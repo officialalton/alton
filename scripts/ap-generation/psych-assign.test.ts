@@ -23,6 +23,21 @@ describe("psych exact assignment (ILP + independent verifier)", () => {
     expect(toReportSet(out[0]).frqA).toHaveLength(2);
     expect(buildPsychOrder(out[0])).toHaveLength(75);
   }, 300000);
+  it("min exam_prep per exam and the no-transfer rule are enforced (psych-hard)", () => {
+    const st = stock().map((c, i) => (c.kind === "mc" && !c.shared && i % 2 === 0 ? { ...c, exam: 1 } : c));
+    const ex = (r: { singles: { exam?: number }[]; sets: { exam?: number }[] }) => [...r.singles, ...r.sets].reduce((n, c) => n + (c.exam ?? 0), 0);
+    const base = solvePsychSets(["PS1", "PS2"], st, { timeMs: 120000, preferExamPrep: true, examWeight: 0.5 });
+    expect(base.res.status).toBe("optimal"); expect(verifyPsychAssignment(base.out)).toEqual([]);
+    const lo = Math.min(...base.out.map(ex));
+    const strict = solvePsychSets(["PS1", "PS2"], st, { timeMs: 120000, preferExamPrep: true, examWeight: 0.5, minExamPrep: lo });
+    for (const r of strict.out) expect(ex(r)).toBeGreaterThanOrEqual(lo);
+    const infeasible = solvePsychSets(["PS1", "PS2"], st, { timeMs: 60000, minExamPrep: 76 });
+    expect(infeasible.res.x.length === 0 || infeasible.out.some((r) => r.virtual.length > 0 || ex(r) < 76)).toBe(true);
+    // no-transfer: PS1 may not take any item that the other exam currently has
+    const other = new Set(base.out[1].singles.map((c) => c.key));
+    const nt = solvePsychSets(["PS1", "PS2"], st, { timeMs: 120000, forbidSets: { PS1: other } });
+    for (const c of [...nt.out[0].singles, ...nt.out[0].sets]) expect(other.has(c.key)).toBe(false);
+  }, 400000);
   it("reports missing slots as virtual items when the stock has no AAQ", () => {
     const keep = stock().filter((c) => !(c.kind === "frq" && c.frqType === "aaq")).filter((c, i) => c.kind !== "mc" || i % 3 !== 0);
     const { res, out } = solvePsychSets(["PS1"], keep, { timeMs: 60000 });

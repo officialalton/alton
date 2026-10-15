@@ -67,7 +67,7 @@ for (const id of ["PS1", "PS2"] as const) {
     const { raw, p } = planOf(id);
     it("형식·원본: sourceVersionNo 2, 이름 일치, 위반 0, 변환 필요 후보는 새 배치 키만", () => {
       expect(p.sourceVersionNo).toBe(2); expect(p.sourceSetName).toBe(live[id].sourceSetName); expect(raw.verifierViolations).toEqual([]); expect(raw.swapCount).toBe(p.swaps.length);
-      for (const k of raw.requiresConvertedCandidates) expect(k).toMatch(/^psych-hard-[ab]:/);
+      for (const k of raw.requiresConvertedCandidates) expect(k).toMatch(/^psych-hard-(a|b|c3|d):/);
       for (const k of live.convertedKeys) expect(raw.requiresConvertedCandidates).not.toContain(k);
     });
     it("실제 새 버전 검사(resolveSwaps + checkNewVersionComposition, DB 단원·절대 범위 11-19) 통과", () => {
@@ -84,7 +84,7 @@ for (const id of ["PS1", "PS2"] as const) {
       const o = live[other(id)].slots; const r = resolveSwaps(p.swaps, o.map((s) => ({ section: s.section, position: s.position, candidateKey: s.candidateKey }))); expect(r.problems.length).toBeGreaterThan(0);
     });
     it("교체는 같은 부류끼리: 단독→단독, 세트(3칸)→세트, AAQ→AAQ·EBQ→EBQ", () => {
-      for (const sw of p.swaps) { expect(Boolean((sw as unknown as { remove: { shared: boolean } }).remove.shared)).toBe(Boolean((sw as unknown as { add: { shared: boolean } }).add.shared)); }
+      for (const sw of p.swaps) { expect(by.get(sw.addKey)!.shared, sw.addKey).toBe(by.get(sw.removeKey ?? "")!.shared); expect(by.get(sw.addKey)!.members.length).toBe(by.get(sw.removeKey ?? "")!.members.length); }
       for (const sw of p.swaps.filter((x) => x.section === "ap_frq")) expect(by.get(sw.addKey)!.frqType).toBe(by.get(sw.removeKey ?? "")!.frqType);
     });
   });
@@ -98,8 +98,17 @@ describe("배치 등록·통과 키·난이도 목표", () => {
       for (const k of pass) expect(items.some((i) => i.stockKey === k && i.validation === "auto_passed")).toBe(true);
     });
   }
+  it("새 배치 문항: 정답이 가장 긴 선택지인 비율 < 45 %(길이 단서 방지), 모든 오답 설명 25자 이상·서로 다름, 선언된 구조 신호 3단계 이상", () => {
+    let strict = 0, total = 0;
+    for (const b of ["psych-hard-a", "psych-hard-b"]) for (const r of rd<{ stockKey: string; validation: string; payload: Record<string, any> }[]>(`data/ap/stock/${b}-items.json`)) {
+      if (r.validation !== "auto_passed") continue; const its: Record<string, any>[] = r.payload.items ?? [r.payload];
+      for (const it of its) { const L = (it.options as { text: string; why?: string }[]).map((o) => o.text.length); const k = it.key_index as number; total++; if (L[k] === Math.max(...L) && L.filter((x) => x === L[k]).length === 1) strict++;
+        const whys = (it.options as { why?: string }[]).filter((_, i) => i !== k).map((o) => o.why ?? ""); expect(whys.every((w) => w.length >= 25)).toBe(true); expect(new Set(whys).size).toBe(3); }
+    }
+    expect(strict / total).toBeLessThan(0.45);
+  });
   it("exam_prep 문항 수: 배정 PS1·PS2 모두 MIN_EXAM 이상(기존 v2 배정은 PS1 1·PS2 1)", () => {
-    const MIN_EXAM = Number(process.env.PSYCH_MIN_EXAM ?? 20);
+    const MIN_EXAM = Number(process.env.PSYCH_MIN_EXAM ?? 51);
     for (const s of assign.sets) expect(examOf(flow(s.id as SetId).next)).toBeGreaterThanOrEqual(MIN_EXAM);
     expect(examOf(live.PS1.slots)).toBeLessThanOrEqual(2);
   });

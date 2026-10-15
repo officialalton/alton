@@ -73,12 +73,12 @@ function main() {
   const snap = rd<Snap>(arg("--slots", "data/ap/stock/psych-ps1-ps2-published-v2-slots.json")); const assign = rd<{ sets: { id: string; mcA: string[]; frqA: string[]; virtual: unknown[]; virtualSets: unknown[]; frqVirtual: unknown[] }[] }>(arg("--assign", "data/ap/stock/exact-assign-psych-ps1-ps2-v3.json"));
   const { all } = loadPsychPool({ ignorePctFlags: true }); const by = new Map(all.filter((c) => c.screen).map((c) => [c.key, c])); // 지금 게시본에 있는 표 비율 위반 후보도 '제거 대상'으로 읽어야 하므로 비율 표시 목록은 무시한다(배정기는 쓰지 않는다)
   const assumed = new Set(arg("--assume-converted").split(",").filter(Boolean).flatMap((b) => rd<{ stockKey: string; validation: string; duplicateOf?: string | null }[]>(`data/ap/stock/${b}.json`).filter((r) => r.validation === "auto_passed" && !r.duplicateOf).map((r) => r.stockKey)));
-  const converted = new Set([...snap.convertedKeys, ...assumed]); const write = process.argv.includes("--write"); const out: Record<string, { bad: string[]; plan: unknown; file: string }> = {};
+  void assumed; const write = process.argv.includes("--write"); const out: Record<string, { bad: string[]; plan: unknown; file: string }> = {};
   const finals: Record<string, Slot[]> = {};
   for (const id of ["PS1", "PS2"] as SetId[]) {
     const t = assign.sets.find((s) => s.id === id)!; if (t.virtual.length || t.virtualSets.length || t.frqVirtual.length) throw new Error(`${id}: 가상 칸이 있다`);
     const p = planFor(id, snap[id].slots, t, by); finals[id] = afterSwaps(snap[id].slots, p.swaps);
-    const bad = [...p.problems]; const need = [...new Set(p.swaps.map((s) => s.addKey))].filter((k) => !converted.has(k));
+    const bad = [...p.problems]; const need = [...new Set(p.swaps.map((s) => s.addKey))].filter((k) => !new Set(snap.convertedKeys).has(k)); // 먼저 적재·변환해야 하는 후보(스냅샷에 변환 완료로 없는 키; --assume-converted 는 새 배치를 변환 완료로 가정할 뿐이다)
     bad.push(...slotViolations(id, finals[id], by), ...dbUnitViolations(finals[id], by));
     out[id] = { bad, file: `data/ap/stock/${id.toLowerCase()}-v${snap[id].sourceVersionNo + 1}-swap-plan.json`, plan: { kind: "ap_new_version_swap_plan", set: id, sourceSetName: snap[id].sourceSetName, sourceVersionNo: snap[id].sourceVersionNo, generatedBy: "scripts/ap-generation/psych-new-version-plans.ts", swapCount: p.swaps.length, verifierViolations: bad, requiresConvertedCandidates: need, swaps: p.swaps,
       note: `psych-hard: 게시 v${snap[id].sourceVersionNo} → v${snap[id].sourceVersionNo + 1}. 교체 ${p.swaps.length}건(단독 MC·공유 세트·FRQ 같은 부류끼리). 어느 시험도 상대 시험이 지금 갖고 있는 문항을 가져오지 않으므로 두 시험의 새 버전은 서로 독립이고 순서가 없다. requiresConvertedCandidates 는 먼저 배치 적재·변환해야 하는 후보 키다.` } };

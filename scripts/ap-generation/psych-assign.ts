@@ -1,5 +1,5 @@
 // AP Psychology 풀 모의고사 세트 정확 배정(무료·읽기 전용·DB 없음). macro-assign.ts·bio-assign.ts 와 같은 방식(정수계획 HiGHS + 배정기와 별개인 독립 검증기)을 Psychology 구조에 적용한다.
-//   npx tsx scripts/ap-generation/psych-assign.ts --sets PS1[,PS2] [--time-ms 120000] [--write-report <경로 .json>] [--files psych-p1a-items,...] [--no-screen] [--prefer-exam-prep] [--min-exam-prep N] [--exam-weight 0.5] [--hd-bonus 0.1] [--forbid-swap-sets <슬롯 스냅샷.json>] [--no-transfer <슬롯 스냅샷.json>] [--block-file <보고서.json[,..]>] [--joint]
+//   npx tsx scripts/ap-generation/psych-assign.ts --sets PS1[,PS2] [--time-ms 120000] [--write-report <경로 .json>] [--files psych-p1a-items,...] [--no-screen] [--prefer-exam-prep] [--min-exam-prep N] [--exam-weight 0.5] [--hd-bonus 0.1] [--forbid-swap-sets <슬롯 스냅샷.json>] [--no-transfer <슬롯 스냅샷.json>] | --verify-report <보고서.json> [--block-file <보고서.json[,..]>] [--joint]
 // 조건(공식 구조, docs/ap/psychology-facts.md): MC 75 = 단독 + 3문항 세트 정확히 PSYCH_SET_COUNT 개(같은 단원, 연속 위치), 단원 5-단원 각 15-25 %(정수 11-19, **차단**), Practice 1/2/3 = 60-70 / 20-30 / 5-15 %(차단; CED 는 65/25/10 %를 '대략'으로 공표),
 //   Practice 4 는 MC 에서 평가하지 않는다. FRQ 2 = AAQ 1 + EBQ 1. 한 시험 안에서 같은 문항군(원형+토픽, look-alike 포함)은 한 번만, 시험 사이 같은 문항 0,
 //   시험 사이 같은 질문·같은 정답 문장(같은 변형의 다른 후보; sig)도 0. 재고에 없는 칸은 가상 문항으로 세어 부족분을 (단원 × 스킬) 칸 단위로 정확히 보고한다.
@@ -158,7 +158,18 @@ export function practiceSummary(r: PsychResult) {
   return { practice: c, skills: k };
 }
 
+/** 저장된 배정 보고서를 독립 검증기로 다시 검사하고 요약을 출력한다(`--verify-report <보고서.json>`; 배정기를 다시 풀지 않는다). */
+function verifyReport(file: string) {
+  const { pool } = loadPsychPool({ requireScreen: !has("--no-screen") }); const by = new Map(pool.map((c) => [c.key, c]));
+  const rep = JSON.parse(readFileSync(file, "utf-8")) as { sets: { id: string; mcA: string[]; frqA: string[]; virtual: unknown[]; virtualSets: unknown[]; frqVirtual: unknown[] }[] };
+  const res: PsychResult[] = rep.sets.map((s) => { const items = s.mcA.map((k) => { const c = by.get(k); if (!c) throw new Error(`재고(화면 증거 보유)에 없는 키 ${k}`); return c; }); return { id: s.id, singles: items.filter((c) => !c.shared), sets: items.filter((c) => c.shared), frq: s.frqA.map((k) => by.get(k)!), virtual: [], virtualSets: [], virtualSetArchetypes: [], frqVirtual: [] }; });
+  const bad = verifyPsychAssignment(res); console.log(`# 배정 보고서 재검증 ${file}\n독립 검증기 위반: ${bad.length ? bad.join("; ") : "0"}`);
+  for (const r of res) { const u: Record<string, number> = {}; for (const it of buildPsychOrder(r)) u[it.unit ?? "?"] = (u[it.unit ?? "?"] ?? 0) + 1; const ex = [...r.singles, ...r.sets].reduce((a, c) => a + (c.exam ?? 0), 0); const hd = [...r.singles, ...r.sets].reduce((a, c) => a + (c.hd ?? 0), 0);
+    console.log(`- ${r.id}: 단독 ${r.singles.length}, 세트 ${r.sets.length}, FRQ ${r.frq.map((c) => c.frqType).join("+")}, 가상 0, 단원 ${JSON.stringify(u)}, MC exam_prep ${ex}/${PSYCH_MC_COUNT}, 고차 원형(ps_hd_*) ${hd}, Practice ${JSON.stringify(practiceSummary(r).practice)}`); }
+  process.exit(bad.length ? 1 : 0);
+}
 function main() {
+  if (arg("--verify-report")) return verifyReport(arg("--verify-report"));
   const ids = arg("--sets", "PS1,PS2").split(",").filter(Boolean); const TIME = Number(arg("--time-ms", "120000"));
   const files = arg("--files") ? arg("--files").split(",") : undefined;
   const { pool } = loadPsychPool({ requireScreen: !has("--no-screen"), files });

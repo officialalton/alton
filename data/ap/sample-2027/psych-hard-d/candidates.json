@@ -1,0 +1,3786 @@
+[
+ {
+  "candidateKey": "ap_psychology-m01-k0",
+  "cellId": "ap_psychology-m01",
+  "apSubjectCode": "ap_psychology",
+  "kind": "mc",
+  "keywordCode": "1.3",
+  "unitCode": "1",
+  "skillPrimary": "1.A",
+  "structure": "standalone",
+  "calculator": "na",
+  "archetype": "ps_hd_c_neuron_signal",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Student must (1) sum excitatory and inhibitory inputs to +13 and judge it below the +15 threshold, (2) carry that net value forward and add +4 to reach +17, so the neuron fires, and (3) apply the all-or-none principle to reject larger or smaller action potential claims. This combines threshold/summation with all-or-none firing. Two distractors pass the first step and fail only later. Arithmetic is trivial, reading is short, and all content is in Unit 1 scope, so no unfair difficulty sources.",
+  "payload": {
+   "archetype": "ps_hd_c_neuron_signal",
+   "topic": "1.3",
+   "skill": "1.A",
+   "calculator": "na",
+   "stem": "A neuron fires only when the combined input it receives reaches its threshold of +15 units. It receives excitatory signals of +10 and +8 and an inhibitory signal of -5 at the same moment. Later, an additional excitatory signal of +4 arrives. Which statement best describes what happens?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "It fires at first, because +10 and +8 together exceed the threshold, and it fires a larger action potential after the additional signal.",
+     "why": "The inhibitory signal reduces the net input to +13, below threshold, and the size of an action potential does not depend on how far threshold is exceeded.",
+     "value": null
+    },
+    {
+     "text": "It does not fire at first, and it still does not fire after the additional signal, because inhibitory signals permanently block firing.",
+     "why": "Inhibition lowers the net input only while it lasts; the net input becomes +17 and reaches threshold.",
+     "value": null
+    },
+    {
+     "text": "It does not fire at first, and it fires after the additional signal, with a smaller action potential because inhibition was present earlier.",
+     "why": "An action potential is all-or-none; its size does not depend on earlier inhibition.",
+     "value": null
+    },
+    {
+     "text": "It does not fire at first, since the net input is +13, then fires after the added signal with a normal-size action potential.",
+     "why": "The net input of +13 is below threshold, adding +4 brings it to +17, and an action potential is all-or-none in size once threshold is reached.",
+     "value": null
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 95,
+   "facts": [
+    "ek=1.3.A"
+   ],
+   "variant_id": "58b8d94114ff",
+   "blueprint": {
+    "id": "ps_hd_c_neuron_signal",
+    "subject": "ap_psychology",
+    "kind": "mc",
+    "concept": "predicting neural firing from summed excitatory and inhibitory input, and the effect of myelin damage",
+    "topic": "1.3",
+    "skill": "1.A",
+    "student_thinking": [
+     "Add the excitatory inputs and subtract the inhibitory input to find the net input",
+     "Compare the net input with the threshold before and after the additional signal",
+     "Apply the all-or-none principle to the size of the action potential and reject answers that ignore inhibition or vary the size"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "na",
+    "key_conditions": [
+     {
+      "condition": "the stem supplies every fact needed and exactly one option follows from all of the steps",
+      "evidence": "stem and options"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "The inhibitory signal reduces the net input to +13, below threshold, and the size of an action potential does not depend on how far threshold is exceeded."
+     },
+     {
+      "id": "m2",
+      "description": "Inhibition lowers the net input only while it lasts; the net input becomes +17 and reaches threshold."
+     },
+     {
+      "id": "m3",
+      "description": "An action potential is all-or-none; its size does not depend on earlier inhibition."
+     }
+    ],
+    "verification": {
+     "independent_path": "authored from the CED required content (essential knowledge 1.3.A); the key is NOT code-verified: it must be matched by an independent blind solver (Opus), the five-criterion reviewer (Sonnet) and a second independent model panel (Fable and Sonnet blind solves) before the item is used",
+     "method": "authored+blind-solver+panel"
+    },
+    "judgment_demand": [
+     "apply the concept to the scenario"
+    ]
+   },
+   "difficulty_signals": {
+    "steps": [
+     "Add the excitatory inputs and subtract the inhibitory input to find the net input",
+     "Compare the net input with the threshold before and after the additional signal",
+     "Apply the all-or-none principle to the size of the action potential and reject answers that ignore inhibition or vary the size"
+    ],
+    "concepts": [
+     "threshold and summation of inputs",
+     "all-or-none action potential and myelin"
+    ],
+    "representations": 1,
+    "distractor_fail_step": {
+     "It fires at first, because +10 and +8 together exceed the threshold, and it fires a larger action potential after the additional signal.": 1,
+     "It does not fire at first, and it still does not fire after the additional signal, because inhibitory signals permanently block firing.": 2,
+     "It does not fire at first, and it fires after the additional signal, with a smaller action potential because inhibition was present earlier.": 3
+    },
+    "arithmetic": "none"
+   },
+   "seed": 11600,
+   "pack_id": "ps_hd_c_neuron_signal-s11600",
+   "explanation_en": "The correct answer is It does not fire at first, since the net input is +13, then fires after the added signal with a normal-size action potential.. The net input of +13 is below threshold, adding +4 brings it to +17, and an action potential is all-or-none in size once threshold is reached.\nIt fires at first, because +10 and +8 together exceed the threshold, and it fires a larger action potential after the additional signal. is incorrect: The inhibitory signal reduces the net input to +13, below threshold, and the size of an action potential does not depend on how far threshold is exceeded.\nIt does not fire at first, and it still does not fire after the additional signal, because inhibitory signals permanently block firing. is incorrect: Inhibition lowers the net input only while it lasts; the net input becomes +17 and reaches threshold.\nIt does not fire at first, and it fires after the additional signal, with a smaller action potential because inhibition was present earlier. is incorrect: An action potential is all-or-none; its size does not depend on earlier inhibition."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ps_hd_c_neuron_signal",
+   "facts": [
+    "ek=1.3.A"
+   ],
+   "seed": 11600
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Applies threshold, excitatory/inhibitory input, and all-or-none principle (EK 1.3.A) to a scenario. Fits 1.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Net +13 below threshold, then +17 fires; all-or-none gives a normal-size action potential. Unique correct answer D. The solver agrees."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed. The stem is clear and complete. The persistence of input between the two signals is implied by the wording."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception (ignoring inhibition and larger spikes, permanent inhibition, smaller spike from earlier inhibition). Each wrong option is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 95 seconds, simple arithmetic, no calculator, four options."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is accurate, with a unique key (D) and distinct, plausible distractors. Its scope and load fit AP Psychology. The only flaws are minor: the blueprint label mentions myelin, which the item does not use, and the stem leaves the persistence of the earlier input implicit. Pass."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must (1) sum excitatory and inhibitory inputs to +13 and judge it below the +15 threshold, (2) carry that net value forward and add +4 to reach +17, so the neuron fires, and (3) apply the all-or-none principle to reject larger or smaller action potential claims. This combines threshold/summation with all-or-none firing. Two distractors pass the first step and fail only later. Arithmetic is trivial, reading is short, and all content is in Unit 1 scope, so no unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "candidateKey": "ap_psychology-m01-k1",
+  "cellId": "ap_psychology-m01",
+  "apSubjectCode": "ap_psychology",
+  "kind": "mc",
+  "keywordCode": "1.3",
+  "unitCode": "1",
+  "skillPrimary": "1.A",
+  "structure": "standalone",
+  "calculator": "na",
+  "archetype": "ps_hd_c_neuron_signal",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "The item applies one named concept (myelin sheath function) to a short disease scenario. The student recalls that myelin speeds conduction and then rejects distractors that assign the functions of other neuron parts to myelin. The generator's claimed concepts (threshold, summation, all-or-none) do not appear in the stem or options, so the text supports about 2 steps and a single concept, which fits basic_learning under the rubric. The distractors are clearly wrong once the myelin function is known, and there is no figure, table, or computation.",
+  "payload": {
+   "archetype": "ps_hd_c_neuron_signal",
+   "topic": "1.3",
+   "skill": "1.A",
+   "calculator": "na",
+   "stem": "A disease degrades the myelin sheath surrounding many of a person's axons. Which result is most likely, and why?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Signals travel faster along the affected axons, because the missing myelin lets the action potential spread more widely.",
+     "why": "Myelin speeds conduction, so losing it slows signals rather than speeding them.",
+     "value": null
+    },
+    {
+     "text": "Neurotransmitters can no longer be released at the terminal buttons, because myelin is where they are manufactured and stored.",
+     "why": "Neurotransmitters are stored in vesicles in the terminal buttons, not in the myelin sheath.",
+     "value": null
+    },
+    {
+     "text": "Dendrites cannot receive signals from other neurons, because the myelin sheath is the structure that receives incoming messages.",
+     "why": "Dendrites and the cell body receive incoming messages, and the myelin sheath surrounds the axon.",
+     "value": null
+    },
+    {
+     "text": "Signals travel more slowly along the affected axons, because the myelin sheath normally speeds up conduction.",
+     "why": "The myelin sheath insulates the axon and speeds the movement of the action potential, so damage to it slows or disrupts signaling.",
+     "value": null
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 95,
+   "facts": [
+    "ek=1.3.A"
+   ],
+   "variant_id": "db255aa14549",
+   "blueprint": {
+    "id": "ps_hd_c_neuron_signal",
+    "subject": "ap_psychology",
+    "kind": "mc",
+    "concept": "predicting neural firing from summed excitatory and inhibitory input, and the effect of myelin damage",
+    "topic": "1.3",
+    "skill": "1.A",
+    "student_thinking": [
+     "Recall the location of the myelin sheath (around the axon)",
+     "Recall its function (insulation that speeds conduction)",
+     "Predict the effect of damage and reject answers that reverse the effect or assign myelin a different function"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "na",
+    "key_conditions": [
+     {
+      "condition": "the stem supplies every fact needed and exactly one option follows from all of the steps",
+      "evidence": "stem and options"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Myelin speeds conduction, so losing it slows signals rather than speeding them."
+     },
+     {
+      "id": "m2",
+      "description": "Neurotransmitters are stored in vesicles in the terminal buttons, not in the myelin sheath."
+     },
+     {
+      "id": "m3",
+      "description": "Dendrites and the cell body receive incoming messages, and the myelin sheath surrounds the axon."
+     }
+    ],
+    "verification": {
+     "independent_path": "authored from the CED required content (essential knowledge 1.3.A); the key is NOT code-verified: it must be matched by an independent blind solver (Opus), the five-criterion reviewer (Sonnet) and a second independent model panel (Fable and Sonnet blind solves) before the item is used",
+     "method": "authored+blind-solver+panel"
+    },
+    "judgment_demand": [
+     "apply the concept to the scenario"
+    ]
+   },
+   "difficulty_signals": {
+    "steps": [
+     "Recall the location of the myelin sheath (around the axon)",
+     "Recall its function (insulation that speeds conduction)",
+     "Predict the effect of damage and reject answers that reverse the effect or assign myelin a different function"
+    ],
+    "concepts": [
+     "threshold and summation of inputs",
+     "all-or-none action potential and myelin"
+    ],
+    "representations": 1,
+    "distractor_fail_step": {
+     "Signals travel faster along the affected axons, because the missing myelin lets the action potential spread more widely.": 3,
+     "Neurotransmitters can no longer be released at the terminal buttons, because myelin is where they are manufactured and stored.": 1,
+     "Dendrites cannot receive signals from other neurons, because the myelin sheath is the structure that receives incoming messages.": 1
+    },
+    "arithmetic": "none"
+   },
+   "seed": 11601,
+   "pack_id": "ps_hd_c_neuron_signal-s11601",
+   "explanation_en": "The correct answer is Signals travel more slowly along the affected axons, because the myelin sheath normally speeds up conduction.. The myelin sheath insulates the axon and speeds the movement of the action potential, so damage to it slows or disrupts signaling.\nSignals travel faster along the affected axons, because the missing myelin lets the action potential spread more widely. is incorrect: Myelin speeds conduction, so losing it slows signals rather than speeding them.\nNeurotransmitters can no longer be released at the terminal buttons, because myelin is where they are manufactured and stored. is incorrect: Neurotransmitters are stored in vesicles in the terminal buttons, not in the myelin sheath.\nDendrites cannot receive signals from other neurons, because the myelin sheath is the structure that receives incoming messages. is incorrect: Dendrites and the cell body receive incoming messages, and the myelin sheath surrounds the axon."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ps_hd_c_neuron_signal",
+   "facts": [
+    "ek=1.3.A"
+   ],
+   "seed": 11601
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Myelin function, EK 1.3.A; simple application to a disease scenario."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "D is uniquely correct; the other options are factually false."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions; each wrong option is explained. Minor: the key reuses the stem's terminology."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, no calculator, about 95 seconds. Fairly easy, but acceptable."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Accurate, unambiguous myelin item with a unique key and distinct distractors. It is low difficulty, but it passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item applies one named concept (myelin sheath function) to a short disease scenario. The student recalls that myelin speeds conduction and then rejects distractors that assign the functions of other neuron parts to myelin. The generator's claimed concepts (threshold, summation, all-or-none) do not appear in the stem or options, so the text supports about 2 steps and a single concept, which fits basic_learning under the rubric. The distractors are clearly wrong once the myelin function is known, and there is no figure, table, or computation.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "candidateKey": "ap_psychology-m02-k0",
+  "cellId": "ap_psychology-m02",
+  "apSubjectCode": "ap_psychology",
+  "kind": "mc",
+  "keywordCode": "1.4",
+  "unitCode": "1",
+  "skillPrimary": "1.A",
+  "structure": "standalone",
+  "calculator": "na",
+  "archetype": "ps_hd_c_lobe_function",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "The student must (1) separate the sensory deficit from the intact movement, (2) map touch to the somatosensory cortex in the parietal lobe, and (3) apply contralateral processing to choose the left hemisphere. Each distractor fails at a different step: option 1 confuses sensory and motor cortex, option 3 ignores contralateral processing, and option 4 names the wrong lobe. This meets the rubric of at least 3 steps and 2 combined concepts (lobe function and contralateral processing). The scenario is unambiguous and entirely within Topic 1.4 scope. Reading is minimal and there is no arithmetic.",
+  "payload": {
+   "archetype": "ps_hd_c_lobe_function",
+   "topic": "1.4",
+   "skill": "1.A",
+   "calculator": "na",
+   "stem": "After a stroke, a patient cannot feel being touched on her right hand, but she can still move that hand normally. Which damage best explains this pattern?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "The motor cortex in the left frontal lobe, because the left hemisphere controls movement of the right side of the body.",
+     "why": "Her movement is normal, so the motor cortex in the frontal lobe is not the damaged area.",
+     "value": null
+    },
+    {
+     "text": "The somatosensory cortex in the left parietal lobe, because the left hemisphere processes touch from the right side of the body.",
+     "why": "Touch is processed in the parietal lobe, and each hemisphere receives sensory information mainly from the opposite side of the body, while movement is controlled in the frontal lobe.",
+     "value": null
+    },
+    {
+     "text": "The somatosensory cortex in the right parietal lobe, because the right hemisphere processes touch from the right side of the body.",
+     "why": "Each hemisphere mainly processes touch from the opposite side of the body, so left parietal damage affects the right hand.",
+     "value": null
+    },
+    {
+     "text": "The visual cortex in the occipital lobe, because vision is needed to know when the right hand is being touched.",
+     "why": "The occipital lobe processes vision and not touch, and the patient's problem is feeling the touch.",
+     "value": null
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 95,
+   "facts": [
+    "ek=1.4.A"
+   ],
+   "variant_id": "6afdb2c8f3a7",
+   "blueprint": {
+    "id": "ps_hd_c_lobe_function",
+    "subject": "ap_psychology",
+    "kind": "mc",
+    "concept": "inferring the lobe or hemisphere from a pattern of lost and preserved functions",
+    "topic": "1.4",
+    "skill": "1.A",
+    "student_thinking": [
+     "Identify the lost function (touch) and the preserved function (movement)",
+     "Match touch to the parietal lobe and movement to the frontal lobe",
+     "Use the opposite-side rule to choose the hemisphere and reject answers that use the wrong lobe or side"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "na",
+    "key_conditions": [
+     {
+      "condition": "the stem supplies every fact needed and exactly one option follows from all of the steps",
+      "evidence": "stem and options"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Her movement is normal, so the motor cortex in the frontal lobe is not the damaged area."
+     },
+     {
+      "id": "m2",
+      "description": "Each hemisphere mainly processes touch from the opposite side of the body, so left parietal damage affects the right hand."
+     },
+     {
+      "id": "m3",
+      "description": "The occipital lobe processes vision and not touch, and the patient's problem is feeling the touch."
+     }
+    ],
+    "verification": {
+     "independent_path": "authored from the CED required content (essential knowledge 1.4.A); the key is NOT code-verified: it must be matched by an independent blind solver (Opus), the five-criterion reviewer (Sonnet) and a second independent model panel (Fable and Sonnet blind solves) before the item is used",
+     "method": "authored+blind-solver+panel"
+    },
+    "judgment_demand": [
+     "apply the concept to the scenario"
+    ]
+   },
+   "difficulty_signals": {
+    "steps": [
+     "Identify the lost function (touch) and the preserved function (movement)",
+     "Match touch to the parietal lobe and movement to the frontal lobe",
+     "Use the opposite-side rule to choose the hemisphere and reject answers that use the wrong lobe or side"
+    ],
+    "concepts": [
+     "lobe functions (parietal, frontal, occipital)",
+     "contralateral processing"
+    ],
+    "representations": 1,
+    "distractor_fail_step": {
+     "The motor cortex in the left frontal lobe, because the left hemisphere controls movement of the right side of the body.": 2,
+     "The somatosensory cortex in the right parietal lobe, because the right hemisphere processes touch from the right side of the body.": 3,
+     "The visual cortex in the occipital lobe, because vision is needed to know when the right hand is being touched.": 2
+    },
+    "arithmetic": "none"
+   },
+   "seed": 11600,
+   "pack_id": "ps_hd_c_lobe_function-s11600",
+   "explanation_en": "The correct answer is The somatosensory cortex in the left parietal lobe, because the left hemisphere processes touch from the right side of the body.. Touch is processed in the parietal lobe, and each hemisphere receives sensory information mainly from the opposite side of the body, while movement is controlled in the frontal lobe.\nThe motor cortex in the left frontal lobe, because the left hemisphere controls movement of the right side of the body. is incorrect: Her movement is normal, so the motor cortex in the frontal lobe is not the damaged area.\nThe somatosensory cortex in the right parietal lobe, because the right hemisphere processes touch from the right side of the body. is incorrect: Each hemisphere mainly processes touch from the opposite side of the body, so left parietal damage affects the right hand.\nThe visual cortex in the occipital lobe, because vision is needed to know when the right hand is being touched. is incorrect: The occipital lobe processes vision and not touch, and the patient's problem is feeling the touch."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ps_hd_c_lobe_function",
+   "facts": [
+    "ek=1.4.A"
+   ],
+   "seed": 11600
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Applies lobe function and contralateral processing to a scenario; fits 1.4 and skill 1.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Left parietal somatosensory cortex is the unique correct answer; the solver agrees."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed; the stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception (wrong lobe, wrong side, wrong sense), and the explanation addresses each one."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The task load is typical, and no calculator is needed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Accurate, unambiguous item with a unique key and plausible distractors, so it passes all criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The student must (1) separate the sensory deficit from the intact movement, (2) map touch to the somatosensory cortex in the parietal lobe, and (3) apply contralateral processing to choose the left hemisphere. Each distractor fails at a different step: option 1 confuses sensory and motor cortex, option 3 ignores contralateral processing, and option 4 names the wrong lobe. This meets the rubric of at least 3 steps and 2 combined concepts (lobe function and contralateral processing). The scenario is unambiguous and entirely within Topic 1.4 scope. Reading is minimal and there is no arithmetic.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "candidateKey": "ap_psychology-m02-k1",
+  "cellId": "ap_psychology-m02",
+  "apSubjectCode": "ap_psychology",
+  "kind": "mc",
+  "keywordCode": "1.4",
+  "unitCode": "1",
+  "skillPrimary": "1.A",
+  "structure": "standalone",
+  "calculator": "na",
+  "archetype": "ps_hd_c_lobe_function",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "The item reduces to one core concept: the occipital lobe/visual cortex processes vision, and intact eye and pupil responses point to a brain-based deficit. The contralateral-processing concept listed in the generator count is never required, because no option references hemisphere or side, so the left-field detail does not change which answer is right. Distractors are eliminated directly by lobe-function knowledge or by the stem's own statement that the eyes work normally. This is 2 or fewer effective steps with a single concept, which fits basic_learning rather than exam_prep.",
+  "payload": {
+   "archetype": "ps_hd_c_lobe_function",
+   "topic": "1.4",
+   "skill": "1.A",
+   "calculator": "na",
+   "stem": "A man's eyes and pupils respond normally to light, but after an injury he reports that he cannot see objects in the left half of his visual field. Which damage best explains this pattern?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "The motor cortex in the frontal lobe, because the frontal lobe controls where the eyes are directed when a person looks.",
+     "why": "The motor cortex controls movement, and the man's problem is seeing objects rather than moving his eyes.",
+     "value": null
+    },
+    {
+     "text": "Part of the visual cortex in the occipital lobe, because the eyes work but the brain area that processes vision is damaged.",
+     "why": "Normal eye responses point to intact eye structures, while a loss of vision in part of the visual field points to damage to the occipital lobe's visual areas.",
+     "value": null
+    },
+    {
+     "text": "The retina of both eyes, because the retina is the structure that processes visual information in the brain.",
+     "why": "Normal responses of the eyes and pupils to light suggest that the retina is working, and the retina is not part of the brain.",
+     "value": null
+    },
+    {
+     "text": "The auditory cortex in the temporal lobe, because the temporal lobe is responsible for all sensory processing in the brain.",
+     "why": "The temporal lobe processes hearing, not vision, and it is not responsible for all senses.",
+     "value": null
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 95,
+   "facts": [
+    "ek=1.4.A"
+   ],
+   "variant_id": "1f59a0cfe032",
+   "blueprint": {
+    "id": "ps_hd_c_lobe_function",
+    "subject": "ap_psychology",
+    "kind": "mc",
+    "concept": "inferring the lobe or hemisphere from a pattern of lost and preserved functions",
+    "topic": "1.4",
+    "skill": "1.A",
+    "student_thinking": [
+     "Note that the eyes respond normally, which points away from the eyes themselves",
+     "Note that part of the visual field is lost, which points to a brain region for vision",
+     "Match vision to the occipital lobe and reject answers that use the wrong structure or lobe"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "na",
+    "key_conditions": [
+     {
+      "condition": "the stem supplies every fact needed and exactly one option follows from all of the steps",
+      "evidence": "stem and options"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "The motor cortex controls movement, and the man's problem is seeing objects rather than moving his eyes."
+     },
+     {
+      "id": "m2",
+      "description": "Normal responses of the eyes and pupils to light suggest that the retina is working, and the retina is not part of the brain."
+     },
+     {
+      "id": "m3",
+      "description": "The temporal lobe processes hearing, not vision, and it is not responsible for all senses."
+     }
+    ],
+    "verification": {
+     "independent_path": "authored from the CED required content (essential knowledge 1.4.A); the key is NOT code-verified: it must be matched by an independent blind solver (Opus), the five-criterion reviewer (Sonnet) and a second independent model panel (Fable and Sonnet blind solves) before the item is used",
+     "method": "authored+blind-solver+panel"
+    },
+    "judgment_demand": [
+     "apply the concept to the scenario"
+    ]
+   },
+   "difficulty_signals": {
+    "steps": [
+     "Note that the eyes respond normally, which points away from the eyes themselves",
+     "Note that part of the visual field is lost, which points to a brain region for vision",
+     "Match vision to the occipital lobe and reject answers that use the wrong structure or lobe"
+    ],
+    "concepts": [
+     "lobe functions (parietal, frontal, occipital)",
+     "contralateral processing"
+    ],
+    "representations": 1,
+    "distractor_fail_step": {
+     "The retina of both eyes, because the retina is the structure that processes visual information in the brain.": 1,
+     "The auditory cortex in the temporal lobe, because the temporal lobe is responsible for all sensory processing in the brain.": 3,
+     "The motor cortex in the frontal lobe, because the frontal lobe controls where the eyes are directed when a person looks.": 2
+    },
+    "arithmetic": "none"
+   },
+   "seed": 11601,
+   "pack_id": "ps_hd_c_lobe_function-s11601",
+   "explanation_en": "The correct answer is Part of the visual cortex in the occipital lobe, because the eyes work but the brain area that processes vision is damaged.. Normal eye responses point to intact eye structures, while a loss of vision in part of the visual field points to damage to the occipital lobe's visual areas.\nThe motor cortex in the frontal lobe, because the frontal lobe controls where the eyes are directed when a person looks. is incorrect: The motor cortex controls movement, and the man's problem is seeing objects rather than moving his eyes.\nThe retina of both eyes, because the retina is the structure that processes visual information in the brain. is incorrect: Normal responses of the eyes and pupils to light suggest that the retina is working, and the retina is not part of the brain.\nThe auditory cortex in the temporal lobe, because the temporal lobe is responsible for all sensory processing in the brain. is incorrect: The temporal lobe processes hearing, not vision, and it is not responsible for all senses."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ps_hd_c_lobe_function",
+   "facts": [
+    "ek=1.4.A"
+   ],
+   "seed": 11601
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Matches 1.4 and 1.A: infer the brain region from a pattern of lost and preserved function."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "B is the unique correct answer: the eyes and pupils work, and the visual-field loss points to occipital visual cortex damage."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor targets a distinct misconception (motor cortex, retina as brain, temporal lobe as all senses). The explanation covers every wrong option. D is somewhat easy to rule out but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, about 60-95 seconds, with no calculator, typical of AP Psychology."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is accurate and well scoped, with a unique key (B) and distinct, plausible distractors. No instant-reject condition applies, so it passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item reduces to one core concept: the occipital lobe/visual cortex processes vision, and intact eye and pupil responses point to a brain-based deficit. The contralateral-processing concept listed in the generator count is never required, because no option references hemisphere or side, so the left-field detail does not change which answer is right. Distractors are eliminated directly by lobe-function knowledge or by the stem's own statement that the eyes work normally. This is 2 or fewer effective steps with a single concept, which fits basic_learning rather than exam_prep.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "candidateKey": "ap_psychology-m03-k0",
+  "cellId": "ap_psychology-m03",
+  "apSubjectCode": "ap_psychology",
+  "kind": "mc",
+  "keywordCode": "1.5",
+  "unitCode": "1",
+  "skillPrimary": "1.A",
+  "structure": "standalone",
+  "calculator": "na",
+  "archetype": "ps_hd_c_sleep_disorders",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "The student must identify sleep apnea from the symptoms, eliminate the narcolepsy and insomnia options, and then connect the disorder to its effect (fragmented sleep causing daytime sleepiness) to separate the two apnea options. This meets the rubric: 3 sequential steps and 2 combined concepts. One distractor passes the first step and fails only on the mechanism. Everything is within Unit 1 scope, with a single defensible answer.",
+  "payload": {
+   "archetype": "ps_hd_c_sleep_disorders",
+   "topic": "1.5",
+   "skill": "1.A",
+   "calculator": "na",
+   "stem": "A man's partner reports that he repeatedly stops breathing for short periods during the night and snores loudly. He sleeps eight hours but is very sleepy in the daytime. Which explanation is best?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "He may have narcolepsy, and the sudden loss of muscle tone during the day causes him to fall asleep in the daytime.",
+     "why": "Narcolepsy involves sudden sleep attacks and does not involve repeated pauses in breathing at night.",
+     "value": null
+    },
+    {
+     "text": "He may have sleep apnea, and the pauses in his breathing wake him fully every hour, which leaves him with only about four hours of sleep.",
+     "why": "The disorder is named correctly, but the scenario says that he sleeps eight hours; the problem is fragmented sleep, not too few hours.",
+     "value": null
+    },
+    {
+     "text": "He may have sleep apnea, and awakenings that restart his breathing fragment his sleep and cause daytime sleepiness.",
+     "why": "Sleep apnea interrupts breathing, and the brief awakenings that follow reduce the quality of sleep even when time in bed seems adequate.",
+     "value": null
+    },
+    {
+     "text": "He may have insomnia, and the difficulty falling asleep at night causes him to spend too few hours in bed.",
+     "why": "He sleeps eight hours, and insomnia involves difficulty falling or staying asleep rather than interrupted breathing.",
+     "value": null
+    }
+   ],
+   "key_index": 2,
+   "est_seconds": 95,
+   "facts": [
+    "ek=1.5.B"
+   ],
+   "variant_id": "2685334d6f97",
+   "blueprint": {
+    "id": "ps_hd_c_sleep_disorders",
+    "subject": "ap_psychology",
+    "kind": "mc",
+    "concept": "linking a sleep disorder's night-time pattern to its daytime consequence",
+    "topic": "1.5",
+    "skill": "1.A",
+    "student_thinking": [
+     "Match repeated breathing pauses and loud snoring to a disorder",
+     "Recall how that disorder disrupts the continuity of sleep",
+     "Link the disrupted sleep to daytime sleepiness and reject disorders that do not fit the pattern"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "na",
+    "key_conditions": [
+     {
+      "condition": "the stem supplies every fact needed and exactly one option follows from all of the steps",
+      "evidence": "stem and options"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Narcolepsy involves sudden sleep attacks and does not involve repeated pauses in breathing at night."
+     },
+     {
+      "id": "m2",
+      "description": "The disorder is named correctly, but the scenario says that he sleeps eight hours; the problem is fragmented sleep, not too few hours."
+     },
+     {
+      "id": "m3",
+      "description": "He sleeps eight hours, and insomnia involves difficulty falling or staying asleep rather than interrupted breathing."
+     }
+    ],
+    "verification": {
+     "independent_path": "authored from the CED required content (essential knowledge 1.5.B); the key is NOT code-verified: it must be matched by an independent blind solver (Opus), the five-criterion reviewer (Sonnet) and a second independent model panel (Fable and Sonnet blind solves) before the item is used",
+     "method": "authored+blind-solver+panel"
+    },
+    "judgment_demand": [
+     "apply the concept to the scenario"
+    ]
+   },
+   "difficulty_signals": {
+    "steps": [
+     "Match repeated breathing pauses and loud snoring to a disorder",
+     "Recall how that disorder disrupts the continuity of sleep",
+     "Link the disrupted sleep to daytime sleepiness and reject disorders that do not fit the pattern"
+    ],
+    "concepts": [
+     "sleep disorder features",
+     "effects of fragmented or disrupted sleep"
+    ],
+    "representations": 1,
+    "distractor_fail_step": {
+     "He may have narcolepsy, and the sudden loss of muscle tone during the day causes him to fall asleep in the daytime.": 1,
+     "He may have insomnia, and the difficulty falling asleep at night causes him to spend too few hours in bed.": 1,
+     "He may have sleep apnea, and the pauses in his breathing wake him fully every hour, which leaves him with only about four hours of sleep.": 3
+    },
+    "arithmetic": "none"
+   },
+   "seed": 11600,
+   "pack_id": "ps_hd_c_sleep_disorders-s11600",
+   "explanation_en": "The correct answer is He may have sleep apnea, and awakenings that restart his breathing fragment his sleep and cause daytime sleepiness.. Sleep apnea interrupts breathing, and the brief awakenings that follow reduce the quality of sleep even when time in bed seems adequate.\nHe may have narcolepsy, and the sudden loss of muscle tone during the day causes him to fall asleep in the daytime. is incorrect: Narcolepsy involves sudden sleep attacks and does not involve repeated pauses in breathing at night.\nHe may have sleep apnea, and the pauses in his breathing wake him fully every hour, which leaves him with only about four hours of sleep. is incorrect: The disorder is named correctly, but the scenario says that he sleeps eight hours; the problem is fragmented sleep, not too few hours.\nHe may have insomnia, and the difficulty falling asleep at night causes him to spend too few hours in bed. is incorrect: He sleeps eight hours, and insomnia involves difficulty falling or staying asleep rather than interrupted breathing."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ps_hd_c_sleep_disorders",
+   "facts": [
+    "ek=1.5.B"
+   ],
+   "seed": 11600
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Sleep apnea is in scope for 1.5; the item applies the concept to a scenario (1.A)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "C is the unique correct option. Snoring and breathing pauses indicate apnea, and the restart awakenings fragment sleep."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option has a stated reason. Option B is a somewhat weak distractor, but it is clearly wrong given the eight hours of sleep in the stem."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 95 seconds, no calculation, four options. The item is on the easy side."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is accurate, in scope, and has a unique key. Option B is a weak but acceptable distractor. Pass."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The student must identify sleep apnea from the symptoms, eliminate the narcolepsy and insomnia options, and then connect the disorder to its effect (fragmented sleep causing daytime sleepiness) to separate the two apnea options. This meets the rubric: 3 sequential steps and 2 combined concepts. One distractor passes the first step and fails only on the mechanism. Everything is within Unit 1 scope, with a single defensible answer.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "candidateKey": "ap_psychology-m03-k1",
+  "cellId": "ap_psychology-m03",
+  "apSubjectCode": "ap_psychology",
+  "kind": "mc",
+  "keywordCode": "1.5",
+  "unitCode": "1",
+  "skillPrimary": "1.A",
+  "structure": "standalone",
+  "calculator": "na",
+  "archetype": "ps_hd_c_sleep_disorders",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "The student must identify the disorder from the symptoms (sudden sleep attacks, direct entry into REM). The student must then evaluate each option's explanation of the mechanism, including the near-miss narcolepsy option that wrongly describes acting out dreams (REM sleep behavior disorder). The student must carry the disorder identification into judging which statement is accurate. This meets the rubric of at least 3 steps and 2 combined concepts. The disorders are all in scope, the stem is short, there is no arithmetic, and one distractor survives the first step, so the item is moderate rather than advanced.",
+  "payload": {
+   "archetype": "ps_hd_c_sleep_disorders",
+   "topic": "1.5",
+   "skill": "1.A",
+   "calculator": "na",
+   "stem": "A woman is suddenly overcome by sleep several times a day, even in the middle of conversations, and her sleep often begins directly with REM sleep. Which disorder does this best describe, and which statement about it is accurate?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Narcolepsy; REM sleep intrudes into waking hours because the usual sequence of sleep stages is disrupted.",
+     "why": "Narcolepsy involves sudden sleep attacks during the day and abnormal entry into REM sleep, unlike the usual progression through earlier stages first.",
+     "value": null
+    },
+    {
+     "text": "Narcolepsy; sleep begins with REM sleep because her body acts out her dreams while she is awake in the daytime.",
+     "why": "The disorder is named correctly, but narcolepsy does not involve acting out dreams while awake; the stage sequence is what is disrupted.",
+     "value": null
+    },
+    {
+     "text": "Insomnia; sleep begins with REM sleep because she cannot fall asleep at night and is exhausted when she finally does.",
+     "why": "Insomnia is difficulty falling or staying asleep, and it does not cause sudden sleep attacks during conversations.",
+     "value": null
+    },
+    {
+     "text": "Sleep apnea; sleep begins with REM sleep because airway obstruction wakes her whenever she reaches a deeper stage.",
+     "why": "Sleep apnea involves breathing pauses at night, not sleep attacks that begin directly in REM sleep.",
+     "value": null
+    }
+   ],
+   "key_index": 0,
+   "est_seconds": 95,
+   "facts": [
+    "ek=1.5.B"
+   ],
+   "variant_id": "7d50ae3ae27e",
+   "blueprint": {
+    "id": "ps_hd_c_sleep_disorders",
+    "subject": "ap_psychology",
+    "kind": "mc",
+    "concept": "linking a sleep disorder's night-time pattern to its daytime consequence",
+    "topic": "1.5",
+    "skill": "1.A",
+    "student_thinking": [
+     "Match sudden sleep attacks in the daytime to a disorder",
+     "Recall what is unusual about the sleep stages in that disorder",
+     "Choose the matching statement and reject disorders with different features"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "na",
+    "key_conditions": [
+     {
+      "condition": "the stem supplies every fact needed and exactly one option follows from all of the steps",
+      "evidence": "stem and options"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "The disorder is named correctly, but narcolepsy does not involve acting out dreams while awake; the stage sequence is what is disrupted."
+     },
+     {
+      "id": "m2",
+      "description": "Insomnia is difficulty falling or staying asleep, and it does not cause sudden sleep attacks during conversations."
+     },
+     {
+      "id": "m3",
+      "description": "Sleep apnea involves breathing pauses at night, not sleep attacks that begin directly in REM sleep."
+     }
+    ],
+    "verification": {
+     "independent_path": "authored from the CED required content (essential knowledge 1.5.B); the key is NOT code-verified: it must be matched by an independent blind solver (Opus), the five-criterion reviewer (Sonnet) and a second independent model panel (Fable and Sonnet blind solves) before the item is used",
+     "method": "authored+blind-solver+panel"
+    },
+    "judgment_demand": [
+     "apply the concept to the scenario"
+    ]
+   },
+   "difficulty_signals": {
+    "steps": [
+     "Match sudden sleep attacks in the daytime to a disorder",
+     "Recall what is unusual about the sleep stages in that disorder",
+     "Choose the matching statement and reject disorders with different features"
+    ],
+    "concepts": [
+     "sleep disorder features",
+     "effects of fragmented or disrupted sleep"
+    ],
+    "representations": 1,
+    "distractor_fail_step": {
+     "Insomnia; sleep begins with REM sleep because she cannot fall asleep at night and is exhausted when she finally does.": 1,
+     "Sleep apnea; sleep begins with REM sleep because airway obstruction wakes her whenever she reaches a deeper stage.": 1,
+     "Narcolepsy; sleep begins with REM sleep because her body acts out her dreams while she is awake in the daytime.": 3
+    },
+    "arithmetic": "none"
+   },
+   "seed": 11601,
+   "pack_id": "ps_hd_c_sleep_disorders-s11601",
+   "explanation_en": "The correct answer is Narcolepsy; REM sleep intrudes into waking hours because the usual sequence of sleep stages is disrupted.. Narcolepsy involves sudden sleep attacks during the day and abnormal entry into REM sleep, unlike the usual progression through earlier stages first.\nNarcolepsy; sleep begins with REM sleep because her body acts out her dreams while she is awake in the daytime. is incorrect: The disorder is named correctly, but narcolepsy does not involve acting out dreams while awake; the stage sequence is what is disrupted.\nInsomnia; sleep begins with REM sleep because she cannot fall asleep at night and is exhausted when she finally does. is incorrect: Insomnia is difficulty falling or staying asleep, and it does not cause sudden sleep attacks during conversations.\nSleep apnea; sleep begins with REM sleep because airway obstruction wakes her whenever she reaches a deeper stage. is incorrect: Sleep apnea involves breathing pauses at night, not sleep attacks that begin directly in REM sleep."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ps_hd_c_sleep_disorders",
+   "facts": [
+    "ek=1.5.B"
+   ],
+   "seed": 11601
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Narcolepsy application within 1.5; the disorders named are in scope."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "A is uniquely correct. REM intruding into wakefulness is standard textbook language; the other options name wrong disorders or wrong mechanisms."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear and self-contained."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor targets a distinct misconception, and the explanation addresses each wrong option. Option B is a good near-miss that confuses narcolepsy with REM sleep behavior disorder."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 95 seconds, no calculator, four options, parallel structure."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key (narcolepsy with REM intrusion) is correct and the item is in scope. The distractors are plausible and distinct. The item is somewhat recall-heavy but acceptable."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The student must identify the disorder from the symptoms (sudden sleep attacks, direct entry into REM). The student must then evaluate each option's explanation of the mechanism, including the near-miss narcolepsy option that wrongly describes acting out dreams (REM sleep behavior disorder). The student must carry the disorder identification into judging which statement is accurate. This meets the rubric of at least 3 steps and 2 combined concepts. The disorders are all in scope, the stem is short, there is no arithmetic, and one distractor survives the first step, so the item is moderate rather than advanced.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "candidateKey": "ap_psychology-m04-k0",
+  "cellId": "ap_psychology-m04",
+  "apSubjectCode": "ap_psychology",
+  "kind": "mc",
+  "keywordCode": "2.2",
+  "unitCode": "2",
+  "skillPrimary": "1.A",
+  "structure": "standalone",
+  "calculator": "na",
+  "archetype": "ps_hd_c_problem_obstacles",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "The item requires identifying the procedure (the tacks-in-box manipulation of the candle problem), recognizing that the box's typical function as a container blocks its use as a platform, and discriminating functional fixedness from the near-miss concept of mental set, then checking the option's explanation against the scenario. This matches the generator's counted 3 sequential steps and 2 combined concepts. The wrong options (mental set, availability, confirmation bias) are plausible at first glance and fail only on closer reading of the scenario. All content is in CED scope, wording is plain, and there is no arithmetic or heavy reading.",
+  "payload": {
+   "archetype": "ps_hd_c_problem_obstacles",
+   "topic": "2.2",
+   "skill": "1.A",
+   "calculator": "na",
+   "stem": "Participants are given a candle, a box of tacks, and matches and asked to mount the candle on a wall so that it burns without dripping. Participants who are given the tacks inside the box often fail, while participants who are given the tacks beside the empty box more often succeed. Which concept explains the difference?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Functional fixedness; participants who see the box only as a container fail to think of using it as a platform.",
+     "why": "Seeing an object only in its usual function prevents recognizing a new use, and an empty box is easier to see as a platform.",
+     "value": null
+    },
+    {
+     "text": "Availability heuristic; participants judge the likelihood of success by how easily past successes come to mind.",
+     "why": "The scenario does not describe judging likelihood from examples that come to mind.",
+     "value": null
+    },
+    {
+     "text": "Mental set; participants rely on a strategy that solved earlier problems and apply it to this one without any change.",
+     "why": "A mental set is persistence of a previously successful strategy, and the scenario describes no earlier problems.",
+     "value": null
+    },
+    {
+     "text": "Confirmation bias; participants search for evidence that supports their first idea and ignore evidence against that idea.",
+     "why": "The difference concerns how the objects are presented and viewed, not a search for supporting evidence.",
+     "value": null
+    }
+   ],
+   "key_index": 0,
+   "est_seconds": 95,
+   "facts": [
+    "ek=2.2.B"
+   ],
+   "variant_id": "69fce3152569",
+   "blueprint": {
+    "id": "ps_hd_c_problem_obstacles",
+    "subject": "ap_psychology",
+    "kind": "mc",
+    "concept": "diagnosing a problem-solving obstacle and the change that overcomes it",
+    "topic": "2.2",
+    "skill": "1.A",
+    "student_thinking": [
+     "Compare the two conditions: tacks inside the box versus beside the box",
+     "Link the difference to how the box is perceived (container versus platform)",
+     "Name the obstacle and reject obstacles about past strategies, evidence, or ease of recall"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "na",
+    "key_conditions": [
+     {
+      "condition": "the stem supplies every fact needed and exactly one option follows from all of the steps",
+      "evidence": "stem and options"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "The scenario does not describe judging likelihood from examples that come to mind."
+     },
+     {
+      "id": "m2",
+      "description": "A mental set is persistence of a previously successful strategy, and the scenario describes no earlier problems."
+     },
+     {
+      "id": "m3",
+      "description": "The difference concerns how the objects are presented and viewed, not a search for supporting evidence."
+     }
+    ],
+    "verification": {
+     "independent_path": "authored from the CED required content (essential knowledge 2.2.B); the key is NOT code-verified: it must be matched by an independent blind solver (Opus), the five-criterion reviewer (Sonnet) and a second independent model panel (Fable and Sonnet blind solves) before the item is used",
+     "method": "authored+blind-solver+panel"
+    },
+    "judgment_demand": [
+     "apply the concept to the scenario"
+    ]
+   },
+   "difficulty_signals": {
+    "steps": [
+     "Compare the two conditions: tacks inside the box versus beside the box",
+     "Link the difference to how the box is perceived (container versus platform)",
+     "Name the obstacle and reject obstacles about past strategies, evidence, or ease of recall"
+    ],
+    "concepts": [
+     "functional fixedness",
+     "mental set"
+    ],
+    "representations": 1,
+    "distractor_fail_step": {
+     "Mental set; participants rely on a strategy that solved earlier problems and apply it to this one without any change.": 2,
+     "Confirmation bias; participants search for evidence that supports their first idea and ignore evidence against that idea.": 3,
+     "Availability heuristic; participants judge the likelihood of success by how easily past successes come to mind.": 3
+    },
+    "arithmetic": "none"
+   },
+   "seed": 11600,
+   "pack_id": "ps_hd_c_problem_obstacles-s11600",
+   "explanation_en": "The correct answer is Functional fixedness; participants who see the box only as a container fail to think of using it as a platform.. Seeing an object only in its usual function prevents recognizing a new use, and an empty box is easier to see as a platform.\nAvailability heuristic; participants judge the likelihood of success by how easily past successes come to mind. is incorrect: The scenario does not describe judging likelihood from examples that come to mind.\nMental set; participants rely on a strategy that solved earlier problems and apply it to this one without any change. is incorrect: A mental set is persistence of a previously successful strategy, and the scenario describes no earlier problems.\nConfirmation bias; participants search for evidence that supports their first idea and ignore evidence against that idea. is incorrect: The difference concerns how the objects are presented and viewed, not a search for supporting evidence."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ps_hd_c_problem_obstacles",
+   "facts": [
+    "ek=2.2.B"
+   ],
+   "seed": 11600
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Applies functional fixedness (CED 2.2.B) to a scenario; matches 1.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Duncker candle problem is the textbook functional fixedness example; unique key."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Mental set, availability, and confirmation bias are distinct, clearly wrong; each is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, about 90 seconds, four options, no calculator."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, unambiguous functional fixedness item with plausible distractors and full explanations. Passes all criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The item requires identifying the procedure (the tacks-in-box manipulation of the candle problem), recognizing that the box's typical function as a container blocks its use as a platform, and discriminating functional fixedness from the near-miss concept of mental set, then checking the option's explanation against the scenario. This matches the generator's counted 3 sequential steps and 2 combined concepts. The wrong options (mental set, availability, confirmation bias) are plausible at first glance and fail only on closer reading of the scenario. All content is in CED scope, wording is plain, and there is no arithmetic or heavy reading.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 50
+  }
+ },
+ {
+  "candidateKey": "ap_psychology-m04-k1",
+  "cellId": "ap_psychology-m04",
+  "apSubjectCode": "ap_psychology",
+  "kind": "mc",
+  "keywordCode": "2.2",
+  "unitCode": "2",
+  "skillPrimary": "1.A",
+  "structure": "standalone",
+  "calculator": "na",
+  "archetype": "ps_hd_c_problem_obstacles",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Student must (1) identify the scenario as persisting with an old strategy despite a better one (mental set), (2) discriminate it from near-miss concepts such as functional fixedness, insight, and hindsight bias, and (3) match the correct remedy to the concept. This meets the rubric of at least 3 sequential steps and 2 combined concepts, with a result carried from step to step. All three distractors survive initial scrutiny and fail only on the concept or remedy. The scenario is unambiguous and uses only in-scope Unit 2.2 content, so there are no unfair difficulty sources.",
+  "payload": {
+   "archetype": "ps_hd_c_problem_obstacles",
+   "topic": "2.2",
+   "skill": "1.A",
+   "calculator": "na",
+   "stem": "A student always solves long division problems by writing out every step. When a teacher shows a much faster shortcut that works for all of them, the student keeps using the long method for weeks. Which concept explains this, and what would help?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Insight; the student suddenly sees the solution, so no further help is needed for the student to adopt the shortcut.",
+     "why": "Insight is a sudden realization of a solution, and the student has not adopted the shortcut.",
+     "value": null
+    },
+    {
+     "text": "Functional fixedness; the student sees pencils only as writing tools, so teaching the student other uses for pencils would help.",
+     "why": "Functional fixedness concerns seeing objects only in their usual use, which is not described here.",
+     "value": null
+    },
+    {
+     "text": "Hindsight bias; the student believes that she knew the shortcut all along, so reminding her that she did not know it would help.",
+     "why": "Hindsight bias concerns believing that an outcome was predictable, and the scenario describes a strategy, not a belief about knowledge.",
+     "value": null
+    },
+    {
+     "text": "Mental set; trying new approaches on problems that the long method also solves can reduce reliance on the old strategy.",
+     "why": "A mental set is a tendency to keep using a strategy that has worked before, and practicing alternatives can weaken it.",
+     "value": null
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 95,
+   "facts": [
+    "ek=2.2.B"
+   ],
+   "variant_id": "2079501ca796",
+   "blueprint": {
+    "id": "ps_hd_c_problem_obstacles",
+    "subject": "ap_psychology",
+    "kind": "mc",
+    "concept": "diagnosing a problem-solving obstacle and the change that overcomes it",
+    "topic": "2.2",
+    "skill": "1.A",
+    "student_thinking": [
+     "Note that the student keeps using a strategy that has worked",
+     "Name the obstacle and its effect on trying the shortcut",
+     "Choose the change that addresses the obstacle and reject concepts that do not involve a persisting strategy"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "na",
+    "key_conditions": [
+     {
+      "condition": "the stem supplies every fact needed and exactly one option follows from all of the steps",
+      "evidence": "stem and options"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Insight is a sudden realization of a solution, and the student has not adopted the shortcut."
+     },
+     {
+      "id": "m2",
+      "description": "Functional fixedness concerns seeing objects only in their usual use, which is not described here."
+     },
+     {
+      "id": "m3",
+      "description": "Hindsight bias concerns believing that an outcome was predictable, and the scenario describes a strategy, not a belief about knowledge."
+     }
+    ],
+    "verification": {
+     "independent_path": "authored from the CED required content (essential knowledge 2.2.B); the key is NOT code-verified: it must be matched by an independent blind solver (Opus), the five-criterion reviewer (Sonnet) and a second independent model panel (Fable and Sonnet blind solves) before the item is used",
+     "method": "authored+blind-solver+panel"
+    },
+    "judgment_demand": [
+     "apply the concept to the scenario"
+    ]
+   },
+   "difficulty_signals": {
+    "steps": [
+     "Note that the student keeps using a strategy that has worked",
+     "Name the obstacle and its effect on trying the shortcut",
+     "Choose the change that addresses the obstacle and reject concepts that do not involve a persisting strategy"
+    ],
+    "concepts": [
+     "functional fixedness",
+     "mental set"
+    ],
+    "representations": 1,
+    "distractor_fail_step": {
+     "Functional fixedness; the student sees pencils only as writing tools, so teaching the student other uses for pencils would help.": 2,
+     "Hindsight bias; the student believes that she knew the shortcut all along, so reminding her that she did not know it would help.": 2,
+     "Insight; the student suddenly sees the solution, so no further help is needed for the student to adopt the shortcut.": 3
+    },
+    "arithmetic": "none"
+   },
+   "seed": 11601,
+   "pack_id": "ps_hd_c_problem_obstacles-s11601",
+   "explanation_en": "The correct answer is Mental set; trying new approaches on problems that the long method also solves can reduce reliance on the old strategy.. A mental set is a tendency to keep using a strategy that has worked before, and practicing alternatives can weaken it.\nInsight; the student suddenly sees the solution, so no further help is needed for the student to adopt the shortcut. is incorrect: Insight is a sudden realization of a solution, and the student has not adopted the shortcut.\nFunctional fixedness; the student sees pencils only as writing tools, so teaching the student other uses for pencils would help. is incorrect: Functional fixedness concerns seeing objects only in their usual use, which is not described here.\nHindsight bias; the student believes that she knew the shortcut all along, so reminding her that she did not know it would help. is incorrect: Hindsight bias concerns believing that an outcome was predictable, and the scenario describes a strategy, not a belief about knowledge."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ps_hd_c_problem_obstacles",
+   "facts": [
+    "ek=2.2.B"
+   ],
+   "seed": 11601
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Mental set applied to a scenario; squarely 2.2 / 1.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Mental set is the unique correct concept; remedy of practicing alternative strategies is standard. Other options are clearly wrong."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Standalone stem; the 'she' in option C versus 'the student' in the stem is a minor pronoun inconsistency. Option A is wordy."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors are real near-miss concepts (insight, functional fixedness, hindsight bias) and each is explained. They are weak in plausibility because the paired remedies are contrived (pencils, 'she knew it all along'), and option A's 'no further help needed' is a giveaway."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, about 60-90 seconds, no calculator. The two-part concept-plus-remedy format is slightly unusual for AP but acceptable."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, unique key (mental set). The item is in scope and suitable. Its weaknesses are minor: some distractors are easy to eliminate because of their contrived remedies, and the pronoun in option C does not match the stem."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must (1) identify the scenario as persisting with an old strategy despite a better one (mental set), (2) discriminate it from near-miss concepts such as functional fixedness, insight, and hindsight bias, and (3) match the correct remedy to the concept. This meets the rubric of at least 3 sequential steps and 2 combined concepts, with a result carried from step to step. All three distractors survive initial scrutiny and fail only on the concept or remedy. The scenario is unambiguous and uses only in-scope Unit 2.2 content, so there are no unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "candidateKey": "ap_psychology-m05-k0",
+  "cellId": "ap_psychology-m05",
+  "apSubjectCode": "ap_psychology",
+  "kind": "mc",
+  "keywordCode": "3.5",
+  "unitCode": "3",
+  "skillPrimary": "1.A",
+  "structure": "standalone",
+  "calculator": "na",
+  "archetype": "ps_hd_c_language_rules",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "The item applies one named concept, overregularization as evidence of rule learning, to a short scenario. The correct option follows directly once the student recognizes \"goed\" and \"mouses\" as overregularization. The distractors use absolute wording (\"only by copying\", \"lacks any knowledge\") and a stage mismatch (babbling at age three), so they are easy to eliminate. The generator counted 3 steps and 2 concepts, but the item text shows about 2 steps: identify overregularization, then conclude she is applying rules rather than imitating. The stages concept only eliminates one distractor and is not carried forward as a separate reasoning step. The rubric's exam_prep threshold of 3 steps plus 2 combined concepts is therefore not met.",
+  "payload": {
+   "archetype": "ps_hd_c_language_rules",
+   "topic": "3.5",
+   "skill": "1.A",
+   "calculator": "na",
+   "stem": "A three-year-old says, 'I goed to the park and I saw two mouses.' Her parents have never said these words. Which conclusion is best supported?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "She has learned grammatical rules and applies them to irregular words, so she is not simply imitating adults.",
+     "why": "Overregularization shows that children extract rules such as adding -ed or -s, because they produce forms that they have never heard.",
+     "value": null
+    },
+    {
+     "text": "She has not learned any grammar, because errors in speech show that she lacks any knowledge of language rules.",
+     "why": "Applying a rule such as adding -ed shows knowledge of grammar, even when it is applied incorrectly.",
+     "value": null
+    },
+    {
+     "text": "She is imitating the speech of adults exactly, because children learn language only by copying what they have heard.",
+     "why": "The child says forms that adults have not said, which cannot be pure imitation.",
+     "value": null
+    },
+    {
+     "text": "She is in the babbling stage, because a child who makes errors in words must be repeating sounds without meaning.",
+     "why": "Babbling occurs in infancy and involves repeated syllables, not full sentences with word endings.",
+     "value": null
+    }
+   ],
+   "key_index": 0,
+   "est_seconds": 95,
+   "facts": [
+    "ek=3.5.A"
+   ],
+   "variant_id": "68b70f59a14a",
+   "blueprint": {
+    "id": "ps_hd_c_language_rules",
+    "subject": "ap_psychology",
+    "kind": "mc",
+    "concept": "using overregularization and telegraphic speech as evidence about how children learn language",
+    "topic": "3.5",
+    "skill": "1.A",
+    "student_thinking": [
+     "Notice that her parents have never said 'goed' or 'mouses'",
+     "Infer that she is applying rules she has learned",
+     "Reject answers that claim pure imitation, no grammar, or the babbling stage"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "na",
+    "key_conditions": [
+     {
+      "condition": "the stem supplies every fact needed and exactly one option follows from all of the steps",
+      "evidence": "stem and options"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Applying a rule such as adding -ed shows knowledge of grammar, even when it is applied incorrectly."
+     },
+     {
+      "id": "m2",
+      "description": "The child says forms that adults have not said, which cannot be pure imitation."
+     },
+     {
+      "id": "m3",
+      "description": "Babbling occurs in infancy and involves repeated syllables, not full sentences with word endings."
+     }
+    ],
+    "verification": {
+     "independent_path": "authored from the CED required content (essential knowledge 3.5.A); the key is NOT code-verified: it must be matched by an independent blind solver (Opus), the five-criterion reviewer (Sonnet) and a second independent model panel (Fable and Sonnet blind solves) before the item is used",
+     "method": "authored+blind-solver+panel"
+    },
+    "judgment_demand": [
+     "apply the concept to the scenario"
+    ]
+   },
+   "difficulty_signals": {
+    "steps": [
+     "Notice that her parents have never said 'goed' or 'mouses'",
+     "Infer that she is applying rules she has learned",
+     "Reject answers that claim pure imitation, no grammar, or the babbling stage"
+    ],
+    "concepts": [
+     "overregularization as evidence of rule learning",
+     "stages of language development"
+    ],
+    "representations": 1,
+    "distractor_fail_step": {
+     "She is imitating the speech of adults exactly, because children learn language only by copying what they have heard.": 1,
+     "She has not learned any grammar, because errors in speech show that she lacks any knowledge of language rules.": 2,
+     "She is in the babbling stage, because a child who makes errors in words must be repeating sounds without meaning.": 3
+    },
+    "arithmetic": "none"
+   },
+   "seed": 11600,
+   "pack_id": "ps_hd_c_language_rules-s11600",
+   "explanation_en": "The correct answer is She has learned grammatical rules and applies them to irregular words, so she is not simply imitating adults.. Overregularization shows that children extract rules such as adding -ed or -s, because they produce forms that they have never heard.\nShe has not learned any grammar, because errors in speech show that she lacks any knowledge of language rules. is incorrect: Applying a rule such as adding -ed shows knowledge of grammar, even when it is applied incorrectly.\nShe is imitating the speech of adults exactly, because children learn language only by copying what they have heard. is incorrect: The child says forms that adults have not said, which cannot be pure imitation.\nShe is in the babbling stage, because a child who makes errors in words must be repeating sounds without meaning. is incorrect: Babbling occurs in infancy and involves repeated syllables, not full sentences with word endings."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ps_hd_c_language_rules",
+   "facts": [
+    "ek=3.5.A"
+   ],
+   "seed": 11600
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Overregularization applied to a scenario; fits 3.5 and 1.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "A is the unique correct answer; the other options are clearly wrong."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed; the stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor is explained. They are somewhat weak and use absolute wording (any, only, must), which is a mild giveaway, but each encodes a recognizable misconception."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60-90 seconds with low reading load; typical of AP items, though easy."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound, easy overregularization item with a unique key. The distractors are weak and the key is longest and hedged, but this is acceptable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item applies one named concept, overregularization as evidence of rule learning, to a short scenario. The correct option follows directly once the student recognizes \"goed\" and \"mouses\" as overregularization. The distractors use absolute wording (\"only by copying\", \"lacks any knowledge\") and a stage mismatch (babbling at age three), so they are easy to eliminate. The generator counted 3 steps and 2 concepts, but the item text shows about 2 steps: identify overregularization, then conclude she is applying rules rather than imitating. The stages concept only eliminates one distractor and is not carried forward as a separate reasoning step. The rubric's exam_prep threshold of 3 steps plus 2 combined concepts is therefore not met.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "candidateKey": "ap_psychology-m05-k1",
+  "cellId": "ap_psychology-m05",
+  "apSubjectCode": "ap_psychology",
+  "kind": "mc",
+  "keywordCode": "3.5",
+  "unitCode": "3",
+  "skillPrimary": "1.A",
+  "structure": "standalone",
+  "calculator": "na",
+  "archetype": "ps_hd_c_language_rules",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "The stem gives two-word utterances that are a textbook example of telegraphic speech, so the student matches one example to one named stage. The distractors (overregularization, one-word stage, babbling) are each clearly ruled out by the stem. This is single-concept recognition with at most 1-2 steps, which is below the exam_prep threshold of 3 steps and 2 combined concepts. The generator's count of 3 steps is not supported by the item text. Overregularization appears only as a distractor and does not have to be applied.",
+  "payload": {
+   "archetype": "ps_hd_c_language_rules",
+   "topic": "3.5",
+   "skill": "1.A",
+   "calculator": "na",
+   "stem": "A two-year-old says, 'Want milk' and 'Daddy go work,' using mostly nouns and verbs and leaving out small words. Which stage of language development is this, and what does it show?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Overregularization, in which a child applies a grammatical rule to words that are exceptions to it.",
+     "why": "The child's phrases leave out small words rather than apply a rule incorrectly to exceptions.",
+     "value": null
+    },
+    {
+     "text": "The one-word stage, in which a child uses single words to stand for whole sentences of meaning.",
+     "why": "The child is using combinations of words, so the one-word stage has passed.",
+     "value": null
+    },
+    {
+     "text": "Telegraphic speech, in which a child combines key words to express meaning before using full grammar.",
+     "why": "At around two years, children combine key content words into short phrases that omit small function words.",
+     "value": null
+    },
+    {
+     "text": "Babbling, in which a child repeats syllables such as ba-ba without any meaning attached to the sounds.",
+     "why": "Babbling involves repeated syllables in infancy rather than meaningful two-word combinations.",
+     "value": null
+    }
+   ],
+   "key_index": 2,
+   "est_seconds": 95,
+   "facts": [
+    "ek=3.5.A"
+   ],
+   "variant_id": "7bcb520d5712",
+   "blueprint": {
+    "id": "ps_hd_c_language_rules",
+    "subject": "ap_psychology",
+    "kind": "mc",
+    "concept": "using overregularization and telegraphic speech as evidence about how children learn language",
+    "topic": "3.5",
+    "skill": "1.A",
+    "student_thinking": [
+     "Read the child's utterances: two or three key words, small words omitted",
+     "Match that pattern to a stage in the sequence of language development",
+     "Reject earlier stages and error patterns that do not fit"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "na",
+    "key_conditions": [
+     {
+      "condition": "the stem supplies every fact needed and exactly one option follows from all of the steps",
+      "evidence": "stem and options"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "The child's phrases leave out small words rather than apply a rule incorrectly to exceptions."
+     },
+     {
+      "id": "m2",
+      "description": "The child is using combinations of words, so the one-word stage has passed."
+     },
+     {
+      "id": "m3",
+      "description": "Babbling involves repeated syllables in infancy rather than meaningful two-word combinations."
+     }
+    ],
+    "verification": {
+     "independent_path": "authored from the CED required content (essential knowledge 3.5.A); the key is NOT code-verified: it must be matched by an independent blind solver (Opus), the five-criterion reviewer (Sonnet) and a second independent model panel (Fable and Sonnet blind solves) before the item is used",
+     "method": "authored+blind-solver+panel"
+    },
+    "judgment_demand": [
+     "apply the concept to the scenario"
+    ]
+   },
+   "difficulty_signals": {
+    "steps": [
+     "Read the child's utterances: two or three key words, small words omitted",
+     "Match that pattern to a stage in the sequence of language development",
+     "Reject earlier stages and error patterns that do not fit"
+    ],
+    "concepts": [
+     "overregularization as evidence of rule learning",
+     "stages of language development"
+    ],
+    "representations": 1,
+    "distractor_fail_step": {
+     "Babbling, in which a child repeats syllables such as ba-ba without any meaning attached to the sounds.": 2,
+     "The one-word stage, in which a child uses single words to stand for whole sentences of meaning.": 2,
+     "Overregularization, in which a child applies a grammatical rule to words that are exceptions to it.": 3
+    },
+    "arithmetic": "none"
+   },
+   "seed": 11601,
+   "pack_id": "ps_hd_c_language_rules-s11601",
+   "explanation_en": "The correct answer is Telegraphic speech, in which a child combines key words to express meaning before using full grammar.. At around two years, children combine key content words into short phrases that omit small function words.\nOverregularization, in which a child applies a grammatical rule to words that are exceptions to it. is incorrect: The child's phrases leave out small words rather than apply a rule incorrectly to exceptions.\nThe one-word stage, in which a child uses single words to stand for whole sentences of meaning. is incorrect: The child is using combinations of words, so the one-word stage has passed.\nBabbling, in which a child repeats syllables such as ba-ba without any meaning attached to the sounds. is incorrect: Babbling involves repeated syllables in infancy rather than meaningful two-word combinations."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ps_hd_c_language_rules",
+   "facts": [
+    "ek=3.5.A"
+   ],
+   "seed": 11601
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "3.5 telegraphic speech applied to a scenario; fits 1.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Telegraphic speech is the unique correct answer; the other stages clearly do not fit."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors are real related concepts (overregularization, one-word stage, babbling) and each is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, about 60-95 seconds, four options, no calculator."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Accurate, unambiguous concept-application item on telegraphic speech. The key is correct, the distractors are plausible but clearly wrong, and the load is suitable for the exam."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The stem gives two-word utterances that are a textbook example of telegraphic speech, so the student matches one example to one named stage. The distractors (overregularization, one-word stage, babbling) are each clearly ruled out by the stem. This is single-concept recognition with at most 1-2 steps, which is below the exam_prep threshold of 3 steps and 2 combined concepts. The generator's count of 3 steps is not supported by the item text. Overregularization appears only as a distractor and does not have to be applied.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "candidateKey": "ap_psychology-m06-k0",
+  "cellId": "ap_psychology-m06",
+  "apSubjectCode": "ap_psychology",
+  "kind": "mc",
+  "keywordCode": "3.8",
+  "unitCode": "3",
+  "skillPrimary": "1.A",
+  "structure": "standalone",
+  "calculator": "na",
+  "archetype": "ps_hd_c_punishment_reinforcement",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "The item requires applying operant conditioning to a scenario in three sequential steps: (1) identify whether a stimulus was added or removed (phone removed), (2) identify whether the behavior increased or decreased (curfew violations decreased, so punishment rather than reinforcement), (3) combine the results to name the correct quadrant (negative punishment). This combines two concepts (added vs. removed; reinforcement vs. punishment) and matches the rubric for exam_prep (3 steps, 2 combined concepts). It is a near-miss discrimination, and one distractor (positive punishment) survives the first step and fails later. The scenario is unambiguous, the vocabulary is within CED content, the reading is short, and there is no arithmetic. The difficulty comes from legitimate concept discrimination, not unfair sources.",
+  "payload": {
+   "archetype": "ps_hd_c_punishment_reinforcement",
+   "topic": "3.8",
+   "skill": "1.A",
+   "calculator": "na",
+   "stem": "A teenager's parents take away his phone for a week after he misses curfew, and he misses curfew much less often afterward. Which description is correct?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Positive reinforcement; adding a pleasant stimulus increases the behavior it follows.",
+     "why": "A pleasant stimulus was removed and the behavior decreased, so this is not reinforcement.",
+     "value": null
+    },
+    {
+     "text": "Negative reinforcement; removing a pleasant stimulus increases the behavior it follows.",
+     "why": "Negative reinforcement removes an unpleasant stimulus and increases behavior, which does not fit the scenario.",
+     "value": null
+    },
+    {
+     "text": "Negative punishment; removing a pleasant stimulus decreases the behavior.",
+     "why": "Taking away something desirable after a behavior, which makes the behavior less likely, is negative punishment.",
+     "value": null
+    },
+    {
+     "text": "Positive punishment; adding an unpleasant stimulus decreases the behavior it follows.",
+     "why": "No unpleasant stimulus was added; a pleasant one was removed.",
+     "value": null
+    }
+   ],
+   "key_index": 2,
+   "est_seconds": 95,
+   "facts": [
+    "ek=3.8.A"
+   ],
+   "variant_id": "0b146ff42c4b",
+   "blueprint": {
+    "id": "ps_hd_c_punishment_reinforcement",
+    "subject": "ap_psychology",
+    "kind": "mc",
+    "concept": "classifying consequences by whether a stimulus is added or removed and whether behavior increases or decreases",
+    "topic": "3.8",
+    "skill": "1.A",
+    "student_thinking": [
+     "Decide whether a stimulus was added or removed (removed)",
+     "Decide whether the stimulus was pleasant or unpleasant and whether the behavior increased or decreased",
+     "Combine the three facts and reject labels that match only some of them"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "na",
+    "key_conditions": [
+     {
+      "condition": "the stem supplies every fact needed and exactly one option follows from all of the steps",
+      "evidence": "stem and options"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "A pleasant stimulus was removed and the behavior decreased, so this is not reinforcement."
+     },
+     {
+      "id": "m2",
+      "description": "Negative reinforcement removes an unpleasant stimulus and increases behavior, which does not fit the scenario."
+     },
+     {
+      "id": "m3",
+      "description": "No unpleasant stimulus was added; a pleasant one was removed."
+     }
+    ],
+    "verification": {
+     "independent_path": "authored from the CED required content (essential knowledge 3.8.A); the key is NOT code-verified: it must be matched by an independent blind solver (Opus), the five-criterion reviewer (Sonnet) and a second independent model panel (Fable and Sonnet blind solves) before the item is used",
+     "method": "authored+blind-solver+panel"
+    },
+    "judgment_demand": [
+     "apply the concept to the scenario"
+    ]
+   },
+   "difficulty_signals": {
+    "steps": [
+     "Decide whether a stimulus was added or removed (removed)",
+     "Decide whether the stimulus was pleasant or unpleasant and whether the behavior increased or decreased",
+     "Combine the three facts and reject labels that match only some of them"
+    ],
+    "concepts": [
+     "added versus removed stimulus",
+     "reinforcement versus punishment"
+    ],
+    "representations": 1,
+    "distractor_fail_step": {
+     "Negative reinforcement; removing a pleasant stimulus increases the behavior it follows.": 2,
+     "Positive punishment; adding an unpleasant stimulus decreases the behavior it follows.": 1,
+     "Positive reinforcement; adding a pleasant stimulus increases the behavior it follows.": 1
+    },
+    "arithmetic": "none"
+   },
+   "seed": 11600,
+   "pack_id": "ps_hd_c_punishment_reinforcement-s11600",
+   "explanation_en": "The correct answer is Negative punishment; removing a pleasant stimulus decreases the behavior.. Taking away something desirable after a behavior, which makes the behavior less likely, is negative punishment.\nPositive reinforcement; adding a pleasant stimulus increases the behavior it follows. is incorrect: A pleasant stimulus was removed and the behavior decreased, so this is not reinforcement.\nNegative reinforcement; removing a pleasant stimulus increases the behavior it follows. is incorrect: Negative reinforcement removes an unpleasant stimulus and increases behavior, which does not fit the scenario.\nPositive punishment; adding an unpleasant stimulus decreases the behavior it follows. is incorrect: No unpleasant stimulus was added; a pleasant one was removed."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ps_hd_c_punishment_reinforcement",
+   "facts": [
+    "ek=3.8.A"
+   ],
+   "seed": 11600
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Applies operant conditioning categories to a scenario (3.8, 1.A)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Negative punishment is unique and correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors cover the other three quadrants; the explanation addresses each one."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short and typical of the exam."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and clean. The scenario is a phone removed after a missed curfew, and the keyed answer, negative punishment, is the only defensible one."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The item requires applying operant conditioning to a scenario in three sequential steps: (1) identify whether a stimulus was added or removed (phone removed), (2) identify whether the behavior increased or decreased (curfew violations decreased, so punishment rather than reinforcement), (3) combine the results to name the correct quadrant (negative punishment). This combines two concepts (added vs. removed; reinforcement vs. punishment) and matches the rubric for exam_prep (3 steps, 2 combined concepts). It is a near-miss discrimination, and one distractor (positive punishment) survives the first step and fails later. The scenario is unambiguous, the vocabulary is within CED content, the reading is short, and there is no arithmetic. The difficulty comes from legitimate concept discrimination, not unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "candidateKey": "ap_psychology-m06-k1",
+  "cellId": "ap_psychology-m06",
+  "apSubjectCode": "ap_psychology",
+  "kind": "mc",
+  "keywordCode": "3.8",
+  "unitCode": "3",
+  "skillPrimary": "1.A",
+  "structure": "standalone",
+  "calculator": "na",
+  "archetype": "ps_hd_c_punishment_reinforcement",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Student must (1) identify whether a stimulus is added or removed (nagging removed), (2) determine the behavior's direction of change (cleaning increases), and (3) combine these to select reinforcement vs punishment with positive vs negative. This meets the rubric of 3 sequential steps and 2 combined concepts. Distractors are near-miss operant terms, which is an allowed lever. The scenario is unambiguous, the reading load is light, and there is no arithmetic.",
+  "payload": {
+   "archetype": "ps_hd_c_punishment_reinforcement",
+   "topic": "3.8",
+   "skill": "1.A",
+   "calculator": "na",
+   "stem": "A child cleans her room as soon as her parent starts to nag about it, which makes the nagging stop. Over the following weeks she starts cleaning her room earlier and more often. Which description is correct?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Negative reinforcement; removing an unpleasant stimulus increases the behavior.",
+     "why": "Ending an unpleasant event after a behavior makes the behavior more likely, which is negative reinforcement.",
+     "value": null
+    },
+    {
+     "text": "Positive punishment; adding an unpleasant stimulus decreases the behavior it follows.",
+     "why": "The nagging was removed rather than added, and the behavior increased rather than decreased.",
+     "value": null
+    },
+    {
+     "text": "Negative punishment; removing a pleasant stimulus decreases the behavior it follows.",
+     "why": "The behavior increased and an unpleasant, not a pleasant, stimulus was removed.",
+     "value": null
+    },
+    {
+     "text": "Positive reinforcement; adding a pleasant stimulus increases the behavior it follows.",
+     "why": "No pleasant stimulus was added; an unpleasant one was removed.",
+     "value": null
+    }
+   ],
+   "key_index": 0,
+   "est_seconds": 95,
+   "facts": [
+    "ek=3.8.A"
+   ],
+   "variant_id": "85b28830c999",
+   "blueprint": {
+    "id": "ps_hd_c_punishment_reinforcement",
+    "subject": "ap_psychology",
+    "kind": "mc",
+    "concept": "classifying consequences by whether a stimulus is added or removed and whether behavior increases or decreases",
+    "topic": "3.8",
+    "skill": "1.A",
+    "student_thinking": [
+     "Decide whether a stimulus was added or removed (removed)",
+     "Decide whether it was unpleasant and whether the behavior increased (it did)",
+     "Combine the facts and reject labels that match only some of them"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "na",
+    "key_conditions": [
+     {
+      "condition": "the stem supplies every fact needed and exactly one option follows from all of the steps",
+      "evidence": "stem and options"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "The nagging was removed rather than added, and the behavior increased rather than decreased."
+     },
+     {
+      "id": "m2",
+      "description": "The behavior increased and an unpleasant, not a pleasant, stimulus was removed."
+     },
+     {
+      "id": "m3",
+      "description": "No pleasant stimulus was added; an unpleasant one was removed."
+     }
+    ],
+    "verification": {
+     "independent_path": "authored from the CED required content (essential knowledge 3.8.A); the key is NOT code-verified: it must be matched by an independent blind solver (Opus), the five-criterion reviewer (Sonnet) and a second independent model panel (Fable and Sonnet blind solves) before the item is used",
+     "method": "authored+blind-solver+panel"
+    },
+    "judgment_demand": [
+     "apply the concept to the scenario"
+    ]
+   },
+   "difficulty_signals": {
+    "steps": [
+     "Decide whether a stimulus was added or removed (removed)",
+     "Decide whether it was unpleasant and whether the behavior increased (it did)",
+     "Combine the facts and reject labels that match only some of them"
+    ],
+    "concepts": [
+     "added versus removed stimulus",
+     "reinforcement versus punishment"
+    ],
+    "representations": 1,
+    "distractor_fail_step": {
+     "Positive reinforcement; adding a pleasant stimulus increases the behavior it follows.": 1,
+     "Negative punishment; removing a pleasant stimulus decreases the behavior it follows.": 2,
+     "Positive punishment; adding an unpleasant stimulus decreases the behavior it follows.": 1
+    },
+    "arithmetic": "none"
+   },
+   "seed": 11601,
+   "pack_id": "ps_hd_c_punishment_reinforcement-s11601",
+   "explanation_en": "The correct answer is Negative reinforcement; removing an unpleasant stimulus increases the behavior.. Ending an unpleasant event after a behavior makes the behavior more likely, which is negative reinforcement.\nPositive punishment; adding an unpleasant stimulus decreases the behavior it follows. is incorrect: The nagging was removed rather than added, and the behavior increased rather than decreased.\nNegative punishment; removing a pleasant stimulus decreases the behavior it follows. is incorrect: The behavior increased and an unpleasant, not a pleasant, stimulus was removed.\nPositive reinforcement; adding a pleasant stimulus increases the behavior it follows. is incorrect: No pleasant stimulus was added; an unpleasant one was removed."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ps_hd_c_punishment_reinforcement",
+   "facts": [
+    "ek=3.8.A"
+   ],
+   "seed": 11601
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Applies negative reinforcement to a scenario; squarely 3.8 / 1.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Aversive nagging removed, behavior increases: negative reinforcement. Unique answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distractors cover the other grid cells; each is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, no calculator, typical AP load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clear, standard 3.8 concept-application item with a unique key and distinct distractors. Accept."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must (1) identify whether a stimulus is added or removed (nagging removed), (2) determine the behavior's direction of change (cleaning increases), and (3) combine these to select reinforcement vs punishment with positive vs negative. This meets the rubric of 3 sequential steps and 2 combined concepts. Distractors are near-miss operant terms, which is an allowed lever. The scenario is unambiguous, the reading load is light, and there is no arithmetic.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "candidateKey": "ap_psychology-m07-k0",
+  "cellId": "ap_psychology-m07",
+  "apSubjectCode": "ap_psychology",
+  "kind": "mc",
+  "keywordCode": "3.4",
+  "unitCode": "3",
+  "skillPrimary": "1.A",
+  "structure": "standalone",
+  "calculator": "na",
+  "archetype": "ps_hd_c_piaget_processes",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Student must identify the first reaction as assimilation, identify the later schema change as accommodation, and keep the order straight while rejecting near-miss concepts (conservation, object permanence) and the reversed sequence. This meets the rubric: 3 sequential steps and 2 combined concepts. Content is in scope for 3.4, the scenario has a single defensible answer, wording is plain, and there is no arithmetic. It is a low-end exam_prep item because the concepts are core and commonly taught.",
+  "payload": {
+   "archetype": "ps_hd_c_piaget_processes",
+   "topic": "3.4",
+   "skill": "1.A",
+   "calculator": "na",
+   "stem": "A child who knows what a dog is sees a horse for the first time and calls it a big dog. After her parent explains that it is a horse, she starts to use separate categories for dogs and horses. Which sequence correctly describes her thinking?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Assimilation of the horse into her dog schema, followed by conservation to form a new horse schema.",
+     "why": "Conservation is understanding that quantity stays the same despite changes in appearance, and it is not how new schemas form.",
+     "value": null
+    },
+    {
+     "text": "Assimilation of the horse into her dog schema, followed by accommodation to form a new horse schema.",
+     "why": "She first fits the new animal into an existing schema, and then she changes her schemas to make room for a new category.",
+     "value": null
+    },
+    {
+     "text": "Accommodation of the horse into her dog schema, followed by assimilation to form a new horse schema.",
+     "why": "The order of the processes is reversed: fitting into an existing schema is assimilation.",
+     "value": null
+    },
+    {
+     "text": "Object permanence of the horse in her dog schema, followed by accommodation to form a new horse schema.",
+     "why": "Object permanence is knowing that objects exist when out of sight and does not describe fitting a new animal into a schema.",
+     "value": null
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 95,
+   "facts": [
+    "ek=3.4.B"
+   ],
+   "variant_id": "4ebb06c62480",
+   "blueprint": {
+    "id": "ps_hd_c_piaget_processes",
+    "subject": "ap_psychology",
+    "kind": "mc",
+    "concept": "sequencing assimilation and accommodation in a child's learning episode",
+    "topic": "3.4",
+    "skill": "1.A",
+    "student_thinking": [
+     "Identify her first response (fitting the horse into 'dog') and name the process",
+     "Identify her later response (creating a new category) and name the process",
+     "Order the two processes and reject reversed orders or unrelated terms"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "na",
+    "key_conditions": [
+     {
+      "condition": "the stem supplies every fact needed and exactly one option follows from all of the steps",
+      "evidence": "stem and options"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Conservation is understanding that quantity stays the same despite changes in appearance, and it is not how new schemas form."
+     },
+     {
+      "id": "m2",
+      "description": "The order of the processes is reversed: fitting into an existing schema is assimilation."
+     },
+     {
+      "id": "m3",
+      "description": "Object permanence is knowing that objects exist when out of sight and does not describe fitting a new animal into a schema."
+     }
+    ],
+    "verification": {
+     "independent_path": "authored from the CED required content (essential knowledge 3.4.B); the key is NOT code-verified: it must be matched by an independent blind solver (Opus), the five-criterion reviewer (Sonnet) and a second independent model panel (Fable and Sonnet blind solves) before the item is used",
+     "method": "authored+blind-solver+panel"
+    },
+    "judgment_demand": [
+     "apply the concept to the scenario"
+    ]
+   },
+   "difficulty_signals": {
+    "steps": [
+     "Identify her first response (fitting the horse into 'dog') and name the process",
+     "Identify her later response (creating a new category) and name the process",
+     "Order the two processes and reject reversed orders or unrelated terms"
+    ],
+    "concepts": [
+     "assimilation and accommodation",
+     "object permanence in the sensorimotor stage"
+    ],
+    "representations": 1,
+    "distractor_fail_step": {
+     "Accommodation of the horse into her dog schema, followed by assimilation to form a new horse schema.": 3,
+     "Assimilation of the horse into her dog schema, followed by conservation to form a new horse schema.": 2,
+     "Object permanence of the horse in her dog schema, followed by accommodation to form a new horse schema.": 1
+    },
+    "arithmetic": "none"
+   },
+   "seed": 11600,
+   "pack_id": "ps_hd_c_piaget_processes-s11600",
+   "explanation_en": "The correct answer is Assimilation of the horse into her dog schema, followed by accommodation to form a new horse schema.. She first fits the new animal into an existing schema, and then she changes her schemas to make room for a new category.\nAssimilation of the horse into her dog schema, followed by conservation to form a new horse schema. is incorrect: Conservation is understanding that quantity stays the same despite changes in appearance, and it is not how new schemas form.\nAccommodation of the horse into her dog schema, followed by assimilation to form a new horse schema. is incorrect: The order of the processes is reversed: fitting into an existing schema is assimilation.\nObject permanence of the horse in her dog schema, followed by accommodation to form a new horse schema. is incorrect: Object permanence is knowing that objects exist when out of sight and does not describe fitting a new animal into a schema."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ps_hd_c_piaget_processes",
+   "facts": [
+    "ek=3.4.B"
+   ],
+   "seed": 11600
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Piaget assimilation/accommodation applied to a scenario; fits 3.4 and 1.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "B is the unique correct answer: assimilation first, then accommodation."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors encode distinct misconceptions (unrelated concepts, reversed order), and the explanation addresses each one."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, typical AP length, no calculator."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Accurate, unambiguous concept-application item. The key B is correct and the distractors are plausible and distinct. Passes all criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must identify the first reaction as assimilation, identify the later schema change as accommodation, and keep the order straight while rejecting near-miss concepts (conservation, object permanence) and the reversed sequence. This meets the rubric: 3 sequential steps and 2 combined concepts. Content is in scope for 3.4, the scenario has a single defensible answer, wording is plain, and there is no arithmetic. It is a low-end exam_prep item because the concepts are core and commonly taught.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "candidateKey": "ap_psychology-m07-k1",
+  "cellId": "ap_psychology-m07",
+  "apSubjectCode": "ap_psychology",
+  "kind": "mc",
+  "keywordCode": "3.4",
+  "unitCode": "3",
+  "skillPrimary": "1.A",
+  "structure": "standalone",
+  "calculator": "na",
+  "archetype": "ps_hd_c_piaget_processes",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "The item applies a single named concept, object permanence in Piaget's sensorimotor stage, to a short scenario. The student identifies which infant shows the behavior and matches it to the correct stage. The distractors (wrong stage, wrong concept, overgeneralization) are easy to eliminate once the concept is known. The generator's count of 3 steps and 2 concepts (assimilation and accommodation) does not match the item text, since assimilation and accommodation never appear. The text shows about 2 steps and one concept, which meets the basic_learning criteria and not the exam_prep threshold.",
+  "payload": {
+   "archetype": "ps_hd_c_piaget_processes",
+   "topic": "3.4",
+   "skill": "1.A",
+   "calculator": "na",
+   "stem": "A 7-month-old looks away when a toy is covered by a cloth, but a 10-month-old pulls off the cloth to find the toy. Which statement correctly describes the two infants?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "The 7-month-old shows object permanence, which develops during the preoperational stage; the 10-month-old does not yet show it.",
+     "why": "The younger infant does not search, and object permanence develops in the sensorimotor stage.",
+     "value": null
+    },
+    {
+     "text": "The 10-month-old shows object permanence, which develops during the sensorimotor stage; the 7-month-old does not yet show it.",
+     "why": "Searching for a hidden object shows that the infant knows it still exists, a milestone of the sensorimotor stage.",
+     "value": null
+    },
+    {
+     "text": "The 10-month-old shows conservation, which develops during the concrete operational stage; the 7-month-old does not yet show it.",
+     "why": "Searching for a hidden toy is object permanence, not conservation, which comes much later.",
+     "value": null
+    },
+    {
+     "text": "Both infants show object permanence, because infants in the sensorimotor stage always know that hidden objects still exist.",
+     "why": "The 7-month-old looks away, which indicates that object permanence has not yet developed.",
+     "value": null
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 95,
+   "facts": [
+    "ek=3.4.B"
+   ],
+   "variant_id": "b0cd22fc442b",
+   "blueprint": {
+    "id": "ps_hd_c_piaget_processes",
+    "subject": "ap_psychology",
+    "kind": "mc",
+    "concept": "sequencing assimilation and accommodation in a child's learning episode",
+    "topic": "3.4",
+    "skill": "1.A",
+    "student_thinking": [
+     "Compare the two infants' reactions to the covered toy",
+     "Name the concept shown by searching for a hidden object and the stage where it develops",
+     "Assign it to the correct infant and reject reversed or unrelated answers"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "na",
+    "key_conditions": [
+     {
+      "condition": "the stem supplies every fact needed and exactly one option follows from all of the steps",
+      "evidence": "stem and options"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "The younger infant does not search, and object permanence develops in the sensorimotor stage."
+     },
+     {
+      "id": "m2",
+      "description": "Searching for a hidden toy is object permanence, not conservation, which comes much later."
+     },
+     {
+      "id": "m3",
+      "description": "The 7-month-old looks away, which indicates that object permanence has not yet developed."
+     }
+    ],
+    "verification": {
+     "independent_path": "authored from the CED required content (essential knowledge 3.4.B); the key is NOT code-verified: it must be matched by an independent blind solver (Opus), the five-criterion reviewer (Sonnet) and a second independent model panel (Fable and Sonnet blind solves) before the item is used",
+     "method": "authored+blind-solver+panel"
+    },
+    "judgment_demand": [
+     "apply the concept to the scenario"
+    ]
+   },
+   "difficulty_signals": {
+    "steps": [
+     "Compare the two infants' reactions to the covered toy",
+     "Name the concept shown by searching for a hidden object and the stage where it develops",
+     "Assign it to the correct infant and reject reversed or unrelated answers"
+    ],
+    "concepts": [
+     "assimilation and accommodation",
+     "object permanence in the sensorimotor stage"
+    ],
+    "representations": 1,
+    "distractor_fail_step": {
+     "The 7-month-old shows object permanence, which develops during the preoperational stage; the 10-month-old does not yet show it.": 3,
+     "The 10-month-old shows conservation, which develops during the concrete operational stage; the 7-month-old does not yet show it.": 2,
+     "Both infants show object permanence, because infants in the sensorimotor stage always know that hidden objects still exist.": 1
+    },
+    "arithmetic": "none"
+   },
+   "seed": 11601,
+   "pack_id": "ps_hd_c_piaget_processes-s11601",
+   "explanation_en": "The correct answer is The 10-month-old shows object permanence, which develops during the sensorimotor stage; the 7-month-old does not yet show it.. Searching for a hidden object shows that the infant knows it still exists, a milestone of the sensorimotor stage.\nThe 7-month-old shows object permanence, which develops during the preoperational stage; the 10-month-old does not yet show it. is incorrect: The younger infant does not search, and object permanence develops in the sensorimotor stage.\nThe 10-month-old shows conservation, which develops during the concrete operational stage; the 7-month-old does not yet show it. is incorrect: Searching for a hidden toy is object permanence, not conservation, which comes much later.\nBoth infants show object permanence, because infants in the sensorimotor stage always know that hidden objects still exist. is incorrect: The 7-month-old looks away, which indicates that object permanence has not yet developed."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ps_hd_c_piaget_processes",
+   "facts": [
+    "ek=3.4.B"
+   ],
+   "seed": 11601
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Object permanence applied to a scenario; 3.4 and 1.A fit."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "B is uniquely correct: sensorimotor stage, object permanence emerges around 8 months, so the 10-month-old shows it and the 7-month-old does not."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed. The stem is clear and gives everything required."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor is a distinct error (reversed infants and wrong stage, wrong concept, both infants credited). All are explained. D's 'always' wording is a mild giveaway."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 95 seconds, four options, no calculator. Typical for AP Psychology."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is accurate and well formed: the key B is unique, the distractors are distinct, and the load is appropriate. Minor issues are that the key is the longest option and the blueprint concept line does not match the item content."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item applies a single named concept, object permanence in Piaget's sensorimotor stage, to a short scenario. The student identifies which infant shows the behavior and matches it to the correct stage. The distractors (wrong stage, wrong concept, overgeneralization) are easy to eliminate once the concept is known. The generator's count of 3 steps and 2 concepts (assimilation and accommodation) does not match the item text, since assimilation and accommodation never appear. The text shows about 2 steps and one concept, which meets the basic_learning criteria and not the exam_prep threshold.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "candidateKey": "ap_psychology-m08-k0",
+  "cellId": "ap_psychology-m08",
+  "apSubjectCode": "ap_psychology",
+  "kind": "mc",
+  "keywordCode": "4.7",
+  "unitCode": "4",
+  "skillPrimary": "1.B",
+  "structure": "standalone",
+  "calculator": "na",
+  "archetype": "ps_hd_c_emotion_culture",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "The student must (1) interpret the cross-cultural recognition finding as evidence of universal basic expressions, (2) interpret the finding that some countries rarely show anger in public as a cultural norm about display, and (3) integrate both findings to pick the statement that accounts for each. This matches the 3 counted steps and 2 combined concepts, so it meets the exam_prep rubric. Two distractors are partly plausible at first and fail only later, because they overgeneralize one finding or contradict the other. The stem is short, with no arithmetic and no out-of-scope content. It applies cultural norms to emotional expression (skill 1.B) without naming any theory of emotion.",
+  "payload": {
+   "archetype": "ps_hd_c_emotion_culture",
+   "topic": "4.7",
+   "skill": "1.B",
+   "calculator": "na",
+   "stem": "Researchers show photographs of faces expressing happiness, anger, and surprise to people in many different countries. Nearly all of them correctly name the emotions. Researchers also find that people in some countries rarely show anger in public. Which statement best accounts for both findings?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Facial expressions are recognized only within the culture that produced them, so cultures cannot share any emotional expressions.",
+     "why": "Nearly all respondents named the emotions correctly, which shows broad recognition across cultures.",
+     "value": null
+    },
+    {
+     "text": "Basic facial expressions are recognized across cultures, but display rules differ about when expressing an emotion is acceptable.",
+     "why": "Recognition of basic expressions appears similar across cultures, while cultures differ in rules about showing emotions in public.",
+     "value": null
+    },
+    {
+     "text": "Display rules cause people from different countries to misidentify emotions in photographs of faces from another country.",
+     "why": "Display rules concern when people show emotions, not whether they can identify expressions in photographs.",
+     "value": null
+    },
+    {
+     "text": "People who rarely show anger in public must not experience anger, because emotions always appear on the face in every setting.",
+     "why": "Display rules explain why some people hide emotions, which shows that emotions do not always appear on the face.",
+     "value": null
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 95,
+   "facts": [
+    "ek=4.7.A"
+   ],
+   "variant_id": "4d4dd82056c8",
+   "blueprint": {
+    "id": "ps_hd_c_emotion_culture",
+    "subject": "ap_psychology",
+    "kind": "mc",
+    "concept": "distinguishing universal expressions from culture-specific display rules",
+    "topic": "4.7",
+    "skill": "1.B",
+    "student_thinking": [
+     "Interpret the recognition finding as evidence of similarity across cultures",
+     "Interpret the rare public anger as a difference in rules about display",
+     "Choose the statement that explains both and reject answers that deny either finding"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "na",
+    "key_conditions": [
+     {
+      "condition": "the stem supplies every fact needed and exactly one option follows from all of the steps",
+      "evidence": "stem and options"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Nearly all respondents named the emotions correctly, which shows broad recognition across cultures."
+     },
+     {
+      "id": "m2",
+      "description": "Display rules concern when people show emotions, not whether they can identify expressions in photographs."
+     },
+     {
+      "id": "m3",
+      "description": "Display rules explain why some people hide emotions, which shows that emotions do not always appear on the face."
+     }
+    ],
+    "verification": {
+     "independent_path": "authored from the CED required content (essential knowledge 4.7.A); the key is NOT code-verified: it must be matched by an independent blind solver (Opus), the five-criterion reviewer (Sonnet) and a second independent model panel (Fable and Sonnet blind solves) before the item is used",
+     "method": "authored+blind-solver+panel"
+    },
+    "judgment_demand": [
+     "apply the concept to the scenario"
+    ]
+   },
+   "difficulty_signals": {
+    "steps": [
+     "Interpret the recognition finding as evidence of similarity across cultures",
+     "Interpret the rare public anger as a difference in rules about display",
+     "Choose the statement that explains both and reject answers that deny either finding"
+    ],
+    "concepts": [
+     "universal expressions and display rules",
+     "cultural norms about showing emotion"
+    ],
+    "representations": 1,
+    "distractor_fail_step": {
+     "Facial expressions are recognized only within the culture that produced them, so cultures cannot share any emotional expressions.": 1,
+     "Display rules cause people from different countries to misidentify emotions in photographs of faces from another country.": 3,
+     "People who rarely show anger in public must not experience anger, because emotions always appear on the face in every setting.": 2
+    },
+    "arithmetic": "none"
+   },
+   "seed": 11600,
+   "pack_id": "ps_hd_c_emotion_culture-s11600",
+   "explanation_en": "The correct answer is Basic facial expressions are recognized across cultures, but display rules differ about when expressing an emotion is acceptable.. Recognition of basic expressions appears similar across cultures, while cultures differ in rules about showing emotions in public.\nFacial expressions are recognized only within the culture that produced them, so cultures cannot share any emotional expressions. is incorrect: Nearly all respondents named the emotions correctly, which shows broad recognition across cultures.\nDisplay rules cause people from different countries to misidentify emotions in photographs of faces from another country. is incorrect: Display rules concern when people show emotions, not whether they can identify expressions in photographs.\nPeople who rarely show anger in public must not experience anger, because emotions always appear on the face in every setting. is incorrect: Display rules explain why some people hide emotions, which shows that emotions do not always appear on the face."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ps_hd_c_emotion_culture",
+   "facts": [
+    "ek=4.7.A"
+   ],
+   "seed": 11600
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Matches CED 4.7.A, universal expressions vs display rules; concept application."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "B is uniquely correct; the other options deny a stated finding or misapply display rules."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; stem is clear and self-contained."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions; the explanation covers each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 95 seconds, no calculator or arithmetic, typical AP reading load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound item with a unique key matching the blind solver, plausible distinct distractors, and appropriate scope."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The student must (1) interpret the cross-cultural recognition finding as evidence of universal basic expressions, (2) interpret the finding that some countries rarely show anger in public as a cultural norm about display, and (3) integrate both findings to pick the statement that accounts for each. This matches the 3 counted steps and 2 combined concepts, so it meets the exam_prep rubric. Two distractors are partly plausible at first and fail only later, because they overgeneralize one finding or contradict the other. The stem is short, with no arithmetic and no out-of-scope content. It applies cultural norms to emotional expression (skill 1.B) without naming any theory of emotion.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "candidateKey": "ap_psychology-m08-k1",
+  "cellId": "ap_psychology-m08",
+  "apSubjectCode": "ap_psychology",
+  "kind": "mc",
+  "keywordCode": "4.7",
+  "unitCode": "4",
+  "skillPrimary": "1.B",
+  "structure": "standalone",
+  "calculator": "na",
+  "archetype": "ps_hd_c_emotion_culture",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Counted structure meets the exam_prep rubric: 3 sequential steps and 2 combined concepts (universal expressions vs. display rules). The student must (1) notice that the felt emotion is the same across cultures, (2) recognize that only the outward expression differs by cultural norm, and (3) reject near-miss options such as universal expression, dissonance, and arousal alone. This is a concept-application item (skill 1.B) built on one named concept in a brief scenario, with no arithmetic. The scenario has one defensible answer, with no trick wording and no out-of-scope content.",
+  "payload": {
+   "archetype": "ps_hd_c_emotion_culture",
+   "topic": "4.7",
+   "skill": "1.B",
+   "calculator": "na",
+   "stem": "At funerals in one culture, mourners are expected to cry loudly, and at funerals in another culture, mourners are expected to remain calm and composed. Mourners in both cultures report similar levels of grief. Which concept best explains the difference in outward expression?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Display rules, which are cultural norms about how and when emotions should be expressed.",
+     "why": "Cultures differ in rules about showing emotion, so similar feelings can be expressed in different ways.",
+     "value": null
+    },
+    {
+     "text": "Cognitive dissonance, which makes mourners change how they feel so that their feelings match how they behave.",
+     "why": "Dissonance explains changes in beliefs and attitudes to match behavior and does not explain cultural norms about showing emotion.",
+     "value": null
+    },
+    {
+     "text": "Universal facial expressions, which require every culture to show grief in exactly the same way at funerals.",
+     "why": "Universal expressions concern recognition of basic facial expressions and do not require identical public behavior in every culture.",
+     "value": null
+    },
+    {
+     "text": "The Yerkes-Dodson relationship, which says that the level of arousal alone determines how grief is expressed outwardly.",
+     "why": "Yerkes-Dodson concerns arousal and performance, not cultural norms about showing grief.",
+     "value": null
+    }
+   ],
+   "key_index": 0,
+   "est_seconds": 95,
+   "facts": [
+    "ek=4.7.A"
+   ],
+   "variant_id": "b1402bc83eb9",
+   "blueprint": {
+    "id": "ps_hd_c_emotion_culture",
+    "subject": "ap_psychology",
+    "kind": "mc",
+    "concept": "distinguishing universal expressions from culture-specific display rules",
+    "topic": "4.7",
+    "skill": "1.B",
+    "student_thinking": [
+     "Note that the feelings are similar but the outward expression differs",
+     "Link the difference to cultural norms about showing emotion",
+     "Name the concept and reject concepts about universal expressions, arousal, or dissonance"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "na",
+    "key_conditions": [
+     {
+      "condition": "the stem supplies every fact needed and exactly one option follows from all of the steps",
+      "evidence": "stem and options"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Dissonance explains changes in beliefs and attitudes to match behavior and does not explain cultural norms about showing emotion."
+     },
+     {
+      "id": "m2",
+      "description": "Universal expressions concern recognition of basic facial expressions and do not require identical public behavior in every culture."
+     },
+     {
+      "id": "m3",
+      "description": "Yerkes-Dodson concerns arousal and performance, not cultural norms about showing grief."
+     }
+    ],
+    "verification": {
+     "independent_path": "authored from the CED required content (essential knowledge 4.7.A); the key is NOT code-verified: it must be matched by an independent blind solver (Opus), the five-criterion reviewer (Sonnet) and a second independent model panel (Fable and Sonnet blind solves) before the item is used",
+     "method": "authored+blind-solver+panel"
+    },
+    "judgment_demand": [
+     "apply the concept to the scenario"
+    ]
+   },
+   "difficulty_signals": {
+    "steps": [
+     "Note that the feelings are similar but the outward expression differs",
+     "Link the difference to cultural norms about showing emotion",
+     "Name the concept and reject concepts about universal expressions, arousal, or dissonance"
+    ],
+    "concepts": [
+     "universal expressions and display rules",
+     "cultural norms about showing emotion"
+    ],
+    "representations": 1,
+    "distractor_fail_step": {
+     "Universal facial expressions, which require every culture to show grief in exactly the same way at funerals.": 2,
+     "The Yerkes-Dodson relationship, which says that the level of arousal alone determines how grief is expressed outwardly.": 3,
+     "Cognitive dissonance, which makes mourners change how they feel so that their feelings match how they behave.": 3
+    },
+    "arithmetic": "none"
+   },
+   "seed": 11601,
+   "pack_id": "ps_hd_c_emotion_culture-s11601",
+   "explanation_en": "The correct answer is Display rules, which are cultural norms about how and when emotions should be expressed.. Cultures differ in rules about showing emotion, so similar feelings can be expressed in different ways.\nCognitive dissonance, which makes mourners change how they feel so that their feelings match how they behave. is incorrect: Dissonance explains changes in beliefs and attitudes to match behavior and does not explain cultural norms about showing emotion.\nUniversal facial expressions, which require every culture to show grief in exactly the same way at funerals. is incorrect: Universal expressions concern recognition of basic facial expressions and do not require identical public behavior in every culture.\nThe Yerkes-Dodson relationship, which says that the level of arousal alone determines how grief is expressed outwardly. is incorrect: Yerkes-Dodson concerns arousal and performance, not cultural norms about showing grief."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ps_hd_c_emotion_culture",
+   "facts": [
+    "ek=4.7.A"
+   ],
+   "seed": 11601
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Display rules apply directly to CED 4.7 and skill 1.B (cultural norms applied to behavior)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Display rules is the unique correct answer. The stem gives similar grief with different expected expression, and the other three concepts do not explain this."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear, in US English, and has no double negatives."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor targets a distinct misconception (dissonance, universality, arousal), and the explanation covers all three. The distractors are somewhat extreme in wording, and the key is the longest option, but neither is disqualifying."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 60-90 seconds, needs no calculator, and has a short stem with four options."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a sound concept-application question on display rules. Its key is unique and correct, and the distractors are distinct. It is slightly easy because of the cue word 'expected' and the extreme wording of the distractors. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Counted structure meets the exam_prep rubric: 3 sequential steps and 2 combined concepts (universal expressions vs. display rules). The student must (1) notice that the felt emotion is the same across cultures, (2) recognize that only the outward expression differs by cultural norm, and (3) reject near-miss options such as universal expression, dissonance, and arousal alone. This is a concept-application item (skill 1.B) built on one named concept in a brief scenario, with no arithmetic. The scenario has one defensible answer, with no trick wording and no out-of-scope content.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "candidateKey": "ap_psychology-m09-k0",
+  "cellId": "ap_psychology-m09",
+  "apSubjectCode": "ap_psychology",
+  "kind": "mc",
+  "keywordCode": "4.1",
+  "unitCode": "4",
+  "skillPrimary": "1.B",
+  "structure": "standalone",
+  "calculator": "na",
+  "archetype": "ps_hd_c_prejudice_chain",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "The student must (1) identify the belief as a stereotype, (2) identify the refusal to interview as discrimination, and (3) match the correct relationship between the two against the options. Two distractors survive the first step and fail only later: one reverses the stereotype/discrimination relationship, the other misdefines prejudice. This meets the rubric of at least 3 steps and at least 2 combined concepts. The scenario is short and has one defensible answer. There is no arithmetic and the wording is not tricky, so the difficulty does not come from unfair sources.",
+  "payload": {
+   "archetype": "ps_hd_c_prejudice_chain",
+   "topic": "4.1",
+   "skill": "1.B",
+   "calculator": "na",
+   "stem": "A manager believes that older workers are not good with technology. When a 60-year-old applicant with strong technology skills applies, the manager decides not to interview her. Which description best fits the manager's thinking and behavior?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Discrimination, which becomes a stereotype when the manager believes that older workers are not good with technology.",
+     "why": "The order is reversed: the belief is a stereotype, and acting on it is discrimination.",
+     "value": null
+    },
+    {
+     "text": "An in-group bias, in which the manager favors older workers over younger workers in the hiring process.",
+     "why": "The manager treats an older applicant less favorably, which does not describe favoring one's own group.",
+     "value": null
+    },
+    {
+     "text": "Prejudice, which means that the manager's action is only a belief and not a behavior toward the applicant.",
+     "why": "The manager acted on the belief by declining to interview, so discrimination is described.",
+     "value": null
+    },
+    {
+     "text": "A stereotype about older workers, which leads to discrimination when the manager acts on it.",
+     "why": "A generalized belief about a group is a stereotype, and acting on it to treat a person unfairly is discrimination.",
+     "value": null
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 95,
+   "facts": [
+    "ek=4.1.B"
+   ],
+   "variant_id": "7e62c1c2b0bc",
+   "blueprint": {
+    "id": "ps_hd_c_prejudice_chain",
+    "subject": "ap_psychology",
+    "kind": "mc",
+    "concept": "distinguishing stereotypes, prejudice, and discrimination in a chain of events",
+    "topic": "4.1",
+    "skill": "1.B",
+    "student_thinking": [
+     "Identify the belief about older workers",
+     "Identify the behavior toward the applicant",
+     "Name each correctly and reject answers that reverse them or describe favoritism"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "na",
+    "key_conditions": [
+     {
+      "condition": "the stem supplies every fact needed and exactly one option follows from all of the steps",
+      "evidence": "stem and options"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "The order is reversed: the belief is a stereotype, and acting on it is discrimination."
+     },
+     {
+      "id": "m2",
+      "description": "The manager treats an older applicant less favorably, which does not describe favoring one's own group."
+     },
+     {
+      "id": "m3",
+      "description": "The manager acted on the belief by declining to interview, so discrimination is described."
+     }
+    ],
+    "verification": {
+     "independent_path": "authored from the CED required content (essential knowledge 4.1.B); the key is NOT code-verified: it must be matched by an independent blind solver (Opus), the five-criterion reviewer (Sonnet) and a second independent model panel (Fable and Sonnet blind solves) before the item is used",
+     "method": "authored+blind-solver+panel"
+    },
+    "judgment_demand": [
+     "apply the concept to the scenario"
+    ]
+   },
+   "difficulty_signals": {
+    "steps": [
+     "Identify the belief about older workers",
+     "Identify the behavior toward the applicant",
+     "Name each correctly and reject answers that reverse them or describe favoritism"
+    ],
+    "concepts": [
+     "stereotype, prejudice, and discrimination",
+     "in-group bias"
+    ],
+    "representations": 1,
+    "distractor_fail_step": {
+     "Prejudice, which means that the manager's action is only a belief and not a behavior toward the applicant.": 2,
+     "Discrimination, which becomes a stereotype when the manager believes that older workers are not good with technology.": 3,
+     "An in-group bias, in which the manager favors older workers over younger workers in the hiring process.": 1
+    },
+    "arithmetic": "none"
+   },
+   "seed": 11600,
+   "pack_id": "ps_hd_c_prejudice_chain-s11600",
+   "explanation_en": "The correct answer is A stereotype about older workers, which leads to discrimination when the manager acts on it.. A generalized belief about a group is a stereotype, and acting on it to treat a person unfairly is discrimination.\nDiscrimination, which becomes a stereotype when the manager believes that older workers are not good with technology. is incorrect: The order is reversed: the belief is a stereotype, and acting on it is discrimination.\nAn in-group bias, in which the manager favors older workers over younger workers in the hiring process. is incorrect: The manager treats an older applicant less favorably, which does not describe favoring one's own group.\nPrejudice, which means that the manager's action is only a belief and not a behavior toward the applicant. is incorrect: The manager acted on the belief by declining to interview, so discrimination is described."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ps_hd_c_prejudice_chain",
+   "facts": [
+    "ek=4.1.B"
+   ],
+   "seed": 11600
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Stereotype/prejudice/discrimination in 4.1 concept application."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "D is unique: belief = stereotype, acting on it = discrimination."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor targets a distinct misconception (reversed order, in-group bias, belief-only); all are explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, typical AP length, no calculator."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is accurate and unambiguous; the key (D) is unique and the distractors are distinct and plausible. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The student must (1) identify the belief as a stereotype, (2) identify the refusal to interview as discrimination, and (3) match the correct relationship between the two against the options. Two distractors survive the first step and fail only later: one reverses the stereotype/discrimination relationship, the other misdefines prejudice. This meets the rubric of at least 3 steps and at least 2 combined concepts. The scenario is short and has one defensible answer. There is no arithmetic and the wording is not tricky, so the difficulty does not come from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "candidateKey": "ap_psychology-m09-k1",
+  "cellId": "ap_psychology-m09",
+  "apSubjectCode": "ap_psychology",
+  "kind": "mc",
+  "keywordCode": "4.1",
+  "unitCode": "4",
+  "skillPrimary": "1.B",
+  "structure": "standalone",
+  "calculator": "na",
+  "archetype": "ps_hd_c_prejudice_chain",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "The item asks the student to match one scenario to one named concept, in-group bias. Wrong options are largely distant concepts, and the fundamental attribution error is eliminated quickly because the scenario involves no explanation of behavior. The item text shows about two steps (identify the pattern, select the matching definition) and a single concept, so the generator's count of 3 steps and 2 concepts is not supported. Under the rubric (2 or fewer steps or a single concept), this is basic_learning.",
+  "payload": {
+   "archetype": "ps_hd_c_prejudice_chain",
+   "topic": "4.1",
+   "skill": "1.B",
+   "calculator": "na",
+   "stem": "Students at a school with two rival teams tend to describe members of their own team as friendly and members of the other team as unfriendly, even before meeting them. Which concept best describes this?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Cognitive dissonance, in which people experience tension between their beliefs and their actions and then change a belief.",
+     "why": "The scenario describes favoring one's group, not resolving tension between beliefs and actions.",
+     "value": null
+    },
+    {
+     "text": "The foot-in-the-door phenomenon, in which agreeing to a small request makes people more likely to agree to a larger one.",
+     "why": "The scenario does not involve requests; it describes evaluations of members of two groups.",
+     "value": null
+    },
+    {
+     "text": "In-group bias, in which people favor members of their own group over members of other groups.",
+     "why": "People tend to evaluate members of their own group more favorably than members of other groups, even without direct experience.",
+     "value": null
+    },
+    {
+     "text": "The fundamental attribution error, in which people explain others' behavior mostly by their traits and underestimate the influence of situations.",
+     "why": "That describes a bias in explaining behavior, whereas the scenario describes favoring members of one's own team.",
+     "value": null
+    }
+   ],
+   "key_index": 2,
+   "est_seconds": 95,
+   "facts": [
+    "ek=4.1.B"
+   ],
+   "variant_id": "1bf9a6e14ccc",
+   "blueprint": {
+    "id": "ps_hd_c_prejudice_chain",
+    "subject": "ap_psychology",
+    "kind": "mc",
+    "concept": "distinguishing stereotypes, prejudice, and discrimination in a chain of events",
+    "topic": "4.1",
+    "skill": "1.B",
+    "student_thinking": [
+     "Compare how students describe their own team and the other team",
+     "Notice that the evaluations occur before any contact",
+     "Name the bias that favors the own group and reject concepts about attributions, dissonance, or requests"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "na",
+    "key_conditions": [
+     {
+      "condition": "the stem supplies every fact needed and exactly one option follows from all of the steps",
+      "evidence": "stem and options"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "The scenario describes favoring one's group, not resolving tension between beliefs and actions."
+     },
+     {
+      "id": "m2",
+      "description": "The scenario does not involve requests; it describes evaluations of members of two groups."
+     },
+     {
+      "id": "m3",
+      "description": "That describes a bias in explaining behavior, whereas the scenario describes favoring members of one's own team."
+     }
+    ],
+    "verification": {
+     "independent_path": "authored from the CED required content (essential knowledge 4.1.B); the key is NOT code-verified: it must be matched by an independent blind solver (Opus), the five-criterion reviewer (Sonnet) and a second independent model panel (Fable and Sonnet blind solves) before the item is used",
+     "method": "authored+blind-solver+panel"
+    },
+    "judgment_demand": [
+     "apply the concept to the scenario"
+    ]
+   },
+   "difficulty_signals": {
+    "steps": [
+     "Compare how students describe their own team and the other team",
+     "Notice that the evaluations occur before any contact",
+     "Name the bias that favors the own group and reject concepts about attributions, dissonance, or requests"
+    ],
+    "concepts": [
+     "stereotype, prejudice, and discrimination",
+     "in-group bias"
+    ],
+    "representations": 1,
+    "distractor_fail_step": {
+     "The fundamental attribution error, in which people explain others' behavior mostly by their traits and underestimate the influence of situations.": 3,
+     "Cognitive dissonance, in which people experience tension between their beliefs and their actions and then change a belief.": 3,
+     "The foot-in-the-door phenomenon, in which agreeing to a small request makes people more likely to agree to a larger one.": 1
+    },
+    "arithmetic": "none"
+   },
+   "seed": 11601,
+   "pack_id": "ps_hd_c_prejudice_chain-s11601",
+   "explanation_en": "The correct answer is In-group bias, in which people favor members of their own group over members of other groups.. People tend to evaluate members of their own group more favorably than members of other groups, even without direct experience.\nCognitive dissonance, in which people experience tension between their beliefs and their actions and then change a belief. is incorrect: The scenario describes favoring one's group, not resolving tension between beliefs and actions.\nThe foot-in-the-door phenomenon, in which agreeing to a small request makes people more likely to agree to a larger one. is incorrect: The scenario does not involve requests; it describes evaluations of members of two groups.\nThe fundamental attribution error, in which people explain others' behavior mostly by their traits and underestimate the influence of situations. is incorrect: That describes a bias in explaining behavior, whereas the scenario describes favoring members of one's own team."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ps_hd_c_prejudice_chain",
+   "facts": [
+    "ek=4.1.B"
+   ],
+   "seed": 11601
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "In-group bias is CED 4.1 content (essential knowledge 4.1.B). Applying a named concept to a short scenario fits skill 1.B. The blueprint label (stereotype/prejudice/discrimination chain) is slightly off from the item as written, but this is a loose label only."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "In-group bias is the unique defensible answer. Every option's definition is correct for its own term, and none fits the scenario. Someone could argue the scenario also shows prejudice, but prejudice is not offered as an option."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear and complete, with no double negatives."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors are three real course concepts: dissonance, foot-in-the-door and the fundamental attribution error. The fundamental attribution error is the most plausible, as a near-miss within attribution. The explanation addresses each wrong option. One weakness is that the correct option's definition is longer than the others, which is a minor format cue."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 60 to 90 seconds and has four options. It is easy but suitable. It involves no calculation."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is accurate and the key is unique. It is a standard concept-application question with plausible distractors, and it passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item asks the student to match one scenario to one named concept, in-group bias. Wrong options are largely distant concepts, and the fundamental attribution error is eliminated quickly because the scenario involves no explanation of behavior. The item text shows about two steps (identify the pattern, select the matching definition) and a single concept, so the generator's count of 3 steps and 2 concepts is not supported. Under the rubric (2 or fewer steps or a single concept), this is basic_learning.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "candidateKey": "ap_psychology-m10-k0",
+  "cellId": "ap_psychology-m10",
+  "apSubjectCode": "ap_psychology",
+  "kind": "mc",
+  "keywordCode": "5.5",
+  "unitCode": "5",
+  "skillPrimary": "1.A",
+  "structure": "standalone",
+  "calculator": "na",
+  "archetype": "ps_hd_c_drug_treatment",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Student must (1) recognize that blocking reuptake leaves more serotonin in the synapse, (2) classify the drug as a biomedical treatment, and (3) combine both results to pick the one option that is correct on both parts. The distractors include a near-miss that gets the mechanism right but the treatment type wrong. The stem is short and unambiguous, with no arithmetic, so the difficulty comes from concept application and not from unfair sources. It meets the rubric for exam_prep (at least 3 steps and 2 combined concepts).",
+  "payload": {
+   "archetype": "ps_hd_c_drug_treatment",
+   "topic": "5.5",
+   "skill": "1.A",
+   "calculator": "na",
+   "stem": "A psychiatrist prescribes a medication for depression that blocks the reuptake of serotonin. Which statement best describes how the drug is expected to work and which kind of treatment it is?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "It decreases the amount of serotonin available in the synapse, and it is a biomedical treatment.",
+     "why": "Blocking reuptake keeps serotonin in the synapse, so more, not less, is available.",
+     "value": null
+    },
+    {
+     "text": "It increases the amount of serotonin available in the synapse, and it is a psychotherapy that changes thought patterns.",
+     "why": "A drug is not a psychotherapy; it acts on neurotransmitters, which makes it biomedical.",
+     "value": null
+    },
+    {
+     "text": "It blocks serotonin receptors on the postsynaptic neuron, and it is a behavioral treatment based on reinforcement.",
+     "why": "Blocking reuptake does not block receptors, and a medication is not a behavioral treatment.",
+     "value": null
+    },
+    {
+     "text": "It increases the amount of serotonin available in the synapse, and it is a biomedical treatment.",
+     "why": "Blocking reuptake leaves more serotonin in the synapse, and a medication that acts on brain chemistry is a biomedical treatment.",
+     "value": null
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 95,
+   "facts": [
+    "ek=5.5.C"
+   ],
+   "variant_id": "c4737722756d",
+   "blueprint": {
+    "id": "ps_hd_c_drug_treatment",
+    "subject": "ap_psychology",
+    "kind": "mc",
+    "concept": "linking a medication's mechanism to the neurotransmitter system and disorder it targets",
+    "topic": "5.5",
+    "skill": "1.A",
+    "student_thinking": [
+     "Recall what blocking reuptake does to the amount of neurotransmitter in the synapse",
+     "Classify a medication as a biomedical or psychological treatment",
+     "Combine both and reject answers that reverse the effect or misclassify the treatment"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "na",
+    "key_conditions": [
+     {
+      "condition": "the stem supplies every fact needed and exactly one option follows from all of the steps",
+      "evidence": "stem and options"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Blocking reuptake keeps serotonin in the synapse, so more, not less, is available."
+     },
+     {
+      "id": "m2",
+      "description": "A drug is not a psychotherapy; it acts on neurotransmitters, which makes it biomedical."
+     },
+     {
+      "id": "m3",
+      "description": "Blocking reuptake does not block receptors, and a medication is not a behavioral treatment."
+     }
+    ],
+    "verification": {
+     "independent_path": "authored from the CED required content (essential knowledge 5.5.C); the key is NOT code-verified: it must be matched by an independent blind solver (Opus), the five-criterion reviewer (Sonnet) and a second independent model panel (Fable and Sonnet blind solves) before the item is used",
+     "method": "authored+blind-solver+panel"
+    },
+    "judgment_demand": [
+     "apply the concept to the scenario"
+    ]
+   },
+   "difficulty_signals": {
+    "steps": [
+     "Recall what blocking reuptake does to the amount of neurotransmitter in the synapse",
+     "Classify a medication as a biomedical or psychological treatment",
+     "Combine both and reject answers that reverse the effect or misclassify the treatment"
+    ],
+    "concepts": [
+     "reuptake blocking and receptor antagonism",
+     "biomedical treatment"
+    ],
+    "representations": 1,
+    "distractor_fail_step": {
+     "It decreases the amount of serotonin available in the synapse, and it is a biomedical treatment.": 1,
+     "It increases the amount of serotonin available in the synapse, and it is a psychotherapy that changes thought patterns.": 2,
+     "It blocks serotonin receptors on the postsynaptic neuron, and it is a behavioral treatment based on reinforcement.": 1
+    },
+    "arithmetic": "none"
+   },
+   "seed": 11600,
+   "pack_id": "ps_hd_c_drug_treatment-s11600",
+   "explanation_en": "The correct answer is It increases the amount of serotonin available in the synapse, and it is a biomedical treatment.. Blocking reuptake leaves more serotonin in the synapse, and a medication that acts on brain chemistry is a biomedical treatment.\nIt decreases the amount of serotonin available in the synapse, and it is a biomedical treatment. is incorrect: Blocking reuptake keeps serotonin in the synapse, so more, not less, is available.\nIt increases the amount of serotonin available in the synapse, and it is a psychotherapy that changes thought patterns. is incorrect: A drug is not a psychotherapy; it acts on neurotransmitters, which makes it biomedical.\nIt blocks serotonin receptors on the postsynaptic neuron, and it is a behavioral treatment based on reinforcement. is incorrect: Blocking reuptake does not block receptors, and a medication is not a behavioral treatment."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ps_hd_c_drug_treatment",
+   "facts": [
+    "ek=5.5.C"
+   ],
+   "seed": 11600
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 5.5 biomedical treatment and the mechanism of an SSRI; the skill is applying the concept to a drug scenario. Somewhat recall-like but acceptable."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "D is the unique correct answer. Reuptake blockade increases synaptic serotonin and a medication is a biomedical treatment. The other three options each contain a clear error."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct error: reversed effect, misclassifying the drug as psychotherapy, or confusing reuptake blockade with receptor blockade plus misclassification. The explanation covers each wrong option. Distractor C is mildly implausible."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, with about 90 seconds of reading and thinking, no calculator, four options."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and unique, the item is in scope, and the distractors are distinct and clearly wrong. The item is mildly recall-heavy but acceptable."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must (1) recognize that blocking reuptake leaves more serotonin in the synapse, (2) classify the drug as a biomedical treatment, and (3) combine both results to pick the one option that is correct on both parts. The distractors include a near-miss that gets the mechanism right but the treatment type wrong. The stem is short and unambiguous, with no arithmetic, so the difficulty comes from concept application and not from unfair sources. It meets the rubric for exam_prep (at least 3 steps and 2 combined concepts).",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "candidateKey": "ap_psychology-m10-k1",
+  "cellId": "ap_psychology-m10",
+  "apSubjectCode": "ap_psychology",
+  "kind": "mc",
+  "keywordCode": "5.5",
+  "unitCode": "5",
+  "skillPrimary": "1.A",
+  "structure": "standalone",
+  "calculator": "na",
+  "archetype": "ps_hd_c_drug_treatment",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "The student must map \"blocks receptors\" to antagonist, link that to a reduced dopamine effect, and discriminate against the near-miss reuptake-inhibitor and agonist options. One distractor (antagonist with increased effect) passes the first step and fails only on the effect. The code-counted structure of 3 steps and 2 combined concepts meets the exam_prep rubric. The concepts are in scope and the item has a single defensible answer. It sits at the low end of exam_prep.",
+  "payload": {
+   "archetype": "ps_hd_c_drug_treatment",
+   "topic": "5.5",
+   "skill": "1.A",
+   "calculator": "na",
+   "stem": "A medication prescribed for schizophrenia blocks dopamine receptors on postsynaptic neurons. Which statement best describes the drug and its likely effect?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "It acts as a reuptake inhibitor for dopamine and is expected to leave more dopamine in the synapse than before.",
+     "why": "The drug is described as blocking receptors, not as blocking the reuptake of dopamine.",
+     "value": null
+    },
+    {
+     "text": "It acts as an agonist at dopamine receptors and is expected to increase the effect of dopamine on those neurons.",
+     "why": "A drug that blocks receptors is an antagonist, not an agonist.",
+     "value": null
+    },
+    {
+     "text": "It acts as an antagonist at dopamine receptors and is expected to reduce the effect of dopamine on those neurons.",
+     "why": "A drug that blocks receptors without activating them is an antagonist, and it reduces the effect of the neurotransmitter on the postsynaptic neuron.",
+     "value": null
+    },
+    {
+     "text": "It acts as an antagonist at dopamine receptors and is expected to increase the effect of dopamine on those neurons.",
+     "why": "Blocking receptors reduces, rather than increases, the effect of the neurotransmitter.",
+     "value": null
+    }
+   ],
+   "key_index": 2,
+   "est_seconds": 95,
+   "facts": [
+    "ek=5.5.C"
+   ],
+   "variant_id": "d7da5c25d848",
+   "blueprint": {
+    "id": "ps_hd_c_drug_treatment",
+    "subject": "ap_psychology",
+    "kind": "mc",
+    "concept": "linking a medication's mechanism to the neurotransmitter system and disorder it targets",
+    "topic": "5.5",
+    "skill": "1.A",
+    "student_thinking": [
+     "Recall that blocking a receptor makes a drug an antagonist",
+     "Predict the effect on the neurotransmitter's action at the receptor",
+     "Reject answers that call it an agonist, reverse the effect, or describe reuptake inhibition"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "na",
+    "key_conditions": [
+     {
+      "condition": "the stem supplies every fact needed and exactly one option follows from all of the steps",
+      "evidence": "stem and options"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "The drug is described as blocking receptors, not as blocking the reuptake of dopamine."
+     },
+     {
+      "id": "m2",
+      "description": "A drug that blocks receptors is an antagonist, not an agonist."
+     },
+     {
+      "id": "m3",
+      "description": "Blocking receptors reduces, rather than increases, the effect of the neurotransmitter."
+     }
+    ],
+    "verification": {
+     "independent_path": "authored from the CED required content (essential knowledge 5.5.C); the key is NOT code-verified: it must be matched by an independent blind solver (Opus), the five-criterion reviewer (Sonnet) and a second independent model panel (Fable and Sonnet blind solves) before the item is used",
+     "method": "authored+blind-solver+panel"
+    },
+    "judgment_demand": [
+     "apply the concept to the scenario"
+    ]
+   },
+   "difficulty_signals": {
+    "steps": [
+     "Recall that blocking a receptor makes a drug an antagonist",
+     "Predict the effect on the neurotransmitter's action at the receptor",
+     "Reject answers that call it an agonist, reverse the effect, or describe reuptake inhibition"
+    ],
+    "concepts": [
+     "reuptake blocking and receptor antagonism",
+     "biomedical treatment"
+    ],
+    "representations": 1,
+    "distractor_fail_step": {
+     "It acts as an agonist at dopamine receptors and is expected to increase the effect of dopamine on those neurons.": 1,
+     "It acts as an antagonist at dopamine receptors and is expected to increase the effect of dopamine on those neurons.": 2,
+     "It acts as a reuptake inhibitor for dopamine and is expected to leave more dopamine in the synapse than before.": 1
+    },
+    "arithmetic": "none"
+   },
+   "seed": 11601,
+   "pack_id": "ps_hd_c_drug_treatment-s11601",
+   "explanation_en": "The correct answer is It acts as an antagonist at dopamine receptors and is expected to reduce the effect of dopamine on those neurons.. A drug that blocks receptors without activating them is an antagonist, and it reduces the effect of the neurotransmitter on the postsynaptic neuron.\nIt acts as a reuptake inhibitor for dopamine and is expected to leave more dopamine in the synapse than before. is incorrect: The drug is described as blocking receptors, not as blocking the reuptake of dopamine.\nIt acts as an agonist at dopamine receptors and is expected to increase the effect of dopamine on those neurons. is incorrect: A drug that blocks receptors is an antagonist, not an agonist.\nIt acts as an antagonist at dopamine receptors and is expected to increase the effect of dopamine on those neurons. is incorrect: Blocking receptors reduces, rather than increases, the effect of the neurotransmitter."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ps_hd_c_drug_treatment",
+   "facts": [
+    "ek=5.5.C"
+   ],
+   "seed": 11601
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Matches 5.5.C; schizophrenia is in the listed disorders; one concept applied."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Antagonist that reduces dopamine's effect is uniquely correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions, each explained; options are parallel in form and length."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, with no calculator, and suitable for the exam. The stem is somewhat definitional but framed as a scenario."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is accurate and clean. The key (antagonist, reduces dopamine's effect) is unique and the distractors are distinct. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The student must map \"blocks receptors\" to antagonist, link that to a reduced dopamine effect, and discriminate against the near-miss reuptake-inhibitor and agonist options. One distractor (antagonist with increased effect) passes the first step and fails only on the effect. The code-counted structure of 3 steps and 2 combined concepts meets the exam_prep rubric. The concepts are in scope and the item has a single defensible answer. It sits at the low end of exam_prep.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "candidateKey": "ap_psychology-m11-k0",
+  "cellId": "ap_psychology-m11",
+  "apSubjectCode": "ap_psychology",
+  "kind": "mc",
+  "keywordCode": "1.4",
+  "unitCode": "1",
+  "skillPrimary": "2.D",
+  "structure": "standalone",
+  "calculator": "na",
+  "archetype": "ps_hd_r_ethics_animals",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "The item requires evaluating each option against three ethical criteria (institutional review, humane care, pain minimization justified by benefit), combining two concepts. Two distractors satisfy some criteria and fail only later, so students must check all elements rather than stopping at the first. Content is in scope and the scenario is unambiguous. Each violation is fairly recognizable, so the item is at the lower end of exam_prep. It meets the rubric thresholds of 3 steps and 2 combined concepts.",
+  "payload": {
+   "archetype": "ps_hd_r_ethics_animals",
+   "topic": "1.4",
+   "skill": "2.D",
+   "calculator": "na",
+   "stem": "A researcher plans to study how a brain region affects learning by making a small lesion in the brains of laboratory rats. Which procedure best follows ethical guidelines for research with animals?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Provide humane care and minimize pain during the procedure, and begin the study before review because the planned lesion is very small in size.",
+     "why": "Institutional review must take place before the study begins, whatever the size of the planned lesion.",
+     "value": null
+    },
+    {
+     "text": "Obtain institutional review approval and provide humane care, but skip anesthesia for the lesion procedure because the rats will be tested soon after surgery.",
+     "why": "Review and humane care are required, but pain must also be minimized with anesthesia and post-operative care appropriate to the procedure.",
+     "value": null
+    },
+    {
+     "text": "Obtain institutional review approval, provide humane care, and minimize pain in procedures justified by the knowledge gained.",
+     "why": "Animal research requires institutional review, humane care, minimizing pain and distress, and a justification that the benefits warrant the procedure.",
+     "value": null
+    },
+    {
+     "text": "Obtain institutional review approval and minimize pain, but use as many rats as needed to guarantee that the results will be statistically significant.",
+     "why": "Researchers should use no more animals than needed to answer the question, and guaranteeing significance is not a justification for more animals.",
+     "value": null
+    }
+   ],
+   "key_index": 2,
+   "est_seconds": 95,
+   "facts": [
+    "ek=1.4.C"
+   ],
+   "variant_id": "0dc5b02c55f2",
+   "blueprint": {
+    "id": "ps_hd_r_ethics_animals",
+    "subject": "ap_psychology",
+    "kind": "mc",
+    "concept": "applying ethical guidelines for research with nonhuman animals",
+    "topic": "1.4",
+    "skill": "2.D",
+    "student_thinking": [
+     "Recall that animal research requires review and humane treatment",
+     "Recall the duty to minimize pain and justify the procedure by its benefits",
+     "Choose the procedure that includes all of them and reject answers that skip review or ignore pain"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "na",
+    "key_conditions": [
+     {
+      "condition": "the stem supplies every fact needed and exactly one option follows from all of the steps",
+      "evidence": "stem and options"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Institutional review must take place before the study begins, whatever the size of the planned lesion."
+     },
+     {
+      "id": "m2",
+      "description": "Review and humane care are required, but pain must also be minimized with anesthesia and post-operative care appropriate to the procedure."
+     },
+     {
+      "id": "m3",
+      "description": "Researchers should use no more animals than needed to answer the question, and guaranteeing significance is not a justification for more animals."
+     }
+    ],
+    "verification": {
+     "independent_path": "authored from the CED required content (essential knowledge 1.4.C); the key is NOT code-verified: it must be matched by an independent blind solver (Opus), the five-criterion reviewer (Sonnet) and a second independent model panel (Fable and Sonnet blind solves) before the item is used",
+     "method": "authored+blind-solver+panel"
+    },
+    "judgment_demand": [
+     "apply the concept to the scenario"
+    ]
+   },
+   "difficulty_signals": {
+    "steps": [
+     "Recall that animal research requires review and humane treatment",
+     "Recall the duty to minimize pain and justify the procedure by its benefits",
+     "Choose the procedure that includes all of them and reject answers that skip review or ignore pain"
+    ],
+    "concepts": [
+     "institutional review of animal research",
+     "minimizing pain and humane care"
+    ],
+    "representations": 1,
+    "distractor_fail_step": {
+     "Obtain institutional review approval and provide humane care, but skip anesthesia for the lesion procedure because the rats will be tested soon after surgery.": 1,
+     "Provide humane care and minimize pain during the procedure, and begin the study before review because the planned lesion is very small in size.": 2,
+     "Obtain institutional review approval and minimize pain, but use as many rats as needed to guarantee that the results will be statistically significant.": 3
+    },
+    "arithmetic": "none"
+   },
+   "seed": 11600,
+   "pack_id": "ps_hd_r_ethics_animals-s11600",
+   "explanation_en": "The correct answer is Obtain institutional review approval, provide humane care, and minimize pain in procedures justified by the knowledge gained.. Animal research requires institutional review, humane care, minimizing pain and distress, and a justification that the benefits warrant the procedure.\nProvide humane care and minimize pain during the procedure, and begin the study before review because the planned lesion is very small in size. is incorrect: Institutional review must take place before the study begins, whatever the size of the planned lesion.\nObtain institutional review approval and provide humane care, but skip anesthesia for the lesion procedure because the rats will be tested soon after surgery. is incorrect: Review and humane care are required, but pain must also be minimized with anesthesia and post-operative care appropriate to the procedure.\nObtain institutional review approval and minimize pain, but use as many rats as needed to guarantee that the results will be statistically significant. is incorrect: Researchers should use no more animals than needed to answer the question, and guaranteeing significance is not a justification for more animals."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ps_hd_r_ethics_animals",
+   "facts": [
+    "ek=1.4.C"
+   ],
+   "seed": 11600
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Animal-research ethics (CED 1.4.C) in a brain lesion context; skill 2.D matched."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "C is the unique option with all required safeguards; A, B and D each violate a guideline."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; wording is clear and the options are parallel."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes one distinct violation and the explanation covers all three. The key is slightly longer than the others, which is minor."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short recall-application item with no calculation."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound: C is the unique correct answer, the distractors are plausible single-violation options, and the load is appropriate for the exam."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The item requires evaluating each option against three ethical criteria (institutional review, humane care, pain minimization justified by benefit), combining two concepts. Two distractors satisfy some criteria and fail only later, so students must check all elements rather than stopping at the first. Content is in scope and the scenario is unambiguous. Each violation is fairly recognizable, so the item is at the lower end of exam_prep. It meets the rubric thresholds of 3 steps and 2 combined concepts.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 50
+  }
+ },
+ {
+  "candidateKey": "ap_psychology-m11-k1",
+  "cellId": "ap_psychology-m11",
+  "apSubjectCode": "ap_psychology",
+  "kind": "mc",
+  "keywordCode": "1.4",
+  "unitCode": "1",
+  "skillPrimary": "2.D",
+  "structure": "standalone",
+  "calculator": "na",
+  "archetype": "ps_hd_r_ethics_animals",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Meets the exam_prep rubric: 3 required sequential steps (committee review, minimal stress and duration, humane care) and 2 combined concepts (institutional review of animal research, minimizing pain and humane care). Two of the three distractors satisfy some criteria and fail only on a later one, so students must check every option against all criteria. Reading load is low, there is no arithmetic, and the scenario has one defensible answer within CED research ethics content.",
+  "payload": {
+   "archetype": "ps_hd_r_ethics_animals",
+   "topic": "1.4",
+   "skill": "2.D",
+   "calculator": "na",
+   "stem": "A team wants to test how long-term mild stress affects the immune systems of mice. Which proposal best follows ethical guidelines for research with animals?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Keep the stress as mild as the question allows and provide humane care, and begin right away because mild stress does not need committee review.",
+     "why": "Even mild procedures with animals require institutional review before the study begins.",
+     "value": null
+    },
+    {
+     "text": "Have a committee review the plan and provide humane care, but raise the stress to the level that produces the largest change in the immune system.",
+     "why": "Stress should be limited to what the research question requires, and maximizing the size of the effect is not a justification for greater distress.",
+     "value": null
+    },
+    {
+     "text": "Have a committee review the plan and keep the stress mild, but house the mice alone in bare cages to keep the conditions as simple as possible.",
+     "why": "Humane housing and care are required, and barren isolation can add distress and also confound the results.",
+     "value": null
+    },
+    {
+     "text": "Have a committee review the plan, keep the stress as mild and brief as the question allows, and provide humane care.",
+     "why": "Ethical animal research requires review, minimizing harm consistent with the research question, and humane care throughout the study.",
+     "value": null
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 95,
+   "facts": [
+    "ek=1.4.C"
+   ],
+   "variant_id": "d4f6945e46fe",
+   "blueprint": {
+    "id": "ps_hd_r_ethics_animals",
+    "subject": "ap_psychology",
+    "kind": "mc",
+    "concept": "applying ethical guidelines for research with nonhuman animals",
+    "topic": "1.4",
+    "skill": "2.D",
+    "student_thinking": [
+     "Recall the requirement for institutional review of animal research",
+     "Recall the duty to limit stress and provide humane care",
+     "Choose the proposal that follows both and reject proposals that skip review, maximize harm, or violate consent"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "na",
+    "key_conditions": [
+     {
+      "condition": "the stem supplies every fact needed and exactly one option follows from all of the steps",
+      "evidence": "stem and options"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Even mild procedures with animals require institutional review before the study begins."
+     },
+     {
+      "id": "m2",
+      "description": "Stress should be limited to what the research question requires, and maximizing the size of the effect is not a justification for greater distress."
+     },
+     {
+      "id": "m3",
+      "description": "Humane housing and care are required, and barren isolation can add distress and also confound the results."
+     }
+    ],
+    "verification": {
+     "independent_path": "authored from the CED required content (essential knowledge 1.4.C); the key is NOT code-verified: it must be matched by an independent blind solver (Opus), the five-criterion reviewer (Sonnet) and a second independent model panel (Fable and Sonnet blind solves) before the item is used",
+     "method": "authored+blind-solver+panel"
+    },
+    "judgment_demand": [
+     "apply the concept to the scenario"
+    ]
+   },
+   "difficulty_signals": {
+    "steps": [
+     "Recall the requirement for institutional review of animal research",
+     "Recall the duty to limit stress and provide humane care",
+     "Choose the proposal that follows both and reject proposals that skip review, maximize harm, or violate consent"
+    ],
+    "concepts": [
+     "institutional review of animal research",
+     "minimizing pain and humane care"
+    ],
+    "representations": 1,
+    "distractor_fail_step": {
+     "Have a committee review the plan and provide humane care, but raise the stress to the level that produces the largest change in the immune system.": 2,
+     "Keep the stress as mild as the question allows and provide humane care, and begin right away because mild stress does not need committee review.": 1,
+     "Have a committee review the plan and keep the stress mild, but house the mice alone in bare cages to keep the conditions as simple as possible.": 3
+    },
+    "arithmetic": "none"
+   },
+   "seed": 11601,
+   "pack_id": "ps_hd_r_ethics_animals-s11601",
+   "explanation_en": "The correct answer is Have a committee review the plan, keep the stress as mild and brief as the question allows, and provide humane care.. Ethical animal research requires review, minimizing harm consistent with the research question, and humane care throughout the study.\nKeep the stress as mild as the question allows and provide humane care, and begin right away because mild stress does not need committee review. is incorrect: Even mild procedures with animals require institutional review before the study begins.\nHave a committee review the plan and provide humane care, but raise the stress to the level that produces the largest change in the immune system. is incorrect: Stress should be limited to what the research question requires, and maximizing the size of the effect is not a justification for greater distress.\nHave a committee review the plan and keep the stress mild, but house the mice alone in bare cages to keep the conditions as simple as possible. is incorrect: Humane housing and care are required, and barren isolation can add distress and also confound the results."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ps_hd_r_ethics_animals",
+   "facts": [
+    "ek=1.4.C"
+   ],
+   "seed": 11601
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "D is the unique option with review, minimized harm, and humane care. A skips review, B maximizes distress, C uses barren isolation. The solver agrees."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor fails one distinct requirement and the explanation addresses each. The correct option is the longest and most complete, a mild cue but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60 to 90 seconds, no calculator, typical AP load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound ethics item with a unique, correct key and distinct distractor misconceptions. The topic label is slightly loose and the key option is the longest, but neither is disqualifying."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Meets the exam_prep rubric: 3 required sequential steps (committee review, minimal stress and duration, humane care) and 2 combined concepts (institutional review of animal research, minimizing pain and humane care). Two of the three distractors satisfy some criteria and fail only on a later one, so students must check every option against all criteria. Reading load is low, there is no arithmetic, and the scenario has one defensible answer within CED research ethics content.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ }
+]
