@@ -1,0 +1,54 @@
+{
+ "run": "wh-p1",
+ "generatedAt": "2026-10-15",
+ "passed": [
+  "wh-p1:ap_world_history-w101-k0",
+  "wh-p1:ap_world_history-w108-k0",
+  "wh-p1:ap_world_history-w109-k0"
+ ],
+ "rejected": [
+  {
+   "__rejected": true,
+   "specId": "w102",
+   "reason": "3/4 items; setFlags=0; setViolations="
+  }
+ ],
+ "sets": [
+  {
+   "set": "w101",
+   "requested": 4,
+   "passed": 6,
+   "chosen": 4,
+   "setFlags": [],
+   "setViolations": []
+  },
+  {
+   "set": "w102",
+   "requested": 4,
+   "passed": 3,
+   "chosen": 3,
+   "setFlags": [],
+   "setViolations": []
+  },
+  {
+   "set": "w108",
+   "requested": 3,
+   "passed": 5,
+   "chosen": 3,
+   "setFlags": [],
+   "setViolations": []
+  },
+  {
+   "set": "w109",
+   "requested": 4,
+   "passed": 6,
+   "chosen": 4,
+   "setFlags": [],
+   "setViolations": []
+  }
+ ],
+ "items": {
+  "generated": 23,
+  "passed": 20
+ }
+}

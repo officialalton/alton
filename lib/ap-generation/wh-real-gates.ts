@@ -61,7 +61,7 @@ export function srcEntry(s: RegistrySource, id: string, context: string) {
   return { id, kind: KIND_FOR[s.type], title: s.title, attribution: credit(s), context, real_data: true, source_registry_id: s.id, source_sha256: s.sha256 };
 }
 /** 문항 게이트용 모양(UshSetRaw 호환): 텍스트는 발췌, 표는 표, 이미지는 alt·제목(그림 존재 처리). */
-function shim(spec: Pick<WhSetSpec, "unit" | "stim">, refs: { id: string }[], reg: Map<string, RegistrySource>): UshSetRaw {
+function shim(spec: Pick<WhSetSpec, "unit" | "stim">, refs: { id: string }[], reg: Map<string, WhRegistrySource>): UshSetRaw {
   const sources: UshSource[] = refs.map((r, i) => { const s = reg.get(r.id)!; const base = { id: String.fromCharCode(65 + i), kind: KIND_FOR[s.type], title: s.title, attribution: credit(s), provenance: { kind: "real_historical_source" as const, note: "real source" } };
     if (s.excerpt_segments) return { ...base, body: s.excerpt_segments.join(" ") }; if (s.table) return { ...base, body: `${s.title} ${s.year}`, table: { columns: s.table.columns, rows: s.table.rows } };
     return { ...base, body: `${s.alt} ${s.title} ${s.year} ${s.credit ?? ""} ${s.notes ?? ""}`, figure: { chart: "bar" as const, title: s.title, categories: ["a", "b", "c"], series: [{ name: "x", values: [1, 2, 3] }], description: s.alt ?? "" } }; });

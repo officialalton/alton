@@ -1,0 +1,964 @@
+[
+ {
+  "cellId": "ap_world_history-w101",
+  "apSubjectCode": "ap_world_history",
+  "kind": "mc",
+  "calculator": "na",
+  "reserve": false,
+  "wording": "designed_from_real_source",
+  "candidateKey": "ap_world_history-w101-k0",
+  "keywordCode": "1.6",
+  "unitCode": "1",
+  "skillPrimary": "2.B",
+  "structure": "shared_stimulus_set",
+  "archetype": "wh_w101",
+  "reviewState": "verified_by_independent_models",
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficulty": [
+   {
+    "label": "exam_prep"
+   },
+   {
+    "label": "basic_learning"
+   },
+   {
+    "label": "basic_learning"
+   },
+   {
+    "label": "exam_prep"
+   }
+  ],
+  "gateOverride": "wh-p1-2026-10-15",
+  "run": "wh-p1",
+  "stockKey": "wh-p1:ap_world_history-w101-k0",
+  "pipeline": "real_source_v1",
+  "validation": "auto_passed",
+  "gateVersion": "wh-p1-2026-10-15",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "selectedForSample": true,
+  "legacyReserve": false,
+  "family": "ap_world_history",
+  "itemFamilyId": "fam:wh-p1:ap_world_history-w101-k0",
+  "canonicalKey": "wh-p1:ap_world_history-w101-k0",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_world_history:1.6",
+  "sharedWith": [],
+  "stockCell": "ap_world_history|1.6|2.B|shared_stimulus_set|na",
+  "history": [
+   {
+    "run": "wh-p1",
+    "gateVersion": "wh-p1-2026-10-15",
+    "outcome": "passed",
+    "reasons": null
+   }
+  ],
+  "stimulusOrigin": "real_historical_source",
+  "sourceRegistryIds": [
+   "txt-magna-1215"
+  ],
+  "exam": "WH1",
+  "payload": {
+   "archetype": "wh_w101",
+   "topic": "1.6",
+   "skill": "2.B",
+   "calculator": "na",
+   "set_intro": "Historical source (real document)\n(primary source)\nMagna Carta (excerpt: clauses 12 and 39-40)\nKing John of England and the barons (Magna Carta of 15 June 1215; English translation transcribed by the Avalon Project), 1215 (June 15). Avalon Project, Yale Law School (transcription). Reuse: public domain (13th-century document; translation published before 1929). excerpted (2 segments joined by [...]); whitespace normalized; no wording changed.\nContext: In 1215 a group of English barons in rebellion against King John forced him to accept this charter.\n\n\"12. No scutage not aid shall be imposed on our kingdom, unless by common counsel of our kingdom, except for ransoming our person, for making our eldest son a knight, and for once marrying our eldest daughter; and for these there shall not be levied more than a reasonable aid. [...] 39. No freemen shall be taken or imprisoned or disseised or exiled or in any way destroyed, nor will we go upon him nor send upon him, except by the lawful judgment of his peers or by the law of the land. 40. To no one will we sell, to no one will we refuse or delay, right or justice.\"",
+   "wh_set": {
+    "unit": 1,
+    "stim_type": "primary_text",
+    "theme": "Limits on royal power and feudal obligations in England, 1215",
+    "title": "Limits on royal power and feudal obligations in England, 1215",
+    "sources": [
+     {
+      "id": "A",
+      "kind": "primary_text",
+      "title": "Magna Carta (excerpt: clauses 12 and 39-40)",
+      "attribution": "King John of England and the barons (Magna Carta of 15 June 1215; English translation transcribed by the Avalon Project), 1215 (June 15). Avalon Project, Yale Law School (transcription). Reuse: public domain (13th-century document; translation published before 1929). excerpted (2 segments joined by [...]); whitespace normalized; no wording changed.",
+      "context": "In 1215 a group of English barons in rebellion against King John forced him to accept this charter.",
+      "real_data": true,
+      "source_registry_id": "txt-magna-1215",
+      "source_sha256": "373b384e784981f4ac972b502f02164877e603e523ad5c56e3f1e41ef8686932"
+     }
+    ]
+   },
+   "items": [
+    {
+     "archetype": "wh_w101_2B",
+     "topic": "1.6",
+     "skill": "2.B",
+     "stem": "Based on the excerpt and the context line, the barons who forced the charter on King John most likely intended it to",
+     "options": [
+      {
+       "text": "affirm the pope's authority to approve the taxes that English kings imposed on clergy and lay nobles",
+       "why": "Clause 12 gives a role to the common counsel of the kingdom, not to the pope. In fact Pope Innocent III later annulled the charter.",
+       "value": null,
+       "label": "misattributed"
+      },
+      {
+       "text": "strengthen the authority of the crown over rebellious nobles by tying them more firmly to royal courts",
+       "why": "The rebels imposed the charter to limit royal authority. They were not trying to strengthen the king against nobles.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "guarantee equal legal rights to every inhabitant of England, including unfree peasants bound to the land",
+       "why": "The protections in clause 39 apply to freemen. Unfree villeins, who made up a large part of the rural population, were not given equal rights.",
+       "value": null,
+       "label": "overstated"
+      },
+      {
+       "text": "restrict the king's power to tax his vassals and punish free men without legal process",
+       "why": "Clause 12 requires common counsel for scutage and aids, and clause 39 bars imprisonment or exile of freemen without lawful judgment. Rebellious barons wanted to protect their own interests against a demanding king.",
+       "value": null,
+       "label": "key"
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is \"restrict the king's power to tax his vassals and punish free men without legal process\". Clause 12 requires common counsel for scutage and aids, and clause 39 bars imprisonment or exile of freemen without lawful judgment. Rebellious barons wanted to protect their own interests against a demanding king.\n\"affirm the pope's authority to approve the taxes that English kings imposed on clergy and lay nobles\" is incorrect: Clause 12 gives a role to the common counsel of the kingdom, not to the pope. In fact Pope Innocent III later annulled the charter.\n\"strengthen the authority of the crown over rebellious nobles by tying them more firmly to royal courts\" is incorrect: The rebels imposed the charter to limit royal authority. They were not trying to strengthen the king against nobles.\n\"guarantee equal legal rights to every inhabitant of England, including unfree peasants bound to the land\" is incorrect: The protections in clause 39 apply to freemen. Unfree villeins, who made up a large part of the rural population, were not given equal rights.",
+     "est_seconds": 55,
+     "facts": [
+      "In 1215 rebel barons forced King John to accept Magna Carta.",
+      "Feudal aids and scutage were payments that vassals owed their lord. Scutage was paid in place of military service."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "2.B",
+      "key_evidence_in_source": "Clause 12 limits scutage and aids, clause 39 limits punishment of freemen, and the context line says rebel barons forced the charter on the king.",
+      "evidence_quote": "No scutage not aid shall be imposed on our kingdom, unless by common counsel of our kingdom"
+     },
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 3,
+        "confidence": "certain"
+       },
+       {
+        "choice": 3,
+        "confidence": "certain"
+       }
+      ],
+      "panel_choice": 3
+     }
+    },
+    {
+     "archetype": "wh_w101_3A",
+     "topic": "1.6",
+     "skill": "3.A",
+     "stem": "Clause 39 of the excerpt makes which of the following claims?",
+     "options": [
+      {
+       "text": "A free man can be punished only by lawful judgment of his peers or the law of the land",
+       "why": "Clause 39 says no freeman shall be imprisoned, disseised, exiled, or destroyed except by the lawful judgment of his peers or by the law of the land.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "The king may seize the lands of free men whenever he decides that the safety of the kingdom requires it",
+       "why": "The clause forbids disseisin, meaning the taking of land, without lawful judgment. It does not allow the king to seize land at his own discretion.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "Accused free men must be tried in church courts rather than by royal judges appointed by the king",
+       "why": "The clause mentions judgment of peers and the law of the land. It says nothing about church courts.",
+       "value": null,
+       "label": "unsupported_by_source"
+      },
+      {
+       "text": "All people in the kingdom, whatever their legal status, must receive identical treatment in royal courts",
+       "why": "The clause names only freemen. It does not promise identical treatment for people of every legal status.",
+       "value": null,
+       "label": "overstated"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is \"A free man can be punished only by lawful judgment of his peers or the law of the land\". Clause 39 says no freeman shall be imprisoned, disseised, exiled, or destroyed except by the lawful judgment of his peers or by the law of the land.\n\"The king may seize the lands of free men whenever he decides that the safety of the kingdom requires it\" is incorrect: The clause forbids disseisin, meaning the taking of land, without lawful judgment. It does not allow the king to seize land at his own discretion.\n\"Accused free men must be tried in church courts rather than by royal judges appointed by the king\" is incorrect: The clause mentions judgment of peers and the law of the land. It says nothing about church courts.\n\"All people in the kingdom, whatever their legal status, must receive identical treatment in royal courts\" is incorrect: The clause names only freemen. It does not promise identical treatment for people of every legal status.",
+     "est_seconds": 45,
+     "facts": [
+      "Magna Carta (1215) clause 39 restricted the king from punishing freemen without lawful judgment of peers or the law of the land."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "3.A",
+      "key_evidence_in_source": "The wording of clause 39 lists the protected actions and the two lawful exceptions.",
+      "evidence_quote": "except by the lawful judgment of his peers or by the law of the land"
+     },
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 0,
+        "confidence": "certain"
+       },
+       {
+        "choice": 0,
+        "confidence": "certain"
+       }
+      ],
+      "panel_choice": 0
+     }
+    },
+    {
+     "archetype": "wh_w101_4A",
+     "topic": "1.6",
+     "skill": "4.A",
+     "stem": "Which of the following developments most directly contributed to the barons' rebellion that produced the charter in 1215?",
+     "options": [
+      {
+       "text": "Mongol campaigns into Eastern Europe, which pressured Western kings to raise large armies for defense",
+       "why": "The Mongol invasions of Eastern Europe took place around 1240 to 1242, after 1215. They had nothing to do with the English barons' grievances.",
+       "value": null,
+       "label": "unrelated_development"
+      },
+      {
+       "text": "Royal demands for money to fund King John's unsuccessful wars to recover lands in France",
+       "why": "John lost Normandy to Philip II of France in 1204 and his allies were defeated at Bouvines in 1214. The heavy scutage and aids he demanded to pay for these campaigns angered the barons, which is why clause 12 limits such levies.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "Mounting costs of the Hundred Years' War, which forced the crown to seek new taxes on wool exports",
+       "why": "The Hundred Years' War began in 1337, long after Magna Carta.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "Severe labor shortages after the Black Death, which led lords and peasants to fight over wages and dues",
+       "why": "The Black Death reached England in 1348, more than a century after 1215.",
+       "value": null,
+       "label": "wrong_period"
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is \"Royal demands for money to fund King John's unsuccessful wars to recover lands in France\". John lost Normandy to Philip II of France in 1204 and his allies were defeated at Bouvines in 1214. The heavy scutage and aids he demanded to pay for these campaigns angered the barons, which is why clause 12 limits such levies.\n\"Mongol campaigns into Eastern Europe, which pressured Western kings to raise large armies for defense\" is incorrect: The Mongol invasions of Eastern Europe took place around 1240 to 1242, after 1215. They had nothing to do with the English barons' grievances.\n\"Mounting costs of the Hundred Years' War, which forced the crown to seek new taxes on wool exports\" is incorrect: The Hundred Years' War began in 1337, long after Magna Carta.\n\"Severe labor shortages after the Black Death, which led lords and peasants to fight over wages and dues\" is incorrect: The Black Death reached England in 1348, more than a century after 1215.",
+     "est_seconds": 55,
+     "facts": [
+      "King John lost Normandy to Philip II of France in 1204.",
+      "John's allies were defeated at the Battle of Bouvines in 1214, shortly before the 1215 rebellion."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "4.A",
+      "key_evidence_in_source": "Clause 12's limits on scutage and aids point to baronial anger over heavy royal levies.",
+      "evidence_quote": "No scutage not aid shall be imposed on our kingdom, unless by common counsel of our kingdom"
+     },
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 1,
+        "confidence": "certain"
+       },
+       {
+        "choice": 1,
+        "confidence": "certain"
+       }
+      ],
+      "panel_choice": 1
+     }
+    },
+    {
+     "archetype": "wh_w101_5B",
+     "topic": "1.6",
+     "skill": "5.B",
+     "stem": "The principle in clause 12 that certain levies required the \"common counsel of our kingdom\" most directly relates to which later development in England during the 1200s?",
+     "options": [
+      {
+       "text": "The creation of an absolute monarchy in which kings ruled without consulting nobles or towns",
+       "why": "English kings increasingly had to consult assemblies in this period, which is the opposite of absolutism.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "The replacement of feudal levies by a salaried civil service recruited through written examinations",
+       "why": "Recruiting officials through examinations was a feature of Song China, not of thirteenth-century England.",
+       "value": null,
+       "label": "misattributed"
+      },
+      {
+       "text": "The rise of Parliament as an assembly whose consent kings sought for new taxes",
+       "why": "The idea that taxation needed the counsel of the realm fed into the growth of Parliament in the 1200s, including Simon de Montfort's parliament of 1265 and Edward I's parliament of 1295.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "The abolition of serfdom, as royal courts extended the charter's protections to all peasants",
+       "why": "Serfdom continued in England through the 1200s. It declined only gradually after the Black Death.",
+       "value": null,
+       "label": "overstated"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is \"The rise of Parliament as an assembly whose consent kings sought for new taxes\". The idea that taxation needed the counsel of the realm fed into the growth of Parliament in the 1200s, including Simon de Montfort's parliament of 1265 and Edward I's parliament of 1295.\n\"The creation of an absolute monarchy in which kings ruled without consulting nobles or towns\" is incorrect: English kings increasingly had to consult assemblies in this period, which is the opposite of absolutism.\n\"The replacement of feudal levies by a salaried civil service recruited through written examinations\" is incorrect: Recruiting officials through examinations was a feature of Song China, not of thirteenth-century England.\n\"The abolition of serfdom, as royal courts extended the charter's protections to all peasants\" is incorrect: Serfdom continued in England through the 1200s. It declined only gradually after the Black Death.",
+     "est_seconds": 55,
+     "facts": [
+      "Simon de Montfort called a parliament in 1265 that included representatives of towns.",
+      "Edward I summoned the so-called Model Parliament in 1295."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "5.B",
+      "key_evidence_in_source": "Clause 12 makes scutage and aids depend on the common counsel of the kingdom.",
+      "evidence_quote": "unless by common counsel of our kingdom"
+     },
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 2,
+        "confidence": "certain"
+       },
+       {
+        "choice": 2,
+        "confidence": "certain"
+       }
+      ],
+      "panel_choice": 2
+     }
+    }
+   ],
+   "excluded_items": []
+  }
+ },
+ {
+  "cellId": "ap_world_history-w108",
+  "apSubjectCode": "ap_world_history",
+  "kind": "mc",
+  "calculator": "na",
+  "reserve": false,
+  "wording": "designed_from_real_source",
+  "candidateKey": "ap_world_history-w108-k0",
+  "keywordCode": "5.10",
+  "unitCode": "5",
+  "skillPrimary": "1.A",
+  "structure": "shared_stimulus_set",
+  "archetype": "wh_w108",
+  "reviewState": "verified_by_independent_models",
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficulty": [
+   {
+    "label": "basic_learning"
+   },
+   {
+    "label": "exam_prep"
+   },
+   {
+    "label": "exam_prep"
+   }
+  ],
+  "gateOverride": "wh-p1-2026-10-15",
+  "run": "wh-p1",
+  "stockKey": "wh-p1:ap_world_history-w108-k0",
+  "pipeline": "real_source_v1",
+  "validation": "auto_passed",
+  "gateVersion": "wh-p1-2026-10-15",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "selectedForSample": true,
+  "legacyReserve": false,
+  "family": "ap_world_history",
+  "itemFamilyId": "fam:wh-p1:ap_world_history-w108-k0",
+  "canonicalKey": "wh-p1:ap_world_history-w108-k0",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_world_history:5.10",
+  "sharedWith": [],
+  "stockCell": "ap_world_history|5.10|1.A|shared_stimulus_set|na",
+  "history": [
+   {
+    "run": "wh-p1",
+    "gateVersion": "wh-p1-2026-10-15",
+    "outcome": "passed",
+    "reasons": null
+   }
+  ],
+  "stimulusOrigin": "real_historical_source",
+  "sourceRegistryIds": [
+   "tab-census-worldpop-1700-1900"
+  ],
+  "exam": "WH1",
+  "payload": {
+   "archetype": "wh_w108",
+   "topic": "5.10",
+   "skill": "1.A",
+   "calculator": "na",
+   "set_intro": "Historical source (real document)\n(table)\nEstimated world population, 1700-1900 (summary lower and upper estimates, millions)\nU.S. Census Bureau, International Programs (compiled from published estimates by Biraben, Durand, Haub, McEvedy and Jones, Thomlinson and the United Nations), Table compiled by the Census Bureau from estimates published 1974-1999. U.S. Census Bureau. Reuse: public domain (U.S. government work). five rows copied from the Census Bureau's 'Summary' Lower and Upper columns (population in millions); no values changed or recomputed.\nContext: The U.S. Census Bureau publishes a table comparing estimates of world population made by several scholars; this table shows the lowest and highest of those estimates for five years.\n\n| Year | Lower estimate | Upper estimate |\n| --- | --- | --- |\n| 1700 AD | 600 | 679 |\n| 1750 AD | 629 | 961 |\n| 1800 AD | 813 | 1,125 |\n| 1850 AD | 1,128 | 1,402 |\n| 1900 AD | 1,550 | 1,762 |",
+   "stimulus": {
+    "kind": "table",
+    "description": "Estimated world population, 1700-1900 (summary lower and upper estimates, millions)",
+    "data": {
+     "columns": [
+      "Year",
+      "Lower estimate",
+      "Upper estimate"
+     ],
+     "rows": [
+      [
+       "1700 AD",
+       "600",
+       "679"
+      ],
+      [
+       "1750 AD",
+       "629",
+       "961"
+      ],
+      [
+       "1800 AD",
+       "813",
+       "1,125"
+      ],
+      [
+       "1850 AD",
+       "1,128",
+       "1,402"
+      ],
+      [
+       "1900 AD",
+       "1,550",
+       "1,762"
+      ]
+     ]
+    }
+   },
+   "wh_set": {
+    "unit": 5,
+    "stim_type": "quantitative",
+    "theme": "World population growth in the age of revolutions and industrialization",
+    "title": "World population growth in the age of revolutions and industrialization",
+    "sources": [
+     {
+      "id": "A",
+      "kind": "table",
+      "title": "Estimated world population, 1700-1900 (summary lower and upper estimates, millions)",
+      "attribution": "U.S. Census Bureau, International Programs (compiled from published estimates by Biraben, Durand, Haub, McEvedy and Jones, Thomlinson and the United Nations), Table compiled by the Census Bureau from estimates published 1974-1999. U.S. Census Bureau. Reuse: public domain (U.S. government work). five rows copied from the Census Bureau's 'Summary' Lower and Upper columns (population in millions); no values changed or recomputed.",
+      "context": "The U.S. Census Bureau publishes a table comparing estimates of world population made by several scholars; this table shows the lowest and highest of those estimates for five years.",
+      "real_data": true,
+      "source_registry_id": "tab-census-worldpop-1700-1900",
+      "source_sha256": "1e969ac62831dd944e5c2004d9830632c880ad3f205b049554fc22f28827984b"
+     }
+    ]
+   },
+   "items": [
+    {
+     "archetype": "wh_w108_1A",
+     "topic": "5.10",
+     "skill": "1.A",
+     "stem": "Which of the following developments most directly contributed to the rise in world population shown in the table between 1750 and 1900?",
+     "options": [
+      {
+       "text": "Rising death rates from the Taiping Rebellion in China and from famines in British India",
+       "why": "These were real nineteenth-century disasters, but they killed millions. They worked against population growth and did not cause it.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "The mass use of antibiotics such as penicillin to treat bacterial infections in colonized regions",
+       "why": "Penicillin went into wide use in the 1940s, long after 1900.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "Wider cultivation of American crops such as maize and potatoes in Afro-Eurasia",
+       "why": "After the Columbian Exchange, American crops spread in Europe, Africa, and China. They raised food supplies and helped support the growth both estimates show from 1750 to 1900.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "The Green Revolution's high-yield rice and wheat varieties and chemical fertilizers in South Asia",
+       "why": "The Green Revolution happened in the mid-twentieth century, after the period the table covers.",
+       "value": null,
+       "label": "wrong_period"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is \"Wider cultivation of American crops such as maize and potatoes in Afro-Eurasia\". After the Columbian Exchange, American crops spread in Europe, Africa, and China. They raised food supplies and helped support the growth both estimates show from 1750 to 1900.\n\"Rising death rates from the Taiping Rebellion in China and from famines in British India\" is incorrect: These were real nineteenth-century disasters, but they killed millions. They worked against population growth and did not cause it.\n\"The mass use of antibiotics such as penicillin to treat bacterial infections in colonized regions\" is incorrect: Penicillin went into wide use in the 1940s, long after 1900.\n\"The Green Revolution's high-yield rice and wheat varieties and chemical fertilizers in South Asia\" is incorrect: The Green Revolution happened in the mid-twentieth century, after the period the table covers.",
+     "est_seconds": 50,
+     "facts": [
+      "Maize, potatoes, and sweet potatoes from the Americas spread through Afro-Eurasia after the sixteenth century as part of the Columbian Exchange.",
+      "Penicillin came into widespread medical use in the 1940s."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "1.A",
+      "key_evidence_in_source": "Both estimates rise steadily from 1750 (629 and 961 million) to 1900 (1,550 and 1,762 million), so students must name a cause of growth from this period.",
+      "evidence_quote": "1900 AD | 1,550 | 1,762"
+     },
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 2,
+        "confidence": "certain"
+       },
+       {
+        "choice": 2,
+        "confidence": "likely"
+       }
+      ],
+      "panel_choice": 2
+     }
+    },
+    {
+     "archetype": "wh_w108_3B",
+     "topic": "5.10",
+     "skill": "3.B",
+     "stem": "Which of the following claims about world population is best supported by the data in the table?",
+     "options": [
+      {
+       "text": "Most of the population increase from 1800 to 1900 took place in industrializing countries of Western Europe",
+       "why": "The table gives only world totals and has no regional breakdown. Asia, not Western Europe, also held most of the world's people.",
+       "value": null,
+       "label": "unsupported_by_source"
+      },
+      {
+       "text": "Both the lower and upper estimates show world population more than doubling from 1700 to 1900",
+       "why": "The lower estimate rises from 600 to 1,550 million and the upper from 679 to 1,762 million. Each is about 2.6 times its 1700 value.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "World population declined between 1750 and 1800 according to the lower estimate before recovering",
+       "why": "The lower estimate rises from 629 to 813 million between 1750 and 1800. It does not fall.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "Scholars' estimates for 1750 agree more closely than their estimates for any other year in the table",
+       "why": "The 1750 gap (629 to 961, a spread of 332 million) is the widest in the table, so the estimates for that year agree least.",
+       "value": null,
+       "label": "reversal"
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is \"Both the lower and upper estimates show world population more than doubling from 1700 to 1900\". The lower estimate rises from 600 to 1,550 million and the upper from 679 to 1,762 million. Each is about 2.6 times its 1700 value.\n\"Most of the population increase from 1800 to 1900 took place in industrializing countries of Western Europe\" is incorrect: The table gives only world totals and has no regional breakdown. Asia, not Western Europe, also held most of the world's people.\n\"World population declined between 1750 and 1800 according to the lower estimate before recovering\" is incorrect: The lower estimate rises from 629 to 813 million between 1750 and 1800. It does not fall.\n\"Scholars' estimates for 1750 agree more closely than their estimates for any other year in the table\" is incorrect: The 1750 gap (629 to 961, a spread of 332 million) is the widest in the table, so the estimates for that year agree least.",
+     "est_seconds": 60,
+     "facts": [
+      "Asia held the majority of the world's population throughout the period 1700 to 1900."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "3.B",
+      "key_evidence_in_source": "Computation: lower estimate 1,550 divided by 600 is about 2.6; upper estimate 1,762 divided by 679 is about 2.6.",
+      "evidence_quote": "1700 AD | 600 | 679"
+     },
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 1,
+        "confidence": "certain"
+       },
+       {
+        "choice": 1,
+        "confidence": "certain"
+       }
+      ],
+      "panel_choice": 1
+     }
+    },
+    {
+     "archetype": "wh_w108_4B",
+     "topic": "5.9",
+     "skill": "4.B",
+     "stem": "The world population growth shown in the table between 1850 and 1900 is best understood in the context of which of the following broader developments?",
+     "options": [
+      {
+       "text": "Growing populations encouraged European states to adopt mercantilist policies and found their first joint-stock trading companies",
+       "why": "The first joint-stock trading companies and mercantilist policy date to the 1600s, long before 1850.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "Crowding in coastal cities persuaded Qing China and Tokugawa Japan to open their ports voluntarily to Western trade",
+       "why": "Western pressure forced the ports open: the Opium Wars in China and Perry's gunboat diplomacy in Japan. Neither state opened them by choice.",
+       "value": null,
+       "label": "misattributed"
+      },
+      {
+       "text": "Rural population pressure, along with steamships and railroads, helped drive mass labor migration abroad",
+       "why": "In the late nineteenth century, crowded rural areas in Europe, China, and India sent millions of migrants abroad. Steamships and railroads made the journeys cheaper and faster.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "Concerns about population growth led Britain to abolish the Atlantic slave trade and slavery in its colonies",
+       "why": "Britain ended the slave trade in 1807 and slavery in 1833 because of abolitionist campaigns, slave resistance, and economic change, not worries about population. Both acts also came before 1850.",
+       "value": null,
+       "label": "misattributed"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is \"Rural population pressure, along with steamships and railroads, helped drive mass labor migration abroad\". In the late nineteenth century, crowded rural areas in Europe, China, and India sent millions of migrants abroad. Steamships and railroads made the journeys cheaper and faster.\n\"Growing populations encouraged European states to adopt mercantilist policies and found their first joint-stock trading companies\" is incorrect: The first joint-stock trading companies and mercantilist policy date to the 1600s, long before 1850.\n\"Crowding in coastal cities persuaded Qing China and Tokugawa Japan to open their ports voluntarily to Western trade\" is incorrect: Western pressure forced the ports open: the Opium Wars in China and Perry's gunboat diplomacy in Japan. Neither state opened them by choice.\n\"Concerns about population growth led Britain to abolish the Atlantic slave trade and slavery in its colonies\" is incorrect: Britain ended the slave trade in 1807 and slavery in 1833 because of abolitionist campaigns, slave resistance, and economic change, not worries about population. Both acts also came before 1850.",
+     "est_seconds": 60,
+     "facts": [
+      "Millions of Europeans, Chinese, and Indians migrated overseas in the late nineteenth century, many as laborers.",
+      "Commodore Perry's expedition (1853-1854) forced Japan to open ports to U.S. ships.",
+      "Britain abolished the slave trade in 1807 and slavery in most of its colonies in 1833."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "4.B",
+      "key_evidence_in_source": "Between 1850 and 1900 the lower estimate rises by 422 million (1,128 to 1,550) and the upper by 360 million (1,402 to 1,762), the largest increases in the table.",
+      "evidence_quote": "1850 AD | 1,128 | 1,402"
+     },
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 2,
+        "confidence": "certain"
+       },
+       {
+        "choice": 2,
+        "confidence": "likely"
+       }
+      ],
+      "panel_choice": 2
+     }
+    }
+   ],
+   "excluded_items": []
+  }
+ },
+ {
+  "cellId": "ap_world_history-w109",
+  "apSubjectCode": "ap_world_history",
+  "kind": "mc",
+  "calculator": "na",
+  "reserve": false,
+  "wording": "designed_from_real_source",
+  "candidateKey": "ap_world_history-w109-k0",
+  "keywordCode": "6.1",
+  "unitCode": "6",
+  "skillPrimary": "3.C",
+  "structure": "shared_stimulus_set",
+  "archetype": "wh_w109",
+  "reviewState": "verified_by_independent_models",
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficulty": [
+   {
+    "label": "exam_prep"
+   },
+   {
+    "label": "exam_prep"
+   },
+   {
+    "label": "basic_learning"
+   },
+   {
+    "label": "exam_prep"
+   }
+  ],
+  "gateOverride": "wh-p1-2026-10-15",
+  "run": "wh-p1",
+  "stockKey": "wh-p1:ap_world_history-w109-k0",
+  "pipeline": "real_source_v1",
+  "validation": "auto_passed",
+  "gateVersion": "wh-p1-2026-10-15",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "selectedForSample": true,
+  "legacyReserve": false,
+  "family": "ap_world_history",
+  "itemFamilyId": "fam:wh-p1:ap_world_history-w109-k0",
+  "canonicalKey": "wh-p1:ap_world_history-w109-k0",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_world_history:6.1",
+  "sharedWith": [],
+  "stockCell": "ap_world_history|6.1|3.C|shared_stimulus_set|na",
+  "history": [
+   {
+    "run": "wh-p1",
+    "gateVersion": "wh-p1-2026-10-15",
+    "outcome": "passed",
+    "reasons": null
+   }
+  ],
+  "stimulusOrigin": "real_historical_source",
+  "sourceRegistryIds": [
+   "txt-kipling-1899",
+   "txt-twain-1905"
+  ],
+  "exam": "WH1",
+  "payload": {
+   "archetype": "wh_w109",
+   "topic": "6.1",
+   "skill": "3.C",
+   "calculator": "na",
+   "set_intro": "Historical source (real document)\nSource A (primary source)\nThe White Man's Burden (excerpt: first and third stanzas)\nRudyard Kipling (British writer born in India), 1899 (poem; collected in The Five Nations, 1903). Project Gutenberg eBook #60260. Reuse: public domain in the United States (published before 1929). excerpted (2 segments joined by [...]); whitespace normalized; no wording changed.\nContext: Rudyard Kipling, a British writer born in India, published this poem in 1899, soon after the United States took control of the Philippines.\n\n\"Take up the White Man’s burden-- Send forth the best ye breed-- Go bind your sons to exile To serve your captives’ need; To wait in heavy harness, On fluttered folk and wild-- Your new-caught, sullen peoples, Half-devil and half-child. [...] Take up the White Man’s burden-- The savage wars of peace-- Fill full the mouth of Famine And bid the sickness cease; And when your goal is nearest The end for others sought, Watch Sloth and heathen Folly Bring all your hope to nought.\"\n\n———\n\nSource B (primary source)\nKing Leopold's Soliloquy: A Defense of His Congo Rule (excerpt on the kodak)\nMark Twain (Samuel L. Clemens), American satirist and Congo Reform Association supporter, 1905 (Boston: P. R. Warren). Project Gutenberg eBook #62739. Reuse: public domain in the United States (published before 1929). excerpted (one contiguous passage); whitespace normalized; no wording changed.\nContext: Mark Twain, an American writer, published this satire in 1905 to support a campaign against the rule of King Leopold II of Belgium in the Congo; the speaker is Leopold as Twain imagined him.\n\n\"The kodak has been a sore calamity to us. The most powerful enemy that has confronted us, indeed. In the early years we had no trouble in getting the press to “expose” the tales of the mutilations as slanders, lies, inventions of busy-body American missionaries and exasperated foreigners who had found the “open door” of the Berlin-Congo charter closed against them when they innocently went out there to trade; and by the press’s help we got the Christian nations everywhere to turn an irritated and unbelieving ear to those tales and say hard things about the tellers of them. Yes, all things went harmoniously and pleasantly in those good days, and I was looked up to as the benefactor of a down-trodden and friendless people. [...] The only witness I have encountered in my long experience that I couldn’t bribe. Every Yankee missionary and every interrupted trader sent home and got one; and now—oh, well, the pictures get sneaked around everywhere, in spite of all we can do to ferret them out and suppress them.\"",
+   "wh_set": {
+    "unit": 6,
+    "stim_type": "paired_text",
+    "theme": "Justifying and criticizing imperial rule around 1900",
+    "title": "Justifying and criticizing imperial rule around 1900",
+    "sources": [
+     {
+      "id": "A",
+      "kind": "primary_text",
+      "title": "The White Man's Burden (excerpt: first and third stanzas)",
+      "attribution": "Rudyard Kipling (British writer born in India), 1899 (poem; collected in The Five Nations, 1903). Project Gutenberg eBook #60260. Reuse: public domain in the United States (published before 1929). excerpted (2 segments joined by [...]); whitespace normalized; no wording changed.",
+      "context": "Rudyard Kipling, a British writer born in India, published this poem in 1899, soon after the United States took control of the Philippines.",
+      "real_data": true,
+      "source_registry_id": "txt-kipling-1899",
+      "source_sha256": "909eddf92c19339080b8b50891ca7e5e6d0e6466e7abc56b3de5b4aebbe1ca24"
+     },
+     {
+      "id": "B",
+      "kind": "primary_text",
+      "title": "King Leopold's Soliloquy: A Defense of His Congo Rule (excerpt on the kodak)",
+      "attribution": "Mark Twain (Samuel L. Clemens), American satirist and Congo Reform Association supporter, 1905 (Boston: P. R. Warren). Project Gutenberg eBook #62739. Reuse: public domain in the United States (published before 1929). excerpted (one contiguous passage); whitespace normalized; no wording changed.",
+      "context": "Mark Twain, an American writer, published this satire in 1905 to support a campaign against the rule of King Leopold II of Belgium in the Congo; the speaker is Leopold as Twain imagined him.",
+      "real_data": true,
+      "source_registry_id": "txt-twain-1905",
+      "source_sha256": "20844acfa06bb318a9d09861bd2a9c4d3e53edafd5fd5b672f4b3dd4d29211a1"
+     }
+    ]
+   },
+   "items": [
+    {
+     "archetype": "wh_w109_3C",
+     "topic": "6.1",
+     "skill": "3.C",
+     "stem": "Which of the following best describes a difference between the main ideas of Source A and Source B about imperial rule?",
+     "options": [
+      {
+       "text": "Source A portrays imperial rule as a costly duty, while Source B mocks claims that such rule benefited the colonized.",
+       "why": "Kipling urges readers to send their sons to exile and fight famine and sickness, framing empire as self-sacrifice. Twain has Leopold admit he was falsely seen as the benefactor of a down-trodden people, which ridicules that claim.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "Both sources reject the idea of racial hierarchy and call for colonized peoples to receive immediate self-government.",
+       "why": "Source A openly expresses racial hierarchy, and neither source calls for self-government.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "Both sources argue that colonial rule should be left to private trading companies rather than to national governments and their armies.",
+       "why": "Neither excerpt discusses whether companies or governments should rule. Twain mentions traders only as people Leopold blamed for spreading stories.",
+       "value": null,
+       "label": "unsupported_by_source"
+      },
+      {
+       "text": "Source A warns that empire would corrupt the colonizing nation, while Source B praises Leopold for ending the Congo's internal slave trade.",
+       "why": "Kipling urges readers to take up empire rather than warning against it, and Twain's satire attacks Leopold instead of praising him.",
+       "value": null,
+       "label": "reversal"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is \"Source A portrays imperial rule as a costly duty, while Source B mocks claims that such rule benefited the colonized.\". Kipling urges readers to send their sons to exile and fight famine and sickness, framing empire as self-sacrifice. Twain has Leopold admit he was falsely seen as the benefactor of a down-trodden people, which ridicules that claim.\n\"Both sources reject the idea of racial hierarchy and call for colonized peoples to receive immediate self-government.\" is incorrect: Source A openly expresses racial hierarchy, and neither source calls for self-government.\n\"Both sources argue that colonial rule should be left to private trading companies rather than to national governments and their armies.\" is incorrect: Neither excerpt discusses whether companies or governments should rule. Twain mentions traders only as people Leopold blamed for spreading stories.\n\"Source A warns that empire would corrupt the colonizing nation, while Source B praises Leopold for ending the Congo's internal slave trade.\" is incorrect: Kipling urges readers to take up empire rather than warning against it, and Twain's satire attacks Leopold instead of praising him.",
+     "est_seconds": 60,
+     "facts": [
+      "Kipling published The White Man's Burden in 1899, urging the United States to take up colonial rule in the Philippines.",
+      "Twain published King Leopold's Soliloquy in 1905 to support the international campaign against abuses in the Congo Free State."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "3.C",
+      "key_evidence_in_source": "Source A's call to send sons into exile to serve colonized peoples, set against Source B's ironic line about Leopold being seen as a benefactor.",
+      "evidence_quote": "I was looked up to as the benefactor of a down-trodden and friendless people"
+     },
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 0,
+        "confidence": "certain"
+       },
+       {
+        "choice": 0,
+        "confidence": "certain"
+       }
+      ],
+      "panel_choice": 0
+     }
+    },
+    {
+     "archetype": "wh_w109_2B",
+     "topic": "6.3",
+     "skill": "2.B",
+     "stem": "Twain most likely had the imagined Leopold call the kodak his most powerful enemy in Source B in order to",
+     "options": [
+      {
+       "text": "argue that new technologies such as cameras mainly helped European states expand their colonial control",
+       "why": "Some technologies did help imperial expansion, but in this excerpt the camera works against the colonial ruler.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "suggest that photographic evidence undercut official denials of abuses in the Congo",
+       "why": "Leopold says the press once dismissed the mutilation stories as lies, but the camera is a witness he cannot bribe. Twain wrote for the reform campaign, which used photographs of mutilated Congolese to prove the abuses were real.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "persuade American traders to demand the reopening of the Congo market under the Berlin Conference terms",
+       "why": "Twain mentions traders shut out by the closed open door, but the point of the kodak passage is exposing atrocities, not trade access.",
+       "value": null,
+       "label": "true_but_not_responsive"
+      },
+      {
+       "text": "praise Leopold's efforts to protect Congolese privacy from foreign journalists and missionaries",
+       "why": "The work is satire aimed against Leopold. His efforts to suppress the pictures are shown as a cover-up, not as protecting anyone.",
+       "value": null,
+       "label": "unsupported_by_source"
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is \"suggest that photographic evidence undercut official denials of abuses in the Congo\". Leopold says the press once dismissed the mutilation stories as lies, but the camera is a witness he cannot bribe. Twain wrote for the reform campaign, which used photographs of mutilated Congolese to prove the abuses were real.\n\"argue that new technologies such as cameras mainly helped European states expand their colonial control\" is incorrect: Some technologies did help imperial expansion, but in this excerpt the camera works against the colonial ruler.\n\"persuade American traders to demand the reopening of the Congo market under the Berlin Conference terms\" is incorrect: Twain mentions traders shut out by the closed open door, but the point of the kodak passage is exposing atrocities, not trade access.\n\"praise Leopold's efforts to protect Congolese privacy from foreign journalists and missionaries\" is incorrect: The work is satire aimed against Leopold. His efforts to suppress the pictures are shown as a cover-up, not as protecting anyone.",
+     "est_seconds": 55,
+     "facts": [
+      "Photographs of mutilated Congolese, including those taken by missionary Alice Seeley Harris, were used by the Congo Reform Association in the early 1900s.",
+      "Portable Kodak cameras became widely available after 1888."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "2.B",
+      "key_evidence_in_source": "Leopold calls the camera a witness he could not bribe and says its pictures circulate despite his efforts to suppress them, after earlier press denials of the mutilation stories.",
+      "evidence_quote": "The only witness I have encountered in my long experience that I couldn't bribe."
+     },
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 1,
+        "confidence": "certain"
+       },
+       {
+        "choice": 1,
+        "confidence": "certain"
+       }
+      ],
+      "panel_choice": 1
+     }
+    },
+    {
+     "archetype": "wh_w109_4A",
+     "topic": "6.2",
+     "skill": "4.A",
+     "stem": "Source B's reference to the open door of the Berlin-Congo charter is best understood in the context of which of the following?",
+     "options": [
+      {
+       "text": "European diplomacy that set terms for claiming African territory in the 1880s",
+       "why": "At the Berlin Conference of 1884 to 1885, European powers set rules for claiming African territory and accepted Leopold's Congo Free State on the condition that trade there stayed open to all.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "The Treaty of Paris of 1898, by which Spain ceded the Philippines and other colonies to the United States",
+       "why": "This treaty is the context for Source A, not for the Berlin-Congo charter named in Source B.",
+       "value": null,
+       "label": "misattributed"
+      },
+      {
+       "text": "Treaties that forced Qing China to open ports to Western trade after the Opium Wars of the 1840s",
+       "why": "The phrase open door also appears in the history of China, but this source refers to a charter about the Congo, not to the treaty ports.",
+       "value": null,
+       "label": "unrelated_development"
+      },
+      {
+       "text": "The Congress of Vienna's effort to restore a balance of power among European monarchies after 1815",
+       "why": "The Congress of Vienna came decades earlier and dealt with Europe after Napoleon, not with the Congo.",
+       "value": null,
+       "label": "wrong_period"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is \"European diplomacy that set terms for claiming African territory in the 1880s\". At the Berlin Conference of 1884 to 1885, European powers set rules for claiming African territory and accepted Leopold's Congo Free State on the condition that trade there stayed open to all.\n\"The Treaty of Paris of 1898, by which Spain ceded the Philippines and other colonies to the United States\" is incorrect: This treaty is the context for Source A, not for the Berlin-Congo charter named in Source B.\n\"Treaties that forced Qing China to open ports to Western trade after the Opium Wars of the 1840s\" is incorrect: The phrase open door also appears in the history of China, but this source refers to a charter about the Congo, not to the treaty ports.\n\"The Congress of Vienna's effort to restore a balance of power among European monarchies after 1815\" is incorrect: The Congress of Vienna came decades earlier and dealt with Europe after Napoleon, not with the Congo.",
+     "est_seconds": 45,
+     "facts": [
+      "The Berlin Conference (1884 to 1885) set rules for European claims in Africa and included free-trade provisions for the Congo basin.",
+      "Leopold II's Congo Free State was recognized as his personal possession in 1885."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "4.A",
+      "key_evidence_in_source": "Source B names the Berlin-Congo charter and its open door for trade, which points to the Berlin Conference settlement.",
+      "evidence_quote": "the \"open door\" of the Berlin-Congo charter closed against them"
+     },
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 0,
+        "confidence": "certain"
+       },
+       {
+        "choice": 0,
+        "confidence": "certain"
+       }
+      ],
+      "panel_choice": 0
+     }
+    },
+    {
+     "archetype": "wh_w109_5B",
+     "topic": "6.8",
+     "skill": "5.B",
+     "stem": "The international campaign that Source B was written to support most directly contributed to which of the following developments?",
+     "options": [
+      {
+       "text": "The collapse of global demand for rubber as manufacturers turned to synthetic substitutes",
+       "why": "Demand for rubber kept growing in the early 1900s, and synthetic rubber had nothing to do with the reform campaign.",
+       "value": null,
+       "label": "unrelated_development"
+      },
+      {
+       "text": "An agreement among the European powers to abandon their claims to colonies across sub-Saharan Africa",
+       "why": "The reform campaign aimed at Leopold's rule in particular. European powers kept their African colonies for decades afterward.",
+       "value": null,
+       "label": "overstated"
+      },
+      {
+       "text": "The Belgian state's takeover of the Congo from Leopold's personal control in 1908",
+       "why": "Pressure from the Congo reform movement led Belgium to annex the Congo Free State in 1908, ending Leopold's personal rule there.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "The immediate independence of the Congo and the withdrawal of all Belgian officials and companies",
+       "why": "The Congo became a Belgian colony in 1908 and did not become independent until 1960.",
+       "value": null,
+       "label": "wrong_period"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is \"The Belgian state's takeover of the Congo from Leopold's personal control in 1908\". Pressure from the Congo reform movement led Belgium to annex the Congo Free State in 1908, ending Leopold's personal rule there.\n\"The collapse of global demand for rubber as manufacturers turned to synthetic substitutes\" is incorrect: Demand for rubber kept growing in the early 1900s, and synthetic rubber had nothing to do with the reform campaign.\n\"An agreement among the European powers to abandon their claims to colonies across sub-Saharan Africa\" is incorrect: The reform campaign aimed at Leopold's rule in particular. European powers kept their African colonies for decades afterward.\n\"The immediate independence of the Congo and the withdrawal of all Belgian officials and companies\" is incorrect: The Congo became a Belgian colony in 1908 and did not become independent until 1960.",
+     "est_seconds": 45,
+     "facts": [
+      "Belgium annexed the Congo Free State as the Belgian Congo in 1908.",
+      "The Congo Reform Association was founded in 1904 to publicize abuses in Leopold's Congo."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "5.B",
+      "key_evidence_in_source": "The context line says Twain wrote to support a campaign against Leopold's rule in the Congo, and that campaign helped bring about the 1908 annexation.",
+      "evidence_quote": ""
+     },
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 2,
+        "confidence": "certain"
+       },
+       {
+        "choice": 2,
+        "confidence": "certain"
+       }
+      ],
+      "panel_choice": 2
+     }
+    }
+   ],
+   "excluded_items": []
+  }
+ }
+]
