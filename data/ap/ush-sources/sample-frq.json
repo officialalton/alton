@@ -1,0 +1,221 @@
+[
+ {
+  "cellId": "ap_us_history-real_saq3_1",
+  "apSubjectCode": "ap_us_history",
+  "kind": "frq_bundle",
+  "calculator": "na",
+  "reserve": false,
+  "wording": "authored_from_real_source",
+  "candidateKey": "ap_us_history-real_saq3_1-k0",
+  "keywordCode": "7.9",
+  "unitCode": "7",
+  "skillPrimary": "3.A",
+  "structure": "frq_multipart",
+  "archetype": "ushfrq_real_saq3_1",
+  "reviewState": "fact_checked_by_independent_model",
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "run": "ush-real-1",
+  "stockKey": "ush-real-1:ap_us_history-real_saq3_1-k0",
+  "stimulusOrigin": "real_historical_source",
+  "sourceRegistryIds": [
+   "img-migrant-mother-1936"
+  ],
+  "payload": {
+   "archetype": "ushfrq_real_saq3_1",
+   "template": "saq3",
+   "topic": "7.9",
+   "extra_topics": [
+    "7.10"
+   ],
+   "skill": "3.A",
+   "representative_skill": "3.A",
+   "calculator": "na",
+   "title": "A Photograph of a Migrant Farm Family, 1936",
+   "set_intro": "Historical source (real document)\n(photograph)\nDestitute pea pickers in California. Mother of seven children. Age thirty-two. Nipomo, California (\"Migrant Mother\")\nDorothea Lange, photographer, U.S. Resettlement Administration (Historical Section; the agency's work was continued by the Farm Security Administration, and LoC catalogs the photograph in the FSA/OWI Collection), 1936 (March). Library of Congress, Prints and Photographs Division (FSA/OWI Collection). Reuse: U.S. government work (photograph made by a federal agency employee) with LoC 'no known restrictions' statement. unmodified except LoC's 1024px reference JPEG; the digital file is made from the retouched negative (thumb erased at lower right), as LoC's item notes state.\n\nThe photograph for this source appears below.",
+   "stimulus": {
+    "kind": "image",
+    "description": "A black-and-white photograph of a worried-looking woman with two children who hide their faces against her shoulders, taken at a migrant pea-pickers' camp in California in 1936.",
+    "data": {
+     "path": "ap-sources/img-migrant-mother-1936/image.jpg",
+     "alt": "A black-and-white photograph of a worried-looking woman with two children who hide their faces against her shoulders, taken at a migrant pea-pickers' camp in California in 1936.",
+     "credit": "Dorothea Lange, Resettlement Administration (LoC FSA/OWI Collection), March 1936. Library of Congress, Prints and Photographs Division (LC-DIG-fsa-8b29516). No known restrictions."
+    }
+   },
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "Briefly describe ONE condition faced by American farm families in the 1930s that is reflected in the photograph and its caption.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "3.A"
+     ],
+     "topic_codes": [
+      "7.9"
+     ],
+     "model_answer": "Many farm families were so poor that they became migrant laborers, traveling from crop to crop for low pay, as the caption's 'destitute pea pickers' indicates.",
+     "rubric_rows": [
+      {
+       "row_id": "a",
+       "points": 1,
+       "criterion": "Describe one condition of 1930s farm families that the photograph or its caption reflects, such as destitution, migrant farm labor, or displacement in search of work.",
+       "required_elements": [
+        "Many farm families were so poor that they became migrant laborers who followed seasonal crops for low pay.",
+        "Farm families lacked money for basic needs; the caption calls the pea pickers 'destitute.'",
+        "Families left their homes in search of work during the Depression."
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "Briefly explain ONE specific historical cause of the hardship reflected in the photograph.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "1.B"
+     ],
+     "topic_codes": [
+      "7.9"
+     ],
+     "model_answer": "The Great Depression collapsed crop prices after 1929, and drought and dust storms on the southern Plains drove many farm families to leave for California.",
+     "rubric_rows": [
+      {
+       "row_id": "b",
+       "points": 1,
+       "criterion": "Explain one specific cause of 1930s farm hardship, such as collapsing crop prices in the Great Depression, the Dust Bowl, or the displacement of tenants and sharecroppers.",
+       "required_elements": [
+        "The Great Depression collapsed crop prices after 1929, leaving farmers unable to pay debts and rent.",
+        "Drought and dust storms of the Dust Bowl in the 1930s ruined farms on the southern Plains and sent families west.",
+        "Tenant farmers and sharecroppers were pushed off the land, especially as landowners cut production and used tractors."
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "Briefly explain ONE specific response by the federal government to the hardship of farm families in the 1930s.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "4.B"
+     ],
+     "topic_codes": [
+      "7.10"
+     ],
+     "model_answer": "The Resettlement Administration, later the Farm Security Administration, lent money to poor farmers and ran camps for migrant farm workers.",
+     "rubric_rows": [
+      {
+       "row_id": "c",
+       "points": 1,
+       "criterion": "Explain one specific federal response to 1930s farm hardship, such as the Agricultural Adjustment Act, the Resettlement Administration or Farm Security Administration, or New Deal relief programs.",
+       "required_elements": [
+        "The Resettlement Administration (1935) and its successor the Farm Security Administration (1937) gave loans to poor farmers and built camps for migrant farm workers.",
+        "The Agricultural Adjustment Act (1933) paid farmers to reduce production in order to raise crop prices.",
+        "Photographers of the Resettlement Administration and Farm Security Administration, including Dorothea Lange, documented rural poverty to build public support for relief."
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ]
+    }
+   ],
+   "reference_text": "Scoring guide (ALTON practice rubric, not official College Board scoring). This question is worth 3 points.\nPart A (0-1): Describe one condition of 1930s farm families that the photograph or its caption reflects, such as destitution, migrant farm labor, or displacement in search of work.\n   - 1: Many farm families were so poor that they became migrant laborers, traveling from crop to crop for low pay, as the caption's 'destitute pea pickers' indicates.\nPart B (0-1): Explain one specific cause of 1930s farm hardship, such as collapsing crop prices in the Great Depression, the Dust Bowl, or the displacement of tenants and sharecroppers.\n   - 1: The Great Depression collapsed crop prices after 1929, and drought and dust storms on the southern Plains drove many farm families to leave for California.\nPart C (0-1): Explain one specific federal response to 1930s farm hardship, such as the Agricultural Adjustment Act, the Resettlement Administration or Farm Security Administration, or New Deal relief programs.\n   - 1: The Resettlement Administration, later the Farm Security Administration, lent money to poor farmers and ran camps for migrant farm workers.",
+   "ush_frq": {
+    "schema_version": "ush-frq-1",
+    "task_type": "saq",
+    "template": "saq3",
+    "period": 7,
+    "periods": [
+     7
+    ],
+    "title": "A Photograph of a Migrant Farm Family, 1936",
+    "prompt": {
+     "scenario": "Use the photograph below to answer parts A, B, and C.",
+     "task": "Using the photograph, answer parts A, B, and C.",
+     "requirements": [
+      "Answer all three parts.",
+      "Each part is worth one point.",
+      "Use specific historical evidence for parts B and C."
+     ],
+     "parts": [
+      {
+       "label": "A",
+       "prompt": "Briefly describe ONE condition faced by American farm families in the 1930s that is reflected in the photograph and its caption.",
+       "points": 1
+      },
+      {
+       "label": "B",
+       "prompt": "Briefly explain ONE specific historical cause of the hardship reflected in the photograph.",
+       "points": 1
+      },
+      {
+       "label": "C",
+       "prompt": "Briefly explain ONE specific response by the federal government to the hardship of farm families in the 1930s.",
+       "points": 1
+      }
+     ]
+    },
+    "sources": [
+     {
+      "id": "A",
+      "kind": "photograph",
+      "title": "Destitute pea pickers in California. Mother of seven children. Age thirty-two. Nipomo, California (\"Migrant Mother\")",
+      "attribution": "Dorothea Lange, photographer, U.S. Resettlement Administration (Historical Section; the agency's work was continued by the Farm Security Administration, and LoC catalogs the photograph in the FSA/OWI Collection), 1936 (March). Library of Congress, Prints and Photographs Division (FSA/OWI Collection). Reuse: U.S. government work (photograph made by a federal agency employee) with LoC 'no known restrictions' statement. unmodified except LoC's 1024px reference JPEG; the digital file is made from the retouched negative (thumb erased at lower right), as LoC's item notes state.",
+      "real_data": true,
+      "source_registry_id": "img-migrant-mother-1936",
+      "source_sha256": "f915fb81b4a33f00b04f6cf2399d19adf6dd76ca041a33b582d5f5878ca89a39"
+     }
+    ]
+   },
+   "design": {
+    "source_fixed_first": true,
+    "evidence_in_source": "caption text 'Destitute pea pickers in California. A 32 year old mother of seven children.' and the visible worn clothing and tent setting"
+   },
+   "verification": {
+    "fact_checker": "claude-fable-5-1",
+    "verdicts": [
+     {
+      "where": "A",
+      "verdict": "sound",
+      "note": "Caption accurately quoted ('destitute pea pickers'); migrant seasonal labor for low pay is a well-documented 1930s condition and is directly supported by the source."
+     },
+     {
+      "where": "B",
+      "verdict": "sound",
+      "note": "Post-1929 collapse of crop prices, Dust Bowl drought/dust storms on the southern Plains, and displacement of tenants/sharecroppers by AAA acreage reduction and tractors are all historically accurate causes. (Thompson herself had come to California in 1926, but the question asks about the hardship generally, not her biography, so no issue.)"
+     },
+     {
+      "where": "C",
+      "verdict": "sound",
+      "note": "Resettlement Administration (1935) succeeded by FSA (1937), rehabilitation loans and migrant labor camps, AAA (1933) production-reduction payments, and RA/FSA documentary photography under the Historical Section are all accurate."
+     }
+    ],
+    "flags": []
+   }
+  }
+ }
+]

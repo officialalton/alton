@@ -1,0 +1,25 @@
+# Destitute pea pickers in California. Mother of seven children. Age thirty-two. Nipomo, California ("Migrant Mother")
+
+- **id**: img-migrant-mother-1936
+- **type**: photograph
+- **title**: Destitute pea pickers in California. Mother of seven children. Age thirty-two. Nipomo, California ("Migrant Mother")
+- **author**: Dorothea Lange, photographer, U.S. Resettlement Administration (Historical Section; the agency's work was continued by the Farm Security Administration, and LoC catalogs the photograph in the FSA/OWI Collection)
+- **year**: 1936 (March)
+- **repository**: Library of Congress, Prints and Photographs Division (FSA/OWI Collection)
+- **url**: https://www.loc.gov/item/2017762891/
+- **call_number**: LC-USF34-009058-C; digital file LC-DIG-fsa-8b29516
+- **rights_statement**: LoC item record rights information: "No known restrictions. For information, see U.S. Farm Security Administration/Office of War Information Black & White Photographs http://www.loc.gov/rr/print/res/071_fsab.html"
+- **reuse_basis**: U.S. government work (photograph made by a federal agency employee) with LoC 'no known restrictions' statement
+- **modified**: unmodified except LoC's 1024px reference JPEG; the digital file is made from the retouched negative (thumb erased at lower right), as LoC's item notes state
+- **retrieved**: 2026-10-15
+- **origin**: real_historical_source
+- **file**: files/img-migrant-mother-1936/image.jpg
+- **public_path**: ap-sources/img-migrant-mother-1936/image.jpg
+- **sha256**: f915fb81b4a33f00b04f6cf2399d19adf6dd76ca041a33b582d5f5878ca89a39
+- **bytes**: 361010
+- **width**: 821
+- **height**: 1024
+- **alt**: A black-and-white photograph of a worried-looking woman with two children who hide their faces against her shoulders, taken at a migrant pea-pickers' camp in California in 1936.
+- **credit**: Dorothea Lange, Resettlement Administration (LoC FSA/OWI Collection), March 1936. Library of Congress, Prints and Photographs Division (LC-DIG-fsa-8b29516). No known restrictions.
+- **notes**: Print title per LoC: 'Destitute pea pickers in California. A 32 year old mother of seven children.' 
+- **file**: files/img-migrant-mother-1936/image.jpg (sha256 f915fb81b4a33f00b04f6cf2399d19adf6dd76ca041a33b582d5f5878ca89a39, 361010 bytes)

@@ -54,6 +54,11 @@ describe("문제 도형 생성기(2026-09-14 문제 템플릿 ③)", () => {
     expect(validateFigureSpec({ type: "image", bucket: "problem-assets", path: "p/x.png" })).toMatchObject({ ok: true });
     expect(validateFigureSpec({ type: "image", bucket: "problem-assets", path: "../x.png" })).toMatchObject({ ok: false });
     expect(renderFigureSvg({ type: "image", bucket: "b", path: "p" })).toBe("");
+    const st = { type: "image", bucket: "static", path: "ap-sources/img-bosses-senate-1889/image.jpg", alt: "x", credit: "LoC" };
+    expect(validateFigureSpec(st)).toMatchObject({ ok: true });
+    expect(validateFigureSpec({ ...st, credit: "" })).toMatchObject({ ok: false });
+    expect(validateFigureSpec({ ...st, path: "other/x.jpg" })).toMatchObject({ ok: false });
+    expect(validateFigureSpec({ ...st, path: "ap-sources/a/../b.jpg" })).toMatchObject({ ok: false });
   });
 
   it("평행선의 각은 교점·사분면으로 놓이고 호가 그려진다; 좌표평면은 축 설명·원점 O 를 그린다", () => {

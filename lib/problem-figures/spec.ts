@@ -54,7 +54,13 @@ export type ImageFigureSpec = {
   alt?: string;
   /** 표시 최대 폭(px). 없으면 본문 폭. */
   width?: number;
+  /** 가시 출처 표기(bucket "static" 필수): 저장소·작성자·연도·재사용 근거를 한 줄로 화면에 보인다. */
+  credit?: string;
 };
+
+/** 정적 실제 자료 이미지(US History 실제 사료, 2026-10-15): bucket "static" 이면 path 는 public/ 아래 ap-sources/<id>/<file> 이고 서명 URL 이 필요 없다. */
+export const STATIC_IMAGE_BUCKET = "static";
+export const STATIC_IMAGE_PATH = /^ap-sources\/[a-z0-9-]+\/[a-z0-9._-]+\.(jpg|jpeg|png|svg)$/;
 
 import type { ParallelTransversalSpec } from "./templates/parallel-transversal";
 import { validateParallelTransversal } from "./templates/parallel-transversal";
@@ -136,6 +142,10 @@ export function validateFigureSpec(input: unknown): { ok: true; spec: FigureSpec
   if (s.type === "image") {
     if (typeof s.bucket !== "string" || typeof s.path !== "string" || !s.path || s.path.includes("..")) {
       return { ok: false, error: "image 는 bucket 과 path 가 필요합니다." };
+    }
+    if (s.bucket === STATIC_IMAGE_BUCKET) {
+      if (!STATIC_IMAGE_PATH.test(s.path)) return { ok: false, error: "static image 의 path 는 ap-sources/<id>/<file>.(jpg|png|svg) 형식이어야 합니다." };
+      if (typeof s.credit !== "string" || !s.credit.trim()) return { ok: false, error: "static image 에는 화면에 보일 출처 표기(credit)가 필요합니다." };
     }
     return { ok: true, spec: s as unknown as ImageFigureSpec };
   }

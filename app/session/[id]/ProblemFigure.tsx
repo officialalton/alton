@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { renderFigureSvg } from "@/lib/problem-figures/render";
-import { validateFigureSpec, type ImageFigureSpec } from "@/lib/problem-figures/spec";
+import { validateFigureSpec, STATIC_IMAGE_BUCKET, type ImageFigureSpec } from "@/lib/problem-figures/spec";
 import { getProblemImageUrlAction } from "./problem-image-actions";
 
 /**
@@ -39,6 +39,22 @@ export default function ProblemFigure({ spec, className, text }: { spec: unknown
 
 /** 올린 그림 파일 — 서명 URL 을 받아 그린다(만료 전 재요청). */
 function FigureImage({ spec, className }: { spec: ImageFigureSpec; className?: string }) {
+  if (spec.bucket === STATIC_IMAGE_BUCKET) return <StaticFigureImage spec={spec} className={className} />;
+  return <SignedFigureImage spec={spec} className={className} />;
+}
+
+/** 정적 실제 자료 이미지: public/ 에서 그대로 서빙하고 출처 표기를 항상 이미지 아래에 보인다. */
+function StaticFigureImage({ spec, className }: { spec: ImageFigureSpec; className?: string }) {
+  return (
+    <figure className={"problem-figure max-w-full m-0 " + (className ?? "")} data-testid="problem-figure">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={"/" + spec.path} alt={spec.alt ?? ""} style={{ maxWidth: spec.width ? `${spec.width}px` : "100%" }} className="max-w-full h-auto" />
+      <figcaption className="mt-1 text-[12px] leading-snug text-grey-500" data-testid="figure-credit">{spec.credit}</figcaption>
+    </figure>
+  );
+}
+
+function SignedFigureImage({ spec, className }: { spec: ImageFigureSpec; className?: string }) {
   const [url, setUrl] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   useEffect(() => {
