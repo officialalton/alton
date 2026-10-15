@@ -1,0 +1,236 @@
+{
+ "run": "lt-real-1",
+ "generatedAt": "2026-10-15",
+ "passed": [
+  {
+   "stockKey": "lt-real-1:ap_english_literature-real-rs1-k0",
+   "replaces": "LT1 p03 (ALTON poetry set, 8 items)"
+  },
+  {
+   "stockKey": "lt-real-1:ap_english_literature-real-rf1-k0",
+   "replaces": "LT1 FRQ Q1 fb1 (ALTON poem)"
+  },
+  {
+   "stockKey": "lt-real-1:ap_english_literature-real-rf2-k0",
+   "replaces": "LT2 FRQ Q2 fa2 (ALTON prose passage)"
+  }
+ ],
+ "unresolved": [],
+ "reverification": {
+  "mcRun": "englit-real-2 (same pipeline re-run, rs1 only, the 8 phase-1 passing items; strict min key score 0.8)",
+  "mc": [
+   {
+    "i": 0,
+    "skill": "6.C",
+    "solverVotes": [
+     0,
+     0
+    ],
+    "key": 0,
+    "adversary": "none",
+    "judge": "key_clearly_better",
+    "panel": {
+     "choice": 0,
+     "agree": true,
+     "also": null
+    },
+    "score": 1,
+    "pass": true,
+    "reasons": []
+   },
+   {
+    "i": 1,
+    "skill": "1.E",
+    "solverVotes": [
+     2,
+     2
+    ],
+    "key": 2,
+    "adversary": "weak",
+    "judge": "key_clearly_better",
+    "panel": null,
+    "score": 0.788,
+    "pass": false,
+    "reasons": []
+   },
+   {
+    "i": 2,
+    "skill": "4.C",
+    "solverVotes": [
+     3,
+     3
+    ],
+    "key": 3,
+    "adversary": "none",
+    "judge": "key_clearly_better",
+    "panel": {
+     "choice": 3,
+     "agree": true,
+     "also": null
+    },
+    "score": 1,
+    "pass": true,
+    "reasons": []
+   },
+   {
+    "i": 3,
+    "skill": "4.D",
+    "solverVotes": [
+     1,
+     1
+    ],
+    "key": 1,
+    "adversary": "none",
+    "judge": "key_clearly_better",
+    "panel": {
+     "choice": 1,
+     "agree": true,
+     "also": null
+    },
+    "score": 1,
+    "pass": true,
+    "reasons": []
+   },
+   {
+    "i": 4,
+    "skill": "3.C",
+    "solverVotes": [
+     2,
+     2
+    ],
+    "key": 2,
+    "adversary": "none",
+    "judge": "key_clearly_better",
+    "panel": {
+     "choice": 2,
+     "agree": true,
+     "also": null
+    },
+    "score": 0.959,
+    "pass": true,
+    "reasons": []
+   },
+   {
+    "i": 5,
+    "skill": "5.B",
+    "solverVotes": [
+     1,
+     1
+    ],
+    "key": 1,
+    "adversary": "weak",
+    "judge": "key_clearly_better",
+    "panel": null,
+    "score": 0.788,
+    "pass": false,
+    "reasons": []
+   },
+   {
+    "i": 6,
+    "skill": "4.A",
+    "solverVotes": [
+     0,
+     0
+    ],
+    "key": 0,
+    "adversary": "none",
+    "judge": "key_clearly_better",
+    "panel": null,
+    "score": 0.959,
+    "pass": false,
+    "reasons": [
+     "solver_reports_second_defensible_option"
+    ]
+   },
+   {
+    "i": 7,
+    "skill": "7.B",
+    "solverVotes": [
+     0,
+     0
+    ],
+    "key": 0,
+    "adversary": "weak",
+    "judge": "key_clearly_better",
+    "panel": {
+     "choice": 0,
+     "agree": true,
+     "also": null
+    },
+    "score": 0.87,
+    "pass": true,
+    "reasons": []
+   }
+  ],
+  "borderline": "re-run items 1 and 5 scored 0.788 (< 0.8) only because both solvers answered 'likely' and the adversary rated 'weak' — all four votes, judge and a Fable panel (run afterwards) agree with the key; kept. Item 6 (4.A) got a second-defensible flag and was replaced.",
+  "replacement": {
+   "run": "englit-real-3",
+   "item": "5.A (line 11, fields)",
+   "gates": "code gates + 2 blind solvers + adversary + judge + Fable panel all agree (score 0.87)"
+  },
+  "frq": {
+   "path": "production processEssay (2 runs, lower kept), rubric englit-v1, leave-one-out anchors",
+   "rows": [
+    {
+     "cell": "ap_english_literature-real-rf1",
+     "tier": "high",
+     "target": 6,
+     "got": 6,
+     "status": "done"
+    },
+    {
+     "cell": "ap_english_literature-real-rf1",
+     "tier": "mid",
+     "target": 4,
+     "got": 4,
+     "status": "done"
+    },
+    {
+     "cell": "ap_english_literature-real-rf1",
+     "tier": "low",
+     "target": 2,
+     "got": 2,
+     "status": "done"
+    },
+    {
+     "cell": "ap_english_literature-real-rf2",
+     "tier": "high",
+     "target": 6,
+     "got": 6,
+     "status": "done"
+    },
+    {
+     "cell": "ap_english_literature-real-rf2",
+     "tier": "mid",
+     "target": 4,
+     "got": 4,
+     "status": "done"
+    },
+    {
+     "cell": "ap_english_literature-real-rf2",
+     "tier": "low",
+     "target": 2,
+     "got": 3,
+     "status": "done"
+    }
+   ],
+   "mae": 0.167,
+   "ordering": [
+    {
+     "cell": "ap_english_literature-real-rf1",
+     "ok": true,
+     "h": 6,
+     "m": 4,
+     "l": 2
+    },
+    {
+     "cell": "ap_english_literature-real-rf2",
+     "ok": true,
+     "h": 6,
+     "m": 4,
+     "l": 3
+    }
+   ]
+  }
+ }
+}

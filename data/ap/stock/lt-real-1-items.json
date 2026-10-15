@@ -1,0 +1,2615 @@
+[
+ {
+  "cellId": "ap_english_literature-real-rs1",
+  "apSubjectCode": "ap_english_literature",
+  "kind": "mc",
+  "calculator": "na",
+  "reserve": false,
+  "wording": "source_first_real_text",
+  "candidateKey": "ap_english_literature-real-rs1-k0",
+  "structure": "shared_stimulus_set",
+  "archetype": "lt_real_poetry_rs1",
+  "pipeline": "real_text_v1",
+  "releaseTier": "candidate",
+  "expertStatus": "unreviewed",
+  "renderVerified": false,
+  "screenVerified": false,
+  "sourceKind": "real_public_domain",
+  "registryId": "dickinson-chariot",
+  "keywordCode": "U5.3",
+  "unitCode": "5",
+  "skillPrimary": "6.C",
+  "reviewState": "verified_by_independent_models",
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "payload": {
+   "archetype": "lt_real_poetry_rs1",
+   "topic": "U5.3",
+   "skill": "6.C",
+   "calculator": "na",
+   "set_intro": "Public-domain source text — Emily Dickinson, The Chariot (\"Because I could not stop for Death\"), Poems by Emily Dickinson, ed. Mabel Loomis Todd and T. W. Higginson (Series One, 1890)\nThe Chariot (\"Because I could not stop for Death\")\nby Emily Dickinson\nThe following poem is by Emily Dickinson (1890).\n\n```passage\nBecause I could not stop for Death,\nHe kindly stopped for me;\nThe carriage held but just ourselves\nAnd Immortality.\n\nWe slowly drove, he knew no haste,\nAnd I had put away\nMy labor, and my leisure too,\nFor his civility.\n\nWe passed the school where children played,\nTheir lessons scarcely done;\nWe passed the fields of gazing grain,\nWe passed the setting sun.\n\nWe paused before a house that seemed\nA swelling of the ground;\nThe roof was scarcely visible,\nThe cornice but a mound.\n\nSince then 't is centuries; but each\nFeels shorter than the day\nI first surmised the horses' heads\nWere toward eternity.\n```",
+   "lt_passage": {
+    "form": "poem",
+    "group": "poetry",
+    "title": "The Chariot (\"Because I could not stop for Death\")",
+    "headnote": "The following poem is by Emily Dickinson (1890).",
+    "stanzas": [
+     [
+      "Because I could not stop for Death,",
+      "He kindly stopped for me;",
+      "The carriage held but just ourselves",
+      "And Immortality."
+     ],
+     [
+      "We slowly drove, he knew no haste,",
+      "And I had put away",
+      "My labor, and my leisure too,",
+      "For his civility."
+     ],
+     [
+      "We passed the school where children played,",
+      "Their lessons scarcely done;",
+      "We passed the fields of gazing grain,",
+      "We passed the setting sun."
+     ],
+     [
+      "We paused before a house that seemed",
+      "A swelling of the ground;",
+      "The roof was scarcely visible,",
+      "The cornice but a mound."
+     ],
+     [
+      "Since then 't is centuries; but each",
+      "Feels shorter than the day",
+      "I first surmised the horses' heads",
+      "Were toward eternity."
+     ]
+    ],
+    "line_count": 20
+   },
+   "provenance": {
+    "kind": "public_domain",
+    "registry_id": "dickinson-chariot",
+    "author": "Emily Dickinson",
+    "translator": null,
+    "year": 1890,
+    "repository": "Project Gutenberg (gutenberg.org)",
+    "url": "https://www.gutenberg.org/ebooks/12242",
+    "reuse_basis": "United States public domain: poem and 1890 edition published before 1929; author died 1886. The repository states the eBook is not protected by U.S. copyright; the text is reproduced without the repository's trademark or license header.",
+    "text_sha256": "fe0a7bffeb75412b66c7b23b8be485c00555b76b0fb28d5eba11b6b8d9a914f7",
+    "excerpt": {
+     "unit": "line",
+     "from": 1,
+     "to": 20,
+     "whole_work": true,
+     "note": "Complete poem (heading 'XXVII. The Chariot.' omitted)."
+    },
+    "modifications": [
+     "Removed heading lines and the section number.",
+     "Line and stanza structure unchanged."
+    ]
+   },
+   "text_map": {
+    "central_idea": "Speaking from centuries after her death, the speaker remembers dying as a polite, unhurried carriage ride with a courteous Death. The ride passes images of a whole life and stops at a grave described as a sunken house. Only at the end does she reveal that she slowly realized the ride led to eternity. The calm, mannerly surface keeps death's finality half-hidden until the last stanza.",
+    "speaker_or_narrator": "A first-person speaker who has died. She looks back from an eternity that has lasted 'centuries' to the day Death called for her. She was Death's passenger and, in effect, the woman he was courting.",
+    "structure_and_shifts": [
+     {
+      "quote": "We passed the school where children played",
+      "from": "Death picking up the speaker, told in the language of a social call",
+      "to": "the journey itself, a run of passing images"
+     },
+     {
+      "quote": "We paused before a house that seemed",
+      "from": "movement past scenes of life",
+      "to": "a stop at a grave described as a house"
+     },
+     {
+      "quote": "Since then 't is centuries; but each",
+      "from": "a past-tense account of the ride",
+      "to": "a view from eternity, looking back over centuries"
+     }
+    ],
+    "devices": [
+     {
+      "device": "personification",
+      "quote": "He kindly stopped for me",
+      "function": "Turns Death into a polite gentleman caller, so a feared event looks like a social courtesy."
+     },
+     {
+      "device": "diction",
+      "quote": "For his civility",
+      "function": "The vocabulary of manners and courtship gives the encounter a decorous, almost romantic feel."
+     },
+     {
+      "device": "anaphora",
+      "quote": "We passed the setting sun",
+      "function": "The repeated 'We passed' strings together stages of life (childhood, ripeness, decline) as scenery going by."
+     },
+     {
+      "device": "symbol",
+      "quote": "We passed the setting sun",
+      "function": "The setting sun stands for the end of life and the coming of death."
+     },
+     {
+      "device": "personification",
+      "quote": "fields of gazing grain",
+      "function": "The grain seems to watch the speaker go by, as if the living world is looking on while she leaves it."
+     },
+     {
+      "device": "metaphor",
+      "quote": "A swelling of the ground",
+      "function": "Presents the grave as a house, a new home, without ever naming it."
+     },
+     {
+      "device": "understatement",
+      "quote": "The cornice but a mound",
+      "function": "Calmly describes the sunken tomb in architectural terms, softening the horror of burial."
+     },
+     {
+      "device": "paradox",
+      "quote": "Feels shorter than the day",
+      "function": "Centuries feel shorter than one day, which shows how much the moment of realization weighed on her."
+     },
+     {
+      "device": "shift_in_tone",
+      "quote": "Were toward eternity",
+      "function": "The calm ride ends with the speaker finally understanding that its destination was eternity."
+     }
+    ],
+    "skills_supported": [
+     {
+      "skill": "6.C",
+      "why_supported": "Death is personified as a kind, courteous caller.",
+      "quote": "He kindly stopped for me"
+     },
+     {
+      "skill": "1.D",
+      "why_supported": "The shared carriage and the 'civility' suggest a courtship-like relationship between the speaker and Death.",
+      "quote": "The carriage held but just ourselves"
+     },
+     {
+      "skill": "1.E",
+      "why_supported": "The speaker who 'could not stop' still gives up both labor and leisure, which shows a complex surrender.",
+      "quote": "My labor, and my leisure too"
+     },
+     {
+      "skill": "4.C",
+      "why_supported": "The diction of the second stanza sets an unhurried tone.",
+      "quote": "We slowly drove, he knew no haste"
+     },
+     {
+      "skill": "3.B",
+      "why_supported": "The three images passed in order follow the stages of a life.",
+      "quote": "We passed the fields of gazing grain"
+     },
+     {
+      "skill": "4.D",
+      "why_supported": "The speaker describes the grave only as a house, so the reader has to infer what she does not say.",
+      "quote": "We paused before a house that seemed"
+     },
+     {
+      "skill": "3.C",
+      "why_supported": "The final stanza changes the time frame and reveals where the ride was going.",
+      "quote": "Since then 't is centuries; but each"
+     },
+     {
+      "skill": "5.B",
+      "why_supported": "'Surmised' suggests a slow, tentative realization.",
+      "quote": "I first surmised the horses' heads"
+     },
+     {
+      "skill": "4.A",
+      "why_supported": "The speaker's position after death is shown by the passing of centuries.",
+      "quote": "Were toward eternity"
+     },
+     {
+      "skill": "7.B",
+      "why_supported": "The poem's calm treatment of death and its delayed sense of finality support thesis-level interpretation.",
+      "quote": "For his civility"
+     }
+    ]
+   },
+   "items": [
+    {
+     "archetype": "lt_poetry_6C",
+     "topic": "U5.3",
+     "skill": "6.C",
+     "cognitive": "explain",
+     "stem": "The personification of Death in (line 2) primarily serves to",
+     "options": [
+      {
+       "text": "present death as a courteous caller, making a feared event seem a polite visit",
+       "why": "'Kindly' and the act of stopping for someone make Death a considerate gentleman, so dying looks like a social courtesy.",
+       "value": null,
+       "label": "correct"
+      },
+      {
+       "text": "show that the speaker literally refused to halt her carriage for a stranger",
+       "why": "'Could not stop' is figurative: she was too busy living. She did not literally refuse anything, and she did not own a carriage.",
+       "value": null,
+       "label": "literal_for_figurative"
+      },
+      {
+       "text": "suggest that all people secretly long for death as a welcome release from their toil",
+       "why": "The poem tells one speaker's experience. It makes no general claim about what all people long for.",
+       "value": null,
+       "label": "too_broad"
+      },
+      {
+       "text": "portray death as a menacing pursuer who seizes the speaker against her will",
+       "why": "Death stops 'kindly' and acts with 'civility'. Nothing about him is threatening.",
+       "value": null,
+       "label": "reversal"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is \"present death as a courteous caller, making a feared event seem a polite visit\". 'Kindly' and the act of stopping for someone make Death a considerate gentleman, so dying looks like a social courtesy.\n\"show that the speaker literally refused to halt her carriage for a stranger\" is incorrect: 'Could not stop' is figurative: she was too busy living. She did not literally refuse anything, and she did not own a carriage.\n\"suggest that all people secretly long for death as a welcome release from their toil\" is incorrect: The poem tells one speaker's experience. It makes no general claim about what all people long for.\n\"portray death as a menacing pursuer who seizes the speaker against her will\" is incorrect: Death stops 'kindly' and acts with 'civility'. Nothing about him is threatening.",
+     "est_seconds": 55,
+     "evidence_quotes": [
+      "He kindly stopped for me"
+     ],
+     "ref_lines": {
+      "r1": {
+       "from": 2,
+       "to": 2
+      }
+     },
+     "devices_used": [
+      "personification"
+     ],
+     "real_text": {
+      "registry_id": "dickinson-chariot",
+      "skill": "6.C",
+      "key_evidence": {
+       "quote": "He kindly stopped for me",
+       "from": 2,
+       "to": 2,
+       "ref": "line 2",
+       "unit": "stanza 1"
+      },
+      "distractor_evidence": [
+       {
+        "index": 1,
+        "label": "literal_for_figurative",
+        "why": "'Could not stop' is figurative: she was too busy living. She did not literally refuse anything, and she did not own a carriage.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "Because I could not stop for Death",
+         "from": 1,
+         "to": 1,
+         "ref": "line 1",
+         "unit": "stanza 1"
+        }
+       },
+       {
+        "index": 2,
+        "label": "too_broad",
+        "why": "The poem tells one speaker's experience. It makes no general claim about what all people long for.",
+        "evidence_kind": "absence",
+        "evidence": null
+       },
+       {
+        "index": 3,
+        "label": "reversal",
+        "why": "Death stops 'kindly' and acts with 'civility'. Nothing about him is threatening.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "For his civility",
+         "from": 8,
+         "to": 8,
+         "ref": "line 8",
+         "unit": "stanza 2"
+        }
+       }
+      ],
+      "verification": {
+       "solvers": [
+        "claude-opus-5-5",
+        "claude-sonnet-5-5"
+       ],
+       "solver_votes": [
+        0,
+        0
+       ],
+       "adversary": "none",
+       "judge": "key_clearly_better",
+       "panel_model": "claude-fable-5-1",
+       "panel_choice": 0,
+       "panel_agree": true,
+       "score": 1,
+       "band": "high",
+       "verified": true
+      }
+     },
+     "key_confidence": {
+      "score": 1,
+      "band": "high",
+      "solver_agreement": 1,
+      "adversary": "none",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 0,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 0,
+        "confidence": "certain"
+       },
+       {
+        "choice": 0,
+        "confidence": "certain"
+       }
+      ]
+     }
+    },
+    {
+     "archetype": "lt_poetry_1E",
+     "topic": "U2.1",
+     "skill": "1.E",
+     "cognitive": "explain",
+     "stem": "Taken together, the speaker's statement that she \"could not stop for Death\" (line 1) and her admission that she \"had put away\" her pursuits (line 7) suggest that she",
+     "options": [
+      {
+       "text": "had long planned for death and so had already ended both work and pleasure",
+       "why": "Reads 'had put away' as advance planning. The opening line shows she was not ready or waiting for death.",
+       "value": null,
+       "label": "lexical_trap"
+      },
+      {
+       "text": "regrets chiefly the loss of her work, which she abandons with deep, bitter reluctance",
+       "why": "She gives up 'leisure too', not just work, and the tone is calm rather than bitter.",
+       "value": null,
+       "label": "wrong_tone"
+      },
+      {
+       "text": "was too absorbed in living to seek death, yet yields to it entirely and willingly",
+       "why": "At first she is too busy to stop. Then she sets aside both labor and leisure 'For his civility', a complete and gracious surrender that sits uneasily with how busy she was.",
+       "value": null,
+       "label": "correct"
+      },
+      {
+       "text": "resists Death's summons throughout and is carried off only by superior force",
+       "why": "She puts her life aside out of courtesy. There is no resistance and no force.",
+       "value": null,
+       "label": "reversal"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is \"was too absorbed in living to seek death, yet yields to it entirely and willingly\". At first she is too busy to stop. Then she sets aside both labor and leisure 'For his civility', a complete and gracious surrender that sits uneasily with how busy she was.\n\"had long planned for death and so had already ended both work and pleasure\" is incorrect: Reads 'had put away' as advance planning. The opening line shows she was not ready or waiting for death.\n\"regrets chiefly the loss of her work, which she abandons with deep, bitter reluctance\" is incorrect: She gives up 'leisure too', not just work, and the tone is calm rather than bitter.\n\"resists Death's summons throughout and is carried off only by superior force\" is incorrect: She puts her life aside out of courtesy. There is no resistance and no force.",
+     "est_seconds": 75,
+     "evidence_quotes": [
+      "Because I could not stop for Death",
+      "My labor, and my leisure too",
+      "For his civility"
+     ],
+     "ref_lines": {
+      "r1": {
+       "from": 1,
+       "to": 1
+      },
+      "r2": {
+       "from": 7,
+       "to": 7
+      }
+     },
+     "devices_used": [
+      "contrast",
+      "diction"
+     ],
+     "real_text": {
+      "registry_id": "dickinson-chariot",
+      "skill": "1.E",
+      "key_evidence": {
+       "quote": "My labor, and my leisure too",
+       "from": 7,
+       "to": 7,
+       "ref": "line 7",
+       "unit": "stanza 2"
+      },
+      "distractor_evidence": [
+       {
+        "index": 0,
+        "label": "lexical_trap",
+        "why": "Reads 'had put away' as advance planning. The opening line shows she was not ready or waiting for death.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "Because I could not stop for Death",
+         "from": 1,
+         "to": 1,
+         "ref": "line 1",
+         "unit": "stanza 1"
+        }
+       },
+       {
+        "index": 1,
+        "label": "wrong_tone",
+        "why": "She gives up 'leisure too', not just work, and the tone is calm rather than bitter.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "We slowly drove, he knew no haste",
+         "from": 5,
+         "to": 5,
+         "ref": "line 5",
+         "unit": "stanza 2"
+        }
+       },
+       {
+        "index": 3,
+        "label": "reversal",
+        "why": "She puts her life aside out of courtesy. There is no resistance and no force.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "For his civility",
+         "from": 8,
+         "to": 8,
+         "ref": "line 8",
+         "unit": "stanza 2"
+        }
+       }
+      ],
+      "verification": {
+       "solvers": [
+        "claude-opus-5-5",
+        "claude-sonnet-5-5"
+       ],
+       "solver_votes": [
+        2,
+        2
+       ],
+       "adversary": "weak",
+       "judge": "key_clearly_better",
+       "panel_model": "claude-fable-5-1",
+       "panel_choice": 2,
+       "panel_agree": true,
+       "score": 0.829,
+       "band": "medium",
+       "verified": true
+      }
+     },
+     "key_confidence": {
+      "score": 0.829,
+      "band": "medium",
+      "solver_agreement": 1,
+      "adversary": "weak",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 2,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 2,
+        "confidence": "certain"
+       },
+       {
+        "choice": 2,
+        "confidence": "likely"
+       }
+      ]
+     }
+    },
+    {
+     "archetype": "lt_poetry_4C",
+     "topic": "U9.2",
+     "skill": "4.C",
+     "cognitive": "identify",
+     "stem": "The tone of the second stanza, particularly in (line 5), is best described as",
+     "options": [
+      {
+       "text": "bitter and resentful",
+       "why": "She speaks of Death's 'civility'. Nothing she says is resentful.",
+       "value": null,
+       "label": "wrong_tone"
+      },
+      {
+       "text": "grieving and somber",
+       "why": "The subject is death, but the speaker does not grieve. She calmly sets her life aside out of courtesy.",
+       "value": null,
+       "label": "partially_right"
+      },
+      {
+       "text": "anxious and hurried",
+       "why": "The stanza says outright that there was no haste.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "calm and unhurried",
+       "why": "'Slowly' and 'knew no haste' create a leisurely, composed pace.",
+       "value": null,
+       "label": "correct"
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is \"calm and unhurried\". 'Slowly' and 'knew no haste' create a leisurely, composed pace.\n\"bitter and resentful\" is incorrect: She speaks of Death's 'civility'. Nothing she says is resentful.\n\"grieving and somber\" is incorrect: The subject is death, but the speaker does not grieve. She calmly sets her life aside out of courtesy.\n\"anxious and hurried\" is incorrect: The stanza says outright that there was no haste.",
+     "est_seconds": 45,
+     "evidence_quotes": [
+      "We slowly drove, he knew no haste"
+     ],
+     "ref_lines": {
+      "r1": {
+       "from": 5,
+       "to": 5
+      }
+     },
+     "devices_used": [
+      "diction"
+     ],
+     "real_text": {
+      "registry_id": "dickinson-chariot",
+      "skill": "4.C",
+      "key_evidence": {
+       "quote": "We slowly drove, he knew no haste",
+       "from": 5,
+       "to": 5,
+       "ref": "line 5",
+       "unit": "stanza 2"
+      },
+      "distractor_evidence": [
+       {
+        "index": 0,
+        "label": "wrong_tone",
+        "why": "She speaks of Death's 'civility'. Nothing she says is resentful.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "For his civility",
+         "from": 8,
+         "to": 8,
+         "ref": "line 8",
+         "unit": "stanza 2"
+        }
+       },
+       {
+        "index": 1,
+        "label": "partially_right",
+        "why": "The subject is death, but the speaker does not grieve. She calmly sets her life aside out of courtesy.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "And I had put away",
+         "from": 6,
+         "to": 6,
+         "ref": "line 6",
+         "unit": "stanza 2"
+        }
+       },
+       {
+        "index": 2,
+        "label": "reversal",
+        "why": "The stanza says outright that there was no haste.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "We slowly drove, he knew no haste",
+         "from": 5,
+         "to": 5,
+         "ref": "line 5",
+         "unit": "stanza 2"
+        }
+       }
+      ],
+      "verification": {
+       "solvers": [
+        "claude-opus-5-5",
+        "claude-sonnet-5-5"
+       ],
+       "solver_votes": [
+        3,
+        3
+       ],
+       "adversary": "none",
+       "judge": "key_clearly_better",
+       "panel_model": "claude-fable-5-1",
+       "panel_choice": 3,
+       "panel_agree": true,
+       "score": 1,
+       "band": "high",
+       "verified": true
+      }
+     },
+     "key_confidence": {
+      "score": 1,
+      "band": "high",
+      "solver_agreement": 1,
+      "adversary": "none",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 3,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 3,
+        "confidence": "certain"
+       },
+       {
+        "choice": 3,
+        "confidence": "certain"
+       }
+      ]
+     }
+    },
+    {
+     "archetype": "lt_poetry_4D",
+     "topic": "U7.1",
+     "skill": "4.D",
+     "cognitive": "evaluate",
+     "stem": "The speaker's description of the house in the fourth stanza (line 13) affects the reader's interpretation chiefly by",
+     "options": [
+      {
+       "text": "revealing that the speaker deliberately lies to conceal her terror of burial",
+       "why": "'Seemed' marks an honest impression, not a lie, and the speaker never shows terror.",
+       "value": null,
+       "label": "unsupported"
+      },
+      {
+       "text": "inviting the reader to recognize a grave the speaker never names directly",
+       "why": "A 'house' that is 'A swelling of the ground', with a roof barely visible and a cornice that is only a mound, is clearly a grave. The speaker keeps calling it a house, so the reader has to supply what she leaves unsaid.",
+       "value": null,
+       "label": "correct"
+      },
+      {
+       "text": "suggesting that the speaker's entire account of the journey is only a dream",
+       "why": "Treats one veiled image as if it cast doubt on the whole poem. The speaker says centuries have really passed since that day.",
+       "value": null,
+       "label": "wrong_scope"
+      },
+      {
+       "text": "establishing that the journey ends at the speaker's new home among the living",
+       "why": "Takes 'house' literally. A dwelling that is only a mound in the ground is a grave, not a home among the living.",
+       "value": null,
+       "label": "literal_for_figurative"
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is \"inviting the reader to recognize a grave the speaker never names directly\". A 'house' that is 'A swelling of the ground', with a roof barely visible and a cornice that is only a mound, is clearly a grave. The speaker keeps calling it a house, so the reader has to supply what she leaves unsaid.\n\"revealing that the speaker deliberately lies to conceal her terror of burial\" is incorrect: 'Seemed' marks an honest impression, not a lie, and the speaker never shows terror.\n\"suggesting that the speaker's entire account of the journey is only a dream\" is incorrect: Treats one veiled image as if it cast doubt on the whole poem. The speaker says centuries have really passed since that day.\n\"establishing that the journey ends at the speaker's new home among the living\" is incorrect: Takes 'house' literally. A dwelling that is only a mound in the ground is a grave, not a home among the living.",
+     "est_seconds": 80,
+     "evidence_quotes": [
+      "A swelling of the ground",
+      "The roof was scarcely visible",
+      "The cornice but a mound"
+     ],
+     "ref_lines": {
+      "r1": {
+       "from": 13,
+       "to": 13
+      }
+     },
+     "devices_used": [
+      "metaphor",
+      "understatement",
+      "imagery"
+     ],
+     "real_text": {
+      "registry_id": "dickinson-chariot",
+      "skill": "4.D",
+      "key_evidence": {
+       "quote": "A swelling of the ground",
+       "from": 14,
+       "to": 14,
+       "ref": "line 14",
+       "unit": "stanza 4"
+      },
+      "distractor_evidence": [
+       {
+        "index": 0,
+        "label": "unsupported",
+        "why": "'Seemed' marks an honest impression, not a lie, and the speaker never shows terror.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "a house that seemed",
+         "from": 13,
+         "to": 13,
+         "ref": "line 13",
+         "unit": "stanza 4"
+        }
+       },
+       {
+        "index": 2,
+        "label": "wrong_scope",
+        "why": "Treats one veiled image as if it cast doubt on the whole poem. The speaker says centuries have really passed since that day.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "Since then 't is centuries; but each",
+         "from": 17,
+         "to": 17,
+         "ref": "line 17",
+         "unit": "stanza 5"
+        }
+       },
+       {
+        "index": 3,
+        "label": "literal_for_figurative",
+        "why": "Takes 'house' literally. A dwelling that is only a mound in the ground is a grave, not a home among the living.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "The cornice but a mound",
+         "from": 16,
+         "to": 16,
+         "ref": "line 16",
+         "unit": "stanza 4"
+        }
+       }
+      ],
+      "verification": {
+       "solvers": [
+        "claude-opus-5-5",
+        "claude-sonnet-5-5"
+       ],
+       "solver_votes": [
+        1,
+        1
+       ],
+       "adversary": "none",
+       "judge": "key_clearly_better",
+       "panel_model": "claude-fable-5-1",
+       "panel_choice": 1,
+       "panel_agree": true,
+       "score": 1,
+       "band": "high",
+       "verified": true
+      }
+     },
+     "key_confidence": {
+      "score": 1,
+      "band": "high",
+      "solver_agreement": 1,
+      "adversary": "none",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 1,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 1,
+        "confidence": "certain"
+       },
+       {
+        "choice": 1,
+        "confidence": "certain"
+       }
+      ]
+     }
+    },
+    {
+     "archetype": "lt_poetry_3C",
+     "topic": "U5.2",
+     "skill": "3.C",
+     "cognitive": "explain",
+     "stem": "The final stanza functions primarily to",
+     "options": [
+      {
+       "text": "describe the horses in detail, adding a last image of the carriage itself",
+       "why": "The horses' heads matter for the direction they point, which is what she realizes. They are not there as description.",
+       "value": null,
+       "label": "wrong_function"
+      },
+      {
+       "text": "express the speaker's anguish at the endless, weary boredom of her centuries dead",
+       "why": "She says the centuries feel short, not weary, and she shows no anguish.",
+       "value": null,
+       "label": "wrong_tone"
+      },
+      {
+       "text": "shift to a vantage beyond death, revealing where the ride was always headed",
+       "why": "'Since then 't is centuries' moves the speaker into eternity, and the stanza reveals that the horses were headed 'toward eternity' all along.",
+       "value": null,
+       "label": "correct"
+      },
+      {
+       "text": "return the speaker to life, ending the journey before it reaches its goal",
+       "why": "The stanza confirms that the ride's destination was eternity. It does not bring her back to life.",
+       "value": null,
+       "label": "reversal"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is \"shift to a vantage beyond death, revealing where the ride was always headed\". 'Since then 't is centuries' moves the speaker into eternity, and the stanza reveals that the horses were headed 'toward eternity' all along.\n\"describe the horses in detail, adding a last image of the carriage itself\" is incorrect: The horses' heads matter for the direction they point, which is what she realizes. They are not there as description.\n\"express the speaker's anguish at the endless, weary boredom of her centuries dead\" is incorrect: She says the centuries feel short, not weary, and she shows no anguish.\n\"return the speaker to life, ending the journey before it reaches its goal\" is incorrect: The stanza confirms that the ride's destination was eternity. It does not bring her back to life.",
+     "est_seconds": 65,
+     "evidence_quotes": [
+      "Since then 't is centuries; but each",
+      "Were toward eternity"
+     ],
+     "ref_lines": {},
+     "devices_used": [
+      "shift_in_tone",
+      "paradox"
+     ],
+     "real_text": {
+      "registry_id": "dickinson-chariot",
+      "skill": "3.C",
+      "key_evidence": {
+       "quote": "Since then 't is centuries; but each",
+       "from": 17,
+       "to": 17,
+       "ref": "line 17",
+       "unit": "stanza 5"
+      },
+      "distractor_evidence": [
+       {
+        "index": 0,
+        "label": "wrong_function",
+        "why": "The horses' heads matter for the direction they point, which is what she realizes. They are not there as description.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "I first surmised the horses' heads",
+         "from": 19,
+         "to": 19,
+         "ref": "line 19",
+         "unit": "stanza 5"
+        }
+       },
+       {
+        "index": 1,
+        "label": "wrong_tone",
+        "why": "She says the centuries feel short, not weary, and she shows no anguish.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "Feels shorter than the day",
+         "from": 18,
+         "to": 18,
+         "ref": "line 18",
+         "unit": "stanza 5"
+        }
+       },
+       {
+        "index": 3,
+        "label": "reversal",
+        "why": "The stanza confirms that the ride's destination was eternity. It does not bring her back to life.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "Were toward eternity",
+         "from": 20,
+         "to": 20,
+         "ref": "line 20",
+         "unit": "stanza 5"
+        }
+       }
+      ],
+      "verification": {
+       "solvers": [
+        "claude-opus-5-5",
+        "claude-sonnet-5-5"
+       ],
+       "solver_votes": [
+        2,
+        2
+       ],
+       "adversary": "none",
+       "judge": "key_clearly_better",
+       "panel_model": "claude-fable-5-1",
+       "panel_choice": 2,
+       "panel_agree": true,
+       "score": 0.959,
+       "band": "high",
+       "verified": true
+      }
+     },
+     "key_confidence": {
+      "score": 0.959,
+      "band": "high",
+      "solver_agreement": 1,
+      "adversary": "none",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 2,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 2,
+        "confidence": "certain"
+       },
+       {
+        "choice": 2,
+        "confidence": "likely"
+       }
+      ]
+     }
+    },
+    {
+     "archetype": "lt_poetry_5B",
+     "topic": "U8.2",
+     "skill": "5.B",
+     "cognitive": "identify",
+     "stem": "In context, the word \"surmised\" (line 19) most strongly suggests that the speaker",
+     "options": [
+      {
+       "text": "was surprised and alarmed when she noticed where the horses were facing",
+       "why": "Confuses 'surmised' with 'surprised'. The ride is calm and shows no alarm.",
+       "value": null,
+       "label": "lexical_trap"
+      },
+      {
+       "text": "grasped the journey's destination only gradually, by inference",
+       "why": "To 'surmise' is to guess from clues. Together with 'first', it shows a slow, tentative dawning of what the ride meant.",
+       "value": null,
+       "label": "correct"
+      },
+      {
+       "text": "doubted that the carriage was moving toward any destination at all",
+       "why": "What she surmised was a definite destination: eternity.",
+       "value": null,
+       "label": "unsupported"
+      },
+      {
+       "text": "knew from the very first moment exactly where Death was taking her",
+       "why": "'Surmised' describes a guess, not certain knowledge from the start.",
+       "value": null,
+       "label": "reversal"
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is \"grasped the journey's destination only gradually, by inference\". To 'surmise' is to guess from clues. Together with 'first', it shows a slow, tentative dawning of what the ride meant.\n\"was surprised and alarmed when she noticed where the horses were facing\" is incorrect: Confuses 'surmised' with 'surprised'. The ride is calm and shows no alarm.\n\"doubted that the carriage was moving toward any destination at all\" is incorrect: What she surmised was a definite destination: eternity.\n\"knew from the very first moment exactly where Death was taking her\" is incorrect: 'Surmised' describes a guess, not certain knowledge from the start.",
+     "est_seconds": 50,
+     "evidence_quotes": [
+      "I first surmised the horses' heads",
+      "Were toward eternity"
+     ],
+     "ref_lines": {
+      "r1": {
+       "from": 19,
+       "to": 19
+      }
+     },
+     "devices_used": [
+      "diction"
+     ],
+     "real_text": {
+      "registry_id": "dickinson-chariot",
+      "skill": "5.B",
+      "key_evidence": {
+       "quote": "I first surmised the horses' heads",
+       "from": 19,
+       "to": 19,
+       "ref": "line 19",
+       "unit": "stanza 5"
+      },
+      "distractor_evidence": [
+       {
+        "index": 0,
+        "label": "lexical_trap",
+        "why": "Confuses 'surmised' with 'surprised'. The ride is calm and shows no alarm.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "We slowly drove, he knew no haste",
+         "from": 5,
+         "to": 5,
+         "ref": "line 5",
+         "unit": "stanza 2"
+        }
+       },
+       {
+        "index": 2,
+        "label": "unsupported",
+        "why": "What she surmised was a definite destination: eternity.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "Were toward eternity",
+         "from": 20,
+         "to": 20,
+         "ref": "line 20",
+         "unit": "stanza 5"
+        }
+       },
+       {
+        "index": 3,
+        "label": "reversal",
+        "why": "'Surmised' describes a guess, not certain knowledge from the start.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "Feels shorter than the day",
+         "from": 18,
+         "to": 18,
+         "ref": "line 18",
+         "unit": "stanza 5"
+        }
+       }
+      ],
+      "verification": {
+       "solvers": [
+        "claude-opus-5-5",
+        "claude-sonnet-5-5"
+       ],
+       "solver_votes": [
+        1,
+        1
+       ],
+       "adversary": "weak",
+       "judge": "key_clearly_better",
+       "panel_model": "claude-fable-5-1",
+       "panel_choice": 1,
+       "panel_agree": true,
+       "score": 0.829,
+       "band": "medium",
+       "verified": true
+      }
+     },
+     "key_confidence": {
+      "score": 0.829,
+      "band": "medium",
+      "solver_agreement": 1,
+      "adversary": "weak",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 1,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 1,
+        "confidence": "likely"
+       },
+       {
+        "choice": 1,
+        "confidence": "certain"
+       }
+      ]
+     }
+    },
+    {
+     "archetype": "lt_poetry_5A",
+     "topic": "U5.1",
+     "skill": "5.A",
+     "cognitive": "explain",
+     "stem": "In context, the phrase describing the fields (line 11) works on two levels at once, suggesting both",
+     "options": [
+      {
+       "text": "a menacing, shadowed landscape and the speaker's growing terror as Death hurries her to the grave",
+       "why": "The ride is unhurried and calm. Death 'knew no haste', and nothing suggests terror.",
+       "value": null,
+       "label": "wrong_tone"
+      },
+      {
+       "text": "a farm the carriage is heading toward and the comfortable new home in which the speaker will settle",
+       "why": "The carriage passes the fields rather than stopping there. The only 'home' it reaches is a grave, described as a mound in the earth.",
+       "value": null,
+       "label": "literal_for_figurative"
+      },
+      {
+       "text": "a literal field of ripened grain and a living world that watches passively as the speaker goes by",
+       "why": "The grain is literally mature, at a late stage of growth. 'Gazing' also makes it an onlooker that stays behind while the carriage carries the speaker past life's scenes.",
+       "value": null,
+       "label": "correct"
+      },
+      {
+       "text": "a harvest the speaker means to gather and the reward she expects for her lifetime of earthly labor",
+       "why": "The speaker has already given up her work. She will gather nothing, and she simply passes the fields.",
+       "value": null,
+       "label": "reversal"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is \"a literal field of ripened grain and a living world that watches passively as the speaker goes by\". The grain is literally mature, at a late stage of growth. 'Gazing' also makes it an onlooker that stays behind while the carriage carries the speaker past life's scenes.\n\"a menacing, shadowed landscape and the speaker's growing terror as Death hurries her to the grave\" is incorrect: The ride is unhurried and calm. Death 'knew no haste', and nothing suggests terror.\n\"a farm the carriage is heading toward and the comfortable new home in which the speaker will settle\" is incorrect: The carriage passes the fields rather than stopping there. The only 'home' it reaches is a grave, described as a mound in the earth.\n\"a harvest the speaker means to gather and the reward she expects for her lifetime of earthly labor\" is incorrect: The speaker has already given up her work. She will gather nothing, and she simply passes the fields.",
+     "est_seconds": 70,
+     "evidence_quotes": [
+      "We passed the fields of gazing grain,"
+     ],
+     "ref_lines": {
+      "r1": {
+       "from": 11,
+       "to": 11
+      }
+     },
+     "devices_used": [
+      "imagery",
+      "diction"
+     ],
+     "real_text": {
+      "registry_id": "dickinson-chariot",
+      "skill": "5.A",
+      "key_evidence": {
+       "quote": "We passed the fields of gazing grain,",
+       "from": 11,
+       "to": 11,
+       "ref": "line 11",
+       "unit": "stanza 3"
+      },
+      "distractor_evidence": [
+       {
+        "index": 0,
+        "label": "wrong_tone",
+        "why": "The ride is unhurried and calm. Death 'knew no haste', and nothing suggests terror.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "We slowly drove, he knew no haste,",
+         "from": 5,
+         "to": 5,
+         "ref": "line 5",
+         "unit": "stanza 2"
+        }
+       },
+       {
+        "index": 1,
+        "label": "literal_for_figurative",
+        "why": "The carriage passes the fields rather than stopping there. The only 'home' it reaches is a grave, described as a mound in the earth.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "A swelling of the ground;",
+         "from": 14,
+         "to": 14,
+         "ref": "line 14",
+         "unit": "stanza 4"
+        }
+       },
+       {
+        "index": 3,
+        "label": "reversal",
+        "why": "The speaker has already given up her work. She will gather nothing, and she simply passes the fields.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "My labor, and my leisure too,",
+         "from": 7,
+         "to": 7,
+         "ref": "line 7",
+         "unit": "stanza 2"
+        }
+       }
+      ],
+      "verification": {
+       "solvers": [
+        "claude-opus-5-5",
+        "claude-sonnet-5-5"
+       ],
+       "solver_votes": [
+        2,
+        2
+       ],
+       "adversary": "weak",
+       "judge": "key_clearly_better",
+       "panel_model": "claude-fable-5-1",
+       "panel_choice": 2,
+       "panel_agree": true,
+       "score": 0.87,
+       "band": "medium",
+       "verified": true
+      },
+      "regenerated_in": "englit-real-3"
+     },
+     "key_confidence": {
+      "score": 0.87,
+      "band": "medium",
+      "solver_agreement": 1,
+      "adversary": "weak",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 2,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 2,
+        "confidence": "certain"
+       },
+       {
+        "choice": 2,
+        "confidence": "certain"
+       }
+      ]
+     }
+    },
+    {
+     "archetype": "lt_poetry_7B",
+     "topic": "U8.3",
+     "skill": "7.B",
+     "cognitive": "evaluate",
+     "stem": "Which of the following statements is the most defensible thesis about the poem as a whole?",
+     "options": [
+      {
+       "text": "Through Death's courtly manners and the unhurried ride, the poem turns dying into a calm passage whose finality emerges only gradually",
+       "why": "Death's 'civility' and the slow pace make dying gentle. The disguised grave and the late 'surmised ... eternity' show that its finality dawns only slowly. The claim is specific and covers the whole poem.",
+       "value": null,
+       "label": "correct"
+      },
+      {
+       "text": "Through images of decay and darkness, the poem depicts death as a cruel abductor who violently tears the speaker away from a life she cherishes",
+       "why": "Death is 'kind' and civil, and the speaker gives up her pursuits willingly. Nothing is violent.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "The third stanza's catalog of school, grain, and sunset is the poem's central achievement, a pastoral portrait of village life",
+       "why": "Focuses on one stanza and misses its symbolism. The setting sun points to death, not to village life.",
+       "value": null,
+       "label": "too_narrow"
+      },
+      {
+       "text": "The poem argues that all human fear of death is irrational, since every life, however busy, ends in the same peaceful eternity",
+       "why": "The poem presents one speaker's experience. It makes no argument about everyone's fears.",
+       "value": null,
+       "label": "too_broad"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is \"Through Death's courtly manners and the unhurried ride, the poem turns dying into a calm passage whose finality emerges only gradually\". Death's 'civility' and the slow pace make dying gentle. The disguised grave and the late 'surmised ... eternity' show that its finality dawns only slowly. The claim is specific and covers the whole poem.\n\"Through images of decay and darkness, the poem depicts death as a cruel abductor who violently tears the speaker away from a life she cherishes\" is incorrect: Death is 'kind' and civil, and the speaker gives up her pursuits willingly. Nothing is violent.\n\"The third stanza's catalog of school, grain, and sunset is the poem's central achievement, a pastoral portrait of village life\" is incorrect: Focuses on one stanza and misses its symbolism. The setting sun points to death, not to village life.\n\"The poem argues that all human fear of death is irrational, since every life, however busy, ends in the same peaceful eternity\" is incorrect: The poem presents one speaker's experience. It makes no argument about everyone's fears.",
+     "est_seconds": 90,
+     "evidence_quotes": [
+      "For his civility",
+      "We slowly drove, he knew no haste",
+      "I first surmised the horses' heads"
+     ],
+     "ref_lines": {},
+     "devices_used": [
+      "personification",
+      "imagery",
+      "shift_in_tone"
+     ],
+     "real_text": {
+      "registry_id": "dickinson-chariot",
+      "skill": "7.B",
+      "key_evidence": {
+       "quote": "I first surmised the horses' heads",
+       "from": 19,
+       "to": 19,
+       "ref": "line 19",
+       "unit": "stanza 5"
+      },
+      "distractor_evidence": [
+       {
+        "index": 1,
+        "label": "reversal",
+        "why": "Death is 'kind' and civil, and the speaker gives up her pursuits willingly. Nothing is violent.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "He kindly stopped for me",
+         "from": 2,
+         "to": 2,
+         "ref": "line 2",
+         "unit": "stanza 1"
+        }
+       },
+       {
+        "index": 2,
+        "label": "too_narrow",
+        "why": "Focuses on one stanza and misses its symbolism. The setting sun points to death, not to village life.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "We passed the setting sun",
+         "from": 12,
+         "to": 12,
+         "ref": "line 12",
+         "unit": "stanza 3"
+        }
+       },
+       {
+        "index": 3,
+        "label": "too_broad",
+        "why": "The poem presents one speaker's experience. It makes no argument about everyone's fears.",
+        "evidence_kind": "absence",
+        "evidence": null
+       }
+      ],
+      "verification": {
+       "solvers": [
+        "claude-opus-5-5",
+        "claude-sonnet-5-5"
+       ],
+       "solver_votes": [
+        0,
+        0
+       ],
+       "adversary": "weak",
+       "judge": "key_clearly_better",
+       "panel_model": "claude-fable-5-1",
+       "panel_choice": 0,
+       "panel_agree": true,
+       "score": 0.87,
+       "band": "medium",
+       "verified": true
+      }
+     },
+     "key_confidence": {
+      "score": 0.87,
+      "band": "medium",
+      "solver_agreement": 1,
+      "adversary": "weak",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 0,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 0,
+        "confidence": "certain"
+       },
+       {
+        "choice": 0,
+        "confidence": "certain"
+       }
+      ]
+     }
+    }
+   ],
+   "excluded_items": [
+    {
+     "index": 1,
+     "skill": "1.D",
+     "stem": "The description of who rides in the carriage ([[r1]]) suggests that the relationship between the speaker and Death is best characterized as",
+     "reasons": [
+      "solver_reports_second_defensible_option"
+     ]
+    },
+    {
+     "index": 4,
+     "skill": "3.B",
+     "stem": "The sequence of images in the third stanza, moving from the school ([[r1]]) to the grain ([[r2]]) to the sun ([[r3]]), primarily serves to",
+     "reasons": [
+      "solver_reports_second_defensible_option"
+     ]
+    },
+    {
+     "index": 6,
+     "skill": "4.A",
+     "stem": "Which of the following best describes the speaker's situation as the poem presents it?",
+     "reasons": [
+      "solver_reports_second_defensible_option (re-verification run englit-real-2)"
+     ]
+    }
+   ],
+   "assignable_size": true,
+   "set_note": "",
+   "layout_status": "not verified identical to the official AP Central preview: layout was checked only against the ALTON PassageBlock at 390px and 1280px (docs/ap/englit-material-audit.md section 6)",
+   "excluded_items_note": "Excluded and never shown: two phase-1 items and one item that failed re-verification (a blind solver reported a second defensible option). See excluded_items."
+  },
+  "difficulty": [
+   {
+    "label": "exam_prep"
+   },
+   {
+    "label": "exam_prep"
+   },
+   {
+    "label": "exam_prep"
+   },
+   {
+    "label": "exam_prep"
+   },
+   {
+    "label": "exam_prep"
+   },
+   {
+    "label": "exam_prep"
+   },
+   {
+    "label": "exam_prep"
+   },
+   {
+    "label": "exam_prep"
+   }
+  ],
+  "stockKey": "lt-real-1:ap_english_literature-real-rs1-k0",
+  "run": "lt-real-1",
+  "validation": "auto_passed",
+  "gateVersion": "lt-real-1-2026-10-15",
+  "gateOverride": "lt-real-1-2026-10-15",
+  "reviewEnvReady": false,
+  "selectedForSample": true,
+  "legacyReserve": false,
+  "family": "ap_english_literature",
+  "itemFamilyId": "fam:lt-real-1:ap_english_literature-real-rs1-k0",
+  "canonicalKey": "lt-real-1:ap_english_literature-real-rs1-k0",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_english_literature:U5.3",
+  "sharedWith": [],
+  "stockCell": "ap_english_literature|U5.3|6.C|shared_stimulus_set|na",
+  "history": [
+   {
+    "run": "lt-real-1",
+    "gateVersion": "lt-real-1-2026-10-15",
+    "outcome": "passed",
+    "reasons": null
+   }
+  ],
+  "stimulusOrigin": "real_public_domain_text",
+  "sourceRegistryIds": [
+   "dickinson-chariot"
+  ],
+  "replaces": "LT1 p03 (ALTON poetry set, 8 items)"
+ },
+ {
+  "cellId": "ap_english_literature-real-rf1",
+  "apSubjectCode": "ap_english_literature",
+  "kind": "frq_bundle",
+  "calculator": "na",
+  "reserve": false,
+  "wording": "source_first_real_text",
+  "candidateKey": "ap_english_literature-real-rf1-k0",
+  "pipeline": "real_text_v1",
+  "releaseTier": "candidate",
+  "expertStatus": "unreviewed",
+  "sourceKind": "real_public_domain",
+  "keywordCode": "U9.4",
+  "unitCode": "9",
+  "skillPrimary": "6.B",
+  "structure": "frq_multipart",
+  "archetype": "ltfrq_real_rf1",
+  "reviewState": "verified_by_independent_models",
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "payload": {
+   "layout_status": "not verified identical to the official AP Central preview: layout was checked only against the ALTON PassageBlock at 390px and 1280px (docs/ap/englit-material-audit.md section 6)",
+   "archetype": "ltfrq_real_rf1",
+   "template": "q1",
+   "topic": "U9.4",
+   "extra_topics": [],
+   "skill": "6.B",
+   "representative_skill": "6.B",
+   "calculator": "na",
+   "title": "Poetry Analysis: God's Grandeur",
+   "set_intro": "Public-domain source text — Gerard Manley Hopkins, God's Grandeur, Poems of Gerard Manley Hopkins, ed. Robert Bridges (1918, first edition)\nGod's Grandeur\nby Gerard Manley Hopkins\nThe following poem is by Gerard Manley Hopkins (1918).\n\n```passage\nTHE world is charged with the grandeur of God.\n   It will flame out, like shining from shook foil;\n   It gathers to a greatness, like the ooze of oil\nCrushed. Why do men then now not reck his rod?\nGenerations have trod, have trod, have trod;\n   And all is seared with trade; bleared, smeared with toil;\n   And wears man's smudge and shares man's smell: the soil\nIs bare now, nor can foot feel, being shod.\n\nAnd for all this, nature is never spent;\n   There lives the dearest freshness deep down things;\nAnd though the last lights off the black West went\n   Oh, morning, at the brown brink eastward, springs--\nBecause the Holy Ghost over the bent\n   World broods with warm breast and with ah! bright wings.\n```",
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "The following poem is \"God's Grandeur\" by Gerard Manley Hopkins (1918). In this poem, the speaker reflects on a world filled with divine energy that generations of human labor and indifference have dulled, and then turns to a freshness that he insists keeps renewing it.\n\nRead the poem closely. Then write an essay in which you analyze how Gerard Manley Hopkins uses poetic elements and techniques to convey the speaker's tension between dismay at how humanity has worn down and ignored a divinely charged world and his confident faith that this divine presence keeps renewing the world anyway.\n\nYour essay should:\n- Respond to the prompt with a thesis that offers a defensible interpretation of the poem.\n- Use specific evidence from the poem, and explain how that evidence supports your line of reasoning.\n- Explain how multiple poetic elements and techniques contribute to the meaning you describe.\n- Write clearly, with appropriate grammar and punctuation.",
+     "points": 6,
+     "response_mode": "essay",
+     "skill_codes": [
+      "6.B"
+     ],
+     "topic_codes": [
+      "U9.4"
+     ],
+     "model_answer": "Hopkins's \"God's Grandeur\" could be read as a simple before-and-after: eight lines of complaint about a ruined world, then six lines of comfort. But the poem doesn't let its comfort erase its grief. The octave's sounds grind and repeat like the labor they describe. The sestet's images place God's renewal \"deep down\" and inside a \"bent\" world. Through both, Hopkins suggests that divine presence does not undo human damage but works beneath and through it. The speaker's faith sounds confident because he has looked hard at the smudge first.\n\nEven the opening praise contains pressure. \"Charged\" suggests electricity, but it can also mean something handed to someone as a duty, as if the world has been entrusted to us. Both similes show grandeur appearing only when something is disturbed. Foil has to be \"shook\" to flash, and oil gathers only after it is \"Crushed,\" a word Hopkins strands at the start of line 4 so it lands with a thud. From the start, then, greatness comes out of force applied to matter. That makes the next question sound almost bewildered: \"Why do men then now not reck his rod?\" The run of stressed monosyllables, \"men then now not,\" stumbles, as if the speaker can't get the question out smoothly.\n\nThe rest of the octave turns sound into argument. \"Generations have trod, have trod, have trod\" repeats the same flat beat three times, so the reader actually feels the monotony of centuries of feet. The internal rhymes \"seared,\" \"bleared,\" \"smeared\" pile up like layers of grime, and in \"man's smudge and shares man's smell\" the m and sh sounds smear into each other. Then Hopkins ends on the shoe: the foot, \"being shod,\" cannot feel the soil. This is the subtlest loss in the poem. People haven't just damaged the earth. They have insulated themselves from it, so the charge of line 1 can't reach them anymore. His dismay is less about pollution than about numbness.\n\nThe sestet begins \"And for all this,\" and the phrase matters. Hopkins doesn't pretend nothing happened; \"for all this\" admits every line before it. Renewal comes in spite of the damage, not by ignoring it. Even \"nature is never spent\" has a double meaning, since \"spent\" means both exhausted and paid out like money, so the language of \"trade\" gets turned against itself. The freshness lives \"deep down things,\" below the surface where the smudge sits, and the soft d's of \"dearest\" and \"deep down\" ease the octave's harsh consonants into something gentler. The dawn image follows the same pattern. \"The last lights off the black West went\" sinks under its heavy monosyllables, but morning \"springs\" at the \"brown brink.\" Brown is not a clean color. The new day rises out of the same soiled earth.\n\nThe final image completes this logic. The Holy Ghost broods over \"the bent / World,\" and \"bent\" works two ways: the world is warped by toil, but it is also curved like an egg beneath a bird. The line break makes us feel the bend before we reach \"World.\" \"Broods\" also means both to sit warmly on eggs and to worry, so even God's care keeps a trace of concern. Then comes \"ah!\" in the middle of the line, as if the speaker suddenly sees the wings and is caught off guard. That small cry shows his faith isn't calm doctrine recited over the problem but something that happens to him as he looks.\n\nThe poem's confidence feels earned because Hopkins never claims the world is clean. The grandeur is crushed out like oil, the morning springs from a brown brink, and the Spirit's wings cover a bent World. For this speaker, renewal is not an escape from human failure but the one thing that goes deeper than it.",
+     "rubric_rows": [
+      {
+       "row_id": "A",
+       "points": 1,
+       "criterion": "A defensible thesis must make a claim about how the poem holds both the speaker's dismay at human degradation and his faith in renewal, or how it moves from one to the other, and should point toward how the poem builds that relationship (for example, the turn after the octave, the heavy sounds of labor against the bright imagery of rebirth, or the bird image of the Spirit brooding). Acceptable theses might argue that the speaker's faith is strengthened by facing the damage, that renewal happens beneath and in spite of human failure, or that the closing reassurance still carries traces of the octave's grief. Theses that only restate the prompt ('the speaker feels both dismay and faith'), only list devices, or describe just one half of the attitude (for example, 'the poem criticizes industry') do not earn the point.",
+       "required_elements": [],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "B",
+       "points": 4,
+       "criterion": "Strong responses track the poem's structure: the opening images of energy ('charged,' 'shining from shook foil,' 'ooze of oil / Crushed'), the abrupt question about why men do not 'reck his rod,' the heavy repetition of 'have trod, have trod, have trod,' the clotted rhymes of 'seared,' 'bleared,' 'smeared,' and the image of the shod foot that can no longer feel the soil. They then show how 'And for all this' changes direction, and analyze the 'dearest freshness deep down things,' the dawn that 'springs' after the 'black West,' and the closing image of the Holy Ghost brooding 'with warm breast and with ah! bright wings.' Commentary at the 4 level explains how specific choices of sound, syntax, and imagery create the speaker's divided attitude. For example, it might show how the harsh, repetitive sounds of the octave act out the deadening of human toil, while the softer sounds and warm images of the sestet act out renewal. A 3 gives clear but less consistent analysis, a 2 mostly summarizes with some loosely connected device-naming, and a 1 offers little relevant evidence.",
+       "required_elements": [],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "C",
+       "points": 1,
+       "criterion": "Sophistication might appear as an argument that the destruction and the renewal are bound together: 'Crushed' grandeur gathers to greatness, the 'bent' World is both damaged and curved under the protecting wings, and 'for all this' admits the damage rather than denying it. It could also take the form of a careful reading of word play ('charged' as both electrically filled and entrusted, 'spent' as both exhausted and used up, 'broods' as both nurturing and brooding over) that complicates the poem's apparent certainty. Another route is to examine how the closing exclamation 'ah!' sounds like a speaker who is surprised into joy, not one who calmly states doctrine. Using elaborate vocabulary or bringing in outside biography does not earn this point by itself.",
+       "required_elements": [],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ]
+    }
+   ],
+   "reference_text": "Reference answer and scoring notes (ALTON-authored; not official College Board scoring). Compare your essay with this guide; no AP score is estimated.\n\nScoring guide (6 points): Thesis 0-1, Evidence and commentary 0-4, Sophistication 0-1.\nThesis (0-1): A defensible thesis must make a claim about how the poem holds both the speaker's dismay at human degradation and his faith in renewal, or how it moves from one to the other, and should point toward how the poem builds that relationship (for example, the turn after the octave, the heavy sounds of labor against the bright imagery of rebirth, or the bird image of the Spirit brooding). Acceptable theses might argue that the speaker's faith is strengthened by facing the damage, that renewal happens beneath and in spite of human failure, or that the closing reassurance still carries traces of the octave's grief. Theses that only restate the prompt ('the speaker feels both dismay and faith'), only list devices, or describe just one half of the attitude (for example, 'the poem criticizes industry') do not earn the point.\nEvidence and commentary (0-4): Strong responses track the poem's structure: the opening images of energy ('charged,' 'shining from shook foil,' 'ooze of oil / Crushed'), the abrupt question about why men do not 'reck his rod,' the heavy repetition of 'have trod, have trod, have trod,' the clotted rhymes of 'seared,' 'bleared,' 'smeared,' and the image of the shod foot that can no longer feel the soil. They then show how 'And for all this' changes direction, and analyze the 'dearest freshness deep down things,' the dawn that 'springs' after the 'black West,' and the closing image of the Holy Ghost brooding 'with warm breast and with ah! bright wings.' Commentary at the 4 level explains how specific choices of sound, syntax, and imagery create the speaker's divided attitude. For example, it might show how the harsh, repetitive sounds of the octave act out the deadening of human toil, while the softer sounds and warm images of the sestet act out renewal. A 3 gives clear but less consistent analysis, a 2 mostly summarizes with some loosely connected device-naming, and a 1 offers little relevant evidence.\nSophistication (0-1): Sophistication might appear as an argument that the destruction and the renewal are bound together: 'Crushed' grandeur gathers to greatness, the 'bent' World is both damaged and curved under the protecting wings, and 'for all this' admits the damage rather than denying it. It could also take the form of a careful reading of word play ('charged' as both electrically filled and entrusted, 'spent' as both exhausted and used up, 'broods' as both nurturing and brooding over) that complicates the poem's apparent certainty. Another route is to examine how the closing exclamation 'ah!' sounds like a speaker who is surprised into joy, not one who calmly states doctrine. Using elaborate vocabulary or bringing in outside biography does not earn this point by itself.\nNote: Do not reward claims about Hopkins's life or religious vocation; the analysis should rest on the text and the headnote.\nNote: Responses may treat the volta at 'And for all this' as a full reversal or as a qualification; either is acceptable if supported.\nNote: Reading the poem only as environmental protest, with no attention to its religious framework, limits the response's credit in Row B and usually rules out Row C.\nNote: Spotting sound devices earns credit only when the response connects the sound to the attitude, for example the heavy, thudding repetition linked to the deadening routine of labor.\n\nSample essay (high; scored 6/6: thesis 1, evidence 4, sophistication 1)\nHopkins's \"God's Grandeur\" could be read as a simple before-and-after: eight lines of complaint about a ruined world, then six lines of comfort. But the poem doesn't let its comfort erase its grief. The octave's sounds grind and repeat like the labor they describe. The sestet's images place God's renewal \"deep down\" and inside a \"bent\" world. Through both, Hopkins suggests that divine presence does not undo human damage but works beneath and through it. The speaker's faith sounds confident because he has looked hard at the smudge first.\n\nEven the opening praise contains pressure. \"Charged\" suggests electricity, but it can also mean something handed to someone as a duty, as if the world has been entrusted to us. Both similes show grandeur appearing only when something is disturbed. Foil has to be \"shook\" to flash, and oil gathers only after it is \"Crushed,\" a word Hopkins strands at the start of line 4 so it lands with a thud. From the start, then, greatness comes out of force applied to matter. That makes the next question sound almost bewildered: \"Why do men then now not reck his rod?\" The run of stressed monosyllables, \"men then now not,\" stumbles, as if the speaker can't get the question out smoothly.\n\nThe rest of the octave turns sound into argument. \"Generations have trod, have trod, have trod\" repeats the same flat beat three times, so the reader actually feels the monotony of centuries of feet. The internal rhymes \"seared,\" \"bleared,\" \"smeared\" pile up like layers of grime, and in \"man's smudge and shares man's smell\" the m and sh sounds smear into each other. Then Hopkins ends on the shoe: the foot, \"being shod,\" cannot feel the soil. This is the subtlest loss in the poem. People haven't just damaged the earth. They have insulated themselves from it, so the charge of line 1 can't reach them anymore. His dismay is less about pollution than about numbness.\n\nThe sestet begins \"And for all this,\" and the phrase matters. Hopkins doesn't pretend nothing happened; \"for all this\" admits every line before it. Renewal comes in spite of the damage, not by ignoring it. Even \"nature is never spent\" has a double meaning, since \"spent\" means both exhausted and paid out like money, so the language of \"trade\" gets turned against itself. The freshness lives \"deep down things,\" below the surface where the smudge sits, and the soft d's of \"dearest\" and \"deep down\" ease the octave's harsh consonants into something gentler. The dawn image follows the same pattern. \"The last lights off the black West went\" sinks under its heavy monosyllables, but morning \"springs\" at the \"brown brink.\" Brown is not a clean color. The new day rises out of the same soiled earth.\n\nThe final image completes this logic. The Holy Ghost broods over \"the bent / World,\" and \"bent\" works two ways: the world is warped by toil, but it is also curved like an egg beneath a bird. The line break makes us feel the bend before we reach \"World.\" \"Broods\" also means both to sit warmly on eggs and to worry, so even God's care keeps a trace of concern. Then comes \"ah!\" in the middle of the line, as if the speaker suddenly sees the wings and is caught off guard. That small cry shows his faith isn't calm doctrine recited over the problem but something that happens to him as he looks.\n\nThe poem's confidence feels earned because Hopkins never claims the world is clean. The grandeur is crushed out like oil, the morning springs from a brown brink, and the Spirit's wings cover a bent World. For this speaker, renewal is not an escape from human failure but the one thing that goes deeper than it.\n- Row A: \"Hopkins suggests that divine presence does not undo human damage but works beneath and through it\" - A defensible thesis that covers both halves of the speaker's attitude and how they relate, so it goes beyond restating the prompt. Together with the previous sentences about octave sound and sestet imagery, it sets up a line of reasoning. Earns the point.\n- Row B: \"The run of stressed monosyllables, \"men then now not,\" stumbles\" - Quotes a specific phrase and explains what the rhythm does, showing the speaker's frustration in the sound of the line instead of just naming a device.\n- Row B: \"repeats the same flat beat three times, so the reader actually feels the monotony of centuries of feet\" - Ties the repetition to the meaning of endless human labor. This is the consistent commentary a 4 requires.\n- Row B: \"His dismay is less about pollution than about numbness.\" - Reads the shod-foot image as a real claim and links it back to 'charged' in line 1, which keeps the line of reasoning going.\n- Row B: \"the soft d's of \"dearest\" and \"deep down\" ease the octave's harsh consonants into something gentler\" - Contrasts sound across the turn. Together with the imagery and line-break analysis, it shows multiple techniques (sound, syntax, imagery, structure) building meaning. Supports a 4.\n- Row C: \"From the start, then, greatness comes out of force applied to matter.\" - Starts a sustained argument that destruction and renewal are bound together. 'Crushed,' 'brown brink,' and 'bent' come back to it later, so it isn't a one-off remark.\n- Row C: \"\"bent\" works two ways: the world is warped by toil, but it is also curved like an egg beneath a bird\" - Close reading of a double meaning complicates the poem's apparent certainty. The essay does the same with 'charged,' 'spent,' and 'broods.'\n- Row C: \"his faith isn't calm doctrine recited over the problem but something that happens to him as he looks\" - Reads the tone of 'ah!' as surprise. This finishes a complex reading kept up across the whole essay and earns the sophistication point.\n\nSample essay (mid; scored 4/6: thesis 1, evidence 3, sophistication 0)\nIn \"God's Grandeur,\" Gerard Manley Hopkins shows a speaker who is upset by what people have done to the world but still sure that God keeps it alive. Hopkins builds this through the structure of the poem, moving from a harsh, heavy first section to a lighter, more hopeful second one, so that the faith in the end answers the dismay at the beginning instead of just ignoring it.\n\nThe poem begins with images of energy. The world \"is charged with the grandeur of God,\" and the speaker compares this to \"shining from shook foil\" and to oil that gathers when it is \"Crushed.\" These similes make God's presence seem like something that bursts out suddenly, and the word \"Crushed\" suggests that even pressure can bring out greatness. But right after this the tone changes with the question \"Why do men then now not reck his rod?\" The question is abrupt and sounds frustrated, as if the speaker cannot understand why people ignore something so obvious.\n\nThe next lines show the dismay most clearly. The repetition of \"have trod, have trod, have trod\" makes the line feel slow and heavy, like feet walking the same ground over and over. The sound of the words also matters. Words like \"seared,\" \"bleared,\" and \"smeared\" all rhyme and are crowded together, so the line feels messy and clogged, just like the world is described as being covered in \"man's smudge\" and \"man's smell.\" Hopkins also says the soil is \"bare\" and that people cannot \"feel, being shod.\" This image shows that people have lost touch with nature because of their shoes, which stand for the way work and trade separate them from the earth. The octave therefore uses sound and repetition to make the reader feel how worn out everything has become.\n\nThe poem turns with \"And for all this, nature is never spent.\" This line admits the damage but refuses to give up on the world. The images become much softer and more hopeful, with \"the dearest freshness deep down things.\" The word \"deep\" suggests that the goodness is hidden below the surface where human toil cannot reach. The example of the morning that \"springs\" after the \"black West\" shows renewal in a natural cycle, because even when the last lights are gone, the sun comes back. The verb \"springs\" is quick and lively, which is a big contrast to the slow \"trod.\"\n\nThe poem ends with the Holy Ghost who \"broods with warm breast and with ah! bright wings.\" This image of a bird protecting its young makes God seem caring and gentle, not just powerful like the \"rod\" earlier. The exclamation \"ah!\" shows the speaker is moved and excited, so the faith feels real and not just stated.\n\nOverall, Hopkins uses sound, repetition, and imagery to show both sides of the speaker's feelings. The harsh sounds of the first half show how humans have damaged the world, and the warmer images of the second half show that God's renewal is stronger.\n- Row A: \"so that the faith in the end answers the dismay at the beginning instead of just ignoring it\" - This gives a defensible thesis. It says the poem moves from heavy dismay to lighter faith and that the faith answers the dismay, so it addresses both halves of the attitude and points to the structure. It stays fairly general, which keeps it from being more precise.\n- Row B: \"The repetition of \"have trod, have trod, have trod\" makes the line feel slow and heavy, like feet walking the same ground over and over.\" - This is specific evidence with a real explanation of how repetition and rhythm create the sense of weary labor. It is one of the stronger moments of commentary.\n- Row B: \"Words like \"seared,\" \"bleared,\" and \"smeared\" all rhyme and are crowded together, so the line feels messy and clogged\" - The essay names a sound technique and explains its effect, which supports the line of reasoning about the octave. It could go further on how the sound enacts deadening.\n- Row B: \"The word \"deep\" suggests that the goodness is hidden below the surface where human toil cannot reach.\" - The quoted detail is relevant and there is some interpretation. The point is brief and the essay does not connect it to the octave's image of the shod foot, so the commentary stays thin.\n- Row C: \"These similes make God's presence seem like something that bursts out suddenly, and the word \"Crushed\" suggests that even pressure can bring out greatness.\" - The essay notices \"Crushed\" but does not develop the idea that damage and renewal are linked. It then drops the idea, so it does not become a sustained complex argument.\n- Row C: \"This image of a bird protecting its young makes God seem caring and gentle, not just powerful like the \"rod\" earlier.\" - This is a worthwhile contrast between the rod and the brooding wings. It appears only in passing and is not developed, and the conclusion repeats earlier points, so the essay shows no sustained sophistication.\n\nSample essay (low; scored 2/6: thesis 0, evidence 2, sophistication 0)\nIn the poem \"God's Grandeur\" Gerard Manley Hopkins talks about God and nature and how people have hurt it. The speaker is sad about what people did but he also has faith. This essay will show how Hopkins uses poetic elements to show this.\n\nIn the first part of the poem the speaker says the world is full of God's grandeur. He uses images like \"shining from shook foil\" and oil being crushed. These images show that God is everywhere in the world. Then he asks why men do not listen to God. He says \"Generations have trod, have trod, have trod\" which means people have been walking on the earth for a long time and have not cared. The poem also says everything is \"seared with trade\" and \"smeared with toil\" which means that factories and work have made the world dirty. This is the first part where the speaker is upset.\n\nIn the second part the poem changes. It says \"nature is never spent\" which means nature does not run out. The speaker says there is a freshness deep down in things. Even when the sun goes down in the west, morning comes back in the east. This shows that the speaker believes in God even though people are bad. At the end the Holy Ghost is like a bird that sits over the world with wings. Hopkins uses repetition and rhyme and imagery in the poem.\n\nIn conclusion, Hopkins shows that people hurt nature but God keeps it going. The poem is about faith and how nature always comes back.\n- Row A: \"The speaker is sad about what people did but he also has faith.\" - This only restates the prompt's two attitudes (dismay and faith). It makes no defensible claim about how the poem builds or resolves the tension, so no thesis point.\n- Row A: \"This essay will show how Hopkins uses poetic elements to show this.\" - Announces the task without naming any specific techniques or an argument. The thesis stays a general statement rather than an interpretation.\n- Row B: \"These images show that God is everywhere in the world.\" - Quotes the foil and oil images but gives only a general paraphrase. It never explains how the imagery of energy and crushing creates meaning, and the ties between destruction and greatness go unnoticed.\n- Row B: \"which means people have been walking on the earth for a long time and have not cared\" - Evidence is specific (the repeated 'have trod'), but the commentary only paraphrases. It does not discuss how the repetition and heavy rhythm act out the deadening of toil, so the technique is quoted without its effect explained.\n- Row B: \"Hopkins uses repetition and rhyme and imagery in the poem.\" - Lists devices with no explanation of how they contribute to meaning. This kind of device-naming stays at the low end of the evidence row.\n- Row B: \"This shows that the speaker believes in God even though people are bad.\" - A broad generalization about people. The essay does not analyze 'And for all this,' the dawn that 'springs,' or the sounds and imagery of the sestet, so the turn is described rather than analyzed.\n- Row C: \"In conclusion, Hopkins shows that people hurt nature but God keeps it going.\" - The conclusion is a plain summary with no complexity, such as how damage and renewal are linked or how the closing 'ah!' complicates the certainty. No sophistication shown.",
+   "lit_frq": {
+    "schema_version": "lit-frq-1",
+    "task_type": "poetry_analysis",
+    "template": "q1",
+    "title": "Poetry Analysis: God's Grandeur",
+    "prompt": {
+     "lead": "The following poem is \"God's Grandeur\" by Gerard Manley Hopkins (1918). In this poem, the speaker reflects on a world filled with divine energy that generations of human labor and indifference have dulled, and then turns to a freshness that he insists keeps renewing it.",
+     "task": "Read the poem closely. Then write an essay in which you analyze how Gerard Manley Hopkins uses poetic elements and techniques to convey the speaker's tension between dismay at how humanity has worn down and ignored a divinely charged world and his confident faith that this divine presence keeps renewing the world anyway.",
+     "requirements": [
+      "Respond to the prompt with a thesis that offers a defensible interpretation of the poem.",
+      "Use specific evidence from the poem, and explain how that evidence supports your line of reasoning.",
+      "Explain how multiple poetic elements and techniques contribute to the meaning you describe.",
+      "Write clearly, with appropriate grammar and punctuation."
+     ]
+    },
+    "passage": {
+     "form": "poem",
+     "title": "God's Grandeur",
+     "attribution": "by Gerard Manley Hopkins",
+     "headnote": "The following poem is by Gerard Manley Hopkins (1918).",
+     "stanzas": [
+      [
+       "THE world is charged with the grandeur of God.",
+       "   It will flame out, like shining from shook foil;",
+       "   It gathers to a greatness, like the ooze of oil",
+       "Crushed. Why do men then now not reck his rod?",
+       "Generations have trod, have trod, have trod;",
+       "   And all is seared with trade; bleared, smeared with toil;",
+       "   And wears man's smudge and shares man's smell: the soil",
+       "Is bare now, nor can foot feel, being shod."
+      ],
+      [
+       "And for all this, nature is never spent;",
+       "   There lives the dearest freshness deep down things;",
+       "And though the last lights off the black West went",
+       "   Oh, morning, at the brown brink eastward, springs--",
+       "Because the Holy Ghost over the bent",
+       "   World broods with warm breast and with ah! bright wings."
+      ]
+     ],
+     "line_count": 14,
+     "provenance": {
+      "kind": "public_domain",
+      "author_alias": "Gerard Manley Hopkins",
+      "year_alias": 1918,
+      "registry_id": "hopkins-grandeur",
+      "source_url": "https://www.gutenberg.org/ebooks/22403"
+     }
+    },
+    "rubric": {
+     "total_points": 6,
+     "rows": [
+      {
+       "row_id": "A",
+       "name": "Thesis",
+       "max": 1,
+       "descriptors": {
+        "0": "No defensible thesis: the response only restates the prompt, summarizes or describes the text, makes a comment that does not answer the prompt, or never states an interpretation that needs to be defended.",
+        "1": "The response states a defensible interpretation that answers the prompt (it may take more than one sentence and may appear anywhere in the essay)."
+       },
+       "task_specific": "A defensible thesis must make a claim about how the poem holds both the speaker's dismay at human degradation and his faith in renewal, or how it moves from one to the other, and should point toward how the poem builds that relationship (for example, the turn after the octave, the heavy sounds of labor against the bright imagery of rebirth, or the bird image of the Spirit brooding). Acceptable theses might argue that the speaker's faith is strengthened by facing the damage, that renewal happens beneath and in spite of human failure, or that the closing reassurance still carries traces of the octave's grief. Theses that only restate the prompt ('the speaker feels both dismay and faith'), only list devices, or describe just one half of the attitude (for example, 'the poem criticizes industry') do not earn the point."
+      },
+      {
+       "row_id": "B",
+       "name": "Evidence and commentary",
+       "max": 4,
+       "descriptors": {
+        "0": "Restates the thesis or the prompt, repeats given information, or offers irrelevant material; no usable evidence or commentary.",
+        "1": "Evidence is mostly general; the response summarizes or paraphrases and does not explain how the evidence supports an argument.",
+        "2": "Some specific, relevant evidence, mixed with generalities. Explains how some evidence relates to the argument, but no line of reasoning is established or it is faulty.",
+        "3": "Specific evidence for the claims in a line of reasoning, and explains how some of that evidence supports the line of reasoning, including how at least one literary element or technique contributes to meaning.",
+        "4": "Specific evidence supports every claim in a line of reasoning, the commentary consistently explains how the evidence supports it, and it explains how multiple literary elements or techniques contribute to meaning. Errors that interfere with communication prevent this level."
+       },
+       "task_specific": "Strong responses track the poem's structure: the opening images of energy ('charged,' 'shining from shook foil,' 'ooze of oil / Crushed'), the abrupt question about why men do not 'reck his rod,' the heavy repetition of 'have trod, have trod, have trod,' the clotted rhymes of 'seared,' 'bleared,' 'smeared,' and the image of the shod foot that can no longer feel the soil. They then show how 'And for all this' changes direction, and analyze the 'dearest freshness deep down things,' the dawn that 'springs' after the 'black West,' and the closing image of the Holy Ghost brooding 'with warm breast and with ah! bright wings.' Commentary at the 4 level explains how specific choices of sound, syntax, and imagery create the speaker's divided attitude. For example, it might show how the harsh, repetitive sounds of the octave act out the deadening of human toil, while the softer sounds and warm images of the sestet act out renewal. A 3 gives clear but less consistent analysis, a 2 mostly summarizes with some loosely connected device-naming, and a 1 offers little relevant evidence."
+      },
+      {
+       "row_id": "C",
+       "name": "Sophistication",
+       "max": 1,
+       "descriptors": {
+        "0": "Does not meet the criteria for the point: contextualizing is limited to sweeping generalities, other readings are only hinted at, complexity is oversimplified, or elaborate language does not advance the argument.",
+        "1": "Shows sophistication of thought or develops a complex literary argument, sustained through the essay (not a phrase): explores tensions or complexities in the text, situates the interpretation in a broader context, accounts for alternative interpretations, or uses a consistently vivid and persuasive style."
+       },
+       "task_specific": "Sophistication might appear as an argument that the destruction and the renewal are bound together: 'Crushed' grandeur gathers to greatness, the 'bent' World is both damaged and curved under the protecting wings, and 'for all this' admits the damage rather than denying it. It could also take the form of a careful reading of word play ('charged' as both electrically filled and entrusted, 'spent' as both exhausted and used up, 'broods' as both nurturing and brooding over) that complicates the poem's apparent certainty. Another route is to examine how the closing exclamation 'ah!' sounds like a speaker who is surprised into joy, not one who calmly states doctrine. Using elaborate vocabulary or bringing in outside biography does not earn this point by itself."
+      }
+     ],
+     "scoring_notes": [
+      "Do not reward claims about Hopkins's life or religious vocation; the analysis should rest on the text and the headnote.",
+      "Responses may treat the volta at 'And for all this' as a full reversal or as a qualification; either is acceptable if supported.",
+      "Reading the poem only as environmental protest, with no attention to its religious framework, limits the response's credit in Row B and usually rules out Row C.",
+      "Spotting sound devices earns credit only when the response connects the sound to the attitude, for example the heavy, thudding repetition linked to the deadening routine of labor."
+     ]
+    },
+    "expected_features": {
+     "defensible_positions": [
+      "The octave's dismay is necessary to the sestet's faith: the speaker presents renewal as all the more remarkable because he has fully registered how badly humanity has damaged and ignored the world.",
+      "Renewal in the poem happens beneath the human damage rather than replacing it; the freshness lives 'deep down things,' so the soiled surface and the divine depth exist together.",
+      "The poem moves from frustrated questioning of human indifference to confident wonder, and the shift in sound from harsh, clotted repetition to open, warm, exclamatory language enacts that movement.",
+      "The poem's faith is qualified rather than triumphant: the world stays 'bent,' and the dawn rises only at a 'brown brink,' which suggests that renewal comforts but does not erase the harm.",
+      "Images of pressure and damage ('Crushed,' 'bent') turn out to be the very conditions under which divine grandeur shows itself, suggesting that the speaker sees God's presence as working through the world's wounds."
+     ],
+     "devices": [
+      {
+       "device": "metaphor",
+       "quote": "THE world is charged with the grandeur of God.",
+       "effect": "Presents divine presence as a stored, almost electric energy filling the world, which raises the question of why humanity fails to notice it."
+      },
+      {
+       "device": "simile",
+       "quote": "It will flame out, like shining from shook foil;",
+       "effect": "Pictures God's grandeur as sudden flashes of brilliance, setting up the bright world against which human dullness is measured."
+      },
+      {
+       "device": "caesura",
+       "quote": "Crushed. Why do men then now not reck his rod?",
+       "effect": "The hard stop after 'Crushed' and the pile of monosyllables in the question sharpen the speaker's frustrated bewilderment at human indifference."
+      },
+      {
+       "device": "repetition",
+       "quote": "Generations have trod, have trod, have trod;",
+       "effect": "The thudding repetition acts out the endless, deadening routine of human labor and shows the speaker's weary dismay."
+      },
+      {
+       "device": "diction",
+       "quote": "And all is seared with trade; bleared, smeared with toil;",
+       "effect": "Internal rhymes on harsh, smudging verbs make human work sound like a stain that dims the world's shine."
+      },
+      {
+       "device": "alliteration",
+       "quote": "And wears man's smudge and shares man's smell: the soil",
+       "effect": "The repeated 'sm' and 'sh' sounds pile up human residue on the earth and stress how fully humanity has marked it."
+      },
+      {
+       "device": "symbol",
+       "quote": "Is bare now, nor can foot feel, being shod.",
+       "effect": "The shod foot stands for humanity cut off from contact with the earth and, by extension, from the divine presence in it."
+      },
+      {
+       "device": "volta",
+       "quote": "And for all this, nature is never spent;",
+       "effect": "Turns from dismay to assurance while 'for all this' admits the damage just described, so the faith that follows meets the harm head-on."
+      },
+      {
+       "device": "imagery",
+       "quote": "There lives the dearest freshness deep down things;",
+       "effect": "Places renewal at a hidden depth beneath the soiled surface, and the soft alliteration gives it an intimate tenderness."
+      },
+      {
+       "device": "juxtaposition",
+       "quote": "Oh, morning, at the brown brink eastward, springs--",
+       "effect": "Dawn bursting up after the 'black West' sets darkness against renewal, and the delayed verb 'springs' imitates the sudden rising of light."
+      },
+      {
+       "device": "enjambment",
+       "quote": "Because the Holy Ghost over the bent",
+       "effect": "The line breaks on 'bent,' holding the image of a damaged, curved world in suspension before the comforting image of protection arrives."
+      },
+      {
+       "device": "metaphor",
+       "quote": "World broods with warm breast and with ah! bright wings.",
+       "effect": "Pictures the Holy Ghost as a bird sheltering and warming the world, and the exclamation 'ah!' shows the speaker caught up in joyful wonder."
+      }
+     ],
+     "common_pitfalls": [
+      "Summarizing the octave and the sestet in turn without analyzing how specific choices create the speaker's attitude.",
+      "Reading the poem only as a modern environmental or anti-industrial protest and ignoring the divine framework that shapes both the dismay and the hope.",
+      "Treating the turn as a simple flip from bad to good without noticing that 'for all this' and the 'bent' world carry the damage into the ending.",
+      "Naming sound devices such as alliteration or internal rhyme without explaining how they shape tone or meaning.",
+      "Building claims on biographical assumptions about the poet rather than on the text and headnote.",
+      "Misreading 'reck his rod' or 'spent' without thinking through their meaning in context, which can lead to confused claims."
+     ]
+    },
+    "samples": [
+     {
+      "tier": "high",
+      "target_total": 6,
+      "essay": "Hopkins's \"God's Grandeur\" could be read as a simple before-and-after: eight lines of complaint about a ruined world, then six lines of comfort. But the poem doesn't let its comfort erase its grief. The octave's sounds grind and repeat like the labor they describe. The sestet's images place God's renewal \"deep down\" and inside a \"bent\" world. Through both, Hopkins suggests that divine presence does not undo human damage but works beneath and through it. The speaker's faith sounds confident because he has looked hard at the smudge first.\n\nEven the opening praise contains pressure. \"Charged\" suggests electricity, but it can also mean something handed to someone as a duty, as if the world has been entrusted to us. Both similes show grandeur appearing only when something is disturbed. Foil has to be \"shook\" to flash, and oil gathers only after it is \"Crushed,\" a word Hopkins strands at the start of line 4 so it lands with a thud. From the start, then, greatness comes out of force applied to matter. That makes the next question sound almost bewildered: \"Why do men then now not reck his rod?\" The run of stressed monosyllables, \"men then now not,\" stumbles, as if the speaker can't get the question out smoothly.\n\nThe rest of the octave turns sound into argument. \"Generations have trod, have trod, have trod\" repeats the same flat beat three times, so the reader actually feels the monotony of centuries of feet. The internal rhymes \"seared,\" \"bleared,\" \"smeared\" pile up like layers of grime, and in \"man's smudge and shares man's smell\" the m and sh sounds smear into each other. Then Hopkins ends on the shoe: the foot, \"being shod,\" cannot feel the soil. This is the subtlest loss in the poem. People haven't just damaged the earth. They have insulated themselves from it, so the charge of line 1 can't reach them anymore. His dismay is less about pollution than about numbness.\n\nThe sestet begins \"And for all this,\" and the phrase matters. Hopkins doesn't pretend nothing happened; \"for all this\" admits every line before it. Renewal comes in spite of the damage, not by ignoring it. Even \"nature is never spent\" has a double meaning, since \"spent\" means both exhausted and paid out like money, so the language of \"trade\" gets turned against itself. The freshness lives \"deep down things,\" below the surface where the smudge sits, and the soft d's of \"dearest\" and \"deep down\" ease the octave's harsh consonants into something gentler. The dawn image follows the same pattern. \"The last lights off the black West went\" sinks under its heavy monosyllables, but morning \"springs\" at the \"brown brink.\" Brown is not a clean color. The new day rises out of the same soiled earth.\n\nThe final image completes this logic. The Holy Ghost broods over \"the bent / World,\" and \"bent\" works two ways: the world is warped by toil, but it is also curved like an egg beneath a bird. The line break makes us feel the bend before we reach \"World.\" \"Broods\" also means both to sit warmly on eggs and to worry, so even God's care keeps a trace of concern. Then comes \"ah!\" in the middle of the line, as if the speaker suddenly sees the wings and is caught off guard. That small cry shows his faith isn't calm doctrine recited over the problem but something that happens to him as he looks.\n\nThe poem's confidence feels earned because Hopkins never claims the world is clean. The grandeur is crushed out like oil, the morning springs from a brown brink, and the Spirit's wings cover a bent World. For this speaker, renewal is not an escape from human failure but the one thing that goes deeper than it.",
+      "word_count": 630,
+      "rubric_scores": {
+       "A": 1,
+       "B": 4,
+       "C": 1,
+       "total": 6
+      },
+      "annotations": [
+       {
+        "quote": "Hopkins suggests that divine presence does not undo human damage but works beneath and through it",
+        "comment": "A defensible thesis that covers both halves of the speaker's attitude and how they relate, so it goes beyond restating the prompt. Together with the previous sentences about octave sound and sestet imagery, it sets up a line of reasoning. Earns the point.",
+        "row_id": "A"
+       },
+       {
+        "quote": "The run of stressed monosyllables, \"men then now not,\" stumbles",
+        "comment": "Quotes a specific phrase and explains what the rhythm does, showing the speaker's frustration in the sound of the line instead of just naming a device.",
+        "row_id": "B"
+       },
+       {
+        "quote": "repeats the same flat beat three times, so the reader actually feels the monotony of centuries of feet",
+        "comment": "Ties the repetition to the meaning of endless human labor. This is the consistent commentary a 4 requires.",
+        "row_id": "B"
+       },
+       {
+        "quote": "His dismay is less about pollution than about numbness.",
+        "comment": "Reads the shod-foot image as a real claim and links it back to 'charged' in line 1, which keeps the line of reasoning going.",
+        "row_id": "B"
+       },
+       {
+        "quote": "the soft d's of \"dearest\" and \"deep down\" ease the octave's harsh consonants into something gentler",
+        "comment": "Contrasts sound across the turn. Together with the imagery and line-break analysis, it shows multiple techniques (sound, syntax, imagery, structure) building meaning. Supports a 4.",
+        "row_id": "B"
+       },
+       {
+        "quote": "From the start, then, greatness comes out of force applied to matter.",
+        "comment": "Starts a sustained argument that destruction and renewal are bound together. 'Crushed,' 'brown brink,' and 'bent' come back to it later, so it isn't a one-off remark.",
+        "row_id": "C"
+       },
+       {
+        "quote": "\"bent\" works two ways: the world is warped by toil, but it is also curved like an egg beneath a bird",
+        "comment": "Close reading of a double meaning complicates the poem's apparent certainty. The essay does the same with 'charged,' 'spent,' and 'broods.'",
+        "row_id": "C"
+       },
+       {
+        "quote": "his faith isn't calm doctrine recited over the problem but something that happens to him as he looks",
+        "comment": "Reads the tone of 'ah!' as surprise. This finishes a complex reading kept up across the whole essay and earns the sophistication point.",
+        "row_id": "C"
+       }
+      ]
+     },
+     {
+      "tier": "mid",
+      "target_total": 4,
+      "essay": "In \"God's Grandeur,\" Gerard Manley Hopkins shows a speaker who is upset by what people have done to the world but still sure that God keeps it alive. Hopkins builds this through the structure of the poem, moving from a harsh, heavy first section to a lighter, more hopeful second one, so that the faith in the end answers the dismay at the beginning instead of just ignoring it.\n\nThe poem begins with images of energy. The world \"is charged with the grandeur of God,\" and the speaker compares this to \"shining from shook foil\" and to oil that gathers when it is \"Crushed.\" These similes make God's presence seem like something that bursts out suddenly, and the word \"Crushed\" suggests that even pressure can bring out greatness. But right after this the tone changes with the question \"Why do men then now not reck his rod?\" The question is abrupt and sounds frustrated, as if the speaker cannot understand why people ignore something so obvious.\n\nThe next lines show the dismay most clearly. The repetition of \"have trod, have trod, have trod\" makes the line feel slow and heavy, like feet walking the same ground over and over. The sound of the words also matters. Words like \"seared,\" \"bleared,\" and \"smeared\" all rhyme and are crowded together, so the line feels messy and clogged, just like the world is described as being covered in \"man's smudge\" and \"man's smell.\" Hopkins also says the soil is \"bare\" and that people cannot \"feel, being shod.\" This image shows that people have lost touch with nature because of their shoes, which stand for the way work and trade separate them from the earth. The octave therefore uses sound and repetition to make the reader feel how worn out everything has become.\n\nThe poem turns with \"And for all this, nature is never spent.\" This line admits the damage but refuses to give up on the world. The images become much softer and more hopeful, with \"the dearest freshness deep down things.\" The word \"deep\" suggests that the goodness is hidden below the surface where human toil cannot reach. The example of the morning that \"springs\" after the \"black West\" shows renewal in a natural cycle, because even when the last lights are gone, the sun comes back. The verb \"springs\" is quick and lively, which is a big contrast to the slow \"trod.\"\n\nThe poem ends with the Holy Ghost who \"broods with warm breast and with ah! bright wings.\" This image of a bird protecting its young makes God seem caring and gentle, not just powerful like the \"rod\" earlier. The exclamation \"ah!\" shows the speaker is moved and excited, so the faith feels real and not just stated.\n\nOverall, Hopkins uses sound, repetition, and imagery to show both sides of the speaker's feelings. The harsh sounds of the first half show how humans have damaged the world, and the warmer images of the second half show that God's renewal is stronger.",
+      "word_count": 501,
+      "rubric_scores": {
+       "A": 1,
+       "B": 3,
+       "C": 0,
+       "total": 4
+      },
+      "annotations": [
+       {
+        "quote": "so that the faith in the end answers the dismay at the beginning instead of just ignoring it",
+        "comment": "This gives a defensible thesis. It says the poem moves from heavy dismay to lighter faith and that the faith answers the dismay, so it addresses both halves of the attitude and points to the structure. It stays fairly general, which keeps it from being more precise.",
+        "row_id": "A"
+       },
+       {
+        "quote": "The repetition of \"have trod, have trod, have trod\" makes the line feel slow and heavy, like feet walking the same ground over and over.",
+        "comment": "This is specific evidence with a real explanation of how repetition and rhythm create the sense of weary labor. It is one of the stronger moments of commentary.",
+        "row_id": "B"
+       },
+       {
+        "quote": "Words like \"seared,\" \"bleared,\" and \"smeared\" all rhyme and are crowded together, so the line feels messy and clogged",
+        "comment": "The essay names a sound technique and explains its effect, which supports the line of reasoning about the octave. It could go further on how the sound enacts deadening.",
+        "row_id": "B"
+       },
+       {
+        "quote": "The word \"deep\" suggests that the goodness is hidden below the surface where human toil cannot reach.",
+        "comment": "The quoted detail is relevant and there is some interpretation. The point is brief and the essay does not connect it to the octave's image of the shod foot, so the commentary stays thin.",
+        "row_id": "B"
+       },
+       {
+        "quote": "These similes make God's presence seem like something that bursts out suddenly, and the word \"Crushed\" suggests that even pressure can bring out greatness.",
+        "comment": "The essay notices \"Crushed\" but does not develop the idea that damage and renewal are linked. It then drops the idea, so it does not become a sustained complex argument.",
+        "row_id": "C"
+       },
+       {
+        "quote": "This image of a bird protecting its young makes God seem caring and gentle, not just powerful like the \"rod\" earlier.",
+        "comment": "This is a worthwhile contrast between the rod and the brooding wings. It appears only in passing and is not developed, and the conclusion repeats earlier points, so the essay shows no sustained sophistication.",
+        "row_id": "C"
+       }
+      ]
+     },
+     {
+      "tier": "low",
+      "target_total": 2,
+      "essay": "In the poem \"God's Grandeur\" Gerard Manley Hopkins talks about God and nature and how people have hurt it. The speaker is sad about what people did but he also has faith. This essay will show how Hopkins uses poetic elements to show this.\n\nIn the first part of the poem the speaker says the world is full of God's grandeur. He uses images like \"shining from shook foil\" and oil being crushed. These images show that God is everywhere in the world. Then he asks why men do not listen to God. He says \"Generations have trod, have trod, have trod\" which means people have been walking on the earth for a long time and have not cared. The poem also says everything is \"seared with trade\" and \"smeared with toil\" which means that factories and work have made the world dirty. This is the first part where the speaker is upset.\n\nIn the second part the poem changes. It says \"nature is never spent\" which means nature does not run out. The speaker says there is a freshness deep down in things. Even when the sun goes down in the west, morning comes back in the east. This shows that the speaker believes in God even though people are bad. At the end the Holy Ghost is like a bird that sits over the world with wings. Hopkins uses repetition and rhyme and imagery in the poem.\n\nIn conclusion, Hopkins shows that people hurt nature but God keeps it going. The poem is about faith and how nature always comes back.",
+      "word_count": 263,
+      "rubric_scores": {
+       "A": 0,
+       "B": 2,
+       "C": 0,
+       "total": 2
+      },
+      "annotations": [
+       {
+        "quote": "The speaker is sad about what people did but he also has faith.",
+        "comment": "This only restates the prompt's two attitudes (dismay and faith). It makes no defensible claim about how the poem builds or resolves the tension, so no thesis point.",
+        "row_id": "A"
+       },
+       {
+        "quote": "This essay will show how Hopkins uses poetic elements to show this.",
+        "comment": "Announces the task without naming any specific techniques or an argument. The thesis stays a general statement rather than an interpretation.",
+        "row_id": "A"
+       },
+       {
+        "quote": "These images show that God is everywhere in the world.",
+        "comment": "Quotes the foil and oil images but gives only a general paraphrase. It never explains how the imagery of energy and crushing creates meaning, and the ties between destruction and greatness go unnoticed.",
+        "row_id": "B"
+       },
+       {
+        "quote": "which means people have been walking on the earth for a long time and have not cared",
+        "comment": "Evidence is specific (the repeated 'have trod'), but the commentary only paraphrases. It does not discuss how the repetition and heavy rhythm act out the deadening of toil, so the technique is quoted without its effect explained.",
+        "row_id": "B"
+       },
+       {
+        "quote": "Hopkins uses repetition and rhyme and imagery in the poem.",
+        "comment": "Lists devices with no explanation of how they contribute to meaning. This kind of device-naming stays at the low end of the evidence row.",
+        "row_id": "B"
+       },
+       {
+        "quote": "This shows that the speaker believes in God even though people are bad.",
+        "comment": "A broad generalization about people. The essay does not analyze 'And for all this,' the dawn that 'springs,' or the sounds and imagery of the sestet, so the turn is described rather than analyzed.",
+        "row_id": "B"
+       },
+       {
+        "quote": "In conclusion, Hopkins shows that people hurt nature but God keeps it going.",
+        "comment": "The conclusion is a plain summary with no complexity, such as how damage and renewal are linked or how the closing 'ah!' complicates the certainty. No sophistication shown.",
+        "row_id": "C"
+       }
+      ]
+     }
+    ],
+    "blueprint": {
+     "central_idea": "The speaker sees a world charged with divine grandeur that human toil and indifference have smeared and deadened, yet he insists that a divine freshness keeps renewing it from beneath. That renewal is pictured as the Holy Ghost brooding over the bent world like a sheltering bird.",
+     "complexity": "The poem's attitude is divided rather than simply sequential. Images of crushing and bending appear in both halves, so damage and grandeur are bound together. The sestet's assurance openly acknowledges the octave's grief ('for all this'). Shifts in sound, from harsh repetition and clotted rhyme to soft alliteration and exclamation, give students concrete evidence for tracing how the speaker's dismay gives way to wonder, or is held inside it."
+    },
+    "provenance": {
+     "kind": "original",
+     "note": "Real public-domain text (registry hopkins-grandeur); rubric guidance and sample essays are ALTON-authored, not official College Board material."
+    }
+   },
+   "real_text": {
+    "registry_id": "hopkins-grandeur",
+    "grader_audit": [
+     {
+      "id": "rf1",
+      "tier": "high",
+      "options": [
+       {
+        "k": 0,
+        "graderTotals": [
+         6,
+         6
+        ],
+        "graderRows": [
+         "1/4/1",
+         "1/4/1"
+        ],
+        "spread": 0,
+        "final": 6
+       },
+       {
+        "k": 1,
+        "graderTotals": [
+         6,
+         6
+        ],
+        "graderRows": [
+         "1/4/1",
+         "1/4/1"
+        ],
+        "spread": 0,
+        "final": 6
+       }
+      ],
+      "chosen": 0
+     },
+     {
+      "id": "rf1",
+      "tier": "mid",
+      "options": [
+       {
+        "k": 0,
+        "graderTotals": [
+         4,
+         4
+        ],
+        "graderRows": [
+         "1/3/0",
+         "1/3/0"
+        ],
+        "spread": 0,
+        "final": 4
+       },
+       {
+        "k": 1,
+        "graderTotals": [
+         4,
+         4
+        ],
+        "graderRows": [
+         "1/3/0",
+         "1/3/0"
+        ],
+        "spread": 0,
+        "final": 4
+       }
+      ],
+      "chosen": 0
+     },
+     {
+      "id": "rf1",
+      "tier": "low",
+      "options": [
+       {
+        "k": 0,
+        "graderTotals": [
+         2,
+         2
+        ],
+        "graderRows": [
+         "0/2/0",
+         "0/2/0"
+        ],
+        "spread": 0,
+        "final": 2
+       },
+       {
+        "k": 1,
+        "graderTotals": [
+         2,
+         2
+        ],
+        "graderRows": [
+         "0/2/0",
+         "0/2/0"
+        ],
+        "spread": 0,
+        "final": 2
+       }
+      ],
+      "chosen": 0
+     }
+    ]
+   }
+  },
+  "registryId": "hopkins-grandeur",
+  "stockKey": "lt-real-1:ap_english_literature-real-rf1-k0",
+  "run": "lt-real-1",
+  "validation": "auto_passed",
+  "gateVersion": "lt-real-1-2026-10-15",
+  "gateOverride": "lt-real-1-2026-10-15",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "selectedForSample": true,
+  "legacyReserve": false,
+  "family": "ap_english_literature",
+  "itemFamilyId": "fam:lt-real-1:ap_english_literature-real-rf1-k0",
+  "canonicalKey": "lt-real-1:ap_english_literature-real-rf1-k0",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_english_literature:U9.4",
+  "sharedWith": [],
+  "stockCell": "ap_english_literature|U9.4|6.B|frq_multipart|na",
+  "history": [
+   {
+    "run": "lt-real-1",
+    "gateVersion": "lt-real-1-2026-10-15",
+    "outcome": "passed",
+    "reasons": null
+   }
+  ],
+  "stimulusOrigin": "real_public_domain_text",
+  "sourceRegistryIds": [
+   "hopkins-grandeur"
+  ],
+  "replaces": "LT1 FRQ Q1 fb1 (ALTON poem)"
+ },
+ {
+  "cellId": "ap_english_literature-real-rf2",
+  "apSubjectCode": "ap_english_literature",
+  "kind": "frq_bundle",
+  "calculator": "na",
+  "reserve": false,
+  "wording": "source_first_real_text",
+  "candidateKey": "ap_english_literature-real-rf2-k0",
+  "pipeline": "real_text_v1",
+  "releaseTier": "candidate",
+  "expertStatus": "unreviewed",
+  "sourceKind": "real_public_domain",
+  "keywordCode": "U9.4",
+  "unitCode": "9",
+  "skillPrimary": "4.C",
+  "structure": "frq_multipart",
+  "archetype": "ltfrq_real_rf2",
+  "reviewState": "verified_by_independent_models",
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "payload": {
+   "layout_status": "not verified identical to the official AP Central preview: layout was checked only against the ALTON PassageBlock at 390px and 1280px (docs/ap/englit-material-audit.md section 6)",
+   "archetype": "ltfrq_real_rf2",
+   "template": "q2",
+   "topic": "U9.4",
+   "extra_topics": [],
+   "skill": "4.C",
+   "representative_skill": "4.C",
+   "calculator": "na",
+   "title": "Prose Fiction Analysis: The Lady with the Dog",
+   "set_intro": "Public-domain source text — Anton Chekhov, The Lady with the Dog (Section I, opening), The Lady with the Dog and Other Stories, trans. Constance Garnett (1917)\nThe Lady with the Dog\nby Anton Chekhov, translated by Constance Garnett\nThe following passage from a short story is by Anton Chekhov, translated by Constance Garnett (1917). This is an excerpt.\n\n```passage\n    IT was said that a new person had appeared on the\nsea-front: a lady with a little dog. Dmitri Dmitritch\nGurov, who had by then been a fortnight at Yalta, and so\nwas fairly at home there, had begun to take an interest\nin new arrivals. Sitting in Verney's pavilion, he saw,\nwalking on the sea-front, a fair-haired young lady of\nmedium height, wearing a béret; a white Pomeranian dog\nwas running behind her.\n\n    And afterwards he met her in the public gardens and\nin the square several times a day. She was walking\nalone, always wearing the same béret, and always with\nthe same white dog; no one knew who she was, and every\none called her simply \"the lady with the dog.\"\n\n    \"If she is here alone without a husband or friends,\nit wouldn't be amiss to make her acquaintance,\" Gurov\nreflected.\n\n    He was under forty, but he had a daughter already\ntwelve years old, and two sons at school. He had been\nmarried young, when he was a student in his second year,\nand by now his wife seemed half as old again as he. She\nwas a tall, erect woman with dark eyebrows, staid and\ndignified, and, as she said of herself, intellectual.\nShe read a great deal, used phonetic spelling, called\nher husband, not Dmitri, but Dimitri, and he secretly\nconsidered her unintelligent, narrow, inelegant, was\nafraid of her, and did not like to be at home. He had\nbegun being unfaithful to her long ago--had been\nunfaithful to her often, and, probably on that account,\nalmost always spoke ill of women, and when they were\ntalked about in his presence, used to call them \"the\nlower race.\"\n\n    It seemed to him that he had been so schooled by\nbitter experience that he might call them what he liked,\nand yet he could not get on for two days together\nwithout \"the lower race.\" In the society of men he was\nbored and not himself, with them he was cold and\nuncommunicative; but when he was in the company of women\nhe felt free, and knew what to say to them and how to\nbehave; and he was at ease with them even when he was\nsilent. In his appearance, in his character, in his\nwhole nature, there was something attractive and elusive\nwhich allured women and disposed them in his favour; he\nknew that, and some force seemed to draw him, too, to\nthem.\n\n    Experience often repeated, truly bitter experience,\nhad taught him long ago that with decent people,\nespecially Moscow people--always slow to move and\nirresolute--every intimacy, which at first so agreeably\ndiversifies life and appears a light and charming\nadventure, inevitably grows into a regular problem of\nextreme intricacy, and in the long run the situation\nbecomes unbearable. But at every fresh meeting with an\ninteresting woman this experience seemed to slip out of\nhis memory, and he was eager for life, and everything\nseemed simple and amusing.\n\n    One evening he was dining in the gardens, and the\nlady in the béret came up slowly to take the next table.\nHer expression, her gait, her dress, and the way she did\nher hair told him that she was a lady, that she was\nmarried, that she was in Yalta for the first time and\nalone, and that she was dull there.... The stories told\nof the immorality in such places as Yalta are to a great\nextent untrue; he despised them, and knew that such\nstories were for the most part made up by persons who\nwould themselves have been glad to sin if they had been\nable; but when the lady sat down at the next table three\npaces from him, he remembered these tales of easy\nconquests, of trips to the mountains, and the tempting\nthought of a swift, fleeting love affair, a romance with\nan unknown woman, whose name he did not know, suddenly\ntook possession of him.\n\n    He beckoned coaxingly to the Pomeranian, and when\nthe dog came up to him he shook his finger at it. The\nPomeranian growled: Gurov shook his finger at it again.\n```",
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "The following passage is from \"The Lady with the Dog,\" a short story by Anton Chekhov (1899 in the original; English translation by Constance Garnett, 1917). In this passage, the narrator introduces Dmitri Dmitritch Gurov, a married man on holiday at Yalta, as he notices a young woman walking alone with a small white dog and begins to imagine an affair with her.\n\nRead the passage closely. Then write an essay in which you analyze how Anton Chekhov uses literary elements and techniques to portray Gurov as a man whose claimed worldly experience and scorn for women are undercut by his dependence on them and his readiness to forget what experience has taught him.\n\nYour essay should:\n- Respond to the prompt with a thesis that offers a defensible interpretation of the passage.\n- Use specific evidence from the passage, and explain how that evidence supports your line of reasoning.\n- Explain how multiple literary elements and techniques contribute to the meaning you describe.\n- Write clearly, with appropriate grammar and punctuation.",
+     "points": 6,
+     "response_mode": "essay",
+     "skill_codes": [
+      "4.C"
+     ],
+     "topic_codes": [
+      "U9.4"
+     ],
+     "model_answer": "Gurov thinks of himself as a man who has seen through women, but Chekhov's narrator stays just close enough to his thoughts to show that the contempt is a cover. Using a close, half-ironic narrative voice, sentences that turn on \"and yet\" and \"but,\" and a final comic moment with a dog, Chekhov presents Gurov's \"bitter experience\" as a lesson he keeps repeating and keeps forgetting. Still, the narrator never simply sneers at him. By paying attention to his loveless marriage and his loneliness among men, Chekhov makes Gurov ridiculous and believable at once.\n\nThe irony starts with how Gurov's opinions are framed. The narrator tells us he called women \"the lower race,\" but the explanation comes from the narrator: he was unfaithful often, and \"probably on that account\" spoke ill of women. That small phrase flips the cause and effect Gurov would claim. He doesn't scorn women because experience taught him to. He scorns them because he has wronged them and needs a reason. The next paragraph opens with \"It seemed to him,\" which marks his sense of being \"schooled\" as his own belief, not a fact the narrator confirms. Then the sentence pivots: he could call them what he liked, \"and yet he could not get on for two days together\" without them. The grammar acts out the contradiction, with the boast in the first half and the dependence in the second.\n\nChekhov does not let the irony go cold, though. The description of Gurov's wife cuts both ways. She is \"intellectual\" only \"as she said of herself,\" which mocks her pretensions, and Gurov privately judges her \"unintelligent, narrow, inelegant.\" But the list ends with \"was afraid of her, and did not like to be at home.\" The last item gives him away, because a man who fears his wife is not the master of women he imagines. The same goes for the line that among men he is \"bored and not himself,\" while with women \"he felt free.\" These details make his chasing less like conquest and more like a hunt for the only place he can be himself, so the reader pities him even while seeing through him.\n\nThe paragraph about experience repeats its lesson in the way it is built. \"Experience often repeated, truly bitter experience\" is insistent, almost exhausted, as if Gurov is trying to drill the lesson into himself. The long sentence that follows moves from \"a light and charming adventure\" to \"a regular problem of extreme intricacy,\" and its piled-up clauses feel as tangled as the affairs it describes. Then one short \"But\" wipes the lesson away: the experience \"seemed to slip out of his memory.\" The verb is passive. Gurov doesn't choose to forget, it just happens to him, the same way \"some force seemed to draw him\" and the thought of an affair \"suddenly took possession of him.\" Chekhov lets Gurov feel like the victim of his own desire, but the repeated \"seemed\" keeps that excuse at a distance. The Yalta gossip works the same way. Gurov despises the storytellers as people \"who would themselves have been glad to sin,\" which describes him exactly, and a sentence later \"he remembered these tales.\" His scorn and his temptation sit inside one sentence.\n\nThe ending shrinks this whole pattern down to a gesture. The woman has no name. She is \"the lady with the dog,\" and Gurov reads her gait and dress as signs that she is married, alone and \"dull,\" confident in his worldly expertise. What attracts him is a woman \"whose name he did not know,\" in other words someone he can't really know. Then he beckons \"coaxingly\" to the Pomeranian, shakes his finger at it, and when \"The Pomeranian growled,\" he does it again. Coaxing, scolding and trying again regardless is exactly how he treats women, and the growl is a warning he ignores just as he ignores his experience. It is funny, but it also suggests that Gurov, for all his claims, has learned nothing at all.",
+     "rubric_rows": [
+      {
+       "row_id": "A",
+       "points": 1,
+       "criterion": "A defensible thesis must make an interpretive claim about how the passage presents Gurov, and it must deal with the tension between what he says or believes (his contempt for women, his bitter experience, his scorn of Yalta gossip) and what he feels or does (needing women, forgetting his lessons, being carried away by the thought of an affair). Acceptable theses might say the narrator ironically exposes Gurov's contempt as a defense that hides his dependence, or that the passage shows a man trapped in a repeating cycle of disillusionment and renewed appetite, or that Chekhov's mix of detachment and sympathy makes Gurov both ridiculous and human. A thesis that only restates the prompt, only lists devices, only summarizes (for example, 'Gurov sees a lady and wants to meet her'), or only judges Gurov morally ('Gurov is a bad husband') without a claim about how he is portrayed does not earn the point.",
+       "required_elements": [],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "B",
+       "points": 4,
+       "criterion": "Strong responses build a line of reasoning from specific textual details. Key evidence includes the reversal in 'he might call them what he liked, and yet he could not get on for two days together without \"the lower race\"'; the repeated 'Experience often repeated, truly bitter experience' set against 'this experience seemed to slip out of his memory'; the movement from 'a light and charming adventure' to 'a regular problem of extreme intricacy'; the ironic 'as she said of herself, intellectual' and the list of 'unintelligent, narrow, inelegant, was afraid of her'; his scorn for gossips 'who would themselves have been glad to sin' just before the same tales tempt him; the passive phrasing 'some force seemed to draw him' and 'suddenly took possession of him'; and the closing moment with the growling Pomeranian. Commentary has to explain how these choices show the gap between Gurov's self-image and his behavior, for example how the narrator's close, half-ironic voice ('It seemed to him') lets readers see past his own rationalizations. A score of 4 needs consistent, specific commentary that ties evidence to the thesis across the passage. A score of 3 explains several pieces of evidence well but unevenly. A score of 2 relies on summary, or names devices with little explanation. A score of 1 or 0 is mostly paraphrase or uses evidence that has nothing to do with the claim.",
+       "required_elements": [],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "C",
+       "points": 1,
+       "criterion": "Sophistication can be earned by tracing the complexity in how the narrator treats Gurov, who is mocked and also understood: the irony exposes his hypocrisy while the attention to his boredom with men and his marriage makes his longing believable. It can also be earned by showing how the passage's own structure acts out the cycle it describes, with a lesson stated and then immediately forgotten. Other routes are reading the final gesture with the dog as a small comic model of his whole approach to women (coaxing, then scolding, then repeating), or noting how the lady is reduced to a label and a set of readable signs ('the lady with the dog', 'whose name he did not know') in a way that shows how Gurov sees women. The point goes to responses that develop one of these readings throughout the essay. Passing mentions or sweeping claims about Chekhov or human nature do not earn it.",
+       "required_elements": [],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ]
+    }
+   ],
+   "reference_text": "Reference answer and scoring notes (ALTON-authored; not official College Board scoring). Compare your essay with this guide; no AP score is estimated.\n\nScoring guide (6 points): Thesis 0-1, Evidence and commentary 0-4, Sophistication 0-1.\nThesis (0-1): A defensible thesis must make an interpretive claim about how the passage presents Gurov, and it must deal with the tension between what he says or believes (his contempt for women, his bitter experience, his scorn of Yalta gossip) and what he feels or does (needing women, forgetting his lessons, being carried away by the thought of an affair). Acceptable theses might say the narrator ironically exposes Gurov's contempt as a defense that hides his dependence, or that the passage shows a man trapped in a repeating cycle of disillusionment and renewed appetite, or that Chekhov's mix of detachment and sympathy makes Gurov both ridiculous and human. A thesis that only restates the prompt, only lists devices, only summarizes (for example, 'Gurov sees a lady and wants to meet her'), or only judges Gurov morally ('Gurov is a bad husband') without a claim about how he is portrayed does not earn the point.\nEvidence and commentary (0-4): Strong responses build a line of reasoning from specific textual details. Key evidence includes the reversal in 'he might call them what he liked, and yet he could not get on for two days together without \"the lower race\"'; the repeated 'Experience often repeated, truly bitter experience' set against 'this experience seemed to slip out of his memory'; the movement from 'a light and charming adventure' to 'a regular problem of extreme intricacy'; the ironic 'as she said of herself, intellectual' and the list of 'unintelligent, narrow, inelegant, was afraid of her'; his scorn for gossips 'who would themselves have been glad to sin' just before the same tales tempt him; the passive phrasing 'some force seemed to draw him' and 'suddenly took possession of him'; and the closing moment with the growling Pomeranian. Commentary has to explain how these choices show the gap between Gurov's self-image and his behavior, for example how the narrator's close, half-ironic voice ('It seemed to him') lets readers see past his own rationalizations. A score of 4 needs consistent, specific commentary that ties evidence to the thesis across the passage. A score of 3 explains several pieces of evidence well but unevenly. A score of 2 relies on summary, or names devices with little explanation. A score of 1 or 0 is mostly paraphrase or uses evidence that has nothing to do with the claim.\nSophistication (0-1): Sophistication can be earned by tracing the complexity in how the narrator treats Gurov, who is mocked and also understood: the irony exposes his hypocrisy while the attention to his boredom with men and his marriage makes his longing believable. It can also be earned by showing how the passage's own structure acts out the cycle it describes, with a lesson stated and then immediately forgotten. Other routes are reading the final gesture with the dog as a small comic model of his whole approach to women (coaxing, then scolding, then repeating), or noting how the lady is reduced to a label and a set of readable signs ('the lady with the dog', 'whose name he did not know') in a way that shows how Gurov sees women. The point goes to responses that develop one of these readings throughout the essay. Passing mentions or sweeping claims about Chekhov or human nature do not earn it.\nNote: Do not require or reward knowledge of later events in the story; responses must be grounded in this passage.\nNote: Moral condemnation of Gurov is acceptable only when it is tied to analysis of how the text presents him; disapproval alone is not analysis.\nNote: Do not credit readings that assume the narrator agrees with calling women 'the lower race' unless the response deals with the irony around that phrase.\nNote: Device identification without explanation of effect should not move a response above 2 in Row B.\nNote: Accept a range of interpretations of the dog ending (comic, symbolic, foreshadowing a pattern) as long as they are supported.\n\nSample essay (high; scored 6/6: thesis 1, evidence 4, sophistication 1)\nGurov thinks of himself as a man who has seen through women, but Chekhov's narrator stays just close enough to his thoughts to show that the contempt is a cover. Using a close, half-ironic narrative voice, sentences that turn on \"and yet\" and \"but,\" and a final comic moment with a dog, Chekhov presents Gurov's \"bitter experience\" as a lesson he keeps repeating and keeps forgetting. Still, the narrator never simply sneers at him. By paying attention to his loveless marriage and his loneliness among men, Chekhov makes Gurov ridiculous and believable at once.\n\nThe irony starts with how Gurov's opinions are framed. The narrator tells us he called women \"the lower race,\" but the explanation comes from the narrator: he was unfaithful often, and \"probably on that account\" spoke ill of women. That small phrase flips the cause and effect Gurov would claim. He doesn't scorn women because experience taught him to. He scorns them because he has wronged them and needs a reason. The next paragraph opens with \"It seemed to him,\" which marks his sense of being \"schooled\" as his own belief, not a fact the narrator confirms. Then the sentence pivots: he could call them what he liked, \"and yet he could not get on for two days together\" without them. The grammar acts out the contradiction, with the boast in the first half and the dependence in the second.\n\nChekhov does not let the irony go cold, though. The description of Gurov's wife cuts both ways. She is \"intellectual\" only \"as she said of herself,\" which mocks her pretensions, and Gurov privately judges her \"unintelligent, narrow, inelegant.\" But the list ends with \"was afraid of her, and did not like to be at home.\" The last item gives him away, because a man who fears his wife is not the master of women he imagines. The same goes for the line that among men he is \"bored and not himself,\" while with women \"he felt free.\" These details make his chasing less like conquest and more like a hunt for the only place he can be himself, so the reader pities him even while seeing through him.\n\nThe paragraph about experience repeats its lesson in the way it is built. \"Experience often repeated, truly bitter experience\" is insistent, almost exhausted, as if Gurov is trying to drill the lesson into himself. The long sentence that follows moves from \"a light and charming adventure\" to \"a regular problem of extreme intricacy,\" and its piled-up clauses feel as tangled as the affairs it describes. Then one short \"But\" wipes the lesson away: the experience \"seemed to slip out of his memory.\" The verb is passive. Gurov doesn't choose to forget, it just happens to him, the same way \"some force seemed to draw him\" and the thought of an affair \"suddenly took possession of him.\" Chekhov lets Gurov feel like the victim of his own desire, but the repeated \"seemed\" keeps that excuse at a distance. The Yalta gossip works the same way. Gurov despises the storytellers as people \"who would themselves have been glad to sin,\" which describes him exactly, and a sentence later \"he remembered these tales.\" His scorn and his temptation sit inside one sentence.\n\nThe ending shrinks this whole pattern down to a gesture. The woman has no name. She is \"the lady with the dog,\" and Gurov reads her gait and dress as signs that she is married, alone and \"dull,\" confident in his worldly expertise. What attracts him is a woman \"whose name he did not know,\" in other words someone he can't really know. Then he beckons \"coaxingly\" to the Pomeranian, shakes his finger at it, and when \"The Pomeranian growled,\" he does it again. Coaxing, scolding and trying again regardless is exactly how he treats women, and the growl is a warning he ignores just as he ignores his experience. It is funny, but it also suggests that Gurov, for all his claims, has learned nothing at all.\n- Row A: \"Chekhov presents Gurov's \"bitter experience\" as a lesson he keeps repeating and keeps forgetting\" - This is a defensible interpretive claim that deals directly with the tension the prompt asks about, between what Gurov believes and what he does. It also lays out a line of reasoning: narrative voice, sentence structure, the dog scene.\n- Row A: \"Chekhov makes Gurov ridiculous and believable at once\" - This extends the thesis past pure irony and sets up the sophisticated reading the essay develops later.\n- Row B: \"That small phrase flips the cause and effect Gurov would claim.\" - The commentary explains how one precise detail (\"probably on that account\") undercuts Gurov's version of himself. This is analysis, not paraphrase.\n- Row B: \"The grammar acts out the contradiction, with the boast in the first half and the dependence in the second.\" - This ties a syntactic technique to meaning and links it back to the thesis.\n- Row B: \"The last item gives him away, because a man who fears his wife is not the master of women he imagines.\" - Close reading of how the list is ordered, with clear reasoning about how it shows the gap between Gurov's self-image and the truth.\n- Row B: \"The verb is passive. Gurov doesn't choose to forget, it just happens to him\" - This connects several pieces of evidence (passive phrasing, \"seemed\") into one technique and explains what it does. Multiple techniques handled consistently support a 4. The small comma splice does not get in the way of meaning.\n- Row C: \"These details make his chasing less like conquest and more like a hunt for the only place he can be himself, so the reader pities him even while seeing through him.\" - This develops the tension between mockery and sympathy in how the narrator treats Gurov. The essay sets it up in the introduction and comes back to it, so it is more than a passing remark.\n- Row C: \"The paragraph about experience repeats its lesson in the way it is built.\" - Shows how the passage's structure performs the cycle it describes, a lesson stated and then wiped out. This is another sustained route to sophistication.\n- Row C: \"Coaxing, scolding and trying again regardless is exactly how he treats women\" - Reads the final gesture as a comic model of Gurov's whole pattern and pairs it with the point about the lady being reduced to a label. This finishes a complex argument instead of just summarizing.\n\nSample essay (mid; scored 4/6: thesis 1, evidence 3, sophistication 0)\nIn this passage from \"The Lady with the Dog,\" Chekhov shows Gurov as a man who believes he is experienced and above women, but whose behavior proves the opposite. Through irony and a narrator who stays close to Gurov's thoughts while still pointing out his contradictions, Chekhov makes Gurov both a little ridiculous and believable, a man who says one thing and does another.\n\nThe clearest contradiction is in how Gurov talks about women. The narrator says he \"almost always spoke ill of women\" and called them \"the lower race.\" This sounds like contempt, but the next paragraph undercuts it. It says \"It seemed to him that he had been so schooled by bitter experience that he might call them what he liked.\" The phrase \"It seemed to him\" shows that this is only Gurov's opinion of himself, and the narrator does not agree with it. Then comes the reversal, \"yet he could not get on for two days together\" without them. The word \"yet\" turns the sentence around, so the reader sees that the name-calling is not real superiority. He actually needs women, since with men he is \"bored and not himself\" but with women he feels \"free.\" So his scorn seems more like a cover for dependence.\n\nChekhov also uses repetition to show how Gurov forgets what he has learned. The narrator writes \"Experience often repeated, truly bitter experience,\" which makes the lesson sound heavy and serious. The lesson is that affairs start as \"a light and charming adventure\" and end as \"a regular problem of extreme intricacy.\" The contrast between \"light and charming\" and \"extreme intricacy\" shows how much trouble he knows is coming. But then \"this experience seemed to slip out of his memory,\" and \"everything seemed simple and amusing.\" The structure of the passage acts this out, because the lesson is stated and then forgotten right away, just as Gurov forgets it with every new woman.\n\nThe description of his wife adds to this. She is described as \"as she said of herself, intellectual,\" which is ironic because it is her own claim, and the details that follow, like phonetic spelling, make it seem silly. Gurov thinks she is \"unintelligent, narrow, inelegant\" and he is \"afraid of her.\" The list shows his dislike, but being afraid shows he is not as strong as he pretends. This helps explain why he looks for other women, and it makes the reader understand him a bit.\n\nFinally, the passage ends with Gurov teasing the dog. He first calls the gossip about Yalta untrue and says people who spread it \"would themselves have been glad to sin,\" but then he remembers the same tales and the thought of an affair \"suddenly took possession of him.\" The passive wording makes it seem like he has no control. The ending, where he shakes his finger at the growling Pomeranian twice, is a small version of the whole thing, since he does it again even after the dog growls.\n\nOverall, Chekhov uses irony, repetition, and the narrator's tone to show that Gurov's experience and scorn are not as strong as he thinks, and that his desire wins over what he knows.\n- Row A: \"shows Gurov as a man who believes he is experienced and above women, but whose behavior proves the opposite\" - Defensible thesis that addresses the gap between Gurov's self-image and his actions, as the task requires. It is fairly general and does not yet state a distinctive claim about the narrator's attitude, but it earns the point.\n- Row B: \"The phrase \"It seemed to him\" shows that this is only Gurov's opinion of himself\" - Good specific evidence with commentary on narrative voice and how it exposes his self-deception. This is one of the stronger moves in the essay.\n- Row B: \"The word \"yet\" turns the sentence around\" - Identifies the key reversal and explains how it undercuts his scorn, linking a small technical choice to the argument. The explanation stays fairly brief.\n- Row B: \"The contrast between \"light and charming\" and \"extreme intricacy\" shows how much trouble he knows is coming.\" - Uses the contrast of diction accurately, but the commentary is thin and mostly restates the contrast rather than exploring its effect.\n- Row C: \"The structure of the passage acts this out, because the lesson is stated and then forgotten right away\" - Notices that structure mirrors the cycle, which is a promising insight toward sophistication. It is a single observation and is not developed or sustained through the essay.\n- Row B: \"The list shows his dislike, but being afraid shows he is not as strong as he pretends.\" - Commentary on the wife passage is present but general. It does not fully explain the irony of 'intellectual' or tie the wife to the larger pattern beyond a short remark.\n- Row C: \"is a small version of the whole thing, since he does it again even after the dog growls\" - Reads the dog scene as a model of his behavior, a good idea, but the commentary is brief and ends the essay without developing the reading. The conclusion mostly repeats the thesis, so it does not reach sustained sophistication.\n\nSample essay (low; scored 2/6: thesis 0, evidence 2, sophistication 0)\nIn the passage from \"The Lady with the Dog,\" Chekhov shows Gurov as a man who has a lot of experience with women and who is also married. He sees a lady with a dog in Yalta and starts thinking about having an affair with her. This shows that Gurov is not a very good husband and that he does not respect women.\n\nFirst, Chekhov tells us about Gurov's family. He has a daughter who is twelve and two sons at school. He married young and his wife seems older than him. She is described as \"staid and dignified\" and she says she is intellectual. Gurov does not like her and he does not like to be at home. This is why he has been unfaithful to her many times. The narrator also says he calls women \"the lower race\" which is a bad thing to say about women.\n\nNext, the passage says that Gurov has had \"bitter experience\" with women. He thinks that affairs always become a problem in the end. But when he meets a new woman he forgets all of this and thinks everything is simple and amusing. So he does not really learn from what happened before. The narrator says it \"seemed to slip out of his memory\" which shows that he forgets.\n\nThen the lady comes to sit at the next table at dinner. Gurov thinks about the stories of Yalta and gets tempted. At the end he calls the dog over and shakes his finger at it and the dog growls. This is a small moment but it shows he is trying to get close to the lady.\n\nIn conclusion, Chekhov uses details about Gurov's marriage and his thoughts to show that he says one thing about women but does another. He is a man who is unfaithful and forgets his lessons, which makes him seem like a bad person.\n- Row A: \"Chekhov shows Gurov as a man who has a lot of experience with women and who is also married.\" - The thesis only restates the situation and the prompt's wording. It makes no claim about how Gurov is portrayed or about the tension between what he says and what he does, so it earns no thesis credit.\n- Row A: \"This shows that Gurov is not a very good husband and that he does not respect women.\" - This is a moral judgment of Gurov, not an interpretive claim about technique or about the gap between his self-image and his behavior. The task-specific guidance says this does not meet the thesis standard.\n- Row B: \"She is described as \"staid and dignified\" and she says she is intellectual.\" - The detail is specific and relevant, but the essay never notices the irony in 'as she said of herself'. It also skips Gurov's list of insults against her. The material is paraphrased and the paragraph ends without a point about Gurov.\n- Row B: \"The narrator says it \"seemed to slip out of his memory\" which shows that he forgets.\" - This is the best moment, because it quotes the key phrase and ties it to forgetting. The comment only repeats the quotation. It does not explain the repeated 'bitter experience' set against the forgetting, or how the narrator's voice exposes Gurov.\n- Row B: \"This is a small moment but it shows he is trying to get close to the lady.\" - The dog scene is summarized and its meaning is read too literally. The essay does not see the coaxing and scolding as a comic image of Gurov's whole approach to women. It also leaves out the earlier scorn for gossips, who are the very people he resembles when he is tempted.\n- Row C: \"which makes him seem like a bad person.\" - The conclusion ends on a flat moral verdict. It does not see that the narrator both mocks Gurov and understands him, through his boredom with men and his unhappy marriage. No complexity or alternative reading is developed, so no sophistication.",
+   "lit_frq": {
+    "schema_version": "lit-frq-1",
+    "task_type": "prose_analysis",
+    "template": "q2",
+    "title": "Prose Fiction Analysis: The Lady with the Dog",
+    "prompt": {
+     "lead": "The following passage is from \"The Lady with the Dog,\" a short story by Anton Chekhov (1899 in the original; English translation by Constance Garnett, 1917). In this passage, the narrator introduces Dmitri Dmitritch Gurov, a married man on holiday at Yalta, as he notices a young woman walking alone with a small white dog and begins to imagine an affair with her.",
+     "task": "Read the passage closely. Then write an essay in which you analyze how Anton Chekhov uses literary elements and techniques to portray Gurov as a man whose claimed worldly experience and scorn for women are undercut by his dependence on them and his readiness to forget what experience has taught him.",
+     "requirements": [
+      "Respond to the prompt with a thesis that offers a defensible interpretation of the passage.",
+      "Use specific evidence from the passage, and explain how that evidence supports your line of reasoning.",
+      "Explain how multiple literary elements and techniques contribute to the meaning you describe.",
+      "Write clearly, with appropriate grammar and punctuation."
+     ]
+    },
+    "passage": {
+     "form": "prose",
+     "title": "The Lady with the Dog",
+     "attribution": "by Anton Chekhov, translated by Constance Garnett",
+     "headnote": "The following passage from a short story is by Anton Chekhov, translated by Constance Garnett (1917). This is an excerpt.",
+     "stanzas": [
+      [
+       "    IT was said that a new person had appeared on the",
+       "sea-front: a lady with a little dog. Dmitri Dmitritch",
+       "Gurov, who had by then been a fortnight at Yalta, and so",
+       "was fairly at home there, had begun to take an interest",
+       "in new arrivals. Sitting in Verney's pavilion, he saw,",
+       "walking on the sea-front, a fair-haired young lady of",
+       "medium height, wearing a béret; a white Pomeranian dog",
+       "was running behind her."
+      ],
+      [
+       "    And afterwards he met her in the public gardens and",
+       "in the square several times a day. She was walking",
+       "alone, always wearing the same béret, and always with",
+       "the same white dog; no one knew who she was, and every",
+       "one called her simply \"the lady with the dog.\""
+      ],
+      [
+       "    \"If she is here alone without a husband or friends,",
+       "it wouldn't be amiss to make her acquaintance,\" Gurov",
+       "reflected."
+      ],
+      [
+       "    He was under forty, but he had a daughter already",
+       "twelve years old, and two sons at school. He had been",
+       "married young, when he was a student in his second year,",
+       "and by now his wife seemed half as old again as he. She",
+       "was a tall, erect woman with dark eyebrows, staid and",
+       "dignified, and, as she said of herself, intellectual.",
+       "She read a great deal, used phonetic spelling, called",
+       "her husband, not Dmitri, but Dimitri, and he secretly",
+       "considered her unintelligent, narrow, inelegant, was",
+       "afraid of her, and did not like to be at home. He had",
+       "begun being unfaithful to her long ago--had been",
+       "unfaithful to her often, and, probably on that account,",
+       "almost always spoke ill of women, and when they were",
+       "talked about in his presence, used to call them \"the",
+       "lower race.\""
+      ],
+      [
+       "    It seemed to him that he had been so schooled by",
+       "bitter experience that he might call them what he liked,",
+       "and yet he could not get on for two days together",
+       "without \"the lower race.\" In the society of men he was",
+       "bored and not himself, with them he was cold and",
+       "uncommunicative; but when he was in the company of women",
+       "he felt free, and knew what to say to them and how to",
+       "behave; and he was at ease with them even when he was",
+       "silent. In his appearance, in his character, in his",
+       "whole nature, there was something attractive and elusive",
+       "which allured women and disposed them in his favour; he",
+       "knew that, and some force seemed to draw him, too, to",
+       "them."
+      ],
+      [
+       "    Experience often repeated, truly bitter experience,",
+       "had taught him long ago that with decent people,",
+       "especially Moscow people--always slow to move and",
+       "irresolute--every intimacy, which at first so agreeably",
+       "diversifies life and appears a light and charming",
+       "adventure, inevitably grows into a regular problem of",
+       "extreme intricacy, and in the long run the situation",
+       "becomes unbearable. But at every fresh meeting with an",
+       "interesting woman this experience seemed to slip out of",
+       "his memory, and he was eager for life, and everything",
+       "seemed simple and amusing."
+      ],
+      [
+       "    One evening he was dining in the gardens, and the",
+       "lady in the béret came up slowly to take the next table.",
+       "Her expression, her gait, her dress, and the way she did",
+       "her hair told him that she was a lady, that she was",
+       "married, that she was in Yalta for the first time and",
+       "alone, and that she was dull there.... The stories told",
+       "of the immorality in such places as Yalta are to a great",
+       "extent untrue; he despised them, and knew that such",
+       "stories were for the most part made up by persons who",
+       "would themselves have been glad to sin if they had been",
+       "able; but when the lady sat down at the next table three",
+       "paces from him, he remembered these tales of easy",
+       "conquests, of trips to the mountains, and the tempting",
+       "thought of a swift, fleeting love affair, a romance with",
+       "an unknown woman, whose name he did not know, suddenly",
+       "took possession of him."
+      ],
+      [
+       "    He beckoned coaxingly to the Pomeranian, and when",
+       "the dog came up to him he shook his finger at it. The",
+       "Pomeranian growled: Gurov shook his finger at it again."
+      ]
+     ],
+     "line_count": 74,
+     "provenance": {
+      "kind": "public_domain",
+      "author_alias": "Anton Chekhov",
+      "year_alias": 1917,
+      "registry_id": "chekhov-lady-dog",
+      "source_url": "https://www.gutenberg.org/ebooks/13415"
+     }
+    },
+    "rubric": {
+     "total_points": 6,
+     "rows": [
+      {
+       "row_id": "A",
+       "name": "Thesis",
+       "max": 1,
+       "descriptors": {
+        "0": "No defensible thesis: the response only restates the prompt, summarizes or describes the text, makes a comment that does not answer the prompt, or never states an interpretation that needs to be defended.",
+        "1": "The response states a defensible interpretation that answers the prompt (it may take more than one sentence and may appear anywhere in the essay)."
+       },
+       "task_specific": "A defensible thesis must make an interpretive claim about how the passage presents Gurov, and it must deal with the tension between what he says or believes (his contempt for women, his bitter experience, his scorn of Yalta gossip) and what he feels or does (needing women, forgetting his lessons, being carried away by the thought of an affair). Acceptable theses might say the narrator ironically exposes Gurov's contempt as a defense that hides his dependence, or that the passage shows a man trapped in a repeating cycle of disillusionment and renewed appetite, or that Chekhov's mix of detachment and sympathy makes Gurov both ridiculous and human. A thesis that only restates the prompt, only lists devices, only summarizes (for example, 'Gurov sees a lady and wants to meet her'), or only judges Gurov morally ('Gurov is a bad husband') without a claim about how he is portrayed does not earn the point."
+      },
+      {
+       "row_id": "B",
+       "name": "Evidence and commentary",
+       "max": 4,
+       "descriptors": {
+        "0": "Restates the thesis or the prompt, repeats given information, or offers irrelevant material; no usable evidence or commentary.",
+        "1": "Evidence is mostly general; the response summarizes or paraphrases and does not explain how the evidence supports an argument.",
+        "2": "Some specific, relevant evidence, mixed with generalities. Explains how some evidence relates to the argument, but no line of reasoning is established or it is faulty.",
+        "3": "Specific evidence for the claims in a line of reasoning, and explains how some of that evidence supports the line of reasoning, including how at least one literary element or technique contributes to meaning.",
+        "4": "Specific evidence supports every claim in a line of reasoning, the commentary consistently explains how the evidence supports it, and it explains how multiple literary elements or techniques contribute to meaning. Errors that interfere with communication prevent this level."
+       },
+       "task_specific": "Strong responses build a line of reasoning from specific textual details. Key evidence includes the reversal in 'he might call them what he liked, and yet he could not get on for two days together without \"the lower race\"'; the repeated 'Experience often repeated, truly bitter experience' set against 'this experience seemed to slip out of his memory'; the movement from 'a light and charming adventure' to 'a regular problem of extreme intricacy'; the ironic 'as she said of herself, intellectual' and the list of 'unintelligent, narrow, inelegant, was afraid of her'; his scorn for gossips 'who would themselves have been glad to sin' just before the same tales tempt him; the passive phrasing 'some force seemed to draw him' and 'suddenly took possession of him'; and the closing moment with the growling Pomeranian. Commentary has to explain how these choices show the gap between Gurov's self-image and his behavior, for example how the narrator's close, half-ironic voice ('It seemed to him') lets readers see past his own rationalizations. A score of 4 needs consistent, specific commentary that ties evidence to the thesis across the passage. A score of 3 explains several pieces of evidence well but unevenly. A score of 2 relies on summary, or names devices with little explanation. A score of 1 or 0 is mostly paraphrase or uses evidence that has nothing to do with the claim."
+      },
+      {
+       "row_id": "C",
+       "name": "Sophistication",
+       "max": 1,
+       "descriptors": {
+        "0": "Does not meet the criteria for the point: contextualizing is limited to sweeping generalities, other readings are only hinted at, complexity is oversimplified, or elaborate language does not advance the argument.",
+        "1": "Shows sophistication of thought or develops a complex literary argument, sustained through the essay (not a phrase): explores tensions or complexities in the text, situates the interpretation in a broader context, accounts for alternative interpretations, or uses a consistently vivid and persuasive style."
+       },
+       "task_specific": "Sophistication can be earned by tracing the complexity in how the narrator treats Gurov, who is mocked and also understood: the irony exposes his hypocrisy while the attention to his boredom with men and his marriage makes his longing believable. It can also be earned by showing how the passage's own structure acts out the cycle it describes, with a lesson stated and then immediately forgotten. Other routes are reading the final gesture with the dog as a small comic model of his whole approach to women (coaxing, then scolding, then repeating), or noting how the lady is reduced to a label and a set of readable signs ('the lady with the dog', 'whose name he did not know') in a way that shows how Gurov sees women. The point goes to responses that develop one of these readings throughout the essay. Passing mentions or sweeping claims about Chekhov or human nature do not earn it."
+      }
+     ],
+     "scoring_notes": [
+      "Do not require or reward knowledge of later events in the story; responses must be grounded in this passage.",
+      "Moral condemnation of Gurov is acceptable only when it is tied to analysis of how the text presents him; disapproval alone is not analysis.",
+      "Do not credit readings that assume the narrator agrees with calling women 'the lower race' unless the response deals with the irony around that phrase.",
+      "Device identification without explanation of effect should not move a response above 2 in Row B.",
+      "Accept a range of interpretations of the dog ending (comic, symbolic, foreshadowing a pattern) as long as they are supported."
+     ]
+    },
+    "expected_features": {
+     "defensible_positions": [
+      "The narrator's irony exposes Gurov's contempt for women as hypocritical and self-protective: he calls them 'the lower race' yet cannot do without them and feels like himself only in their company.",
+      "The passage presents Gurov as caught in a repeating cycle in which hard-won experience is forgotten at every new encounter, so his worldliness looks less like wisdom and more like self-deception.",
+      "Gurov is shown as oddly passive in his own desires, drawn by 'some force' and taken over by a 'tempting thought', which makes him both less responsible and less in control than he thinks.",
+      "Chekhov balances judgment with sympathy: the unhappy marriage, the fear of his wife, and his boredom with men make Gurov's restlessness understandable even while the narrator mocks his rationalizations.",
+      "Gurov's habit of reading women as types (decoding the lady's dress and gait, choosing her because she is nameless and unknown) shows how he turns women into objects of his own story, a habit the growling dog comically pushes back against."
+     ],
+     "devices": [
+      {
+       "device": "irony",
+       "quote": "he might call them what he liked, and yet he could not get on for two days together without \"the lower race.\"",
+       "effect": "The turn on 'and yet' undercuts his contempt right away and shows that his scorn hides his dependence on women."
+      },
+      {
+       "device": "repetition",
+       "quote": "Experience often repeated, truly bitter experience",
+       "effect": "Repeating 'experience' stresses how heavily Gurov relies on his supposed wisdom, which makes its quick disappearance a few lines later more pointed."
+      },
+      {
+       "device": "juxtaposition",
+       "quote": "this experience seemed to slip out of his memory, and he was eager for life, and everything seemed simple and amusing.",
+       "effect": "Putting his firm lesson next to its immediate forgetting shows the cycle of disillusionment and renewed appetite that rules him."
+      },
+      {
+       "device": "diction",
+       "quote": "a light and charming adventure, inevitably grows into a regular problem of extreme intricacy",
+       "effect": "The shift from airy, pleasant words to heavy, bureaucratic ones traces how each affair goes sour, in Gurov's own weary terms."
+      },
+      {
+       "device": "irony",
+       "quote": "as she said of herself, intellectual",
+       "effect": "Using the wife's own label lets the narrator mock her pretensions while also hinting at how one-sided Gurov's view of her is."
+      },
+      {
+       "device": "diction",
+       "quote": "secretly considered her unintelligent, narrow, inelegant, was afraid of her, and did not like to be at home",
+       "effect": "The list of private insults ends in fear and avoidance, showing the weakness behind his contempt."
+      },
+      {
+       "device": "irony",
+       "quote": "persons who would themselves have been glad to sin if they had been able",
+       "effect": "Gurov looks down on the gossips as hypocrites just before the same gossip tempts him, so the judgment turns back on him."
+      },
+      {
+       "device": "personification",
+       "quote": "suddenly took possession of him",
+       "effect": "Treating the thought as something that takes hold of him presents Gurov as passive before his desires and avoiding responsibility."
+      },
+      {
+       "device": "syntax",
+       "quote": "Her expression, her gait, her dress, and the way she did her hair told him",
+       "effect": "The cataloguing sentence shows Gurov reading a woman as a set of signs, which reveals his practiced, objectifying eye."
+      },
+      {
+       "device": "repetition",
+       "quote": "always wearing the same béret, and always with the same white dog",
+       "effect": "Repeated 'always' and 'same' turn the lady into a fixed, anonymous figure, which fits the label 'the lady with the dog' and her appeal to him as an unknown."
+      },
+      {
+       "device": "symbol",
+       "quote": "The Pomeranian growled: Gurov shook his finger at it again.",
+       "effect": "The coax, scold, and repeat pattern with the dog is a small comic model of his approach to women, and the dog's resistance punctures his confidence."
+      },
+      {
+       "device": "free_indirect_discourse",
+       "quote": "It seemed to him that he had been so schooled by bitter experience",
+       "effect": "Staying close to Gurov's view while marking it with 'It seemed to him' lets the narrator present his self-justification and quietly put it in doubt."
+      }
+     ],
+     "common_pitfalls": [
+      "Summarizing Gurov's background and his first sight of the lady without analyzing how the narration shapes our view of him.",
+      "Treating the 'lower race' remark as the narrator's view instead of recognizing the irony around it.",
+      "Moralizing about adultery instead of analyzing how the text presents Gurov's contradictions.",
+      "Bringing in events from later in the story that the passage does not support.",
+      "Ignoring the dog ending or treating it only as a cute detail.",
+      "Listing devices such as repetition or diction without explaining how they show the gap between Gurov's beliefs and his behavior."
+     ]
+    },
+    "samples": [
+     {
+      "tier": "high",
+      "target_total": 6,
+      "essay": "Gurov thinks of himself as a man who has seen through women, but Chekhov's narrator stays just close enough to his thoughts to show that the contempt is a cover. Using a close, half-ironic narrative voice, sentences that turn on \"and yet\" and \"but,\" and a final comic moment with a dog, Chekhov presents Gurov's \"bitter experience\" as a lesson he keeps repeating and keeps forgetting. Still, the narrator never simply sneers at him. By paying attention to his loveless marriage and his loneliness among men, Chekhov makes Gurov ridiculous and believable at once.\n\nThe irony starts with how Gurov's opinions are framed. The narrator tells us he called women \"the lower race,\" but the explanation comes from the narrator: he was unfaithful often, and \"probably on that account\" spoke ill of women. That small phrase flips the cause and effect Gurov would claim. He doesn't scorn women because experience taught him to. He scorns them because he has wronged them and needs a reason. The next paragraph opens with \"It seemed to him,\" which marks his sense of being \"schooled\" as his own belief, not a fact the narrator confirms. Then the sentence pivots: he could call them what he liked, \"and yet he could not get on for two days together\" without them. The grammar acts out the contradiction, with the boast in the first half and the dependence in the second.\n\nChekhov does not let the irony go cold, though. The description of Gurov's wife cuts both ways. She is \"intellectual\" only \"as she said of herself,\" which mocks her pretensions, and Gurov privately judges her \"unintelligent, narrow, inelegant.\" But the list ends with \"was afraid of her, and did not like to be at home.\" The last item gives him away, because a man who fears his wife is not the master of women he imagines. The same goes for the line that among men he is \"bored and not himself,\" while with women \"he felt free.\" These details make his chasing less like conquest and more like a hunt for the only place he can be himself, so the reader pities him even while seeing through him.\n\nThe paragraph about experience repeats its lesson in the way it is built. \"Experience often repeated, truly bitter experience\" is insistent, almost exhausted, as if Gurov is trying to drill the lesson into himself. The long sentence that follows moves from \"a light and charming adventure\" to \"a regular problem of extreme intricacy,\" and its piled-up clauses feel as tangled as the affairs it describes. Then one short \"But\" wipes the lesson away: the experience \"seemed to slip out of his memory.\" The verb is passive. Gurov doesn't choose to forget, it just happens to him, the same way \"some force seemed to draw him\" and the thought of an affair \"suddenly took possession of him.\" Chekhov lets Gurov feel like the victim of his own desire, but the repeated \"seemed\" keeps that excuse at a distance. The Yalta gossip works the same way. Gurov despises the storytellers as people \"who would themselves have been glad to sin,\" which describes him exactly, and a sentence later \"he remembered these tales.\" His scorn and his temptation sit inside one sentence.\n\nThe ending shrinks this whole pattern down to a gesture. The woman has no name. She is \"the lady with the dog,\" and Gurov reads her gait and dress as signs that she is married, alone and \"dull,\" confident in his worldly expertise. What attracts him is a woman \"whose name he did not know,\" in other words someone he can't really know. Then he beckons \"coaxingly\" to the Pomeranian, shakes his finger at it, and when \"The Pomeranian growled,\" he does it again. Coaxing, scolding and trying again regardless is exactly how he treats women, and the growl is a warning he ignores just as he ignores his experience. It is funny, but it also suggests that Gurov, for all his claims, has learned nothing at all.",
+      "word_count": 669,
+      "rubric_scores": {
+       "A": 1,
+       "B": 4,
+       "C": 1,
+       "total": 6
+      },
+      "annotations": [
+       {
+        "quote": "Chekhov presents Gurov's \"bitter experience\" as a lesson he keeps repeating and keeps forgetting",
+        "comment": "This is a defensible interpretive claim that deals directly with the tension the prompt asks about, between what Gurov believes and what he does. It also lays out a line of reasoning: narrative voice, sentence structure, the dog scene.",
+        "row_id": "A"
+       },
+       {
+        "quote": "Chekhov makes Gurov ridiculous and believable at once",
+        "comment": "This extends the thesis past pure irony and sets up the sophisticated reading the essay develops later.",
+        "row_id": "A"
+       },
+       {
+        "quote": "That small phrase flips the cause and effect Gurov would claim.",
+        "comment": "The commentary explains how one precise detail (\"probably on that account\") undercuts Gurov's version of himself. This is analysis, not paraphrase.",
+        "row_id": "B"
+       },
+       {
+        "quote": "The grammar acts out the contradiction, with the boast in the first half and the dependence in the second.",
+        "comment": "This ties a syntactic technique to meaning and links it back to the thesis.",
+        "row_id": "B"
+       },
+       {
+        "quote": "The last item gives him away, because a man who fears his wife is not the master of women he imagines.",
+        "comment": "Close reading of how the list is ordered, with clear reasoning about how it shows the gap between Gurov's self-image and the truth.",
+        "row_id": "B"
+       },
+       {
+        "quote": "The verb is passive. Gurov doesn't choose to forget, it just happens to him",
+        "comment": "This connects several pieces of evidence (passive phrasing, \"seemed\") into one technique and explains what it does. Multiple techniques handled consistently support a 4. The small comma splice does not get in the way of meaning.",
+        "row_id": "B"
+       },
+       {
+        "quote": "These details make his chasing less like conquest and more like a hunt for the only place he can be himself, so the reader pities him even while seeing through him.",
+        "comment": "This develops the tension between mockery and sympathy in how the narrator treats Gurov. The essay sets it up in the introduction and comes back to it, so it is more than a passing remark.",
+        "row_id": "C"
+       },
+       {
+        "quote": "The paragraph about experience repeats its lesson in the way it is built.",
+        "comment": "Shows how the passage's structure performs the cycle it describes, a lesson stated and then wiped out. This is another sustained route to sophistication.",
+        "row_id": "C"
+       },
+       {
+        "quote": "Coaxing, scolding and trying again regardless is exactly how he treats women",
+        "comment": "Reads the final gesture as a comic model of Gurov's whole pattern and pairs it with the point about the lady being reduced to a label. This finishes a complex argument instead of just summarizing.",
+        "row_id": "C"
+       }
+      ]
+     },
+     {
+      "tier": "mid",
+      "target_total": 4,
+      "essay": "In this passage from \"The Lady with the Dog,\" Chekhov shows Gurov as a man who believes he is experienced and above women, but whose behavior proves the opposite. Through irony and a narrator who stays close to Gurov's thoughts while still pointing out his contradictions, Chekhov makes Gurov both a little ridiculous and believable, a man who says one thing and does another.\n\nThe clearest contradiction is in how Gurov talks about women. The narrator says he \"almost always spoke ill of women\" and called them \"the lower race.\" This sounds like contempt, but the next paragraph undercuts it. It says \"It seemed to him that he had been so schooled by bitter experience that he might call them what he liked.\" The phrase \"It seemed to him\" shows that this is only Gurov's opinion of himself, and the narrator does not agree with it. Then comes the reversal, \"yet he could not get on for two days together\" without them. The word \"yet\" turns the sentence around, so the reader sees that the name-calling is not real superiority. He actually needs women, since with men he is \"bored and not himself\" but with women he feels \"free.\" So his scorn seems more like a cover for dependence.\n\nChekhov also uses repetition to show how Gurov forgets what he has learned. The narrator writes \"Experience often repeated, truly bitter experience,\" which makes the lesson sound heavy and serious. The lesson is that affairs start as \"a light and charming adventure\" and end as \"a regular problem of extreme intricacy.\" The contrast between \"light and charming\" and \"extreme intricacy\" shows how much trouble he knows is coming. But then \"this experience seemed to slip out of his memory,\" and \"everything seemed simple and amusing.\" The structure of the passage acts this out, because the lesson is stated and then forgotten right away, just as Gurov forgets it with every new woman.\n\nThe description of his wife adds to this. She is described as \"as she said of herself, intellectual,\" which is ironic because it is her own claim, and the details that follow, like phonetic spelling, make it seem silly. Gurov thinks she is \"unintelligent, narrow, inelegant\" and he is \"afraid of her.\" The list shows his dislike, but being afraid shows he is not as strong as he pretends. This helps explain why he looks for other women, and it makes the reader understand him a bit.\n\nFinally, the passage ends with Gurov teasing the dog. He first calls the gossip about Yalta untrue and says people who spread it \"would themselves have been glad to sin,\" but then he remembers the same tales and the thought of an affair \"suddenly took possession of him.\" The passive wording makes it seem like he has no control. The ending, where he shakes his finger at the growling Pomeranian twice, is a small version of the whole thing, since he does it again even after the dog growls.\n\nOverall, Chekhov uses irony, repetition, and the narrator's tone to show that Gurov's experience and scorn are not as strong as he thinks, and that his desire wins over what he knows.",
+      "word_count": 529,
+      "rubric_scores": {
+       "A": 1,
+       "B": 3,
+       "C": 0,
+       "total": 4
+      },
+      "annotations": [
+       {
+        "quote": "shows Gurov as a man who believes he is experienced and above women, but whose behavior proves the opposite",
+        "comment": "Defensible thesis that addresses the gap between Gurov's self-image and his actions, as the task requires. It is fairly general and does not yet state a distinctive claim about the narrator's attitude, but it earns the point.",
+        "row_id": "A"
+       },
+       {
+        "quote": "The phrase \"It seemed to him\" shows that this is only Gurov's opinion of himself",
+        "comment": "Good specific evidence with commentary on narrative voice and how it exposes his self-deception. This is one of the stronger moves in the essay.",
+        "row_id": "B"
+       },
+       {
+        "quote": "The word \"yet\" turns the sentence around",
+        "comment": "Identifies the key reversal and explains how it undercuts his scorn, linking a small technical choice to the argument. The explanation stays fairly brief.",
+        "row_id": "B"
+       },
+       {
+        "quote": "The contrast between \"light and charming\" and \"extreme intricacy\" shows how much trouble he knows is coming.",
+        "comment": "Uses the contrast of diction accurately, but the commentary is thin and mostly restates the contrast rather than exploring its effect.",
+        "row_id": "B"
+       },
+       {
+        "quote": "The structure of the passage acts this out, because the lesson is stated and then forgotten right away",
+        "comment": "Notices that structure mirrors the cycle, which is a promising insight toward sophistication. It is a single observation and is not developed or sustained through the essay.",
+        "row_id": "C"
+       },
+       {
+        "quote": "The list shows his dislike, but being afraid shows he is not as strong as he pretends.",
+        "comment": "Commentary on the wife passage is present but general. It does not fully explain the irony of 'intellectual' or tie the wife to the larger pattern beyond a short remark.",
+        "row_id": "B"
+       },
+       {
+        "quote": "is a small version of the whole thing, since he does it again even after the dog growls",
+        "comment": "Reads the dog scene as a model of his behavior, a good idea, but the commentary is brief and ends the essay without developing the reading. The conclusion mostly repeats the thesis, so it does not reach sustained sophistication.",
+        "row_id": "C"
+       }
+      ]
+     },
+     {
+      "tier": "low",
+      "target_total": 2,
+      "essay": "In the passage from \"The Lady with the Dog,\" Chekhov shows Gurov as a man who has a lot of experience with women and who is also married. He sees a lady with a dog in Yalta and starts thinking about having an affair with her. This shows that Gurov is not a very good husband and that he does not respect women.\n\nFirst, Chekhov tells us about Gurov's family. He has a daughter who is twelve and two sons at school. He married young and his wife seems older than him. She is described as \"staid and dignified\" and she says she is intellectual. Gurov does not like her and he does not like to be at home. This is why he has been unfaithful to her many times. The narrator also says he calls women \"the lower race\" which is a bad thing to say about women.\n\nNext, the passage says that Gurov has had \"bitter experience\" with women. He thinks that affairs always become a problem in the end. But when he meets a new woman he forgets all of this and thinks everything is simple and amusing. So he does not really learn from what happened before. The narrator says it \"seemed to slip out of his memory\" which shows that he forgets.\n\nThen the lady comes to sit at the next table at dinner. Gurov thinks about the stories of Yalta and gets tempted. At the end he calls the dog over and shakes his finger at it and the dog growls. This is a small moment but it shows he is trying to get close to the lady.\n\nIn conclusion, Chekhov uses details about Gurov's marriage and his thoughts to show that he says one thing about women but does another. He is a man who is unfaithful and forgets his lessons, which makes him seem like a bad person.",
+      "word_count": 316,
+      "rubric_scores": {
+       "A": 0,
+       "B": 2,
+       "C": 0,
+       "total": 2
+      },
+      "annotations": [
+       {
+        "quote": "Chekhov shows Gurov as a man who has a lot of experience with women and who is also married.",
+        "comment": "The thesis only restates the situation and the prompt's wording. It makes no claim about how Gurov is portrayed or about the tension between what he says and what he does, so it earns no thesis credit.",
+        "row_id": "A"
+       },
+       {
+        "quote": "This shows that Gurov is not a very good husband and that he does not respect women.",
+        "comment": "This is a moral judgment of Gurov, not an interpretive claim about technique or about the gap between his self-image and his behavior. The task-specific guidance says this does not meet the thesis standard.",
+        "row_id": "A"
+       },
+       {
+        "quote": "She is described as \"staid and dignified\" and she says she is intellectual.",
+        "comment": "The detail is specific and relevant, but the essay never notices the irony in 'as she said of herself'. It also skips Gurov's list of insults against her. The material is paraphrased and the paragraph ends without a point about Gurov.",
+        "row_id": "B"
+       },
+       {
+        "quote": "The narrator says it \"seemed to slip out of his memory\" which shows that he forgets.",
+        "comment": "This is the best moment, because it quotes the key phrase and ties it to forgetting. The comment only repeats the quotation. It does not explain the repeated 'bitter experience' set against the forgetting, or how the narrator's voice exposes Gurov.",
+        "row_id": "B"
+       },
+       {
+        "quote": "This is a small moment but it shows he is trying to get close to the lady.",
+        "comment": "The dog scene is summarized and its meaning is read too literally. The essay does not see the coaxing and scolding as a comic image of Gurov's whole approach to women. It also leaves out the earlier scorn for gossips, who are the very people he resembles when he is tempted.",
+        "row_id": "B"
+       },
+       {
+        "quote": "which makes him seem like a bad person.",
+        "comment": "The conclusion ends on a flat moral verdict. It does not see that the narrator both mocks Gurov and understands him, through his boredom with men and his unhappy marriage. No complexity or alternative reading is developed, so no sophistication.",
+        "row_id": "C"
+       }
+      ]
+     }
+    ],
+    "blueprint": {
+     "central_idea": "The opening of the story presents Gurov through a close, quietly ironic narration that sets his self-image as an experienced man who scorns women against his dependence on them, his fear of his wife, and his habit of forgetting every lesson when a new woman appears.",
+     "complexity": "The passage is neither a simple condemnation nor a simple endorsement. The narrator mocks Gurov's rationalizations and his hypocrisy toward the gossips, yet gives him an unhappy marriage, a believable loneliness, and a passivity before his desires that makes him human. The structure acts out the cycle it describes, and the comic gesture with the dog both sums up and deflates his practiced charm."
+    },
+    "provenance": {
+     "kind": "original",
+     "note": "Real public-domain text (registry chekhov-lady-dog); rubric guidance and sample essays are ALTON-authored, not official College Board material."
+    }
+   },
+   "real_text": {
+    "registry_id": "chekhov-lady-dog",
+    "grader_audit": [
+     {
+      "id": "rf2",
+      "tier": "high",
+      "options": [
+       {
+        "k": 0,
+        "graderTotals": [
+         6,
+         6
+        ],
+        "graderRows": [
+         "1/4/1",
+         "1/4/1"
+        ],
+        "spread": 0,
+        "final": 6
+       },
+       {
+        "k": 1,
+        "graderTotals": [
+         6,
+         6
+        ],
+        "graderRows": [
+         "1/4/1",
+         "1/4/1"
+        ],
+        "spread": 0,
+        "final": 6
+       }
+      ],
+      "chosen": 0
+     },
+     {
+      "id": "rf2",
+      "tier": "mid",
+      "options": [
+       {
+        "k": 0,
+        "graderTotals": [
+         4,
+         5
+        ],
+        "graderRows": [
+         "1/3/0",
+         "1/4/0"
+        ],
+        "spread": 1,
+        "final": 5
+       },
+       {
+        "k": 1,
+        "graderTotals": [
+         4,
+         4
+        ],
+        "graderRows": [
+         "1/3/0",
+         "1/3/0"
+        ],
+        "spread": 0,
+        "final": 4
+       }
+      ],
+      "chosen": 1
+     },
+     {
+      "id": "rf2",
+      "tier": "low",
+      "options": [
+       {
+        "k": 0,
+        "graderTotals": [
+         2,
+         2
+        ],
+        "graderRows": [
+         "0/2/0",
+         "0/2/0"
+        ],
+        "spread": 0,
+        "final": 2
+       },
+       {
+        "k": 1,
+        "graderTotals": [
+         3,
+         3
+        ],
+        "graderRows": [
+         "1/2/0",
+         "1/2/0"
+        ],
+        "spread": 0,
+        "final": 3
+       }
+      ],
+      "chosen": 0
+     }
+    ]
+   }
+  },
+  "registryId": "chekhov-lady-dog",
+  "stockKey": "lt-real-1:ap_english_literature-real-rf2-k0",
+  "run": "lt-real-1",
+  "validation": "auto_passed",
+  "gateVersion": "lt-real-1-2026-10-15",
+  "gateOverride": "lt-real-1-2026-10-15",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "selectedForSample": true,
+  "legacyReserve": false,
+  "family": "ap_english_literature",
+  "itemFamilyId": "fam:lt-real-1:ap_english_literature-real-rf2-k0",
+  "canonicalKey": "lt-real-1:ap_english_literature-real-rf2-k0",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_english_literature:U9.4",
+  "sharedWith": [],
+  "stockCell": "ap_english_literature|U9.4|4.C|frq_multipart|na",
+  "history": [
+   {
+    "run": "lt-real-1",
+    "gateVersion": "lt-real-1-2026-10-15",
+    "outcome": "passed",
+    "reasons": null
+   }
+  ],
+  "stimulusOrigin": "real_public_domain_text",
+  "sourceRegistryIds": [
+   "chekhov-lady-dog"
+  ],
+  "replaces": "LT2 FRQ Q2 fa2 (ALTON prose passage)"
+ }
+]

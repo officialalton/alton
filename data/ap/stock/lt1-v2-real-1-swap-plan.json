@@ -1,0 +1,60 @@
+{
+ "kind": "ap_new_version_swap_plan",
+ "set": "LT1",
+ "sourceSetName": "AP English Literature — Practice Exam 1",
+ "sourceVersionNo": 1,
+ "generatedBy": "scripts/ap-generation/lt-real-1-plans.ts",
+ "note": "Stage 1: ① MC 시 세트 p03(ALTON 작성 시, 8문항) → rs1(Dickinson 'The Chariot', 8문항, 같은 칸·같은 장르 묶음) ② FRQ Q1 fb1(ALTON 작성 시) → rf1(Hopkins \"God's Grandeur\"). 교체 뒤 구성(55 MC·3 FRQ·묶음 5·장르·범주 1–7·LT1/LT2 서로소)은 독립 검증기 위반 0.",
+ "swapCount": 2,
+ "verifierViolations": [],
+ "swaps": [
+  {
+   "section": "ap_mc",
+   "position": 38,
+   "removeKey": "englit-p1-a:ap_english_literature-p03-k0",
+   "addKey": "lt-real-1:ap_english_literature-real-rs1-k0",
+   "remove": {
+    "kind": "mc_set",
+    "group": "poetry",
+    "skills": [
+     "5.B",
+     "2.B",
+     "4.C",
+     "3.D",
+     "6.A",
+     "3.C",
+     "7.C",
+     "6.D"
+    ]
+   },
+   "add": {
+    "kind": "mc_set",
+    "group": "poetry",
+    "skills": [
+     "6.C",
+     "1.E",
+     "4.C",
+     "4.D",
+     "3.C",
+     "5.B",
+     "5.A",
+     "7.B"
+    ]
+   }
+  },
+  {
+   "section": "ap_frq",
+   "position": 1,
+   "removeKey": "englit-p1-b:ap_english_literature-fb1-k0",
+   "addKey": "lt-real-1:ap_english_literature-real-rf1-k0",
+   "remove": {
+    "kind": "frq",
+    "frqType": "q1"
+   },
+   "add": {
+    "kind": "frq",
+    "frqType": "q1"
+   }
+  }
+ ]
+}

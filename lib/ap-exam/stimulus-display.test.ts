@@ -37,6 +37,7 @@ describe("AP English Language 지문(2026-10-14): stem 이 지문 문장을 인�
 import { REAL_TEXT_MARKER as REAL_MARKER_T, isEnglishPassage as isEnT } from "./stimulus-display";
 describe("real public-domain text marker (2026-10-15)", () => {
   it("is treated as an English passage (shown verbatim, never math-converted)", () => { expect(isEnT(`${REAL_MARKER_T}\nTitle\n\n\`\`\`passage\nA line\n\`\`\``)).toBe(true); });
+  it("is treated as an English passage with the attribution first line, shown verbatim", () => { const p = `${REAL_MARKER_T} — Emily Dickinson, The Chariot, Poems by Emily Dickinson (1890)\nThe Chariot\n\n\`\`\`passage\nBecause I could not stop for Death\n\`\`\``; expect(isEnT(p)).toBe(true); expect(apPassageForDisplay(p, "The speaker could not stop for Death")).toBe(p); expect(isEnT(`${REAL_MARKER_T}x\nTitle`)).toBe(false); });
 });
 
 import { apPassageForDisplay as _apd, US_REAL_SOURCE_MARKER as _usm } from "./stimulus-display";

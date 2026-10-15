@@ -110,7 +110,7 @@ async function syncRun(todo: BatchReq[], opts: { name: string; budgetUsd?: numbe
       if (opts.budgetUsd !== undefined && led.spent() + cost + perReqEst > opts.budgetUsd) { process.stderr.write(`[sync ${opts.name}] 예산 상한 도달 — 중단\n`); q.length = 0; return; }
       for (let a = 0; a < 5; a++) {
         try {
-          const msg = await getClient().messages.create(r.params as never);
+          const msg = await getClient().messages.create(r.params as never, { timeout: 15 * 60 * 1000 });
           const u = msg.usage as Usage;
           const c = costOf(modelOf.get(r.custom_id) ?? "", u) * 2;
           cost += c;
@@ -121,6 +121,7 @@ async function syncRun(todo: BatchReq[], opts: { name: string; budgetUsd?: numbe
         } catch (e) {
           const status = (e as { status?: number }).status;
           if (status === 400) { appendFileSync(resF, JSON.stringify({ custom_id: r.custom_id, ok: false, model: modelOf.get(r.custom_id), err: (e as Error).message.slice(0, 200) }) + "\n"); break; }
+          process.stderr.write(`[sync ${opts.name}] ${r.custom_id} 시도 ${a + 1} 오류: ${String((e as Error).message).slice(0, 160)}\n`);
           await sleep(3000 * (a + 1));
         }
       }

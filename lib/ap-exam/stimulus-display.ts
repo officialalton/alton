@@ -20,7 +20,9 @@ export const US_STIMULUS_MARKER = "ALTON-composed stimulus";
 export const US_REAL_SOURCE_MARKER = "Historical source (real document)";
 /** 실제 공개 저작물(공유 영역) 발췌 표지(AP English Literature 실제 작품 보강, 2026-10-15) — 산문·시이므로 영어 지문과 같이 취급한다. */
 export const REAL_TEXT_MARKER = "Public-domain source text";
-export const isEnglishPassage = (p: string): boolean => [EN_PASSAGE_MARKER, US_STIMULUS_MARKER, US_REAL_SOURCE_MARKER, REAL_TEXT_MARKER].some((m) => p.startsWith(`${m}\n`));
+/** 실제 작품 지문의 첫 줄은 표지만이거나 "Public-domain source text — 저자, 작품, 판본" 이다. */
+export const startsWithRealTextMarker = (p: string): boolean => p.startsWith(`${REAL_TEXT_MARKER}\n`) || p.startsWith(`${REAL_TEXT_MARKER} — `);
+export const isEnglishPassage = (p: string): boolean => [EN_PASSAGE_MARKER, US_STIMULUS_MARKER, US_REAL_SOURCE_MARKER].some((m) => p.startsWith(`${m}\n`)) || startsWithRealTextMarker(p);
 /** 화면에 그릴 자료 텍스트(없으면 null). */
 export function apPassageForDisplay(passage: string | null | undefined, stem: string | null | undefined): string | null {
   const p = (passage ?? "").trim(); if (!p) return null;

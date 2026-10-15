@@ -1,0 +1,317 @@
+[
+ {
+  "cellId": "ap_english_literature-real-rs1",
+  "apSubjectCode": "ap_english_literature",
+  "kind": "mc",
+  "calculator": "na",
+  "reserve": false,
+  "wording": "source_first_real_text",
+  "candidateKey": "ap_english_literature-real-rs1-k0",
+  "structure": "shared_stimulus_set",
+  "archetype": "lt_real_poetry_rs1",
+  "pipeline": "real_text_v1",
+  "releaseTier": "sample_not_loaded",
+  "expertStatus": "unreviewed",
+  "renderVerified": false,
+  "screenVerified": false,
+  "sourceKind": "real_public_domain",
+  "registryId": "dickinson-chariot",
+  "keywordCode": "U5.1",
+  "unitCode": "5",
+  "skillPrimary": "5.A",
+  "reviewState": "auto_passed",
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "payload": {
+   "layout_status": "not verified identical to the official AP Central preview: layout was checked only against the ALTON PassageBlock at 390px and 1280px (docs/ap/englit-material-audit.md section 6)",
+   "archetype": "lt_real_poetry_rs1",
+   "topic": "U5.1",
+   "skill": "5.A",
+   "calculator": "na",
+   "set_intro": "Public-domain source text — Emily Dickinson, The Chariot (\"Because I could not stop for Death\"), Poems by Emily Dickinson, ed. Mabel Loomis Todd and T. W. Higginson (Series One, 1890)\nThe Chariot (\"Because I could not stop for Death\")\nby Emily Dickinson\nThe following poem is by Emily Dickinson (1890).\n\n```passage\nBecause I could not stop for Death,\nHe kindly stopped for me;\nThe carriage held but just ourselves\nAnd Immortality.\n\nWe slowly drove, he knew no haste,\nAnd I had put away\nMy labor, and my leisure too,\nFor his civility.\n\nWe passed the school where children played,\nTheir lessons scarcely done;\nWe passed the fields of gazing grain,\nWe passed the setting sun.\n\nWe paused before a house that seemed\nA swelling of the ground;\nThe roof was scarcely visible,\nThe cornice but a mound.\n\nSince then 't is centuries; but each\nFeels shorter than the day\nI first surmised the horses' heads\nWere toward eternity.\n```",
+   "lt_passage": {
+    "form": "poem",
+    "group": "poetry",
+    "title": "The Chariot (\"Because I could not stop for Death\")",
+    "headnote": "The following poem is by Emily Dickinson (1890).",
+    "stanzas": [
+     [
+      "Because I could not stop for Death,",
+      "He kindly stopped for me;",
+      "The carriage held but just ourselves",
+      "And Immortality."
+     ],
+     [
+      "We slowly drove, he knew no haste,",
+      "And I had put away",
+      "My labor, and my leisure too,",
+      "For his civility."
+     ],
+     [
+      "We passed the school where children played,",
+      "Their lessons scarcely done;",
+      "We passed the fields of gazing grain,",
+      "We passed the setting sun."
+     ],
+     [
+      "We paused before a house that seemed",
+      "A swelling of the ground;",
+      "The roof was scarcely visible,",
+      "The cornice but a mound."
+     ],
+     [
+      "Since then 't is centuries; but each",
+      "Feels shorter than the day",
+      "I first surmised the horses' heads",
+      "Were toward eternity."
+     ]
+    ],
+    "line_count": 20
+   },
+   "provenance": {
+    "kind": "public_domain",
+    "registry_id": "dickinson-chariot",
+    "author": "Emily Dickinson",
+    "translator": null,
+    "year": 1890,
+    "repository": "Project Gutenberg (gutenberg.org)",
+    "url": "https://www.gutenberg.org/ebooks/12242",
+    "reuse_basis": "United States public domain: poem and 1890 edition published before 1929; author died 1886. The repository states the eBook is not protected by U.S. copyright; the text is reproduced without the repository's trademark or license header.",
+    "text_sha256": "fe0a7bffeb75412b66c7b23b8be485c00555b76b0fb28d5eba11b6b8d9a914f7",
+    "excerpt": {
+     "unit": "line",
+     "from": 1,
+     "to": 20,
+     "whole_work": true,
+     "note": "Complete poem (heading 'XXVII. The Chariot.' omitted)."
+    },
+    "modifications": [
+     "Removed heading lines and the section number.",
+     "Line and stanza structure unchanged."
+    ]
+   },
+   "text_map": {
+    "central_idea": "The speaker recalls a calm, courteous carriage ride with Death. It passes the stages of life and ends at the grave. From the vantage of 'centuries' later, she shows that death has changed her sense of time, making eternity feel briefer than the single day she understood where she was going.",
+    "speaker_or_narrator": "A first-person speaker, apparently already dead, looking back on the day Death called for her and the journey that followed.",
+    "structure_and_shifts": [
+     {
+      "quote": "He kindly stopped for me;",
+      "from": "the speaker's busy life, in which she 'could not stop'",
+      "to": "Death's polite intervention, which begins the journey"
+     },
+     {
+      "quote": "We passed the setting sun.",
+      "from": "images of living activity (school, grain)",
+      "to": "the close of day, signaling life's end"
+     },
+     {
+      "quote": "We paused before a house that seemed",
+      "from": "motion through the landscape",
+      "to": "stillness at the grave-house"
+     },
+     {
+      "quote": "Since then 't is centuries; but each",
+      "from": "narrated past journey",
+      "to": "a timeless present that reveals the speaker's posthumous perspective"
+     }
+    ],
+    "devices": [
+     {
+      "device": "personification",
+      "quote": "He kindly stopped for me;",
+      "function": "Presents Death as a courteous gentleman caller, which softens its terror."
+     },
+     {
+      "device": "anaphora",
+      "quote": "We passed the setting sun.",
+      "function": "The repeated 'We passed' gives the ride a steady, procession-like movement through life's stages."
+     },
+     {
+      "device": "metaphor",
+      "quote": "A swelling of the ground;",
+      "function": "The grave is pictured as a house, its roof hardly rising above the earth."
+     },
+     {
+      "device": "imagery",
+      "quote": "We passed the fields of gazing grain,",
+      "function": "Ripened grain suggests maturity and a living world that watches as the speaker passes."
+     },
+     {
+      "device": "paradox",
+      "quote": "Feels shorter than the day",
+      "function": "Centuries feel shorter than one day, which shows how eternity distorts time."
+     }
+    ],
+    "skills_supported": [
+     {
+      "skill": "5.A",
+      "why_supported": "'gazing grain' works literally as ripened crops and figuratively as a living world that watches the speaker pass.",
+      "quote": "We passed the fields of gazing grain,"
+     },
+     {
+      "skill": "7.D",
+      "why_supported": "Several passages bear on time, so students can choose the best evidence for a claim about how death distorts time.",
+      "quote": "Since then 't is centuries; but each"
+     }
+    ]
+   },
+   "items": [
+    {
+     "archetype": "lt_poetry_5A",
+     "topic": "U5.1",
+     "skill": "5.A",
+     "cognitive": "explain",
+     "stem": "In context, the phrase describing the fields (line 11) works on two levels at once, suggesting both",
+     "options": [
+      {
+       "text": "a menacing, shadowed landscape and the speaker's growing terror as Death hurries her to the grave",
+       "why": "The ride is unhurried and calm. Death 'knew no haste', and nothing suggests terror.",
+       "value": null,
+       "label": "wrong_tone"
+      },
+      {
+       "text": "a farm the carriage is heading toward and the comfortable new home in which the speaker will settle",
+       "why": "The carriage passes the fields rather than stopping there. The only 'home' it reaches is a grave, described as a mound in the earth.",
+       "value": null,
+       "label": "literal_for_figurative"
+      },
+      {
+       "text": "a literal field of ripened grain and a living world that watches passively as the speaker goes by",
+       "why": "The grain is literally mature, at a late stage of growth. 'Gazing' also makes it an onlooker that stays behind while the carriage carries the speaker past life's scenes.",
+       "value": null,
+       "label": "correct"
+      },
+      {
+       "text": "a harvest the speaker means to gather and the reward she expects for her lifetime of earthly labor",
+       "why": "The speaker has already given up her work. She will gather nothing, and she simply passes the fields.",
+       "value": null,
+       "label": "reversal"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is \"a literal field of ripened grain and a living world that watches passively as the speaker goes by\". The grain is literally mature, at a late stage of growth. 'Gazing' also makes it an onlooker that stays behind while the carriage carries the speaker past life's scenes.\n\"a menacing, shadowed landscape and the speaker's growing terror as Death hurries her to the grave\" is incorrect: The ride is unhurried and calm. Death 'knew no haste', and nothing suggests terror.\n\"a farm the carriage is heading toward and the comfortable new home in which the speaker will settle\" is incorrect: The carriage passes the fields rather than stopping there. The only 'home' it reaches is a grave, described as a mound in the earth.\n\"a harvest the speaker means to gather and the reward she expects for her lifetime of earthly labor\" is incorrect: The speaker has already given up her work. She will gather nothing, and she simply passes the fields.",
+     "est_seconds": 70,
+     "evidence_quotes": [
+      "We passed the fields of gazing grain,"
+     ],
+     "ref_lines": {
+      "r1": {
+       "from": 11,
+       "to": 11
+      }
+     },
+     "devices_used": [
+      "imagery",
+      "diction"
+     ],
+     "real_text": {
+      "registry_id": "dickinson-chariot",
+      "skill": "5.A",
+      "key_evidence": {
+       "quote": "We passed the fields of gazing grain,",
+       "from": 11,
+       "to": 11,
+       "ref": "line 11",
+       "unit": "stanza 3"
+      },
+      "distractor_evidence": [
+       {
+        "index": 0,
+        "label": "wrong_tone",
+        "why": "The ride is unhurried and calm. Death 'knew no haste', and nothing suggests terror.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "We slowly drove, he knew no haste,",
+         "from": 5,
+         "to": 5,
+         "ref": "line 5",
+         "unit": "stanza 2"
+        }
+       },
+       {
+        "index": 1,
+        "label": "literal_for_figurative",
+        "why": "The carriage passes the fields rather than stopping there. The only 'home' it reaches is a grave, described as a mound in the earth.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "A swelling of the ground;",
+         "from": 14,
+         "to": 14,
+         "ref": "line 14",
+         "unit": "stanza 4"
+        }
+       },
+       {
+        "index": 3,
+        "label": "reversal",
+        "why": "The speaker has already given up her work. She will gather nothing, and she simply passes the fields.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "My labor, and my leisure too,",
+         "from": 7,
+         "to": 7,
+         "ref": "line 7",
+         "unit": "stanza 2"
+        }
+       }
+      ],
+      "verification": {
+       "solvers": [
+        "claude-opus-5-5",
+        "claude-sonnet-5-5"
+       ],
+       "solver_votes": [
+        2,
+        2
+       ],
+       "adversary": "weak",
+       "judge": "key_clearly_better",
+       "panel_model": "claude-fable-5-1",
+       "panel_choice": 2,
+       "panel_agree": true,
+       "score": 0.87,
+       "band": "medium",
+       "verified": true
+      }
+     },
+     "key_confidence": {
+      "score": 0.87,
+      "band": "medium",
+      "solver_agreement": 1,
+      "adversary": "weak",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 2,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 2,
+        "confidence": "certain"
+       },
+       {
+        "choice": 2,
+        "confidence": "certain"
+       }
+      ]
+     }
+    }
+   ],
+   "excluded_items": [
+    {
+     "index": 1,
+     "skill": "7.D",
+     "stem": "A student claims that the poem shows death changing the speaker's sense of time, so that vast spans come to feel brief. Which of the followi",
+     "reasons": [
+      "adversary_missing",
+      "judge_missing",
+      "deterministic_4"
+     ]
+    }
+   ],
+   "assignable_size": false,
+   "set_note": "only 1 verified items: below the exam's 8-13 per set; not assignable as a full set"
+  }
+ }
+]

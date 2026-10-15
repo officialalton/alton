@@ -25,7 +25,7 @@ type Sample = { tier: "high" | "mid" | "low"; essay: string; target_total: numbe
 // CALIB_SUBJECT: en(기본, el_frq) | lit(lt-p1b, lit_frq, englit-v1) | ush(ush-p1b, ush_frq, ushistory-v1). CALIB_CELLS = 쉼표로 구분한 cellId 접미사(예: saq1_3,dbq_1)
 const SUBJ = process.env.CALIB_SUBJECT ?? "en";
 const KEY = SUBJ === "lit" ? "lit_frq" : SUBJ === "ush" ? "ush_frq" : "el_frq";
-const FILES = SUBJ === "lit" ? ["lt-p1b"] : SUBJ === "ush" ? ["ush-p1b"] : ["el-p1", "el-p2b"];
+const FILES = process.env.CALIB_FILES ? process.env.CALIB_FILES.split(",") : SUBJ === "lit" ? ["lt-p1b"] : SUBJ === "ush" ? ["ush-p1b"] : ["el-p1", "el-p2b"];
 const CELLS = process.env.CALIB_CELLS ? process.env.CALIB_CELLS.split(",") : null;
 const items = FILES.flatMap((f) => JSON.parse(readFileSync(`data/ap/stock/${f}-items.json`, "utf-8")) as any[]).filter((i) => i.kind === "frq_bundle" && i.payload?.[KEY]?.samples?.length >= 3)
   .filter((i) => !CELLS || CELLS.some((c) => String(i.cellId).endsWith(c))).slice(0, SUBJ === "en" ? 6 : 99);
