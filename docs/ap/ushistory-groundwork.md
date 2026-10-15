@@ -93,3 +93,61 @@
 - **US2 계획**은 이미 적용돼(US2 v2 게시) 기록용으로 그대로 둔다(게시 v1 스냅샷으로 DB 단원 기준 재생도 통과).
 - **테스트**(`lib/ap-admin/ush-stage-a-plans.test.ts`): 관리자 서비스와 같은 컨텍스트(`fullPracticeUnitBounds('ap_us_history','full_practice')`, 단원 = keyUnit)로 `resolveSwaps`+`checkNewVersionComposition` 재생 — 현재 US1 v1 이 DB 단원 11/4 로 위반임을 고정, Stage A 만 교체하면 위 두 오류로 막힘(음성 테스트), 3건 계획은 통과·교체 후 DB 단원 수 고정, 교체 문항 변환 완료·US2 와 서로소, 검증기가 교체 전 v1 의 DB 단원 위반을 잡고 교체 후 0, 균형 교체는 같은 크기만 허용.
 - **관리자 순서 갱신**: §9 의 단계 3(US1)은 새 계획 3건으로 진행(미리보기 0 위반 기대). 단계 4(US2)는 이미 완료.
+
+## 10. Stage B — 게시 US2 `dbq_1`·US1 `dbq_2` 의 가공 문서 7개 세트를 실제 자료 7개 DBQ 로 교체 (2026-10-15, 브랜치 `ush-real-b`, DB 쓰기 없음)
+오너 정책(`docs/POLICY-DECISIONS.md` 2026-10-15)대로 **자료를 먼저 고정**하고(레지스트리 `data/ap/ush-sources/registry.json`, 출처·저자·연도·재사용 근거·발췌/수정·해시), 프롬프트·논지 공간·증거 지도·루브릭·샘플 답안은 그 자료 7개에서 설계했다. 가공 자료는 삭제·표지 변경 없이 보존한다(게시 v2 는 그대로, 새 버전 v3 로만 바뀐다). 시험 위치(ap_frq #1)·구간(DBQ)·시대(US2 4, US1 6)·루브릭 템플릿(ushistory-v1 DBQ 7점)·문서 7개 구조는 그대로다. 소스 DBQ 시대 범위 1754–1980 안.
+
+| 시험 | 교체 전(ALTON 작성) | 교체 후 키 | 프롬프트 |
+|---|---|---|---|
+| US2 `dbq_1` | 시장 혁명(가공 편지·팸플릿·합성 차트) | `ush-real-b:ap_us_history-real_b_dbq_market-k0` | Evaluate the extent to which the market revolution changed the lives of Americans between 1815 and 1860. |
+| US1 `dbq_2` | 노동 운동 1877–1900(가공 문서·합성 표) | `ush-real-b:ap_us_history-real_b_dbq_regulation-k0` | Evaluate the extent to which the growth of large corporations led to greater federal regulation of business in the United States between 1880 and 1910. |
+
+### 문서 설계(자료를 먼저 고정 → 그 자료로 프롬프트·논지 공간)
+- **US2 시장 혁명(시대 4–5)**: ① Jackson 은행 거부 메시지 1832(Avalon, 정치·1차) ② Robinson *Loom and Spindle* 1898(Gutenberg #72757, 로웰 직공 회고) ③ Tocqueville 1840(Gutenberg #816, 외부 관찰자) ④ **로웰 공장 도시 판화 c.1840(LoC, 시각)** ⑤ Thoreau *Walden* 1854(Gutenberg #205, 비판) ⑥ **지역별 인구 1800–1860(Census Bureau 표, 정량)** ⑦ **1860 센서스 노예 인구 분포 지도 1861(LoC, 시각, Stage A 레지스트리 자료)**. 논지 공간: 북부·서부 생활의 큰 변화(②③④⑥) / 변화는 불균등하며 노예제를 깊게 했다(⑦⑥) / 새 불안·갈등·비판으로 이득이 엇갈렸다(①⑤②③). 반론·복합성: ⑤는 '변화' 주장에 반론, ④는 비노동 시각을 제공하고 ⑦·② 가 이를 한정한다.
+- **US1 기업 규제(시대 6–7)**: ① Sumner 1883(Gutenberg #18603, 자유방임 반론) ② 주간통상법 1887 제2조(archives.gov) ③ **Keppler 'The Bosses of the Senate' 1889(LoC, 시각, 레지스트리 자료)** ④ Sherman 반독점법 1890 제1·2조(archives.gov) ⑤ Tarbell *History of the Standard Oil Company* 1904(Gutenberg #60692, **2차(저널리즘 역사)**) ⑥ **U. J. Keppler 'Next!' 1904(LoC, 시각, 스탠더드 오일 문어)** ⑦ Sinclair *The Jungle* 1906 발췌(레지스트리 자료, 소설). 논지 공간: 큰 폭의 연방 규제 확대(②④⑤⑦③) / 한정·반응적(⑥③④⑦ — 법이 좁고 집행이 약하며 기업 영향력 지속) / 저항·시장의 답(①⑤ — Tarbell 의 석유업자는 '공정한 경쟁'을 요구, 정부 통제 요구가 아님). 1단계가 지적한 '반대 관점 없음'을 ① 과 ⑤ 로, '더 나은 통계' 문제는 아래 UNVERIFIED 를 참고한다(정량 자료는 US2 에만 있다).
+- 모든 문서에 **ALTON 이 쓴 한 줄 context(사건·청중, 사실만)** 와 레지스트리의 저자·연도·저장소·재사용 근거·수정 표시가 학생 화면에 붙는다. 발췌는 저장소 원문에서 **앵커 문구→연속 구간을 코드로 잘라**(`ush-real-b-sources.py`) 해시를 고정했다(Sherman 한 곳만 원문 줄바꿈 하이픈 'other- wise'→'otherwise' 보정, 레지스트리 modified 에 기록). 학생 화면 본문은 `realDbqPassage()`(레지스트리→코드)가 만들고 게이트가 글자 그대로 일치하는지 점검한다.
+- **증거 지도·문서 사용·출처 분석**은 `expected_features.evidence_map`(논증 줄별 뒷받침·복합 문서), `doc_uses`(문서별 usable_for + sourcing) 에 있고 참고 답안(`reference_text`)에 실린다. 루브릭은 ushistory-v1 7점(주장·맥락·문서 증거 2·외부 증거·출처 분석·복합성)의 ALTON 의역이며 **'ALTON reference — not official AP scoring'** 표지를 붙였다.
+
+### 새 실제 자료와 다운로드(전부 허용 도메인; 커밋 대상은 아래 발췌·표·이미지뿐, 원본 파일은 커밋하지 않음)
+| 파일(레지스트리 id) | 출처 | 크기 | 재사용 근거(항목 페이지 확인) |
+|---|---|---|---|
+| `txt-jackson-veto-1832` ← ajveto01.asp | avalon.law.yale.edu | 53 KB(html) | 미국 대통령 메시지(정부 저작물, 1832) |
+| `txt-robinson-1898` ← pg72757.txt | gutenberg.org #72757 | 306 KB | 1898년 출판, Gutenberg 미국 내 제한 없음 |
+| `txt-tocqueville-1840` ← pg816.txt | gutenberg.org #816 | 866 KB | 1840(영역 19세기), 공유 영역 |
+| `txt-thoreau-1854` ← pg205.txt | gutenberg.org #205 | 668 KB | 1854, 공유 영역 |
+| `txt-sumner-1883` ← pg18603.txt | gutenberg.org #18603 | 210 KB | 1883, 공유 영역 |
+| `txt-tarbell-1904` ← pg60692.txt | gutenberg.org #60692 | 1.9 MB | 1904, 공유 영역 |
+| `txt-ica-1887`, `txt-sherman-1890` | archives.gov milestone-documents | 75 KB·45 KB(html) | 미국 의회 법률(정부 저작물, 1887·1890) |
+| `stat-region-pop-1800-1860` ← POP-twps0056.pdf(Tables 1–5) | census.gov | 1.6 MB(PDF, 커밋 안 함; 표는 코드로 추출·지역 합=전국 검증) | 미국 정부 간행물 |
+| `img-next-1904`(`25884v.jpg` 1024×650) | loc.gov/item/2001695241 | 151 KB(JPEG) | LoC 'No known restrictions on publication.' |
+| `img-lowell-1840`(`07376v.jpg` 1024×669) | loc.gov/item/94515606 | 361 KB(JPEG) | LoC 'No known restrictions on publication.' |
+레지스트리 기존 자료 재사용: Keppler 'Bosses of the Senate', The Jungle, 1860 노예 인구 지도. 추가로 **내려받았으나 쓰지 못하고 폐기한 파일**(보고에도 명시): Statistical Abstract 1911 PDF 18개(census.gov, 합계 약 120 MB; 스캔본이라 텍스트층 없음)와 Historical Statistics 1970 ch.D PDF 1개(약 7 MB; 스캔본). 그래서 US1 에는 정량 문서가 없다. 모두 실행하지 않았고 repo 에 없다.
+
+### 샘플 답안 3단계×독립 채점 2 + 사실 점검(Fable, 시각 자료 이미지 첨부)
+- 채점(`scripts/ap-generation/ush-real-b-verify.ts`): ushistory-v1 루브릭으로 Opus·Sonnet 각각 독립 채점. **US2: 상 7·7, 중 4·5, 하 1·1(대역 상 5–7 / 중 3–5 / 하 1–3 전부 안, 단계 엄격 순서). US1: 상 7·7, 중 4·4, 하 1·1.** 채점기 간 편차는 중 단계 US2 에서만 1점.
+- 사실 점검(Fable): 문서 7개·프롬프트·증거 지도·루브릭·외부 증거·facts·샘플 3개 항목별 verdict, 전부 sound·플래그 0(최종). 과정에서 **고친 것**: (1) 'Next!' 이미지 설명(실제로는 국회의사당·주 의사당을 감고 백악관을 향해 뻗음, 상원·백악관을 이미 감은 것으로 잘못 씀) (2) Sumner 발췌에 없는 문장을 문서 사용·샘플에 귀속 (3) Tocqueville 발췌에 없는 '휴가' 세부 (4) Robinson 의 예금자 수 vs 예금액 오독 (5) 1861 지도 출처를 '연방 정부 제작'으로 과장(실제: 센서스 자료로 Hergesheimer 가 그리고 Graham 이 발행) (6) 증거 지도의 한 문서를 같은 줄에 뒷받침·복합으로 동시 기재 (7) Keppler 부자(Joseph·Udo) 혼동 (8) 파일 설명의 깃발 문자 단정. 수정 뒤 재채점·재점검(3라운드). 원자료: `data/ap/sample-2027/ush-real-b/*.round1|round2.*.txt`(이전 라운드), `real-b-verification*.json`.
+- 비용: 이 브랜치 3라운드 합계 **$3.78**(원장 214.59 → 218.37; 한도 $6·중단 $226 이내). 사실 점검도 LLM 이며 **역사 교사 검수가 아니다**.
+
+### 화면(학생 시험 화면, 문서 패널)과 이미지 확대
+- 변경: DBQ 는 한 문제에 이미지가 2장이라 그림 스펙을 확장(`lib/problem-figures/spec.ts` `ImageFigureSpec.label`·`more`(static 전용, 최대 3장; path·credit 검증), `lib/ap-figures/normalize.ts`, `lib/problem-figures/check.ts` alt·credit 점검, `app/session/[id]/ProblemFigure.tsx`). 각 이미지에 **라벨(Document N)·출처 캡션(항상 표시)·"Tap or click the image to open it full size."** 와 원본 크기 **새 탭 링크**(`<a target=_blank rel=noopener>`)를 둔다 — 390px 에서 1024px 이미지는 약 35 % 로 줄어 만평·지도 글자가 읽히지 않아, 가장 작은 안전한 개선으로 확대 링크를 택했다. 단위 테스트 `app/session/[id]/ProblemFigure.static-image.test.tsx`(3).
+- 격리 스택(`ALTON_apushb`, 포트 +100, 가드 통과)에서 두 DBQ × 390×844·1280×800 = 4항목, `data/ap/screen-evidence/evidence-ush-real-b.json` 점검 전부 pass(입력 가능·정답/해설 비노출·잘림 없음·그림 렌더 포함). 스크린샷 `docs/ap/screen-evidence/ush-real-b/`(항목 4 + 그림 칸 `figures-*-390|1280.png` + 문서 패널 `panel-top-*-1280.png`). 측정: 이미지 4장 모두 로드·라벨·출처 캡션 표시(390px 에서 약 358 px 폭으로 줄어듦), 각 문제의 첫 이미지 링크를 새 탭으로 열어 원본(로웰 1024×669, Bosses 1024×808)이 열리는 것 확인(지도 링크는 같은 컴포넌트이며 단위 테스트로 href·target 을 확인). 데스크톱 1280 에서도 이미지는 문서 본문 **아래**에 나온다(스크롤 필요; 본문이 문서 N 이 이미지임을 알려 줌). 종료 뒤 개발 서버 종료·`isolated-stack.sh stop`·`config.toml` 원복·컨테이너 0·임시 비밀번호 삭제.
+
+### 배치·렌더·계획
+- 배치 `ush-real-b`(2키; 보조 적재, 증거 `evidence-ush-real-b.json`)를 `lib/ap-admin/batches.ts` 에 등록(`ush-*-items.json` 규칙으로 키 파일·render-check·supp 자동 인식). `render-check.ts` 재생성: 보고서(report.json·md)만 바뀜(4097행, `image:static` 2행 통과; 다른 과목 스냅샷 변경 없음).
+- 새 버전 계획(게시 v2 → v3, 각 1건): `data/ap/stock/us2-v3-real-b-swap-plan.json`(`ap_frq` #1 `ush-p1-b:…dbq_1-k0` → `ush-real-b:…real_b_dbq_market-k0`), `us1-v3-real-b-swap-plan.json`(`ap_frq` #1 `ush-p1-b:…dbq_2-k0` → `…real_b_dbq_regulation-k0`). 생성기 `scripts/ap-generation/ush-stage-b-plans.ts [--write]`, 입력 = **게시 US1 v2·US2 v2 SELECT 전용 스냅샷**(`data/ap/stock/ush-us1-us2-published-v2-slots.json`, 2026-10-15 `supabase db query --linked`; 두 시험 모두 status published, DB 단원 수 범위 안).
+- 테스트 `lib/ap-admin/ush-stage-b-plans.test.ts`(15): 관리자 새 버전 흐름(`resolveSwaps` + `checkNewVersionComposition`, `fullPracticeUnitBounds`, **DB 단원 = 후보 keyword_code 단원**)을 라이브 스냅샷에서 재현해 0 위반, 교체 뒤 독립 검증기(`verifyUshAssignment`, 두 시험 합) 0 위반·다른 칸 그대로·다른 시험에는 적용 불가, 배치 등록·키 일치·레지스트리·`realDbqViolations` 0, 문서 7(시각 2)·모든 문서가 논증 줄을 뒷받침·반론 문서 존재·표지, 변조 8종(발췌 글자·표 숫자·이미지 출처·본문 순서·증거 지도·ALTON 표지·이미지 칸 불일치·같은 줄 지지·복합) 검출, 변환 시 이미지 2장(라벨·출처)이 그림 칸에 실림.
+
+### 관리자 작업 순서(DB 쓰기 전부 관리자 화면 — 이 브랜치는 쓰지 않았다)
+1. 이 브랜치를 통합 브랜치에 병합·배포한다(배치 파일·증거·계획·**이미지 `public/ap-sources/img-next-1904`, `img-lowell-1840`**·확대 링크 코드가 번들에 실려야 한다).
+2. 관리자 → Mock Exams → AP 재고 관리 → **배치 전체 적재**: 배치 **`ush-real-b`**(2키) 선택 → 미리보기(dry-run, 쓰기 0) → "확인했습니다" → 실행(① 적재 ② 렌더 기록 ③ 화면 기록 ④ 문제은행 변환). **건너뜀 허용은 켜지 않는다**(2키 모두 렌더 보고서·화면 증거 해시 일치). 건너뜀·'검증 미완료'가 보이면 진행하지 말고 payload 와 배포본 불일치부터 푼다. 현황 표에서 `ush-real-b` 가 2/2 변환·`review_env_ready` 인지 확인.
+3. **새 버전 — `AP U.S. History — Practice Exam 1`**: 계획 `us1-v3-real-b-swap-plan.json`(교체 1건) 선택 → 미리보기(검증 통과·기존 응시 수) → 확인 → 초안 v3 → 초안에서 FRQ 1번이 새 DBQ(대기업과 연방 규제)인지, 문서 3·6 이미지가 보이는지 확인 → **'새 버전 공개'**(공개 범위는 이전 공개본에서 승계).
+4. **새 버전 — `AP U.S. History — Practice Exam 2`**: 계획 `us2-v3-real-b-swap-plan.json` 동일 절차(FRQ 1번 = 시장 혁명 DBQ, 문서 4·7 이미지). 3·4 는 서로 독립이라 순서 무관.
+5. 공개 뒤 두 DBQ 를 학생 화면(휴대폰 폭 포함)에서 한 번씩 열어 이미지·출처 캡션·'열기' 링크·정답/해설 비노출을 확인한다. 기존 v2 응시 이력은 새 버전 정책대로 건드리지 않는다. 미리보기가 source version 불일치를 보이면 그 사이 다른 v3 가 만들어진 것이니 `ush-stage-b-plans.ts` 로 새 스냅샷에서 다시 만든다.
+
+### Stage B 의 한계·UNVERIFIED
+- 사실 정확성은 LLM 검사(Opus·Sonnet 채점, Fable 사실 점검)로 보증한 것이며 **역사 교사 검수가 아니다**. 샘플 답안의 점수는 모델 채점기 결과이고 College Board 공식 채점 지침과의 일치는 검증하지 않았다(루브릭 라벨: ALTON reference — not official AP scoring).
+- **US1 DBQ 에는 정량 문서가 없다**(텍스트층 있는 공식 통계를 찾지 못함 — 위 폐기 파일 참고). 필수 구성이 아니라 '적절한 곳에서'였고 2차 자료(Tarbell)·정책 문서 2종·시각 2종으로 구성했다. 후속: 텍스트층 있는 산업 집중 통계가 확인되면 ⑥·⑦ 중 하나를 교체.
+- Tarbell 은 저널리즘 저작이며(2차 자료 표시, 사건 30여 년 뒤 저술) 엄밀한 학술 2차 자료가 아니다. Sinclair 는 소설이다(근거 자료가 아니라 여론·집필 목적 자료로 쓰도록 노트에 명시). 로웰 판화(제작자·목적 미상, LoC 날짜 c.1840), 'Next!'(두 쪽 펼침면, 가운데 접힘 보임), 'Bosses of the Senate'(LoC 필름 색띠 보임)는 원본 그대로다.
+- Document 7(US2) 지도의 작은 인쇄 글자·범례는 390px 에서 읽을 수 없어 확대 링크로만 읽는다(앱 안 확대 뷰어는 만들지 않았다).
+- 한 문제에 이미지가 둘 이상이면 이미지는 문서 본문 **아래**에 한꺼번에 나온다(문서 사이에 끼워 넣지 않음). 문서 인라인 배치는 폴리싱 라운드 후보.
+- 새 버전 공개·DB 적재는 실행하지 않았다. 적재 후 `review_env_ready`·`release_tier` 가 채워져야 새 버전 미리보기가 통과한다(미리보기가 사유를 알려 준다).

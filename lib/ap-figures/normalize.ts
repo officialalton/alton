@@ -202,7 +202,8 @@ export function normalizeStimulus(stimIn: unknown, ctx: StimCtx): NormResult {
   if (stimKind === "none") return { stimKind, spec: null, features, issues, hidden };
   if (stimKind === "image") { // 실제 자료 이미지(사진·만평·지도): data = { path, alt, credit } → static image 스펙
     const p = data && typeof data.path === "string" ? data.path : "";
-    const spec = { type: "image", bucket: "static", path: p, alt: typeof data?.alt === "string" ? data.alt : "", credit: typeof data?.credit === "string" ? data.credit : "" };
+    const more = Array.isArray(data?.more) ? (data!.more as unknown[]).filter(isObj).map((m) => ({ path: typeof m.path === "string" ? m.path : "", alt: typeof m.alt === "string" ? m.alt : "", credit: typeof m.credit === "string" ? m.credit : "", ...(typeof m.label === "string" ? { label: m.label } : {}) })) : undefined;
+    const spec = { type: "image", bucket: "static", path: p, alt: typeof data?.alt === "string" ? data.alt : "", credit: typeof data?.credit === "string" ? data.credit : "", ...(typeof data?.label === "string" ? { label: data.label } : {}), ...(more && more.length ? { more } : {}) };
     return { stimKind, spec: spec as never, features, issues, hidden };
   }
   if (stimKind === "text") {

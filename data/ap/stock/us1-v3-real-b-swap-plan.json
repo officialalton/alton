@@ -1,0 +1,28 @@
+{
+ "kind": "ap_new_version_swap_plan",
+ "set": "US1",
+ "sourceSetName": "AP U.S. History — Practice Exam 1",
+ "sourceVersionNo": 2,
+ "generatedBy": "scripts/ap-generation/ush-stage-b-plans.ts",
+ "note": "Stage B: dbq_2 (Growth and Limits of the Labor Movement, ALTON-composed) -> real-source DBQ on large corporations and federal regulation. 같은 위치(ap_frq #1)·같은 시험 구간(DBQ)·같은 시대. 순서: 배치 ush-real-b 적재 → 이 계획으로 새 버전(v3) 초안 → 확인 → '새 버전 공개'. 두 계획(US1·US2)은 서로 독립이다.",
+ "swapCount": 1,
+ "verifierViolations": [],
+ "swaps": [
+  {
+   "section": "ap_frq",
+   "position": 1,
+   "removeKey": "ush-p1-b:ap_us_history-dbq_2-k0",
+   "addKey": "ush-real-b:ap_us_history-real_b_dbq_regulation-k0",
+   "remove": {
+    "kind": "dbq",
+    "period": 6,
+    "template": "dbq"
+   },
+   "add": {
+    "kind": "dbq",
+    "period": 6,
+    "template": "dbq"
+   }
+  }
+ ]
+}
