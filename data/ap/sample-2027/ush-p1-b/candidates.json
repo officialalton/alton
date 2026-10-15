@@ -333,7 +333,7 @@
   "structure": "frq_multipart",
   "archetype": "ushfrq_saq1_3",
   "reviewState": "rejected",
-  "rejectionReason": "samples_not_strictly_ordered",
+  "rejectionReason": "sample_low_missing; sample_low_no_consistent_candidate",
   "difficultyProvisional": null,
   "payload": {
    "archetype": "ushfrq_saq1_3",
@@ -561,88 +561,44 @@
      },
      {
       "tier": "mid",
-      "target_total": 3,
-      "essay": "(A) Calderwood thinks the main reason suburbs grew was federal government policy. She says mortgage programs and road money made it cheap and easy to move out of the city, and that government rules decided who got to move. Ashby-Monroe thinks the main reason was what families wanted after the depression and war. He says government programs only made houses affordable, but the real cause was a culture that valued family, space, and a house with a yard.\n\n(B) One example that supports Calderwood is the GI Bill of 1944, which gave returning veterans VA-guaranteed home loans with little or no down payment. This helped millions of veterans buy new houses in places like Levittown, so it shows the federal government making suburban homes cheap for young families. This fits Calderwood's argument that Washington laid the foundation for the suburbs.\n\n(C) One example that supports Ashby-Monroe is the baby boom of the late 1940s and 1950s. Many couples were having more children than before, so they wanted bigger homes with yards and safe places for kids to play. This shows that family life was a reason people moved to the suburbs, which is what Ashby-Monroe says about families wanting space and privacy. Also, television was popular in the 1950s.",
-      "word_count": 209,
+      "target_total": 2,
+      "essay": "(A) One major difference is what each historian thinks was the main cause of suburban growth. Calderwood argues that the federal government was the driving force, because its mortgage programs and road building made suburbs possible and also decided who was allowed to live in them. Ashby-Monroe argues that the main cause was what families wanted after the Depression and the war, like space and a safe home life, and he says government programs only made the houses affordable.\n\n(B) The GI Bill of 1944 supports Calderwood's interpretation. It gave veterans home loans guaranteed by the Veterans Administration, so many returning soldiers could buy a house with little or no down payment. This helped fuel the move to new suburbs like Levittown after World War II, because government backing made it cheap for young families to buy there instead of renting in the city. That shows federal policy was what made the suburban boom happen, which is what Calderwood says.\n\n(C) The baby boom supports Ashby-Monroe's interpretation. After World War II there was a baby boom in the late 1940s and 1950s, and a lot of people were having children. This fits with what Ashby-Monroe says about families in the suburbs.",
+      "word_count": 201,
       "rubric_scores": {
        "a": 1,
        "b": 1,
-       "c": 1,
-       "total": 3
-      },
-      "annotations": [
-       {
-        "quote": "Calderwood thinks the main reason suburbs grew was federal government policy.",
-        "comment": "Accurately states Calderwood's cause as federal policy, setting up a contrast with the other historian.",
-        "row_id": "a"
-       },
-       {
-        "quote": "Ashby-Monroe thinks the main reason was what families wanted after the depression and war.",
-        "comment": "Correctly contrasts family desires and culture with federal policy as the driving cause, so a real difference is described and Part A earns the point.",
-        "row_id": "a"
-       },
-       {
-        "quote": "the GI Bill of 1944, which gave returning veterans VA-guaranteed home loans with little or no down payment",
-        "comment": "Names a specific, accurate program not in the excerpt and ties it to postwar suburbs. The 1944 date is allowed because it is linked to postwar growth.",
-        "row_id": "b"
-       },
-       {
-        "quote": "This fits Calderwood's argument that Washington laid the foundation for the suburbs.",
-        "comment": "Connects the evidence to Calderwood's claim, so Part B earns the point.",
-        "row_id": "b"
-       },
-       {
-        "quote": "One example that supports Ashby-Monroe is the baby boom of the late 1940s and 1950s.",
-        "comment": "Names a specific accurate development, but the excerpt already says couples had more children, so this is close to restating it.",
-        "row_id": "c"
-       },
-       {
-        "quote": "Also, television was popular in the 1950s.",
-        "comment": "Only mentions television without explaining how shows idealizing suburban life pushed families to move, so it adds no credit. Part C stays vague and does not earn the point.",
-        "row_id": "c"
-       }
-      ]
-     },
-     {
-      "tier": "low",
-      "target_total": 2,
-      "essay": "(A) Calderwood thinks the suburbs grew mainly because of the federal government, since its mortgage programs and road money made it cheap to buy a house and move out of the city. Ashby-Monroe disagrees and thinks the main cause was what families wanted, like space and a safe home life after the depression and war, and that government programs only made the houses affordable.\n\n(B) The government did a lot to help people move to the suburbs in this time. It gave out money and loans and built things that helped people leave the cities. This supports Calderwood because she says the government was the foundation of the suburbs, and the government programs after World War II helped many people buy homes in the suburbs instead of staying in the city.\n\n(C) The baby boom supports Ashby-Monroe. After the war there were a lot of babies and families got bigger. Ashby-Monroe says families wanted more space, so the baby boom shows that families wanted to live in the suburbs and that is why the suburbs grew.",
-      "word_count": 176,
-      "rubric_scores": {
-       "a": 1,
-       "b": 0,
-       "c": 1,
+       "c": 0,
        "total": 2
       },
       "annotations": [
        {
-        "quote": "Calderwood thinks the suburbs grew mainly because of the federal government",
-        "comment": "Accurately identifies Calderwood's argument that federal policy was the main cause. Together with the contrast that follows, this earns the Part A point.",
+        "quote": "Calderwood argues that the federal government was the driving force, because its mortgage programs and road building made suburbs possible and also decided who was allowed to live in them.",
+        "comment": "Accurately states Calderwood's claim of federal policy as the main cause, including exclusion. This sets up a real contrast, not just a summary of one excerpt.",
         "row_id": "a"
        },
        {
-        "quote": "Ashby-Monroe disagrees and thinks the main cause was what families wanted",
-        "comment": "Correctly contrasts this with Ashby-Monroe's emphasis on family culture and demand, and notes that he sees government only as making homes affordable. This completes a real difference, so Part A earns credit.",
+        "quote": "Ashby-Monroe argues that the main cause was what families wanted after the Depression and the war",
+        "comment": "Correctly contrasts this with family culture and demand as the main cause, with government only making houses affordable. A difference is clearly described, so Part A earns the point.",
         "row_id": "a"
        },
        {
-        "quote": "It gave out money and loans and built things that helped people leave the cities.",
-        "comment": "Too vague. It names no specific program, law, or event, such as the GI Bill, FHA mortgages, or the Federal-Aid Highway Act of 1956. No credit for Part B.",
+        "quote": "The GI Bill of 1944 supports Calderwood's interpretation.",
+        "comment": "Names a specific, accurate program not named in the excerpt. The 1944 date is allowed because it is tied to postwar suburban growth.",
         "row_id": "b"
        },
        {
-        "quote": "This supports Calderwood because she says the government was the foundation of the suburbs",
-        "comment": "This only repeats the excerpt's own claim and does not add outside evidence or explain how any specific policy produced suburban growth.",
+        "quote": "government backing made it cheap for young families to buy there instead of renting in the city",
+        "comment": "Explains the link: VA-guaranteed loans lowered the cost of buying and drove suburban growth, supporting Calderwood's argument. Part B earns the point.",
         "row_id": "b"
        },
        {
-        "quote": "The baby boom supports Ashby-Monroe.",
-        "comment": "The baby boom is a valid outside example from the period, but it is only named here and not developed.",
+        "quote": "The baby boom supports Ashby-Monroe's interpretation.",
+        "comment": "The baby boom is an acceptable, specific example from the period, but the response only names it.",
         "row_id": "c"
        },
        {
-        "quote": "so the baby boom shows that families wanted to live in the suburbs and that is why the suburbs grew",
-        "comment": "This paraphrases the excerpt's claim about larger families wanting space. It does not explain how the baby boom connects to suburban housing demand, for example through the need for yards, bigger houses, and child-centered neighborhoods. No credit for Part C.",
+        "quote": "This fits with what Ashby-Monroe says about families in the suburbs.",
+        "comment": "This only asserts a fit and restates the excerpt's point about larger families. It never explains how more children led families to want suburban homes or space, so the link to consumer and cultural preference is missing. No credit for Part C.",
         "row_id": "c"
        }
       ]
@@ -4538,14 +4494,96 @@
   "candidateKey": "ap_us_history-leq_1-k0",
   "keywordCode": "3.1",
   "unitCode": "3",
-  "skillPrimary": "1.B",
+  "skillPrimary": "6.A",
   "structure": "frq_multipart",
   "archetype": "ushfrq_leq_1",
-  "reviewState": "rejected",
-  "rejectionReason": "sample_mid_missing; sample_low_missing; sample_mid_no_consistent_candidate; sample_low_no_consistent_candidate",
-  "difficultyProvisional": null,
+  "reviewState": "auto_passed",
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
   "payload": {
    "archetype": "ushfrq_leq_1",
+   "template": "leq",
+   "topic": "3.1",
+   "extra_topics": [],
+   "skill": "6.A",
+   "representative_skill": "6.A",
+   "calculator": "na",
+   "title": "Federal Power Versus State Power and the Shaping of the Nation, 1787-1877",
+   "set_intro": "",
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "From the drafting of the Constitution to the end of Reconstruction, Americans argued again and again about how power should be divided between the national government and the states. These arguments came up over taxation, banking, tariffs, westward expansion, slavery, and the rights of citizens.\n\nEvaluate the extent to which debates over the power of the federal government relative to the states changed the United States from 1787 to 1877. You are not expected to address the entire time period.\n\nIn your response you should do the following:\n- Respond to the prompt with a historically defensible thesis or claim that establishes a line of reasoning.\n- Describe a broader historical context relevant to the prompt.\n- Support an argument in response to the prompt using at least two pieces of specific and relevant evidence.\n- Use historical reasoning (for example, causation, comparison, or continuity and change) to frame or structure an argument that addresses the prompt.\n- Use evidence to corroborate, qualify, or modify an argument that addresses the prompt, showing a complex understanding.",
+     "points": 6,
+     "response_mode": "essay",
+     "skill_codes": [
+      "6.A"
+     ],
+     "topic_codes": [
+      "3.1"
+     ],
+     "model_answer": "After the Revolution, Americans were suspicious of any strong central government because they had just fought a war against a king and Parliament who taxed them without consent. Because of this, the Articles of Confederation gave almost all power to the states. Congress could not tax, could not regulate trade between states, and could not raise an army without the states agreeing. When farmers in Massachusetts rose up in Shays' Rebellion in 1786 over debts and taxes, the national government could do almost nothing, and many leaders decided a stronger government was needed. This tension between fear of tyranny and the need for a working national government shaped arguments for the next ninety years.\n\nFrom 1787 to 1877, debates over federal versus state power changed the United States a great deal by creating a much stronger national government, especially after the Civil War, but the change was not complete because states kept control over many rights, and after 1877 the South was able to use states' rights again to limit Black citizens.\n\nThe first big debate was over the Constitution itself. Federalists like Hamilton and Madison argued in the Federalist Papers that a stronger government would protect liberty better, while Anti-Federalists worried it would crush the states. The compromise was the Bill of Rights, and the Tenth Amendment said powers not given to the federal government belonged to the states. This shows the nation changed by having a real national government, but the states' role was still protected. Soon after, Hamilton's national bank caused another fight. Jefferson said the Constitution did not allow a bank, but Hamilton used the elastic clause. In McCulloch v. Maryland (1819), John Marshall's Supreme Court ruled that the bank was constitutional and that Maryland could not tax it, which made federal law supreme over the states.\n\nStates' rights arguments did not go away, though. In the Virginia and Kentucky Resolutions of 1798, Jefferson and Madison argued states could judge the Alien and Sedition Acts unconstitutional. John C. Calhoun built on this idea in the Nullification Crisis of 1832, when South Carolina declared the tariff void. Jackson threatened to use force with the Force Bill, and a compromise tariff ended the crisis. Interestingly, the side that wanted states' rights changed depending on the issue. New England Federalists at the Hartford Convention complained about federal power during the War of 1812, and Southerners who talked about states' rights supported the Fugitive Slave Act of 1850, which made Northern states help return escaped slaves. This shows the debate was often really about slavery and economic interests more than a principle.\n\nThese arguments eventually led to secession. After Lincoln was elected in 1860, South Carolina and other Southern states claimed they had the right to leave the Union. The Union victory in the Civil War settled that states could not secede, which was the biggest change in the whole period. Then the Reconstruction Amendments greatly expanded federal power. The Thirteenth Amendment ended slavery, and the Fourteenth Amendment made everyone born in the U.S. a citizen and said no state could deny equal protection of the laws. For the first time, the federal government was protecting individual rights against the states.\n\nHowever, this change was limited. After the Compromise of 1877, federal troops left the South, and Southern states passed laws that took away Black voting rights and set up segregation. So even though the Constitution had changed, states still had a lot of power in practice. Overall, debates over federal and state power transformed the nation by making the Union permanent and creating national citizenship, but the continuing power of the states meant the promise of Reconstruction was not fulfilled until much later, during the civil rights movement.",
+     "rubric_rows": [
+      {
+       "row_id": "thesis",
+       "points": 1,
+       "criterion": "A historically defensible claim that judges how far debates over federal versus state power changed the nation between 1787 and 1877, and that sets up a line of reasoning, for example by naming the ways it changed (a stronger national government, sectional crisis and war, new definitions of citizenship) and what stayed the same.",
+       "required_elements": [],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "context",
+       "points": 1,
+       "criterion": "Describes a broader context relevant to the prompt, such as the weaknesses of the Articles of Confederation and Shays' Rebellion, Revolutionary-era fears of centralized power drawn from the conflict with Britain, or the market revolution and westward expansion that raised new questions about federal authority.",
+       "required_elements": [],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "evidence",
+       "points": 2,
+       "criterion": "Specific examples such as the ratification debate, the Bill of Rights, Hamilton's bank, the Virginia and Kentucky Resolutions, McCulloch v. Maryland, the Nullification Crisis, the Bank War, the Fugitive Slave Act of 1850, Dred Scott, secession, the Reconstruction Amendments, and the Compromise of 1877.",
+       "required_elements": [],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "analysis",
+       "points": 2,
+       "criterion": "Uses causation, comparison, or continuity and change to structure the essay, for example tracing how arguments for states' rights moved from the Virginia and Kentucky Resolutions to nullification to secession, and how the Civil War and Reconstruction Amendments strengthened federal power. Complexity might mean explaining both change and continuity (for example, federal power over civil rights grew but then weakened after 1877), noting that sides switched positions depending on the issue (New England Federalists at the Hartford Convention, Southern support for the federal Fugitive Slave Act), or tying the topic to a later period.",
+       "required_elements": [],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ]
+    }
+   ],
+   "reference_text": "Scoring guide (ALTON practice rubric, not official College Board scoring). This question is worth 6 points.\nThesis/claim (0-1): A historically defensible claim that judges how far debates over federal versus state power changed the nation between 1787 and 1877, and that sets up a line of reasoning, for example by naming the ways it changed (a stronger national government, sectional crisis and war, new definitions of citizenship) and what stayed the same.\n   - 1: Gives a defensible thesis that judges the extent of change and sets up a line of reasoning about federal-state debates, 1787-1877.\n   - 0: No defensible thesis, the thesis only restates the prompt, or it does not judge the extent of change.\nContextualization (0-1): Describes a broader context relevant to the prompt, such as the weaknesses of the Articles of Confederation and Shays' Rebellion, Revolutionary-era fears of centralized power drawn from the conflict with Britain, or the market revolution and westward expansion that raised new questions about federal authority.\n   - 1: Describes a broader historical context relevant to federal-state power debates and connects it to the argument.\n   - 0: No relevant context, or only a passing reference.\nEvidence (0-2): Specific examples such as the ratification debate, the Bill of Rights, Hamilton's bank, the Virginia and Kentucky Resolutions, McCulloch v. Maryland, the Nullification Crisis, the Bank War, the Fugitive Slave Act of 1850, Dred Scott, secession, the Reconstruction Amendments, and the Compromise of 1877.\n   - 2: Uses at least two specific, relevant examples to support an argument in response to the prompt.\n   - 1: Gives at least two specific, relevant examples of evidence about the topic.\n   - 0: No specific relevant evidence, or only one example.\nAnalysis and reasoning (0-2): Uses causation, comparison, or continuity and change to structure the essay, for example tracing how arguments for states' rights moved from the Virginia and Kentucky Resolutions to nullification to secession, and how the Civil War and Reconstruction Amendments strengthened federal power. Complexity might mean explaining both change and continuity (for example, federal power over civil rights grew but then weakened after 1877), noting that sides switched positions depending on the issue (New England Federalists at the Hartford Convention, Southern support for the federal Fugitive Slave Act), or tying the topic to a later period.\n   - 2: Shows a complex understanding by using evidence to corroborate, qualify, or modify the argument, for example by weighing change against continuity or explaining multiple causes or perspectives.\n   - 1: Uses historical reasoning to frame or structure an argument about the extent of change.\n   - 0: Does not use historical reasoning to frame an argument.\nNote: Accept either a 'significant change' or a 'limited change' thesis if it is defensible and supported.\nNote: Students may focus on part of the period; full coverage of 1787-1877 is not required.\nNote: Evidence must relate to the balance between federal and state power, not only slavery or politics in general.\nNote: Context must be more than one phrase and must relate to the argument; it may come from just before 1787 or from developments within the period.\n\nSample response, high score (6/6; Thesis/claim 1, Contextualization 1, Evidence 2, Analysis and reasoning 2):\nAfter the Revolution, Americans were suspicious of any strong central government because they had just fought a war against a king and Parliament who taxed them without consent. Because of this, the Articles of Confederation gave almost all power to the states. Congress could not tax, could not regulate trade between states, and could not raise an army without the states agreeing. When farmers in Massachusetts rose up in Shays' Rebellion in 1786 over debts and taxes, the national government could do almost nothing, and many leaders decided a stronger government was needed. This tension between fear of tyranny and the need for a working national government shaped arguments for the next ninety years.\n\nFrom 1787 to 1877, debates over federal versus state power changed the United States a great deal by creating a much stronger national government, especially after the Civil War, but the change was not complete because states kept control over many rights, and after 1877 the South was able to use states' rights again to limit Black citizens.\n\nThe first big debate was over the Constitution itself. Federalists like Hamilton and Madison argued in the Federalist Papers that a stronger government would protect liberty better, while Anti-Federalists worried it would crush the states. The compromise was the Bill of Rights, and the Tenth Amendment said powers not given to the federal government belonged to the states. This shows the nation changed by having a real national government, but the states' role was still protected. Soon after, Hamilton's national bank caused another fight. Jefferson said the Constitution did not allow a bank, but Hamilton used the elastic clause. In McCulloch v. Maryland (1819), John Marshall's Supreme Court ruled that the bank was constitutional and that Maryland could not tax it, which made federal law supreme over the states.\n\nStates' rights arguments did not go away, though. In the Virginia and Kentucky Resolutions of 1798, Jefferson and Madison argued states could judge the Alien and Sedition Acts unconstitutional. John C. Calhoun built on this idea in the Nullification Crisis of 1832, when South Carolina declared the tariff void. Jackson threatened to use force with the Force Bill, and a compromise tariff ended the crisis. Interestingly, the side that wanted states' rights changed depending on the issue. New England Federalists at the Hartford Convention complained about federal power during the War of 1812, and Southerners who talked about states' rights supported the Fugitive Slave Act of 1850, which made Northern states help return escaped slaves. This shows the debate was often really about slavery and economic interests more than a principle.\n\nThese arguments eventually led to secession. After Lincoln was elected in 1860, South Carolina and other Southern states claimed they had the right to leave the Union. The Union victory in the Civil War settled that states could not secede, which was the biggest change in the whole period. Then the Reconstruction Amendments greatly expanded federal power. The Thirteenth Amendment ended slavery, and the Fourteenth Amendment made everyone born in the U.S. a citizen and said no state could deny equal protection of the laws. For the first time, the federal government was protecting individual rights against the states.\n\nHowever, this change was limited. After the Compromise of 1877, federal troops left the South, and Southern states passed laws that took away Black voting rights and set up segregation. So even though the Constitution had changed, states still had a lot of power in practice. Overall, debates over federal and state power transformed the nation by making the Union permanent and creating national citizenship, but the continuing power of the states meant the promise of Reconstruction was not fulfilled until much later, during the civil rights movement.\n   - \"debates over federal versus state power changed the United States a great deal by creating a much stronger national government\" - Defensible thesis that judges extent (great deal but not complete) and sets a line of reasoning: stronger government, war, limits after 1877.\n   - \"When farmers in Massachusetts rose up in Shays' Rebellion in 1786\" - Context of Articles weakness and Revolutionary fear of central power, tied to the ongoing tension the essay traces.\n   - \"In McCulloch v. Maryland (1819), John Marshall's Supreme Court ruled that the bank was constitutional and that Maryland could not tax it\" - Specific evidence used to support the claim that federal supremacy grew.\n   - \"The Fourteenth Amendment made everyone born in the U.S. a citizen\" - Specific evidence connected to the argument about federal protection of rights against states; with nullification and secession earns 2.\n   - \"Calhoun built on this idea in the Nullification Crisis of 1832\" - Traces continuity of states' rights arguments from 1798 to nullification to secession, a causal line of reasoning.\n   - \"the side that wanted states' rights changed depending on the issue\" - Complexity: Hartford Convention and the Fugitive Slave Act show positions switched, which qualifies the argument.\n   - \"However, this change was limited. After the Compromise of 1877\" - Weighs change against continuity; the explanation of later Jim Crow laws is brief, which keeps this short of a top-level essay.\n\nSample response, middle score (5/6; Thesis/claim 1, Contextualization 1, Evidence 2, Analysis and reasoning 1):\nDebates over federal power versus state power changed the United States a great deal between 1787 and 1877, because they moved the country from a loose union of states toward a stronger national government, but some of the change was limited since states kept a lot of power and the federal government pulled back from Reconstruction at the end.\n\nBefore 1787 the United States was run under the Articles of Confederation. Americans had just fought Britain because they feared a distant central government that taxed them, so the Articles gave Congress very little power. Congress could not tax and could not force states to follow its decisions. Problems like Shays' Rebellion in Massachusetts in 1786 and 1787, where farmers in debt shut down courts, made many leaders think the national government was too weak. This led to the Constitutional Convention, which created a stronger federal government but still left many powers to the states.\n\nOne example of the debate was the fight over Hamilton's national bank in the 1790s. Hamilton wanted a Bank of the United States to help the economy and handle the national debt. Jefferson and Madison said the Constitution did not say Congress could create a bank, so it was unconstitutional, and they wanted a strict reading of the Constitution. Washington sided with Hamilton, and the bank was created using the idea of implied powers from the necessary and proper clause. Later, in McCulloch v. Maryland in 1819, the Supreme Court under John Marshall said Maryland could not tax the national bank and that the federal government had implied powers. This shows the national government getting stronger over time.\n\nAnother example is the Nullification Crisis. In 1832 South Carolina said it could nullify the federal tariff because it hurt Southern farmers. John C. Calhoun argued that states could cancel federal laws they thought were unconstitutional. President Jackson, even though he liked limiting government in other ways, said the Union could not be broken and threatened to use force. A compromise tariff was passed in 1833 and South Carolina backed down. This showed that states' rights arguments were strong in the South, and the same kind of argument came back later with secession in 1860 and 1861.\n\nThe biggest change came with the Civil War and Reconstruction. After the North won, the Thirteenth, Fourteenth, and Fifteenth Amendments were added, which ended slavery, made African Americans citizens, and protected their right to vote. These gave the federal government power to enforce rights against the states, which was a big change from 1787. However, there was also continuity, because by the Compromise of 1877 federal troops left the South and Southern states went back to controlling their own affairs, so African Americans lost many protections.\n\nIn conclusion, the debates changed the country by making the federal government much stronger, especially after the Civil War, but the struggle between the two levels never fully ended.\n   - \"changed the United States a great deal between 1787 and 1877, because they moved the country from a loose union of states toward a stronger national government, but some of the change was limited since states kept a lot of power\" - Defensible thesis that judges the extent of change and previews a line of reasoning (stronger national government, but limited by state power and the end of Reconstruction). Earns the thesis point, though the categories of change are not very specific.\n   - \"Problems like Shays' Rebellion in Massachusetts in 1786 and 1787, where farmers in debt shut down courts, made many leaders think the national government was too weak.\" - Describes relevant context (Articles of Confederation weakness, fear of central power from Britain, Shays' Rebellion) and links it to the Constitutional Convention. Brief but connected to the argument, so it earns the context point.\n   - \"Washington sided with Hamilton, and the bank was created using the idea of implied powers from the necessary and proper clause.\" - Accurate, specific evidence about the bank debate and McCulloch v. Maryland. It is mostly described rather than analyzed, with little explanation of how the debate changed the balance of power.\n   - \"A compromise tariff was passed in 1833 and South Carolina backed down.\" - Second specific example (Nullification Crisis) that is accurate and relevant. It is linked to later secession, but the causal link is stated rather than explained, so evidence support is only partly developed.\n   - \"This shows the national government getting stronger over time.\" - Reasoning is present (continuity and change) but thin: it asserts a conclusion without explaining how the ruling actually shifted power from states to the federal government.\n   - \"However, there was also continuity, because by the Compromise of 1877 federal troops left the South and Southern states went back to controlling their own affairs\" - Qualifies the argument by weighing change against continuity, which moves toward complexity. It is brief and not developed with multiple causes or perspectives, so it does not fully earn the second analysis point.\n\nSample response, low score (3/6; Thesis/claim 0, Contextualization 0, Evidence 2, Analysis and reasoning 1):\nDebates over federal and state power were very important in United States history from 1787 to 1877. The country argued about this issue many times and it changed in some ways, but the debates also stayed important throughout the period. This essay will show that the debates changed the United States a lot.\n\nThe debates were a big part of American history because Americans did not agree on how much power the government should have. Some people wanted a strong national government and other people wanted the states to have more say. This made many problems for the country and led to a lot of conflict over time.\n\nOne example is the Civil War. The Southern states left the Union because they believed the states had the right to decide about slavery. The North fought to keep the country together. After the war the federal government became stronger than it was before. This shows that the debate changed the country.\n\nAnother example is the Reconstruction period. The government passed new amendments after the war, including the Thirteenth Amendment, which ended slavery. This changed the country because the federal government took on more power over what states could do.\n\nIn conclusion, the debates over federal power changed the United States in many ways between 1787 and 1877. They caused a war and led to a stronger national government, even though people still argued about it afterward.\n   - \"This essay will show that the debates changed the United States a lot.\" - Thesis only restates the prompt with a vague 'a lot'. It names no specific ways the nation changed and sets up no line of reasoning, so it earns no thesis point.\n   - \"Some people wanted a strong national government and other people wanted the states to have more say.\" - General background with no specific events, such as the Articles of Confederation or Revolutionary-era fears of central power, and it is not tied to the argument. No contextualization credit.\n   - \"The Southern states left the Union because they believed the states had the right to decide about slavery.\" - Secession is a relevant example but is described only generally, with no dates, specific events or details. It is the main example and is not developed.\n   - \"The government passed new amendments after the war, including the Thirteenth Amendment, which ended slavery.\" - A second example is mentioned but barely explained, and it is not clearly linked to federal versus state power. Together with the thin first example, this does not reach the evidence standard.\n   - \"After the war the federal government became stronger than it was before.\" - States a change but gives no causal explanation of how the debates produced it. It also ignores continuity, such as the weakening of federal power by 1877. No historical reasoning or complexity.",
    "ush_frq": {
     "schema_version": "ush-frq-1",
     "task_type": "leq",
@@ -4724,6 +4762,91 @@
         "quote": "However, this change was limited. After the Compromise of 1877",
         "comment": "Weighs change against continuity; the explanation of later Jim Crow laws is brief, which keeps this short of a top-level essay.",
         "row_id": "analysis and reasoning"
+       }
+      ]
+     },
+     {
+      "tier": "mid",
+      "target_total": 5,
+      "essay": "Debates over federal power versus state power changed the United States a great deal between 1787 and 1877, because they moved the country from a loose union of states toward a stronger national government, but some of the change was limited since states kept a lot of power and the federal government pulled back from Reconstruction at the end.\n\nBefore 1787 the United States was run under the Articles of Confederation. Americans had just fought Britain because they feared a distant central government that taxed them, so the Articles gave Congress very little power. Congress could not tax and could not force states to follow its decisions. Problems like Shays' Rebellion in Massachusetts in 1786 and 1787, where farmers in debt shut down courts, made many leaders think the national government was too weak. This led to the Constitutional Convention, which created a stronger federal government but still left many powers to the states.\n\nOne example of the debate was the fight over Hamilton's national bank in the 1790s. Hamilton wanted a Bank of the United States to help the economy and handle the national debt. Jefferson and Madison said the Constitution did not say Congress could create a bank, so it was unconstitutional, and they wanted a strict reading of the Constitution. Washington sided with Hamilton, and the bank was created using the idea of implied powers from the necessary and proper clause. Later, in McCulloch v. Maryland in 1819, the Supreme Court under John Marshall said Maryland could not tax the national bank and that the federal government had implied powers. This shows the national government getting stronger over time.\n\nAnother example is the Nullification Crisis. In 1832 South Carolina said it could nullify the federal tariff because it hurt Southern farmers. John C. Calhoun argued that states could cancel federal laws they thought were unconstitutional. President Jackson, even though he liked limiting government in other ways, said the Union could not be broken and threatened to use force. A compromise tariff was passed in 1833 and South Carolina backed down. This showed that states' rights arguments were strong in the South, and the same kind of argument came back later with secession in 1860 and 1861.\n\nThe biggest change came with the Civil War and Reconstruction. After the North won, the Thirteenth, Fourteenth, and Fifteenth Amendments were added, which ended slavery, made African Americans citizens, and protected their right to vote. These gave the federal government power to enforce rights against the states, which was a big change from 1787. However, there was also continuity, because by the Compromise of 1877 federal troops left the South and Southern states went back to controlling their own affairs, so African Americans lost many protections.\n\nIn conclusion, the debates changed the country by making the federal government much stronger, especially after the Civil War, but the struggle between the two levels never fully ended.",
+      "word_count": 484,
+      "rubric_scores": {
+       "thesis": 1,
+       "context": 1,
+       "evidence": 2,
+       "analysis": 1,
+       "total": 5
+      },
+      "annotations": [
+       {
+        "quote": "changed the United States a great deal between 1787 and 1877, because they moved the country from a loose union of states toward a stronger national government, but some of the change was limited since states kept a lot of power",
+        "comment": "Defensible thesis that judges the extent of change and previews a line of reasoning (stronger national government, but limited by state power and the end of Reconstruction). Earns the thesis point, though the categories of change are not very specific.",
+        "row_id": "thesis"
+       },
+       {
+        "quote": "Problems like Shays' Rebellion in Massachusetts in 1786 and 1787, where farmers in debt shut down courts, made many leaders think the national government was too weak.",
+        "comment": "Describes relevant context (Articles of Confederation weakness, fear of central power from Britain, Shays' Rebellion) and links it to the Constitutional Convention. Brief but connected to the argument, so it earns the context point.",
+        "row_id": "context"
+       },
+       {
+        "quote": "Washington sided with Hamilton, and the bank was created using the idea of implied powers from the necessary and proper clause.",
+        "comment": "Accurate, specific evidence about the bank debate and McCulloch v. Maryland. It is mostly described rather than analyzed, with little explanation of how the debate changed the balance of power.",
+        "row_id": "evidence"
+       },
+       {
+        "quote": "A compromise tariff was passed in 1833 and South Carolina backed down.",
+        "comment": "Second specific example (Nullification Crisis) that is accurate and relevant. It is linked to later secession, but the causal link is stated rather than explained, so evidence support is only partly developed.",
+        "row_id": "evidence"
+       },
+       {
+        "quote": "This shows the national government getting stronger over time.",
+        "comment": "Reasoning is present (continuity and change) but thin: it asserts a conclusion without explaining how the ruling actually shifted power from states to the federal government.",
+        "row_id": "analysis"
+       },
+       {
+        "quote": "However, there was also continuity, because by the Compromise of 1877 federal troops left the South and Southern states went back to controlling their own affairs",
+        "comment": "Qualifies the argument by weighing change against continuity, which moves toward complexity. It is brief and not developed with multiple causes or perspectives, so it does not fully earn the second analysis point.",
+        "row_id": "analysis"
+       }
+      ]
+     },
+     {
+      "tier": "low",
+      "target_total": 3,
+      "essay": "Debates over federal and state power were very important in United States history from 1787 to 1877. The country argued about this issue many times and it changed in some ways, but the debates also stayed important throughout the period. This essay will show that the debates changed the United States a lot.\n\nThe debates were a big part of American history because Americans did not agree on how much power the government should have. Some people wanted a strong national government and other people wanted the states to have more say. This made many problems for the country and led to a lot of conflict over time.\n\nOne example is the Civil War. The Southern states left the Union because they believed the states had the right to decide about slavery. The North fought to keep the country together. After the war the federal government became stronger than it was before. This shows that the debate changed the country.\n\nAnother example is the Reconstruction period. The government passed new amendments after the war, including the Thirteenth Amendment, which ended slavery. This changed the country because the federal government took on more power over what states could do.\n\nIn conclusion, the debates over federal power changed the United States in many ways between 1787 and 1877. They caused a war and led to a stronger national government, even though people still argued about it afterward.",
+      "word_count": 235,
+      "rubric_scores": {
+       "thesis": 0,
+       "context": 0,
+       "evidence": 2,
+       "analysis": 1,
+       "total": 3
+      },
+      "annotations": [
+       {
+        "quote": "This essay will show that the debates changed the United States a lot.",
+        "comment": "Thesis only restates the prompt with a vague 'a lot'. It names no specific ways the nation changed and sets up no line of reasoning, so it earns no thesis point.",
+        "row_id": "thesis"
+       },
+       {
+        "quote": "Some people wanted a strong national government and other people wanted the states to have more say.",
+        "comment": "General background with no specific events, such as the Articles of Confederation or Revolutionary-era fears of central power, and it is not tied to the argument. No contextualization credit.",
+        "row_id": "context"
+       },
+       {
+        "quote": "The Southern states left the Union because they believed the states had the right to decide about slavery.",
+        "comment": "Secession is a relevant example but is described only generally, with no dates, specific events or details. It is the main example and is not developed.",
+        "row_id": "evidence"
+       },
+       {
+        "quote": "The government passed new amendments after the war, including the Thirteenth Amendment, which ended slavery.",
+        "comment": "A second example is mentioned but barely explained, and it is not clearly linked to federal versus state power. Together with the thin first example, this does not reach the evidence standard.",
+        "row_id": "evidence"
+       },
+       {
+        "quote": "After the war the federal government became stronger than it was before.",
+        "comment": "States a change but gives no causal explanation of how the debates produced it. It also ignores continuity, such as the weakening of federal power by 1877. No historical reasoning or complexity.",
+        "row_id": "analysis"
        }
       ]
      }
@@ -4910,14 +5033,96 @@
   "candidateKey": "ap_us_history-leq_3-k0",
   "keywordCode": "4.1",
   "unitCode": "4",
-  "skillPrimary": "1.B",
+  "skillPrimary": "6.A",
   "structure": "frq_multipart",
   "archetype": "ushfrq_leq_3",
-  "reviewState": "rejected",
-  "rejectionReason": "sample_mid_missing; sample_mid_no_consistent_candidate",
-  "difficultyProvisional": null,
+  "reviewState": "auto_passed",
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
   "payload": {
    "archetype": "ushfrq_leq_3",
+   "template": "leq",
+   "topic": "4.1",
+   "extra_topics": [],
+   "skill": "6.A",
+   "representative_skill": "6.A",
+   "calculator": "na",
+   "title": "Migration, Immigration, and the Remaking of American Society and Politics, 1607-1865",
+   "set_intro": "",
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "Between the founding of Jamestown and the end of the Civil War, people kept arriving in and moving across North America. English, Scots-Irish, German, and later Irish and Chinese migrants came, voluntarily or as bound laborers. Enslaved Africans were transported by force. Settlers moved west across the Appalachians and on toward the Pacific, and Native nations were removed from their homelands. These movements changed who lived where, how people worked, and what political conflicts Americans fought over.\n\nEvaluate the extent to which migration and immigration changed American society and politics from 1607 to 1865.\n\nIn your response you should do the following:\n- Respond to the prompt with a historically defensible thesis or claim that establishes a line of reasoning.\n- Describe a broader historical context relevant to the prompt.\n- Support an argument in response to the prompt using at least two pieces of specific and relevant evidence.\n- Use historical reasoning (causation, comparison, or continuity and change) to frame or structure an argument that addresses the prompt.\n- Demonstrate a complex understanding of the historical development that is the focus of the prompt.\n- You are not expected to address the entire time period. You may focus on any developments within the span from 1607 to 1865.",
+     "points": 6,
+     "response_mode": "essay",
+     "skill_codes": [
+      "6.A"
+     ],
+     "topic_codes": [
+      "4.1"
+     ],
+     "model_answer": "From the start, the English colonies were built by people who came from somewhere else, and by people who were forced to come. Between 1607 and 1865 migration did a lot to change American society and politics. It shaped how labor was organized, it caused conflict over land with Native nations, and in the 1850s it helped break apart the party system. However, migration did not create these divisions alone. It mostly deepened conflicts that already existed over slavery and land, so its effect was large but it worked through older problems.\n\nMigration in this period was tied to bigger changes in the Atlantic world. England followed mercantilism and wanted colonies that produced cash crops like tobacco, which needed a lot of workers. Later, in the 1800s, the market revolution brought canals, railroads and factories that needed cheap labor, while the Irish potato famine and the failed revolutions of 1848 in Europe pushed millions of people to leave. Ideas like Manifest Destiny also encouraged Americans to believe they had a right to move west.\n\nIn the colonial Chesapeake, migration changed the labor system. At first planters relied on indentured servants from England, and the headright system gave land to people who paid for a servant's passage. But when freed servants could not get good land, they became angry, and in Bacon's Rebellion in 1676 poor whites and some Black servants attacked Native Americans and burned Jamestown. After this, planters turned more to enslaved Africans brought by the Atlantic slave trade, because they seemed less of a threat. So migration first created a servant society, and then forced migration created a slave society with strict racial laws. This shows one type of migration causing a change to another type.\n\nWestward migration also changed politics a lot. As settlers moved across the Appalachians and into the Southeast, they wanted Native land. Andrew Jackson signed the Indian Removal Act in 1830, and the Cherokee were forced out on the Trail of Tears even after the Supreme Court ruled for them in Worcester v. Georgia. For Native nations this was the biggest change of all, since they lost their homelands. For white Americans, expansion raised the question of whether new territories would be slave or free, which led to fights like the Kansas-Nebraska Act in 1854, when settlers from both sides rushed into Kansas and violence broke out.\n\nImmigration from Europe made these political conflicts worse. Large numbers of Irish Catholics came in the 1840s and 1850s and settled in cities like Boston and New York, where they worked in factories and on docks. Many native-born Protestants feared them, and the Know-Nothing Party grew by attacking immigrants. Together with the fight over Kansas, this helped destroy the Whig Party, and many former Whigs and Know-Nothings joined the new Republican Party. Germans, many of whom settled farms in the Midwest, often opposed slavery spreading west, which also helped the Republicans.\n\nStill, there was continuity. Even with all these new people, slavery remained the central issue, and the South stayed mostly a plantation society that few immigrants moved to. Immigrants did not start the sectional conflict; they mostly shifted which party people voted for and made the North larger and stronger, which mattered in the Civil War. Overall, migration changed American society and politics to a great extent, but mainly by speeding up and reshaping older conflicts over land and slavery instead of creating brand new ones.",
+     "rubric_rows": [
+      {
+       "row_id": "thesis",
+       "points": 1,
+       "criterion": "A defensible claim that evaluates how far migration and immigration changed American society and politics between 1607 and 1865, and that sets up a line of reasoning, for example by naming the areas of change (labor systems, sectional politics, nativism, western expansion) or by weighing change against continuity. The thesis must appear in the introduction or conclusion.",
+       "required_elements": [],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "context",
+       "points": 1,
+       "criterion": "Describes broader developments that frame the argument, such as English mercantilism and the Atlantic labor market, the market revolution and the growth of industry, European famine and the revolutions of 1848, or the ideology of Manifest Destiny. The description must be more than a phrase and must connect to the prompt.",
+       "required_elements": [],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "evidence",
+       "points": 2,
+       "criterion": "Uses specific historical examples, such as indentured servitude and the headright system, Bacon's Rebellion, the Atlantic slave trade, Scots-Irish and German backcountry settlement, the Northwest Ordinance, Indian removal, Irish famine immigration, the Know-Nothing movement, the Gold Rush and Chinese immigration, or the Kansas-Nebraska Act. Earning 2 points requires that the evidence actually support the argument.",
+       "required_elements": [],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "analysis",
+       "points": 2,
+       "criterion": "Uses causation, comparison, or continuity and change to structure the argument, for example tracing how Irish and German immigration fed nativism and the breakup of the Second Party System, or comparing colonial and antebellum migration. The second point requires complex understanding, for example weighing change against continuity, explaining several causes or effects, linking periods, considering different groups' experiences, or qualifying the argument.",
+       "required_elements": [],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ]
+    }
+   ],
+   "reference_text": "Scoring guide (ALTON practice rubric, not official College Board scoring). This question is worth 6 points.\nThesis/claim (0-1): A defensible claim that evaluates how far migration and immigration changed American society and politics between 1607 and 1865, and that sets up a line of reasoning, for example by naming the areas of change (labor systems, sectional politics, nativism, western expansion) or by weighing change against continuity. The thesis must appear in the introduction or conclusion.\n   - 1: Makes a historically defensible claim about the extent to which migration and immigration changed society and politics and sets up a line of reasoning.\n   - 0: Restates the prompt, gives no defensible claim, or makes a claim with no line of reasoning about the extent of change.\nContextualization (0-1): Describes broader developments that frame the argument, such as English mercantilism and the Atlantic labor market, the market revolution and the growth of industry, European famine and the revolutions of 1848, or the ideology of Manifest Destiny. The description must be more than a phrase and must connect to the prompt.\n   - 1: Describes a broader historical context relevant to migration and immigration in this period and ties it to the argument.\n   - 0: Gives no relevant context, or only a passing phrase.\nEvidence (0-2): Uses specific historical examples, such as indentured servitude and the headright system, Bacon's Rebellion, the Atlantic slave trade, Scots-Irish and German backcountry settlement, the Northwest Ordinance, Indian removal, Irish famine immigration, the Know-Nothing movement, the Gold Rush and Chinese immigration, or the Kansas-Nebraska Act. Earning 2 points requires that the evidence actually support the argument.\n   - 2: Uses at least two pieces of specific, relevant evidence to support an argument about the extent of change.\n   - 1: Accurately identifies at least two pieces of specific, relevant evidence.\n   - 0: Gives no specific relevant evidence.\nAnalysis and reasoning (0-2): Uses causation, comparison, or continuity and change to structure the argument, for example tracing how Irish and German immigration fed nativism and the breakup of the Second Party System, or comparing colonial and antebellum migration. The second point requires complex understanding, for example weighing change against continuity, explaining several causes or effects, linking periods, considering different groups' experiences, or qualifying the argument.\n   - 2: Shows a complex understanding of how migration and immigration changed, or did not change, American society and politics, using evidence to corroborate, qualify, or modify the argument.\n   - 1: Uses historical reasoning to frame or structure an argument about migration and immigration.\n   - 0: Gives no historical reasoning, or only lists events.\nNote: Students may focus on part of the 1607-1865 span. An essay concentrating on 1800-1848 with one link to the colonial era or the 1850s is fully acceptable.\nNote: Forced migration, such as the Atlantic slave trade, the domestic slave trade, and Indian removal, counts as relevant migration if the essay connects it to social or political change.\nNote: Internal westward migration and overseas immigration both count. Strong essays often show how the two worked together, for example immigrants settling the Old Northwest or nativism shaping debates over free soil.\nNote: Evidence must be accurate. A minor date error does not cancel an otherwise correct and relevant piece of evidence.\nNote: The complexity point can be earned across the whole essay. It does not have to appear in a single sentence.\n\nSample response, high score (6/6; Thesis/claim 1, Contextualization 1, Evidence 2, Analysis and reasoning 2):\nFrom the start, the English colonies were built by people who came from somewhere else, and by people who were forced to come. Between 1607 and 1865 migration did a lot to change American society and politics. It shaped how labor was organized, it caused conflict over land with Native nations, and in the 1850s it helped break apart the party system. However, migration did not create these divisions alone. It mostly deepened conflicts that already existed over slavery and land, so its effect was large but it worked through older problems.\n\nMigration in this period was tied to bigger changes in the Atlantic world. England followed mercantilism and wanted colonies that produced cash crops like tobacco, which needed a lot of workers. Later, in the 1800s, the market revolution brought canals, railroads and factories that needed cheap labor, while the Irish potato famine and the failed revolutions of 1848 in Europe pushed millions of people to leave. Ideas like Manifest Destiny also encouraged Americans to believe they had a right to move west.\n\nIn the colonial Chesapeake, migration changed the labor system. At first planters relied on indentured servants from England, and the headright system gave land to people who paid for a servant's passage. But when freed servants could not get good land, they became angry, and in Bacon's Rebellion in 1676 poor whites and some Black servants attacked Native Americans and burned Jamestown. After this, planters turned more to enslaved Africans brought by the Atlantic slave trade, because they seemed less of a threat. So migration first created a servant society, and then forced migration created a slave society with strict racial laws. This shows one type of migration causing a change to another type.\n\nWestward migration also changed politics a lot. As settlers moved across the Appalachians and into the Southeast, they wanted Native land. Andrew Jackson signed the Indian Removal Act in 1830, and the Cherokee were forced out on the Trail of Tears even after the Supreme Court ruled for them in Worcester v. Georgia. For Native nations this was the biggest change of all, since they lost their homelands. For white Americans, expansion raised the question of whether new territories would be slave or free, which led to fights like the Kansas-Nebraska Act in 1854, when settlers from both sides rushed into Kansas and violence broke out.\n\nImmigration from Europe made these political conflicts worse. Large numbers of Irish Catholics came in the 1840s and 1850s and settled in cities like Boston and New York, where they worked in factories and on docks. Many native-born Protestants feared them, and the Know-Nothing Party grew by attacking immigrants. Together with the fight over Kansas, this helped destroy the Whig Party, and many former Whigs and Know-Nothings joined the new Republican Party. Germans, many of whom settled farms in the Midwest, often opposed slavery spreading west, which also helped the Republicans.\n\nStill, there was continuity. Even with all these new people, slavery remained the central issue, and the South stayed mostly a plantation society that few immigrants moved to. Immigrants did not start the sectional conflict; they mostly shifted which party people voted for and made the North larger and stronger, which mattered in the Civil War. Overall, migration changed American society and politics to a great extent, but mainly by speeding up and reshaping older conflicts over land and slavery instead of creating brand new ones.\n   - \"migration did not create these divisions alone. It mostly deepened conflicts that already existed over slavery and land\" - Defensible claim about the extent of change, with a line of reasoning (labor, land, parties) and a qualification. Earns the point.\n   - \"England followed mercantilism and wanted colonies that produced cash crops like tobacco\" - Describes mercantilism, the market revolution, the famine and 1848, and Manifest Destiny, and ties them to labor demand and migration. Earns the point.\n   - \"Bacon's Rebellion in 1676\" - Specific, accurate evidence that supports the argument about the move from servitude to slavery.\n   - \"the Know-Nothing Party grew by attacking immigrants\" - Ties Irish immigration to the collapse of the Whigs. With Indian removal and Kansas-Nebraska, the evidence supports the argument, so it earns 2 points. The Know-Nothing and German sections could use more detail, such as election results.\n   - \"one type of migration causing a change to another type\" - Clear causal reasoning that links migration to changes in the labor system.\n   - \"Still, there was continuity.\" - Weighs change against continuity and compares Native and white experiences across periods. That is enough complexity for the second point, though the explanation is fairly short.\n\nSample response, middle score (5/6; Thesis/claim 1, Contextualization 1, Evidence 2, Analysis and reasoning 1):\nMigration and immigration changed American society and politics a great deal between 1607 and 1865, especially in how people worked and in the political fights that divided the country. Migration changed labor systems, it created new groups that Americans argued about, and it pushed the nation toward sectional conflict, so the change was large.\n\nIn the early colonial period, England was building an empire and wanted colonies that could make money for the mother country. Many English people left because land was scarce and jobs were hard to find at home. This led to the Atlantic movement of people that filled the colonies with workers.\n\nOne example of how migration changed society is the Atlantic slave trade. Enslaved Africans were brought by force to the southern colonies to grow tobacco, rice, and later cotton. Before this, the Chesapeake colonies used indentured servants, who worked for a number of years in exchange for passage to America. After Bacon's Rebellion in 1676, when poor former servants rebelled against the Virginia government, planters turned more toward enslaved Africans for labor. Slavery became a main part of southern society and it stayed until the Civil War.\n\nAnother example is Irish immigration in the 1840s. Many Irish people came to the United States because of the potato famine, and most of them were Catholic. They settled in cities in the North and worked in low paying jobs. Some native-born Protestants did not like them, and this led to nativism and the Know-Nothing movement in the 1850s. The Know-Nothings wanted to limit the power of immigrants and Catholics. German immigrants also came in this period and many moved to the Midwest.\n\nWestward movement also changed things. Settlers crossed the Appalachians and moved toward the Pacific, and Native Americans were removed from their land, such as in the Indian Removal Act of 1830 which led to the Trail of Tears. This made more room for farms and for the spread of slavery, which caused arguments in Congress about whether new states would be free or slave.\n\nIn conclusion, migration changed America in many ways. It brought slavery, it brought new immigrant groups that caused nativism, and it moved people west where the question of slavery got worse. Although some things stayed the same, such as the importance of farming, the changes from migration were mostly bigger and helped lead to the Civil War.\n   - \"Migration changed labor systems, it created new groups that Americans argued about, and it pushed the nation toward sectional conflict, so the change was large.\" - Defensible claim about extent of change with a line of reasoning (labor, group conflict, sectional politics). Earns the thesis point.\n   - \"In the early colonial period, England was building an empire and wanted colonies that could make money for the mother country.\" - Context is only a brief, general sentence or two and is not developed or tied closely to the later argument, so no contextualization credit.\n   - \"After Bacon's Rebellion in 1676, when poor former servants rebelled against the Virginia government, planters turned more toward enslaved Africans for labor.\" - Accurate, specific evidence (Bacon's Rebellion, shift from indentured servitude to slavery). Described correctly, though only partly used to argue.\n   - \"Many Irish people came to the United States because of the potato famine, and most of them were Catholic.\" - Second accurate specific example (Irish famine immigration, Know-Nothings). Evidence is described but mostly stated rather than used to weigh how much change occurred, so it earns 1 of 2.\n   - \"Another example is Irish immigration in the 1840s.\" - Organization is a list of examples taken one at a time with description; little causation or comparison is developed.\n   - \"Although some things stayed the same, such as the importance of farming, the changes from migration were mostly bigger\" - Gestures at continuity but does not explain or support it, so there is no complex understanding or qualification.\n\nSample response, low score (2/6; Thesis/claim 0, Contextualization 0, Evidence 1, Analysis and reasoning 1):\nMigration and immigration changed American society and politics a great deal between 1607 and 1865. People moving to America and across it affected the way people lived and worked and also caused many political conflicts. This essay will show that migration changed society and politics in many ways.\n\nIn the 1800s the United States was growing quickly. Many people were moving around and the country was changing, and this made migration an important part of the time period.\n\nOne way migration changed society was through the Irish who came in the 1840s. Many Irish immigrants came to the United States and they were often Catholic. Some Americans did not like them and this led to conflict in cities. Another example is the Chinese who came to California for the Gold Rush. They worked hard and many Americans did not welcome them either.\n\nMigration also changed politics. Enslaved Africans were brought to America and this caused arguments over slavery that lasted a long time. When people moved west, they argued about whether the new places would allow slavery. These arguments got bigger over time and made the country more divided.\n\nIn conclusion, migration and immigration changed America a lot because they changed who lived here and made people fight about politics. Without migration America would have been very different from 1607 to 1865.\n   - \"Migration and immigration changed American society and politics a great deal between 1607 and 1865.\" - The thesis restates the prompt and gives no line of reasoning about areas of change or about continuity. No thesis credit.\n   - \"In the 1800s the United States was growing quickly. Many people were moving around and the country was changing\" - This is a vague general statement. It names no specific development such as the market revolution or the famine, and it is not tied to the argument. No contextualization credit.\n   - \"Many Irish immigrants came to the United States and they were often Catholic.\" - This is the one identifiable example, and it is general. The essay does not name nativism, the Know-Nothings, or the famine. The Chinese example is too thin to count as a second piece of specific evidence. No evidence credit.\n   - \"They worked hard and many Americans did not welcome them either.\" - The statement is general and has no specifics such as laws or dates. It does not support a claim about how much society changed.\n   - \"These arguments got bigger over time and made the country more divided.\" - The essay asserts change but does not explain the causal chain, for example how western migration led to the Kansas-Nebraska Act or the breakup of the party system. There is no continuity-and-change comparison and no qualification. The essay mostly lists and asserts, so no reasoning credit.",
    "ush_frq": {
     "schema_version": "ush-frq-1",
     "task_type": "leq",
@@ -5101,6 +5306,51 @@
        {
         "quote": "Still, there was continuity.",
         "comment": "Weighs change against continuity and compares Native and white experiences across periods. That is enough complexity for the second point, though the explanation is fairly short.",
+        "row_id": "analysis"
+       }
+      ]
+     },
+     {
+      "tier": "mid",
+      "target_total": 5,
+      "essay": "Migration and immigration changed American society and politics a great deal between 1607 and 1865, especially in how people worked and in the political fights that divided the country. Migration changed labor systems, it created new groups that Americans argued about, and it pushed the nation toward sectional conflict, so the change was large.\n\nIn the early colonial period, England was building an empire and wanted colonies that could make money for the mother country. Many English people left because land was scarce and jobs were hard to find at home. This led to the Atlantic movement of people that filled the colonies with workers.\n\nOne example of how migration changed society is the Atlantic slave trade. Enslaved Africans were brought by force to the southern colonies to grow tobacco, rice, and later cotton. Before this, the Chesapeake colonies used indentured servants, who worked for a number of years in exchange for passage to America. After Bacon's Rebellion in 1676, when poor former servants rebelled against the Virginia government, planters turned more toward enslaved Africans for labor. Slavery became a main part of southern society and it stayed until the Civil War.\n\nAnother example is Irish immigration in the 1840s. Many Irish people came to the United States because of the potato famine, and most of them were Catholic. They settled in cities in the North and worked in low paying jobs. Some native-born Protestants did not like them, and this led to nativism and the Know-Nothing movement in the 1850s. The Know-Nothings wanted to limit the power of immigrants and Catholics. German immigrants also came in this period and many moved to the Midwest.\n\nWestward movement also changed things. Settlers crossed the Appalachians and moved toward the Pacific, and Native Americans were removed from their land, such as in the Indian Removal Act of 1830 which led to the Trail of Tears. This made more room for farms and for the spread of slavery, which caused arguments in Congress about whether new states would be free or slave.\n\nIn conclusion, migration changed America in many ways. It brought slavery, it brought new immigrant groups that caused nativism, and it moved people west where the question of slavery got worse. Although some things stayed the same, such as the importance of farming, the changes from migration were mostly bigger and helped lead to the Civil War.",
+      "word_count": 396,
+      "rubric_scores": {
+       "thesis": 1,
+       "context": 1,
+       "evidence": 2,
+       "analysis": 1,
+       "total": 5
+      },
+      "annotations": [
+       {
+        "quote": "Migration changed labor systems, it created new groups that Americans argued about, and it pushed the nation toward sectional conflict, so the change was large.",
+        "comment": "Defensible claim about extent of change with a line of reasoning (labor, group conflict, sectional politics). Earns the thesis point.",
+        "row_id": "thesis"
+       },
+       {
+        "quote": "In the early colonial period, England was building an empire and wanted colonies that could make money for the mother country.",
+        "comment": "Context is only a brief, general sentence or two and is not developed or tied closely to the later argument, so no contextualization credit.",
+        "row_id": "context"
+       },
+       {
+        "quote": "After Bacon's Rebellion in 1676, when poor former servants rebelled against the Virginia government, planters turned more toward enslaved Africans for labor.",
+        "comment": "Accurate, specific evidence (Bacon's Rebellion, shift from indentured servitude to slavery). Described correctly, though only partly used to argue.",
+        "row_id": "evidence"
+       },
+       {
+        "quote": "Many Irish people came to the United States because of the potato famine, and most of them were Catholic.",
+        "comment": "Second accurate specific example (Irish famine immigration, Know-Nothings). Evidence is described but mostly stated rather than used to weigh how much change occurred, so it earns 1 of 2.",
+        "row_id": "evidence"
+       },
+       {
+        "quote": "Another example is Irish immigration in the 1840s.",
+        "comment": "Organization is a list of examples taken one at a time with description; little causation or comparison is developed.",
+        "row_id": "analysis"
+       },
+       {
+        "quote": "Although some things stayed the same, such as the importance of farming, the changes from migration were mostly bigger",
+        "comment": "Gestures at continuity but does not explain or support it, so there is no complex understanding or qualification.",
         "row_id": "analysis"
        }
       ]

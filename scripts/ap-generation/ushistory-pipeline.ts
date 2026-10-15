@@ -238,7 +238,8 @@ function toFrqPayload(spec: P.FrqSpec, raw: Json): UshFrqPayload | null {
     expected_features: { defensible_theses: strs(af.defensible_theses), contextualization_ideas: strs(af.contextualization_ideas), outside_evidence: strs(af.outside_evidence), reasoning_types: strs(af.reasoning_types), doc_uses: af.doc_uses, saq_answers: af.saq_answers, common_pitfalls: strs(af.common_pitfalls), facts: strs(af.facts) },
     samples: [], provenance: { kind: "alton_composed", note: "ALTON-composed practice material; fictional sources and attributions." } };
 }
-const candsFor = (id: string, tier: string): number[] => Array.from({ length: cfg.sampleCands ?? 1 }, (_, k) => k).filter((k) => k === 0 || (cfg.resample?.[id] ?? []).includes(tier));
+/** 후보 번호: k=0 은 항상, 보충은 resample 에 "tier"(최대 3개) 또는 "tier:N"(최대 N개)로 지정한 세트·단계만. */
+const candsFor = (id: string, tier: string): number[] => { const e = (cfg.resample?.[id] ?? []).find((x) => x === tier || x.startsWith(`${tier}:`)); const max = !e ? 1 : e.includes(":") ? Number(e.split(":")[1]) : Math.min(3, cfg.sampleCands ?? 1); return Array.from({ length: Math.min(max, cfg.sampleCands ?? 1) }, (_, k) => k); };
 const loadFrq = () => rj<{ id: string; spec: P.FrqSpec; payload: UshFrqPayload | null; fact?: Json[] }[]>("frq.json", []);
 async function frqGenStage() {
   const plan = cfg.frqPlan ?? []; const sys = { saq: P.FRQ_SAQ_SYSTEM, dbq: P.FRQ_DBQ_SYSTEM, leq: P.FRQ_LEQ_SYSTEM };
