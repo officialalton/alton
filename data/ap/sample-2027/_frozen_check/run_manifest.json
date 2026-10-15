@@ -1,7 +1,7 @@
 {
  "run": "_frozen_check",
  "subject": "ap_psychology",
- "generatorCommit": "a38de12e",
+ "generatorCommit": "d5796989",
  "gateVersion": "v2-code-first-final-2026-10-08",
  "reviewerPromptHash": "8c19342ae47a",
  "difficultyPromptHash": "9bda2250d42c",
@@ -12,7 +12,7 @@
   "legacyItems": false,
   "repair": false
  },
- "arm": "frozen v1-psych-p1-b",
+ "arm": "frozen v1-psych-p1-a",
  "parserHash": "7528bbe8cdfc",
  "models": {
   "gen": "claude-sonnet-5-5",
@@ -35,9 +35,9 @@
  },
  "seeds": {
   "first": [
-   9800
+   9700
   ],
   "note": "seed0 = first seed tried per archetype; packs.json records pack_id = archetype-sSEED"
  },
- "frozenAt": "2026-10-15T00:38:09.023Z"
+ "frozenAt": "2026-10-15T00:38:19.177Z"
 }
