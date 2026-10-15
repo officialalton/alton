@@ -1,11 +1,11 @@
 # AP 그림 렌더링 게이트 결과
 
-생성: 2026-10-15T11:57:10.524Z · 대상: data/ap/stock/items.json + s1a-items.json + v1ab-items.json + v45ab-items.json + bc-topup-items.json + graph-s1-items.json + graph-s2a-items.json + graph-s2b-items.json + graph-s3a-items.json + graph-s3b-items.json + graph-s3c-items.json + graph-s3d-items.json + graph-s3e-items.json + graph-s3f-items.json + graph-s3g-items.json + stats-s1-items.json + stats-s2a-items.json + stats-s2b-items.json + stats-s3a-items.json + stats-s3b-items.json + phys-p1a-items.json + phys-p1a2-items.json + phys-p1b-items.json + phys-s2-items.json + phys-s3-items.json + phys-s4-items.json + chem-p1a-items.json + chem-p1a2-items.json + chem-p1b-items.json + chem-s2f-items.json + chem-s2ma-items.json + chem-s2mb-items.json + chem-s2mc-items.json + micro-p1a-items.json + micro-p1b-items.json + micro-p2f-items.json + micro-p2a-items.json + micro-p2b-items.json + micro-p2c-items.json + micro-p2d-items.json + csa-p1a-items.json + csa-p1b-items.json + csa-s2a-items.json + csa-s2b-items.json + csa-s2c-items.json + csa-s2fa-items.json + csa-s2fb-items.json + csa-s2sf-items.json + csa-s2sm-items.json + el-p1-items.json + el-p2a-items.json + el-p2b-items.json + el-rv-items.json + el-s2a-items.json + el-s2b-items.json + lt-p0-items.json + lt-p1a-items.json + lt-p1b-items.json + lt-p1c-items.json + bio-p1a-items.json + bio-p1b-items.json + bio-r1-items.json + bio-r2-items.json + bio-r3-items.json + bio-r4-items.json + bio-s2a-items.json + bio-s2b-items.json + bio-s2c-items.json + bio-v2a-items.json + bio-v2b-items.json + bio-v2c-items.json + macro-p1a-items.json + macro-p1b-items.json + macro-p2a-items.json + macro-p2b-items.json + macro-p2f-items.json + macro-p3-items.json + psych-p1a-items.json + psych-p1b-items.json + psych-p2a-items.json + psych-p3a-items.json + psych-p3b-items.json + psych-p4a-items.json + ush-p1a-items.json + ush-p1b-items.json + ush-p2a-items.json + ush-p3a-items.json + supp-b1-items.json + supp-b2ab-items.json + supp-b2bc-items.json + supp-b3ab-items.json + supp-b3bc-items.json + supp-b3fa-items.json + supp-b4ab-items.json + supp-b5bc-items.json + supp-b6ab-items.json + supp-t2a-items.json + supp-t2b-items.json + supp-r3a-items.json + supp-r3b-items.json + supp-r3b2-items.json + supp-r3c-items.json + supp-r3c2-items.json (4012행)
+생성: 2026-10-15T16:54:32.715Z · 대상: data/ap/stock/items.json + s1a-items.json + v1ab-items.json + v45ab-items.json + bc-topup-items.json + graph-s1-items.json + graph-s2a-items.json + graph-s2b-items.json + graph-s3a-items.json + graph-s3b-items.json + graph-s3c-items.json + graph-s3d-items.json + graph-s3e-items.json + graph-s3f-items.json + graph-s3g-items.json + stats-s1-items.json + stats-s2a-items.json + stats-s2b-items.json + stats-s3a-items.json + stats-s3b-items.json + phys-p1a-items.json + phys-p1a2-items.json + phys-p1b-items.json + phys-s2-items.json + phys-s3-items.json + phys-s4-items.json + chem-p1a-items.json + chem-p1a2-items.json + chem-p1b-items.json + chem-s2f-items.json + chem-s2ma-items.json + chem-s2mb-items.json + chem-s2mc-items.json + micro-p1a-items.json + micro-p1b-items.json + micro-p2f-items.json + micro-p2a-items.json + micro-p2b-items.json + micro-p2c-items.json + micro-p2d-items.json + csa-p1a-items.json + csa-p1b-items.json + csa-s2a-items.json + csa-s2b-items.json + csa-s2c-items.json + csa-s2fa-items.json + csa-s2fb-items.json + csa-s2sf-items.json + csa-s2sm-items.json + el-p1-items.json + el-p2a-items.json + el-p2b-items.json + el-rv-items.json + el-s2a-items.json + el-s2b-items.json + lt-p0-items.json + lt-p1a-items.json + lt-p1b-items.json + lt-p1c-items.json + bio-p1a-items.json + bio-p1b-items.json + bio-r1-items.json + bio-r2-items.json + bio-r3-items.json + bio-r4-items.json + bio-s2a-items.json + bio-s2b-items.json + bio-s2c-items.json + bio-v2a-items.json + bio-v2b-items.json + bio-v2c-items.json + bio-v3a-items.json + bio-v3b-items.json + bio-v3c-items.json + macro-p1a-items.json + macro-p1b-items.json + macro-p2a-items.json + macro-p2b-items.json + macro-p2f-items.json + macro-p3-items.json + psych-p1a-items.json + psych-p1b-items.json + psych-p2a-items.json + psych-p3a-items.json + psych-p3b-items.json + psych-p4a-items.json + ush-p1a-items.json + ush-p1b-items.json + ush-p2a-items.json + ush-p3a-items.json + supp-b1-items.json + supp-b2ab-items.json + supp-b2bc-items.json + supp-b3ab-items.json + supp-b3bc-items.json + supp-b3fa-items.json + supp-b4ab-items.json + supp-b5bc-items.json + supp-b6ab-items.json + supp-t2a-items.json + supp-t2b-items.json + supp-r3a-items.json + supp-r3b-items.json + supp-r3b2-items.json + supp-r3c-items.json + supp-r3c2-items.json (4083행)
 
 ## 전체
 
-- 전체 4012행: 통과 1508 / 실패 6 / 해당 없음(그림·표 없음) 2498
-- 현재 재고 중 게시 후보 상태(auto_passed + needs_revalidation) 2437행: 통과 865 / 실패 1 / 해당 없음 1571
+- 전체 4083행: 통과 1535 / 실패 6 / 해당 없음(그림·표 없음) 2542
+- 현재 재고 중 게시 후보 상태(auto_passed + needs_revalidation) 2474행: 통과 876 / 실패 1 / 해당 없음 1597
 
 ## 유형별(렌더 유형)
 
@@ -34,21 +34,21 @@
 | ap_stat_chart:table | 11 | 11 | 0 | 0 |
 | ap_stat_chart:tree | 6 | 6 | 0 | 0 |
 | ap_stat_chart:two_way | 12 | 12 | 0 | 0 |
-| ap_table | 838 | 838 | 0 | 0 |
+| ap_table | 865 | 865 | 0 | 0 |
 | ap_table:given_info | 60 | 60 | 0 | 0 |
 | ap_table:multi_panel | 29 | 29 | 0 | 0 |
 | ap_table:payoff_matrix | 18 | 18 | 0 | 0 |
 | figure_choice:ap_diagram:phys_scene | 8 | 6 | 2 | 0 |
-| none | 2070 | 0 | 3 | 2067 |
+| none | 2106 | 0 | 3 | 2103 |
 | none(diagram_text_only) | 1 | 0 | 0 | 1 |
-| text | 430 | 0 | 0 | 430 |
+| text | 438 | 0 | 0 | 438 |
 
 ## 과목별
 
 | 과목 | 전체 | 통과 | 실패 | 해당 없음 |
 |---|---:|---:|---:|---:|
 | ap_calculus_ab | 679 | 312 | 1 | 366 |
-| ap_biology | 723 | 443 | 0 | 280 |
+| ap_biology | 794 | 470 | 0 | 324 |
 | ap_microeconomics | 458 | 261 | 0 | 197 |
 | ap_calculus_bc | 136 | 28 | 0 | 108 |
 | ap_statistics | 131 | 74 | 0 | 57 |
@@ -63,9 +63,9 @@
 
 ## 그림 필요 분류(그림이 있어야 풀리는가)
 
-- required(그림·표가 있어야 풀림): 1393
+- required(그림·표가 있어야 풀림): 1420
 - supporting(보조 자료, 본문에도 정보 있음): 118
-- text_only(본문만으로 충분): 2501
+- text_only(본문만으로 충분): 2545
 
 ## 실패 사유 코드
 
@@ -79,8 +79,8 @@
 
 | 코드 | 건수 |
 |---|---:|
-| table_no_title | 559 |
-| table_units_missing | 430 |
+| table_no_title | 586 |
+| table_units_missing | 433 |
 | data_not_rendered | 130 |
 | axis_units_missing | 99 |
 | stimulus_json_repaired | 93 |

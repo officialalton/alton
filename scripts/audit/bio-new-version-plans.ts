@@ -213,7 +213,6 @@ const final = stageChecks[2].violations;
 
 const nm = (i: SetId) => snap[i].sourceSetName;
 const v1 = snap[first].sourceVersionNo, v2 = snap[second].sourceVersionNo;
-const needsConversion = [...new Set([...s1.swaps, ...s2.swaps, ...s3.swaps].map((x) => x.addKey))].filter((k) => !snap.convertedKeys.includes(k)).sort();
 const plans: { file: string; set: SetId; ver: number; swaps: Swap[]; note: string; violations: string[] }[] = [
   { file: `${lowerName(first)}-v${v1 + 1}-swap-plan.json`, set: first, ver: v1, swaps: s1.swaps, note: `단계 ① ${first} 중간판(v${v1 + 1}): ${second} 가 목표 배정에서 가져갈 문항을 비우고 빈 칸을 아무도 안 쓰는 문항으로 채운다(단원 범위 유지). 공개 직후 ②③ 을 이어서 한다.`, violations: stageChecks[0].violations },
   { file: `${lowerName(second)}-v${v2 + 1}-swap-plan.json`, set: second, ver: v2, swaps: s2.swaps, note: `단계 ② ${second} → 목표 배정(v${v2 + 1}). 선행: ${lowerName(first)}-v${v1 + 1} 공개(${first} 가 ${second} 몫 문항을 비운 뒤).`, violations: stageChecks[1].violations },
@@ -221,6 +220,6 @@ const plans: { file: string; set: SetId; ver: number; swaps: Swap[]; note: strin
 ];
 if (write) {
   if (final.length) throw new Error(`최종 위반 ${final.length}건 — 계획 파일을 쓰지 않습니다`);
-  for (const p of plans) writeFileSync(`data/ap/stock/${p.file}`, JSON.stringify({ kind: "ap_new_version_swap_plan", set: p.set, sourceSetName: nm(p.set), sourceVersionNo: p.ver, generatedBy: "scripts/audit/bio-new-version-plans.ts", note: p.note, swapCount: p.swaps.length, verifierViolations: p.violations, ...(notes.length ? { substitutions: notes } : {}), ...(needsConversion.length ? { requiresConvertedCandidates: needsConversion } : {}), swaps: p.swaps }, null, 1) + "\n");
+  for (const p of plans) writeFileSync(`data/ap/stock/${p.file}`, JSON.stringify({ kind: "ap_new_version_swap_plan", set: p.set, sourceSetName: nm(p.set), sourceVersionNo: p.ver, generatedBy: "scripts/audit/bio-new-version-plans.ts", note: p.note, swapCount: p.swaps.length, verifierViolations: p.violations, ...(notes.length ? { substitutions: notes } : {}), ...(() => { const r = [...new Set(p.swaps.map((x) => x.addKey))].filter((k) => !snap.convertedKeys.includes(k)).sort(); return r.length ? { requiresConvertedCandidates: r } : {}; })(), swaps: p.swaps }, null, 1) + "\n");
   console.log("wrote", plans.map((p) => p.file).join(", "));
 }
