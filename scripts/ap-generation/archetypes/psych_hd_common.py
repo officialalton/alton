@@ -3,6 +3,7 @@
 변형 = (질문, 정답 문장, 정답 설명, [(오답 문장, 오개념 설명) x 3], 자료 또는 None, 풀이 단계 목록(3개 이상)). 심리학 사실은 CED 필수 내용 안에서 주류 합의만 쓴다(재현 논란 연구는 쓰지 않는다)."""
 import re
 from psych_common import mk, tbl, PATH_CONCEPT  # noqa: F401
+from psych_hd_signals import CONCEPTS, FAILS, TABLE_ARCHS
 
 
 def pct_rows_ok(stim):
@@ -35,8 +36,13 @@ def hd_fixed(arch, topic, skill, concept, ek, variants):
         thinking = v[5] if len(v) > 5 else None
         key_not_longest(kt, wr)
         pct_rows_ok(stim)
-        return mk(arch, topic, skill, q, kt, kw, wr, rng, concept=concept, ek=ek, est=95, stim=stim, thinking=thinking,
-                  cond=[("the stem supplies every fact needed and exactly one option follows from all of the steps", "stem and options")])
+        vi = variants.index(v); base = arch[3:] if arch.startswith("ps_") else arch
+        p = mk(arch, topic, skill, q, kt, kw, wr, rng, concept=concept, ek=ek, est=95, stim=stim, thinking=thinking,
+               cond=[("the stem supplies every fact needed and exactly one option follows from all of the steps", "stem and options")])
+        # 난이도 신호(AP Statistics S3 방식): 필수 풀이 단계·결합 개념·자료 수·오답이 처음 틀어지는 단계를 코드로 선언한다(lib/ap-generation/stats-difficulty.ts 가 게이트로 검증하고 판정기에 사실로 보여 준다).
+        fails = FAILS[base][vi]
+        p["difficulty_signals"] = {"steps": list(thinking), "concepts": list(CONCEPTS[base]), "representations": 2 if (base in TABLE_ARCHS or stim) else 1, "distractor_fail_step": {w[0]: f for w, f in zip(wr, fails)}, "arithmetic": "none"}
+        return p
     fn.__name__ = arch
     return fn
 

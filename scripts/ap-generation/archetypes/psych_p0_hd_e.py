@@ -2,13 +2,16 @@
 import statistics as st  # noqa: F401
 from psych_common import mk, tbl, agree, PATH_STATS
 from psych_hd_common import key_not_longest, pct_rows_ok
+from psych_hd_signals import code_signals
 import numpy as np
 
 
 def _mk(arch, topic, skill, stem, key, kwhy, wr, rng, *, concept, ek, stim, facts, thinking, cond, est=100, method="statistics+numpy"):
     key_not_longest(key, wr)
     pct_rows_ok(stim)
-    return mk(arch, topic, skill, stem, key, kwhy, wr, rng, concept=concept, ek=ek, stim=stim, est=est, facts=facts, path=PATH_STATS, method=method, thinking=thinking, cond=cond)
+    p = mk(arch, topic, skill, stem, key, kwhy, wr, rng, concept=concept, ek=ek, stim=stim, est=est, facts=facts, path=PATH_STATS, method=method, thinking=thinking, cond=cond)
+    p["difficulty_signals"] = code_signals(arch, thinking, wr)  # 난이도 신호 선언(psych_hd_signals.py)
+    return p
 
 
 def ps_hd_s_spacing(rng):

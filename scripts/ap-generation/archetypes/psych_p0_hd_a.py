@@ -3,6 +3,7 @@
 import statistics as st
 from psych_common import mk, tbl, agree, PATH_STATS
 from psych_hd_common import key_not_longest, pct_rows_ok
+from psych_hd_signals import code_signals
 import numpy as np
 from scipy import stats as sps
 
@@ -10,7 +11,9 @@ from scipy import stats as sps
 def _mk(arch, topic, skill, stem, key, kwhy, wr, rng, *, concept, ek, stim, facts, thinking, cond, est=100, method="statistics+numpy"):
     key_not_longest(key, wr)
     pct_rows_ok(stim)
-    return mk(arch, topic, skill, stem, key, kwhy, wr, rng, concept=concept, ek=ek, stim=stim, est=est, facts=facts, path=PATH_STATS, method=method, thinking=thinking, cond=cond)
+    p = mk(arch, topic, skill, stem, key, kwhy, wr, rng, concept=concept, ek=ek, stim=stim, est=est, facts=facts, path=PATH_STATS, method=method, thinking=thinking, cond=cond)
+    p["difficulty_signals"] = code_signals(arch, thinking, wr)  # 난이도 신호 선언(psych_hd_signals.py)
+    return p
 
 
 def ps_hd_s_did(rng):
@@ -172,7 +175,7 @@ def ps_hd_s_skew(rng):
               (f"The mean, {mean} ms, better describes a typical reaction time because the slowest participant is part of the data, and the distribution is positively skewed.", "Reads the skew correctly but chooses the mean, which an extreme score pulls away from where most participants fall.")]
         return _mk("ps_hd_s_skew", "3.2", "3.B", stem, key, "The slowest time pulls the mean upward but does not move the middle value; mean greater than median indicates a tail toward high values, a positive skew.", wr, rng,
                    concept="choosing a measure of central tendency and inferring skew from mean and median", ek="3.2", stim=stim, facts=[f"data={sorted(data)}", f"mean={mean}", f"median={med}"],
-                   thinking=["Order the nine times and find the median", "Add the times and divide by nine to find the mean", "Compare mean and median to infer the skew and choose the measure that best represents most participants"],
+                   thinking=["Order the nine times and find the median, then add them and divide by nine to find the mean", "Compare the mean with the median to infer the direction of the skew", "Choose the measure that best represents most participants and reject answers that misread the skew or choose the mean"],
                    cond=[("the mean exceeds the median by at least 18 ms because of one slow time", "table values")])
     raise ValueError("no_data")
 
@@ -251,9 +254,11 @@ def ps_hd_s_normal_count(rng):
         why = {1: "A score 1 standard deviation above the mean has about 16 percent of scores above it (the 68 percent in the middle leaves 32 percent in the two tails, 16 percent in each).", 2: "A score 2 standard deviations above the mean has about 2.5 percent above it (the 95 percent in the middle leaves 5 percent in the two tails, 2.5 percent in each)."}[z]
         wr = [(f"About {v:,} students", f"Uses {lab} instead of the proportion above a score {z} standard deviation{'s' if z > 1 else ''} above the mean.") for v, lab in zip(vals, [o[1] for o in other])]
         stim = None
-        return mk("ps_hd_s_normal_count", "2.8", "3.B", stem, key, why, wr, rng, concept="applying the 68-95-99.7 rule to a count of test takers", ek="2.8", est=95, facts=[f"mean={mean}", f"sd={sd}", f"n={n}", f"z={z}", f"answer={key_n}"], path=PATH_STATS, method="scipy norm.sf + empirical rule",
-                  thinking=["Express the cutoff as a number of standard deviations above the mean", "Use the 68-95-99.7 rule to find the share of scores above that cutoff, halving the outside area", "Multiply the share by the number of students and reject counts that use both tails or the middle area"],
-                  cond=[("the cutoff is exactly 1 or 2 standard deviations above the mean and the share times the group size is a whole number", "stem values")])
+        th = ["Express the cutoff as a number of standard deviations above the mean", "Use the 68-95-99.7 rule to find the share of scores above that cutoff, halving the outside area", "Multiply the share by the number of students and reject counts that use both tails or the middle area"]
+        p = mk("ps_hd_s_normal_count", "2.8", "3.B", stem, key, why, wr, rng, concept="applying the 68-95-99.7 rule to a count of test takers", ek="2.8", est=95, facts=[f"mean={mean}", f"sd={sd}", f"n={n}", f"z={z}", f"answer={key_n}"], path=PATH_STATS, method="scipy norm.sf + empirical rule",
+               thinking=th, cond=[("the cutoff is exactly 1 or 2 standard deviations above the mean and the share times the group size is a whole number", "stem values")])
+        p["difficulty_signals"] = code_signals("ps_hd_s_normal_count", th, wr)
+        return p
     raise ValueError("no_data")
 
 # 단계 B(psych-hard-b): 코드 계산 자료 해석 원형 9 + (psych_p0_hd_b.py 의 연구 설계 원형 11) + 표 비율을 고친 공유 세트 2(psych_p0_sets_b.py 의 원형, 같은 id 로 재생성)

@@ -30,7 +30,7 @@ ITEMS = [
    "Adrenaline during the near miss, and oxytocin during the hug.",
    "Adrenaline produces the arousal of a threat, and oxytocin is associated with bonding and feelings of closeness.",
    [("Oxytocin during the near miss, and adrenaline during the hug.", "The roles are reversed: adrenaline produces arousal and oxytocin is linked to bonding."),
-    ("Melatonin during the near miss, and leptin during the hug.", "Melatonin is related to sleep and leptin to fullness, which do not match the experiences."),
+    ("Adrenaline during the near miss, and melatonin during the hug.", "Melatonin regulates sleep and is not the hormone associated with bonding and closeness."),
     ("Ghrelin during the near miss, and adrenaline during the hug.", "Ghrelin is related to hunger, and adrenaline would not produce calm closeness.")],
    None, ["Link the pounding heart after a threat to the hormone of arousal", "Link calm closeness with her child to the hormone associated with bonding", "Reject reversed pairs and hormones tied to sleep or hunger"]),
  ]),
