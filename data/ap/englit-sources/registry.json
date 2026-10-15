@@ -1,0 +1,316 @@
+{
+ "schema": "englit-sources-1",
+ "created": "2026-10-15",
+ "policy": "docs/POLICY-DECISIONS.md 2026-10-15 (AP English Literature uses real works with verified reuse rights; fix the text first, then design skill, question and rationales).",
+ "entries": [
+  {
+   "id": "dickinson-chariot",
+   "title": "The Chariot (\"Because I could not stop for Death\")",
+   "author": "Emily Dickinson",
+   "genre": "poetry",
+   "form": "poem",
+   "year_first_published": 1890,
+   "edition": "Poems by Emily Dickinson, ed. Mabel Loomis Todd and T. W. Higginson (Series One, 1890), as in Gutenberg eBook #12242 (Three Series, Complete). This is the 1890 edited text (5 stanzas, editorial wording/punctuation), not the later manuscript-based text.",
+   "period": "19th century (American Romantic / pre-modern)",
+   "region": "United States (New England)",
+   "perspective": "Woman poet; first-person speaker addressing death and time",
+   "repository": "Project Gutenberg (gutenberg.org)",
+   "url": "https://www.gutenberg.org/ebooks/12242",
+   "retrieved": "2026-10-15",
+   "raw_sha256": "f4421418353de2737c9bfe3db1e4657534b6b8ae2a8603f31de2d77678d18791",
+   "raw_bytes": 206765,
+   "raw_line_range": [
+    2533,
+    2556
+   ],
+   "reuse_basis": "United States public domain: poem and 1890 edition published before 1929; author died 1886. The repository states the eBook is not protected by U.S. copyright; the text is reproduced without the repository's trademark or license header.",
+   "excerpt": {
+    "unit": "line",
+    "from": 1,
+    "to": 20,
+    "whole_work": true,
+    "note": "Complete poem (heading 'XXVII. The Chariot.' omitted)."
+   },
+   "modifications": [
+    "Removed heading lines and the section number.",
+    "Line and stanza structure unchanged."
+   ],
+   "text_file": "texts/dickinson-chariot.txt",
+   "text_sha256": "fe0a7bffeb75412b66c7b23b8be485c00555b76b0fb28d5eba11b6b8d9a914f7",
+   "word_count": 107,
+   "counted_line_count": 20,
+   "unit_count": 5
+  },
+  {
+   "id": "whitman-spider",
+   "title": "A Noiseless Patient Spider",
+   "author": "Walt Whitman",
+   "genre": "poetry",
+   "form": "poem",
+   "year_first_published": 1881,
+   "edition": "Leaves of Grass, Gutenberg eBook #1322 (Book-organized final-arrangement text; the file does not state the edition year, so the exact edition is UNVERIFIED). Poem published in Leaves of Grass by 1881.",
+   "period": "19th century (American)",
+   "region": "United States",
+   "perspective": "Free-verse speaker addressing the soul; long cataloguing lines",
+   "repository": "Project Gutenberg (gutenberg.org)",
+   "url": "https://www.gutenberg.org/ebooks/1322",
+   "retrieved": "2026-10-15",
+   "raw_sha256": "77c066a8774e2b04d8bfbc570d9aa5131410355cd6062ab5962ac773240f3140",
+   "raw_bytes": 780492,
+   "raw_line_range": [
+    14563,
+    14574
+   ],
+   "reuse_basis": "United States public domain: poem published before 1929; author died 1892. The repository states the eBook is not protected by U.S. copyright; the text is reproduced without the repository's trademark or license header.",
+   "excerpt": {
+    "unit": "line",
+    "from": 1,
+    "to": 10,
+    "whole_work": true,
+    "note": "Complete poem, 10 original lines (stanza 1 = lines 1-5, stanza 2 = lines 6-10)."
+   },
+   "modifications": [
+    "The repository wrapped original line 8 ('Ceaselessly musing, venturing, throwing, seeking the spheres to connect them,') over two printed lines; the wrap was rejoined so each stored line is one original line (raw line 14572 merged into 14571).",
+    "Removed the 2-space repository indent; heading omitted."
+   ],
+   "text_file": "texts/whitman-spider.txt",
+   "text_sha256": "c49c17959db440a4465e6bd4fd4ffbb4d3ad4795962603200c48a5187e790574",
+   "word_count": 87,
+   "counted_line_count": 10,
+   "unit_count": 2
+  },
+  {
+   "id": "dunbar-mask",
+   "title": "We Wear the Mask",
+   "author": "Paul Laurence Dunbar",
+   "genre": "poetry",
+   "form": "poem",
+   "year_first_published": 1896,
+   "edition": "The Complete Poems of Paul Laurence Dunbar (1913 collected edition), Gutenberg eBook #18338; poem first collected in Lyrics of Lowly Life (1896).",
+   "period": "Late 19th century (Reconstruction legacy / American realism)",
+   "region": "United States",
+   "perspective": "African American poet; collective 'we' speaker",
+   "repository": "Project Gutenberg (gutenberg.org)",
+   "url": "https://www.gutenberg.org/ebooks/18338",
+   "retrieved": "2026-10-15",
+   "raw_sha256": "0e97ad6cd6ea5775b96446a531e2b097116b4c7e2b7b313e45f31bfed9055a6c",
+   "raw_bytes": 566810,
+   "raw_line_range": [
+    4728,
+    4744
+   ],
+   "reuse_basis": "United States public domain: poem published 1896 and the collected edition in 1913; author died 1906. The repository states the eBook is not protected by U.S. copyright; the text is reproduced without the repository's trademark or license header.",
+   "excerpt": {
+    "unit": "line",
+    "from": 1,
+    "to": 15,
+    "whole_work": true,
+    "note": "Complete poem, 15 lines in three stanzas (5/4/6); the two refrain lines keep their relative indent."
+   },
+   "modifications": [
+    "Heading omitted.",
+    "Repository base indent removed; the 4-space relative indent of the two refrain lines kept."
+   ],
+   "text_file": "texts/dunbar-mask.txt",
+   "text_sha256": "a77f49efde727ec08598865927263e552b97012d4e614f20b3f625133cbc0e40",
+   "word_count": 98,
+   "counted_line_count": 15,
+   "unit_count": 3
+  },
+  {
+   "id": "hopkins-grandeur",
+   "title": "God's Grandeur",
+   "author": "Gerard Manley Hopkins",
+   "genre": "poetry",
+   "form": "poem",
+   "year_first_published": 1918,
+   "edition": "Poems of Gerard Manley Hopkins, ed. Robert Bridges (1918, first edition), Gutenberg eBook #22403. Composed 1877; first published 1918.",
+   "period": "Victorian (published posthumously 1918)",
+   "region": "United Kingdom",
+   "perspective": "Religious sonnet with sprung rhythm and long lines",
+   "repository": "Project Gutenberg (gutenberg.org)",
+   "url": "https://www.gutenberg.org/ebooks/22403",
+   "retrieved": "2026-10-15",
+   "raw_sha256": "7be6edff06b1894903c104ef500d1c2206a708a72f3509ae51fde405b8daab84",
+   "raw_bytes": 192791,
+   "raw_line_range": [
+    903,
+    920
+   ],
+   "reuse_basis": "United States public domain: first edition published 1918, before 1929; author died 1889. The repository states the eBook is not protected by U.S. copyright; the text is reproduced without the repository's trademark or license header.",
+   "excerpt": {
+    "unit": "line",
+    "from": 1,
+    "to": 14,
+    "whole_work": true,
+    "note": "Complete sonnet, 14 original lines (octave 8 + sestet 6)."
+   },
+   "modifications": [
+    "The 1918 print wraps three long sonnet lines ('And all is seared ... toil;' / 'And wears ... the soil' / 'World broods ... bright wings.'); the run-over fragments (raw lines 909, 911, 920) were rejoined to their lines so each stored line is one sonnet line.",
+    "Heading omitted; the print's alternate-line indent is kept (3 spaces)."
+   ],
+   "text_file": "texts/hopkins-grandeur.txt",
+   "text_sha256": "f2a5b7146247298c4d3b73de850e8d724668fac124547343e06bd483ac3504c6",
+   "word_count": 125,
+   "counted_line_count": 14,
+   "unit_count": 2
+  },
+  {
+   "id": "chopin-silk-stockings",
+   "title": "A Pair of Silk Stockings",
+   "author": "Kate Chopin",
+   "genre": "short_fiction",
+   "form": "prose",
+   "year_first_published": 1897,
+   "edition": "The Awakening, and Selected Short Stories, Gutenberg eBook #160 (story first published in Vogue, 1897).",
+   "period": "Late 19th century (American realism / local color)",
+   "region": "United States (New Orleans setting)",
+   "perspective": "Woman writer; third-person limited on a working-class mother",
+   "repository": "Project Gutenberg (gutenberg.org)",
+   "url": "https://www.gutenberg.org/ebooks/160",
+   "retrieved": "2026-10-15",
+   "raw_sha256": "31d4577d255806b92c6296419adddd5ca460bdb788743878a09ded1e19f4161a",
+   "raw_bytes": 392860,
+   "raw_line_range": [
+    6928,
+    6988
+   ],
+   "reuse_basis": "United States public domain: story published 1897; author died 1904. The repository states the eBook is not protected by U.S. copyright; the text is reproduced without the repository's trademark or license header.",
+   "excerpt": {
+    "unit": "paragraph",
+    "from": 1,
+    "to": 7,
+    "whole_work": false,
+    "note": "Opening of the story: paragraphs 1-7 of the story (about 640 words), ending where Mrs. Sommers sits at the stocking counter."
+   },
+   "modifications": [
+    "Repository hard-wrap rejoined into paragraphs (one stored line per paragraph).",
+    "Removed italic underscore markup.",
+    "Title line omitted."
+   ],
+   "text_file": "texts/chopin-silk-stockings.txt",
+   "text_sha256": "f79f437dc083d0c6acd7aa2d2ae4254f67d8a7e6e2ce522525fcc859131173ea",
+   "word_count": 640,
+   "counted_line_count": 7,
+   "unit_count": 7
+  },
+  {
+   "id": "chekhov-lady-dog",
+   "title": "The Lady with the Dog (Section I, opening)",
+   "author": "Anton Chekhov",
+   "translator": "Constance Garnett",
+   "genre": "short_fiction",
+   "form": "prose",
+   "year_first_published": 1917,
+   "edition": "The Lady with the Dog and Other Stories, trans. Constance Garnett (1917), Gutenberg eBook #13415. Russian original 1899.",
+   "period": "Turn of the 20th century (Russian realism, in translation)",
+   "region": "Russia (Yalta setting)",
+   "perspective": "Russian author in English translation; free indirect third person",
+   "repository": "Project Gutenberg (gutenberg.org)",
+   "url": "https://www.gutenberg.org/ebooks/13415",
+   "retrieved": "2026-10-15",
+   "raw_sha256": "79eb6eeed77023b08bea36499bd1ac60ec6d84852b59714bb0b88cee21992a27",
+   "raw_bytes": 423298,
+   "raw_line_range": [
+    76,
+    139
+   ],
+   "reuse_basis": "United States public domain: Garnett translation published 1917; author died 1904, translator died 1946 but the 1917 publication is before 1929. The repository states the eBook is not protected by U.S. copyright; the text is reproduced without the repository's trademark or license header.",
+   "excerpt": {
+    "unit": "paragraph",
+    "from": 1,
+    "to": 8,
+    "whole_work": false,
+    "note": "Section I, paragraphs 1-8 (about 690 words; the numeral heading 'I' omitted)."
+   },
+   "modifications": [
+    "Repository hard-wrap rejoined into paragraphs.",
+    "Removed italic underscore markup.",
+    "Section numeral omitted."
+   ],
+   "text_file": "texts/chekhov-lady-dog.txt",
+   "text_sha256": "f8e5257a22da92b3d78f8909ddae862d718cf56e9fad28368f821cdf4f271a4a",
+   "word_count": 689,
+   "counted_line_count": 8,
+   "unit_count": 8
+  },
+  {
+   "id": "crane-open-boat",
+   "title": "The Open Boat (Section I, excerpt)",
+   "author": "Stephen Crane",
+   "genre": "short_fiction",
+   "form": "prose",
+   "year_first_published": 1897,
+   "edition": "The Open Boat and Other Stories (London: Heinemann, 1898 print), Gutenberg eBook #45524; story first published in Scribner's Magazine, 1897.",
+   "period": "Late 19th century (American naturalism)",
+   "region": "United States (Florida coast)",
+   "perspective": "Omniscient narrator with ironic distance",
+   "repository": "Project Gutenberg (gutenberg.org)",
+   "url": "https://www.gutenberg.org/ebooks/45524",
+   "retrieved": "2026-10-15",
+   "raw_sha256": "0ebacd153c0ed8e37227d5a41e01da7cee5723ed50b29a15da9e824161793840",
+   "raw_bytes": 398135,
+   "raw_line_range": [
+    164,
+    215
+   ],
+   "reuse_basis": "United States public domain: story published 1897; author died 1900. The repository states the eBook is not protected by U.S. copyright; the text is reproduced without the repository's trademark or license header.",
+   "excerpt": {
+    "unit": "paragraph",
+    "from": 1,
+    "to": 9,
+    "whole_work": false,
+    "note": "Section I, paragraphs 1-9 (about 530 words; numeral heading omitted)."
+   },
+   "modifications": [
+    "Repository hard-wrap rejoined into paragraphs.",
+    "Removed italic underscore markup.",
+    "Section numeral omitted."
+   ],
+   "text_file": "texts/crane-open-boat.txt",
+   "text_sha256": "c63fc384a2aeea8bb54e433ea222da270171b4d8746241c851551aa23fc2d1f8",
+   "word_count": 531,
+   "counted_line_count": 9,
+   "unit_count": 9
+  },
+  {
+   "id": "ibsen-dolls-house",
+   "title": "A Doll's House (Act III, Nora and Helmer's conversation)",
+   "author": "Henrik Ibsen",
+   "translator": "R. Farquharson Sharp",
+   "genre": "drama",
+   "form": "drama",
+   "year_first_published": 1910,
+   "edition": "A Doll's House, trans. R. Farquharson Sharp (Everyman edition, 1910), Gutenberg eBook #2542. Norwegian original 1879.",
+   "period": "19th century (Scandinavian realist drama, in translation)",
+   "region": "Norway",
+   "perspective": "Norwegian playwright in English translation; domestic realism",
+   "repository": "Project Gutenberg (gutenberg.org)",
+   "url": "https://www.gutenberg.org/ebooks/2542",
+   "retrieved": "2026-10-15",
+   "raw_sha256": "d72a481b08ca7ace73e8ca2087b2baec29fc00e0d6e493f5e877b12116bccf4f",
+   "raw_bytes": 169080,
+   "raw_line_range": [
+    4716,
+    4806
+   ],
+   "reuse_basis": "United States public domain: translation published 1910; author died 1906. The repository states the eBook is not protected by U.S. copyright; the text is reproduced without the repository's trademark or license header.",
+   "excerpt": {
+    "unit": "speech",
+    "from": 1,
+    "to": 21,
+    "whole_work": false,
+    "note": "Opening of the final conversation in Act III, from Nora's 'It is not so very late. Sit down here, Torvald' (raw line 4716) to her speech ending 'made nothing of my life.' (raw line 4806); 21 speeches; speech 1 = the first speech excerpted."
+   },
+   "modifications": [
+    "Speaker name rejoined with speech as 'NAME. text'.",
+    "Removed italic underscore markup; stage directions kept in square brackets."
+   ],
+   "text_file": "texts/ibsen-dolls-house.txt",
+   "text_sha256": "dcc8488fe965226eeb1a389c327bcb0d95d80dbf559bddc54144a0422e2e12da",
+   "word_count": 538,
+   "counted_line_count": 21,
+   "unit_count": 21
+  }
+ ]
+}

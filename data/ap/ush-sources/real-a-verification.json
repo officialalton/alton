@@ -1,0 +1,362 @@
+{
+ "models": {
+  "solvers": [
+   "claude-opus-5-5",
+   "claude-sonnet-5-5"
+  ],
+  "graders": [
+   "claude-opus-5-5",
+   "claude-sonnet-5-5"
+  ],
+  "fact": "claude-fable-5-1"
+ },
+ "solve": {
+  "solve-0-0": [
+   {
+    "q": 1,
+    "choice": 2,
+    "confidence": "certain",
+    "also": null,
+    "note": null
+   },
+   {
+    "q": 2,
+    "choice": 0,
+    "confidence": "certain",
+    "also": null,
+    "note": null
+   },
+   {
+    "q": 3,
+    "choice": 3,
+    "confidence": "certain",
+    "also": null,
+    "note": null
+   }
+  ],
+  "solve-0-1": [
+   {
+    "q": 1,
+    "choice": 2,
+    "confidence": "certain",
+    "also": null,
+    "note": null
+   },
+   {
+    "q": 2,
+    "choice": 0,
+    "confidence": "certain",
+    "also": null,
+    "note": null
+   },
+   {
+    "q": 3,
+    "choice": 3,
+    "confidence": "certain",
+    "also": null,
+    "note": null
+   }
+  ],
+  "solve-1-0": [
+   {
+    "q": 1,
+    "choice": 1,
+    "confidence": "certain",
+    "also": null,
+    "note": null
+   },
+   {
+    "q": 2,
+    "choice": 3,
+    "confidence": "certain",
+    "also": null,
+    "note": null
+   },
+   {
+    "q": 3,
+    "choice": 2,
+    "confidence": "certain",
+    "also": null,
+    "note": null
+   }
+  ],
+  "solve-1-1": [
+   {
+    "q": 1,
+    "choice": 1,
+    "confidence": "certain",
+    "also": null,
+    "note": null
+   },
+   {
+    "q": 2,
+    "choice": 3,
+    "confidence": "certain",
+    "also": null,
+    "note": null
+   },
+   {
+    "q": 3,
+    "choice": 2,
+    "confidence": "certain",
+    "also": null,
+    "note": null
+   }
+  ]
+ },
+ "fact": {
+  "fact-mc-0": {
+   "verdicts": [
+    {
+     "where": "Q1",
+     "verdict": "sound",
+     "note": "All cited figures match the table (Northeast 484,176→1,146,985; Midwest 543,498→793,075; South 7,922,969 in 1900). Key reflects standard Great Migration causation (WWI labor demand, declining European immigration); distractors are clearly wrong (Emancipation 1863 did not immediately relocate most freedpeople; Dust Bowl is 1930s; northern hiring rose, not fell, during WWI)."
+    },
+    {
+     "where": "Q2",
+     "verdict": "sound",
+     "note": "Checked arithmetic: Northeast +183%, Midwest +161% (\"more than 160 percent\" holds), South +13.2%. South rose every decade. 1940 South share = 9,904,619/12,865,518 = 77%, consistent with \"about three-fourths.\" West figures far below Midwest in all years. Key is the only supportable claim."
+    },
+    {
+     "where": "Q3",
+     "verdict": "sound",
+     "note": "Historical statements accurate: federal troops withdrawn 1877; Plessy (1896) upheld separate-but-equal; Northeast figures 385,020 (1900) and 679,234 (1920) match the table and predate 1929. Key correctly identifies Jim Crow and sharecropping as push factors."
+    }
+   ],
+   "flags": []
+  },
+  "fact-mc-1": {
+   "verdicts": [
+    {
+     "where": "Q1",
+     "verdict": "sound",
+     "note": "Key (1921/1924 quota laws) is the clear best answer. Table figures cited in rationales (13.3% in 1880, 14.8% in 1890; 11,594,896 foreign-born in 1940) match the source. Distractor rationales are accurate: 1965 Act abolished national-origins quotas; 1882 Act targeted Chinese laborers; Depression-era repatriation affected hundreds of thousands, not 'most' foreign-born residents."
+    },
+    {
+     "where": "Q2",
+     "verdict": "sound",
+     "note": "Key (postwar nativism and the 1919-20 Red Scare) is standard and correct. Distractor rationales are accurate: first transcontinental railroad completed 1869; AFL supported restriction in the 1920s; Plains settlement promotion was a 19th-century phenomenon."
+    },
+    {
+     "where": "Q3",
+     "verdict": "sound",
+     "note": "Chinese Exclusion Act of 1882 is the clearly best analogue. Dates and descriptions of the Homestead Act (1862), Dawes Act (1887), and Pendleton Act (1883) are accurate. Describing the 1882 law as 'one of the first' federal race/national-origin restrictions is defensible given the 1875 Page Act preceded it."
+    }
+   ],
+   "flags": []
+  }
+ },
+ "items": {
+  "ap_us_history-real_a_gm#1": {
+   "keyIndex": 2,
+   "solverChoices": [
+    2,
+    2
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "factVerdict": "sound",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_a_gm#2": {
+   "keyIndex": 0,
+   "solverChoices": [
+    0,
+    0
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "factVerdict": "sound",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_a_gm#3": {
+   "keyIndex": 3,
+   "solverChoices": [
+    3,
+    3
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "factVerdict": "sound",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_a_imm#1": {
+   "keyIndex": 1,
+   "solverChoices": [
+    1,
+    1
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "factVerdict": "sound",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_a_imm#2": {
+   "keyIndex": 3,
+   "solverChoices": [
+    3,
+    3
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "factVerdict": "sound",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_a_imm#3": {
+   "keyIndex": 2,
+   "solverChoices": [
+    2,
+    2
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "factVerdict": "sound",
+   "flags": [],
+   "status": "verified"
+  }
+ },
+ "frq": {
+  "ap_us_history-real_a_saq3_own": {
+   "scores": {
+    "high": {
+     "a": 1,
+     "b": 1,
+     "c": 1
+    },
+    "mid": {
+     "a": 1,
+     "b": 0,
+     "c": 1
+    },
+    "low": {
+     "a": 1,
+     "b": 0,
+     "c": 0
+    }
+   },
+   "totals": {
+    "high": 3,
+    "mid": 2,
+    "low": 1
+   },
+   "graderTotals": {
+    "high": [
+     3,
+     3
+    ],
+    "mid": [
+     2,
+     2
+    ],
+    "low": [
+     1,
+     1
+    ]
+   },
+   "factVerdicts": [
+    {
+     "where": "A",
+     "verdict": "sound",
+     "note": "All table claims check out: US 1900-1940 values 43.6–47.8 ('about 44 to 48' is a fair rounding of 43.6); Mississippi rises 33.3 (1940) to 71.0 (1980) and exceeds the US rate first in 1970 (66.3 vs 62.9; 1960 was 57.7 vs 61.9); New York is below the US figure in every year listed."
+    },
+    {
+     "where": "B",
+     "verdict": "sound",
+     "note": "GI Bill (1944) VA-guaranteed low/no-down-payment loans, FHA mortgage insurance, Levitt and Sons mass production, postwar prosperity/baby boom, and Depression-era foreclosures for the 1940 dip are all accurate and fit the trends."
+    },
+    {
+     "where": "C",
+     "verdict": "sound",
+     "note": "Interstate Highway Act 1956, redlining/restrictive covenants and segregation, white flight and urban fiscal decline, consumer demand, and Fair Housing Act of 1968 are all accurate and within 1945-1980."
+    },
+    {
+     "where": "samples",
+     "verdict": "sound",
+     "note": "Numbers cited (43.6, 55.0, 61.9) match the table; GI Bill/VA loan, Levittown, car dependence, restrictive covenants, and urban tax-base loss claims are accurate. Low sample is vague but not inaccurate."
+    }
+   ],
+   "flags": [],
+   "ok": true
+  },
+  "ap_us_history-real_a_saq3_plains": {
+   "scores": {
+    "high": {
+     "a": 1,
+     "b": 1,
+     "c": 1
+    },
+    "mid": {
+     "a": 1,
+     "b": 0,
+     "c": 1
+    },
+    "low": {
+     "a": 1,
+     "b": 0,
+     "c": 0
+    }
+   },
+   "totals": {
+    "high": 3,
+    "mid": 2,
+    "low": 1
+   },
+   "graderTotals": {
+    "high": [
+     3,
+     3
+    ],
+    "mid": [
+     2,
+     2
+    ],
+    "low": [
+     1,
+     1
+    ]
+   },
+   "factVerdicts": [
+    {
+     "where": "A",
+     "verdict": "sound",
+     "note": "All three acceptable trends match the table: rapid growth 1870-1890 in all four areas; Kansas (+43,399, ~3%) and Nebraska (+7,390, <1%) nearly flat in the 1890s while ND (182,719→319,146) and SD (328,808→401,570) kept growing; Dakotas each above 300,000 by 1900. Figures match the Census Bureau working paper's original decennial counts."
+    },
+    {
+     "where": "B",
+     "verdict": "sound",
+     "note": "Homestead Act (1862, 160 acres, five-year residency/improvement), Pacific Railway Act land grants and railroad promotion, European recruitment of Germans/Scandinavians, and drought/low prices/Panic of 1893 for the 1890s slowdown are all accurate and fit the trends in A."
+    },
+    {
+     "where": "C",
+     "verdict": "sound",
+     "note": "Bison destruction and reservations, Dawes Act 1887, Grange/Alliances/Populists with 1892 Omaha Platform planks (government ownership of railroads, free silver), Granger laws upheld in Munn v. Illinois (1877), Interstate Commerce Act (1887), and the 1890 census superintendent's frontier-line statement used by Turner in 1893 are all accurate and within 1865-1898."
+    },
+    {
+     "where": "samples",
+     "verdict": "sound",
+     "note": "Historical claims in the high, mid, and low samples are accurate; numbers quoted match the table. Low sample is vague but not wrong."
+    }
+   ],
+   "flags": [],
+   "ok": true
+  }
+ },
+ "grades": {}
+}

@@ -92,7 +92,8 @@ export function CodeBlock({ language, lines }: { language: string; lines: string
 
 /**
  * 줄 번호가 있는 문학 지문(AP English Literature, 2026-10-14): ```passage 펜스. 빈 줄(연·문단 사이)은 줄로 세지 않고 번호는 5줄마다만 표시한다(lib/ap-exam/passage-lines.ts).
- * 좁은 화면에서는 줄이 접힐 수 있어도 번호 열은 유지된다. 글자는 이스케이프된 텍스트로만 그린다.
+ * 좁은 화면에서는 줄이 접힐 수 있어도 번호 열은 유지되고, 번호는 원문 줄의 첫 행에만 붙는다. 접힌 이어지는 행은 내어쓰기(hanging indent 1.5rem)로 들여써
+ * '다른 줄'로 읽히지 않게 한다(2026-10-15: 시의 긴 줄·원문이 접어 둔 줄 배치 검증). 글자는 이스케이프된 텍스트로만 그린다.
  */
 export function PassageBlock({ lines }: { lines: string[] }) {
   const labels = lineNumberLabels(lines);
@@ -102,7 +103,7 @@ export function PassageBlock({ lines }: { lines: string[] }) {
         ln.trim() === "" ? <div key={i} className="h-3" aria-hidden="true" /> : (
           <div key={i} data-testid="passage-line" className="flex">
             <span aria-hidden="true" className="inline-block w-8 shrink-0 select-none pr-2 text-right font-sans text-[11px] text-grey-500">{labels[i] ?? ""}</span>
-            <span className="min-w-0 whitespace-pre-wrap">{ln}</span>
+            <span className="min-w-0 whitespace-pre-wrap pl-6 -indent-6" data-testid="passage-line-text">{ln}</span>
           </div>
         ),
       )}

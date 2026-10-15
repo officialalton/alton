@@ -1,0 +1,942 @@
+{
+ "generated": "2026-10-15",
+ "source_files": [
+  "data/ap/stock/exact-assign-englit-lt1-lt2.json",
+  "data/ap/stock/lt-p0-items.json",
+  "data/ap/stock/lt-p1a-items.json",
+  "data/ap/stock/lt-p1b-items.json",
+  "data/ap/stock/lt-p1c-items.json"
+ ],
+ "ced_reference": "docs/ap/englit-facts.md (CED V.1 Fall 2024, read 2026-10-14; NOT re-fetched in this session)",
+ "official": {
+  "mc": "55 questions, 5 sets, 8-13 each, >=2 prose/drama and >=2 poetry sets; weights short fiction 42-49%, poetry 36-45%, longer fiction/drama 15-18%; 20th/21st-century texts outnumber earlier ones",
+  "frq": "Q1 poetry analysis (~100-400 words), Q2 prose fiction analysis (~600-800 words, drama possible), Q3 literary argument (student chooses a work)"
+ },
+ "exams": [
+  {
+   "id": "LT1",
+   "mc_items": 55,
+   "sets": [
+    {
+     "position": 1,
+     "key": "ap_english_literature-s01-k0",
+     "run": "englit-p1-a",
+     "genre_group": "short",
+     "form": "prose",
+     "title": "The Harlan Narrows Crossing",
+     "author_alias": "Orrin Delacourt",
+     "year_alias": 1954,
+     "period": "mid-20th century (manner)",
+     "era_raw": "mid-20th-century manner",
+     "region": "invented setting (see headnote; not a real region)",
+     "headnote": "The following passage is from a short story by Orrin Delacourt, set at a river crossing in the early 1950s.",
+     "words": 685,
+     "counted_lines": 67,
+     "items": 11,
+     "skills": [
+      "1.B",
+      "7.A",
+      "2.A",
+      "3.C",
+      "1.A",
+      "4.D",
+      "4.B",
+      "5.B",
+      "4.A",
+      "6.B",
+      "3.B"
+     ],
+     "release_tier": "candidate",
+     "expert_status": "unreviewed",
+     "origin": "ALTON-authored (fictional writer/title/setting)",
+     "representative_of_real_exam": false,
+     "label": "ALTON original; not confirmed representative of the real exam"
+    },
+    {
+     "position": 2,
+     "key": "ap_english_literature-s05-k0",
+     "run": "englit-p1-a",
+     "genre_group": "short",
+     "form": "prose",
+     "title": "The Danner Account",
+     "author_alias": "Lowell Imbrie",
+     "year_alias": 1958,
+     "period": "mid-20th century (manner)",
+     "era_raw": "mid-20th-century manner",
+     "region": "invented setting (see headnote; not a real region)",
+     "headnote": "The following passage is from a short story by Lowell Imbrie, set in a small mill town shortly after the Second World War.",
+     "words": 649,
+     "counted_lines": 63,
+     "items": 13,
+     "skills": [
+      "7.B",
+      "4.B",
+      "2.B",
+      "3.D",
+      "7.C",
+      "4.A",
+      "4.D",
+      "6.D",
+      "3.A",
+      "5.D",
+      "1.B",
+      "1.A",
+      "1.C"
+     ],
+     "release_tier": "candidate",
+     "expert_status": "unreviewed",
+     "origin": "ALTON-authored (fictional writer/title/setting)",
+     "representative_of_real_exam": false,
+     "label": "ALTON original; not confirmed representative of the real exam"
+    },
+    {
+     "position": 3,
+     "key": "ap_english_literature-p01-k0",
+     "run": "englit-p1-a",
+     "genre_group": "poetry",
+     "form": "poem",
+     "title": "To the House on Tenney Street, Before the Closing",
+     "author_alias": "Edith Marrow Kell",
+     "year_alias": 1957,
+     "period": "mid-20th century (manner)",
+     "era_raw": "mid-20th-century manner",
+     "region": "invented setting (see headnote; not a real region)",
+     "headnote": "In this poem, the speaker addresses the house where she grew up on the day before it is sold.",
+     "words": 223,
+     "counted_lines": 26,
+     "items": 13,
+     "skills": [
+      "6.D",
+      "2.A",
+      "4.C",
+      "4.A",
+      "7.B",
+      "4.B",
+      "6.A",
+      "5.B",
+      "1.E",
+      "3.C",
+      "5.C",
+      "3.D",
+      "7.A"
+     ],
+     "release_tier": "candidate",
+     "expert_status": "unreviewed",
+     "origin": "ALTON-authored (fictional writer/title/setting)",
+     "representative_of_real_exam": false,
+     "label": "ALTON original; not confirmed representative of the real exam"
+    },
+    {
+     "position": 4,
+     "key": "ap_english_literature-p03-k0",
+     "run": "englit-p1-a",
+     "genre_group": "poetry",
+     "form": "poem",
+     "title": "The Bench in Vrana Square",
+     "author_alias": "Milan Oresko",
+     "year_alias": 1961,
+     "period": "mid-20th century (manner)",
+     "era_raw": "mid-20th-century manner",
+     "region": "invented setting (see headnote; not a real region)",
+     "headnote": "The following poem is by an invented writer, set in a small river village some years after a war.",
+     "words": 310,
+     "counted_lines": 37,
+     "items": 8,
+     "skills": [
+      "5.B",
+      "2.B",
+      "4.C",
+      "3.D",
+      "6.A",
+      "3.C",
+      "7.C",
+      "6.D"
+     ],
+     "release_tier": "candidate",
+     "expert_status": "unreviewed",
+     "origin": "ALTON-authored (fictional writer/title/setting)",
+     "representative_of_real_exam": false,
+     "label": "ALTON original; not confirmed representative of the real exam"
+    },
+    {
+     "position": 5,
+     "key": "ap_english_literature-l04-k0",
+     "run": "englit-p1-c",
+     "genre_group": "longer",
+     "form": "prose",
+     "title": "Breakfast Is at Seven",
+     "author_alias": "Corinne Abelard",
+     "year_alias": 1954,
+     "period": "mid-20th century (manner)",
+     "era_raw": "mid-20th-century manner",
+     "region": "invented setting (see headnote; not a real region)",
+     "headnote": "The following passage is from a novel by Corinne Abelard. The narrator runs a boarding house in a small town on Lake Erie in the early 1950s.",
+     "words": 671,
+     "counted_lines": 64,
+     "items": 10,
+     "skills": [
+      "1.B",
+      "4.B",
+      "1.D",
+      "7.B",
+      "3.F",
+      "3.E",
+      "4.D",
+      "7.C",
+      "5.C",
+      "3.D"
+     ],
+     "release_tier": "candidate",
+     "expert_status": "unreviewed",
+     "origin": "ALTON-authored (fictional writer/title/setting)",
+     "representative_of_real_exam": false,
+     "label": "ALTON original; not confirmed representative of the real exam"
+    }
+   ],
+   "groups": [
+    {
+     "group": "short",
+     "items": 24,
+     "pct": 43.6,
+     "official_pct": [
+      42,
+      49
+     ],
+     "items_bounds_55": [
+      23,
+      27
+     ],
+     "within": true
+    },
+    {
+     "group": "poetry",
+     "items": 21,
+     "pct": 38.2,
+     "official_pct": [
+      36,
+      45
+     ],
+     "items_bounds_55": [
+      19,
+      25
+     ],
+     "within": true
+    },
+    {
+     "group": "longer",
+     "items": 10,
+     "pct": 18.2,
+     "official_pct": [
+      15,
+      18
+     ],
+     "items_bounds_55": [
+      8,
+      10
+     ],
+     "within": true
+    }
+   ],
+   "poetry_sets": 2,
+   "prose_or_drama_sets": 3,
+   "sets_in_8_13": true,
+   "set_sizes": [
+    11,
+    13,
+    13,
+    8,
+    10
+   ],
+   "earlier_period_sets": 0,
+   "twentieth_or_later_sets": 5,
+   "origin_alton_sets": 5,
+   "real_sets": 0,
+   "frq": [
+    {
+     "key": "ap_english_literature-fb1-k0",
+     "task_type": "poetry_analysis",
+     "template": "q1",
+     "passage_title": "To the Ellery Orchard, at Picking's End",
+     "author_alias": "Tobias Wrenfield",
+     "year_alias": 1914,
+     "words": 270,
+     "samples": 3,
+     "origin": "ALTON-authored (fictional writer/title/setting)",
+     "representative_of_real_exam": false,
+     "label": "ALTON original; not confirmed representative of the real exam"
+    },
+    {
+     "key": "ap_english_literature-fb2-k0",
+     "task_type": "prose_analysis",
+     "template": "q2",
+     "passage_title": "The Letter on the Net Box",
+     "author_alias": "Orla Bressan",
+     "year_alias": 1953,
+     "words": 758,
+     "samples": 3,
+     "origin": "ALTON-authored (fictional writer/title/setting)",
+     "representative_of_real_exam": false,
+     "label": "ALTON original; not confirmed representative of the real exam"
+    },
+    {
+     "key": "ap_english_literature-fb3-k0",
+     "task_type": "literary_argument",
+     "template": "q3",
+     "passage_title": null,
+     "author_alias": null,
+     "year_alias": null,
+     "words": null,
+     "samples": 3,
+     "origin": "Q3 works list names real published works for student choice; no passage",
+     "representative_of_real_exam": false,
+     "label": "Q3: real work list (ALTON-chosen 40 titles, not the official list)"
+    }
+   ]
+  },
+  {
+   "id": "LT2",
+   "mc_items": 55,
+   "sets": [
+    {
+     "position": 1,
+     "key": "ap_english_literature-s02-k0",
+     "run": "englit-p1-a",
+     "genre_group": "short",
+     "form": "prose",
+     "title": "The Patience",
+     "author_alias": "Edmund Askew Thorne",
+     "year_alias": 1871,
+     "period": "19th century (manner)",
+     "era_raw": "19th-century manner",
+     "region": "invented setting (see headnote; not a real region)",
+     "headnote": "The following passage is from a story by an invented writer, set in a northern English fishing harbour in the nineteenth century.",
+     "words": 582,
+     "counted_lines": 58,
+     "items": 12,
+     "skills": [
+      "4.A",
+      "2.B",
+      "1.A",
+      "1.B",
+      "4.B",
+      "3.A",
+      "7.A",
+      "6.A",
+      "4.C",
+      "5.C",
+      "7.D",
+      "3.D"
+     ],
+     "release_tier": "candidate",
+     "expert_status": "unreviewed",
+     "origin": "ALTON-authored (fictional writer/title/setting)",
+     "representative_of_real_exam": false,
+     "label": "ALTON original; not confirmed representative of the real exam"
+    },
+    {
+     "position": 2,
+     "key": "ap_english_literature-s03-k0",
+     "run": "englit-p1-a",
+     "genre_group": "short",
+     "form": "prose",
+     "title": "Canon One",
+     "author_alias": "Marisa Coelho-Vance",
+     "year_alias": 2019,
+     "period": "contemporary (2019 alias)",
+     "era_raw": "contemporary",
+     "region": "invented setting (see headnote; not a real region)",
+     "headnote": "The following passage is from a contemporary short story. The narrator works as a professional interpreter.",
+     "words": 649,
+     "counted_lines": 65,
+     "items": 12,
+     "skills": [
+      "3.A",
+      "4.C",
+      "4.A",
+      "7.A",
+      "1.D",
+      "2.A",
+      "6.C",
+      "7.B",
+      "3.C",
+      "3.B",
+      "1.B",
+      "5.D"
+     ],
+     "release_tier": "candidate",
+     "expert_status": "unreviewed",
+     "origin": "ALTON-authored (fictional writer/title/setting)",
+     "representative_of_real_exam": false,
+     "label": "ALTON original; not confirmed representative of the real exam"
+    },
+    {
+     "position": 3,
+     "key": "ap_english_literature-p02-k0",
+     "run": "englit-p1-a",
+     "genre_group": "poetry",
+     "form": "poem",
+     "title": "Trackbed, Kell Valley Branch",
+     "author_alias": "Isla Brennick",
+     "year_alias": 2019,
+     "period": "contemporary (2019 alias)",
+     "era_raw": "contemporary",
+     "region": "invented setting (see headnote; not a real region)",
+     "headnote": "The following poem is by the contemporary poet Isla Brennick. The speaker walks the route of a railway branch line that closed many years earlier.",
+     "words": 275,
+     "counted_lines": 33,
+     "items": 10,
+     "skills": [
+      "4.B",
+      "3.C",
+      "4.A",
+      "5.C",
+      "6.A",
+      "2.A",
+      "7.A",
+      "5.A",
+      "6.B",
+      "7.D"
+     ],
+     "release_tier": "candidate",
+     "expert_status": "unreviewed",
+     "origin": "ALTON-authored (fictional writer/title/setting)",
+     "representative_of_real_exam": false,
+     "label": "ALTON original; not confirmed representative of the real exam"
+    },
+    {
+     "position": 4,
+     "key": "ap_english_literature-p05-k0",
+     "run": "englit-p1-a",
+     "genre_group": "poetry",
+     "form": "poem",
+     "title": "Accession 4471-B",
+     "author_alias": "Maren Oduya",
+     "year_alias": 2019,
+     "period": "contemporary (2019 alias)",
+     "era_raw": "contemporary",
+     "region": "invented setting (see headnote; not a real region)",
+     "headnote": "The following poem is by the contemporary poet Maren Oduya. The speaker is a seed held in long-term frozen storage.",
+     "words": 280,
+     "counted_lines": 32,
+     "items": 13,
+     "skills": [
+      "7.B",
+      "6.D",
+      "4.C",
+      "3.C",
+      "2.A",
+      "3.D",
+      "4.A",
+      "6.C",
+      "1.D",
+      "4.B",
+      "3.B",
+      "5.B",
+      "5.D"
+     ],
+     "release_tier": "candidate",
+     "expert_status": "unreviewed",
+     "origin": "ALTON-authored (fictional writer/title/setting)",
+     "representative_of_real_exam": false,
+     "label": "ALTON original; not confirmed representative of the real exam"
+    },
+    {
+     "position": 5,
+     "key": "ap_english_literature-l01-k0",
+     "run": "englit-p1-a",
+     "genre_group": "longer",
+     "form": "drama",
+     "title": "The Kitchen Room",
+     "author_alias": "Ruth Abernathy Kell",
+     "year_alias": 1953,
+     "period": "mid-20th century (manner)",
+     "era_raw": "mid-20th-century manner",
+     "region": "invented setting (see headnote; not a real region)",
+     "headnote": "The following scene is from The Kitchen Room, a play by Ruth Abernathy Kell, set in a small lake-town hotel in the early 1950s.",
+     "words": 693,
+     "counted_lines": 78,
+     "items": 8,
+     "skills": [
+      "4.D",
+      "3.B",
+      "3.E",
+      "7.C",
+      "4.B",
+      "1.D",
+      "1.E",
+      "1.B"
+     ],
+     "release_tier": "candidate",
+     "expert_status": "unreviewed",
+     "origin": "ALTON-authored (fictional writer/title/setting)",
+     "representative_of_real_exam": false,
+     "label": "ALTON original; not confirmed representative of the real exam"
+    }
+   ],
+   "groups": [
+    {
+     "group": "short",
+     "items": 24,
+     "pct": 43.6,
+     "official_pct": [
+      42,
+      49
+     ],
+     "items_bounds_55": [
+      23,
+      27
+     ],
+     "within": true
+    },
+    {
+     "group": "poetry",
+     "items": 23,
+     "pct": 41.8,
+     "official_pct": [
+      36,
+      45
+     ],
+     "items_bounds_55": [
+      19,
+      25
+     ],
+     "within": true
+    },
+    {
+     "group": "longer",
+     "items": 8,
+     "pct": 14.5,
+     "official_pct": [
+      15,
+      18
+     ],
+     "items_bounds_55": [
+      8,
+      10
+     ],
+     "within": true
+    }
+   ],
+   "poetry_sets": 2,
+   "prose_or_drama_sets": 3,
+   "sets_in_8_13": true,
+   "set_sizes": [
+    12,
+    12,
+    10,
+    13,
+    8
+   ],
+   "earlier_period_sets": 1,
+   "twentieth_or_later_sets": 4,
+   "origin_alton_sets": 5,
+   "real_sets": 0,
+   "frq": [
+    {
+     "key": "ap_english_literature-fa1-k0",
+     "task_type": "poetry_analysis",
+     "template": "q1",
+     "passage_title": "Spin Cycle, Ellery Street",
+     "author_alias": "Marisol Teague",
+     "year_alias": 2019,
+     "words": 230,
+     "samples": 3,
+     "origin": "ALTON-authored (fictional writer/title/setting)",
+     "representative_of_real_exam": false,
+     "label": "ALTON original; not confirmed representative of the real exam"
+    },
+    {
+     "key": "ap_english_literature-fa2-k0",
+     "task_type": "prose_analysis",
+     "template": "q2",
+     "passage_title": "The Second Lesson",
+     "author_alias": "Edmund Calloway Wrenne",
+     "year_alias": 1861,
+     "words": 685,
+     "samples": 3,
+     "origin": "ALTON-authored (fictional writer/title/setting)",
+     "representative_of_real_exam": false,
+     "label": "ALTON original; not confirmed representative of the real exam"
+    },
+    {
+     "key": "ap_english_literature-fa3-k0",
+     "task_type": "literary_argument",
+     "template": "q3",
+     "passage_title": null,
+     "author_alias": null,
+     "year_alias": null,
+     "words": null,
+     "samples": 3,
+     "origin": "Q3 works list names real published works for student choice; no passage",
+     "representative_of_real_exam": false,
+     "label": "Q3: real work list (ALTON-chosen 40 titles, not the official list)"
+    }
+   ]
+  }
+ ],
+ "reinforcement_targets": [
+  {
+   "priority": 1,
+   "stage": 1,
+   "slot": "LT1 FRQ Q1 (fb1)",
+   "current": "ALTON poem 'To the Ellery Orchard, at Picking's End' (alias 1914 manner)",
+   "real_text": "hopkins-grandeur",
+   "status": "FRQ sample built in this branch (rf1)",
+   "why": "Single short text, cheapest, and the real exam's Q1 is always a real poem; highest fidelity gain per dollar."
+  },
+  {
+   "priority": 2,
+   "stage": 1,
+   "slot": "LT2 FRQ Q2 (fa2)",
+   "current": "ALTON prose 'The Second Lesson' (alias 1861 manner)",
+   "real_text": "chekhov-lady-dog",
+   "status": "FRQ sample built in this branch (rf2)",
+   "why": "Same reasons; Q2 needs 600-800 words and the registry excerpt is 689 words."
+  },
+  {
+   "priority": 3,
+   "stage": 2,
+   "slot": "LT1 MC set p03 (poetry, 8 items)",
+   "current": "ALTON 'The Bench in Vrana Square' (mid-20th-century manner)",
+   "real_text": "dickinson-chariot",
+   "status": "MC sample set built in this branch (rs1)",
+   "why": "Set size 8 can swap one-for-one (exam total must stay 55); adds a 19th-century American poem (LT1 has no earlier-period poetry)."
+  },
+  {
+   "priority": 4,
+   "stage": 2,
+   "slot": "LT2 MC set p05 (poetry, 13 items)",
+   "current": "ALTON 'Accession 4471-B' (contemporary alias)",
+   "real_text": "needs a longer registry poem (28-40 lines) or a paired-poem set; dunbar-mask sample (rs2) holds at most 9 items",
+   "status": "registry gap",
+   "why": "13-item slot cannot be filled by a 15-line poem; add a Romantic/Victorian/Harlem Renaissance PD poem of 30+ lines."
+  },
+  {
+   "priority": 5,
+   "stage": 3,
+   "slot": "LT1 MC set s05 (short fiction, 13 items)",
+   "current": "ALTON 'The Danner Account'",
+   "real_text": "chopin-silk-stockings (rs3 sample, <=10 items) + longer excerpt for 13",
+   "status": "MC sample set built (rs3); size gap to 13",
+   "why": "Largest prose set; swap needs a longer excerpt or a compensating size swap verified by verifyEnglitFullComposition."
+  },
+  {
+   "priority": 6,
+   "stage": 3,
+   "slot": "LT2 MC set l01 (drama, 8 items)",
+   "current": "ALTON drama 'The Kitchen Room'",
+   "real_text": "ibsen-dolls-house",
+   "status": "registry text ready; set not built",
+   "why": "Size 8 matches; drama is the weakest genre for ALTON-authored text (scene conventions)."
+  },
+  {
+   "priority": 7,
+   "stage": 4,
+   "slot": "LT1 FRQ Q2 (fb2)",
+   "current": "ALTON prose 'The Letter on the Net Box' (1953 manner)",
+   "real_text": "crane-open-boat (531 words; below the 600-800 word Q2 range: extend to paragraph 11 or use another excerpt)",
+   "status": "registry text ready; needs a longer boundary",
+   "why": "Rounds out Q2 diversity (American naturalism, third-person omniscient)."
+  },
+  {
+   "priority": 8,
+   "stage": 4,
+   "slot": "LT1 MC set l04 (longer prose, 10 items)",
+   "current": "ALTON 'Breakfast Is at Seven'",
+   "real_text": "none registered (needs a novel excerpt, e.g. a PD novel chapter)",
+   "status": "registry gap",
+   "why": "Longer-fiction slot needs a novel excerpt with headnote."
+  },
+  {
+   "priority": 9,
+   "stage": 5,
+   "slot": "LT1 MC sets p01 (13), s01 (13); LT2 MC sets p02 (10), s02 (12), s03 (12); LT2 FRQ Q1 (fa1, 2019 alias)",
+   "current": "ALTON passages (mid-20th, 19th-century manner, contemporary)",
+   "real_text": "needs more registry texts; contemporary/post-1928 texts cannot use the pre-1929 public-domain basis",
+   "status": "owner decision on modern texts",
+   "why": "CED: 20th/21st-century texts outnumber earlier ones. A pre-1929-only registry cannot supply 21st-century texts; keep labelled ALTON-authored modern sets until licensed or explicitly public-domain modern texts are verified."
+  }
+ ],
+ "stock_inventory": [
+  {
+   "key": "englit-p0:ap_english_literature-p00-k0",
+   "kind": "mc",
+   "review_state": "rejected",
+   "group": null,
+   "title": null,
+   "items": null,
+   "in_lt1_lt2": false,
+   "origin": "ALTON-authored (fictional writer/title/setting)",
+   "representative_of_real_exam": false,
+   "label": "ALTON original; not confirmed representative of the real exam"
+  },
+  {
+   "key": "englit-p0:ap_english_literature-s00-k0",
+   "kind": "mc",
+   "review_state": "auto_passed",
+   "group": "short",
+   "title": "The Low Water Year",
+   "items": 9,
+   "in_lt1_lt2": false,
+   "origin": "ALTON-authored (fictional writer/title/setting)",
+   "representative_of_real_exam": false,
+   "label": "ALTON original; not confirmed representative of the real exam"
+  },
+  {
+   "key": "englit-p1-a:ap_english_literature-p01-k0",
+   "kind": "mc",
+   "review_state": "auto_passed",
+   "group": "poetry",
+   "title": "To the House on Tenney Street, Before the Closing",
+   "items": 13,
+   "in_lt1_lt2": true,
+   "origin": "ALTON-authored (fictional writer/title/setting)",
+   "representative_of_real_exam": false,
+   "label": "ALTON original; not confirmed representative of the real exam"
+  },
+  {
+   "key": "englit-p1-a:ap_english_literature-p02-k0",
+   "kind": "mc",
+   "review_state": "auto_passed",
+   "group": "poetry",
+   "title": "Trackbed, Kell Valley Branch",
+   "items": 10,
+   "in_lt1_lt2": true,
+   "origin": "ALTON-authored (fictional writer/title/setting)",
+   "representative_of_real_exam": false,
+   "label": "ALTON original; not confirmed representative of the real exam"
+  },
+  {
+   "key": "englit-p1-a:ap_english_literature-p03-k0",
+   "kind": "mc",
+   "review_state": "auto_passed",
+   "group": "poetry",
+   "title": "The Bench in Vrana Square",
+   "items": 8,
+   "in_lt1_lt2": true,
+   "origin": "ALTON-authored (fictional writer/title/setting)",
+   "representative_of_real_exam": false,
+   "label": "ALTON original; not confirmed representative of the real exam"
+  },
+  {
+   "key": "englit-p1-a:ap_english_literature-p04-k0",
+   "kind": "mc",
+   "review_state": "rejected",
+   "group": null,
+   "title": null,
+   "items": null,
+   "in_lt1_lt2": false,
+   "origin": "ALTON-authored (fictional writer/title/setting)",
+   "representative_of_real_exam": false,
+   "label": "ALTON original; not confirmed representative of the real exam"
+  },
+  {
+   "key": "englit-p1-a:ap_english_literature-p05-k0",
+   "kind": "mc",
+   "review_state": "auto_passed",
+   "group": "poetry",
+   "title": "Accession 4471-B",
+   "items": 13,
+   "in_lt1_lt2": true,
+   "origin": "ALTON-authored (fictional writer/title/setting)",
+   "representative_of_real_exam": false,
+   "label": "ALTON original; not confirmed representative of the real exam"
+  },
+  {
+   "key": "englit-p1-a:ap_english_literature-p06-k0",
+   "kind": "mc",
+   "review_state": "auto_passed",
+   "group": "poetry",
+   "title": "Room Above the Coal Merchant's",
+   "items": 13,
+   "in_lt1_lt2": false,
+   "origin": "ALTON-authored (fictional writer/title/setting)",
+   "representative_of_real_exam": false,
+   "label": "ALTON original; not confirmed representative of the real exam"
+  },
+  {
+   "key": "englit-p1-a:ap_english_literature-s01-k0",
+   "kind": "mc",
+   "review_state": "auto_passed",
+   "group": "short",
+   "title": "The Harlan Narrows Crossing",
+   "items": 11,
+   "in_lt1_lt2": true,
+   "origin": "ALTON-authored (fictional writer/title/setting)",
+   "representative_of_real_exam": false,
+   "label": "ALTON original; not confirmed representative of the real exam"
+  },
+  {
+   "key": "englit-p1-a:ap_english_literature-s02-k0",
+   "kind": "mc",
+   "review_state": "auto_passed",
+   "group": "short",
+   "title": "The Patience",
+   "items": 12,
+   "in_lt1_lt2": true,
+   "origin": "ALTON-authored (fictional writer/title/setting)",
+   "representative_of_real_exam": false,
+   "label": "ALTON original; not confirmed representative of the real exam"
+  },
+  {
+   "key": "englit-p1-a:ap_english_literature-s03-k0",
+   "kind": "mc",
+   "review_state": "auto_passed",
+   "group": "short",
+   "title": "Canon One",
+   "items": 12,
+   "in_lt1_lt2": true,
+   "origin": "ALTON-authored (fictional writer/title/setting)",
+   "representative_of_real_exam": false,
+   "label": "ALTON original; not confirmed representative of the real exam"
+  },
+  {
+   "key": "englit-p1-a:ap_english_literature-s04-k0",
+   "kind": "mc",
+   "review_state": "auto_passed",
+   "group": "short",
+   "title": "The Hours in Coldharbour Lane",
+   "items": 8,
+   "in_lt1_lt2": false,
+   "origin": "ALTON-authored (fictional writer/title/setting)",
+   "representative_of_real_exam": false,
+   "label": "ALTON original; not confirmed representative of the real exam"
+  },
+  {
+   "key": "englit-p1-a:ap_english_literature-s05-k0",
+   "kind": "mc",
+   "review_state": "auto_passed",
+   "group": "short",
+   "title": "The Danner Account",
+   "items": 13,
+   "in_lt1_lt2": true,
+   "origin": "ALTON-authored (fictional writer/title/setting)",
+   "representative_of_real_exam": false,
+   "label": "ALTON original; not confirmed representative of the real exam"
+  },
+  {
+   "key": "englit-p1-a:ap_english_literature-l01-k0",
+   "kind": "mc",
+   "review_state": "auto_passed",
+   "group": "longer",
+   "title": "The Kitchen Room",
+   "items": 8,
+   "in_lt1_lt2": true,
+   "origin": "ALTON-authored (fictional writer/title/setting)",
+   "representative_of_real_exam": false,
+   "label": "ALTON original; not confirmed representative of the real exam"
+  },
+  {
+   "key": "englit-p1-a:ap_english_literature-l02-k0",
+   "kind": "mc",
+   "review_state": "auto_passed",
+   "group": "longer",
+   "title": "from The Fen Parish",
+   "items": 9,
+   "in_lt1_lt2": false,
+   "origin": "ALTON-authored (fictional writer/title/setting)",
+   "representative_of_real_exam": false,
+   "label": "ALTON original; not confirmed representative of the real exam"
+  },
+  {
+   "key": "englit-p1-a:ap_english_literature-l03-k0",
+   "kind": "mc",
+   "review_state": "rejected",
+   "group": null,
+   "title": null,
+   "items": null,
+   "in_lt1_lt2": false,
+   "origin": "ALTON-authored (fictional writer/title/setting)",
+   "representative_of_real_exam": false,
+   "label": "ALTON original; not confirmed representative of the real exam"
+  },
+  {
+   "key": "englit-p1-b:ap_english_literature-fa1-k0",
+   "kind": "frq_bundle",
+   "review_state": "auto_passed",
+   "group": "poetry_analysis",
+   "title": "Spin Cycle, Ellery Street",
+   "items": null,
+   "in_lt1_lt2": true,
+   "origin": "ALTON-authored (fictional writer/title/setting)",
+   "representative_of_real_exam": false,
+   "label": "ALTON original; not confirmed representative of the real exam"
+  },
+  {
+   "key": "englit-p1-b:ap_english_literature-fa2-k0",
+   "kind": "frq_bundle",
+   "review_state": "auto_passed",
+   "group": "prose_analysis",
+   "title": "The Second Lesson",
+   "items": null,
+   "in_lt1_lt2": true,
+   "origin": "ALTON-authored (fictional writer/title/setting)",
+   "representative_of_real_exam": false,
+   "label": "ALTON original; not confirmed representative of the real exam"
+  },
+  {
+   "key": "englit-p1-b:ap_english_literature-fa3-k0",
+   "kind": "frq_bundle",
+   "review_state": "auto_passed",
+   "group": "literary_argument",
+   "title": "The House That Holds",
+   "items": null,
+   "in_lt1_lt2": true,
+   "origin": "ALTON-authored (fictional writer/title/setting)",
+   "representative_of_real_exam": false,
+   "label": "ALTON original; not confirmed representative of the real exam"
+  },
+  {
+   "key": "englit-p1-b:ap_english_literature-fb1-k0",
+   "kind": "frq_bundle",
+   "review_state": "auto_passed",
+   "group": "poetry_analysis",
+   "title": "To the Ellery Orchard, at Picking's End",
+   "items": null,
+   "in_lt1_lt2": true,
+   "origin": "ALTON-authored (fictional writer/title/setting)",
+   "representative_of_real_exam": false,
+   "label": "ALTON original; not confirmed representative of the real exam"
+  },
+  {
+   "key": "englit-p1-b:ap_english_literature-fb2-k0",
+   "kind": "frq_bundle",
+   "review_state": "auto_passed",
+   "group": "prose_analysis",
+   "title": "The Letter on the Net Box",
+   "items": null,
+   "in_lt1_lt2": true,
+   "origin": "ALTON-authored (fictional writer/title/setting)",
+   "representative_of_real_exam": false,
+   "label": "ALTON original; not confirmed representative of the real exam"
+  },
+  {
+   "key": "englit-p1-b:ap_english_literature-fb3-k0",
+   "kind": "frq_bundle",
+   "review_state": "auto_passed",
+   "group": "literary_argument",
+   "title": "The Shared Secret",
+   "items": null,
+   "in_lt1_lt2": true,
+   "origin": "ALTON-authored (fictional writer/title/setting)",
+   "representative_of_real_exam": false,
+   "label": "ALTON original; not confirmed representative of the real exam"
+  },
+  {
+   "key": "englit-p1-c:ap_english_literature-l04-k0",
+   "kind": "mc",
+   "review_state": "auto_passed",
+   "group": "longer",
+   "title": "Breakfast Is at Seven",
+   "items": 10,
+   "in_lt1_lt2": true,
+   "origin": "ALTON-authored (fictional writer/title/setting)",
+   "representative_of_real_exam": false,
+   "label": "ALTON original; not confirmed representative of the real exam"
+  }
+ ],
+ "totals": {
+  "alton_authored_passages_in_exams": 14,
+  "real_passages_in_exams": 0
+ }
+}

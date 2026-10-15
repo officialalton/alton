@@ -36,7 +36,7 @@ export type RenderCheck = {
 
 /** 지문이 그림을 요구하는가("as shown", "in the figure", "the graph", "in the diagram"). */
 export function passageRequiresFigure(passage: string): boolean {
-  if (passage.startsWith("ALTON original passage\n")) return false; // 영어 원본 지문(시·소설·희곡·논픽션): "the figure of the old man" 같은 문학적 표현은 그림 지시가 아니다(2026-10-14 AP English Literature)
+  if (passage.startsWith("ALTON original passage\n") || passage.startsWith("Public-domain source text\n")) return false; // 영어 원본 지문(시·소설·희곡·논픽션): "the figure of the old man" 같은 문학적 표현은 그림 지시가 아니다(2026-10-14 AP English Literature)
   return /\b(as shown|in the figure|the figure|the diagram|shown below|shown above|the graph (?:above|below|shown))\b/i.test(passage);
 }
 
