@@ -14,6 +14,8 @@ ALTON and its licensors own the platform, practice tests, questions, explanation
 
 ALTON does not guarantee any score, score improvement, admission or other outcome. Practice scores and estimates in ALTON are internal learning estimates. They are not official College Board scores and may differ from results on the actual SAT or AP exams. SAT and AP are trademarks of their respective owners, and ALTON is not affiliated with or endorsed by them unless we say so.
 
+AP® and SAT® are registered trademarks of the College Board, which is not affiliated with and does not endorse Alton Education LLC or this website. Practice questions are written by ALTON; where a question uses a public-domain historical or literary source, the source is credited with the question.
+
 Premium tutoring and educational consulting are separate services governed by their own written agreement, signed electronically through DocuSign. If that agreement conflicts with these terms for those services, the agreement controls. Lessons and consultations may be held using Google Workspace and Google Meet.
 
 Lesson credits are purchased through Stripe. Prices, payment terms, cancellation, rescheduling, expiry and refunds are set out in your tutoring agreement and at checkout. We do not store your card details; Stripe handles them under its own terms.

@@ -9,6 +9,7 @@ import Pager from "@/app/components/Pager";
 import { trackEvent } from "@/lib/analytics/track";
 import { startMockExamAction, loadFrqHandwritingAction } from "@/lib/mock-exam/attempt-actions";
 import { apFrqIsPaper } from "@/lib/ap-exam/frq-delivery";
+import { TRADEMARK_NOTICE } from "@/lib/legal";
 import { AP_SUBJECT_NAME } from "@/lib/ap-exam/layouts";
 import type { FrqInkRow } from "@/lib/ap-exam/frq-ink";
 import MockExamOpenList from "@/app/components/MockExamOpenList";
@@ -181,6 +182,7 @@ export default function StudentMockExamTab({ initialOverview }: { initialOvervie
         }
       />
       <Pager page={pageSafe} pageCount={pageCount} onPage={setPage} />
+      {program === "ap" || program === "sat" ? <p className="mt-6 text-[11px] leading-relaxed text-grey-500" data-testid="trademark-notice">{TRADEMARK_NOTICE}</p> : null}
     </div>
   );
 }

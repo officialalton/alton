@@ -1,3 +1,4 @@
+import { TRADEMARK_NOTICE } from "@/lib/legal";
 import Link from "next/link";
 import LandingCtaLink from "@/app/LandingCtaLink";
 import { FOOTER_LINKS, NAV_ITEMS } from "@/lib/landing/copy";
@@ -92,7 +93,10 @@ export function PublicFooter() {
             )}
           </nav>
         </div>
-        <div className="p-mono pt-6 border-t border-[var(--p-line)] text-[12px] text-[var(--p-mute)]">© 2026 Alton Education LLC</div>
+        <div className="p-mono pt-6 border-t border-[var(--p-line)] text-[12px] text-[var(--p-mute)]">
+          <p>© 2026 Alton Education LLC</p>
+          <p className="mt-2 max-w-3xl leading-relaxed" data-testid="trademark-notice">{TRADEMARK_NOTICE}</p>
+        </div>
       </div>
     </footer>
   );
