@@ -24,7 +24,8 @@ export const isEnglishPassage = (p: string): boolean => [EN_PASSAGE_MARKER, US_S
 /** 화면에 그릴 자료 텍스트(없으면 null). */
 export function apPassageForDisplay(passage: string | null | undefined, stem: string | null | undefined): string | null {
   const p = (passage ?? "").trim(); if (!p) return null;
-  if (isEnglishPassage(p)) return p; // 영어: 본문 인용 때문에 숨기지 않고, 산문을 수식으로 바꾸지 않는다
+  // 영어/자료 지문: 본문 인용 때문에 숨기지 않고, 산문을 수식으로 바꾸지 않는다. 자료 종류를 나타내는 내부 표기 줄('(table)' 등)은 학생에게 보이지 않게 뺀다.
+  if (isEnglishPassage(p)) return p.replace(/^\((?:table|chart|map|image|graph)\)[ \t]*\n/gim, "");
   if (!p.includes("```") && passageDuplicatesStem(p, stem ?? "")) return null; // 코드 자료는 본문과 단어가 겹쳐도 숨기지 않는다(코드가 곧 문제)
   return autoMathExplanation(p);
 }
