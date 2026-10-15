@@ -157,6 +157,7 @@ export function renderTypeOf(stimKind: string, specIn: ApSpec | FigureChoiceSpec
   if (!specIn) return stimKind === "diagram" ? "none(diagram_text_only)" : stimKind;
   if (specIn.type === "figure_choice") return `figure_choice:${(specIn.choices[0] as { type?: string; variant?: string }).type}:${(specIn.choices[0] as { variant?: string }).variant ?? "graph"}`;
   const spec = specIn;
+  if ((spec as { type: string }).type === "image") return "image:static"; // 실제 자료 이미지(사진·만평·지도)
   if (spec.type === "ap_table_set") return "ap_table:multi_panel";
   if (spec.type === "ap_table") return stimKind === "payoff_matrix" ? "ap_table:payoff_matrix" : stimKind === "text" ? "ap_table:given_info" : spec.columns.length === 2 && spec.columns[0] === "Item" ? "ap_table:given_info" : "ap_table";
   if (spec.type === "ap_diagram") return `ap_diagram:${spec.variant}`;

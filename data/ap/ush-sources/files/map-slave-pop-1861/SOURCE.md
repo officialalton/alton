@@ -1,0 +1,25 @@
+# Map showing the distribution of the slave population of the southern states of the United States. Compiled from the census of 1860
+
+- **id**: map-slave-pop-1861
+- **type**: map
+- **title**: Map showing the distribution of the slave population of the southern states of the United States. Compiled from the census of 1860
+- **author**: E. Hergesheimer (drawn); Henry S. Graham (publisher, Washington); certified by Census Office, Dept. of the Interior
+- **year**: 1861 (Washington, September 1861)
+- **repository**: Library of Congress, Geography and Map Division
+- **url**: https://www.loc.gov/item/99447026/
+- **call_number**: G3861.E9 1860 .H4
+- **rights_statement**: LoC GMD statement on the item record: The content of the Library of Congress Geography and Map Division digitized collections is free to use and reuse unless a Rights Advisory statement is present that indicates otherwise. (No Rights Advisory is present on the item record.)
+- **reuse_basis**: public domain (published 1861, before 1929; LoC GMD free to use and reuse)
+- **modified**: unmodified except LoC's IIIF 12.5% rendering (1313x1048 px)
+- **retrieved**: 2026-10-15
+- **origin**: real_historical_source
+- **file**: files/map-slave-pop-1861/image.jpg
+- **public_path**: ap-sources/map-slave-pop-1861/image.jpg
+- **sha256**: 88b7658726f7e4eee2192a2156270da58b805837f994ca671a3e9d125cacfa36
+- **bytes**: 221052
+- **width**: 1313
+- **height**: 1048
+- **alt**: A county-level shaded map of the Southern states from the 1860 census: darker shading shows a higher share of the population enslaved, with the darkest counties along the lower Mississippi River and in coastal South Carolina; a legend gives shading steps and a table of 1860 totals appears below.
+- **credit**: Distribution of the slave population of the southern states, from the census of 1860 (Hergesheimer, 1861). Library of Congress, Geography and Map Division (G3861.E9 1860 .H4). Public domain.
+- **notes**: Printed county percentages and the state table are small; items use only the shading pattern and the legend.
+- **file**: files/map-slave-pop-1861/image.jpg (sha256 88b7658726f7e4eee2192a2156270da58b805837f994ca671a3e9d125cacfa36, 221052 bytes)

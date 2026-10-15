@@ -1,0 +1,25 @@
+# The Bosses of the Senate
+
+- **id**: img-bosses-senate-1889
+- **type**: political_cartoon
+- **title**: The Bosses of the Senate
+- **author**: Joseph Keppler (drawing); lithograph by J. Ottmann Lith. Co.
+- **year**: 1889 (Puck, January 23, 1889)
+- **repository**: Library of Congress, Prints and Photographs Division
+- **url**: https://www.loc.gov/item/2002718861/
+- **call_number**: Illus. in AP101.P7 1889 (Case X) [P&P]; reproduction no. LC-USZ62-9678
+- **rights_statement**: LoC item record rights information: "No known restrictions on publication."
+- **reuse_basis**: public domain (U.S. publication before 1929; LoC reports no known restrictions)
+- **modified**: unmodified except LoC's own 1024px reference JPEG; color-bar/film border of the LoC transparency scan is visible
+- **retrieved**: 2026-10-15
+- **origin**: real_historical_source
+- **file**: files/img-bosses-senate-1889/image.jpg
+- **public_path**: ap-sources/img-bosses-senate-1889/image.jpg
+- **sha256**: d86f6a437285177613d56f8ec9466df5c2fd52b33d5bbc47a166adba7eecabfa
+- **bytes**: 649633
+- **width**: 1024
+- **height**: 808
+- **alt**: A political cartoon in Puck magazine: giant money-bag figures labeled with trusts (salt, paper bag, coal, sugar, tin, iron, Standard Oil, copper, steel beam, nail) loom over senators at their desks; a sign reads that this is a Senate of, by and for the monopolists; the entrance for monopolists is open while the people's entrance is closed.
+- **credit**: The Bosses of the Senate, Joseph Keppler, Puck, Jan. 23, 1889. Library of Congress, Prints and Photographs Division (LC-USZ62-9678). Public domain; no known restrictions.
+- **notes**: Labels transcribed from the image by ALTON (visible: SALT TRUST, PAPER BAG TRUST, COAL, TIN, SUGAR TRUST, IRON TRUST, STANDARD OIL TRUST, COPPER TRUST, STEEL BEAM TRUST, NAIL TRUST; signs: THIS IS A SENATE OF THE MONOPOLISTS BY THE MONOPOLISTS FOR THE MONOPOLISTS; ENTRANCE FOR MONOPOLISTS; PEOPLES' ENTRANCE - CLOSED). Item notes: Lithograph by J. Ottmann after drawing by J. Keppler.
+- **file**: files/img-bosses-senate-1889/image.jpg (sha256 d86f6a437285177613d56f8ec9466df5c2fd52b33d5bbc47a166adba7eecabfa, 649633 bytes)
