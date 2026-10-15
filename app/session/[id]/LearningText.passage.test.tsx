@@ -17,6 +17,11 @@ describe("LearningText passage fence", () => {
     expect(screen.queryByTestId("code-block")).toBeNull();
     expect(container.textContent).toContain("Salt");
   });
+  it("wraps long lines with a hanging indent so a wrapped row never reads as a new numbered line (2026-10-15)", () => {
+    render(<LearningText text={litPassageDisplay({ title: "T", stanzas: [["a very long original line that the narrow screen will wrap onto a second visual row", "short"]] })} />);
+    const t = screen.getAllByTestId("passage-line-text")[0];
+    expect(t.className).toContain("pl-6"); expect(t.className).toContain("-indent-6"); expect(t.className).toContain("whitespace-pre-wrap");
+  });
   it("still renders ordinary code fences as code blocks", () => {
     render(<LearningText text={"```java\nint x = 1;\n```"} />);
     expect(screen.getByTestId("code-block")).toBeTruthy();

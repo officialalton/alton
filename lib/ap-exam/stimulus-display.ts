@@ -18,7 +18,9 @@ export const EN_PASSAGE_MARKER = "ALTON original passage";
 export const US_STIMULUS_MARKER = "ALTON-composed stimulus";
 /** 실제 역사 자료(US History 실제 사료, 2026-10-15) 표지 — ALTON 작성 자료와 구분하며, 같은 산문 취급이다. */
 export const US_REAL_SOURCE_MARKER = "Historical source (real document)";
-export const isEnglishPassage = (p: string): boolean => p.startsWith(`${EN_PASSAGE_MARKER}\n`) || p.startsWith(`${US_STIMULUS_MARKER}\n`) || p.startsWith(`${US_REAL_SOURCE_MARKER}\n`);
+/** 실제 공개 저작물(공유 영역) 발췌 표지(AP English Literature 실제 작품 보강, 2026-10-15) — 산문·시이므로 영어 지문과 같이 취급한다. */
+export const REAL_TEXT_MARKER = "Public-domain source text";
+export const isEnglishPassage = (p: string): boolean => [EN_PASSAGE_MARKER, US_STIMULUS_MARKER, US_REAL_SOURCE_MARKER, REAL_TEXT_MARKER].some((m) => p.startsWith(`${m}\n`));
 /** 화면에 그릴 자료 텍스트(없으면 null). */
 export function apPassageForDisplay(passage: string | null | undefined, stem: string | null | undefined): string | null {
   const p = (passage ?? "").trim(); if (!p) return null;
