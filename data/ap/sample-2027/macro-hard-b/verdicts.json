@@ -1,0 +1,2474 @@
+[
+ {
+  "key": "ap_macroeconomics-m01-k0",
+  "cellId": "ap_macroeconomics-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "$5 billion",
+     "brief_reasoning": "E at Q=40, LRAS at 60, so the gap is 20. The tax multiplier is 0.8/0.2 = 4, so the tax cut is 20/4 = 5.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Fiscal policy with the tax multiplier, using a gap read from AD-AS; fits 3.8/3.C."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Gap 20, tax multiplier 4, cut 5. Unique answer; the fixed price level is stated."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Curves, axes, and the point E are fully specified and consistent (AD and SRAS intersect at (40,80); LRAS at Q=60)."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Four distinct misconceptions; each wrong option is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Typical AP load; simple arithmetic; five options."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound item. The key of $5 billion is unique and the graph data are consistent. The distractors are distinct and each is explained."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must read the graph to find the output gap (LRAS 60 minus equilibrium 40 = 20), recognize that a tax cut uses the tax multiplier -MPC/(1-MPC) = -4 rather than the spending multiplier, and divide to get $5 billion. Distractors reflect common multiplier mix-ups. Arithmetic is trivial, wording is clear, and the constant-price-level assumption is stated. This is a typical AP-level Unit 3 fiscal policy computation.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_macroeconomics-m01-k1",
+  "cellId": "ap_macroeconomics-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Point E checks out at (65, 70) on both AD and SRAS. The gap to LRAS is 85 − 65 = 20. The tax multiplier is 0.8/0.2 = 4, so the tax cut is 20/4 = $5 billion.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "$5 billion"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Fiscal policy gap closing with the tax multiplier, a quantitative manipulation (3.C). In scope."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Gap 20, tax multiplier 4, cut $5B. Unique answer; E is consistent with both AD and SRAS."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Axes, three curves and the labeled point E are fully specified. The stem states the price-level assumption and the MPC."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Four distinct, realistic errors, each explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Five options, simple numbers, reasonable load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. The graph is consistent, the key is unique, the distractors reflect distinct misconceptions, and the load is appropriate."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must read the graph to find the output gap (LRAS at 85 vs equilibrium at 65 = 20), choose the correct tax multiplier -MPC/(1-MPC) = -4 rather than the spending multiplier, and divide to get a $5 billion tax cut. It is a one-step comparative-statics question with a graph-to-calculation representation change and simple integer arithmetic. The stem states the fixed price level assumption, so there is no ambiguity. Distractors reflect common errors (using the spending multiplier, dividing by MPC, reporting the multiplier itself).",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_macroeconomics-m01-k2",
+  "cellId": "ap_macroeconomics-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "The gap is 20 (65−45). The tax multiplier is 0.8/0.2=4, so the tax cut is 20/4=$5 billion.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 4,
+     "final_answer": "$5 billion"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 3.8 fiscal policy with tax multiplier; skill 3.C quantitative effect. In scope."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Graph gives E=(45,120) and LRAS=65, so the gap is 20. The tax multiplier is 4, so the tax cut is 5. The key is unique and the price-level assumption is stated."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Axes, three curves and labeled point E are fully specified. AD and SRAS intersect exactly at E. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Four distinct misconceptions, each explained. The wording of the $100 billion explanation is slightly muddled but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Roughly 100-115 seconds, simple arithmetic, five options, standard AP style."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, complete and well-formed item. The graph is consistent, the key is unique, and the distractors are distinct and realistic."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must read the graph to find the recessionary gap (LRAS 65 minus equilibrium output 45 = 20), pick the tax multiplier (-MPC/(1-MPC) = -4) rather than the spending multiplier, and divide to get a $5 billion tax cut. This is one comparative-statics step with a single clean calculation. Distractors reflect common errors: using the spending multiplier, MPC alone, or multiplying instead of dividing. Reading and arithmetic are light, and the item stays within Unit 3 scope.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_macroeconomics-m02-k0",
+  "cellId": "ap_macroeconomics-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "Real GDP is the same, and the price level is higher.",
+     "brief_reasoning": "Both cases end at potential output. In Case 1, AD is restored, so the price level returns to its original level. In Case 2, SRAS shifts right, so the price level ends lower. Therefore Case 1 has a higher price level.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "Short reading load, five options of parallel form, and a typical AP time demand. The calculator is marked allowed but is not needed, which is a trivial point.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a sound, standard comparison of fiscal stabilization with self-adjustment, with a unique key and distinct distractors."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP-style comparison of two long-run adjustment paths in the AD-AS model. The student must see that fiscal stimulus restores the original AD and price level, while self-adjustment via falling nominal wages shifts SRAS right and ends at potential output with a lower price level. This needs a mental graph and combines a demand shift with a supply adjustment, but involves no calculation, has short and unambiguous wording, and stays within Unit 3 scope.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_macroeconomics-m02-k1",
+  "cellId": "ap_macroeconomics-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "Real GDP is the same, and the price level is higher.",
+     "brief_reasoning": "Both cases end at potential output. In Case 1, AD is restored, so the original price level holds. In Case 2, SRAS shifts right at the lower AD, giving a lower price level. So Case 1 has a higher price level than Case 2.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "Typical AP conceptual item with no calculation and a reasonable reading load.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and well formed, and it passes all five criteria with no instant-reject conditions."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must mentally model two AD-AS scenarios: Case 1 (fiscal policy restores AD to the original equilibrium, so the original price level and potential output) and Case 2 (wages and prices fall, SRAS shifts right, and the economy returns to potential output at a lower price level). The comparison gives the same real GDP and a higher price level in Case 1. This requires combining the self-adjustment mechanism with a policy response and comparing the two long-run outcomes. It is a standard Unit 3 multiple-choice item with no computation, unambiguous wording, and in-scope content.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_macroeconomics-m02-k2",
+  "cellId": "ap_macroeconomics-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "Real GDP is the same, and the price level is lower.",
+     "brief_reasoning": "In Case 1, policy returns AD to its original position, so output is at potential at the original price level. In Case 2, SRAS shifts left, so output is back at potential but at a higher price level. Compared with Case 2, Case 1 has the same real GDP and a lower price level.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Long-run self-adjustment vs policy comparison; fits 3.7/2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Key D unique: same real GDP, Case 1 price level lower than Case 2."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; stem complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distinct combinations; each wrong option explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Typical AP MC load, five options."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, well-formed item on long-run self-adjustment versus fiscal stabilization; passes all criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The item requires tracing two policy paths in the AD-AS model: contractionary fiscal policy shifting AD back, versus self-adjustment through a leftward SRAS shift as wages and prices rise. The student then compares the long-run price level and output across the two cases. It has several reasoning steps and a comparison across scenarios, with no calculation and a clear, unambiguous stem. This is typical of an AP multiple-choice item and suits a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_macroeconomics-m03-k0",
+  "cellId": "ap_macroeconomics-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "MPC=160/200=0.8, multiplier=1/(1-0.8)=5. Recessionary gap=3000-2850=150. Required increase in G=150/5=$30 billion.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "$30 billion"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 3.2, skill 3.C: MPC from table, multiplier, close gap. In Unit 3 scope."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "MPC=0.8, multiplier 5, gap 150, answer 30. Unique; taxes and price level held constant."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table complete with labeled columns and units; stem gives all needed values."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Four distinct misconceptions; each wrong option explained. The 'why' for $120 billion is slightly loose but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Typical load (~110s), five options, simple arithmetic, calculator designation consistent."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound item with a unique key of $30 billion and distinct misconception-based distractors. All five criteria pass and there are no instant-reject conditions."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must derive MPC from table data (change in C / change in DI = 0.8), compute the spending multiplier (5), find the recessionary gap (150), and divide gap by the multiplier to get the required government purchases change ($30B). Standard AP multiplier/fiscal policy item with clean numbers and plausible distractors (gap itself, gap x multiplier, gap/MPC, gap x MPC). Difficulty is conceptual, not arithmetic or reading-based.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_macroeconomics-m03-k1",
+  "cellId": "ap_macroeconomics-m03",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "MPC=0.6, multiplier 2.5, gap 250, so G rises by 250/2.5=100",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "$100 billion"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "MPC from data, multiplier, gap closing; fits 3.2/3.C."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Key $100B unique under stated assumptions (constant price level, no tax change)."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The $58B option's rationale (APC at middle income) does not generate 58.33 under any reasonable computation (APC 0.767 gives 192 or 326). The explanation for this wrong option is inaccurate, so the distractor is not tied to a real misconception."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Reasonable load; options not ordered, minor."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound in scope, key, and stimulus, but it fails on distractors. The $58B option claims to use the APC at the middle income level, which does not produce that value, so the explanation for that wrong option is incorrect. Fix this distractor before use."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must derive the MPC from a table (0.6), compute the spending multiplier (2.5), find the output gap (250), and divide gap by multiplier to get the required government purchases change (100). Concept depth is standard for topic 3.2/3.8, with clean arithmetic, a short stem, and unambiguous assumptions. Distractors reflect common errors (tax multiplier, multiplying instead of dividing, using 1/MPC). Appropriate for full mock exams.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_macroeconomics-m03-k2",
+  "cellId": "ap_macroeconomics-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "MPC=150/200=0.75, multiplier=4, recessionary gap 300; 300/4=75.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "$75 billion"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Derive MPC, then multiplier, then close the gap. Fits topic 3.2 and skill 3.C."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "MPC 0.75, multiplier 4, gap 300, answer 75. The key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete, and the stem states the constant price level and unchanged taxes. The explanation's 300/400 uses the first and third rows, which is valid but not the adjacent rows."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor maps to a distinct misconception, and each wrong option is explained. The APC option (11/12 used as the MPC, giving a multiplier of 12) is consistent."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Typical load of about 110 seconds, with five options and a calculator allowed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound item. The key is correct and unique, the stimulus is complete, and the distractors are distinct and explained. The only flaw is the minor 300/400 wording in the explanation."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must derive MPC from a consumption table, compute the spending multiplier (4), then divide the $300B output gap by it to get $75B. Clean numbers, short stem, a single model (simple spending multiplier), and plausible distractors (forgetting the multiplier, multiplying instead of dividing). It is typical of an AP mock item on topics 3.2/3.8 and is not hard for unfair reasons.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_macroeconomics-m04-k0",
+  "cellId": "ap_macroeconomics-m04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "The spending multiplier is 4, so the $100B purchase raises GDP by $400B. The tax multiplier is -3, so the $80B tax increase lowers GDP by $240B. The net change is +$160B.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "+$160 billion"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 3.2 multipliers, skill 3.C calculation combining spending and tax multipliers; in scope."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Key 160 is unique: 100x4 - 80x3 = 160. Distractors are distinct values."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed. Stem states MPC, lump-sum taxes, constant price level; unambiguous."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor maps to a distinct realistic error (ignore tax, wrong multiplier on net, add instead of subtract); explanation covers all."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Five options, about 110 seconds, simple arithmetic, typical AP load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Clean, correct multiplier item with a unique key and well-motivated distractors. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires computing both the spending multiplier (4) and the tax multiplier (-3) from MPC and combining the two effects: 400 - 240 = +160. The arithmetic is simple, the wording is clear, and the stem is short. Distractors reflect typical errors (ignoring taxes, using the wrong multiplier). This is a typical multi-step mock-exam item and not overly hard.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_macroeconomics-m04-k1",
+  "cellId": "ap_macroeconomics-m04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Spending multiplier 2: 80×2=160. Tax multiplier -1: -40. Net +120 billion.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "+$120 billion"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "Time load is about 110 seconds, arithmetic is simple, and there are five options.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, in scope, and has well-built distractors, so it passes all five criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must recall both the spending multiplier (1/(1-MPC)=2) and the lump-sum tax multiplier (-MPC/(1-MPC)=-1), apply each to its change, and sum: 160 - 40 = +120. This combines two fiscal effects with simple arithmetic; distractors capture common errors (ignoring taxes, wrong sign, balanced budget confusion). Within Unit 3.2 scope, with clear wording and no heavy reading.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_macroeconomics-m04-k2",
+  "cellId": "ap_macroeconomics-m04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Spending multiplier 4 x 100 = 400; tax multiplier -3 x 40 = -120; net +280B",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "+$280 billion"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Simple spending and tax multipliers, topic 3.2, skill 3.C. In scope."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key of +$280B is unique and correct. It is 4x100 minus 3x40."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. All conditions are stated: MPC, lump-sum taxes, constant price level, maximum change."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor maps to a distinct, realistic misconception, and the explanation covers every wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Five options, parallel values, and a typical load for one multi-step calculation."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, clear, and in scope. The key is unique and the distractors reflect distinct misconceptions. No issues found."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires knowing both the spending multiplier (4) and the tax multiplier (-3), applying each to its change, and combining the two effects (400 - 120 = 280). Arithmetic is small and clean, wording is unambiguous, and the model assumption (constant price level, lump-sum taxes) is stated. This is a standard AP-level two-effect multiplier item, a bit above a single-multiplier basic item but not advanced. Distractors reflect common errors (ignoring taxes, adding instead of subtracting, wrong multiplier).",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_macroeconomics-m05-k0",
+  "cellId": "ap_macroeconomics-m05",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "New AD: 640,620,600,580,560. It equals SRAS at price level 130, where real GDP is 580. Since 580 > potential 570, there is an inflationary gap of 10.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "An inflationary gap of $10 billion"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item has five options, a small table, and one dominant task. It should take roughly 90 to 115 seconds, and no calculator is needed, though one is allowed.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound in scope, key, stimulus, and suitability. It fails only on the distractor criterion: the explanation for the +30 option (and loosely the -30 option) does not match the numerical path that would produce those values. The \"why\" texts should be rewritten to describe the actual error behind each value."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must read the table, shift AD by 40 at each price level, locate the new short-run equilibrium (P=130, Y=580), and compare it with potential GDP of 570 to identify a $10B inflationary gap. This combines a table-to-equilibrium reading, one comparative-statics step, and a gap interpretation, using small whole-number arithmetic and clear wording. Distractors reflect plausible errors such as the $30B gap, wrong gap type, or the full $40B shift. This is typical full-mock difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_macroeconomics-m05-k1",
+  "cellId": "ap_macroeconomics-m05",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "After the shift, AD at each price level is 540, 510, 480, 450, 420. It meets SRAS at price level 130, where real GDP is 450. That is $10 billion above potential GDP of 440, so there is an inflationary gap of $10 billion.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "An inflationary gap of $10 billion"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 3.6 AD shift with schedules, then compare to potential output; quantitative determination fits 3.C."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "New equilibrium at price level 130, output 450, gap +10; unique answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table fully specified with columns and rows; stem clear, shift stated at every price level."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Four distinct misconceptions, each matches its numeric option and is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 2 minutes, five options, minimal arithmetic, typical AP load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Clean, correct table-based AD shift item with a unique key and well-motivated distractors; passes all criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must read the table to confirm initial equilibrium at potential GDP, shift AD by +40 at each price level, find the new intersection (P=130, Y=450), and compare with potential output (440) to identify a $10B inflationary gap. It requires one comparative-statics step plus a gap interpretation, with simple arithmetic and clear wording. This is typical of AP mock exam items.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_macroeconomics-m05-k2",
+  "cellId": "ap_macroeconomics-m05",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "An inflationary gap of $15 billion",
+     "brief_reasoning": "New AD is 650/630/610/590/570. It equals SRAS at a price level of 120 with real GDP of 610. 610 − 595 = 15, an inflationary gap.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 3.6 AD shift with table, quantitative effect; fits 3.C."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "New equilibrium 610 at price level 120, potential 595, inflationary gap 15; unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Option A's explanation (old-price-level supply vs potential) gives 15, not 35; the 35 actually arises from new demand at the old price level (630) minus 595. The stated misconception does not match the value."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 100 seconds, five options, no needless arithmetic."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and the item is well suited to the exam. The explanation for distractor A is inaccurate: the described error yields 15, not 35. Fix the rationale (new AD at the old price level, 630, minus potential output) before use."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must read the table, shift AD by +50 at each price level, find the new intersection with SRAS (P=120, Y=610), and compare to potential GDP of 595 to get an inflationary gap of 15. This combines a comparative-statics step with a table read and a gap calculation. Arithmetic is small and the wording is clear; the distractors reflect plausible errors such as using the old equilibrium or the size of the shift.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_macroeconomics-m06-k0",
+  "cellId": "ap_macroeconomics-m06",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "Price level increases; real GDP indeterminate",
+     "brief_reasoning": "Wages rise faster than productivity, so unit labor costs rise and SRAS shifts left. AD shifts right. Both shifts raise the price level, but they push real GDP in opposite directions, so its change is indeterminate.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Unit labor cost shifting SRAS combined with an AD shift; fits topic 3.3 and skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Price level up, real GDP indeterminate; unique correct answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Five options with distinct misconceptions; each wrong option is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Typical AP MC load, about 100 seconds."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound item. SRAS shifts left because wages outpace productivity and AD shifts right, so the price level rises and the real GDP change is indeterminate. Passes all criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must combine wage and productivity changes to see that unit labor costs rise and SRAS shifts left, then pair that with a rightward AD shift and recognize that price level rises while the change in real GDP is indeterminate. This is a standard double-shift AD-AS reasoning item at AP exam level. Arithmetic is trivial (6% vs 3%), reading is short, and the model is unambiguous.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_macroeconomics-m06-k1",
+  "cellId": "ap_macroeconomics-m06",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "Price level indeterminate, real GDP increases",
+     "brief_reasoning": "Productivity is rising faster than wages, so the labor cost per unit of output falls and SRAS shifts right. AD also shifts right. Real GDP rises, but the price-level change is ambiguous.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Unit labor cost shifting SRAS plus an AD shift; in Unit 3 scope; fits 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Productivity growth (5%) exceeds wage growth (3%), so SRAS shifts right. With AD also shifting right, real GDP rises and the price level change is indeterminate. Key B is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is complete and unambiguous."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Four distinct misconceptions; every wrong option is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Light reading load, about 100 seconds, five options, no needless arithmetic."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound and passes all five criteria. The key is unique, the distractors are distinct, and the scope fits topic 3.3 with a combined AD shift."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must compare wage and productivity changes to infer a fall in unit labor costs and hence a rightward SRAS shift, then combine it with a rightward AD shift to conclude real GDP rises while the price level change is indeterminate. This is a two-effect comparative-statics item with minimal arithmetic and clear wording, typical of a full AP mock multiple-choice question.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_macroeconomics-m06-k2",
+  "cellId": "ap_macroeconomics-m06",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "Price level indeterminate, real GDP increases",
+     "brief_reasoning": "Productivity grows faster than wages, so unit labor costs fall and SRAS shifts right. AD also shifts right. Real GDP rises, but the price level change depends on which shift is larger, so it is indeterminate.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 3.3 determinants of SRAS (unit labor cost) combined with an AD shift. Skill 2.B (multiple contributing variables) fits. Stays within Unit 3."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Unit labor costs fall (4% < 6%), so SRAS shifts right. AD also shifts right. Real GDP rises and the price level change is indeterminate. The key is unique, and the other four options each contradict this result."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is complete and clear, and states ceteris paribus."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Five options cover the combinations of price level and real GDP outcomes. Each wrong option has an explanation tied to a distinct error. Two distractors share the same price-level rationale but differ in direction (decrease vs increase). The options are parallel in length and format."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 90-110 seconds with no real calculation, is typical of AP Macroeconomics, and has five options. The calculator designation is harmless."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. It has a single correct answer, a clear stem, and parallel options with distinct misconceptions, and it fits topic 3.3 and skill 2.B."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must infer that wages rising less than productivity lowers unit labor costs and shifts SRAS right, then combine this with an AD rightward shift. Real GDP rises for sure, while the price level change is indeterminate. This is a standard combine-two-shifts item with a light comparison step. It is clear, in scope, and has no unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_macroeconomics-m07-k0",
+  "cellId": "ap_macroeconomics-m07",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Expansionary policy moves the economy to 3% unemployment with 5% inflation. Expectations then adjust to 5%, so the SRPC shifts up. At the natural rate (5% unemployment), inflation equals expected inflation, which is 5%.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "5%"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 5.2: movement along the SRPC, expectations adjustment, return to the natural rate. Skill 2.C fits, since the student reads the table and carries the result through the expectations step."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key of 5% is unique and defensible. At the natural rate with fully adjusted expectations, inflation equals expected inflation of 5%. The stem states all conditions, including full adjustment and the natural rate."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete, with columns and rows labeled. The wording is clear. Only four options are written as percent values, but the item has five options (A-E)."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The explanation for 7% is muddled: it says 'reports the inflation rate on the original curve at 3 percent unemployment only after expectations adjusted further', but the original curve gives 5% there, not 7%. The 1% explanation is also confusing. The options are a mix of table values (4%, 1%, 3%) and a double-counting 7% figure. The explanations are weak, but each wrong option does map to a plausible error."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 115 seconds, with low reading load. The calculator is allowed but not needed. This is typical of AP macroeconomics."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound in scope, key and stimulus. The distractor rationales are inaccurate or muddled for 7% and 1%, so I fail the distractor criterion. This is a strict call, and the fix is a rewrite of those explanations."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must read the table (5% inflation at 3% unemployment), recognize that expectations adjust to 5% and shift the SRPC up, then apply the idea that at the natural rate actual inflation equals expected inflation. This is a conceptual comparative-statics step with a table read and a multi-stage scenario. Distractors (3%, 7%, 4%, 1%) are plausible misconceptions. There is no heavy arithmetic or reading, and the content is in scope.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_macroeconomics-m07-k1",
+  "cellId": "ap_macroeconomics-m07",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "5%",
+     "brief_reasoning": "Expansionary policy moves unemployment to 3%, where inflation is 5%. Expected inflation then rises to 5%, which shifts the short-run Phillips curve up. Back at the natural rate (5% unemployment), inflation equals expected inflation, so it is 5%.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Squarely 5.2: SRPC movement, expectations adjustment, return to LRPC. Interpreting table values fits 2.C."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "5% is unique: inflation at 3% unemployment is 5%, expectations adjust to 5%, and at the natural rate actual equals expected inflation."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table fully specified with columns and rows; the stem gives expected inflation, the natural rate and the sequence of events clearly."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Four distinct wrong answers (wrong row, original inflation, high unemployment row, double-counting). The 1% and 7% rationales are a bit contrived but each is distinct and explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Five options, short numeric values, about two minutes, no arithmetic burden. Calculator designation is harmless."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean, unambiguous 5.2 item. The key of 5% is unique and the table is complete. The distractors are distinct and explained. Passes all criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must read the table to find inflation (5%) at 3% unemployment, recognize that expectations adjust fully so the SRPC shifts upward, and apply the idea that at the natural rate actual inflation equals expected inflation (5%). Requires a multi-step conceptual chain (movement along the curve, then a shift, then a return to the natural rate). The main distractor (3%) catches students who ignore the shift. Computation is trivial, reading is short, and the scope is within Unit 5.2.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_macroeconomics-m07-k2",
+  "cellId": "ap_macroeconomics-m07",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "5%",
+     "brief_reasoning": "Moving to 4% unemployment gives 5% inflation. Expectations then adjust to 5%, shifting the SRPC up 2 points. At the natural rate of 6%, inflation equals expected inflation, which is 5%.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 5.2 expectations adjustment on the Phillips curve; table reading plus one conceptual step fits skill 2.C."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "5% is unique and defensible: inflation at 4% unemployment is 5%, expectations adjust to 5%, and at the natural rate actual equals expected."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table is complete with columns and rows; the stem is clear and unambiguous."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Five options, each with an explanation. The rationale for 1% (described as inflation at 6% unemployment on the original curve) does not match its value, and the 4% rationale is vague. These are minor flaws and the distractors remain plausible and distinct."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short table read and one reasoning step, with no needless arithmetic; typical AP load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound, with a unique key of 5% and a complete table. Two distractor rationales (1% and 4%) are slightly mismatched or vague, but this is not enough to reject."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must read the table, identify the inflation rate at 4% unemployment (5%), recognize that expectations adjust to 5%, shift the SRPC up, and conclude that at the natural rate inflation equals expected inflation (5%). It requires one comparative-statics step and the SRPC/LRPC concept, with trivial arithmetic and short reading. The distractor 3% (the original expected inflation) targets a common misconception. This is typical of a full-mock item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_macroeconomics-m08-k0",
+  "cellId": "ap_macroeconomics-m08",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Debt: 400-30=370, +80=450, +30=480; 480/960=50%",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "50%"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Deficits/surpluses updating debt and debt-to-GDP; fits 5.4 and 3.C."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "50% is unique and correct; assumptions about borrowing and repayment stated."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The 8% option (80/960 = 8.33%) is described as leaving out initial debt but netting the surplus, which would give 50/960 = 5.2%. The stated misconception does not produce the value, so the explanation is wrong. Other distractors are consistent. Also only four options are given, not five as required."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Reasonable load; but only four options versus the five-option format."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key (50%) is correct, but the 8% distractor's rationale does not match its value, and the item has four options instead of the required five. Fail."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Tests the deficit vs. debt distinction in core topic 5.4. Students must read the table, compute each year's balance with correct signs (a surplus repays debt, a deficit adds to it), update the debt from the starting $400B, and compute debt/GDP. The numbers are clean and the model is unambiguous. Distractors reflect plausible errors: using only one year's deficit, ignoring the starting debt, or mishandling the surplus sign. This is a moderate multi-step item suited to a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_macroeconomics-m08-k1",
+  "cellId": "ap_macroeconomics-m08",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Debt=500-40+80+80=620; 620/2480=25%",
+     "ambiguous_or_flawed": false,
+     "choice_index": 4,
+     "final_answer": "25%"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The task needs three simple steps with round numbers, which fits about 2 minutes. There are five options and a calculator is allowed. The reading load is low.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is clean and in scope. It has a unique key, a complete table, distinct misconception-based distractors, five options and a reasonable load."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must read the table, compute the balance each year (surplus in Year 1, deficits in Years 2 and 3), accumulate the debt from $500B to $620B, and then compute debt as a percent of GDP (620/2480 = 25%). Distractors reflect plausible errors (ignoring the Year 1 surplus gives 28%, using the starting debt gives 20%). Numbers are clean, the wording is clear, and the content is in scope. Multi-step but not advanced.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_macroeconomics-m08-k2",
+  "cellId": "ap_macroeconomics-m08",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Debt=600+50-30+40=660; 660/1320=50%",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "50%"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Debt accumulation and debt-to-GDP calculation fit 5.4 and skill 3.C."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Debt = 600+50-30+40 = 660; 660/1320 = 50%. Unique answer; assumptions stated in the stem."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table is complete with columns and rows; the wording is clear. The caption says 'Federal' while the stem says 'a government', which is minor."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor maps to a distinct, realistic error and is explained; the computed values match the described errors."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short multi-step calculation, about 2 minutes, simple arithmetic, calculator allowed. Five options as required."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and in scope: 660/1320 = 50%. The distractors reflect distinct errors and are all explained. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must read the table, compute the deficit or surplus each year (50, -30, 40), accumulate the net change into the debt (600 to 660), then express debt as a percent of GDP. It tests the deficit vs. debt distinction with a surplus year as a mild trap. The arithmetic is simple and the wording is clear, so the difficulty comes from the concept and the number of steps, not from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_macroeconomics-m09-k0",
+  "cellId": "ap_macroeconomics-m09",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Before the change, the market clears at 7%, where 400 is supplied and 400 is demanded. Government borrowing adds 100 to demand at every rate. At 9%, total demand is 360 private + 100 government = 460, which equals the 460 supplied, so 9% is the new equilibrium. Private borrowing falls from 400 to 360, a drop of $40 billion.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "$40 billion"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about two minutes, involves a simple table scan, and needs little arithmetic.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound: the key is unique and correct, the table is complete, the distractors are plausible, and the task load is appropriate."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must read the table, add the $100B government demand to private demand at each rate, locate the new equilibrium (9%, 460), and compare private borrowing before (400) and after (360) to get the $40B crowding out. One comparative-statics step with simple arithmetic; the distractor of $100B tests the common misconception of full crowding out. Wording is unambiguous and the model is standard.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_macroeconomics-m09-k1",
+  "cellId": "ap_macroeconomics-m09",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "New equilibrium at 8%: supply 330 = 290 private + 40 government. Private borrowing falls from 300 to 290, a drop of 10.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "$10 billion"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Crowding out from loanable funds schedules; one comparative-statics step with a calculation, fits 5.5 / 3.C."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "New equilibrium at 8%; private borrowing falls 300 to 290, so $10 billion. Unique answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table is fully specified with labeled columns and all rows; the stem states the $40 billion shift at every rate."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors map to distinct misconceptions (one-for-one, change in total quantity, level instead of change, half). Each wrong option is explained. The $300 billion option is somewhat weak but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short table scan with simple arithmetic; about 90-125 seconds, no calculator needed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound crowding-out table item. The key of $10 billion is verified and unique, the stimulus is complete, distractors are distinct with explanations, and the load is appropriate."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must identify the loanable funds model, read the table, add $40B to demand at each rate, find the new equilibrium (8%, where supply 330 = 290 + 40), and compare private borrowing before (300) and after (290) to get a $10B fall. This involves one comparative-statics step and simple arithmetic with a table. Distractors reflect common misconceptions (full $40B means no interest rate effect). Scope is fine and the wording is unambiguous.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_macroeconomics-m09-k2",
+  "cellId": "ap_macroeconomics-m09",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Adding 50 to demand at every rate moves the equilibrium to 7%, where supply is 420 and total demand is 370+50=420. Private borrowing falls from 400 to 370, a drop of 30.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "$30 billion"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Crowding out from loanable funds schedules; one comparative-statics step matches topic 5.5 and skill 3.C."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "New equilibrium at 7% (supply 420, total demand 420); private borrowing falls from 400 to 370, a drop of 30. The key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete and clear, with labeled columns and units given in the description."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Five options with distinct misconceptions, and the explanation addresses each wrong option. The $25 billion rationale is a bit contrived."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Reasonable load of about 2 minutes, simple arithmetic, and the calculator designation is consistent."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound item: the key of $30 billion is verified and unique, the table is complete, and the distractors are distinct. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must identify the loanable funds model, add $50B government demand to each row, find the new equilibrium (7%, 420), then compare private borrowing (370 vs 400) to get a $30B crowding-out effect. This is one comparative-statics step plus a table read with a conceptual trap (50 as full crowding out, 20 as the change in total quantity). Arithmetic is minimal and the wording is unambiguous, so the difficulty is conceptual rather than from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_macroeconomics-m10-k0",
+  "cellId": "ap_macroeconomics-m10",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "From the quantity equation, inflation = 12% + 1% − 3% = 10%. The real interest rate is then about 12% − 10% = 2%.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "2%"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Quantity equation in growth form to get inflation, then the real rate. This fits topic 5.3 and an interpretation/calculation skill."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Inflation is about 10% and the real rate is about 2%. The key is unique, and the stem says approximate."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors map to distinct errors: inflation of 3% gives a 9% real rate, confusing inflation with the real rate gives 10%, subtracting money growth gives 0%, and ignoring velocity gives 9% inflation and a 3% real rate. The explanation covers each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Five options, about 105 seconds, and light arithmetic."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. The key is unique, the distractors reflect distinct misconceptions, and the load is appropriate."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Two-step chain: apply the growth form of the quantity equation (%ΔM + %ΔV - %ΔY = inflation = 10%), then subtract inflation from the nominal rate (Fisher) to get a real rate of 2%. Easy whole-number arithmetic, short stem, in scope for Unit 5.3. Distractors correspond to plausible errors (ignoring velocity gives 9%, using money growth as inflation gives 0%). Moderate difficulty from combining two concepts, appropriate for a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_macroeconomics-m10-k1",
+  "cellId": "ap_macroeconomics-m10",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Using %ΔM + %ΔV = %ΔP + %ΔY: inflation = 8+1-2 = 7%. Real rate = 9-7 = 2%.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "2%"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Quantity equation growth form plus the Fisher relation fits topic 5.3 and skill 2.C."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "2% is the unique correct answer: inflation = 8+1-2 = 7%, real rate = 9-7 = 2%."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed and the stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The rationale for the 7% option says it uses real GDP growth as the inflation rate, but real GDP growth is 2%, so the stated misconception does not produce 7%. 7% is just the inflation rate, with the subtraction from the nominal rate forgotten. The explanation for this wrong option is incorrect, and the matching misconception m1 is mislabeled."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Single-step item with light load. The options are not in numerical order, which is a minor point."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and the item is in scope. It fails on distractor explanation: the 7% option's rationale (real GDP growth used as inflation) is incoherent and does not match how a student would actually reach 7%. The rationale and misconception m1 need to be rewritten as \"reports the inflation rate instead of the real interest rate.\""
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Two linked steps: apply the growth-rate form of the quantity equation (%ΔM + %ΔV = %ΔP + %ΔY) to get inflation of 7%, then subtract from the nominal rate for a real rate of 2%. The arithmetic is trivial and the wording is clear and in scope. The velocity term and the combination of two relationships make it a typical exam-level item rather than pure recall. Distractors map to plausible errors (7% is inflation; 3% comes from ignoring velocity).",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_macroeconomics-m10-k2",
+  "cellId": "ap_macroeconomics-m10",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "%ΔM + %ΔV = %ΔP + %ΔY → 9 + (−1) = π + 3 → π = 5%. Real rate = 7 − 5 = 2%.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "2%"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Quantity equation in growth form, then real rate. Fits topic 5.3 and skill 2.C."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "9-1-3=5 percent inflation; 7-5=2 percent real rate. Unique answer. The stem says 'approximate', which is appropriate."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor maps to a distinct, realistic error. 4% uses output growth as inflation. 0% gets the sign of velocity wrong. 1% ignores velocity. -2% subtracts money growth from the nominal rate. The explanation covers each one."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 105 seconds, simple arithmetic, five options. Acceptable."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and unique, the distractors encode distinct misconceptions, and the scope and format fit. The item passes."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Two-step application: use the quantity equation in growth-rate form (%ΔM + %ΔV = %ΔP + %ΔY) to get inflation of 5%, then apply the Fisher relation to get a real rate of 2%. The arithmetic is trivial. The difficulty comes from handling the negative velocity change and chaining two concepts, and the distractors reflect sign errors. This is standard AP Unit 5 content with no unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_macroeconomics-m11-k0",
+  "cellId": "ap_macroeconomics-m11",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 4,
+     "final_answer": "The dollar will appreciate, and the change in the quantity of dollars traded is indeterminate.",
+     "brief_reasoning": "Demand for dollars rises and supply of dollars falls, so the dollar appreciates while the change in quantity is indeterminate.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Two simultaneous shifts in the FX market, squarely 6.4 and 3.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "D shifts right and S shifts left, so the dollar appreciates and the quantity change is indeterminate. The key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Axes, curves and point E are fully specified and consistent (both curves pass through (30,35)). Wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Four distinct misconceptions, all explained; no length giveaway."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Time and reading load are typical; no needless arithmetic. The graph is not strictly necessary but harmless."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. The key is correct and unique, the graph data is complete and consistent, the distractors are distinct, and the load is appropriate for the exam."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must identify the FX market model, determine that higher U.S. interest rates shift dollar demand right and reduced import demand shifts dollar supply left, then combine two opposing-direction shifts: price effect determinate (appreciation), quantity effect indeterminate. Standard AP combined-shifts reasoning with no calculation; the graph is largely decorative. Wording is clear and in scope.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_macroeconomics-m11-k1",
+  "cellId": "ap_macroeconomics-m11",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:The two events contradict each other. Event 1 says U.S. interest rates fall relative to rates abroad. Event 2 says rates abroad fall relative to U.S. rates. The gap between U.S. and foreign rates can't move both ways at once. If you take each stated investor response at face value, the answer is E (index 4), which is almost certainly the intended key.",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_exam_suitability",
+   "instant_reject_missing_condition",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 4,
+     "final_answer": "The change in the value of the dollar is indeterminate, and the quantity of dollars traded will decrease.",
+     "brief_reasoning": "I checked the graph first: the equilibrium is at Q=60, P=45, which matches point E. Event 1: foreign investors want fewer U.S. assets, so the demand for dollars shifts left. Event 2: U.S. investors buy fewer foreign assets, so the supply of dollars shifts left. When both curves shift left, the quantity traded falls, but the change in the exchange rate depends on which shift is bigger, so it's indeterminate.",
+     "ambiguous_or_flawed": true,
+     "flaw_note": "The two events contradict each other. Event 1 says U.S. interest rates fall relative to rates abroad. Event 2 says rates abroad fall relative to U.S. rates. The gap between U.S. and foreign rates can't move both ways at once. If you take each stated investor response at face value, the answer is E (index 4), which is almost certainly the intended key."
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "Contradictory event premises and an unnecessary graph make this unsuitable for an exam. Calculator is irrelevant here.",
+   "key_scoring": {
+    "pass": false,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": ""
+   },
+   "instant_reject": [
+    "missing_condition"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The two events as stated contradict each other (U.S. rates fall relative to abroad, and foreign rates fall relative to the U.S.). The key is reachable only by taking the investor responses at face value, and the independent solver flagged the same flaw. The graph is unneeded and has an inconsistent y-axis tick. Fail."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires combining two simultaneous shifts (demand for dollars decreases, supply of dollars decreases) and recognizing that the quantity effect is determinate (falls) while the exchange rate effect is indeterminate. This is a typical AP multiple-choice comparative-statics item with a common trap in the indeterminate-price option. No heavy computation, reading, or out-of-scope content.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_macroeconomics-m11-k2",
+  "cellId": "ap_macroeconomics-m11",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "A: The dollar appreciates, and the change in the quantity of dollars traded is indeterminate.",
+     "brief_reasoning": "Event 1: foreigners buy more U.S. exports, so they need more dollars and demand for dollars shifts right. Event 2: Americans buy fewer imports, so they sell fewer dollars for foreign currency and supply of dollars shifts left. Both shifts raise the exchange rate, so the dollar appreciates. The two shifts push quantity in opposite directions, so the change in quantity depends on the shift sizes, which aren't given. The graph's point E (40, 25) lies on both curves, so the stimulus is consistent.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Two simultaneous shifts in the FX market; fits 6.4 and skill 3.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Appreciation is determinate; the quantity change is indeterminate. The key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Axes, curves and point E are specified; E lies on both curves. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor targets a distinct error, and the explanation covers every wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Typical length and load; five options."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. The key is unique, the graph is consistent, and the distractors are distinct."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must identify the FX market model, shift D right (higher foreign demand for US exports) and S left (lower US demand for imports), then combine two effects: the price effect is determinate (appreciation) while the quantity effect is indeterminate. Standard AP multiple-choice combination-of-shifts reasoning; the graph numbers are consistent but not needed. No heavy reading, arithmetic, or out-of-scope content.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_macroeconomics-m12-k0",
+  "cellId": "ap_macroeconomics-m12",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "A's real rate rises from 2% to 5%, which is above B's 3%. Capital flows into A, A's currency appreciates, and A's net exports decrease.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "Inflows increase, currency appreciates, net exports decrease"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 6.6 with a chain through the FX market and net exports (skill 2.B). In scope."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Unique key: real rate 5% vs B's 3%, inflows up, appreciation, net exports down."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table is complete and assumptions are stated. The stem's 'rises to 7 percent' versus the table's 4 percent is clear enough."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Distractors are mostly internally inconsistent direction combinations (e.g. inflows decrease with appreciation) and are easy to eliminate without using the real-rate concept. Explanations only restate the key's reasoning rather than identifying distinct misconceptions."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "Weak option design: only 5 of 8 direction patterns are used, and the options are not equally plausible. Task load is otherwise typical, at about 125 seconds, five options and calculator allowed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and the item is in scope with a complete table. It fails on distractor quality and option design: several distractors are internally inconsistent and easily eliminated, and the explanations are mechanical rather than misconception-based."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must compute real rates from a table (simple subtraction), compare across countries, then chain capital inflow -> currency appreciation -> lower net exports under floating rates. Combines the real interest rate concept with the foreign exchange market and net exports. Moderate reasoning depth typical of AP multiple-choice. Arithmetic is trivial and wording is unambiguous, so the difficulty is conceptual rather than from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_macroeconomics-m12-k1",
+  "cellId": "ap_macroeconomics-m12",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "Inflows increase, currency appreciates, net exports decrease",
+     "brief_reasoning": "A's real rate rises from 1% to 4%, which is above B's 3%. Capital flows into A, demand for A's currency rises so it appreciates, and A's exports become more expensive, so net exports fall.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 6.6 with a multi-step chain (real rates, capital flows, exchange rate, net exports), which fits skill 2.B. No out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Real rate for A rises from 1% to 4%, above B's 3%. Inflows increase, the currency appreciates, net exports fall. Option C is the unique correct answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table gives nominal rates and expected inflation for both countries. The stem states that B is constant and that exchange rates float. Wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct direction error, and the explanation addresses every wrong option. No format giveaway."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Five options, a short stem and a small table, with one simple subtraction. Load is typical for AP. Calculator designation is consistent."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is clean: the key is unique and verified, the table is complete, the distractors are distinct and explained, and the load is appropriate. No instant-reject conditions apply."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must compute real interest rates from a table (two simple subtractions), compare before and after the event, then chain capital inflow to currency demand, appreciation, and lower net exports. This is a standard multi-step Unit 6.6 skill 2.B item with minimal reading and arithmetic, and no out-of-scope content or ambiguity.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_macroeconomics-m12-k2",
+  "cellId": "ap_macroeconomics-m12",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "D",
+     "brief_reasoning": "A's real rate falls from 6% to 2%, below B's 3%. Capital leaves A, so net inflows fall, A's currency depreciates and net exports rise.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 6.6 real rate comparison leading to capital flows, FX and net exports; multi-step chain fits skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Real A 6%->2% vs B 3%: inflows decrease, depreciation, net exports increase. Unique key D."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table fully specified; stem gives the new inflation and the assumption about investor behavior; floating rates stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor flips one or two components; explanations address each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Five parallel options, modest reading and arithmetic load, reasonable time."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound item: correct unique key, complete table, distinct distractors, in-scope for 6.6 and skill 2.B."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must compute real rates (Fisher approximation) for both countries, notice the ranking reverses, then chain capital flow change to currency depreciation to net exports increase. Concept depth and multi-step reasoning fit a typical AP multiple-choice exam item. Arithmetic is trivial and wording is clear. The five options span all direction combinations, so each effect must be reasoned correctly.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_macroeconomics-m13-k0",
+  "cellId": "ap_macroeconomics-m13",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "Interest rate up, investment down, net exports down",
+     "brief_reasoning": "Both the extra government borrowing and the contractionary open market sales push the real interest rate up. That crowds out private investment, and capital inflows make the currency appreciate, which lowers net exports.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 5.1 policy mix with loanable funds, crowding out, and open-economy effects on exchange rate and net exports; skill 2.B (multiple contributing variables) fits. All content is in scope for Unit 5."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Deficit-financed purchases raise loanable funds demand and OMO sales cut money supply, so the real interest rate rises unambiguously. Investment falls. Higher rates attract capital inflow, the currency appreciates, and net exports fall. Option A is the unique answer. The 'limited reserves' and floating exchange rate conditions are stated."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed and the stem is complete and clear. It has five options (A-E)."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor flips one or more of the three variables, encoding distinct errors. The explanation addresses every wrong option. One minor point: the option that reverses the interest rate and net exports together is a weaker misconception. This is acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60-90 seconds, no calculations, and the format is typical of AP Macroeconomics direction-combination items. Calculator designation is harmless."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, determinate two-policy mix question with a unique key, parallel options, and a full explanation of each wrong option. It is acceptable."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires combining fiscal expansion (deficit borrowing) and monetary contraction (open market sales), both raising the real interest rate, then tracing effects to investment (crowding out) and to net exports via capital inflows and currency appreciation. Multi-variable explanation matches skill 2.B. No computation, clear wording, in-scope content.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_macroeconomics-m13-k1",
+  "cellId": "ap_macroeconomics-m13",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "B",
+     "brief_reasoning": "Borrowing increases demand for loanable funds, and open market sales reduce the money supply. Both push the real interest rate up. A higher rate crowds out investment. Higher rates draw in capital, so the currency appreciates and net exports fall.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 5.1 policy mix; multi-variable explanation fits 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Interest rate up is determinate (both policies push it up); investment down; net exports down. Key B is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem states limited reserves and a floating exchange rate."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distinct misconceptions; every wrong option is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Five options, a typical AP stem, and a reasonable load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound and passes all criteria. The key is unique, the distractors are distinct, and the stem is complete."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires combining two policy effects (expansionary fiscal via deficit borrowing and contractionary monetary via open market sales). Both push the real interest rate up, so investment is crowded out. Higher rates attract capital inflow, appreciating the currency under a floating rate, which lowers net exports. Needs multi-variable causal reasoning (skill 2.B) with no calculation and low reading load. Standard AP-level concept chain with a single clear correct answer (B). The wording is clean and the 'limited reserves' phrase is a standard cue.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_macroeconomics-m13-k2",
+  "cellId": "ap_macroeconomics-m13",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "B",
+     "brief_reasoning": "A smaller deficit means the government borrows less, so demand for loanable funds falls and the real rate drops. Open market purchases add to the money supply, which also pushes the rate down. Both policies lower the real interest rate, so investment rises. The lower rate sends financial capital abroad, the currency depreciates, and net exports rise.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Fiscal plus monetary policy mix, then effects on interest rate, investment and net exports. This fits topic 5.1 and skill 2.B, which asks for combining multiple actions. The loanable funds and foreign exchange links are prerequisites from earlier units and are used appropriately."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Both the fiscal contraction (lower government borrowing) and the open market purchase push the real interest rate down, so the direction is determinate. Lower rates raise investment, lead to capital outflow and currency depreciation, and so raise net exports. Option B is the unique key."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem states the economy type (limited reserves, floating exchange rate) and both policies clearly. The 'other things equal' phrasing is appropriate."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Five options with distinct error patterns (investment sign, net exports sign, interest rate sign). The explanations address every wrong option. The wording is formulaic, and the option 4 explanation is slightly inconsistent because it reasons from a lower rate while the option says the rate rises. This is minor."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "A short conceptual item, about 90-120 seconds, with no calculation. The 'calculator allowed' label is harmless. The five-option format matches AP Macroeconomics."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound and has a unique key. Its scope and skill fit is good, and the distractors are distinct and each one is explained."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The item combines contractionary fiscal policy with expansionary monetary policy, so the student must see that both lower the real interest rate. The student then traces the lower rate to higher investment, and to currency depreciation and higher net exports under a floating exchange rate. There is no calculation and the wording is clear. The content is standard Unit 5 material and needs about four reasoning steps, which fits a full mock exam.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_macroeconomics-m14-k0",
+  "cellId": "ap_macroeconomics-m14",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "B",
+     "brief_reasoning": "In the short run the economy moves up and to the left along the SRPC, so unemployment falls and inflation rises. Once expectations fully adjust, the SRPC shifts up and unemployment returns to the natural rate on the vertical LRPC, but inflation stays higher.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 5.2 SR/LR Phillips curve effects of money growth; skill 3.B comparative statics. In scope."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "B is the unique correct answer. Stem states initial conditions and full expectation adjustment."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the wording is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Four distinct misconceptions; five parallel options; every wrong option is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Typical AP MC load; no calculation."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is clean: the key is unique, the distractors are distinct, it is in scope for 5.2/3.B, and it is suitable for the exam."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Standard conceptual item: expansionary monetary policy moves the economy along the SRPC (lower unemployment, higher inflation), then expectations adjust and the SRPC shifts up, returning unemployment to the natural rate with higher inflation. It needs no calculation or graph, and the model is explicitly stated. The reasoning is two short sequential steps, and the distractors are plausible but clearly wrong. The depth fits core learning of the topic rather than a challenging mock-exam item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_macroeconomics-m14-k1",
+  "cellId": "ap_macroeconomics-m14",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "D",
+     "brief_reasoning": "Short run: move up along the SRPC, so unemployment falls and inflation rises. Long run: expectations adjust, the SRPC shifts up, and unemployment returns to the natural rate while inflation stays higher.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 5.2: SRPC and LRPC effects of expansionary monetary policy. Skill 3.B fits: traces the effects of a policy change across short run and long run."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option D is the unique correct answer. SR: unemployment lower, inflation higher. LR: unemployment at the natural rate, inflation higher. The other four options each contain exactly one wrong element."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem states the initial state, the policy and the expectation adjustment. The only wording issue is the money-growth phrasing; it is acceptable and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor maps to a distinct misconception (SR inflation falls, LR unemployment lower, LR unemployment higher, LR inflation unchanged). The explanation addresses every wrong option. Options are parallel in length and format."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Standard conceptual MC, about 60-90 seconds. Reading load is light. No calculation is required. The stem mentions the short-run Phillips curve, which gives away some of the model, but this is acceptable."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, unambiguous SRPC/LRPC question. It has a unique key and distinct misconception-based distractors, and it fits the topic and skill. It is acceptable as written."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must identify the SRPC/LRPC model, trace expansionary monetary policy as a movement along the SRPC (lower unemployment, higher inflation), then recognize the SRPC shift after expectations adjust, with unemployment returning to the natural rate and inflation staying higher. This is a single comparative-statics sequence with a short-run/long-run contrast. No computation, minimal reading, and unambiguous wording. It is a standard core-concept item appropriate for a full mock exam.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_macroeconomics-m14-k2",
+  "cellId": "ap_macroeconomics-m14",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "A",
+     "brief_reasoning": "When the central bank slows money growth, the economy moves down along the SRPC, so unemployment rises and inflation falls. Once expectations adjust, the SRPC shifts down and unemployment returns to the natural rate on the LRPC, while inflation stays lower.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The reading load is light and no calculation is needed. It is a typical AP-style direction-combination item with five options. The 120-second estimate is acceptable. The calculator designation is harmless.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean, correct item on short-run and long-run Phillips curve effects of disinflationary monetary policy. It has a unique key, distinct distractors and a full explanation, with no scope problems."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item on short-run vs. long-run Phillips curve. One comparative-statics step: contractionary monetary policy moves the economy along the SRPC to higher unemployment and lower inflation, and the long run returns unemployment to the natural rate with lower inflation. No calculation, no graph or table to read, and the wording is clear. A standard textbook scenario that is core to the unit, so it suits basic learning rather than a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_macroeconomics-m15-k0",
+  "cellId": "ap_macroeconomics-m15",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_exam_suitability"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Supply of loanable funds shifts right (more saving), demand shifts right (more investment). Quantity rises; interest rate effect depends on relative magnitudes.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 4,
+     "final_answer": "Interest rate indeterminate; quantity increases"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "Awkward axis scale and unrealistic interest rates are atypical of AP graphs. The calculator designation is not needed, though harmless.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The economics and key are correct, but the stimulus graph has unrealistic and unrounded scale values (53.3333 vertex, 0-90 percent axis with step 20) that hurt clarity and exam suitability. Fail on stimulus quality."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must identify the loanable funds model, recognize that higher saving shifts supply right and investment optimism shifts demand right, then combine the two shifts: quantity rises with certainty while the interest rate change is indeterminate. This is a standard double-shift comparative statics item with no calculation. The graph only establishes the model and starting equilibrium. Difficulty comes from the legitimate concept of combining two shifts, not from reading load or arithmetic.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_macroeconomics-m15-k1",
+  "cellId": "ap_macroeconomics-m15",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_stimulus_expression"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 4,
+     "final_answer": "Interest rate indeterminate; quantity increases",
+     "brief_reasoning": "Supply shifts right (foreign lending) and demand shifts right (investment). Quantity rises for sure; the interest rate change depends on the size of each shift.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "Five options, short reading load, typical of the AP exam. The graph is superfluous but harmless. The calculator is irrelevant.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct with a unique key and good distractors. The only flaw is a minor graph axis oddity (y max 115 with step 20), and the graph is not needed to answer the question. I marked stimulus_expression as failing for that reason."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must identify the loanable funds model, recognize that foreign lending shifts supply right and investment optimism shifts demand right, then combine the two shifts: quantity rises for sure, the real interest rate is indeterminate. This is one comparative-statics step with two combined effects, and the graph is only context. There is no heavy computation or reading, and the wording is unambiguous. It is a standard full-mock difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_macroeconomics-m15-k2",
+  "cellId": "ap_macroeconomics-m15",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "Real interest rate increases; quantity indeterminate",
+     "brief_reasoning": "Supply of loanable funds shifts left (less saving), demand shifts right (investment tax credit). Both raise r; effects on Q oppose, so indeterminate.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "Five options, about 115 seconds, no arithmetic needed. The graph is only background but acceptable.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound: the graph is internally consistent, the key is unique and correct, and the distractors are distinct and explained."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must identify the loanable funds model, shift supply left (lower household saving) and demand right (investment tax credit), then combine the two shifts: the interest rate definitely rises while the quantity change is indeterminate. This is a standard double-shift comparative-statics item with no calculation required; the graph is only context. It matches the allowed lever of combining two effects and suits a full mock exam.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ }
+]

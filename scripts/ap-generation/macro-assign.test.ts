@@ -74,4 +74,12 @@ describe("macro exact assignment (ILP + independent verifier)", () => {
     expect(out[0].virtual.filter((v) => v.unit === 5).length).toBeGreaterThanOrEqual(11);
     expect(verifyMacroAssignment(out)).toEqual([]);
   }, 120000);
+  it("minExamPrep raises the number of exam_prep singles in every exam to the floor (virtual items are not counted)", () => {
+    const st = stock(2).map((c, i) => (c.kind === "mc" && i % 3 === 0 ? { ...c, exam: 1 } : c));
+    const { res, out } = solveMacroSets(["MA1", "MA2"], st, { timeMs: 90000, minExamPrep: 18, preferExamPrep: true });
+    expect(res.status).toBe("optimal");
+    for (const r of out) expect(r.singles.reduce((a, c) => a + (c.exam ?? 0), 0)).toBeGreaterThanOrEqual(18);
+    const none = solveMacroSets(["MA1"], stock(1).map((c) => ({ ...c, exam: 0 })), { timeMs: 30000, minExamPrep: 5 });
+    expect(none.res.status).not.toBe("optimal"); // exam_prep 문항이 없으면 하한을 만족할 수 없다
+  }, 240000);
 });
