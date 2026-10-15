@@ -204,12 +204,18 @@ export async function fetchApSetUsage(db: SupabaseClient, fullOnly: boolean): Pr
   const { data: sets, error } = await q;
   if (error) throw new Error(error.message);
   if (!sets?.length) return [];
-  const { data: items, error: ie } = await db.from("mock_exam_set_items").select("exam_set_id, problem_id").in("exam_set_id", sets.map((s) => s.id as string));
-  if (ie) throw new Error(ie.message);
-  const pids = [...new Set((items ?? []).map((i) => i.problem_id as string))];
+  // 1000행 상한 때문에 세트가 많으면 뒤쪽이 잘린다 — 쪽 나눔(안정 정렬).
+  const items: { exam_set_id: string; problem_id: string }[] = [];
+  for (let from = 0; ; from += 1000) {
+    const { data, error: ie } = await db.from("mock_exam_set_items").select("exam_set_id, problem_id").in("exam_set_id", sets.map((s) => s.id as string)).order("id").range(from, from + 999);
+    if (ie) throw new Error(ie.message);
+    items.push(...((data ?? []) as { exam_set_id: string; problem_id: string }[]));
+    if (!data || data.length < 1000) break;
+  }
+  const pids = [...new Set(items.map((i) => i.problem_id as string))];
   const keyOf = new Map<string, string>();
   for (const ps of chunk(pids, 150)) { const { data, error: e } = await db.from("ap_candidate_problems").select("problem_id, candidate_key").in("problem_id", ps); if (e) throw new Error(e.message); for (const x of data ?? []) keyOf.set(x.problem_id as string, x.candidate_key as string); }
-  return sets.map((s) => { const mine = (items ?? []).filter((i) => i.exam_set_id === s.id).map((i) => i.problem_id as string); return { id: s.id as string, name: s.name as string, status: s.status as string, label: (s.ap_label as string | null) ?? undefined, problemIds: mine, candidateKeys: mine.map((p) => keyOf.get(p)).filter((k): k is string => !!k) }; });
+  return sets.map((s) => { const mine = items.filter((i) => i.exam_set_id === s.id).map((i) => i.problem_id as string); return { id: s.id as string, name: s.name as string, status: s.status as string, label: (s.ap_label as string | null) ?? undefined, problemIds: mine, candidateKeys: mine.map((p) => keyOf.get(p)).filter((k): k is string => !!k) }; });
 }
 export const fetchFullSetUsage = (db: SupabaseClient) => fetchApSetUsage(db, true);
 export type AccessTier = "free" | "tutoring";
