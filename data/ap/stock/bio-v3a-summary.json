@@ -1,0 +1,74 @@
+{
+ "runs": [
+  "bio-v3a"
+ ],
+ "rows": 21,
+ "passed": 12,
+ "rejected": 9,
+ "passRate": 0.571,
+ "mc": {
+  "rows": 0,
+  "passed": 0,
+  "passRate": 0
+ },
+ "frq": {
+  "rows": 21,
+  "passed": 12,
+  "passRate": 0.571
+ },
+ "unitsPassed": {},
+ "skillsPassed": {},
+ "figPassed": {
+  "table": 6,
+  "text": 6
+ },
+ "figAll": {
+  "table": 14,
+  "text": 7
+ },
+ "figPassRate": {
+  "table": "6/14",
+  "text": "6/7"
+ },
+ "renderTypesPassed": {
+  "ap_table": 6,
+  "text": 6
+ },
+ "archetypesPassed": {
+  "bif_q1_fliesselection": 1,
+  "bif_q1_lacoperon": 1,
+  "bif_q2_receptorsat": 1,
+  "bif_q2_allelefreq": 2,
+  "bif_q3_uvbacteria": 1,
+  "bif_q3_ethylene": 1,
+  "bif_q3_beetlecolor": 1,
+  "bif_q4_crossingover": 1,
+  "bif_q4_bottleneck": 1,
+  "bif_q4_keystone": 1,
+  "bif_q6_lacz": 1
+ },
+ "archetypesAll": {
+  "bif_q1_fliesselection": 2,
+  "bif_q1_lacoperon": 2,
+  "bif_q2_receptorsat": 2,
+  "bif_q2_allelefreq": 2,
+  "bif_q3_flycross": 1,
+  "bif_q3_uvbacteria": 1,
+  "bif_q3_ethylene": 1,
+  "bif_q3_beetlecolor": 1,
+  "bif_q4_crossingover": 1,
+  "bif_q4_bottleneck": 1,
+  "bif_q4_keystone": 1,
+  "bif_q6_lacz": 2,
+  "bif_q6_moth": 2,
+  "bif_q6_agemeiosis": 2
+ },
+ "failedArchetypes": [
+  "bif_q3_flycross",
+  "bif_q6_moth",
+  "bif_q6_agemeiosis"
+ ],
+ "costUsd": {
+  "bio-v3a": 1.2594
+ }
+}

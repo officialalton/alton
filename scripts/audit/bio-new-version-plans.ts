@@ -11,12 +11,18 @@ import { verifyBioAssignment, type BioResult } from "../ap-generation/bio-assign
 import { loadBioPool, type BioItem } from "../ap-generation/bio-pool";
 
 const write = process.argv.includes("--write");
+const argv = (n: string, d: string) => { const i = process.argv.indexOf(n); return i > 0 ? process.argv[i + 1] : d; };
 const rd = <T>(p: string) => JSON.parse(readFileSync(p, "utf-8")) as T;
 type Snap = Record<"BI1" | "BI2", { sourceSetName: string; sourceVersionNo: number; slots: { section: string; position: number; candidateKey: string }[] }> & { convertedKeys: string[] };
-const snap = rd<Snap>("data/ap/stock/bio-bi1-bi2-published-v1-slots.json");
-const v3 = Object.fromEntries(rd<{ sets: { id: string; mcA: string[]; frqA: string[] }[] }>("data/ap/stock/exact-assign-bio-bi1-bi2-v3.json").sets.map((s) => [s.id, s]));
+// 입력은 인자로 바꿀 수 있다(기본값 = 2026-10-14 v1 → v3 계획). 2026-10-15 v4 계획: --slots data/ap/stock/bio-bi1-bi2-published-v3v4-slots.json --assign data/ap/stock/exact-assign-bio-bi1-bi2-v4.json --assume-converted bio-v3a-items,bio-v3b-items --frq-spread
+const snap = rd<Snap>(argv("--slots", "data/ap/stock/bio-bi1-bi2-published-v1-slots.json"));
+const FRQ_SPREAD = process.argv.includes("--frq-spread");
+const v3 = Object.fromEntries(rd<{ sets: { id: string; mcA: string[]; frqA: string[] }[] }>(argv("--assign", "data/ap/stock/exact-assign-bio-bi1-bi2-v3.json")).sets.map((s) => [s.id, s]));
 const { all } = loadBioPool(); const byKey = new Map(all.map((c) => [c.key, c]));
-const converted = new Set(snap.convertedKeys);
+const assumeBatches = argv("--assume-converted", "").split(",").filter(Boolean);
+/** 새 배치(DB 적재·변환 전)의 통과 키 — 관리자가 배치를 적재·변환한 뒤에 계획을 적용한다는 전제로 '변환 완료'로 센다. */
+const assumed = new Set(assumeBatches.flatMap((b) => rd<{ stockKey: string; validation: string; duplicateOf?: string | null }[]>(`data/ap/stock/${b}.json`).filter((r) => r.validation === "auto_passed" && !r.duplicateOf).map((r) => r.stockKey)));
+const converted = new Set([...snap.convertedKeys, ...assumed]);
 const get = (k: string) => { const c = byKey.get(k); if (!c) throw new Error(`재고(화면 증거 보유)에 없는 키 ${k}`); return c; };
 
 /** 한 세트의 상태: MC 블록(단독 1칸·세트 4칸, 시작 위치 고정) + FRQ 칸 6개. */
@@ -196,6 +202,7 @@ const chk = (stage: string, a: State, b: State, strictStructure: boolean) => {
 chk(`① ${first} 중간판 + ${second} v1`, s1.next, C[second], false);
 chk(`② ${first} 중간판 + ${second} v3 목표`, s1.next, s2.next, false);
 chk(`③ ${first} v3 목표 + ${second} v3 목표(최종)`, s3.next, s2.next, true);
+if (FRQ_SPREAD) stageChecks[2].violations.push(...verifyBioAssignment([resultOf(first, s3.next), resultOf(second, s2.next)], new Set(), { frqSpread: true }).filter((x) => /frq_/.test(x)));
 for (const c of stageChecks) console.log(`${c.stage}: 위반 ${c.violations.length}${c.violations.length ? " — " + c.violations.slice(0, 6).join(" | ") : ""}`);
 const sameSet = (a: Iterable<string>, b: Iterable<string>) => { const x = [...a].sort(), y = [...b].sort(); return x.length === y.length && x.every((v, i) => v === y[i]); };
 if (!sameSet(keysOf(s3.next), T[first]) || !sameSet(keysOf(s2.next), T[second])) throw new Error("최종 구성이 v3 목표와 다르다");
@@ -205,13 +212,15 @@ for (const n of notes) console.log(`NOTE ${n}`);
 const final = stageChecks[2].violations;
 
 const nm = (i: SetId) => snap[i].sourceSetName;
+const v1 = snap[first].sourceVersionNo, v2 = snap[second].sourceVersionNo;
+const needsConversion = [...new Set([...s1.swaps, ...s2.swaps, ...s3.swaps].map((x) => x.addKey))].filter((k) => !snap.convertedKeys.includes(k)).sort();
 const plans: { file: string; set: SetId; ver: number; swaps: Swap[]; note: string; violations: string[] }[] = [
-  { file: `${lowerName(first)}-v2-swap-plan.json`, set: first, ver: 1, swaps: s1.swaps, note: `단계 ① ${first} 중간판(v2): ${second} 가 v3 에서 가져갈 문항을 비우고 빈 칸을 아무도 안 쓰는 문항으로 채운다(단원 범위 유지). 공개 직후 ②③ 을 이어서 한다.`, violations: stageChecks[0].violations },
-  { file: `${lowerName(second)}-v2-swap-plan.json`, set: second, ver: 1, swaps: s2.swaps, note: `단계 ② ${second} → v3 목표(v2). 선행: ${lowerName(first)}-v2 공개(${first} 가 ${second} 몫 문항을 비운 뒤).`, violations: stageChecks[1].violations },
-  { file: `${lowerName(first)}-v3-swap-plan.json`, set: first, ver: 2, swaps: s3.swaps, note: `단계 ③ ${first} 중간판(v2) → v3 목표(v3). 선행: ${lowerName(second)}-v2 공개(${second} 가 ${first} 몫 문항을 비운 뒤).`, violations: final },
+  { file: `${lowerName(first)}-v${v1 + 1}-swap-plan.json`, set: first, ver: v1, swaps: s1.swaps, note: `단계 ① ${first} 중간판(v${v1 + 1}): ${second} 가 목표 배정에서 가져갈 문항을 비우고 빈 칸을 아무도 안 쓰는 문항으로 채운다(단원 범위 유지). 공개 직후 ②③ 을 이어서 한다.`, violations: stageChecks[0].violations },
+  { file: `${lowerName(second)}-v${v2 + 1}-swap-plan.json`, set: second, ver: v2, swaps: s2.swaps, note: `단계 ② ${second} → 목표 배정(v${v2 + 1}). 선행: ${lowerName(first)}-v${v1 + 1} 공개(${first} 가 ${second} 몫 문항을 비운 뒤).`, violations: stageChecks[1].violations },
+  { file: `${lowerName(first)}-v${v1 + 2}-swap-plan.json`, set: first, ver: v1 + 1, swaps: s3.swaps, note: `단계 ③ ${first} 중간판(v${v1 + 1}) → 목표 배정(v${v1 + 2}). 선행: ${lowerName(second)}-v${v2 + 1} 공개(${second} 가 ${first} 몫 문항을 비운 뒤).`, violations: final },
 ];
 if (write) {
   if (final.length) throw new Error(`최종 위반 ${final.length}건 — 계획 파일을 쓰지 않습니다`);
-  for (const p of plans) writeFileSync(`data/ap/stock/${p.file}`, JSON.stringify({ kind: "ap_new_version_swap_plan", set: p.set, sourceSetName: nm(p.set), sourceVersionNo: p.ver, generatedBy: "scripts/audit/bio-new-version-plans.ts", note: p.note, swapCount: p.swaps.length, verifierViolations: p.violations, ...(notes.length ? { substitutions: notes } : {}), swaps: p.swaps }, null, 1) + "\n");
+  for (const p of plans) writeFileSync(`data/ap/stock/${p.file}`, JSON.stringify({ kind: "ap_new_version_swap_plan", set: p.set, sourceSetName: nm(p.set), sourceVersionNo: p.ver, generatedBy: "scripts/audit/bio-new-version-plans.ts", note: p.note, swapCount: p.swaps.length, verifierViolations: p.violations, ...(notes.length ? { substitutions: notes } : {}), ...(needsConversion.length ? { requiresConvertedCandidates: needsConversion } : {}), swaps: p.swaps }, null, 1) + "\n");
   console.log("wrote", plans.map((p) => p.file).join(", "));
 }

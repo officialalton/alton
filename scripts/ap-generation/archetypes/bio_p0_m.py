@@ -45,11 +45,11 @@ bi_sp_error_catalase = make_bank_archetype("bi_sp_error_catalase", "3.2", "3.D",
       [("Using a different amount of catalase at each temperature", "This adds a second changing variable and so adds error instead of reducing it."),
        ("Reporting only the trial with the highest rate at each temperature", "Selecting one trial hides the variation and introduces bias."),
        ("Adding more temperatures but running each only once", "More temperatures do not reduce the random error in each measurement.")]),
-    B("In a catalase investigation, a student leaves the bottle of hydrogen peroxide uncovered on the bench for a day before using it for all of the trials. Hydrogen peroxide slowly breaks down into water and oxygen gas when it is left standing. Which statement best describes the effect of this error on the results?",
-      ("Less substrate is available than assumed, so the volume of oxygen measured is lower in every trial.", "A lower concentration of substrate lowers the rate and the amount of product measured."),
-      [("The enzyme has a higher activation energy, so the rate is lower in every trial.", "Enzymes lower activation energy and the standing solution does not change that of the enzyme."),
-       ("The temperature of the reaction mixture is raised, so the measured volume of oxygen is greater in every trial.", "Standing on the bench does not raise the temperature of the reaction mixtures."),
-       ("The error affects only the trial at the highest temperature and has no effect at the others.", "All of the trials used the same bottle, so every trial is affected.")]),
+    B("In a catalase investigation, a student leaves the bottle of hydrogen peroxide uncovered on the bench for a day before using it for the trials at four temperatures. Hydrogen peroxide slowly breaks down into water and oxygen gas when it is left standing, so less hydrogen peroxide is present than the student assumed. Which revision to the procedure would best prevent this error in future trials?",
+      ("Use hydrogen peroxide solution that is freshly prepared and kept covered until the trials", "Fresh covered solution has the concentration of substrate that the student intends to use."),
+      [("Use a larger amount of catalase in each of the trials", "Changing the amount of enzyme adds a second variable and does not correct the lost substrate."),
+       ("Run all of the trials at the highest temperature in the study", "Running every trial at one temperature removes the independent variable."),
+       ("Collect the oxygen for a longer time only in the trials at the lowest temperature", "A longer time for some trials adds a second variable and does not fix the substrate.")]),
     B("In a catalase investigation the volume of oxygen collected at 60 degrees Celsius is lower than the volume collected at 37 degrees Celsius. A classmate claims the difference is only due to experimental error. Which additional data would best test this claim?",
       ("Repeated trials at both temperatures to see whether the difference is consistent", "Consistent differences across repeated trials indicate an effect and not random error."),
       [("A single additional trial at a much higher temperature, such as 100 degrees Celsius", "One trial at a new temperature does not test the difference between 37 and 60 degrees."),
@@ -68,11 +68,11 @@ bi_sp_design_protein_ph = make_bank_archetype("bi_sp_design_protein_ph", "1.7", 
       [("Use a different volume of egg white for each pH", "Different volumes would add a second changing variable."),
        ("Measure the cloudiness of the pH 2 sample after 10 minutes and the pH 10 sample after 30 minutes", "Different times would add a second changing variable."),
        ("Keep the pH of all the samples the same", "The pH is the variable that is being tested and must differ among the samples.")]),
-    B("A student predicts that egg white mixed with a solution of pH 2 will be more cloudy than egg white mixed with a solution of pH 7 after 10 minutes. Which result would be the best evidence that the pH 2 solution denatured the protein?",
-      ("The sample at pH 2 is cloudier than the sample at pH 7 under the same conditions.", "Increased cloudiness indicates that the protein has unfolded and aggregated."),
-      [("The sample at pH 7 is cloudier than the sample at pH 2 under the same conditions.", "This result would indicate more denaturation at pH 7, which is opposite to the prediction."),
-       ("The sample at pH 2 has the same cloudiness as the sample at pH 7.", "Equal cloudiness would indicate no effect of pH."),
-       ("The sample at pH 2 is warmer than the sample at pH 7.", "Temperature differences do not measure denaturation of the protein.")]),
+    B("A student adds equal volumes of solutions with pH values of 2, 4, 10, and 12 to samples of egg white at 25 degrees Celsius and measures the cloudiness of each sample after 10 minutes. The student wants to be sure that any cloudiness is caused by the pH of the solution and not by the act of adding liquid to the egg white. Which additional sample is the best control?",
+      ("Egg white mixed with an equal volume of distilled water at 25 degrees Celsius", "This sample receives the same volume of liquid but has no change in pH."),
+      [("Egg white that is heated to 60 degrees Celsius with no solution added", "Heating changes the temperature, which is a second variable."),
+       ("Egg white mixed with twice the volume of the solution with a pH of 2", "A different volume changes a second variable and is not a control."),
+       ("A tube of distilled water with no egg white added", "A tube without egg white cannot show the effect of liquid added to egg white.")]),
 ], "identify variables and controls in a protein denaturation investigation", "fixed fact bank checked against CED 1.7 and science practice 3", est=65)
 
 bi_sp_design_phenotype_environment = make_bank_archetype("bi_sp_design_phenotype_environment", "5.5", "3.C", [
@@ -104,11 +104,11 @@ bi_sp_hypothesis_flycross = make_bank_archetype("bi_sp_hypothesis_flycross", "5.
       [("Why do pea plants have seeds that are round or wrinkled?", "This question asks for a reason and is not answered by counting offspring phenotypes."),
        ("Which of the two traits is more important to the pea plant?", "Importance to the plant cannot be tested by counting offspring."),
        ("Do the offspring of heterozygous parents have a 1:1 ratio of phenotypes?", "A 1:1 ratio is not expected from a cross of two double heterozygotes.")]),
-    B("A student plans to test the hypothesis that the gene for eye color in fruit flies is inherited in a simple Mendelian pattern with red eyes dominant to brown eyes. The student crosses two heterozygous red-eyed flies. Which result would be most consistent with the hypothesis?",
-      ("About three-fourths of the offspring have red eyes and one-fourth have brown eyes.", "A cross of two heterozygotes gives a 3:1 ratio of dominant to recessive phenotypes."),
-      [("About half of the offspring have red eyes and half have brown eyes.", "A 1:1 ratio is expected from a test cross and not from a cross of two heterozygotes."),
-       ("All of the offspring have red eyes.", "About one-fourth of the offspring are expected to be homozygous recessive."),
-       ("About one-fourth of the offspring have red eyes and three-fourths have brown eyes.", "This is the reverse of the ratio expected for a dominant red allele.")]),
+    B("A student wants to find out whether the gene for eye color in fruit flies, with red eyes dominant to brown eyes, is inherited in a simple Mendelian pattern. The student crosses two flies that are heterozygous and have red eyes and counts the eye color of the offspring. Which of the following is the best testable question for the investigation?",
+      ("Do about three-fourths of the offspring have red eyes and about one-fourth have brown eyes?", "A cross of two heterozygotes is predicted to give a 3:1 ratio of dominant to recessive phenotypes."),
+      [("Why do fruit flies have red eyes in nature?", "This question asks about the reason for a trait and cannot be answered by counting the offspring."),
+       ("Is red eye color more useful to fruit flies than brown eye color?", "Usefulness to the flies is not measured by counting offspring."),
+       ("Do about half of the offspring have red eyes and half have brown eyes?", "A 1:1 ratio is expected from a test cross and not from a cross of two heterozygotes.")]),
 ], "state a testable hypothesis or expected ratio for a genetic cross", "fixed fact bank checked against CED 5.3 and science practice 3", est=65)
 
 bi_sp_design_choice_chamber = make_bank_archetype("bi_sp_design_choice_chamber", "8.1", "3.C", [
@@ -130,22 +130,22 @@ bi_sp_design_choice_chamber = make_bank_archetype("bi_sp_design_choice_chamber",
 ], "choose a design or control that isolates a behavioral response in a choice chamber", "fixed fact bank checked against CED 8.1 and science practice 3", est=65)
 
 bi_sp_error_quadrat = make_bank_archetype("bi_sp_error_quadrat", "8.4", "3.D", [
-    B("A student estimates the density of dandelions in a large field by counting the dandelions in five square quadrats that the student places in the part of the field that is closest to the path. Which statement best describes a source of error in this method?",
-      ("The quadrats are not placed at random, so the estimate may not represent the whole field.", "Random placement of many quadrats is needed for the sample to represent the field."),
-      [("The quadrats are square, so the dandelions cannot be counted.", "The shape of the quadrat does not prevent counting."),
-       ("The student counts the dandelions in each quadrat, so the data are not quantitative.", "Counts are quantitative data."),
-       ("The student uses five quadrats, which is too many to estimate a density.", "More quadrats generally improve the estimate and are not a source of error.")]),
-    B("A student estimates the number of clover plants in a large field by counting the plants in 5 quadrats of 1 square meter. Another student counts the clover in 30 quadrats of 1 square meter placed at random. Which statement best compares the two estimates?",
-      ("The estimate from 30 quadrats is likely to be closer to the true density because a larger sample reduces the effect of chance variation.", "A larger random sample reduces sampling error."),
-      [("The estimate from 5 quadrats is likely to be closer to the true density because fewer quadrats reduce mistakes in counting.", "Fewer quadrats increase sampling error."),
-       ("The two estimates are equally reliable because both use quadrats of the same size.", "The number of samples affects reliability even when the quadrat size is the same."),
-       ("The estimate from 30 quadrats is less reliable because the quadrats are placed at random.", "Random placement reduces bias and does not make the estimate less reliable.")]),
-    B("A student counts the number of snails in quadrats along a line from a pond to a dry field to investigate how the density of snails depends on the distance from the pond. The student counts only in the morning, when snails are most active, on the first day and in the afternoon on the second day. Which statement best describes the effect of this procedure?",
-      ("The time of day differs among the counts, which adds a variable that could affect the number of snails seen.", "Activity changes with the time of day, so differences in counts could be caused by when the counts are made."),
-      [("The distance from the pond is the same for all counts, which prevents the test of the hypothesis.", "The distance is the independent variable and is expected to differ among the quadrats."),
-       ("The use of quadrats makes it impossible to compare the number of snails at different distances.", "Quadrats of the same size allow comparisons."),
-       ("Counting on two days always makes the results more accurate than counting on one day.", "Counting on two days with different conditions can add error.")]),
-], "identify sources of sampling error and improve a field sampling procedure", "fixed fact bank checked against CED 8.4 and science practice 3.D", est=70)
+    B("A student estimates the density of dandelions in a large field by counting the dandelions in five square quadrats that are placed in the part of the field closest to the path. Which revision to the procedure would best improve the reliability of the estimate of the density in the whole field?",
+      ("Count the dandelions in a larger number of quadrats that are placed at random locations across the field", "Random placement of many quadrats makes the sample represent the whole field."),
+      [("Count the dandelions in the part of the field where they are most common", "This would bias the estimate toward a higher density than the density of the whole field."),
+       ("Use one smaller quadrat that is placed along the path", "One small quadrat placed in one location gives a less representative sample."),
+       ("Count the dandelions in the same five quadrats a second time and use the larger count", "Recounting the same quadrats does not make the sample more representative.")]),
+    B("A student estimates the number of clover plants in a large field by counting the plants in 5 randomly placed quadrats of 1 square meter. The counts in the quadrats range from 2 to 40 plants. Which change to the investigation would best reduce the effect of chance variation on the estimate of the density?",
+      ("Count the clover in many more randomly placed quadrats of the same size", "A larger random sample reduces the effect of chance variation on the mean."),
+      [("Count the clover only in the quadrats that have more than 20 plants", "Excluding quadrats biases the estimate."),
+       ("Use quadrats of different sizes in each part of the field", "Different quadrat sizes make the counts harder to compare and add a variable."),
+       ("Average the counts of the two quadrats with the fewest plants", "Using two selected quadrats does not represent the whole field.")]),
+    B("A student counts the snails in quadrats along a line from a pond to a dry field to test the hypothesis that the density of snails decreases with the distance from the pond. The student counts the quadrats near the pond in the morning and the quadrats far from the pond in the afternoon. Which revision would best allow the student to test the hypothesis?",
+      ("Count the snails in the quadrats at all of the distances at the same time of day", "The time of day is then the same for all distances, so only the distance differs."),
+      [("Count the snails only in the quadrats nearest to the pond", "Counting at one distance cannot show how the density changes with distance."),
+       ("Count the snails at the quadrats far from the pond in the morning and near the pond in the afternoon", "Switching the times keeps the time of day different for the two distances."),
+       ("Use a larger quadrat only for the counts far from the pond", "Different quadrat sizes change the counts and add another variable.")]),
+], "propose a revision that improves a field sampling procedure", "fixed fact bank checked against CED 8.4 and science practice 3.D", est=70)
 
 # ============================ Practice 4 (4.B 자료 기술) ============================
 bi_sp_describe_cohesion_table = make_bank_archetype("bi_sp_describe_cohesion_table", "1.1", "4.B", [
@@ -213,3 +213,6 @@ bi_sp_describe_svr_table = make_bank_archetype("bi_sp_describe_svr_table", "2.2"
 
 STAGE_SPREAD_MC = ["bi_sp_design_dialysis", "bi_sp_predict_agar_cubes", "bi_sp_error_catalase", "bi_sp_design_protein_ph", "bi_sp_design_phenotype_environment", "bi_sp_hypothesis_flycross",
                    "bi_sp_design_choice_chamber", "bi_sp_error_quadrat", "bi_sp_describe_cohesion_table", "bi_sp_describe_offspring_counts", "bi_sp_describe_svr_table"]
+
+# 2차(재시도): 1차에서 검토기의 스킬 적합성 지적(3.A·3.C·3.D 를 실제로 묻는 선택지로 다시 씀)을 받은 MC 4개 + 문구를 고친 FRQ 3개(bio_p0_l: flycross·agemeiosis·moth).
+STAGE_SPREAD_RETRY = ["bi_sp_error_quadrat", "bi_sp_error_catalase", "bi_sp_hypothesis_flycross", "bi_sp_design_protein_ph", "bif_q3_flycross", "bif_q6_agemeiosis", "bif_q6_moth"]
