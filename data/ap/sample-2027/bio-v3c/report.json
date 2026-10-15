@@ -1,0 +1,33 @@
+{
+ "run": "bio-v3c",
+ "subject": "ap_biology",
+ "generatedAt": "2026-10-15T16:50:50.047Z",
+ "totalCostUsd": 0.55,
+ "newSpendSinceBaseline": 0.62,
+ "cap": 1.4,
+ "calls": 51,
+ "candidates": 17,
+ "mcCandidates": 12,
+ "frqCandidates": 5,
+ "passedAll": 13,
+ "adopted": 7,
+ "mcAdopted": 4,
+ "frqAdopted": 3,
+ "reserve": 6,
+ "yield": 0.412,
+ "costPerAdopted": 0.079,
+ "callsPerAdopted": 7.3,
+ "duplicateRejected": 2,
+ "spotChecked": 0,
+ "wording": {
+  "llm": 0,
+  "template": 17
+ },
+ "rejectionReasons": {
+  "criterion_failed_distractor_explanation": 2,
+  "criterion_failed_exam_suitability": 1,
+  "reference_pattern_mismatch": 1,
+  "duplicate_gate_near_duplicate": 2
+ },
+ "unfilledCells": []
+}

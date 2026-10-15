@@ -103,3 +103,21 @@ TS: `lib/ap-generation/subjects/bio.ts`(+`bio-archetypes.json` 가이드 항목,
     - 각 계획의 `sourceVersionNo`(1→1→2)와 제거 문항이 현재 공개본의 그 칸과 맞아야 미리보기가 통과한다. 단계를 건너뛰거나 순서를 바꾸면 "제거할 문항이 없습니다/이미 다른 시험에서 쓰입니다"로 막히니 고치지 말고 순서대로 다시 한다.
   - **최종 상태**: BI1 = v3 배정, BI2 = v3 배정, MC 60 + FRQ 6, 독립 검증기 위반 0(구조 겹침 포함), 두 회 문항 서로소, exam_prep MC 각 **26/60**. 단 한 가지 차이: v3 의 `bio-r2:ap_biology-m18-k0`(BI1, 단원 7·1.A·basic)는 DB 에 아직 변환되지 않아 BI1 이 지금 이미 갖고 있는 같은 원형(`bi_evidence_evolution`)·단원·스킬 문항 `bio-s2-mc-b:ap_biology-m20-k0` 를 그대로 유지한다(해당 칸은 교체 없음, exam_prep 영향 없음). m18-k0 를 쓰려면 먼저 변환(배치 ⑤)해야 하며 그때 BI1 계획을 다시 생성한다.
   - **중간판의 한계(투명 공개)**: 단계 1 이후 단계 3 까지 BI2 는 단원 범위(흐름이 강제)·문항군 1 을 지키지만 **Practice 1 이 9/15, Practice 5 가 11/9 로 공식 범위를 벗어난다**(Practice 1 문항을 BI1 에 넘기고 받을 때까지의 임시). 새 버전은 기존 응시를 건드리지 않고 공개본만 바꾸므로, 이 짧은 구간에 BI2 를 새로 시작하는 학생은 중간판을 본다 → 학생이 적은 시간대에 1→3 단계를 한 번에 끝낸다. 대안은 한 번에 옮기는 문항 수를 줄여 단계를 늘리는 것(공개 3회 → 7회 이상)인데 이득이 작아 택하지 않았다.
+
+## 12. 주제 분산 v4 배정과 새 버전 적용 절차(2026-10-15, 브랜치 `bio-spread`, DB 쓰기 없음)
+- **배경**: 외부 감사에서 BI1 FRQ1~3 이 효소(22/34점)로 쏠렸다는 지적. 점검 표·원인·재고·결과는 `docs/ap/biology-topic-spread.md`. 요약: FRQ 시나리오 14개(유전·진화·세포 소통·생태)와 P3·P4 MC 원형 11개를 새로 만들어(`bio-v3a/b/c`, 모델 비용 $3.05, 통과 37키) **v4 배정**(`data/ap/stock/exact-assign-bio-bi1-bi2-v4.json`)을 만들었다: 두 시험 모두 FRQ 영역 6개·최대 영역 26 %(규칙: 영역 ≤ 35 %·≥ 4영역, `bio-assign.ts --frq-spread`), exam_prep MC 26/60, 가상 0, 독립 검증기 위반 0, BI1·BI2 문항·구조 서로소.
+- **지금 게시 중**(DB SELECT): BI1 `version_no` 3 · BI2 `version_no` 4 (둘 다 v3 배정). 새 버전 계획의 `sourceVersionNo` 는 이 값이다. 게시본 스냅샷: `data/ap/stock/bio-bi1-bi2-published-v3v4-slots.json`.
+- **계획 생성**: `npx tsx scripts/audit/bio-new-version-plans.ts --slots data/ap/stock/bio-bi1-bi2-published-v3v4-slots.json --assign data/ap/stock/exact-assign-bio-bi1-bi2-v4.json --assume-converted bio-v3a-items,bio-v3b-items,bio-v3c-items --frq-spread --write` → `bi1-v4-swap-plan.json`, `bi2-v5-swap-plan.json`, `bi1-v5-swap-plan.json`(파일 이름 = 만들어질 초안의 `version_no`). 각 파일의 `requiresConvertedCandidates` 는 아직 DB 에 없어 **먼저 적재·변환해야 하는 새 배치 키**다. 검증: `lib/ap-admin/bio-new-version-plans-v4.test.ts`(관리자 흐름의 `resolveSwaps` + `checkNewVersionComposition` 을 세 단계로 재현 + 독립 검증기 + FRQ 분산 + 최종 구성 = v4 배정).
+- **순환 겹침 처리(v3 때와 같은 방식)**: v4 에서 BI1 이 가져올 문항 일부가 지금 BI2 에, BI2 가 가져올 문항 일부가 지금 BI1 에 있어 어느 쪽도 단독으로 새 버전을 못 만든다. **BI1 한 번 중간판**(BI2 몫 문항을 비우고 아무도 안 쓰는 변환 완료 문항으로 채움)을 거치는 3단계다. 이번에는 **공유 세트가 시험 사이를 오가지 않도록 배정에 제약**(`--forbid-swap-sets`)을 둬서 세트(같은 크기 세트로만 통째 교체) 때문에 중간판을 못 채우는 문제를 없앴다(첫 시도에서 실제로 막혔다). 계획의 교체는 전부 단독 MC·FRQ 다.
+
+### 관리자가 할 일(순서대로, 단계 사이에 다른 작업을 끼우지 않는다)
+1. **새 배치 적재·변환**: 관리자 → Mock Exams → AP 재고 관리 → 배치 `bio-v3a`, `bio-v3b`, `bio-v3c` 를 각각 "배치 전체 적재"(① 후보 적재 ②③ 렌더·화면 기록 ④ 문제은행 변환). 통과 37키가 모두 변환돼야 한다(증거 `evidence-bio-v3.json` 은 74항목 fail 0, 렌더 보고서는 이미 갱신돼 있어 건너뜀이 없어야 한다).
+2. **새 버전 3단계**(관리자 ⑥ 새 버전, 계획 파일은 목록에서 선택. 각 단계 = 미리보기 → 확인 → 초안 생성 → 별도 '새 버전 공개'; 공개 범위(무료)는 이전 공개본에서 승계):
+   1. `AP Biology — Practice Exam 1`(지금 게시 v3): 계획 `bi1-v4-swap-plan.json`(교체 20 = MC 19 + FRQ 1) → 초안 v4 확인 → 공개. **BI1 중간판**(BI2 몫 문항을 비운 임시 구성).
+   2. `AP Biology — Practice Exam 2`(지금 게시 v4): 계획 `bi2-v5-swap-plan.json`(교체 31 = MC 26 + FRQ 5) → 초안 v5 확인 → 공개. BI2 최종 구성.
+   3. `AP Biology — Practice Exam 1`(지금 v4 가 공개본): 계획 `bi1-v5-swap-plan.json`(교체 27 = MC 23 + FRQ 4) → 초안 v5 확인 → 공개. BI1 최종 구성.
+   - 각 계획의 `sourceVersionNo`(3→4→4)와 제거 문항이 현재 공개본의 그 칸과 맞아야 미리보기가 통과한다. 단계를 건너뛰거나 순서를 바꾸면 "제거할 문항이 없습니다/이미 다른 시험에서 쓰입니다"로 막히니 고치지 말고 순서대로 다시 한다. 1단계를 한 뒤 2단계 전에 BI2 가 먼저 바뀌어 있으면 계획을 다시 생성한다.
+3. **최종 상태**: BI1 = v4 배정, BI2 = v4 배정, MC 60 + FRQ 6, 독립 검증기 위반 0, 두 시험 문항 서로소, exam_prep MC 각 26/60, FRQ 영역 6개(최대 26 %).
+- **중간판의 한계(투명 공개)**: 1단계 후 3단계까지 BI1 은 단원 범위·문항군 1 은 지키지만 **Practice 1 이 10/15 로 공식 범위(15–20)를 벗어난다**(Practice 1 문항을 BI2 에 넘기고 받을 때까지의 임시). 이 구간에 BI1 을 새로 시작하는 학생은 중간판을 보므로 학생이 적은 시간대에 1→3 단계를 한 번에 끝낸다. 새 버전은 기존 응시를 건드리지 않고 공개본만 바꾼다.
+- **비교**: 지금 게시본 BI1 FRQ1~3 = 억제제·효소 온도·카탈레이스(U3 22점, 65 %), BI2 U3 17점(50 %) → v4 BI1 FRQ = 인위 선택 7.3 / 감자 삼투 2.7 / 자외선 돌연변이 6.7 / 불가사리 제거 8.5 / 에너지 도표 3.1 / 유사분열 4.6, BI2 FRQ = 성장 인자 4.2 / 대립유전자 빈도 7.4 / 카탈레이스 3.2 / 비료 유출 8.7 / 복제 포크 6.2 / 나이와 감수 분열 오류 5.1.
+- **남은 위험**: ① 새 FRQ·MC 는 자동 게이트·제2 모델 검토를 통과한 초안일 뿐 사람 검토 전이다(루브릭은 "ALTON reference answer — not official AP scoring"). ② MC Practice 는 P5 과다(BI2 9)·P2 부족(양쪽 10)이 남았다 — exam_prep ≥ 26 을 지키는 한 다단계이면서 P2 인 새 원형이 필요하다. ③ 새 배치는 DB 적재 전이다(적재·새 버전은 관리자 화면).

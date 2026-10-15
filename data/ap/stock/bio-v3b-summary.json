@@ -1,0 +1,80 @@
+{
+ "runs": [
+  "bio-v3b"
+ ],
+ "rows": 33,
+ "passed": 12,
+ "rejected": 21,
+ "passRate": 0.364,
+ "mc": {
+  "rows": 33,
+  "passed": 12,
+  "passRate": 0.364
+ },
+ "frq": {
+  "rows": 0,
+  "passed": 0,
+  "passRate": 0
+ },
+ "unitsPassed": {
+  "1": 2,
+  "2": 4,
+  "3": 1,
+  "5": 4,
+  "8": 1
+ },
+ "skillsPassed": {
+  "3.C": 5,
+  "3.B": 2,
+  "3.D": 1,
+  "3.A": 1,
+  "4.B": 3
+ },
+ "figPassed": {
+  "none": 9,
+  "table": 3
+ },
+ "figAll": {
+  "none": 24,
+  "table": 9
+ },
+ "figPassRate": {
+  "none": "9/24",
+  "table": "3/9"
+ },
+ "renderTypesPassed": {
+  "none": 9,
+  "ap_table": 3
+ },
+ "archetypesPassed": {
+  "bi_sp_design_dialysis": 1,
+  "bi_sp_predict_agar_cubes": 2,
+  "bi_sp_error_catalase": 1,
+  "bi_sp_design_protein_ph": 1,
+  "bi_sp_design_phenotype_environment": 2,
+  "bi_sp_hypothesis_flycross": 1,
+  "bi_sp_design_choice_chamber": 1,
+  "bi_sp_describe_cohesion_table": 1,
+  "bi_sp_describe_offspring_counts": 1,
+  "bi_sp_describe_svr_table": 1
+ },
+ "archetypesAll": {
+  "bi_sp_design_dialysis": 3,
+  "bi_sp_predict_agar_cubes": 3,
+  "bi_sp_error_catalase": 3,
+  "bi_sp_design_protein_ph": 3,
+  "bi_sp_design_phenotype_environment": 3,
+  "bi_sp_hypothesis_flycross": 3,
+  "bi_sp_design_choice_chamber": 3,
+  "bi_sp_error_quadrat": 3,
+  "bi_sp_describe_cohesion_table": 3,
+  "bi_sp_describe_offspring_counts": 3,
+  "bi_sp_describe_svr_table": 3
+ },
+ "failedArchetypes": [
+  "bi_sp_error_quadrat"
+ ],
+ "costUsd": {
+  "bio-v3b": 1.1734
+ }
+}
