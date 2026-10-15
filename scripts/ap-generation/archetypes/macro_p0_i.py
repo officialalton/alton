@@ -279,8 +279,8 @@ def ma_h_fx_two_events(rng):
     yhi = int(m.A) + 10
     stim = econ_graph("Foreign exchange market for the dollar, initially in equilibrium at E.", cur, 100, yhi, 10, 20, points=[("E", m.Q0, m.P0)], xlabel="Quantity of dollars (billions)", ylabel="Exchange rate (yen per dollar)")
     loc = lambda s: s.replace("the country's", "U.S.").replace("in the country", "in the United States").replace("Domestic", "U.S.").replace("domestic", "U.S.").replace("the country", "the United States")  # noqa: E731
-    stem = (f"The graph shows the foreign exchange market for the dollar, with the exchange rate in yen per dollar. The curves are labeled D and S. Both of the following events occur at the same time. Event 1: {loc(e_d[0])} Event 2: {loc(e_s[0])} "
-            "Which of the following correctly describes the effects on the value of the dollar and on the quantity of dollars traded?")
+    stem = (f"The graph shows the foreign exchange market for the dollar (curves D and S). Two events occur at the same time. Event 1: {loc(e_d[0])} Event 2: {loc(e_s[0])} "
+            "Which of the following describes the effects on the value of the dollar and on the quantity of dollars traded?")
     s1 = "right" if dd == 1 else "left"; s2 = "right" if sd == 1 else "left"
     mech = {"ER": ("The shifts push the value of the dollar in opposite directions and their sizes are not given, so the change in the value of the dollar is indeterminate." if d["ER"] is None else f"Event 1 shifts demand for dollars {s1} and Event 2 shifts supply of dollars {s2}, and both push the exchange rate {'up' if d['ER'] == 1 else 'down'}, so the dollar {'appreciates' if d['ER'] == 1 else 'depreciates'}."),
             "QC": ("The shifts push the quantity of dollars traded in opposite directions and their sizes are not given, so the change in the quantity is indeterminate." if d["QC"] is None else f"Both shifts {'increase' if d['QC'] == 1 else 'decrease'} the quantity of dollars traded.")}
