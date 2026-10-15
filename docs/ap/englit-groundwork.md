@@ -87,3 +87,13 @@ LT1·LT2 는 후보·문항군이 서로소(테스트 `lt-assign.test.ts`). 예�
 - 모든 FRQ 샘플의 인용·작품 사실을 사람이 읽지 않았다(Q3 샘플의 실제 작품 사실은 채점기 신고에만 의존).
 - 7문항은 합성 점수 0.7–0.8(위 설명). 보수적으로 쓰려면 해당 문항(`key_confidence.score < 0.8`)을 교체 후보로 빼면 된다.
 - 이 세션의 에세이 채점 flag(`AI_ESSAY_GRADING_ENABLED`)는 건드리지 않았다. `englit` 루브릭은 코드·테스트만 있고 프로덕션 점수 행은 만들어지지 않았다.
+
+## 반응형 줄 번호 (2026-10-15, 산문 390px 쟁점 해결)
+
+- **문제**: 산문은 저장 시 코드가 56자로 접는다(`PROSE_WRAP_WIDTH`). 휴대폰 칸(326px)에서는 그 줄이 다시 접혀 5줄 번호 간격이 6~10행으로 보였다.
+- **방식(DB·저장 내용 변경 없음)**: `lib/ap-exam/passage-layout.ts` 가 펜스의 접힌 줄을 문단(단어 배열)으로 복원한다(`isWrappedProse`: 첫 줄 4칸 들여쓰기·나머지 무들여쓰기·≤56자·마지막 줄 외 ≥36자. 시 원문 줄은 해당 없음 → 기존 표시 그대로). `PassageBlock`(LearningText.tsx)은 마운트 후 문단을 브라우저가 자연스럽게 접게 두고, 단어별 `Range` 좌표로 실제 화면 행을 읽어 **세는 행 5개마다** 번호를 번호 열(absolute, aria-hidden, select-none)에 문단 상단+행×줄높이 위치로 붙인다. `ResizeObserver`(분할 화면 폭 변화)·`document.fonts.ready` 에서 다시 측정한다. 복사하면 자연스러운 문장이 나온다(행마다 줄바꿈 없음).
+- **측정 전/불가**: 서버 렌더·hydration 첫 렌더·`Range.getClientRects` 없음(jsdom)·측정 실패 시 기존 56자 줄 표시(`LegacyPassage`)를 그대로 쓴다 → hydration 불일치 없음, `useLayoutEffect` 로 첫 페인트 전에 전환(클라이언트 렌더 시 깜빡임 없음; SSR HTML 은 hydration 전까지 옛 표시).
+- **줄 참조**: 저장된 문항·해설에는 `(lines 7-9)`, `line 15` 같은 리터럴이 56자 줄 번호로 들어 있다(공개본 LT: 문항 106/153건). 지문을 그리는 쪽이 `PassageRefsScope`(app/components/PassageRefs.tsx)에 '옛 줄 → 화면 번호' 표를 등록하고, `LearningText` 의 모든 글 조각이 `rewriteLineRefs` 로 바꿔 그린다. 앵커는 **옛 줄의 첫 단어/끝 단어가 놓인 화면 행**이라 인용 구절을 항상 덮는다(범위가 한 행이면 `line N`, 둘 이상이면 `lines a-b`; `lines 7 and 9`·`3, 5-6`·en dash 도 처리, 범위 밖 번호·`baseline 2` 같은 단어는 그대로). 시는 옛 줄=원문 줄이라 변경 없음. 새 실제 산문(등록부)도 같은 `wrapParagraph` 저장이라 같은 경로로 동작한다. 적용 범위: ApExamTakeClient·ApExamResultView(문항 카드마다 scope). 지문 하나일 때만 다시 쓴다.
+- **검증**: `lib/ap-exam/passage-layout.test.ts`, `app/session/[id]/LearningText.passage-live.test.tsx`(가짜 Range 로 번호·접근성·참조·폴백) + Chromium 측정 `npx tsx scripts/ap-generation/englit-live-layout.ts` → `docs/ap/englit-layout/live-layout.json`·`live-*-{before,after,resize}.png`.
+  - 390px(칸 358): 이전 번호 간격 6~10행·번호≠화면 행(Chopin 113행/70줄, Chekhov 112/74, Crane 84/55, Ibsen 92/62). 이후 **간격 항상 5행, 번호=화면 행, 문항 참조=인용 줄의 화면 범위 일치(4개 작품 ×3 참조 전부 true)**. 768·1280 도 같음(1280 은 Chopin 70→46행). 분할 화면 576→358 폭 변경 후에도 true.
+- **잔여 위험**: 시의 긴 줄은 좁은 화면에서 접히되 번호는 원문 줄 기준(의도, 시 관행; 휴대폰 Whitman 16행/10줄). 산문 감지는 모양 휴리스틱(드문 시 연이 4칸 들여쓴 56자 이하 줄 묶음이면 산문으로 오인 가능). 다른 화면(관리자 뷰어·ProblemsPanel)은 scope 가 없어 리터럴 번호 그대로. SSR 직후 hydration 전 잠깐 옛 표시. 줄 높이 23.8px 가정(번호 위치).

@@ -21,6 +21,7 @@ import { countWords } from "@/lib/ap-generation/english-text-stats";
 import { sharedSetRange } from "@/lib/ap-exam/shared-set";
 import SharedStimulus from "./SharedStimulus";
 import { frqAnswerToJson, parseFrqAnswer } from "@/lib/ap-exam/frq-answer";
+import { PassageRefsScope } from "@/app/components/PassageRefs";
 import LearningText from "@/app/session/[id]/LearningText";
 import ProblemFigure from "@/app/session/[id]/ProblemFigure";
 import MockExamMathTools, { MockExamToolButtons, type MathToolsOpen } from "@/app/session/[id]/MockExamMathTools";
@@ -372,6 +373,7 @@ export default function ApExamTakeClient({ attempt }: { attempt: MockExamAttempt
               </div>
 
               <div className="contents" data-testid="ap-question-card">
+                <PassageRefsScope>
                 <ScrollPanes resetKey={current.setItemId}>
                   <section aria-label="Passage and question" className="min-w-0 shrink-0 overflow-x-auto overflow-y-hidden px-4 py-4 md:w-1/2 md:shrink md:overflow-y-auto md:px-8 md:py-6 md:border-r md:border-grey-200">
                     {(() => {
@@ -444,6 +446,7 @@ export default function ApExamTakeClient({ attempt }: { attempt: MockExamAttempt
                     )}
                   </section>
                 </ScrollPanes>
+                </PassageRefsScope>
               </div>
 
               <div className="flex shrink-0 items-center justify-between border-t border-grey-200 bg-white px-3 py-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] md:px-8 md:py-3">

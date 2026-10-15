@@ -38,3 +38,15 @@ import { REAL_TEXT_MARKER as REAL_MARKER_T, isEnglishPassage as isEnT } from "./
 describe("real public-domain text marker (2026-10-15)", () => {
   it("is treated as an English passage (shown verbatim, never math-converted)", () => { expect(isEnT(`${REAL_MARKER_T}\nTitle\n\n\`\`\`passage\nA line\n\`\`\``)).toBe(true); });
 });
+
+import { apPassageForDisplay as _apd, US_REAL_SOURCE_MARKER as _usm } from "./stimulus-display";
+describe("apPassageForDisplay: 자료 종류 내부 표기 줄", () => {
+  it("'(table)' 줄만 학생 화면에서 뺀다", () => {
+    const p = `${_usm}\n(table)\nForeign-born population, 1850-1940\nSource line.`;
+    expect(_apd(p, "stem")).toBe(`${_usm}\nForeign-born population, 1850-1940\nSource line.`);
+  });
+  it("본문 중간의 괄호 단어는 건드리지 않는다", () => {
+    const p = `${_usm}\nThe (table) shows data.`;
+    expect(_apd(p, "stem")).toBe(p);
+  });
+});
