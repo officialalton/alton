@@ -1,0 +1,25 @@
+# Reynolds's political map of the United States, designed to exhibit the comparative area of the free and slave states and the territory open to slavery or freedom by the repeal of the Missouri Compromise
+
+- **id**: map-reynolds-1856
+- **type**: map
+- **title**: Reynolds's political map of the United States, designed to exhibit the comparative area of the free and slave states and the territory open to slavery or freedom by the repeal of the Missouri Compromise
+- **author**: William C. Reynolds and J. C. Jones, publishers (New York); Rufus Blanchard (Chicago)
+- **year**: 1856
+- **repository**: Library of Congress, Geography and Map Division
+- **url**: https://www.loc.gov/item/2003627003/
+- **call_number**: G3701.E9 1856 .R4
+- **rights_statement**: LoC GMD statement on the item record: The content of the Library of Congress Geography and Map Division digitized collections is free to use and reuse unless a Rights Advisory statement is present that indicates otherwise. (No Rights Advisory is present on the item record.)
+- **reuse_basis**: public domain (published 1856, before 1929; LoC GMD free to use and reuse)
+- **modified**: unmodified except LoC's IIIF 12.5% rendering (979x887 px)
+- **retrieved**: 2026-10-15
+- **origin**: real_historical_source
+- **file**: files/map-reynolds-1856/image.jpg
+- **public_path**: ap-sources/map-reynolds-1856/image.jpg
+- **sha256**: 752cec3f44c1bccf40e032200a94f9a30a173fbb0f9a221edf4d83a500c820a0
+- **bytes**: 236981
+- **width**: 979
+- **height**: 887
+- **alt**: An 1856 political map of the United States in which free states are colored red, slave states gray and western territories green; portraits of John C. Fremont and William L. Dayton appear at the top corners, with tables of census statistics for the free and slave states below the map.
+- **credit**: Reynolds's Political Map of the United States, 1856. Library of Congress, Geography and Map Division (G3701.E9 1856 .R4). Public domain.
+- **notes**: Colors and portrait captions read from the image; the small printed statistics are not legible at this size and must not be used in items.
+- **file**: files/map-reynolds-1856/image.jpg (sha256 752cec3f44c1bccf40e032200a94f9a30a173fbb0f9a221edf4d83a500c820a0, 236981 bytes)

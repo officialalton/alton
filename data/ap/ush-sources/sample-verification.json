@@ -1,0 +1,444 @@
+{
+ "models": {
+  "solvers": [
+   "claude-opus-5-5",
+   "claude-sonnet-5-5"
+  ],
+  "fact": "claude-fable-5-1"
+ },
+ "solve": {
+  "solve-0-0": [
+   {
+    "q": 1,
+    "choice": 1,
+    "confidence": "certain",
+    "also": null,
+    "reasoning": "The inspector lets a dozen carcasses go by untouched, yet his uniform puts 'the stamp of official approval' on what happens at Durham's."
+   },
+   {
+    "q": 2,
+    "choice": 3,
+    "confidence": "certain",
+    "also": null,
+    "reasoning": "Sinclair is a muckraker. His irony attacks both the packers and the token oversight that was supposed to check them."
+   },
+   {
+    "q": 3,
+    "choice": 0,
+    "confidence": "certain",
+    "also": null,
+    "reasoning": "Public outrage over The Jungle helped pass the Meat Inspection Act and the Pure Food and Drug Act in 1906. The other laws came in 1890, 1913 and 1887."
+   }
+  ],
+  "solve-0-1": [
+   {
+    "q": 1,
+    "choice": 1,
+    "confidence": "certain",
+    "also": null,
+    "reasoning": "The inspector lets a dozen carcasses pass untouched while his uniform gives an air of official approval."
+   },
+   {
+    "q": 2,
+    "choice": 3,
+    "confidence": "certain",
+    "also": null,
+    "reasoning": "Sinclair is criticizing the packers and the ineffective inspection."
+   },
+   {
+    "q": 3,
+    "choice": 0,
+    "confidence": "certain",
+    "also": null,
+    "reasoning": "The Jungle spurred the 1906 Meat Inspection Act and Pure Food and Drug Act."
+   }
+  ],
+  "solve-1-0": [
+   {
+    "q": 1,
+    "choice": 2,
+    "confidence": "certain",
+    "also": null,
+    "reasoning": "From 1960 to 1990, the Asian-born count rose from about 491K to 4.98M and the Latin American-born count rose from about 908K to 8.4M, while the European-born count fell from 7.26M to 4.35M. The other options are wrong: Latin America, not Northern America, was the largest group by 1990; the total rose after 1970; and Europe was not the leading region in 1990."
+   },
+   {
+    "q": 2,
+    "choice": 0,
+    "confidence": "certain",
+    "also": null,
+    "reasoning": "The 1965 Hart-Celler Act ended national-origins quotas, which opened the way for large-scale Asian immigration. The other options either restricted immigration (the 1882 and 1924 laws) or had nothing to do with it (the Marshall Plan)."
+   },
+   {
+    "q": 3,
+    "choice": 3,
+    "confidence": "certain",
+    "also": null,
+    "reasoning": "The 1920s quota laws sharply cut new European arrivals, so as earlier immigrants died the European-born population shrank. The other options don't fit: the 1965 act came after this period, there was no mass deportation of Europeans, and the Homestead Act was earlier and would have increased immigration."
+   }
+  ],
+  "solve-1-1": [
+   {
+    "q": 1,
+    "choice": 2,
+    "confidence": "certain",
+    "also": null,
+    "reasoning": "Asia and Latin America rose sharply 1960-1990 while Europe fell from 7.26M to 4.35M."
+   },
+   {
+    "q": 2,
+    "choice": 0,
+    "confidence": "certain",
+    "also": null,
+    "reasoning": "The 1965 Act ended national-origins quotas, driving Asian immigration growth."
+   },
+   {
+    "q": 3,
+    "choice": 3,
+    "confidence": "certain",
+    "also": null,
+    "reasoning": "1920s quota laws limited European immigration, so the European-born population shrank through aging and death."
+   }
+  ],
+  "solve-2-0": [
+   {
+    "q": 1,
+    "choice": 1,
+    "confidence": "certain",
+    "also": null,
+    "reasoning": "The title highlights territory opened to slavery or freedom once the Missouri Compromise was repealed, so the map is about slavery spreading into the western territories. The Confederacy didn't exist yet in 1856, and the title says nothing about tariffs or a Pacific railroad."
+   },
+   {
+    "q": 2,
+    "choice": 2,
+    "confidence": "certain",
+    "also": null,
+    "reasoning": "The Kansas-Nebraska Act of 1854 repealed the 36°30' line and let settlers decide by popular sovereignty. Dred Scott came in 1857, after this map, and it declared the Compromise unconstitutional rather than repealing it."
+   },
+   {
+    "q": 3,
+    "choice": 0,
+    "confidence": "certain",
+    "also": null,
+    "reasoning": "Frémont and Dayton were the 1856 Republican ticket, and the party ran against extending slavery. The map's free-versus-slave comparison supports that campaign."
+   }
+  ],
+  "solve-2-1": [
+   {
+    "q": 1,
+    "choice": 1,
+    "confidence": "certain",
+    "also": null,
+    "reasoning": "The title contrasts free and slave states and the territory open to slavery after the repeal of the Missouri Compromise."
+   },
+   {
+    "q": 2,
+    "choice": 2,
+    "confidence": "certain",
+    "also": null,
+    "reasoning": "The Kansas-Nebraska Act of 1854 repealed the Missouri Compromise line. The Dred Scott decision came in 1857, after the map was published."
+   },
+   {
+    "q": 3,
+    "choice": 0,
+    "confidence": "certain",
+    "also": null,
+    "reasoning": "Fremont and Dayton were the 1856 Republican presidential and vice-presidential nominees, who opposed extending slavery into the territories."
+   }
+  ]
+ },
+ "fact": {
+  "fact-mc-0": {
+   "verdicts": [
+    {
+     "where": "Q1",
+     "verdict": "sound",
+     "note": "Key is directly supported by the quoted lines ('a dozen carcasses were passing him untouched'; 'stamp of official approval'). Distractor rationales accurately quote and characterize the excerpt; the 'government inspector' in Packingtown in 1906 was indeed a federal (Bureau of Animal Industry) inspector, so 'federal' in the key is accurate."
+    },
+    {
+     "where": "Q2",
+     "verdict": "sound",
+     "note": "Key correctly captures Sinclair's satirical purpose; no distractor is defensible. Rationales accurately describe source content."
+    },
+    {
+     "where": "Q3",
+     "verdict": "sound",
+     "note": "Meat Inspection Act and Pure Food and Drug Act were both signed June 30, 1906, following the Neill–Reynolds investigation prompted by The Jungle. Distractor dates (Sherman 1890, Federal Reserve Act 1913, Interstate Commerce Act 1887) and the '16 years earlier' arithmetic are all correct."
+    }
+   ],
+   "flags": []
+  },
+  "fact-mc-2": {
+   "verdicts": [
+    {
+     "where": "Q1",
+     "verdict": "sound",
+     "note": "Title text is quoted accurately ('the territory open to slavery or freedom by the repeal of the Missouri Compromise'); key is clearly supported; distractor rationales (no Confederacy until 1861; no tariff or railroad content in title) are accurate."
+    },
+    {
+     "where": "Q2",
+     "verdict": "sound",
+     "note": "Kansas-Nebraska Act (1854) repealed the 36°30' restriction for Kansas and Nebraska territories, both north of the line. Rationales for Compromise of 1850, Wilmot Proviso (passed House, never Senate), and Dred Scott (1857, judicial ruling not repeal) are historically accurate."
+    },
+    {
+     "where": "Q3",
+     "verdict": "sound",
+     "note": "Fremont and Dayton were the 1856 Republican presidential and vice-presidential nominees; the map's free-vs-slave comparison and election tables function as campaign material. Buchanan as Democratic nominee favoring popular sovereignty, Whig collapse by 1856, and the sectional nature of the Republican ticket are all accurately stated."
+    }
+   ],
+   "flags": []
+  },
+  "fact-mc-1": {
+   "verdicts": [
+    {
+     "where": "Q1",
+     "verdict": "sound",
+     "note": "All cited figures match the table; Europe did still lead Latin America in 1980 (5,149,572 vs 4,372,487) and was surpassed by both Latin America and Asia in 1990. Key is the only option supported."
+    },
+    {
+     "where": "Q2",
+     "verdict": "sound",
+     "note": "1965 Hart-Celler Act description (abolished national-origins quotas, family-preference system) is accurate; distractors are correctly characterized as restrictive/earlier/unrelated. Figures match the table."
+    },
+    {
+     "where": "Q3",
+     "verdict": "sound",
+     "note": "1921 Emergency Quota Act and 1924 Immigration Act correctly dated; Depression/WWII suppression of arrivals and aging/mortality of the existing European-born cohort is the standard explanation. Figures match the table; stem's 'in part' hedge is appropriate."
+    }
+   ],
+   "flags": []
+  },
+  "fact-dbq": {
+   "verdicts": [
+    {
+     "where": "Doc1",
+     "verdict": "sound",
+     "note": "Joseph Keppler's 'The Bosses of the Senate' (Puck, Jan. 23, 1889) is correctly identified. Image content as described checks out: bloated moneybag trusts (Copper, Steel Beam, Standard Oil, Iron, Sugar, Tin, Coal, Paper Bag, Envelope, Salt, Nail, etc.) entering through an 'Entrance for Monopolists'; 'People's Entrance' marked 'Closed'; sign reading 'This is a Senate of the Monopolists by the Monopolists and for the Monopolists.' HIPP, supports, and complication are accurate. Note (not a flag): because it predates the Sherman Act (1890) by a year, it is useful evidence that demands for regulation preceded the legislation."
+    },
+    {
+     "where": "Doc2",
+     "verdict": "sound",
+     "note": "Excerpt is genuine (The Jungle, ch. 3). Sinclair was a socialist; novel published in book form 1906; it fed public pressure for the Meat Inspection Act and Pure Food and Drug Act (both June 30, 1906). The complication (Sinclair aimed at labor conditions, public reacted to food safety—'hit it in the stomach') is a standard and accurate point. Minor: the excerpt documents lax inspection, not concentration per se; writers should link it to the Beef Trust explicitly to fit the prompt."
+    },
+    {
+     "where": "Doc3",
+     "verdict": "sound",
+     "note": "Figures match Census Bureau historical data (Gibson & Jung, 2006 working paper): foreign-born share 13.3% (1880), 14.8% (1890), 13.6% (1900), 14.7% (1910), so the '13 to 15 percent' claim is correct. Table does not address regulation or concentration; the outline already flags it as weak fit and a replacement candidate, which is the right call."
+    },
+    {
+     "where": "Prompt",
+     "verdict": "fix",
+     "note": "Prompt is historically well-formed and standard for Period 6/7. However, with only three resolved documents—two from critics of trusts and one contextual immigration table unrelated to regulation—the set does not yet support a balanced 'evaluate the extent' argument. It needs at least the legislative text (Doc 4), the Roosevelt excerpt (Doc 5), and especially a business/limited-government counter-source (Doc 6) before it is answerable as a DBQ."
+    }
+   ],
+   "flags": [
+    {
+     "where": "Prompt / document set",
+     "kind": "other",
+     "detail": "Documents 4–7 are unresolved; the current three documents all come from the anti-trust or contextual side, with no counter-perspective (e.g., U.S. v. E.C. Knight 1895, Sumner, or Carnegie), so the prompt cannot presently be evaluated for 'extent.' Doc 3 is acknowledged as a poor fit and should be replaced with an industrial-concentration statistic (e.g., HSUS data on mergers 1895–1904 or share of output by largest firms)."
+    }
+   ]
+  },
+  "fact-frq-0": {
+   "verdicts": [
+    {
+     "where": "A",
+     "verdict": "sound",
+     "note": "Caption accurately quoted ('destitute pea pickers'); migrant seasonal labor for low pay is a well-documented 1930s condition and is directly supported by the source."
+    },
+    {
+     "where": "B",
+     "verdict": "sound",
+     "note": "Post-1929 collapse of crop prices, Dust Bowl drought/dust storms on the southern Plains, and displacement of tenants/sharecroppers by AAA acreage reduction and tractors are all historically accurate causes. (Thompson herself had come to California in 1926, but the question asks about the hardship generally, not her biography, so no issue.)"
+    },
+    {
+     "where": "C",
+     "verdict": "sound",
+     "note": "Resettlement Administration (1935) succeeded by FSA (1937), rehabilitation loans and migrant labor camps, AAA (1933) production-reduction payments, and RA/FSA documentary photography under the Historical Section are all accurate."
+    }
+   ],
+   "flags": []
+  }
+ },
+ "items": {
+  "ap_us_history-real_r1#1": {
+   "keyIndex": 1,
+   "solverChoices": [
+    1,
+    1
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlsoDefensible": [
+    null,
+    null
+   ],
+   "allSolversAgree": true,
+   "factVerdict": "sound",
+   "factNote": "Key is directly supported by the quoted lines ('a dozen carcasses were passing him untouched'; 'stamp of official approval'). Distractor rationales accurately quote and characterize the excerpt; the 'government inspector' in Packingtown in 1906 was indeed a federal (Bureau of Animal Industry) inspector, so 'federal' in the key is accurate.",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_r1#2": {
+   "keyIndex": 3,
+   "solverChoices": [
+    3,
+    3
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlsoDefensible": [
+    null,
+    null
+   ],
+   "allSolversAgree": true,
+   "factVerdict": "sound",
+   "factNote": "Key correctly captures Sinclair's satirical purpose; no distractor is defensible. Rationales accurately describe source content.",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_r1#3": {
+   "keyIndex": 0,
+   "solverChoices": [
+    0,
+    0
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlsoDefensible": [
+    null,
+    null
+   ],
+   "allSolversAgree": true,
+   "factVerdict": "sound",
+   "factNote": "Meat Inspection Act and Pure Food and Drug Act were both signed June 30, 1906, following the Neill–Reynolds investigation prompted by The Jungle. Distractor dates (Sherman 1890, Federal Reserve Act 1913, Interstate Commerce Act 1887) and the '16 years earlier' arithmetic are all correct.",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_r2#1": {
+   "keyIndex": 2,
+   "solverChoices": [
+    2,
+    2
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlsoDefensible": [
+    null,
+    null
+   ],
+   "allSolversAgree": true,
+   "factVerdict": "sound",
+   "factNote": "All cited figures match the table; Europe did still lead Latin America in 1980 (5,149,572 vs 4,372,487) and was surpassed by both Latin America and Asia in 1990. Key is the only option supported.",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_r2#2": {
+   "keyIndex": 0,
+   "solverChoices": [
+    0,
+    0
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlsoDefensible": [
+    null,
+    null
+   ],
+   "allSolversAgree": true,
+   "factVerdict": "sound",
+   "factNote": "1965 Hart-Celler Act description (abolished national-origins quotas, family-preference system) is accurate; distractors are correctly characterized as restrictive/earlier/unrelated. Figures match the table.",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_r2#3": {
+   "keyIndex": 3,
+   "solverChoices": [
+    3,
+    3
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlsoDefensible": [
+    null,
+    null
+   ],
+   "allSolversAgree": true,
+   "factVerdict": "sound",
+   "factNote": "1921 Emergency Quota Act and 1924 Immigration Act correctly dated; Depression/WWII suppression of arrivals and aging/mortality of the existing European-born cohort is the standard explanation. Figures match the table; stem's 'in part' hedge is appropriate.",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_r3#1": {
+   "keyIndex": 1,
+   "solverChoices": [
+    1,
+    1
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlsoDefensible": [
+    null,
+    null
+   ],
+   "allSolversAgree": true,
+   "factVerdict": "sound",
+   "factNote": "Title text is quoted accurately ('the territory open to slavery or freedom by the repeal of the Missouri Compromise'); key is clearly supported; distractor rationales (no Confederacy until 1861; no tariff or railroad content in title) are accurate.",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_r3#2": {
+   "keyIndex": 2,
+   "solverChoices": [
+    2,
+    2
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlsoDefensible": [
+    null,
+    null
+   ],
+   "allSolversAgree": true,
+   "factVerdict": "sound",
+   "factNote": "Kansas-Nebraska Act (1854) repealed the 36°30' restriction for Kansas and Nebraska territories, both north of the line. Rationales for Compromise of 1850, Wilmot Proviso (passed House, never Senate), and Dred Scott (1857, judicial ruling not repeal) are historically accurate.",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_r3#3": {
+   "keyIndex": 0,
+   "solverChoices": [
+    0,
+    0
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlsoDefensible": [
+    null,
+    null
+   ],
+   "allSolversAgree": true,
+   "factVerdict": "sound",
+   "factNote": "Fremont and Dayton were the 1856 Republican presidential and vice-presidential nominees; the map's free-vs-slave comparison and election tables function as campaign material. Buchanan as Democratic nominee favoring popular sovereignty, Whig collapse by 1856, and the sectional nature of the Republican ticket are all accurately stated.",
+   "flags": [],
+   "status": "verified"
+  }
+ }
+}

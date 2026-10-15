@@ -200,6 +200,11 @@ export function normalizeStimulus(stimIn: unknown, ctx: StimCtx): NormResult {
   const stimKind = typeof stim.kind === "string" ? stim.kind : stim.data ? "unknown" : "none";
   const data = isObj(stim.data) ? stim.data : null;
   if (stimKind === "none") return { stimKind, spec: null, features, issues, hidden };
+  if (stimKind === "image") { // 실제 자료 이미지(사진·만평·지도): data = { path, alt, credit } → static image 스펙
+    const p = data && typeof data.path === "string" ? data.path : "";
+    const spec = { type: "image", bucket: "static", path: p, alt: typeof data?.alt === "string" ? data.alt : "", credit: typeof data?.credit === "string" ? data.credit : "" };
+    return { stimKind, spec: spec as never, features, issues, hidden };
+  }
   if (stimKind === "text") {
     // 텍스트 자료의 숫자·식이 학생이 보는 본문에 없으면 "Given information" 패널로 보여 준다.
     if (data) {
