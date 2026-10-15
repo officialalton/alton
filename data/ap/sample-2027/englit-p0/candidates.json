@@ -1,0 +1,179 @@
+[
+ {
+  "cellId": "ap_english_literature-p01",
+  "apSubjectCode": "ap_english_literature",
+  "kind": "mc",
+  "calculator": "na",
+  "reserve": false,
+  "wording": "generated",
+  "candidateKey": "ap_english_literature-p01-k0",
+  "keywordCode": "U1.2",
+  "unitCode": "1",
+  "skillPrimary": "2.A",
+  "structure": "shared_stimulus_set",
+  "archetype": "lt_poetry_p01",
+  "reviewState": "rejected",
+  "rejectionReason": "no_tool_output_or_unparseable; excluded=[]",
+  "difficultyProvisional": null,
+  "payload": {
+   "archetype": "lt_poetry_p01",
+   "spec": {
+    "id": "p01",
+    "group": "poetry",
+    "form": "poem",
+    "era": "19th-century manner",
+    "premise": "a baker's hands at four in the morning",
+    "skills": [
+     "2.A",
+     "6.B",
+     "4.C",
+     "3.C",
+     "4.B",
+     "7.A",
+     "4.A",
+     "5.C",
+     "7.D",
+     "6.A",
+     "1.D",
+     "3.D",
+     "5.B",
+     "3.B"
+    ],
+    "seed": 34487
+   },
+   "excluded_items": [],
+   "kept_count": 0
+  }
+ },
+ {
+  "cellId": "ap_english_literature-s01",
+  "apSubjectCode": "ap_english_literature",
+  "kind": "mc",
+  "calculator": "na",
+  "reserve": false,
+  "wording": "generated",
+  "candidateKey": "ap_english_literature-s01-k0",
+  "keywordCode": "U4.1",
+  "unitCode": "4",
+  "skillPrimary": "1.C",
+  "structure": "shared_stimulus_set",
+  "archetype": "lt_short_s01",
+  "reviewState": "rejected",
+  "rejectionReason": "fewer_than_8_items_passed_4; excluded=[{\"index\":0,\"skill\":\"1.C\",\"reasons\":[\"deterministic_1\"]},{\"index\":1,\"skill\":\"7.C\",\"reasons\":[\"deterministic_1\"]},{\"index\":4,\"skill\":\"2.C\",\"reasons\":[\"adversary_strong_alternative\",\"deterministic_1\"]},{\"index\":5,\"skill\":\"2.B\",\"reasons\":[]},{\"index\":6,\"skill\":\"4.A\",\"reasons\":[\"solver_reports_second_defensible_option\"]},{\"index\":7,\"skill\":\"1.E\",\"reasons\":[\"solver_reports_second_defensible_option\",\"adversary_strong_alternative\",\"judge_key_wrong\",\"deterministic_1\"]},{\"index\":8,\"skill\":\"1.A\",\"reasons\":[\"deterministic_1\"]},{\"index\":9,\"skill\":\"4.B\",\"reasons\":[\"adversary_missing\",\"judge_missing\",\"deterministic_1\"]},{\"index\":11,\"skill\":\"6.D\",\"reasons\":[\"deterministic_2\"]},{\"index\":13,\"skill\":\"7.B\",\"reasons\":[\"deterministic_1\"]},{\"index\":14,\"skill\":\"3.A\",\"reasons\":[\"adversary_missing\",\"judge_missing\",\"deterministic_1\"]}]",
+  "difficultyProvisional": null,
+  "payload": {
+   "archetype": "lt_short_s01",
+   "spec": {
+    "id": "s01",
+    "group": "short",
+    "form": "prose",
+    "era": "mid-20th-century manner",
+    "premise": "a girl returns to her grandmother's island to sell a boat",
+    "skills": [
+     "1.C",
+     "7.C",
+     "3.B",
+     "3.C",
+     "2.C",
+     "2.B",
+     "4.A",
+     "1.E",
+     "1.A",
+     "4.B",
+     "5.D",
+     "6.D",
+     "4.C",
+     "7.B",
+     "3.A"
+    ],
+    "seed": 78848
+   },
+   "excluded_items": [
+    {
+     "index": 0,
+     "skill": "1.C",
+     "reasons": [
+      "deterministic_1"
+     ]
+    },
+    {
+     "index": 1,
+     "skill": "7.C",
+     "reasons": [
+      "deterministic_1"
+     ]
+    },
+    {
+     "index": 4,
+     "skill": "2.C",
+     "reasons": [
+      "adversary_strong_alternative",
+      "deterministic_1"
+     ]
+    },
+    {
+     "index": 5,
+     "skill": "2.B",
+     "reasons": []
+    },
+    {
+     "index": 6,
+     "skill": "4.A",
+     "reasons": [
+      "solver_reports_second_defensible_option"
+     ]
+    },
+    {
+     "index": 7,
+     "skill": "1.E",
+     "reasons": [
+      "solver_reports_second_defensible_option",
+      "adversary_strong_alternative",
+      "judge_key_wrong",
+      "deterministic_1"
+     ]
+    },
+    {
+     "index": 8,
+     "skill": "1.A",
+     "reasons": [
+      "deterministic_1"
+     ]
+    },
+    {
+     "index": 9,
+     "skill": "4.B",
+     "reasons": [
+      "adversary_missing",
+      "judge_missing",
+      "deterministic_1"
+     ]
+    },
+    {
+     "index": 11,
+     "skill": "6.D",
+     "reasons": [
+      "deterministic_2"
+     ]
+    },
+    {
+     "index": 13,
+     "skill": "7.B",
+     "reasons": [
+      "deterministic_1"
+     ]
+    },
+    {
+     "index": 14,
+     "skill": "3.A",
+     "reasons": [
+      "adversary_missing",
+      "judge_missing",
+      "deterministic_1"
+     ]
+    }
+   ],
+   "kept_count": 4
+  }
+ }
+]

@@ -115,3 +115,6 @@ export function frqViolations(p: LtFrqPayload, prior: { id: string; text: string
   }
   return v;
 }
+
+/** 테스트가 스키마 모듈이 로드되었는지 확인하는 표지. */
+export const LT_SCHEMA_CHECK = true;

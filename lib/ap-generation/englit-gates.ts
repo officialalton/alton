@@ -34,7 +34,7 @@ export function similarityViolations(text: string, corpus: CorpusDoc[], o: { max
 }
 // ── 지문 게이트 ────────────────────────────────────────────────────
 const REAL_AUTHORS = ["shakespeare", "emily dickinson", "walt whitman", "robert frost", "langston hughes", "maya angelou", "sylvia plath", "william blake", "wordsworth", "keats", "shelley", "byron", "tennyson", "browning", "milton", "chaucer", "yeats", "eliot", "pound", "auden", "neruda", "rilke", "poe", "hemingway", "faulkner", "fitzgerald", "austen", "dickens", "bronte", "hardy", "woolf", "joyce", "kafka", "chekhov", "tolstoy", "dostoevsky", "hawthorne", "melville", "twain", "wilde", "ibsen", "beckett", "achebe", "morrison", "walker", "baldwin", "ellison", "hurston", "o'connor", "carver", "munro", "lahiri", "ishiguro", "marquez", "borges", "joseph conrad", "kate chopin", "gaskell", "elizabeth bishop", "seamus heaney", "mary oliver", "billy collins", "gwendolyn brooks", "ocean vuong", "naomi shihab nye"];
-const REAL_ORGS = ["the new york times", "harvard", "oxford", "cambridge", "college board", "nobel", "the bible", "quran", "bbc", "nasa"];
+const REAL_ORGS = ["the new york times", "harvard", "oxford", "cambridge", "college board", "nobel", "bbc", "nasa"];
 const hasWord = (text: string, name: string): boolean => new RegExp(`(^|[^a-z])${name.trim().replace(/[.*+?^()|[\]\\]/g, "\\$&")}([^a-z]|$)`).test(text);
 const BANNED_FORMAT = /(^|\n)\s*([-*•]\s|#{1,6}\s)|\*\*|__|```|<\/?[a-z][^>]*>/;
 export const ltBannedHits = (text: string): string[] => { const t = norm(text); return LT_BANNED_PHRASES.filter((p) => t.includes(p)); };
@@ -60,7 +60,7 @@ export function setViolations(set: LtSetRaw): string[] {
   if (wc < b.minWords || wc > b.maxWords) v.push(`passage_words_${wc}_outside_${b.minWords}-${b.maxWords}`);
   if (lines.length < b.minLines || lines.length > b.maxLines) v.push(`passage_lines_${lines.length}_outside_${b.minLines}-${b.maxLines}`);
   if (set.form === "poem") { if (set.stanzas.length < 1 || set.stanzas.length > 9) v.push(`stanza_count_${set.stanzas.length}`); if (lines.some((l) => countWords(l) > 16)) v.push("poem_line_over_16_words"); }
-  else { if (set.stanzas.length < 4 || set.stanzas.length > 14) v.push(`paragraph_count_${set.stanzas.length}`); const sents = plain.split(/(?<=[.!?])["')”’]?\s+/); if (sents.some((s) => countWords(s) > 80)) v.push("sentence_over_80_words"); }
+  else { if (set.stanzas.length < 4 || set.stanzas.length > (set.form === "drama" ? 30 : 14)) v.push(`paragraph_count_${set.stanzas.length}`); const sents = plain.split(/(?<=[.!?])["')”’]?\s+/); if (sents.some((s) => countWords(s) > 80)) v.push("sentence_over_80_words"); }
   if (BANNED_FORMAT.test(passageText(set))) v.push("markdown_or_html_in_passage");
   for (const h of textHazards(passageText(set) + " " + set.title)) v.push(`passage_${h}`);
   if (/[ㄱ-ㆎ가-힣]/.test(plain + set.title)) v.push("hangul_in_passage");
@@ -143,4 +143,10 @@ export function setItemSpread(items: LtItemRaw[]): string[] {
   const longest = items.filter((it) => lengthCueRatio(it) >= LENGTH_CUE_RATIO).length; if (items.length >= 6 && longest / items.length > 0.4) v.push(`length_cue_in_${longest}_of_${items.length}`);
   const st = items.map((i) => norm(i.stem)); if (new Set(st).size !== st.length) v.push("duplicate_stem");
   return v;
+}
+
+/** 장치 목록 정리: 근거 구절이 지문에 없거나(또는 코드로 확인되는 형태가 맞지 않는) 장치는 목록에서 뺀다(세트를 버리지 않는다). 남은 장치가 5개 미만이면 setViolations 가 거른다. */
+export function cleanDevices(set: LtSetRaw): { set: LtSetRaw; dropped: string[] } {
+  const dropped: string[] = []; const devices = (set.blueprint?.devices ?? []).filter((d) => { const v = (LT_DEVICES as readonly string[]).includes(d.device) && String(d.quote ?? "").trim() ? deviceViolations(d, set.stanzas) : ["bad"]; if (v.length) dropped.push(`${d.device}:${v[0]}`); return !v.length; });
+  return { set: { ...set, blueprint: { ...set.blueprint, devices } }, dropped };
 }

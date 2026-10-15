@@ -11,7 +11,7 @@ import { ledgerTotal } from "./ledger-total";
 import { planSets, planSummary } from "../../lib/ap-generation/englit-plan";
 import * as P from "../../lib/ap-generation/englit-prompts";
 import { balancedKeyPositions, keyConfidence, placeKey, keyPositionViolations, quoteInPassage, type CorpusDoc, type SolverVote } from "../../lib/ap-generation/englang-gates";
-import { LENGTH_CUE_RATIO, itemViolations, lengthCueRatio, ltDisplay, ltForModels, passagePlain, proseStanzas, resolveItem, setItemSpread, setViolations, similarityViolations, type LtItemRaw, type LtSetRaw } from "../../lib/ap-generation/englit-gates";
+import { LENGTH_CUE_RATIO, cleanDevices, itemViolations, lengthCueRatio, ltDisplay, ltForModels, passagePlain, proseStanzas, resolveItem, setItemSpread, setViolations, similarityViolations, type LtItemRaw, type LtSetRaw } from "../../lib/ap-generation/englit-gates";
 import { LT_FRQ_SCHEMA_VERSION, LT_FRQ_TYPE_BY_TEMPLATE, frqPassageDisplay, frqPassageText, frqReferenceText, frqTaskText, frqViolations, normalizeFrqPayload, type LtFrqPayload, type LtSample } from "../../lib/ap-generation/englit-frq";
 import { LT_WORKS_LIST, ltTopicFor } from "../../lib/ap-generation/subjects/englit";
 import { countedLines } from "../../lib/ap-exam/passage-lines";
@@ -103,14 +103,14 @@ function specsOf(): P.SetSpec[] {
 type Row = { spec: P.SetSpec; set: LtSetRaw | null; setViolations: string[]; items: (LtItemRaw & { key_index: number; det: string[]; rebalanced?: boolean })[] };
 async function genStage() {
   const specs = specsOf(); wj("plan.json", { specs, summary: planSummary(specs) });
-  const reqs = specs.map((s) => mk(`g-${s.id}`, cfg.genModels?.[s.group] ?? cfg.models.gen, s.form === "poem" ? P.GEN_POEM_SYSTEM : P.GEN_PROSE_SYSTEM(s.form), P.setTool, P.genUser(s), 24000, Boolean(cfg.genForce), cfg.genEffort ?? cfg.effort));
+  const reqs = specs.map((s) => mk(`g-${s.id}`, cfg.genModels?.[s.group] ?? cfg.models.gen, s.form === "poem" ? P.GEN_POEM_SYSTEM : P.GEN_PROSE_SYSTEM(s.form), P.setTool, P.genUser(s), 32000, false, cfg.genEffort ?? cfg.effort));
   const out = await call("gen", reqs, estimate(cfg.models.gen, reqs.length, 3200, 10000)); wj("gen.json", Object.fromEntries([...out.entries()]));
 }
 const sameSkills = (spec: P.SetSpec, items: LtItemRaw[]) => [...spec.skills].sort().join() === items.map((i) => i.skill).sort().join();
 function checkStage() {
   const specs = rj<{ specs: P.SetSpec[] }>("plan.json", { specs: [] }).specs; const gen = rj<Record<string, Json | null>>("gen.json", {}); const prior = corpus(); const same: CorpusDoc[] = []; const rows: Row[] = [];
   for (const spec of specs) {
-    const set = parseSet(spec, gen[`g-${spec.id}`] as Json); if (!set) { rows.push({ spec, set: null, setViolations: ["no_tool_output_or_unparseable"], items: [] }); continue; }
+    const parsed = parseSet(spec, gen[`g-${spec.id}`] as Json); const cd = parsed ? cleanDevices(parsed) : null; const set = cd ? cd.set : null; if (!set) { rows.push({ spec, set: null, setViolations: ["no_tool_output_or_unparseable"], items: [] }); continue; }
     const sv = [...setViolations(set), ...similarityViolations(passagePlain(set), [...prior, ...same])]; same.push({ id: `${cfg.run}:${spec.id}`, text: passagePlain(set) });
     if (set.items.length !== spec.skills.length) sv.push(`item_count_${set.items.length}_not_${spec.skills.length}`);
     const items = set.items.map((it) => ({ ...it, key_index: it.options.findIndex((o) => o.is_key), det: itemViolations(set, it), cue: lengthCueRatio(it) }));
@@ -194,7 +194,7 @@ function evalRow(r: Row) {
   const reviewOut = rv[`p-${r.spec.id}`]; const reviewBad = reviewOut ? Boolean(reviewOut.resembles_known_text) || Boolean(reviewOut.real_world_error) || !reviewOut.ok : true;
   return r.items.map((it, i) => {
     const v = (votes[r.spec.id]?.[i] ?? []).filter(Boolean) as SolverVote[]; const a = adv[r.spec.id]?.[i] ?? null; const j = jd[r.spec.id]?.[i] ?? null;
-    const kc = keyConfidence({ keyIndex: it.key_index, votes: v.length === cfg.models.solvers.length ? v : [], adversary: a ? { defensibility: a.defensibility, alt_index: a.alt_index } : null, judge: j ? { verdict: j.verdict } : null, detViolations: [...it.det, ...(a?.key_flaw ? ["adversary_key_flaw"] : []), ...(a?.stem_issue ? ["adversary_stem_issue"] : [])], minScore: cfg.minKeyConfidence });
+    const kc = keyConfidence({ keyIndex: it.key_index, votes: v.length === cfg.models.solvers.length ? v : [], adversary: a ? { defensibility: a.defensibility, alt_index: a.alt_index } : null, judge: j ? { verdict: j.verdict } : null, detViolations: [...it.det] /* adversary key_flaw·stem_issue 는 설명 문구 지적이 대부분이라 제외하지 않고 review_notes 로 남긴다(제외는 strong·심판) */, minScore: cfg.minKeyConfidence });
     return { it, i, kc, a, j, votes: v, reviewBad, reviewOut, pass: kc.pass && setAlive(r) && !reviewBad };
   });
 }
@@ -230,7 +230,7 @@ function finalizeStage() {
     const set = r.set; const keptSorted = kept.slice().sort((a, b) => a.i - b.i);
     const items = keptSorted.map((e, n) => { const res = resolveItem(set, e.it); const opts = res.options.map((o) => ({ text: o.text, why: o.why, value: null, label: o.label })); const pv = panel[r.spec.id]?.[e.i] ?? null;
       return { archetype: `lt_${r.spec.group}_${e.it.skill.replace(".", "")}`, topic: topicFor(e.it.skill, n), skill: e.it.skill, cognitive: e.it.cognitive, stem: res.stem, options: opts, key_index: e.it.key_index, explanation_en: explanationOf({ options: opts, key_index: e.it.key_index }), est_seconds: e.it.est_seconds ?? 70,
-        evidence_quotes: e.it.evidence_quotes, ref_lines: res.refLines, devices_used: e.it.devices_used ?? [], key_confidence: { score: e.kc.score, band: e.kc.band, solver_agreement: e.kc.solverAgreement, adversary: e.a?.defensibility ?? null, judge: e.j?.verdict ?? null, panel: pv ? { model: cfg.models.panel, choice: pv.choice, agree: pv.agree } : null, solver_votes: e.votes.map((x) => x && { choice: x.choice, confidence: x.confidence }) } }; });
+        evidence_quotes: e.it.evidence_quotes, ref_lines: res.refLines, devices_used: e.it.devices_used ?? [], review_notes: { key_flaw: e.a?.key_flaw ?? null, stem_issue: e.a?.stem_issue ?? null }, key_confidence: { score: e.kc.score, band: e.kc.band, solver_agreement: e.kc.solverAgreement, adversary: e.a?.defensibility ?? null, judge: e.j?.verdict ?? null, panel: pv ? { model: cfg.models.panel, choice: pv.choice, agree: pv.agree } : null, solver_votes: e.votes.map((x) => x && { choice: x.choice, confidence: x.confidence }) } }; });
     const diff = items.map((it) => ({ label: it.cognitive === "identify" && it.key_confidence.adversary === "none" ? "basic_learning" : it.cognitive === "evaluate" && it.key_confidence.adversary === "weak" ? "advanced_supplement" : "exam_prep" }));
     const first = items[0];
     cands.push({ ...base, candidateKey: `ap_english_literature-${r.spec.id}-k0`, keywordCode: first.topic, unitCode: (first.topic.match(/^U(\d)/) ?? [])[1] ?? "", skillPrimary: first.skill, structure: "shared_stimulus_set", archetype, reviewState: "auto_passed", rejectionReason: null, difficultyProvisional: "exam_prep", difficulty: diff,
