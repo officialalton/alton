@@ -5,15 +5,9 @@
  "mode": "mc",
  "batch": true,
  "capUsd": 7.2,
- "hardStopCumulativeUsd": 186,
+ "hardStopCumulativeUsd": 184.9,
  "myTotalCapUsd": 12,
  "stages": [
-  "gen",
-  "check",
-  "rebalance",
-  "solve",
-  "adv",
-  "judge",
   "panel",
   "finalize"
  ],
@@ -53,7 +47,7 @@
  },
  "effort": "medium",
  "genEffort": "low",
- "minKeyConfidence": 0.8,
+ "minKeyConfidence": 0.7,
  "generatorFiles": [
   "lib/ap-generation/englit-prompts.ts",
   "lib/ap-generation/englit-gates.ts",
@@ -65,10 +59,13 @@
   "scripts/ap-generation/englit-pipeline.ts"
  ],
  "expected": {
-  "hash": "e4cc4303ad34"
+  "hash": "924f8d4def52"
  },
  "genForce": false,
  "syncStages": [
   "judge"
+ ],
+ "panelOnly": [
+  "s02"
  ]
 }

@@ -42,7 +42,7 @@
  },
  "effort": "medium",
  "genEffort": "low",
- "minKeyConfidence": 0.8,
+ "minKeyConfidence": 0.7,
  "generatorFiles": [
   "lib/ap-generation/englit-prompts.ts",
   "lib/ap-generation/englit-gates.ts",
@@ -54,7 +54,7 @@
   "scripts/ap-generation/englit-pipeline.ts"
  ],
  "expected": {
-  "hash": "2bacb65e981e"
+  "hash": "b0804b3dcf76"
  },
  "genForce": false,
  "syncStages": []

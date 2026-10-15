@@ -22,7 +22,7 @@ export type LtCfg = {
   plan?: { poetry?: { sets: number; seed: number; startIndex?: number }; short?: { sets: number; seed: number; startIndex?: number }; longer?: { sets: number; seed: number; startIndex?: number; dramaSets?: number } };
   frqPlan?: { id: string; type: "poetry_analysis" | "prose_analysis" | "literary_argument"; seedText: string; era: string; seed: number }[];
   models: { gen: string; solvers: string[]; adversary: string; judge: string; review: string; panel: string; rebalance: string; sampleHigh: string; sampleLow: string; graders: string[] };
-  effort: string; genForce?: boolean; genEffort?: string; gradeEffort?: string; sampleCands?: number; genModels?: Partial<Record<"poetry" | "short" | "longer", string>>; corpusExclude?: string[]; minKeyConfidence: number; generatorFiles: string[]; expected: { hash: string };
+  effort: string; /** 패널을 이 묶음 id 에만 적용(예산 절약). */ panelOnly?: string[]; genForce?: boolean; genEffort?: string; gradeEffort?: string; sampleCands?: number; genModels?: Partial<Record<"poetry" | "short" | "longer", string>>; corpusExclude?: string[]; minKeyConfidence: number; generatorFiles: string[]; expected: { hash: string };
 };
 const arg = (n: string, d = "") => { const i = process.argv.indexOf(n); return i > 0 ? process.argv[i + 1] : d; };
 const has = (n: string) => process.argv.includes(n);
@@ -199,11 +199,11 @@ function evalRow(r: Row) {
   });
 }
 async function panelStage() {
-  const rows = rj<Row[]>("sets.json", []); const reqs: BatchReq[] = []; const meta: { id: string; setId: string; idx: number[] }[] = [];
-  for (const r of rows) { if (!r.set) continue; const idx = evalRow(r).filter((e) => e.pass).map((e) => e.i); if (idx.length < 3) continue; const id = `m-${r.spec.id}-${idx.length}`; reqs.push(mk(id, cfg.models.panel, P.PANEL_SYSTEM, P.SOLVER_TOOL, P.solverUser(ltForModels(r.set), shownItems(r, idx, 3)), 6000)); meta.push({ id, setId: r.spec.id, idx }); }
-  const out = await call("panel", reqs, estimate(cfg.models.panel, reqs.length, 3400, 3000)); const res: Record<string, (Json | null)[]> = {}; const p = perm(4, 3); let agree = 0, tot = 0;
+  const rows = rj<Row[]>("sets.json", []); const prev = rj<Record<string, (Json | null)[]>>("panel.json", {}); const reqs: BatchReq[] = []; const meta: { id: string; setId: string; idx: number[] }[] = [];
+  for (const r of rows) { if (!r.set || (cfg.panelOnly && !cfg.panelOnly.includes(r.spec.id))) continue; const idx = evalRow(r).filter((e) => e.pass && !prev[r.spec.id]?.[e.i]).map((e) => e.i); if (!idx.length) continue; const id = `m-${r.spec.id}-${idx.join("_")}`; reqs.push(mk(id, cfg.models.panel, P.PANEL_SYSTEM, P.SOLVER_TOOL, P.solverUser(ltForModels(r.set), shownItems(r, idx, 3)), 6000)); meta.push({ id, setId: r.spec.id, idx }); } // 이미 패널 결과가 있는 문항은 다시 묻지 않는다
+  const out = await call("panel", reqs, estimate(cfg.models.panel, reqs.length, 3400, 3000)); const res: Record<string, (Json | null)[]> = prev; const p = perm(4, 3); let agree = 0, tot = 0;
   for (const m of meta) { const row = rows.find((r) => r.spec.id === m.setId)!; const arr = (res[m.setId] ??= row.items.map(() => null)); for (const a of (out.get(m.id)?.answers ?? []) as Json[]) { const ii = m.idx[Number(a.question) - 1]; if (ii === undefined) continue; const sc = Number(a.choice); const choice = Number.isInteger(sc) && sc >= 0 && sc < 4 ? p[sc] : null; const also = a.also_defensible === null || a.also_defensible === undefined ? null : p[Number(a.also_defensible)]; arr[ii] = { choice, confidence: String(a.confidence ?? ""), also_defensible: also ?? null, agree: choice === row.items[ii].key_index }; tot++; if (choice === row.items[ii].key_index) agree++; } }
-  wj("panel.json", res); console.log(`[panel] ${cfg.models.panel} 일치 ${agree}/${tot}`);
+  wj("panel.json", res); console.log(`[panel] ${cfg.models.panel} 새로 묻은 문항 일치 ${agree}/${tot}`);
 }
 
 // ── finalize(MC) ───────────────────────────────────────────────────
@@ -224,6 +224,8 @@ function finalizeStage() {
     }
     // 세트 안 길이 단서 비율 ≤ 40%: 넘으면 단서 비율이 큰 문항부터 뺀다.
     const cueOf = (e: (typeof ev)[number]) => lengthCueRatio(e.it); while (kept.length >= 6 && kept.filter((e) => cueOf(e) >= LENGTH_CUE_RATIO).length / kept.length > 0.4) { const worst = kept.reduce((a, b) => (cueOf(b) > cueOf(a) ? b : a)); kept.splice(kept.indexOf(worst), 1); excluded.push({ index: worst.i, skill: worst.it.skill, reasons: ["length_cue_trim"] }); }
+    // 배경(범주 2) 문항은 시험 전체에서 3–6%(55문항 중 2–4개)뿐이라 묶음마다 1개로 제한한다(초과분은 키 신뢰도가 낮은 것부터 뺀다) — 재고 조합이 범주 상한에 막히지 않게.
+    while (kept.filter((e) => e.it.skill.startsWith("2.")).length > 1) { const c2 = kept.filter((e) => e.it.skill.startsWith("2.")); const worst = c2.reduce((a, b) => (b.kc.score < a.kc.score ? b : a)); kept.splice(kept.indexOf(worst), 1); excluded.push({ index: worst.i, skill: worst.it.skill, reasons: ["setting_cap_1_per_set"] }); }
     // 묶음 크기 상한(공식 8–13, 장편·희곡은 장르 비중상 8–10): 넘으면 키 신뢰도가 낮은(같으면 길이 단서가 큰) 문항부터 뺀다.
     const capN = r.spec.group === "longer" ? 10 : 13; while (kept.length > capN) { const worst = kept.reduce((a, b) => (b.kc.score < a.kc.score || (b.kc.score === a.kc.score && lengthCueRatio(b.it) > lengthCueRatio(a.it)) ? b : a)); kept.splice(kept.indexOf(worst), 1); excluded.push({ index: worst.i, skill: worst.it.skill, reasons: ["set_size_cap"] }); }
     const base = { cellId: `ap_english_literature-${r.spec.id}`, apSubjectCode: "ap_english_literature", kind: "mc" as const, calculator: "na", reserve: false, wording: "generated" };

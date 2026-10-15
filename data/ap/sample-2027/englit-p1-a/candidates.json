@@ -7,9 +7,9 @@
   "reserve": false,
   "wording": "generated",
   "candidateKey": "ap_english_literature-p01-k0",
-  "keywordCode": "U4.3",
-  "unitCode": "4",
-  "skillPrimary": "4.C",
+  "keywordCode": "U5.3",
+  "unitCode": "5",
+  "skillPrimary": "6.D",
   "structure": "shared_stimulus_set",
   "archetype": "lt_poetry_p01",
   "reviewState": "auto_passed",
@@ -20,16 +20,31 @@
     "label": "exam_prep"
    },
    {
+    "label": "exam_prep"
+   },
+   {
+    "label": "exam_prep"
+   },
+   {
     "label": "basic_learning"
    },
    {
     "label": "advanced_supplement"
    },
    {
+    "label": "exam_prep"
+   },
+   {
+    "label": "exam_prep"
+   },
+   {
     "label": "basic_learning"
    },
    {
     "label": "exam_prep"
+   },
+   {
+    "label": "advanced_supplement"
    },
    {
     "label": "exam_prep"
@@ -43,8 +58,8 @@
   ],
   "payload": {
    "archetype": "lt_poetry_p01",
-   "topic": "U4.3",
-   "skill": "4.C",
+   "topic": "U5.3",
+   "skill": "6.D",
    "calculator": "na",
    "set_intro": "ALTON original passage\nTo the House on Tenney Street, Before the Closing\nby Edith Marrow Kell\nIn this poem, the speaker addresses the house where she grew up on the day before it is sold.\n\n```passage\nThe agent calls you charming. She means old.\nShe means the stair that answers every foot,\nthe cellar where the furnace, like a bishop,\nsits in its rusted robes and will not die.\n\nI have taped the boxes, I have rolled the rugs\nand found beneath them the pale squares of floor\nthe sun has never touched, as clean as the day\nmy father nailed the boards down in thirty-one.\n\nYou were a good house. Everyone said so.\nGood plaster, good joists, a good tight roof\nthat kept the weather out and kept us in,\nand walls so thick no neighbor ever heard\n\nwhat you heard: the chair against the door,\nmy mother's voice going small, then smaller,\nthe radio turned up to cover it.\nYou held all that as a jar holds water.\n\nBut I was the one who turned the radio up.\nI was eleven, and I knew the dial.\nI knew which station had the loudest band.\nSo don't think I've come here to accuse you.\n\nTomorrow a couple up from Marlowe, with a baby,\nwill stand in your front room and praise the quiet.\nThey'll mean it as a compliment. I lock you,\nslide the key beneath the mat, and walk\ndown to the car without once turning round.\nLot's wife looked back. I was raised better than that.\n```",
    "lt_passage": {
@@ -211,8 +226,161 @@
    "era": "mid-20th-century manner",
    "items": [
     {
+     "archetype": "lt_poetry_6D",
+     "topic": "U5.3",
+     "skill": "6.D",
+     "cognitive": "explain",
+     "stem": "The allusion to Lot's wife in the final line (line 26) primarily suggests that the speaker",
+     "options": [
+      {
+       "text": "regrets leaving the house and expects to be punished for lingering too long beside it",
+       "why": "She walks to the car 'without once turning round'. She does not linger, and she does not express any fear of punishment.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "dresses up as good upbringing the habit of not facing the past that the poem exposes",
+       "why": "Lot's wife was punished for looking back. The speaker presents her own refusal to turn around as being 'raised better', but the poem has shown that this upbringing taught her to cover and avoid harm.",
+       "value": null,
+       "label": "correct"
+      },
+      {
+       "text": "believes that her family's history is a sin for which the whole town deserves destruction",
+       "why": "This stretches the biblical story into a judgment on the town. Nowhere does the poem condemn the town or call for its destruction.",
+       "value": null,
+       "label": "too_broad"
+      },
+      {
+       "text": "is proud of a religious upbringing that has given her the strength to start a new life",
+       "why": "This takes the boast at face value and misses its irony. The poem gives no sign of religious pride or of a hopeful new life.",
+       "value": null,
+       "label": "wrong_tone"
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is \"dresses up as good upbringing the habit of not facing the past that the poem exposes\". Lot's wife was punished for looking back. The speaker presents her own refusal to turn around as being 'raised better', but the poem has shown that this upbringing taught her to cover and avoid harm.\n\"regrets leaving the house and expects to be punished for lingering too long beside it\" is incorrect: She walks to the car 'without once turning round'. She does not linger, and she does not express any fear of punishment.\n\"believes that her family's history is a sin for which the whole town deserves destruction\" is incorrect: This stretches the biblical story into a judgment on the town. Nowhere does the poem condemn the town or call for its destruction.\n\"is proud of a religious upbringing that has given her the strength to start a new life\" is incorrect: This takes the boast at face value and misses its irony. The poem gives no sign of religious pride or of a hopeful new life.",
+     "est_seconds": 75,
+     "evidence_quotes": [
+      "Lot's wife looked back. I was raised better than that.",
+      "down to the car without once turning round."
+     ],
+     "ref_lines": {
+      "r1": {
+       "from": 26,
+       "to": 26
+      }
+     },
+     "devices_used": [
+      "allusion",
+      "irony"
+     ],
+     "review_notes": {
+      "key_flaw": null,
+      "stem_issue": "This item overlaps heavily with Q11. Both test the same irony in the final line, so a student who sees it once gets both points."
+     },
+     "key_confidence": {
+      "score": 0.788,
+      "band": "low",
+      "solver_agreement": 1,
+      "adversary": "weak",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 1,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 1,
+        "confidence": "likely"
+       },
+       {
+        "choice": 1,
+        "confidence": "likely"
+       }
+      ]
+     }
+    },
+    {
+     "archetype": "lt_poetry_2A",
+     "topic": "U3.2",
+     "skill": "2.A",
+     "cognitive": "identify",
+     "stem": "In the first stanza, the details of the stair (line 2) and the furnace chiefly establish the house as",
+     "options": [
+      {
+       "text": "sacred to the speaker, a place of worship she links to her religious family's past",
+       "why": "This reads the bishop simile literally. The comparison describes the furnace's robed, stubborn bulk, not religious worship.",
+       "value": null,
+       "label": "literal_for_figurative"
+      },
+      {
+       "text": "fashionable and well kept, which is why the agent can honestly call it so charming",
+       "why": "The speaker undercuts the agent at once: 'She means old.' The details point to age, not fashion.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "aged and audible, with fixtures that respond to and outlast the people living there",
+       "why": "The agent's 'charming' is translated as 'old'. The stair 'answers every foot', and the furnace 'will not die', so the house is noisy, responsive, and longer-lived than its occupants.",
+       "value": null,
+       "label": "correct"
+      },
+      {
+       "text": "dangerous and neglected, with a furnace that the speaker fears will soon break down",
+       "why": "'Will not die' means the furnace keeps going stubbornly. It does not mean the furnace is about to fail.",
+       "value": null,
+       "label": "lexical_trap"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is \"aged and audible, with fixtures that respond to and outlast the people living there\". The agent's 'charming' is translated as 'old'. The stair 'answers every foot', and the furnace 'will not die', so the house is noisy, responsive, and longer-lived than its occupants.\n\"sacred to the speaker, a place of worship she links to her religious family's past\" is incorrect: This reads the bishop simile literally. The comparison describes the furnace's robed, stubborn bulk, not religious worship.\n\"fashionable and well kept, which is why the agent can honestly call it so charming\" is incorrect: The speaker undercuts the agent at once: 'She means old.' The details point to age, not fashion.\n\"dangerous and neglected, with a furnace that the speaker fears will soon break down\" is incorrect: 'Will not die' means the furnace keeps going stubbornly. It does not mean the furnace is about to fail.",
+     "est_seconds": 60,
+     "evidence_quotes": [
+      "She means the stair that answers every foot,",
+      "sits in its rusted robes and will not die."
+     ],
+     "ref_lines": {
+      "r1": {
+       "from": 2,
+       "to": 2
+      }
+     },
+     "devices_used": [
+      "personification",
+      "simile",
+      "caesura"
+     ],
+     "review_notes": {
+      "key_flaw": "'Outlast the people living there' goes slightly beyond the text. 'Will not die' shows the furnace is durable, but the poem never says it outlives anyone. The claim is defensible but stretched.",
+      "stem_issue": null
+     },
+     "key_confidence": {
+      "score": 0.788,
+      "band": "low",
+      "solver_agreement": 1,
+      "adversary": "weak",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 2,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 2,
+        "confidence": "likely"
+       },
+       {
+        "choice": 2,
+        "confidence": "likely"
+       }
+      ]
+     }
+    },
+    {
      "archetype": "lt_poetry_4C",
-     "topic": "U4.3",
+     "topic": "U9.2",
      "skill": "4.C",
      "cognitive": "explain",
      "stem": "The repetition of \"good\" in the third stanza (line 10) most directly conveys the speaker's",
@@ -430,8 +598,158 @@
      }
     },
     {
-     "archetype": "lt_poetry_5B",
+     "archetype": "lt_poetry_4B",
+     "topic": "U9.2",
+     "skill": "4.B",
+     "cognitive": "explain",
+     "stem": "The speaker's first-person account of the events in the fourth stanza (line 13) affects the reader's understanding chiefly by",
+     "options": [
+      {
+       "text": "revealing the mother's private thoughts about her marriage directly through her own words",
+       "why": "The mother never speaks in the poem. Only her voice 'going small' is reported.",
+       "value": null,
+       "label": "unsupported"
+      },
+      {
+       "text": "giving a complete and objective record of the father's actions from an outside witness",
+       "why": "The account is partial and filtered through a child's ears. The father's actions are never described directly.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "limiting the violence to what a child could hear, so its full extent stays implied",
+       "why": "Everything is given as sound or as a sign of it: a chair against the door, a voice going small, a radio. The reader, like the child, never sees what happened.",
+       "value": null,
+       "label": "correct"
+      },
+      {
+       "text": "shifting the focus to the house's own point of view, since the house is the one that heard",
+       "why": "The speaker addresses the house as 'you', but the account stays hers. The house never narrates.",
+       "value": null,
+       "label": "misread_speaker"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is \"limiting the violence to what a child could hear, so its full extent stays implied\". Everything is given as sound or as a sign of it: a chair against the door, a voice going small, a radio. The reader, like the child, never sees what happened.\n\"revealing the mother's private thoughts about her marriage directly through her own words\" is incorrect: The mother never speaks in the poem. Only her voice 'going small' is reported.\n\"giving a complete and objective record of the father's actions from an outside witness\" is incorrect: The account is partial and filtered through a child's ears. The father's actions are never described directly.\n\"shifting the focus to the house's own point of view, since the house is the one that heard\" is incorrect: The speaker addresses the house as 'you', but the account stays hers. The house never narrates.",
+     "est_seconds": 70,
+     "evidence_quotes": [
+      "what you heard: the chair against the door,",
+      "my mother's voice going small, then smaller,"
+     ],
+     "ref_lines": {
+      "r1": {
+       "from": 13,
+       "to": 13
+      }
+     },
+     "devices_used": [
+      "imagery"
+     ],
+     "review_notes": {
+      "key_flaw": null,
+      "stem_issue": "Calling it 'the speaker's first-person account of the events in the fourth stanza' sits a little awkwardly with the stanza's own framing, which presents the events as what the house heard. The stem also points to line 13 when the account runs through line 15."
+     },
+     "key_confidence": {
+      "score": 0.788,
+      "band": "low",
+      "solver_agreement": 1,
+      "adversary": "weak",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 2,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 2,
+        "confidence": "likely"
+       },
+       {
+        "choice": 2,
+        "confidence": "likely"
+       }
+      ]
+     }
+    },
+    {
+     "archetype": "lt_poetry_6A",
      "topic": "U2.3",
+     "skill": "6.A",
+     "cognitive": "explain",
+     "stem": "The simile \"You held all that as a jar holds water\" (line 16) presents the house as",
+     "options": [
+      {
+       "text": "a source of renewal that nourished and sustained the family through its hardest years",
+       "why": "Water can suggest nourishment, but here what the house held is violence. The comparison is about containment, not renewal.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "a fragile object that was always close to cracking under the strain of what it held",
+       "why": "The poem stresses the house's solidity ('walls so thick'). Nothing suggests it was about to break.",
+       "value": null,
+       "label": "unsupported"
+      },
+      {
+       "text": "a deliberate protector that chose to hide the family's secret in order to spare the child",
+       "why": "The house did contain the secret, but a jar does not choose anything. The simile stresses passive holding, not intention.",
+       "value": null,
+       "label": "partially_right"
+      },
+      {
+       "text": "a vessel that contained the family's trouble wholly, neither judging nor spilling it",
+       "why": "A jar holds whatever is poured into it, completely and without choice. The house kept everything inside its walls, which is why no neighbor heard.",
+       "value": null,
+       "label": "correct"
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is \"a vessel that contained the family's trouble wholly, neither judging nor spilling it\". A jar holds whatever is poured into it, completely and without choice. The house kept everything inside its walls, which is why no neighbor heard.\n\"a source of renewal that nourished and sustained the family through its hardest years\" is incorrect: Water can suggest nourishment, but here what the house held is violence. The comparison is about containment, not renewal.\n\"a fragile object that was always close to cracking under the strain of what it held\" is incorrect: The poem stresses the house's solidity ('walls so thick'). Nothing suggests it was about to break.\n\"a deliberate protector that chose to hide the family's secret in order to spare the child\" is incorrect: The house did contain the secret, but a jar does not choose anything. The simile stresses passive holding, not intention.",
+     "est_seconds": 60,
+     "evidence_quotes": [
+      "You held all that as a jar holds water.",
+      "and walls so thick no neighbor ever heard"
+     ],
+     "ref_lines": {
+      "r1": {
+       "from": 16,
+       "to": 16
+      }
+     },
+     "devices_used": [
+      "simile"
+     ],
+     "review_notes": {
+      "key_flaw": null,
+      "stem_issue": null
+     },
+     "key_confidence": {
+      "score": 0.788,
+      "band": "low",
+      "solver_agreement": 1,
+      "adversary": "weak",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 3,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 3,
+        "confidence": "likely"
+       },
+       {
+        "choice": 3,
+        "confidence": "likely"
+       }
+      ]
+     }
+    },
+    {
+     "archetype": "lt_poetry_5B",
+     "topic": "U5.1",
      "skill": "5.B",
      "cognitive": "identify",
      "stem": "In context, the phrase \"going small, then smaller\" (line 14) primarily conveys",
@@ -580,6 +898,77 @@
      }
     },
     {
+     "archetype": "lt_poetry_3C",
+     "topic": "U2.2",
+     "skill": "3.C",
+     "cognitive": "evaluate",
+     "stem": "Which of the following best describes the function of the final line of the poem?",
+     "options": [
+      {
+       "text": "It reveals that the speaker's parents were strict about religion as well as about silence.",
+       "why": "This reads 'raised better' as a literal report of religious training. The line is ironic, not a fact about the family's faith.",
+       "value": null,
+       "label": "literal_for_figurative"
+      },
+      {
+       "text": "It resolves the poem's tension by showing that the speaker has fully healed and can move on.",
+       "why": "The irony of 'raised better' leaves the tension unresolved. Her leaving looks like avoidance, not healing.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "It recasts the speaker's composed departure as a learned evasion, linking it to the radio.",
+       "why": "Not turning around is called being 'raised better'. Yet what she was raised in was covering harm with noise, so her calm exit repeats the habit she confessed in the fifth stanza.",
+       "value": null,
+       "label": "correct"
+      },
+      {
+       "text": "It introduces a religious theme that the earlier stanzas of the poem have not prepared for.",
+       "why": "The allusion is not a new theme. It sums up the poem's concern with looking at, or away from, the past.",
+       "value": null,
+       "label": "wrong_function"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is \"It recasts the speaker's composed departure as a learned evasion, linking it to the radio.\". Not turning around is called being 'raised better'. Yet what she was raised in was covering harm with noise, so her calm exit repeats the habit she confessed in the fifth stanza.\n\"It reveals that the speaker's parents were strict about religion as well as about silence.\" is incorrect: This reads 'raised better' as a literal report of religious training. The line is ironic, not a fact about the family's faith.\n\"It resolves the poem's tension by showing that the speaker has fully healed and can move on.\" is incorrect: The irony of 'raised better' leaves the tension unresolved. Her leaving looks like avoidance, not healing.\n\"It introduces a religious theme that the earlier stanzas of the poem have not prepared for.\" is incorrect: The allusion is not a new theme. It sums up the poem's concern with looking at, or away from, the past.",
+     "est_seconds": 75,
+     "evidence_quotes": [
+      "Lot's wife looked back. I was raised better than that.",
+      "I was the one who turned the radio up"
+     ],
+     "ref_lines": {},
+     "devices_used": [
+      "allusion",
+      "irony"
+     ],
+     "review_notes": {
+      "key_flaw": null,
+      "stem_issue": "This item overlaps with Q2, which tests the same idea."
+     },
+     "key_confidence": {
+      "score": 0.788,
+      "band": "low",
+      "solver_agreement": 1,
+      "adversary": "weak",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 2,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 2,
+        "confidence": "likely"
+       },
+       {
+        "choice": 2,
+        "confidence": "likely"
+       }
+      ]
+     }
+    },
+    {
      "archetype": "lt_poetry_5C",
      "topic": "U8.2",
      "skill": "5.C",
@@ -661,7 +1050,7 @@
     },
     {
      "archetype": "lt_poetry_3D",
-     "topic": "U2.2",
+     "topic": "U8.1",
      "skill": "3.D",
      "cognitive": "explain",
      "stem": "The contrast between the buyers' praise of \"the quiet\" (line 22) and the earlier image of walls \"so thick no neighbor ever heard\" (line 12) primarily serves to",
@@ -815,32 +1204,9 @@
     {
      "index": 0,
      "skill": "3.B",
-     "reasons": []
-    },
-    {
-     "index": 1,
-     "skill": "6.D",
-     "reasons": []
-    },
-    {
-     "index": 2,
-     "skill": "2.A",
-     "reasons": []
-    },
-    {
-     "index": 6,
-     "skill": "4.B",
-     "reasons": []
-    },
-    {
-     "index": 7,
-     "skill": "6.A",
-     "reasons": []
-    },
-    {
-     "index": 10,
-     "skill": "3.C",
-     "reasons": []
+     "reasons": [
+      "set_size_cap"
+     ]
     }
    ]
   }
@@ -1843,12 +2209,16 @@
     {
      "index": 1,
      "skill": "4.C",
-     "reasons": []
+     "reasons": [
+      "panel_missing"
+     ]
     },
     {
      "index": 2,
      "skill": "3.B",
-     "reasons": []
+     "reasons": [
+      "panel_missing"
+     ]
     },
     {
      "index": 6,
@@ -1860,7 +2230,9 @@
     {
      "index": 10,
      "skill": "3.D",
-     "reasons": []
+     "reasons": [
+      "panel_missing"
+     ]
     }
    ]
   }
@@ -4122,7 +4494,9 @@
     {
      "index": 1,
      "skill": "7.A",
-     "reasons": []
+     "reasons": [
+      "panel_missing"
+     ]
     }
    ]
   }
@@ -6420,7 +6794,9 @@
     {
      "index": 2,
      "skill": "2.B",
-     "reasons": []
+     "reasons": [
+      "panel_missing"
+     ]
     },
     {
      "index": 4,
@@ -6485,6 +6861,12 @@
    },
    {
     "label": "advanced_supplement"
+   },
+   {
+    "label": "exam_prep"
+   },
+   {
+    "label": "exam_prep"
    },
    {
     "label": "exam_prep"
@@ -7231,6 +7613,152 @@
      }
     },
     {
+     "archetype": "lt_short_4C",
+     "topic": "U4.3",
+     "skill": "4.C",
+     "cognitive": "explain",
+     "stem": "The narrator's remark that he wrote his judgment of Harrowby \"in a hand I was proud of\" (lines 42-43) conveys a tone of",
+     "options": [
+      {
+       "text": "resentful anger at being deceived by Harrowby",
+       "why": "The narrator shows no bitterness, and Harrowby never lied to him.",
+       "value": null,
+       "label": "wrong_tone"
+      },
+      {
+       "text": "gentle self-mockery at his own youthful certainty",
+       "why": "The older narrator smiles at a boy who was prouder of his handwriting than of his judgment, as 'I am afraid with some heat' also shows.",
+       "value": null,
+       "label": "correct"
+      },
+      {
+       "text": "a plain note on his skill as a careful clerk",
+       "why": "It does mention handwriting, but the retrospective context makes the remark ironic, not neutral.",
+       "value": null,
+       "label": "partially_right"
+      },
+      {
+       "text": "steady pride in a verdict he holds to this day",
+       "why": "The ending shows he has since abandoned that verdict about Harrowby.",
+       "value": null,
+       "label": "reversal"
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is \"gentle self-mockery at his own youthful certainty\". The older narrator smiles at a boy who was prouder of his handwriting than of his judgment, as 'I am afraid with some heat' also shows.\n\"resentful anger at being deceived by Harrowby\" is incorrect: The narrator shows no bitterness, and Harrowby never lied to him.\n\"a plain note on his skill as a careful clerk\" is incorrect: It does mention handwriting, but the retrospective context makes the remark ironic, not neutral.\n\"steady pride in a verdict he holds to this day\" is incorrect: The ending shows he has since abandoned that verdict about Harrowby.",
+     "est_seconds": 60,
+     "evidence_quotes": [
+      "in a hand I was proud of",
+      "I am afraid with some heat"
+     ],
+     "ref_lines": {
+      "r1": {
+       "from": 42,
+       "to": 43
+      }
+     },
+     "devices_used": [
+      "irony",
+      "diction"
+     ],
+     "review_notes": {
+      "key_flaw": null,
+      "stem_issue": null
+     },
+     "key_confidence": {
+      "score": 0.788,
+      "band": "low",
+      "solver_agreement": 1,
+      "adversary": "weak",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 1,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 1,
+        "confidence": "likely"
+       },
+       {
+        "choice": 1,
+        "confidence": "likely"
+       }
+      ]
+     }
+    },
+    {
+     "archetype": "lt_short_5C",
+     "topic": "U7.3",
+     "skill": "5.C",
+     "cognitive": "explain",
+     "stem": "In the final paragraph, the brass scale on which the housekeeper weighs the codling functions as a symbol that",
+     "options": [
+      {
+       "text": "foretells the prosperity Venn will eventually gain from his fishing",
+       "why": "The catch is tiny ('three small codling'); nothing suggests Venn will grow rich.",
+       "value": null,
+       "label": "unsupported"
+      },
+      {
+       "text": "hints that the housekeeper is shortchanging the boy who brings the fish",
+       "why": "She pays four times the quay price, so no one is being cheated.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "turns exact measurement into a cover for a generosity beyond measure",
+       "why": "The scale weighs the fish, yet the price paid ignores its reading. Measuring becomes a disguise for kindness.",
+       "value": null,
+       "label": "correct"
+      },
+      {
+       "text": "stands for the Trust's rigid fairness in its dealings with fishermen",
+       "why": "The scale belongs to Harrowby's private kitchen and household, not to the Trust.",
+       "value": null,
+       "label": "wrong_scope"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is \"turns exact measurement into a cover for a generosity beyond measure\". The scale weighs the fish, yet the price paid ignores its reading. Measuring becomes a disguise for kindness.\n\"foretells the prosperity Venn will eventually gain from his fishing\" is incorrect: The catch is tiny ('three small codling'); nothing suggests Venn will grow rich.\n\"hints that the housekeeper is shortchanging the boy who brings the fish\" is incorrect: She pays four times the quay price, so no one is being cheated.\n\"stands for the Trust's rigid fairness in its dealings with fishermen\" is incorrect: The scale belongs to Harrowby's private kitchen and household, not to the Trust.",
+     "est_seconds": 65,
+     "evidence_quotes": [
+      "weighing out three small codling on the brass scale",
+      "four times what they would fetch on the quay"
+     ],
+     "ref_lines": {},
+     "devices_used": [
+      "symbol"
+     ],
+     "review_notes": {
+      "key_flaw": null,
+      "stem_issue": "Calling the scale a 'symbol' is somewhat generous, though it can be defended."
+     },
+     "key_confidence": {
+      "score": 0.788,
+      "band": "low",
+      "solver_agreement": 1,
+      "adversary": "weak",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 2,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 2,
+        "confidence": "likely"
+       },
+       {
+        "choice": 2,
+        "confidence": "likely"
+       }
+      ]
+     }
+    },
+    {
      "archetype": "lt_short_7D",
      "topic": "U7.4",
      "skill": "7.D",
@@ -7394,16 +7922,6 @@
      ]
     },
     {
-     "index": 10,
-     "skill": "4.C",
-     "reasons": []
-    },
-    {
-     "index": 11,
-     "skill": "5.C",
-     "reasons": []
-    },
-    {
      "index": 14,
      "skill": "3.C",
      "reasons": [
@@ -7432,9 +7950,6 @@
   "rejectionReason": null,
   "difficultyProvisional": "exam_prep",
   "difficulty": [
-   {
-    "label": "exam_prep"
-   },
    {
     "label": "exam_prep"
    },
@@ -7750,80 +8265,6 @@
      }
     },
     {
-     "archetype": "lt_short_2C",
-     "topic": "U7.2",
-     "skill": "2.C",
-     "cognitive": "identify",
-     "stem": "Dana's position in the room as described in lines 9-10 primarily conveys",
-     "options": [
-      {
-       "text": "her ease with the hospice after many weeks of visiting her father there every single day",
-       "why": "The coat and her distance from the bed suggest unease, not familiarity, and no daily visits are mentioned.",
-       "value": null,
-       "label": "reversal"
-      },
-      {
-       "text": "her reluctance to settle into a room she seems ready to leave at any moment",
-       "why": "Standing apart with her coat zipped, she has not committed to staying. Later she sits on the bed, which marks the change.",
-       "value": null,
-       "label": "correct"
-      },
-      {
-       "text": "her impatience with the interpreter, whose late arrival through the snow she has resented",
-       "why": "No lateness or resentment of the interpreter is mentioned.",
-       "value": null,
-       "label": "unsupported"
-      },
-      {
-       "text": "her physical discomfort with a room that the hospice has failed to keep properly heated",
-       "why": "She is standing by the radiator, a heat source, so the zipped coat signals guardedness rather than a cold room.",
-       "value": null,
-       "label": "literal_for_figurative"
-      }
-     ],
-     "key_index": 1,
-     "explanation_en": "The correct answer is \"her reluctance to settle into a room she seems ready to leave at any moment\". Standing apart with her coat zipped, she has not committed to staying. Later she sits on the bed, which marks the change.\n\"her ease with the hospice after many weeks of visiting her father there every single day\" is incorrect: The coat and her distance from the bed suggest unease, not familiarity, and no daily visits are mentioned.\n\"her impatience with the interpreter, whose late arrival through the snow she has resented\" is incorrect: No lateness or resentment of the interpreter is mentioned.\n\"her physical discomfort with a room that the hospice has failed to keep properly heated\" is incorrect: She is standing by the radiator, a heat source, so the zipped coat signals guardedness rather than a cold room.",
-     "est_seconds": 50,
-     "evidence_quotes": [
-      "stood by the radiator with her coat still zipped"
-     ],
-     "ref_lines": {
-      "r1": {
-       "from": 9,
-       "to": 10
-      }
-     },
-     "devices_used": [
-      "imagery"
-     ],
-     "review_notes": {
-      "key_flaw": "'Ready to leave at any moment' slightly overreads a zipped coat, though the core idea of not settling in is sound.",
-      "stem_issue": null
-     },
-     "key_confidence": {
-      "score": 0.829,
-      "band": "medium",
-      "solver_agreement": 1,
-      "adversary": "weak",
-      "judge": "key_clearly_better",
-      "panel": {
-       "model": "claude-fable-5-1",
-       "choice": 1,
-       "agree": true
-      },
-      "solver_votes": [
-       {
-        "choice": 1,
-        "confidence": "certain"
-       },
-       {
-        "choice": 1,
-        "confidence": "likely"
-       }
-      ]
-     }
-    },
-    {
      "archetype": "lt_short_4C",
      "topic": "U4.3",
      "skill": "4.C",
@@ -7900,7 +8341,7 @@
     },
     {
      "archetype": "lt_short_4A",
-     "topic": "U4.3",
+     "topic": "U1.3",
      "skill": "4.A",
      "cognitive": "identify",
      "stem": "The opening sentence (lines 2-4) suggests that the narrator is",
@@ -8046,7 +8487,7 @@
     },
     {
      "archetype": "lt_short_1D",
-     "topic": "U7.1",
+     "topic": "U4.1",
      "skill": "1.D",
      "cognitive": "explain",
      "stem": "The narrator's reply to Aurelio in the final paragraph (lines 60-61) most clearly reveals",
@@ -8272,7 +8713,7 @@
     },
     {
      "archetype": "lt_short_7B",
-     "topic": "U4.4",
+     "topic": "U7.4",
      "skill": "7.B",
      "cognitive": "evaluate",
      "stem": "Which of the following is the most defensible thesis about the passage as a whole?",
@@ -8344,7 +8785,7 @@
     },
     {
      "archetype": "lt_short_3C",
-     "topic": "U2.2",
+     "topic": "U8.1",
      "skill": "3.C",
      "cognitive": "explain",
      "stem": "The transition from the fifth paragraph, which ends with the plow (lines 42-43), to the sixth, which opens with the line the narrator reads aloud (line 44), primarily serves to",
@@ -8424,7 +8865,7 @@
     },
     {
      "archetype": "lt_short_3B",
-     "topic": "U1.4",
+     "topic": "U7.2",
      "skill": "3.B",
      "cognitive": "explain",
      "stem": "In the fifth paragraph, the narrator's attention moves from the canon on her card, to the concentrator's sigh, to the plow outside (lines 41-42). This sequence primarily",
@@ -8502,7 +8943,7 @@
     },
     {
      "archetype": "lt_short_1B",
-     "topic": "U7.1",
+     "topic": "U1.1",
      "skill": "1.B",
      "cognitive": "explain",
      "stem": "The change in Dana from lines 32-33 to lines 54-55 primarily",
@@ -8674,6 +9115,13 @@
       "judge_missing",
       "deterministic_1"
      ]
+    },
+    {
+     "index": 3,
+     "skill": "2.C",
+     "reasons": [
+      "setting_cap_1_per_set"
+     ]
     }
    ]
   }
@@ -8686,41 +9134,799 @@
   "reserve": false,
   "wording": "generated",
   "candidateKey": "ap_english_literature-s04-k0",
-  "keywordCode": "U1.4",
-  "unitCode": "1",
-  "skillPrimary": "3.B",
+  "keywordCode": "U4.4",
+  "unitCode": "4",
+  "skillPrimary": "7.B",
   "structure": "shared_stimulus_set",
   "archetype": "lt_short_s04",
-  "reviewState": "rejected",
-  "rejectionReason": "fewer_than_8_items_passed_7; excluded=[{\"index\":0,\"skill\":\"3.B\",\"reasons\":[\"adversary_missing\",\"judge_missing\",\"deterministic_1\"]},{\"index\":3,\"skill\":\"4.A\",\"reasons\":[\"adversary_missing\",\"judge_missing\",\"deterministic_1\"]},{\"index\":4,\"skill\":\"2.B\",\"reasons\":[\"adversary_missing\",\"judge_missing\",\"deterministic_1\"]},{\"index\":7,\"skill\":\"2.C\",\"reasons\":[\"adversary_missing\",\"judge_missing\",\"deterministic_1\"]},{\"index\":9,\"skill\":\"1.D\",\"reasons\":[]},{\"index\":12,\"skill\":\"7.A\",\"reasons\":[\"adversary_missing\",\"judge_missing\",\"deterministic_1\"]},{\"index\":13,\"skill\":\"4.D\",\"reasons\":[\"adversary_missing\",\"judge_missing\",\"deterministic_1\"]},{\"index\":14,\"skill\":\"5.C\",\"reasons\":[\"adversary_missing\",\"judge_missing\",\"deterministic_2\"]}]",
-  "difficultyProvisional": null,
+  "reviewState": "auto_passed",
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficulty": [
+   {
+    "label": "exam_prep"
+   },
+   {
+    "label": "exam_prep"
+   },
+   {
+    "label": "exam_prep"
+   },
+   {
+    "label": "exam_prep"
+   },
+   {
+    "label": "exam_prep"
+   },
+   {
+    "label": "exam_prep"
+   },
+   {
+    "label": "exam_prep"
+   },
+   {
+    "label": "exam_prep"
+   }
+  ],
   "payload": {
    "archetype": "lt_short_s04",
-   "spec": {
-    "id": "s04",
-    "group": "short",
+   "topic": "U4.4",
+   "skill": "7.B",
+   "calculator": "na",
+   "set_intro": "ALTON original passage\nThe Hours in Coldharbour Lane\nby Edith Marrable\nThe following passage is from a short story by Edith Marrable, set in an English market town shortly before the First World War.\n\n```passage\n    My father died on a Tuesday in March of 1912, and by\nThursday I had decided to sell the shop. I set this down\nfirst so it will be understood that I was never\nsentimental about clocks. There were forty-one of them\non the walls of the shop in Coldharbour Lane, and every\none had stopped.\n\n    He had stopped them himself, I supposed, in the last\nweek, when his hands grew too uncertain for the winding.\nThat was like him: he would rather have a clock silent\nthan wrong. The bracket clocks stood along the counter\nlike a row of deacons who had forgotten the hymn, and\nthe long-case by the door held its pendulum still, as a\nman holds his breath outside a sickroom. Dust had\nsettled on the glass in a fine grey fur. I did not wipe\nit. A dealer does not pay more for clean glass.\n\n    When I was a girl I was permitted in the shop only\non Saturdays, and only to sit on the stool by the stove\nand not touch. My father bent over his bench with the\nloupe screwed into his eye, so that he looked at me,\nwhen he looked at all, with one eye enormous and one eye\nsmall. \"Hush, Nell,\" he would say, though I had said\nnothing. \"She's nearly going.\" He meant a clock. It was\nalways a clock that was nearly going.\n\n    Mr. Pell came at eleven, a brisk man in a brown\novercoat with a chain across his waistcoat, and his own\nwatch ticked so loudly in that silent room that I could\nhear it from the counter. He walked the walls, lifting\ndials, naming prices under his breath. \"Forty for the\nlot,\" he said. \"They're none of them running, Miss\nGarrow. You understand that brings it down.\" \"I\nunderstand perfectly,\" I said.\n\n    It was while he was in the back room, measuring the\nlong-case, that I opened the drawer of the bench to find\nthe winding keys, and found instead a little cash book\nwith its columns ruled for shillings and pence. My\nfather had not used it for money. Each line held the\nname of a clock, and beside it an hour, and beside that\na few words in his small upright hand. The Dutch\nbracket, ten past four: N. born. The French carriage\nclock, a quarter to nine: N. walks to the stove alone.\nThe long-case, twenty past six: N. says Father, not Da.\nThere were forty-one lines. The last was the little\nenamel clock in the window, eleven minutes past two: N.\nleaves for Bristol on the coach, does not look back.\n\n    I looked up. The enamel clock said eleven minutes\npast two. I had looked back; I am quite certain of it. I\nhad looked back at the window, and the window had been\nfull of clocks, and I had not seen him behind them.\n\n    Mr. Pell returned with his tape. \"Forty-five, then,\nas the long-case is sound.\" \"I find I'm not ready to\nsell,\" I said. \"Not at present. You'll forgive me the\ntrouble.\" He looked at me as if I were a mechanism with\na part missing, and then he went out, and his watch went\nwith him, and the shop was quiet again. I put the cash\nbook in my coat. I have not wound any of them. It is a\npractical matter: one would have to know which hour to\nset them to, and I find that I know all of them.\n```",
+   "lt_passage": {
     "form": "prose",
-    "era": "early 20th-century manner",
-    "premise": "a clockmaker's daughter inherits a shop of stopped clocks",
-    "skills": [
-     "3.B",
-     "7.B",
-     "1.A",
-     "4.A",
-     "2.B",
-     "3.D",
-     "6.C",
-     "2.C",
-     "3.A",
-     "1.D",
-     "4.B",
-     "1.B",
-     "7.A",
-     "4.D",
-     "5.C"
+    "group": "short",
+    "title": "The Hours in Coldharbour Lane",
+    "headnote": "The following passage is from a short story by Edith Marrable, set in an English market town shortly before the First World War.",
+    "stanzas": [
+     [
+      "    My father died on a Tuesday in March of 1912, and by",
+      "Thursday I had decided to sell the shop. I set this down",
+      "first so it will be understood that I was never",
+      "sentimental about clocks. There were forty-one of them",
+      "on the walls of the shop in Coldharbour Lane, and every",
+      "one had stopped."
+     ],
+     [
+      "    He had stopped them himself, I supposed, in the last",
+      "week, when his hands grew too uncertain for the winding.",
+      "That was like him: he would rather have a clock silent",
+      "than wrong. The bracket clocks stood along the counter",
+      "like a row of deacons who had forgotten the hymn, and",
+      "the long-case by the door held its pendulum still, as a",
+      "man holds his breath outside a sickroom. Dust had",
+      "settled on the glass in a fine grey fur. I did not wipe",
+      "it. A dealer does not pay more for clean glass."
+     ],
+     [
+      "    When I was a girl I was permitted in the shop only",
+      "on Saturdays, and only to sit on the stool by the stove",
+      "and not touch. My father bent over his bench with the",
+      "loupe screwed into his eye, so that he looked at me,",
+      "when he looked at all, with one eye enormous and one eye",
+      "small. \"Hush, Nell,\" he would say, though I had said",
+      "nothing. \"She's nearly going.\" He meant a clock. It was",
+      "always a clock that was nearly going."
+     ],
+     [
+      "    Mr. Pell came at eleven, a brisk man in a brown",
+      "overcoat with a chain across his waistcoat, and his own",
+      "watch ticked so loudly in that silent room that I could",
+      "hear it from the counter. He walked the walls, lifting",
+      "dials, naming prices under his breath. \"Forty for the",
+      "lot,\" he said. \"They're none of them running, Miss",
+      "Garrow. You understand that brings it down.\" \"I",
+      "understand perfectly,\" I said."
+     ],
+     [
+      "    It was while he was in the back room, measuring the",
+      "long-case, that I opened the drawer of the bench to find",
+      "the winding keys, and found instead a little cash book",
+      "with its columns ruled for shillings and pence. My",
+      "father had not used it for money. Each line held the",
+      "name of a clock, and beside it an hour, and beside that",
+      "a few words in his small upright hand. The Dutch",
+      "bracket, ten past four: N. born. The French carriage",
+      "clock, a quarter to nine: N. walks to the stove alone.",
+      "The long-case, twenty past six: N. says Father, not Da.",
+      "There were forty-one lines. The last was the little",
+      "enamel clock in the window, eleven minutes past two: N.",
+      "leaves for Bristol on the coach, does not look back."
+     ],
+     [
+      "    I looked up. The enamel clock said eleven minutes",
+      "past two. I had looked back; I am quite certain of it. I",
+      "had looked back at the window, and the window had been",
+      "full of clocks, and I had not seen him behind them."
+     ],
+     [
+      "    Mr. Pell returned with his tape. \"Forty-five, then,",
+      "as the long-case is sound.\" \"I find I'm not ready to",
+      "sell,\" I said. \"Not at present. You'll forgive me the",
+      "trouble.\" He looked at me as if I were a mechanism with",
+      "a part missing, and then he went out, and his watch went",
+      "with him, and the shop was quiet again. I put the cash",
+      "book in my coat. I have not wound any of them. It is a",
+      "practical matter: one would have to know which hour to",
+      "set them to, and I find that I know all of them."
+     ]
     ],
-    "seed": 28279
+    "line_count": 57
    },
+   "provenance": {
+    "kind": "original",
+    "author_alias": "Edith Marrable",
+    "year_alias": 1913,
+    "note": "Original passage written for practice use."
+   },
+   "blueprint": {
+    "characters": [
+     "Nell Garrow, the narrator, a grown daughter",
+     "her late father, a clockmaker",
+     "Mr. Pell, a dealer"
+    ],
+    "setting": "A clock shop in Coldharbour Lane, an English town, March 1912",
+    "situation": "Nell, who left home for Bristol, returns after her father's death intending to sell his shop of stopped clocks; she finds a ledger showing each clock was stopped at an hour from her life.",
+    "conflict": "Nell's professed practicality and sense of having been neglected versus the evidence of her father's silent, devoted attention.",
+    "central_idea": "Love that seems displaced onto objects may be a hidden form of attention; the narrator can admit its effect on her only in practical terms.",
+    "complexity": "Both father and daughter misread each other: he believed she did not look back, she believed he did not look at her. The narrator's insistence on practicality is undercut by her actions, and the stopped clocks shift from commercial defect to memorial.",
+    "speaker": "Nell, first person, retrospective, guarded and self-deceiving about her feeling",
+    "devices": [
+     {
+      "device": "irony",
+      "quote": "I was never sentimental about clocks",
+      "function": "Professed detachment that the ending undercuts."
+     },
+     {
+      "device": "symbol",
+      "quote": "every one had stopped",
+      "function": "Stopped clocks first signal loss and lower value, later preserved hours of her life."
+     },
+     {
+      "device": "simile",
+      "quote": "like a row of deacons who had forgotten the hymn",
+      "function": "Gives the silent clocks a solemn, faintly comic awkwardness."
+     },
+     {
+      "device": "personification",
+      "quote": "held its pendulum still, as a man holds his breath",
+      "function": "Makes the shop seem to keep a deathbed vigil."
+     },
+     {
+      "device": "imagery",
+      "quote": "Dust had settled on the glass in a fine grey fur",
+      "function": "Conveys neglect and suspended time."
+     },
+     {
+      "device": "flashback",
+      "quote": "When I was a girl I was permitted in the shop",
+      "function": "Establishes her sense of marginality before the ledger revises it."
+     },
+     {
+      "device": "dialogue",
+      "quote": "\"Hush, Nell,\" he would say, though I had said nothing",
+      "function": "Shows the father's half-absent attention."
+     },
+     {
+      "device": "repetition",
+      "quote": "It was always a clock that was nearly going",
+      "function": "Reinforces her grievance that clocks came first."
+     },
+     {
+      "device": "contrast",
+      "quote": "his own watch ticked so loudly in that silent room",
+      "function": "Sets commercial running time against the shop's held hours."
+     },
+     {
+      "device": "shift_in_tone",
+      "quote": "I find I'm not ready to sell",
+      "function": "Marks the reversal of her businesslike resolve."
+     }
+    ],
+    "shifts": [
+     {
+      "quote": "found instead a little cash book",
+      "from": "brisk commercial detachment",
+      "to": "discovery and unsettlement"
+     },
+     {
+      "quote": "I find I'm not ready to sell",
+      "from": "intention to sell",
+      "to": "keeping the clocks as they are"
+     }
+    ],
+    "form_notes": "Seven paragraphs, retrospective first person; the final sentence recasts the practical stance."
+   },
+   "premise": "a clockmaker's daughter inherits a shop of stopped clocks",
+   "era": "early 20th-century manner",
+   "items": [
+    {
+     "archetype": "lt_short_7B",
+     "topic": "U4.4",
+     "skill": "7.B",
+     "cognitive": "evaluate",
+     "stem": "Which of the following statements is the most defensible thesis about the passage as a whole?",
+     "options": [
+      {
+       "text": "Through the decline of the clock shop, the passage argues that small family trades of the period were doomed by the dealers who bought up their stock at very low prices.",
+       "why": "Unsupported: Pell is an incidental figure, and the passage makes no argument about the fate of small trades.",
+       "value": null,
+       "label": "unsupported"
+      },
+      {
+       "text": "Through the father's secret ledger, the passage shows that the narrator was right all along to believe her father cared more for his clocks than for her own company.",
+       "why": "Reversal: the ledger shows the opposite, since each clock in it records a moment from her life.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "Through a narrator who insists on her practicality, the passage shows that a father's absorption in clocks hid a close attention to his daughter that she can admit only indirectly.",
+       "why": "Accounts for the ledger, the narrator's guarded voice, and the practical ending.",
+       "value": null,
+       "label": "correct"
+      },
+      {
+       "text": "Through its many images of stopped time, the passage suggests that every human memory is unreliable and that no event in the past can ever be known with any confidence.",
+       "why": "Too broad: it turns one disputed memory into a universal claim about all memory that the passage does not make.",
+       "value": null,
+       "label": "too_broad"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is \"Through a narrator who insists on her practicality, the passage shows that a father's absorption in clocks hid a close attention to his daughter that she can admit only indirectly.\". Accounts for the ledger, the narrator's guarded voice, and the practical ending.\n\"Through the decline of the clock shop, the passage argues that small family trades of the period were doomed by the dealers who bought up their stock at very low prices.\" is incorrect: Unsupported: Pell is an incidental figure, and the passage makes no argument about the fate of small trades.\n\"Through the father's secret ledger, the passage shows that the narrator was right all along to believe her father cared more for his clocks than for her own company.\" is incorrect: Reversal: the ledger shows the opposite, since each clock in it records a moment from her life.\n\"Through its many images of stopped time, the passage suggests that every human memory is unreliable and that no event in the past can ever be known with any confidence.\" is incorrect: Too broad: it turns one disputed memory into a universal claim about all memory that the passage does not make.",
+     "est_seconds": 90,
+     "evidence_quotes": [
+      "N. leaves for Bristol on the coach, does not look back.",
+      "I had not seen him behind them."
+     ],
+     "ref_lines": {},
+     "devices_used": [
+      "symbol",
+      "irony"
+     ],
+     "review_notes": {
+      "key_flaw": null,
+      "stem_issue": null
+     },
+     "key_confidence": {
+      "score": 1,
+      "band": "high",
+      "solver_agreement": 1,
+      "adversary": "none",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 2,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 2,
+        "confidence": "certain"
+       },
+       {
+        "choice": 2,
+        "confidence": "certain"
+       }
+      ]
+     }
+    },
+    {
+     "archetype": "lt_short_1A",
+     "topic": "U1.1",
+     "skill": "1.A",
+     "cognitive": "explain",
+     "stem": "The narrator's explanation (line 15) for leaving the dust on the glass most strongly suggests that she",
+     "options": [
+      {
+       "text": "is angry that her father neglected the shop during the final week of his life",
+       "why": "She explains his stopping the clocks sympathetically; no anger at neglect.",
+       "value": null,
+       "label": "unsupported"
+      },
+      {
+       "text": "has a thorough, expert knowledge of how antique clocks are valued and sold",
+       "why": "Takes the remark at face value; Pell's pricing shows no such expertise on her part.",
+       "value": null,
+       "label": "literal_for_figurative"
+      },
+      {
+       "text": "wants to preserve the shop exactly as her father left it for sentimental reasons",
+       "why": "She does later keep it as it is, but here she explicitly gives a dealer's reason.",
+       "value": null,
+       "label": "partially_right"
+      },
+      {
+       "text": "frames a reluctance to tend her father's things as a purely commercial choice",
+       "why": "She gives a money reason for not touching the clocks, consistent with her guarded stance.",
+       "value": null,
+       "label": "correct"
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is \"frames a reluctance to tend her father's things as a purely commercial choice\". She gives a money reason for not touching the clocks, consistent with her guarded stance.\n\"is angry that her father neglected the shop during the final week of his life\" is incorrect: She explains his stopping the clocks sympathetically; no anger at neglect.\n\"has a thorough, expert knowledge of how antique clocks are valued and sold\" is incorrect: Takes the remark at face value; Pell's pricing shows no such expertise on her part.\n\"wants to preserve the shop exactly as her father left it for sentimental reasons\" is incorrect: She does later keep it as it is, but here she explicitly gives a dealer's reason.",
+     "est_seconds": 60,
+     "evidence_quotes": [
+      "I did not wipe it. A dealer does not pay more for clean glass."
+     ],
+     "ref_lines": {
+      "r1": {
+       "from": 15,
+       "to": 15
+      }
+     },
+     "devices_used": [
+      "imagery"
+     ],
+     "review_notes": {
+      "key_flaw": null,
+      "stem_issue": null
+     },
+     "key_confidence": {
+      "score": 0.829,
+      "band": "medium",
+      "solver_agreement": 1,
+      "adversary": "weak",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 3,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 3,
+        "confidence": "likely"
+       },
+       {
+        "choice": 3,
+        "confidence": "certain"
+       }
+      ]
+     }
+    },
+    {
+     "archetype": "lt_short_3D",
+     "topic": "U4.4",
+     "skill": "3.D",
+     "cognitive": "explain",
+     "stem": "The contrast between Mr. Pell's watch and the shop (lines 25-26) primarily serves to",
+     "options": [
+      {
+       "text": "suggest that Mr. Pell is a finer craftsman than the narrator's father",
+       "why": "Nothing compares Pell's skill to the father's.",
+       "value": null,
+       "label": "unsupported"
+      },
+      {
+       "text": "show that the narrator is eager to have the clocks running once more",
+       "why": "She ends by refusing to wind any of them.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "set the ordinary running time of commerce against the shop's held hours",
+       "why": "Pell's ticking watch and pricing intrude on the stilled clocks; when he leaves, quiet returns.",
+       "value": null,
+       "label": "correct"
+      },
+      {
+       "text": "indicate that Mr. Pell is dishonest about the true worth of the clocks",
+       "why": "He raises his offer; no dishonesty is shown.",
+       "value": null,
+       "label": "unsupported"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is \"set the ordinary running time of commerce against the shop's held hours\". Pell's ticking watch and pricing intrude on the stilled clocks; when he leaves, quiet returns.\n\"suggest that Mr. Pell is a finer craftsman than the narrator's father\" is incorrect: Nothing compares Pell's skill to the father's.\n\"show that the narrator is eager to have the clocks running once more\" is incorrect: She ends by refusing to wind any of them.\n\"indicate that Mr. Pell is dishonest about the true worth of the clocks\" is incorrect: He raises his offer; no dishonesty is shown.",
+     "est_seconds": 60,
+     "evidence_quotes": [
+      "his own watch ticked so loudly in that silent room",
+      "his watch went with him, and the shop was quiet again"
+     ],
+     "ref_lines": {
+      "r1": {
+       "from": 25,
+       "to": 26
+      }
+     },
+     "devices_used": [
+      "contrast"
+     ],
+     "review_notes": {
+      "key_flaw": null,
+      "stem_issue": null
+     },
+     "key_confidence": {
+      "score": 1,
+      "band": "high",
+      "solver_agreement": 1,
+      "adversary": "none",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 2,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 2,
+        "confidence": "certain"
+       },
+       {
+        "choice": 2,
+        "confidence": "certain"
+       }
+      ]
+     }
+    },
+    {
+     "archetype": "lt_short_6C",
+     "topic": "U7.3",
+     "skill": "6.C",
+     "cognitive": "explain",
+     "stem": "The description of the long-case clock that (lines 12-13) primarily has the effect of",
+     "options": [
+      {
+       "text": "implying that the clock resents the narrator's return home",
+       "why": "Nothing hostile is attributed to the clock.",
+       "value": null,
+       "label": "unsupported"
+      },
+      {
+       "text": "suggesting that the clock is broken beyond any hope of repair",
+       "why": "Reads the figure as a mechanical diagnosis; the long-case is later called sound.",
+       "value": null,
+       "label": "literal_for_figurative"
+      },
+      {
+       "text": "conveying the father's fear of illness in his last few days",
+       "why": "The image is the narrator's, about the shop, not the father's fear.",
+       "value": null,
+       "label": "misread_speaker"
+      },
+      {
+       "text": "making the shop seem to keep a watchful vigil over a death",
+       "why": "The clock is given a human held breath outside a sickroom, a vigil image.",
+       "value": null,
+       "label": "correct"
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is \"making the shop seem to keep a watchful vigil over a death\". The clock is given a human held breath outside a sickroom, a vigil image.\n\"implying that the clock resents the narrator's return home\" is incorrect: Nothing hostile is attributed to the clock.\n\"suggesting that the clock is broken beyond any hope of repair\" is incorrect: Reads the figure as a mechanical diagnosis; the long-case is later called sound.\n\"conveying the father's fear of illness in his last few days\" is incorrect: The image is the narrator's, about the shop, not the father's fear.",
+     "est_seconds": 60,
+     "evidence_quotes": [
+      "held its pendulum still, as a man holds his breath outside a sickroom"
+     ],
+     "ref_lines": {
+      "r1": {
+       "from": 12,
+       "to": 13
+      }
+     },
+     "devices_used": [
+      "personification",
+      "simile"
+     ],
+     "review_notes": {
+      "key_flaw": "The key attributes the vigil to 'the shop', while the simile describes only the long-case clock. This is a minor stretch, supported by the 'deacons' simile.",
+      "stem_issue": "The stem is garbled: 'The description of the long-case clock that (lines 12-13)' leaves out the quoted words (e.g., 'held its pendulum still, as a man holds his breath outside a sickroom'). As written, the sentence does not parse."
+     },
+     "key_confidence": {
+      "score": 0.87,
+      "band": "medium",
+      "solver_agreement": 1,
+      "adversary": "weak",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 3,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 3,
+        "confidence": "certain"
+       },
+       {
+        "choice": 3,
+        "confidence": "certain"
+       }
+      ]
+     }
+    },
+    {
+     "archetype": "lt_short_3A",
+     "topic": "U4.4",
+     "skill": "3.A",
+     "cognitive": "explain",
+     "stem": "Placing the flashback to the narrator's childhood (third paragraph) before the discovery of the cash book has which effect?",
+     "options": [
+      {
+       "text": "It shows that the narrator has already forgiven her father before he died.",
+       "why": "The flashback voices grievance, not forgiveness.",
+       "value": null,
+       "label": "unsupported"
+      },
+      {
+       "text": "It lets the reader share her sense of neglect before the ledger revises it.",
+       "why": "The grievance is set up first so that the ledger's record of her childhood overturns it.",
+       "value": null,
+       "label": "correct"
+      },
+      {
+       "text": "It explains why the father chose to stop each clock at a particular hour.",
+       "why": "The reason emerges only from the cash book, not the flashback.",
+       "value": null,
+       "label": "wrong_function"
+      },
+      {
+       "text": "It delays Mr. Pell's arrival in order to build suspense about his offer.",
+       "why": "Pell's offer is not the point of suspense; the flashback's purpose is thematic.",
+       "value": null,
+       "label": "too_narrow"
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is \"It lets the reader share her sense of neglect before the ledger revises it.\". The grievance is set up first so that the ledger's record of her childhood overturns it.\n\"It shows that the narrator has already forgiven her father before he died.\" is incorrect: The flashback voices grievance, not forgiveness.\n\"It explains why the father chose to stop each clock at a particular hour.\" is incorrect: The reason emerges only from the cash book, not the flashback.\n\"It delays Mr. Pell's arrival in order to build suspense about his offer.\" is incorrect: Pell's offer is not the point of suspense; the flashback's purpose is thematic.",
+     "est_seconds": 70,
+     "evidence_quotes": [
+      "It was always a clock that was nearly going.",
+      "N. walks to the stove alone."
+     ],
+     "ref_lines": {},
+     "devices_used": [
+      "flashback"
+     ],
+     "review_notes": {
+      "key_flaw": null,
+      "stem_issue": null
+     },
+     "key_confidence": {
+      "score": 0.829,
+      "band": "medium",
+      "solver_agreement": 1,
+      "adversary": "weak",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 1,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 1,
+        "confidence": "certain"
+       },
+       {
+        "choice": 1,
+        "confidence": "likely"
+       }
+      ]
+     }
+    },
+    {
+     "archetype": "lt_short_1D",
+     "topic": "U7.1",
+     "skill": "1.D",
+     "cognitive": "explain",
+     "stem": "The father's habit of saying (lines 21-22) suggests which of the following about the relationship?",
+     "options": [
+      {
+       "text": "He was openly harsh with her and often punished her for her noisy behavior.",
+       "why": "Exaggerates a mild hush into harshness; she had said nothing.",
+       "value": null,
+       "label": "too_broad"
+      },
+      {
+       "text": "She chattered constantly during her visits and disrupted all of his work.",
+       "why": "The text says she had said nothing.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "He was aware of her even while absorbed, though she took his words as dismissal.",
+       "why": "He addresses her by name unprompted; the ledger later confirms his attention, which she read as rebuff.",
+       "value": null,
+       "label": "correct"
+      },
+      {
+       "text": "They shared a playful private game of silence that both of them enjoyed.",
+       "why": "Her account is wistful and aggrieved, not playful.",
+       "value": null,
+       "label": "wrong_tone"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is \"He was aware of her even while absorbed, though she took his words as dismissal.\". He addresses her by name unprompted; the ledger later confirms his attention, which she read as rebuff.\n\"He was openly harsh with her and often punished her for her noisy behavior.\" is incorrect: Exaggerates a mild hush into harshness; she had said nothing.\n\"She chattered constantly during her visits and disrupted all of his work.\" is incorrect: The text says she had said nothing.\n\"They shared a playful private game of silence that both of them enjoyed.\" is incorrect: Her account is wistful and aggrieved, not playful.",
+     "est_seconds": 60,
+     "evidence_quotes": [
+      "\"Hush, Nell,\" he would say, though I had said nothing",
+      "N. says Father, not Da."
+     ],
+     "ref_lines": {
+      "r1": {
+       "from": 21,
+       "to": 22
+      }
+     },
+     "devices_used": [
+      "dialogue"
+     ],
+     "review_notes": {
+      "key_flaw": null,
+      "stem_issue": "The stem is garbled: 'The father's habit of saying (lines 21-22)' leaves out the quoted words ('Hush, Nell... She's nearly going')."
+     },
+     "key_confidence": {
+      "score": 0.788,
+      "band": "low",
+      "solver_agreement": 1,
+      "adversary": "weak",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 2,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 2,
+        "confidence": "likely"
+       },
+       {
+        "choice": 2,
+        "confidence": "likely"
+       }
+      ]
+     }
+    },
+    {
+     "archetype": "lt_short_4B",
+     "topic": "U4.3",
+     "skill": "4.B",
+     "cognitive": "explain",
+     "stem": "The use of a first-person narrator affects the reader's understanding chiefly by",
+     "options": [
+      {
+       "text": "providing a neutral, impartial record of events that the reader may trust completely",
+       "why": "Her account is guarded and self-justifying.",
+       "value": null,
+       "label": "unsupported"
+      },
+      {
+       "text": "giving full access to the father's private thoughts throughout his years at the bench",
+       "why": "His thoughts are never accessed; only his written notes.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "shifting between the views of Nell, her father, and Mr. Pell to compare their motives",
+       "why": "The view never shifts from Nell.",
+       "value": null,
+       "label": "wrong_scope"
+      },
+      {
+       "text": "limiting the father to how she saw him, so the ledger surprises reader and narrator alike",
+       "why": "We know the father only through her grievance, so the cash book's revelation lands for both.",
+       "value": null,
+       "label": "correct"
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is \"limiting the father to how she saw him, so the ledger surprises reader and narrator alike\". We know the father only through her grievance, so the cash book's revelation lands for both.\n\"providing a neutral, impartial record of events that the reader may trust completely\" is incorrect: Her account is guarded and self-justifying.\n\"giving full access to the father's private thoughts throughout his years at the bench\" is incorrect: His thoughts are never accessed; only his written notes.\n\"shifting between the views of Nell, her father, and Mr. Pell to compare their motives\" is incorrect: The view never shifts from Nell.",
+     "est_seconds": 70,
+     "evidence_quotes": [
+      "I had not seen him behind them.",
+      "I had looked back; I am quite certain of it."
+     ],
+     "ref_lines": {},
+     "devices_used": [
+      "irony"
+     ],
+     "review_notes": {
+      "key_flaw": null,
+      "stem_issue": null
+     },
+     "key_confidence": {
+      "score": 1,
+      "band": "high",
+      "solver_agreement": 1,
+      "adversary": "none",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 3,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 3,
+        "confidence": "certain"
+       },
+       {
+        "choice": 3,
+        "confidence": "certain"
+       }
+      ]
+     }
+    },
+    {
+     "archetype": "lt_short_1B",
+     "topic": "U7.1",
+     "skill": "1.B",
+     "cognitive": "explain",
+     "stem": "The narrator's decision at the end of the passage that she is (lines 50-51) primarily indicates that she",
+     "options": [
+      {
+       "text": "has been changed by the ledger, though she will not name the feeling",
+       "why": "She reverses her plan and keeps the book while offering only practical reasons.",
+       "value": null,
+       "label": "correct"
+      },
+      {
+       "text": "is holding out for Mr. Pell to raise his price for the long-case clock",
+       "why": "She sends him away after a higher offer.",
+       "value": null,
+       "label": "unsupported"
+      },
+      {
+       "text": "has decided to reopen the shop and carry on her father's clock trade",
+       "why": "She winds none of them; no plan to trade.",
+       "value": null,
+       "label": "unsupported"
+      },
+      {
+       "text": "remains as indifferent to the clocks as she claimed she was at first",
+       "why": "Her actions contradict her earlier detachment.",
+       "value": null,
+       "label": "reversal"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is \"has been changed by the ledger, though she will not name the feeling\". She reverses her plan and keeps the book while offering only practical reasons.\n\"is holding out for Mr. Pell to raise his price for the long-case clock\" is incorrect: She sends him away after a higher offer.\n\"has decided to reopen the shop and carry on her father's clock trade\" is incorrect: She winds none of them; no plan to trade.\n\"remains as indifferent to the clocks as she claimed she was at first\" is incorrect: Her actions contradict her earlier detachment.",
+     "est_seconds": 60,
+     "evidence_quotes": [
+      "I find I'm not ready to sell",
+      "I put the cash book in my coat."
+     ],
+     "ref_lines": {
+      "r1": {
+       "from": 50,
+       "to": 51
+      }
+     },
+     "devices_used": [
+      "shift_in_tone"
+     ],
+     "review_notes": {
+      "key_flaw": null,
+      "stem_issue": "The stem is garbled: 'that she is (lines 50-51)' leaves out the quotation ('not ready to sell')."
+     },
+     "key_confidence": {
+      "score": 0.829,
+      "band": "medium",
+      "solver_agreement": 1,
+      "adversary": "weak",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 0,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 0,
+        "confidence": "certain"
+       },
+       {
+        "choice": 0,
+        "confidence": "likely"
+       }
+      ]
+     }
+    }
+   ],
    "excluded_items": [
     {
      "index": 0,
@@ -8759,11 +9965,6 @@
      ]
     },
     {
-     "index": 9,
-     "skill": "1.D",
-     "reasons": []
-    },
-    {
      "index": 12,
      "skill": "7.A",
      "reasons": [
@@ -8790,8 +9991,7 @@
       "deterministic_2"
      ]
     }
-   ],
-   "kept_count": 7
+   ]
   }
  },
  {
@@ -9596,82 +10796,8 @@
      }
     },
     {
-     "archetype": "lt_short_2C",
-     "topic": "U4.2",
-     "skill": "2.C",
-     "cognitive": "explain",
-     "stem": "The description of the house that \"leaned toward the street as if it were trying to hear\" (lines 28-29) suggests that the house",
-     "options": [
-      {
-       "text": "is about to fall down because Mrs. Danner neglects her repairs",
-       "why": "Treats the lean as a structural detail rather than a figure for listening.",
-       "value": null,
-       "label": "literal_for_figurative"
-      },
-      {
-       "text": "seems, like its owner, to strain toward news that never comes",
-       "why": "Personification echoes the waiting mother whose son is gone.",
-       "value": null,
-       "label": "correct"
-      },
-      {
-       "text": "is full of gossiping neighbors who talk about Mrs. Danner's debt",
-       "why": "Misreads 'what was said about it'; no neighbors appear.",
-       "value": null,
-       "label": "lexical_trap"
-      },
-      {
-       "text": "offers the boy a warm welcome after his long walk up Tanner Hill",
-       "why": "Inside it is 'colder than the porch.'",
-       "value": null,
-       "label": "reversal"
-      }
-     ],
-     "key_index": 1,
-     "explanation_en": "The correct answer is \"seems, like its owner, to strain toward news that never comes\". Personification echoes the waiting mother whose son is gone.\n\"is about to fall down because Mrs. Danner neglects her repairs\" is incorrect: Treats the lean as a structural detail rather than a figure for listening.\n\"is full of gossiping neighbors who talk about Mrs. Danner's debt\" is incorrect: Misreads 'what was said about it'; no neighbors appear.\n\"offers the boy a warm welcome after his long walk up Tanner Hill\" is incorrect: Inside it is 'colder than the porch.'",
-     "est_seconds": 50,
-     "evidence_quotes": [
-      "leaned toward the street as if it were trying to hear what was said about it"
-     ],
-     "ref_lines": {
-      "r1": {
-       "from": 28,
-       "to": 29
-      }
-     },
-     "devices_used": [
-      "personification"
-     ],
-     "review_notes": {
-      "key_flaw": null,
-      "stem_issue": null
-     },
-     "key_confidence": {
-      "score": 0.829,
-      "band": "medium",
-      "solver_agreement": 1,
-      "adversary": "weak",
-      "judge": "key_clearly_better",
-      "panel": {
-       "model": "claude-fable-5-1",
-       "choice": 1,
-       "agree": true
-      },
-      "solver_votes": [
-       {
-        "choice": 1,
-        "confidence": "certain"
-       },
-       {
-        "choice": 1,
-        "confidence": "likely"
-       }
-      ]
-     }
-    },
-    {
      "archetype": "lt_short_3A",
-     "topic": "U1.3",
+     "topic": "U7.2",
      "skill": "3.A",
      "cognitive": "explain",
      "stem": "Withholding what is actually written in Mrs. Danner's ledger page until the final paragraph has the effect of",
@@ -9811,6 +10937,76 @@
        {
         "choice": 3,
         "confidence": "certain"
+       }
+      ]
+     }
+    },
+    {
+     "archetype": "lt_short_1B",
+     "topic": "U1.1",
+     "skill": "1.B",
+     "cognitive": "explain",
+     "stem": "Compared with his attitude in the first paragraph, the narrator's attitude at the end of the passage is best described as",
+     "options": [
+      {
+       "text": "shaken in practice, though in his retelling he still claims the hardness of his younger self",
+       "why": "He did not ask and saw 'Paid,' yet 'I still tell people I would have asked her.'",
+       "value": null,
+       "label": "correct"
+      },
+      {
+       "text": "fully converted, so that he now speaks openly about the mercy Mr. Pruitt taught him",
+       "why": "He tells people the opposite: that he would have asked her.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "entirely unchanged, since he went on believing that Mrs. Danner had cheated Mr. Pruitt",
+       "why": "Ignores his silence and his discovery of Pruitt's payments.",
+       "value": null,
+       "label": "too_narrow"
+      },
+      {
+       "text": "bitter toward Mr. Pruitt for hiding the truth of the ledger from his young apprentice",
+       "why": "No resentment toward Pruitt is expressed.",
+       "value": null,
+       "label": "wrong_tone"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is \"shaken in practice, though in his retelling he still claims the hardness of his younger self\". He did not ask and saw 'Paid,' yet 'I still tell people I would have asked her.'\n\"fully converted, so that he now speaks openly about the mercy Mr. Pruitt taught him\" is incorrect: He tells people the opposite: that he would have asked her.\n\"entirely unchanged, since he went on believing that Mrs. Danner had cheated Mr. Pruitt\" is incorrect: Ignores his silence and his discovery of Pruitt's payments.\n\"bitter toward Mr. Pruitt for hiding the truth of the ledger from his young apprentice\" is incorrect: No resentment toward Pruitt is expressed.",
+     "est_seconds": 60,
+     "evidence_quotes": [
+      "believed that the world ran on payment",
+      "I still tell people I would have asked her"
+     ],
+     "ref_lines": {},
+     "devices_used": [
+      "irony"
+     ],
+     "review_notes": {
+      "key_flaw": null,
+      "stem_issue": null
+     },
+     "key_confidence": {
+      "score": 0.829,
+      "band": "medium",
+      "solver_agreement": 1,
+      "adversary": "weak",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 0,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 0,
+        "confidence": "certain"
+       },
+       {
+        "choice": 0,
+        "confidence": "likely"
        }
       ]
      }
@@ -9972,10 +11168,10 @@
      ]
     },
     {
-     "index": 12,
-     "skill": "1.B",
+     "index": 9,
+     "skill": "2.C",
      "reasons": [
-      "set_size_cap"
+      "setting_cap_1_per_set"
      ]
     }
    ]
@@ -10875,7 +12071,9 @@
     {
      "index": 0,
      "skill": "4.C",
-     "reasons": []
+     "reasons": [
+      "panel_missing"
+     ]
     },
     {
      "index": 4,
@@ -10898,7 +12096,9 @@
     {
      "index": 9,
      "skill": "5.C",
-     "reasons": []
+     "reasons": [
+      "panel_missing"
+     ]
     },
     {
      "index": 10,
@@ -10925,45 +12125,905 @@
   "skillPrimary": "4.C",
   "structure": "shared_stimulus_set",
   "archetype": "lt_longer_l02",
-  "reviewState": "rejected",
-  "rejectionReason": "fewer_than_8_items_passed_6; excluded=[{\"index\":0,\"skill\":\"4.C\",\"reasons\":[]},{\"index\":1,\"skill\":\"1.D\",\"reasons\":[]},{\"index\":2,\"skill\":\"5.C\",\"reasons\":[\"adversary_missing\",\"judge_missing\",\"deterministic_2\"]},{\"index\":6,\"skill\":\"3.B\",\"reasons\":[\"adversary_missing\",\"judge_missing\",\"deterministic_1\"]},{\"index\":9,\"skill\":\"1.A\",\"reasons\":[]},{\"index\":10,\"skill\":\"7.D\",\"reasons\":[\"adversary_missing\",\"judge_missing\",\"deterministic_1\"]},{\"index\":11,\"skill\":\"4.B\",\"reasons\":[\"adversary_missing\",\"judge_missing\",\"deterministic_1\"]}]",
-  "difficultyProvisional": null,
+  "reviewState": "auto_passed",
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficulty": [
+   {
+    "label": "exam_prep"
+   },
+   {
+    "label": "exam_prep"
+   },
+   {
+    "label": "exam_prep"
+   },
+   {
+    "label": "exam_prep"
+   },
+   {
+    "label": "basic_learning"
+   },
+   {
+    "label": "exam_prep"
+   },
+   {
+    "label": "advanced_supplement"
+   },
+   {
+    "label": "exam_prep"
+   },
+   {
+    "label": "exam_prep"
+   }
+  ],
   "payload": {
    "archetype": "lt_longer_l02",
-   "spec": {
-    "id": "l02",
-    "group": "longer",
+   "topic": "U6.2",
+   "skill": "4.C",
+   "calculator": "na",
+   "set_intro": "ALTON original passage\nfrom The Fen Parish\nby Edith Marrable Sowe\nThe following passage is from a nineteenth-century novel. The narrator has kept the village school of Hollin Cross since the death of her brother, its schoolmaster.\n\n```passage\n    The inspector came on a Tuesday in March, when the\ndyke-water stood level with the road and the whole\nparish of Hollin Cross smelt of wet rope and turned\nearth. I had been expecting him for six years, which is\nto say that I had ceased to expect him at all. My\nbrother's greatcoat hung on its peg beside the\nschoolroom door, where it had hung since the winter he\ndied, and every Saturday I brushed it as other women\nbrush the stones of a grave.\n\n    He was a narrow gentleman in a grey muffler, and he\ncarried a portmanteau that looked better fed than he\ndid. He asked, with his hat already in his hand, whether\nhe might see Mr. Penhallow. I told him what I had told\nthe curate, the carrier, and six years of letters from\nthe Ministry of Instruction, all answered in a hand that\nhad once been my brother's and was now mine: that the\nmaster was confined above stairs with his chest, and\ncould not come down, but that the school was entirely at\nthe gentleman's disposal.\n\n    'Then I shall not trouble him,' said Mr. Dask.\n'Children are the better witnesses, as a rule. They have\nnot yet learned what is wanted.'\n\n    He sat in my brother's chair, which I had never sat\nin, and the stove sulked in its corner as it always did\nwhen the wind came off the fen. Tobias Reck gave him the\nrivers of the kingdom in order, down to the smallest.\nAnn Marle worked a sum in compound interest upon the\nslate and did not once look at me. Mr. Dask said 'Good'\nto each of them in the same low voice, as though he were\ncounting coins and found none of them false. I began,\nGod forgive me, to be proud.\n\n    It was little Hetty Gall, who was five and sat\nnearest the stove for warmth, who put up her hand.\n'Please, sir,' she said, 'shall Miss hear our spelling\nafter, same as always?' Nobody laughed. Nobody breathed.\nI felt the floor of that room tilt beneath me, as a boat\ntilts when someone careless stands up in it, and I saw\nMr. Dask write a single line in his book.\n\n    What had I to fear? Only the end of everything. The\nRegulations were plain as the Commandments: a parish\nschool was to be kept by a certificated master, and a\nwoman might assist but not keep it. Twelve pounds a\nyear, the cottage, the coals, the coat upon its peg; all\nof it was held for a man who had lain six winters in the\nchurchyard. I had been so careful. I had been careful\neven of the coat.\n\n    He buttoned his muffler at the door and looked a\nwhile at the greatcoat. 'A good coat,' he said. 'It\nwants wearing, Miss Penhallow, or the moth will have\nit.' Then, drawing on his gloves: 'I have entered the\nschool as satisfactory under its present master. I am\nexpected again in three years, if the Ministry keeps me\nso long. I trust Mr. Penhallow's chest will hold until\nthen.' He bowed, quite gravely, and went out to the\ncarrier's cart.\n\n    I stood a long while with my hand upon the latch.\nFor six years I had believed that I was keeping a\nsecret; I understood now that I had only been keeping a\ncoat. When the children had gone out to their dinners I\nlifted it down from the peg. It was heavier than I\nremembered, and smelt of camphor and of him, and I put\nit on, and when they came back I sat in his chair, and\nheard the spelling.\n```",
+   "lt_passage": {
     "form": "prose",
-    "era": "19th-century manner",
-    "premise": "a village schoolteacher receives a visitor from the city ministry",
-    "skills": [
-     "4.C",
-     "1.D",
-     "5.C",
-     "3.E",
-     "7.B",
-     "4.A",
-     "3.B",
-     "3.F",
-     "7.C",
-     "1.A",
-     "7.D",
-     "4.B",
-     "1.B"
+    "group": "longer",
+    "title": "from The Fen Parish",
+    "headnote": "The following passage is from a nineteenth-century novel. The narrator has kept the village school of Hollin Cross since the death of her brother, its schoolmaster.",
+    "stanzas": [
+     [
+      "    The inspector came on a Tuesday in March, when the",
+      "dyke-water stood level with the road and the whole",
+      "parish of Hollin Cross smelt of wet rope and turned",
+      "earth. I had been expecting him for six years, which is",
+      "to say that I had ceased to expect him at all. My",
+      "brother's greatcoat hung on its peg beside the",
+      "schoolroom door, where it had hung since the winter he",
+      "died, and every Saturday I brushed it as other women",
+      "brush the stones of a grave."
+     ],
+     [
+      "    He was a narrow gentleman in a grey muffler, and he",
+      "carried a portmanteau that looked better fed than he",
+      "did. He asked, with his hat already in his hand, whether",
+      "he might see Mr. Penhallow. I told him what I had told",
+      "the curate, the carrier, and six years of letters from",
+      "the Ministry of Instruction, all answered in a hand that",
+      "had once been my brother's and was now mine: that the",
+      "master was confined above stairs with his chest, and",
+      "could not come down, but that the school was entirely at",
+      "the gentleman's disposal."
+     ],
+     [
+      "    'Then I shall not trouble him,' said Mr. Dask.",
+      "'Children are the better witnesses, as a rule. They have",
+      "not yet learned what is wanted.'"
+     ],
+     [
+      "    He sat in my brother's chair, which I had never sat",
+      "in, and the stove sulked in its corner as it always did",
+      "when the wind came off the fen. Tobias Reck gave him the",
+      "rivers of the kingdom in order, down to the smallest.",
+      "Ann Marle worked a sum in compound interest upon the",
+      "slate and did not once look at me. Mr. Dask said 'Good'",
+      "to each of them in the same low voice, as though he were",
+      "counting coins and found none of them false. I began,",
+      "God forgive me, to be proud."
+     ],
+     [
+      "    It was little Hetty Gall, who was five and sat",
+      "nearest the stove for warmth, who put up her hand.",
+      "'Please, sir,' she said, 'shall Miss hear our spelling",
+      "after, same as always?' Nobody laughed. Nobody breathed.",
+      "I felt the floor of that room tilt beneath me, as a boat",
+      "tilts when someone careless stands up in it, and I saw",
+      "Mr. Dask write a single line in his book."
+     ],
+     [
+      "    What had I to fear? Only the end of everything. The",
+      "Regulations were plain as the Commandments: a parish",
+      "school was to be kept by a certificated master, and a",
+      "woman might assist but not keep it. Twelve pounds a",
+      "year, the cottage, the coals, the coat upon its peg; all",
+      "of it was held for a man who had lain six winters in the",
+      "churchyard. I had been so careful. I had been careful",
+      "even of the coat."
+     ],
+     [
+      "    He buttoned his muffler at the door and looked a",
+      "while at the greatcoat. 'A good coat,' he said. 'It",
+      "wants wearing, Miss Penhallow, or the moth will have",
+      "it.' Then, drawing on his gloves: 'I have entered the",
+      "school as satisfactory under its present master. I am",
+      "expected again in three years, if the Ministry keeps me",
+      "so long. I trust Mr. Penhallow's chest will hold until",
+      "then.' He bowed, quite gravely, and went out to the",
+      "carrier's cart."
+     ],
+     [
+      "    I stood a long while with my hand upon the latch.",
+      "For six years I had believed that I was keeping a",
+      "secret; I understood now that I had only been keeping a",
+      "coat. When the children had gone out to their dinners I",
+      "lifted it down from the peg. It was heavier than I",
+      "remembered, and smelt of camphor and of him, and I put",
+      "it on, and when they came back I sat in his chair, and",
+      "heard the spelling."
+     ]
     ],
-    "seed": 94744
+    "line_count": 63
    },
-   "excluded_items": [
+   "provenance": {
+    "kind": "original",
+    "author_alias": "Edith Marrable Sowe",
+    "year_alias": 1861,
+    "note": "Invented novelist and novel."
+   },
+   "blueprint": {
+    "characters": [
+     "Theodora Penhallow, narrator, sister of the late schoolmaster, who has secretly kept the school for six years",
+     "Mr. Dask, inspector from the Ministry of Instruction",
+     "Tobias Reck, Ann Marle, Hetty Gall, pupils",
+     "Matthew Penhallow, the dead master (absent)"
+    ],
+    "setting": "The parish schoolroom of Hollin Cross, a fen village, on a wet March Tuesday in the mid-nineteenth century",
+    "situation": "A ministry inspector arrives at a school the narrator has run under her dead brother's name; she claims the master is ill upstairs; a small child exposes her, and the inspector, rather than reporting her, approves the school 'under its present master' and leaves.",
+    "conflict": "The narrator's competence and devotion against Regulations that forbid a woman to keep a school; her fear of exposure against her pride in her work.",
+    "central_idea": "A deception maintained out of necessity can become a cage of its own; the narrator learns that what she guarded was less a secret than a dead man's place, and the inspector's quiet complicity frees her to occupy it.",
+    "complexity": "The inspector's ambiguous mercy: he enforces nothing and sanctions everything through irony, so official approval and rule-breaking coincide; the narrator's pride is tinged with guilt; the children are complicit witnesses; the coat shifts from relic to garment.",
+    "devices": [
+     {
+      "device": "simile",
+      "quote": "I brushed it as other women brush the stones",
+      "function": "Equates her care of the coat with mourning ritual, showing the fiction as a kind of grave-tending."
+     },
+     {
+      "device": "symbol",
+      "quote": "My brother's greatcoat hung on its peg",
+      "function": "The coat stands for the fiction of the absent master and, at the end, the role she takes on openly."
+     },
+     {
+      "device": "personification",
+      "quote": "the stove sulked in its corner",
+      "function": "Gives the room a grudging, uneasy mood during the examination."
+     },
+     {
+      "device": "simile",
+      "quote": "as a boat tilts when someone careless stands up in it",
+      "function": "Conveys the sudden instability of exposure."
+     },
+     {
+      "device": "dialogue",
+      "quote": "shall Miss hear our spelling after, same as always?",
+      "function": "A child's innocent speech reveals the secret."
+     },
+     {
+      "device": "free_indirect_discourse",
+      "quote": "What had I to fear? Only the end of everything.",
+      "function": "Renders her panic and stakes from inside her thought."
+     },
+     {
+      "device": "irony",
+      "quote": "I trust Mr. Penhallow's chest will hold until then.",
+      "function": "Dask's mock-concern signals he knows and will collude."
+     },
+     {
+      "device": "metaphor",
+      "quote": "I had only been keeping a coat",
+      "function": "Redefines the secret as mere preservation of an empty form."
+     },
+     {
+      "device": "shift_in_tone",
+      "quote": "Nobody laughed. Nobody breathed.",
+      "function": "Moves from growing pride to suspended dread."
+     },
+     {
+      "device": "contrast",
+      "quote": "which I had never sat in",
+      "function": "Contrasts with her sitting in his chair at the end."
+     }
+    ],
+    "shifts": [
+     {
+      "quote": "I began, God forgive me, to be proud.",
+      "from": "wary performance",
+      "to": "guilty pride"
+     },
+     {
+      "quote": "Nobody laughed. Nobody breathed.",
+      "from": "pride",
+      "to": "dread of exposure"
+     },
+     {
+      "quote": "I had only been keeping a coat",
+      "from": "fear of discovery",
+      "to": "recognition and release"
+     }
+    ],
+    "speaker": "Theodora Penhallow, narrating retrospectively in the first person",
+    "form_notes": "Eight paragraphs, retrospective first person, period diction, quiet ironic turn at the close."
+   },
+   "premise": "a village schoolteacher receives a visitor from the city ministry",
+   "era": "19th-century manner",
+   "items": [
     {
-     "index": 0,
+     "archetype": "lt_longer_4C",
+     "topic": "U6.2",
      "skill": "4.C",
-     "reasons": []
+     "cognitive": "explain",
+     "stem": "The narrator's interjection in (lines 30-31) chiefly conveys her",
+     "options": [
+      {
+       "text": "sense that pride in her pupils is a fault, given the deception it rests on",
+       "why": "The plea for forgiveness marks her pleasure as guilty because the success she enjoys is achieved under a false name.",
+       "value": null,
+       "label": "correct"
+      },
+      {
+       "text": "bitterness that the inspector credits the children and overlooks her",
+       "why": "Unsupported: no resentment appears; she hides her role and seeks no credit.",
+       "value": null,
+       "label": "unsupported"
+      },
+      {
+       "text": "devout belief that every kind of pride is a sin, whatever prompts it",
+       "why": "Too broad: the text shows no general doctrine; her guilt is tied to this specific deception.",
+       "value": null,
+       "label": "too_broad"
+      },
+      {
+       "text": "relief that the inspection is nearly done and her secret has been kept",
+       "why": "Wrong scope: the inspection is not over, and exposure follows immediately after.",
+       "value": null,
+       "label": "wrong_scope"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is \"sense that pride in her pupils is a fault, given the deception it rests on\". The plea for forgiveness marks her pleasure as guilty because the success she enjoys is achieved under a false name.\n\"bitterness that the inspector credits the children and overlooks her\" is incorrect: Unsupported: no resentment appears; she hides her role and seeks no credit.\n\"devout belief that every kind of pride is a sin, whatever prompts it\" is incorrect: Too broad: the text shows no general doctrine; her guilt is tied to this specific deception.\n\"relief that the inspection is nearly done and her secret has been kept\" is incorrect: Wrong scope: the inspection is not over, and exposure follows immediately after.",
+     "est_seconds": 60,
+     "evidence_quotes": [
+      "I began, God forgive me, to be proud."
+     ],
+     "ref_lines": {
+      "r1": {
+       "from": 30,
+       "to": 31
+      }
+     },
+     "devices_used": [
+      "diction"
+     ],
+     "review_notes": {
+      "key_flaw": null,
+      "stem_issue": null
+     },
+     "key_confidence": {
+      "score": 0.788,
+      "band": "low",
+      "solver_agreement": 1,
+      "adversary": "weak",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 0,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 0,
+        "confidence": "likely"
+       },
+       {
+        "choice": 0,
+        "confidence": "likely"
+       }
+      ]
+     }
     },
     {
-     "index": 1,
+     "archetype": "lt_longer_1D",
+     "topic": "U9.1",
      "skill": "1.D",
-     "reasons": []
+     "cognitive": "explain",
+     "stem": "Taken together, Ann Marle's behavior at the slate (line 28) and the class's response to Hetty (line 35) suggest that the pupils",
+     "options": [
+      {
+       "text": "fear the narrator's discipline more than the inspector's judgment",
+       "why": "No evidence of fear of her discipline; their stillness concerns the secret.",
+       "value": null,
+       "label": "unsupported"
+      },
+      {
+       "text": "tacitly understand and protect their teacher's secret",
+       "why": "Ann avoids glancing at her and the class freezes at Hetty's slip, showing shared, unspoken complicity.",
+       "value": null,
+       "label": "correct"
+      },
+      {
+       "text": "are indifferent to who keeps the school so long as lessons go on",
+       "why": "Their held breath shows acute awareness, not indifference.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "have been drilled by the narrator to deceive any visitor",
+       "why": "They do protect her, but nothing says she drilled them; Hetty's slip suggests no rehearsal.",
+       "value": null,
+       "label": "partially_right"
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is \"tacitly understand and protect their teacher's secret\". Ann avoids glancing at her and the class freezes at Hetty's slip, showing shared, unspoken complicity.\n\"fear the narrator's discipline more than the inspector's judgment\" is incorrect: No evidence of fear of her discipline; their stillness concerns the secret.\n\"are indifferent to who keeps the school so long as lessons go on\" is incorrect: Their held breath shows acute awareness, not indifference.\n\"have been drilled by the narrator to deceive any visitor\" is incorrect: They do protect her, but nothing says she drilled them; Hetty's slip suggests no rehearsal.",
+     "est_seconds": 70,
+     "evidence_quotes": [
+      "did not once look at me",
+      "Nobody laughed. Nobody breathed."
+     ],
+     "ref_lines": {
+      "r1": {
+       "from": 28,
+       "to": 28
+      },
+      "r2": {
+       "from": 35,
+       "to": 35
+      }
+     },
+     "devices_used": [
+      "shift_in_tone"
+     ],
+     "review_notes": {
+      "key_flaw": null,
+      "stem_issue": null
+     },
+     "key_confidence": {
+      "score": 0.788,
+      "band": "low",
+      "solver_agreement": 1,
+      "adversary": "weak",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 1,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 1,
+        "confidence": "likely"
+       },
+       {
+        "choice": 1,
+        "confidence": "likely"
+       }
+      ]
+     }
     },
+    {
+     "archetype": "lt_longer_3E",
+     "topic": "U3.2",
+     "skill": "3.E",
+     "cognitive": "explain",
+     "stem": "Hetty's question in the fifth paragraph (lines 34-35) functions in the passage chiefly to",
+     "options": [
+      {
+       "text": "show that the youngest pupil has learned the least of all",
+       "why": "Her question concerns routine, not her attainments.",
+       "value": null,
+       "label": "wrong_function"
+      },
+      {
+       "text": "provide comic relief after the tension of the examination",
+       "why": "Nobody laughs; the moment heightens tension rather than relieving it.",
+       "value": null,
+       "label": "wrong_tone"
+      },
+      {
+       "text": "reveal that Hetty resents the narrator and hopes to replace her",
+       "why": "Nothing indicates malice; the question is innocent.",
+       "value": null,
+       "label": "unsupported"
+      },
+      {
+       "text": "expose the narrator's deception and force the inspector to respond",
+       "why": "The innocent question reveals who teaches, creating the crisis that Dask's later remarks resolve.",
+       "value": null,
+       "label": "correct"
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is \"expose the narrator's deception and force the inspector to respond\". The innocent question reveals who teaches, creating the crisis that Dask's later remarks resolve.\n\"show that the youngest pupil has learned the least of all\" is incorrect: Her question concerns routine, not her attainments.\n\"provide comic relief after the tension of the examination\" is incorrect: Nobody laughs; the moment heightens tension rather than relieving it.\n\"reveal that Hetty resents the narrator and hopes to replace her\" is incorrect: Nothing indicates malice; the question is innocent.",
+     "est_seconds": 60,
+     "evidence_quotes": [
+      "shall Miss hear our spelling after, same as always?",
+      "write a single line in his book"
+     ],
+     "ref_lines": {
+      "r1": {
+       "from": 34,
+       "to": 35
+      }
+     },
+     "devices_used": [
+      "dialogue"
+     ],
+     "review_notes": {
+      "key_flaw": null,
+      "stem_issue": null
+     },
+     "key_confidence": {
+      "score": 0.959,
+      "band": "high",
+      "solver_agreement": 1,
+      "adversary": "none",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 3,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 3,
+        "confidence": "certain"
+       },
+       {
+        "choice": 3,
+        "confidence": "likely"
+       }
+      ]
+     }
+    },
+    {
+     "archetype": "lt_longer_7B",
+     "topic": "U9.4",
+     "skill": "7.B",
+     "cognitive": "evaluate",
+     "stem": "Which of the following statements is the most defensible thesis about the passage as a whole?",
+     "options": [
+      {
+       "text": "Through an inspector's ironic approval, the narrator learns that her secret was really a vigil over an empty role, and she takes it up.",
+       "why": "Accounts for Dask's irony, the coat-as-role realization and the final act of putting it on.",
+       "value": null,
+       "label": "correct"
+      },
+      {
+       "text": "A schoolteacher is visited by an inspector, her pupils answer questions, and he leaves after writing that the school is satisfactory.",
+       "why": "Merely summarizes the plot and makes no interpretive claim.",
+       "value": null,
+       "label": "too_narrow"
+      },
+      {
+       "text": "The passage argues that every government office is corrupt and that its inspectors will ignore any rule for a sympathetic face.",
+       "why": "Generalizes from one discreet act of mercy to a claim about all officials.",
+       "value": null,
+       "label": "too_broad"
+      },
+      {
+       "text": "The narrator's fear proves foolish, since the inspector never noticed anything unusual and simply reported what the master taught.",
+       "why": "Dask clearly notices: he writes after Hetty speaks and ironically addresses the master's 'chest'.",
+       "value": null,
+       "label": "reversal"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is \"Through an inspector's ironic approval, the narrator learns that her secret was really a vigil over an empty role, and she takes it up.\". Accounts for Dask's irony, the coat-as-role realization and the final act of putting it on.\n\"A schoolteacher is visited by an inspector, her pupils answer questions, and he leaves after writing that the school is satisfactory.\" is incorrect: Merely summarizes the plot and makes no interpretive claim.\n\"The passage argues that every government office is corrupt and that its inspectors will ignore any rule for a sympathetic face.\" is incorrect: Generalizes from one discreet act of mercy to a claim about all officials.\n\"The narrator's fear proves foolish, since the inspector never noticed anything unusual and simply reported what the master taught.\" is incorrect: Dask clearly notices: he writes after Hetty speaks and ironically addresses the master's 'chest'.",
+     "est_seconds": 90,
+     "evidence_quotes": [
+      "I have entered the school as satisfactory under its present master.",
+      "I had only been keeping a coat"
+     ],
+     "ref_lines": {},
+     "devices_used": [
+      "irony",
+      "symbol"
+     ],
+     "review_notes": {
+      "key_flaw": null,
+      "stem_issue": null
+     },
+     "key_confidence": {
+      "score": 0.959,
+      "band": "high",
+      "solver_agreement": 1,
+      "adversary": "none",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 0,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 0,
+        "confidence": "certain"
+       },
+       {
+        "choice": 0,
+        "confidence": "likely"
+       }
+      ]
+     }
+    },
+    {
+     "archetype": "lt_longer_4A",
+     "topic": "U1.3",
+     "skill": "4.A",
+     "cognitive": "identify",
+     "stem": "The details in the second paragraph (lines 15-16) indicate that the narrator is",
+     "options": [
+      {
+       "text": "a former pupil of the master's who now assists him in his illness",
+       "why": "She is his sister, and he is dead, not ill.",
+       "value": null,
+       "label": "misread_speaker"
+      },
+      {
+       "text": "a woman who has written the Ministry for years in her dead brother's hand",
+       "why": "She has answered six years of letters in a hand once his, sustaining the fiction of his illness.",
+       "value": null,
+       "label": "correct"
+      },
+      {
+       "text": "an official who reports on the village to the Ministry of Instruction",
+       "why": "Confuses the narrator with the inspector.",
+       "value": null,
+       "label": "misread_speaker"
+      },
+      {
+       "text": "a nurse who tends the master upstairs while others keep the school",
+       "why": "Takes her cover story as fact; the brother lies in the churchyard.",
+       "value": null,
+       "label": "literal_for_figurative"
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is \"a woman who has written the Ministry for years in her dead brother's hand\". She has answered six years of letters in a hand once his, sustaining the fiction of his illness.\n\"a former pupil of the master's who now assists him in his illness\" is incorrect: She is his sister, and he is dead, not ill.\n\"an official who reports on the village to the Ministry of Instruction\" is incorrect: Confuses the narrator with the inspector.\n\"a nurse who tends the master upstairs while others keep the school\" is incorrect: Takes her cover story as fact; the brother lies in the churchyard.",
+     "est_seconds": 50,
+     "evidence_quotes": [
+      "a hand that had once been my brother's and was now mine"
+     ],
+     "ref_lines": {
+      "r1": {
+       "from": 15,
+       "to": 16
+      }
+     },
+     "devices_used": [
+      "diction"
+     ],
+     "review_notes": {
+      "key_flaw": "'Written in her dead brother's hand' slightly overreads the line. 'A hand that had once been my brother's and was now mine' could mean she copied his handwriting, or more loosely that she took over his role as the person who answered letters.",
+      "stem_issue": "Lines 15-16 by themselves do not show that the brother is dead. The reader needs the introduction and lines 6-9/44 for that, so the cited line range is narrower than the evidence the key relies on."
+     },
+     "key_confidence": {
+      "score": 1,
+      "band": "high",
+      "solver_agreement": 1,
+      "adversary": "none",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 1,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 1,
+        "confidence": "certain"
+       },
+       {
+        "choice": 1,
+        "confidence": "certain"
+       }
+      ]
+     }
+    },
+    {
+     "archetype": "lt_longer_3F",
+     "topic": "U9.1",
+     "skill": "3.F",
+     "cognitive": "explain",
+     "stem": "In the sixth paragraph (lines 41-42), the narrator's central conflict is best described as one between",
+     "options": [
+      {
+       "text": "her loyalty to her brother's memory and her wish to leave the village",
+       "why": "She never expresses a wish to leave.",
+       "value": null,
+       "label": "unsupported"
+      },
+      {
+       "text": "her religious scruples and the curate's demand that she confess",
+       "why": "'Commandments' and the curate appear, but no confession is demanded.",
+       "value": null,
+       "label": "lexical_trap"
+      },
+      {
+       "text": "her affection for the pupils and her dislike of teaching itself",
+       "why": "She takes pride in teaching; there is no dislike.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "her proven ability to keep the school and rules that forbid her to",
+       "why": "The Regulations bar women from keeping a school; her livelihood and home depend on doing so anyway.",
+       "value": null,
+       "label": "correct"
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is \"her proven ability to keep the school and rules that forbid her to\". The Regulations bar women from keeping a school; her livelihood and home depend on doing so anyway.\n\"her loyalty to her brother's memory and her wish to leave the village\" is incorrect: She never expresses a wish to leave.\n\"her religious scruples and the curate's demand that she confess\" is incorrect: 'Commandments' and the curate appear, but no confession is demanded.\n\"her affection for the pupils and her dislike of teaching itself\" is incorrect: She takes pride in teaching; there is no dislike.",
+     "est_seconds": 65,
+     "evidence_quotes": [
+      "a woman might assist but not keep it",
+      "Twelve pounds a year, the cottage, the coals"
+     ],
+     "ref_lines": {
+      "r1": {
+       "from": 41,
+       "to": 42
+      }
+     },
+     "devices_used": [
+      "free_indirect_discourse"
+     ],
+     "review_notes": {
+      "key_flaw": null,
+      "stem_issue": null
+     },
+     "key_confidence": {
+      "score": 1,
+      "band": "high",
+      "solver_agreement": 1,
+      "adversary": "none",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 3,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 3,
+        "confidence": "certain"
+       },
+       {
+        "choice": 3,
+        "confidence": "certain"
+       }
+      ]
+     }
+    },
+    {
+     "archetype": "lt_longer_7C",
+     "topic": "U9.3",
+     "skill": "7.C",
+     "cognitive": "evaluate",
+     "stem": "A student claims that Mr. Dask quietly gives the narrator permission to continue as she has. Which commentary best explains how his remark (lines 48-50) supports this claim?",
+     "options": [
+      {
+       "text": "Addressing her by name about the coat, Dask hints that the master's role should be used by her, not preserved unused.",
+       "why": "Links the coat-as-role to his advice that it be worn, implying sanction for her keeping the school.",
+       "value": null,
+       "label": "correct"
+      },
+      {
+       "text": "The remark warns her that the Ministry will soon take everything from the school, much as moths ruin a coat left hanging.",
+       "why": "Reversal: Dask has just passed the school as satisfactory, so the remark is not a threat.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "Dask's remark reveals his practical knowledge of cloth and his worry that a good garment might be left to spoil unused.",
+       "why": "Literal for figurative: it reads the remark only literally, so it cannot support the claim of permission.",
+       "value": null,
+       "label": "literal_for_figurative"
+      },
+      {
+       "text": "This shows Dask is a generous man, since officials in novels of this kind are so often secretly sympathetic to the poor.",
+       "why": "Unsupported: it rests on outside generalizations about fiction rather than on the text.",
+       "value": null,
+       "label": "unsupported"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is \"Addressing her by name about the coat, Dask hints that the master's role should be used by her, not preserved unused.\". Links the coat-as-role to his advice that it be worn, implying sanction for her keeping the school.\n\"The remark warns her that the Ministry will soon take everything from the school, much as moths ruin a coat left hanging.\" is incorrect: Reversal: Dask has just passed the school as satisfactory, so the remark is not a threat.\n\"Dask's remark reveals his practical knowledge of cloth and his worry that a good garment might be left to spoil unused.\" is incorrect: Literal for figurative: it reads the remark only literally, so it cannot support the claim of permission.\n\"This shows Dask is a generous man, since officials in novels of this kind are so often secretly sympathetic to the poor.\" is incorrect: Unsupported: it rests on outside generalizations about fiction rather than on the text.",
+     "est_seconds": 85,
+     "evidence_quotes": [
+      "It wants wearing, Miss Penhallow, or the moth will have it."
+     ],
+     "ref_lines": {
+      "r1": {
+       "from": 48,
+       "to": 50
+      }
+     },
+     "devices_used": [
+      "irony",
+      "symbol"
+     ],
+     "review_notes": {
+      "key_flaw": null,
+      "stem_issue": null
+     },
+     "key_confidence": {
+      "score": 0.829,
+      "band": "medium",
+      "solver_agreement": 1,
+      "adversary": "weak",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 0,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 0,
+        "confidence": "likely"
+       },
+       {
+        "choice": 0,
+        "confidence": "certain"
+       }
+      ]
+     }
+    },
+    {
+     "archetype": "lt_longer_1A",
+     "topic": "U6.1",
+     "skill": "1.A",
+     "cognitive": "explain",
+     "stem": "Mr. Dask's comment in the third paragraph (lines 21-22) most clearly suggests that he",
+     "options": [
+      {
+       "text": "thinks children too young to be examined fairly",
+       "why": "He prefers examining them, calling them better witnesses.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "trusts unrehearsed answers over prepared accounts",
+       "why": "Children are better witnesses because they do not yet know what adults want said.",
+       "value": null,
+       "label": "correct"
+      },
+      {
+       "text": "means to trick the pupils into betraying the master",
+       "why": "Nothing shows a design to trap them; he simply listens.",
+       "value": null,
+       "label": "unsupported"
+      },
+      {
+       "text": "has no real interest in the school's actual quality",
+       "why": "He examines carefully and judges each answer.",
+       "value": null,
+       "label": "wrong_tone"
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is \"trusts unrehearsed answers over prepared accounts\". Children are better witnesses because they do not yet know what adults want said.\n\"thinks children too young to be examined fairly\" is incorrect: He prefers examining them, calling them better witnesses.\n\"means to trick the pupils into betraying the master\" is incorrect: Nothing shows a design to trap them; he simply listens.\n\"has no real interest in the school's actual quality\" is incorrect: He examines carefully and judges each answer.",
+     "est_seconds": 55,
+     "evidence_quotes": [
+      "Children are the better witnesses, as a rule.",
+      "They have not yet learned what is wanted."
+     ],
+     "ref_lines": {
+      "r1": {
+       "from": 21,
+       "to": 22
+      }
+     },
+     "devices_used": [
+      "dialogue"
+     ],
+     "review_notes": {
+      "key_flaw": null,
+      "stem_issue": null
+     },
+     "key_confidence": {
+      "score": 0.788,
+      "band": "low",
+      "solver_agreement": 1,
+      "adversary": "weak",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 1,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 1,
+        "confidence": "likely"
+       },
+       {
+        "choice": 1,
+        "confidence": "likely"
+       }
+      ]
+     }
+    },
+    {
+     "archetype": "lt_longer_1B",
+     "topic": "U3.1",
+     "skill": "1.B",
+     "cognitive": "evaluate",
+     "stem": "The narrator's actions in the final sentence (lines 62-63), compared with her earlier remark (lines 23-24), chiefly show that she",
+     "options": [
+      {
+       "text": "has stopped guarding her brother's place and openly occupies it",
+       "why": "She had never sat in his chair; now she wears his coat and sits there to teach.",
+       "value": null,
+       "label": "correct"
+      },
+      {
+       "text": "is copying the inspector, who sat in the chair earlier that day",
+       "why": "Dask did sit there, but her act concerns her brother's role, not imitation of Dask.",
+       "value": null,
+       "label": "lexical_trap"
+      },
+      {
+       "text": "has given up the school and now merely sits to mourn her brother",
+       "why": "She resumes teaching; hearing the spelling continues her work.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "remains as fearful of exposure as before, though now more cold",
+       "why": "The coat does warm her, but her realization marks release from fear.",
+       "value": null,
+       "label": "partially_right"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is \"has stopped guarding her brother's place and openly occupies it\". She had never sat in his chair; now she wears his coat and sits there to teach.\n\"is copying the inspector, who sat in the chair earlier that day\" is incorrect: Dask did sit there, but her act concerns her brother's role, not imitation of Dask.\n\"has given up the school and now merely sits to mourn her brother\" is incorrect: She resumes teaching; hearing the spelling continues her work.\n\"remains as fearful of exposure as before, though now more cold\" is incorrect: The coat does warm her, but her realization marks release from fear.",
+     "est_seconds": 75,
+     "evidence_quotes": [
+      "which I had never sat in",
+      "sat in his chair, and heard the spelling"
+     ],
+     "ref_lines": {
+      "r1": {
+       "from": 62,
+       "to": 63
+      },
+      "r2": {
+       "from": 23,
+       "to": 24
+      }
+     },
+     "devices_used": [
+      "contrast",
+      "symbol"
+     ],
+     "review_notes": {
+      "key_flaw": null,
+      "stem_issue": null
+     },
+     "key_confidence": {
+      "score": 1,
+      "band": "high",
+      "solver_agreement": 1,
+      "adversary": "none",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 0,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 0,
+        "confidence": "certain"
+       },
+       {
+        "choice": 0,
+        "confidence": "certain"
+       }
+      ]
+     }
+    }
+   ],
+   "excluded_items": [
     {
      "index": 2,
      "skill": "5.C",
@@ -10983,11 +13043,6 @@
      ]
     },
     {
-     "index": 9,
-     "skill": "1.A",
-     "reasons": []
-    },
-    {
      "index": 10,
      "skill": "7.D",
      "reasons": [
@@ -11005,8 +13060,7 @@
       "deterministic_1"
      ]
     }
-   ],
-   "kept_count": 6
+   ]
   }
  },
  {

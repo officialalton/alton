@@ -8,11 +8,9 @@
   "adversary": "weak",
   "judge": "key_clearly_better",
   "panel": null,
-  "score": 0.641,
+  "score": 0.691,
   "pass": false,
-  "reasons": [
-   "deterministic_1"
-  ],
+  "reasons": [],
   "cue": 0
  },
  {
@@ -23,12 +21,13 @@
   "solverAgree": 1,
   "adversary": "none",
   "judge": "key_clearly_better",
-  "panel": null,
-  "score": 0.95,
-  "pass": false,
-  "reasons": [
-   "deterministic_1"
-  ],
+  "panel": {
+   "choice": 2,
+   "agree": true
+  },
+  "score": 1,
+  "pass": true,
+  "reasons": [],
   "cue": 0
  },
  {
@@ -74,11 +73,10 @@
   "adversary": "strong",
   "judge": "key_clearly_better",
   "panel": null,
-  "score": 0.659,
+  "score": 0.709,
   "pass": false,
   "reasons": [
-   "adversary_strong_alternative",
-   "deterministic_1"
+   "adversary_strong_alternative"
   ],
   "cue": 0
  },
@@ -90,9 +88,12 @@
   "solverAgree": 1,
   "adversary": "weak",
   "judge": "key_clearly_better",
-  "panel": null,
+  "panel": {
+   "choice": 1,
+   "agree": true
+  },
   "score": 0.788,
-  "pass": false,
+  "pass": true,
   "reasons": [],
   "cue": 0
  },
@@ -121,13 +122,12 @@
   "adversary": "strong",
   "judge": "key_wrong",
   "panel": null,
-  "score": 0.371,
+  "score": 0.421,
   "pass": false,
   "reasons": [
    "solver_reports_second_defensible_option",
    "adversary_strong_alternative",
-   "judge_key_wrong",
-   "deterministic_1"
+   "judge_key_wrong"
   ],
   "cue": 1.05
  },
@@ -139,12 +139,13 @@
   "solverAgree": 1,
   "adversary": "weak",
   "judge": "key_clearly_better",
-  "panel": null,
-  "score": 0.738,
-  "pass": false,
-  "reasons": [
-   "deterministic_1"
-  ],
+  "panel": {
+   "choice": 2,
+   "agree": true
+  },
+  "score": 0.788,
+  "pass": true,
+  "reasons": [],
   "cue": 1.06
  },
  {
@@ -192,12 +193,13 @@
   "solverAgree": 1,
   "adversary": "weak",
   "judge": "key_clearly_better",
-  "panel": null,
-  "score": 0.738,
-  "pass": false,
-  "reasons": [
-   "deterministic_2"
-  ],
+  "panel": {
+   "choice": 1,
+   "agree": true
+  },
+  "score": 0.788,
+  "pass": true,
+  "reasons": [],
   "cue": 1.07
  },
  {
@@ -225,12 +227,13 @@
   "solverAgree": 1,
   "adversary": "weak",
   "judge": "key_clearly_better",
-  "panel": null,
-  "score": 0.779,
-  "pass": false,
-  "reasons": [
-   "deterministic_1"
-  ],
+  "panel": {
+   "choice": 0,
+   "agree": true
+  },
+  "score": 0.829,
+  "pass": true,
+  "reasons": [],
   "cue": 1.12
  },
  {
