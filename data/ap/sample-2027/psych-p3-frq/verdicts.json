@@ -1,0 +1,238 @@
+[
+ {
+  "key": "ap_psychology-f01-k0",
+  "cellId": "ap_psychology-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Claim grounded in intrinsic vs extrinsic motivation.",
+     "final_answer": "High schools should not require community service hours for graduation, because making service mandatory turns it into an external requirement. That can weaken students' intrinsic motivation to volunteer later on.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Experimental evidence.",
+     "final_answer": "Source 2: In a randomized experiment, students required to complete 20 service hours later volunteered a mean of 4 hours when nothing was required. Students in the optional group volunteered a mean of 9 hours. The difference was statistically significant.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Overjustification effect.",
+     "final_answer": "This fits the overjustification effect. When an external control, such as a graduation requirement, is placed on an activity, people start to explain their behavior by that requirement instead of by their own interest. This lowers their intrinsic motivation. Once the requirement was gone, the Required group had less internal reason to volunteer, so they volunteered less than the Optional group. Because students were randomly assigned, the experiment supports a cause-and-effect conclusion: requiring service reduced later voluntary service. That supports not making service mandatory.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Interview quote.",
+     "final_answer": "Source 3: Fifteen students who completed required hours described them as 'something I had to get done.'",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "Self-determination theory (autonomy).",
+     "final_answer": "Self-determination theory says people stay motivated when their needs for autonomy, competence, and relatedness are met. Describing service as 'something I had to get done' shows these students did not feel they chose the activity, so their need for autonomy was not met. Their motivation was controlled from outside rather than self-directed, and that kind of motivation is less likely to last. So mandatory hours are unlikely to produce lasting civic engagement, which supports the claim. One limit: the interviewees volunteered to be interviewed, so they may not represent all students.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a well-structured EBQ with three sources that support opposing claims and several correct course concepts. The rubric accepts any defensible claim, and the numbers in the model answers match the sources. Minor flaws: a leftover 'sleep' error example in the rubric, a slight causal overclaim in the C model answer from correlational Source 1, and Source 3's confidence result is not tied to required service.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The item fits 4.6 motivation and the EBQ structure. Skill tags follow the official EBQ design."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The rubric is meaning-based and accepts alternative claims and concepts. The blind solver took the opposite claim and the rubric still credits it. The C model answer slightly overclaims causation from a survey."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table and the text agree, and all the numbers cited are readable from them."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to an FRQ; the rubric rows list common errors and alternative solutions. One error example ('sleep') is a template leftover."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical for a 7-point EBQ."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "This is a five-part argumentation item of the kind used in full mocks. The student must pick a claim, select evidence from a table or sources, and link it to a named AP concept such as the overjustification effect/extrinsic vs intrinsic motivation, self-efficacy, or correlation vs causation. Part E requires a different concept from part C. The concepts are all in the CED, and the sources are short and clear. Because many claims are defensible, the task is open-ended but scoreable. Each concept needs only moderate reasoning, with no calculation beyond comparing the numbers shown. The design flaws (no random assignment in Source 1, self-selection in Source 3) are stated outright, so they are fair to use. The item avoids contested findings and out-of-scope content.",
+   "reading_load": "medium",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 840
+  }
+ },
+ {
+  "key": "ap_psychology-f02-k0",
+  "cellId": "ap_psychology-f02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Distributed practice is well supported by research.",
+     "final_answer": "Yes. Teachers should spread homework and review out over time, because distributed (spaced) practice and frequent retrieval produce better long-term retention than massed practice (cramming).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Experimental evidence with random assignment.",
+     "final_answer": "Source 1: adults randomly assigned to study in three 20-minute sessions on separate days recalled an average of 33 words a week later. Adults who studied in one 60-minute session recalled 21. The difference was statistically significant.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Spacing effect.",
+     "final_answer": "This shows the spacing effect, also called distributed practice. Both groups studied for the same total time (60 minutes), but the spaced group remembered more a week later. Spreading study over days means the words are encoded again in different sessions, which strengthens their consolidation into long-term memory and slows the forgetting that Ebbinghaus's forgetting curve describes. Because participants were randomly assigned, the experiment supports the claim that spacing causes better retention. So teachers who spread homework and review over time should see better learning than with cramming.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "A different source.",
+     "final_answer": "Source 2: history classes that gave a short cumulative quiz each week averaged 84% on the common final exam. Classes without weekly quizzes averaged 78%. The difference was statistically significant, and each teacher taught one class of each type.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "Testing effect / retrieval practice.",
+     "final_answer": "This shows the testing effect, also called retrieval practice. Each weekly cumulative quiz made students recall earlier material from long-term memory. Retrieving information strengthens the retrieval cues and memory pathways for it, so it is easier to recall on the final exam. Because the quizzes were cumulative, they also spread retrieval of the same material across the term. Having each teacher teach one class of each type rules out teacher differences as a confounding variable. This supports organizing review as regular practice over time rather than one session right before the test.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The EBQ is well formed. The sources are original and give enough evidence for at least two claims and two different concepts (spacing effect, testing effect, metacognition). The numbers in the model answers are readable from the text, and the rubric is meaning-based. It has minor weaknesses in the alternatives: Source 3's belief statistic is weak evidence for effectiveness. It does not break the item, so it passes.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The item sits in 2.4, with 2.6 and 2.7 allowed as related topics. The 4.x and 1.A tagging follows the official EBQ design."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The model answers are consistent with the sources, and the rubric accepts other defensible claims and concepts. Source 3's 70% belief statistic is only indirect evidence for the effectiveness of spacing, which is a minor issue."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table and the source text are complete, and the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to an FRQ; the rubric lists common errors for each part."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The 7-point multi-part structure matches the official EBQ task, and the reading and writing load is reasonable."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "This is an AP-style argumentation FRQ (skill 4.B) with five parts and 7 points. The student must state a claim, pick evidence from the sources, and link it to concepts such as the spacing effect, distributed practice, encoding, retrieval practice or the testing effect, and correlation versus causation. Nothing falls outside Unit 2 scope. The concepts are standard CED content. The table is simple, with a few numbers to read. No arithmetic is required. The sources are short and clear. Using two different concepts for the two explanation parts adds some demand, as does choosing evidence that fits the claim. The load is typical for a full mock FRQ. It is above basic recall because it needs argumentation and discrimination among evidence types, but it is not advanced.",
+   "reading_load": "medium",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_psychology-f03-k0",
+  "cellId": "ap_psychology-f03",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring",
+   "instant_reject_multiple_correct"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Evidence points to social loafing and perceived inequity under team-only rewards.",
+     "final_answer": "A company should not reward employees mainly with team-based bonuses. Individual (or mostly individual) bonuses are better, because team-only rewards encourage social loafing and make workers feel the workload is shared unfairly, which lowers effort and raises burnout.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "brief_reasoning": "Cite Source 1's experimental result.",
+     "item": "B",
+     "final_answer": "Source 1: students who believed only their four-person team's total force was measured pulled with a mean force of 78 units. Students who believed their own force was measured averaged 100 units, and the difference was statistically significant.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Social loafing/diffusion of responsibility; experiment allows causal claim.",
+     "final_answer": "This is social loafing: people put in less effort when their own contribution can't be identified within a group. When only the team total is measured, individual effort isn't held accountable and responsibility is spread across members, so each person works less hard. Team-based bonuses create the same situation, because each person's pay depends on the group result, not on their own work. So effort, and output, would likely drop. Source 1 was an experiment with a manipulated condition, so we can conclude that the team condition caused the lower effort.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Use Source 2 correlation.",
+     "final_answer": "Source 2: in a survey of 500 employees, people who saw their team's workload as unfairly shared reported more burnout, with r = +0.44.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "Different concept: equity/fairness, stress, extrinsic motivation; note correlation limits.",
+     "final_answer": "Equity theory explains this link. Workers compare what they put in with what they get back. Under team bonuses, hard workers get the same reward as people who loaf (the free-rider problem), so they see the arrangement as inequitable. That perceived unfairness acts as a chronic workplace stressor, which can lead to burnout (as in Selye's general adaptation syndrome, where long-lasting stress ends in exhaustion). The moderate positive correlation (r = +0.44) is consistent with this. However, a correlation does not show cause, and the volunteer sample is biased toward people in teams with group rewards. So this source supports the claim but is weaker evidence than Source 1.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [
+    "multiple_correct"
+   ],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The set-up and content are sound, but the E1 rubric row requires Source 3 sales evidence while the model answer and the D alternatives use Source 2. C1 is similarly locked to Source 1. Correct student responses would be scored inconsistently, so the scoring fails.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Rubric rows C1 and E1 are tied to fixed sources (C1 to Source 1 effort, E1 to Source 3 sales). The E1 criterion requires 'sales were higher in the office with individual bonuses', but the model answer for D/E uses Source 2 (burnout) and the D alt solutions allow any different source. A student who correctly cites and explains Source 2 or Source 1 in D/E would be denied E1. The same problem affects C1 if a student cites Source 2 or 3 in B. Rows must be written source-agnostically, as in the official EBQ rubric, or the model answer must match."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "AQ-style argumentation item (skill 4.B) requiring a defensible claim, two pieces of evidence from different sources, and two different psychological concepts (e.g., social loafing/diffusion of responsibility, correlation vs causation, sampling bias, confounds, experimental control). Concepts are in CED scope and the sources are short and explicit about their limitations. Multiple defensible claims are acceptable, so there is no unfair ambiguity. Difficulty comes from integrating evidence and concepts across five scored parts, which fits a full mock exam.",
+   "reading_load": "medium",
+   "computation_load": "low",
+   "reasoning_steps": 8,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 900
+  }
+ }
+]

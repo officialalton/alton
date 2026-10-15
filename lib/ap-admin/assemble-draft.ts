@@ -9,6 +9,7 @@ import { planPhysDraftSet } from "./assemble-phys-draft";
 import { planChemDraftSet } from "./assemble-chem-draft";
 import { planMicroDraftSet } from "./assemble-micro-draft";
 import { planMacroDraftSet } from "./assemble-macro-draft";
+import { planPsychDraftSet } from "./assemble-psych-draft";
 import { planCsaDraftSet } from "./assemble-csa-draft";
 import { planBioDraftSet } from "./assemble-bio-draft";
 import { planElDraftSet } from "./assemble-elang-draft";
@@ -17,6 +18,7 @@ import type { PhysItem } from "../../scripts/ap-generation/phys-pool";
 import type { ChemItem } from "../../scripts/ap-generation/chem-pool";
 import type { MicroItem } from "../../scripts/ap-generation/micro-pool";
 import type { MacroItem } from "../../scripts/ap-generation/macro-pool";
+import type { PsychItem } from "../../scripts/ap-generation/psych-pool";
 import type { CsItem } from "../../scripts/ap-generation/cs-pool";
 import type { BioItem } from "../../scripts/ap-generation/bio-pool";
 import type { ElItem } from "../../scripts/ap-generation/el-pool";
@@ -32,11 +34,11 @@ export type PoolRow = {
 export type FullSetUsage = { id: string; name: string; status: string; problemIds: string[]; candidateKeys: string[]; label?: string };
 
 /** 세트 ID 접두 → AP 과목. 모르는 접두는 AB 로 가정하지 않고 거부한다(2026-10-12: 통계 등 새 과목이 AB 로 오판되던 문제). */
-export const SET_PREFIX_SUBJECT: Record<string, string> = { AB: "ap_calculus_ab", BC: "ap_calculus_bc", ST: "ap_statistics", PH: "ap_physics_1", CH: "ap_chemistry", MI: "ap_microeconomics", MA: "ap_macroeconomics", CS: "ap_computer_science_a", BI: "ap_biology", EL: "ap_english_language" };
-export const SET_ID_RE = /^(AB|BC|ST|PH|CH|MI|MA|CS|BI|EL)\d$/;
+export const SET_PREFIX_SUBJECT: Record<string, string> = { AB: "ap_calculus_ab", BC: "ap_calculus_bc", ST: "ap_statistics", PH: "ap_physics_1", CH: "ap_chemistry", MI: "ap_microeconomics", MA: "ap_macroeconomics", PS: "ap_psychology", CS: "ap_computer_science_a", BI: "ap_biology", EL: "ap_english_language" };
+export const SET_ID_RE = /^(AB|BC|ST|PH|CH|MI|MA|PS|CS|BI|EL)\d$/;
 export const subjectOfSetIdOrNull = (id: string): string | null => SET_PREFIX_SUBJECT[id.slice(0, 2)] ?? null;
 export function subjectOfSetId(id: string): string { const s = subjectOfSetIdOrNull(id); if (!s) throw new Error(`알 수 없는 세트 ID 접두: ${id}`); return s; }
-const SUBJECT_TITLE: Record<string, string> = { ap_calculus_ab: "AP Calculus AB", ap_calculus_bc: "AP Calculus BC", ap_statistics: "AP Statistics", ap_physics_1: "AP Physics 1", ap_chemistry: "AP Chemistry", ap_microeconomics: "AP Microeconomics", ap_macroeconomics: "AP Macroeconomics", ap_computer_science_a: "AP Computer Science A", ap_biology: "AP Biology", ap_english_language: "AP English Language" };
+const SUBJECT_TITLE: Record<string, string> = { ap_calculus_ab: "AP Calculus AB", ap_calculus_bc: "AP Calculus BC", ap_statistics: "AP Statistics", ap_physics_1: "AP Physics 1", ap_chemistry: "AP Chemistry", ap_microeconomics: "AP Microeconomics", ap_macroeconomics: "AP Macroeconomics", ap_psychology: "AP Psychology", ap_computer_science_a: "AP Computer Science A", ap_biology: "AP Biology", ap_english_language: "AP English Language" };
 export const defaultDraftName = (setId: string) => `${SUBJECT_TITLE[subjectOfSetId(setId)]} — Practice Exam ${setId.slice(2)}`;
 
 let poolCache: Item[] | null = null;
@@ -55,7 +57,7 @@ export type DraftPlan = {
 };
 
 export function planDraftSet(o: {
-  setId: string; keys: SetKeys; hasVirtual: boolean; name?: string; pool: PoolRow[]; existingFullSets: FullSetUsage[]; publishedKeys: Set<string>; stock: Item[]; floor?: number; /** 통계 재고(테스트 주입용; 기본은 커밋된 재고 + 화면 증거). */ statsStock?: StatsItem[]; /** 물리 재고(테스트 주입용). */ physStock?: PhysItem[]; /** 화학 재고(테스트 주입용). */ chemStock?: ChemItem[]; /** 마이크로 재고(테스트 주입용). */ microStock?: MicroItem[]; /** 매크로 재고(테스트 주입용). */ macroStock?: MacroItem[]; /** CS A 재고(테스트 주입용). */ csaStock?: CsItem[]; /** Biology 재고(테스트 주입용). */ bioStock?: BioItem[]; elStock?: ElItem[];
+  setId: string; keys: SetKeys; hasVirtual: boolean; name?: string; pool: PoolRow[]; existingFullSets: FullSetUsage[]; publishedKeys: Set<string>; stock: Item[]; floor?: number; /** 통계 재고(테스트 주입용; 기본은 커밋된 재고 + 화면 증거). */ statsStock?: StatsItem[]; /** 물리 재고(테스트 주입용). */ physStock?: PhysItem[]; /** 화학 재고(테스트 주입용). */ chemStock?: ChemItem[]; /** 마이크로 재고(테스트 주입용). */ microStock?: MicroItem[]; /** 매크로 재고(테스트 주입용). */ macroStock?: MacroItem[]; /** 심리학 재고(테스트 주입용). */ psychStock?: PsychItem[]; /** CS A 재고(테스트 주입용). */ csaStock?: CsItem[]; /** Biology 재고(테스트 주입용). */ bioStock?: BioItem[]; elStock?: ElItem[];
 }): DraftPlan {
   const problems: string[] = [];
   const subjectKnown = subjectOfSetIdOrNull(o.setId); const subject = subjectKnown ?? "unknown";
@@ -84,6 +86,10 @@ export function planDraftSet(o: {
   if (subjectKnown === "ap_macroeconomics" && SET_ID_RE.test(o.setId)) { // 매크로: MC 60 단독 5지선다·FRQ 3(긴 1 + 짧은 2, 과제 유형 비중) 구조는 전용 계획기가 독립 검증한다
     const ma = planMacroDraftSet({ setId: o.setId, keys: o.keys, hasVirtual: o.hasVirtual, name, pool: o.pool, existingFullSets: o.existingFullSets, subject, stock: o.macroStock });
     return { ...ma, problems: [...problems, ...ma.problems], ok: problems.length === 0 && ma.ok };
+  }
+  if (subjectKnown === "ap_psychology" && SET_ID_RE.test(o.setId)) { // 심리학: MC 75(단독 + 3문항 세트)·FRQ 2(AAQ + EBQ) 구조는 전용 계획기가 독립 검증한다
+    const ps = planPsychDraftSet({ setId: o.setId, keys: o.keys, hasVirtual: o.hasVirtual, name, pool: o.pool, existingFullSets: o.existingFullSets, subject, stock: o.psychStock });
+    return { ...ps, problems: [...problems, ...ps.problems], ok: problems.length === 0 && ps.ok };
   }
   if (subjectKnown === "ap_computer_science_a" && SET_ID_RE.test(o.setId)) { // CS A: MC 42(단독 + 2문항 세트 1~3)·FRQ 4유형(q1~q4) 구조는 전용 계획기가 독립 검증한다
     const ap = planCsaDraftSet({ setId: o.setId, keys: o.keys, hasVirtual: o.hasVirtual, name, pool: o.pool, existingFullSets: o.existingFullSets, subject, stock: o.csaStock });

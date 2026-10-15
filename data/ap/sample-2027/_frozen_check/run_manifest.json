@@ -1,7 +1,7 @@
 {
  "run": "_frozen_check",
  "subject": "ap_biology",
- "generatorCommit": "b262e91a",
+ "generatorCommit": "30fa0935",
  "gateVersion": "v2-code-first-final-2026-10-08",
  "reviewerPromptHash": "27a77ef5f491",
  "difficultyPromptHash": "9bda2250d42c",
@@ -12,7 +12,7 @@
   "legacyItems": false,
   "repair": false
  },
- "arm": "frozen v1-bio-s2-mc-a",
+ "arm": "frozen v9-bio-data-short",
  "parserHash": "7528bbe8cdfc",
  "models": {
   "gen": "claude-sonnet-5-5",
@@ -35,9 +35,9 @@
  },
  "seeds": {
   "first": [
-   8700
+   2000
   ],
   "note": "seed0 = first seed tried per archetype; packs.json records pack_id = archetype-sSEED"
  },
- "frozenAt": "2026-10-14T07:34:46.668Z"
+ "frozenAt": "2026-10-15T04:00:21.250Z"
 }

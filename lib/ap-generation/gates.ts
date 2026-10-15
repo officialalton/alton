@@ -23,8 +23,9 @@ export const NOT_ASSESSED_MC: Record<string, string[]> = {
   ap_macroeconomics: ["4.A", "4.B", "4.C"],
   ap_physics_1: ["1.A", "1.B", "1.C", "3.A"], // 2027 CED p.172: Practice 1 과 3.A 는 MC 에서 평가하지 않는다
   ap_chemistry: ["3.A", "3.B", "3.C"], // AP Chemistry CED(2024) Exam Information p.207: Practice 3 은 MC 에서 평가하지 않는다
+  ap_psychology: ["4.A", "4.B"], // AP Psychology CED(Fall 2025) Exam Information p.148: MC 는 Practice 1-3 만 평가한다(Practice 4 논증은 FRQ 전용)
 };
-export const OPTION_COUNT: Record<string, number> = { ap_calculus_ab: 4, ap_biology: 4, ap_microeconomics: 5, ap_macroeconomics: 5, ap_statistics: 4, ap_physics_1: 4, ap_chemistry: 4, ap_computer_science_a: 4 };
+export const OPTION_COUNT: Record<string, number> = { ap_calculus_ab: 4, ap_biology: 4, ap_microeconomics: 5, ap_macroeconomics: 5, ap_psychology: 4, ap_statistics: 4, ap_physics_1: 4, ap_chemistry: 4, ap_computer_science_a: 4 };
 /** 수식 구분자 규칙이 적용되는 수학·통계 과목(달러 기호가 통화인 Micro 는 제외). 통계는 정수·확률·통계량을 모두 $...$ 안에 쓴다. */
 const MATH_SUBJECT = /^ap_(calculus|statistics|physics|chemistry|biology)/;
 
@@ -94,7 +95,9 @@ export function gateMc(subject: string, p: McPack): string[] {
   if (p.explanation_en && LETTER_REF.test(p.explanation_en)) r.push("explanation_references_option_letter");
   if ((NOT_ASSESSED_MC[subject] ?? []).includes(p.skill)) r.push("skill_not_assessed_in_mc");
   if (!(p.est_seconds >= 30 && p.est_seconds <= 150)) r.push("est_seconds_out_of_range");
-  if (p.stem.split(/\s+/).length > 120) r.push("stem_too_long");
+  const setMeta = (p as unknown as { set?: { question?: string; intro?: string } }).set; // 공유 세트 문항: 본문 = 세트 소개 + 질문 — 질문만 길이 한도를 적용하고 소개는 따로(220단어) 본다
+  if (setMeta?.question !== undefined) { if (setMeta.question.split(/\s+/).length > 120) r.push("stem_too_long"); if ((setMeta.intro ?? "").split(/\s+/).length > 220) r.push("set_intro_too_long"); }
+  else if (p.stem.split(/\s+/).length > 120) r.push("stem_too_long");
   if (subject === "ap_statistics") r.push(...statsMcRules(p)); // 통계 전용: 반올림 관례·구별 가능한 수치 선택지
   if (MATH_SUBJECT.test(subject)) { // 달러 기호가 통화인 과목(Micro)에는 적용하지 않는다
     if (p.stem.replace(/\\\$/g, "").split("$").length % 2 === 0) r.push("unbalanced_math_delimiters");
@@ -157,7 +160,7 @@ export function gateFrq(subject: string, p: FrqPack, skills: Set<string>, opts: 
   if (total !== p.total_points) r.push(`total_points_${total}_vs_${p.total_points}`);
   // 번들 대표 스킬은 어떤 파트의 평가 스킬이어야 하지만, 모든 파트가 같을 필요는 없다(공식 FRQ 는 파트별 스킬이 다르다).
   if (p.representative_skill && !p.parts.some((x) => x.skill_codes.includes(p.representative_skill!))) r.push("representative_skill_not_assessed_by_any_part");
-  if (subject !== "ap_biology" && p.est_minutes > (subject === "ap_microeconomics" || subject === "ap_macroeconomics" || subject === "ap_physics_1" || subject === "ap_chemistry" || subject === "ap_computer_science_a" ? 32 : subject === "ap_statistics" ? 25 : 20)) r.push("est_minutes_too_long"); // Bio 의 시간은 점수 비례 내부 추정(참고용)이라 반려 사유로 쓰지 않는다
+  if (subject !== "ap_biology" && p.est_minutes > (subject === "ap_psychology" ? 45 : subject === "ap_microeconomics" || subject === "ap_macroeconomics" || subject === "ap_physics_1" || subject === "ap_chemistry" || subject === "ap_computer_science_a" ? 32 : subject === "ap_statistics" ? 25 : 20)) r.push("est_minutes_too_long"); // Bio 의 시간은 점수 비례 내부 추정(참고용)이라 반려 사유로 쓰지 않는다
   if (!(p.stimulus.kind && p.stimulus.description)) r.push("missing_stimulus");
   return [...new Set(r)];
 }
@@ -187,7 +190,8 @@ export function calibrateMc(subject: string, p: McPack): string[] {
   const P = REFERENCE_PROFILE.mc;
   if (false) r.push("");
   if (p.est_seconds < P.estSeconds[0] || p.est_seconds > P.estSeconds[1]) r.push("reference_time_out_of_range");
-  const words = p.stem.replace(/\$[^$]*\$/g, " ").split(/\s+/).filter(Boolean).length;
+  const setQ = (p as unknown as { set?: { question?: string } }).set?.question; // 공유 세트 문항은 질문 문장만 센다(소개는 gateMc 가 따로 본다)
+  const words = (setQ ?? p.stem).replace(/\$[^$]*\$/g, " ").split(/\s+/).filter(Boolean).length;
   if (words < 3 || words > P.stemWords[1]) r.push("reference_stem_length_out_of_range");
   const whys = new Set(p.options.filter((_, i) => i !== p.key_index).map((o) => norm(o.why ?? "")));
   if (whys.size < Math.min(P.minDistinctMisconceptions, p.options.length - 1)) r.push("reference_distractor_misconceptions_not_distinct");
@@ -211,9 +215,13 @@ export const CHEMISTRY_FRQ_PROFILE: Record<string, { points: number; parts: [num
 };
 /** Computer Science A(2027): FRQ 4문항(메서드·제어문 / 클래스 설계 / ArrayList / 2D 배열) 각 9점(공식 고정, 채점 지침 2025). 문항별 시간은 공식 미공표 — 90분/4 = 약 22분(내부 추정). Q1 은 파트 a/b 두 개, Q2~Q4 는 한 덩어리로 쓰는 코드라 파트 1개에 채점 행 최대 9개. 채점 행은 1점 단위. */
 export const CSA_FRQ_PROFILE = { points: 9, parts: [1, 3] as [number, number], rowsPerPart: [1, 9] as [number, number], minutes: [18, 26] as [number, number] };
+/** Psychology(CED Fall 2025 p.147-149): FRQ 2문항 — Article Analysis(AAQ, 25분 = 읽기 10 + 쓰기 15, 7점, 파트 A-F) · Evidence-Based(EBQ, 45분 = 읽기 15 + 쓰기 30, 7점, 파트 A·B(i)·B(ii)·C(i)·C(ii)). 시간 범위는 공식 시간에 맞춘 내부 값. */
+export const PSYCH_FRQ_PROFILE: Record<string, { points: number; parts: [number, number]; rowsPerPart: [number, number]; minutes: [number, number] }> = {
+  aaq: { points: 7, parts: [6, 6], rowsPerPart: [1, 2], minutes: [20, 25] }, ebq: { points: 7, parts: [5, 5], rowsPerPart: [1, 2], minutes: [35, 45] },
+};
 export function calibrateFrq(p: FrqPack, subject = "ap_calculus_ab"): string[] {
   const r: string[] = [];
-  const prof = subject === "ap_chemistry" ? (CHEMISTRY_FRQ_PROFILE[p.template] ?? { points: -1, parts: [99, 99] as [number, number], rowsPerPart: [99, 99] as [number, number], minutes: [0, 0] as [number, number] }) : subject === "ap_physics_1" ? (PHYSICS_FRQ_PROFILE[p.template] ?? { points: -1, parts: [99, 99] as [number, number], rowsPerPart: [99, 99] as [number, number], minutes: [0, 0] as [number, number] }) : subject === "ap_statistics" ? STATS_PROFILE : subject === "ap_computer_science_a" ? CSA_FRQ_PROFILE : (subject === "ap_microeconomics" || subject === "ap_macroeconomics") ? (p.total_points >= 10 ? MICRO_PROFILE.long : MICRO_PROFILE.short) : subject === "ap_biology" ? (p.total_points >= 9 ? BIO_PROFILE.long : BIO_PROFILE.short) : p.total_points >= 9 ? REFERENCE_PROFILE.frq9 : REFERENCE_PROFILE.frq4;
+  const prof = subject === "ap_psychology" ? (PSYCH_FRQ_PROFILE[p.template] ?? { points: -1, parts: [99, 99] as [number, number], rowsPerPart: [99, 99] as [number, number], minutes: [0, 0] as [number, number] }) : subject === "ap_chemistry" ? (CHEMISTRY_FRQ_PROFILE[p.template] ?? { points: -1, parts: [99, 99] as [number, number], rowsPerPart: [99, 99] as [number, number], minutes: [0, 0] as [number, number] }) : subject === "ap_physics_1" ? (PHYSICS_FRQ_PROFILE[p.template] ?? { points: -1, parts: [99, 99] as [number, number], rowsPerPart: [99, 99] as [number, number], minutes: [0, 0] as [number, number] }) : subject === "ap_statistics" ? STATS_PROFILE : subject === "ap_computer_science_a" ? CSA_FRQ_PROFILE : (subject === "ap_microeconomics" || subject === "ap_macroeconomics") ? (p.total_points >= 10 ? MICRO_PROFILE.long : MICRO_PROFILE.short) : subject === "ap_biology" ? (p.total_points >= 9 ? BIO_PROFILE.long : BIO_PROFILE.short) : p.total_points >= 9 ? REFERENCE_PROFILE.frq9 : REFERENCE_PROFILE.frq4;
   if (p.total_points !== prof.points) r.push("reference_points_mismatch");
   if (p.parts.length < prof.parts[0] || p.parts.length > prof.parts[1]) r.push("reference_part_count_out_of_range");
   if (subject !== "ap_biology" && (p.est_minutes < prof.minutes[0] || p.est_minutes > prof.minutes[1])) r.push("reference_time_out_of_range");

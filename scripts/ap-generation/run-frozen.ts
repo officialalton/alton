@@ -28,7 +28,7 @@ function actualOf(cfg: FrozenConfig, env: NodeJS.ProcessEnv): FrozenExpected {
   return { generatorHash: fileSetHash(expandFiles(cfg.generatorFiles)), reviewerPromptHash: String(m.reviewerPromptHash), difficultyPromptHash: String(m.difficultyPromptHash), parserHash: String(m.parserHash), models: m.models, flags: { flatReview: m.flags.flatReview, subjectNotes: m.flags.subjectNotes, requireBlueprint: m.flags.requireBlueprint, legacyItems: m.flags.legacyItems, repair: m.flags.repair } };
 }
 function stage(cfg: FrozenConfig, env: NodeJS.ProcessEnv, st: string) {
-  const r = spawnSync("npx", ["tsx", "scripts/ap-generation/pipeline2.ts", st, "--run", cfg.run, "--subject", cfg.subject, "--seed0", String(cfg.seed0), "--sync"], { env, encoding: "utf-8" }); const last = (r.stdout ?? "").trim().split("\n").slice(-1)[0] ?? ""; console.log(`[${st}] ${last.slice(0, 150)}`); if (r.status !== 0) throw new Error(`${st} 실패: ${(r.stderr ?? "").slice(-300)}`);
+  const r = spawnSync("npx", ["tsx", "scripts/ap-generation/pipeline2.ts", st, "--run", cfg.run, "--subject", cfg.subject, "--seed0", String(cfg.seed0), ...(cfg.batch ? [] : ["--sync"])], { env, encoding: "utf-8", maxBuffer: 64 * 1024 * 1024 }); const last = (r.stdout ?? "").trim().split("\n").slice(-1)[0] ?? ""; console.log(`[${st}] ${last.slice(0, 150)}`); if (r.status !== 0) throw new Error(`${st} 실패: ${(r.stderr ?? "").slice(-300)}`);
 }
 const spentSince = (cfg: FrozenConfig) => { const b = path.join(root, cfg.run, "baseline.json"); if (!existsSync(b)) return 0; const base = (JSON.parse(readFileSync(b, "utf-8")) as { spent: number }).spent; return (JSON.parse(readFileSync(path.join(root, "ledger.json"), "utf-8")) as { spent: number }).spent - base; };
 

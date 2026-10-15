@@ -1,0 +1,2018 @@
+{
+ "schemaVersion": 1,
+ "subject": {
+  "apCode": "ap_psychology",
+  "name": "AP Psychology",
+  "family": "psychology",
+  "edition": "ced-2027",
+  "cedVersion": "AP Psychology CED (Course Framework V.1, (c)2024; effective Fall 2025)",
+  "examYear": 2027,
+  "sourceUrl": "https://apcentral.collegeboard.org/media/pdf/ap-psychology-course-and-exam-description.pdf",
+  "officialTopicCodes": true,
+  "designNotes": "Units, topic codes, titles, instructional periods, MC unit weights (15-25 percent each) and suggested skills come from the CED effective Fall 2025 (5 units; the pre-2024 9-unit framework no longer applies). MC practice weights (65/25/10 percent) are approximate in the CED; the 60-70/20-30/5-15 ranges are an ALTON tolerance. Practice 4 (Argumentation) is FRQ-only. Sub-keywords, kinds, requires and estLessons are original tutoring-sequence proposals; where the CED lists only categories of disorders or neurotransmitters, only the listed items are in scope (see docs/ap/psychology-facts.md)."
+ },
+ "skills": [
+  {
+   "code": "1.A",
+   "category": "Practice 1: Concept Application",
+   "label": "Apply psychological perspectives, theories, concepts, and research findings to a scenario"
+  },
+  {
+   "code": "1.B",
+   "category": "Practice 1: Concept Application",
+   "label": "Explain how cultural norms, expectations, and circumstances, as well as cognitive biases, apply to behavior and mental processes"
+  },
+  {
+   "code": "2.A",
+   "category": "Practice 2: Research Methods and Design",
+   "label": "Determine the type of research design(s) used in a given study"
+  },
+  {
+   "code": "2.B",
+   "category": "Practice 2: Research Methods and Design",
+   "label": "Evaluate the appropriate use of research design elements in experimental methodology"
+  },
+  {
+   "code": "2.C",
+   "category": "Practice 2: Research Methods and Design",
+   "label": "Evaluate the appropriate use of research design elements in non-experimental methodologies"
+  },
+  {
+   "code": "2.D",
+   "category": "Practice 2: Research Methods and Design",
+   "label": "Evaluate whether a psychological research scenario followed appropriate ethical procedures"
+  },
+  {
+   "code": "3.A",
+   "category": "Practice 3: Data Interpretation",
+   "label": "Identify psychology-related concepts in descriptions or representations of data"
+  },
+  {
+   "code": "3.B",
+   "category": "Practice 3: Data Interpretation",
+   "label": "Calculate and interpret measures of central tendency, variation, and percentile rank in a given data set"
+  },
+  {
+   "code": "3.C",
+   "category": "Practice 3: Data Interpretation",
+   "label": "Interpret quantitative or qualitative inferential data from a given table, graph, chart, figure, or diagram"
+  },
+  {
+   "code": "4.A",
+   "category": "Practice 4: Argumentation",
+   "label": "Propose a defensible claim"
+  },
+  {
+   "code": "4.B",
+   "category": "Practice 4: Argumentation",
+   "label": "Provide reasoning that is grounded in scientifically derived evidence to support, refute, or modify an established or provided claim, policy, or norm"
+  }
+ ],
+ "weights": [
+  {
+   "axis": "unit",
+   "code": "1",
+   "section": "mc",
+   "min": 15,
+   "max": 25,
+   "source": "AP Psychology CED (effective Fall 2025), Exam Information p.148: MC unit weighting 15-25 percent for each of the 5 units"
+  },
+  {
+   "axis": "unit",
+   "code": "2",
+   "section": "mc",
+   "min": 15,
+   "max": 25,
+   "source": "AP Psychology CED (effective Fall 2025), Exam Information p.148: MC unit weighting 15-25 percent for each of the 5 units"
+  },
+  {
+   "axis": "unit",
+   "code": "3",
+   "section": "mc",
+   "min": 15,
+   "max": 25,
+   "source": "AP Psychology CED (effective Fall 2025), Exam Information p.148: MC unit weighting 15-25 percent for each of the 5 units"
+  },
+  {
+   "axis": "unit",
+   "code": "4",
+   "section": "mc",
+   "min": 15,
+   "max": 25,
+   "source": "AP Psychology CED (effective Fall 2025), Exam Information p.148: MC unit weighting 15-25 percent for each of the 5 units"
+  },
+  {
+   "axis": "unit",
+   "code": "5",
+   "section": "mc",
+   "min": 15,
+   "max": 25,
+   "source": "AP Psychology CED (effective Fall 2025), Exam Information p.148: MC unit weighting 15-25 percent for each of the 5 units"
+  },
+  {
+   "axis": "skill",
+   "code": "Practice 1: Concept Application",
+   "section": "mc",
+   "min": 60,
+   "max": 70,
+   "source": "AP Psychology CED Exam Information p.148: approximate MC weighting (65 percent); the published value is approximate, so ALTON allows plus or minus 5 percentage points (internal tolerance)"
+  },
+  {
+   "axis": "skill",
+   "code": "Practice 2: Research Methods and Design",
+   "section": "mc",
+   "min": 20,
+   "max": 30,
+   "source": "AP Psychology CED Exam Information p.148: approximate MC weighting (25 percent); the published value is approximate, so ALTON allows plus or minus 5 percentage points (internal tolerance)"
+  },
+  {
+   "axis": "skill",
+   "code": "Practice 3: Data Interpretation",
+   "section": "mc",
+   "min": 5,
+   "max": 15,
+   "source": "AP Psychology CED Exam Information p.148: approximate MC weighting (10 percent); the published value is approximate, so ALTON allows plus or minus 5 percentage points (internal tolerance)"
+  },
+  {
+   "axis": "skill",
+   "code": "Practice 4: Argumentation",
+   "section": "frq",
+   "min": null,
+   "max": null,
+   "source": "AP Psychology CED Exam Information p.149: Practice 4 is assessed in both FRQs (AAQ: practices 2, 3, 4; EBQ: practices 1, 4) and not in MC"
+  }
+ ],
+ "units": [
+  {
+   "code": "1",
+   "title": "Biological Bases of Behavior",
+   "officialClassPeriods": "~17-23",
+   "topics": [
+    {
+     "code": "1.1",
+     "title": "Interaction of Heredity and Environment",
+     "scope": "both",
+     "skills": [
+      "1.A",
+      "2.A"
+     ],
+     "requires": [],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "1.1#1",
+       "label": "Nature, nurture, and their interaction",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "1.1#2",
+       "label": "Twin, family, and adoption studies",
+       "kind": "representation",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [
+        "1.1#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.1#3",
+       "label": "Heritability confusions: genes are not destiny",
+       "kind": "misconception",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [
+        "1.1#2"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "1.2",
+     "title": "Overview of the Nervous System",
+     "scope": "both",
+     "skills": [
+      "1.A",
+      "3.A"
+     ],
+     "requires": [
+      "1.1"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "1.2#1",
+       "label": "Central and peripheral nervous systems",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "1.2#2",
+       "label": "Autonomic versus somatic divisions",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "1.2#3",
+       "label": "Sympathetic and parasympathetic responses",
+       "kind": "skill",
+       "skills": [
+        "3.A"
+       ],
+       "requires": [
+        "1.2#2"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "1.3",
+     "title": "The Neuron and Neural Firing",
+     "scope": "both",
+     "skills": [
+      "1.A",
+      "2.A",
+      "3.A"
+     ],
+     "requires": [
+      "1.2"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "1.3#1",
+       "label": "Neuron structure, glial cells, and the reflex arc",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "1.3#2",
+       "label": "Neural transmission: threshold, all-or-none, reuptake",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "1.3#3",
+       "label": "Listed neurotransmitters and hormones and their functions",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "1.3#4",
+       "label": "Agonists, antagonists, and reuptake inhibitors",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "1.3#5",
+       "label": "Psychoactive drug classes, tolerance, and addiction",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      }
+     ]
+    },
+    {
+     "code": "1.4",
+     "title": "The Brain",
+     "scope": "both",
+     "skills": [
+      "1.A",
+      "2.C",
+      "2.D",
+      "3.A"
+     ],
+     "requires": [
+      "1.3"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "1.4#1",
+       "label": "Brain stem, cerebellum, limbic system, and cortex lobes",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "1.4#2",
+       "label": "Split-brain research and hemispheric specialization",
+       "kind": "representation",
+       "skills": [
+        "2.C"
+       ],
+       "requires": [
+        "1.4#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.4#3",
+       "label": "Brain plasticity and recovery",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "1.4#4",
+       "label": "Brain imaging and case-study methods",
+       "kind": "skill",
+       "skills": [
+        "3.A"
+       ],
+       "requires": [
+        "1.4#3"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "1.5",
+     "title": "Sleep",
+     "scope": "both",
+     "skills": [
+      "1.B",
+      "2.C",
+      "2.D",
+      "4.A"
+     ],
+     "requires": [
+      "1.4"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "1.5#1",
+       "label": "Circadian rhythm and its disruptions",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "1.5#2",
+       "label": "Sleep stages and EEG patterns",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "1.5#3",
+       "label": "Theories of dreams and why we sleep",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "1.5#4",
+       "label": "Sleep disorders in scope",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "1.5#5",
+       "label": "Common sleep misconceptions",
+       "kind": "misconception",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [
+        "1.5#4"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "1.6",
+     "title": "Sensation",
+     "scope": "both",
+     "skills": [
+      "1.A",
+      "2.B",
+      "3.B",
+      "3.C"
+     ],
+     "requires": [
+      "1.5"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "1.6#1",
+       "label": "Thresholds, adaptation, and just-noticeable difference",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "1.6#2",
+       "label": "Vision: retina, rods, cones, and color theories",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "1.6#3",
+       "label": "Hearing: pitch theories and hearing loss types",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "1.6#4",
+       "label": "Chemical senses, touch, and pain",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "1.6#5",
+       "label": "Vestibular sense and kinesthesis",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "1.6#6",
+       "label": "Sensation versus perception",
+       "kind": "misconception",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [
+        "1.6#5"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "2",
+   "title": "Cognition",
+   "officialClassPeriods": "~17-23",
+   "topics": [
+    {
+     "code": "2.1",
+     "title": "Perception",
+     "scope": "both",
+     "skills": [
+      "1.B",
+      "3.A"
+     ],
+     "requires": [],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "2.1#1",
+       "label": "Top-down and bottom-up processing",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "2.1#2",
+       "label": "Gestalt principles of perceptual organization",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "2.1#3",
+       "label": "Depth cues and perceptual constancies",
+       "kind": "representation",
+       "skills": [
+        "3.A"
+       ],
+       "requires": [
+        "2.1#2"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.1#4",
+       "label": "Selective attention and change blindness",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      }
+     ]
+    },
+    {
+     "code": "2.2",
+     "title": "Thinking, Problem-Solving, Judgments, and Decision-Making",
+     "scope": "both",
+     "skills": [
+      "1.B",
+      "2.C"
+     ],
+     "requires": [
+      "2.1"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "2.2#1",
+       "label": "Concepts, prototypes, and schemas",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "2.2#2",
+       "label": "Algorithms and heuristics",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "2.2#3",
+       "label": "Cognitive biases in judgment and decision-making",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "2.2#4",
+       "label": "Creativity, functional fixedness, and executive functions",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      }
+     ]
+    },
+    {
+     "code": "2.3",
+     "title": "Introduction to Memory",
+     "scope": "both",
+     "skills": [
+      "1.A",
+      "2.A"
+     ],
+     "requires": [
+      "2.2"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "2.3#1",
+       "label": "Explicit, implicit, and prospective memory",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "2.3#2",
+       "label": "Multi-store and working memory models",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "2.3#3",
+       "label": "Levels of processing and long-term potentiation",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      }
+     ]
+    },
+    {
+     "code": "2.4",
+     "title": "Encoding Memories",
+     "scope": "both",
+     "skills": [
+      "1.A",
+      "2.B",
+      "3.B"
+     ],
+     "requires": [
+      "2.3"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "2.4#1",
+       "label": "Effortful and automatic encoding, chunking, and mnemonics",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "2.4#2",
+       "label": "Spacing effect and serial position effect",
+       "kind": "skill",
+       "skills": [
+        "3.B"
+       ],
+       "requires": [
+        "2.4#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.4#3",
+       "label": "Designing a memory experiment",
+       "kind": "skill",
+       "skills": [
+        "2.B"
+       ],
+       "requires": [
+        "2.4#2"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "2.5",
+     "title": "Storing Memories",
+     "scope": "both",
+     "skills": [
+      "1.A",
+      "2.C"
+     ],
+     "requires": [
+      "2.4"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "2.5#1",
+       "label": "Sensory, short-term, working, and long-term storage",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "2.5#2",
+       "label": "Rehearsal types and storage impairments",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "2.5#3",
+       "label": "Superior autobiographical memory",
+       "kind": "representation",
+       "skills": [
+        "2.C"
+       ],
+       "requires": [
+        "2.5#2"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "2.6",
+     "title": "Retrieving Memories",
+     "scope": "both",
+     "skills": [
+      "1.A",
+      "3.A",
+      "3.C"
+     ],
+     "requires": [
+      "2.5"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "2.6#1",
+       "label": "Recall versus recognition",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "2.6#2",
+       "label": "Context-, mood-, and state-dependent retrieval",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "2.6#3",
+       "label": "Retrieval practice and the testing effect",
+       "kind": "skill",
+       "skills": [
+        "3.C"
+       ],
+       "requires": [
+        "2.6#2"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "2.7",
+     "title": "Forgetting and Other Memory Challenges",
+     "scope": "both",
+     "skills": [
+      "1.A",
+      "2.B",
+      "4.A"
+     ],
+     "requires": [
+      "2.6"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "2.7#1",
+       "label": "Forgetting curve and encoding failure",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "2.7#2",
+       "label": "Proactive and retroactive interference",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "2.7#3",
+       "label": "Misinformation effect, source amnesia, and constructed memory",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "2.7#4",
+       "label": "Evaluating eyewitness memory claims",
+       "kind": "skill",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [
+        "2.7#3"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "2.8",
+     "title": "Intelligence and Achievement",
+     "scope": "both",
+     "skills": [
+      "1.B",
+      "2.D",
+      "4.B"
+     ],
+     "requires": [
+      "2.7"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "2.8#1",
+       "label": "General intelligence versus multiple abilities",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "2.8#2",
+       "label": "Standardization, validity, and reliability of tests",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "2.8#3",
+       "label": "Flynn effect, stereotype threat, and test bias",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "2.8#4",
+       "label": "Achievement versus aptitude and mindset",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "3",
+   "title": "Development and Learning",
+   "officialClassPeriods": "~17-23",
+   "topics": [
+    {
+     "code": "3.1",
+     "title": "Themes and Methods in Developmental Psychology",
+     "scope": "both",
+     "skills": [
+      "1.A",
+      "2.A"
+     ],
+     "requires": [],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "3.1#1",
+       "label": "Stability versus change and continuity versus stages",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "3.1#2",
+       "label": "Cross-sectional and longitudinal designs",
+       "kind": "representation",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [
+        "3.1#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "3.2",
+     "title": "Physical Development Across the Lifespan",
+     "scope": "both",
+     "skills": [
+      "1.A",
+      "3.C",
+      "4.A"
+     ],
+     "requires": [
+      "3.1"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "3.2#1",
+       "label": "Prenatal influences and teratogens",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "3.2#2",
+       "label": "Infant reflexes, motor milestones, and sensitive periods",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "3.2#3",
+       "label": "Adolescent and adult physical change",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      }
+     ]
+    },
+    {
+     "code": "3.3",
+     "title": "Gender and Sexual Orientation",
+     "scope": "both",
+     "skills": [
+      "2.C"
+     ],
+     "requires": [
+      "3.2"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "3.3#1",
+       "label": "Sex, gender, and socialization",
+       "kind": "concept",
+       "skills": [
+        "2.C"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      }
+     ]
+    },
+    {
+     "code": "3.4",
+     "title": "Cognitive Development Across the Lifespan",
+     "scope": "both",
+     "skills": [
+      "1.B",
+      "2.C",
+      "4.B"
+     ],
+     "requires": [
+      "3.3"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "3.4#1",
+       "label": "Piaget's stages and schema processes",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "3.4#2",
+       "label": "Vygotsky's zone of proximal development and scaffolding",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "3.4#3",
+       "label": "Fluid and crystallized intelligence in adulthood",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      }
+     ]
+    },
+    {
+     "code": "3.5",
+     "title": "Communication and Language Development",
+     "scope": "both",
+     "skills": [
+      "1.B",
+      "2.D"
+     ],
+     "requires": [
+      "3.4"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "3.5#1",
+       "label": "Components of language: phonemes, morphemes, syntax",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "3.5#2",
+       "label": "Stages of language development and overgeneralization",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      }
+     ]
+    },
+    {
+     "code": "3.6",
+     "title": "Social-Emotional Development Across the Lifespan",
+     "scope": "both",
+     "skills": [
+      "1.A",
+      "2.A",
+      "2.B"
+     ],
+     "requires": [
+      "3.5"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "3.6#1",
+       "label": "Ecological systems theory",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "3.6#2",
+       "label": "Parenting styles",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "3.6#3",
+       "label": "Attachment styles and temperament",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "3.6#4",
+       "label": "Peer relationships and adolescent egocentrism",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "3.6#5",
+       "label": "Psychosocial stages and identity development",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      }
+     ]
+    },
+    {
+     "code": "3.7",
+     "title": "Classical Conditioning",
+     "scope": "both",
+     "skills": [
+      "1.A",
+      "2.D",
+      "3.A"
+     ],
+     "requires": [
+      "3.6"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "3.7#1",
+       "label": "UCS, UCR, CS, and CR in scenarios",
+       "kind": "skill",
+       "skills": [
+        "3.A"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "3.7#2",
+       "label": "Acquisition, extinction, spontaneous recovery, generalization, discrimination",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "3.7#3",
+       "label": "Taste aversion, preparedness, and habituation",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      }
+     ]
+    },
+    {
+     "code": "3.8",
+     "title": "Operant Conditioning",
+     "scope": "both",
+     "skills": [
+      "1.A",
+      "3.A",
+      "3.B",
+      "4.A"
+     ],
+     "requires": [
+      "3.7"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "3.8#1",
+       "label": "Reinforcement and punishment, positive and negative",
+       "kind": "skill",
+       "skills": [
+        "3.A"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "3.8#2",
+       "label": "Shaping and instinctive drift",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "3.8#3",
+       "label": "Reinforcement schedules and response patterns",
+       "kind": "representation",
+       "skills": [
+        "3.A"
+       ],
+       "requires": [
+        "3.8#2"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "3.8#4",
+       "label": "Learned helplessness and superstitious behavior",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      }
+     ]
+    },
+    {
+     "code": "3.9",
+     "title": "Social, Cognitive, and Neurological Factors in Learning",
+     "scope": "both",
+     "skills": [
+      "1.A",
+      "4.B"
+     ],
+     "requires": [
+      "3.8"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "3.9#1",
+       "label": "Observational learning and modeling",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "3.9#2",
+       "label": "Insight and latent learning",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "4",
+   "title": "Social Psychology and Personality",
+   "officialClassPeriods": "~17-23",
+   "topics": [
+    {
+     "code": "4.1",
+     "title": "Attribution Theory and Person Perception",
+     "scope": "both",
+     "skills": [
+      "1.B",
+      "2.B",
+      "2.C",
+      "4.A"
+     ],
+     "requires": [],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "4.1#1",
+       "label": "Dispositional versus situational attributions",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "4.1#2",
+       "label": "Fundamental attribution error and self-serving bias",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "4.1#3",
+       "label": "Explanatory style and locus of control",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "4.1#4",
+       "label": "Mere exposure, self-fulfilling prophecy, and social comparison",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      }
+     ]
+    },
+    {
+     "code": "4.2",
+     "title": "Attitude Formation and Attitude Change",
+     "scope": "both",
+     "skills": [
+      "1.B",
+      "3.A",
+      "3.B",
+      "4.B"
+     ],
+     "requires": [
+      "4.1"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "4.2#1",
+       "label": "Stereotypes, prejudice, and discrimination",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "4.2#2",
+       "label": "Implicit attitudes and in-group bias",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "4.2#3",
+       "label": "Belief perseverance and confirmation bias",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "4.2#4",
+       "label": "Cognitive dissonance",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      }
+     ]
+    },
+    {
+     "code": "4.3",
+     "title": "Psychology of Social Situations",
+     "scope": "both",
+     "skills": [
+      "1.B",
+      "2.D",
+      "3.B",
+      "4.A"
+     ],
+     "requires": [
+      "4.2"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "4.3#1",
+       "label": "Social norms and social influence",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "4.3#2",
+       "label": "Persuasion routes and compliance techniques",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "4.3#3",
+       "label": "Conformity and obedience research",
+       "kind": "representation",
+       "skills": [
+        "2.D"
+       ],
+       "requires": [
+        "4.3#2"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "4.3#4",
+       "label": "Group effects: polarization, groupthink, social loafing",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "4.3#5",
+       "label": "Prosocial behavior and the bystander effect",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "4.3#6",
+       "label": "Industrial-organizational psychology",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      }
+     ]
+    },
+    {
+     "code": "4.4",
+     "title": "Psychodynamic and Humanistic Theories of Personality",
+     "scope": "both",
+     "skills": [
+      "1.A",
+      "2.C"
+     ],
+     "requires": [
+      "4.3"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "4.4#1",
+       "label": "Unconscious processes and defense mechanisms",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "4.4#2",
+       "label": "Projective tests",
+       "kind": "skill",
+       "skills": [
+        "2.C"
+       ],
+       "requires": [
+        "4.4#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "4.4#3",
+       "label": "Humanistic theory: unconditional regard and self-actualizing tendency",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      }
+     ]
+    },
+    {
+     "code": "4.5",
+     "title": "Social-Cognitive and Trait Theories of Personality",
+     "scope": "both",
+     "skills": [
+      "1.A",
+      "2.A",
+      "3.C"
+     ],
+     "requires": [
+      "4.4"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "4.5#1",
+       "label": "Reciprocal determinism and self-efficacy",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "4.5#2",
+       "label": "Trait theories and the Big Five",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      }
+     ]
+    },
+    {
+     "code": "4.6",
+     "title": "Motivation",
+     "scope": "both",
+     "skills": [
+      "1.A",
+      "2.B",
+      "2.C"
+     ],
+     "requires": [
+      "4.5"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "4.6#1",
+       "label": "Drive-reduction, arousal, incentive, and self-determination theories",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "4.6#2",
+       "label": "Instincts and sensation seeking",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "4.6#3",
+       "label": "Lewin's motivational conflicts",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "4.6#4",
+       "label": "Hunger, ghrelin, and leptin",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      }
+     ]
+    },
+    {
+     "code": "4.7",
+     "title": "Emotion",
+     "scope": "both",
+     "skills": [
+      "1.A",
+      "2.D",
+      "3.A",
+      "4.B"
+     ],
+     "requires": [
+      "4.6"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "4.7#1",
+       "label": "Components of emotion and the facial-feedback hypothesis",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "4.7#2",
+       "label": "Broaden-and-build theory",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "4.7#3",
+       "label": "Display rules and cultural expression of emotion",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "5",
+   "title": "Mental and Physical Health",
+   "officialClassPeriods": "~17-23",
+   "topics": [
+    {
+     "code": "5.1",
+     "title": "Introduction to Health Psychology",
+     "scope": "both",
+     "skills": [
+      "1.B",
+      "3.A",
+      "3.B"
+     ],
+     "requires": [],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "5.1#1",
+       "label": "Stress, eustress, distress, and stressors",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "5.1#2",
+       "label": "General adaptation syndrome",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "5.1#3",
+       "label": "Tend-and-befriend response",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "5.1#4",
+       "label": "Problem-focused and emotion-focused coping",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      }
+     ]
+    },
+    {
+     "code": "5.2",
+     "title": "Positive Psychology",
+     "scope": "both",
+     "skills": [
+      "1.B",
+      "2.C",
+      "4.A"
+     ],
+     "requires": [
+      "5.1"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "5.2#1",
+       "label": "Well-being, gratitude, and signature strengths",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "5.2#2",
+       "label": "Posttraumatic growth",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      }
+     ]
+    },
+    {
+     "code": "5.3",
+     "title": "Explaining and Classifying Psychological Disorders",
+     "scope": "both",
+     "skills": [
+      "1.B",
+      "2.D",
+      "4.B"
+     ],
+     "requires": [
+      "5.2"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "5.3#1",
+       "label": "Defining disorders: dysfunction, distress, deviation",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "5.3#2",
+       "label": "DSM and ICD classification",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "5.3#3",
+       "label": "Perspectives on the causes of disorders",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "5.3#4",
+       "label": "Biopsychosocial and diathesis-stress models",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      }
+     ]
+    },
+    {
+     "code": "5.4",
+     "title": "Selection of Categories of Psychological Disorders",
+     "scope": "both",
+     "skills": [
+      "1.A",
+      "2.D",
+      "3.A",
+      "4.A"
+     ],
+     "requires": [
+      "5.3"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "5.4#1",
+       "label": "Neurodevelopmental and schizophrenia spectrum disorders",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "5.4#2",
+       "label": "Depressive and bipolar disorders",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "5.4#3",
+       "label": "Anxiety and obsessive-compulsive disorders",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "5.4#4",
+       "label": "Dissociative, trauma, and eating disorders",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "5.4#5",
+       "label": "Personality disorder clusters",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      }
+     ]
+    },
+    {
+     "code": "5.5",
+     "title": "Treatment of Psychological Disorders",
+     "scope": "both",
+     "skills": [
+      "1.A",
+      "2.B",
+      "2.C",
+      "2.D",
+      "3.C",
+      "4.B"
+     ],
+     "requires": [
+      "5.4"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "5.5#1",
+       "label": "Evidence-based treatment and therapeutic alliance",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "5.5#2",
+       "label": "Psychodynamic, cognitive, behavioral, and humanistic therapies",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "5.5#3",
+       "label": "Biological treatments and side effects",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "5.5#4",
+       "label": "Ethical principles in treatment",
+       "kind": "skill",
+       "skills": [
+        "2.D"
+       ],
+       "requires": [
+        "5.5#3"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "5.5#5",
+       "label": "Hypnosis and group therapy",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

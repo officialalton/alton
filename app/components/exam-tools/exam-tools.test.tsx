@@ -319,3 +319,11 @@ describe("AP Biology 도구", () => {
     expect(wp.items.map((i) => i.expr).join(" ")).toMatch(/°C \+ 273/);
   });
 });
+
+describe("AP Psychology 도구", () => {
+  const psych = subjectToolsConfig("ap_psychology");
+  it("계산기와 Reference 패널이 모두 없다(CED·AP Central 시험 안내에 둘 다 언급이 없다)", () => {
+    expect(psych.calculatorTabs).toEqual([]);
+    expect(psych.reference).toBeNull();
+  });
+});
