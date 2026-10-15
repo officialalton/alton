@@ -1,0 +1,90 @@
+{
+ "runs": [
+  "macro-hard-a"
+ ],
+ "rows": 51,
+ "passed": 42,
+ "rejected": 9,
+ "passRate": 0.824,
+ "mc": {
+  "rows": 51,
+  "passed": 42,
+  "passRate": 0.824
+ },
+ "frq": {
+  "rows": 0,
+  "passed": 0,
+  "passRate": 0
+ },
+ "unitsPassed": {
+  "1": 9,
+  "2": 15,
+  "4": 11,
+  "6": 7
+ },
+ "skillsPassed": {
+  "1.C": 4,
+  "3.C": 23,
+  "3.A": 2,
+  "2.C": 11,
+  "2.B": 2
+ },
+ "figPassed": {
+  "table": 29,
+  "none": 13
+ },
+ "figAll": {
+  "table": 36,
+  "none": 15
+ },
+ "figPassRate": {
+  "table": "29/36",
+  "none": "13/15"
+ },
+ "renderTypesPassed": {
+  "ap_table": 29,
+  "none": 13
+ },
+ "archetypesPassed": {
+  "ma_h_trade_gain": 3,
+  "ma_h_shift_shortage": 1,
+  "ma_h_ppc_rotate": 3,
+  "ma_h_terms_range": 2,
+  "ma_h_real_percapita": 3,
+  "ma_h_unemp_event": 3,
+  "ma_h_cpi_real_wage": 3,
+  "ma_h_exp_real_growth": 3,
+  "ma_h_gdp_classify": 1,
+  "ma_h_unexpected_inflation": 2,
+  "ma_h_omo_chain": 3,
+  "ma_h_real_rate_ad": 2,
+  "ma_h_money_target": 3,
+  "ma_h_rr_cut": 3,
+  "ma_h_export_price": 2,
+  "ma_h_trip_exchange": 2,
+  "ma_h_depr_nx_gdp": 3
+ },
+ "archetypesAll": {
+  "ma_h_trade_gain": 3,
+  "ma_h_shift_shortage": 3,
+  "ma_h_ppc_rotate": 3,
+  "ma_h_terms_range": 3,
+  "ma_h_real_percapita": 3,
+  "ma_h_unemp_event": 3,
+  "ma_h_cpi_real_wage": 3,
+  "ma_h_exp_real_growth": 3,
+  "ma_h_gdp_classify": 3,
+  "ma_h_unexpected_inflation": 3,
+  "ma_h_omo_chain": 3,
+  "ma_h_real_rate_ad": 3,
+  "ma_h_money_target": 3,
+  "ma_h_rr_cut": 3,
+  "ma_h_export_price": 3,
+  "ma_h_trip_exchange": 3,
+  "ma_h_depr_nx_gdp": 3
+ },
+ "failedArchetypes": [],
+ "costUsd": {
+  "macro-hard-a": 1.975
+ }
+}

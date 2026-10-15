@@ -1,0 +1,430 @@
+{
+ "kind": "ap_new_version_swap_plan",
+ "set": "MA1",
+ "sourceSetName": "AP Macroeconomics — Practice Exam 1",
+ "sourceVersionNo": 2,
+ "generatedBy": "scripts/audit/macro-new-version-plans.ts",
+ "note": "MA1 게시본 v2 → v3 배정(exam_prep MC 26/60). 상대 시험과 독립인 한 번의 새 버전(중간판 없음).",
+ "swapCount": 25,
+ "verifierViolations": [],
+ "swaps": [
+  {
+   "section": "ap_mc",
+   "position": 1,
+   "removeKey": "macro-p2-a:ap_macroeconomics-m02-k0",
+   "addKey": "macro-hard-a:ap_macroeconomics-m01-k0",
+   "remove": {
+    "unit": 1,
+    "skill": "1.B",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 1,
+    "skill": "1.C",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 2,
+   "removeKey": "macro-p2-a:ap_macroeconomics-m05-k0",
+   "addKey": "macro-hard-a:ap_macroeconomics-m04-k1",
+   "remove": {
+    "unit": 1,
+    "skill": "1.D",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 1,
+    "skill": "3.A",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 3,
+   "removeKey": "macro-p2-b:ap_macroeconomics-m01-k0",
+   "addKey": "macro-p1-a:ap_macroeconomics-m03-k0",
+   "remove": {
+    "unit": 1,
+    "skill": "1.A",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 1,
+    "skill": "3.A",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 4,
+   "removeKey": "macro-p2-b:ap_macroeconomics-m02-k0",
+   "addKey": "macro-p2-a:ap_macroeconomics-m06-k0",
+   "remove": {
+    "unit": 1,
+    "skill": "1.D",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 1,
+    "skill": "3.A",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 6,
+   "removeKey": "macro-p1-a:ap_macroeconomics-m04-k0",
+   "addKey": "macro-p1-a:ap_macroeconomics-m07-k0",
+   "remove": {
+    "unit": 2,
+    "skill": "1.C",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 2,
+    "skill": "1.B",
+    "examPrep": 0
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 7,
+   "removeKey": "macro-p1-a:ap_macroeconomics-m05-k0",
+   "addKey": "macro-p2-a:ap_macroeconomics-m12-k1",
+   "remove": {
+    "unit": 2,
+    "skill": "1.C",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 2,
+    "skill": "1.D",
+    "examPrep": 0
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 8,
+   "removeKey": "macro-p2-a:ap_macroeconomics-m09-k0",
+   "addKey": "macro-p2-a:ap_macroeconomics-m14-k1",
+   "remove": {
+    "unit": 2,
+    "skill": "1.C",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 2,
+    "skill": "1.A",
+    "examPrep": 0
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 9,
+   "removeKey": "macro-p2-a:ap_macroeconomics-m11-k0",
+   "addKey": "macro-hard-a:ap_macroeconomics-m06-k2",
+   "remove": {
+    "unit": 2,
+    "skill": "3.C",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 2,
+    "skill": "3.C",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 10,
+   "removeKey": "macro-p2-a:ap_macroeconomics-m13-k0",
+   "addKey": "macro-hard-a:ap_macroeconomics-m05-k1",
+   "remove": {
+    "unit": 2,
+    "skill": "2.A",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 2,
+    "skill": "2.C",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 11,
+   "removeKey": "macro-p2-b:ap_macroeconomics-m08-k0",
+   "addKey": "macro-hard-a:ap_macroeconomics-m07-k0",
+   "remove": {
+    "unit": 2,
+    "skill": "1.C",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 2,
+    "skill": "2.C",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 13,
+   "removeKey": "macro-p2-b:ap_macroeconomics-m15-k0",
+   "addKey": "macro-hard-a:ap_macroeconomics-m08-k0",
+   "remove": {
+    "unit": 2,
+    "skill": "3.A",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 2,
+    "skill": "2.C",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 14,
+   "removeKey": "macro-p2-b:ap_macroeconomics-m16-k0",
+   "addKey": "macro-hard-a:ap_macroeconomics-m10-k0",
+   "remove": {
+    "unit": 2,
+    "skill": "2.A",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 2,
+    "skill": "2.C",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 17,
+   "removeKey": "macro-p2-a:ap_macroeconomics-m21-k0",
+   "addKey": "macro-hard-b:ap_macroeconomics-m02-k0",
+   "remove": {
+    "unit": 3,
+    "skill": "2.A",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 3,
+    "skill": "2.B",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 21,
+   "removeKey": "macro-p2-a:ap_macroeconomics-m29-k1",
+   "addKey": "macro-hard-b:ap_macroeconomics-m06-k0",
+   "remove": {
+    "unit": 3,
+    "skill": "2.A",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 3,
+    "skill": "2.B",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 22,
+   "removeKey": "macro-p2-b:ap_macroeconomics-m23-k0",
+   "addKey": "macro-hard-b:ap_macroeconomics-m01-k0",
+   "remove": {
+    "unit": 3,
+    "skill": "2.B",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 3,
+    "skill": "3.C",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 24,
+   "removeKey": "macro-p2-b:ap_macroeconomics-m26-k0",
+   "addKey": "macro-hard-b:ap_macroeconomics-m04-k1",
+   "remove": {
+    "unit": 3,
+    "skill": "2.A",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 3,
+    "skill": "3.C",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 26,
+   "removeKey": "macro-p2-b:ap_macroeconomics-m29-k0",
+   "addKey": "macro-p2-b:ap_macroeconomics-m28-k0",
+   "remove": {
+    "unit": 3,
+    "skill": "2.B",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 3,
+    "skill": "3.C",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 38,
+   "removeKey": "macro-p2-b:ap_macroeconomics-m40-k0",
+   "addKey": "macro-hard-b:ap_macroeconomics-m15-k2",
+   "remove": {
+    "unit": 4,
+    "skill": "3.A",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 4,
+    "skill": "3.A",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 40,
+   "removeKey": "macro-p2-a:ap_macroeconomics-m44-k0",
+   "addKey": "macro-hard-b:ap_macroeconomics-m13-k2",
+   "remove": {
+    "unit": 5,
+    "skill": "2.C",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 5,
+    "skill": "2.B",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 41,
+   "removeKey": "macro-p2-a:ap_macroeconomics-m45-k0",
+   "addKey": "macro-p1-a:ap_macroeconomics-m19-k1",
+   "remove": {
+    "unit": 5,
+    "skill": "3.A",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 5,
+    "skill": "2.B",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 42,
+   "removeKey": "macro-p2-a:ap_macroeconomics-m47-k1",
+   "addKey": "macro-p2-a:ap_macroeconomics-m42-k0",
+   "remove": {
+    "unit": 5,
+    "skill": "2.C",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 5,
+    "skill": "2.B",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 54,
+   "removeKey": "macro-p3:ap_macroeconomics-m01-k3",
+   "addKey": "macro-p3:ap_macroeconomics-m01-k1",
+   "remove": {
+    "unit": 5,
+    "skill": "2.B",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 5,
+    "skill": "2.B",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 55,
+   "removeKey": "macro-p1-a:ap_macroeconomics-m25-k1",
+   "addKey": "macro-hard-a:ap_macroeconomics-m16-k2",
+   "remove": {
+    "unit": 6,
+    "skill": "1.C",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 6,
+    "skill": "3.C",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 59,
+   "removeKey": "macro-p2-b:ap_macroeconomics-m56-k0",
+   "addKey": "macro-hard-b:ap_macroeconomics-m12-k1",
+   "remove": {
+    "unit": 6,
+    "skill": "2.A",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 6,
+    "skill": "2.B",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 60,
+   "removeKey": "macro-p2-b:ap_macroeconomics-m59-k1",
+   "addKey": "macro-hard-b:ap_macroeconomics-m11-k2",
+   "remove": {
+    "unit": 6,
+    "skill": "1.C",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 6,
+    "skill": "3.A",
+    "examPrep": 1
+   }
+  }
+ ],
+ "requiresConvertedCandidates": [
+  "macro-hard-a:ap_macroeconomics-m01-k0",
+  "macro-hard-a:ap_macroeconomics-m04-k1",
+  "macro-hard-a:ap_macroeconomics-m05-k1",
+  "macro-hard-a:ap_macroeconomics-m06-k2",
+  "macro-hard-a:ap_macroeconomics-m07-k0",
+  "macro-hard-a:ap_macroeconomics-m08-k0",
+  "macro-hard-a:ap_macroeconomics-m10-k0",
+  "macro-hard-a:ap_macroeconomics-m16-k2",
+  "macro-hard-b:ap_macroeconomics-m01-k0",
+  "macro-hard-b:ap_macroeconomics-m02-k0",
+  "macro-hard-b:ap_macroeconomics-m04-k1",
+  "macro-hard-b:ap_macroeconomics-m06-k0",
+  "macro-hard-b:ap_macroeconomics-m11-k2",
+  "macro-hard-b:ap_macroeconomics-m12-k1",
+  "macro-hard-b:ap_macroeconomics-m13-k2",
+  "macro-hard-b:ap_macroeconomics-m15-k2"
+ ]
+}

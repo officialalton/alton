@@ -397,6 +397,119 @@ class Coverage(unittest.TestCase):
         self.assertGreaterEqual(len(numeric), 2 * C.count_bounds(C.NUMERIC_MC)[1])
 
 
+class HardTruth(unittest.TestCase):
+    """macro-hard(2026-10-15): exam_prep 보강 원형의 키를 facts·표만으로 테스트가 다시 계산한다(원형 코드의 이중 경로와 별개의 세 번째 계산)."""
+
+    def rows(self, p):
+        def num(c):
+            try:
+                return float(str(c).replace("$", "").replace(",", "").replace("%", ""))
+            except ValueError:
+                return float("nan")
+        return [[num(c) for c in r] for r in p["stimulus"]["data"]["rows"]]
+
+    def test_library_has_the_hard_archetypes_and_all_are_multi_step(self):
+        hard = [n for n in MC if n.startswith("ma_h_")]
+        self.assertGreaterEqual(len(hard), 29)
+        for n in hard:
+            for p in R.batch(n, 3, 0):
+                self.assertGreaterEqual(len(p["blueprint"]["student_thinking"]), 2, n)
+
+    def test_trade_gain_and_ppc(self):
+        for p in R.batch("ma_h_trade_gain", 6, 0):
+            f = facts(p)
+            self.assertAlmostEqual(key_value(p), f["e"] / f["t"] - f["a2"] * f["e"] / f["a1"], places=6)
+        for p in R.batch("ma_h_ppc_rotate", 6, 0):
+            f = facts(p)
+            self.assertAlmostEqual(key_value(p), f["gain"], places=6)
+            self.assertAlmostEqual(f["gain"], f["C"] * f["g"] / 100 * (1 - f["k1"] / f["K"]), places=6)
+
+    def test_shift_shortage_from_the_table(self):
+        for p in R.batch("ma_h_shift_shortage", 6, 0):
+            f = facts(p); rows = self.rows(p)
+            qs = [(pr, qd, qs_) for pr, qd, qs_ in rows]
+            x, y = f["x"], f["y"]
+            hit = [(pr, qs_ - y) for pr, qd, qs_ in qs if qd + x == qs_ - y]
+            if not hit:  # 새 균형이 표 밖이면 직선으로 외삽
+                import numpy as np
+                P = np.array([r[0] for r in qs]); a = np.polyfit(P, [r[1] + x for r in qs], 1); b = np.polyfit(P, [r[2] - y for r in qs], 1)
+                pe = (b[1] - a[1]) / (a[0] - b[0]); hit = [(pe, a[0] * pe + a[1])]
+            self.assertAlmostEqual(key_value(p), hit[0][1], places=6)
+
+    def test_percapita_unemployment_cpi_and_growth_from_the_tables(self):
+        for p in R.batch("ma_h_real_percapita", 6, 0):
+            r = self.rows(p); nom1, nom2 = r[0][1], r[0][2]; d2 = r[1][2]; p1, p2 = r[2][1], r[2][2]
+            self.assertAlmostEqual(key_value(p), round(((nom2 * 100 / d2) / p2) / (nom1 / p1) * 100 - 100, 1), places=6)
+        for p in R.batch("ma_h_unemp_event", 6, 0):
+            f = facts(p); r = self.rows(p); E, U = r[1][1], r[2][1]
+            self.assertAlmostEqual(key_value(p), round((U - f["d"] - f["f"]) / (E + U - f["d"]) * 100, 1), places=6)
+        for p in R.batch("ma_h_cpi_real_wage", 6, 0):
+            f = facts(p); rows = self.rows(p) if False else p["stimulus"]["data"]["rows"]
+            c1 = sum(float(a) * float(b.strip("$")) for _, a, b, _c in rows); c2 = sum(float(a) * float(c.strip("$")) for _, a, _b, c in rows)
+            infl = c2 / c1 * 100 - 100
+            self.assertAlmostEqual(abs(key_value(p)), abs(f["w"] - infl), places=6)
+        for p in R.batch("ma_h_exp_real_growth", 6, 0):
+            f = facts(p); r = self.rows(p)
+            gdp = lambda col: r[0][col] + r[1][col] + r[2][col] + r[3][col] - r[4][col]  # noqa: E731
+            self.assertAlmostEqual(key_value(p), (gdp(2) * 100 / r[5][2] / gdp(1) - 1) * 100, places=6)
+
+    def test_gdp_classification_sum(self):
+        import macro_p0_h as H
+        counted = {d for d, c in H.CATALOG if c}
+        for p in R.batch("ma_h_gdp_classify", 6, 0):
+            tot = sum(float(a.strip("$")) for d, a in p["stimulus"]["data"]["rows"] if d in counted)
+            self.assertAlmostEqual(key_value(p), tot, places=6)
+
+    def test_multiplier_family(self):
+        for p in R.batch("ma_h_mpc_table_gap", 6, 0):
+            f = facts(p); r = self.rows(p)
+            mpc = (r[2][1] - r[0][1]) / (r[2][0] - r[0][0])
+            self.assertAlmostEqual(key_value(p), f["gap"] * (1 - mpc), places=6)
+        for p in R.batch("ma_h_two_policy_net", 6, 0):
+            f = facts(p)
+            self.assertAlmostEqual(key_value(p), (f["g"] - f["mpc"] * f["t"]) / (1 - f["mpc"]), places=6)
+        for p in R.batch("ma_h_gap_tax", 6, 0):
+            f = facts(p)
+            self.assertAlmostEqual(key_value(p), (f["Yf"] - f["Y0"]) * (1 - f["mpc"]) / f["mpc"], places=6)
+        for p in R.batch("ma_h_depr_nx_gdp", 6, 0):
+            f = facts(p)
+            self.assertAlmostEqual(key_value(p), (f["X"] * f["a"] / 100 + f["M"] * f["b"] / 100) / (1 - f["mpc"]), places=6)
+        for p in R.batch("ma_h_adas_table_shift", 6, 0):
+            r = self.rows(p)
+            x = float(re.search(r"increases by \$(\d+) billion", p["stem"]).group(1)); yf = float(re.search(r"Potential real GDP is \$(\d+)", p["stem"]).group(1))
+            eq = [row[2] for row in r if row[1] + x == row[2]]
+            self.assertEqual(len(eq), 1)
+            self.assertAlmostEqual(key_value(p), eq[0] - yf, places=6)
+
+    def test_financial_family(self):
+        for p in R.batch("ma_h_money_target", 6, 0):
+            f = facts(p)
+            self.assertAlmostEqual(key_value(p), (f["M0"] - f["sl"] * (f["i1"] - f["i0"]) - f["M0"]) * f["rr"], places=6)
+        for p in R.batch("ma_h_rr_cut", 6, 0):
+            f = facts(p)
+            self.assertAlmostEqual(key_value(p), f["D"] * (f["ro"] / f["rn"] - 1), places=6)
+        for p in R.batch("ma_h_money_growth_real", 6, 0):
+            f = facts(p)
+            self.assertAlmostEqual(key_value(p), f["n"] - (f["gM"] + f["gV"] - f["gY"]), places=6)
+        for p in R.batch("ma_h_debt_path", 6, 0):
+            r = self.rows(p); f = facts(p)
+            d3 = f["D0"] + sum(row[1] - row[2] for row in r)
+            self.assertAlmostEqual(key_value(p), d3 / f["Y3"] * 100, places=6)
+        for p in R.batch("ma_h_crowding_table", 6, 0):
+            f = facts(p)
+            self.assertAlmostEqual(key_value(p), f["fall"], places=6)
+
+    def test_phillips_and_open_economy(self):
+        for p in R.batch("ma_h_phillips_expect", 6, 0):
+            f = facts(p); r = self.rows(p)
+            pi_at_low = [row[1] for row in r if row[0] == f["un"] - (f["pi1"] - f["pe"]) / f["sl"]]
+            self.assertEqual(len(pi_at_low), 1)
+            self.assertAlmostEqual(key_value(p), pi_at_low[0], places=6)
+        for p in R.batch("ma_h_trip_exchange", 6, 0):
+            f = facts(p)
+            self.assertAlmostEqual(f["back"], (1000 * f["e0"] - f["S"]) / f["e1"], places=6)
+
+
 class FrqStructure(unittest.TestCase):
     def test_points_rows_and_modes(self):
         for n in FRQ:

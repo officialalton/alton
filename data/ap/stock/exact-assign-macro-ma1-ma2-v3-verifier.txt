@@ -1,0 +1,11 @@
+# macro-assign sets=MA1,MA2 재고 단독 260 FRQ 14
+status=optimal 목적값(가상×1000 + 단원 이탈)=11.405 노드 0 가상 문항=0
+독립 검증기 위반: 0
+- MA1: 단독 60+가상 0, FRQ 3+가상 0, 단원 {"1":5,"2":9,"3":13,"4":12,"5":15,"6":6}
+    MC exam_prep 26/60
+    범주 {"1":18,"2":18,"3":24} 수치 분석 12 스킬 코드 {"3.A":17,"1.B":6,"2.B":9,"1.D":5,"1.A":5,"2.A":4,"3.B":2,"2.C":5,"1.C":2,"3.C":5}
+    FRQ maf_short_fiscal_multiplier + maf_long_adas_policy + maf_short_fx_trade
+- MA2: 단독 60+가상 0, FRQ 3+가상 0, 단원 {"1":5,"2":9,"3":14,"4":13,"5":13,"6":6}
+    MC exam_prep 26/60
+    범주 {"1":18,"2":18,"3":24} 수치 분석 12 스킬 코드 {"3.A":14,"2.B":8,"1.B":6,"1.C":3,"1.A":5,"1.D":4,"2.C":4,"2.A":6,"3.B":5,"3.C":5}
+    FRQ maf_long_money_market + maf_short_lf_crowding + maf_short_phillips
