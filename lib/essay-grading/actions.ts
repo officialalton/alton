@@ -11,7 +11,7 @@ import { concatSaqAnswers, parseEssayContext } from "./context";
 import { loadEssayPayload } from "./payload";
 import { processEssay, type Job } from "./queue";
 import { essayGradingSubject } from "./subject";
-import { USH_RUBRIC_ID } from "./rubric";
+import { USH_RUBRIC_ID, WHAP_RUBRIC_ID } from "./rubric";
 import { createSupabaseEssayStore } from "./store";
 
 type Result = { ok: true; value: { enabled: boolean; queued: number } } | { ok: false; error: string };
@@ -33,7 +33,7 @@ export async function enqueueEssayGradingAction(attemptId: string): Promise<Resu
       const payload = await loadEssayPayload(admin, it.problemId);
       const parts = it.parts ?? [];
       const first = parts[0] ? parseEssayContext(payload, parts[0].label) : null;
-      if (first?.rubricId === USH_RUBRIC_ID && first.taskType === "saq" && parts.length > 0) {
+      if ((first?.rubricId === USH_RUBRIC_ID || first?.rubricId === WHAP_RUBRIC_ID) && first.taskType === "saq" && parts.length > 0) {
         // SAQ: 한 문항(A·B·C)을 한 건으로 채점 — 답한 파트를 "(A) … (B) … (C) …" 로 합치고 첫 파트 라벨을 키로 쓴다.
         const essay = concatSaqAnswers(parts, answers);
         jobs.push({ attemptId, setItemId: it.setItemId, partLabel: parts[0].label, studentId: user.id, essay, ...first });

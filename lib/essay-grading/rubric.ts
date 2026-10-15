@@ -26,7 +26,8 @@ export const USH_RUBRIC_ID = "ushistory-v1";
 export const ENGLANG_RUBRIC_ID = RUBRIC_VERSION;
 export type RubricId = "englang" | "englit";
 export const RUBRIC_VERSION_ENGLIT = "englit-v1";
-export const RUBRIC_IDS = [ENGLANG_RUBRIC_ID, RUBRIC_VERSION_ENGLIT, USH_RUBRIC_ID] as const;
+export const WHAP_RUBRIC_ID = "whap-v1";
+export const RUBRIC_IDS = [ENGLANG_RUBRIC_ID, RUBRIC_VERSION_ENGLIT, USH_RUBRIC_ID, WHAP_RUBRIC_ID] as const;
 const sum = (rows: readonly { max: number }[]) => rows.reduce((n, r) => n + r.max, 0);
 
 const ENGLISH_DEF: RubricDef = {
@@ -69,6 +70,10 @@ const USH_DEFS: Record<UshTaskType, RubricDef> = {
     ], 50),
 };
 
+// AP World History: Modern(whap-v1): 공개 AP History 루브릭 구조(SAQ 3×1점 · DBQ 7점 · LEQ 6점)는 U.S. History 와 같아 같은 행·안내를 쓰고 과목 이름·상한 환경변수만 바꾼다(문구는 ALTON 자체 표현).
+const toWhap = (d: RubricDef): RubricDef => ({ ...d, id: WHAP_RUBRIC_ID, subject: "AP World History: Modern", head: [d.head[0].replace("AP U.S. History", "AP World History: Modern"), d.head[1]], perAttemptEnv: "AI_ESSAY_PER_ATTEMPT_CAP_WHAP" });
+const WHAP_DEFS: Record<UshTaskType, RubricDef> = { saq: toWhap(USH_DEFS.saq), dbq: toWhap(USH_DEFS.dbq), leq: toWhap(USH_DEFS.leq) };
+
 export const RUBRIC_ROWS_ENGLIT = [
   { key: "thesis", label: "Thesis", max: 1, guide: "1 if the essay states a defensible interpretation that answers the prompt (of the poem, the passage, or the chosen work as a whole); 0 if it only restates the prompt, summarizes or describes the text, makes a general comment that does not respond to the prompt, or offers no claim that needs defending." },
   { key: "evidence", label: "Evidence & Commentary", max: 4, guide: "0 = restates the thesis or prompt, repeats given information, or is irrelevant; 1 = evidence is mostly general and the essay summarizes or paraphrases without explaining how the evidence supports an argument; 2 = some specific, relevant evidence (a quoted phrase or precise detail) mixed with generalities, with at least an attempt to explain how some of it relates to the argument, even if the commentary is thin or there is no established (or a faulty) line of reasoning — do not drop to 1 only because the commentary is simple when specific evidence is actually present; 3 = specific evidence for the claims in a line of reasoning, with commentary explaining how some evidence supports it, including how at least one literary element or technique contributes to meaning; 4 = specific evidence for every claim, commentary that consistently explains how the evidence supports the line of reasoning, and explanation of how multiple literary elements or techniques contribute to meaning. Naming a device or quoting a line without explaining its effect stays at 1-2. For the literary argument question the evidence must come accurately from the chosen work and the commentary must connect the named concept to an interpretation of the whole work, not retell the plot. Errors that interfere with communication prevent a 4." },
@@ -90,6 +95,7 @@ export function resolveRubric(id?: string | null, taskType?: string | null): Rub
   if (!id || id === ENGLANG_RUBRIC_ID || id === "englang") return ENGLISH_DEF;
   if (id === RUBRIC_VERSION_ENGLIT || id === "englit") return LIT_DEF;
   if (id === USH_RUBRIC_ID && (taskType === "saq" || taskType === "dbq" || taskType === "leq")) return USH_DEFS[taskType];
+  if (id === WHAP_RUBRIC_ID && (taskType === "saq" || taskType === "dbq" || taskType === "leq")) return WHAP_DEFS[taskType];
   return null;
 }
 export const englishRubric = (): RubricDef => ENGLISH_DEF;

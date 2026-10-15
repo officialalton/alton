@@ -4,7 +4,7 @@ import { RUBRIC_IDS } from "./rubric";
 export type EssayScoreView = {
   setItemId: string; partLabel: string;
   status: "pending" | "processing" | "done" | "failed" | "dead" | "skipped";
-  /** 저장된 루브릭 id(englang-v2 | ushistory-v1). 생략 = 영어. */
+  /** 저장된 루브릭 id(englang-v2 | ushistory-v1 | whap-v1). 생략 = 영어. */
   rubricVersion?: string;
   /** 행 키는 루브릭마다 다르다(영어: thesis/evidence/sophistication, History: 과제 유형별). taskType 은 History 에서만. */
   scores: { total: number; disagreement?: boolean; rubricVersion?: string; taskType?: string; [row: string]: number | boolean | string | undefined } | null;
