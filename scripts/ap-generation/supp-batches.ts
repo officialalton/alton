@@ -77,3 +77,13 @@ export const psychItemNames = (): string[] => {
   const dir = path.resolve(process.cwd(), "data/ap/stock");
   return existsSync(dir) ? readdirSync(dir).filter((f) => PSYCH_ITEM_FILE_RE.test(f)).map((f) => f.replace(/\.json$/, "")).sort() : [];
 };
+
+/**
+ * AP English Literature 재고 파일(data/ap/stock/lt-<배치>-items.json, 2026-10-14). el·psych 와 같은 이름 규칙: 새 배치마다 keys-file·render-check 목록을 고치지 않는다.
+ * 관리자 적재 배치(lib/ap-admin/batches.ts STOCK_BATCHES)는 적재 시점에 따로 등록한다.
+ */
+export const LT_ITEM_FILE_RE = /^lt-[a-z0-9]+(?:-[a-z0-9]+)*-items\.json$/;
+export const ltItemNames = (): string[] => {
+  const dir = path.resolve(process.cwd(), "data/ap/stock");
+  return existsSync(dir) ? readdirSync(dir).filter((f) => LT_ITEM_FILE_RE.test(f)).map((f) => f.replace(/\.json$/, "")).sort() : [];
+};

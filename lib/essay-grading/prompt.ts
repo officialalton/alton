@@ -1,4 +1,4 @@
-import { RUBRIC_ROWS } from "./rubric";
+import { RUBRIC_ROWS, RUBRIC_SUBJECT_LABEL, rubricRowsFor, type RubricId } from "./rubric";
 
 // 프롬프트 구성. 학생 에세이는 "데이터"이며 지시가 아니다 — 구분자 안에 넣고, 구분자 위조·제어문자를 제거하고, 시스템 프롬프트가 명시적으로 무시하라고 지시한다.
 export const MIN_WORDS = 50;
@@ -7,7 +7,7 @@ export const MAX_ESSAY_CHARS = 12_000;
 export const MAX_SOURCE_CHARS = 14_000;
 
 export type Anchor = { tier: "high" | "mid" | "low"; text: string; note?: string };
-export type EssayInput = { taskPrompt: string; sources: { id: string; title?: string; body: string }[]; essay: string; anchors: Anchor[] };
+export type EssayInput = { taskPrompt: string; sources: { id: string; title?: string; body: string }[]; essay: string; anchors: Anchor[]; /** 루브릭 id(기본 englang). */ rubricId?: RubricId };
 
 export const countWordsSimple = (s: string): number => (s.trim().match(/\S+/g) ?? []).length;
 
@@ -37,20 +37,26 @@ export const SYSTEM_PROMPT = [
   "Respond only by calling the submit_score tool. Rationales: one or two sentences each, addressed to the student (second person), quoting at most a short phrase from the essay. improve: up to 3 concrete, specific next steps.",
 ].join("\n");
 
-export function rubricBlock(): string {
-  return "<rubric>\n" + RUBRIC_ROWS.map((r) => `${r.label} (0-${r.max}): ${r.guide}`).join("\n") + "\n</rubric>";
+/** 루브릭 id 별 시스템 프롬프트(englang 는 기존 SYSTEM_PROMPT 그대로). */
+export const systemPromptFor = (id: RubricId | undefined): string => (id === "englit"
+  ? [SYSTEM_PROMPT.replace(RUBRIC_SUBJECT_LABEL.englang, RUBRIC_SUBJECT_LABEL.englit),
+    "This is a literary analysis task (a poem, a prose passage, or a work chosen by the student). Judge the interpretation and how well the commentary explains the effect of literary choices on meaning. Do not reward a list of devices or a plot summary. For the literary argument question, credit only evidence that is accurate about the work the student chose; the text, if shown, is inside <source> tags and line numbers appear every fifth line."].join("\n")
+  : SYSTEM_PROMPT);
+
+export function rubricBlock(id?: RubricId): string {
+  return "<rubric>\n" + rubricRowsFor(id).map((r) => `${r.label} (0-${r.max}): ${r.guide}`).join("\n") + "\n</rubric>";
 }
 
 export function buildPrompt(i: EssayInput): { system: string; user: string } {
   const sources = i.sources.map((s) => `<source id="${s.id.replace(/[^A-Za-z0-9]/g, "")}">${s.title ? s.title.slice(0, 120) + "\n" : ""}${sanitizeEssay(s.body)}</source>`).join("\n").slice(0, MAX_SOURCE_CHARS);
   const anchors = i.anchors.map((a) => `<sample tier="${a.tier}">\n${sanitizeEssay(a.text)}${a.note ? `\nAnnotation: ${sanitizeEssay(a.note)}` : ""}\n</sample>`).join("\n");
   const user = [
-    rubricBlock(),
+    rubricBlock(i.rubricId),
     `<task>\n${sanitizeEssay(i.taskPrompt)}\n</task>`,
     sources,
     anchors ? `Annotated sample responses to the same task (calibration only):\n${anchors}` : "",
     `<student_essay>\n${sanitizeEssay(i.essay).slice(0, MAX_ESSAY_CHARS)}\n</student_essay>`,
     "Score the student essay now.",
   ].filter(Boolean).join("\n\n");
-  return { system: SYSTEM_PROMPT, user };
+  return { system: systemPromptFor(i.rubricId), user };
 }

@@ -1,0 +1,1646 @@
+{
+ "schemaVersion": 1,
+ "subject": {
+  "apCode": "ap_english_literature",
+  "name": "AP English Literature and Composition",
+  "family": "english_literature",
+  "edition": "ced-2027",
+  "cedVersion": "AP English Literature and Composition CED (V.1, (c)2024; effective Fall 2024; 2027 exam)",
+  "examYear": 2027,
+  "sourceUrl": "https://apcentral.collegeboard.org/media/pdf/ap-english-literature-and-composition-course-and-exam-description.pdf",
+  "officialTopicCodes": false,
+  "designNotes": "The CED has no numbered topics: nine units (Short Fiction I/II/III = units 1/4/7, Poetry I/II/III = 2/5/8, Longer Fiction or Drama I/II/III = 3/6/9) are defined by the skills 1.A-7.E in seven skill categories. Topic codes here are ALTON-assigned U<unit>.<n>, each grouping official skills from that unit's skill list (Course at a Glance). Unit and topic titles and sub-keywords are ALTON labels. Topic U9.4 (timed essays) is an ALTON addition for FRQ practice, not an official unit topic. Exam (docs/ap/englit-facts.md): 55 MC / 60 min / 45% = 5 passage sets of 8-13 questions (>= 2 prose fiction or drama, >= 2 poetry); 3 FRQ / 2 hours / 55% = poetry analysis, prose fiction analysis, literary argument (6 points each, analytic rubric: thesis 0-1, evidence and commentary 0-4, sophistication 0-1). MC weights: skill categories (see weights) and genre groups Short Fiction 42-49%, Poetry 36-45%, Longer Fiction or Drama 15-18% (genre groups are enforced in lib/ap-exam/englit-rules.ts, not as per-unit weights). Digital delivery (Bluebook)."
+ },
+ "skills": [
+  {
+   "code": "1.A",
+   "category": "Character",
+   "label": "Identify and describe what specific textual details reveal about a character, that character's perspective, and that character's motives."
+  },
+  {
+   "code": "1.B",
+   "category": "Character",
+   "label": "Explain the function of a character changing or remaining unchanged."
+  },
+  {
+   "code": "1.C",
+   "category": "Character",
+   "label": "Explain the function of contrasting characters."
+  },
+  {
+   "code": "1.D",
+   "category": "Character",
+   "label": "Describe how textual details reveal nuances and complexities in characters' relationships with one another."
+  },
+  {
+   "code": "1.E",
+   "category": "Character",
+   "label": "Explain how a character's own choices, actions, and speech reveal complexities in that character, and explain the function of those complexities."
+  },
+  {
+   "code": "2.A",
+   "category": "Setting",
+   "label": "Identify and describe specific textual details that convey or reveal a setting."
+  },
+  {
+   "code": "2.B",
+   "category": "Setting",
+   "label": "Explain the function of setting in a narrative."
+  },
+  {
+   "code": "2.C",
+   "category": "Setting",
+   "label": "Describe the relationship between a character and a setting."
+  },
+  {
+   "code": "3.A",
+   "category": "Plot and Structure",
+   "label": "Identify and describe how plot orders events in a narrative."
+  },
+  {
+   "code": "3.B",
+   "category": "Plot and Structure",
+   "label": "Explain the function of a particular sequence of events in a plot."
+  },
+  {
+   "code": "3.C",
+   "category": "Plot and Structure",
+   "label": "Explain the function of structure in a text."
+  },
+  {
+   "code": "3.D",
+   "category": "Plot and Structure",
+   "label": "Explain the function of contrasts within a text."
+  },
+  {
+   "code": "3.E",
+   "category": "Plot and Structure",
+   "label": "Explain the function of a significant event or related set of significant events in a plot."
+  },
+  {
+   "code": "3.F",
+   "category": "Plot and Structure",
+   "label": "Explain the function of conflict in a text."
+  },
+  {
+   "code": "4.A",
+   "category": "Narrator or Speaker",
+   "label": "Identify and describe the narrator or speaker of a text."
+  },
+  {
+   "code": "4.B",
+   "category": "Narrator or Speaker",
+   "label": "Identify and explain the function of point of view in a narrative."
+  },
+  {
+   "code": "4.C",
+   "category": "Narrator or Speaker",
+   "label": "Identify and describe details, diction, or syntax in a text that reveal a narrator's or speaker's perspective."
+  },
+  {
+   "code": "4.D",
+   "category": "Narrator or Speaker",
+   "label": "Explain how a narrator's reliability affects a narrative."
+  },
+  {
+   "code": "5.A",
+   "category": "Word Choice, Imagery, and Symbols",
+   "label": "Distinguish between the literal and figurative meanings of words and phrases."
+  },
+  {
+   "code": "5.B",
+   "category": "Word Choice, Imagery, and Symbols",
+   "label": "Explain the function of specific words and phrases in a text."
+  },
+  {
+   "code": "5.C",
+   "category": "Word Choice, Imagery, and Symbols",
+   "label": "Identify and explain the function of a symbol."
+  },
+  {
+   "code": "5.D",
+   "category": "Word Choice, Imagery, and Symbols",
+   "label": "Identify and explain the function of an image or imagery."
+  },
+  {
+   "code": "6.A",
+   "category": "Comparison",
+   "label": "Identify and explain the function of a simile."
+  },
+  {
+   "code": "6.B",
+   "category": "Comparison",
+   "label": "Identify and explain the function of a metaphor."
+  },
+  {
+   "code": "6.C",
+   "category": "Comparison",
+   "label": "Identify and explain the function of personification."
+  },
+  {
+   "code": "6.D",
+   "category": "Comparison",
+   "label": "Identify and explain the function of an allusion."
+  },
+  {
+   "code": "7.A",
+   "category": "Literary Argumentation",
+   "label": "Develop a paragraph that includes 1) a claim that requires defense with evidence from the text and 2) the evidence itself."
+  },
+  {
+   "code": "7.B",
+   "category": "Literary Argumentation",
+   "label": "Develop a thesis statement that conveys a defensible claim about an interpretation of literature and that may establish a line of reasoning."
+  },
+  {
+   "code": "7.C",
+   "category": "Literary Argumentation",
+   "label": "Develop commentary that establishes and explains relationships among textual evidence, the line of reasoning, and the thesis."
+  },
+  {
+   "code": "7.D",
+   "category": "Literary Argumentation",
+   "label": "Select and use relevant and sufficient evidence to both develop and support a line of reasoning."
+  },
+  {
+   "code": "7.E",
+   "category": "Literary Argumentation",
+   "label": "Demonstrate control over the elements of composition to communicate clearly."
+  }
+ ],
+ "weights": [
+  {
+   "axis": "skill",
+   "code": "Character",
+   "section": "mc",
+   "min": 16,
+   "max": 20,
+   "source": "AP English Literature and Composition CED (V.1, Fall 2024), Exam Information p.135: Section I skill-category weighting"
+  },
+  {
+   "axis": "skill",
+   "code": "Setting",
+   "section": "mc",
+   "min": 3,
+   "max": 6,
+   "source": "AP English Literature and Composition CED (V.1, Fall 2024), Exam Information p.135: Section I skill-category weighting"
+  },
+  {
+   "axis": "skill",
+   "code": "Plot and Structure",
+   "section": "mc",
+   "min": 16,
+   "max": 20,
+   "source": "AP English Literature and Composition CED (V.1, Fall 2024), Exam Information p.135: Section I skill-category weighting"
+  },
+  {
+   "axis": "skill",
+   "code": "Narrator or Speaker",
+   "section": "mc",
+   "min": 21,
+   "max": 26,
+   "source": "AP English Literature and Composition CED (V.1, Fall 2024), Exam Information p.135: Section I skill-category weighting"
+  },
+  {
+   "axis": "skill",
+   "code": "Word Choice, Imagery, and Symbols",
+   "section": "mc",
+   "min": 10,
+   "max": 13,
+   "source": "AP English Literature and Composition CED (V.1, Fall 2024), Exam Information p.135: Section I skill-category weighting"
+  },
+  {
+   "axis": "skill",
+   "code": "Comparison",
+   "section": "mc",
+   "min": 10,
+   "max": 13,
+   "source": "AP English Literature and Composition CED (V.1, Fall 2024), Exam Information p.135: Section I skill-category weighting"
+  },
+  {
+   "axis": "skill",
+   "code": "Literary Argumentation",
+   "section": "mc",
+   "min": 10,
+   "max": 13,
+   "source": "AP English Literature and Composition CED (V.1, Fall 2024), Exam Information p.135: Section I skill-category weighting"
+  }
+ ],
+ "units": [
+  {
+   "code": "1",
+   "title": "Short Fiction I",
+   "officialClassPeriods": "~10",
+   "topics": [
+    {
+     "code": "U1.1",
+     "title": "Details That Reveal Character",
+     "scope": "both",
+     "skills": [
+      "1.A",
+      "1.B"
+     ],
+     "requires": [],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "U1.1#1",
+       "label": "Reading a character from specific details",
+       "kind": "concept",
+       "skills": [
+        "1.A",
+        "1.B"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "U1.1#2",
+       "label": "Characters who change versus characters who stay the same",
+       "kind": "misconception",
+       "skills": [
+        "1.A",
+        "1.B"
+       ],
+       "requires": [
+        "U1.1#1"
+       ],
+       "estLessons": 0.5
+      }
+     ]
+    },
+    {
+     "code": "U1.2",
+     "title": "Setting Details and Their Effect",
+     "scope": "both",
+     "skills": [
+      "2.A"
+     ],
+     "requires": [
+      "U1.1"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "U1.2#1",
+       "label": "Details that build a time and place",
+       "kind": "representation",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "U1.2#2",
+       "label": "Setting as mood",
+       "kind": "skill",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [
+        "U1.2#1"
+       ],
+       "estLessons": 0.5
+      }
+     ]
+    },
+    {
+     "code": "U1.3",
+     "title": "How Plot Orders Events",
+     "scope": "both",
+     "skills": [
+      "3.A",
+      "4.A"
+     ],
+     "requires": [
+      "U1.2"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "U1.3#1",
+       "label": "Chronological order and its alternatives",
+       "kind": "concept",
+       "skills": [
+        "3.A",
+        "4.A"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "U1.3#2",
+       "label": "Who is telling the story",
+       "kind": "skill",
+       "skills": [
+        "3.A",
+        "4.A"
+       ],
+       "requires": [
+        "U1.3#1"
+       ],
+       "estLessons": 0.5
+      }
+     ]
+    },
+    {
+     "code": "U1.4",
+     "title": "Claims That Need Textual Evidence",
+     "scope": "both",
+     "skills": [
+      "7.A",
+      "3.B"
+     ],
+     "requires": [
+      "U1.3"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "U1.4#1",
+       "label": "A claim versus a plot summary",
+       "kind": "concept",
+       "skills": [
+        "7.A",
+        "3.B"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "U1.4#2",
+       "label": "Choosing the quotation that proves the claim",
+       "kind": "skill",
+       "skills": [
+        "7.A",
+        "3.B"
+       ],
+       "requires": [
+        "U1.4#1"
+       ],
+       "estLessons": 0.5
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "2",
+   "title": "Poetry I",
+   "officialClassPeriods": "~10",
+   "topics": [
+    {
+     "code": "U2.1",
+     "title": "Speaker and Situation in a Poem",
+     "scope": "both",
+     "skills": [
+      "1.A",
+      "1.E"
+     ],
+     "requires": [
+      "U1.1"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "U2.1#1",
+       "label": "Who speaks and to whom",
+       "kind": "concept",
+       "skills": [
+        "1.A",
+        "1.E"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "U2.1#2",
+       "label": "Choices and speech that complicate a speaker",
+       "kind": "misconception",
+       "skills": [
+        "1.A",
+        "1.E"
+       ],
+       "requires": [
+        "U2.1#1"
+       ],
+       "estLessons": 0.5
+      }
+     ]
+    },
+    {
+     "code": "U2.2",
+     "title": "Stanzas, Turns, and Contrasts",
+     "scope": "both",
+     "skills": [
+      "3.C",
+      "3.D"
+     ],
+     "requires": [
+      "U2.1"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "U2.2#1",
+       "label": "Stanza structure and the volta",
+       "kind": "representation",
+       "skills": [
+        "3.C",
+        "3.D"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "U2.2#2",
+       "label": "Contrast between images or tones",
+       "kind": "skill",
+       "skills": [
+        "3.C",
+        "3.D"
+       ],
+       "requires": [
+        "U2.2#1"
+       ],
+       "estLessons": 0.5
+      }
+     ]
+    },
+    {
+     "code": "U2.3",
+     "title": "Word Choice, Simile, and Metaphor",
+     "scope": "both",
+     "skills": [
+      "5.B",
+      "6.A",
+      "6.B"
+     ],
+     "requires": [
+      "U2.2"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "U2.3#1",
+       "label": "Connotation of specific words",
+       "kind": "concept",
+       "skills": [
+        "5.B",
+        "6.A"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "U2.3#2",
+       "label": "What a comparison asks readers to see",
+       "kind": "skill",
+       "skills": [
+        "5.B",
+        "6.A"
+       ],
+       "requires": [
+        "U2.3#1"
+       ],
+       "estLessons": 0.5
+      }
+     ]
+    },
+    {
+     "code": "U2.4",
+     "title": "Evidence in a Poetry Paragraph",
+     "scope": "both",
+     "skills": [
+      "7.A",
+      "1.D"
+     ],
+     "requires": [
+      "U2.3"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "U2.4#1",
+       "label": "Poetic evidence for a claim",
+       "kind": "concept",
+       "skills": [
+        "7.A",
+        "1.D"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "U2.4#2",
+       "label": "Relationships voiced in a poem",
+       "kind": "skill",
+       "skills": [
+        "7.A",
+        "1.D"
+       ],
+       "requires": [
+        "U2.4#1"
+       ],
+       "estLessons": 0.5
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "3",
+   "title": "Longer Fiction or Drama I",
+   "officialClassPeriods": "~17",
+   "topics": [
+    {
+     "code": "U3.1",
+     "title": "Characters Across a Long Work",
+     "scope": "both",
+     "skills": [
+      "1.A",
+      "1.B",
+      "1.E"
+     ],
+     "requires": [
+      "U2.1"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "U3.1#1",
+       "label": "Following a character through chapters or acts",
+       "kind": "concept",
+       "skills": [
+        "1.A",
+        "1.B"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "U3.1#2",
+       "label": "Choices that reveal motive",
+       "kind": "misconception",
+       "skills": [
+        "1.A",
+        "1.B"
+       ],
+       "requires": [
+        "U3.1#1"
+       ],
+       "estLessons": 0.5
+      }
+     ]
+    },
+    {
+     "code": "U3.2",
+     "title": "Events and Setting in Extended Texts",
+     "scope": "both",
+     "skills": [
+      "2.A",
+      "3.E"
+     ],
+     "requires": [
+      "U3.1"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "U3.2#1",
+       "label": "A turning-point event",
+       "kind": "representation",
+       "skills": [
+        "2.A",
+        "3.E"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "U3.2#2",
+       "label": "Setting that recurs",
+       "kind": "skill",
+       "skills": [
+        "2.A",
+        "3.E"
+       ],
+       "requires": [
+        "U3.2#1"
+       ],
+       "estLessons": 0.5
+      }
+     ]
+    },
+    {
+     "code": "U3.3",
+     "title": "Building an Interpretive Thesis",
+     "scope": "both",
+     "skills": [
+      "7.B",
+      "7.C",
+      "7.D",
+      "7.E"
+     ],
+     "requires": [
+      "U3.2"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "U3.3#1",
+       "label": "Defensible claims about a whole work",
+       "kind": "concept",
+       "skills": [
+        "7.B",
+        "7.C"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "U3.3#2",
+       "label": "Commentary that links evidence to a thesis",
+       "kind": "skill",
+       "skills": [
+        "7.B",
+        "7.C"
+       ],
+       "requires": [
+        "U3.3#1"
+       ],
+       "estLessons": 0.5
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "4",
+   "title": "Short Fiction II",
+   "officialClassPeriods": "~17",
+   "topics": [
+    {
+     "code": "U4.1",
+     "title": "Contrasting Characters and Relationships",
+     "scope": "both",
+     "skills": [
+      "1.C",
+      "1.D"
+     ],
+     "requires": [
+      "U3.1"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "U4.1#1",
+       "label": "Foil characters",
+       "kind": "concept",
+       "skills": [
+        "1.C",
+        "1.D"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "U4.1#2",
+       "label": "Nuance in a relationship",
+       "kind": "misconception",
+       "skills": [
+        "1.C",
+        "1.D"
+       ],
+       "requires": [
+        "U4.1#1"
+       ],
+       "estLessons": 0.5
+      }
+     ]
+    },
+    {
+     "code": "U4.2",
+     "title": "Setting and Character",
+     "scope": "both",
+     "skills": [
+      "2.B",
+      "2.C"
+     ],
+     "requires": [
+      "U4.1"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "U4.2#1",
+       "label": "Setting that shapes a character",
+       "kind": "representation",
+       "skills": [
+        "2.B",
+        "2.C"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "U4.2#2",
+       "label": "A character's relationship to place",
+       "kind": "skill",
+       "skills": [
+        "2.B",
+        "2.C"
+       ],
+       "requires": [
+        "U4.2#1"
+       ],
+       "estLessons": 0.5
+      }
+     ]
+    },
+    {
+     "code": "U4.3",
+     "title": "Narrator and Point of View",
+     "scope": "both",
+     "skills": [
+      "4.A",
+      "4.B",
+      "4.C"
+     ],
+     "requires": [
+      "U4.2"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "U4.3#1",
+       "label": "First-person versus third-person limited",
+       "kind": "concept",
+       "skills": [
+        "4.A",
+        "4.B"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "U4.3#2",
+       "label": "Diction and syntax that reveal a narrator",
+       "kind": "skill",
+       "skills": [
+        "4.A",
+        "4.B"
+       ],
+       "requires": [
+        "U4.3#1"
+       ],
+       "estLessons": 0.5
+      }
+     ]
+    },
+    {
+     "code": "U4.4",
+     "title": "Contrast, Plot, and Evidence",
+     "scope": "both",
+     "skills": [
+      "3.A",
+      "3.D",
+      "7.B",
+      "7.C"
+     ],
+     "requires": [
+      "U4.3"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "U4.4#1",
+       "label": "Contrasts inside a plot",
+       "kind": "concept",
+       "skills": [
+        "3.A",
+        "3.D"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "U4.4#2",
+       "label": "Relating evidence to a thesis",
+       "kind": "skill",
+       "skills": [
+        "3.A",
+        "3.D"
+       ],
+       "requires": [
+        "U4.4#1"
+       ],
+       "estLessons": 0.5
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "5",
+   "title": "Poetry II",
+   "officialClassPeriods": "~17",
+   "topics": [
+    {
+     "code": "U5.1",
+     "title": "Literal and Figurative Meaning",
+     "scope": "both",
+     "skills": [
+      "5.A",
+      "5.B"
+     ],
+     "requires": [
+      "U4.1"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "U5.1#1",
+       "label": "Reading a phrase literally then figuratively",
+       "kind": "concept",
+       "skills": [
+        "5.A",
+        "5.B"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "U5.1#2",
+       "label": "Words doing double duty",
+       "kind": "misconception",
+       "skills": [
+        "5.A",
+        "5.B"
+       ],
+       "requires": [
+        "U5.1#1"
+       ],
+       "estLessons": 0.5
+      }
+     ]
+    },
+    {
+     "code": "U5.2",
+     "title": "Images and Poetic Structure",
+     "scope": "both",
+     "skills": [
+      "5.D",
+      "3.C"
+     ],
+     "requires": [
+      "U5.1"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "U5.2#1",
+       "label": "Imagery patterns",
+       "kind": "representation",
+       "skills": [
+        "5.D",
+        "3.C"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "U5.2#2",
+       "label": "Structure that mirrors meaning",
+       "kind": "skill",
+       "skills": [
+        "5.D",
+        "3.C"
+       ],
+       "requires": [
+        "U5.2#1"
+       ],
+       "estLessons": 0.5
+      }
+     ]
+    },
+    {
+     "code": "U5.3",
+     "title": "Metaphor, Personification, and Allusion",
+     "scope": "both",
+     "skills": [
+      "6.B",
+      "6.C",
+      "6.D"
+     ],
+     "requires": [
+      "U5.2"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "U5.3#1",
+       "label": "Extended metaphor",
+       "kind": "concept",
+       "skills": [
+        "6.B",
+        "6.C"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "U5.3#2",
+       "label": "Personified objects and forces",
+       "kind": "skill",
+       "skills": [
+        "6.B",
+        "6.C"
+       ],
+       "requires": [
+        "U5.3#1"
+       ],
+       "estLessons": 0.5
+      }
+     ]
+    },
+    {
+     "code": "U5.4",
+     "title": "Thesis and Commentary on Poems",
+     "scope": "both",
+     "skills": [
+      "7.B",
+      "7.C",
+      "7.D",
+      "7.E"
+     ],
+     "requires": [
+      "U5.3"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "U5.4#1",
+       "label": "A thesis about a poem's complex perspective",
+       "kind": "concept",
+       "skills": [
+        "7.B",
+        "7.C"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "U5.4#2",
+       "label": "Writing clearly about poetic technique",
+       "kind": "skill",
+       "skills": [
+        "7.B",
+        "7.C"
+       ],
+       "requires": [
+        "U5.4#1"
+       ],
+       "estLessons": 0.5
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "6",
+   "title": "Longer Fiction or Drama II",
+   "officialClassPeriods": "~17",
+   "topics": [
+    {
+     "code": "U6.1",
+     "title": "Character Complexity and Contrast",
+     "scope": "both",
+     "skills": [
+      "1.A",
+      "1.C",
+      "1.D",
+      "1.E"
+     ],
+     "requires": [
+      "U5.1"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "U6.1#1",
+       "label": "Contrasting figures in a long work",
+       "kind": "concept",
+       "skills": [
+        "1.A",
+        "1.C"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "U6.1#2",
+       "label": "Complexity revealed by action",
+       "kind": "misconception",
+       "skills": [
+        "1.A",
+        "1.C"
+       ],
+       "requires": [
+        "U6.1#1"
+       ],
+       "estLessons": 0.5
+      }
+     ]
+    },
+    {
+     "code": "U6.2",
+     "title": "Sequence, Narration, and Reliability",
+     "scope": "both",
+     "skills": [
+      "3.A",
+      "3.B",
+      "3.D",
+      "4.C",
+      "4.D"
+     ],
+     "requires": [
+      "U6.1"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "U6.2#1",
+       "label": "Sequence of events and its effect",
+       "kind": "representation",
+       "skills": [
+        "3.A",
+        "3.B"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "U6.2#2",
+       "label": "Unreliable narrators",
+       "kind": "skill",
+       "skills": [
+        "3.A",
+        "3.B"
+       ],
+       "requires": [
+        "U6.2#1"
+       ],
+       "estLessons": 0.5
+      }
+     ]
+    },
+    {
+     "code": "U6.3",
+     "title": "Symbols in Extended Texts",
+     "scope": "both",
+     "skills": [
+      "5.C"
+     ],
+     "requires": [
+      "U6.2"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "U6.3#1",
+       "label": "A recurring symbol",
+       "kind": "concept",
+       "skills": [
+        "5.C"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "U6.3#2",
+       "label": "Symbol versus plain object",
+       "kind": "skill",
+       "skills": [
+        "5.C"
+       ],
+       "requires": [
+        "U6.3#1"
+       ],
+       "estLessons": 0.5
+      }
+     ]
+    },
+    {
+     "code": "U6.4",
+     "title": "Arguing About Longer Works",
+     "scope": "both",
+     "skills": [
+      "7.B",
+      "7.C",
+      "7.D",
+      "7.E"
+     ],
+     "requires": [
+      "U6.3"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "U6.4#1",
+       "label": "Supporting a line of reasoning across scenes",
+       "kind": "concept",
+       "skills": [
+        "7.B",
+        "7.C"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "U6.4#2",
+       "label": "Control of composition in an essay",
+       "kind": "skill",
+       "skills": [
+        "7.B",
+        "7.C"
+       ],
+       "requires": [
+        "U6.4#1"
+       ],
+       "estLessons": 0.5
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "7",
+   "title": "Short Fiction III",
+   "officialClassPeriods": "~17",
+   "topics": [
+    {
+     "code": "U7.1",
+     "title": "Relationships, Reliability, and Choices",
+     "scope": "both",
+     "skills": [
+      "1.B",
+      "1.D",
+      "1.E",
+      "4.D"
+     ],
+     "requires": [
+      "U6.1"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "U7.1#1",
+       "label": "How a narrator's reliability colors relationships",
+       "kind": "concept",
+       "skills": [
+        "1.B",
+        "1.D"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "U7.1#2",
+       "label": "Speech that exposes a character",
+       "kind": "misconception",
+       "skills": [
+        "1.B",
+        "1.D"
+       ],
+       "requires": [
+        "U7.1#1"
+       ],
+       "estLessons": 0.5
+      }
+     ]
+    },
+    {
+     "code": "U7.2",
+     "title": "Setting and Plot Sequence",
+     "scope": "both",
+     "skills": [
+      "2.B",
+      "2.C",
+      "3.A",
+      "3.B"
+     ],
+     "requires": [
+      "U7.1"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "U7.2#1",
+       "label": "Setting that drives events",
+       "kind": "representation",
+       "skills": [
+        "2.B",
+        "2.C"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "U7.2#2",
+       "label": "Why events come in this order",
+       "kind": "skill",
+       "skills": [
+        "2.B",
+        "2.C"
+       ],
+       "requires": [
+        "U7.2#1"
+       ],
+       "estLessons": 0.5
+      }
+     ]
+    },
+    {
+     "code": "U7.3",
+     "title": "Symbols, Imagery, Simile, and Personification",
+     "scope": "both",
+     "skills": [
+      "5.C",
+      "5.D",
+      "6.A",
+      "6.C"
+     ],
+     "requires": [
+      "U7.2"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "U7.3#1",
+       "label": "Image clusters in short fiction",
+       "kind": "concept",
+       "skills": [
+        "5.C",
+        "5.D"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "U7.3#2",
+       "label": "Similes in narration",
+       "kind": "skill",
+       "skills": [
+        "5.C",
+        "5.D"
+       ],
+       "requires": [
+        "U7.3#1"
+       ],
+       "estLessons": 0.5
+      }
+     ]
+    },
+    {
+     "code": "U7.4",
+     "title": "Arguing About Short Fiction",
+     "scope": "both",
+     "skills": [
+      "7.B",
+      "7.C",
+      "7.D"
+     ],
+     "requires": [
+      "U7.3"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "U7.4#1",
+       "label": "Evidence that is both relevant and sufficient",
+       "kind": "concept",
+       "skills": [
+        "7.B",
+        "7.C"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "U7.4#2",
+       "label": "A line of reasoning in a prose analysis",
+       "kind": "skill",
+       "skills": [
+        "7.B",
+        "7.C"
+       ],
+       "requires": [
+        "U7.4#1"
+       ],
+       "estLessons": 0.5
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "8",
+   "title": "Poetry III",
+   "officialClassPeriods": "~17",
+   "topics": [
+    {
+     "code": "U8.1",
+     "title": "Structure and Contrast in Poems",
+     "scope": "both",
+     "skills": [
+      "3.C",
+      "3.D",
+      "1.D"
+     ],
+     "requires": [
+      "U7.1"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "U8.1#1",
+       "label": "Form, line, and enjambment",
+       "kind": "concept",
+       "skills": [
+        "3.C",
+        "3.D"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "U8.1#2",
+       "label": "Turns and tonal contrast",
+       "kind": "misconception",
+       "skills": [
+        "3.C",
+        "3.D"
+       ],
+       "requires": [
+        "U8.1#1"
+       ],
+       "estLessons": 0.5
+      }
+     ]
+    },
+    {
+     "code": "U8.2",
+     "title": "Words, Symbols, Metaphor, and Allusion",
+     "scope": "both",
+     "skills": [
+      "5.B",
+      "5.C",
+      "6.B",
+      "6.D"
+     ],
+     "requires": [
+      "U8.1"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "U8.2#1",
+       "label": "Symbol in a short poem",
+       "kind": "representation",
+       "skills": [
+        "5.B",
+        "5.C"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "U8.2#2",
+       "label": "Allusion and what it borrows",
+       "kind": "skill",
+       "skills": [
+        "5.B",
+        "5.C"
+       ],
+       "requires": [
+        "U8.2#1"
+       ],
+       "estLessons": 0.5
+      }
+     ]
+    },
+    {
+     "code": "U8.3",
+     "title": "Arguing About Poems",
+     "scope": "both",
+     "skills": [
+      "7.B",
+      "7.C",
+      "7.D",
+      "7.E",
+      "5.D"
+     ],
+     "requires": [
+      "U8.2"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "U8.3#1",
+       "label": "Imagery as evidence",
+       "kind": "concept",
+       "skills": [
+        "7.B",
+        "7.C"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "U8.3#2",
+       "label": "The poetry analysis essay",
+       "kind": "skill",
+       "skills": [
+        "7.B",
+        "7.C"
+       ],
+       "requires": [
+        "U8.3#1"
+       ],
+       "estLessons": 0.5
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "9",
+   "title": "Longer Fiction or Drama III",
+   "officialClassPeriods": "~17",
+   "topics": [
+    {
+     "code": "U9.1",
+     "title": "Character, Event, and Conflict in Long Works",
+     "scope": "both",
+     "skills": [
+      "1.B",
+      "1.D",
+      "1.E",
+      "3.E",
+      "3.F"
+     ],
+     "requires": [
+      "U8.1"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "U9.1#1",
+       "label": "Conflict as an engine of plot",
+       "kind": "concept",
+       "skills": [
+        "1.B",
+        "1.D"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "U9.1#2",
+       "label": "Relationships that shift",
+       "kind": "misconception",
+       "skills": [
+        "1.B",
+        "1.D"
+       ],
+       "requires": [
+        "U9.1#1"
+       ],
+       "estLessons": 0.5
+      }
+     ]
+    },
+    {
+     "code": "U9.2",
+     "title": "Narrator and Perspective in Long Works",
+     "scope": "both",
+     "skills": [
+      "4.C",
+      "4.B"
+     ],
+     "requires": [
+      "U9.1"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "U9.2#1",
+       "label": "Perspective across chapters",
+       "kind": "representation",
+       "skills": [
+        "4.C",
+        "4.B"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "U9.2#2",
+       "label": "Details that reveal attitude",
+       "kind": "skill",
+       "skills": [
+        "4.C",
+        "4.B"
+       ],
+       "requires": [
+        "U9.2#1"
+       ],
+       "estLessons": 0.5
+      }
+     ]
+    },
+    {
+     "code": "U9.3",
+     "title": "Literary Argument on a Whole Work",
+     "scope": "both",
+     "skills": [
+      "7.B",
+      "7.C",
+      "7.D"
+     ],
+     "requires": [
+      "U9.2"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "U9.3#1",
+       "label": "Choosing a work for the open question",
+       "kind": "concept",
+       "skills": [
+        "7.B",
+        "7.C"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "U9.3#2",
+       "label": "Interpretation of a work as a whole",
+       "kind": "skill",
+       "skills": [
+        "7.B",
+        "7.C"
+       ],
+       "requires": [
+        "U9.3#1"
+       ],
+       "estLessons": 0.5
+      }
+     ]
+    },
+    {
+     "code": "U9.4",
+     "title": "Timed Essays: Poetry, Prose, and Literary Argument",
+     "scope": "both",
+     "skills": [
+      "7.B",
+      "7.C",
+      "7.D",
+      "7.E"
+     ],
+     "requires": [
+      "U9.3"
+     ],
+     "estLessons": 2.0,
+     "subKeywords": [
+      {
+       "code": "U9.4#1",
+       "label": "Planning a 40-minute literary essay",
+       "kind": "skill",
+       "skills": [
+        "7.B"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "U9.4#2",
+       "label": "Choosing a work for the literary argument question",
+       "kind": "skill",
+       "skills": [
+        "7.D"
+       ],
+       "requires": [
+        "U9.4#1"
+       ],
+       "estLessons": 0.5
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

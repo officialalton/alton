@@ -1,6 +1,7 @@
 "use client";
 
 import { memo } from "react";
+import { lineNumberLabels } from "@/lib/ap-exam/passage-lines";
 import { splitLearningBlocks, splitLearningContent, type ContentPart } from "@/lib/render-learning-content";
 
 /**
@@ -53,7 +54,7 @@ export default memo(function LearningText({ text, className }: { text: string; c
             </table>
           </div>
         ) : block.kind === "code" ? (
-          <CodeBlock key={b} language={block.language} lines={block.lines} />
+          block.language === "passage" ? <PassageBlock key={b} lines={block.lines} /> : <CodeBlock key={b} language={block.language} lines={block.lines} />
         ) : block.kind === "list" ? (
           <ul key={b} className="my-2 pl-5 list-disc">
             {block.items.map((item, i) => (
@@ -86,6 +87,26 @@ export function CodeBlock({ language, lines }: { language: string; lines: string
         ))}
       </code>
     </pre>
+  );
+}
+
+/**
+ * 줄 번호가 있는 문학 지문(AP English Literature, 2026-10-14): ```passage 펜스. 빈 줄(연·문단 사이)은 줄로 세지 않고 번호는 5줄마다만 표시한다(lib/ap-exam/passage-lines.ts).
+ * 좁은 화면에서는 줄이 접힐 수 있어도 번호 열은 유지된다. 글자는 이스케이프된 텍스트로만 그린다.
+ */
+export function PassageBlock({ lines }: { lines: string[] }) {
+  const labels = lineNumberLabels(lines);
+  return (
+    <div data-testid="lit-passage" role="group" aria-label="Passage with line numbers" className="my-3 font-serif text-[14px] leading-[1.7] text-ink">
+      {lines.map((ln, i) =>
+        ln.trim() === "" ? <div key={i} className="h-3" aria-hidden="true" /> : (
+          <div key={i} data-testid="passage-line" className="flex">
+            <span aria-hidden="true" className="inline-block w-8 shrink-0 select-none pr-2 text-right font-sans text-[11px] text-grey-500">{labels[i] ?? ""}</span>
+            <span className="min-w-0 whitespace-pre-wrap">{ln}</span>
+          </div>
+        ),
+      )}
+    </div>
   );
 }
 
