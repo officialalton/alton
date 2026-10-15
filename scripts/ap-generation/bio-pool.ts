@@ -10,7 +10,7 @@ type Json = Record<string, unknown>;
 type Raw = { stockKey: string; apSubjectCode: string; kind: "mc" | "frq_bundle"; validation: string; keywordCode: string; skillPrimary?: string; itemFamilyId: string; payload: Json; duplicateOf?: string | null; archetype?: string; structure?: string; difficultyProvisional?: string | null; difficulty?: unknown };
 /** unit: 1–4, skill: 스킬 코드 문자열("3.A"), topic: "3.4". */
 export type BioMember = { unit: number; skill: string; topic: string };
-export type BioItem = { key: string; kind: "mc" | "frq"; shared: boolean; members: BioMember[]; fam: string; frqType: string; archetype: string; screen: boolean; batch: string; renderType: string; stimKind: string; /** 이 후보가 기여하는 exam_prep MC 문항 수. */ exam?: number };
+export type BioItem = { key: string; kind: "mc" | "frq"; shared: boolean; members: BioMember[]; fam: string; frqType: string; archetype: string; screen: boolean; batch: string; renderType: string; stimKind: string; /** FRQ 번들의 CED 대표 토픽(payload.topic, 예 "3.2") — 다른 종류는 빈 문자열. */ frqTopic?: string; /** 이 후보가 기여하는 exam_prep MC 문항 수. */ exam?: number };
 
 export function bioMembers(r: Pick<Raw, "kind" | "keywordCode" | "skillPrimary" | "payload">): BioMember[] {
   const items = Array.isArray(r.payload.items) ? (r.payload.items as Json[]) : null;
@@ -39,7 +39,7 @@ export function loadBioPool(opts: { requireScreen?: boolean; files?: string[] } 
   const all: BioItem[] = gated.map(({ i, g }) => ({
     key: i.stockKey, kind: i.kind === "mc" ? "mc" : "frq", shared: i.kind === "mc" && Array.isArray(i.payload.items), members: bioMembers(i),
     fam: i.kind === "mc" ? (cl.effectiveFamily.get(i.stockKey) ?? i.itemFamilyId) : i.itemFamilyId, frqType: i.kind === "frq_bundle" ? String(i.payload.template ?? "") : "",
-    archetype: String(i.payload.archetype ?? i.archetype ?? ""), screen: ev.has(i.stockKey), batch: batchOf.get(i.stockKey) ?? "", renderType: g.renderType, stimKind: g.stimKind, exam: bioExamCount(i),
+    archetype: String(i.payload.archetype ?? i.archetype ?? ""), screen: ev.has(i.stockKey), batch: batchOf.get(i.stockKey) ?? "", renderType: g.renderType, stimKind: g.stimKind, frqTopic: i.kind === "frq_bundle" ? String(i.payload.topic ?? "") : "", exam: bioExamCount(i),
   }));
   const pool = opts.requireScreen === false ? all : all.filter((c) => c.screen);
   return { all, pool };

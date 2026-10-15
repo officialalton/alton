@@ -232,6 +232,32 @@ def _q2(rng, sc):
         c_rows = [R("C1", "Gives the correct average growth rate with units (answer)", None, None, None, "numeric", num=f"{rate:.1f}", tol=f"±{max(0.2, abs(rate) * 0.01):.1f}", units=True),
                   R("C2", "Estimates the carrying capacity from the plateau of the graph (value)", None, None, None, "numeric", num=f"{ys[-1]:g}", tol=f"±{max(10, 0.05 * ys[-1]):.0f}")]
         ev = [_ev("C", "average growth rate", rate, max(0.2, abs(rate) * 0.01), "mice per week"), _ev("C", "carrying capacity", ys[-1], max(10, 0.05 * ys[-1]), "mice")]
+    elif sc.get("calc") in ("rate_plateau", "rate_threshold"):
+        # 2026-10-15 주제 분산 시나리오(bio_p0_l.py): 두 x 값 사이 평균 변화율 + (포화값 또는 기준값을 넘는 x 의 선형 보간) — 값은 표에서 코드가 다시 계산한다.
+        a, b = xs.index(float(sc["ia"])), xs.index(float(sc["ib"]))
+        rate = (ys[b] - ys[a]) / (xs[b] - xs[a])
+        if rate <= 0 or any(ys[i + 1] < ys[i] for i in range(len(ys) - 1)):
+            raise ValueError("shape")
+        agree(rate, float((np.interp(xs[b], xs, ys) - np.interp(xs[a], xs, ys)) / (xs[b] - xs[a])), 1e-9, "rate")
+        ru = sc["rate_unit"]
+        if sc["calc"] == "rate_plateau":
+            if abs(ys[-1] - ys[-2]) > 0.05 * ys[-1]:
+                raise ValueError("shape")
+            est, est_tol = ys[-1], max(sc.get("plateau_tol_min", 2), 0.05 * ys[-1])
+            c2_crit = f"Estimates the maximum {sc['yl'].lower()} from the plateau of the graph (value)"
+            c_ans = f"(i) rate = ({ys[b]:g} - {ys[a]:g}) / ({xs[b]:g} - {xs[a]:g}) = {rate:.2f} {ru}. (ii) The graph levels off at about {est:g} {sc['yunit']}, which estimates the maximum."
+            ev = [_ev("C", "average rate of increase", rate, max(0.02, abs(rate) * 0.01), ru), _ev("C", "plateau value", est, est_tol, sc["yunit"])]
+        else:
+            thr = float(sc["threshold"])
+            j = next(i for i in range(len(ys) - 1) if ys[i] < thr <= ys[i + 1])
+            est = xs[j] + (thr - ys[j]) * (xs[j + 1] - xs[j]) / (ys[j + 1] - ys[j])
+            agree(est, float(np.interp(thr, ys, xs)), 1e-6, "crossing")
+            est = round(est, 1); est_tol = sc["threshold_tol"]
+            c2_crit = f"Estimates from the graph the {sc['xl'].split(' (')[0].lower()} at which the value first exceeds {thr:g} (value)"
+            c_ans = f"(i) rate = ({ys[b]:g} - {ys[a]:g}) / ({xs[b]:g} - {xs[a]:g}) = {rate:.2f} {ru}. (ii) The plotted line crosses {thr:g} at about {est:.1f} (between {xs[j]:g} and {xs[j + 1]:g})."
+            ev = [_ev("C", "average rate of increase", rate, max(0.02, abs(rate) * 0.01), ru), _ev("C", "crossing point", est, est_tol, "")]
+        c_rows = [R("C1", "Gives the correct average rate of increase with units (answer)", None, None, None, "numeric", num=f"{rate:.2f}", tol=f"±{max(0.02, abs(rate) * 0.01):.2f}", units=True),
+                  R("C2", c2_crit, None, None, None, "numeric", num=f"{est:g}", tol=f"±{est_tol:g}")]
     else:
         slope = (ys[1] - ys[0]) / (xs[1] - xs[0])
         if ys[-1] != ys[-2] or slope <= 0:

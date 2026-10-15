@@ -1,5 +1,20 @@
 [
  {
+  "id": "bif_q1_fliesselection",
+  "template": "bio_q1_results",
+  "topic": "7.3",
+  "extraTopics": [
+   "7.4"
+  ],
+  "skill": "1.B",
+  "calculator": "allowed",
+  "parts": "A 1.B(1) / B 3.C(3) / C 5.A(3) / D 6.E(2)",
+  "points": 9,
+  "verifiedBy": [
+   "percent change and \u00b12SE overlap recomputed from the displayed table values"
+  ]
+ },
+ {
   "id": "bif_q1_growthfactor",
   "template": "bio_q1_results",
   "topic": "4.2",
@@ -20,6 +35,21 @@
   "topic": "3.1",
   "extraTopics": [
    "3.2"
+  ],
+  "skill": "1.B",
+  "calculator": "allowed",
+  "parts": "A 1.B(1) / B 3.C(3) / C 5.A(3) / D 6.E(2)",
+  "points": 9,
+  "verifiedBy": [
+   "percent change and \u00b12SE overlap recomputed from the displayed table values"
+  ]
+ },
+ {
+  "id": "bif_q1_lacoperon",
+  "template": "bio_q1_results",
+  "topic": "6.5",
+  "extraTopics": [
+   "6.4"
   ],
   "skill": "1.B",
   "calculator": "allowed",
@@ -57,6 +87,21 @@
   "points": 9,
   "verifiedBy": [
    "percent change and \u00b12SE overlap recomputed from the displayed table values"
+  ]
+ },
+ {
+  "id": "bif_q2_allelefreq",
+  "template": "bio_q2_graphing",
+  "topic": "7.4",
+  "extraTopics": [
+   "7.2"
+  ],
+  "skill": "4.A",
+  "calculator": "allowed",
+  "parts": "A 1.A(1) / B 4.A(4) / C 5.A(2) / D 6.E(2)",
+  "points": 9,
+  "verifiedBy": [
+   "values read back from the generating data (percent change, interpolation, slope, plateau)"
   ]
  },
  {
@@ -120,6 +165,34 @@
   ]
  },
  {
+  "id": "bif_q2_receptorsat",
+  "template": "bio_q2_graphing",
+  "topic": "4.2",
+  "extraTopics": [
+   "4.3"
+  ],
+  "skill": "4.A",
+  "calculator": "allowed",
+  "parts": "A 1.A(1) / B 4.A(4) / C 5.A(2) / D 6.E(2)",
+  "points": 9,
+  "verifiedBy": [
+   "values read back from the generating data (percent change, interpolation, slope, plateau)"
+  ]
+ },
+ {
+  "id": "bif_q3_beetlecolor",
+  "template": "bio_q3_investigation",
+  "topic": "7.2",
+  "extraTopics": [],
+  "skill": "3.C",
+  "calculator": "allowed",
+  "parts": "A 1.A(1) / B 3.C(1) / C 3.B(1) / D 6.C(1)",
+  "points": 4,
+  "verifiedBy": [
+   "a fixed scenario with rubric rows derived from the design (variable, control, null hypothesis, mechanism)"
+  ]
+ },
+ {
   "id": "bif_q3_catalase",
   "template": "bio_q3_investigation",
   "topic": "3.2",
@@ -140,6 +213,32 @@
   "skill": "3.C",
   "calculator": "allowed",
   "parts": "A 1.C(1) / B 3.C(1) / C 3.B(1) / D 6.C(1)",
+  "points": 4,
+  "verifiedBy": [
+   "a fixed scenario with rubric rows derived from the design (variable, control, null hypothesis, mechanism)"
+  ]
+ },
+ {
+  "id": "bif_q3_ethylene",
+  "template": "bio_q3_investigation",
+  "topic": "4.1",
+  "extraTopics": [],
+  "skill": "3.C",
+  "calculator": "allowed",
+  "parts": "A 1.A(1) / B 3.C(1) / C 3.B(1) / D 6.C(1)",
+  "points": 4,
+  "verifiedBy": [
+   "a fixed scenario with rubric rows derived from the design (variable, control, null hypothesis, mechanism)"
+  ]
+ },
+ {
+  "id": "bif_q3_flycross",
+  "template": "bio_q3_investigation",
+  "topic": "5.3",
+  "extraTopics": [],
+  "skill": "3.C",
+  "calculator": "allowed",
+  "parts": "A 1.A(1) / B 3.C(1) / C 3.B(1) / D 5.C(1)",
   "points": 4,
   "verifiedBy": [
    "a fixed scenario with rubric rows derived from the design (variable, control, null hypothesis, mechanism)"
@@ -172,6 +271,19 @@
   ]
  },
  {
+  "id": "bif_q3_uvbacteria",
+  "template": "bio_q3_investigation",
+  "topic": "6.7",
+  "extraTopics": [],
+  "skill": "3.C",
+  "calculator": "allowed",
+  "parts": "A 1.A(1) / B 3.C(1) / C 3.B(1) / D 6.C(1)",
+  "points": 4,
+  "verifiedBy": [
+   "a fixed scenario with rubric rows derived from the design (variable, control, null hypothesis, mechanism)"
+  ]
+ },
+ {
   "id": "bif_q3_yeast",
   "template": "bio_q3_investigation",
   "topic": "3.5",
@@ -182,6 +294,32 @@
   "points": 4,
   "verifiedBy": [
    "a fixed scenario with rubric rows derived from the design (variable, control, null hypothesis, mechanism)"
+  ]
+ },
+ {
+  "id": "bif_q4_bottleneck",
+  "template": "bio_q4_conceptual",
+  "topic": "7.4",
+  "extraTopics": [],
+  "skill": "1.B",
+  "calculator": "allowed",
+  "parts": "A 1.A(1) / B 1.B(1) / C 6.E(1) / D 6.C(1)",
+  "points": 4,
+  "verifiedBy": [
+   "a fixed scenario with rubric rows derived from the normal mechanism and the effect of the disruption"
+  ]
+ },
+ {
+  "id": "bif_q4_crossingover",
+  "template": "bio_q4_conceptual",
+  "topic": "5.2",
+  "extraTopics": [],
+  "skill": "1.B",
+  "calculator": "allowed",
+  "parts": "A 1.A(1) / B 1.B(1) / C 6.E(1) / D 6.C(1)",
+  "points": 4,
+  "verifiedBy": [
+   "a fixed scenario with rubric rows derived from the normal mechanism and the effect of the disruption"
   ]
  },
  {
@@ -218,6 +356,19 @@
   "skill": "1.B",
   "calculator": "allowed",
   "parts": "A 1.A(1) / B 1.B(1) / C 6.E(1) / D 6.C(1)",
+  "points": 4,
+  "verifiedBy": [
+   "a fixed scenario with rubric rows derived from the normal mechanism and the effect of the disruption"
+  ]
+ },
+ {
+  "id": "bif_q4_keystone",
+  "template": "bio_q4_conceptual",
+  "topic": "8.5",
+  "extraTopics": [],
+  "skill": "1.B",
+  "calculator": "allowed",
+  "parts": "A 1.C(1) / B 1.B(1) / C 6.E(1) / D 6.C(1)",
   "points": 4,
   "verifiedBy": [
    "a fixed scenario with rubric rows derived from the normal mechanism and the effect of the disruption"
@@ -325,6 +476,19 @@
   ]
  },
  {
+  "id": "bif_q6_agemeiosis",
+  "template": "bio_q6_data",
+  "topic": "5.1",
+  "extraTopics": [],
+  "skill": "4.B",
+  "calculator": "allowed",
+  "parts": "A 4.B(1) / B 5.A(1) / C 5.D(1) / D 6.D(1)",
+  "points": 4,
+  "verifiedBy": [
+   "percent change and \u00b12SE overlap recomputed from the displayed values"
+  ]
+ },
+ {
   "id": "bif_q6_enzymeph",
   "template": "bio_q6_data",
   "topic": "3.2",
@@ -351,9 +515,35 @@
   ]
  },
  {
+  "id": "bif_q6_lacz",
+  "template": "bio_q6_data",
+  "topic": "6.5",
+  "extraTopics": [],
+  "skill": "4.B",
+  "calculator": "allowed",
+  "parts": "A 4.B(1) / B 5.A(1) / C 5.D(1) / D 6.D(1)",
+  "points": 4,
+  "verifiedBy": [
+   "percent change and \u00b12SE overlap recomputed from the displayed values"
+  ]
+ },
+ {
   "id": "bif_q6_mitotic",
   "template": "bio_q6_data",
   "topic": "4.6",
+  "extraTopics": [],
+  "skill": "4.B",
+  "calculator": "allowed",
+  "parts": "A 4.B(1) / B 5.A(1) / C 5.D(1) / D 6.D(1)",
+  "points": 4,
+  "verifiedBy": [
+   "percent change and \u00b12SE overlap recomputed from the displayed values"
+  ]
+ },
+ {
+  "id": "bif_q6_moth",
+  "template": "bio_q6_data",
+  "topic": "7.2",
   "extraTopics": [],
   "skill": "4.B",
   "calculator": "allowed",
