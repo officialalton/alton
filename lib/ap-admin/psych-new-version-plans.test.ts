@@ -15,7 +15,7 @@ import { parseSwapPlan, resolveSwaps, type PlanSwapInput } from "./new-version";
 const rd = <T>(p: string) => JSON.parse(readFileSync(p, "utf-8")) as T;
 const live = rd<Snap>("data/ap/stock/psych-ps1-ps2-published-v2-slots.json"); // 2026-10-15 현재 DB: 게시 PS1 v2 + PS2 v2(SELECT 전용)
 const assign = rd<{ sets: { id: string; mcA: string[]; frqA: string[]; virtual: unknown[]; virtualSets: unknown[]; frqVirtual: unknown[] }[] }>("data/ap/stock/exact-assign-psych-ps1-ps2-v3.json");
-const { all } = loadPsychPool(); const by = new Map(all.filter((c) => c.screen).map((c) => [c.key, c]));
+const { all } = loadPsychPool({ ignorePctFlags: true }); const by = new Map(all.filter((c) => c.screen).map((c) => [c.key, c]));
 const planOf = (id: SetId) => { const raw = rd<{ swapCount: number; verifierViolations: string[]; requiresConvertedCandidates: string[] }>(`data/ap/stock/${id.toLowerCase()}-v3-swap-plan.json`); return { raw, p: parseSwapPlan(raw) }; };
 const pid = (key: string, i: number) => `${key}#${i}`;
 const unitOf = (key: string) => String(by.get(key)!.keyUnit); // 관리자 새 버전 서비스와 같은 단원: 후보 keyword_code 단원(세트 전 칸 동일)
@@ -85,7 +85,7 @@ for (const id of ["PS1", "PS2"] as const) {
     });
     it("교체는 같은 부류끼리: 단독→단독, 세트(3칸)→세트, AAQ→AAQ·EBQ→EBQ", () => {
       for (const sw of p.swaps) { expect(Boolean((sw as unknown as { remove: { shared: boolean } }).remove.shared)).toBe(Boolean((sw as unknown as { add: { shared: boolean } }).add.shared)); }
-      for (const sw of p.swaps.filter((x) => x.section === "ap_frq")) expect(by.get(sw.addKey)!.frqType).toBe(by.get(sw.removeKey)!.frqType);
+      for (const sw of p.swaps.filter((x) => x.section === "ap_frq")) expect(by.get(sw.addKey)!.frqType).toBe(by.get(sw.removeKey ?? "")!.frqType);
     });
   });
 }

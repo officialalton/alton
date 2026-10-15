@@ -71,7 +71,7 @@ export function afterSwaps(slots: Slot[], swaps: PlanSwap[]): Slot[] { const m =
 
 function main() {
   const snap = rd<Snap>(arg("--slots", "data/ap/stock/psych-ps1-ps2-published-v2-slots.json")); const assign = rd<{ sets: { id: string; mcA: string[]; frqA: string[]; virtual: unknown[]; virtualSets: unknown[]; frqVirtual: unknown[] }[] }>(arg("--assign", "data/ap/stock/exact-assign-psych-ps1-ps2-v3.json"));
-  const { all } = loadPsychPool(); const by = new Map(all.filter((c) => c.screen).map((c) => [c.key, c]));
+  const { all } = loadPsychPool({ ignorePctFlags: true }); const by = new Map(all.filter((c) => c.screen).map((c) => [c.key, c])); // 지금 게시본에 있는 표 비율 위반 후보도 '제거 대상'으로 읽어야 하므로 비율 표시 목록은 무시한다(배정기는 쓰지 않는다)
   const assumed = new Set(arg("--assume-converted").split(",").filter(Boolean).flatMap((b) => rd<{ stockKey: string; validation: string; duplicateOf?: string | null }[]>(`data/ap/stock/${b}.json`).filter((r) => r.validation === "auto_passed" && !r.duplicateOf).map((r) => r.stockKey)));
   const converted = new Set([...snap.convertedKeys, ...assumed]); const write = process.argv.includes("--write"); const out: Record<string, { bad: string[]; plan: unknown; file: string }> = {};
   const finals: Record<string, Slot[]> = {};

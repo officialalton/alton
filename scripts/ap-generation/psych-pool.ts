@@ -35,7 +35,7 @@ export function mcSig(payload: Json): string {
   return createHash("sha1").update(`${items.map(one).join("#")}|${JSON.stringify(payload.stimulus ?? null)}|${String(payload.set_intro ?? "")}`).digest("hex").slice(0, 12);
 }
 
-export function loadPsychPool(opts: { requireScreen?: boolean; files?: string[] } = {}) {
+export function loadPsychPool(opts: { requireScreen?: boolean; files?: string[]; ignorePctFlags?: boolean } = {}) {
   const scan = new Set((JSON.parse(readFileSync("data/ap/stock/defect-scan.json", "utf-8")) as { key: string }[]).map((r) => r.key));
   const ev = new Set<string>();
   for (const f of readdirSync("data/ap/screen-evidence").filter((x) => /^evidence-.*\.json$/.test(x))) for (const e of (JSON.parse(readFileSync(`data/ap/screen-evidence/${f}`, "utf-8")) as { entries: { candidate_key: string }[] }).entries) ev.add(e.candidate_key);
@@ -44,7 +44,7 @@ export function loadPsychPool(opts: { requireScreen?: boolean; files?: string[] 
   const panel = existsSync("data/ap/stock/psych-panel-flags.json") ? new Set(Object.keys(JSON.parse(readFileSync("data/ap/stock/psych-panel-flags.json", "utf-8")) as Record<string, string[]>)) : new Set<string>(); // 두 번째 모델 패널이 반려한 키
   // 감사 지적(2026-10-15): 표의 백분율이 정수 인원과 맞지 않는 후보는 재고에서 뺀다(scripts/audit/psych-table-pct-scan.ts --write 가 만든 목록; 같은 원형의 고친 후보가 새 배치에 있다).
   const pctFlags = existsSync("data/ap/stock/psych-table-pct-flags.json") ? new Set(Object.keys(JSON.parse(readFileSync("data/ap/stock/psych-table-pct-flags.json", "utf-8")) as Record<string, string[]>)) : new Set<string>();
-  const live = raws.filter((i) => i.validation === "auto_passed" && !scan.has(i.stockKey) && !i.duplicateOf && !panel.has(i.stockKey) && !pctFlags.has(i.stockKey));
+  const live = raws.filter((i) => i.validation === "auto_passed" && !scan.has(i.stockKey) && !i.duplicateOf && !panel.has(i.stockKey) && (opts.ignorePctFlags || !pctFlags.has(i.stockKey)));
   const gated = live.map((i) => ({ i, g: gateCandidate({ stockKey: i.stockKey, candidateKey: i.stockKey, apSubjectCode: i.apSubjectCode, kind: i.kind, payload: i.payload }) })).filter((x) => x.g.status !== "fail");
   const first = (r: Raw) => (Array.isArray(r.payload.items) ? (r.payload.items as Json[])[0] : r.payload) as { stem?: string; blueprint?: { student_thinking?: string[] } };
   const mc = gated.filter((x) => x.i.kind === "mc");
