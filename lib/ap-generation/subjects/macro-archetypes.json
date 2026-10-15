@@ -1037,6 +1037,499 @@
   "bc": false
  },
  {
+  "id": "ma_h_adas_table_shift",
+  "topic": "3.6",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "schedule scan for the shifted equilibrium vs closed-form row arithmetic"
+  ],
+  "misconceptions": [
+   "Reports the increase in aggregate demand as the size of the gap.",
+   "Compares the real GDP supplied at the old price level with potential output after the shift.",
+   "Compares the old equilibrium output with potential output, ignoring the increase in aggregate demand.",
+   "Names the gap with the wrong sign because it compares potential output with actual output in the wrong direction."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_h_cpi_real_wage",
+  "topic": "2.4",
+  "skill": "2.C",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "exact basket costs vs sympy rational ratio"
+  ],
+  "misconceptions": [
+   "Reports the change in the nominal wage and does not adjust for the rise in the price level.",
+   "Treats a rise in the nominal wage as a fall in the real wage.",
+   "Reverses the subtraction, treating the inflation rate minus the wage growth as the change in the real wage.",
+   "Adds the inflation rate to the nominal wage growth instead of subtracting it."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_h_crowding_table",
+  "topic": "5.5",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "schedule scan for the new equilibrium rate vs algebra on the linear schedules"
+  ],
+  "misconceptions": [
+   "Reports the increase in the total quantity of loanable funds traded rather than the fall in private borrowing.",
+   "Reports the quantity of private borrowing at the old equilibrium rather than the change.",
+   "Assumes half of the additional government borrowing crowds out private borrowing and half is financed by higher saving.",
+   "Reports the additional government borrowing, assuming it crowds out private borrowing one for one."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_h_debt_path",
+  "topic": "5.4",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "cumulative sum vs year-by-year debt updating"
+  ],
+  "misconceptions": [
+   "Reports the initial debt as a percent of Year 3 GDP.",
+   "Divides the debt by GDP using only the last year's budget balance.",
+   "Divides only the sum of the deficits by GDP and leaves out the debt at the start of Year 1.",
+   "Adds the surplus to the debt instead of using it to repay debt."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_h_depr_nx_gdp",
+  "topic": "6.5",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "exact fractions vs round-by-round induced spending"
+  ],
+  "misconceptions": [
+   "Applies the multiplier to the change in exports only and ignores the fall in imports.",
+   "Divides the change in net exports by the MPC instead of by 1 - MPC.",
+   "Subtracts the fall in imports from the rise in exports, treating the fall in imports as a loss of net exports.",
+   "Reports the change in net exports and leaves out the multiplier."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_h_exp_real_growth",
+  "topic": "2.6",
+  "skill": "2.C",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "exact fractions vs sympy rationals"
+  ],
+  "misconceptions": [
+   "Leaves imports out of the calculation, adding C + I + G + X instead of subtracting imports.",
+   "Adds imports instead of subtracting them when computing GDP.",
+   "Adds the inflation implied by the deflator to nominal growth instead of removing it.",
+   "Reports the growth of nominal GDP and does not remove the price increase."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_h_export_price",
+  "topic": "6.5",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "exact euro prices at both dates vs percent change formula"
+  ],
+  "misconceptions": [
+   "Reports the change in the exchange rate in cents as a percent and also reverses the effect on net exports.",
+   "Inverts the ratio and also misstates the effect on net exports for that price change.",
+   "Divides the change in the exchange rate by the new rate instead of the old rate, understating the size of the price change.",
+   "Finds the price change correctly but reverses the effect of a change in the euro price on U.S. exports."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_h_fx_two_events",
+  "topic": "6.4",
+  "skill": "3.A",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "rule table vs three-region numeric simulation of the linear currency market; initial equilibrium recomputed exactly and by sympy"
+  ],
+  "misconceptions": [
+   "Claims the value of the currency would decrease for certain, but the effect is indeterminate. The shifts push the value of the dollar in opposite directions and their sizes are not given, so the change in the value of the dollar is indeterminate.",
+   "Says the quantity of the currency traded would increase, but it would decrease. Both shifts decrease the quantity of dollars traded.",
+   "Claims the value of the currency would increase for certain, but the effect is indeterminate. The shifts push the value of the dollar in opposite directions and their sizes are not given, so the change in the value of the dollar is indeterminate.",
+   "Calls the effect on the quantity of the currency traded indeterminate, but it would decrease. Both shifts decrease the quantity of dollars traded."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_h_gap_tax",
+  "topic": "3.8",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "exact fraction gap/tax multiplier vs sympy solution of tax effect = gap"
+  ],
+  "misconceptions": [
+   "Multiplies the gap by the tax multiplier instead of dividing by it.",
+   "Sets the tax cut equal to the size of the gap and ignores the tax multiplier.",
+   "Applies the spending multiplier 1/(1 - MPC) to the gap, which is the wrong direction and the wrong multiplier.",
+   "Divides the gap by the spending multiplier 1/(1 - MPC) instead of the tax multiplier."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_h_gdp_classify",
+  "topic": "2.1",
+  "skill": "1.C",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "sum of counted items vs total minus excluded items"
+  ],
+  "misconceptions": [
+   "Counts the first excluded transaction (a household buys shares of stock on a stock exchange) even though it is not spending on newly produced domestic output.",
+   "Reports only the largest single final-good transaction.",
+   "Counts the second excluded transaction (a household buys a car produced and assembled in japan) even though it is not spending on newly produced domestic output.",
+   "Adds every transaction in the table, including intermediate goods, resales, transfers, and financial assets."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_h_money_growth_real",
+  "topic": "5.3",
+  "skill": "2.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "growth-rate form of MV = PY vs exact level simulation (within one percentage point)"
+  ],
+  "misconceptions": [
+   "Subtracts the money growth rate from the nominal interest rate and ignores velocity and output growth.",
+   "Reports the inflation rate found from the quantity equation as the real interest rate.",
+   "Uses the growth rate of real GDP as the inflation rate.",
+   "Ignores the change in velocity and uses money growth minus output growth as the inflation rate."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_h_money_target",
+  "topic": "4.6",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "exact fractions vs sympy line for money demand; bond size = change in money supply x reserve ratio"
+  ],
+  "misconceptions": [
+   "Reports the needed change in the money supply as the size of the bond transaction, leaving out the money multiplier.",
+   "Multiplies the needed change in the money supply by the money multiplier instead of dividing the change by it.",
+   "Uses the quantity of money demanded at the target rate rather than the change from the current money supply.",
+   "Uses the table row for a rate one percentage point away from the target."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_h_mpc_table_gap",
+  "topic": "3.2",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "exact fractions vs sympy rationals (MPC from two rows, from three rows)"
+  ],
+  "misconceptions": [
+   "Sets the increase in purchases equal to the gap and ignores the multiplier.",
+   "Uses the average propensity to consume at the middle income level in place of the MPC.",
+   "Divides the gap by the MPC instead of by the spending multiplier.",
+   "Multiplies the gap by the spending multiplier instead of dividing by it."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_h_omo_chain",
+  "topic": "4.6",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact multiplier 1/rr vs round-by-round lending simulation; interest-rate direction from the vertical-supply money market rule"
+  ],
+  "misconceptions": [
+   "Treats the change in reserves as the change in the money supply and leaves out the money multiplier.",
+   "Reverses the effect of the sale of bonds on reserves and on the money supply.",
+   "Uses 1/(1 - reserve ratio) as the multiplier instead of 1/(reserve ratio).",
+   "Gets the money market effect backward: when the money supply decreases the nominal interest rate rises."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_h_phillips_expect",
+  "topic": "5.2",
+  "skill": "2.C",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "table arithmetic vs iterative expectation updating until unemployment returns to the natural rate"
+  ],
+  "misconceptions": [
+   "Reports the original inflation rate, assuming the economy returns to the original point on the original short-run Phillips curve.",
+   "Reports the inflation rate at unemployment above the natural rate on the original curve.",
+   "Reads the table at the wrong unemployment rate, one percentage point from the rate reached by the policy.",
+   "Reports the inflation rate on the original curve at 3 percent unemployment only after expectations have adjusted further, adding the trade-off a second time."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_h_ppc_rotate",
+  "topic": "1.2",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact fractions along the linear PPC vs sympy solution of both curve equations at the fixed capital level"
+  ],
+  "misconceptions": [
+   "Reports the increase in the maximum output of consumer goods rather than the increase at the given level of capital goods.",
+   "Reports the old quantity of consumer goods at the point, assuming the point does not move.",
+   "Weights the increase in the maximum output by the share of resources used for capital goods instead of the share used for consumer goods.",
+   "Reports the new quantity of consumer goods instead of the increase."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_h_real_percapita",
+  "topic": "2.6",
+  "skill": "2.C",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "exact fractions vs sympy rational per-person levels"
+  ],
+  "misconceptions": [
+   "Reports the growth of real GDP and ignores that the population grew.",
+   "Reports the growth of nominal GDP, which includes the change in prices.",
+   "Uses the inflation rate implied by the deflator as the change in real GDP per person.",
+   "Reports nominal GDP per person growth and does not remove the price increase."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_h_real_rate_ad",
+  "topic": "4.2",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "Fisher approximation vs exact (1+n)/(1+pe) comparison; investment and AD directions from the rule table"
+  ],
+  "misconceptions": [
+   "Says the real interest rate would increase, but it would decrease. The real rate is nominal minus expected inflation: 7 - 2 = 5 before and 7 - 3 = 4 after, so it falls.",
+   "Says the real interest rate would increase, but it would decrease. The real rate is nominal minus expected inflation: 7 - 2 = 5 before and 7 - 3 = 4 after, so it falls. Says aggregate demand would decrease, but it would increase. Investment is a component of aggregate demand, so aggregate demand rises.",
+   "Says aggregate demand would decrease, but it would increase. Investment is a component of aggregate demand, so aggregate demand rises.",
+   "Says investment spending would decrease, but it would increase. A lower real interest rate makes borrowing less costly, so investment spending rises."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_h_real_rate_fx",
+  "topic": "6.6",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "real rates from the Fisher relation; direction chain from the foreign-exchange rule table (fx_dirs)"
+  ],
+  "misconceptions": [
+   "Says net financial capital inflows would increase, but it would decrease. Country A's real interest rate falls from 5 to 1 percent and falls below Country B's 3 percent, so net financial capital inflows to Country A decrease.",
+   "Says net financial capital inflows would increase, but it would decrease. Country A's real interest rate falls from 5 to 1 percent and falls below Country B's 3 percent, so net financial capital inflows to Country A decrease. Says the value of the currency would increase, but it would decrease. Less demand for Country A's currency makes it depreciate.",
+   "Says the value of the currency would increase, but it would decrease. Less demand for Country A's currency makes it depreciate.",
+   "Says net exports would decrease, but it would increase. A currency that depreciates makes exports more competitive and imports more expensive, so net exports rise."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_h_rr_cut",
+  "topic": "4.4",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact fractions vs lending-round simulation at the new ratio"
+  ],
+  "misconceptions": [
+   "Reports only the excess reserves created by the change and leaves out the money multiplier.",
+   "Multiplies total deposits by the difference between the new and old multipliers.",
+   "Multiplies the excess reserves by the old multiplier 1/(old ratio).",
+   "Reports the total deposits the banking system can support at the new ratio instead of the increase."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_h_shift_shortage",
+  "topic": "1.6",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "algebraic equilibrium (exact) vs exhaustive price search over the shifted schedules"
+  ],
+  "misconceptions": [
+   "Applies only the decrease in supply and ignores the change in demand.",
+   "Reads the old demand schedule at the new equilibrium price, ignoring the increase in demand.",
+   "Keeps the original equilibrium quantity, treating the two shifts as offsetting each other.",
+   "Applies only the increase in demand, so the quantity at the old equilibrium price is changed by the demand shift alone."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_h_shock_fiscal_vs_self",
+  "topic": "3.7",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact AD-AS solution for both cases vs sympy simultaneous equations; price-level order from the linear model"
+  ],
+  "misconceptions": [
+   "Assumes the policy leaves real GDP different in the long run; in the long run output is at potential in both cases.",
+   "Claims real GDP differs in the long run, but both cases end at potential output.",
+   "Overlooks that self-adjustment works through the price level: in Case 2 the price level ends away from its original level.",
+   "Gets the price-level comparison backward; the policy case returns to the original price level."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_h_terms_range",
+  "topic": "1.3",
+  "skill": "3.A",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "exact fractions of hours ratios vs direct gain test for each country at each option"
+  ],
+  "misconceptions": [
+   "At exactly 2 units of chairs per unit of lamps, the country with the lower opportunity cost of lamps gains nothing because it receives only what it gives up at home.",
+   "A price above the higher opportunity cost of lamps makes the buyer of lamps worse off than producing lamps at home.",
+   "A price below the lower opportunity cost of lamps makes the seller of lamps worse off than producing chairs at home.",
+   "At exactly 4 units of chairs per unit of lamps, the country with the higher opportunity cost of lamps gains nothing because it could obtain the same by producing at home."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_h_trade_gain",
+  "topic": "1.3",
+  "skill": "1.C",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "exact fractions on the trade rate vs sympy solution of the PPC line at the home consumption point"
+  ],
+  "misconceptions": [
+   "Reports only the lumber received from Country B and does not subtract the lumber Country A could have produced at home for the same corn.",
+   "Reports the lumber Country A could have produced at home instead of comparing it with the lumber obtained from trade.",
+   "Uses Country B's opportunity cost of lumber to value the home alternative, which makes Country A look worse off.",
+   "Treats the terms of trade as units of lumber per unit of corn by inverting the exchange rate."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_h_trip_exchange",
+  "topic": "6.2",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "exact fractions vs sympy rationals; direction from the change in euros per dollar"
+  ],
+  "misconceptions": [
+   "Converts the spending into dollars at the departure rate instead of converting the remaining euros at the return rate.",
+   "Converts the spending at the departure rate and reverses the direction of the change in the dollar's value.",
+   "Finds the dollar amount correctly but reverses the direction of the change in the dollar's value.",
+   "Treats the euros spent as dollars and subtracts them from the original dollar amount."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_h_two_policy_net",
+  "topic": "3.2",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact multipliers vs round-by-round summation of induced spending"
+  ],
+  "misconceptions": [
+   "Adds the tax multiplier effect to the spending effect instead of subtracting it.",
+   "Applies the multiplier to the purchases only and ignores the tax increase.",
+   "Subtracts the tax change from the purchases without using any multiplier.",
+   "Applies the tax multiplier to both changes."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_h_ulc_adas",
+  "topic": "3.3",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "rule table (adas_dirs) vs numeric three-region simulation of the linear AD-AS model; unit-cost ratio from exact fractions"
+  ],
+  "misconceptions": [
+   "Calls the effect on the price level indeterminate, but it would increase. Higher costs per unit shift SRAS left and rising demand shifts AD right, so both push the price level up.",
+   "Claims real GDP would increase for certain, but the effect is indeterminate. SRAS shifts left (lower output) and AD shifts right (higher output), so the effect on real GDP is indeterminate without sizes.",
+   "Says the price level would decrease, but it would increase. Higher costs per unit shift SRAS left and rising demand shifts AD right, so both push the price level up.",
+   "Claims real GDP would decrease for certain, but the effect is indeterminate. SRAS shifts left (lower output) and AD shifts right (higher output), so the effect on real GDP is indeterminate without sizes."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_h_unemp_event",
+  "topic": "2.3",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "exact fractions vs person-by-person status transitions"
+  ],
+  "misconceptions": [
+   "Ignores both changes and reports the initial unemployment rate.",
+   "Divides the remaining unemployed by the whole adult population instead of the labor force.",
+   "Reports the share of the labor force that left unemployment instead of the share that remains unemployed.",
+   "Counts the job finders as the only unemployed workers who leave, so the discouraged workers are left in the unemployed count while the labor force shrinks."
+  ],
+  "bc": false
+ },
+ {
+  "id": "ma_h_unexpected_inflation",
+  "topic": "2.5",
+  "skill": "2.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "Fisher approximation vs purchasing-power comparison of the repayment (exact fractions)"
+  ],
+  "misconceptions": [
+   "Uses the correct real interest rate but names the wrong party; when inflation is higher than expected the borrower gains.",
+   "Adds actual inflation to the nominal rate instead of subtracting it to find the real rate.",
+   "Adds inflation to the nominal rate and names the wrong party who gains from the surprise.",
+   "Reports the expected real interest rate instead of the actual real interest rate."
+  ],
+  "bc": false
+ },
+ {
   "id": "ma_income_approach",
   "topic": "2.1",
   "skill": "1.C",

@@ -16,3 +16,9 @@ STAGE_P2_B = ['ma_scarcity_concept', 'ma_ppc_shape', 'ma_comp_adv_inputs', 'ma_t
 STAGE_P2_F = ['maf_long_adas_policy', 'maf_long_money_market', 'maf_long_open_economy', 'maf_short_fiscal_multiplier', 'maf_short_fx_trade', 'maf_short_gdp_data', 'maf_short_lf_crowding', 'maf_short_money_banking', 'maf_short_phillips', 'maf_short_ppc_trade']
 
 STAGE_P3 = ['ma_phillips_adas', 'ma_policy_goal', 'ma_phillips_explain']  # 마지막 가상 칸(MA2 단원 5 스킬 2.B) 보충, 후보 4씩
+
+# 2026-10-15 macro-hard: exam_prep 보강 원형(ma_h_* 단원 1–3 은 macro_p0_h.py, 단원 4–6 은 macro_p0_i.py). 두 런으로 나눠 첫 런의 통과·exam_prep 비율을 본 뒤 둘째 런을 정한다.
+STAGE_HARD_A = ['ma_h_trade_gain', 'ma_h_shift_shortage', 'ma_h_ppc_rotate', 'ma_h_terms_range', 'ma_h_real_percapita', 'ma_h_unemp_event', 'ma_h_cpi_real_wage', 'ma_h_exp_real_growth', 'ma_h_gdp_classify', 'ma_h_unexpected_inflation',
+                'ma_h_omo_chain', 'ma_h_real_rate_ad', 'ma_h_money_target', 'ma_h_rr_cut', 'ma_h_export_price', 'ma_h_trip_exchange', 'ma_h_depr_nx_gdp']
+STAGE_HARD_B = ['ma_h_gap_tax', 'ma_h_shock_fiscal_vs_self', 'ma_h_mpc_table_gap', 'ma_h_two_policy_net', 'ma_h_adas_table_shift', 'ma_h_ulc_adas', 'ma_h_phillips_expect', 'ma_h_debt_path', 'ma_h_crowding_table', 'ma_h_money_growth_real',
+                'ma_h_fx_two_events', 'ma_h_real_rate_fx']
