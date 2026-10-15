@@ -1,0 +1,498 @@
+{
+ "models": {
+  "solvers": [
+   "claude-opus-5-5",
+   "claude-sonnet-5-5"
+  ],
+  "fact": "claude-fable-5-1"
+ },
+ "solve": {
+  "solve-ap_us_history-real_d_reynolds-0": [
+   {
+    "q": 1,
+    "choice": 2,
+    "confidence": "certain",
+    "also": null,
+    "note": "The title refers to 'the territory open to slavery or freedom by the repeal of the Missouri Compromise.' That means the Kansas-Nebraska Act of 1854 opened land north of the 36°30' line to slavery."
+   },
+   {
+    "q": 2,
+    "choice": 0,
+    "confidence": "certain",
+    "also": null,
+    "note": "Bleeding Kansas (1855–56) fits the dates in the question. Dred Scott (1857) would also back up the concern, but it falls outside 1855–56. The Gadsden Purchase and the Homestead Act are off topic or have the wrong dates."
+   },
+   {
+    "q": 3,
+    "choice": 1,
+    "confidence": "certain",
+    "also": null,
+    "note": "The map compares the area of free and slave states and shows which western territories were open to slavery. That puts it in the sectional fight over extending slavery into the West."
+   },
+   {
+    "q": 4,
+    "choice": 3,
+    "confidence": "certain",
+    "also": null,
+    "note": "The map carries portraits of Frémont and Dayton, the Republican candidates in 1856. The new party kept gaining in the North and won with Lincoln in 1860. Kansas entered as a free state in 1861, so choice 0 is false."
+   }
+  ],
+  "solve-ap_us_history-real_d_reynolds-1": [
+   {
+    "q": 1,
+    "choice": 2,
+    "confidence": "certain",
+    "also": null,
+    "note": "Title says territory open to slavery by repeal of Missouri Compromise."
+   },
+   {
+    "q": 2,
+    "choice": 0,
+    "confidence": "certain",
+    "also": null,
+    "note": "Bleeding Kansas occurred 1855-56; other options are outside the period."
+   },
+   {
+    "q": 3,
+    "choice": 1,
+    "confidence": "certain",
+    "also": null,
+    "note": "Sectional conflict over slavery's expansion."
+   },
+   {
+    "q": 4,
+    "choice": 3,
+    "confidence": "certain",
+    "also": null,
+    "note": "Republican Party rise led to Lincoln's 1860 election."
+   }
+  ],
+  "solve-ap_us_history-real_d_school-0": [
+   {
+    "q": 1,
+    "choice": 1,
+    "confidence": "certain",
+    "also": null,
+    "note": "The pupils labeled with western states (California, Texas, etc.) are the model students showing earlier acquisitions successfully absorbed, as the caption says."
+   },
+   {
+    "q": 2,
+    "choice": 2,
+    "confidence": "likely",
+    "also": null,
+    "note": "The Platt Amendment imposed U.S. control over Cuba without full consent, which matches the blackboard's 'with or without their consent.' Teller contradicts this; option 3 is factually false."
+   },
+   {
+    "q": 3,
+    "choice": 3,
+    "confidence": "certain",
+    "also": null,
+    "note": "The blackboard lesson justifies imperial rule over 'uncivilized' peoples, the civilizing-mission rhetoric of imperialism around 1900."
+   },
+   {
+    "q": 4,
+    "choice": 0,
+    "confidence": "certain",
+    "also": null,
+    "note": "Annexation led to the Philippine-American War (1899-1902) against Aguinaldo's independence forces."
+   }
+  ],
+  "solve-ap_us_history-real_d_school-1": [
+   {
+    "q": 1,
+    "choice": 1,
+    "confidence": "certain",
+    "also": null,
+    "note": "Older pupils labeled with western states/territories reading quietly show earlier acquisitions absorbed."
+   },
+   {
+    "q": 2,
+    "choice": 2,
+    "confidence": "likely",
+    "also": null,
+    "note": "Platt Amendment shows US governing/controlling Cuba without full consent, matching the cartoon's message."
+   },
+   {
+    "q": 3,
+    "choice": 3,
+    "confidence": "certain",
+    "also": null,
+    "note": "Blackboard reflects imperialist civilizing mission rhetoric c. 1900."
+   },
+   {
+    "q": 4,
+    "choice": 0,
+    "confidence": "certain",
+    "also": null,
+    "note": "Philippine-American War (1899-1902) followed annexation."
+   }
+  ],
+  "solve-ap_us_history-real_d_reserv-0": [
+   {
+    "q": 1,
+    "choice": 0,
+    "confidence": "certain",
+    "also": null,
+    "note": "The map's title and its orange and red shading show defined reservations set aside across the country. They take up only part of the West, not most of it, so option 1 is wrong."
+   },
+   {
+    "q": 2,
+    "choice": 3,
+    "confidence": "certain",
+    "also": null,
+    "note": "The reservations appear as limited tracts inside larger states and territories, which shows confinement. Option 0 is false, because many states, including much of the Southeast, have no reservations on the map."
+   },
+   {
+    "q": 3,
+    "choice": 2,
+    "confidence": "likely",
+    "also": 0,
+    "note": "Most western reservations (Plains, Southwest, Northwest) came out of wars and treaties after the Civil War, as settlers, miners and railroads moved west. Removal explains the Indian Territory, but not most western reservations."
+   },
+   {
+    "q": 4,
+    "choice": 1,
+    "confidence": "certain",
+    "also": null,
+    "note": "The Indian Reorganization Act of 1934 (the Wheeler-Howard Act) ended allotment under the Dawes Act."
+   }
+  ],
+  "solve-ap_us_history-real_d_reserv-1": [
+   {
+    "q": 1,
+    "choice": 0,
+    "confidence": "likely",
+    "also": null,
+    "note": "The map shows defined reservations across the nation."
+   },
+   {
+    "q": 2,
+    "choice": 3,
+    "confidence": "likely",
+    "also": null,
+    "note": "Reservations are small tracts within each state, showing confinement."
+   },
+   {
+    "q": 3,
+    "choice": 2,
+    "confidence": "likely",
+    "also": null,
+    "note": "Post-Civil War western expansion by settlers, miners and railroads led to conflict and reservations."
+   },
+   {
+    "q": 4,
+    "choice": 1,
+    "confidence": "certain",
+    "also": null,
+    "note": "The IRA of 1934 ended allotment under the Dawes Act."
+   }
+  ]
+ },
+ "fact": {
+  "fact-ap_us_history-real_d_reserv": {
+   "verdicts": [
+    {
+     "where": "Q1",
+     "verdict": "sound",
+     "note": "Title cartouche ('Map showing Indian Reservations within the limits of the United States ... T. J. Morgan ... 1892') is legible and supports the key; distractor rationales match the map (reservations are partial tracts, mostly western, none of the large ones in the former Confederacy—Indian Territory was not a state)."
+    },
+    {
+     "where": "Q2",
+     "verdict": "sound",
+     "note": "Map shows reservations as discrete orange/red tracts inside larger states (e.g., Washington, Montana, Nevada, Arizona); Southeast/Atlantic coast largely unshaded apart from small tracts (e.g., NC, NY). Key [3] is the only defensible option."
+    },
+    {
+     "where": "Q3",
+     "verdict": "sound",
+     "note": "Post-Civil War settlement, mining, railroads and the resulting wars/treaties are the standard explanation for the western reservations shown; distractor rationales are historically accurate."
+    },
+    {
+     "where": "Q4",
+     "verdict": "sound",
+     "note": "The Indian Reorganization Act of 1934 ended allotment under the Dawes Act; the 1924 Citizenship Act, 1950s termination, and 1973 Wounded Knee are correctly characterized."
+    }
+   ],
+   "flags": []
+  },
+  "fact-ap_us_history-real_d_school": {
+   "verdicts": [
+    {
+     "where": "Q1",
+     "verdict": "sound",
+     "note": "The rear pupils hold books labeled California, Texas, New Mexico, Arizona, Alaska and sit calmly; the four front children labeled Philippines, Hawaii, Porto Rico, Cuba look unhappy. The caption ('take a look at the class ahead of you... you will feel as glad to be here as they are') confirms the intended reading. Key and distractor rationales are accurate."
+    },
+    {
+     "where": "Q2",
+     "verdict": "sound",
+     "note": "Blackboard text is quoted accurately ('with or without their consent until they can govern themselves'). Platt Amendment (1901) description is accurate and fits the message; Teller Amendment, Open Door, and Treaty of Paris descriptions are historically correct. Note the Platt Amendment postdates the cartoon by two years, but the stem asks which policy best supports the message, not which the cartoon depicts, so this is acceptable."
+    },
+    {
+     "where": "Q3",
+     "verdict": "sound",
+     "note": "Caption reads 'Uncle Sam (to his new class in Civilization)' as cited; blackboard lesson matches. Context of civilizing-mission imperialism c. 1900 is correct; distractor rationales (Reconstruction ended 1877; interwar isolationism) are accurate."
+    },
+    {
+     "where": "Q4",
+     "verdict": "sound",
+     "note": "Philippine-American War began February 1899 under Aguinaldo; Philippine independence came in 1946; no U.S.-Japan war in 1900. All statements accurate and the child labeled 'Philippines' is clearly legible."
+    }
+   ],
+   "flags": []
+  },
+  "fact-ap_us_history-real_d_reynolds": {
+   "verdicts": [
+    {
+     "where": "Q1",
+     "verdict": "sound",
+     "note": "Title wording quoted accurately; green territories (Kansas, Nebraska, Utah, New Mexico) lie west of the gray slave states as stated. Key is the only option supported by the title."
+    },
+    {
+     "where": "Q2",
+     "verdict": "sound",
+     "note": "Bleeding Kansas (1855–56) is the only option in the stated date range; 'Territory of Kansas' and 'Territory of Nebraska' are legible in green. Dates for Gadsden (1853), Dred Scott (1857), Homestead (1862) are correct."
+    },
+    {
+     "where": "Q3",
+     "verdict": "sound",
+     "note": "Context claims accurate; distractors are chronologically and topically distinct."
+    },
+    {
+     "where": "Q4",
+     "verdict": "sound",
+     "note": "Portrait labels 'John C. Fremont' and 'Wm. L. Dayton' are legible. Kansas admitted free Jan. 1861, Fremont carried 11 of 16 free states, 15th Amendment 1870, Republican Party founded 1854 — all accurate."
+    }
+   ],
+   "flags": []
+  }
+ },
+ "items": {
+  "ap_us_history-real_d_reynolds#1": {
+   "keyIndex": 2,
+   "solverChoices": [
+    2,
+    2
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "sound",
+   "factNote": "Title wording quoted accurately; green territories (Kansas, Nebraska, Utah, New Mexico) lie west of the gray slave states as stated. Key is the only option supported by the title.",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_d_reynolds#2": {
+   "keyIndex": 0,
+   "solverChoices": [
+    0,
+    0
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "sound",
+   "factNote": "Bleeding Kansas (1855–56) is the only option in the stated date range; 'Territory of Kansas' and 'Territory of Nebraska' are legible in green. Dates for Gadsden (1853), Dred Scott (1857), Homestead (1862) are correct.",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_d_reynolds#3": {
+   "keyIndex": 1,
+   "solverChoices": [
+    1,
+    1
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "sound",
+   "factNote": "Context claims accurate; distractors are chronologically and topically distinct.",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_d_reynolds#4": {
+   "keyIndex": 3,
+   "solverChoices": [
+    3,
+    3
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "sound",
+   "factNote": "Portrait labels 'John C. Fremont' and 'Wm. L. Dayton' are legible. Kansas admitted free Jan. 1861, Fremont carried 11 of 16 free states, 15th Amendment 1870, Republican Party founded 1854 — all accurate.",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_d_school#1": {
+   "keyIndex": 1,
+   "solverChoices": [
+    1,
+    1
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "sound",
+   "factNote": "The rear pupils hold books labeled California, Texas, New Mexico, Arizona, Alaska and sit calmly; the four front children labeled Philippines, Hawaii, Porto Rico, Cuba look unhappy. The caption ('take a look at the class ahead of you... you will feel as glad to be here as they are') confirms the intended reading. Key and distractor rationales are accurate.",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_d_school#2": {
+   "keyIndex": 2,
+   "solverChoices": [
+    2,
+    2
+   ],
+   "solverConfidence": [
+    "likely",
+    "likely"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "sound",
+   "factNote": "Blackboard text is quoted accurately ('with or without their consent until they can govern themselves'). Platt Amendment (1901) description is accurate and fits the message; Teller Amendment, Open Door, and Treaty of Paris descriptions are historically correct. Note the Platt Amendment postdates the cartoon by two years, but the stem asks which policy best supports the message, not which the cartoon depicts, so this is acceptable.",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_d_school#3": {
+   "keyIndex": 3,
+   "solverChoices": [
+    3,
+    3
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "sound",
+   "factNote": "Caption reads 'Uncle Sam (to his new class in Civilization)' as cited; blackboard lesson matches. Context of civilizing-mission imperialism c. 1900 is correct; distractor rationales (Reconstruction ended 1877; interwar isolationism) are accurate.",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_d_school#4": {
+   "keyIndex": 0,
+   "solverChoices": [
+    0,
+    0
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "sound",
+   "factNote": "Philippine-American War began February 1899 under Aguinaldo; Philippine independence came in 1946; no U.S.-Japan war in 1900. All statements accurate and the child labeled 'Philippines' is clearly legible.",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_d_reserv#1": {
+   "keyIndex": 0,
+   "solverChoices": [
+    0,
+    0
+   ],
+   "solverConfidence": [
+    "certain",
+    "likely"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "sound",
+   "factNote": "Title cartouche ('Map showing Indian Reservations within the limits of the United States ... T. J. Morgan ... 1892') is legible and supports the key; distractor rationales match the map (reservations are partial tracts, mostly western, none of the large ones in the former Confederacy—Indian Territory was not a state).",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_d_reserv#2": {
+   "keyIndex": 3,
+   "solverChoices": [
+    3,
+    3
+   ],
+   "solverConfidence": [
+    "certain",
+    "likely"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "sound",
+   "factNote": "Map shows reservations as discrete orange/red tracts inside larger states (e.g., Washington, Montana, Nevada, Arizona); Southeast/Atlantic coast largely unshaded apart from small tracts (e.g., NC, NY). Key [3] is the only defensible option.",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_d_reserv#3": {
+   "keyIndex": 2,
+   "solverChoices": [
+    2,
+    2
+   ],
+   "solverConfidence": [
+    "likely",
+    "likely"
+   ],
+   "solverAlso": [
+    0,
+    null
+   ],
+   "factVerdict": "sound",
+   "factNote": "Post-Civil War settlement, mining, railroads and the resulting wars/treaties are the standard explanation for the western reservations shown; distractor rationales are historically accurate.",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_d_reserv#4": {
+   "keyIndex": 1,
+   "solverChoices": [
+    1,
+    1
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "sound",
+   "factNote": "The Indian Reorganization Act of 1934 ended allotment under the Dawes Act; the 1924 Citizenship Act, 1950s termination, and 1973 Wounded Knee are correctly characterized.",
+   "flags": [],
+   "status": "verified"
+  }
+ }
+}
