@@ -1,9 +1,9 @@
 {
- "version": "v1-ush-p1-b3",
+ "version": "v1-ush-p1-b4",
  "run": "ush-p1-b",
  "subject": "ap_us_history",
  "mode": "frq",
- "capUsd": 7.6,
+ "capUsd": 7.9,
  "hardStopCumulativeUsd": 200,
  "myTotalCapUsd": 16,
  "stages": [
@@ -41,7 +41,7 @@
   "lib/ap-exam/ush-rules.ts"
  ],
  "expected": {
-  "hash": "f9dc373b1dcd"
+  "hash": "6f1f82e68368"
  },
  "frqPlan": [
   {
@@ -162,6 +162,13 @@
    "period": 5,
    "focus": "Two fictional historians interpret the legacy of Reconstruction (1865-1877): one stresses the lasting constitutional and legal changes, the other stresses the limits and reversals that followed as federal enforcement faded.",
    "seed": 4251
+  },
+  {
+   "id": "saq1_6",
+   "template": "saq1",
+   "period": 7,
+   "focus": "Two fictional historians interpret who drove Progressive Era reform (1890-1920): one stresses middle-class professionals and urban reformers working through government, the other stresses working-class, immigrant and women's organizing from below.",
+   "seed": 4260
   }
  ],
  "sampleCands": 5,
@@ -199,6 +206,11 @@
    "mid",
    "low"
   ],
-  "saq1_5": []
+  "saq1_5": [],
+  "saq1_6": [
+   "high:3",
+   "mid:3",
+   "low:3"
+  ]
  }
 }

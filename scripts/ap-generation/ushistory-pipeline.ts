@@ -49,7 +49,9 @@ function guard(stage: string, est: number) {
   console.log(`[${stage}] ledger before: run $${spentRun().toFixed(4)}, US History total $${spentMine().toFixed(4)}, cumulative $${t.cumulativeUsd} (stop line ${t.stopLine}); est this step $${est.toFixed(3)}`);
 }
 async function call(stage: string, reqs: BatchReq[], estUsd: number): Promise<Map<string, Json | null>> {
-  if (!reqs.length) return new Map(); guard(stage, estUsd);
+  if (!reqs.length) return new Map();
+  { const rf = path.join(DIR, `${stage}.results.jsonl`); const done = new Set<string>(); if (existsSync(rf)) for (const l of readFileSync(rf, "utf-8").split("\n").filter(Boolean)) { try { const j = JSON.parse(l); if (j.ok) done.add(j.custom_id); } catch { /* skip */ } } const todo = reqs.filter((r) => !done.has(r.custom_id)).length; estUsd = estUsd * (todo / reqs.length); } // 이미 끝난 요청은 비용이 들지 않는다
+  guard(stage, estUsd);
   if (has("--dry")) { console.log(`[dry] ${stage}: ${reqs.length} requests, est $${estUsd.toFixed(3)}`); return new Map(); }
   const sync = cfg.syncStages?.includes(stage) ?? false;
   const run = async (name: string, rs: BatchReq[]) => runBatch({ dir: DIR, name, requests: rs, budgetUsd: ledger(DIR).spent() + Math.max(0, cfg.capUsd - spentRun()), estimateUsd: estUsd * (rs.length / reqs.length), sync, syncConcurrency: Number(process.env.AP_SYNC_CONC ?? 8), pollMs: 20000 });
