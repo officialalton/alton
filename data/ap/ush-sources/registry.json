@@ -375,6 +375,220 @@
    "pdf_sha256": "d610ace08d95b09cd075f89e3b77a656f39f25271cc169728bf1e598299de184",
    "pdf_retrieved_bytes": 10756062,
    "notes": "Working Paper 81, Table 2 (World Region of Birth of the Foreign-Born Population: 1850 to 1930 and 1960 to 2000), NUMBER block; 1940 and 1950 are not in that table. 1960-1990 rows are sample data per the source. Africa, Oceania and region-not-reported columns omitted, so row sums fall slightly below the total. Foreign-born = stock of residents, not annual arrivals."
+  },
+  {
+   "id": "stat-black-pop-region-1900-1940",
+   "type": "statistic_table",
+   "title": "Black population of the United States by region, census counts 1900-1940",
+   "table": {
+    "columns": [
+     "Year",
+     "Northeast",
+     "Midwest",
+     "South",
+     "West",
+     "United States"
+    ],
+    "rows": [
+     [
+      "1900",
+      "385,020",
+      "495,751",
+      "7,922,969",
+      "30,254",
+      "8,833,994"
+     ],
+     [
+      "1910",
+      "484,176",
+      "543,498",
+      "8,749,427",
+      "50,662",
+      "9,827,763"
+     ],
+     [
+      "1920",
+      "679,234",
+      "793,075",
+      "8,912,231",
+      "78,591",
+      "10,463,131"
+     ],
+     [
+      "1930",
+      "1,146,985",
+      "1,262,234",
+      "9,361,577",
+      "120,347",
+      "11,891,143"
+     ],
+     [
+      "1940",
+      "1,369,875",
+      "1,420,318",
+      "9,904,619",
+      "170,706",
+      "12,865,518"
+     ]
+    ]
+   },
+   "sha256": "b9b4d44d3a397a4ef3729065ae2cea58ca6f10aa6a537aaac3822600db962dfa",
+   "author": "Campbell Gibson and Kay Jung, U.S. Census Bureau, Population Division",
+   "year": "2002 (Working Paper No. 56, Sept. 2002; figures from decennial censuses)",
+   "url": "https://www.census.gov/library/working-papers/2002/demo/POP-twps0056.html",
+   "call_number": "Working Paper No. 56; PDF https://www.census.gov/content/dam/Census/library/working-papers/2002/demo/POP-twps0056.pdf",
+   "pdf_sha256": "1e60f6a45cc1be5d4a939da18a232ec71b52469f5d5ef4351b8831c9272caf78",
+   "pdf_retrieved_bytes": 1629986,
+   "origin": "real_historical_source",
+   "retrieved": "2026-10-15",
+   "repository": "U.S. Census Bureau",
+   "hash_of": "canonical JSON of table (sorted keys, compact separators, UTF-8)",
+   "rights_statement": "Publication of a U.S. federal agency (U.S. government work, 17 U.S.C. 105); no copyright claimed on the page.",
+   "reuse_basis": "public domain (U.S. government work)",
+   "modified": "excerpted (selected rows/columns; values unchanged)",
+   "notes": "Working Paper 56, Tables 1-5 (United States, Northeast, Midwest, South, West; NUMBER block, 'Black' column; the 1900-1950 censuses used the term Negro). Regions are the four current Census regions (the Midwest was called North Central before 1984). Cell values were extracted by code; the four regional counts sum to the United States count in every row. Counts are residents at each census."
+  },
+  {
+   "id": "stat-plains-state-pop-1870-1900",
+   "type": "statistic_table",
+   "title": "Total population of Kansas, Nebraska, North Dakota and South Dakota, census counts 1870-1900",
+   "table": {
+    "columns": [
+     "Year",
+     "Kansas",
+     "Nebraska",
+     "North Dakota",
+     "South Dakota"
+    ],
+    "rows": [
+     [
+      "1870",
+      "364,399",
+      "122,993",
+      "2,405",
+      "11,776"
+     ],
+     [
+      "1880",
+      "996,096",
+      "452,402",
+      "36,909",
+      "98,268"
+     ],
+     [
+      "1890",
+      "1,427,096",
+      "1,058,910",
+      "182,719",
+      "328,808"
+     ],
+     [
+      "1900",
+      "1,470,495",
+      "1,066,300",
+      "319,146",
+      "401,570"
+     ]
+    ]
+   },
+   "sha256": "17a7005c0b058d391cd30655409a773151808293ddace51a5664aa4ef8480e1f",
+   "author": "Campbell Gibson and Kay Jung, U.S. Census Bureau, Population Division",
+   "year": "2002 (Working Paper No. 56, Sept. 2002; figures from decennial censuses)",
+   "url": "https://www.census.gov/library/working-papers/2002/demo/POP-twps0056.html",
+   "call_number": "Working Paper No. 56; PDF https://www.census.gov/content/dam/Census/library/working-papers/2002/demo/POP-twps0056.pdf",
+   "pdf_sha256": "1e60f6a45cc1be5d4a939da18a232ec71b52469f5d5ef4351b8831c9272caf78",
+   "pdf_retrieved_bytes": 1629986,
+   "origin": "real_historical_source",
+   "retrieved": "2026-10-15",
+   "repository": "U.S. Census Bureau",
+   "hash_of": "canonical JSON of table (sorted keys, compact separators, UTF-8)",
+   "rights_statement": "Publication of a U.S. federal agency (U.S. government work, 17 U.S.C. 105); no copyright claimed on the page.",
+   "reuse_basis": "public domain (U.S. government work)",
+   "modified": "excerpted (selected rows/columns; values unchanged)",
+   "notes": "Working Paper 56, Tables 31 (Kansas), 42 (Nebraska), 49 (North Dakota), 56 (South Dakota); 'Total population' column. The 1890 row uses the figures that exclude Indian reservations (the second 1890 line in each table; the first line includes them). For North and South Dakota the 1870 and 1880 figures are for the area of the present state; the source states that the division of Dakota Territory's population into North and South Dakota is partially estimated (Working Paper 56, Appendix A-17/A-18 note). Counts are residents at each census."
+  },
+  {
+   "id": "stat-homeownership-1900-1980",
+   "type": "statistic_table",
+   "title": "Homeownership rates (percent) for the United States, New York and Mississippi, 1900-1980",
+   "table": {
+    "columns": [
+     "Year",
+     "United States",
+     "New York",
+     "Mississippi"
+    ],
+    "rows": [
+     [
+      "1900",
+      "46.5",
+      "33.2",
+      "34.5"
+     ],
+     [
+      "1910",
+      "45.9",
+      "31.0",
+      "34.0"
+     ],
+     [
+      "1920",
+      "45.6",
+      "30.7",
+      "34.0"
+     ],
+     [
+      "1930",
+      "47.8",
+      "37.1",
+      "32.5"
+     ],
+     [
+      "1940",
+      "43.6",
+      "30.3",
+      "33.3"
+     ],
+     [
+      "1950",
+      "55.0",
+      "37.9",
+      "47.8"
+     ],
+     [
+      "1960",
+      "61.9",
+      "44.8",
+      "57.7"
+     ],
+     [
+      "1970",
+      "62.9",
+      "47.3",
+      "66.3"
+     ],
+     [
+      "1980",
+      "64.4",
+      "48.6",
+      "71.0"
+     ]
+    ]
+   },
+   "sha256": "963d86e578e26cbe76ae7adc415f3729dca120f9de03dc12b01c596f35716e04",
+   "author": "U.S. Census Bureau (Historical Census of Housing Tables)",
+   "year": "Historical Census of Housing Tables: Homeownership (table compiled from decennial censuses 1900-2000; page last revised October 8, 2021)",
+   "url": "https://www.census.gov/data/tables/time-series/dec/coh-owner.html",
+   "call_number": "Table file https://www2.census.gov/programs-surveys/decennial/tables/time-series/coh-owner/owner-tab.txt",
+   "file_sha256": "fb32f67af2d96caeb5814e615f4e6c3bb6a9b8d00570209f1e529e7ff1889997",
+   "origin": "real_historical_source",
+   "retrieved": "2026-10-15",
+   "repository": "U.S. Census Bureau",
+   "hash_of": "canonical JSON of table (sorted keys, compact separators, UTF-8)",
+   "rights_statement": "Publication of a U.S. federal agency (U.S. government work, 17 U.S.C. 105); no copyright claimed on the page.",
+   "reuse_basis": "public domain (U.S. government work)",
+   "modified": "excerpted (selected rows/columns; values unchanged)",
+   "notes": "Rows 1900-1980 and the United States, New York and Mississippi columns of the Census Bureau's Homeownership Rates table (all states, 1900-2000). Percent values copied unchanged from the table file. The Census page text says the national rate fell to 44 percent in 1940 and topped 60 percent within two decades after World War II, and names the Middle Atlantic states and many southern states as examples of the postwar boom."
   }
  ]
 }

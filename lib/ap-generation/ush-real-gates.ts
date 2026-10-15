@@ -4,6 +4,7 @@ import { createHash } from "node:crypto";
 import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { itemViolations, type UshItemRaw, type UshSetRaw } from "./ushistory-gates";
+import { frqViolations, type UshFrqPayload } from "./ushistory-frq";
 
 export type RegistrySource = {
   id: string; type: string; title: string; author: string; year: string; repository: string; url: string; call_number: string; rights_statement: string; reuse_basis: string; modified: string; retrieved: string; origin: string; sha256: string;
@@ -52,5 +53,26 @@ export function realSetViolations(payload: Json, reg: Map<string, RegistrySource
     for (const x of itemViolations(set, raw)) v.push(`item${i + 1}:${x}`);
     const d = it.design as Json | undefined; if (!d || d.source_fixed_first !== true || !String(d.key_evidence_in_source ?? "").trim()) v.push(`item${i + 1}:design_evidence_missing`);
   }
+  return v;
+}
+
+/** 실제 자료 SAQ(비텍스트) 점검: 자료가 레지스트리와 글자 그대로 같은지 + ALTON 작성 표지 금지 + FRQ 공통 게이트(ALTON 작성 출처 표지·가공 출처 규칙만 제외). */
+export function realFrqViolations(payload: Json, reg: Map<string, RegistrySource>): string[] {
+  const v: string[] = []; const u = payload.ush_frq as Json | undefined; const intro = String(payload.set_intro ?? "");
+  if (!u) return ["no_ush_frq"];
+  if (/ALTON-composed/i.test(intro)) v.push("real_set_marked_alton_composed");
+  if (!intro.startsWith("Historical source (real document)\n")) v.push("real_marker_missing");
+  const sources = (u.sources as Json[]) ?? [];
+  if (sources.length !== 1) v.push(`sources_${sources.length}_not_1`);
+  for (const s of sources) {
+    const r = reg.get(String(s.source_registry_id)); if (!r) { v.push(`unknown_source_${String(s.source_registry_id)}`); continue; }
+    if (s.real_data !== true) v.push(`${r.id}:real_data_flag`); if (s.source_sha256 !== r.sha256) v.push(`${r.id}:sha_not_pinned`);
+    if (r.table) {
+      const t = s.table as { rows?: string[][]; columns?: string[] } | undefined; const d = ((payload.stimulus as Json | undefined)?.data as { rows?: string[][]; columns?: string[] } | undefined);
+      for (const x of [t, d]) if (JSON.stringify(x?.rows) !== JSON.stringify(r.table.rows) || JSON.stringify(x?.columns) !== JSON.stringify(r.table.columns)) v.push(`${r.id}:table_differs_from_registry`);
+    }
+    if (!intro.includes(r.author) || !intro.includes(r.repository)) v.push(`${r.id}:author_or_repository_not_shown`);
+  }
+  v.push(...frqViolations(u as unknown as UshFrqPayload).filter((x) => !/not_marked_alton_composed/.test(x)));
   return v;
 }
