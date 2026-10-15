@@ -12,6 +12,8 @@ const RUNS = arg("--runs", "ush-p1-a").split(","), BATCH = arg("--batch", "ush-p
 const root = path.resolve("data/ap/sample-2027"), out = path.resolve("data/ap/stock");
 const runs: Record<string, RawCand[]> = {};
 for (const r of RUNS) { const f = path.join(root, r, "candidates.json"); if (existsSync(f)) runs[r] = (JSON.parse(readFileSync(f, "utf-8")) as RawCand[]).map((c) => ({ ...c, gateOverride: LATEST_GATE } as RawCand)); }
+// 표시 형식 정규화(멱등): 초기 실행의 set_intro 는 표지 뒤에 빈 구분선이 끼어 있다("ALTON-composed stimulus\n\n———\n\n(…)"). 학생 화면용 형식으로 고친다.
+for (const list of Object.values(runs)) for (const c of list) { const p = c.payload as { set_intro?: unknown } | undefined; if (p && typeof p.set_intro === "string") p.set_intro = p.set_intro.replace(/^ALTON-composed stimulus\n\n———\n\n/, "ALTON-composed stimulus\n"); }
 const items = buildStock(runs, {});
 writeFileSync(path.join(out, `${BATCH}-items.json`), JSON.stringify(items.map((i) => ({ ...i })), null, 0));
 const pass = items.filter((i) => i.validation === "auto_passed" && !i.duplicateOf && generatorDefects(i.payload).length === 0);

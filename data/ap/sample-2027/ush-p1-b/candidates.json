@@ -333,7 +333,7 @@
   "structure": "frq_multipart",
   "archetype": "ushfrq_saq1_3",
   "reviewState": "rejected",
-  "rejectionReason": "sample_high_words_223_not_45-220; sample_mid_words_209_not_30-200; sample_low_missing; sample_low_no_consistent_candidate",
+  "rejectionReason": "samples_not_strictly_ordered",
   "difficultyProvisional": null,
   "payload": {
    "archetype": "ushfrq_saq1_3",
@@ -602,6 +602,50 @@
         "row_id": "c"
        }
       ]
+     },
+     {
+      "tier": "low",
+      "target_total": 2,
+      "essay": "(A) Calderwood thinks the suburbs grew mainly because of the federal government, since its mortgage programs and road money made it cheap to buy a house and move out of the city. Ashby-Monroe disagrees and thinks the main cause was what families wanted, like space and a safe home life after the depression and war, and that government programs only made the houses affordable.\n\n(B) The government did a lot to help people move to the suburbs in this time. It gave out money and loans and built things that helped people leave the cities. This supports Calderwood because she says the government was the foundation of the suburbs, and the government programs after World War II helped many people buy homes in the suburbs instead of staying in the city.\n\n(C) The baby boom supports Ashby-Monroe. After the war there were a lot of babies and families got bigger. Ashby-Monroe says families wanted more space, so the baby boom shows that families wanted to live in the suburbs and that is why the suburbs grew.",
+      "word_count": 176,
+      "rubric_scores": {
+       "a": 1,
+       "b": 0,
+       "c": 1,
+       "total": 2
+      },
+      "annotations": [
+       {
+        "quote": "Calderwood thinks the suburbs grew mainly because of the federal government",
+        "comment": "Accurately identifies Calderwood's argument that federal policy was the main cause. Together with the contrast that follows, this earns the Part A point.",
+        "row_id": "a"
+       },
+       {
+        "quote": "Ashby-Monroe disagrees and thinks the main cause was what families wanted",
+        "comment": "Correctly contrasts this with Ashby-Monroe's emphasis on family culture and demand, and notes that he sees government only as making homes affordable. This completes a real difference, so Part A earns credit.",
+        "row_id": "a"
+       },
+       {
+        "quote": "It gave out money and loans and built things that helped people leave the cities.",
+        "comment": "Too vague. It names no specific program, law, or event, such as the GI Bill, FHA mortgages, or the Federal-Aid Highway Act of 1956. No credit for Part B.",
+        "row_id": "b"
+       },
+       {
+        "quote": "This supports Calderwood because she says the government was the foundation of the suburbs",
+        "comment": "This only repeats the excerpt's own claim and does not add outside evidence or explain how any specific policy produced suburban growth.",
+        "row_id": "b"
+       },
+       {
+        "quote": "The baby boom supports Ashby-Monroe.",
+        "comment": "The baby boom is a valid outside example from the period, but it is only named here and not developed.",
+        "row_id": "c"
+       },
+       {
+        "quote": "so the baby boom shows that families wanted to live in the suburbs and that is why the suburbs grew",
+        "comment": "This paraphrases the excerpt's claim about larger families wanting space. It does not explain how the baby boom connects to suburban housing demand, for example through the need for yards, bigger houses, and child-centered neighborhoods. No credit for Part C.",
+        "row_id": "c"
+       }
+      ]
      }
     ],
     "provenance": {
@@ -621,14 +665,127 @@
   "candidateKey": "ap_us_history-saq2_1-k0",
   "keywordCode": "4.1",
   "unitCode": "4",
-  "skillPrimary": "1.B",
+  "skillPrimary": "3.A",
   "structure": "frq_multipart",
   "archetype": "ushfrq_saq2_1",
-  "reviewState": "rejected",
-  "rejectionReason": "sample_high_missing; sample_mid_words_216_not_30-200; sample_low_missing; sample_high_no_consistent_candidate; sample_low_no_consistent_candidate",
-  "difficultyProvisional": null,
+  "reviewState": "auto_passed",
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
   "payload": {
    "archetype": "ushfrq_saq2_1",
+   "template": "saq2",
+   "topic": "4.1",
+   "extra_topics": [],
+   "skill": "3.A",
+   "representative_skill": "3.A",
+   "calculator": "na",
+   "title": "Canal Boats and Farm Households: A Market Revolution Editorial",
+   "set_intro": "ALTON-composed stimulus\n(primary source)\nEditorial on the Canal and the Farmer\nEditorial in the Kessler Landing Courier, a fictional newspaper in a canal town on the Ohio and Erie Canal, 1836 (ALTON-composed, in the style of a small-town Ohio newspaper editorial of the 1830s)\n\n\"Ten years ago a farmer of this county who raised more wheat than his family could eat had little use for the surplus but to feed it to hogs or distill it into whiskey, for hauling it over mud roads to the lake cost more than it would fetch. Now canal boats call at our landing every day of the season, and the new turnpike brings wagons from the back townships to meet them. Flour from our mills travels by water to New York, and the boats return loaded with cloth, crockery, coffee and iron stoves. Our farmers plant more wheat each spring and buy at the store what their wives once spun and wove at home. Yet the change is not all gain. The farmer who once answered only to the weather now watches prices quoted from cities he has never seen, and many have borrowed from the bank to buy more land. A bad season in the East may now be felt at every hearth in this valley.\"",
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "Briefly identify ONE claim the editor makes about how the canal and turnpike changed farm life or trade in the valley.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "3.A"
+     ],
+     "topic_codes": [
+      "4.1"
+     ],
+     "model_answer": "The editor claims that before the canal, farmers could not profitably ship surplus wheat because overland hauling cost too much.",
+     "rubric_rows": [
+      {
+       "row_id": "a",
+       "points": 1,
+       "criterion": "Identify one claim from the excerpt, such as that transportation lowered the cost of getting surplus crops to market, that farmers shifted toward commercial wheat production, that store-bought manufactured goods replaced household production, or that farmers became dependent on distant markets and credit.",
+       "required_elements": [
+        "The editor claims that before the canal, farmers could not profitably ship surplus wheat because overland hauling cost too much.",
+        "The editor claims that farmers now grow more wheat for sale in distant markets such as New York.",
+        "The editor claims that families now buy manufactured goods like cloth at stores instead of making them at home.",
+        "The editor warns that farmers now depend on distant prices and bank loans, so problems in eastern markets can hurt them."
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "Briefly explain how ONE specific historical development or circumstance in the period 1815 to 1836 led to the changes described in the excerpt.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "3.A"
+     ],
+     "topic_codes": [
+      "4.1"
+     ],
+     "model_answer": "The Erie Canal's success after it opened in 1825 cut shipping costs between the Great Lakes and New York City and pushed states like Ohio to build their own canals, such as the Ohio and Erie Canal, finished in 1832.",
+     "rubric_rows": [
+      {
+       "row_id": "b",
+       "points": 1,
+       "criterion": "Explain a specific development from 1815 to 1836 that caused the changes, such as the success of the Erie Canal (completed 1825) prompting Ohio to build its own canals, state and federal support for internal improvements (the American System, the National Road), expanded bank credit, or a growing eastern urban demand for western foodstuffs.",
+       "required_elements": [
+        "The Erie Canal's success after it opened in 1825 cut shipping costs between the Great Lakes and New York City and pushed states like Ohio to build their own canals, such as the Ohio and Erie Canal, finished in 1832.",
+        "Henry Clay's American System and state support for internal improvements paid for roads and canals that linked western farms to eastern markets.",
+        "Expanding state banks, especially after the Second Bank of the United States began losing its federal deposits in 1833, made credit easier to get, so farmers could borrow to buy land and expand production.",
+        "Growing eastern cities and the early factory workforce in places like Lowell created demand for western grain and flour."
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "Briefly explain ONE specific effect that developments like those described in the excerpt had on the economy or society of the United States in the period 1830 to 1848.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "3.A"
+     ],
+     "topic_codes": [
+      "4.1"
+     ],
+     "model_answer": "The Northwest became tied economically to the Northeast as it shipped food east and bought manufactured goods, which shaped sectional alignments before the Civil War.",
+     "rubric_rows": [
+      {
+       "row_id": "c",
+       "points": 1,
+       "criterion": "Explain a specific effect from 1830 to 1848, such as closer economic ties between the Northwest and the Northeast, growth of cities like Cleveland, Buffalo, and Chicago, the decline of household manufacturing alongside the growth of factory production, greater exposure to boom and bust as in the Panic of 1837, the adoption of new farm technology, or the spread of railroads.",
+       "required_elements": [
+        "The Northwest became tied economically to the Northeast as it shipped food east and bought manufactured goods, which shaped sectional alignments before the Civil War.",
+        "Speculation and debt helped bring on the Panic of 1837, which hurt farmers and banks across the West.",
+        "Household production of cloth declined while factory textile production in New England grew, which changed women's work in farm families.",
+        "Commercial farming encouraged new tools such as McCormick's reaper and John Deere's steel plow and fed the growth of lake and canal cities like Cleveland, Buffalo, and Chicago."
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ]
+    }
+   ],
+   "reference_text": "Scoring guide (ALTON practice rubric, not official College Board scoring). This question is worth 3 points.\nPart A (0-1): Identify one claim from the excerpt, such as that transportation lowered the cost of getting surplus crops to market, that farmers shifted toward commercial wheat production, that store-bought manufactured goods replaced household production, or that farmers became dependent on distant markets and credit.\n   - 1: Accurately identifies one claim the editor makes about changes in farm life or trade.\n   - 0: Does not identify an accurate claim from the excerpt or only copies text with no identification of a claim.\nPart B (0-1): Explain a specific development from 1815 to 1836 that caused the changes, such as the success of the Erie Canal (completed 1825) prompting Ohio to build its own canals, state and federal support for internal improvements (the American System, the National Road), expanded bank credit, or a growing eastern urban demand for western foodstuffs.\n   - 1: Explains how one specific, accurate development in the period led to the changes the excerpt describes.\n   - 0: Does not name a specific accurate development, or names one without explaining how it led to the circumstances in the excerpt.\nPart C (0-1): Explain a specific effect from 1830 to 1848, such as closer economic ties between the Northwest and the Northeast, growth of cities like Cleveland, Buffalo, and Chicago, the decline of household manufacturing alongside the growth of factory production, greater exposure to boom and bust as in the Panic of 1837, the adoption of new farm technology, or the spread of railroads.\n   - 1: Explains one specific, accurate effect of transportation and market changes on the US economy or society from 1830 to 1848.\n   - 0: Does not give an accurate effect, gives one outside the period, or does not explain the connection.\nNote: Each part is worth 1 point; score parts independently.\nNote: For B and C, a response must go beyond restating the excerpt and bring in specific historical knowledge.\nNote: Accept accurate developments from nearby years if the response clearly ties them to the period asked.\nAcceptable answers for A: The editor claims that before the canal, farmers could not profitably ship surplus wheat because overland hauling cost too much. / The editor claims that farmers now grow more wheat for sale in distant markets such as New York. / The editor claims that families now buy manufactured goods like cloth at stores instead of making them at home. / The editor warns that farmers now depend on distant prices and bank loans, so problems in eastern markets can hurt them.\nAcceptable answers for B: The Erie Canal's success after it opened in 1825 cut shipping costs between the Great Lakes and New York City and pushed states like Ohio to build their own canals, such as the Ohio and Erie Canal, finished in 1832. / Henry Clay's American System and state support for internal improvements paid for roads and canals that linked western farms to eastern markets. / Expanding state banks, especially after the Second Bank of the United States began losing its federal deposits in 1833, made credit easier to get, so farmers could borrow to buy land and expand production. / Growing eastern cities and the early factory workforce in places like Lowell created demand for western grain and flour.\nAcceptable answers for C: The Northwest became tied economically to the Northeast as it shipped food east and bought manufactured goods, which shaped sectional alignments before the Civil War. / Speculation and debt helped bring on the Panic of 1837, which hurt farmers and banks across the West. / Household production of cloth declined while factory textile production in New England grew, which changed women's work in farm families. / Commercial farming encouraged new tools such as McCormick's reaper and John Deere's steel plow and fed the growth of lake and canal cities like Cleveland, Buffalo, and Chicago.\n\nSample response, high score (3/3; Part A 1, Part B 1, Part C 1):\n(A) The editor claims that the canal and turnpike turned farmers from making things for their own household into commercial producers tied to distant markets. Before the canal, extra wheat was fed to hogs or distilled into whiskey because hauling it to the lake cost too much. Now farmers plant more wheat to sell to New York and buy store goods like cloth that their wives once spun and wove at home.\n\n(B) The success of the Erie Canal, finished in 1825, led to the changes in the excerpt. The Erie Canal cut the cost of shipping goods between the Great Lakes and New York City by a huge amount, and Ohio saw this and began building the Ohio and Erie Canal that same year. That canal linked Ohio farms to Lake Erie, and through the Erie Canal to eastern markets, which made it profitable to grow surplus wheat for sale.\n\n(C) One effect was that western farmers were exposed to the boom and bust cycle, as seen in the Panic of 1837. Many farmers had borrowed from banks to buy land during the speculative boom of the mid-1830s, and when Jackson's Specie Circular (1836) demanded hard money for land purchases and banks failed, credit collapsed and prices for crops fell. Farmers who depended on distant markets and loans lost their land or fell into debt during the depression that lasted into the early 1840s, just as the editor warned.\n   - \"Now farmers plant more wheat to sell to New York and buy store goods like cloth that their wives once spun and wove at home.\" - Correctly identifies the editor's claim that farmers moved toward commercial wheat and bought goods they used to make at home. Earns the point.\n   - \"The success of the Erie Canal, finished in 1825\" - Names a specific, accurate development from the period.\n   - \"That canal linked Ohio farms to Lake Erie, and through the Erie Canal to eastern markets, which made it profitable to grow surplus wheat for sale.\" - Explains how the development caused the changes in the excerpt, so it goes beyond just naming it. Earns the point.\n   - \"Panic of 1837\" - Gives a specific, accurate effect inside 1830-1848.\n   - \"Farmers who depended on distant markets and loans lost their land or fell into debt during the depression that lasted into the early 1840s\" - Connects the effect to market dependence and credit, using outside knowledge such as the Specie Circular. Earns the point.\n\nSample response, middle score (2/3; Part A 1, Part B 0, Part C 1):\n(A) The editor claims that the canal and turnpike made it possible for farmers to sell their extra wheat in distant markets, where before it was not worth hauling it over muddy roads. Because of this, farmers now plant more wheat and buy goods like cloth at the store instead of making them at home.\n\n(B) One development that led to these changes was the Erie Canal, which was finished in 1825. It was a big success and showed that canals were important for transportation. This helped change how people traded and lived in the 1820s and 1830s, which is why the valley looks different in the editorial.\n\n(C) One effect of developments like these was that the Northwest and the Northeast became more closely tied together economically between 1830 and 1848. Before canals, Ohio farmers sold mostly locally or down the Mississippi River, but with the Erie Canal and the Ohio canals, wheat and flour went east through the Great Lakes to New York, and manufactured goods came back west. This helped lake port cities like Cleveland and Buffalo grow quickly as shipping and trading centers. It also meant western farmers were affected by eastern prices and credit, so when the Panic of 1837 hit, many farmers who had borrowed to buy land were hurt.\n   - \"made it possible for farmers to sell their extra wheat in distant markets\" - Accurately identifies a claim from the excerpt (transportation let farmers reach distant markets with surplus crops). Earns the point.\n   - \"One development that led to these changes was the Erie Canal, which was finished in 1825.\" - Names an accurate, relevant development with a correct date, but this alone is only a mention.\n   - \"This helped change how people traded and lived in the 1820s and 1830s\" - Vague. It never explains how the Erie Canal's success led Ohio to build its own canals or raised eastern demand for western grain. No link to the Ohio and Erie Canal, so no credit.\n   - \"the Northwest and the Northeast became more closely tied together economically between 1830 and 1848\" - Names a specific effect within the period that the rubric accepts.\n   - \"wheat and flour went east through the Great Lakes to New York, and manufactured goods came back west\" - Explains the connection with specific content beyond the excerpt, supporting the effect.\n   - \"This helped lake port cities like Cleveland and Buffalo grow quickly\" - Adds accurate evidence of urban growth, which strengthens the explanation. Earns the point.\n\nSample response, low score (1/3; Part A 1, Part B 0, Part C 0):\n(A) The editor claims that the canal and turnpike made it possible for farmers to sell their extra wheat far away. Before, the wheat was not worth hauling, but now it goes by boat to New York and farmers plant more of it each spring.\n\n(B) One development was the government building roads and canals in the early 1800s. People wanted better transportation and the government helped pay for things, so the canals and turnpikes got built. This is why the town has boats and wagons now.\n\n(C) Another effect was that the country changed a lot in the 1830s and 1840s. Transportation got better and more people moved west and the country got bigger. Life was different for many Americans and the economy grew because of all the new ways of moving goods around.\n   - \"The editor claims that the canal and turnpike made it possible for farmers to sell their extra wheat far away.\" - Accurately identifies a claim from the excerpt about transportation opening distant markets for surplus crops. This is the only part that earns credit.\n   - \"One development was the government building roads and canals in the early 1800s.\" - Too general. It does not name the Erie Canal (1825), the American System, the National Road, or any specific project or policy, and gives no dates within 1815 to 1836.\n   - \"This is why the town has boats and wagons now.\" - Only restates the excerpt (boats and wagons at the landing). It brings in no outside historical knowledge and does not explain how a specific development caused the changes.\n   - \"the country changed a lot in the 1830s and 1840s\" - Vague. No specific effect is named, such as growth of Cleveland or Buffalo, the Panic of 1837, decline of household manufacturing, or railroads, so no credit.\n   - \"the economy grew because of all the new ways of moving goods around\" - A broad claim with no specific evidence or explanation of the connection between transportation and a particular economic or social change.",
    "ush_frq": {
     "schema_version": "ush-frq-1",
     "task_type": "saq",
@@ -778,6 +935,45 @@
     },
     "samples": [
      {
+      "tier": "high",
+      "target_total": 3,
+      "essay": "(A) The editor claims that the canal and turnpike turned farmers from making things for their own household into commercial producers tied to distant markets. Before the canal, extra wheat was fed to hogs or distilled into whiskey because hauling it to the lake cost too much. Now farmers plant more wheat to sell to New York and buy store goods like cloth that their wives once spun and wove at home.\n\n(B) The success of the Erie Canal, finished in 1825, led to the changes in the excerpt. The Erie Canal cut the cost of shipping goods between the Great Lakes and New York City by a huge amount, and Ohio saw this and began building the Ohio and Erie Canal that same year. That canal linked Ohio farms to Lake Erie, and through the Erie Canal to eastern markets, which made it profitable to grow surplus wheat for sale.\n\n(C) One effect was that western farmers were exposed to the boom and bust cycle, as seen in the Panic of 1837. Many farmers had borrowed from banks to buy land during the speculative boom of the mid-1830s, and when Jackson's Specie Circular (1836) demanded hard money for land purchases and banks failed, credit collapsed and prices for crops fell. Farmers who depended on distant markets and loans lost their land or fell into debt during the depression that lasted into the early 1840s, just as the editor warned.",
+      "word_count": 240,
+      "rubric_scores": {
+       "a": 1,
+       "b": 1,
+       "c": 1,
+       "total": 3
+      },
+      "annotations": [
+       {
+        "quote": "Now farmers plant more wheat to sell to New York and buy store goods like cloth that their wives once spun and wove at home.",
+        "comment": "Correctly identifies the editor's claim that farmers moved toward commercial wheat and bought goods they used to make at home. Earns the point.",
+        "row_id": "a"
+       },
+       {
+        "quote": "The success of the Erie Canal, finished in 1825",
+        "comment": "Names a specific, accurate development from the period.",
+        "row_id": "b"
+       },
+       {
+        "quote": "That canal linked Ohio farms to Lake Erie, and through the Erie Canal to eastern markets, which made it profitable to grow surplus wheat for sale.",
+        "comment": "Explains how the development caused the changes in the excerpt, so it goes beyond just naming it. Earns the point.",
+        "row_id": "b"
+       },
+       {
+        "quote": "Panic of 1837",
+        "comment": "Gives a specific, accurate effect inside 1830-1848.",
+        "row_id": "c"
+       },
+       {
+        "quote": "Farmers who depended on distant markets and loans lost their land or fell into debt during the depression that lasted into the early 1840s",
+        "comment": "Connects the effect to market dependence and credit, using outside knowledge such as the Specie Circular. Earns the point.",
+        "row_id": "c"
+       }
+      ]
+     },
+     {
       "tier": "mid",
       "target_total": 2,
       "essay": "(A) The editor claims that the canal and turnpike made it possible for farmers to sell their extra wheat in distant markets, where before it was not worth hauling it over muddy roads. Because of this, farmers now plant more wheat and buy goods like cloth at the store instead of making them at home.\n\n(B) One development that led to these changes was the Erie Canal, which was finished in 1825. It was a big success and showed that canals were important for transportation. This helped change how people traded and lived in the 1820s and 1830s, which is why the valley looks different in the editorial.\n\n(C) One effect of developments like these was that the Northwest and the Northeast became more closely tied together economically between 1830 and 1848. Before canals, Ohio farmers sold mostly locally or down the Mississippi River, but with the Erie Canal and the Ohio canals, wheat and flour went east through the Great Lakes to New York, and manufactured goods came back west. This helped lake port cities like Cleveland and Buffalo grow quickly as shipping and trading centers. It also meant western farmers were affected by eastern prices and credit, so when the Panic of 1837 hit, many farmers who had borrowed to buy land were hurt.",
@@ -820,6 +1016,45 @@
         "row_id": "c"
        }
       ]
+     },
+     {
+      "tier": "low",
+      "target_total": 1,
+      "essay": "(A) The editor claims that the canal and turnpike made it possible for farmers to sell their extra wheat far away. Before, the wheat was not worth hauling, but now it goes by boat to New York and farmers plant more of it each spring.\n\n(B) One development was the government building roads and canals in the early 1800s. People wanted better transportation and the government helped pay for things, so the canals and turnpikes got built. This is why the town has boats and wagons now.\n\n(C) Another effect was that the country changed a lot in the 1830s and 1840s. Transportation got better and more people moved west and the country got bigger. Life was different for many Americans and the economy grew because of all the new ways of moving goods around.",
+      "word_count": 135,
+      "rubric_scores": {
+       "a": 1,
+       "b": 0,
+       "c": 0,
+       "total": 1
+      },
+      "annotations": [
+       {
+        "quote": "The editor claims that the canal and turnpike made it possible for farmers to sell their extra wheat far away.",
+        "comment": "Accurately identifies a claim from the excerpt about transportation opening distant markets for surplus crops. This is the only part that earns credit.",
+        "row_id": "a"
+       },
+       {
+        "quote": "One development was the government building roads and canals in the early 1800s.",
+        "comment": "Too general. It does not name the Erie Canal (1825), the American System, the National Road, or any specific project or policy, and gives no dates within 1815 to 1836.",
+        "row_id": "b"
+       },
+       {
+        "quote": "This is why the town has boats and wagons now.",
+        "comment": "Only restates the excerpt (boats and wagons at the landing). It brings in no outside historical knowledge and does not explain how a specific development caused the changes.",
+        "row_id": "b"
+       },
+       {
+        "quote": "the country changed a lot in the 1830s and 1840s",
+        "comment": "Vague. No specific effect is named, such as growth of Cleveland or Buffalo, the Panic of 1837, decline of household manufacturing, or railroads, so no credit.",
+        "row_id": "c"
+       },
+       {
+        "quote": "the economy grew because of all the new ways of moving goods around",
+        "comment": "A broad claim with no specific evidence or explanation of the connection between transportation and a particular economic or social change.",
+        "row_id": "c"
+       }
+      ]
      }
     ],
     "provenance": {
@@ -839,14 +1074,127 @@
   "candidateKey": "ap_us_history-saq2_2-k0",
   "keywordCode": "7.1",
   "unitCode": "7",
-  "skillPrimary": "1.B",
+  "skillPrimary": "3.A",
   "structure": "frq_multipart",
   "archetype": "ushfrq_saq2_2",
-  "reviewState": "rejected",
-  "rejectionReason": "sample_high_words_227_not_45-220; sample_mid_words_215_not_30-200; sample_low_missing; sample_low_no_consistent_candidate",
-  "difficultyProvisional": null,
+  "reviewState": "auto_passed",
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
   "payload": {
    "archetype": "ushfrq_saq2_2",
+   "template": "saq2",
+   "topic": "7.1",
+   "extra_topics": [],
+   "skill": "3.A",
+   "representative_skill": "3.A",
+   "calculator": "na",
+   "title": "A Wartime Letter from the Aircraft Line, 1943",
+   "set_intro": "ALTON-composed stimulus\n(primary source)\nLetter from an aircraft plant worker to her sister, 1943\nOdessa Pryor, a fictional African American riveter at an aircraft plant in Los Angeles, letter to her sister in rural Louisiana, 1943 (ALTON-composed, in the style of wartime personal correspondence)\n\n\"Dear Mae, Eight months now I have been on the night shift riveting wing sections. They pay me more in one week than I made in a month keeping house for Mrs. Pruitt back home, and I put part of every check into war bonds. Hundreds of women here wear slacks and bandanas and do work the foremen once swore no woman could do. When I first came, the hiring office said there were no openings for colored girls. After the government order against discrimination and some pressure from our church committee, they took on a dozen of us. Some of the white men still will not work beside us, and housing is so short that four of us share one room. Still, I am building planes for the boys overseas, and I do not intend to go back to anybody's kitchen when this war is done. Your loving sister, Odessa\"",
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "Briefly identify ONE claim the author makes in the excerpt about how the Second World War changed work, wages, or opportunities on the home front.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "3.A"
+     ],
+     "topic_codes": [
+      "7.1"
+     ],
+     "model_answer": "The author claims defense work paid far more than domestic service, since one week of riveting earned more than a month of housework.",
+     "rubric_rows": [
+      {
+       "row_id": "a",
+       "points": 1,
+       "criterion": "Identify one claim from the excerpt about wartime changes in work, wages, or opportunity, such as higher industrial wages than domestic service, women doing jobs once reserved for men, Black workers being hired after a federal antidiscrimination order, or continuing discrimination and housing shortages.",
+       "required_elements": [
+        "The author claims defense work paid far more than domestic service, since one week of riveting earned more than a month of housework.",
+        "The author claims women were doing industrial jobs, such as riveting, that foremen once said women could not do.",
+        "The author claims Black women were hired only after a federal order against discrimination and pressure from community groups.",
+        "The author claims discrimination and crowded housing continued even as new jobs opened."
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "Briefly explain how ONE specific historical development or circumstance between 1939 and 1945 helps explain why the author was able to get the job she describes.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "3.A"
+     ],
+     "topic_codes": [
+      "7.1"
+     ],
+     "model_answer": "Executive Order 8802 (1941) banned discrimination in defense industries and set up the Fair Employment Practice Committee, which gave Black workers grounds to demand hiring.",
+     "rubric_rows": [
+      {
+       "row_id": "b",
+       "points": 1,
+       "criterion": "Explain one specific development from 1939 to 1945 that made the author's hiring possible, such as Executive Order 8802 and the Fair Employment Practice Committee, the March on Washington Movement led by A. Philip Randolph, labor shortages caused by military mobilization, or the huge growth of West Coast defense production.",
+       "required_elements": [
+        "Executive Order 8802 (1941) banned discrimination in defense industries and set up the Fair Employment Practice Committee, which gave Black workers grounds to demand hiring.",
+        "A. Philip Randolph's March on Washington Movement pressured Roosevelt into issuing the antidiscrimination order, which opened plants that had refused to hire Black workers.",
+        "The draft took millions of men into the military, causing labor shortages that pushed employers to hire women and African Americans.",
+        "Huge federal spending on war production made West Coast aircraft plants grow fast, which drew migrants from the South looking for high-paying jobs."
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "Briefly explain ONE specific effect of the wartime changes described in the excerpt on United States society in the period from 1943 to 1960.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "3.A"
+     ],
+     "topic_codes": [
+      "7.1"
+     ],
+     "model_answer": "Wartime gains and the Double V campaign encouraged Black activists to push harder for civil rights after the war, as seen in growing NAACP membership and later challenges such as Brown v. Board of Education (1954).",
+     "rubric_rows": [
+      {
+       "row_id": "c",
+       "points": 1,
+       "criterion": "Explain one specific effect from 1943 to 1960 of wartime changes in work for women or African Americans, such as rising civil rights activism and the Double V legacy, continued Black migration to Northern and Western cities, racial tension in crowded war centers, women being laid off or pushed out of industrial jobs after 1945 along with a postwar emphasis on domestic life, or the growing share of women in paid work over the long run.",
+       "required_elements": [
+        "Wartime gains and the Double V campaign encouraged Black activists to push harder for civil rights after the war, as seen in growing NAACP membership and later challenges such as Brown v. Board of Education (1954).",
+        "The Second Great Migration continued after 1945, increasing the Black population of Northern and Western cities and changing urban politics.",
+        "Many women were laid off from defense jobs when the war ended, and the postwar years stressed domesticity and the baby boom, though more women gradually took paid work.",
+        "Competition for jobs and housing in crowded war centers led to racial violence, such as the 1943 Detroit riot, and to continuing housing segregation in postwar cities."
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ]
+    }
+   ],
+   "reference_text": "Scoring guide (ALTON practice rubric, not official College Board scoring). This question is worth 3 points.\nPart A (0-1): Identify one claim from the excerpt about wartime changes in work, wages, or opportunity, such as higher industrial wages than domestic service, women doing jobs once reserved for men, Black workers being hired after a federal antidiscrimination order, or continuing discrimination and housing shortages.\n   - 1: The response accurately identifies one claim in the excerpt about how the war changed work, wages, or opportunities for women or African Americans.\n   - 0: The response does not accurately identify a claim from the excerpt about wartime change, or only quotes text without saying what it claims.\nPart B (0-1): Explain one specific development from 1939 to 1945 that made the author's hiring possible, such as Executive Order 8802 and the Fair Employment Practice Committee, the March on Washington Movement led by A. Philip Randolph, labor shortages caused by military mobilization, or the huge growth of West Coast defense production.\n   - 1: The response explains how one specific development between 1939 and 1945 helped make the author's defense job possible.\n   - 0: The response gives no specific development, gives one from the wrong period, or does not connect it to the author getting her job.\nPart C (0-1): Explain one specific effect from 1943 to 1960 of wartime changes in work for women or African Americans, such as rising civil rights activism and the Double V legacy, continued Black migration to Northern and Western cities, racial tension in crowded war centers, women being laid off or pushed out of industrial jobs after 1945 along with a postwar emphasis on domestic life, or the growing share of women in paid work over the long run.\n   - 1: The response explains one specific, accurate effect of the wartime changes for women or African Americans in the period from 1943 to 1960.\n   - 0: The response does not give a specific, accurate effect within roughly 1943 to 1960, or does not connect it to the wartime changes in the excerpt.\nNote: Each part is worth one point; score each part on its own.\nNote: For part B, a general statement such as 'because of the war' is not enough unless the response names a specific circumstance, such as the labor shortage caused by the draft or a federal policy.\nNote: For part C, accept effects that are either continuities or changes, provided the response explains the connection to wartime work.\nAcceptable answers for A: The author claims defense work paid far more than domestic service, since one week of riveting earned more than a month of housework. / The author claims women were doing industrial jobs, such as riveting, that foremen once said women could not do. / The author claims Black women were hired only after a federal order against discrimination and pressure from community groups. / The author claims discrimination and crowded housing continued even as new jobs opened.\nAcceptable answers for B: Executive Order 8802 (1941) banned discrimination in defense industries and set up the Fair Employment Practice Committee, which gave Black workers grounds to demand hiring. / A. Philip Randolph's March on Washington Movement pressured Roosevelt into issuing the antidiscrimination order, which opened plants that had refused to hire Black workers. / The draft took millions of men into the military, causing labor shortages that pushed employers to hire women and African Americans. / Huge federal spending on war production made West Coast aircraft plants grow fast, which drew migrants from the South looking for high-paying jobs.\nAcceptable answers for C: Wartime gains and the Double V campaign encouraged Black activists to push harder for civil rights after the war, as seen in growing NAACP membership and later challenges such as Brown v. Board of Education (1954). / The Second Great Migration continued after 1945, increasing the Black population of Northern and Western cities and changing urban politics. / Many women were laid off from defense jobs when the war ended, and the postwar years stressed domesticity and the baby boom, though more women gradually took paid work. / Competition for jobs and housing in crowded war centers led to racial violence, such as the 1943 Detroit riot, and to continuing housing segregation in postwar cities.\n\nSample response, high score (3/3; Part A 1, Part B 1, Part C 1):\n(A) One claim Odessa makes is that the war opened better paying industrial jobs to Black women who used to be stuck in domestic service. She says she makes more riveting wing sections in one week than she made in a month keeping house for Mrs. Pruitt, so war work raised her wages a lot.\n\n(B) Odessa got her job partly because of Executive Order 8802, which FDR issued in 1941 after A. Philip Randolph threatened a March on Washington. The order banned racial discrimination in defense industries and set up the Fair Employment Practice Committee, so when her church committee put pressure on the plant, it had a federal rule to point to. That is why the hiring office went from saying there were \"no openings for colored girls\" to hiring a dozen Black women.\n\n(C) One effect was that wartime jobs pushed African Americans to demand more rights after the war, building on the Double V campaign for victory over fascism abroad and racism at home. Black workers and veterans who had helped win the war would not accept going back to second-class status, and NAACP membership grew a lot during the war. This helped lead to the civil rights movement of the 1950s, like the Montgomery Bus Boycott in 1955-1956, and it fits Odessa's statement that she will not go back to \"anybody's kitchen.\"\n   - \"She says she makes more riveting wing sections in one week than she made in a month keeping house\" - Puts the excerpt's claim about higher industrial wages compared with domestic service in the student's own words, so it is more than just quoting.\n   - \"Executive Order 8802, which FDR issued in 1941 after A. Philip Randolph threatened a March on Washington\" - Names a specific, correctly dated federal policy from 1939-1945 along with what caused it.\n   - \"That is why the hiring office went from saying there were \"no openings for colored girls\" to hiring a dozen Black women.\" - Ties the policy straight to the author getting hired, which is what this part asks for.\n   - \"This helped lead to the civil rights movement of the 1950s, like the Montgomery Bus Boycott in 1955-1956\" - Gives a specific, accurate effect inside 1943-1960 and links it back to wartime work through the Double V campaign and the author's refusal to return to domestic work.\n\nSample response, middle score (2/3; Part A 1, Part B 1, Part C 0):\n(A) One claim the author makes is that war work paid much better than the work she did before. She says she makes more in one week at the aircraft plant than she made in a month as a housekeeper for Mrs. Pruitt in Louisiana, so the war gave her a chance at higher wages than domestic service.\n\n(B) The government order against discrimination that she mentions was Executive Order 8802, which President Roosevelt issued in 1941 after A. Philip Randolph threatened a March on Washington. The order banned discrimination in defense industries and created the Fair Employment Practice Committee. Before this the hiring office told her there were no openings for colored girls, but once the order was in place and her church committee pushed, the plant had to hire a dozen Black women, including her. So the federal order is why she got the job.\n\n(C) After the war, the changes in work had a big effect on American society. A lot of women and African Americans had gotten a taste of better jobs and wanted to keep them, and this made people want more change in the country. Society was different in the 1950s because of what happened during the war, and many people kept pushing for more rights and better opportunities.\n   - \"she makes more in one week at the aircraft plant than she made in a month as a housekeeper\" - Accurately identifies a claim from the excerpt about wartime wages and compares industrial pay to domestic service. Earns the point.\n   - \"Executive Order 8802, which President Roosevelt issued in 1941 after A. Philip Randolph threatened a March on Washington\" - Names a specific, accurate development from 1939 to 1945 (EO 8802 and Randolph's March on Washington threat). Strong specific evidence.\n   - \"the plant had to hire a dozen Black women, including her\" - Links the order directly to the author getting hired, as the rubric requires. Earns the point.\n   - \"A lot of women and African Americans had gotten a taste of better jobs and wanted to keep them\" - Too general. It names no specific effect between 1943 and 1960, such as civil rights activism, postwar layoffs of women, or continued migration, so the link to the wartime changes is not explained.\n   - \"many people kept pushing for more rights and better opportunities\" - Vague restatement of the excerpt's last line with no specific event or example from 1943 to 1960 (no Double V legacy, no postwar layoffs). Does not earn credit.\n\nSample response, low score (1/3; Part A 1, Part B 0, Part C 0):\n(A) One claim the author makes is that the war changed wages for her. She says she gets paid more in one week at the aircraft plant than she made in a month doing housework for Mrs. Pruitt back in Louisiana. So war factory work paid much better than domestic work.\n\n(B) She was able to get the job because of the war. The war made a lot of jobs and the country needed people to help win. Lots of people were working to help the war effort and the government wanted planes built for the soldiers. This is why she got hired at the plant.\n\n(C) After the war, things changed for a lot of people in America. Many people were happy the war was over and the country was doing well in the 1950s. People moved around and had new opportunities and the country became more modern. The war changed society in many ways and this had effects on people for many years afterward.\n   - \"She says she gets paid more in one week at the aircraft plant than she made in a month doing housework for Mrs. Pruitt back in Louisiana.\" - Accurately identifies a claim from the excerpt about higher industrial wages than domestic service and says what it shows. This is the only part that earns credit.\n   - \"She was able to get the job because of the war.\" - Only says 'because of the war' with no specific development. The note says this is not enough without a named circumstance such as Executive Order 8802, the FEPC, or the labor shortage from the draft.\n   - \"The war made a lot of jobs and the country needed people to help win.\" - Too general. It does not name a specific policy, the March on Washington Movement, or a labor shortage caused by mobilization, and does not explain how it led to her hiring.\n   - \"Many people were happy the war was over and the country was doing well in the 1950s.\" - Vague statement about the postwar era that is not tied to the wartime work changes for women or African Americans. No specific effect such as layoffs of women, Black migration, or civil rights activism is given.\n   - \"People moved around and had new opportunities and the country became more modern.\" - Too general to count as a specific, accurate effect. It does not name migration to Western cities or explain the connection to wartime jobs.",
    "ush_frq": {
     "schema_version": "ush-frq-1",
     "task_type": "saq",
@@ -1071,6 +1419,45 @@
        {
         "quote": "many people kept pushing for more rights and better opportunities",
         "comment": "Vague restatement of the excerpt's last line with no specific event or example from 1943 to 1960 (no Double V legacy, no postwar layoffs). Does not earn credit.",
+        "row_id": "c"
+       }
+      ]
+     },
+     {
+      "tier": "low",
+      "target_total": 1,
+      "essay": "(A) One claim the author makes is that the war changed wages for her. She says she gets paid more in one week at the aircraft plant than she made in a month doing housework for Mrs. Pruitt back in Louisiana. So war factory work paid much better than domestic work.\n\n(B) She was able to get the job because of the war. The war made a lot of jobs and the country needed people to help win. Lots of people were working to help the war effort and the government wanted planes built for the soldiers. This is why she got hired at the plant.\n\n(C) After the war, things changed for a lot of people in America. Many people were happy the war was over and the country was doing well in the 1950s. People moved around and had new opportunities and the country became more modern. The war changed society in many ways and this had effects on people for many years afterward.",
+      "word_count": 166,
+      "rubric_scores": {
+       "a": 1,
+       "b": 0,
+       "c": 0,
+       "total": 1
+      },
+      "annotations": [
+       {
+        "quote": "She says she gets paid more in one week at the aircraft plant than she made in a month doing housework for Mrs. Pruitt back in Louisiana.",
+        "comment": "Accurately identifies a claim from the excerpt about higher industrial wages than domestic service and says what it shows. This is the only part that earns credit.",
+        "row_id": "a"
+       },
+       {
+        "quote": "She was able to get the job because of the war.",
+        "comment": "Only says 'because of the war' with no specific development. The note says this is not enough without a named circumstance such as Executive Order 8802, the FEPC, or the labor shortage from the draft.",
+        "row_id": "b"
+       },
+       {
+        "quote": "The war made a lot of jobs and the country needed people to help win.",
+        "comment": "Too general. It does not name a specific policy, the March on Washington Movement, or a labor shortage caused by mobilization, and does not explain how it led to her hiring.",
+        "row_id": "b"
+       },
+       {
+        "quote": "Many people were happy the war was over and the country was doing well in the 1950s.",
+        "comment": "Vague statement about the postwar era that is not tied to the wartime work changes for women or African Americans. No specific effect such as layoffs of women, Black migration, or civil rights activism is given.",
+        "row_id": "c"
+       },
+       {
+        "quote": "People moved around and had new opportunities and the country became more modern.",
+        "comment": "Too general to count as a specific, accurate effect. It does not name migration to Western cities or explain the connection to wartime jobs.",
         "row_id": "c"
        }
       ]
@@ -2082,11 +2469,188 @@
   "skillPrimary": "1.B",
   "structure": "frq_multipart",
   "archetype": "ushfrq_saq3_3",
-  "reviewState": "rejected",
-  "rejectionReason": "sample_mid_words_203_not_30-200; sample_low_missing; sample_low_no_consistent_candidate",
-  "difficultyProvisional": null,
+  "reviewState": "auto_passed",
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
   "payload": {
    "archetype": "ushfrq_saq3_3",
+   "template": "saq3",
+   "topic": "6.1",
+   "extra_topics": [],
+   "skill": "1.B",
+   "representative_skill": "1.B",
+   "calculator": "na",
+   "title": "Settlement and Railroads in a Plains County, 1870-1900",
+   "set_intro": "ALTON-composed stimulus\n(table)\nWheatley County: Population, Farms, and Railroad Mileage, 1870-1900\nCompiled from state and federal census returns and railroad commission reports for a fictional Plains county (ALTON-composed, in the style of a late nineteenth-century state statistical abstract)\n\nThis table shows total population, number of farms, miles of railroad track inside the county, and the foreign-born share of the population for Wheatley County in seven selected years from 1870 to 1900.\n\nThe table for this source appears below.",
+   "stimulus": {
+    "kind": "table",
+    "description": "This table shows total population, number of farms, miles of railroad track inside the county, and the foreign-born share of the population for Wheatley County in seven selected years from 1870 to 1900.",
+    "data": {
+     "columns": [
+      "Year",
+      "Total population",
+      "Number of farms",
+      "Miles of railroad track in county",
+      "Foreign-born share of population (percent)"
+     ],
+     "rows": [
+      [
+       "1870",
+       "410",
+       "30",
+       "0",
+       "12"
+      ],
+      [
+       "1875",
+       "2350",
+       "310",
+       "0",
+       "22"
+      ],
+      [
+       "1880",
+       "7900",
+       "1120",
+       "38",
+       "26"
+      ],
+      [
+       "1885",
+       "14600",
+       "1980",
+       "61",
+       "25"
+      ],
+      [
+       "1890",
+       "18200",
+       "2410",
+       "74",
+       "23"
+      ],
+      [
+       "1895",
+       "16900",
+       "2260",
+       "74",
+       "21"
+      ],
+      [
+       "1900",
+       "17400",
+       "2300",
+       "79",
+       "19"
+      ]
+     ]
+    }
+   },
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "Briefly identify ONE trend or pattern in Wheatley County shown in the table between 1870 and 1900.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "1.B"
+     ],
+     "topic_codes": [
+      "6.1"
+     ],
+     "model_answer": "Population rose from about 410 in 1870 to about 18,200 in 1890, an increase of more than forty times in twenty years.",
+     "rubric_rows": [
+      {
+       "row_id": "a",
+       "points": 1,
+       "criterion": "Students identify one accurate trend or pattern from the table. Acceptable answers include: rapid population growth from 1870 to 1890; the number of farms rising along with population; railroad mileage first appearing between 1875 and 1880 and then expanding; growth slowing or reversing between 1890 and 1895; or a large foreign-born share that peaked around 1880.",
+       "required_elements": [
+        "Population rose from about 410 in 1870 to about 18,200 in 1890, an increase of more than forty times in twenty years.",
+        "Railroad track first appears between 1875 and 1880, and population grows fastest after the railroad arrives.",
+        "Population and the number of farms both fell between 1890 and 1895, then recovered only slightly by 1900.",
+        "The foreign-born share rose to about one-quarter of residents around 1880 and then slowly declined."
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "Briefly explain ONE specific historical cause of the trend or pattern you identified in part A.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "1.B"
+     ],
+     "topic_codes": [
+      "6.1"
+     ],
+     "model_answer": "The Homestead Act of 1862 offered 160 acres of public land to settlers who lived on and improved it for five years, which drew farm families to the Plains and raised the number of farms.",
+     "rubric_rows": [
+      {
+       "row_id": "b",
+       "points": 1,
+       "criterion": "Students explain one specific historical cause that fits the trend they named in part A. Examples: the Homestead Act's 160-acre claims; federal land grants to railroads under the Pacific Railway Acts, along with railroad promotion of settlement; immigrant recruitment in Europe; new farming technology; drought and falling crop prices around 1890; or the Panic of 1893.",
+       "required_elements": [
+        "The Homestead Act of 1862 offered 160 acres of public land to settlers who lived on and improved it for five years, which drew farm families to the Plains and raised the number of farms.",
+        "Federal land grants under the Pacific Railway Acts led railroads to build lines across the Plains and to sell land and advertise for settlers, so population grew quickly once track reached the county.",
+        "Railroads and state immigration boards recruited settlers in Europe, including Germans and Scandinavians, which explains the large foreign-born share.",
+        "Drought in the late 1880s and early 1890s, falling crop prices, and the Panic of 1893 ruined many Plains farmers, which explains the drop in population and farms after 1890."
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "Briefly explain ONE specific effect of, or development related to, the settlement of the Great Plains in the period 1865 to 1898.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "1.B"
+     ],
+     "topic_codes": [
+      "6.1"
+     ],
+     "model_answer": "Settlement and railroad building helped destroy the bison herds and pushed Plains nations onto reservations, and the Dawes Act of 1887 later divided reservation land into individual allotments.",
+     "rubric_rows": [
+      {
+       "row_id": "c",
+       "points": 1,
+       "criterion": "Students explain one specific effect of, or development connected to, Plains settlement from 1865 to 1898. Examples: Native nations displaced, the bison destroyed, and the Dawes Act passed; farmer protest through the Grange, the Farmers' Alliances, and the Populist Party; railroad regulation through Granger laws, Munn v. Illinois, and the Interstate Commerce Act; the 1890 census report that a frontier line no longer existed; or greater commercial farming for national and world markets.",
+       "required_elements": [
+        "Settlement and railroad building helped destroy the bison herds and pushed Plains nations onto reservations, and the Dawes Act of 1887 later divided reservation land into individual allotments.",
+        "Farmers who resented railroad rates, debt, and low prices organized the Grange and the Farmers' Alliances and later formed the Populist Party, whose 1892 Omaha Platform called for government ownership of railroads and free coinage of silver.",
+        "Farmer pressure led to state Granger laws regulating railroads, which the Supreme Court upheld in Munn v. Illinois in 1877, and later to the Interstate Commerce Act of 1887.",
+        "The Superintendent of the Census reported in 1890 that a frontier line no longer existed, and Frederick Jackson Turner made that report the starting point of his 1893 frontier thesis."
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ]
+    }
+   ],
+   "reference_text": "Scoring guide (ALTON practice rubric, not official College Board scoring). This question is worth 3 points.\nPart A (0-1): Students identify one accurate trend or pattern from the table. Acceptable answers include: rapid population growth from 1870 to 1890; the number of farms rising along with population; railroad mileage first appearing between 1875 and 1880 and then expanding; growth slowing or reversing between 1890 and 1895; or a large foreign-born share that peaked around 1880.\n   - 1: The response accurately identifies one trend or pattern shown in the table, such as population rising from about 400 to about 18,000 between 1870 and 1890.\n   - 0: The response misreads the table, gives a vague statement, or names no trend that the data support.\nPart B (0-1): Students explain one specific historical cause that fits the trend they named in part A. Examples: the Homestead Act's 160-acre claims; federal land grants to railroads under the Pacific Railway Acts, along with railroad promotion of settlement; immigrant recruitment in Europe; new farming technology; drought and falling crop prices around 1890; or the Panic of 1893.\n   - 1: The response explains how one specific, accurate development from the period caused or contributed to the trend identified in part A.\n   - 0: The response gives no cause, gives a cause from the wrong period, or does not explain how the cause connects to the trend.\nPart C (0-1): Students explain one specific effect of, or development connected to, Plains settlement from 1865 to 1898. Examples: Native nations displaced, the bison destroyed, and the Dawes Act passed; farmer protest through the Grange, the Farmers' Alliances, and the Populist Party; railroad regulation through Granger laws, Munn v. Illinois, and the Interstate Commerce Act; the 1890 census report that a frontier line no longer existed; or greater commercial farming for national and world markets.\n   - 1: The response explains one specific, accurate effect of or development related to Great Plains settlement between 1865 and 1898.\n   - 0: The response gives no effect, an inaccurate one, or one outside the period or not connected to Plains settlement.\nNote: Each part is worth one point. Parts are scored separately, but part B must explain a cause of a trend that the data actually show.\nNote: In part A, accept an accurate reading of any column. Students do not need to quote exact numbers.\nNote: In part B, a bare name such as 'the Homestead Act' with no explanation does not earn the point. The response must show how the development produced the trend.\nNote: In part C, accept effects on Native peoples, farmers, railroads, politics, or the national economy if they are tied to western settlement in the period.\nAcceptable answers for A: Population rose from about 410 in 1870 to about 18,200 in 1890, an increase of more than forty times in twenty years. / Railroad track first appears between 1875 and 1880, and population grows fastest after the railroad arrives. / Population and the number of farms both fell between 1890 and 1895, then recovered only slightly by 1900. / The foreign-born share rose to about one-quarter of residents around 1880 and then slowly declined.\nAcceptable answers for B: The Homestead Act of 1862 offered 160 acres of public land to settlers who lived on and improved it for five years, which drew farm families to the Plains and raised the number of farms. / Federal land grants under the Pacific Railway Acts led railroads to build lines across the Plains and to sell land and advertise for settlers, so population grew quickly once track reached the county. / Railroads and state immigration boards recruited settlers in Europe, including Germans and Scandinavians, which explains the large foreign-born share. / Drought in the late 1880s and early 1890s, falling crop prices, and the Panic of 1893 ruined many Plains farmers, which explains the drop in population and farms after 1890.\nAcceptable answers for C: Settlement and railroad building helped destroy the bison herds and pushed Plains nations onto reservations, and the Dawes Act of 1887 later divided reservation land into individual allotments. / Farmers who resented railroad rates, debt, and low prices organized the Grange and the Farmers' Alliances and later formed the Populist Party, whose 1892 Omaha Platform called for government ownership of railroads and free coinage of silver. / Farmer pressure led to state Granger laws regulating railroads, which the Supreme Court upheld in Munn v. Illinois in 1877, and later to the Interstate Commerce Act of 1887. / The Superintendent of the Census reported in 1890 that a frontier line no longer existed, and Frederick Jackson Turner made that report the starting point of his 1893 frontier thesis.\n\nSample response, high score (3/3; Part A 1, Part B 1, Part C 1):\n(A) One trend in the table is that Wheatley County's population grew very fast from 1870 to 1890, going from 410 people to 18,200. The number of farms rose along with it, from 30 to 2,410, so most of the people coming in were farm families.\n\n(B) One cause of this growth was the Homestead Act of 1862, which gave settlers 160 acres of public land for free if they lived on it and farmed it for five years. Since the land cost almost nothing, thousands of families from the East and from Europe moved onto Plains counties like Wheatley and started their own farms. That explains why the farm count climbs right alongside the population.\n\n(C) One effect of Plains settlement was that farmers organized politically, first in the Grange and the Farmers' Alliances and later in the Populist Party. Plains farmers depended on railroads to ship their crops, and they were angry about high shipping rates, falling crop prices, and debt. In the 1892 Omaha Platform the Populists called for government ownership of the railroads, free coinage of silver, and a graduated income tax.\n   - \"going from 410 people to 18,200\" - Reads the table correctly and gives exact figures to show the growth trend from 1870 to 1890. Earns the point.\n   - \"The number of farms rose along with it\" - Ties the farm column to the population column, so the trend is specific and clearly backed by the data.\n   - \"gave settlers 160 acres of public land for free if they lived on it and farmed it for five years\" - Names an accurate, specific cause with correct details from the right period. It goes beyond a bare name of the act.\n   - \"That explains why the farm count climbs right alongside the population.\" - Spells out how the cause produced the trend from part A, which is what the rubric requires. Earns the point.\n   - \"the Grange and the Farmers' Alliances and later in the Populist Party\" - Gives an accurate development tied to Plains settlement between 1865 and 1898.\n   - \"In the 1892 Omaha Platform\" - Backs the effect with specific, accurate evidence and connects it to farmers' complaints about railroads and prices. Earns the point.\n\nSample response, middle score (2/3; Part A 1, Part B 0, Part C 1):\n(A) One trend in the table is that the population of Wheatley County grew very fast between 1870 and 1890. In 1870 the county had only 410 people, but by 1890 it had 18,200 people. The number of farms also went up a lot during the same years, from 30 farms to 2,410 farms.\n\n(B) A cause of this was the Homestead Act. The Homestead Act was passed in 1862 and it was important for settling the West. A lot of people moved to the Plains because of it.\n\n(C) One effect of the settlement of the Great Plains was that farmers got into trouble with the railroads and started protest groups. Farmers on the Plains had to ship their wheat and corn on the railroads to reach eastern markets and the world market, and the railroads often charged high rates, especially where there was only one line. Farmers also had debts and falling crop prices in the 1880s and 1890s. To fight back, many farmers joined the Grange and later the Farmers' Alliances, which wanted lower rates and government regulation of railroads. This protest movement later led to the Populist Party, which was formed in 1892 and ran James Weaver for president.\n   - \"the population of Wheatley County grew very fast between 1870 and 1890\" - Accurate trend read directly from the table (rapid population growth 1870-1890). This earns the Part A point.\n   - \"from 30 farms to 2,410 farms\" - Specific, correct figures from the table support the trend and strengthen the Part A answer.\n   - \"A cause of this was the Homestead Act.\" - Names a valid cause from the period, but a bare name is not enough. The response never says what the Act offered (160 free acres for settlers who farmed the land for five years) or how that drew people to the county.\n   - \"A lot of people moved to the Plains because of it.\" - Vague, restates the trend without explaining the link between the Act and the growth in population and farms. No credit for Part B.\n   - \"the railroads often charged high rates, especially where there was only one line\" - Accurate and specific explanation of a development tied to Plains settlement: dependence on railroads for shipping crops to distant markets.\n   - \"many farmers joined the Grange and later the Farmers' Alliances, which wanted lower rates and government regulation of railroads\" - Correct, specific farmer protest movements linked to settlement and falling prices. This earns the Part C point.\n   - \"formed in 1892 and ran James Weaver for president\" - Accurate extra detail (Populist Party, 1892 election) that is within the period and supports the explanation.\n\nSample response, low score (1/3; Part A 1, Part B 0, Part C 0):\n(A) One trend in the table is that the population of Wheatley County grew a lot between 1870 and 1890. It went from 410 people in 1870 to 18,200 in 1890.\n\n(B) This happened because of the Homestead Act. A lot of people moved to the county because of the Homestead Act and that is why the population went up.\n\n(C) Settlement of the Great Plains had a big effect on the country. Many people moved west and the West changed a lot during this time. There were more farms and towns and it was a very important part of American history in the late 1800s.\n   - \"the population of Wheatley County grew a lot between 1870 and 1890\" - Accurate reading of the table, so this earns the Part A point. Population rose from 410 to 18,200, and the response backs it with the specific figures.\n   - \"This happened because of the Homestead Act.\" - Names a real and relevant development, but the Part B point requires explaining how it produced the trend. The response never mentions 160-acre free claims, the cost of filing, or why settlers came. No credit.\n   - \"A lot of people moved to the county because of the Homestead Act and that is why the population went up.\" - This only restates the trend with the Act's name attached. It is a bare assertion with no link between the law and the growth, so it does not earn the point.\n   - \"Many people moved west and the West changed a lot during this time.\" - Too general. It names no specific effect such as Native displacement, the Dawes Act, farmer protest, the Populists, or railroad regulation, so it earns no Part C credit.\n   - \"it was a very important part of American history in the late 1800s\" - Vague claim of importance with no evidence or explanation. Part C needs one specific, accurate effect tied to Plains settlement between 1865 and 1898.",
    "ush_frq": {
     "schema_version": "ush-frq-1",
     "task_type": "saq",
@@ -2386,6 +2950,45 @@
         "row_id": "c"
        }
       ]
+     },
+     {
+      "tier": "low",
+      "target_total": 1,
+      "essay": "(A) One trend in the table is that the population of Wheatley County grew a lot between 1870 and 1890. It went from 410 people in 1870 to 18,200 in 1890.\n\n(B) This happened because of the Homestead Act. A lot of people moved to the county because of the Homestead Act and that is why the population went up.\n\n(C) Settlement of the Great Plains had a big effect on the country. Many people moved west and the West changed a lot during this time. There were more farms and towns and it was a very important part of American history in the late 1800s.",
+      "word_count": 106,
+      "rubric_scores": {
+       "a": 1,
+       "b": 0,
+       "c": 0,
+       "total": 1
+      },
+      "annotations": [
+       {
+        "quote": "the population of Wheatley County grew a lot between 1870 and 1890",
+        "comment": "Accurate reading of the table, so this earns the Part A point. Population rose from 410 to 18,200, and the response backs it with the specific figures.",
+        "row_id": "a"
+       },
+       {
+        "quote": "This happened because of the Homestead Act.",
+        "comment": "Names a real and relevant development, but the Part B point requires explaining how it produced the trend. The response never mentions 160-acre free claims, the cost of filing, or why settlers came. No credit.",
+        "row_id": "b"
+       },
+       {
+        "quote": "A lot of people moved to the county because of the Homestead Act and that is why the population went up.",
+        "comment": "This only restates the trend with the Act's name attached. It is a bare assertion with no link between the law and the growth, so it does not earn the point.",
+        "row_id": "b"
+       },
+       {
+        "quote": "Many people moved west and the West changed a lot during this time.",
+        "comment": "Too general. It names no specific effect such as Native displacement, the Dawes Act, farmer protest, the Populists, or railroad regulation, so it earns no Part C credit.",
+        "row_id": "c"
+       },
+       {
+        "quote": "it was a very important part of American history in the late 1800s",
+        "comment": "Vague claim of importance with no evidence or explanation. Part C needs one specific, accurate effect tied to Plains settlement between 1865 and 1898.",
+        "row_id": "c"
+       }
+      ]
      }
     ],
     "provenance": {
@@ -2405,14 +3008,124 @@
   "candidateKey": "ap_us_history-dbq_1-k0",
   "keywordCode": "4.1",
   "unitCode": "4",
-  "skillPrimary": "1.B",
+  "skillPrimary": "6.A",
   "structure": "frq_multipart",
   "archetype": "ushfrq_dbq_1",
-  "reviewState": "rejected",
-  "rejectionReason": "sample_mid_missing; sample_low_missing; sample_mid_no_consistent_candidate; sample_low_no_consistent_candidate",
-  "difficultyProvisional": null,
+  "reviewState": "auto_passed",
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
   "payload": {
    "archetype": "ushfrq_dbq_1",
+   "template": "dbq",
+   "topic": "4.1",
+   "extra_topics": [],
+   "skill": "6.A",
+   "representative_skill": "6.A",
+   "calculator": "na",
+   "title": "The Market Revolution and American Lives, 1815-1860",
+   "set_intro": "ALTON-composed stimulus\nDocument 1 (primary text)\nLetter from a farmer in western New York to his brother in Vermont, 1830\nAmos Whitcomb, a fictional wheat farmer in Oriska County, New York, private letter to his brother, 1830 (ALTON-composed, in the style of a private letter from a commercial farmer)\n\n\"Dear Brother, Since the canal opened through our valley five years past, a man can haul his wheat to the landing in half a day and see it carried clear to New York. Last fall I sold three hundred bushels at a price we never saw in Vermont. Hannah has given up the loom, for cloth at Pratt's store costs less than her time is worth, and we now have a clock on the mantel and a carpet in the parlor. Yet I own I lie awake some nights. I bought forty more acres on credit from the land agent, and the price of flour is now set in cities I have never seen. When wheat falls, the note at the bank does not fall with it. Our father raised what he ate and owed no man much. I raise what strangers buy, and I owe a good many.\"\n\n———\n\nDocument 2 (primary text)\nLetter from a textile mill worker to her sister, 1846\nLucinda Marsh, a fictional young woman employed in a cotton mill in a Massachusetts factory town, private letter to her sister on the family farm in New Hampshire, 1846 (ALTON-composed, in the style of a letter from a New England mill operative)\n\n\"Dear Sister, I have put by nearly forty dollars since spring, more money than I ever held at home, and I mean to send some toward Father's mortgage and keep the rest for my schooling. I have a new bonnet and go to lectures at the hall twice a month. But do not believe all the fine things said of this place. The bell rings us up before five, and we stand at the looms near thirteen hours with only short breaks for meals. The overseers now give each girl four looms where we once tended two, and the pay per piece has been cut. Some of us have signed a petition to the legislature for a ten-hour day. I like having my own wages, yet I sometimes think I have only traded one master for another.\"\n\n———\n\nDocument 3 (primary text)\nPamphlet issued by a textile manufacturing company, 1838\nTreasurer of the fictional Pemberton Falls Manufacturing Company, a promotional pamphlet addressed to New England farm families and state legislators, 1838 (ALTON-composed, in the style of a manufacturer's promotional pamphlet)\n\n\"Parents need have no fear in sending their daughters to Pemberton Falls. Our operatives live in company boarding houses under the watch of respectable matrons, where doors are locked at ten o'clock and attendance at public worship is expected of all. Any young woman found guilty of improper conduct is dismissed at once. The wages paid here exceed what any girl may earn at home spinning or sewing, and many return to their villages with savings, refined manners and improved minds. Our mills prove that American manufacturing need not breed the misery seen in the factory towns of England. By turning the water power of our rivers to useful work, we free the nation from dependence on foreign goods and give honest employment to thousands who would otherwise sit idle.\"\n\n———\n\nDocument 4 (primary text)\nResolutions of a journeymen mechanics' association, 1835\nResolutions adopted at a public meeting of a fictional association of journeymen carpenters, shoemakers and other mechanics in Philadelphia, printed in a workingmen's newspaper, 1835 (ALTON-composed, in the style of a labor association's published resolutions)\n\n\"Resolved, that in former days the apprentice learned his trade at his master's bench, lived beneath his master's roof, and might hope in time to keep a shop of his own. Resolved, that the merchant capitalist, who buys labor as he buys leather, has divided our trades into pieces, so that a shoe once made by one skilled hand now passes through many unskilled ones at starvation prices. Resolved, that the custom of working from sunrise to sunset leaves the mechanic no hours for reading, for his family, or for the duties of a citizen in a free republic. Resolved, therefore, that we will labor no more than ten hours in a day, and we call upon all workingmen of this city to stand with us until this just demand is granted.\"\n\n———\n\nDocument 5 (primary text)\nLetter from a New Orleans cotton factor to a planter client, 1854\nEdmund Ravenel Tate, a fictional cotton factor (commission merchant) in New Orleans, business letter to a planter client in Mississippi, 1854; the writer earned commissions on cotton he sold (ALTON-composed, in the style of a merchant's business correspondence)\n\n\"Sir, Your crop of two hundred and ten bales arrived by steamboat on the 9th and has been sold at a handsome figure. The demand from the mills of Lancashire and of New England has never been stronger, and the buyers here say they will take every bale the valley can send. I have charged against your account the plantation supplies you ordered, including the barrels of Ohio pork and corn shipped downriver, and the balance stands in your favor. You write that you intend to purchase more bottomland and to add more enslaved hands to clear it. At present prices I can only encourage you. Cotton is the great business of this port and of the world, and so long as the factories run, the planter who plants more will prosper more.\"\n\n———\n\nDocument 6 (secondary text)\nExcerpt from a study of rural America in the canal and railroad era\nMargaret Ellery Sloane, a fictional historian, Markets and Margins: Rural Households in the Age of Canals, 2009 (ALTON-composed, in the style of a historian's monograph)\n\n\"Accounts of the market revolution often move too quickly from the canal boat to the factory gate. In 1860 most Americans still lived on farms, and many rural households in upland districts far from rivers or rail lines continued to grow most of their own food and to trade with neighbors through barter and credit kept in account books. Even families who sold wheat or wool to distant buyers usually did so to protect the older goal of owning land free of debt and passing it to their children. The market reshaped daily routines, the work of women in the home, and the meaning of wages, but it did so unevenly. Its reach depended on geography, class and race, and for the enslaved millions of the cotton South it deepened bondage rather than offering new choices.\"\n\n———\n\nDocument 7 (chart)\nWheat shipped by canal and cloth woven at home, Oriska County, New York, 1820-1855\nFictional composite data for Oriska County, New York, based on patterns in state agricultural reports (ALTON-composed, in the style of a state census of agriculture and manufactures)\n\nBar chart comparing bushels of wheat shipped from the county by canal with yards of cloth woven in county households, in thousands, for 1820, 1825, 1835, 1845 and 1855.\n\nOriska County, New York: Wheat Shipped by Canal and Household Cloth Production (thousands)\n1820: Bushels of wheat shipped by canal (thousands) 0, Yards of cloth woven in households (thousands) 310\n1825: Bushels of wheat shipped by canal (thousands) 40, Yards of cloth woven in households (thousands) 280\n1835: Bushels of wheat shipped by canal (thousands) 180, Yards of cloth woven in households (thousands) 150\n1845: Bushels of wheat shipped by canal (thousands) 260, Yards of cloth woven in households (thousands) 60\n1855: Bushels of wheat shipped by canal (thousands) 210, Yards of cloth woven in households (thousands) 15",
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "Between the end of the War of 1812 and the eve of the Civil War, new canals, steamboats and railroads linked farms, towns and cities across the United States. Factories in the Northeast began producing textiles and other goods on a large scale, and farmers and planters grew more crops for sale in distant markets. These developments are often called the market revolution.\n\nEvaluate the extent to which the market revolution changed the lives of Americans between 1815 and 1860.\n\nIn your response you should do the following:\n- Respond to the prompt with a historically defensible thesis or claim that establishes a line of reasoning.\n- Describe a broader historical context relevant to the prompt.\n- Support an argument in response to the prompt using at least four documents.\n- Use at least one additional piece of specific historical evidence (beyond that found in the documents) relevant to an argument about the prompt.\n- For at least two documents, explain how or why the document's point of view, purpose, historical situation, and/or audience is relevant to an argument.\n- Demonstrate a complex understanding of the historical development that is the focus of the prompt, using evidence to corroborate, qualify, or modify an argument that addresses the question.",
+     "points": 7,
+     "response_mode": "essay",
+     "skill_codes": [
+      "6.A"
+     ],
+     "topic_codes": [
+      "4.1"
+     ],
+     "model_answer": "After the War of 1812, many Americans felt a new sense of nationalism and wanted the country to depend less on Britain. Henry Clay's American System called for a protective tariff, a national bank and internal improvements like roads and canals. The Erie Canal opened in 1825 and connected the Great Lakes to New York City, and steamboats on the Mississippi made it possible to ship goods upriver as well as down. At the same time, the cotton gin had made short-staple cotton very profitable, so planters pushed into the Southwest. These changes set up the market revolution. Between 1815 and 1860 the market revolution greatly changed the lives of Northern farm families and workers by tying them to distant markets and wages, but those changes brought new debt and dependence along with opportunity, and in the South and in remote rural areas the market mostly deepened older patterns like slavery instead of changing them.\n\nFor Northern farm families, the canals changed daily life a lot. In Document 1, a farmer in western New York says that since the canal opened he can ship wheat \"clear to New York\" and sell it at prices he never saw in Vermont. His wife \"has given up the loom\" because store cloth is cheaper, and they now own a clock and a carpet. Document 7 supports this, since wheat shipped by canal in Oriska County went from 0 in 1820 to 260 thousand bushels in 1845 while cloth woven at home fell from 310 thousand yards to only 15 thousand by 1855. So families stopped making what they used and started buying it. But Document 1 also shows the cost of this change. Because it is a private letter to his brother, Whitcomb has no reason to brag or hide his worries, so his admission that \"the price of flour is now set in cities I have never seen\" and that the bank note \"does not fall with it\" seems honest. This fear was real, because in the Panic of 1837 crop prices and land values collapsed and many farmers who had bought on credit lost their land.\n\nThe market revolution also changed work for young women and for craftsmen. Document 2 shows a mill girl who saved nearly forty dollars and goes to lectures, which was a new kind of independence for a farm daughter. Document 3, a company pamphlet, says girls live under \"respectable matrons\" and return home with \"improved minds.\" However, the purpose of Document 3 matters, because it was written by the company treasurer to convince parents and legislators to support the mills, so it leaves out the long hours. Lucinda's letter in Document 2 was written privately to her sister and tells a different story, with thirteen-hour days, four looms instead of two, and pay cuts, and she says she \"traded one master for another.\" In Document 4, Philadelphia journeymen complain that merchant capitalists have broken their trades into pieces so they can no longer hope to own a shop. Both Documents 2 and 4 call for a ten-hour day, which shows workers in different industries reacting to the same loss of control over their time.\n\nThe market revolution did not change everyone's life in the same way, though. Document 5 shows that Northern mills and Western farms were connected to the cotton South, since the planter buys Ohio pork and sells cotton to New England and Lancashire. The factor encourages the planter to buy more enslaved people, but he earned commissions on cotton, so he had a reason to push for bigger crops. For enslaved people, the market meant more bondage, not freedom, as Document 6 also argues. Document 6 also points out that in 1860 most Americans were still on farms and that upland families far from canals still bartered and grew their own food. Even commercial farmers like Whitcomb wanted the old goal of owning land free of debt.\n\nOverall, the market revolution changed American lives to a large extent in the North, where it brought store goods, wages and new labor protests, but the change was uneven. It tied the regions together economically while making slavery more important to the South, which helps explain why sectional tension grew by 1860.",
+     "rubric_rows": [
+      {
+       "row_id": "thesis",
+       "points": 1,
+       "criterion": "A defensible claim that evaluates the extent of change the market revolution brought to American lives from 1815 to 1860 and sets up a line of reasoning, for example significant change for Northern farm families and workers alongside continuity or deepening of slavery in the South and older rural patterns in some regions.",
+       "required_elements": [],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "context",
+       "points": 1,
+       "criterion": "Describes broader context such as post-War of 1812 nationalism and the American System, the transportation revolution (National Road, Erie Canal, steamboats), early industrial technology, or westward settlement and cotton expansion after the cotton gin, and ties it to the prompt.",
+       "required_elements": [],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "docs",
+       "points": 2,
+       "criterion": "Uses the documents' content to support claims about how far the market revolution changed lives, for example commercial farming and debt (Doc 1, Doc 7), wage labor for women (Docs 2, 3), decline of the artisan system (Doc 4), expansion of slavery (Doc 5), uneven change (Doc 6).",
+       "required_elements": [],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "outside",
+       "points": 1,
+       "criterion": "Uses at least one specific piece of evidence not in the documents, such as the Panic of 1837, Commonwealth v. Hunt (1842), Gibbons v. Ogden (1824), the McCormick reaper or John Deere's steel plow, the telegraph, Irish immigration after the famine of the 1840s, or the cult of domesticity.",
+       "required_elements": [],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "sourcing",
+       "points": 1,
+       "criterion": "Explains how point of view, purpose, historical situation or audience matters for at least two documents, for example the promotional purpose of the company pamphlet in Doc 3, the private audience of Docs 1 and 2, the commission-earning position of the factor in Doc 5, or the labor-organizing purpose of Doc 4.",
+       "required_elements": [],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "complexity",
+       "points": 1,
+       "criterion": "Shows complex understanding, for example by weighing regional, gender, class and racial differences in the experience of change, by explaining both opportunity and new dependence, by corroborating and qualifying with several documents, or by linking the market revolution to sectional tension.",
+       "required_elements": [],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ]
+    }
+   ],
+   "reference_text": "Scoring guide (ALTON practice rubric, not official College Board scoring). This question is worth 7 points.\nThesis/claim (0-1): A defensible claim that evaluates the extent of change the market revolution brought to American lives from 1815 to 1860 and sets up a line of reasoning, for example significant change for Northern farm families and workers alongside continuity or deepening of slavery in the South and older rural patterns in some regions.\n   - 1: Gives a historically defensible thesis that evaluates the extent of change and sets up a line of reasoning, in the introduction or conclusion.\n   - 0: Gives no defensible thesis, only restates the prompt, or does not evaluate the extent of change.\nContextualization (0-1): Describes broader context such as post-War of 1812 nationalism and the American System, the transportation revolution (National Road, Erie Canal, steamboats), early industrial technology, or westward settlement and cotton expansion after the cotton gin, and ties it to the prompt.\n   - 1: Describes a broader historical context before, during or continuing through 1815 to 1860 and connects it to the prompt.\n   - 0: Gives no relevant context, or only a passing reference.\nEvidence from the documents (0-2): Uses the documents' content to support claims about how far the market revolution changed lives, for example commercial farming and debt (Doc 1, Doc 7), wage labor for women (Docs 2, 3), decline of the artisan system (Doc 4), expansion of slavery (Doc 5), uneven change (Doc 6).\n   - 2: Uses the content of at least four documents to support an argument in response to the prompt.\n   - 1: Accurately describes the content of at least three documents in a way that addresses the topic.\n   - 0: Uses fewer than three documents or only quotes or summarizes without connecting them to the topic.\nEvidence beyond the documents (0-1): Uses at least one specific piece of evidence not in the documents, such as the Panic of 1837, Commonwealth v. Hunt (1842), Gibbons v. Ogden (1824), the McCormick reaper or John Deere's steel plow, the telegraph, Irish immigration after the famine of the 1840s, or the cult of domesticity.\n   - 1: Uses at least one specific, accurate piece of outside evidence relevant to an argument about the prompt.\n   - 0: Gives no specific outside evidence, or the evidence is irrelevant or inaccurate.\nSourcing (point of view, purpose, situation, audience) (0-1): Explains how point of view, purpose, historical situation or audience matters for at least two documents, for example the promotional purpose of the company pamphlet in Doc 3, the private audience of Docs 1 and 2, the commission-earning position of the factor in Doc 5, or the labor-organizing purpose of Doc 4.\n   - 1: Explains how or why the point of view, purpose, historical situation or audience of at least two documents matters to an argument.\n   - 0: Gives no sourcing analysis, or sourcing for only one document.\nComplex understanding (0-1): Shows complex understanding, for example by weighing regional, gender, class and racial differences in the experience of change, by explaining both opportunity and new dependence, by corroborating and qualifying with several documents, or by linking the market revolution to sectional tension.\n   - 1: Shows a complex understanding through sophisticated argumentation or effective use of evidence that corroborates, qualifies or modifies the argument.\n   - 0: Does not show a complex understanding, or makes only a brief phrase or reference.\nNote: The thesis may argue for great, moderate or limited change as long as it is defensible and evaluates extent.\nNote: Document 7 is fictional composite data; students should treat its pattern (rising market sales, falling home manufacture) as illustrative.\nNote: Outside evidence must differ from evidence used for contextualization to earn both points.\nNote: Simply naming an author or date does not count as sourcing; the student must explain why the source's perspective or situation matters.\n\nSample response, high score (7/7; Thesis/claim 1, Contextualization 1, Evidence from the documents 2, Evidence beyond the documents 1, Sourcing (point of view, purpose, situation, audience) 1, Complex understanding 1):\nAfter the War of 1812, many Americans felt a new sense of nationalism and wanted the country to depend less on Britain. Henry Clay's American System called for a protective tariff, a national bank and internal improvements like roads and canals. The Erie Canal opened in 1825 and connected the Great Lakes to New York City, and steamboats on the Mississippi made it possible to ship goods upriver as well as down. At the same time, the cotton gin had made short-staple cotton very profitable, so planters pushed into the Southwest. These changes set up the market revolution. Between 1815 and 1860 the market revolution greatly changed the lives of Northern farm families and workers by tying them to distant markets and wages, but those changes brought new debt and dependence along with opportunity, and in the South and in remote rural areas the market mostly deepened older patterns like slavery instead of changing them.\n\nFor Northern farm families, the canals changed daily life a lot. In Document 1, a farmer in western New York says that since the canal opened he can ship wheat \"clear to New York\" and sell it at prices he never saw in Vermont. His wife \"has given up the loom\" because store cloth is cheaper, and they now own a clock and a carpet. Document 7 supports this, since wheat shipped by canal in Oriska County went from 0 in 1820 to 260 thousand bushels in 1845 while cloth woven at home fell from 310 thousand yards to only 15 thousand by 1855. So families stopped making what they used and started buying it. But Document 1 also shows the cost of this change. Because it is a private letter to his brother, Whitcomb has no reason to brag or hide his worries, so his admission that \"the price of flour is now set in cities I have never seen\" and that the bank note \"does not fall with it\" seems honest. This fear was real, because in the Panic of 1837 crop prices and land values collapsed and many farmers who had bought on credit lost their land.\n\nThe market revolution also changed work for young women and for craftsmen. Document 2 shows a mill girl who saved nearly forty dollars and goes to lectures, which was a new kind of independence for a farm daughter. Document 3, a company pamphlet, says girls live under \"respectable matrons\" and return home with \"improved minds.\" However, the purpose of Document 3 matters, because it was written by the company treasurer to convince parents and legislators to support the mills, so it leaves out the long hours. Lucinda's letter in Document 2 was written privately to her sister and tells a different story, with thirteen-hour days, four looms instead of two, and pay cuts, and she says she \"traded one master for another.\" In Document 4, Philadelphia journeymen complain that merchant capitalists have broken their trades into pieces so they can no longer hope to own a shop. Both Documents 2 and 4 call for a ten-hour day, which shows workers in different industries reacting to the same loss of control over their time.\n\nThe market revolution did not change everyone's life in the same way, though. Document 5 shows that Northern mills and Western farms were connected to the cotton South, since the planter buys Ohio pork and sells cotton to New England and Lancashire. The factor encourages the planter to buy more enslaved people, but he earned commissions on cotton, so he had a reason to push for bigger crops. For enslaved people, the market meant more bondage, not freedom, as Document 6 also argues. Document 6 also points out that in 1860 most Americans were still on farms and that upland families far from canals still bartered and grew their own food. Even commercial farmers like Whitcomb wanted the old goal of owning land free of debt.\n\nOverall, the market revolution changed American lives to a large extent in the North, where it brought store goods, wages and new labor protests, but the change was uneven. It tied the regions together economically while making slavery more important to the South, which helps explain why sectional tension grew by 1860.\n   - \"the market revolution greatly changed the lives of Northern farm families and workers by tying them to distant markets and wages\" - Defensible thesis that evaluates extent and sets up a line of reasoning (Northern change, opportunity vs. dependence, continuity in the South).\n   - \"Henry Clay's American System called for a protective tariff, a national bank and internal improvements\" - A full context paragraph (nationalism, American System, Erie Canal, cotton gin) that is tied to the prompt.\n   - \"Document 7 supports this, since wheat shipped by canal\" - Uses Docs 1, 7, 2, 4, 5 and 6 to support claims, not just summarize them. Earns 2.\n   - \"in the Panic of 1837 crop prices and land values collapsed\" - Specific, accurate outside evidence that is different from the context and connected to the farmer's debt.\n   - \"so it leaves out the long hours\" - Explains how the promotional purpose and audience of Doc 3 shape what it says. Combined with the private-audience sourcing of Docs 1 and 2 and the factor's commissions in Doc 5, this earns the point.\n   - \"he had a reason to push for bigger crops\" - Second sourcing example: the factor's financial interest in Doc 5.\n   - \"The market revolution did not change everyone's life in the same way\" - Qualifies the argument by weighing regional, racial and class differences and by connecting them to sectional tension. Shows complex understanding, though the treatment is fairly brief.\n\nSample response, middle score (4/7; Thesis/claim 1, Contextualization 0, Evidence from the documents 1, Evidence beyond the documents 1, Sourcing (point of view, purpose, situation, audience) 1, Complex understanding 0):\nThe market revolution changed the lives of Americans a great deal between 1815 and 1860, especially for farmers and workers in the North, because it pulled them into a money economy where they depended on wages and distant prices instead of on their own households. It gave people new opportunities, but it also brought new problems.\n\nAfter the War of 1812 the country began building canals and other transportation, and this is where the market revolution started.\n\nFarmers were one group that was changed. In Document 1, a farmer in western New York says that since the canal opened he can ship his wheat to New York City and sell it at a price they never saw in Vermont. His family now has a clock and a carpet, and his wife stopped weaving because cloth from the store is cheaper. However, he also says he lies awake at night because he bought land on credit and the price of flour is set in cities he has never seen. This shows that the market made life more comfortable for some farmers but also made them owe money and depend on strangers. The farmer is writing to his brother, so he is probably being honest about his worries, which makes the letter believable on the downside of change.\n\nWorkers were also changed. In Document 2, a mill worker named Lucinda writes that she has saved forty dollars and bought a bonnet and goes to lectures, which she could never have done on the farm. But she also says she works almost thirteen hours at the looms, that the overseers gave each girl four looms instead of two, and that pay was cut. She thinks she has traded one master for another. Because she is writing privately to her sister and not trying to attract anyone to the mills, she has a reason to tell the truth about conditions, and that is why her letter is more trustworthy than a company advertisement. This fits the Panic of 1837, which caused factories to close and cut wages and showed workers how much they now relied on the market. Document 4 shows the same kind of change for skilled workers. The journeymen in Philadelphia say that apprentices used to live with a master and hope to own a shop, but now merchant capitalists divide the trades into pieces and pay starvation prices. Since this is a group of workers trying to get a ten-hour day and asking other workingmen to join them, they probably made the old days sound better and their situation sound worse in order to win support. Even so, workers did gain some legal ground when Commonwealth v. Hunt in 1842 said that unions were legal in Massachusetts.\n\nIn conclusion, the market revolution changed American lives to a large extent, because farmers, women and craftsmen all had to adjust to wages, credit and distant markets. These changes brought both better goods and more hardship.\n   - \"The market revolution changed the lives of Americans a great deal between 1815 and 1860, especially for farmers and workers in the North\" - Defensible thesis that evaluates extent of change and previews a line of reasoning (farmers, workers); earns the thesis point.\n   - \"After the War of 1812 the country began building canals and other transportation, and this is where the market revolution started.\" - Only a one-sentence passing mention of an event; it does not describe a broader historical context, so no contextualization point.\n   - \"he bought land on credit and the price of flour is set in cities he has never seen\" - Accurately describes the content of Document 1 and ties it to the topic (opportunity plus debt).\n   - \"she works almost thirteen hours at the looms, that the overseers gave each girl four looms instead of two, and that pay was cut\" - Accurate description of Document 2 connected to the prompt. With Docs 1 and 4, exactly three documents are used, earning one point but not the second.\n   - \"merchant capitalists divide the trades into pieces and pay starvation prices\" - Third document (Doc 4) described accurately; only three documents are used, so the four-document point is not reached.\n   - \"This fits the Panic of 1837, which caused factories to close and cut wages\" - Accurate outside evidence beyond the documents and relevant to the argument.\n   - \"Commonwealth v. Hunt in 1842 said that unions were legal in Massachusetts\" - Second accurate outside example, supporting the outside-evidence point.\n   - \"Because she is writing privately to her sister and not trying to attract anyone to the mills, she has a reason to tell the truth about conditions\" - Explains how audience and purpose matter for Document 2.\n   - \"Since this is a group of workers trying to get a ten-hour day and asking other workingmen to join them, they probably made the old days sound better\" - Explains how purpose matters for Document 4; with Doc 2 this gives sourcing for two documents.\n   - \"These changes brought both better goods and more hardship.\" - Only a brief statement of opportunity and hardship. It does not weigh regional, racial or class differences, such as the South or uneven change, so no complexity point.\n\nSample response, low score (2/7; Thesis/claim 1, Contextualization 0, Evidence from the documents 0, Evidence beyond the documents 1, Sourcing (point of view, purpose, situation, audience) 0, Complex understanding 0):\nThe market revolution changed the lives of Americans a great deal between 1815 and 1860, especially in how people worked and earned money, because farmers and workers became connected to markets and wages instead of making everything for themselves.\n\nDocument 1 shows a farmer in New York who sold wheat after the canal opened. He says he sold three hundred bushels at a good price and his wife stopped weaving cloth because it was cheaper at the store. They bought a clock and a carpet. But he also says he bought more land on credit and worries about the bank note when wheat falls. So the market gave him more goods but also more debt.\n\nDocument 2 is a letter from a mill worker named Lucinda. She saved forty dollars and went to lectures, which she could not do on the farm. But she also says she works almost thirteen hours at the looms and the overseers gave her four looms instead of two. She thinks she traded one master for another. This shows that factory work gave young women wages but also hard conditions.\n\nOutside the documents, the Panic of 1837 showed how risky the market could be, since many people lost jobs and farms when banks failed and prices fell.\n\nIn conclusion, the market revolution changed American lives in many ways, giving people new things but also new problems.\n   - \"The market revolution changed the lives of Americans a great deal between 1815 and 1860, especially in how people worked and earned money\" - Defensible claim that evaluates the extent of change and names a line of reasoning (work and wages replacing household self-sufficiency). Earns the thesis point, though it is not elaborated further.\n   - \"Document 1 shows a farmer in New York who sold wheat after the canal opened.\" - Describes the content of Document 1 accurately but mostly summarizes it. With only two documents used (Docs 1 and 2) and no real argument built from them, this earns no document-evidence credit; at least three documents are needed for one point and four for two.\n   - \"Outside the documents, the Panic of 1837 showed how risky the market could be\" - Accurate, specific outside evidence (the Panic of 1837) tied to the risks of market dependence. Earns the outside evidence point.\n   - \"Document 2 is a letter from a mill worker named Lucinda.\" - Only identifies the author and summarizes the letter. It does not explain how her point of view, private audience (her sister) or situation affects the reliability or meaning of her claims, so no sourcing credit.\n   - \"The market revolution changed American lives in many ways, giving people new things but also new problems.\" - Conclusion is general and does not weigh regional, racial or class differences or qualify the argument with other evidence such as slavery or uneven rural change. No complex understanding.\n   - \"Document 1 shows a farmer in New York\" - The response begins directly with document summary and never describes the broader context (the transportation revolution, the post-War of 1812 era, the cotton gin). No contextualization credit.",
    "ush_frq": {
     "schema_version": "ush-frq-1",
     "task_type": "dbq",
@@ -2763,6 +3476,120 @@
         "row_id": "complex understanding"
        }
       ]
+     },
+     {
+      "tier": "mid",
+      "target_total": 4,
+      "essay": "The market revolution changed the lives of Americans a great deal between 1815 and 1860, especially for farmers and workers in the North, because it pulled them into a money economy where they depended on wages and distant prices instead of on their own households. It gave people new opportunities, but it also brought new problems.\n\nAfter the War of 1812 the country began building canals and other transportation, and this is where the market revolution started.\n\nFarmers were one group that was changed. In Document 1, a farmer in western New York says that since the canal opened he can ship his wheat to New York City and sell it at a price they never saw in Vermont. His family now has a clock and a carpet, and his wife stopped weaving because cloth from the store is cheaper. However, he also says he lies awake at night because he bought land on credit and the price of flour is set in cities he has never seen. This shows that the market made life more comfortable for some farmers but also made them owe money and depend on strangers. The farmer is writing to his brother, so he is probably being honest about his worries, which makes the letter believable on the downside of change.\n\nWorkers were also changed. In Document 2, a mill worker named Lucinda writes that she has saved forty dollars and bought a bonnet and goes to lectures, which she could never have done on the farm. But she also says she works almost thirteen hours at the looms, that the overseers gave each girl four looms instead of two, and that pay was cut. She thinks she has traded one master for another. Because she is writing privately to her sister and not trying to attract anyone to the mills, she has a reason to tell the truth about conditions, and that is why her letter is more trustworthy than a company advertisement. This fits the Panic of 1837, which caused factories to close and cut wages and showed workers how much they now relied on the market. Document 4 shows the same kind of change for skilled workers. The journeymen in Philadelphia say that apprentices used to live with a master and hope to own a shop, but now merchant capitalists divide the trades into pieces and pay starvation prices. Since this is a group of workers trying to get a ten-hour day and asking other workingmen to join them, they probably made the old days sound better and their situation sound worse in order to win support. Even so, workers did gain some legal ground when Commonwealth v. Hunt in 1842 said that unions were legal in Massachusetts.\n\nIn conclusion, the market revolution changed American lives to a large extent, because farmers, women and craftsmen all had to adjust to wages, credit and distant markets. These changes brought both better goods and more hardship.",
+      "word_count": 492,
+      "rubric_scores": {
+       "thesis": 1,
+       "context": 0,
+       "docs": 1,
+       "outside": 1,
+       "sourcing": 1,
+       "complexity": 0,
+       "total": 4
+      },
+      "annotations": [
+       {
+        "quote": "The market revolution changed the lives of Americans a great deal between 1815 and 1860, especially for farmers and workers in the North",
+        "comment": "Defensible thesis that evaluates extent of change and previews a line of reasoning (farmers, workers); earns the thesis point.",
+        "row_id": "thesis"
+       },
+       {
+        "quote": "After the War of 1812 the country began building canals and other transportation, and this is where the market revolution started.",
+        "comment": "Only a one-sentence passing mention of an event; it does not describe a broader historical context, so no contextualization point.",
+        "row_id": "context"
+       },
+       {
+        "quote": "he bought land on credit and the price of flour is set in cities he has never seen",
+        "comment": "Accurately describes the content of Document 1 and ties it to the topic (opportunity plus debt).",
+        "row_id": "doc_evidence"
+       },
+       {
+        "quote": "she works almost thirteen hours at the looms, that the overseers gave each girl four looms instead of two, and that pay was cut",
+        "comment": "Accurate description of Document 2 connected to the prompt. With Docs 1 and 4, exactly three documents are used, earning one point but not the second.",
+        "row_id": "doc_evidence"
+       },
+       {
+        "quote": "merchant capitalists divide the trades into pieces and pay starvation prices",
+        "comment": "Third document (Doc 4) described accurately; only three documents are used, so the four-document point is not reached.",
+        "row_id": "doc_evidence"
+       },
+       {
+        "quote": "This fits the Panic of 1837, which caused factories to close and cut wages",
+        "comment": "Accurate outside evidence beyond the documents and relevant to the argument.",
+        "row_id": "outside_evidence"
+       },
+       {
+        "quote": "Commonwealth v. Hunt in 1842 said that unions were legal in Massachusetts",
+        "comment": "Second accurate outside example, supporting the outside-evidence point.",
+        "row_id": "outside_evidence"
+       },
+       {
+        "quote": "Because she is writing privately to her sister and not trying to attract anyone to the mills, she has a reason to tell the truth about conditions",
+        "comment": "Explains how audience and purpose matter for Document 2.",
+        "row_id": "sourcing"
+       },
+       {
+        "quote": "Since this is a group of workers trying to get a ten-hour day and asking other workingmen to join them, they probably made the old days sound better",
+        "comment": "Explains how purpose matters for Document 4; with Doc 2 this gives sourcing for two documents.",
+        "row_id": "sourcing"
+       },
+       {
+        "quote": "These changes brought both better goods and more hardship.",
+        "comment": "Only a brief statement of opportunity and hardship. It does not weigh regional, racial or class differences, such as the South or uneven change, so no complexity point.",
+        "row_id": "complexity"
+       }
+      ]
+     },
+     {
+      "tier": "low",
+      "target_total": 2,
+      "essay": "The market revolution changed the lives of Americans a great deal between 1815 and 1860, especially in how people worked and earned money, because farmers and workers became connected to markets and wages instead of making everything for themselves.\n\nDocument 1 shows a farmer in New York who sold wheat after the canal opened. He says he sold three hundred bushels at a good price and his wife stopped weaving cloth because it was cheaper at the store. They bought a clock and a carpet. But he also says he bought more land on credit and worries about the bank note when wheat falls. So the market gave him more goods but also more debt.\n\nDocument 2 is a letter from a mill worker named Lucinda. She saved forty dollars and went to lectures, which she could not do on the farm. But she also says she works almost thirteen hours at the looms and the overseers gave her four looms instead of two. She thinks she traded one master for another. This shows that factory work gave young women wages but also hard conditions.\n\nOutside the documents, the Panic of 1837 showed how risky the market could be, since many people lost jobs and farms when banks failed and prices fell.\n\nIn conclusion, the market revolution changed American lives in many ways, giving people new things but also new problems.",
+      "word_count": 231,
+      "rubric_scores": {
+       "thesis": 1,
+       "context": 0,
+       "docs": 0,
+       "outside": 1,
+       "sourcing": 0,
+       "complexity": 0,
+       "total": 2
+      },
+      "annotations": [
+       {
+        "quote": "The market revolution changed the lives of Americans a great deal between 1815 and 1860, especially in how people worked and earned money",
+        "comment": "Defensible claim that evaluates the extent of change and names a line of reasoning (work and wages replacing household self-sufficiency). Earns the thesis point, though it is not elaborated further.",
+        "row_id": "thesis"
+       },
+       {
+        "quote": "Document 1 shows a farmer in New York who sold wheat after the canal opened.",
+        "comment": "Describes the content of Document 1 accurately but mostly summarizes it. With only two documents used (Docs 1 and 2) and no real argument built from them, this earns no document-evidence credit; at least three documents are needed for one point and four for two.",
+        "row_id": "evidence_docs"
+       },
+       {
+        "quote": "Outside the documents, the Panic of 1837 showed how risky the market could be",
+        "comment": "Accurate, specific outside evidence (the Panic of 1837) tied to the risks of market dependence. Earns the outside evidence point.",
+        "row_id": "evidence_outside"
+       },
+       {
+        "quote": "Document 2 is a letter from a mill worker named Lucinda.",
+        "comment": "Only identifies the author and summarizes the letter. It does not explain how her point of view, private audience (her sister) or situation affects the reliability or meaning of her claims, so no sourcing credit.",
+        "row_id": "sourcing"
+       },
+       {
+        "quote": "The market revolution changed American lives in many ways, giving people new things but also new problems.",
+        "comment": "Conclusion is general and does not weigh regional, racial or class differences or qualify the argument with other evidence such as slavery or uneven rural change. No complex understanding.",
+        "row_id": "complexity"
+       },
+       {
+        "quote": "Document 1 shows a farmer in New York",
+        "comment": "The response begins directly with document summary and never describes the broader context (the transportation revolution, the post-War of 1812 era, the cotton gin). No contextualization credit.",
+        "row_id": "context"
+       }
+      ]
      }
     ],
     "provenance": {
@@ -2782,14 +3609,124 @@
   "candidateKey": "ap_us_history-dbq_2-k0",
   "keywordCode": "6.1",
   "unitCode": "6",
-  "skillPrimary": "1.B",
+  "skillPrimary": "6.A",
   "structure": "frq_multipart",
   "archetype": "ushfrq_dbq_2",
-  "reviewState": "rejected",
-  "rejectionReason": "sample_mid_missing; sample_mid_no_consistent_candidate",
-  "difficultyProvisional": null,
+  "reviewState": "auto_passed",
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
   "payload": {
    "archetype": "ushfrq_dbq_2",
+   "template": "dbq",
+   "topic": "6.1",
+   "extra_topics": [],
+   "skill": "6.A",
+   "representative_skill": "6.A",
+   "calculator": "na",
+   "title": "Growth and Limits of the Labor Movement, 1877-1900",
+   "set_intro": "ALTON-composed stimulus\nDocument 1 (primary text)\nDiary of a railroad fireman\nPrivate diary of a fictional locomotive fireman in a railroad town in the Appalachian region, July 1877 (ALTON-composed, in the style of a private workingman's diary)\n\n\"July 18, 1877. The notice went up at the roundhouse that wages are cut again, the second time since the panic. A fireman who takes every run the dispatcher allows still cannot pay rent and buy flour in the same month. Nobody planned anything grand at the meeting. We only agreed that we would not take the freight trains out until the cut is taken back. By evening half the town stood at the yard, shopkeepers and miners' wives among them, and they cheered when the engines stayed cold. July 24. Soldiers came in on the cars this morning, sent by the governor, and we hear the federal government has sent troops to other cities. Our grievance is the same as it was last week, but now the papers call us a mob. I do not know whether I will have a place on the road when this is over.\"\n\n———\n\nDocument 2 (primary text)\nCircular of a Knights of Labor local assembly\nRecruiting circular issued by a fictional local assembly of the Knights of Labor in a New England textile town, March 1886 (ALTON-composed, in the style of a labor organization circular)\n\n\"To all who toil in mill, shop, and field. The Knights of Labor ask no man what trade he follows, what church he attends, or what land he was born in. The weaver and the carter, the skilled machinist and the girl at the spinning frame, the white laborer and the colored laborer are welcome in our assembly. Alone, each of us must take whatever wage the corporation offers. Together we can demand the eight-hour day, an end to labor by young children, and the settlement of disputes by arbitration instead of ruinous strikes. We look beyond wages to a day when workers own the shops through cooperation and the wage system itself gives way. Our order has grown by many thousands since the victory on the railroads last year. Come to the hall on Thursday evening and take your place.\"\n\n———\n\nDocument 3 (primary text)\nEditorial on the Chicago bombing\nEditorial in the fictional Lakeport Commercial Advertiser, a newspaper owned by Great Lakes shipping and lumber interests, May 1886 (ALTON-composed, in the style of a business-oriented Gilded Age editorial)\n\n\"The bomb thrown at the police in Haymarket Square has shown the country where the eight-hour agitation leads. For months, foreign-born orators have told our workingmen that employers are their enemies and that property is theft. Now policemen lie dead. We do not say that every member of a labor society is an anarchist. But the honest American mechanic must decide whether he will stand with law and order or with the red flag. Employers in this city would do well to dismiss any man who marches behind agitators, and the legislature should give the police every power needed to break up such meetings before they begin. A man who is dissatisfied with his wages is free to seek another employer. He is not free to stop the wheels of commerce for everyone else.\"\n\n———\n\nDocument 4 (primary text)\nLetter from a craft union secretary\nLetter from the fictional recording secretary of an iron molders' local, affiliated with the American Federation of Labor, to a newly admitted member, 1891 (ALTON-composed, in the style of craft union correspondence)\n\n\"Brother, you will find our dues higher than those of the old Knights, and there is good reason for it. Your money builds a sick benefit, a death benefit, and above all a strike fund, so that when we stop work we can hold out longer than the foundry owner can. We admit only journeymen who have served their time at the trade, because an employer cannot easily replace a skilled molder, while he can fill a gang of laborers by noon. We do not chase schemes to abolish the wage system or march in every political parade. We bargain for wages, hours, and the rules of the shop, and we sign agreements that both sides must keep. This past year we won a raise at two foundries without losing a day. Pay your dues on time and keep the union card in your pocket.\"\n\n———\n\nDocument 5 (primary text)\nTestimony of a steel manufacturer\nTestimony of a fictional Pennsylvania steel mill owner before a state legislative committee investigating the use of private armed guards, 1892 (ALTON-composed, in the style of Gilded Age legislative testimony)\n\n\"I hired the watchmen because the sheriff told me plainly that he could not protect my property. The mill is mine and the stockholders'. I will not have a committee of the union deciding whom I may hire or what machine I may install. When the old scale expired, I offered the work at a rate the market would bear, and the union refused it. That was their right. It is equally my right to hire men who will accept it. Within two weeks of the shutdown I had more applicants than places, many of them newly arrived from southern and eastern Europe and glad of steady work. I bear no grudge against the workingman. My quarrel is with the organizers who tell him that he has a claim on a business he did not build.\"\n\n———\n\nDocument 6 (secondary text)\nA historian on courts, troops, and divided workers\nRuth Tellander, fictional historian, Contested Ground: Workers, Courts, and Capital in the Gilded Age, a fictional monograph, 2009 (ALTON-composed, in the style of a modern labor history monograph)\n\n\"Gilded Age workers did not lack militancy. Again and again, from the railroad yards of 1877 to the Pullman boycott of 1894, they showed that they could stop the most powerful corporations in the nation. What they could not do was outlast an alliance of employers and the state. Governors sent militia, presidents sent federal troops, and federal judges issued sweeping injunctions that turned a strike into contempt of court. Yet the state was not the only obstacle. Workers were split by skill, by language, by race, and by religion. Craft unionists often saw unskilled immigrants as a threat to wage standards, many white unions excluded Black workers, and Chinese immigrants had been barred from entry by law. Employers learned to exploit each of these divisions. The labor movement grew because industrial capitalism created grievances that millions shared, but it remained weak because those millions rarely acted as one.\"\n\n———\n\nDocument 7 (table)\nStrikes reported in a Midwestern industrial state, by outcome, 1881-1900\nFictional composite data modeled on reports of a state labor statistics bureau, Midwestern industrial state, 1881-1900 (ALTON-composed, in the style of a state labor bureau report)\n\nThe table shows the number of strikes reported in a fictional Midwestern industrial state in four five-year periods, how many succeeded, partly succeeded, or failed, and the share of strikes ordered by a labor organization.\n\n| Years | Strikes reported | Succeeded | Partly succeeded | Failed | Percent ordered by a union |\n| --- | --- | --- | --- | --- | --- |\n| 1881-1885 | 212 | 98 | 27 | 87 | 41 percent |\n| 1886-1890 | 486 | 189 | 58 | 239 | 58 percent |\n| 1891-1895 | 431 | 154 | 46 | 231 | 66 percent |\n| 1896-1900 | 398 | 178 | 63 | 157 | 72 percent |",
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "After the Civil War, railroads, steel mills, mines and factories turned millions of Americans and recent immigrants into wage workers. Between 1877 and 1900, workers organized on a larger scale than ever before, through mass strikes, the Knights of Labor, and the craft unions of the American Federation of Labor. By 1900, however, only a small share of American workers belonged to unions, and many of the era's largest strikes had ended in defeat.\n\nEvaluate the relative importance of the factors that contributed to the growth of the labor movement and the factors that limited its success in the period from 1877 to 1900.\n\nIn your response you should do the following:\n- Respond to the prompt with a historically defensible thesis or claim that establishes a line of reasoning.\n- Describe a broader historical context relevant to the prompt.\n- Support an argument in response to the prompt using at least four documents.\n- Use at least one additional piece of specific historical evidence (beyond that found in the documents) relevant to an argument about the prompt.\n- For at least two documents, explain how or why the document's point of view, purpose, historical situation, and/or audience is relevant to an argument.\n- Demonstrate a complex understanding of the historical development that is the focus of the prompt.",
+     "points": 7,
+     "response_mode": "essay",
+     "skill_codes": [
+      "6.A"
+     ],
+     "topic_codes": [
+      "6.1"
+     ],
+     "model_answer": "After the Civil War the United States industrialized faster than almost any country in history. Railroads connected the continent, and men like Andrew Carnegie and John D. Rockefeller built huge corporations that used new machines and cheap labor. Millions of immigrants, more and more from southern and eastern Europe, came looking for work in mills and mines. Depressions after the Panic of 1873 and again in 1893 led to wage cuts and layoffs, and most judges and politicians believed in laissez-faire and Social Darwinist ideas that said the government should not interfere between employers and workers. Because of this, workers had serious grievances but very little protection, which is why they tried to organize.\n\nThe labor movement grew mainly because industrial capitalism created shared grievances like wage cuts and long hours, and because organizations like the Knights of Labor and the AFL gave workers a way to act together. However, its success was limited more by the alliance of employers with the government, which used troops and courts to break strikes, than by anything else, although divisions among workers by skill, race, and nationality made that power easier to use.\n\nThe biggest reason labor grew was economic hardship. In Document 1, a railroad fireman writes in 1877 that wages were cut \"the second time since the panic\" and that he cannot pay rent and buy flour in the same month. Since this is a private diary, he had no reason to exaggerate for an audience, so it shows the strike started from real need and not from planning by radicals, as he says \"Nobody planned anything grand.\" The whole town supported the strikers, which shows how widely the grievances were shared. Organizations then turned this anger into membership. Document 2, a Knights of Labor circular, welcomes workers of any trade, religion, or race and calls for the eight-hour day and cooperation. Its purpose is recruiting, so it probably makes the Knights sound more united and successful than they were, but its claim that the order \"has grown by many thousands\" after a railroad victory fits with the Knights growing to around 700,000 members by 1886. Document 7 also shows growth, since strikes more than doubled from 212 in 1881-1885 to 486 in 1886-1890 and the share ordered by unions rose from 41 to 72 percent.\n\nThe main limit on labor's success was government power on the side of employers. In Document 1 the governor sends soldiers and the federal government sends troops, and the papers suddenly \"call us a mob.\" Document 6, a historian, argues that workers \"could not outlast an alliance of employers and the state,\" pointing to militia, troops, and injunctions. A clear example is the Pullman Strike of 1894, when President Cleveland sent federal troops to Chicago and a federal court issued an injunction against the American Railway Union, using the Sherman Antitrust Act. Eugene Debs went to jail, and the Supreme Court upheld this in In re Debs (1895). Public opinion also turned against labor after violence. Document 3, an editorial after Haymarket, links the eight-hour movement to anarchists and tells employers to fire marchers. Because the paper was owned by shipping and lumber interests, its purpose was to protect business by making unions look foreign and dangerous, and that kind of fear helped destroy the Knights after 1886. Document 7 shows that failures outnumbered successes in 1886-1895, the years of Haymarket and Pullman.\n\nStill, divisions among workers also mattered. Document 5, a steel owner, says he had more applicants than jobs, \"many of them newly arrived from southern and eastern Europe.\" He is defending himself before a committee investigating armed guards, so he wants to look reasonable, but his testimony shows how immigration gave employers replacement workers. Document 6 adds that many unions excluded Black workers and Chinese immigrants were barred by law. In Document 4, the AFL molders only admit skilled journeymen. This craft strategy actually worked for the skilled, winning raises \"without losing a day,\" and Document 7 shows more successes in 1896-1900 as union-ordered strikes grew. But it left out most unskilled workers, so the same choice that made the AFL survive is also why so few workers were in unions by 1900.\n\nIn conclusion, hard conditions made workers organize, but the government's support for employers did the most to stop them, with worker divisions making it worse.",
+     "rubric_rows": [
+      {
+       "row_id": "thesis",
+       "points": 1,
+       "criterion": "A defensible claim that weighs the relative importance of factors in both the growth of the labor movement and its limited success from 1877 to 1900, for example arguing that industrial grievances drove growth while government intervention or worker divisions were the chief limits.",
+       "required_elements": [],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "context",
+       "points": 1,
+       "criterion": "Describes broader developments such as rapid industrialization, the rise of large corporations and railroads, depressions after 1873 and 1893, mass immigration, or laissez-faire and Social Darwinist ideas, and ties them to the prompt.",
+       "required_elements": [],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "docs",
+       "points": 2,
+       "criterion": "Uses the content of documents accurately to support an argument about why the labor movement grew and why it had limited success.",
+       "required_elements": [],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "outside",
+       "points": 1,
+       "criterion": "Uses at least one specific piece of evidence not in the documents, such as the Homestead Strike, the Pullman Strike, In re Debs, the Chinese Exclusion Act, Samuel Gompers, Terence Powderly, or the Sherman Antitrust Act being used against unions.",
+       "required_elements": [],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "sourcing",
+       "points": 1,
+       "criterion": "Explains how point of view, purpose, historical situation, or audience matters for at least two documents, for example the business ownership of the Lakeport editorial, the recruiting purpose of the Knights circular, or the self-justifying setting of the manufacturer's testimony.",
+       "required_elements": [],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "complexity",
+       "points": 1,
+       "criterion": "Shows complex understanding, for example by weighing state power against worker divisions, explaining how the same factor (immigration, the shift to craft unionism) both strengthened and weakened labor, connecting to later developments such as the CIO or the Progressive Era, or sourcing most documents well.",
+       "required_elements": [],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ]
+    }
+   ],
+   "reference_text": "Scoring guide (ALTON practice rubric, not official College Board scoring). This question is worth 7 points.\nThesis/claim (0-1): A defensible claim that weighs the relative importance of factors in both the growth of the labor movement and its limited success from 1877 to 1900, for example arguing that industrial grievances drove growth while government intervention or worker divisions were the chief limits.\n   - 1: States a historically defensible thesis that ranks or weighs factors of growth and limitation and establishes a line of reasoning.\n   - 0: Restates the prompt, offers no claim, or lists factors without weighing their relative importance.\nContextualization (0-1): Describes broader developments such as rapid industrialization, the rise of large corporations and railroads, depressions after 1873 and 1893, mass immigration, or laissez-faire and Social Darwinist ideas, and ties them to the prompt.\n   - 1: Describes a broader historical context relevant to labor organizing between 1877 and 1900 and connects it to the argument.\n   - 0: Gives no context or only a phrase or passing reference.\nEvidence from the documents (0-2): Uses the content of documents accurately to support an argument about why the labor movement grew and why it had limited success.\n   - 2: Uses the content of at least four documents to support an argument about the relative importance of factors.\n   - 1: Accurately describes the content of at least three documents in a way that addresses the prompt.\n   - 0: Uses fewer than three documents accurately, or only quotes or summarizes them without relevance.\nEvidence beyond the documents (0-1): Uses at least one specific piece of evidence not in the documents, such as the Homestead Strike, the Pullman Strike, In re Debs, the Chinese Exclusion Act, Samuel Gompers, Terence Powderly, or the Sherman Antitrust Act being used against unions.\n   - 1: Uses at least one specific, relevant piece of outside evidence to support an argument.\n   - 0: Gives no outside evidence, or only evidence already in the documents or a vague reference.\nSourcing (point of view, purpose, situation, audience) (0-1): Explains how point of view, purpose, historical situation, or audience matters for at least two documents, for example the business ownership of the Lakeport editorial, the recruiting purpose of the Knights circular, or the self-justifying setting of the manufacturer's testimony.\n   - 1: For at least two documents, explains how or why point of view, purpose, historical situation, or audience is relevant to an argument.\n   - 0: Gives no sourcing, or only identifies the source without explaining why it matters.\nComplex understanding (0-1): Shows complex understanding, for example by weighing state power against worker divisions, explaining how the same factor (immigration, the shift to craft unionism) both strengthened and weakened labor, connecting to later developments such as the CIO or the Progressive Era, or sourcing most documents well.\n   - 1: Demonstrates a complex understanding through sophisticated argumentation and/or effective use of evidence that explains nuance, multiple causes, or tensions.\n   - 0: Does not demonstrate a complex understanding of the development.\nNote: Responses may weigh growth and limits unevenly, but they must address both to earn the thesis point.\nNote: The table is fictional composite data; credit students who read its trend correctly, such as rising strike numbers in the mid-1880s, a high failure share in 1886-1895, and a growing share of union-ordered strikes, and who link it to the shift toward organized craft unions.\nNote: Do not award the outside evidence point for Haymarket, the 1877 railroad strike, or Homestead-style private guards described only as they appear in Documents 1, 3, and 5; outside evidence must add something specific beyond the documents.\nNote: A sourcing explanation must say why the source's situation matters to the argument; labeling a source as biased without explaining why does not earn the point.\n\nSample response, high score (7/7; Thesis/claim 1, Contextualization 1, Evidence from the documents 2, Evidence beyond the documents 1, Sourcing (point of view, purpose, situation, audience) 1, Complex understanding 1):\nAfter the Civil War the United States industrialized faster than almost any country in history. Railroads connected the continent, and men like Andrew Carnegie and John D. Rockefeller built huge corporations that used new machines and cheap labor. Millions of immigrants, more and more from southern and eastern Europe, came looking for work in mills and mines. Depressions after the Panic of 1873 and again in 1893 led to wage cuts and layoffs, and most judges and politicians believed in laissez-faire and Social Darwinist ideas that said the government should not interfere between employers and workers. Because of this, workers had serious grievances but very little protection, which is why they tried to organize.\n\nThe labor movement grew mainly because industrial capitalism created shared grievances like wage cuts and long hours, and because organizations like the Knights of Labor and the AFL gave workers a way to act together. However, its success was limited more by the alliance of employers with the government, which used troops and courts to break strikes, than by anything else, although divisions among workers by skill, race, and nationality made that power easier to use.\n\nThe biggest reason labor grew was economic hardship. In Document 1, a railroad fireman writes in 1877 that wages were cut \"the second time since the panic\" and that he cannot pay rent and buy flour in the same month. Since this is a private diary, he had no reason to exaggerate for an audience, so it shows the strike started from real need and not from planning by radicals, as he says \"Nobody planned anything grand.\" The whole town supported the strikers, which shows how widely the grievances were shared. Organizations then turned this anger into membership. Document 2, a Knights of Labor circular, welcomes workers of any trade, religion, or race and calls for the eight-hour day and cooperation. Its purpose is recruiting, so it probably makes the Knights sound more united and successful than they were, but its claim that the order \"has grown by many thousands\" after a railroad victory fits with the Knights growing to around 700,000 members by 1886. Document 7 also shows growth, since strikes more than doubled from 212 in 1881-1885 to 486 in 1886-1890 and the share ordered by unions rose from 41 to 72 percent.\n\nThe main limit on labor's success was government power on the side of employers. In Document 1 the governor sends soldiers and the federal government sends troops, and the papers suddenly \"call us a mob.\" Document 6, a historian, argues that workers \"could not outlast an alliance of employers and the state,\" pointing to militia, troops, and injunctions. A clear example is the Pullman Strike of 1894, when President Cleveland sent federal troops to Chicago and a federal court issued an injunction against the American Railway Union, using the Sherman Antitrust Act. Eugene Debs went to jail, and the Supreme Court upheld this in In re Debs (1895). Public opinion also turned against labor after violence. Document 3, an editorial after Haymarket, links the eight-hour movement to anarchists and tells employers to fire marchers. Because the paper was owned by shipping and lumber interests, its purpose was to protect business by making unions look foreign and dangerous, and that kind of fear helped destroy the Knights after 1886. Document 7 shows that failures outnumbered successes in 1886-1895, the years of Haymarket and Pullman.\n\nStill, divisions among workers also mattered. Document 5, a steel owner, says he had more applicants than jobs, \"many of them newly arrived from southern and eastern Europe.\" He is defending himself before a committee investigating armed guards, so he wants to look reasonable, but his testimony shows how immigration gave employers replacement workers. Document 6 adds that many unions excluded Black workers and Chinese immigrants were barred by law. In Document 4, the AFL molders only admit skilled journeymen. This craft strategy actually worked for the skilled, winning raises \"without losing a day,\" and Document 7 shows more successes in 1896-1900 as union-ordered strikes grew. But it left out most unskilled workers, so the same choice that made the AFL survive is also why so few workers were in unions by 1900.\n\nIn conclusion, hard conditions made workers organize, but the government's support for employers did the most to stop them, with worker divisions making it worse.\n   - \"However, its success was limited more by the alliance of employers with the government\" - Thesis weighs factors for both growth and limits and sets a line of reasoning.\n   - \"Depressions after the Panic of 1873 and again in 1893 led to wage cuts and layoffs\" - Context on industrialization, immigration, depressions, laissez-faire, tied to why workers organized.\n   - \"strikes more than doubled from 212 in 1881-1885 to 486 in 1886-1890\" - Reads table correctly; with Docs 1-6 used, more than four documents support the argument.\n   - \"using the Sherman Antitrust Act. Eugene Debs went to jail, and the Supreme Court upheld this in In re Debs (1895)\" - Specific outside evidence beyond the documents (Pullman details, In re Debs).\n   - \"Because the paper was owned by shipping and lumber interests, its purpose was to protect business\" - Explains why the editorial's ownership matters; also sources Docs 1, 2, and 5.\n   - \"the same choice that made the AFL survive is also why so few workers were in unions by 1900\" - Shows tension: craft unionism both strengthened and limited labor. Earns complexity, though the conclusion is brief.\n\nSample response, middle score (4/7; Thesis/claim 1, Contextualization 1, Evidence from the documents 1, Evidence beyond the documents 1, Sourcing (point of view, purpose, situation, audience) 0, Complex understanding 0):\nThe labor movement grew between 1877 and 1900 mainly because industrial wage work created shared grievances like low pay and wage cuts, but it had limited success mainly because employers had the help of the government and troops, while divisions among workers made this problem worse.\n\nAfter the Civil War the United States industrialized very quickly. Railroads spread across the country, big corporations such as steel companies grew, and millions of farmers and immigrants moved into factories and mines. Depressions like the Panic of 1873 led to wage cuts, and these conditions pushed workers to organize in the years after 1877.\n\nDocument 1 shows why workers organized. The railroad fireman writes that wages were cut for the second time since the panic and that a fireman could not pay rent and buy flour in the same month. The workers refused to take the trains out, and townspeople like shopkeepers and miners' wives joined them. This shows that anger over pay was a big reason the labor movement grew, and it spread beyond just the workers. Document 2 shows how the movement grew in an organized way. The Knights of Labor circular says it welcomes workers of any trade, religion, or race, and it asks for the eight-hour day and an end to child labor. It says the order grew by many thousands after the railroad victory. So one reason for growth was that the Knights tried to bring all workers together instead of only skilled ones.\n\nHowever, the movement was held back. In Document 1 the governor sends soldiers and the fireman worries he will lose his job, so the government sided against the strikers. Document 6, by historian Ruth Tellander, agrees. She says workers were militant but could not outlast employers and the state, because governors sent militia, presidents sent troops, and judges issued injunctions. She also says workers were split by skill, language, race, and religion. I think government power was the most important limit, because even when workers were united in a town like in Document 1, soldiers could end the strike. The divisions were also important, but they were less important than the power of the state.\n\nIn conclusion, industrial grievances and organizing groups like the Knights caused the labor movement to grow, but the use of troops and courts against workers, along with divisions among workers, kept it from being very successful by 1900. One example is the Pullman Strike of 1894, when federal troops and a court injunction were used against Eugene Debs and the American Railway Union and the strike was broken.\n   - \"mainly because industrial wage work created shared grievances like low pay and wage cuts, but it had limited success mainly because employers had the help of the government and troops\" - Defensible thesis that weighs both growth and limiting factors and ranks government power first. Earns the thesis point.\n   - \"After the Civil War the United States industrialized very quickly.\" - Describes industrialization, railroads, immigration and depression, but the treatment is brief and only loosely tied to the argument, so context is weak.\n   - \"The railroad fireman writes that wages were cut for the second time since the panic\" - Accurately describes Document 1 and links it to why the movement grew. This is one of exactly three documents used (1, 2, 6), enough for one document point but not the second.\n   - \"It says the order grew by many thousands after the railroad victory.\" - Accurate summary of Document 2 used for growth. Documents are only described, not analyzed, and only three are used, so no second evidence point.\n   - \"One example is the Pullman Strike of 1894, when federal troops and a court injunction were used against Eugene Debs\" - Accurate specific outside evidence (Pullman, Debs, injunction) that supports the argument about government power.\n   - \"Document 6, by historian Ruth Tellander, agrees.\" - Only names the author. It does not explain why a historian's hindsight or purpose matters, so no sourcing credit.\n   - \"The divisions were also important, but they were less important than the power of the state.\" - Ranks factors but does not explain nuance or how one factor both helped and hurt labor, so no complexity credit.\n\nSample response, low score (3/7; Thesis/claim 0, Contextualization 1, Evidence from the documents 2, Evidence beyond the documents 0, Sourcing (point of view, purpose, situation, audience) 0, Complex understanding 0):\nThe labor movement between 1877 and 1900 grew for many reasons and it also faced many problems. Workers had a lot of reasons to organize, but employers and other things made it hard for unions to succeed. In this essay I will talk about the factors that helped the labor movement grow and the factors that limited it.\n\nAfter the Civil War the United States changed a lot. Factories and railroads got bigger and many people came from other countries to work in them. Workers were not paid well and many of them were unhappy, so they started to form groups.\n\nDocument 1 shows a railroad fireman whose wages were cut two times. The workers in his town refused to take the trains out and the whole town cheered for them. But then soldiers came in and the papers called the workers a mob. This shows that workers wanted to organize because of low wages but the government sent troops against them. Document 2 is a Knights of Labor circular that says everyone is welcome no matter their trade or race. It says they want an eight hour day. This shows why the Knights grew, because they let in many kinds of workers.\n\nDocument 3 is an editorial about Haymarket. It says that foreign born orators are dangerous and employers should fire anyone who marches with agitators. This shows that business people were against unions and blamed them for violence. Document 5 shows a steel mill owner who hired guards and new immigrants when the union refused his pay rate. So employers could replace strikers easily, which limited the unions.\n\nDocument 4 says the craft unions had higher dues and a strike fund, and only let in skilled workers. Document 7 shows that the number of strikes went up in 1886 to 1890 and many of them failed, but more of them were ordered by unions over time.\n\nIn conclusion, the labor movement grew because of bad conditions in industry, but it was limited because employers and the government were stronger than the workers.\n   - \"Workers had a lot of reasons to organize, but employers and other things made it hard for unions to succeed.\" - Thesis only restates the prompt in general terms. It names growth and limits but does not rank or weigh factors or set up a line of reasoning, so no thesis point.\n   - \"Factories and railroads got bigger and many people came from other countries to work in them.\" - Context is a brief, general statement about industrialization and immigration. It is not developed (no panics, laissez-faire ideas, etc.) or tied to the argument, so it earns no credit.\n   - \"This shows that workers wanted to organize because of low wages but the government sent troops against them.\" - Accurately summarizes Document 1 and links it to growth and limits, but mostly paraphrases. Together with the accurate summaries of Documents 2, 3, 5, 4 and 7 it reaches the documents, but the argument about relative importance is thin, so it does not reach the full two points.\n   - \"So employers could replace strikers easily, which limited the unions.\" - Uses Document 5 for a limiting factor, but only restates its content without weighing it against other factors.\n   - \"This shows that business people were against unions and blamed them for violence.\" - Notes the business viewpoint but never explains why the newspaper's ownership or purpose affects how far it can be trusted. Identifying bias without explanation earns no sourcing credit.\n   - \"Document 7 shows that the number of strikes went up in 1886 to 1890 and many of them failed, but more of them were ordered by unions over time.\" - Reads the table trend correctly but does not explain it or connect it to the shift to craft unionism.\n   - \"In conclusion, the labor movement grew because of bad conditions in industry, but it was limited because employers and the government were stronger than the workers.\" - The conclusion repeats a simple two-sided claim with no outside evidence (such as Pullman, In re Debs, or Gompers) and no nuance about how factors interacted, so no outside evidence or complex understanding credit.",
    "ush_frq": {
     "schema_version": "ush-frq-1",
     "task_type": "dbq",
@@ -3137,6 +4074,58 @@
         "quote": "the same choice that made the AFL survive is also why so few workers were in unions by 1900",
         "comment": "Shows tension: craft unionism both strengthened and limited labor. Earns complexity, though the conclusion is brief.",
         "row_id": "complex understanding"
+       }
+      ]
+     },
+     {
+      "tier": "mid",
+      "target_total": 4,
+      "essay": "The labor movement grew between 1877 and 1900 mainly because industrial wage work created shared grievances like low pay and wage cuts, but it had limited success mainly because employers had the help of the government and troops, while divisions among workers made this problem worse.\n\nAfter the Civil War the United States industrialized very quickly. Railroads spread across the country, big corporations such as steel companies grew, and millions of farmers and immigrants moved into factories and mines. Depressions like the Panic of 1873 led to wage cuts, and these conditions pushed workers to organize in the years after 1877.\n\nDocument 1 shows why workers organized. The railroad fireman writes that wages were cut for the second time since the panic and that a fireman could not pay rent and buy flour in the same month. The workers refused to take the trains out, and townspeople like shopkeepers and miners' wives joined them. This shows that anger over pay was a big reason the labor movement grew, and it spread beyond just the workers. Document 2 shows how the movement grew in an organized way. The Knights of Labor circular says it welcomes workers of any trade, religion, or race, and it asks for the eight-hour day and an end to child labor. It says the order grew by many thousands after the railroad victory. So one reason for growth was that the Knights tried to bring all workers together instead of only skilled ones.\n\nHowever, the movement was held back. In Document 1 the governor sends soldiers and the fireman worries he will lose his job, so the government sided against the strikers. Document 6, by historian Ruth Tellander, agrees. She says workers were militant but could not outlast employers and the state, because governors sent militia, presidents sent troops, and judges issued injunctions. She also says workers were split by skill, language, race, and religion. I think government power was the most important limit, because even when workers were united in a town like in Document 1, soldiers could end the strike. The divisions were also important, but they were less important than the power of the state.\n\nIn conclusion, industrial grievances and organizing groups like the Knights caused the labor movement to grow, but the use of troops and courts against workers, along with divisions among workers, kept it from being very successful by 1900. One example is the Pullman Strike of 1894, when federal troops and a court injunction were used against Eugene Debs and the American Railway Union and the strike was broken.",
+      "word_count": 429,
+      "rubric_scores": {
+       "thesis": 1,
+       "context": 1,
+       "docs": 1,
+       "outside": 1,
+       "sourcing": 0,
+       "complexity": 0,
+       "total": 4
+      },
+      "annotations": [
+       {
+        "quote": "mainly because industrial wage work created shared grievances like low pay and wage cuts, but it had limited success mainly because employers had the help of the government and troops",
+        "comment": "Defensible thesis that weighs both growth and limiting factors and ranks government power first. Earns the thesis point.",
+        "row_id": "thesis"
+       },
+       {
+        "quote": "After the Civil War the United States industrialized very quickly.",
+        "comment": "Describes industrialization, railroads, immigration and depression, but the treatment is brief and only loosely tied to the argument, so context is weak.",
+        "row_id": "context"
+       },
+       {
+        "quote": "The railroad fireman writes that wages were cut for the second time since the panic",
+        "comment": "Accurately describes Document 1 and links it to why the movement grew. This is one of exactly three documents used (1, 2, 6), enough for one document point but not the second.",
+        "row_id": "doc_evidence"
+       },
+       {
+        "quote": "It says the order grew by many thousands after the railroad victory.",
+        "comment": "Accurate summary of Document 2 used for growth. Documents are only described, not analyzed, and only three are used, so no second evidence point.",
+        "row_id": "doc_evidence"
+       },
+       {
+        "quote": "One example is the Pullman Strike of 1894, when federal troops and a court injunction were used against Eugene Debs",
+        "comment": "Accurate specific outside evidence (Pullman, Debs, injunction) that supports the argument about government power.",
+        "row_id": "outside_evidence"
+       },
+       {
+        "quote": "Document 6, by historian Ruth Tellander, agrees.",
+        "comment": "Only names the author. It does not explain why a historian's hindsight or purpose matters, so no sourcing credit.",
+        "row_id": "sourcing"
+       },
+       {
+        "quote": "The divisions were also important, but they were less important than the power of the state.",
+        "comment": "Ranks factors but does not explain nuance or how one factor both helped and hurt labor, so no complexity credit.",
+        "row_id": "complexity"
        }
       ]
      },
@@ -3925,7 +4914,7 @@
   "structure": "frq_multipart",
   "archetype": "ushfrq_leq_3",
   "reviewState": "rejected",
-  "rejectionReason": "sample_mid_missing; sample_low_missing; sample_mid_no_consistent_candidate; sample_low_no_consistent_candidate",
+  "rejectionReason": "sample_mid_missing; sample_mid_no_consistent_candidate",
   "difficultyProvisional": null,
   "payload": {
    "archetype": "ushfrq_leq_3",
@@ -4115,6 +5104,46 @@
         "row_id": "analysis"
        }
       ]
+     },
+     {
+      "tier": "low",
+      "target_total": 2,
+      "essay": "Migration and immigration changed American society and politics a great deal between 1607 and 1865. People moving to America and across it affected the way people lived and worked and also caused many political conflicts. This essay will show that migration changed society and politics in many ways.\n\nIn the 1800s the United States was growing quickly. Many people were moving around and the country was changing, and this made migration an important part of the time period.\n\nOne way migration changed society was through the Irish who came in the 1840s. Many Irish immigrants came to the United States and they were often Catholic. Some Americans did not like them and this led to conflict in cities. Another example is the Chinese who came to California for the Gold Rush. They worked hard and many Americans did not welcome them either.\n\nMigration also changed politics. Enslaved Africans were brought to America and this caused arguments over slavery that lasted a long time. When people moved west, they argued about whether the new places would allow slavery. These arguments got bigger over time and made the country more divided.\n\nIn conclusion, migration and immigration changed America a lot because they changed who lived here and made people fight about politics. Without migration America would have been very different from 1607 to 1865.",
+      "word_count": 222,
+      "rubric_scores": {
+       "thesis": 0,
+       "context": 0,
+       "evidence": 1,
+       "analysis": 1,
+       "total": 2
+      },
+      "annotations": [
+       {
+        "quote": "Migration and immigration changed American society and politics a great deal between 1607 and 1865.",
+        "comment": "The thesis restates the prompt and gives no line of reasoning about areas of change or about continuity. No thesis credit.",
+        "row_id": "thesis"
+       },
+       {
+        "quote": "In the 1800s the United States was growing quickly. Many people were moving around and the country was changing",
+        "comment": "This is a vague general statement. It names no specific development such as the market revolution or the famine, and it is not tied to the argument. No contextualization credit.",
+        "row_id": "context"
+       },
+       {
+        "quote": "Many Irish immigrants came to the United States and they were often Catholic.",
+        "comment": "This is the one identifiable example, and it is general. The essay does not name nativism, the Know-Nothings, or the famine. The Chinese example is too thin to count as a second piece of specific evidence. No evidence credit.",
+        "row_id": "evidence"
+       },
+       {
+        "quote": "They worked hard and many Americans did not welcome them either.",
+        "comment": "The statement is general and has no specifics such as laws or dates. It does not support a claim about how much society changed.",
+        "row_id": "evidence"
+       },
+       {
+        "quote": "These arguments got bigger over time and made the country more divided.",
+        "comment": "The essay asserts change but does not explain the causal chain, for example how western migration led to the Kansas-Nebraska Act or the breakup of the party system. There is no continuity-and-change comparison and no qualification. The essay mostly lists and asserts, so no reasoning credit.",
+        "row_id": "analysis"
+       }
+      ]
      }
     ],
     "provenance": {
@@ -4301,14 +5330,127 @@
   "candidateKey": "ap_us_history-saq1_5-k0",
   "keywordCode": "5.1",
   "unitCode": "5",
-  "skillPrimary": "1.B",
+  "skillPrimary": "3.C",
   "structure": "frq_multipart",
   "archetype": "ushfrq_saq1_5",
-  "reviewState": "rejected",
-  "rejectionReason": "sample_high_words_230_not_45-220; sample_mid_words_245_not_30-200; sample_low_words_200_not_15-160",
-  "difficultyProvisional": null,
+  "reviewState": "auto_passed",
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
   "payload": {
    "archetype": "ushfrq_saq1_5",
+   "template": "saq1",
+   "topic": "5.1",
+   "extra_topics": [],
+   "skill": "3.C",
+   "representative_skill": "3.C",
+   "calculator": "na",
+   "title": "Interpreting the Legacy of Reconstruction, 1865-1877",
+   "set_intro": "ALTON-composed stimulus\nSource A (secondary source)\nHistorian Miriam Ashcombe on the constitutional legacy of Reconstruction\nMiriam Ashcombe, fictional historian, Charters of Citizenship: Law and Freedom after Appomattox, 2019 (ALTON-composed, in the style of a modern academic history of Reconstruction)\n\n\"Whatever its disappointments, Reconstruction rewrote the terms of American nationhood. In barely five years, Congress and the states abolished slavery, defined national citizenship by birth, promised every person the equal protection of the laws, and barred the states from denying the vote on account of race. These were not temporary measures tied to an army in the field. They were written into the Constitution itself, and they stayed there after Northern resolve weakened. Later generations of Black Americans and their allies returned to these clauses again and again. Reconstruction's most lasting achievement was to place in the nation's highest law a standard of equality that the country would one day be forced to honor.\"\n\n———\n\nSource B (secondary source)\nHistorian Tobias Wrenfield on the limits of Reconstruction\nTobias Wrenfield, fictional historian, The Receding Tide: Federal Power and the Southern Countryside, 2021 (ALTON-composed, in the style of a modern academic history of Reconstruction)\n\n\"To read Reconstruction mainly through its amendments is to mistake promise for practice. Rights on paper depended on federal willingness to defend them in Southern courthouses, at polling places, and on cotton plantations, and that willingness proved short-lived. By the mid-1870s, Northern voters had grown tired of Southern questions, Republican leaders were divided, and white Democrats had retaken one state government after another through fraud and intimidation. As federal enforcement faded, freedpeople were left to face landlords, sheriffs, and legislatures determined to hollow out their gains. For most Black Southerners, the decades that followed brought a narrowing of freedom, not equality.\"",
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "Briefly describe ONE major difference between Ashcombe's and Wrenfield's historical interpretations of the legacy of Reconstruction.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "3.C"
+     ],
+     "topic_codes": [
+      "5.1"
+     ],
+     "model_answer": "Ashcombe argues that Reconstruction's main legacy was permanent constitutional change, the Thirteenth, Fourteenth, and Fifteenth Amendments, that later generations could use. Wrenfield argues that those rights meant little in practice because federal enforcement soon ended.",
+     "rubric_rows": [
+      {
+       "row_id": "a",
+       "points": 1,
+       "criterion": "Describe one major difference: Ashcombe sees Reconstruction's legacy in permanent constitutional and legal change that served as a foundation for later equality; Wrenfield argues that rights on paper meant little without federal enforcement, which faded and allowed white Southern Democrats to reverse gains.",
+       "required_elements": [
+        "Ashcombe argues that Reconstruction's main legacy was permanent constitutional change, the Thirteenth, Fourteenth, and Fifteenth Amendments, that later generations could use. Wrenfield argues that those rights meant little in practice because federal enforcement soon ended.",
+        "Ashcombe treats the amendments as lasting even after Northern commitment declined. Wrenfield stresses that the decline in Northern commitment let white Southern Democrats undo Black Americans' gains.",
+        "Ashcombe looks at the long-run promise of equality, while Wrenfield looks at the lived experience of Black Southerners, which he describes as a narrowing of freedom."
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "Briefly explain how ONE specific historical event, development, or circumstance from the period 1865 to 1877 that is not explicitly mentioned in the excerpts could be used to support Ashcombe's interpretation.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "3.C"
+     ],
+     "topic_codes": [
+      "5.1"
+     ],
+     "model_answer": "The Civil Rights Act of 1866, passed over President Andrew Johnson's veto, defined Black Americans as citizens with equal rights to make contracts and own property. It shows Congress building a national, legal basis for citizenship.",
+     "rubric_rows": [
+      {
+       "row_id": "b",
+       "points": 1,
+       "criterion": "Explain how one specific piece of evidence from 1865-1877 not explicitly in the excerpts (for example the Civil Rights Act of 1866, the Enforcement Acts and Ku Klux Klan Act, election of Black officeholders such as Hiram Revels, Freedmen's Bureau schools, the Civil Rights Act of 1875) supports the argument that Reconstruction produced lasting legal and constitutional change.",
+       "required_elements": [
+        "The Civil Rights Act of 1866, passed over President Andrew Johnson's veto, defined Black Americans as citizens with equal rights to make contracts and own property. It shows Congress building a national, legal basis for citizenship.",
+        "The Enforcement Acts of 1870-1871, including the Ku Klux Klan Act, let the federal government prosecute people who violated Black citizens' rights, and they weakened the Klan in the early 1870s. This shows the new amendments being backed by national law.",
+        "Hiram Revels became the first Black U.S. senator in 1870, and hundreds of Black men held state and local offices. This shows that the Fourteenth and Fifteenth Amendments changed who could take part in government.",
+        "The Civil Rights Act of 1875 banned racial discrimination in public accommodations, which shows Congress trying to put a national standard of equality into law."
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "Briefly explain how ONE specific historical event, development, or circumstance from the period 1865 to 1877 that is not explicitly mentioned in the excerpts could be used to support Wrenfield's interpretation.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "3.C"
+     ],
+     "topic_codes": [
+      "5.1"
+     ],
+     "model_answer": "In the Slaughterhouse Cases (1873), the Supreme Court read the Fourteenth Amendment's privileges or immunities clause narrowly, which weakened federal protection of Black citizens' rights.",
+     "rubric_rows": [
+      {
+       "row_id": "c",
+       "points": 1,
+       "criterion": "Explain how one specific piece of evidence from 1865-1877 not explicitly in the excerpts (for example the Slaughterhouse Cases, United States v. Cruikshank, the Colfax Massacre, Ku Klux Klan or White League violence, the spread of sharecropping and crop liens, the Panic of 1873 shifting Northern attention, the Compromise of 1877) supports the argument that rights were limited or reversed as federal enforcement faded.",
+       "required_elements": [
+        "In the Slaughterhouse Cases (1873), the Supreme Court read the Fourteenth Amendment's privileges or immunities clause narrowly, which weakened federal protection of Black citizens' rights.",
+        "United States v. Cruikshank (1876) came out of the Colfax Massacre of 1873. The Court ruled that the Fourteenth Amendment limited only state action, which made it harder for the federal government to punish private violence against freedpeople.",
+        "Many freedpeople became sharecroppers bound by crop liens because they did not receive land. This kept them economically dependent on white landowners even though they were legally free.",
+        "The Panic of 1873 and the economic depression that followed turned Northern voters toward economic concerns. Democrats won the House in 1874, and support for enforcing Reconstruction declined.",
+        "In the Compromise of 1877, Rutherford B. Hayes became president and federal troops stopped propping up the last Republican governments in the South, which left Black Southerners without federal protection."
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ]
+    }
+   ],
+   "reference_text": "Scoring guide (ALTON practice rubric, not official College Board scoring). This question is worth 3 points.\nPart A (0-1): Describe one major difference: Ashcombe sees Reconstruction's legacy in permanent constitutional and legal change that served as a foundation for later equality; Wrenfield argues that rights on paper meant little without federal enforcement, which faded and allowed white Southern Democrats to reverse gains.\n   - 1: The response accurately describes one major difference between Ashcombe's emphasis on lasting constitutional change and Wrenfield's emphasis on weak enforcement and reversal.\n   - 0: The response does not accurately describe a difference between the two interpretations, or only summarizes one excerpt.\nPart B (0-1): Explain how one specific piece of evidence from 1865-1877 not explicitly in the excerpts (for example the Civil Rights Act of 1866, the Enforcement Acts and Ku Klux Klan Act, election of Black officeholders such as Hiram Revels, Freedmen's Bureau schools, the Civil Rights Act of 1875) supports the argument that Reconstruction produced lasting legal and constitutional change.\n   - 1: The response explains how one specific, accurate event or development from 1865-1877 supports Ashcombe's interpretation.\n   - 0: The response gives no relevant evidence, uses only what the excerpt states, or does not connect the evidence to Ashcombe's argument.\nPart C (0-1): Explain how one specific piece of evidence from 1865-1877 not explicitly in the excerpts (for example the Slaughterhouse Cases, United States v. Cruikshank, the Colfax Massacre, Ku Klux Klan or White League violence, the spread of sharecropping and crop liens, the Panic of 1873 shifting Northern attention, the Compromise of 1877) supports the argument that rights were limited or reversed as federal enforcement faded.\n   - 1: The response explains how one specific, accurate event or development from 1865-1877 supports Wrenfield's interpretation.\n   - 0: The response gives no relevant evidence, uses only what the excerpt states, or does not connect the evidence to Wrenfield's argument.\nNote: Each part is scored independently, 0 or 1 point.\nNote: For B and C, generic statements such as 'the amendments' or 'white Democrats took back states' only repeat the excerpts; credit needs a specific development and an explanation of how it supports the interpretation.\nNote: Naming a specific amendment (Thirteenth, Fourteenth, or Fifteenth) can earn credit in part B only if the response goes beyond the excerpt, for example by explaining a specific clause's later use or the Fourteenth Amendment's ratification as a condition of readmission.\nNote: Evidence from slightly after 1877 (such as the Civil Rights Cases of 1883 or Plessy v. Ferguson in 1896) falls outside the stated years and should not earn credit for B or C.\nAcceptable answers for A: Ashcombe argues that Reconstruction's main legacy was permanent constitutional change, the Thirteenth, Fourteenth, and Fifteenth Amendments, that later generations could use. Wrenfield argues that those rights meant little in practice because federal enforcement soon ended. / Ashcombe treats the amendments as lasting even after Northern commitment declined. Wrenfield stresses that the decline in Northern commitment let white Southern Democrats undo Black Americans' gains. / Ashcombe looks at the long-run promise of equality, while Wrenfield looks at the lived experience of Black Southerners, which he describes as a narrowing of freedom.\nAcceptable answers for B: The Civil Rights Act of 1866, passed over President Andrew Johnson's veto, defined Black Americans as citizens with equal rights to make contracts and own property. It shows Congress building a national, legal basis for citizenship. / The Enforcement Acts of 1870-1871, including the Ku Klux Klan Act, let the federal government prosecute people who violated Black citizens' rights, and they weakened the Klan in the early 1870s. This shows the new amendments being backed by national law. / Hiram Revels became the first Black U.S. senator in 1870, and hundreds of Black men held state and local offices. This shows that the Fourteenth and Fifteenth Amendments changed who could take part in government. / The Civil Rights Act of 1875 banned racial discrimination in public accommodations, which shows Congress trying to put a national standard of equality into law.\nAcceptable answers for C: In the Slaughterhouse Cases (1873), the Supreme Court read the Fourteenth Amendment's privileges or immunities clause narrowly, which weakened federal protection of Black citizens' rights. / United States v. Cruikshank (1876) came out of the Colfax Massacre of 1873. The Court ruled that the Fourteenth Amendment limited only state action, which made it harder for the federal government to punish private violence against freedpeople. / Many freedpeople became sharecroppers bound by crop liens because they did not receive land. This kept them economically dependent on white landowners even though they were legally free. / The Panic of 1873 and the economic depression that followed turned Northern voters toward economic concerns. Democrats won the House in 1874, and support for enforcing Reconstruction declined. / In the Compromise of 1877, Rutherford B. Hayes became president and federal troops stopped propping up the last Republican governments in the South, which left Black Southerners without federal protection.\n\nSample response, high score (3/3; Part A 1, Part B 1, Part C 1):\n(A) Ashcombe argues that Reconstruction's main legacy was permanent, because the Thirteenth, Fourteenth, and Fifteenth Amendments put equality into the Constitution, where later generations could use them. Wrenfield argues that those rights on paper meant little in practice, because federal enforcement faded by the mid-1870s and white Southern Democrats were able to strip freedpeople of their gains. So Ashcombe focuses on lasting legal change, while Wrenfield focuses on the failure to enforce it.\n\n(B) The Civil Rights Act of 1866 supports Ashcombe's interpretation. Congress passed it over President Andrew Johnson's veto, and it declared Black Americans citizens with the right to make contracts, own property, and sue in court. Republicans then wrote the Fourteenth Amendment partly so a later Congress or the courts could not undo those protections. That shows Reconstruction leaders were deliberately turning rights into permanent national law, which is the lasting achievement Ashcombe describes.\n\n(C) The Supreme Court's decision in United States v. Cruikshank (1876) supports Wrenfield's interpretation. After the Colfax Massacre in Louisiana in 1873, where a white mob killed dozens of Black men, federal prosecutors charged some of the attackers under the Enforcement Act. The Court overturned the convictions, ruling that the Fourteenth Amendment only restricted state governments and not private individuals. This left Black Southerners to rely on hostile local officials for protection, showing that rights on paper failed once federal enforcement was weakened.\n   - \"So Ashcombe focuses on lasting legal change, while Wrenfield focuses on the failure to enforce it.\" - Earns the point: states a direct contrast between constitutional permanence and weak enforcement/reversal, covering both historians instead of summarizing just one.\n   - \"The Civil Rights Act of 1866 supports Ashcombe's interpretation.\" - Specific, accurate evidence from 1865-1877 that the excerpt does not mention.\n   - \"Reconstruction leaders were deliberately turning rights into permanent national law\" - Earns the point: explains how the evidence supports Ashcombe's claim about lasting legal and constitutional change, so it does more than name a law.\n   - \"United States v. Cruikshank (1876)\" - Specific, accurate evidence inside the time period, with accurate context (Colfax Massacre, Enforcement Act).\n   - \"showing that rights on paper failed once federal enforcement was weakened\" - Earns the point: ties the ruling directly to Wrenfield's argument that rights depended on federal enforcement.\n\nSample response, middle score (2/3; Part A 1, Part B 1, Part C 0):\n(A) One major difference is that Ashcombe thinks the biggest legacy of Reconstruction was the permanent changes to the Constitution, which gave later generations a standard of equality to point back to. Wrenfield thinks those rights on paper did not mean much because the federal government stopped enforcing them, so Black Southerners ended up with less freedom instead of equality.\n\n(B) The Civil Rights Act of 1866 could be used to support Ashcombe. Congress passed it over Andrew Johnson's veto, and it said that people born in the United States were citizens with equal rights to make contracts, own property, and use the courts. This supports Ashcombe because it was an early statement of national citizenship and equal legal rights that Congress then put into the Fourteenth Amendment so it could not easily be repealed. Because the idea of citizenship by birth and equal legal treatment stayed in the law after Reconstruction ended, later groups could use it to demand equality, which is what Ashcombe argues was the lasting achievement.\n\n(C) Wrenfield's argument can be supported by the fact that violence against Black people happened a lot in the South during the 1870s and the government did not do enough to stop it. Groups used violence and scared Black voters, so they could not use their rights even though the laws said they could. This shows that rights on paper did not matter without enforcement, which is what Wrenfield says about the decline of Reconstruction.\n   - \"Ashcombe thinks the biggest legacy of Reconstruction was the permanent changes to the Constitution\" - Accurately identifies Ashcombe's emphasis on lasting constitutional change as a foundation for later equality.\n   - \"The Civil Rights Act of 1866 could be used to support Ashcombe.\" - Names a specific, accurate event from 1865-1877 that is not in the excerpt.\n   - \"Congress then put into the Fourteenth Amendment so it could not easily be repealed\" - Explains the link: the law's citizenship and equal-rights principles were later constitutionalized and endured, supporting Ashcombe's argument about lasting legal change. This earns the point.\n   - \"violence against Black people happened a lot in the South during the 1870s\" - Too vague. It names no specific development such as the Colfax Massacre, the Klan, Cruikshank, or sharecropping, so it only echoes the excerpt's mention of fraud and intimidation.\n   - \"This shows that rights on paper did not matter without enforcement, which is what Wrenfield says\" - Restates Wrenfield's claim instead of explaining how specific evidence supports it. No credit for C.\n\nSample response, low score (1/3; Part A 0, Part B 0, Part C 1):\n(A) Ashcombe and Wrenfield disagree about Reconstruction. Ashcombe thinks Reconstruction was a good thing because of the amendments, and Wrenfield thinks it did not work out as well and was not as successful for Black people in the South.\n\n(B) The Fourteenth Amendment and the Fifteenth Amendment support Ashcombe's interpretation. These amendments gave citizenship and equal protection and said states could not deny the vote because of race. This shows that Reconstruction changed the Constitution in a lasting way, which is what Ashcombe says.\n\n(C) The Colfax Massacre in Louisiana in 1873 supports Wrenfield's interpretation. After a disputed election for local offices, a white mob attacked Black men who were defending the courthouse in Colfax, and many of them were killed. When some of the attackers were prosecuted under the Enforcement Acts, the Supreme Court in United States v. Cruikshank (1876) threw out the convictions, saying the federal government could only act against states and not against private individuals. This shows that rights on paper were not protected in practice, because federal enforcement was weakened and white attackers were not punished. That fits Wrenfield's point that freedpeople were left to face violence once the federal government stopped defending their rights.\n   - \"Ashcombe thinks Reconstruction was a good thing because of the amendments, and Wrenfield thinks it did not work out as well\" - Too general. It says one historian is positive and the other negative, but never identifies Ashcombe's argument about lasting constitutional change as a foundation for later equality, or Wrenfield's argument about weak federal enforcement and reversal. No credit.\n   - \"The Fourteenth Amendment and the Fifteenth Amendment support Ashcombe's interpretation.\" - The excerpt already names citizenship, equal protection and the vote. Naming the amendments only repeats the source and does not go beyond it, for example by explaining the Fourteenth Amendment's ratification as a condition of readmission or later use of its clauses. No credit.\n   - \"This shows that Reconstruction changed the Constitution in a lasting way, which is what Ashcombe says.\" - This restates Ashcombe's claim instead of explaining how a specific outside development supports it, so the connection is missing.\n   - \"The Colfax Massacre in Louisiana in 1873 supports Wrenfield's interpretation.\" - Names a specific, accurate event from 1865-1877 that is not in the excerpt. This is the kind of evidence Part C requires.\n   - \"the Supreme Court in United States v. Cruikshank (1876) threw out the convictions, saying the federal government could only act against states and not against private individuals\" - Accurate detail that shows weakened federal enforcement and explains the link to Wrenfield's argument that rights on paper were not protected. Earns the point.",
    "ush_frq": {
     "schema_version": "ush-frq-1",
     "task_type": "saq",

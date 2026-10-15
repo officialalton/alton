@@ -12,7 +12,7 @@ import { planUshSets, planSummaryUsh, type UshSetSpec, type PlanCfg } from "../.
 import * as P from "../../lib/ap-generation/ushistory-prompts";
 import { balancedKeyPositions, placeKey, keyPositionViolations, quoteInPassage, type CorpusDoc, type SolverVote } from "../../lib/ap-generation/englang-gates";
 import { itemViolations, setViolations, ushStimulusDisplay, ushPassagePlain, ushSimilarity, tableMarkdown, type UshSetRaw, type UshItemRaw, type UshSource } from "../../lib/ap-generation/ushistory-gates";
-import { USH_FRQ_SCHEMA_VERSION, USH_RUBRIC_ID, USH_RUBRIC_ROWS, USH_SAMPLE_TARGET, taskOf, frqPassageDisplay, frqTaskText, frqViolations, frqReferenceText, sourcesText, noDollar, type UshFrqPayload, type UshSample } from "../../lib/ap-generation/ushistory-frq";
+import { USH_FRQ_SCHEMA_VERSION, USH_RUBRIC_ID, USH_RUBRIC_ROWS, USH_SAMPLE_BAND, USH_SAMPLE_TARGET, taskOf, frqPassageDisplay, frqTaskText, frqViolations, frqReferenceText, sourcesText, noDollar, type UshFrqPayload, type UshSample } from "../../lib/ap-generation/ushistory-frq";
 import { USH_PERIODS } from "../../lib/ap-generation/subjects/ushistory";
 import { ushUnitOfTopic } from "../../lib/ap-exam/ush-rules";
 
@@ -288,7 +288,7 @@ function frqFinalizeStage() {
         const sc: Record<string, number> = {}; for (const r of rows) sc[r.row_id] = Math.min(r.max, Math.max(0, median(gs.map((x) => Number(x[r.row_id]))))); const tot = Object.values(sc).reduce((a, b) => a + b, 0); const totals = gs.map((x) => rows.reduce((a, r) => a + Number(x[r.row_id] ?? 0), 0)); const spread = Math.max(...totals) - Math.min(...totals);
         const fl = ((f2[`fs-${f.id}-${tier}-${k}`]?.flags ?? []) as Json[]).filter((x) => BAD_FLAG.test(String(x.kind)));
         return { k, s, sc, tot, spread, dist: Math.abs(tot - USH_SAMPLE_TARGET[task][tier]), flagged: fl.length > 0, fl }; }).filter(Boolean) as { k: number; s: Json; sc: Record<string, number>; tot: number; spread: number; dist: number; flagged: boolean; fl: Json[] }[];
-      const ok = opts.filter((o) => o.dist <= 1 && o.spread <= (task === "saq" ? 1 : 2) && !o.flagged).sort((a, b) => a.dist - b.dist || a.spread - b.spread)[0];
+      const ok = opts.filter((o) => o.tot >= USH_SAMPLE_BAND[task][tier][0] && o.tot <= USH_SAMPLE_BAND[task][tier][1] && o.spread <= (task === "saq" ? 1 : 2) && !o.flagged).sort((a, b) => a.dist - b.dist || a.spread - b.spread)[0];
       audit.push({ id: f.id, tier, options: opts.map((o) => ({ k: o.k, total: o.tot, spread: o.spread, flagged: o.flagged, flags: o.fl })), chosen: ok?.k ?? null });
       if (!ok) { why.push(`sample_${tier}_no_consistent_candidate`); continue; }
       const text = noDollar(String(ok.s.essay)).trim();

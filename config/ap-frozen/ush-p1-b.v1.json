@@ -1,5 +1,5 @@
 {
- "version": "v1-ush-p1-b",
+ "version": "v1-ush-p1-b2",
  "run": "ush-p1-b",
  "subject": "ap_us_history",
  "mode": "frq",
@@ -39,7 +39,7 @@
   "lib/ap-exam/ush-rules.ts"
  ],
  "expected": {
-  "hash": "b38e39da8156"
+  "hash": "9d7ef28f02cb"
  },
  "frqPlan": [
   {
@@ -165,7 +165,8 @@
  "sampleCands": 3,
  "resample": {
   "saq1_3": [
-   "low"
+   "low",
+   "mid"
   ],
   "saq2_2": [
    "low"

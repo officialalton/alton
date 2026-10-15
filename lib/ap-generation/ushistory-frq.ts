@@ -35,6 +35,8 @@ const SAMPLE_WORDS: Record<UshFrqTask, Record<string, [number, number]>> = {
   dbq: { high: [480, 950], mid: [300, 650], low: [110, 380] },
   leq: { high: [430, 850], mid: [270, 560], low: [90, 320] },
 };
+/** 샘플이 속해야 하는 점수 대역(독립 채점기 행별 중앙값의 총점). 점수 이산성이 큰 SAQ 는 정확히 3/2/1, DBQ·LEQ 는 상/중/하 대역(English 와 같은 방식). */
+export const USH_SAMPLE_BAND: Record<UshFrqTask, Record<"high" | "mid" | "low", [number, number]>> = { saq: { high: [3, 3], mid: [2, 2], low: [1, 1] }, dbq: { high: [5, 7], mid: [3, 5], low: [1, 3] }, leq: { high: [5, 6], mid: [3, 5], low: [1, 3] } };
 export const USH_SAMPLE_TARGET: Record<UshFrqTask, Record<"high" | "mid" | "low", number>> = { saq: { high: 3, mid: 2, low: 1 }, dbq: { high: 6, mid: 4, low: 2 }, leq: { high: 5, mid: 3, low: 1 } };
 export const sourcesText = (p: Pick<UshFrqPayload, "sources">): string => p.sources.map(sourceBody).join("\n\n");
 
@@ -124,7 +126,7 @@ export function frqViolations(p: UshFrqPayload, corpus: { id: string; text: stri
     if (Math.abs(w - s.word_count) > 3) v.push(`sample_${t}_word_count_field`);
     const rs = s.rubric_scores; const sum = want.reduce((a, r) => a + (rs?.[r.row_id] ?? 0), 0);
     if (!rs || want.some((r) => !(rs[r.row_id] >= 0 && rs[r.row_id] <= r.max)) || sum !== rs.total) v.push(`sample_${t}_rubric_scores_invalid`);
-    else if (Math.abs(rs.total - USH_SAMPLE_TARGET[task][t]) > 1) v.push(`sample_${t}_total_${rs.total}_far_from_${USH_SAMPLE_TARGET[task][t]}`);
+    else if (rs.total < USH_SAMPLE_BAND[task][t][0] || rs.total > USH_SAMPLE_BAND[task][t][1]) v.push(`sample_${t}_total_${rs.total}_outside_band_${USH_SAMPLE_BAND[task][t].join("-")}`);
     if (s.annotations.length < (task === "saq" ? 2 : 3)) v.push(`sample_${t}_annotations_few`);
     for (const a of s.annotations) { if (!quoteInPassage(a.quote, s.essay)) v.push(`sample_${t}_annotation_quote_not_in_essay`); if (!a.comment?.trim()) v.push(`sample_${t}_annotation_comment_empty`); }
     const src = sourcesText(p); if (src && longestSharedRun(s.essay, src) > 24) v.push(`sample_${t}_copies_source`);

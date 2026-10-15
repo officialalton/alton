@@ -14,6 +14,18 @@
    }
   ]
  },
+ "fs-saq1_3-low-1": {
+  "flags": [
+   {
+    "where": "Student sample response, part (B): \"It gave out loans and helped people buy houses\"",
+    "kind": "inaccurate",
+    "detail": "The federal government did not generally 'give out' home loans directly. The FHA (1934) and the VA under the 1944 GI Bill insured or guaranteed mortgages issued by private lenders, which lowered down payments and interest rates. Since the material states the low-tier sample's historical claims should be accurate, this characterization of the mechanism is imprecise to the point of being misleading; it should say the government insured/guaranteed mortgages (e.g., through the FHA and the GI Bill's VA loan program)."
+   }
+  ]
+ },
+ "fs-saq1_3-low-2": {
+  "flags": []
+ },
  "fs-saq2_1-high-0": {
   "flags": [
    {
@@ -22,6 +34,12 @@
     "detail": "The sequence is off. Ohio authorized its canal program in February 1825 and broke ground on the Ohio and Erie Canal on July 4, 1825, several months BEFORE the Erie Canal was completed (October 1825). Ohio was responding to the Erie's partial openings and expected success, not to its completion. The rest of the response (Specie Circular 1836, Panic of 1837, depression into the early 1840s, Cleveland's canal-driven growth) is accurate."
    }
   ]
+ },
+ "fs-saq2_1-high-1": {
+  "flags": []
+ },
+ "fs-saq2_1-high-2": {
+  "flags": []
  },
  "fs-saq2_1-mid-0": {
   "flags": []
@@ -34,6 +52,12 @@
     "detail": "The response implies that 'the government' (in context, the national government behind Henry Clay's internal-improvements program) caused the Ohio canal to be built. In fact, federal funding for canals was largely blocked in this period (Madison's 1817 Bonus Bill veto, Jackson's 1830 Maysville Road veto), and Ohio's canals (Ohio & Erie, Miami & Erie, begun 1825) were financed and built by the state of Ohio, following New York's state-funded Erie Canal model. The causal link as stated is misleading; a sound answer would credit state-level initiative/the Erie Canal's success rather than Clay's federal program."
    }
   ]
+ },
+ "fs-saq2_1-low-1": {
+  "flags": []
+ },
+ "fs-saq2_1-low-2": {
+  "flags": []
  },
  "fs-saq2_2-high-0": {
   "flags": []
@@ -59,6 +83,12 @@
     "detail": "The prompt instructs students to 'read the excerpt' and the sample response quotes specific claims from it (wages compared to housecleaning, initial rejection, hiring after the government order), but no letter text is included in the material. The excerpt should be supplied so the sample response's references can be verified against it."
    }
   ]
+ },
+ "fs-saq2_2-low-1": {
+  "flags": []
+ },
+ "fs-saq2_2-low-2": {
+  "flags": []
  },
  "fs-saq2_3-high-0": {
   "flags": []
@@ -86,6 +116,39 @@
    }
   ]
  },
+ "fs-saq2_3-low-1": {
+  "flags": [
+   {
+    "where": "Student sample response, part (C)",
+    "kind": "inaccurate",
+    "detail": "The response states that 'the Antifederalists won and the Constitution was thrown out and the states went back to being separate' in the 1790s. This is false: the Constitution was ratified (effective 1788–1789) and remained in force; the Antifederalists lost the ratification contest, though their arguments contributed to the adoption of the Bill of Rights (1791) and to the emergence of the Democratic-Republican opposition. Even a low-tier sample response should not contain a fabricated historical outcome; its weakness should come from vagueness, not from asserting events that never happened."
+   }
+  ]
+ },
+ "fs-saq2_3-low-2": {
+  "flags": [
+   {
+    "where": "Sample response (C): 'the Bill of Rights was passed in 1830'",
+    "kind": "inaccurate",
+    "detail": "The Bill of Rights was proposed by Congress in 1789 and ratified in 1791, not 1830. Also contradicts the 1788–1800 timeframe of the question."
+   },
+   {
+    "where": "Sample response (C): 'made the United States change a lot in the 1800s'",
+    "kind": "inaccurate",
+    "detail": "The question asks about 1788–1800; the response misplaces the effect in the 1800s, inconsistent with the actual chronology of Antifederalist influence (Bill of Rights, 1789–1791)."
+   },
+   {
+    "where": "Sample response (C): 'after that the Constitution was accepted by everyone and there was no more arguing about it'",
+    "kind": "inaccurate",
+    "detail": "Debate over the Constitution's meaning continued throughout the 1790s (Hamilton–Jefferson disputes over the national bank and strict vs. loose construction, Alien and Sedition Acts, Virginia and Kentucky Resolutions). Antifederalist concerns also fed into the Democratic-Republican opposition."
+   },
+   {
+    "where": "Prompt: 'The following excerpt comes from a pamphlet...'",
+    "kind": "other",
+    "detail": "No document excerpt is actually included in the material; the prompt refers to an excerpt that is absent, so parts (A) and the sample response cannot be checked against a source text."
+   }
+  ]
+ },
  "fs-saq3_1-high-0": {
   "flags": []
  },
@@ -107,6 +170,18 @@
  "fs-saq3_3-mid-0": {
   "flags": []
  },
+ "fs-saq3_3-mid-1": {
+  "flags": []
+ },
+ "fs-saq3_3-mid-2": {
+  "flags": [
+   {
+    "where": "Prompt / table reference",
+    "kind": "other",
+    "detail": "The prompt and the sample response both rely on a data table (population, farms, railroad miles, nativity for Wheatley County, 1870–1900), but no table is included in the material. The specific figures cited in the sample response (410 people in 1870, 18,200 in 1890; 30 to 2,410 farms) therefore cannot be checked for consistency with the source document. The historical content of parts (B) and (C) — Homestead Act as a settlement driver, railroad rate grievances (especially on single-line routes), falling crop prices in the 1880s–90s amid farm debt, Grange → Farmers' Alliances → Populist Party (1892 national nominating convention), and demands for railroad regulation and currency expansion — is accurate for APUSH purposes."
+   }
+  ]
+ },
  "fs-saq3_3-low-0": {
   "flags": [
    {
@@ -121,19 +196,49 @@
    }
   ]
  },
+ "fs-saq3_3-low-1": {
+  "flags": []
+ },
+ "fs-saq3_3-low-2": {
+  "flags": []
+ },
  "fs-dbq_1-high-0": {
   "flags": []
  },
  "fs-dbq_1-mid-0": {
   "flags": []
  },
+ "fs-dbq_1-mid-1": {
+  "flags": []
+ },
+ "fs-dbq_1-mid-2": {
+  "flags": [
+   {
+    "where": "Student sample response, paragraph 2: \"After the War of 1812 the country built canals and began using steamboats\"",
+    "kind": "inaccurate",
+    "detail": "Steamboat use in the United States predates the War of 1812: Fulton's Clermont ran commercially on the Hudson in 1807 and the New Orleans descended the Ohio-Mississippi in 1811. Steamboat traffic expanded greatly after 1815, but the country did not 'begin' using steamboats then. Minor, but the claim as phrased is inaccurate."
+   }
+  ]
+ },
  "fs-dbq_1-low-0": {
+  "flags": []
+ },
+ "fs-dbq_1-low-1": {
+  "flags": []
+ },
+ "fs-dbq_1-low-2": {
   "flags": []
  },
  "fs-dbq_2-high-0": {
   "flags": []
  },
  "fs-dbq_2-mid-0": {
+  "flags": []
+ },
+ "fs-dbq_2-mid-1": {
+  "flags": []
+ },
+ "fs-dbq_2-mid-2": {
   "flags": []
  },
  "fs-dbq_2-low-0": {
@@ -166,7 +271,25 @@
  "fs-leq_1-mid-0": {
   "flags": []
  },
+ "fs-leq_1-mid-1": {
+  "flags": []
+ },
+ "fs-leq_1-mid-2": {
+  "flags": []
+ },
  "fs-leq_1-low-0": {
+  "flags": []
+ },
+ "fs-leq_1-low-1": {
+  "flags": [
+   {
+    "where": "Student sample response, paragraph 3: \"The southern states wanted to protect their rights and their way of life, so they left the Union.\"",
+    "kind": "unneutral",
+    "detail": "This frames secession in Lost Cause terms ('rights' and 'way of life') without mentioning slavery. The seceding states' own declarations of causes (e.g., South Carolina, Mississippi, Georgia, Texas) explicitly identified the protection of slavery as the reason for leaving the Union. Even in a deliberately weak sample, the historical claim should not present a euphemistic, contested framing as the explanation for secession; at minimum it should say the states seceded to protect slavery (which they described as their rights/way of life)."
+   }
+  ]
+ },
+ "fs-leq_1-low-2": {
   "flags": []
  },
  "fs-leq_3-high-0": {
@@ -175,7 +298,19 @@
  "fs-leq_3-mid-0": {
   "flags": []
  },
+ "fs-leq_3-mid-1": {
+  "flags": []
+ },
+ "fs-leq_3-mid-2": {
+  "flags": []
+ },
  "fs-leq_3-low-0": {
+  "flags": []
+ },
+ "fs-leq_3-low-1": {
+  "flags": []
+ },
+ "fs-leq_3-low-2": {
   "flags": []
  },
  "fs-saq1_5-high-0": {
