@@ -114,6 +114,20 @@ BIO_STAGES["bio_mc_all"] = sorted(n for n in BIO if n.startswith("bi_"))
 BIO_STAGES["bio_sets"] = sorted(n for n in BIO if n.startswith("bis_"))
 BIO_STAGES["bio_frq"] = sorted(BIO_FRQ)
 BIO_STAGES["bio_all"] = BIO_STAGES["bio_mc_all"] + BIO_STAGES["bio_sets"] + BIO_STAGES["bio_frq"]
+# 2026-10-14 AP Psychology: psych_p0_*.py 모듈을 두면 ps_ 접두 MC 원형·pss_ 접두 공유 세트(3문항) 원형·psf_ 접두 FRQ 원형과 STAGE_<이름> 목록이 자동 등록된다(psych_p1_mc …). 문항은 사람이 쓴 고정 문장 변형(+코드 계산 통계 원형)이다.
+_PS = [_il.import_module(_os.path.basename(f)[:-3]) for f in sorted(_glob.glob(_os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "psych_p0_*.py")))]
+PSYCH = {n: (getattr(m, n), "0") for m in _PS for n in dir(m) if n.startswith(("ps_", "pss_")) and callable(getattr(m, n)) and getattr(getattr(m, n), "__module__", "") == m.__name__}
+PSYCH_FRQ = {n: (getattr(m, n), "0") for m in _PS for n in dir(m) if n.startswith("psf_") and callable(getattr(m, n)) and getattr(getattr(m, n), "__module__", "") == m.__name__}
+PSYCH_STAGES = {}
+for _m in _PS:
+    for _n in dir(_m):
+        if _n.startswith("STAGE_"):
+            _k = "psych_" + _n[6:].lower()
+            PSYCH_STAGES[_k] = PSYCH_STAGES.get(_k, []) + [x for x in getattr(_m, _n) if x not in PSYCH_STAGES.get(_k, [])]
+PSYCH_STAGES["psych_mc_all"] = sorted(n for n in PSYCH if n.startswith("ps_"))
+PSYCH_STAGES["psych_sets"] = sorted(n for n in PSYCH if n.startswith("pss_"))
+PSYCH_STAGES["psych_frq"] = sorted(PSYCH_FRQ)
+PSYCH_STAGES["psych_all"] = PSYCH_STAGES["psych_mc_all"] + PSYCH_STAGES["psych_sets"] + PSYCH_STAGES["psych_frq"]
 GRAPH = {n: (getattr(m, n), "0") for m in GRAPH_MODS for n in dir(m) if n.startswith(("g_", "c_")) and callable(getattr(m, n)) and getattr(getattr(m, n), "__module__", "") == m.__name__}
 MC.update(GRAPH)
 GRAPH_STAGES = {}  # 단계별 목록(graph_s1_ab, graph_s1_bc …): calc_graph_stages.py 가 채운다
@@ -134,14 +148,14 @@ def sig(p):
     return hashlib.sha1(json.dumps([p.get("stem"), [o["text"] for o in p.get("options", [])], p.get("stimulus")], sort_keys=True).encode()).hexdigest()[:12]
 
 def batch(name, n, seed0):
-    fn = (MC.get(name) or STATS.get(name) or STATS_FRQ.get(name) or PHYS.get(name) or PHYS_FRQ.get(name) or CHEM.get(name) or CHEM_FRQ.get(name) or CSA.get(name) or CSA_FRQ.get(name) or MICRO.get(name) or MICRO_FRQ.get(name) or MACRO.get(name) or MACRO_FRQ.get(name) or BIO.get(name) or BIO_FRQ.get(name) or (FRQ.get(name),))[0]  # 통계 원형은 MC 사전(칼큘러스 회귀 테스트 대상)에 넣지 않는다
+    fn = (MC.get(name) or STATS.get(name) or STATS_FRQ.get(name) or PHYS.get(name) or PHYS_FRQ.get(name) or CHEM.get(name) or CHEM_FRQ.get(name) or CSA.get(name) or CSA_FRQ.get(name) or MICRO.get(name) or MICRO_FRQ.get(name) or MACRO.get(name) or MACRO_FRQ.get(name) or BIO.get(name) or BIO_FRQ.get(name) or PSYCH.get(name) or PSYCH_FRQ.get(name) or (FRQ.get(name),))[0]  # 통계 원형은 MC 사전(칼큘러스 회귀 테스트 대상)에 넣지 않는다
     out, seen, seed = [], set(), seed0
     while len(out) < n and seed < seed0 + 400:
         try:
             p = fn(random.Random(seed))
         except Exception:
             seed += 1; continue
-        k = sig(p) if "options" in p else hashlib.sha1(json.dumps(p["facts"]).encode()).hexdigest()[:12]
+        k = p.get("variant_id") or (sig(p) if "options" in p else hashlib.sha1(json.dumps(p["facts"]).encode()).hexdigest()[:12])
         if k not in seen:
             seen.add(k); p["seed"] = seed; p["pack_id"] = f"{name}-s{seed}"; out.append(p)
         seed += 1
@@ -157,6 +171,7 @@ if __name__ == "__main__":
         elif which.startswith("csa"): print(json.dumps({"mc": [n for n in CSA_STAGES.get(which, list(CSA)) if n in CSA], "frq": [n for n in CSA_STAGES.get(which, []) if n in CSA_FRQ]}))
         elif which.startswith("bio_"): print(json.dumps({"mc": [n for n in BIO_STAGES.get(which, list(BIO)) if n in BIO], "frq": [n for n in BIO_STAGES.get(which, []) if n in BIO_FRQ]}))
         elif which.startswith("micro_"): print(json.dumps({"mc": [n for n in MICRO_STAGES.get(which, list(MICRO)) if n in MICRO], "frq": [n for n in MICRO_STAGES.get(which, []) if n in MICRO_FRQ or n in FRQ]}))
+        elif which.startswith("psych_"): print(json.dumps({"mc": [n for n in PSYCH_STAGES.get(which, list(PSYCH)) if n in PSYCH], "frq": [n for n in PSYCH_STAGES.get(which, []) if n in PSYCH_FRQ]}))
         elif which.startswith("macro_"): print(json.dumps({"mc": [n for n in MACRO_STAGES.get(which, list(MACRO)) if n in MACRO], "frq": [n for n in MACRO_STAGES.get(which, []) if n in MACRO_FRQ]}))
         elif which.startswith("chem"): print(json.dumps({"mc": [n for n in CHEM_STAGES.get(which, list(CHEM)) if n in CHEM], "frq": [n for n in CHEM_STAGES.get(which, []) if n in CHEM_FRQ]}))
         elif which.startswith("phys"): print(json.dumps({"mc": [n for n in PHYS_STAGES.get(which, list(PHYS)) if n in PHYS], "frq": [n for n in PHYS_STAGES.get(which, []) if n in PHYS_FRQ]}))
@@ -211,6 +226,15 @@ if __name__ == "__main__":
             if not p: raise SystemExit(f"no pack for {n}")
             b = p["blueprint"]
             out.append({"id": p["archetype"], "topic": p["topic"], "skill": p["skill"], "calculator": "allowed", "stimulus": p["stimulus"]["kind"], "verifiedBy": [b["verification"]["independent_path"]], "misconceptions": [m["description"] for m in b["misconceptions"]], "bc": False})
+        print(json.dumps(out, indent=1))
+    elif cmd == "guide-psych":  # Psychology 원형의 가이드 항목(JSON): lib/ap-generation/subjects/psych-archetypes.json 의 원천. 세트는 문항마다 한 항목(<id>_q1..q3).
+        out = []
+        for n in PSYCH_STAGES["psych_mc_all"] + PSYCH_STAGES["psych_sets"]:
+            p = (batch(n, 1, 0) or [None])[0]
+            if not p: raise SystemExit(f"no pack for {n}")
+            for q in (p["items"] if "items" in p else [p]):
+                b = q["blueprint"]
+                out.append({"id": q["archetype"], "topic": q["topic"], "skill": q["skill"], "calculator": "na", "stimulus": (q.get("stimulus") or p["stimulus"])["kind"], "verifiedBy": [b["verification"]["independent_path"]], "misconceptions": [m["description"] for m in b["misconceptions"]], "bc": False})
         print(json.dumps(out, indent=1))
     elif cmd == "guide-chem":  # Chemistry 원형의 가이드 항목(JSON): lib/ap-generation/subjects/chem-archetypes.json 의 원천. 세트는 문항마다 한 항목.
         out = []
