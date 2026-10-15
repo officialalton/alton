@@ -92,8 +92,9 @@ export async function fetchLaunchGateReport(db: SupabaseClient): Promise<LaunchG
   if (error) throw new Error(error.message);
   const setRows: LaunchSetRow[] = (sets ?? []).map((s) => ({ id: s.id as string, name: s.name as string, status: s.status as string, label: (s.ap_label as string | null) ?? null, versionNo: (s.version_no as number | null) ?? null }));
   if (setRows.length === 0) return buildLaunchGateReport([], [], [], [], new Set());
-  const { data: its, error: ie } = await db.from("mock_exam_set_items").select("exam_set_id, section, position, problem_id").in("exam_set_id", setRows.map((s) => s.id));
-  if (ie) throw new Error(ie.message);
+  // 세트가 늘면 문항 행이 1000개를 넘는다(PostgREST 기본 상한) — 쪽 나눔 없이는 뒤쪽 세트가 '문항 없음'으로 잘린다. 안정적인 정렬(id)로 쪽을 나눈다.
+  const setIds = setRows.map((s) => s.id);
+  const its = await pageAll<{ exam_set_id: string; section: string; position: number; problem_id: string }>((a, b) => db.from("mock_exam_set_items").select("exam_set_id, section, position, problem_id").in("exam_set_id", setIds).order("id").range(a, b));
   const [links, status, ready, blockers] = await Promise.all([
     pageAll<{ problem_id: string; candidate_key: string }>((a, b) => db.from("ap_candidate_problems").select("problem_id, candidate_key").range(a, b)),
     pageAll<LaunchStatusRow>((a, b) => db.from("ap_item_review_status_v").select("candidate_key, release_tier, review_state, render_verified, screen_verified, review_env_ready, open_reports, open_defect_reports, open_blockers, defect_flags").range(a, b)),
