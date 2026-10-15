@@ -1,11 +1,16 @@
 {
- "at": "2026-10-15T01:39:34.716Z",
- "config": "v1-psych-p2-mc",
+ "at": "2026-10-15T04:00:21.282Z",
+ "config": "v9-bio-data-short",
  "mismatches": [
   {
    "field": "generatorHash",
-   "expected": "8198ce411d6b",
-   "actual": "7c06f0641050"
+   "expected": "tampered",
+   "actual": "412472ecdd74"
+  },
+  {
+   "field": "reviewerPromptHash",
+   "expected": "e2cfc88eb330",
+   "actual": "27a77ef5f491"
   }
  ]
 }

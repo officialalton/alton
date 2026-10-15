@@ -35,7 +35,7 @@ export function planPsychDraftSet(o: {
   // 위치 배정: 후보 순서대로, 공유 세트는 연속 3칸
   const comp: PsychSetItem[] = []; let pos = 1;
   for (const key of mcKeys) { const st = stockBy.get(key); if (!st) continue; for (const m of st.members) comp.push({ kind: "mc", unit: String(m.unit), skill: m.skill, candidateKey: st.shared ? key : null, position: pos++ }); }
-  for (const [i, key] of frqKeys.entries()) comp.push({ kind: "frq", unit: null, skill: null, candidateKey: key, position: i + 1 });
+  for (const [i, key] of frqKeys.entries()) comp.push({ kind: "frq", unit: null, skill: null, candidateKey: key, position: i + 1, frqType: stockBy.get(key)?.frqType });
   for (const v of verifyPsychFullComposition(comp)) problems.push(`독립 검증: ${v}`);
   const mcStock = mcKeys.map((k) => stockBy.get(k)).filter((c): c is PsychItem => !!c);
   const fams = mcStock.map((c) => c.fam); if (new Set(fams).size !== fams.length) problems.push("독립 검증: 세트 안 문항군(구조 look-alike) 중복");
