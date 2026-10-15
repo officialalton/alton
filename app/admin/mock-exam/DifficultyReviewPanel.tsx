@@ -1,5 +1,5 @@
-import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
 "use client";
+import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
 
 import { useCallback, useEffect, useState } from "react";
 import LearningText from "@/app/session/[id]/LearningText";

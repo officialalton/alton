@@ -1,5 +1,5 @@
-import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
 "use client";
+import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
 
 // M1 — 관리자 상담 운영 화면: 승인 대기 신청 수락/거절/시간변경, 오늘·주간·월간
 // 예정 상담 캘린더, 상담 결과 기록. (공용 상담 가능시간 관리는 2026-09-29 오너 규칙으로 제거 —
