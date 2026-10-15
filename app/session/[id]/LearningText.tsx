@@ -1,6 +1,8 @@
 "use client";
 
-import { memo } from "react";
+import { memo, useEffect, useId, useLayoutEffect, useMemo, useRef, useState } from "react";
+import { usePassageRefsRewrite, usePassageRefsStore } from "@/app/components/PassageRefs";
+import { numberPassage, parsePassage, rowStartsFromTops, showsNumber, type LayoutRows, type PassageBlockModel } from "@/lib/ap-exam/passage-layout";
 import { lineNumberLabels } from "@/lib/ap-exam/passage-lines";
 import { splitLearningBlocks, splitLearningContent, type ContentPart } from "@/lib/render-learning-content";
 
@@ -92,10 +94,24 @@ export function CodeBlock({ language, lines }: { language: string; lines: string
 
 /**
  * 줄 번호가 있는 문학 지문(AP English Literature, 2026-10-14): ```passage 펜스. 빈 줄(연·문단 사이)은 줄로 세지 않고 번호는 5줄마다만 표시한다(lib/ap-exam/passage-lines.ts).
- * 좁은 화면에서는 줄이 접힐 수 있어도 번호 열은 유지되고, 번호는 원문 줄의 첫 행에만 붙는다. 접힌 이어지는 행은 내어쓰기(hanging indent 1.5rem)로 들여써
- * '다른 줄'로 읽히지 않게 한다(2026-10-15: 시의 긴 줄·원문이 접어 둔 줄 배치 검증). 글자는 이스케이프된 텍스트로만 그린다.
+ * 시(원문 줄)는 줄마다 번호 열을 두고 긴 줄은 내어쓰기로 접는다(2026-10-15). 산문은 저장된 56자 접기를 문단으로 되돌려, 화면이 실제로 접은 행을 측정해 5행마다 번호를 붙인다
+ * (2026-10-15 반응형 줄 번호: lib/ap-exam/passage-layout.ts). 측정 전(서버 렌더·JS 없음·측정 불가)에는 기존 56자 줄 표시를 그대로 쓴다. 글자는 이스케이프된 텍스트로만 그린다.
  */
 export function PassageBlock({ lines }: { lines: string[] }) {
+  const blocks = useMemo(() => parsePassage(lines), [lines]);
+  const hasProse = blocks.some((b) => b.kind === "prose");
+  const [live, setLive] = useState(false);
+  const failed = useRef(false);
+  useIsoLayoutEffect(() => { if (hasProse && canMeasure() && !failed.current) setLive(true); else setLive(false); }, [hasProse, lines]);
+  if (!hasProse || !live) return <LegacyPassage lines={lines} />;
+  return <LivePassage blocks={blocks} onFail={() => { failed.current = true; setLive(false); }} />;
+}
+
+const useIsoLayoutEffect = typeof window !== "undefined" ? useLayoutEffect : useEffect;
+const canMeasure = () => typeof Range !== "undefined" && typeof Range.prototype.getClientRects === "function" && typeof document !== "undefined";
+const NUM_LINE_HEIGHT = 23.8; // 14px × leading 1.7
+
+function LegacyPassage({ lines }: { lines: string[] }) {
   const labels = lineNumberLabels(lines);
   return (
     <div data-testid="lit-passage" role="group" aria-label="Passage with line numbers" className="my-3 font-serif text-[14px] leading-[1.7] text-ink">
@@ -111,19 +127,79 @@ export function PassageBlock({ lines }: { lines: string[] }) {
   );
 }
 
+type Mark = { top: number; n: number };
+type Measured = { layout: LayoutRows; marks: Mark[]; legacy: Array<{ from: number; to: number }>; sig: string };
+
+/** 화면에 실제로 놓인 행을 읽는다: 산문은 단어마다 Range 상단 좌표로 행을 나누고, 번호는 문단 상단 + 행×줄높이에 둔다. 측정할 수 없으면 null. */
+function measurePassage(root: HTMLElement, blocks: PassageBlockModel[]): Measured | null {
+  const rootTop = root.getBoundingClientRect().top; const layout: LayoutRows = []; const pos: Array<number[]> = [];
+  for (let bi = 0; bi < blocks.length; bi++) {
+    const b = blocks[bi]; layout.push(null); pos.push([]);
+    if (b.kind === "blank") continue;
+    const el = root.querySelector<HTMLElement>(`[data-b="${bi}"]`); if (!el) return null;
+    const top = el.getBoundingClientRect().top - rootTop;
+    if (b.kind === "poem") { pos[bi] = [top]; continue; }
+    const node = el.firstChild; if (!node || node.nodeType !== 3) return null;
+    const lh = parseFloat(getComputedStyle(el).lineHeight) || NUM_LINE_HEIGHT; const tops: number[] = []; let off = 0; const r = document.createRange();
+    for (const w of b.words) {
+      r.setStart(node, off); r.setEnd(node, off + w.length); off += w.length + 1;
+      const rect = r.getClientRects()[0]; if (!rect || rect.height === 0) return null; tops.push(rect.top);
+    }
+    const starts = rowStartsFromTops(tops); layout[bi] = starts; pos[bi] = starts.map((_s, k) => top + k * lh);
+  }
+  const num = numberPassage(blocks, layout); const marks: Mark[] = [];
+  num.rows.forEach((rs, bi) => rs.forEach((n, k) => { if (showsNumber(n)) marks.push({ top: pos[bi][k], n }); }));
+  return { layout, marks, legacy: num.legacy, sig: marks.map((m) => `${Math.round(m.top)}:${m.n}`).join("|") + "#" + JSON.stringify(layout) };
+}
+
+function LivePassage({ blocks, onFail }: { blocks: PassageBlockModel[]; onFail: () => void }) {
+  const root = useRef<HTMLDivElement>(null);
+  const [m, setM] = useState<Measured | null>(null);
+  const store = usePassageRefsStore(); const id = useId();
+  const sig = useRef("");
+  useIsoLayoutEffect(() => {
+    const el = root.current; if (!el) return; let dead = false; let raf = 0;
+    const run = (first: boolean) => {
+      if (dead) return; const next = measurePassage(el, blocks);
+      if (!next) { if (first) onFail(); return; }
+      if (next.sig !== sig.current) { sig.current = next.sig; setM(next); }
+    };
+    run(true);
+    const ro = typeof ResizeObserver !== "undefined" ? new ResizeObserver(() => { cancelAnimationFrame(raf); raf = requestAnimationFrame(() => run(false)); }) : null;
+    ro?.observe(el);
+    void document.fonts?.ready.then(() => run(false));
+    return () => { dead = true; cancelAnimationFrame(raf); ro?.disconnect(); };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [blocks]);
+  useEffect(() => { if (!store || !m) return; store.register(id, m.legacy); return () => store.unregister(id); }, [store, id, m]);
+  return (
+    <div ref={root} data-testid="lit-passage" data-live="1" role="group" aria-label="Passage with line numbers" className="relative my-3 pl-8 font-serif text-[14px] leading-[1.7] text-ink">
+      {(m?.marks ?? []).map((k) => (
+        <span key={k.n} data-testid="passage-number" aria-hidden="true" className="pointer-events-none absolute left-0 w-6 select-none text-right font-sans text-[11px] text-grey-500" style={{ top: k.top, lineHeight: `${NUM_LINE_HEIGHT}px` }}>{k.n}</span>
+      ))}
+      {blocks.map((b, bi) =>
+        b.kind === "blank" ? <div key={bi} className="h-3" aria-hidden="true" />
+        : b.kind === "poem" ? <div key={bi} data-b={bi} data-testid="passage-line" className="whitespace-pre-wrap pl-6 -indent-6">{b.line}</div>
+        : <p key={bi} data-b={bi} data-testid="passage-para" className="m-0" style={{ textIndent: "1.5rem" }}>{b.words.join(" ")}</p>,
+      )}
+    </div>
+  );
+}
+
 /** 한 줄 미리보기용: 블록(표·목록) 없이 글+수식만 그린다(truncate 안에서 수식이 원문 `$...$` 로 보이지 않게). */
 export function InlineLearningText({ text }: { text: string }) {
   return <Inline parts={splitLearningContent(text)} />;
 }
 
 function Inline({ parts }: { parts: ContentPart[] }) {
+  const refs = usePassageRefsRewrite();
   return (
     <>
       {parts.map((part, i) => {
         if (part.kind === "text") {
           return (
             <span key={i} className="whitespace-pre-wrap">
-              {addThousandsSeparators(part.value)}
+              {refs(addThousandsSeparators(part.value))}
             </span>
           );
         }

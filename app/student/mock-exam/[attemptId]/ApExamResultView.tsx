@@ -16,6 +16,7 @@ import { apPassageForDisplay } from "@/lib/ap-exam/stimulus-display";
 import { autoMathExplanation } from "@/lib/ap-exam/explanation-math";
 import { breakOptionAnalysis } from "@/lib/mock-exam/explanation-format";
 import { parseFrqAnswer } from "@/lib/ap-exam/frq-answer";
+import { PassageRefsScope } from "@/app/components/PassageRefs";
 import LearningText from "@/app/session/[id]/LearningText";
 import ProblemFigure from "@/app/session/[id]/ProblemFigure";
 import ProblemErrorReportButton from "@/app/components/ProblemErrorReportButton";
@@ -41,7 +42,7 @@ const ApReviewItem = memo(function ApReviewItem({ it, attemptId, inkByPart, essa
   const groupedScore = it.format === "essay" && (it.parts?.length ?? 0) > 1 ? essayByPart?.get(inkKey(it.setItemId, it.parts![0].label)) : undefined;
   const grouped = groupedScore?.rubricVersion === USH_RUBRIC_ID;
   return (
-    <>
+    <PassageRefsScope>
               {apPassageForDisplay(it.passage, it.question) && <LearningText text={apPassageForDisplay(it.passage, it.question) as string} className="mb-2 text-[13.5px]" />}
               {it.figure ? <ProblemFigure spec={it.figure} text={problemText(it.passage, it.question, it.options)} className="mb-3" /> : null}
               {it.question && <LearningText text={autoMathExplanation(it.question)} className="mb-2 font-semibold text-[14px]" />}
@@ -84,7 +85,7 @@ const ApReviewItem = memo(function ApReviewItem({ it, attemptId, inkByPart, essa
                 </div>
               )}
               <ProblemErrorReportButton className="mt-3" role="student" context={{ source: "mock_exam", attemptId: attemptId, setItemId: it.setItemId, problemId: it.problemId }} />
-    </>
+    </PassageRefsScope>
   );
 });
 
