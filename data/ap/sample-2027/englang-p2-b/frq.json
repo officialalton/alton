@@ -1,0 +1,1289 @@
+[
+ {
+  "id": "fb1",
+  "plan": {
+   "id": "fb1",
+   "type": "synthesis",
+   "theme": "whether a school district should move to a four-day school week",
+   "seed": 9401
+  },
+  "payload": {
+   "schema_version": "el-frq-1",
+   "task_type": "synthesis",
+   "template": "q1",
+   "title": "Synthesis: Should a School District Adopt a Four-Day School Week?",
+   "prompt": {
+    "scenario": "A growing number of small and mid-sized school districts have shortened the school week to four days, usually by lengthening each remaining day and giving students Fridays off. Supporters point to budget savings, easier teacher recruitment, and more family time. Opponents point to childcare costs, lost instructional time for young children, and uneven effects across households. Some observers argue the schedule can work only under specific conditions. Carefully read the six sources that follow, including the introductory information for each source.",
+    "task": "Write an essay that synthesizes material from at least three of the sources and develops your position on whether a school district should move to a four-day school week.",
+    "requirements": [
+     "Take a clear, defensible position on whether, or under what conditions, a district should adopt a four-day week; a conditional or qualified position is acceptable if it is clearly stated and consistently developed.",
+     "Use material from at least three of the six sources to support your line of reasoning, and identify each source you use as Source A, Source B, Source C, Source D, Source E, or Source F.",
+     "Explain how each piece of evidence supports your reasoning; do not simply summarize or list the sources.",
+     "Treat the sources as material for your own argument rather than as the argument itself; you may agree with, challenge, or qualify what a source claims."
+    ]
+   },
+   "sources": [
+    {
+     "id": "A",
+     "kind": "text",
+     "title": "Fewer Buses, Longer Days: Harrow Fork Finishes Its First Four-Day Year",
+     "attribution": "Tobias Lindqvist, staff reporter, The Cobble Creek Ledger, 2024",
+     "genre": "news report",
+     "body": "The last yellow bus of the school year pulled out of the Harrow Fork Consolidated Schools lot on a Thursday afternoon, which is now the end of the week here. When the district of about 1,900 students adopted a four-day calendar last August, it became the fourth in the county to do so. The school day grew by 55 minutes, Friday became a day off for students, and administrators promised that the money and the teachers would follow.\n\nOn the money, the district's own figures show a savings of roughly 410,000 dollars, close to 2 percent of its operating budget, most of it from parking the bus fleet one day a week. On teachers, the change is harder to measure but easier to feel. The district opened the previous year with 14 unfilled teaching positions. It opened this one with 5.\n\nNot everyone is counting the same things. The public library doubled its Friday staffing and still turned away children when its community room filled. Two of the three day-care centers in town added a Friday rate. A spring survey conducted by the district found that teachers overwhelmingly want to keep the schedule, while parents of elementary students are nearly split.\n\nThe school board will vote in July on whether to renew the calendar for a second year. \"We said we'd look at the numbers honestly,\" board chair Everett Mbanefo said at the May meeting. \"That means the reading scores and the day-care bills, not just the bus budget.\"",
+     "paragraphs": [
+      [
+       "The last yellow bus of the school year pulled out of the Harrow Fork Consolidated Schools lot on a Thursday afternoon, which is now the end of the week here.",
+       "When the district of about 1,900 students adopted a four-day calendar last August, it became the fourth in the county to do so.",
+       "The school day grew by 55 minutes, Friday became a day off for students, and administrators promised that the money and the teachers would follow."
+      ],
+      [
+       "On the money, the district's own figures show a savings of roughly 410,000 dollars, close to 2 percent of its operating budget, most of it from parking the bus fleet one day a week.",
+       "On teachers, the change is harder to measure but easier to feel.",
+       "The district opened the previous year with 14 unfilled teaching positions.",
+       "It opened this one with 5."
+      ],
+      [
+       "Not everyone is counting the same things.",
+       "The public library doubled its Friday staffing and still turned away children when its community room filled.",
+       "Two of the three day-care centers in town added a Friday rate.",
+       "A spring survey conducted by the district found that teachers overwhelmingly want to keep the schedule, while parents of elementary students are nearly split."
+      ],
+      [
+       "The school board will vote in July on whether to renew the calendar for a second year.",
+       "\"We said we'd look at the numbers honestly,\" board chair Everett Mbanefo said at the May meeting.",
+       "\"That means the reading scores and the day-care bills, not just the bus budget.\""
+      ]
+     ],
+     "stance": "neutral report; presents savings and staffing gains alongside childcare strain and a divided parent survey",
+     "provenance": {
+      "kind": "original",
+      "author_alias": "Tobias Lindqvist",
+      "year_alias": 2024
+     }
+    },
+    {
+     "id": "B",
+     "kind": "text",
+     "title": "Friday Is Not a Gift If You Have to Pay for It",
+     "attribution": "Marisol Ettinger, guest column, The Cobble Creek Ledger, 2024",
+     "genre": "op-ed",
+     "body": "I own the hardware store on Dunmore Street, and I have two kids at Harrow Fork Elementary. Since August, every Friday has been a math problem. My husband drives for a feed supplier and cannot take the day. I open at seven. So either my eight-year-old sits in the back room with a tablet for nine hours, or I pay the day-care center's new Friday rate, which comes to 38 dollars a child. That is 76 dollars a week, more than 2,700 dollars across the school year, for a schedule I never asked for.\n\nSupporters keep telling me what the district saved. I believe them. But a saving that moves from the district's ledger to mine is not a saving; it is a transfer, and it lands hardest on the families least able to absorb it. The parents who cheered loudest at the board meeting tend to have a grandparent down the road or a job they can do from a kitchen table. Plenty of us have neither.\n\nI also notice who has been quiet. The high school students love it, of course. Ask a sixteen-year-old whether she wants a three-day weekend and you already know the answer. The younger children do not get a vote, and they are the ones whose reading teachers now have 55 more minutes a day to fill with children who, by two o'clock, are done.\n\nIf the board wants to keep teachers, it should pay them. Raise the levy, cut something else, say so plainly. Do not hand the bill to the families in the lunch line and call it a gift.",
+     "paragraphs": [
+      [
+       "I own the hardware store on Dunmore Street, and I have two kids at Harrow Fork Elementary.",
+       "Since August, every Friday has been a math problem.",
+       "My husband drives for a feed supplier and cannot take the day.",
+       "I open at seven.",
+       "So either my eight-year-old sits in the back room with a tablet for nine hours, or I pay the day-care center's new Friday rate, which comes to 38 dollars a child.",
+       "That is 76 dollars a week, more than 2,700 dollars across the school year, for a schedule I never asked for."
+      ],
+      [
+       "Supporters keep telling me what the district saved.",
+       "I believe them.",
+       "But a saving that moves from the district's ledger to mine is not a saving; it is a transfer, and it lands hardest on the families least able to absorb it.",
+       "The parents who cheered loudest at the board meeting tend to have a grandparent down the road or a job they can do from a kitchen table.",
+       "Plenty of us have neither."
+      ],
+      [
+       "I also notice who has been quiet.",
+       "The high school students love it, of course.",
+       "Ask a sixteen-year-old whether she wants a three-day weekend and you already know the answer.",
+       "The younger children do not get a vote, and they are the ones whose reading teachers now have 55 more minutes a day to fill with children who, by two o'clock, are done."
+      ],
+      [
+       "If the board wants to keep teachers, it should pay them.",
+       "Raise the levy, cut something else, say so plainly.",
+       "Do not hand the bill to the families in the lunch line and call it a gift."
+      ]
+     ],
+     "stance": "opposed; argues the savings are a cost transfer onto working families and young children",
+     "provenance": {
+      "kind": "original",
+      "author_alias": "Marisol Ettinger",
+      "year_alias": 2024
+     }
+    },
+    {
+     "id": "C",
+     "kind": "text",
+     "title": "Three Years In: A Conversation with Superintendent Ruth Castellane of Pinemont Valley Unified",
+     "attribution": "Interview conducted by Devin Achterberg, Pinemont Valley Education Review, 2023",
+     "genre": "interview excerpt",
+     "body": "Achterberg: Pinemont Valley has been on a four-day calendar for three years. What did you expect, and what actually happened?\n\nCastellane: I expected a budget story. We did save money, about 1.5 percent of operations, but that turned out to be the least important thing. What changed was hiring. The year before we switched, we posted a middle school science job and got two applications, one from a man who later withdrew. Last spring the same posting drew eleven. Teachers in the region now ask about our calendar before they ask about our salary schedule.\n\nAchterberg: Critics say the day off comes at the expense of younger students.\n\nCastellane: They are partly right, and I would rather say so than pretend otherwise. We tracked it. Our third and fourth graders lost ground in reading the first year, not dramatically, but measurably. We responded by moving reading to the first block of the morning and adding a paid Friday tutoring session for anyone below grade level. Second and third year, the gap closed. I would not recommend the calendar to any district that is not willing to do that kind of repair work.\n\nAchterberg: What about families who need Friday care?\n\nCastellane: That is the hardest part, and I will not dress it up. We run a Friday enrichment day at two of our five buildings, staffed by aides and paid for mostly by a county grant. It serves about 140 children. It does not serve everyone. If a district tells you it has solved the childcare problem, ask to see the waiting list.\n\nAchterberg: Would you go back?\n\nCastellane: No. But I also would not have voted for it on the information we had at the time. We got lucky, and then we worked.",
+     "paragraphs": [
+      [
+       "Achterberg: Pinemont Valley has been on a four-day calendar for three years.",
+       "What did you expect, and what actually happened?"
+      ],
+      [
+       "Castellane: I expected a budget story.",
+       "We did save money, about 1.5 percent of operations, but that turned out to be the least important thing.",
+       "What changed was hiring.",
+       "The year before we switched, we posted a middle school science job and got two applications, one from a man who later withdrew.",
+       "Last spring the same posting drew eleven.",
+       "Teachers in the region now ask about our calendar before they ask about our salary schedule."
+      ],
+      [
+       "Achterberg: Critics say the day off comes at the expense of younger students."
+      ],
+      [
+       "Castellane: They are partly right, and I would rather say so than pretend otherwise.",
+       "We tracked it.",
+       "Our third and fourth graders lost ground in reading the first year, not dramatically, but measurably.",
+       "We responded by moving reading to the first block of the morning and adding a paid Friday tutoring session for anyone below grade level.",
+       "Second and third year, the gap closed.",
+       "I would not recommend the calendar to any district that is not willing to do that kind of repair work."
+      ],
+      [
+       "Achterberg: What about families who need Friday care?"
+      ],
+      [
+       "Castellane: That is the hardest part, and I will not dress it up.",
+       "We run a Friday enrichment day at two of our five buildings, staffed by aides and paid for mostly by a county grant.",
+       "It serves about 140 children.",
+       "It does not serve everyone.",
+       "If a district tells you it has solved the childcare problem, ask to see the waiting list."
+      ],
+      [
+       "Achterberg: Would you go back?"
+      ],
+      [
+       "Castellane: No.",
+       "But I also would not have voted for it on the information we had at the time.",
+       "We got lucky, and then we worked."
+      ]
+     ],
+     "stance": "supportive with conditions; credits hiring gains but insists on remedial and childcare commitments",
+     "provenance": {
+      "kind": "original",
+      "author_alias": "Ruth Castellane",
+      "year_alias": 2023
+     }
+    },
+    {
+     "id": "D",
+     "kind": "text",
+     "title": "Four-Day Calendars in Rural Districts: Three-Year Findings",
+     "attribution": "Research brief, Meridian Basin Institute for Rural Education Policy (a fictional policy research center), 2025",
+     "genre": "institutional report excerpt",
+     "body": "This brief summarizes three years of records from 23 districts in the Meridian Basin region that adopted a four-day instructional calendar between 2021 and 2023, compared with 31 neighboring districts that retained five days.\n\nFiscal effects. Reported savings ranged from 1.2 to 2.5 percent of annual operating budgets, concentrated in transportation, utilities and substitute pay. No district achieved the 5 percent savings that several had projected before adoption, chiefly because salaries, the largest cost, are unaffected by the number of days taught.\n\nAchievement. Outcomes depended on what districts did with the lost day. In the 9 districts that lengthened the remaining four days enough to preserve total instructional hours, achievement growth in reading and mathematics was statistically indistinguishable from the comparison districts. In the 14 districts that accepted a net reduction in hours, mathematics growth over three years trailed comparison districts by an average of 3 percentile points, with the largest effects in grades 2 through 5.\n\nStaffing. Four-day districts reported a median of 2.4 times as many applicants per certified vacancy in year three as in the year before adoption. Comparison districts saw no comparable change. Teacher attrition fell in 18 of the 23 districts.\n\nFamilies. In household surveys, 41 percent of parents of children under age 12 reported new weekly childcare costs attributable to the calendar; 22 percent reported reducing their own work hours. Reported benefits included more time for medical appointments and reduced family travel for extracurricular events.\n\nRecommendation. The evidence does not support a blanket endorsement or rejection. Districts considering the calendar should commit in advance to preserving instructional hours, funding a fifth-day option for younger children, and reviewing achievement data publicly after two years.",
+     "paragraphs": [
+      [
+       "This brief summarizes three years of records from 23 districts in the Meridian Basin region that adopted a four-day instructional calendar between 2021 and 2023, compared with 31 neighboring districts that retained five days."
+      ],
+      [
+       "Fiscal effects.",
+       "Reported savings ranged from 1.2 to 2.5 percent of annual operating budgets, concentrated in transportation, utilities and substitute pay.",
+       "No district achieved the 5 percent savings that several had projected before adoption, chiefly because salaries, the largest cost, are unaffected by the number of days taught."
+      ],
+      [
+       "Achievement.",
+       "Outcomes depended on what districts did with the lost day.",
+       "In the 9 districts that lengthened the remaining four days enough to preserve total instructional hours, achievement growth in reading and mathematics was statistically indistinguishable from the comparison districts.",
+       "In the 14 districts that accepted a net reduction in hours, mathematics growth over three years trailed comparison districts by an average of 3 percentile points, with the largest effects in grades 2 through 5."
+      ],
+      [
+       "Staffing.",
+       "Four-day districts reported a median of 2.4 times as many applicants per certified vacancy in year three as in the year before adoption.",
+       "Comparison districts saw no comparable change.",
+       "Teacher attrition fell in 18 of the 23 districts."
+      ],
+      [
+       "Families.",
+       "In household surveys, 41 percent of parents of children under age 12 reported new weekly childcare costs attributable to the calendar; 22 percent reported reducing their own work hours.",
+       "Reported benefits included more time for medical appointments and reduced family travel for extracurricular events."
+      ],
+      [
+       "Recommendation.",
+       "The evidence does not support a blanket endorsement or rejection.",
+       "Districts considering the calendar should commit in advance to preserving instructional hours, funding a fifth-day option for younger children, and reviewing achievement data publicly after two years."
+      ]
+     ],
+     "stance": "conditional; outcomes depend on whether instructional hours are preserved and a fifth-day option is funded",
+     "provenance": {
+      "kind": "original",
+      "author_alias": "Meridian Basin Institute for Rural Education Policy",
+      "year_alias": 2025
+     }
+    },
+    {
+     "id": "E",
+     "kind": "quantitative",
+     "title": "Should Harrow Fork Keep the Four-Day Calendar? Survey Results by Group",
+     "attribution": "Spring 2024 community survey, Harrow Fork Consolidated Schools, 1,112 responses",
+     "genre": "survey table",
+     "body": "The table reports responses to a survey conducted by Harrow Fork Consolidated Schools in April 2024 asking whether the district should keep its four-day calendar for a second year. Figures are percentages of respondents within each group, and each row sums to 100.",
+     "table": {
+      "columns": [
+       "Respondent group",
+       "Keep it (%)",
+       "Return to five days (%)",
+       "Unsure (%)"
+      ],
+      "rows": [
+       [
+        "Teachers",
+        84,
+        9,
+        7
+       ],
+       [
+        "Support staff (bus drivers, aides, custodians)",
+        58,
+        31,
+        11
+       ],
+       [
+        "Parents of elementary students",
+        48,
+        42,
+        10
+       ],
+       [
+        "Parents of middle and high school students",
+        63,
+        27,
+        10
+       ],
+       [
+        "Students in grades 9 through 12",
+        79,
+        12,
+        9
+       ],
+       [
+        "Local employers",
+        37,
+        49,
+        14
+       ]
+      ]
+     },
+     "stance": "data; shows strong staff and older-student support, split elementary parents, and employer opposition",
+     "provenance": {
+      "kind": "original",
+      "author_alias": "Harrow Fork Consolidated Schools",
+      "year_alias": 2024
+     }
+    },
+    {
+     "id": "F",
+     "kind": "visual",
+     "title": "Where Harrow Fork's First-Year Savings Came From",
+     "attribution": "Chart prepared from the Harrow Fork Consolidated Schools year-end budget summary, 2024",
+     "genre": "bar chart",
+     "body": "The chart breaks down the roughly 410,000 dollars (about 2 percent of the operating budget) that Harrow Fork Consolidated Schools reports saving in its first four-day year.",
+     "figure": {
+      "chart": "bar",
+      "title": "Where Harrow Fork's First-Year Savings Came From",
+      "categories": [
+       "Transportation",
+       "Utilities",
+       "Substitute teacher pay",
+       "Food service",
+       "Custodial and other"
+      ],
+      "series": [
+       {
+        "name": "Estimated annual savings",
+        "values": [
+         165,
+         95,
+         80,
+         45,
+         25
+        ]
+       }
+      ],
+      "xTitle": "Budget category",
+      "yTitle": "Estimated annual savings (thousands of dollars)",
+      "description": "A bar chart with five bars showing that transportation accounts for the largest savings at 165 thousand dollars, followed by utilities at 95 thousand, substitute teacher pay at 80 thousand, food service at 45 thousand, and custodial and other costs at 25 thousand, for a total of about 410 thousand dollars; no bar represents teacher salaries."
+     },
+     "stance": "data; shows that savings come from operations rather than salaries, which supports both the fiscal case and the argument that savings are modest",
+     "provenance": {
+      "kind": "original",
+      "author_alias": "Harrow Fork Consolidated Schools business office",
+      "year_alias": 2024
+     }
+    }
+   ],
+   "rubric": {
+    "total_points": 6,
+    "rows": [
+     {
+      "row_id": "A",
+      "name": "Thesis",
+      "max": 1,
+      "descriptors": {
+       "0": "No thesis; a thesis that only restates the prompt (for example, 'There are many opinions about the four-day week'); a thesis that merely lists what the sources say without taking a position; or a thesis that answers a different question (such as whether teachers deserve raises) without connecting it to whether a district should adopt the schedule.",
+       "1": "States a defensible position on whether, or under what conditions, a district should move to a four-day week. The position may be unconditional (adopt / do not adopt), conditional (adopt only if instructional hours are preserved and a fifth-day option is funded), or alternative (reject the schedule and address teacher shortages another way). A thesis may appear anywhere in the essay and may be more than one sentence, but it must commit to a stance the rest of the essay can defend."
+      },
+      "task_specific": "A conditional thesis earns the point only if the conditions are named, not merely gestured at ('it depends on the district'). A thesis that says the schedule 'has pros and cons' without resolving them does not earn the point."
+     },
+     {
+      "row_id": "B",
+      "name": "Evidence and commentary",
+      "max": 4,
+      "descriptors": {
+       "0": "Restates the thesis, offers only personal opinion with no source material, or uses sources in a way that shows misreading (for example, claiming Source D proves four-day weeks raise test scores).",
+       "1": "Mostly summary or paraphrase of fewer than three sources, or of three sources with no explanation of how any of them supports the writer's position. Sources may be mentioned in a list ('Sources A, C, and D all discuss savings') without being put to use.",
+       "2": "Uses at least three sources but commentary is thin or repetitive: the writer quotes or paraphrases a figure (such as the 410,000 dollar savings or the 41 percent childcare figure) and then asserts that it proves the point without explaining why. Evidence may be loosely connected to the thesis, or the essay may treat each source in isolation without connecting them.",
+       "3": "Uses at least three sources with specific, accurate evidence and explains how most of it supports a clear line of reasoning. The writer may put two sources in conversation (for instance, Source B's cost-transfer argument against Source F's breakdown of savings) but one or two pieces of evidence may be underexplained, or the essay may not account for the strongest counter-evidence.",
+       "4": "Uses at least three sources with well-chosen, specific evidence throughout and consistently explains how each piece advances the argument. Sources are synthesized rather than stacked: the writer notices, for example, that Source A's reduction in vacancies, Source C's eleven applicants, and Source D's 2.4 multiplier describe the same phenomenon at three scales, or that Source E's split among elementary parents matches the grade-level findings in Source D. The essay engages with evidence that complicates its position and explains why the position still holds."
+      },
+      "task_specific": "Count as 'using' a source only when the writer draws a specific claim, figure, or example from it and attributes it (Source A through Source F). Numbers from Source E or Source F count as evidence when the writer interprets them (for example, that employers oppose the schedule while teachers favor it, and why that gap matters), not when they are simply reproduced. Source C and Source D can be used for more than one stance; credit depends on the writer's explanation, not on which stance the writer takes."
+     },
+     {
+      "row_id": "C",
+      "name": "Sophistication",
+      "max": 1,
+      "descriptors": {
+       "0": "Argument stays at a general level ('the district should weigh costs and benefits'), relies on vague praise or blame, uses ornamental but empty language, or acknowledges a counterargument only to drop it.",
+       "1": "Demonstrates a complex understanding of the issue through one or more of the following, carried through the essay rather than appearing in a single sentence: explaining why the same evidence (such as the modest 2 percent savings) can support opposing conclusions; identifying who gains and who pays and treating that distribution as central to the decision; recognizing that Harrow Fork and Pinemont Valley are different districts and reasoning about whether one's experience transfers to another; distinguishing between short-run effects (first-year reading dips) and long-run effects (closed gaps after repair work); or making a conditional argument whose conditions are drawn from and tested against the sources."
+      },
+      "task_specific": "Sophistication is not earned by taking the middle stance automatically. A conditional thesis with vague conditions is no more sophisticated than a one-sided essay; a one-sided essay that honestly confronts Source C's caveats or Source B's cost-transfer logic can earn the point."
+     }
+    ],
+    "scoring_notes": [
+     "Scores are additive: Row A (0-1) plus Row B (0-4) plus Row C (0-1), maximum 6.",
+     "An essay that earns 0 on Row A can still earn up to 2 on Row B if it uses sources, but cannot earn 3 or 4 because there is no position for the evidence to support.",
+     "Misstating a figure from a source (for example, calling the savings 5 percent) counts against accuracy on Row B; one small slip does not by itself lower the score, but a pattern does.",
+     "Writers who cite Source E or Source F must interpret the numbers; an essay that reproduces the table as a sentence earns no more credit than one that mentions the source by letter.",
+     "Essays that reject the four-day week and propose a different remedy for teacher shortages (such as Source B's levy proposal) are fully defensible, provided the writer still engages with the sources' evidence on the schedule itself."
+    ]
+   },
+   "expected_features": {
+    "defensible_positions": [
+     "Adopt the four-day week: the hiring and retention gains (Sources A, C, D) address the most serious problem small districts face, and the drawbacks are manageable with planning.",
+     "Reject the four-day week: savings are small and operational (Sources D, F), while costs are shifted to families and young children (Sources B, D, E); teacher shortages should be addressed through pay instead.",
+     "Adopt only under conditions: preserve total instructional hours, fund a fifth-day program for younger children, and commit to a public data review (Sources C, D), with Harrow Fork's split survey (Source E) showing what happens when those conditions are not in place.",
+     "Pilot before deciding: run the schedule in secondary schools only, where support is strongest (Source E) and achievement effects are smallest (Source D), while keeping elementary schools on five days.",
+     "Decide based on who pays: the schedule is justified only where a district can prevent the cost transfer Source B describes; where it cannot, the hiring gains do not outweigh the harm to the families least able to absorb it."
+    ],
+    "lines_of_reasoning": [
+     "Chain the staffing evidence across scales (Source A vacancies falling from 14 to 5, Source C's two applicants becoming eleven, Source D's 2.4 multiplier) to argue that recruitment, not savings, is the real case for the schedule.",
+     "Use Source F and Source D together to show that savings are structurally limited, then use Source B to argue that even those limited savings are partly a transfer to households.",
+     "Use Source D's hours-preserved versus hours-reduced split, plus Source C's reading dip and recovery, to argue that the achievement question is really a design question.",
+     "Read Source E as a map of winners and losers: those with the most control over the decision (teachers, older students) favor it; those with the least (elementary parents, employers) do not.",
+     "Argue from Source C's own caution ('I would not have voted for it on the information we had') that a district without a repair plan and a Friday program should not proceed."
+    ],
+    "rhetorical_choices": [
+     {
+      "device": "antithesis",
+      "paragraph": 2,
+      "sentence_ids": [
+       9
+      ],
+      "effect": "In Source B, setting 'saving' against 'transfer' reframes the district's fiscal claim as a question of who pays, which writers can adopt or contest."
+     },
+     {
+      "device": "rhetorical_question",
+      "paragraph": 3,
+      "sentence_ids": [
+       14
+      ],
+      "effect": "In Source B, the sixteen-year-old question dismisses student enthusiasm as predictable, inviting writers to weigh whose preferences in Source E should count."
+     },
+     {
+      "device": "concession_and_rebuttal",
+      "paragraph": 4,
+      "sentence_ids": [
+       1,
+       6
+      ],
+      "effect": "In Source C, the superintendent concedes the critics are 'partly right' before describing repair work, modeling the conditional stance and giving writers a credible insider's caveat."
+     },
+     {
+      "device": "qualification",
+      "paragraph": 6,
+      "sentence_ids": [
+       2,
+       3
+      ],
+      "effect": "In Source D, the refusal of a 'blanket endorsement or rejection' pushes writers toward naming specific conditions rather than taking a general stance."
+     },
+     {
+      "device": "juxtaposition",
+      "paragraph": 2,
+      "sentence_ids": [
+       6,
+       7
+      ],
+      "effect": "In Source A, the two short sentences on vacancies (14, then 5) make the staffing gain vivid without editorializing, a figure writers on any side must account for."
+     }
+    ],
+    "source_uses": [
+     {
+      "source_id": "A",
+      "usable_for": "Concrete first-year picture of one district: 410,000 dollars saved (about 2 percent), vacancies dropping from 14 to 5, library and day-care strain, and a board chair's insistence on looking at reading scores and day-care bills; usable by every stance as a balanced case study."
+     },
+     {
+      "source_id": "B",
+      "usable_for": "The strongest objection: savings are a cost transfer to families (38 dollars per child per Friday, about 2,700 dollars a year), younger children lose the most, and the alternative is to pay teachers directly; usable to oppose, or to define the conditions a conditional stance must meet."
+     },
+     {
+      "source_id": "C",
+      "usable_for": "An experienced supporter's testimony: hiring improved sharply, early reading losses were real but repaired with morning reading blocks and Friday tutoring, Friday care serves only 140 children; usable for adoption, for conditions, or (through her own caution) for skepticism."
+     },
+     {
+      "source_id": "D",
+      "usable_for": "Comparative evidence across 23 districts: savings between 1.2 and 2.5 percent, achievement unaffected where hours were preserved but 3 percentile points lower in math where they were not, 2.4 times as many applicants, 41 percent of parents of young children facing new costs; usable for any stance, and essential for conditional arguments."
+     },
+     {
+      "source_id": "E",
+      "usable_for": "Group-by-group support in Harrow Fork: teachers 84 percent, high school students 79 percent, elementary parents 48 percent, employers 37 percent; usable to show that support tracks who benefits, or to argue that a majority of most groups favor keeping it."
+     },
+     {
+      "source_id": "F",
+      "usable_for": "Breakdown of the 410,000 dollars: transportation 165 thousand, utilities 95, substitutes 80, food service 45, other 25, with no salary savings; usable to show savings are real but structurally modest and operational, confirming Source D's explanation."
+     }
+    ],
+    "common_pitfalls": [
+     "Treating the essay as a report on the sources ('Source A says, Source B says') rather than an argument that uses them.",
+     "Citing the 410,000 dollar figure from Source A or Source F as if it settled the fiscal question without noting Source D's finding that savings are capped near 2.5 percent because salaries are untouched.",
+     "Reading Source D as uniformly negative or uniformly positive; its achievement findings depend on whether instructional hours were preserved, and essays that miss the distinction misuse the source.",
+     "Assuming Source C and Source A describe the same district; Pinemont Valley and Harrow Fork are different places with different years of experience.",
+     "Using Source E only to say 'most people support it' when the table shows sharp differences among groups, especially between teachers and elementary parents or employers.",
+     "Dismissing Source B as 'just one parent' instead of engaging with the argument that savings have been transferred rather than eliminated.",
+     "Writing a conditional thesis ('it depends on the district') without specifying which conditions and then defending them with evidence.",
+     "Ignoring the question of who bears the costs; many weak essays argue about whether the schedule 'works' without asking for whom."
+    ]
+   },
+   "samples": [],
+   "blueprint": {
+    "theme": "Public decisions that redistribute costs and benefits across groups: whether a schedule change that helps institutions and staff is worth its burden on families and young children.",
+    "issue": "Whether a school district should move to a four-day school week.",
+    "stances": [
+     "Adopt: teacher recruitment and retention justify the change.",
+     "Reject: savings are small and costs shift to families and the youngest students; pay teachers instead.",
+     "Conditional: adopt only with preserved instructional hours, a funded fifth-day program, and public data review.",
+     "Partial: pilot in secondary schools only, where support is highest and achievement risk lowest."
+    ],
+    "devices": [
+     {
+      "device": "antithesis",
+      "sentence_ids": [
+       9
+      ],
+      "function": "Source B contrasts saving with transfer to reframe the fiscal argument as a distributional one."
+     },
+     {
+      "device": "concession_and_rebuttal",
+      "sentence_ids": [
+       1,
+       6
+      ],
+      "function": "Source C admits the critics are partly right and then explains the repair work, modeling a conditional position."
+     },
+     {
+      "device": "qualification",
+      "sentence_ids": [
+       2,
+       3
+      ],
+      "function": "Source D refuses a blanket verdict and lists conditions, pushing writers toward specificity."
+     },
+     {
+      "device": "sentence_length_variation",
+      "sentence_ids": [
+       6,
+       7
+      ],
+      "function": "Source A uses two clipped sentences to land the vacancy figures with force."
+     },
+     {
+      "device": "statistic",
+      "sentence_ids": [
+       5,
+       6
+      ],
+      "function": "Source B converts a daily rate into an annual household cost to make the transfer tangible."
+     }
+    ]
+   },
+   "provenance": {
+    "kind": "original",
+    "note": "ALTON original practice material; fictional sources and attributions."
+   }
+  }
+ },
+ {
+  "id": "fb2",
+  "plan": {
+   "id": "fb2",
+   "type": "rhetorical_analysis",
+   "theme": "a hospital night nurse's address to graduating nursing students about the discipline of paying attention",
+   "seed": 9402
+  },
+  "payload": {
+   "schema_version": "el-frq-1",
+   "task_type": "rhetorical_analysis",
+   "template": "q2",
+   "title": "Rhetorical Analysis: A Night Nurse on the Discipline of Attention",
+   "prompt": {
+    "scenario": "Speaker: Marisol Quenneville, a charge nurse who has worked the overnight shift at the fictional Harrowgate Memorial Hospital for nineteen years. Audience: the graduating class of the fictional Dunmore Valley School of Nursing, their families, and faculty, gathered at a commencement ceremony. Exigence: the graduates have finished technical training and are about to begin work on understaffed floors where they will be tempted to rely on monitors and routine; Quenneville has been invited to give the commencement address. Purpose: to persuade the new nurses that attention is a deliberate, practiced discipline rather than a mood, and to convince them to commit to noticing patients as people even under exhausting conditions.",
+    "task": "The passage below is a commencement address delivered in 2019 by Marisol Quenneville, a night-shift charge nurse at Harrowgate Memorial Hospital, to the graduating class of the Dunmore Valley School of Nursing. Read the passage carefully. Write an essay that analyzes the rhetorical choices Quenneville makes to convince the new graduates that paying attention is a discipline they must practice deliberately.",
+    "requirements": [
+     "Respond to the prompt with a thesis that presents a defensible analysis of the rhetorical choices Quenneville makes.",
+     "Select and use evidence from the passage to support your line of reasoning.",
+     "Explain how the evidence supports your line of reasoning by showing how specific choices advance Quenneville's purpose for this audience and occasion."
+    ]
+   },
+   "sources": [
+    {
+     "id": "passage",
+     "kind": "text",
+     "title": "Commencement Address to the Dunmore Valley School of Nursing",
+     "attribution": "Marisol Quenneville, charge nurse, Harrowgate Memorial Hospital night shift; commencement address delivered to the graduating class of the Dunmore Valley School of Nursing, 2019",
+     "genre": "commencement speech",
+     "paragraphs": [
+      [
+       "(1) I have worked nights for nineteen years, and I will tell you the first thing the dark teaches: a hospital at three in the morning is never silent.",
+       "(2) The monitors tick, the ice machine groans, somebody's call light blinks at the end of the hall like a slow pulse.",
+       "(3) Most of that noise means nothing.",
+       "(4) Some of it means everything.",
+       "(5) The whole of our profession, I have come to believe, lives in the space between those two sentences."
+      ],
+      [
+       "(6) You have spent four years learning what to do.",
+       "(7) You can run a line, titrate a drip, read a rhythm strip from across the room.",
+       "(8) I am not here to add to that list.",
+       "(9) I am here to talk about something that cannot be put on an exam: the discipline of paying attention.",
+       "(10) I call it a discipline on purpose.",
+       "(11) Attention is not a mood you fall into when the floor is quiet; it is a practice, like scrubbing in, that you perform the same way whether you feel like it or not."
+      ],
+      [
+       "(12) Let me tell you about a man in room 412.",
+       "(13) This was my third year, and he was what we called a quiet patient, which is a dangerous compliment.",
+       "(14) His vitals were fine.",
+       "(15) His chart was fine.",
+       "(16) He asked me, at twenty past two, whether I could open the blinds, and I nearly told him there was nothing out there but a parking lot.",
+       "(17) Instead I asked him why.",
+       "(18) He said he wanted to be able to see the sky in case he did not get another chance.",
+       "(19) Nothing on the monitor had changed.",
+       "(20) I called the resident anyway, and forty minutes later that man was in the cardiac unit, and he is, as far as I know, still alive, still looking at skies.",
+       "(21) I did not save him with a skill.",
+       "(22) I saved him by hearing a sentence."
+      ],
+      [
+       "(23) Now, I know what some of you are thinking, because I thought it too at your age.",
+       "(24) You will have six patients, sometimes eight.",
+       "(25) You will have a charting system that wants fourteen clicks to record a glass of water.",
+       "(26) You will be tired in a way that has no name yet.",
+       "(27) All of that is true, and I will not insult you by pretending otherwise.",
+       "(28) But I have noticed, over nineteen years, that the nurses who miss things are not usually the busiest ones.",
+       "(29) They are the ones who decided, somewhere along the way, that they already knew what they would find.",
+       "(30) Fatigue takes your legs; certainty takes your eyes.",
+       "(31) Of the two, certainty is the thief I fear."
+      ],
+      [
+       "(32) Our own quality committee at Harrowgate pulled the numbers last spring.",
+       "(33) Of the seventy-one rapid-response calls on our medical floors last year, forty-four were triggered not by an alarm but by a nurse who simply reported that something was off.",
+       "(34) Forty-four.",
+       "(35) The machines, with all their sensors and their price tags, caught fewer than the people who were paying attention.",
+       "(36) I do not say this to disparage the machines; they are good at what they measure.",
+       "(37) I say it because what they do not measure is the thing you are being hired to notice."
+      ],
+      [
+       "(38) So here is what I ask of you, and it is small, and it is enormous.",
+       "(39) When you walk into a room, stand still for three seconds before you touch anything.",
+       "(40) Look at the hands, look at the breathing, look at what the patient is looking at.",
+       "(41) Ask the second question.",
+       "(42) The first question gets you a chart; the second gets you a person.",
+       "(43) You will not do this perfectly.",
+       "(44) I do not do it perfectly, and I have had nineteen years of practice.",
+       "(45) But do it on purpose, every shift, until it stops being something you do and becomes something you are.",
+       "(46) The hall will be loud tonight and every night after.",
+       "(47) Listen anyway.",
+       "(48) Congratulations, and welcome to the work."
+      ]
+     ],
+     "stance": "Attention is a practiced discipline, not a mood, and it is the core of nursing.",
+     "provenance": {
+      "kind": "original",
+      "author_alias": "Marisol Quenneville",
+      "year_alias": 2019
+     }
+    }
+   ],
+   "rubric": {
+    "total_points": 6,
+    "rows": [
+     {
+      "row_id": "A",
+      "name": "Thesis",
+      "max": 1,
+      "descriptors": {
+       "0": "No thesis, or a thesis that only restates the prompt (for example, 'Quenneville uses many rhetorical choices to convince the graduates to pay attention'), or a thesis that merely summarizes the speech's content or lists devices without any claim about how they work.",
+       "1": "A defensible claim about how Quenneville's choices advance her purpose, stated in the introduction or elsewhere. Acceptable examples: she builds credibility through nineteen years of night-shift experience and then uses a single patient's story to redefine attention as a skill rather than a feeling; she anticipates the graduates' exhaustion so she can relocate the real danger from fatigue to certainty; she pairs a hospital statistic with an anecdote to show that human noticing outperforms machines. The thesis may be a single sentence and need not preview every device."
+      },
+      "task_specific": "Thesis must make an analytical claim about the relationship between at least one choice and the purpose (convincing new nurses that attention is a deliberate discipline). A thesis that argues Quenneville is 'effective' with no indication of how is not sufficient. A thesis that names devices but also asserts what they accomplish for this audience earns the point."
+     },
+     {
+      "row_id": "B",
+      "name": "Evidence and Commentary",
+      "max": 4,
+      "descriptors": {
+       "0": "Simply restates the thesis, repeats the prompt, or offers evidence unrelated to the passage.",
+       "1": "Mostly summarizes or paraphrases the speech (for example, retells the story of room 412) with general statements such as 'this makes the audience feel emotion' and no explanation tied to purpose. May name devices without quoting or locating them.",
+       "2": "Quotes or references specific moments but commentary is thin or repetitive: identifies that sentence 30 is a metaphor or that paragraph 4 is a concession but explains the effect in a generic way ('this helps her argument') or only once in the essay. Line of reasoning is present but underdeveloped or inconsistent.",
+       "3": "Uses specific evidence from at least two or three different parts of the speech and explains for most of it how the choice works on this audience of graduating nurses. Commentary may occasionally lapse into summary or overstate (for example, claiming the statistic 'proves' machines are useless), but a line of reasoning is sustained.",
+       "4": "Consistently specific evidence drawn from across the speech and commentary that explains how each selected choice advances the purpose for this audience and occasion. The essay accounts for the speech as a developing whole (for example, how the opening sensory scene sets up the later contrast between noise that means nothing and noise that means everything, or how the concession in paragraph 4 earns the authority of the closing instructions). Explanations are precise about what the audience is asked to believe or do and why the choice makes that more likely."
+      },
+      "task_specific": "Choices that count include: the opening sensory description and simile (sentences 1 to 2); the antithesis 'Most of that noise means nothing. Some of it means everything' (3 to 4); the definition of attention as a discipline and the scrubbing-in simile (9 to 11); the room 412 anecdote with its short parallel sentences (12 to 22); the concession to workload and fatigue followed by the rebuttal that certainty, not busyness, causes misses (23 to 29); the metaphors 'Fatigue takes your legs; certainty takes your eyes' and 'certainty is the thief' (30 to 31); the hospital statistic and the one-word sentence 'Forty-four' (32 to 35); the qualification about machines (36 to 37); the shift to direct imperative instructions and a warmer tone (38 to 48); the closing two-word sentence 'Listen anyway' (47). Student commentary should connect choices to the specific audience: new graduates proud of technical skill who are about to be overwhelmed. Device labels are not required if the student describes the choice accurately."
+     },
+     {
+      "row_id": "C",
+      "name": "Sophistication",
+      "max": 1,
+      "descriptors": {
+       "0": "Commentary stays at the level of identifying and explaining individual choices; prose may be clear but does not explore tensions, complexities, or the rhetorical situation in depth. Also 0 if the essay's style is inflated or vague in ways that obscure the analysis.",
+       "1": "Earns the point by doing at least one of the following consistently: explaining how Quenneville's choices respond to the specific rhetorical situation (a commencement where she must honor the graduates' training while telling them it is not enough); tracing a tension in the speech such as her respect for and limitation of monitors, or her admission in 44 that she herself fails; showing how the speech's structure moves the audience from scene to story to data to charge; or writing with a controlled, precise style that itself demonstrates careful attention to the text."
+      },
+      "task_specific": "Do not award for merely using sophisticated vocabulary, for a long introduction about nursing in general, or for a single clever sentence in the conclusion. The point is for thinking carried through the essay."
+     }
+    ],
+    "scoring_notes": [
+     "Score the three rows independently; an essay may earn Row B points without a thesis point.",
+     "Evidence may be quoted or closely paraphrased with sentence references; exact device terminology is not required if the choice is accurately described.",
+     "Do not reward device-spotting lists. Three devices explained well outweigh eight devices named.",
+     "Commentary that explains effect on the specific audience (new nurses, proud of skills, about to face understaffed floors) should be rated higher than commentary about 'the reader' in general.",
+     "An essay that argues the speech is partly unpersuasive is acceptable if it still analyzes how the choices are meant to work.",
+     "Misreadings that reverse meaning (for example, claiming Quenneville says machines should be ignored) weaken Row B but do not zero it if other evidence is sound."
+    ]
+   },
+   "expected_features": {
+    "defensible_positions": [
+     "Quenneville establishes authority through specific night-shift detail, then uses a patient's story to redefine attention as a trained practice rather than a feeling, so that the graduates accept her closing instructions as professional technique.",
+     "By conceding the graduates' coming exhaustion and then naming certainty rather than fatigue as the real threat, Quenneville removes the audience's strongest excuse and makes attention a matter of choice.",
+     "The speech pairs human-scale evidence (one sentence from one patient) with institutional data (forty-four of seventy-one calls) to argue that noticing is both measurable and irreplaceable.",
+     "The structure moves from sensory scene to story to statistic to command, so that the final imperatives feel earned rather than preached."
+    ],
+    "lines_of_reasoning": [
+     "Ethos first (nineteen years, three in the morning, the ice machine), then anecdote that turns a skill-proud audience toward listening, then concession that pre-empts objections, then a charge delivered in short imperatives.",
+     "Track the contrast between measurement and noticing: monitor unchanged in 19, machines in 35 to 37, chart versus person in 42.",
+     "Track sentence length: long descriptive sentences in paragraph 1 narrow to four-word sentences in 14 and 15, the one-word 34, and the two-word 47, each compressing emphasis at a turning point."
+    ],
+    "rhetorical_choices": [
+     {
+      "device": "ethos",
+      "paragraph": 1,
+      "sentence_ids": [
+       1,
+       2
+      ],
+      "effect": "Specific night-shift details (nineteen years, three in the morning, the ice machine) establish that she speaks from the floor, not the lectern, so graduates will trust her over textbook advice."
+     },
+     {
+      "device": "simile",
+      "paragraph": 1,
+      "sentence_ids": [
+       2
+      ],
+      "effect": "The call light blinking 'like a slow pulse' turns the hospital itself into a body to be monitored, foreshadowing the claim that attention is the nurse's real instrument."
+     },
+     {
+      "device": "antithesis",
+      "paragraph": 1,
+      "sentence_ids": [
+       3,
+       4,
+       5
+      ],
+      "effect": "Two balanced short sentences frame the whole speech as the problem of telling meaningless noise from meaningful noise, which is exactly what attention does."
+     },
+     {
+      "device": "definition",
+      "paragraph": 2,
+      "sentence_ids": [
+       9,
+       10,
+       11
+      ],
+      "effect": "Defining attention as a discipline, with the scrubbing-in comparison, moves it from a personality trait to a procedure the audience already respects and performs."
+     },
+     {
+      "device": "direct_address",
+      "paragraph": 2,
+      "sentence_ids": [
+       6,
+       7,
+       8
+      ],
+      "effect": "Acknowledging the graduates' skills before withholding more of them honors their training while opening space for something it did not cover."
+     },
+     {
+      "device": "anecdote",
+      "paragraph": 3,
+      "sentence_ids": [
+       12,
+       13,
+       14,
+       15,
+       16,
+       17,
+       18,
+       19,
+       20,
+       21,
+       22
+      ],
+      "effect": "The room 412 story gives a concrete case where the monitor was wrong and a sentence was right, making the abstract claim about attention vivid and memorable."
+     },
+     {
+      "device": "parallelism",
+      "paragraph": 3,
+      "sentence_ids": [
+       14,
+       15
+      ],
+      "effect": "'His vitals were fine. His chart were fine' in flat parallel form mimics the false reassurance of routine data before the turn."
+     },
+     {
+      "device": "pathos",
+      "paragraph": 3,
+      "sentence_ids": [
+       18,
+       20
+      ],
+      "effect": "The patient's wish to see the sky 'in case he did not get another chance' creates emotional stakes that no chart captures, moving graduates to want to be the nurse who asks why."
+     },
+     {
+      "device": "concession_and_rebuttal",
+      "paragraph": 4,
+      "sentence_ids": [
+       23,
+       24,
+       25,
+       26,
+       27,
+       28,
+       29
+      ],
+      "effect": "She grants workload and exhaustion in full, then shifts blame for missed signs to certainty, disarming the excuse before the audience can raise it."
+     },
+     {
+      "device": "metaphor",
+      "paragraph": 4,
+      "sentence_ids": [
+       30,
+       31
+      ],
+      "effect": "'Fatigue takes your legs; certainty takes your eyes' and 'certainty is the thief' make a mental habit into a physical loss and a criminal, intensifying the warning."
+     },
+     {
+      "device": "statistic",
+      "paragraph": 5,
+      "sentence_ids": [
+       32,
+       33,
+       34,
+       35
+      ],
+      "effect": "Forty-four of seventy-one calls supplies institutional, countable proof that human noticing is not sentimental but measurable, appealing to graduates trained on data."
+     },
+     {
+      "device": "sentence_length_variation",
+      "paragraph": 5,
+      "sentence_ids": [
+       33,
+       34
+      ],
+      "effect": "The one-word sentence 'Forty-four' after a long clause forces the number to land as a spoken beat."
+     },
+     {
+      "device": "qualification",
+      "paragraph": 5,
+      "sentence_ids": [
+       36,
+       37
+      ],
+      "effect": "Refusing to disparage machines keeps her credible with technically trained listeners and sharpens the claim to what machines cannot measure."
+     },
+     {
+      "device": "tone_shift",
+      "paragraph": 6,
+      "sentence_ids": [
+       38,
+       39,
+       40,
+       41,
+       42
+      ],
+      "effect": "The move from reflective storytelling to direct imperatives ('stand still,' 'look,' 'ask') converts the argument into an actionable practice at the moment of commencement."
+     },
+     {
+      "device": "antithesis",
+      "paragraph": 6,
+      "sentence_ids": [
+       42
+      ],
+      "effect": "'The first question gets you a chart; the second gets you a person' compresses the whole argument into a memorable rule."
+     },
+     {
+      "device": "repetition",
+      "paragraph": 6,
+      "sentence_ids": [
+       1,
+       28,
+       44
+      ],
+      "effect": "Returning to 'nineteen years' at the end, now paired with her own imperfection, humanizes the authority established at the start and makes the charge humble rather than preachy."
+     },
+     {
+      "device": "sentence_length_variation",
+      "paragraph": 6,
+      "sentence_ids": [
+       46,
+       47,
+       48
+      ],
+      "effect": "The two-word 'Listen anyway' after the noisy hall sentence enacts the discipline it names: a brief, deliberate act of attention amid noise."
+     }
+    ],
+    "source_uses": [
+     {
+      "source_id": "passage",
+      "usable_for": "All evidence; students should cite by sentence number or quotation."
+     }
+    ],
+    "common_pitfalls": [
+     "Retelling the room 412 story as plot summary instead of analyzing why it is placed after the definition of attention and told in short, flat sentences.",
+     "Claiming the statistic in sentence 33 proves machines are useless, ignoring the qualification in sentences 36 to 37.",
+     "Listing devices (metaphor, anecdote, repetition) with one sentence each and no connection to the graduates as an audience.",
+     "Treating pathos as 'making the audience sad' rather than explaining how the patient's wish to see the sky dramatizes what a monitor cannot measure.",
+     "Ignoring the concession in paragraph 4 or describing it as weakening the argument rather than as a move that lets her relocate the danger from fatigue to certainty.",
+     "Missing the tone shift in the final paragraph from reflective storytelling to direct imperatives.",
+     "Writing a thesis that says only that the speech is 'effective' or 'uses ethos, pathos, and logos.'"
+    ]
+   },
+   "samples": [],
+   "blueprint": {
+    "theme": "The discipline of paying attention in nursing",
+    "issue": "Whether attention to patients is a practiced discipline that new nurses must deliberately cultivate, even when exhausted and surrounded by monitoring technology",
+    "stances": [
+     "Attention is a trained discipline, not a mood, and it outperforms machines in catching what matters (speaker's stance).",
+     "Workload and fatigue make sustained attention unrealistic (anticipated objection, conceded then rebutted)."
+    ],
+    "devices": [
+     {
+      "device": "ethos",
+      "sentence_ids": [
+       1,
+       2,
+       44
+      ],
+      "function": "Grounds authority in nineteen years of overnight experience and admits imperfection."
+     },
+     {
+      "device": "simile",
+      "sentence_ids": [
+       2,
+       11
+      ],
+      "function": "Call light like a slow pulse; attention like scrubbing in, making the abstract bodily and procedural."
+     },
+     {
+      "device": "antithesis",
+      "sentence_ids": [
+       3,
+       4,
+       30,
+       42
+      ],
+      "function": "Balanced opposites sharpen the central distinction between noise and signal, chart and person."
+     },
+     {
+      "device": "definition",
+      "sentence_ids": [
+       9,
+       10,
+       11
+      ],
+      "function": "Redefines attention as a discipline to be practiced."
+     },
+     {
+      "device": "direct_address",
+      "sentence_ids": [
+       6,
+       7,
+       8,
+       23,
+       38,
+       39,
+       40,
+       41,
+       48
+      ],
+      "function": "Keeps the graduates as the explicit audience and turns argument into instruction."
+     },
+     {
+      "device": "anecdote",
+      "sentence_ids": [
+       12,
+       13,
+       14,
+       15,
+       16,
+       17,
+       18,
+       19,
+       20,
+       21,
+       22
+      ],
+      "function": "Concrete evidence that a sentence, not a monitor, saved a patient."
+     },
+     {
+      "device": "parallelism",
+      "sentence_ids": [
+       14,
+       15,
+       24,
+       25,
+       26,
+       40
+      ],
+      "function": "Repeated structures mimic routine reassurance and then enumerate the audience's coming burdens and the practice she asks for."
+     },
+     {
+      "device": "pathos",
+      "sentence_ids": [
+       18,
+       20
+      ],
+      "function": "The patient's wish to see the sky supplies emotional stakes beyond logic."
+     },
+     {
+      "device": "concession_and_rebuttal",
+      "sentence_ids": [
+       23,
+       24,
+       25,
+       26,
+       27,
+       28,
+       29
+      ],
+      "function": "Grants exhaustion and workload, then relocates blame to certainty."
+     },
+     {
+      "device": "metaphor",
+      "sentence_ids": [
+       30,
+       31
+      ],
+      "function": "Certainty as thief that takes your eyes."
+     },
+     {
+      "device": "statistic",
+      "sentence_ids": [
+       32,
+       33,
+       34,
+       35
+      ],
+      "function": "Fictional hospital data showing nurses triggered most rapid responses."
+     },
+     {
+      "device": "sentence_length_variation",
+      "sentence_ids": [
+       33,
+       34,
+       46,
+       47
+      ],
+      "function": "One- and two-word sentences land key beats."
+     },
+     {
+      "device": "qualification",
+      "sentence_ids": [
+       36,
+       37
+      ],
+      "function": "Limits the anti-machine reading and preserves credibility."
+     },
+     {
+      "device": "tone_shift",
+      "sentence_ids": [
+       38,
+       39,
+       40,
+       41,
+       42,
+       43,
+       44,
+       45,
+       46,
+       47,
+       48
+      ],
+      "function": "From reflective narrative to warm imperative charge."
+     },
+     {
+      "device": "dash_or_colon_emphasis",
+      "sentence_ids": [
+       1,
+       9
+      ],
+      "function": "Colons set up the lesson of the dark and the name of the discipline."
+     },
+     {
+      "device": "repetition",
+      "sentence_ids": [
+       1,
+       28,
+       44
+      ],
+      "function": "Nineteen years recurs to frame authority and humility."
+     }
+    ]
+   },
+   "provenance": {
+    "kind": "original",
+    "note": "ALTON original practice material; fictional sources and attributions."
+   }
+  }
+ },
+ {
+  "id": "fb3",
+  "plan": {
+   "id": "fb3",
+   "type": "argument",
+   "theme": "the extent to which a city should limit private cars in its downtown",
+   "seed": 9403
+  },
+  "payload": {
+   "schema_version": "el-frq-1",
+   "task_type": "argument",
+   "template": "q3",
+   "title": "Argument: How Far Should a City Go in Keeping Private Cars Out of Downtown?",
+   "prompt": {
+    "scenario": "Cities of every size have begun experimenting with their downtown streets: some close a few blocks to private cars on weekends, some charge drivers to enter a central district, some remove curbside parking to widen sidewalks, and some do nothing at all. In a column for a small-city newspaper, the commentator Marisol Teague describes the quarrel that followed one such experiment:\n\nLast spring the council of Verrick Falls closed six blocks of Carrow Street to private cars, and the arguments have not stopped since. The owner of the hardware store says his Saturday regulars, who used to park at the curb and haul out lumber, now drive to the outlet strip on the highway instead. The woman who runs the bakery two doors down says she has never sold so many morning rolls, because people linger when nothing is idling at their backs. A nurse who finishes her shift at eleven at night asks who exactly is supposed to walk her to the garage eight blocks away. A downtown is not a park, and it is not a highway either: it is a place people must be able to reach and a place people must want to stay. The quarrel is really over how much of the street each of those purposes gets to claim.",
+    "task": "Write an essay that argues your position on the extent to which a city should limit private cars in its downtown.",
+    "requirements": [
+     "Respond to the prompt with a thesis that presents a defensible position.",
+     "Provide evidence to support your line of reasoning. Evidence may be drawn from your reading, experience, or observation, and may include (but need not be limited to) the stimulus column.",
+     "Explain how the evidence supports your line of reasoning, and use appropriate grammar and punctuation in communicating your argument."
+    ]
+   },
+   "sources": [
+    {
+     "id": "A",
+     "kind": "text",
+     "title": "The Six Blocks of Carrow Street",
+     "attribution": "Column in a small-city newspaper, the Verrick Falls Ledger (fictional)",
+     "genre": "opinion column",
+     "body": "Last spring the council of Verrick Falls closed six blocks of Carrow Street to private cars, and the arguments have not stopped since. The owner of the hardware store says his Saturday regulars, who used to park at the curb and haul out lumber, now drive to the outlet strip on the highway instead. The woman who runs the bakery two doors down says she has never sold so many morning rolls, because people linger when nothing is idling at their backs. A nurse who finishes her shift at eleven at night asks who exactly is supposed to walk her to the garage eight blocks away. A downtown is not a park, and it is not a highway either: it is a place people must be able to reach and a place people must want to stay. The quarrel is really over how much of the street each of those purposes gets to claim.",
+     "paragraphs": [
+      [
+       "Last spring the council of Verrick Falls closed six blocks of Carrow Street to private cars, and the arguments have not stopped since.",
+       "The owner of the hardware store says his Saturday regulars, who used to park at the curb and haul out lumber, now drive to the outlet strip on the highway instead.",
+       "The woman who runs the bakery two doors down says she has never sold so many morning rolls, because people linger when nothing is idling at their backs.",
+       "A nurse who finishes her shift at eleven at night asks who exactly is supposed to walk her to the garage eight blocks away.",
+       "A downtown is not a park, and it is not a highway either: it is a place people must be able to reach and a place people must want to stay.",
+       "The quarrel is really over how much of the street each of those purposes gets to claim."
+      ]
+     ],
+     "stance": "Frames the dispute without resolving it; identifies the underlying tension between reaching downtown and staying there",
+     "provenance": {
+      "kind": "original",
+      "author_alias": "Marisol Teague",
+      "year_alias": 2026
+     }
+    }
+   ],
+   "rubric": {
+    "total_points": 6,
+    "rows": [
+     {
+      "row_id": "A",
+      "name": "Thesis",
+      "max": 1,
+      "descriptors": {
+       "0": "No thesis, or a thesis that only restates the prompt (for example, 'Cities must decide how much to limit cars downtown'), or a thesis that merely summarizes Teague's column, or a thesis that takes a position on a different question (such as whether cars are bad for the environment in general) without connecting it to how far a city should limit cars in its downtown.",
+       "1": "A thesis that takes a defensible, arguable position on the degree to which a city should restrict private cars downtown. The position may be strong (cars should be nearly excluded; cars should be left alone), moderate, or conditional (limits should depend on time of day, size of the city, availability of transit, or the kind of business on the street). A thesis that presents a condition or a qualification still earns the point so long as it commits to something a reader could dispute."
+      },
+      "task_specific": "The thesis must be about the extent of limits, not merely whether cars exist. 'Cities should limit cars somewhat' earns the point only if the essay's opening makes clear what 'somewhat' means or on what the degree depends. A thesis may appear anywhere in the essay, including the conclusion."
+     },
+     {
+      "row_id": "B",
+      "name": "Evidence and Commentary",
+      "max": 4,
+      "descriptors": {
+       "0": "Only restates the thesis, or offers evidence that has no bearing on the question of car limits (for example, a general essay on pollution with no connection to downtown streets), or consists entirely of summary of the Teague column.",
+       "1": "Mostly generalities: the writer asserts that 'studies show' or 'everyone knows' that walkable downtowns thrive or that drivers abandon car-free areas, without a single specific example, scene, or observation. Or the writer lists the three people from the column (hardware store owner, baker, nurse) and says they show the issue is complicated, with no argument built from them.",
+       "2": "Provides some specific evidence, such as a real or plausibly described downtown the writer has visited, a family member's commute, or the baker and the hardware store from the column, but the commentary is thin or repetitive: the writer says the evidence 'proves' the point without explaining the mechanism. Typical 2-level responses also wander among unrelated points (parking, pollution, crime, noise) without a line of reasoning that orders them.",
+       "3": "Provides specific evidence and explains how it supports the claim, with a line of reasoning the reader can follow from paragraph to paragraph. Commentary may be uneven: one body paragraph explains carefully why a particular kind of business depends on curbside access while another simply asserts that pedestrian streets are 'more pleasant.' The writer may acknowledge an objection but treat it briefly or dismiss it rather than answer it.",
+       "4": "Provides specific, well-chosen evidence and consistently explains how each piece advances the argument. The reasoning is organized around the writer's own distinction (for instance, the difference between people who must reach downtown and people who choose to stay there, or between delivery traffic and commuter traffic, or between cities with and without working transit), and the writer uses that distinction to decide what should and should not be limited. Counterexamples are addressed, not merely mentioned; the nurse's late-night walk, for example, is treated as a problem the writer's position must solve."
+      },
+      "task_specific": "Evidence counts whether drawn from the stimulus, from the writer's own town, from reading, or from reasoned hypotheticals, as long as it is specific. The writer is not required to use Teague's column at all. Commentary earns credit when it explains why a given example bears on the degree of limits a city should set, not merely on whether cars are good or bad. An essay that argues at length about climate or public health earns at most a 2 unless it connects those concerns to a decision about how much of downtown to close."
+     },
+     {
+      "row_id": "C",
+      "name": "Sophistication",
+      "max": 1,
+      "descriptors": {
+       "0": "The argument is one-sided or treats the question as settled; or the essay gestures at complexity ('there are many sides to this issue') without actually working through tensions; or the prose is ornate but does not sharpen the argument.",
+       "1": "The essay does one or more of the following in a sustained way, not in a single sentence: works through the real tension between access and lingering that Teague identifies and shows how the writer's position resolves it in particular cases; situates the question in a wider context (who downtown is for, how a city treats people who cannot walk far or who work odd hours, what happens to the highway strip when downtown closes); considers unintended consequences of the writer's own position and adjusts the position accordingly; or sustains a voice and style that are precise, controlled, and persuasive throughout."
+      },
+      "task_specific": "Sophistication is most often earned by essays that turn Teague's three people into a test for a principle rather than three separate complaints: for example, an essay that argues the nurse and the hardware customer are different problems (one solved by time-of-day rules, the other perhaps not solvable) and says so. Merely proposing a compromise ('close streets on weekends') does not earn the point unless the writer explains why that compromise fits the competing purposes of a downtown."
+     }
+    ],
+    "scoring_notes": [
+     "Score the essay as a whole; a strong conclusion can supply the thesis for Row A.",
+     "Do not reward or penalize the writer's political stance; a well-argued case for leaving cars alone can earn a 6, and a poorly argued case for a full car ban can earn a 2.",
+     "The stimulus is optional. Essays that never mention Verrick Falls are scored on exactly the same criteria.",
+     "Reasoned hypotheticals ('imagine a pharmacy whose customers cannot carry a week of groceries eight blocks') count as evidence if they are concrete and the writer explains what they show.",
+     "Row B scores of 3 and 4 require a visible line of reasoning; if the body paragraphs could be shuffled without loss, the ceiling is 2.",
+     "An essay that argues only about a single consideration (for example, only emissions) with excellent commentary may earn a 3 on Row B but is unlikely to earn the sophistication point because it does not engage the tension the prompt names."
+    ]
+   },
+   "expected_features": {
+    "defensible_positions": [
+     "Cities should limit private cars downtown extensively, reserving most central streets for walking, transit, and deliveries, because a downtown's value comes from people staying rather than passing through.",
+     "Cities should limit cars only lightly, if at all, because downtown businesses in most small and mid-sized cities depend on drivers who have real alternatives on the highway.",
+     "Limits should be conditional on time: streets closed during daytime and weekend hours when lingering matters, open at night when safety and access for shift workers matter more.",
+     "Limits should be conditional on infrastructure: a city earns the right to exclude cars only after it provides the transit, parking at the edge, and lighting that make exclusion fair.",
+     "Limits should target the kind of traffic rather than the amount: through-traffic and long-term curb parking can go, while short-stop loading, accessible parking, and deliveries must remain.",
+     "Cities should begin with reversible experiments and let evidence from their own streets, not imported models from larger cities, set the extent of limits."
+    ],
+    "lines_of_reasoning": [
+     "Access versus lingering: the writer adopts Teague's distinction and argues that a downtown dies if either purpose is wholly sacrificed, then shows which streets or hours should serve which purpose.",
+     "The hardware store as a type: some businesses sell things people carry, and a city that removes curb access for them is choosing which businesses survive; the writer argues this is or is not a legitimate choice.",
+     "Who bears the cost: restrictions are experienced differently by a nurse at eleven at night, a parent with a stroller, and a weekend shopper; the writer argues a policy's fairness depends on who it burdens most.",
+     "The highway strip as the real competitor: downtown does not compete with its own past but with the outlet strip, and the writer argues which policy makes downtown more attractive than the strip rather than more virtuous.",
+     "Reversibility and scale: small cities cannot copy large ones; the writer argues the extent of limits should be set by trial and adjusted, with a clear standard for what counts as success.",
+     "A counterintuitive line: the writer argues that heavy limits actually help businesses like the hardware store in the long run because foot traffic brings new customers, or conversely that the bakery's gain is temporary novelty, and defends the claim with specific reasoning."
+    ],
+    "rhetorical_choices": [
+     {
+      "device": "juxtaposition",
+      "paragraph": 1,
+      "sentence_ids": [
+       2,
+       3
+      ],
+      "effect": "Sets the hardware store's loss directly against the bakery's gain so the reader sees that the same closure produces opposite results depending on what a business sells."
+     },
+     {
+      "device": "anecdote",
+      "paragraph": 1,
+      "sentence_ids": [
+       2,
+       3,
+       4
+      ],
+      "effect": "Three brief, concrete figures stand in for whole categories of downtown users and give student writers ready test cases for their own principles."
+     },
+     {
+      "device": "antithesis",
+      "paragraph": 1,
+      "sentence_ids": [
+       5
+      ],
+      "effect": "Denying that downtown is either a park or a highway clears away the two extreme positions and pushes the reader toward a question of degree."
+     },
+     {
+      "device": "dash_or_colon_emphasis",
+      "paragraph": 1,
+      "sentence_ids": [
+       5
+      ],
+      "effect": "The colon delivers the column's central distinction between reaching and staying as a compact formula the essay can borrow or contest."
+     },
+     {
+      "device": "definition",
+      "paragraph": 1,
+      "sentence_ids": [
+       5,
+       6
+      ],
+      "effect": "Redefines the quarrel as a contest over how much street each purpose may claim, turning a yes-or-no fight into a question of extent, which is exactly what the prompt asks."
+     }
+    ],
+    "source_uses": [
+     {
+      "source_id": "A",
+      "usable_for": "Supplying three concrete cases (hardware store, bakery, nurse) and a distinction between access and lingering that a writer can adopt, refine, or reject; also usable as a counterexample for writers who think the column's framing leaves out deliveries, disabled residents, or the highway strip's role."
+     }
+    ],
+    "common_pitfalls": [
+     "Answering 'should cars be allowed downtown' as a yes-or-no question instead of arguing about the extent or conditions of limits.",
+     "Summarizing the hardware store owner, the baker, and the nurse and concluding that 'it depends,' without saying on what it depends.",
+     "Treating environmental benefits as the whole argument, which ignores the prompt's focus on access and the shape of a downtown.",
+     "Proposing a compromise (weekend closures, delivery hours) as the thesis without defending why that compromise is right rather than merely moderate.",
+     "Relying on vague authority ('experts agree walkable cities are better') rather than specific examples the writer can explain.",
+     "Ignoring people who cannot walk long distances, night-shift workers, or deliveries, which leaves an easy objection unanswered.",
+     "Assuming every city resembles a large transit-rich one; failing to consider that a small city like Verrick Falls may have no bus running at eleven at night.",
+     "Using Teague's closing distinction (a place to reach versus a place to stay) as decoration rather than as a tool for deciding specific cases."
+    ]
+   },
+   "samples": [],
+   "blueprint": {
+    "issue": "The extent to which a city should limit private cars in its downtown",
+    "theme": "Community, public space, and who a city center is for",
+    "stances": [
+     "Extensive limits: downtown as a place to stay",
+     "Minimal limits: downtown as a place to reach, especially in car-dependent small cities",
+     "Time-based limits",
+     "Infrastructure-first limits",
+     "Traffic-type limits rather than blanket limits",
+     "Experimental, evidence-driven limits set locally"
+    ],
+    "devices": [
+     {
+      "device": "juxtaposition",
+      "sentence_ids": [
+       2,
+       3
+      ],
+      "function": "Opposite outcomes from the same policy expose that the question is one of degree and kind, not of yes or no."
+     },
+     {
+      "device": "anecdote",
+      "sentence_ids": [
+       2,
+       3,
+       4
+      ],
+      "function": "Gives writers specific people to reason about and to test any proposed rule against."
+     },
+     {
+      "device": "rhetorical_question",
+      "sentence_ids": [
+       4
+      ],
+      "function": "The nurse's reported question raises safety and labor concerns that pure pedestrian advocates must answer."
+     },
+     {
+      "device": "antithesis",
+      "sentence_ids": [
+       5
+      ],
+      "function": "Rejects both extremes and frames the middle ground as contested rather than automatic."
+     },
+     {
+      "device": "dash_or_colon_emphasis",
+      "sentence_ids": [
+       5
+      ],
+      "function": "Isolates the reach-versus-stay distinction as the column's key idea."
+     },
+     {
+      "device": "definition",
+      "sentence_ids": [
+       5,
+       6
+      ],
+      "function": "Reframes the dispute as a question of how much street each purpose may claim, aligning the stimulus with the extent-based task."
+     }
+    ]
+   },
+   "provenance": {
+    "kind": "original",
+    "note": "ALTON original practice material; fictional sources and attributions."
+   }
+  }
+ }
+]

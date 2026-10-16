@@ -1,0 +1,115 @@
+// AP World History: Modern 고정 계획(2026-10-15): 자료를 먼저 고정(data/ap/wh-sources/registry.json)하고, 세트·FRQ 는 그 자료에 맞춰 배치한다(자료 → 스킬 → 문항 → 정답·오답 근거).
+// 이 파일은 동결 구성 해시 대상이다. 각 자료의 context 는 ALTON 이 쓴 한 줄(사건·청중, 사실만)이며 학생 화면에 자료 출처 표기와 함께 표시된다.
+export type WhSrcRef = { id: string; context: string };
+export type WhStim = "primary_text" | "secondary_text" | "paired_text" | "quantitative" | "image";
+export type WhSetSpec = { id: string; exam: "WH1" | "WH2"; unit: number; stim: WhStim; theme: string; sources: WhSrcRef[]; skills: string[]; nItems: number; seed: number };
+export type WhFrqSpec = { id: string; exam: "WH1" | "WH2"; template: "saq1" | "saq2" | "saq3" | "dbq" | "leq"; era: number; units: number[]; focus: string; sources: WhSrcRef[]; seed: number };
+
+/** 자료별 한 줄 맥락(사실만). */
+export const CTX: Record<string, string> = {
+  "txt-magna-1215": "In 1215 a group of English barons in rebellion against King John forced him to accept this charter.",
+  "img-catalan-mansa-musa-1375": "This detail comes from a hand-painted atlas made in 1375 on the island of Majorca, which shows lands around the Mediterranean and beyond as European mapmakers knew them.",
+  "txt-babur-hindustan-1528": "Babur, a ruler from Central Asia, defeated the Sultan of Delhi at Panipat in 1526 and began Mughal rule in northern India; he wrote his memoirs in Chagatai Turkic.",
+  "txt-malleson-akbar-1890": "A British army officer and historian wrote this book about the Mughal emperor Akbar, who ruled from 1556 to 1605, for a series on the rulers of India.",
+  "txt-lascasas-1552": "Las Casas was a Spanish priest who took part in the Spanish settlement of the Caribbean and later argued for reform of Spanish treatment of Native peoples.",
+  "txt-equiano-1789": "Equiano was a formerly enslaved man living in London when he published this autobiography in 1789, during a British campaign to end the slave trade.",
+  "txt-manifesto-1848": "Karl Marx and Friedrich Engels wrote this political program in 1847 and 1848 for a group of European socialists called the Communist League.",
+  "tab-census-worldpop-1700-1900": "The U.S. Census Bureau publishes a table comparing estimates of world population made by several scholars; this table shows the lowest and highest of those estimates for five years.",
+  "txt-kipling-1899": "Rudyard Kipling, a British writer born in India, published this poem in 1899, soon after the United States took control of the Philippines.",
+  "txt-twain-1905": "Mark Twain, an American writer, published this satire in 1905 to support a campaign against the rule of King Leopold II of Belgium in the Congo; the speaker is Leopold as Twain imagined him.",
+  "img-rhodes-colossus-1892": "Cecil Rhodes was a British businessman and politician in southern Africa who proposed a railway and telegraph line from Cape Town to Cairo; this cartoon was printed in a British magazine in 1892.",
+  "txt-morgenthau-1918": "Henry Morgenthau Sr. was the United States ambassador to the Ottoman Empire from 1913 to 1916; he published this book in 1918.",
+  "txt-wilson14-1918": "United States President Woodrow Wilson gave this address to Congress in January 1918, during the First World War.",
+  "txt-truman-1947": "United States President Harry Truman gave this address to Congress in March 1947 while asking for aid to Greece and Turkey.",
+  "txt-cs-ghana-1995": "This reference book was written for the U.S. government; the country was called the Gold Coast under British rule before it became independent as Ghana in 1957.",
+  "txt-cs-china-1988-reform": "This reference book was written for the U.S. government and describes China's economy in the mid-1980s.",
+  "txt-polo-paper-money": "Marco Polo was a Venetian merchant who spent years in Mongol-ruled China in the 13th century; his account of his travels was written down around 1298 with the help of a writer named Rustichello of Pisa.",
+  "tab-census-worldpop-1000-1500": "The U.S. Census Bureau publishes a table comparing estimates of world population made by several scholars; this table shows the lowest and highest of those estimates for six years.",
+  "img-jahangir-sufi-1615": "This painting was made around 1615 to 1618 for Jahangir, the Mughal emperor of India, by the court painter Bichitr.",
+  "txt-lybyer-1913": "Albert Lybyer was an American historian who wrote this study of the Ottoman government in the time of Sultan Suleiman, who ruled from 1520 to 1566.",
+  "img-brookes-poster-1788": "Opponents of the slave trade printed this plan in 1788 to show how people were packed on the British ship Brookes after a new British law limited the number allowed on board.",
+  "txt-bernal-1568": "Bernal Diaz was a Spanish soldier who took part in the 1519 expedition of Hernan Cortes into Mexico; he wrote this account decades later.",
+  "txt-rights-man-1789": "The French National Assembly adopted this declaration in August 1789, soon after the French Revolution began.",
+  "txt-wollstonecraft-1792": "Mary Wollstonecraft, an English writer, published this book in 1792, soon after the French Revolution began.",
+  "txt-wells-1920": "H. G. Wells was an English writer who published a popular history of the world in 1920 for general readers.",
+  "txt-kanagawa-1854": "In 1854 a United States naval squadron under Commodore Matthew Perry and Japanese commissioners signed this treaty.",
+  "img-china-cake-1898": "This cartoon appeared in a French newspaper supplement in January 1898, after several European powers and Japan had gained special rights in parts of China.",
+  "txt-order1-1917": "This order was issued on March 1 (Old Style) in 1917 by the Petrograd Soviet, a council of workers' and soldiers' deputies, during the February Revolution and one day before Tsar Nicholas II gave up the throne.",
+  "txt-lenin-1918": "Vladimir Lenin, leader of the Bolshevik government of Russia, wrote this letter in August 1918, during the Russian Civil War.",
+  "txt-gandhi-1909": "Mohandas Gandhi, an Indian lawyer who had worked in South Africa, wrote this book in 1909 as a dialogue between a Reader and an Editor; the Editor states Gandhi's views.",
+  "img-berlin-wall-cia-1961": "This photograph from the U.S. Central Intelligence Agency shows work on a wall dividing East Berlin from West Berlin in September 1961.",
+  "txt-cs-india-1995": "This reference book was written for the U.S. government and describes India's economy after independence in 1947.",
+  "txt-cs-egypt-1991": "This reference book was written for the U.S. government; the passage describes events in 1956.",
+  "txt-boccaccio-plague-1353": "Giovanni Boccaccio was a writer from Florence, Italy; he wrote this introduction a few years after a plague struck Florence in 1348.",
+  "img-piri-reis-1513": "Piri Reis, an Ottoman naval commander, drew this world map in 1513; only the western part of the map survives.",
+  "txt-smith-1776": "Adam Smith was a Scottish moral philosopher who published this book in 1776.",
+  "txt-qianlong-1793": "The Qianlong Emperor of China wrote this reply to King George III of Britain in 1793, after a British ambassador asked for expanded trade and a permanent British envoy in Beijing.",
+  "txt-engels-1845": "Friedrich Engels, a German who helped manage his family's cotton business in Manchester, England, published this book in German in 1845.",
+  "txt-tientsin-1858": "Britain and China signed this treaty in June 1858, during the Second Opium War.",
+  "img-dore-london-1872": "The French artist Gustave Dore drew scenes of London for a book published in 1872.",
+  "txt-gandhi-1909-machinery": "Mohandas Gandhi, an Indian lawyer, wrote this book in 1909 as a dialogue between a Reader and an Editor; the Editor states Gandhi's views.",
+  "txt-sun-1922": "Sun Yat-sen, a leader of the Chinese revolution of 1911, wrote this plan to attract foreign investment to China after the First World War; it was published in English in 1922.",
+  "txt-cs-china-1988-treaties": "This reference book was written for the U.S. government in the 1980s.",
+  "txt-atlantic-1941": "United States President Franklin Roosevelt and British Prime Minister Winston Churchill issued this joint statement in August 1941, before the United States entered the Second World War.",
+  "img-mongol-invasion-japan-1293": "A Japanese warrior named Takezaki Suenaga had this scroll painted around 1293 to record his service against the Mongol invasions of Japan in 1274 and 1281.",
+  "txt-hussein-1915": "Hussein ibn Ali was the Sharif of Mecca, the ruler of a region of Arabia then in the Ottoman Empire; he wrote to a British official in July 1915.",
+  "txt-mcmahon-1915": "Sir Henry McMahon was the British High Commissioner in Egypt; he replied to Hussein in October 1915.",
+  "txt-sykes-1916": "Britain and France reached this agreement in 1916 during the First World War; it stayed secret until Russia's revolutionary government published it in 1917.",
+  "img-sykes-picot-map-1916": "British and French negotiators signed this map on 8 May 1916 to show the zones in their agreement.",
+  "txt-balfour-1917": "Arthur Balfour was the British Foreign Secretary; he wrote this letter in November 1917, during the First World War.",
+  "txt-leagcov-art22": "The Covenant of the League of Nations was part of the peace settlement after the First World War; Article 22 set up the mandate system.",
+  "txt-whitepaper-1922": "The British government published this statement in June 1922, when Britain was preparing to govern Palestine under a League of Nations mandate.",
+};
+const S = (id: string): WhSrcRef => ({ id, context: CTX[id] });
+const set = (id: string, exam: "WH1" | "WH2", unit: number, stim: WhStim, theme: string, srcs: string[], skills: string[], seed: number): WhSetSpec => ({ id, exam, unit, stim, theme, sources: srcs.map(S), skills, nItems: skills.length, seed });
+
+export const WH_SETS: WhSetSpec[] = [
+  // ── WH1 ──
+  set("w101", "WH1", 1, "primary_text", "Limits on royal power and feudal obligations in England, 1215", ["txt-magna-1215"], ["2.B", "3.A", "4.A", "5.B"], 1101),
+  set("w102", "WH1", 2, "image", "Trans-Saharan trade, gold and the image of the king of Mali on a European atlas", ["img-catalan-mansa-musa-1375"], ["2.A", "3.A", "4.B", "5.A"], 1102),
+  set("w103", "WH1", 3, "primary_text", "A Central Asian conqueror's view of Hindustan after 1526", ["txt-babur-hindustan-1528"], ["1.B", "2.A", "3.B", "4.B"], 1103),
+  set("w104", "WH1", 3, "secondary_text", "Akbar's religious discussions and Mughal rule", ["txt-malleson-akbar-1890"], ["3.A", "3.D", "4.A", "1.B"], 1104),
+  set("w105", "WH1", 4, "primary_text", "Spanish colonization of the Caribbean and criticism of it", ["txt-lascasas-1552"], ["2.C", "3.B", "4.A", "5.B"], 1105),
+  set("w106", "WH1", 4, "primary_text", "The Atlantic slave trade as experienced and recounted by a survivor", ["txt-equiano-1789"], ["2.B", "3.A", "4.B", "5.A"], 1106),
+  set("w107", "WH1", 5, "primary_text", "Industrial capitalism and the world market in the mid-19th century", ["txt-manifesto-1848"], ["1.B", "3.A", "4.A", "5.B"], 1107),
+  set("w108", "WH1", 5, "quantitative", "World population growth in the age of revolutions and industrialization", ["tab-census-worldpop-1700-1900"], ["1.A", "3.B", "4.B"], 1108),
+  set("w109", "WH1", 6, "paired_text", "Justifying and criticizing imperial rule around 1900", ["txt-kipling-1899", "txt-twain-1905"], ["3.C", "2.B", "4.A", "5.B"], 1109),
+  set("w110", "WH1", 6, "image", "Railways, telegraphs and imperial ambition in Africa", ["img-rhodes-colossus-1892"], ["2.B", "3.A", "4.B", "5.A"], 1110),
+  set("w111", "WH1", 7, "primary_text", "The 1915 deportations of Armenians in the Ottoman Empire", ["txt-morgenthau-1918"], ["2.C", "4.B", "5.B"], 1111),
+  set("w112", "WH1", 7, "primary_text", "War aims, self-determination and empires at the end of the First World War", ["txt-wilson14-1918"], ["2.B", "4.A", "5.B"], 1112),
+  set("w113", "WH1", 8, "primary_text", "Containment and the beginning of the Cold War", ["txt-truman-1947"], ["1.B", "3.A", "4.B"], 1113),
+  set("w114", "WH1", 8, "secondary_text", "The path to independence in the Gold Coast", ["txt-cs-ghana-1995"], ["3.A", "4.A", "5.B"], 1114),
+  set("w115", "WH1", 9, "secondary_text", "China's opening to the world economy in the 1980s", ["txt-cs-china-1988-reform"], ["1.B", "3.A", "3.D", "4.B"], 1115),
+  // ── WH2 ──
+  set("w201", "WH2", 1, "primary_text", "Paper money and state power in Yuan China", ["txt-polo-paper-money"], ["1.B", "2.B", "3.A", "5.A"], 1201),
+  set("w202", "WH2", 2, "quantitative", "World population change across the period of the Mongol empire and the Black Death", ["tab-census-worldpop-1000-1500"], ["1.A", "1.B", "3.B", "4.B"], 1202),
+  set("w203", "WH2", 3, "image", "Mughal court painting, religion and the foreign rulers it shows", ["img-jahangir-sufi-1615"], ["2.A", "3.A", "4.A", "5.B"], 1203),
+  set("w204", "WH2", 3, "secondary_text", "Law, religion and foreigners in the Ottoman Empire", ["txt-lybyer-1913"], ["3.A", "3.B", "4.B", "5.A"], 1204),
+  set("w205", "WH2", 4, "image", "The Atlantic slave trade and the British campaign against it", ["img-brookes-poster-1788"], ["2.B", "3.A", "4.B", "5.B"], 1205),
+  set("w206", "WH2", 4, "primary_text", "Spanish conquistadors' encounter with the Aztec capital", ["txt-bernal-1568"], ["2.C", "3.B", "4.A", "5.B"], 1206),
+  set("w207", "WH2", 5, "paired_text", "Rights claims in the French Revolution era: citizens and women", ["txt-rights-man-1789", "txt-wollstonecraft-1792"], ["3.C", "3.D", "4.A", "5.B"], 1207),
+  set("w208", "WH2", 5, "secondary_text", "The industrial revolution in Britain as seen in the 20th century", ["txt-wells-1920"], ["3.A", "4.B", "1.B"], 1208),
+  set("w209", "WH2", 6, "primary_text", "The opening of Japan and the unequal exchange of privileges", ["txt-kanagawa-1854"], ["1.B", "2.B", "4.B", "5.A"], 1209),
+  set("w210", "WH2", 6, "image", "Imperial rivalry over China in the late 1890s", ["img-china-cake-1898"], ["2.B", "3.A", "4.B", "5.B"], 1210),
+  set("w211", "WH2", 7, "primary_text", "Revolution and the army in Russia in 1917", ["txt-order1-1917"], ["1.B", "2.B", "4.B"], 1211),
+  set("w212", "WH2", 7, "primary_text", "The Russian revolutionary government's appeal to workers abroad", ["txt-lenin-1918"], ["2.A", "3.A", "5.B"], 1212),
+  set("w213", "WH2", 8, "primary_text", "Indian nationalism and the critique of British rule", ["txt-gandhi-1909"], ["2.B", "3.A", "5.B"], 1213),
+  set("w214", "WH2", 8, "image", "The division of Berlin during the Cold War", ["img-berlin-wall-cia-1961"], ["2.A", "4.B", "5.B"], 1214),
+  set("w215", "WH2", 9, "secondary_text", "Economic planning and growth in India after independence", ["txt-cs-india-1995"], ["1.B", "3.A", "4.B", "5.B"], 1215),
+];
+
+const F = (id: string, exam: "WH1" | "WH2", template: WhFrqSpec["template"], era: number, units: number[], focus: string, srcs: string[], seed: number): WhFrqSpec => ({ id, exam, template, era, units, focus, sources: srcs.map(S), seed });
+export const WH_FRQS: WhFrqSpec[] = [
+  F("wh1_saq1", "WH1", "saq1", 4, [8], "Superpower rivalry and the end of European control in the Middle East in the 1950s (Suez crisis)", ["txt-cs-egypt-1991"], 2101),
+  F("wh1_saq2", "WH1", "saq2", 1, [2], "The Black Death as a disease that moved along trade routes, and its social and economic effects in Europe and the Mediterranean (do not tie the plague to the fall of any particular dynasty)", ["txt-boccaccio-plague-1353"], 3122),
+  F("wh1_saq3", "WH1", "saq3", 2, [4], "Maritime exploration, mapmaking and the Atlantic world in the early 16th century", ["img-piri-reis-1513"], 3103),
+  F("wh1_dbq", "WH1", "dbq", 3, [5, 6, 7], "How industrialization changed relationships between industrial and non-industrial societies and conditions within industrial societies, 1776-1922", ["txt-smith-1776", "txt-qianlong-1793", "txt-engels-1845", "txt-tientsin-1858", "img-dore-london-1872", "txt-gandhi-1909-machinery", "txt-sun-1922"], 3124),
+  F("wh1_leq", "WH1", "leq", 2, [1, 2, 3, 4], "Long-distance trade and the exchange of goods, ideas and diseases, c. 1200 to c. 1750 (avoid 'for the first time' claims)", [], 3125),
+  F("wh2_saq1", "WH2", "saq1", 3, [6], "Western trade and military pressure on China in the 19th century and its consequences", ["txt-cs-china-1988-treaties"], 2201),
+  F("wh2_saq2", "WH2", "saq2", 4, [8], "Anti-colonial movements and the principles stated by the Allies in the Second World War", ["txt-atlantic-1941"], 3212),
+  F("wh2_saq3", "WH2", "saq3", 1, [1], "Mongol expansion and the response of the states it threatened in the 13th century (the image is a detail of a longer scroll; make no claims about the rest of the scroll)", ["img-mongol-invasion-japan-1293"], 3223),
+  F("wh2_dbq", "WH2", "dbq", 4, [7], "How far Allied commitments and the peace settlements after the First World War reshaped political authority in the former Ottoman Arab provinces, 1915-1922", ["txt-hussein-1915", "txt-mcmahon-1915", "txt-sykes-1916", "img-sykes-picot-map-1916", "txt-balfour-1917", "txt-leagcov-art22", "txt-whitepaper-1922"], 2204),
+  F("wh2_leq", "WH2", "leq", 3, [5, 6, 7, 8, 9], "Nationalism and resistance to foreign rule, c. 1750 to the present (use only well-established facts; avoid details about who led the early stages of any revolution)", [], 3205),
+];
+export const whSetsOf = (exam?: string) => WH_SETS.filter((s) => !exam || s.exam === exam);
+export const whPlanSummary = () => ({ sets: WH_SETS.length, items: WH_SETS.reduce((a, s) => a + s.nItems, 0), byExam: Object.fromEntries(["WH1", "WH2"].map((e) => [e, { sets: whSetsOf(e).length, items: whSetsOf(e).reduce((a, s) => a + s.nItems, 0), units: whSetsOf(e).reduce<Record<string, number>>((o, s) => { o[s.unit] = (o[s.unit] ?? 0) + s.nItems; return o; }, {}), stim: whSetsOf(e).reduce<Record<string, number>>((o, s) => { o[s.stim] = (o[s.stim] ?? 0) + 1; return o; }, {}), skillCats: whSetsOf(e).reduce<Record<string, number>>((o, s) => { for (const k of s.skills) o[k[0]] = (o[k[0]] ?? 0) + 1; return o; }, {}) }])) });

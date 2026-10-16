@@ -1,0 +1,327 @@
+[
+ {
+  "key": "ap_computer_science_a-f01-k0",
+  "cellId": "ap_computer_science_a-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "Loop through the reviews. Use indexOf(word) >= 0 to check whether the text contains word anywhere, including at index 0. For each match, add its stars to a running total and count it. Cast to double before dividing so the result isn't truncated. Return -1.0 if nothing matched. Example check: (5+4)/2 = 4.5.",
+     "final_answer": "public static double averageFor(ArrayList<Review> reviews, String word) {\n    int sum = 0;\n    int count = 0;\n    for (Review r : reviews) {\n        if (r.getText().indexOf(word) >= 0) {\n            sum += r.getStars();\n            count++;\n        }\n    }\n    if (count == 0) {\n        return -1.0;\n    }\n    return (double) sum / count;\n}",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean 9-point ArrayList algorithm FRQ with a unique, well-specified behavior and a consistent rubric. The independent solution matches the reference. I found no defects.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The task is writing an ArrayList traversal with a filter, an accumulator and a sentinel return. This is squarely topic 4.10 and skill 2.A. It uses only String indexOf and class-design prerequisites from earlier units."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The spec is unambiguous: contains anywhere, the -1.0 sentinel, and a worked example. The reference and the independent solver's answer are equivalent. The rubric rows are 1 point each and judge single behaviors. Rows A8 and A9 overlap slightly because both require the (double) total / count expression, but they judge different behaviors (computation vs. return placement). The alternative-solution handling is acceptable."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The Review class and the method header are provided and complete. The wording is clear US English. The note about \"including at the start\" targets the indexOf boundary without adding reading load."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so there are no distractors. The common_errors listed in the rubric rows are realistic: indexOf > 0, integer division, dividing by size, returning 0.0, and returning inside the loop."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "This is a typical 9-point FRQ with a single method, a short traversal and no calculator need. The 22-minute estimate is only an internal reference. The actual task load is a standard AP-style method."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard FRQ-style ArrayList algorithm: traverse, filter with indexOf/contains (boundary at index 0 is a plausible off-by-one), accumulate sum and count, guard the zero-count case, and avoid integer division by casting. It is moderately deep and in scope for 4.10, with light reading, trivial arithmetic, and no unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_computer_science_a-f02-k0",
+  "cellId": "ap_computer_science_a-f02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "Go through the list once, keeping the length of the current run and the longest run seen so far. Compare neighbours with .equals, not == on Integer objects.\n\npublic static int longestRun(ArrayList<Integer> data) {\n    if (data.size() == 0) return 0;\n    int max = 1, cur = 1;\n    for (int i = 1; i < data.size(); i++) {\n        if (data.get(i).equals(data.get(i - 1))) {\n            cur++;\n        } else {\n            cur = 1;\n        }\n        if (cur > max) max = cur;\n    }\n    return max;\n}",
+     "final_answer": "Single pass with current/max counters, using equals; returns 0 for empty list, 3 for [1,1,2,2,2,3], 1 for [4,5,6].",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A single 9-point FRQ on an ArrayList traversal that tracks a longest run, which fits topic 4.10 and skill 2.A. The rubric has nine one-point rows, each judging one behavior, and the dependency chain is reasonable. The reference solution is correct and the independent solver produced an equivalent one. The prompt states the empty-list, no-modification, and example conditions. The Integer equals-versus-== trap is a realistic misconception. The task load is a typical single-method FRQ. One minor point: rubric row A3 requires the exact string data.get(i).equals(data.get(i - 1)). An equivalent next-element comparison is allowed by the criterion text, but the required element is too narrow. This is not disqualifying.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The dominant demand is writing an ArrayList traversal algorithm, which matches 4.10 and 2.A. No out-of-scope content is used."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The reference solution is correct, and the independent solver's solution matches it. Valid alternatives such as a nested scan, unboxing with intValue(), or comparing with the next element are acceptable under the criteria text."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The header, the specification, and the two examples are complete and clearly worded."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so there are no distractors. The common_errors entries per row cover the realistic misconceptions."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical of an AP CS A FRQ: one method, no calculator, and a modest amount of reading."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard FRQ-style ArrayList algorithm. The student writes a single traversal that compares adjacent elements, keeps a running count and a running maximum, and handles the empty list. The plausible pitfalls are the off-by-one at the boundary (starting at index 1 or comparing i with i-1), resetting the count correctly, and using .equals() rather than == for Integer objects. All of these are in scope under 4.7 to 4.10. Reading and computation load are minimal, preconditions are clearly stated, and the examples are short, so the difficulty comes from the concept and not from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "ap_computer_science_a-f03-k0",
+  "cellId": "ap_computer_science_a-f03",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "Go through the list from the back so that removing an element does not shift any index that has not been checked yet.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "public static void removeShort(ArrayList<String> words, int minLength) {\n    for (int i = words.size() - 1; i >= 0; i--) {\n        if (words.get(i).length() < minLength) {\n            words.remove(i);\n        }\n    }\n}"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The task fits topic 4.10 and skill 2.A, the key is correct, and the stimulus is clear. The rubric is padded: A6 restates A3, A4, and A5; A7 and A8 are automatically satisfied by any remove(i) solution; and the dependency chains make one early error cascade across several rows. This breaks the one-behavior-per-row requirement, and the item is a single 9-point part rather than the usual FRQ structure.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Removal traversal of an ArrayList is core 4.10 content and the demand is 2.A. No out-of-scope material is used."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "The reference solution and the alternative forward-loop solution are both valid. The rubric rows overlap: A6 duplicates A3, A4, and A5; A7 and A8 are automatic for any remove(i) solution; A2 is not an independent behavior. The dependency chains double-penalize a single error, such as a missing index shift losing both A5 and A6."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The header, specification, and example are complete and clearly worded."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Common errors are listed per rubric row, including the skipped element after a removal and the wrong boundary. FRQ items have no distractors, so this criterion is not a concern."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The task load is a single short method. Because several of the nine points are free or redundant, the 9-point value is not earned by 9 distinct behaviors, so the item does not discriminate as an official FRQ would."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard FRQ-style ArrayList algorithm. The key concept is the index shift when removing during traversal, which requires a backward loop or an index decrement and creates a plausible off-by-one/skipped-element error. The code is short with a clear spec, no heavy reading or arithmetic, and it stays within Unit 4 scope (size/get/remove). It suits a full mock rather than basic learning because of the removal-while-traversing pitfall, but it is not advanced.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_computer_science_a-f04-k0",
+  "cellId": "ap_computer_science_a-f04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "Make a new array with the same number of rows and columns. For each row r and column c, copy grid[r][c] into result[r][(c+1)%cols]. This shifts every element one place right, and the last element wraps around to the front. The original grid is never changed.",
+     "final_answer": "public static int[][] shiftRight(int[][] grid) {\n    int rows = grid.length;\n    int cols = grid[0].length;\n    int[][] result = new int[rows][cols];\n    for (int r = 0; r < rows; r++) {\n        for (int c = 0; c < cols; c++) {\n            result[r][(c + 1) % cols] = grid[r][c];\n        }\n    }\n    return result;\n}",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A 2D array algorithm FRQ on topic 4.13 and skill 2.A that builds a new array with wrap-around column indexing. The spec has a precondition and an example, the reference and independent solver solutions agree, and the rubric has nine one-point rows that each judge a single behavior. It fits the Class Design / 2D Array FRQ pattern, and the 9-point load in about 22 minutes is acceptable.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The dominant demand is writing a 2D traversal that builds a new array, which fits 4.13 and 2.A. It uses no out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The reference and the solver's alternative both implement the spec correctly. Rubric rows each judge one behavior, and alternative approaches such as a special case for the first column are allowed in row A6. The dependency chain between rows is consistent."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The method header, precondition, return behavior and example are all stated clearly."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so there are no distractors. Common errors are listed per rubric row."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The task is typical for an AP CS A 2D array FRQ, needs no calculator, and has a reasonable length."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard 2D array FRQ-style method. The student must allocate a new array with matching dimensions, traverse by row and column, and map each element to column (c+1) % length. The wrap-around index is the only real subtlety, and it is a plausible off-by-one at the boundary. The method does not modify the input, so the student must avoid aliasing. Reading load is small and the example clarifies the behavior. The arithmetic is trivial and the scope is within 4.11-4.13. There are no unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_computer_science_a-f05-k0",
+  "cellId": "ap_computer_science_a-f05",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "Go through every element and add it if it is in the first row, the last row, the first column or the last column. Because each element is checked only once, corners are not counted twice. This also works for grids with a single row or a single column. Check with the example: 1+2+3+4+6+7+8+9 = 40.",
+     "final_answer": "public static int borderSum(int[][] grid) {\n    int sum = 0;\n    int rows = grid.length;\n    int cols = grid[0].length;\n    for (int r = 0; r < rows; r++) {\n        for (int c = 0; c < cols; c++) {\n            if (r == 0 || r == rows - 1 || c == 0 || c == cols - 1) {\n                sum += grid[r][c];\n            }\n        }\n    }\n    return sum;\n}",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a single 9-point method-writing FRQ on 2D array traversal with a combined border test. It fits 4.13 and skill 2.A. The spec is clear, includes an example and states the precondition. The nine 1-point rows each judge one behavior. The reference and the independent solver's solution (which uses grid[0].length, covered by the A2 alternative) both pass the tests. Single-row, single-column and 1x1 cases are tested. The load is typical of an AP FRQ.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Nested traversal with a boundary condition. Dominant demand is 2D array algorithm implementation. No out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Rows are consistent with the reference. The tests cover degenerate shapes. A7 is somewhat implicit but acceptable. The alternative (total minus interior) is also valid."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The method header, javadoc and precondition are complete. The example gives 40, which is correct."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "FRQ: the common_errors listed in the rubric rows are realistic, such as && instead of ||, a wrong loop bound, and double counting."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Appropriate for a 9-point FRQ. No calculator is needed."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard FRQ-style 2D array algorithm: nested traversal plus a compound boundary condition. The trap is counting each element once, including corners and 1-row/1-column grids, which a single OR condition inside the nested loop handles. Concept depth is moderate, the worked example is short, and preconditions are stated, so nothing makes it hard for unfair reasons.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "key": "ap_computer_science_a-f06-k0",
+  "cellId": "ap_computer_science_a-f06",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "Make a new array with grid[0].length rows and grid.length columns. Then set result[c][r] = grid[r][c] for every r and c. The original grid is never changed.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "public static int[][] transpose(int[][] grid) {\n    int rows = grid.length;\n    int cols = grid[0].length;\n    int[][] result = new int[cols][rows];\n    for (int r = 0; r < rows; r++) {\n        for (int c = 0; c < cols; c++) {\n            result[c][r] = grid[r][c];\n        }\n    }\n    return result;\n}"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The task is in scope and the reference solution is correct. However, the rubric splits one statement across three rows (A4, A5, A6) and adds redundant rows (A7, A8). It also uses literal-string required elements that would penalize valid alternative solutions. The 9-point single-part structure also deviates from the official pattern of multi-part FRQs. I am failing it on key/scoring and on matches_reference_pattern.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Transposing a 2D array is squarely topic 4.13 and skill 2.A. It needs only 2D traversal and array creation (4.11 and 4.12), with no out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "The reference is correct, and the independent solver's different valid solution (hoisting rows/cols into variables) shows that alternatives work. The rubric is poorly constructed, though. It has nine 1-point rows, and several do not each judge a distinct behavior. A4 (reading grid[r][c]), A5 (writing result[c][r]) and A6 (the assignment) all award credit for the same single statement. A7 (works for non-square arrays) is already covered by A1 and A3. A8 (leaves grid unchanged) awards a point for the absence of a bad action, which is not a distinct skill. The rows also demand literal strings such as 'for (int r = 0; r < grid.length; r++)'. The solver's valid alternative, which uses rows/cols variables, would fail those literal required_elements, so the rubric is not robust to valid solutions. The dependency chain (A9 requires A6, and so on) can also cause cascading loss of credit."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The stem is clear. The method header, the precondition and a worked example are all given. The one weakness is that the stimulus data is minimal (variant java_code, language java) and the code itself is carried in the description."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ with no distractors. The common_errors listed for each row are reasonable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "This is a single 9-point part in a task that takes about 5 minutes, which is lighter than a real 9-point AP FRQ. Real AP FRQs split the 9 points across parts of 1-5 points (for example 1/1/2/5). One part with nine 1-point rows is a material deviation from that pattern. The inflated rubric over-rewards a short method."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard FRQ-style 2D array method. The student must size the new array with swapped dimensions (grid[0].length by grid.length), traverse with nested loops, and swap the indices on assignment. The likely errors are swapped dimensions or indices, or modifying the input. It is typical of a full-mock free-response item and tests only in-scope Unit 4 content, with short reading and no long computation.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 480
+  }
+ }
+]

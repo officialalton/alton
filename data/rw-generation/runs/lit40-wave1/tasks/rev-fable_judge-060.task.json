@@ -1,0 +1,315 @@
+{
+ "schema": "rw-session-task/v1",
+ "kind": "review",
+ "role": "fable_judge",
+ "runId": "lit40-wave1",
+ "taskId": "rev-fable_judge-060",
+ "chunkId": "rev-fable_judge-060",
+ "suggestedModel": "fable",
+ "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-fable_judge-060.result.json",
+ "outputSchema": {
+  "chunkId": "청크 ID",
+  "model": "fable",
+  "items": [
+   {
+    "candidateId": "id",
+    "picked_letter": "A|B|C|D",
+    "other_defensible": "정답 외 방어 가능한 선택지가 있으면 true",
+    "est_difficulty": "easy|medium|hard (실제 체감, 요청 난이도에 맞추지 말 것)",
+    "hard_fit": "실제 SAT hard 수준의 사고 단계가 필요하면 true(지문 길이·난어만이면 false)",
+    "plausible_distractors": "오답 3개가 모두 그럴듯하고 서로 다른 오개념에서 나왔으면 true",
+    "length_balanced": "네 선택지 길이·구체성이 비슷해 정답이 형식으로 드러나지 않으면 true",
+    "multi_answer_risk": "복수 정답 위험이 있으면 true",
+    "issues": "한 줄 메모"
+   }
+  ]
+ },
+ "items": [
+  {
+   "candidateId": "lit40-easy-03-015",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "easy",
+   "passage": "Over its grave stood the leering spectre of unrest.\n\nWhen he took her in his arms later on, and kissed her, there was not the shadow of a doubt in the mind of either that the restraining influence of a condition over which they had no control was there to mock their endeavour to be natural. They were not to be deceived by the apparent earnestness of the embrace. Each knew that the other was asking a question, even as their lips met and clung in the rather pathetic attempt to confirm the fond dream of the night before. They kissed as through a veil. They were awake once more, and they were wary, unconvinced. The answer to their questions came in the kiss itself, and constraint fell upon them.",
+   "question": "Which choice best describes the shift in tone that occurs in the text?",
+   "options": [
+    "From bitter resentment to joyful reconciliation.",
+    "From quiet boredom to sudden romantic passion.",
+    "From hopeful tenderness to wary constraint.",
+    "From playful teasing to open, angry hostility."
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-03-016",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "easy",
+   "passage": "Low in the tomb of glory\nThe old man's ashes lie--\nUnuttered this my story,\nUnwritten to human eye;\nAnd the young man, blessed and blessing,\nWalks over the shady town,\nThe evil passions repressing,\nAnd his head bent humbly down.\n\nPerhaps he marvels why treasure\nOf the judge to his credit is set,\nAnd an old revival measure\nShould have been the statesman's pet.\nBut he hears the invitation,\nAnd sees the streaming eyes\nOf the old man lost to the nation,\nAnd forgiven beyond the skies.",
+   "question": "Which choice best describes the shift in tone that occurs in the text?",
+   "options": [
+    "From cheerful praise to bitter condemnation.",
+    "From angry protest to resigned silence.",
+    "From playful wit to anxious, growing dread.",
+    "From somber reflection to consoling reassurance."
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-03-017",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "easy",
+   "passage": "At the Christmas dance the same some one had said her waltzing would make her \"all the rage\" in Boston. She wondered if it were true, and wondered whether, if she had not promised to marry Stephen, some splendid being from a city would have descended from his heights, bearing diamonds in his hand. Not that she would have accepted them; she only wondered. These disloyal thoughts came seldom, and she put them resolutely away, devoting herself with all the greater assiduity to her muslin curtains and ruffled pillow-shams. Stephen, too, had his momentary pangs. There were times when he could calm his doubts only by working on the little house. The mere sight of the beloved floors and walls and ceilings comforted his heart, and brought him good cheer.",
+   "question": "Which choice best describes the shift in tone that occurs in the text?",
+   "options": [
+    "From wistful daydreaming to steady reassurance.",
+    "From open anger to cheerful acceptance.",
+    "From calm confidence to growing panic.",
+    "From playful mockery to sincere regret."
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-03-018",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "easy",
+   "passage": "I fancy we are most of us tired of Constantinople. To me it is a place where a little sight-seeing goes a long way. Our gallant captain, on the contrary, tells me that he could put in three months here very well. As it is, there are about 2,000 English here, to say nothing of naturalized Greeks and Maltese. I suppose Constantinople is not a bad place for a short residence. The hotels are good, and in some you may have a bedroom for four francs a day. Provisions are not dear, but house-rent is very expensive. The population of the place is dense, at which I wonder, as Constantinople seems to me the most unhealthy city I have ever seen.",
+   "question": "Which choice best describes the shift in tone that occurs in the text?",
+   "options": [
+    "From eager enthusiasm to bitter disappointment.",
+    "From weary dismissal to practical appraisal.",
+    "From scholarly detachment to fond nostalgia.",
+    "From playful humor to fearful alarm."
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-03-019",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "easy",
+   "passage": "My mother had the words engraved on the inside of a ring, which Hugh wore for many years.\n\nBy far the closest and dearest of all the ties which bound Hugh to another was his love for my mother. Though she still lives to bless us, I may say this, that never did a mother give to her children a larger and a wiser love than she gave to us; she was our playmate and companion, but we always gave her a perfectly trustful and unquestioning obedience. Yet it was always a reasonable and critical obedience. She never exacted silent submission, but gave us her reasons readily. She never curtailed our independence, or oppressed us with a sense of over-anxiety. She never demanded confidence, but welcomed it with perfect, understanding.",
+   "question": "Which choice best describes the shift in tone that occurs in the text?",
+   "options": [
+    "From joyful celebration to quiet mourning.",
+    "From harsh criticism to reluctant praise.",
+    "From plain report to warm, grateful tribute.",
+    "From anxious worry to calm indifference."
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-03-020",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "easy",
+   "passage": "I mounted the steps, however, and rung at the door. It was opened by a pale nun, of thirty, who hesitated a moment, and let me pass. In a small, plain chapel within, the service of the altar was just commencing, and, before I reached a seat, a low plaintive chant commenced, in female voices from the choir. It went on with occasional interruptions from the prayers, for perhaps an hour. I can not describe the excessive mournfulness of the music. One or two familiar hymns occurred in the course of it, like airs in a recitative, the same sung in our churches, but the effect was totally different.",
+   "question": "Which choice best describes the shift in tone that occurs in the text?",
+   "options": [
+    "From solemn grief to cheerful relief.",
+    "From eager curiosity to angry disapproval.",
+    "From familiar comfort to bored indifference.",
+    "From plain narration to deep, moved sorrow."
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-03-022",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "text_structure",
+   "requestedDifficulty": "easy",
+   "passage": "There are some people who habitually, and from a strong sense of duty, live on the shady side of life. Metaphorically speaking, the sunshine may almost touch the very path on which they are treading, but they shrink from and avoid it, having a strong preference for the shade, but considering themselves martyrs while they live in it. Mrs. Cameron was one of these people. The circumstances of her life had elected plenty of sunshine for her; she had a devoted and excellent husband, an abundant income, and admirable health. It is true she had no children, and it is also true that she had brought herself by careful cultivation to a state of chronic ill-temper.",
+   "question": "Which choice best describes the overall structure of the text?",
+   "options": [
+    "It describes Mrs. Cameron's poor health and then explains how her husband came to cure her.",
+    "It states a general claim about certain people and then gives Mrs. Cameron as an example.",
+    "It contrasts two married couples and then judges which of the two is the happier pair.",
+    "It recounts a sunny walk in the country and then shifts to a memory of a darker period."
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-03-023",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "text_structure",
+   "requestedDifficulty": "easy",
+   "passage": "The chamber of the solitary student is peopled with immortal guests. He has friends who are always steadfast, who are never false, who are silent when he is weary, who go forth with him to his work, who await his return. In the literature of the world a grand society is open to all who choose to enter it.\n\nBooks are the chief food of our intellectual life.--There are men that have, indeed, done great things who have read but little. These have had their want of mental training compensated by their powers of observation and experience of life. But they have been for the most part exceptional men, and it is possible they might have done better if they had studied more.",
+   "question": "Which choice best describes the overall structure of the text?",
+   "options": [
+    "It tells the story of one solitary student and then describes the friends he has lost.",
+    "It lists several famous books and then ranks them by their value to young scholars.",
+    "It praises books as companions and then answers an objection about light readers.",
+    "It argues against heavy reading and then admits that books can offer some comfort."
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-03-024",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "text_structure",
+   "requestedDifficulty": "easy",
+   "passage": "I was, however, happily disappointed, when at the close of the ceremony the company retired, and my sisters went about employing every means for my consolation and comfort.\n\nBeing now settled and provided with a home, I was employed in nursing the children, and doing light work about the house. Occasionally I was sent out with the Indian hunters, when they went but a short distance, to help them carry their game.\n\nMy situation was easy; I had no particular hardships to endure. But still, the recollection of my parents, my brothers and sisters, my home, and my own captivity, destroyed my happiness, and made me constantly solitary, lonesome and gloomy.",
+   "question": "Which choice best describes the overall structure of the text?",
+   "options": [
+    "It lists the narrator's daily chores and then explains how she escaped from captivity.",
+    "It describes a harsh punishment and then the narrator's secret plan to seek revenge.",
+    "It praises the hunters' great skill and then describes one hunt the narrator joined.",
+    "It describes the narrator's easy new routine and then reveals her lasting sorrow."
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-03-029",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "easy",
+   "passage": "With a firm step he walked from his prison to the foot of the gibbet, and mounted the steps. Resting a moment, he addressed the spectators, exhorting them to take example from his dreadful fate, and to avoid the evil courses which had, step by step, conducted him to it. At length the executioner warned him that his time was up.\n\n\"I am ready,\" he answered, and was about to submit his neck to the fatal noose, when, starting back, he exclaimed in a voice of agony, \"He is come! he is come! Oh, save me from him!--save me!\"\n\nBefore he could utter more, the drop was let fall, and all was soon over. The rest of the crew died making no sign.",
+   "question": "Which choice best describes the narrator's attitude in the text?",
+   "options": [
+    "Detached, reporting the man's last moments without comment",
+    "Admiring, praising the man as a hero who faces death bravely",
+    "Mocking, treating the man's cry of terror as a source of humor",
+    "Outraged, protesting that the execution is unjust and cruel"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-03-030",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "easy",
+   "passage": "Perhaps I was wrong in this: I dare say I was, as I nearly always am. It is the people who make the greatest demands that get the largest supplies. But it was not in me either to make the one or to claim the other; and we can only act according to our kind.\n\nIn looking back on past events I once used to think: \"How much better things would have turned out, if only I had acted differently.\" But as I grew older and wiser I changed the formula to: \"How much better things would have turned out, if only I had had the power to act differently.\" And at the back of my mind I knew that I never had had the power.",
+   "question": "Which choice best describes the narrator's attitude in the text?",
+   "options": [
+    "Bitter, blaming other people for making unfair demands on the narrator",
+    "Resigned, accepting that the narrator lacked power to act otherwise",
+    "Proud, confident that the narrator's past choices were always correct",
+    "Hopeful, expecting that the narrator will act more boldly in the future"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-03-031",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "easy",
+   "passage": "The Suffolk (was it Surrey?) flirt\nWithout a pang threw over\nPoor Jack and all his works like dirt,\nAnd caught a richer lover.\n\nWe read one morning more to say\nWe had not been quite idle,\nAnd then to end the arduous day\nEnjoyed a swim in Rydal.\n\nNext day the hundredweight of books\nWas packed once more in cases,\nWe left the lakes and hills and brooks\nAnd southward turned our faces.",
+   "question": "Which choice best describes the speaker's attitude toward the holiday described in the poem?",
+   "options": [
+    "Grieving, mourning a romance that ended in a painful betrayal",
+    "Earnest, recording a period of intense and serious study",
+    "Playfully ironic, poking fun at how little work was done",
+    "Angry, resenting the flirt who abandoned poor Jack"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-03-032",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "easy",
+   "passage": "Suppose thrown among us a person of well-developed intellect, but unacquainted with a single language or word that we use. It is absolutely useless to talk to him, because nothing that we say conveys any meaning to his mind. We can supply him no dictionary, because by hypothesis he knows no language to which we have access. How shall we proceed to communicate our ideas to him? Clearly there is but one possible way--namely, through his senses. Outside of this means of bringing him in contact with us we can have no communication with him. We, therefore, begin by showing him sensible objects, and letting him understand that certain words which we use correspond to those objects.",
+   "question": "Which choice best describes the narrator's attitude in the text?",
+   "options": [
+    "Doubtful, suggesting that communication with the stranger may be impossible",
+    "Impatient, dismissing the stranger as unworthy of the effort involved",
+    "Amused, treating the stranger's confusion as a kind of harmless joke",
+    "Confident, reasoning step by step toward the one workable method"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-03-033",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "easy",
+   "passage": "Whilst we were in the midst of our work, some natives made their appearance. I held out a branch as a sign of peace, when they ventured up to hold a parley, though evidently with great suspicion. They were rather small, and the tall ones were slim and lightly built. They examined Brown's hat, and expressed a great desire to keep it. In order to make them a present, I went to the tents to fetch some broken pieces of iron; and whilst I was away, Brown, wishing to surprise them, mounted his horse, and commenced trotting, which frightened them so much, that they ran away, and did not come again.",
+   "question": "Which choice best describes the narrator's attitude in the text?",
+   "options": [
+    "Curious and kind, trying to win the visitors' trust with gifts",
+    "Fearful, convinced that the visitors intend to attack the whole camp",
+    "Scornful, dismissing the visitors as small and quite unimportant",
+    "Amused, delighted that Brown's trick frightened the visitors away"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-03-035",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "easy",
+   "passage": "The five held meetings in secret to complete their arrangements, and these meetings were enlivened with much smothered laughter. It was to be a \"glorious joke.\" A boat-race, of course; and there must be a great show of previous practice, tremendous rivalry, and pressing competition, so that a strong feeling of partisanship would be aroused; while in truth, the race itself was to be a sham. The boats were to reach the goal at the same moment, nobody was to win, yet every one was to claim the victory; the air was to be rent with cries of \"foul!\" and spurious shouts of triumph, accompanied by vehement demands for a \"fresh try.\" Then a second start was to be made--One, two, three, and off!",
+   "question": "Which choice best states the main purpose of the text?",
+   "options": [
+    "To describe a real boat race and the team that fairly won it",
+    "To explain why the five friends quarreled over who would win",
+    "To present a group's secret plan to stage a fake race",
+    "To criticize rowing competitions for encouraging bitter rivalry"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-03-036",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "easy",
+   "passage": "In fact, civilization from its very inception has been “machine-made.” It began when our remotest ancestor snatched the bough of a tree and decided thenceforth to walk erect, using the bough as staff and club--that is, as a machine. Every tool of every kind has been a machine; and the progress of the race has been determined by the number and efficiency of its machines, both those designed to compel peace and those designed to further the arts of peace. If you wish to measure the actual value of any civilization--value in producing healthy minds in healthy bodies--you need only inquire into the kind and number and efficiency of its machines. Why? Because the machine represents the effort of man to adjust himself to his environment, his environment to himself.",
+   "question": "Which choice best states the main purpose of the text?",
+   "options": [
+    "To warn that modern machines threaten healthy minds and bodies",
+    "To describe how the earliest humans first learned to walk erect",
+    "To argue that tools designed for war have slowed human progress",
+    "To claim that machines have always driven civilization"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-03-037",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "easy",
+   "passage": "In spite of this, the landlord has done his share; chiefly perhaps by yielding--not always gracefully--when it was no longer of any use to fight. There have been exceptions, however: men and women who have mended and built with an eye to the real welfare of their tenants as well as to their own pockets. Let it be well understood that the two are inseparable, if any good is to come of it. The business of housing the poor, if it is to amount to anything, must be business, as it was business with our fathers to put them where they are. As charity, pastime, or fad, it will miserably fail, always and everywhere.",
+   "question": "Which choice best states the main purpose of the text?",
+   "options": [
+    "To argue that housing the poor works only as fair business",
+    "To praise landlords for always fighting to improve their tenants' homes",
+    "To claim that charity is the best way to improve housing for the poor",
+    "To describe how one landlord's family built new homes for the poor"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-03-038",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "character_motivation",
+   "requestedDifficulty": "easy",
+   "passage": "When the second woman with the two little ones came up and begged for the toy, something hard and sullen and cruel rose in the widow's heart, and she refused angrily to give up the thing. She hated those two boys who had been spared when her own was taken. She would not make them happy.\n\n\"No, you shall not have it,\" she cried, clutching the Noah's ark fiercely. \"I will destroy it.\"\n\nThe poor woman and the children followed her wistfully. The little boys were crying. They were cold and hungry and disappointed.",
+   "question": "Based on the text, why does the widow refuse to give up the toy?",
+   "options": [
+    "She resents that the boys were spared when her own son was taken.",
+    "She believes the toy is far too valuable to give away to strangers.",
+    "She hopes to sell the Noah's ark later to buy food for herself.",
+    "She fears the two boys will break the toy as soon as they get it."
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-03-039",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "tone_or_mood",
+   "requestedDifficulty": "easy",
+   "passage": "For weeks it takes the edge off his bliss; for weeks he never glances at the addresses of his letters without a pang of dread; for weeks he never turns the handle of his door on his return home from his work without a shiver of apprehension. But not once does his eye alight on that feared handwriting; always his room is empty of that once so longed-for, and now dreaded presence. Ah, he is not so indispensable to her as he had fancied! She can do better without him than in his self-value had appeared possible. He need not be afraid that her fingers will ever again trace his name upon paper, or hurriedly lift his latch.",
+   "question": "Which choice best describes the overall tone of the text?",
+   "options": [
+    "Joyful, celebrating a lover's long-awaited and happy reunion",
+    "Anxious, then rueful as the man's fear proves needless",
+    "Angry, condemning a woman for her cruelty toward the man",
+    "Calm, describing a man's untroubled and steady routine"
+   ]
+  }
+ ],
+ "instructions": "당신은 디지털 SAT 독립 채점자다. 정답 표시가 없다. 먼저 문항을 직접 풀고(picked_letter), 이어서 난이도·hard 적합·오답 품질을 판정한다. 요청 난이도에 맞추려 하지 말고 실제로 느끼는 대로 답한다.\n청크 rev-fable_judge-060 — 19문항.\n출력: Write 도구로 정확히 이 경로에 JSON 한 파일을 쓴다 → /Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-fable_judge-060.result.json\n출력 JSON 스키마(예시 구조): {\"chunkId\":\"청크 ID\",\"model\":\"fable\",\"items\":[{\"candidateId\":\"id\",\"picked_letter\":\"A|B|C|D\",\"other_defensible\":\"정답 외 방어 가능한 선택지가 있으면 true\",\"est_difficulty\":\"easy|medium|hard (실제 체감, 요청 난이도에 맞추지 말 것)\",\"hard_fit\":\"실제 SAT hard 수준의 사고 단계가 필요하면 true(지문 길이·난어만이면 false)\",\"plausible_distractors\":\"오답 3개가 모두 그럴듯하고 서로 다른 오개념에서 나왔으면 true\",\"length_balanced\":\"네 선택지 길이·구체성이 비슷해 정답이 형식으로 드러나지 않으면 true\",\"multi_answer_risk\":\"복수 정답 위험이 있으면 true\",\"issues\":\"한 줄 메모\"}]}\n허용 값: picked_letter ∈ {A,B,C,D}, 불리언 필드는 true/false, est_difficulty ∈ {easy,medium,hard}. candidateId 를 바꾸지 않고 모든 항목에 답한다.\n금지: 결과 파일 외의 파일 생성·수정, 다른 명령 실행, 문항 수정·재작성. 끝나면 'done <항목 수>' 한 줄만 답한다.\n\n## 문항\n### lit40-easy-03-015 — skill text_structure_purpose · 유형 tone_shift · 요청 난이도 easy\n[지문]\nOver its grave stood the leering spectre of unrest.\n\nWhen he took her in his arms later on, and kissed her, there was not the shadow of a doubt in the mind of either that the restraining influence of a condition over which they had no control was there to mock their endeavour to be natural. They were not to be deceived by the apparent earnestness of the embrace. Each knew that the other was asking a question, even as their lips met and clung in the rather pathetic attempt to confirm the fond dream of the night before. They kissed as through a veil. They were awake once more, and they were wary, unconvinced. The answer to their questions came in the kiss itself, and constraint fell upon them.\n\n[질문] Which choice best describes the shift in tone that occurs in the text?\nA) From bitter resentment to joyful reconciliation.\nB) From quiet boredom to sudden romantic passion.\nC) From hopeful tenderness to wary constraint.\nD) From playful teasing to open, angry hostility.\n### lit40-easy-03-016 — skill text_structure_purpose · 유형 tone_shift · 요청 난이도 easy\n[지문]\nLow in the tomb of glory\nThe old man's ashes lie--\nUnuttered this my story,\nUnwritten to human eye;\nAnd the young man, blessed and blessing,\nWalks over the shady town,\nThe evil passions repressing,\nAnd his head bent humbly down.\n\nPerhaps he marvels why treasure\nOf the judge to his credit is set,\nAnd an old revival measure\nShould have been the statesman's pet.\nBut he hears the invitation,\nAnd sees the streaming eyes\nOf the old man lost to the nation,\nAnd forgiven beyond the skies.\n\n[질문] Which choice best describes the shift in tone that occurs in the text?\nA) From cheerful praise to bitter condemnation.\nB) From angry protest to resigned silence.\nC) From playful wit to anxious, growing dread.\nD) From somber reflection to consoling reassurance.\n### lit40-easy-03-017 — skill text_structure_purpose · 유형 tone_shift · 요청 난이도 easy\n[지문]\nAt the Christmas dance the same some one had said her waltzing would make her \"all the rage\" in Boston. She wondered if it were true, and wondered whether, if she had not promised to marry Stephen, some splendid being from a city would have descended from his heights, bearing diamonds in his hand. Not that she would have accepted them; she only wondered. These disloyal thoughts came seldom, and she put them resolutely away, devoting herself with all the greater assiduity to her muslin curtains and ruffled pillow-shams. Stephen, too, had his momentary pangs. There were times when he could calm his doubts only by working on the little house. The mere sight of the beloved floors and walls and ceilings comforted his heart, and brought him good cheer.\n\n[질문] Which choice best describes the shift in tone that occurs in the text?\nA) From wistful daydreaming to steady reassurance.\nB) From open anger to cheerful acceptance.\nC) From calm confidence to growing panic.\nD) From playful mockery to sincere regret.\n### lit40-easy-03-018 — skill text_structure_purpose · 유형 tone_shift · 요청 난이도 easy\n[지문]\nI fancy we are most of us tired of Constantinople. To me it is a place where a little sight-seeing goes a long way. Our gallant captain, on the contrary, tells me that he could put in three months here very well. As it is, there are about 2,000 English here, to say nothing of naturalized Greeks and Maltese. I suppose Constantinople is not a bad place for a short residence. The hotels are good, and in some you may have a bedroom for four francs a day. Provisions are not dear, but house-rent is very expensive. The population of the place is dense, at which I wonder, as Constantinople seems to me the most unhealthy city I have ever seen.\n\n[질문] Which choice best describes the shift in tone that occurs in the text?\nA) From eager enthusiasm to bitter disappointment.\nB) From weary dismissal to practical appraisal.\nC) From scholarly detachment to fond nostalgia.\nD) From playful humor to fearful alarm.\n### lit40-easy-03-019 — skill text_structure_purpose · 유형 tone_shift · 요청 난이도 easy\n[지문]\nMy mother had the words engraved on the inside of a ring, which Hugh wore for many years.\n\nBy far the closest and dearest of all the ties which bound Hugh to another was his love for my mother. Though she still lives to bless us, I may say this, that never did a mother give to her children a larger and a wiser love than she gave to us; she was our playmate and companion, but we always gave her a perfectly trustful and unquestioning obedience. Yet it was always a reasonable and critical obedience. She never exacted silent submission, but gave us her reasons readily. She never curtailed our independence, or oppressed us with a sense of over-anxiety. She never demanded confidence, but welcomed it with perfect, understanding.\n\n[질문] Which choice best describes the shift in tone that occurs in the text?\nA) From joyful celebration to quiet mourning.\nB) From harsh criticism to reluctant praise.\nC) From plain report to warm, grateful tribute.\nD) From anxious worry to calm indifference.\n### lit40-easy-03-020 — skill text_structure_purpose · 유형 tone_shift · 요청 난이도 easy\n[지문]\nI mounted the steps, however, and rung at the door. It was opened by a pale nun, of thirty, who hesitated a moment, and let me pass. In a small, plain chapel within, the service of the altar was just commencing, and, before I reached a seat, a low plaintive chant commenced, in female voices from the choir. It went on with occasional interruptions from the prayers, for perhaps an hour. I can not describe the excessive mournfulness of the music. One or two familiar hymns occurred in the course of it, like airs in a recitative, the same sung in our churches, but the effect was totally different.\n\n[질문] Which choice best describes the shift in tone that occurs in the text?\nA) From solemn grief to cheerful relief.\nB) From eager curiosity to angry disapproval.\nC) From familiar comfort to bored indifference.\nD) From plain narration to deep, moved sorrow.\n### lit40-easy-03-022 — skill text_structure_purpose · 유형 text_structure · 요청 난이도 easy\n[지문]\nThere are some people who habitually, and from a strong sense of duty, live on the shady side of life. Metaphorically speaking, the sunshine may almost touch the very path on which they are treading, but they shrink from and avoid it, having a strong preference for the shade, but considering themselves martyrs while they live in it. Mrs. Cameron was one of these people. The circumstances of her life had elected plenty of sunshine for her; she had a devoted and excellent husband, an abundant income, and admirable health. It is true she had no children, and it is also true that she had brought herself by careful cultivation to a state of chronic ill-temper.\n\n[질문] Which choice best describes the overall structure of the text?\nA) It describes Mrs. Cameron's poor health and then explains how her husband came to cure her.\nB) It states a general claim about certain people and then gives Mrs. Cameron as an example.\nC) It contrasts two married couples and then judges which of the two is the happier pair.\nD) It recounts a sunny walk in the country and then shifts to a memory of a darker period.\n### lit40-easy-03-023 — skill text_structure_purpose · 유형 text_structure · 요청 난이도 easy\n[지문]\nThe chamber of the solitary student is peopled with immortal guests. He has friends who are always steadfast, who are never false, who are silent when he is weary, who go forth with him to his work, who await his return. In the literature of the world a grand society is open to all who choose to enter it.\n\nBooks are the chief food of our intellectual life.--There are men that have, indeed, done great things who have read but little. These have had their want of mental training compensated by their powers of observation and experience of life. But they have been for the most part exceptional men, and it is possible they might have done better if they had studied more.\n\n[질문] Which choice best describes the overall structure of the text?\nA) It tells the story of one solitary student and then describes the friends he has lost.\nB) It lists several famous books and then ranks them by their value to young scholars.\nC) It praises books as companions and then answers an objection about light readers.\nD) It argues against heavy reading and then admits that books can offer some comfort.\n### lit40-easy-03-024 — skill text_structure_purpose · 유형 text_structure · 요청 난이도 easy\n[지문]\nI was, however, happily disappointed, when at the close of the ceremony the company retired, and my sisters went about employing every means for my consolation and comfort.\n\nBeing now settled and provided with a home, I was employed in nursing the children, and doing light work about the house. Occasionally I was sent out with the Indian hunters, when they went but a short distance, to help them carry their game.\n\nMy situation was easy; I had no particular hardships to endure. But still, the recollection of my parents, my brothers and sisters, my home, and my own captivity, destroyed my happiness, and made me constantly solitary, lonesome and gloomy.\n\n[질문] Which choice best describes the overall structure of the text?\nA) It lists the narrator's daily chores and then explains how she escaped from captivity.\nB) It describes a harsh punishment and then the narrator's secret plan to seek revenge.\nC) It praises the hunters' great skill and then describes one hunt the narrator joined.\nD) It describes the narrator's easy new routine and then reveals her lasting sorrow.\n### lit40-easy-03-029 — skill central_ideas_details · 유형 narrator_attitude · 요청 난이도 easy\n[지문]\nWith a firm step he walked from his prison to the foot of the gibbet, and mounted the steps. Resting a moment, he addressed the spectators, exhorting them to take example from his dreadful fate, and to avoid the evil courses which had, step by step, conducted him to it. At length the executioner warned him that his time was up.\n\n\"I am ready,\" he answered, and was about to submit his neck to the fatal noose, when, starting back, he exclaimed in a voice of agony, \"He is come! he is come! Oh, save me from him!--save me!\"\n\nBefore he could utter more, the drop was let fall, and all was soon over. The rest of the crew died making no sign.\n\n[질문] Which choice best describes the narrator's attitude in the text?\nA) Detached, reporting the man's last moments without comment\nB) Admiring, praising the man as a hero who faces death bravely\nC) Mocking, treating the man's cry of terror as a source of humor\nD) Outraged, protesting that the execution is unjust and cruel\n### lit40-easy-03-030 — skill central_ideas_details · 유형 narrator_attitude · 요청 난이도 easy\n[지문]\nPerhaps I was wrong in this: I dare say I was, as I nearly always am. It is the people who make the greatest demands that get the largest supplies. But it was not in me either to make the one or to claim the other; and we can only act according to our kind.\n\nIn looking back on past events I once used to think: \"How much better things would have turned out, if only I had acted differently.\" But as I grew older and wiser I changed the formula to: \"How much better things would have turned out, if only I had had the power to act differently.\" And at the back of my mind I knew that I never had had the power.\n\n[질문] Which choice best describes the narrator's attitude in the text?\nA) Bitter, blaming other people for making unfair demands on the narrator\nB) Resigned, accepting that the narrator lacked power to act otherwise\nC) Proud, confident that the narrator's past choices were always correct\nD) Hopeful, expecting that the narrator will act more boldly in the future\n### lit40-easy-03-031 — skill central_ideas_details · 유형 narrator_attitude · 요청 난이도 easy\n[지문]\nThe Suffolk (was it Surrey?) flirt\nWithout a pang threw over\nPoor Jack and all his works like dirt,\nAnd caught a richer lover.\n\nWe read one morning more to say\nWe had not been quite idle,\nAnd then to end the arduous day\nEnjoyed a swim in Rydal.\n\nNext day the hundredweight of books\nWas packed once more in cases,\nWe left the lakes and hills and brooks\nAnd southward turned our faces.\n\n[질문] Which choice best describes the speaker's attitude toward the holiday described in the poem?\nA) Grieving, mourning a romance that ended in a painful betrayal\nB) Earnest, recording a period of intense and serious study\nC) Playfully ironic, poking fun at how little work was done\nD) Angry, resenting the flirt who abandoned poor Jack\n### lit40-easy-03-032 — skill central_ideas_details · 유형 narrator_attitude · 요청 난이도 easy\n[지문]\nSuppose thrown among us a person of well-developed intellect, but unacquainted with a single language or word that we use. It is absolutely useless to talk to him, because nothing that we say conveys any meaning to his mind. We can supply him no dictionary, because by hypothesis he knows no language to which we have access. How shall we proceed to communicate our ideas to him? Clearly there is but one possible way--namely, through his senses. Outside of this means of bringing him in contact with us we can have no communication with him. We, therefore, begin by showing him sensible objects, and letting him understand that certain words which we use correspond to those objects.\n\n[질문] Which choice best describes the narrator's attitude in the text?\nA) Doubtful, suggesting that communication with the stranger may be impossible\nB) Impatient, dismissing the stranger as unworthy of the effort involved\nC) Amused, treating the stranger's confusion as a kind of harmless joke\nD) Confident, reasoning step by step toward the one workable method\n### lit40-easy-03-033 — skill central_ideas_details · 유형 narrator_attitude · 요청 난이도 easy\n[지문]\nWhilst we were in the midst of our work, some natives made their appearance. I held out a branch as a sign of peace, when they ventured up to hold a parley, though evidently with great suspicion. They were rather small, and the tall ones were slim and lightly built. They examined Brown's hat, and expressed a great desire to keep it. In order to make them a present, I went to the tents to fetch some broken pieces of iron; and whilst I was away, Brown, wishing to surprise them, mounted his horse, and commenced trotting, which frightened them so much, that they ran away, and did not come again.\n\n[질문] Which choice best describes the narrator's attitude in the text?\nA) Curious and kind, trying to win the visitors' trust with gifts\nB) Fearful, convinced that the visitors intend to attack the whole camp\nC) Scornful, dismissing the visitors as small and quite unimportant\nD) Amused, delighted that Brown's trick frightened the visitors away\n### lit40-easy-03-035 — skill central_ideas_details · 유형 main_idea_or_purpose · 요청 난이도 easy\n[지문]\nThe five held meetings in secret to complete their arrangements, and these meetings were enlivened with much smothered laughter. It was to be a \"glorious joke.\" A boat-race, of course; and there must be a great show of previous practice, tremendous rivalry, and pressing competition, so that a strong feeling of partisanship would be aroused; while in truth, the race itself was to be a sham. The boats were to reach the goal at the same moment, nobody was to win, yet every one was to claim the victory; the air was to be rent with cries of \"foul!\" and spurious shouts of triumph, accompanied by vehement demands for a \"fresh try.\" Then a second start was to be made--One, two, three, and off!\n\n[질문] Which choice best states the main purpose of the text?\nA) To describe a real boat race and the team that fairly won it\nB) To explain why the five friends quarreled over who would win\nC) To present a group's secret plan to stage a fake race\nD) To criticize rowing competitions for encouraging bitter rivalry\n### lit40-easy-03-036 — skill central_ideas_details · 유형 main_idea_or_purpose · 요청 난이도 easy\n[지문]\nIn fact, civilization from its very inception has been “machine-made.” It began when our remotest ancestor snatched the bough of a tree and decided thenceforth to walk erect, using the bough as staff and club--that is, as a machine. Every tool of every kind has been a machine; and the progress of the race has been determined by the number and efficiency of its machines, both those designed to compel peace and those designed to further the arts of peace. If you wish to measure the actual value of any civilization--value in producing healthy minds in healthy bodies--you need only inquire into the kind and number and efficiency of its machines. Why? Because the machine represents the effort of man to adjust himself to his environment, his environment to himself.\n\n[질문] Which choice best states the main purpose of the text?\nA) To warn that modern machines threaten healthy minds and bodies\nB) To describe how the earliest humans first learned to walk erect\nC) To argue that tools designed for war have slowed human progress\nD) To claim that machines have always driven civilization\n### lit40-easy-03-037 — skill central_ideas_details · 유형 main_idea_or_purpose · 요청 난이도 easy\n[지문]\nIn spite of this, the landlord has done his share; chiefly perhaps by yielding--not always gracefully--when it was no longer of any use to fight. There have been exceptions, however: men and women who have mended and built with an eye to the real welfare of their tenants as well as to their own pockets. Let it be well understood that the two are inseparable, if any good is to come of it. The business of housing the poor, if it is to amount to anything, must be business, as it was business with our fathers to put them where they are. As charity, pastime, or fad, it will miserably fail, always and everywhere.\n\n[질문] Which choice best states the main purpose of the text?\nA) To argue that housing the poor works only as fair business\nB) To praise landlords for always fighting to improve their tenants' homes\nC) To claim that charity is the best way to improve housing for the poor\nD) To describe how one landlord's family built new homes for the poor\n### lit40-easy-03-038 — skill inferences · 유형 character_motivation · 요청 난이도 easy\n[지문]\nWhen the second woman with the two little ones came up and begged for the toy, something hard and sullen and cruel rose in the widow's heart, and she refused angrily to give up the thing. She hated those two boys who had been spared when her own was taken. She would not make them happy.\n\n\"No, you shall not have it,\" she cried, clutching the Noah's ark fiercely. \"I will destroy it.\"\n\nThe poor woman and the children followed her wistfully. The little boys were crying. They were cold and hungry and disappointed.\n\n[질문] Based on the text, why does the widow refuse to give up the toy?\nA) She resents that the boys were spared when her own son was taken.\nB) She believes the toy is far too valuable to give away to strangers.\nC) She hopes to sell the Noah's ark later to buy food for herself.\nD) She fears the two boys will break the toy as soon as they get it.\n### lit40-easy-03-039 — skill inferences · 유형 tone_or_mood · 요청 난이도 easy\n[지문]\nFor weeks it takes the edge off his bliss; for weeks he never glances at the addresses of his letters without a pang of dread; for weeks he never turns the handle of his door on his return home from his work without a shiver of apprehension. But not once does his eye alight on that feared handwriting; always his room is empty of that once so longed-for, and now dreaded presence. Ah, he is not so indispensable to her as he had fancied! She can do better without him than in his self-value had appeared possible. He need not be afraid that her fingers will ever again trace his name upon paper, or hurriedly lift his latch.\n\n[질문] Which choice best describes the overall tone of the text?\nA) Joyful, celebrating a lover's long-awaited and happy reunion\nB) Anxious, then rueful as the man's fear proves needless\nC) Angry, condemning a woman for her cruelty toward the man\nD) Calm, describing a man's untroubled and steady routine"
+}

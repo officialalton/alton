@@ -1,0 +1,2791 @@
+[
+ {
+  "candidateKey": "ap_computer_science_a-f01-k0",
+  "cellId": "ap_computer_science_a-f01",
+  "apSubjectCode": "ap_computer_science_a",
+  "kind": "frq_bundle",
+  "keywordCode": "4.10",
+  "unitCode": "4",
+  "skillPrimary": "2.A",
+  "structure": "frq_multipart",
+  "calculator": "not_allowed",
+  "archetype": "csf_list_reviews",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Standard FRQ-style ArrayList algorithm: traverse, filter with indexOf/contains (boundary at index 0 is a plausible off-by-one), accumulate sum and count, guard the zero-count case, and avoid integer division by casting. It is moderately deep and in scope for 4.10, with light reading, trivial arithmetic, and no unfair difficulty sources.",
+  "payload": {
+   "archetype": "csf_list_reviews",
+   "template": "q3",
+   "topic": "4.10",
+   "extra_topics": [
+    "4.9",
+    "1.15"
+   ],
+   "skill": "2.A",
+   "representative_skill": "2.A",
+   "calculator": "not_allowed",
+   "title": "ReviewStats: average stars of matching reviews",
+   "stimulus": {
+    "kind": "text",
+    "description": "A website stores customer reviews in an ArrayList<Review>. The Review class and the header of the method you will write are shown.\n```java\nimport java.util.ArrayList;\n\npublic class Review {\n    private String text;\n    private int stars;\n    public Review(String t, int s) { text = t; stars = s; }\n    public String getText() { return text; }\n    public int getStars() { return stars; }\n}\n\npublic class ReviewStats {\n    /** Returns the average number of stars of the reviews whose text contains word,\n     *  or -1.0 if no review contains word. */\n    public static double averageFor(ArrayList<Review> reviews, String word) { /* to be written */ }\n}\n```",
+    "data": {
+     "variant": "java_code",
+     "language": "java"
+    }
+   },
+   "parts": [
+    {
+     "label": "a",
+     "prompt": "Write the method averageFor, which returns the average number of stars, as a double, of the Review objects in reviews whose text contains the String word anywhere (including at the start). If no review contains word, the method returns -1.0. For example, if the reviews are (\"good food\", 5), (\"bad service\", 2) and (\"good\", 4) then averageFor(reviews, \"good\") returns 4.5. Complete the method averageFor.",
+     "points": 9,
+     "response_mode": "code",
+     "skill_codes": [
+      "2.A"
+     ],
+     "model_answer": "One correct implementation (ALTON reference answer):\n```java\n    public static double averageFor(ArrayList<Review> reviews, String word) {\n        int total = 0;\n        int count = 0;\n        for (int i = 0; i < reviews.size(); i++) {\n            Review r = reviews.get(i);\n            if (r.getText().indexOf(word) >= 0) {\n                total += r.getStars();\n                count++;\n            }\n        }\n        if (count == 0) {\n            return -1.0;\n        }\n        return (double) total / count;\n    }\n```",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Traverses every element of reviews with correct bounds (get and size, or enhanced for)",
+       "required_elements": [
+        "for (int i = 0; i < reviews.size(); i++)"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "misses the first or last review"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A2",
+       "points": 1,
+       "criterion": "Accesses each Review's text through the accessor getText()",
+       "required_elements": [
+        "r.getText()"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "accesses the private field"
+       ],
+       "requires_row_id": "A1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A3",
+       "points": 1,
+       "criterion": "Tests whether the text contains word using indexOf (or equivalent), with a correct boundary for index 0",
+       "required_elements": [
+        "indexOf(word) >= 0"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "indexOf(word) > 0",
+        "uses equals"
+       ],
+       "requires_row_id": "A2",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A4",
+       "points": 1,
+       "criterion": "Accumulates the stars of matching reviews only (through getStars())",
+       "required_elements": [
+        "total += r.getStars()"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "adds the stars of every review"
+       ],
+       "requires_row_id": "A3",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A5",
+       "points": 1,
+       "criterion": "Counts the matching reviews",
+       "required_elements": [
+        "count++"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "counts all reviews"
+       ],
+       "requires_row_id": "A3",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A6",
+       "points": 1,
+       "criterion": "Initializes both accumulators before the loop",
+       "required_elements": [
+        "int total = 0",
+        "int count = 0"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "initializes inside the loop"
+       ],
+       "requires_row_id": "A1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A7",
+       "points": 1,
+       "criterion": "Returns -1.0 when no review matches (no division by zero)",
+       "required_elements": [
+        "count == 0",
+        "return -1.0"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "returns 0.0",
+        "divides by zero"
+       ],
+       "requires_row_id": "A5",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A8",
+       "points": 1,
+       "criterion": "Computes the average of the matching reviews with floating-point division",
+       "required_elements": [
+        "(double) total / count"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "integer division",
+        "divides by reviews.size()"
+       ],
+       "requires_row_id": "A7",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A9",
+       "points": 1,
+       "criterion": "Returns the average after the loop and the code compiles with correct ArrayList<Review> use",
+       "required_elements": [
+        "return (double) total / count"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "returns inside the loop"
+       ],
+       "requires_row_id": "A8",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      }
+     ]
+    }
+   ],
+   "total_points": 9,
+   "est_minutes": 22,
+   "facts": [
+    "review_cases=12"
+   ],
+   "expected_values": [],
+   "reference_note": "ALTON reference answer for self-review — not official AP scoring",
+   "self_check_tests": [
+    {
+     "part": "a",
+     "call": "ArrayList<Review> L = new ArrayList<Review>();  return ReviewStats.averageFor(L, \"good\");",
+     "expected": "-1.0"
+    },
+    {
+     "part": "a",
+     "call": "ArrayList<Review> L = new ArrayList<Review>();  return ReviewStats.averageFor(L, \"great\");",
+     "expected": "-1.0"
+    },
+    {
+     "part": "a",
+     "call": "ArrayList<Review> L = new ArrayList<Review>(); L.add(new Review(\"good food\", 5)); return ReviewStats.averageFor(L, \"good\");",
+     "expected": "5.0"
+    },
+    {
+     "part": "a",
+     "call": "ArrayList<Review> L = new ArrayList<Review>(); L.add(new Review(\"good food\", 5)); return ReviewStats.averageFor(L, \"great\");",
+     "expected": "-1.0"
+    },
+    {
+     "part": "a",
+     "call": "ArrayList<Review> L = new ArrayList<Review>(); L.add(new Review(\"good food\", 5)); L.add(new Review(\"bad service\", 2)); L.add(new Review(\"good\", 4)); return ReviewStats.averageFor(L, \"good\");",
+     "expected": "4.5"
+    },
+    {
+     "part": "a",
+     "call": "ArrayList<Review> L = new ArrayList<Review>(); L.add(new Review(\"good food\", 5)); L.add(new Review(\"bad service\", 2)); L.add(new Review(\"good\", 4)); return ReviewStats.averageFor(L, \"great\");",
+     "expected": "-1.0"
+    },
+    {
+     "part": "a",
+     "call": "ArrayList<Review> L = new ArrayList<Review>(); L.add(new Review(\"ok\", 3)); L.add(new Review(\"fine\", 4)); return ReviewStats.averageFor(L, \"good\");",
+     "expected": "-1.0"
+    },
+    {
+     "part": "a",
+     "call": "ArrayList<Review> L = new ArrayList<Review>(); L.add(new Review(\"ok\", 3)); L.add(new Review(\"fine\", 4)); return ReviewStats.averageFor(L, \"great\");",
+     "expected": "-1.0"
+    },
+    {
+     "part": "a",
+     "call": "ArrayList<Review> L = new ArrayList<Review>(); L.add(new Review(\"great\", 5)); L.add(new Review(\"greatest\", 4)); L.add(new Review(\"not great\", 1)); return ReviewStats.averageFor(L, \"good\");",
+     "expected": "-1.0"
+    },
+    {
+     "part": "a",
+     "call": "ArrayList<Review> L = new ArrayList<Review>(); L.add(new Review(\"great\", 5)); L.add(new Review(\"greatest\", 4)); L.add(new Review(\"not great\", 1)); return ReviewStats.averageFor(L, \"great\");",
+     "expected": "3.3333333333333335"
+    },
+    {
+     "part": "a",
+     "call": "ArrayList<Review> L = new ArrayList<Review>(); L.add(new Review(\"a good one\", 3)); L.add(new Review(\"good\", 2)); L.add(new Review(\"goodness\", 5)); return ReviewStats.averageFor(L, \"good\");",
+     "expected": "3.3333333333333335"
+    },
+    {
+     "part": "a",
+     "call": "ArrayList<Review> L = new ArrayList<Review>(); L.add(new Review(\"a good one\", 3)); L.add(new Review(\"good\", 2)); L.add(new Review(\"goodness\", 5)); return ReviewStats.averageFor(L, \"great\");",
+     "expected": "-1.0"
+    }
+   ],
+   "verification": {
+    "variants": 7,
+    "wrong_failures": [
+     4,
+     3,
+     8,
+     1,
+     4
+    ]
+   },
+   "blueprint": {
+    "id": "csf_list_reviews",
+    "subject": "ap_computer_science_a",
+    "kind": "frq_bundle",
+    "concept": "ArrayList of objects: filter with indexOf, accumulate and average with a sentinel",
+    "topic": "4.10",
+    "skill": "2.A",
+    "student_thinking": [
+     "Traverse a list of objects",
+     "Filter with a String method",
+     "Average with a no-match sentinel"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "not_allowed",
+    "key_conditions": [
+     {
+      "condition": "the reference and an alternative (manual substring scan) pass every test; each wrong solution fails at least one",
+      "evidence": "java test run"
+     }
+    ],
+    "material": {
+     "type": "code",
+     "must_include": [
+      "class or method skeleton",
+      "specification with examples"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "javac+java compile and run reference, alternative and wrong solutions; expected values from Python",
+     "method": "javac+java unit tests + python reference"
+    },
+    "parts": [
+     {
+      "label": "a",
+      "skills": [
+       "2.A"
+      ],
+      "topics": [
+       "4.10"
+      ],
+      "points": 9,
+      "accepted_answers": [
+       "One correct implementation (ALTON reference answer):\n```java\n    public static double averageFor(ArrayList<Review> reviews, String word) {\n        int total = 0;\n        int count = 0;\n        for (int i = 0; i < reviews.size(); i++) {\n            Review r = reviews.get(i);\n            if (r.getText().indexOf(word) >= 0) {\n                total += r.getStars();\n                count++;\n            }\n        }\n        if (count == 0) {\n            return -1.0;\n        }\n        return (double) total / count;\n    }\n```"
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Traverses every element of reviews with correct bounds (get and size, or enhanced for)",
+        "elements": [
+         "for (int i = 0; i < reviews.size(); i++)"
+        ]
+       },
+       {
+        "row_id": "A2",
+        "points": 1,
+        "criterion": "Accesses each Review's text through the accessor getText()",
+        "elements": [
+         "r.getText()"
+        ]
+       },
+       {
+        "row_id": "A3",
+        "points": 1,
+        "criterion": "Tests whether the text contains word using indexOf (or equivalent), with a correct boundary for index 0",
+        "elements": [
+         "indexOf(word) >= 0"
+        ]
+       },
+       {
+        "row_id": "A4",
+        "points": 1,
+        "criterion": "Accumulates the stars of matching reviews only (through getStars())",
+        "elements": [
+         "total += r.getStars()"
+        ]
+       },
+       {
+        "row_id": "A5",
+        "points": 1,
+        "criterion": "Counts the matching reviews",
+        "elements": [
+         "count++"
+        ]
+       },
+       {
+        "row_id": "A6",
+        "points": 1,
+        "criterion": "Initializes both accumulators before the loop",
+        "elements": [
+         "int total = 0",
+         "int count = 0"
+        ]
+       },
+       {
+        "row_id": "A7",
+        "points": 1,
+        "criterion": "Returns -1.0 when no review matches (no division by zero)",
+        "elements": [
+         "count == 0",
+         "return -1.0"
+        ]
+       },
+       {
+        "row_id": "A8",
+        "points": 1,
+        "criterion": "Computes the average of the matching reviews with floating-point division",
+        "elements": [
+         "(double) total / count"
+        ]
+       },
+       {
+        "row_id": "A9",
+        "points": 1,
+        "criterion": "Returns the average after the loop and the code compiles with correct ArrayList<Review> use",
+        "elements": [
+         "return (double) total / count"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 9,
+    "judgment_demand": "write correct Java for the stated specification"
+   },
+   "seed": 8410,
+   "pack_id": "csf_list_reviews-s8410"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "csf_list_reviews",
+   "facts": [
+    "review_cases=12"
+   ],
+   "seed": 8410
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean 9-point ArrayList algorithm FRQ with a unique, well-specified behavior and a consistent rubric. The independent solution matches the reference. I found no defects.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The task is writing an ArrayList traversal with a filter, an accumulator and a sentinel return. This is squarely topic 4.10 and skill 2.A. It uses only String indexOf and class-design prerequisites from earlier units."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The spec is unambiguous: contains anywhere, the -1.0 sentinel, and a worked example. The reference and the independent solver's answer are equivalent. The rubric rows are 1 point each and judge single behaviors. Rows A8 and A9 overlap slightly because both require the (double) total / count expression, but they judge different behaviors (computation vs. return placement). The alternative-solution handling is acceptable."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The Review class and the method header are provided and complete. The wording is clear US English. The note about \"including at the start\" targets the indexOf boundary without adding reading load."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so there are no distractors. The common_errors listed in the rubric rows are realistic: indexOf > 0, integer division, dividing by size, returning 0.0, and returning inside the loop."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "This is a typical 9-point FRQ with a single method, a short traversal and no calculator need. The 22-minute estimate is only an internal reference. The actual task load is a standard AP-style method."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard FRQ-style ArrayList algorithm: traverse, filter with indexOf/contains (boundary at index 0 is a plausible off-by-one), accumulate sum and count, guard the zero-count case, and avoid integer division by casting. It is moderately deep and in scope for 4.10, with light reading, trivial arithmetic, and no unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "candidateKey": "ap_computer_science_a-f02-k0",
+  "cellId": "ap_computer_science_a-f02",
+  "apSubjectCode": "ap_computer_science_a",
+  "kind": "frq_bundle",
+  "keywordCode": "4.10",
+  "unitCode": "4",
+  "skillPrimary": "2.A",
+  "structure": "frq_multipart",
+  "calculator": "not_allowed",
+  "archetype": "csf_list_runs",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Standard FRQ-style ArrayList algorithm. The student writes a single traversal that compares adjacent elements, keeps a running count and a running maximum, and handles the empty list. The plausible pitfalls are the off-by-one at the boundary (starting at index 1 or comparing i with i-1), resetting the count correctly, and using .equals() rather than == for Integer objects. All of these are in scope under 4.7 to 4.10. Reading and computation load are minimal, preconditions are clearly stated, and the examples are short, so the difficulty comes from the concept and not from unfair sources.",
+  "payload": {
+   "archetype": "csf_list_runs",
+   "template": "q3",
+   "topic": "4.10",
+   "extra_topics": [
+    "4.8",
+    "4.9"
+   ],
+   "skill": "2.A",
+   "representative_skill": "2.A",
+   "calculator": "not_allowed",
+   "title": "RunFinder: the longest run in an ArrayList",
+   "stimulus": {
+    "kind": "text",
+    "description": "A data-analysis class uses an ArrayList<Integer> of readings. The class is shown with the header of the method you will write.\n```java\nimport java.util.ArrayList;\n\npublic class RunFinder {\n    /** Returns the length of the longest run of consecutive equal values in data.\n     *  Returns 0 if data is empty. The list data is not modified. */\n    public static int longestRun(ArrayList<Integer> data) { /* to be written */ }\n}\n```",
+    "data": {
+     "variant": "java_code",
+     "language": "java"
+    }
+   },
+   "parts": [
+    {
+     "label": "a",
+     "prompt": "Write the method longestRun, which returns the length of the longest run of consecutive equal values in the ArrayList data. A run is a sequence of one or more neighboring elements that are equal. The method returns 0 if data is empty and must not modify data. For example, if data is [1, 1, 2, 2, 2, 3] the method returns 3, and if data is [4, 5, 6] the method returns 1. Complete the method longestRun.",
+     "points": 9,
+     "response_mode": "code",
+     "skill_codes": [
+      "2.A"
+     ],
+     "model_answer": "One correct implementation (ALTON reference answer):\n```java\n    public static int longestRun(ArrayList<Integer> data) {\n        if (data.size() == 0) {\n            return 0;\n        }\n        int best = 1;\n        int run = 1;\n        for (int i = 1; i < data.size(); i++) {\n            if (data.get(i).equals(data.get(i - 1))) {\n                run++;\n            } else {\n                run = 1;\n            }\n            if (run > best) {\n                best = run;\n            }\n        }\n        return best;\n    }\n```",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Handles an empty list by returning 0 without an exception",
+       "required_elements": [
+        "data.size() == 0",
+        "return 0"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "throws an exception",
+        "returns 1"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A2",
+       "points": 1,
+       "criterion": "Traverses the list with correct bounds so every neighboring pair is examined (indexes stay inside the list)",
+       "required_elements": [
+        "for (int i = 1; i < data.size(); i++)"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "reads data.get(i + 1) at the last index",
+        "starts at -1"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A3",
+       "points": 1,
+       "criterion": "Compares each value with its neighbor (previous or next element), not with the first element",
+       "required_elements": [
+        "data.get(i).equals(data.get(i - 1))"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "compares with data.get(0)"
+       ],
+       "requires_row_id": "A2",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A4",
+       "points": 1,
+       "criterion": "Compares Integer values with equals (or by unboxing), not with == on objects",
+       "required_elements": [
+        "equals",
+        "or intValue()"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "== on Integer objects"
+       ],
+       "requires_row_id": "A3",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A5",
+       "points": 1,
+       "criterion": "Extends the current run length when the values are equal",
+       "required_elements": [
+        "run++"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "increments for every element"
+       ],
+       "requires_row_id": "A3",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A6",
+       "points": 1,
+       "criterion": "Restarts the current run length at 1 when the values differ",
+       "required_elements": [
+        "run = 1"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "never resets the run"
+       ],
+       "requires_row_id": "A5",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A7",
+       "points": 1,
+       "criterion": "Keeps the maximum run length seen so far (updates it when a run is longer)",
+       "required_elements": [
+        "if (run > best) best = run"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "returns the last run"
+       ],
+       "requires_row_id": "A5",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A8",
+       "points": 1,
+       "criterion": "Initializes the counters so a list with one element returns 1",
+       "required_elements": [
+        "int best = 1",
+        "int run = 1"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "initializes best to 0"
+       ],
+       "requires_row_id": "A1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A9",
+       "points": 1,
+       "criterion": "Returns the best length after the traversal and does not modify data",
+       "required_elements": [
+        "return best"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "returns inside the loop",
+        "removes elements"
+       ],
+       "requires_row_id": "A7",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      }
+     ]
+    }
+   ],
+   "total_points": 9,
+   "est_minutes": 22,
+   "facts": [
+    "list_cases=9"
+   ],
+   "expected_values": [],
+   "reference_note": "ALTON reference answer for self-review — not official AP scoring",
+   "self_check_tests": [
+    {
+     "part": "a",
+     "call": "ArrayList<Integer> d = new ArrayList<Integer>();  int r = RunFinder.longestRun(d); return r + \"|\" + d;",
+     "expected": "0|[]"
+    },
+    {
+     "part": "a",
+     "call": "ArrayList<Integer> d = new ArrayList<Integer>(); d.add(5); int r = RunFinder.longestRun(d); return r + \"|\" + d;",
+     "expected": "1|[5]"
+    },
+    {
+     "part": "a",
+     "call": "ArrayList<Integer> d = new ArrayList<Integer>(); d.add(1); d.add(1); d.add(2); d.add(2); d.add(2); d.add(3); int r = RunFinder.longestRun(d); return r + \"|\" + d;",
+     "expected": "3|[1, 1, 2, 2, 2, 3]"
+    },
+    {
+     "part": "a",
+     "call": "ArrayList<Integer> d = new ArrayList<Integer>(); d.add(4); d.add(4); d.add(4); d.add(4); int r = RunFinder.longestRun(d); return r + \"|\" + d;",
+     "expected": "4|[4, 4, 4, 4]"
+    },
+    {
+     "part": "a",
+     "call": "ArrayList<Integer> d = new ArrayList<Integer>(); d.add(1); d.add(2); d.add(3); int r = RunFinder.longestRun(d); return r + \"|\" + d;",
+     "expected": "1|[1, 2, 3]"
+    },
+    {
+     "part": "a",
+     "call": "ArrayList<Integer> d = new ArrayList<Integer>(); d.add(1); d.add(2); d.add(2); d.add(1); d.add(1); int r = RunFinder.longestRun(d); return r + \"|\" + d;",
+     "expected": "2|[1, 2, 2, 1, 1]"
+    },
+    {
+     "part": "a",
+     "call": "ArrayList<Integer> d = new ArrayList<Integer>(); d.add(1000); d.add(1000); d.add(1000); int r = RunFinder.longestRun(d); return r + \"|\" + d;",
+     "expected": "3|[1000, 1000, 1000]"
+    },
+    {
+     "part": "a",
+     "call": "ArrayList<Integer> d = new ArrayList<Integer>(); d.add(3); d.add(3); d.add(2); d.add(3); d.add(3); d.add(3); int r = RunFinder.longestRun(d); return r + \"|\" + d;",
+     "expected": "3|[3, 3, 2, 3, 3, 3]"
+    },
+    {
+     "part": "a",
+     "call": "ArrayList<Integer> d = new ArrayList<Integer>(); d.add(7); d.add(7); int r = RunFinder.longestRun(d); return r + \"|\" + d;",
+     "expected": "2|[7, 7]"
+    }
+   ],
+   "verification": {
+    "variants": 8,
+    "wrong_failures": [
+     1,
+     3,
+     3,
+     1,
+     1,
+     1
+    ]
+   },
+   "blueprint": {
+    "id": "csf_list_runs",
+    "subject": "ap_computer_science_a",
+    "kind": "frq_bundle",
+    "concept": "ArrayList traversal that compares neighboring elements and keeps a running maximum",
+    "topic": "4.10",
+    "skill": "2.A",
+    "student_thinking": [
+     "Compare neighbors with get(i) and get(i - 1)",
+     "Reset and extend a run counter",
+     "Keep the maximum run"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "not_allowed",
+    "key_conditions": [
+     {
+      "condition": "the reference and an alternative (nested scan) pass every test; each wrong solution fails at least one",
+      "evidence": "java test run"
+     }
+    ],
+    "material": {
+     "type": "code",
+     "must_include": [
+      "class or method skeleton",
+      "specification with examples"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "javac+java compile and run reference, alternative and wrong solutions; expected values from Python; the == on Integer case uses values above 127",
+     "method": "javac+java unit tests + python reference"
+    },
+    "parts": [
+     {
+      "label": "a",
+      "skills": [
+       "2.A"
+      ],
+      "topics": [
+       "4.10"
+      ],
+      "points": 9,
+      "accepted_answers": [
+       "One correct implementation (ALTON reference answer):\n```java\n    public static int longestRun(ArrayList<Integer> data) {\n        if (data.size() == 0) {\n            return 0;\n        }\n        int best = 1;\n        int run = 1;\n        for (int i = 1; i < data.size(); i++) {\n            if (data.get(i).equals(data.get(i - 1))) {\n                run++;\n            } else {\n                run = 1;\n            }\n            if (run > best) {\n                best = run;\n            }\n        }\n        return best;\n    }\n```"
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Handles an empty list by returning 0 without an exception",
+        "elements": [
+         "data.size() == 0",
+         "return 0"
+        ]
+       },
+       {
+        "row_id": "A2",
+        "points": 1,
+        "criterion": "Traverses the list with correct bounds so every neighboring pair is examined (indexes stay inside the list)",
+        "elements": [
+         "for (int i = 1; i < data.size(); i++)"
+        ]
+       },
+       {
+        "row_id": "A3",
+        "points": 1,
+        "criterion": "Compares each value with its neighbor (previous or next element), not with the first element",
+        "elements": [
+         "data.get(i).equals(data.get(i - 1))"
+        ]
+       },
+       {
+        "row_id": "A4",
+        "points": 1,
+        "criterion": "Compares Integer values with equals (or by unboxing), not with == on objects",
+        "elements": [
+         "equals",
+         "or intValue()"
+        ]
+       },
+       {
+        "row_id": "A5",
+        "points": 1,
+        "criterion": "Extends the current run length when the values are equal",
+        "elements": [
+         "run++"
+        ]
+       },
+       {
+        "row_id": "A6",
+        "points": 1,
+        "criterion": "Restarts the current run length at 1 when the values differ",
+        "elements": [
+         "run = 1"
+        ]
+       },
+       {
+        "row_id": "A7",
+        "points": 1,
+        "criterion": "Keeps the maximum run length seen so far (updates it when a run is longer)",
+        "elements": [
+         "if (run > best) best = run"
+        ]
+       },
+       {
+        "row_id": "A8",
+        "points": 1,
+        "criterion": "Initializes the counters so a list with one element returns 1",
+        "elements": [
+         "int best = 1",
+         "int run = 1"
+        ]
+       },
+       {
+        "row_id": "A9",
+        "points": 1,
+        "criterion": "Returns the best length after the traversal and does not modify data",
+        "elements": [
+         "return best"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 9,
+    "judgment_demand": "write correct Java for the stated specification"
+   },
+   "seed": 8410,
+   "pack_id": "csf_list_runs-s8410"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "csf_list_runs",
+   "facts": [
+    "list_cases=9"
+   ],
+   "seed": 8410
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A single 9-point FRQ on an ArrayList traversal that tracks a longest run, which fits topic 4.10 and skill 2.A. The rubric has nine one-point rows, each judging one behavior, and the dependency chain is reasonable. The reference solution is correct and the independent solver produced an equivalent one. The prompt states the empty-list, no-modification, and example conditions. The Integer equals-versus-== trap is a realistic misconception. The task load is a typical single-method FRQ. One minor point: rubric row A3 requires the exact string data.get(i).equals(data.get(i - 1)). An equivalent next-element comparison is allowed by the criterion text, but the required element is too narrow. This is not disqualifying.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The dominant demand is writing an ArrayList traversal algorithm, which matches 4.10 and 2.A. No out-of-scope content is used."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The reference solution is correct, and the independent solver's solution matches it. Valid alternatives such as a nested scan, unboxing with intValue(), or comparing with the next element are acceptable under the criteria text."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The header, the specification, and the two examples are complete and clearly worded."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so there are no distractors. The common_errors entries per row cover the realistic misconceptions."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical of an AP CS A FRQ: one method, no calculator, and a modest amount of reading."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard FRQ-style ArrayList algorithm. The student writes a single traversal that compares adjacent elements, keeps a running count and a running maximum, and handles the empty list. The plausible pitfalls are the off-by-one at the boundary (starting at index 1 or comparing i with i-1), resetting the count correctly, and using .equals() rather than == for Integer objects. All of these are in scope under 4.7 to 4.10. Reading and computation load are minimal, preconditions are clearly stated, and the examples are short, so the difficulty comes from the concept and not from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "candidateKey": "ap_computer_science_a-f03-k0",
+  "cellId": "ap_computer_science_a-f03",
+  "apSubjectCode": "ap_computer_science_a",
+  "kind": "frq_bundle",
+  "keywordCode": "4.10",
+  "unitCode": "4",
+  "skillPrimary": "2.A",
+  "structure": "frq_multipart",
+  "calculator": "not_allowed",
+  "archetype": "csf_list_remove_short",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "criterion_failed_key_scoring; criterion_failed_exam_suitability; reference_pattern_mismatch",
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Standard FRQ-style ArrayList algorithm. The key concept is the index shift when removing during traversal, which requires a backward loop or an index decrement and creates a plausible off-by-one/skipped-element error. The code is short with a clear spec, no heavy reading or arithmetic, and it stays within Unit 4 scope (size/get/remove). It suits a full mock rather than basic learning because of the removal-while-traversing pitfall, but it is not advanced.",
+  "payload": {
+   "archetype": "csf_list_remove_short",
+   "template": "q3",
+   "topic": "4.10",
+   "extra_topics": [
+    "4.8",
+    "4.9"
+   ],
+   "skill": "2.A",
+   "representative_skill": "2.A",
+   "calculator": "not_allowed",
+   "title": "WordFilter: remove short Strings from an ArrayList",
+   "stimulus": {
+    "kind": "text",
+    "description": "A text-processing class modifies a list of words. The class is shown with the header of the method you will write.\n```java\nimport java.util.ArrayList;\n\npublic class WordFilter {\n    /** Removes from words every String whose length is less than minLength.\n     *  The order of the remaining Strings is not changed. */\n    public static void removeShort(ArrayList<String> words, int minLength) { /* to be written */ }\n}\n```",
+    "data": {
+     "variant": "java_code",
+     "language": "java"
+    }
+   },
+   "parts": [
+    {
+     "label": "a",
+     "prompt": "Write the method removeShort, which removes from the ArrayList words every String whose length is less than minLength. The order of the remaining Strings must not change, and the method changes the list it is given rather than returning a new list. For example, if words is [\"ab\", \"abc\", \"a\", \"abcd\"] and minLength is 3, then after the call words is [\"abc\", \"abcd\"]. Complete the method removeShort.",
+     "points": 9,
+     "response_mode": "code",
+     "skill_codes": [
+      "2.A"
+     ],
+     "model_answer": "One correct implementation (ALTON reference answer):\n```java\n    public static void removeShort(ArrayList<String> words, int minLength) {\n        for (int i = words.size() - 1; i >= 0; i--) {\n            if (words.get(i).length() < minLength) {\n                words.remove(i);\n            }\n        }\n    }\n```",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Traverses every index of the list with bounds based on words.size()",
+       "required_elements": [
+        "for (int i = 0; i < words.size(); i++) or a backward loop"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses length instead of size()",
+        "skips the first or last element"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A2",
+       "points": 1,
+       "criterion": "Uses get(i) to read an element and length() to read its length",
+       "required_elements": [
+        "words.get(i).length()"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "calls length on the list"
+       ],
+       "requires_row_id": "A1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A3",
+       "points": 1,
+       "criterion": "Tests for strings shorter than minLength with a correct boundary",
+       "required_elements": [
+        "length() < minLength"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses <=",
+        "removes the long strings"
+       ],
+       "requires_row_id": "A2",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A4",
+       "points": 1,
+       "criterion": "Removes the element at index i (remove(i)) when the test is true",
+       "required_elements": [
+        "words.remove(i)"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "removes by the wrong index",
+        "set instead of remove"
+       ],
+       "requires_row_id": "A3",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A5",
+       "points": 1,
+       "criterion": "Accounts for the shift caused by a removal (backward traversal, or the index is not advanced after a removal)",
+       "required_elements": [
+        "i-- or backward loop or no i++ after remove"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "skips the element that moves into the removed position"
+       ],
+       "requires_row_id": "A4",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A6",
+       "points": 1,
+       "criterion": "Does not remove elements incorrectly: every short string is removed and no other string is removed",
+       "required_elements": [
+        "all short strings removed"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "leaves some short strings"
+       ],
+       "requires_row_id": "A5",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A7",
+       "points": 1,
+       "criterion": "Preserves the order of the remaining elements",
+       "required_elements": [
+        "no reordering"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "reorders the list"
+       ],
+       "requires_row_id": "A4",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A8",
+       "points": 1,
+       "criterion": "Changes the original list (words) instead of building and discarding a new list",
+       "required_elements": [
+        "modifies words"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "builds a new list only"
+       ],
+       "requires_row_id": "A4",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A9",
+       "points": 1,
+       "criterion": "The method compiles with return type void and correct ArrayList<String> and String use",
+       "required_elements": [
+        "public static void removeShort(ArrayList<String> words, int minLength)"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "returns a value from a void method"
+       ],
+       "requires_row_id": "A1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      }
+     ]
+    }
+   ],
+   "total_points": 9,
+   "est_minutes": 22,
+   "facts": [
+    "word_cases=8"
+   ],
+   "expected_values": [],
+   "reference_note": "ALTON reference answer for self-review — not official AP scoring",
+   "self_check_tests": [
+    {
+     "part": "a",
+     "call": "ArrayList<String> w = new ArrayList<String>();  WordFilter.removeShort(w, 2); return w;",
+     "expected": "[]"
+    },
+    {
+     "part": "a",
+     "call": "ArrayList<String> w = new ArrayList<String>(); w.add(\"a\"); WordFilter.removeShort(w, 2); return w;",
+     "expected": "[]"
+    },
+    {
+     "part": "a",
+     "call": "ArrayList<String> w = new ArrayList<String>(); w.add(\"ab\"); w.add(\"abc\"); w.add(\"a\"); w.add(\"abcd\"); WordFilter.removeShort(w, 3); return w;",
+     "expected": "[abc, abcd]"
+    },
+    {
+     "part": "a",
+     "call": "ArrayList<String> w = new ArrayList<String>(); w.add(\"x\"); w.add(\"y\"); w.add(\"z\"); WordFilter.removeShort(w, 1); return w;",
+     "expected": "[x, y, z]"
+    },
+    {
+     "part": "a",
+     "call": "ArrayList<String> w = new ArrayList<String>(); w.add(\"aa\"); w.add(\"bb\"); w.add(\"c\"); w.add(\"dd\"); w.add(\"e\"); WordFilter.removeShort(w, 2); return w;",
+     "expected": "[aa, bb, dd]"
+    },
+    {
+     "part": "a",
+     "call": "ArrayList<String> w = new ArrayList<String>(); w.add(\"short\"); w.add(\"tiny\"); w.add(\"a\"); w.add(\"enormous\"); WordFilter.removeShort(w, 5); return w;",
+     "expected": "[short, enormous]"
+    },
+    {
+     "part": "a",
+     "call": "ArrayList<String> w = new ArrayList<String>(); w.add(\"q\"); w.add(\"w\"); w.add(\"e\"); w.add(\"r\"); WordFilter.removeShort(w, 2); return w;",
+     "expected": "[]"
+    },
+    {
+     "part": "a",
+     "call": "ArrayList<String> w = new ArrayList<String>(); w.add(\"aaa\"); w.add(\"b\"); w.add(\"c\"); w.add(\"ddd\"); WordFilter.removeShort(w, 2); return w;",
+     "expected": "[aaa, ddd]"
+    }
+   ],
+   "verification": {
+    "variants": 7,
+    "wrong_failures": [
+     3,
+     4,
+     6,
+     7,
+     3
+    ]
+   },
+   "blueprint": {
+    "id": "csf_list_remove_short",
+    "subject": "ap_computer_science_a",
+    "kind": "frq_bundle",
+    "concept": "ArrayList traversal with removal: the index shift after remove",
+    "topic": "4.10",
+    "skill": "2.A",
+    "student_thinking": [
+     "Traverse with an index",
+     "Remove by index safely",
+     "Change the list in place"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "not_allowed",
+    "key_conditions": [
+     {
+      "condition": "the reference and an alternative (index advanced only when nothing is removed) pass every test; each wrong solution fails at least one",
+      "evidence": "java test run"
+     }
+    ],
+    "material": {
+     "type": "code",
+     "must_include": [
+      "class or method skeleton",
+      "specification with examples"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "javac+java compile and run reference, alternative and wrong solutions; expected values from Python list filtering",
+     "method": "javac+java unit tests + python reference"
+    },
+    "parts": [
+     {
+      "label": "a",
+      "skills": [
+       "2.A"
+      ],
+      "topics": [
+       "4.10"
+      ],
+      "points": 9,
+      "accepted_answers": [
+       "One correct implementation (ALTON reference answer):\n```java\n    public static void removeShort(ArrayList<String> words, int minLength) {\n        for (int i = words.size() - 1; i >= 0; i--) {\n            if (words.get(i).length() < minLength) {\n                words.remove(i);\n            }\n        }\n    }\n```"
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Traverses every index of the list with bounds based on words.size()",
+        "elements": [
+         "for (int i = 0; i < words.size(); i++) or a backward loop"
+        ]
+       },
+       {
+        "row_id": "A2",
+        "points": 1,
+        "criterion": "Uses get(i) to read an element and length() to read its length",
+        "elements": [
+         "words.get(i).length()"
+        ]
+       },
+       {
+        "row_id": "A3",
+        "points": 1,
+        "criterion": "Tests for strings shorter than minLength with a correct boundary",
+        "elements": [
+         "length() < minLength"
+        ]
+       },
+       {
+        "row_id": "A4",
+        "points": 1,
+        "criterion": "Removes the element at index i (remove(i)) when the test is true",
+        "elements": [
+         "words.remove(i)"
+        ]
+       },
+       {
+        "row_id": "A5",
+        "points": 1,
+        "criterion": "Accounts for the shift caused by a removal (backward traversal, or the index is not advanced after a removal)",
+        "elements": [
+         "i-- or backward loop or no i++ after remove"
+        ]
+       },
+       {
+        "row_id": "A6",
+        "points": 1,
+        "criterion": "Does not remove elements incorrectly: every short string is removed and no other string is removed",
+        "elements": [
+         "all short strings removed"
+        ]
+       },
+       {
+        "row_id": "A7",
+        "points": 1,
+        "criterion": "Preserves the order of the remaining elements",
+        "elements": [
+         "no reordering"
+        ]
+       },
+       {
+        "row_id": "A8",
+        "points": 1,
+        "criterion": "Changes the original list (words) instead of building and discarding a new list",
+        "elements": [
+         "modifies words"
+        ]
+       },
+       {
+        "row_id": "A9",
+        "points": 1,
+        "criterion": "The method compiles with return type void and correct ArrayList<String> and String use",
+        "elements": [
+         "public static void removeShort(ArrayList<String> words, int minLength)"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 9,
+    "judgment_demand": "write correct Java for the stated specification"
+   },
+   "seed": 8410,
+   "pack_id": "csf_list_remove_short-s8410"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "csf_list_remove_short",
+   "facts": [
+    "word_cases=8"
+   ],
+   "seed": 8410
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The task fits topic 4.10 and skill 2.A, the key is correct, and the stimulus is clear. The rubric is padded: A6 restates A3, A4, and A5; A7 and A8 are automatically satisfied by any remove(i) solution; and the dependency chains make one early error cascade across several rows. This breaks the one-behavior-per-row requirement, and the item is a single 9-point part rather than the usual FRQ structure.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Removal traversal of an ArrayList is core 4.10 content and the demand is 2.A. No out-of-scope material is used."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "The reference solution and the alternative forward-loop solution are both valid. The rubric rows overlap: A6 duplicates A3, A4, and A5; A7 and A8 are automatic for any remove(i) solution; A2 is not an independent behavior. The dependency chains double-penalize a single error, such as a missing index shift losing both A5 and A6."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The header, specification, and example are complete and clearly worded."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Common errors are listed per rubric row, including the skipped element after a removal and the wrong boundary. FRQ items have no distractors, so this criterion is not a concern."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The task load is a single short method. Because several of the nine points are free or redundant, the 9-point value is not earned by 9 distinct behaviors, so the item does not discriminate as an official FRQ would."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard FRQ-style ArrayList algorithm. The key concept is the index shift when removing during traversal, which requires a backward loop or an index decrement and creates a plausible off-by-one/skipped-element error. The code is short with a clear spec, no heavy reading or arithmetic, and it stays within Unit 4 scope (size/get/remove). It suits a full mock rather than basic learning because of the removal-while-traversing pitfall, but it is not advanced.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "candidateKey": "ap_computer_science_a-f04-k0",
+  "cellId": "ap_computer_science_a-f04",
+  "apSubjectCode": "ap_computer_science_a",
+  "kind": "frq_bundle",
+  "keywordCode": "4.13",
+  "unitCode": "4",
+  "skillPrimary": "2.A",
+  "structure": "frq_multipart",
+  "calculator": "not_allowed",
+  "archetype": "csf_2d_shift",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Standard 2D array FRQ-style method. The student must allocate a new array with matching dimensions, traverse by row and column, and map each element to column (c+1) % length. The wrap-around index is the only real subtlety, and it is a plausible off-by-one at the boundary. The method does not modify the input, so the student must avoid aliasing. Reading load is small and the example clarifies the behavior. The arithmetic is trivial and the scope is within 4.11-4.13. There are no unfair difficulty sources.",
+  "payload": {
+   "archetype": "csf_2d_shift",
+   "template": "q4",
+   "topic": "4.13",
+   "extra_topics": [
+    "4.12",
+    "4.11"
+   ],
+   "skill": "2.A",
+   "representative_skill": "2.A",
+   "calculator": "not_allowed",
+   "title": "GridShift: shift every row to the right",
+   "stimulus": {
+    "kind": "text",
+    "description": "A class GridShift manipulates rectangular two-dimensional arrays of integers. The class is shown with the header of the method you will write.\n```java\npublic class GridShift {\n    /** Returns a new two-dimensional array with the same dimensions as grid in which each row of grid\n     *  has been shifted one position to the right; the last element of each row moves to the front\n     *  of that row. The array grid is not modified.\n     *  Precondition: grid is rectangular and has at least one row and one column. */\n    public static int[][] shiftRight(int[][] grid) { /* to be written */ }\n}\n```",
+    "data": {
+     "variant": "java_code",
+     "language": "java"
+    }
+   },
+   "parts": [
+    {
+     "label": "a",
+     "prompt": "Write the method shiftRight, which returns a new two-dimensional array with the same dimensions as grid in which every row of grid has been shifted one position to the right, with the last element of each row moving to the front of that row. The array grid must not be modified. For example, if grid is { { 1, 2, 3 }, { 4, 5, 6 } } the method returns { { 3, 1, 2 }, { 6, 4, 5 } }. Complete the method shiftRight.",
+     "points": 9,
+     "response_mode": "code",
+     "skill_codes": [
+      "2.A"
+     ],
+     "model_answer": "One correct implementation (ALTON reference answer):\n```java\n    public static int[][] shiftRight(int[][] grid) {\n        int[][] result = new int[grid.length][grid[0].length];\n        for (int r = 0; r < grid.length; r++) {\n            for (int c = 0; c < grid[r].length; c++) {\n                result[r][(c + 1) % grid[r].length] = grid[r][c];\n            }\n        }\n        return result;\n    }\n```",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Creates a new two-dimensional array with the same number of rows and columns as grid (and does not reuse grid)",
+       "required_elements": [
+        "new int[grid.length][grid[0].length]"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "result = grid",
+        "swapped dimensions"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A2",
+       "points": 1,
+       "criterion": "Iterates over every row with a loop bounded by grid.length",
+       "required_elements": [
+        "for (int r = 0; r < grid.length; r++)"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "skips a row"
+       ],
+       "requires_row_id": "A1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A3",
+       "points": 1,
+       "criterion": "Iterates over every element of each row with correct column bounds",
+       "required_elements": [
+        "for (int c = 0; c < grid[r].length; c++)"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "skips the last column"
+       ],
+       "requires_row_id": "A2",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A4",
+       "points": 1,
+       "criterion": "Reads from grid with the row index first and the column index second",
+       "required_elements": [
+        "grid[r][c]"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "swaps the indexes"
+       ],
+       "requires_row_id": "A3",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A5",
+       "points": 1,
+       "criterion": "Computes the destination column one position to the right",
+       "required_elements": [
+        "c + 1"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "moves left",
+        "moves down a row"
+       ],
+       "requires_row_id": "A3",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A6",
+       "points": 1,
+       "criterion": "Wraps the last element of each row to column 0 (modulo or a special case)",
+       "required_elements": [
+        "% grid[r].length",
+        "or the last element copied to index 0"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "no wrap-around"
+       ],
+       "requires_row_id": "A5",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A7",
+       "points": 1,
+       "criterion": "Stores into the new array (not into grid)",
+       "required_elements": [
+        "result[r][...] = grid[r][c]"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "assigns into grid"
+       ],
+       "requires_row_id": "A5",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A8",
+       "points": 1,
+       "criterion": "Leaves grid unchanged",
+       "required_elements": [
+        "no assignment to grid elements"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "modifies grid"
+       ],
+       "requires_row_id": "A1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A9",
+       "points": 1,
+       "criterion": "Returns the new array after all rows are processed and the code compiles with return type int[][]",
+       "required_elements": [
+        "return result"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "returns inside the loop"
+       ],
+       "requires_row_id": "A7",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      }
+     ]
+    }
+   ],
+   "total_points": 9,
+   "est_minutes": 22,
+   "facts": [
+    "grids=8"
+   ],
+   "expected_values": [],
+   "reference_note": "ALTON reference answer for self-review — not official AP scoring",
+   "self_check_tests": [
+    {
+     "part": "a",
+     "call": "int[][] g = new int[][] { { 1 } }; int[][] s = GridShift.shiftRight(g); return Arrays.deepToString(s) + \"|\" + Arrays.deepToString(g);",
+     "expected": "[[1]]|[[1]]"
+    },
+    {
+     "part": "a",
+     "call": "int[][] g = new int[][] { { 1, 2 } }; int[][] s = GridShift.shiftRight(g); return Arrays.deepToString(s) + \"|\" + Arrays.deepToString(g);",
+     "expected": "[[2, 1]]|[[1, 2]]"
+    },
+    {
+     "part": "a",
+     "call": "int[][] g = new int[][] { { 1 }, { 2 } }; int[][] s = GridShift.shiftRight(g); return Arrays.deepToString(s) + \"|\" + Arrays.deepToString(g);",
+     "expected": "[[1], [2]]|[[1], [2]]"
+    },
+    {
+     "part": "a",
+     "call": "int[][] g = new int[][] { { 1, 2, 3 }, { 4, 5, 6 } }; int[][] s = GridShift.shiftRight(g); return Arrays.deepToString(s) + \"|\" + Arrays.deepToString(g);",
+     "expected": "[[3, 1, 2], [6, 4, 5]]|[[1, 2, 3], [4, 5, 6]]"
+    },
+    {
+     "part": "a",
+     "call": "int[][] g = new int[][] { { 1, 2 }, { 3, 4 }, { 5, 6 } }; int[][] s = GridShift.shiftRight(g); return Arrays.deepToString(s) + \"|\" + Arrays.deepToString(g);",
+     "expected": "[[2, 1], [4, 3], [6, 5]]|[[1, 2], [3, 4], [5, 6]]"
+    },
+    {
+     "part": "a",
+     "call": "int[][] g = new int[][] { { 7, 8, 9, 0 } }; int[][] s = GridShift.shiftRight(g); return Arrays.deepToString(s) + \"|\" + Arrays.deepToString(g);",
+     "expected": "[[0, 7, 8, 9]]|[[7, 8, 9, 0]]"
+    },
+    {
+     "part": "a",
+     "call": "int[][] g = new int[][] { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } }; int[][] s = GridShift.shiftRight(g); return Arrays.deepToString(s) + \"|\" + Arrays.deepToString(g);",
+     "expected": "[[3, 1, 2], [6, 4, 5], [9, 7, 8]]|[[1, 2, 3], [4, 5, 6], [7, 8, 9]]"
+    },
+    {
+     "part": "a",
+     "call": "int[][] g = new int[][] { { 5, 5 }, { 6, 6 } }; int[][] s = GridShift.shiftRight(g); return Arrays.deepToString(s) + \"|\" + Arrays.deepToString(g);",
+     "expected": "[[5, 5], [6, 6]]|[[5, 5], [6, 6]]"
+    }
+   ],
+   "verification": {
+    "variants": 7,
+    "wrong_failures": [
+     7,
+     5,
+     3,
+     7,
+     5
+    ]
+   },
+   "blueprint": {
+    "id": "csf_2d_shift",
+    "subject": "ap_computer_science_a",
+    "kind": "frq_bundle",
+    "concept": "2D array traversal that builds a new array with wrap-around indexing",
+    "topic": "4.13",
+    "skill": "2.A",
+    "student_thinking": [
+     "Allocate a matching array",
+     "Map each source index to a destination index with wrap-around",
+     "Leave the input unchanged"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "not_allowed",
+    "key_conditions": [
+     {
+      "condition": "the reference and an alternative (explicit first column) pass every test; each wrong solution fails at least one",
+      "evidence": "java test run"
+     }
+    ],
+    "material": {
+     "type": "code",
+     "must_include": [
+      "class or method skeleton",
+      "specification with examples"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "javac+java compile and run reference, alternative and wrong solutions; expected values from Python (list rotation)",
+     "method": "javac+java unit tests + python reference"
+    },
+    "parts": [
+     {
+      "label": "a",
+      "skills": [
+       "2.A"
+      ],
+      "topics": [
+       "4.13"
+      ],
+      "points": 9,
+      "accepted_answers": [
+       "One correct implementation (ALTON reference answer):\n```java\n    public static int[][] shiftRight(int[][] grid) {\n        int[][] result = new int[grid.length][grid[0].length];\n        for (int r = 0; r < grid.length; r++) {\n            for (int c = 0; c < grid[r].length; c++) {\n                result[r][(c + 1) % grid[r].length] = grid[r][c];\n            }\n        }\n        return result;\n    }\n```"
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Creates a new two-dimensional array with the same number of rows and columns as grid (and does not reuse grid)",
+        "elements": [
+         "new int[grid.length][grid[0].length]"
+        ]
+       },
+       {
+        "row_id": "A2",
+        "points": 1,
+        "criterion": "Iterates over every row with a loop bounded by grid.length",
+        "elements": [
+         "for (int r = 0; r < grid.length; r++)"
+        ]
+       },
+       {
+        "row_id": "A3",
+        "points": 1,
+        "criterion": "Iterates over every element of each row with correct column bounds",
+        "elements": [
+         "for (int c = 0; c < grid[r].length; c++)"
+        ]
+       },
+       {
+        "row_id": "A4",
+        "points": 1,
+        "criterion": "Reads from grid with the row index first and the column index second",
+        "elements": [
+         "grid[r][c]"
+        ]
+       },
+       {
+        "row_id": "A5",
+        "points": 1,
+        "criterion": "Computes the destination column one position to the right",
+        "elements": [
+         "c + 1"
+        ]
+       },
+       {
+        "row_id": "A6",
+        "points": 1,
+        "criterion": "Wraps the last element of each row to column 0 (modulo or a special case)",
+        "elements": [
+         "% grid[r].length",
+         "or the last element copied to index 0"
+        ]
+       },
+       {
+        "row_id": "A7",
+        "points": 1,
+        "criterion": "Stores into the new array (not into grid)",
+        "elements": [
+         "result[r][...] = grid[r][c]"
+        ]
+       },
+       {
+        "row_id": "A8",
+        "points": 1,
+        "criterion": "Leaves grid unchanged",
+        "elements": [
+         "no assignment to grid elements"
+        ]
+       },
+       {
+        "row_id": "A9",
+        "points": 1,
+        "criterion": "Returns the new array after all rows are processed and the code compiles with return type int[][]",
+        "elements": [
+         "return result"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 9,
+    "judgment_demand": "write correct Java for the stated specification"
+   },
+   "seed": 8410,
+   "pack_id": "csf_2d_shift-s8410"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "csf_2d_shift",
+   "facts": [
+    "grids=8"
+   ],
+   "seed": 8410
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A 2D array algorithm FRQ on topic 4.13 and skill 2.A that builds a new array with wrap-around column indexing. The spec has a precondition and an example, the reference and independent solver solutions agree, and the rubric has nine one-point rows that each judge a single behavior. It fits the Class Design / 2D Array FRQ pattern, and the 9-point load in about 22 minutes is acceptable.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The dominant demand is writing a 2D traversal that builds a new array, which fits 4.13 and 2.A. It uses no out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The reference and the solver's alternative both implement the spec correctly. Rubric rows each judge one behavior, and alternative approaches such as a special case for the first column are allowed in row A6. The dependency chain between rows is consistent."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The method header, precondition, return behavior and example are all stated clearly."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so there are no distractors. Common errors are listed per rubric row."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The task is typical for an AP CS A 2D array FRQ, needs no calculator, and has a reasonable length."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard 2D array FRQ-style method. The student must allocate a new array with matching dimensions, traverse by row and column, and map each element to column (c+1) % length. The wrap-around index is the only real subtlety, and it is a plausible off-by-one at the boundary. The method does not modify the input, so the student must avoid aliasing. Reading load is small and the example clarifies the behavior. The arithmetic is trivial and the scope is within 4.11-4.13. There are no unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "candidateKey": "ap_computer_science_a-f05-k0",
+  "cellId": "ap_computer_science_a-f05",
+  "apSubjectCode": "ap_computer_science_a",
+  "kind": "frq_bundle",
+  "keywordCode": "4.13",
+  "unitCode": "4",
+  "skillPrimary": "2.A",
+  "structure": "frq_multipart",
+  "calculator": "not_allowed",
+  "archetype": "csf_2d_border",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Standard FRQ-style 2D array algorithm: nested traversal plus a compound boundary condition. The trap is counting each element once, including corners and 1-row/1-column grids, which a single OR condition inside the nested loop handles. Concept depth is moderate, the worked example is short, and preconditions are stated, so nothing makes it hard for unfair reasons.",
+  "payload": {
+   "archetype": "csf_2d_border",
+   "template": "q4",
+   "topic": "4.13",
+   "extra_topics": [
+    "4.12"
+   ],
+   "skill": "2.A",
+   "representative_skill": "2.A",
+   "calculator": "not_allowed",
+   "title": "GridBorder: the sum of the border of a 2D array",
+   "stimulus": {
+    "kind": "text",
+    "description": "A class GridBorder analyzes a rectangular two-dimensional array of integers. The class is shown with the header of the method you will write.\n```java\npublic class GridBorder {\n    /** Returns the sum of the elements that are in the first row, the last row, the first column\n     *  or the last column of grid. Each element is counted once.\n     *  Precondition: grid is rectangular with at least one row and one column. */\n    public static int borderSum(int[][] grid) { /* to be written */ }\n}\n```",
+    "data": {
+     "variant": "java_code",
+     "language": "java"
+    }
+   },
+   "parts": [
+    {
+     "label": "a",
+     "prompt": "Write the method borderSum, which returns the sum of the elements of grid that are in the first row, the last row, the first column or the last column. Each element is counted once, even if it is in two of those places. For example, if grid is { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } } the method returns 40, because every element except the 5 is on the border. Complete the method borderSum.",
+     "points": 9,
+     "response_mode": "code",
+     "skill_codes": [
+      "2.A"
+     ],
+     "model_answer": "One correct implementation (ALTON reference answer):\n```java\n    public static int borderSum(int[][] grid) {\n        int sum = 0;\n        for (int r = 0; r < grid.length; r++) {\n            for (int c = 0; c < grid[r].length; c++) {\n                if (r == 0 || r == grid.length - 1 || c == 0 || c == grid[r].length - 1) {\n                    sum += grid[r][c];\n                }\n            }\n        }\n        return sum;\n    }\n```",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Iterates over every row with a loop bounded by grid.length",
+       "required_elements": [
+        "for (int r = 0; r < grid.length; r++)"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses grid[0].length for the rows"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A2",
+       "points": 1,
+       "criterion": "Iterates over every element of the current row with bounds based on grid[r].length (or grid[0].length)",
+       "required_elements": [
+        "for (int c = 0; c < grid[r].length; c++)"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses grid.length for the columns"
+       ],
+       "requires_row_id": "A1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A3",
+       "points": 1,
+       "criterion": "Accesses elements with the row index first and the column index second",
+       "required_elements": [
+        "grid[r][c]"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "swaps the indexes"
+       ],
+       "requires_row_id": "A2",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A4",
+       "points": 1,
+       "criterion": "Recognizes the first and last rows with correct index tests",
+       "required_elements": [
+        "r == 0 || r == grid.length - 1"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "compares with grid.length",
+        "omits the last row"
+       ],
+       "requires_row_id": "A1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A5",
+       "points": 1,
+       "criterion": "Recognizes the first and last columns with correct index tests",
+       "required_elements": [
+        "c == 0 || c == grid[r].length - 1"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "omits the last column"
+       ],
+       "requires_row_id": "A2",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A6",
+       "points": 1,
+       "criterion": "Combines the row and column tests so that an element is included when it satisfies any of them (logical or)",
+       "required_elements": [
+        "||"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses && between the row and column tests"
+       ],
+       "requires_row_id": "A5",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A7",
+       "points": 1,
+       "criterion": "Counts each border element exactly once (corners and one-row or one-column arrays are not double counted)",
+       "required_elements": [
+        "a single condition per element"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "adds rows and columns separately"
+       ],
+       "requires_row_id": "A6",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A8",
+       "points": 1,
+       "criterion": "Accumulates the included elements in a sum initialized before the loops",
+       "required_elements": [
+        "int sum = 0",
+        "sum += grid[r][c]"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "replaces the sum"
+       ],
+       "requires_row_id": "A7",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A9",
+       "points": 1,
+       "criterion": "Returns the sum after both loops and compiles with return type int",
+       "required_elements": [
+        "return sum"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "returns inside the loop"
+       ],
+       "requires_row_id": "A8",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      }
+     ]
+    }
+   ],
+   "total_points": 9,
+   "est_minutes": 22,
+   "facts": [
+    "grids=8"
+   ],
+   "expected_values": [],
+   "reference_note": "ALTON reference answer for self-review — not official AP scoring",
+   "self_check_tests": [
+    {
+     "part": "a",
+     "call": "return GridBorder.borderSum(new int[][] { { 5 } });",
+     "expected": "5"
+    },
+    {
+     "part": "a",
+     "call": "return GridBorder.borderSum(new int[][] { { 1, 2, 3 } });",
+     "expected": "6"
+    },
+    {
+     "part": "a",
+     "call": "return GridBorder.borderSum(new int[][] { { 1 }, { 2 }, { 3 } });",
+     "expected": "6"
+    },
+    {
+     "part": "a",
+     "call": "return GridBorder.borderSum(new int[][] { { 1, 2 }, { 3, 4 } });",
+     "expected": "10"
+    },
+    {
+     "part": "a",
+     "call": "return GridBorder.borderSum(new int[][] { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } });",
+     "expected": "40"
+    },
+    {
+     "part": "a",
+     "call": "return GridBorder.borderSum(new int[][] { { 1, 2, 3, 4 }, { 5, 6, 7, 8 }, { 9, 1, 2, 3 } });",
+     "expected": "38"
+    },
+    {
+     "part": "a",
+     "call": "return GridBorder.borderSum(new int[][] { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 }, { 1, 1, 1 } });",
+     "expected": "35"
+    },
+    {
+     "part": "a",
+     "call": "return GridBorder.borderSum(new int[][] { { -1, 5 }, { 5, -1 }, { 2, 2 } });",
+     "expected": "12"
+    }
+   ],
+   "verification": {
+    "variants": 7,
+    "wrong_failures": [
+     8,
+     6,
+     4,
+     8,
+     4
+    ]
+   },
+   "blueprint": {
+    "id": "csf_2d_border",
+    "subject": "ap_computer_science_a",
+    "kind": "frq_bundle",
+    "concept": "2D array traversal with a combined row and column boundary test",
+    "topic": "4.13",
+    "skill": "2.A",
+    "student_thinking": [
+     "Visit every element with nested loops",
+     "Test the row and the column boundaries",
+     "Count each element once"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "not_allowed",
+    "key_conditions": [
+     {
+      "condition": "the reference and an alternative (total minus interior) pass every test; each wrong solution fails at least one",
+      "evidence": "java test run"
+     }
+    ],
+    "material": {
+     "type": "code",
+     "must_include": [
+      "class or method skeleton",
+      "specification with examples"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "javac+java compile and run reference, alternative and wrong solutions; expected values from Python",
+     "method": "javac+java unit tests + python reference"
+    },
+    "parts": [
+     {
+      "label": "a",
+      "skills": [
+       "2.A"
+      ],
+      "topics": [
+       "4.13"
+      ],
+      "points": 9,
+      "accepted_answers": [
+       "One correct implementation (ALTON reference answer):\n```java\n    public static int borderSum(int[][] grid) {\n        int sum = 0;\n        for (int r = 0; r < grid.length; r++) {\n            for (int c = 0; c < grid[r].length; c++) {\n                if (r == 0 || r == grid.length - 1 || c == 0 || c == grid[r].length - 1) {\n                    sum += grid[r][c];\n                }\n            }\n        }\n        return sum;\n    }\n```"
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Iterates over every row with a loop bounded by grid.length",
+        "elements": [
+         "for (int r = 0; r < grid.length; r++)"
+        ]
+       },
+       {
+        "row_id": "A2",
+        "points": 1,
+        "criterion": "Iterates over every element of the current row with bounds based on grid[r].length (or grid[0].length)",
+        "elements": [
+         "for (int c = 0; c < grid[r].length; c++)"
+        ]
+       },
+       {
+        "row_id": "A3",
+        "points": 1,
+        "criterion": "Accesses elements with the row index first and the column index second",
+        "elements": [
+         "grid[r][c]"
+        ]
+       },
+       {
+        "row_id": "A4",
+        "points": 1,
+        "criterion": "Recognizes the first and last rows with correct index tests",
+        "elements": [
+         "r == 0 || r == grid.length - 1"
+        ]
+       },
+       {
+        "row_id": "A5",
+        "points": 1,
+        "criterion": "Recognizes the first and last columns with correct index tests",
+        "elements": [
+         "c == 0 || c == grid[r].length - 1"
+        ]
+       },
+       {
+        "row_id": "A6",
+        "points": 1,
+        "criterion": "Combines the row and column tests so that an element is included when it satisfies any of them (logical or)",
+        "elements": [
+         "||"
+        ]
+       },
+       {
+        "row_id": "A7",
+        "points": 1,
+        "criterion": "Counts each border element exactly once (corners and one-row or one-column arrays are not double counted)",
+        "elements": [
+         "a single condition per element"
+        ]
+       },
+       {
+        "row_id": "A8",
+        "points": 1,
+        "criterion": "Accumulates the included elements in a sum initialized before the loops",
+        "elements": [
+         "int sum = 0",
+         "sum += grid[r][c]"
+        ]
+       },
+       {
+        "row_id": "A9",
+        "points": 1,
+        "criterion": "Returns the sum after both loops and compiles with return type int",
+        "elements": [
+         "return sum"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 9,
+    "judgment_demand": "write correct Java for the stated specification"
+   },
+   "seed": 8410,
+   "pack_id": "csf_2d_border-s8410"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "csf_2d_border",
+   "facts": [
+    "grids=8"
+   ],
+   "seed": 8410
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a single 9-point method-writing FRQ on 2D array traversal with a combined border test. It fits 4.13 and skill 2.A. The spec is clear, includes an example and states the precondition. The nine 1-point rows each judge one behavior. The reference and the independent solver's solution (which uses grid[0].length, covered by the A2 alternative) both pass the tests. Single-row, single-column and 1x1 cases are tested. The load is typical of an AP FRQ.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Nested traversal with a boundary condition. Dominant demand is 2D array algorithm implementation. No out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Rows are consistent with the reference. The tests cover degenerate shapes. A7 is somewhat implicit but acceptable. The alternative (total minus interior) is also valid."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The method header, javadoc and precondition are complete. The example gives 40, which is correct."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "FRQ: the common_errors listed in the rubric rows are realistic, such as && instead of ||, a wrong loop bound, and double counting."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Appropriate for a 9-point FRQ. No calculator is needed."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard FRQ-style 2D array algorithm: nested traversal plus a compound boundary condition. The trap is counting each element once, including corners and 1-row/1-column grids, which a single OR condition inside the nested loop handles. Concept depth is moderate, the worked example is short, and preconditions are stated, so nothing makes it hard for unfair reasons.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "candidateKey": "ap_computer_science_a-f06-k0",
+  "cellId": "ap_computer_science_a-f06",
+  "apSubjectCode": "ap_computer_science_a",
+  "kind": "frq_bundle",
+  "keywordCode": "4.13",
+  "unitCode": "4",
+  "skillPrimary": "2.A",
+  "structure": "frq_multipart",
+  "calculator": "not_allowed",
+  "archetype": "csf_2d_transpose",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "criterion_failed_key_scoring; reference_pattern_mismatch",
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Standard FRQ-style 2D array method. The student must size the new array with swapped dimensions (grid[0].length by grid.length), traverse with nested loops, and swap the indices on assignment. The likely errors are swapped dimensions or indices, or modifying the input. It is typical of a full-mock free-response item and tests only in-scope Unit 4 content, with short reading and no long computation.",
+  "payload": {
+   "archetype": "csf_2d_transpose",
+   "template": "q4",
+   "topic": "4.13",
+   "extra_topics": [
+    "4.12",
+    "4.11"
+   ],
+   "skill": "2.A",
+   "representative_skill": "2.A",
+   "calculator": "not_allowed",
+   "title": "GridTools: transpose a 2D array",
+   "stimulus": {
+    "kind": "text",
+    "description": "A class GridTools manipulates rectangular two-dimensional arrays of integers. The class is shown with the header of the method you will write.\n```java\npublic class GridTools {\n    /** Returns a new two-dimensional array that is the transpose of grid: for every row r and column c,\n     *  element [c][r] of the result equals element [r][c] of grid. The array grid is not modified.\n     *  Precondition: grid is rectangular and has at least one row and one column. */\n    public static int[][] transpose(int[][] grid) { /* to be written */ }\n}\n```",
+    "data": {
+     "variant": "java_code",
+     "language": "java"
+    }
+   },
+   "parts": [
+    {
+     "label": "a",
+     "prompt": "Write the method transpose, which returns a new two-dimensional array that is the transpose of grid: for every row r and column c, the element at row c and column r of the result equals the element at row r and column c of grid. The array grid must not be modified. For example, if grid is { { 1, 2, 3 }, { 4, 5, 6 } } the method returns { { 1, 4 }, { 2, 5 }, { 3, 6 } }. Complete the method transpose.",
+     "points": 9,
+     "response_mode": "code",
+     "skill_codes": [
+      "2.A"
+     ],
+     "model_answer": "One correct implementation (ALTON reference answer):\n```java\n    public static int[][] transpose(int[][] grid) {\n        int[][] result = new int[grid[0].length][grid.length];\n        for (int r = 0; r < grid.length; r++) {\n            for (int c = 0; c < grid[r].length; c++) {\n                result[c][r] = grid[r][c];\n            }\n        }\n        return result;\n    }\n```",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Creates a new two-dimensional array whose number of rows equals the number of columns of grid and whose number of columns equals the number of rows of grid",
+       "required_elements": [
+        "new int[grid[0].length][grid.length]"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "same dimensions as grid",
+        "swapped incorrectly"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A2",
+       "points": 1,
+       "criterion": "Iterates over every row with a loop bounded by grid.length",
+       "required_elements": [
+        "for (int r = 0; r < grid.length; r++)"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "skips a row"
+       ],
+       "requires_row_id": "A1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A3",
+       "points": 1,
+       "criterion": "Iterates over every element of each row with correct column bounds",
+       "required_elements": [
+        "for (int c = 0; c < grid[r].length; c++)"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses grid.length for the columns"
+       ],
+       "requires_row_id": "A2",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A4",
+       "points": 1,
+       "criterion": "Reads from grid with the row index first and the column index second",
+       "required_elements": [
+        "grid[r][c]"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "swaps the indexes when reading"
+       ],
+       "requires_row_id": "A3",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A5",
+       "points": 1,
+       "criterion": "Writes into the result with the indexes exchanged",
+       "required_elements": [
+        "result[c][r]"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "result[r][c]"
+       ],
+       "requires_row_id": "A3",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A6",
+       "points": 1,
+       "criterion": "Assigns the element read from grid to the element written in the result",
+       "required_elements": [
+        "result[c][r] = grid[r][c]"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "compares instead of assigns"
+       ],
+       "requires_row_id": "A5",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A7",
+       "points": 1,
+       "criterion": "Works for arrays that are not square (rows and columns are bounded separately)",
+       "required_elements": [
+        "separate bounds for rows and columns"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "fails for non-square arrays"
+       ],
+       "requires_row_id": "A1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A8",
+       "points": 1,
+       "criterion": "Leaves grid unchanged",
+       "required_elements": [
+        "no assignment to grid elements"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "modifies grid"
+       ],
+       "requires_row_id": "A1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      },
+      {
+       "row_id": "A9",
+       "points": 1,
+       "criterion": "Returns the new array after all elements are copied and compiles with return type int[][]",
+       "required_elements": [
+        "return result"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "returns inside the loop",
+        "returns grid"
+       ],
+       "requires_row_id": "A6",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "code"
+      }
+     ]
+    }
+   ],
+   "total_points": 9,
+   "est_minutes": 22,
+   "facts": [
+    "grids=8"
+   ],
+   "expected_values": [],
+   "reference_note": "ALTON reference answer for self-review — not official AP scoring",
+   "self_check_tests": [
+    {
+     "part": "a",
+     "call": "int[][] g = new int[][] { { 1 } }; int[][] t = GridTools.transpose(g); return Arrays.deepToString(t) + \"|\" + Arrays.deepToString(g);",
+     "expected": "[[1]]|[[1]]"
+    },
+    {
+     "part": "a",
+     "call": "int[][] g = new int[][] { { 1, 2, 3 } }; int[][] t = GridTools.transpose(g); return Arrays.deepToString(t) + \"|\" + Arrays.deepToString(g);",
+     "expected": "[[1], [2], [3]]|[[1, 2, 3]]"
+    },
+    {
+     "part": "a",
+     "call": "int[][] g = new int[][] { { 1 }, { 2 } }; int[][] t = GridTools.transpose(g); return Arrays.deepToString(t) + \"|\" + Arrays.deepToString(g);",
+     "expected": "[[1, 2]]|[[1], [2]]"
+    },
+    {
+     "part": "a",
+     "call": "int[][] g = new int[][] { { 1, 2 }, { 3, 4 } }; int[][] t = GridTools.transpose(g); return Arrays.deepToString(t) + \"|\" + Arrays.deepToString(g);",
+     "expected": "[[1, 3], [2, 4]]|[[1, 2], [3, 4]]"
+    },
+    {
+     "part": "a",
+     "call": "int[][] g = new int[][] { { 1, 2, 3 }, { 4, 5, 6 } }; int[][] t = GridTools.transpose(g); return Arrays.deepToString(t) + \"|\" + Arrays.deepToString(g);",
+     "expected": "[[1, 4], [2, 5], [3, 6]]|[[1, 2, 3], [4, 5, 6]]"
+    },
+    {
+     "part": "a",
+     "call": "int[][] g = new int[][] { { 1, 2 }, { 3, 4 }, { 5, 6 } }; int[][] t = GridTools.transpose(g); return Arrays.deepToString(t) + \"|\" + Arrays.deepToString(g);",
+     "expected": "[[1, 3, 5], [2, 4, 6]]|[[1, 2], [3, 4], [5, 6]]"
+    },
+    {
+     "part": "a",
+     "call": "int[][] g = new int[][] { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } }; int[][] t = GridTools.transpose(g); return Arrays.deepToString(t) + \"|\" + Arrays.deepToString(g);",
+     "expected": "[[1, 4, 7], [2, 5, 8], [3, 6, 9]]|[[1, 2, 3], [4, 5, 6], [7, 8, 9]]"
+    },
+    {
+     "part": "a",
+     "call": "int[][] g = new int[][] { { 7, 8, 9, 0 } }; int[][] t = GridTools.transpose(g); return Arrays.deepToString(t) + \"|\" + Arrays.deepToString(g);",
+     "expected": "[[7], [8], [9], [0]]|[[7, 8, 9, 0]]"
+    }
+   ],
+   "verification": {
+    "variants": 7,
+    "wrong_failures": [
+     5,
+     7,
+     7,
+     5,
+     7
+    ]
+   },
+   "blueprint": {
+    "id": "csf_2d_transpose",
+    "subject": "ap_computer_science_a",
+    "kind": "frq_bundle",
+    "concept": "2D array traversal that builds a new array with row and column exchanged",
+    "topic": "4.13",
+    "skill": "2.A",
+    "student_thinking": [
+     "Allocate an array with swapped dimensions",
+     "Map [r][c] to [c][r]",
+     "Leave the input unchanged"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "not_allowed",
+    "key_conditions": [
+     {
+      "condition": "the reference and an alternative (column-first loops) pass every test; each wrong solution fails at least one",
+      "evidence": "java test run"
+     }
+    ],
+    "material": {
+     "type": "code",
+     "must_include": [
+      "class or method skeleton",
+      "specification with examples"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "javac+java compile and run reference, alternative and wrong solutions; expected values from Python zip",
+     "method": "javac+java unit tests + python reference"
+    },
+    "parts": [
+     {
+      "label": "a",
+      "skills": [
+       "2.A"
+      ],
+      "topics": [
+       "4.13"
+      ],
+      "points": 9,
+      "accepted_answers": [
+       "One correct implementation (ALTON reference answer):\n```java\n    public static int[][] transpose(int[][] grid) {\n        int[][] result = new int[grid[0].length][grid.length];\n        for (int r = 0; r < grid.length; r++) {\n            for (int c = 0; c < grid[r].length; c++) {\n                result[c][r] = grid[r][c];\n            }\n        }\n        return result;\n    }\n```"
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Creates a new two-dimensional array whose number of rows equals the number of columns of grid and whose number of columns equals the number of rows of grid",
+        "elements": [
+         "new int[grid[0].length][grid.length]"
+        ]
+       },
+       {
+        "row_id": "A2",
+        "points": 1,
+        "criterion": "Iterates over every row with a loop bounded by grid.length",
+        "elements": [
+         "for (int r = 0; r < grid.length; r++)"
+        ]
+       },
+       {
+        "row_id": "A3",
+        "points": 1,
+        "criterion": "Iterates over every element of each row with correct column bounds",
+        "elements": [
+         "for (int c = 0; c < grid[r].length; c++)"
+        ]
+       },
+       {
+        "row_id": "A4",
+        "points": 1,
+        "criterion": "Reads from grid with the row index first and the column index second",
+        "elements": [
+         "grid[r][c]"
+        ]
+       },
+       {
+        "row_id": "A5",
+        "points": 1,
+        "criterion": "Writes into the result with the indexes exchanged",
+        "elements": [
+         "result[c][r]"
+        ]
+       },
+       {
+        "row_id": "A6",
+        "points": 1,
+        "criterion": "Assigns the element read from grid to the element written in the result",
+        "elements": [
+         "result[c][r] = grid[r][c]"
+        ]
+       },
+       {
+        "row_id": "A7",
+        "points": 1,
+        "criterion": "Works for arrays that are not square (rows and columns are bounded separately)",
+        "elements": [
+         "separate bounds for rows and columns"
+        ]
+       },
+       {
+        "row_id": "A8",
+        "points": 1,
+        "criterion": "Leaves grid unchanged",
+        "elements": [
+         "no assignment to grid elements"
+        ]
+       },
+       {
+        "row_id": "A9",
+        "points": 1,
+        "criterion": "Returns the new array after all elements are copied and compiles with return type int[][]",
+        "elements": [
+         "return result"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 9,
+    "judgment_demand": "write correct Java for the stated specification"
+   },
+   "seed": 8410,
+   "pack_id": "csf_2d_transpose-s8410"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "csf_2d_transpose",
+   "facts": [
+    "grids=8"
+   ],
+   "seed": 8410
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The task is in scope and the reference solution is correct. However, the rubric splits one statement across three rows (A4, A5, A6) and adds redundant rows (A7, A8). It also uses literal-string required elements that would penalize valid alternative solutions. The 9-point single-part structure also deviates from the official pattern of multi-part FRQs. I am failing it on key/scoring and on matches_reference_pattern.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Transposing a 2D array is squarely topic 4.13 and skill 2.A. It needs only 2D traversal and array creation (4.11 and 4.12), with no out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "The reference is correct, and the independent solver's different valid solution (hoisting rows/cols into variables) shows that alternatives work. The rubric is poorly constructed, though. It has nine 1-point rows, and several do not each judge a distinct behavior. A4 (reading grid[r][c]), A5 (writing result[c][r]) and A6 (the assignment) all award credit for the same single statement. A7 (works for non-square arrays) is already covered by A1 and A3. A8 (leaves grid unchanged) awards a point for the absence of a bad action, which is not a distinct skill. The rows also demand literal strings such as 'for (int r = 0; r < grid.length; r++)'. The solver's valid alternative, which uses rows/cols variables, would fail those literal required_elements, so the rubric is not robust to valid solutions. The dependency chain (A9 requires A6, and so on) can also cause cascading loss of credit."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The stem is clear. The method header, the precondition and a worked example are all given. The one weakness is that the stimulus data is minimal (variant java_code, language java) and the code itself is carried in the description."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ with no distractors. The common_errors listed for each row are reasonable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "This is a single 9-point part in a task that takes about 5 minutes, which is lighter than a real 9-point AP FRQ. Real AP FRQs split the 9 points across parts of 1-5 points (for example 1/1/2/5). One part with nine 1-point rows is a material deviation from that pattern. The inflated rubric over-rewards a short method."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard FRQ-style 2D array method. The student must size the new array with swapped dimensions (grid[0].length by grid.length), traverse with nested loops, and swap the indices on assignment. The likely errors are swapped dimensions or indices, or modifying the input. It is typical of a full-mock free-response item and tests only in-scope Unit 4 content, with short reading and no long computation.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 480
+  }
+ }
+]

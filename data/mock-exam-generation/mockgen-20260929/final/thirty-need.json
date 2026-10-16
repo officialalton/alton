@@ -1,0 +1,934 @@
+{
+ "sets": 30,
+ "perSet": {
+  "rw|rw_information_ideas|easy|mc": 4,
+  "rw|rw_information_ideas|medium|mc": 15,
+  "rw|rw_craft_structure|easy|mc": 6,
+  "rw|rw_craft_structure|medium|mc": 15,
+  "rw|rw_expression_ideas|easy|mc": 4,
+  "rw|rw_expression_ideas|medium|mc": 9,
+  "rw|rw_standard_english|easy|mc": 4,
+  "rw|rw_standard_english|medium|mc": 15,
+  "rw|rw_information_ideas|hard|mc": 2,
+  "rw|rw_craft_structure|hard|mc": 3,
+  "rw|rw_expression_ideas|hard|mc": 2,
+  "rw|rw_standard_english|hard|mc": 2,
+  "math|algebra|easy|mc": 4,
+  "math|algebra|easy|spr": 2,
+  "math|algebra|medium|mc": 12,
+  "math|algebra|medium|spr": 3,
+  "math|advanced_math|easy|mc": 4,
+  "math|advanced_math|easy|spr": 2,
+  "math|advanced_math|medium|mc": 12,
+  "math|advanced_math|medium|spr": 3,
+  "math|problem_solving_data|easy|mc": 2,
+  "math|problem_solving_data|medium|mc": 6,
+  "math|geometry_trig|easy|mc": 2,
+  "math|geometry_trig|medium|mc": 6,
+  "math|algebra|hard|mc": 2,
+  "math|algebra|hard|spr": 1,
+  "math|advanced_math|hard|mc": 2,
+  "math|advanced_math|hard|spr": 1,
+  "math|problem_solving_data|hard|mc": 1,
+  "math|geometry_trig|hard|mc": 1
+ },
+ "rows": [
+  {
+   "system": "sat_rw",
+   "domain": "rw_information_ideas",
+   "skill": "central_ideas_details",
+   "total": 190,
+   "byDiff": {
+    "easy": 42,
+    "medium": 125,
+    "hard": 23
+   },
+   "propHard": 18,
+   "floorApplied": true,
+   "supply": {
+    "easy": 13,
+    "medium": 45,
+    "hardRemoteNonAi": 0,
+    "hardRemoteAiProvisional": 1,
+    "hardLocalAdoptedProvisional": 4
+   },
+   "short": {
+    "easy": 29,
+    "medium": 80,
+    "hard": 18
+   },
+   "shortTotal": 127,
+   "perSetSkill": 6.33,
+   "compiler": null
+  },
+  {
+   "system": "sat_rw",
+   "domain": "rw_information_ideas",
+   "skill": "inferences",
+   "total": 158,
+   "byDiff": {
+    "easy": 35,
+    "medium": 103,
+    "hard": 20
+   },
+   "propHard": 15,
+   "floorApplied": true,
+   "supply": {
+    "easy": 10,
+    "medium": 29,
+    "hardRemoteNonAi": 0,
+    "hardRemoteAiProvisional": 4,
+    "hardLocalAdoptedProvisional": 1
+   },
+   "short": {
+    "easy": 25,
+    "medium": 74,
+    "hard": 15
+   },
+   "shortTotal": 114,
+   "perSetSkill": 5.27,
+   "compiler": null
+  },
+  {
+   "system": "sat_rw",
+   "domain": "rw_information_ideas",
+   "skill": "command_of_evidence_text",
+   "total": 158,
+   "byDiff": {
+    "easy": 35,
+    "medium": 103,
+    "hard": 20
+   },
+   "propHard": 15,
+   "floorApplied": true,
+   "supply": {
+    "easy": 11,
+    "medium": 29,
+    "hardRemoteNonAi": 0,
+    "hardRemoteAiProvisional": 6,
+    "hardLocalAdoptedProvisional": 5
+   },
+   "short": {
+    "easy": 24,
+    "medium": 74,
+    "hard": 9
+   },
+   "shortTotal": 107,
+   "perSetSkill": 5.27,
+   "compiler": null
+  },
+  {
+   "system": "sat_rw",
+   "domain": "rw_information_ideas",
+   "skill": "command_of_evidence_quant",
+   "total": 126,
+   "byDiff": {
+    "easy": 27,
+    "medium": 81,
+    "hard": 18
+   },
+   "propHard": 12,
+   "floorApplied": true,
+   "supply": {
+    "easy": 13,
+    "medium": 20,
+    "hardRemoteNonAi": 0,
+    "hardRemoteAiProvisional": 4,
+    "hardLocalAdoptedProvisional": 0
+   },
+   "short": {
+    "easy": 14,
+    "medium": 61,
+    "hard": 14
+   },
+   "shortTotal": 89,
+   "perSetSkill": 4.2,
+   "compiler": null
+  },
+  {
+   "system": "sat_rw",
+   "domain": "rw_craft_structure",
+   "skill": "words_in_context",
+   "total": 306,
+   "byDiff": {
+    "easy": 69,
+    "medium": 207,
+    "hard": 30
+   },
+   "propHard": 41,
+   "floorApplied": false,
+   "supply": {
+    "easy": 49,
+    "medium": 41,
+    "hardRemoteNonAi": 0,
+    "hardRemoteAiProvisional": 1,
+    "hardLocalAdoptedProvisional": 5
+   },
+   "short": {
+    "easy": 20,
+    "medium": 166,
+    "hard": 24
+   },
+   "shortTotal": 210,
+   "perSetSkill": 10.2,
+   "compiler": null
+  },
+  {
+   "system": "sat_rw",
+   "domain": "rw_craft_structure",
+   "skill": "text_structure_purpose",
+   "total": 238,
+   "byDiff": {
+    "easy": 53,
+    "medium": 159,
+    "hard": 26
+   },
+   "propHard": 32,
+   "floorApplied": false,
+   "supply": {
+    "easy": 19,
+    "medium": 37,
+    "hardRemoteNonAi": 0,
+    "hardRemoteAiProvisional": 6,
+    "hardLocalAdoptedProvisional": 5
+   },
+   "short": {
+    "easy": 34,
+    "medium": 122,
+    "hard": 15
+   },
+   "shortTotal": 171,
+   "perSetSkill": 7.93,
+   "compiler": null
+  },
+  {
+   "system": "sat_rw",
+   "domain": "rw_craft_structure",
+   "skill": "cross_text_connections",
+   "total": 136,
+   "byDiff": {
+    "easy": 29,
+    "medium": 88,
+    "hard": 19
+   },
+   "propHard": 18,
+   "floorApplied": true,
+   "supply": {
+    "easy": 11,
+    "medium": 30,
+    "hardRemoteNonAi": 0,
+    "hardRemoteAiProvisional": 7,
+    "hardLocalAdoptedProvisional": 6
+   },
+   "short": {
+    "easy": 18,
+    "medium": 58,
+    "hard": 6
+   },
+   "shortTotal": 82,
+   "perSetSkill": 4.53,
+   "compiler": null
+  },
+  {
+   "system": "sat_rw",
+   "domain": "rw_expression_ideas",
+   "skill": "rhetorical_synthesis",
+   "total": 243,
+   "byDiff": {
+    "easy": 54,
+    "medium": 163,
+    "hard": 26
+   },
+   "propHard": 30,
+   "floorApplied": false,
+   "supply": {
+    "easy": 19,
+    "medium": 63,
+    "hardRemoteNonAi": 0,
+    "hardRemoteAiProvisional": 4,
+    "hardLocalAdoptedProvisional": 4
+   },
+   "short": {
+    "easy": 35,
+    "medium": 100,
+    "hard": 18
+   },
+   "shortTotal": 153,
+   "perSetSkill": 8.1,
+   "compiler": null
+  },
+  {
+   "system": "sat_rw",
+   "domain": "rw_expression_ideas",
+   "skill": "transitions",
+   "total": 243,
+   "byDiff": {
+    "easy": 54,
+    "medium": 163,
+    "hard": 26
+   },
+   "propHard": 30,
+   "floorApplied": false,
+   "supply": {
+    "easy": 14,
+    "medium": 57,
+    "hardRemoteNonAi": 0,
+    "hardRemoteAiProvisional": 3,
+    "hardLocalAdoptedProvisional": 4
+   },
+   "short": {
+    "easy": 40,
+    "medium": 106,
+    "hard": 19
+   },
+   "shortTotal": 165,
+   "perSetSkill": 8.1,
+   "compiler": null
+  },
+  {
+   "system": "sat_rw",
+   "domain": "rw_standard_english",
+   "skill": "boundaries",
+   "total": 316,
+   "byDiff": {
+    "easy": 71,
+    "medium": 214,
+    "hard": 31
+   },
+   "propHard": 30,
+   "floorApplied": true,
+   "supply": {
+    "easy": 20,
+    "medium": 44,
+    "hardRemoteNonAi": 0,
+    "hardRemoteAiProvisional": 4,
+    "hardLocalAdoptedProvisional": 6
+   },
+   "short": {
+    "easy": 51,
+    "medium": 170,
+    "hard": 21
+   },
+   "shortTotal": 242,
+   "perSetSkill": 10.53,
+   "compiler": null
+  },
+  {
+   "system": "sat_rw",
+   "domain": "rw_standard_english",
+   "skill": "form_structure_sense",
+   "total": 316,
+   "byDiff": {
+    "easy": 71,
+    "medium": 214,
+    "hard": 31
+   },
+   "propHard": 30,
+   "floorApplied": true,
+   "supply": {
+    "easy": 17,
+    "medium": 34,
+    "hardRemoteNonAi": 0,
+    "hardRemoteAiProvisional": 7,
+    "hardLocalAdoptedProvisional": 4
+   },
+   "short": {
+    "easy": 54,
+    "medium": 180,
+    "hard": 20
+   },
+   "shortTotal": 254,
+   "perSetSkill": 10.53,
+   "compiler": null
+  },
+  {
+   "system": "sat_math",
+   "domain": "algebra",
+   "skill": "linear_equations_one_var",
+   "total": 139,
+   "byDiff": {
+    "easy": 34,
+    "medium": 91,
+    "hard": 14
+   },
+   "propHard": 18,
+   "floorApplied": false,
+   "supply": {
+    "easy": 5,
+    "medium": 27,
+    "hardRemoteNonAi": 4,
+    "hardRemoteAiProvisional": 2,
+    "hardLocalAdoptedProvisional": 3
+   },
+   "short": {
+    "easy": 29,
+    "medium": 64,
+    "hard": 5
+   },
+   "shortTotal": 98,
+   "perSetSkill": 4.63,
+   "compiler": {
+    "kinds": 3,
+    "perSetOverCap": 1.63
+   }
+  },
+  {
+   "system": "sat_math",
+   "domain": "algebra",
+   "skill": "linear_functions",
+   "total": 139,
+   "byDiff": {
+    "easy": 34,
+    "medium": 91,
+    "hard": 14
+   },
+   "propHard": 18,
+   "floorApplied": false,
+   "supply": {
+    "easy": 8,
+    "medium": 20,
+    "hardRemoteNonAi": 10,
+    "hardRemoteAiProvisional": 2,
+    "hardLocalAdoptedProvisional": 0
+   },
+   "short": {
+    "easy": 26,
+    "medium": 71,
+    "hard": 2
+   },
+   "shortTotal": 99,
+   "perSetSkill": 4.63,
+   "compiler": {
+    "kinds": 5,
+    "perSetOverCap": 0
+   }
+  },
+  {
+   "system": "sat_math",
+   "domain": "algebra",
+   "skill": "linear_equations_two_var",
+   "total": 139,
+   "byDiff": {
+    "easy": 35,
+    "medium": 91,
+    "hard": 13
+   },
+   "propHard": 18,
+   "floorApplied": false,
+   "supply": {
+    "easy": 13,
+    "medium": 29,
+    "hardRemoteNonAi": 0,
+    "hardRemoteAiProvisional": 3,
+    "hardLocalAdoptedProvisional": 3
+   },
+   "short": {
+    "easy": 22,
+    "medium": 62,
+    "hard": 7
+   },
+   "shortTotal": 91,
+   "perSetSkill": 4.63,
+   "compiler": {
+    "kinds": 6,
+    "perSetOverCap": 0
+   }
+  },
+  {
+   "system": "sat_math",
+   "domain": "algebra",
+   "skill": "systems_linear",
+   "total": 138,
+   "byDiff": {
+    "easy": 34,
+    "medium": 91,
+    "hard": 13
+   },
+   "propHard": 18,
+   "floorApplied": false,
+   "supply": {
+    "easy": 11,
+    "medium": 39,
+    "hardRemoteNonAi": 0,
+    "hardRemoteAiProvisional": 2,
+    "hardLocalAdoptedProvisional": 4
+   },
+   "short": {
+    "easy": 23,
+    "medium": 52,
+    "hard": 7
+   },
+   "shortTotal": 82,
+   "perSetSkill": 4.6,
+   "compiler": {
+    "kinds": 0,
+    "perSetOverCap": 4.6
+   }
+  },
+  {
+   "system": "sat_math",
+   "domain": "algebra",
+   "skill": "linear_inequalities",
+   "total": 138,
+   "byDiff": {
+    "easy": 34,
+    "medium": 91,
+    "hard": 13
+   },
+   "propHard": 18,
+   "floorApplied": false,
+   "supply": {
+    "easy": 5,
+    "medium": 18,
+    "hardRemoteNonAi": 4,
+    "hardRemoteAiProvisional": 2,
+    "hardLocalAdoptedProvisional": 0
+   },
+   "short": {
+    "easy": 29,
+    "medium": 73,
+    "hard": 7
+   },
+   "shortTotal": 109,
+   "perSetSkill": 4.6,
+   "compiler": {
+    "kinds": 3,
+    "perSetOverCap": 1.6
+   }
+  },
+  {
+   "system": "sat_math",
+   "domain": "advanced_math",
+   "skill": "equivalent_expressions",
+   "total": 231,
+   "byDiff": {
+    "easy": 59,
+    "medium": 156,
+    "hard": 16
+   },
+   "propHard": 30,
+   "floorApplied": false,
+   "supply": {
+    "easy": 8,
+    "medium": 35,
+    "hardRemoteNonAi": 4,
+    "hardRemoteAiProvisional": 4,
+    "hardLocalAdoptedProvisional": 4
+   },
+   "short": {
+    "easy": 51,
+    "medium": 121,
+    "hard": 4
+   },
+   "shortTotal": 176,
+   "perSetSkill": 7.7,
+   "compiler": {
+    "kinds": 2,
+    "perSetOverCap": 5.7
+   }
+  },
+  {
+   "system": "sat_math",
+   "domain": "advanced_math",
+   "skill": "nonlinear_equations_systems",
+   "total": 231,
+   "byDiff": {
+    "easy": 59,
+    "medium": 156,
+    "hard": 16
+   },
+   "propHard": 30,
+   "floorApplied": false,
+   "supply": {
+    "easy": 19,
+    "medium": 26,
+    "hardRemoteNonAi": 0,
+    "hardRemoteAiProvisional": 6,
+    "hardLocalAdoptedProvisional": 1
+   },
+   "short": {
+    "easy": 40,
+    "medium": 130,
+    "hard": 9
+   },
+   "shortTotal": 179,
+   "perSetSkill": 7.7,
+   "compiler": {
+    "kinds": 9,
+    "perSetOverCap": 0
+   }
+  },
+  {
+   "system": "sat_math",
+   "domain": "advanced_math",
+   "skill": "nonlinear_functions",
+   "total": 231,
+   "byDiff": {
+    "easy": 59,
+    "medium": 156,
+    "hard": 16
+   },
+   "propHard": 30,
+   "floorApplied": false,
+   "supply": {
+    "easy": 8,
+    "medium": 48,
+    "hardRemoteNonAi": 8,
+    "hardRemoteAiProvisional": 2,
+    "hardLocalAdoptedProvisional": 0
+   },
+   "short": {
+    "easy": 51,
+    "medium": 108,
+    "hard": 6
+   },
+   "shortTotal": 165,
+   "perSetSkill": 7.7,
+   "compiler": {
+    "kinds": 6,
+    "perSetOverCap": 1.7
+   }
+  },
+  {
+   "system": "sat_math",
+   "domain": "problem_solving_data",
+   "skill": "ratios_rates_units",
+   "total": 43,
+   "byDiff": {
+    "easy": 9,
+    "medium": 23,
+    "hard": 11
+   },
+   "propHard": 4,
+   "floorApplied": true,
+   "supply": {
+    "easy": 6,
+    "medium": 15,
+    "hardRemoteNonAi": 0,
+    "hardRemoteAiProvisional": 5,
+    "hardLocalAdoptedProvisional": 0
+   },
+   "short": {
+    "easy": 3,
+    "medium": 8,
+    "hard": 6
+   },
+   "shortTotal": 17,
+   "perSetSkill": 1.43,
+   "compiler": {
+    "kinds": 2,
+    "perSetOverCap": 0
+   }
+  },
+  {
+   "system": "sat_math",
+   "domain": "problem_solving_data",
+   "skill": "percentages",
+   "total": 43,
+   "byDiff": {
+    "easy": 9,
+    "medium": 23,
+    "hard": 11
+   },
+   "propHard": 4,
+   "floorApplied": true,
+   "supply": {
+    "easy": 5,
+    "medium": 17,
+    "hardRemoteNonAi": 1,
+    "hardRemoteAiProvisional": 3,
+    "hardLocalAdoptedProvisional": 0
+   },
+   "short": {
+    "easy": 4,
+    "medium": 6,
+    "hard": 7
+   },
+   "shortTotal": 17,
+   "perSetSkill": 1.43,
+   "compiler": {
+    "kinds": 5,
+    "perSetOverCap": 0
+   }
+  },
+  {
+   "system": "sat_math",
+   "domain": "problem_solving_data",
+   "skill": "one_variable_data",
+   "total": 43,
+   "byDiff": {
+    "easy": 9,
+    "medium": 23,
+    "hard": 11
+   },
+   "propHard": 4,
+   "floorApplied": true,
+   "supply": {
+    "easy": 3,
+    "medium": 10,
+    "hardRemoteNonAi": 4,
+    "hardRemoteAiProvisional": 0,
+    "hardLocalAdoptedProvisional": 0
+   },
+   "short": {
+    "easy": 6,
+    "medium": 13,
+    "hard": 7
+   },
+   "shortTotal": 26,
+   "perSetSkill": 1.43,
+   "compiler": {
+    "kinds": 4,
+    "perSetOverCap": 0
+   }
+  },
+  {
+   "system": "sat_math",
+   "domain": "problem_solving_data",
+   "skill": "two_variable_data",
+   "total": 42,
+   "byDiff": {
+    "easy": 9,
+    "medium": 22,
+    "hard": 11
+   },
+   "propHard": 4,
+   "floorApplied": true,
+   "supply": {
+    "easy": 3,
+    "medium": 7,
+    "hardRemoteNonAi": 4,
+    "hardRemoteAiProvisional": 0,
+    "hardLocalAdoptedProvisional": 0
+   },
+   "short": {
+    "easy": 6,
+    "medium": 15,
+    "hard": 7
+   },
+   "shortTotal": 28,
+   "perSetSkill": 1.4,
+   "compiler": {
+    "kinds": 7,
+    "perSetOverCap": 0
+   }
+  },
+  {
+   "system": "sat_math",
+   "domain": "problem_solving_data",
+   "skill": "probability",
+   "total": 42,
+   "byDiff": {
+    "easy": 9,
+    "medium": 22,
+    "hard": 11
+   },
+   "propHard": 4,
+   "floorApplied": true,
+   "supply": {
+    "easy": 5,
+    "medium": 8,
+    "hardRemoteNonAi": 3,
+    "hardRemoteAiProvisional": 0,
+    "hardLocalAdoptedProvisional": 0
+   },
+   "short": {
+    "easy": 4,
+    "medium": 14,
+    "hard": 8
+   },
+   "shortTotal": 26,
+   "perSetSkill": 1.4,
+   "compiler": {
+    "kinds": 3,
+    "perSetOverCap": 0
+   }
+  },
+  {
+   "system": "sat_math",
+   "domain": "problem_solving_data",
+   "skill": "inference_margin_error",
+   "total": 42,
+   "byDiff": {
+    "easy": 9,
+    "medium": 22,
+    "hard": 11
+   },
+   "propHard": 4,
+   "floorApplied": true,
+   "supply": {
+    "easy": 5,
+    "medium": 8,
+    "hardRemoteNonAi": 2,
+    "hardRemoteAiProvisional": 0,
+    "hardLocalAdoptedProvisional": 0
+   },
+   "short": {
+    "easy": 4,
+    "medium": 14,
+    "hard": 9
+   },
+   "shortTotal": 27,
+   "perSetSkill": 1.4,
+   "compiler": {
+    "kinds": 0,
+    "perSetOverCap": 1.4
+   }
+  },
+  {
+   "system": "sat_math",
+   "domain": "problem_solving_data",
+   "skill": "evaluating_statistical_claims",
+   "total": 42,
+   "byDiff": {
+    "easy": 9,
+    "medium": 22,
+    "hard": 11
+   },
+   "propHard": 4,
+   "floorApplied": true,
+   "supply": {
+    "easy": 3,
+    "medium": 9,
+    "hardRemoteNonAi": 1,
+    "hardRemoteAiProvisional": 0,
+    "hardLocalAdoptedProvisional": 0
+   },
+   "short": {
+    "easy": 6,
+    "medium": 13,
+    "hard": 10
+   },
+   "shortTotal": 29,
+   "perSetSkill": 1.4,
+   "compiler": {
+    "kinds": 0,
+    "perSetOverCap": 1.4
+   }
+  },
+  {
+   "system": "sat_math",
+   "domain": "geometry_trig",
+   "skill": "area_volume",
+   "total": 77,
+   "byDiff": {
+    "easy": 18,
+    "medium": 47,
+    "hard": 12
+   },
+   "propHard": 8,
+   "floorApplied": true,
+   "supply": {
+    "easy": 8,
+    "medium": 22,
+    "hardRemoteNonAi": 14,
+    "hardRemoteAiProvisional": 0,
+    "hardLocalAdoptedProvisional": 0
+   },
+   "short": {
+    "easy": 10,
+    "medium": 25,
+    "hard": 0
+   },
+   "shortTotal": 35,
+   "perSetSkill": 2.57,
+   "compiler": {
+    "kinds": 6,
+    "perSetOverCap": 0
+   }
+  },
+  {
+   "system": "sat_math",
+   "domain": "geometry_trig",
+   "skill": "lines_angles_triangles",
+   "total": 77,
+   "byDiff": {
+    "easy": 18,
+    "medium": 47,
+    "hard": 12
+   },
+   "propHard": 8,
+   "floorApplied": true,
+   "supply": {
+    "easy": 9,
+    "medium": 21,
+    "hardRemoteNonAi": 0,
+    "hardRemoteAiProvisional": 2,
+    "hardLocalAdoptedProvisional": 0
+   },
+   "short": {
+    "easy": 9,
+    "medium": 26,
+    "hard": 10
+   },
+   "shortTotal": 45,
+   "perSetSkill": 2.57,
+   "compiler": {
+    "kinds": 4,
+    "perSetOverCap": 0
+   }
+  },
+  {
+   "system": "sat_math",
+   "domain": "geometry_trig",
+   "skill": "right_triangles_trigonometry",
+   "total": 77,
+   "byDiff": {
+    "easy": 18,
+    "medium": 47,
+    "hard": 12
+   },
+   "propHard": 8,
+   "floorApplied": true,
+   "supply": {
+    "easy": 9,
+    "medium": 19,
+    "hardRemoteNonAi": 1,
+    "hardRemoteAiProvisional": 3,
+    "hardLocalAdoptedProvisional": 0
+   },
+   "short": {
+    "easy": 9,
+    "medium": 28,
+    "hard": 8
+   },
+   "shortTotal": 45,
+   "perSetSkill": 2.57,
+   "compiler": {
+    "kinds": 3,
+    "perSetOverCap": 0
+   }
+  },
+  {
+   "system": "sat_math",
+   "domain": "geometry_trig",
+   "skill": "circles",
+   "total": 66,
+   "byDiff": {
+    "easy": 15,
+    "medium": 39,
+    "hard": 12
+   },
+   "propHard": 7,
+   "floorApplied": true,
+   "supply": {
+    "easy": 6,
+    "medium": 14,
+    "hardRemoteNonAi": 9,
+    "hardRemoteAiProvisional": 1,
+    "hardLocalAdoptedProvisional": 0
+   },
+   "short": {
+    "easy": 9,
+    "medium": 25,
+    "hard": 2
+   },
+   "shortTotal": 36,
+   "perSetSkill": 2.2,
+   "compiler": {
+    "kinds": 7,
+    "perSetOverCap": 0
+   }
+  }
+ ]
+}

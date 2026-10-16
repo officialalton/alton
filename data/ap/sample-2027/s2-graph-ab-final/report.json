@@ -1,0 +1,34 @@
+{
+ "run": "s2-graph-ab",
+ "subject": "ap_calculus_ab",
+ "generatedAt": "2026-10-09T08:16:29.280Z",
+ "totalCostUsd": 0.24,
+ "newSpendSinceBaseline": 0.24,
+ "cap": 50,
+ "calls": 24,
+ "candidates": 6,
+ "mcCandidates": 6,
+ "frqCandidates": 0,
+ "passedAll": 5,
+ "adopted": 5,
+ "mcAdopted": 5,
+ "frqAdopted": 0,
+ "reserve": 0,
+ "yield": 0.833,
+ "costPerAdopted": 0.047,
+ "callsPerAdopted": 4.8,
+ "duplicateRejected": 0,
+ "spotChecked": 0,
+ "wording": {
+  "llm": 0,
+  "template": 6
+ },
+ "rejectionReasons": {
+  "criterion_failed_scope_skill": 1,
+  "instant_reject_out_of_scope_knowledge": 1,
+  "difficulty_from_unfair_sources": 1
+ },
+ "unfilledCells": [
+  "ap_calculus_ab-m03"
+ ]
+}

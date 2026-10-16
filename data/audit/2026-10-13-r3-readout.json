@@ -1,0 +1,1672 @@
+{
+ "generatedAt": "2026-10-14T05:19:56.421Z",
+ "project": "worpsqwqgnspddnrtnvq",
+ "problems": [
+  {
+   "ap_candidate_key": "chem-s2-f4:ap_chemistry-f03-k0",
+   "ap_item_index": 0,
+   "exam_system": "ap",
+   "gid": null,
+   "pformat": "essay",
+   "placements": [
+    {
+     "format": "ap_fixed",
+     "item_version_id": "66893939-a62b-49d7-904c-30e990b41103",
+     "module_key": null,
+     "position": 3,
+     "route": null,
+     "section": "ap_frq",
+     "set_id": "2bf3171b-8375-49a2-bbd2-e92425e35564",
+     "set_name": "AP Chemistry — Practice Exam 1",
+     "set_status": "published",
+     "set_version": 1
+    }
+   ],
+   "problem_id": "0e1652f7-e9f3-4da6-a2b1-fd6ef992dade",
+   "pstatus": "confirmed",
+   "pub": {
+    "answer_rationale": null,
+    "answers": null,
+    "correct_index": null,
+    "created_at": "2026-10-13T15:21:42.904713+00:00",
+    "difficulty": "medium",
+    "distractor_error_types": null,
+    "evidence_span": null,
+    "evidence_target": null,
+    "explanation": "Reference answer and scoring notes (not official College Board scoring). Compare your response with this guide; no AP score is estimated.\n\n(A) [3 pt] The reaction is second order. A plot of 1/[A] versus t gives a straight line, while the other two linearized plots curve.\n   - 1 pt: States that the reaction is second order in A\n   - 1 pt: Names the axes of the linearized plot to make: 1/[A] versus t\n   - 1 pt: Explains that the points of this plot fall on a straight line, whereas the other linearized plots are curved\n(B) [3 pt] $k=|\\text{slope}|\\approx 0.0400\\text{ M}^{-1}\\text{s}^{-1}$.\n   - 1 pt: Obtains the slope magnitude of the linear plot (about 0.0400 in the units of the plot)\n   - 1 pt: States $k\\approx 0.0400$ as the magnitude of the slope\n   - 1 pt: Gives the units of $k$ as M⁻¹·s⁻¹\n(C) [2 pt] $t_{1/2}=25\\text{ s}$ ($1/(k[\\mathrm{A}]_0)$).\n   - 1 pt: Uses the half-life relation for a second-order reaction: 1/(k[A]0)\n   - 1 pt: Calculates the half-life (about 25 s)\n(D) [2 pt] $k$ increases: at the higher temperature a larger fraction of collisions has energy at least equal to the activation energy.\n   - 1 pt: States that $k$ increases\n   - 1 pt: Justifies with a larger fraction of collisions that exceed the activation energy (and more frequent collisions)",
+    "explanation_en": "Reference answer and scoring notes (not official College Board scoring). Compare your response with this guide; no AP score is estimated.\n\n(A) [3 pt] The reaction is second order. A plot of 1/[A] versus t gives a straight line, while the other two linearized plots curve.\n   - 1 pt: States that the reaction is second order in A\n   - 1 pt: Names the axes of the linearized plot to make: 1/[A] versus t\n   - 1 pt: Explains that the points of this plot fall on a straight line, whereas the other linearized plots are curved\n(B) [3 pt] $k=|\\text{slope}|\\approx 0.0400\\text{ M}^{-1}\\text{s}^{-1}$.\n   - 1 pt: Obtains the slope magnitude of the linear plot (about 0.0400 in the units of the plot)\n   - 1 pt: States $k\\approx 0.0400$ as the magnitude of the slope\n   - 1 pt: Gives the units of $k$ as M⁻¹·s⁻¹\n(C) [2 pt] $t_{1/2}=25\\text{ s}$ ($1/(k[\\mathrm{A}]_0)$).\n   - 1 pt: Uses the half-life relation for a second-order reaction: 1/(k[A]0)\n   - 1 pt: Calculates the half-life (about 25 s)\n(D) [2 pt] $k$ increases: at the higher temperature a larger fraction of collisions has energy at least equal to the activation energy.\n   - 1 pt: States that $k$ increases\n   - 1 pt: Justifies with a larger fraction of collisions that exceed the activation energy (and more frequent collisions)",
+    "figure": {
+     "columns": [
+      "Time (s)",
+      "[A] (M)"
+     ],
+     "rows": [
+      [
+       "0",
+       "1.0000"
+      ],
+      [
+       "30",
+       "0.4545"
+      ],
+      [
+       "60",
+       "0.2941"
+      ],
+      [
+       "90",
+       "0.2174"
+      ],
+      [
+       "120",
+       "0.1724"
+      ],
+      [
+       "150",
+       "0.1429"
+      ]
+     ],
+     "type": "ap_table"
+    },
+    "figure_checked": false,
+    "id": "66893939-a62b-49d7-904c-30e990b41103",
+    "options": null,
+    "passage": null,
+    "problem_id": "0e1652f7-e9f3-4da6-a2b1-fd6ef992dade",
+    "published_at": "2026-10-13T15:21:43.13347+00:00",
+    "quality": null,
+    "question": "Concentration–time data and the order of a reaction — answer every part.",
+    "render_check": {
+     "alt": "Table with columns Time (s), [A] (M) and 6 rows.",
+     "checkedAt": "2026-10-13T15:21:42.855Z",
+     "figure_hash": "a81f14d9972cdbf2b50e1b09ec44e4e1",
+     "issues": [],
+     "ok": true,
+     "renderer": "std-1"
+    },
+    "repair_status": "none",
+    "review_kind": "self_confirmed",
+    "statements": [
+     {
+      "label": "A",
+      "mode": "determine",
+      "points": 3,
+      "prompt": "Determine the order of the reaction with respect to A. Describe the linearized plot you would make to test your answer and explain how that plot supports your conclusion."
+     },
+     {
+      "label": "B",
+      "mode": "calculate",
+      "points": 3,
+      "prompt": "Using the linear plot from part A, determine the rate constant, $k$. Give the value as a decimal number (not in scientific notation) with units."
+     },
+     {
+      "label": "C",
+      "mode": "calculate",
+      "points": 2,
+      "prompt": "Calculate the half-life of the reaction for the initial concentration in the table."
+     },
+     {
+      "label": "D",
+      "mode": "predict",
+      "points": 2,
+      "prompt": "The experiment is repeated at a higher temperature. Predict whether $k$ increases, decreases, or stays the same, and justify your answer using the collision model."
+     }
+    ],
+    "status": "published",
+    "submitted_at": "2026-10-13T15:21:43.13347+00:00",
+    "version_no": 1
+   },
+   "published_version_id": "66893939-a62b-49d7-904c-30e990b41103",
+   "skill_code": null,
+   "usage_scope": "mock_exam",
+   "versions": [
+    {
+     "id": "66893939-a62b-49d7-904c-30e990b41103",
+     "no": 1,
+     "status": "published"
+    }
+   ]
+  },
+  {
+   "ap_candidate_key": "phys-s2-d:ap_physics_1-f03-k0",
+   "ap_item_index": 0,
+   "exam_system": "ap",
+   "gid": null,
+   "pformat": "essay",
+   "placements": null,
+   "problem_id": "1dc7acc0-2662-4442-9d65-ff8068763c9c",
+   "pstatus": "confirmed",
+   "pub": {
+    "answer_rationale": null,
+    "answers": null,
+    "correct_index": null,
+    "created_at": "2026-10-13T10:29:50.22895+00:00",
+    "difficulty": "medium",
+    "distractor_error_types": null,
+    "evidence_span": null,
+    "evidence_target": null,
+    "explanation": "Reference answer and scoring notes (not official College Board scoring). Compare your response with this guide; no AP score is estimated.\n\n(A) [3 pt] Use a stopwatch to time 10 oscillations for each of several hanging masses added one at a time to the same spring, starting each trial from a small displacement, then divide by 10; repeat each timing.\n   - 1 pt: Identifies the measured quantities and equipment: a balance or known masses and a timing device (both a way to know the mass and a way to time the motion are needed)\n   - 1 pt: Changes only the hanging mass while keeping the spring and the starting amplitude the same (both conditions are needed)\n   - 1 pt: Reduces timing uncertainty by timing many oscillations and dividing, or by repeating the trials and averaging (either earns the point)\n(B) [1 pt] Plot $T^2$ on the vertical axis against $m$ on the horizontal axis; the slope is $4\\pi^2/k$.\n   - 1 pt: Identifies $T^2$ (vertical) versus $m$ (horizontal)\n(C) [3 pt] Points $(m,T^2)$: (0.1, 0.198), (0.2, 0.384), (0.3, 0.599), (0.4, 0.812), (0.5, 1.008) with a best-fit line of slope about $2.05\\text{ s}^2/\\text{kg}$.\n   - 1 pt: Axes are labeled with quantities and units and the scale fills most of the grid\n   - 1 pt: Plots the five points $(m, T^2)$ accurately\n   - 1 pt: Draws a straight best-fit line through the trend of the points\n(D) [3 pt] Slope $\\approx 2.05\\text{ s}^2/\\text{kg}$, so $k=4\\pi^2/\\text{slope}\\approx 19.3\\text{ N/m}$.\n   - 1 pt: Calculates the slope of the best-fit line using two points on the line (about 2.05 $s^2$/kg; accept any value within 5 percent)\n   - 1 pt: Relates the slope to the spring constant: slope $=4\\pi^2/k$\n   - 1 pt: Calculates $k$ (about 19; accept any value within 8 percent) with units of newtons per meter",
+    "explanation_en": "Reference answer and scoring notes (not official College Board scoring). Compare your response with this guide; no AP score is estimated.\n\n(A) [3 pt] Use a stopwatch to time 10 oscillations for each of several hanging masses added one at a time to the same spring, starting each trial from a small displacement, then divide by 10; repeat each timing.\n   - 1 pt: Identifies the measured quantities and equipment: a balance or known masses and a timing device (both a way to know the mass and a way to time the motion are needed)\n   - 1 pt: Changes only the hanging mass while keeping the spring and the starting amplitude the same (both conditions are needed)\n   - 1 pt: Reduces timing uncertainty by timing many oscillations and dividing, or by repeating the trials and averaging (either earns the point)\n(B) [1 pt] Plot $T^2$ on the vertical axis against $m$ on the horizontal axis; the slope is $4\\pi^2/k$.\n   - 1 pt: Identifies $T^2$ (vertical) versus $m$ (horizontal)\n(C) [3 pt] Points $(m,T^2)$: (0.1, 0.198), (0.2, 0.384), (0.3, 0.599), (0.4, 0.812), (0.5, 1.008) with a best-fit line of slope about $2.05\\text{ s}^2/\\text{kg}$.\n   - 1 pt: Axes are labeled with quantities and units and the scale fills most of the grid\n   - 1 pt: Plots the five points $(m, T^2)$ accurately\n   - 1 pt: Draws a straight best-fit line through the trend of the points\n(D) [3 pt] Slope $\\approx 2.05\\text{ s}^2/\\text{kg}$, so $k=4\\pi^2/\\text{slope}\\approx 19.3\\text{ N/m}$.\n   - 1 pt: Calculates the slope of the best-fit line using two points on the line (about 2.05 $s^2$/kg; accept any value within 5 percent)\n   - 1 pt: Relates the slope to the spring constant: slope $=4\\pi^2/k$\n   - 1 pt: Calculates $k$ (about 19; accept any value within 8 percent) with units of newtons per meter",
+    "figure": {
+     "columns": [
+      "Mass m (kg)",
+      "Period T (s)"
+     ],
+     "rows": [
+      [
+       0.1,
+       0.445
+      ],
+      [
+       0.2,
+       0.62
+      ],
+      [
+       0.3,
+       0.774
+      ],
+      [
+       0.4,
+       0.901
+      ],
+      [
+       0.5,
+       1.004
+      ]
+     ],
+     "type": "ap_table"
+    },
+    "figure_checked": false,
+    "id": "79520602-ceff-415e-8b14-4e83b9246c7f",
+    "options": null,
+    "passage": null,
+    "problem_id": "1dc7acc0-2662-4442-9d65-ff8068763c9c",
+    "published_at": "2026-10-13T10:29:50.489867+00:00",
+    "quality": null,
+    "question": "Experiment: spring constant from the period of an oscillator — answer every part.",
+    "render_check": {
+     "alt": "Table with columns Mass m (kg), Period T (s) and 5 rows.",
+     "checkedAt": "2026-10-13T10:29:50.179Z",
+     "figure_hash": "bc2f9cfe250baae2e3886c5c2ab4849c",
+     "issues": [],
+     "ok": true,
+     "renderer": "std-1"
+    },
+    "repair_status": "none",
+    "review_kind": "self_confirmed",
+    "statements": [
+     {
+      "label": "A",
+      "mode": "design",
+      "points": 3,
+      "prompt": "Describe an experimental procedure to collect the data for the period as a function of mass. Include the equipment and the measurements, how the independent variable is changed, and one way to reduce the uncertainty in the measured period."
+     },
+     {
+      "label": "B",
+      "mode": "explain",
+      "points": 1,
+      "prompt": "Using the relationship between the period of a mass on a spring, the mass and the spring constant from the reference information, identify the quantities that should be plotted on the vertical and horizontal axes so that the data produce a straight line whose slope can be used to find $k$."
+     },
+     {
+      "label": "C",
+      "mode": "graph",
+      "points": 3,
+      "prompt": "On a blank grid whose scale you choose, plot the data in a form that gives a straight line, and draw a best-fit line. Label the axes with quantities and units and use a scale that fills most of the grid."
+     },
+     {
+      "label": "D",
+      "mode": "calculate",
+      "points": 3,
+      "prompt": "Use the best-fit line to determine the spring constant $k$. Show your work."
+     }
+    ],
+    "status": "published",
+    "submitted_at": "2026-10-13T10:29:50.489867+00:00",
+    "version_no": 1
+   },
+   "published_version_id": "79520602-ceff-415e-8b14-4e83b9246c7f",
+   "skill_code": null,
+   "usage_scope": "mock_exam",
+   "versions": [
+    {
+     "id": "79520602-ceff-415e-8b14-4e83b9246c7f",
+     "no": 1,
+     "status": "published"
+    }
+   ]
+  },
+  {
+   "ap_candidate_key": "chem-s2-f2:ap_chemistry-f03-k1",
+   "ap_item_index": 0,
+   "exam_system": "ap",
+   "gid": null,
+   "pformat": "essay",
+   "placements": null,
+   "problem_id": "23cbc7d6-ebc7-443b-ad7c-78171a826ef3",
+   "pstatus": "confirmed",
+   "pub": {
+    "answer_rationale": null,
+    "answers": null,
+    "correct_index": null,
+    "created_at": "2026-10-13T15:21:37.763118+00:00",
+    "difficulty": "medium",
+    "distractor_error_types": null,
+    "evidence_span": null,
+    "evidence_target": null,
+    "explanation": "Reference answer and scoring notes (not official College Board scoring). Compare your response with this guide; no AP score is estimated.\n\n(A) [3 pt] The reaction is first order. A plot of ln[A] versus t gives a straight line, while the other two linearized plots curve.\n   - 1 pt: States that the reaction is first order in A\n   - 1 pt: Names the axes of the linearized plot to make: ln[A] versus t\n   - 1 pt: Explains that the points of this plot fall on a straight line, whereas the other linearized plots are curved\n(B) [3 pt] $k=|\\text{slope}|\\approx 0.0120\\text{ s}^{-1}$.\n   - 1 pt: Obtains the slope magnitude of the linear plot (about 0.0120 in the units of the plot)\n   - 1 pt: States $k\\approx 0.0120$ as the magnitude of the slope\n   - 1 pt: Gives the units of $k$ as s⁻¹\n(C) [2 pt] $t_{1/2}=58\\text{ s}$ ($0.693/k$).\n   - 1 pt: Uses the half-life relation for a first-order reaction: 0.693/k\n   - 1 pt: Calculates the half-life (about 58 s)\n(D) [2 pt] $k$ increases: at the higher temperature a larger fraction of collisions has energy at least equal to the activation energy.\n   - 1 pt: States that $k$ increases\n   - 1 pt: Justifies with a larger fraction of collisions that exceed the activation energy (and more frequent collisions)",
+    "explanation_en": "Reference answer and scoring notes (not official College Board scoring). Compare your response with this guide; no AP score is estimated.\n\n(A) [3 pt] The reaction is first order. A plot of ln[A] versus t gives a straight line, while the other two linearized plots curve.\n   - 1 pt: States that the reaction is first order in A\n   - 1 pt: Names the axes of the linearized plot to make: ln[A] versus t\n   - 1 pt: Explains that the points of this plot fall on a straight line, whereas the other linearized plots are curved\n(B) [3 pt] $k=|\\text{slope}|\\approx 0.0120\\text{ s}^{-1}$.\n   - 1 pt: Obtains the slope magnitude of the linear plot (about 0.0120 in the units of the plot)\n   - 1 pt: States $k\\approx 0.0120$ as the magnitude of the slope\n   - 1 pt: Gives the units of $k$ as s⁻¹\n(C) [2 pt] $t_{1/2}=58\\text{ s}$ ($0.693/k$).\n   - 1 pt: Uses the half-life relation for a first-order reaction: 0.693/k\n   - 1 pt: Calculates the half-life (about 58 s)\n(D) [2 pt] $k$ increases: at the higher temperature a larger fraction of collisions has energy at least equal to the activation energy.\n   - 1 pt: States that $k$ increases\n   - 1 pt: Justifies with a larger fraction of collisions that exceed the activation energy (and more frequent collisions)",
+    "figure": {
+     "columns": [
+      "Time (s)",
+      "[A] (M)"
+     ],
+     "rows": [
+      [
+       "0",
+       "0.8000"
+      ],
+      [
+       "30",
+       "0.5581"
+      ],
+      [
+       "60",
+       "0.3894"
+      ],
+      [
+       "90",
+       "0.2717"
+      ],
+      [
+       "120",
+       "0.1895"
+      ],
+      [
+       "150",
+       "0.1322"
+      ]
+     ],
+     "type": "ap_table"
+    },
+    "figure_checked": false,
+    "id": "5f4b7042-3749-4bba-ad9a-36c9c92df488",
+    "options": null,
+    "passage": null,
+    "problem_id": "23cbc7d6-ebc7-443b-ad7c-78171a826ef3",
+    "published_at": "2026-10-13T15:21:38.569109+00:00",
+    "quality": null,
+    "question": "Concentration–time data and the order of a reaction — answer every part.",
+    "render_check": {
+     "alt": "Table with columns Time (s), [A] (M) and 6 rows.",
+     "checkedAt": "2026-10-13T15:21:37.712Z",
+     "figure_hash": "3996c60c5f17e110eab2b78aca132411",
+     "issues": [],
+     "ok": true,
+     "renderer": "std-1"
+    },
+    "repair_status": "none",
+    "review_kind": "self_confirmed",
+    "statements": [
+     {
+      "label": "A",
+      "mode": "determine",
+      "points": 3,
+      "prompt": "Determine the order of the reaction with respect to A. Describe the linearized plot you would make to test your answer and explain how that plot supports your conclusion."
+     },
+     {
+      "label": "B",
+      "mode": "calculate",
+      "points": 3,
+      "prompt": "Using the linear plot from part A, determine the rate constant, $k$. Give the value as a decimal number (not in scientific notation) with units."
+     },
+     {
+      "label": "C",
+      "mode": "calculate",
+      "points": 2,
+      "prompt": "Calculate the half-life of the reaction for the initial concentration in the table."
+     },
+     {
+      "label": "D",
+      "mode": "predict",
+      "points": 2,
+      "prompt": "The experiment is repeated at a higher temperature. Predict whether $k$ increases, decreases, or stays the same, and justify your answer using the collision model."
+     }
+    ],
+    "status": "published",
+    "submitted_at": "2026-10-13T15:21:38.569109+00:00",
+    "version_no": 1
+   },
+   "published_version_id": "5f4b7042-3749-4bba-ad9a-36c9c92df488",
+   "skill_code": null,
+   "usage_scope": "mock_exam",
+   "versions": [
+    {
+     "id": "5f4b7042-3749-4bba-ad9a-36c9c92df488",
+     "no": 1,
+     "status": "published"
+    }
+   ]
+  },
+  {
+   "ap_candidate_key": "stats-s3b-c:ap_statistics-f02-k0",
+   "ap_item_index": 0,
+   "exam_system": "ap",
+   "gid": null,
+   "pformat": "essay",
+   "placements": [
+    {
+     "format": "ap_fixed",
+     "item_version_id": "0f3bc27a-62aa-4236-9446-4b25bb3d9930",
+     "module_key": null,
+     "position": 2,
+     "route": null,
+     "section": "ap_frq",
+     "set_id": "0a43690b-41f7-4293-81e9-8224052973fc",
+     "set_name": "AP Statistics — Practice Exam 2",
+     "set_status": "published",
+     "set_version": 1
+    }
+   ],
+   "problem_id": "29942b62-3469-4d26-aed1-d2a3310391b1",
+   "pstatus": "confirmed",
+   "pub": {
+    "answer_rationale": null,
+    "answers": null,
+    "correct_index": null,
+    "created_at": "2026-10-13T07:31:52.822834+00:00",
+    "difficulty": "medium",
+    "distractor_error_types": null,
+    "evidence_span": null,
+    "evidence_target": null,
+    "explanation": "Reference answer and scoring notes (not official College Board scoring). Compare your response with this guide; no AP score is estimated.\n\n(A) [2 pt] For each additional hour, the predicted exam score increases by about 5.2 points.\n   - 1 pt: States that the predicted response changes by 5.2 for each one-unit increase in the explanatory variable (with the correct direction)\n   - 1 pt: Gives the interpretation in context with units (predicted value, points, per hour)\n(B) [2 pt] (i) Predicted value: 44.47 + (5.2)(8) = 86.07. (ii) Residual = actual - predicted = 88.2 - 86.07 = 2.13.\n   - 1 pt: Calculates the predicted value (answer 86.07)\n   - 1 pt: Calculates the residual as actual minus predicted (answer 2.13)\n(C) [3 pt] Yes. The points are scattered fairly evenly above and below the line with no curve, so a linear model is appropriate.\n   - 1 pt: Describes the pattern of the points about the line (no curve, points scattered evenly above and below)\n   - 1 pt: States that a linear model is appropriate\n   - 1 pt: Links the conclusion to the pattern (no curvature in the scatterplot)\n(D) [2 pt] About 94% of the variation in the exam score is accounted for by the linear relationship with the number of hours of study.\n   - 1 pt: States that 94% (the proportion 0.94) of the variation in the response is accounted for by the linear relationship\n   - 1 pt: Uses the context (names both variables)\n(E) [1 pt] No. $13$ is outside the range of the data (1 to 9), so this is extrapolation and the linear pattern may not continue.\n   - 1 pt: States that the prediction is not reliable because the value is outside the range of the data (extrapolation)",
+    "explanation_en": "Reference answer and scoring notes (not official College Board scoring). Compare your response with this guide; no AP score is estimated.\n\n(A) [2 pt] For each additional hour, the predicted exam score increases by about 5.2 points.\n   - 1 pt: States that the predicted response changes by 5.2 for each one-unit increase in the explanatory variable (with the correct direction)\n   - 1 pt: Gives the interpretation in context with units (predicted value, points, per hour)\n(B) [2 pt] (i) Predicted value: 44.47 + (5.2)(8) = 86.07. (ii) Residual = actual - predicted = 88.2 - 86.07 = 2.13.\n   - 1 pt: Calculates the predicted value (answer 86.07)\n   - 1 pt: Calculates the residual as actual minus predicted (answer 2.13)\n(C) [3 pt] Yes. The points are scattered fairly evenly above and below the line with no curve, so a linear model is appropriate.\n   - 1 pt: Describes the pattern of the points about the line (no curve, points scattered evenly above and below)\n   - 1 pt: States that a linear model is appropriate\n   - 1 pt: Links the conclusion to the pattern (no curvature in the scatterplot)\n(D) [2 pt] About 94% of the variation in the exam score is accounted for by the linear relationship with the number of hours of study.\n   - 1 pt: States that 94% (the proportion 0.94) of the variation in the response is accounted for by the linear relationship\n   - 1 pt: Uses the context (names both variables)\n(E) [1 pt] No. $13$ is outside the range of the data (1 to 9), so this is extrapolation and the linear pattern may not continue.\n   - 1 pt: States that the prediction is not reliable because the value is outside the range of the data (extrapolation)",
+    "figure": {
+     "chart": "scatter",
+     "data": {
+      "fitLine": {
+       "intercept": 44.47,
+       "slope": 5.2
+      },
+      "points": [
+       [
+        1,
+        54.8
+       ],
+       [
+        2,
+        52.5
+       ],
+       [
+        2,
+        53.3
+       ],
+       [
+        3,
+        60
+       ],
+       [
+        4,
+        64.9
+       ],
+       [
+        4,
+        62
+       ],
+       [
+        6,
+        78.3
+       ],
+       [
+        7,
+        77.3
+       ],
+       [
+        7,
+        82.8
+       ],
+       [
+        7,
+        84.5
+       ],
+       [
+        8,
+        88.2
+       ],
+       [
+        8,
+        76.2
+       ],
+       [
+        9,
+        94.2
+       ],
+       [
+        9,
+        88.3
+       ],
+       [
+        9,
+        95.2
+       ],
+       [
+        9,
+        92.5
+       ]
+      ],
+      "xTitle": "Hours of study",
+      "yTitle": "Exam score"
+     },
+     "title": "Exam score versus hours of study",
+     "type": "ap_stat_chart"
+    },
+    "figure_checked": false,
+    "id": "0f3bc27a-62aa-4236-9446-4b25bb3d9930",
+    "options": null,
+    "passage": null,
+    "problem_id": "29942b62-3469-4d26-aed1-d2a3310391b1",
+    "published_at": "2026-10-13T07:31:53.044963+00:00",
+    "quality": null,
+    "question": "Linear regression of exam score on number of hours of study — answer every part.",
+    "render_check": {
+     "alt": "Exam score versus hours of study. Scatterplot of 16 points. Horizontal axis: Hours of study. Vertical axis: Exam score. Line: y = 5.2x + 44.47.",
+     "checkedAt": "2026-10-13T07:31:52.770Z",
+     "figure_hash": "6f88ffdf8f70b4680cd9ba9edffce587",
+     "issues": [],
+     "ok": true,
+     "renderer": "std-1"
+    },
+    "repair_status": "none",
+    "review_kind": "self_confirmed",
+    "statements": [
+     {
+      "label": "A",
+      "mode": "explain",
+      "points": 2,
+      "prompt": "The least-squares regression line for the data in the scatterplot shown is $\\hat y = 44.47 + 5.2x$, where $x$ is the number of hours of study and $\\hat y$ is the predicted exam score (points), and $r^2 = 0.94$. Interpret the slope of the line in the context of the data."
+     },
+     {
+      "label": "B",
+      "mode": "calculate",
+      "points": 2,
+      "prompt": "(i) Use the regression line to predict the exam score when $x = 8$. (ii) One observation has $x = 8$ and an actual exam score of $88.2$. Calculate the residual for this observation."
+     },
+     {
+      "label": "C",
+      "mode": "explain",
+      "points": 3,
+      "prompt": "Does the scatterplot suggest that a linear model is appropriate for these data? Justify your answer by describing the pattern in the scatterplot relative to the line."
+     },
+     {
+      "label": "D",
+      "mode": "explain",
+      "points": 2,
+      "prompt": "Interpret the value $r^2 = 0.94$ in the context of the data."
+     },
+     {
+      "label": "E",
+      "mode": "explain",
+      "points": 1,
+      "prompt": "A researcher uses the regression line to predict the exam score when $x = 13$. Is this prediction reliable? Explain."
+     }
+    ],
+    "status": "published",
+    "submitted_at": "2026-10-13T07:31:53.044963+00:00",
+    "version_no": 1
+   },
+   "published_version_id": "0f3bc27a-62aa-4236-9446-4b25bb3d9930",
+   "skill_code": null,
+   "usage_scope": "mock_exam",
+   "versions": [
+    {
+     "id": "0f3bc27a-62aa-4236-9446-4b25bb3d9930",
+     "no": 1,
+     "status": "published"
+    }
+   ]
+  },
+  {
+   "ap_candidate_key": "chem-s2-f2:ap_chemistry-f03-k0",
+   "ap_item_index": 0,
+   "exam_system": "ap",
+   "gid": null,
+   "pformat": "essay",
+   "placements": [
+    {
+     "format": "ap_fixed",
+     "item_version_id": "3b4bc404-7c9e-492a-a73b-eab0f7932f4f",
+     "module_key": null,
+     "position": 3,
+     "route": null,
+     "section": "ap_frq",
+     "set_id": "61e1b4e4-b8d2-4010-b6ae-192bc2d8e73d",
+     "set_name": "AP Chemistry — Practice Exam 2",
+     "set_status": "published",
+     "set_version": 1
+    }
+   ],
+   "problem_id": "54cbdf03-1c8d-49ad-ac29-8b3b8d776e18",
+   "pstatus": "confirmed",
+   "pub": {
+    "answer_rationale": null,
+    "answers": null,
+    "correct_index": null,
+    "created_at": "2026-10-13T15:21:36.272903+00:00",
+    "difficulty": "medium",
+    "distractor_error_types": null,
+    "evidence_span": null,
+    "evidence_target": null,
+    "explanation": "Reference answer and scoring notes (not official College Board scoring). Compare your response with this guide; no AP score is estimated.\n\n(A) [3 pt] The reaction is first order. A plot of ln[A] versus t gives a straight line, while the other two linearized plots curve.\n   - 1 pt: States that the reaction is first order in A\n   - 1 pt: Names the axes of the linearized plot to make: ln[A] versus t\n   - 1 pt: Explains that the points of this plot fall on a straight line, whereas the other linearized plots are curved\n(B) [3 pt] $k=|\\text{slope}|\\approx 0.0150\\text{ s}^{-1}$.\n   - 1 pt: Obtains the slope magnitude of the linear plot (about 0.0150 in the units of the plot)\n   - 1 pt: States $k\\approx 0.0150$ as the magnitude of the slope\n   - 1 pt: Gives the units of $k$ as s⁻¹\n(C) [2 pt] $t_{1/2}=46\\text{ s}$ ($0.693/k$).\n   - 1 pt: Uses the half-life relation for a first-order reaction: 0.693/k\n   - 1 pt: Calculates the half-life (about 46 s)\n(D) [2 pt] $k$ increases: at the higher temperature a larger fraction of collisions has energy at least equal to the activation energy.\n   - 1 pt: States that $k$ increases\n   - 1 pt: Justifies with a larger fraction of collisions that exceed the activation energy (and more frequent collisions)",
+    "explanation_en": "Reference answer and scoring notes (not official College Board scoring). Compare your response with this guide; no AP score is estimated.\n\n(A) [3 pt] The reaction is first order. A plot of ln[A] versus t gives a straight line, while the other two linearized plots curve.\n   - 1 pt: States that the reaction is first order in A\n   - 1 pt: Names the axes of the linearized plot to make: ln[A] versus t\n   - 1 pt: Explains that the points of this plot fall on a straight line, whereas the other linearized plots are curved\n(B) [3 pt] $k=|\\text{slope}|\\approx 0.0150\\text{ s}^{-1}$.\n   - 1 pt: Obtains the slope magnitude of the linear plot (about 0.0150 in the units of the plot)\n   - 1 pt: States $k\\approx 0.0150$ as the magnitude of the slope\n   - 1 pt: Gives the units of $k$ as s⁻¹\n(C) [2 pt] $t_{1/2}=46\\text{ s}$ ($0.693/k$).\n   - 1 pt: Uses the half-life relation for a first-order reaction: 0.693/k\n   - 1 pt: Calculates the half-life (about 46 s)\n(D) [2 pt] $k$ increases: at the higher temperature a larger fraction of collisions has energy at least equal to the activation energy.\n   - 1 pt: States that $k$ increases\n   - 1 pt: Justifies with a larger fraction of collisions that exceed the activation energy (and more frequent collisions)",
+    "figure": {
+     "columns": [
+      "Time (s)",
+      "[A] (M)"
+     ],
+     "rows": [
+      [
+       "0",
+       "1.0000"
+      ],
+      [
+       "30",
+       "0.6376"
+      ],
+      [
+       "60",
+       "0.4066"
+      ],
+      [
+       "90",
+       "0.2592"
+      ],
+      [
+       "120",
+       "0.1653"
+      ],
+      [
+       "150",
+       "0.1054"
+      ]
+     ],
+     "type": "ap_table"
+    },
+    "figure_checked": false,
+    "id": "3b4bc404-7c9e-492a-a73b-eab0f7932f4f",
+    "options": null,
+    "passage": null,
+    "problem_id": "54cbdf03-1c8d-49ad-ac29-8b3b8d776e18",
+    "published_at": "2026-10-13T15:21:37.097731+00:00",
+    "quality": null,
+    "question": "Concentration–time data and the order of a reaction — answer every part.",
+    "render_check": {
+     "alt": "Table with columns Time (s), [A] (M) and 6 rows.",
+     "checkedAt": "2026-10-13T15:21:36.189Z",
+     "figure_hash": "25afe2d7e5299316416c12f96dca1160",
+     "issues": [],
+     "ok": true,
+     "renderer": "std-1"
+    },
+    "repair_status": "none",
+    "review_kind": "self_confirmed",
+    "statements": [
+     {
+      "label": "A",
+      "mode": "determine",
+      "points": 3,
+      "prompt": "Determine the order of the reaction with respect to A. Describe the linearized plot you would make to test your answer and explain how that plot supports your conclusion."
+     },
+     {
+      "label": "B",
+      "mode": "calculate",
+      "points": 3,
+      "prompt": "Using the linear plot from part A, determine the rate constant, $k$. Give the value as a decimal number (not in scientific notation) with units."
+     },
+     {
+      "label": "C",
+      "mode": "calculate",
+      "points": 2,
+      "prompt": "Calculate the half-life of the reaction for the initial concentration in the table."
+     },
+     {
+      "label": "D",
+      "mode": "predict",
+      "points": 2,
+      "prompt": "The experiment is repeated at a higher temperature. Predict whether $k$ increases, decreases, or stays the same, and justify your answer using the collision model."
+     }
+    ],
+    "status": "published",
+    "submitted_at": "2026-10-13T15:21:37.097731+00:00",
+    "version_no": 1
+   },
+   "published_version_id": "3b4bc404-7c9e-492a-a73b-eab0f7932f4f",
+   "skill_code": null,
+   "usage_scope": "mock_exam",
+   "versions": [
+    {
+     "id": "3b4bc404-7c9e-492a-a73b-eab0f7932f4f",
+     "no": 1,
+     "status": "published"
+    }
+   ]
+  },
+  {
+   "ap_candidate_key": "stats-s3b-c:ap_statistics-f02-k2",
+   "ap_item_index": 0,
+   "exam_system": "ap",
+   "gid": null,
+   "pformat": "essay",
+   "placements": null,
+   "problem_id": "ce78a0fc-01c7-402d-9711-ad8ea6d7b1d2",
+   "pstatus": "confirmed",
+   "pub": {
+    "answer_rationale": null,
+    "answers": null,
+    "correct_index": null,
+    "created_at": "2026-10-13T07:31:53.202347+00:00",
+    "difficulty": "medium",
+    "distractor_error_types": null,
+    "evidence_span": null,
+    "evidence_target": null,
+    "explanation": "Reference answer and scoring notes (not official College Board scoring). Compare your response with this guide; no AP score is estimated.\n\n(A) [2 pt] For each additional hour, the predicted exam score increases by about 5.09 points.\n   - 1 pt: States that the predicted response changes by 5.09 for each one-unit increase in the explanatory variable (with the correct direction)\n   - 1 pt: Gives the interpretation in context with units (predicted value, points, per hour)\n(B) [2 pt] (i) Predicted value: 45.35 + (5.09)(6) = 75.89. (ii) Residual = actual - predicted = 79.1 - 75.89 = 3.21.\n   - 1 pt: Calculates the predicted value (answer 75.89)\n   - 1 pt: Calculates the residual as actual minus predicted (answer 3.21)\n(C) [3 pt] Yes. The points are scattered fairly evenly above and below the line with no curve, so a linear model is appropriate.\n   - 1 pt: Describes the pattern of the points about the line (no curve, points scattered evenly above and below)\n   - 1 pt: States that a linear model is appropriate\n   - 1 pt: Links the conclusion to the pattern (no curvature in the scatterplot)\n(D) [2 pt] About 94% of the variation in the exam score is accounted for by the linear relationship with the number of hours of study.\n   - 1 pt: States that 94% (the proportion 0.94) of the variation in the response is accounted for by the linear relationship\n   - 1 pt: Uses the context (names both variables)\n(E) [1 pt] No. $14$ is outside the range of the data (1 to 9), so this is extrapolation and the linear pattern may not continue.\n   - 1 pt: States that the prediction is not reliable because the value is outside the range of the data (extrapolation)",
+    "explanation_en": "Reference answer and scoring notes (not official College Board scoring). Compare your response with this guide; no AP score is estimated.\n\n(A) [2 pt] For each additional hour, the predicted exam score increases by about 5.09 points.\n   - 1 pt: States that the predicted response changes by 5.09 for each one-unit increase in the explanatory variable (with the correct direction)\n   - 1 pt: Gives the interpretation in context with units (predicted value, points, per hour)\n(B) [2 pt] (i) Predicted value: 45.35 + (5.09)(6) = 75.89. (ii) Residual = actual - predicted = 79.1 - 75.89 = 3.21.\n   - 1 pt: Calculates the predicted value (answer 75.89)\n   - 1 pt: Calculates the residual as actual minus predicted (answer 3.21)\n(C) [3 pt] Yes. The points are scattered fairly evenly above and below the line with no curve, so a linear model is appropriate.\n   - 1 pt: Describes the pattern of the points about the line (no curve, points scattered evenly above and below)\n   - 1 pt: States that a linear model is appropriate\n   - 1 pt: Links the conclusion to the pattern (no curvature in the scatterplot)\n(D) [2 pt] About 94% of the variation in the exam score is accounted for by the linear relationship with the number of hours of study.\n   - 1 pt: States that 94% (the proportion 0.94) of the variation in the response is accounted for by the linear relationship\n   - 1 pt: Uses the context (names both variables)\n(E) [1 pt] No. $14$ is outside the range of the data (1 to 9), so this is extrapolation and the linear pattern may not continue.\n   - 1 pt: States that the prediction is not reliable because the value is outside the range of the data (extrapolation)",
+    "figure": {
+     "chart": "scatter",
+     "data": {
+      "fitLine": {
+       "intercept": 45.35,
+       "slope": 5.09
+      },
+      "points": [
+       [
+        1,
+        48
+       ],
+       [
+        1,
+        44.7
+       ],
+       [
+        1,
+        55.1
+       ],
+       [
+        2,
+        57.3
+       ],
+       [
+        2,
+        61.1
+       ],
+       [
+        3,
+        61
+       ],
+       [
+        3,
+        61.4
+       ],
+       [
+        3,
+        60.3
+       ],
+       [
+        4,
+        62.4
+       ],
+       [
+        5,
+        66.7
+       ],
+       [
+        6,
+        79.1
+       ],
+       [
+        7,
+        79.1
+       ],
+       [
+        7,
+        78.2
+       ],
+       [
+        8,
+        85.1
+       ],
+       [
+        8,
+        91.5
+       ],
+       [
+        9,
+        90.9
+       ]
+      ],
+      "xTitle": "Hours of study",
+      "yTitle": "Exam score"
+     },
+     "title": "Exam score versus hours of study",
+     "type": "ap_stat_chart"
+    },
+    "figure_checked": false,
+    "id": "ff04c79c-0e5c-43f0-81fa-aefbdd72ecdc",
+    "options": null,
+    "passage": null,
+    "problem_id": "ce78a0fc-01c7-402d-9711-ad8ea6d7b1d2",
+    "published_at": "2026-10-13T07:31:53.405763+00:00",
+    "quality": null,
+    "question": "Linear regression of exam score on number of hours of study — answer every part.",
+    "render_check": {
+     "alt": "Exam score versus hours of study. Scatterplot of 16 points. Horizontal axis: Hours of study. Vertical axis: Exam score. Line: y = 5.09x + 45.35.",
+     "checkedAt": "2026-10-13T07:31:53.146Z",
+     "figure_hash": "147ab8060da12bf5b6b88090c9ecd704",
+     "issues": [],
+     "ok": true,
+     "renderer": "std-1"
+    },
+    "repair_status": "none",
+    "review_kind": "self_confirmed",
+    "statements": [
+     {
+      "label": "A",
+      "mode": "explain",
+      "points": 2,
+      "prompt": "The least-squares regression line for the data in the scatterplot shown is $\\hat y = 45.35 + 5.09x$, where $x$ is the number of hours of study and $\\hat y$ is the predicted exam score (points), and $r^2 = 0.94$. Interpret the slope of the line in the context of the data."
+     },
+     {
+      "label": "B",
+      "mode": "calculate",
+      "points": 2,
+      "prompt": "(i) Use the regression line to predict the exam score when $x = 6$. (ii) One observation has $x = 6$ and an actual exam score of $79.1$. Calculate the residual for this observation."
+     },
+     {
+      "label": "C",
+      "mode": "explain",
+      "points": 3,
+      "prompt": "Does the scatterplot suggest that a linear model is appropriate for these data? Justify your answer by describing the pattern in the scatterplot relative to the line."
+     },
+     {
+      "label": "D",
+      "mode": "explain",
+      "points": 2,
+      "prompt": "Interpret the value $r^2 = 0.94$ in the context of the data."
+     },
+     {
+      "label": "E",
+      "mode": "explain",
+      "points": 1,
+      "prompt": "A researcher uses the regression line to predict the exam score when $x = 14$. Is this prediction reliable? Explain."
+     }
+    ],
+    "status": "published",
+    "submitted_at": "2026-10-13T07:31:53.405763+00:00",
+    "version_no": 1
+   },
+   "published_version_id": "ff04c79c-0e5c-43f0-81fa-aefbdd72ecdc",
+   "skill_code": null,
+   "usage_scope": "mock_exam",
+   "versions": [
+    {
+     "id": "ff04c79c-0e5c-43f0-81fa-aefbdd72ecdc",
+     "no": 1,
+     "status": "published"
+    }
+   ]
+  },
+  {
+   "ap_candidate_key": "phys-s2-e:ap_physics_1-f02-k0",
+   "ap_item_index": 0,
+   "exam_system": "ap",
+   "gid": null,
+   "pformat": "essay",
+   "placements": [
+    {
+     "format": "ap_fixed",
+     "item_version_id": "ec213cca-8052-4eec-aaa7-b7fa10aa0d56",
+     "module_key": null,
+     "position": 3,
+     "route": null,
+     "section": "ap_frq",
+     "set_id": "7ac923cd-05f7-4d4b-ac3f-557b4d33d16b",
+     "set_name": "AP Physics 1 — Practice Exam 1",
+     "set_status": "published",
+     "set_version": 1
+    }
+   ],
+   "problem_id": "d5e5fa81-fb0a-4d7e-bf39-676309864b47",
+   "pstatus": "confirmed",
+   "pub": {
+    "answer_rationale": null,
+    "answers": null,
+    "correct_index": null,
+    "created_at": "2026-10-13T10:29:51.591808+00:00",
+    "difficulty": "medium",
+    "distractor_error_types": null,
+    "evidence_span": null,
+    "evidence_target": null,
+    "explanation": "Reference answer and scoring notes (not official College Board scoring). Compare your response with this guide; no AP score is estimated.\n\n(A) [3 pt] Measure each hanging mass with a balance (or use slotted masses of known mass) and use a stopwatch to time 10 oscillations for each of several hanging masses added one at a time to the same spring, starting each trial from the same small displacement, then divide by 10; repeat each timing.\n   - 1 pt: Identifies the measured quantities and equipment: a balance or known masses and a timing device (both a way to know the mass and a way to time the motion are needed)\n   - 1 pt: Changes only the hanging mass while keeping the spring and the starting amplitude the same (both conditions are needed)\n   - 1 pt: Reduces timing uncertainty by timing many oscillations and dividing, or by repeating the trials and averaging (either earns the point)\n(B) [1 pt] Plot $T^2$ on the vertical axis against $m$ on the horizontal axis; the slope is $4\\pi^2/k$.\n   - 1 pt: Identifies $T^2$ (vertical) versus $m$ (horizontal)\n(C) [3 pt] Points $(m,T^2)$: (0.1, 0.195), (0.2, 0.399), (0.3, 0.588), (0.4, 0.796), (0.5, 0.996) with a best-fit line of slope about $2.00\\text{ s}^2/\\text{kg}$.\n   - 1 pt: Axes are labeled with quantities and units and the scale fills most of the grid\n   - 1 pt: Plots the five points $(m, T^2)$ accurately\n   - 1 pt: Draws a straight best-fit line through the trend of the points\n(D) [3 pt] Slope $\\approx 2.00\\text{ s}^2/\\text{kg}$, so $k=4\\pi^2/\\text{slope}\\approx 19.8\\text{ N/m}$.\n   - 1 pt: Calculates the slope of the best-fit line using two points on the line (about 2.00 $s^2$/kg; accept any value within 5 percent)\n   - 1 pt: Relates the slope to the spring constant: slope $=4\\pi^2/k$\n   - 1 pt: Calculates $k$ (about 20; accept any value within 8 percent) with units of newtons per meter",
+    "explanation_en": "Reference answer and scoring notes (not official College Board scoring). Compare your response with this guide; no AP score is estimated.\n\n(A) [3 pt] Measure each hanging mass with a balance (or use slotted masses of known mass) and use a stopwatch to time 10 oscillations for each of several hanging masses added one at a time to the same spring, starting each trial from the same small displacement, then divide by 10; repeat each timing.\n   - 1 pt: Identifies the measured quantities and equipment: a balance or known masses and a timing device (both a way to know the mass and a way to time the motion are needed)\n   - 1 pt: Changes only the hanging mass while keeping the spring and the starting amplitude the same (both conditions are needed)\n   - 1 pt: Reduces timing uncertainty by timing many oscillations and dividing, or by repeating the trials and averaging (either earns the point)\n(B) [1 pt] Plot $T^2$ on the vertical axis against $m$ on the horizontal axis; the slope is $4\\pi^2/k$.\n   - 1 pt: Identifies $T^2$ (vertical) versus $m$ (horizontal)\n(C) [3 pt] Points $(m,T^2)$: (0.1, 0.195), (0.2, 0.399), (0.3, 0.588), (0.4, 0.796), (0.5, 0.996) with a best-fit line of slope about $2.00\\text{ s}^2/\\text{kg}$.\n   - 1 pt: Axes are labeled with quantities and units and the scale fills most of the grid\n   - 1 pt: Plots the five points $(m, T^2)$ accurately\n   - 1 pt: Draws a straight best-fit line through the trend of the points\n(D) [3 pt] Slope $\\approx 2.00\\text{ s}^2/\\text{kg}$, so $k=4\\pi^2/\\text{slope}\\approx 19.8\\text{ N/m}$.\n   - 1 pt: Calculates the slope of the best-fit line using two points on the line (about 2.00 $s^2$/kg; accept any value within 5 percent)\n   - 1 pt: Relates the slope to the spring constant: slope $=4\\pi^2/k$\n   - 1 pt: Calculates $k$ (about 20; accept any value within 8 percent) with units of newtons per meter",
+    "figure": {
+     "columns": [
+      "Mass m (kg)",
+      "Period T (s)"
+     ],
+     "rows": [
+      [
+       0.1,
+       0.442
+      ],
+      [
+       0.2,
+       0.632
+      ],
+      [
+       0.3,
+       0.767
+      ],
+      [
+       0.4,
+       0.892
+      ],
+      [
+       0.5,
+       0.998
+      ]
+     ],
+     "type": "ap_table"
+    },
+    "figure_checked": false,
+    "id": "ec213cca-8052-4eec-aaa7-b7fa10aa0d56",
+    "options": null,
+    "passage": null,
+    "problem_id": "d5e5fa81-fb0a-4d7e-bf39-676309864b47",
+    "published_at": "2026-10-13T10:29:51.880233+00:00",
+    "quality": null,
+    "question": "Experiment: spring constant from the period of an oscillator — answer every part.",
+    "render_check": {
+     "alt": "Table with columns Mass m (kg), Period T (s) and 5 rows.",
+     "checkedAt": "2026-10-13T10:29:51.545Z",
+     "figure_hash": "cf44c2a84a7339c0aad65478237a18f7",
+     "issues": [],
+     "ok": true,
+     "renderer": "std-1"
+    },
+    "repair_status": "none",
+    "review_kind": "self_confirmed",
+    "statements": [
+     {
+      "label": "A",
+      "mode": "design",
+      "points": 3,
+      "prompt": "Describe an experimental procedure to collect the data for the period as a function of mass. Include the equipment and the measurements, how the independent variable is changed, and one way to reduce the uncertainty in the measured period."
+     },
+     {
+      "label": "B",
+      "mode": "explain",
+      "points": 1,
+      "prompt": "Using the relationship between the period of a mass on a spring, the mass and the spring constant from the reference information, identify the quantities that should be plotted on the vertical and horizontal axes so that the data produce a straight line whose slope can be used to find $k$."
+     },
+     {
+      "label": "C",
+      "mode": "graph",
+      "points": 3,
+      "prompt": "On a blank grid whose scale you choose, plot the data in a form that gives a straight line, and draw a best-fit line. Label the axes with quantities and units and use a scale that fills most of the grid."
+     },
+     {
+      "label": "D",
+      "mode": "calculate",
+      "points": 3,
+      "prompt": "Use the best-fit line to determine the spring constant $k$. Show your work."
+     }
+    ],
+    "status": "published",
+    "submitted_at": "2026-10-13T10:29:51.880233+00:00",
+    "version_no": 1
+   },
+   "published_version_id": "ec213cca-8052-4eec-aaa7-b7fa10aa0d56",
+   "skill_code": null,
+   "usage_scope": "mock_exam",
+   "versions": [
+    {
+     "id": "ec213cca-8052-4eec-aaa7-b7fa10aa0d56",
+     "no": 1,
+     "status": "published"
+    }
+   ]
+  },
+  {
+   "ap_candidate_key": "stats-s2b-c:ap_statistics-f02-k0",
+   "ap_item_index": 0,
+   "exam_system": "ap",
+   "gid": null,
+   "pformat": "essay",
+   "placements": [
+    {
+     "format": "ap_fixed",
+     "item_version_id": "ceacfa91-5bd9-4404-b5b5-821c3f669df5",
+     "module_key": null,
+     "position": 2,
+     "route": null,
+     "section": "ap_frq",
+     "set_id": "cc7a8ff0-fb98-4a8c-a69a-d2a0bda31582",
+     "set_name": "AP Statistics — Practice Exam 1",
+     "set_status": "published",
+     "set_version": 2
+    }
+   ],
+   "problem_id": "d743987b-e981-4ba9-be06-d5860aefbbb7",
+   "pstatus": "confirmed",
+   "pub": {
+    "answer_rationale": null,
+    "answers": null,
+    "correct_index": null,
+    "created_at": "2026-10-13T05:41:51.818952+00:00",
+    "difficulty": "medium",
+    "distractor_error_types": null,
+    "evidence_span": null,
+    "evidence_target": null,
+    "explanation": "Reference answer and scoring notes (not official College Board scoring). Compare your response with this guide; no AP score is estimated.\n\n(A) [2 pt] For each additional hour, the predicted exam score increases by about 4.81 points.\n   - 1 pt: States that the predicted response changes by 4.81 for each one-unit increase in the explanatory variable (with the correct direction)\n   - 1 pt: Gives the interpretation in context with units (predicted value, points, per hour)\n(B) [2 pt] (i) Predicted value: 46.47 + (4.81)(5) = 70.52. (ii) Residual = actual - predicted = 52.8 - 70.52 = -17.72.\n   - 1 pt: Calculates the predicted value (answer 70.52)\n   - 1 pt: Calculates the residual as actual minus predicted (answer -17.72)\n(C) [3 pt] No. The points show a curved pattern: they lie above the line at both ends and below it in the middle, so a linear model is not appropriate.\n   - 1 pt: Describes the pattern of the points about the line (a curved pattern: above the line at the ends and below in the middle)\n   - 1 pt: States that a linear model is not appropriate\n   - 1 pt: Links the conclusion to the pattern (curvature means the line does not describe the relationship)\n(D) [2 pt] About 47% of the variation in the exam score is accounted for by the linear relationship with the number of hours of study.\n   - 1 pt: States that 47% (the proportion 0.47) of the variation in the response is accounted for by the linear relationship\n   - 1 pt: Uses the context (names both variables)\n(E) [1 pt] No. $17$ is outside the range of the data (1 to 9), so this is extrapolation and the linear pattern may not continue.\n   - 1 pt: States that the prediction is not reliable because the value is outside the range of the data (extrapolation)",
+    "explanation_en": "Reference answer and scoring notes (not official College Board scoring). Compare your response with this guide; no AP score is estimated.\n\n(A) [2 pt] For each additional hour, the predicted exam score increases by about 4.81 points.\n   - 1 pt: States that the predicted response changes by 4.81 for each one-unit increase in the explanatory variable (with the correct direction)\n   - 1 pt: Gives the interpretation in context with units (predicted value, points, per hour)\n(B) [2 pt] (i) Predicted value: 46.47 + (4.81)(5) = 70.52. (ii) Residual = actual - predicted = 52.8 - 70.52 = -17.72.\n   - 1 pt: Calculates the predicted value (answer 70.52)\n   - 1 pt: Calculates the residual as actual minus predicted (answer -17.72)\n(C) [3 pt] No. The points show a curved pattern: they lie above the line at both ends and below it in the middle, so a linear model is not appropriate.\n   - 1 pt: Describes the pattern of the points about the line (a curved pattern: above the line at the ends and below in the middle)\n   - 1 pt: States that a linear model is not appropriate\n   - 1 pt: Links the conclusion to the pattern (curvature means the line does not describe the relationship)\n(D) [2 pt] About 47% of the variation in the exam score is accounted for by the linear relationship with the number of hours of study.\n   - 1 pt: States that 47% (the proportion 0.47) of the variation in the response is accounted for by the linear relationship\n   - 1 pt: Uses the context (names both variables)\n(E) [1 pt] No. $17$ is outside the range of the data (1 to 9), so this is extrapolation and the linear pattern may not continue.\n   - 1 pt: States that the prediction is not reliable because the value is outside the range of the data (extrapolation)",
+    "figure": {
+     "chart": "scatter",
+     "data": {
+      "fitLine": {
+       "intercept": 46.47,
+       "slope": 4.81
+      },
+      "points": [
+       [
+        1,
+        83
+       ],
+       [
+        2,
+        66.9
+       ],
+       [
+        2,
+        66.6
+       ],
+       [
+        3,
+        53.6
+       ],
+       [
+        3,
+        57.2
+       ],
+       [
+        3,
+        55.7
+       ],
+       [
+        3,
+        57.1
+       ],
+       [
+        5,
+        54.8
+       ],
+       [
+        5,
+        46.6
+       ],
+       [
+        5,
+        52.8
+       ],
+       [
+        7,
+        71
+       ],
+       [
+        7,
+        68.6
+       ],
+       [
+        8,
+        77.9
+       ],
+       [
+        8,
+        80.3
+       ],
+       [
+        9,
+        104
+       ],
+       [
+        9,
+        106.7
+       ],
+       [
+        9,
+        104.9
+       ],
+       [
+        9,
+        100.4
+       ]
+      ],
+      "xTitle": "Hours of study",
+      "yTitle": "Exam score"
+     },
+     "title": "Exam score versus hours of study",
+     "type": "ap_stat_chart"
+    },
+    "figure_checked": false,
+    "id": "ceacfa91-5bd9-4404-b5b5-821c3f669df5",
+    "options": null,
+    "passage": null,
+    "problem_id": "d743987b-e981-4ba9-be06-d5860aefbbb7",
+    "published_at": "2026-10-13T05:41:52.012383+00:00",
+    "quality": null,
+    "question": "Linear regression of exam score on number of hours of study — answer every part.",
+    "render_check": {
+     "alt": "Exam score versus hours of study. Scatterplot of 18 points. Horizontal axis: Hours of study. Vertical axis: Exam score. Line: y = 4.81x + 46.47.",
+     "checkedAt": "2026-10-13T05:41:51.773Z",
+     "figure_hash": "1ebde8637d15fe330ba28038c6b697d8",
+     "issues": [],
+     "ok": true,
+     "renderer": "std-1"
+    },
+    "repair_status": "none",
+    "review_kind": "self_confirmed",
+    "statements": [
+     {
+      "label": "A",
+      "mode": "explain",
+      "points": 2,
+      "prompt": "The least-squares regression line for the data in the scatterplot shown is $\\hat y = 46.47 + 4.81x$, where $x$ is the number of hours of study and $\\hat y$ is the predicted exam score (points), and $r^2 = 0.47$. Interpret the slope of the line in the context of the data."
+     },
+     {
+      "label": "B",
+      "mode": "calculate",
+      "points": 2,
+      "prompt": "(i) Use the regression line to predict the exam score when $x = 5$. (ii) One observation has $x = 5$ and an actual exam score of $52.8$. Calculate the residual for this observation."
+     },
+     {
+      "label": "C",
+      "mode": "explain",
+      "points": 3,
+      "prompt": "Does the scatterplot suggest that a linear model is appropriate for these data? Justify your answer by describing the pattern in the scatterplot relative to the line."
+     },
+     {
+      "label": "D",
+      "mode": "explain",
+      "points": 2,
+      "prompt": "Interpret the value $r^2 = 0.47$ in the context of the data."
+     },
+     {
+      "label": "E",
+      "mode": "explain",
+      "points": 1,
+      "prompt": "A researcher uses the regression line to predict the exam score when $x = 17$. Is this prediction reliable? Explain."
+     }
+    ],
+    "status": "published",
+    "submitted_at": "2026-10-13T05:41:52.012383+00:00",
+    "version_no": 1
+   },
+   "published_version_id": "ceacfa91-5bd9-4404-b5b5-821c3f669df5",
+   "skill_code": null,
+   "usage_scope": "mock_exam",
+   "versions": [
+    {
+     "id": "ceacfa91-5bd9-4404-b5b5-821c3f669df5",
+     "no": 1,
+     "status": "published"
+    }
+   ]
+  }
+ ],
+ "sets": [
+  {
+   "access_tier": "free",
+   "archived_at": null,
+   "format": "ap_fixed",
+   "id": "f100d256-f594-4832-9d6a-4d621f4e3e70",
+   "name": "AP Calculus AB — Calculator Practice",
+   "published_at": "2026-10-13 00:43:22.653731+00",
+   "published_by": "b2a34464-f8b1-4605-89cd-e3e56de44c67",
+   "set_group_id": "fff19832-b09d-4c05-a710-40585b8f93c4",
+   "status": "published",
+   "version_no": 1
+  },
+  {
+   "access_tier": "free",
+   "archived_at": null,
+   "format": "ap_fixed",
+   "id": "8ced9c1b-8019-4f07-a2e2-4659fe4cf143",
+   "name": "AP Calculus AB — Free-Response Practice",
+   "published_at": "2026-10-13 00:43:38.958437+00",
+   "published_by": "b2a34464-f8b1-4605-89cd-e3e56de44c67",
+   "set_group_id": "96b5f2e8-9caf-4fdd-8ccb-cdbba52ce7a0",
+   "status": "published",
+   "version_no": 1
+  },
+  {
+   "access_tier": "free",
+   "archived_at": null,
+   "format": "ap_fixed",
+   "id": "d711f9ea-8ac5-4b28-afa4-01b139909bd9",
+   "name": "AP Calculus AB — Non-Calculator Practice",
+   "published_at": "2026-10-13 00:43:01.746477+00",
+   "published_by": "b2a34464-f8b1-4605-89cd-e3e56de44c67",
+   "set_group_id": "5e7a80ae-fa2d-42bc-9065-f7ab75e64dee",
+   "status": "published",
+   "version_no": 1
+  },
+  {
+   "access_tier": "free",
+   "archived_at": null,
+   "format": "ap_fixed",
+   "id": "4bb4e440-6890-408d-b4ad-3897533b1e72",
+   "name": "AP Calculus AB — Practice Exam",
+   "published_at": "2026-10-13 16:01:36.981383+00",
+   "published_by": "b2a34464-f8b1-4605-89cd-e3e56de44c67",
+   "set_group_id": "57a95d4b-628c-44c6-9da2-172b6eeeea20",
+   "status": "published",
+   "version_no": 4
+  },
+  {
+   "access_tier": "free",
+   "archived_at": null,
+   "format": "ap_fixed",
+   "id": "d974afe8-a157-46db-9883-afdfe9e26fca",
+   "name": "AP Calculus AB — Practice Exam 2",
+   "published_at": "2026-10-13 16:01:36.981383+00",
+   "published_by": "b2a34464-f8b1-4605-89cd-e3e56de44c67",
+   "set_group_id": "0e792906-39d8-47e4-9826-afb2de63cb1a",
+   "status": "published",
+   "version_no": 3
+  },
+  {
+   "access_tier": "free",
+   "archived_at": null,
+   "format": "ap_fixed",
+   "id": "c012461c-3358-4604-b680-ddd7bacc934d",
+   "name": "AP Calculus AB — Practice Exam 3",
+   "published_at": "2026-10-13 16:03:40.216866+00",
+   "published_by": "b2a34464-f8b1-4605-89cd-e3e56de44c67",
+   "set_group_id": "af41bb49-3db4-4104-8aaf-5efabe4c7535",
+   "status": "published",
+   "version_no": 2
+  },
+  {
+   "access_tier": "free",
+   "archived_at": null,
+   "format": "ap_fixed",
+   "id": "2f4f532e-7789-4f35-98b7-ca11c049894e",
+   "name": "AP Calculus BC — Practice Exam 1",
+   "published_at": "2026-10-13 16:06:50.074451+00",
+   "published_by": "b2a34464-f8b1-4605-89cd-e3e56de44c67",
+   "set_group_id": "b29d0ad3-af3c-400d-86df-1c3700c817e6",
+   "status": "published",
+   "version_no": 4
+  },
+  {
+   "access_tier": "free",
+   "archived_at": null,
+   "format": "ap_fixed",
+   "id": "15af2b8e-8994-4f6d-af7c-b1efae3598b2",
+   "name": "AP Calculus BC — Practice Exam 2",
+   "published_at": "2026-10-13 16:05:21.96324+00",
+   "published_by": "b2a34464-f8b1-4605-89cd-e3e56de44c67",
+   "set_group_id": "4fe2f5db-e8e7-494e-90d3-f4412f117041",
+   "status": "published",
+   "version_no": 2
+  },
+  {
+   "access_tier": "free",
+   "archived_at": null,
+   "format": "ap_fixed",
+   "id": "b4cc5990-74bb-483a-9ae2-ae1c0d374ba3",
+   "name": "AP Calculus BC — Practice Exam 3",
+   "published_at": "2026-10-13 00:12:56.539371+00",
+   "published_by": "b2a34464-f8b1-4605-89cd-e3e56de44c67",
+   "set_group_id": "a82d9fd8-f62b-4718-b5c4-c880779a1bd9",
+   "status": "published",
+   "version_no": 1
+  },
+  {
+   "access_tier": "free",
+   "archived_at": null,
+   "format": "ap_fixed",
+   "id": "2bf3171b-8375-49a2-bbd2-e92425e35564",
+   "name": "AP Chemistry — Practice Exam 1",
+   "published_at": "2026-10-13 15:55:41.433058+00",
+   "published_by": "b2a34464-f8b1-4605-89cd-e3e56de44c67",
+   "set_group_id": "ecb17501-26e8-4e01-9b5e-8cc0a10a2799",
+   "status": "published",
+   "version_no": 1
+  },
+  {
+   "access_tier": "free",
+   "archived_at": null,
+   "format": "ap_fixed",
+   "id": "61e1b4e4-b8d2-4010-b6ae-192bc2d8e73d",
+   "name": "AP Chemistry — Practice Exam 2",
+   "published_at": "2026-10-13 15:56:15.763265+00",
+   "published_by": "b2a34464-f8b1-4605-89cd-e3e56de44c67",
+   "set_group_id": "0952b774-6156-4d09-a5fa-fb4943b20dac",
+   "status": "published",
+   "version_no": 1
+  },
+  {
+   "access_tier": "free",
+   "archived_at": null,
+   "format": "ap_fixed",
+   "id": "cb5e2094-7fcd-48fd-854e-b4db0a634165",
+   "name": "AP Microeconomics — Practice Exam 1",
+   "published_at": "2026-10-14 01:51:44.733363+00",
+   "published_by": "b2a34464-f8b1-4605-89cd-e3e56de44c67",
+   "set_group_id": "f981bddb-2e31-4bf0-bdc6-da8f68582ed0",
+   "status": "published",
+   "version_no": 1
+  },
+  {
+   "access_tier": "free",
+   "archived_at": null,
+   "format": "ap_fixed",
+   "id": "06f1e19e-c6b8-495c-9078-91eae82e3af3",
+   "name": "AP Microeconomics — Practice Exam 2",
+   "published_at": "2026-10-14 01:52:03.713514+00",
+   "published_by": "b2a34464-f8b1-4605-89cd-e3e56de44c67",
+   "set_group_id": "1f165064-c082-4d5e-bd17-0a0f3863e6f8",
+   "status": "published",
+   "version_no": 1
+  },
+  {
+   "access_tier": "free",
+   "archived_at": null,
+   "format": "ap_fixed",
+   "id": "7ac923cd-05f7-4d4b-ac3f-557b4d33d16b",
+   "name": "AP Physics 1 — Practice Exam 1",
+   "published_at": "2026-10-13 15:56:46.493104+00",
+   "published_by": "b2a34464-f8b1-4605-89cd-e3e56de44c67",
+   "set_group_id": "c21312d0-2b9a-4ee5-8196-e98aa5f2fc17",
+   "status": "published",
+   "version_no": 1
+  },
+  {
+   "access_tier": "free",
+   "archived_at": null,
+   "format": "ap_fixed",
+   "id": "4ee4c6c6-a5e5-4173-af93-ca1a591341df",
+   "name": "AP Physics 1 — Practice Exam 2",
+   "published_at": "2026-10-13 16:00:32.366194+00",
+   "published_by": "b2a34464-f8b1-4605-89cd-e3e56de44c67",
+   "set_group_id": "8b284820-f11f-43ad-a33b-816df5479f26",
+   "status": "published",
+   "version_no": 2
+  },
+  {
+   "access_tier": "free",
+   "archived_at": null,
+   "format": "ap_fixed",
+   "id": "cc7a8ff0-fb98-4a8c-a69a-d2a0bda31582",
+   "name": "AP Statistics — Practice Exam 1",
+   "published_at": "2026-10-13 06:49:19.813534+00",
+   "published_by": "b2a34464-f8b1-4605-89cd-e3e56de44c67",
+   "set_group_id": "a57a7d5e-850c-43f2-991d-785450e72018",
+   "status": "published",
+   "version_no": 2
+  },
+  {
+   "access_tier": "free",
+   "archived_at": null,
+   "format": "ap_fixed",
+   "id": "0a43690b-41f7-4293-81e9-8224052973fc",
+   "name": "AP Statistics — Practice Exam 2",
+   "published_at": "2026-10-13 15:55:11.788259+00",
+   "published_by": "b2a34464-f8b1-4605-89cd-e3e56de44c67",
+   "set_group_id": "f99e778c-3b8f-4e4a-8116-c5bc29a338a9",
+   "status": "published",
+   "version_no": 1
+  },
+  {
+   "access_tier": "free",
+   "archived_at": null,
+   "format": "mst",
+   "id": "c6d0390e-f43c-4695-ba3a-91cb75653f61",
+   "name": "SAT Practice Test 1",
+   "published_at": "2026-10-14 01:11:49.092725+00",
+   "published_by": "b2a34464-f8b1-4605-89cd-e3e56de44c67",
+   "set_group_id": "693168bd-3fb0-4cdf-8dc4-21186e80cf39",
+   "status": "published",
+   "version_no": 4
+  },
+  {
+   "access_tier": "free",
+   "archived_at": null,
+   "format": "mst",
+   "id": "bdcb8b74-8145-4bb3-8c21-ef5985143adc",
+   "name": "SAT Practice Test 10",
+   "published_at": "2026-10-14 01:11:49.092725+00",
+   "published_by": "b2a34464-f8b1-4605-89cd-e3e56de44c67",
+   "set_group_id": "4ed98082-6042-41bb-9c3c-1fc645f5d463",
+   "status": "published",
+   "version_no": 3
+  },
+  {
+   "access_tier": "free",
+   "archived_at": null,
+   "format": "mst",
+   "id": "94824975-3420-4c68-99b1-23aa709c1300",
+   "name": "SAT Practice Test 11",
+   "published_at": "2026-10-14 01:11:49.092725+00",
+   "published_by": "b2a34464-f8b1-4605-89cd-e3e56de44c67",
+   "set_group_id": "8deac77d-54b2-4071-8139-613c84c69c6c",
+   "status": "published",
+   "version_no": 3
+  },
+  {
+   "access_tier": "free",
+   "archived_at": null,
+   "format": "mst",
+   "id": "cefa003f-c72d-40e8-9f6a-b85a1e6032fc",
+   "name": "SAT Practice Test 12",
+   "published_at": "2026-10-14 01:11:49.092725+00",
+   "published_by": "b2a34464-f8b1-4605-89cd-e3e56de44c67",
+   "set_group_id": "11ca1e4b-a6e6-446a-821e-1a2ad2bd1a78",
+   "status": "published",
+   "version_no": 3
+  },
+  {
+   "access_tier": "free",
+   "archived_at": null,
+   "format": "mst",
+   "id": "a9bba027-ddb9-471f-8481-fe4790aac691",
+   "name": "SAT Practice Test 13",
+   "published_at": "2026-10-14 01:11:49.092725+00",
+   "published_by": "b2a34464-f8b1-4605-89cd-e3e56de44c67",
+   "set_group_id": "81373039-c769-4d74-93f0-8bb1da0e26ee",
+   "status": "published",
+   "version_no": 3
+  },
+  {
+   "access_tier": "free",
+   "archived_at": null,
+   "format": "mst",
+   "id": "42ad8b42-646d-43b7-bae2-41f65e2ac7ab",
+   "name": "SAT Practice Test 2",
+   "published_at": "2026-10-14 01:11:49.092725+00",
+   "published_by": "b2a34464-f8b1-4605-89cd-e3e56de44c67",
+   "set_group_id": "f4f02828-f657-467c-91a2-169955e44869",
+   "status": "published",
+   "version_no": 4
+  },
+  {
+   "access_tier": "free",
+   "archived_at": null,
+   "format": "mst",
+   "id": "27379131-e342-4092-a47a-22a258a3df6b",
+   "name": "SAT Practice Test 3",
+   "published_at": "2026-10-14 01:11:49.092725+00",
+   "published_by": "b2a34464-f8b1-4605-89cd-e3e56de44c67",
+   "set_group_id": "a9e69f00-5935-412d-8b42-07cd8438b040",
+   "status": "published",
+   "version_no": 4
+  },
+  {
+   "access_tier": "free",
+   "archived_at": null,
+   "format": "mst",
+   "id": "2cf543c2-75de-4980-82d0-188ee6714a0b",
+   "name": "SAT Practice Test 4",
+   "published_at": "2026-10-14 01:11:49.092725+00",
+   "published_by": "b2a34464-f8b1-4605-89cd-e3e56de44c67",
+   "set_group_id": "976dfc8b-c610-41e8-ac72-d0715fd697cd",
+   "status": "published",
+   "version_no": 4
+  },
+  {
+   "access_tier": "free",
+   "archived_at": null,
+   "format": "mst",
+   "id": "b4162083-4c3c-447c-9958-a0e82c42a77f",
+   "name": "SAT Practice Test 5",
+   "published_at": "2026-10-14 01:11:49.092725+00",
+   "published_by": "b2a34464-f8b1-4605-89cd-e3e56de44c67",
+   "set_group_id": "e1d076eb-e2c5-4a80-b91a-875dc24988f3",
+   "status": "published",
+   "version_no": 4
+  },
+  {
+   "access_tier": "free",
+   "archived_at": null,
+   "format": "mst",
+   "id": "e3b889a3-c22a-4d00-9485-c401b1f2c8dc",
+   "name": "SAT Practice Test 6",
+   "published_at": "2026-10-14 01:11:49.092725+00",
+   "published_by": "b2a34464-f8b1-4605-89cd-e3e56de44c67",
+   "set_group_id": "dbe9ac87-7fb4-4413-bc68-2ba959b405ea",
+   "status": "published",
+   "version_no": 4
+  },
+  {
+   "access_tier": "free",
+   "archived_at": null,
+   "format": "mst",
+   "id": "6418f96d-02ec-4093-ae87-808208732f14",
+   "name": "SAT Practice Test 7",
+   "published_at": "2026-10-14 01:11:49.092725+00",
+   "published_by": "b2a34464-f8b1-4605-89cd-e3e56de44c67",
+   "set_group_id": "b7c2f1c4-b6a7-432c-b56a-b7329ca9f851",
+   "status": "published",
+   "version_no": 4
+  },
+  {
+   "access_tier": "free",
+   "archived_at": null,
+   "format": "mst",
+   "id": "961698b0-17af-46af-ac4b-d9f2436d7c1b",
+   "name": "SAT Practice Test 8",
+   "published_at": "2026-10-14 01:11:49.092725+00",
+   "published_by": "b2a34464-f8b1-4605-89cd-e3e56de44c67",
+   "set_group_id": "d572c4b4-0391-47ec-88e7-ef6a345ffc20",
+   "status": "published",
+   "version_no": 4
+  },
+  {
+   "access_tier": "free",
+   "archived_at": null,
+   "format": "mst",
+   "id": "16cfa546-afd1-4ac8-9c97-9f30e2df83f2",
+   "name": "SAT Practice Test 9",
+   "published_at": "2026-10-14 01:11:49.092725+00",
+   "published_by": "b2a34464-f8b1-4605-89cd-e3e56de44c67",
+   "set_group_id": "ed2c2f97-b810-4136-9b8e-4aa2113d7309",
+   "status": "published",
+   "version_no": 4
+  },
+  {
+   "access_tier": "tutoring",
+   "archived_at": null,
+   "format": "fixed",
+   "id": "444895a4-4337-490a-b9e0-e5f29552604d",
+   "name": "Test Set 1",
+   "published_at": null,
+   "published_by": null,
+   "set_group_id": "b5b8e20b-c523-4157-98a7-bf17c352a70f",
+   "status": "draft",
+   "version_no": 1
+  }
+ ],
+ "triage": {
+  "notes": "problems[] = Q1 (per patched problem: DB id, published version row `pub`, version history, every published/draft set placement incl. section/position/module/route and the set item's problem_version_id), sets[] = published/draft set rows, patchStatus[] = per-patch plan result (apply/already/needs_owner/blocked/not_in_db). q2..q5 = the triage doc's read queries (Q2 RW passage length, Q3 English explanation suspects, Q4 text search for unlocated items, Q5 AP slots). SELECT-only reads through `supabase db query --linked`.",
+  "q2_rw_passage_words_over_150": [
+   {
+    "over150": 137,
+    "over150_chars6": 134,
+    "total": 1053
+   }
+  ],
+  "q3_explanation_en_suspects": [],
+  "q4_text_search": [
+   {
+    "passage_head": "The amount of a radioactive substance, in grams, after t days is modeled by $A(t) = 4000 \\cdot 0.75^{t}$, where t ≥ 0.",
+    "problem_id": "c35a45e7-4c2d-4b93-8fdc-86b973e12c4a",
+    "status": "published",
+    "version_id": "39272fbb-4f6d-4f0d-bf5b-e991ebe8134b"
+   },
+   {
+    "passage_head": "The amount of a radioactive substance, in grams, after t days is modeled by $A(t) = 70000 \\cdot 1.15^{t}$, where t ≥ 0.",
+    "problem_id": "aea66ace-7029-4d01-90dc-79b86e1797c9",
+    "status": "archived",
+    "version_id": "a95c2467-57e9-4a61-981f-f7af43316241"
+   },
+   {
+    "passage_head": "For decades, marine biologists assumed that octopuses were solitary creatures with little tolerance for one another outs",
+    "problem_id": "b4af5fd9-678f-4f8c-82f4-45905d194cad",
+    "status": "archived",
+    "version_id": "ffe513f9-3f56-4040-99d1-6ffbcc4fca9c"
+   },
+   {
+    "passage_head": "For decades, marine biologists assumed that octopuses were solitary creatures with little tolerance for one another outs",
+    "problem_id": "b4af5fd9-678f-4f8c-82f4-45905d194cad",
+    "status": "published",
+    "version_id": "5fdc5e60-0ada-4637-9904-622f8cd1d57f"
+   }
+  ],
+  "q5_ap_slots": [
+   {
+    "ap_candidate_key": "run1:ap_calculus_ab-f02-k5",
+    "ap_item_index": 0,
+    "name": "AP Calculus AB — Practice Exam",
+    "position": 1,
+    "problem_id": "cecede20-5818-424e-90b6-80e2a40a0f6b",
+    "problem_version_id": "96b567ba-25d2-4c95-b67b-40cfc3c2eec5",
+    "published_version_id": "96b567ba-25d2-4c95-b67b-40cfc3c2eec5",
+    "section": "ap_frq_b",
+    "status": "published",
+    "version_no": 4
+   },
+   {
+    "ap_candidate_key": "run1:ap_calculus_ab-f02-k9",
+    "ap_item_index": 0,
+    "name": "AP Calculus AB — Practice Exam 2",
+    "position": 1,
+    "problem_id": "1554274a-a01d-4025-8c4e-20fe01289129",
+    "problem_version_id": "c7f19257-3fe8-467e-8c6a-8219fca8cef8",
+    "published_version_id": "c7f19257-3fe8-467e-8c6a-8219fca8cef8",
+    "section": "ap_frq_b",
+    "status": "published",
+    "version_no": 3
+   },
+   {
+    "ap_candidate_key": "run1:ap_calculus_ab-f02-k10",
+    "ap_item_index": 0,
+    "name": "AP Calculus BC — Practice Exam 1",
+    "position": 1,
+    "problem_id": "95291c5b-4250-49c2-8c28-df0871aa7722",
+    "problem_version_id": "4a04ef2c-275c-4c19-b53f-6c8a11c6487a",
+    "published_version_id": "4a04ef2c-275c-4c19-b53f-6c8a11c6487a",
+    "section": "ap_frq_b",
+    "status": "published",
+    "version_no": 4
+   }
+  ]
+ },
+ "patchStatus": [
+  {
+   "patchId": "R3-chem_s2_f2_ap_chemistry_f03_k0",
+   "status": "apply",
+   "problemId": "54cbdf03-1c8d-49ad-ac29-8b3b8d776e18",
+   "fromVersionNo": 1,
+   "reasons": [],
+   "changed": [
+    "passage"
+   ],
+   "sets": [
+    "AP Chemistry — Practice Exam 2 v1 ap_frq#3"
+   ]
+  },
+  {
+   "patchId": "R3-chem_s2_f2_ap_chemistry_f03_k1",
+   "status": "apply",
+   "problemId": "23cbc7d6-ebc7-443b-ad7c-78171a826ef3",
+   "fromVersionNo": 1,
+   "reasons": [],
+   "changed": [
+    "passage"
+   ],
+   "sets": []
+  },
+  {
+   "patchId": "R3-chem_s2_f4_ap_chemistry_f03_k0",
+   "status": "apply",
+   "problemId": "0e1652f7-e9f3-4da6-a2b1-fd6ef992dade",
+   "fromVersionNo": 1,
+   "reasons": [],
+   "changed": [
+    "passage"
+   ],
+   "sets": [
+    "AP Chemistry — Practice Exam 1 v1 ap_frq#3"
+   ]
+  },
+  {
+   "patchId": "R3-phys_s2_d_ap_physics_1_f03_k0",
+   "status": "apply",
+   "problemId": "1dc7acc0-2662-4442-9d65-ff8068763c9c",
+   "fromVersionNo": 1,
+   "reasons": [],
+   "changed": [
+    "passage"
+   ],
+   "sets": []
+  },
+  {
+   "patchId": "R3-phys_s2_e_ap_physics_1_f02_k0",
+   "status": "apply",
+   "problemId": "d5e5fa81-fb0a-4d7e-bf39-676309864b47",
+   "fromVersionNo": 1,
+   "reasons": [],
+   "changed": [
+    "passage"
+   ],
+   "sets": [
+    "AP Physics 1 — Practice Exam 1 v1 ap_frq#3"
+   ]
+  },
+  {
+   "patchId": "R3-stats_s2b_c_ap_statistics_f02_k0",
+   "status": "apply",
+   "problemId": "d743987b-e981-4ba9-be06-d5860aefbbb7",
+   "fromVersionNo": 1,
+   "reasons": [],
+   "changed": [
+    "passage"
+   ],
+   "sets": [
+    "AP Statistics — Practice Exam 1 v2 ap_frq#2"
+   ]
+  },
+  {
+   "patchId": "R3-stats_s3b_c_ap_statistics_f02_k0",
+   "status": "apply",
+   "problemId": "29942b62-3469-4d26-aed1-d2a3310391b1",
+   "fromVersionNo": 1,
+   "reasons": [],
+   "changed": [
+    "passage"
+   ],
+   "sets": [
+    "AP Statistics — Practice Exam 2 v1 ap_frq#2"
+   ]
+  },
+  {
+   "patchId": "R3-stats_s3b_c_ap_statistics_f02_k2",
+   "status": "apply",
+   "problemId": "ce78a0fc-01c7-402d-9711-ad8ea6d7b1d2",
+   "fromVersionNo": 1,
+   "reasons": [],
+   "changed": [
+    "passage"
+   ],
+   "sets": []
+  }
+ ]
+}

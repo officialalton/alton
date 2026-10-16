@@ -1,0 +1,889 @@
+{"event":"problem_generation_item_accepted","elapsedMs":37987,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":64236,"acceptedSoFar":2}
+{"event":"problem_generation_item_accepted","elapsedMs":67158,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":67595,"acceptedSoFar":2}
+{"event":"problem_generation_item_accepted","elapsedMs":68029,"acceptedSoFar":3}
+{"event":"problem_generation_pipeline_timing","requested":3,"accepted":3,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":68029,"generate":50282,"figure":0,"contractRepair":3427,"answerExplanationCheck":13408,"review":35092,"regenerate":0}}
+[inferences/easy/mc] 3/3 (라운드 1, 통과 3/3, 호출 3)
+{"event":"problem_generation_item_accepted","elapsedMs":77328,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":79605,"acceptedSoFar":2}
+{"event":"problem_generation_item_accepted","elapsedMs":79629,"acceptedSoFar":3}
+{"event":"problem_generation_item_accepted","elapsedMs":81673,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":95005,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":95881,"acceptedSoFar":2}
+{"event":"problem_generation_item_accepted","elapsedMs":96707,"acceptedSoFar":3}
+{"event":"problem_generation_item_accepted","elapsedMs":100226,"acceptedSoFar":2}
+{"event":"problem_generation_item_accepted","elapsedMs":100399,"acceptedSoFar":3}
+{"event":"problem_generation_pipeline_timing","requested":3,"accepted":3,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":100399,"generate":43950,"figure":3572,"contractRepair":0,"answerExplanationCheck":12127,"review":39150,"regenerate":16245}}
+[command_of_evidence_quant/easy/mc] 3/3 (라운드 1, 통과 3/3, 호출 6)
+{"event":"problem_generation_item_accepted","elapsedMs":101129,"acceptedSoFar":4}
+{"event":"problem_generation_item_accepted","elapsedMs":105625,"acceptedSoFar":3}
+{"event":"problem_generation_item_accepted","elapsedMs":106690,"acceptedSoFar":4}
+{"event":"problem_generation_item_accepted","elapsedMs":108681,"acceptedSoFar":5}
+{"event":"problem_generation_item_accepted","elapsedMs":108955,"acceptedSoFar":5}
+{"event":"problem_generation_item_accepted","elapsedMs":115004,"acceptedSoFar":6}
+{"event":"problem_generation_item_accepted","elapsedMs":118534,"acceptedSoFar":7}
+{"event":"problem_generation_item_accepted","elapsedMs":121795,"acceptedSoFar":4}
+{"event":"problem_generation_item_accepted","elapsedMs":128876,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":133892,"acceptedSoFar":2}
+{"event":"problem_generation_item_accepted","elapsedMs":134460,"acceptedSoFar":3}
+{"event":"problem_generation_item_accepted","elapsedMs":136717,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":140160,"acceptedSoFar":2}
+{"event":"problem_generation_item_accepted","elapsedMs":142448,"acceptedSoFar":4}
+{"event":"problem_generation_item_accepted","elapsedMs":144461,"acceptedSoFar":3}
+{"event":"problem_generation_pipeline_timing","requested":7,"accepted":7,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":152099,"generate":216570,"figure":0,"contractRepair":5069,"answerExplanationCheck":56397,"review":125673,"regenerate":0}}
+[command_of_evidence_text/hard/mc] 7/7 (라운드 1, 통과 7/7, 호출 4.43)
+{"event":"problem_generation_item_accepted","elapsedMs":159306,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":161192,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":163162,"acceptedSoFar":4}
+{"event":"problem_generation_item_accepted","elapsedMs":66210,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":66549,"acceptedSoFar":2}
+{"event":"problem_generation_item_accepted","elapsedMs":167128,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":171408,"acceptedSoFar":2}
+{"event":"problem_generation_item_accepted","elapsedMs":173010,"acceptedSoFar":5}
+{"event":"problem_generation_item_accepted","elapsedMs":179206,"acceptedSoFar":5}
+{"event":"problem_generation_pipeline_timing","requested":5,"accepted":5,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":179206,"generate":83638,"figure":0,"contractRepair":21064,"answerExplanationCheck":28102,"review":118590,"regenerate":12420}}
+[command_of_evidence_text/easy/mc] 5/5 (라운드 1, 통과 5/5, 호출 8)
+{"event":"problem_generation_item_accepted","elapsedMs":182510,"acceptedSoFar":2}
+{"event":"problem_generation_item_accepted","elapsedMs":184288,"acceptedSoFar":2}
+{"event":"problem_generation_item_accepted","elapsedMs":185477,"acceptedSoFar":5}
+{"event":"problem_generation_item_accepted","elapsedMs":185514,"acceptedSoFar":3}
+{"event":"problem_generation_item_accepted","elapsedMs":185719,"acceptedSoFar":6}
+{"event":"problem_generation_item_accepted","elapsedMs":186829,"acceptedSoFar":3}
+{"event":"problem_generation_item_accepted","elapsedMs":189723,"acceptedSoFar":4}
+{"event":"problem_generation_item_accepted","elapsedMs":93908,"acceptedSoFar":3}
+{"event":"problem_generation_item_accepted","elapsedMs":194394,"acceptedSoFar":4}
+{"event":"problem_generation_item_accepted","elapsedMs":201368,"acceptedSoFar":7}
+{"event":"problem_generation_pipeline_timing","requested":9,"accepted":7,"shortfall":2,"stoppedReason":"time_cap","timeMs":{"total":201369,"generate":148124,"figure":0,"contractRepair":14911,"answerExplanationCheck":52842,"review":188777,"regenerate":21939}}
+[command_of_evidence_text/medium/mc] 7/9 (라운드 1, 통과 7/9, 호출 8)
+{"event":"problem_generation_item_accepted","elapsedMs":201744,"acceptedSoFar":5}
+{"event":"problem_generation_item_accepted","elapsedMs":102128,"acceptedSoFar":4}
+{"event":"problem_generation_item_accepted","elapsedMs":205194,"acceptedSoFar":3}
+{"event":"problem_generation_item_accepted","elapsedMs":209809,"acceptedSoFar":6}
+{"event":"problem_generation_item_accepted","elapsedMs":210926,"acceptedSoFar":7}
+{"event":"problem_generation_item_accepted","elapsedMs":211385,"acceptedSoFar":4}
+{"event":"problem_generation_item_accepted","elapsedMs":213606,"acceptedSoFar":5}
+LaTeX-incompatible input and strict mode is set to 'warn': Unicode text character "년" used in math mode [unicodeTextInMathMode]
+LaTeX-incompatible input and strict mode is set to 'warn': Unicode text character "대" used in math mode [unicodeTextInMathMode]
+LaTeX-incompatible input and strict mode is set to 'warn': Unicode text character "년" used in math mode [unicodeTextInMathMode]
+LaTeX-incompatible input and strict mode is set to 'warn': Unicode text character "대" used in math mode [unicodeTextInMathMode]
+LaTeX-incompatible input and strict mode is set to 'warn': Unicode text character "년" used in math mode [unicodeTextInMathMode]
+LaTeX-incompatible input and strict mode is set to 'warn': Unicode text character "대" used in math mode [unicodeTextInMathMode]
+LaTeX-incompatible input and strict mode is set to 'warn': Unicode text character "년" used in math mode [unicodeTextInMathMode]
+LaTeX-incompatible input and strict mode is set to 'warn': Unicode text character "대" used in math mode [unicodeTextInMathMode]
+{"event":"problem_generation_item_accepted","elapsedMs":217135,"acceptedSoFar":5}
+{"event":"problem_generation_item_accepted","elapsedMs":219352,"acceptedSoFar":6}
+{"event":"problem_generation_item_accepted","elapsedMs":221696,"acceptedSoFar":6}
+{"event":"problem_generation_item_accepted","elapsedMs":71786,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":224245,"acceptedSoFar":6}
+{"event":"problem_generation_item_accepted","elapsedMs":225259,"acceptedSoFar":7}
+{"event":"problem_generation_item_accepted","elapsedMs":228124,"acceptedSoFar":8}
+{"event":"problem_generation_item_accepted","elapsedMs":233321,"acceptedSoFar":8}
+{"event":"problem_generation_item_accepted","elapsedMs":167473,"acceptedSoFar":1}
+LaTeX-incompatible input and strict mode is set to 'warn': Unicode text character "년" used in math mode [unicodeTextInMathMode]
+LaTeX-incompatible input and strict mode is set to 'warn': Unicode text character "대" used in math mode [unicodeTextInMathMode]
+LaTeX-incompatible input and strict mode is set to 'warn': Unicode text character "년" used in math mode [unicodeTextInMathMode]
+LaTeX-incompatible input and strict mode is set to 'warn': Unicode text character "대" used in math mode [unicodeTextInMathMode]
+LaTeX-incompatible input and strict mode is set to 'warn': Unicode text character "년" used in math mode [unicodeTextInMathMode]
+LaTeX-incompatible input and strict mode is set to 'warn': Unicode text character "대" used in math mode [unicodeTextInMathMode]
+LaTeX-incompatible input and strict mode is set to 'warn': Unicode text character "년" used in math mode [unicodeTextInMathMode]
+LaTeX-incompatible input and strict mode is set to 'warn': Unicode text character "대" used in math mode [unicodeTextInMathMode]
+{"event":"problem_generation_item_accepted","elapsedMs":240897,"acceptedSoFar":9}
+{"event":"problem_generation_item_accepted","elapsedMs":177909,"acceptedSoFar":2}
+{"event":"problem_generation_item_accepted","elapsedMs":246109,"acceptedSoFar":7}
+{"event":"problem_generation_item_accepted","elapsedMs":96270,"acceptedSoFar":2}
+{"event":"problem_generation_item_accepted","elapsedMs":182581,"acceptedSoFar":3}
+{"event":"problem_generation_pipeline_timing","requested":6,"accepted":6,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":250645,"generate":259783,"figure":2208,"contractRepair":20671,"answerExplanationCheck":61895,"review":158113,"regenerate":69918}}
+[central_ideas_details/hard/mc] 6/6 (라운드 1, 통과 6/6, 호출 9)
+{"event":"problem_generation_item_accepted","elapsedMs":98916,"acceptedSoFar":3}
+{"event":"problem_generation_item_accepted","elapsedMs":253505,"acceptedSoFar":9}
+{"event":"problem_generation_pipeline_timing","requested":10,"accepted":9,"shortfall":1,"stoppedReason":"time_cap","timeMs":{"total":253505,"generate":222083,"figure":0,"contractRepair":22020,"answerExplanationCheck":60571,"review":218291,"regenerate":8954}}
+[inferences/medium/mc] 9/12 (라운드 1, 통과 9/10, 호출 6.67)
+{"event":"problem_generation_item_accepted","elapsedMs":188771,"acceptedSoFar":4}
+{"event":"problem_generation_item_accepted","elapsedMs":258441,"acceptedSoFar":10}
+{"event":"problem_generation_pipeline_timing","requested":10,"accepted":10,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":258442,"generate":189481,"figure":23070,"contractRepair":51153,"answerExplanationCheck":50910,"review":123795,"regenerate":111745}}
+[command_of_evidence_quant/medium/mc] 10/10 (라운드 1, 통과 10/10, 호출 5.1)
+{"event":"problem_generation_item_accepted","elapsedMs":58333,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":260230,"acceptedSoFar":6}
+{"event":"problem_generation_item_accepted","elapsedMs":260397,"acceptedSoFar":7}
+{"event":"problem_generation_item_accepted","elapsedMs":164032,"acceptedSoFar":5}
+{"event":"problem_generation_item_accepted","elapsedMs":113202,"acceptedSoFar":4}
+{"event":"problem_generation_item_accepted","elapsedMs":202254,"acceptedSoFar":5}
+{"event":"problem_generation_item_accepted","elapsedMs":271945,"acceptedSoFar":8}
+{"event":"problem_generation_item_accepted","elapsedMs":171865,"acceptedSoFar":6}
+{"event":"problem_generation_pipeline_timing","requested":7,"accepted":7,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":273164,"generate":354425,"figure":0,"contractRepair":19633,"answerExplanationCheck":69328,"review":179969,"regenerate":60418}}
+[inferences/hard/mc] 7/7 (라운드 1, 통과 7/7, 호출 7.14)
+{"event":"problem_generation_item_accepted","elapsedMs":213583,"acceptedSoFar":6}
+{"event":"problem_generation_item_accepted","elapsedMs":80348,"acceptedSoFar":2}
+{"event":"problem_generation_pipeline_timing","requested":2,"accepted":2,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":80349,"generate":36586,"figure":0,"contractRepair":2703,"answerExplanationCheck":11038,"review":39168,"regenerate":0}}
+[command_of_evidence_text/medium/mc] 9/9 (라운드 2, 통과 2/2, 호출 5.5)
+{"event":"problem_generation_item_accepted","elapsedMs":102912,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":130904,"acceptedSoFar":5}
+{"event":"problem_generation_item_accepted","elapsedMs":132756,"acceptedSoFar":6}
+{"event":"problem_generation_item_accepted","elapsedMs":106792,"acceptedSoFar":2}
+{"event":"problem_generation_item_accepted","elapsedMs":138780,"acceptedSoFar":7}
+{"event":"problem_generation_item_accepted","elapsedMs":54033,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":155808,"acceptedSoFar":8}
+{"event":"problem_generation_item_accepted","elapsedMs":130000,"acceptedSoFar":3}
+{"event":"problem_generation_item_accepted","elapsedMs":312041,"acceptedSoFar":9}
+{"event":"problem_generation_pipeline_timing","requested":9,"accepted":9,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":312042,"generate":198068,"figure":6242,"contractRepair":28359,"answerExplanationCheck":77171,"review":140038,"regenerate":126967}}
+[central_ideas_details/medium/mc] 9/9 (라운드 1, 통과 9/9, 호출 6)
+{"event":"problem_generation_item_accepted","elapsedMs":64229,"acceptedSoFar":2}
+{"event":"problem_generation_item_accepted","elapsedMs":214664,"acceptedSoFar":7}
+{"event":"problem_generation_pipeline_timing","requested":7,"accepted":7,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":214665,"generate":94639,"figure":5960,"contractRepair":2341,"answerExplanationCheck":41694,"review":155292,"regenerate":70679}}
+[words_in_context/easy/mc] 7/7 (라운드 1, 통과 7/7, 호출 8)
+{"event":"problem_generation_item_accepted","elapsedMs":65244,"acceptedSoFar":3}
+{"event":"problem_generation_pipeline_timing","requested":3,"accepted":3,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":65245,"generate":38456,"figure":0,"contractRepair":0,"answerExplanationCheck":13852,"review":32620,"regenerate":21661}}
+[text_structure_purpose/easy/mc] 3/3 (라운드 1, 통과 3/3, 호출 3)
+{"event":"problem_generation_item_accepted","elapsedMs":69932,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":71129,"acceptedSoFar":2}
+{"event":"problem_generation_item_accepted","elapsedMs":162001,"acceptedSoFar":4}
+{"event":"problem_generation_item_accepted","elapsedMs":84485,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":84801,"acceptedSoFar":2}
+{"event":"problem_generation_item_accepted","elapsedMs":84979,"acceptedSoFar":3}
+{"event":"problem_generation_item_accepted","elapsedMs":193415,"acceptedSoFar":9}
+{"event":"problem_generation_item_accepted","elapsedMs":77660,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":284128,"acceptedSoFar":7}
+{"event":"problem_generation_item_accepted","elapsedMs":79161,"acceptedSoFar":2}
+{"event":"problem_generation_item_accepted","elapsedMs":177683,"acceptedSoFar":5}
+{"event":"problem_generation_item_accepted","elapsedMs":101343,"acceptedSoFar":4}
+{"event":"problem_generation_item_accepted","elapsedMs":101634,"acceptedSoFar":5}
+{"event":"problem_generation_item_accepted","elapsedMs":103900,"acceptedSoFar":6}
+{"event":"problem_generation_item_accepted","elapsedMs":49047,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":110138,"acceptedSoFar":7}
+{"event":"problem_generation_item_accepted","elapsedMs":96871,"acceptedSoFar":3}
+{"event":"problem_generation_item_accepted","elapsedMs":192419,"acceptedSoFar":6}
+{"event":"problem_generation_item_accepted","elapsedMs":192751,"acceptedSoFar":7}
+{"event":"problem_generation_item_accepted","elapsedMs":57189,"acceptedSoFar":2}
+{"event":"problem_generation_item_accepted","elapsedMs":116672,"acceptedSoFar":8}
+{"event":"problem_generation_item_accepted","elapsedMs":118216,"acceptedSoFar":9}
+{"event":"problem_generation_item_accepted","elapsedMs":118823,"acceptedSoFar":10}
+{"event":"problem_generation_pipeline_timing","requested":10,"accepted":10,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":118823,"generate":122031,"figure":0,"contractRepair":1821,"answerExplanationCheck":54423,"review":119727,"regenerate":0}}
+[text_structure_purpose/medium/mc] 10/22 (라운드 1, 통과 10/10, 호출 2.7)
+{"event":"problem_generation_item_accepted","elapsedMs":202522,"acceptedSoFar":8}
+{"event":"problem_generation_pipeline_timing","requested":7,"accepted":7,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":318833,"generate":325921,"figure":18480,"contractRepair":21147,"answerExplanationCheck":39768,"review":103195,"regenerate":83618}}
+[command_of_evidence_quant/hard/mc] 7/7 (라운드 1, 통과 7/7, 호출 6)
+{"event":"problem_generation_item_accepted","elapsedMs":241843,"acceptedSoFar":10}
+{"event":"problem_generation_pipeline_timing","requested":10,"accepted":10,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":241843,"generate":105796,"figure":0,"contractRepair":9244,"answerExplanationCheck":56819,"review":252801,"regenerate":36794}}
+[words_in_context/medium/mc] 10/40 (라운드 1, 통과 10/10, 호출 7.1)
+{"event":"problem_generation_item_accepted","elapsedMs":85202,"acceptedSoFar":3}
+{"event":"problem_generation_pipeline_timing","requested":3,"accepted":3,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":85202,"generate":47667,"figure":0,"contractRepair":0,"answerExplanationCheck":13037,"review":30662,"regenerate":20649}}
+[rhetorical_synthesis/easy/mc] 3/3 (라운드 1, 통과 3/3, 호출 3.33)
+{"event":"problem_generation_item_accepted","elapsedMs":118778,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":119716,"acceptedSoFar":2}
+{"event":"problem_generation_item_accepted","elapsedMs":223080,"acceptedSoFar":9}
+{"event":"problem_generation_item_accepted","elapsedMs":121937,"acceptedSoFar":3}
+{"event":"problem_generation_item_accepted","elapsedMs":131543,"acceptedSoFar":4}
+{"event":"problem_generation_item_accepted","elapsedMs":135558,"acceptedSoFar":5}
+{"event":"problem_generation_item_accepted","elapsedMs":95316,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":95457,"acceptedSoFar":2}
+{"event":"problem_generation_item_accepted","elapsedMs":100307,"acceptedSoFar":3}
+{"event":"problem_generation_item_accepted","elapsedMs":136640,"acceptedSoFar":4}
+{"event":"problem_generation_item_accepted","elapsedMs":137133,"acceptedSoFar":5}
+{"event":"problem_generation_item_accepted","elapsedMs":148921,"acceptedSoFar":6}
+{"event":"problem_generation_item_accepted","elapsedMs":149443,"acceptedSoFar":7}
+{"event":"problem_generation_item_accepted","elapsedMs":145055,"acceptedSoFar":6}
+{"event":"problem_generation_item_accepted","elapsedMs":112019,"acceptedSoFar":4}
+{"event":"problem_generation_item_accepted","elapsedMs":116933,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":117333,"acceptedSoFar":2}
+{"event":"problem_generation_item_accepted","elapsedMs":119647,"acceptedSoFar":3}
+{"event":"problem_generation_item_accepted","elapsedMs":116658,"acceptedSoFar":5}
+{"event":"problem_generation_item_accepted","elapsedMs":152355,"acceptedSoFar":7}
+{"event":"problem_generation_item_accepted","elapsedMs":164618,"acceptedSoFar":8}
+{"event":"problem_generation_pipeline_timing","requested":10,"accepted":9,"shortfall":1,"stoppedReason":"time_cap","timeMs":{"total":261426,"generate":227559,"figure":0,"contractRepair":2550,"answerExplanationCheck":78310,"review":276801,"regenerate":120080}}
+[words_in_context/hard/mc] 9/18 (라운드 1, 통과 9/10, 호출 8.78)
+{"event":"problem_generation_item_accepted","elapsedMs":187589,"acceptedSoFar":3}
+{"event":"problem_generation_pipeline_timing","requested":3,"accepted":3,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":187589,"generate":82074,"figure":0,"contractRepair":1881,"answerExplanationCheck":22297,"review":67093,"regenerate":34780}}
+[inferences/medium/mc] 12/12 (라운드 2, 통과 3/3, 호출 5.67)
+{"event":"problem_generation_item_accepted","elapsedMs":170464,"acceptedSoFar":9}
+{"event":"problem_generation_item_accepted","elapsedMs":131128,"acceptedSoFar":6}
+{"event":"problem_generation_item_accepted","elapsedMs":51475,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":139375,"acceptedSoFar":7}
+{"event":"problem_generation_item_accepted","elapsedMs":57050,"acceptedSoFar":2}
+{"event":"problem_generation_item_accepted","elapsedMs":60547,"acceptedSoFar":3}
+{"event":"problem_generation_pipeline_timing","requested":3,"accepted":3,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":60547,"generate":37038,"figure":0,"contractRepair":0,"answerExplanationCheck":11384,"review":31996,"regenerate":14575}}
+[transitions/easy/mc] 3/3 (라운드 1, 통과 3/3, 호출 3)
+{"event":"problem_generation_item_accepted","elapsedMs":184041,"acceptedSoFar":8}
+{"event":"problem_generation_item_accepted","elapsedMs":195287,"acceptedSoFar":10}
+{"event":"problem_generation_pipeline_timing","requested":10,"accepted":10,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":195287,"generate":212380,"figure":0,"contractRepair":11135,"answerExplanationCheck":55504,"review":213483,"regenerate":90174}}
+[text_structure_purpose/hard/mc] 10/15 (라운드 1, 통과 10/10, 호출 5.2)
+{"event":"problem_generation_item_accepted","elapsedMs":189103,"acceptedSoFar":9}
+{"event":"problem_generation_item_accepted","elapsedMs":85907,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":91542,"acceptedSoFar":2}
+{"event":"problem_generation_item_accepted","elapsedMs":106628,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":102227,"acceptedSoFar":3}
+{"event":"problem_generation_item_accepted","elapsedMs":104899,"acceptedSoFar":4}
+{"event":"problem_generation_item_accepted","elapsedMs":115479,"acceptedSoFar":2}
+{"event":"problem_generation_item_accepted","elapsedMs":118722,"acceptedSoFar":3}
+{"event":"problem_generation_item_accepted","elapsedMs":109477,"acceptedSoFar":5}
+{"event":"problem_generation_item_accepted","elapsedMs":122116,"acceptedSoFar":4}
+{"event":"problem_generation_item_accepted","elapsedMs":60977,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":109668,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":66235,"acceptedSoFar":2}
+{"event":"problem_generation_item_accepted","elapsedMs":121856,"acceptedSoFar":6}
+{"event":"problem_generation_item_accepted","elapsedMs":123673,"acceptedSoFar":7}
+{"event":"problem_generation_item_accepted","elapsedMs":133332,"acceptedSoFar":5}
+{"event":"problem_generation_item_accepted","elapsedMs":117167,"acceptedSoFar":2}
+{"event":"problem_generation_item_accepted","elapsedMs":117292,"acceptedSoFar":3}
+{"event":"problem_generation_item_accepted","elapsedMs":70571,"acceptedSoFar":3}
+{"event":"problem_generation_item_accepted","elapsedMs":199708,"acceptedSoFar":4}
+{"event":"problem_generation_item_accepted","elapsedMs":203301,"acceptedSoFar":5}
+{"event":"problem_generation_item_accepted","elapsedMs":141278,"acceptedSoFar":6}
+{"event":"problem_generation_item_accepted","elapsedMs":238527,"acceptedSoFar":10}
+{"event":"problem_generation_pipeline_timing","requested":10,"accepted":10,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":238527,"generate":204653,"figure":0,"contractRepair":15717,"answerExplanationCheck":65027,"review":142378,"regenerate":51459}}
+[cross_text_connections/medium/mc] 10/13 (라운드 1, 통과 10/10, 호출 4.2)
+{"event":"problem_generation_item_accepted","elapsedMs":208369,"acceptedSoFar":6}
+{"event":"problem_generation_item_accepted","elapsedMs":146087,"acceptedSoFar":7}
+{"event":"problem_generation_item_accepted","elapsedMs":130836,"acceptedSoFar":4}
+{"event":"problem_generation_item_accepted","elapsedMs":132115,"acceptedSoFar":5}
+{"event":"problem_generation_item_accepted","elapsedMs":85004,"acceptedSoFar":4}
+{"event":"problem_generation_item_accepted","elapsedMs":156036,"acceptedSoFar":8}
+{"event":"problem_generation_item_accepted","elapsedMs":151832,"acceptedSoFar":8}
+{"event":"problem_generation_item_accepted","elapsedMs":146184,"acceptedSoFar":6}
+{"event":"problem_generation_item_accepted","elapsedMs":163822,"acceptedSoFar":9}
+{"event":"problem_generation_item_accepted","elapsedMs":148429,"acceptedSoFar":7}
+{"event":"problem_generation_item_accepted","elapsedMs":81685,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":83242,"acceptedSoFar":2}
+{"event":"problem_generation_item_accepted","elapsedMs":83431,"acceptedSoFar":3}
+{"event":"problem_generation_item_accepted","elapsedMs":150997,"acceptedSoFar":8}
+{"event":"problem_generation_item_accepted","elapsedMs":158978,"acceptedSoFar":9}
+{"event":"problem_generation_item_accepted","elapsedMs":235289,"acceptedSoFar":7}
+{"event":"problem_generation_item_accepted","elapsedMs":114955,"acceptedSoFar":5}
+{"event":"problem_generation_pipeline_timing","requested":5,"accepted":5,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":114955,"generate":56255,"figure":0,"contractRepair":0,"answerExplanationCheck":21526,"review":70089,"regenerate":24242}}
+[transitions/medium/mc] 5/5 (라운드 1, 통과 5/5, 호출 3.8)
+{"event":"problem_generation_item_accepted","elapsedMs":244699,"acceptedSoFar":8}
+{"event":"problem_generation_item_accepted","elapsedMs":245283,"acceptedSoFar":9}
+{"event":"problem_generation_pipeline_timing","requested":9,"accepted":9,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":245283,"generate":249600,"figure":0,"contractRepair":0,"answerExplanationCheck":77697,"review":303233,"regenerate":118607}}
+[cross_text_connections/hard/mc] 9/9 (라운드 1, 통과 9/9, 호출 9.33)
+{"event":"problem_generation_item_accepted","elapsedMs":90231,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":99356,"acceptedSoFar":4}
+{"event":"problem_generation_item_accepted","elapsedMs":100435,"acceptedSoFar":5}
+{"event":"problem_generation_item_accepted","elapsedMs":245417,"acceptedSoFar":8}
+{"event":"problem_generation_item_accepted","elapsedMs":245638,"acceptedSoFar":9}
+{"event":"problem_generation_pipeline_timing","requested":10,"accepted":9,"shortfall":1,"stoppedReason":"time_cap","timeMs":{"total":246536,"generate":191609,"figure":0,"contractRepair":29535,"answerExplanationCheck":41604,"review":116711,"regenerate":104623}}
+[rhetorical_synthesis/medium/mc] 9/14 (라운드 1, 통과 9/10, 호출 5.44)
+{"event":"problem_generation_item_accepted","elapsedMs":102898,"acceptedSoFar":2}
+{"event":"problem_generation_item_accepted","elapsedMs":105933,"acceptedSoFar":3}
+{"event":"problem_generation_item_accepted","elapsedMs":135764,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":115807,"acceptedSoFar":6}
+{"event":"problem_generation_item_accepted","elapsedMs":118709,"acceptedSoFar":7}
+{"event":"problem_generation_item_accepted","elapsedMs":119757,"acceptedSoFar":8}
+{"event":"problem_generation_item_accepted","elapsedMs":112626,"acceptedSoFar":4}
+{"event":"problem_generation_item_accepted","elapsedMs":204506,"acceptedSoFar":10}
+{"event":"problem_generation_pipeline_timing","requested":10,"accepted":10,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":204506,"generate":161470,"figure":0,"contractRepair":10302,"answerExplanationCheck":42064,"review":161091,"regenerate":46006}}
+[text_structure_purpose/medium/mc] 20/22 (라운드 2, 통과 10/10, 호출 4.7)
+{"event":"problem_generation_item_accepted","elapsedMs":114960,"acceptedSoFar":5}
+{"event":"problem_generation_item_accepted","elapsedMs":203941,"acceptedSoFar":9}
+{"event":"problem_generation_item_accepted","elapsedMs":158034,"acceptedSoFar":2}
+{"event":"problem_generation_item_accepted","elapsedMs":143321,"acceptedSoFar":9}
+{"event":"problem_generation_pipeline_timing","requested":5,"accepted":5,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":138407,"generate":160805,"figure":0,"contractRepair":0,"answerExplanationCheck":20100,"review":110216,"regenerate":32003}}
+[text_structure_purpose/hard/mc] 15/15 (라운드 2, 통과 5/5, 호출 4.8)
+{"event":"problem_generation_item_accepted","elapsedMs":220075,"acceptedSoFar":10}
+{"event":"problem_generation_item_accepted","elapsedMs":220358,"acceptedSoFar":10}
+{"event":"problem_generation_pipeline_timing","requested":10,"accepted":10,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":220359,"generate":143862,"figure":0,"contractRepair":0,"answerExplanationCheck":44563,"review":191972,"regenerate":70817}}
+[words_in_context/medium/mc] 20/40 (라운드 2, 통과 10/10, 호출 5.6)
+{"event":"problem_generation_item_accepted","elapsedMs":175101,"acceptedSoFar":3}
+{"event":"problem_generation_item_accepted","elapsedMs":155534,"acceptedSoFar":10}
+{"event":"problem_generation_pipeline_timing","requested":10,"accepted":10,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":155535,"generate":206674,"figure":0,"contractRepair":10605,"answerExplanationCheck":47249,"review":123053,"regenerate":89025}}
+[transitions/hard/mc] 10/18 (라운드 1, 통과 10/10, 호출 3.4)
+{"event":"problem_generation_item_accepted","elapsedMs":61012,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":65759,"acceptedSoFar":2}
+{"event":"problem_generation_item_accepted","elapsedMs":76792,"acceptedSoFar":3}
+{"event":"problem_generation_item_accepted","elapsedMs":79824,"acceptedSoFar":4}
+{"event":"problem_generation_item_accepted","elapsedMs":81947,"acceptedSoFar":5}
+{"event":"problem_generation_pipeline_timing","requested":10,"accepted":10,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":254431,"generate":272700,"figure":0,"contractRepair":29486,"answerExplanationCheck":53767,"review":167582,"regenerate":80084}}
+[rhetorical_synthesis/hard/mc] 10/18 (라운드 1, 통과 10/10, 호출 5.7)
+{"event":"problem_generation_item_accepted","elapsedMs":84226,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":85406,"acceptedSoFar":2}
+{"event":"problem_generation_item_accepted","elapsedMs":81575,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":87915,"acceptedSoFar":3}
+{"event":"problem_generation_item_accepted","elapsedMs":63513,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":88135,"acceptedSoFar":4}
+{"event":"problem_generation_item_accepted","elapsedMs":92289,"acceptedSoFar":6}
+{"event":"problem_generation_item_accepted","elapsedMs":99449,"acceptedSoFar":5}
+{"event":"problem_generation_item_accepted","elapsedMs":106108,"acceptedSoFar":7}
+{"event":"problem_generation_pipeline_timing","requested":7,"accepted":7,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":106109,"generate":62385,"figure":0,"contractRepair":2235,"answerExplanationCheck":28334,"review":114542,"regenerate":8533}}
+[boundaries/easy/mc] 7/7 (라운드 1, 통과 7/7, 호출 3.57)
+{"event":"problem_generation_item_accepted","elapsedMs":222358,"acceptedSoFar":4}
+{"event":"problem_generation_item_accepted","elapsedMs":101064,"acceptedSoFar":2}
+{"event":"problem_generation_item_accepted","elapsedMs":102598,"acceptedSoFar":3}
+{"event":"problem_generation_item_accepted","elapsedMs":102969,"acceptedSoFar":4}
+{"event":"problem_generation_item_accepted","elapsedMs":145883,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":105019,"acceptedSoFar":5}
+{"event":"problem_generation_pipeline_timing","requested":5,"accepted":5,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":105019,"generate":65832,"figure":0,"contractRepair":11072,"answerExplanationCheck":25319,"review":83959,"regenerate":0}}
+[rhetorical_synthesis/medium/mc] 14/14 (라운드 2, 통과 5/5, 호출 5.6)
+{"event":"problem_generation_item_accepted","elapsedMs":111456,"acceptedSoFar":6}
+{"event":"problem_generation_item_accepted","elapsedMs":151331,"acceptedSoFar":2}
+{"event":"problem_generation_item_accepted","elapsedMs":156147,"acceptedSoFar":3}
+{"event":"problem_generation_pipeline_timing","requested":3,"accepted":3,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":156147,"generate":112063,"figure":0,"contractRepair":0,"answerExplanationCheck":15282,"review":68334,"regenerate":0}}
+[cross_text_connections/medium/mc] 13/13 (라운드 2, 통과 3/3, 호출 6.67)
+{"event":"problem_generation_item_accepted","elapsedMs":96712,"acceptedSoFar":2}
+{"event":"problem_generation_pipeline_timing","requested":2,"accepted":2,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":96712,"generate":45140,"figure":0,"contractRepair":1843,"answerExplanationCheck":18552,"review":37963,"regenerate":26618}}
+[text_structure_purpose/medium/mc] 22/22 (라운드 3, 통과 2/2, 호출 5.5)
+{"event":"problem_generation_item_accepted","elapsedMs":122145,"acceptedSoFar":7}
+{"event":"problem_generation_item_accepted","elapsedMs":67606,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":68248,"acceptedSoFar":2}
+{"event":"problem_generation_item_accepted","elapsedMs":77226,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":78544,"acceptedSoFar":2}
+{"event":"problem_generation_item_accepted","elapsedMs":128486,"acceptedSoFar":8}
+{"event":"problem_generation_item_accepted","elapsedMs":245328,"acceptedSoFar":5}
+{"event":"problem_generation_item_accepted","elapsedMs":80038,"acceptedSoFar":3}
+{"event":"problem_generation_item_accepted","elapsedMs":246759,"acceptedSoFar":6}
+{"event":"problem_generation_item_accepted","elapsedMs":9062,"acceptedSoFar":1}
+{"event":"problem_generation_pipeline_timing","requested":1,"accepted":1,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":9063,"generate":5743,"figure":0,"contractRepair":0,"answerExplanationCheck":0,"review":3303,"regenerate":0}}
+[linear_equations_one_var/easy/spr] 1/1 (라운드 1, 통과 1/1, 호출 2)
+{"event":"problem_generation_item_accepted","elapsedMs":90307,"acceptedSoFar":4}
+{"event":"problem_generation_item_accepted","elapsedMs":84920,"acceptedSoFar":3}
+{"event":"problem_generation_item_accepted","elapsedMs":83294,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":87213,"acceptedSoFar":4}
+{"event":"problem_generation_item_accepted","elapsedMs":91408,"acceptedSoFar":5}
+{"event":"problem_generation_item_accepted","elapsedMs":91878,"acceptedSoFar":2}
+{"event":"problem_generation_item_accepted","elapsedMs":23487,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":99868,"acceptedSoFar":6}
+{"event":"problem_generation_item_accepted","elapsedMs":98687,"acceptedSoFar":3}
+{"event":"problem_generation_item_accepted","elapsedMs":53108,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":74365,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":53982,"acceptedSoFar":2}
+{"event":"problem_generation_item_accepted","elapsedMs":100409,"acceptedSoFar":4}
+{"event":"problem_generation_item_accepted","elapsedMs":103494,"acceptedSoFar":7}
+{"event":"problem_generation_item_accepted","elapsedMs":101589,"acceptedSoFar":5}
+{"event":"problem_generation_item_accepted","elapsedMs":76854,"acceptedSoFar":2}
+{"event":"problem_generation_item_accepted","elapsedMs":56811,"acceptedSoFar":3}
+{"event":"problem_generation_item_accepted","elapsedMs":78388,"acceptedSoFar":3}
+{"event":"problem_generation_item_accepted","elapsedMs":34066,"acceptedSoFar":2}
+{"event":"problem_generation_pipeline_timing","requested":2,"accepted":2,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":34066,"generate":11527,"figure":0,"contractRepair":0,"answerExplanationCheck":8145,"review":20329,"regenerate":6018}}
+[linear_equations_one_var/medium/mc] 2/2 (라운드 1, 통과 2/2, 호출 3.5)
+{"event":"problem_generation_item_accepted","elapsedMs":108903,"acceptedSoFar":6}
+{"event":"problem_generation_item_accepted","elapsedMs":111779,"acceptedSoFar":8}
+{"event":"problem_generation_item_accepted","elapsedMs":122616,"acceptedSoFar":5}
+{"event":"problem_generation_pipeline_timing","requested":5,"accepted":5,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":122616,"generate":72029,"figure":0,"contractRepair":9809,"answerExplanationCheck":18051,"review":57828,"regenerate":33762}}
+[form_structure_sense/easy/mc] 5/5 (라운드 1, 통과 5/5, 호출 4.6)
+{"event":"problem_generation_item_accepted","elapsedMs":67628,"acceptedSoFar":4}
+{"event":"problem_generation_item_accepted","elapsedMs":8911,"acceptedSoFar":1}
+{"event":"problem_generation_pipeline_timing","requested":1,"accepted":1,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":8911,"generate":5464,"figure":0,"contractRepair":0,"answerExplanationCheck":0,"review":3446,"regenerate":0}}
+[linear_equations_one_var/medium/spr] 1/1 (라운드 1, 통과 1/1, 호출 2)
+{"event":"problem_generation_item_accepted","elapsedMs":182093,"acceptedSoFar":9}
+{"event":"problem_generation_item_accepted","elapsedMs":98590,"acceptedSoFar":4}
+{"event":"problem_generation_item_accepted","elapsedMs":126181,"acceptedSoFar":7}
+{"event":"problem_generation_item_accepted","elapsedMs":129373,"acceptedSoFar":9}
+{"event":"problem_generation_item_accepted","elapsedMs":106969,"acceptedSoFar":5}
+{"event":"problem_generation_item_accepted","elapsedMs":84629,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":88001,"acceptedSoFar":2}
+{"event":"problem_generation_item_accepted","elapsedMs":114334,"acceptedSoFar":6}
+{"event":"problem_generation_item_accepted","elapsedMs":116216,"acceptedSoFar":7}
+{"event":"problem_generation_item_accepted","elapsedMs":145687,"acceptedSoFar":10}
+{"event":"problem_generation_pipeline_timing","requested":10,"accepted":10,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":145687,"generate":91446,"figure":0,"contractRepair":5995,"answerExplanationCheck":35444,"review":173023,"regenerate":15520}}
+[words_in_context/medium/mc] 30/40 (라운드 3, 통과 10/10, 호출 4.6)
+{"event":"problem_generation_item_accepted","elapsedMs":146029,"acceptedSoFar":8}
+{"event":"problem_generation_item_accepted","elapsedMs":323279,"acceptedSoFar":7}
+{"event":"problem_generation_pipeline_timing","requested":9,"accepted":7,"shortfall":2,"stoppedReason":"time_cap","timeMs":{"total":323279,"generate":239590,"figure":0,"contractRepair":8838,"answerExplanationCheck":69393,"review":324382,"regenerate":121596}}
+[words_in_context/hard/mc] 16/18 (라운드 2, 통과 7/9, 호출 10.86)
+{"event":"problem_generation_item_accepted","elapsedMs":123870,"acceptedSoFar":8}
+{"event":"problem_generation_item_accepted","elapsedMs":108780,"acceptedSoFar":3}
+{"event":"problem_generation_item_accepted","elapsedMs":108780,"acceptedSoFar":4}
+{"event":"problem_generation_pipeline_timing","requested":8,"accepted":8,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":141917,"generate":177906,"figure":0,"contractRepair":18775,"answerExplanationCheck":48860,"review":113642,"regenerate":88114}}
+[rhetorical_synthesis/hard/mc] 18/18 (라운드 2, 통과 8/8, 호출 4.88)
+{"event":"problem_generation_item_accepted","elapsedMs":108330,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":55534,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":56228,"acceptedSoFar":2}
+{"event":"problem_generation_item_accepted","elapsedMs":124449,"acceptedSoFar":5}
+{"event":"problem_generation_pipeline_timing","requested":5,"accepted":5,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":124449,"generate":58176,"figure":0,"contractRepair":4064,"answerExplanationCheck":22345,"review":84798,"regenerate":16018}}
+[form_structure_sense/medium/mc] 5/5 (라운드 1, 통과 5/5, 호출 3.6)
+{"event":"problem_generation_item_accepted","elapsedMs":232701,"acceptedSoFar":10}
+{"event":"problem_generation_item_accepted","elapsedMs":114522,"acceptedSoFar":2}
+{"event":"problem_generation_pipeline_timing","requested":2,"accepted":2,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":114522,"generate":44186,"figure":0,"contractRepair":4794,"answerExplanationCheck":11454,"review":86369,"regenerate":14082}}
+[linear_equations_one_var/easy/mc] 2/2 (라운드 1, 통과 2/2, 호출 10)
+{"event":"problem_generation_item_accepted","elapsedMs":126380,"acceptedSoFar":5}
+{"event":"problem_generation_pipeline_timing","requested":10,"accepted":10,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":237134,"generate":228926,"figure":0,"contractRepair":2158,"answerExplanationCheck":70695,"review":212760,"regenerate":58843}}
+[boundaries/hard/mc] 10/18 (라운드 1, 통과 10/10, 호출 4.8)
+{"event":"problem_generation_item_accepted","elapsedMs":127464,"acceptedSoFar":6}
+{"event":"problem_generation_item_accepted","elapsedMs":127486,"acceptedSoFar":7}
+{"event":"problem_generation_item_accepted","elapsedMs":8857,"acceptedSoFar":1}
+{"event":"problem_generation_pipeline_timing","requested":1,"accepted":1,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":8857,"generate":5783,"figure":0,"contractRepair":0,"answerExplanationCheck":0,"review":3066,"regenerate":0}}
+[linear_functions/easy/spr] 1/1 (라운드 1, 통과 1/1, 호출 2)
+{"event":"problem_generation_item_accepted","elapsedMs":130064,"acceptedSoFar":8}
+{"event":"problem_generation_item_accepted","elapsedMs":82572,"acceptedSoFar":3}
+{"event":"problem_generation_pipeline_timing","requested":8,"accepted":8,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":195824,"generate":211804,"figure":0,"contractRepair":0,"answerExplanationCheck":57647,"review":177436,"regenerate":142597}}
+[transitions/hard/mc] 18/18 (라운드 2, 통과 8/8, 호출 5.25)
+{"event":"problem_generation_item_accepted","elapsedMs":146894,"acceptedSoFar":9}
+{"event":"problem_generation_item_accepted","elapsedMs":148095,"acceptedSoFar":10}
+{"event":"problem_generation_pipeline_timing","requested":10,"accepted":10,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":148095,"generate":195003,"figure":0,"contractRepair":17819,"answerExplanationCheck":50313,"review":173249,"regenerate":34440}}
+[form_structure_sense/hard/mc] 10/15 (라운드 1, 통과 10/10, 호출 4.3)
+{"event":"problem_generation_item_accepted","elapsedMs":88910,"acceptedSoFar":1}
+{"event":"problem_generation_pipeline_timing","requested":1,"accepted":1,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":89074,"generate":48610,"figure":0,"contractRepair":7055,"answerExplanationCheck":0,"review":28213,"regenerate":13869}}
+[linear_equations_one_var/hard/spr] 1/1 (라운드 1, 통과 1/1, 호출 12)
+{"event":"problem_generation_item_accepted","elapsedMs":42254,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":43123,"acceptedSoFar":2}
+{"event":"problem_generation_pipeline_timing","requested":2,"accepted":2,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":43123,"generate":30100,"figure":0,"contractRepair":0,"answerExplanationCheck":7621,"review":17537,"regenerate":0}}
+[linear_functions/easy/mc] 2/2 (라운드 1, 통과 2/2, 호출 2.5)
+{"event":"problem_generation_item_accepted","elapsedMs":70478,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":71944,"acceptedSoFar":2}
+{"event":"problem_generation_pipeline_timing","requested":3,"accepted":3,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":118151,"generate":77196,"figure":0,"contractRepair":2368,"answerExplanationCheck":24301,"review":110520,"regenerate":36300}}
+[linear_equations_one_var/hard/mc] 3/3 (라운드 1, 통과 3/3, 호출 8.33)
+{"event":"problem_generation_pipeline_timing","requested":1,"accepted":0,"shortfall":1,"stoppedReason":"candidate_cap","timeMs":{"total":31807,"generate":9990,"figure":14054,"contractRepair":0,"answerExplanationCheck":0,"review":0,"regenerate":7733}}
+[linear_equations_two_var/easy/spr] 0/1 (라운드 1, 통과 0/1, 호출 10)
+{"event":"problem_generation_item_accepted","elapsedMs":64448,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":35303,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":72544,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":105637,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":106387,"acceptedSoFar":2}
+{"event":"problem_generation_item_accepted","elapsedMs":107062,"acceptedSoFar":3}
+{"event":"problem_generation_item_accepted","elapsedMs":113249,"acceptedSoFar":4}
+{"event":"problem_generation_item_accepted","elapsedMs":84246,"acceptedSoFar":2}
+{"event":"problem_generation_item_accepted","elapsedMs":27024,"acceptedSoFar":1}
+{"event":"problem_generation_pipeline_timing","requested":1,"accepted":1,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":27024,"generate":12063,"figure":7683,"contractRepair":0,"answerExplanationCheck":0,"review":3097,"regenerate":4176}}
+[linear_equations_two_var/easy/spr] 1/1 (라운드 2, 통과 1/1, 호출 7)
+{"event":"problem_generation_item_accepted","elapsedMs":122109,"acceptedSoFar":5}
+{"event":"problem_generation_pipeline_timing","requested":1,"accepted":0,"shortfall":1,"stoppedReason":"candidate_cap","timeMs":{"total":35482,"generate":11928,"figure":14848,"contractRepair":0,"answerExplanationCheck":0,"review":0,"regenerate":8688}}
+[linear_equations_two_var/medium/spr] 0/1 (라운드 1, 통과 0/1, 호출 10)
+{"event":"problem_generation_item_accepted","elapsedMs":97683,"acceptedSoFar":3}
+{"event":"problem_generation_item_accepted","elapsedMs":132542,"acceptedSoFar":6}
+{"event":"problem_generation_item_accepted","elapsedMs":133496,"acceptedSoFar":7}
+{"event":"problem_generation_item_accepted","elapsedMs":10672,"acceptedSoFar":1}
+{"event":"problem_generation_pipeline_timing","requested":1,"accepted":1,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":10672,"generate":7230,"figure":0,"contractRepair":0,"answerExplanationCheck":0,"review":3441,"regenerate":0}}
+[linear_equations_two_var/medium/spr] 1/1 (라운드 2, 통과 1/1, 호출 2)
+{"event":"problem_generation_item_accepted","elapsedMs":102879,"acceptedSoFar":4}
+[pipeline] 자료 생성 실패: plane AI 가 만든 그림 데이터가 규격에 맞지 않습니다 — 알 수 없는 그림 type: undefined (받은 데이터: {"axes":{"x":{"min":-2,"max":10,"step":1},"y":{"min":-2,"max":10,"step":1}},"objects":[{"id":"l1","kind":"line","slope":-0.5,"intercept":4,"label":"y = -(1/2)x + 4"}]})
+{"event":"problem_generation_item_accepted","elapsedMs":143958,"acceptedSoFar":8}
+{"event":"problem_generation_item_accepted","elapsedMs":149725,"acceptedSoFar":9}
+{"event":"problem_generation_item_accepted","elapsedMs":85492,"acceptedSoFar":2}
+{"event":"problem_generation_pipeline_timing","requested":2,"accepted":2,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":85492,"generate":45570,"figure":12884,"contractRepair":1414,"answerExplanationCheck":4872,"review":19812,"regenerate":13362}}
+[linear_equations_two_var/medium/mc] 2/2 (라운드 1, 통과 2/2, 호출 7.5)
+{"event":"problem_generation_pipeline_timing","requested":1,"accepted":1,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":118927,"generate":55765,"figure":6600,"contractRepair":5517,"answerExplanationCheck":0,"review":41677,"regenerate":18036}}
+[linear_functions/hard/spr] 1/1 (라운드 1, 통과 1/1, 호출 13)
+{"event":"problem_generation_pipeline_timing","requested":2,"accepted":2,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":153366,"generate":81943,"figure":0,"contractRepair":6560,"answerExplanationCheck":29853,"review":102689,"regenerate":34859}}
+[words_in_context/hard/mc] 18/18 (라운드 3, 통과 2/2, 호출 14)
+[pipeline] 자료 생성 실패: plane AI 가 만든 그림 데이터가 규격에 맞지 않습니다 — 알 수 없는 그림 type: undefined (받은 데이터: {"axes":{"x":{"min":-2,"max":6,"step":1,"title":"x"},"y":{"min":-2,"max":10,"step":1,"title":"y"}},"objects":[{"id":"P0","kind":"point","at":[0,3],"label":"(0, 3)"},{"id":"k","kind":"line","slope":2,"intercept":3,"label":"k"}]})
+{"event":"problem_generation_pipeline_timing","requested":2,"accepted":0,"shortfall":2,"stoppedReason":"candidate_cap","timeMs":{"total":106074,"generate":43934,"figure":17060,"contractRepair":2980,"answerExplanationCheck":5072,"review":38403,"regenerate":19347}}
+[linear_equations_two_var/easy/mc] 0/2 (라운드 1, 통과 0/2, 호출 21)
+{"event":"problem_generation_item_accepted","elapsedMs":11607,"acceptedSoFar":1}
+{"event":"problem_generation_pipeline_timing","requested":1,"accepted":1,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":11607,"generate":5561,"figure":2415,"contractRepair":0,"answerExplanationCheck":0,"review":3628,"regenerate":0}}
+[systems_linear/easy/spr] 1/1 (라운드 1, 통과 1/1, 호출 3)
+{"event":"problem_generation_pipeline_timing","requested":4,"accepted":4,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":136154,"generate":102021,"figure":25664,"contractRepair":0,"answerExplanationCheck":31586,"review":118687,"regenerate":64076}}
+[linear_functions/hard/mc] 4/4 (라운드 1, 통과 4/4, 호출 8.75)
+{"event":"problem_generation_item_accepted","elapsedMs":118663,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":118944,"acceptedSoFar":2}
+{"event":"problem_generation_item_accepted","elapsedMs":140952,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":141396,"acceptedSoFar":2}
+[pipeline] 자료 생성 실패: plane AI 가 만든 그림 데이터가 규격에 맞지 않습니다 — 알 수 없는 그림 type: undefined (받은 데이터: {"axes":{"x":{"min":-6,"max":6,"step":1},"y":{"min":-6,"max":6,"step":1}},"objects":[{"id":"A","kind":"point","at":[-4,-2],"label":"(-4, -2)"},{"id":"B","kind":"point","at":[2,4],"label":"(2, 4)"},{"id":"l","kind":"line","through":["A","B"],"label":"ℓ"},{"id":"C","kind":"point","at":[0,-1],"label":"(0, -1)"},{"id":"S","kind":"point","at":[1,1],"label":"(1, 1)"},{"id":"m","kind":"line","through":["…)
+{"event":"problem_generation_item_accepted","elapsedMs":59527,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":12442,"acceptedSoFar":1}
+{"event":"problem_generation_pipeline_timing","requested":1,"accepted":1,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":12442,"generate":9539,"figure":0,"contractRepair":0,"answerExplanationCheck":0,"review":2901,"regenerate":0}}
+[systems_linear/medium/spr] 1/1 (라운드 1, 통과 1/1, 호출 2)
+{"event":"problem_generation_item_accepted","elapsedMs":144672,"acceptedSoFar":3}
+{"event":"problem_generation_item_accepted","elapsedMs":144828,"acceptedSoFar":4}
+{"event":"problem_generation_item_accepted","elapsedMs":132716,"acceptedSoFar":3}
+{"event":"problem_generation_item_accepted","elapsedMs":136584,"acceptedSoFar":4}
+{"event":"problem_generation_item_accepted","elapsedMs":157902,"acceptedSoFar":5}
+{"event":"problem_generation_item_accepted","elapsedMs":138592,"acceptedSoFar":5}
+{"event":"problem_generation_item_accepted","elapsedMs":174251,"acceptedSoFar":6}
+{"event":"problem_generation_item_accepted","elapsedMs":209349,"acceptedSoFar":10}
+{"event":"problem_generation_pipeline_timing","requested":10,"accepted":10,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":209349,"generate":113857,"figure":0,"contractRepair":0,"answerExplanationCheck":55365,"review":199282,"regenerate":74871}}
+[words_in_context/medium/mc] 40/40 (라운드 4, 통과 10/10, 호출 5.9)
+{"event":"problem_generation_item_accepted","elapsedMs":96895,"acceptedSoFar":2}
+{"event":"problem_generation_item_accepted","elapsedMs":58254,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":60766,"acceptedSoFar":2}
+{"event":"problem_generation_item_accepted","elapsedMs":67561,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":86238,"acceptedSoFar":1}
+{"event":"problem_generation_pipeline_timing","requested":2,"accepted":1,"shortfall":1,"stoppedReason":"candidate_cap","timeMs":{"total":88715,"generate":68528,"figure":38267,"contractRepair":10691,"answerExplanationCheck":0,"review":21896,"regenerate":73081}}
+[linear_equations_two_var/hard/spr] 1/2 (라운드 1, 통과 1/2, 호출 28)
+{"event":"problem_generation_item_accepted","elapsedMs":104698,"acceptedSoFar":3}
+[pipeline] 자료 생성 실패: plane AI 가 만든 그림 데이터가 규격에 맞지 않습니다 — 알 수 없는 그림 type: undefined (받은 데이터: {"axes":{"x":{"min":-1,"max":10,"step":1,"title":"x (hundred liters of pesticide)"},"y":{"min":-1,"max":15,"step":1,"title":"y (kg of fertilizer)"}},"objects":[{"id":"A","kind":"point","at":[0,8],"label":"(0, 8)"},{"id":"B","kind":"point","at":[6,0],"label":"(6, 0)"},{"id":"l1","kind":"line","through":["A","B"],"label":"ℓ"},{"id":"X","kind":"point","at":[3,4],"label":"(3, 4)"}]})
+{"event":"problem_generation_item_accepted","elapsedMs":71623,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":72727,"acceptedSoFar":3}
+{"event":"problem_generation_item_accepted","elapsedMs":54213,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":82606,"acceptedSoFar":2}
+{"event":"problem_generation_pipeline_timing","requested":2,"accepted":2,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":82607,"generate":22105,"figure":8094,"contractRepair":4203,"answerExplanationCheck":12181,"review":69895,"regenerate":11557}}
+[systems_linear/easy/mc] 2/2 (라운드 1, 통과 2/2, 호출 9)
+{"event":"problem_generation_item_accepted","elapsedMs":74206,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":208614,"acceptedSoFar":7}
+{"event":"problem_generation_item_accepted","elapsedMs":65615,"acceptedSoFar":2}
+{"event":"problem_generation_item_accepted","elapsedMs":13247,"acceptedSoFar":1}
+{"event":"problem_generation_pipeline_timing","requested":1,"accepted":1,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":13247,"generate":9442,"figure":0,"contractRepair":0,"answerExplanationCheck":0,"review":3804,"regenerate":0}}
+[linear_inequalities/easy/spr] 1/1 (라운드 1, 통과 1/1, 호출 2)
+{"event":"problem_generation_pipeline_timing","requested":2,"accepted":1,"shortfall":1,"stoppedReason":"candidate_cap","timeMs":{"total":91107,"generate":43993,"figure":22852,"contractRepair":0,"answerExplanationCheck":5341,"review":23024,"regenerate":18787}}
+[linear_equations_two_var/easy/mc] 1/2 (라운드 2, 통과 1/2, 호출 18)
+{"event":"problem_generation_item_accepted","elapsedMs":40883,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":43660,"acceptedSoFar":2}
+{"event":"problem_generation_item_accepted","elapsedMs":91124,"acceptedSoFar":2}
+{"event":"problem_generation_item_accepted","elapsedMs":91607,"acceptedSoFar":3}
+{"event":"problem_generation_item_accepted","elapsedMs":111375,"acceptedSoFar":4}
+{"event":"problem_generation_pipeline_timing","requested":4,"accepted":4,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":111375,"generate":65941,"figure":9657,"contractRepair":1904,"answerExplanationCheck":17530,"review":51933,"regenerate":15845}}
+[systems_linear/medium/mc] 4/4 (라운드 1, 통과 4/4, 호출 4.5)
+{"event":"problem_generation_item_accepted","elapsedMs":62651,"acceptedSoFar":3}
+{"event":"problem_generation_item_accepted","elapsedMs":110927,"acceptedSoFar":4}
+{"event":"problem_generation_item_accepted","elapsedMs":29607,"acceptedSoFar":1}
+{"event":"problem_generation_pipeline_timing","requested":1,"accepted":1,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":29607,"generate":14542,"figure":0,"contractRepair":0,"answerExplanationCheck":4351,"review":10713,"regenerate":0}}
+[linear_equations_two_var/easy/mc] 2/2 (라운드 3, 통과 1/1, 호출 3)
+{"event":"problem_generation_pipeline_timing","requested":2,"accepted":2,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":100813,"generate":76312,"figure":29271,"contractRepair":0,"answerExplanationCheck":0,"review":48300,"regenerate":49174}}
+[systems_linear/hard/spr] 2/2 (라운드 1, 통과 2/2, 호출 12)
+{"event":"problem_generation_item_accepted","elapsedMs":61571,"acceptedSoFar":1}
+{"event":"problem_generation_pipeline_timing","requested":5,"accepted":5,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":231006,"generate":191854,"figure":0,"contractRepair":11355,"answerExplanationCheck":40498,"review":156352,"regenerate":39890}}
+[form_structure_sense/hard/mc] 15/15 (라운드 2, 통과 5/5, 호출 6.4)
+{"event":"problem_generation_item_accepted","elapsedMs":173832,"acceptedSoFar":4}
+{"event":"problem_generation_pipeline_timing","requested":1,"accepted":1,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":71150,"generate":34825,"figure":18746,"contractRepair":0,"answerExplanationCheck":0,"review":18520,"regenerate":25775}}
+[linear_equations_two_var/hard/spr] 2/2 (라운드 2, 통과 1/1, 호출 16)
+{"event":"problem_generation_item_accepted","elapsedMs":176627,"acceptedSoFar":5}
+[pipeline] 자료 생성 실패: plane AI 가 만든 그림 데이터가 규격에 맞지 않습니다 — 교점 X 의 of 는 직선 id 2개여야 합니다. (받은 데이터: {"type":"plane","axes":{"x":{"min":0,"max":14,"step":1,"title":"Number of pieces (x)"},"y":{"min":0,"max":140,"step":10,"title":"Cost (dollars)"}},"objects":[{"id":"f","kind":"function","fn":"linear","params":[8,20],"label":"f","domain":[0,13]},{"id":"g","kind":"function","fn":"linear","params":[10,0],"label":"g","domain":[0,13]},{"id":"X","kind":"intersection","of":["f","g"],"label":"X"}]})
+{"event":"problem_generation_item_accepted","elapsedMs":6491,"acceptedSoFar":1}
+{"event":"problem_generation_pipeline_timing","requested":1,"accepted":1,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":6492,"generate":3285,"figure":0,"contractRepair":0,"answerExplanationCheck":0,"review":3205,"regenerate":0}}
+[equivalent_expressions/easy/spr] 1/1 (라운드 1, 통과 1/1, 호출 2)
+{"event":"problem_generation_item_accepted","elapsedMs":91219,"acceptedSoFar":4}
+{"event":"problem_generation_pipeline_timing","requested":4,"accepted":4,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":91219,"generate":37571,"figure":12703,"contractRepair":7901,"answerExplanationCheck":14855,"review":45449,"regenerate":14117}}
+[linear_inequalities/easy/mc] 4/4 (라운드 1, 통과 4/4, 호출 6)
+{"event":"problem_generation_item_accepted","elapsedMs":34474,"acceptedSoFar":1}
+{"event":"problem_generation_pipeline_timing","requested":1,"accepted":1,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":34474,"generate":11306,"figure":9720,"contractRepair":0,"answerExplanationCheck":0,"review":4635,"regenerate":8808}}
+[linear_inequalities/medium/spr] 1/1 (라운드 1, 통과 1/1, 호출 6)
+{"event":"problem_generation_item_accepted","elapsedMs":271769,"acceptedSoFar":8}
+{"event":"problem_generation_item_accepted","elapsedMs":61321,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":9384,"acceptedSoFar":1}
+{"event":"problem_generation_pipeline_timing","requested":1,"accepted":1,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":9384,"generate":6140,"figure":0,"contractRepair":0,"answerExplanationCheck":0,"review":3242,"regenerate":0}}
+[equivalent_expressions/medium/spr] 1/1 (라운드 1, 통과 1/1, 호출 2)
+{"event":"problem_generation_item_accepted","elapsedMs":64426,"acceptedSoFar":2}
+{"event":"problem_generation_item_accepted","elapsedMs":68990,"acceptedSoFar":3}
+{"event":"problem_generation_item_accepted","elapsedMs":30767,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":31556,"acceptedSoFar":2}
+{"event":"problem_generation_pipeline_timing","requested":2,"accepted":2,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":31556,"generate":19636,"figure":0,"contractRepair":0,"answerExplanationCheck":4361,"review":18688,"regenerate":0}}
+[equivalent_expressions/easy/mc] 2/2 (라운드 1, 통과 2/2, 호출 2.5)
+{"event":"problem_generation_pipeline_timing","requested":8,"accepted":8,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":287189,"generate":298399,"figure":0,"contractRepair":0,"answerExplanationCheck":49144,"review":147588,"regenerate":21583}}
+[boundaries/hard/mc] 18/18 (라운드 2, 통과 8/8, 호출 4.25)
+{"event":"problem_generation_item_accepted","elapsedMs":76465,"acceptedSoFar":4}
+{"event":"problem_generation_pipeline_timing","requested":4,"accepted":4,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":76467,"generate":49300,"figure":5737,"contractRepair":5801,"answerExplanationCheck":14084,"review":41650,"regenerate":6713}}
+[linear_inequalities/medium/mc] 4/4 (라운드 1, 통과 4/4, 호출 3.5)
+[pipeline] 자료 생성 실패: plane AI 가 만든 그림 데이터가 규격에 맞지 않습니다 — 알 수 없는 그림 type: undefined (받은 데이터: {"axes":{"x":{"min":-10,"max":10,"step":1,"title":"x"},"y":{"min":-10,"max":10,"step":1,"title":"y"}},"objects":[{"id":"P","kind":"point","at":[0,0],"label":"P"}]})
+{"event":"problem_generation_item_accepted","elapsedMs":12399,"acceptedSoFar":1}
+{"event":"problem_generation_pipeline_timing","requested":1,"accepted":1,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":12399,"generate":8749,"figure":0,"contractRepair":0,"answerExplanationCheck":0,"review":3647,"regenerate":0}}
+[nonlinear_equations_systems/medium/spr] 1/1 (라운드 1, 통과 1/1, 호출 2)
+{"event":"problem_generation_pipeline_timing","requested":5,"accepted":5,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":222996,"generate":159542,"figure":47543,"contractRepair":4912,"answerExplanationCheck":29210,"review":126672,"regenerate":73982}}
+[linear_equations_two_var/hard/mc] 5/5 (라운드 1, 통과 5/5, 호출 10.4)
+{"event":"problem_generation_item_accepted","elapsedMs":43974,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":34437,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":67863,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":76187,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":77455,"acceptedSoFar":2}
+{"event":"problem_generation_item_accepted","elapsedMs":81398,"acceptedSoFar":3}
+{"event":"problem_generation_item_accepted","elapsedMs":75159,"acceptedSoFar":2}
+{"event":"problem_generation_item_accepted","elapsedMs":47235,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":47257,"acceptedSoFar":2}
+{"event":"problem_generation_item_accepted","elapsedMs":47282,"acceptedSoFar":3}
+{"event":"problem_generation_pipeline_timing","requested":3,"accepted":3,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":47282,"generate":35014,"figure":0,"contractRepair":0,"answerExplanationCheck":8893,"review":27828,"regenerate":0}}
+[nonlinear_functions/easy/mc] 3/3 (라운드 1, 통과 3/3, 호출 2.33)
+[pipeline] 자료 생성 실패: plane AI 가 만든 그림 데이터가 규격에 맞지 않습니다 — 알 수 없는 그림 type: undefined (받은 데이터: {"axes":{"x":{"min":-2,"max":6,"step":1,"title":"x (hundreds of units)"},"y":{"min":-3,"max":10,"step":1,"title":"Profit (thousands of dollars)"}},"objects":[{"id":"f","kind":"function","fn":"quadratic","params":[1,-4,3],"label":"f","domain":[-2,6]}]})
+{"event":"problem_generation_item_accepted","elapsedMs":84663,"acceptedSoFar":3}
+{"event":"problem_generation_item_accepted","elapsedMs":91943,"acceptedSoFar":4}
+{"event":"problem_generation_item_accepted","elapsedMs":92315,"acceptedSoFar":5}
+{"event":"problem_generation_item_accepted","elapsedMs":117240,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":117811,"acceptedSoFar":2}
+{"event":"problem_generation_item_accepted","elapsedMs":11117,"acceptedSoFar":1}
+{"event":"problem_generation_pipeline_timing","requested":1,"accepted":1,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":11117,"generate":7380,"figure":0,"contractRepair":0,"answerExplanationCheck":0,"review":3735,"regenerate":0}}
+[nonlinear_functions/easy/spr] 1/1 (라운드 1, 통과 1/1, 호출 2)
+{"event":"problem_generation_item_accepted","elapsedMs":80929,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":104676,"acceptedSoFar":6}
+{"event":"problem_generation_item_accepted","elapsedMs":104863,"acceptedSoFar":7}
+{"event":"problem_generation_item_accepted","elapsedMs":111211,"acceptedSoFar":2}
+{"event":"problem_generation_pipeline_timing","requested":2,"accepted":2,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":111211,"generate":45634,"figure":0,"contractRepair":0,"answerExplanationCheck":19288,"review":45054,"regenerate":13666}}
+[equivalent_expressions/medium/mc] 2/2 (라운드 1, 통과 2/2, 호출 6.5)
+{"event":"problem_generation_item_accepted","elapsedMs":95311,"acceptedSoFar":2}
+{"event":"problem_generation_item_accepted","elapsedMs":95560,"acceptedSoFar":3}
+{"event":"problem_generation_item_accepted","elapsedMs":97789,"acceptedSoFar":4}
+{"event":"problem_generation_pipeline_timing","requested":4,"accepted":4,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":97789,"generate":45270,"figure":7483,"contractRepair":0,"answerExplanationCheck":20053,"review":56181,"regenerate":17349}}
+[nonlinear_equations_systems/medium/mc] 4/4 (라운드 1, 통과 4/4, 호출 4.75)
+{"event":"problem_generation_item_accepted","elapsedMs":140219,"acceptedSoFar":3}
+{"event":"problem_generation_item_accepted","elapsedMs":96561,"acceptedSoFar":2}
+{"event":"problem_generation_item_accepted","elapsedMs":142205,"acceptedSoFar":4}
+LaTeX-incompatible input and strict mode is set to 'warn': In LaTeX, \\ or \newline does nothing in display mode [newLineInDisplayMode]
+LaTeX-incompatible input and strict mode is set to 'warn': In LaTeX, \\ or \newline does nothing in display mode [newLineInDisplayMode]
+LaTeX-incompatible input and strict mode is set to 'warn': In LaTeX, \\ or \newline does nothing in display mode [newLineInDisplayMode]
+[pipeline] 자료 생성 실패: plane AI 가 만든 그림 데이터가 규격에 맞지 않습니다 — 선분 s1 의 from/to 는 점 id 또는 좌표여야 합니다. (받은 데이터: {"type":"plane","axes":{"x":{"min":0,"max":2800,"step":400,"title":"x (oysters)"},"y":{"min":0,"max":2000,"step":200,"title":"y (clams)"}},"objects":[{"id":"l1","kind":"line","slope":-0.6667,"intercept":1800,"label":"2x + 3y = 5400"},{"id":"l2","kind":"line","slope":-1,"intercept":1600,"label":"x + y = 1600"},{"id":"P","kind":"point","at":[1200,1000],"label":"(1200, 1000)"},{"id":"s1","kind":"segm…)
+[pipeline] 자료 생성 실패: plane AI 가 만든 그림 데이터가 규격에 맞지 않습니다 — 객체 f 의 kind 를 모릅니다: quadratic (받은 데이터: {"type":"plane","axes":{"x":{"min":-6,"max":10,"step":2,"title":"x (meters)"},"y":{"min":-30,"max":15,"step":5,"title":"y (meters)"}},"objects":[{"id":"A","kind":"point","at":[-2,0],"label":"(-2, 0)"},{"id":"B","kind":"point","at":[6,0],"label":"(6, 0)"},{"id":"f","kind":"quadratic","fn":"quadratic","params":[1,-4,-12],"label":"y = ax^2+bx+c"},{"id":"l1","kind":"line","slope":-3,"intercept":9,"lab…)
+{"event":"problem_generation_item_accepted","elapsedMs":103143,"acceptedSoFar":3}
+{"event":"problem_generation_pipeline_timing","requested":4,"accepted":4,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":156716,"generate":123236,"figure":30729,"contractRepair":20424,"answerExplanationCheck":52703,"review":100325,"regenerate":61389}}
+[linear_inequalities/hard/mc] 4/4 (라운드 1, 통과 4/4, 호출 11.25)
+{"event":"problem_generation_item_accepted","elapsedMs":135940,"acceptedSoFar":8}
+{"event":"problem_generation_item_accepted","elapsedMs":160550,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":117673,"acceptedSoFar":4}
+[pipeline] 자료 생성 실패: plane AI 가 만든 그림 데이터가 규격에 맞지 않습니다 — 객체 f 의 kind 를 모릅니다: quadratic (받은 데이터: {"type":"plane","axes":{"x":{"min":-6,"max":10,"step":1,"title":"x (meters)"},"y":{"min":-20,"max":15,"step":5,"title":"y (meters)"}},"objects":[{"id":"A","kind":"point","at":[-2,0],"label":"(-2, 0)"},{"id":"B","kind":"point","at":[6,0],"label":"(6, 0)"},{"id":"f","kind":"quadratic","fn":"quadratic","params":[1,-4,-12],"label":"y = ax^2+bx+c"},{"id":"l1","kind":"line","slope":-3,"intercept":9,"lab…)
+{"event":"problem_generation_item_accepted","elapsedMs":13076,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":13280,"acceptedSoFar":2}
+{"event":"problem_generation_pipeline_timing","requested":2,"accepted":2,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":13280,"generate":9655,"figure":0,"contractRepair":0,"answerExplanationCheck":0,"review":7045,"regenerate":0}}
+[ratios_rates_units/easy/spr] 2/2 (라운드 1, 통과 2/2, 호출 1.5)
+{"event":"problem_generation_pipeline_timing","requested":1,"accepted":1,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":171751,"generate":115965,"figure":17221,"contractRepair":7166,"answerExplanationCheck":0,"review":40780,"regenerate":35178}}
+[linear_inequalities/hard/spr] 1/1 (라운드 1, 통과 1/1, 호출 19)
+[pipeline] 독립 검사 오류: (input.design.key_relations ?? []).join is not a function
+[pipeline] 자료 생성 실패: plane AI 가 만든 그림 데이터가 규격에 맞지 않습니다 — 객체 f 의 kind 를 모릅니다: quadratic (받은 데이터: {"axes":{"x":{"min":-6,"max":8,"step":1,"title":"x"},"y":{"min":-18,"max":12,"step":2,"title":"y"}},"type":"plane","objects":[{"id":"f","kind":"quadratic","fn":"quadratic","params":[1,-2,-15],"label":"f","domain":[-5,7]},{"id":"A","kind":"point","at":[-3,0],"label":"(-3, 0)"},{"id":"B","kind":"point","at":[5,0],"label":"(5, 0)"},{"id":"C","kind":"point","at":[6,9],"label":"(6, 9)"}]})
+{"event":"problem_generation_item_accepted","elapsedMs":286696,"acceptedSoFar":5}
+[pipeline] 독립 검사 오류: (input.design.key_relations ?? []).join is not a function
+{"event":"problem_generation_item_accepted","elapsedMs":292372,"acceptedSoFar":6}
+[pipeline] 독립 검사 오류: (input.design.key_relations ?? []).join is not a function
+[pipeline] 독립 검사 오류: (input.design.key_relations ?? []).join is not a function
+[pipeline] 자료 생성 실패: plane AI 가 만든 그림 데이터가 규격에 맞지 않습니다 — 객체 f 의 kind 를 모릅니다: quadratic (받은 데이터: {"type":"plane","axes":{"x":{"min":-6,"max":10,"step":1,"title":"Distance (meters)"},"y":{"min":-20,"max":15,"step":5,"title":"Height (meters)"}},"objects":[{"id":"A","kind":"point","at":[-2,0],"label":"(-2, 0)"},{"id":"B","kind":"point","at":[6,0],"label":"(6, 0)"},{"id":"f","kind":"quadratic","fn":"quadratic","params":[1,-4,-12],"label":"y = ax^2 + bx + c"},{"id":"l1","kind":"line","slope":-3,"i…)
+[pipeline] 자료 생성 실패: plane AI 가 만든 그림 데이터가 규격에 맞지 않습니다 — 알 수 없는 그림 type: undefined (받은 데이터: {"axes":{"x":{"min":-6,"max":8,"step":1,"title":"x"},"y":{"min":-25,"max":10,"step":5,"title":"y"}},"objects":[{"id":"A","kind":"point","at":[-3,0],"label":"(-3, 0)"},{"id":"B","kind":"point","at":[5,0],"label":"(5, 0)"},{"id":"C","kind":"point","at":[2,-21],"label":"(2, -21)"},{"id":"f","kind":"function","fn":"quadratic","params":[1.4,-2.8,-21],"label":"f","domain":[-6,8]}]})
+[pipeline] 자료 생성 실패: plane AI 가 만든 그림 데이터가 규격에 맞지 않습니다 — 객체 f 의 kind 를 모릅니다: quadratic (받은 데이터: {"type":"plane","axes":{"x":{"min":-2,"max":8,"step":1,"title":"Time t (days)"},"y":{"min":-5,"max":40,"step":5,"title":"Population P (millions of cells)"}},"objects":[{"id":"f","kind":"quadratic","fn":"quadratic","params":[3,-12,24.333],"label":"P = 3t^2 - 12t + k"},{"id":"l1","kind":"line","slope":2,"intercept":8,"label":"P = 2t + 8"},{"id":"T","kind":"point","at":[2.333,12.667],"label":"(t, P)"…)
+[pipeline] 자료 생성 실패: plane AI 가 만든 그림 데이터가 규격에 맞지 않습니다 — 객체 f 의 kind 를 모릅니다: quadratic (받은 데이터: {"type":"plane","axes":{"x":{"min":-6,"max":8,"step":1,"title":"x"},"y":{"min":-18,"max":12,"step":2,"title":"y"}},"objects":[{"id":"f","kind":"quadratic","fn":"quadratic","params":[1,-2,-15],"label":"f"},{"id":"A","kind":"point","at":[-3,0],"label":"(-3, 0)"},{"id":"B","kind":"point","at":[5,0],"label":"(5, 0)"},{"id":"C","kind":"point","at":[6,9],"label":"(6, 9)"}]})
+{"event":"problem_generation_item_accepted","elapsedMs":147254,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":147608,"acceptedSoFar":2}
+{"event":"problem_generation_item_accepted","elapsedMs":147909,"acceptedSoFar":3}
+{"event":"problem_generation_item_accepted","elapsedMs":151734,"acceptedSoFar":4}
+{"event":"problem_generation_item_accepted","elapsedMs":71781,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":72853,"acceptedSoFar":2}
+[pipeline] 자료 생성 실패: plane AI 가 만든 그림 데이터가 규격에 맞지 않습니다 — 그림 데이터가 객체가 아닙니다. (받은 데이터: "{\"type\":\"plane\",\"axes\":{\"x\":{\"min\":-2,\"max\":8,\"step\":1,\"title\":\"Time t (days)\"},\"y\":{\"min\":-5,\"max\":40,\"step\":5,\"title\":\"Population P (millions of cells)\"}},\"objects\":[{\"id\":\"l1\",\"kind\":\"line\",\"slope\":2,\"intercept\":8,\"label\":\"P = 2t + 8\"},{\"id\":\"f\",\"kind\":\"function\",\"fn\":\"quadratic\",\"params\":[3,-14,73.0/3+8],\"label\":\"P = 3t^2 - 12t …)
+{"event":"problem_generation_item_accepted","elapsedMs":73609,"acceptedSoFar":3}
+{"event":"problem_generation_pipeline_timing","requested":2,"accepted":0,"shortfall":2,"stoppedReason":"candidate_cap","timeMs":{"total":80593,"generate":54541,"figure":52013,"contractRepair":5457,"answerExplanationCheck":0,"review":17232,"regenerate":58887}}
+[nonlinear_functions/hard/spr] 0/2 (라운드 1, 통과 0/2, 호출 34)
+{"event":"problem_generation_item_accepted","elapsedMs":172144,"acceptedSoFar":5}
+[pipeline] 독립 검사 오류: (input.design.key_relations ?? []).join is not a function
+{"event":"problem_generation_item_accepted","elapsedMs":117885,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":119062,"acceptedSoFar":2}
+{"event":"problem_generation_item_accepted","elapsedMs":121064,"acceptedSoFar":3}
+[pipeline] 독립 검사 오류: (input.design.key_relations ?? []).join is not a function
+{"event":"problem_generation_item_accepted","elapsedMs":72667,"acceptedSoFar":1}
+[pipeline] 독립 검사 오류: (input.design.key_relations ?? []).join is not a function
+{"event":"problem_generation_pipeline_timing","requested":6,"accepted":6,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":358503,"generate":224412,"figure":50071,"contractRepair":4467,"answerExplanationCheck":61533,"review":156665,"regenerate":100890}}
+[systems_linear/hard/mc] 6/6 (라운드 1, 통과 6/6, 호출 9.5)
+{"event":"problem_generation_item_accepted","elapsedMs":38019,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":216059,"acceptedSoFar":5}
+{"event":"problem_generation_item_accepted","elapsedMs":48464,"acceptedSoFar":2}
+[pipeline] 자료 생성 실패: plane AI 가 만든 그림 데이터가 규격에 맞지 않습니다 — 객체 f 의 kind 를 모릅니다: exponential (받은 데이터: {"type":"plane","axes":{"x":{"min":-2,"max":5,"step":1,"title":"Time (hours)"},"y":{"min":0,"max":20,"step":2,"title":"Population (thousands)"}},"objects":[{"id":"P0","kind":"point","at":[0,10],"label":"(0, 10)"},{"id":"P1","kind":"point","at":[2,16.25],"label":"(2, 16.25)"},{"id":"f","kind":"exponential","fn":"exponential","params":[5,1.5,5],"label":"P","domain":[-2,5]}]})
+{"event":"problem_generation_pipeline_timing","requested":5,"accepted":5,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":212412,"generate":185823,"figure":36821,"contractRepair":0,"answerExplanationCheck":0,"review":63032,"regenerate":66815}}
+[nonlinear_equations_systems/hard/spr] 5/5 (라운드 1, 통과 5/5, 호출 7.4)
+[pipeline] 자료 생성 실패: plane AI 가 만든 그림 데이터가 규격에 맞지 않습니다 — 직선 axis 는 through 두 점 또는 slope/intercept 가 필요합니다. (받은 데이터: {"type":"plane","axes":{"x":{"min":-1,"max":7,"step":1,"title":"Horizontal distance (meters)"},"y":{"min":-1,"max":9,"step":1,"title":"Height (meters)"}},"objects":[{"id":"f","kind":"function","fn":"quadratic","params":[-2,12,-10],"label":"f","domain":[1,5]},{"id":"V","kind":"point","at":[3,8],"label":"Vertex"},{"id":"L","kind":"point","at":[5,0],"label":"Landing point"},{"id":"P","kind":"point","…)
+{"event":"problem_generation_item_accepted","elapsedMs":225880,"acceptedSoFar":6}
+{"event":"problem_generation_item_accepted","elapsedMs":136617,"acceptedSoFar":4}
+{"event":"problem_generation_item_accepted","elapsedMs":228395,"acceptedSoFar":7}
+{"event":"problem_generation_item_accepted","elapsedMs":153842,"acceptedSoFar":4}
+{"event":"problem_generation_item_accepted","elapsedMs":138259,"acceptedSoFar":5}
+{"event":"problem_generation_item_accepted","elapsedMs":155540,"acceptedSoFar":5}
+[pipeline] 자료 생성 실패: plane AI 가 만든 그림 데이터가 규격에 맞지 않습니다 — 직선 axis 는 through 두 점 또는 slope/intercept 가 필요합니다. (받은 데이터: {"type":"plane","axes":{"x":{"min":-1,"max":7,"step":1,"title":"Horizontal distance (m)"},"y":{"min":-1,"max":9,"step":1,"title":"Height (m)"}},"objects":[{"id":"f","kind":"function","fn":"quadratic","params":[-2,12,-10],"label":"f","domain":[1,5]},{"id":"V","kind":"point","at":[3,8],"label":"Vertex"},{"id":"L","kind":"point","at":[5,0],"label":"Landing point"},{"id":"axis","kind":"line","slope":"…)
+{"event":"problem_generation_pipeline_timing","requested":2,"accepted":2,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":68501,"generate":50625,"figure":21126,"contractRepair":0,"answerExplanationCheck":0,"review":20143,"regenerate":41697}}
+[nonlinear_functions/hard/spr] 2/2 (라운드 2, 통과 2/2, 호출 9.5)
+{"event":"problem_generation_item_accepted","elapsedMs":17632,"acceptedSoFar":1}
+{"event":"problem_generation_pipeline_timing","requested":1,"accepted":1,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":17632,"generate":5602,"figure":1872,"contractRepair":1808,"answerExplanationCheck":0,"review":3132,"regenerate":5217}}
+[percentages/easy/spr] 1/1 (라운드 1, 통과 1/1, 호출 5)
+{"event":"problem_generation_item_accepted","elapsedMs":39805,"acceptedSoFar":1}
+[pipeline] 자료 생성 실패: plane AI 가 만든 그림 데이터가 규격에 맞지 않습니다 — 알 수 없는 그림 type: undefined (받은 데이터: {"axes":{"x":{"min":-5,"max":110,"step":10,"title":"Horizontal distance (feet)"},"y":{"min":-2,"max":15,"step":1,"title":"Height (feet)"}},"objects":[{"id":"f","kind":"function","fn":"quadratic","params":[-0.02,2,8],"label":"f","domain":[0,100]},{"id":"rail","kind":"line","slope":0,"intercept":8,"label":"y = 8"},{"id":"V","kind":"point","at":[50,8],"label":"(50, 8)"}]})
+{"event":"problem_generation_item_accepted","elapsedMs":41858,"acceptedSoFar":2}
+{"event":"problem_generation_item_accepted","elapsedMs":244026,"acceptedSoFar":8}
+{"event":"problem_generation_item_accepted","elapsedMs":246047,"acceptedSoFar":9}
+{"event":"problem_generation_pipeline_timing","requested":5,"accepted":5,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":180930,"generate":173584,"figure":17399,"contractRepair":0,"answerExplanationCheck":44227,"review":86904,"regenerate":51290}}
+[nonlinear_functions/hard/mc] 5/5 (라운드 1, 통과 5/5, 호출 7.4)
+{"event":"problem_generation_item_accepted","elapsedMs":139245,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":145395,"acceptedSoFar":2}
+{"event":"problem_generation_pipeline_timing","requested":5,"accepted":3,"shortfall":2,"stoppedReason":"time_cap","timeMs":{"total":285437,"generate":234633,"figure":0,"contractRepair":26851,"answerExplanationCheck":0,"review":134201,"regenerate":77531}}
+[equivalent_expressions/hard/spr] 3/5 (라운드 1, 통과 3/5, 호출 14)
+{"event":"problem_generation_item_accepted","elapsedMs":271863,"acceptedSoFar":10}
+{"event":"problem_generation_pipeline_timing","requested":10,"accepted":10,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":271863,"generate":276235,"figure":71634,"contractRepair":2972,"answerExplanationCheck":70565,"review":188097,"regenerate":158584}}
+[nonlinear_equations_systems/hard/mc] 10/13 (라운드 1, 통과 10/10, 호출 7.6)
+{"event":"problem_generation_item_accepted","elapsedMs":293464,"acceptedSoFar":9}
+{"event":"problem_generation_item_accepted","elapsedMs":145727,"acceptedSoFar":2}
+{"event":"problem_generation_item_accepted","elapsedMs":295454,"acceptedSoFar":10}
+{"event":"problem_generation_item_accepted","elapsedMs":37006,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":151176,"acceptedSoFar":3}
+{"event":"problem_generation_pipeline_timing","requested":1,"accepted":1,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":53508,"generate":27547,"figure":10573,"contractRepair":0,"answerExplanationCheck":0,"review":9459,"regenerate":15385}}
+[percentages/hard/spr] 1/1 (라운드 1, 통과 1/1, 호출 9)
+{"event":"problem_generation_item_accepted","elapsedMs":37774,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":93068,"acceptedSoFar":3}
+{"event":"problem_generation_item_accepted","elapsedMs":40122,"acceptedSoFar":2}
+{"event":"problem_generation_pipeline_timing","requested":2,"accepted":2,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":40122,"generate":25854,"figure":0,"contractRepair":0,"answerExplanationCheck":6247,"review":19939,"regenerate":0}}
+[one_variable_data/easy/mc] 2/2 (라운드 1, 통과 2/2, 호출 2.5)
+{"event":"problem_generation_pipeline_timing","requested":3,"accepted":3,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":171124,"generate":97699,"figure":37826,"contractRepair":4068,"answerExplanationCheck":0,"review":75976,"regenerate":68491}}
+[ratios_rates_units/hard/spr] 3/3 (라운드 1, 통과 3/3, 호출 13)
+{"event":"problem_generation_pipeline_timing","requested":10,"accepted":10,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":323160,"generate":281204,"figure":0,"contractRepair":17520,"answerExplanationCheck":93581,"review":263892,"regenerate":59612}}
+[equivalent_expressions/hard/mc] 10/13 (라운드 1, 통과 10/10, 호출 5.5)
+{"event":"problem_generation_item_accepted","elapsedMs":9529,"acceptedSoFar":1}
+{"event":"problem_generation_pipeline_timing","requested":1,"accepted":1,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":9529,"generate":6318,"figure":0,"contractRepair":0,"answerExplanationCheck":0,"review":3211,"regenerate":0}}
+[one_variable_data/easy/spr] 1/1 (라운드 1, 통과 1/1, 호출 2)
+{"event":"problem_generation_item_accepted","elapsedMs":10071,"acceptedSoFar":1}
+{"event":"problem_generation_pipeline_timing","requested":1,"accepted":1,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":10071,"generate":6803,"figure":0,"contractRepair":0,"answerExplanationCheck":0,"review":3268,"regenerate":0}}
+[two_variable_data/easy/spr] 1/1 (라운드 1, 통과 1/1, 호출 2)
+{"event":"problem_generation_item_accepted","elapsedMs":127056,"acceptedSoFar":4}
+{"event":"problem_generation_pipeline_timing","requested":4,"accepted":4,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":127056,"generate":65933,"figure":23412,"contractRepair":0,"answerExplanationCheck":15408,"review":59732,"regenerate":22711}}
+[percentages/easy/mc] 4/4 (라운드 1, 통과 4/4, 호출 7.5)
+LaTeX-incompatible input and strict mode is set to 'warn': Unicode text character "천" used in math mode [unicodeTextInMathMode]
+LaTeX-incompatible input and strict mode is set to 'warn': Unicode text character "에" used in math mode [unicodeTextInMathMode]
+LaTeX-incompatible input and strict mode is set to 'warn': Unicode text character "천" used in math mode [unicodeTextInMathMode]
+LaTeX-incompatible input and strict mode is set to 'warn': Unicode text character "에" used in math mode [unicodeTextInMathMode]
+LaTeX-incompatible input and strict mode is set to 'warn': Unicode text character "천" used in math mode [unicodeTextInMathMode]
+LaTeX-incompatible input and strict mode is set to 'warn': Unicode text character "에" used in math mode [unicodeTextInMathMode]
+LaTeX-incompatible input and strict mode is set to 'warn': Unicode text character "천" used in math mode [unicodeTextInMathMode]
+LaTeX-incompatible input and strict mode is set to 'warn': Unicode text character "에" used in math mode [unicodeTextInMathMode]
+{"event":"problem_generation_item_accepted","elapsedMs":36789,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":251356,"acceptedSoFar":6}
+{"event":"problem_generation_pipeline_timing","requested":6,"accepted":6,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":251357,"generate":104950,"figure":19958,"contractRepair":0,"answerExplanationCheck":27858,"review":142526,"regenerate":32402}}
+[ratios_rates_units/easy/mc] 6/6 (라운드 1, 통과 6/6, 호출 7.17)
+{"event":"problem_generation_item_accepted","elapsedMs":111667,"acceptedSoFar":1}
+{"event":"problem_generation_pipeline_timing","requested":1,"accepted":0,"shortfall":1,"stoppedReason":"candidate_cap","timeMs":{"total":40424,"generate":13731,"figure":6041,"contractRepair":7719,"answerExplanationCheck":0,"review":0,"regenerate":12930}}
+[probability/easy/spr] 0/1 (라운드 1, 통과 0/1, 호출 10)
+{"event":"problem_generation_item_accepted","elapsedMs":115751,"acceptedSoFar":2}
+{"event":"problem_generation_item_accepted","elapsedMs":116768,"acceptedSoFar":3}
+{"event":"problem_generation_item_accepted","elapsedMs":11308,"acceptedSoFar":1}
+{"event":"problem_generation_pipeline_timing","requested":1,"accepted":1,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":11308,"generate":7635,"figure":0,"contractRepair":0,"answerExplanationCheck":0,"review":3673,"regenerate":0}}
+[inference_margin_error/easy/spr] 1/1 (라운드 1, 통과 1/1, 호출 2)
+{"event":"problem_generation_item_accepted","elapsedMs":29562,"acceptedSoFar":1}
+{"event":"problem_generation_pipeline_timing","requested":1,"accepted":1,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":29563,"generate":15580,"figure":0,"contractRepair":0,"answerExplanationCheck":3154,"review":10827,"regenerate":0}}
+[inference_margin_error/easy/mc] 1/1 (라운드 1, 통과 1/1, 호출 3)
+{"event":"problem_generation_item_accepted","elapsedMs":67567,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":130593,"acceptedSoFar":4}
+{"event":"problem_generation_item_accepted","elapsedMs":70988,"acceptedSoFar":2}
+{"event":"problem_generation_item_accepted","elapsedMs":21211,"acceptedSoFar":1}
+{"event":"problem_generation_pipeline_timing","requested":1,"accepted":1,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":21211,"generate":7585,"figure":1402,"contractRepair":2438,"answerExplanationCheck":0,"review":3766,"regenerate":6018}}
+[probability/easy/spr] 1/1 (라운드 2, 통과 1/1, 호출 5)
+{"event":"problem_generation_pipeline_timing","requested":4,"accepted":4,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":144033,"generate":153216,"figure":6330,"contractRepair":2703,"answerExplanationCheck":22431,"review":83398,"regenerate":16103}}
+[percentages/hard/mc] 4/4 (라운드 1, 통과 4/4, 호출 5.5)
+{"event":"problem_generation_item_accepted","elapsedMs":23471,"acceptedSoFar":1}
+{"event":"problem_generation_pipeline_timing","requested":1,"accepted":1,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":23471,"generate":7704,"figure":7340,"contractRepair":0,"answerExplanationCheck":0,"review":3794,"regenerate":4633}}
+[inference_margin_error/medium/spr] 1/1 (라운드 1, 통과 1/1, 호출 5)
+{"event":"problem_generation_item_accepted","elapsedMs":259361,"acceptedSoFar":3}
+{"event":"problem_generation_item_accepted","elapsedMs":83830,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":115805,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":36700,"acceptedSoFar":1}
+{"event":"problem_generation_pipeline_timing","requested":1,"accepted":1,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":36700,"generate":19041,"figure":0,"contractRepair":0,"answerExplanationCheck":8201,"review":9458,"regenerate":0}}
+[inference_margin_error/medium/mc] 1/1 (라운드 1, 통과 1/1, 호출 3)
+{"event":"problem_generation_item_accepted","elapsedMs":120330,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":122058,"acceptedSoFar":2}
+{"event":"problem_generation_item_accepted","elapsedMs":122128,"acceptedSoFar":3}
+{"event":"problem_generation_item_accepted","elapsedMs":102742,"acceptedSoFar":2}
+{"event":"problem_generation_item_accepted","elapsedMs":280911,"acceptedSoFar":4}
+{"event":"problem_generation_item_accepted","elapsedMs":32776,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":111577,"acceptedSoFar":2}
+{"event":"problem_generation_item_accepted","elapsedMs":113750,"acceptedSoFar":3}
+{"event":"problem_generation_item_accepted","elapsedMs":114147,"acceptedSoFar":4}
+{"event":"problem_generation_pipeline_timing","requested":4,"accepted":4,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":114147,"generate":60006,"figure":4658,"contractRepair":0,"answerExplanationCheck":16627,"review":64837,"regenerate":9342}}
+[probability/easy/mc] 4/4 (라운드 1, 통과 4/4, 호출 4)
+{"event":"problem_generation_item_accepted","elapsedMs":297418,"acceptedSoFar":5}
+[pipeline] 자료 생성 실패: data AI 가 만든 그림 데이터가 규격에 맞지 않습니다 — title 은 90자 이내 문자열입니다. (받은 데이터: {"type":"data","kind":"statement","title":"","facts":[],"note":""})
+{"event":"problem_generation_item_accepted","elapsedMs":131106,"acceptedSoFar":3}
+{"event":"problem_generation_item_accepted","elapsedMs":142802,"acceptedSoFar":3}
+{"event":"problem_generation_item_accepted","elapsedMs":171203,"acceptedSoFar":2}
+{"event":"problem_generation_pipeline_timing","requested":2,"accepted":2,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":171203,"generate":168583,"figure":0,"contractRepair":18677,"answerExplanationCheck":0,"review":59869,"regenerate":37896}}
+[equivalent_expressions/hard/spr] 5/5 (라운드 2, 통과 2/2, 호출 9)
+{"event":"problem_generation_pipeline_timing","requested":3,"accepted":3,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":179583,"generate":161853,"figure":9255,"contractRepair":0,"answerExplanationCheck":20882,"review":81482,"regenerate":12975}}
+[nonlinear_equations_systems/hard/mc] 13/13 (라운드 2, 통과 3/3, 호출 7.67)
+{"event":"problem_generation_item_accepted","elapsedMs":62475,"acceptedSoFar":1}
+{"event":"problem_generation_pipeline_timing","requested":1,"accepted":1,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":62475,"generate":15635,"figure":3555,"contractRepair":0,"answerExplanationCheck":0,"review":27722,"regenerate":15550}}
+[lines_angles_triangles/easy/spr] 1/1 (라운드 1, 통과 1/1, 호출 13)
+{"event":"problem_generation_pipeline_timing","requested":3,"accepted":3,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":151854,"generate":102335,"figure":0,"contractRepair":0,"answerExplanationCheck":35109,"review":149431,"regenerate":61275}}
+[equivalent_expressions/hard/mc] 13/13 (라운드 2, 통과 3/3, 호출 8)
+{"event":"problem_generation_item_accepted","elapsedMs":79791,"acceptedSoFar":2}
+{"event":"problem_generation_pipeline_timing","requested":2,"accepted":2,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":79791,"generate":23340,"figure":2091,"contractRepair":0,"answerExplanationCheck":7972,"review":46464,"regenerate":9356}}
+[lines_angles_triangles/easy/mc] 2/2 (라운드 1, 통과 2/2, 호출 5)
+{"event":"problem_generation_item_accepted","elapsedMs":338067,"acceptedSoFar":6}
+{"event":"problem_generation_pipeline_timing","requested":8,"accepted":6,"shortfall":2,"stoppedReason":"candidate_cap","timeMs":{"total":338067,"generate":323259,"figure":153266,"contractRepair":8657,"answerExplanationCheck":62636,"review":186796,"regenerate":316468}}
+[ratios_rates_units/hard/mc] 6/8 (라운드 1, 통과 6/8, 호출 22.67)
+{"event":"problem_generation_item_accepted","elapsedMs":173792,"acceptedSoFar":4}
+{"event":"problem_generation_pipeline_timing","requested":4,"accepted":4,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":173792,"generate":73060,"figure":8540,"contractRepair":3090,"answerExplanationCheck":22277,"review":142615,"regenerate":28898}}
+[two_variable_data/easy/mc] 4/4 (라운드 1, 통과 4/4, 호출 8.75)
+{"event":"problem_generation_item_accepted","elapsedMs":13106,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":30080,"acceptedSoFar":2}
+{"event":"problem_generation_pipeline_timing","requested":2,"accepted":2,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":30080,"generate":14520,"figure":1677,"contractRepair":4985,"answerExplanationCheck":0,"review":6674,"regenerate":5490}}
+[right_triangles_trigonometry/easy/spr] 2/2 (라운드 1, 통과 2/2, 호출 4)
+[pipeline] 자료 생성 실패: triangle AI 가 만든 그림 데이터가 규격에 맞지 않습니다 — sides[].between 은 서로 다른 꼭짓점 2개여야 합니다. (받은 데이터: {"type":"triangle","vertices":["P","Q","R"],"kind":"scalene","sides":[{"between":["P","M"],"label":"9"},{"between":["M","Q"],"label":"9"},{"between":["Q","R"],"label":"24"}],"second":{"vertices":["M","N"],"scale":0.5},"notToScale":true})
+[pipeline] 자료 생성 실패: triangle AI 가 만든 그림 데이터가 규격에 맞지 않습니다 — sides[].between 은 서로 다른 꼭짓점 2개여야 합니다. (받은 데이터: {"type":"triangle","vertices":["A","B","C"],"kind":"isosceles","sides":[{"between":["A","B"],"tick":1},{"between":["A","C"],"tick":1},{"between":["B","D"],"tick":2},{"between":["D","C"],"tick":2}],"angles":[{"at":"A","label":"46°"},{"at":"D","label":"x°"}],"altitude":{"from":"A","foot":"D","label":"AD"},"notToScale":true})
+{"event":"problem_generation_item_accepted","elapsedMs":52049,"acceptedSoFar":1}
+[pipeline] 자료 생성 실패: triangle AI 가 만든 그림 데이터가 규격에 맞지 않습니다 — sides[].between 은 서로 다른 꼭짓점 2개여야 합니다. (받은 데이터: {"type":"triangle","vertices":["P","Q","R"],"kind":"scalene","sides":[{"between":["P","M"],"label":"9"},{"between":["M","Q"],"label":"9"},{"between":["Q","R"],"label":"24"}],"notToScale":true,"second":{"vertices":["P","M","N"],"scale":0.5}})
+{"event":"problem_generation_item_accepted","elapsedMs":48401,"acceptedSoFar":1}
+[pipeline] 독립 검사 오류: (input.design.key_relations ?? []).join is not a function
+{"event":"problem_generation_item_accepted","elapsedMs":61833,"acceptedSoFar":2}
+{"event":"problem_generation_pipeline_timing","requested":2,"accepted":2,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":61833,"generate":28190,"figure":8376,"contractRepair":0,"answerExplanationCheck":0,"review":19829,"regenerate":20613}}
+[lines_angles_triangles/medium/spr] 2/2 (라운드 1, 통과 2/2, 호출 6)
+[pipeline] 자료 생성 실패: triangle AI 가 만든 그림 데이터가 규격에 맞지 않습니다 — second.vertices 는 꼭짓점 이름 3개여야 합니다. (받은 데이터: {"type":"triangle","vertices":["A","B","C"],"kind":"isosceles","sides":[{"between":["A","B"],"tick":1},{"between":["A","C"],"tick":1}],"angles":[{"at":"A","label":"46°"}],"altitude":{"from":"A","foot":"D"},"second":{"vertices":["D","E"],"scale":1}})
+[pipeline] 자료 생성 실패: triangle AI 가 만든 그림 데이터가 규격에 맞지 않습니다 — sides[].between 은 서로 다른 꼭짓점 2개여야 합니다. (받은 데이터: {"type":"triangle","vertices":["P","Q","R"],"kind":"scalene","sides":[{"between":["P","M"],"label":"9"},{"between":["M","Q"],"label":"9"},{"between":["Q","R"],"label":"24"}],"notToScale":true,"second":{"vertices":["P","M","N"],"scale":0.5}})
+{"event":"problem_generation_item_accepted","elapsedMs":130588,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":131729,"acceptedSoFar":2}
+{"event":"problem_generation_item_accepted","elapsedMs":133523,"acceptedSoFar":3}
+{"event":"problem_generation_pipeline_timing","requested":3,"accepted":3,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":133524,"generate":105239,"figure":6031,"contractRepair":16318,"answerExplanationCheck":15421,"review":42348,"regenerate":0}}
+[evaluating_statistical_claims/medium/mc] 3/3 (라운드 1, 통과 3/3, 호출 4.67)
+{"event":"problem_generation_item_accepted","elapsedMs":63655,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":64165,"acceptedSoFar":2}
+{"event":"problem_generation_item_accepted","elapsedMs":67703,"acceptedSoFar":2}
+{"event":"problem_generation_item_accepted","elapsedMs":67954,"acceptedSoFar":3}
+{"event":"problem_generation_item_accepted","elapsedMs":73844,"acceptedSoFar":4}
+{"event":"problem_generation_item_accepted","elapsedMs":67262,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":80353,"acceptedSoFar":3}
+{"event":"problem_generation_item_accepted","elapsedMs":79274,"acceptedSoFar":5}
+{"event":"problem_generation_item_accepted","elapsedMs":117358,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":119290,"acceptedSoFar":2}
+{"event":"problem_generation_item_accepted","elapsedMs":47806,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":70140,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":80103,"acceptedSoFar":2}
+{"event":"problem_generation_pipeline_timing","requested":2,"accepted":2,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":80103,"generate":73725,"figure":27131,"contractRepair":0,"answerExplanationCheck":11329,"review":26744,"regenerate":47158}}
+[ratios_rates_units/hard/mc] 8/8 (라운드 2, 통과 2/2, 호출 11.5)
+[pipeline] 자료 생성 실패: composite AI 가 만든 그림 데이터가 규격에 맞지 않습니다 — inner.vertices 는 12자 이내 라벨입니다. (받은 데이터: {"type":"composite","outer":{"kind":"circle","radius":"r","center":"O"},"inner":{"kind":"triangle","vertices":["A","B","C"],"placement":"on_base","note":"AB is a diameter passing through center O, C is on the circle"},"shaded":"none","notToScale":true})
+{"event":"problem_generation_item_accepted","elapsedMs":54003,"acceptedSoFar":2}
+{"event":"problem_generation_item_accepted","elapsedMs":131776,"acceptedSoFar":3}
+[pipeline] 자료 생성 실패: circle AI 가 만든 그림 데이터가 규격에 맞지 않습니다 — tangents[].external 은 새 이름이어야 합니다. (받은 데이터: {"type":"circle","center":"O","points":[{"id":"A","angle":150},{"id":"B","angle":30},{"id":"P","angle":0}],"radii":[{"to":"A","label":"12"},{"to":"B","label":"12"}],"chords":[{"between":["A","B"],"label":"AB","diameter":false}],"centralAngles":[{"between":["A","B"],"label":"120°","right":false}],"tangents":[{"at":"A","external":"P","label":"AP"}],"notToScale":true})
+[pipeline] 자료 생성 실패: composite AI 가 만든 그림 데이터가 규격에 맞지 않습니다 — inner.side 는 12자 이내 라벨입니다. (받은 데이터: {"type":"composite","outer":{"kind":"circle","radius":"8"},"inner":{"kind":"triangle","side":"OA=8, OB=8, angle=120°","placement":"center"},"shaded":"outer_minus_inner","notToScale":true})
+{"event":"problem_generation_item_accepted","elapsedMs":84443,"acceptedSoFar":2}
+[pipeline] 자료 생성 실패: triangle AI 가 만든 그림 데이터가 규격에 맞지 않습니다 — 직각 꼭짓점 B 에는 각 라벨을 따로 두지 않습니다(직각 표시가 대신합니다). (받은 데이터: {"type":"triangle","vertices":["T","B","Q"],"kind":"right","rightAngleAt":"B","sides":[{"between":["T","B"],"label":"120"}],"angles":[{"at":"B","label":"58°","tick":1},{"at":"B","label":"35°","tick":2}],"notToScale":true})
+[pipeline] 자료 생성 실패: circle AI 가 만든 그림 데이터가 규격에 맞지 않습니다 — centralAngles[].between 은 원 위의 점 2개여야 합니다. (받은 데이터: {"type":"circle","center":"O","points":[{"id":"A","angle":150},{"id":"B","angle":210},{"id":"M","angle":180},{"id":"T","angle":0}],"radii":[{"to":"A","label":"15"},{"to":"T","label":"15"}],"chords":[{"between":["A","B"],"label":"x","diameter":false}],"centralAngles":[{"between":["M","O"],"label":"9","right":true}],"tangents":[{"at":"T","external":"P","label":"fence"}],"notToScale":true})
+{"event":"problem_generation_item_accepted","elapsedMs":110706,"acceptedSoFar":6}
+{"event":"problem_generation_pipeline_timing","requested":6,"accepted":6,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":110706,"generate":63490,"figure":5312,"contractRepair":0,"answerExplanationCheck":17333,"review":69602,"regenerate":6911}}
+[right_triangles_trigonometry/easy/mc] 6/6 (라운드 1, 통과 6/6, 호출 4)
+[pipeline] 자료 생성 실패: circle AI 가 만든 그림 데이터가 규격에 맞지 않습니다 — tangents[].external 은 새 이름이어야 합니다. (받은 데이터: {"type":"circle","center":"O","points":[{"id":"A","angle":150},{"id":"B","angle":30},{"id":"P","angle":0}],"radii":[{"to":"A","label":"12"},{"to":"B","label":"12"}],"chords":[{"between":["A","B"],"label":"AB","diameter":false}],"centralAngles":[{"between":["A","B"],"label":"120°","right":false}],"tangents":[{"at":"A","external":"P","label":"AP"}],"notToScale":true})
+[pipeline] 자료 생성 실패: triangle AI 가 만든 그림 데이터가 규격에 맞지 않습니다 — 직각 꼭짓점 B 에는 각 라벨을 따로 두지 않습니다(직각 표시가 대신합니다). (받은 데이터: {"type":"triangle","vertices":["T","B","Q"],"kind":"right","rightAngleAt":"B","sides":[{"between":["T","B"],"label":"120"}],"angles":[{"at":"B","label":"58°"},{"at":"B","label":"35°"}],"notToScale":true})
+[pipeline] 자료 생성 실패: triangle AI 가 만든 그림 데이터가 규격에 맞지 않습니다 — sides[].between 은 서로 다른 꼭짓점 2개여야 합니다. (받은 데이터: {"type":"triangle","vertices":["L","K","N"],"kind":"right","rightAngleAt":"K","sides":[{"between":["K","N"],"label":"KN"},{"between":["M","N"],"label":"40"}],"angles":[{"at":"M","label":"58°"},{"at":"N","label":"37°"}],"notToScale":true})
+{"event":"problem_generation_pipeline_timing","requested":1,"accepted":0,"shortfall":1,"stoppedReason":"candidate_cap","timeMs":{"total":62371,"generate":34493,"figure":28577,"contractRepair":0,"answerExplanationCheck":0,"review":0,"regenerate":26225}}
+[circles/hard/spr] 0/1 (라운드 1, 통과 0/1, 호출 16)
+{"event":"problem_generation_item_accepted","elapsedMs":73178,"acceptedSoFar":1}
+[pipeline] 자료 생성 실패: circle AI 가 만든 그림 데이터가 규격에 맞지 않습니다 — tangents[].external 은 새 이름이어야 합니다. (받은 데이터: {"type":"circle","center":"O","points":[{"id":"A","angle":150},{"id":"B","angle":30},{"id":"P","angle":-30}],"radii":[{"to":"A","label":"12"},{"to":"B","label":"OB"}],"chords":[{"between":["A","B"],"label":"AB","diameter":false}],"centralAngles":[{"between":["A","B"],"label":"120°","right":false}],"tangents":[{"at":"A","external":"P","label":"AP"}],"notToScale":true})
+{"event":"problem_generation_item_accepted","elapsedMs":113627,"acceptedSoFar":3}
+{"event":"problem_generation_item_accepted","elapsedMs":119830,"acceptedSoFar":4}
+[pipeline] 자료 생성 실패: triangle AI 가 만든 그림 데이터가 규격에 맞지 않습니다 — sides[].between 은 서로 다른 꼭짓점 2개여야 합니다. (받은 데이터: {"type":"triangle","vertices":["L","K","N"],"kind":"right","rightAngleAt":"K","sides":[{"between":["K","L"],"label":"h"},{"between":["M","N"],"label":"40"}],"angles":[{"at":"M","label":"58°"},{"at":"N","label":"37°"}],"notToScale":true})
+{"event":"problem_generation_item_accepted","elapsedMs":184457,"acceptedSoFar":4}
+{"event":"problem_generation_item_accepted","elapsedMs":190407,"acceptedSoFar":5}
+{"event":"problem_generation_pipeline_timing","requested":5,"accepted":5,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":190407,"generate":100626,"figure":14857,"contractRepair":0,"answerExplanationCheck":27299,"review":175089,"regenerate":49150}}
+[lines_angles_triangles/medium/mc] 5/5 (라운드 1, 통과 5/5, 호출 8.6)
+{"event":"problem_generation_item_accepted","elapsedMs":155027,"acceptedSoFar":1}
+[pipeline] 자료 생성 실패: triangle AI 가 만든 그림 데이터가 규격에 맞지 않습니다 — sides[].between 은 서로 다른 꼭짓점 2개여야 합니다. (받은 데이터: {"type":"triangle","vertices":["A","B","C"],"kind":"right","rightAngleAt":"B","sides":[{"between":["A","D"],"label":"4"},{"between":["D","C"],"label":"9"}],"altitude":{"from":"B","foot":"D","label":"BD"}})
+[pipeline] 자료 생성 실패: triangle AI 가 만든 그림 데이터가 규격에 맞지 않습니다 — sides[].between 은 서로 다른 꼭짓점 2개여야 합니다. (받은 데이터: {"type":"triangle","vertices":["A","B","C"],"kind":"right","rightAngleAt":"B","sides":[{"between":["A","D"],"label":"4"},{"between":["D","C"],"label":"9"}],"altitude":{"from":"B","foot":"D","label":"BD"},"notToScale":true})
+[pipeline] 자료 생성 실패: triangle AI 가 만든 그림 데이터가 규격에 맞지 않습니다 — sides[].between 은 서로 다른 꼭짓점 2개여야 합니다. (받은 데이터: {"type":"triangle","vertices":["A","B","C"],"kind":"right","rightAngleAt":"B","sides":[{"between":["A","D"],"label":"4"},{"between":["D","C"],"label":"9"}],"altitude":{"from":"B","foot":"D","label":"BD"}})
+{"event":"problem_generation_pipeline_timing","requested":1,"accepted":0,"shortfall":1,"stoppedReason":"candidate_cap","timeMs":{"total":68791,"generate":35126,"figure":16737,"contractRepair":12859,"answerExplanationCheck":0,"review":0,"regenerate":30980}}
+[circles/hard/spr] 0/1 (라운드 2, 통과 0/1, 호출 15)
+{"event":"problem_generation_pipeline_timing","requested":2,"accepted":1,"shortfall":1,"stoppedReason":"candidate_cap","timeMs":{"total":194219,"generate":78664,"figure":28169,"contractRepair":4016,"answerExplanationCheck":0,"review":75082,"regenerate":92393}}
+[lines_angles_triangles/hard/spr] 1/2 (라운드 1, 통과 1/2, 호출 36)
+{"event":"problem_generation_pipeline_timing","requested":3,"accepted":2,"shortfall":1,"stoppedReason":"candidate_cap","timeMs":{"total":160346,"generate":107381,"figure":35295,"contractRepair":15669,"answerExplanationCheck":0,"review":19971,"regenerate":95542}}
+[right_triangles_trigonometry/hard/spr] 2/3 (라운드 1, 통과 2/3, 호출 20)
+{"event":"problem_generation_pipeline_timing","requested":2,"accepted":1,"shortfall":1,"stoppedReason":"candidate_cap","timeMs":{"total":150453,"generate":67962,"figure":29311,"contractRepair":6168,"answerExplanationCheck":15802,"review":71752,"regenerate":80358}}
+[circles/hard/mc] 1/2 (라운드 1, 통과 1/2, 호출 33)
+[pipeline] 자료 생성 실패: triangle AI 가 만든 그림 데이터가 규격에 맞지 않습니다 — sides[].between 은 서로 다른 꼭짓점 2개여야 합니다. (받은 데이터: {"type":"triangle","vertices":["A","B","C"],"kind":"scalene","sides":[{"between":["A","D"],"label":"8"},{"between":["D","B"],"label":"4"}],"second":{"vertices":["A","D","E"],"sides":[{"between":["D","E"],"label":"10"}]},"notToScale":true})
+[pipeline] 자료 생성 실패: triangle AI 가 만든 그림 데이터가 규격에 맞지 않습니다 — second.vertices 는 꼭짓점 이름 3개여야 합니다. (받은 데이터: {"type":"triangle","vertices":["P","Q","R"],"kind":"scalene","sides":[{"between":["P","Q"],"label":"PS=8, SQ=4"},{"between":["P","R"],"label":""}],"second":{"vertices":["S","T"],"note":"S on PQ, T on PR, ST parallel to QR","sides":[{"between":["S","T"],"label":"10"}]},"notToScale":true})
+[pipeline] 자료 생성 실패: triangle AI 가 만든 그림 데이터가 규격에 맞지 않습니다 — sides[].between 은 서로 다른 꼭짓점 2개여야 합니다. (받은 데이터: {"type":"triangle","vertices":["P","Q","R"],"kind":"scalene","sides":[{"between":["P","S"],"label":"8"},{"between":["S","Q"],"label":"4"},{"between":["S","T"],"label":"10"},{"between":["Q","R"],"label":"QR"}],"second":{"vertices":["S","T"],"note":"S on PQ, T on PR, ST parallel to QR"},"notToScale":true})
+{"event":"problem_generation_item_accepted","elapsedMs":32241,"acceptedSoFar":1}
+{"event":"problem_generation_pipeline_timing","requested":5,"accepted":0,"shortfall":5,"stoppedReason":"time_cap","timeMs":{"total":315535,"generate":315534,"figure":0,"contractRepair":0,"answerExplanationCheck":0,"review":0,"regenerate":0}}
+[evaluating_statistical_claims/easy/mc] 0/5 (라운드 1, 통과 0/5, 호출 4)
+{"event":"problem_generation_item_accepted","elapsedMs":216504,"acceptedSoFar":5}
+{"event":"problem_generation_item_accepted","elapsedMs":40991,"acceptedSoFar":1}
+{"event":"problem_generation_pipeline_timing","requested":1,"accepted":1,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":44719,"generate":35268,"figure":0,"contractRepair":0,"answerExplanationCheck":0,"review":15161,"regenerate":0}}
+[lines_angles_triangles/hard/spr] 2/2 (라운드 2, 통과 1/1, 호출 3)
+{"event":"problem_generation_pipeline_timing","requested":1,"accepted":1,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":42090,"generate":22287,"figure":9507,"contractRepair":0,"answerExplanationCheck":0,"review":9951,"regenerate":10279}}
+[right_triangles_trigonometry/hard/spr] 3/3 (라운드 2, 통과 1/1, 호출 9)
+{"event":"problem_generation_pipeline_timing","requested":8,"accepted":5,"shortfall":3,"stoppedReason":"time_cap","timeMs":{"total":242029,"generate":224514,"figure":74445,"contractRepair":16766,"answerExplanationCheck":35222,"review":85841,"regenerate":191356}}
+[right_triangles_trigonometry/hard/mc] 5/8 (라운드 1, 통과 5/8, 호출 16.6)
+{"event":"problem_generation_item_accepted","elapsedMs":76021,"acceptedSoFar":1}
+{"event":"problem_generation_pipeline_timing","requested":5,"accepted":3,"shortfall":2,"stoppedReason":"candidate_cap","timeMs":{"total":284860,"generate":103696,"figure":51226,"contractRepair":14945,"answerExplanationCheck":27433,"review":123966,"regenerate":127162}}
+[lines_angles_triangles/hard/mc] 3/5 (라운드 1, 통과 3/5, 호출 21.33)
+{"event":"problem_generation_pipeline_timing","requested":1,"accepted":0,"shortfall":1,"stoppedReason":"candidate_cap","timeMs":{"total":94955,"generate":31940,"figure":15633,"contractRepair":3602,"answerExplanationCheck":0,"review":39810,"regenerate":33609}}
+[circles/hard/spr] 0/1 (라운드 3, 통과 0/1, 호출 18)
+{"event":"problem_generation_pipeline_timing","requested":1,"accepted":1,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":89402,"generate":57733,"figure":8225,"contractRepair":0,"answerExplanationCheck":6731,"review":24228,"regenerate":10737}}
+[circles/hard/mc] 2/2 (라운드 2, 통과 1/1, 호출 10)
+{"event":"problem_generation_item_accepted","elapsedMs":78485,"acceptedSoFar":1}
+LaTeX-incompatible input and strict mode is set to 'warn': Unicode text character "대" used in math mode [unicodeTextInMathMode]
+{"event":"problem_generation_item_accepted","elapsedMs":79425,"acceptedSoFar":2}
+LaTeX-incompatible input and strict mode is set to 'warn': Unicode text character "대" used in math mode [unicodeTextInMathMode]
+{"event":"problem_generation_item_accepted","elapsedMs":97421,"acceptedSoFar":3}
+{"event":"problem_generation_item_accepted","elapsedMs":103763,"acceptedSoFar":4}
+LaTeX-incompatible input and strict mode is set to 'warn': Unicode text character "대" used in math mode [unicodeTextInMathMode]
+{"event":"problem_generation_item_accepted","elapsedMs":124752,"acceptedSoFar":5}
+{"event":"problem_generation_pipeline_timing","requested":5,"accepted":5,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":124752,"generate":58998,"figure":0,"contractRepair":11159,"answerExplanationCheck":29646,"review":92849,"regenerate":0}}
+[evaluating_statistical_claims/easy/mc] 5/5 (라운드 2, 통과 5/5, 호출 5.2)
+{"event":"problem_generation_item_accepted","elapsedMs":117035,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":94485,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":134968,"acceptedSoFar":2}
+{"event":"problem_generation_pipeline_timing","requested":2,"accepted":1,"shortfall":1,"stoppedReason":"candidate_cap","timeMs":{"total":120188,"generate":125041,"figure":27895,"contractRepair":0,"answerExplanationCheck":7708,"review":11123,"regenerate":38387}}
+[lines_angles_triangles/hard/mc] 4/5 (라운드 2, 통과 1/2, 호출 26)
+{"event":"problem_generation_item_accepted","elapsedMs":164263,"acceptedSoFar":3}
+{"event":"problem_generation_pipeline_timing","requested":3,"accepted":3,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":164264,"generate":141754,"figure":19391,"contractRepair":0,"answerExplanationCheck":15792,"review":65883,"regenerate":35299}}
+[right_triangles_trigonometry/hard/mc] 8/8 (라운드 2, 통과 3/3, 호출 9.67)
+{"event":"problem_generation_item_accepted","elapsedMs":42434,"acceptedSoFar":1}
+{"event":"problem_generation_pipeline_timing","requested":1,"accepted":1,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":78096,"generate":30108,"figure":2236,"contractRepair":10538,"answerExplanationCheck":8665,"review":23440,"regenerate":15415}}
+[lines_angles_triangles/hard/mc] 5/5 (라운드 3, 통과 1/1, 호출 8)
+생성 완료

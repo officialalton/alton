@@ -1,0 +1,108 @@
+{
+ "kind": "ap_new_version_swap_plan",
+ "set": "LT1",
+ "sourceSetName": "AP English Literature — Practice Exam 1",
+ "sourceVersionNo": 2,
+ "generatedBy": "scripts/ap-generation/lt-real-2-plans.ts",
+ "note": "Stage 2 (source = Stage 1 published v2): ① MC 단편 세트 s05(ALTON 작성, 13문항) → ls3(Chopin 'A Pair of Silk Stockings' 문단 1–13, 13문항) ② MC 장편 세트 l04(ALTON 작성, 10문항) → ll4(Austen Persuasion 1장 문단 1–10, 10문항) ③ FRQ Q2 fb2(ALTON 작성 산문) → rf3(Crane 'The Open Boat' I장 문단 1–10, 677단어). 같은 칸·같은 크기·같은 장르 묶음. 교체 뒤 구성은 독립 검증기 위반 0.",
+ "swapCount": 3,
+ "verifierViolations": [],
+ "swaps": [
+  {
+   "section": "ap_mc",
+   "position": 12,
+   "removeKey": "englit-p1-a:ap_english_literature-s05-k0",
+   "addKey": "lt-real-2:ap_english_literature-real-ls3-k0",
+   "remove": {
+    "kind": "mc_set",
+    "group": "short",
+    "skills": [
+     "7.B",
+     "4.B",
+     "2.B",
+     "3.D",
+     "7.C",
+     "4.A",
+     "4.D",
+     "6.D",
+     "3.A",
+     "5.D",
+     "1.B",
+     "1.A",
+     "1.C"
+    ]
+   },
+   "add": {
+    "kind": "mc_set",
+    "group": "short",
+    "skills": [
+     "1.A",
+     "4.C",
+     "3.B",
+     "6.B",
+     "5.D",
+     "1.E",
+     "4.C",
+     "2.B",
+     "4.B",
+     "7.B",
+     "1.C",
+     "3.E",
+     "3.D"
+    ]
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 46,
+   "removeKey": "englit-p1-c:ap_english_literature-l04-k0",
+   "addKey": "lt-real-2:ap_english_literature-real-ll4-k0",
+   "remove": {
+    "kind": "mc_set",
+    "group": "longer",
+    "skills": [
+     "1.B",
+     "4.B",
+     "1.D",
+     "7.B",
+     "3.F",
+     "3.E",
+     "4.D",
+     "7.C",
+     "5.C",
+     "3.D"
+    ]
+   },
+   "add": {
+    "kind": "mc_set",
+    "group": "longer",
+    "skills": [
+     "4.C",
+     "3.B",
+     "6.A",
+     "5.B",
+     "6.B",
+     "4.B",
+     "1.E",
+     "3.D",
+     "1.C",
+     "1.D"
+    ]
+   }
+  },
+  {
+   "section": "ap_frq",
+   "position": 2,
+   "removeKey": "englit-p1-b:ap_english_literature-fb2-k0",
+   "addKey": "lt-real-2:ap_english_literature-real-rf3-k0",
+   "remove": {
+    "kind": "frq",
+    "frqType": "q2"
+   },
+   "add": {
+    "kind": "frq",
+    "frqType": "q2"
+   }
+  }
+ ]
+}

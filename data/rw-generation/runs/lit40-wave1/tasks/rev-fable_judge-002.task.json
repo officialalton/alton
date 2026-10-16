@@ -1,0 +1,331 @@
+{
+ "schema": "rw-session-task/v1",
+ "kind": "review",
+ "role": "fable_judge",
+ "runId": "lit40-wave1",
+ "taskId": "rev-fable_judge-002",
+ "chunkId": "rev-fable_judge-002",
+ "suggestedModel": "fable",
+ "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-fable_judge-002.result.json",
+ "outputSchema": {
+  "chunkId": "청크 ID",
+  "model": "fable",
+  "items": [
+   {
+    "candidateId": "id",
+    "picked_letter": "A|B|C|D",
+    "other_defensible": "정답 외 방어 가능한 선택지가 있으면 true",
+    "est_difficulty": "easy|medium|hard (실제 체감, 요청 난이도에 맞추지 말 것)",
+    "hard_fit": "실제 SAT hard 수준의 사고 단계가 필요하면 true(지문 길이·난어만이면 false)",
+    "plausible_distractors": "오답 3개가 모두 그럴듯하고 서로 다른 오개념에서 나왔으면 true",
+    "length_balanced": "네 선택지 길이·구체성이 비슷해 정답이 형식으로 드러나지 않으면 true",
+    "multi_answer_risk": "복수 정답 위험이 있으면 true",
+    "issues": "한 줄 메모"
+   }
+  ]
+ },
+ "items": [
+  {
+   "candidateId": "lit40-hard-01-024",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "hard",
+   "passage": "I gave you the fishing rod on your twelfth birthday, Errol,\nand you leaned it in the corner like a broom.\nConsuelo said you wanted books. I heard her\nthe way the river hears a pebble.\nNow we stand on the stone bridge over the Hope,\nyou with your satchel, I with nothing in my hands,\nand neither of us looks down at the water\nwhere I used to fish at your age.\nYou point to a heron, stiff as a nail.\nI almost tell you that my father gave me nothing,\nthat the rod was my whole vocabulary.\nInstead I count the stones in the railing,\neach one set by someone who did not explain it.",
+   "question": "As used in the text, the phrase “the way the river hears a pebble” most nearly suggests",
+   "options": [
+    "that the speaker took in Consuelo's words without changing his course.",
+    "that the speaker found Consuelo's remark sharp and painful to accept.",
+    "that Consuelo spoke so softly the speaker could not make out her words.",
+    "that the speaker and Consuelo often argued by the river about Errol."
+   ]
+  },
+  {
+   "candidateId": "lit40-hard-01-025",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "hard",
+   "passage": "Piper had captained the girls' team at our school in Vigo for three seasons, and by the night of the winter dinner she ran the gymnasium like a deck: tables in rows, chairs squared, her grandmother's empanadas at the head. Lucia had arrived from Buenos Aires in October and came along that evening without being on any list; I think she slipped in behind the volunteers carrying folding chairs. She brought a tray of alfajores and set it down, hesitating, at the far corner. I watched Piper notice it. She said nothing. She lifted her grandmother's platter and slid it down the table until the two trays touched, then pulled up a chair at that end, the wrong end by her own rules, and sat. For the rest of the night the table listed toward Lucia's corner, a boat trimmed to an unexpected weight, and no one tried to set it straight.",
+   "question": "As used in the text, the phrase “a boat trimmed to an unexpected weight” most nearly suggests",
+   "options": [
+    "that the table was overloaded with food and close to collapsing.",
+    "that the gathering had rebalanced itself around the newcomer.",
+    "that Piper had lost control of the dinner she carefully planned.",
+    "that the guests were uneasy and wished Lucia had stayed home."
+   ]
+  },
+  {
+   "candidateId": "lit40-hard-01-026",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "hard",
+   "passage": "Three rules governed the galley of the training ship docked at Manila that summer: knives point down, nothing left on the burners, and no one cries where the cook can see. I was nineteen, newly hired to teach English to the cadets, and Anh, the cook, let me hold class at his steel tables between meals. Shira, the quietest cadet, would not answer me for weeks. So I made a plan. I asked her to translate Anh's recipes for the others, and she did, fluently, in front of everyone. The cadets applauded. Anh grinned. Shira folded the recipe card into smaller and smaller squares until it was the size of a stamp. That night I scrubbed the same pot three times. The plan had worked, I kept telling myself; the success sat in me like a meal eaten standing up.",
+   "question": "As used in the text, the phrase “like a meal eaten standing up” most nearly suggests",
+   "options": [
+    "that the narrator was too busy teaching to sit down and eat properly.",
+    "that the narrator felt physically ill from rough conditions aboard ship.",
+    "that the narrator's achievement felt hasty and gave no real satisfaction.",
+    "that the narrator was eager to celebrate the success with the whole crew."
+   ]
+  },
+  {
+   "candidateId": "lit40-hard-01-032",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "hard",
+   "passage": "Two cups of espresso cooled on the zinc counter of the station cafe in Bologna while Fiorella untied the ribbon around their mother's letters. Anneke's train to Rotterdam left at 4:10, and her suitcase held everything she meant to keep. They read the first letters aloud, laughing at the spelling, at the recipes copied into the margins, at a long complaint about a neighbor's goat. Fiorella did the voices. Then Anneke unfolded one dated the spring she had first gone away, years ago, and read it silently. Fiorella waited for the voice, and none came. Anneke set the page face down, squared it against the others, and picked up her ticket, turning it over as though it might list a different time. Fiorella retied the ribbon slowly, making the bow twice.",
+   "question": "Which choice best describes the shift in tone in the text?",
+   "options": [
+    "From bitter resentment of the mother to forgiving acceptance of her flaws",
+    "From playful shared reminiscence to a hushed tension about the departure",
+    "From anxious haste about the train to relief that there is time to spare",
+    "From detached curiosity about the letters to open grief expressed in tears"
+   ]
+  },
+  {
+   "candidateId": "lit40-hard-01-033",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "hard",
+   "passage": "Clay forgives nothing. Tamika's husband had said that to every student who walked into the studio on Seventy-First Street, and for thirty years the neighborhood had repeated it as proof of his genius. She was boxing his glazes when Ngozi arrived with the kiln parts, a lanky boy who lingered to admire the famous blue bowls on the top shelf. My uncle fired those, he said cheerfully. Your husband paid him in lunch. Tamika laughed, assuming a joke, and handed him a bowl to carry. Ngozi turned it over and showed her the mark scratched faintly into the foot, two initials that were not her husband's. She set the box of glazes down. For a while she simply moved along the shelf, bowl by bowl, turning each one over with care.",
+   "question": "Which choice best describes the shift in tone in the text?",
+   "options": [
+    "From grief-stricken mourning to cheerful celebration of the husband's work",
+    "From suspicious hostility toward Ngozi to grateful trust in his account",
+    "From affectionate pride in a legacy to a sober, searching reconsideration",
+    "From casual indifference about the bowls to an outraged public accusation"
+   ]
+  },
+  {
+   "candidateId": "lit40-hard-01-034",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "hard",
+   "passage": "Once a week the language school in Surabaya\nlent its back classroom to anyone with a map.\nThida came from the rice terraces with mud on her sandals,\nNeema from the city office with a rolled survey,\nand for an hour they practiced polite English,\nwould you, could you, may I, laughing at the verbs.\nThen Neema asked her to the ministry dinner,\nwhere the new road would be announced.\nThida closed her notebook.\nShe studied the whiteboard where the teacher\nhad written, in blue, the word boundary,\nand did not erase it, and did not answer,\nand thanked Neema, very correctly, for the invitation.",
+   "question": "Which choice best describes the shift in tone in the text?",
+   "options": [
+    "From formal distance to growing warmth as the two practice together",
+    "From confusion about English verbs to confident mastery of the lesson",
+    "From enthusiasm about the new road to disappointment at its delay",
+    "From easy shared amusement to guarded courtesy after the invitation"
+   ]
+  },
+  {
+   "candidateId": "lit40-hard-01-035",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "hard",
+   "passage": "After my grandfather's funeral in Porto Alegre, I volunteered to carry the folding chairs back up to the fourth floor, mostly so I would not have to talk. I was Fausto, the grandson who had read the eulogy, and I was proud of it; people squeezed my arm on the stairs and said how well I had captured him. On the third landing Joaquim, his oldest friend, stopped me and took two of the chairs. Lovely speech, he said. Then, while adjusting his grip, he mentioned that my grandfather had never fished a day in his life; the river stories had been Joaquim's own, told so often over dominoes that they had changed owners. He said it lightly. He carried the chairs the rest of the way. I climbed behind him counting the steps, which I had never once counted before.",
+   "question": "Which choice best describes the shift in tone in the text?",
+   "options": [
+    "From self-satisfied pride to quiet, chastened reflection",
+    "From fresh grief over the death to amusement at Joaquim",
+    "From resentment of Joaquim to admiration for his kindness",
+    "From nervous dread about speaking to relief at its success"
+   ]
+  },
+  {
+   "candidateId": "lit40-hard-01-036",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "hard",
+   "passage": "We met in the reading room of the national library in Hanoi because neither of us could raise his voice there. Bao, my older brother, had brought the shop's ledger, and I, Dayoung, had brought nothing but the acceptance letter from the university in Seoul. For twenty minutes we whispered like conspirators, trading jokes about the librarian's squeaking cart, about our father's handwriting in the ledger, about the cat that slept on the rice sacks. Then Bao turned to the last page, where the debts were listed, and laid my letter beside it. He did not say anything. He straightened the two papers until their edges matched exactly. I listened to the cart squeak past again and found that it no longer seemed funny at all.",
+   "question": "Which choice best describes the shift in tone in the text?",
+   "options": [
+    "From quiet hostility to open reconciliation between the brothers",
+    "From conspiratorial humor to a heavy and wordless reckoning",
+    "From hopeful planning to excited celebration of the letter",
+    "From bored restlessness to irritation at the noisy librarian"
+   ]
+  },
+  {
+   "candidateId": "lit40-hard-01-037",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "text_structure",
+   "requestedDifficulty": "hard",
+   "passage": "Sell it, Mehrnaz said, and you will be selling the only thing he ever tuned for both of us. Seoyeon did not answer. They stood in the radio repair shop off Oxford Street in Accra, where the technician had just lifted the back from the old valve set their late teacher had left to the two of them jointly. Inside, the tubes glowed amber. Seoyeon had come with a buyer's offer folded in her violin case; her tuition was due in a week. Mehrnaz, who corrected her bowing down to the angle of a wrist, said nothing more. The technician switched the radio on. A highlife station crackled in, then a violin concerto from somewhere far off, faint and slightly flat. Both women leaned toward it at once. Seoyeon heard Mehrnaz hum the correction under her breath, and found herself, without meaning to, humming it too.",
+   "question": "Which choice best describes the overall structure of the text?",
+   "options": [
+    "A history of the radio is given, followed by an account of its repair.",
+    "A disagreement is stated and then settled when one woman agrees to sell.",
+    "A dispute is introduced, set aside, and complicated by a shared habit.",
+    "A teacher's lesson is presented and then rejected by a defiant student."
+   ]
+  },
+  {
+   "candidateId": "lit40-hard-01-039",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "text_structure",
+   "requestedDifficulty": "hard",
+   "passage": "Port of Spain was still dark when my mother, Pearl, drove me to the diner on the highway for one last breakfast before my flight. I am Cecile, her only child, and I was leaving for a college in Toronto. She slid a wrapped box across the table: a wool scarf in the colors of a school I had not chosen, the one she had hoped for. I thanked her and put it on at once, over a T-shirt, in the heat. She praised how it looked. We ate saltfish and bake and talked about the weather in Canada. Only on the plane did I notice that she had sewn my initials into the fringe, crooked, by hand, the work of several nights. I wore it through every winter that followed, and I never told her that I knew she knew.",
+   "question": "Which choice best describes the overall structure of the text?",
+   "options": [
+    "A scene of polite pretense is shown and later reframed by a discovery.",
+    "A disagreement is recalled and then settled through frank conversation.",
+    "A journey is traced in order, ending with the author's arrival at school.",
+    "A gift is criticized, and the author then explains why it was returned."
+   ]
+  },
+  {
+   "candidateId": "lit40-hard-01-041",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "underlined_portion_function",
+   "requestedDifficulty": "hard",
+   "passage": "I had asked Younghee three times to write down the fish stew he made each winter, and three times he had laughed and pointed at the gulls over the ferry terminal, as though the birds kept his accounts. On the morning he meant to sail for his sister's island, I brought a notebook and a pencil to the waiting hall. He took neither. Instead he pressed a paper twist of dried anchovies into my palm, then a knob of ginger, then a pinch of something gray that smelled of smoke. __He named nothing, only closed my fingers over each in turn, the way a man coils rope he expects another to handle.__ When the horn sounded, he walked to the gangway without looking back. I stood a long while in the Busan wind, the notebook still blank under my arm, and found I no longer wished to fill it.",
+   "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+   "options": [
+    "It shows that Younghee has forgotten the ingredients and is hiding his confusion from the narrator.",
+    "It suggests that Younghee resents the narrator's repeated requests and wishes to end the visit.",
+    "It indicates that Younghee is handing down the recipe through touch rather than through writing.",
+    "It reveals that the narrator has finally persuaded Younghee to record the recipe in lasting form."
+   ]
+  },
+  {
+   "candidateId": "lit40-hard-01-042",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "underlined_portion_function",
+   "requestedDifficulty": "hard",
+   "passage": "Defne had ruled on harder matters than a broken dryer, but she watched Leopoldina kneel before the machine as if a verdict waited inside it. The girl had come from the courthouse on her lunch hour, still wearing her lanyard, with a screwdriver borrowed from the guard. 'The belt is worn,' Leopoldina said. 'I can tighten it. It will turn again for a month, perhaps two.' Defne said nothing about the rust spreading along the drum's seam, which she had noticed the first week the Istanbul laundromat opened. __She handed over her own coins for the test cycle and sat down to wait, folding her hands in her lap as she once had at the bench.__ The drum shuddered, caught, and began to spin. Leopoldina grinned up at her. Defne nodded slowly, the way she used to nod at lawyers whose arguments were well made and would not, in the end, prevail.",
+   "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+   "options": [
+    "It shows that Defne doubts Leopoldina's skill and plans to supervise every single step of the repair.",
+    "It suggests that Defne regrets leaving the courthouse and misses the authority of her old role.",
+    "It reveals that Defne expects the repair to last and wishes to reward the clerk's hard effort.",
+    "It conveys that Defne lets the clerk's attempt proceed respectfully despite knowing its limits."
+   ]
+  },
+  {
+   "candidateId": "lit40-hard-01-043",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "underlined_portion_function",
+   "requestedDifficulty": "hard",
+   "passage": "Four stones mark the safe path across the dry riverbed below our town in Oaxaca, and Nicolas taught me to count them aloud before I was old enough to ask why. Every crossing, my stepfather named them: the flat one, the split one, the one shaped like a shoe, the last. The summer my scholarship letter came, he walked me to the bus on the far bank. I, Katarzyna, the girl who had never left the valley, talked the whole way about tuition, about the cost of the ticket north, about how he would manage the stall alone. He answered none of it. __At the third stone he stopped, tapped it twice with his boot, and waited until I said its name.__ On the far bank he set down my suitcase and told me the river would be running by the time I came home, and that I should not try to cross it by memory.",
+   "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+   "options": [
+    "It shows Nicolas answering the narrator's worries through a familiar ritual instead of discussion.",
+    "It suggests that Nicolas is unsure of the old path and needs the narrator to guide him safely across.",
+    "It indicates that Nicolas disapproves of the scholarship and is trying to delay her departure.",
+    "It reveals that the narrator has forgotten the stones and must be taught the path once again."
+   ]
+  },
+  {
+   "candidateId": "lit40-hard-01-044",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "underlined_portion_function",
+   "requestedDifficulty": "hard",
+   "passage": "Flour dusted my stepmother's wrists before the sun was up, and by five she had already shaped forty loaves for an oven she could no longer afford to repair. I was sixteen and had told her, more than once, that the bakery in our Tbilisi lane was finished: the new supermarket sold bread cheaper, and Stanislav, who had fired the oven for my father, was nearly eighty. She never argued. She only set out cups of tea each morning, one for herself and one for Stanislav, and a third, untouched, at my place on the bench. __One morning I sat down and drank it, and she slid the scoring blade across the table toward me without a word.__ I cut the loaves badly. Stanislav laughed until he coughed. Dmitri, my friend from school, asked that afternoon why my hands smelled of yeast, and I told him I was only helping until the place closed. I said that for eleven more years.",
+   "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+   "options": [
+    "It shows the narrator finally convincing the stepmother that the bakery must be closed.",
+    "It marks the narrator's first acceptance of a role the stepmother had quietly kept open.",
+    "It suggests the stepmother is testing whether the narrator could replace Stanislav at the oven.",
+    "It reveals that the narrator joined the work only to prove the bakery could not survive."
+   ]
+  },
+  {
+   "candidateId": "lit40-hard-01-045",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "hard",
+   "passage": "When the band paused between songs, Tommaso came in through the kitchen door of the wedding hall as if he had stepped out for ice twenty minutes earlier instead of nine years. Aaliyah, the bride, did not know him; she saw only that her new mother-in-law set down her fork and did not pick it up again. He wore a pressed suit a size too large and carried a gift wrapped in newspaper. No one asked where he had been, and he offered nothing, only kissed his mother's cheek and took the empty chair by the cake table that someone, it seemed, had been keeping. Gossip along the Delta levees had long since called him a scoundrel. Yet the cake was cut beneath his hand, and the old woman ate two pieces, and the bride, watching, decided that some absences are settled in ways a guest list cannot show.",
+   "question": "Which choice best describes the narrator's attitude toward Tommaso?",
+   "options": [
+    "The narrator is openly contemptuous of his failure to explain his long absence.",
+    "The narrator is amused chiefly by the awkwardness his arrival causes among the guests.",
+    "The narrator is indifferent to his history and attends only to the bride's feelings.",
+    "The narrator withholds judgment, implying his return holds meaning gossip overlooks."
+   ]
+  },
+  {
+   "candidateId": "lit40-hard-01-046",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "hard",
+   "passage": "Who tells a dying man that the salt works he built will be sold by spring? I asked Armand this on my third week, while we raked the evaporation pans outside Beirut and the crust cracked white under our boots. He did not answer. He told me instead to rake slower, so the crystals would not cloud. That evening we carried a tin of the first harvest to Giada's bed, and Armand described the pans to him in detail: how high the brine stood, how the wind had come off the sea. Every word was true. He left out only the letter from the buyers, folded in his breast pocket. Driving back, I said that wasn't lying, exactly. Armand turned the radio up. I have spent years since retelling that drive, and I always slow down at the part where he raked so carefully for a man who would never see the sale.",
+   "question": "Which choice best describes the narrator's attitude toward Armand?",
+   "options": [
+    "Respectful of his care for Giada, though uneasy about what he chose to leave unsaid",
+    "Openly critical of what the narrator regards as Armand's deliberate deception of Giada",
+    "Dismissive of Armand's silence, which the narrator reads as indifference to his friend",
+    "Wholly approving of Armand's decision and certain that it was the only honest choice"
+   ]
+  },
+  {
+   "candidateId": "lit40-hard-01-047",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "hard",
+   "passage": "Hot oil still in my hair, I stand on the platform at Piccadilly\nbeside Chiara, who has said nothing since the till was counted.\nForty years she ran that kitchen like a ship,\nbarked at me for every bruised onion, every slack knife.\nTonight she wrapped the knives in a tea towel\nand gave them to me, handle first,\nthe way she taught me, the way you pass something sharp.\nNobody said closing. The sign says Back Soon.\nA Manchester tram comes in hissing. She checks her ticket twice.\nI want to tell her the onions were never bruised,\nthat I learned the knife from her wrists, not her shouting.\nInstead I hold the towel against my chest\nand let her board first, the way she likes.",
+   "question": "Which choice best describes the speaker's attitude toward Chiara?",
+   "options": [
+    "Resentful of the years of harsh criticism Chiara directed at the speaker",
+    "Tender and protective, sensing the care beneath Chiara's strictness",
+    "Relieved that Chiara's demanding kitchen has finally been shut down",
+    "Puzzled by Chiara's silence and wary of provoking her bad temper"
+   ]
+  },
+  {
+   "candidateId": "lit40-hard-01-048",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "hard",
+   "passage": "I was twelve when Mohan came home from the border and took over our grandfather's clock shop in Kochi, and I assumed he did it because no one else would. He was clumsy at first; his hands, which had cleaned rifles for six years, shook over the hairsprings. Still, every evening he cleared a space on the bench and set a loupe in front of me. I complained. Tourists bought quartz watches from the stalls; nobody, I told him, would pay to fix a pendulum. He agreed, and kept handing me the tweezers. I learned to hear the beat of an escapement before I learned to like him again. Now, when customers ask Sunja who taught her, I say my brother, and I let them assume he was a master. He was not. He was a man who practiced late at night so he could stay one lesson ahead of me.",
+   "question": "Which choice best describes the narrator's attitude toward Mohan?",
+   "options": [
+    "Resentful, since she believes he pushed an outdated trade onto her unwillingly",
+    "Admiring chiefly of the expert skill he showed as a master clockmaker",
+    "Affectionate and grateful, valuing his persistence more than his ability",
+    "Sympathetic toward him, though convinced that his effort was largely wasted"
+   ]
+  },
+  {
+   "candidateId": "lit40-hard-01-049",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "hard",
+   "passage": "Callum stepped off my father's boat in the summer of 1912 with a botanist's case and a cough, and asked within the hour why our tea bushes grew only on the western slope above the Galway shore. I was fourteen and found the question rude. Every child on the estate knew the east field was poor ground; my father, Lachlan, said so at supper each night, the way other men said grace. Callum walked the east rows anyway, crumbled the soil between his fingers, and said the trouble was the drainage ditch my grandfather had dug, not the earth. My father thanked him and refilled his cup. The ditch stayed. Callum left on the September ferry, and I rowed him across myself, cross that he had been right and that we would go on as if he had not. I still keep the soil sample he left on our windowsill, labeled in his small hand.",
+   "question": "Which choice best describes the narrator's attitude toward Callum?",
+   "options": [
+    "Scornful of the arrogance he showed in questioning the family's knowledge",
+    "Fond of him chiefly because he flattered her father during the visit",
+    "Indifferent to his findings, which she regarded as unimportant to the estate",
+    "Grudgingly appreciative of the clarity that his outsider's view provided"
+   ]
+  },
+  {
+   "candidateId": "lit40-hard-01-051",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "hard",
+   "passage": "Taipei's hills were not supposed to hold vineyards, Mingyu told me, which was why he had planted one. We were strangers waiting out a washed-out road on his porch, my rented scooter tipped in the mud, rows of purple grapes dripping behind us. When I said my name was Xinyi, he repeated it twice, as if testing its weight. I asked how he had started. He said a teacher, forty years ago, had read his essay about his father's tea farm aloud and remarked, not unkindly, that it was a good essay about the wrong crop. He laughed telling it. Then he handed me shears and showed me how to cut a bunch without bruising its neighbors. By the time the road crew arrived, my hands were sticky and I had filled two baskets. I never learned what the teacher meant, and I doubt Mingyu had ever settled it.",
+   "question": "Which choice best describes the main purpose of the text?",
+   "options": [
+    "To depict a traveler's frustration at being stranded far from her intended destination",
+    "To portray how an offhand comment became a lasting, unresolved motive in a man's life",
+    "To explain the farming methods needed to grow grapes in a poorly suited climate",
+    "To suggest that Mingyu bitterly resents the teacher who once dismissed his writing"
+   ],
+   "recipeBeyondMedium": "요지가 세 곳의 근거를 종합해야 나오고, 오답은 각각 한 곳만 요약한 부분 요지다"
+  }
+ ],
+ "instructions": "당신은 디지털 SAT 독립 채점자다. 정답 표시가 없다. 먼저 문항을 직접 풀고(picked_letter), 이어서 난이도·hard 적합·오답 품질을 판정한다. 요청 난이도에 맞추려 하지 말고 실제로 느끼는 대로 답한다.\n청크 rev-fable_judge-002 — 20문항.\n출력: Write 도구로 정확히 이 경로에 JSON 한 파일을 쓴다 → /Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-fable_judge-002.result.json\n출력 JSON 스키마(예시 구조): {\"chunkId\":\"청크 ID\",\"model\":\"fable\",\"items\":[{\"candidateId\":\"id\",\"picked_letter\":\"A|B|C|D\",\"other_defensible\":\"정답 외 방어 가능한 선택지가 있으면 true\",\"est_difficulty\":\"easy|medium|hard (실제 체감, 요청 난이도에 맞추지 말 것)\",\"hard_fit\":\"실제 SAT hard 수준의 사고 단계가 필요하면 true(지문 길이·난어만이면 false)\",\"plausible_distractors\":\"오답 3개가 모두 그럴듯하고 서로 다른 오개념에서 나왔으면 true\",\"length_balanced\":\"네 선택지 길이·구체성이 비슷해 정답이 형식으로 드러나지 않으면 true\",\"multi_answer_risk\":\"복수 정답 위험이 있으면 true\",\"issues\":\"한 줄 메모\"}]}\n허용 값: picked_letter ∈ {A,B,C,D}, 불리언 필드는 true/false, est_difficulty ∈ {easy,medium,hard}. candidateId 를 바꾸지 않고 모든 항목에 답한다.\n금지: 결과 파일 외의 파일 생성·수정, 다른 명령 실행, 문항 수정·재작성. 끝나면 'done <항목 수>' 한 줄만 답한다.\n\n## 문항\n### lit40-hard-01-024 — skill words_in_context · 유형 figurative_language · 요청 난이도 hard\n[지문]\nI gave you the fishing rod on your twelfth birthday, Errol,\nand you leaned it in the corner like a broom.\nConsuelo said you wanted books. I heard her\nthe way the river hears a pebble.\nNow we stand on the stone bridge over the Hope,\nyou with your satchel, I with nothing in my hands,\nand neither of us looks down at the water\nwhere I used to fish at your age.\nYou point to a heron, stiff as a nail.\nI almost tell you that my father gave me nothing,\nthat the rod was my whole vocabulary.\nInstead I count the stones in the railing,\neach one set by someone who did not explain it.\n\n[질문] As used in the text, the phrase “the way the river hears a pebble” most nearly suggests\nA) that the speaker took in Consuelo's words without changing his course.\nB) that the speaker found Consuelo's remark sharp and painful to accept.\nC) that Consuelo spoke so softly the speaker could not make out her words.\nD) that the speaker and Consuelo often argued by the river about Errol.\n### lit40-hard-01-025 — skill words_in_context · 유형 figurative_language · 요청 난이도 hard\n[지문]\nPiper had captained the girls' team at our school in Vigo for three seasons, and by the night of the winter dinner she ran the gymnasium like a deck: tables in rows, chairs squared, her grandmother's empanadas at the head. Lucia had arrived from Buenos Aires in October and came along that evening without being on any list; I think she slipped in behind the volunteers carrying folding chairs. She brought a tray of alfajores and set it down, hesitating, at the far corner. I watched Piper notice it. She said nothing. She lifted her grandmother's platter and slid it down the table until the two trays touched, then pulled up a chair at that end, the wrong end by her own rules, and sat. For the rest of the night the table listed toward Lucia's corner, a boat trimmed to an unexpected weight, and no one tried to set it straight.\n\n[질문] As used in the text, the phrase “a boat trimmed to an unexpected weight” most nearly suggests\nA) that the table was overloaded with food and close to collapsing.\nB) that the gathering had rebalanced itself around the newcomer.\nC) that Piper had lost control of the dinner she carefully planned.\nD) that the guests were uneasy and wished Lucia had stayed home.\n### lit40-hard-01-026 — skill words_in_context · 유형 figurative_language · 요청 난이도 hard\n[지문]\nThree rules governed the galley of the training ship docked at Manila that summer: knives point down, nothing left on the burners, and no one cries where the cook can see. I was nineteen, newly hired to teach English to the cadets, and Anh, the cook, let me hold class at his steel tables between meals. Shira, the quietest cadet, would not answer me for weeks. So I made a plan. I asked her to translate Anh's recipes for the others, and she did, fluently, in front of everyone. The cadets applauded. Anh grinned. Shira folded the recipe card into smaller and smaller squares until it was the size of a stamp. That night I scrubbed the same pot three times. The plan had worked, I kept telling myself; the success sat in me like a meal eaten standing up.\n\n[질문] As used in the text, the phrase “like a meal eaten standing up” most nearly suggests\nA) that the narrator was too busy teaching to sit down and eat properly.\nB) that the narrator felt physically ill from rough conditions aboard ship.\nC) that the narrator's achievement felt hasty and gave no real satisfaction.\nD) that the narrator was eager to celebrate the success with the whole crew.\n### lit40-hard-01-032 — skill text_structure_purpose · 유형 tone_shift · 요청 난이도 hard\n[지문]\nTwo cups of espresso cooled on the zinc counter of the station cafe in Bologna while Fiorella untied the ribbon around their mother's letters. Anneke's train to Rotterdam left at 4:10, and her suitcase held everything she meant to keep. They read the first letters aloud, laughing at the spelling, at the recipes copied into the margins, at a long complaint about a neighbor's goat. Fiorella did the voices. Then Anneke unfolded one dated the spring she had first gone away, years ago, and read it silently. Fiorella waited for the voice, and none came. Anneke set the page face down, squared it against the others, and picked up her ticket, turning it over as though it might list a different time. Fiorella retied the ribbon slowly, making the bow twice.\n\n[질문] Which choice best describes the shift in tone in the text?\nA) From bitter resentment of the mother to forgiving acceptance of her flaws\nB) From playful shared reminiscence to a hushed tension about the departure\nC) From anxious haste about the train to relief that there is time to spare\nD) From detached curiosity about the letters to open grief expressed in tears\n### lit40-hard-01-033 — skill text_structure_purpose · 유형 tone_shift · 요청 난이도 hard\n[지문]\nClay forgives nothing. Tamika's husband had said that to every student who walked into the studio on Seventy-First Street, and for thirty years the neighborhood had repeated it as proof of his genius. She was boxing his glazes when Ngozi arrived with the kiln parts, a lanky boy who lingered to admire the famous blue bowls on the top shelf. My uncle fired those, he said cheerfully. Your husband paid him in lunch. Tamika laughed, assuming a joke, and handed him a bowl to carry. Ngozi turned it over and showed her the mark scratched faintly into the foot, two initials that were not her husband's. She set the box of glazes down. For a while she simply moved along the shelf, bowl by bowl, turning each one over with care.\n\n[질문] Which choice best describes the shift in tone in the text?\nA) From grief-stricken mourning to cheerful celebration of the husband's work\nB) From suspicious hostility toward Ngozi to grateful trust in his account\nC) From affectionate pride in a legacy to a sober, searching reconsideration\nD) From casual indifference about the bowls to an outraged public accusation\n### lit40-hard-01-034 — skill text_structure_purpose · 유형 tone_shift · 요청 난이도 hard\n[지문]\nOnce a week the language school in Surabaya\nlent its back classroom to anyone with a map.\nThida came from the rice terraces with mud on her sandals,\nNeema from the city office with a rolled survey,\nand for an hour they practiced polite English,\nwould you, could you, may I, laughing at the verbs.\nThen Neema asked her to the ministry dinner,\nwhere the new road would be announced.\nThida closed her notebook.\nShe studied the whiteboard where the teacher\nhad written, in blue, the word boundary,\nand did not erase it, and did not answer,\nand thanked Neema, very correctly, for the invitation.\n\n[질문] Which choice best describes the shift in tone in the text?\nA) From formal distance to growing warmth as the two practice together\nB) From confusion about English verbs to confident mastery of the lesson\nC) From enthusiasm about the new road to disappointment at its delay\nD) From easy shared amusement to guarded courtesy after the invitation\n### lit40-hard-01-035 — skill text_structure_purpose · 유형 tone_shift · 요청 난이도 hard\n[지문]\nAfter my grandfather's funeral in Porto Alegre, I volunteered to carry the folding chairs back up to the fourth floor, mostly so I would not have to talk. I was Fausto, the grandson who had read the eulogy, and I was proud of it; people squeezed my arm on the stairs and said how well I had captured him. On the third landing Joaquim, his oldest friend, stopped me and took two of the chairs. Lovely speech, he said. Then, while adjusting his grip, he mentioned that my grandfather had never fished a day in his life; the river stories had been Joaquim's own, told so often over dominoes that they had changed owners. He said it lightly. He carried the chairs the rest of the way. I climbed behind him counting the steps, which I had never once counted before.\n\n[질문] Which choice best describes the shift in tone in the text?\nA) From self-satisfied pride to quiet, chastened reflection\nB) From fresh grief over the death to amusement at Joaquim\nC) From resentment of Joaquim to admiration for his kindness\nD) From nervous dread about speaking to relief at its success\n### lit40-hard-01-036 — skill text_structure_purpose · 유형 tone_shift · 요청 난이도 hard\n[지문]\nWe met in the reading room of the national library in Hanoi because neither of us could raise his voice there. Bao, my older brother, had brought the shop's ledger, and I, Dayoung, had brought nothing but the acceptance letter from the university in Seoul. For twenty minutes we whispered like conspirators, trading jokes about the librarian's squeaking cart, about our father's handwriting in the ledger, about the cat that slept on the rice sacks. Then Bao turned to the last page, where the debts were listed, and laid my letter beside it. He did not say anything. He straightened the two papers until their edges matched exactly. I listened to the cart squeak past again and found that it no longer seemed funny at all.\n\n[질문] Which choice best describes the shift in tone in the text?\nA) From quiet hostility to open reconciliation between the brothers\nB) From conspiratorial humor to a heavy and wordless reckoning\nC) From hopeful planning to excited celebration of the letter\nD) From bored restlessness to irritation at the noisy librarian\n### lit40-hard-01-037 — skill text_structure_purpose · 유형 text_structure · 요청 난이도 hard\n[지문]\nSell it, Mehrnaz said, and you will be selling the only thing he ever tuned for both of us. Seoyeon did not answer. They stood in the radio repair shop off Oxford Street in Accra, where the technician had just lifted the back from the old valve set their late teacher had left to the two of them jointly. Inside, the tubes glowed amber. Seoyeon had come with a buyer's offer folded in her violin case; her tuition was due in a week. Mehrnaz, who corrected her bowing down to the angle of a wrist, said nothing more. The technician switched the radio on. A highlife station crackled in, then a violin concerto from somewhere far off, faint and slightly flat. Both women leaned toward it at once. Seoyeon heard Mehrnaz hum the correction under her breath, and found herself, without meaning to, humming it too.\n\n[질문] Which choice best describes the overall structure of the text?\nA) A history of the radio is given, followed by an account of its repair.\nB) A disagreement is stated and then settled when one woman agrees to sell.\nC) A dispute is introduced, set aside, and complicated by a shared habit.\nD) A teacher's lesson is presented and then rejected by a defiant student.\n### lit40-hard-01-039 — skill text_structure_purpose · 유형 text_structure · 요청 난이도 hard\n[지문]\nPort of Spain was still dark when my mother, Pearl, drove me to the diner on the highway for one last breakfast before my flight. I am Cecile, her only child, and I was leaving for a college in Toronto. She slid a wrapped box across the table: a wool scarf in the colors of a school I had not chosen, the one she had hoped for. I thanked her and put it on at once, over a T-shirt, in the heat. She praised how it looked. We ate saltfish and bake and talked about the weather in Canada. Only on the plane did I notice that she had sewn my initials into the fringe, crooked, by hand, the work of several nights. I wore it through every winter that followed, and I never told her that I knew she knew.\n\n[질문] Which choice best describes the overall structure of the text?\nA) A scene of polite pretense is shown and later reframed by a discovery.\nB) A disagreement is recalled and then settled through frank conversation.\nC) A journey is traced in order, ending with the author's arrival at school.\nD) A gift is criticized, and the author then explains why it was returned.\n### lit40-hard-01-041 — skill text_structure_purpose · 유형 underlined_portion_function · 요청 난이도 hard\n[지문]\nI had asked Younghee three times to write down the fish stew he made each winter, and three times he had laughed and pointed at the gulls over the ferry terminal, as though the birds kept his accounts. On the morning he meant to sail for his sister's island, I brought a notebook and a pencil to the waiting hall. He took neither. Instead he pressed a paper twist of dried anchovies into my palm, then a knob of ginger, then a pinch of something gray that smelled of smoke. __He named nothing, only closed my fingers over each in turn, the way a man coils rope he expects another to handle.__ When the horn sounded, he walked to the gangway without looking back. I stood a long while in the Busan wind, the notebook still blank under my arm, and found I no longer wished to fill it.\n\n[질문] Which choice best describes the function of the underlined sentence in the text as a whole?\nA) It shows that Younghee has forgotten the ingredients and is hiding his confusion from the narrator.\nB) It suggests that Younghee resents the narrator's repeated requests and wishes to end the visit.\nC) It indicates that Younghee is handing down the recipe through touch rather than through writing.\nD) It reveals that the narrator has finally persuaded Younghee to record the recipe in lasting form.\n### lit40-hard-01-042 — skill text_structure_purpose · 유형 underlined_portion_function · 요청 난이도 hard\n[지문]\nDefne had ruled on harder matters than a broken dryer, but she watched Leopoldina kneel before the machine as if a verdict waited inside it. The girl had come from the courthouse on her lunch hour, still wearing her lanyard, with a screwdriver borrowed from the guard. 'The belt is worn,' Leopoldina said. 'I can tighten it. It will turn again for a month, perhaps two.' Defne said nothing about the rust spreading along the drum's seam, which she had noticed the first week the Istanbul laundromat opened. __She handed over her own coins for the test cycle and sat down to wait, folding her hands in her lap as she once had at the bench.__ The drum shuddered, caught, and began to spin. Leopoldina grinned up at her. Defne nodded slowly, the way she used to nod at lawyers whose arguments were well made and would not, in the end, prevail.\n\n[질문] Which choice best describes the function of the underlined sentence in the text as a whole?\nA) It shows that Defne doubts Leopoldina's skill and plans to supervise every single step of the repair.\nB) It suggests that Defne regrets leaving the courthouse and misses the authority of her old role.\nC) It reveals that Defne expects the repair to last and wishes to reward the clerk's hard effort.\nD) It conveys that Defne lets the clerk's attempt proceed respectfully despite knowing its limits.\n### lit40-hard-01-043 — skill text_structure_purpose · 유형 underlined_portion_function · 요청 난이도 hard\n[지문]\nFour stones mark the safe path across the dry riverbed below our town in Oaxaca, and Nicolas taught me to count them aloud before I was old enough to ask why. Every crossing, my stepfather named them: the flat one, the split one, the one shaped like a shoe, the last. The summer my scholarship letter came, he walked me to the bus on the far bank. I, Katarzyna, the girl who had never left the valley, talked the whole way about tuition, about the cost of the ticket north, about how he would manage the stall alone. He answered none of it. __At the third stone he stopped, tapped it twice with his boot, and waited until I said its name.__ On the far bank he set down my suitcase and told me the river would be running by the time I came home, and that I should not try to cross it by memory.\n\n[질문] Which choice best describes the function of the underlined sentence in the text as a whole?\nA) It shows Nicolas answering the narrator's worries through a familiar ritual instead of discussion.\nB) It suggests that Nicolas is unsure of the old path and needs the narrator to guide him safely across.\nC) It indicates that Nicolas disapproves of the scholarship and is trying to delay her departure.\nD) It reveals that the narrator has forgotten the stones and must be taught the path once again.\n### lit40-hard-01-044 — skill text_structure_purpose · 유형 underlined_portion_function · 요청 난이도 hard\n[지문]\nFlour dusted my stepmother's wrists before the sun was up, and by five she had already shaped forty loaves for an oven she could no longer afford to repair. I was sixteen and had told her, more than once, that the bakery in our Tbilisi lane was finished: the new supermarket sold bread cheaper, and Stanislav, who had fired the oven for my father, was nearly eighty. She never argued. She only set out cups of tea each morning, one for herself and one for Stanislav, and a third, untouched, at my place on the bench. __One morning I sat down and drank it, and she slid the scoring blade across the table toward me without a word.__ I cut the loaves badly. Stanislav laughed until he coughed. Dmitri, my friend from school, asked that afternoon why my hands smelled of yeast, and I told him I was only helping until the place closed. I said that for eleven more years.\n\n[질문] Which choice best describes the function of the underlined sentence in the text as a whole?\nA) It shows the narrator finally convincing the stepmother that the bakery must be closed.\nB) It marks the narrator's first acceptance of a role the stepmother had quietly kept open.\nC) It suggests the stepmother is testing whether the narrator could replace Stanislav at the oven.\nD) It reveals that the narrator joined the work only to prove the bakery could not survive.\n### lit40-hard-01-045 — skill central_ideas_details · 유형 narrator_attitude · 요청 난이도 hard\n[지문]\nWhen the band paused between songs, Tommaso came in through the kitchen door of the wedding hall as if he had stepped out for ice twenty minutes earlier instead of nine years. Aaliyah, the bride, did not know him; she saw only that her new mother-in-law set down her fork and did not pick it up again. He wore a pressed suit a size too large and carried a gift wrapped in newspaper. No one asked where he had been, and he offered nothing, only kissed his mother's cheek and took the empty chair by the cake table that someone, it seemed, had been keeping. Gossip along the Delta levees had long since called him a scoundrel. Yet the cake was cut beneath his hand, and the old woman ate two pieces, and the bride, watching, decided that some absences are settled in ways a guest list cannot show.\n\n[질문] Which choice best describes the narrator's attitude toward Tommaso?\nA) The narrator is openly contemptuous of his failure to explain his long absence.\nB) The narrator is amused chiefly by the awkwardness his arrival causes among the guests.\nC) The narrator is indifferent to his history and attends only to the bride's feelings.\nD) The narrator withholds judgment, implying his return holds meaning gossip overlooks.\n### lit40-hard-01-046 — skill central_ideas_details · 유형 narrator_attitude · 요청 난이도 hard\n[지문]\nWho tells a dying man that the salt works he built will be sold by spring? I asked Armand this on my third week, while we raked the evaporation pans outside Beirut and the crust cracked white under our boots. He did not answer. He told me instead to rake slower, so the crystals would not cloud. That evening we carried a tin of the first harvest to Giada's bed, and Armand described the pans to him in detail: how high the brine stood, how the wind had come off the sea. Every word was true. He left out only the letter from the buyers, folded in his breast pocket. Driving back, I said that wasn't lying, exactly. Armand turned the radio up. I have spent years since retelling that drive, and I always slow down at the part where he raked so carefully for a man who would never see the sale.\n\n[질문] Which choice best describes the narrator's attitude toward Armand?\nA) Respectful of his care for Giada, though uneasy about what he chose to leave unsaid\nB) Openly critical of what the narrator regards as Armand's deliberate deception of Giada\nC) Dismissive of Armand's silence, which the narrator reads as indifference to his friend\nD) Wholly approving of Armand's decision and certain that it was the only honest choice\n### lit40-hard-01-047 — skill central_ideas_details · 유형 narrator_attitude · 요청 난이도 hard\n[지문]\nHot oil still in my hair, I stand on the platform at Piccadilly\nbeside Chiara, who has said nothing since the till was counted.\nForty years she ran that kitchen like a ship,\nbarked at me for every bruised onion, every slack knife.\nTonight she wrapped the knives in a tea towel\nand gave them to me, handle first,\nthe way she taught me, the way you pass something sharp.\nNobody said closing. The sign says Back Soon.\nA Manchester tram comes in hissing. She checks her ticket twice.\nI want to tell her the onions were never bruised,\nthat I learned the knife from her wrists, not her shouting.\nInstead I hold the towel against my chest\nand let her board first, the way she likes.\n\n[질문] Which choice best describes the speaker's attitude toward Chiara?\nA) Resentful of the years of harsh criticism Chiara directed at the speaker\nB) Tender and protective, sensing the care beneath Chiara's strictness\nC) Relieved that Chiara's demanding kitchen has finally been shut down\nD) Puzzled by Chiara's silence and wary of provoking her bad temper\n### lit40-hard-01-048 — skill central_ideas_details · 유형 narrator_attitude · 요청 난이도 hard\n[지문]\nI was twelve when Mohan came home from the border and took over our grandfather's clock shop in Kochi, and I assumed he did it because no one else would. He was clumsy at first; his hands, which had cleaned rifles for six years, shook over the hairsprings. Still, every evening he cleared a space on the bench and set a loupe in front of me. I complained. Tourists bought quartz watches from the stalls; nobody, I told him, would pay to fix a pendulum. He agreed, and kept handing me the tweezers. I learned to hear the beat of an escapement before I learned to like him again. Now, when customers ask Sunja who taught her, I say my brother, and I let them assume he was a master. He was not. He was a man who practiced late at night so he could stay one lesson ahead of me.\n\n[질문] Which choice best describes the narrator's attitude toward Mohan?\nA) Resentful, since she believes he pushed an outdated trade onto her unwillingly\nB) Admiring chiefly of the expert skill he showed as a master clockmaker\nC) Affectionate and grateful, valuing his persistence more than his ability\nD) Sympathetic toward him, though convinced that his effort was largely wasted\n### lit40-hard-01-049 — skill central_ideas_details · 유형 narrator_attitude · 요청 난이도 hard\n[지문]\nCallum stepped off my father's boat in the summer of 1912 with a botanist's case and a cough, and asked within the hour why our tea bushes grew only on the western slope above the Galway shore. I was fourteen and found the question rude. Every child on the estate knew the east field was poor ground; my father, Lachlan, said so at supper each night, the way other men said grace. Callum walked the east rows anyway, crumbled the soil between his fingers, and said the trouble was the drainage ditch my grandfather had dug, not the earth. My father thanked him and refilled his cup. The ditch stayed. Callum left on the September ferry, and I rowed him across myself, cross that he had been right and that we would go on as if he had not. I still keep the soil sample he left on our windowsill, labeled in his small hand.\n\n[질문] Which choice best describes the narrator's attitude toward Callum?\nA) Scornful of the arrogance he showed in questioning the family's knowledge\nB) Fond of him chiefly because he flattered her father during the visit\nC) Indifferent to his findings, which she regarded as unimportant to the estate\nD) Grudgingly appreciative of the clarity that his outsider's view provided\n### lit40-hard-01-051 — skill central_ideas_details · 유형 main_idea_or_purpose · 요청 난이도 hard · hard 기준: 요지가 세 곳의 근거를 종합해야 나오고, 오답은 각각 한 곳만 요약한 부분 요지다\n[지문]\nTaipei's hills were not supposed to hold vineyards, Mingyu told me, which was why he had planted one. We were strangers waiting out a washed-out road on his porch, my rented scooter tipped in the mud, rows of purple grapes dripping behind us. When I said my name was Xinyi, he repeated it twice, as if testing its weight. I asked how he had started. He said a teacher, forty years ago, had read his essay about his father's tea farm aloud and remarked, not unkindly, that it was a good essay about the wrong crop. He laughed telling it. Then he handed me shears and showed me how to cut a bunch without bruising its neighbors. By the time the road crew arrived, my hands were sticky and I had filled two baskets. I never learned what the teacher meant, and I doubt Mingyu had ever settled it.\n\n[질문] Which choice best describes the main purpose of the text?\nA) To depict a traveler's frustration at being stranded far from her intended destination\nB) To portray how an offhand comment became a lasting, unresolved motive in a man's life\nC) To explain the farming methods needed to grow grapes in a poorly suited climate\nD) To suggest that Mingyu bitterly resents the teacher who once dismissed his writing"
+}

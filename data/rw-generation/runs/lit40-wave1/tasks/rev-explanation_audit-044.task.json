@@ -1,0 +1,349 @@
+{
+ "schema": "rw-session-task/v1",
+ "kind": "review",
+ "role": "explanation_audit",
+ "runId": "lit40-wave1",
+ "taskId": "rev-explanation_audit-044",
+ "chunkId": "rev-explanation_audit-044",
+ "suggestedModel": "sonnet",
+ "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-explanation_audit-044.result.json",
+ "outputSchema": {
+  "chunkId": "청크 ID",
+  "model": "sonnet",
+  "items": [
+   {
+    "candidateId": "id",
+    "answer_correct": "표시된 정답이 정말 정답이면 true",
+    "explanation_consistent": "해설이 정답·오답 판단과 일치하고 글자 참조가 맞으면 true",
+    "explanation_factual": "해설에 사실 오류가 없으면 true",
+    "issues": "한 줄 메모"
+   }
+  ]
+ },
+ "items": [
+  {
+   "candidateId": "lit40-medium-06-032",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "symbolism",
+   "requestedDifficulty": "medium",
+   "passage": "Joon and Suhyun met on the stone bridge in Busan every evening before their set, as they had for eight years. Lately the duo drew smaller crowds, and both knew why, though neither said it: Suhyun had been offered a solo contract in Seoul. Instead they talked about the bridge. Joon pointed out a crack running between two stones, filled long ago with mortar that had weathered to a different color. Suhyun said the bridge would stand for another century that way. Each night after that, one of them would touch the patched seam while passing, as if checking it. On their last evening before the contract deadline, Suhyun pressed her palm flat against the mortar and held it there, and Joon looked away toward the harbor lights.",
+   "question": "In the text, the mortar-filled crack in the bridge most likely represents",
+   "options": [
+    "the decline in audiences that has troubled the duo's recent performances.",
+    "the long history of the city of Busan and its old stone architecture.",
+    "Suhyun's confidence that she will succeed in her solo career in Seoul.",
+    "the duo's strained partnership, held together by what they avoid saying."
+   ],
+   "correct_letter": "D",
+   "explanation": "지문은 두 사람이 Suhyun의 솔로 계약이라는 주제를 말하지 않고 대신 다리 이야기를 한다고 서술한다. 이어서 오래전 메운 균열을 매일 밤 확인하듯 만지고, 마감 전날 Suhyun이 손을 오래 대는 장면이 반복된다. 이 단서들을 이으면 균열과 모르타르는 말하지 않는 것으로 겨우 이어진 듀오의 관계를 상징하므로 D가 정답이다. A는 관객 감소라는 표면 정보, B는 문자 그대로의 의미, C는 지문에 근거가 없다."
+  },
+  {
+   "candidateId": "lit40-medium-06-033",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "medium",
+   "passage": "When Neema and Kiara hung their families' tablecloths side by side on the rooftop laundry line in Nairobi, neither said a word, as was their habit after forty years of friendship. Neema's cloth was stiff white cotton for her family's Sunday lunch; Kiara's was patterned in red and gold for the evening feast her relatives were bringing to the same house. The two cloths flapped against each other in the wind, tangling and parting and tangling again, a quarrel conducted entirely in cotton. Kiara reached up once to separate them, then let her hand fall. By late afternoon both were dry, and Neema folded them together, the white inside the red, so they would fit on the one long table downstairs.",
+   "question": "As used in the text, the phrase “a quarrel conducted entirely in cotton” most nearly suggests that",
+   "options": [
+    "the tablecloths' motion expresses the tension the silent friends never voice.",
+    "the friends argue loudly about which cloth should be used for the meal.",
+    "the cotton cloths are being damaged by the strong wind on the roof.",
+    "the two families have refused to share the long table downstairs."
+   ],
+   "correct_letter": "A",
+   "explanation": "지문 첫 문장에서 두 친구는 40년 우정 동안 습관처럼 말을 하지 않는다고 하고, 두 집안의 서로 다른 전통이 한 식탁을 나눠야 하는 상황이 제시된다. 바람에 엉키고 떨어지는 천을 말다툼에 비유한 표현은 말로 하지 않는 긴장이 천의 움직임으로 드러난다는 뜻이므로 A가 정답이다. B는 침묵한다는 서술과 모순되고, C는 문자 그대로의 해석이며, D는 마지막에 함께 접어 한 식탁에 올리는 장면과 맞지 않는다."
+  },
+  {
+   "candidateId": "lit40-medium-06-034",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "medium",
+   "passage": "Who would have guessed that Larissa would end up keeping bees in a Glasgow yard? Twenty years earlier she and her stage partner had toured every hall in Scotland, and Eamon, who had managed them both, now arrived at her gate with news: her old partner was staging a reunion and wanted Larissa to join. Larissa lifted a frame from the hive, heavy with comb, and said she had promised the neighborhood association a season of honey. Eamon watched the bees crawl over her bare wrists without stinging. Her old loyalty tugged at her one way, the new one another, and she stood between them like a hive with two queens, humming and uneasy. She asked him to come back after the harvest, when she might have an answer.",
+   "question": "As used in the text, the phrase “like a hive with two queens” most nearly suggests that Larissa",
+   "options": [
+    "has become an expert beekeeper with an unusually productive hive.",
+    "is torn between competing commitments that cannot easily coexist.",
+    "feels threatened by her former stage partner's growing fame.",
+    "intends to lead both the reunion and the neighborhood association."
+   ],
+   "correct_letter": "B",
+   "explanation": "지문은 옛 무대 파트너의 재결합 공연 제안과 동네 협회에 꿀을 약속한 새로운 책임을 함께 제시한다. 바로 앞 문장에서 옛 충성과 새 충성이 서로 다른 방향으로 그녀를 끌어당긴다고 말하므로, 여왕벌이 둘인 벌통은 공존하기 어려운 두 의무 사이의 갈등을 뜻한다. 따라서 B가 정답이다. A는 문자 그대로의 해석, C는 근거 없는 감정, D는 두 역할을 다 맡는다는 잘못된 추론이다."
+  },
+  {
+   "candidateId": "lit40-medium-06-035",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "medium",
+   "passage": "Tell him only that I'm tired, Ruoxi said,\nher voice small in the Taipei gym\nwhere her brother's team ran drills beneath the lights.\nNora, who carried words between two languages for pay,\nweighed the sentence like a coin with two faces.\nThe doctor's news sat folded in her pocket,\na paper boat she could not sail across the court.\nThe boy waved from the free-throw line, grinning,\nand Nora waved back, choosing the smaller truth,\nwhile sneakers squealed on the varnished floor\nand the scoreboard blinked its patient zeros.",
+   "question": "As used in the text, the phrase “a paper boat she could not sail across the court” most nearly suggests that Nora",
+   "options": [
+    "is unable to read the doctor's handwriting on the folded paper.",
+    "wishes she could join the brother's team practice on the court.",
+    "cannot bring herself to deliver the serious news to the boy.",
+    "plans to give the boy a small gift once the practice ends."
+   ],
+   "correct_letter": "C",
+   "explanation": "시에서 Ruoxi는 동생에게 피곤하다고만 전해 달라고 부탁하고, 통역사는 그 문장을 양면 동전처럼 저울질한다. 이후 그녀가 더 작은 진실을 택하며 손을 흔드는 장면과 이어 보면, 코트를 건너 띄울 수 없는 종이배는 의사의 소식을 소년에게 전하지 못하는 마음을 비유한다. 따라서 C가 정답이다. A와 D는 종이를 문자 그대로 해석했고, B는 코트라는 단어만 활용한 오독이다."
+  },
+  {
+   "candidateId": "lit40-medium-06-036",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "medium",
+   "passage": "I worked the night shift at a pharmacy in Valparaiso the winter my marriage to Takoda was quietly coming apart, and his mother, Cleotilde, came in nearly every evening near midnight. She bought small things: throat lozenges, a comb, a single bandage. We talked about the fog, the price of oranges, her knees. Neither of us mentioned that Takoda had not slept at home in weeks. Our conversations were a bridge built only to its middle, and each night we walked out to the edge of it, admired the view, and turned back. Once she paused at the door and seemed about to say his name. Instead she pulled her scarf higher and stepped into the wet street, where taxis hissed past under the hill's yellow lamps.",
+   "question": "As used in the text, the phrase “a bridge built only to its middle” most nearly suggests that the conversations",
+   "options": [
+    "were difficult because the two women spoke different languages.",
+    "gradually brought the women to an open discussion of the marriage.",
+    "took place on the walk from the pharmacy across the town's bridge.",
+    "reached toward each other but always stopped short of the real subject."
+   ],
+   "correct_letter": "D",
+   "explanation": "화자는 둘이 안개, 오렌지 값, 무릎 이야기만 하고 Takoda가 몇 주째 집에 오지 않은 사실은 꺼내지 않았다고 말한다. 또 Cleotilde가 문 앞에서 그의 이름을 말하려다 멈추는 장면이 이어지므로, 중간까지만 지은 다리는 서로 다가가지만 핵심 주제 앞에서 늘 멈추는 대화를 뜻한다. 따라서 D가 정답이다. A는 근거 없는 언어 차이, B는 반대 방향의 진전, C는 문자 그대로의 해석이다."
+  },
+  {
+   "candidateId": "lit40-medium-06-037",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "medium",
+   "passage": "Meera and Eulalio ran rival bakeries on opposite sides of the mountain bus stop outside Lima, and I spent my tenth summer carrying flour sacks for Meera. That year the old master baker of the village died and left his copper dough scraper not to Meera, his apprentice of twenty years, but to Eulalio, who had once insulted his bread in public. For weeks the scraper hung in Eulalio's window, untouched, a medal pinned on the wrong chest. Customers waiting for the bus whispered about it. Eulalio's loaves came out lopsided, and he stopped meeting anyone's eyes. One morning in August I found the scraper wrapped in brown paper on Meera's doorstep, no note attached. The early bus groaned up the switchbacks, its roof stacked with crates of potatoes.",
+   "question": "As used in the text, the phrase “a medal pinned on the wrong chest” most nearly suggests that the scraper",
+   "options": [
+    "was an honor that everyone sensed rightly belonged to someone else.",
+    "was a prize Eulalio had won in a public baking competition.",
+    "was too valuable to be used for ordinary daily baking.",
+    "was displayed to insult Meera in front of the customers."
+   ],
+   "correct_letter": "A",
+   "explanation": "지문은 스크레이퍼가 20년 제자인 Meera가 아니라 한때 스승의 빵을 모욕했던 Eulalio에게 남겨졌다고 설명한다. 이후 손님들이 수군대고 Eulalio가 눈을 피하다가 결국 Meera의 문 앞에 두고 가는 장면이 이어져, 잘못된 가슴에 단 훈장은 다른 사람에게 돌아갔어야 할 영예임을 뜻한다. 따라서 A가 정답이다. B는 훈장을 문자 그대로 상으로 해석했고, C는 근거가 없으며, D는 Eulalio의 위축된 태도와 맞지 않는다."
+  },
+  {
+   "candidateId": "lit40-medium-06-043",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "medium",
+   "passage": "When the train lurched out of the station at Kollam, Ananya was already watching Radek over the top of her newspaper. Her retired neighbor had insisted on carrying her suitcase, had bought her tea at every stop, and had now offered to hold her ticket while she slept. A sailor, she reminded herself, learns to be charming in every port, and charm usually wants something. She kept the ticket in her fist. Near Alappuzha, however, the conductor came through, and Radek quietly paid the fare difference she had not known she owed, waving off her protest. He explained that her late husband had once done the same for him on a ship bound for Kochi. Ananya folded the newspaper. She found she could not quite meet his eyes, and the tea he handed her next tasted unaccountably sweeter than the last.",
+   "question": "Which choice best describes the shift in tone in the text?",
+   "options": [
+    "It moves from nostalgic to openly bitter.",
+    "It moves from wary to quietly chastened.",
+    "It moves from playful to suddenly anxious.",
+    "It moves from indifferent to mildly amused."
+   ],
+   "correct_letter": "B",
+   "explanation": "앞부분에서 Ananya는 Radek의 친절을 '무언가를 원하는 매력'으로 의심하며 표를 주먹에 쥐고 있다. 그러나 Radek이 그녀가 몰랐던 운임을 대신 내고 남편과의 인연을 설명한 뒤, 그녀는 그의 눈을 마주치지 못하고 차 맛이 달게 느껴진다. 따라서 경계에서 조용한 부끄러움으로 바뀐다는 B가 정답이다. A는 남편 회상을 근거로 한 오답이지만 씁쓸함은 드러나지 않고, C와 D는 처음의 의심하는 어조를 놓친다."
+  },
+  {
+   "candidateId": "lit40-medium-06-044",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "medium",
+   "passage": "A brown parcel slid back across the counter, stamped twice in red: REFUSED BY RECIPIENT. Waya read the stamp aloud in the officer's flat voice, and Tallulah laughed despite the fluorescent hum of the Albuquerque checkpoint. Their mother would have called the officer a magistrate of string and tape. They had driven three hours to collect it, sure it held another of her complaints about the price of postage. Tallulah tore it open in the parking lot. Inside, beneath their mother's own letters to her sister, lay a quilt square stitched with the two of them as children, each name embroidered in uneven thread. Waya traced his name with one finger. Neither of them laughed again. They sat in the car with the engine off and read the letters slowly, passing each page back and forth as though it might break.",
+   "question": "Which choice best describes the shift in tone in the text?",
+   "options": [
+    "It shifts from grieving to cautiously hopeful.",
+    "It shifts from tense to openly triumphant.",
+    "It shifts from wry to hushed and tender.",
+    "It shifts from formal to sharply accusatory."
+   ],
+   "correct_letter": "C",
+   "explanation": "처음에는 Waya가 직원의 무덤덤한 목소리를 흉내 내고 어머니의 재치 있는 표현이 떠오르는 등 냉소적인 유머가 있다. 소포 안에서 남매의 이름을 수놓은 퀼트 조각과 편지가 나온 뒤에는 웃음이 사라지고 편지를 조심스럽게 주고받는 다정한 분위기가 된다. 따라서 C가 정답이다. A는 슬픔이 처음부터 있었다고 보는 오답이고, B와 D는 지문에 없는 승리감이나 비난을 가정한다."
+  },
+  {
+   "candidateId": "lit40-medium-06-045",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "medium",
+   "passage": "When the post office opens at eight in Bergen's hills,\nGunnar sorts the letters as he always has,\nand Leilani, new this spring, stacks the parcels by weight.\nThey speak of rain, of the ferry, of the stamp machine's cough.\nNeither mentions the empty stool by the window\nwhere the old postmistress kept her thermos warm.\nBut at noon, when Gunnar pours two cups instead of three,\nhe pauses with the kettle tilted over nothing,\nand Leilani watches the steam drift toward the glass\nas if it, too, were waiting for someone to come in.\nShe slides her own cup toward the window stool\nand neither of them says why.",
+   "question": "Which choice best describes the shift in tone in the poem?",
+   "options": [
+    "It shifts from joyful to openly resentful.",
+    "It shifts from solemn to lightly playful.",
+    "It shifts from fearful to calmly relieved.",
+    "It shifts from matter-of-fact to wistful."
+   ],
+   "correct_letter": "D",
+   "explanation": "시의 앞부분은 편지 분류, 비, 페리, 우표 기계 같은 일상을 담담하게 나열한다. 정오에 Gunnar가 세 잔 대신 두 잔을 따르다 멈추고, 김이 누군가를 기다리듯 창으로 향하는 장면부터 떠난 사람에 대한 그리움이 드러난다. 따라서 담담함에서 그리움으로 바뀐다는 D가 정답이다. B는 빈 의자 언급을 엄숙함으로 읽은 그럴듯한 오답이지만 뒤로 갈수록 장난스러워지지 않으며, A와 C의 감정은 지문에 없다."
+  },
+  {
+   "candidateId": "lit40-medium-06-046",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "medium",
+   "passage": "What do you owe a friend who has only weeks left? I asked Aiko this on the dock behind her house in Hokkaido, the lake so still that our reflections looked more certain than we did. Ren had asked me, in the hospital, whether his mother had forgiven him, and I had said yes, though she had said nothing of the kind. For days I circled the lie, wondering if I should take it back or let it stand. Aiko, who had known Ren's family for forty years, said only that his mother had sat outside his room every night, unable to go in. I watched a heron lift from the reeds. That evening I went back to the hospital, not to correct myself, but to tell Ren what Aiko had seen, and to let him decide what it meant.",
+   "question": "Which choice best describes the shift in tone in the text?",
+   "options": [
+    "It moves from uneasy questioning to quiet resolve.",
+    "It moves from bitter complaint to forced cheer.",
+    "It moves from playful teasing to sudden alarm.",
+    "It moves from detached reporting to sudden open anger."
+   ],
+   "correct_letter": "A",
+   "explanation": "글은 '무엇을 빚졌는가'라는 질문과 함께 화자가 며칠 동안 거짓말을 두고 망설이는 불안한 어조로 시작한다. Aiko가 Ren의 어머니가 매일 밤 병실 밖에 앉아 있었다고 말한 뒤 화자는 병원으로 돌아가 본 것을 전하기로 차분히 결정한다. 따라서 A가 정답이다. D는 화자의 담담한 서술을 근거로 한 오답이지만 분노는 드러나지 않고, B와 C도 지문의 정서와 맞지 않는다."
+  },
+  {
+   "candidateId": "lit40-medium-06-047",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "medium",
+   "passage": "“I'll need to see the candle receipts again,” Leah said, for the third morning running. I ran the little gift counter at the monastery guesthouse on Chicago's South Side, and by then I could recite her order before she reached the bell. She counted coins slowly, held each receipt to the window, and asked questions no one else bothered to ask. I began greeting her with a smile tight enough to crack. On the fourth morning she laid a twenty-dollar bill on the counter and explained, without any triumph, that I had charged her for a box of candles twice the week before. She had waited, she said, until she was certain, because she did not want to embarrass me in front of the brothers. I took the bill and stared at it a long while. After that, I kept her receipts in a drawer of their own.",
+   "question": "Which choice best describes the shift in tone in the text?",
+   "options": [
+    "It moves from amused to quietly fearful.",
+    "It moves from irritated to humbled.",
+    "It moves from grateful to suspicious.",
+    "It moves from solemn to openly giddy."
+   ],
+   "correct_letter": "B",
+   "explanation": "처음에 화자는 매일 영수증을 다시 보자는 Leah를 귀찮아하며 '금이 갈 듯한 억지 미소'로 맞는다. Leah가 화자의 이중 청구 실수를 조용히 알려 주고 수도사들 앞에서 망신을 주지 않으려 기다렸다고 말하자, 화자는 지폐를 오래 바라보며 겸허해진다. 따라서 B가 정답이다. A는 반복되는 상황을 우스꽝스럽게 읽은 오답이고, C는 감정 변화의 방향을 거꾸로 잡았다."
+  },
+  {
+   "candidateId": "lit40-medium-06-048",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "text_structure",
+   "requestedDifficulty": "medium",
+   "passage": "How long did a stowaway think a captain's patience could last? Sadia put the question plainly as they walked the promenade in Colombo, the harbor lights behind them. Ayesha had hidden in the cargo hold for six days and now owed passage money she plainly did not have. She offered promises instead: a cousin with a shop, a job by the end of the month, interest on every rupee. Sadia listened without answering. She was remembering a different harbor, twenty years earlier, and a girl curled behind sacks of rice who had been found by a captain far less patient than she was. That captain had put her ashore with nothing. Sadia stopped beside the seawall. She told Ayesha that the debt would keep, and that the month she had mentioned could be two, if the cousin proved slow.",
+   "question": "Which choice best describes the overall structure of the text?",
+   "options": [
+    "A promise is made, then broken, then bitterly recalled by the captain.",
+    "A dispute is described, then settled by an outside figure's decision.",
+    "A demand is posed, a memory reframes it, and the demand is eased.",
+    "A setting is portrayed at length, then a stranger's past is revealed."
+   ],
+   "correct_letter": "C",
+   "explanation": "글은 Sadia가 밀항자 Ayesha에게 인내심의 한계를 묻는 요구로 시작하고, Ayesha의 약속이 이어진다. 중간에 Sadia가 자신도 과거에 밀항했다가 무정한 선장에게 내쫓긴 기억이 나오며, 이 기억이 현재 상황을 다르게 보게 만든다. 결국 Sadia는 빚을 미루고 기한을 늘려 주므로 C가 정답이다. B는 외부 인물이 결정한다고 보지만 결정은 Sadia 자신이 하며, D는 드러나는 과거가 낯선 사람이 아니라 선장 본인의 것임을 놓친다."
+  },
+  {
+   "candidateId": "lit40-medium-06-049",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "text_structure",
+   "requestedDifficulty": "medium",
+   "passage": "“I won't be coming to the anniversary dinner,” Bahram said, moving his bishop before Tamar had finished setting the board. They had played on this hillside terrace above Dhaka every Friday for twenty-two years, and for twenty-two years Bahram had won exactly as often as he lost. Tamar had kept a tally in pencil on the underside of the table. He had planned the club's dinner partly to announce the final count. Now he studied his old rival's face and saw, for the first time, a tremor in the hand that held the bishop. Bahram's eyes had been failing for months; he could no longer read a menu, let alone a speech. Tamar said nothing about it. He simply turned the table over, rubbed out the pencil marks with his thumb, and suggested they play on the terrace that night instead.",
+   "question": "Which choice best describes the overall structure of the text?",
+   "options": [
+    "A competition is recounted, and then its final winner is declared.",
+    "A conflict is introduced, and then an apology resolves it at once.",
+    "A setting is described, and then a flashback explains the rivalry.",
+    "A refusal is stated, and then its hidden cause alters a plan."
+   ],
+   "correct_letter": "D",
+   "explanation": "글은 Bahram이 기념 만찬에 가지 않겠다고 거절하는 대사로 시작한다. 이어 두 사람의 오랜 경쟁과 Tamar의 계획이 소개된 뒤, Tamar는 Bahram의 시력이 나빠졌다는 숨은 이유를 알아차린다. 그 결과 Tamar는 기록을 지우고 만찬 대신 테라스에서 두자고 제안하므로 D가 정답이다. A는 최종 승자를 발표하려던 계획을 근거로 한 오답이지만 실제로는 기록이 지워지고, B는 지문에 사과가 없다는 점에서 틀렸다."
+  },
+  {
+   "candidateId": "lit40-medium-06-050",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "text_structure",
+   "requestedDifficulty": "medium",
+   "passage": "Some costs are worth paying. I believed this when my mother, Taeyang, and I floated in the salt-water pool on Jeju, arguing over whether my wedding should be small. She wanted a hall for two hundred guests; I wanted the money set aside for my younger cousin's scholarship abroad. My mother let the water hold her and said nothing for a long time. Then she told me about the year she had been offered a place at a university in Seoul and had turned it down so her brother could go instead. She did not regret it, she said, but she had never stopped wondering. I had always thought of sacrifice as a clean exchange, one good traded for another. Watching her stare at the sky, I began to suspect that every such exchange leaves something unpaid.",
+   "question": "Which choice best describes the overall structure of the text?",
+   "options": [
+    "A belief is stated, tested by a story, and then complicated.",
+    "A conflict is posed, avoided entirely, and then quietly forgotten.",
+    "A memory is recalled, then disproved by a later event.",
+    "A setting is depicted, then a decision is announced."
+   ],
+   "correct_letter": "A",
+   "explanation": "글은 '어떤 대가는 치를 가치가 있다'는 화자의 믿음으로 시작한다. 결혼식 규모와 장학금을 두고 다투던 중 어머니가 오빠를 위해 대학을 포기했던 이야기를 들려주며, 그 믿음이 시험받는다. 화자는 희생이 깔끔한 교환이 아니라 무언가를 남긴다고 생각하게 되므로 A가 정답이다. D는 결혼식 결정을 예상한 오답이지만 지문에서 결정은 발표되지 않으며, C는 어머니의 기억이 반박되지 않는다는 점에서 틀렸다."
+  },
+  {
+   "candidateId": "lit40-medium-06-052",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "underlined_portion_function",
+   "requestedDifficulty": "medium",
+   "passage": "Bouzouki music and the clatter of plates filled the wedding hall in Thessaloniki, so loud that no one noticed two guests who had stopped speaking to each other. Zoya had taught Alisha literature for three years, and both of them had come for the bride, Alisha's cousin. An hour earlier, Alisha had handed Zoya an envelope she thought was a thank-you card; inside was a letter Alisha had written to a friend, describing Zoya's lessons with merciless accuracy. Now they sat at opposite ends of the same long table. __When the waiter set down the honey cakes, each of them reached for the plate at the same moment, and each pulled back as if burned.__ Neither moved again until the dancing began. Later, Alisha watched her teacher fold the letter into a small square and tuck it into her purse rather than throw it away.",
+   "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+   "options": [
+    "It introduces a rivalry that becomes the focus of the passage.",
+    "It suggests that the wedding itself is the source of their quarrel.",
+    "It shows through a gesture that both feel the strain equally.",
+    "It reveals that Zoya has already decided to forgive Alisha."
+   ],
+   "correct_letter": "C",
+   "explanation": "앞에서 두 사람은 편지 사건 이후 긴 테이블 양 끝에 떨어져 앉아 있다. 밑줄 문장에서 둘이 동시에 꿀 케이크 접시로 손을 뻗었다가 데인 듯 물러나는 동작은, 어색함과 긴장이 한쪽만이 아니라 양쪽 모두에게 있음을 보여 준다. 따라서 C가 정답이다. D는 마지막에 Zoya가 편지를 버리지 않는 장면과 연결한 오답이지만, 밑줄 문장 자체는 용서가 아니라 긴장을 드러낸다. B는 결혼식이 다툼의 원인이라고 잘못 보고, A의 경쟁 관계는 지문에 없다."
+  },
+  {
+   "candidateId": "lit40-medium-06-053",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "underlined_portion_function",
+   "requestedDifficulty": "medium",
+   "passage": "Karachi's monsoon had softened every page in the bookbinder's workshop, and Savitri, the night nurse, kept a lamp burning beside the narrow bed where old Tomoe slept among his presses. His family visited each afternoon and spoke of him as already gone, discussing which tools to sell. One evening a former apprentice arrived unannounced, a man who had not seen Tomoe in ten years. He stood a long time at the foot of the bed. __Then he pointed to Tomoe's hands, which, even in sleep, were folding the edge of the blanket into careful, even signatures, as if preparing a book for sewing.__ Savitri had seen the motion every night and thought it a restless habit. The apprentice took the bone folder from the bench and placed it gently in the old man's palm, and Tomoe's breathing slowed.",
+   "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+   "options": [
+    "It suggests that the apprentice has come to claim the tools.",
+    "It explains why the family has decided to sell the workshop.",
+    "It reveals that Savitri has neglected her duties as a nurse.",
+    "It shows the visitor seeing a craft that others overlooked."
+   ],
+   "correct_letter": "D",
+   "explanation": "가족은 Tomoe를 이미 떠난 사람처럼 대하며 도구를 팔 이야기를 하고, 간호사 Savitri도 그의 손동작을 단순한 버릇으로 여겼다. 밑줄 문장에서 방문객은 잠든 Tomoe가 담요 끝을 제본용 접장처럼 접고 있다는 것을 알아보며, 이는 다른 사람들이 놓친 장인의 솜씨를 방문객만이 알아본다는 기능을 한다. 따라서 D가 정답이다. A는 도구 판매 이야기를 근거로 한 오답이지만 방문객은 도구를 차지하려 하지 않고 오히려 노인의 손에 쥐여 준다. C는 Savitri가 매일 밤 곁을 지켰다는 점과 맞지 않는다."
+  },
+  {
+   "candidateId": "lit40-medium-06-054",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "underlined_portion_function",
+   "requestedDifficulty": "medium",
+   "passage": "“Smoked eel or herring?” my sister Irena asked, as though I had been gone a week rather than two years. We walked the open-air market in Riga, past Assunta's stall of pickled mushrooms, where Irena had worked every morning while I was at the front. I knew, though she had never written it, that her wages had paid off the loan I took before I left. I had rehearsed a speech of thanks on the train. __At Assunta's stall, Irena paid for both our lunches before I could reach for my wallet, and counted out the coins with the same care she must have used every week I was away.__ I put my hand back in my pocket. We ate on a bench by the canal and talked about the weather, the price of eel, and whether the old tram line would ever reopen.",
+   "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+   "options": [
+    "It hints at the unspoken debt through an ordinary act.",
+    "It shows that Irena resents the burden her brother left her.",
+    "It reveals that the narrator has forgotten what he owes.",
+    "It introduces Assunta as the person who lent the money."
+   ],
+   "correct_letter": "A",
+   "explanation": "화자는 여동생 Irena가 자신이 떠나기 전 진 빚을 임금으로 갚았다는 것을 알지만, 둘 다 그 일을 말하지 않는다. 밑줄 문장에서 Irena가 점심값을 먼저 내고 매주 그랬을 것처럼 동전을 조심스럽게 세는 모습은, 말하지 않는 빚을 일상적인 행동으로 넌지시 떠올리게 한다. 따라서 A가 정답이다. B는 짐을 떠안은 상황에서 원망을 추측한 오답이지만 Irena의 태도에는 원망이 드러나지 않는다. D는 Assunta가 단지 Irena가 일한 가게 주인일 뿐이라는 점을 놓친다."
+  },
+  {
+   "candidateId": "lit40-medium-06-055",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "underlined_portion_function",
+   "requestedDifficulty": "medium",
+   "passage": "I was fourteen when the rumor about my stepfather climbed the stairwell of our building in Istanbul. Someone on the third floor had decided that he drank, because he came home late and slowly. By the time the story reached our neighbor Yasmin, it had grown into something cruel, and Yasmin told it to the one person who should never have heard it: my mother. I listened from the landing as she repeated it. __My stepfather, coming up behind me with a sack of bread and a bandaged knee from his shift at the docks, stopped on the step below and waited until Yasmin had finished.__ Then he climbed past us, greeted her by name, and went inside to wash his hands. That night my mother unwrapped his knee herself, and I stopped calling him by his first name. I am Eda, I thought, and he is the one who waited.",
+   "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+   "options": [
+    "It confirms that the rumor about the stepfather was accurate.",
+    "It offers a quiet explanation for the habits behind the rumor.",
+    "It shows the stepfather preparing to confront the neighbor.",
+    "It shifts the focus from the stepfather to the narrator's mother."
+   ],
+   "correct_letter": "B",
+   "explanation": "앞에서 이웃들은 의붓아버지가 늦게, 천천히 귀가한다는 이유로 그가 술을 마신다는 소문을 만든다. 밑줄 문장은 그가 부두 일을 마치고 붕대 감은 무릎으로 빵을 들고 올라오는 모습을 보여 주어, 늦고 느린 귀가의 진짜 이유를 조용히 설명한다. 따라서 B가 정답이다. C는 그가 Yasmin의 말이 끝날 때까지 기다린 장면을 대립의 준비로 읽은 오답이지만, 그는 인사만 하고 들어간다. A는 소문이 사실이라는 근거가 없다는 점에서 틀렸다."
+  },
+  {
+   "candidateId": "lit40-medium-06-056",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "medium",
+   "passage": "Elan had been certain, for nearly an hour, that Beatriz was the woman who had promised to drive him to Flagstaff. They were the only two adults left in the camp dining hall on the plateau after the bus failed to arrive, and he had greeted her with the confidence of a man reminding someone of a debt. Beatriz, who had never seen him before, listened politely and then admitted she had been just as sure that he was the one who had promised to drive her. Neither had a car. Both had been told, by someone neither could name, that a ride was arranged. Elan considered this with great seriousness, as though the mystery deserved a committee. Then he offered her half of his peanut butter sandwich, which was, the narrator suspects, the only promise anyone kept that day.",
+   "question": "Which choice best describes the narrator's attitude toward Elan?",
+   "options": [
+    "Openly scornful of his foolish mistake",
+    "Gently amused by his confusion",
+    "Deeply worried about his poor memory",
+    "Coolly indifferent to his predicament"
+   ],
+   "correct_letter": "B",
+   "explanation": "서술자는 Elan이 빚을 상기시키는 사람처럼 자신 있게 말했다가 상대도 같은 착각을 했음을 알게 되는 과정을 유머러스하게 그린다. 또한 그가 이 수수께끼를 '위원회가 필요한 일'처럼 진지하게 생각했다고 표현하고, 샌드위치를 나눈 일을 그날 지켜진 유일한 약속이라 부르며 애정을 드러낸다. 따라서 너그럽게 즐거워하는 태도인 B가 정답이다. A는 Elan의 착각을 근거로 한 오답이지만 서술자는 그를 비웃지 않으며, C와 D도 서술자의 따뜻한 어조와 맞지 않는다."
+  }
+ ],
+ "instructions": "당신은 문항 감사관이다. 표시된 정답과 해설을 받아, 정답이 맞는지·해설이 일관되고 사실에 맞는지 점검한다(고치지 않고 판정만).\n청크 rev-explanation_audit-044 — 19문항.\n출력: Write 도구로 정확히 이 경로에 JSON 한 파일을 쓴다 → /Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-explanation_audit-044.result.json\n출력 JSON 스키마(예시 구조): {\"chunkId\":\"청크 ID\",\"model\":\"sonnet\",\"items\":[{\"candidateId\":\"id\",\"answer_correct\":\"표시된 정답이 정말 정답이면 true\",\"explanation_consistent\":\"해설이 정답·오답 판단과 일치하고 글자 참조가 맞으면 true\",\"explanation_factual\":\"해설에 사실 오류가 없으면 true\",\"issues\":\"한 줄 메모\"}]}\n허용 값: picked_letter ∈ {A,B,C,D}, 불리언 필드는 true/false, est_difficulty ∈ {easy,medium,hard}. candidateId 를 바꾸지 않고 모든 항목에 답한다.\n금지: 결과 파일 외의 파일 생성·수정, 다른 명령 실행, 문항 수정·재작성. 끝나면 'done <항목 수>' 한 줄만 답한다.\n\n## 문항\n### lit40-medium-06-032 — skill inferences · 유형 symbolism\n[지문]\nJoon and Suhyun met on the stone bridge in Busan every evening before their set, as they had for eight years. Lately the duo drew smaller crowds, and both knew why, though neither said it: Suhyun had been offered a solo contract in Seoul. Instead they talked about the bridge. Joon pointed out a crack running between two stones, filled long ago with mortar that had weathered to a different color. Suhyun said the bridge would stand for another century that way. Each night after that, one of them would touch the patched seam while passing, as if checking it. On their last evening before the contract deadline, Suhyun pressed her palm flat against the mortar and held it there, and Joon looked away toward the harbor lights.\n\n[질문] In the text, the mortar-filled crack in the bridge most likely represents\nA) the decline in audiences that has troubled the duo's recent performances.\nB) the long history of the city of Busan and its old stone architecture.\nC) Suhyun's confidence that she will succeed in her solo career in Seoul.\nD) the duo's strained partnership, held together by what they avoid saying.\n\n[표시된 정답] D\n[해설]\n지문은 두 사람이 Suhyun의 솔로 계약이라는 주제를 말하지 않고 대신 다리 이야기를 한다고 서술한다. 이어서 오래전 메운 균열을 매일 밤 확인하듯 만지고, 마감 전날 Suhyun이 손을 오래 대는 장면이 반복된다. 이 단서들을 이으면 균열과 모르타르는 말하지 않는 것으로 겨우 이어진 듀오의 관계를 상징하므로 D가 정답이다. A는 관객 감소라는 표면 정보, B는 문자 그대로의 의미, C는 지문에 근거가 없다.\n### lit40-medium-06-033 — skill words_in_context · 유형 figurative_language\n[지문]\nWhen Neema and Kiara hung their families' tablecloths side by side on the rooftop laundry line in Nairobi, neither said a word, as was their habit after forty years of friendship. Neema's cloth was stiff white cotton for her family's Sunday lunch; Kiara's was patterned in red and gold for the evening feast her relatives were bringing to the same house. The two cloths flapped against each other in the wind, tangling and parting and tangling again, a quarrel conducted entirely in cotton. Kiara reached up once to separate them, then let her hand fall. By late afternoon both were dry, and Neema folded them together, the white inside the red, so they would fit on the one long table downstairs.\n\n[질문] As used in the text, the phrase “a quarrel conducted entirely in cotton” most nearly suggests that\nA) the tablecloths' motion expresses the tension the silent friends never voice.\nB) the friends argue loudly about which cloth should be used for the meal.\nC) the cotton cloths are being damaged by the strong wind on the roof.\nD) the two families have refused to share the long table downstairs.\n\n[표시된 정답] A\n[해설]\n지문 첫 문장에서 두 친구는 40년 우정 동안 습관처럼 말을 하지 않는다고 하고, 두 집안의 서로 다른 전통이 한 식탁을 나눠야 하는 상황이 제시된다. 바람에 엉키고 떨어지는 천을 말다툼에 비유한 표현은 말로 하지 않는 긴장이 천의 움직임으로 드러난다는 뜻이므로 A가 정답이다. B는 침묵한다는 서술과 모순되고, C는 문자 그대로의 해석이며, D는 마지막에 함께 접어 한 식탁에 올리는 장면과 맞지 않는다.\n### lit40-medium-06-034 — skill words_in_context · 유형 figurative_language\n[지문]\nWho would have guessed that Larissa would end up keeping bees in a Glasgow yard? Twenty years earlier she and her stage partner had toured every hall in Scotland, and Eamon, who had managed them both, now arrived at her gate with news: her old partner was staging a reunion and wanted Larissa to join. Larissa lifted a frame from the hive, heavy with comb, and said she had promised the neighborhood association a season of honey. Eamon watched the bees crawl over her bare wrists without stinging. Her old loyalty tugged at her one way, the new one another, and she stood between them like a hive with two queens, humming and uneasy. She asked him to come back after the harvest, when she might have an answer.\n\n[질문] As used in the text, the phrase “like a hive with two queens” most nearly suggests that Larissa\nA) has become an expert beekeeper with an unusually productive hive.\nB) is torn between competing commitments that cannot easily coexist.\nC) feels threatened by her former stage partner's growing fame.\nD) intends to lead both the reunion and the neighborhood association.\n\n[표시된 정답] B\n[해설]\n지문은 옛 무대 파트너의 재결합 공연 제안과 동네 협회에 꿀을 약속한 새로운 책임을 함께 제시한다. 바로 앞 문장에서 옛 충성과 새 충성이 서로 다른 방향으로 그녀를 끌어당긴다고 말하므로, 여왕벌이 둘인 벌통은 공존하기 어려운 두 의무 사이의 갈등을 뜻한다. 따라서 B가 정답이다. A는 문자 그대로의 해석, C는 근거 없는 감정, D는 두 역할을 다 맡는다는 잘못된 추론이다.\n### lit40-medium-06-035 — skill words_in_context · 유형 figurative_language\n[지문]\nTell him only that I'm tired, Ruoxi said,\nher voice small in the Taipei gym\nwhere her brother's team ran drills beneath the lights.\nNora, who carried words between two languages for pay,\nweighed the sentence like a coin with two faces.\nThe doctor's news sat folded in her pocket,\na paper boat she could not sail across the court.\nThe boy waved from the free-throw line, grinning,\nand Nora waved back, choosing the smaller truth,\nwhile sneakers squealed on the varnished floor\nand the scoreboard blinked its patient zeros.\n\n[질문] As used in the text, the phrase “a paper boat she could not sail across the court” most nearly suggests that Nora\nA) is unable to read the doctor's handwriting on the folded paper.\nB) wishes she could join the brother's team practice on the court.\nC) cannot bring herself to deliver the serious news to the boy.\nD) plans to give the boy a small gift once the practice ends.\n\n[표시된 정답] C\n[해설]\n시에서 Ruoxi는 동생에게 피곤하다고만 전해 달라고 부탁하고, 통역사는 그 문장을 양면 동전처럼 저울질한다. 이후 그녀가 더 작은 진실을 택하며 손을 흔드는 장면과 이어 보면, 코트를 건너 띄울 수 없는 종이배는 의사의 소식을 소년에게 전하지 못하는 마음을 비유한다. 따라서 C가 정답이다. A와 D는 종이를 문자 그대로 해석했고, B는 코트라는 단어만 활용한 오독이다.\n### lit40-medium-06-036 — skill words_in_context · 유형 figurative_language\n[지문]\nI worked the night shift at a pharmacy in Valparaiso the winter my marriage to Takoda was quietly coming apart, and his mother, Cleotilde, came in nearly every evening near midnight. She bought small things: throat lozenges, a comb, a single bandage. We talked about the fog, the price of oranges, her knees. Neither of us mentioned that Takoda had not slept at home in weeks. Our conversations were a bridge built only to its middle, and each night we walked out to the edge of it, admired the view, and turned back. Once she paused at the door and seemed about to say his name. Instead she pulled her scarf higher and stepped into the wet street, where taxis hissed past under the hill's yellow lamps.\n\n[질문] As used in the text, the phrase “a bridge built only to its middle” most nearly suggests that the conversations\nA) were difficult because the two women spoke different languages.\nB) gradually brought the women to an open discussion of the marriage.\nC) took place on the walk from the pharmacy across the town's bridge.\nD) reached toward each other but always stopped short of the real subject.\n\n[표시된 정답] D\n[해설]\n화자는 둘이 안개, 오렌지 값, 무릎 이야기만 하고 Takoda가 몇 주째 집에 오지 않은 사실은 꺼내지 않았다고 말한다. 또 Cleotilde가 문 앞에서 그의 이름을 말하려다 멈추는 장면이 이어지므로, 중간까지만 지은 다리는 서로 다가가지만 핵심 주제 앞에서 늘 멈추는 대화를 뜻한다. 따라서 D가 정답이다. A는 근거 없는 언어 차이, B는 반대 방향의 진전, C는 문자 그대로의 해석이다.\n### lit40-medium-06-037 — skill words_in_context · 유형 figurative_language\n[지문]\nMeera and Eulalio ran rival bakeries on opposite sides of the mountain bus stop outside Lima, and I spent my tenth summer carrying flour sacks for Meera. That year the old master baker of the village died and left his copper dough scraper not to Meera, his apprentice of twenty years, but to Eulalio, who had once insulted his bread in public. For weeks the scraper hung in Eulalio's window, untouched, a medal pinned on the wrong chest. Customers waiting for the bus whispered about it. Eulalio's loaves came out lopsided, and he stopped meeting anyone's eyes. One morning in August I found the scraper wrapped in brown paper on Meera's doorstep, no note attached. The early bus groaned up the switchbacks, its roof stacked with crates of potatoes.\n\n[질문] As used in the text, the phrase “a medal pinned on the wrong chest” most nearly suggests that the scraper\nA) was an honor that everyone sensed rightly belonged to someone else.\nB) was a prize Eulalio had won in a public baking competition.\nC) was too valuable to be used for ordinary daily baking.\nD) was displayed to insult Meera in front of the customers.\n\n[표시된 정답] A\n[해설]\n지문은 스크레이퍼가 20년 제자인 Meera가 아니라 한때 스승의 빵을 모욕했던 Eulalio에게 남겨졌다고 설명한다. 이후 손님들이 수군대고 Eulalio가 눈을 피하다가 결국 Meera의 문 앞에 두고 가는 장면이 이어져, 잘못된 가슴에 단 훈장은 다른 사람에게 돌아갔어야 할 영예임을 뜻한다. 따라서 A가 정답이다. B는 훈장을 문자 그대로 상으로 해석했고, C는 근거가 없으며, D는 Eulalio의 위축된 태도와 맞지 않는다.\n### lit40-medium-06-043 — skill text_structure_purpose · 유형 tone_shift\n[지문]\nWhen the train lurched out of the station at Kollam, Ananya was already watching Radek over the top of her newspaper. Her retired neighbor had insisted on carrying her suitcase, had bought her tea at every stop, and had now offered to hold her ticket while she slept. A sailor, she reminded herself, learns to be charming in every port, and charm usually wants something. She kept the ticket in her fist. Near Alappuzha, however, the conductor came through, and Radek quietly paid the fare difference she had not known she owed, waving off her protest. He explained that her late husband had once done the same for him on a ship bound for Kochi. Ananya folded the newspaper. She found she could not quite meet his eyes, and the tea he handed her next tasted unaccountably sweeter than the last.\n\n[질문] Which choice best describes the shift in tone in the text?\nA) It moves from nostalgic to openly bitter.\nB) It moves from wary to quietly chastened.\nC) It moves from playful to suddenly anxious.\nD) It moves from indifferent to mildly amused.\n\n[표시된 정답] B\n[해설]\n앞부분에서 Ananya는 Radek의 친절을 '무언가를 원하는 매력'으로 의심하며 표를 주먹에 쥐고 있다. 그러나 Radek이 그녀가 몰랐던 운임을 대신 내고 남편과의 인연을 설명한 뒤, 그녀는 그의 눈을 마주치지 못하고 차 맛이 달게 느껴진다. 따라서 경계에서 조용한 부끄러움으로 바뀐다는 B가 정답이다. A는 남편 회상을 근거로 한 오답이지만 씁쓸함은 드러나지 않고, C와 D는 처음의 의심하는 어조를 놓친다.\n### lit40-medium-06-044 — skill text_structure_purpose · 유형 tone_shift\n[지문]\nA brown parcel slid back across the counter, stamped twice in red: REFUSED BY RECIPIENT. Waya read the stamp aloud in the officer's flat voice, and Tallulah laughed despite the fluorescent hum of the Albuquerque checkpoint. Their mother would have called the officer a magistrate of string and tape. They had driven three hours to collect it, sure it held another of her complaints about the price of postage. Tallulah tore it open in the parking lot. Inside, beneath their mother's own letters to her sister, lay a quilt square stitched with the two of them as children, each name embroidered in uneven thread. Waya traced his name with one finger. Neither of them laughed again. They sat in the car with the engine off and read the letters slowly, passing each page back and forth as though it might break.\n\n[질문] Which choice best describes the shift in tone in the text?\nA) It shifts from grieving to cautiously hopeful.\nB) It shifts from tense to openly triumphant.\nC) It shifts from wry to hushed and tender.\nD) It shifts from formal to sharply accusatory.\n\n[표시된 정답] C\n[해설]\n처음에는 Waya가 직원의 무덤덤한 목소리를 흉내 내고 어머니의 재치 있는 표현이 떠오르는 등 냉소적인 유머가 있다. 소포 안에서 남매의 이름을 수놓은 퀼트 조각과 편지가 나온 뒤에는 웃음이 사라지고 편지를 조심스럽게 주고받는 다정한 분위기가 된다. 따라서 C가 정답이다. A는 슬픔이 처음부터 있었다고 보는 오답이고, B와 D는 지문에 없는 승리감이나 비난을 가정한다.\n### lit40-medium-06-045 — skill text_structure_purpose · 유형 tone_shift\n[지문]\nWhen the post office opens at eight in Bergen's hills,\nGunnar sorts the letters as he always has,\nand Leilani, new this spring, stacks the parcels by weight.\nThey speak of rain, of the ferry, of the stamp machine's cough.\nNeither mentions the empty stool by the window\nwhere the old postmistress kept her thermos warm.\nBut at noon, when Gunnar pours two cups instead of three,\nhe pauses with the kettle tilted over nothing,\nand Leilani watches the steam drift toward the glass\nas if it, too, were waiting for someone to come in.\nShe slides her own cup toward the window stool\nand neither of them says why.\n\n[질문] Which choice best describes the shift in tone in the poem?\nA) It shifts from joyful to openly resentful.\nB) It shifts from solemn to lightly playful.\nC) It shifts from fearful to calmly relieved.\nD) It shifts from matter-of-fact to wistful.\n\n[표시된 정답] D\n[해설]\n시의 앞부분은 편지 분류, 비, 페리, 우표 기계 같은 일상을 담담하게 나열한다. 정오에 Gunnar가 세 잔 대신 두 잔을 따르다 멈추고, 김이 누군가를 기다리듯 창으로 향하는 장면부터 떠난 사람에 대한 그리움이 드러난다. 따라서 담담함에서 그리움으로 바뀐다는 D가 정답이다. B는 빈 의자 언급을 엄숙함으로 읽은 그럴듯한 오답이지만 뒤로 갈수록 장난스러워지지 않으며, A와 C의 감정은 지문에 없다.\n### lit40-medium-06-046 — skill text_structure_purpose · 유형 tone_shift\n[지문]\nWhat do you owe a friend who has only weeks left? I asked Aiko this on the dock behind her house in Hokkaido, the lake so still that our reflections looked more certain than we did. Ren had asked me, in the hospital, whether his mother had forgiven him, and I had said yes, though she had said nothing of the kind. For days I circled the lie, wondering if I should take it back or let it stand. Aiko, who had known Ren's family for forty years, said only that his mother had sat outside his room every night, unable to go in. I watched a heron lift from the reeds. That evening I went back to the hospital, not to correct myself, but to tell Ren what Aiko had seen, and to let him decide what it meant.\n\n[질문] Which choice best describes the shift in tone in the text?\nA) It moves from uneasy questioning to quiet resolve.\nB) It moves from bitter complaint to forced cheer.\nC) It moves from playful teasing to sudden alarm.\nD) It moves from detached reporting to sudden open anger.\n\n[표시된 정답] A\n[해설]\n글은 '무엇을 빚졌는가'라는 질문과 함께 화자가 며칠 동안 거짓말을 두고 망설이는 불안한 어조로 시작한다. Aiko가 Ren의 어머니가 매일 밤 병실 밖에 앉아 있었다고 말한 뒤 화자는 병원으로 돌아가 본 것을 전하기로 차분히 결정한다. 따라서 A가 정답이다. D는 화자의 담담한 서술을 근거로 한 오답이지만 분노는 드러나지 않고, B와 C도 지문의 정서와 맞지 않는다.\n### lit40-medium-06-047 — skill text_structure_purpose · 유형 tone_shift\n[지문]\n“I'll need to see the candle receipts again,” Leah said, for the third morning running. I ran the little gift counter at the monastery guesthouse on Chicago's South Side, and by then I could recite her order before she reached the bell. She counted coins slowly, held each receipt to the window, and asked questions no one else bothered to ask. I began greeting her with a smile tight enough to crack. On the fourth morning she laid a twenty-dollar bill on the counter and explained, without any triumph, that I had charged her for a box of candles twice the week before. She had waited, she said, until she was certain, because she did not want to embarrass me in front of the brothers. I took the bill and stared at it a long while. After that, I kept her receipts in a drawer of their own.\n\n[질문] Which choice best describes the shift in tone in the text?\nA) It moves from amused to quietly fearful.\nB) It moves from irritated to humbled.\nC) It moves from grateful to suspicious.\nD) It moves from solemn to openly giddy.\n\n[표시된 정답] B\n[해설]\n처음에 화자는 매일 영수증을 다시 보자는 Leah를 귀찮아하며 '금이 갈 듯한 억지 미소'로 맞는다. Leah가 화자의 이중 청구 실수를 조용히 알려 주고 수도사들 앞에서 망신을 주지 않으려 기다렸다고 말하자, 화자는 지폐를 오래 바라보며 겸허해진다. 따라서 B가 정답이다. A는 반복되는 상황을 우스꽝스럽게 읽은 오답이고, C는 감정 변화의 방향을 거꾸로 잡았다.\n### lit40-medium-06-048 — skill text_structure_purpose · 유형 text_structure\n[지문]\nHow long did a stowaway think a captain's patience could last? Sadia put the question plainly as they walked the promenade in Colombo, the harbor lights behind them. Ayesha had hidden in the cargo hold for six days and now owed passage money she plainly did not have. She offered promises instead: a cousin with a shop, a job by the end of the month, interest on every rupee. Sadia listened without answering. She was remembering a different harbor, twenty years earlier, and a girl curled behind sacks of rice who had been found by a captain far less patient than she was. That captain had put her ashore with nothing. Sadia stopped beside the seawall. She told Ayesha that the debt would keep, and that the month she had mentioned could be two, if the cousin proved slow.\n\n[질문] Which choice best describes the overall structure of the text?\nA) A promise is made, then broken, then bitterly recalled by the captain.\nB) A dispute is described, then settled by an outside figure's decision.\nC) A demand is posed, a memory reframes it, and the demand is eased.\nD) A setting is portrayed at length, then a stranger's past is revealed.\n\n[표시된 정답] C\n[해설]\n글은 Sadia가 밀항자 Ayesha에게 인내심의 한계를 묻는 요구로 시작하고, Ayesha의 약속이 이어진다. 중간에 Sadia가 자신도 과거에 밀항했다가 무정한 선장에게 내쫓긴 기억이 나오며, 이 기억이 현재 상황을 다르게 보게 만든다. 결국 Sadia는 빚을 미루고 기한을 늘려 주므로 C가 정답이다. B는 외부 인물이 결정한다고 보지만 결정은 Sadia 자신이 하며, D는 드러나는 과거가 낯선 사람이 아니라 선장 본인의 것임을 놓친다.\n### lit40-medium-06-049 — skill text_structure_purpose · 유형 text_structure\n[지문]\n“I won't be coming to the anniversary dinner,” Bahram said, moving his bishop before Tamar had finished setting the board. They had played on this hillside terrace above Dhaka every Friday for twenty-two years, and for twenty-two years Bahram had won exactly as often as he lost. Tamar had kept a tally in pencil on the underside of the table. He had planned the club's dinner partly to announce the final count. Now he studied his old rival's face and saw, for the first time, a tremor in the hand that held the bishop. Bahram's eyes had been failing for months; he could no longer read a menu, let alone a speech. Tamar said nothing about it. He simply turned the table over, rubbed out the pencil marks with his thumb, and suggested they play on the terrace that night instead.\n\n[질문] Which choice best describes the overall structure of the text?\nA) A competition is recounted, and then its final winner is declared.\nB) A conflict is introduced, and then an apology resolves it at once.\nC) A setting is described, and then a flashback explains the rivalry.\nD) A refusal is stated, and then its hidden cause alters a plan.\n\n[표시된 정답] D\n[해설]\n글은 Bahram이 기념 만찬에 가지 않겠다고 거절하는 대사로 시작한다. 이어 두 사람의 오랜 경쟁과 Tamar의 계획이 소개된 뒤, Tamar는 Bahram의 시력이 나빠졌다는 숨은 이유를 알아차린다. 그 결과 Tamar는 기록을 지우고 만찬 대신 테라스에서 두자고 제안하므로 D가 정답이다. A는 최종 승자를 발표하려던 계획을 근거로 한 오답이지만 실제로는 기록이 지워지고, B는 지문에 사과가 없다는 점에서 틀렸다.\n### lit40-medium-06-050 — skill text_structure_purpose · 유형 text_structure\n[지문]\nSome costs are worth paying. I believed this when my mother, Taeyang, and I floated in the salt-water pool on Jeju, arguing over whether my wedding should be small. She wanted a hall for two hundred guests; I wanted the money set aside for my younger cousin's scholarship abroad. My mother let the water hold her and said nothing for a long time. Then she told me about the year she had been offered a place at a university in Seoul and had turned it down so her brother could go instead. She did not regret it, she said, but she had never stopped wondering. I had always thought of sacrifice as a clean exchange, one good traded for another. Watching her stare at the sky, I began to suspect that every such exchange leaves something unpaid.\n\n[질문] Which choice best describes the overall structure of the text?\nA) A belief is stated, tested by a story, and then complicated.\nB) A conflict is posed, avoided entirely, and then quietly forgotten.\nC) A memory is recalled, then disproved by a later event.\nD) A setting is depicted, then a decision is announced.\n\n[표시된 정답] A\n[해설]\n글은 '어떤 대가는 치를 가치가 있다'는 화자의 믿음으로 시작한다. 결혼식 규모와 장학금을 두고 다투던 중 어머니가 오빠를 위해 대학을 포기했던 이야기를 들려주며, 그 믿음이 시험받는다. 화자는 희생이 깔끔한 교환이 아니라 무언가를 남긴다고 생각하게 되므로 A가 정답이다. D는 결혼식 결정을 예상한 오답이지만 지문에서 결정은 발표되지 않으며, C는 어머니의 기억이 반박되지 않는다는 점에서 틀렸다.\n### lit40-medium-06-052 — skill text_structure_purpose · 유형 underlined_portion_function\n[지문]\nBouzouki music and the clatter of plates filled the wedding hall in Thessaloniki, so loud that no one noticed two guests who had stopped speaking to each other. Zoya had taught Alisha literature for three years, and both of them had come for the bride, Alisha's cousin. An hour earlier, Alisha had handed Zoya an envelope she thought was a thank-you card; inside was a letter Alisha had written to a friend, describing Zoya's lessons with merciless accuracy. Now they sat at opposite ends of the same long table. __When the waiter set down the honey cakes, each of them reached for the plate at the same moment, and each pulled back as if burned.__ Neither moved again until the dancing began. Later, Alisha watched her teacher fold the letter into a small square and tuck it into her purse rather than throw it away.\n\n[질문] Which choice best describes the function of the underlined sentence in the text as a whole?\nA) It introduces a rivalry that becomes the focus of the passage.\nB) It suggests that the wedding itself is the source of their quarrel.\nC) It shows through a gesture that both feel the strain equally.\nD) It reveals that Zoya has already decided to forgive Alisha.\n\n[표시된 정답] C\n[해설]\n앞에서 두 사람은 편지 사건 이후 긴 테이블 양 끝에 떨어져 앉아 있다. 밑줄 문장에서 둘이 동시에 꿀 케이크 접시로 손을 뻗었다가 데인 듯 물러나는 동작은, 어색함과 긴장이 한쪽만이 아니라 양쪽 모두에게 있음을 보여 준다. 따라서 C가 정답이다. D는 마지막에 Zoya가 편지를 버리지 않는 장면과 연결한 오답이지만, 밑줄 문장 자체는 용서가 아니라 긴장을 드러낸다. B는 결혼식이 다툼의 원인이라고 잘못 보고, A의 경쟁 관계는 지문에 없다.\n### lit40-medium-06-053 — skill text_structure_purpose · 유형 underlined_portion_function\n[지문]\nKarachi's monsoon had softened every page in the bookbinder's workshop, and Savitri, the night nurse, kept a lamp burning beside the narrow bed where old Tomoe slept among his presses. His family visited each afternoon and spoke of him as already gone, discussing which tools to sell. One evening a former apprentice arrived unannounced, a man who had not seen Tomoe in ten years. He stood a long time at the foot of the bed. __Then he pointed to Tomoe's hands, which, even in sleep, were folding the edge of the blanket into careful, even signatures, as if preparing a book for sewing.__ Savitri had seen the motion every night and thought it a restless habit. The apprentice took the bone folder from the bench and placed it gently in the old man's palm, and Tomoe's breathing slowed.\n\n[질문] Which choice best describes the function of the underlined sentence in the text as a whole?\nA) It suggests that the apprentice has come to claim the tools.\nB) It explains why the family has decided to sell the workshop.\nC) It reveals that Savitri has neglected her duties as a nurse.\nD) It shows the visitor seeing a craft that others overlooked.\n\n[표시된 정답] D\n[해설]\n가족은 Tomoe를 이미 떠난 사람처럼 대하며 도구를 팔 이야기를 하고, 간호사 Savitri도 그의 손동작을 단순한 버릇으로 여겼다. 밑줄 문장에서 방문객은 잠든 Tomoe가 담요 끝을 제본용 접장처럼 접고 있다는 것을 알아보며, 이는 다른 사람들이 놓친 장인의 솜씨를 방문객만이 알아본다는 기능을 한다. 따라서 D가 정답이다. A는 도구 판매 이야기를 근거로 한 오답이지만 방문객은 도구를 차지하려 하지 않고 오히려 노인의 손에 쥐여 준다. C는 Savitri가 매일 밤 곁을 지켰다는 점과 맞지 않는다.\n### lit40-medium-06-054 — skill text_structure_purpose · 유형 underlined_portion_function\n[지문]\n“Smoked eel or herring?” my sister Irena asked, as though I had been gone a week rather than two years. We walked the open-air market in Riga, past Assunta's stall of pickled mushrooms, where Irena had worked every morning while I was at the front. I knew, though she had never written it, that her wages had paid off the loan I took before I left. I had rehearsed a speech of thanks on the train. __At Assunta's stall, Irena paid for both our lunches before I could reach for my wallet, and counted out the coins with the same care she must have used every week I was away.__ I put my hand back in my pocket. We ate on a bench by the canal and talked about the weather, the price of eel, and whether the old tram line would ever reopen.\n\n[질문] Which choice best describes the function of the underlined sentence in the text as a whole?\nA) It hints at the unspoken debt through an ordinary act.\nB) It shows that Irena resents the burden her brother left her.\nC) It reveals that the narrator has forgotten what he owes.\nD) It introduces Assunta as the person who lent the money.\n\n[표시된 정답] A\n[해설]\n화자는 여동생 Irena가 자신이 떠나기 전 진 빚을 임금으로 갚았다는 것을 알지만, 둘 다 그 일을 말하지 않는다. 밑줄 문장에서 Irena가 점심값을 먼저 내고 매주 그랬을 것처럼 동전을 조심스럽게 세는 모습은, 말하지 않는 빚을 일상적인 행동으로 넌지시 떠올리게 한다. 따라서 A가 정답이다. B는 짐을 떠안은 상황에서 원망을 추측한 오답이지만 Irena의 태도에는 원망이 드러나지 않는다. D는 Assunta가 단지 Irena가 일한 가게 주인일 뿐이라는 점을 놓친다.\n### lit40-medium-06-055 — skill text_structure_purpose · 유형 underlined_portion_function\n[지문]\nI was fourteen when the rumor about my stepfather climbed the stairwell of our building in Istanbul. Someone on the third floor had decided that he drank, because he came home late and slowly. By the time the story reached our neighbor Yasmin, it had grown into something cruel, and Yasmin told it to the one person who should never have heard it: my mother. I listened from the landing as she repeated it. __My stepfather, coming up behind me with a sack of bread and a bandaged knee from his shift at the docks, stopped on the step below and waited until Yasmin had finished.__ Then he climbed past us, greeted her by name, and went inside to wash his hands. That night my mother unwrapped his knee herself, and I stopped calling him by his first name. I am Eda, I thought, and he is the one who waited.\n\n[질문] Which choice best describes the function of the underlined sentence in the text as a whole?\nA) It confirms that the rumor about the stepfather was accurate.\nB) It offers a quiet explanation for the habits behind the rumor.\nC) It shows the stepfather preparing to confront the neighbor.\nD) It shifts the focus from the stepfather to the narrator's mother.\n\n[표시된 정답] B\n[해설]\n앞에서 이웃들은 의붓아버지가 늦게, 천천히 귀가한다는 이유로 그가 술을 마신다는 소문을 만든다. 밑줄 문장은 그가 부두 일을 마치고 붕대 감은 무릎으로 빵을 들고 올라오는 모습을 보여 주어, 늦고 느린 귀가의 진짜 이유를 조용히 설명한다. 따라서 B가 정답이다. C는 그가 Yasmin의 말이 끝날 때까지 기다린 장면을 대립의 준비로 읽은 오답이지만, 그는 인사만 하고 들어간다. A는 소문이 사실이라는 근거가 없다는 점에서 틀렸다.\n### lit40-medium-06-056 — skill central_ideas_details · 유형 narrator_attitude\n[지문]\nElan had been certain, for nearly an hour, that Beatriz was the woman who had promised to drive him to Flagstaff. They were the only two adults left in the camp dining hall on the plateau after the bus failed to arrive, and he had greeted her with the confidence of a man reminding someone of a debt. Beatriz, who had never seen him before, listened politely and then admitted she had been just as sure that he was the one who had promised to drive her. Neither had a car. Both had been told, by someone neither could name, that a ride was arranged. Elan considered this with great seriousness, as though the mystery deserved a committee. Then he offered her half of his peanut butter sandwich, which was, the narrator suspects, the only promise anyone kept that day.\n\n[질문] Which choice best describes the narrator's attitude toward Elan?\nA) Openly scornful of his foolish mistake\nB) Gently amused by his confusion\nC) Deeply worried about his poor memory\nD) Coolly indifferent to his predicament\n\n[표시된 정답] B\n[해설]\n서술자는 Elan이 빚을 상기시키는 사람처럼 자신 있게 말했다가 상대도 같은 착각을 했음을 알게 되는 과정을 유머러스하게 그린다. 또한 그가 이 수수께끼를 '위원회가 필요한 일'처럼 진지하게 생각했다고 표현하고, 샌드위치를 나눈 일을 그날 지켜진 유일한 약속이라 부르며 애정을 드러낸다. 따라서 너그럽게 즐거워하는 태도인 B가 정답이다. A는 Elan의 착각을 근거로 한 오답이지만 서술자는 그를 비웃지 않으며, C와 D도 서술자의 따뜻한 어조와 맞지 않는다."
+}

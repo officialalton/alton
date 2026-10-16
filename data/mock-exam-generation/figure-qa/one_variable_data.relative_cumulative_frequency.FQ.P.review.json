@@ -1,0 +1,25 @@
+{
+ "itemId": "one_variable_data.relative_cumulative_frequency.FQ.P",
+ "verdict": "pass",
+ "reviewedAt": "2026-10-05T19:43:04.000Z",
+ "reviewer": "visual-review-agent-SC",
+ "codeHash": "ee3d26f5b610b701ffe5a6388c4f39dc4b73ef82fad8a17df5da4477543cb559",
+ "samples": [
+  "one_variable_data.relative_cumulative_frequency.FQ.P.png"
+ ],
+ "checklist": {
+  "figure_present": "pass",
+  "proportion_matches_values": "pass",
+  "labels_placed_and_legible": "pass",
+  "multi_figure_consistent": "n/a",
+  "text_matches_figure_and_solvable": "pass",
+  "axes_ticks_units_legend": "pass",
+  "choice_distinct_one_rule": "n/a",
+  "sat_visual_style": "pass",
+  "mobile_375_readable": "pass"
+ },
+ "defects": [],
+ "notes": "n=50, 10 at value 5; (10+x)/(50+x)=0.5 => x=30 = meta. Re-review after label rule change: table items, no line/curve labels referenced or drawn.",
+ "restampedAt": "2026-10-05T00:00:00Z",
+ "restampNote": "2026-10-05 영문화로 ProblemFigure.tsx(해시 대상) 문구만 변경 — SVG·PNG 바이트 동일, 해시만 갱신"
+}

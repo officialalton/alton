@@ -1,0 +1,43 @@
+{
+ "itemId": "ratios_rates_units.proportion.LN.P",
+ "generatedAt": "2026-10-07T05:02:00.654Z",
+ "codeHash": "0e23567ad0e40d4fc3bb3f38274426126ff195c96b21fa1cd003de5c97bea5a9",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/coordinate-plane.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/graph-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/ratios_rates_units.proportion.LN.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "ratios_rates_units.proportion.LN.P.png",
+   "mobileFile": "ratios_rates_units.proportion.LN.P.m375.png",
+   "archetypeId": "prpg.proportion.LN.P.repr_shift",
+   "seed": 11,
+   "signature": "plane",
+   "stimulus": "Data collected by a research group show that the number of pages it prints is related to the time a printer runs by a linear model, whose graph is shown.",
+   "question": "Based on the graph, what is the number of pages it prints, in pages, when the time a printer runs is 14 minutes?",
+   "options": [
+    "65",
+    "70",
+    "20",
+    "75"
+   ],
+   "correctIndex": 1,
+   "answer": "70",
+   "explanation": "(1) 그래프에 표시된 두 점 (0, 0) 과 (2, 10) 을 읽는다. (2) 기울기 = (10 - 0) ÷ (2 - 0) = 5 이다. (3) x = 0 일 때 값: 0 - (5) × 0 = 0 이다. (4) 원점을 지나므로 y = 5x 이고, minutes 1 당 pages 5 이다. (5) 값 = 5 × 14 = 70 이다. 따라서 정답은 70이다.",
+   "structuralIssues": []
+  }
+ ]
+}

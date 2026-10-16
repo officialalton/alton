@@ -1,0 +1,4537 @@
+[
+ {
+  "key": "ap_chemistry-m01-k0",
+  "cellId": "ap_chemistry-m01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Iodine has the largest atomic radius, so H–I has the longest bond and the poorest orbital overlap. That gives it the lowest bond energy (about 299 kJ/mol).",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "HI"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "The item targets topic 8.6 (bond length and strength down the halogen group, which governs acid strength). The demand is a single trend recall. The skill is a thin fit for 4.A (use a given model), because no model or data is provided, but it is acceptable."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "HI is uniquely the longest and weakest H-X bond. The distractor data are accurate (HF 92 pm and 567 kJ/mol, HCl 127 pm and 431, HBr 141 pm and 366, HI 161 pm and 299)."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear and complete. Because the question is unambiguous, the quantities in the option explanations are not required in the stem."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The distractors are simply the other three halogens. Each explanation says 'shorter and stronger than HI', which is not a named, distinct misconception. Only the HF explanation encodes a misconception (choosing the most electronegative atom). The explanations also cite numerical values that were never given to the student."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "This is pure one-step recall with no data or reasoning, and the calculator is irrelevant. It is below the level of AP Chemistry 8.6 items, which typically ask students to connect bond strength and polarity to acid strength, for example by comparing HF and HI acidity or the acidity of oxyacids. The question stops at bond length and strength and never reaches acid strength, so it is trivially easy."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and unique, and the chemistry is accurate. However, the item is a simple recall of a periodic trend that never links bond strength to acid strength. The distractor rationales are generic, and only the HF one names a misconception. I recommend revising it to ask for the acid-strength consequence or to supply bond data to interpret. It currently fails on distractor quality and exam suitability."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step recall of the periodic trend: bond length increases and bond strength decreases down group 17, so HI has the longest and weakest H-X bond. No calculation, no data to read, no multi-step linkage to acidity or a claim. Short, unambiguous wording.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 20
+  }
+ },
+ {
+  "key": "ap_chemistry-m01-k1",
+  "cellId": "ap_chemistry-m01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Iodine has the largest atomic radius, so the H–I bond is the longest and has the poorest orbital overlap. That makes it the weakest bond (about 299 kJ/mol).",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "HI"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct, but the item is a recall question with no model to apply. It is below AP rigor for 4.A and does not connect bond strength to acid strength. Fail on scope/skill and exam suitability.",
+   "scope_skill": {
+    "pass": false,
+    "notes": "The item is pure recall of a periodic trend, with no model supplied or applied. This is a weak fit for skill 4.A (using a given model to predict or explain). The only reasoning is \"down the group, bonds weaken\", and the item never links that to acid strength, the core of 8.6."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "HI is the unique correct answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed, and the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option is explained with accurate bond data. They all encode essentially the same misconception, with a named electronegativity misconception only for HF."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The item is too easy and takes about 20 seconds. It is a trivial recall question below AP rigor. The calculator designation is irrelevant to it."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step recall of the periodic trend in bond length and bond strength for the hydrogen halides (HI is longest and weakest). It involves no calculation, no representation change and no multi-step reasoning, so it sits below full-mock level.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 25
+  }
+ },
+ {
+  "key": "ap_chemistry-m01-k2",
+  "cellId": "ap_chemistry-m01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "I has largest atomic radius, so H–I bond is longest with poorest orbital overlap, hence weakest.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "HI"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct, but the item is pure recall of a periodic trend (the longest, weakest H-X bond is HI). It never connects the trend to acid strength and uses no given model, so it does not meet skill 4.A or the 8.6 learning objective. It is too low-level for an AP item.",
+   "scope_skill": {
+    "pass": false,
+    "notes": "The stem asks only about bond length and strength. It does not ask about acid strength or require applying a model, so 4.A is not demanded."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "HI is the unique correct answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed, and the stem is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option is a different halide with accurate data and its own explanation. The rationales stay on bond length and strength and do not reach acid strength."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The item is trivial recall that takes about 30 seconds. It lacks the reasoning step an AP item should require."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step recall of the periodic trend in H-X bond length and strength. Atomic radius increases down group 17, so HI has the longest and weakest bond. No computation, no representation change, and minimal reading. It is aligned with topic 8.6 but sits at a foundational level, not at the multi-step reasoning level of a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 25
+  }
+ },
+ {
+  "key": "ap_chemistry-m02-k0",
+  "cellId": "ap_chemistry-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "B",
+     "brief_reasoning": "A's pH barely changed (0.03) vs B's 8.0 change; A behaves as a buffer (weak acid + conjugate base).",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 8.10 buffer resistance; claim from data fits 6.F."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "B is unique; A contradicts the data, since a strong acid would change a lot; C and D are wrong."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete and clear. NaOH concentration is not needed for the qualitative claim."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions, each explained. The key is slightly longer than the distractors, which is minor."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short reading, no arithmetic, typical MC load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound item with a unique key, a clear table, and distinct misconception distractors. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Student reads a small table, computes two pH differences (0.03 vs ~8), and selects the claim linking minimal pH change to a weak acid/conjugate base buffer. Concept depth is modest (buffer resists pH change), with a single linking step from data to claim. Distractors reflect common misconceptions (strong acid as buffer, same initial pH implies same behavior, larger change equals resistance) but are easily eliminated. No heavy arithmetic or reading.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_chemistry-m02-k1",
+  "cellId": "ap_chemistry-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "C",
+     "brief_reasoning": "Solution A's pH changed by only 0.04 units, which is what a buffer does. A buffer is a weak acid and its conjugate base, and they react with the added OH-. Solution B's pH jumped by 8.09 units, so it is not buffered. Option A is wrong because both solutions start at the same pH, so neither one has more H+ to begin with.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item needs a short table read and a comparison of the two pH changes. This fits roughly 100 seconds, needs no calculator, and has a typical AP reading load.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a sound buffer-capacity data-conclusion question. It has a unique key, distinct misconception distractors, and a complete table, and it passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Student compares pH changes in a small table (0.04 vs 8.1 units) and connects the small change to buffer composition (weak acid plus conjugate base neutralizing OH-). No calculation is needed, and there is one reasoning link from data to claim. Distractors are standard misconceptions (strong acid as buffer, bigger change means resistance, same initial pH means same capacity). The item sits at the core of topic 8.10 and is not hard for unfair reasons.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_chemistry-m02-k2",
+  "cellId": "ap_chemistry-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "A",
+     "brief_reasoning": "Solution A's pH changed by only 0.04 units, which is buffer behavior: a weak acid and its conjugate base neutralize the added OH-. Solution B's pH jumped by 8.1 units, so it is not a buffer. Option C fails because the two solutions have the same pH, so A cannot be a more concentrated strong acid.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Connects pH change data to buffer presence; fits 8.10 and 6.F."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option A is the unique correct answer. B is clearly not a buffer; C is inconsistent because a strong acid at the same starting pH would jump sharply."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete with before and after pH for both solutions. The quoted pH changes of 0.04 and 8.1 match the table."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct, named misconceptions. The explanation covers each wrong option. Option A is longer than the others, but all options are parallel claim-plus-reason sentences."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Typical AP reading and time load, with no arithmetic burden."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. It has a unique key, a complete table, distinct misconception distractors, and a typical AP load, so it passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Student reads a small table, compares pH changes (0.04 vs 8.1), and links the small change to buffer composition (weak acid plus conjugate base). Only one conceptual link is needed, with no real calculation. Distractors target common misconceptions (equal initial pH means equal behavior, strong acid acts as a buffer, large change means resistance). This is a core-concept check suited to basic learning rather than a full mock exam item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_chemistry-m03-k0",
+  "cellId": "ap_chemistry-m03",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "instant_reject_missing_condition",
+   "instant_reject_multiple_correct",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "18.62 mL",
+     "brief_reasoning": "Trial volumes are 18.55, 18.70 and 20.00 mL. Trial 3 is an outlier, so average trials 1 and 2: 18.625, giving 18.62 mL.",
+     "ambiguous_or_flawed": false,
+     "flaw_note": "Minor issues: the answer relies on dropping the outlier, which the item doesn't state, and 18.625 rounds to 18.62 only with round-half-to-even."
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The rounding ambiguity and the unstated exclusion rule make the item unsuitable for exam use as written.",
+   "key_scoring": {
+    "pass": false,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": ""
+   },
+   "instant_reject": [
+    "missing_condition",
+    "multiple_correct"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "Fail. The key depends on discarding a trial without any stated criterion, so the mean of all three trials (19.08 mL) is also defensible. The exact answer of 18.625 mL rounds to 18.63 mL by standard rounding, not the keyed 18.62 mL."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Student subtracts initial from final buret readings for each trial (18.55, 18.70, 20.00 mL), recognizes Trial 3 as an outlier, and averages the two concordant trials to get 18.62 mL. Distractors reflect common errors: averaging all trials, using the final reading, or averaging final readings. Concept depth is shallow, the arithmetic is minimal, and the table read is straightforward. Difficulty comes from legitimate sources only.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_chemistry-m03-k1",
+  "cellId": "ap_chemistry-m03",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring",
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Volumes 20.00, 18.55, 18.60 mL; trial 1 outlier; mean of concordant trials = 18.575 ≈ 18.57 mL.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "18.57 mL"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Reading buret data, computing delivered volume and excluding a discordant trial fits 4.6 / 2.D."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "The exact answer is 18.575 mL, which rounds to 18.58 under standard rounding. The key lists 18.57, so a correct student answer of 18.58 has no matching option. The key is not cleanly unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete and clear. The y_label duplicates a column name, which is minor."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The explanation states (18.55+18.60)/2 = 18.57, which is a rounding error (18.575). The distractors are otherwise distinct, though the final-readings average is weak."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The time and calculator load are appropriate."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound in concept, but the exact mean is 18.575 mL and the key shows 18.57, a half-rounding error that makes the key and explanation unreliable. Fix by changing the data so the mean is not a rounding tie, for example final readings of 19.05 and 19.65 to give 18.55 and 18.65, whose mean is exactly 18.60."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Student subtracts initial from final buret readings for three trials (20.00, 18.55, 18.60 mL), recognizes Trial 1 as an outlier, and averages the two concordant trials (~18.58 mL). Single concept (titration data handling), simple 2-decimal arithmetic, one table read. Distractors are the raw final reading, a single trial, and the average including the outlier. Minor note: exact mean 18.575 vs. option 18.57 is a rounding quirk but does not create real ambiguity.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_chemistry-m03-k2",
+  "cellId": "ap_chemistry-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Delivered volumes are 21.45, 20.35 and 21.40 mL. Trial 2 disagrees with the other two by about 1 mL, so it is an outlier and is discarded. The mean of 21.45 and 21.40 is 21.425, which rounds to 21.43 mL.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "21.43 mL"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Buret data reading and delivered volume with discordant trial exclusion fits 4.6 / 2.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Unique best answer 21.43 mL; the outlier Trial 2 is clearly discordant."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table has complete initial and final readings for three trials; wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions, each explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 90 seconds, light arithmetic, calculator allowed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound: the key is unique, the table is complete, the distractors each encode a distinct error, and the task load is appropriate for 4.6 / 2.D."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Student subtracts initial from final buret readings for three trials (21.45, 20.35, 21.40), recognizes Trial 2 as an outlier, and averages the two concordant trials to get 21.43 mL. Concept depth is shallow (titration data handling), with light arithmetic and a short table. The distractor 21.07 mL comes from averaging all three trials. It is a good fit for early learning of titration data handling, and the item is below typical full-mock difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_chemistry-m04-k0",
+  "cellId": "ap_chemistry-m04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "The salt is recorded as 5.50 g but 5.00 g is actually dissolved.",
+     "brief_reasoning": "The calculated ΔH is q/n, where q = mcΔT. In C, the measured q is correct because it comes from the 5.00 g that actually dissolved. But the moles are worked out from the recorded 5.50 g, so n is too large and |ΔH| comes out too low. In A and B, q is too high, so |ΔH| is too high. In D, n is too small, so |ΔH| is also too high.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 6.4, skill 2.E error-direction reasoning on q=mcΔT and moles."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Only C lowers |ΔH|; A, B and D raise it."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception and the explanation covers all three."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 80 seconds, no arithmetic burden."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Clean error-direction item with a unique key and distinct distractors; it passes all five criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires choosing q=mcΔT and ΔH=-q/n, then reasoning qualitatively about how each of four errors shifts q or n and thus the calculated magnitude. Four directional judgments, including the exothermic ΔT direction and the mass-in-denominator effect, give moderate depth. No arithmetic, no ambiguity, minimal reading, so the difficulty is fair and typical of a full-mock item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_chemistry-m04-k1",
+  "cellId": "ap_chemistry-m04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "C",
+     "brief_reasoning": "Heat loss lowers measured ΔT, so q and |ΔH| come out too low; the other options all raise the calculated magnitude.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Identifying calorimetry error direction fits 6.4 / 2.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Only heat loss lowers the magnitude; the other three raise it."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor is a distinct error type, and the explanation covers each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 80 seconds, no arithmetic burden."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. It has a unique key (heat loss lowers ΔT, so the calculated magnitude is too low), clear distractors with explanations, and appropriate load."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires applying q = mcΔT and ΔH = q/n qualitatively to four error scenarios and predicting the direction of the effect on the magnitude of ΔH. Option B adds a per-mole reasoning step, and the correct answer needs the link between heat loss and a smaller ΔT. There is no arithmetic and the wording is clear and in scope, so this is a standard mock-exam item on experimental error.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_chemistry-m04-k2",
+  "cellId": "ap_chemistry-m04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "C",
+     "brief_reasoning": "ΔH = q/n. Recording more salt mass than was dissolved makes n too large, so |ΔH| comes out too low. A, B and D all make the magnitude too high.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "Can be answered in about 60-80 seconds with no arithmetic. Options are short and parallel.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound error-direction item with a unique key, distinct distractors, and appropriate load."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The item requires choosing the governing relationship (q = mcΔT, ΔH = q/n) and reasoning qualitatively and proportionally about how each measurement error propagates to the magnitude of molar enthalpy. Four options each need a direction-of-error judgment, including the subtle point that a mass error affects only the moles, not the measured ΔT (option C), while a water-mass error affects only q. No arithmetic is needed, the reading load is low, the wording is clear and the content is in scope for 6.4. The difficulty comes from the concept, not from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_chemistry-m05-k0",
+  "cellId": "ap_chemistry-m05",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring",
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "B",
+     "brief_reasoning": "Average final temperature is (18.5+18.7+18.4)/3 ≈ 18.53 °C, so ΔT ≈ −2.5 °C. The temperature dropped, so the process is endothermic. Option C is wrong because the student ran three trials, not one.",
+     "ambiguous_or_flawed": false,
+     "flaw_note": "B says the solution lost thermal energy 'from' the dissolving process. It would be clearer to say the solution lost thermal energy 'to' the process, but B is still the best choice."
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Fits 6.4/6.B: claim supported by temperature data in a calorimeter."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Key B is the only correct classification with correct data use, but its wording 'lost thermal energy from the dissolving process' is ambiguous or backwards (the solution's energy goes into the process). Fix the phrasing."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table is complete with initial and final temperatures for three trials; the qualitative claim needs no mass or heat capacity."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Option A is self-contradictory (exothermic yet 'absorb energy') and mixes errors beyond the stated misconception. Option C is weak: it says a single trial was run although three were, and its endothermic label is correct. The distractors are not clean, distinct misconceptions, and the explanation does not note these flaws."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, low reading load, about 60-85 seconds; no arithmetic burden."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item fits the topic and skill and its stimulus is complete. The key wording ('lost thermal energy from the dissolving process') is ambiguous, and the distractors are weak or contradictory (A is internally inconsistent, C asserts a single trial although three were run). I fail the key and distractor criteria and recommend revising the key phrasing and tightening the distractors."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The student reads a small table, averages three temperature changes (about -2.5 °C), and links the sign of the change to endothermic vs exothermic. This takes one governing idea, one short computation, and one claim-linking step. No heat calculation or unit conversion is needed. Option B is the intended answer, but its phrasing (solution lost thermal energy) is slightly muddled. Option C is internally inconsistent (it cites a single trial when three are given), so the distractors need revision.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_chemistry-m05-k1",
+  "cellId": "ap_chemistry-m05",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "D",
+     "brief_reasoning": "The temperature rose in all three trials, by an average of about +2.5 °C. The solution gained thermal energy from the dissolving, so the process is exothermic. B is wrong because there were three trials, not one. A and C say endothermic, which contradicts the temperature rise.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "Quick, low reading load, no calculator needed. It is easy and not strongly aligned with the heat capacity and calorimetry computation of 6.4.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct, but distractor B shares the key's conclusion (exothermic) with a faulty \"single trial\" justification, and the other distractors are weak. This makes the item flawed on distractor quality."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Read a small table, compute or estimate the average temperature rise (about 2.5 °C), and link a warming solution to an exothermic process. This takes one concept (sign convention for heat flow in calorimetry) and no q = mcΔT computation. The distractors are clearly flawed: A and C reverse the sign or misuse the data, and B contradicts the three trials shown. The task is a simple claim-evidence match.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_chemistry-m05-k2",
+  "cellId": "ap_chemistry-m05",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Average ΔT = 20.93-24.0 ≈ -3.1 °C; temperature drop means the water's thermal energy was absorbed by dissolving, so endothermic. D is wrong because there were three trials.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "C"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Claim from temperature data about endothermic/exothermic dissolving; fits 6.4/6.B reasonably."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "C is the unique defensible answer: cooling means energy absorbed, so endothermic. D's clause that a single trial is not enough is inconsistent with the three trials shown."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete. The wording of C, 'solution lost thermal energy from the dissolving process', is awkward and imprecise about system and surroundings."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "B is an implausible non-sequitur, and D contradicts the three-trial setup, so it is not a realistic misconception. Two of three distractors are weak, and the wrong option pattern makes C easy to pick."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "Timing is fine, but the weak distractors and the muddled wording of the key make the item too easy and imprecise for the exam."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct, but two distractors (B and D) are weak and not realistic misconceptions, and the key's wording about the solution losing energy from the dissolving process is imprecise. I recommend revising the distractors and the wording."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single concept: the water cooling means the dissolving process absorbs energy, so it is endothermic. Students read a short table, average three small temperature changes, and match the claim to the option. The main trap is reversing the system and surroundings. There is no q = mcΔT computation, and the distractors are clearly wrong. Option C's wording (\"lost thermal energy from the dissolving process\") is slightly loose but still the best answer.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_chemistry-m06-k0",
+  "cellId": "ap_chemistry-m06",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "CH4 has the largest a value, so it has the strongest intermolecular attractions and deviates most from ideal behavior at high pressure and low temperature.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "CH4"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": "Skill 4.B (explain whether a model is consistent with theory) is not really assessed; the item is a max-lookup in a table with no model evaluation. It also uses van der Waals constants, which the scope note flags as out of scope for calculations; here it is only a qualitative comparison."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "CH4 has the largest a and is the unique defensible answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table data is complete and conditions are stated."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "All three distractors encode the same reasoning (smaller a means closer to ideal); they are not distinct misconceptions. The Ar 'heaviest gas' remark is not a realistic trap. No distractor tests an error such as choosing by molar mass or by smallest a."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The question is a trivial table lookup, well under typical AP load and with too little reasoning demand. Calculator is irrelevant."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key (CH4) is correct and the table is complete. However, the item is a pure max-lookup that does not assess model analysis (4.B), and its three distractors encode the same misconception. It fails on scope/skill, distractor quality and exam suitability."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Student reads a small table, links a larger van der Waals a to stronger intermolecular attractions and greater non-ideal behavior, and picks the maximum (CH4). No computation, one conceptual step, and the distractors are clustered near 1.35-1.38 so the answer is obvious. The stimulus gives the constants, so no outside knowledge is needed. Skill 4.B is only loosely engaged since no model is evaluated, and the item is closer to recall/application.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "key": "ap_chemistry-m06-k1",
+  "cellId": "ap_chemistry-m06",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_key_scoring",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "instant_reject_out_of_scope_knowledge",
+   "instant_reject_missing_condition",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "CH4",
+     "brief_reasoning": "Of the four gases, CH4 has the largest van der Waals a value. That means it has the strongest attractions between molecules, so it deviates most from ideal behavior at moderate pressure and low temperature.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": ""
+   },
+   "notes": "The question is a trivial lookup of the maximum value. It does not require explaining why the model fails, and it relies on van der Waals constants that the AP course does not use.",
+   "key_scoring": {
+    "pass": false,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": ""
+   },
+   "instant_reject": [
+    "out_of_scope_knowledge",
+    "missing_condition"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The item is rejected. It is built on van der Waals a constants, which the scope note excludes. It is a simple table lookup rather than 4.B model analysis. The b constant and the assumption that only attractions matter are not stated. All three distractors encode the same single misconception."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step qualitative item. The student reads the table, identifies the largest a value (CH4) as indicating the strongest intermolecular attractions, and links that to the largest deviation from ideal behavior at high pressure and low temperature. There is no calculation, and the Ar vs N2 distractors are close but irrelevant to the answer. The constants are used only qualitatively, so the item stays in scope. It is a recall-level application of the concept, and the 4.B skill tag is only loosely matched.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "key": "ap_chemistry-m06-k2",
+  "cellId": "ap_chemistry-m06",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_distractor_explanation",
+   "instant_reject_out_of_scope_knowledge",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "CO2 has the largest a value, so it has the strongest intermolecular attractions and should deviate most from ideal behavior.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "CO2"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [
+    "out_of_scope_knowledge"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "Reject. The key (CO2) is correct, but the item uses van der Waals constants as stimulus data, which is out of scope. It is a simple table lookup that does not assess model analysis (4.B), and the distractor explanations are templated rather than distinct misconceptions.",
+   "scope_skill": {
+    "pass": false,
+    "notes": "The scope note excludes van der Waals constants as inputs. This item gives a values for four gases and asks the student to read them. AP Chemistry does not teach or use the van der Waals a constant, so the stimulus requires out-of-scope knowledge. The task is also a simple table lookup (pick the largest a). It does not require explaining whether a model is consistent with chemical theory, so it does not assess skill 4.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "CO2 has the largest a, so it is the unique defensible answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table data are complete and the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The three distractor explanations are templated restatements of the numbers (\"smaller than 3.59\") rather than named misconceptions. They do not encode distinct, realistic errors. For example, no distractor reflects the idea that molar mass or size alone drives deviation. The stem also states 20 atm and 300 K without using them."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The time and reading load are fine. However, the van der Waals constants are not an AP-level data source, and the calculator designation is irrelevant because no calculation is needed."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step qualitative item: read the table, pick the largest a value, and link it to the strongest intermolecular attractions and hence the greatest deviation from ideality at high pressure. No calculation, no unit conversion, and minimal reading. The a constants are used only qualitatively, so the item stays in scope. It is too direct for a full-mock exam_prep item and only lightly engages the model-analysis skill.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "key": "ap_chemistry-m07-k0",
+  "cellId": "ap_chemistry-m07",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "Too low; moles of H2 overestimated",
+     "brief_reasoning": "Total pressure > P(H2), so n(H2) = PV/RT is too large. Molar mass = mass/n is therefore too small.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Gas collected over water, error source and its direction: fits 3.4 and 2.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "B is the unique correct answer. Overestimated n(H2) gives a molar mass that is too low. The 1:1 stoichiometry is stated."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions, and each is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, qualitative, and suitable for a timed exam."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound item. The key is unique and correct, the distractors are distinct, and the scope fits topic 3.4 with skill 2.E."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must recognize that gas collected over water includes water vapor (Dalton's law), apply PV=nRT proportionally to see moles are overestimated, then link that to molar mass = mass/moles to conclude it is too low. No computation; a short multi-step qualitative error-analysis chain typical of AP skill 2.E. Distractors target common slips (direction of error, wrong reasoning), but wording is clear and in scope.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_chemistry-m07-k1",
+  "cellId": "ap_chemistry-m07",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "C",
+     "brief_reasoning": "Using the total pressure overestimates the H2 pressure, so the moles of H2 (and of metal) are too high. Molar mass = mass/moles, so the calculated molar mass is too low.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Gas collected over water and the vapor-pressure error sit squarely in 3.4. The dominant skill is identifying an experimental error and its direction (2.E)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key is correct: n(H2) is overestimated, so M = m/n is too low. It is the unique defensible answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear and complete under the standard assumptions."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The three wrong options each encode a distinct misconception (vapor reduces the volume, no effect, reversed direction), and the explanation addresses each one."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item is conceptual and takes about 60 to 100 seconds. It needs no arithmetic, and its option format is typical of the exam."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean 2.E error-direction question on collecting gas over water. It has a unique correct key, distinct distractors and an appropriate exam load. I found no reason to reject it."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must recognize that the total pressure includes water vapor (Dalton's law), then reason proportionally that an overestimated P gives overestimated n(H2) and n(metal), and that M = mass/moles is therefore underestimated. No calculation is needed. It requires a short chain of qualitative reasoning with plausible distractors (the direction of the error and the 'unaffected' claim), which is typical of an exam-style error-analysis question.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_chemistry-m07-k2",
+  "cellId": "ap_chemistry-m07",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "C",
+     "brief_reasoning": "Total pressure > P(H2), so moles of H2 are overestimated. Molar mass = mass/moles, so it comes out too low.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Gas collected over water with Dalton's law and the ideal gas law (3.4); the task is to trace an experimental error (2.E)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Total pressure overestimates the moles of H2, so the molar mass is too low. C is the unique answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is complete: it gives 1:1 stoichiometry, collection over water, and the use of total pressure."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor maps to a distinct misconception: reversed direction, volume change, no effect. Option B is weak but acceptable. The explanation covers every option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "A single conceptual step, no arithmetic, and about 60-100 seconds of work. Typical of AP Chemistry."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. The key is unique and correct, the scope and skill fit, and the distractors are plausible. Option B is the weakest distractor. No instant-reject condition applies."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Conceptual error-analysis item. Student must recognize Dalton's law (gas over water includes vapor), see that using total P overestimates n(H2) via PV=nRT, link to n(metal) by 1:1 stoichiometry, and reason that M = m/n comes out too low. Several linked reasoning steps with a directional-reasoning trap (option 1 has the right cause but the wrong direction), but there is no calculation, little reading, and everything is in scope for topic 3.4 and skill 2.E.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_chemistry-m08-k0",
+  "cellId": "ap_chemistry-m08",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "T = ΔH/ΔS = 90000/100 = 900 K",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "900 K"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Crossover temperature from ΔG=ΔH−TΔS=0 with a kJ-to-J conversion fits 9.3 / 5.F."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "900 K is unique and correct. The stem gives ΔH, ΔS, and the temperature-independence assumption."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Option B's rationale is incorrect: converting both ΔH and ΔS to kJ still gives 900 K, not 900000 K. Option D labels 627 as K, so it is not a coherent Celsius-confusion distractor. Option C (multiplying ΔH and ΔS) is weak, since 90×100 gives 9000 only if the units are ignored."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60-90 seconds with light arithmetic. This is typical for AP Chemistry."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key (900 K) is correct, unique, and in scope. The distractor rationales are flawed: B's stated error does not produce its value, and D mislabels a Celsius value as K. The item fails on distractor quality and needs revision."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-relationship problem: set ΔG = 0 in ΔG = ΔH − TΔS and solve T = ΔH/ΔS. The only extra demand is a kJ to J unit conversion, which the distractor 900000 K targets. Arithmetic is trivial (90000/100), reading is minimal, and no representation change is needed. Core skill-level practice rather than a multi-step exam-style synthesis.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_chemistry-m08-k1",
+  "cellId": "ap_chemistry-m08",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "ΔG=0 at T=ΔH/ΔS=80000/150=533 K; favorable below this.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "533 K"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "About 90 seconds, simple arithmetic, calculator allowed.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, correct 9.3 crossover-temperature calculation with a unique key and plausible distractors. It is acceptable."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires choosing ΔG = ΔH - TΔS, converting kJ to J, handling two negative signs to find the crossover temperature, and interpreting the inequality direction (favorable below T). A single clean division with no long arithmetic. Distractors reflect common errors (missed unit conversion). Appropriate for a full mock exam item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_chemistry-m08-k2",
+  "cellId": "ap_chemistry-m08",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "ΔG=0 at T=ΔH/ΔS=(-80000 J/mol)/(-150 J/mol·K)=533 K; favorable below this since both negative.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "533 K"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "About 60-90 seconds, minimal arithmetic, calculator allowed, and the options are short values.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is chemically correct, with a unique key at 533 K and proper scope. It fails the distractor criterion. The 12000 K option (the product of ΔH and ΔS) is an unrealistic error, and 0.002 K is of limited realism. The more plausible forgotten kJ→J conversion (0.533 K) is missing, and the Celsius distractor is a conversion of the key rather than a distinct student misconception. Revise the distractors to include 0.533 K and a sign or unit error."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-relationship problem: set ΔG = 0 in ΔG = ΔH − TΔS, convert kJ to J, and divide. The only extra step is recognizing that both ΔH and ΔS are negative, so the reaction is favorable below the crossover temperature. Short arithmetic, no stimulus, and no ambiguity. This is a routine Topic 9.3 calculation that is better suited to basic practice than to a full mock exam.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_chemistry-m09-k0",
+  "cellId": "ap_chemistry-m09",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_exam_suitability"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Ne is a noble gas with a full valence shell and the highest effective nuclear charge in period 2, so it has the highest first ionization energy (about 2081 kJ/mol).",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "Ne"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item is very low-demand: choose the noble gas at the right end of the period. The distractors do not capture common errors, such as picking the elements with the larger atomic radius or applying the Be/B or N/O exceptions. It is a plain recall item, though the time (55 s) is fine. The explanation quotes ionization energy values that the stem does not provide. That is acceptable as explanation, but it implies memorized data beyond the stem.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and in scope, with a unique key (Ne). It is a trivial trend-recall item whose three distractors share one misconception, so exam suitability is marginal and I fail it on that criterion."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept recall of the periodic trend: first ionization energy increases across a period, so Ne (noble gas, far right of period 2) is greatest. No computation, no stimulus, no representation change, no subtle exceptions (such as the N/O or Be/B anomalies) that would affect the answer. Fits foundational practice, not a full-mock exam item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_chemistry-m09-k1",
+  "cellId": "ap_chemistry-m09",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Ne is a noble gas with a full valence shell and the greatest effective nuclear charge in period 2, so it has the highest first ionization energy (about 2081 kJ/mol).",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "Ne"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "Short, about 55 seconds, with no calculator needed. The item is very easy and recall-based. The question is whether a noble gas with its full shell should be treated as trivial.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key (Ne) is correct and unique, and the scope and format are fine. The item fails on distractor quality: all three wrong options are the same \"fewer protons, lower effective nuclear charge\" argument, with no distinct named misconceptions. The item is also trivially easy."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "One-step recall of the periodic trend: first ionization energy increases across a period, and the noble gas Ne has the highest value among the period 2 elements listed. There is no calculation, no table or graph to read, and no multi-step linking of claims. Concept depth is shallow, and the item is clear and in scope, with no unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 20
+  }
+ },
+ {
+  "key": "ap_chemistry-m09-k2",
+  "cellId": "ap_chemistry-m09",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "All four are in period 3. Ionization energy rises across a period, and noble gas Ar is highest (about 1521 kJ/mol, compared with Cl at 1251).",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "Ar"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 1.7 periodic trends, in scope. Skill 4.A is only weakly exercised: this is trend recall."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Ar is the unique correct answer: all four elements are in period 3 and Ar has the highest first ionization energy."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear and the options are short and parallel."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "All three distractors use the same templated rationale (fewer protons, lower effective nuclear charge) and differ only in numbers. They encode no distinct named misconceptions, such as confusing a noble gas with a halogen, or using atomic size or electronegativity incorrectly. The explanations are repetitive and give more data than the stem provides (kJ/mol values)."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "Too trivial for the exam: the highest-group element in the period is the answer, with no exception pair, data reading or reasoning step. The difficulty is below the AP level, and the options offer little discrimination because Ar is the obvious end-of-period noble gas."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key (Ar) is correct and unique, and the topic fits, but the item is pure recall with templated, non-distinct distractors that do not reflect realistic misconceptions. It is too easy and weak for a 4.A model-analysis item, so I am failing it on distractor quality and exam suitability."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step recall of the periodic trend: first ionization energy increases across a period, so the noble gas Ar (period 3, highest effective nuclear charge, full valence shell) has the greatest value among Na, Mg, Cl, Ar. No stimulus, computation, or representation change is needed. The only subtlety is knowing the small Mg/Al-type anomalies, which are not relevant here. Concept depth is shallow and the wording is clear and unambiguous.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 20
+  }
+ },
+ {
+  "key": "ap_chemistry-m10-k0",
+  "cellId": "ap_chemistry-m10",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "bromothymol blue",
+     "brief_reasoning": "Equivalence point pH = 7 for strong acid/strong base; bromothymol blue range 6.0–7.6 contains 7.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": "Topic 8.5 is in scope, but skill 6.D (justify a claim with principles or math) is barely engaged. The item is single-step recall: strong acid/strong base equivalence pH is 7, so pick the range containing 7. The blueprint's 'judgment demand' is not really present."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Bromothymol blue is the only range containing pH 7. The key is unique under the stated model, though real practice often tolerates other indicators because of the steep pH jump; 'most appropriate' makes the key defensible."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed and the wording is clear. The stem omits the 25 C assumption that makes the equivalence pH exactly 7, which is a standard assumption."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "All three distractor rationales are the same template ('range does not include 7'), so they do not encode distinct misconceptions. Methyl orange and alizarin yellow R are listed in the stem but are not options, which adds reading load without function."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The item is too easy and quick (well under 60 seconds) for the reference pattern. The six-indicator list adds reading without adding demand, and there is no calculation or argumentation."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and unique, but the item is trivial recall rather than argumentation (6.D). The distractor rationales are templated and not distinct, and the item is too easy for AP-level demand. Fail on skill fit, distractors and exam suitability."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept recall: a strong acid-strong base titration has its equivalence point at pH 7, so the solver picks the indicator whose range contains 7 (bromothymol blue). There is no calculation, only one reasoning step, and no representation change beyond scanning the listed ranges. Distractors are easy to eliminate. The item does not require the argumentation that skill 6.D describes, so it is below full-mock exam_prep level.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_chemistry-m10-k1",
+  "cellId": "ap_chemistry-m10",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "In a strong acid–strong base titration, the equivalence point is at pH 7. Bromothymol blue changes color between pH 6.0 and 7.6, so its range includes 7.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "bromothymol blue"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": "Tagged 6.D (justify a claim), but the item is a simple selection: pick the range containing pH 7. No justification or claim-linking step. The blueprint's demand to avoid defaulting to pH 7 is moot because the equivalence pH is exactly 7 for a strong acid-strong base titration."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Bromothymol blue is the only listed range containing pH 7. \"Most appropriate\" is slightly loose, since phenolphthalein and methyl red are also used in practice for strong-strong titrations because of the steep jump, but under the range-contains-equivalence-pH criterion the key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The wording is clear, though the stem does not say to use the equivalence-point pH criterion explicitly."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "All three distractors encode the same single error (range does not contain 7). They are not distinct misconceptions, and the explanations are templated with no named misconception such as assuming a basic endpoint, or confusing weak-acid and strong-acid titrations."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "Quick recall item with no reasoning or calculation. It is below the AP argumentation level, and the \"calculator allowed\" label is irrelevant. The wide indicator list adds reading load without adding difficulty."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and unique, but the item is a trivial recall selection that does not assess 6.D argumentation. The distractors share one identical misconception, and \"most appropriate\" is slightly loose. Fail on skill fit and distractor quality."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Strong acid-strong base equivalence point is pH 7; the student matches this to the indicator range that contains 7 (bromothymol blue). It takes one reasoning step, involves no calculation, and the wording is clear. It is a recall-and-match item and does not require a written justification, so the 6.D argumentation skill is only weakly engaged.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_chemistry-m10-k2",
+  "cellId": "ap_chemistry-m10",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "When a strong acid is titrated with a strong base, the pH at the equivalence point is 7. Bromothymol blue changes color between pH 6.0 and 7.6, so its range contains 7.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "bromothymol blue"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": "The topic is correct (8.5), but the item is a recall-level indicator choice. It has no claim to justify, so it does not meet 6.D. The intended judgment demand (do not default to pH 7) does not apply, because 7 is correct for a strong acid with a strong base."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The equivalence pH is 7.00. Only bromothymol blue (6.0-7.6) contains it, so the key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is complete and clear, and the indicator ranges are given."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "All three distractors are the same error (the range excludes 7). None encodes a distinct named misconception, such as assuming a weak-acid equivalence pH or picking phenolphthalein out of habit. The explanations are formulaic."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The item is too easy and takes too little reasoning for the argumentation skill. The stem lists six indicator ranges, which is extra reading with little chemical demand."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and unique. The item is a low-demand recall question that does not require justification (6.D), and its distractors repeat a single error rather than encoding distinct misconceptions. I lean toward failing it on skill fit and distractor quality."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Student recalls that a strong acid-strong base titration has an equivalence point at pH 7, then picks the indicator whose transition range contains pH 7 (bromothymol blue). No computation, a single reasoning link, and a short in-stem list of ranges. This is a recall/application item and does not require a real justification, so it sits at foundational level despite the 6.D skill tag.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_chemistry-m11-k0",
+  "cellId": "ap_chemistry-m11",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Al(NO3)3 dissociates into 4 ions per formula unit (0.40 M ions), most of any option.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "Al(NO3)3"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 60 seconds, needs no arithmetic and has a light reading load. It is fairly easy but suitable for the exam.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean particle-count-to-conductivity question with a unique key and a complete stem. Its only weakness is that two distractors share a 3-ion count."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single concept: count ions produced per formula unit upon complete dissociation, then link total ion concentration to conductivity. Assumptions are stated explicitly, arithmetic is trivial (0.10 M times 2-4 ions), and there is no graph or table to read. This is a basic particulate-to-macroscopic connection suited to initial learning rather than full-mock exam prep.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_chemistry-m11-k1",
+  "cellId": "ap_chemistry-m11",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "K3PO4 dissociates into 4 ions (0.40 M ions), more than CaCl2 (3 ions); CH3OH and glucose are nonelectrolytes.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "K3PO4"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 60 seconds, needs no calculation, and has short parallel options.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, unambiguous particle-count-to-conductivity question with a unique key and a minor redundancy between two distractors. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Classify each solute as ionic or molecular, count ions per formula unit (K3PO4 gives 4, CaCl2 gives 3, the two molecular solutes give 0), and compare ion concentrations at equal molarity. It needs recall of polyatomic ions and a simple particle-count comparison. No arithmetic is required, the reading load is minimal, and the assumptions are stated explicitly. This is a single-concept item suited to initial learning.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_chemistry-m11-k2",
+  "cellId": "ap_chemistry-m11",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "AlCl3 dissociates into 4 ions per formula unit (0.40 M ions), the most of the options.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "AlCl3"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item is pure ion counting with no representation or proportional reasoning. It is too trivial and does not really connect particulate-level and macroscopic properties as 4.C requires.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The item is chemically correct with a unique key. It is a trivial ion-count recall question with redundant distractors (NaCl and MgSO4 both give 2 ions), and it is weak on the 4.C particulate-to-macroscopic reasoning. I recommend revising it."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Student writes dissociation equations, counts ions per formula unit (4, 3, 2, 2), and links higher particle concentration to higher conductivity. The stem states the assumptions (complete dissociation, equal ion contribution), so there is no ambiguity. Arithmetic is trivial, reading is short, and there is a single proportional step with no representation change. This is a direct recall and application item at the foundational level, not a multi-step mock-exam item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_chemistry-m12-k0",
+  "cellId": "ap_chemistry-m12",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "CaO",
+     "brief_reasoning": "By Coulomb's law, lattice energy grows with the product of the ion charges and shrinks as the distance between ions grows. CaO has 2+ and 2− ions, so its charge product is 4. The other three compounds each have a charge product of 2 or less. Known values agree: CaO ≈ 3401 kJ/mol, MgCl2 ≈ 2526, NaF ≈ 923, NaCl ≈ 787.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Lattice energy comparison via Coulomb's law (charges and ionic size) fits topic 2.3 and skill 4.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "CaO is uniquely greatest: 2+/2- charges and a small separation. Real values (CaO ~3400, MgCl2 ~2526, NaF ~923, NaCl ~787 kJ/mol) confirm it. The only caveat is that students must rely on known ion charges and relative sizes, since no data are given."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear. It does not give ionic radii, but students are expected to know the relative sizes and charges of common ions."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The distractor rationales are all the same template with different numbers, so they do not encode distinct named misconceptions (for example, ignoring charge, ignoring size, or miscounting charge in a 2:1 salt). The ratios use made-up separations. The MgCl2 separation of 253 pm and the 'charge product 2' are a loose simplification for a 2:1 salt. The explanation also cites separations that the student is never given."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Quick, with a short stem and parallel options. Typical AP-style recall and reasoning with no arithmetic needed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key (CaO) is correct and the item fits topic 2.3, skill 4.A, and exam timing. It fails on distractor explanations: they are one generic template with invented separations, not distinct named misconceptions, and the MgCl2 'charge product 2, 253 pm' treatment is a loose simplification of a 2:1 salt. Fail when unsure."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept application of Coulomb's law to lattice energy: compare ion charges (and size secondarily). CaO has +2/-2 charges and small separation, so it is the clear answer. No computation, minimal reading, and only a short comparison is needed (about two reasoning steps).",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_chemistry-m12-k1",
+  "cellId": "ap_chemistry-m12",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "instant_reject_missing_condition",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "CaO",
+     "brief_reasoning": "By Coulomb's law, lattice energy depends on the product of the ion charges divided by the distance between them. In CaO the ions are Ca2+ and O2-, so the charge product is 4. In each other compound, every cation–anion pair has a charge product of only 2 or 1. Measured values agree: CaO is about 3400 kJ/mol, compared with roughly 2600 for CaF2, 2500 for MgCl2 and 1040 for LiF.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item is quick to answer, but with no radii given it relies on recalled data. The sample-item pattern would supply the radii or have charge alone decide the answer. The calculator designation is irrelevant here.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": ""
+   },
+   "instant_reject": [
+    "missing_condition"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key (CaO) is correct, but the stem gives no ionic radii or separations. The rationales depend on those values, so the item is not self-contained. It needs a radii table, or options in which charge alone decides the answer. Distractor explanations are also generic numeric comparisons rather than named misconceptions."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must choose Coulomb's law as the governing relationship and compare charge products and ion sizes across four compounds. CaO has the largest charge product (2+ and 2-) and a short ion separation, so it has the greatest lattice energy. Needs a short qualitative comparison with no computation or heavy reading, so it is a typical mock-exam item at the easier end of the range.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_chemistry-m12-k2",
+  "cellId": "ap_chemistry-m12",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "CaF2",
+     "brief_reasoning": "By Coulomb's law, the attraction between ions grows with the product of their charges. Ca2+ has a 2+ charge, while the other compounds have only 1+ cations, so CaF2 has the largest lattice energy.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Lattice energy comparison via Coulomb's law fits 2.3 and skill 4.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "CaF2 is uniquely greatest (charge 2+ and similar separation to NaF)."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed; the stem is clear. Students rely on known ion sizes and charges."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "All three wrong-option rationales are the same template citing numeric ratios and pm separations the student never sees. They name no distinct misconceptions, such as ignoring charge or reversing the size trend."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Quick item, about 40-70 s. The calculator designation is irrelevant because no calculation is needed, which is harmless."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and in scope, but the distractor explanations are a generic template that cites hidden numbers instead of encoding distinct misconceptions. I am failing the distractor criterion on that basis."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept qualitative application of Coulomb's law: lattice energy scales with q1*q2/r. Students compare charge products (CaF2 has 2+/1- vs 1+/1-) and ionic size among the 1+/1- salts. No calculation, no stimulus, minimal reading. Distractor NaF tests whether students over-weight small size relative to charge, but the reasoning is short and standard for topic 2.3.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_chemistry-m13-k0",
+  "cellId": "ap_chemistry-m13",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Q=[B]/[A]^2. Taking B out lowers Q so Q<K. K doesn't change at constant T, so the reaction runs forward and makes more B.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "B"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item is conceptual and takes about 60-90 seconds with no calculation. It has four options and a light reading load.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean 7.9 Le Chatelier prediction with a unique correct key. It has minor distractor-quality weaknesses (the key is the longest option and two explanations only restate the correct reasoning) but is acceptable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept Le Chatelier prediction: removing product lowers Q below K, so the system shifts toward products. No calculation, a short stem, and no representation changes. Distractors target common misconceptions (K changes, wrong direction, no shift). This is a direct application of the principle, so it suits foundational learning rather than a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_chemistry-m13-k1",
+  "cellId": "ap_chemistry-m13",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "Shifts toward products; Q < K",
+     "brief_reasoning": "Halving the volume doubles both concentrations, so Q = 2[B]/(4[A]^2) = K/2. Since Q < K, the system shifts toward the product, which has fewer gas moles.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 60-90 seconds, needs no calculation, and has a typical AP load.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The chemistry and key are correct and the item suits the exam. I fail it on distractor quality: the key is the longest, most elaborated option, and the explanations for options 1 and 2 only restate the calculation instead of naming a misconception."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept Le Chatelier application: halving the volume doubles the concentrations, so Q = [B]/[A]^2 drops to K/2 and the system shifts toward products. It needs one proportional-reasoning step and no calculation. The distractors are common misconceptions (K changes, no shift, wrong direction). It is a straightforward topic 7.9 item with a short stem.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_chemistry-m13-k2",
+  "cellId": "ap_chemistry-m13",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "A",
+     "brief_reasoning": "Q=[B]/[A]^2. Doubling the volume halves both concentrations, so Q becomes (1/2)/(1/4)K = 2K. Since Q > K, the reaction shifts toward A, the side with more gas moles.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Key A is unique: Q = 2K, so the shift is toward the reactant (more gas moles). The other options are each wrong."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem states constant temperature and the equation, so it is complete."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The wrong-option 'why' texts are generic and repeat the same Q = 2K sentence rather than naming each misconception. Option 2 (no change) and option 4 (K changes) are distinct misconceptions, but option 3 (opposite direction) is not named. The option 4 explanation is fine. Option 2's explanation does not directly address the false claim that concentrations are unchanged."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "A short conceptual item of about 60-90 seconds, with no calculation needed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is chemically sound and in scope with a unique key. The distractor explanations are weak: they reuse the same Q = 2K sentence and do not name distinct misconceptions, notably for the opposite-direction option. That fails the distractor criterion, so the item needs revision of the explanations before acceptance."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must pick the governing relationship (Q vs K or Le Chatelier gas-mole reasoning), apply one proportional step (halved concentrations, squared in the denominator gives Q = 2K), and link the result to a shift direction. The distractors target common misconceptions (K changes, no shift, reversed direction). There is no heavy arithmetic or reading, and the scope is within Unit 7.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_chemistry-m14-k0",
+  "cellId": "ap_chemistry-m14",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "sodium chloride",
+     "brief_reasoning": "NaCl is an ionic compound. Its ions are stabilized by ion-dipole attractions with water. The other three are nonpolar substances that dissolve very little in water.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item is trivially easy: one ionic compound sits among three nonpolar liquids, so the key is obvious and the distractors do not discriminate. It is also a close variant of a familiar 'like dissolves like' textbook question. The three nonpolar organics add no distinct reasoning.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and the topic fits, but the three distractors are interchangeable nonpolar organics with no distinct misconceptions. The item is too easy to discriminate and the key's rationale is imprecise (hydrogen bonding is cited for NaCl). Fail on distractor quality and exam suitability."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept recall of \"like dissolves like\": identify the one ionic compound among three nonpolar molecular liquids as the most water-soluble. There is no calculation, no representation change, and only one reasoning step. It is a direct application of a basic polarity and intermolecular-force model, so it is suited to initial learning rather than full-mock exam prep.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 25
+  }
+ },
+ {
+  "key": "ap_chemistry-m14-k1",
+  "cellId": "ap_chemistry-m14",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "methanol",
+     "brief_reasoning": "Methanol is small and polar, and it forms hydrogen bonds with water, so it mixes with water completely. The other three are nonpolar hydrocarbons.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Passes all five criteria. The item is a short, standalone MC question that is easy to defend and calls for no calculation.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 3.7 asks students to relate polarity and hydrogen bonding to dissolving. Skill 4.A fits because students use the \"like dissolves like\" model to predict a property. No out-of-scope content appears."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Methanol is miscible with water. The other three options are nonpolar hydrocarbons with very low solubility, so the key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear and complete, and the options are short and parallel."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The three distractors are all nonpolar hydrocarbons, so they encode one shared misconception (that a nonpolar substance could dissolve in water) rather than three distinct ones. Each distractor is still explained. The explanation for methanol says \"polar (or ionic)\", which is generic template wording, and the stem and options contain no ionic substance. Both are minor issues and do not undermine the item."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 55 seconds and has a low reading load. The calculator designation is harmless because no calculation is required."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept \"like dissolves like\" item. The student identifies methanol as the only polar, hydrogen-bonding molecule among three nonpolar hydrocarbons and concludes it is the most soluble in water. There is no calculation, no stimulus to read, and minimal reading. It needs only one reasoning step and no representation changes. It is aligned with topic 3.7 (IMFs in solutions) and skill 4.A. The wording is clear, with no unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_chemistry-m14-k2",
+  "cellId": "ap_chemistry-m14",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "ethanol",
+     "brief_reasoning": "Ethanol is polar and can hydrogen bond with water, so it mixes with water in any proportion. CCl4, toluene and hexane are nonpolar.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "About 55 seconds, no arithmetic, four short parallel options.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a valid, unique-key polarity and solubility question that fits topic 3.7. The only weakness is the shared rationale across the three nonpolar distractors."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step application of 'like dissolves like': ethanol is polar and hydrogen-bonds with water, while carbon tetrachloride, toluene, and hexane are nonpolar. No computation, minimal reading, no representation changes, and no unfair difficulty sources. This is foundational conceptual recall and not at the multi-step level of a full mock exam.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_chemistry-m15-k0",
+  "cellId": "ap_chemistry-m15",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "3(2.02)=6.06; 8(28.02)=224.16; 6.06/230.22=2.63%",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "2.63%"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "About 85 seconds, light arithmetic, calculator allowed.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, clean, and in scope. The explanation's rounding of 6.06 to 6.0 is a trivial flaw."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Read particle counts from the diagram, multiply by molar masses, and compute the mass percent. A single governing relationship with simple arithmetic. The distractors (mole fraction, N2 mass percent) target common conceptual slips, but the item is a foundational application of mixture composition.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_chemistry-m15-k1",
+  "cellId": "ap_chemistry-m15",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Mass H2 = 6(2.02)=12.12; N2 = 2(28.02)=56.04; 12.12/68.16 = 17.8%",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "17.8%"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Mass percent from particle counts in a diagram; fits 1.4 and 1.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "17.8% is unique and correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Diagram data gives species and counts; the stem clarifies each particle is one molecule."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions, each explained; the key's rationale is given."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 85 seconds, light arithmetic, calculator allowed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound: the key is unique and correct, the stimulus is complete, the distractors are distinct and each is explained, and the load is typical of an AP exam."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: read particle counts from the diagram, multiply by molar masses, and compute a mass percent. Three or four short steps with small numbers. The distractors (number percent and similar errors) test whether the student distinguishes particle fraction from mass fraction, but there is no deeper multi-concept reasoning. The wording is clear and the arithmetic is light.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_chemistry-m15-k2",
+  "cellId": "ap_chemistry-m15",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "4(16.04)=64.16; 5(32.00)=160.00; 64.16/224.16=28.6%",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "28.6%"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 1.4 with skill 1.B: reads particle counts from a diagram and converts them to mass fractions. No later-unit content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key of 28.6% is unique and defensible. The stem gives the molar masses and states one particle per molecule."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Species and counts are complete. The data has no explicit color field, but the renderer can generate colors."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The three distractors encode distinct misconceptions, and the explanation addresses each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 85 seconds, light calculator use, and options are parallel numeric values."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean particulate-diagram mass percent question with a unique key and distinct, realistic distractors, and it passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: read particle counts from the diagram, multiply by molar mass, sum, and compute mass percent. About 3 reasoning steps with simple arithmetic and a single representation change (particulate to mass). The wording is clear and the content is in scope for 1.4; the distractors correspond to common slips such as the O2 fraction. It is appropriate for introductory learning rather than full-mock exam prep.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_chemistry-m16-k0",
+  "cellId": "ap_chemistry-m16",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "B",
+     "brief_reasoning": "q = m·c·ΔT needs the mass of the solution, which is the mass of the water plus the mass of the salt (already measured to get the moles), plus ΔT. Then ΔH = −q/n needs the moles of salt. Density isn't needed, and options A and C each leave out a needed quantity.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Fails on key and scoring only: the key (B) is the intended answer, but the stem is slightly loose about the solution mass, and the stated gas constant is an irrelevant distraction. Scope, stimulus, distractors and exam suitability pass.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 6.4 and skill 5.A (identify the quantities needed) fit the item."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "B is the intended answer, but the stem does not say whether the solution mass is the water mass alone or the water plus salt. The gas constant listed in the stem is irrelevant to the relationship. Because I am unsure, this criterion fails."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Conceptual selection of required measurements for coffee-cup calorimetry (q = mcΔT, then ΔH = -q/n). No calculation or representation change; distractors are straightforward omissions or an unneeded density. Mild unstated assumption (water mass approximates solution mass) is conventional and does not drive difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_chemistry-m16-k1",
+  "cellId": "ap_chemistry-m16",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "D",
+     "brief_reasoning": "q = mcΔT needs the solution mass (water mass plus salt mass) and ΔT. Dividing by moles of salt gives ΔH. Density isn't needed.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Fits 6.4 and 5.A: identify the quantities needed from q=mcΔT and ΔH=-q/n."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option D is the only option containing all the needed quantities. Water mass standing in for solution mass is an unstated approximation, but it does not make another option correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The 'gas constant' assumption is irrelevant and slightly odd, and the mass of water vs. mass of solution is not clarified."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The three distractors encode distinct omissions or extras (density, missing moles, missing mass), and each is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short conceptual item, well within about 80 seconds, with no arithmetic."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Acceptable item with a unique key. Minor wording issues: the irrelevant gas-constant phrase and the water-mass vs. solution-mass approximation."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item only requires recalling q = mcΔT and ΔH = -q/n and identifying which measured quantities feed them (mass, ΔT, moles). There is no computation or representation change, and the distractors are eliminated by checking for one missing or extra variable. It targets skill 5.A directly, but it is a one-step identification task suited to initial learning rather than full-mock exam depth.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_chemistry-m16-k2",
+  "cellId": "ap_chemistry-m16",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "C",
+     "brief_reasoning": "q = mcΔT needs the mass and ΔT. Dividing by the moles of salt gives the molar ΔH. A has no moles, B has no ΔT, and D has no volume, so density cannot give the mass.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Matches 6.4 / 5.A: identify the quantities needed for q = mcΔT and ΔH = q/n."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "C is the only set containing mass, ΔT and moles with nothing unneeded. The mass of the water approximates the solution mass, which is standard."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The mention of the gas constant and of 'compounds named' is a slightly odd template artifact but is not misleading."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors encode omission of moles, an unneeded density, and omission of the mass of the water. The explanation covers each wrong option. The correct option is the longest, a mild giveaway."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Quick, with no calculation, and a reasonable reading load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Acceptable item: C is uniquely defensible and the distractors are reasonable. Minor issues are the stray gas-constant mention and the longest option being correct."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The item asks the student to choose the governing relationships (q = mcΔT and ΔH = -q/n) and to identify which measurements are necessary and which are extraneous (density, gas constant). It needs about 3 reasoning steps with no calculation and little reading. The only soft spot is that the solution mass is approximated by the water mass, which is standard practice. This is typical of an AP full-mock item on identifying needed quantities.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_chemistry-m17-k0",
+  "cellId": "ap_chemistry-m17",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Random arrangement with large gaps indicates a gas: it fills the shape and volume of its container and is easily compressed.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "B"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Phase from particle diagram connects to macroscopic properties; fits 3.3 and 1.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "B is uniquely correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Data gives phase, arrangement and packing fraction; no particle coordinates, but adequate for a schematic gas diagram."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Option D is self-contradictory and an obvious giveaway. The misconception labels for A and C are mismatched or vague (the 'touching particles' wording does not match the diagram). Explanations for wrong options are generic rather than explaining why each is wrong for this diagram."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "Too easy and low-discrimination: the diagram is unambiguous and one distractor is implausible. It does not demand the representation reading expected of an AP item."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and the item is in scope. However, distractor D is self-contradictory (an obvious giveaway), the misconception labels are weak or mismatched, and the item is trivially easy. Fail on distractor quality and exam suitability."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept recognition: a random arrangement with large gaps (packing fraction 0.04) indicates a gas, which is matched to the macroscopic properties of a gas (takes the shape and volume of its container, easily compressed). There is no computation, one representation change (particulate to macroscopic), and few reasoning steps. The distractors are standard misconceptions that are easy to rule out, and the wording is clear.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_chemistry-m17-k1",
+  "cellId": "ap_chemistry-m17",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Particles that touch and sit in a regular repeating pattern describe a crystalline solid. A solid keeps a fixed shape and fixed volume and is essentially incompressible.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "The sample is a solid, so it has a fixed shape and is essentially incompressible."
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item is far too easy, since 'regular repeating pattern' directly names a solid. It has weak discrimination, and one distractor is self-contradictory. The calculator designation is irrelevant.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and the scope fits, but the stimulus data is thin and gives away the answer. One distractor is self-contradictory and the distractor rationales are generic. The item is too easy and below the reference pattern for particulate-diagram items."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept recognition: a regular repeating, touching particle arrangement indicates a solid, which has fixed shape and is essentially incompressible. One representation change (particle diagram to macroscopic properties), no computation, and minimal reading. The gas option and the 'solid same as gas' option are easy to eliminate. The liquid option takes slight discrimination, but the regular-pattern cue resolves it. This is foundational for 3.3 and below full-mock exam-prep depth.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_chemistry-m17-k2",
+  "cellId": "ap_chemistry-m17",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Particles arranged randomly with large gaps between them (packing fraction about 0.04) show a gas. A gas fills the shape and volume of its container and can be compressed easily.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "C"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 60 seconds, has no calculation, and is appropriate in reading load. It is rather easy, but acceptable for the topic.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound in scope, key and stimulus. It fails only on distractor quality: option B is implausible, and the misconception rationales for A and D are weak or mismatched. Because the criteria say to fail when unsure, the distractor criterion is marked as failed."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: identify the gas phase from a particulate diagram (random arrangement, large gaps) and connect it to its macroscopic properties (takes container shape and volume, easily compressed). There is no computation and the reading load is minimal. Two distractors are easily eliminated, and the liquid option is a modest discriminator. The item matches skill 1.B at an introductory level, with one representation change from particles to macroscopic behavior.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_chemistry-m18-k0",
+  "cellId": "ap_chemistry-m18",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Diagram has 1 Ca2+ and 2 Cl-, which is a 1:2 ratio. That matches CaCl2.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "CaCl2"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Reading ion counts from a particulate diagram to identify the dissolved formula fits 3.8 and skill 1.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "CaCl2 is the only option with a 1 Ca2+ : 2 Cl- ratio. The key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The data gives the species and counts needed to render the diagram. Minor wording flaw: '1 Ca2+ ions' is a grammar slip in the description and explanation."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option is explained. Distractors are distinct: wrong cation charge, wrong ratio, wrong anion. The explanations are somewhat generic ('not the ions shown'), and the Na2SO4 and NaCl distractors contain ions absent from the diagram, so they are weak. This is acceptable for a simple item."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The task takes about 30-60 seconds and needs no calculation. It is a very easy recognition item, but within the typical range for a representation item."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound with a unique key, a complete stimulus and in-scope content. It is low difficulty, and the 'ions' wording has a minor grammar issue. It passes."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step item: read ion counts from the particulate diagram (1 Ca2+, 2 Cl-) and match to the formula CaCl2. No computation, minimal reading, and distractors are easily eliminated by ion identity or ratio. It tests recall of ionic formulas and dissociation at a foundational level.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_chemistry-m18-k1",
+  "cellId": "ap_chemistry-m18",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Each Ca2+ goes with 2 Cl-, so the 1:2 ratio fits CaCl2.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "CaCl2"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Reading ion counts from a particulate diagram and matching them to a neutral formula fits 3.8 and skill 1.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The 2 Ca2+ to 4 Cl- ratio of 1:2 uniquely matches CaCl2. None of the other options contains Ca2+ and Cl- in that ratio, so there is one defensible answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The data gives each species and its count. The stem states that water is not shown, and the figure description mentions a color key."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors are plausible chloride and sodium salts with different ion ratios. Their explanations are somewhat generic ('not the ions shown'), and the NaCl and Na2SO4 options introduce a different cation or anion. They are still acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 60 seconds, has a light reading load, needs no calculation, and its options are short parallel formulas."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, simple particulate-representation question with a unique key and no instant-reject condition. The distractor rationales are generic but acceptable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step item: read the 2 Ca2+ : 4 Cl- ratio from the particulate diagram and match it to CaCl2 (1:2 formula). The distractors are easy to rule out by the ions present (Na+, SO4 2-, Al3+) or by the wrong ratio. There is no calculation, no multi-step reasoning, and minimal reading. It checks the basic skill of interpreting a particulate representation.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_chemistry-m18-k2",
+  "cellId": "ap_chemistry-m18",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "There are 6 Na+ and 3 SO4^2- ions, which is a 2:1 ratio. That matches Na2SO4. None of the other choices contain these ions.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "Na2SO4"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 60 seconds, needs no calculation, and has a typical AP format.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, unambiguous particulate-diagram identification item with a unique key, and it passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Student reads ion identities and counts from the particulate diagram, notes the 2:1 Na+:SO4^2- ratio, and matches it to Na2SO4. Only one option contains both ions, so the item is close to direct recognition with minimal reasoning, no calculation, and little reading.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_chemistry-m19-k0",
+  "cellId": "ap_chemistry-m19",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "4 H2 needs 2 O2 (3 available), so H2 is limiting; 4 H2 -> 4 H2O.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "4"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Particulate limiting reagent with mole ratio; fits 4.5 and 1.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "H2 limiting, 4 H2O; unique answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Data gives species and counts; complete for rendering."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor maps to a distinct error and is explained; leftover O2 = 1 is correct."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, typical load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound, simple particulate limiting-reagent item; the key is correct and unique, and the distractors are distinct and explained."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept limiting reactant item with small whole-number particle counts. The student reads the counts from the particulate diagram, applies the 2:1:2 mole ratio (4 H2 limits to 4 H2O; 3 O2 could make 6), and picks the smaller. No unit conversions or heavy arithmetic. Distractors (1, 2, 7) are plausible misconceptions such as adding the particles or using O2 count incorrectly. The wording is clear and the item is within Unit 4.5 scope.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_chemistry-m19-k1",
+  "cellId": "ap_chemistry-m19",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "H2 is the limiting reactant: 6 H2 react with 2 N2 to make 4 NH3, leaving 1 N2 unused.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "4"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "Quick, minimal arithmetic, typical AP particulate-diagram item. The calculator is not needed but is harmless.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound, with a unique key of 4 and a clear, simple diagram. The distractor rationale for 3 is a bit loosely worded. I am marking the distractor criterion as fail out of caution, though the item is otherwise acceptable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Read particle counts from the diagram, apply the 1:3 N2:H2 ratio to identify H2 as the limiting reactant, then use the 3 H2 : 2 NH3 ratio to get 4 NH3. Small whole-number arithmetic, a single concept (limiting reactant at the particulate level), and a clear, unambiguous stem. This is a core-skill item rather than a full-mock-level challenge.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_chemistry-m19-k2",
+  "cellId": "ap_chemistry-m19",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "H2 is limiting: 4 H2 give 4 H2O and use 2 of the 10 O2.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "4"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Particulate diagram reading plus limiting reagent; fits 4.5 and skill 1.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "4 H2 limiting gives 4 H2O; unique correct answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Counts of H2 and O2 given; sufficient for rendering and the question."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option is explained; 14 is a weak but acceptable distractor."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, low reading load, appropriate for AP."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clear limiting-reagent particulate item with one weak distractor (14); passes."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Student reads particle counts from the diagram (4 H2, 10 O2), applies the 2:1 mole ratio to identify H2 as the limiting reactant, and gets 4 H2O. This is a single limiting-reactant comparison with small whole numbers and no real arithmetic. It's a core stoichiometry concept at the particulate level, with minimal reading and one representation change from diagram to equation.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_chemistry-m20-k0",
+  "cellId": "ap_chemistry-m20",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "15 electrons means phosphorus. Peaks in order of decreasing binding energy are 1s, 2s, 2p, 3s, 3p, so the second-highest peak (18.7 MJ/mol) is 2s.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "2s"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 60 seconds with a short reading load and no arithmetic. It is fairly easy, but the format matches the AP style. The calculator designation is irrelevant but harmless.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, unambiguous PES peak-to-subshell assignment with a unique key and distinct distractors. It is easy, and the 4s distractor is weak, but it is acceptable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept PES interpretation: order peaks by binding energy, use electron counts (2,2,6,2,3) to assign 1s, 2s, 2p, 3s, 3p, and pick the second-highest peak as 2s. No calculation; the spectrum read is direct and the wording is unambiguous, so this fits early-learning practice for topic 1.6.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_chemistry-m20-k1",
+  "cellId": "ap_chemistry-m20",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "The peaks fit Na: 1s2 2s2 2p6 3s1. Going from highest to lowest binding energy, the peaks are 1s, 2s, 2p, 3s. So the second-highest peak, at 6.84 MJ/mol, is 2s.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "2s"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 60 seconds, needs no calculation, and its format is typical of AP PES items.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, unambiguous PES subshell assignment. The key is 2s, the data are consistent with Na, and the distractors are plausible and explained. It passes."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The student reads the peak electron counts (2, 2, 6, 1), writes the configuration 1s2 2s2 2p6 3s1 for sodium, and assigns subshells in order of binding energy. The second-highest peak is 2s. This is a single-concept, direct read-and-assign task. The only trap is choosing 2p. No computation is needed.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_chemistry-m20-k2",
+  "cellId": "ap_chemistry-m20",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Peaks correspond to 1s2 2s2 2p6 3s2 3p5 (Cl). Ranked by binding energy, the third-highest peak is at 21.9 MJ/mol with 6 electrons, so it is 2p.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "2p"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 60 to 75 seconds, needs no calculation, and has a typical stimulus and reading load.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a valid PES subshell-assignment question with a unique key (2p) and a complete stimulus. The only weakness is the 4s distractor, which the period 2 or 3 restriction rules out. It passes."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Student orders the five peaks by binding energy, matches them to subshells using electron counts (2,2,6,2,5 gives 1s,2s,2p,3s,3p, chlorine), and picks the third peak as 2p. This takes one spectrum read and a direct application of the PES-to-configuration mapping, with no computation. It is a standard topic 1.6 identification item. Distractors are plausible but easy to rule out.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "key": "ap_chemistry-m21-k0",
+  "cellId": "ap_chemistry-m21",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "All four solutions are 0.2 M, so the acid with the largest Ka gives the most H+ and the lowest pH. That is HF (Ka = 6.8e-4).",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "HF"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "About 75 seconds, with no calculation needed. The item is fairly easy but suitable. A calculator is allowed but not needed.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean, unambiguous item with a unique key (HF) and distinct distractors. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step comparison: at equal concentration, the largest Ka gives the most H+ and the lowest pH. The student reads the table and picks HF (6.8e-4). No ICE table, no arithmetic, and no multi-step linkage is required. This is a basic concept check, below full-mock exam_prep depth.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "key": "ap_chemistry-m21-k1",
+  "cellId": "ap_chemistry-m21",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "All four solutions are 0.1 M, so the acid with the largest Ka gives the highest [H+] and the lowest pH. That acid is HF (Ka = 6.8 × 10⁻⁴).",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "HF"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Ranking 0.1 M weak acid solutions by pH from Ka fits topic 8.7 (pH and pKa) and skill 4.A (use a given model to predict a property). The demand is low but appropriate, and no later-unit content is used."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "HF has the largest Ka (6.8e-4) at equal concentration, so it has the lowest pH. The key (index 2) is unique. All four acids are 0.1 M and their Ka values are close enough that HF is still clearly lowest."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete, with an acid column and a Ka column at 25 °C. The stem specifies 0.1 M. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor has a named misconception and an explanation. HOCl is the reversed relationship. HCOOH and CH3COOH are ranked-near-top errors that differ by Ka rank. The m2 and m3 explanations are nearly identical in wording, but they are distinct in content."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 30-75 seconds, needs no calculation, and has four short parallel options. The calculator designation is harmless. The item is slightly easy but acceptable."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, unambiguous Ka-to-pH ranking with a complete table, a unique key, distinct distractors with explanations, and appropriate load. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: at equal concentration, the acid with the largest Ka is the most dissociated and gives the lowest pH. The student reads the table and compares exponents (6.8e-4 is largest), with no calculation required. This is a one-step comparison, which is basic learning level for topic 8.7 and not exam-prep depth.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_chemistry-m21-k2",
+  "cellId": "ap_chemistry-m21",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "All the solutions are at the same concentration, so the acid with the largest Ka gives the most H+ and the lowest pH. That is HNO2, with Ka = 4.5e-4.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "HNO2"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 30 seconds, with a light reading load and no arithmetic. It is somewhat easy but within the acceptable range.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and unambiguous, with a unique key and distinct distractors. It is low in difficulty but acceptable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Student reads Ka values from a short table and applies the relationship that, at equal concentration, a larger Ka means more dissociation and a lower pH. This takes one comparison of scientific-notation values (largest Ka is HNO2) with no calculation or multi-step reasoning. The stem is clear and the content is in scope for 8.7, so the item suits foundational practice rather than a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "key": "ap_chemistry-m22-k0",
+  "cellId": "ap_chemistry-m22",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "C",
+     "brief_reasoning": "Both bonds are 128 pm, which is between the single-bond (148 pm) and double-bond (121 pm) lengths. That points to a bond order of about 1.5, which matches the resonance hybrid model.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 2.6 resonance; evaluating a single Lewis structure against bond length data is a fit for 4.D model analysis."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "C is the unique defensible answer. A, B and D are each contradicted by the table."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table gives the single, double and measured lengths and is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors encode distinct misconceptions and the explanation covers each one. Option C is slightly longer than the others, a minor giveaway."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short reading load, about 95 seconds, and no arithmetic is needed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. It has a unique key, a complete table stimulus, and distractors that each encode a distinct misconception. It is in scope and a typical length for the exam."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item. The student reads a 4-row table, notices the two measured ozone bond lengths are equal and fall between the typical single and double values, and concludes that resonance (bond order of about 1.5) fits better than a single Lewis structure. There is no computation, the reading load is minimal, and the distractors are plainly contradicted by the data (lengths not near single, lengths not different, one structure predicts unequal bonds). It does link a particulate model to a measurable property (skill 4.D), but the depth is introductory, so it suits basic learning of resonance more than a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_chemistry-m22-k1",
+  "cellId": "ap_chemistry-m22",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "All three bonds measure 129 pm, between the single (143 pm) and double (120 pm) values. That points to delocalized bonds with a bond order of about 1.33, which resonance structures describe.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "C"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 2.6 resonance evidence from bond lengths; 4.D model evaluation."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "C is unique: equal intermediate lengths imply delocalization; single structure predicts two lengths."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table complete with reference and measured lengths; clear wording."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions, each explained. Option A is slightly weak since 129 is nearer to 120, but still clearly wrong."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 95 s, no arithmetic, short reading load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound item with a unique key, a complete table, and distinct distractors, suitable for the exam."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single core concept: equal intermediate bond lengths in carbonate indicate resonance and delocalization, so a single Lewis structure with one double bond is inadequate. The student reads a small table, notes that 129 pm lies between 143 and 120 pm, and picks the best evaluation. There is no computation and little reading. The distractors are clearly wrong, and the model-evaluation link is direct and common in introductory instruction. Wording is unambiguous and the content stays within Unit 2 scope.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_chemistry-m22-k2",
+  "cellId": "ap_chemistry-m22",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Both O–O bonds measure 128 pm, which falls between the single-bond value (148 pm) and the double-bond value (121 pm). That means the two bonds are equivalent, each with a bond order of about 1.5. Resonance structures describe this; one structure with a single and a double bond does not.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "C"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 2.6 resonance evaluated against bond-length data; skill 4.D (evaluating a model against macroscopic/measured evidence) fits well."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option C is the unique correct answer: equal intermediate lengths indicate delocalization/resonance. Others are clearly contradicted by the table or by what a single structure would predict. 128 pm is closer to the double-bond value (121) than the single (148), but option D's claim of 'close to single' with only single bonds is false regardless."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete with single, double and the two measured lengths with units. The wording is clear. The 'Length' column header lacks units, but the values carry pm."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception (misreading data, ignoring that the model predicts unequal lengths, misreading the intermediate value), and the explanation addresses each. Option C is somewhat longer, but not a major giveaway."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Quick table read with no calculation; about 90 seconds; typical of the AP style."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound: a single correct answer, a complete table, distinct distractors, and a good fit to 2.6 and skill 4.D."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item asks students to read a short four-row table and see that both measured O-O bond lengths are equal (128 pm) and fall between the typical single (148 pm) and double (121 pm) values. They then need to connect this to resonance and delocalized bonding, and to reject the student's single localized structure. No calculation is needed. The concept is a core Unit 2.6 idea, and the distractors are plainly wrong once the table is read: unequal lengths, a fit with no change needed, and a single-bond claim. Reading load is minimal and the wording is unambiguous. The skill 4.D model-evaluation step adds one reasoning link beyond recall, but overall this is an introductory-level check of understanding rather than a full-mock exam item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_chemistry-m23-k0",
+  "cellId": "ap_chemistry-m23",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_distractor_explanation",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "HCl = 0.1 M × 0.020 L = 0.002 mol. At a 1:1 ratio, 0.002 mol ÷ 0.1 M = 20.0 mL. This matches the first run (0.05 M × 40 mL = 0.002 mol).",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "20.0 mL"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": "Dominant demand is a routine n=cV stoichiometry calculation, not explaining how a procedural change alters results (2.F). The first-run data is unnecessary because equal concentrations of acid and base give an equal volume."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "20.0 mL is correct and unique under 1:1 stoichiometry."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The 60.0 mL distractor (adding acid volume to the first titration volume) is an unrealistic misconception. The 40 mL and 80 mL distractors are reasonable. The explanations cover every option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item is quick (about 60-80 seconds) and has a low calculation load. It is too easy because of the equal-concentration shortcut."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct, but the item is a plain stoichiometry calculation that does not really assess skill 2.F. It is trivially easy because of the equal-concentration shortcut, and one distractor is unrealistic. I fail it on scope/skill and distractor quality."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single proportional-reasoning step: at equivalence moles NaOH = moles HCl (1:1), so doubling the NaOH concentration halves the volume needed (40 mL to 20 mL). Arithmetic is trivial, there is no representation change, and reading load is minimal. It tests a basic understanding of titration stoichiometry, below the depth typical of full-mock exam items.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_chemistry-m23-k1",
+  "cellId": "ap_chemistry-m23",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "There is 0.003 mol of HCl. NaOH reacts 1:1, so 0.003 mol / 0.1 M = 30.0 mL. Halving the base concentration doubles the volume (15 mL becomes 30 mL).",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "30.0 mL"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 60-80 seconds and has light arithmetic. It is fine with a calculator allowed.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. It has a unique correct key, distinct distractors tied to named misconceptions, and a light load suited to the exam."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single governing relationship (n = MV at 1:1 equivalence) with one proportional-reasoning prediction: halving NaOH concentration doubles the volume needed (15 mL to 30 mL). No stimulus, minimal reading, trivial arithmetic. Data are consistent (0.15 M x 20 mL = 0.2 M x 15 mL). Fits an introductory titration item rather than a full-mock exam item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_chemistry-m23-k2",
+  "cellId": "ap_chemistry-m23",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "There are 0.0045 mol of HCl. Dividing by 0.1 M NaOH gives 0.045 L, or 45.0 mL. This checks out because 0.0045 mol / 0.05 M = 90 mL, as in the first titration.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "45.0 mL"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Titration stoichiometry with a changed titrant concentration; fits 4.6 and 2.F (predicting how a procedural change alters the result), though it is computational."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "45.0 mL is unique. The first-titration data are consistent (4.5 mmol), and the 1:1 stoichiometry is standard for HCl and NaOH."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors are distinct and explained. 120 mL (adding volumes) is a weak misconception, and the inverted-ratio error (180 mL) is missing, but this is acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 80 seconds, with simple arithmetic and a calculator allowed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, clear and appropriately scoped. The distractors are somewhat weak but acceptable. Pass."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single proportional-reasoning step: the moles of HCl are fixed, so doubling the NaOH concentration halves the equivalence volume (45.0 mL). The arithmetic is trivial and the wording is clear. The item fits introductory titration understanding rather than full-mock exam difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_chemistry-m24-k0",
+  "cellId": "ap_chemistry-m24",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "B",
+     "brief_reasoning": "A strong acid at 0.1 M would start at pH 1.00, so 2.88 means only partial dissociation (Ka ≈ 1.8e-5, like acetic acid). An equivalence-point pH above 7 also shows a basic conjugate base, which points to a weak acid.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 8.5 titration data used to argue acid strength; fits 6.F."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "B is uniquely defensible: pH 2.88 > 1.00 for 0.1 M strong acid, and equivalence pH 8.7 > 7 indicates a weak acid."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem has all the information."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct, named misconceptions, each explained. The key is slightly longer than the other options, a mild giveaway."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60-90 seconds, conceptual, no heavy arithmetic."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. It has a unique key and distinct misconceptions in the distractors, and it fits skill 6.F and the MC pattern. No instant-reject conditions apply."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Conceptual item with no calculation. The student compares the initial pH (2.88) with the 1.00 expected for a 0.1 M strong acid, then links an equivalence-point pH above 7 to the basic conjugate base of a weak acid. That is two short reasoning steps. The distractors are clearly wrong, and each targets a common misconception such as pH < 7 meaning strong, or pH > 7 at equivalence meaning strong. No heavy reading, arithmetic, or out-of-scope knowledge.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_chemistry-m24-k1",
+  "cellId": "ap_chemistry-m24",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "D",
+     "brief_reasoning": "A strong acid at 0.2 M would have pH 0.70. The observed pH of 2.72 is higher, so the acid is only partly dissociated (Ka ≈ 1.8e-5). An equivalence-point pH above 7 means the conjugate base is basic, which fits a weak acid. The calculated equivalence pH is about 8.87, consistent with 8.9.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Connects titration pH data to acid strength; fits 8.5 and 6.F argumentation."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "D unique: strong 0.2 M acid pH 0.70 vs 2.72; equivalence pH 8.9 consistent with Ka ~1.8e-5 (computed 8.88)."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; stem gives concentration and both pH values clearly."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions, each explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 95 seconds, light calculation, calculator allowed is fine."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound, self-consistent item with a unique key and distinct distractors; accept."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must compute or recall the expected pH of a 0.2 M strong acid (0.70), compare it with the measured 2.72, and link the equivalence-point pH > 7 to a basic conjugate base. This requires choosing the governing relationship and one extra reasoning step connecting data to a claim. Arithmetic is minimal and the wording is clear. This is typical of AP claim-evidence reasoning (skill 6.F) in Unit 8.5.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_chemistry-m24-k2",
+  "cellId": "ap_chemistry-m24",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "0.1 M with pH 1.00 means [H+]=0.1 M, so it's fully dissociated. A neutral equivalence point (pH 7) fits a strong acid paired with a strong base.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "C"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 60-90 seconds, needs no calculation and has a light reading load.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean conclusion question with a unique key, distinct misconception-based distractors and suitable exam load. I found no instant-reject conditions."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: compare initial pH to the -log(0.1)=1 expected for a strong acid, then link equivalence pH 7 to a neutral salt. Two short reasoning steps, trivial computation, no representation change, clear wording. Distractors target common misconceptions but the item is not demanding enough for full-mock exam prep.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_chemistry-m25-k0",
+  "cellId": "ap_chemistry-m25",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Glycerol has three OH groups, giving extensive hydrogen bonding, so its intermolecular forces are the strongest and its viscosity is the highest.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "glycerol"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Links number of H-bonding sites to viscosity; fits 3.1 / 4.C."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Glycerol is the unique correct answer (viscosity ~1400 mPa·s vs <1 for the others)."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The three wrong-option rationales are one template (fewer –OH groups than glycerol, so weaker attractions). Hexane and acetone get identical wording even though they reflect different errors (dispersion-only vs dipole-dipole without H-bond donors). They do not encode distinct named misconceptions."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60 s, no calculation, appropriate load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a sound topic 3.1 / 4.C question with a unique correct key (glycerol). It fails on distractor quality because the three wrong options share one templated rationale and do not encode distinct misconceptions, notably hexane and acetone."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: identify the intermolecular forces from each molecule's structure (glycerol has three OH groups and extensive hydrogen bonding; methanol has one OH group; acetone is polar without H-bond donors; hexane is nonpolar with only London dispersion forces) and link stronger IMFs to higher viscosity. No computation, no data read, minimal reading. Standard introductory application of topic 3.1 and skill 4.C. Difficulty comes from in-scope content only.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_chemistry-m25-k1",
+  "cellId": "ap_chemistry-m25",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "ethylene glycol",
+     "brief_reasoning": "Two OH groups per molecule give it extensive hydrogen bonding, and it is larger than water. Measured viscosity is about 16 cP, versus about 0.89 cP for water, 1.07 cP for ethanol and 0.31 cP for acetone.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 3.1: relates hydrogen-bonding capacity and molecular size to a macroscopic property (viscosity). This fits skill 4.C, connecting the particulate and macroscopic levels. No out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Ethylene glycol (about 16 cP) is clearly the most viscous of water, ethanol, acetone and ethylene glycol. It is the unique defensible answer. The independent solver agrees."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear and self-contained. It relies on students knowing the structures of the four standard liquids, which is reasonable."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors are plausible and each is explained. The m1 and m3 explanations are similar (fewer OH groups). The m2 explanation is slightly awkward: water has the same number of OH groups but a smaller molecule. The explanations are in the option 'why' fields and are repeated in the explanation text, so every wrong option is covered. Option lengths are comparable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 60 seconds, needs no calculation, and has a typical AP style and one dominant skill. The 'calculator allowed' designation is harmless."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. It has a single correct answer, a short stem, distinct distractors and an appropriate load for AP Chemistry topic 3.1 and skill 4.C. The m2 rationale is slightly weak, but it does not undermine the item."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Conceptual item with no calculation. The student must recall or infer the structures of four liquids, compare intermolecular forces (hydrogen bonding sites per molecule, molecular size, dipole-dipole only for acetone), and link the strongest overall IMF to the highest viscosity. Water is a plausible distractor because of its strong H-bonding, so the student has to reason about the number of H-bond sites and molecular size rather than just identify H-bonding. This is a standard multiple-choice difficulty for topic 3.1 and skill 4.C. Reading load is minimal and there are no unfair sources of difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_chemistry-m25-k2",
+  "cellId": "ap_chemistry-m25",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "glycerol",
+     "brief_reasoning": "Glycerol has three OH groups per molecule. This gives it the most hydrogen bonding, so it has the strongest intermolecular forces and the highest viscosity (about 1 Pa·s, compared with about 16 mPa·s for ethylene glycol).",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 30-60 seconds and needs no calculation. The option lengths are parallel. The task is a bit easy, but it is a typical recall-and-reason AP item, and the allowed calculator is simply not needed.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean, unambiguous item on hydrogen bonding and viscosity with a unique key. The distractors are somewhat formulaic, but the item is acceptable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Qualitative IMF comparison. The student identifies the H-bonding capability of each molecule, counts OH groups (0, 1, 2, 3), and links the stronger or more extensive H-bonding to higher viscosity. There is no computation, no stimulus, and minimal reading. It is a single-concept recall and application item suited to introductory practice rather than full-mock exam prep.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_chemistry-m26-k0-q1",
+  "cellId": "ap_chemistry-m26",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "Second order in A",
+     "brief_reasoning": "In experiments 1 and 2, [B] stays the same while [A] doubles. The rate goes up 4 times, so the reaction is second order in A.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Experiments 1 and 2 hold [B] constant and double [A]; the rate quadruples, so the order in A is 2. Unique key."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors encode distinct misconceptions and each wrong option is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Quick item with low reading load. The options are not in logical order, which is minor."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, in scope and clean. The key is unique and the distractors are distinct and explained."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept method of initial rates. Students pick the two experiments where [B] is constant (1 and 2), see that doubling [A] quadruples the rate, and conclude the order in A is 2. Experiment 3 is a minor distractor, since the B-order is not needed. One table read and one proportional-reasoning step, with no heavy arithmetic. This is a foundational skill-5.D item, below full-mock exam_prep depth.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_chemistry-m26-k0-q2",
+  "cellId": "ap_chemistry-m26",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Doubling [A] makes the rate 4 times larger, so the reaction is second order in A. Doubling [B] leaves the rate unchanged, so it is zero order in B. The rate law is rate = k[A]^2, and k = 1.5e-4/(0.1)^2 = 0.0150 M^-1 s^-1.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "0.0150 M^-1 s^-1"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 5.2 fits: orders from comparing experiments, then k. A table rather than a graph is a mild skill-label stretch but is acceptable."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Order 2 in A, order 0 in B, k = 0.0150 M^-1 s^-1 is unique and correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table is complete, with consistent units and one variable changing at a time."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception and is explained; the 0.0075 value matches the no-orders error."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Typical AP load, calculator allowed, simple arithmetic."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and well formed. It tests orders from a table and then k with units. The distractors are distinct and explained. The only quibble is that skill 5.D mentions graphs while the stimulus is a table, which is acceptable."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP method-of-initial-rates item. The student must read the table, compare experiments to find the orders (second order in A, zero order in B), write the rate law, solve for k with simple arithmetic, and derive the units (M^-1 s^-1). Distractors target plausible order errors and unit errors. Concept depth and number of steps are moderate and appropriate for a full mock exam; the reading and computation load are low and there are no unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_chemistry-m26-k1-q1",
+  "cellId": "ap_chemistry-m26",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "In experiments 1 and 2, [A] doubles with [B] held constant, and the rate doubles. That means the reaction is first order in A.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "First order in A"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a standard method-of-initial-rates problem with a unique key (first order in A). The table is complete, the distractors each encode a distinct misconception, and the explanation addresses every wrong option. The load is appropriate for an AP exam item.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Fits topic 5.2 and skill 5.D, since the item requires reading a table of rate data to find an order."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Experiments 1 and 2 differ only in [A], which doubles, and the rate doubles, so the reaction is first order in A. Only one option is defensible."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table has complete columns and rows, and the stem states constant temperature. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The three distractors (cannot be determined, second order, zero order) are distinct misconceptions, and each is explained. The options are parallel in length and format."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 60-100 seconds, needs no arithmetic, and is consistent with the calculator designation."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item. Compare experiments 1 and 2, where only [A] changes (doubles) and the rate doubles, so the order in A is 1. This needs one table read and one proportional-reasoning step, with no multi-step computation, unit conversion, or extra linking claim. Distractors are standard order misconceptions. The wording is clear and unambiguous.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_chemistry-m26-k1-q2",
+  "cellId": "ap_chemistry-m26",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Doubling [A] doubles rate (first order); doubling [B] doubles rate (first order). k = 1.2e-3/(0.1*0.1)=0.120 M^-1 s^-1",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "0.120 M^-1 s^-1"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Reading a table to find orders and then computing k fits 5.2/5.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Orders 1 and 1, k = 0.120 M^-1 s^-1, unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table is complete and one variable changes at a time."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Distractor D rationale is vague (\"wrong rate-law order for the units\") and not a distinct named misconception. A pairs a one-concentration-division value with M^-1 s^-1 units, which is inconsistent with the stated error. Options with M/s units for k are implausible and form a format giveaway (two options with correct-type units)."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Time and load typical."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct and in scope, but the distractor rationales are weak: D has no clear misconception, A's units conflict with its stated error, and the mixed unit forms (M/s versus M^-1 s^-1) signal the answer. Fail on distractor quality."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must read the table, compare experiments to find orders for A and B (both first order), write the rate law, solve for k with clean numbers, and deduce the units for a second-order reaction. This is a standard method-of-initial-rates item with minimal computation and clear wording, and the distractors target the order determination and units. It is appropriate for a full mock exam, not a basic first-pass item or an advanced one.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_chemistry-m26-k2-q1",
+  "cellId": "ap_chemistry-m26",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "Second order in A",
+     "brief_reasoning": "Exp 1→2: [A] doubles with [B] held constant, and the rate goes up 4 times, so the order is 2.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Reading a table and comparing two experiments to find the order in A fits 5.2 and skill 5.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Doubling [A] with [B] constant gives a 4x rate, so the order is 2. The key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete, with clear columns and a one-variable-at-a-time design. The stem states constant temperature."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Zero order, first order and 'cannot be determined' are each distinct misconceptions. The explanation addresses every wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short task, minimal arithmetic, typical of AP time and reading load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, standard initial-rates question with a unique key and a complete table. It has distinct distractors and typical AP load, so it passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step method of initial rates: select experiments 1 and 2 (B constant), see that doubling [A] quadruples the rate, so the order in A is 2. One table read and one proportional-reasoning step; experiment 3 is an unneeded distractor. Wording is clear, the numbers are simple, and the item is in scope for topic 5.2.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_chemistry-m26-k2-q2",
+  "cellId": "ap_chemistry-m26",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Rate = k[A]^2[B]. Using experiment 1: k = 4e-5 / (0.01 × 0.1) = 0.0400 M^-2 s^-1",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "0.0400 M^-2 s^-1"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 5.2: determine orders from the table, then compute k with units. Within Unit 5 scope."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Orders 2 in A and 1 in B, k = 0.0400 M^-2 s^-1. Unique correct option."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table is complete, constant temperature is stated, and each experiment varies one concentration relative to Exp 1."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor maps to a distinct misconception (ignoring orders, using the rate as k, dividing by one concentration). The explanation addresses each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 105 s, simple arithmetic, calculator allowed, typical AP format."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean initial-rates item with a unique key and distinct distractors, suitable for the exam."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must read table, use two pairwise comparisons to find orders (2 in A, 1 in B), write the rate law, solve for k with clean arithmetic, and derive units for a third-order reaction. Standard AP-level multi-step routine, with no unfair difficulty sources; distractors target order and unit errors.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ }
+]

@@ -1,0 +1,336 @@
+{
+ "schema": "rw-session-task/v1",
+ "kind": "review",
+ "role": "fable_judge",
+ "runId": "lit40-wave1",
+ "taskId": "rev-fable_judge-034",
+ "chunkId": "rev-fable_judge-034",
+ "suggestedModel": "fable",
+ "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-fable_judge-034.result.json",
+ "outputSchema": {
+  "chunkId": "청크 ID",
+  "model": "fable",
+  "items": [
+   {
+    "candidateId": "id",
+    "picked_letter": "A|B|C|D",
+    "other_defensible": "정답 외 방어 가능한 선택지가 있으면 true",
+    "est_difficulty": "easy|medium|hard (실제 체감, 요청 난이도에 맞추지 말 것)",
+    "hard_fit": "실제 SAT hard 수준의 사고 단계가 필요하면 true(지문 길이·난어만이면 false)",
+    "plausible_distractors": "오답 3개가 모두 그럴듯하고 서로 다른 오개념에서 나왔으면 true",
+    "length_balanced": "네 선택지 길이·구체성이 비슷해 정답이 형식으로 드러나지 않으면 true",
+    "multi_answer_risk": "복수 정답 위험이 있으면 true",
+    "issues": "한 줄 메모"
+   }
+  ]
+ },
+ "items": [
+  {
+   "candidateId": "lit40-hard-03-090",
+   "attempt": 1,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "hard",
+   "passage": "By the ninth night before the Lantern Festival, Yuying and I had swept the barbershop on Drum Tower Lane so often that its floor shone. Our master had promised the guild that she would sing the opening verse on its stage, and she had never sung for anyone but me, Meilin, who shared the night shift with her. Each night, once the shutters were barred, she sang it through twice, low and exact; whenever boots sounded in the lane, she stopped mid-line and took up the broom again. Her voice was a razor stropped every evening and laid back in its case. I held the lamp and kept time with my foot on the board. Two nights later a drunk porter knocked to ask the hour, and she finished the verse before she unbarred the shutter to answer him.",
+   "question": "As used in the text, the phrase \"a razor stropped every evening and laid back in its case\" most nearly suggests that Yuying's voice is",
+   "options": [
+    "a sharp edge that could wound whoever happened to overhear it.",
+    "a gift that is still too rough to be offered on a public stage.",
+    "a readiness she sharpens each night and keeps from public trial.",
+    "one of the tools of the trade she practices in the barbershop."
+   ],
+   "recipeBeyondMedium": "관용 해석으로 풀 수 없고, 오답이 비유의 다른 속성에서 나온 그럴듯한 해석이며 정답은 두 곳 이상의 단서가 정한다"
+  },
+  {
+   "candidateId": "lit40-hard-03-092",
+   "attempt": 1,
+   "skill": "words_in_context",
+   "questionType": "word_in_context",
+   "requestedDifficulty": "hard",
+   "passage": "Eulalio set the copper pot on the boarding-house stove each evening and made you repeat the farewells until the beans went soft. In the valley, he told you, a guest does not simply leave; the leaving has an order, and he drilled you in it, correcting the place of each word, the pause before the blessing, the second thanks for the salt. For six weeks, Anacleto, you practiced while the landlady shelled peas by the window. Then your coach for Puebla was moved up a day. That morning you stood at the kitchen door with your bag, ready to recite the whole of it. His own farewell was ______. He touched two fingers to your sleeve, said a single word, and turned back to stir the pot before you could begin.",
+   "question": "Which choice completes the text with the most logical and precise word or phrase?",
+   "options": [
+    "deliberately brief",
+    "hastily curt",
+    "properly ceremonial",
+    "carefully rehearsed"
+   ],
+   "recipeBeyondMedium": "빈칸 뒤 정의가 없고 두 제약을 동시에 만족하는 표현만 정답이며, 오답이 모두 문법적으로 맞고 의미 영역이 같다"
+  },
+  {
+   "candidateId": "lit40-hard-03-094",
+   "attempt": 1,
+   "skill": "words_in_context",
+   "questionType": "word_in_context",
+   "requestedDifficulty": "hard",
+   "passage": "Aluva station, at the far end of the Kochi metro line, was empty at six except for you, Priya, and Vikram with a cardboard box. For eleven years of rehearsals he had wound the brass metronome himself before every session, and if a cellist reached for it, he moved it a few inches away without breaking his sentence. His mother's house in Kakkanad had been emptied that week; the piano was sold, the shelves taken apart, and the box held the last thing left. He took out the metronome and handed it to you, the youngest of the second violins, in a manner that was ______. Then he folded the empty box flat, did not stay to watch you try the key, and stepped onto the train before the doors finished chiming.",
+   "question": "Which choice completes the text with the most logical and precise word or phrase?",
+   "options": [
+    "fondly sentimental",
+    "briskly dismissive",
+    "quietly trusting",
+    "steadily rhythmic"
+   ],
+   "recipeBeyondMedium": "빈칸 뒤 정의가 없고 두 제약을 동시에 만족하는 표현만 정답이며, 오답이 모두 문법적으로 맞고 의미 영역이 같다"
+  },
+  {
+   "candidateId": "lit40-medium-04-002",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "relationship_between_characters",
+   "requestedDifficulty": "medium",
+   "passage": "While the cook ladled broth into two paper bowls, Clara explained the plan a second time: they would tell Clement's father that the school trip had been canceled, and the trip money would go toward his birthday surprise instead. Clement poked at a slice of pork and said nothing. When she finished, he asked how many birthdays she had planned before, and she admitted this was her first. He snorted, but he slid the chili oil across the counter to her, the way his father always did, and told her that the lie would need a better reason for the cancellation. She took out a pen and wrote his suggestion on a napkin. Steam rose against the striped awning, and a bus hissed to a stop at the corner.",
+   "question": "Based on the text, which choice best describes the relationship between Clement and Clara?",
+   "options": [
+    "Clement remains wary of Clara but is starting to work with her as a partner.",
+    "Clara distrusts Clement and hesitates to include him in the plan for his father.",
+    "Clement openly admires Clara and eagerly accepts every plan that she proposes.",
+    "Like many stepchildren, Clement refuses to join in anything that Clara organizes."
+   ],
+   "recipeBeyondMedium": "두 문장의 단서를 연결해야 하고 오답은 한쪽 감정만 반영한다"
+  },
+  {
+   "candidateId": "lit40-medium-04-003",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "relationship_between_characters",
+   "requestedDifficulty": "medium",
+   "passage": "Salt-stained binoculars hung by the door of the lighthouse station where Marta wrote her novels, and I lifted them only to have something to do with my hands. I had come to deliver proofs, expecting the polite distance of a writer and her translator. Instead I watched Larissa read a paragraph aloud in Persian, pause, and wait while Marta mouthed the English sentence beneath it, as if checking a pulse. Marta's family, passing through with tea, called Larissa the helper. Yet when Larissa frowned at a word, Marta crossed out her own line rather than defend it, and later asked her, almost shyly, which of two endings she should keep. Outside, the lamp turned its slow beam over the rooftops, and a dog barked twice at the gate.",
+   "question": "Based on the text, which choice best describes the relationship between Marta and Larissa?",
+   "options": [
+    "Larissa feels inferior to Marta and hesitates to question any part of her work.",
+    "Marta treats Larissa as a trusted collaborator whose judgment shapes the writing.",
+    "Larissa relies on Marta to approve each of her choices before she translates further.",
+    "As is typical, the translator serves the author and simply follows her instructions."
+   ],
+   "recipeBeyondMedium": "두 문장의 단서를 연결해야 하고 오답은 한쪽 감정만 반영한다"
+  },
+  {
+   "candidateId": "lit40-medium-04-004",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "relationship_between_characters",
+   "requestedDifficulty": "medium",
+   "passage": "Diesel and burnt coffee hung over the bus depot in Istanbul where Nikos and I had worked the night schedule for twenty-two years. We rarely talked; a nod at the start of each shift had always been enough. One evening I opened the dispatch drawer looking for a stapler and found a stack of my own letters to my mother, the ones I believed had been lost years ago, each stamped and returned. Nikos must have been keeping them safe since the depot's old mailroom closed. I said nothing. The next night he set a cup of tea at my elbow before I asked, and I left the drawer unlocked so he would know I had seen. Through the glass, a bus idled with its doors folded open, its headlights pale in the drizzle.",
+   "question": "Based on the text, which choice best describes the relationship between the narrator, Mingyu, and Nikos?",
+   "options": [
+    "Mingyu feels betrayed by Nikos's secret and quietly withdraws from their friendship.",
+    "Nikos waits anxiously for Mingyu to explain the letters he found in the drawer.",
+    "Their long friendship relies on unspoken gestures that both men understand well.",
+    "Like most coworkers, they share a schedule but have little personal connection."
+   ],
+   "recipeBeyondMedium": "두 문장의 단서를 연결해야 하고 오답은 한쪽 감정만 반영한다"
+  },
+  {
+   "candidateId": "lit40-medium-04-005",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "symbolism",
+   "requestedDifficulty": "medium",
+   "passage": "Who brings a ferry token to a wedding? Mele asked, watching Leilani turn the brass coin over her knuckles while the band tuned up. Leilani explained that her father gave one to every passenger who crossed the harbor in bad weather, a promise that the boat would come back for them. Mele had ridden that ferry for years; tonight she was only waiting for a message from the hospital where her brother lay in surgery. As the speeches began, Leilani pressed the token into Mele's palm. Mele held it through the toasts and the first dance, rubbing its worn edge whenever her phone stayed dark. When the screen finally lit, she did not read it at once. She closed her fingers around the brass first. Around them, guests clapped as the couple cut a cake shaped like a lighthouse.",
+   "question": "In the text, the ferry token most likely represents",
+   "options": [
+    "the debt that Mele owes Leilani's father for her many years of crossings.",
+    "Leilani's wish to leave the crowded wedding and return to the harbor.",
+    "the long friendship that Leilani and Mele formed while riding the ferry.",
+    "a promise of safe return that Mele clings to while she awaits the news."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-04-006",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "symbolism",
+   "requestedDifficulty": "medium",
+   "passage": "Ofelia found the jar on her workbench at four in the morning, its lid still tied with the red string she had used when she gave it away. Inside, the sourdough starter had been fed and was bubbling, alive. She had kept that culture going for eleven years, feeding it every night before the ovens warmed, and she had handed a portion to Ingrid after their first month together on the night shift, telling her it would need her every day. Ingrid, shaping rolls at the far table, did not look up. Later she mentioned, to no one in particular, that her lease ended in spring and she had not decided where she would go. Ofelia unscrewed the lid, smelled the sour sweetness, and set the jar on the shelf beside her own. Flour drifted in the light above the proofing racks, and outside, the first delivery van rattled over the cobbles.",
+   "question": "In the text, the sourdough starter most likely represents",
+   "options": [
+    "an ongoing commitment that Ingrid feels unable to promise she will keep.",
+    "Ofelia's resentment that Ingrid has ignored her advice about baking bread.",
+    "the bakery's eleven-year history and its constant need for new workers.",
+    "Ingrid's gratitude, shown by feeding the starter before she returned it."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-04-008",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "symbolism",
+   "requestedDifficulty": "medium",
+   "passage": "Janelle was already at the train-station cafe in Port of Spain when I arrived, two cups of sorrel tea sweating on the table and the blue ribbon from Saturday's garden show lying between them. I had bought the house on the hill only in March; she had tended its hibiscus for thirty years before that. Everyone at the show knew her blooms were the best, and everyone saw her withdraw her entry an hour before judging, leaving mine to win. I had brought the ribbon to return it. She pushed it back across the table and said the garden needed to learn my name. A train pulled in as she spoke, and pigeons scattered from the platform roof. Since then I have kept the ribbon in a drawer rather than on the wall, and each time I see it I water more carefully, prune more slowly, as though the prize is still being judged. Outside my window now, the hibiscus has begun to bud along the fence.",
+   "question": "In the text, the blue ribbon most likely represents",
+   "options": [
+    "Janelle's lingering bitterness at losing the house to a newcomer.",
+    "the community's admiration for Shanice's skill as a gardener.",
+    "a welcome that Shanice accepts but still feels she must earn.",
+    "Shanice's pride in defeating the most respected local gardener."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-04-009",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "symbolism",
+   "requestedDifficulty": "medium",
+   "passage": "Cut grass and wet chalk: that is what I remember of the field in Taipei the week after I missed the penalty in front of the whole stadium. Coach Yuxuan benched me without explanation. Each evening at dusk she handed me a flat ball from the equipment shed and a hand pump, and I knelt by the sideline pressing air into it while the others ran drills. At first I resented the task and pumped carelessly, so the ball sagged by morning. By the fourth night I was checking the valve, squeezing the seams, testing the bounce against my palm before I handed it back. Yuxuan never commented. On the last evening of the week she rolled the ball back to me and pointed at the penalty spot. The floodlights buzzed on, one bank at a time, and moths gathered in the glare.",
+   "question": "In the text, the flat ball that the narrator, Ruoxi, inflates each evening most likely represents",
+   "options": [
+    "the punishment Yuxuan plans to continue until Ruoxi decides to quit.",
+    "Ruoxi's lasting resentment toward the teammates who watched her fail.",
+    "the team's dependence on Ruoxi to keep all of its equipment in order.",
+    "Ruoxi's gradual recovery of a confidence that her mistake had emptied."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-04-010",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "medium",
+   "passage": "Jeju Island had one bus stop on that stretch of the mountain road, a tin shelter where Minjun waited each afternoon after school. Eamon, who had fished with her father before her father left for Busan, sat down beside her and said, without greeting, that her aunt had heard. Minjun had told only one classmate that her father was not coming back. By the time Eamon reached the shelter, the story had already walked down the mountain without her, stopping at the market, the clinic, and finally her aunt's kitchen. Eamon offered her a tangerine and said her aunt was not angry, only hurt that she had learned it from a neighbor. Minjun peeled the fruit slowly. Mist slid over the ridge, and the bus appeared, its headlights soft in the gray.",
+   "question": "As used in the text, the phrase “the story had already walked down the mountain without her” most nearly suggests that the news",
+   "options": [
+    "was told by Minjun to her aunt during a long walk down the mountain.",
+    "was slowly forgotten as it passed from one neighbor to the next.",
+    "had spread from person to person beyond Minjun's control.",
+    "had been invented by people gossiping at the market and clinic."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-04-011",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "medium",
+   "passage": "Your hives sound quieter this year, Amelia said, setting her bag on the bench by the gate. Sota, who had taught her chemistry thirty years earlier in Porto Alegre, only lifted the lid of the nearest box and let her look. Fewer frames held comb; the bees moved over them slowly. He told her that he had sold four colonies in the spring and would sell the rest in autumn, though he said it as if describing the weather. Amelia asked who would keep them. He answered that the bees had been humming a smaller song for some time now, and that he had been pretending not to hear it. She helped him close the lid. Neither of them mentioned his hands, which shook as he tightened the strap. Along the fence, the jasmine had opened, heavy with afternoon heat.",
+   "question": "As used in the text, the phrase “humming a smaller song” most nearly suggests that the bees",
+   "options": [
+    "make a louder sound that Sota now finds tiresome to hear.",
+    "show a new behavior that Sota hopes to study more closely.",
+    "respond to Amelia's visit with an unusual kind of calm.",
+    "reflect a steady decline that Sota has avoided admitting."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-04-012",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "medium",
+   "passage": "Why keep the shutters open, Emilio asks,\nwhen no one climbs the hill for gloves anymore?\nBronislaw, who stitched beside his grandfather\nfor forty years, sets down his guesthouse cup\nand listens to the bell for vespers.\n\nA shop, he says, is a lamp left burning\nfor a traveler you have never met.\nYou do not light it for the road tonight.\nYou light it so the road remembers.\n\nEmilio looks down at his grandfather's thimble,\nworn to silver on one side,\nand counts the unpaid bills again.\n\nBelow the cloister, Naples gathers its lights,\nand a cat crosses the warm stones of the yard.",
+   "question": "As used in the poem, the phrase “a lamp left burning” most nearly suggests that keeping the shop open is",
+   "options": [
+    "a commitment kept in hope of customers who have not yet come.",
+    "a costly waste of money that the family can no longer afford.",
+    "a memorial meant only to honor the grandfather's years of work.",
+    "a warning to travelers that the road up the hill is dangerous."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-04-013",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "medium",
+   "passage": "Themba had driven me to the vineyard gate every harvest morning for six years, and I had never once paid attention to the route until the season I took a job picking grapes for his cousin's rivals across the valley outside Addis Ababa. He still stopped for me. He still saved the seat behind him. But he no longer hummed along to the radio, and when I mentioned the new owners' generous wages he simply nodded at the windshield. That autumn I felt as if I were pruning the same vine from both sides, trimming one friendship to feed another and unsure which branch would bear fruit. On the last day of harvest I bought two baskets of grapes, one from each estate, and left his on the dashboard. Dust rose behind the bus as it climbed toward the hills, gold in the evening light.",
+   "question": "As used in the text, the phrase “pruning the same vine from both sides” most nearly suggests that the narrator, Zawadi, was",
+   "options": [
+    "working harder at the harvest than she had in any earlier season.",
+    "trying to honor two competing loyalties without knowing which would last.",
+    "deliberately ending her friendship with Themba to protect her new job.",
+    "cutting back her time on the bus to spend more hours in the fields."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-04-014",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "medium",
+   "passage": "Our mother's radio still works. Thuy proved it the morning she arrived at the dock in Manila, turning the dial until a station crackled through the static, though we had not spoken in nine years. She had come to decide which of us would keep it. We sat on the planks with our feet above the water, and the silence between us had its own tide: it drew back when she laughed at an old song, then rushed in again whenever one of us said our mother's name. Aung, she said finally, you take it. I said she should, since she was the one who had fixed the antenna. By noon neither of us had touched it. A fishing boat slid past the pilings, and its wake slapped softly against the posts.",
+   "question": "As used in the text, the phrase “the silence between us had its own tide” most nearly suggests",
+   "options": [
+    "a steady calm that settled once the sisters reached a decision.",
+    "the noise of the lake drowning out the sisters' conversation.",
+    "a distance that eased and returned as their memories shifted.",
+    "a lasting anger that neither sister was willing to express."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-04-015",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "medium",
+   "passage": "Shanghai, in the old tale, held a press room so small that only two people could turn its great wheel: Jordan, the elder printer, and Xinyi, an apprentice who could not sit still. One winter Xinyi set the type for a book of riddles without asking permission, and by spring every bookseller along the river wanted a thousand copies. Merchants crowded the doorway. Paper ran short, ink froze in its pots, and Xinyi slept beside the wheel. Jordan watched her for many nights before speaking. You planted one seed, he told her, and now it wants the whole garden. Xinyi asked whether she should have planted nothing. Jordan only handed her a second lamp and showed her how to trim its wick. Outside, snow settled on the rooftops of the sleeping town.",
+   "question": "As used in the text, the phrase “now it wants the whole garden” most nearly suggests that",
+   "options": [
+    "the riddle book will soon be copied by rival printers in town.",
+    "Xinyi should leave the press room to work as a gardener.",
+    "Jordan regrets having taught Xinyi to set type by herself.",
+    "a small success has grown into demands that consume everything."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-04-022",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "medium",
+   "passage": "Kyoto's eastern hills were slick with rain when the funicular stalled halfway up, and the attendant herded its two passengers onto a terrace café to wait. Takeshi chose the table farthest from Kenji, nodded once, and opened a newspaper he did not read. Kenji ordered tea and apologized to no one in particular for the weather. For twenty minutes their only exchange concerned the sugar bowl. Then the owner set down a dish of pickled plums, and Kenji, tasting one, murmured that his grandmother had made them saltier, with a shiso leaf folded inside each. Takeshi lowered his paper. His mother, he said, had done the same, and had refused to write the method down because a written recipe, she claimed, would stop listening to the cook. Kenji laughed, pulled his chair closer, and began to guess at proportions. By the time the funicular hummed back to life, they had filled a napkin with crossed-out numbers and were arguing, happily, about how long to dry the leaves.",
+   "question": "Which choice best describes the shift in tone that occurs in the text?",
+   "options": [
+    "From guarded politeness to warm nostalgia",
+    "From cheerful curiosity to quiet disappointment",
+    "From open hostility to cautious mutual respect",
+    "From playful banter to solemn, shared grief"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-04-023",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "medium",
+   "passage": "Diesel, brine, and the sweet rot of yesterday's catch hung over the Colombo harbor as Kamal strode down the jetty, his sash already pinned for the evening. He found Shamsuddin rinsing his hands at the fish market tap and pressed the gilt card on him with a flourish. The new breakwater would be dedicated at sunset, Kamal announced; there would be speeches, a brass band, his own name cut into the stone. The doctor read the card twice and handed it back. He could not come, he said. Three boys from the eastern quay were in his clinic with fever, and their fathers had spent the week hauling rock for that breakwater without pay. Kamal opened his mouth for a ready answer and found none. He looked down at the card, then out at the grey wall where the band was tuning, and for the first time that day he did not seem sure which way to walk.",
+   "question": "Which choice best describes the shift in tone that occurs in the text?",
+   "options": [
+    "It moves from mournful reflection to festive celebration.",
+    "It moves from brisk self-assurance to doubt.",
+    "It moves from bitter accusation to gentle forgiveness.",
+    "It moves from detached observation to playful mockery."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-04-024",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "medium",
+   "passage": "Three hymns, two readings, one cake of four tiers—\nRashid reads the list in the library hush\nas if the reference room were a shop floor\nand every item could be ticked and bought.\nCallum, beside her, is gluing the spine\nof her grandmother's prayer book, torn in the move,\npressing the cloth with a bone folder, firm,\nas though a seam held tight enough\ncould seat one more guest at the table.\nThe clock above the atlases ticks on.\nThen the glue dries crooked, a small ridge\nthat no thumb will ever smooth,\nand Rashid stops reading. She lays the list down.\nShe runs one finger along the scar\nand says, softly, that it will do—\nthat a book can be opened\neven where it once came apart,\nand that the empty chair can stay\nwith a flower on it, and a name.",
+   "question": "Which choice best describes the shift in tone that occurs in the poem?",
+   "options": [
+    "It shifts from quiet grief to defiant, noisy joy.",
+    "It shifts from hushed wonder to mild irritation.",
+    "It shifts from brisk practicality to acceptance.",
+    "It shifts from anxious haste to confident triumph."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-04-025",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "medium",
+   "passage": "\"Sit, Albert, or you'll wear a trench in their good linoleum.\"\nA hospital waiting room in Surabaya, past midnight. LAN, a retired sailor, sprawls across two plastic chairs. ALBERT, his neighbor, paces beneath a buzzing fan.\nALBERT: Four hours. They said two.\nLAN: Surgeons lie about time the way captains lie about weather. Have a peanut.\nALBERT: How can you joke? She could—\nLAN: (Sitting up; the grin goes.) When I was eleven, my teacher held up my chart of the harbor and told the class I would never find my way out of a bathtub. I believed him for a week. Then I decided to prove him wrong, and I did not stop proving it for forty years. Your wife is stubborn in exactly that way. I have watched her bargain at the market. She will come out of there, Albert. Sit down beside me and wait for her properly.",
+   "question": "Which choice best describes the shift in tone that occurs in the text?",
+   "options": [
+    "It shifts from earnest comfort to biting sarcasm.",
+    "It shifts from quiet dread to sudden open relief.",
+    "It shifts from fond nostalgia to lasting bitterness.",
+    "It shifts from joking deflection to sincerity."
+   ]
+  }
+ ],
+ "instructions": "당신은 디지털 SAT 독립 채점자다. 정답 표시가 없다. 먼저 문항을 직접 풀고(picked_letter), 이어서 난이도·hard 적합·오답 품질을 판정한다. 요청 난이도에 맞추려 하지 말고 실제로 느끼는 대로 답한다.\n청크 rev-fable_judge-034 — 20문항.\n출력: Write 도구로 정확히 이 경로에 JSON 한 파일을 쓴다 → /Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-fable_judge-034.result.json\n출력 JSON 스키마(예시 구조): {\"chunkId\":\"청크 ID\",\"model\":\"fable\",\"items\":[{\"candidateId\":\"id\",\"picked_letter\":\"A|B|C|D\",\"other_defensible\":\"정답 외 방어 가능한 선택지가 있으면 true\",\"est_difficulty\":\"easy|medium|hard (실제 체감, 요청 난이도에 맞추지 말 것)\",\"hard_fit\":\"실제 SAT hard 수준의 사고 단계가 필요하면 true(지문 길이·난어만이면 false)\",\"plausible_distractors\":\"오답 3개가 모두 그럴듯하고 서로 다른 오개념에서 나왔으면 true\",\"length_balanced\":\"네 선택지 길이·구체성이 비슷해 정답이 형식으로 드러나지 않으면 true\",\"multi_answer_risk\":\"복수 정답 위험이 있으면 true\",\"issues\":\"한 줄 메모\"}]}\n허용 값: picked_letter ∈ {A,B,C,D}, 불리언 필드는 true/false, est_difficulty ∈ {easy,medium,hard}. candidateId 를 바꾸지 않고 모든 항목에 답한다.\n금지: 결과 파일 외의 파일 생성·수정, 다른 명령 실행, 문항 수정·재작성. 끝나면 'done <항목 수>' 한 줄만 답한다.\n\n## 문항\n### lit40-hard-03-090 — skill words_in_context · 유형 figurative_language · 요청 난이도 hard · hard 기준: 관용 해석으로 풀 수 없고, 오답이 비유의 다른 속성에서 나온 그럴듯한 해석이며 정답은 두 곳 이상의 단서가 정한다\n[지문]\nBy the ninth night before the Lantern Festival, Yuying and I had swept the barbershop on Drum Tower Lane so often that its floor shone. Our master had promised the guild that she would sing the opening verse on its stage, and she had never sung for anyone but me, Meilin, who shared the night shift with her. Each night, once the shutters were barred, she sang it through twice, low and exact; whenever boots sounded in the lane, she stopped mid-line and took up the broom again. Her voice was a razor stropped every evening and laid back in its case. I held the lamp and kept time with my foot on the board. Two nights later a drunk porter knocked to ask the hour, and she finished the verse before she unbarred the shutter to answer him.\n\n[질문] As used in the text, the phrase \"a razor stropped every evening and laid back in its case\" most nearly suggests that Yuying's voice is\nA) a sharp edge that could wound whoever happened to overhear it.\nB) a gift that is still too rough to be offered on a public stage.\nC) a readiness she sharpens each night and keeps from public trial.\nD) one of the tools of the trade she practices in the barbershop.\n### lit40-hard-03-092 — skill words_in_context · 유형 word_in_context · 요청 난이도 hard · hard 기준: 빈칸 뒤 정의가 없고 두 제약을 동시에 만족하는 표현만 정답이며, 오답이 모두 문법적으로 맞고 의미 영역이 같다\n[지문]\nEulalio set the copper pot on the boarding-house stove each evening and made you repeat the farewells until the beans went soft. In the valley, he told you, a guest does not simply leave; the leaving has an order, and he drilled you in it, correcting the place of each word, the pause before the blessing, the second thanks for the salt. For six weeks, Anacleto, you practiced while the landlady shelled peas by the window. Then your coach for Puebla was moved up a day. That morning you stood at the kitchen door with your bag, ready to recite the whole of it. His own farewell was ______. He touched two fingers to your sleeve, said a single word, and turned back to stir the pot before you could begin.\n\n[질문] Which choice completes the text with the most logical and precise word or phrase?\nA) deliberately brief\nB) hastily curt\nC) properly ceremonial\nD) carefully rehearsed\n### lit40-hard-03-094 — skill words_in_context · 유형 word_in_context · 요청 난이도 hard · hard 기준: 빈칸 뒤 정의가 없고 두 제약을 동시에 만족하는 표현만 정답이며, 오답이 모두 문법적으로 맞고 의미 영역이 같다\n[지문]\nAluva station, at the far end of the Kochi metro line, was empty at six except for you, Priya, and Vikram with a cardboard box. For eleven years of rehearsals he had wound the brass metronome himself before every session, and if a cellist reached for it, he moved it a few inches away without breaking his sentence. His mother's house in Kakkanad had been emptied that week; the piano was sold, the shelves taken apart, and the box held the last thing left. He took out the metronome and handed it to you, the youngest of the second violins, in a manner that was ______. Then he folded the empty box flat, did not stay to watch you try the key, and stepped onto the train before the doors finished chiming.\n\n[질문] Which choice completes the text with the most logical and precise word or phrase?\nA) fondly sentimental\nB) briskly dismissive\nC) quietly trusting\nD) steadily rhythmic\n### lit40-medium-04-002 — skill inferences · 유형 relationship_between_characters · 요청 난이도 medium · hard 기준: 두 문장의 단서를 연결해야 하고 오답은 한쪽 감정만 반영한다\n[지문]\nWhile the cook ladled broth into two paper bowls, Clara explained the plan a second time: they would tell Clement's father that the school trip had been canceled, and the trip money would go toward his birthday surprise instead. Clement poked at a slice of pork and said nothing. When she finished, he asked how many birthdays she had planned before, and she admitted this was her first. He snorted, but he slid the chili oil across the counter to her, the way his father always did, and told her that the lie would need a better reason for the cancellation. She took out a pen and wrote his suggestion on a napkin. Steam rose against the striped awning, and a bus hissed to a stop at the corner.\n\n[질문] Based on the text, which choice best describes the relationship between Clement and Clara?\nA) Clement remains wary of Clara but is starting to work with her as a partner.\nB) Clara distrusts Clement and hesitates to include him in the plan for his father.\nC) Clement openly admires Clara and eagerly accepts every plan that she proposes.\nD) Like many stepchildren, Clement refuses to join in anything that Clara organizes.\n### lit40-medium-04-003 — skill inferences · 유형 relationship_between_characters · 요청 난이도 medium · hard 기준: 두 문장의 단서를 연결해야 하고 오답은 한쪽 감정만 반영한다\n[지문]\nSalt-stained binoculars hung by the door of the lighthouse station where Marta wrote her novels, and I lifted them only to have something to do with my hands. I had come to deliver proofs, expecting the polite distance of a writer and her translator. Instead I watched Larissa read a paragraph aloud in Persian, pause, and wait while Marta mouthed the English sentence beneath it, as if checking a pulse. Marta's family, passing through with tea, called Larissa the helper. Yet when Larissa frowned at a word, Marta crossed out her own line rather than defend it, and later asked her, almost shyly, which of two endings she should keep. Outside, the lamp turned its slow beam over the rooftops, and a dog barked twice at the gate.\n\n[질문] Based on the text, which choice best describes the relationship between Marta and Larissa?\nA) Larissa feels inferior to Marta and hesitates to question any part of her work.\nB) Marta treats Larissa as a trusted collaborator whose judgment shapes the writing.\nC) Larissa relies on Marta to approve each of her choices before she translates further.\nD) As is typical, the translator serves the author and simply follows her instructions.\n### lit40-medium-04-004 — skill inferences · 유형 relationship_between_characters · 요청 난이도 medium · hard 기준: 두 문장의 단서를 연결해야 하고 오답은 한쪽 감정만 반영한다\n[지문]\nDiesel and burnt coffee hung over the bus depot in Istanbul where Nikos and I had worked the night schedule for twenty-two years. We rarely talked; a nod at the start of each shift had always been enough. One evening I opened the dispatch drawer looking for a stapler and found a stack of my own letters to my mother, the ones I believed had been lost years ago, each stamped and returned. Nikos must have been keeping them safe since the depot's old mailroom closed. I said nothing. The next night he set a cup of tea at my elbow before I asked, and I left the drawer unlocked so he would know I had seen. Through the glass, a bus idled with its doors folded open, its headlights pale in the drizzle.\n\n[질문] Based on the text, which choice best describes the relationship between the narrator, Mingyu, and Nikos?\nA) Mingyu feels betrayed by Nikos's secret and quietly withdraws from their friendship.\nB) Nikos waits anxiously for Mingyu to explain the letters he found in the drawer.\nC) Their long friendship relies on unspoken gestures that both men understand well.\nD) Like most coworkers, they share a schedule but have little personal connection.\n### lit40-medium-04-005 — skill inferences · 유형 symbolism · 요청 난이도 medium\n[지문]\nWho brings a ferry token to a wedding? Mele asked, watching Leilani turn the brass coin over her knuckles while the band tuned up. Leilani explained that her father gave one to every passenger who crossed the harbor in bad weather, a promise that the boat would come back for them. Mele had ridden that ferry for years; tonight she was only waiting for a message from the hospital where her brother lay in surgery. As the speeches began, Leilani pressed the token into Mele's palm. Mele held it through the toasts and the first dance, rubbing its worn edge whenever her phone stayed dark. When the screen finally lit, she did not read it at once. She closed her fingers around the brass first. Around them, guests clapped as the couple cut a cake shaped like a lighthouse.\n\n[질문] In the text, the ferry token most likely represents\nA) the debt that Mele owes Leilani's father for her many years of crossings.\nB) Leilani's wish to leave the crowded wedding and return to the harbor.\nC) the long friendship that Leilani and Mele formed while riding the ferry.\nD) a promise of safe return that Mele clings to while she awaits the news.\n### lit40-medium-04-006 — skill inferences · 유형 symbolism · 요청 난이도 medium\n[지문]\nOfelia found the jar on her workbench at four in the morning, its lid still tied with the red string she had used when she gave it away. Inside, the sourdough starter had been fed and was bubbling, alive. She had kept that culture going for eleven years, feeding it every night before the ovens warmed, and she had handed a portion to Ingrid after their first month together on the night shift, telling her it would need her every day. Ingrid, shaping rolls at the far table, did not look up. Later she mentioned, to no one in particular, that her lease ended in spring and she had not decided where she would go. Ofelia unscrewed the lid, smelled the sour sweetness, and set the jar on the shelf beside her own. Flour drifted in the light above the proofing racks, and outside, the first delivery van rattled over the cobbles.\n\n[질문] In the text, the sourdough starter most likely represents\nA) an ongoing commitment that Ingrid feels unable to promise she will keep.\nB) Ofelia's resentment that Ingrid has ignored her advice about baking bread.\nC) the bakery's eleven-year history and its constant need for new workers.\nD) Ingrid's gratitude, shown by feeding the starter before she returned it.\n### lit40-medium-04-008 — skill inferences · 유형 symbolism · 요청 난이도 medium\n[지문]\nJanelle was already at the train-station cafe in Port of Spain when I arrived, two cups of sorrel tea sweating on the table and the blue ribbon from Saturday's garden show lying between them. I had bought the house on the hill only in March; she had tended its hibiscus for thirty years before that. Everyone at the show knew her blooms were the best, and everyone saw her withdraw her entry an hour before judging, leaving mine to win. I had brought the ribbon to return it. She pushed it back across the table and said the garden needed to learn my name. A train pulled in as she spoke, and pigeons scattered from the platform roof. Since then I have kept the ribbon in a drawer rather than on the wall, and each time I see it I water more carefully, prune more slowly, as though the prize is still being judged. Outside my window now, the hibiscus has begun to bud along the fence.\n\n[질문] In the text, the blue ribbon most likely represents\nA) Janelle's lingering bitterness at losing the house to a newcomer.\nB) the community's admiration for Shanice's skill as a gardener.\nC) a welcome that Shanice accepts but still feels she must earn.\nD) Shanice's pride in defeating the most respected local gardener.\n### lit40-medium-04-009 — skill inferences · 유형 symbolism · 요청 난이도 medium\n[지문]\nCut grass and wet chalk: that is what I remember of the field in Taipei the week after I missed the penalty in front of the whole stadium. Coach Yuxuan benched me without explanation. Each evening at dusk she handed me a flat ball from the equipment shed and a hand pump, and I knelt by the sideline pressing air into it while the others ran drills. At first I resented the task and pumped carelessly, so the ball sagged by morning. By the fourth night I was checking the valve, squeezing the seams, testing the bounce against my palm before I handed it back. Yuxuan never commented. On the last evening of the week she rolled the ball back to me and pointed at the penalty spot. The floodlights buzzed on, one bank at a time, and moths gathered in the glare.\n\n[질문] In the text, the flat ball that the narrator, Ruoxi, inflates each evening most likely represents\nA) the punishment Yuxuan plans to continue until Ruoxi decides to quit.\nB) Ruoxi's lasting resentment toward the teammates who watched her fail.\nC) the team's dependence on Ruoxi to keep all of its equipment in order.\nD) Ruoxi's gradual recovery of a confidence that her mistake had emptied.\n### lit40-medium-04-010 — skill words_in_context · 유형 figurative_language · 요청 난이도 medium\n[지문]\nJeju Island had one bus stop on that stretch of the mountain road, a tin shelter where Minjun waited each afternoon after school. Eamon, who had fished with her father before her father left for Busan, sat down beside her and said, without greeting, that her aunt had heard. Minjun had told only one classmate that her father was not coming back. By the time Eamon reached the shelter, the story had already walked down the mountain without her, stopping at the market, the clinic, and finally her aunt's kitchen. Eamon offered her a tangerine and said her aunt was not angry, only hurt that she had learned it from a neighbor. Minjun peeled the fruit slowly. Mist slid over the ridge, and the bus appeared, its headlights soft in the gray.\n\n[질문] As used in the text, the phrase “the story had already walked down the mountain without her” most nearly suggests that the news\nA) was told by Minjun to her aunt during a long walk down the mountain.\nB) was slowly forgotten as it passed from one neighbor to the next.\nC) had spread from person to person beyond Minjun's control.\nD) had been invented by people gossiping at the market and clinic.\n### lit40-medium-04-011 — skill words_in_context · 유형 figurative_language · 요청 난이도 medium\n[지문]\nYour hives sound quieter this year, Amelia said, setting her bag on the bench by the gate. Sota, who had taught her chemistry thirty years earlier in Porto Alegre, only lifted the lid of the nearest box and let her look. Fewer frames held comb; the bees moved over them slowly. He told her that he had sold four colonies in the spring and would sell the rest in autumn, though he said it as if describing the weather. Amelia asked who would keep them. He answered that the bees had been humming a smaller song for some time now, and that he had been pretending not to hear it. She helped him close the lid. Neither of them mentioned his hands, which shook as he tightened the strap. Along the fence, the jasmine had opened, heavy with afternoon heat.\n\n[질문] As used in the text, the phrase “humming a smaller song” most nearly suggests that the bees\nA) make a louder sound that Sota now finds tiresome to hear.\nB) show a new behavior that Sota hopes to study more closely.\nC) respond to Amelia's visit with an unusual kind of calm.\nD) reflect a steady decline that Sota has avoided admitting.\n### lit40-medium-04-012 — skill words_in_context · 유형 figurative_language · 요청 난이도 medium\n[지문]\nWhy keep the shutters open, Emilio asks,\nwhen no one climbs the hill for gloves anymore?\nBronislaw, who stitched beside his grandfather\nfor forty years, sets down his guesthouse cup\nand listens to the bell for vespers.\n\nA shop, he says, is a lamp left burning\nfor a traveler you have never met.\nYou do not light it for the road tonight.\nYou light it so the road remembers.\n\nEmilio looks down at his grandfather's thimble,\nworn to silver on one side,\nand counts the unpaid bills again.\n\nBelow the cloister, Naples gathers its lights,\nand a cat crosses the warm stones of the yard.\n\n[질문] As used in the poem, the phrase “a lamp left burning” most nearly suggests that keeping the shop open is\nA) a commitment kept in hope of customers who have not yet come.\nB) a costly waste of money that the family can no longer afford.\nC) a memorial meant only to honor the grandfather's years of work.\nD) a warning to travelers that the road up the hill is dangerous.\n### lit40-medium-04-013 — skill words_in_context · 유형 figurative_language · 요청 난이도 medium\n[지문]\nThemba had driven me to the vineyard gate every harvest morning for six years, and I had never once paid attention to the route until the season I took a job picking grapes for his cousin's rivals across the valley outside Addis Ababa. He still stopped for me. He still saved the seat behind him. But he no longer hummed along to the radio, and when I mentioned the new owners' generous wages he simply nodded at the windshield. That autumn I felt as if I were pruning the same vine from both sides, trimming one friendship to feed another and unsure which branch would bear fruit. On the last day of harvest I bought two baskets of grapes, one from each estate, and left his on the dashboard. Dust rose behind the bus as it climbed toward the hills, gold in the evening light.\n\n[질문] As used in the text, the phrase “pruning the same vine from both sides” most nearly suggests that the narrator, Zawadi, was\nA) working harder at the harvest than she had in any earlier season.\nB) trying to honor two competing loyalties without knowing which would last.\nC) deliberately ending her friendship with Themba to protect her new job.\nD) cutting back her time on the bus to spend more hours in the fields.\n### lit40-medium-04-014 — skill words_in_context · 유형 figurative_language · 요청 난이도 medium\n[지문]\nOur mother's radio still works. Thuy proved it the morning she arrived at the dock in Manila, turning the dial until a station crackled through the static, though we had not spoken in nine years. She had come to decide which of us would keep it. We sat on the planks with our feet above the water, and the silence between us had its own tide: it drew back when she laughed at an old song, then rushed in again whenever one of us said our mother's name. Aung, she said finally, you take it. I said she should, since she was the one who had fixed the antenna. By noon neither of us had touched it. A fishing boat slid past the pilings, and its wake slapped softly against the posts.\n\n[질문] As used in the text, the phrase “the silence between us had its own tide” most nearly suggests\nA) a steady calm that settled once the sisters reached a decision.\nB) the noise of the lake drowning out the sisters' conversation.\nC) a distance that eased and returned as their memories shifted.\nD) a lasting anger that neither sister was willing to express.\n### lit40-medium-04-015 — skill words_in_context · 유형 figurative_language · 요청 난이도 medium\n[지문]\nShanghai, in the old tale, held a press room so small that only two people could turn its great wheel: Jordan, the elder printer, and Xinyi, an apprentice who could not sit still. One winter Xinyi set the type for a book of riddles without asking permission, and by spring every bookseller along the river wanted a thousand copies. Merchants crowded the doorway. Paper ran short, ink froze in its pots, and Xinyi slept beside the wheel. Jordan watched her for many nights before speaking. You planted one seed, he told her, and now it wants the whole garden. Xinyi asked whether she should have planted nothing. Jordan only handed her a second lamp and showed her how to trim its wick. Outside, snow settled on the rooftops of the sleeping town.\n\n[질문] As used in the text, the phrase “now it wants the whole garden” most nearly suggests that\nA) the riddle book will soon be copied by rival printers in town.\nB) Xinyi should leave the press room to work as a gardener.\nC) Jordan regrets having taught Xinyi to set type by herself.\nD) a small success has grown into demands that consume everything.\n### lit40-medium-04-022 — skill text_structure_purpose · 유형 tone_shift · 요청 난이도 medium\n[지문]\nKyoto's eastern hills were slick with rain when the funicular stalled halfway up, and the attendant herded its two passengers onto a terrace café to wait. Takeshi chose the table farthest from Kenji, nodded once, and opened a newspaper he did not read. Kenji ordered tea and apologized to no one in particular for the weather. For twenty minutes their only exchange concerned the sugar bowl. Then the owner set down a dish of pickled plums, and Kenji, tasting one, murmured that his grandmother had made them saltier, with a shiso leaf folded inside each. Takeshi lowered his paper. His mother, he said, had done the same, and had refused to write the method down because a written recipe, she claimed, would stop listening to the cook. Kenji laughed, pulled his chair closer, and began to guess at proportions. By the time the funicular hummed back to life, they had filled a napkin with crossed-out numbers and were arguing, happily, about how long to dry the leaves.\n\n[질문] Which choice best describes the shift in tone that occurs in the text?\nA) From guarded politeness to warm nostalgia\nB) From cheerful curiosity to quiet disappointment\nC) From open hostility to cautious mutual respect\nD) From playful banter to solemn, shared grief\n### lit40-medium-04-023 — skill text_structure_purpose · 유형 tone_shift · 요청 난이도 medium\n[지문]\nDiesel, brine, and the sweet rot of yesterday's catch hung over the Colombo harbor as Kamal strode down the jetty, his sash already pinned for the evening. He found Shamsuddin rinsing his hands at the fish market tap and pressed the gilt card on him with a flourish. The new breakwater would be dedicated at sunset, Kamal announced; there would be speeches, a brass band, his own name cut into the stone. The doctor read the card twice and handed it back. He could not come, he said. Three boys from the eastern quay were in his clinic with fever, and their fathers had spent the week hauling rock for that breakwater without pay. Kamal opened his mouth for a ready answer and found none. He looked down at the card, then out at the grey wall where the band was tuning, and for the first time that day he did not seem sure which way to walk.\n\n[질문] Which choice best describes the shift in tone that occurs in the text?\nA) It moves from mournful reflection to festive celebration.\nB) It moves from brisk self-assurance to doubt.\nC) It moves from bitter accusation to gentle forgiveness.\nD) It moves from detached observation to playful mockery.\n### lit40-medium-04-024 — skill text_structure_purpose · 유형 tone_shift · 요청 난이도 medium\n[지문]\nThree hymns, two readings, one cake of four tiers—\nRashid reads the list in the library hush\nas if the reference room were a shop floor\nand every item could be ticked and bought.\nCallum, beside her, is gluing the spine\nof her grandmother's prayer book, torn in the move,\npressing the cloth with a bone folder, firm,\nas though a seam held tight enough\ncould seat one more guest at the table.\nThe clock above the atlases ticks on.\nThen the glue dries crooked, a small ridge\nthat no thumb will ever smooth,\nand Rashid stops reading. She lays the list down.\nShe runs one finger along the scar\nand says, softly, that it will do—\nthat a book can be opened\neven where it once came apart,\nand that the empty chair can stay\nwith a flower on it, and a name.\n\n[질문] Which choice best describes the shift in tone that occurs in the poem?\nA) It shifts from quiet grief to defiant, noisy joy.\nB) It shifts from hushed wonder to mild irritation.\nC) It shifts from brisk practicality to acceptance.\nD) It shifts from anxious haste to confident triumph.\n### lit40-medium-04-025 — skill text_structure_purpose · 유형 tone_shift · 요청 난이도 medium\n[지문]\n\"Sit, Albert, or you'll wear a trench in their good linoleum.\"\nA hospital waiting room in Surabaya, past midnight. LAN, a retired sailor, sprawls across two plastic chairs. ALBERT, his neighbor, paces beneath a buzzing fan.\nALBERT: Four hours. They said two.\nLAN: Surgeons lie about time the way captains lie about weather. Have a peanut.\nALBERT: How can you joke? She could—\nLAN: (Sitting up; the grin goes.) When I was eleven, my teacher held up my chart of the harbor and told the class I would never find my way out of a bathtub. I believed him for a week. Then I decided to prove him wrong, and I did not stop proving it for forty years. Your wife is stubborn in exactly that way. I have watched her bargain at the market. She will come out of there, Albert. Sit down beside me and wait for her properly.\n\n[질문] Which choice best describes the shift in tone that occurs in the text?\nA) It shifts from earnest comfort to biting sarcasm.\nB) It shifts from quiet dread to sudden open relief.\nC) It shifts from fond nostalgia to lasting bitterness.\nD) It shifts from joking deflection to sincerity."
+}

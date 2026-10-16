@@ -1,0 +1,1273 @@
+{
+ "kind": "ap_new_version_swap_plan",
+ "set": "PS2",
+ "sourceSetName": "AP Psychology — Practice Exam 2",
+ "sourceVersionNo": 2,
+ "generatedBy": "scripts/ap-generation/psych-new-version-plans.ts",
+ "swapCount": 60,
+ "verifierViolations": [],
+ "requiresConvertedCandidates": [
+  "psych-hard-b:ap_psychology-m13-k0",
+  "psych-hard-a:ap_psychology-m18-k1",
+  "psych-hard-a:ap_psychology-m20-k0",
+  "psych-hard-b:ap_psychology-m16-k0",
+  "psych-hard-a:ap_psychology-m23-k1",
+  "psych-hard-a:ap_psychology-m24-k0",
+  "psych-hard-a:ap_psychology-m25-k1",
+  "psych-hard-b:ap_psychology-m03-k0",
+  "psych-hard-b:ap_psychology-m04-k1",
+  "psych-hard-b:ap_psychology-m06-k0",
+  "psych-hard-b:ap_psychology-m14-k0",
+  "psych-hard-b:ap_psychology-m07-k1",
+  "psych-hard-b:ap_psychology-m17-k0",
+  "psych-hard-c3:ap_psychology-m06-k0",
+  "psych-hard-b:ap_psychology-m01-k1",
+  "psych-hard-a:ap_psychology-m14-k1",
+  "psych-hard-a:ap_psychology-m15-k1",
+  "psych-hard-a:ap_psychology-m16-k0",
+  "psych-hard-a:ap_psychology-m17-k1",
+  "psych-hard-c3:ap_psychology-m04-k0",
+  "psych-hard-d:ap_psychology-m08-k0",
+  "psych-hard-d:ap_psychology-m09-k1",
+  "psych-hard-b:ap_psychology-m20-k1",
+  "psych-hard-b:ap_psychology-m12-k1",
+  "psych-hard-b:ap_psychology-m15-k0",
+  "psych-hard-c3:ap_psychology-m07-k0",
+  "psych-hard-a:ap_psychology-m01-k1",
+  "psych-hard-a:ap_psychology-m02-k0",
+  "psych-hard-a:ap_psychology-m03-k0",
+  "psych-hard-a:ap_psychology-m05-k1",
+  "psych-hard-c3:ap_psychology-m01-k0",
+  "psych-hard-c3:ap_psychology-m02-k0",
+  "psych-hard-d:ap_psychology-m01-k0",
+  "psych-hard-d:ap_psychology-m03-k0",
+  "psych-hard-b:ap_psychology-m05-k2",
+  "psych-hard-c3:ap_psychology-m13-k2",
+  "psych-hard-d:ap_psychology-m11-k1",
+  "psych-hard-a:ap_psychology-m07-k0",
+  "psych-hard-a:ap_psychology-m08-k0",
+  "psych-hard-a:ap_psychology-m09-k0",
+  "psych-hard-a:ap_psychology-m10-k1",
+  "psych-hard-b:ap_psychology-m02-k0",
+  "psych-hard-a:ap_psychology-m12-k1",
+  "psych-hard-c3:ap_psychology-m03-k1",
+  "psych-hard-d:ap_psychology-m04-k1",
+  "psych-hard-a:ap_psychology-m11-k0",
+  "psych-hard-b:ap_psychology-m08-k2",
+  "psych-hard-b:ap_psychology-m09-k1",
+  "psych-hard-c3:ap_psychology-m10-k0",
+  "psych-hard-d:ap_psychology-m05-k0",
+  "psych-hard-d:ap_psychology-m06-k0",
+  "psych-hard-d:ap_psychology-m07-k0",
+  "psych-hard-c3:ap_psychology-m05-k0",
+  "psych-hard-d:ap_psychology-m10-k1",
+  "psych-hard-a:ap_psychology-m13-k1",
+  "psych-hard-a:ap_psychology-m26-k1",
+  "psych-hard-c3:ap_psychology-m08-k1",
+  "psych-hard-b:ap_psychology-m18-k1",
+  "psych-hard-c3:ap_psychology-m09-k1"
+ ],
+ "swaps": [
+  {
+   "section": "ap_mc",
+   "position": 31,
+   "removeKey": "psych-p1-a:ap_psychology-m14-k1",
+   "addKey": "psych-hard-b:ap_psychology-m13-k0",
+   "remove": {
+    "unit": 3,
+    "skill": "2.A",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 3,
+    "skill": "2.C",
+    "shared": false,
+    "type": "",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 47,
+   "removeKey": "psych-p1-a:ap_psychology-m16-k0",
+   "addKey": "psych-hard-a:ap_psychology-m18-k1",
+   "remove": {
+    "unit": 4,
+    "skill": "1.B",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 4,
+    "skill": "1.B",
+    "shared": false,
+    "type": "",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 48,
+   "removeKey": "psych-p1-a:ap_psychology-m17-k0",
+   "addKey": "psych-hard-a:ap_psychology-m20-k0",
+   "remove": {
+    "unit": 4,
+    "skill": "1.B",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 4,
+    "skill": "1.A",
+    "shared": false,
+    "type": "",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 49,
+   "removeKey": "psych-p1-a:ap_psychology-m20-k0",
+   "addKey": "psych-hard-b:ap_psychology-m16-k0",
+   "remove": {
+    "unit": 4,
+    "skill": "2.D",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 4,
+    "skill": "2.B",
+    "shared": false,
+    "type": "",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 65,
+   "removeKey": "psych-p1-a:ap_psychology-m21-k0",
+   "addKey": "psych-hard-a:ap_psychology-m23-k1",
+   "remove": {
+    "unit": 5,
+    "skill": "1.B",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 5,
+    "skill": "1.A",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 66,
+   "removeKey": "psych-p1-a:ap_psychology-m22-k0",
+   "addKey": "psych-hard-a:ap_psychology-m24-k0",
+   "remove": {
+    "unit": 5,
+    "skill": "1.A",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 5,
+    "skill": "1.A",
+    "shared": false,
+    "type": "",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 67,
+   "removeKey": "psych-p1-a:ap_psychology-m23-k0",
+   "addKey": "psych-hard-a:ap_psychology-m25-k1",
+   "remove": {
+    "unit": 5,
+    "skill": "1.A",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 5,
+    "skill": "1.A",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 50,
+   "removeKey": "psych-p1-a:ap_psychology-m26-k0",
+   "addKey": "psych-hard-b:ap_psychology-m03-k0",
+   "remove": {
+    "unit": 4,
+    "skill": "3.B",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 4,
+    "skill": "3.C",
+    "shared": false,
+    "type": "",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 69,
+   "removeKey": "psych-p1-a:ap_psychology-m28-k1",
+   "addKey": "psych-hard-b:ap_psychology-m04-k1",
+   "remove": {
+    "unit": 5,
+    "skill": "3.B",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 5,
+    "skill": "2.B",
+    "shared": false,
+    "type": "",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 32,
+   "removeKey": "psych-p1-a:ap_psychology-m32-k0",
+   "addKey": "psych-hard-b:ap_psychology-m06-k0",
+   "remove": {
+    "unit": 3,
+    "skill": "3.A",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 3,
+    "skill": "3.B",
+    "shared": false,
+    "type": "",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 33,
+   "removeKey": "psych-p1-a:ap_psychology-m33-k0",
+   "addKey": "psych-hard-b:ap_psychology-m14-k0",
+   "remove": {
+    "unit": 3,
+    "skill": "3.C",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 5,
+    "skill": "2.B",
+    "shared": false,
+    "type": "",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 51,
+   "removeKey": "psych-p2-mc:ap_psychology-m02-k0",
+   "addKey": "psych-hard-b:ap_psychology-m07-k1",
+   "remove": {
+    "unit": 4,
+    "skill": "3.C",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 4,
+    "skill": "3.C",
+    "shared": false,
+    "type": "",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 52,
+   "removeKey": "psych-p2-mc:ap_psychology-m05-k1",
+   "addKey": "psych-hard-b:ap_psychology-m17-k0",
+   "remove": {
+    "unit": 4,
+    "skill": "2.B",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 4,
+    "skill": "2.D",
+    "shared": false,
+    "type": "",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 53,
+   "removeKey": "psych-p2-mc:ap_psychology-m08-k0",
+   "addKey": "psych-hard-c3:ap_psychology-m06-k0",
+   "remove": {
+    "unit": 4,
+    "skill": "2.D",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 4,
+    "skill": "2.B",
+    "shared": false,
+    "type": "",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 16,
+   "removeKey": "psych-p2-mc:ap_psychology-m10-k1",
+   "addKey": "psych-hard-b:ap_psychology-m01-k1",
+   "remove": {
+    "unit": 2,
+    "skill": "2.D",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 2,
+    "skill": "2.B",
+    "shared": false,
+    "type": "",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 34,
+   "removeKey": "psych-p2-mc:ap_psychology-m100-k1",
+   "addKey": "psych-hard-a:ap_psychology-m14-k1",
+   "remove": {
+    "unit": 3,
+    "skill": "1.B",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 3,
+    "skill": "1.A",
+    "shared": false,
+    "type": "",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 35,
+   "removeKey": "psych-p2-mc:ap_psychology-m101-k0",
+   "addKey": "psych-hard-a:ap_psychology-m15-k1",
+   "remove": {
+    "unit": 3,
+    "skill": "1.A",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 3,
+    "skill": "1.A",
+    "shared": false,
+    "type": "",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 36,
+   "removeKey": "psych-p2-mc:ap_psychology-m102-k1",
+   "addKey": "psych-hard-a:ap_psychology-m16-k0",
+   "remove": {
+    "unit": 3,
+    "skill": "1.A",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 3,
+    "skill": "1.A",
+    "shared": false,
+    "type": "",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 37,
+   "removeKey": "psych-p2-mc:ap_psychology-m103-k1",
+   "addKey": "psych-hard-a:ap_psychology-m17-k1",
+   "remove": {
+    "unit": 3,
+    "skill": "1.B",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 3,
+    "skill": "1.A",
+    "shared": false,
+    "type": "",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 54,
+   "removeKey": "psych-p2-mc:ap_psychology-m112-k1",
+   "addKey": "psych-hard-c3:ap_psychology-m04-k0",
+   "remove": {
+    "unit": 4,
+    "skill": "1.B",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 4,
+    "skill": "1.A",
+    "shared": false,
+    "type": "",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 55,
+   "removeKey": "psych-p2-mc:ap_psychology-m118-k1",
+   "addKey": "psych-hard-d:ap_psychology-m08-k0",
+   "remove": {
+    "unit": 4,
+    "skill": "1.B",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 4,
+    "skill": "1.B",
+    "shared": false,
+    "type": "",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 56,
+   "removeKey": "psych-p2-mc:ap_psychology-m124-k1",
+   "addKey": "psych-hard-d:ap_psychology-m09-k1",
+   "remove": {
+    "unit": 4,
+    "skill": "1.B",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 4,
+    "skill": "1.B",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 17,
+   "removeKey": "psych-p2-mc:ap_psychology-m14-k1",
+   "addKey": "psych-hard-b:ap_psychology-m20-k1",
+   "remove": {
+    "unit": 2,
+    "skill": "2.C",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 2,
+    "skill": "2.C",
+    "shared": false,
+    "type": "",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 1,
+   "removeKey": "psych-p2-mc:ap_psychology-m20-k1",
+   "addKey": "psych-hard-b:ap_psychology-m12-k1",
+   "remove": {
+    "unit": 1,
+    "skill": "2.B",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 1,
+    "skill": "2.B",
+    "shared": false,
+    "type": "",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 39,
+   "removeKey": "psych-p2-mc:ap_psychology-m24-k0",
+   "addKey": "psych-hard-b:ap_psychology-m15-k0",
+   "remove": {
+    "unit": 3,
+    "skill": "3.B",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 3,
+    "skill": "2.A",
+    "shared": false,
+    "type": "",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 57,
+   "removeKey": "psych-p2-mc:ap_psychology-m25-k1",
+   "addKey": "psych-hard-c3:ap_psychology-m07-k0",
+   "remove": {
+    "unit": 4,
+    "skill": "3.B",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 4,
+    "skill": "2.C",
+    "shared": false,
+    "type": "",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 2,
+   "removeKey": "psych-p2-mc:ap_psychology-m26-k0",
+   "addKey": "psych-hard-a:ap_psychology-m01-k1",
+   "remove": {
+    "unit": 1,
+    "skill": "1.A",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 1,
+    "skill": "1.A",
+    "shared": false,
+    "type": "",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 3,
+   "removeKey": "psych-p2-mc:ap_psychology-m27-k0",
+   "addKey": "psych-hard-a:ap_psychology-m02-k0",
+   "remove": {
+    "unit": 1,
+    "skill": "1.A",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 1,
+    "skill": "1.A",
+    "shared": false,
+    "type": "",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 4,
+   "removeKey": "psych-p2-mc:ap_psychology-m31-k0",
+   "addKey": "psych-hard-a:ap_psychology-m03-k0",
+   "remove": {
+    "unit": 1,
+    "skill": "1.A",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 1,
+    "skill": "1.A",
+    "shared": false,
+    "type": "",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 5,
+   "removeKey": "psych-p2-mc:ap_psychology-m32-k0",
+   "addKey": "psych-hard-a:ap_psychology-m05-k1",
+   "remove": {
+    "unit": 1,
+    "skill": "1.A",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 1,
+    "skill": "1.A",
+    "shared": false,
+    "type": "",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 6,
+   "removeKey": "psych-p2-mc:ap_psychology-m33-k1",
+   "addKey": "psych-hard-c3:ap_psychology-m01-k0",
+   "remove": {
+    "unit": 1,
+    "skill": "1.B",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 1,
+    "skill": "1.A",
+    "shared": false,
+    "type": "",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 7,
+   "removeKey": "psych-p2-mc:ap_psychology-m34-k1",
+   "addKey": "psych-hard-c3:ap_psychology-m02-k0",
+   "remove": {
+    "unit": 1,
+    "skill": "1.A",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 1,
+    "skill": "1.A",
+    "shared": false,
+    "type": "",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 8,
+   "removeKey": "psych-p2-mc:ap_psychology-m37-k1",
+   "addKey": "psych-hard-d:ap_psychology-m01-k0",
+   "remove": {
+    "unit": 1,
+    "skill": "1.A",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 1,
+    "skill": "1.A",
+    "shared": false,
+    "type": "",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 9,
+   "removeKey": "psych-p2-mc:ap_psychology-m38-k1",
+   "addKey": "psych-hard-d:ap_psychology-m03-k0",
+   "remove": {
+    "unit": 1,
+    "skill": "1.A",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 1,
+    "skill": "1.A",
+    "shared": false,
+    "type": "",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 10,
+   "removeKey": "psych-p2-mc:ap_psychology-m40-k1",
+   "addKey": "psych-hard-b:ap_psychology-m05-k2",
+   "remove": {
+    "unit": 1,
+    "skill": "1.A",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 1,
+    "skill": "3.C",
+    "shared": false,
+    "type": "",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 11,
+   "removeKey": "psych-p2-mc:ap_psychology-m41-k1",
+   "addKey": "psych-hard-c3:ap_psychology-m13-k2",
+   "remove": {
+    "unit": 1,
+    "skill": "1.A",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 1,
+    "skill": "3.C",
+    "shared": false,
+    "type": "",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 12,
+   "removeKey": "psych-p2-mc:ap_psychology-m48-k1",
+   "addKey": "psych-hard-d:ap_psychology-m11-k1",
+   "remove": {
+    "unit": 1,
+    "skill": "1.B",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 1,
+    "skill": "2.D",
+    "shared": false,
+    "type": "",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 18,
+   "removeKey": "psych-p2-mc:ap_psychology-m60-k0",
+   "addKey": "psych-hard-a:ap_psychology-m07-k0",
+   "remove": {
+    "unit": 2,
+    "skill": "1.B",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 2,
+    "skill": "1.A",
+    "shared": false,
+    "type": "",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 19,
+   "removeKey": "psych-p2-mc:ap_psychology-m62-k0",
+   "addKey": "psych-hard-a:ap_psychology-m08-k0",
+   "remove": {
+    "unit": 2,
+    "skill": "1.B",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 2,
+    "skill": "1.A",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 20,
+   "removeKey": "psych-p2-mc:ap_psychology-m63-k0",
+   "addKey": "psych-hard-a:ap_psychology-m09-k0",
+   "remove": {
+    "unit": 2,
+    "skill": "1.B",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 2,
+    "skill": "1.A",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 21,
+   "removeKey": "psych-p2-mc:ap_psychology-m64-k0",
+   "addKey": "psych-hard-a:ap_psychology-m10-k1",
+   "remove": {
+    "unit": 2,
+    "skill": "1.A",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 2,
+    "skill": "1.B",
+    "shared": false,
+    "type": "",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 22,
+   "removeKey": "psych-p2-mc:ap_psychology-m66-k1",
+   "addKey": "psych-hard-b:ap_psychology-m02-k0",
+   "remove": {
+    "unit": 2,
+    "skill": "2.B",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 2,
+    "skill": "3.B",
+    "shared": false,
+    "type": "",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 23,
+   "removeKey": "psych-p2-mc:ap_psychology-m67-k0",
+   "addKey": "psych-hard-a:ap_psychology-m12-k1",
+   "remove": {
+    "unit": 2,
+    "skill": "1.A",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 2,
+    "skill": "1.A",
+    "shared": false,
+    "type": "",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 24,
+   "removeKey": "psych-p2-mc:ap_psychology-m74-k0",
+   "addKey": "psych-hard-c3:ap_psychology-m03-k1",
+   "remove": {
+    "unit": 2,
+    "skill": "1.A",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 2,
+    "skill": "1.A",
+    "shared": false,
+    "type": "",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 25,
+   "removeKey": "psych-p2-mc:ap_psychology-m78-k1",
+   "addKey": "psych-hard-d:ap_psychology-m04-k1",
+   "remove": {
+    "unit": 2,
+    "skill": "1.A",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 2,
+    "skill": "1.A",
+    "shared": false,
+    "type": "",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 26,
+   "removeKey": "psych-p2-mc:ap_psychology-m79-k1",
+   "addKey": "psych-hard-a:ap_psychology-m11-k0",
+   "remove": {
+    "unit": 2,
+    "skill": "1.A",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 2,
+    "skill": "1.A",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 27,
+   "removeKey": "psych-p2-mc:ap_psychology-m80-k0",
+   "addKey": "psych-hard-b:ap_psychology-m08-k2",
+   "remove": {
+    "unit": 2,
+    "skill": "1.A",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 2,
+    "skill": "3.C",
+    "shared": false,
+    "type": "",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 28,
+   "removeKey": "psych-p2-mc:ap_psychology-m84-k0",
+   "addKey": "psych-hard-b:ap_psychology-m09-k1",
+   "remove": {
+    "unit": 2,
+    "skill": "1.B",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 2,
+    "skill": "3.B",
+    "shared": false,
+    "type": "",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 29,
+   "removeKey": "psych-p2-mc:ap_psychology-m85-k1",
+   "addKey": "psych-hard-c3:ap_psychology-m10-k0",
+   "remove": {
+    "unit": 2,
+    "skill": "1.B",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 2,
+    "skill": "3.C",
+    "shared": false,
+    "type": "",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 40,
+   "removeKey": "psych-p2-mc:ap_psychology-m91-k0",
+   "addKey": "psych-hard-d:ap_psychology-m05-k0",
+   "remove": {
+    "unit": 3,
+    "skill": "1.A",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 3,
+    "skill": "1.A",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 41,
+   "removeKey": "psych-p2-mc:ap_psychology-m93-k1",
+   "addKey": "psych-hard-d:ap_psychology-m06-k0",
+   "remove": {
+    "unit": 3,
+    "skill": "1.A",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 3,
+    "skill": "1.A",
+    "shared": false,
+    "type": "",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 42,
+   "removeKey": "psych-p2-mc:ap_psychology-m94-k1",
+   "addKey": "psych-hard-d:ap_psychology-m07-k0",
+   "remove": {
+    "unit": 3,
+    "skill": "1.A",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 3,
+    "skill": "1.A",
+    "shared": false,
+    "type": "",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 43,
+   "removeKey": "psych-p2-mc:ap_psychology-m95-k1",
+   "addKey": "psych-hard-c3:ap_psychology-m05-k0",
+   "remove": {
+    "unit": 3,
+    "skill": "1.A",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 5,
+    "skill": "1.A",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 44,
+   "removeKey": "psych-p2-mc:ap_psychology-m96-k1",
+   "addKey": "psych-hard-d:ap_psychology-m10-k1",
+   "remove": {
+    "unit": 3,
+    "skill": "1.A",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 5,
+    "skill": "1.A",
+    "shared": false,
+    "type": "",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 45,
+   "removeKey": "psych-p2-mc:ap_psychology-m97-k1",
+   "addKey": "psych-hard-a:ap_psychology-m13-k1",
+   "remove": {
+    "unit": 3,
+    "skill": "1.A",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 3,
+    "skill": "1.A",
+    "shared": false,
+    "type": "",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 46,
+   "removeKey": "psych-p2-mc:ap_psychology-m98-k1",
+   "addKey": "psych-hard-a:ap_psychology-m26-k1",
+   "remove": {
+    "unit": 3,
+    "skill": "1.A",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 5,
+    "skill": "1.A",
+    "shared": false,
+    "type": "",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 64,
+   "removeKey": "psych-p4-mc:ap_psychology-m07-k0",
+   "addKey": "psych-hard-c3:ap_psychology-m08-k1",
+   "remove": {
+    "unit": 4,
+    "skill": "2.A",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 4,
+    "skill": "2.C",
+    "shared": false,
+    "type": "",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 74,
+   "removeKey": "psych-p4-mc:ap_psychology-m10-k0",
+   "addKey": "psych-hard-b:ap_psychology-m18-k1",
+   "remove": {
+    "unit": 5,
+    "skill": "2.D",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 5,
+    "skill": "2.C",
+    "shared": false,
+    "type": "",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 75,
+   "removeKey": "psych-p4-mc:ap_psychology-m11-k0",
+   "addKey": "psych-hard-c3:ap_psychology-m09-k1",
+   "remove": {
+    "unit": 5,
+    "skill": "2.B",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 5,
+    "skill": "2.C",
+    "shared": false,
+    "type": "",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 58,
+   "removeKey": "psych-p3-mc:ap_psychology-m05-k0",
+   "addKey": "psych-p2-mc:ap_psychology-m159-k0",
+   "remove": {
+    "unit": 4,
+    "skill": "1.B",
+    "shared": true,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 3,
+    "skill": "1.A",
+    "shared": true,
+    "type": "",
+    "examPrep": 0
+   }
+  }
+ ],
+ "note": "psych-hard: 게시 v2 → v3. 교체 60건(단독 MC·공유 세트·FRQ 같은 부류끼리). 어느 시험도 상대 시험이 지금 갖고 있는 문항을 가져오지 않으므로 두 시험의 새 버전은 서로 독립이고 순서가 없다. requiresConvertedCandidates 는 먼저 배치 적재·변환해야 하는 후보 키다."
+}

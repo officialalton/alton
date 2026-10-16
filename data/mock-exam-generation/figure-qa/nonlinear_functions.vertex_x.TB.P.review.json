@@ -1,0 +1,25 @@
+{
+ "itemId": "nonlinear_functions.vertex_x.TB.P",
+ "verdict": "pass",
+ "reviewedAt": "2026-10-05T19:43:04.000Z",
+ "reviewer": "visual-review-agent-SC",
+ "codeHash": "f4c1578142ea1991b86ff383c970de7ddfbedb09e965dfdc0ede815fcc71982f",
+ "samples": [
+  "nonlinear_functions.vertex_x.TB.P.png"
+ ],
+ "checklist": {
+  "figure_present": "pass",
+  "proportion_matches_values": "pass",
+  "labels_placed_and_legible": "pass",
+  "multi_figure_consistent": "n/a",
+  "text_matches_figure_and_solvable": "pass",
+  "axes_ticks_units_legend": "pass",
+  "choice_distinct_one_rule": "n/a",
+  "sat_visual_style": "pass",
+  "mobile_375_readable": "pass"
+ },
+ "defects": [],
+ "notes": "2nd diff -6 => a=-3,b=48; vertex x=8 = meta. Table only; no line labels. Nit: snapshot shows raw ax^2 (snapshot page does not render superscripts). Re-review after label rule change: table items, no line/curve labels referenced or drawn.",
+ "restampedAt": "2026-10-05T00:00:00Z",
+ "restampNote": "2026-10-05 영문화로 ProblemFigure.tsx(해시 대상) 문구만 변경 — SVG·PNG 바이트 동일, 해시만 갱신"
+}

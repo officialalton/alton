@@ -1,0 +1,121 @@
+{
+ "runs": [
+  "micro-p2-b"
+ ],
+ "rows": 100,
+ "passed": 66,
+ "rejected": 34,
+ "passRate": 0.66,
+ "mc": {
+  "rows": 100,
+  "passed": 66,
+  "passRate": 0.66
+ },
+ "frq": {
+  "rows": 0,
+  "passed": 0,
+  "passRate": 0
+ },
+ "unitsPassed": {
+  "1": 9,
+  "2": 14,
+  "3": 21,
+  "4": 8,
+  "5": 6,
+  "6": 8
+ },
+ "skillsPassed": {
+  "2.A": 18,
+  "1.D": 3,
+  "3.B": 3,
+  "1.A": 8,
+  "2.C": 4,
+  "3.A": 8,
+  "1.B": 11,
+  "2.B": 3,
+  "1.C": 8
+ },
+ "figPassed": {
+  "graph": 15,
+  "none": 43,
+  "payoff_matrix": 4,
+  "table": 4
+ },
+ "figAll": {
+  "graph": 20,
+  "none": 72,
+  "payoff_matrix": 4,
+  "table": 4
+ },
+ "figPassRate": {
+  "graph": "15/20",
+  "none": "43/72",
+  "payoff_matrix": "4/4",
+  "table": "4/4"
+ },
+ "renderTypesPassed": {
+  "ap_graph:econ_curves": 15,
+  "none": 43,
+  "ap_table:payoff_matrix": 4,
+  "ap_table": 4
+ },
+ "archetypesPassed": {
+  "mi_cost_curve_relation_graph": 2,
+  "mi_cost_graph_min": 3,
+  "mi_cost_relationships": 4,
+  "mi_elasticity_graph": 3,
+  "mi_factor_substitutes": 3,
+  "mi_factors_production": 2,
+  "mi_game_pareto": 4,
+  "mi_hire_rule": 2,
+  "mi_labor_market_shift": 1,
+  "mi_lorenz_graph": 3,
+  "mi_mc_short_long": 3,
+  "mi_movement_vs_shift": 1,
+  "mi_mp_numeric": 4,
+  "mi_mr_mc_rule": 4,
+  "mi_neg_externality": 3,
+  "mi_pes_determinant": 3,
+  "mi_ppc_graph_points": 4,
+  "mi_profit_types": 4,
+  "mi_public_good": 2,
+  "mi_scarcity_concept": 3,
+  "mi_shift_supply": 3,
+  "mi_structure_identify": 1,
+  "mi_tariff_effects": 4
+ },
+ "archetypesAll": {
+  "mi_cost_curve_relation_graph": 4,
+  "mi_cost_graph_min": 4,
+  "mi_cost_relationships": 4,
+  "mi_elasticity_graph": 4,
+  "mi_factor_substitutes": 4,
+  "mi_factors_production": 4,
+  "mi_game_pareto": 4,
+  "mi_hire_rule": 4,
+  "mi_labor_market_shift": 4,
+  "mi_lorenz_graph": 4,
+  "mi_mc_short_long": 4,
+  "mi_movement_vs_shift": 4,
+  "mi_mp_numeric": 4,
+  "mi_mr_mc_rule": 4,
+  "mi_neg_externality": 4,
+  "mi_pd_markets": 4,
+  "mi_pes_determinant": 4,
+  "mi_ppc_graph_points": 4,
+  "mi_profit_types": 4,
+  "mi_public_good": 4,
+  "mi_scarcity_concept": 4,
+  "mi_shift_supply": 4,
+  "mi_shutdown_rule": 4,
+  "mi_structure_identify": 4,
+  "mi_tariff_effects": 4
+ },
+ "failedArchetypes": [
+  "mi_pd_markets",
+  "mi_shutdown_rule"
+ ],
+ "costUsd": {
+  "micro-p2-b": 3.2721
+ }
+}

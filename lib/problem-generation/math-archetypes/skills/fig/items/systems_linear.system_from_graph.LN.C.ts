@@ -1,0 +1,37 @@
+// systems_linear.system_from_graph.LN.C — 두 직선(연립방정식)의 조건을 서술로 주고, 두 직선이 모두 맞는 그래프를 4개 중에서 고른다.
+import { GenFail } from "../../../types";
+import type { Rng } from "../../../rng";
+import { defineItem } from "../item-kit";
+import { C_LEADS, R_SET, SPR_NO_PLANE_CHOICE, cInst, M_SET, pickLine, pointOn, poolChoices, twoCond, twoLineFig, twoLinePool } from "../cplane-kit";
+import { lineChoice } from "../ln-b-kit";
+
+const sg = (n: number) => (n < 0 ? `-${-n}` : `${n}`);
+const STEMS = ["Four graphs of two lines each are shown in the $xy$-plane, all with the same axes.", "The four graphs shown each draw a system of two lines on the same axes.", "Each of the four graphs shown is a pair of lines in one $xy$-plane.", "Four possible graphs of a system of two linear equations are shown with identical axes.", "Below are four graphs shown, each with two lines drawn on the same axes.", "Choices A through D are graphs of two lines in the same $xy$-plane."];
+const QS = (c: string) => [`Which of the four graphs shown is a system in which ${c}?`, `Which graph shown could be the graph of a system in which ${c}?`, `Exactly one of the graphs shown is a system in which ${c}. Which one is it?`, `Of the four graphs shown, which one is a system where ${c}?`, `Which choice shown is the graph of a system in which ${c}?`];
+const has = (m: string, b: string) => `s.L.some(l => l[0] === ${m} && l[1] === ${b})`;
+const STATS = "const L=c.objects.filter(q=>q.kind==='line'); if(L.length!==2) throw new Error('직선 2개 필요'); const k=(o)=>{const [p,q]=o.through; const m=(q[1]-p[1])/(q[0]-p[0]); return [m,p[1]-m*p[0]];}; const LL=L.map(k); const [a,b0]=LL[0],[c0,d0]=LL[1]; const xs=a===c0?NaN:(d0-b0)/(a-c0); const ys=a*xs+b0; return {L:LL,xs,ys};";
+type Scene = { R: number; l1: [number, number]; l2: [number, number] };
+function scene(rng: Rng): Scene { for (let t = 0; t < 300; t++) { const R = rng.pick(R_SET); const l1 = pickLine(rng, R, M_SET.filter(Number.isInteger)), l2 = pickLine(rng, R, M_SET.filter(Number.isInteger)); if (l1.m === l2.m) continue; const xi = (l2.b - l1.b) / (l1.m - l2.m); if (!Number.isInteger(xi) || Math.abs(xi) > R - 1) continue; const yi = l1.m * xi + l1.b; if (Math.abs(yi) > R - 1) continue; try { twoLineFig(R, [l1.m, l1.b], [l2.m, l2.b]); } catch { continue; } return { R, l1: [l1.m, l1.b], l2: [l2.m, l2.b] }; } throw new GenFail("연립 장면"); }
+const xy = (s: Scene) => { const x = (s.l2[1] - s.l1[1]) / (s.l1[0] - s.l2[0]); return [x, s.l1[0] * x + s.l1[1]] as [number, number]; };
+
+function build(rng: Rng, kind: number) {
+  const s = scene(rng); const [m1, b1] = s.l1, [m2, b2] = s.l2; const [x0, y0] = xy(s); let clause: string, P: Record<string, number>, A: string, B: string, rules: [string, string, string], tag: string, trace: [string, string][];
+  if (kind === 0) { clause = rng.pick([`one line has slope ${sg(m1)} and $y$-intercept ${sg(b1)}, and the other line has slope ${sg(m2)} and $y$-intercept ${sg(b2)}`, `the lines are the graphs of a line with slope ${sg(m1)} and $y$-intercept ${sg(b1)} and a line with slope ${sg(m2)} and $y$-intercept ${sg(b2)}`]); P = { m1, b1, m2, b2 }; A = has("P.m1", "P.b1"); B = has("P.m2", "P.b2"); rules = ["first_line_off", "second_line_off", "both_off"]; tag = "both_lines"; trace = [[`두 직선: y = ${sg(m1)}x + ${sg(b1)}, y = ${sg(m2)}x + ${sg(b2)}.`, "Write both lines."]]; }
+  else if (kind === 1) { clause = rng.pick([`the lines cross at the point with $x$-coordinate ${x0} and $y$-coordinate ${y0}, and one of them has slope ${sg(m1)} and $y$-intercept ${sg(b1)}`, `one line has slope ${sg(m1)} and $y$-intercept ${sg(b1)}, and the solution of the system is the point where $x = ${x0}$ and $y = ${y0}$`]); P = { x0, y0, m1, b1 }; A = "Math.abs(s.xs - P.x0) < 1e-9 && Math.abs(s.ys - P.y0) < 1e-9"; B = has("P.m1", "P.b1"); rules = ["solution_off", "line_off", "both_off"]; tag = "solution_and_line"; trace = [[`한 직선 y = ${sg(m1)}x + ${sg(b1)} 과 해 (${x0}, ${y0}) 를 쓴다.`, "Use one line and the solution."], [`둘째 직선은 해를 지나야 하므로 y = ${sg(m2)}x + ${sg(b2)} 이다.`, "The second line must pass through the solution."]]; }
+  else if (kind === 2) { const [p, q] = pointOn(rng, s.R, m1, b1); clause = rng.pick([`one line has slope ${sg(m1)} and passes through the point with $x$-coordinate ${p} and $y$-coordinate ${q}, and the other line has slope ${sg(m2)} and $y$-intercept ${sg(b2)}`, `the lines are one with slope ${sg(m1)} through the point where $x = ${p}$ and $y = ${q}$ and one with slope ${sg(m2)} and $y$-intercept ${sg(b2)}`]); P = { m1, p, q, m2, b2 }; A = "s.L.some(l => l[0] === P.m1 && Math.abs(l[0] * P.p + l[1] - P.q) < 1e-9)"; B = has("P.m2", "P.b2"); rules = ["first_line_off", "second_line_off", "both_off"]; tag = "point_and_intercept"; trace = [[`첫 직선: 기울기 ${m1}, 점 (${p}, ${q}) → y 절편 ${b1}.`, "Find the first line's intercept."], [`둘째 직선: y = ${sg(m2)}x + ${sg(b2)}.`, "Write the second line."]]; }
+  else { clause = rng.pick([`the solution of the system has $x$-coordinate ${x0}, and one line has slope ${sg(m2)} and $y$-intercept ${sg(b2)}`, `one line has slope ${sg(m2)} and $y$-intercept ${sg(b2)}, and the two lines meet where $x = ${x0}$`]); P = { x0, m2, b2 }; A = "Math.abs(s.xs - P.x0) < 1e-9"; B = has("P.m2", "P.b2"); rules = ["solution_x_off", "line_off", "both_off"]; tag = "solution_x_and_line"; trace = [[`한 직선 y = ${sg(m2)}x + ${sg(b2)} 가 주어지고 교점의 x 는 ${x0} 이다.`, "One line and the x-coordinate of the solution."], [`그 점에서 y = ${y0} 이므로 다른 직선도 (${x0}, ${y0}) 를 지난다.`, "The other line passes through the same point."]]; }
+  const c = twoCond(STATS, A, B, rules); const ok = twoLineFig(s.R, s.l1, s.l2); const pool = twoLinePool(rng, s.R, [s.l1, s.l2]);
+  const ch = poolChoices(rng, { ok, pool, P, ...c }); void lineChoice;
+  return { ch, clause, P, c, tag, trace };
+}
+const mkGen = (kind: number, med = false) => (rng: Rng) => { const { ch, clause, P, c, tag, trace } = build(rng, kind); return cInst(rng, ch, { stimulus: `${rng.pick(C_LEADS)}${rng.pick(STEMS)}`, question: rng.pick(QS(clause)), P, ...c, variant: `system_${tag}${med ? "_med" : ""}`, trace: [...trace, ["각 그래프의 두 직선을 읽어 조건을 대조한다.", "Read both lines of each graph."], ["조건 하나라도 어긋난 그래프를 지운다.", "Eliminate graphs that fail a condition."], ["남은 그래프가 정답이다.", "The remaining graph is the answer."]] }, ["다른 그래프는 조건 하나 이상이 어긋난다.", "Each other graph violates at least one condition."]); };
+const H = (op: "repr_shift" | "chain2" | "compose_kind" | "inverse", kind: number, structure: string) => ({ op, sprNo: SPR_NO_PLANE_CHOICE, structure, extra: "두 직선 각각의 조건을 따져 네 그래프를 대조해야 함(한 직선만 맞는 그래프가 함정) — medium 은 직접 대조", concepts: ["연립방정식의 그래프", "직선의 식", "교점"], gen: mkGen(kind) });
+
+export const ITEM = defineItem({
+  prefix: "sfcg", itemId: "systems_linear.system_from_graph.LN.C",
+  hard: [H("repr_shift", 0, "두 직선의 기울기·절편을 각각 서술로 주고 그 연립의 그래프를 고름"), H("chain2", 1, "해와 한 직선의 식을 서술로 주고 그 연립의 그래프를 고름"), H("compose_kind", 2, "한 직선은 기울기와 지나는 점, 다른 직선은 기울기와 절편으로 주고 그 연립의 그래프를 고름"), H("inverse", 3, "해의 x 와 한 직선의 식을 주고 그 연립의 그래프를 고름")],
+  em: [
+    { lv: "easy", name: "both_lines", sprNo: SPR_NO_PLANE_CHOICE, structure: "두 직선의 식을 서술로 주고 그래프를 고름", extra: "easy: 두 직선 대조", concepts: ["연립방정식의 그래프", "그래프 읽기"], gen: mkGen(0, true) },
+    { lv: "medium", name: "point_line", sprNo: SPR_NO_PLANE_CHOICE, structure: "한 직선은 지나는 점으로, 다른 직선은 절편으로 주고 그래프를 고름", extra: "medium: 점으로 절편 구하기", concepts: ["연립방정식의 그래프", "직선의 식"], gen: mkGen(2, true) },
+  ],
+});

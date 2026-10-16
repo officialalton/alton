@@ -1,0 +1,234 @@
+[
+ {
+  "gid": "medium-transitions-1002",
+  "runId": "rw-supplement-medium",
+  "skill": "transitions",
+  "domain": "rw_expression_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "Along the coast of Bangladesh, engineers once relied on earthen embankments called polders to keep tidal water off farmland. The walls worked as intended, but they also blocked the sediment that tides had always spread across the floodplain. Over several decades, the land inside many polders sank while riverbeds outside them rose with trapped silt. ______ some enclosed fields now sit lower than the channels beside them, leaving them waterlogged after heavy rains and harder to drain than before the embankments were built.\n\nWhich choice completes the text with the most logical transition?",
+   "stimulus": "Along the coast of Bangladesh, engineers once relied on earthen embankments called polders to keep tidal water off farmland. The walls worked as intended, but they also blocked the sediment that tides had always spread across the floodplain. Over several decades, the land inside many polders sank while riverbeds outside them rose with trapped silt. ______ some enclosed fields now sit lower than the channels beside them, leaving them waterlogged after heavy rains and harder to drain than before the embankments were built.",
+   "question": "Which choice completes the text with the most logical transition?",
+   "options": [
+    "Nevertheless,",
+    "For instance,",
+    "As a result,",
+    "Similarly,"
+   ],
+   "correctIndex": 2,
+   "answers": null,
+   "explanation": "앞 문장은 제방 안쪽 땅은 가라앉고 바깥 하천 바닥은 높아졌다는 원인을 제시하고, 빈칸 뒤 문장은 그 때문에 일부 농지가 수로보다 낮아져 배수가 어려워졌다는 결과를 말하므로 C가 정답이다. A는 제방이 의도대로 작동했다는 앞부분과 대조되는 것처럼 보이지만, 바로 앞 문장과 이어지는 내용은 반전이 아니라 그 논리적 귀결이다. B는 뒤 문장이 구체적 사례처럼 보여 끌리지만, 앞 문장의 사례가 아니라 그로 인해 생긴 새로운 결과다. D는 두 문장 모두 문제점을 다룬다는 점에서 그럴듯하지만, 별개의 유사한 현상을 나열하는 관계가 아니다.",
+   "explanationEn": "The sentence before the blank gives a cause: land inside the polders sank while the riverbeds outside rose. The sentence after it gives the effect: some fields now sit lower than the nearby channels and are hard to drain. That makes C the best answer. A may seem possible because the passage first says the walls worked as intended, but the final sentence follows logically from the sentence right before it rather than reversing it. B is tempting because the final sentence sounds specific, but it describes a new result, not an example of the sinking and rising. D fails because the final sentence does not add a separate, similar problem. It describes what happened because of the problem already mentioned.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "C",
+   "seed": "환경·지리",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "검산: 앞 문장(안쪽 땅 침하, 바깥 하천 바닥 상승) → 뒤 문장(농지가 수로보다 낮아져 배수 곤란)은 명확한 인과 관계이므로 C \"As a result\"가 정답. A는 'worked as intended'와의 대조로 오인 가능하나 직전 문장과는 반전 아님; B는 뒤 문장의 구체성 때문에 매력적이나 사례가 아닌 결과; D는 유사 현상 나열이 아님. 한·영 해설 모두 결론·글자 참조 일치, 영어 자연스럽고 한글 없음. 폴더 침하·하천 바닥 상승 현상은 방글라데시 해안 실제 사례와 부합. 지문은 독창적 서술로 저작권 의심 없음. 두 단계 판단(인과 파악 + 'worked as intended' 대조 유혹 배제)이 필요하고 오답 A·B가 부분적 근거를 가지므로 medium에 적합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "인과 관계가 명확하다. B(사례)와 D(유사)는 어느 정도 매력적인 오답이다. 뒤 문장이 구체적이어서 B와 비교해 판단해야 하므로 medium 수준에 맞다. 다만 결과 신호가 강해서 쉬운 편에 가깝다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "medium-transitions-1003",
+  "runId": "rw-supplement-medium",
+  "skill": "transitions",
+  "domain": "rw_expression_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "When the Erie Canal opened in 1825, many merchants in Philadelphia assumed their city's long-standing trade networks would shield it from competition with New York. Historian Elena Marsh argues that this confidence was misplaced. Because the canal cut the cost of shipping grain from the Great Lakes region by roughly 90 percent, western farmers began routing their harvests eastward through Albany and down the Hudson River rather than overland toward Pennsylvania. ______ by the 1840s, New York had handled a far larger share of the nation's exports than Philadelphia, a gap that Pennsylvania's own expensive canal system never managed to close.\n\nWhich choice completes the text with the most logical transition?",
+   "stimulus": "When the Erie Canal opened in 1825, many merchants in Philadelphia assumed their city's long-standing trade networks would shield it from competition with New York. Historian Elena Marsh argues that this confidence was misplaced. Because the canal cut the cost of shipping grain from the Great Lakes region by roughly 90 percent, western farmers began routing their harvests eastward through Albany and down the Hudson River rather than overland toward Pennsylvania. ______ by the 1840s, New York had handled a far larger share of the nation's exports than Philadelphia, a gap that Pennsylvania's own expensive canal system never managed to close.",
+   "question": "Which choice completes the text with the most logical transition?",
+   "options": [
+    "Nevertheless,",
+    "For instance,",
+    "Similarly,",
+    "As a result,"
+   ],
+   "correctIndex": 3,
+   "answers": null,
+   "explanation": "앞 문장은 운하로 운송비가 급감하자 서부 농민들이 곡물을 뉴욕 쪽으로 보내기 시작했다는 원인을 제시하고, 빈칸 뒤 문장은 1840년대 뉴욕이 수출 비중에서 필라델피아를 크게 앞섰다는 결과를 제시하므로 D가 정답이다. A는 필라델피아 상인들의 자신감과 대조되는 듯 보이지만, 바로 앞 문장과 뒤 문장은 대립이 아니라 인과로 이어지므로 틀리다. B는 뒤 문장이 앞 내용의 구체적 사례처럼 보일 수 있으나, 수출 비중 격차는 농민들의 운송 경로 변화의 한 예가 아니라 그 결과이다. C는 두 문장이 모두 뉴욕에 유리한 변화를 말해 비슷해 보이지만, 별개의 유사한 사례를 나열하는 관계가 아니다.",
+   "explanationEn": "The sentence before the blank gives a cause: the canal slashed shipping costs, so western farmers began sending grain through New York. The sentence after the blank gives the outcome: by the 1840s New York handled far more of the nation's exports than Philadelphia. That cause-to-effect link makes D correct. A might seem to fit because the passage contrasts with the Philadelphia merchants' confidence, but the two sentences around the blank don't conflict; one follows from the other. B treats the export gap as an example of farmers changing their routes, when it's actually a consequence of that change. C would introduce a separate, parallel development, but the second sentence results directly from the first.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "D",
+   "seed": "역사(근대 사회 변화)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "빈칸 앞 문장(운송비 90% 절감 → 농민들의 경로 변경)이 원인, 뒤 문장(1840년대 뉴욕의 수출 비중 우위)이 결과이므로 D 'As a result'가 유일하게 논리적. A는 도입부의 '잘못된 자신감'과의 대조 때문에 매력적인 오답, B·C도 표면적 근거가 있어 medium에 적합. 사실관계(1825년 개통, 약 90% 운임 절감, 펜실베이니아 운하의 고비용·실패)는 통설과 부합하며 역사학자 이름은 가상으로 문제 없음. 'by the 1840s, New York had handled'의 과거완료는 다소 어색하나(was handling이 더 자연스러움) 오류 수준은 아님. 한·영 해설 모두 D 지지, 글자 참조 일치, 영어 해설에 한글 없음."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "빈칸 앞 원인(경로 변경)에서 뒤 결과(수출 격차)로 이어지므로 인과 관계가 분명하다. 오답 A(첫 문장의 자신감과 대조)와 B(사례처럼 보임)는 그럴듯하게 유인한다. 'by the 1840s, New York had handled'의 과거완료가 약간 어색하지만 허용 범위다. Elena Marsh는 가상 인물로 보인다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "medium-rhetorical_synthesis-1000",
+  "runId": "rw-supplement-medium",
+  "skill": "rhetorical_synthesis",
+  "domain": "rw_expression_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "While researching a topic, a student has taken the following notes:\n- In the nineteenth century, many European cities lacked public clocks that agreed with one another; each town kept its own local \"sun time.\"\n- In 1847, most British railway companies adopted Greenwich Mean Time (GMT), often called \"railway time,\" to coordinate train schedules.\n- Bristol, about 190 kilometers west of London, kept its local time roughly ten minutes behind GMT for several years after the railways switched.\n- The Corn Exchange in Bristol installed a clock with two minute hands, one showing local time and one showing railway time.\n- By 1855, the vast majority of public clocks in Britain displayed GMT.\n\nThe student wants to emphasize that the shift to a standardized time in Britain was not immediate everywhere. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "stimulus": "While researching a topic, a student has taken the following notes:\n- In the nineteenth century, many European cities lacked public clocks that agreed with one another; each town kept its own local \"sun time.\"\n- In 1847, most British railway companies adopted Greenwich Mean Time (GMT), often called \"railway time,\" to coordinate train schedules.\n- Bristol, about 190 kilometers west of London, kept its local time roughly ten minutes behind GMT for several years after the railways switched.\n- The Corn Exchange in Bristol installed a clock with two minute hands, one showing local time and one showing railway time.\n- By 1855, the vast majority of public clocks in Britain displayed GMT.",
+   "question": "The student wants to emphasize that the shift to a standardized time in Britain was not immediate everywhere. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "options": [
+    "Although most British railway companies adopted GMT in 1847, Bristol continued to keep local time for several years, even displaying both times on its Corn Exchange clock.",
+    "In 1847, most British railway companies adopted Greenwich Mean Time, and by 1855 the vast majority of public clocks in Britain displayed it.",
+    "Before railway time, many European cities kept their own local \"sun time,\" so their public clocks often failed to agree with one another.",
+    "Bristol, about 190 kilometers west of London, had a local time that ran roughly ten minutes behind Greenwich Mean Time."
+   ],
+   "correctIndex": 0,
+   "answers": null,
+   "explanation": "목표는 표준시 전환이 모든 곳에서 즉시 일어나지 않았음을 강조하는 것이다. A는 1847년 철도의 GMT 채택과 브리스톨이 수년간 지역 시간을 유지하며 두 시간을 함께 표시한 사실을 대조해 전환의 지연을 분명히 보여 준다. B는 정확한 메모를 쓰지만 전환이 순조롭게 퍼졌다는 인상을 주어 지연을 강조하지 못한다. C는 표준화 이전 상황만 설명할 뿐 전환 과정을 다루지 않는다. D는 브리스톨과 GMT의 시차만 말하고, 철도가 바꾼 뒤에도 브리스톨이 지역 시간을 유지했다는 점은 빠져 있다.",
+   "explanationEn": "The goal is to emphasize that the shift to standardized time didn't happen immediately everywhere. A sets the railways' 1847 adoption of GMT against Bristol keeping its local time for years afterward, even showing both times on one clock, so it clearly highlights the delay. B uses accurate notes, but it makes the shift sound smooth and widespread instead of emphasizing any delay. C describes only the situation before standardization and says nothing about how the shift happened. D gives only the time difference between Bristol and GMT and leaves out the key fact that Bristol held on to local time after the railways had switched.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "A",
+   "seed": "역사(근대 사회 변화)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "정답 A 검산: 1847년 철도 GMT 채택과 브리스톨의 수년간 지역시 유지(두 분침 시계)를 대조해 '즉시 이뤄지지 않았다'는 목표를 직접 달성. B는 관련 메모를 쓰나 순조로운 확산 인상, D는 브리스톨 시차만 언급하고 '철도 전환 이후에도 유지'라는 핵심 누락, C는 전환 이전 상황만 서술 → 모두 배제 타당. 메모의 사실(1847년 철도시간, 브리스톨 약 10분 차·약 190km, Corn Exchange 두 분침 시계, 1855년 대다수 GMT)은 역사적으로 정확. 한·영 해설 결론과 글자 참조 일치, 영어 자연스럽고 한글 없음. 난이도: B·D가 부분적 근거를 가져 비교가 필요하며 C도 말이 되므로 medium 적합(정답이 다소 명확한 편이나 표준 SAT medium 범위)."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "A가 최선의 선택지다. B의 1847→1855 시간 간격도 점진적 변화를 암시할 수는 있지만, 지연을 명시적으로 강조하지 않아 매력적인 오답으로 기능한다. D는 브리스톨 관련 사실을 일부 담고 있으나 '철도 전환 이후에도 유지'라는 핵심이 빠져 있어 비교가 필요하다. 중간 난이도에 적합하다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "medium-rhetorical_synthesis-1001",
+  "runId": "rw-supplement-medium",
+  "skill": "rhetorical_synthesis",
+  "domain": "rw_expression_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "While researching a topic, a student has taken the following notes:\n- Traditional concrete production releases large amounts of carbon dioxide, mainly from heating limestone to make cement.\n- In 2021, engineers in Norway tested a concrete mix in which crushed seashells replaced 40 percent of the limestone.\n- The seashell mix reached 92 percent of the strength of standard concrete after 28 days.\n- The seashell mix produced about 30 percent less carbon dioxide during manufacturing.\n- Seashells are a waste product of the seafood industry and are often sent to landfills.\n\nThe student wants to emphasize a trade-off of the seashell concrete mix. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "stimulus": "While researching a topic, a student has taken the following notes:\n- Traditional concrete production releases large amounts of carbon dioxide, mainly from heating limestone to make cement.\n- In 2021, engineers in Norway tested a concrete mix in which crushed seashells replaced 40 percent of the limestone.\n- The seashell mix reached 92 percent of the strength of standard concrete after 28 days.\n- The seashell mix produced about 30 percent less carbon dioxide during manufacturing.\n- Seashells are a waste product of the seafood industry and are often sent to landfills.",
+   "question": "The student wants to emphasize a trade-off of the seashell concrete mix. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "options": [
+    "Because seashells are a seafood industry waste product often sent to landfills, using them in concrete could reduce the carbon dioxide released when limestone is heated.",
+    "The seashell concrete mix cut manufacturing carbon dioxide emissions by about 30 percent, though it reached only 92 percent of the strength of standard concrete after 28 days.",
+    "In 2021, engineers in Norway tested a concrete mix in which crushed seashells replaced 40 percent of the limestone normally used to make cement.",
+    "The seashell concrete mix not only produced about 30 percent less carbon dioxide but also made use of seashells that would otherwise end up in landfills."
+   ],
+   "correctIndex": 1,
+   "answers": null,
+   "explanation": "목표는 '트레이드오프', 즉 얻는 이점과 잃는 대가를 함께 보여 주는 것이다. B는 탄소 배출 30% 감소(이점)와 강도가 표준의 92%에 그친다는 점(대가)을 'though'로 연결해 목표를 정확히 달성한다. D는 정확한 메모를 쓰지만 두 가지 이점만 나열하므로 대가가 빠져 있다. A는 폐기물 활용과 탄소 감소 가능성을 연결할 뿐 단점이 없다. C는 실험 내용만 소개하는 배경 설명이다.",
+   "explanationEn": "Your goal is to show a trade-off, meaning a benefit along with a cost. B does this: it pairs the 30 percent drop in carbon dioxide (the benefit) with strength reaching only 92 percent of standard concrete (the cost), joined by \"though.\" D uses accurate notes, but it lists two benefits and leaves out any cost. A links waste reuse to lower emissions, but it never mentions a downside. C only describes the experiment as background information.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "B",
+   "seed": "기술·공학 사례",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "B is the only choice pairing a benefit (30% CO2 reduction) with a cost (92% strength), satisfying \"trade-off.\" D (two benefits) and A (waste reuse + emissions) are plausible distractors requiring comparison; C is background. Korean and English explanations agree, reference correct letters, and contain no errors. Fictional data consistent across notes; no copyright issue."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": false,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "B만 이점(CO2 30% 감소)과 대가(강도 92%)를 대비시킴. D는 'not only...but also'로 이점만 나열하는 그럴듯한 오답이고, A는 정확한 근거를 쓰지만 단점이 없다. 중간 난이도에 적합. 메모의 노르웨이 실험은 가상의 내용으로 보임.",
+    "passed": false
+   }
+  }
+ }
+]

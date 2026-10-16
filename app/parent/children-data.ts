@@ -1,10 +1,37 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
+import { selectInChunks, orderComparator } from "@/lib/select-in-chunks";
 
 export type Child = {
   studentId: string;
   name: string;
   isPrimary: boolean;
 };
+
+// (2026-09-06 제품 오너 지시) 상담이 "체험 없이 종료"/"체험 후 종료(정규 미전환)"로
+// 중도 종료된 자녀는 보호자 포털 상단 탭에서 숨긴다 — 더 이상 진행 중인 게 없는
+// 자녀를 계속 노출하는 게 혼란스럽다는 지적. 단, 이미 정규 전환돼 active
+// subject_enrollments가 있는 자녀는 절대 숨기지 않는다(중도 종료된 상담이
+// 이력으로 남아있어도 실제 진행 중인 수강이 있으면 무시).
+const CLOSED_WITHOUT_PROGRESS = new Set(["no_trial", "trial_no_convert"]);
+
+async function isHiddenForClosedConsultation(
+  supabase: SupabaseClient,
+  childId: string
+): Promise<boolean> {
+  const { data: activeEnrollments } = await supabase
+    .from("subject_enrollments")
+    .select("id")
+    .eq("child_id", childId)
+    .eq("status", "active")
+    .limit(1);
+  if (activeEnrollments && activeEnrollments.length > 0) return false;
+
+  // 2026-09-29(F1) — 가족은 consultations 를 직접 읽을 수 없다(내부 메모 노출 차단). 자녀의 최근
+  // 상담 종료 유형만 SECURITY DEFINER 함수로 받는다.
+  const { data: closureType } = await supabase.rpc("family_child_latest_closure_type", { p_child_id: childId });
+  if (!closureType) return false;
+  return CLOSED_WITHOUT_PROGRESS.has(closureType as string);
+}
 
 export async function loadChildren(
   supabase: SupabaseClient,
@@ -23,18 +50,24 @@ export async function loadChildren(
   const householdIds = (guardianLinks ?? []).map((l) => l.household_id);
   if (householdIds.length === 0) return [];
 
-  const { data: childLinks } = await supabase
+  const { data: childLinks } = await selectInChunks(householdIds, (chunk) => supabase
     .from("household_members")
     .select("profile_id, is_primary, profile:profiles(name)")
-    .in("household_id", householdIds)
+    .in("household_id", chunk)
     .eq("role", "child")
-    .order("is_primary", { ascending: false });
+    .order("is_primary", { ascending: false }), { sort: orderComparator(["is_primary", false]) });
 
-  return (childLinks ?? []).map((c) => ({
-    studentId: c.profile_id,
+  const children = (childLinks ?? []).map((c) => ({
+    studentId: c.profile_id as string,
     name: extractName(c.profile),
-    isPrimary: c.is_primary,
+    isPrimary: c.is_primary as boolean,
   }));
+  if (children.length === 0) return [];
+
+  const hiddenFlags = await Promise.all(
+    children.map((c) => isHiddenForClosedConsultation(supabase, c.studentId))
+  );
+  return children.filter((_, i) => !hiddenFlags[i]);
 }
 
 function extractName(rel: unknown): string {

@@ -1,0 +1,43 @@
+{
+ "run": "s1a",
+ "subject": "ap_calculus_ab",
+ "generatedAt": "2026-10-08T19:57:16.738Z",
+ "totalCostUsd": 2.28,
+ "newSpendSinceBaseline": 9.72,
+ "cap": 3,
+ "calls": 272,
+ "candidates": 68,
+ "mcCandidates": 60,
+ "frqCandidates": 8,
+ "passedAll": 54,
+ "adopted": 32,
+ "mcAdopted": 28,
+ "frqAdopted": 4,
+ "reserve": 22,
+ "yield": 0.471,
+ "costPerAdopted": 0.071,
+ "callsPerAdopted": 8.5,
+ "duplicateRejected": 1,
+ "spotChecked": 0,
+ "wording": {
+  "llm": 7,
+  "template": 61
+ },
+ "rejectionReasons": {
+  "criterion_failed_distractor_explanation": 11,
+  "solver_disagrees": 2,
+  "criterion_failed_key_scoring": 1,
+  "criterion_failed_stimulus_expression": 2,
+  "criterion_failed_exam_suitability": 1,
+  "instant_reject_wrong_key": 1,
+  "instant_reject_wrong_stimulus": 1,
+  "reference_pattern_mismatch": 2,
+  "duplicate_gate_near_duplicate": 1,
+  "instant_reject_missing_condition": 1,
+  "review_malformed": 2
+ },
+ "unfilledCells": [
+  "ap_calculus_ab-m23",
+  "ap_calculus_ab-m24"
+ ]
+}

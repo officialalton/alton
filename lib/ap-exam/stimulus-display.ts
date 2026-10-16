@@ -1,0 +1,33 @@
+// AP 문항의 자료 텍스트(passage)는 변환 때 stimulus.description 에서 온다. 그림·표가 없는 text 자료의 description 은 대개 본문(stem)이 이미 말한 모델·상황의 요약이라
+// 학생 화면에 그대로 두면 본문 위에 원문 TeX 가 섞인 같은 문장이 한 번 더 나온다(2026-10-09 리뷰 환경 점검). 본문과 겹치는 자료 텍스트는 숨기고, 남는 것은 수식을 입혀 그린다.
+import { autoMathExplanation } from "./explanation-math";
+
+const words = (t: string): string[] => (t.replace(/\$[^$]*\$/g, " ").toLowerCase().match(/[a-z]{3,}/g) ?? []);
+const norm = (t: string) => t.replace(/\\[a-z]+|[\s$\\{}]/gi, "").toLowerCase().replace(/[^a-z0-9<>=+\-*/^().]/g, "");
+
+/** 본문과 실질적으로 같은 내용이면 true(단어 80% 이상이 본문에 있거나, 수식 문자열이 본문에 그대로 들어 있음). */
+export function passageDuplicatesStem(passage: string, stem: string): boolean {
+  const pw = words(passage); if (!pw.length) return norm(passage).length > 0 && norm(stem).includes(norm(passage));
+  const sw = new Set(words(stem));
+  const hit = pw.filter((w) => sw.has(w) || [...sw].some((s) => s.startsWith(w.slice(0, 5)) && w.length >= 5)).length;
+  return hit / pw.length >= 0.8;
+}
+/** ALTON 원본 영어 지문(AP English Language) 표지. 영어 지문은 stem 이 지문 문장을 인용해도 중복이 아니고, 산문이라 수식 자동 변환 대상도 아니다(2026-10-14). */
+export const EN_PASSAGE_MARKER = "ALTON original passage";
+/** ALTON 작성 US History 자료(원문 아님) 표지 — 산문이므로 영어 지문과 같이 취급한다(2026-10-14). */
+export const US_STIMULUS_MARKER = "ALTON-composed stimulus";
+/** 실제 역사 자료(US History 실제 사료, 2026-10-15) 표지 — ALTON 작성 자료와 구분하며, 같은 산문 취급이다. */
+export const US_REAL_SOURCE_MARKER = "Historical source (real document)";
+/** 실제 공개 저작물(공유 영역) 발췌 표지(AP English Literature 실제 작품 보강, 2026-10-15) — 산문·시이므로 영어 지문과 같이 취급한다. */
+export const REAL_TEXT_MARKER = "Public-domain source text";
+/** 실제 작품 지문의 첫 줄은 표지만이거나 "Public-domain source text — 저자, 작품, 판본" 이다. */
+export const startsWithRealTextMarker = (p: string): boolean => p.startsWith(`${REAL_TEXT_MARKER}\n`) || p.startsWith(`${REAL_TEXT_MARKER} — `);
+export const isEnglishPassage = (p: string): boolean => [EN_PASSAGE_MARKER, US_STIMULUS_MARKER, US_REAL_SOURCE_MARKER].some((m) => p.startsWith(`${m}\n`)) || startsWithRealTextMarker(p);
+/** 화면에 그릴 자료 텍스트(없으면 null). */
+export function apPassageForDisplay(passage: string | null | undefined, stem: string | null | undefined): string | null {
+  const p = (passage ?? "").trim(); if (!p) return null;
+  // 영어/자료 지문: 본문 인용 때문에 숨기지 않고, 산문을 수식으로 바꾸지 않는다. 자료 종류를 나타내는 내부 표기 줄('(table)' 등)은 학생에게 보이지 않게 뺀다.
+  if (isEnglishPassage(p)) return p.replace(/^\((?:table|chart|map|image|graph)\)[ \t]*\n/gim, "");
+  if (!p.includes("```") && passageDuplicatesStem(p, stem ?? "")) return null; // 코드 자료는 본문과 단어가 겹쳐도 숨기지 않는다(코드가 곧 문제)
+  return autoMathExplanation(p);
+}

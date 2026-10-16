@@ -39,3 +39,28 @@ describe("sanitizeDocHtml", () => {
     expect(result).toContain("color:red");
   });
 });
+
+// P2/P3 5단계 — 학습 자료의 그림은 본문의 일부다.
+describe("교재 그림", () => {
+  it("그림을 보존한다(예전에는 저장 시점에 통째로 사라졌다)", () => {
+    const out = sanitizeDocHtml('<p>도표</p><img src="https://cdn.example.com/g.png" alt="그래프">');
+    expect(out).toContain("<img");
+    expect(out).toContain("https://cdn.example.com/g.png");
+    expect(out).toContain('alt="그래프"');
+  });
+
+  it("data URL 그림도 보존한다(붙여넣은 이미지)", () => {
+    const out = sanitizeDocHtml('<img src="data:image/png;base64,iVBORw0KGgo=">');
+    expect(out).toContain("data:image/png;base64");
+  });
+
+  it("javascript: 주소는 막는다", () => {
+    const out = sanitizeDocHtml('<img src="javascript:alert(1)">');
+    expect(out).not.toContain("javascript:");
+  });
+
+  it("그림에 이벤트 핸들러를 붙일 수 없다", () => {
+    const out = sanitizeDocHtml('<img src="https://a/b.png" onerror="alert(1)">');
+    expect(out).not.toContain("onerror");
+  });
+});

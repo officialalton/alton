@@ -1,0 +1,124 @@
+/* 공개 페이지 전용 디자인 토큰(2026-10-05 랜딩 v3). 인증 앱 토큰(globals.css)은 건드리지 않는다. */
+.public-theme {
+  --p-paper: #f7f6f2;
+  --p-card: #ffffff;
+  --p-ink: #17171a;
+  --p-slate: #44495a;
+  --p-mute: #5b5e66;
+  --p-line: rgba(23, 23, 26, 0.18);
+  --p-red: #c8102e;
+  --p-red-d: #8f0b20;
+  --p-maroon: #4a1a18;
+  --p-green: #17503f;
+  --p-skeleton: #e9e6e0;
+  --p-skeleton-red: #f1d4d8;
+
+  background: var(--p-paper);
+  color: var(--p-ink);
+  font-family: var(--font-p-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+.public-theme a { color: inherit; }
+.public-theme :focus-visible { outline: 2px solid var(--p-red); outline-offset: 3px; }
+.public-theme .p-dark :focus-visible { outline-color: #fff; }
+
+.public-theme .p-wrap { max-width: 1120px; margin: 0 auto; padding-left: 20px; padding-right: 20px; }
+@media (min-width: 768px) { .public-theme .p-wrap { padding-left: 40px; padding-right: 40px; } }
+.public-theme .p-section { padding: 72px 0; border-top: 1px solid var(--p-line); }
+@media (min-width: 768px) { .public-theme .p-section { padding: 104px 0; } }
+.public-theme .p-dark { border-top: 0; color: #f7f6f2; --p-line: rgba(247, 246, 242, 0.32); --p-slate: #e6e2da; --p-mute: #d9d4ca; }
+.public-theme .p-maroon { background: var(--p-maroon); }
+.public-theme .p-green { background: var(--p-green); }
+.public-theme .p-maroon .p-eyebrow-text { color: #f0bdb6; }
+.public-theme .p-green .p-eyebrow-text { color: #a9dcc9; }
+.public-theme .p-dark .p-rule { background: #f7f6f2; opacity: 0.7; }
+
+.public-theme .p-serif { font-family: var(--font-p-serif), Georgia, serif; font-weight: 400; }
+.public-theme .p-mono { font-family: var(--font-p-mono), ui-monospace, monospace; }
+
+.public-theme .p-eyebrow { display: flex; align-items: center; gap: 14px; }
+.public-theme .p-rule { display: inline-block; width: 48px; height: 2px; background: var(--p-red); flex: none; }
+.public-theme .p-eyebrow-text { font-family: var(--font-p-mono), ui-monospace, monospace; font-size: 12px; letter-spacing: 0.02em; color: var(--p-mute); }
+
+.public-theme .p-h1 { margin: 0; font-family: var(--font-p-serif), Georgia, serif; font-weight: 400; font-size: clamp(46px, 11vw, 84px); line-height: 0.98; letter-spacing: -0.035em; }
+.public-theme .p-h2 { margin: 0; font-family: var(--font-p-serif), Georgia, serif; font-weight: 400; font-size: clamp(36px, 8vw, 58px); line-height: 1.02; letter-spacing: -0.03em; }
+.public-theme .p-h3 { margin: 0; font-family: var(--font-p-serif), Georgia, serif; font-weight: 400; font-size: 26px; line-height: 1.15; letter-spacing: -0.015em; }
+.public-theme .p-lede { margin: 0; font-size: 18px; line-height: 1.65; color: var(--p-slate); }
+@media (min-width: 768px) { .public-theme .p-lede { font-size: 20px; } }
+.public-theme .p-body { margin: 0; font-size: 16px; line-height: 1.7; color: var(--p-slate); }
+
+.public-theme .p-btn { display: flex; align-items: center; justify-content: center; min-height: 56px; padding: 0 28px; width: 100%; font-size: 16px; font-weight: 600; text-decoration: none; border: 1px solid var(--p-ink); border-radius: 0; text-align: center; transition: background-color .15s, color .15s; }
+@media (min-width: 640px) { .public-theme .p-btn { width: auto; } }
+.public-theme .p-btn-primary { background: var(--p-ink); color: #fff; }
+.public-theme .p-btn-primary:hover { background: var(--p-red); border-color: var(--p-red); }
+.public-theme .p-btn-secondary { background: transparent; color: var(--p-ink); }
+.public-theme .p-btn-secondary:hover { background: var(--p-ink); color: #fff; }
+.public-theme .p-dark .p-btn-primary { background: #f7f6f2; color: var(--p-ink); border-color: #f7f6f2; }
+.public-theme .p-dark .p-btn-primary:hover { background: #fff; border-color: #fff; color: var(--p-red-d); }
+.public-theme .p-dark .p-btn-secondary { color: #f7f6f2; border-color: rgba(247, 246, 242, 0.7); }
+.public-theme .p-dark .p-btn-secondary:hover { background: #f7f6f2; color: var(--p-ink); }
+.public-theme .p-btn-sm { min-height: 40px; padding: 0 16px; width: auto; font-size: 14px; white-space: nowrap; }
+
+.public-theme .p-box { border: 1px solid var(--p-line); padding: 28px; display: flex; flex-direction: column; gap: 14px; }
+@media (min-width: 768px) { .public-theme .p-box { padding: 36px; } }
+.public-theme .p-label { font-family: var(--font-p-mono), ui-monospace, monospace; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--p-mute); }
+
+.public-theme .p-proof { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 0; font-family: var(--font-p-mono), ui-monospace, monospace; font-size: 12.5px; color: var(--p-mute); }
+.public-theme .p-proof li { display: flex; align-items: center; }
+.public-theme .p-proof li + li::before { content: ""; width: 4px; height: 4px; border-radius: 50%; background: var(--p-red); margin: 0 12px; }
+
+.public-theme .p-link { color: var(--p-red); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+.public-theme .p-dark .p-link { color: #fff; }
+
+.public-theme .p-doc { background: #fff; border: 1px solid var(--p-line); padding: 24px; display: flex; flex-direction: column; gap: 18px; }
+.public-theme .p-sk { display: block; height: 8px; background: var(--p-skeleton); }
+.public-theme .p-sk-red { background: var(--p-skeleton-red); }
+.public-theme .p-note { border: 1px solid var(--p-ink); padding: 8px 12px; font-family: var(--font-p-mono), ui-monospace, monospace; font-size: 11.5px; color: var(--p-ink); background: #fff; }
+
+.public-theme .p-faq details { border-top: 1px solid var(--p-line); }
+.public-theme .p-faq details:last-child { border-bottom: 1px solid var(--p-line); }
+.public-theme .p-faq summary { cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 22px 0; font-size: 17px; font-weight: 600; }
+.public-theme .p-faq summary::-webkit-details-marker { display: none; }
+.public-theme .p-faq summary span { color: var(--p-red); font-family: var(--font-p-mono), monospace; font-size: 22px; line-height: 1; transition: transform .15s; }
+.public-theme .p-faq details[open] summary span { transform: rotate(45deg); }
+
+.public-theme .p-prose { display: flex; flex-direction: column; gap: 20px; font-size: 16.5px; line-height: 1.75; color: var(--p-slate); }
+.public-theme .p-prose h2 { margin: 16px 0 0; font-family: var(--font-p-serif), Georgia, serif; font-weight: 400; font-size: 30px; line-height: 1.1; letter-spacing: -0.02em; color: var(--p-ink); }
+.public-theme .p-prose ul { margin: 0; padding-left: 20px; }
+.public-theme .p-prose li { margin-bottom: 6px; }
+.public-theme .p-prose a:not(.p-btn) { color: var(--p-red); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+
+/* 상담 폼(공용 ConsultForm)을 공개 톤에 맞춘다 — 컴포넌트 자체는 수정하지 않는다. */
+.public-theme .p-consult form,
+.public-theme .p-consult > div { border-radius: 0; border: 1px solid var(--p-line); background: #fff; }
+.public-theme .p-consult input,
+.public-theme .p-consult textarea,
+.public-theme .p-consult select { border-radius: 0; border: 1px solid var(--p-ink); background: #fff; font-size: 15px; }
+.public-theme .p-consult button[type="submit"] { border-radius: 0; background: var(--p-ink); min-height: 56px; }
+.public-theme .p-consult button[type="submit"]:hover { background: var(--p-red); }
+
+/* Meet Chrisy Kim */
+.public-theme .p-portrait { position: relative; width: 100%; aspect-ratio: 4 / 5; overflow: hidden; border: 1px solid var(--p-line); background: var(--p-skeleton); }
+.public-theme .p-portrait-fallback { display: flex; align-items: center; justify-content: center; background: var(--p-ink); color: #f7f6f2; border-color: var(--p-ink); }
+.public-theme .p-portrait-fallback span { font-size: clamp(64px, 14vw, 112px); letter-spacing: -0.03em; }
+.public-theme .p-advisor { display: flex; align-items: center; gap: 16px; border: 1px solid var(--p-line); padding: 14px 16px; text-decoration: none; max-width: 520px; transition: border-color .15s; }
+.public-theme .p-advisor:hover { border-color: var(--p-ink); }
+.public-theme .p-advisor .p-portrait { width: 56px; flex: none; }
+.public-theme .p-advisor .p-portrait-fallback span { font-size: 20px; }
+.public-theme .p-qa { display: flex; flex-direction: column; }
+.public-theme .p-qa details { border-top: 1px solid var(--p-line); }
+.public-theme .p-qa details:last-child { border-bottom: 1px solid var(--p-line); }
+.public-theme .p-qa summary { cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 22px 0; }
+.public-theme .p-qa summary::-webkit-details-marker { display: none; }
+.public-theme .p-qa summary span { color: var(--p-red); font-family: var(--font-p-mono), monospace; font-size: 22px; line-height: 1; transition: transform .15s; }
+.public-theme .p-qa details[open] summary span { transform: rotate(45deg); }
+.public-theme .p-qa details > p { margin: 0 0 24px; max-width: 640px; }
+.public-theme .p-qa h3 { margin: 0; font-family: var(--font-p-serif), Georgia, serif; font-weight: 400; font-size: 22px; line-height: 1.25; color: var(--p-ink); }
+
+/* 2026-10-09 가용성 카드(히어로) */
+.public-theme .p-live-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--p-red); display: inline-block; }
+.public-theme .p-bar { display: block; height: 6px; background: var(--p-skeleton); }
+.public-theme .p-bar > span { display: block; height: 100%; background: var(--p-ink); transform-origin: left; animation: p-bar-in .7s ease-out both; }
+.public-theme .p-coming { border: 1px dashed var(--p-line); padding: 14px 16px; background: transparent; }
+@keyframes p-bar-in { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@media (prefers-reduced-motion: reduce) { .public-theme .p-bar > span { animation: none; } }

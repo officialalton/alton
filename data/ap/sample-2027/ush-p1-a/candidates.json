@@ -1,0 +1,895 @@
+[
+ {
+  "cellId": "ap_us_history-u201",
+  "apSubjectCode": "ap_us_history",
+  "kind": "mc",
+  "calculator": "na",
+  "reserve": false,
+  "wording": "generated",
+  "candidateKey": "ap_us_history-u201-k0",
+  "keywordCode": "2.7",
+  "unitCode": "2",
+  "skillPrimary": "3.D",
+  "structure": "shared_stimulus_set",
+  "archetype": "ush_u201",
+  "reviewState": "auto_passed",
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficulty": [
+   {
+    "label": "exam_prep"
+   },
+   {
+    "label": "basic_learning"
+   },
+   {
+    "label": "exam_prep"
+   }
+  ],
+  "payload": {
+   "archetype": "ush_u201",
+   "topic": "2.7",
+   "skill": "3.D",
+   "calculator": "na",
+   "set_intro": "ALTON-composed stimulus\n\n———\n\n(secondary source)\nA historian on the Great Awakening in the Middle Colonies\nMiriam Adlerwood, historian, Pulpits Without Walls: Revival and Authority in the Middle Colonies, 1730-1760, published 2009 (ALTON-composed, in the style of a modern scholarly monograph on colonial religion)\n\n\"When itinerant preachers rode into towns like New Brunswick and Lancaster in the early 1740s, they brought something more unsettling than a call to repentance. They invited ordinary listeners to decide for themselves whether the minister in the local pulpit was truly converted, and many listeners decided that he was not. Farmers walked out of meetinghouses where their families had sat for decades. Artisans, servants, and some enslaved people began to speak at gatherings as lay exhorters, a role once reserved for college-trained clergy. Colonial officials complained that crowds of several thousand gathered in open fields without the permission of any parish. The revival did not reject authority altogether; it moved it, from the office a man held to the spiritual experience his hearers could recognize in him. By teaching colonists to judge their leaders, the Awakening rehearsed habits of mind that would outlast the revivals themselves.\"",
+   "ush_set": {
+    "period": 2,
+    "stim_type": "secondary_text",
+    "theme": "The First Great Awakening",
+    "title": "Revival and the Relocation of Religious Authority",
+    "sources": [
+     {
+      "id": "A",
+      "kind": "secondary_text",
+      "title": "A historian on the Great Awakening in the Middle Colonies",
+      "attribution": "Miriam Adlerwood, historian, Pulpits Without Walls: Revival and Authority in the Middle Colonies, 1730-1760, published 2009 (ALTON-composed, in the style of a modern scholarly monograph on colonial religion)",
+      "real_data": false
+     }
+    ]
+   },
+   "items": [
+    {
+     "archetype": "ush_u201_3D",
+     "topic": "2.7",
+     "skill": "3.D",
+     "stem": "Which of the following developments in the 1740s would best support the argument in the excerpt?",
+     "options": [
+      {
+       "text": "Congregations split into pro-revival and anti-revival factions, and revival supporters set up new churches and colleges.",
+       "why": "The New Light/Old Light and New Side/Old Side splits, along with new institutions like the College of New Jersey, show believers rejecting ministers they judged unconverted. That supports the claim that authority moved to the laity.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "Enlightenment writers persuaded many educated colonists that reason and natural law, not revelation, revealed God's design.",
+       "why": "Enlightenment rationalism did spread among some elites, but it says nothing about lay believers challenging the clergy's authority through revival.",
+       "value": null,
+       "label": "true_but_not_responsive"
+      },
+      {
+       "text": "The First Amendment barred Congress from establishing a national church or restricting the free exercise of religion.",
+       "why": "The First Amendment was ratified in 1791, long after the revivals, so it cannot serve as evidence about the 1740s.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "Colonial assemblies passed laws that made attending services in the established church compulsory for every free resident.",
+       "why": "New compulsory-attendance laws were not a feature of the 1740s. Such laws would also strengthen official authority, which is the opposite of the author's argument.",
+       "value": null,
+       "label": "unrelated_development"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is \"Congregations split into pro-revival and anti-revival factions, and revival supporters set up new churches and colleges.\". The New Light/Old Light and New Side/Old Side splits, along with new institutions like the College of New Jersey, show believers rejecting ministers they judged unconverted. That supports the claim that authority moved to the laity.\n\"Enlightenment writers persuaded many educated colonists that reason and natural law, not revelation, revealed God's design.\" is incorrect: Enlightenment rationalism did spread among some elites, but it says nothing about lay believers challenging the clergy's authority through revival.\n\"The First Amendment barred Congress from establishing a national church or restricting the free exercise of religion.\" is incorrect: The First Amendment was ratified in 1791, long after the revivals, so it cannot serve as evidence about the 1740s.\n\"Colonial assemblies passed laws that made attending services in the established church compulsory for every free resident.\" is incorrect: New compulsory-attendance laws were not a feature of the 1740s. Such laws would also strengthen official authority, which is the opposite of the author's argument.",
+     "est_seconds": 75,
+     "facts": [
+      "During the Great Awakening, Congregationalists split into New Lights and Old Lights, and Presbyterians split into New Side and Old Side factions.",
+      "The College of New Jersey (later Princeton) was chartered in 1746 with support from revival-minded Presbyterians."
+     ],
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 0,
+        "confidence": "certain"
+       },
+       {
+        "choice": 0,
+        "confidence": "certain"
+       }
+      ],
+      "panel_choice": 0,
+      "score": 1,
+      "band": "high"
+     }
+    },
+    {
+     "archetype": "ush_u201_4A",
+     "topic": "2.7",
+     "skill": "4.A",
+     "stem": "Which of the following provides the most relevant context for the revivals described in the excerpt?",
+     "options": [
+      {
+       "text": "Evangelical Protestant revivals were spreading across the British Atlantic world, carried by touring preachers and printed sermons.",
+       "why": "The colonial Awakening belonged to a transatlantic evangelical movement. Touring preachers such as George Whitefield, who arrived in 1739, and sermons spread through colonial print explain the itinerants and huge outdoor crowds.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "British victory in the Seven Years' War had removed the French threat and led to new imperial taxes on the colonies.",
+       "why": "The Seven Years' War ended in 1763, about two decades after the revivals of the early 1740s.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "Spanish missionaries were working to convert Native peoples in New Mexico and the borderlands through the mission system.",
+       "why": "Spanish Catholic missions were real but had nothing to do with Protestant revivals in the Middle Colonies.",
+       "value": null,
+       "label": "unrelated_development"
+      },
+      {
+       "text": "Revivalists of the early nineteenth century were holding camp meetings on the frontier and promoting reform movements such as temperance.",
+       "why": "This describes the Second Great Awakening, which came roughly two generations after the revivals in the excerpt.",
+       "value": null,
+       "label": "wrong_period"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is \"Evangelical Protestant revivals were spreading across the British Atlantic world, carried by touring preachers and printed sermons.\". The colonial Awakening belonged to a transatlantic evangelical movement. Touring preachers such as George Whitefield, who arrived in 1739, and sermons spread through colonial print explain the itinerants and huge outdoor crowds.\n\"British victory in the Seven Years' War had removed the French threat and led to new imperial taxes on the colonies.\" is incorrect: The Seven Years' War ended in 1763, about two decades after the revivals of the early 1740s.\n\"Spanish missionaries were working to convert Native peoples in New Mexico and the borderlands through the mission system.\" is incorrect: Spanish Catholic missions were real but had nothing to do with Protestant revivals in the Middle Colonies.\n\"Revivalists of the early nineteenth century were holding camp meetings on the frontier and promoting reform movements such as temperance.\" is incorrect: This describes the Second Great Awakening, which came roughly two generations after the revivals in the excerpt.",
+     "est_seconds": 70,
+     "facts": [
+      "George Whitefield, an English evangelical minister, toured the British North American colonies beginning in 1739, drawing large crowds.",
+      "The First Great Awakening was part of a broader evangelical revival movement across the British Atlantic world."
+     ],
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 0,
+        "confidence": "certain"
+       },
+       {
+        "choice": 0,
+        "confidence": "certain"
+       }
+      ],
+      "panel_choice": 0,
+      "score": 1,
+      "band": "high"
+     }
+    },
+    {
+     "archetype": "ush_u201_1B",
+     "topic": "2.7",
+     "skill": "1.B",
+     "stem": "The preachers described in the excerpt are best understood as emphasizing which of the following religious ideas?",
+     "options": [
+      {
+       "text": "Salvation came mainly through sacraments administered by an ordained hierarchy of bishops and priests.",
+       "why": "Revivalists put inner experience ahead of formal ritual and church hierarchy, as the excerpt's lay exhorters show.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "Governments had a duty to enforce full religious toleration and separate church from state in every colony.",
+       "why": "Some revival-era dissenters later pushed for disestablishment, but the revivals were about personal salvation, not a program requiring governments to separate church and state.",
+       "value": null,
+       "label": "overstated"
+      },
+      {
+       "text": "Human reason and observation of natural law were the surest paths to understanding God and morality.",
+       "why": "This is the rational religion and deism tied to the Enlightenment, which many revivalists opposed.",
+       "value": null,
+       "label": "misattributed"
+      },
+      {
+       "text": "Each believer needed a personal, emotional experience of conversion and a direct relationship with God.",
+       "why": "Revivalists stressed heartfelt, individual conversion. That is why hearers felt able to judge whether a minister was 'truly converted.'",
+       "value": null,
+       "label": "key"
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is \"Each believer needed a personal, emotional experience of conversion and a direct relationship with God.\". Revivalists stressed heartfelt, individual conversion. That is why hearers felt able to judge whether a minister was 'truly converted.'\n\"Salvation came mainly through sacraments administered by an ordained hierarchy of bishops and priests.\" is incorrect: Revivalists put inner experience ahead of formal ritual and church hierarchy, as the excerpt's lay exhorters show.\n\"Governments had a duty to enforce full religious toleration and separate church from state in every colony.\" is incorrect: Some revival-era dissenters later pushed for disestablishment, but the revivals were about personal salvation, not a program requiring governments to separate church and state.\n\"Human reason and observation of natural law were the surest paths to understanding God and morality.\" is incorrect: This is the rational religion and deism tied to the Enlightenment, which many revivalists opposed.",
+     "est_seconds": 60,
+     "facts": [
+      "Great Awakening preachers such as George Whitefield and Jonathan Edwards stressed a personal, emotional conversion experience and an individual relationship with God."
+     ],
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 3,
+        "confidence": "certain"
+       },
+       {
+        "choice": 3,
+        "confidence": "certain"
+       }
+      ],
+      "panel_choice": 3,
+      "score": 1,
+      "band": "high"
+     }
+    }
+   ],
+   "excluded_items": [
+    {
+     "index": 0,
+     "skill": "3.A",
+     "reasons": [
+      "key_is_longest_option",
+      "solver_disagreement_or_missing",
+      "panel_missing"
+     ]
+    }
+   ]
+  }
+ },
+ {
+  "cellId": "ap_us_history-u302",
+  "apSubjectCode": "ap_us_history",
+  "kind": "mc",
+  "calculator": "na",
+  "reserve": false,
+  "wording": "generated",
+  "candidateKey": "ap_us_history-u302-k0",
+  "keywordCode": "3.1",
+  "unitCode": "3",
+  "skillPrimary": "2.A",
+  "structure": "shared_stimulus_set",
+  "archetype": "ush_u302",
+  "reviewState": "rejected",
+  "rejectionReason": "key_is_longest_in_3_items; excluded=[{\"index\":0,\"skill\":\"2.A\",\"reasons\":[\"key_is_longest_option\",\"solver_disagreement_or_missing\",\"panel_missing\",\"set_gate_failed\"]},{\"index\":1,\"skill\":\"3.B\",\"reasons\":[\"solver_disagreement_or_missing\",\"panel_missing\",\"set_gate_failed\"]},{\"index\":2,\"skill\":\"4.B\",\"reasons\":[\"distractor_labels_not_diverse\",\"key_is_longest_option\",\"solver_disagreement_or_missing\",\"panel_missing\",\"set_gate_failed\"]},{\"index\":3,\"skill\":\"1.B\",\"reasons\":[\"key_is_longest_option\",\"solver_disagreement_or_missing\",\"panel_missing\",\"set_gate_failed\"]}]",
+  "difficultyProvisional": null,
+  "payload": {
+   "archetype": "ush_u302",
+   "spec": {
+    "id": "u302",
+    "period": 3,
+    "stim": "primary_text",
+    "theme": "Northwest Ordinance and western settlement",
+    "skills": [
+     "2.A",
+     "3.B",
+     "4.B",
+     "1.B"
+    ],
+    "nItems": 4,
+    "seed": 29308
+   },
+   "excluded_items": [
+    {
+     "index": 0,
+     "skill": "2.A",
+     "reasons": [
+      "key_is_longest_option",
+      "solver_disagreement_or_missing",
+      "panel_missing",
+      "set_gate_failed"
+     ]
+    },
+    {
+     "index": 1,
+     "skill": "3.B",
+     "reasons": [
+      "solver_disagreement_or_missing",
+      "panel_missing",
+      "set_gate_failed"
+     ]
+    },
+    {
+     "index": 2,
+     "skill": "4.B",
+     "reasons": [
+      "distractor_labels_not_diverse",
+      "key_is_longest_option",
+      "solver_disagreement_or_missing",
+      "panel_missing",
+      "set_gate_failed"
+     ]
+    },
+    {
+     "index": 3,
+     "skill": "1.B",
+     "reasons": [
+      "key_is_longest_option",
+      "solver_disagreement_or_missing",
+      "panel_missing",
+      "set_gate_failed"
+     ]
+    }
+   ]
+  }
+ },
+ {
+  "cellId": "ap_us_history-u403",
+  "apSubjectCode": "ap_us_history",
+  "kind": "mc",
+  "calculator": "na",
+  "reserve": false,
+  "wording": "generated",
+  "candidateKey": "ap_us_history-u403-k0",
+  "keywordCode": "4.1",
+  "unitCode": "4",
+  "skillPrimary": "3.C",
+  "structure": "shared_stimulus_set",
+  "archetype": "ush_u403",
+  "reviewState": "rejected",
+  "rejectionReason": "source_A_real_person_in_attribution_jackson; source_B_real_person_in_attribution_jackson; excluded=[{\"index\":0,\"skill\":\"3.C\",\"reasons\":[\"solver_disagreement_or_missing\",\"panel_missing\",\"set_gate_failed\"]},{\"index\":1,\"skill\":\"3.D\",\"reasons\":[\"solver_disagreement_or_missing\",\"panel_missing\",\"set_gate_failed\"]},{\"index\":2,\"skill\":\"4.B\",\"reasons\":[\"solver_disagreement_or_missing\",\"panel_missing\",\"set_gate_failed\"]},{\"index\":3,\"skill\":\"5.B\",\"reasons\":[\"solver_disagreement_or_missing\",\"panel_missing\",\"set_gate_failed\"]}]",
+  "difficultyProvisional": null,
+  "payload": {
+   "archetype": "ush_u403",
+   "spec": {
+    "id": "u403",
+    "period": 4,
+    "stim": "paired_text",
+    "theme": "Jacksonian democracy and the spoils system",
+    "skills": [
+     "3.C",
+     "3.D",
+     "4.B",
+     "5.B"
+    ],
+    "nItems": 4,
+    "seed": 88545
+   },
+   "excluded_items": [
+    {
+     "index": 0,
+     "skill": "3.C",
+     "reasons": [
+      "solver_disagreement_or_missing",
+      "panel_missing",
+      "set_gate_failed"
+     ]
+    },
+    {
+     "index": 1,
+     "skill": "3.D",
+     "reasons": [
+      "solver_disagreement_or_missing",
+      "panel_missing",
+      "set_gate_failed"
+     ]
+    },
+    {
+     "index": 2,
+     "skill": "4.B",
+     "reasons": [
+      "solver_disagreement_or_missing",
+      "panel_missing",
+      "set_gate_failed"
+     ]
+    },
+    {
+     "index": 3,
+     "skill": "5.B",
+     "reasons": [
+      "solver_disagreement_or_missing",
+      "panel_missing",
+      "set_gate_failed"
+     ]
+    }
+   ]
+  }
+ },
+ {
+  "cellId": "ap_us_history-u504",
+  "apSubjectCode": "ap_us_history",
+  "kind": "mc",
+  "calculator": "na",
+  "reserve": false,
+  "wording": "generated",
+  "candidateKey": "ap_us_history-u504-k0",
+  "keywordCode": "5.2",
+  "unitCode": "5",
+  "skillPrimary": "3.A",
+  "structure": "shared_stimulus_set",
+  "archetype": "ush_u504",
+  "reviewState": "auto_passed",
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficulty": [
+   {
+    "label": "basic_learning"
+   },
+   {
+    "label": "exam_prep"
+   },
+   {
+    "label": "exam_prep"
+   }
+  ],
+  "payload": {
+   "archetype": "ush_u504",
+   "topic": "5.2",
+   "skill": "3.A",
+   "calculator": "na",
+   "set_intro": "ALTON-composed stimulus\n\n———\n\n(secondary source)\nA historian on the annexation of Texas\nMarguerite Ellison-Darrow, historian, Lone Star, Divided Union: Texas and the Politics of Expansion, a monograph from a fictional university press in Galveston, 2011 (ALTON-composed, in the style of a modern political history of antebellum expansion)\n\n\"Americans of the 1840s described expansion as a destiny written by Providence, but Texas shows how selective that destiny was. After Texas won its independence from Mexico in 1836, its leaders sought admission to the Union, and for nearly a decade Washington hesitated. The obstacle was not doubt about continental greatness. It was slavery. Texas would enter as a slave state, perhaps later divided into several, and Northern Whigs understood the arithmetic of the Senate. The annexation treaty of 1844 failed in the Senate after its supporters tied it openly to the protection of slavery. Only after an expansionist won the presidency that fall did Congress approve annexation in 1845, by a joint resolution needing a simple majority in each house rather than a two-thirds treaty vote. The language of Manifest Destiny did real work here: it let a measure serving slaveholding interests be presented as the fulfillment of a national mission.\"",
+   "ush_set": {
+    "period": 5,
+    "stim_type": "secondary_text",
+    "theme": "Texas annexation and Manifest Destiny",
+    "title": "Slavery, Sectional Politics, and the Annexation of Texas",
+    "sources": [
+     {
+      "id": "A",
+      "kind": "secondary_text",
+      "title": "A historian on the annexation of Texas",
+      "attribution": "Marguerite Ellison-Darrow, historian, Lone Star, Divided Union: Texas and the Politics of Expansion, a monograph from a fictional university press in Galveston, 2011 (ALTON-composed, in the style of a modern political history of antebellum expansion)",
+      "real_data": false
+     }
+    ]
+   },
+   "items": [
+    {
+     "archetype": "ush_u504_3A",
+     "topic": "5.2",
+     "skill": "3.A",
+     "stem": "Which of the following best describes the author's main argument in the excerpt?",
+     "options": [
+      {
+       "text": "The United States delayed admitting Texas for years mainly because leaders feared that annexation would provoke a war with Great Britain.",
+       "why": "The excerpt does not mention Britain. It names slavery as the obstacle.",
+       "value": null,
+       "label": "unsupported_by_source"
+      },
+      {
+       "text": "Texas joined the Union mostly because Mexican military threats after 1836 forced the United States to protect the new republic.",
+       "why": "The author never presents Mexican threats as the cause of annexation. The passage centers on sectional politics over slavery.",
+       "value": null,
+       "label": "unsupported_by_source"
+      },
+      {
+       "text": "Expansionist rhetoric about national mission helped win approval for an annexation driven mainly by the interests of slaveholders.",
+       "why": "The author says the obstacle to annexation 'was slavery' and that Manifest Destiny let a measure serving slaveholding interests be presented as a national mission.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "Annexation reflected a broad national agreement about continental expansion that crossed sectional lines and political parties.",
+       "why": "The author argues the reverse: the destiny was 'selective,' and Northern Whigs resisted because of slavery.",
+       "value": null,
+       "label": "reversal"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is \"Expansionist rhetoric about national mission helped win approval for an annexation driven mainly by the interests of slaveholders.\". The author says the obstacle to annexation 'was slavery' and that Manifest Destiny let a measure serving slaveholding interests be presented as a national mission.\n\"The United States delayed admitting Texas for years mainly because leaders feared that annexation would provoke a war with Great Britain.\" is incorrect: The excerpt does not mention Britain. It names slavery as the obstacle.\n\"Texas joined the Union mostly because Mexican military threats after 1836 forced the United States to protect the new republic.\" is incorrect: The author never presents Mexican threats as the cause of annexation. The passage centers on sectional politics over slavery.\n\"Annexation reflected a broad national agreement about continental expansion that crossed sectional lines and political parties.\" is incorrect: The author argues the reverse: the destiny was 'selective,' and Northern Whigs resisted because of slavery.",
+     "est_seconds": 60,
+     "facts": [
+      "Texas declared and won independence from Mexico in 1836.",
+      "The Senate rejected a Texas annexation treaty in 1844, and Congress approved annexation by joint resolution in early 1845."
+     ],
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 2,
+        "confidence": "certain"
+       },
+       {
+        "choice": 2,
+        "confidence": "certain"
+       }
+      ],
+      "panel_choice": 2,
+      "score": 1,
+      "band": "high"
+     }
+    },
+    {
+     "archetype": "ush_u504_4B",
+     "topic": "5.1",
+     "skill": "4.B",
+     "stem": "The debate over Texas described in the excerpt is best understood as part of which broader context?",
+     "options": [
+      {
+       "text": "An overseas expansionist movement that ended in the annexation of Hawaii and the acquisition of the Philippines after war with Spain in 1898",
+       "why": "That overseas imperialism came half a century later, in the Gilded Age and Progressive era, and had different causes.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "A wave of canal and turnpike building, encouraged by state governments, that tied Western farmers to Eastern markets during the Market Revolution",
+       "why": "Transportation improvements were part of the era, but they do not explain a debate over adding a slave state.",
+       "value": null,
+       "label": "unrelated_development"
+      },
+      {
+       "text": "A rising nativist movement opposed to Irish and German Catholic immigrants that later produced the American, or Know-Nothing, Party of the 1850s",
+       "why": "Nativism was real in this period, but it was not the setting for a debate centered on slavery and the balance of sectional power.",
+       "value": null,
+       "label": "unrelated_development"
+      },
+      {
+       "text": "A continuing national conflict over the spread of slavery into new territories that had already flared during the Missouri crisis of 1819 to 1820",
+       "why": "Northern fears about the Senate balance over Texas echoed the Missouri crisis. That crisis ended with the Missouri Compromise of 1820, which balanced slave and free states and drew a line for slavery in the Louisiana Purchase lands.",
+       "value": null,
+       "label": "key"
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is \"A continuing national conflict over the spread of slavery into new territories that had already flared during the Missouri crisis of 1819 to 1820\". Northern fears about the Senate balance over Texas echoed the Missouri crisis. That crisis ended with the Missouri Compromise of 1820, which balanced slave and free states and drew a line for slavery in the Louisiana Purchase lands.\n\"An overseas expansionist movement that ended in the annexation of Hawaii and the acquisition of the Philippines after war with Spain in 1898\" is incorrect: That overseas imperialism came half a century later, in the Gilded Age and Progressive era, and had different causes.\n\"A wave of canal and turnpike building, encouraged by state governments, that tied Western farmers to Eastern markets during the Market Revolution\" is incorrect: Transportation improvements were part of the era, but they do not explain a debate over adding a slave state.\n\"A rising nativist movement opposed to Irish and German Catholic immigrants that later produced the American, or Know-Nothing, Party of the 1850s\" is incorrect: Nativism was real in this period, but it was not the setting for a debate centered on slavery and the balance of sectional power.",
+     "est_seconds": 60,
+     "facts": [
+      "The Missouri Compromise of 1820 admitted Missouri as a slave state and Maine as a free state and banned slavery in the Louisiana Purchase north of 36 degrees 30 minutes, except in Missouri."
+     ],
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 3,
+        "confidence": "certain"
+       },
+       {
+        "choice": 3,
+        "confidence": "certain"
+       }
+      ],
+      "panel_choice": 3,
+      "score": 1,
+      "band": "high"
+     }
+    },
+    {
+     "archetype": "ush_u504_1B",
+     "topic": "5.3",
+     "skill": "1.B",
+     "stem": "Which of the following best explains how the annexation of Texas contributed to the Mexican-American War?",
+     "options": [
+      {
+       "text": "The United States backed the Texan claim that the Rio Grande was the border, while Mexico, which never recognized Texas independence, rejected it.",
+       "why": "Mexico never accepted the loss of Texas. When Polk sent troops into the land between the Nueces River and the Rio Grande, the clash there in 1846 led to a declaration of war.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "Annexation started a war with Great Britain over Oregon that pulled Mexico in as a British ally, which widened the conflict across the West.",
+       "why": "The Oregon question was settled peacefully by treaty with Britain in 1846. Britain did not ally with Mexico in a war.",
+       "value": null,
+       "label": "unrelated_development"
+      },
+      {
+       "text": "Congress made Texas a free state in the Compromise of 1850 to end the war, which pleased Mexico and settled the conflict over the borderlands.",
+       "why": "Texas entered as a slave state in 1845. The Compromise of 1850 came after the war ended in 1848 and settled Texas's dispute with New Mexico over territory.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "Mexico declared war at once after Texas joined the Union, because Mexican leaders believed slavery in Texas threatened their own northern provinces.",
+       "why": "Mexico broke off diplomatic relations, but fighting began only after U.S. troops moved into the disputed border zone in 1846. The war came from the boundary dispute, not from a sudden Mexican declaration about slavery.",
+       "value": null,
+       "label": "misattributed"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is \"The United States backed the Texan claim that the Rio Grande was the border, while Mexico, which never recognized Texas independence, rejected it.\". Mexico never accepted the loss of Texas. When Polk sent troops into the land between the Nueces River and the Rio Grande, the clash there in 1846 led to a declaration of war.\n\"Annexation started a war with Great Britain over Oregon that pulled Mexico in as a British ally, which widened the conflict across the West.\" is incorrect: The Oregon question was settled peacefully by treaty with Britain in 1846. Britain did not ally with Mexico in a war.\n\"Congress made Texas a free state in the Compromise of 1850 to end the war, which pleased Mexico and settled the conflict over the borderlands.\" is incorrect: Texas entered as a slave state in 1845. The Compromise of 1850 came after the war ended in 1848 and settled Texas's dispute with New Mexico over territory.\n\"Mexico declared war at once after Texas joined the Union, because Mexican leaders believed slavery in Texas threatened their own northern provinces.\" is incorrect: Mexico broke off diplomatic relations, but fighting began only after U.S. troops moved into the disputed border zone in 1846. The war came from the boundary dispute, not from a sudden Mexican declaration about slavery.",
+     "est_seconds": 60,
+     "facts": [
+      "Fighting between U.S. and Mexican troops in the disputed area between the Nueces River and the Rio Grande in 1846 led Congress to declare war on Mexico.",
+      "The Treaty of Guadalupe Hidalgo (1848) ended the war and set the Rio Grande as the Texas boundary.",
+      "The Oregon boundary dispute with Britain was settled by treaty in 1846 at the 49th parallel."
+     ],
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 0,
+        "confidence": "certain"
+       },
+       {
+        "choice": 0,
+        "confidence": "certain"
+       }
+      ],
+      "panel_choice": 0,
+      "score": 1,
+      "band": "high"
+     }
+    }
+   ],
+   "excluded_items": [
+    {
+     "index": 1,
+     "skill": "3.D",
+     "reasons": [
+      "distractor_labels_not_diverse",
+      "key_is_longest_option",
+      "solver_disagreement_or_missing",
+      "panel_missing"
+     ]
+    }
+   ]
+  }
+ },
+ {
+  "cellId": "ap_us_history-u605",
+  "apSubjectCode": "ap_us_history",
+  "kind": "mc",
+  "calculator": "na",
+  "reserve": false,
+  "wording": "generated",
+  "candidateKey": "ap_us_history-u605-k0",
+  "keywordCode": "6.1",
+  "unitCode": "6",
+  "skillPrimary": "1.B",
+  "structure": "shared_stimulus_set",
+  "archetype": "ush_u605",
+  "reviewState": "rejected",
+  "rejectionReason": "fewer_than_3_items_passed; excluded=[{\"index\":0,\"skill\":\"1.B\",\"reasons\":[\"solver_disagreement_or_missing\",\"panel_missing\"]},{\"index\":1,\"skill\":\"3.A\",\"reasons\":[\"solver_disagreement_or_missing\",\"panel_missing\"]},{\"index\":2,\"skill\":\"4.A\",\"reasons\":[\"distractor_labels_not_diverse\",\"number_1800_not_in_data\",\"solver_disagreement_or_missing\",\"panel_missing\"]},{\"index\":3,\"skill\":\"5.B\",\"reasons\":[\"distractor_labels_not_diverse\",\"number_1920_not_in_data\",\"number_1930_not_in_data\",\"solver_disagreement_or_missing\",\"panel_missing\"]}]",
+  "difficultyProvisional": null,
+  "payload": {
+   "archetype": "ush_u605",
+   "spec": {
+    "id": "u605",
+    "period": 6,
+    "stim": "quantitative",
+    "theme": "Social Gospel and settlement houses",
+    "skills": [
+     "1.B",
+     "3.A",
+     "4.A",
+     "5.B"
+    ],
+    "nItems": 4,
+    "seed": 14394
+   },
+   "excluded_items": [
+    {
+     "index": 0,
+     "skill": "1.B",
+     "reasons": [
+      "solver_disagreement_or_missing",
+      "panel_missing"
+     ]
+    },
+    {
+     "index": 1,
+     "skill": "3.A",
+     "reasons": [
+      "solver_disagreement_or_missing",
+      "panel_missing"
+     ]
+    },
+    {
+     "index": 2,
+     "skill": "4.A",
+     "reasons": [
+      "distractor_labels_not_diverse",
+      "number_1800_not_in_data",
+      "solver_disagreement_or_missing",
+      "panel_missing"
+     ]
+    },
+    {
+     "index": 3,
+     "skill": "5.B",
+     "reasons": [
+      "distractor_labels_not_diverse",
+      "number_1920_not_in_data",
+      "number_1930_not_in_data",
+      "solver_disagreement_or_missing",
+      "panel_missing"
+     ]
+    }
+   ]
+  }
+ },
+ {
+  "cellId": "ap_us_history-u706",
+  "apSubjectCode": "ap_us_history",
+  "kind": "mc",
+  "calculator": "na",
+  "reserve": false,
+  "wording": "generated",
+  "candidateKey": "ap_us_history-u706-k0",
+  "keywordCode": "7.1",
+  "unitCode": "7",
+  "skillPrimary": "3.B",
+  "structure": "shared_stimulus_set",
+  "archetype": "ush_u706",
+  "reviewState": "rejected",
+  "rejectionReason": "key_is_longest_in_2_items; excluded=[{\"index\":0,\"skill\":\"3.B\",\"reasons\":[\"solver_disagreement_or_missing\",\"panel_missing\",\"set_gate_failed\"]},{\"index\":1,\"skill\":\"3.D\",\"reasons\":[\"key_is_longest_option\",\"solver_disagreement_or_missing\",\"panel_missing\",\"set_gate_failed\"]},{\"index\":2,\"skill\":\"4.A\",\"reasons\":[\"distractor_labels_not_diverse\",\"key_is_longest_option\",\"solver_disagreement_or_missing\",\"panel_missing\",\"set_gate_failed\"]},{\"index\":3,\"skill\":\"5.B\",\"reasons\":[\"solver_disagreement_or_missing\",\"panel_missing\",\"set_gate_failed\"]}]",
+  "difficultyProvisional": null,
+  "payload": {
+   "archetype": "ush_u706",
+   "spec": {
+    "id": "u706",
+    "period": 7,
+    "stim": "secondary_text",
+    "theme": "Harlem Renaissance",
+    "skills": [
+     "3.B",
+     "3.D",
+     "4.A",
+     "5.B"
+    ],
+    "nItems": 4,
+    "seed": 35016
+   },
+   "excluded_items": [
+    {
+     "index": 0,
+     "skill": "3.B",
+     "reasons": [
+      "solver_disagreement_or_missing",
+      "panel_missing",
+      "set_gate_failed"
+     ]
+    },
+    {
+     "index": 1,
+     "skill": "3.D",
+     "reasons": [
+      "key_is_longest_option",
+      "solver_disagreement_or_missing",
+      "panel_missing",
+      "set_gate_failed"
+     ]
+    },
+    {
+     "index": 2,
+     "skill": "4.A",
+     "reasons": [
+      "distractor_labels_not_diverse",
+      "key_is_longest_option",
+      "solver_disagreement_or_missing",
+      "panel_missing",
+      "set_gate_failed"
+     ]
+    },
+    {
+     "index": 3,
+     "skill": "5.B",
+     "reasons": [
+      "solver_disagreement_or_missing",
+      "panel_missing",
+      "set_gate_failed"
+     ]
+    }
+   ]
+  }
+ },
+ {
+  "cellId": "ap_us_history-u807",
+  "apSubjectCode": "ap_us_history",
+  "kind": "mc",
+  "calculator": "na",
+  "reserve": false,
+  "wording": "generated",
+  "candidateKey": "ap_us_history-u807-k0",
+  "keywordCode": "8.1",
+  "unitCode": "8",
+  "skillPrimary": "2.A",
+  "structure": "shared_stimulus_set",
+  "archetype": "ush_u807",
+  "reviewState": "rejected",
+  "rejectionReason": "key_is_longest_in_2_items; excluded=[{\"index\":0,\"skill\":\"2.A\",\"reasons\":[\"solver_disagreement_or_missing\",\"panel_missing\",\"set_gate_failed\"]},{\"index\":1,\"skill\":\"3.A\",\"reasons\":[\"key_is_longest_option\",\"solver_disagreement_or_missing\",\"panel_missing\",\"set_gate_failed\"]},{\"index\":2,\"skill\":\"4.B\",\"reasons\":[\"distractor_labels_not_diverse\",\"solver_disagreement_or_missing\",\"panel_missing\",\"set_gate_failed\"]},{\"index\":3,\"skill\":\"5.B\",\"reasons\":[\"key_is_longest_option\",\"solver_disagreement_or_missing\",\"panel_missing\",\"set_gate_failed\"]}]",
+  "difficultyProvisional": null,
+  "payload": {
+   "archetype": "ush_u807",
+   "spec": {
+    "id": "u807",
+    "period": 8,
+    "stim": "primary_text",
+    "theme": "Montgomery bus boycott and nonviolent direct action",
+    "skills": [
+     "2.A",
+     "3.A",
+     "4.B",
+     "5.B"
+    ],
+    "nItems": 4,
+    "seed": 16210
+   },
+   "excluded_items": [
+    {
+     "index": 0,
+     "skill": "2.A",
+     "reasons": [
+      "solver_disagreement_or_missing",
+      "panel_missing",
+      "set_gate_failed"
+     ]
+    },
+    {
+     "index": 1,
+     "skill": "3.A",
+     "reasons": [
+      "key_is_longest_option",
+      "solver_disagreement_or_missing",
+      "panel_missing",
+      "set_gate_failed"
+     ]
+    },
+    {
+     "index": 2,
+     "skill": "4.B",
+     "reasons": [
+      "distractor_labels_not_diverse",
+      "solver_disagreement_or_missing",
+      "panel_missing",
+      "set_gate_failed"
+     ]
+    },
+    {
+     "index": 3,
+     "skill": "5.B",
+     "reasons": [
+      "key_is_longest_option",
+      "solver_disagreement_or_missing",
+      "panel_missing",
+      "set_gate_failed"
+     ]
+    }
+   ]
+  }
+ },
+ {
+  "cellId": "ap_us_history-u908",
+  "apSubjectCode": "ap_us_history",
+  "kind": "mc",
+  "calculator": "na",
+  "reserve": false,
+  "wording": "generated",
+  "candidateKey": "ap_us_history-u908-k0",
+  "keywordCode": "9.1",
+  "unitCode": "9",
+  "skillPrimary": "2.A",
+  "structure": "shared_stimulus_set",
+  "archetype": "ush_u908",
+  "reviewState": "rejected",
+  "rejectionReason": "fewer_than_3_items_passed; excluded=[{\"index\":0,\"skill\":\"2.A\",\"reasons\":[\"solver_disagreement_or_missing\",\"panel_missing\"]},{\"index\":1,\"skill\":\"3.A\",\"reasons\":[\"distractor_labels_not_diverse\",\"solver_disagreement_or_missing\",\"panel_missing\"]},{\"index\":2,\"skill\":\"4.A\",\"reasons\":[\"distractor_labels_not_diverse\",\"key_is_longest_option\",\"solver_disagreement_or_missing\",\"panel_missing\"]},{\"index\":3,\"skill\":\"1.B\",\"reasons\":[\"distractor_labels_not_diverse\",\"solver_disagreement_or_missing\",\"panel_missing\"]}]",
+  "difficultyProvisional": null,
+  "payload": {
+   "archetype": "ush_u908",
+   "spec": {
+    "id": "u908",
+    "period": 9,
+    "stim": "primary_text",
+    "theme": "Reagan-era conservatism and tax policy",
+    "skills": [
+     "2.A",
+     "3.A",
+     "4.A",
+     "1.B"
+    ],
+    "nItems": 4,
+    "seed": 47727
+   },
+   "excluded_items": [
+    {
+     "index": 0,
+     "skill": "2.A",
+     "reasons": [
+      "solver_disagreement_or_missing",
+      "panel_missing"
+     ]
+    },
+    {
+     "index": 1,
+     "skill": "3.A",
+     "reasons": [
+      "distractor_labels_not_diverse",
+      "solver_disagreement_or_missing",
+      "panel_missing"
+     ]
+    },
+    {
+     "index": 2,
+     "skill": "4.A",
+     "reasons": [
+      "distractor_labels_not_diverse",
+      "key_is_longest_option",
+      "solver_disagreement_or_missing",
+      "panel_missing"
+     ]
+    },
+    {
+     "index": 3,
+     "skill": "1.B",
+     "reasons": [
+      "distractor_labels_not_diverse",
+      "solver_disagreement_or_missing",
+      "panel_missing"
+     ]
+    }
+   ]
+  }
+ }
+]

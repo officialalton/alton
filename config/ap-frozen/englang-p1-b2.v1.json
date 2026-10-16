@@ -1,0 +1,75 @@
+{
+ "version": "v1-englang-p1-b2",
+ "run": "englang-p1-b2",
+ "subject": "ap_english_language",
+ "mode": "frq",
+ "capUsd": 4,
+ "hardStopCumulativeUsd": 125,
+ "myTotalCapUsd": 24,
+ "syncStages": [],
+ "stages": [
+  "frq-gen",
+  "frq-samples",
+  "frq-grade",
+  "frq-finalize"
+ ],
+ "frqPlan": [
+  {
+   "id": "fa1",
+   "type": "synthesis",
+   "theme": "whether towns should replace several small public libraries with one shared regional hub",
+   "seed": 9201
+  },
+  {
+   "id": "fa2",
+   "type": "rhetorical_analysis",
+   "theme": "a retired harbor pilot's address to a coastal town about keeping a working waterfront",
+   "seed": 9202
+  },
+  {
+   "id": "fa3",
+   "type": "argument",
+   "theme": "the value of requiring students to learn a hand craft in an age of automation",
+   "seed": 9203
+  }
+ ],
+ "models": {
+  "gen": "claude-fable-5-1",
+  "solvers": [
+   "claude-opus-5-5",
+   "claude-sonnet-5-5",
+   "claude-fable-5-1"
+  ],
+  "adversary": "claude-fable-5-1",
+  "judge": "claude-opus-5-5",
+  "review": "claude-sonnet-5-5",
+  "sampleHigh": "claude-opus-5-5",
+  "sampleLow": "claude-sonnet-5-5",
+  "graders": [
+   "claude-opus-5-5",
+   "claude-sonnet-5-5",
+   "claude-fable-5-1"
+  ]
+ },
+ "effort": "medium",
+ "minKeyConfidence": 0.8,
+ "generatorFiles": [
+  "lib/ap-generation/englang-gates.ts",
+  "lib/ap-generation/englang-frq.ts",
+  "lib/ap-generation/englang-plan.ts",
+  "lib/ap-generation/englang-prompts.ts",
+  "lib/ap-generation/english-text-stats.ts",
+  "lib/ap-generation/subjects/englang.ts",
+  "lib/ap-exam/elang-rules.ts",
+  "scripts/ap-generation/englang-pipeline.ts",
+  "scripts/mock-exam-generation/batch-lib.ts"
+ ],
+ "expected": {
+  "hash": "057cb924349f"
+ },
+ "corpusExclude": [
+  "englang-p1-b",
+  "englang-p1-a"
+ ],
+ "gradeEffort": "low"
+}

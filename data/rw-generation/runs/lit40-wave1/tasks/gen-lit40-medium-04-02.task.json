@@ -1,0 +1,1044 @@
+{
+ "schema": "rw-session-task/v1",
+ "kind": "generate",
+ "runId": "lit40-wave1",
+ "taskId": "gen-lit40-medium-04-02",
+ "chunkId": "gen-lit40-medium-04-02",
+ "batchId": "lit40-medium-04",
+ "attempt": 0,
+ "suggestedModel": "opus",
+ "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/gen-lit40-medium-04-02.result.json",
+ "outputSchema": {
+  "chunkId": "작업 파일의 chunkId 를 그대로",
+  "model": "당신의 모델 이름(예: opus)",
+  "items": [
+   {
+    "candidateId": "후보의 candidateId 를 그대로",
+    "passage": "영어 지문(문항의 질문은 넣지 않는다)",
+    "question": "영어 질문 한 문장",
+    "options": [
+     "선택지 A",
+     "선택지 B",
+     "선택지 C",
+     "선택지 D"
+    ],
+    "correct_letter": "A|B|C|D (targetLetter 와 같게)",
+    "explanation": "한국어 해설 3~5문장",
+    "tone": [
+     "지문 어조 영어 단어 1~3개"
+    ],
+    "devices": [
+     "쓰인 문학 장치 영어 단어"
+    ],
+    "declaration": {
+     "original": true,
+     "noRealWorkQuoted": true,
+     "noCopyrightedSource": true
+    }
+   }
+  ]
+ },
+ "candidates": [
+  {
+   "candidateId": "lit40-medium-04-021",
+   "route": "ai_passage",
+   "skill": "words_in_context",
+   "difficulty": "medium",
+   "questionType": "word_in_context",
+   "genre": "fable_or_folktale_retelling",
+   "targetLetter": "B",
+   "words": {
+    "min": 60,
+    "max": 220
+   },
+   "recipeId": null,
+   "spec": {
+    "candidateId": "lit40-medium-04-021",
+    "batchId": "lit40-medium-04",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "medium",
+    "questionType": "word_in_context",
+    "genre": "fable_or_folktale_retelling",
+    "seed": {
+     "index": 20,
+     "genre": "fable_or_folktale_retelling",
+     "pov": "first",
+     "styleEra": "early_20c",
+     "names": [
+      "Dmitri",
+      "Jakub"
+     ],
+     "nameCultures": [
+      "slavic_baltic",
+      "slavic_baltic"
+     ],
+     "locale": "Tbilisi",
+     "setting": "a train compartment",
+     "relationship": "a violin student and an exacting teacher",
+     "conflict": "about whether to forgive",
+     "openingStyle": "감각 묘사(소리·냄새·촉감)로 시작",
+     "topicSeed": "a train compartment in Tbilisi; a violin student and an exacting teacher about whether to forgive"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a train compartment in Tbilisi; a violin student and an exacting teacher about whether to forgive\n인물 이름: Dmitri, Jakub 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 감각 묘사(소리·냄새·촉감)로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 B 에 둔다. correct_letter 는 B 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 B 로 정한 뒤 나머지 선택지를 채운다."
+  },
+  {
+   "candidateId": "lit40-medium-04-022",
+   "route": "ai_passage",
+   "skill": "text_structure_purpose",
+   "difficulty": "medium",
+   "questionType": "tone_shift",
+   "genre": "short_story",
+   "targetLetter": "A",
+   "words": {
+    "min": 60,
+    "max": 220
+   },
+   "recipeId": null,
+   "spec": {
+    "candidateId": "lit40-medium-04-022",
+    "batchId": "lit40-medium-04",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "medium",
+    "questionType": "tone_shift",
+    "genre": "short_story",
+    "seed": {
+     "index": 21,
+     "genre": "short_story",
+     "pov": "first",
+     "styleEra": "early_20c",
+     "names": [
+      "Takeshi",
+      "Kenji"
+     ],
+     "nameCultures": [
+      "japanese",
+      "japanese"
+     ],
+     "locale": "Kyoto",
+     "setting": "a hillside terrace",
+     "relationship": "two strangers sharing a delay",
+     "conflict": "over a recipe that was never written down",
+     "openingStyle": "장소 이름으로 시작",
+     "topicSeed": "a hillside terrace in Kyoto; two strangers sharing a delay over a recipe that was never written down"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a hillside terrace in Kyoto; two strangers sharing a delay over a recipe that was never written down\n인물 이름: Takeshi, Kenji 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 장소 이름으로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 A 에 둔다. correct_letter 는 A 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 A 로 정한 뒤 나머지 선택지를 채운다."
+  },
+  {
+   "candidateId": "lit40-medium-04-023",
+   "route": "ai_passage",
+   "skill": "text_structure_purpose",
+   "difficulty": "medium",
+   "questionType": "tone_shift",
+   "genre": "novel_excerpt",
+   "targetLetter": "B",
+   "words": {
+    "min": 60,
+    "max": 220
+   },
+   "recipeId": null,
+   "spec": {
+    "candidateId": "lit40-medium-04-023",
+    "batchId": "lit40-medium-04",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "medium",
+    "questionType": "tone_shift",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 22,
+     "genre": "novel_excerpt",
+     "pov": "third_limited",
+     "styleEra": "19c",
+     "names": [
+      "Kamal",
+      "Shamsuddin"
+     ],
+     "nameCultures": [
+      "south_asian_muslim_sri_lankan",
+      "south_asian_muslim_sri_lankan"
+     ],
+     "locale": "Colombo",
+     "setting": "a fishing harbor",
+     "relationship": "a mayor and the town's only doctor",
+     "conflict": "over an invitation one of them refuses",
+     "openingStyle": "감각 묘사(소리·냄새·촉감)로 시작",
+     "topicSeed": "a fishing harbor in Colombo; a mayor and the town's only doctor over an invitation one of them refuses"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a fishing harbor in Colombo; a mayor and the town's only doctor over an invitation one of them refuses\n인물 이름: Kamal, Shamsuddin 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 감각 묘사(소리·냄새·촉감)로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 B 에 둔다. correct_letter 는 B 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 B 로 정한 뒤 나머지 선택지를 채운다."
+  },
+  {
+   "candidateId": "lit40-medium-04-024",
+   "route": "ai_passage",
+   "skill": "text_structure_purpose",
+   "difficulty": "medium",
+   "questionType": "tone_shift",
+   "genre": "poetry",
+   "targetLetter": "C",
+   "words": {
+    "min": 60,
+    "max": 220
+   },
+   "recipeId": null,
+   "spec": {
+    "candidateId": "lit40-medium-04-024",
+    "batchId": "lit40-medium-04",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "medium",
+    "questionType": "tone_shift",
+    "genre": "poetry",
+    "seed": {
+     "index": 23,
+     "genre": "poetry",
+     "pov": "first",
+     "styleEra": "19c",
+     "names": [
+      "Rashid",
+      "Callum"
+     ],
+     "nameCultures": [
+      "arabic_levantine",
+      "irish_scottish"
+     ],
+     "locale": "Glasgow",
+     "setting": "a quiet library",
+     "relationship": "a mother and a daughter planning a wedding",
+     "conflict": "over a repair that could never really fix it",
+     "openingStyle": "숫자·목록·규칙을 말하며 시작",
+     "topicSeed": "a quiet library in Glasgow; a mother and a daughter planning a wedding over a repair that could never really fix it"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a quiet library in Glasgow; a mother and a daughter planning a wedding over a repair that could never really fix it\n인물 이름: Rashid, Callum 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 숫자·목록·규칙을 말하며 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 C 에 둔다. correct_letter 는 C 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 C 로 정한 뒤 나머지 선택지를 채운다."
+  },
+  {
+   "candidateId": "lit40-medium-04-025",
+   "route": "ai_passage",
+   "skill": "text_structure_purpose",
+   "difficulty": "medium",
+   "questionType": "tone_shift",
+   "genre": "drama",
+   "targetLetter": "D",
+   "words": {
+    "min": 60,
+    "max": 220
+   },
+   "recipeId": null,
+   "spec": {
+    "candidateId": "lit40-medium-04-025",
+    "batchId": "lit40-medium-04",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "medium",
+    "questionType": "tone_shift",
+    "genre": "drama",
+    "seed": {
+     "index": 24,
+     "genre": "drama",
+     "pov": "mixed_or_none",
+     "styleEra": "early_20c",
+     "names": [
+      "Lan",
+      "Albert"
+     ],
+     "nameCultures": [
+      "southeast_asian",
+      "english"
+     ],
+     "locale": "Surabaya",
+     "setting": "a hospital waiting room",
+     "relationship": "a retired sailor and his neighbor",
+     "conflict": "after a teacher's remark that changed everything",
+     "openingStyle": "대화 한 줄로 시작",
+     "topicSeed": "a hospital waiting room in Surabaya; a retired sailor and his neighbor after a teacher's remark that changed everything"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a hospital waiting room in Surabaya; a retired sailor and his neighbor after a teacher's remark that changed everything\n인물 이름: Lan, Albert 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 대화 한 줄로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 D 에 둔다. correct_letter 는 D 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 D 로 정한 뒤 나머지 선택지를 채운다."
+  },
+  {
+   "candidateId": "lit40-medium-04-026",
+   "route": "ai_passage",
+   "skill": "text_structure_purpose",
+   "difficulty": "medium",
+   "questionType": "tone_shift",
+   "genre": "personal_essay",
+   "targetLetter": "A",
+   "words": {
+    "min": 60,
+    "max": 220
+   },
+   "recipeId": null,
+   "spec": {
+    "candidateId": "lit40-medium-04-026",
+    "batchId": "lit40-medium-04",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "medium",
+    "questionType": "tone_shift",
+    "genre": "personal_essay",
+    "seed": {
+     "index": 25,
+     "genre": "personal_essay",
+     "pov": "mixed_or_none",
+     "styleEra": "late_20c",
+     "names": [
+      "Weiqi",
+      "Faris"
+     ],
+     "nameCultures": [
+      "chinese",
+      "arabic_levantine"
+     ],
+     "locale": "Beirut",
+     "setting": "a kite-maker's yard",
+     "relationship": "a landlord and a long-term tenant",
+     "conflict": "over whether to sell a shared inheritance",
+     "openingStyle": "짧은 단언문으로 시작",
+     "topicSeed": "a kite-maker's yard in Beirut; a landlord and a long-term tenant over whether to sell a shared inheritance"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a kite-maker's yard in Beirut; a landlord and a long-term tenant over whether to sell a shared inheritance\n인물 이름: Weiqi, Faris 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 짧은 단언문으로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 A 에 둔다. correct_letter 는 A 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 A 로 정한 뒤 나머지 선택지를 채운다."
+  },
+  {
+   "candidateId": "lit40-medium-04-027",
+   "route": "ai_passage",
+   "skill": "text_structure_purpose",
+   "difficulty": "medium",
+   "questionType": "tone_shift",
+   "genre": "memoir",
+   "targetLetter": "B",
+   "words": {
+    "min": 60,
+    "max": 220
+   },
+   "recipeId": null,
+   "spec": {
+    "candidateId": "lit40-medium-04-027",
+    "batchId": "lit40-medium-04",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "medium",
+    "questionType": "tone_shift",
+    "genre": "memoir",
+    "seed": {
+     "index": 26,
+     "genre": "memoir",
+     "pov": "first",
+     "styleEra": "19c",
+     "names": [
+      "Mohan",
+      "Camryn"
+     ],
+     "nameCultures": [
+      "indian_subcontinent",
+      "african_american"
+     ],
+     "locale": "Mumbai",
+     "setting": "a metro platform",
+     "relationship": "a stepfather and his stepdaughter",
+     "conflict": "about a debt neither will mention",
+     "openingStyle": "과거를 회상하는 문장으로 시작('Years later', 'Once' 등)",
+     "topicSeed": "a metro platform in Mumbai; a stepfather and his stepdaughter about a debt neither will mention"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a metro platform in Mumbai; a stepfather and his stepdaughter about a debt neither will mention\n인물 이름: Mohan, Camryn 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 과거를 회상하는 문장으로 시작('Years later', 'Once' 등). 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 B 에 둔다. correct_letter 는 B 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 B 로 정한 뒤 나머지 선택지를 채운다."
+  },
+  {
+   "candidateId": "lit40-medium-04-028",
+   "route": "ai_passage",
+   "skill": "text_structure_purpose",
+   "difficulty": "medium",
+   "questionType": "tone_shift",
+   "genre": "letter",
+   "targetLetter": "C",
+   "words": {
+    "min": 60,
+    "max": 220
+   },
+   "recipeId": null,
+   "spec": {
+    "candidateId": "lit40-medium-04-028",
+    "batchId": "lit40-medium-04",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "medium",
+    "questionType": "tone_shift",
+    "genre": "letter",
+    "seed": {
+     "index": 27,
+     "genre": "letter",
+     "pov": "second",
+     "styleEra": "contemporary",
+     "names": [
+      "Isadora",
+      "Beatriz"
+     ],
+     "nameCultures": [
+      "portuguese_brazilian",
+      "portuguese_brazilian"
+     ],
+     "locale": "Lisbon",
+     "setting": "a shoe repair stall",
+     "relationship": "a teacher and a student who will not speak",
+     "conflict": "when someone returns after years without explaining",
+     "openingStyle": "시간·날짜 표현으로 시작('By', 'On', 'After' 등)",
+     "topicSeed": "a shoe repair stall in Lisbon; a teacher and a student who will not speak when someone returns after years without explaining"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a shoe repair stall in Lisbon; a teacher and a student who will not speak when someone returns after years without explaining\n인물 이름: Isadora, Beatriz 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 시간·날짜 표현으로 시작('By', 'On', 'After' 등). 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 C 에 둔다. correct_letter 는 C 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 C 로 정한 뒤 나머지 선택지를 채운다."
+  },
+  {
+   "candidateId": "lit40-medium-04-029",
+   "route": "ai_passage",
+   "skill": "text_structure_purpose",
+   "difficulty": "medium",
+   "questionType": "text_structure",
+   "genre": "short_story",
+   "targetLetter": "D",
+   "words": {
+    "min": 60,
+    "max": 220
+   },
+   "recipeId": null,
+   "spec": {
+    "candidateId": "lit40-medium-04-029",
+    "batchId": "lit40-medium-04",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "medium",
+    "questionType": "text_structure",
+    "genre": "short_story",
+    "seed": {
+     "index": 28,
+     "genre": "short_story",
+     "pov": "third_limited",
+     "styleEra": "late_20c",
+     "names": [
+      "Ishaan",
+      "Arjun"
+     ],
+     "nameCultures": [
+      "indian_subcontinent",
+      "indian_subcontinent"
+     ],
+     "locale": "Dhaka",
+     "setting": "a ship's galley",
+     "relationship": "a grandmother and her grandson",
+     "conflict": "over silence kept to protect someone",
+     "openingStyle": "의문문으로 시작",
+     "topicSeed": "a ship's galley in Dhaka; a grandmother and her grandson over silence kept to protect someone"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a ship's galley in Dhaka; a grandmother and her grandson over silence kept to protect someone\n인물 이름: Ishaan, Arjun 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 의문문으로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 D 에 둔다. correct_letter 는 D 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 D 로 정한 뒤 나머지 선택지를 채운다."
+  },
+  {
+   "candidateId": "lit40-medium-04-030",
+   "route": "ai_passage",
+   "skill": "text_structure_purpose",
+   "difficulty": "medium",
+   "questionType": "text_structure",
+   "genre": "novel_excerpt",
+   "targetLetter": "A",
+   "words": {
+    "min": 60,
+    "max": 220
+   },
+   "recipeId": null,
+   "spec": {
+    "candidateId": "lit40-medium-04-030",
+    "batchId": "lit40-medium-04",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "medium",
+    "questionType": "text_structure",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 29,
+     "genre": "novel_excerpt",
+     "pov": "first",
+     "styleEra": "19c",
+     "names": [
+      "Siti",
+      "Nguyen"
+     ],
+     "nameCultures": [
+      "southeast_asian",
+      "southeast_asian"
+     ],
+     "locale": "Hanoi",
+     "setting": "a seed-saving cooperative",
+     "relationship": "a teenage cook and her stern aunt",
+     "conflict": "when a long silence is finally broken",
+     "openingStyle": "인물의 이름으로 시작",
+     "topicSeed": "a seed-saving cooperative in Hanoi; a teenage cook and her stern aunt when a long silence is finally broken"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a seed-saving cooperative in Hanoi; a teenage cook and her stern aunt when a long silence is finally broken\n인물 이름: Siti, Nguyen 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 인물의 이름으로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 A 에 둔다. correct_letter 는 A 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 A 로 정한 뒤 나머지 선택지를 채운다."
+  },
+  {
+   "candidateId": "lit40-medium-04-031",
+   "route": "ai_passage",
+   "skill": "text_structure_purpose",
+   "difficulty": "medium",
+   "questionType": "text_structure",
+   "genre": "personal_essay",
+   "targetLetter": "B",
+   "words": {
+    "min": 60,
+    "max": 220
+   },
+   "recipeId": null,
+   "spec": {
+    "candidateId": "lit40-medium-04-031",
+    "batchId": "lit40-medium-04",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "medium",
+    "questionType": "text_structure",
+    "genre": "personal_essay",
+    "seed": {
+     "index": 30,
+     "genre": "personal_essay",
+     "pov": "mixed_or_none",
+     "styleEra": "contemporary",
+     "names": [
+      "Yoav",
+      "Marisol"
+     ],
+     "nameCultures": [
+      "hebrew_jewish",
+      "spanish_iberian"
+     ],
+     "locale": "Seville",
+     "setting": "a snowed-in cabin",
+     "relationship": "a father and his stubborn son",
+     "conflict": "over a shared chore that has become a ritual",
+     "openingStyle": "숫자·목록·규칙을 말하며 시작",
+     "topicSeed": "a snowed-in cabin in Seville; a father and his stubborn son over a shared chore that has become a ritual"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a snowed-in cabin in Seville; a father and his stubborn son over a shared chore that has become a ritual\n인물 이름: Yoav, Marisol 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 숫자·목록·규칙을 말하며 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 B 에 둔다. correct_letter 는 B 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 B 로 정한 뒤 나머지 선택지를 채운다."
+  },
+  {
+   "candidateId": "lit40-medium-04-032",
+   "route": "ai_passage",
+   "skill": "text_structure_purpose",
+   "difficulty": "medium",
+   "questionType": "text_structure",
+   "genre": "memoir",
+   "targetLetter": "C",
+   "words": {
+    "min": 60,
+    "max": 220
+   },
+   "recipeId": null,
+   "spec": {
+    "candidateId": "lit40-medium-04-032",
+    "batchId": "lit40-medium-04",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "medium",
+    "questionType": "text_structure",
+    "genre": "memoir",
+    "seed": {
+     "index": 31,
+     "genre": "memoir",
+     "pov": "third_omniscient",
+     "styleEra": "early_20c",
+     "names": [
+      "Dewi",
+      "Wira"
+     ],
+     "nameCultures": [
+      "southeast_asian",
+      "southeast_asian"
+     ],
+     "locale": "Chiang Mai",
+     "setting": "a radio repair shop",
+     "relationship": "an uncle and a nephew with a debt",
+     "conflict": "while rehearsing for an important performance",
+     "openingStyle": "구체적인 사물이나 동작으로 시작(관사 The 로 시작하지 말 것)",
+     "topicSeed": "a radio repair shop in Chiang Mai; an uncle and a nephew with a debt while rehearsing for an important performance"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a radio repair shop in Chiang Mai; an uncle and a nephew with a debt while rehearsing for an important performance\n인물 이름: Dewi, Wira 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 구체적인 사물이나 동작으로 시작(관사 The 로 시작하지 말 것). 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 C 에 둔다. correct_letter 는 C 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 C 로 정한 뒤 나머지 선택지를 채운다."
+  },
+  {
+   "candidateId": "lit40-medium-04-033",
+   "route": "ai_passage",
+   "skill": "text_structure_purpose",
+   "difficulty": "medium",
+   "questionType": "underlined_portion_function",
+   "genre": "short_story",
+   "targetLetter": "D",
+   "words": {
+    "min": 60,
+    "max": 220
+   },
+   "recipeId": null,
+   "spec": {
+    "candidateId": "lit40-medium-04-033",
+    "batchId": "lit40-medium-04",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "medium",
+    "questionType": "underlined_portion_function",
+    "genre": "short_story",
+    "seed": {
+     "index": 32,
+     "genre": "short_story",
+     "pov": "first",
+     "styleEra": "contemporary",
+     "names": [
+      "Malek",
+      "Lindiwe"
+     ],
+     "nameCultures": [
+      "arabic_levantine",
+      "east_south_african"
+     ],
+     "locale": "Marrakesh",
+     "setting": "a salt flat",
+     "relationship": "a foreman and a young hire",
+     "conflict": "over a tool or instrument inherited by the wrong person",
+     "openingStyle": "짧은 단언문으로 시작",
+     "topicSeed": "a salt flat in Marrakesh; a foreman and a young hire over a tool or instrument inherited by the wrong person"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a salt flat in Marrakesh; a foreman and a young hire over a tool or instrument inherited by the wrong person\n인물 이름: Malek, Lindiwe 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 짧은 단언문으로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 D 에 둔다. correct_letter 는 D 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 D 로 정한 뒤 나머지 선택지를 채운다."
+  },
+  {
+   "candidateId": "lit40-medium-04-034",
+   "route": "ai_passage",
+   "skill": "text_structure_purpose",
+   "difficulty": "medium",
+   "questionType": "underlined_portion_function",
+   "genre": "novel_excerpt",
+   "targetLetter": "A",
+   "words": {
+    "min": 60,
+    "max": 220
+   },
+   "recipeId": null,
+   "spec": {
+    "candidateId": "lit40-medium-04-034",
+    "batchId": "lit40-medium-04",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "medium",
+    "questionType": "underlined_portion_function",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 33,
+     "genre": "novel_excerpt",
+     "pov": "first",
+     "styleEra": "late_20c",
+     "names": [
+      "Seoyeon",
+      "Hassan"
+     ],
+     "nameCultures": [
+      "korean",
+      "south_asian_muslim_sri_lankan"
+     ],
+     "locale": "Lagos",
+     "setting": "a dried-riverbed crossing",
+     "relationship": "a widow and the delivery boy",
+     "conflict": "about what to tell a younger sibling",
+     "openingStyle": "의문문으로 시작",
+     "topicSeed": "a dried-riverbed crossing in Lagos; a widow and the delivery boy about what to tell a younger sibling"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a dried-riverbed crossing in Lagos; a widow and the delivery boy about what to tell a younger sibling\n인물 이름: Seoyeon, Hassan 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 의문문으로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 A 에 둔다. correct_letter 는 A 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 A 로 정한 뒤 나머지 선택지를 채운다."
+  },
+  {
+   "candidateId": "lit40-medium-04-035",
+   "route": "ai_passage",
+   "skill": "text_structure_purpose",
+   "difficulty": "medium",
+   "questionType": "underlined_portion_function",
+   "genre": "personal_essay",
+   "targetLetter": "B",
+   "words": {
+    "min": 60,
+    "max": 220
+   },
+   "recipeId": null,
+   "spec": {
+    "candidateId": "lit40-medium-04-035",
+    "batchId": "lit40-medium-04",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "medium",
+    "questionType": "underlined_portion_function",
+    "genre": "personal_essay",
+    "seed": {
+     "index": 34,
+     "genre": "personal_essay",
+     "pov": "third_limited",
+     "styleEra": "early_20c",
+     "names": [
+      "Chiyo",
+      "Aiko"
+     ],
+     "nameCultures": [
+      "japanese",
+      "japanese"
+     ],
+     "locale": "Hokkaido",
+     "setting": "a night bus",
+     "relationship": "a farmer and a surveyor from the city",
+     "conflict": "over a promise made to a child",
+     "openingStyle": "대화 한 줄로 시작",
+     "topicSeed": "a night bus in Hokkaido; a farmer and a surveyor from the city over a promise made to a child"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a night bus in Hokkaido; a farmer and a surveyor from the city over a promise made to a child\n인물 이름: Chiyo, Aiko 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 대화 한 줄로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 B 에 둔다. correct_letter 는 B 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 B 로 정한 뒤 나머지 선택지를 채운다."
+  },
+  {
+   "candidateId": "lit40-medium-04-036",
+   "route": "ai_passage",
+   "skill": "text_structure_purpose",
+   "difficulty": "medium",
+   "questionType": "underlined_portion_function",
+   "genre": "memoir",
+   "targetLetter": "C",
+   "words": {
+    "min": 60,
+    "max": 220
+   },
+   "recipeId": null,
+   "spec": {
+    "candidateId": "lit40-medium-04-036",
+    "batchId": "lit40-medium-04",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "medium",
+    "questionType": "underlined_portion_function",
+    "genre": "memoir",
+    "seed": {
+     "index": 35,
+     "genre": "memoir",
+     "pov": "mixed_or_none",
+     "styleEra": "contemporary",
+     "names": [
+      "Darnell",
+      "Marcus"
+     ],
+     "nameCultures": [
+      "african_american",
+      "african_american"
+     ],
+     "locale": "the Mississippi Delta",
+     "setting": "a weaving cooperative",
+     "relationship": "twin brothers dividing a house",
+     "conflict": "while one of them is pretending not to be proud",
+     "openingStyle": "대명사 I 또는 We 로 시작",
+     "topicSeed": "a weaving cooperative in the Mississippi Delta; twin brothers dividing a house while one of them is pretending not to be proud"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a weaving cooperative in the Mississippi Delta; twin brothers dividing a house while one of them is pretending not to be proud\n인물 이름: Darnell, Marcus 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 대명사 I 또는 We 로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 C 에 둔다. correct_letter 는 C 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 C 로 정한 뒤 나머지 선택지를 채운다."
+  },
+  {
+   "candidateId": "lit40-medium-04-037",
+   "route": "ai_passage",
+   "skill": "central_ideas_details",
+   "difficulty": "medium",
+   "questionType": "narrator_attitude",
+   "genre": "short_story",
+   "targetLetter": "B",
+   "words": {
+    "min": 60,
+    "max": 220
+   },
+   "recipeId": null,
+   "spec": {
+    "candidateId": "lit40-medium-04-037",
+    "batchId": "lit40-medium-04",
+    "route": "ai_passage",
+    "skill": "central_ideas_details",
+    "difficulty": "medium",
+    "questionType": "narrator_attitude",
+    "genre": "short_story",
+    "seed": {
+     "index": 36,
+     "genre": "short_story",
+     "pov": "first",
+     "styleEra": "early_20c",
+     "names": [
+      "Thorvald",
+      "Freja"
+     ],
+     "nameCultures": [
+      "dutch_nordic",
+      "dutch_nordic"
+     ],
+     "locale": "Rotterdam",
+     "setting": "a summer camp dining hall",
+     "relationship": "a seamstress and her only apprentice",
+     "conflict": "while one of them quietly changes their mind",
+     "openingStyle": "구체적인 사물이나 동작으로 시작(관사 The 로 시작하지 말 것)",
+     "topicSeed": "a summer camp dining hall in Rotterdam; a seamstress and her only apprentice while one of them quietly changes their mind"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a summer camp dining hall in Rotterdam; a seamstress and her only apprentice while one of them quietly changes their mind\n인물 이름: Thorvald, Freja 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 구체적인 사물이나 동작으로 시작(관사 The 로 시작하지 말 것). 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 B 에 둔다. correct_letter 는 B 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 B 로 정한 뒤 나머지 선택지를 채운다."
+  },
+  {
+   "candidateId": "lit40-medium-04-038",
+   "route": "ai_passage",
+   "skill": "central_ideas_details",
+   "difficulty": "medium",
+   "questionType": "narrator_attitude",
+   "genre": "novel_excerpt",
+   "targetLetter": "C",
+   "words": {
+    "min": 60,
+    "max": 220
+   },
+   "recipeId": null,
+   "spec": {
+    "candidateId": "lit40-medium-04-038",
+    "batchId": "lit40-medium-04",
+    "route": "ai_passage",
+    "skill": "central_ideas_details",
+    "difficulty": "medium",
+    "questionType": "narrator_attitude",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 37,
+     "genre": "novel_excerpt",
+     "pov": "second",
+     "styleEra": "contemporary",
+     "names": [
+      "Seun",
+      "Ama"
+     ],
+     "nameCultures": [
+      "west_african",
+      "west_african"
+     ],
+     "locale": "Accra",
+     "setting": "a language school classroom",
+     "relationship": "a brother and sister reading their mother's letters",
+     "conflict": "over unequal sacrifices made in the past",
+     "openingStyle": "숫자·목록·규칙을 말하며 시작",
+     "topicSeed": "a language school classroom in Accra; a brother and sister reading their mother's letters over unequal sacrifices made in the past"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a language school classroom in Accra; a brother and sister reading their mother's letters over unequal sacrifices made in the past\n인물 이름: Seun, Ama 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 숫자·목록·규칙을 말하며 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 C 에 둔다. correct_letter 는 C 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 C 로 정한 뒤 나머지 선택지를 채운다."
+  },
+  {
+   "candidateId": "lit40-medium-04-039",
+   "route": "ai_passage",
+   "skill": "central_ideas_details",
+   "difficulty": "medium",
+   "questionType": "narrator_attitude",
+   "genre": "poetry",
+   "targetLetter": "D",
+   "words": {
+    "min": 60,
+    "max": 220
+   },
+   "recipeId": null,
+   "spec": {
+    "candidateId": "lit40-medium-04-039",
+    "batchId": "lit40-medium-04",
+    "route": "ai_passage",
+    "skill": "central_ideas_details",
+    "difficulty": "medium",
+    "questionType": "narrator_attitude",
+    "genre": "poetry",
+    "seed": {
+     "index": 38,
+     "genre": "poetry",
+     "pov": "first",
+     "styleEra": "contemporary",
+     "names": [
+      "Santiago",
+      "Renata"
+     ],
+     "nameCultures": [
+      "latin_american",
+      "latin_american"
+     ],
+     "locale": "Lima",
+     "setting": "a school gymnasium",
+     "relationship": "a mother-in-law and a new bride",
+     "conflict": "when an expected rival turns out to be an ally",
+     "openingStyle": "구체적인 사물이나 동작으로 시작(관사 The 로 시작하지 말 것)",
+     "topicSeed": "a school gymnasium in Lima; a mother-in-law and a new bride when an expected rival turns out to be an ally"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a school gymnasium in Lima; a mother-in-law and a new bride when an expected rival turns out to be an ally\n인물 이름: Santiago, Renata 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 구체적인 사물이나 동작으로 시작(관사 The 로 시작하지 말 것). 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 D 에 둔다. correct_letter 는 D 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 D 로 정한 뒤 나머지 선택지를 채운다."
+  },
+  {
+   "candidateId": "lit40-medium-04-040",
+   "route": "ai_passage",
+   "skill": "central_ideas_details",
+   "difficulty": "medium",
+   "questionType": "narrator_attitude",
+   "genre": "personal_essay",
+   "targetLetter": "A",
+   "words": {
+    "min": 60,
+    "max": 220
+   },
+   "recipeId": null,
+   "spec": {
+    "candidateId": "lit40-medium-04-040",
+    "batchId": "lit40-medium-04",
+    "route": "ai_passage",
+    "skill": "central_ideas_details",
+    "difficulty": "medium",
+    "questionType": "narrator_attitude",
+    "genre": "personal_essay",
+    "seed": {
+     "index": 39,
+     "genre": "personal_essay",
+     "pov": "first",
+     "styleEra": "late_20c",
+     "names": [
+      "Sergio",
+      "Chiara"
+     ],
+     "nameCultures": [
+      "spanish_iberian",
+      "italian"
+     ],
+     "locale": "Galicia",
+     "setting": "an apartment stairwell",
+     "relationship": "a returning soldier and his younger sister",
+     "conflict": "over how to mark an anniversary",
+     "openingStyle": "감각 묘사(소리·냄새·촉감)로 시작",
+     "topicSeed": "an apartment stairwell in Galicia; a returning soldier and his younger sister over how to mark an anniversary"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): an apartment stairwell in Galicia; a returning soldier and his younger sister over how to mark an anniversary\n인물 이름: Sergio, Chiara 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 감각 묘사(소리·냄새·촉감)로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 A 에 둔다. correct_letter 는 A 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 A 로 정한 뒤 나머지 선택지를 채운다."
+  }
+ ],
+ "instructions": "당신은 디지털 SAT Reading & Writing 문학 지문 문항 출제 위원이다. 아래 20개 후보 각각에 대해 문항 1개를 만들어 JSON 한 파일로 저장한다.\n작업: 새 문항 생성 · 청크 gen-lit40-medium-04-02\n규칙:\n1. 지문은 전부 새로 쓴 창작이다. 실제 작품의 문장·플롯·고유한 인물 설정을 쓰지 말고, 실존 작가·작품 이름이나 'From … by …' 같은 출처 머리글을 붙이지 않는다(발췌 지문 작업은 제공된 발췌를 한 글자도 바꾸지 않는다).\n2. 지문·질문·선택지는 영어만 쓴다. 해설(explanation)만 한국어 3~5문장이며, 글자 참조는 선택지 글자(A~D)로만 한다.\n3. 선택지는 정확히 4개, 정답은 1개이고 정답 위치는 후보별 targetLetter 와 같아야 한다(어기면 코드가 선택지를 재배치하거나 탈락시킨다).\n4. 선택지 길이·문체를 비슷하게 맞춘다. 정답이 가장 길거나 구체적이면 탈락한다. 오답 3개는 서로 다른 그럴듯한 오개념에서 나오게 하고 지문 표현을 일부 활용한다.\n5. 정답이 지문 마지막 문장을 거의 그대로 바꿔 말한 것이면 탈락한다. 근거를 서로 떨어진 둘 이상의 문장에 둔다.\n6. 후보별 names 에 있는 이름만 인물 이름으로 쓴다. 지정되지 않은 이름·'Tobias'·'Odalys'·'Wren' 은 쓰지 않는다. 후보별 openingStyle 을 따르고 첫 단어를 The·You·It·There 로 시작하지 않는다.\n7. 지문 단어 수는 후보별 words.min~words.max 안이어야 한다(코드가 센다). 시는 줄바꿈을 \\n 으로 유지한다.\n8. XML 태그·마크다운·내부 메모·플레이스홀더·'As an AI' 류 문장을 출력에 넣지 않는다. 밑줄 표시는 앱 규격대로 두 밑줄 기호 __문장__ 만 쓴다. 출처·작가를 지어내지 않는다.\n9. 선언: 모든 항목에 declaration 3개(original, noRealWorkQuoted, noCopyrightedSource)를 true 로 쓴다. 그럴 수 없는 항목은 만들지 말고 candidateId 만 빼라(탈락 처리된다).\n지문과 문항을 함께 새로 쓴다.\n출력: Write 도구로 정확히 이 경로에 JSON 한 파일을 쓴다 → /Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/gen-lit40-medium-04-02.result.json\n출력 JSON 스키마(예시 구조): {\"chunkId\":\"작업 파일의 chunkId 를 그대로\",\"model\":\"당신의 모델 이름(예: opus)\",\"items\":[{\"candidateId\":\"후보의 candidateId 를 그대로\",\"passage\":\"영어 지문(문항의 질문은 넣지 않는다)\",\"question\":\"영어 질문 한 문장\",\"options\":[\"선택지 A\",\"선택지 B\",\"선택지 C\",\"선택지 D\"],\"correct_letter\":\"A|B|C|D (targetLetter 와 같게)\",\"explanation\":\"한국어 해설 3~5문장\",\"tone\":[\"지문 어조 영어 단어 1~3개\"],\"devices\":[\"쓰인 문학 장치 영어 단어\"],\"declaration\":{\"original\":true,\"noRealWorkQuoted\":true,\"noCopyrightedSource\":true}}]}\n허용 값: correct_letter ∈ {A,B,C,D}, options 길이 4, declaration 3개 모두 true. 후보의 candidateId 를 바꾸지 않는다. 항목 순서는 후보 순서를 따른다.\n금지: 결과 파일 외의 파일 생성·수정, 다른 명령 실행, 후보 임의 추가·삭제, 이 작업 파일 수정. 끝나면 'done <항목 수>' 한 줄만 답한다.\n\n## 후보\n### lit40-medium-04-021 — skill words_in_context · 유형 word_in_context · 난이도 medium · 장르 fable_or_folktale_retelling · targetLetter B\n유형 지시: 지문에 빈칸 ______ 을 정확히 하나 두고 질문은 'Which choice completes the text with the most logical and precise word or phrase?' 로 한다.\n난이도 지시: medium: 단서를 두 군데 이상 연결해야 하고 오답 중 하나 이상이 그럴듯하다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a train compartment in Tbilisi; a violin student and an exacting teacher about whether to forgive\n인물 이름: Dmitri, Jakub 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 감각 묘사(소리·냄새·촉감)로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 B 에 둔다. correct_letter 는 B 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 B 로 정한 뒤 나머지 선택지를 채운다.\n### lit40-medium-04-022 — skill text_structure_purpose · 유형 tone_shift · 난이도 medium · 장르 short_story · targetLetter A\n유형 지시: 글 중간에서 어조가 바뀌는 지점과 의미를 묻는다.\n난이도 지시: medium: 단서를 두 군데 이상 연결해야 하고 오답 중 하나 이상이 그럴듯하다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a hillside terrace in Kyoto; two strangers sharing a delay over a recipe that was never written down\n인물 이름: Takeshi, Kenji 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 장소 이름으로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 A 에 둔다. correct_letter 는 A 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 A 로 정한 뒤 나머지 선택지를 채운다.\n### lit40-medium-04-023 — skill text_structure_purpose · 유형 tone_shift · 난이도 medium · 장르 novel_excerpt · targetLetter B\n유형 지시: 글 중간에서 어조가 바뀌는 지점과 의미를 묻는다.\n난이도 지시: medium: 단서를 두 군데 이상 연결해야 하고 오답 중 하나 이상이 그럴듯하다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a fishing harbor in Colombo; a mayor and the town's only doctor over an invitation one of them refuses\n인물 이름: Kamal, Shamsuddin 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 감각 묘사(소리·냄새·촉감)로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 B 에 둔다. correct_letter 는 B 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 B 로 정한 뒤 나머지 선택지를 채운다.\n### lit40-medium-04-024 — skill text_structure_purpose · 유형 tone_shift · 난이도 medium · 장르 poetry · targetLetter C\n유형 지시: 글 중간에서 어조가 바뀌는 지점과 의미를 묻는다.\n난이도 지시: medium: 단서를 두 군데 이상 연결해야 하고 오답 중 하나 이상이 그럴듯하다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a quiet library in Glasgow; a mother and a daughter planning a wedding over a repair that could never really fix it\n인물 이름: Rashid, Callum 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 숫자·목록·규칙을 말하며 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 C 에 둔다. correct_letter 는 C 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 C 로 정한 뒤 나머지 선택지를 채운다.\n### lit40-medium-04-025 — skill text_structure_purpose · 유형 tone_shift · 난이도 medium · 장르 drama · targetLetter D\n유형 지시: 글 중간에서 어조가 바뀌는 지점과 의미를 묻는다.\n난이도 지시: medium: 단서를 두 군데 이상 연결해야 하고 오답 중 하나 이상이 그럴듯하다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a hospital waiting room in Surabaya; a retired sailor and his neighbor after a teacher's remark that changed everything\n인물 이름: Lan, Albert 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 대화 한 줄로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 D 에 둔다. correct_letter 는 D 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 D 로 정한 뒤 나머지 선택지를 채운다.\n### lit40-medium-04-026 — skill text_structure_purpose · 유형 tone_shift · 난이도 medium · 장르 personal_essay · targetLetter A\n유형 지시: 글 중간에서 어조가 바뀌는 지점과 의미를 묻는다.\n난이도 지시: medium: 단서를 두 군데 이상 연결해야 하고 오답 중 하나 이상이 그럴듯하다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a kite-maker's yard in Beirut; a landlord and a long-term tenant over whether to sell a shared inheritance\n인물 이름: Weiqi, Faris 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 짧은 단언문으로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 A 에 둔다. correct_letter 는 A 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 A 로 정한 뒤 나머지 선택지를 채운다.\n### lit40-medium-04-027 — skill text_structure_purpose · 유형 tone_shift · 난이도 medium · 장르 memoir · targetLetter B\n유형 지시: 글 중간에서 어조가 바뀌는 지점과 의미를 묻는다.\n난이도 지시: medium: 단서를 두 군데 이상 연결해야 하고 오답 중 하나 이상이 그럴듯하다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a metro platform in Mumbai; a stepfather and his stepdaughter about a debt neither will mention\n인물 이름: Mohan, Camryn 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 과거를 회상하는 문장으로 시작('Years later', 'Once' 등). 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 B 에 둔다. correct_letter 는 B 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 B 로 정한 뒤 나머지 선택지를 채운다.\n### lit40-medium-04-028 — skill text_structure_purpose · 유형 tone_shift · 난이도 medium · 장르 letter · targetLetter C\n유형 지시: 글 중간에서 어조가 바뀌는 지점과 의미를 묻는다.\n난이도 지시: medium: 단서를 두 군데 이상 연결해야 하고 오답 중 하나 이상이 그럴듯하다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a shoe repair stall in Lisbon; a teacher and a student who will not speak when someone returns after years without explaining\n인물 이름: Isadora, Beatriz 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 시간·날짜 표현으로 시작('By', 'On', 'After' 등). 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 C 에 둔다. correct_letter 는 C 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 C 로 정한 뒤 나머지 선택지를 채운다.\n### lit40-medium-04-029 — skill text_structure_purpose · 유형 text_structure · 난이도 medium · 장르 short_story · targetLetter D\n유형 지시: 글 전체의 구조(전개 순서·초점의 이동)를 묻는다.\n난이도 지시: medium: 단서를 두 군데 이상 연결해야 하고 오답 중 하나 이상이 그럴듯하다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a ship's galley in Dhaka; a grandmother and her grandson over silence kept to protect someone\n인물 이름: Ishaan, Arjun 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 의문문으로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 D 에 둔다. correct_letter 는 D 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 D 로 정한 뒤 나머지 선택지를 채운다.\n### lit40-medium-04-030 — skill text_structure_purpose · 유형 text_structure · 난이도 medium · 장르 novel_excerpt · targetLetter A\n유형 지시: 글 전체의 구조(전개 순서·초점의 이동)를 묻는다.\n난이도 지시: medium: 단서를 두 군데 이상 연결해야 하고 오답 중 하나 이상이 그럴듯하다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a seed-saving cooperative in Hanoi; a teenage cook and her stern aunt when a long silence is finally broken\n인물 이름: Siti, Nguyen 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 인물의 이름으로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 A 에 둔다. correct_letter 는 A 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 A 로 정한 뒤 나머지 선택지를 채운다.\n### lit40-medium-04-031 — skill text_structure_purpose · 유형 text_structure · 난이도 medium · 장르 personal_essay · targetLetter B\n유형 지시: 글 전체의 구조(전개 순서·초점의 이동)를 묻는다.\n난이도 지시: medium: 단서를 두 군데 이상 연결해야 하고 오답 중 하나 이상이 그럴듯하다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a snowed-in cabin in Seville; a father and his stubborn son over a shared chore that has become a ritual\n인물 이름: Yoav, Marisol 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 숫자·목록·규칙을 말하며 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 B 에 둔다. correct_letter 는 B 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 B 로 정한 뒤 나머지 선택지를 채운다.\n### lit40-medium-04-032 — skill text_structure_purpose · 유형 text_structure · 난이도 medium · 장르 memoir · targetLetter C\n유형 지시: 글 전체의 구조(전개 순서·초점의 이동)를 묻는다.\n난이도 지시: medium: 단서를 두 군데 이상 연결해야 하고 오답 중 하나 이상이 그럴듯하다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a radio repair shop in Chiang Mai; an uncle and a nephew with a debt while rehearsing for an important performance\n인물 이름: Dewi, Wira 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 구체적인 사물이나 동작으로 시작(관사 The 로 시작하지 말 것). 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 C 에 둔다. correct_letter 는 C 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 C 로 정한 뒤 나머지 선택지를 채운다.\n### lit40-medium-04-033 — skill text_structure_purpose · 유형 underlined_portion_function · 난이도 medium · 장르 short_story · targetLetter D\n유형 지시: 지문의 한 문장을 __문장__ 처럼 두 밑줄 기호로 감싸 정확히 하나만 밑줄 표시하고, 질문에 'underlined' 를 넣어 그 문장이 글 전체에서 하는 기능을 묻는다.\n난이도 지시: medium: 단서를 두 군데 이상 연결해야 하고 오답 중 하나 이상이 그럴듯하다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a salt flat in Marrakesh; a foreman and a young hire over a tool or instrument inherited by the wrong person\n인물 이름: Malek, Lindiwe 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 짧은 단언문으로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 D 에 둔다. correct_letter 는 D 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 D 로 정한 뒤 나머지 선택지를 채운다.\n### lit40-medium-04-034 — skill text_structure_purpose · 유형 underlined_portion_function · 난이도 medium · 장르 novel_excerpt · targetLetter A\n유형 지시: 지문의 한 문장을 __문장__ 처럼 두 밑줄 기호로 감싸 정확히 하나만 밑줄 표시하고, 질문에 'underlined' 를 넣어 그 문장이 글 전체에서 하는 기능을 묻는다.\n난이도 지시: medium: 단서를 두 군데 이상 연결해야 하고 오답 중 하나 이상이 그럴듯하다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a dried-riverbed crossing in Lagos; a widow and the delivery boy about what to tell a younger sibling\n인물 이름: Seoyeon, Hassan 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 의문문으로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 A 에 둔다. correct_letter 는 A 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 A 로 정한 뒤 나머지 선택지를 채운다.\n### lit40-medium-04-035 — skill text_structure_purpose · 유형 underlined_portion_function · 난이도 medium · 장르 personal_essay · targetLetter B\n유형 지시: 지문의 한 문장을 __문장__ 처럼 두 밑줄 기호로 감싸 정확히 하나만 밑줄 표시하고, 질문에 'underlined' 를 넣어 그 문장이 글 전체에서 하는 기능을 묻는다.\n난이도 지시: medium: 단서를 두 군데 이상 연결해야 하고 오답 중 하나 이상이 그럴듯하다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a night bus in Hokkaido; a farmer and a surveyor from the city over a promise made to a child\n인물 이름: Chiyo, Aiko 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 대화 한 줄로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 B 에 둔다. correct_letter 는 B 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 B 로 정한 뒤 나머지 선택지를 채운다.\n### lit40-medium-04-036 — skill text_structure_purpose · 유형 underlined_portion_function · 난이도 medium · 장르 memoir · targetLetter C\n유형 지시: 지문의 한 문장을 __문장__ 처럼 두 밑줄 기호로 감싸 정확히 하나만 밑줄 표시하고, 질문에 'underlined' 를 넣어 그 문장이 글 전체에서 하는 기능을 묻는다.\n난이도 지시: medium: 단서를 두 군데 이상 연결해야 하고 오답 중 하나 이상이 그럴듯하다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a weaving cooperative in the Mississippi Delta; twin brothers dividing a house while one of them is pretending not to be proud\n인물 이름: Darnell, Marcus 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 대명사 I 또는 We 로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 C 에 둔다. correct_letter 는 C 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 C 로 정한 뒤 나머지 선택지를 채운다.\n### lit40-medium-04-037 — skill central_ideas_details · 유형 narrator_attitude · 난이도 medium · 장르 short_story · targetLetter B\n유형 지시: 화자·서술자가 대상에 대해 취하는 태도를 묻는다.\n난이도 지시: medium: 단서를 두 군데 이상 연결해야 하고 오답 중 하나 이상이 그럴듯하다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a summer camp dining hall in Rotterdam; a seamstress and her only apprentice while one of them quietly changes their mind\n인물 이름: Thorvald, Freja 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 구체적인 사물이나 동작으로 시작(관사 The 로 시작하지 말 것). 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 B 에 둔다. correct_letter 는 B 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 B 로 정한 뒤 나머지 선택지를 채운다.\n### lit40-medium-04-038 — skill central_ideas_details · 유형 narrator_attitude · 난이도 medium · 장르 novel_excerpt · targetLetter C\n유형 지시: 화자·서술자가 대상에 대해 취하는 태도를 묻는다.\n난이도 지시: medium: 단서를 두 군데 이상 연결해야 하고 오답 중 하나 이상이 그럴듯하다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a language school classroom in Accra; a brother and sister reading their mother's letters over unequal sacrifices made in the past\n인물 이름: Seun, Ama 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 숫자·목록·규칙을 말하며 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 C 에 둔다. correct_letter 는 C 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 C 로 정한 뒤 나머지 선택지를 채운다.\n### lit40-medium-04-039 — skill central_ideas_details · 유형 narrator_attitude · 난이도 medium · 장르 poetry · targetLetter D\n유형 지시: 화자·서술자가 대상에 대해 취하는 태도를 묻는다.\n난이도 지시: medium: 단서를 두 군데 이상 연결해야 하고 오답 중 하나 이상이 그럴듯하다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a school gymnasium in Lima; a mother-in-law and a new bride when an expected rival turns out to be an ally\n인물 이름: Santiago, Renata 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 구체적인 사물이나 동작으로 시작(관사 The 로 시작하지 말 것). 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 D 에 둔다. correct_letter 는 D 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 D 로 정한 뒤 나머지 선택지를 채운다.\n### lit40-medium-04-040 — skill central_ideas_details · 유형 narrator_attitude · 난이도 medium · 장르 personal_essay · targetLetter A\n유형 지시: 화자·서술자가 대상에 대해 취하는 태도를 묻는다.\n난이도 지시: medium: 단서를 두 군데 이상 연결해야 하고 오답 중 하나 이상이 그럴듯하다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): an apartment stairwell in Galicia; a returning soldier and his younger sister over how to mark an anniversary\n인물 이름: Sergio, Chiara 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 감각 묘사(소리·냄새·촉감)로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 A 에 둔다. correct_letter 는 A 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 A 로 정한 뒤 나머지 선택지를 채운다."
+}

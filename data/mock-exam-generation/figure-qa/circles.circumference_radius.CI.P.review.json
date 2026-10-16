@@ -1,0 +1,23 @@
+{
+ "itemId": "circles.circumference_radius.CI.P",
+ "verdict": "pass",
+ "reviewedAt": "2026-10-06T06:51:17Z",
+ "reviewer": "claude-sonnet-5.5 (math-B session)",
+ "codeHash": "60eb3d5a71b518a9777685223e7a5bb15d710c2cedc2777b5ea3c60730df59a4",
+ "samples": [
+  "circles.circumference_radius.CI.P.png"
+ ],
+ "checklist": {
+  "figure_present": "pass",
+  "proportion_matches_values": "pass",
+  "labels_placed_and_legible": "pass",
+  "multi_figure_consistent": "n/a",
+  "text_matches_figure_and_solvable": "pass",
+  "axes_ticks_units_legend": "pass",
+  "choice_distinct_one_rule": "n/a",
+  "sat_visual_style": "pass",
+  "mobile_375_readable": "pass"
+ },
+ "defects": [],
+ "notes": "원 그림(중심 O·반지름 라벨·원 위의 점) 샘플 데스크톱·375px 확인 + 갤러리(4 연산자·시드 1): 반지름 라벨이 선 옆에 겹침 없이 놓이고 지름 라벨(14)은 중심 근처 위쪽에 표시. 선지의 \\pi 는 스냅샷 렌더가 KaTeX 가 아니라 원문으로 보이는 것(앱에서는 KaTeX 로 렌더)."
+}

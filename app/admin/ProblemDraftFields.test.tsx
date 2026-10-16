@@ -4,7 +4,7 @@ import { describe, expect, it, vi } from "vitest";
 import ProblemDraftFields from "./ProblemDraftFields";
 import type { DocProblem } from "./curriculum-doc-data";
 
-const mcDraft: Omit<DocProblem, "id"> = {
+const mcDraft: Omit<DocProblem, "id" | "keywords"> = {
   format: "mc",
   passage: "지문",
   options: ["A", "B", "C", "D", "E"],
@@ -13,7 +13,7 @@ const mcDraft: Omit<DocProblem, "id"> = {
   difficulty: "medium",
 };
 
-const essayDraft: Omit<DocProblem, "id"> = {
+const essayDraft: Omit<DocProblem, "id" | "keywords"> = {
   format: "essay",
   passage: "서술형 지문",
   options: null,
@@ -22,7 +22,7 @@ const essayDraft: Omit<DocProblem, "id"> = {
   difficulty: "medium",
 };
 
-const mathDraft: Omit<DocProblem, "id"> = {
+const mathDraft: Omit<DocProblem, "id" | "keywords"> = {
   format: "math",
   passage: "수학 지문",
   options: null,

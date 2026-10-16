@@ -1,0 +1,45 @@
+{
+ "itemId": "nonlinear_functions.find_x_for_value.FN.P",
+ "generatedAt": "2026-10-07T05:02:00.569Z",
+ "codeHash": "0cf767ad85b5800fc2c479c9e72817735b5622291748dd053294ba42cea109a7",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/coordinate-plane.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/graph-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/_t5-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/nonlinear_functions.find_x_for_value.FN.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/pure-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "nonlinear_functions.find_x_for_value.FN.P.png",
+   "mobileFile": "nonlinear_functions.find_x_for_value.FN.P.m375.png",
+   "archetypeId": "nfx.find_x_for_value.FN.P.repr_shift",
+   "seed": 11,
+   "signature": "plane",
+   "stimulus": "The figure shows the graph of $y = p(x)$, a parabola in the $xy$-plane, and three marked points on it. The equation $p(x) = -93$ has two solutions.",
+   "question": "What is the larger solution?",
+   "options": [
+    "11",
+    "-11",
+    "-9",
+    "9"
+   ],
+   "correctIndex": 0,
+   "answer": "11",
+   "explanation": "(1) 그래프에 표시된 점을 읽는다: (-2, -2), (3, 3), (5, -9). (2) y = ax² + bx + c 에 세 점을 대입해 세 식을 만든다. (3) 연립해 풀면 a = -1, b = 2, c = 6 이다. (4) 식: y = -1x² + 2x + 6 이다. (5) p(x) = -93 는 -1(x - (1))² + (7) = -93 이므로 (x - (1))² = 100 이다. (6) 해는 -9, 11 이고 큰 해는 11 이다. 따라서 정답은 11이다.",
+   "structuralIssues": []
+  }
+ ]
+}

@@ -1,0 +1,1166 @@
+{
+ "kind": "sat_problem_patch_list_round5",
+ "generatedBy": "scripts/audit/r5-build-patches.ts (lib/audit-fix/r5-edits.ts + r5-trim results)",
+ "count": 64,
+ "patches": [
+  {
+   "id": "R5-G-S10",
+   "problemId": "20a54859-dce7-4280-9786-f449da9b72d0",
+   "expectVersionId": "3062fb02-a7f3-481c-8828-c9e5bd943343",
+   "changes": [
+    {
+     "field": "options",
+     "old": [
+      "Given",
+      "Because of",
+      "As a result of",
+      "Despite"
+     ],
+     "new": [
+      "Despite of",
+      "In spite",
+      "Despite that",
+      "Despite"
+     ]
+    },
+    {
+     "field": "explanation",
+     "old": "문장은 에리스가 멀리 있음에도 밝게 보인다는, 예상과 반대되는 사실을 서술한다. 양보 관계이므로 'Despite'가 정답이다. 'Given', 'Because of', 'As a result of'는 거리가 밝음의 원인이라는 뜻이 되어 맞지 않는다.",
+     "new": "빈칸 뒤 \"its extreme distance, Eris appears bright\"는 완결된 절이므로, 빈칸에는 명사구 \"its extreme distance\"를 목적어로 취하는 전치사 하나가 와야 한다. \"Despite\"는 그 자체로 전치사라서 목적어를 바로 취하며, 먼 거리에도 불구하고 밝게 보인다는 의미도 맞는다. \"Despite of\"는 despite와 in spite of를 섞은 비표준 형태이고, \"In spite\"는 of가 빠진 불완전한 전치사구이며, \"Despite that\"은 that 뒤에 동사 없이 명사구만 이어져 비문이다. 따라서 정답은 D이다."
+    },
+    {
+     "field": "explanation_en",
+     "old": "The sentence contrasts the expectation set by distance with what is actually observed: Eris is far away, yet it appears bright. A concession is needed, so \"Despite\" is correct. \"Given,\" \"Because of,\" and \"As a result of\" all present the distance as the cause of the brightness, which does not make sense.",
+     "new": "After the blank comes a complete clause, \"its extreme distance, Eris appears bright,\" so the blank must hold a single preposition that takes the noun phrase \"its extreme distance\" as its object. \"Despite\" is a preposition on its own, takes its object directly, and also fits the meaning (bright in spite of the distance). \"Despite of\" is a nonstandard blend of \"despite\" and \"in spite of,\" \"In spite\" is missing the \"of\" the phrase requires, and \"Despite that\" leaves \"that\" followed by a bare noun phrase with no verb, so those three are ungrammatical. So the answer is D."
+    }
+   ],
+   "why": "Re-check of S-10: 'Given / Because of / As a result of / Despite' are all grammatical before 'its extreme distance', so a Standard English stem cannot single out 'Despite' (only the meaning does; a transitions-style choice under a conventions stem).",
+   "validation": "Distractors rewritten into real convention errors: 'Despite of' (blend of despite / in spite of), 'In spite' (missing 'of'), 'Despite that' (that + bare noun phrase). Only 'Despite' is grammatical and it is also the only logical one; key D unchanged.",
+   "kind": "sat"
+  },
+  {
+   "id": "R5-G-S12",
+   "problemId": "1a7c11c4-a457-435c-a599-6ff1c564868b",
+   "expectVersionId": "d2b04b94-2721-4129-8bd8-57ac4589147f",
+   "changes": [
+    {
+     "field": "options",
+     "old": [
+      ", which offering",
+      "offering",
+      "; offering",
+      ", offering"
+     ],
+     "new": [
+      ", which offering",
+      "that offering",
+      "; offering",
+      ", offering"
+     ]
+    },
+    {
+     "field": "explanation",
+     "old": "빈칸 앞은 완전한 독립절이고 뒤는 명사구이므로 쉼표 + 분사(, offering)로 잇는 D가 맞다. A(which offering)는 관계대명사 뒤에 정동사가 없고, B는 구두점이 없어 경계가 불분명하며, C는 세미콜론 뒤에 독립절이 아닌 구가 와서 틀리다.",
+     "new": "빈칸 앞은 완전한 독립절이고 빈칸 뒤는 명사구(a solution that promised ...)이다. 콤마로 시작하는 분사구 \", offering\"이 앞 절 전체를 수식하며 이 명사구를 자연스럽게 잇는다. \", which offering\"과 \"that offering\"은 관계대명사 뒤에 정동사 없이 분사만 있어 비문이고, \"; offering\"은 세미콜론이 독립절이 아닌 분사구 앞에 쓰여 틀린다. 따라서 정답은 D이다."
+    },
+    {
+     "field": "explanation_en",
+     "old": "Before the blank is a complete independent clause, and after the blank is a noun phrase (a solution that promised ...). A participle introduced by a comma (\", offering\") correctly attaches that phrase. \"Which offering\" has a relative pronoun without a finite verb, \"offering\" with no punctuation does not mark the boundary, and the semicolon in C cannot precede a non-independent phrase. Therefore, D is correct.",
+     "new": "Before the blank is a complete independent clause, and after the blank is a noun phrase (a solution that promised ...). A participial phrase introduced by a comma, \", offering,\" attaches that phrase to the whole preceding clause. \", which offering\" and \"that offering\" place a relative pronoun before a participle with no finite verb, so they are ungrammatical, and the semicolon in \"; offering\" cannot precede a phrase that is not an independent clause. So the answer is D."
+    }
+   ],
+   "why": "Re-check of S-12: both ', offering' and bare 'offering' attach a participial phrase to 'elevated tracks' (restrictive vs nonrestrictive), so two options are grammatical.",
+   "validation": "Option B 'offering' -> 'that offering' (relative pronoun + participle with no finite verb). ', offering' is now the only grammatical completion; key D unchanged. Explanation rewritten for the new options.",
+   "kind": "sat"
+  },
+  {
+   "id": "R5-G-S13",
+   "problemId": "0cf57c09-cb27-4166-9f90-10d260c961e5",
+   "expectVersionId": "fcdc1d61-4e81-4c32-a562-6b042fd55a67",
+   "changes": [
+    {
+     "field": "options",
+     "old": [
+      "and this launching",
+      "they launched",
+      "launching",
+      "which had launched"
+     ],
+     "new": [
+      "and this launching",
+      "they launched",
+      "launching",
+      "which launching"
+     ]
+    },
+    {
+     "field": "explanation",
+     "old": "빈칸 앞 절 전체가 새로운 학문 분야를 만들어냈다는 결과를 나타내야 하므로 정동사 없는 분사구 \"launching\"이 적절하다. \"and this launching\"은 등위접속사 뒤에 정동사가 없고, \"they launched\"는 콤마로 독립절을 이어 붙이며 대명사가 불분명하고, \"which had launched\"는 시제가 맞지 않고 \"the solar system\"을 수식하는 것으로 오독된다. 정답은 C.",
+     "new": "빈칸 앞은 \"Astronomers eventually realized ...\"라는 완전한 절이므로, 빈칸에는 그 절 전체의 결과를 덧붙이는 현재분사구가 와야 한다. \"launching the field of gamma-ray burst astronomy\"는 앞 절 전체를 수식하는 분사구로 올바르다. \"and this launching\"은 등위접속사 뒤에 정동사가 없고, \"they launched\"는 두 독립절을 콤마만으로 이어 콤마 스플라이스가 되며, \"which launching\"은 관계대명사 뒤에 정동사 없이 분사만 있어 비문이다. 따라서 정답은 C이다."
+    },
+    {
+     "field": "explanation_en",
+     "old": "The clause before the blank as a whole needs to be shown as having resulted in a new field of study, so the participial phrase \"launching\" appropriately modifies the entire preceding clause. \"And this launching\" has no finite verb after a coordinating conjunction; \"they launched\" splices two independent clauses with a comma and has an unclear pronoun; \"which had launched\" has a mismatched tense and can be misread as modifying \"the solar system.\" Therefore, C is correct.",
+     "new": "The clause before the blank is complete, so the blank must add a participial phrase describing the result of the whole clause. \"Launching the field of gamma-ray burst astronomy\" is a present participial phrase that modifies the preceding clause. \"And this launching\" leaves no finite verb after the conjunction, \"they launched\" splices two independent clauses with only a comma, and \"which launching\" puts a participle after a relative pronoun with no finite verb. So the answer is C."
+    }
+   ],
+   "why": "Re-check of S-13: ', which had launched the field' is a grammatical nonrestrictive relative clause as well as ', launching the field'.",
+   "validation": "Option D 'which had launched' -> 'which launching' (relative pronoun + participle, no finite verb). 'launching' is now the only grammatical completion; key C unchanged.",
+   "kind": "sat"
+  },
+  {
+   "id": "R5-G-S15",
+   "problemId": "bbd15ed7-db08-496e-894e-ff3471603bbe",
+   "expectVersionId": "55d7bcbb-2f1b-4c48-a2c0-eaffce3e6ca2",
+   "changes": [
+    {
+     "field": "explanation",
+     "old": "쉼표로 삽입된 구는 'Her team'을 수식하는 분사구여야 자연스럽다. 현재분사 'using satellite transmitters'는 팀이 능동적으로 위성 추적기를 사용했다는 의미를 부가적으로 설명하며, 주절의 동사 'discovered'와 충돌 없이 문장에 매끄럽게 삽입된다. 'used'는 과거분사로 쓰일 경우 '팀이 사용되었다'는 수동의 의미가 되어 팀이 위성 추적기를 능동적으로 활용했다는 원래 의미와 어긋나는 수식 관계 오류를 만든다. 'which used'와 'they used'는 별도의 정동사를 포함한 절을 삽입해 콤마 스플라이스나 어색한 종속 구조를 만든다.",
+     "new": "쉼표 사이에 삽입된 어구는 \"Her team\"을 수식하는 분사구여야 한다. 현재분사 \"using satellite transmitters\"는 팀이 능동적으로 위성 발신기를 썼다는 뜻으로, 주절의 동사 \"discovered\"와 충돌하지 않고 자연스럽게 삽입된다. \"used\"는 과거분사로 읽혀 팀이 사용되었다는 수동 의미가 되어 수식 오류이고, \"which using\"은 관계대명사 뒤에 정동사가 없어 비문이며, \"they used\"는 독립절을 쉼표로만 붙여 콤마 스플라이스가 된다. 따라서 정답은 A이다."
+    },
+    {
+     "field": "explanation_en",
+     "old": "The phrase inserted with commas should be a participial phrase modifying \"Her team.\" The present participle \"using satellite transmitters\" adds the meaning that the team actively used satellite trackers, and it fits smoothly into the sentence without clashing with the main clause's verb \"discovered.\" \"Used,\" if taken as a past participle, would mean \"the team was used,\" a passive meaning that creates a modification error inconsistent with the original meaning that the team actively employed satellite trackers. \"Which used\" and \"they used\" insert a clause containing a separate finite verb, creating a comma splice or an awkward subordinate structure.",
+     "new": "The phrase set off by commas must be a participial phrase modifying \"Her team.\" The present participle \"using satellite transmitters\" says the team actively used the transmitters and fits in without clashing with the main verb \"discovered.\" \"Used\" reads as a past participle (the team was used), which is a modification error; \"which using\" puts a participle after a relative pronoun with no finite verb; and \"they used\" adds a full clause joined by commas only, creating a comma splice. So the answer is A."
+    }
+   ],
+   "why": "Re-check of S-15: the explanation names options ('which used', 'they used') that are not the stored ones ('which using', 'used', 'they used'). Options and key are fine (only 'using' is grammatical).",
+   "validation": "Explanation text only; options and key D/A unchanged (using = A).",
+   "kind": "sat"
+  },
+  {
+   "id": "R5-G-S16",
+   "problemId": "8a9ed576-2730-4661-9ce1-d4d7cbdfd3b7",
+   "expectVersionId": "c454fbc4-7ec9-4ac1-b9b2-9393901bc8e8",
+   "changes": [
+    {
+     "field": "explanation",
+     "old": "이 문장에는 이미 주절의 동사 \"cut\"이 있으므로, 삽입된 구는 주어와 동사를 갖춘 완전한 절이 아니라 명사 \"routes\"를 수식하는 분사구여야 한다. \"featuring\"은 정동사 없이 \"routes\"를 자연스럽게 수식하는 현재분사구다. \"which featured\"는 관계절이지만 콤마 두 개 사이에서 앞의 \"the revised routes\"를 수식하려면 문법적으로는 가능해 보이나 문장 구조상 뒤의 \"cut\" 동사와 어울려 전체 문장이 두 개의 서술을 나란히 놓은 듯 어색해지고, \"they featured\"는 별도의 독립절을 콤마로 이어 붙여 콤마 스플라이스 오류를 만든다. \"having been featured\"는 수동 완료분사로 시제·태가 어색하며 논리적으로 노선이 스스로 특징을 갖는 것이 아니라 \"갖추어진\" 대상이 되어 의미가 왜곡된다. 따라서 정답은 A번이다.",
+     "new": "문장에는 이미 주동사 \"cut\"이 있으므로 삽입어구는 \"routes\"를 수식하는 분사구여야 하고 주어와 정동사를 가진 절이어서는 안 된다. \"featuring\"은 정동사 없이 routes를 수식하는 현재분사구로 올바르다. \"which featuring\"은 관계대명사 뒤에 정동사가 없어 비문이고, \"they featured\"는 독립절을 쉼표로만 이어 콤마 스플라이스가 되며, \"having been featured\"는 수동 완료 분사라 노선이 \"특징으로 내세워진\" 것이 되어 노선이 전용 차선과 신호를 갖추고 있다는 의미가 왜곡된다. 따라서 정답은 A이다."
+    },
+    {
+     "field": "explanation_en",
+     "old": "The sentence already has the main verb 'cut,' so the inserted phrase must be a participial phrase modifying the noun 'routes,' not a full clause with a subject and verb. 'Featuring' is a present participial phrase that naturally modifies 'routes' without a finite verb. 'Which featured' is a relative clause, and between two commas it may look grammatically possible for modifying 'the revised routes,' but combined with the later verb 'cut' it makes the sentence read awkwardly, like two predicates set side by side. 'They featured' joins a separate independent clause with a comma, creating a comma splice error. 'Having been featured' is a passive perfect participle whose tense and voice are awkward, and it distorts the meaning because the routes become things that were 'featured' rather than things that themselves have features. Therefore, the answer is A.",
+     "new": "The sentence already has the main verb \"cut,\" so the inserted phrase must be a participial phrase modifying \"routes,\" not a clause with its own subject and finite verb. \"Featuring\" is a present participial phrase that modifies \"routes\" without a finite verb. \"Which featuring\" puts a participle after a relative pronoun with no finite verb, \"they featured\" joins a separate independent clause with only a comma (a comma splice), and \"having been featured\" is a passive perfect participle that turns the routes into things that were featured instead of things that have dedicated lanes and signals. So the answer is A."
+    }
+   ],
+   "why": "Re-check of S-16: the explanation discusses 'Which featured', which is not an option (the stored option is 'which featuring').",
+   "validation": "Explanation text only; options and key A unchanged (featuring is the only grammatical completion).",
+   "kind": "sat"
+  },
+  {
+   "id": "R5-G-S17",
+   "problemId": "c907ef0f-9235-4f88-9ef5-7620634d88f1",
+   "expectVersionId": "c0ddf7ee-24ac-46c0-86bf-26f0276fce44",
+   "changes": [
+    {
+     "field": "options",
+     "old": [
+      "comprised of",
+      "that comprising",
+      "which was comprised of",
+      "comprising"
+     ],
+     "new": [
+      "comprised",
+      "that comprising",
+      "which was comprised",
+      "comprising"
+     ]
+    },
+    {
+     "field": "explanation",
+     "old": "빈칸 앞의 \"a group\"은 명사구이며, 이를 수식하며 뒤에 나열되는 목록(transportation officials, sanitation departments, property owners)을 목적어로 받으려면 능동의 현재분사 'comprising'이 필요하다. 'comprised of'는 표준 영어에서 어법상 비문으로 간주되며(수동태 오용), 'that comprised'와 'which was comprised of'는 각각 불필요하게 별도의 정동사절을 만들어 앞 문장과의 연결이 어색하거나 comprised의 태를 잘못 사용해 비문이 된다. 정답은 D.",
+     "new": "\"a group\" 다음에는 뒤의 목록(transportation officials, sanitation departments, property owners)을 목적어로 취해 명사를 수식하는 능동 현재분사 \"comprising\"이 필요하다. \"comprised\"는 동격어구 안에 정동사가 홀로 놓인 비문이고, \"that comprising\"은 관계대명사 뒤에 정동사가 없는 비문이며, \"which was comprised\"는 수동태에 목록을 잇는 전치사 of가 빠져 비문이다. 따라서 정답은 D이다."
+    },
+    {
+     "field": "explanation_en",
+     "old": "\"A group\" before the blank is a noun phrase, and to modify it and take the list that follows (transportation officials, sanitation departments, property owners) as its object, the active present participle 'comprising' is needed. 'Comprised of' is considered ungrammatical in Standard English (a misuse of the passive), while 'that comprised' and 'which was comprised of' each create an unnecessary separate finite clause, making the connection to the previous sentence awkward, or misuse the voice of comprise and produce an ungrammatical sentence. The answer is D.",
+     "new": "After \"a group,\" the sentence needs the active present participle \"comprising,\" which modifies the noun and takes the list that follows (transportation officials, sanitation departments, property owners) as its object. \"Comprised\" alone acts as a lone finite verb inside an appositive phrase, \"that comprising\" puts a participle after a relative pronoun with no finite verb, and \"which was comprised\" is a passive that has lost the \"of\" needed to introduce the list. So the answer is D."
+    }
+   ],
+   "why": "Re-check of S-17: 'comprised of' and 'which was comprised of' are widely accepted in current usage, so more than one option can be defended; the stored explanation also names 'that comprised', which is not an option.",
+   "validation": "Options A 'comprised of' -> 'comprised' (lone finite verb in an appositive) and C 'which was comprised of' -> 'which was comprised' (passive without the preposition). 'comprising' (D) is the only grammatical completion; key unchanged.",
+   "kind": "sat"
+  },
+  {
+   "id": "R5-G-S18",
+   "problemId": "eef6e85a-c1d1-4829-9b80-df13fcf153dd",
+   "expectVersionId": "2a43a8cc-597b-4868-8f73-60770f4ddc78",
+   "changes": [
+    {
+     "field": "explanation",
+     "old": "빈칸 앞 'Manchester's Free Library ... quickly attracted mill workers'는 긴 비필수 삽입절을 지나 완성된 독립절이고, 뒤의 'many of them had never ... fee'도 독립절이다. 두 독립절은 세미콜론으로 연결하고, 접속부사 indeed는 두 번째 절 앞에 두고 쉼표를 붙이는 A가 옳다. B와 D는 쉼표와 접속부사만으로 두 독립절을 이어 comma splice가 된다. C는 세미콜론 위치는 맞아 보이지만 indeed를 첫 절 끝에 붙여 의미상 '정말로 노동자들을 끌어들였다'처럼 어색해지고, 뒤 절과의 강조 관계가 사라지며 관례적인 접속부사 위치에도 어긋난다.",
+     "new": "빈칸 앞 \"Manchester's Free Library ... quickly attracted mill workers\"는 독립절이고 뒤 \"many of them had never ... fee\"도 독립절이다. 두 독립절은 세미콜론으로 이을 수 있고 \"indeed\"는 두 번째 절 앞에 놓여 뒤에 쉼표가 온다(\"workers; indeed, many ...\"). 따라서 정답은 A이다. B와 D는 두 절을 쉼표만으로 이어 콤마 스플라이스가 되고, C는 문장부호나 접속사 없이 두 독립절을 붙여 쓴 런온 문장이다."
+    },
+    {
+     "field": "explanation_en",
+     "old": "The text before the blank, \"Manchester's Free Library ... quickly attracted mill workers,\" is a complete independent clause once you skip past the long nonessential clause in the middle. What follows, \"many of them had never ... fee,\" is also an independent clause. Two independent clauses can be joined with a semicolon, and the transition \"indeed\" belongs at the start of the second clause, followed by a comma, so A is correct. B and D join the two clauses with only a comma and a transition, which creates a comma splice. C does put a semicolon between the clauses, but it attaches \"indeed\" to the end of the first clause, so the word no longer introduces the second clause as the stronger point, and that placement breaks the usual way a transition is used.",
+     "new": "The text before the blank (\"Manchester's Free Library ... quickly attracted mill workers\") is an independent clause, and what follows (\"many of them had never ... fee\") is also an independent clause. Two independent clauses can be joined with a semicolon, and the transition \"indeed\" sits at the start of the second clause followed by a comma, as in \"workers; indeed, many ....\" So A is correct. B and D join the two clauses with only a comma, creating a comma splice, and C runs them together with no punctuation or conjunction, a run-on sentence. So the answer is A."
+    }
+   ],
+   "why": "Re-check of S-18: the explanation says option C 'does put a semicolon', but C ('workers indeed') has none, so the explanation misdescribes the options.",
+   "validation": "Explanation text only; options and key A ('workers; indeed,') unchanged: semicolon between two independent clauses is the only correct join (B and D comma splice, C run-on).",
+   "kind": "sat"
+  },
+  {
+   "id": "R5-G-S19",
+   "problemId": "10b609b4-a0e2-4d80-9f24-1bea3d2e4b36",
+   "expectVersionId": "cb879d45-fd1f-4374-8324-87c456b1d016",
+   "changes": [
+    {
+     "field": "options",
+     "old": [
+      "and the adult turtles, unlike the juveniles, relied entirely on visual landmarks near the coastline to navigate",
+      "while the younger animals in her sample lacked this navigational ability and moved according to current patterns alone",
+      "while the younger animals in her sample lacking this navigational ability and moving according to current patterns alone",
+      "so that the younger animals in her sample, lacking this navigational ability, moved according to current patterns alone"
+     ],
+     "new": [
+      "and the adult turtles, unlike the juveniles, relying entirely on visual landmarks near the coastline to navigate",
+      "while the younger animals in her sample lacked this navigational ability and moved according to current patterns alone",
+      "while the younger animals in her sample lacking this navigational ability and moving according to current patterns alone",
+      "so that the younger animals in her sample, lacking this navigational ability, moving according to current patterns alone"
+     ]
+    },
+    {
+     "field": "explanation",
+     "old": "빈칸 앞뒤는 대조되는 두 절을 연결해야 하는 구조로, 접속사 while이 이끄는 절 안에는 완전한 정동사(주어+정동사)가 있어야 문법적으로 완성된 문장이 된다. B는 \"while the younger animals ... lacked ... and moved ...\"로, while절 안에 정동사 lacked와 moved가 병렬적으로 완결되어 있어 문법적으로 올바르며, 성체와 대비되는 유생의 행동을 논리적으로 제시한다. A는 접속사 and 뒤에 분사 relying만 있어 정동사가 없는 비문(dangling/incomplete clause)이며, 게다가 시각적 랜드마크라는 지문에 없는 정보를 도입한다. C는 while절 안에 lacking과 moving이라는 분사만 있고 정동사가 없어 문법적으로 불완전한 종속절이 된다. D는 so로 시작해 앞 문장의 \"5세 이상에서만 나타났다\"는 조건과 논리적으로 모순되는 내용을 도입한다. 따라서 정답은 B이다.",
+     "new": "\"turtles older than five years,\" 뒤의 빈칸은 대조되는 두 번째 절을 완성해야 하고, \"while\"이 이끄는 부사절은 주어와 정동사를 모두 갖춰야 완전하다. B는 \"while the younger animals ... lacked ... and moved ...\"로 정동사 lacked와 moved가 병렬로 완성되어 문법적으로 올바르다. A는 \"and\" 뒤에 분사 \"relying\"만 있어 정동사가 없는 불완전한 절이고, C는 while절에 분사 \"lacking\"과 \"moving\"만 있으며, D도 \"so that\"절에 분사 \"moving\"만 있어 정동사가 없다. 따라서 정답은 B이다."
+    },
+    {
+     "field": "explanation_en",
+     "old": "The blank must join two contrasting clauses, and a clause introduced by the conjunction \"while\" needs a complete finite verb (subject plus finite verb) to be a grammatically complete sentence. B reads \"while the younger animals ... lacked ... and moved ...,\" so the finite verbs \"lacked\" and \"moved\" are completed in parallel inside the while-clause, which makes it grammatically correct and logically presents the juveniles' behavior in contrast to the adults. A has only the participle \"relying\" after the conjunction \"and,\" with no finite verb, making an incomplete (dangling) clause, and it also introduces information not in the passage, visual landmarks. C has only the participles \"lacking\" and \"moving\" in the while-clause, with no finite verb, creating a grammatically incomplete subordinate clause. D begins with \"so\" and introduces content that logically contradicts the previous sentence's condition that the behavior appeared only at age 5 and older. Therefore, the answer is B.",
+     "new": "After \"turtles older than five years,\" the blank must continue the sentence with a complete contrasting clause, and a clause introduced by \"while\" needs both a subject and a finite verb. B reads \"while the younger animals ... lacked ... and moved ...,\" so the finite verbs \"lacked\" and \"moved\" complete the clause in parallel, which is grammatical. A has only the participle \"relying\" after \"and,\" so its clause has no finite verb; C has only the participles \"lacking\" and \"moving\" in the while-clause, and D has only the participle \"moving\" in the so-that clause, so neither contains a finite verb. So the answer is B."
+    }
+   ],
+   "why": "Re-check of S-19: A ('and the adult turtles ... relied ...'), B and D ('so that ... moved ...') are all grammatical completions; the stored explanation also misdescribes A ('relying') and claims D contradicts the passage.",
+   "validation": "A 'relied' -> 'relying' and D 'moved' -> 'moving' (participles with no finite verb inside an 'and' / 'so that' clause). B ('while ... lacked ... and moved ...') is the only grammatical completion; key unchanged.",
+   "kind": "sat"
+  },
+  {
+   "id": "R5-G-G12",
+   "problemId": "65748760-4afd-4506-9289-a5e1f9af6f9e",
+   "expectVersionId": "1421d8e9-6c76-4a9f-b6ae-a12b4817c83c",
+   "changes": [
+    {
+     "field": "options",
+     "old": [
+      "their",
+      "its",
+      "his or her",
+      "one's"
+     ],
+     "new": [
+      "their",
+      "its",
+      "whose",
+      "one's"
+     ]
+    },
+    {
+     "field": "explanation",
+     "old": "이 문장에서 \"all of whom\"은 앞의 세 연주자(timpanist, xylophone player, drummer)를 가리키는 복수 선행사이고, 뒤의 명사도 복수형 \"instruments\"이다. 따라서 소유격 대명사도 복수여야 하므로 \"their\"가 정답이다. \"its\"는 사물을 가리키는 단수형이라 사람들을 가리킬 수 없고, \"his or her\"와 \"one's\"는 단수형이라 복수 선행사·복수 명사와 수가 맞지 않는다. 따라서 정답은 A이다.",
+     "new": "이 문장에서 \"all of whom\"은 세 명의 연주자(팀파니 연주자, 실로폰 연주자, 드러머)를 가리키는 복수 선행사이고 뒤의 명사도 복수형 \"instruments\"이다. 따라서 소유 한정사도 복수여야 하므로 \"their\"가 정답이다. \"its\"는 단수이며 사물을 가리키고, \"one's\"는 단수 일반 인칭이라 복수 선행사와 일치하지 않으며, \"whose\"는 관계대명사라 이 자리에 쓸 수 없어 \"tune whose instruments\"는 비문이다. 정답은 A이다."
+    },
+    {
+     "field": "explanation_en",
+     "old": "In this sentence \"all of whom\" refers to the three players (the timpanist, the xylophone player, and the drummer), a plural antecedent, and the noun that follows is the plural \"instruments.\" The possessive pronoun must therefore be plural, so \"their\" is correct. \"Its\" is singular and refers to things, not people, and \"his or her\" and \"one's\" are singular, so they do not agree with the plural antecedent. So the answer is A.",
+     "new": "In this sentence \"all of whom\" refers to the three players (the timpanist, the xylophone player, and the drummer), a plural antecedent, and the noun that follows is the plural \"instruments.\" The possessive determiner must therefore be plural, so \"their\" is correct. \"Its\" is singular and refers to things, \"one's\" is a singular generic pronoun that does not agree with the plural antecedent, and \"whose\" is a relative pronoun that cannot fill this slot, so \"tune whose instruments\" is ungrammatical. So the answer is A."
+    }
+   ],
+   "why": "Re-check of R2-G12 (S-G12): with the plural antecedent 'all of whom', 'his or her' is still defensible to many editors as a distributive singular.",
+   "validation": "Option C 'his or her' -> 'whose' (a relative pronoun cannot fill the possessive slot: 'tune whose instruments'). 'their' is the only grammatical option; key A unchanged. Explanation rewritten.",
+   "kind": "sat"
+  },
+  {
+   "id": "R5-F-S06",
+   "problemId": "7ddfae40-f506-48b2-a2c2-fd8dab606f30",
+   "expectVersionId": "b67c71ac-2580-4203-b0a6-244c50a91b41",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "A museum curator is planning an exhibit space and wants to display paintings and sculptures together. Each painting requires 8 square feet of wall space, and each sculpture requires 15 square feet of floor space. The exhibit has at most 240 square feet of combined space available for these two types of art. The curator also wants to display at least 5 paintings. Let $x$ represent the number of paintings and $y$ represent the number of sculptures. The graph shows the boundary lines $x = 5$ and $8x + 15y = 240$, with the solution to the system of inequalities shown as the set of points satisfying both $x \\ge 5$ and $8x + 15y \\le 240$.",
+     "new": "A museum curator is planning an exhibit space and wants to display paintings and sculptures together. Each painting requires 8 square feet of wall space, and each sculpture requires 15 square feet of floor space. The exhibit has at most 240 square feet of combined space available for these two types of art. The curator also wants to display at least 5 paintings. Let $x$ represent the number of paintings and $y$ represent the number of sculptures. The graph shows the boundary lines $x = 5$ and $8x + 15y = 240$."
+    }
+   ],
+   "why": "Figure visual check: the figure draws only the two boundary lines (no shading) but the text says the solution set is 'shown' on the graph.",
+   "validation": "Removed the clause claiming the graph shows the solution region; the graph shows exactly the two boundary lines the sentence now names. Answer (6, 10) unchanged: 6 >= 5 and 8*6 + 15*10 = 198 <= 240; the other points fail one condition.",
+   "kind": "sat"
+  },
+  {
+   "id": "R5-F-S07",
+   "problemId": "3dfd2cba-99e0-4fd1-a6dc-7770c3637480",
+   "expectVersionId": "3b5f2e79-efee-4729-9d9d-7d4836ab5033",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "An architect is designing an elliptical archway. In a coordinate system where $x$ and $y$ are measured in feet, the outline of the archway's opening satisfies the equation $\\frac{x^2}{25} + \\frac{y^2}{16} = 1$ for $y \\ge 0$, representing the upper half of an ellipse. A horizontal support beam is to be installed along the line $y = kx + 4$, where $k$ is a constant, and the beam must touch the archway's curved edge at exactly one point.",
+     "new": "An architect is designing an elliptical archway. In a coordinate system where $x$ and $y$ are measured in feet, the outline of the archway's opening satisfies the equation $\\frac{x^2}{25} + \\frac{y^2}{16} = 1$ for $y \\ge 0$, representing the upper half of an ellipse. A straight support beam is to be installed along the line $y = kx + 4$, where $k$ is a constant, and the beam must touch the archway's curved edge at exactly one point."
+    }
+   ],
+   "why": "Figure visual check: the text calls the beam 'horizontal' but its equation y = kx + 4 is not horizontal for k != 0, and the key k = 0 is the only horizontal case (self-contradictory wording).",
+   "validation": "'A horizontal support beam' -> 'A straight support beam'. The math is unchanged: exactly one touch point only for k = 0 (checked: k = 3/5 touches at x=-4.8, k = 4/5 at x=-5 and x=0, k = 16/25 at x=-4.88 and x=0).",
+   "kind": "sat"
+  },
+  {
+   "id": "R5-F-M17",
+   "problemId": "0049d229-8bdc-4a0d-a585-c43cbe9e96dd",
+   "expectVersionId": "0a3c657f-7f44-44c7-a53c-01855b0ea575",
+   "changes": [
+    {
+     "field": "explanation",
+     "old": "(1) 그림에서 직선 위의 두 격자점 (0, 60) 과 (5, 10) 를 읽는다. (2) x = 5 에서 직선의 높이를 격자로 읽으면 10 이다. 따라서 정답은 10이다.",
+     "new": "그래프는 게임 횟수가 1회 늘 때마다 잔액이 10달러씩 줄어드는 직선 관계를 보여 준다(0회 60달러, 1회 50달러, 2회 40달러, 3회 30달러, 4회 20달러). 이 관계가 계속되므로 5회째의 예상 잔액은 4회째 잔액 20달러에서 10달러를 뺀 10달러이다. 따라서 정답은 10이다."
+    },
+    {
+     "field": "explanation_en",
+     "old": "(1) Read two lattice points on the line. (2) Read the height on the grid. So the answer is 10.",
+     "new": "The graph shows a linear pattern in which the balance drops by 10 dollars for each additional game (60 dollars after 0 games, 50 after 1, 40 after 2, 30 after 3, and 20 after 4). Because the pattern continues, the predicted balance after 5 games is the balance after 4 games minus 10, that is, 20 - 10 = 10 dollars. So the answer is 10."
+    },
+    {
+     "field": "figure",
+     "old": {
+      "categories": [
+       "0",
+       "1",
+       "2",
+       "3",
+       "4",
+       "5"
+      ],
+      "kind": "line",
+      "series": [
+       {
+        "values": [
+         60,
+         50,
+         40,
+         30,
+         20,
+         10
+        ]
+       }
+      ],
+      "type": "data",
+      "xTitle": "Number of games played",
+      "yMax": 70,
+      "yMin": 0,
+      "yStep": 10,
+      "yTitle": "Balance remaining (dollars)"
+     },
+     "new": {
+      "categories": [
+       "0",
+       "1",
+       "2",
+       "3",
+       "4"
+      ],
+      "kind": "line",
+      "series": [
+       {
+        "values": [
+         60,
+         50,
+         40,
+         30,
+         20
+        ]
+       }
+      ],
+      "type": "data",
+      "xTitle": "Number of games played",
+      "yMax": 70,
+      "yMin": 0,
+      "yStep": 10,
+      "yTitle": "Balance remaining (dollars)"
+     }
+    }
+   ],
+   "why": "Figure visual check: the graph plots a point at 5 games (balance 10) and the question asks for the 'predicted' balance at 5 games, so the answer is read straight off the graph.",
+   "validation": "Last plotted point (5 games, 10) removed: the graph now shows 0 to 4 games (60, 50, 40, 30, 20) and the predicted balance at 5 games, 20 - 10 = 10, requires using the linear pattern. Key 10 unchanged. figure_checked becomes false (the new figure was rendered and viewed: 5 points, y axis 0-70).",
+   "kind": "sat"
+  },
+  {
+   "id": "R5-TRIM-01990482",
+   "problemId": "01990482-cf4d-443a-a8bc-90dc787457a7",
+   "expectVersionId": "76907d0d-ac91-4b66-9deb-91f6427a162e",
+   "kind": "sat",
+   "why": "RW passage over 160 words shortened by deletion only (Digital SAT RW passages are about 25-150 words). 164 -> 132 words. Removed the opening line, the stairwell/skylight staging, and the closing gull sentence. None bears on the lamp metaphor, the reviewer praise, or the shrinking-name clue the key (A) and the distractors rely on.",
+   "validation": "Deletion-only (every retained word is in the original in order), blanks / Text labels / bullet structure unchanged, no quoted explanation or evidence phrase lost, an independent solver (key hidden) picks the same answer with no other defensible option.",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "Anniversaries matter to me. Ten years after my first novel appeared, I wanted a dinner on the harbor, speeches, a printed card with both our names. Eulalio, who had carried my sentences into English through three books, wanted nothing. We argued on the stairwell of my lodging on the Cornish coast, I on the landing, he two steps below, the skylight rattling in the sea wind. I reminded him that reviewers had praised the music of the English pages, and that he had asked for his name to be printed small on the title page, then smaller. He said that was rather the point. His part, he told me, had always been a lamp in the next room: enough to read by, never meant to be looked at. I wanted to argue that lamps can be thanked. Instead I asked him to write the card himself, in whatever size he liked. Overhead, a gull walked the slate roof, its claws scraping at every step.",
+     "new": "Ten years after my first novel appeared, I wanted a dinner on the harbor, speeches, a printed card with both our names. Eulalio, who had carried my sentences into English through three books, wanted nothing. We argued on the stairwell of my lodging on the Cornish coast. I reminded him that reviewers had praised the music of the English pages, and that he had asked for his name to be printed small on the title page, then smaller. He said that was rather the point. His part, he told me, had always been a lamp in the next room: enough to read by, never meant to be looked at. I wanted to argue that lamps can be thanked. Instead I asked him to write the card himself, in whatever size he liked."
+    }
+   ]
+  },
+  {
+   "id": "R5-TRIM-07ce3c76",
+   "problemId": "07ce3c76-f50b-4c48-bdae-36e1a4234e61",
+   "expectVersionId": "df337ed3-4cf3-4e63-8db7-c88d6c935a9f",
+   "kind": "sat",
+   "why": "RW passage over 160 words shortened by deletion only (Digital SAT RW passages are about 25-150 words). 163 -> 143 words. Cut the lamp-smell clause and the French/English column detail (about 20 words, leaving ~143). Both are atmospheric or incidental. The road excuse, mule timing, missing publisher's letter, intact ledger, and sales detail for the distractors all remain, so the key D is unaffected.",
+   "validation": "Deletion-only (every retained word is in the original in order), blanks / Text labels / bullet structure unchanged, no quoted explanation or evidence phrase lost, an independent solver (key hidden) picks the same answer with no other defensible option.",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "Rain drums on the galvanized roof, and the lamp smells of coconut oil and scorched wick. Each night Roshane sits across from you and copies your pages into his ledger, the French on the left, your English on the right, his pen scratching long after you have gone to bed. You had expected him to arrive with objections; his own novels sold better than yours in Paris. When you ask why he has not gone back down to Port of Spain, Linton, he says the road below the cocoa estate is washed out. Perhaps it is. Yet the boy who brought his mule up the hill led it home on Tuesday, a full day before the first rain. And the publisher's letter, the one asking for forty pages to be cut, is no longer on the shelf where you left it. On Sunday morning you find his finished ledger beside your inkwell, every chapter intact, its spine tied with your own blue ribbon.",
+     "new": "Rain drums on the galvanized roof. Each night Roshane sits across from you and copies your pages into his ledger, his pen scratching long after you have gone to bed. You had expected him to arrive with objections; his own novels sold better than yours in Paris. When you ask why he has not gone back down to Port of Spain, Linton, he says the road below the cocoa estate is washed out. Perhaps it is. Yet the boy who brought his mule up the hill led it home on Tuesday, a full day before the first rain. And the publisher's letter, the one asking for forty pages to be cut, is no longer on the shelf where you left it. On Sunday morning you find his finished ledger beside your inkwell, every chapter intact, its spine tied with your own blue ribbon."
+    }
+   ]
+  },
+  {
+   "id": "R5-TRIM-0abe38d3",
+   "problemId": "0abe38d3-8869-4ad1-9522-090c2c6bac91",
+   "expectVersionId": "281f070d-5301-4a6b-a684-79fd9c92fb93",
+   "kind": "sat",
+   "why": "RW passage over 160 words shortened by deletion only (Digital SAT RW passages are about 25-150 words). 167 -> 146 words. Cut \"trousers rolled,\" the swimming-a-length clause, and the damp-towel clause. Both cover-up episodes (her resting, his rust-word pause) and the distractor details (lessons, older word, towel) remain, so the answer A is unaffected.",
+   "validation": "Deletion-only (every retained word is in the original in order), blanks / Text labels / bullet structure unchanged, no quoted explanation or evidence phrase lost, an independent solver (key hidden) picks the same answer with no other defensible option.",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "We never reached the far wall that summer, though Dario spoke of it each morning as if distance were only another word to learn. He sat on the rim of the salt pool in Havana, trousers rolled, and named things in the language of his village: tile, gull, the green rust on the ladder. Bartolo repeated each word and swam a length before the next. On Thursday she stopped short of the far wall, held the rope, and came back saying she had only wanted to rest. Dario nodded and gave her the word for rest, then a second, older word that he said meant resting before one has finished. She practiced it without asking why. Later, reciting the colors, he paused at the word for the rust, and let her supply it, which she did loudly, as though he had been testing her. On the walk home she carried his towel over her shoulder, still damp at one corner where the rope had dripped on it.",
+     "new": "We never reached the far wall that summer, though Dario spoke of it each morning as if distance were only another word to learn. He sat on the rim of the salt pool in Havana and named things in the language of his village: tile, gull, the green rust on the ladder. Bartolo repeated each word. On Thursday she stopped short of the far wall, held the rope, and came back saying she had only wanted to rest. Dario nodded and gave her the word for rest, then a second, older word that he said meant resting before one has finished. She practiced it without asking why. Later, reciting the colors, he paused at the word for the rust, and let her supply it, which she did loudly, as though he had been testing her. On the walk home she carried his towel over her shoulder."
+    }
+   ]
+  },
+  {
+   "id": "R5-TRIM-13883025",
+   "problemId": "13883025-41d3-4f2d-8d0d-3a797afa0c2c",
+   "expectVersionId": "f3cea03a-0f68-4a0e-8c22-5c73e71eb5f4",
+   "kind": "sat",
+   "why": "RW passage over 160 words shortened by deletion only (Digital SAT RW passages are about 25-150 words). 182 -> 141 words. Removed the sentence describing how the shell steers sound and the \"wrong way\" gloss, plus \"were striking, but they\". The narrow-frequency limitation, the shift to specific frequencies, and the distractor details (negative refractive index, light origin, units smaller than waves, submarine/factory) remain, so the answer B is unchanged. The result is 139 words.",
+   "validation": "Deletion-only (every retained word is in the original in order), blanks / Text labels / bullet structure unchanged, no quoted explanation or evidence phrase lost, an independent solver (key hidden) picks the same answer with no other defensible option.",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "Engineers designing acoustic cloaks often borrow an idea first developed for light: metamaterials, structures built from repeating units smaller than the waves they manipulate, can be arranged to give a material properties no natural substance has, including a negative refractive index that bends waves the \"wrong\" way. By grading these properties carefully, a shell of metamaterial can steer incoming sound around an object and release it on the far side as if nothing had been in the way. Early laboratory demonstrations were striking, but they worked only within a narrow band of frequencies, because the tiny resonating units that produce the unusual behavior respond strongly to some pitches and hardly at all to others.\n\nResearchers at several universities have therefore shifted their focus. Rather than pursuing a perfect cloak, many now design shells that hide objects from the specific frequencies that matter in a given setting, such as the sonar pulses used to locate submarines or the low hum of machinery in a factory. This narrower aim, they argue, turns a laboratory curiosity into something that could actually be built and used.",
+     "new": "Engineers designing acoustic cloaks often borrow an idea first developed for light: metamaterials, structures built from repeating units smaller than the waves they manipulate, can be arranged to give a material properties no natural substance has, including a negative refractive index. Early laboratory demonstrations worked only within a narrow band of frequencies, because the tiny resonating units that produce the unusual behavior respond strongly to some pitches and hardly at all to others.\n\nResearchers at several universities have therefore shifted their focus. Rather than pursuing a perfect cloak, many now design shells that hide objects from the specific frequencies that matter in a given setting, such as the sonar pulses used to locate submarines or the low hum of machinery in a factory. This narrower aim, they argue, turns a laboratory curiosity into something that could actually be built and used."
+    }
+   ]
+  },
+  {
+   "id": "R5-TRIM-230602ac",
+   "problemId": "230602ac-9166-4912-bad0-c0628a8c2ea3",
+   "expectVersionId": "ec842a10-5fa4-490e-a0a2-25c75ccd15c6",
+   "kind": "sat",
+   "why": "RW passage over 160 words shortened by deletion only (Digital SAT RW passages are about 25-150 words). 164 -> 140 words. Removed the opening definition of acoustic cavitation, which is background not needed for the main idea; all details behind the key (D) and distractors A, B, and C remain, bringing the passage to about 136 words.",
+   "validation": "Deletion-only (every retained word is in the original in order), blanks / Text labels / bullet structure unchanged, no quoted explanation or evidence phrase lost, an independent solver (key hidden) picks the same answer with no other defensible option.",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "When a liquid is blasted with intense sound waves, tiny gas bubbles can form, swell, and then collapse violently, a process called acoustic cavitation. In 1990, physicist Felipe Gaitan showed that a single bubble trapped in a flask of water by a standing sound wave could be made to collapse over and over, giving off a faint flash of blue-white light with each cycle. This effect, called sonoluminescence, had first been noticed decades earlier in clouds of bubbles, but isolating one bubble let researchers time the flashes precisely. They found that each flash lasts less than a billionth of a second, far shorter than many had expected. Yet even with this precision, researchers still disagree about what produces the light. Some argue that the collapsing bubble heats its gas enough to form a glowing plasma, while others propose that the light comes from chemical reactions or from electric charges separating at the bubble wall, and no single model yet accounts for all the measurements.",
+     "new": "In 1990, physicist Felipe Gaitan showed that a single bubble trapped in a flask of water by a standing sound wave could be made to collapse over and over, giving off a faint flash of blue-white light with each cycle. This effect, called sonoluminescence, had first been noticed decades earlier in clouds of bubbles, but isolating one bubble let researchers time the flashes precisely. They found that each flash lasts less than a billionth of a second, far shorter than many had expected. Yet even with this precision, researchers still disagree about what produces the light. Some argue that the collapsing bubble heats its gas enough to form a glowing plasma, while others propose that the light comes from chemical reactions or from electric charges separating at the bubble wall, and no single model yet accounts for all the measurements."
+    }
+   ]
+  },
+  {
+   "id": "R5-TRIM-1b7778dc",
+   "problemId": "1b7778dc-6c37-4aa7-b8aa-c21f82321560",
+   "expectVersionId": "3582dc07-2a1d-462f-b393-1d658b504317",
+   "kind": "sat",
+   "why": "RW passage over 160 words shortened by deletion only (Digital SAT RW passages are about 25-150 words). 185 -> 147 words. Removed decorative detail (octopus plates, course after course, coffee at seven, list numbering, final vines image). The night-shift bickering, the proud list, the mothers' mishaps and Genevieve's mouthed number remain, so the irritation-to-sheepish-humor shift and answer D are unaffected.",
+   "validation": "Deletion-only (every retained word is in the original in order), blanks / Text labels / bullet structure unchanged, no quoted explanation or evidence phrase lost, an independent solver (key hidden) picks the same answer with no other defensible option.",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "We had argued for weeks about the table. I wanted the terrace laid the Galician way for my mother's visit, with octopus on wooden plates and bread torn by hand; Genevieve insisted on the long French lunch her grandmother used to serve, course after careful course. Both of us worked nights at the hospital, and we fought the way tired people fight, in clipped sentences over cold coffee at seven in the morning. I kept a list of every dish she rejected, and I was proud of how long it had grown. On the morning itself, both mothers arrived early. I found them in the kitchen, mine rolling crêpe batter far too thick and hers slicing octopus with a bread knife, each doing the other's dish badly and neither apologizing. I touched the list in my pocket. Seventeen items, I recalled, numbered in my neatest hand. We set out both kinds of plates, and Genevieve, catching my eye across the terrace, mouthed the number seventeen, which meant she had found it on the dresser days ago. Below us the vines dripped from the night's rain.",
+     "new": "We had argued for weeks about the table. I wanted the terrace laid the Galician way for my mother's visit; Genevieve insisted on the long French lunch her grandmother used to serve. Both of us worked nights at the hospital, and we fought the way tired people fight, in clipped sentences. I kept a list of every dish she rejected, and I was proud of how long it had grown. On the morning itself, both mothers arrived early. I found them in the kitchen, mine rolling crêpe batter far too thick and hers slicing octopus with a bread knife, each doing the other's dish badly and neither apologizing. I touched the list in my pocket. Seventeen items. We set out both kinds of plates, and Genevieve, catching my eye across the terrace, mouthed the number seventeen, which meant she had found it on the dresser days ago."
+    }
+   ]
+  },
+  {
+   "id": "R5-TRIM-1cdafeb2",
+   "problemId": "1cdafeb2-9348-4649-9afd-32af176b2dfc",
+   "expectVersionId": "fcf71f85-df26-4af5-8a24-0c83c97607c5",
+   "kind": "sat",
+   "why": "RW passage over 160 words shortened by deletion only (Digital SAT RW passages are about 25-150 words). 176 -> 136 words. Cut the closing pigeon/scrap sentence and the redundant second cobbler-inspection sentence. Both are atmospheric or repetitive; the repeated glue repair, the unspoken decline, the covered high note, and the distractor details (appearance, cobbler, hardship) all remain, so the answer B is unaffected.",
+   "validation": "Deletion-only (every retained word is in the original in order), blanks / Text labels / bullet structure unchanged, no quoted explanation or evidence phrase lost, an independent solver (key hidden) picks the same answer with no other defensible option.",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "Years later, Nicolas would remember the boots more clearly than the songs. Every Saturday that last autumn, before their set in the plaza, Sergio left his left boot at a shoe repair stall near the cathedral in Seville, where an old cobbler glued the split sole back together without comment. The duo was drawing fewer listeners each week, though neither of them said so. Nicolas noticed that Sergio had begun to miss the high note in their closing song and to cover it with a flourish on the guitar; Nicolas, in turn, pretended not to hear. Each Saturday the cobbler held the boot up to the light, pressed the seam with his thumb, and handed it back. Each week the glue held for a few days, and then the sole began, quietly, to open again. One evening Nicolas saw Sergio wince as he stepped onto a curb, the boot gaping at the toe, and still say nothing. After the stall closed, the cobbler swept leather scraps into the gutter, where pigeons inspected them and moved on.",
+     "new": "Years later, Nicolas would remember the boots more clearly than the songs. Every Saturday that last autumn, before their set in the plaza, Sergio left his left boot at a shoe repair stall near the cathedral in Seville, where an old cobbler glued the split sole back together without comment. The duo was drawing fewer listeners each week, though neither of them said so. Nicolas noticed that Sergio had begun to miss the high note in their closing song and to cover it with a flourish on the guitar; Nicolas, in turn, pretended not to hear. Each week the glue held for a few days, and then the sole began, quietly, to open again. One evening Nicolas saw Sergio wince as he stepped onto a curb, the boot gaping at the toe, and still say nothing."
+    }
+   ]
+  },
+  {
+   "id": "R5-TRIM-32b63987",
+   "problemId": "32b63987-3958-40cb-a6a1-b91f97a2cd6f",
+   "expectVersionId": "421680aa-1476-426e-9a64-5d0cfaaef105",
+   "kind": "sat",
+   "why": "RW passage over 160 words shortened by deletion only (Digital SAT RW passages are about 25-150 words). 169 -> 144 words. Removed the opening clause about the buffet doors, the collar detail, and the final wave to a cousin. These are incidental; the relaxed laughing, the deflecting behaviors (refilling the cup, japchae, dress compliments, napkin) that support D, and the details behind each distractor remain. Now 145 words.",
+   "validation": "Deletion-only (every retained word is in the original in order), blanks / Text labels / bullet structure unchanged, no quoted explanation or evidence phrase lost, an independent solver (key hidden) picks the same answer with no other defensible option.",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "When the buffet doors opened, the wedding hall in Busan dissolved into a hundred conversations, and Sunja let the noise carry her to a corner table. Joon, her grandson, slid in beside her, tugging at a collar his mother had ironed too stiffly, and teased her about the cousin who had tripped on the aisle runner. Sunja swatted his wrist and laughed until her eyes watered. Then he drew a creased photograph from his jacket: a young woman in a borrowed hanbok beside a man no one in the family had ever named. \"Who is he, Halmeoni?\" Sunja glanced at it, smiled, and said it was only a neighbor, a long time ago. She refilled Joon's cup, though it was nearly full, and asked loudly whether he had tried the japchae. Twice more she praised the bride's dress. When he slid the photograph back toward her, she placed her napkin over it, smoothing the cloth flat with both hands, and turned to wave at a cousin across the room.",
+     "new": "The wedding hall in Busan dissolved into a hundred conversations, and Sunja let the noise carry her to a corner table. Joon, her grandson, slid in beside her and teased her about the cousin who had tripped on the aisle runner. Sunja swatted his wrist and laughed until her eyes watered. Then he drew a creased photograph from his jacket: a young woman in a borrowed hanbok beside a man no one in the family had ever named. \"Who is he, Halmeoni?\" Sunja glanced at it, smiled, and said it was only a neighbor, a long time ago. She refilled Joon's cup, though it was nearly full, and asked loudly whether he had tried the japchae. Twice more she praised the bride's dress. When he slid the photograph back toward her, she placed her napkin over it, smoothing the cloth flat with both hands."
+    }
+   ]
+  },
+  {
+   "id": "R5-TRIM-35a1d518",
+   "problemId": "35a1d518-f01b-4d98-819f-a8fffe2e5c8e",
+   "expectVersionId": "16231185-651d-46f3-b9cf-c9a866af05ed",
+   "kind": "sat",
+   "why": "RW passage over 160 words shortened by deletion only (Digital SAT RW passages are about 25-150 words). 166 -> 144 words. Removed the purpose phrase, the variety description, the timeframe, and the detail about bidders' willingness to pay. The claim, the unchanged-supply sentence, and the guild-letter evidence span that support D and rule out A-C are untouched.",
+   "validation": "Deletion-only (every retained word is in the original in order), blanks / Text labels / bullet structure unchanged, no quoted explanation or evidence phrase lost, an independent solver (key hidden) picks the same answer with no other defensible option.",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "An economic historian studying the collapse of the Dutch tulip market in 1637 argued that the crash resulted primarily from a sudden failure of buyer confidence rather than from any change in tulip bulbs' actual scarcity or agricultural value. To support this claim, the historian traced contract prices for a specific tulip variety, Semper Augustus, across several weeks. The price records showed that contracts for delivery of the bulbs held steady at extremely high values right up until a single afternoon in February, when a routine auction in Haarlem failed to attract any bidders willing to pay even a fraction of the previous asking price. No new bulbs had been planted, harvested, or destroyed in the days surrounding this event, and no change in the growing conditions or bulb supply was recorded. The historian also noted that, within days of the failed auction, several regional guilds began circulating letters urging members to stop honoring existing tulip delivery contracts altogether, regardless of the bulbs' condition or quantity.",
+     "new": "An economic historian studying the collapse of the Dutch tulip market in 1637 argued that the crash resulted primarily from a sudden failure of buyer confidence rather than from any change in tulip bulbs' actual scarcity or agricultural value. The historian traced contract prices for Semper Augustus. The price records showed that contracts for delivery of the bulbs held steady at extremely high values right up until a single afternoon in February, when a routine auction in Haarlem failed to attract any bidders. No new bulbs had been planted, harvested, or destroyed in the days surrounding this event, and no change in the growing conditions or bulb supply was recorded. The historian also noted that, within days of the failed auction, several regional guilds began circulating letters urging members to stop honoring existing tulip delivery contracts altogether, regardless of the bulbs' condition or quantity."
+    }
+   ]
+  },
+  {
+   "id": "R5-TRIM-376e9f71",
+   "problemId": "376e9f71-3875-4f18-9910-4b56cfdefde2",
+   "expectVersionId": "909cbe54-546c-4eb4-8007-2210d8c779c4",
+   "kind": "sat",
+   "why": "RW passage over 160 words shortened by deletion only (Digital SAT RW passages are about 25-150 words). 162 -> 148 words. Removed the habitat appositive and a few adverbial modifiers (\"for decades\", \"initially\", \"surprisingly\", \"More\"). The photoreceptor contrast, the poor discrimination finding, the human-blending contrast, the bees comparison, the predators detail and the evidence span are untouched, so the main idea and answer B are unaffected.",
+   "validation": "Deletion-only (every retained word is in the original in order), blanks / Text labels / bullet structure unchanged, no quoted explanation or evidence phrase lost, an independent solver (key hidden) picks the same answer with no other defensible option.",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "The mantis shrimp, a marine crustacean found in tropical and subtropical waters, possesses one of the most complex visual systems in the animal kingdom, yet the exact purpose of this complexity has puzzled scientists for decades. Unlike humans, who perceive color using three types of photoreceptors, mantis shrimp have between twelve and sixteen types, and their eyes can independently rotate to track prey while scanning for predators. Researchers initially assumed this abundance of photoreceptors allowed the shrimp to distinguish an extraordinary range of colors, but behavioral tests revealed the opposite: mantis shrimp are surprisingly poor at telling similar hues apart compared to humans and bees. More recent studies suggest that instead of blending color signals in the brain the way human vision does, the shrimp's eyes may process each photoreceptor's input separately and rapidly, allowing near-instant color identification without complex neural computation—a system suited less for fine discrimination than for extremely fast recognition in the fast-moving reef environments where the shrimp hunts.",
+     "new": "The mantis shrimp possesses one of the most complex visual systems in the animal kingdom, yet the exact purpose of this complexity has puzzled scientists. Unlike humans, who perceive color using three types of photoreceptors, mantis shrimp have between twelve and sixteen types, and their eyes can independently rotate to track prey while scanning for predators. Researchers assumed this abundance of photoreceptors allowed the shrimp to distinguish an extraordinary range of colors, but behavioral tests revealed the opposite: mantis shrimp are poor at telling similar hues apart compared to humans and bees. Recent studies suggest that instead of blending color signals in the brain the way human vision does, the shrimp's eyes may process each photoreceptor's input separately and rapidly, allowing near-instant color identification without complex neural computation—a system suited less for fine discrimination than for extremely fast recognition in the fast-moving reef environments where the shrimp hunts."
+    }
+   ]
+  },
+  {
+   "id": "R5-TRIM-387cc5bf",
+   "problemId": "387cc5bf-00fb-453e-86cf-e9484094070d",
+   "expectVersionId": "f916d049-4a79-46f7-86e3-2c2850a17701",
+   "kind": "sat",
+   "why": "RW passage over 160 words shortened by deletion only (Digital SAT RW passages are about 25-150 words). 169 -> 146 words. Removed Text 1's sentence on reported traffic drops and revenue. The tested claim (faster, more measurable results than infrastructure), Text 2's evidence span, and the detail distractor A relies on are all kept, so the answer B is unchanged. The passage is now about 145 words.",
+   "validation": "Deletion-only (every retained word is in the original in order), blanks / Text labels / bullet structure unchanged, no quoted explanation or evidence phrase lost, an independent solver (key hidden) picks the same answer with no other defensible option.",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "Text 1\nUrban planners advocating for congestion pricing argue that charging drivers a fee to enter crowded downtown areas during peak hours is the most effective way to reduce gridlock. Cities that have implemented such fees report meaningful drops in traffic volume, along with increased revenue that can be reinvested in public transit. Because the fee directly targets the behavior causing congestion—driving into the city center at busy times—proponents claim it produces faster and more measurable results than infrastructure projects, which can take years to complete and may simply attract new drivers once finished.\n\nText 2\nCritics of congestion pricing point out that the policy places a disproportionate burden on lower-income commuters who cannot afford the daily fee but also lack convenient access to public transit alternatives. These critics argue that without first expanding affordable transit options in underserved neighborhoods, congestion pricing effectively restricts who can drive downtown based on income rather than genuinely solving the underlying transportation problem. They favor phasing in transit investment before introducing any fee.",
+     "new": "Text 1\nUrban planners advocating for congestion pricing argue that charging drivers a fee to enter crowded downtown areas during peak hours is the most effective way to reduce gridlock. Because the fee directly targets the behavior causing congestion—driving into the city center at busy times—proponents claim it produces faster and more measurable results than infrastructure projects, which can take years to complete and may simply attract new drivers once finished.\n\nText 2\nCritics of congestion pricing point out that the policy places a disproportionate burden on lower-income commuters who cannot afford the daily fee but also lack convenient access to public transit alternatives. These critics argue that without first expanding affordable transit options in underserved neighborhoods, congestion pricing effectively restricts who can drive downtown based on income rather than genuinely solving the underlying transportation problem. They favor phasing in transit investment before introducing any fee."
+    }
+   ]
+  },
+  {
+   "id": "R5-TRIM-39de9cb4",
+   "problemId": "39de9cb4-30cc-4be9-b4a2-75e80b772cac",
+   "expectVersionId": "b792bdcb-bda1-4585-80fa-96f26a8bb3fe",
+   "kind": "sat",
+   "why": "RW passage over 160 words shortened by deletion only (Digital SAT RW passages are about 25-150 words). 172 -> 145 words. Removed the broom-path description sentence and the closing tram sentence, which are atmospheric detail. The wedding talk while sweeping, the floor remark, the untouched catalog (B), Marlon's joke (D), and the role swap at the end all remain, so the answer C is unaffected. The passage is now about 145 words.",
+   "validation": "Deletion-only (every retained word is in the original in order), blanks / Text labels / bullet structure unchanged, no quoted explanation or evidence phrase lost, an independent solver (key hidden) picks the same answer with no other defensible option.",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "Milena held the dustpan while her mother swept, as she had every Saturday since she was nine. Marlon's barbershop on Brīvības Street closed at six, and her mother, who had cut hair there for twenty years, never let anyone else sweep the floor. Tonight they were meant to choose wedding napkins; the catalog lay open on a barber chair, untouched. The broom moved in its old pattern, under the mirrors, around the coat rack, toward the door. Her mother talked about guest lists and seating while she swept, and Milena answered without looking up. Once her mother paused and said that Milena's new flat had wooden floors, the kind that showed every hair. Marlon, counting the till, laughed and said she would need a better broom. Near the end, her mother's arms slowed. Milena set down the pan, took the broom, and finished the last corner in the same strokes, left to right. Her mother picked up the dustpan without a word. Outside, a tram rang its bell twice at the corner.",
+     "new": "Milena held the dustpan while her mother swept, as she had every Saturday since she was nine. Marlon's barbershop on Brīvības Street closed at six, and her mother, who had cut hair there for twenty years, never let anyone else sweep the floor. Tonight they were meant to choose wedding napkins; the catalog lay open on a barber chair, untouched. Her mother talked about guest lists and seating while she swept, and Milena answered without looking up. Once her mother paused and said that Milena's new flat had wooden floors, the kind that showed every hair. Marlon, counting the till, laughed and said she would need a better broom. Near the end, her mother's arms slowed. Milena set down the pan, took the broom, and finished the last corner in the same strokes, left to right. Her mother picked up the dustpan without a word."
+    }
+   ]
+  },
+  {
+   "id": "R5-TRIM-3a6e8cbd",
+   "problemId": "3a6e8cbd-4abe-4327-94b5-cec57ec81b09",
+   "expectVersionId": "b51d508d-5cce-41e4-abef-7147a81ac9bd",
+   "kind": "sat",
+   "why": "RW passage over 160 words shortened by deletion only (Digital SAT RW passages are about 25-150 words). 181 -> 138 words. Removed the opening time phrase, the jar-turning sentence, and the closing weather/stove sentence, which are atmosphere only. All clues for C (vanished villages, coat pockets, seeds sprouting, father's move, new jar labeled with his farm) and the distractor-B detail (Dvora's coldness to the teacher) remain.",
+   "validation": "Deletion-only (every retained word is in the original in order), blanks / Text labels / bullet structure unchanged, no quoted explanation or evidence phrase lost, an independent solver (key hidden) picks the same answer with no other defensible option.",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "By the third week of term, Dvora still sat at the farthest table in the seed-saving cooperative in Haifa, sorting lentils without a word to me. I was the new teacher, and she had made it plain that she considered me temporary. Her father, I learned from the director, was to be moved from his farm in the hills to a small room in the city, and he had refused to go. One afternoon she showed me a cabinet of glass jars, each labeled in faded ink with the name of a village that no longer appeared on any map. These were carried here in coat pockets, she said. Some of them still come up every spring. I watched her lift a jar of dark wheat and turn it slowly, as if weighing it. The next morning, she asked me for an empty jar and a label, and she wrote the name of her father's farm on it in careful letters. Rain fell on the tin roof all that day, and the director kept the stove burning in the back room.",
+     "new": "Dvora still sat at the farthest table in the seed-saving cooperative in Haifa, sorting lentils without a word to me. I was the new teacher, and she had made it plain that she considered me temporary. Her father, I learned from the director, was to be moved from his farm in the hills to a small room in the city, and he had refused to go. One afternoon she showed me a cabinet of glass jars, each labeled in faded ink with the name of a village that no longer appeared on any map. These were carried here in coat pockets, she said. Some of them still come up every spring. The next morning, she asked me for an empty jar and a label, and she wrote the name of her father's farm on it in careful letters."
+    }
+   ]
+  },
+  {
+   "id": "R5-TRIM-3b4e74b1",
+   "problemId": "3b4e74b1-e97e-4726-a77e-498f2befd7e9",
+   "expectVersionId": "d2766529-9415-4dd7-8265-b5be2708939b",
+   "kind": "sat",
+   "why": "RW passage over 160 words shortened by deletion only (Digital SAT RW passages are about 25-150 words). 176 -> 149 words. Cut the closing cart-wheel sentence, \"newly hired,\" and the list of cousins and musicians. The wry opening, the unmet expectation of thunder, the father's story and the reflective ending are untouched, so answer A and the distractors still work.",
+   "validation": "Deletion-only (every retained word is in the original in order), blanks / Text labels / bullet structure unchanged, no quoted explanation or evidence phrase lost, an independent solver (key hidden) picks the same answer with no other defensible option.",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "Hasan counted chairs. At every wedding we staffed in Thessaloniki that summer of 1872, he circled the hall twice before the guests came, tapping each chair back like a priest blessing pews, and I, newly hired, learned to time my yawns to the movement of his lips. That evening the count collapsed within minutes: cousins perched on window ledges, the musicians spilled down the stairs, and an aunt sat squarely on his tally board. I braced for thunder. None came. Hasan stood among the dancers with his hands loose at his sides, watching a boy asleep across two laps. Much later, as we folded linens, he mentioned that his father had once lost a post over a single guest left standing, and that he had counted chairs every night since, though no one had ever asked him to. Then he set his tally slate on my stack of napkins. Keep it or break it, Sadia, he said, and went to help the cooks. Out on the street, a cart wheel ground slowly over the wet stones.",
+     "new": "Hasan counted chairs. At every wedding we staffed in Thessaloniki that summer of 1872, he circled the hall twice before the guests came, tapping each chair back like a priest blessing pews, and I, learned to time my yawns to the movement of his lips. That evening the count collapsed within minutes: an aunt sat squarely on his tally board. I braced for thunder. None came. Hasan stood among the dancers with his hands loose at his sides, watching a boy asleep across two laps. Much later, as we folded linens, he mentioned that his father had once lost a post over a single guest left standing, and that he had counted chairs every night since, though no one had ever asked him to. Then he set his tally slate on my stack of napkins. Keep it or break it, Sadia, he said, and went to help the cooks."
+    }
+   ]
+  },
+  {
+   "id": "R5-TRIM-421f69a5",
+   "problemId": "421f69a5-3643-4d66-a7b9-0c4de357fd5b",
+   "expectVersionId": "d24aeb2a-e632-4c8b-9cdd-75ca8dc89984",
+   "kind": "sat",
+   "why": "RW passage over 160 words shortened by deletion only (Digital SAT RW passages are about 25-150 words). 190 -> 148 words. Cut the nineteen/engines detail, Tane's second rejoinder, the thumping machines, and the closing bus/dryer sentence. The three rules, the private fourth rule, Tane's offer, Moana's silence, and the shared memory remain, so answer C and the distractors are unaffected.",
+   "validation": "Deletion-only (every retained word is in the original in order), blanks / Text labels / bullet structure unchanged, no quoted explanation or evidence phrase lost, an independent solver (key hidden) picks the same answer with no other defensible option.",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "Three rules hung on the laundromat wall in Moana's handwriting: no dyeing, no sleeping, no leaving wet clothes past closing. He had added a fourth in his head the day the will was read, a rule for himself: do not mention the chisel. His father had left the carving chisel, the one with the whalebone handle, not to Moana but to Moana's son, Tane, who was nineteen and wanted to fix engines. Now Tane sat on a dryer, turning the chisel over, while the machines thumped. \"You want it,\" Tane said. \"Take it.\" Moana said that was not how it worked. Tane said that was exactly how it worked, that he could hand it over in one second. Moana folded a towel twice and did not answer. Then he asked, almost against his will, whether Tane had ever noticed the small notch near the blade. Tane had not. Moana took the chisel, showed him where his own thumb had slipped at age eight, and handed it back. \"Your grandfather wanted someone to ask about that,\" he said. Outside, a bus hissed at the stop, and the last dryer clicked off.",
+     "new": "Three rules hung on the laundromat wall in Moana's handwriting: no dyeing, no sleeping, no leaving wet clothes past closing. He had added a fourth in his head the day the will was read, a rule for himself: do not mention the chisel. His father had left the carving chisel, the one with the whalebone handle, not to Moana but to Moana's son, Tane. Now Tane sat on a dryer, turning the chisel over. \"You want it,\" Tane said. \"Take it.\" Moana said that was not how it worked. Moana folded a towel twice and did not answer. Then he asked, almost against his will, whether Tane had ever noticed the small notch near the blade. Tane had not. Moana took the chisel, showed him where his own thumb had slipped at age eight, and handed it back. \"Your grandfather wanted someone to ask about that,\" he said."
+    }
+   ]
+  },
+  {
+   "id": "R5-TRIM-4535a3a1",
+   "problemId": "4535a3a1-9c72-435d-bdca-b7334497b725",
+   "expectVersionId": "24af40d6-b7ad-4ba7-a34b-e04ab94992df",
+   "kind": "sat",
+   "why": "RW passage over 160 words shortened by deletion only (Digital SAT RW passages are about 25-150 words). 168 -> 135 words. Removed the sentence about the flax mat and border pattern, which is background unused by the key, the explanation, or any distractor. The saying, the underlined sentence, the apology, the vanished drawing, and the final kite scene all remain, so the answer is unchanged and the passage is 136 words.",
+   "validation": "Deletion-only (every retained word is in the original in order), blanks / Text labels / bullet structure unchanged, no quoted explanation or evidence phrase lost, an independent solver (key hidden) picks the same answer with no other defensible option.",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "Promises are cheap on a tram line. That was my mother's saying, and I repeated it the winter I rode Moana's bus each morning to the weaving cooperative on Ponsonby Road. __Moana kept a child's drawing of a red kite pinned above the fare box, its corners curling from the heat of the engine.__ At the cooperative we were finishing a flax mat for a wedding, and I spent most days arguing with the other women about a border pattern none of us would agree to tighten. One morning Moana missed my stop and drove two streets past it before he noticed, apologizing so many times that I laughed at him. In late August his route changed, and a new driver took the bus. The drawing was gone from above the fare box. That Saturday, walking home, I saw Moana on the hill above the harbor, holding the string of a red kite while a small girl in a borrowed coat ran beneath it, shouting at the wind.",
+     "new": "Promises are cheap on a tram line. That was my mother's saying, and I repeated it the winter I rode Moana's bus each morning to the weaving cooperative on Ponsonby Road. __Moana kept a child's drawing of a red kite pinned above the fare box, its corners curling from the heat of the engine.__ One morning Moana missed my stop and drove two streets past it before he noticed, apologizing so many times that I laughed at him. In late August his route changed, and a new driver took the bus. The drawing was gone from above the fare box. That Saturday, walking home, I saw Moana on the hill above the harbor, holding the string of a red kite while a small girl in a borrowed coat ran beneath it, shouting at the wind."
+    }
+   ]
+  },
+  {
+   "id": "R5-TRIM-47056b8e",
+   "problemId": "47056b8e-21e4-4e4c-ab4a-d4efb2276c16",
+   "expectVersionId": "a29bd5cf-842e-4cfb-84d4-1e1a07fe95ba",
+   "kind": "sat",
+   "why": "RW passage over 160 words shortened by deletion only (Digital SAT RW passages are about 25-150 words). 170 -> 137 words. Cut background (shop description, father's complaints, father going pale, gentle-turning detail). The puzzling habit, the ledger request recasting it, and the open ending are intact, so the key is unchanged.",
+   "validation": "Deletion-only (every retained word is in the original in order), blanks / Text labels / bullet structure unchanged, no quoted explanation or evidence phrase lost, an independent solver (key hidden) picks the same answer with no other defensible option.",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "Why did Hedwig wind the clocks backward? Kalani, the landlord's son, had noticed it on three rent days running: while her father counted coins at the bench of the little Havana shop, she moved along the wall of clocks and turned each key the wrong way, gently, until it resisted, and then let it go. He took it for a girl's idle mischief and said nothing, since his own father disliked complaints. On the fourth rent day his father asked to see the shop's account book. Hedwig's father went pale and reached for the drawer, but Hedwig was quicker; she set the book on the counter herself, opened to a page in her own neat hand, and stepped back to the clocks. Kalani, reading over his father's shoulder, saw that every entry was dated a week before the coins had truly come in. His father nodded and closed the book. Hedwig turned one more key the wrong way and looked at Kalani, and he held her gaze without a word.",
+     "new": "Why did Hedwig wind the clocks backward? Kalani, the landlord's son, had noticed it on three rent days running: while her father counted coins at the bench, she moved along the wall of clocks and turned each key the wrong way. He took it for a girl's idle mischief and said nothing. On the fourth rent day his father asked to see the shop's account book. Hedwig set the book on the counter herself, opened to a page in her own neat hand, and stepped back to the clocks. Kalani, reading over his father's shoulder, saw that every entry was dated a week before the coins had truly come in. His father nodded and closed the book. Hedwig turned one more key the wrong way and looked at Kalani, and he held her gaze without a word."
+    }
+   ]
+  },
+  {
+   "id": "R5-TRIM-47c8f3d1",
+   "problemId": "47c8f3d1-e260-46a7-bbd0-91776f1bc277",
+   "expectVersionId": "1704f890-e1ec-495c-966c-2905f81583da",
+   "kind": "sat",
+   "why": "RW passage over 160 words shortened by deletion only (Digital SAT RW passages are about 25-150 words). 163 -> 141 words. Removed the decorative folk-tale clause about brides' tolls and the closing gulls sentence; neither bears on the metaphor, the flood/thirty-years evidence, or the customs-officer detail behind distractor A.",
+   "validation": "Deletion-only (every retained word is in the original in order), blanks / Text labels / bullet structure unchanged, no quoted explanation or evidence phrase lost, an independent solver (key hidden) picks the same answer with no other defensible option.",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "Anything to declare? asked Lorenzo, the customs officer, as my mother and I reached the little checkpoint on the Cornish coast, where an old tale says brides once paid their toll in shells. My mother had nothing but a photograph she had found that morning in a box of my grandmother's linens, a box she had not opened in thirty years. It showed her own wedding, the groom's half torn away. I had thought it lost in the flood of '89, she said, and I wanted Callum to see it before we choose the chapel. Lorenzo studied it and waved us through. On the cliff path she told me that the torn-away man had drowned off this coast before I was born, and that the man I call father had married her the next spring. The photograph was a locked chest washed ashore, and I could not decide whether I wanted the key. Gulls hung above the checkpoint roof, motionless against the wind.",
+     "new": "Anything to declare? asked Lorenzo, the customs officer, as my mother and I reached the little checkpoint on the Cornish coast. My mother had nothing but a photograph she had found that morning in a box of my grandmother's linens, a box she had not opened in thirty years. It showed her own wedding, the groom's half torn away. I had thought it lost in the flood of '89, she said, and I wanted Callum to see it before we choose the chapel. Lorenzo studied it and waved us through. On the cliff path she told me that the torn-away man had drowned off this coast before I was born, and that the man I call father had married her the next spring. The photograph was a locked chest washed ashore, and I could not decide whether I wanted the key."
+    }
+   ]
+  },
+  {
+   "id": "R5-TRIM-5327a369",
+   "problemId": "5327a369-73ca-4481-82f5-297931d8e270",
+   "expectVersionId": "22b3496e-af64-4585-99a5-46cdb35fd105",
+   "kind": "sat",
+   "why": "RW passage over 160 words shortened by deletion only (Digital SAT RW passages are about 25-150 words). 170 -> 150 words. Removed background (century and a half, markets, outlying islands), \"regular,\" \"Historian,\" and minor modifiers. Kept Lindqvist's enforcement-as-barrier claim (key D), the garrison detail (B), the smuggling claim (C), the monopoly-ending conclusion (A), and Text 2's difficulty-of-growing evidence.",
+   "validation": "Deletion-only (every retained word is in the original in order), blanks / Text labels / bullet structure unchanged, no quoted explanation or evidence phrase lost, an independent solver (key hidden) picks the same answer with no other defensible option.",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "Text 1\nFor roughly a century and a half, the Dutch East India Company (VOC) kept cloves and nutmeg scarce and expensive in European markets. Company fleets made regular \"extirpation\" voyages to burn unauthorized clove trees on outlying islands, and garrisons on the Banda Islands guarded the nutmeg groves. Historian Pieter Lindqvist argues that this enforcement was what confined spice cultivation to Dutch-held islands. So when the company's naval patrols thinned in the 1760s and agents of the French administrator Pierre Poivre slipped seedlings out of the region, the monopoly's days were numbered.\n\nText 2\nBotanist Amara Siregar's review of colonial garden records from Mauritius complicates the story of the smuggled seedlings. Most of the trees that Poivre's agents carried out died within months. Nutmeg in particular proved hard to grow: it needs specific soils, shade, and steady humidity, and it requires both male and female trees, which cannot be told apart until they flower years later. Profitable plantations outside the Moluccas appeared only after decades of repeated failed attempts.",
+     "new": "Text 1\nThe Dutch East India Company (VOC) kept cloves and nutmeg scarce and expensive. Company fleets made \"extirpation\" voyages to burn unauthorized clove trees, and garrisons on the Banda Islands guarded the nutmeg groves. Pieter Lindqvist argues that this enforcement was what confined spice cultivation to Dutch-held islands. So when the company's naval patrols thinned in the 1760s and agents of the French administrator Pierre Poivre slipped seedlings out of the region, the monopoly's days were numbered.\n\nText 2\nBotanist Amara Siregar's review of colonial garden records from Mauritius complicates the story of the smuggled seedlings. Most of the trees that Poivre's agents carried out died within months. Nutmeg proved hard to grow: it needs specific soils, shade, and humidity, and it requires both male and female trees, which cannot be told apart until they flower. Profitable plantations outside the Moluccas appeared only after decades of repeated failed attempts."
+    }
+   ]
+  },
+  {
+   "id": "R5-TRIM-58bb07a8",
+   "problemId": "58bb07a8-311f-4a1b-b051-301ed0b9c068",
+   "expectVersionId": "dc8db1cb-0574-41fd-bbd3-56dee7beddb2",
+   "kind": "sat",
+   "why": "RW passage over 160 words shortened by deletion only (Digital SAT RW passages are about 25-150 words). 187 -> 141 words. Cut the final two sentences (the river stone and the closing shadows/dog imagery). They are background that the key, explanation and distractors do not depend on. The brother's death, \"Neither of us mentioned him,\" the grazing sentence and the hawk sentence all remain. Result is about 141 words.",
+   "validation": "Deletion-only (every retained word is in the original in order), blanks / Text labels / bullet structure unchanged, no quoted explanation or evidence phrase lost, an independent solver (key hidden) picks the same answer with no other defensible option.",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "Tell me about the trading post first, Aponi said, before I had even set down my bundle. So I told her. We stood on the stone bridge below the mesa in the spring of 1879, a year after my family had gone east, and I described my father's ledgers and the schoolmaster's squeaking boots until she laughed. Once, when we were nine, her brother had dared us both to walk the parapet; the summer before I left, the flood had taken him from beneath these same arches. Neither of us mentioned him. For two days we grazed our talk around the edges of one pasture, wandering wide to horses, to weather, to the price of wool. Whenever the water grew loud below us, she would point out a hawk, and I would look where she pointed, though I saw no hawk. On the third evening she pressed a smooth river stone into my palm without explaining it, and I carried it east in my coat. Shadows of the arches lay long across the dry wash, and somewhere up the slope a dog was bringing the sheep down.",
+     "new": "Tell me about the trading post first, Aponi said, before I had even set down my bundle. So I told her. We stood on the stone bridge below the mesa in the spring of 1879, a year after my family had gone east, and I described my father's ledgers and the schoolmaster's squeaking boots until she laughed. Once, when we were nine, her brother had dared us both to walk the parapet; the summer before I left, the flood had taken him from beneath these same arches. Neither of us mentioned him. For two days we grazed our talk around the edges of one pasture, wandering wide to horses, to weather, to the price of wool. Whenever the water grew loud below us, she would point out a hawk, and I would look where she pointed, though I saw no hawk."
+    }
+   ]
+  },
+  {
+   "id": "R5-TRIM-56786280",
+   "problemId": "56786280-b2a7-48e2-b748-4b394c5f9195",
+   "expectVersionId": "68941af4-500d-47a2-aab7-62cf4c3df40a",
+   "kind": "sat",
+   "why": "RW passage over 160 words shortened by deletion only (Digital SAT RW passages are about 25-150 words). 168 -> 150 words. Removed the bay-scenery sentence and two adverbial modifiers (\"without fail,\" \"quite formally,\"). The routine coffee gesture, the disclosed past favor, the later request, and the final look at the coffee all remain, so the structure and answer D are unchanged.",
+   "validation": "Deletion-only (every retained word is in the original in order), blanks / Text labels / bullet structure unchanged, no quoted explanation or evidence phrase lost, an independent solver (key hidden) picks the same answer with no other defensible option.",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "When Anacleto came up to the terrace on Thursdays, he brought his grammar and, without fail, a small paper of coffee, which he set on the wall beside my inkstand as though it had arrived there by itself. I never thanked him, and he never waited to be thanked. We read our verbs while the bay below us went from grey to silver. Some months before, I had paid the physician who attended his father, and neither of us had spoken of it since; I believed the matter forgotten, as I had wished it to be. This Thursday, however, he recited the conditional mood without a single error and then asked, quite formally, whether I might set him harder lessons, longer ones, as many as I pleased. Rosalinda, my housekeeper, laughed from the doorway at such appetite. I did not laugh. I looked at the coffee on the wall, and then at his careful hands, which had already opened the grammar to a page we had not reached.",
+     "new": "When Anacleto came up to the terrace on Thursdays, he brought his grammar and a small paper of coffee, which he set on the wall beside my inkstand as though it had arrived there by itself. I never thanked him, and he never waited to be thanked. Some months before, I had paid the physician who attended his father, and neither of us had spoken of it since; I believed the matter forgotten, as I had wished it to be. This Thursday, however, he recited the conditional mood without a single error and then asked whether I might set him harder lessons, longer ones, as many as I pleased. Rosalinda, my housekeeper, laughed from the doorway at such appetite. I did not laugh. I looked at the coffee on the wall, and then at his careful hands, which had already opened the grammar to a page we had not reached."
+    }
+   ]
+  },
+  {
+   "id": "R5-TRIM-5b73c9b2",
+   "problemId": "5b73c9b2-5309-49af-8e31-63a54863e8fd",
+   "expectVersionId": "509ef491-79af-473e-bca5-358068b9a6ac",
+   "kind": "sat",
+   "why": "RW passage over 160 words shortened by deletion only (Digital SAT RW passages are about 25-150 words). 167 -> 140 words. Removed the train/pigeons sentence and the closing hibiscus-bud sentence, which are atmospheric and not needed for the key. All clues for C (withdrawn entry, ribbon pushed back, \"learn my name\", ribbon in drawer, careful tending) and the distractor details remain.",
+   "validation": "Deletion-only (every retained word is in the original in order), blanks / Text labels / bullet structure unchanged, no quoted explanation or evidence phrase lost, an independent solver (key hidden) picks the same answer with no other defensible option.",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "Janelle was already at the train-station cafe in Port of Spain when I arrived, two cups of sorrel tea sweating on the table and the blue ribbon from Saturday's garden show lying between them. I had bought the house on the hill only in March; she had tended its hibiscus for thirty years before that. Everyone at the show knew her blooms were the best, and everyone saw her withdraw her entry an hour before judging, leaving mine to win. I had brought the ribbon to return it. She pushed it back across the table and said the garden needed to learn my name. A train pulled in as she spoke, and pigeons scattered from the platform roof. Since then I have kept the ribbon in a drawer rather than on the wall, and each time I see it I water more carefully, prune more slowly, as though the prize is still being judged. Outside my window now, the hibiscus has begun to bud along the fence.",
+     "new": "Janelle was already at the train-station cafe in Port of Spain when I arrived, two cups of sorrel tea sweating on the table and the blue ribbon from Saturday's garden show lying between them. I had bought the house on the hill only in March; she had tended its hibiscus for thirty years before that. Everyone at the show knew her blooms were the best, and everyone saw her withdraw her entry an hour before judging, leaving mine to win. I had brought the ribbon to return it. She pushed it back across the table and said the garden needed to learn my name. Since then I have kept the ribbon in a drawer rather than on the wall, and each time I see it I water more carefully, prune more slowly, as though the prize is still being judged."
+    }
+   ]
+  },
+  {
+   "id": "R5-TRIM-5959f6f9",
+   "problemId": "5959f6f9-4626-4e6f-819a-aa448ce10fa9",
+   "expectVersionId": "57d2486c-3c1d-4799-b01a-e655e7253f33",
+   "kind": "sat",
+   "why": "RW passage over 160 words shortened by deletion only (Digital SAT RW passages are about 25-150 words). 164 -> 147 words. Removed the opening aphorism, \"outside Bergen\", \"the week after\", and the \"spoke less and slept more\" sentence (147 words). The brother's death, the letter, the family-reading exchange, the door line, the water imagery, and the burning of the envelope all remain, so the key and every distractor are unaffected.",
+   "validation": "Deletion-only (every retained word is in the original in order), blanks / Text labels / bullet structure unchanged, no quoted explanation or evidence phrase lost, an independent solver (key hidden) picks the same answer with no other defensible option.",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "Night makes people truthful. At the sanatorium above the lake outside Bergen, I was the nurse who sat up with the patients who could not sleep, and Thorvald was the most stubborn of them. He would not lie down until I wheeled him to the end of the dock, where he watched the water as if a boat were due. On the fourth night he told me about his brother, a quarrel over their father's boathouse, and a letter he had written the week after and carried in his coat ever since. His brother had died the following spring. I said that someone in the family might still read the letter, and he shook his head. An apology, he said, was a door that opens from one side only. After that he spoke less and slept more. When he asked me, Sigrid, to burn the envelope in the ward stove, I did, and I noticed that he no longer looked out at the water.",
+     "new": "At the sanatorium above the lake, I was the nurse who sat up with the patients who could not sleep, and Thorvald was the most stubborn of them. He would not lie down until I wheeled him to the end of the dock, where he watched the water as if a boat were due. On the fourth night he told me about his brother, a quarrel over their father's boathouse, and a letter he had written and carried in his coat ever since. His brother had died the following spring. I said that someone in the family might still read the letter, and he shook his head. An apology, he said, was a door that opens from one side only. When he asked me, Sigrid, to burn the envelope in the ward stove, I did, and I noticed that he no longer looked out at the water."
+    }
+   ]
+  },
+  {
+   "id": "R5-TRIM-54c1da25",
+   "problemId": "54c1da25-6100-4410-834a-e2e2887a2923",
+   "expectVersionId": "b6416bd4-cc8e-4fa9-a552-be87fcfa18e0",
+   "kind": "sat",
+   "why": "RW passage over 160 words shortened by deletion only (Digital SAT RW passages are about 25-150 words). 163 -> 147 words. Removed the 'sharing the road with pedestrians, streetcars, and horse-drawn carts' clause and the 'causing drivers to stop and start unpredictably' clause. Both are background detail. The manual-signal problem, Morgan's partial fix, the underlined sentence and the concluding sentence are all kept, so the function of the underlined sentence and answer C are unchanged.",
+   "validation": "Deletion-only (every retained word is in the original in order), blanks / Text labels / bullet structure unchanged, no quoted explanation or evidence phrase lost, an independent solver (key hidden) picks the same answer with no other defensible option.",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "During the 1920s, city planners in several American cities began installing traffic signals at intersections to manage the growing number of automobiles sharing the road with pedestrians, streetcars, and horse-drawn carts. Early signals were often manually operated by police officers stationed in booths, a system that proved inconsistent because officers in different intersections along the same street frequently changed the lights at different times, causing drivers to stop and start unpredictably. Engineer Garrett Morgan's patented signal design, which introduced a distinct caution position between stop and go, addressed part of this problem by giving drivers time to slow down before a full stop. __The more lasting solution, however, came from coordinating signal timing across entire streets so that a driver traveling at a steady speed could pass through a series of green lights without stopping.__ This innovation, known as signal progression, transformed traffic engineering from a matter of managing individual intersections into a matter of managing the flow of traffic across whole corridors.",
+     "new": "During the 1920s, city planners in several American cities began installing traffic signals at intersections to manage the growing number of automobiles. Early signals were often manually operated by police officers stationed in booths, a system that proved inconsistent because officers in different intersections along the same street frequently changed the lights at different times. Engineer Garrett Morgan's patented signal design, which introduced a distinct caution position between stop and go, addressed part of this problem by giving drivers time to slow down before a full stop. __The more lasting solution, however, came from coordinating signal timing across entire streets so that a driver traveling at a steady speed could pass through a series of green lights without stopping.__ This innovation, known as signal progression, transformed traffic engineering from a matter of managing individual intersections into a matter of managing the flow of traffic across whole corridors."
+    }
+   ]
+  },
+  {
+   "id": "R5-TRIM-5fca6127",
+   "problemId": "5fca6127-5cf1-414e-a674-9ff5cb1a42a3",
+   "expectVersionId": "27d9870f-01d3-482f-bccf-8d8907e9b957",
+   "kind": "sat",
+   "why": "RW passage over 160 words shortened by deletion only (Digital SAT RW passages are about 25-150 words). 193 -> 140 words. Cut the extra jab, the shallow-end sentence, the \"trading jabs\" sentence and the closing dragonfly imagery. The playful opening, the vial pivot, the drain trick and \"did not ask me to stay\" remain, so D stays correct and A, B and C stay wrong.",
+   "validation": "Deletion-only (every retained word is in the original in order), blanks / Text labels / bullet structure unchanged, no quoted explanation or evidence phrase lost, an independent solver (key hidden) picks the same answer with no other defensible option.",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "When Paloma handed me the ring of keys that morning, she bowed as if presenting a crown, and I laughed so hard I nearly dropped them. The salt-water pool behind the Dayton rec center had been hers for thirty summers; I was nineteen, her apprentice, and the aquatic park across town had just offered me twice her wage. I mentioned it while we skimmed leaves. Paloma asked whether they would give me a whistle with my name engraved on it, and maybe a manager younger than my sneakers. We traded jabs down the length of the deep end. Then, testing the water, she held the vial up to the light longer than she needed to. Her father's crew had poured these walls, she said. Every child on Fifth Street had learned to float in the shallow end, me included, and the drain still stuck each November in a way no manual explained. She did not ask me to stay. She only showed me, slowly, where to kick the grate. I set down the net. Across the water, light lay flat on the tiles, and a dragonfly kept touching the surface and lifting away.",
+     "new": "When Paloma handed me the ring of keys that morning, she bowed as if presenting a crown, and I laughed so hard I nearly dropped them. The salt-water pool behind the Dayton rec center had been hers for thirty summers; I was nineteen, her apprentice, and the aquatic park across town had just offered me twice her wage. I mentioned it while we skimmed leaves. Paloma asked whether they would give me a whistle with my name engraved on it. Then, testing the water, she held the vial up to the light longer than she needed to. Her father's crew had poured these walls, she said. The drain still stuck each November in a way no manual explained. She did not ask me to stay. She only showed me, slowly, where to kick the grate. I set down the net."
+    }
+   ]
+  },
+  {
+   "id": "R5-TRIM-650d79b4",
+   "problemId": "650d79b4-9299-4a24-9b78-7d9f39657a2e",
+   "expectVersionId": "281cd17a-6e21-481d-89c4-7b366effaeeb",
+   "kind": "sat",
+   "why": "RW passage over 160 words shortened by deletion only (Digital SAT RW passages are about 25-150 words). 164 -> 133 words. Removed the last two sentences (Josiah's reflection on the children and Ephraim erasing the board). The key rests on the free teaching, the cake episode, and the \"fence he had built himself\" line, all kept. The reputation detail in sentence 2 stays so distractor C remains tempting.",
+   "validation": "Deletion-only (every retained word is in the original in order), blanks / Text labels / bullet structure unchanged, no quoted explanation or evidence phrase lost, an independent solver (key hidden) picks the same answer with no other defensible option.",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "Josiah had bought fish from Ephraim every Friday for two years and had never once seen the old man smile. On Mill Street people said he shorted his scales and shouted at children who leaned on his counter. So Josiah nearly dropped his notebook the Tuesday he walked into the night English class at the Ohio language school and found Ephraim at the chalkboard, drilling six new arrivals on the names of vegetables. Afterward the teacher explained that Ephraim had come to town forty years earlier knowing no English and had taught the class for free ever since. Once, she said, a student had brought him a cake at the market, and he had not spoken to her for a month. His temper, the teacher said, was a fence he had built himself. Josiah thought of every child Ephraim had sent away from the counter and wondered how many of their parents sat in this room. Ephraim erased the board in long, careful strokes.",
+     "new": "Josiah had bought fish from Ephraim every Friday for two years and had never once seen the old man smile. On Mill Street people said he shorted his scales and shouted at children who leaned on his counter. So Josiah nearly dropped his notebook the Tuesday he walked into the night English class at the Ohio language school and found Ephraim at the chalkboard, drilling six new arrivals on the names of vegetables. Afterward the teacher explained that Ephraim had come to town forty years earlier knowing no English and had taught the class for free ever since. Once, she said, a student had brought him a cake at the market, and he had not spoken to her for a month. His temper, the teacher said, was a fence he had built himself."
+    }
+   ]
+  },
+  {
+   "id": "R5-TRIM-69a471cd",
+   "problemId": "69a471cd-89e8-4590-bde1-4388052b4de1",
+   "expectVersionId": "ccc79c7a-2d77-4cec-8e32-54148de848de",
+   "kind": "sat",
+   "why": "RW passage over 160 words shortened by deletion only (Digital SAT RW passages are about 25-150 words). 165 -> 144 words. Removed the redundant \"vast darkness\" phrase and the closing \"since...\" clause explaining why higher density helps; the evidence sentence, the density comparison, and all distractor-relevant details remain, so the answer B is unchanged. The result is 143 words.",
+   "validation": "Deletion-only (every retained word is in the original in order), blanks / Text labels / bullet structure unchanged, no quoted explanation or evidence phrase lost, an independent solver (key hidden) picks the same answer with no other defensible option.",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "Marine biologists studying the deep-sea anglerfish have long puzzled over how males, which are dramatically smaller than females, manage to find mates in the vast darkness of the ocean depths. Some species solve this problem through a permanent physical fusion: upon locating a female, the male bites into her body and gradually merges with her tissue, eventually sharing her bloodstream and losing his own digestive organs. This extreme strategy makes sense only if encounters between the sexes are exceedingly rare events. Researchers have found that in species where males retain independent digestive systems and free-swimming ability throughout adulthood, population densities tend to be considerably higher than in species exhibiting permanent fusion. In these higher-density species, a male that separates from one female after mating retains a reasonable chance of encountering another receptive female later on, since individuals of both sexes are more frequently within range of one another. This pattern suggests that the evolution of permanent sexual parasitism among anglerfish is closely tied to ______.",
+     "new": "Marine biologists studying the deep-sea anglerfish have long puzzled over how males, which are dramatically smaller than females, manage to find mates. Some species solve this problem through a permanent physical fusion: upon locating a female, the male bites into her body and gradually merges with her tissue, eventually sharing her bloodstream and losing his own digestive organs. This extreme strategy makes sense only if encounters between the sexes are exceedingly rare events. Researchers have found that in species where males retain independent digestive systems and free-swimming ability throughout adulthood, population densities tend to be considerably higher than in species exhibiting permanent fusion. In these higher-density species, a male that separates from one female after mating retains a reasonable chance of encountering another receptive female later on. This pattern suggests that the evolution of permanent sexual parasitism among anglerfish is closely tied to ______."
+    }
+   ]
+  },
+  {
+   "id": "R5-TRIM-629adba2",
+   "problemId": "629adba2-a4ca-4ab8-94a5-7307a40c6b5b",
+   "expectVersionId": "687f7d3e-dfe4-4731-94df-81958a56aeea",
+   "kind": "sat",
+   "why": "RW passage over 160 words shortened by deletion only (Digital SAT RW passages are about 25-150 words). 192 -> 150 words. Cut the scene-setting opening sentence, the description of Yona, and the table-of-packets clause. All evidence for C (not pressing, distrust of long confessions, set-aside packet, matching handwriting) and the distractor details (Yona's eyebrows, Mass) remain.",
+   "validation": "Deletion-only (every retained word is in the original in order), blanks / Text labels / bullet structure unchanged, no quoted explanation or evidence phrase lost, an independent solver (key hidden) picks the same answer with no other defensible option.",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "Albuquerque in October smells of roasting chiles, and the seed-saving cooperative behind my church smells of paper envelopes and dust. I was labeling squash seed there when Nova walked in, eleven years after she had stopped coming to Mass, and asked whether we still needed volunteers. Yona, who runs the cooperative and has opinions about everyone, raised her eyebrows at me over the scale. I asked Nova nothing beyond whether she knew beans from squash. She said she had grown up sorting both. I have heard a great many confessions, and I have come to distrust the long ones; the shortest are often followed, much later, by the true account. So I let the afternoon pass in envelopes. Nova sorted the speckled bean seed from the plain faster than I could, pausing only once, over a packet labeled in her late grandmother's slanted script, which she set aside without comment. I did not ask about it. By evening the long table was covered in small brown packets, and I found that she had labeled each of hers in a hand very much like the one on the packet she had set aside.",
+     "new": "I was labeling squash seed when Nova walked in, eleven years after she had stopped coming to Mass, and asked whether we still needed volunteers. Yona raised her eyebrows at me over the scale. I asked Nova nothing beyond whether she knew beans from squash. She said she had grown up sorting both. I have heard a great many confessions, and I have come to distrust the long ones; the shortest are often followed, much later, by the true account. So I let the afternoon pass in envelopes. Nova sorted the speckled bean seed from the plain faster than I could, pausing only once, over a packet labeled in her late grandmother's slanted script, which she set aside without comment. I did not ask about it. I found that she had labeled each of hers in a hand very much like the one on the packet she had set aside."
+    }
+   ]
+  },
+  {
+   "id": "R5-TRIM-6fcf27ff",
+   "problemId": "6fcf27ff-3f8f-409b-8f81-c64744c2d3e1",
+   "expectVersionId": "631a68ed-87df-40d2-8348-4d01a980e4d9",
+   "kind": "sat",
+   "why": "RW passage over 160 words shortened by deletion only (Digital SAT RW passages are about 25-150 words). 162 -> 142 words. Removed the May/midnight-sun clause and the ticket seller detail, which are background only. The shift from easy chat (popcorn, parking) to awkward shared cover-up, and every distractor's source detail, remain intact. The passage is now about 143 words.",
+   "validation": "Deletion-only (every retained word is in the original in order), blanks / Text labels / bullet structure unchanged, no quoted explanation or evidence phrase lost, an independent solver (key hidden) picks the same answer with no other defensible option.",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "Who goes to the cinema in Tromso in May, when the sun refuses to set and no one needs the dark? Anders asked himself this as he bought a ticket from a girl reading a magazine. Inside, the theater held eleven people, and one of them was Anneke, who had not come to Mass in three years. She waved with easy warmth, and Anders, who had rehearsed several gentle reproaches over the years, found he wanted none of them. They traded complaints about the stale popcorn and the price of parking. Then Anneke's daughter leaned across her mother's lap. \"Why don't we go to church anymore? You said Father Anders moved away.\" Anneke laughed a little too quickly and said children mix everything up. Anders laughed as well, and agreed that he did travel a great deal. He began folding his ticket stub into smaller and smaller squares. When the lights finally dimmed, he found himself studying the advertisements with unusual care.",
+     "new": "Who goes to the cinema in Tromso? Anders asked himself this as he bought a ticket. Inside, the theater held eleven people, and one of them was Anneke, who had not come to Mass in three years. She waved with easy warmth, and Anders, who had rehearsed several gentle reproaches over the years, found he wanted none of them. They traded complaints about the stale popcorn and the price of parking. Then Anneke's daughter leaned across her mother's lap. \"Why don't we go to church anymore? You said Father Anders moved away.\" Anneke laughed a little too quickly and said children mix everything up. Anders laughed as well, and agreed that he did travel a great deal. He began folding his ticket stub into smaller and smaller squares. When the lights finally dimmed, he found himself studying the advertisements with unusual care."
+    }
+   ]
+  },
+  {
+   "id": "R5-TRIM-6f3efbc8",
+   "problemId": "6f3efbc8-7387-4e90-8873-dd36e55084a1",
+   "expectVersionId": "de074029-0acc-4da2-8126-437bd00fc041",
+   "kind": "sat",
+   "why": "RW passage over 160 words shortened by deletion only (Digital SAT RW passages are about 25-150 words). 163 -> 145 words. Removed the closing mist sentence and the captain appositive; neither is used by the key, the explanation, or any distractor. Only deletions plus a capitalization repair at the join.",
+   "validation": "Deletion-only (every retained word is in the original in order), blanks / Text labels / bullet structure unchanged, no quoted explanation or evidence phrase lost, an independent solver (key hidden) picks the same answer with no other defensible option.",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "Bao did not like surprises. As captain of the river freighter, he had found Wira curled among the rice sacks two days out, and now, docked below the terraced hills outside Hanoi, he had brought the boy home to eat because there was nowhere else to put him. Bao's mother set out bowls and chopsticks with the precision she gave to every meal. Wira, from an island far to the south, hesitated, then began eating with his right hand as his family always had. Bao waited for the small frown he had known since childhood. Instead his mother watched a moment, set down her chopsticks, and tore a piece of rice cake with her fingers. Bao felt the meal tilt on its hinge. Later Wira picked up the chopsticks and fumbled a dumpling into his lap, and Bao's mother laughed, a sound Bao had not heard at that table in years. Mist gathered over the terraces, erasing the lower paddies one by one.",
+     "new": "Bao did not like surprises. He had found Wira curled among the rice sacks two days out, and now, docked below the terraced hills outside Hanoi, he had brought the boy home to eat because there was nowhere else to put him. Bao's mother set out bowls and chopsticks with the precision she gave to every meal. Wira, from an island far to the south, hesitated, then began eating with his right hand as his family always had. Bao waited for the small frown he had known since childhood. Instead his mother watched a moment, set down her chopsticks, and tore a piece of rice cake with her fingers. Bao felt the meal tilt on its hinge. Later Wira picked up the chopsticks and fumbled a dumpling into his lap, and Bao's mother laughed, a sound Bao had not heard at that table in years."
+    }
+   ]
+  },
+  {
+   "id": "R5-TRIM-6eed1b91",
+   "problemId": "6eed1b91-670c-4df9-9306-a07d2dde2bd0",
+   "expectVersionId": "84407b9c-fc00-4f42-9ce7-e81b47b24e31",
+   "kind": "sat",
+   "why": "RW passage over 160 words shortened by deletion only (Digital SAT RW passages are about 25-150 words). 183 -> 150 words. Cut the second example (aunt quote), the teasing clause, the traffic sentence, the rewrite-count appositive, and two small modifiers. The playful opening, the quick reading of the ending, the missing sauce joke, the noodle-shop pivot, the careful handling (B) and the even voice (D) all remain, so the tone shift and answer A are unaffected.",
+   "validation": "Deletion-only (every retained word is in the original in order), blanks / Text labels / bullet structure unchanged, no quoted explanation or evidence phrase lost, an independent solver (key hidden) picks the same answer with no other defensible option.",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "Rain beaded on the manuscript pages Jiayi had carried to the stone bridge, and she shielded them with her sleeve while Haoran read. He had translated four of her novels and liked to say that he read her endings first, the way some people taste the sauce before the noodles. Tonight he lingered over the opening chapters, laughing aloud at a scene in a fish market and quoting a line about a stubborn aunt back to her twice. Jiayi teased him for performing, and he bowed to the lanterns as if they were an audience. When he reached the last pages, he read them quickly, squared the stack, and began to tell her about a noodle shop that had opened behind the temple. She waited for the joke about the sauce. He offered her the pages instead, holding them by the corners so the rain would not spot the final chapter, the one she had rewritten six times. Traffic hissed over the wet stones. Jiayi tucked the manuscript under her coat and asked, in an even voice, whether the shop stayed open late.",
+     "new": "Rain beaded on the manuscript pages Jiayi had carried to the stone bridge, and she shielded them with her sleeve while Haoran read. He had translated four of her novels and liked to say that he read her endings first, the way some people taste the sauce before the noodles. He lingered over the opening chapters, laughing at a scene in a fish market. He bowed to the lanterns as if they were an audience. When he reached the last pages, he read them quickly, squared the stack, and began to tell her about a noodle shop that had opened behind the temple. She waited for the joke about the sauce. He offered her the pages instead, holding them by the corners so the rain would not spot the final chapter. Jiayi tucked the manuscript under her coat and asked, in an even voice, whether the shop stayed open late."
+    }
+   ]
+  },
+  {
+   "id": "R5-TRIM-7f0f959b",
+   "problemId": "7f0f959b-855d-4311-9377-671235b5ddb4",
+   "expectVersionId": "5e048428-1776-4929-9a76-e6ccca41ee30",
+   "kind": "sat",
+   "why": "RW passage over 160 words shortened by deletion only (Digital SAT RW passages are about 25-150 words). 168 -> 150 words. Removed the final atmospheric sentence (kettle and concertina), which is unrelated to the tested phrase; the shrug and weakening-hands clues the key depends on remain, bringing the passage to about 147 words.",
+   "validation": "Deletion-only (every retained word is in the original in order), blanks / Text labels / bullet structure unchanged, no quoted explanation or evidence phrase lost, an independent solver (key hidden) picks the same answer with no other defensible option.",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "Thandiwe had kept the boarding house on Bree Street for twenty years, and Lindiwe had lodged in its back room for nearly as long, paying in coins or, when coins were scarce, in reed mats woven to a pattern her grandmother had carried down from the hills. Buyers at the Saturday market sometimes asked who else made them. Lindiwe would only shrug. Lately she had begun leaving mats half finished on the windowsill, and in the mornings she ran her knuckles under the hot tap before she could close her hand around a cup. One winter evening Thandiwe cleared the kitchen table, laid out a bundle of reeds, and sat down with her sleeves rolled. Teach me, she said, before the pattern goes to sleep in your hands. Lindiwe snorted, but she pulled up a chair, and by the light of the stove the first rows appeared, crooked and stubborn. A kettle muttered on the back burner, and upstairs a lodger was practicing scales on a borrowed concertina.",
+     "new": "Thandiwe had kept the boarding house on Bree Street for twenty years, and Lindiwe had lodged in its back room for nearly as long, paying in coins or, when coins were scarce, in reed mats woven to a pattern her grandmother had carried down from the hills. Buyers at the Saturday market sometimes asked who else made them. Lindiwe would only shrug. Lately she had begun leaving mats half finished on the windowsill, and in the mornings she ran her knuckles under the hot tap before she could close her hand around a cup. One winter evening Thandiwe cleared the kitchen table, laid out a bundle of reeds, and sat down with her sleeves rolled. Teach me, she said, before the pattern goes to sleep in your hands. Lindiwe snorted, but she pulled up a chair, and by the light of the stove the first rows appeared, crooked and stubborn."
+    }
+   ]
+  },
+  {
+   "id": "R5-TRIM-82bf419d",
+   "problemId": "82bf419d-27e7-4be7-a3cf-3025fe34ad75",
+   "expectVersionId": "538a1a43-cf2d-46a5-af46-4684f2412aa7",
+   "kind": "sat",
+   "why": "RW passage over 160 words shortened by deletion only (Digital SAT RW passages are about 25-150 words). 168 -> 143 words. Cut the second example (blue-podded pea), \"Saga learned quickly.\", and the clause about people Marit hadn't spoken to. The underlined sentence, the lease/\"closing\" detail, and Marit's handing over the key and garden list (which the key depends on) remain. Result is about 143 words.",
+   "validation": "Deletion-only (every retained word is in the original in order), blanks / Text labels / bullet structure unchanged, no quoted explanation or evidence phrase lost, an independent solver (key hidden) picks the same answer with no other defensible option.",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "Seeds keep longer than people expect. Marit used to say this to every new member of the cooperative, tapping the glass jars along the warehouse shelves in Rotterdam: beans from 1961, a blue-podded pea no shop had sold in decades. When her son married Saga, Marit brought the bride to the warehouse the very next week and taught her to label envelopes in the old way: variety, grower, year. By then the lease was ending, and the members had stopped coming to meetings, but no one said the word closing. Saga learned quickly. __She began writing a fourth line on each envelope, in small letters: where it could be planted next.__ Marit noticed and said nothing for a month. Then, one wet afternoon, she handed Saga the key to the oldest cabinet and a list of gardens across the city, some of them belonging to people she had not spoken to in years. The last jars left in a borrowed van, rattling down the Maasboulevard in the rain.",
+     "new": "Seeds keep longer than people expect. Marit used to say this to every new member of the cooperative, tapping the glass jars along the warehouse shelves in Rotterdam: beans from 1961. When her son married Saga, Marit brought the bride to the warehouse the very next week and taught her to label envelopes in the old way: variety, grower, year. By then the lease was ending, and the members had stopped coming to meetings, but no one said the word closing. __She began writing a fourth line on each envelope, in small letters: where it could be planted next.__ Marit noticed and said nothing for a month. Then, one wet afternoon, she handed Saga the key to the oldest cabinet and a list of gardens across the city. The last jars left in a borrowed van, rattling down the Maasboulevard in the rain."
+    }
+   ]
+  },
+  {
+   "id": "R5-TRIM-8a08ffdb",
+   "problemId": "8a08ffdb-7e75-4e6b-86ec-217c5ab668b9",
+   "expectVersionId": "d6d91cdb-0d9c-4ef3-bbe8-05522765c016",
+   "kind": "sat",
+   "why": "RW passage over 160 words shortened by deletion only (Digital SAT RW passages are about 25-150 words). 175 -> 133 words. Removed the remarriage clause, the year-of-silence sentence, and the closing scooter sentence. The kept text still has Putri's misreading of the rule, the unanswered open book, the slip listing her books, and the underlined sentence, so the answer C and the distractors are unaffected.",
+   "validation": "Deletion-only (every retained word is in the original in order), blanks / Text labels / bullet structure unchanged, no quoted explanation or evidence phrase lost, an independent solver (key hidden) picks the same answer with no other defensible option.",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "After her mother remarried, Putri learned that Anh kept one rule above all others: no talking in the reading room of the old library in Hanoi, where he took her every Sunday. She resented it. For a year they sat across from each other in silence, he behind his newspapers and she behind whatever novel she could pretend to read. She decided the rule was his way of not having to know her. Twice that spring she left a book open on the table, hoping he would ask about it; he only turned another page. The week before she left for university, she asked whether the rule still applied now that she was grown. He considered the question, then slid a library slip across the table. On it, in pencil, was the title of every book she had read there, with a small mark beside the ones she had read twice. __He had been listening in the only language the room allowed.__ Outside, scooters crowded the wet street, and neither of them hurried to cross.",
+     "new": "Putri learned that Anh kept one rule above all others: no talking in the reading room of the old library in Hanoi, where he took her every Sunday. She resented it. She decided the rule was his way of not having to know her. Twice that spring she left a book open on the table, hoping he would ask about it; he only turned another page. The week before she left for university, she asked whether the rule still applied now that she was grown. He considered the question, then slid a library slip across the table. On it, in pencil, was the title of every book she had read there, with a small mark beside the ones she had read twice. __He had been listening in the only language the room allowed.__"
+    }
+   ]
+  },
+  {
+   "id": "R5-TRIM-862d879e",
+   "problemId": "862d879e-363f-4a1a-abe6-c38a9b211b4c",
+   "expectVersionId": "9ef22190-b63d-46f9-9e5b-477b6c799192",
+   "kind": "sat",
+   "why": "RW passage over 160 words shortened by deletion only (Digital SAT RW passages are about 25-150 words). 170 -> 147 words. Removed the date range and the Bahia/Angola trade-goods detail. The Eltis conclusion, the incomplete legs, the Brazil-bypasses-Europe point, and the source details for distractors B, C and D all remain, so the answer is unchanged.",
+   "validation": "Deletion-only (every retained word is in the original in order), blanks / Text labels / bullet structure unchanged, no quoted explanation or evidence phrase lost, an independent solver (key hidden) picks the same answer with no other defensible option.",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "The phrase \"triangular trade\" is often used to describe Atlantic commerce from the sixteenth to the nineteenth centuries: European manufactured goods shipped to West Africa, enslaved Africans carried across the Atlantic to the Americas, and sugar, tobacco, and cotton returned to Europe. The image is tidy, and it does capture how profits in one region depended on labor and markets in the others. Historians such as David Eltis, however, have argued that the triangle misrepresents how most voyages actually operated. Shipping records show that many vessels did not complete all three legs; ships that delivered captives to the Caribbean frequently sailed home with little cargo, while plantation goods crossed the ocean on separate, specialized ships. Moreover, a large share of the trade to Brazil ran directly between Brazilian and African ports, with tobacco and rum from Bahia exchanged for captives in Angola and the Bight of Benin, bypassing Europe entirely. For these historians, the system is better understood as a web of overlapping routes than as a single closed loop.",
+     "new": "The phrase \"triangular trade\" is often used to describe Atlantic commerce: European manufactured goods shipped to West Africa, enslaved Africans carried across the Atlantic to the Americas, and sugar, tobacco, and cotton returned to Europe. The image is tidy, and it does capture how profits in one region depended on labor and markets in the others. Historians such as David Eltis, however, have argued that the triangle misrepresents how most voyages actually operated. Shipping records show that many vessels did not complete all three legs; ships that delivered captives to the Caribbean frequently sailed home with little cargo, while plantation goods crossed the ocean on separate, specialized ships. Moreover, a large share of the trade to Brazil ran directly between Brazilian and African ports, bypassing Europe entirely. For these historians, the system is better understood as a web of overlapping routes than as a single closed loop."
+    }
+   ]
+  },
+  {
+   "id": "R5-TRIM-97d50145",
+   "problemId": "97d50145-2e13-4e97-b8da-b47d9c5a4942",
+   "expectVersionId": "2fb2d22a-8f42-47cf-a056-de27fc7efed2",
+   "kind": "sat",
+   "why": "RW passage over 160 words shortened by deletion only (Digital SAT RW passages are about 25-150 words). 175 -> 141 words. Cut the designer/completion-date appositive, the firm name, \"at the time\", and the precast-ribs clause (about 35 words, leaving about 140). The underlined sentence, the freeform-vs-sphere context, and the final sentence that supplies distractors C and D are all intact, so the answer stays A.",
+   "validation": "Deletion-only (every retained word is in the original in order), blanks / Text labels / bullet structure unchanged, no quoted explanation or evidence phrase lost, an independent solver (key hidden) picks the same answer with no other defensible option.",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "The Sydney Opera House, designed by Jørn Utzon and completed in 1973, is often celebrated purely for its sail-like shells, but the building's structural history complicates that image of effortless elegance. Utzon's original 1957 competition sketches depicted the shells as freeform curves, a shape that engineers at Ove Arup and Partners found impossible to construct with the technology available at the time. Only after years of experimentation did Utzon arrive at a solution: deriving every shell from sections of a single sphere, so that each curved surface could be built from identical precast, factory-made ribs rather than unique custom pieces. __This geometric breakthrough, more than the shells' visual profile, is what ultimately made the building constructible, since it converted an unrepeatable sculptural form into a system of standardized, mass-producible components.__ The shift from freeform sketch to spherical geometry cost years of delay and contributed to Utzon's eventual departure from the project before its completion, yet it is this very solution that engineers still cite as one of the most influential structural innovations in twentieth-century architecture.",
+     "new": "The Sydney Opera House is often celebrated purely for its sail-like shells, but the building's structural history complicates that image of effortless elegance. Utzon's original 1957 competition sketches depicted the shells as freeform curves, a shape that engineers found impossible to construct with the technology available. Only after years of experimentation did Utzon arrive at a solution: deriving every shell from sections of a single sphere. __This geometric breakthrough, more than the shells' visual profile, is what ultimately made the building constructible, since it converted an unrepeatable sculptural form into a system of standardized, mass-producible components.__ The shift from freeform sketch to spherical geometry cost years of delay and contributed to Utzon's eventual departure from the project before its completion, yet it is this very solution that engineers still cite as one of the most influential structural innovations in twentieth-century architecture."
+    }
+   ]
+  },
+  {
+   "id": "R5-TRIM-92292bb5",
+   "problemId": "92292bb5-68d4-4dfe-a116-f4bd3a45a769",
+   "expectVersionId": "bc490635-daa6-4386-8f6d-29033769d244",
+   "kind": "sat",
+   "why": "RW passage over 160 words shortened by deletion only (Digital SAT RW passages are about 25-150 words). 161 -> 148 words. Removed the decorative opening participle phrase, the date \"in the year 1868,\" and \"with his pipe\"; all are non-essential detail. The unanswered invitation, nightly rereading, the \"little tide\" line and the lemon/card ending are untouched, so the answer B is unaffected.",
+   "validation": "Deletion-only (every retained word is in the original in order), blanks / Text labels / bullet structure unchanged, no quoted explanation or evidence phrase lost, an independent solver (key hidden) picks the same answer with no other defensible option.",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "Folded twice and then once more, Salma's invitation lay on the planks of the dock, weighted with a lemon. Her son's bride had come to Marrakesh only that spring, in the year 1868, and the small lake below the rented villa was the one place in the household where no one followed anyone. The luncheon the card announced was a week off, and the bride had not answered. Each evening she walked to the end of the dock, lifted the lemon, unfolded the card, read the date, and refolded it along the same creases before setting the lemon back. Wolfram, watching from the terrace with his pipe, called the card his mother's little tide. Salma heard him and went on shelling beans. On the third evening the bride carried the lemon up to the kitchen, sliced it, and served it with the tea, and the card stayed on the boards with nothing to hold it but the stillness of the air.",
+     "new": "Salma's invitation lay on the planks of the dock, weighted with a lemon. Her son's bride had come to Marrakesh only that spring, and the small lake below the rented villa was the one place in the household where no one followed anyone. The luncheon the card announced was a week off, and the bride had not answered. Each evening she walked to the end of the dock, lifted the lemon, unfolded the card, read the date, and refolded it along the same creases before setting the lemon back. Wolfram, watching from the terrace, called the card his mother's little tide. Salma heard him and went on shelling beans. On the third evening the bride carried the lemon up to the kitchen, sliced it, and served it with the tea, and the card stayed on the boards with nothing to hold it but the stillness of the air."
+    }
+   ]
+  },
+  {
+   "id": "R5-TRIM-9d489fd5",
+   "problemId": "9d489fd5-2131-43fa-a23a-c192b0d8c0ff",
+   "expectVersionId": "e02e1103-b35f-44ec-b973-f625c4247fcf",
+   "kind": "sat",
+   "why": "RW passage over 160 words shortened by deletion only (Digital SAT RW passages are about 25-150 words). 177 -> 148 words. Removed the sentence-internal detail about cutters, polishers and brokers passing stones in a day, plus \"often\" and \"increasingly\". The cluster-as-coordination idea, the vertical-integration shift, the labor-cost and handshake details behind the distractors, and the shift away from cutting all remain, so the main idea and key C are unchanged.",
+   "validation": "Deletion-only (every retained word is in the original in order), blanks / Text labels / bullet structure unchanged, no quoted explanation or evidence phrase lost, an independent solver (key hidden) picks the same answer with no other defensible option.",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "For much of the twentieth century, Antwerp dominated the world's diamond trade not because any single firm controlled the business but because thousands of small, specialized firms operated within a few city blocks. Cutters, polishers, brokers, and dealers worked within walking distance of one another, so a rough stone could pass through several independent hands in a single day, and reputations built through repeated face-to-face dealings allowed deals worth millions to be sealed with a handshake. Economists have often cited this arrangement as a textbook example of how geographic clustering can substitute for the coordination that a large, vertically integrated company would otherwise provide internally.\n\nSince the 1990s, however, that model has come under strain. Major mining companies have increasingly sought to control their stones from mine to retail counter, sending rough diamonds directly to their own cutting facilities, many of them in India, where labor costs are lower. As a result, the advantages that Antwerp's dense network once offered have mattered less, and the city's role has shifted toward trading and certification rather than cutting itself.",
+     "new": "For much of the twentieth century, Antwerp dominated the world's diamond trade not because any single firm controlled the business but because thousands of small, specialized firms operated within a few city blocks. Reputations built through repeated face-to-face dealings allowed deals worth millions to be sealed with a handshake. Economists have cited this arrangement as a textbook example of how geographic clustering can substitute for the coordination that a large, vertically integrated company would otherwise provide internally.\n\nSince the 1990s, however, that model has come under strain. Major mining companies have sought to control their stones from mine to retail counter, sending rough diamonds directly to their own cutting facilities, many of them in India, where labor costs are lower. As a result, the advantages that Antwerp's dense network once offered have mattered less, and the city's role has shifted toward trading and certification rather than cutting itself."
+    }
+   ]
+  },
+  {
+   "id": "R5-TRIM-a4ed282c",
+   "problemId": "a4ed282c-6665-472e-aa30-7780c7110163",
+   "expectVersionId": "c6d434c5-d134-4899-aa32-2f1580ed81a5",
+   "kind": "sat",
+   "why": "RW passage over 160 words shortened by deletion only (Digital SAT RW passages are about 25-150 words). 172 -> 145 words. Removed background detail (telescope/data mentions, \"currently available\") and Text 2's final \"since...\" clause. The exclusivity claim in Text 1 and the lab-simulation evidence in Text 2 that support answer A are intact, and all distractor-relevant content remains.",
+   "validation": "Deletion-only (every retained word is in the original in order), blanks / Text labels / bullet structure unchanged, no quoted explanation or evidence phrase lost, an independent solver (key hidden) picks the same answer with no other defensible option.",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "Text 1\nAstronomers analyzing data from a newly launched space telescope argue that the unusual chemical signatures detected in a distant exoplanet's atmosphere are best explained by volcanic activity on the planet's surface. The relative abundance of sulfur compounds, they note, closely matches patterns produced by volcanic outgassing observed on rocky planets within our own solar system. Because no other atmospheric process known to occur on such planets produces this particular combination of gases in these proportions, the researchers conclude that active volcanism offers the most plausible explanation currently available.\n\nText 2\nA separate team analyzing the same telescope data proposes that the sulfur compounds could instead result from chemical reactions between the atmosphere and a subsurface ocean rich in dissolved minerals. Laboratory simulations replicating the exoplanet's estimated temperature and pressure conditions produced similar gas ratios without requiring any volcanic activity at all. This team acknowledges that volcanism remains possible but argues that the ocean-based mechanism should not be dismissed, since it independently reproduces the same chemical signatures observed by the telescope.",
+     "new": "Text 1\nAstronomers argue that the unusual chemical signatures detected in a distant exoplanet's atmosphere are best explained by volcanic activity on the planet's surface. The relative abundance of sulfur compounds, they note, closely matches patterns produced by volcanic outgassing observed on rocky planets within our own solar system. Because no other atmospheric process known to occur on such planets produces this particular combination of gases in these proportions, the researchers conclude that active volcanism offers the most plausible explanation.\n\nText 2\nA separate team proposes that the sulfur compounds could instead result from chemical reactions between the atmosphere and a subsurface ocean rich in dissolved minerals. Laboratory simulations replicating the exoplanet's estimated temperature and pressure conditions produced similar gas ratios without requiring any volcanic activity at all. This team acknowledges that volcanism remains possible but argues that the ocean-based mechanism should not be dismissed."
+    }
+   ]
+  },
+  {
+   "id": "R5-TRIM-a750101b",
+   "problemId": "a750101b-abd3-4872-a103-7f45216f00bc",
+   "expectVersionId": "cfe6f508-1472-4b92-9a8e-6f6db704a237",
+   "kind": "sat",
+   "why": "RW passage over 160 words shortened by deletion only (Digital SAT RW passages are about 25-150 words). 178 -> 147 words. Cut the opening arrival sentence and the sentence about the children arriving. The calf, the failed attempts to move it, the Manila snowfall workbook and the sitting-and-questioning remain, so the key (C) and distractors B and D are unaffected. The result is 145 words.",
+   "validation": "Deletion-only (every retained word is in the original in order), blanks / Text labels / bullet structure unchanged, no quoted explanation or evidence phrase lost, an independent solver (key hidden) picks the same answer with no other defensible option.",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "Text 1\nThe school boat bumped against the bamboo pier, and Teacher Rosario climbed out with her satchel held above the spray. On the schoolhouse steps lay a carabao calf, legs folded, chewing as if it had been hired to guard the door. She clapped; it blinked. She pushed; it sighed. By then the children had arrived and were watching her closely. Rosario looked at the workbook in her satchel, printed in Manila, its first lesson about measuring snowfall. Then she sat down beside the calf. \"Who can tell me,\" she asked, \"how many steps this animal is blocking, and how much it weighs compared to all of you?\"\n\nText 2\nReaders often celebrate the carabao scene as proof of Rosario's sudden, playful inventiveness, as though the calf alone sparks her new approach. But the story has already shown us her doubts about lessons written far from the island. The calf does not create her impulse to teach from the world around her; it simply gives her an excuse she has been waiting for to act on it.",
+     "new": "Text 1\nOn the schoolhouse steps lay a carabao calf, legs folded, chewing as if it had been hired to guard the door. She clapped; it blinked. She pushed; it sighed. Rosario looked at the workbook in her satchel, printed in Manila, its first lesson about measuring snowfall. Then she sat down beside the calf. \"Who can tell me,\" she asked, \"how many steps this animal is blocking, and how much it weighs compared to all of you?\"\n\nText 2\nReaders often celebrate the carabao scene as proof of Rosario's sudden, playful inventiveness, as though the calf alone sparks her new approach. But the story has already shown us her doubts about lessons written far from the island. The calf does not create her impulse to teach from the world around her; it simply gives her an excuse she has been waiting for to act on it."
+    }
+   ]
+  },
+  {
+   "id": "R5-TRIM-b4af5fd9",
+   "problemId": "b4af5fd9-678f-4f8c-82f4-45905d194cad",
+   "expectVersionId": "5fdc5e60-0ada-4637-9904-622f8cd1d57f",
+   "kind": "sat",
+   "why": "RW passage over 160 words shortened by deletion only (Digital SAT RW passages are about 25-150 words). 188 -> 139 words. Removed the captivity-observation sentence and the \"Some of these interactions...\" signaling sentence. These are background and do not affect the concession relationship between the acknowledged crowding explanation (before the blank) and the researchers' claim (after the blank). The passage is now about 143 words, and 'Even so,' remains the correct answer.",
+   "validation": "Deletion-only (every retained word is in the original in order), blanks / Text labels / bullet structure unchanged, no quoted explanation or evidence phrase lost, an independent solver (key hidden) picks the same answer with no other defensible option.",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "For decades, marine biologists assumed that octopuses were solitary creatures with little tolerance for one another outside of mating. This view was based largely on observations of species in captivity, where octopuses placed together often fought or cannibalized one another. Recent fieldwork at a site off the coast of Australia nicknamed \"Octlantis,\" however, has complicated this picture. There, researchers documented dozens of octopuses living in close proximity, denning within a few body lengths of each other for extended periods, and engaging in repeated visual displays and physical contact that did not end in violence. Some of these interactions even resembled the kind of signaling seen in more overtly social species, such as changes in skin color and posture directed at approaching neighbors. Researchers acknowledge that the density of octopuses at Octlantis may simply reflect a shortage of suitable denning sites nearby, forcing individuals into proximity regardless of their social preferences. ______ they maintain that many of the observed interactions, including the signaling displays, appear only when other octopuses are within sight, suggesting the behavior is a genuine response to social presence rather than a mere byproduct of crowding.",
+     "new": "For decades, marine biologists assumed that octopuses were solitary creatures with little tolerance for one another outside of mating. Recent fieldwork at a site off the coast of Australia nicknamed \"Octlantis,\" however, has complicated this picture. There, researchers documented dozens of octopuses living in close proximity, denning within a few body lengths of each other for extended periods, and engaging in repeated visual displays and physical contact that did not end in violence. Researchers acknowledge that the density of octopuses at Octlantis may simply reflect a shortage of suitable denning sites nearby, forcing individuals into proximity regardless of their social preferences. ______ they maintain that many of the observed interactions, including the signaling displays, appear only when other octopuses are within sight, suggesting the behavior is a genuine response to social presence rather than a mere byproduct of crowding."
+    }
+   ]
+  },
+  {
+   "id": "R5-TRIM-b7b12e03",
+   "problemId": "b7b12e03-7848-424f-99c8-6790ef461744",
+   "expectVersionId": "fd6af927-17bd-4aa4-adbb-f00494602694",
+   "kind": "sat",
+   "why": "RW passage over 160 words shortened by deletion only (Digital SAT RW passages are about 25-150 words). 174 -> 132 words. Removed Text 1's second sentence (elaboration of the individualism claim). The core claim, Text 2's evidence span, and all distractor contrasts remain intact; the passage is about 128 words.",
+   "validation": "Deletion-only (every retained word is in the original in order), blanks / Text labels / bullet structure unchanged, no quoted explanation or evidence phrase lost, an independent solver (key hidden) picks the same answer with no other defensible option.",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "Text 1\nArt historians have long treated the sudden proliferation of self-portraits among Northern European painters in the sixteenth century as evidence of a new individualism, arguing that artists began to see themselves as worthy subjects independent of religious or aristocratic patronage. This shift, they contend, mirrors broader intellectual currents of the period that elevated the individual thinker and observer, and the self-portrait becomes a visual manifestation of the artist's newfound social and philosophical standing, no longer merely a craftsman serving a patron's commission.\n\nText 2\nA more recent generation of scholars has questioned whether self-portraiture in this period should be read primarily as a statement of individual identity. Surviving guild records indicate that self-portraits were frequently produced as demonstrations of technical skill, intended to attract future patrons by showcasing an artist's mastery of likeness and detail. Rather than expressions of a painter's inner selfhood, these images may have functioned largely as advertisements circulated within a competitive commercial market for commissioned portraiture, a practical motive quite distinct from the philosophical individualism earlier historians emphasized.",
+     "new": "Text 1\nArt historians have long treated the sudden proliferation of self-portraits among Northern European painters in the sixteenth century as evidence of a new individualism, arguing that artists began to see themselves as worthy subjects independent of religious or aristocratic patronage.\n\nText 2\nA more recent generation of scholars has questioned whether self-portraiture in this period should be read primarily as a statement of individual identity. Surviving guild records indicate that self-portraits were frequently produced as demonstrations of technical skill, intended to attract future patrons by showcasing an artist's mastery of likeness and detail. Rather than expressions of a painter's inner selfhood, these images may have functioned largely as advertisements circulated within a competitive commercial market for commissioned portraiture, a practical motive quite distinct from the philosophical individualism earlier historians emphasized."
+    }
+   ]
+  },
+  {
+   "id": "R5-TRIM-c175e2ce",
+   "problemId": "c175e2ce-634a-48e5-a3c5-fc25207c0cf6",
+   "expectVersionId": "5db5a88f-a68c-4499-88e8-9ca890d43d99",
+   "kind": "sat",
+   "why": "RW passage over 160 words shortened by deletion only (Digital SAT RW passages are about 25-150 words). 165 -> 148 words. Removed the \"hemmed in by surviving houses and lanes\" detail, the redundant \"Rather than forcing a uniform design\" clause, and \"striking\" (about 148 words). The main idea and all distractor source details (fire, towers built later, columns) remain intact.",
+   "validation": "Deletion-only (every retained word is in the original in order), blanks / Text labels / bullet structure unchanged, no quoted explanation or evidence phrase lost, an independent solver (key hidden) picks the same answer with no other defensible option.",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "After the Great Fire of 1666 destroyed most of the City of London, Christopher Wren was commissioned to rebuild more than fifty parish churches. Many of the sites he inherited were cramped, irregular plots hemmed in by surviving houses and lanes, so a single standard plan was impossible. Rather than forcing a uniform design onto each lot, Wren treated every church as a separate problem, fitting naves into odd angles and placing entrances wherever the street allowed. Yet he held firmly to one priority across these varied buildings: that the congregation should be able to see the pulpit and hear the preacher clearly. Wren argued that a Protestant church was essentially an \"auditory,\" a room for listening, and he kept interiors compact and largely free of obstructing columns. The striking towers and steeples that rose above the rooftops, often designed years after the main structures were finished, gave each church a distinctive public face, but the logic of the interior began with the spoken word.",
+     "new": "After the Great Fire of 1666 destroyed most of the City of London, Christopher Wren was commissioned to rebuild more than fifty parish churches. Many of the sites he inherited were cramped, irregular plots, so a single standard plan was impossible. Wren treated every church as a separate problem, fitting naves into odd angles and placing entrances wherever the street allowed. Yet he held firmly to one priority across these varied buildings: that the congregation should be able to see the pulpit and hear the preacher clearly. Wren argued that a Protestant church was essentially an \"auditory,\" a room for listening, and he kept interiors compact and largely free of obstructing columns. The towers and steeples that rose above the rooftops, often designed years after the main structures were finished, gave each church a distinctive public face, but the logic of the interior began with the spoken word."
+    }
+   ]
+  },
+  {
+   "id": "R5-TRIM-c40eda06",
+   "problemId": "c40eda06-e1ec-4c4f-ac06-ae7bab36fedb",
+   "expectVersionId": "0a6f56eb-bf2d-4b3f-a0ee-11f2a34b4d72",
+   "kind": "sat",
+   "why": "RW passage over 160 words shortened by deletion only (Digital SAT RW passages are about 25-150 words). 182 -> 147 words. Cut the Bergen/damp-apartment background and the spine-pressing and doctor simile. The unspoken issues, the glue quarrel, the stitches metaphor and the ledger that split when read through are all kept, so the key A is unaffected. The result is about 143 words.",
+   "validation": "Deletion-only (every retained word is in the original in order), blanks / Text labels / bullet structure unchanged, no quoted explanation or evidence phrase lost, an independent solver (key hidden) picks the same answer with no other defensible option.",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "Bergen had given Jens a new job and a damp apartment, and when I visited, he brought me straight to the bookbinder's workshop where he now spent his days. We argued within the hour about glue. He said the animal glue was better; I said he only liked it because the old man who owned the shop liked it. Neither of us raised the week's notice he had given me before he left, or the letters I had not answered since. He pressed a spine between two boards and turned the screw, and I watched him check the binding by letting the book fall open on the bench, gently, the way a doctor lifts a wrist. Our friendship, I thought, had become a book sewn with too few stitches. Later he showed me a ledger he had rebound for a shipping firm, its pages lying flat under the lamp, and told me the old one had looked fine on the shelf for decades and split the first time anyone needed to read it straight through. I said nothing about glue after that.",
+     "new": "Jens brought me straight to the bookbinder's workshop where he now spent his days. We argued within the hour about glue. He said the animal glue was better; I said he only liked it because the old man who owned the shop liked it. Neither of us raised the week's notice he had given me before he left, or the letters I had not answered since. I watched him check the binding by letting the book fall open on the bench. Our friendship, I thought, had become a book sewn with too few stitches. Later he showed me a ledger he had rebound for a shipping firm, its pages lying flat under the lamp, and told me the old one had looked fine on the shelf for decades and split the first time anyone needed to read it straight through. I said nothing about glue after that."
+    }
+   ]
+  },
+  {
+   "id": "R5-TRIM-c5c0acf9",
+   "problemId": "c5c0acf9-4617-45b0-a86a-8b590e9e851e",
+   "expectVersionId": "d81faf7b-6ff4-4c13-8f49-932ac63e39bc",
+   "kind": "sat",
+   "why": "RW passage over 160 words shortened by deletion only (Digital SAT RW passages are about 25-150 words). 189 -> 139 words. Removed Text 1's mechanism sentence and Text 2's closing lower-income sentence. The remaining text keeps Text 1's \"powerful and relatively fast\" claim, the measurable-declines detail that makes A tempting, and Text 2's evidence span, so the key D is unchanged.",
+   "validation": "Deletion-only (every retained word is in the original in order), blanks / Text labels / bullet structure unchanged, no quoted explanation or evidence phrase lost, an independent solver (key hidden) picks the same answer with no other defensible option.",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "Text 1\n\nUrban planners advocating for congestion pricing argue that charging drivers a fee to enter crowded downtown areas during peak hours is the most direct way to reduce gridlock. By attaching a real monetary cost to driving at the busiest times, cities can shift a meaningful share of commuters toward public transit, carpooling, or off-peak travel. Studies of cities that have implemented such fees show measurable declines in traffic volume and average commute times within the first year, suggesting that price signals are a powerful and relatively fast lever for changing commuter behavior.\n\nText 2\n\nCongestion pricing schemes often produce impressive short-term reductions in traffic, but critics note that these gains can erode over time if the underlying public transit system cannot absorb the displaced demand. In cities where buses and trains already run at capacity during rush hour, commuters priced out of driving frequently have no viable alternative and either pay the fee anyway or shift their trips only slightly, blunting the policy's effect. Without simultaneous investment in transit capacity, congestion pricing risks becoming a revenue tool that burdens lower-income drivers more than it meaningfully reduces congestion.",
+     "new": "Text 1\n\nUrban planners advocating for congestion pricing argue that charging drivers a fee to enter crowded downtown areas during peak hours is the most direct way to reduce gridlock. Studies of cities that have implemented such fees show measurable declines in traffic volume and average commute times within the first year, suggesting that price signals are a powerful and relatively fast lever for changing commuter behavior.\n\nText 2\n\nCongestion pricing schemes often produce impressive short-term reductions in traffic, but critics note that these gains can erode over time if the underlying public transit system cannot absorb the displaced demand. In cities where buses and trains already run at capacity during rush hour, commuters priced out of driving frequently have no viable alternative and either pay the fee anyway or shift their trips only slightly, blunting the policy's effect."
+    }
+   ]
+  },
+  {
+   "id": "R5-TRIM-c581d087",
+   "problemId": "c581d087-d476-490a-92de-4df3ced30efd",
+   "expectVersionId": "52a12e95-3bca-46b7-9ccd-d6bda3e7f300",
+   "kind": "sat",
+   "why": "RW passage over 160 words shortened by deletion only (Digital SAT RW passages are about 25-150 words). 167 -> 146 words. Cut the list of example objects, \"during cleaning sessions\", \"where clients are numerous\", and \"having served more clients\". The key (C), the crowded-reef detail (B), the reputation claim (A) and the bitten-clients claim (D) are all intact.",
+   "validation": "Deletion-only (every retained word is in the original in order), blanks / Text labels / bullet structure unchanged, no quoted explanation or evidence phrase lost, an independent solver (key hidden) picks the same answer with no other defensible option.",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "Text 1\nResearchers studying a population of cleaner wrasse, small reef fish that remove parasites from larger \"client\" fish, found that wrasse which spent more time inspecting a mirror placed in their tank later bit fewer clients during cleaning sessions. Because mirror inspection is a standard sign of self-awareness, and because biting clients is a form of cheating that damages a cleaner's reputation, the researchers concluded that self-aware wrasse are better able to manage their reputations. The effect was strongest in wrasse collected from crowded reef sections, where clients are numerous.\n\nText 2\nA separate team observed that cleaner wrasse vary widely in general boldness, a trait measurable by how quickly an individual approaches any novel object, whether a mirror, a plastic cube, or a colored disk. Bold wrasse lingered near all such objects equally long. The same bold individuals also tended to be the most experienced cleaners, having served more clients, and experienced cleaners are known to bite less because clients that are bitten stop returning.",
+     "new": "Text 1\nResearchers studying a population of cleaner wrasse, small reef fish that remove parasites from larger \"client\" fish, found that wrasse which spent more time inspecting a mirror placed in their tank later bit fewer clients. Because mirror inspection is a standard sign of self-awareness, and because biting clients is a form of cheating that damages a cleaner's reputation, the researchers concluded that self-aware wrasse are better able to manage their reputations. The effect was strongest in wrasse collected from crowded reef sections.\n\nText 2\nA separate team observed that cleaner wrasse vary widely in general boldness, a trait measurable by how quickly an individual approaches any novel object. Bold wrasse lingered near all such objects equally long. The same bold individuals also tended to be the most experienced cleaners, and experienced cleaners are known to bite less because clients that are bitten stop returning."
+    }
+   ]
+  },
+  {
+   "id": "R5-TRIM-d929bf0d",
+   "problemId": "d929bf0d-7dd3-489a-abc5-7c44611cb2e9",
+   "expectVersionId": "052c6657-2870-45b1-a5d6-288b3fa40908",
+   "kind": "sat",
+   "why": "RW passage over 160 words shortened by deletion only (Digital SAT RW passages are about 25-150 words). 171 -> 145 words. Removed the final elaborating sentence about other adjustable systems' large power supplies. The passive-vs-adjustable contrast, low power use, particle chains/soft solid and sensors (all distractor sources) remain, so D stays correct. The result is 144 words.",
+   "validation": "Deletion-only (every retained word is in the original in order), blanks / Text labels / bullet structure unchanged, no quoted explanation or evidence phrase lost, an independent solver (key hidden) picks the same answer with no other defensible option.",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "Engineers protecting buildings from earthquakes have long relied on passive dampers, devices filled with oil that resist motion by a fixed amount. Such dampers work well for the shaking they were designed for but cannot adjust when an earthquake proves stronger or weaker than expected. Magnetorheological (MR) dampers offer an alternative. They contain a fluid with suspended iron particles; when an electromagnetic coil inside the damper is switched on, the particles line up into chains, and the fluid thickens from a liquid with the consistency of motor oil to something close to a soft solid within milliseconds. By varying the current, sensors and a controller can tune the damper's resistance as ground motion changes. Because the coil needs only about as much power as a household light bulb, MR dampers can keep running on backup batteries even when an earthquake knocks out the electrical grid. This is an important advantage, since the stronger kinds of adjustable systems need large power supplies that may fail at exactly the moment they are needed.",
+     "new": "Engineers protecting buildings from earthquakes have long relied on passive dampers, devices filled with oil that resist motion by a fixed amount. Such dampers work well for the shaking they were designed for but cannot adjust when an earthquake proves stronger or weaker than expected. Magnetorheological (MR) dampers offer an alternative. They contain a fluid with suspended iron particles; when an electromagnetic coil inside the damper is switched on, the particles line up into chains, and the fluid thickens from a liquid with the consistency of motor oil to something close to a soft solid within milliseconds. By varying the current, sensors and a controller can tune the damper's resistance as ground motion changes. Because the coil needs only about as much power as a household light bulb, MR dampers can keep running on backup batteries even when an earthquake knocks out the electrical grid."
+    }
+   ]
+  },
+  {
+   "id": "R5-TRIM-dcd983fc",
+   "problemId": "dcd983fc-2c1c-4aea-8982-002b18b652c2",
+   "expectVersionId": "14de09e4-7ed9-4242-9924-4da7ca3f4c2e",
+   "kind": "sat",
+   "why": "RW passage over 160 words shortened by deletion only (Digital SAT RW passages are about 25-150 words). 161 -> 129 words. Removed the final sentence about the polarity timescale and seafloor spreading. It is background not needed for the correct answer (C) and contains no detail the distractors rely on. The passage is now about 128 words.",
+   "validation": "Deletion-only (every retained word is in the original in order), blanks / Text labels / bullet structure unchanged, no quoted explanation or evidence phrase lost, an independent solver (key hidden) picks the same answer with no other defensible option.",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "When lava cools into basalt, tiny grains of magnetite inside the rock lock in the direction of Earth's magnetic field at that moment. In the mid-twentieth century, geologists sampling stacked lava flows in places such as Iceland and Hawaii noticed that some layers recorded a field pointing roughly north, as it does today, while others recorded one pointing south. At first, some researchers suspected that certain minerals simply magnetized themselves backward as they cooled, a chemical quirk unrelated to the planet's field. That explanation weakened when scientists dated the flows using the slow decay of radioactive potassium into argon. Rocks of the same age from distant continents turned out to share the same polarity, and reversed layers did not consistently contain a different mix of minerals than normal ones. By matching polarity to age across many sites, researchers assembled a timeline of alternating normal and reversed intervals—the geomagnetic polarity timescale—which later helped confirm that the seafloor spreads outward from mid-ocean ridges.",
+     "new": "When lava cools into basalt, tiny grains of magnetite inside the rock lock in the direction of Earth's magnetic field at that moment. In the mid-twentieth century, geologists sampling stacked lava flows in places such as Iceland and Hawaii noticed that some layers recorded a field pointing roughly north, as it does today, while others recorded one pointing south. At first, some researchers suspected that certain minerals simply magnetized themselves backward as they cooled, a chemical quirk unrelated to the planet's field. That explanation weakened when scientists dated the flows using the slow decay of radioactive potassium into argon. Rocks of the same age from distant continents turned out to share the same polarity, and reversed layers did not consistently contain a different mix of minerals than normal ones."
+    }
+   ]
+  },
+  {
+   "id": "R5-TRIM-e49f18af",
+   "problemId": "e49f18af-6443-46ce-9ac1-84b1c7527700",
+   "expectVersionId": "d686172e-45b4-48b6-9c59-48b10b0c2284",
+   "kind": "sat",
+   "why": "RW passage over 160 words shortened by deletion only (Digital SAT RW passages are about 25-150 words). 174 -> 146 words. Removed the illustrative example quotation, the region phrase, and the landmarks detail; the task, the critics' environment objection, and the later same-environment findings that support A and rule out B, C, and D remain.",
+   "validation": "Deletion-only (every retained word is in the original in order), blanks / Text labels / bullet structure unchanged, no quoted explanation or evidence phrase lost, an independent solver (key hidden) picks the same answer with no other defensible option.",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "Speakers of Guugu Yimithirr, an Aboriginal language of northeastern Australia, describe locations almost entirely with cardinal directions, saying in effect \"the cup is north of the plate\" rather than \"the cup is to the left of the plate.\" Some researchers have argued that such habits shape how speakers mentally encode space. In one well-known task, participants viewed a row of objects on a table, were turned 180 degrees to face a second table, and were asked to rebuild the row \"the same way.\" Dutch speakers, whose language relies on left and right, usually kept the row's order relative to their own bodies, whereas Guugu Yimithirr speakers usually kept its compass orientation. Critics have noted, however, that the two groups also differed in setting: most Guugu Yimithirr participants lived in rural areas with strong outdoor landmarks, while the Dutch participants were mostly city dwellers tested indoors. Later studies that compared speakers of different languages living in the same environment have found that language still predicts which strategy people choose, although environment influences that choice too.",
+     "new": "Speakers of Guugu Yimithirr, an Aboriginal language, describe locations almost entirely with cardinal directions. Some researchers have argued that such habits shape how speakers mentally encode space. In one well-known task, participants viewed a row of objects on a table, were turned 180 degrees to face a second table, and were asked to rebuild the row \"the same way.\" Dutch speakers, whose language relies on left and right, usually kept the row's order relative to their own bodies, whereas Guugu Yimithirr speakers usually kept its compass orientation. Critics have noted, however, that the two groups also differed in setting: most Guugu Yimithirr participants lived in rural areas, while the Dutch participants were mostly city dwellers tested indoors. Later studies that compared speakers of different languages living in the same environment have found that language still predicts which strategy people choose, although environment influences that choice too."
+    }
+   ]
+  },
+  {
+   "id": "R5-TRIM-e80cb92f",
+   "problemId": "e80cb92f-0300-49ae-8959-81729742d09e",
+   "expectVersionId": "d0a24dfa-e096-4c45-ac26-ae6e1aad7778",
+   "kind": "sat",
+   "why": "RW passage over 160 words shortened by deletion only (Digital SAT RW passages are about 25-150 words). 190 -> 145 words. Removed secondary detail (price undercutting, shipping, union background, Southern mills' later construction, Northern aging infrastructure). The evidence sentence in Text 1 and Text 2's decades-old wage gap argument are intact, so answer C is unchanged.",
+   "validation": "Deletion-only (every retained word is in the original in order), blanks / Text labels / bullet structure unchanged, no quoted explanation or evidence phrase lost, an independent solver (key hidden) picks the same answer with no other defensible option.",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "Text 1\n\nEconomic historians examining the decline of the New England textile mills in the mid-twentieth century have generally emphasized labor costs as the decisive factor. Southern mills paid workers substantially less and operated free of the union contracts that had become standard in the Northeast, allowing them to undercut Northern producers on price even when shipping finished goods back to the same national markets. This wage gap, more than any single technological or managerial difference, explains why textile production migrated southward so rapidly once interstate transportation made the shift logistically feasible for manufacturers seeking to preserve their profit margins.\n\nText 2\n\nWage differentials alone cannot account for the timing of the textile industry's southward shift, since the gap between Northern and Southern labor costs had existed for decades before mills began relocating in large numbers. What changed in the mid-twentieth century was the introduction of newer, more efficient machinery that Southern mills, built later and free of investment in older equipment, adopted far more readily than Northern mills burdened by aging infrastructure. It was this gap in equipment, not wages, that ultimately determined which region's mills could compete profitably.",
+     "new": "Text 1\n\nEconomic historians examining the decline of the New England textile mills have emphasized labor costs as the decisive factor. Southern mills paid workers less and operated free of the union contracts. This wage gap, more than any single technological or managerial difference, explains why textile production migrated southward so rapidly once interstate transportation made the shift logistically feasible for manufacturers seeking to preserve their profit margins.\n\nText 2\n\nWage differentials alone cannot account for the timing of the textile industry's southward shift, since the gap between Northern and Southern labor costs had existed for decades before mills began relocating in large numbers. What changed in the mid-twentieth century was the introduction of newer, more efficient machinery that Southern mills adopted far more readily than Northern mills. It was this gap in equipment, not wages, that ultimately determined which region's mills could compete profitably."
+    }
+   ]
+  },
+  {
+   "id": "R5-TRIM-f194a236",
+   "problemId": "f194a236-d663-4531-abf8-de31b8473ffe",
+   "expectVersionId": "f77f3ef3-dc6e-49a7-adb6-efb50d40fc05",
+   "kind": "sat",
+   "why": "RW passage over 160 words shortened by deletion only (Digital SAT RW passages are about 25-150 words). 166 -> 143 words. Removed the setting phrase \"after our night shift at the bakery in Oaxaca\" and the closing street-vendor sentence. Both are atmosphere only. The gradual fading (soft creases), the apron detail behind distractor B, and the \"neither sorry nor relieved... coat\" evidence for C are all kept, so the answer is unchanged.",
+   "validation": "Deletion-only (every retained word is in the original in order), blanks / Text labels / bullet structure unchanged, no quoted explanation or evidence phrase lost, an independent solver (key hidden) picks the same answer with no other defensible option.",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "Dario hung his uniforms on the rooftop line every morning at six, after our night shift at the bakery in Oaxaca, and I, Tendai, hung mine beside his. For months he had talked of quitting to drive a taxi with his cousin; he kept the license forms folded in his wallet and showed them to anyone who asked. That spring he showed them less often, and when he did, the creases had gone soft and gray. One morning I noticed he had begun pinning a second apron to the line, the white one the head baker gave only to those training for the ovens. He did not mention it, and neither did I. Weeks later, when I finally asked about the taxi, he shrugged and said his plans had gone out with the wash. He seemed neither sorry nor relieved, only mildly surprised, as though remembering a coat he had once owned. Below us the street vendors were unfolding their umbrellas, one stripe at a time.",
+     "new": "Dario hung his uniforms on the rooftop line every morning at six, and I, Tendai, hung mine beside his. For months he had talked of quitting to drive a taxi with his cousin; he kept the license forms folded in his wallet and showed them to anyone who asked. That spring he showed them less often, and when he did, the creases had gone soft and gray. One morning I noticed he had begun pinning a second apron to the line, the white one the head baker gave only to those training for the ovens. He did not mention it, and neither did I. Weeks later, when I finally asked about the taxi, he shrugged and said his plans had gone out with the wash. He seemed neither sorry nor relieved, only mildly surprised, as though remembering a coat he had once owned."
+    }
+   ]
+  },
+  {
+   "id": "R5-TRIM-f42d1cb6",
+   "problemId": "f42d1cb6-1801-4905-b44f-7395e22b10b6",
+   "expectVersionId": "ea732df0-e603-43fb-a29f-d701be696d14",
+   "kind": "sat",
+   "why": "RW passage over 160 words shortened by deletion only (Digital SAT RW passages are about 25-150 words). 165 -> 141 words. Removed the first note (1960s bus replacement), which no answer choice or the explanation uses. The key note on developers and permanence, and the source notes for distractors A, B and D, are intact.",
+   "validation": "Deletion-only (every retained word is in the original in order), blanks / Text labels / bullet structure unchanged, no quoted explanation or evidence phrase lost, an independent solver (key hidden) picks the same answer with no other defensible option.",
+   "changes": [
+    {
+     "field": "passage",
+     "old": "While researching a topic, a student has taken the following notes:\n- In the 1960s, urban planners in several U.S. cities began replacing streetcar lines with bus routes, arguing that buses offered greater route flexibility.\n- Streetcars require fixed tracks and overhead wires, which are expensive to install and maintain but tend to have longer operational lifespans than buses.\n- A 2015 study found that cities with light rail systems, a modern successor to streetcars, saw a 15% increase in ridership within five years of construction compared to comparable bus-only corridors.\n- Buses can be rerouted quickly in response to construction, accidents, or changing demand, without the need for costly infrastructure changes.\n- Fixed rail lines tend to attract more private real estate investment near stations because developers view rail infrastructure as a permanent commitment to a corridor.\n- Bus rapid transit (BRT) systems attempt to combine rail-like dedicated lanes with the flexibility of buses, though they often lack the permanence signal that attracts investment.",
+     "new": "While researching a topic, a student has taken the following notes:\n- Streetcars require fixed tracks and overhead wires, which are expensive to install and maintain but tend to have longer operational lifespans than buses.\n- A 2015 study found that cities with light rail systems, a modern successor to streetcars, saw a 15% increase in ridership within five years of construction compared to comparable bus-only corridors.\n- Buses can be rerouted quickly in response to construction, accidents, or changing demand, without the need for costly infrastructure changes.\n- Fixed rail lines tend to attract more private real estate investment near stations because developers view rail infrastructure as a permanent commitment to a corridor.\n- Bus rapid transit (BRT) systems attempt to combine rail-like dedicated lanes with the flexibility of buses, though they often lack the permanence signal that attracts investment."
+    }
+   ]
+  }
+ ]
+}

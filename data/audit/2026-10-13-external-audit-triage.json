@@ -1,0 +1,772 @@
+{
+ "kind": "external_audit_triage",
+ "counts": {
+  "a": 66,
+  "d": 8,
+  "c": 1
+ },
+ "rows": [
+  {
+   "id": "S-M01",
+   "auditRef": "SAT2 Math M2 Q17",
+   "priority": "P1",
+   "finding": "Answer key wrong (x=10 keyed; intersection is (20,2000)); explanation divides 3000/150 as 10",
+   "verdict": "a",
+   "internalId": "gid a118bb1b-89a4-4b3a-9d85-81dffc83e575 (mockgen-20260929 systems_linear medium r2)",
+   "evidence": "sympy: -200x+6000=-350x+9000 -> x=20, y=2000; at x=10 B is 5500. Repo key index 2 = \"x = 10\". Not in position-fix as a correction.",
+   "route": "edit question + rerun validation (patch S-01: key + ko/en explanation)"
+  },
+  {
+   "id": "S-M02",
+   "auditRef": "SAT3 Math M1 Q6",
+   "priority": "P1",
+   "finding": "Three options (-2, 1, 4) are all x-intercepts",
+   "verdict": "a",
+   "internalId": "gid f5124a1b-0ff4-4154-92ad-fea85f2b0dfe",
+   "evidence": "g(x)=(x+2)(x-1)(x-4); g(-4,-2,1,4) = -80,0,0,0. Options stored as [\"-4\",\"-2\",\"1\",\"4\"], key B.",
+   "route": "edit question + rerun validation (patch S-02: options -> -4,-2,2,3)"
+  },
+  {
+   "id": "S-M03",
+   "auditRef": "SAT8 Math M2 Q22 (+ results ord 44)",
+   "priority": "P1",
+   "finding": "No option equals the printed expression; stored factorization wrong",
+   "verdict": "a",
+   "internalId": "gid 1239c707-e34c-488c-9c14-156b58fa4159",
+   "evidence": "3x^2+7x+2=(3x+1)(x+2), stored as (3x+2)(x+2). sympy: printed expr = (x+3)(2x-3)(3x+2)/((x+2)(2x-1)(3x+1)), matches none of A-D. With divisor numerator 3x^2+8x+4 the answer equals option A.",
+   "route": "edit question + rerun validation (patch S-03)"
+  },
+  {
+   "id": "S-M04",
+   "auditRef": "SAT11 Math M2 Q22 (+ results ord 98: reference does not resolve it)",
+   "priority": "P1",
+   "finding": "Photo side 2t-2 is twice the poster side t-1; \"uncovered area\" keyed as -3t^2+6t-3 (negative)",
+   "verdict": "a",
+   "internalId": "gid bc9b4038-6141-594c-a3a7-249f26efac98 (gapfill-20261006/items8, archetype ee.polynomial_distribution.compose_kind/area_context)",
+   "evidence": "sympy: (t-1)^2-(2t-2)^2 = -3(t-1)^2 < 0 for every t != 1. Generator equivalent-expressions.ts:23-33 never enforces inner side < outer side; sibling item a6119db6 (tile 4z-4 vs z-2) is valid, so only this instance of the archetype is wrong in stock.",
+   "route": "edit question + rerun validation (patch S-04: swap roles -> 3(t-1)^2) + generator fix + re-run (code, not applied)"
+  },
+  {
+   "id": "S-M05",
+   "auditRef": "SAT1 Math M1 Q12",
+   "priority": "P1",
+   "finding": "Two valid answers: 1 and 5 (\"other than x=3\")",
+   "verdict": "a",
+   "internalId": "gid 992e2718-a74d-47e6-9b24-bc5e0766ed3f (nonlinear_functions spr)",
+   "evidence": "sympy: f(x)=f(1)=0 -> x in {1,5}; x=3 is the vertex, not the given point. Stored answers [\"5\"]. Student typed 1 -> graded wrong (observed in audit).",
+   "route": "edit question + rerun validation (patch S-05: \"other than x = 1\")"
+  },
+  {
+   "id": "S-M06",
+   "auditRef": "SAT2 Math M2 Q16",
+   "priority": "P1",
+   "finding": "Boundary line x=5 drawn as the x-axis; no shading although text says shaded",
+   "verdict": "a",
+   "internalId": "gid 6fe93dc4-6ef8-4930-99f1-bfafaf5e59b2 (linear_inequalities medium mc r2)",
+   "evidence": "Figure spec object l2 = {kind:line, slope:0, intercept:0, label:\"x = 5\"}. Not a renderer bug: plane lines support vertical via through:[[5,0],[5,25]] (coordinate-plane.ts lineParams). Scan of all figure specs: this is the only mis-encoded vertical line (stock-defect-scans.json). Text answer (6,10) is unique.",
+   "route": "edit question + rerun validation (patch S-06: figure) then admin re-confirms \"figure checked\""
+  },
+  {
+   "id": "S-M07",
+   "auditRef": "SAT5 Math M1 Q1 (+ results)",
+   "priority": "P1",
+   "finding": "Removing outlier of plot C or D both increase slope",
+   "verdict": "a",
+   "internalId": "gid 18ef1549-7fdb-52bb-ab8f-ad5d9de5b6ca (gapfill-20261006/items4.clean, figure_choice)",
+   "evidence": "numpy OLS on the stored points: C 3.0909->3.2716 (up), D 1.9394->3.2145 (up); A,B go down. Key D only.",
+   "route": "edit question + rerun validation (patch S-08: move plot C outlier to (6,66))"
+  },
+  {
+   "id": "S-M08",
+   "auditRef": "SAT2 (new attempt) Math M2 Q20",
+   "priority": "P1",
+   "finding": "Arch drawn flat; beam y=4 shows the answer; k=5/4 also valid",
+   "verdict": "a",
+   "internalId": "gid 9e664468-12eb-406b-bc76-38c8d15ecd39",
+   "evidence": "Figure: arch = fn sqrt params [0,0,0] (y=0). sympy: x[(16+25k^2)x+200k]=0; k=0 -> 1 point; k=5/4 -> second point has y<0 -> also 1 point on the upper half; 4/5 and 16/25 -> 2 points. A and D both valid.",
+   "route": "edit question + rerun validation (patch S-07: polygon arch, drop beam, D -> 3/5)"
+  },
+  {
+   "id": "S-M09",
+   "auditRef": "SAT2 (new attempt) Math M2 Q14 (+ results)",
+   "priority": "P1",
+   "finding": "Two equivalent expressions (A and D)",
+   "verdict": "a",
+   "internalId": "gid bbfa0e1a-c6d4-4b6b-ac17-f3797636eda0",
+   "evidence": "sympy: 400*3^(t/6) == 400*(3^(1/6))^t and == 400*(1/3)^(-t/6). D also equals P(t).",
+   "route": "edit question + rerun validation (patch S-09)"
+  },
+  {
+   "id": "S-M10",
+   "auditRef": "SAT3 Math M2 Q16",
+   "priority": "P2",
+   "finding": "Figure labels radius 12 (reveals the answer); no 30 degree mark visible",
+   "verdict": "a",
+   "internalId": "gid a805ff7a-b16f-4d6f-ae43-b4cb48a64a50",
+   "evidence": "Figure spec: outer.radius \"12\" plus labels AB \"12\", angle_ACB \"30°\". Radius R = AB/(2 sin30) = 12 (sympy) so key B is right; the numeric outer radius label gives it away.",
+   "route": "edit question + rerun validation (figure: drop numeric radius label; no patch written, spec semantics of outer.radius need the figure author)"
+  },
+  {
+   "id": "S-M11",
+   "auditRef": "SAT2 Math M1 Q11",
+   "priority": "P2",
+   "finding": "Text calls angles co-interior but places one above r and one below s",
+   "verdict": "a",
+   "internalId": "gid d4922e40-4840-4448-88e9-0061b738438b",
+   "evidence": "Stimulus says \"one above line r and the other below line s (co-interior)\"; figure puts (4x+10) SE of r and (6x-30) NE of s (between the lines). x=20 either way ((4x+10)+(6x-30)=180).",
+   "route": "edit question + rerun validation (patch A-d4922e40)"
+  },
+  {
+   "id": "S-M12",
+   "auditRef": "SAT13 Math Q14 (cum. 68) / SAT10 Math M1 Q1",
+   "priority": "P2",
+   "finding": "\"greatest x that satisfies the equation\" names no equation",
+   "verdict": "a",
+   "internalId": "gids 838ef1c9-3909-5cfa-af47-d789fb7dad50, e222cbc8-007f-59e5-a61d-a7f3a301e1d7 (gapfill-20261006/items8)",
+   "evidence": "Both stems read \"...the greatest value of x that satisfies the equation?\" with only \"q has two zeros\" in the stimulus.",
+   "route": "edit question + rerun validation (patches Q-838ef1c9, Q-e222cbc8)"
+  },
+  {
+   "id": "S-M13",
+   "auditRef": "SAT10 Math M2 Q21 / SAT12 Math M2 Q21 (+ results)",
+   "priority": "P2",
+   "finding": "Intersection (11,-17) outside the drawn [-10,10] window",
+   "verdict": "a",
+   "internalId": "gids f87e641a-c551-5b11-a25a-340d4aa53f30, c27d0f37-985d-50aa-a9de-da4b37b244f2 (+ same class 8329a1bd-0921-53c0-a7bb-dffbf69c9493, not in audit)",
+   "evidence": "Lines through (4,-3),(7,-9) and (-2,-4),(3,-9) meet at x=11,y=-17; axes -10..10. Scan: 3 imported items with this defect.",
+   "route": "edit question + rerun validation (patches F-*: axes -20..20)"
+  },
+  {
+   "id": "S-M14",
+   "auditRef": "SAT12 Math M2 Q2; SAT8 Math M1 Q6",
+   "priority": "P2",
+   "finding": "Sentence about two real solutions/roots appears in both stimulus and question",
+   "verdict": "a",
+   "internalId": "gids d1fd93d2-66ec-5629-a68e-0464710aba65, 99fd6884-58f8-550f-ac7c-239cf0178ac1",
+   "evidence": "Stimulus ends \"The equation g(x) = 0 has two real solutions.\" and the question restates it. Compiler wording issue (gapfill items4/items8).",
+   "route": "edit question + rerun validation (delete the repeated sentence from the question; not patched)"
+  },
+  {
+   "id": "S-M15",
+   "auditRef": "SAT12 Math M2 Q8",
+   "priority": "P2",
+   "finding": "Car resale value rises with age",
+   "verdict": "a",
+   "internalId": "gid 9939657f-174b-52fc-a0c0-cf1b88a5b242 (+ same context in 704b95a5, 593e942e, 9f5d1526)",
+   "evidence": "Table (0,19),(3,25),(6,31),(9,37) in \"Age (years) / Resale value\": slope +2.",
+   "route": "edit question + rerun validation (patch C-9939657f: \"collector car\") + generator fix + re-run (code, not applied)"
+  },
+  {
+   "id": "S-M16",
+   "auditRef": "SAT9 Math M1 Q16 / Math M2 Q22 (+ results)",
+   "priority": "P2",
+   "finding": "Burning candle \"remaining height\" increases with days",
+   "verdict": "a",
+   "internalId": "gids aaeb9945-8b35-5351-af60-92e0f2734f3a, 445bab61-b420-574d-a08c-abff7d043042 (same class: cb0b6233, fe679eca)",
+   "evidence": "Tables (6,73),(9,94),(12,115),(15,136) and (4,72)..(10,102): slope positive. Numeric answers 157 and 3 are unique.",
+   "route": "edit question + rerun validation (patches C-aaeb9945, C-445bab61: re-theme to seedling) + generator fix + re-run (code, not applied)"
+  },
+  {
+   "id": "S-M17",
+   "auditRef": "SAT4 Math M1 Q1",
+   "priority": "P2",
+   "finding": "Total earnings fall as tickets are sold",
+   "verdict": "a",
+   "internalId": "gid 95fff522-0778-5c44-a219-c4f12c31965f (gapfill-20261006/items4.clean)",
+   "evidence": "Context \"booth earnings vs tickets sold\" with a decreasing line (value 10 at 5 tickets, 60 at 0). Context-pool defect, same class as candle/car.",
+   "route": "edit question + rerun validation (reverse slope or re-theme; not patched)"
+  },
+  {
+   "id": "S-M18",
+   "auditRef": "SAT7 Math M2 Q7",
+   "priority": "P2",
+   "finding": "Says every number is a length but labels are degrees",
+   "verdict": "a",
+   "internalId": "gid efdafa88-0b16-5ab0-a7a6-a46a602eb484",
+   "evidence": "Stimulus: \"...each number is a length in the same unit.\" Figure labels 112 deg, (5x+2) deg, y deg.",
+   "route": "edit question + rerun validation (patch U-efdafa88)"
+  },
+  {
+   "id": "S-M19",
+   "auditRef": "SAT13 (new) Math M2 Q12",
+   "priority": "P2",
+   "finding": "\"By how many percent\" for a percentage-point change",
+   "verdict": "a",
+   "internalId": "gid 3de45c10-e1e4-5562-aa87-f47190761026",
+   "evidence": "Question: \"By how many percent does the phone's battery life remaining change...?\" while the quantity itself is a percentage.",
+   "route": "edit question + rerun validation (\"percentage points\"; not patched)"
+  },
+  {
+   "id": "S-M20",
+   "auditRef": "SAT13 (new) Math M2 Q17",
+   "priority": "P2",
+   "finding": "Sampling unit shifts from households to people",
+   "verdict": "a",
+   "internalId": "gid 5d844285-56bb-5d34-ae52-30c7db4fae76",
+   "evidence": "Stimulus samples \"households in Riverton\"; question asks \"How many people should be in the sample\". Wording only; answer 3200.",
+   "route": "edit question + rerun validation (wording)"
+  },
+  {
+   "id": "S-M21",
+   "auditRef": "SAT2 (new) Math M2 Q9; Q12",
+   "priority": "P2",
+   "finding": "Negative physical counts / negative price index",
+   "verdict": "a",
+   "internalId": "gids ac635b92-d13d-4605-8371-e9f13c6280e3, 84350a19-1c6e-462f-91d6-f722ba414be7",
+   "evidence": "r(t)=2^t-8 negative on 0<=t<3 and c(0)=-6 in the shown domain (claims consistent with the stored statements).",
+   "route": "no action (low impact: answers unique)"
+  },
+  {
+   "id": "S-M22",
+   "auditRef": "SAT2 (new) Math M2 Q21 (+ results)",
+   "priority": "P2",
+   "finding": "Distractor reasoning in the English explanation does not produce the listed distractors",
+   "verdict": "a",
+   "internalId": "DB problem 515a7e74-99e6-4afd-bd7a-809ac05b58db / version 4a3c2460-6c52-4f70-95f0-a37a8409ac6c (data/explanation-en tasks tr-*, approved.json); gid 2e283eea-41df-4f01-a054-733ec3a3e779",
+   "evidence": "Key b=2.50 (b+10r=8.5, b+8r=7.3 -> r=0.6) is right. The English explanation says the wrong readings give 6.50, \"rather than 2.10/3.10\", which are not the listed values.",
+   "route": "explanation-fix"
+  },
+  {
+   "id": "S-M23",
+   "auditRef": "SAT3 (new) Math M2 Q21",
+   "priority": "P2",
+   "finding": "Hint note gives away the factoring; unrealistic revenue",
+   "verdict": "a",
+   "internalId": "gid 1a71ab2a-a857-419a-8606-e02d9f8b33e8",
+   "evidence": "Stimulus contains \"Note: (x-2)(x+2) = x^2 - 4, and this expression is not a perfect square trinomial...\"",
+   "route": "edit question + rerun validation (delete the Note)"
+  },
+  {
+   "id": "S-M24",
+   "auditRef": "SAT1 (new) Math M2 Q14",
+   "priority": "P2",
+   "finding": "Stem already shows the equivalent expression",
+   "verdict": "a",
+   "internalId": "gid 01ea36e2-2166-45a3-8661-fc09993fc110 (probable match 3/7 text windows)",
+   "evidence": "Stem: \"(x^2-5x-14)/(x^2-4) = (x-7)/(x-2) is equivalent to which expression?\" and option A repeats the first fraction.",
+   "route": "edit question + rerun validation (rewrite stem; low impact)"
+  },
+  {
+   "id": "S-M25",
+   "auditRef": "SAT6 (new) Math M2 Q15",
+   "priority": "P2",
+   "finding": "Seller described as spending the purchase price",
+   "verdict": "d",
+   "internalId": "gid d368cef5-da91-5e58-abcd-145cbc85271f (probable)",
+   "evidence": "Text not re-read; claim depends on the exact context sentence.",
+   "route": "needs reviewer read (no DB needed)"
+  },
+  {
+   "id": "S-M26",
+   "auditRef": "SAT8 Math M1 Q20",
+   "priority": "P2",
+   "finding": "\"Radioactive\" amount modeled by 70000*1.15^t (growth)",
+   "verdict": "d",
+   "internalId": "not found by text search (compiler item, math glyph mismatch)",
+   "evidence": "Stimulus per audit capture; numeric answer 2 unique. Needs gid lookup.",
+   "route": "DB query Q1 (search passage ilike %radioactive substance%)"
+  },
+  {
+   "id": "S-M27",
+   "auditRef": "SAT1 Math M2 Q23 (cum. 77)",
+   "priority": "P2",
+   "finding": "Several limitations plausible",
+   "verdict": "d",
+   "internalId": "gid 6719733a-0af8-46ec-bda2-99a04bef1b34 (low-confidence text match)",
+   "evidence": "Editorial/subjective; item not re-derived.",
+   "route": "no action"
+  },
+  {
+   "id": "S-M28",
+   "auditRef": "SAT10 results ord 76; SAT11 results ord 74",
+   "priority": "P2",
+   "finding": "English explanation wording errors (less than = add; each table fails in exactly one way)",
+   "verdict": "d",
+   "internalId": "SAT11 ord74 gid 022e9ff4-708f-541f-a62c-96bc08c6ed59 (probable); SAT10 ord76 not located",
+   "evidence": "English explanation text lives in problem_versions.explanation_en (approved.json holds only some); needs DB read to confirm and edit.",
+   "route": "explanation-fix after DB query Q3"
+  },
+  {
+   "id": "S-R01",
+   "auditRef": "SAT1 RW49",
+   "priority": "P1",
+   "finding": "Verb after the blank duplicated (\"reveal reveal underdrawings\")",
+   "verdict": "a",
+   "internalId": "gid 6e8e14d6-bcfb-44b3-a4b8-554d7a2b037b",
+   "evidence": "Stored passage: \"...single painter ______ reveal underdrawings...\" with options reveals / reveal / has revealed / revealing. Patch R-6e8e14d6... deletes the leftover verb.",
+   "route": "edit question + rerun validation (patch R-*)"
+  },
+  {
+   "id": "S-R02",
+   "auditRef": "SAT13 RW13",
+   "priority": "P1",
+   "finding": "\"such flaws\" repeated after \"; such\"",
+   "verdict": "a",
+   "internalId": "gid w1-boundaries-m-254 (rebalance-20261008/gen)",
+   "evidence": "Passage: \"...Sen no Rikyu ______ such flaws...\"; options , such / such / ; such / and such.",
+   "route": "edit question + rerun validation (patch R-w1-boundaries-m-254)"
+  },
+  {
+   "id": "S-R03",
+   "auditRef": "SAT13 RW23",
+   "priority": "P1",
+   "finding": "\"some\" repeated after \": some\"",
+   "verdict": "a",
+   "internalId": "gid w1-boundaries-m-042 (rebalance-20261008/gen)",
+   "evidence": "Passage: \"...critical trials ______ some later reported...\"; options , some / some / : some / , some of which.",
+   "route": "edit question + rerun validation (patch R-w1-boundaries-m-042)"
+  },
+  {
+   "id": "S-R04",
+   "auditRef": "SAT1 (new) RW M2 Q11",
+   "priority": "P1",
+   "finding": "\"lions, horses, and deer\" repeated",
+   "verdict": "a",
+   "internalId": "gid 0a3372d9-a0d6-4d65-83d1-7d3a2ef10a64",
+   "evidence": "Passage continues \"...menagerie ______ lions, horses, and deer she sketched...\" and every option ends with that list.",
+   "route": "edit question + rerun validation (patch R-0a3372d9...)"
+  },
+  {
+   "id": "S-R05",
+   "auditRef": "SAT1 (new) RW M2 Q22",
+   "priority": "P1",
+   "finding": "Leftover continuation after the blank -> no grammatical completion",
+   "verdict": "a",
+   "internalId": "gid 5b2b6b59-5c82-4c60-b93d-d3b36e9c48db",
+   "evidence": "Passage ends \"...five years, ______ juveniles tracked in the same study drifted passively with currents just as the earlier researchers had described.\" while each option already supplies the whole second clause.",
+   "route": "edit question + rerun validation (patch S-19)"
+  },
+  {
+   "id": "S-R06",
+   "auditRef": "SAT4 RW1 Q26 (+ results)",
+   "priority": "P1",
+   "finding": "\"the data\" repeated",
+   "verdict": "a",
+   "internalId": "gid rwstock:med-se-2:medium-boundaries-609",
+   "evidence": "Passage \"...and temperature ______ the data feed a digital twin...\" options , the data / ; the data / the data / and, the data.",
+   "route": "edit question + rerun validation (patch R-rwstock:med-se-2:medium-boundaries-609)"
+  },
+  {
+   "id": "S-R07",
+   "auditRef": "SAT4 RW2 Q3 (+ results)",
+   "priority": "P1",
+   "finding": "\"readers\" repeated",
+   "verdict": "a",
+   "internalId": "gid rwstock:med-se-1:medium-boundaries-311",
+   "evidence": "Passage \"...stories take place ______ readers instead infer...\"; options , readers / readers / and readers / ; readers.",
+   "route": "edit question + rerun validation (patch R-rwstock:med-se-1:medium-boundaries-311)"
+  },
+  {
+   "id": "S-R08",
+   "auditRef": "SAT5 RW1 Q4 (+ results)",
+   "priority": "P1",
+   "finding": "\"drought\" repeated",
+   "verdict": "a",
+   "internalId": "gid rwstock:easy-1:easy-boundaries-104",
+   "evidence": "Passage \"...since the 1960s ______ drought and heavy use...\".",
+   "route": "edit question + rerun validation (patch R-rwstock:easy-1:easy-boundaries-104)"
+  },
+  {
+   "id": "S-R09",
+   "auditRef": "SAT7 RW2 Q14 (+ results)",
+   "priority": "P1",
+   "finding": "\"condenses\" repeated",
+   "verdict": "a",
+   "internalId": "gid sesup-medium-boundaries-42 (mockgen-20260929/se-topup)",
+   "evidence": "Passage \"...on winter ______ condenses on the leaves...\"; key option \"mornings-condenses\".",
+   "route": "edit question + rerun validation (patch R-sesup-medium-boundaries-42)"
+  },
+  {
+   "id": "S-R10",
+   "auditRef": "SAT4 (new) RW M2 Q9; SAT6 (new) RW M2 Q11, Q24",
+   "priority": "P1",
+   "finding": "Word after blank repeated (\"many\", \"the floodwaters\", \"each\")",
+   "verdict": "a",
+   "internalId": "gids rwstock:easy-1:easy-boundaries-100, rwstock:med-se-1:medium-boundaries-302, sesup-medium-boundaries-43",
+   "evidence": "Same defect pattern, scan hit; second words after the blank equal the second words of the key option.",
+   "route": "edit question + rerun validation (patches R-*)"
+  },
+  {
+   "id": "S-R11",
+   "auditRef": "SAT13 (new) RW M2 Q4",
+   "priority": "P1",
+   "finding": "\"Iranian\" repeated",
+   "verdict": "a",
+   "internalId": "gid w1-boundaries-m-259 (rebalance-20261008/gen)",
+   "evidence": "Passage \"...a quarter of a whole step ______ Iranian composer Alireza Mashayekhi...\".",
+   "route": "edit question + rerun validation (patch R-w1-boundaries-m-259)"
+  },
+  {
+   "id": "S-R12",
+   "auditRef": "SAT3 (new) RW M2 Q6, Q21",
+   "priority": "P1",
+   "finding": "\"she rendered\" / \"allows\" repeated",
+   "verdict": "a",
+   "internalId": "gids e5a18ded-27f1-4874-b132-b405069b8b50, a5895ddf-0728-4328-a9c3-063bdce6363f",
+   "evidence": "Passage \"...jewelry ______ she rendered these details...\"; \"...single year, ______ allows the plant...\".",
+   "route": "edit question + rerun validation (patches R-*)"
+  },
+  {
+   "id": "S-R13",
+   "auditRef": "SAT3 RW1 Q23; SAT3 (final review), SAT3 RW2 Q26",
+   "priority": "P1",
+   "finding": "Comma/words after the blank leave no grammatical completion (RW1 Q23: comma after \"productivity\")",
+   "verdict": "a",
+   "internalId": "gids 618a6ee7-d30d-4577-ab49-f9747e5eb9bc (RW1 Q23), b4cdabde-f747-4dc9-80d3-c5565cbb3bac (RW2 Q26)",
+   "evidence": "RW1 Q23 passage \"...wheat fields ______ productivity, largely determined...\" (option \"depending on soil\" leaves \", largely determined\" after a full subject). RW2 Q26: literal \", the paintings may reflect\" after the blank while the options end in a comma (\"As a result,\" + \", the paintings\").",
+   "route": "edit question + rerun validation (patch R-b4cdabde...; RW1 Q23 needs a hand rewrite)"
+  },
+  {
+   "id": "S-R14",
+   "auditRef": "SAT6 RW2 Q25 / results ord 52 (\", they maintain\" double comma)",
+   "priority": "P1",
+   "finding": "Literal comma after blank duplicates option comma",
+   "verdict": "d",
+   "internalId": "DB problem b4af5fd9-678f-4f8c-82f4-45905d194cad / version ffe513f9-3f56-4040-99d1-6ffbcc4fca9c (transitions, options Even so, / For example, / Similarly, / Consequently,; from data/explanation-en/tasks/tr-021). Passage text is not in the stock JSON; the scan finds the same defect in 5 other transition items (04f6acc4, 51fc09b3, ef96f2f7, b4cdabde, be9e745f)",
+   "evidence": "Defect class confirmed (literal \",\" after the blank, options end in \",\"). The exact SAT6 passage is not in the repo (SAT6 RW2 Q25 text search found no stock item).",
+   "route": "DB query Q1 on version ffe513f9... (confirm literal comma), then patch like R-b4cdabde"
+  },
+  {
+   "id": "S-R15",
+   "auditRef": "SAT3 (final review) RW1 Q23 / SAT3 rw1-root",
+   "priority": "P1",
+   "finding": "No grammatical option",
+   "verdict": "a",
+   "internalId": "gid 618a6ee7-d30d-4577-ab49-f9747e5eb9bc",
+   "evidence": "See S-R13.",
+   "route": "edit question + rerun validation"
+  },
+  {
+   "id": "S-G01",
+   "auditRef": "SAT1 RW25",
+   "priority": "P1",
+   "finding": "Two grammatical answers (\", which offered\" / \", offering\")",
+   "verdict": "a",
+   "internalId": "gid 07fdeecb-6540-4e55-a54e-f5f6ab39d0aa",
+   "evidence": "Stored options [\", which offered\",\"offering\",\"; offering\",\", offering\"]; both A and D complete a valid sentence; stored explanation calls A \"double predication\" (not a rule).",
+   "route": "edit question + rerun validation (patch S-12)"
+  },
+  {
+   "id": "S-G02",
+   "auditRef": "SAT1 RW26",
+   "priority": "P1",
+   "finding": "\"examining\" vs \"an examination that considers\"",
+   "verdict": "a",
+   "internalId": "gid c9923475-95b4-4767-b881-325f5b34da25",
+   "evidence": "\"requires an examination that considers how..., how..., and how...\" is grammatical.",
+   "route": "edit question + rerun validation (patch S-11)"
+  },
+  {
+   "id": "S-G03",
+   "auditRef": "SAT1 RW32",
+   "priority": "P1",
+   "finding": "Key \"Despite\" illogical; Given / Because of / As a result of valid",
+   "verdict": "a",
+   "internalId": "gid 3c263c92-e14d-4312-8051-886f17996d79",
+   "evidence": "Passage: \"______ its extreme distance, Eris should look dim, but...\" key Despite (concession) contradicts the sentence; 3 other options valid.",
+   "route": "edit question + rerun validation (patch S-10)"
+  },
+  {
+   "id": "S-G04",
+   "auditRef": "SAT1 RW17; RW33",
+   "priority": "P1",
+   "finding": "\", and this launched\" / \"displaced, relocated\" also grammatical",
+   "verdict": "a",
+   "internalId": "gids 410e5e7e-6c7e-4276-9b61-b7faa4c05c79, 88e31501-803a-489d-bb6e-9847846137e7",
+   "evidence": "Both extra options form valid sentences.",
+   "route": "edit question + rerun validation (patches S-13, S-14)"
+  },
+  {
+   "id": "S-G05",
+   "auditRef": "SAT1 RW48",
+   "priority": "P1",
+   "finding": "Two supporting evidence choices",
+   "verdict": "d",
+   "internalId": "gid ffb53f81-6b4d-4233-b03d-9aeedcf3a9b8 (match 7/12)",
+   "evidence": "Evidence-selection item; fixing needs a rewrite of options (not a mechanical edit). Claim not re-derived.",
+   "route": "replace item from reserve RW stock"
+  },
+  {
+   "id": "S-G06",
+   "auditRef": "SAT10 RW2 Q17",
+   "priority": "P1",
+   "finding": "\"mill workers; indeed,\" vs \"mill workers indeed;\"",
+   "verdict": "a",
+   "internalId": "gid rwstock4:med-se-2:medium-boundaries-408 (rw-stock-20261008)",
+   "evidence": "Both complete a grammatical sentence; stored explanation rejects the second as \"unconventional\" (style).",
+   "route": "edit question + rerun validation (patch S-18) + explanation-fix"
+  },
+  {
+   "id": "S-G07",
+   "auditRef": "SAT3 RW1 Q4",
+   "priority": "P1",
+   "finding": "Standard-English stem but \"In doing so\" and \"In doing so, however\" both grammatical",
+   "verdict": "a",
+   "internalId": "gid 1f905f95-d611-49c1-a9d8-3a78d179bccf",
+   "evidence": "Options: In doing so / In doing so, however / Despite doing so / In doing so, or. Three are grammatical; only transition logic differs.",
+   "route": "edit question + rerun validation (change stem to the transition-logic stem, or replace options; not patched)"
+  },
+  {
+   "id": "S-G08",
+   "auditRef": "SAT3 RW2 Q14 (+ results)",
+   "priority": "P1",
+   "finding": "B and D both grammatical; explanation claims repeated subjects are prohibited",
+   "verdict": "a",
+   "internalId": "gid 82c5e756-c22a-4238-b56b-07c5c9f79c25",
+   "evidence": "Options: participial opener vs \"She used ..., and she ...\" — the second is also a correct compound sentence.",
+   "route": "edit question + rerun validation + explanation-fix"
+  },
+  {
+   "id": "S-G09",
+   "auditRef": "SAT3 (new) RW M2 Q19, Q20; SAT2 (new) RW M2 Q11",
+   "priority": "P1",
+   "finding": "Relative clause / participle both grammatical",
+   "verdict": "a",
+   "internalId": "gids 3b5485c3-f437-4786-aeb6-14f5f97fecbc, d3db447d-6bc0-46b1-b14c-0e3b0597d7e0, 5ccf4804-9d89-4c6f-b4c2-de3a55e6b97b",
+   "evidence": "\"Her team, which used ...\" vs \"using\"; \"a group that comprised\" vs \"comprising\"; \"routes, which featured\" vs \"featuring\".",
+   "route": "edit question + rerun validation (patches S-15, S-16, S-17)"
+  },
+  {
+   "id": "S-G10",
+   "auditRef": "SAT2 (new) RW M2 Q12, Q21",
+   "priority": "P1",
+   "finding": "Multiple grammatical answers",
+   "verdict": "d",
+   "internalId": "gids ed758eb3-1970-40f2-8d34-74701a243e1a, 55981e4f-a11a-4074-9f46-93faa4d909bb",
+   "evidence": "Q21 options \"and, thereby\" / \"and thereby\" / \"and, thereby,\" / \"and; thereby\": the commaless and comma versions are both acceptable to many editors; Q12 \"having reviewed ...\" vs \"which had reviewed\". Judgement-level, not re-derived.",
+   "route": "edit question + rerun validation after reviewer check"
+  },
+  {
+   "id": "S-G11",
+   "auditRef": "SAT5 RW1 Q8; RW2 Q22",
+   "priority": "P1",
+   "finding": "Several grammatical adverbs / clause forms",
+   "verdict": "a",
+   "internalId": "gids d40fe6a0-6492-4fc8-8537-c6639ff3f3b8, e66e12e0-d7bb-4aa1-be66-28705642b429",
+   "evidence": "Q8: \"and consequently she became\" / \"meanwhile\" / \"having achieved this\" all valid; Q22: \"Noether persisted ... despite\" and \"despite these obstacles Noether persisted\" both valid.",
+   "route": "edit question + rerun validation"
+  },
+  {
+   "id": "S-G12",
+   "auditRef": "SAT6 RW1 Q5",
+   "priority": "P1",
+   "finding": "\"their\" and \"his or her\" both acceptable",
+   "verdict": "a",
+   "internalId": "gid 387fc03b-10ac-428b-a172-703ab895c465",
+   "evidence": "Options his or her / their / its / one's; stored explanation rejects singular they categorically.",
+   "route": "edit question + rerun validation + explanation-fix"
+  },
+  {
+   "id": "S-G13",
+   "auditRef": "SAT8 RW2 Q21",
+   "priority": "P1",
+   "finding": "\"a practice reflecting\" vs \"reflecting\"",
+   "verdict": "a",
+   "internalId": "gid c7a5215b-adb8-4afa-ac99-d2af243c744e",
+   "evidence": "Both attach validly to the preceding clause.",
+   "route": "edit question + rerun validation"
+  },
+  {
+   "id": "S-P01",
+   "auditRef": "SAT1 RW44; SAT2 RW M2 Q8 (cum. 35); SAT3 RW1 Q18; SAT3 RW2 Q9; SAT3 (new) RW Q7; SAT4 RW1 Q9; SAT9 RW1 Q22",
+   "priority": "P2",
+   "finding": "Student goal / question sentence shown twice",
+   "verdict": "a",
+   "internalId": "gids ef704d02-d963-4fc9-a9b9-7b2523e33205, 5b9b865b-09e9-435d-b138-7710f25187f7, f6ad8197-06ca-4bf3-9c40-d425bb696d7d, 896b1d19-9734-425c-887d-ca61860501fc, 3e9176bf-e680-4816-a307-5458e53032da, fcde57e1-5271-4194-8dae-5c2bef3423e1, 3b4169b4-bd54-4fa1-bc01-eef69ef8ba9f",
+   "evidence": "In each stored item the stimulus already contains the question text that is also stored as the question. Scan: 26 candidates (21 imported).",
+   "route": "edit question + rerun validation (patches D-*: 12 mechanical)"
+  },
+  {
+   "id": "S-P02",
+   "auditRef": "SAT4 RW1 Q8",
+   "priority": "P2",
+   "finding": "Standard English stem used for a transition-logic question",
+   "verdict": "a",
+   "internalId": "gid 356d2176-ea3a-42bb-bff1-6a14bc31fc65",
+   "evidence": "Stored question: \"Which choice completes the text so that it conforms to the conventions of Standard English?\" with Similarly / For example / Eventually / Likewise (all grammatical).",
+   "route": "edit question + rerun validation (use the \"most logical transition\" stem)"
+  },
+  {
+   "id": "S-P03",
+   "auditRef": "SAT4 RW1 Q18",
+   "priority": "P2",
+   "finding": "Passage dates cassette development to 1959",
+   "verdict": "a",
+   "internalId": "gid rwstock:med-se-1:medium-boundaries-324",
+   "evidence": "Stored passage: \"In 1959, engineers at the Dutch firm Philips...\". Philips began the compact cassette project in the early 1960s (introduced 1963); date from general knowledge, not independently sourced here.",
+   "route": "edit question + rerun validation (change year)"
+  },
+  {
+   "id": "S-P04",
+   "auditRef": "SAT3 RW1 Q2",
+   "priority": "P2",
+   "finding": "Tacoma Narrows collapse called resonance",
+   "verdict": "a",
+   "internalId": "gid 57c13ba3-a6bc-4706-9263-a3c8cae8e8e1 (probable)",
+   "evidence": "Stored text speaks of \"potential resonance problems\" for the 1940 collapse; the accepted cause is aeroelastic flutter (self-excited), not forced resonance.",
+   "route": "edit question + rerun validation (reword)"
+  },
+  {
+   "id": "S-P05",
+   "auditRef": "SAT4 RW1 Q21; SAT5 RW1 Q20; SAT7 RW1 Q4, Q9; SAT11 RW1 Q3; SAT8 RW1 Q5; SAT9 RW2 Q6; SAT11 RW2 Q12; SAT12 RW1 Q19; SAT3 RW1 Q2",
+   "priority": "P2",
+   "finding": "Factual / scientific accuracy of passages",
+   "verdict": "d",
+   "internalId": "gids 6273a28a-eb53-46b0-bcf3-7cea16fa40b0, 963ebc71-6ff9-432f-a9a7-f6d4e3d505b0, aeaae082-c163-428c-9920-fc7149a9825d, rwstock:easy-1:easy-boundaries-101, rwstock4:easy-ei:easy-transitions-205, b3de9199-dc32-422b-8605-f6d37d9a110c, 3b57dca2-8482-4af0-88cd-718a1bc13566, ebd8bd34-7bc2-44c8-ba4a-ae13576f059e, w1-boundaries-m-189",
+   "evidence": "Each cited passage statement is present in the stored text (e.g. SAT7 RW1 Q4 \"length of the planet's orbit ... every nine days\", SAT7 RW1 Q9 \"In 2019 ... bicycle bridge\", SAT11 RW1 Q3 fern grouped with desert plants); whether the outside fact is wrong needs an external fact-check, not a DB read.",
+   "route": "external fact-check, then edit question + rerun validation"
+  },
+  {
+   "id": "S-P06",
+   "auditRef": "SAT6 results ord 47; SAT9 results ord 15, 42, 54; SAT6 results ord 52",
+   "priority": "P2",
+   "finding": "English explanation contradicts the passage (date direction; Mathis \"his/brother\"; nephew vs niece; absorbs vs oysters)",
+   "verdict": "a",
+   "internalId": "DB problem/version: ord 47 = 47056b8e-21e4-4e4c-ab4a-d4efb2276c16 / b679e222-ad35-4559-84f5-8e09e9aedba9; ord 15 = 457d567a-8ed3-4ca3-9e3d-989326420aa4 / 78e523ad-d682-4f41-9d7e-b257d990b6ac; ord 42 = d07ca7d3-eec2-4221-bdd6-7fbca6489315 / a3f5839d-ceda-49de-94b3-86760f55080f; ord 52 = b4af5fd9-678f-4f8c-82f4-45905d194cad / ffe513f9-3f56-4040-99d1-6ffbcc4fca9c (all from data/explanation-en/tasks, versionId = problem_versions.id)",
+   "evidence": "data/explanation-en/approved.json: \"dates ... a week ahead of the real ones\" (passage: dated a week BEFORE); \"the plane ticket of a brother\" (passage: sister/she); \"calls the narrator ... a nephew\" (passage: like a niece); \"shortage of oysters\" (passage: shortage of suitable denning sites). Korean sources are gender-neutral (조카, 동생) and for ord 52 say \"굴 부족\" (굴 = burrow or oyster); the English translation picked the wrong reading, so the errors were introduced by translation.",
+   "route": "explanation-fix"
+  },
+  {
+   "id": "S-P07",
+   "auditRef": "SAT1 (new) RW Q18, Q20, Q25; SAT13 (new) RW Q12, Q27; SAT2 (new) RW Q24, Q26; SAT3 (new) RW Q24, Q25; SAT6 RW1 Q9, Q27; SAT6 RW M2 (alt) Q21; SAT10 RW1 Q19; SAT5 RW2 Q26; SAT8 RW2 Q24, Q26; SAT9 RW1 Q20; SAT1 RW50; SAT1 RW77/Math Q23",
+   "priority": "P2",
+   "finding": "Alternate valid transition/punctuation/evidence choices, weak supporting data, editorial concerns",
+   "verdict": "a",
+   "internalId": "gids 6f6352ff-6922-4342-adcb-90c2c3aba649, 4ed4249c-86a7-485c-ba48-92675ad436f6, rebal13:w3-boundaries-m-035, c7c1fc86-cd69-4665-9d55-e3cca54fc9e2, 5fcdc4d9-408b-4a5b-8a2c-b88128f9b97a, 38f838b9-156f-4ea9-acbe-bd5471e358ee, d90f5e5b-62cd-4982-9182-baf5f4d6345f, 8af85fbf-c6b7-4c0f-987b-b5893f2f3b64, 4fe2723f-06c9-44d7-bef7-94d64fc4adf8, 58c8b184-f1f8-42e1-a786-b553a6457cc5, rwstock4:med-se-2:medium-boundaries-410, 0483480c-e56a-44a6-afdb-9857c3a1ead4, 03ae9479-1af2-4f87-bd88-30710870a92b (Q25 / SAT7 RW2 Q27 / SAT8 RW2 Q24 have no gid in the repo: pilot gens.json)",
+   "evidence": "Re-read of the stored options: e.g. SAT3 (new) RW Q25 \"bacteria, and\" vs \"bacteria; and\" both valid; SAT13 (new) Q27 \"that critics raised, proving\" valid; SAT1 (new) Q18 option D also illustrates the claim. Judgement-level, low student impact.",
+   "route": "no action unless the owner wants a polishing round (E1)"
+  },
+  {
+   "id": "A-01",
+   "auditRef": "AP AB1 MC-A17",
+   "priority": "P1",
+   "finding": "f' sign/monotonicity premises contradictory",
+   "verdict": "a",
+   "internalId": "run2:ap_calculus_ab-m17-k2 (AB1 v1 and v2 mcA#17; archetype fprime_graph_statements)",
+   "evidence": "f twice differentiable -> f' continuous, sign change at 1 -> f'(1)=0; f' increasing on (1,5) -> f'>0 on (1,5), contradicting f'<0 on (1,6). AB1 v2 swaps only mcA 5,12,14,20,26 and mcB 1,5,6,9,11 so the item is still present. Generator scripts/ap-generation/archetypes/calc_ab_2.py:99-114 picks (lo,hi) at random.",
+   "route": "new version via admin panel: data/ap/stock/ab1-v3-audit-swap-plan.json (mcA#17 -> run2:ap_calculus_ab-m19-k1, unit 5, calc not allowed, db-ready)"
+  },
+  {
+   "id": "A-02",
+   "auditRef": "AP AB2 MC-A18",
+   "priority": "P1",
+   "finding": "Same contradiction (f' increasing on (1,6) while negative on (1,2))",
+   "verdict": "a",
+   "internalId": "s1a-final:ap_calculus_ab-m17-k1 (exact-assign-5sets-cons.json AB2 mcA#18)",
+   "evidence": "Same archetype; the 3 auto_passed items of the archetype are exactly the 3 audited slots (the other 3 were rejected).",
+   "route": "new version via admin panel: data/ap/stock/ab2-v2-audit-swap-plan.json (-> s1a-final:ap_calculus_ab-m19-k0)"
+  },
+  {
+   "id": "A-03",
+   "auditRef": "AP BC1 MC-A7",
+   "priority": "P1",
+   "finding": "Same contradiction",
+   "verdict": "a",
+   "internalId": "run2:ap_calculus_ab-m17-k3 (BC1 mcA#7)",
+   "evidence": "Same archetype.",
+   "route": "new version via admin panel: data/ap/stock/bc1-v2-audit-swap-plan.json (-> run2:ap_calculus_ab-m18-k0, unit 5 skill 2)"
+  },
+  {
+   "id": "A-04",
+   "auditRef": "AP AB1 FRQ-B1(c); AB2 FRQ-B1(c,d); BC1 FRQ-B1(c)",
+   "priority": "P1",
+   "finding": "Absolute extremum asked without an initial value",
+   "verdict": "a",
+   "internalId": "run1:ap_calculus_ab-f02-k5 (AB1: given f(0)=40), run1:ap_calculus_ab-f02-k9 (AB2: S(0)=0), run1:ap_calculus_ab-f02-k10 (BC1: f(0)=1)",
+   "evidence": "The value IS in the stock payload (stimulus.data.given / context) but convert.ts passageFor() only emits a passage for text stimuli, and the graph spec drops data.given/context, so the student never sees it. Exactly these 3 FRQs carry given/context on a graph stimulus. Fixed in code for future conversions (lib/ap-exam/convert.ts graphStatedFacts + tests); the published problem versions still lack it.",
+   "route": "new version via admin panel + edit question + rerun validation: re-convert/edit the passage of those 3 problems, then a new set version for AB1, AB2, BC1 (published versions are immutable)"
+  },
+  {
+   "id": "A-05",
+   "auditRef": "AP AB1 FRQ-A2(c), AB2 FRQ-A2(c), AB3 FRQ-A2(c), BC1 FRQ-A2(c), BC2 FRQ-A2(c)",
+   "priority": "P1/P2",
+   "finding": "Decimal integral upper limit rendered as superscript 2 + baseline \".746\"",
+   "verdict": "a",
+   "internalId": "run2:ap_calculus_ab-f04-k0..k3, s1a-final:ap_calculus_ab-f04-k0/k1 (stored as `\\int_0^3.154` etc.)",
+   "evidence": "KaTeX renders `\\int_0^3.154` as limit \"3\" and the text \".154\" on the baseline (reproduced in a unit test, <mn>3</mn></msubsup><mn>.154</mn>). The old test even pinned the broken output. 37 stock items have unbraced multi-character scripts (^12, ^-2, _0.05, mm^-1 ...). FIXED (display only): braceNumericScripts() in lib/ap-exam/explanation-math.ts applied inside every `$...$` at render time, so already-stored explanations display correctly after deploy without a DB write; data/ap/stock/tex-corrections.json regenerated (7 entries) for the optional storage clean-up.",
+   "route": "fixed in code (tests added); optional EX route for storage normalization"
+  },
+  {
+   "id": "A-06",
+   "auditRef": "AP BC2 FRQ-A2(d)",
+   "priority": "P2",
+   "finding": "Average value 1.191 vs rounded 1.192",
+   "verdict": "c",
+   "internalId": "run2:ap_calculus_ab-f04-k1",
+   "evidence": "sympy: exact intersection b=2.517456, average value = 1.191431 -> 1.191 (stored value correct). The auditor got 1.1917 by dividing by the rounded limit 2.517.",
+   "route": "no action"
+  },
+  {
+   "id": "A-07",
+   "auditRef": "AP AB1 FRQ-B2(a)",
+   "priority": "P2",
+   "finding": "Reference allows \"a vertical\" slope segment at (0,0) where dy/dx is undefined",
+   "verdict": "a",
+   "internalId": "run1:ap_calculus_ab-f03-k2",
+   "evidence": "model_answer: \"no slope segment (or a vertical one) appears there\".",
+   "route": "explanation-fix (reference text) — low impact"
+  },
+  {
+   "id": "A-08",
+   "auditRef": "AP AB3 MC-A27",
+   "priority": "P2",
+   "finding": "\"differentiable\" piecewise-linear graphs with corners",
+   "verdict": "a",
+   "internalId": "s1-graph-ab-final:ap_calculus_ab-m24-k0 (probable, 6/7 windows)",
+   "evidence": "Stem: \"The graphs of the differentiable functions f and g ... each consisting of line segments\".",
+   "route": "edit question + rerun validation (stem wording) or replace item via swap plan; low impact (limit exists at x=7)"
+  },
+  {
+   "id": "A-09",
+   "auditRef": "AP BC1 MC-B6; MC-B5",
+   "priority": "P2",
+   "finding": "\"derivatives of all orders\" with a corner third-derivative graph; rounded implicit constant",
+   "verdict": "a",
+   "internalId": "s3a-graph-bc-final:ap_calculus_bc-m02-k0; s3a-graph-ab-final:ap_calculus_ab-m04-k0",
+   "evidence": "f''' has corners -> f'''' does not exist at them. xe^y+y^2=6.4366 vs exact 2e+1=6.43656; keyed -0.366 is right to 3 dp.",
+   "route": "edit question + rerun validation (wording; low impact)"
+  },
+  {
+   "id": "A-10",
+   "auditRef": "AP BC2 MC-A23 / MC-A25",
+   "priority": "P2",
+   "finding": "Same segment graph reused in one exam",
+   "verdict": "a",
+   "internalId": "s1-graph-ab-final:ap_calculus_ab-m17-k0, s1-graph-ab-final:ap_calculus_ab-m32-k0",
+   "evidence": "Different questions on identical graph data (observation of the audit).",
+   "route": "no action (optional swap)"
+  },
+  {
+   "id": "A-11",
+   "auditRef": "AP BC1, BC2 FRQ real-world contexts",
+   "priority": "P2",
+   "finding": "Only 1 context FRQ (official minimum 2)",
+   "verdict": "a",
+   "internalId": "BC1 (A2 area/volume, B1 f' graph, B2 separable DE, B3 f' graph, B4 Taylor are abstract); BC2 (A1 table, A2 area/volume, B1 f' graph, B3 series, B4 Taylor abstract; B2 cooling the only context)",
+   "evidence": "Read from exact-assign-5sets-cons.json + stock payloads. NOTE: part of the perceived missing context is the display bug of A-04.",
+   "route": "new version via admin panel: bc1-v2-audit-swap-plan.json (A2 -> marginal profit, B2 -> pen cost), bc2-v2-audit-swap-plan.json (A2 -> trench volume); verifier violations 0"
+  },
+  {
+   "id": "A-12",
+   "auditRef": "AP AB2/AB3 FRQ template repetition (5 of 6), identical numeric answers",
+   "priority": "P2",
+   "finding": "AB2 and AB3 FRQs share 5 of 6 archetypes; area/volume answers identical",
+   "verdict": "a",
+   "internalId": "AB2 A1 run2:ap_calculus_ab-f04-k3 and AB3 A1 run2:ap_calculus_ab-f04-k2 (same f-g -> a=4.316, b=7.658, d=1.572); also A2 table-rate, B fprime graph, B cooling DE, B ladder",
+   "evidence": "Compared archetypes from exact-assign-5sets-cons.json; the set rules only forbid repeats inside one set.",
+   "route": "new version via admin panel: data/ap/stock/ab3-v2-audit-swap-plan.json (A1 -> particle motion, A2 -> accumulation, B3 -> exponential decay DE): AB2/AB3 then share 2 of 6"
+  }
+ ],
+ "observations": [
+  [
+   "SAT RW passage length > 150 words",
+   "d",
+   "Stock-wide count (all RW-like stimuli generated, not only published): 3667 unique, 707 > 150 raw words, 585 > 150 by chars/6, 482 > 155 std words (median 120, max 260). The published subset needs DB query Q2."
+  ],
+  [
+   "SAT math diversity / difficulty",
+   "a (observation)",
+   "Our own mix per set copy (rebalance set-copies.json, 147 items): Math 66 = 16 easy / 42 medium / 8 hard (12% hard), 17-19 of the 19+ skills used per set. The auditor's \"91.8% direct reading/standard procedure\" is consistent with a 12% hard share; it is not an official difficulty statistic."
+  ]
+ ]
+}

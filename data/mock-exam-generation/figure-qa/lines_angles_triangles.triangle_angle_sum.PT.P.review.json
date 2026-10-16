@@ -1,0 +1,23 @@
+{
+ "itemId": "lines_angles_triangles.triangle_angle_sum.PT.P",
+ "verdict": "pass",
+ "reviewedAt": "2026-10-06T06:18:26Z",
+ "reviewer": "claude-sonnet-5.5 (math-B session)",
+ "codeHash": "a269da2f00ed57e14f7936be0d2334974e1c38cd189f568026dd6f340c2116b4",
+ "samples": [
+  "lines_angles_triangles.triangle_angle_sum.PT.P.png"
+ ],
+ "checklist": {
+  "figure_present": "pass",
+  "proportion_matches_values": "pass",
+  "labels_placed_and_legible": "pass",
+  "multi_figure_consistent": "n/a",
+  "text_matches_figure_and_solvable": "pass",
+  "axes_ticks_units_legend": "pass",
+  "choice_distinct_one_rule": "n/a",
+  "sat_visual_style": "pass",
+  "mobile_375_readable": "pass"
+ },
+ "defects": [],
+ "notes": "평행선 2 + 횡단선 2(삼각형 CAD) 샘플 데스크톱·375px 확인: 두 횡단선이 각자의 각대로 그려지고 세 라벨((2x+38)=위 평행선 동위각 등)이 값과 일치, 점·선 이름·각 라벨 겹침 없음. 갤러리(4 연산자·시드 3~4)로 위/아래 평행선 위치 변형 확인. 꼭대기 각 60° 이상 규칙(좁으면 라벨이 멀리 놓임)을 장면에 둠."
+}

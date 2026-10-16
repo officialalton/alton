@@ -1,0 +1,319 @@
+{
+ "schema": "rw-session-task/v1",
+ "kind": "review",
+ "role": "second_solver",
+ "runId": "lit40-wave1",
+ "taskId": "rev-second_solver-037",
+ "chunkId": "rev-second_solver-037",
+ "suggestedModel": "opus",
+ "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-second_solver-037.result.json",
+ "outputSchema": {
+  "chunkId": "청크 ID",
+  "model": "opus|fable",
+  "items": [
+   {
+    "candidateId": "id",
+    "picked_letter": "A|B|C|D",
+    "other_defensible": "boolean",
+    "confidence": "high|medium|low",
+    "note": "풀이 한 줄"
+   }
+  ]
+ },
+ "items": [
+  {
+   "candidateId": "lit40-medium-05-002",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "medium",
+   "passage": "When Anselmo and Marisol were children, they rowed to the far end of the dock every evening and talked until the lake went black. Decades later, I watched them sit on that same dock without a word between them. Marisol had found, in her late mother's desk drawer, a letter showing that Anselmo's father had once paid the family's rent for a whole winter, and that no one had ever told her. She did not know whether to thank Anselmo or resent him for keeping quiet. Yet each morning she still carried two cups of coffee down the planks and set one beside him, and he still moved over to make room. Behind them, the fishing boats knocked gently against their moorings while gulls argued over the nets.",
+   "question": "Which choice best states the main purpose of the text?",
+   "options": [
+    "To explain how a letter found in a drawer revealed that a family's rent had once been paid.",
+    "To suggest that a friendship can persist through small habits even when an old secret strains it.",
+    "To describe the evening routines that two children shared on a lakeside dock in Galicia.",
+    "To argue that people should never keep important family information hidden from friends."
+   ],
+   "recipeBeyondMedium": "두 곳의 근거를 합쳐 요지를 잡아야 하고, 오답 하나는 일화 요약에 그치는 부분 요지다"
+  },
+  {
+   "candidateId": "lit40-medium-05-003",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "character_motivation",
+   "requestedDifficulty": "medium",
+   "passage": "Years later, Haoran would still remember the overnight train out of Shanghai and the teacher who sat across from him. Rafaela had joined the school only that autumn, and Haoran had decided early that she was like the others, quick to praise and quicker to forget. Somewhere past Suzhou, she glanced at the notebook on his knee and said that his crossed-out sentences were more interesting than the ones he kept. He closed the notebook at once, his ears hot. But after she fell asleep, he opened it again and, by the light of the corridor, began copying the crossed-out lines onto a clean page so he could read them without the ink scored through them. Outside, the rice fields slid past in long gray strips, broken now and then by a lit window.",
+   "question": "Based on the text, why does Haoran copy the crossed-out lines onto a clean page?",
+   "options": [
+    "He is embarrassed that Rafaela saw his notebook and wants to hide his mistakes from her.",
+    "He wants to prove to the school that he can produce a neater notebook than before.",
+    "He has begun to take seriously Rafaela's remark that his discarded sentences had value.",
+    "He has been told by the school that all notebooks must be recopied before the trip ends."
+   ],
+   "recipeBeyondMedium": "단서를 두 문장 이상 연결해야 하며 오답 중 하나는 결과를 동기로 착각하는 전형적 오독이다"
+  },
+  {
+   "candidateId": "lit40-medium-05-004",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "character_motivation",
+   "requestedDifficulty": "medium",
+   "passage": "Diesel and wet rope hung in the air as Thiago climbed aboard the barge where Esperanza had lived for eleven years. He owned the boat, and he had come to tell her the buyer from the city would arrive on Friday. The buyer, he admitted, believed the barge was empty and in need of nothing but paint. Esperanza listened, then spent the afternoon scrubbing the deck, coiling every line, and stacking her own crates out of sight in the hold. When Thiago asked why she was helping a sale that would put her ashore, she only said that she had seen him sell his father's boat the same way, and that he had not slept for a month afterward. She wanted, she added, the lie to at least be a tidy one. Along the Guaíba, the evening ferries sounded their horns one after another.",
+   "question": "Based on the text, why does Esperanza help prepare the barge for the buyer's visit?",
+   "options": [
+    "She is angry at Thiago and wants him to feel guilty when the buyer finally arrives.",
+    "She hopes that a cleaner barge will raise the price enough for her to share in it.",
+    "She has been ordered by the city's harbor officials to clear her crates from the deck.",
+    "She wants to spare Thiago some of the distress she knows such deceptions cause him."
+   ],
+   "recipeBeyondMedium": "단서를 두 문장 이상 연결해야 하며 오답 중 하나는 결과를 동기로 착각하는 전형적 오독이다"
+  },
+  {
+   "candidateId": "lit40-medium-05-005",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "character_motivation",
+   "requestedDifficulty": "medium",
+   "passage": "I worked nights at the monastery guesthouse on Maui with Koa, folding linens while the monks slept. One week a rumor went around that Koa had taken money from the donation box, and by Thursday it had reached the abbot. Koa said nothing about it to me. But that night he asked me to count the box with him before our shift ended and to write the total in the ledger in my own hand, beside his. He did the same every night after that, always waiting until I had signed. He had once told me that his uncle lost a job over a story no one bothered to check, and that he had never forgiven how quickly it spread. Near dawn, the roosters started up in the banana grove, and the first guests shuffled out toward the lanai.",
+   "question": "Based on the text, why does Koa ask the narrator to count the donation box with him and sign the ledger?",
+   "options": [
+    "He wants a written record that can answer the rumor, having seen an unchecked story harm his uncle.",
+    "He is angry at the narrator and wants to make the narrator share blame for the rumor.",
+    "He hopes the abbot will promote him once the ledger shows the box is always correct.",
+    "He was instructed by the guesthouse's new rules to count the box with a second worker."
+   ],
+   "recipeBeyondMedium": "단서를 두 문장 이상 연결해야 하며 오답 중 하나는 결과를 동기로 착각하는 전형적 오독이다"
+  },
+  {
+   "candidateId": "lit40-medium-05-006",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "tone_or_mood",
+   "requestedDifficulty": "medium",
+   "passage": "\"Bartolo, tell me what you saw out there.\" Fumiko stood at the cemetery gate above Valparaíso, holding the iron bar as if it might swing open on its own. Her brother had been home a week, and in that week she had read the official report four times. It said their cousin had fallen during a night patrol; the letter from another soldier said he had been carrying someone else. Bartolo looked past her at the harbor, where cranes turned slowly. He told her the report was accurate in every detail it chose to include. Fumiko felt something loosen in her chest, a small relief that he had not lied outright, but the heavier question stayed lodged there. Below them, a vendor wheeled a cart of carnations up the steep street, stopping every few meters to catch his breath.",
+   "question": "Which choice best describes the overall tone of the text?",
+   "options": [
+    "Relieved, reflecting Fumiko's comfort that her brother has finally come home.",
+    "Uneasy, with a brief note of relief overshadowed by an unresolved question.",
+    "Hopeful, with only a slight trace of doubt about the conflicting accounts.",
+    "Mournful, centered on a family's open grief at a cousin's graveside."
+   ],
+   "recipeBeyondMedium": "두 정서의 비중을 판단해야 하며, 오답은 정반대가 아니라 비중이 틀린 어조다"
+  },
+  {
+   "candidateId": "lit40-medium-05-007",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "tone_or_mood",
+   "requestedDifficulty": "medium",
+   "passage": "We waited at the mountain bus stop above Marseille, Remy and I, each holding a covered dish for the meal after the funeral. Mine was my grandmother's chickpea stew; his was the almond cake his father's family baked for every burial. Neither of us had seen the other in nine years. Remy joked that the two dishes would probably fight on the table, and I laughed harder than the joke deserved, glad for any sound at all. Still, I kept checking the lid on my pot, and he kept turning his cake so the dented side faced away from me. When the bus finally came around the bend, we both stepped forward at once and nearly collided, then stood aside for each other. Pine needles had collected in the gutter, and a thin wind pushed them in circles.",
+   "question": "Which choice best describes the overall tone of the text?",
+   "options": [
+    "Joyful, celebrating a long-awaited reunion between two cousins after many years.",
+    "Lighthearted, with occasional moments of mild nervousness between the cousins.",
+    "Awkward but warm, with tentative humor softening the cousins' self-consciousness.",
+    "Solemn, emphasizing the grief that the funeral has brought to the whole family."
+   ],
+   "recipeBeyondMedium": "두 정서의 비중을 판단해야 하며, 오답은 정반대가 아니라 비중이 틀린 어조다"
+  },
+  {
+   "candidateId": "lit40-medium-05-008",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "relationship_between_characters",
+   "requestedDifficulty": "medium",
+   "passage": "Once, in the café of the Seville train station, Sergio handed Alba a box of his orange pastries on the morning she opened her bakery across the street from his. Everyone in the neighborhood knew Alba could not eat citrus. She thanked him, bit into one, and declared it the best thing she had tasted all year, though her eyes watered. Sergio, watching her chew, said he had made them with a new recipe and would be glad to hear her honest opinion next week, after she had tried her own croissants against them. Alba promised she would bring him six of hers by Friday, warm. Overhead, the departures board clattered through its letters, and a train for Córdoba was called twice.",
+   "question": "Based on the text, which choice best describes the relationship between Sergio and Alba?",
+   "options": [
+    "Sergio openly resents Alba's new bakery, while Alba remains unaware of his feelings.",
+    "Alba depends on Sergio for guidance as she learns to run a bakery of her own.",
+    "Sergio and Alba are close friends who have long shared recipes without competition.",
+    "Sergio and Alba are rivals who mask their competition with exaggerated courtesy."
+   ],
+   "recipeBeyondMedium": "두 문장의 단서를 연결해야 하고 오답은 한쪽 감정만 반영한다"
+  },
+  {
+   "candidateId": "lit40-medium-05-009",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "relationship_between_characters",
+   "requestedDifficulty": "medium",
+   "passage": "When the night pharmacy in Samarkand emptied out after midnight, Roxana, who had retired from the bench three years earlier, would come in for her blood-pressure pills and stay to talk. Bahram, the clerk, had just passed his licensing exam, and his certificate hung crookedly by the register. Roxana straightened it without comment, then asked him three hard questions about drug interactions, nodding at each answer as if hearing a case. Bahram answered evenly and shrugged when she raised an eyebrow, saying anyone could have memorized it. Roxana replied that anyone could, but that she had sat through forty years of people who had not. She paid, tucked the receipt into her coat, and lingered a moment longer than she needed to. Outside, a street sweeper's brushes scraped along the curb under the yellow lamps.",
+   "question": "Based on the text, which choice best describes the relationship between Roxana and Bahram?",
+   "options": [
+    "Roxana takes a mentor's interest in Bahram, who plays down the pride he feels in his success.",
+    "Roxana is suspicious of Bahram's skills and tests him to find mistakes in his answers.",
+    "Bahram admires Roxana's career and hopes she will help him find a job in the courts.",
+    "Bahram and Roxana are customer and clerk with no interest in each other beyond business."
+   ],
+   "recipeBeyondMedium": "두 문장의 단서를 연결해야 하고 오답은 한쪽 감정만 반영한다"
+  },
+  {
+   "candidateId": "lit40-medium-05-010",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "symbolism",
+   "requestedDifficulty": "medium",
+   "passage": "Who keeps a broken jukebox in a diner for twelve years? Tommaso asked himself that every time he wiped down the booths at the roadside place outside Naples, where his stepson Giacomo worked weekends. The machine had stopped the summer Giacomo's conservatory audition was missed, the summer the car broke down on the way and Tommaso had been the one driving. Giacomo never mentioned the audition. But he dusted the jukebox every Saturday, slid a coin into it out of habit, and listened to the coin rattle down into nothing. One night Tommaso found him with the back panel open and a screwdriver in hand. Giacomo said he was only looking. Tommaso pulled up a stool, held the flashlight steady, and neither of them said anything about the drive. The neon sign outside buzzed and flickered over the empty parking lot.",
+   "question": "In the text, the broken jukebox most likely represents",
+   "options": [
+    "Giacomo's lasting resentment toward Tommaso for causing the failed trip to the audition.",
+    "the lost opportunity that both men still carry and are only beginning to approach together.",
+    "the diner's financial troubles, which keep Tommaso from replacing older equipment.",
+    "Giacomo's general interest in machines, which he hopes will replace his love of music."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-05-011",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "symbolism",
+   "requestedDifficulty": "medium",
+   "passage": "\"Patching it again?\" Mandla asked, finding his mother on the gallery of the lighthouse station outside Accra, the morning before his flight to college. Amit, as everyone on the coast called her, was pressing a strip of tar paper over the same crack in the lantern glass she had sealed every rainy season since he was small. Each patch held for a few months, and each time the salt worked its way back in. She told him the light still reached the fishing boats, crack or no crack. Mandla watched her smooth the edges with her thumb, slowly, as she used to smooth his collar before school. He thought of the narrow dorm room waiting for him, the single window facing a parking lot. He picked up the roll of tar paper and held it while she cut.",
+   "question": "In the text, the repeatedly patched crack in the lantern glass most likely represents",
+   "options": [
+    "the poor condition of the lighthouse, which Mandla fears will close after he leaves.",
+    "Amit's stubborn refusal to accept help from the coastal authorities who run the station.",
+    "an ongoing care that cannot prevent change but continues anyway, like Amit's care for Mandla.",
+    "Mandla's eagerness to leave the coast for a college far away from the sea."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-05-014",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "medium",
+   "passage": "Some gifts arrive in the wrong language.\nDevon sent Lorenzo a pair of resoled boots,\nfixed at the stall on Seventy-First\nwhere the cobbler hums over his last.\nLorenzo, who had spent a year inside her sentences,\nread them as a hint that his work was worn through.\nHe wrote back stiffly, offering to step aside.\nShe answered with a single line:\nI meant you have walked my words\nfarther than I ever could,\nand I wanted your feet to last.\nNow he keeps the boots by the door,\ntheir new soles a quiet grammar\nhe is still learning to parse.",
+   "question": "As used in the text, the phrase “a quiet grammar” most nearly suggests that the boots",
+   "options": [
+    "carry an unspoken meaning that Lorenzo is still coming to understand fully.",
+    "contain written instructions about how a translator should care for leather.",
+    "remind Lorenzo of the grammatical errors he made while translating her book.",
+    "make a soft sound at the door that Lorenzo associates with Devon's visits."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-05-015",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "medium",
+   "passage": "Grapes split on the vine that September in the Delta, and by the time we picked, half the rows smelled of vinegar. Marcus, the priest from the parish down the road, came out to help even though I had not sat in his church in six years. He worked beside me without asking why. At noon, staring at a bin of fruit too soft to sell, I told Priya, my neighbor, that the whole season had been a sermon I had slept through. Marcus heard me and laughed, not unkindly. He said sermons were generous that way; they kept going whether anyone was listening or not. We kept picking. Late that afternoon a crop duster crossed low over the cotton fields to the east, its shadow sliding across the levee.",
+   "question": "As used in the text, the phrase “a sermon I had slept through” most nearly suggests that the narrator",
+   "options": [
+    "was too tired from the harvest to attend Marcus's church services that season.",
+    "feels that the season's warnings had passed by without being heeded or understood.",
+    "plans to return to church now that Marcus has helped with the failed harvest.",
+    "believes that Marcus's teachings caused the vineyard's poor harvest that year."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-05-016",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "medium",
+   "passage": "Promises outlive the people who make them. When I was seven, Kofi, my father's oldest friend, told me that the orchard behind his house outside Dakar would be mine to look after when I was tall enough to reach the mangoes. I measured myself against the lowest branch every visit. Then my family moved away, and Kofi grew too frail to walk the rows. Twenty years later, Abena, his daughter, walked me through the gate. The trees had gone wild, their branches knotted into one another. Abena said her father had called the orchard a letter he had never finished writing to me. I reached up and found that the lowest branch was now below my shoulder. A goat had wandered in through a gap in the fence and was nosing at the fallen fruit.",
+   "question": "As used in the text, the phrase “a letter he had never finished writing to me” most nearly suggests that the orchard",
+   "options": [
+    "was described in letters Kofi sent to the narrator's family after they moved away.",
+    "contains a hidden message that Kofi left somewhere among the overgrown trees.",
+    "stood for an unfulfilled promise to the narrator that Kofi still meant to keep.",
+    "was a place Kofi visited to write while he was too frail to walk the rows."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-05-022",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "medium",
+   "passage": "Lagos traffic had finally thinned, and the night bus rattled along the expressway with its windows half open. Babatunde, a park ranger heading home from a conference, had given up his seat to Ahanu, a hiker who had missed the last shuttle from the forest reserve and looked as if he had walked the whole way. For twenty minutes they argued about whether the driver should stop for a woman waving at the roadside. Ahanu insisted it was dangerous; Babatunde called him timid. Then Ahanu said, quietly, that he had lost his trail map that morning and spent four hours believing no one would find him. Babatunde stopped talking. He looked at the dark shapes of palms sliding past and, after a while, offered the hiker half of the bread in his bag. Neither mentioned the woman again.",
+   "question": "Which choice best describes the shift in tone that occurs in the passage?",
+   "options": [
+    "It moves from relief about the bus ride to fear about the dangers of the road at night.",
+    "It moves from mild amusement at the driver to open anger at the passengers who complain.",
+    "It moves from combative bickering to subdued sympathy once a deeper fear is revealed.",
+    "It moves from cheerful curiosity about the hiker to regret over the ranger's long conference."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-05-023",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "medium",
+   "passage": "Smelling of rosin and damp wood, the music room in Chiang Mai was empty except for Lan, who sat at the piano refusing to play. Ottilie, the old fishmonger who delivered to the school kitchen on Thursdays, had come in to fetch his crate and found the boy there. Two weeks earlier Lan had accused him, loudly and in front of classmates, of cheating his mother on the weight of a catfish. Ottilie had said nothing then. Now he set down the crate and asked whether the piano was broken. Lan shrugged. The old man pressed a single key, then another, finding a children's song with two clumsy fingers. Lan winced, then laughed despite himself, and slid over on the bench. They played it badly together while the rain thickened on the windows, and the scale near the door went on rusting.",
+   "question": "Which choice best describes the shift in tone that occurs in the passage?",
+   "options": [
+    "It shifts from playful teasing between friends to bitter resentment over a past accusation.",
+    "It shifts from nostalgic memories of the school to anxiety about the approaching storm.",
+    "It shifts from formal politeness during the delivery to impatience with an untalented pupil.",
+    "It shifts from strained wariness after a quarrel to a hesitant, gentle reconciliation."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-05-024",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "medium",
+   "passage": "What do I carry, Eunseo asks, when I carry your words?\nOn the terrace above Busan the laundry snaps like flags,\nand Minjun's sentences arrive heavy, one by one,\nfor me to turn into another tongue.\nI trimmed them all week: a name left out,\na date blurred, a brother's debt unspoken,\nbecause the man across the table would have used it.\nI called it accuracy. I called it craft.\nBut tonight, the harbor lights stitching the dark,\nI see that what I kept from him was a shelter,\nnot a mistake, a roof I raised in silence\nover someone neither of us will name.\nLet the wind take the shirts. I will hold this.",
+   "question": "Which choice best describes the shift in tone that occurs in the poem?",
+   "options": [
+    "The speaker moves from calling her omissions craft to seeing them as protection.",
+    "The speaker moves from pride in her translation to shame at having deceived her client.",
+    "The speaker moves from admiration of the harbor view to irritation with the noisy laundry.",
+    "The speaker moves from confusion about her client's language to confidence in her fluency."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-05-025",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "medium",
+   "passage": "Folding chairs clattered as I stacked them along the wall of the gymnasium, where our community supper was held each month on the Navajo plateau. I was sixteen and in charge of the fry bread, and my aunt Katerina was in charge of me. All evening she corrected my dough, my oil, my posture. I resented her and said so. Our friend Defne was in the hospital in Gallup, and I wanted to tell her the doctors had stopped talking about next spring. Katerina said no, sharply, and I called her cold. Later, scrubbing the last pan, I noticed her hands shaking. She told me she had once kept the truth from her own sister and never stopped wondering if it had been a kindness. I put the pan down. For the first time I asked her what she would do, and I waited.",
+   "question": "Which choice best describes the shift in tone that occurs in the passage?",
+   "options": [
+    "It shifts from excitement about the supper to disappointment that few guests attended.",
+    "It shifts from defiant irritation toward the aunt to a more humble, attentive openness.",
+    "It shifts from confident certainty about the friend's illness to complete despair about it.",
+    "It shifts from affectionate teasing of the aunt to formal respect for her cooking skill."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-05-027",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "text_structure",
+   "requestedDifficulty": "medium",
+   "passage": "Years later, Nadeesha would still remember the brass tuning fork Hassan carried through the ferry terminal in Colombo that morning. It had belonged to their music teacher, who had died in the spring and left it, by some clerical error, to Hassan rather than to her, the student who had practiced beside him every afternoon. Hassan was the teacher's nephew and could not sing a note. Nadeesha had stopped speaking to him in protest. Now they waited for the same boat, and she watched him turn the fork over in his hands as gulls circled the loading ramp. He struck it once against the bench. A clear tone rose above the engines, and several passengers looked up. Hassan held it out to her without a word. She did not take it yet, but she leaned close enough to hear the note fade.",
+   "question": "Which choice best describes the overall structure of the passage?",
+   "options": [
+    "It describes a crowded terminal in detail and then explains why the ferry departs late.",
+    "It recounts a teacher's final lesson and then shows how the students carry out his wishes.",
+    "It contrasts two students' musical talents and then reveals which one the teacher favored.",
+    "It explains the source of a grudge and then shows a moment that begins to ease it."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-05-028",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "text_structure",
+   "requestedDifficulty": "medium",
+   "passage": "By the third hour of the wedding in Cairo, the hall was so crowded that Adaeze had to stand on a chair to find her husband's brother. The twins, Edith liked to say, had always been one person split down the middle, and now they were splitting their late father's house as well. Everyone knew the elder twin had won the house in the family's chess match last winter. Edith did not know, until she overheard it near the dessert table, that he had won only because his twin had deliberately lost. Adaeze watched the two men dance with their arms around each other's shoulders, and she began to see the generous move behind the defeat. She climbed down from the chair. On the table, someone had left a cake knife resting across an untouched slice.",
+   "question": "Which choice best describes the overall structure of the passage?",
+   "options": [
+    "It sets a festive scene, then reveals a hidden fact that recasts a family conflict.",
+    "It describes a wedding ceremony in order, then compares it to the customs of an earlier generation.",
+    "It presents an argument between twins, then shows the guests taking sides in their dispute.",
+    "It recounts a chess match move by move, then explains why the losing player demanded a rematch."
+   ]
+  }
+ ],
+ "instructions": "당신은 디지털 SAT 독립 채점자(두 번째 풀이자)다. 정답 표시가 없다. 직접 풀고 정답 외에 방어 가능한 선택지가 있는지 판정한다. 다른 풀이자의 답은 모른다.\n청크 rev-second_solver-037 — 19문항.\n출력: Write 도구로 정확히 이 경로에 JSON 한 파일을 쓴다 → /Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-second_solver-037.result.json\n출력 JSON 스키마(예시 구조): {\"chunkId\":\"청크 ID\",\"model\":\"opus|fable\",\"items\":[{\"candidateId\":\"id\",\"picked_letter\":\"A|B|C|D\",\"other_defensible\":\"boolean\",\"confidence\":\"high|medium|low\",\"note\":\"풀이 한 줄\"}]}\n허용 값: picked_letter ∈ {A,B,C,D}, 불리언 필드는 true/false, est_difficulty ∈ {easy,medium,hard}. candidateId 를 바꾸지 않고 모든 항목에 답한다.\n금지: 결과 파일 외의 파일 생성·수정, 다른 명령 실행, 문항 수정·재작성. 끝나면 'done <항목 수>' 한 줄만 답한다.\n\n## 문항\n### lit40-medium-05-002 — skill central_ideas_details · 유형 main_idea_or_purpose\n[지문]\nWhen Anselmo and Marisol were children, they rowed to the far end of the dock every evening and talked until the lake went black. Decades later, I watched them sit on that same dock without a word between them. Marisol had found, in her late mother's desk drawer, a letter showing that Anselmo's father had once paid the family's rent for a whole winter, and that no one had ever told her. She did not know whether to thank Anselmo or resent him for keeping quiet. Yet each morning she still carried two cups of coffee down the planks and set one beside him, and he still moved over to make room. Behind them, the fishing boats knocked gently against their moorings while gulls argued over the nets.\n\n[질문] Which choice best states the main purpose of the text?\nA) To explain how a letter found in a drawer revealed that a family's rent had once been paid.\nB) To suggest that a friendship can persist through small habits even when an old secret strains it.\nC) To describe the evening routines that two children shared on a lakeside dock in Galicia.\nD) To argue that people should never keep important family information hidden from friends.\n### lit40-medium-05-003 — skill inferences · 유형 character_motivation\n[지문]\nYears later, Haoran would still remember the overnight train out of Shanghai and the teacher who sat across from him. Rafaela had joined the school only that autumn, and Haoran had decided early that she was like the others, quick to praise and quicker to forget. Somewhere past Suzhou, she glanced at the notebook on his knee and said that his crossed-out sentences were more interesting than the ones he kept. He closed the notebook at once, his ears hot. But after she fell asleep, he opened it again and, by the light of the corridor, began copying the crossed-out lines onto a clean page so he could read them without the ink scored through them. Outside, the rice fields slid past in long gray strips, broken now and then by a lit window.\n\n[질문] Based on the text, why does Haoran copy the crossed-out lines onto a clean page?\nA) He is embarrassed that Rafaela saw his notebook and wants to hide his mistakes from her.\nB) He wants to prove to the school that he can produce a neater notebook than before.\nC) He has begun to take seriously Rafaela's remark that his discarded sentences had value.\nD) He has been told by the school that all notebooks must be recopied before the trip ends.\n### lit40-medium-05-004 — skill inferences · 유형 character_motivation\n[지문]\nDiesel and wet rope hung in the air as Thiago climbed aboard the barge where Esperanza had lived for eleven years. He owned the boat, and he had come to tell her the buyer from the city would arrive on Friday. The buyer, he admitted, believed the barge was empty and in need of nothing but paint. Esperanza listened, then spent the afternoon scrubbing the deck, coiling every line, and stacking her own crates out of sight in the hold. When Thiago asked why she was helping a sale that would put her ashore, she only said that she had seen him sell his father's boat the same way, and that he had not slept for a month afterward. She wanted, she added, the lie to at least be a tidy one. Along the Guaíba, the evening ferries sounded their horns one after another.\n\n[질문] Based on the text, why does Esperanza help prepare the barge for the buyer's visit?\nA) She is angry at Thiago and wants him to feel guilty when the buyer finally arrives.\nB) She hopes that a cleaner barge will raise the price enough for her to share in it.\nC) She has been ordered by the city's harbor officials to clear her crates from the deck.\nD) She wants to spare Thiago some of the distress she knows such deceptions cause him.\n### lit40-medium-05-005 — skill inferences · 유형 character_motivation\n[지문]\nI worked nights at the monastery guesthouse on Maui with Koa, folding linens while the monks slept. One week a rumor went around that Koa had taken money from the donation box, and by Thursday it had reached the abbot. Koa said nothing about it to me. But that night he asked me to count the box with him before our shift ended and to write the total in the ledger in my own hand, beside his. He did the same every night after that, always waiting until I had signed. He had once told me that his uncle lost a job over a story no one bothered to check, and that he had never forgiven how quickly it spread. Near dawn, the roosters started up in the banana grove, and the first guests shuffled out toward the lanai.\n\n[질문] Based on the text, why does Koa ask the narrator to count the donation box with him and sign the ledger?\nA) He wants a written record that can answer the rumor, having seen an unchecked story harm his uncle.\nB) He is angry at the narrator and wants to make the narrator share blame for the rumor.\nC) He hopes the abbot will promote him once the ledger shows the box is always correct.\nD) He was instructed by the guesthouse's new rules to count the box with a second worker.\n### lit40-medium-05-006 — skill inferences · 유형 tone_or_mood\n[지문]\n\"Bartolo, tell me what you saw out there.\" Fumiko stood at the cemetery gate above Valparaíso, holding the iron bar as if it might swing open on its own. Her brother had been home a week, and in that week she had read the official report four times. It said their cousin had fallen during a night patrol; the letter from another soldier said he had been carrying someone else. Bartolo looked past her at the harbor, where cranes turned slowly. He told her the report was accurate in every detail it chose to include. Fumiko felt something loosen in her chest, a small relief that he had not lied outright, but the heavier question stayed lodged there. Below them, a vendor wheeled a cart of carnations up the steep street, stopping every few meters to catch his breath.\n\n[질문] Which choice best describes the overall tone of the text?\nA) Relieved, reflecting Fumiko's comfort that her brother has finally come home.\nB) Uneasy, with a brief note of relief overshadowed by an unresolved question.\nC) Hopeful, with only a slight trace of doubt about the conflicting accounts.\nD) Mournful, centered on a family's open grief at a cousin's graveside.\n### lit40-medium-05-007 — skill inferences · 유형 tone_or_mood\n[지문]\nWe waited at the mountain bus stop above Marseille, Remy and I, each holding a covered dish for the meal after the funeral. Mine was my grandmother's chickpea stew; his was the almond cake his father's family baked for every burial. Neither of us had seen the other in nine years. Remy joked that the two dishes would probably fight on the table, and I laughed harder than the joke deserved, glad for any sound at all. Still, I kept checking the lid on my pot, and he kept turning his cake so the dented side faced away from me. When the bus finally came around the bend, we both stepped forward at once and nearly collided, then stood aside for each other. Pine needles had collected in the gutter, and a thin wind pushed them in circles.\n\n[질문] Which choice best describes the overall tone of the text?\nA) Joyful, celebrating a long-awaited reunion between two cousins after many years.\nB) Lighthearted, with occasional moments of mild nervousness between the cousins.\nC) Awkward but warm, with tentative humor softening the cousins' self-consciousness.\nD) Solemn, emphasizing the grief that the funeral has brought to the whole family.\n### lit40-medium-05-008 — skill inferences · 유형 relationship_between_characters\n[지문]\nOnce, in the café of the Seville train station, Sergio handed Alba a box of his orange pastries on the morning she opened her bakery across the street from his. Everyone in the neighborhood knew Alba could not eat citrus. She thanked him, bit into one, and declared it the best thing she had tasted all year, though her eyes watered. Sergio, watching her chew, said he had made them with a new recipe and would be glad to hear her honest opinion next week, after she had tried her own croissants against them. Alba promised she would bring him six of hers by Friday, warm. Overhead, the departures board clattered through its letters, and a train for Córdoba was called twice.\n\n[질문] Based on the text, which choice best describes the relationship between Sergio and Alba?\nA) Sergio openly resents Alba's new bakery, while Alba remains unaware of his feelings.\nB) Alba depends on Sergio for guidance as she learns to run a bakery of her own.\nC) Sergio and Alba are close friends who have long shared recipes without competition.\nD) Sergio and Alba are rivals who mask their competition with exaggerated courtesy.\n### lit40-medium-05-009 — skill inferences · 유형 relationship_between_characters\n[지문]\nWhen the night pharmacy in Samarkand emptied out after midnight, Roxana, who had retired from the bench three years earlier, would come in for her blood-pressure pills and stay to talk. Bahram, the clerk, had just passed his licensing exam, and his certificate hung crookedly by the register. Roxana straightened it without comment, then asked him three hard questions about drug interactions, nodding at each answer as if hearing a case. Bahram answered evenly and shrugged when she raised an eyebrow, saying anyone could have memorized it. Roxana replied that anyone could, but that she had sat through forty years of people who had not. She paid, tucked the receipt into her coat, and lingered a moment longer than she needed to. Outside, a street sweeper's brushes scraped along the curb under the yellow lamps.\n\n[질문] Based on the text, which choice best describes the relationship between Roxana and Bahram?\nA) Roxana takes a mentor's interest in Bahram, who plays down the pride he feels in his success.\nB) Roxana is suspicious of Bahram's skills and tests him to find mistakes in his answers.\nC) Bahram admires Roxana's career and hopes she will help him find a job in the courts.\nD) Bahram and Roxana are customer and clerk with no interest in each other beyond business.\n### lit40-medium-05-010 — skill inferences · 유형 symbolism\n[지문]\nWho keeps a broken jukebox in a diner for twelve years? Tommaso asked himself that every time he wiped down the booths at the roadside place outside Naples, where his stepson Giacomo worked weekends. The machine had stopped the summer Giacomo's conservatory audition was missed, the summer the car broke down on the way and Tommaso had been the one driving. Giacomo never mentioned the audition. But he dusted the jukebox every Saturday, slid a coin into it out of habit, and listened to the coin rattle down into nothing. One night Tommaso found him with the back panel open and a screwdriver in hand. Giacomo said he was only looking. Tommaso pulled up a stool, held the flashlight steady, and neither of them said anything about the drive. The neon sign outside buzzed and flickered over the empty parking lot.\n\n[질문] In the text, the broken jukebox most likely represents\nA) Giacomo's lasting resentment toward Tommaso for causing the failed trip to the audition.\nB) the lost opportunity that both men still carry and are only beginning to approach together.\nC) the diner's financial troubles, which keep Tommaso from replacing older equipment.\nD) Giacomo's general interest in machines, which he hopes will replace his love of music.\n### lit40-medium-05-011 — skill inferences · 유형 symbolism\n[지문]\n\"Patching it again?\" Mandla asked, finding his mother on the gallery of the lighthouse station outside Accra, the morning before his flight to college. Amit, as everyone on the coast called her, was pressing a strip of tar paper over the same crack in the lantern glass she had sealed every rainy season since he was small. Each patch held for a few months, and each time the salt worked its way back in. She told him the light still reached the fishing boats, crack or no crack. Mandla watched her smooth the edges with her thumb, slowly, as she used to smooth his collar before school. He thought of the narrow dorm room waiting for him, the single window facing a parking lot. He picked up the roll of tar paper and held it while she cut.\n\n[질문] In the text, the repeatedly patched crack in the lantern glass most likely represents\nA) the poor condition of the lighthouse, which Mandla fears will close after he leaves.\nB) Amit's stubborn refusal to accept help from the coastal authorities who run the station.\nC) an ongoing care that cannot prevent change but continues anyway, like Amit's care for Mandla.\nD) Mandla's eagerness to leave the coast for a college far away from the sea.\n### lit40-medium-05-014 — skill words_in_context · 유형 figurative_language\n[지문]\nSome gifts arrive in the wrong language.\nDevon sent Lorenzo a pair of resoled boots,\nfixed at the stall on Seventy-First\nwhere the cobbler hums over his last.\nLorenzo, who had spent a year inside her sentences,\nread them as a hint that his work was worn through.\nHe wrote back stiffly, offering to step aside.\nShe answered with a single line:\nI meant you have walked my words\nfarther than I ever could,\nand I wanted your feet to last.\nNow he keeps the boots by the door,\ntheir new soles a quiet grammar\nhe is still learning to parse.\n\n[질문] As used in the text, the phrase “a quiet grammar” most nearly suggests that the boots\nA) carry an unspoken meaning that Lorenzo is still coming to understand fully.\nB) contain written instructions about how a translator should care for leather.\nC) remind Lorenzo of the grammatical errors he made while translating her book.\nD) make a soft sound at the door that Lorenzo associates with Devon's visits.\n### lit40-medium-05-015 — skill words_in_context · 유형 figurative_language\n[지문]\nGrapes split on the vine that September in the Delta, and by the time we picked, half the rows smelled of vinegar. Marcus, the priest from the parish down the road, came out to help even though I had not sat in his church in six years. He worked beside me without asking why. At noon, staring at a bin of fruit too soft to sell, I told Priya, my neighbor, that the whole season had been a sermon I had slept through. Marcus heard me and laughed, not unkindly. He said sermons were generous that way; they kept going whether anyone was listening or not. We kept picking. Late that afternoon a crop duster crossed low over the cotton fields to the east, its shadow sliding across the levee.\n\n[질문] As used in the text, the phrase “a sermon I had slept through” most nearly suggests that the narrator\nA) was too tired from the harvest to attend Marcus's church services that season.\nB) feels that the season's warnings had passed by without being heeded or understood.\nC) plans to return to church now that Marcus has helped with the failed harvest.\nD) believes that Marcus's teachings caused the vineyard's poor harvest that year.\n### lit40-medium-05-016 — skill words_in_context · 유형 figurative_language\n[지문]\nPromises outlive the people who make them. When I was seven, Kofi, my father's oldest friend, told me that the orchard behind his house outside Dakar would be mine to look after when I was tall enough to reach the mangoes. I measured myself against the lowest branch every visit. Then my family moved away, and Kofi grew too frail to walk the rows. Twenty years later, Abena, his daughter, walked me through the gate. The trees had gone wild, their branches knotted into one another. Abena said her father had called the orchard a letter he had never finished writing to me. I reached up and found that the lowest branch was now below my shoulder. A goat had wandered in through a gap in the fence and was nosing at the fallen fruit.\n\n[질문] As used in the text, the phrase “a letter he had never finished writing to me” most nearly suggests that the orchard\nA) was described in letters Kofi sent to the narrator's family after they moved away.\nB) contains a hidden message that Kofi left somewhere among the overgrown trees.\nC) stood for an unfulfilled promise to the narrator that Kofi still meant to keep.\nD) was a place Kofi visited to write while he was too frail to walk the rows.\n### lit40-medium-05-022 — skill text_structure_purpose · 유형 tone_shift\n[지문]\nLagos traffic had finally thinned, and the night bus rattled along the expressway with its windows half open. Babatunde, a park ranger heading home from a conference, had given up his seat to Ahanu, a hiker who had missed the last shuttle from the forest reserve and looked as if he had walked the whole way. For twenty minutes they argued about whether the driver should stop for a woman waving at the roadside. Ahanu insisted it was dangerous; Babatunde called him timid. Then Ahanu said, quietly, that he had lost his trail map that morning and spent four hours believing no one would find him. Babatunde stopped talking. He looked at the dark shapes of palms sliding past and, after a while, offered the hiker half of the bread in his bag. Neither mentioned the woman again.\n\n[질문] Which choice best describes the shift in tone that occurs in the passage?\nA) It moves from relief about the bus ride to fear about the dangers of the road at night.\nB) It moves from mild amusement at the driver to open anger at the passengers who complain.\nC) It moves from combative bickering to subdued sympathy once a deeper fear is revealed.\nD) It moves from cheerful curiosity about the hiker to regret over the ranger's long conference.\n### lit40-medium-05-023 — skill text_structure_purpose · 유형 tone_shift\n[지문]\nSmelling of rosin and damp wood, the music room in Chiang Mai was empty except for Lan, who sat at the piano refusing to play. Ottilie, the old fishmonger who delivered to the school kitchen on Thursdays, had come in to fetch his crate and found the boy there. Two weeks earlier Lan had accused him, loudly and in front of classmates, of cheating his mother on the weight of a catfish. Ottilie had said nothing then. Now he set down the crate and asked whether the piano was broken. Lan shrugged. The old man pressed a single key, then another, finding a children's song with two clumsy fingers. Lan winced, then laughed despite himself, and slid over on the bench. They played it badly together while the rain thickened on the windows, and the scale near the door went on rusting.\n\n[질문] Which choice best describes the shift in tone that occurs in the passage?\nA) It shifts from playful teasing between friends to bitter resentment over a past accusation.\nB) It shifts from nostalgic memories of the school to anxiety about the approaching storm.\nC) It shifts from formal politeness during the delivery to impatience with an untalented pupil.\nD) It shifts from strained wariness after a quarrel to a hesitant, gentle reconciliation.\n### lit40-medium-05-024 — skill text_structure_purpose · 유형 tone_shift\n[지문]\nWhat do I carry, Eunseo asks, when I carry your words?\nOn the terrace above Busan the laundry snaps like flags,\nand Minjun's sentences arrive heavy, one by one,\nfor me to turn into another tongue.\nI trimmed them all week: a name left out,\na date blurred, a brother's debt unspoken,\nbecause the man across the table would have used it.\nI called it accuracy. I called it craft.\nBut tonight, the harbor lights stitching the dark,\nI see that what I kept from him was a shelter,\nnot a mistake, a roof I raised in silence\nover someone neither of us will name.\nLet the wind take the shirts. I will hold this.\n\n[질문] Which choice best describes the shift in tone that occurs in the poem?\nA) The speaker moves from calling her omissions craft to seeing them as protection.\nB) The speaker moves from pride in her translation to shame at having deceived her client.\nC) The speaker moves from admiration of the harbor view to irritation with the noisy laundry.\nD) The speaker moves from confusion about her client's language to confidence in her fluency.\n### lit40-medium-05-025 — skill text_structure_purpose · 유형 tone_shift\n[지문]\nFolding chairs clattered as I stacked them along the wall of the gymnasium, where our community supper was held each month on the Navajo plateau. I was sixteen and in charge of the fry bread, and my aunt Katerina was in charge of me. All evening she corrected my dough, my oil, my posture. I resented her and said so. Our friend Defne was in the hospital in Gallup, and I wanted to tell her the doctors had stopped talking about next spring. Katerina said no, sharply, and I called her cold. Later, scrubbing the last pan, I noticed her hands shaking. She told me she had once kept the truth from her own sister and never stopped wondering if it had been a kindness. I put the pan down. For the first time I asked her what she would do, and I waited.\n\n[질문] Which choice best describes the shift in tone that occurs in the passage?\nA) It shifts from excitement about the supper to disappointment that few guests attended.\nB) It shifts from defiant irritation toward the aunt to a more humble, attentive openness.\nC) It shifts from confident certainty about the friend's illness to complete despair about it.\nD) It shifts from affectionate teasing of the aunt to formal respect for her cooking skill.\n### lit40-medium-05-027 — skill text_structure_purpose · 유형 text_structure\n[지문]\nYears later, Nadeesha would still remember the brass tuning fork Hassan carried through the ferry terminal in Colombo that morning. It had belonged to their music teacher, who had died in the spring and left it, by some clerical error, to Hassan rather than to her, the student who had practiced beside him every afternoon. Hassan was the teacher's nephew and could not sing a note. Nadeesha had stopped speaking to him in protest. Now they waited for the same boat, and she watched him turn the fork over in his hands as gulls circled the loading ramp. He struck it once against the bench. A clear tone rose above the engines, and several passengers looked up. Hassan held it out to her without a word. She did not take it yet, but she leaned close enough to hear the note fade.\n\n[질문] Which choice best describes the overall structure of the passage?\nA) It describes a crowded terminal in detail and then explains why the ferry departs late.\nB) It recounts a teacher's final lesson and then shows how the students carry out his wishes.\nC) It contrasts two students' musical talents and then reveals which one the teacher favored.\nD) It explains the source of a grudge and then shows a moment that begins to ease it.\n### lit40-medium-05-028 — skill text_structure_purpose · 유형 text_structure\n[지문]\nBy the third hour of the wedding in Cairo, the hall was so crowded that Adaeze had to stand on a chair to find her husband's brother. The twins, Edith liked to say, had always been one person split down the middle, and now they were splitting their late father's house as well. Everyone knew the elder twin had won the house in the family's chess match last winter. Edith did not know, until she overheard it near the dessert table, that he had won only because his twin had deliberately lost. Adaeze watched the two men dance with their arms around each other's shoulders, and she began to see the generous move behind the defeat. She climbed down from the chair. On the table, someone had left a cake knife resting across an untouched slice.\n\n[질문] Which choice best describes the overall structure of the passage?\nA) It sets a festive scene, then reveals a hidden fact that recasts a family conflict.\nB) It describes a wedding ceremony in order, then compares it to the customs of an earlier generation.\nC) It presents an argument between twins, then shows the guests taking sides in their dispute.\nD) It recounts a chess match move by move, then explains why the losing player demanded a rematch."
+}

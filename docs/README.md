@@ -1,20 +1,20 @@
 # ALTON 문서 지도
 
-기준일: 2026-08-29
+기준일: 2026-09-01
 
 ## 1. 현재 유효한 문서
 
-충돌 시 아래 순서와 최신 버전을 우선한다.
+새 세션은 이 문서를 먼저 읽지 않는다. `../CLAUDE.md`와 `CURRENT.md`로 시작하고, 문서 위치를 찾을 때만 이 지도를 사용한다. 충돌 시 아래 순서와 최신 버전을 우선한다.
 
-1. `../CONTEXT.md` — 공통 용어와 개념 경계
-2. `2026-08-29-product-architecture-v3.md` — 제품 정책과 도메인 기준
-3. `2026-08-29-r0-approval-and-technical-validation-package.md` — Gate A 승인 기록, 상태·권한, Gate B·C 요구사항
-4. `2026-08-29-developer-handoff-v3.md` — 개발 구현 기준
-5. `2026-08-29-master-roadmap-v3.md` — 실행 순서와 출시 게이트
+1. `CURRENT.md` — 완료 단계, 현재 구조, 최신 migration, 배포·외부 플래그, blocker
+2. `2026-08-29-master-roadmap-v3.md`의 현재 R 섹션 — 실행 범위와 완료 기준
+3. `2026-08-29-product-architecture-v3.md`의 관련 절 — 제품 정책과 도메인 기준
+4. 해당 Gate·R 원본 정책 문서 — 충돌 확인과 세부 근거가 필요할 때만
+5. `../CONTEXT.md` — 공통 용어와 개념 경계
 
 `research/`의 두 문서는 Google 기능의 기술 근거다. 정책을 변경하지 않으며 실제 Workspace Sandbox 결과가 나오면 갱신한다.
 
-다음 Claude Code 작업 요청은 `2026-08-29-claude-code-gate-b-c-request.md`에 있다. 이 요청서는 정책 원본이 아니라 위 문서들을 기준으로 Gate B·C 제출물을 받기 위한 실행 문서다.
+`2026-08-29-claude-code-gate-b-c-request.md`는 완료된 Gate B·C의 과거 실행 요청서이며 신규 작업 지시로 사용하지 않는다.
 
 ## 2. 참고만 가능한 문서
 
@@ -43,4 +43,6 @@
 - Gate B: **승인 완료(2026-08-29)** — `2026-08-29-gate-b-migration-and-permission-design.md`(v5)
 - Gate C: **완료(2026-08-30)** — `2026-08-29-gate-c-google-workspace-validation.md`. Google 기술 검증(GW-01~13)에서 데이터 모델 blocker 없음 확인. GW-10/12/14의 ALTON 앱 워크플로우 부분은 R8/R9/R12 인수 기준으로 이관(삭제 아님)
 - Gate D: **완료(2026-08-30)** — Gate C 작업용 임시 조직 권한 회수·검증 포함. R1 착수.
-- R1: 진행 중. Gate C에서 이관한 R8/R9/R12 인수 기준은 해당 R 단계 완료 조건으로 반드시 통과해야 함
+- R1: **완료** — 데이터 기반 재설계
+- R2: **완료(2026-09-01)** — 계정·가족·권한 수명주기
+- R3 이후의 현재 진행 상태와 blocker는 `CURRENT.md`를 기준으로 확인한다. Gate C에서 이관한 R8/R9/R12 인수 기준은 해당 R 단계 완료 조건으로 반드시 통과해야 한다.

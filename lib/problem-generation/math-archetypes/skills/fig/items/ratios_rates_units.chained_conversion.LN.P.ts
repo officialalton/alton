@@ -1,0 +1,43 @@
+// ratios_rates_units.chained_conversion.LN.P — 원점을 지나는 비례 그래프(큰 단위)에서 작은 단위(분·개월)로 주어진 시간·값을 환산해 연쇄로 구한다.
+import { GenFail } from "../../../types";
+import type { Rng } from "../../../rng";
+import type { SeTopic } from "../../../figure-topics";
+import { fmtNum } from "../../../text";
+import { W } from "../../d-kit";
+import { figJs } from "../../../figure-kit";
+import { defineItem } from "../item-kit";
+import { gInst, GL_JS, glIntercept, glIntro, glRead, makeLinGraph, offXg, type LinGraph } from "../graph-kit";
+
+const isI = Number.isInteger;
+const CT: SeTopic[] = [
+  { x: "the time a printer runs", y: "the number of pages it prints", xa: "Time", ya: "Pages printed", xu: "hours", yu: "pages", conv: { small: "minutes", per: 60 } },
+  { x: "the time a machine runs", y: "the number of parts it makes", xa: "Time", ya: "Parts made", xu: "hours", yu: "parts", conv: { small: "minutes", per: 60 } },
+  { x: "the time a drone flies", y: "the distance it covers", xa: "Time", ya: "Distance", xu: "hours", yu: "kilometers", conv: { small: "minutes", per: 60 } },
+  { x: "the time a pump runs", y: "the volume of oil it moves", xa: "Time", ya: "Oil moved", xu: "hours", yu: "gallons", conv: { small: "minutes", per: 60 } },
+  { x: "the age of a plant", y: "the number of leaves it has grown", xa: "Age", ya: "Leaves grown", xu: "years", yu: "leaves", conv: { small: "months", per: 12 } },
+  { x: "the time a savings plan runs", y: "the money saved", xa: "Time", ya: "Money saved", xu: "years", yu: "dollars", conv: { small: "months", per: 12 } },
+];
+const mk = (rng: Rng, even = false): LinGraph => { for (let t = 0; t < 40; t++) { const s = makeLinGraph(rng, { topic: rng.pick(CT), mSign: 1, bZero: true, mMax: 9 }); if (s.m > 0 && (!even || s.m % 2 === 0)) return s; } throw new GenFail("m"); };
+const BJ = "if (Math.abs(b) > 1e-9) throw new Error('원점을 지나지 않음');\n";
+const note = (s: LinGraph) => `Note that 1 ${s.t.xu.replace(/s$/, "")} = ${s.t.conv!.per} ${s.t.conv!.small}.`;
+const rate = (s: LinGraph): [string, string] => [`원점을 지나므로 y = ${fmtNum(s.m)}x 이다(${s.t.xu} 1 당 ${s.t.yu} ${fmtNum(s.m)}).`, "The line passes through the origin; the slope is the rate per large unit."];
+
+export const ITEM = defineItem({
+  prefix: "rcvg", itemId: "ratios_rates_units.chained_conversion.LN.P",
+  hard: [
+    { op: "unit_ratio", structure: "그래프(큰 단위)의 비율을 구하고, 작은 단위로 주어진 그림 밖의 시간을 큰 단위로 바꿔 값을 구함", extra: "작은 단위를 환산한 뒤 비율을 곱해야 함(환산 없이 곱하는 것이 함정) — medium 은 큰 단위", concepts: ["비례 관계 그래프", "단위 환산", "비율"],
+      gen(rng) { const s = mk(rng); const c = s.t.conv!; const k = offXg(rng, s, 1, 5); const small = k * c.per; if (small > 999) throw new GenFail("big"); const y = s.m * k; return gInst(rng, { stimulus: `${glIntro(rng, s)} ${note(s)}`, question: `Based on the graph, what is ${s.yq}, in ${s.t.yu}, when ${s.xq} is ${small} ${c.small}?`, correct: y, wrongs: [W(s.m * small, "unit_error", "단위를 환산하지 않고 곱했다."), W(y + s.m, "other", "한 단위 더 갔다."), W(small, "step_missing", "시간을 그대로 답했다."), W(Math.round(s.m / c.per * small * 10) / 10 + 1, "other", "어긋났다.")].filter((w) => isI(w.v) && w.v !== y && w.v >= 0), verificationJs: figJs({ small, per: c.per }, s.fig, `${GL_JS}${BJ}return m * P.small / P.per;`), trace: [...glRead(s), glIntercept(s), rate(s), [`${small} ${c.small} = ${small} ÷ ${c.per} = ${k} ${s.t.xu} 이다.`, "Convert to the graph's unit."], [`값 = ${fmtNum(s.m)} × ${k} = ${y} 이다.`, "Multiply the rate."]], variant: "convert_then_value" }, s.fig); } },
+    { op: "inverse", structure: "값 Y 에 도달하는 시간을 큰 단위로 구한 뒤 작은 단위로 환산", extra: "역산 후 다시 환산하는 2단 연쇄(큰 단위로 답하는 것이 함정) — medium 은 큰 단위", concepts: ["비례 관계 그래프", "역산", "단위 환산"],
+      gen(rng) { const s = mk(rng); const c = s.t.conv!; const k = offXg(rng, s, 1, 5); const Y = s.m * k; const ans = k * c.per; if (ans > 999 || Y > 999) throw new GenFail("big"); return gInst(rng, { stimulus: `${glIntro(rng, s)} ${note(s)}`, question: `Based on the graph, for how many ${c.small} must ${s.xq} run for ${s.yq} to be ${Y} ${s.t.yu}?`, correct: ans, wrongs: [W(k, "unit_error", "큰 단위로 답했다."), W(Y * c.per, "formula_misuse", "Y 를 환산했다."), W(Math.round(Y / s.m) * c.per + c.per, "other", "한 단위 어긋났다."), W(ans / 2, "other", "어긋났다.")].filter((w) => isI(w.v) && w.v !== ans && w.v >= 0), verificationJs: figJs({ Y, per: c.per }, s.fig, `${GL_JS}${BJ}return (P.Y / m) * P.per;`), trace: [...glRead(s), glIntercept(s), rate(s), [`${fmtNum(s.m)}x = ${Y} 에서 x = ${k} ${s.t.xu} 이다.`, "Solve for the large unit."], [`${k} × ${c.per} = ${ans} ${c.small} 이다.`, "Convert to the small unit."]], variant: "time_in_small_units" }, s.fig); } },
+    { op: "compose_kind", structure: "큰 단위와 작은 단위가 섞인 시간(예: h 시간 30 분)의 값을 구함", extra: "30 분 = 0.5 시간으로 바꿔 더한 뒤 비율을 곱해야 함(분을 그대로 더하는 것이 함정) — medium 은 큰 단위만", concepts: ["비례 관계 그래프", "단위 환산", "합성"],
+      gen(rng) { const s = mk(rng); const c = s.t.conv!; const h = offXg(rng, s, 1, 4); const half = c.per / 2; const y = s.m * h + s.m / 2; return gInst(rng, { stimulus: `${glIntro(rng, s)} ${note(s)}`, question: `Based on the graph, what is ${s.yq}, in ${s.t.yu}, when ${s.xq} is ${h} ${s.t.xu} and ${half} ${c.small}?`, correct: y, wrongs: [W(s.m * h, "step_missing", "작은 단위 부분을 빠뜨렸다."), W(s.m * (h + half), "unit_error", "작은 단위를 환산하지 않고 더했다."), W(y + s.m, "other", "한 단위 더 갔다."), W(s.m * h + half, "unit_error", "작은 단위를 그대로 더했다.")].filter((w) => w.v !== y && w.v >= 0), verificationJs: figJs({ h, half, per: c.per }, s.fig, `${GL_JS}${BJ}return m * (P.h + P.half / P.per);`), trace: [...glRead(s), glIntercept(s), rate(s), [`${half} ${c.small} = 0.5 ${s.t.xu} 이므로 시간은 ${h + 0.5} ${s.t.xu} 이다.`, "Convert the small part."], [`값 = ${fmtNum(s.m)} × ${h + 0.5} = ${y} 이다.`, "Multiply the rate."]], variant: "mixed_units" }, s.fig); } },
+    { op: "chain2", structure: "두 작업의 시간이 작은 단위로 주어질 때 차이 값을 환산해 구함", extra: "각 시간을 환산한 뒤 비율을 곱하고 차를 구하는 연쇄 — medium 은 한 시간", concepts: ["비례 관계 그래프", "단위 환산", "차이"],
+      gen(rng) { const s = mk(rng); const c = s.t.conv!; const k1 = offXg(rng, s, 1, 4), k2 = k1 + rng.int(1, 5); if (k2 * c.per > 999) throw new GenFail("big"); const d = s.m * (k2 - k1); return gInst(rng, { stimulus: `${glIntro(rng, s)} ${note(s)}`, question: `Based on the graph, how many more ${s.t.yu} are there when ${s.xq} is ${k2 * c.per} ${c.small} than when it is ${k1 * c.per} ${c.small}?`, correct: d, wrongs: [W(s.m * k2, "step_missing", "큰 시간의 값만 답했다."), W(s.m * (k2 - k1) * c.per, "unit_error", "환산 방향을 반대로 했다."), W(k2 - k1, "step_missing", "시간의 차만 답했다."), W(d + s.m, "other", "한 단위 더 갔다.")].filter((w) => isI(w.v) && w.v !== d && w.v >= 0), verificationJs: figJs({ a: k1 * c.per, b2: k2 * c.per, per: c.per }, s.fig, `${GL_JS}${BJ}return m * (P.b2 - P.a) / P.per;`), trace: [...glRead(s), glIntercept(s), rate(s), [`${k1 * c.per} ${c.small} = ${k1} ${s.t.xu}, ${k2 * c.per} ${c.small} = ${k2} ${s.t.xu} 이다.`, "Convert both times."], [`차 = ${fmtNum(s.m)} × (${k2} - ${k1}) = ${d} 이다.`, "Multiply the rate by the difference."]], variant: "difference_in_small_units" }, s.fig); } },
+  ],
+  em: [
+    { lv: "easy", name: "large_unit", structure: "큰 단위의 그림 밖 시간의 값을 구함", extra: "easy: 비율 × x", concepts: ["비례 관계 그래프", "비율"],
+      gen(rng) { const s = mk(rng); const k = offXg(rng, s, 1, 5); const y = s.m * k; return gInst(rng, { stimulus: `${glIntro(rng, s)} ${note(s)}`, question: `Based on the graph, what is ${s.yq}, in ${s.t.yu}, when ${s.xq} is ${k} ${s.t.xu}?`, correct: y, wrongs: [W(y + s.m, "other", "한 단위 더 갔다."), W(k + s.m, "formula_misuse", "더했다."), W(Math.max(0, y - s.m), "other", "한 단위 덜 갔다.")].filter((w) => isI(w.v) && w.v !== y && w.v >= 0), verificationJs: figJs({ k }, s.fig, `${GL_JS}${BJ}return m * P.k;`), trace: [...glRead(s), rate(s)], variant: "large_unit_value" }, s.fig); } },
+    { lv: "medium", name: "small_unit_whole", structure: "작은 단위 시간을 큰 단위로 환산해 그림 안의 값을 구함", extra: "medium: 환산 후 계산", concepts: ["비례 관계 그래프", "단위 환산"],
+      gen(rng) { const s = mk(rng); const c = s.t.conv!; const k = rng.int(1, Math.max(1, s.X - 1)); const y = s.m * k; if (y > s.yMax) throw new GenFail("range"); return gInst(rng, { stimulus: `${glIntro(rng, s)} ${note(s)}`, question: `Based on the graph, what is ${s.yq}, in ${s.t.yu}, when ${s.xq} is ${k * c.per} ${c.small}?`, correct: y, wrongs: [W(s.m * k * c.per, "unit_error", "단위를 환산하지 않았다."), W(y + s.m, "other", "한 단위 더 갔다."), W(k * c.per, "step_missing", "시간을 그대로 답했다.")].filter((w) => isI(w.v) && w.v !== y && w.v >= 0), verificationJs: figJs({ small: k * c.per, per: c.per }, s.fig, `${GL_JS}${BJ}return m * P.small / P.per;`), trace: [...glRead(s), rate(s), [`${k * c.per} ${c.small} = ${k} ${s.t.xu} 이다.`, "Convert."], [`값 = ${y} 이다.`, "Multiply."]], variant: "small_unit_whole_read" }, s.fig); } },
+  ],
+});

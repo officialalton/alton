@@ -1,0 +1,1379 @@
+{
+ "taskId": "gen-lit40-easy-01-02",
+ "passed": [
+  {
+   "candidateId": "lit40-easy-01-021",
+   "task": "gen-lit40-easy-01-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-easy-01-021",
+    "batchId": "lit40-easy-01",
+    "route": "excerpt",
+    "skill": "inferences",
+    "difficulty": "easy",
+    "questionType": "tone_or_mood",
+    "genre": "personal_essay",
+    "seed": {
+     "index": 20,
+     "genre": "personal_essay",
+     "pov": "third_limited",
+     "styleEra": "contemporary",
+     "names": [
+      "Renata",
+      "Isadora"
+     ],
+     "nameCultures": [
+      "latin_american",
+      "portuguese_brazilian"
+     ],
+     "locale": "Oaxaca",
+     "setting": "an abandoned orchard",
+     "relationship": "two neighbors with a shared wall",
+     "conflict": "about a name that no one uses anymore",
+     "openingStyle": "짧은 단언문으로 시작",
+     "topicSeed": "an abandoned orchard in Oaxaca; two neighbors with a shared wall about a name that no one uses anymore"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Good nature is something born with us--an easy, contented disposition, and a tendency to take things quietly and pleasantly. We inherit it. There is little merit in possessing it. Good humor is the result of pleasant surroundings and agreeable circumstances. A good-humored man is so when everything goes right; when things go wrong, his good humor departs and bad humor takes its place. But good temper results from training and self-control--keeping constant watch over our passions and feelings, and above all being in constant harmony with God; for he who is at peace with God is at peace with man, and will keep the \"even tenor of his way.\"",
+    "question": "Which choice best describes the overall tone of the text?",
+    "options": [
+     "earnest and instructive",
+     "bitter and accusatory",
+     "playful and mocking",
+     "anxious and uncertain"
+    ],
+    "correct_letter": "A",
+    "explanation": "지문은 good nature, good humor, good temper를 차례로 구분하며 독자가 훈련과 자제를 통해 좋은 기질을 길러야 한다고 진지하게 가르친다. 'results from training and self-control'과 'in constant harmony with God' 같은 표현이 교훈적이고 진지한 태도를 보여 주므로 A가 정답이다. B는 누군가를 비난하는 표현이 없어 틀리다. C는 조롱이나 장난스러운 표현이 없고, D는 필자가 자신의 주장에 확신을 갖고 있어 틀리다."
+   },
+   "notes": [],
+   "tone": [
+    "earnest",
+    "instructive"
+   ],
+   "devices": [
+    "contrast",
+    "definition"
+   ],
+   "producerModel": "opus",
+   "excerpt": {
+    "text": "Good nature is something born with us--an easy, contented disposition, and a tendency to take things quietly and pleasantly. We inherit it. There is little merit in possessing it. Good humor is the result of pleasant surroundings and agreeable circumstances. A good-humored man is so when everything goes right; when things go wrong, his good humor departs and bad humor takes its place. But good temper results from training and self-control--keeping constant watch over our passions and feelings, and above all being in constant harmony with God; for he who is at peace with God is at peace with man, and will keep the \"even tenor of his way.\"",
+    "source": {
+     "author": "Lees, J. Cameron (James Cameron)",
+     "work": "Life and Conduct",
+     "year": null,
+     "yearSource": "unknown(코퍼스 메타에 발행연도 없음)",
+     "authorDeathYear": 1913,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/22050",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg_humanities:gutenberg-22050",
+     "corpusTextSha256": "3f85f3b768ea1ba9d921952bc07fa01e0726ad2f88cf4a661e63e0f51815ad4e",
+     "excerptSha256": "9fa82d1e8d0762124969e82cc465d968041ce95bb96de5bc0e4fce2a5934ee82",
+     "sliceSha256": "58f6a5b46e40de51225b702166df79e666cbc5a5f5bfc906edd0b107af853416",
+     "location": {
+      "startChar": 130070,
+      "endChar": 130720,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 64
+     },
+     "genre": "personal_essay",
+     "workForm": "personal_essay"
+    }
+   },
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-easy-01-022",
+   "task": "gen-lit40-easy-01-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-easy-01-022",
+    "batchId": "lit40-easy-01",
+    "route": "excerpt",
+    "skill": "inferences",
+    "difficulty": "easy",
+    "questionType": "tone_or_mood",
+    "genre": "memoir",
+    "seed": {
+     "index": 21,
+     "genre": "memoir",
+     "pov": "first",
+     "styleEra": "contemporary",
+     "names": [
+      "Avraham",
+      "Dainius"
+     ],
+     "nameCultures": [
+      "hebrew_jewish",
+      "slavic_baltic"
+     ],
+     "locale": "Haifa",
+     "setting": "an apartment stairwell",
+     "relationship": "a stepfather and his stepdaughter",
+     "conflict": "about the last item in a house being emptied",
+     "openingStyle": "의문문으로 시작",
+     "topicSeed": "an apartment stairwell in Haifa; a stepfather and his stepdaughter about the last item in a house being emptied"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "You will soon be as well as ever, and we shall all be rejoiced at your return. You must not, however, become impatient at the gradual progress you must necessarily make, but be content with the steady advance you are making to health and strength. Your progress will be the more certain and your recovery more confirmed. Do not let Sherman capture you, and I will endeavor to hold Grant till you come. I am glad to hear such good accounts of my little namesake. Good lungs are a great blessing, and nothing expands them better than a full, hearty yell. I hope Mrs. Longstreet is well, and that she is enjoying the good peaches and melons of Georgia.",
+    "question": "Which choice best describes the overall tone of the text?",
+    "options": [
+     "stern and disapproving",
+     "warm and encouraging",
+     "formal and detached",
+     "grieving and somber"
+    ],
+    "correct_letter": "B",
+    "explanation": "필자는 상대가 곧 회복할 것이라며 'we shall all be rejoiced at your return'이라고 말하고, 조급해하지 말라고 다정하게 당부한다. 또한 어린 이름 동명이와 부인의 안부를 묻고 'a full, hearty yell'이라는 가벼운 농담도 덧붙여 따뜻한 격려의 어조를 만든다. 따라서 B가 정답이다. A는 꾸짖는 내용이 없고, C는 개인적 관심이 드러나 거리감이 없으며, D는 슬픔이 아니라 희망을 말하므로 틀리다."
+   },
+   "notes": [],
+   "tone": [
+    "warm",
+    "encouraging"
+   ],
+   "devices": [
+    "humor",
+    "direct address"
+   ],
+   "producerModel": "opus",
+   "excerpt": {
+    "text": "You will soon be as well as ever, and we shall all be rejoiced at your return. You must not, however, become impatient at the gradual progress you must necessarily make, but be content with the steady advance you are making to health and strength. Your progress will be the more certain and your recovery more confirmed. Do not let Sherman capture you, and I will endeavor to hold Grant till you come. I am glad to hear such good accounts of my little namesake. Good lungs are a great blessing, and nothing expands them better than a full, hearty yell. I hope Mrs. Longstreet is well, and that she is enjoying the good peaches and melons of Georgia.",
+    "source": {
+     "author": "Longstreet, James",
+     "work": "From Manassas to Appomattox: Memoirs of the Civil War in America",
+     "year": 1895,
+     "yearSource": "text-header(copyright/published line)",
+     "authorDeathYear": 1904,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/38418",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg:gutenberg-38418",
+     "corpusTextSha256": "a793054237a65f1c56befc4d94885a4ddda100e93d459615d4bd30c85f60521f",
+     "excerptSha256": "d0dd1c22372394f3a3bb7914747eb3acd83c105c94c9135678b8d27ab83486dd",
+     "sliceSha256": "35471c36a2c6968b6001226a13e70672aff6bbb0aa9c3cfcfde32ef91528190a",
+     "location": {
+      "startChar": 1224886,
+      "endChar": 1225535,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 87
+     },
+     "genre": "memoir",
+     "workForm": "memoir"
+    }
+   },
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-easy-01-023",
+   "task": "gen-lit40-easy-01-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-easy-01-023",
+    "batchId": "lit40-easy-01",
+    "route": "excerpt",
+    "skill": "inferences",
+    "difficulty": "easy",
+    "questionType": "relationship_between_characters",
+    "genre": "short_story",
+    "seed": {
+     "index": 22,
+     "genre": "short_story",
+     "pov": "third_limited",
+     "styleEra": "contemporary",
+     "names": [
+      "Meilin",
+      "Mingyu"
+     ],
+     "nameCultures": [
+      "chinese",
+      "chinese"
+     ],
+     "locale": "Shanghai",
+     "setting": "a salt flat",
+     "relationship": "a girl and an old family friend",
+     "conflict": "over an unspoken agreement to avoid one subject",
+     "openingStyle": "감각 묘사(소리·냄새·촉감)로 시작",
+     "topicSeed": "a salt flat in Shanghai; a girl and an old family friend over an unspoken agreement to avoid one subject"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Though I have traveled close to a million miles behind the iron horse I cannot ride backwards on a railroad train. In that respect I am like the husband who when about to die said to his wife: \"I want to make a special request of you, and that is, see that I am buried face down; it always did make me sick to travel backwards.\" When a boy I could not swing as could other boys. My head is not level on my shoulders. I have never crossed the ocean and never will. I cannot ride the rolling waves. Some years ago when out on a little coast ride for pleasure, (if that's what you call it) I said to the captain: \"How long till we reach the shore?\"",
+    "question": "Based on the text, which choice best describes the narrator's relationship with the captain?",
+    "options": [
+     "The narrator is a fellow sailor helping the captain steer the boat.",
+     "The narrator is an old friend who often sails with the captain.",
+     "The narrator is an uneasy passenger relying on the captain's knowledge.",
+     "The narrator is a rival captain testing the other's skill at sea."
+    ],
+    "correct_letter": "C",
+    "explanation": "화자는 자신이 'cannot ride the rolling waves'라고 하며 배 타기를 몹시 힘들어하는 사람임을 밝힌다. 그런 화자가 짧은 해안 유람 중 선장에게 'How long till we reach the shore?'라고 묻는 것은 불편한 승객이 선장에게 의지하는 관계를 보여 준다. 따라서 C가 정답이다. A와 D는 화자가 배를 다루는 사람이라는 근거가 없고, B는 화자가 바다를 건넌 적도 없다고 해 자주 함께 항해한다는 내용과 맞지 않는다."
+   },
+   "notes": [],
+   "tone": [
+    "humorous",
+    "self-deprecating"
+   ],
+   "devices": [
+    "anecdote",
+    "hyperbole"
+   ],
+   "producerModel": "opus",
+   "excerpt": {
+    "text": "Though I have traveled close to a million miles behind the iron horse I cannot ride backwards on a railroad train. In that respect I am like the husband who when about to die said to his wife: \"I want to make a special request of you, and that is, see that I am buried face down; it always did make me sick to travel backwards.\" When a boy I could not swing as could other boys. My head is not level on my shoulders. I have never crossed the ocean and never will. I cannot ride the rolling waves. Some years ago when out on a little coast ride for pleasure, (if that's what you call it) I said to the captain: \"How long till we reach the shore?\"",
+    "source": {
+     "author": "Bain, George W.",
+     "work": "Wit, humor, reason, rhetoric, prose, poetry and story woven into eight popular lectures",
+     "year": 1915,
+     "yearSource": "text-header(copyright/published line)",
+     "authorDeathYear": 1927,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/16858",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg_humanities:gutenberg-16858",
+     "corpusTextSha256": "932849bf0220826503b20b17061c504f18ced938a609e9a37c63af9f220711f2",
+     "excerptSha256": "5cda2e3f5cd3d1ea226288330779666176a01bc9f3399e8f7a6527294f375d0d",
+     "sliceSha256": "d5817d9951135cdc0eb413b97374ddd7d52b0e491c922e5642a00a98f1af0754",
+     "location": {
+      "startChar": 79718,
+      "endChar": 80363,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 21
+     },
+     "genre": "short_story",
+     "workForm": "poetry"
+    }
+   },
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-easy-01-024",
+   "task": "gen-lit40-easy-01-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-easy-01-024",
+    "batchId": "lit40-easy-01",
+    "route": "excerpt",
+    "skill": "inferences",
+    "difficulty": "easy",
+    "questionType": "relationship_between_characters",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 23,
+     "genre": "novel_excerpt",
+     "pov": "third_omniscient",
+     "styleEra": "early_20c",
+     "names": [
+      "Maya",
+      "Dana"
+     ],
+     "nameCultures": [
+      "english",
+      "english"
+     ],
+     "locale": "the Cornish coast",
+     "setting": "a soccer field at dusk",
+     "relationship": "an immigrant father and his English-speaking daughter",
+     "conflict": "over an apology offered too late",
+     "openingStyle": "대명사 I 또는 We 로 시작",
+     "topicSeed": "a soccer field at dusk in the Cornish coast; an immigrant father and his English-speaking daughter over an apology offered too late"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "I was treated like a dog, ordered about like a servant, and made to do three times as much work as had been agreed with my guardian. I felt that it was right to resist. There was no one to fight my battle, and that of my poor sister, but myself. I am well aware that I took upon myself a great responsibility in deciding this question. Perhaps, without the counsel of my brother, I should not have dared to proceed as I did. Bad as the consequences threatened to be, I did not regret that I had permitted the log to drift ashore.",
+    "question": "Based on the text, which choice best describes the narrator's relationship with his brother?",
+    "options": [
+     "The brother is a rival who opposed the narrator's decision to resist.",
+     "The brother is the person who forced the narrator to do extra work.",
+     "The brother is unaware of the hardships the narrator has endured.",
+     "The brother is a trusted adviser whose counsel gave the narrator courage."
+    ],
+    "correct_letter": "D",
+    "explanation": "화자는 부당한 대우에 맞서기로 한 결정이 큰 책임이었다고 말한 뒤 'without the counsel of my brother, I should not have dared'라고 고백한다. 이는 형제의 조언이 화자에게 용기를 준 믿을 만한 지지였음을 보여 주므로 D가 정답이다. A는 형제가 결정을 반대했다는 근거가 없고, B는 화자를 혹사한 사람은 형제가 아니라 일을 시킨 쪽이다. C는 형제가 조언을 했다는 점에서 사정을 알고 있었으므로 틀리다."
+   },
+   "notes": [],
+   "tone": [
+    "defiant",
+    "resolute"
+   ],
+   "devices": [
+    "first-person narration",
+    "simile"
+   ],
+   "producerModel": "opus",
+   "excerpt": {
+    "text": "I was treated like a dog, ordered about like a servant, and made to do three times as much work as had been agreed with my guardian. I felt that it was right to resist. There was no one to fight my battle, and that of my poor sister, but myself. I am well aware that I took upon myself a great responsibility in deciding this question. Perhaps, without the counsel of my brother, I should not have dared to proceed as I did. Bad as the consequences threatened to be, I did not regret that I had permitted the log to drift ashore.",
+    "source": {
+     "author": "Optic, Oliver",
+     "work": "Down the River; Or, Buck Bradford and His Tyrants",
+     "year": 1896,
+     "yearSource": "text-header(copyright/published line)",
+     "authorDeathYear": 1897,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/24283",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg:gutenberg-24283",
+     "corpusTextSha256": "227c42f85a8050b256e4a8db0486678976c5785f093c34791b92e9c0066bf4d1",
+     "excerptSha256": "264827e9744fc884e8061f94b518323668d34a3dc1cedbf5971e20416375d866",
+     "sliceSha256": "b12d252ce39fa5e233039e5a0ce795ad1d5698fab1fc8f22412d0e72bd18c319",
+     "location": {
+      "startChar": 95678,
+      "endChar": 96207,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 29
+     },
+     "genre": "novel_excerpt",
+     "workForm": "novel_excerpt"
+    }
+   },
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-easy-01-025",
+   "task": "gen-lit40-easy-01-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-easy-01-025",
+    "batchId": "lit40-easy-01",
+    "route": "excerpt",
+    "skill": "inferences",
+    "difficulty": "easy",
+    "questionType": "relationship_between_characters",
+    "genre": "personal_essay",
+    "seed": {
+     "index": 24,
+     "genre": "personal_essay",
+     "pov": "third_limited",
+     "styleEra": "contemporary",
+     "names": [
+      "Gil",
+      "Errol"
+     ],
+     "nameCultures": [
+      "hebrew_jewish",
+      "caribbean"
+     ],
+     "locale": "Ohio",
+     "setting": "a summer camp dining hall",
+     "relationship": "a boy and the old man who sells him fish",
+     "conflict": "over a decision made without asking",
+     "openingStyle": "대화 한 줄로 시작",
+     "topicSeed": "a summer camp dining hall in Ohio; a boy and the old man who sells him fish over a decision made without asking"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "In France, mothers always visit with their daughters; and if restraint upon unmarried people is carried to excess there, we certainly err on the opposite extreme. We allow too much freedom, and we allow it too soon. I believe it is much better for a very young lady never to go about alone, or visit for any length of time from home, without her mother.\n\nYouth must have friends, and those friends, being loved ardently, will have prodigious influence. The choice requires extreme caution. The whole of human destiny is often materially affected by those with whom we are intimate at fourteen or fifteen years of age.",
+    "question": "Based on the text, how does the author view the ideal relationship between a very young lady and her mother?",
+    "options": [
+     "The mother should serve as a close guide who accompanies her daughter.",
+     "The daughter should act as an equal who travels freely without her mother.",
+     "The mother should remain a distant authority who is consulted only rarely.",
+     "The daughter should let her friends replace her mother as her chief guide."
+    ],
+    "correct_letter": "A",
+    "explanation": "필자는 프랑스에서는 어머니가 늘 딸과 함께 방문한다고 소개하고, 어린 숙녀는 'never to go about alone'해야 하며 어머니 없이 집을 떠나지 말아야 한다고 주장한다. 또한 열넷, 열다섯 살의 친구 선택이 운명을 좌우하므로 매우 신중해야 한다고 덧붙인다. 따라서 어머니가 곁에서 이끄는 동반자여야 한다는 A가 정답이다. B는 필자가 지나친 자유를 비판하므로 틀리고, C와 D는 어머니의 동행을 강조하는 주장과 반대된다."
+   },
+   "notes": [],
+   "tone": [
+    "cautionary",
+    "earnest"
+   ],
+   "devices": [
+    "contrast",
+    "generalization"
+   ],
+   "producerModel": "opus",
+   "excerpt": {
+    "text": "In France, mothers always visit with their daughters; and if restraint upon unmarried people is carried to excess there, we certainly err on the opposite extreme. We allow too much freedom, and we allow it too soon. I believe it is much better for a very young lady never to go about alone, or visit for any length of time from home, without her mother.\n\nYouth must have friends, and those friends, being loved ardently, will have prodigious influence. The choice requires extreme caution. The whole of human destiny is often materially affected by those with whom we are intimate at fourteen or fifteen years of age.",
+    "source": {
+     "author": "Child, Lydia Maria",
+     "work": "The mother's book",
+     "year": null,
+     "yearSource": "unknown(코퍼스 메타에 발행연도 없음)",
+     "authorDeathYear": 1880,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/69345",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg:gutenberg-69345",
+     "corpusTextSha256": "64c8c90f7f1bf5cad30091e63b70c17ed5a7e6249eef546973a24f3b0f653809",
+     "excerptSha256": "1177c0630c47ef7a7aa3adf6020d73b955a210c274c49600cf000c089b1179ba",
+     "sliceSha256": "99dcd80ba9354d10790cd8b313aa328e4893876014a8cd3fa9097c0286f68999",
+     "location": {
+      "startChar": 251378,
+      "endChar": 251995,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 84
+     },
+     "genre": "personal_essay",
+     "workForm": "personal_essay"
+    }
+   },
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-easy-01-026",
+   "task": "gen-lit40-easy-01-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-easy-01-026",
+    "batchId": "lit40-easy-01",
+    "route": "excerpt",
+    "skill": "inferences",
+    "difficulty": "easy",
+    "questionType": "relationship_between_characters",
+    "genre": "memoir",
+    "seed": {
+     "index": 25,
+     "genre": "memoir",
+     "pov": "mixed_or_none",
+     "styleEra": "contemporary",
+     "names": [
+      "Radek",
+      "Ksenia"
+     ],
+     "nameCultures": [
+      "slavic_baltic",
+      "slavic_baltic"
+     ],
+     "locale": "Tbilisi",
+     "setting": "a barbershop",
+     "relationship": "a teenage cook and her stern aunt",
+     "conflict": "after a harvest, voyage or season that went badly",
+     "openingStyle": "숫자·목록·규칙을 말하며 시작",
+     "topicSeed": "a barbershop in Tbilisi; a teenage cook and her stern aunt after a harvest, voyage or season that went badly"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "The gentleman replied that that information was to be obtained from the result of the schooling of the population generally. Every boy and girl around us could read and write, and could enjoy reading and writing. There was therefore evidence to show that they remained at school sufficiently long for the required purposes. It was fair that I should judge of the system from the results. Here in England, we generally object to much that the Americans have adopted into their form of government, and think that many of their political theories are wrong. We do not like universal suffrage.",
+    "question": "Based on the text, which choice best describes the relationship between the narrator and the gentleman?",
+    "options": [
+     "A teacher is correcting a pupil who has failed to learn to read and write.",
+     "A host is explaining local schooling to a visitor who judges it by results.",
+     "Two political allies are agreeing that universal suffrage should be adopted.",
+     "Two rivals are debating so fiercely that neither listens to the other."
+    ],
+    "correct_letter": "B",
+    "explanation": "신사는 교육 성과를 주민들의 학교 교육 결과로 알 수 있다고 설명하고, 화자는 'It was fair that I should judge of the system from the results'라고 받아들인다. 이어 'Here in England'라며 미국 제도를 바라보는 영국인의 시각을 밝히므로, 화자는 설명을 듣고 판단하는 방문자이다. 따라서 B가 정답이다. A는 화자가 학생이라는 근거가 없고, C는 화자가 보통선거를 좋아하지 않는다고 했으므로 틀리며, D는 화자가 신사의 설명을 공정하다고 인정해 맞지 않는다."
+   },
+   "notes": [],
+   "tone": [
+    "measured",
+    "analytical"
+   ],
+   "devices": [
+    "reported speech",
+    "comparison"
+   ],
+   "producerModel": "opus",
+   "excerpt": {
+    "text": "The gentleman replied that that information was to be obtained from the result of the schooling of the population generally. Every boy and girl around us could read and write, and could enjoy reading and writing. There was therefore evidence to show that they remained at school sufficiently long for the required purposes. It was fair that I should judge of the system from the results. Here in England, we generally object to much that the Americans have adopted into their form of government, and think that many of their political theories are wrong. We do not like universal suffrage.",
+    "source": {
+     "author": "Trollope, Anthony",
+     "work": "North America — Volume 2",
+     "year": null,
+     "yearSource": "unknown(코퍼스 메타에 발행연도 없음)",
+     "authorDeathYear": 1882,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/1866",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg:gutenberg-1866",
+     "corpusTextSha256": "e4755d1d0fb5f6cac7ed752d4e96a5d3a70d16ae70b16372b861e06d3074e09a",
+     "excerptSha256": "f3f34c9c9aa769ac005e782671a0fc38afa07ca578a30444ede0b0152d6bd634",
+     "sliceSha256": "030b204a143230a446748b9df89e555215d7183c51fca895858244d411a45145",
+     "location": {
+      "startChar": 755922,
+      "endChar": 756511,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 88
+     },
+     "genre": "memoir",
+     "workForm": "memoir"
+    }
+   },
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-easy-01-027",
+   "task": "gen-lit40-easy-01-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-easy-01-027",
+    "batchId": "lit40-easy-01",
+    "route": "excerpt",
+    "skill": "inferences",
+    "difficulty": "easy",
+    "questionType": "symbolism",
+    "genre": "short_story",
+    "seed": {
+     "index": 26,
+     "genre": "short_story",
+     "pov": "first",
+     "styleEra": "early_20c",
+     "names": [
+      "Cyrus",
+      "Mabel"
+     ],
+     "nameCultures": [
+      "english",
+      "english"
+     ],
+     "locale": "Manchester",
+     "setting": "an open-air market",
+     "relationship": "a seamstress and her only apprentice",
+     "conflict": "over a map, a route or a way home",
+     "openingStyle": "구체적인 사물이나 동작으로 시작(관사 The 로 시작하지 말 것)",
+     "topicSeed": "an open-air market in Manchester; a seamstress and her only apprentice over a map, a route or a way home"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "There is a fascination in it; there is a magnetism stronger than that of the rock which drew the nails from Sindbad's ship. You are like a bird let out with a string tied to the foot to flutter a little way and return again. It is not business, for you may have none, in the ordinary sense; it is not \"society,\" it is not pleasure. It is the presence of man in his myriads. There is something in the heart which cannot be satisfied away from it.\n\nIt is a curious thing that your next-door neighbour may be a stranger, but there are no strangers in a vast crowd.",
+    "question": "In the text, the image of a bird with a string tied to its foot mainly represents",
+    "options": [
+     "the freedom a person gains by leaving the city for the countryside.",
+     "the loneliness a person feels when living beside an unknown neighbor.",
+     "the pull of the crowd that draws a person back after any brief absence.",
+     "the burden of business duties that keep a person tied to an office."
+    ],
+    "correct_letter": "C",
+    "explanation": "필자는 도시의 군중에 'a magnetism stronger than that of the rock'이 있다고 말하며, 사람을 줄 묶인 새처럼 잠시 날아갔다가 다시 돌아오게 만든다고 묘사한다. 그 끌림은 사업이나 사교가 아니라 'the presence of man in his myriads'라고 밝히므로 C가 정답이다. A는 새가 결국 돌아온다는 점과 반대되고, B는 이웃 이야기가 새의 이미지와 직접 연결되지 않는다. D는 필자가 그것이 사업 때문이 아니라고 분명히 말하므로 틀리다."
+   },
+   "notes": [],
+   "tone": [
+    "reflective",
+    "wondering"
+   ],
+   "devices": [
+    "simile",
+    "allusion"
+   ],
+   "producerModel": "opus",
+   "excerpt": {
+    "text": "There is a fascination in it; there is a magnetism stronger than that of the rock which drew the nails from Sindbad's ship. You are like a bird let out with a string tied to the foot to flutter a little way and return again. It is not business, for you may have none, in the ordinary sense; it is not \"society,\" it is not pleasure. It is the presence of man in his myriads. There is something in the heart which cannot be satisfied away from it.\n\nIt is a curious thing that your next-door neighbour may be a stranger, but there are no strangers in a vast crowd.",
+    "source": {
+     "author": "Jefferies, Richard",
+     "work": "Nature Near London",
+     "year": null,
+     "yearSource": "unknown(코퍼스 메타에 발행연도 없음)",
+     "authorDeathYear": 1887,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/18629",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg:gutenberg-18629",
+     "corpusTextSha256": "c7404a430d32435d047607d4c7a7e6f098ee46f65351175decc0e386c1014ef8",
+     "excerptSha256": "eef6ab41dfd0bfac6c62c664afea9275d0a76e4e5f899c03dbe6bef3a14ea3f9",
+     "sliceSha256": "6ecdbcf042b80e5e3b153846dc042ca791e7cfac594857a0d38c8553562479a4",
+     "location": {
+      "startChar": 44693,
+      "endChar": 45254,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 12
+     },
+     "genre": "short_story",
+     "workForm": "short_story"
+    }
+   },
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-easy-01-028",
+   "task": "gen-lit40-easy-01-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-easy-01-028",
+    "batchId": "lit40-easy-01",
+    "route": "excerpt",
+    "skill": "inferences",
+    "difficulty": "easy",
+    "questionType": "symbolism",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 27,
+     "genre": "novel_excerpt",
+     "pov": "mixed_or_none",
+     "styleEra": "late_20c",
+     "names": [
+      "Ciara",
+      "Cleotilde"
+     ],
+     "nameCultures": [
+      "irish_scottish",
+      "latin_american"
+     ],
+     "locale": "Bologna",
+     "setting": "a boarding-house kitchen",
+     "relationship": "a violin student and an exacting teacher",
+     "conflict": "about leaving versus staying loyal",
+     "openingStyle": "짧은 단언문으로 시작",
+     "topicSeed": "a boarding-house kitchen in Bologna; a violin student and an exacting teacher about leaving versus staying loyal"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "The hot, sleepy streets were waking up in the red glow of the fading day. People in the town, now that the glare had died from their eyes, were telling each other that the air was cool, and trying to believe it.\n\nOutside, however, the assertion had more truth in it. A ripple of refreshment was slowly spreading up from the distant river. The shadows of the straight-lined trees lay across the brick road in great black stripes. The fields looked as if their dusty grass was turning green again beneath the darkening sky; in the dull ditches stood the cattle, dreamily content.\n\nThe girls walked on in silence till they reached a point where the road swerved off into a little thicket. This was the spot which Romeo must have had in his mind.",
+    "question": "In the text, the ripple of refreshment spreading up from the distant river mainly represents",
+    "options": [
+     "a coming storm that threatens the girls on their walk to the thicket.",
+     "a false hope that the townspeople invent to forget the summer heat.",
+     "a sign that the fields have been ruined by a long season of drought.",
+     "a gentle relief that arrives as the oppressive day finally ends."
+    ],
+    "correct_letter": "D",
+    "explanation": "지문 앞부분에서 마을 사람들은 공기가 시원하다고 'trying to believe it'하지만, 바깥에서는 그 말이 'had more truth in it'이라고 한다. 강에서 퍼지는 상쾌함과 함께 풀이 다시 푸르러 보이고 소들이 'dreamily content'한 모습은 무더운 하루 끝에 찾아온 안도를 나타낸다. 따라서 D가 정답이다. A는 폭풍의 조짐이 없고, B는 마을 밖에서는 시원함이 실제라고 했으므로 틀리며, C는 들판이 되살아나는 듯하다는 묘사와 반대된다."
+   },
+   "notes": [],
+   "tone": [
+    "calm",
+    "languid"
+   ],
+   "devices": [
+    "imagery",
+    "personification"
+   ],
+   "producerModel": "opus",
+   "excerpt": {
+    "text": "The hot, sleepy streets were waking up in the red glow of the fading day. People in the town, now that the glare had died from their eyes, were telling each other that the air was cool, and trying to believe it.\n\nOutside, however, the assertion had more truth in it. A ripple of refreshment was slowly spreading up from the distant river. The shadows of the straight-lined trees lay across the brick road in great black stripes. The fields looked as if their dusty grass was turning green again beneath the darkening sky; in the dull ditches stood the cattle, dreamily content.\n\nThe girls walked on in silence till they reached a point where the road swerved off into a little thicket. This was the spot which Romeo must have had in his mind.",
+    "source": {
+     "author": "Maartens, Maarten",
+     "work": "My Lady Nobody: A Novel",
+     "year": 1895,
+     "yearSource": "text-header(copyright/published line)",
+     "authorDeathYear": 1915,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/49903",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg:gutenberg-49903",
+     "corpusTextSha256": "2e0211e663225eaa3bf7ce591f3c7ef4a4c538f252abe0218b3df40ffc44d753",
+     "excerptSha256": "fb7841699a02eabf801dfd1ef7117ed4592f95f9b0366ecbe1d6525c167c8c58",
+     "sliceSha256": "5642c88494f5e48e8f9b66aa49f459811049ac97f1f48f13dc26a3c9aba5518d",
+     "location": {
+      "startChar": 107409,
+      "endChar": 108151,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 14
+     },
+     "genre": "novel_excerpt",
+     "workForm": "novel_excerpt"
+    }
+   },
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-easy-01-029",
+   "task": "gen-lit40-easy-01-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-easy-01-029",
+    "batchId": "lit40-easy-01",
+    "route": "excerpt",
+    "skill": "inferences",
+    "difficulty": "easy",
+    "questionType": "symbolism",
+    "genre": "personal_essay",
+    "seed": {
+     "index": 28,
+     "genre": "personal_essay",
+     "pov": "first",
+     "styleEra": "late_20c",
+     "names": [
+      "Noa",
+      "Carmela"
+     ],
+     "nameCultures": [
+      "hebrew_jewish",
+      "spanish_iberian"
+     ],
+     "locale": "Karachi",
+     "setting": "a courtyard with a dry fountain",
+     "relationship": "a landlord's son and a tenant's daughter",
+     "conflict": "after discovering a letter meant for someone else",
+     "openingStyle": "대명사 I 또는 We 로 시작",
+     "topicSeed": "a courtyard with a dry fountain in Karachi; a landlord's son and a tenant's daughter after discovering a letter meant for someone else"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "In each black little seed is a whole vine packed away.\n\nAfter a time the old vine will fade away. It will fall and turn brown. It will do no more work of changing gases and minerals into living plant. It will not again have green leaves and bear bright flowers.\n\nBut there will be more morning-glories, for the vine has stored some of its life in the seeds, and they will not fade and cease to work. All that is left of the life of the vine is in the seeds. All the morning-glories that will grow and delight us with their bright flowers next summer lie packed away in the dark seeds.\n\nDear little seeds, live on through the cold winter; without you we never again could see our bright morning-glories!",
+    "question": "In the text, the seeds of the morning-glory vine mainly represent",
+    "options": [
+     "the continuation of the vine's life after the old vine fades away.",
+     "the harsh winter that destroys every flower in the garden each year.",
+     "the work of changing gases and minerals into green leaves and flowers.",
+     "the darkness that remains once the bright summer flowers are gone."
+    ],
+    "correct_letter": "A",
+    "explanation": "필자는 'In each black little seed is a whole vine packed away'라고 말하고, 늙은 덩굴이 시들어도 덩굴이 생명의 일부를 씨앗에 저장해 두었다고 설명한다. 'All that is left of the life of the vine is in the seeds'라는 문장도 씨앗이 생명의 이어짐을 상징함을 보여 주므로 A가 정답이다. B는 씨앗이 겨울을 견디는 존재이지 겨울 자체가 아니라서 틀리다. C는 시드는 늙은 덩굴이 하던 일이고, D는 씨앗의 색만 보고 의미를 잘못 읽은 것이다."
+   },
+   "notes": [],
+   "tone": [
+    "tender",
+    "hopeful"
+   ],
+   "devices": [
+    "apostrophe",
+    "repetition"
+   ],
+   "producerModel": "opus",
+   "excerpt": {
+    "text": "In each black little seed is a whole vine packed away.\n\nAfter a time the old vine will fade away. It will fall and turn brown. It will do no more work of changing gases and minerals into living plant. It will not again have green leaves and bear bright flowers.\n\nBut there will be more morning-glories, for the vine has stored some of its life in the seeds, and they will not fade and cease to work. All that is left of the life of the vine is in the seeds. All the morning-glories that will grow and delight us with their bright flowers next summer lie packed away in the dark seeds.\n\nDear little seeds, live on through the cold winter; without you we never again could see our bright morning-glories!",
+    "source": {
+     "author": "Morley, Margaret Warner",
+     "work": "Flowers and their friends",
+     "year": 1897,
+     "yearSource": "text-header(copyright/published line)",
+     "authorDeathYear": 1923,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/72776",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg:gutenberg-72776",
+     "corpusTextSha256": "3aaf13ff4eef95d744b35eaf36d1350e4d2ad11f78e357a27841e6f69063d923",
+     "excerptSha256": "ae76df4c833840d6c0893f3211c9a84dc5f33394a1ac9a38f31394ad28c37a5e",
+     "sliceSha256": "0d34d79aaccbd76e4d279deaeb7ff5a0fb974af1b4c3b6eb54620c955a4f95cc",
+     "location": {
+      "startChar": 27125,
+      "endChar": 27827,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 11
+     },
+     "genre": "personal_essay",
+     "workForm": "personal_essay"
+    }
+   },
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-easy-01-030",
+   "task": "gen-lit40-easy-01-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-easy-01-030",
+    "batchId": "lit40-easy-01",
+    "route": "excerpt",
+    "skill": "inferences",
+    "difficulty": "easy",
+    "questionType": "symbolism",
+    "genre": "memoir",
+    "seed": {
+     "index": 29,
+     "genre": "memoir",
+     "pov": "first",
+     "styleEra": "contemporary",
+     "names": [
+      "Tamika",
+      "Alba"
+     ],
+     "nameCultures": [
+      "african_american",
+      "spanish_iberian"
+     ],
+     "locale": "Seville",
+     "setting": "a seaside promenade",
+     "relationship": "a mother-in-law and a new bride",
+     "conflict": "over a promise made to a child",
+     "openingStyle": "대화 한 줄로 시작",
+     "topicSeed": "a seaside promenade in Seville; a mother-in-law and a new bride over a promise made to a child"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "I rode up to the house and dismounted, hitched my horse to a post at the door, and proceeded to ring the bell. A tall, stately lady made her appearance, and invited me in with much apparent courtesy. She was dressed in deep mourning, which was very becoming to her pale, sad face. She seemed to be about thirty years of age, very prepossessing in appearance, and evidently belonged to one of the \"F. F. V's.\" As soon as I was seated she inquired: \"To what fortunate circumstance am I to attribute the pleasure of this unexpected call?\" I told her in a few words the nature of my business. The intelligence seemed to cast a deep shadow over her pale features, which all her efforts could not control.",
+    "question": "In the text, the lady's deep mourning dress mainly represents",
+    "options": [
+     "the wealth and high rank that make her look down on her visitor.",
+     "the recent grief that already shadows her face and her manner.",
+     "the formal custom she follows whenever a stranger comes to call.",
+     "the pride she takes in looking elegant before unexpected guests."
+    ],
+    "correct_letter": "B",
+    "explanation": "화자는 부인이 'dressed in deep mourning'이었고 그것이 'pale, sad face'에 어울렸다고 묘사한다. 화자가 용건을 말하자 소식이 'cast a deep shadow over her pale features'하여 감정을 감추지 못하므로, 상복은 그녀를 이미 짓누르고 있는 슬픔을 나타낸다. 따라서 B가 정답이다. A는 부인이 정중하게 맞이했으므로 틀리고, C와 D는 상복을 단순한 관습이나 멋으로만 보아 슬픔의 단서를 놓친다."
+   },
+   "notes": [],
+   "tone": [
+    "somber",
+    "courteous"
+   ],
+   "devices": [
+    "imagery",
+    "characterization"
+   ],
+   "producerModel": "opus",
+   "excerpt": {
+    "text": "I rode up to the house and dismounted, hitched my horse to a post at the door, and proceeded to ring the bell. A tall, stately lady made her appearance, and invited me in with much apparent courtesy. She was dressed in deep mourning, which was very becoming to her pale, sad face. She seemed to be about thirty years of age, very prepossessing in appearance, and evidently belonged to one of the \"F. F. V's.\" As soon as I was seated she inquired: \"To what fortunate circumstance am I to attribute the pleasure of this unexpected call?\" I told her in a few words the nature of my business. The intelligence seemed to cast a deep shadow over her pale features, which all her efforts could not control.",
+    "source": {
+     "author": "Edmonds, S. Emma E. (Sarah Emma Evelyn)",
+     "work": "Nurse and Spy in the Union Army\r The Adventures and Experiences of a Woman in Hospitals, Camps, and Battle-Fields",
+     "year": null,
+     "yearSource": "unknown(코퍼스 메타에 발행연도 없음)",
+     "authorDeathYear": 1898,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/38497",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg:gutenberg-38497",
+     "corpusTextSha256": "ac6d47a613eb5174e5427d06619cf13b96e3a2bc77b7c2761eeae40b911e89f1",
+     "excerptSha256": "16d3b60538a771bafe26df74bc4d69c6c9205f25bf5de754e9242525ad10d198",
+     "sliceSha256": "ac82ef2be91b9bb6e0a41beae09f39a7228cd18d335120f571a012a288c4efd3",
+     "location": {
+      "startChar": 121129,
+      "endChar": 121828,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 23
+     },
+     "genre": "memoir",
+     "workForm": "memoir"
+    }
+   },
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-easy-01-031",
+   "task": "gen-lit40-easy-01-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-easy-01-031",
+    "batchId": "lit40-easy-01",
+    "route": "excerpt",
+    "skill": "words_in_context",
+    "difficulty": "easy",
+    "questionType": "figurative_language",
+    "genre": "short_story",
+    "seed": {
+     "index": 30,
+     "genre": "short_story",
+     "pov": "mixed_or_none",
+     "styleEra": "19c",
+     "names": [
+      "Xiulan",
+      "Lena"
+     ],
+     "nameCultures": [
+      "chinese",
+      "german_austrian"
+     ],
+     "locale": "Hamburg",
+     "setting": "a school gymnasium",
+     "relationship": "a grandmother and her grandson",
+     "conflict": "after a surprising success that makes things harder",
+     "openingStyle": "대명사 I 또는 We 로 시작",
+     "topicSeed": "a school gymnasium in Hamburg; a grandmother and her grandson after a surprising success that makes things harder"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "In a few minutes twenty-five hundred men were in simultaneous movement. Five companies of cavalry wheeled into column of companies, and advanced at a trot through the fields, seeking to gain the shelter of the forest. The six infantry regiments slid up alongside of each other, and pushed on in six parallel columns of march, two on the right of the road and four on the left. The artillery, which alone left the highway, followed at a distance of two or three hundred yards. The remaining cavalry made a wide detour to the right as if to flank the enemy’s left.\n\nIt was a mile and a quarter--it was a march of fully twenty minutes--to the edge of the woodland, the proposed cover of the column.",
+    "question": "As used in the text, the phrase “slid up alongside of each other” most nearly suggests",
+    "options": [
+     "that the regiments moved into position smoothly and in close order.",
+     "that the soldiers lost their footing on the wet and muddy road.",
+     "that the regiments retreated quietly to avoid the enemy's notice.",
+     "that the soldiers mixed together until the columns could not be told apart."
+    ],
+    "correct_letter": "A",
+    "explanation": "이 구절 앞에서는 'twenty-five hundred men were in simultaneous movement'라고 하여 대규모 부대가 함께 움직이는 장면을 보여 준다. 뒤이어 연대들이 'six parallel columns of march'로 나아갔다고 하므로, 'slid up'은 미끄러지듯 매끄럽게 나란히 정렬한 움직임을 뜻한다. 따라서 A가 정답이다. B는 문자 그대로 미끄러졌다고 읽은 오해이고, C는 부대가 전진하므로 틀리며, D는 평행한 대열이 유지되었다는 내용과 반대된다."
+   },
+   "notes": [],
+   "tone": [
+    "tense",
+    "precise"
+   ],
+   "devices": [
+    "metaphor",
+    "imagery"
+   ],
+   "producerModel": "opus",
+   "excerpt": {
+    "text": "In a few minutes twenty-five hundred men were in simultaneous movement. Five companies of cavalry wheeled into column of companies, and advanced at a trot through the fields, seeking to gain the shelter of the forest. The six infantry regiments slid up alongside of each other, and pushed on in six parallel columns of march, two on the right of the road and four on the left. The artillery, which alone left the highway, followed at a distance of two or three hundred yards. The remaining cavalry made a wide detour to the right as if to flank the enemy’s left.\n\nIt was a mile and a quarter--it was a march of fully twenty minutes--to the edge of the woodland, the proposed cover of the column.",
+    "source": {
+     "author": "De Forest, John William",
+     "work": "The Brigade Commander",
+     "year": null,
+     "yearSource": "unknown(코퍼스 메타에 발행연도 없음)",
+     "authorDeathYear": 1906,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/23182",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg:gutenberg-23182",
+     "corpusTextSha256": "e1fc48febb688e69c26c6a17ccd28fee0bb5fadd94e6ec59c963a5ee5770da48",
+     "excerptSha256": "c0b16497bb3b227d6d8f7000fee87c155cdda6cfc3de5bafd9b42843de97771a",
+     "sliceSha256": "819558159ab4247db86d1589e20c844cdf658610242b750321427165fd7fe08b",
+     "location": {
+      "startChar": 29638,
+      "endChar": 30333,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 51
+     },
+     "genre": "short_story",
+     "workForm": "short_story"
+    }
+   },
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-easy-01-032",
+   "task": "gen-lit40-easy-01-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-easy-01-032",
+    "batchId": "lit40-easy-01",
+    "route": "excerpt",
+    "skill": "words_in_context",
+    "difficulty": "easy",
+    "questionType": "figurative_language",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 31,
+     "genre": "novel_excerpt",
+     "pov": "third_omniscient",
+     "styleEra": "contemporary",
+     "names": [
+      "Lucien",
+      "Theo"
+     ],
+     "nameCultures": [
+      "french",
+      "french"
+     ],
+     "locale": "Lyon",
+     "setting": "a school music room",
+     "relationship": "a grandfather and a granddaughter learning his language",
+     "conflict": "over a plan that depends on a lie",
+     "openingStyle": "인물의 이름으로 시작",
+     "topicSeed": "a school music room in Lyon; a grandfather and a granddaughter learning his language over a plan that depends on a lie"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "A look of wild amazement swept over her face. It had not disappeared with her touch. It smiled upon her yet. No venomous thing had sprung from those parted and smiling lips. It was herself gazing upon herself. She was there—and it was there—oh! how that poor brain worked and toiled to solve the question of its double self. Was she, the creature of pain, with her temples full of fire, which had no power to melt the snow from her hair, an evil growth from the loveliness before her, and that perfect still? After wandering so many years, with age upon her limbs, and a curse at her heart, had she come back upon her own young self to be met with smiles and pleasant looks, as if no wickedness had ever crept between them?",
+    "question": "As used in the text, the phrase “temples full of fire” most nearly suggests",
+    "options": [
+     "that the woman is filled with fierce anger at her own reflection.",
+     "that the woman is suffering from a burning, feverish pain in her head.",
+     "that the woman has recently escaped from a house that caught fire.",
+     "that the woman's hair has been darkened and scorched by the heat."
+    ],
+    "correct_letter": "B",
+    "explanation": "지문은 그녀를 'the creature of pain'이라고 부르며 이 구절을 쓰고, 그 불이 'had no power to melt the snow from her hair'라고 덧붙인다. 또 'that poor brain worked and toiled'라는 표현이 머리의 고통과 혼란을 강조하므로, 관자놀이 속 불은 열에 들뜬 듯한 머리의 고통을 뜻한다. 따라서 B가 정답이다. A는 그녀가 분노보다 놀라움과 혼란을 느끼므로 틀리고, C와 D는 비유를 실제 화재로 오해한 것이다."
+   },
+   "notes": [],
+   "tone": [
+    "anguished",
+    "haunting"
+   ],
+   "devices": [
+    "metaphor",
+    "rhetorical question"
+   ],
+   "producerModel": "opus",
+   "excerpt": {
+    "text": "A look of wild amazement swept over her face. It had not disappeared with her touch. It smiled upon her yet. No venomous thing had sprung from those parted and smiling lips. It was herself gazing upon herself. She was there—and it was there—oh! how that poor brain worked and toiled to solve the question of its double self. Was she, the creature of pain, with her temples full of fire, which had no power to melt the snow from her hair, an evil growth from the loveliness before her, and that perfect still? After wandering so many years, with age upon her limbs, and a curse at her heart, had she come back upon her own young self to be met with smiles and pleasant looks, as if no wickedness had ever crept between them?",
+    "source": {
+     "author": "Stephens, Ann S. (Ann Sophia)",
+     "work": "The curse of gold",
+     "year": null,
+     "yearSource": "unknown(코퍼스 메타에 발행연도 없음)",
+     "authorDeathYear": 1886,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/70134",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg:gutenberg-70134",
+     "corpusTextSha256": "1091a5115f3eb09b3b6fa21c62e6a6432dfbcfdfd29af2725d7c8b6f99eef6ea",
+     "excerptSha256": "73660ed0a0e7f058f9ae4ab3878a67492ccd7d3b93a9b4d0db059857a32f5ff9",
+     "sliceSha256": "5eb5f1941c6b24399d1dd17f212c044a4978beae7d64d2c44b2ec3e8b3380a0f",
+     "location": {
+      "startChar": 360359,
+      "endChar": 361082,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 49
+     },
+     "genre": "novel_excerpt",
+     "workForm": "novel_excerpt"
+    }
+   },
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-easy-01-033",
+   "task": "gen-lit40-easy-01-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-easy-01-033",
+    "batchId": "lit40-easy-01",
+    "route": "excerpt",
+    "skill": "words_in_context",
+    "difficulty": "easy",
+    "questionType": "figurative_language",
+    "genre": "poetry",
+    "seed": {
+     "index": 32,
+     "genre": "poetry",
+     "pov": "second",
+     "styleEra": "contemporary",
+     "names": [
+      "Fausto",
+      "Rafaela"
+     ],
+     "nameCultures": [
+      "portuguese_brazilian",
+      "portuguese_brazilian"
+     ],
+     "locale": "Porto Alegre",
+     "setting": "a community garden",
+     "relationship": "a coach and a benched star",
+     "conflict": "over a tool or instrument inherited by the wrong person",
+     "openingStyle": "감각 묘사(소리·냄새·촉감)로 시작",
+     "topicSeed": "a community garden in Porto Alegre; a coach and a benched star over a tool or instrument inherited by the wrong person"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "There the old armorial stones dwellers seldom read;\nThere the ivy clambers like the rankest weed;\nThere the Cambridge lawyers sometimes scale the wall\nTo the grave of Helen, loveliest of all.\n\nEven here the fairest of the little band\nStrangers call the fairest girls in Maryland,\nLike the peach her color ere its dyes are fast,\nAnd her form as slender as the virgin mast.\n\nLike a vessel gliding with a net in tow,\nUp the street of evenings Helen seemed to flow,\nLeaving light behind her and a nameless spell\nMurmured in the young men, like an ocean shell.",
+    "question": "As used in the text, the phrase “like an ocean shell” most nearly suggests",
+    "options": [
+     "that Helen spoke to the young men in a loud and commanding voice.",
+     "that the young men collected shells as gifts to win Helen's favor.",
+     "that Helen's charm lingered in the young men like a faint echo.",
+     "that the young men feared Helen as sailors fear a stormy ocean."
+    ],
+    "correct_letter": "C",
+    "explanation": "시는 Helen이 거리를 흐르듯 지나가며 'Leaving light behind her and a nameless spell'을 남긴다고 묘사한다. 그 매력이 젊은이들 속에서 소라 껍데기처럼 'Murmured'한다는 것은 그녀가 떠난 뒤에도 은은한 울림처럼 남는다는 뜻이므로 C가 정답이다. A는 'murmured'라는 낮은 소리와 맞지 않고, B는 비유를 실제 조개 수집으로 오해했다. D는 시 전체가 그녀의 아름다움을 찬미하므로 두려움과 거리가 멀다."
+   },
+   "notes": [],
+   "tone": [
+    "admiring",
+    "nostalgic"
+   ],
+   "devices": [
+    "simile",
+    "imagery"
+   ],
+   "producerModel": "opus",
+   "excerpt": {
+    "text": "There the old armorial stones dwellers seldom read;\nThere the ivy clambers like the rankest weed;\nThere the Cambridge lawyers sometimes scale the wall\nTo the grave of Helen, loveliest of all.\n\nEven here the fairest of the little band\nStrangers call the fairest girls in Maryland,\nLike the peach her color ere its dyes are fast,\nAnd her form as slender as the virgin mast.\n\nLike a vessel gliding with a net in tow,\nUp the street of evenings Helen seemed to flow,\nLeaving light behind her and a nameless spell\nMurmured in the young men, like an ocean shell.",
+    "source": {
+     "author": "Townsend, George Alfred",
+     "work": "Tales of the Chesapeake",
+     "year": 1880,
+     "yearSource": "text-header(copyright/published line)",
+     "authorDeathYear": 1914,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/18126",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg:gutenberg-18126",
+     "corpusTextSha256": "a100a2522d2503ac76f88d808efb331000c097d96f46a43789dcfb90aff685e4",
+     "excerptSha256": "73d2e6c70c17e5ea885374365d0ac23911030adfd1a49417864130ecbe4671d2",
+     "sliceSha256": "007a53af9b29a0bf05d6b7310bae5feb72283c6913bd4b77276bf6395936e172",
+     "location": {
+      "startChar": 330481,
+      "endChar": 331080,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 67
+     },
+     "genre": "poetry",
+     "workForm": "short_story"
+    }
+   },
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-easy-01-035",
+   "task": "gen-lit40-easy-01-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-easy-01-035",
+    "batchId": "lit40-easy-01",
+    "route": "excerpt",
+    "skill": "words_in_context",
+    "difficulty": "easy",
+    "questionType": "figurative_language",
+    "genre": "memoir",
+    "seed": {
+     "index": 34,
+     "genre": "memoir",
+     "pov": "third_limited",
+     "styleEra": "19c",
+     "names": [
+      "Tallulah",
+      "Waya"
+     ],
+     "nameCultures": [
+      "indigenous_american",
+      "indigenous_american"
+     ],
+     "locale": "Albuquerque",
+     "setting": "a dried-riverbed crossing",
+     "relationship": "two women who once shared a stage",
+     "conflict": "about a debt neither will mention",
+     "openingStyle": "시간·날짜 표현으로 시작('By', 'On', 'After' 등)",
+     "topicSeed": "a dried-riverbed crossing in Albuquerque; two women who once shared a stage about a debt neither will mention"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Sometimes it charms us; sometimes it repels. But we can no more be oblivious to it than we can to the temperature of the air. Its possessor has but to enter the room, and insensibly we are conscious of a presence. It is as if we had suddenly been placed in the field of a magnetic force.\n\nOn the other hand there are people who produce no effect upon us whatever. They come and go with a like indifference. They are as unimportant psychically as if they were any other portion of the furniture. They never stir us. We might live with them for fifty years and be hardly able to tell, for any influence upon ourselves, whether they existed or not.",
+    "question": "As used in the text, the phrase “placed in the field of a magnetic force” most nearly suggests",
+    "options": [
+     "that such a person exerts a strong, invisible pull on everyone nearby.",
+     "that such a person makes others feel physically uncomfortable and hot.",
+     "that such a person works in a laboratory studying electricity and magnets.",
+     "that such a person forces others to agree with whatever is said aloud."
+    ],
+    "correct_letter": "A",
+    "explanation": "필자는 그런 사람이 방에 들어오기만 해도 'insensibly we are conscious of a presence'라고 말한다. 반대로 영향력 없는 사람들은 'They never stir us'라고 대비되므로, 자기장 비유는 눈에 보이지 않지만 강하게 끌어당기는 존재감을 뜻한다. 따라서 A가 정답이다. B는 기온 비유를 신체적 불편으로 잘못 읽었고, C는 비유를 문자 그대로 받아들였으며, D는 끌림이 'charms us'일 수도 'repels'일 수도 있다는 내용과 맞지 않는다."
+   },
+   "notes": [],
+   "tone": [
+    "reflective",
+    "analytical"
+   ],
+   "devices": [
+    "simile",
+    "contrast"
+   ],
+   "producerModel": "opus",
+   "excerpt": {
+    "text": "Sometimes it charms us; sometimes it repels. But we can no more be oblivious to it than we can to the temperature of the air. Its possessor has but to enter the room, and insensibly we are conscious of a presence. It is as if we had suddenly been placed in the field of a magnetic force.\n\nOn the other hand there are people who produce no effect upon us whatever. They come and go with a like indifference. They are as unimportant psychically as if they were any other portion of the furniture. They never stir us. We might live with them for fifty years and be hardly able to tell, for any influence upon ourselves, whether they existed or not.",
+    "source": {
+     "author": "Lowell, Percival",
+     "work": "The Soul of the Far East",
+     "year": null,
+     "yearSource": "unknown(코퍼스 메타에 발행연도 없음)",
+     "authorDeathYear": 1916,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/1409",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg:gutenberg-1409",
+     "corpusTextSha256": "3139160404ce8fd57d2d475305720ae1fa7b7a40e5d1ed1f4b26b98ade478ddc",
+     "excerptSha256": "6507da7f85e12587b6742c9e7cf62302af5acaa4eff3d87cd784849704d5cd2e",
+     "sliceSha256": "72b5ccb8d985158aea6d7f56ca1a6f1c531f8cf1da05d02aad6a468793afa3f2",
+     "location": {
+      "startChar": 224931,
+      "endChar": 225576,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 88
+     },
+     "genre": "memoir",
+     "workForm": "memoir"
+    }
+   },
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-easy-01-036",
+   "task": "gen-lit40-easy-01-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-easy-01-036",
+    "batchId": "lit40-easy-01",
+    "route": "excerpt",
+    "skill": "words_in_context",
+    "difficulty": "easy",
+    "questionType": "figurative_language",
+    "genre": "fable_or_folktale_retelling",
+    "seed": {
+     "index": 35,
+     "genre": "fable_or_folktale_retelling",
+     "pov": "mixed_or_none",
+     "styleEra": "late_20c",
+     "names": [
+      "Baraka",
+      "Neema"
+     ],
+     "nameCultures": [
+      "east_south_african",
+      "east_south_african"
+     ],
+     "locale": "Addis Ababa",
+     "setting": "a crowded wedding hall",
+     "relationship": "best friends after a move",
+     "conflict": "over an old photograph",
+     "openingStyle": "대명사 I 또는 We 로 시작",
+     "topicSeed": "a crowded wedding hall in Addis Ababa; best friends after a move over an old photograph"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "All at once--strange as it may seem, it is true,--the vessel stopped, in the mid sea, as fast as if it was fixed on the ground. The men, astonished, pulled at their oars, and spread more sail, trying to make progress by the aid of both, but all in vain. Ivy twined round the oars and hindered their motion, and clung to the sails, with heavy clusters of berries. A vine, laden with grapes, ran up the mast, and along the sides of the vessel. The sound of flutes was heard and the odor of fragrant wine spread all around.",
+    "question": "As used in the text, the phrase “as fast as if it was fixed on the ground” most nearly suggests",
+    "options": [
+     "that the vessel was moving at a great speed across the open sea.",
+     "that the vessel stopped completely, as though held by solid land.",
+     "that the vessel had run aground on a hidden sandbar near the coast.",
+     "that the vessel slowed gradually as the wind died down around it."
+    ],
+    "correct_letter": "B",
+    "explanation": "지문은 배가 'in the mid sea'에서 갑자기 멈췄다고 하므로 실제 육지에 걸린 것이 아니다. 선원들이 노를 젓고 돛을 더 펼쳐도 'all in vain'이었다는 점에서, 이 비유는 배가 땅에 고정된 듯 꼼짝 않고 멈춘 상태를 뜻한다. 따라서 B가 정답이다. A는 'fast'를 속도로 오해한 것이고, C는 바다 한가운데라는 설정과 맞지 않으며, D는 갑작스러운 정지를 점진적 감속으로 바꾸어 틀리다."
+   },
+   "notes": [],
+   "tone": [
+    "mysterious",
+    "wondrous"
+   ],
+   "devices": [
+    "simile",
+    "imagery"
+   ],
+   "producerModel": "opus",
+   "excerpt": {
+    "text": "All at once--strange as it may seem, it is true,--the vessel stopped, in the mid sea, as fast as if it was fixed on the ground. The men, astonished, pulled at their oars, and spread more sail, trying to make progress by the aid of both, but all in vain. Ivy twined round the oars and hindered their motion, and clung to the sails, with heavy clusters of berries. A vine, laden with grapes, ran up the mast, and along the sides of the vessel. The sound of flutes was heard and the odor of fragrant wine spread all around.",
+    "source": {
+     "author": "Bulfinch, Thomas",
+     "work": "The Age of Fable",
+     "year": 1855,
+     "yearSource": "text-header(copyright/published line)",
+     "authorDeathYear": 1867,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/4925",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg_humanities:gutenberg-4925",
+     "corpusTextSha256": "9eae640d01475acfdab5febb4ec968bc50ea68b1cc07062ae9c27ed3a49a9610",
+     "excerptSha256": "14517c0b105c28a299173ece2bd314fbb93ab162599663de878dc308efca3e77",
+     "sliceSha256": "7adae5b7d58b796ea8fd3b9aae8fad4d6a3af959245521f34614b17234d27bdb",
+     "location": {
+      "startChar": 343628,
+      "endChar": 344148,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 42
+     },
+     "genre": "fable_or_folktale_retelling",
+     "workForm": "fable_or_folktale_retelling"
+    }
+   },
+   "wordRetries": 0,
+   "rewrites": 0
+  }
+ ],
+ "rejected": [
+  {
+   "candidateId": "lit40-easy-01-034",
+   "stage": "distractor",
+   "reasons": [
+    "정답이 가장 긴 선택지(14단어, 다음 12)"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-01-037",
+   "stage": "format",
+   "reasons": [
+    "발췌 지문이 제공된 원문과 다름"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-01-038",
+   "stage": "format",
+   "reasons": [
+    "발췌 지문이 제공된 원문과 다름"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-01-039",
+   "stage": "format",
+   "reasons": [
+    "발췌 지문이 제공된 원문과 다름"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-01-040",
+   "stage": "format",
+   "reasons": [
+    "발췌 지문이 제공된 원문과 다름"
+   ]
+  }
+ ],
+ "retryWords": [],
+ "extraIgnored": []
+}

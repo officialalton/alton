@@ -1,0 +1,3245 @@
+{
+ "schemaVersion": 1,
+ "subject": {
+  "apCode": "ap_computer_science_a",
+  "name": "AP Computer Science A",
+  "family": "computer_science_a",
+  "edition": "ced-2027",
+  "cedVersion": "AP Computer Science A CED ((c)2025; 2027 exam fully digital)",
+  "examYear": 2027,
+  "sourceUrl": "https://apcentral.collegeboard.org/media/pdf/ap-computer-science-a-course-and-exam-description.pdf",
+  "officialTopicCodes": true,
+  "designNotes": "Uses the CED's four-unit structure with official topic numbering (1.1-1.15, 2.1-2.12, 3.1-3.9, 4.1-4.17). Exam: 42 MC (55%, 90 min) + 4 FRQ (45%, 90 min): Methods and Control Structures, Class Design, Data Analysis with ArrayList, 2D Array. Unit and practice MC weights are the CED ranges; FRQ section weight for Practice 2 is 100 percent because all FRQs assess Develop Code. Topic skills are the CED suggested skills (some topics list more than were captured from the text layout, so topic skill lists may be a subset). Titles shortened or restated from the CED where the text layout split them; Sub-keywords, kinds, prerequisites and estLessons are original tutoring-design judgement. Sub-keyword skills default to the topic's first skill unless specified."
+ },
+ "skills": [
+  {
+   "code": "1.A",
+   "category": "Practice 1: Design Code",
+   "label": "Determine an appropriate program design to solve a problem or accomplish a task"
+  },
+  {
+   "code": "1.B",
+   "category": "Practice 1: Design Code",
+   "label": "Determine what knowledge can be extracted from data"
+  },
+  {
+   "code": "2.A",
+   "category": "Practice 2: Develop Code",
+   "label": "Write program code to implement an algorithm"
+  },
+  {
+   "code": "2.B",
+   "category": "Practice 2: Develop Code",
+   "label": "Write program code involving data abstractions"
+  },
+  {
+   "code": "2.C",
+   "category": "Practice 2: Develop Code",
+   "label": "Write program code involving procedural abstractions"
+  },
+  {
+   "code": "3.A",
+   "category": "Practice 3: Analyze Code",
+   "label": "Determine result or output from statement execution order"
+  },
+  {
+   "code": "3.B",
+   "category": "Practice 3: Analyze Code",
+   "label": "Determine result or output from code with data abstractions"
+  },
+  {
+   "code": "3.C",
+   "category": "Practice 3: Analyze Code",
+   "label": "Determine result or output from code with procedural abstractions"
+  },
+  {
+   "code": "3.D",
+   "category": "Practice 3: Analyze Code",
+   "label": "Explain why code will not compile or work as intended and correct it"
+  },
+  {
+   "code": "4.A",
+   "category": "Practice 4: Document Code and Computing Systems",
+   "label": "Describe the behavior of a code segment or program"
+  },
+  {
+   "code": "4.B",
+   "category": "Practice 4: Document Code and Computing Systems",
+   "label": "Describe initial conditions needed for code to work as intended"
+  },
+  {
+   "code": "5.A",
+   "category": "Practice 5: Use Computers Responsibly",
+   "label": "Explain how computing impacts society, economy and culture"
+  }
+ ],
+ "weights": [
+  {
+   "axis": "unit",
+   "code": "1",
+   "section": "mc",
+   "min": 15,
+   "max": 25,
+   "source": "AP Computer Science A CED (c)2025, Exam Information, multiple-choice unit weighting table"
+  },
+  {
+   "axis": "unit",
+   "code": "2",
+   "section": "mc",
+   "min": 25,
+   "max": 35,
+   "source": "AP Computer Science A CED (c)2025, Exam Information, multiple-choice unit weighting table"
+  },
+  {
+   "axis": "unit",
+   "code": "3",
+   "section": "mc",
+   "min": 10,
+   "max": 18,
+   "source": "AP Computer Science A CED (c)2025, Exam Information, multiple-choice unit weighting table"
+  },
+  {
+   "axis": "unit",
+   "code": "4",
+   "section": "mc",
+   "min": 30,
+   "max": 40,
+   "source": "AP Computer Science A CED (c)2025, Exam Information, multiple-choice unit weighting table"
+  },
+  {
+   "axis": "skill",
+   "code": "Practice 1: Design Code",
+   "section": "mc",
+   "min": 2,
+   "max": 10,
+   "source": "AP Computer Science A CED (c)2025, Exam Information, multiple-choice practice weighting table"
+  },
+  {
+   "axis": "skill",
+   "code": "Practice 2: Develop Code",
+   "section": "mc",
+   "min": 22,
+   "max": 38,
+   "source": "AP Computer Science A CED (c)2025, Exam Information, multiple-choice practice weighting table"
+  },
+  {
+   "axis": "skill",
+   "code": "Practice 3: Analyze Code",
+   "section": "mc",
+   "min": 37,
+   "max": 53,
+   "source": "AP Computer Science A CED (c)2025, Exam Information, multiple-choice practice weighting table"
+  },
+  {
+   "axis": "skill",
+   "code": "Practice 4: Document Code and Computing Systems",
+   "section": "mc",
+   "min": 10,
+   "max": 15,
+   "source": "AP Computer Science A CED (c)2025, Exam Information, multiple-choice practice weighting table"
+  },
+  {
+   "axis": "skill",
+   "code": "Practice 5: Use Computers Responsibly",
+   "section": "mc",
+   "min": 2,
+   "max": 10,
+   "source": "AP Computer Science A CED (c)2025, Exam Information, multiple-choice practice weighting table"
+  },
+  {
+   "axis": "skill",
+   "code": "Practice 2: Develop Code",
+   "section": "frq",
+   "min": 100,
+   "max": 100,
+   "source": "AP Computer Science A CED (c)2025, Exam Information: all four FRQs assess Practice 2 Develop Code"
+  }
+ ],
+ "units": [
+  {
+   "code": "1",
+   "title": "Using Objects and Methods",
+   "officialClassPeriods": "~32–34",
+   "topics": [
+    {
+     "code": "1.1",
+     "title": "Introduction to Algorithms, Programming, and Compilers",
+     "scope": "both",
+     "skills": [
+      "1.A"
+     ],
+     "requires": [],
+     "estLessons": 1.0,
+     "subKeywords": [
+      {
+       "code": "1.1#1",
+       "label": "Algorithm as ordered steps",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 0.3
+      },
+      {
+       "code": "1.1#2",
+       "label": "Compile vs run and kinds of errors",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 0.3
+      },
+      {
+       "code": "1.1#3",
+       "label": "Syntax, logic and runtime errors confused",
+       "kind": "misconception",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [
+        "1.1#2"
+       ],
+       "estLessons": 0.15
+      },
+      {
+       "code": "1.1#4",
+       "label": "Writing and running a first program",
+       "kind": "skill",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [
+        "1.1#2"
+       ],
+       "estLessons": 0.3
+      }
+     ]
+    },
+    {
+     "code": "1.2",
+     "title": "Variables and Data Types",
+     "scope": "both",
+     "skills": [
+      "1.A",
+      "2.A"
+     ],
+     "requires": [
+      "1.1"
+     ],
+     "estLessons": 1.0,
+     "subKeywords": [
+      {
+       "code": "1.2#1",
+       "label": "Primitive types int, double, boolean",
+       "kind": "concept",
+       "skills": [
+        "1.A",
+        "2.A"
+       ],
+       "requires": [
+        "1.1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "1.2#2",
+       "label": "Declaring and initializing variables",
+       "kind": "skill",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [
+        "1.2#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "1.2#3",
+       "label": "Reference types vs primitives",
+       "kind": "concept",
+       "skills": [
+        "1.A",
+        "2.A"
+       ],
+       "requires": [
+        "1.2#1"
+       ],
+       "estLessons": 0.15
+      },
+      {
+       "code": "1.2#4",
+       "label": "Naming and type-matching rules",
+       "kind": "skill",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [
+        "1.2#2"
+       ],
+       "estLessons": 0.15
+      }
+     ]
+    },
+    {
+     "code": "1.3",
+     "title": "Expressions and Output",
+     "scope": "both",
+     "skills": [
+      "2.A",
+      "3.A",
+      "3.D"
+     ],
+     "requires": [
+      "1.2"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "1.3#1",
+       "label": "Arithmetic operators and precedence",
+       "kind": "concept",
+       "skills": [
+        "2.A",
+        "3.A",
+        "3.D"
+       ],
+       "requires": [
+        "1.2"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "1.3#2",
+       "label": "Integer division and modulus surprises",
+       "kind": "misconception",
+       "skills": [
+        "3.A"
+       ],
+       "requires": [
+        "1.3#1"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "1.3#3",
+       "label": "print vs println and escape sequences",
+       "kind": "concept",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [
+        "1.2"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "1.3#4",
+       "label": "Tracing expression values by hand",
+       "kind": "skill",
+       "skills": [
+        "3.A"
+       ],
+       "requires": [
+        "1.3#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "1.3#5",
+       "label": "Fixing compile errors in expressions",
+       "kind": "skill",
+       "skills": [
+        "3.D"
+       ],
+       "requires": [
+        "1.3#2"
+       ],
+       "estLessons": 0.15
+      }
+     ]
+    },
+    {
+     "code": "1.4",
+     "title": "Assignment Statements and Input",
+     "scope": "both",
+     "skills": [
+      "2.A",
+      "4.A"
+     ],
+     "requires": [
+      "1.3"
+     ],
+     "estLessons": 1.0,
+     "subKeywords": [
+      {
+       "code": "1.4#1",
+       "label": "Assignment is not equality",
+       "kind": "misconception",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [
+        "1.3"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "1.4#2",
+       "label": "Tracking variable state across statements",
+       "kind": "skill",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [
+        "1.4#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "1.4#3",
+       "label": "Reading input with Scanner",
+       "kind": "skill",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [
+        "1.3"
+       ],
+       "estLessons": 0.3
+      }
+     ]
+    },
+    {
+     "code": "1.5",
+     "title": "Casting and Range of Variables",
+     "scope": "both",
+     "skills": [
+      "2.A",
+      "4.A"
+     ],
+     "requires": [
+      "1.4"
+     ],
+     "estLessons": 1.25,
+     "subKeywords": [
+      {
+       "code": "1.5#1",
+       "label": "Casting between int and double",
+       "kind": "concept",
+       "skills": [
+        "2.A",
+        "4.A"
+       ],
+       "requires": [
+        "1.4"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "1.5#2",
+       "label": "Truncation vs rounding",
+       "kind": "misconception",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [
+        "1.5#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "1.5#3",
+       "label": "Integer range and overflow",
+       "kind": "concept",
+       "skills": [
+        "2.A",
+        "4.A"
+       ],
+       "requires": [
+        "1.4"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "1.5#4",
+       "label": "Predicting values after mixed-type expressions",
+       "kind": "skill",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [
+        "1.5#1"
+       ],
+       "estLessons": 0.3
+      }
+     ]
+    },
+    {
+     "code": "1.6",
+     "title": "Compound Assignment Operators",
+     "scope": "both",
+     "skills": [
+      "3.A"
+     ],
+     "requires": [
+      "1.4"
+     ],
+     "estLessons": 0.5,
+     "subKeywords": [
+      {
+       "code": "1.6#1",
+       "label": "+=, -=, ++ and -- forms",
+       "kind": "concept",
+       "skills": [
+        "3.A"
+       ],
+       "requires": [
+        "1.4"
+       ],
+       "estLessons": 0.15
+      },
+      {
+       "code": "1.6#2",
+       "label": "Hand tracing increment statements",
+       "kind": "skill",
+       "skills": [
+        "3.A"
+       ],
+       "requires": [
+        "1.6#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "1.6#3",
+       "label": "Prefix vs postfix confusion",
+       "kind": "misconception",
+       "skills": [
+        "3.A"
+       ],
+       "requires": [
+        "1.6#1"
+       ],
+       "estLessons": 0.15
+      }
+     ]
+    },
+    {
+     "code": "1.7",
+     "title": "Application Program Interface (API) and Libraries",
+     "scope": "both",
+     "skills": [
+      "4.A"
+     ],
+     "requires": [
+      "1.6"
+     ],
+     "estLessons": 0.5,
+     "subKeywords": [
+      {
+       "code": "1.7#1",
+       "label": "Using library documentation",
+       "kind": "skill",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [
+        "1.6"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "1.7#2",
+       "label": "Packages and imports",
+       "kind": "concept",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [
+        "1.7#1"
+       ],
+       "estLessons": 0.15
+      }
+     ]
+    },
+    {
+     "code": "1.8",
+     "title": "Documentation with Comments",
+     "scope": "both",
+     "skills": [
+      "4.B"
+     ],
+     "requires": [
+      "1.7"
+     ],
+     "estLessons": 0.5,
+     "subKeywords": [
+      {
+       "code": "1.8#1",
+       "label": "Writing preconditions and postconditions",
+       "kind": "skill",
+       "skills": [
+        "4.B"
+       ],
+       "requires": [
+        "1.7"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "1.8#2",
+       "label": "Comment styles and Javadoc",
+       "kind": "concept",
+       "skills": [
+        "4.B"
+       ],
+       "requires": [
+        "1.8#1"
+       ],
+       "estLessons": 0.15
+      }
+     ]
+    },
+    {
+     "code": "1.9",
+     "title": "Method Signatures",
+     "scope": "both",
+     "skills": [
+      "3.C"
+     ],
+     "requires": [
+      "1.8"
+     ],
+     "estLessons": 1.0,
+     "subKeywords": [
+      {
+       "code": "1.9#1",
+       "label": "Parameters, return type and name",
+       "kind": "concept",
+       "skills": [
+        "3.C"
+       ],
+       "requires": [
+        "1.8"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "1.9#2",
+       "label": "Overloaded methods",
+       "kind": "concept",
+       "skills": [
+        "3.C"
+       ],
+       "requires": [
+        "1.9#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "1.9#3",
+       "label": "Matching a call to the right signature",
+       "kind": "skill",
+       "skills": [
+        "3.C"
+       ],
+       "requires": [
+        "1.9#2"
+       ],
+       "estLessons": 0.3
+      }
+     ]
+    },
+    {
+     "code": "1.10",
+     "title": "Calling Class Methods",
+     "scope": "both",
+     "skills": [
+      "2.C",
+      "3.C",
+      "3.D"
+     ],
+     "requires": [
+      "1.9"
+     ],
+     "estLessons": 1.0,
+     "subKeywords": [
+      {
+       "code": "1.10#1",
+       "label": "Static method call syntax",
+       "kind": "concept",
+       "skills": [
+        "2.C"
+       ],
+       "requires": [
+        "1.9"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "1.10#2",
+       "label": "Passing arguments and using return values",
+       "kind": "skill",
+       "skills": [
+        "3.C"
+       ],
+       "requires": [
+        "1.10#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "1.10#3",
+       "label": "Calling a void method and expecting a value",
+       "kind": "misconception",
+       "skills": [
+        "3.D"
+       ],
+       "requires": [
+        "1.10#2"
+       ],
+       "estLessons": 0.15
+      },
+      {
+       "code": "1.10#4",
+       "label": "Tracing a chain of method calls",
+       "kind": "skill",
+       "skills": [
+        "3.C"
+       ],
+       "requires": [
+        "1.10#2"
+       ],
+       "estLessons": 0.3
+      }
+     ]
+    },
+    {
+     "code": "1.11",
+     "title": "Math Class",
+     "scope": "both",
+     "skills": [
+      "2.C",
+      "4.A"
+     ],
+     "requires": [
+      "1.10",
+      "1.5"
+     ],
+     "estLessons": 1.0,
+     "subKeywords": [
+      {
+       "code": "1.11#1",
+       "label": "abs, pow, sqrt and random",
+       "kind": "concept",
+       "skills": [
+        "2.C",
+        "4.A"
+       ],
+       "requires": [
+        "1.10"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "1.11#2",
+       "label": "Scaling Math.random into a range",
+       "kind": "skill",
+       "skills": [
+        "2.C"
+       ],
+       "requires": [
+        "1.11#1"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "1.11#3",
+       "label": "Off-by-one in random range ends",
+       "kind": "misconception",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [
+        "1.11#2"
+       ],
+       "estLessons": 0.3
+      }
+     ]
+    },
+    {
+     "code": "1.12",
+     "title": "Objects: Instances of Classes",
+     "scope": "both",
+     "skills": [
+      "4.A"
+     ],
+     "requires": [
+      "1.10"
+     ],
+     "estLessons": 0.5,
+     "subKeywords": [
+      {
+       "code": "1.12#1",
+       "label": "Class vs object",
+       "kind": "concept",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [
+        "1.10"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "1.12#2",
+       "label": "Attributes and behaviors",
+       "kind": "concept",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [
+        "1.12#1"
+       ],
+       "estLessons": 0.15
+      },
+      {
+       "code": "1.12#3",
+       "label": "Class diagrams as a blueprint view",
+       "kind": "representation",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [
+        "1.12#1"
+       ],
+       "estLessons": 0.15
+      }
+     ]
+    },
+    {
+     "code": "1.13",
+     "title": "Object Creation and Storage (Instantiation)",
+     "scope": "both",
+     "skills": [
+      "2.B"
+     ],
+     "requires": [
+      "1.12"
+     ],
+     "estLessons": 1.0,
+     "subKeywords": [
+      {
+       "code": "1.13#1",
+       "label": "new and constructor calls",
+       "kind": "skill",
+       "skills": [
+        "2.B"
+       ],
+       "requires": [
+        "1.12"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "1.13#2",
+       "label": "Object references and null",
+       "kind": "concept",
+       "skills": [
+        "2.B"
+       ],
+       "requires": [
+        "1.13#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "1.13#3",
+       "label": "Two variables, one object (aliasing)",
+       "kind": "misconception",
+       "skills": [
+        "2.B"
+       ],
+       "requires": [
+        "1.13#2"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "1.13#4",
+       "label": "Memory diagrams of references",
+       "kind": "representation",
+       "skills": [
+        "2.B"
+       ],
+       "requires": [
+        "1.13#2"
+       ],
+       "estLessons": 0.15
+      }
+     ]
+    },
+    {
+     "code": "1.14",
+     "title": "Calling Instance Methods",
+     "scope": "both",
+     "skills": [
+      "2.C",
+      "3.C"
+     ],
+     "requires": [
+      "1.13"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "1.14#1",
+       "label": "Dot notation on an object",
+       "kind": "skill",
+       "skills": [
+        "2.C"
+       ],
+       "requires": [
+        "1.13"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "1.14#2",
+       "label": "NullPointerException causes",
+       "kind": "misconception",
+       "skills": [
+        "3.C"
+       ],
+       "requires": [
+        "1.14#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "1.14#3",
+       "label": "Accessor vs mutator behavior",
+       "kind": "concept",
+       "skills": [
+        "2.C",
+        "3.C"
+       ],
+       "requires": [
+        "1.14#1"
+       ],
+       "estLessons": 0.15
+      }
+     ]
+    },
+    {
+     "code": "1.15",
+     "title": "String Manipulation",
+     "scope": "both",
+     "skills": [
+      "2.C",
+      "3.C",
+      "4.A",
+      "4.B"
+     ],
+     "requires": [
+      "1.14"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "1.15#1",
+       "label": "String indexing and length",
+       "kind": "concept",
+       "skills": [
+        "2.C",
+        "3.C",
+        "4.A",
+        "4.B"
+       ],
+       "requires": [
+        "1.14"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "1.15#2",
+       "label": "substring, indexOf and its end-index rule",
+       "kind": "skill",
+       "skills": [
+        "2.C"
+       ],
+       "requires": [
+        "1.15#1"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "1.15#3",
+       "label": "equals vs == on Strings",
+       "kind": "misconception",
+       "skills": [
+        "3.C"
+       ],
+       "requires": [
+        "1.15#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "1.15#4",
+       "label": "Strings are immutable",
+       "kind": "misconception",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [
+        "1.15#1"
+       ],
+       "estLessons": 0.15
+      },
+      {
+       "code": "1.15#5",
+       "label": "Boundary preconditions for String methods",
+       "kind": "skill",
+       "skills": [
+        "4.B"
+       ],
+       "requires": [
+        "1.15#2"
+       ],
+       "estLessons": 0.3
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "2",
+   "title": "Selection and Iteration",
+   "officialClassPeriods": "~29–31",
+   "topics": [
+    {
+     "code": "2.1",
+     "title": "Algorithms with Selection and Repetition",
+     "scope": "both",
+     "skills": [
+      "1.A"
+     ],
+     "requires": [
+      "1.15"
+     ],
+     "estLessons": 0.5,
+     "subKeywords": [
+      {
+       "code": "2.1#1",
+       "label": "Sequencing, selection and repetition",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [
+        "1.15"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "2.1#2",
+       "label": "Flowcharts and pseudocode planning",
+       "kind": "representation",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [
+        "2.1#1"
+       ],
+       "estLessons": 0.3
+      }
+     ]
+    },
+    {
+     "code": "2.2",
+     "title": "Boolean Expressions",
+     "scope": "both",
+     "skills": [
+      "3.A"
+     ],
+     "requires": [
+      "2.1"
+     ],
+     "estLessons": 1.0,
+     "subKeywords": [
+      {
+       "code": "2.2#1",
+       "label": "Relational operators",
+       "kind": "concept",
+       "skills": [
+        "3.A"
+       ],
+       "requires": [
+        "2.1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "2.2#2",
+       "label": "= vs == in conditions",
+       "kind": "misconception",
+       "skills": [
+        "3.A"
+       ],
+       "requires": [
+        "2.2#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "2.2#3",
+       "label": "Evaluating boolean expressions by hand",
+       "kind": "skill",
+       "skills": [
+        "3.A"
+       ],
+       "requires": [
+        "2.2#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "2.2#4",
+       "label": "Comparing doubles with ==",
+       "kind": "misconception",
+       "skills": [
+        "3.A"
+       ],
+       "requires": [
+        "2.2#1"
+       ],
+       "estLessons": 0.15
+      }
+     ]
+    },
+    {
+     "code": "2.3",
+     "title": "if Statements and Control Flow",
+     "scope": "both",
+     "skills": [
+      "2.A",
+      "3.A",
+      "4.A"
+     ],
+     "requires": [
+      "2.2"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "2.3#1",
+       "label": "if, if-else and else-if chains",
+       "kind": "concept",
+       "skills": [
+        "2.A",
+        "3.A",
+        "4.A"
+       ],
+       "requires": [
+        "2.2"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "2.3#2",
+       "label": "Missing braces and misleading indentation",
+       "kind": "misconception",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [
+        "2.3#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "2.3#3",
+       "label": "Separate ifs vs else-if chain",
+       "kind": "misconception",
+       "skills": [
+        "3.A"
+       ],
+       "requires": [
+        "2.3#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "2.3#4",
+       "label": "Writing a branching method",
+       "kind": "skill",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [
+        "2.3#1"
+       ],
+       "estLessons": 0.3
+      }
+     ]
+    },
+    {
+     "code": "2.4",
+     "title": "Nested if Statements",
+     "scope": "both",
+     "skills": [
+      "2.A",
+      "4.A"
+     ],
+     "requires": [
+      "2.3"
+     ],
+     "estLessons": 1.0,
+     "subKeywords": [
+      {
+       "code": "2.4#1",
+       "label": "Nested conditions and dangling else",
+       "kind": "concept",
+       "skills": [
+        "2.A",
+        "4.A"
+       ],
+       "requires": [
+        "2.3"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "2.4#2",
+       "label": "Flattening nested logic",
+       "kind": "skill",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [
+        "2.4#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "2.4#3",
+       "label": "Which branch executes for given inputs",
+       "kind": "skill",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [
+        "2.4#1"
+       ],
+       "estLessons": 0.3
+      }
+     ]
+    },
+    {
+     "code": "2.5",
+     "title": "Compound Boolean Expressions",
+     "scope": "both",
+     "skills": [
+      "2.A",
+      "3.A"
+     ],
+     "requires": [
+      "2.4"
+     ],
+     "estLessons": 1.0,
+     "subKeywords": [
+      {
+       "code": "2.5#1",
+       "label": "&&, || and ! precedence",
+       "kind": "concept",
+       "skills": [
+        "2.A",
+        "3.A"
+       ],
+       "requires": [
+        "2.4"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "2.5#2",
+       "label": "Short-circuit evaluation",
+       "kind": "concept",
+       "skills": [
+        "3.A"
+       ],
+       "requires": [
+        "2.5#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "2.5#3",
+       "label": "Writing range tests like 0 < x < 10",
+       "kind": "misconception",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [
+        "2.5#1"
+       ],
+       "estLessons": 0.3
+      }
+     ]
+    },
+    {
+     "code": "2.6",
+     "title": "Comparing Boolean Expressions",
+     "scope": "both",
+     "skills": [
+      "2.A",
+      "3.A"
+     ],
+     "requires": [
+      "2.5"
+     ],
+     "estLessons": 1.0,
+     "subKeywords": [
+      {
+       "code": "2.6#1",
+       "label": "De Morgan's laws",
+       "kind": "concept",
+       "skills": [
+        "2.A",
+        "3.A"
+       ],
+       "requires": [
+        "2.5"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "2.6#2",
+       "label": "Truth tables for equivalence",
+       "kind": "representation",
+       "skills": [
+        "3.A"
+       ],
+       "requires": [
+        "2.6#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "2.6#3",
+       "label": "Negating a compound condition incorrectly",
+       "kind": "misconception",
+       "skills": [
+        "3.A"
+       ],
+       "requires": [
+        "2.6#1"
+       ],
+       "estLessons": 0.3
+      }
+     ]
+    },
+    {
+     "code": "2.7",
+     "title": "while Loops",
+     "scope": "both",
+     "skills": [
+      "2.A",
+      "3.A",
+      "4.B"
+     ],
+     "requires": [
+      "2.6"
+     ],
+     "estLessons": 1.25,
+     "subKeywords": [
+      {
+       "code": "2.7#1",
+       "label": "while loop structure and flow",
+       "kind": "concept",
+       "skills": [
+        "2.A",
+        "3.A",
+        "4.B"
+       ],
+       "requires": [
+        "2.6"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "2.7#2",
+       "label": "Infinite loops and forgotten updates",
+       "kind": "misconception",
+       "skills": [
+        "4.B"
+       ],
+       "requires": [
+        "2.7#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "2.7#3",
+       "label": "Loop conditions and initial state",
+       "kind": "skill",
+       "skills": [
+        "4.B"
+       ],
+       "requires": [
+        "2.7#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "2.7#4",
+       "label": "Tracing a loop with a table",
+       "kind": "skill",
+       "skills": [
+        "3.A"
+       ],
+       "requires": [
+        "2.7#1"
+       ],
+       "estLessons": 0.3
+      }
+     ]
+    },
+    {
+     "code": "2.8",
+     "title": "for Loops",
+     "scope": "both",
+     "skills": [
+      "2.A",
+      "3.A",
+      "3.D"
+     ],
+     "requires": [
+      "2.7"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "2.8#1",
+       "label": "for loop header parts",
+       "kind": "concept",
+       "skills": [
+        "2.A",
+        "3.A",
+        "3.D"
+       ],
+       "requires": [
+        "2.7"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "2.8#2",
+       "label": "Off-by-one with < vs <=",
+       "kind": "misconception",
+       "skills": [
+        "3.D"
+       ],
+       "requires": [
+        "2.8#1"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "2.8#3",
+       "label": "Translating while to for",
+       "kind": "skill",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [
+        "2.8#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "2.8#4",
+       "label": "Counting iterations from a header",
+       "kind": "skill",
+       "skills": [
+        "3.A"
+       ],
+       "requires": [
+        "2.8#1"
+       ],
+       "estLessons": 0.3
+      }
+     ]
+    },
+    {
+     "code": "2.9",
+     "title": "Implementing Selection and Iteration Algorithms",
+     "scope": "both",
+     "skills": [
+      "2.A",
+      "3.A",
+      "4.A"
+     ],
+     "requires": [
+      "2.8",
+      "2.3"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "2.9#1",
+       "label": "Accumulators, counters and flags",
+       "kind": "concept",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [
+        "2.8"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "2.9#2",
+       "label": "Digit and divisibility algorithms using %",
+       "kind": "skill",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [
+        "2.9#1"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "2.9#3",
+       "label": "Finding max and min in a loop",
+       "kind": "skill",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [
+        "2.9#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "2.9#4",
+       "label": "Describing what an algorithm does",
+       "kind": "skill",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [
+        "2.9#1"
+       ],
+       "estLessons": 0.3
+      }
+     ]
+    },
+    {
+     "code": "2.10",
+     "title": "Implementing String Algorithms",
+     "scope": "both",
+     "skills": [
+      "2.C",
+      "3.C",
+      "3.D"
+     ],
+     "requires": [
+      "2.9",
+      "1.15"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "2.10#1",
+       "label": "Traversing a String with charAt/substring",
+       "kind": "skill",
+       "skills": [
+        "2.C"
+       ],
+       "requires": [
+        "2.9"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "2.10#2",
+       "label": "Loop bound errors causing StringIndexOutOfBounds",
+       "kind": "misconception",
+       "skills": [
+        "3.D"
+       ],
+       "requires": [
+        "2.10#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "2.10#3",
+       "label": "Building a new String in a loop",
+       "kind": "skill",
+       "skills": [
+        "3.C"
+       ],
+       "requires": [
+        "2.10#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "2.10#4",
+       "label": "Palindrome and counting patterns",
+       "kind": "skill",
+       "skills": [
+        "2.C"
+       ],
+       "requires": [
+        "2.10#1"
+       ],
+       "estLessons": 0.3
+      }
+     ]
+    },
+    {
+     "code": "2.11",
+     "title": "Nested Iteration",
+     "scope": "both",
+     "skills": [
+      "2.A",
+      "3.D",
+      "4.B"
+     ],
+     "requires": [
+      "2.8"
+     ],
+     "estLessons": 1.0,
+     "subKeywords": [
+      {
+       "code": "2.11#1",
+       "label": "Nested loop execution order",
+       "kind": "concept",
+       "skills": [
+        "2.A",
+        "3.D",
+        "4.B"
+       ],
+       "requires": [
+        "2.8"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "2.11#2",
+       "label": "Counting total inner iterations",
+       "kind": "skill",
+       "skills": [
+        "4.B"
+       ],
+       "requires": [
+        "2.11#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "2.11#3",
+       "label": "Reusing the same loop variable in inner and outer",
+       "kind": "misconception",
+       "skills": [
+        "3.D"
+       ],
+       "requires": [
+        "2.11#1"
+       ],
+       "estLessons": 0.15
+      },
+      {
+       "code": "2.11#4",
+       "label": "Pattern-printing with nested loops",
+       "kind": "skill",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [
+        "2.11#1"
+       ],
+       "estLessons": 0.3
+      }
+     ]
+    },
+    {
+     "code": "2.12",
+     "title": "Informal Run-Time Comparison of Statements",
+     "scope": "both",
+     "skills": [
+      "4.A"
+     ],
+     "requires": [
+      "2.11"
+     ],
+     "estLessons": 0.5,
+     "subKeywords": [
+      {
+       "code": "2.12#1",
+       "label": "Statement execution counts",
+       "kind": "concept",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [
+        "2.11"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "2.12#2",
+       "label": "Comparing two loop versions",
+       "kind": "skill",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [
+        "2.12#1"
+       ],
+       "estLessons": 0.15
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "3",
+   "title": "Class Creation",
+   "officialClassPeriods": "~20–22",
+   "topics": [
+    {
+     "code": "3.1",
+     "title": "Abstraction and Program Design",
+     "scope": "both",
+     "skills": [
+      "1.A"
+     ],
+     "requires": [
+      "2.12",
+      "1.12"
+     ],
+     "estLessons": 0.5,
+     "subKeywords": [
+      {
+       "code": "3.1#1",
+       "label": "Abstraction and decomposition",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [
+        "2.12"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "3.1#2",
+       "label": "Choosing classes and methods from a problem",
+       "kind": "skill",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [
+        "3.1#1"
+       ],
+       "estLessons": 0.3
+      }
+     ]
+    },
+    {
+     "code": "3.2",
+     "title": "Impact of Program Design",
+     "scope": "both",
+     "skills": [
+      "5.A"
+     ],
+     "requires": [
+      "3.1"
+     ],
+     "estLessons": 0.5,
+     "subKeywords": [
+      {
+       "code": "3.2#1",
+       "label": "Societal effects of software choices",
+       "kind": "concept",
+       "skills": [
+        "5.A"
+       ],
+       "requires": [
+        "3.1"
+       ],
+       "estLessons": 0.15
+      },
+      {
+       "code": "3.2#2",
+       "label": "Bias, privacy and security in design",
+       "kind": "concept",
+       "skills": [
+        "5.A"
+       ],
+       "requires": [
+        "3.2#1"
+       ],
+       "estLessons": 0.15
+      }
+     ]
+    },
+    {
+     "code": "3.3",
+     "title": "Anatomy of a Class",
+     "scope": "both",
+     "skills": [
+      "1.A",
+      "2.B"
+     ],
+     "requires": [
+      "3.1"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "3.3#1",
+       "label": "Class header, fields, constructors, methods",
+       "kind": "concept",
+       "skills": [
+        "1.A",
+        "2.B"
+       ],
+       "requires": [
+        "3.1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "3.3#2",
+       "label": "Public vs private and encapsulation",
+       "kind": "concept",
+       "skills": [
+        "2.B"
+       ],
+       "requires": [
+        "3.3#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "3.3#3",
+       "label": "UML-like class sketches",
+       "kind": "representation",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [
+        "3.3#1"
+       ],
+       "estLessons": 0.15
+      }
+     ]
+    },
+    {
+     "code": "3.4",
+     "title": "Constructors",
+     "scope": "both",
+     "skills": [
+      "2.B",
+      "3.B"
+     ],
+     "requires": [
+      "3.3"
+     ],
+     "estLessons": 1.0,
+     "subKeywords": [
+      {
+       "code": "3.4#1",
+       "label": "Writing a constructor",
+       "kind": "skill",
+       "skills": [
+        "2.B"
+       ],
+       "requires": [
+        "3.3"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "3.4#2",
+       "label": "Default values when fields are not set",
+       "kind": "concept",
+       "skills": [
+        "3.B"
+       ],
+       "requires": [
+        "3.4#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "3.4#3",
+       "label": "Parameter shadowing a field",
+       "kind": "misconception",
+       "skills": [
+        "3.B"
+       ],
+       "requires": [
+        "3.4#1"
+       ],
+       "estLessons": 0.3
+      }
+     ]
+    },
+    {
+     "code": "3.5",
+     "title": "Methods: How to Write Them",
+     "scope": "both",
+     "skills": [
+      "2.C",
+      "3.C",
+      "3.D",
+      "4.B"
+     ],
+     "requires": [
+      "3.4"
+     ],
+     "estLessons": 1.75,
+     "subKeywords": [
+      {
+       "code": "3.5#1",
+       "label": "Writing accessors and mutators",
+       "kind": "skill",
+       "skills": [
+        "2.C"
+       ],
+       "requires": [
+        "3.4"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "3.5#2",
+       "label": "Return type, return statements and void",
+       "kind": "concept",
+       "skills": [
+        "2.C",
+        "3.C",
+        "3.D",
+        "4.B"
+       ],
+       "requires": [
+        "3.5#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "3.5#3",
+       "label": "Missing return or unreachable code",
+       "kind": "misconception",
+       "skills": [
+        "3.D"
+       ],
+       "requires": [
+        "3.5#2"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "3.5#4",
+       "label": "Preconditions for a method",
+       "kind": "skill",
+       "skills": [
+        "4.B"
+       ],
+       "requires": [
+        "3.5#2"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "3.5#5",
+       "label": "Implementing a method from a specification",
+       "kind": "skill",
+       "skills": [
+        "2.C"
+       ],
+       "requires": [
+        "3.5#1"
+       ],
+       "estLessons": 0.5
+      }
+     ]
+    },
+    {
+     "code": "3.6",
+     "title": "Methods: Passing and Returning References of an Object",
+     "scope": "both",
+     "skills": [
+      "2.C",
+      "4.A"
+     ],
+     "requires": [
+      "3.5",
+      "1.13"
+     ],
+     "estLessons": 1.0,
+     "subKeywords": [
+      {
+       "code": "3.6#1",
+       "label": "Pass by value of primitives",
+       "kind": "concept",
+       "skills": [
+        "2.C",
+        "4.A"
+       ],
+       "requires": [
+        "3.5"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "3.6#2",
+       "label": "Passing object references and mutation",
+       "kind": "misconception",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [
+        "3.6#1"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "3.6#3",
+       "label": "Returning objects from methods",
+       "kind": "concept",
+       "skills": [
+        "2.C",
+        "4.A"
+       ],
+       "requires": [
+        "3.6#2"
+       ],
+       "estLessons": 0.3
+      }
+     ]
+    },
+    {
+     "code": "3.7",
+     "title": "Class Variables and Methods",
+     "scope": "both",
+     "skills": [
+      "2.C",
+      "3.B"
+     ],
+     "requires": [
+      "3.5"
+     ],
+     "estLessons": 1.0,
+     "subKeywords": [
+      {
+       "code": "3.7#1",
+       "label": "static fields and methods",
+       "kind": "concept",
+       "skills": [
+        "2.C",
+        "3.B"
+       ],
+       "requires": [
+        "3.5"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "3.7#2",
+       "label": "Instance vs class variable behavior",
+       "kind": "misconception",
+       "skills": [
+        "3.B"
+       ],
+       "requires": [
+        "3.7#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "3.7#3",
+       "label": "Counting instances with a static counter",
+       "kind": "skill",
+       "skills": [
+        "2.C"
+       ],
+       "requires": [
+        "3.7#1"
+       ],
+       "estLessons": 0.3
+      }
+     ]
+    },
+    {
+     "code": "3.8",
+     "title": "Scope and Access",
+     "scope": "both",
+     "skills": [
+      "3.B",
+      "3.D",
+      "4.A"
+     ],
+     "requires": [
+      "3.5"
+     ],
+     "estLessons": 1.0,
+     "subKeywords": [
+      {
+       "code": "3.8#1",
+       "label": "Local, parameter and field scope",
+       "kind": "concept",
+       "skills": [
+        "3.B",
+        "3.D",
+        "4.A"
+       ],
+       "requires": [
+        "3.5"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "3.8#2",
+       "label": "Variable not found because of block scope",
+       "kind": "misconception",
+       "skills": [
+        "3.D"
+       ],
+       "requires": [
+        "3.8#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "3.8#3",
+       "label": "Access modifiers and encapsulation violations",
+       "kind": "concept",
+       "skills": [
+        "3.B"
+       ],
+       "requires": [
+        "3.8#1"
+       ],
+       "estLessons": 0.3
+      }
+     ]
+    },
+    {
+     "code": "3.9",
+     "title": "this Keyword",
+     "scope": "both",
+     "skills": [
+      "2.B"
+     ],
+     "requires": [
+      "3.8"
+     ],
+     "estLessons": 0.5,
+     "subKeywords": [
+      {
+       "code": "3.9#1",
+       "label": "this refers to the current object",
+       "kind": "concept",
+       "skills": [
+        "2.B"
+       ],
+       "requires": [
+        "3.8"
+       ],
+       "estLessons": 0.15
+      },
+      {
+       "code": "3.9#2",
+       "label": "Disambiguating parameters and fields",
+       "kind": "skill",
+       "skills": [
+        "2.B"
+       ],
+       "requires": [
+        "3.9#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "3.9#3",
+       "label": "Passing this to another method",
+       "kind": "concept",
+       "skills": [
+        "2.B"
+       ],
+       "requires": [
+        "3.9#1"
+       ],
+       "estLessons": 0.15
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "4",
+   "title": "Data Collections",
+   "officialClassPeriods": "~50–52",
+   "topics": [
+    {
+     "code": "4.1",
+     "title": "Ethical and Social Issues Around Data Collection",
+     "scope": "both",
+     "skills": [
+      "1.B",
+      "5.A"
+     ],
+     "requires": [
+      "3.2"
+     ],
+     "estLessons": 0.5,
+     "subKeywords": [
+      {
+       "code": "4.1#1",
+       "label": "Privacy and consent in data",
+       "kind": "concept",
+       "skills": [
+        "5.A"
+       ],
+       "requires": [
+        "3.9"
+       ],
+       "estLessons": 0.15
+      },
+      {
+       "code": "4.1#2",
+       "label": "Bias in collected data",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [
+        "4.1#1"
+       ],
+       "estLessons": 0.15
+      }
+     ]
+    },
+    {
+     "code": "4.2",
+     "title": "Introduction to Using Data Sets",
+     "scope": "both",
+     "skills": [
+      "1.B"
+     ],
+     "requires": [
+      "4.1"
+     ],
+     "estLessons": 0.5,
+     "subKeywords": [
+      {
+       "code": "4.2#1",
+       "label": "Data sets and what they can show",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [
+        "4.1"
+       ],
+       "estLessons": 0.15
+      },
+      {
+       "code": "4.2#2",
+       "label": "Choosing a structure for a data set",
+       "kind": "skill",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [
+        "4.2#1"
+       ],
+       "estLessons": 0.15
+      }
+     ]
+    },
+    {
+     "code": "4.3",
+     "title": "Array Creation and Access",
+     "scope": "both",
+     "skills": [
+      "2.B",
+      "3.B"
+     ],
+     "requires": [
+      "4.2",
+      "2.8"
+     ],
+     "estLessons": 1.0,
+     "subKeywords": [
+      {
+       "code": "4.3#1",
+       "label": "Declaring and initializing arrays",
+       "kind": "skill",
+       "skills": [
+        "2.B"
+       ],
+       "requires": [
+        "4.2",
+        "2.8"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "4.3#2",
+       "label": "Zero-based indexing",
+       "kind": "concept",
+       "skills": [
+        "2.B",
+        "3.B"
+       ],
+       "requires": [
+        "4.3#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "4.3#3",
+       "label": "ArrayIndexOutOfBounds from length vs last index",
+       "kind": "misconception",
+       "skills": [
+        "3.B"
+       ],
+       "requires": [
+        "4.3#2"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "4.3#4",
+       "label": "Default values in new arrays",
+       "kind": "concept",
+       "skills": [
+        "3.B"
+       ],
+       "requires": [
+        "4.3#1"
+       ],
+       "estLessons": 0.15
+      }
+     ]
+    },
+    {
+     "code": "4.4",
+     "title": "Array Traversals",
+     "scope": "both",
+     "skills": [
+      "2.B",
+      "3.B",
+      "3.D"
+     ],
+     "requires": [
+      "4.3"
+     ],
+     "estLessons": 1.25,
+     "subKeywords": [
+      {
+       "code": "4.4#1",
+       "label": "Index-based for loop over an array",
+       "kind": "skill",
+       "skills": [
+        "2.B"
+       ],
+       "requires": [
+        "4.3"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "4.4#2",
+       "label": "Enhanced for loop and its limits",
+       "kind": "concept",
+       "skills": [
+        "2.B",
+        "3.B",
+        "3.D"
+       ],
+       "requires": [
+        "4.4#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "4.4#3",
+       "label": "Modifying elements inside enhanced for",
+       "kind": "misconception",
+       "skills": [
+        "3.D"
+       ],
+       "requires": [
+        "4.4#2"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "4.4#4",
+       "label": "Tracing array contents through a loop",
+       "kind": "skill",
+       "skills": [
+        "3.B"
+       ],
+       "requires": [
+        "4.4#1"
+       ],
+       "estLessons": 0.3
+      }
+     ]
+    },
+    {
+     "code": "4.5",
+     "title": "Implementing Array Algorithms",
+     "scope": "both",
+     "skills": [
+      "2.B",
+      "3.B",
+      "3.D",
+      "4.A"
+     ],
+     "requires": [
+      "4.4"
+     ],
+     "estLessons": 1.75,
+     "subKeywords": [
+      {
+       "code": "4.5#1",
+       "label": "Sum, average, min and max",
+       "kind": "skill",
+       "skills": [
+        "2.B"
+       ],
+       "requires": [
+        "4.4"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "4.5#2",
+       "label": "Shifting and reversing elements",
+       "kind": "skill",
+       "skills": [
+        "2.B"
+       ],
+       "requires": [
+        "4.5#1"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "4.5#3",
+       "label": "Counting matches and building result arrays",
+       "kind": "skill",
+       "skills": [
+        "2.B"
+       ],
+       "requires": [
+        "4.5#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "4.5#4",
+       "label": "Swap logic that overwrites a value",
+       "kind": "misconception",
+       "skills": [
+        "3.D"
+       ],
+       "requires": [
+        "4.5#2"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "4.5#5",
+       "label": "Describing an array algorithm's effect",
+       "kind": "skill",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [
+        "4.5#1"
+       ],
+       "estLessons": 0.15
+      }
+     ]
+    },
+    {
+     "code": "4.6",
+     "title": "Using Text Files",
+     "scope": "both",
+     "skills": [
+      "2.C",
+      "3.C",
+      "4.B"
+     ],
+     "requires": [
+      "4.5"
+     ],
+     "estLessons": 1.0,
+     "subKeywords": [
+      {
+       "code": "4.6#1",
+       "label": "Reading a file with Scanner",
+       "kind": "skill",
+       "skills": [
+        "2.C"
+       ],
+       "requires": [
+        "4.5"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "4.6#2",
+       "label": "Checked exceptions and file not found",
+       "kind": "concept",
+       "skills": [
+        "4.B"
+       ],
+       "requires": [
+        "4.6#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "4.6#3",
+       "label": "Parsing lines into data",
+       "kind": "skill",
+       "skills": [
+        "3.C"
+       ],
+       "requires": [
+        "4.6#1"
+       ],
+       "estLessons": 0.3
+      }
+     ]
+    },
+    {
+     "code": "4.7",
+     "title": "Wrapper Classes",
+     "scope": "both",
+     "skills": [
+      "2.B"
+     ],
+     "requires": [
+      "4.5"
+     ],
+     "estLessons": 0.5,
+     "subKeywords": [
+      {
+       "code": "4.7#1",
+       "label": "Integer and Double classes",
+       "kind": "concept",
+       "skills": [
+        "2.B"
+       ],
+       "requires": [
+        "4.5"
+       ],
+       "estLessons": 0.15
+      },
+      {
+       "code": "4.7#2",
+       "label": "Autoboxing and unboxing",
+       "kind": "concept",
+       "skills": [
+        "2.B"
+       ],
+       "requires": [
+        "4.7#1"
+       ],
+       "estLessons": 0.15
+      },
+      {
+       "code": "4.7#3",
+       "label": "Parsing numbers from Strings",
+       "kind": "skill",
+       "skills": [
+        "2.B"
+       ],
+       "requires": [
+        "4.7#1"
+       ],
+       "estLessons": 0.15
+      }
+     ]
+    },
+    {
+     "code": "4.8",
+     "title": "ArrayList Methods",
+     "scope": "both",
+     "skills": [
+      "2.B",
+      "3.B",
+      "3.D"
+     ],
+     "requires": [
+      "4.7",
+      "4.3"
+     ],
+     "estLessons": 1.25,
+     "subKeywords": [
+      {
+       "code": "4.8#1",
+       "label": "add, get, set, remove and size",
+       "kind": "concept",
+       "skills": [
+        "2.B",
+        "3.B",
+        "3.D"
+       ],
+       "requires": [
+        "4.7"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "4.8#2",
+       "label": "Array vs ArrayList syntax differences",
+       "kind": "misconception",
+       "skills": [
+        "3.D"
+       ],
+       "requires": [
+        "4.8#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "4.8#3",
+       "label": "Generics and the diamond notation",
+       "kind": "concept",
+       "skills": [
+        "2.B"
+       ],
+       "requires": [
+        "4.8#1"
+       ],
+       "estLessons": 0.15
+      },
+      {
+       "code": "4.8#4",
+       "label": "Tracing ArrayList state after calls",
+       "kind": "skill",
+       "skills": [
+        "3.B"
+       ],
+       "requires": [
+        "4.8#1"
+       ],
+       "estLessons": 0.3
+      }
+     ]
+    },
+    {
+     "code": "4.9",
+     "title": "ArrayList Traversals",
+     "scope": "both",
+     "skills": [
+      "2.B",
+      "3.D",
+      "4.A"
+     ],
+     "requires": [
+      "4.8",
+      "4.4"
+     ],
+     "estLessons": 1.25,
+     "subKeywords": [
+      {
+       "code": "4.9#1",
+       "label": "Traversing an ArrayList with a loop",
+       "kind": "skill",
+       "skills": [
+        "2.B"
+       ],
+       "requires": [
+        "4.8"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "4.9#2",
+       "label": "Skipped elements when removing in a loop",
+       "kind": "misconception",
+       "skills": [
+        "3.D"
+       ],
+       "requires": [
+        "4.9#1"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "4.9#3",
+       "label": "Safe patterns for deleting",
+       "kind": "skill",
+       "skills": [
+        "2.B"
+       ],
+       "requires": [
+        "4.9#2"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "4.9#4",
+       "label": "Describing a traversal's result",
+       "kind": "skill",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [
+        "4.9#1"
+       ],
+       "estLessons": 0.15
+      }
+     ]
+    },
+    {
+     "code": "4.10",
+     "title": "Implementing ArrayList Algorithms",
+     "scope": "both",
+     "skills": [
+      "2.B",
+      "3.B",
+      "3.D",
+      "4.A"
+     ],
+     "requires": [
+      "4.9",
+      "3.5"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "4.10#1",
+       "label": "Filter and collect into a new list",
+       "kind": "skill",
+       "skills": [
+        "2.B"
+       ],
+       "requires": [
+        "4.9"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "4.10#2",
+       "label": "Inserting and removing while keeping order",
+       "kind": "skill",
+       "skills": [
+        "2.B"
+       ],
+       "requires": [
+        "4.10#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "4.10#3",
+       "label": "Processing lists of objects via accessors",
+       "kind": "skill",
+       "skills": [
+        "3.B"
+       ],
+       "requires": [
+        "4.10#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "4.10#4",
+       "label": "Index vs value confusion in remove",
+       "kind": "misconception",
+       "skills": [
+        "3.D"
+       ],
+       "requires": [
+        "4.10#2"
+       ],
+       "estLessons": 0.3
+      }
+     ]
+    },
+    {
+     "code": "4.11",
+     "title": "2D Array Creation and Access",
+     "scope": "both",
+     "skills": [
+      "2.B",
+      "3.B"
+     ],
+     "requires": [
+      "4.4"
+     ],
+     "estLessons": 1.0,
+     "subKeywords": [
+      {
+       "code": "4.11#1",
+       "label": "Rows, columns and declaration syntax",
+       "kind": "concept",
+       "skills": [
+        "2.B",
+        "3.B"
+       ],
+       "requires": [
+        "4.4"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "4.11#2",
+       "label": "Accessing grid[row][col]",
+       "kind": "skill",
+       "skills": [
+        "2.B"
+       ],
+       "requires": [
+        "4.11#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "4.11#3",
+       "label": "Swapping row and column indices",
+       "kind": "misconception",
+       "skills": [
+        "3.B"
+       ],
+       "requires": [
+        "4.11#2"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "4.11#4",
+       "label": "Grid diagrams of array contents",
+       "kind": "representation",
+       "skills": [
+        "3.B"
+       ],
+       "requires": [
+        "4.11#1"
+       ],
+       "estLessons": 0.15
+      }
+     ]
+    },
+    {
+     "code": "4.12",
+     "title": "2D Array Traversals",
+     "scope": "both",
+     "skills": [
+      "2.B",
+      "3.B",
+      "3.D"
+     ],
+     "requires": [
+      "4.11",
+      "2.11"
+     ],
+     "estLessons": 1.25,
+     "subKeywords": [
+      {
+       "code": "4.12#1",
+       "label": "Row-major traversal",
+       "kind": "skill",
+       "skills": [
+        "2.B"
+       ],
+       "requires": [
+        "4.11"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "4.12#2",
+       "label": "Column-major traversal",
+       "kind": "skill",
+       "skills": [
+        "2.B"
+       ],
+       "requires": [
+        "4.12#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "4.12#3",
+       "label": "Using length for rows vs columns",
+       "kind": "misconception",
+       "skills": [
+        "3.D"
+       ],
+       "requires": [
+        "4.12#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "4.12#4",
+       "label": "Tracing nested loops on a grid",
+       "kind": "skill",
+       "skills": [
+        "3.B"
+       ],
+       "requires": [
+        "4.12#1"
+       ],
+       "estLessons": 0.3
+      }
+     ]
+    },
+    {
+     "code": "4.13",
+     "title": "Implementing 2D Array Algorithms",
+     "scope": "both",
+     "skills": [
+      "2.B",
+      "3.B",
+      "3.D",
+      "4.A"
+     ],
+     "requires": [
+      "4.12"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "4.13#1",
+       "label": "Row, column and total sums",
+       "kind": "skill",
+       "skills": [
+        "2.B"
+       ],
+       "requires": [
+        "4.12"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "4.13#2",
+       "label": "Neighbor checks and boundary guards",
+       "kind": "skill",
+       "skills": [
+        "3.D"
+       ],
+       "requires": [
+        "4.13#1"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "4.13#3",
+       "label": "Applying a method to each row",
+       "kind": "skill",
+       "skills": [
+        "2.B"
+       ],
+       "requires": [
+        "4.13#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "4.13#4",
+       "label": "Describing a 2D traversal's effect",
+       "kind": "skill",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [
+        "4.13#1"
+       ],
+       "estLessons": 0.15
+      }
+     ]
+    },
+    {
+     "code": "4.14",
+     "title": "Searching Algorithms",
+     "scope": "both",
+     "skills": [
+      "2.B",
+      "3.B",
+      "4.A"
+     ],
+     "requires": [
+      "4.10"
+     ],
+     "estLessons": 1.25,
+     "subKeywords": [
+      {
+       "code": "4.14#1",
+       "label": "Linear search",
+       "kind": "skill",
+       "skills": [
+        "2.B"
+       ],
+       "requires": [
+        "4.10",
+        "4.5"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "4.14#2",
+       "label": "Binary search on sorted data",
+       "kind": "concept",
+       "skills": [
+        "3.B"
+       ],
+       "requires": [
+        "4.14#1"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "4.14#3",
+       "label": "Binary search requires sorted data",
+       "kind": "misconception",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [
+        "4.14#2"
+       ],
+       "estLessons": 0.15
+      },
+      {
+       "code": "4.14#4",
+       "label": "Tracing low, mid, high",
+       "kind": "skill",
+       "skills": [
+        "3.B"
+       ],
+       "requires": [
+        "4.14#2"
+       ],
+       "estLessons": 0.3
+      }
+     ]
+    },
+    {
+     "code": "4.15",
+     "title": "Sorting Algorithms",
+     "scope": "both",
+     "skills": [
+      "3.B",
+      "4.A",
+      "4.B"
+     ],
+     "requires": [
+      "4.14"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "4.15#1",
+       "label": "Selection sort",
+       "kind": "concept",
+       "skills": [
+        "3.B",
+        "4.A",
+        "4.B"
+       ],
+       "requires": [
+        "4.14"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "4.15#2",
+       "label": "Insertion sort",
+       "kind": "concept",
+       "skills": [
+        "3.B",
+        "4.A",
+        "4.B"
+       ],
+       "requires": [
+        "4.15#1"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "4.15#3",
+       "label": "Tracing sort passes",
+       "kind": "skill",
+       "skills": [
+        "3.B"
+       ],
+       "requires": [
+        "4.15#1",
+        "4.15#2"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "4.15#4",
+       "label": "Mixing up what each pass guarantees",
+       "kind": "misconception",
+       "skills": [
+        "4.B"
+       ],
+       "requires": [
+        "4.15#3"
+       ],
+       "estLessons": 0.3
+      }
+     ]
+    },
+    {
+     "code": "4.16",
+     "title": "Recursion",
+     "scope": "both",
+     "skills": [
+      "3.C",
+      "4.A",
+      "4.B"
+     ],
+     "requires": [
+      "3.6",
+      "2.9"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "4.16#1",
+       "label": "Base case and recursive case",
+       "kind": "concept",
+       "skills": [
+        "3.C",
+        "4.A",
+        "4.B"
+       ],
+       "requires": [
+        "4.15",
+        "3.9"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "4.16#2",
+       "label": "Missing or unreachable base case",
+       "kind": "misconception",
+       "skills": [
+        "4.B"
+       ],
+       "requires": [
+        "4.16#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "4.16#3",
+       "label": "Tracing a call stack",
+       "kind": "skill",
+       "skills": [
+        "3.C"
+       ],
+       "requires": [
+        "4.16#1"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "4.16#4",
+       "label": "Call-tree diagrams",
+       "kind": "representation",
+       "skills": [
+        "3.C"
+       ],
+       "requires": [
+        "4.16#3"
+       ],
+       "estLessons": 0.15
+      },
+      {
+       "code": "4.16#5",
+       "label": "Describing a recursive method",
+       "kind": "skill",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [
+        "4.16#3"
+       ],
+       "estLessons": 0.15
+      }
+     ]
+    },
+    {
+     "code": "4.17",
+     "title": "Recursive Searching and Sorting",
+     "scope": "both",
+     "skills": [
+      "4.A",
+      "4.B"
+     ],
+     "requires": [
+      "4.16",
+      "4.14",
+      "4.15"
+     ],
+     "estLessons": 1.0,
+     "subKeywords": [
+      {
+       "code": "4.17#1",
+       "label": "Recursive binary search",
+       "kind": "skill",
+       "skills": [
+        "4.B"
+       ],
+       "requires": [
+        "4.16"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "4.17#2",
+       "label": "Merge sort idea",
+       "kind": "concept",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [
+        "4.17#1"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "4.17#3",
+       "label": "Comparing iterative and recursive designs",
+       "kind": "skill",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [
+        "4.17#2"
+       ],
+       "estLessons": 0.15
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

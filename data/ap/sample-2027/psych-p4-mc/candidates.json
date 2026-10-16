@@ -1,0 +1,3850 @@
+[
+ {
+  "candidateKey": "ap_psychology-m01-k0",
+  "cellId": "ap_psychology-m01",
+  "apSubjectCode": "ap_psychology",
+  "kind": "mc",
+  "keywordCode": "1.1",
+  "unitCode": "1",
+  "skillPrimary": "1.A",
+  "structure": "shared_stimulus_set",
+  "calculator": "na",
+  "archetype": "pss_u1_twin_reading_q1",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "set_item_2:criterion_failed_stimulus_expression; criterion_failed_stimulus_expression",
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "One-step interpretation of a small table: identical twins correlate more highly than fraternal twins (heredity), but correlations are below 1.0 and fraternal twins still correlate substantially (environment). Distractors use absolute wording ('entirely', 'no influence') and are easily eliminated. Core 1.1 concept, minimal reading, no computation, no out-of-scope content.",
+  "payload": {
+   "archetype": "pss_u1_twin_reading",
+   "topic": "1.1",
+   "skill": "1.A",
+   "calculator": "na",
+   "set_intro": "Researchers studied reading ability in 100 pairs of identical twins and 100 pairs of fraternal twins, all raised together by their families. For each pair, the researchers measured how similar the two twins' reading scores were, using a correlation coefficient. The table shows the results.",
+   "stimulus": {
+    "kind": "table",
+    "description": "Correlation between twins' reading scores",
+    "data": {
+     "columns": [
+      "Type of twin pair",
+      "Number of pairs",
+      "Correlation between the twins' scores"
+     ],
+     "rows": [
+      [
+       "Identical twins",
+       "100",
+       "0.82"
+      ],
+      [
+       "Fraternal twins",
+       "100",
+       "0.55"
+      ]
+     ]
+    }
+   },
+   "items": [
+    {
+     "archetype": "pss_u1_twin_reading_q1",
+     "topic": "1.1",
+     "skill": "1.A",
+     "stem": "Which conclusion about heredity and environment is best supported by the data?",
+     "options": [
+      {
+       "text": "Reading ability is determined entirely by genes.",
+       "why": "Fraternal twins show a considerable correlation, and identical twins' correlation is not 1.0, so other factors matter.",
+       "value": null
+      },
+      {
+       "text": "Heredity and environment have no influence on reading ability.",
+       "why": "Both correlations are positive and substantial.",
+       "value": null
+      },
+      {
+       "text": "Reading ability is determined entirely by the family environment.",
+       "why": "Identical twins are more similar than fraternal twins, which suggests a role for genes.",
+       "value": null
+      },
+      {
+       "text": "Reading ability appears to be influenced by both heredity and environment.",
+       "why": "The identical twins are more similar than the fraternal twins, which suggests a role for heredity, and the fraternal twins are still similar, which is consistent with shared environment.",
+       "value": null
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is Reading ability appears to be influenced by both heredity and environment.. The identical twins are more similar than the fraternal twins, which suggests a role for heredity, and the fraternal twins are still similar, which is consistent with shared environment.\nReading ability is determined entirely by genes. is incorrect: Fraternal twins show a considerable correlation, and identical twins' correlation is not 1.0, so other factors matter.\nHeredity and environment have no influence on reading ability. is incorrect: Both correlations are positive and substantial.\nReading ability is determined entirely by the family environment. is incorrect: Identical twins are more similar than fraternal twins, which suggests a role for genes.",
+     "est_seconds": 70,
+     "blueprint": {
+      "id": "pss_u1_twin_reading_q1",
+      "subject": "ap_psychology",
+      "kind": "mc",
+      "concept": "twin study of reading: heredity, design, correlations",
+      "topic": "1.1",
+      "skill": "1.A",
+      "student_thinking": [
+       "Identify what the scenario or question is asking about: twin study of reading: heredity, design, correlations",
+       "Match the defining feature in the stem against each option and reject the near-miss concepts"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "na",
+      "key_conditions": [
+       {
+        "condition": "the stem contains the defining feature of exactly one option",
+        "evidence": "stem wording"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Fraternal twins show a considerable correlation, and identical twins' correlation is not 1.0, so other factors matter."
+       },
+       {
+        "id": "m2",
+        "description": "Both correlations are positive and substantial."
+       },
+       {
+        "id": "m3",
+        "description": "Identical twins are more similar than fraternal twins, which suggests a role for genes."
+       }
+      ],
+      "verification": {
+       "independent_path": "authored from the CED required content (essential knowledge 1.1.A.3); the key is NOT code-verified: it must be matched by an independent blind solver (Opus), the five-criterion reviewer (Sonnet) and a second independent model panel (Fable and Sonnet blind solves) before the item is used",
+       "method": "authored+blind-solver+panel"
+      },
+      "judgment_demand": [
+       "apply the concept to the scenario"
+      ]
+     }
+    },
+    {
+     "archetype": "pss_u1_twin_reading_q2",
+     "topic": "1.1",
+     "skill": "2.A",
+     "stem": "Why could the researchers not have answered this question with an experiment?",
+     "options": [
+      {
+       "text": "Correlation coefficients cannot be calculated in an experiment.",
+       "why": "Correlations can be computed in any kind of study; the issue is manipulation and assignment.",
+       "value": null
+      },
+      {
+       "text": "Experiments can be done only with people who are not related.",
+       "why": "Experiments can include related participants.",
+       "value": null
+      },
+      {
+       "text": "Participants cannot be randomly assigned to be identical or fraternal twins.",
+       "why": "An experiment requires manipulating the independent variable and randomly assigning participants.",
+       "value": null
+      },
+      {
+       "text": "Twins cannot be given a reading test under identical conditions.",
+       "why": "Testing twins under the same conditions is possible and is not what rules out an experiment.",
+       "value": null
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is Participants cannot be randomly assigned to be identical or fraternal twins.. An experiment requires manipulating the independent variable and randomly assigning participants.\nCorrelation coefficients cannot be calculated in an experiment. is incorrect: Correlations can be computed in any kind of study; the issue is manipulation and assignment.\nExperiments can be done only with people who are not related. is incorrect: Experiments can include related participants.\nTwins cannot be given a reading test under identical conditions. is incorrect: Testing twins under the same conditions is possible and is not what rules out an experiment.",
+     "est_seconds": 55,
+     "blueprint": {
+      "id": "pss_u1_twin_reading_q2",
+      "subject": "ap_psychology",
+      "kind": "mc",
+      "concept": "twin study of reading: heredity, design, correlations",
+      "topic": "1.1",
+      "skill": "2.A",
+      "student_thinking": [
+       "Identify what the scenario or question is asking about: twin study of reading: heredity, design, correlations",
+       "Match the defining feature in the stem against each option and reject the near-miss concepts"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "na",
+      "key_conditions": [
+       {
+        "condition": "the stem contains the defining feature of exactly one option",
+        "evidence": "stem wording"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Correlations can be computed in any kind of study; the issue is manipulation and assignment."
+       },
+       {
+        "id": "m2",
+        "description": "Experiments can include related participants."
+       },
+       {
+        "id": "m3",
+        "description": "Testing twins under the same conditions is possible and is not what rules out an experiment."
+       }
+      ],
+      "verification": {
+       "independent_path": "authored from the CED required content (essential knowledge 1.1.A.3); the key is NOT code-verified: it must be matched by an independent blind solver (Opus), the five-criterion reviewer (Sonnet) and a second independent model panel (Fable and Sonnet blind solves) before the item is used",
+       "method": "authored+blind-solver+panel"
+      },
+      "judgment_demand": [
+       "apply the concept to the scenario"
+      ]
+     }
+    },
+    {
+     "archetype": "pss_u1_twin_reading_q3",
+     "topic": "1.1",
+     "skill": "3.C",
+     "stem": "Which conclusion about the twins' scores is best supported by the table?",
+     "options": [
+      {
+       "text": "The correlations prove that reading ability is inherited.",
+       "why": "Correlational twin data cannot prove inheritance and show that both influences are likely.",
+       "value": null
+      },
+      {
+       "text": "The identical twins' scores were more alike than the fraternal twins' scores, which is consistent with a genetic contribution.",
+       "why": "A correlation of 0.82 is higher than 0.55, but correlations do not give percentages of influence.",
+       "value": null
+      },
+      {
+       "text": "Because identical twins correlate 0.82, 82 percent of reading ability is determined by genes.",
+       "why": "A correlation coefficient does not tell the percentage of a trait caused by genes.",
+       "value": null
+      },
+      {
+       "text": "Because fraternal twins correlate 0.55, the environment explains 55 percent of reading ability.",
+       "why": "A correlation coefficient does not tell the percentage of a trait caused by the environment.",
+       "value": null
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is The identical twins' scores were more alike than the fraternal twins' scores, which is consistent with a genetic contribution.. A correlation of 0.82 is higher than 0.55, but correlations do not give percentages of influence.\nThe correlations prove that reading ability is inherited. is incorrect: Correlational twin data cannot prove inheritance and show that both influences are likely.\nBecause identical twins correlate 0.82, 82 percent of reading ability is determined by genes. is incorrect: A correlation coefficient does not tell the percentage of a trait caused by genes.\nBecause fraternal twins correlate 0.55, the environment explains 55 percent of reading ability. is incorrect: A correlation coefficient does not tell the percentage of a trait caused by the environment.",
+     "est_seconds": 65,
+     "blueprint": {
+      "id": "pss_u1_twin_reading_q3",
+      "subject": "ap_psychology",
+      "kind": "mc",
+      "concept": "twin study of reading: heredity, design, correlations",
+      "topic": "1.1",
+      "skill": "3.C",
+      "student_thinking": [
+       "Identify what the scenario or question is asking about: twin study of reading: heredity, design, correlations",
+       "Match the defining feature in the stem against each option and reject the near-miss concepts"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "na",
+      "key_conditions": [
+       {
+        "condition": "the stem contains the defining feature of exactly one option",
+        "evidence": "stem wording"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Correlational twin data cannot prove inheritance and show that both influences are likely."
+       },
+       {
+        "id": "m2",
+        "description": "A correlation coefficient does not tell the percentage of a trait caused by genes."
+       },
+       {
+        "id": "m3",
+        "description": "A correlation coefficient does not tell the percentage of a trait caused by the environment."
+       }
+      ],
+      "verification": {
+       "independent_path": "authored from the CED required content (essential knowledge 1.1.A.3); the key is NOT code-verified: it must be matched by an independent blind solver (Opus), the five-criterion reviewer (Sonnet) and a second independent model panel (Fable and Sonnet blind solves) before the item is used",
+       "method": "authored+blind-solver+panel"
+      },
+      "judgment_demand": [
+       "apply the concept to the scenario"
+      ]
+     }
+    }
+   ],
+   "set_size": 3,
+   "est_seconds": 190,
+   "facts": [
+    "ek=1.1.A.3"
+   ]
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "pss_u1_twin_reading_q1",
+   "facts": [
+    "ek=1.1.A.3"
+   ],
+   "seed": 11300
+  },
+  "review": [
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Twin study interpretation fits 1.1.A.3 and skill 1.A."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "Key is unique; both-heredity-and-environment is the only supported conclusion."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Table is complete; the stem describes the design and the correlation measure."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Three distinct misconceptions; every wrong option is explained."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "About 70 seconds, no calculation, light reading load."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "Sound twin-study item with a correct, unique key and plausible distractors; acceptable as written."
+   },
+   {
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The key (C) is correct and unique. The stem refers to \"this question\" but never states the research question, so it has a dangling reference and the wording is incomplete. The table is not needed to answer. Distractor A is weakly plausible. A fix is to restate the research question (the influence of heredity on reading ability) in the stem.",
+    "scope_skill": {
+     "pass": true,
+     "notes": "Fits 1.1 and skill 2.A (design reasoning), though the stem asks why an experiment was impossible rather than naming the design."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "C is the only defensible answer."
+    },
+    "stimulus_expression": {
+     "pass": false,
+     "notes": "\"this question\" has no antecedent; the research question must be stated in the stem."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Each wrong option is explained; option A is somewhat implausible."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "Time and load are typical for an AP item."
+    }
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Twin study table interpretation fits 1.1 and 3.C."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "B uniquely correct; A overclaims 'prove'; C and D misread correlation as percent."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Table complete with n and correlations; wording clear."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Distinct misconceptions. Key's 'why' text is awkward and the key option is longer than the others, both minor flaws."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "About 60 seconds, no calculation."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "Sound twin-study table item. The key B is unique and correct, and the distractors target real misconceptions. The wording of the explanations is slightly awkward, and the key option is a bit longer than the others, but neither flaw is serious."
+   }
+  ],
+  "difficulty": [
+   {
+    "label": "basic_learning",
+    "rationale": "One-step interpretation of a small table: identical twins correlate more highly than fraternal twins (heredity), but correlations are below 1.0 and fraternal twins still correlate substantially (environment). Distractors use absolute wording ('entirely', 'no influence') and are easily eliminated. Core 1.1 concept, minimal reading, no computation, no out-of-scope content.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 45
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "Students identify a twin study as a correlational/quasi-experimental design and recognize that twin type cannot be randomly assigned, so no experiment is possible. This is one concept applied to a short scenario. The table is simple and needs no calculation, and the distractors are clearly wrong. The 2.A skill is met through the 'decide the research design from the procedure' lever. The stem asks why the question could not be answered by an experiment, which is slightly indirect, but the wording is clear and has no double negatives.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 45
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "The student reads a 2-row table and selects the conclusion it supports. Identical twins correlate more strongly than fraternal twins, which is consistent with a genetic contribution. The distractors rely on common misconceptions: that a correlation proves causation, or that a correlation coefficient equals the percent of variance explained. Only one core idea is needed and there is no computation. The scope is limited to 1.1 and the wording is straightforward.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 45
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_psychology-m02-k0",
+  "cellId": "ap_psychology-m02",
+  "apSubjectCode": "ap_psychology",
+  "kind": "mc",
+  "keywordCode": "3.5",
+  "unitCode": "3",
+  "skillPrimary": "1.B",
+  "structure": "shared_stimulus_set",
+  "calculator": "na",
+  "archetype": "pss_u3_language_longitudinal_q1",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "set_item_2:criterion_failed_stimulus_expression; criterion_failed_stimulus_expression",
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-step identification of research design from the procedure: the same children are followed repeatedly over time, which indicates a longitudinal design. Distractors (cross-sectional, case study, experiment) are standard and clearly distinguishable. Consent and confidentiality details are non-essential context. Little reasoning is required, so this is a foundational application item.",
+  "payload": {
+   "archetype": "pss_u3_language_longitudinal",
+   "topic": "3.5",
+   "skill": "2.A",
+   "calculator": "na",
+   "set_intro": "A research team followed 80 children from the age of 6 months until the age of 3 years. Every three months, the children visited a lab with a parent, where researchers recorded the sounds and words the children produced during play. At the first visit, the researchers explained the study to the parents, who gave written consent, and parents were told that they could stop their participation at any time. The recordings were identified only by code numbers.",
+   "stimulus": {
+    "kind": "text",
+    "description": "Study description (no table or figure accompanies it)",
+    "data": {}
+   },
+   "items": [
+    {
+     "archetype": "pss_u3_language_longitudinal_q1",
+     "topic": "3.5",
+     "skill": "2.A",
+     "stem": "Which research design did the team use?",
+     "options": [
+      {
+       "text": "Cross-sectional design",
+       "why": "A cross-sectional design compares different age groups at one time.",
+       "value": null
+      },
+      {
+       "text": "Case study",
+       "why": "A case study examines a single individual or very small group in depth.",
+       "value": null
+      },
+      {
+       "text": "Longitudinal design",
+       "why": "The researchers followed the same children repeatedly over time.",
+       "value": null
+      },
+      {
+       "text": "Experiment",
+       "why": "No independent variable was manipulated.",
+       "value": null
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is Longitudinal design. The researchers followed the same children repeatedly over time.\nCross-sectional design is incorrect: A cross-sectional design compares different age groups at one time.\nCase study is incorrect: A case study examines a single individual or very small group in depth.\nExperiment is incorrect: No independent variable was manipulated.",
+     "est_seconds": 55,
+     "blueprint": {
+      "id": "pss_u3_language_longitudinal_q1",
+      "subject": "ap_psychology",
+      "kind": "mc",
+      "concept": "longitudinal language study with young children",
+      "topic": "3.5",
+      "skill": "2.A",
+      "student_thinking": [
+       "Identify what the scenario or question is asking about: longitudinal language study with young children",
+       "Match the defining feature in the stem against each option and reject the near-miss concepts"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "na",
+      "key_conditions": [
+       {
+        "condition": "the stem contains the defining feature of exactly one option",
+        "evidence": "stem wording"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "A cross-sectional design compares different age groups at one time."
+       },
+       {
+        "id": "m2",
+        "description": "A case study examines a single individual or very small group in depth."
+       },
+       {
+        "id": "m3",
+        "description": "No independent variable was manipulated."
+       }
+      ],
+      "verification": {
+       "independent_path": "authored from the CED required content (essential knowledge 3.5.B.1); the key is NOT code-verified: it must be matched by an independent blind solver (Opus), the five-criterion reviewer (Sonnet) and a second independent model panel (Fable and Sonnet blind solves) before the item is used",
+       "method": "authored+blind-solver+panel"
+      },
+      "judgment_demand": [
+       "apply the concept to the scenario"
+      ]
+     }
+    },
+    {
+     "archetype": "pss_u3_language_longitudinal_q2",
+     "topic": "3.5",
+     "skill": "1.A",
+     "stem": "At around 12 months, a child in the study repeatedly says 'ba-ba-ba' and 'da-da-da' but no recognizable words. Which stage of language development is this?",
+     "options": [
+      {
+       "text": "Overgeneralization",
+       "why": "Overgeneralization is the misapplication of language rules, which occurs later.",
+       "value": null
+      },
+      {
+       "text": "Babbling",
+       "why": "Babbling consists of repeated syllables without meaning and appears before the first words.",
+       "value": null
+      },
+      {
+       "text": "Telegraphic speech",
+       "why": "Telegraphic speech consists of short phrases of two or more words.",
+       "value": null
+      },
+      {
+       "text": "The one-word stage",
+       "why": "The one-word stage uses single recognizable words with meaning.",
+       "value": null
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is Babbling. Babbling consists of repeated syllables without meaning and appears before the first words.\nOvergeneralization is incorrect: Overgeneralization is the misapplication of language rules, which occurs later.\nTelegraphic speech is incorrect: Telegraphic speech consists of short phrases of two or more words.\nThe one-word stage is incorrect: The one-word stage uses single recognizable words with meaning.",
+     "est_seconds": 55,
+     "blueprint": {
+      "id": "pss_u3_language_longitudinal_q2",
+      "subject": "ap_psychology",
+      "kind": "mc",
+      "concept": "longitudinal language study with young children",
+      "topic": "3.5",
+      "skill": "1.A",
+      "student_thinking": [
+       "Identify what the scenario or question is asking about: longitudinal language study with young children",
+       "Match the defining feature in the stem against each option and reject the near-miss concepts"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "na",
+      "key_conditions": [
+       {
+        "condition": "the stem contains the defining feature of exactly one option",
+        "evidence": "stem wording"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Overgeneralization is the misapplication of language rules, which occurs later."
+       },
+       {
+        "id": "m2",
+        "description": "Telegraphic speech consists of short phrases of two or more words."
+       },
+       {
+        "id": "m3",
+        "description": "The one-word stage uses single recognizable words with meaning."
+       }
+      ],
+      "verification": {
+       "independent_path": "authored from the CED required content (essential knowledge 3.5.B.1); the key is NOT code-verified: it must be matched by an independent blind solver (Opus), the five-criterion reviewer (Sonnet) and a second independent model panel (Fable and Sonnet blind solves) before the item is used",
+       "method": "authored+blind-solver+panel"
+      },
+      "judgment_demand": [
+       "apply the concept to the scenario"
+      ]
+     }
+    },
+    {
+     "archetype": "pss_u3_language_longitudinal_q3",
+     "topic": "3.5",
+     "skill": "2.D",
+     "stem": "A reviewer asks whether the study protected the children's privacy. Which detail in the description is the strongest evidence that it did?",
+     "options": [
+      {
+       "text": "Parents were told they could stop at any time.",
+       "why": "The right to withdraw is a separate protection from privacy.",
+       "value": null
+      },
+      {
+       "text": "Visits took place in a lab with a parent present.",
+       "why": "A parent's presence reduces distress but does not protect the privacy of the data.",
+       "value": null
+      },
+      {
+       "text": "Parents gave written consent at the first visit.",
+       "why": "Consent concerns agreement to participate, not privacy of the data.",
+       "value": null
+      },
+      {
+       "text": "Recordings were identified only by code numbers.",
+       "why": "Using codes keeps participants' information confidential.",
+       "value": null
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is Recordings were identified only by code numbers.. Using codes keeps participants' information confidential.\nParents were told they could stop at any time. is incorrect: The right to withdraw is a separate protection from privacy.\nVisits took place in a lab with a parent present. is incorrect: A parent's presence reduces distress but does not protect the privacy of the data.\nParents gave written consent at the first visit. is incorrect: Consent concerns agreement to participate, not privacy of the data.",
+     "est_seconds": 60,
+     "blueprint": {
+      "id": "pss_u3_language_longitudinal_q3",
+      "subject": "ap_psychology",
+      "kind": "mc",
+      "concept": "longitudinal language study with young children",
+      "topic": "3.5",
+      "skill": "2.D",
+      "student_thinking": [
+       "Identify what the scenario or question is asking about: longitudinal language study with young children",
+       "Match the defining feature in the stem against each option and reject the near-miss concepts"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "na",
+      "key_conditions": [
+       {
+        "condition": "the stem contains the defining feature of exactly one option",
+        "evidence": "stem wording"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "The right to withdraw is a separate protection from privacy."
+       },
+       {
+        "id": "m2",
+        "description": "A parent's presence reduces distress but does not protect the privacy of the data."
+       },
+       {
+        "id": "m3",
+        "description": "Consent concerns agreement to participate, not privacy of the data."
+       }
+      ],
+      "verification": {
+       "independent_path": "authored from the CED required content (essential knowledge 3.5.B.1); the key is NOT code-verified: it must be matched by an independent blind solver (Opus), the five-criterion reviewer (Sonnet) and a second independent model panel (Fable and Sonnet blind solves) before the item is used",
+       "method": "authored+blind-solver+panel"
+      },
+      "judgment_demand": [
+       "apply the concept to the scenario"
+      ]
+     }
+    }
+   ],
+   "set_size": 3,
+   "est_seconds": 170,
+   "facts": [
+    "ek=3.5.B.1"
+   ]
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "pss_u3_language_longitudinal_q1",
+   "facts": [
+    "ek=3.5.B.1"
+   ],
+   "seed": 11300
+  },
+  "review": [
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": ""
+    },
+    "notes": "About 55 seconds, short reading, no calculator needed.",
+    "key_scoring": {
+     "pass": true,
+     "notes": ""
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": ""
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": ""
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": ""
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "A clean, correct research-design identification item. The key is unique and well supported, and it passes all criteria."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Babbling is a core 3.5 concept (CED 3.5.B). The stem applies a named stage to a scenario, which fits skill 1.A."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "Repeated syllables ba-ba and da-da with no recognizable words at about 12 months is babbling. The key is unique. The one-word stage is excluded by the \"no recognizable words\" wording."
+    },
+    "stimulus_expression": {
+     "pass": false,
+     "notes": "The study description (longitudinal design, consent, code numbers) is irrelevant padding. The question never uses it, so the stimulus is not needed and the shared scenario is decorative. This is a minor flaw, not a correctness problem. The stimulus data object is empty, but the text is clear."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "The distractors are other language stages, each plausible to a student who is unsure. All are clearly wrong for this child. The explanation covers each wrong option. The explanation for telegraphic speech says \"two or more words\", which is acceptable."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "The item takes about 55 seconds, uses four options, and needs no calculator. The padded stem is a bit long. The item is very easy, almost definitional: the stem gives the defining feature of babbling directly. Because it is a plain recall item, I rate it borderline but acceptable."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is correct and has a unique key. The stage-identification task fits topic 3.5, and the distractors are sound. The only weakness is that the first paragraph (consent, code numbers, longitudinal design) has nothing to do with the question, and the item is easy. This is not enough to reject it."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Skill 2.D (evaluate ethical procedures) is the dominant demand. The scenario is a longitudinal language-development study, which fits 3.5 and Unit 3. Confidentiality and anonymity are standard CED ethics content."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "Code-number identification is the only detail that protects the privacy and confidentiality of the data. Consent, the right to withdraw, and parent presence are separate protections or features. The key (D) is unique and matches the blind solver."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "The text-only stem is complete and clear. The empty stimulus data object is acceptable because no table or figure is needed."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Each distractor is a real ethical safeguard that does not address privacy, and the explanation covers each wrong option. The options are parallel in length and format. The key is the most specific detail, but that matches the question asked and is not a giveaway."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "About 60 seconds, no calculator, one dominant skill, four options. The reading load is typical of the exam."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "This is a sound ethics item with one clear key (code numbers protect privacy) and plausible distractors drawn from other ethical protections. It fits the skill and the exam format."
+   }
+  ],
+  "difficulty": [
+   {
+    "label": "basic_learning",
+    "rationale": "Single-step identification of research design from the procedure: the same children are followed repeatedly over time, which indicates a longitudinal design. Distractors (cross-sectional, case study, experiment) are standard and clearly distinguishable. Consent and confidentiality details are non-essential context. Little reasoning is required, so this is a foundational application item.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 1,
+    "representation_changes": 0,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 30
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "Single-concept application: identify babbling from a brief description of repeated syllables without recognizable words. The study-design and ethics details in the stimulus are irrelevant to the question and add minor reading only. Distractors are clearly later stages, with no ambiguity. One reasoning step, no computation, no representation change.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 1,
+    "representation_changes": 0,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 30
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "Single-concept application: students match the privacy/confidentiality safeguard (code numbers) to the scenario and distinguish it from informed consent, right to withdraw, and parental presence. One reasoning step, short text, no computation, no representation changes. The distractors map clearly to other ethical principles, so there is only one defensible answer. Appropriate for foundational ethics-in-research learning rather than a full-mock level of challenge.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 0,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 40
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_psychology-m03-k0",
+  "cellId": "ap_psychology-m03",
+  "apSubjectCode": "ap_psychology",
+  "kind": "mc",
+  "keywordCode": "4.2",
+  "unitCode": "4",
+  "skillPrimary": "1.B",
+  "structure": "shared_stimulus_set",
+  "calculator": "na",
+  "archetype": "pss_u4_initiation_club_q1",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept application: identify cognitive dissonance (effort justification) from a short, classic experiment description. Distractors are clearly unrelated to the scenario, with no computation, no representation changes, and one reasoning step. It is appropriate for foundational learning rather than a full mock's discriminating items.",
+  "payload": {
+   "archetype": "pss_u4_initiation_club",
+   "topic": "4.2",
+   "skill": "1.B",
+   "calculator": "na",
+   "set_intro": "A researcher invited 50 volunteers to join a discussion club. Volunteers were randomly assigned to one of two entrance procedures. In the easy procedure, they simply signed a form. In the demanding procedure, they spent an hour completing a long and tedious set of tasks to qualify. Afterward, all volunteers listened to the same dull recording of a club discussion and rated how interesting and valuable the club seemed on a scale from 1 (not at all) to 10 (extremely). The mean rating was 4.1 in the easy group and 6.8 in the demanding group. After the study, the researcher explained the true purpose of the study and the reason for the different entrance procedures.",
+   "stimulus": {
+    "kind": "text",
+    "description": "Study description (no table or figure accompanies it)",
+    "data": {}
+   },
+   "items": [
+    {
+     "archetype": "pss_u4_initiation_club_q1",
+     "topic": "4.2",
+     "skill": "1.B",
+     "stem": "Which concept best explains why the demanding-procedure group rated the club higher?",
+     "options": [
+      {
+       "text": "Social facilitation",
+       "why": "Social facilitation is a change in performance in the presence of others.",
+       "value": null
+      },
+      {
+       "text": "Out-group homogeneity bias",
+       "why": "Out-group homogeneity is seeing members of other groups as alike.",
+       "value": null
+      },
+      {
+       "text": "Mere exposure effect",
+       "why": "The mere exposure effect is increased liking from repeated exposure.",
+       "value": null
+      },
+      {
+       "text": "Cognitive dissonance",
+       "why": "People reduce the discomfort of conflicting actions and attitudes, here by deciding that a club that cost much effort must be worthwhile.",
+       "value": null
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is Cognitive dissonance. People reduce the discomfort of conflicting actions and attitudes, here by deciding that a club that cost much effort must be worthwhile.\nSocial facilitation is incorrect: Social facilitation is a change in performance in the presence of others.\nOut-group homogeneity bias is incorrect: Out-group homogeneity is seeing members of other groups as alike.\nMere exposure effect is incorrect: The mere exposure effect is increased liking from repeated exposure.",
+     "est_seconds": 60,
+     "blueprint": {
+      "id": "pss_u4_initiation_club_q1",
+      "subject": "ap_psychology",
+      "kind": "mc",
+      "concept": "effort justification study",
+      "topic": "4.2",
+      "skill": "1.B",
+      "student_thinking": [
+       "Identify what the scenario or question is asking about: effort justification study",
+       "Match the defining feature in the stem against each option and reject the near-miss concepts"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "na",
+      "key_conditions": [
+       {
+        "condition": "the stem contains the defining feature of exactly one option",
+        "evidence": "stem wording"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Social facilitation is a change in performance in the presence of others."
+       },
+       {
+        "id": "m2",
+        "description": "Out-group homogeneity is seeing members of other groups as alike."
+       },
+       {
+        "id": "m3",
+        "description": "The mere exposure effect is increased liking from repeated exposure."
+       }
+      ],
+      "verification": {
+       "independent_path": "authored from the CED required content (essential knowledge 4.2.B.2); the key is NOT code-verified: it must be matched by an independent blind solver (Opus), the five-criterion reviewer (Sonnet) and a second independent model panel (Fable and Sonnet blind solves) before the item is used",
+       "method": "authored+blind-solver+panel"
+      },
+      "judgment_demand": [
+       "apply the concept to the scenario"
+      ]
+     }
+    },
+    {
+     "archetype": "pss_u4_initiation_club_q2",
+     "topic": "4.2",
+     "skill": "2.D",
+     "stem": "Which statement best explains why the researcher needed to explain the true purpose of the study afterward?",
+     "options": [
+      {
+       "text": "Volunteers had rated the club on a numeric scale, which is personal data.",
+       "why": "A rating scale does not by itself create an ethical need for explanation.",
+       "value": null
+      },
+      {
+       "text": "Volunteers had been placed in groups at random, which harms them.",
+       "why": "Random assignment is a design feature and is not harmful in itself.",
+       "value": null
+      },
+      {
+       "text": "Volunteers had completed tedious tasks, which always requires a payment.",
+       "why": "Tedious tasks do not by themselves require payment or explanation of the purpose.",
+       "value": null
+      },
+      {
+       "text": "Volunteers had been misled about why the entrance tasks differed.",
+       "why": "When participants are not told the true purpose, researchers must debrief them afterward.",
+       "value": null
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is Volunteers had been misled about why the entrance tasks differed.. When participants are not told the true purpose, researchers must debrief them afterward.\nVolunteers had rated the club on a numeric scale, which is personal data. is incorrect: A rating scale does not by itself create an ethical need for explanation.\nVolunteers had been placed in groups at random, which harms them. is incorrect: Random assignment is a design feature and is not harmful in itself.\nVolunteers had completed tedious tasks, which always requires a payment. is incorrect: Tedious tasks do not by themselves require payment or explanation of the purpose.",
+     "est_seconds": 60,
+     "blueprint": {
+      "id": "pss_u4_initiation_club_q2",
+      "subject": "ap_psychology",
+      "kind": "mc",
+      "concept": "effort justification study",
+      "topic": "4.2",
+      "skill": "2.D",
+      "student_thinking": [
+       "Identify what the scenario or question is asking about: effort justification study",
+       "Match the defining feature in the stem against each option and reject the near-miss concepts"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "na",
+      "key_conditions": [
+       {
+        "condition": "the stem contains the defining feature of exactly one option",
+        "evidence": "stem wording"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "A rating scale does not by itself create an ethical need for explanation."
+       },
+       {
+        "id": "m2",
+        "description": "Random assignment is a design feature and is not harmful in itself."
+       },
+       {
+        "id": "m3",
+        "description": "Tedious tasks do not by themselves require payment or explanation of the purpose."
+       }
+      ],
+      "verification": {
+       "independent_path": "authored from the CED required content (essential knowledge 4.2.B.2); the key is NOT code-verified: it must be matched by an independent blind solver (Opus), the five-criterion reviewer (Sonnet) and a second independent model panel (Fable and Sonnet blind solves) before the item is used",
+       "method": "authored+blind-solver+panel"
+      },
+      "judgment_demand": [
+       "apply the concept to the scenario"
+      ]
+     }
+    },
+    {
+     "archetype": "pss_u4_initiation_club_q3",
+     "topic": "4.2",
+     "skill": "3.A",
+     "stem": "In this study, what is the dependent variable?",
+     "options": [
+      {
+       "text": "The mean rating of how valuable the club seemed",
+       "why": "The dependent variable is the outcome that the researcher measured.",
+       "value": null
+      },
+      {
+       "text": "The difficulty of the entrance procedure",
+       "why": "That is the independent variable the researcher manipulated.",
+       "value": null
+      },
+      {
+       "text": "The number of volunteers",
+       "why": "The number of volunteers is the sample size, not a variable measured as an outcome.",
+       "value": null
+      },
+      {
+       "text": "The recording of the club discussion",
+       "why": "The recording was the same for all volunteers.",
+       "value": null
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is The mean rating of how valuable the club seemed. The dependent variable is the outcome that the researcher measured.\nThe difficulty of the entrance procedure is incorrect: That is the independent variable the researcher manipulated.\nThe number of volunteers is incorrect: The number of volunteers is the sample size, not a variable measured as an outcome.\nThe recording of the club discussion is incorrect: The recording was the same for all volunteers.",
+     "est_seconds": 60,
+     "blueprint": {
+      "id": "pss_u4_initiation_club_q3",
+      "subject": "ap_psychology",
+      "kind": "mc",
+      "concept": "effort justification study",
+      "topic": "4.2",
+      "skill": "3.A",
+      "student_thinking": [
+       "Identify what the scenario or question is asking about: effort justification study",
+       "Match the defining feature in the stem against each option and reject the near-miss concepts"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "na",
+      "key_conditions": [
+       {
+        "condition": "the stem contains the defining feature of exactly one option",
+        "evidence": "stem wording"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "That is the independent variable the researcher manipulated."
+       },
+       {
+        "id": "m2",
+        "description": "The number of volunteers is the sample size, not a variable measured as an outcome."
+       },
+       {
+        "id": "m3",
+        "description": "The recording was the same for all volunteers."
+       }
+      ],
+      "verification": {
+       "independent_path": "authored from the CED required content (essential knowledge 4.2.B.2); the key is NOT code-verified: it must be matched by an independent blind solver (Opus), the five-criterion reviewer (Sonnet) and a second independent model panel (Fable and Sonnet blind solves) before the item is used",
+       "method": "authored+blind-solver+panel"
+      },
+      "judgment_demand": [
+       "apply the concept to the scenario"
+      ]
+     }
+    }
+   ],
+   "set_size": 3,
+   "est_seconds": 180,
+   "facts": [
+    "ek=4.2.B.2"
+   ]
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "pss_u4_initiation_club_q1",
+   "facts": [
+    "ek=4.2.B.2"
+   ],
+   "seed": 11300
+  },
+  "review": [
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Effort justification/cognitive dissonance is core 4.2 content; applying a named concept to a scenario matches 1.B."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "Cognitive dissonance is uniquely correct; other three options do not fit the scenario."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Text scenario is complete: random assignment, same recording, means given. Clear US English."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Distractors are realistic Unit 4 near-miss concepts; each wrong option is explained accurately, if briefly."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "About 60 seconds, no calculation, four parallel options, typical AP length."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "Sound, accurate concept-application item on effort justification (cognitive dissonance). The key is unique, the distractors are plausible but clearly wrong, and the load is appropriate. Pass."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Debriefing after deception is a core ethical standard, so the 2.D skill fits. The effort-justification context belongs to attitude change in 4.2, and the skill is applicable."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "Option D is the only defensible answer. The stem says the researcher explained the \"true purpose\" and \"reason for the different entrance procedures,\" which implies participants were not told it beforehand. The other options are clearly wrong. One minor point is that the deception is implied rather than stated outright."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "The text-only scenario is complete and clear. The data object is empty, which is fine for a text description. The wording \"volunteers had been misled\" is slightly loose, since the stem never explicitly says deception occurred, but it is inferable."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Each distractor is a distinct, plausible-sounding but wrong ethical claim: rating data as personal, random assignment as harmful, and tedious tasks as requiring payment. The explanation covers every wrong option. The distractors are somewhat weak, and \"always requires a payment\" is obviously overstated, but they are acceptable. The key is slightly longer than the others, but not to a degree that gives it away."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "Reading load is short and the item takes about 60 seconds. It has four options and no calculator is needed, which matches the reference pattern."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "A sound ethics item on debriefing after deception, with a unique key and distinct distractors. The item is acceptable."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Effort-justification scenario fits 4.2; identifying the DV is a valid Practice 3 / research-methods skill."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "DV is the mean rating of how valuable the club seemed; unique correct answer."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Text-only stem is complete and clear; empty data object is appropriate."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Distractors reflect IV/DV confusion, sample size, and constant control; each is explained."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "About 60 seconds, no calculator, typical AP level; fairly easy."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "Sound, unambiguous DV-identification item set in an effort-justification context. It passes all five criteria with minor weaknesses (easy, some superfluous stem detail)."
+   }
+  ],
+  "difficulty": [
+   {
+    "label": "basic_learning",
+    "rationale": "Single-concept application: identify cognitive dissonance (effort justification) from a short, classic experiment description. Distractors are clearly unrelated to the scenario, with no computation, no representation changes, and one reasoning step. It is appropriate for foundational learning rather than a full mock's discriminating items.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 1,
+    "representation_changes": 0,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 45
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "Single-step application of one named ethics concept (debriefing after deception) to a short scenario. The distractors are clearly implausible (random assignment is not harmful, numeric ratings are not the issue, tedious tasks do not always require payment), so no fine discrimination between near-miss concepts is needed. Reading is brief, there is no computation, and the scenario is unambiguous.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 0,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 45
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "The item asks only for the dependent variable in a simple two-group experiment. The answer is the club rating, and the three distractors are clearly wrong (the independent variable, the sample size, a constant). It takes one concept, one step, and no data computation beyond reading the stated means. The cognitive dissonance context is not needed to answer. It is a basic research-methods identification at the foundational level, not exam-level integration.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 1,
+    "representation_changes": 0,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 30
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_psychology-m04-k0",
+  "cellId": "ap_psychology-m04",
+  "apSubjectCode": "ap_psychology",
+  "kind": "mc",
+  "keywordCode": "3.6",
+  "unitCode": "3",
+  "skillPrimary": "1.A",
+  "structure": "shared_stimulus_set",
+  "calculator": "na",
+  "archetype": "pss_u3_attachment_style_q1",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "set_item_2:criterion_failed_stimulus_expression; criterion_failed_stimulus_expression",
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single small table with three percentages; the student compares values and rejects a causal claim (correlational design), a false 'most in every group' claim (45% < 50%), and a wrong 'lowest' claim (authoritarian is lowest). Requires only basic table reading and the correlation vs. causation distinction, with no computation and low reading load. It is well suited for foundational practice of skill 3.C rather than full-mock discrimination.",
+  "payload": {
+   "archetype": "pss_u3_attachment_style",
+   "topic": "3.6",
+   "skill": "3.C",
+   "calculator": "na",
+   "set_intro": "Researchers observed 120 toddlers and their primary caregivers. Trained observers rated each caregiver as authoritarian, authoritative, or permissive, using a checklist of behaviors. Weeks later, other observers, who did not know the caregiver ratings, assessed whether each toddler showed a secure attachment. The table shows the percentage of toddlers in each caregiver group who were rated as securely attached.",
+   "stimulus": {
+    "kind": "table",
+    "description": "Toddlers rated as securely attached, by caregiver style",
+    "data": {
+     "columns": [
+      "Caregiver style",
+      "Number of toddlers",
+      "Percentage securely attached"
+     ],
+     "rows": [
+      [
+       "Authoritarian",
+       "40",
+       "45%"
+      ],
+      [
+       "Authoritative",
+       "40",
+       "82%"
+      ],
+      [
+       "Permissive",
+       "40",
+       "58%"
+      ]
+     ]
+    }
+   },
+   "items": [
+    {
+     "archetype": "pss_u3_attachment_style_q1",
+     "topic": "3.6",
+     "skill": "3.C",
+     "stem": "Which conclusion is best supported by the table?",
+     "options": [
+      {
+       "text": "Authoritative parenting causes secure attachment.",
+       "why": "The study is correlational, so the table cannot show a cause.",
+       "value": null
+      },
+      {
+       "text": "Toddlers of authoritative caregivers were more often securely attached than toddlers of authoritarian caregivers.",
+       "why": "The table shows 82 percent for authoritative caregivers and 45 percent for authoritarian caregivers.",
+       "value": null
+      },
+      {
+       "text": "Most toddlers in every group were securely attached.",
+       "why": "Only 45 percent of the authoritarian group was securely attached.",
+       "value": null
+      },
+      {
+       "text": "Permissive parenting produced the lowest percentage of secure attachment.",
+       "why": "The authoritarian group had the lowest percentage, 45 percent.",
+       "value": null
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is Toddlers of authoritative caregivers were more often securely attached than toddlers of authoritarian caregivers.. The table shows 82 percent for authoritative caregivers and 45 percent for authoritarian caregivers.\nAuthoritative parenting causes secure attachment. is incorrect: The study is correlational, so the table cannot show a cause.\nMost toddlers in every group were securely attached. is incorrect: Only 45 percent of the authoritarian group was securely attached.\nPermissive parenting produced the lowest percentage of secure attachment. is incorrect: The authoritarian group had the lowest percentage, 45 percent.",
+     "est_seconds": 60,
+     "blueprint": {
+      "id": "pss_u3_attachment_style_q1",
+      "subject": "ap_psychology",
+      "kind": "mc",
+      "concept": "parenting and attachment survey",
+      "topic": "3.6",
+      "skill": "3.C",
+      "student_thinking": [
+       "Identify what the scenario or question is asking about: parenting and attachment survey",
+       "Match the defining feature in the stem against each option and reject the near-miss concepts"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "na",
+      "key_conditions": [
+       {
+        "condition": "the stem contains the defining feature of exactly one option",
+        "evidence": "stem wording"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "The study is correlational, so the table cannot show a cause."
+       },
+       {
+        "id": "m2",
+        "description": "Only 45 percent of the authoritarian group was securely attached."
+       },
+       {
+        "id": "m3",
+        "description": "The authoritarian group had the lowest percentage, 45 percent."
+       }
+      ],
+      "verification": {
+       "independent_path": "authored from the CED required content (essential knowledge 3.6.A.2); the key is NOT code-verified: it must be matched by an independent blind solver (Opus), the five-criterion reviewer (Sonnet) and a second independent model panel (Fable and Sonnet blind solves) before the item is used",
+       "method": "authored+blind-solver+panel"
+      },
+      "judgment_demand": [
+       "apply the concept to the scenario"
+      ]
+     }
+    },
+    {
+     "archetype": "pss_u3_attachment_style_q2",
+     "topic": "3.6",
+     "skill": "2.A",
+     "stem": "Which research design best describes this study?",
+     "options": [
+      {
+       "text": "Correlational study",
+       "why": "The researchers measured two existing variables and compared them without assigning families to parenting styles.",
+       "value": null
+      },
+      {
+       "text": "Meta-analysis",
+       "why": "A meta-analysis combines the results of many earlier studies.",
+       "value": null
+      },
+      {
+       "text": "Experiment",
+       "why": "The researchers did not assign caregivers to a parenting style.",
+       "value": null
+      },
+      {
+       "text": "Case study",
+       "why": "A case study focuses on one individual or a very small group.",
+       "value": null
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is Correlational study. The researchers measured two existing variables and compared them without assigning families to parenting styles.\nMeta-analysis is incorrect: A meta-analysis combines the results of many earlier studies.\nExperiment is incorrect: The researchers did not assign caregivers to a parenting style.\nCase study is incorrect: A case study focuses on one individual or a very small group.",
+     "est_seconds": 60,
+     "blueprint": {
+      "id": "pss_u3_attachment_style_q2",
+      "subject": "ap_psychology",
+      "kind": "mc",
+      "concept": "parenting and attachment survey",
+      "topic": "3.6",
+      "skill": "2.A",
+      "student_thinking": [
+       "Identify what the scenario or question is asking about: parenting and attachment survey",
+       "Match the defining feature in the stem against each option and reject the near-miss concepts"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "na",
+      "key_conditions": [
+       {
+        "condition": "the stem contains the defining feature of exactly one option",
+        "evidence": "stem wording"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "A meta-analysis combines the results of many earlier studies."
+       },
+       {
+        "id": "m2",
+        "description": "The researchers did not assign caregivers to a parenting style."
+       },
+       {
+        "id": "m3",
+        "description": "A case study focuses on one individual or a very small group."
+       }
+      ],
+      "verification": {
+       "independent_path": "authored from the CED required content (essential knowledge 3.6.A.2); the key is NOT code-verified: it must be matched by an independent blind solver (Opus), the five-criterion reviewer (Sonnet) and a second independent model panel (Fable and Sonnet blind solves) before the item is used",
+       "method": "authored+blind-solver+panel"
+      },
+      "judgment_demand": [
+       "apply the concept to the scenario"
+      ]
+     }
+    },
+    {
+     "archetype": "pss_u3_attachment_style_q3",
+     "topic": "3.6",
+     "skill": "2.C",
+     "stem": "The observers who assessed the toddlers' attachment did not know the caregiver ratings. This feature of the design helps control for",
+     "options": [
+      {
+       "text": "Social desirability bias",
+       "why": "Social desirability bias concerns participants' answers.",
+       "value": null
+      },
+      {
+       "text": "Observer bias",
+       "why": "Keeping assessors unaware of the other variable prevents their expectations from influencing their ratings.",
+       "value": null
+      },
+      {
+       "text": "Directionality",
+       "why": "Directionality concerns which variable causes the other, which blinding does not resolve.",
+       "value": null
+      },
+      {
+       "text": "Sampling bias",
+       "why": "Sampling bias concerns who is selected for the study.",
+       "value": null
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is Observer bias. Keeping assessors unaware of the other variable prevents their expectations from influencing their ratings.\nSocial desirability bias is incorrect: Social desirability bias concerns participants' answers.\nDirectionality is incorrect: Directionality concerns which variable causes the other, which blinding does not resolve.\nSampling bias is incorrect: Sampling bias concerns who is selected for the study.",
+     "est_seconds": 65,
+     "blueprint": {
+      "id": "pss_u3_attachment_style_q3",
+      "subject": "ap_psychology",
+      "kind": "mc",
+      "concept": "parenting and attachment survey",
+      "topic": "3.6",
+      "skill": "2.C",
+      "student_thinking": [
+       "Identify what the scenario or question is asking about: parenting and attachment survey",
+       "Match the defining feature in the stem against each option and reject the near-miss concepts"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "na",
+      "key_conditions": [
+       {
+        "condition": "the stem contains the defining feature of exactly one option",
+        "evidence": "stem wording"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Social desirability bias concerns participants' answers."
+       },
+       {
+        "id": "m2",
+        "description": "Directionality concerns which variable causes the other, which blinding does not resolve."
+       },
+       {
+        "id": "m3",
+        "description": "Sampling bias concerns who is selected for the study."
+       }
+      ],
+      "verification": {
+       "independent_path": "authored from the CED required content (essential knowledge 3.6.A.2); the key is NOT code-verified: it must be matched by an independent blind solver (Opus), the five-criterion reviewer (Sonnet) and a second independent model panel (Fable and Sonnet blind solves) before the item is used",
+       "method": "authored+blind-solver+panel"
+      },
+      "judgment_demand": [
+       "apply the concept to the scenario"
+      ]
+     }
+    }
+   ],
+   "set_size": 3,
+   "est_seconds": 185,
+   "facts": [
+    "ek=3.6.A.2"
+   ]
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "pss_u3_attachment_style_q1",
+   "facts": [
+    "ek=3.6.A.2"
+   ],
+   "seed": 11300
+  },
+  "review": [
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Table interpretation within 3.6 parenting and attachment; fits 3.C."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "B is uniquely supported: 82% vs 45%. A overclaims causation, C false, D false."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Table is complete and clear. Minor flaw: 82% of 40 is 32.8, not a whole number of toddlers."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Distinct misconceptions (causal overreach, majority misread, wrong lowest group); each is explained."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "About 60 seconds, no calculator, four options, typical AP format."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is sound. The key (B) is unique and the distractors are distinct, plausible errors. The only flaw is minor: 82% of 40 toddlers is not a whole number, which does not affect the key."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Design identification in a 3.6 parenting/attachment context."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "Correlational is the unique defensible answer; no manipulation or assignment."
+    },
+    "stimulus_expression": {
+     "pass": false,
+     "notes": "82% of 40 = 32.8 and 58% of 40 = 23.2 are not whole toddlers, so the table is internally inconsistent. Fix by using percentages that give whole counts, e.g., 45%, 80%, 60%."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "All options are explained. Meta-analysis and case study are weak distractors but acceptable."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "Short, with no calculation needed."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The key (correlational) is correct and the item is in scope. The table has impossible counts: 82% and 58% of 40 toddlers are not whole numbers. The percentages need correcting before use."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Parenting/attachment context fits 3.6; evaluating blinding in an observational study fits 2.C."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "Observer bias is the unique correct answer; blinding assessors does not address the other three options."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Table is complete and internally consistent; stem is clear. The table is not strictly needed but is harmless."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Distractors are distinct, plausible near-misses, and each is explained."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "About 65 seconds, no calculation, four options, typical of AP."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "Sound item: blinding the attachment assessors controls for observer bias, and the other options are clearly wrong. It passes all five criteria."
+   }
+  ],
+  "difficulty": [
+   {
+    "label": "basic_learning",
+    "rationale": "Single small table with three percentages; the student compares values and rejects a causal claim (correlational design), a false 'most in every group' claim (45% < 50%), and a wrong 'lowest' claim (authoritarian is lowest). Requires only basic table reading and the correlation vs. causation distinction, with no computation and low reading load. It is well suited for foundational practice of skill 3.C rather than full-mock discrimination.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 45
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "Single-concept design identification: caregiver style is measured, not manipulated, and there is no random assignment, so the design is correlational. Distractors (meta-analysis, experiment, case study) are clearly distinct from the procedure described. The table is simple and needs no computation. The blinded observers are a minor detail that could tempt students toward 'experiment' but does not create real ambiguity.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 45
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "Single-concept application: recognize that blinding observers to caregiver ratings controls observer bias. The table is context only and is not needed to answer. Distractors are CED research terms, with social desirability the only mild near-miss. No computation, short reading, one reasoning step, no unfair difficulty sources.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 40
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_psychology-m05-k0",
+  "cellId": "ap_psychology-m05",
+  "apSubjectCode": "ap_psychology",
+  "kind": "mc",
+  "keywordCode": "2.7",
+  "unitCode": "2",
+  "skillPrimary": "1.A",
+  "structure": "shared_stimulus_set",
+  "calculator": "na",
+  "archetype": "pss_u2_eyewitness_speed_q1",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept application: the scenario is a textbook Loftus-style misinformation paradigm (post-event misleading info alters recall of the original event). The table is simple and supports but is not needed for the answer. Distractors (context-dependent memory, proactive interference, serial position) are in-scope but clearly distinguishable; proactive interference is a mild near-miss since the misleading info came after the event (retroactive direction). One defensible answer, no trick wording, no calculation.",
+  "payload": {
+   "archetype": "pss_u2_eyewitness_speed",
+   "topic": "2.7",
+   "skill": "1.A",
+   "calculator": "na",
+   "set_intro": "In a laboratory study, 80 students watched the same short video of a minor bicycle accident. Afterward, students were randomly assigned to read one of two written summaries of the video. The summary for half of the students (the Accurate group) described only what the video showed. The summary for the other half (the Misleading group) also mentioned a red helmet, although no one in the video wore a helmet. One week later, all students answered a recall questionnaire. The table shows the results.",
+   "stimulus": {
+    "kind": "table",
+    "description": "Results of the eyewitness study",
+    "data": {
+     "columns": [
+      "Summary read",
+      "Students",
+      "Students who said the rider wore a red helmet"
+     ],
+     "rows": [
+      [
+       "Accurate",
+       "40",
+       "4"
+      ],
+      [
+       "Misleading",
+       "40",
+       "17"
+      ]
+     ]
+    }
+   },
+   "items": [
+    {
+     "archetype": "pss_u2_eyewitness_speed_q1",
+     "topic": "2.7",
+     "skill": "1.A",
+     "stem": "Which concept is best illustrated by the students who recalled a helmet that was not in the video?",
+     "options": [
+      {
+       "text": "Context-dependent memory",
+       "why": "Context-dependent memory concerns retrieval in the same environment as encoding.",
+       "value": null
+      },
+      {
+       "text": "Proactive interference",
+       "why": "Proactive interference concerns old information disrupting new learning.",
+       "value": null
+      },
+      {
+       "text": "Misinformation effect",
+       "why": "Misleading information introduced after an event can alter memory of the event.",
+       "value": null
+      },
+      {
+       "text": "Serial position effect",
+       "why": "The serial position effect concerns memory for items by position in a list.",
+       "value": null
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is Misinformation effect. Misleading information introduced after an event can alter memory of the event.\nContext-dependent memory is incorrect: Context-dependent memory concerns retrieval in the same environment as encoding.\nProactive interference is incorrect: Proactive interference concerns old information disrupting new learning.\nSerial position effect is incorrect: The serial position effect concerns memory for items by position in a list.",
+     "est_seconds": 60,
+     "blueprint": {
+      "id": "pss_u2_eyewitness_speed_q1",
+      "subject": "ap_psychology",
+      "kind": "mc",
+      "concept": "eyewitness memory and post-event information",
+      "topic": "2.7",
+      "skill": "1.A",
+      "student_thinking": [
+       "Identify what the scenario or question is asking about: eyewitness memory and post-event information",
+       "Match the defining feature in the stem against each option and reject the near-miss concepts"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "na",
+      "key_conditions": [
+       {
+        "condition": "the stem contains the defining feature of exactly one option",
+        "evidence": "stem wording"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Context-dependent memory concerns retrieval in the same environment as encoding."
+       },
+       {
+        "id": "m2",
+        "description": "Proactive interference concerns old information disrupting new learning."
+       },
+       {
+        "id": "m3",
+        "description": "The serial position effect concerns memory for items by position in a list."
+       }
+      ],
+      "verification": {
+       "independent_path": "authored from the CED required content (essential knowledge 2.7.A.4); the key is NOT code-verified: it must be matched by an independent blind solver (Opus), the five-criterion reviewer (Sonnet) and a second independent model panel (Fable and Sonnet blind solves) before the item is used",
+       "method": "authored+blind-solver+panel"
+      },
+      "judgment_demand": [
+       "apply the concept to the scenario"
+      ]
+     }
+    },
+    {
+     "archetype": "pss_u2_eyewitness_speed_q2",
+     "topic": "2.7",
+     "skill": "2.B",
+     "stem": "What is the independent variable in this experiment?",
+     "options": [
+      {
+       "text": "The number of students who recalled the helmet",
+       "why": "That is the dependent variable that was measured.",
+       "value": null
+      },
+      {
+       "text": "The video the students watched",
+       "why": "All students watched the same video, so it did not vary.",
+       "value": null
+      },
+      {
+       "text": "Whether the written summary contained the false detail",
+       "why": "The researchers manipulated the content of the summary.",
+       "value": null
+      },
+      {
+       "text": "The week of delay before the questionnaire",
+       "why": "The delay was the same for every student.",
+       "value": null
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is Whether the written summary contained the false detail. The researchers manipulated the content of the summary.\nThe number of students who recalled the helmet is incorrect: That is the dependent variable that was measured.\nThe video the students watched is incorrect: All students watched the same video, so it did not vary.\nThe week of delay before the questionnaire is incorrect: The delay was the same for every student.",
+     "est_seconds": 55,
+     "blueprint": {
+      "id": "pss_u2_eyewitness_speed_q2",
+      "subject": "ap_psychology",
+      "kind": "mc",
+      "concept": "eyewitness memory and post-event information",
+      "topic": "2.7",
+      "skill": "2.B",
+      "student_thinking": [
+       "Identify what the scenario or question is asking about: eyewitness memory and post-event information",
+       "Match the defining feature in the stem against each option and reject the near-miss concepts"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "na",
+      "key_conditions": [
+       {
+        "condition": "the stem contains the defining feature of exactly one option",
+        "evidence": "stem wording"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "That is the dependent variable that was measured."
+       },
+       {
+        "id": "m2",
+        "description": "All students watched the same video, so it did not vary."
+       },
+       {
+        "id": "m3",
+        "description": "The delay was the same for every student."
+       }
+      ],
+      "verification": {
+       "independent_path": "authored from the CED required content (essential knowledge 2.7.A.4); the key is NOT code-verified: it must be matched by an independent blind solver (Opus), the five-criterion reviewer (Sonnet) and a second independent model panel (Fable and Sonnet blind solves) before the item is used",
+       "method": "authored+blind-solver+panel"
+      },
+      "judgment_demand": [
+       "apply the concept to the scenario"
+      ]
+     }
+    },
+    {
+     "archetype": "pss_u2_eyewitness_speed_q3",
+     "topic": "2.7",
+     "skill": "3.C",
+     "stem": "Which conclusion is best supported by the results in the table?",
+     "options": [
+      {
+       "text": "More students who read the misleading summary reported a helmet.",
+       "why": "The numbers are 17 of 40 and 4 of 40.",
+       "value": null
+      },
+      {
+       "text": "The accurate summary eliminated every false report of a helmet.",
+       "why": "Four students in the accurate group still reported a helmet.",
+       "value": null
+      },
+      {
+       "text": "The two summaries had no effect on what students reported.",
+       "why": "The two groups differ, with 4 and 17 students reporting the helmet.",
+       "value": null
+      },
+      {
+       "text": "Reading the misleading summary made most students report a helmet.",
+       "why": "17 of 40 is fewer than half.",
+       "value": null
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is More students who read the misleading summary reported a helmet.. The numbers are 17 of 40 and 4 of 40.\nThe accurate summary eliminated every false report of a helmet. is incorrect: Four students in the accurate group still reported a helmet.\nThe two summaries had no effect on what students reported. is incorrect: The two groups differ, with 4 and 17 students reporting the helmet.\nReading the misleading summary made most students report a helmet. is incorrect: 17 of 40 is fewer than half.",
+     "est_seconds": 65,
+     "blueprint": {
+      "id": "pss_u2_eyewitness_speed_q3",
+      "subject": "ap_psychology",
+      "kind": "mc",
+      "concept": "eyewitness memory and post-event information",
+      "topic": "2.7",
+      "skill": "3.C",
+      "student_thinking": [
+       "Identify what the scenario or question is asking about: eyewitness memory and post-event information",
+       "Match the defining feature in the stem against each option and reject the near-miss concepts"
+      ],
+      "structure": "standalone",
+      "response_mode": "select",
+      "calculator": "na",
+      "key_conditions": [
+       {
+        "condition": "the stem contains the defining feature of exactly one option",
+        "evidence": "stem wording"
+       }
+      ],
+      "material": {
+       "type": "none",
+       "must_include": []
+      },
+      "misconceptions": [
+       {
+        "id": "m1",
+        "description": "Four students in the accurate group still reported a helmet."
+       },
+       {
+        "id": "m2",
+        "description": "The two groups differ, with 4 and 17 students reporting the helmet."
+       },
+       {
+        "id": "m3",
+        "description": "17 of 40 is fewer than half."
+       }
+      ],
+      "verification": {
+       "independent_path": "authored from the CED required content (essential knowledge 2.7.A.4); the key is NOT code-verified: it must be matched by an independent blind solver (Opus), the five-criterion reviewer (Sonnet) and a second independent model panel (Fable and Sonnet blind solves) before the item is used",
+       "method": "authored+blind-solver+panel"
+      },
+      "judgment_demand": [
+       "apply the concept to the scenario"
+      ]
+     }
+    }
+   ],
+   "set_size": 3,
+   "est_seconds": 180,
+   "facts": [
+    "ek=2.7.A.4"
+   ]
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "pss_u2_eyewitness_speed_q1",
+   "facts": [
+    "ek=2.7.A.4"
+   ],
+   "seed": 11300
+  },
+  "review": [
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Misinformation effect application, topic 2.7, skill 1.A."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "Misinformation effect is the unique correct answer."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Table complete and consistent with stem; clear wording."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Each distractor is a distinct near-miss memory concept and is explained."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "About 60 seconds, no calculation, parallel short options. The table is somewhat redundant but harmless."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "A sound concept-application item. The key is correct, the distractors are clearly wrong, and the stimulus is complete. It passes all five criteria."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Misinformation effect scenario; IV identification is Practice 2 experimental design."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "Summary content is the manipulated variable; unique correct answer."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Table complete and consistent; stem clear."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Distinct misconceptions (DV vs IV, constants); each explained. The constant-variable distractors are somewhat weak but acceptable."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "About 55 seconds, no calculator, four options."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "Sound, unambiguous IV-identification item in an eyewitness-memory context; the key is correct and every distractor is explained."
+   },
+   {
+    "scope_skill": {
+     "pass": true,
+     "notes": "Misinformation effect (2.7) with table reading (3.C); fits."
+    },
+    "key_scoring": {
+     "pass": true,
+     "notes": "A uniquely correct: 17/40 vs 4/40. B, C, D clearly false."
+    },
+    "stimulus_expression": {
+     "pass": true,
+     "notes": "Table complete; random assignment stated; clear wording."
+    },
+    "distractor_explanation": {
+     "pass": true,
+     "notes": "Distractors are plausible misreadings (eliminated, no effect, majority); each explained."
+    },
+    "exam_suitability": {
+     "pass": true,
+     "notes": "About 65 s, no calculation; somewhat easy but acceptable."
+    },
+    "instant_reject": [],
+    "matches_reference_pattern": true,
+    "resembles_known_exam_item": false,
+    "summary": "The item is sound and passes all five criteria. The key (A) is unique and correct, the table is complete, and the distractors are plausible misreadings that are each explained. The item is easy, but that is acceptable."
+   }
+  ],
+  "difficulty": [
+   {
+    "label": "basic_learning",
+    "rationale": "Single-concept application: the scenario is a textbook Loftus-style misinformation paradigm (post-event misleading info alters recall of the original event). The table is simple and supports but is not needed for the answer. Distractors (context-dependent memory, proactive interference, serial position) are in-scope but clearly distinguishable; proactive interference is a mild near-miss since the misleading info came after the event (retroactive direction). One defensible answer, no trick wording, no calculation.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 45
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "Single-concept application: identify the independent variable from a clearly described two-group, randomly assigned experiment. The distractors (dependent variable, constant video, constant delay) are standard near-misses, but the manipulated variable is explicit in the procedure. The table is supplementary and not needed to answer. There is no computation, ambiguity, or out-of-scope content.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 40
+   },
+   {
+    "label": "basic_learning",
+    "rationale": "Single comparison of two counts (4 vs 17 of 40) in a small two-row table. The distractors are eliminated by simple checks: 4 students in the Accurate group still reported a helmet, the groups clearly differ, and 17/40 is less than half. The concept (misinformation effect) is applied at a basic level, with no design evaluation or multi-step inference. Wording is straightforward and there are no unfair difficulty sources.",
+    "reading_load": "low",
+    "computation_load": "low",
+    "reasoning_steps": 2,
+    "representation_changes": 1,
+    "difficulty_from_unfair_sources": false,
+    "est_seconds": 45
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_psychology-m06-k0",
+  "cellId": "ap_psychology-m06",
+  "apSubjectCode": "ap_psychology",
+  "kind": "mc",
+  "keywordCode": "5.3",
+  "unitCode": "5",
+  "skillPrimary": "2.D",
+  "structure": "standalone",
+  "calculator": "na",
+  "archetype": "ps_r_casestudy_confidential",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept application: the scenario directly describes anonymizing identifying details, which maps to confidentiality. Distractors (informed consent, debriefing, protection from harm) are clearly distinct from the described action, so there is no ambiguity. One short reading, no computation, no representation changes. This matches the allowed lever of evaluating an ethical feature of a study at a recall/application level, so it is better suited to basic learning than full-mock exam prep.",
+  "payload": {
+   "archetype": "ps_r_casestudy_confidential",
+   "topic": "5.3",
+   "skill": "2.D",
+   "calculator": "na",
+   "stem": "A psychologist writes a journal article about a client who developed a rare phobia. In the article she uses a different first name, leaves out the client's workplace, and changes the city. Which ethical guideline is she primarily applying?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Informed consent",
+     "why": "Informed consent concerns agreeing to take part with knowledge of the procedures, not protecting identity in a report.",
+     "value": null
+    },
+    {
+     "text": "Debriefing",
+     "why": "Debriefing is an explanation of a study's purpose after participation.",
+     "value": null
+    },
+    {
+     "text": "Protection from harm",
+     "why": "Protection from harm concerns reducing risks from procedures, not hiding identifying details.",
+     "value": null
+    },
+    {
+     "text": "Confidentiality",
+     "why": "Confidentiality means keeping participant information private and unidentifiable.",
+     "value": null
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 60,
+   "facts": [
+    "ek=5.3.A"
+   ],
+   "variant_id": "62a4b6c7f38b",
+   "blueprint": {
+    "id": "ps_r_casestudy_confidential",
+    "subject": "ap_psychology",
+    "kind": "mc",
+    "concept": "confidentiality and anonymity",
+    "topic": "5.3",
+    "skill": "2.D",
+    "student_thinking": [
+     "Identify what the scenario or question is asking about: confidentiality and anonymity",
+     "Match the defining feature in the stem against each option and reject the near-miss concepts"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "na",
+    "key_conditions": [
+     {
+      "condition": "the stem contains the defining feature of exactly one option",
+      "evidence": "stem wording"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Informed consent concerns agreeing to take part with knowledge of the procedures, not protecting identity in a report."
+     },
+     {
+      "id": "m2",
+      "description": "Debriefing is an explanation of a study's purpose after participation."
+     },
+     {
+      "id": "m3",
+      "description": "Protection from harm concerns reducing risks from procedures, not hiding identifying details."
+     }
+    ],
+    "verification": {
+     "independent_path": "authored from the CED required content (essential knowledge 5.3.A); the key is NOT code-verified: it must be matched by an independent blind solver (Opus), the five-criterion reviewer (Sonnet) and a second independent model panel (Fable and Sonnet blind solves) before the item is used",
+     "method": "authored+blind-solver+panel"
+    },
+    "judgment_demand": [
+     "apply the concept to the scenario"
+    ]
+   },
+   "seed": 11300,
+   "pack_id": "ps_r_casestudy_confidential-s11300",
+   "explanation_en": "The correct answer is Confidentiality. Confidentiality means keeping participant information private and unidentifiable.\nInformed consent is incorrect: Informed consent concerns agreeing to take part with knowledge of the procedures, not protecting identity in a report.\nDebriefing is incorrect: Debriefing is an explanation of a study's purpose after participation.\nProtection from harm is incorrect: Protection from harm concerns reducing risks from procedures, not hiding identifying details."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ps_r_casestudy_confidential",
+   "facts": [
+    "ek=5.3.A"
+   ],
+   "seed": 11300
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key (Confidentiality) is the unique defensible answer. The distractors are distinct near-miss ethics concepts and the explanation covers each. The topic label 5.3 is loose, but Practice 2 items may carry a loose label, and the phobia context fits Unit 5. The item is concise and suited to about 60 seconds.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept application: the scenario directly describes anonymizing identifying details, which maps to confidentiality. Distractors (informed consent, debriefing, protection from harm) are clearly distinct from the described action, so there is no ambiguity. One short reading, no computation, no representation changes. This matches the allowed lever of evaluating an ethical feature of a study at a recall/application level, so it is better suited to basic learning than full-mock exam prep.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 25
+  }
+ },
+ {
+  "candidateKey": "ap_psychology-m06-k1",
+  "cellId": "ap_psychology-m06",
+  "apSubjectCode": "ap_psychology",
+  "kind": "mc",
+  "keywordCode": "5.3",
+  "unitCode": "5",
+  "skillPrimary": "2.D",
+  "structure": "standalone",
+  "calculator": "na",
+  "archetype": "ps_r_casestudy_confidential",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "criterion_failed_exam_suitability; reference_pattern_mismatch",
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single ethical concept (anonymity) applied to a short scenario. The only discrimination is anonymity vs. confidentiality, and the scenario explicitly says no identifying information is collected, so one answer is clearly correct. One reasoning step, no computation, minimal reading, no representation changes.",
+  "payload": {
+   "archetype": "ps_r_casestudy_confidential",
+   "topic": "5.3",
+   "skill": "2.D",
+   "calculator": "na",
+   "stem": "A research team surveys students about anxiety using forms that contain no name, student ID, or other identifying information. Which concept best describes this practice?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Debriefing",
+     "why": "Debriefing is an explanation given after participation.",
+     "value": null
+    },
+    {
+     "text": "Confidentiality of recorded names",
+     "why": "Confidentiality applies when names are known to the researchers but kept private, which is not the case here.",
+     "value": null
+    },
+    {
+     "text": "Anonymity",
+     "why": "Anonymity means that participants cannot be identified from the data at all.",
+     "value": null
+    },
+    {
+     "text": "Informed assent",
+     "why": "Assent is a minor's agreement to take part and does not describe unidentifiable forms.",
+     "value": null
+    }
+   ],
+   "key_index": 2,
+   "est_seconds": 60,
+   "facts": [
+    "ek=5.3.A"
+   ],
+   "variant_id": "de9cd1696df2",
+   "blueprint": {
+    "id": "ps_r_casestudy_confidential",
+    "subject": "ap_psychology",
+    "kind": "mc",
+    "concept": "confidentiality and anonymity",
+    "topic": "5.3",
+    "skill": "2.D",
+    "student_thinking": [
+     "Identify what the scenario or question is asking about: confidentiality and anonymity",
+     "Match the defining feature in the stem against each option and reject the near-miss concepts"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "na",
+    "key_conditions": [
+     {
+      "condition": "the stem contains the defining feature of exactly one option",
+      "evidence": "stem wording"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Debriefing is an explanation given after participation."
+     },
+     {
+      "id": "m2",
+      "description": "Confidentiality applies when names are known to the researchers but kept private, which is not the case here."
+     },
+     {
+      "id": "m3",
+      "description": "Assent is a minor's agreement to take part and does not describe unidentifiable forms."
+     }
+    ],
+    "verification": {
+     "independent_path": "authored from the CED required content (essential knowledge 5.3.A); the key is NOT code-verified: it must be matched by an independent blind solver (Opus), the five-criterion reviewer (Sonnet) and a second independent model panel (Fable and Sonnet blind solves) before the item is used",
+     "method": "authored+blind-solver+panel"
+    },
+    "judgment_demand": [
+     "apply the concept to the scenario"
+    ]
+   },
+   "seed": 11302,
+   "pack_id": "ps_r_casestudy_confidential-s11302",
+   "explanation_en": "The correct answer is Anonymity. Anonymity means that participants cannot be identified from the data at all.\nDebriefing is incorrect: Debriefing is an explanation given after participation.\nConfidentiality of recorded names is incorrect: Confidentiality applies when names are known to the researchers but kept private, which is not the case here.\nInformed assent is incorrect: Assent is a minor's agreement to take part and does not describe unidentifiable forms."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ps_r_casestudy_confidential",
+   "facts": [
+    "ek=5.3.A"
+   ],
+   "seed": 11302
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The stem essentially restates the definition of anonymity (no identifying information), so the item is pure recall with a thin scenario. It does not require evaluating ethical procedures in a study. Informed assent is a weak distractor.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and unique, but the stem restates the definition of the keyed term, so the item is recall and does not evaluate ethical procedures. The topic label (5.3) is loose. Recommend fail on exam suitability."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single ethical concept (anonymity) applied to a short scenario. The only discrimination is anonymity vs. confidentiality, and the scenario explicitly says no identifying information is collected, so one answer is clearly correct. One reasoning step, no computation, minimal reading, no representation changes.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 25
+  }
+ },
+ {
+  "candidateKey": "ap_psychology-m07-k0",
+  "cellId": "ap_psychology-m07",
+  "apSubjectCode": "ap_psychology",
+  "kind": "mc",
+  "keywordCode": "4.5",
+  "unitCode": "4",
+  "skillPrimary": "2.A",
+  "structure": "standalone",
+  "calculator": "na",
+  "archetype": "ps_r_personality_design",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-step identification of a correlational design from a short procedure: two measured variables, no manipulation, a relationship calculated. Distractors are clearly distinguishable (observation, meta-analysis, experiment). The Big Five conscientiousness context is incidental and requires no trait-theory knowledge. Minimal reading, no computation, one representation.",
+  "payload": {
+   "archetype": "ps_r_personality_design",
+   "topic": "4.5",
+   "skill": "2.A",
+   "calculator": "na",
+   "stem": "A researcher asks 300 adults to complete a conscientiousness inventory and to report how many days of work they missed last year, and then calculates the relationship between the two scores. Which research design is this?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Naturalistic observation of workplace behavior",
+     "why": "The data come from an inventory and self-reports rather than observation in a natural setting.",
+     "value": null
+    },
+    {
+     "text": "Meta-analysis of earlier studies",
+     "why": "A meta-analysis combines results of earlier studies rather than collecting new scores.",
+     "value": null
+    },
+    {
+     "text": "Correlational study",
+     "why": "The researcher measures two existing variables and calculates their relationship without manipulation.",
+     "value": null
+    },
+    {
+     "text": "Experiment manipulating conscientiousness",
+     "why": "Conscientiousness is measured, not manipulated, and no one is randomly assigned.",
+     "value": null
+    }
+   ],
+   "key_index": 2,
+   "est_seconds": 60,
+   "facts": [
+    "ek=4.5.B"
+   ],
+   "variant_id": "e681b2bee8ea",
+   "blueprint": {
+    "id": "ps_r_personality_design",
+    "subject": "ap_psychology",
+    "kind": "mc",
+    "concept": "identifying correlational and experimental designs",
+    "topic": "4.5",
+    "skill": "2.A",
+    "student_thinking": [
+     "Identify what the scenario or question is asking about: identifying correlational and experimental designs",
+     "Match the defining feature in the stem against each option and reject the near-miss concepts"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "na",
+    "key_conditions": [
+     {
+      "condition": "the stem contains the defining feature of exactly one option",
+      "evidence": "stem wording"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "The data come from an inventory and self-reports rather than observation in a natural setting."
+     },
+     {
+      "id": "m2",
+      "description": "A meta-analysis combines results of earlier studies rather than collecting new scores."
+     },
+     {
+      "id": "m3",
+      "description": "Conscientiousness is measured, not manipulated, and no one is randomly assigned."
+     }
+    ],
+    "verification": {
+     "independent_path": "authored from the CED required content (essential knowledge 4.5.B); the key is NOT code-verified: it must be matched by an independent blind solver (Opus), the five-criterion reviewer (Sonnet) and a second independent model panel (Fable and Sonnet blind solves) before the item is used",
+     "method": "authored+blind-solver+panel"
+    },
+    "judgment_demand": [
+     "apply the concept to the scenario"
+    ]
+   },
+   "seed": 11300,
+   "pack_id": "ps_r_personality_design-s11300",
+   "explanation_en": "The correct answer is Correlational study. The researcher measures two existing variables and calculates their relationship without manipulation.\nNaturalistic observation of workplace behavior is incorrect: The data come from an inventory and self-reports rather than observation in a natural setting.\nMeta-analysis of earlier studies is incorrect: A meta-analysis combines results of earlier studies rather than collecting new scores.\nExperiment manipulating conscientiousness is incorrect: Conscientiousness is measured, not manipulated, and no one is randomly assigned."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ps_r_personality_design",
+   "facts": [
+    "ek=4.5.B"
+   ],
+   "seed": 11300
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Decide the research design from the procedure (2.A) in a trait-theory context (conscientiousness); fits the scope conventions."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Two measured variables with a calculated relationship and no manipulation is a correlational study. The key is unique; no other option is defensible."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is complete and clearly worded."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor is a distinct, plausible wrong design, and the explanation addresses every wrong option. There is a minor length cue because the key is the shortest option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60 seconds, no calculation, four options. Somewhat easy but typical of AP Psychology design-identification items."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A correct, clear, standard correlational-design identification item in a trait-theory context. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step identification of a correlational design from a short procedure: two measured variables, no manipulation, a relationship calculated. Distractors are clearly distinguishable (observation, meta-analysis, experiment). The Big Five conscientiousness context is incidental and requires no trait-theory knowledge. Minimal reading, no computation, one representation.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 25
+  }
+ },
+ {
+  "candidateKey": "ap_psychology-m07-k1",
+  "cellId": "ap_psychology-m07",
+  "apSubjectCode": "ap_psychology",
+  "kind": "mc",
+  "keywordCode": "4.5",
+  "unitCode": "4",
+  "skillPrimary": "2.A",
+  "structure": "standalone",
+  "calculator": "na",
+  "archetype": "ps_r_personality_design",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-step research design identification: random assignment to conditions plus a manipulated independent variable signals an experiment. The distractors rely on the misconception that the measurement tool (questionnaire) defines the design, but the scenario is unambiguous with one defensible answer. No computation, short reading, one concept, no representation changes. Foundational skill 2.A at an entry level.",
+  "payload": {
+   "archetype": "ps_r_personality_design",
+   "topic": "4.5",
+   "skill": "2.A",
+   "calculator": "na",
+   "stem": "Researchers randomly assign 100 volunteers to write about their personal strengths or about a neutral topic, and then measure each volunteer's self-efficacy with a questionnaire. Which research design is this?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Naturalistic observation in an ordinary setting",
+     "why": "Participants were assigned a task; behavior was not simply observed in a natural setting.",
+     "value": null
+    },
+    {
+     "text": "Experiment with random assignment",
+     "why": "The researchers manipulate the writing task and randomly assign participants.",
+     "value": null
+    },
+    {
+     "text": "Survey, as participants answered questions",
+     "why": "A survey does not manipulate a variable or randomly assign participants.",
+     "value": null
+    },
+    {
+     "text": "Correlational study, as a questionnaire was used",
+     "why": "Using a questionnaire does not make a study correlational when a variable is manipulated with random assignment.",
+     "value": null
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 60,
+   "facts": [
+    "ek=4.5.B"
+   ],
+   "variant_id": "fd2414452624",
+   "blueprint": {
+    "id": "ps_r_personality_design",
+    "subject": "ap_psychology",
+    "kind": "mc",
+    "concept": "identifying correlational and experimental designs",
+    "topic": "4.5",
+    "skill": "2.A",
+    "student_thinking": [
+     "Identify what the scenario or question is asking about: identifying correlational and experimental designs",
+     "Match the defining feature in the stem against each option and reject the near-miss concepts"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "na",
+    "key_conditions": [
+     {
+      "condition": "the stem contains the defining feature of exactly one option",
+      "evidence": "stem wording"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Participants were assigned a task; behavior was not simply observed in a natural setting."
+     },
+     {
+      "id": "m2",
+      "description": "A survey does not manipulate a variable or randomly assign participants."
+     },
+     {
+      "id": "m3",
+      "description": "Using a questionnaire does not make a study correlational when a variable is manipulated with random assignment."
+     }
+    ],
+    "verification": {
+     "independent_path": "authored from the CED required content (essential knowledge 4.5.B); the key is NOT code-verified: it must be matched by an independent blind solver (Opus), the five-criterion reviewer (Sonnet) and a second independent model panel (Fable and Sonnet blind solves) before the item is used",
+     "method": "authored+blind-solver+panel"
+    },
+    "judgment_demand": [
+     "apply the concept to the scenario"
+    ]
+   },
+   "seed": 11302,
+   "pack_id": "ps_r_personality_design-s11302",
+   "explanation_en": "The correct answer is Experiment with random assignment. The researchers manipulate the writing task and randomly assign participants.\nNaturalistic observation in an ordinary setting is incorrect: Participants were assigned a task; behavior was not simply observed in a natural setting.\nSurvey, as participants answered questions is incorrect: A survey does not manipulate a variable or randomly assign participants.\nCorrelational study, as a questionnaire was used is incorrect: Using a questionnaire does not make a study correlational when a variable is manipulated with random assignment."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ps_r_personality_design",
+   "facts": [
+    "ek=4.5.B"
+   ],
+   "seed": 11302
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Skill 2.A (identify the research design) is the dominant demand. Self-efficacy is a social-cognitive concept, so the topic link is acceptable."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Random assignment to a writing condition with a measured outcome is an experiment. The key is unique and correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor reflects a distinct misconception and is clearly wrong, and the explanation addresses each one. The correct option's wording echoes the stem's 'randomly assign', a mild giveaway rather than a flaw."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60 seconds, no calculation, four options. Fits the reference pattern."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A correct, simple design-identification item. The key is unique and the distractors are plausible misconceptions. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step research design identification: random assignment to conditions plus a manipulated independent variable signals an experiment. The distractors rely on the misconception that the measurement tool (questionnaire) defines the design, but the scenario is unambiguous with one defensible answer. No computation, short reading, one concept, no representation changes. Foundational skill 2.A at an entry level.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "candidateKey": "ap_psychology-m08-k0",
+  "cellId": "ap_psychology-m08",
+  "apSubjectCode": "ap_psychology",
+  "kind": "mc",
+  "keywordCode": "5.2",
+  "unitCode": "5",
+  "skillPrimary": "2.C",
+  "structure": "standalone",
+  "calculator": "na",
+  "archetype": "ps_r_replication",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single concept (replication and scientific confidence) applied to a short, unambiguous scenario. The correct option is clearly distinguishable, and the distractors are absurd or extreme (proves the opposite, unethical, only the original researchers can replicate). It needs no calculation, no stimulus reading and no representation changes. Minor note: the item aligns loosely with skill 2.C, since it concerns evaluating evidence rather than a non-experimental design element.",
+  "payload": {
+   "archetype": "ps_r_replication",
+   "topic": "5.2",
+   "skill": "2.C",
+   "calculator": "na",
+   "stem": "A positive-psychology study finds that a gratitude exercise raises well-being. Three independent labs repeat the procedure with new participants and find no effect. What is the most appropriate conclusion?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Replications count only if the original researchers run them.",
+     "why": "Independent replication is valuable precisely because it is run by others.",
+     "value": null
+    },
+    {
+     "text": "The original study must have been unethical.",
+     "why": "Failure to replicate says nothing about whether a study was ethical.",
+     "value": null
+    },
+    {
+     "text": "The failed replications prove that gratitude lowers well-being.",
+     "why": "No effect is not evidence of a harmful effect.",
+     "value": null
+    },
+    {
+     "text": "The original finding is less certain and needs further testing.",
+     "why": "Conclusions evolve through replication; failed replications reduce confidence in the original result.",
+     "value": null
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 60,
+   "facts": [
+    "ek=5.2.B"
+   ],
+   "variant_id": "6b81b5d8a314",
+   "blueprint": {
+    "id": "ps_r_replication",
+    "subject": "ap_psychology",
+    "kind": "mc",
+    "concept": "replication and peer review",
+    "topic": "5.2",
+    "skill": "2.C",
+    "student_thinking": [
+     "Identify what the scenario or question is asking about: replication and peer review",
+     "Match the defining feature in the stem against each option and reject the near-miss concepts"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "na",
+    "key_conditions": [
+     {
+      "condition": "the stem contains the defining feature of exactly one option",
+      "evidence": "stem wording"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Independent replication is valuable precisely because it is run by others."
+     },
+     {
+      "id": "m2",
+      "description": "Failure to replicate says nothing about whether a study was ethical."
+     },
+     {
+      "id": "m3",
+      "description": "No effect is not evidence of a harmful effect."
+     }
+    ],
+    "verification": {
+     "independent_path": "authored from the CED required content (essential knowledge 5.2.B); the key is NOT code-verified: it must be matched by an independent blind solver (Opus), the five-criterion reviewer (Sonnet) and a second independent model panel (Fable and Sonnet blind solves) before the item is used",
+     "method": "authored+blind-solver+panel"
+    },
+    "judgment_demand": [
+     "apply the concept to the scenario"
+    ]
+   },
+   "seed": 11300,
+   "pack_id": "ps_r_replication-s11300",
+   "explanation_en": "The correct answer is The original finding is less certain and needs further testing.. Conclusions evolve through replication; failed replications reduce confidence in the original result.\nReplications count only if the original researchers run them. is incorrect: Independent replication is valuable precisely because it is run by others.\nThe original study must have been unethical. is incorrect: Failure to replicate says nothing about whether a study was ethical.\nThe failed replications prove that gratitude lowers well-being. is incorrect: No effect is not evidence of a harmful effect."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ps_r_replication",
+   "facts": [
+    "ek=5.2.B"
+   ],
+   "seed": 11300
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Replication and interpreting results is core research-methods content in the gratitude context. The 2.C label (non-experimental designs) is loose because the original study is experimental. This is a minor label issue only."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "D is the unique defensible answer. A, B and C are each clearly wrong."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor targets a distinct misconception, and each wrong option has an explanation. B and C are somewhat implausible but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60 seconds, with no calculator and low reading load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. The key is unique and correct, the distractors are distinct, and the load is typical. The only issue is a loose skill label (2.C versus an experimental original study), which is not a failure."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single concept (replication and scientific confidence) applied to a short, unambiguous scenario. The correct option is clearly distinguishable, and the distractors are absurd or extreme (proves the opposite, unethical, only the original researchers can replicate). It needs no calculation, no stimulus reading and no representation changes. Minor note: the item aligns loosely with skill 2.C, since it concerns evaluating evidence rather than a non-experimental design element.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "candidateKey": "ap_psychology-m08-k1",
+  "cellId": "ap_psychology-m08",
+  "apSubjectCode": "ap_psychology",
+  "kind": "mc",
+  "keywordCode": "5.2",
+  "unitCode": "5",
+  "skillPrimary": "2.C",
+  "structure": "standalone",
+  "calculator": "na",
+  "archetype": "ps_r_replication",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "criterion_failed_scope_skill; criterion_failed_distractor_explanation; criterion_failed_exam_suitability; reference_pattern_mismatch",
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept recall/application: peer review means independent experts evaluate methods and conclusions before publication. The distractors are clearly wrong, with no near-miss concepts to discriminate. There is no stimulus, no computation, and one reasoning step. Alignment with skill 2.C (non-experimental design elements) and topic 5.2 (Positive Psychology) is weak, but that is a tagging mismatch and does not make the item hard. Difficulty is not from unfair sources.",
+  "payload": {
+   "archetype": "ps_r_replication",
+   "topic": "5.2",
+   "skill": "2.C",
+   "calculator": "na",
+   "stem": "Which feature of peer review best helps prevent weak research from being published?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "The journal publishes only studies with statistically significant results.",
+     "why": "Publishing only significant results creates bias rather than preventing weak research.",
+     "value": null
+    },
+    {
+     "text": "Study participants vote on whether the study should be published.",
+     "why": "Participants are not the evaluators in peer review.",
+     "value": null
+    },
+    {
+     "text": "The authors choose which reviewers evaluate their own work.",
+     "why": "Authors choosing their own reviewers would weaken, not strengthen, the check.",
+     "value": null
+    },
+    {
+     "text": "Independent experts evaluate the methods and conclusions before publication.",
+     "why": "Peer review is evaluation of research by other scientists before publication.",
+     "value": null
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 60,
+   "facts": [
+    "ek=5.2.B"
+   ],
+   "variant_id": "a0ddfbfcf46d",
+   "blueprint": {
+    "id": "ps_r_replication",
+    "subject": "ap_psychology",
+    "kind": "mc",
+    "concept": "replication and peer review",
+    "topic": "5.2",
+    "skill": "2.C",
+    "student_thinking": [
+     "Identify what the scenario or question is asking about: replication and peer review",
+     "Match the defining feature in the stem against each option and reject the near-miss concepts"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "na",
+    "key_conditions": [
+     {
+      "condition": "the stem contains the defining feature of exactly one option",
+      "evidence": "stem wording"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Publishing only significant results creates bias rather than preventing weak research."
+     },
+     {
+      "id": "m2",
+      "description": "Participants are not the evaluators in peer review."
+     },
+     {
+      "id": "m3",
+      "description": "Authors choosing their own reviewers would weaken, not strengthen, the check."
+     }
+    ],
+    "verification": {
+     "independent_path": "authored from the CED required content (essential knowledge 5.2.B); the key is NOT code-verified: it must be matched by an independent blind solver (Opus), the five-criterion reviewer (Sonnet) and a second independent model panel (Fable and Sonnet blind solves) before the item is used",
+     "method": "authored+blind-solver+panel"
+    },
+    "judgment_demand": [
+     "apply the concept to the scenario"
+    ]
+   },
+   "seed": 11302,
+   "pack_id": "ps_r_replication-s11302",
+   "explanation_en": "The correct answer is Independent experts evaluate the methods and conclusions before publication.. Peer review is evaluation of research by other scientists before publication.\nThe journal publishes only studies with statistically significant results. is incorrect: Publishing only significant results creates bias rather than preventing weak research.\nStudy participants vote on whether the study should be published. is incorrect: Participants are not the evaluators in peer review.\nThe authors choose which reviewers evaluate their own work. is incorrect: Authors choosing their own reviewers would weaken, not strengthen, the check."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ps_r_replication",
+   "facts": [
+    "ek=5.2.B"
+   ],
+   "seed": 11302
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": "Skill 2.C requires evaluating research design elements in a described non-experimental study. The stem is a generic peer-review definition with no design to evaluate. Topic label 5.2 is also loose."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option D is correct and unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Distractors are trivially implausible (participants vote, authors pick reviewers), and the explanations are minimal."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "Pure definition recall with no scenario; the correct option restates the definition. This is not a scenario-based application item."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct, but the item is a bare definition-recall question about peer review. It does not assess skill 2.C (evaluating research design elements in a described study), and its distractors are trivially implausible. Fails on scope/skill, distractors and exam suitability."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept recall/application: peer review means independent experts evaluate methods and conclusions before publication. The distractors are clearly wrong, with no near-miss concepts to discriminate. There is no stimulus, no computation, and one reasoning step. Alignment with skill 2.C (non-experimental design elements) and topic 5.2 (Positive Psychology) is weak, but that is a tagging mismatch and does not make the item hard. Difficulty is not from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 20
+  }
+ },
+ {
+  "candidateKey": "ap_psychology-m09-k0",
+  "cellId": "ap_psychology-m09",
+  "apSubjectCode": "ap_psychology",
+  "kind": "mc",
+  "keywordCode": "4.6",
+  "unitCode": "4",
+  "skillPrimary": "2.C",
+  "structure": "standalone",
+  "calculator": "na",
+  "archetype": "ps_r_survey_wording",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "criterion_failed_scope_skill; criterion_failed_exam_suitability; reference_pattern_mismatch",
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-step identification of qualitative data from a brief scenario (open-ended interviews grouped into themes). Distractors target common misconceptions (categorizing equals quantitative; interaction equals experiment; comparison equals correlation), but only one option is defensible. Minimal reading and no computation. Content stays within scope, with motivation as light context for a research methods skill.",
+  "payload": {
+   "archetype": "ps_r_survey_wording",
+   "topic": "4.6",
+   "skill": "2.C",
+   "calculator": "na",
+   "stem": "A researcher interviews 15 athletes in open-ended conversations about why they train and then groups their answers into themes. Which kind of data is this?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Correlational data, because the researcher compared two variables",
+     "why": "No relationship between two measured variables is reported.",
+     "value": null
+    },
+    {
+     "text": "Qualitative data",
+     "why": "Open-ended descriptive responses grouped into themes are qualitative.",
+     "value": null
+    },
+    {
+     "text": "Experimental data, because the researcher interacted with the athletes",
+     "why": "Interviewing is not manipulating a variable.",
+     "value": null
+    },
+    {
+     "text": "Quantitative data, because the answers were grouped into categories",
+     "why": "Grouping answers into themes does not turn descriptive responses into numerical scores.",
+     "value": null
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 60,
+   "facts": [
+    "ek=4.6.A"
+   ],
+   "variant_id": "fa738fa28a4a",
+   "blueprint": {
+    "id": "ps_r_survey_wording",
+    "subject": "ap_psychology",
+    "kind": "mc",
+    "concept": "qualitative versus quantitative measures and leading questions",
+    "topic": "4.6",
+    "skill": "2.C",
+    "student_thinking": [
+     "Identify what the scenario or question is asking about: qualitative versus quantitative measures and leading questions",
+     "Match the defining feature in the stem against each option and reject the near-miss concepts"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "na",
+    "key_conditions": [
+     {
+      "condition": "the stem contains the defining feature of exactly one option",
+      "evidence": "stem wording"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "No relationship between two measured variables is reported."
+     },
+     {
+      "id": "m2",
+      "description": "Interviewing is not manipulating a variable."
+     },
+     {
+      "id": "m3",
+      "description": "Grouping answers into themes does not turn descriptive responses into numerical scores."
+     }
+    ],
+    "verification": {
+     "independent_path": "authored from the CED required content (essential knowledge 4.6.A); the key is NOT code-verified: it must be matched by an independent blind solver (Opus), the five-criterion reviewer (Sonnet) and a second independent model panel (Fable and Sonnet blind solves) before the item is used",
+     "method": "authored+blind-solver+panel"
+    },
+    "judgment_demand": [
+     "apply the concept to the scenario"
+    ]
+   },
+   "seed": 11300,
+   "pack_id": "ps_r_survey_wording-s11300",
+   "explanation_en": "The correct answer is Qualitative data. Open-ended descriptive responses grouped into themes are qualitative.\nCorrelational data, because the researcher compared two variables is incorrect: No relationship between two measured variables is reported.\nExperimental data, because the researcher interacted with the athletes is incorrect: Interviewing is not manipulating a variable.\nQuantitative data, because the answers were grouped into categories is incorrect: Grouping answers into themes does not turn descriptive responses into numerical scores."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ps_r_survey_wording",
+   "facts": [
+    "ek=4.6.A"
+   ],
+   "seed": 11300
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": "Qualitative vs. quantitative data is a research-methods item with little tie to 4.6 Motivation beyond a loose scenario about why athletes train. The CED does not have qualitative/quantitative as a 2.C skill target, and the concept is weakly matched to non-experimental design evaluation. Also the blueprint concept mentions leading questions, but the item does not address them. The item is mostly a definition recall."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Qualitative is the unique defensible answer. Open-ended interviews grouped into themes are standard qualitative data. The quantitative option is arguably tempting because coding yields categories, but without counts or numerical scoring, it is wrong."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors encode distinct misconceptions (correlational, experimental, categories mean quantitative). The explanations are brief but cover each option. The option text length differs a little, but without a giveaway."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The item is a near-restatement of a definition: 'open-ended' plus 'themes' essentially names qualitative. It is too easy and does not evaluate any research design element. The stem includes no motivation concept, so it is weak for an AP exam item on 4.6/2.C."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and unique, but the item is a definition-level recall that barely fits topic 4.6 or skill 2.C (evaluating the use of design elements in non-experimental methods). The mismatch with the target skill and the trivially easy stem make it unsuitable, so I am failing it on scope and exam suitability."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step identification of qualitative data from a brief scenario (open-ended interviews grouped into themes). Distractors target common misconceptions (categorizing equals quantitative; interaction equals experiment; comparison equals correlation), but only one option is defensible. Minimal reading and no computation. Content stays within scope, with motivation as light context for a research methods skill.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "candidateKey": "ap_psychology-m09-k1",
+  "cellId": "ap_psychology-m09",
+  "apSubjectCode": "ap_psychology",
+  "kind": "mc",
+  "keywordCode": "4.6",
+  "unitCode": "4",
+  "skillPrimary": "2.C",
+  "structure": "standalone",
+  "calculator": "na",
+  "archetype": "ps_r_survey_wording",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "criterion_failed_exam_suitability; reference_pattern_mismatch",
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-step recognition of an obviously leading survey item (\"Most experts agree... don't you?\") versus three neutral items. No stimulus, no calculation, no near-miss concepts. Concepts are in scope; difficulty comes from no unfair source.",
+  "payload": {
+   "archetype": "ps_r_survey_wording",
+   "topic": "4.6",
+   "skill": "2.C",
+   "calculator": "na",
+   "stem": "Which survey item is most likely to produce a leading-question or social desirability bias?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "On a scale from 1 to 5, how motivated do you feel today?",
+     "why": "A rating scale with neutral wording is not leading.",
+     "value": null
+    },
+    {
+     "text": "Most experts agree that rewards ruin motivation, don't you?",
+     "why": "The wording signals the expected answer and pressures respondents to agree.",
+     "value": null
+    },
+    {
+     "text": "What is the main reason you practice?",
+     "why": "An open question does not suggest an answer.",
+     "value": null
+    },
+    {
+     "text": "How many hours did you practice last week?",
+     "why": "This asks for a factual number without signaling an expected answer.",
+     "value": null
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 60,
+   "facts": [
+    "ek=4.6.A"
+   ],
+   "variant_id": "d2afb3f11ed3",
+   "blueprint": {
+    "id": "ps_r_survey_wording",
+    "subject": "ap_psychology",
+    "kind": "mc",
+    "concept": "qualitative versus quantitative measures and leading questions",
+    "topic": "4.6",
+    "skill": "2.C",
+    "student_thinking": [
+     "Identify what the scenario or question is asking about: qualitative versus quantitative measures and leading questions",
+     "Match the defining feature in the stem against each option and reject the near-miss concepts"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "na",
+    "key_conditions": [
+     {
+      "condition": "the stem contains the defining feature of exactly one option",
+      "evidence": "stem wording"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "A rating scale with neutral wording is not leading."
+     },
+     {
+      "id": "m2",
+      "description": "An open question does not suggest an answer."
+     },
+     {
+      "id": "m3",
+      "description": "This asks for a factual number without signaling an expected answer."
+     }
+    ],
+    "verification": {
+     "independent_path": "authored from the CED required content (essential knowledge 4.6.A); the key is NOT code-verified: it must be matched by an independent blind solver (Opus), the five-criterion reviewer (Sonnet) and a second independent model panel (Fable and Sonnet blind solves) before the item is used",
+     "method": "authored+blind-solver+panel"
+    },
+    "judgment_demand": [
+     "apply the concept to the scenario"
+    ]
+   },
+   "seed": 11302,
+   "pack_id": "ps_r_survey_wording-s11302",
+   "explanation_en": "The correct answer is Most experts agree that rewards ruin motivation, don't you?. The wording signals the expected answer and pressures respondents to agree.\nOn a scale from 1 to 5, how motivated do you feel today? is incorrect: A rating scale with neutral wording is not leading.\nWhat is the main reason you practice? is incorrect: An open question does not suggest an answer.\nHow many hours did you practice last week? is incorrect: This asks for a factual number without signaling an expected answer."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ps_r_survey_wording",
+   "facts": [
+    "ek=4.6.A"
+   ],
+   "seed": 11302
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Survey wording and leading questions fit Practice 2 (non-experimental methods). The 4.6 label is loose, which is acceptable under the scope conventions. The stem has no scenario, but all four options mention motivation or practice."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option B is the only leading question. It cites expert authority and ends with a tag question ('don't you?'). The other three options are neutral."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed and the data object is empty, which is fine. The stem is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors are plausible survey item types (rating scale, open-ended, factual count). The explanation covers each of them. One weakness is that the wrong options are trivially neutral."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The key is too obvious, since the 'don't you?' phrasing gives it away. The stem is a bare definition-style recognition question with no scenario, which falls short of the 'no stem that merely restates the definition' standard. Option B is also noticeably longer. It also claims 'rewards ruin motivation' loosely, though it is only a survey item. Overall the item is weak in difficulty and discrimination."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and unique. The item is too trivial and has no scenario. It fails exam suitability because the keyed option is an obvious giveaway (the 'don't you?' tag question and its greater length) and the stem is a bare recognition prompt. Fail when unsure."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step recognition of an obviously leading survey item (\"Most experts agree... don't you?\") versus three neutral items. No stimulus, no calculation, no near-miss concepts. Concepts are in scope; difficulty comes from no unfair source.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "candidateKey": "ap_psychology-m10-k0",
+  "cellId": "ap_psychology-m10",
+  "apSubjectCode": "ap_psychology",
+  "kind": "mc",
+  "keywordCode": "5.5",
+  "unitCode": "5",
+  "skillPrimary": "2.D",
+  "structure": "standalone",
+  "calculator": "na",
+  "archetype": "ps_r_therapy_ethics",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-step application of two named ethical guidelines (informed consent, confidentiality) to brief cues in the scenario. Distractors are clearly distinct concepts, so there is no near-miss discrimination. The stem is short and straightforward with no calculation or representation changes. It is consistent with skill 2.D but at a recall/identification level, which fits basic learning more than a full-mock item.",
+  "payload": {
+   "archetype": "ps_r_therapy_ethics",
+   "topic": "5.5",
+   "skill": "2.D",
+   "calculator": "na",
+   "stem": "In a trial of a new therapy for panic attacks, participants are told they might be placed on a waiting list, that they can leave at any time, and that their records will be identified only by codes. Which pair of ethical guidelines is being applied?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Random assignment and double-blind procedure",
+     "why": "These are design techniques rather than ethical guidelines.",
+     "value": null
+    },
+    {
+     "text": "Operational definition and replication",
+     "why": "These are scientific concepts rather than ethical guidelines.",
+     "value": null
+    },
+    {
+     "text": "Informed consent and confidentiality",
+     "why": "Participants agreed knowing the procedures and right to withdraw, and their identities were protected.",
+     "value": null
+    },
+    {
+     "text": "Debriefing and deception",
+     "why": "Nothing in the description involves misleading participants or explaining a hidden purpose afterward.",
+     "value": null
+    }
+   ],
+   "key_index": 2,
+   "est_seconds": 60,
+   "facts": [
+    "ek=5.5.C"
+   ],
+   "variant_id": "176feab2953a",
+   "blueprint": {
+    "id": "ps_r_therapy_ethics",
+    "subject": "ap_psychology",
+    "kind": "mc",
+    "concept": "ethics in treatment research",
+    "topic": "5.5",
+    "skill": "2.D",
+    "student_thinking": [
+     "Identify what the scenario or question is asking about: ethics in treatment research",
+     "Match the defining feature in the stem against each option and reject the near-miss concepts"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "na",
+    "key_conditions": [
+     {
+      "condition": "the stem contains the defining feature of exactly one option",
+      "evidence": "stem wording"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "These are design techniques rather than ethical guidelines."
+     },
+     {
+      "id": "m2",
+      "description": "These are scientific concepts rather than ethical guidelines."
+     },
+     {
+      "id": "m3",
+      "description": "Nothing in the description involves misleading participants or explaining a hidden purpose afterward."
+     }
+    ],
+    "verification": {
+     "independent_path": "authored from the CED required content (essential knowledge 5.5.C); the key is NOT code-verified: it must be matched by an independent blind solver (Opus), the five-criterion reviewer (Sonnet) and a second independent model panel (Fable and Sonnet blind solves) before the item is used",
+     "method": "authored+blind-solver+panel"
+    },
+    "judgment_demand": [
+     "apply the concept to the scenario"
+    ]
+   },
+   "seed": 11300,
+   "pack_id": "ps_r_therapy_ethics-s11300",
+   "explanation_en": "The correct answer is Informed consent and confidentiality. Participants agreed knowing the procedures and right to withdraw, and their identities were protected.\nRandom assignment and double-blind procedure is incorrect: These are design techniques rather than ethical guidelines.\nOperational definition and replication is incorrect: These are scientific concepts rather than ethical guidelines.\nDebriefing and deception is incorrect: Nothing in the description involves misleading participants or explaining a hidden purpose afterward."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ps_r_therapy_ethics",
+   "facts": [
+    "ek=5.5.C"
+   ],
+   "seed": 11300
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Ethics in a treatment trial; matches 2.D and 5.5 (ethical guidelines), though the demand is mostly recall/matching."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Informed consent (waitlist disclosure, right to leave) plus confidentiality (coded records) is unique and correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "A and B are non-ethical concepts and easily eliminated; D is plausible but unsupported by the scenario. Each wrong option is explained. Acceptable but weak."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, about 60 seconds, no calculator."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and unique. The item is acceptable, though easy because two distractors are not ethical guidelines at all."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step application of two named ethical guidelines (informed consent, confidentiality) to brief cues in the scenario. Distractors are clearly distinct concepts, so there is no near-miss discrimination. The stem is short and straightforward with no calculation or representation changes. It is consistent with skill 2.D but at a recall/identification level, which fits basic learning more than a full-mock item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "candidateKey": "ap_psychology-m10-k1",
+  "cellId": "ap_psychology-m10",
+  "apSubjectCode": "ap_psychology",
+  "kind": "mc",
+  "keywordCode": "5.5",
+  "unitCode": "5",
+  "skillPrimary": "2.D",
+  "structure": "standalone",
+  "calculator": "na",
+  "archetype": "ps_r_therapy_ethics",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept application of the protection-from-harm ethical principle to a brief scenario. Distractors are clearly unethical (concealing findings, prioritizing validity over safety, withholding risk information), so little discrimination between near-miss concepts is needed. No stimulus, no computation, short stem, unambiguous wording.",
+  "payload": {
+   "archetype": "ps_r_therapy_ethics",
+   "topic": "5.5",
+   "skill": "2.D",
+   "calculator": "na",
+   "stem": "Halfway through a therapy trial, a clinician sees that several participants in the treatment group are getting worse. Which action best follows ethical principles?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Keep the observation private until the results are published.",
+     "why": "Withholding a known risk from participants and the review board is not ethical.",
+     "value": null
+    },
+    {
+     "text": "Stop or modify the procedure to protect participants from harm.",
+     "why": "Researchers must take steps to protect participants from harm.",
+     "value": null
+    },
+    {
+     "text": "Finish data collection so that the study results stay valid.",
+     "why": "Participants' welfare takes precedence over data collection.",
+     "value": null
+    },
+    {
+     "text": "Stop telling participants about the risks so that fewer of them drop out.",
+     "why": "Participants must be kept informed of risks.",
+     "value": null
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 60,
+   "facts": [
+    "ek=5.5.C"
+   ],
+   "variant_id": "e906956a3a43",
+   "blueprint": {
+    "id": "ps_r_therapy_ethics",
+    "subject": "ap_psychology",
+    "kind": "mc",
+    "concept": "ethics in treatment research",
+    "topic": "5.5",
+    "skill": "2.D",
+    "student_thinking": [
+     "Identify what the scenario or question is asking about: ethics in treatment research",
+     "Match the defining feature in the stem against each option and reject the near-miss concepts"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "na",
+    "key_conditions": [
+     {
+      "condition": "the stem contains the defining feature of exactly one option",
+      "evidence": "stem wording"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Withholding a known risk from participants and the review board is not ethical."
+     },
+     {
+      "id": "m2",
+      "description": "Participants' welfare takes precedence over data collection."
+     },
+     {
+      "id": "m3",
+      "description": "Participants must be kept informed of risks."
+     }
+    ],
+    "verification": {
+     "independent_path": "authored from the CED required content (essential knowledge 5.5.C); the key is NOT code-verified: it must be matched by an independent blind solver (Opus), the five-criterion reviewer (Sonnet) and a second independent model panel (Fable and Sonnet blind solves) before the item is used",
+     "method": "authored+blind-solver+panel"
+    },
+    "judgment_demand": [
+     "apply the concept to the scenario"
+    ]
+   },
+   "seed": 11302,
+   "pack_id": "ps_r_therapy_ethics-s11302",
+   "explanation_en": "The correct answer is Stop or modify the procedure to protect participants from harm.. Researchers must take steps to protect participants from harm.\nKeep the observation private until the results are published. is incorrect: Withholding a known risk from participants and the review board is not ethical.\nFinish data collection so that the study results stay valid. is incorrect: Participants' welfare takes precedence over data collection.\nStop telling participants about the risks so that fewer of them drop out. is incorrect: Participants must be kept informed of risks."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ps_r_therapy_ethics",
+   "facts": [
+    "ek=5.5.C"
+   ],
+   "seed": 11302
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Evaluates ethical procedure in a treatment trial; matches 2.D and 5.5 (protection from harm)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Stop or modify to protect participants is the unique defensible answer; the other three options are clearly unethical."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is clear. Minor looseness in calling the observer a 'clinician', but the intent is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor reflects a distinct unethical idea and is explained; they are somewhat obviously wrong, which makes the item easy."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60 seconds, low reading load, no calculator, four options."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Straightforward, correct ethics item on protecting participants from harm. The key is unique, the distractors are distinct but easy, and no instant-reject conditions apply. Accept."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept application of the protection-from-harm ethical principle to a brief scenario. Distractors are clearly unethical (concealing findings, prioritizing validity over safety, withholding risk information), so little discrimination between near-miss concepts is needed. No stimulus, no computation, short stem, unambiguous wording.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "candidateKey": "ap_psychology-m11-k0",
+  "cellId": "ap_psychology-m11",
+  "apSubjectCode": "ap_psychology",
+  "kind": "mc",
+  "keywordCode": "5.5",
+  "unitCode": "5",
+  "skillPrimary": "2.B",
+  "structure": "standalone",
+  "calculator": "na",
+  "archetype": "ps_r_therapy_placebo",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept recognition: the identical inactive pill indicates a placebo control group, and both participants and outcome assessors being blind indicates a double-blind procedure. The stem is short and unambiguous, and the distractors are clearly distinguishable (single-blind, open-label, waiting-list). It requires no computation or representation change, and it is a core CED research-methods term applied to a simple treatment scenario.",
+  "payload": {
+   "archetype": "ps_r_therapy_placebo",
+   "topic": "5.5",
+   "skill": "2.B",
+   "calculator": "na",
+   "stem": "In a trial of a new antidepressant, participants are randomly assigned to receive the drug or an identical-looking pill with no active ingredient. Neither the participants nor the staff who measure symptoms know who received which pill. Which pair of terms describes the design?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Placebo control group and single-blind procedure",
+     "why": "Both participants and staff are unaware, so the procedure is double-blind.",
+     "value": null
+    },
+    {
+     "text": "Experimental group and open-label procedure",
+     "why": "An open-label procedure would tell everyone who received the drug.",
+     "value": null
+    },
+    {
+     "text": "Placebo control group and double-blind procedure",
+     "why": "An inactive pill gives a comparison, and keeping both participants and assessors unaware controls expectations and experimenter bias.",
+     "value": null
+    },
+    {
+     "text": "Waiting-list control group and single-blind procedure",
+     "why": "No one is placed on a waiting list, and both participants and staff are blind.",
+     "value": null
+    }
+   ],
+   "key_index": 2,
+   "est_seconds": 60,
+   "facts": [
+    "ek=5.5.A"
+   ],
+   "variant_id": "db4d900b54cf",
+   "blueprint": {
+    "id": "ps_r_therapy_placebo",
+    "subject": "ap_psychology",
+    "kind": "mc",
+    "concept": "placebo and blinding",
+    "topic": "5.5",
+    "skill": "2.B",
+    "student_thinking": [
+     "Identify what the scenario or question is asking about: placebo and blinding",
+     "Match the defining feature in the stem against each option and reject the near-miss concepts"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "na",
+    "key_conditions": [
+     {
+      "condition": "the stem contains the defining feature of exactly one option",
+      "evidence": "stem wording"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Both participants and staff are unaware, so the procedure is double-blind."
+     },
+     {
+      "id": "m2",
+      "description": "An open-label procedure would tell everyone who received the drug."
+     },
+     {
+      "id": "m3",
+      "description": "No one is placed on a waiting list, and both participants and staff are blind."
+     }
+    ],
+    "verification": {
+     "independent_path": "authored from the CED required content (essential knowledge 5.5.A); the key is NOT code-verified: it must be matched by an independent blind solver (Opus), the five-criterion reviewer (Sonnet) and a second independent model panel (Fable and Sonnet blind solves) before the item is used",
+     "method": "authored+blind-solver+panel"
+    },
+    "judgment_demand": [
+     "apply the concept to the scenario"
+    ]
+   },
+   "seed": 11300,
+   "pack_id": "ps_r_therapy_placebo-s11300",
+   "explanation_en": "The correct answer is Placebo control group and double-blind procedure. An inactive pill gives a comparison, and keeping both participants and assessors unaware controls expectations and experimenter bias.\nPlacebo control group and single-blind procedure is incorrect: Both participants and staff are unaware, so the procedure is double-blind.\nExperimental group and open-label procedure is incorrect: An open-label procedure would tell everyone who received the drug.\nWaiting-list control group and single-blind procedure is incorrect: No one is placed on a waiting list, and both participants and staff are blind."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ps_r_therapy_placebo",
+   "facts": [
+    "ek=5.5.A"
+   ],
+   "seed": 11300
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 45-60 seconds, needs no calculator, and has four options of similar length.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is accurate, has a unique key, and has plausible distractors. It is suitable for the exam."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept recognition: the identical inactive pill indicates a placebo control group, and both participants and outcome assessors being blind indicates a double-blind procedure. The stem is short and unambiguous, and the distractors are clearly distinguishable (single-blind, open-label, waiting-list). It requires no computation or representation change, and it is a core CED research-methods term applied to a simple treatment scenario.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "candidateKey": "ap_psychology-m11-k1",
+  "cellId": "ap_psychology-m11",
+  "apSubjectCode": "ap_psychology",
+  "kind": "mc",
+  "keywordCode": "5.5",
+  "unitCode": "5",
+  "skillPrimary": "2.B",
+  "structure": "standalone",
+  "calculator": "na",
+  "archetype": "ps_r_therapy_placebo",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "criterion_failed_distractor_explanation; criterion_failed_exam_suitability; reference_pattern_mismatch",
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept application: recognizing that a placebo/inactive-treatment comparison group isolates the effect of therapy from expectation. The stem is brief, the distractors are clearly non-experimental or irrelevant to expectation effects, and there are no representation changes or computation. This is core experimental-design knowledge at an introductory level.",
+  "payload": {
+   "archetype": "ps_r_therapy_placebo",
+   "topic": "5.5",
+   "skill": "2.B",
+   "calculator": "na",
+   "stem": "A researcher wants to know whether improvement after therapy comes from the therapy itself or from clients' expectation of getting help. Which design element best addresses this question?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "A case study of one client",
+     "why": "A single case cannot separate treatment effects from expectation.",
+     "value": null
+    },
+    {
+     "text": "A satisfaction survey after the study",
+     "why": "Satisfaction ratings cannot separate real improvement from expectation.",
+     "value": null
+    },
+    {
+     "text": "A larger sample from a single clinic",
+     "why": "A larger sample does not separate treatment from expectation.",
+     "value": null
+    },
+    {
+     "text": "A comparison group that receives an inactive treatment",
+     "why": "A placebo-style comparison separates the effect of the treatment from the effect of expectations.",
+     "value": null
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 60,
+   "facts": [
+    "ek=5.5.A"
+   ],
+   "variant_id": "2cb838f54e9e",
+   "blueprint": {
+    "id": "ps_r_therapy_placebo",
+    "subject": "ap_psychology",
+    "kind": "mc",
+    "concept": "placebo and blinding",
+    "topic": "5.5",
+    "skill": "2.B",
+    "student_thinking": [
+     "Identify what the scenario or question is asking about: placebo and blinding",
+     "Match the defining feature in the stem against each option and reject the near-miss concepts"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "na",
+    "key_conditions": [
+     {
+      "condition": "the stem contains the defining feature of exactly one option",
+      "evidence": "stem wording"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "A single case cannot separate treatment effects from expectation."
+     },
+     {
+      "id": "m2",
+      "description": "Satisfaction ratings cannot separate real improvement from expectation."
+     },
+     {
+      "id": "m3",
+      "description": "A larger sample does not separate treatment from expectation."
+     }
+    ],
+    "verification": {
+     "independent_path": "authored from the CED required content (essential knowledge 5.5.A); the key is NOT code-verified: it must be matched by an independent blind solver (Opus), the five-criterion reviewer (Sonnet) and a second independent model panel (Fable and Sonnet blind solves) before the item is used",
+     "method": "authored+blind-solver+panel"
+    },
+    "judgment_demand": [
+     "apply the concept to the scenario"
+    ]
+   },
+   "seed": 11302,
+   "pack_id": "ps_r_therapy_placebo-s11302",
+   "explanation_en": "The correct answer is A comparison group that receives an inactive treatment. A placebo-style comparison separates the effect of the treatment from the effect of expectations.\nA case study of one client is incorrect: A single case cannot separate treatment effects from expectation.\nA satisfaction survey after the study is incorrect: Satisfaction ratings cannot separate real improvement from expectation.\nA larger sample from a single clinic is incorrect: A larger sample does not separate treatment from expectation."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ps_r_therapy_placebo",
+   "facts": [
+    "ek=5.5.A"
+   ],
+   "seed": 11302
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Placebo control in therapy research fits 5.5 and Practice 2."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Inactive-treatment comparison is the unique correct answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; stem is clear."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Distractors are trivially implausible and the explanations are generic; none is a near-miss design element such as a waitlist control, random assignment, or single-blind."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The stem phrase 'expectation of getting help' gives away the answer, and the question is basically a definition recall with weak distractors."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and in scope, but the item is too easy. The stem nearly states the placebo definition and the distractors are not realistic near-misses, so it fails on distractor quality and exam suitability."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept application: recognizing that a placebo/inactive-treatment comparison group isolates the effect of therapy from expectation. The stem is brief, the distractors are clearly non-experimental or irrelevant to expectation effects, and there are no representation changes or computation. This is core experimental-design knowledge at an introductory level.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ }
+]

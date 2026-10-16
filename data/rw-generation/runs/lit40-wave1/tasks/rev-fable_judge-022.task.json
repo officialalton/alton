@@ -1,0 +1,258 @@
+{
+ "schema": "rw-session-task/v1",
+ "kind": "review",
+ "role": "fable_judge",
+ "runId": "lit40-wave1",
+ "taskId": "rev-fable_judge-022",
+ "chunkId": "rev-fable_judge-022",
+ "suggestedModel": "fable",
+ "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-fable_judge-022.result.json",
+ "outputSchema": {
+  "chunkId": "청크 ID",
+  "model": "fable",
+  "items": [
+   {
+    "candidateId": "id",
+    "picked_letter": "A|B|C|D",
+    "other_defensible": "정답 외 방어 가능한 선택지가 있으면 true",
+    "est_difficulty": "easy|medium|hard (실제 체감, 요청 난이도에 맞추지 말 것)",
+    "hard_fit": "실제 SAT hard 수준의 사고 단계가 필요하면 true(지문 길이·난어만이면 false)",
+    "plausible_distractors": "오답 3개가 모두 그럴듯하고 서로 다른 오개념에서 나왔으면 true",
+    "length_balanced": "네 선택지 길이·구체성이 비슷해 정답이 형식으로 드러나지 않으면 true",
+    "multi_answer_risk": "복수 정답 위험이 있으면 true",
+    "issues": "한 줄 메모"
+   }
+  ]
+ },
+ "items": [
+  {
+   "candidateId": "lit40-medium-03-007",
+   "attempt": 1,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "medium",
+   "passage": "I give that relic a week before it burns the place down, CLEMENT says, dropping a basket onto the folding counter of the laundromat in Port of Spain. LINTON, his father, does not answer. He lifts an old charcoal iron from its shelf and sets it heating.\nCLEMENT: Nobody pays for hand-pressing anymore, Pa.\nLINTON: (smoothing a white collar) Your grandmother pressed shirts for half of Belmont with this.\nCLEMENT: (laughing) Because she couldn't afford a machine.\nLINTON: (softly) She couldn't. She did it anyway.\n(LINTON holds out the iron. CLEMENT hesitates, then takes it. He presses one sleeve, quickly and badly. He lifts the iron, looks at the scorched crease, and dampens the cloth again without being told.)\nCLEMENT: How long did she hold it before it stopped hurting?\nLINTON: She never said.\n(CLEMENT starts the sleeve over, slower this time. Neither of them looks at the washing machines humming along the wall.)",
+   "question": "Which choice best describes the shift in tone in the text?",
+   "options": [
+    "From weary irritation to open grief, as Linton mourns his mother aloud.",
+    "From dismissive mockery to a hesitant, growing regard for the old craft.",
+    "From playful teasing to sharp anger, as Linton faults Clement's clumsiness.",
+    "From quiet tension to relief, as Clement agrees to modernize the shop."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-03-011",
+   "attempt": 1,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "medium",
+   "passage": "Read the harbor part again, Yuxuan said, so I did, sitting cross-legged among the half-strung kites in the old kite-maker's yard in Lisbon where Mother used to work. Our plan had been simple: sell her last kites at the festival, buy back the letters she had pawned, and learn at last why she left us for three years. We sold all nine before noon. Yuxuan haggled the pawnbroker down by a third and bowed to him like a courtier, and I laughed so hard I dropped the bundle in the street. Tonight the bundle sits on the workbench, retied in her blue thread. She wrote about the harbor, about missing us, about a doctor in Porto she never once mentioned at home. Yuxuan has gone to bed without brushing his teeth. I have put the kettle on twice and forgotten it both times.\nShanice",
+   "question": "Which choice best describes the shift in tone in the diary entry?",
+   "options": [
+    "From quiet grief to renewed hope as the siblings recover their mother's letters.",
+    "From buoyant triumph over the plan to a subdued, unsettled heaviness.",
+    "From nervous doubt to relief as the letters finally explain the long absence.",
+    "From cheerful teasing to open resentment as Yuxuan turns against Shanice."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-03-027",
+   "attempt": 1,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "medium",
+   "passage": "Years later, I can still smell the wet feijoas from the morning the ferry was cancelled and I waited out the rain under a fruit stall at the Auckland market. I was nineteen, and my teacher had just written tidy and empty across the essay I was proudest of. A stranger named Makana sheltered beside me, peeling a feijoa with his thumb. I told him the whole injustice, pausing at the best parts for the outrage I was owed. He asked my name instead. Kian, he repeated, as though trying it on, and then wondered what I would write if nobody graded it. I answered with a twenty-minute speech on fairness, complete with numbered points. I had, I believe, a closing argument. The rain eased by eleven, and the vendors began stacking crates of kumara along the curb.",
+   "question": "Which choice best describes the narrator's attitude toward his younger self?",
+   "options": [
+    "Stern disapproval of the anger he once aimed at his teacher",
+    "Gentle amusement at how sure of himself he once was",
+    "Lasting regret that he never answered the stranger's question",
+    "Wistful longing for the conviction he felt as a young man"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-03-032",
+   "attempt": 1,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "medium",
+   "passage": "Once, during the spring Haneul rented a farmhouse outside Porto Alegre, her neighbor Taeyang arrived at dawn with a coil of rope and an apology for the noise. He had sailed for thirty years, he said, and his hands still tied knots the old way, even on the fence he was mending for her goats. By summer he had joined the local farmers' cooperative, whose members teased him about his knots and patiently taught him theirs. He practiced their loop on the porch every evening until he could tie it blind. Yet on the gate he trusted most, the one that held the goats at night, Haneul noticed a sailor's hitch, retied fresh each week. In August the eucalyptus shed long strips of bark across the road, and the goats chewed them with great seriousness.",
+   "question": "Which choice best states the main idea of the text?",
+   "options": [
+    "Taeyang mends Haneul's fence and is later welcomed by the farmers' cooperative.",
+    "Haneul contrasts two kinds of knots to show that a sailor's skills fade on land.",
+    "Taeyang keeps faith with his old life even as he embraces his new neighbors.",
+    "Newcomers should adopt local customs if they hope to be accepted by others."
+   ],
+   "recipeBeyondMedium": "두 곳의 근거를 합쳐 요지를 잡아야 하고, 오답 하나는 일화 요약에 그치는 부분 요지다"
+  },
+  {
+   "candidateId": "lit40-medium-03-047",
+   "attempt": 1,
+   "skill": "inferences",
+   "questionType": "relationship_between_characters",
+   "requestedDifficulty": "medium",
+   "passage": "Smoke from the tandoor and the sour breath of rising dough met me each morning in our Samarkand bakery, long before the shutters opened. Darius came at four, though I paid him from six. I never asked him to come early, and he never asked to be paid for it. My husband, before he died, had lent the boy's mother money for a surgery; the ledger with her name in it still sat on the shelf above the flour bins. Darius dusted that shelf every morning and never once touched the ledger. On the coldest days I burned the stale loaves in the oven and told him there was no bread to spare, then left a warm round on the stool by the door, where he would find it without having to thank me. Outside, a cart rattled over the stones toward the market.",
+   "question": "Based on the text, which choice best describes the relationship between the narrator and Darius?",
+   "options": [
+    "Each quietly acknowledges an old obligation while sparing the other from having to discuss it.",
+    "Darius works extra hours mainly to win the narrator's trust so that she will forgive the loan.",
+    "The narrator keeps the ledger in sight to remind Darius that his mother's debt is still owed.",
+    "The narrator treats Darius with the distant formality expected of a widow toward a hired boy."
+   ],
+   "recipeBeyondMedium": "두 문장의 단서를 연결해야 하고 오답은 한쪽 감정만 반영한다"
+  },
+  {
+   "candidateId": "lit40-medium-03-048",
+   "attempt": 1,
+   "skill": "inferences",
+   "questionType": "symbolism",
+   "requestedDifficulty": "medium",
+   "passage": "We sat on the bench nearest the Havana ferry ramp, and Cleotilde held the ticket her cousin had paid for, a single crossing that left at dawn. Father Emiliano had walked her down from the parish without being asked. She had not come to Mass in ten years, and she reminded him of that twice, as though it settled something. He said nothing about Mass. Instead he watched a deckhand loop a gray mooring line around an iron post. The rope was frayed in a dozen places, spliced and respliced, and the boat pulled at it with every swell. When the deckhand later lifted the line free, the ferry drifted without a sound. Cleotilde asked whether he would scold her for leaving. He said that a rope is not there to keep a boat from sailing, only to let it come back to the same place. She turned the ticket over in her fingers. Gulls argued over a fish head near the customs shed.",
+   "question": "In the text, the mooring line most likely represents",
+   "options": [
+    "the duties that Father Emiliano believes should keep Cleotilde from leaving Havana.",
+    "a tie to home and faith that allows a return without forbidding departure.",
+    "the strain Cleotilde feels between her cousin's plans and her own uncertain wishes.",
+    "the long years of neglect that have worn away Cleotilde's ties to the parish."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-03-049",
+   "attempt": 1,
+   "skill": "inferences",
+   "questionType": "symbolism",
+   "requestedDifficulty": "medium",
+   "passage": "Milena held the dustpan while her mother swept, as she had every Saturday since she was nine. Marlon's barbershop on Brīvības Street closed at six, and her mother, who had cut hair there for twenty years, never let anyone else sweep the floor. Tonight they were meant to choose wedding napkins; the catalog lay open on a barber chair, untouched. The broom moved in its old pattern, under the mirrors, around the coat rack, toward the door. Her mother talked about guest lists and seating while she swept, and Milena answered without looking up. Once her mother paused and said that Milena's new flat had wooden floors, the kind that showed every hair. Marlon, counting the till, laughed and said she would need a better broom. Near the end, her mother's arms slowed. Milena set down the pan, took the broom, and finished the last corner in the same strokes, left to right. Her mother picked up the dustpan without a word. Outside, a tram rang its bell twice at the corner.",
+   "question": "In the text, the act of sweeping the shop floor most likely represents",
+   "options": [
+    "a tiresome chore that Milena intends to leave behind once she is married.",
+    "the mother's quiet resistance to discussing her daughter's coming wedding.",
+    "a shared habit carrying their bond forward as their roles shift.",
+    "the strict standards Marlon expects his employees to follow in the shop."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-03-050",
+   "attempt": 1,
+   "skill": "inferences",
+   "questionType": "symbolism",
+   "requestedDifficulty": "medium",
+   "passage": "Three rules of the theater in the off-season:\nno films, no tickets, no questions at the door.\nNandi sat in row nine in his pressed uniform,\nhis reenlistment form folded in his cap,\nwhile Neema swept husks from the aisle,\nleftovers of a Nairobi season long gone.\nOn other nights, in other countries,\nhe had watched walls fill up with fire.\nHere the screen hung blank, a sheet of white\nthat nobody had yet been paid to color.\nNeema bumped the projector switch by accident;\nlight crossed the room and carried nothing,\nonly dust, turning slow as weather.\nHe did not ask her to switch it off.\nHe walked to the stage and held one hand\ninside the beam, and watched his shadow\nlie down across the white, as large as he liked.\nNeema leaned on the broom and waited.\nOn the seat behind him, the cap tipped over,\nand the folded paper slid onto the floor.",
+   "question": "In the text, the blank screen most likely represents",
+   "options": [
+    "the painful scenes from war that Nandi still sees whenever he closes his eyes.",
+    "the emptiness of a theater that has nothing to show during the off-season.",
+    "the silence between Nandi and Neema that neither of them knows how to break.",
+    "an open future that Nandi is starting to picture as something he can shape."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-03-053",
+   "attempt": 1,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "medium",
+   "passage": "Who gives a widow a shovel for her seventy-fifth birthday? Zawadi had turned the question over for a week, ever since Theo arrived with the long box tied in green ribbon. Since her husband's funeral she had hardly left the flat, and her neighbors had begun to say, kindly, that she should find something to do with her hands. So the shovel stood in the kitchen corner like an accusation. Each morning she moved her chair so that her back was to it, and each evening she found herself facing it again. On Sunday Theo returned and walked her up the hill to the community garden above the Marseille harbor. In the farthest bed, beneath a fig tree, the soil had gone hard and pale. Theo said his grandfather had dug this plot for forty years and had asked that no stranger ever turn it. Zawadi held out her hand for the shovel he had carried up the hill.",
+   "question": "As used in the text, the phrase “like an accusation” most nearly suggests that the shovel",
+   "options": [
+    "seemed to Zawadi a reminder of the garden work her husband once did alone.",
+    "struck Zawadi as an awkward, impractical gift for a woman of her age.",
+    "appeared to Zawadi to blame her for withdrawing from life in her grief.",
+    "showed Zawadi that Theo shared her neighbors' impatience with her mourning."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-03-054",
+   "attempt": 1,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "medium",
+   "passage": "Josiah had bought fish from Ephraim every Friday for two years and had never once seen the old man smile. On Mill Street people said he shorted his scales and shouted at children who leaned on his counter. So Josiah nearly dropped his notebook the Tuesday he walked into the night English class at the Ohio language school and found Ephraim at the chalkboard, drilling six new arrivals on the names of vegetables. Afterward the teacher explained that Ephraim had come to town forty years earlier knowing no English and had taught the class for free ever since. Once, she said, a student had brought him a cake at the market, and he had not spoken to her for a month. His temper, the teacher said, was a fence he had built himself. Josiah thought of every child Ephraim had sent away from the counter and wondered how many of their parents sat in this room. Ephraim erased the board in long, careful strokes.",
+   "question": "As used in the text, the phrase “a fence he had built himself” most nearly suggests that Ephraim's temper is",
+   "options": [
+    "a habit he picked up from years of dealing with rude customers at the market.",
+    "an outlet for the frustration he feels when his students learn too slowly.",
+    "a reputation that his neighbors created and that he has never tried to correct.",
+    "a deliberate barrier that keeps others from thanking him for his kindness."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-03-069",
+   "attempt": 1,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "medium",
+   "passage": "Some guests are announced long before they arrive. For a month the bride had heard warnings about Kemoy, Dwayne's aunt, who had opposed the engagement and was now coming to the salt-water pool in Port of Spain where the bride and her mother planned the wedding with their feet in the water. The mother rehearsed polite refusals under her breath. When Kemoy came, she lowered herself onto the edge of the pool, kept her own feet dry, and criticized the guest list, the menu, and the color of the tablecloths. The bride felt her mother stiffen beside her. Then Kemoy asked what the hall would cost. Hearing the figure, she clicked her tongue, opened her handbag, and unfolded a page of names: a caterer who owed her a favor, a cousin with a free hall, a band that played for half price. Two families, she said, should not go broke on one afternoon. Then she slipped off her sandals and put her feet in the water beside them.",
+   "question": "Which choice best describes the shift in tone that occurs in the text?",
+   "options": [
+    "From relaxed planning at the pool to growing fear of a lasting family feud",
+    "From wary dread of Kemoy to relief at discovering her practical support",
+    "From open hostility toward the wedding to grudging acceptance of its cost",
+    "From cheerful excitement about the wedding to weary concern about money"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-03-071",
+   "attempt": 1,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "medium",
+   "passage": "\"Not again,\" I said this morning, pulling your envelope out of my dryer at the laundromat.\n\nDear Talon,\n\nI am writing because this is the third piece of your mail that has reached my machine, my mailbox, or my coat pocket, and I am starting to think the wall between our apartments lets through more than your radio. I had a note ready to slide under your door. It used the word \"repeatedly\" twice. But the envelope had come open in the wash, and the first line was showing before I could look away. It was from the clinic, about your sister. I should not have read it, and I will not pretend I did not. I have complained about that wall every night for a year. I did not know what you were listening for on the other side of it. My door is open after six. I make terrible coffee, and I will not mention the mail.\n\nTallulah",
+   "question": "Which choice best describes the shift in tone that occurs in the letter?",
+   "options": [
+    "From friendly amusement at the mix-up to formal distance about privacy",
+    "From mild curiosity about the envelope to anxious alarm over the clinic",
+    "From sincere apology for reading the letter to lighthearted teasing",
+    "From annoyed complaint about the misdelivered mail to quiet sympathy"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-03-078",
+   "attempt": 1,
+   "skill": "text_structure_purpose",
+   "questionType": "underlined_portion_function",
+   "requestedDifficulty": "medium",
+   "passage": "After her mother remarried, Putri learned that Anh kept one rule above all others: no talking in the reading room of the old library in Hanoi, where he took her every Sunday. She resented it. For a year they sat across from each other in silence, he behind his newspapers and she behind whatever novel she could pretend to read. She decided the rule was his way of not having to know her. Twice that spring she left a book open on the table, hoping he would ask about it; he only turned another page. The week before she left for university, she asked whether the rule still applied now that she was grown. He considered the question, then slid a library slip across the table. On it, in pencil, was the title of every book she had read there, with a small mark beside the ones she had read twice. __He had been listening in the only language the room allowed.__ Outside, scooters crowded the wet street, and neither of them hurried to cross.",
+   "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+   "options": [
+    "It suggests that Anh preferred the library's silence to speaking with Putri.",
+    "It explains why Anh insisted so strictly on the rule of silence in the room.",
+    "It reframes the silence Putri resented as a form of attention Anh paid her.",
+    "It shows that Putri has finally accepted that the rule no longer applies."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-03-084",
+   "attempt": 1,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "medium",
+   "passage": "We were both quiet on the walk home from the field in Gdansk, Pavel because he had sent the penalty kick over the crossbar in front of every family on the street, and his grandmother Irena because she seemed to be thinking about something else. She had watched from the bench by the fence in her good coat. Halfway home she began, without being asked, to describe a school play in which she had forgotten every line and stood frozen while the hall laughed. She described the laughter in great detail, more than Pavel thought anyone would want to remember. At eleven he decided she simply liked her own stories better than his match. Decades later, telling his own daughter about that night, he paused over the part where Irena had never once mentioned the ball, and he found he had to start the sentence twice. Along the shipyard road, the streetlights came on one after another.",
+   "question": "Which choice best describes Pavel's attitude as an adult toward his grandmother's story?",
+   "options": [
+    "Lasting puzzlement over why she turned the talk away from his missed kick",
+    "Moved appreciation for the care hidden in how she chose to comfort him",
+    "Lingering embarrassment that she exposed such a humiliating memory to him",
+    "Quiet regret that he had once judged her stories to be self-centered"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-03-097",
+   "attempt": 1,
+   "skill": "inferences",
+   "questionType": "tone_or_mood",
+   "requestedDifficulty": "medium",
+   "passage": "Paper cups rose in a careful tower on the low table between us, one added for each hour of the delay in the Bergen hospital waiting room. I, Anneke, had set down the first cup; Marit, a stranger until that morning, had steadied the base when it leaned. By the third hour we were debating, with mock solemnity, who deserved credit for the structure. I argued that foundations come first. Marit argued that a foundation is only a floor until someone builds on it. A nurse passing with a cart told us to apply for a grant, and we both laughed louder than the joke deserved. When a door opened down the corridor, Marit stopped talking in the middle of a word, then picked the sentence up again as if nothing had happened. I added the sixth cup slowly. Rain ran down the tall windows above the car park.",
+   "question": "Which choice best describes the overall mood of the passage?",
+   "options": [
+    "Tense and fearful, as the two strangers dread the news they are waiting for",
+    "Competitive and prickly, as each stranger insists on credit for the tower",
+    "Quietly anxious, with brief bursts of humor that barely mask the worry",
+    "Playful and companionable, with an undercurrent of unspoken unease"
+   ],
+   "recipeBeyondMedium": "두 정서의 비중을 판단해야 하며, 오답은 정반대가 아니라 비중이 틀린 어조다"
+  }
+ ],
+ "instructions": "당신은 디지털 SAT 독립 채점자다. 정답 표시가 없다. 먼저 문항을 직접 풀고(picked_letter), 이어서 난이도·hard 적합·오답 품질을 판정한다. 요청 난이도에 맞추려 하지 말고 실제로 느끼는 대로 답한다.\n청크 rev-fable_judge-022 — 15문항.\n출력: Write 도구로 정확히 이 경로에 JSON 한 파일을 쓴다 → /Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-fable_judge-022.result.json\n출력 JSON 스키마(예시 구조): {\"chunkId\":\"청크 ID\",\"model\":\"fable\",\"items\":[{\"candidateId\":\"id\",\"picked_letter\":\"A|B|C|D\",\"other_defensible\":\"정답 외 방어 가능한 선택지가 있으면 true\",\"est_difficulty\":\"easy|medium|hard (실제 체감, 요청 난이도에 맞추지 말 것)\",\"hard_fit\":\"실제 SAT hard 수준의 사고 단계가 필요하면 true(지문 길이·난어만이면 false)\",\"plausible_distractors\":\"오답 3개가 모두 그럴듯하고 서로 다른 오개념에서 나왔으면 true\",\"length_balanced\":\"네 선택지 길이·구체성이 비슷해 정답이 형식으로 드러나지 않으면 true\",\"multi_answer_risk\":\"복수 정답 위험이 있으면 true\",\"issues\":\"한 줄 메모\"}]}\n허용 값: picked_letter ∈ {A,B,C,D}, 불리언 필드는 true/false, est_difficulty ∈ {easy,medium,hard}. candidateId 를 바꾸지 않고 모든 항목에 답한다.\n금지: 결과 파일 외의 파일 생성·수정, 다른 명령 실행, 문항 수정·재작성. 끝나면 'done <항목 수>' 한 줄만 답한다.\n\n## 문항\n### lit40-medium-03-007 — skill text_structure_purpose · 유형 tone_shift · 요청 난이도 medium\n[지문]\nI give that relic a week before it burns the place down, CLEMENT says, dropping a basket onto the folding counter of the laundromat in Port of Spain. LINTON, his father, does not answer. He lifts an old charcoal iron from its shelf and sets it heating.\nCLEMENT: Nobody pays for hand-pressing anymore, Pa.\nLINTON: (smoothing a white collar) Your grandmother pressed shirts for half of Belmont with this.\nCLEMENT: (laughing) Because she couldn't afford a machine.\nLINTON: (softly) She couldn't. She did it anyway.\n(LINTON holds out the iron. CLEMENT hesitates, then takes it. He presses one sleeve, quickly and badly. He lifts the iron, looks at the scorched crease, and dampens the cloth again without being told.)\nCLEMENT: How long did she hold it before it stopped hurting?\nLINTON: She never said.\n(CLEMENT starts the sleeve over, slower this time. Neither of them looks at the washing machines humming along the wall.)\n\n[질문] Which choice best describes the shift in tone in the text?\nA) From weary irritation to open grief, as Linton mourns his mother aloud.\nB) From dismissive mockery to a hesitant, growing regard for the old craft.\nC) From playful teasing to sharp anger, as Linton faults Clement's clumsiness.\nD) From quiet tension to relief, as Clement agrees to modernize the shop.\n### lit40-medium-03-011 — skill text_structure_purpose · 유형 tone_shift · 요청 난이도 medium\n[지문]\nRead the harbor part again, Yuxuan said, so I did, sitting cross-legged among the half-strung kites in the old kite-maker's yard in Lisbon where Mother used to work. Our plan had been simple: sell her last kites at the festival, buy back the letters she had pawned, and learn at last why she left us for three years. We sold all nine before noon. Yuxuan haggled the pawnbroker down by a third and bowed to him like a courtier, and I laughed so hard I dropped the bundle in the street. Tonight the bundle sits on the workbench, retied in her blue thread. She wrote about the harbor, about missing us, about a doctor in Porto she never once mentioned at home. Yuxuan has gone to bed without brushing his teeth. I have put the kettle on twice and forgotten it both times.\nShanice\n\n[질문] Which choice best describes the shift in tone in the diary entry?\nA) From quiet grief to renewed hope as the siblings recover their mother's letters.\nB) From buoyant triumph over the plan to a subdued, unsettled heaviness.\nC) From nervous doubt to relief as the letters finally explain the long absence.\nD) From cheerful teasing to open resentment as Yuxuan turns against Shanice.\n### lit40-medium-03-027 — skill central_ideas_details · 유형 narrator_attitude · 요청 난이도 medium\n[지문]\nYears later, I can still smell the wet feijoas from the morning the ferry was cancelled and I waited out the rain under a fruit stall at the Auckland market. I was nineteen, and my teacher had just written tidy and empty across the essay I was proudest of. A stranger named Makana sheltered beside me, peeling a feijoa with his thumb. I told him the whole injustice, pausing at the best parts for the outrage I was owed. He asked my name instead. Kian, he repeated, as though trying it on, and then wondered what I would write if nobody graded it. I answered with a twenty-minute speech on fairness, complete with numbered points. I had, I believe, a closing argument. The rain eased by eleven, and the vendors began stacking crates of kumara along the curb.\n\n[질문] Which choice best describes the narrator's attitude toward his younger self?\nA) Stern disapproval of the anger he once aimed at his teacher\nB) Gentle amusement at how sure of himself he once was\nC) Lasting regret that he never answered the stranger's question\nD) Wistful longing for the conviction he felt as a young man\n### lit40-medium-03-032 — skill central_ideas_details · 유형 main_idea_or_purpose · 요청 난이도 medium · hard 기준: 두 곳의 근거를 합쳐 요지를 잡아야 하고, 오답 하나는 일화 요약에 그치는 부분 요지다\n[지문]\nOnce, during the spring Haneul rented a farmhouse outside Porto Alegre, her neighbor Taeyang arrived at dawn with a coil of rope and an apology for the noise. He had sailed for thirty years, he said, and his hands still tied knots the old way, even on the fence he was mending for her goats. By summer he had joined the local farmers' cooperative, whose members teased him about his knots and patiently taught him theirs. He practiced their loop on the porch every evening until he could tie it blind. Yet on the gate he trusted most, the one that held the goats at night, Haneul noticed a sailor's hitch, retied fresh each week. In August the eucalyptus shed long strips of bark across the road, and the goats chewed them with great seriousness.\n\n[질문] Which choice best states the main idea of the text?\nA) Taeyang mends Haneul's fence and is later welcomed by the farmers' cooperative.\nB) Haneul contrasts two kinds of knots to show that a sailor's skills fade on land.\nC) Taeyang keeps faith with his old life even as he embraces his new neighbors.\nD) Newcomers should adopt local customs if they hope to be accepted by others.\n### lit40-medium-03-047 — skill inferences · 유형 relationship_between_characters · 요청 난이도 medium · hard 기준: 두 문장의 단서를 연결해야 하고 오답은 한쪽 감정만 반영한다\n[지문]\nSmoke from the tandoor and the sour breath of rising dough met me each morning in our Samarkand bakery, long before the shutters opened. Darius came at four, though I paid him from six. I never asked him to come early, and he never asked to be paid for it. My husband, before he died, had lent the boy's mother money for a surgery; the ledger with her name in it still sat on the shelf above the flour bins. Darius dusted that shelf every morning and never once touched the ledger. On the coldest days I burned the stale loaves in the oven and told him there was no bread to spare, then left a warm round on the stool by the door, where he would find it without having to thank me. Outside, a cart rattled over the stones toward the market.\n\n[질문] Based on the text, which choice best describes the relationship between the narrator and Darius?\nA) Each quietly acknowledges an old obligation while sparing the other from having to discuss it.\nB) Darius works extra hours mainly to win the narrator's trust so that she will forgive the loan.\nC) The narrator keeps the ledger in sight to remind Darius that his mother's debt is still owed.\nD) The narrator treats Darius with the distant formality expected of a widow toward a hired boy.\n### lit40-medium-03-048 — skill inferences · 유형 symbolism · 요청 난이도 medium\n[지문]\nWe sat on the bench nearest the Havana ferry ramp, and Cleotilde held the ticket her cousin had paid for, a single crossing that left at dawn. Father Emiliano had walked her down from the parish without being asked. She had not come to Mass in ten years, and she reminded him of that twice, as though it settled something. He said nothing about Mass. Instead he watched a deckhand loop a gray mooring line around an iron post. The rope was frayed in a dozen places, spliced and respliced, and the boat pulled at it with every swell. When the deckhand later lifted the line free, the ferry drifted without a sound. Cleotilde asked whether he would scold her for leaving. He said that a rope is not there to keep a boat from sailing, only to let it come back to the same place. She turned the ticket over in her fingers. Gulls argued over a fish head near the customs shed.\n\n[질문] In the text, the mooring line most likely represents\nA) the duties that Father Emiliano believes should keep Cleotilde from leaving Havana.\nB) a tie to home and faith that allows a return without forbidding departure.\nC) the strain Cleotilde feels between her cousin's plans and her own uncertain wishes.\nD) the long years of neglect that have worn away Cleotilde's ties to the parish.\n### lit40-medium-03-049 — skill inferences · 유형 symbolism · 요청 난이도 medium\n[지문]\nMilena held the dustpan while her mother swept, as she had every Saturday since she was nine. Marlon's barbershop on Brīvības Street closed at six, and her mother, who had cut hair there for twenty years, never let anyone else sweep the floor. Tonight they were meant to choose wedding napkins; the catalog lay open on a barber chair, untouched. The broom moved in its old pattern, under the mirrors, around the coat rack, toward the door. Her mother talked about guest lists and seating while she swept, and Milena answered without looking up. Once her mother paused and said that Milena's new flat had wooden floors, the kind that showed every hair. Marlon, counting the till, laughed and said she would need a better broom. Near the end, her mother's arms slowed. Milena set down the pan, took the broom, and finished the last corner in the same strokes, left to right. Her mother picked up the dustpan without a word. Outside, a tram rang its bell twice at the corner.\n\n[질문] In the text, the act of sweeping the shop floor most likely represents\nA) a tiresome chore that Milena intends to leave behind once she is married.\nB) the mother's quiet resistance to discussing her daughter's coming wedding.\nC) a shared habit carrying their bond forward as their roles shift.\nD) the strict standards Marlon expects his employees to follow in the shop.\n### lit40-medium-03-050 — skill inferences · 유형 symbolism · 요청 난이도 medium\n[지문]\nThree rules of the theater in the off-season:\nno films, no tickets, no questions at the door.\nNandi sat in row nine in his pressed uniform,\nhis reenlistment form folded in his cap,\nwhile Neema swept husks from the aisle,\nleftovers of a Nairobi season long gone.\nOn other nights, in other countries,\nhe had watched walls fill up with fire.\nHere the screen hung blank, a sheet of white\nthat nobody had yet been paid to color.\nNeema bumped the projector switch by accident;\nlight crossed the room and carried nothing,\nonly dust, turning slow as weather.\nHe did not ask her to switch it off.\nHe walked to the stage and held one hand\ninside the beam, and watched his shadow\nlie down across the white, as large as he liked.\nNeema leaned on the broom and waited.\nOn the seat behind him, the cap tipped over,\nand the folded paper slid onto the floor.\n\n[질문] In the text, the blank screen most likely represents\nA) the painful scenes from war that Nandi still sees whenever he closes his eyes.\nB) the emptiness of a theater that has nothing to show during the off-season.\nC) the silence between Nandi and Neema that neither of them knows how to break.\nD) an open future that Nandi is starting to picture as something he can shape.\n### lit40-medium-03-053 — skill words_in_context · 유형 figurative_language · 요청 난이도 medium\n[지문]\nWho gives a widow a shovel for her seventy-fifth birthday? Zawadi had turned the question over for a week, ever since Theo arrived with the long box tied in green ribbon. Since her husband's funeral she had hardly left the flat, and her neighbors had begun to say, kindly, that she should find something to do with her hands. So the shovel stood in the kitchen corner like an accusation. Each morning she moved her chair so that her back was to it, and each evening she found herself facing it again. On Sunday Theo returned and walked her up the hill to the community garden above the Marseille harbor. In the farthest bed, beneath a fig tree, the soil had gone hard and pale. Theo said his grandfather had dug this plot for forty years and had asked that no stranger ever turn it. Zawadi held out her hand for the shovel he had carried up the hill.\n\n[질문] As used in the text, the phrase “like an accusation” most nearly suggests that the shovel\nA) seemed to Zawadi a reminder of the garden work her husband once did alone.\nB) struck Zawadi as an awkward, impractical gift for a woman of her age.\nC) appeared to Zawadi to blame her for withdrawing from life in her grief.\nD) showed Zawadi that Theo shared her neighbors' impatience with her mourning.\n### lit40-medium-03-054 — skill words_in_context · 유형 figurative_language · 요청 난이도 medium\n[지문]\nJosiah had bought fish from Ephraim every Friday for two years and had never once seen the old man smile. On Mill Street people said he shorted his scales and shouted at children who leaned on his counter. So Josiah nearly dropped his notebook the Tuesday he walked into the night English class at the Ohio language school and found Ephraim at the chalkboard, drilling six new arrivals on the names of vegetables. Afterward the teacher explained that Ephraim had come to town forty years earlier knowing no English and had taught the class for free ever since. Once, she said, a student had brought him a cake at the market, and he had not spoken to her for a month. His temper, the teacher said, was a fence he had built himself. Josiah thought of every child Ephraim had sent away from the counter and wondered how many of their parents sat in this room. Ephraim erased the board in long, careful strokes.\n\n[질문] As used in the text, the phrase “a fence he had built himself” most nearly suggests that Ephraim's temper is\nA) a habit he picked up from years of dealing with rude customers at the market.\nB) an outlet for the frustration he feels when his students learn too slowly.\nC) a reputation that his neighbors created and that he has never tried to correct.\nD) a deliberate barrier that keeps others from thanking him for his kindness.\n### lit40-medium-03-069 — skill text_structure_purpose · 유형 tone_shift · 요청 난이도 medium\n[지문]\nSome guests are announced long before they arrive. For a month the bride had heard warnings about Kemoy, Dwayne's aunt, who had opposed the engagement and was now coming to the salt-water pool in Port of Spain where the bride and her mother planned the wedding with their feet in the water. The mother rehearsed polite refusals under her breath. When Kemoy came, she lowered herself onto the edge of the pool, kept her own feet dry, and criticized the guest list, the menu, and the color of the tablecloths. The bride felt her mother stiffen beside her. Then Kemoy asked what the hall would cost. Hearing the figure, she clicked her tongue, opened her handbag, and unfolded a page of names: a caterer who owed her a favor, a cousin with a free hall, a band that played for half price. Two families, she said, should not go broke on one afternoon. Then she slipped off her sandals and put her feet in the water beside them.\n\n[질문] Which choice best describes the shift in tone that occurs in the text?\nA) From relaxed planning at the pool to growing fear of a lasting family feud\nB) From wary dread of Kemoy to relief at discovering her practical support\nC) From open hostility toward the wedding to grudging acceptance of its cost\nD) From cheerful excitement about the wedding to weary concern about money\n### lit40-medium-03-071 — skill text_structure_purpose · 유형 tone_shift · 요청 난이도 medium\n[지문]\n\"Not again,\" I said this morning, pulling your envelope out of my dryer at the laundromat.\n\nDear Talon,\n\nI am writing because this is the third piece of your mail that has reached my machine, my mailbox, or my coat pocket, and I am starting to think the wall between our apartments lets through more than your radio. I had a note ready to slide under your door. It used the word \"repeatedly\" twice. But the envelope had come open in the wash, and the first line was showing before I could look away. It was from the clinic, about your sister. I should not have read it, and I will not pretend I did not. I have complained about that wall every night for a year. I did not know what you were listening for on the other side of it. My door is open after six. I make terrible coffee, and I will not mention the mail.\n\nTallulah\n\n[질문] Which choice best describes the shift in tone that occurs in the letter?\nA) From friendly amusement at the mix-up to formal distance about privacy\nB) From mild curiosity about the envelope to anxious alarm over the clinic\nC) From sincere apology for reading the letter to lighthearted teasing\nD) From annoyed complaint about the misdelivered mail to quiet sympathy\n### lit40-medium-03-078 — skill text_structure_purpose · 유형 underlined_portion_function · 요청 난이도 medium\n[지문]\nAfter her mother remarried, Putri learned that Anh kept one rule above all others: no talking in the reading room of the old library in Hanoi, where he took her every Sunday. She resented it. For a year they sat across from each other in silence, he behind his newspapers and she behind whatever novel she could pretend to read. She decided the rule was his way of not having to know her. Twice that spring she left a book open on the table, hoping he would ask about it; he only turned another page. The week before she left for university, she asked whether the rule still applied now that she was grown. He considered the question, then slid a library slip across the table. On it, in pencil, was the title of every book she had read there, with a small mark beside the ones she had read twice. __He had been listening in the only language the room allowed.__ Outside, scooters crowded the wet street, and neither of them hurried to cross.\n\n[질문] Which choice best describes the function of the underlined sentence in the text as a whole?\nA) It suggests that Anh preferred the library's silence to speaking with Putri.\nB) It explains why Anh insisted so strictly on the rule of silence in the room.\nC) It reframes the silence Putri resented as a form of attention Anh paid her.\nD) It shows that Putri has finally accepted that the rule no longer applies.\n### lit40-medium-03-084 — skill central_ideas_details · 유형 narrator_attitude · 요청 난이도 medium\n[지문]\nWe were both quiet on the walk home from the field in Gdansk, Pavel because he had sent the penalty kick over the crossbar in front of every family on the street, and his grandmother Irena because she seemed to be thinking about something else. She had watched from the bench by the fence in her good coat. Halfway home she began, without being asked, to describe a school play in which she had forgotten every line and stood frozen while the hall laughed. She described the laughter in great detail, more than Pavel thought anyone would want to remember. At eleven he decided she simply liked her own stories better than his match. Decades later, telling his own daughter about that night, he paused over the part where Irena had never once mentioned the ball, and he found he had to start the sentence twice. Along the shipyard road, the streetlights came on one after another.\n\n[질문] Which choice best describes Pavel's attitude as an adult toward his grandmother's story?\nA) Lasting puzzlement over why she turned the talk away from his missed kick\nB) Moved appreciation for the care hidden in how she chose to comfort him\nC) Lingering embarrassment that she exposed such a humiliating memory to him\nD) Quiet regret that he had once judged her stories to be self-centered\n### lit40-medium-03-097 — skill inferences · 유형 tone_or_mood · 요청 난이도 medium · hard 기준: 두 정서의 비중을 판단해야 하며, 오답은 정반대가 아니라 비중이 틀린 어조다\n[지문]\nPaper cups rose in a careful tower on the low table between us, one added for each hour of the delay in the Bergen hospital waiting room. I, Anneke, had set down the first cup; Marit, a stranger until that morning, had steadied the base when it leaned. By the third hour we were debating, with mock solemnity, who deserved credit for the structure. I argued that foundations come first. Marit argued that a foundation is only a floor until someone builds on it. A nurse passing with a cart told us to apply for a grant, and we both laughed louder than the joke deserved. When a door opened down the corridor, Marit stopped talking in the middle of a word, then picked the sentence up again as if nothing had happened. I added the sixth cup slowly. Rain ran down the tall windows above the car park.\n\n[질문] Which choice best describes the overall mood of the passage?\nA) Tense and fearful, as the two strangers dread the news they are waiting for\nB) Competitive and prickly, as each stranger insists on credit for the tower\nC) Quietly anxious, with brief bursts of humor that barely mask the worry\nD) Playful and companionable, with an undercurrent of unspoken unease"
+}

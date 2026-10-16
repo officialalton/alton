@@ -3,6 +3,120 @@
 import { createAdminClient } from "@/lib/supabase-admin";
 import { requireAdmin } from "@/lib/admin-auth";
 import { sendInviteEmail } from "@/lib/invite-email";
+import { currentRequestOrigin } from "@/lib/request-origin";
+import { loadCurrentTeacherRate, loadTeacherRateLock, RATE_LOCK_MESSAGE, type TeacherRateLock } from "@/lib/teacher-agreements/rate";
+import { assertTeacherHasValidRate } from "@/lib/enrollment/teacher-rate-check";
+import {
+  loadParents,
+  loadStudents,
+  loadTeachers,
+  loadUsersPage,
+  type UsersPageResult,
+  loadStudentCreditHistoryBatch,
+  loadTeacherQcWarningsBatch,
+  type ParentListItem,
+  type StudentListItem,
+  type TeacherListItem,
+  type CreditTransaction,
+  type QcWarning,
+} from "./users-data";
+
+// 2026-09-10(P1 — 학부모 SSR 회귀 조사 후속) — admin/page.tsx의 거대한
+// Promise.all 안에서 loadParents()가 실패(또는 지연)하면 "사용자" 탭뿐
+// 아니라 페이지 전체가 예외를 던져 admin/error.tsx로 튕겨나갔다(원인
+// 구분 불가능한 "그냥 아무것도 안 뜸" 증상). 학생/선생님과 동일하게 이
+// 액션으로 분리하고, 예외를 던지는 대신 {ok, data, errorCode}로
+// 응답한다 — 페이지 전체를 절대 깨뜨리지 않고, UsersTab이 실패를
+// 명확히 구분해 "다시 시도" 버튼을 보여줄 수 있게 한다.
+export type ListParentsResult = { ok: true; data: ParentListItem[] } | { ok: false; errorCode: string };
+
+export async function listParentsForUsersTabAction(): Promise<ListParentsResult> {
+  const startedAt = Date.now();
+  try {
+    const { supabase } = await requireAdmin();
+    const data = await loadParents(supabase);
+    console.log(
+      JSON.stringify({ event: "server_timing", stage: "users_tab.parents.action_total", ms: Date.now() - startedAt, count: data.length })
+    );
+    return { ok: true, data };
+  } catch (e) {
+    const errorCode = e instanceof Error ? e.message : "unknown_error";
+    console.log(
+      JSON.stringify({ event: "server_timing_error", stage: "users_tab.parents.action", ms: Date.now() - startedAt, errorCode })
+    );
+    return { ok: false, errorCode };
+  }
+}
+
+// 2026-10-08 — 사용자 탭 서버 페이지네이션(10명/페이지). 탭·필터·검색·페이지에 맞는
+// 한 페이지와 전체 건수만 조회한다. 수업권 이력/QC 경고도 그 페이지 id에 대해서만 읽는다.
+export type UsersPageParams = { search?: string; memberType?: "all" | "tutoring" | "free"; page?: number };
+export type ListUsersPageResult<T> = { ok: true; data: UsersPageResult<T> } | { ok: false; errorCode: string };
+
+export async function listParentsPageAction(params: UsersPageParams = {}): Promise<ListUsersPageResult<ParentListItem>> {
+  const startedAt = Date.now();
+  try {
+    const { supabase } = await requireAdmin();
+    const data = (await loadUsersPage(supabase, "parent", params)) as UsersPageResult<ParentListItem>;
+    console.log(JSON.stringify({ event: "server_timing", stage: "users_tab.parents.page_total", ms: Date.now() - startedAt, count: data.items.length, total: data.total }));
+    return { ok: true, data };
+  } catch (e) {
+    return { ok: false, errorCode: e instanceof Error ? e.message : "unknown_error" };
+  }
+}
+
+export async function listStudentsPageAction(params: UsersPageParams = {}): Promise<
+  ListUsersPageResult<StudentListItem> & { creditHistoryByStudent?: Record<string, CreditTransaction[]> }
+> {
+  try {
+    const { supabase } = await requireAdmin();
+    const data = (await loadUsersPage(supabase, "student", params)) as UsersPageResult<StudentListItem>;
+    const creditHistoryByStudent = await loadStudentCreditHistoryBatch(supabase, data.items.map((s) => s.id));
+    return { ok: true, data, creditHistoryByStudent };
+  } catch (e) {
+    return { ok: false, errorCode: e instanceof Error ? e.message : "unknown_error" };
+  }
+}
+
+export async function listTeachersPageAction(params: UsersPageParams = {}): Promise<
+  ListUsersPageResult<TeacherListItem> & { qcWarningsByTeacher?: Record<string, QcWarning[]> }
+> {
+  try {
+    const { supabase } = await requireAdmin();
+    const data = (await loadUsersPage(supabase, "teacher", params)) as UsersPageResult<TeacherListItem>;
+    const qcWarningsByTeacher = await loadTeacherQcWarningsBatch(supabase, data.items.map((t) => t.id));
+    return { ok: true, data, qcWarningsByTeacher };
+  } catch (e) {
+    return { ok: false, errorCode: e instanceof Error ? e.message : "unknown_error" };
+  }
+}
+
+// 전체 목록 조회(페이지네이션 없음) — Messenger 탭의 선생님 선택 등 전체가 필요한 곳 전용.
+export async function listStudentsForUsersTabAction(): Promise<{
+  students: StudentListItem[];
+  creditHistoryByStudent: Record<string, CreditTransaction[]>;
+}> {
+  const { supabase } = await requireAdmin();
+  const students = await loadStudents(supabase);
+  const creditHistoryByStudent = await loadStudentCreditHistoryBatch(
+    supabase,
+    students.map((s) => s.id)
+  );
+  return { students, creditHistoryByStudent };
+}
+
+export async function listTeachersForUsersTabAction(): Promise<{
+  teachers: TeacherListItem[];
+  qcWarningsByTeacher: Record<string, QcWarning[]>;
+}> {
+  const { supabase } = await requireAdmin();
+  const teachers = await loadTeachers(supabase);
+  const qcWarningsByTeacher = await loadTeacherQcWarningsBatch(
+    supabase,
+    teachers.map((t) => t.id)
+  );
+  return { teachers, qcWarningsByTeacher };
+}
 
 async function inviteAndCreateProfile(params: {
   email: string;
@@ -10,10 +124,9 @@ async function inviteAndCreateProfile(params: {
   role: "parent" | "student" | "teacher";
 }): Promise<string> {
   const admin = createAdminClient();
+  const siteUrl = await currentRequestOrigin();
   const redirectTo =
-    params.role === "parent"
-      ? `${process.env.NEXT_PUBLIC_SITE_URL}/set-password?role=parent`
-      : `${process.env.NEXT_PUBLIC_SITE_URL}/set-password`;
+    params.role === "parent" ? `${siteUrl}/set-password?role=parent` : `${siteUrl}/set-password`;
   const { data, error } = await admin.auth.admin.inviteUserByEmail(params.email, {
     redirectTo,
   });
@@ -28,24 +141,16 @@ async function inviteAndCreateProfile(params: {
   return userId;
 }
 
-// (2026-08-30 R2 Task 4) 계정 초대는 더 이상 즉시 Supabase Auth 계정을 만들지
-// 않는다 — account_invites에 ALTON 자체 토큰(해시만 저장)으로 초대를 기록하고,
-// 실제 계정·역할·household 연결은 초대 수락 시(app/api/invite/accept)
-// 하나의 트랜잭션에서 처리한다(만료/재발송/철회/중복 방지를 DB 상태 머신으로
-// 관리하기 위함 — 상세는 supabase/migrations/20260902000000_r2_account_invites.sql).
-export async function inviteParent(params: { name: string; email: string }): Promise<string> {
-  const { supabase } = await requireAdmin();
-  const { data, error } = await supabase.rpc("create_account_invite", {
-    p_email: params.email,
-    p_name: params.name,
-    p_role: "parent",
-    p_household_id: null,
-  });
-  if (error) throw new Error(error.message);
-  const row = data![0];
-  await sendInviteEmail({ to: params.email, name: params.name, token: row.raw_token, role: "parent" });
-  return row.invite_id;
-}
+// (2026-09-07) 레거시 "학부모 초대"(inviteParent, account_invites 기반 — 자녀
+// 없이 보호자만 먼저 만들고 나중에 자녀를 추가하는 경로)는 제거했다. 지인/추천
+// 경로(app/admin/direct-account-actions.ts의 sendDirectOnboardingNoticeAction,
+// trial_onboarding_links 기반)가 보호자+학생을 한 번에 만드는 완전한 상위
+// 호환이라 UsersTab에서 두 폼이 중복 노출됐고, 레거시 쪽은 production에서
+// React 미니파이 오류(#441)로 크래시가 났다(원인: 이 함수가 예외를 그대로
+// throw해 Next.js Server Action 오류 마스킹에 걸림 — sendTrialOnboardingNoticeAction/
+// sendDirectOnboardingNoticeAction에서 이미 고친 것과 동일한 클래스의 버그).
+// 다른 호출부가 없음을 확인하고 함수 자체를 삭제했다(더 이상 UI가 없어
+// 예외 마스킹 버그를 별도로 고칠 필요도 없어졌다).
 
 // (2026-08-30 R2 Task 3) 가족 관계 원본은 households/household_members다 —
 // guardian_students는 동결됐고 DB 트리거가 쓰기를 거부한다. 부모가 이미 속한
@@ -112,7 +217,7 @@ export async function inviteStudent(params: {
 // 대체 구현과 이 함수 제거는 Task 7에서 진행하고, 지금은 명확한 오류로 막기만
 // 한다 — 관리자 권한 확인은 그대로 거쳐서 익명/비관리자에게는 그보다 먼저
 // "로그인이 필요합니다"/"관리자만 사용할 수 있습니다"가 나가도록 한다.
-export async function inviteTeacher(params: {
+export async function inviteTeacher(_params: {
   name: string;
   email: string;
   school: string;
@@ -127,6 +232,7 @@ export async function inviteTeacher(params: {
 // (2026-08-30 R2 Task 4) 위 inviteTeacher()가 호출을 막기 전까지 실제로 쓰이던
 // 구현 — Task 7에서 Workspace 프로비저닝으로 교체·제거될 때까지 참고용으로
 // 남겨둔다(호출부 없음, 삭제하지 않음).
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 async function legacyInviteTeacherByEmail(params: {
   name: string;
   email: string;
@@ -172,10 +278,13 @@ async function legacyInviteTeacherByEmail(params: {
 // transition_account_status()가 유일한 정상 경로다(R2 §5.7) — 허용된 전이만
 // 통과시키고(예: pending→active, active↔suspended) 감사 이력을 남긴다.
 // students/teachers/parents.status 직접 UPDATE는 DB 트리거가 전부 차단한다.
+// transition_account_status RPC는 closure_pending/closed도 이미 허용한다(2026-10-06 Free Accounts에서 TS 타입만 확장).
+export type AccountStatusTarget = "active" | "pending" | "suspended" | "inactive" | "closure_pending" | "closed";
+
 async function transitionAccountStatus(
   supabase: Awaited<ReturnType<typeof requireAdmin>>["supabase"],
   profileId: string,
-  status: "active" | "pending" | "suspended",
+  status: AccountStatusTarget,
   reason?: string
 ): Promise<void> {
   const { error } = await supabase.rpc("transition_account_status", {
@@ -188,72 +297,76 @@ async function transitionAccountStatus(
 
 export async function setStudentStatus(
   studentId: string,
-  status: "active" | "pending" | "suspended"
+  status: AccountStatusTarget,
+  reason?: string
 ): Promise<void> {
   const { supabase } = await requireAdmin();
-  await transitionAccountStatus(supabase, studentId, status);
+  await transitionAccountStatus(supabase, studentId, status, reason);
 }
 
 export async function setParentStatus(
   parentId: string,
-  status: "active" | "pending" | "suspended"
+  status: "active" | "pending" | "suspended" | "inactive"
 ): Promise<void> {
   const { supabase } = await requireAdmin();
   await transitionAccountStatus(supabase, parentId, status);
 }
 
+// M4 UAT #2 후속(2026-09-05): 관리자 "생년월일 확인 완료" 버튼 — 신원확인 서류
+// 등 별도 절차 없이 확인자·확인시각만 기록한다(verify_student_date_of_birth()).
+// 체험수업권 자동 지급 게이트(grant_trial_entitlement_for_consultation())가
+// 이 값을 검사하므로, 체험수업 시작 전 관리자가 이 버튼을 눌러야 한다.
+export async function verifyStudentDateOfBirth(studentId: string): Promise<void> {
+  const { supabase } = await requireAdmin();
+  const { error } = await supabase.rpc("verify_student_date_of_birth", {
+    p_student_id: studentId,
+  });
+  if (error) throw new Error(error.message);
+}
+
 export async function setTeacherStatus(
   teacherId: string,
-  status: "active" | "pending" | "suspended"
+  status: "active" | "pending" | "suspended" | "inactive"
 ): Promise<void> {
   const { supabase } = await requireAdmin();
   if (status === "active") {
     // DB 트리거(teachers_enforce_active_requires_rate)가 최종 방어선이지만,
     // 그 원시 오류를 그대로 보여주지 않고 미리 확인해 사용자 친화적으로 안내한다.
+    // R5 선생님 배정(app/admin/subject-enrollment-actions.ts)과 같은 공유
+    // 함수(lib/enrollment/teacher-rate-check.ts)를 사용한다.
     const admin = createAdminClient();
-    const { data: hasRate, error: checkError } = await admin.rpc(
-      "has_valid_current_teacher_rate",
-      { p_teacher_id: teacherId }
+    await assertTeacherHasValidRate(
+      admin,
+      teacherId,
+      "이 선생님은 아직 시급이 설정되지 않아 active로 전환할 수 없습니다. 먼저 시급을 설정해주세요."
     );
-    if (checkError) throw new Error(checkError.message);
-    if (!hasRate) {
-      throw new Error(
-        "이 선생님은 아직 시급이 설정되지 않아 active로 전환할 수 없습니다. 먼저 시급을 설정해주세요."
-      );
-    }
   }
   await transitionAccountStatus(supabase, teacherId, status);
 }
 
 export async function setTeacherHourlyRate(
   teacherId: string,
-  rateKrw: number
+  rate: number,
+  currency: "KRW" | "USD" = "KRW"
 ): Promise<void> {
   await requireAdmin();
-  if (!Number.isFinite(rateKrw) || rateKrw <= 0) {
-    throw new Error("시급은 1원 이상의 숫자로 입력해주세요.");
+  if (!Number.isFinite(rate) || rate <= 0) {
+    throw new Error(currency === "USD" ? "시급은 0보다 큰 달러 금액으로 입력해주세요." : "시급은 1원 이상의 숫자로 입력해주세요.");
   }
+  // USD는 minor unit(센트)로 저장한다. 통화 간 환산은 하지 않는다.
+  const amountMinor = currency === "USD" ? Math.round(rate * 100) : Math.round(rate);
+  if (amountMinor <= 0) throw new Error("시급이 너무 작습니다.");
   // set_teacher_rate()만이 시급 변경의 정상 경로다(기존 이력 종료 + 새 이력
   // 생성을 원자적으로 수행) — teachers.hourly_rate_krw 직접 UPDATE는 이 함수가
   // teacher_rate_history와 함께 동기화해주므로 더 이상 직접 하지 않는다.
   const admin = createAdminClient();
+  const lock = await loadTeacherRateLock(admin, teacherId);
+  if (lock) throw new Error(RATE_LOCK_MESSAGE[lock]);
   const { error } = await admin.rpc("set_teacher_rate", {
     p_teacher_id: teacherId,
-    p_amount_minor: rateKrw,
-    p_currency: "KRW",
+    p_amount_minor: amountMinor,
+    p_currency: currency,
   });
-  if (error) throw new Error(error.message);
-}
-
-export async function setTeacherCalendlyUrl(
-  teacherId: string,
-  url: string
-): Promise<void> {
-  const { supabase } = await requireAdmin();
-  const { error } = await supabase
-    .from("teachers")
-    .update({ calendly_scheduling_url: url.trim() || null })
-    .eq("id", teacherId);
   if (error) throw new Error(error.message);
 }
 
@@ -297,4 +410,25 @@ export async function adjustStudentCredit(params: {
   if (txError) throw new Error(txError.message);
 
   return { newBalance, transactionId: tx.id };
+}
+
+// R12(Section 2, 2026-09-24) — closed 계정 상세 열람 게이트(§4.13 "별도
+// 권한을 가진 관리자만 사유를 입력한 뒤 접근할 수 있다"). 사유 없이는
+// record_closed_account_access() RPC 자체가 예외를 던진다.
+export async function recordClosedAccountAccess(profileId: string, reason: string): Promise<void> {
+  const { supabase } = await requireAdmin();
+  const { error } = await supabase.rpc("record_closed_account_access", {
+    p_profile_id: profileId,
+    p_reason: reason,
+  });
+  if (error) throw new Error(error.message);
+}
+
+export async function getTeacherRateLockAction(
+  teacherId: string
+): Promise<{ lock: TeacherRateLock; message: string | null; rate: { amountMinor: number; currency: "KRW" | "USD" } | null }> {
+  await requireAdmin();
+  const admin = createAdminClient();
+  const [lock, rate] = await Promise.all([loadTeacherRateLock(admin, teacherId), loadCurrentTeacherRate(admin, teacherId)]);
+  return { lock, message: lock ? RATE_LOCK_MESSAGE[lock] : null, rate: rate ? { amountMinor: rate.amountMinor, currency: rate.currency } : null };
 }

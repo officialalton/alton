@@ -1,0 +1,1162 @@
+[
+ {
+  "gid": "medium-transitions-401",
+  "runId": "rw-supplement-medium",
+  "skill": "transitions",
+  "domain": "rw_expression_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "In Margaret Vell's novel The Lamplighter's Daughter (2019), the narrator, Hester, spends the first half of the book insisting that she has no interest in her late father's unfinished letters, which she keeps locked in a drawer she claims never to open. Vell, writing in the long, formal sentences of a Victorian novel, lets Hester repeat this claim in nearly every chapter. ______ the reader gradually notices that Hester can quote whole passages of the letters from memory, a detail that quietly exposes her indifference as a pose.\n\nWhich choice completes the text with the most logical transition?",
+   "stimulus": "In Margaret Vell's novel The Lamplighter's Daughter (2019), the narrator, Hester, spends the first half of the book insisting that she has no interest in her late father's unfinished letters, which she keeps locked in a drawer she claims never to open. Vell, writing in the long, formal sentences of a Victorian novel, lets Hester repeat this claim in nearly every chapter. ______ the reader gradually notices that Hester can quote whole passages of the letters from memory, a detail that quietly exposes her indifference as a pose.",
+   "question": "Which choice completes the text with the most logical transition?",
+   "options": [
+    "Accordingly,",
+    "All the while,",
+    "For example,",
+    "In other words,"
+   ],
+   "correctIndex": 1,
+   "answers": null,
+   "explanation": "앞 문장은 Hester가 편지에 관심이 없다고 계속 주장한다는 내용이고, 뒤 문장은 그 주장이 반복되는 동안 독자가 그녀가 편지를 외우고 있음을 알아차린다는, 주장과 어긋나는 사실을 제시한다. 따라서 주장이 이어지는 '그 동안 내내' 반대 증거가 쌓인다는 대조적 동시성을 나타내는 B가 적절하다. A는 결과 관계를 나타내지만, 주장을 반복한다고 해서 그녀가 편지를 외우게 되는 것은 아니다. C는 뒤 문장이 앞 문장의 사례라는 뜻인데, 편지를 외운다는 것은 무관심을 주장하는 사례가 아니라 그 주장과 반대된다. D는 다시 말하기를 나타내지만, 뒤 문장은 앞 내용을 바꿔 말하는 것이 아니라 그것을 뒤집는다.",
+   "explanationEn": "The previous sentence says Hester keeps claiming she has no interest in the letters. The next sentence reveals something that contradicts that claim: she can quote them from memory, and the reader notices this while she keeps repeating the claim. Choice B fits because \"All the while\" shows that this contradicting evidence builds up during the same stretch in which she makes her claims. Choice A signals a result, but repeating the claim doesn't cause her to know the letters by heart. Choice C would make the memorized passages an example of her claimed indifference, when they actually undercut it. Choice D signals a restatement, but the second sentence reverses the first point rather than rephrasing it.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "B",
+   "seed": "문학(19세기 소설 분위기의 현대 서술)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "앞 문장(주장을 매 장마다 반복)과 뒤 문장(그 사이 독자가 반대 증거를 알아차림)은 동시 진행되는 대조 관계이므로 'All the while'이 유일하게 논리적임. A는 '반복 주장 → 독자가 주목'으로 표면상 결과처럼 읽힐 수 있어 유혹적 오답으로 기능하고, C·D는 뒤 문장이 앞 내용을 뒤집는다는 점을 파악해야 배제됨. 해설(한·영) 모두 정답과 선택지 글자 참조가 일치하며 영어 해설에 한글 없음. 가상의 소설·작가를 사용해 저작권·사실 오류 우려 없음. 문장부호(쉼표 뒤 소문자 the) 형식 적절. 대조+동시성이라는 두 요소를 결합해야 정답을 고를 수 있어 medium에 적합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": false,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "B는 주장이 반복되는 동안 그와 어긋나는 증거가 쌓인다는 대조적 동시성을 정확히 나타냄. 대조 신호인 'All the while'은 인과(A)·예시(C)·재진술(D)과 비교해야 고를 수 있어 medium 난이도에 맞음. 소설과 작가는 가상으로 보이며 저작권 문제는 없음. 'Victorian novel' 문체 언급은 내용과 무관한 정보이지만 문항에 해가 되지는 않음.",
+    "passed": false
+   }
+  }
+ },
+ {
+  "gid": "medium-transitions-402",
+  "runId": "rw-supplement-medium",
+  "skill": "transitions",
+  "domain": "rw_expression_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "Along the coast of Bangladesh, engineers long assumed that building tall embankments around low-lying \"polders\" would protect farmland from tidal flooding. The embankments did keep seawater out during ordinary high tides. ______ by blocking the sediment that tides once spread across the land, they caused the enclosed fields to sink gradually relative to the rivers outside, so that when an embankment finally breached, water poured in deeper and stayed longer than before.\n\nWhich choice completes the text with the most logical transition?",
+   "stimulus": "Along the coast of Bangladesh, engineers long assumed that building tall embankments around low-lying \"polders\" would protect farmland from tidal flooding. The embankments did keep seawater out during ordinary high tides. ______ by blocking the sediment that tides once spread across the land, they caused the enclosed fields to sink gradually relative to the rivers outside, so that when an embankment finally breached, water poured in deeper and stayed longer than before.",
+   "question": "Which choice completes the text with the most logical transition?",
+   "options": [
+    "As a result,",
+    "For example,",
+    "Over time, however,",
+    "Similarly,"
+   ],
+   "correctIndex": 2,
+   "answers": null,
+   "explanation": "앞 문장은 제방이 평상시 만조에는 바닷물을 막았다는 긍정적 효과를 인정하고, 뒤 문장은 같은 제방이 퇴적물을 막아 땅을 가라앉게 해 결국 홍수 피해를 키웠다는 반대 결과를 제시하므로 '양보 후 반전'과 점진적 시간 경과를 함께 나타내는 C가 정답이다. A는 제방이 퇴적물을 막은 것이 원인이 된 것은 맞지만, 바닷물을 막은 것의 '결과'로 지반 침하가 일어난 것이 아니므로 인과 방향이 맞지 않는다. B는 뒤 문장이 앞 문장의 성공 사례를 보여 주는 예시가 아니라 그와 상반된 결과이므로 틀리다. D는 두 문장이 비슷한 효과를 말한다고 보지만, 실제로는 보호 효과와 피해 악화가 대조되므로 틀리다.",
+   "explanationEn": "The previous sentence grants a benefit: the embankments kept seawater out during ordinary high tides. The next sentence then shows that the same embankments slowly made flooding worse by starving the land of sediment. This is a concession followed by a reversal that develops gradually, so C is correct. A may look tempting because the embankments did cause the sinking, but the sinking was not a result of keeping out the tides, which is what the previous sentence describes. B is wrong because the second sentence isn't an example of the success the passage just described; it contradicts it. D is wrong because the two sentences describe opposite effects, not similar ones.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "C",
+   "seed": "환경·지리",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "앞 문장의 'did keep'이 양보 신호이고 뒤 문장이 장기적 역효과를 서술하므로 C(Over time, however,)가 유일하게 논리적임. A는 제방-침하 간 인과가 실제로 존재해 부분적 유인력이 있으나, 앞 문장(바닷물 차단)의 결과가 아니며 뒤 문장이 이미 'by blocking the sediment'로 원인을 명시하므로 배제됨. B·D는 예시/유사 관계가 아니어서 배제. 한국어·영어 해설 모두 정답과 글자 참조가 일치하고 모순 없음. 방글라데시 폴더 지반 침하 사실은 실제 연구(Auerbach et al. 2015 등)와 부합. B·D의 유인력이 다소 약해 medium 하한에 가깝지만 양보→반전 구조 파악이 필요해 표준 medium 범위로 판정."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": false,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "too_easy",
+     "eliminated:2"
+    ],
+    "note": "그럴듯한 오답은 A(As a result)뿐이다. B(For example)와 D(Similarly)는 대조 구조에서 바로 배제되므로 '오답 3개 중 최소 2개는 부분 근거를 가져야 한다'는 medium 기준에 못 미친다. 방글라데시 폴더의 퇴적물 공급 차단과 지반 침하는 실제로 보고된 현상이다.",
+    "passed": false
+   }
+  }
+ },
+ {
+  "gid": "medium-transitions-404",
+  "runId": "rw-supplement-medium",
+  "skill": "transitions",
+  "domain": "rw_expression_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "When engineers at a Dutch firm designed a pedestrian bridge from 3D-printed stainless steel, critics predicted that the printed metal would be too porous and brittle to bear heavy foot traffic. Early test samples did show tiny internal voids, and some layers bonded unevenly. ______ load tests on the finished twelve-meter span revealed that it could support several times the weight of a dense crowd without measurable deformation, and the bridge was installed over an Amsterdam canal.\n\nWhich choice completes the text with the most logical transition?",
+   "stimulus": "When engineers at a Dutch firm designed a pedestrian bridge from 3D-printed stainless steel, critics predicted that the printed metal would be too porous and brittle to bear heavy foot traffic. Early test samples did show tiny internal voids, and some layers bonded unevenly. ______ load tests on the finished twelve-meter span revealed that it could support several times the weight of a dense crowd without measurable deformation, and the bridge was installed over an Amsterdam canal.",
+   "question": "Which choice completes the text with the most logical transition?",
+   "options": [
+    "Nevertheless,",
+    "Consequently,",
+    "Specifically,",
+    "Similarly,"
+   ],
+   "correctIndex": 0,
+   "answers": null,
+   "explanation": "앞 문장은 시험 샘플에서 내부 기공과 불균일한 접합이 나타났다는, 비평가들의 우려를 일부 뒷받침하는 사실을 인정한다. 빈칸 뒤 문장은 그런 결함이 있었는데도 완성된 다리가 큰 하중을 견뎠다는 결과를 제시하므로, 양보 후 반전을 나타내는 A가 정답이다. B는 결함이 뛰어난 강도의 원인처럼 만들어 인과 방향이 맞지 않는다. C는 뒤 문장이 결함을 구체적으로 설명하는 것처럼 만들지만, 실제로는 완성된 다리의 시험 결과라는 새로운 정보를 제시한다. D는 결함과 강도가 서로 비슷한 사례인 것처럼 연결하지만, 두 내용은 서로 대조된다.",
+   "explanationEn": "The previous sentence admits that early samples had voids and uneven bonding, which partly supports what the critics feared. The next sentence reports that the finished bridge held very heavy loads despite those flaws, so the text needs a transition that admits a point and then reverses it. That makes A correct. B would mean the flaws caused the bridge's strength, which gets the cause and effect wrong. C would make the next sentence a specific detail about the flaws, but it actually gives new information: test results for the finished bridge. D presents the flaws and the strength as similar examples, but the two ideas contrast.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "A",
+   "seed": "기술·공학 사례",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "앞 문장(결함 인정)과 뒤 문장(강한 하중 지지)의 대조 관계가 명확하여 'Nevertheless'가 유일하게 성립. B는 앞 문장만 보면 인과처럼 보일 수 있고, C는 'load tests'가 세부 설명처럼 보일 수 있어 비교가 필요한 오답. 실제 MX3D 다리(암스테르담 2021 설치) 사실과 부합. 한·영 해설 모두 정답·글자 참조 일치, 한글 없음."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": false,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "too_easy",
+     "eliminated:3"
+    ],
+    "note": "Nevertheless가 정답임은 확실하다. 소재(MX3D의 12m 스테인리스강 3D 프린팅 다리, 2021년 암스테르담 운하에 설치)도 사실과 맞다. 다만 결함 언급 뒤에 강한 하중 결과가 이어지는 대비가 너무 뚜렷해서 훑어 읽어도 정답이 보인다. Specifically와 Similarly는 그럴듯한 근거가 거의 없어 바로 배제된다. 따라서 medium 기준(오답 중 최소 2개가 부분적 근거를 가질 것)에 못 미친다.",
+    "passed": false
+   }
+  }
+ },
+ {
+  "gid": "medium-transitions-405",
+  "runId": "rw-supplement-medium",
+  "skill": "transitions",
+  "domain": "rw_expression_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "Many desert plants survive drought by storing water in thick, fleshy tissues, a strategy familiar from cacti and agaves. The resurrection plant Selaginella lepidophylla, native to the Chihuahuan Desert, takes a very different approach. During dry spells, it lets almost all of its water evaporate, curling its fronds into a tight brown ball that appears dead. ______ when rain returns, the plant unfurls and resumes photosynthesis within hours, its cells having been protected throughout by sugars that stabilize membranes in the absence of water.\n\nWhich choice completes the text with the most logical transition?",
+   "stimulus": "Many desert plants survive drought by storing water in thick, fleshy tissues, a strategy familiar from cacti and agaves. The resurrection plant Selaginella lepidophylla, native to the Chihuahuan Desert, takes a very different approach. During dry spells, it lets almost all of its water evaporate, curling its fronds into a tight brown ball that appears dead. ______ when rain returns, the plant unfurls and resumes photosynthesis within hours, its cells having been protected throughout by sugars that stabilize membranes in the absence of water.",
+   "question": "Which choice completes the text with the most logical transition?",
+   "options": [
+    "As a result,",
+    "Yet",
+    "Similarly,",
+    "For example,"
+   ],
+   "correctIndex": 1,
+   "answers": null,
+   "explanation": "앞 문장은 식물이 물을 거의 다 잃고 '죽은 것처럼 보인다'고 말하고, 뒤 문장은 비가 오면 몇 시간 만에 다시 살아난다고 말한다. 이처럼 겉보기와 실제가 대비되므로 대조를 나타내는 B가 정답이다. A는 건조해진 상태가 회복의 원인처럼 보이게 만드는데, 실제로 회복의 원인은 비와 세포를 보호하는 당이므로 인과 방향이 맞지 않는다. C는 두 문장이 비슷한 내용을 말한다고 보지만, 둥글게 말려 죽은 듯한 모습과 다시 펼쳐지는 모습은 비슷하지 않고 반대이다. D는 뒤 문장을 앞 문장의 예시로 보지만, 비가 와서 회복하는 것은 건조기에 웅크리는 것의 사례가 아니다.",
+   "explanationEn": "The previous sentence says the plant loses nearly all its water and \"appears dead.\" The next sentence says it revives within hours once rain returns. Because the plant looks dead but is actually still alive, the sentences contrast, so B is correct. A makes the drying-out sound like the cause of the recovery, but the plant actually recovers because of the rain and the protective sugars, so the cause-and-effect direction is wrong. C says the two sentences describe something similar, but curling into a dead-looking ball and unfurling to grow again are opposites. D treats the next sentence as an example of the previous one, but reviving after rain is not an instance of curling up during drought.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "B",
+   "seed": "자연과학(생물·생태)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "앞 문장의 '죽은 것처럼 보인다'와 뒤 문장의 '몇 시간 만에 회복'이 명확한 대조를 이루므로 B(Yet)가 정답으로 타당함. A는 시간 순서를 인과로 오독할 경우, C는 앞부분의 선인장 비교 맥락 때문에 각각 부분적 유인력을 가지며, D도 문법적으로 말이 되어 medium 기준 충족. 사실관계(치와와 사막 자생, 수시간 내 회복, 당에 의한 막 안정화) 정확. 한·영 해설 모두 정답과 선택지 글자 참조가 일치하고 모순 없음. 'Yet' 뒤에만 쉼표가 없는 점은 종속절이 뒤따르므로 자연스러워 형식상 문제 없음."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": false,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "too_easy",
+     "eliminated:2"
+    ],
+    "note": "'appears dead'와 '비가 오면 되살아남'의 대비가 매우 분명해서 Yet을 바로 고를 수 있다. 오답 C(Similarly)와 D(For example)는 훑어 읽어도 쉽게 배제된다. 부분적으로 그럴듯한 오답은 A(As a result) 하나뿐이다. 따라서 오답 3개 중 최소 2개가 비교해야 배제되어야 한다는 medium 기준을 충족하지 못한다. 예컨대 Instead나 Nevertheless 같은 다른 대조 표현처럼 비교가 필요한 오답이 없다.",
+    "passed": false
+   }
+  }
+ },
+ {
+  "gid": "medium-transitions-407",
+  "runId": "rw-supplement-medium",
+  "skill": "transitions",
+  "domain": "rw_expression_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "Along the coast of Bangladesh, villagers have long built earthen embankments to keep tidal floods out of low-lying farmland. The walls succeeded in protecting crops, but they also blocked the sediment that tides once spread across the land each season. Over decades, the enclosed fields slowly sank while riverbeds outside the walls rose with trapped silt. ______ some embanked areas now sit below the level of the surrounding channels, so that when a wall breaches, water pours in and can remain for months.\n\nWhich choice completes the text with the most logical transition?",
+   "stimulus": "Along the coast of Bangladesh, villagers have long built earthen embankments to keep tidal floods out of low-lying farmland. The walls succeeded in protecting crops, but they also blocked the sediment that tides once spread across the land each season. Over decades, the enclosed fields slowly sank while riverbeds outside the walls rose with trapped silt. ______ some embanked areas now sit below the level of the surrounding channels, so that when a wall breaches, water pours in and can remain for months.",
+   "question": "Which choice completes the text with the most logical transition?",
+   "options": [
+    "Nevertheless,",
+    "For example,",
+    "In contrast,",
+    "As a result,"
+   ],
+   "correctIndex": 3,
+   "answers": null,
+   "explanation": "앞 문장은 제방 안 농지는 가라앉고 바깥 하천 바닥은 높아졌다고 설명하고, 빈칸 뒤 문장은 그 결과 일부 지역이 주변 수로보다 낮아져 제방이 무너지면 물이 몇 달간 고인다고 말한다. 따라서 원인-결과를 잇는 D가 정답이다. A는 지문 앞부분의 '보호 성공 vs 퇴적물 차단'이라는 대조에 이끌린 오답이지만, 빈칸 뒤 내용은 앞 문장과 상반되지 않고 그로부터 따라 나온다. B는 뒤 문장이 구체적 사례처럼 보이지만, 앞 문장을 예시하는 것이 아니라 그 결과로 생긴 새로운 상황을 제시한다. C는 '안쪽 농지 vs 바깥 하천'의 대비가 앞 문장 안에 있을 뿐, 두 문장 사이의 관계는 대조가 아니다.",
+   "explanationEn": "The previous sentence explains that the fields inside the walls sank while the riverbeds outside rose. The sentence after the blank gives what followed from that: some embanked areas now sit lower than the nearby channels, so floodwater stays for months after a breach. That is a cause-and-effect relationship, so D is correct. A might pull you in because the passage earlier contrasts protecting crops with blocking sediment, but the final sentence doesn't push against the one before it. It follows directly from it. B is wrong because the final sentence isn't an example of sinking land. It describes a new situation that the sinking caused. C picks up on the inside-versus-outside contrast within the previous sentence, but the two sentences themselves aren't being contrasted.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "D",
+   "seed": "환경·지리",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "정답 검산: 앞 문장(농지 침하·하천 바닥 상승) → 뒤 문장(제방 안이 수로보다 낮아짐)은 명백한 인과 관계이므로 D 'As a result'가 옳다. A/C는 지문 내 대조 요소(보호 성공 vs 퇴적물 차단, 안 vs 밖)에 이끌리는 그럴듯한 오답이고, B는 뒤 문장이 구체적 상황을 서술해 예시처럼 보일 수 있어 비교가 필요하다. 한국어·영어 해설 모두 D를 일관되게 뒷받침하고 선택지 글자 참조가 일치하며 영어 해설에 한글 없음. 방글라데시 해안 제방(polder)으로 인한 농지 침하와 하천 퇴적 현상은 실제 문헌과 부합. 독창적 지문으로 저작권 의심 없음. 형식 적합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "방글라데시 폴더(polder)의 침하와 침수 정체 현상은 사실에 부합한다. 인과 관계가 명확하고, 오답 A·B·C는 각각 지문 안의 대조 요소나 구체적 사례처럼 보이는 내용에 기대고 있어 medium 난이도에 맞다. 다만 오답이 다소 쉽게 배제될 수 있다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "medium-transitions-408",
+  "runId": "rw-supplement-medium",
+  "skill": "transitions",
+  "domain": "rw_expression_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "When the first public lending libraries opened in English mill towns in the 1850s, reformers predicted that factory workers would flock to them for books on science and self-improvement. Borrowing records from towns such as Bolton and Salford tell a different story. Most loans were novels, travel narratives, and serialized adventure stories, and technical manuals often sat on the shelves for years without being checked out. ______ the reformers' hopes were not entirely misplaced: library registers show that many workers who first came in for fiction later borrowed history and geography titles, suggesting that reading for pleasure gradually led some patrons toward the very subjects reformers had promoted.\n\nWhich choice completes the text with the most logical transition?",
+   "stimulus": "When the first public lending libraries opened in English mill towns in the 1850s, reformers predicted that factory workers would flock to them for books on science and self-improvement. Borrowing records from towns such as Bolton and Salford tell a different story. Most loans were novels, travel narratives, and serialized adventure stories, and technical manuals often sat on the shelves for years without being checked out. ______ the reformers' hopes were not entirely misplaced: library registers show that many workers who first came in for fiction later borrowed history and geography titles, suggesting that reading for pleasure gradually led some patrons toward the very subjects reformers had promoted.",
+   "question": "Which choice completes the text with the most logical transition?",
+   "options": [
+    "Even so,",
+    "As a result,",
+    "For instance,",
+    "Similarly,"
+   ],
+   "correctIndex": 0,
+   "answers": null,
+   "explanation": "앞 문장들은 대출 기록이 개혁가들의 예측과 달랐다(주로 소설 대출)고 말하고, 빈칸 뒤 문장은 그럼에도 개혁가들의 기대가 완전히 틀린 것은 아니었다고 일부 되돌린다. 따라서 앞 내용을 인정하면서 반전시키는 A가 정답이다. B는 소설 위주 대출이 '결과적으로' 기대가 맞았다는 인과를 만들어 논리가 뒤집힌다. 뒤 문장에 '소설이 역사로 이어졌다'는 인과 내용이 있어 그럴듯해 보이지만, 빈칸은 앞 문장과의 관계를 나타내야 한다. C는 뒤 문장이 앞의 주장(기대와 다름)의 사례가 아니므로 틀리고, D는 두 문장이 같은 방향의 내용이 아니므로 틀리다.",
+   "explanationEn": "The earlier sentences show that borrowing records contradicted the reformers' predictions, since most loans were novels. The sentence after the blank partly takes that back by saying the hopes were \"not entirely misplaced,\" so you need a transition that admits the previous point and then turns against it. That makes A correct. B might look tempting because the final sentence describes fiction leading to history reading, but \"As a result\" would claim that the mostly-fiction borrowing caused the reformers' hopes to be valid, which isn't the logic connecting the two sentences. C is wrong because the sentence is not an example of workers ignoring serious books, and D is wrong because the sentence doesn't make a parallel point in the same direction.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "A",
+   "seed": "역사(근대 사회 변화)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "앞 문장(기록이 예측과 달랐다: 소설 위주 대출)과 뒤 문장(그럼에도 기대가 완전히 틀리진 않았다)의 관계는 명백한 양보·반전이므로 'Even so'가 유일하게 성립한다. B는 마지막 문장 내부의 인과(소설→역사 독서) 때문에 훑어 읽으면 끌리는 그럴듯한 오답이고, D는 '개혁가' 화제 반복으로 부분적 유인이 있으며, C는 사례 관계가 아님이 분명하다. 'not entirely misplaced'라는 부분 양보 어구를 앞 문맥과 연결해야 하는 두 단계 판단이 요구되어 medium에 적합. 한국어·영어 해설 모두 정답 A를 일관되게 뒷받침하고 글자 참조가 선택지와 일치하며, 영어 해설에 한글 없음. 1850년 공공도서관법 이후 Salford(1850)·Bolton(1853) 개관 등 역사적 배경도 무리 없음."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": false,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "A와 B만 진지하게 비교할 만한 선택지다. B는 마지막 문장의 '소설에서 역사로' 이어지는 인과 때문에 그럴듯해 보인다. 다만 'not entirely misplaced'라는 단서가 강해서 medium의 하단에 가깝다. C와 D는 비교적 쉽게 배제된다.",
+    "passed": false
+   }
+  }
+ },
+ {
+  "gid": "medium-transitions-410",
+  "runId": "rw-supplement-medium",
+  "skill": "transitions",
+  "domain": "rw_expression_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "Ecologists long assumed that the bright orange coloration of the monarch-mimicking viceroy butterfly offered protection only because birds confused it with the toxic monarch. Experiments by Jane Brower and later David Ritland complicated this picture: when birds were fed viceroys alone, many rejected them after a single taste, suggesting the viceroy is itself distasteful. ______ the viceroy's resemblance to the monarch is now understood less as a harmless species borrowing another's reputation and more as two unpalatable species reinforcing a shared warning signal.\n\nWhich choice completes the text with the most logical transition?",
+   "stimulus": "Ecologists long assumed that the bright orange coloration of the monarch-mimicking viceroy butterfly offered protection only because birds confused it with the toxic monarch. Experiments by Jane Brower and later David Ritland complicated this picture: when birds were fed viceroys alone, many rejected them after a single taste, suggesting the viceroy is itself distasteful. ______ the viceroy's resemblance to the monarch is now understood less as a harmless species borrowing another's reputation and more as two unpalatable species reinforcing a shared warning signal.",
+   "question": "Which choice completes the text with the most logical transition?",
+   "options": [
+    "Nevertheless,",
+    "For example,",
+    "Accordingly,",
+    "Similarly,"
+   ],
+   "correctIndex": 2,
+   "answers": null,
+   "explanation": "앞 문장은 바이스로이 나비 자체가 맛이 없다는 실험 결과를 제시하고, 빈칸 뒤 문장은 그 결과로 두 나비의 유사성에 대한 해석이 바뀌었다는 결론을 말하므로 원인-결과 관계인 C(Accordingly)가 적절하다. A(Nevertheless)는 기존 가정과 실험 결과 사이의 대조에 끌리게 하지만, 빈칸 뒤 문장은 실험 결과와 상반되지 않고 그 결과를 따른다. B(For example)는 뒤 문장이 앞 결과의 구체적 사례가 아니라 그 결과에서 나온 일반적 재해석이므로 맞지 않는다. D(Similarly)는 두 종이 비슷하다는 내용에 끌릴 수 있지만, 앞 문장과 유사한 별개의 사실을 덧붙이는 것이 아니므로 오답이다.",
+   "explanationEn": "The previous sentence reports experimental evidence that the viceroy is itself distasteful, and the sentence after the blank gives the revised interpretation that follows from that evidence, so the cause-and-effect transition in C (Accordingly) is the best fit. A (Nevertheless) may tempt you because the experiments contradict the old assumption, but the final sentence builds on the experimental result instead of contradicting it. B (For example) doesn't work because the final sentence is not a specific case of the finding; it is a broader conclusion drawn from it. D (Similarly) may seem fitting because the passage is about two butterflies that look alike, but the final sentence does not add a separate, parallel fact.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "C",
+   "seed": "자연과학(생물·생태)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "앞 문장(바이스로이 자체가 맛없음이라는 실험 결과) → 빈칸 뒤(그에 따른 재해석)로 인과 관계가 명확하여 C(Accordingly)가 정답임을 직접 확인. '복잡하게 만들었다'는 서술 때문에 A(Nevertheless)에 끌리기 쉽고, 두 종의 유사성 때문에 D(Similarly)도 그럴듯해 medium 적합. 한·영 해설 모두 선택지 글자 참조 일치, 모순 없음, 영어 해설에 한글 없음. 참고: 바이스로이 비기호성(Müllerian 해석)을 실험적으로 확립한 것은 주로 Ritland & Brower(1991)이며 Jane Brower(1958)의 실험은 Batesian 해석과 더 연관되어 귀속이 다소 느슨하나, 지문의 \"later David Ritland\" 서술과 문항 논리에는 영향 없는 경미한 사안으로 판단."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "Ritland & Brower(1991) 연구 내용과 부합. 빈칸 뒤 문장이 'the viceroy's…'로 소문자 시작이나 빈칸 뒤라 문제없음. 오답 A·D는 그럴듯한 유인 요소를 가짐.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "medium-transitions-413",
+  "runId": "rw-supplement-medium",
+  "skill": "transitions",
+  "domain": "rw_expression_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "When British railway companies adopted a single standardized \"railway time\" in the 1840s, many towns resisted, preferring to keep clocks set by the local position of the sun. Some town halls even displayed two minute hands, one for local time and one for London time. ______ by 1855 the great majority of public clocks in Great Britain had been set to Greenwich Mean Time, a shift driven less by legislation than by the practical demands of catching trains.\n\nWhich choice completes the text with the most logical transition?",
+   "stimulus": "When British railway companies adopted a single standardized \"railway time\" in the 1840s, many towns resisted, preferring to keep clocks set by the local position of the sun. Some town halls even displayed two minute hands, one for local time and one for London time. ______ by 1855 the great majority of public clocks in Great Britain had been set to Greenwich Mean Time, a shift driven less by legislation than by the practical demands of catching trains.",
+   "question": "Which choice completes the text with the most logical transition?",
+   "options": [
+    "Consequently,",
+    "Nevertheless,",
+    "For example,",
+    "Similarly,"
+   ],
+   "correctIndex": 1,
+   "answers": null,
+   "explanation": "앞 문장들은 여러 도시가 철도 시간에 저항하며 지역 시간을 고수했다고 설명하고, 빈칸 뒤 문장은 그럼에도 1855년경에는 대부분의 시계가 그리니치 표준시로 맞춰졌다고 말한다. 저항이 있었는데도 결국 채택되었다는 양보-반전 관계이므로 B가 정답이다. A는 철도 시간이 결국 채택된 원인처럼 보여 그럴듯하지만, 바로 앞 문장(시계에 분침 두 개를 단 저항 사례)이 그 결과로 이어지지 않으므로 맞지 않는다. C는 빈칸 뒤 문장을 저항의 예시로 만들지만, 이 문장은 저항이 아니라 채택을 보여 준다. D는 유사성을 나타내지만 두 내용은 서로 반대된다.",
+   "explanationEn": "The earlier sentences say that many towns resisted railway time and kept their local time. The sentence after the blank says that by 1855 most clocks had switched to Greenwich Mean Time anyway. That is a concession followed by a reversal: the towns resisted, yet they adopted it in the end, so B is correct. A might look reasonable because the railways did eventually cause the change, but the sentence right before the blank describes resistance (town clocks with two minute hands), and the switch does not follow from that resistance as a result. C would make the final sentence an example of resistance, but it actually describes adoption. D signals that the two ideas are alike, but they are opposites.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "B",
+   "seed": "역사(근대 사회 변화)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "앞 문장(저항·분침 두 개)과 뒤 문장(1855년 대다수 GMT 채택)은 양보-반전 관계로 B \"Nevertheless\"가 명확히 정답. A는 마지막 절 \"driven ... by the practical demands of catching trains\"의 인과 뉘앙스 때문에 훑어 읽으면 고를 수 있어 유효한 오답이나, C·D는 비교적 쉽게 배제됨(오답 2개의 부분적 타당성 기준에 다소 못 미치는 경계선이지만 표준 SAT 중간 난이도 전환어 문항 범위 내). 역사적 사실(1840년대 철도 시간 도입, 1855년경 대부분 공공시계 GMT, 법제화는 1880년) 정확. 해설 한·영 모두 글자 참조 일치, 한글 혼입 없음."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "Resistance → eventual adoption is a clear concession-reversal relationship, so B is correct. The historical facts hold up: some clocks had two minute hands (e.g., Bristol), and about 98% of public clocks were on GMT by 1855. A is the most tempting distractor because of the railways' causal role. C and D are weaker, but D is still somewhat plausible. Overall the item sits at roughly medium difficulty.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "medium-transitions-414",
+  "runId": "rw-supplement-medium",
+  "skill": "transitions",
+  "domain": "rw_expression_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "When engineers in the Netherlands designed the Maeslantkering, a storm-surge barrier protecting the port of Rotterdam, they faced an unusual constraint: the barrier could not obstruct one of the busiest shipping channels in Europe. A permanent wall across the waterway was therefore out of the question. ______ the engineers built two enormous hinged gates, each roughly as long as the Eiffel Tower is tall, that rest in dry docks along the banks and swing shut only when forecasts predict a dangerous surge.\n\nWhich choice completes the text with the most logical transition?",
+   "stimulus": "When engineers in the Netherlands designed the Maeslantkering, a storm-surge barrier protecting the port of Rotterdam, they faced an unusual constraint: the barrier could not obstruct one of the busiest shipping channels in Europe. A permanent wall across the waterway was therefore out of the question. ______ the engineers built two enormous hinged gates, each roughly as long as the Eiffel Tower is tall, that rest in dry docks along the banks and swing shut only when forecasts predict a dangerous surge.",
+   "question": "Which choice completes the text with the most logical transition?",
+   "options": [
+    "Nevertheless,",
+    "Similarly,",
+    "Instead,",
+    "For example,"
+   ],
+   "correctIndex": 2,
+   "answers": null,
+   "explanation": "앞 문장은 항로를 막는 영구적인 벽이 불가능하다고 하여 한 가지 해결책을 배제하고, 뒤 문장은 그 대신 채택된 해결책(평소에는 강둑에 보관하다가 필요할 때만 닫히는 수문)을 제시한다. 따라서 배제된 대안을 대체하는 관계이므로 C가 정답이다. A는 '그럼에도 불구하고'라는 뜻이라 벽을 짓지 못했는데도 벽을 지었다는 식의 양보가 되어야 하지만, 수문은 그 제약을 따른 결과이지 제약에 반하는 행동이 아니다. B는 두 가지 비슷한 사례를 나란히 놓을 때 쓰는데, 수문은 영구 벽과 비슷한 것이 아니라 그와 대조되는 방식이다. D는 뒤 문장을 앞 문장의 예시로 만들지만, 수문은 '영구적인 벽'의 사례가 아니라 그것을 대신하는 방안이다.",
+   "explanationEn": "The previous sentence rules out one solution, a permanent wall across the waterway, and the next sentence describes the solution the engineers used in its place: gates that are stored on the banks and close only when needed. Because the text swaps a rejected option for a chosen one, C is correct. A (\"Nevertheless\") would mean the engineers acted despite the constraint, but the movable gates follow the constraint rather than go against it. B treats the gates as similar to something already mentioned, but they are the opposite of a permanent wall. D presents the next sentence as an example of the previous claim, but the gates are not an example of a permanent wall. They are a replacement for it.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "C",
+   "seed": "기술·공학 사례",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "정답 C 검산 완료: 앞 문장이 '영구 벽은 불가'로 대안을 배제하고 뒤 문장이 대체 해결책을 제시하므로 'Instead'가 유일하게 논리적. A(Nevertheless)는 제약을 고려해 설계했다는 서술과 양보 관계가 성립하지 않아 매력적 오답으로 기능하고, D(For example)는 '해결책'이라는 모호한 선행 개념을 떠올리면 잠깐 그럴듯해 보여 부분적 근거가 있음. B도 문맥상 말이 됨. Maeslantkering 사실관계(두 개의 회전식 수문, 각 약 210m·에펠탑 높이급, 평소 드라이독 보관, 예보 시 폐쇄)는 정확. 한국어·영어 해설 모두 결론·글자 참조 일치하고 영어 해설에 한글 없음. 두 문장 간 '배제→대체' 관계 파악이 필요한 표준 medium 수준."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "'Instead'는 배제된 영구 벽을 대체하는 해결책과 잘 연결된다. 'Nevertheless'는 앞 문장이 제약을 말하므로 훑어 읽으면 고르기 쉬운 오답이다. B와 D도 그럴듯하지만 비교하면 배제된다. 사실 관계: 각 수문의 지지 팔은 약 237m로 에펠탑 높이(약 300m)와 대략 비슷하며, 이는 흔히 쓰이는 비교다. 그 밖의 사실 서술도 정확하다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "medium-transitions-415",
+  "runId": "rw-supplement-medium",
+  "skill": "transitions",
+  "domain": "rw_expression_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "Many species of freshwater mussel depend on fish to complete their life cycle: the mussel larvae clamp onto a host fish's gills and ride along for several weeks before dropping off to settle in the riverbed. Ecologist Wendell Haag and colleagues found that in stretches of river where dams had blocked the movement of host fish, mussel populations were dominated by older adults, with almost no juveniles present. ______ the researchers concluded that many of these populations, though they appear stable in surveys of living animals, are not replacing themselves and may eventually disappear.\n\nWhich choice completes the text with the most logical transition?",
+   "stimulus": "Many species of freshwater mussel depend on fish to complete their life cycle: the mussel larvae clamp onto a host fish's gills and ride along for several weeks before dropping off to settle in the riverbed. Ecologist Wendell Haag and colleagues found that in stretches of river where dams had blocked the movement of host fish, mussel populations were dominated by older adults, with almost no juveniles present. ______ the researchers concluded that many of these populations, though they appear stable in surveys of living animals, are not replacing themselves and may eventually disappear.",
+   "question": "Which choice completes the text with the most logical transition?",
+   "options": [
+    "Nevertheless,",
+    "For example,",
+    "In other words,",
+    "Accordingly,"
+   ],
+   "correctIndex": 3,
+   "answers": null,
+   "explanation": "앞 문장은 댐으로 숙주 어류의 이동이 막힌 구간에서 어린 개체가 거의 없다는 관찰 결과를 제시하고, 뒤 문장은 그 관찰을 근거로 개체군이 스스로 대체되지 못해 사라질 수 있다는 결론을 내린다. 따라서 관찰에서 결론으로 이어지는 결과 관계를 나타내는 D가 정답이다. A는 뒤 문장의 '안정적으로 보이지만'이라는 양보 표현에 끌린 오답으로, 결론은 관찰과 대조되지 않고 그 관찰에서 도출된다. B는 뒤 문장을 앞 내용의 구체적 사례로 만드는데, 실제로는 더 일반적인 결론이다. C는 단순한 재진술을 나타내지만, 뒤 문장은 개체군 소멸 가능성이라는 새로운 추론을 덧붙인다.",
+   "explanationEn": "The previous sentence gives an observation: where dams blocked host fish, mussel populations had almost no juveniles. The next sentence draws a conclusion from that observation: the populations aren't replacing themselves and may disappear. Since the conclusion follows from the evidence, D is correct. A is tempting because of the contrast phrase \"though they appear stable,\" but the conclusion doesn't oppose the observation; it builds on it. B would make the conclusion an example of the observation, but the conclusion is actually broader. C signals a simple restatement, but the final sentence adds a new inference about possible disappearance.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "D",
+   "seed": "자연과학(생물·생태)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "관찰(어린 개체 부재) → 결론(개체군 미대체) 구조이므로 결과 전환어 Accordingly가 적절. A는 '안정적으로 보이지만' 양보구에 끌리는 유인 오답, C는 결론 문장이 재진술처럼 보일 수 있어 비교 필요, B도 문맥상 말이 됨. 해설 한·영 모두 글자 참조·결론 일치, 한글 혼입 없음. Wendell Haag의 담수 홍합·댐 연구 언급은 사실과 부합. 표준 SAT medium 수준."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "관찰에서 결론으로 이어지는 구조라 D가 명확하다. A는 'though they appear stable'이라는 양보 표현 때문에, C는 'not replacing themselves'가 '어린 개체 부재'를 재진술하는 것처럼 읽히기 때문에 그럴듯한 오답이 된다. 따라서 중간 난이도에 적합하다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "medium-transitions-419",
+  "runId": "rw-supplement-medium",
+  "skill": "transitions",
+  "domain": "rw_expression_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "When engineers in the Netherlands began testing roads paved with a porous asphalt mix, they expected the main benefit to be drainage: rainwater seeps through tiny gaps in the surface rather than pooling on top, reducing spray and hydroplaning. ______ the same network of gaps turned out to absorb much of the sound produced where tires meet pavement, and drivers on test stretches reported noticeably quieter rides even on dry days.\n\nWhich choice completes the text with the most logical transition?",
+   "stimulus": "When engineers in the Netherlands began testing roads paved with a porous asphalt mix, they expected the main benefit to be drainage: rainwater seeps through tiny gaps in the surface rather than pooling on top, reducing spray and hydroplaning. ______ the same network of gaps turned out to absorb much of the sound produced where tires meet pavement, and drivers on test stretches reported noticeably quieter rides even on dry days.",
+   "question": "Which choice completes the text with the most logical transition?",
+   "options": [
+    "As a result,",
+    "Nevertheless,",
+    "In other words,",
+    "Unexpectedly,"
+   ],
+   "correctIndex": 3,
+   "answers": null,
+   "explanation": "첫 문장은 엔지니어들이 배수를 주된 이점으로 '예상했다'고 하고, 둘째 문장은 같은 틈새 구조가 소음까지 흡수한다는 사실이 '드러났다'(turned out)고 한다. 이는 예상하지 못한 추가 발견이므로 D가 정답이다. A는 소음 감소가 배수 효과의 결과처럼 보이게 만들지만, 소음 감소는 배수가 아니라 틈새 구조 자체에서 생기며 맑은 날에도 나타난다. B는 앞 내용과 어긋나는 반전을 나타내지만, 소음 감소는 배수 이점을 부정하지 않고 그 위에 더해지는 효과이다. C는 재진술을 나타내는데, 소음은 배수와 다른 새로운 정보이다.",
+   "explanationEn": "The first sentence says engineers expected drainage to be the main benefit, and the second says the same gaps \"turned out\" to absorb tire noise. That is a surprising extra discovery, so D is correct. A makes the noise reduction sound like a result of drainage, but the quieter ride comes from the gaps themselves and happens even on dry days. B signals a reversal, but the noise benefit adds to the drainage benefit rather than working against it. C signals a restatement, but noise is new information, not drainage described in other words.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "D",
+   "seed": "기술·공학 사례",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "정답 D 검산 완료: 'expected'(예상) → 'turned out'(드러남) 구조로 예상 밖의 추가 발견이므로 'Unexpectedly'가 가장 논리적. A(인과)는 소음 감소가 배수의 결과가 아니고 맑은 날에도 발생하므로 배제, B(역접)는 배수 이점이 부정되지 않으므로 배제, C(재진술)는 새로운 정보이므로 배제. 한국어·영어 해설 모두 같은 결론과 글자 참조를 가지며 모순 없음. 네덜란드 다공성 아스팔트(ZOAB)의 배수·소음 저감 효과는 사실과 부합. 난이도: 'expected/turned out' 단서가 비교적 명시적이어서 medium 하한에 가깝지만, B(Nevertheless)와 D 사이의 '반전 vs 예상 밖 추가 발견' 구분이 정독을 요구하고 A도 부분적 근거(틈새→소음 흡수의 인과 착시)를 가지므로 medium 적합으로 판정. 'Unexpectedly'와 'turned out'의 약간의 의미 중복은 허용 범위."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "'expected'와 'turned out'의 대비로 D가 유일하게 성립한다. A(같은 틈새 구조가 원인이라 인과처럼 보임)와 B(예상과 어긋남)는 부분적인 근거가 있어 비교해야 배제되므로 medium 수준에 맞다. 다공성 아스팔트(ZOAB)의 배수·소음 저감 효과도 사실과 일치한다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "medium-rhetorical_synthesis-401",
+  "runId": "rw-supplement-medium",
+  "skill": "rhetorical_synthesis",
+  "domain": "rw_expression_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "While researching a topic, a student has taken the following notes:\n- Ynés Mexía (1870–1938) was a Mexican American botanical collector.\n- She did not begin studying botany until 1921, when she was over 50 years old.\n- Over the next 13 years, she collected roughly 145,000 plant specimens across Mexico and South America.\n- About 500 of the species she collected were new to science.\n- Around 50 of those new species were named in her honor, such as Mimosa mexiae.\n\nThe student wants to emphasize how productive Mexía was despite starting her career late in life. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "stimulus": "While researching a topic, a student has taken the following notes:\n- Ynés Mexía (1870–1938) was a Mexican American botanical collector.\n- She did not begin studying botany until 1921, when she was over 50 years old.\n- Over the next 13 years, she collected roughly 145,000 plant specimens across Mexico and South America.\n- About 500 of the species she collected were new to science.\n- Around 50 of those new species were named in her honor, such as Mimosa mexiae.",
+   "question": "The student wants to emphasize how productive Mexía was despite starting her career late in life. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "options": [
+    "Ynés Mexía, a Mexican American botanical collector, gathered about 500 species that were new to science, around 50 of which were named in her honor.",
+    "Ynés Mexía, who began studying botany in 1921, was honored when roughly 50 plant species, including Mimosa mexiae, were named after her.",
+    "Although Ynés Mexía did not begin studying botany until she was over 50, she went on to collect roughly 145,000 plant specimens in just 13 years.",
+    "Ynés Mexía collected roughly 145,000 plant specimens across Mexico and South America, making her an important botanical collector of the early twentieth century."
+   ],
+   "correctIndex": 2,
+   "answers": null,
+   "explanation": "목표는 두 가지, 즉 '늦은 시작'과 '많은 성과'를 함께 보여 주는 것이다. C는 50세가 넘어 식물학을 시작했다는 점과 13년 동안 약 145,000점을 수집했다는 점을 'Although'로 연결해 이 둘을 모두 충족한다. A는 성과는 보여 주지만 늦게 시작했다는 점이 빠져 있다. B는 1921년이라는 연도만 제시할 뿐 나이를 밝히지 않아 '늦은 시작'이 드러나지 않고, 생산성보다 명예에 초점을 둔다. D는 수집량은 정확히 언급하지만 늦은 출발이라는 대비가 없다.",
+   "explanationEn": "Your goal has two parts: you need to show that Mexía started late and that she was highly productive anyway. C does both. It says she started botany after age 50, and it uses \"Although\" to connect that fact to her roughly 145,000 specimens collected in just 13 years. A shows what she achieved but never mentions her late start. B gives only the year 1921, not her age, so it doesn't show that she started late, and it focuses on honors rather than productivity. D states her collection total correctly but leaves out the contrast with her late start.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "C",
+   "seed": "인물 소개(과학자·예술가)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "C가 유일하게 '50세 이후 시작'과 '13년간 약 145,000점 수집'을 대비 구조(Although)로 결합해 목표를 충족. A·D는 성과만 제시해 늦은 출발이 빠지고, B는 연도만 있을 뿐 나이가 없고 명예에 초점을 두어 배제됨. 노트 내용(1921년 시작, 약 145,000점, 약 500 신종, 약 50종 명명, Mimosa mexiae)은 실제 Mexía 전기와 부합. 한·영 해설 모두 선택지 참조와 결론이 일치하며 영어 자연스러움. 두 조건을 동시에 확인해야 하는 표준 medium 수준."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": false,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "늦은 시작과 높은 생산성을 함께 담은 선택지는 C뿐이다. A와 D는 성과만 보여 주고, B는 연도만 제시해 늦은 시작이 드러나지 않으며 생산성보다 명예에 초점을 둔다. 오답들이 부분적으로 맞는 근거를 갖고 있어 medium 난이도에 적합하다. 사실관계(1870–1938년, 약 145,000점, 약 500종의 신종, 약 50종이 그녀의 이름을 딴 종)도 대체로 일치한다.",
+    "passed": false
+   }
+  }
+ },
+ {
+  "gid": "medium-rhetorical_synthesis-402",
+  "runId": "rw-supplement-medium",
+  "skill": "rhetorical_synthesis",
+  "domain": "rw_expression_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "While researching a topic, a student has taken the following notes:\n- Magnetars are a rare type of neutron star with extremely powerful magnetic fields.\n- SGR 1806-20 is a magnetar located about 50,000 light-years from Earth.\n- In December 2004, SGR 1806-20 released a giant flare of gamma rays lasting roughly two-tenths of a second.\n- In that brief burst, the flare released more energy than the Sun emits in about 100,000 years.\n- The flare's radiation was strong enough to measurably disturb Earth's upper atmosphere despite the magnetar's great distance.\n\nThe student wants to emphasize the magnitude of the 2004 flare's energy output relative to its duration. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "stimulus": "While researching a topic, a student has taken the following notes:\n- Magnetars are a rare type of neutron star with extremely powerful magnetic fields.\n- SGR 1806-20 is a magnetar located about 50,000 light-years from Earth.\n- In December 2004, SGR 1806-20 released a giant flare of gamma rays lasting roughly two-tenths of a second.\n- In that brief burst, the flare released more energy than the Sun emits in about 100,000 years.\n- The flare's radiation was strong enough to measurably disturb Earth's upper atmosphere despite the magnetar's great distance.",
+   "question": "The student wants to emphasize the magnitude of the 2004 flare's energy output relative to its duration. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "options": [
+    "SGR 1806-20, a magnetar about 50,000 light-years from Earth, released a giant flare of gamma rays in December 2004.",
+    "Although SGR 1806-20 is located about 50,000 light-years away, its 2004 flare measurably disturbed Earth's upper atmosphere.",
+    "Magnetars such as SGR 1806-20 are rare neutron stars with extremely powerful magnetic fields, and they can release enormous amounts of energy.",
+    "In a gamma-ray flare lasting only about two-tenths of a second, the magnetar SGR 1806-20 released more energy than the Sun emits in roughly 100,000 years."
+   ],
+   "correctIndex": 3,
+   "answers": null,
+   "explanation": "목표는 플레어의 에너지 양을 '지속 시간'과 대비해 강조하는 것이므로 약 0.2초라는 짧은 시간과 태양 10만 년치 에너지라는 두 메모를 함께 써야 한다. D가 이 둘을 결합해 목표를 달성한다. A는 플레어 발생 사실과 거리만 제시하고 에너지 크기나 지속 시간을 다루지 않는다. B는 거리와 대기 영향으로 플레어의 강력함을 암시하지만 지속 시간 대비 에너지량을 보여주지 않는다. C는 마그네타의 일반적 특징을 설명할 뿐 2004년 플레어의 구체적 에너지와 시간을 언급하지 않는다.",
+   "explanationEn": "Your goal is to emphasize how much energy the flare released compared with how long it lasted, so you need both the duration (about two-tenths of a second) and the energy (more than the Sun emits in about 100,000 years). Choice D combines exactly those two notes, so it is the best answer. Choice A gives the flare's date and the magnetar's distance but says nothing about energy or duration. Choice B hints at the flare's power through its effect on Earth's atmosphere, but it doesn't contrast energy with duration. Choice C describes magnetars in general and never gives the 2004 flare's specific energy or brief duration.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "D",
+   "seed": "자연과학(물리·천문)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "D는 지속 시간(0.2초)과 에너지량(태양 10만 년치)을 결합해 목표를 정확히 충족. B는 거리 대비 영향으로 '강력함'을 암시, C는 '엄청난 에너지'를 언급해 부분적 근거를 가진 오답으로 기능하며, A도 메모 기반으로 말이 됨. 메모 사실관계(SGR 1806-20, 2004년 12월, ~0.2초, 약 5만 광년, 태양 ~10만 년치 에너지)는 알려진 수치와 대체로 부합. 한·영 해설 결론 및 글자 참조 일치, 영어 해설에 한글 없음. D가 두 수치를 모두 담은 유일한 선택지라 다소 명확한 편이지만 표준 medium 범위."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": false,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "too_easy",
+     "eliminated:3"
+    ],
+    "note": "정답은 D이며, 지속 시간과 에너지를 함께 언급하는 선택지는 D 하나뿐이다. 그래서 '에너지'와 '지속 시간'이라는 키워드만 대조해도 바로 답이 나온다. 부분적으로 맞는 근거를 가진 오답은 B 하나뿐이다. A는 날짜와 거리만, C는 마그네타의 일반적 특징만 다루어 금방 걸러지므로, medium 기준(최소 2개의 그럴듯한 오답)에 미치지 못한다. 사실관계 메모: NASA 등은 이 에너지를 흔히 '태양의 약 15만 년치'로 소개하지만, '10만 년'으로 보도한 자료도 있어 허용 범위로 본다.",
+    "passed": false
+   }
+  }
+ },
+ {
+  "gid": "medium-rhetorical_synthesis-404",
+  "runId": "rw-supplement-medium",
+  "skill": "rhetorical_synthesis",
+  "domain": "rw_expression_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "While researching a topic, a student has taken the following notes:\n- Whistled languages encode speech in whistled melodies so that messages can carry over long distances.\n- Silbo Gomero, used on La Gomera in the Canary Islands, whistles Spanish and can be understood up to about 5 kilometers away.\n- In Silbo Gomero, whistlers mimic vowel and consonant sounds by changing pitch, since Spanish does not use pitch to distinguish words.\n- In Kuşköy, a village in northern Turkey, residents whistle Turkish to communicate across steep valleys.\n- Among the Hmong of Southeast Asia, whistled speech follows the tones of the spoken language, because Hmong uses pitch to tell words apart.\n\nThe student wants to emphasize a difference in how two whistled languages represent speech. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "stimulus": "While researching a topic, a student has taken the following notes:\n- Whistled languages encode speech in whistled melodies so that messages can carry over long distances.\n- Silbo Gomero, used on La Gomera in the Canary Islands, whistles Spanish and can be understood up to about 5 kilometers away.\n- In Silbo Gomero, whistlers mimic vowel and consonant sounds by changing pitch, since Spanish does not use pitch to distinguish words.\n- In Kuşköy, a village in northern Turkey, residents whistle Turkish to communicate across steep valleys.\n- Among the Hmong of Southeast Asia, whistled speech follows the tones of the spoken language, because Hmong uses pitch to tell words apart.",
+   "question": "The student wants to emphasize a difference in how two whistled languages represent speech. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "options": [
+    "Both Silbo Gomero in the Canary Islands and the whistled Turkish of Kuşköy allow speakers to send messages across difficult terrain over long distances.",
+    "Whereas Silbo Gomero whistlers use pitch to imitate the vowels and consonants of Spanish, Hmong whistlers use pitch to reproduce the tones that distinguish Hmong words.",
+    "Silbo Gomero, which whistles Spanish, can be understood up to about 5 kilometers away, while Hmong whistled speech is used in Southeast Asia.",
+    "Like Hmong, which uses pitch to tell words apart, Silbo Gomero relies on changes in pitch to convey spoken language through whistles."
+   ],
+   "correctIndex": 1,
+   "answers": null,
+   "explanation": "목표는 두 휘파람 언어가 말을 '표현하는 방식'의 차이를 강조하는 것이다. B는 Silbo Gomero가 음높이로 모음·자음을 흉내 내는 반면 Hmong은 단어를 구별하는 성조를 재현한다는 점을 대조해 목표를 정확히 달성한다. A는 두 언어의 공통점(장거리 소통)을 말하므로 차이를 강조하지 못한다. C는 '대조'의 형식을 갖췄지만 전달 거리와 지역을 비교할 뿐 표현 방식의 차이는 다루지 않는다. D는 두 언어 모두 음높이를 쓴다는 유사성을 강조하여 목표와 반대된다.",
+   "explanationEn": "Your goal is to highlight a difference in how two whistled languages represent speech. B does this by contrasting Silbo Gomero, where pitch imitates Spanish vowels and consonants, with Hmong, where pitch reproduces the tones that distinguish words. A points out a similarity (long-distance communication), not a difference. C is set up as a contrast, but it compares range and location rather than how speech is represented. D stresses that both languages use pitch, which is a similarity and works against the goal.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "B",
+   "seed": "언어·인류학",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "정답 B 검산 완료: 노트 3(Silbo Gomero는 음높이로 모음·자음 모방)과 노트 5(Hmong은 성조를 재현)를 대조하여 '표현 방식의 차이'라는 목표를 정확히 충족. 오답 분석: A는 두 언어를 비교하지만 공통점(장거리 전달)이며 A의 'difficult terrain'은 Silbo 노트에 명시되지 않았으나 핵심 오류는 아님. C는 'while'로 대조 형식을 갖추고 노트 사실을 정확히 인용하지만 거리·지역 비교로 표현 방식과 무관. D는 두 언어 모두 음높이를 쓴다는 점을 들어 유사성으로 묶는, 가장 매력적인 오답. 수험생은 '차이'와 '표현 방식' 두 조건을 모두 확인해야 하므로 medium에 적합. 사실 관계(5km, Kuşköy, Hmong 성조 휘파람)도 통상 자료와 부합. 한국어·영어 해설 결론 및 선택지 참조 일치, 영어 해설에 한글 없음."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "B가 노트에 나온 두 표현 방식(모음·자음 흉내 vs 성조 재현)을 유일하게 대조함. C는 대조 형식만 갖춘 오답이고, D는 음높이를 쓴다는 공통점만 담은 오답이며, A는 공통점을 진술함. 이처럼 부분적으로 그럴듯한 오답이 있어 medium에 적합함. A의 'difficult terrain'은 Silbo에 대한 노트에는 없지만 오답이므로 문제없음.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "medium-rhetorical_synthesis-406",
+  "runId": "rw-supplement-medium",
+  "skill": "rhetorical_synthesis",
+  "domain": "rw_expression_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "While researching a topic, a student has taken the following notes:\n- Tomoko Ohta (born 1933) is a Japanese population geneticist.\n- In 1973, she proposed the \"nearly neutral theory\" of molecular evolution.\n- Earlier, her mentor Motoo Kimura had argued that most genetic mutations are completely neutral, neither helping nor harming an organism.\n- Ohta argued instead that many mutations are slightly harmful, with effects so small that chance can still determine whether they spread.\n- Her theory predicts that such mutations spread more easily in small populations than in large ones.\n- In 2015, Ohta received the Crafoord Prize in Biosciences.\n\nThe student wants to emphasize how Ohta's theory differed from Kimura's view. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "stimulus": "While researching a topic, a student has taken the following notes:\n- Tomoko Ohta (born 1933) is a Japanese population geneticist.\n- In 1973, she proposed the \"nearly neutral theory\" of molecular evolution.\n- Earlier, her mentor Motoo Kimura had argued that most genetic mutations are completely neutral, neither helping nor harming an organism.\n- Ohta argued instead that many mutations are slightly harmful, with effects so small that chance can still determine whether they spread.\n- Her theory predicts that such mutations spread more easily in small populations than in large ones.\n- In 2015, Ohta received the Crafoord Prize in Biosciences.",
+   "question": "The student wants to emphasize how Ohta's theory differed from Kimura's view. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "options": [
+    "Tomoko Ohta, a Japanese population geneticist who studied under Motoo Kimura, received the Crafoord Prize in Biosciences in 2015.",
+    "Ohta's nearly neutral theory, proposed in 1973, predicts that slightly harmful mutations spread more easily in small populations than in large ones.",
+    "Both Kimura and Ohta studied molecular evolution, and in 1973 Ohta proposed a theory about how genetic mutations spread.",
+    "Whereas Kimura had argued that most mutations are completely neutral, Ohta proposed that many are slightly harmful, though too weakly for that harm to keep chance from determining whether they spread."
+   ],
+   "correctIndex": 3,
+   "answers": null,
+   "explanation": "D는 Kimura의 견해(대부분의 돌연변이는 완전히 중립적이다)와 Ohta의 견해(많은 돌연변이가 약간 해롭다)를 'Whereas'로 직접 대비시키므로 두 이론의 차이를 강조한다는 목표를 달성한다. A는 두 사람의 사제 관계와 수상 사실만 언급할 뿐 이론의 차이는 다루지 않는다. B는 Ohta 이론의 정확한 예측을 담고 있지만 Kimura의 견해가 빠져 있어 대조가 이루어지지 않는다. C는 두 사람을 함께 언급하지만 공통점만 제시하고 무엇이 달랐는지는 밝히지 않는다.",
+   "explanationEn": "D directly contrasts Kimura's view (most mutations are completely neutral) with Ohta's view (many mutations are slightly harmful) using \"Whereas,\" so it emphasizes how the two theories differed. A mentions only their mentor-student relationship and Ohta's prize, not any difference in their ideas. B accurately states a prediction of Ohta's theory, but it leaves out Kimura's view, so there is no contrast. C names both scientists, but it points out only what they had in common and never says how their views differed.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "D",
+   "seed": "인물 소개(과학자·예술가)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "정답 D만이 Kimura(완전 중립)와 Ohta(약간 해로움)의 견해를 'Whereas'로 직접 대비하여 목표를 충족함. B는 Ohta 이론의 정확한 예측(부분적 근거), C는 두 사람을 함께 언급하나 공통점만 제시(부분적 근거), A는 사제 관계·수상만 언급. 노트 사실관계(1933년 출생, 1973년 nearly neutral theory, Kimura 멘토, 2015 Crafoord Prize) 모두 정확. D의 후반부 \"though too weakly for that harm to keep chance from determining...\"이 다소 장황하나 문법적·내용적으로 노트와 일치하여 결함은 아님. 한국어·영어 해설 결론 및 선택지 참조 일치, 한글 혼입 없음."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "사실관계(Ohta 1973 nearly neutral theory, 2015 Crafoord Prize)가 정확함. B와 C가 그럴듯한 오답으로 작동함. 다만 D의 'though too weakly...' 구문이 다소 어색하지만 의미는 정확함.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "medium-rhetorical_synthesis-407",
+  "runId": "rw-supplement-medium",
+  "skill": "rhetorical_synthesis",
+  "domain": "rw_expression_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "While researching a topic, a student has taken the following notes:\n- Fast radio bursts (FRBs) are flashes of radio waves from distant galaxies that typically last only a few milliseconds.\n- Most known FRBs have been detected only once and have never been observed to repeat.\n- FRB 20180916B, discovered by the CHIME telescope in Canada, repeats on a regular cycle of about 16.3 days.\n- Its bursts arrive during a window of roughly 4 days, followed by about 12 days of silence.\n- Astronomers suggest the cycle may result from the source orbiting a companion star or from a slowly wobbling magnetized neutron star.\n\nThe student wants to emphasize how FRB 20180916B differs from most fast radio bursts. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "stimulus": "While researching a topic, a student has taken the following notes:\n- Fast radio bursts (FRBs) are flashes of radio waves from distant galaxies that typically last only a few milliseconds.\n- Most known FRBs have been detected only once and have never been observed to repeat.\n- FRB 20180916B, discovered by the CHIME telescope in Canada, repeats on a regular cycle of about 16.3 days.\n- Its bursts arrive during a window of roughly 4 days, followed by about 12 days of silence.\n- Astronomers suggest the cycle may result from the source orbiting a companion star or from a slowly wobbling magnetized neutron star.",
+   "question": "The student wants to emphasize how FRB 20180916B differs from most fast radio bursts. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "options": [
+    "Whereas most known fast radio bursts have been detected only once, FRB 20180916B repeats on a regular cycle of about 16.3 days.",
+    "FRB 20180916B, discovered by the CHIME telescope in Canada, sends out bursts during a window of roughly 4 days, followed by about 12 days of silence.",
+    "Like other fast radio bursts, FRB 20180916B is a flash of radio waves from a distant galaxy that lasts only a few milliseconds.",
+    "Astronomers suggest that the 16.3-day cycle of FRB 20180916B may result from the source orbiting a companion star or from a wobbling neutron star."
+   ],
+   "correctIndex": 0,
+   "answers": null,
+   "explanation": "목표는 FRB 20180916B가 대부분의 FRB와 어떻게 다른지 강조하는 것이므로, 일반적인 FRB의 특징과 이 FRB의 특징을 함께 제시해 대조해야 한다. A는 대부분의 FRB가 한 번만 관측된다는 점과 이 FRB가 16.3일 주기로 반복된다는 점을 대조하므로 정답이다. B는 이 FRB의 활동 패턴을 정확히 설명하지만 다른 FRB와의 비교가 없다. C는 비교는 하지만 차이가 아닌 공통점을 강조한다. D는 주기의 원인에 대한 가설만 제시할 뿐 대부분의 FRB와의 차이를 보여 주지 않는다.",
+   "explanationEn": "Your goal is to emphasize how FRB 20180916B differs from most FRBs, so the sentence needs to set what is typical of FRBs against what is unusual about this one. A does this: it contrasts most FRBs, which are detected only once, with FRB 20180916B, which repeats on a regular 16.3-day cycle. B describes this burst's activity pattern accurately, but it never compares it with other FRBs. C does make a comparison, but it points to a similarity rather than a difference. D only offers possible explanations for the cycle and doesn't show how this FRB differs from most others.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "A",
+   "seed": "자연과학(물리·천문)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "정답 A는 노트 2·3을 결합해 '대부분 vs. 이 FRB' 대조를 명시적으로 제시하므로 목표에 정확히 부합. B·D는 노트 내용을 정확히 담은 부분 정답형 오답(비교 부재), C는 비교를 하지만 공통점을 강조하는 함정형 오답으로 medium 구성 요건 충족. FRB 20180916B 16.35일 주기·CHIME 발견 등 사실 관계 정확. 두 해설 결론·글자 참조 일치, 영어 자연스러움."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "FRB 20180916B의 16.3일 주기(활동 약 4일)와 CHIME 발견은 사실과 맞다. B와 D는 이 FRB만의 특징을 담고 있어 그럴듯한 오답이고, C는 비교 구조를 갖춘 함정이다. medium 난이도에 적합하다. 다만 D에는 노트의 'slowly'와 'magnetized'가 빠졌는데, 정답에는 영향이 없다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "medium-rhetorical_synthesis-408",
+  "runId": "rw-supplement-medium",
+  "skill": "rhetorical_synthesis",
+  "domain": "rw_expression_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "While researching a topic, a student has taken the following notes:\n- Behavioral economists study how the timing of choices affects what people decide.\n- In a study of a workplace cafeteria, researchers compared lunch orders placed in advance with orders placed at the counter.\n- Employees who ordered by 10:00 a.m. chose meals averaging 74 fewer calories than employees who ordered at noon.\n- The researchers attributed the difference to hunger: people choosing while hungry favored more filling, higher-calorie foods.\n- Both groups had access to the same menu at the same prices.\n\nThe student wants to explain why the researchers believed hunger, rather than menu options, accounted for the difference in calories. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "stimulus": "While researching a topic, a student has taken the following notes:\n- Behavioral economists study how the timing of choices affects what people decide.\n- In a study of a workplace cafeteria, researchers compared lunch orders placed in advance with orders placed at the counter.\n- Employees who ordered by 10:00 a.m. chose meals averaging 74 fewer calories than employees who ordered at noon.\n- The researchers attributed the difference to hunger: people choosing while hungry favored more filling, higher-calorie foods.\n- Both groups had access to the same menu at the same prices.",
+   "question": "The student wants to explain why the researchers believed hunger, rather than menu options, accounted for the difference in calories. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "options": [
+    "Employees who ordered lunch by 10:00 a.m. chose meals averaging 74 fewer calories than employees who ordered at noon, a finding that interests behavioral economists studying the timing of choices.",
+    "Because early and noon orderers chose from the same menu at the same prices, the researchers concluded that the 74-calorie gap stemmed from hunger, which led noon orderers to favor more filling foods.",
+    "In a workplace cafeteria study, researchers found that hungry employees favored more filling, higher-calorie foods than other employees did.",
+    "Researchers compared advance lunch orders with counter orders in a workplace cafeteria, where all employees had access to the same menu at the same prices."
+   ],
+   "correctIndex": 1,
+   "answers": null,
+   "explanation": "목표는 메뉴가 아니라 배고픔이 칼로리 차이의 원인이라고 연구자들이 판단한 이유를 설명하는 것이다. B는 두 집단의 메뉴와 가격이 같았다는 점(메뉴 요인 배제)과 배고픔이라는 설명을 연결하므로 정답이다. A는 결과만 제시하고 원인 판단의 근거는 빠져 있다. C는 배고픔을 언급하지만 메뉴가 같았다는 점을 빠뜨려 메뉴가 원인일 가능성을 배제하지 못한다. D는 같은 메뉴라는 사실은 담았지만 칼로리 차이나 배고픔과 연결하지 않는다.",
+   "explanationEn": "Your goal is to explain why the researchers credited hunger, not menu options, for the calorie difference. B works because it links the identical menu and prices (which rules out the menu as a cause) to the hunger explanation for the 74-calorie gap. A gives only the result and leaves out the reasoning behind the cause. C mentions hunger but leaves out the identical menu, so it never rules out menu options. D includes the identical menu but never connects it to the calorie gap or to hunger.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "B",
+   "seed": "사회과학(경제·행동)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "목표(메뉴가 아닌 배고픔이 원인이라고 본 이유 설명)에 대해 B만이 '같은 메뉴·가격'(메뉴 요인 배제)과 '배고픔' 설명을 인과적으로 연결함. A는 결과만, C는 배고픔만, D는 메뉴 동일성만 담아 각각 부분적 근거를 지녀 비교가 필요한 적절한 오답. 한국어·영어 해설 모두 정답과 선택지 참조가 일치하고 모순 없음. 노트는 가상 자료로 사실 오류·저작권 문제 없음. 두 정보의 연결이 요구되는 medium 난이도에 적합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": false,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "B만이 메뉴 요인 배제(같은 메뉴·가격)와 배고픔 설명을 함께 제시함. C·D가 각각 절반의 근거를 담고 있어 서로 비교해야 배제되며, A도 그럴듯함. 노트에는 메뉴가 같았기 때문에 결론을 내렸다는 인과가 명시되어 있지 않으나, 합리적으로 종합한 내용으로 볼 수 있음.",
+    "passed": false
+   }
+  }
+ },
+ {
+  "gid": "medium-rhetorical_synthesis-413",
+  "runId": "rw-supplement-medium",
+  "skill": "rhetorical_synthesis",
+  "domain": "rw_expression_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "While researching a topic, a student has taken the following notes:\n- In 2010, economists Dean Karlan and colleagues studied how reminders affect personal savings.\n- Participants in Bolivia, Peru, and the Philippines had recently opened savings accounts with specific savings goals.\n- Some participants received monthly text or letter reminders about their goals; others received none.\n- Participants who received reminders saved about 6 percent more than those who did not.\n- Reminders that mentioned the participant's specific goal (such as buying school supplies) were especially effective.\n- The researchers argued that people often fail to save not because they lack money but because future expenses slip from their attention.\n\nThe student wants to present the researchers' explanation for why reminders increased savings. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "stimulus": "While researching a topic, a student has taken the following notes:\n- In 2010, economists Dean Karlan and colleagues studied how reminders affect personal savings.\n- Participants in Bolivia, Peru, and the Philippines had recently opened savings accounts with specific savings goals.\n- Some participants received monthly text or letter reminders about their goals; others received none.\n- Participants who received reminders saved about 6 percent more than those who did not.\n- Reminders that mentioned the participant's specific goal (such as buying school supplies) were especially effective.\n- The researchers argued that people often fail to save not because they lack money but because future expenses slip from their attention.",
+   "question": "The student wants to present the researchers' explanation for why reminders increased savings. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "options": [
+    "In a study conducted in Bolivia, Peru, and the Philippines, participants who received monthly reminders about their savings goals saved about 6 percent more than participants who received none.",
+    "Karlan and colleagues found that reminders mentioning a specific goal, such as buying school supplies, were especially effective at increasing how much people saved.",
+    "Because people often fail to save when future expenses slip from their attention, Karlan and colleagues reasoned, reminders that keep savings goals in mind helped participants save about 6 percent more.",
+    "Karlan and colleagues studied people who had recently opened savings accounts with specific goals, sending some of them monthly text or letter reminders."
+   ],
+   "correctIndex": 2,
+   "answers": null,
+   "explanation": "목표는 리마인더가 저축을 늘린 '이유에 대한 연구자들의 설명'을 제시하는 것이다. C는 미래 지출이 주의에서 벗어난다는 연구자들의 주장(마지막 메모)을 6% 증가라는 결과와 연결해 이유를 설명하므로 정답이다. A는 결과 수치만 전달할 뿐 왜 그런지는 설명하지 않는다. B는 어떤 리마인더가 더 효과적이었는지를 보여 줄 뿐 연구자들의 설명은 빠져 있다. D는 연구 설계만 기술하고 결과나 설명이 없다.",
+   "explanationEn": "Your goal is to present the researchers' explanation for why reminders increased savings. C does this by tying the researchers' argument that future expenses slip from people's attention to the 6 percent increase, so it explains the cause behind the result. A reports the result accurately, but it never says why the reminders worked. B points out which reminders worked best, but it leaves out the researchers' explanation. D only describes how the study was set up and gives neither a result nor an explanation.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "C",
+   "seed": "사회과학(경제·행동)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "C is the only choice that conveys the researchers' causal explanation (future expenses slip from attention) and links it to the result; A gives only the result, B only which reminders worked best, D only the design. Korean and English explanations agree and reference choices correctly. Study details match Karlan et al.'s real reminder research; original student-note framing, no copyright concern. A and B are partially correct distractors requiring comparison; difficulty matches medium."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "Karlan et al. 리마인더 연구(약 6% 증가, 목표 언급 리마인더가 더 효과적, 주의 제한 설명)를 정확히 반영함. 연구 연도(2010 워킹페이퍼/2016 출판)는 메모 설정으로 허용 범위. 정답 C만 연구자들의 설명을 담고 있음. B는 부분적으로 그럴듯한 오답이어서 비교가 필요해 medium 난이도에 적합. 다만 'explanation'이라는 핵심어 때문에 비교적 쉽게 풀릴 수 있음.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "medium-rhetorical_synthesis-414",
+  "runId": "rw-supplement-medium",
+  "skill": "rhetorical_synthesis",
+  "domain": "rw_expression_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "While researching a topic, a student has taken the following notes:\n- Whistled languages encode speech in whistled tones and can carry over long distances.\n- Silbo Gomero is a whistled form of Spanish used on La Gomera in the Canary Islands.\n- Silbo Gomero represents spoken vowels and consonants through changes in whistled pitch.\n- Kuşköy, a village in northern Turkey, uses a whistled form of Turkish.\n- A 2015 study by Onur Güntürkün found that understanding whistled Turkish draws heavily on both brain hemispheres.\n- In contrast, understanding spoken Turkish relies mainly on the left hemisphere.\n\nThe student wants to emphasize a difference between how listeners process two forms of the same language. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "stimulus": "While researching a topic, a student has taken the following notes:\n- Whistled languages encode speech in whistled tones and can carry over long distances.\n- Silbo Gomero is a whistled form of Spanish used on La Gomera in the Canary Islands.\n- Silbo Gomero represents spoken vowels and consonants through changes in whistled pitch.\n- Kuşköy, a village in northern Turkey, uses a whistled form of Turkish.\n- A 2015 study by Onur Güntürkün found that understanding whistled Turkish draws heavily on both brain hemispheres.\n- In contrast, understanding spoken Turkish relies mainly on the left hemisphere.",
+   "question": "The student wants to emphasize a difference between how listeners process two forms of the same language. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "options": [
+    "Silbo Gomero, a whistled form of Spanish, and the whistled Turkish of Kuşköy both encode speech in tones that can carry over long distances.",
+    "Whistled Spanish on La Gomera represents vowels and consonants through changes in pitch, whereas whistled Turkish is used in the village of Kuşköy in northern Turkey.",
+    "According to a 2015 study by Onur Güntürkün, understanding whistled Turkish, a language used in Kuşköy, draws heavily on both hemispheres of the brain.",
+    "While understanding spoken Turkish relies mainly on the brain's left hemisphere, understanding its whistled form draws heavily on both hemispheres, according to a 2015 study."
+   ],
+   "correctIndex": 3,
+   "answers": null,
+   "explanation": "D는 같은 언어(터키어)의 음성 형태와 휘파람 형태를 대조하면서 듣는 사람의 뇌 처리 방식 차이(좌반구 위주 vs 양반구)를 보여 주므로 목표를 달성한다. A는 두 휘파람 언어의 공통점을 말하므로 차이를 강조하지 못한다. B는 'whereas'로 대조 형식을 띠지만 서로 다른 두 언어를 다루고, 처리 방식이 아니라 표현 방식과 사용 지역을 비교한다. C는 연구 결과를 정확히 전하지만 휘파람 터키어 하나만 설명하므로 두 형태의 차이가 드러나지 않는다.",
+   "explanationEn": "D contrasts two forms of the same language, spoken and whistled Turkish, and shows how listeners process them differently: mainly with the left hemisphere versus heavily with both hemispheres. That makes D the choice that accomplishes the goal. A describes something the two whistled languages have in common, so it doesn't emphasize a difference. B uses a contrast word (\"whereas\"), but it compares two different languages and talks about how sounds are represented and where each language is used, not how listeners process it. C reports the study accurately, but it describes only whistled Turkish, so there's nothing for the difference to be measured against.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "D",
+   "seed": "언어·인류학",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "D만이 '같은 언어의 두 형태'와 '처리 방식(좌반구 vs 양반구)'이라는 두 조건을 모두 충족. B는 대조 접속사로, C는 연구 결과 인용으로 부분적 근거를 가져 비교가 필요하며 A도 문맥상 말이 됨. 노트 사실(Silbo Gomero, Kuşköy, Güntürkün 2015 연구) 정확. 해설 한·영 일치, 글자 참조 일치."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "B는 대조어가 있고 C는 관련 연구를 담고 있어 둘 다 일부만 맞는 오답이다. 정답을 고르려면 '같은 언어'와 '처리 방식'이라는 두 조건을 모두 확인해야 하므로 medium 난이도에 맞는다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "medium-rhetorical_synthesis-415",
+  "runId": "rw-supplement-medium",
+  "skill": "rhetorical_synthesis",
+  "domain": "rw_expression_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "While researching a topic, a student has taken the following notes:\n- Lina Bo Bardi was an Italian-born Brazilian architect.\n- In 1977 she began converting a former oil-drum factory in São Paulo into SESC Pompéia, a public leisure and cultural center.\n- Rather than demolishing the factory's brick sheds, Bo Bardi kept them and opened their interiors for exhibitions, a library, and workshops.\n- She added three new concrete towers containing sports courts and a swimming pool.\n- The towers are linked by concrete walkways that cross the site at upper levels.\n- Critics often describe the project as a model for reusing industrial buildings instead of replacing them.\n\nThe student wants to explain why critics regard SESC Pompéia as a model for a particular approach to architecture. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "stimulus": "While researching a topic, a student has taken the following notes:\n- Lina Bo Bardi was an Italian-born Brazilian architect.\n- In 1977 she began converting a former oil-drum factory in São Paulo into SESC Pompéia, a public leisure and cultural center.\n- Rather than demolishing the factory's brick sheds, Bo Bardi kept them and opened their interiors for exhibitions, a library, and workshops.\n- She added three new concrete towers containing sports courts and a swimming pool.\n- The towers are linked by concrete walkways that cross the site at upper levels.\n- Critics often describe the project as a model for reusing industrial buildings instead of replacing them.",
+   "question": "The student wants to explain why critics regard SESC Pompéia as a model for a particular approach to architecture. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "options": [
+    "Critics see SESC Pompéia as a model for reusing industrial sites because Bo Bardi preserved the old factory's brick sheds and opened them for exhibitions, a library, and workshops rather than tearing them down.",
+    "Critics admire SESC Pompéia, a São Paulo cultural center that Bo Bardi created by adding three concrete towers, linked by upper-level walkways, to a former oil-drum factory.",
+    "Begun in 1977, SESC Pompéia converted a São Paulo oil-drum factory into a public leisure and cultural center, a project designed by the Italian-born Brazilian architect Lina Bo Bardi.",
+    "At SESC Pompéia, Bo Bardi placed sports courts and a swimming pool in three new concrete towers, while exhibitions, a library, and workshops occupy the older brick sheds."
+   ],
+   "correctIndex": 0,
+   "answers": null,
+   "explanation": "목표는 비평가들이 이 프로젝트를 어떤 건축 방식의 모범으로 보는지와 그 이유를 함께 설명하는 것이다. A는 '산업 건물 재사용'이라는 방식을 밝히고, 벽돌 창고를 철거하지 않고 보존해 새 용도로 열었다는 근거를 연결하므로 정답이다. B는 비평가의 호평을 언급하지만 새로 지은 타워와 통로만 강조해 재사용이라는 핵심 이유가 빠져 있다. C는 정확한 배경 정보만 나열할 뿐 비평가의 평가나 그 이유를 설명하지 않는다. D는 옛 건물과 새 건물의 용도를 대조하지만 왜 모범으로 여겨지는지는 밝히지 않는다.",
+   "explanationEn": "Your goal is to name the approach critics see SESC Pompéia as modeling and explain why. A does both: it names industrial reuse and backs it up with the fact that Bo Bardi kept the brick sheds and gave them new uses instead of demolishing them. B mentions that critics admire the project, but it focuses only on the new towers and walkways, so it leaves out the reuse that explains their praise. C gives accurate background details, but it never says what critics think or why. D contrasts how the old and new buildings are used, but it doesn't explain why the project is considered a model.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "A",
+   "seed": "예술·건축 비평",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "A alone names the approach (industrial reuse) and supplies the causal reason (preserving/repurposing sheds instead of demolishing), directly combining notes 3 and 6. B references critics but omits the reuse rationale; D uses the shed detail but lacks critics/reason; C is background only. Historical facts about Bo Bardi and SESC Pompéia (1977, drum factory, towers, walkways) are accurate. Korean and English explanations align in conclusion and letter references; English is natural with no Hangul. Two-step judgment (approach + reason) with two partially plausible distractors fits medium."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "정답 A가 방식(산업 건물 재사용)과 이유(창고 보존·용도 전환)를 모두 담고 있다. B와 D는 부분적으로 그럴듯해 비교해야 배제할 수 있어 medium 난이도에 맞는다. 사실관계(1977년 착공, 기름통 공장, 콘크리트 타워 세 동)도 정확하다.",
+    "passed": true
+   }
+  }
+ }
+]

@@ -1,0 +1,311 @@
+{
+ "schema": "rw-session-task/v1",
+ "kind": "review",
+ "role": "second_solver",
+ "runId": "lit40-wave1",
+ "taskId": "rev-second_solver-044",
+ "chunkId": "rev-second_solver-044",
+ "suggestedModel": "opus",
+ "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-second_solver-044.result.json",
+ "outputSchema": {
+  "chunkId": "청크 ID",
+  "model": "opus|fable",
+  "items": [
+   {
+    "candidateId": "id",
+    "picked_letter": "A|B|C|D",
+    "other_defensible": "boolean",
+    "confidence": "high|medium|low",
+    "note": "풀이 한 줄"
+   }
+  ]
+ },
+ "items": [
+  {
+   "candidateId": "lit40-medium-06-032",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "symbolism",
+   "requestedDifficulty": "medium",
+   "passage": "Joon and Suhyun met on the stone bridge in Busan every evening before their set, as they had for eight years. Lately the duo drew smaller crowds, and both knew why, though neither said it: Suhyun had been offered a solo contract in Seoul. Instead they talked about the bridge. Joon pointed out a crack running between two stones, filled long ago with mortar that had weathered to a different color. Suhyun said the bridge would stand for another century that way. Each night after that, one of them would touch the patched seam while passing, as if checking it. On their last evening before the contract deadline, Suhyun pressed her palm flat against the mortar and held it there, and Joon looked away toward the harbor lights.",
+   "question": "In the text, the mortar-filled crack in the bridge most likely represents",
+   "options": [
+    "the decline in audiences that has troubled the duo's recent performances.",
+    "the long history of the city of Busan and its old stone architecture.",
+    "Suhyun's confidence that she will succeed in her solo career in Seoul.",
+    "the duo's strained partnership, held together by what they avoid saying."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-06-033",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "medium",
+   "passage": "When Neema and Kiara hung their families' tablecloths side by side on the rooftop laundry line in Nairobi, neither said a word, as was their habit after forty years of friendship. Neema's cloth was stiff white cotton for her family's Sunday lunch; Kiara's was patterned in red and gold for the evening feast her relatives were bringing to the same house. The two cloths flapped against each other in the wind, tangling and parting and tangling again, a quarrel conducted entirely in cotton. Kiara reached up once to separate them, then let her hand fall. By late afternoon both were dry, and Neema folded them together, the white inside the red, so they would fit on the one long table downstairs.",
+   "question": "As used in the text, the phrase “a quarrel conducted entirely in cotton” most nearly suggests that",
+   "options": [
+    "the tablecloths' motion expresses the tension the silent friends never voice.",
+    "the friends argue loudly about which cloth should be used for the meal.",
+    "the cotton cloths are being damaged by the strong wind on the roof.",
+    "the two families have refused to share the long table downstairs."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-06-034",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "medium",
+   "passage": "Who would have guessed that Larissa would end up keeping bees in a Glasgow yard? Twenty years earlier she and her stage partner had toured every hall in Scotland, and Eamon, who had managed them both, now arrived at her gate with news: her old partner was staging a reunion and wanted Larissa to join. Larissa lifted a frame from the hive, heavy with comb, and said she had promised the neighborhood association a season of honey. Eamon watched the bees crawl over her bare wrists without stinging. Her old loyalty tugged at her one way, the new one another, and she stood between them like a hive with two queens, humming and uneasy. She asked him to come back after the harvest, when she might have an answer.",
+   "question": "As used in the text, the phrase “like a hive with two queens” most nearly suggests that Larissa",
+   "options": [
+    "has become an expert beekeeper with an unusually productive hive.",
+    "is torn between competing commitments that cannot easily coexist.",
+    "feels threatened by her former stage partner's growing fame.",
+    "intends to lead both the reunion and the neighborhood association."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-06-035",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "medium",
+   "passage": "Tell him only that I'm tired, Ruoxi said,\nher voice small in the Taipei gym\nwhere her brother's team ran drills beneath the lights.\nNora, who carried words between two languages for pay,\nweighed the sentence like a coin with two faces.\nThe doctor's news sat folded in her pocket,\na paper boat she could not sail across the court.\nThe boy waved from the free-throw line, grinning,\nand Nora waved back, choosing the smaller truth,\nwhile sneakers squealed on the varnished floor\nand the scoreboard blinked its patient zeros.",
+   "question": "As used in the text, the phrase “a paper boat she could not sail across the court” most nearly suggests that Nora",
+   "options": [
+    "is unable to read the doctor's handwriting on the folded paper.",
+    "wishes she could join the brother's team practice on the court.",
+    "cannot bring herself to deliver the serious news to the boy.",
+    "plans to give the boy a small gift once the practice ends."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-06-036",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "medium",
+   "passage": "I worked the night shift at a pharmacy in Valparaiso the winter my marriage to Takoda was quietly coming apart, and his mother, Cleotilde, came in nearly every evening near midnight. She bought small things: throat lozenges, a comb, a single bandage. We talked about the fog, the price of oranges, her knees. Neither of us mentioned that Takoda had not slept at home in weeks. Our conversations were a bridge built only to its middle, and each night we walked out to the edge of it, admired the view, and turned back. Once she paused at the door and seemed about to say his name. Instead she pulled her scarf higher and stepped into the wet street, where taxis hissed past under the hill's yellow lamps.",
+   "question": "As used in the text, the phrase “a bridge built only to its middle” most nearly suggests that the conversations",
+   "options": [
+    "were difficult because the two women spoke different languages.",
+    "gradually brought the women to an open discussion of the marriage.",
+    "took place on the walk from the pharmacy across the town's bridge.",
+    "reached toward each other but always stopped short of the real subject."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-06-037",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "medium",
+   "passage": "Meera and Eulalio ran rival bakeries on opposite sides of the mountain bus stop outside Lima, and I spent my tenth summer carrying flour sacks for Meera. That year the old master baker of the village died and left his copper dough scraper not to Meera, his apprentice of twenty years, but to Eulalio, who had once insulted his bread in public. For weeks the scraper hung in Eulalio's window, untouched, a medal pinned on the wrong chest. Customers waiting for the bus whispered about it. Eulalio's loaves came out lopsided, and he stopped meeting anyone's eyes. One morning in August I found the scraper wrapped in brown paper on Meera's doorstep, no note attached. The early bus groaned up the switchbacks, its roof stacked with crates of potatoes.",
+   "question": "As used in the text, the phrase “a medal pinned on the wrong chest” most nearly suggests that the scraper",
+   "options": [
+    "was an honor that everyone sensed rightly belonged to someone else.",
+    "was a prize Eulalio had won in a public baking competition.",
+    "was too valuable to be used for ordinary daily baking.",
+    "was displayed to insult Meera in front of the customers."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-06-043",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "medium",
+   "passage": "When the train lurched out of the station at Kollam, Ananya was already watching Radek over the top of her newspaper. Her retired neighbor had insisted on carrying her suitcase, had bought her tea at every stop, and had now offered to hold her ticket while she slept. A sailor, she reminded herself, learns to be charming in every port, and charm usually wants something. She kept the ticket in her fist. Near Alappuzha, however, the conductor came through, and Radek quietly paid the fare difference she had not known she owed, waving off her protest. He explained that her late husband had once done the same for him on a ship bound for Kochi. Ananya folded the newspaper. She found she could not quite meet his eyes, and the tea he handed her next tasted unaccountably sweeter than the last.",
+   "question": "Which choice best describes the shift in tone in the text?",
+   "options": [
+    "It moves from nostalgic to openly bitter.",
+    "It moves from wary to quietly chastened.",
+    "It moves from playful to suddenly anxious.",
+    "It moves from indifferent to mildly amused."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-06-044",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "medium",
+   "passage": "A brown parcel slid back across the counter, stamped twice in red: REFUSED BY RECIPIENT. Waya read the stamp aloud in the officer's flat voice, and Tallulah laughed despite the fluorescent hum of the Albuquerque checkpoint. Their mother would have called the officer a magistrate of string and tape. They had driven three hours to collect it, sure it held another of her complaints about the price of postage. Tallulah tore it open in the parking lot. Inside, beneath their mother's own letters to her sister, lay a quilt square stitched with the two of them as children, each name embroidered in uneven thread. Waya traced his name with one finger. Neither of them laughed again. They sat in the car with the engine off and read the letters slowly, passing each page back and forth as though it might break.",
+   "question": "Which choice best describes the shift in tone in the text?",
+   "options": [
+    "It shifts from grieving to cautiously hopeful.",
+    "It shifts from tense to openly triumphant.",
+    "It shifts from wry to hushed and tender.",
+    "It shifts from formal to sharply accusatory."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-06-045",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "medium",
+   "passage": "When the post office opens at eight in Bergen's hills,\nGunnar sorts the letters as he always has,\nand Leilani, new this spring, stacks the parcels by weight.\nThey speak of rain, of the ferry, of the stamp machine's cough.\nNeither mentions the empty stool by the window\nwhere the old postmistress kept her thermos warm.\nBut at noon, when Gunnar pours two cups instead of three,\nhe pauses with the kettle tilted over nothing,\nand Leilani watches the steam drift toward the glass\nas if it, too, were waiting for someone to come in.\nShe slides her own cup toward the window stool\nand neither of them says why.",
+   "question": "Which choice best describes the shift in tone in the poem?",
+   "options": [
+    "It shifts from joyful to openly resentful.",
+    "It shifts from solemn to lightly playful.",
+    "It shifts from fearful to calmly relieved.",
+    "It shifts from matter-of-fact to wistful."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-06-046",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "medium",
+   "passage": "What do you owe a friend who has only weeks left? I asked Aiko this on the dock behind her house in Hokkaido, the lake so still that our reflections looked more certain than we did. Ren had asked me, in the hospital, whether his mother had forgiven him, and I had said yes, though she had said nothing of the kind. For days I circled the lie, wondering if I should take it back or let it stand. Aiko, who had known Ren's family for forty years, said only that his mother had sat outside his room every night, unable to go in. I watched a heron lift from the reeds. That evening I went back to the hospital, not to correct myself, but to tell Ren what Aiko had seen, and to let him decide what it meant.",
+   "question": "Which choice best describes the shift in tone in the text?",
+   "options": [
+    "It moves from uneasy questioning to quiet resolve.",
+    "It moves from bitter complaint to forced cheer.",
+    "It moves from playful teasing to sudden alarm.",
+    "It moves from detached reporting to sudden open anger."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-06-047",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "medium",
+   "passage": "“I'll need to see the candle receipts again,” Leah said, for the third morning running. I ran the little gift counter at the monastery guesthouse on Chicago's South Side, and by then I could recite her order before she reached the bell. She counted coins slowly, held each receipt to the window, and asked questions no one else bothered to ask. I began greeting her with a smile tight enough to crack. On the fourth morning she laid a twenty-dollar bill on the counter and explained, without any triumph, that I had charged her for a box of candles twice the week before. She had waited, she said, until she was certain, because she did not want to embarrass me in front of the brothers. I took the bill and stared at it a long while. After that, I kept her receipts in a drawer of their own.",
+   "question": "Which choice best describes the shift in tone in the text?",
+   "options": [
+    "It moves from amused to quietly fearful.",
+    "It moves from irritated to humbled.",
+    "It moves from grateful to suspicious.",
+    "It moves from solemn to openly giddy."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-06-048",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "text_structure",
+   "requestedDifficulty": "medium",
+   "passage": "How long did a stowaway think a captain's patience could last? Sadia put the question plainly as they walked the promenade in Colombo, the harbor lights behind them. Ayesha had hidden in the cargo hold for six days and now owed passage money she plainly did not have. She offered promises instead: a cousin with a shop, a job by the end of the month, interest on every rupee. Sadia listened without answering. She was remembering a different harbor, twenty years earlier, and a girl curled behind sacks of rice who had been found by a captain far less patient than she was. That captain had put her ashore with nothing. Sadia stopped beside the seawall. She told Ayesha that the debt would keep, and that the month she had mentioned could be two, if the cousin proved slow.",
+   "question": "Which choice best describes the overall structure of the text?",
+   "options": [
+    "A promise is made, then broken, then bitterly recalled by the captain.",
+    "A dispute is described, then settled by an outside figure's decision.",
+    "A demand is posed, a memory reframes it, and the demand is eased.",
+    "A setting is portrayed at length, then a stranger's past is revealed."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-06-049",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "text_structure",
+   "requestedDifficulty": "medium",
+   "passage": "“I won't be coming to the anniversary dinner,” Bahram said, moving his bishop before Tamar had finished setting the board. They had played on this hillside terrace above Dhaka every Friday for twenty-two years, and for twenty-two years Bahram had won exactly as often as he lost. Tamar had kept a tally in pencil on the underside of the table. He had planned the club's dinner partly to announce the final count. Now he studied his old rival's face and saw, for the first time, a tremor in the hand that held the bishop. Bahram's eyes had been failing for months; he could no longer read a menu, let alone a speech. Tamar said nothing about it. He simply turned the table over, rubbed out the pencil marks with his thumb, and suggested they play on the terrace that night instead.",
+   "question": "Which choice best describes the overall structure of the text?",
+   "options": [
+    "A competition is recounted, and then its final winner is declared.",
+    "A conflict is introduced, and then an apology resolves it at once.",
+    "A setting is described, and then a flashback explains the rivalry.",
+    "A refusal is stated, and then its hidden cause alters a plan."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-06-050",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "text_structure",
+   "requestedDifficulty": "medium",
+   "passage": "Some costs are worth paying. I believed this when my mother, Taeyang, and I floated in the salt-water pool on Jeju, arguing over whether my wedding should be small. She wanted a hall for two hundred guests; I wanted the money set aside for my younger cousin's scholarship abroad. My mother let the water hold her and said nothing for a long time. Then she told me about the year she had been offered a place at a university in Seoul and had turned it down so her brother could go instead. She did not regret it, she said, but she had never stopped wondering. I had always thought of sacrifice as a clean exchange, one good traded for another. Watching her stare at the sky, I began to suspect that every such exchange leaves something unpaid.",
+   "question": "Which choice best describes the overall structure of the text?",
+   "options": [
+    "A belief is stated, tested by a story, and then complicated.",
+    "A conflict is posed, avoided entirely, and then quietly forgotten.",
+    "A memory is recalled, then disproved by a later event.",
+    "A setting is depicted, then a decision is announced."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-06-052",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "underlined_portion_function",
+   "requestedDifficulty": "medium",
+   "passage": "Bouzouki music and the clatter of plates filled the wedding hall in Thessaloniki, so loud that no one noticed two guests who had stopped speaking to each other. Zoya had taught Alisha literature for three years, and both of them had come for the bride, Alisha's cousin. An hour earlier, Alisha had handed Zoya an envelope she thought was a thank-you card; inside was a letter Alisha had written to a friend, describing Zoya's lessons with merciless accuracy. Now they sat at opposite ends of the same long table. __When the waiter set down the honey cakes, each of them reached for the plate at the same moment, and each pulled back as if burned.__ Neither moved again until the dancing began. Later, Alisha watched her teacher fold the letter into a small square and tuck it into her purse rather than throw it away.",
+   "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+   "options": [
+    "It introduces a rivalry that becomes the focus of the passage.",
+    "It suggests that the wedding itself is the source of their quarrel.",
+    "It shows through a gesture that both feel the strain equally.",
+    "It reveals that Zoya has already decided to forgive Alisha."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-06-053",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "underlined_portion_function",
+   "requestedDifficulty": "medium",
+   "passage": "Karachi's monsoon had softened every page in the bookbinder's workshop, and Savitri, the night nurse, kept a lamp burning beside the narrow bed where old Tomoe slept among his presses. His family visited each afternoon and spoke of him as already gone, discussing which tools to sell. One evening a former apprentice arrived unannounced, a man who had not seen Tomoe in ten years. He stood a long time at the foot of the bed. __Then he pointed to Tomoe's hands, which, even in sleep, were folding the edge of the blanket into careful, even signatures, as if preparing a book for sewing.__ Savitri had seen the motion every night and thought it a restless habit. The apprentice took the bone folder from the bench and placed it gently in the old man's palm, and Tomoe's breathing slowed.",
+   "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+   "options": [
+    "It suggests that the apprentice has come to claim the tools.",
+    "It explains why the family has decided to sell the workshop.",
+    "It reveals that Savitri has neglected her duties as a nurse.",
+    "It shows the visitor seeing a craft that others overlooked."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-06-054",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "underlined_portion_function",
+   "requestedDifficulty": "medium",
+   "passage": "“Smoked eel or herring?” my sister Irena asked, as though I had been gone a week rather than two years. We walked the open-air market in Riga, past Assunta's stall of pickled mushrooms, where Irena had worked every morning while I was at the front. I knew, though she had never written it, that her wages had paid off the loan I took before I left. I had rehearsed a speech of thanks on the train. __At Assunta's stall, Irena paid for both our lunches before I could reach for my wallet, and counted out the coins with the same care she must have used every week I was away.__ I put my hand back in my pocket. We ate on a bench by the canal and talked about the weather, the price of eel, and whether the old tram line would ever reopen.",
+   "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+   "options": [
+    "It hints at the unspoken debt through an ordinary act.",
+    "It shows that Irena resents the burden her brother left her.",
+    "It reveals that the narrator has forgotten what he owes.",
+    "It introduces Assunta as the person who lent the money."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-06-055",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "underlined_portion_function",
+   "requestedDifficulty": "medium",
+   "passage": "I was fourteen when the rumor about my stepfather climbed the stairwell of our building in Istanbul. Someone on the third floor had decided that he drank, because he came home late and slowly. By the time the story reached our neighbor Yasmin, it had grown into something cruel, and Yasmin told it to the one person who should never have heard it: my mother. I listened from the landing as she repeated it. __My stepfather, coming up behind me with a sack of bread and a bandaged knee from his shift at the docks, stopped on the step below and waited until Yasmin had finished.__ Then he climbed past us, greeted her by name, and went inside to wash his hands. That night my mother unwrapped his knee herself, and I stopped calling him by his first name. I am Eda, I thought, and he is the one who waited.",
+   "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+   "options": [
+    "It confirms that the rumor about the stepfather was accurate.",
+    "It offers a quiet explanation for the habits behind the rumor.",
+    "It shows the stepfather preparing to confront the neighbor.",
+    "It shifts the focus from the stepfather to the narrator's mother."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-06-056",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "medium",
+   "passage": "Elan had been certain, for nearly an hour, that Beatriz was the woman who had promised to drive him to Flagstaff. They were the only two adults left in the camp dining hall on the plateau after the bus failed to arrive, and he had greeted her with the confidence of a man reminding someone of a debt. Beatriz, who had never seen him before, listened politely and then admitted she had been just as sure that he was the one who had promised to drive her. Neither had a car. Both had been told, by someone neither could name, that a ride was arranged. Elan considered this with great seriousness, as though the mystery deserved a committee. Then he offered her half of his peanut butter sandwich, which was, the narrator suspects, the only promise anyone kept that day.",
+   "question": "Which choice best describes the narrator's attitude toward Elan?",
+   "options": [
+    "Openly scornful of his foolish mistake",
+    "Gently amused by his confusion",
+    "Deeply worried about his poor memory",
+    "Coolly indifferent to his predicament"
+   ]
+  }
+ ],
+ "instructions": "당신은 디지털 SAT 독립 채점자(두 번째 풀이자)다. 정답 표시가 없다. 직접 풀고 정답 외에 방어 가능한 선택지가 있는지 판정한다. 다른 풀이자의 답은 모른다.\n청크 rev-second_solver-044 — 19문항.\n출력: Write 도구로 정확히 이 경로에 JSON 한 파일을 쓴다 → /Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-second_solver-044.result.json\n출력 JSON 스키마(예시 구조): {\"chunkId\":\"청크 ID\",\"model\":\"opus|fable\",\"items\":[{\"candidateId\":\"id\",\"picked_letter\":\"A|B|C|D\",\"other_defensible\":\"boolean\",\"confidence\":\"high|medium|low\",\"note\":\"풀이 한 줄\"}]}\n허용 값: picked_letter ∈ {A,B,C,D}, 불리언 필드는 true/false, est_difficulty ∈ {easy,medium,hard}. candidateId 를 바꾸지 않고 모든 항목에 답한다.\n금지: 결과 파일 외의 파일 생성·수정, 다른 명령 실행, 문항 수정·재작성. 끝나면 'done <항목 수>' 한 줄만 답한다.\n\n## 문항\n### lit40-medium-06-032 — skill inferences · 유형 symbolism\n[지문]\nJoon and Suhyun met on the stone bridge in Busan every evening before their set, as they had for eight years. Lately the duo drew smaller crowds, and both knew why, though neither said it: Suhyun had been offered a solo contract in Seoul. Instead they talked about the bridge. Joon pointed out a crack running between two stones, filled long ago with mortar that had weathered to a different color. Suhyun said the bridge would stand for another century that way. Each night after that, one of them would touch the patched seam while passing, as if checking it. On their last evening before the contract deadline, Suhyun pressed her palm flat against the mortar and held it there, and Joon looked away toward the harbor lights.\n\n[질문] In the text, the mortar-filled crack in the bridge most likely represents\nA) the decline in audiences that has troubled the duo's recent performances.\nB) the long history of the city of Busan and its old stone architecture.\nC) Suhyun's confidence that she will succeed in her solo career in Seoul.\nD) the duo's strained partnership, held together by what they avoid saying.\n### lit40-medium-06-033 — skill words_in_context · 유형 figurative_language\n[지문]\nWhen Neema and Kiara hung their families' tablecloths side by side on the rooftop laundry line in Nairobi, neither said a word, as was their habit after forty years of friendship. Neema's cloth was stiff white cotton for her family's Sunday lunch; Kiara's was patterned in red and gold for the evening feast her relatives were bringing to the same house. The two cloths flapped against each other in the wind, tangling and parting and tangling again, a quarrel conducted entirely in cotton. Kiara reached up once to separate them, then let her hand fall. By late afternoon both were dry, and Neema folded them together, the white inside the red, so they would fit on the one long table downstairs.\n\n[질문] As used in the text, the phrase “a quarrel conducted entirely in cotton” most nearly suggests that\nA) the tablecloths' motion expresses the tension the silent friends never voice.\nB) the friends argue loudly about which cloth should be used for the meal.\nC) the cotton cloths are being damaged by the strong wind on the roof.\nD) the two families have refused to share the long table downstairs.\n### lit40-medium-06-034 — skill words_in_context · 유형 figurative_language\n[지문]\nWho would have guessed that Larissa would end up keeping bees in a Glasgow yard? Twenty years earlier she and her stage partner had toured every hall in Scotland, and Eamon, who had managed them both, now arrived at her gate with news: her old partner was staging a reunion and wanted Larissa to join. Larissa lifted a frame from the hive, heavy with comb, and said she had promised the neighborhood association a season of honey. Eamon watched the bees crawl over her bare wrists without stinging. Her old loyalty tugged at her one way, the new one another, and she stood between them like a hive with two queens, humming and uneasy. She asked him to come back after the harvest, when she might have an answer.\n\n[질문] As used in the text, the phrase “like a hive with two queens” most nearly suggests that Larissa\nA) has become an expert beekeeper with an unusually productive hive.\nB) is torn between competing commitments that cannot easily coexist.\nC) feels threatened by her former stage partner's growing fame.\nD) intends to lead both the reunion and the neighborhood association.\n### lit40-medium-06-035 — skill words_in_context · 유형 figurative_language\n[지문]\nTell him only that I'm tired, Ruoxi said,\nher voice small in the Taipei gym\nwhere her brother's team ran drills beneath the lights.\nNora, who carried words between two languages for pay,\nweighed the sentence like a coin with two faces.\nThe doctor's news sat folded in her pocket,\na paper boat she could not sail across the court.\nThe boy waved from the free-throw line, grinning,\nand Nora waved back, choosing the smaller truth,\nwhile sneakers squealed on the varnished floor\nand the scoreboard blinked its patient zeros.\n\n[질문] As used in the text, the phrase “a paper boat she could not sail across the court” most nearly suggests that Nora\nA) is unable to read the doctor's handwriting on the folded paper.\nB) wishes she could join the brother's team practice on the court.\nC) cannot bring herself to deliver the serious news to the boy.\nD) plans to give the boy a small gift once the practice ends.\n### lit40-medium-06-036 — skill words_in_context · 유형 figurative_language\n[지문]\nI worked the night shift at a pharmacy in Valparaiso the winter my marriage to Takoda was quietly coming apart, and his mother, Cleotilde, came in nearly every evening near midnight. She bought small things: throat lozenges, a comb, a single bandage. We talked about the fog, the price of oranges, her knees. Neither of us mentioned that Takoda had not slept at home in weeks. Our conversations were a bridge built only to its middle, and each night we walked out to the edge of it, admired the view, and turned back. Once she paused at the door and seemed about to say his name. Instead she pulled her scarf higher and stepped into the wet street, where taxis hissed past under the hill's yellow lamps.\n\n[질문] As used in the text, the phrase “a bridge built only to its middle” most nearly suggests that the conversations\nA) were difficult because the two women spoke different languages.\nB) gradually brought the women to an open discussion of the marriage.\nC) took place on the walk from the pharmacy across the town's bridge.\nD) reached toward each other but always stopped short of the real subject.\n### lit40-medium-06-037 — skill words_in_context · 유형 figurative_language\n[지문]\nMeera and Eulalio ran rival bakeries on opposite sides of the mountain bus stop outside Lima, and I spent my tenth summer carrying flour sacks for Meera. That year the old master baker of the village died and left his copper dough scraper not to Meera, his apprentice of twenty years, but to Eulalio, who had once insulted his bread in public. For weeks the scraper hung in Eulalio's window, untouched, a medal pinned on the wrong chest. Customers waiting for the bus whispered about it. Eulalio's loaves came out lopsided, and he stopped meeting anyone's eyes. One morning in August I found the scraper wrapped in brown paper on Meera's doorstep, no note attached. The early bus groaned up the switchbacks, its roof stacked with crates of potatoes.\n\n[질문] As used in the text, the phrase “a medal pinned on the wrong chest” most nearly suggests that the scraper\nA) was an honor that everyone sensed rightly belonged to someone else.\nB) was a prize Eulalio had won in a public baking competition.\nC) was too valuable to be used for ordinary daily baking.\nD) was displayed to insult Meera in front of the customers.\n### lit40-medium-06-043 — skill text_structure_purpose · 유형 tone_shift\n[지문]\nWhen the train lurched out of the station at Kollam, Ananya was already watching Radek over the top of her newspaper. Her retired neighbor had insisted on carrying her suitcase, had bought her tea at every stop, and had now offered to hold her ticket while she slept. A sailor, she reminded herself, learns to be charming in every port, and charm usually wants something. She kept the ticket in her fist. Near Alappuzha, however, the conductor came through, and Radek quietly paid the fare difference she had not known she owed, waving off her protest. He explained that her late husband had once done the same for him on a ship bound for Kochi. Ananya folded the newspaper. She found she could not quite meet his eyes, and the tea he handed her next tasted unaccountably sweeter than the last.\n\n[질문] Which choice best describes the shift in tone in the text?\nA) It moves from nostalgic to openly bitter.\nB) It moves from wary to quietly chastened.\nC) It moves from playful to suddenly anxious.\nD) It moves from indifferent to mildly amused.\n### lit40-medium-06-044 — skill text_structure_purpose · 유형 tone_shift\n[지문]\nA brown parcel slid back across the counter, stamped twice in red: REFUSED BY RECIPIENT. Waya read the stamp aloud in the officer's flat voice, and Tallulah laughed despite the fluorescent hum of the Albuquerque checkpoint. Their mother would have called the officer a magistrate of string and tape. They had driven three hours to collect it, sure it held another of her complaints about the price of postage. Tallulah tore it open in the parking lot. Inside, beneath their mother's own letters to her sister, lay a quilt square stitched with the two of them as children, each name embroidered in uneven thread. Waya traced his name with one finger. Neither of them laughed again. They sat in the car with the engine off and read the letters slowly, passing each page back and forth as though it might break.\n\n[질문] Which choice best describes the shift in tone in the text?\nA) It shifts from grieving to cautiously hopeful.\nB) It shifts from tense to openly triumphant.\nC) It shifts from wry to hushed and tender.\nD) It shifts from formal to sharply accusatory.\n### lit40-medium-06-045 — skill text_structure_purpose · 유형 tone_shift\n[지문]\nWhen the post office opens at eight in Bergen's hills,\nGunnar sorts the letters as he always has,\nand Leilani, new this spring, stacks the parcels by weight.\nThey speak of rain, of the ferry, of the stamp machine's cough.\nNeither mentions the empty stool by the window\nwhere the old postmistress kept her thermos warm.\nBut at noon, when Gunnar pours two cups instead of three,\nhe pauses with the kettle tilted over nothing,\nand Leilani watches the steam drift toward the glass\nas if it, too, were waiting for someone to come in.\nShe slides her own cup toward the window stool\nand neither of them says why.\n\n[질문] Which choice best describes the shift in tone in the poem?\nA) It shifts from joyful to openly resentful.\nB) It shifts from solemn to lightly playful.\nC) It shifts from fearful to calmly relieved.\nD) It shifts from matter-of-fact to wistful.\n### lit40-medium-06-046 — skill text_structure_purpose · 유형 tone_shift\n[지문]\nWhat do you owe a friend who has only weeks left? I asked Aiko this on the dock behind her house in Hokkaido, the lake so still that our reflections looked more certain than we did. Ren had asked me, in the hospital, whether his mother had forgiven him, and I had said yes, though she had said nothing of the kind. For days I circled the lie, wondering if I should take it back or let it stand. Aiko, who had known Ren's family for forty years, said only that his mother had sat outside his room every night, unable to go in. I watched a heron lift from the reeds. That evening I went back to the hospital, not to correct myself, but to tell Ren what Aiko had seen, and to let him decide what it meant.\n\n[질문] Which choice best describes the shift in tone in the text?\nA) It moves from uneasy questioning to quiet resolve.\nB) It moves from bitter complaint to forced cheer.\nC) It moves from playful teasing to sudden alarm.\nD) It moves from detached reporting to sudden open anger.\n### lit40-medium-06-047 — skill text_structure_purpose · 유형 tone_shift\n[지문]\n“I'll need to see the candle receipts again,” Leah said, for the third morning running. I ran the little gift counter at the monastery guesthouse on Chicago's South Side, and by then I could recite her order before she reached the bell. She counted coins slowly, held each receipt to the window, and asked questions no one else bothered to ask. I began greeting her with a smile tight enough to crack. On the fourth morning she laid a twenty-dollar bill on the counter and explained, without any triumph, that I had charged her for a box of candles twice the week before. She had waited, she said, until she was certain, because she did not want to embarrass me in front of the brothers. I took the bill and stared at it a long while. After that, I kept her receipts in a drawer of their own.\n\n[질문] Which choice best describes the shift in tone in the text?\nA) It moves from amused to quietly fearful.\nB) It moves from irritated to humbled.\nC) It moves from grateful to suspicious.\nD) It moves from solemn to openly giddy.\n### lit40-medium-06-048 — skill text_structure_purpose · 유형 text_structure\n[지문]\nHow long did a stowaway think a captain's patience could last? Sadia put the question plainly as they walked the promenade in Colombo, the harbor lights behind them. Ayesha had hidden in the cargo hold for six days and now owed passage money she plainly did not have. She offered promises instead: a cousin with a shop, a job by the end of the month, interest on every rupee. Sadia listened without answering. She was remembering a different harbor, twenty years earlier, and a girl curled behind sacks of rice who had been found by a captain far less patient than she was. That captain had put her ashore with nothing. Sadia stopped beside the seawall. She told Ayesha that the debt would keep, and that the month she had mentioned could be two, if the cousin proved slow.\n\n[질문] Which choice best describes the overall structure of the text?\nA) A promise is made, then broken, then bitterly recalled by the captain.\nB) A dispute is described, then settled by an outside figure's decision.\nC) A demand is posed, a memory reframes it, and the demand is eased.\nD) A setting is portrayed at length, then a stranger's past is revealed.\n### lit40-medium-06-049 — skill text_structure_purpose · 유형 text_structure\n[지문]\n“I won't be coming to the anniversary dinner,” Bahram said, moving his bishop before Tamar had finished setting the board. They had played on this hillside terrace above Dhaka every Friday for twenty-two years, and for twenty-two years Bahram had won exactly as often as he lost. Tamar had kept a tally in pencil on the underside of the table. He had planned the club's dinner partly to announce the final count. Now he studied his old rival's face and saw, for the first time, a tremor in the hand that held the bishop. Bahram's eyes had been failing for months; he could no longer read a menu, let alone a speech. Tamar said nothing about it. He simply turned the table over, rubbed out the pencil marks with his thumb, and suggested they play on the terrace that night instead.\n\n[질문] Which choice best describes the overall structure of the text?\nA) A competition is recounted, and then its final winner is declared.\nB) A conflict is introduced, and then an apology resolves it at once.\nC) A setting is described, and then a flashback explains the rivalry.\nD) A refusal is stated, and then its hidden cause alters a plan.\n### lit40-medium-06-050 — skill text_structure_purpose · 유형 text_structure\n[지문]\nSome costs are worth paying. I believed this when my mother, Taeyang, and I floated in the salt-water pool on Jeju, arguing over whether my wedding should be small. She wanted a hall for two hundred guests; I wanted the money set aside for my younger cousin's scholarship abroad. My mother let the water hold her and said nothing for a long time. Then she told me about the year she had been offered a place at a university in Seoul and had turned it down so her brother could go instead. She did not regret it, she said, but she had never stopped wondering. I had always thought of sacrifice as a clean exchange, one good traded for another. Watching her stare at the sky, I began to suspect that every such exchange leaves something unpaid.\n\n[질문] Which choice best describes the overall structure of the text?\nA) A belief is stated, tested by a story, and then complicated.\nB) A conflict is posed, avoided entirely, and then quietly forgotten.\nC) A memory is recalled, then disproved by a later event.\nD) A setting is depicted, then a decision is announced.\n### lit40-medium-06-052 — skill text_structure_purpose · 유형 underlined_portion_function\n[지문]\nBouzouki music and the clatter of plates filled the wedding hall in Thessaloniki, so loud that no one noticed two guests who had stopped speaking to each other. Zoya had taught Alisha literature for three years, and both of them had come for the bride, Alisha's cousin. An hour earlier, Alisha had handed Zoya an envelope she thought was a thank-you card; inside was a letter Alisha had written to a friend, describing Zoya's lessons with merciless accuracy. Now they sat at opposite ends of the same long table. __When the waiter set down the honey cakes, each of them reached for the plate at the same moment, and each pulled back as if burned.__ Neither moved again until the dancing began. Later, Alisha watched her teacher fold the letter into a small square and tuck it into her purse rather than throw it away.\n\n[질문] Which choice best describes the function of the underlined sentence in the text as a whole?\nA) It introduces a rivalry that becomes the focus of the passage.\nB) It suggests that the wedding itself is the source of their quarrel.\nC) It shows through a gesture that both feel the strain equally.\nD) It reveals that Zoya has already decided to forgive Alisha.\n### lit40-medium-06-053 — skill text_structure_purpose · 유형 underlined_portion_function\n[지문]\nKarachi's monsoon had softened every page in the bookbinder's workshop, and Savitri, the night nurse, kept a lamp burning beside the narrow bed where old Tomoe slept among his presses. His family visited each afternoon and spoke of him as already gone, discussing which tools to sell. One evening a former apprentice arrived unannounced, a man who had not seen Tomoe in ten years. He stood a long time at the foot of the bed. __Then he pointed to Tomoe's hands, which, even in sleep, were folding the edge of the blanket into careful, even signatures, as if preparing a book for sewing.__ Savitri had seen the motion every night and thought it a restless habit. The apprentice took the bone folder from the bench and placed it gently in the old man's palm, and Tomoe's breathing slowed.\n\n[질문] Which choice best describes the function of the underlined sentence in the text as a whole?\nA) It suggests that the apprentice has come to claim the tools.\nB) It explains why the family has decided to sell the workshop.\nC) It reveals that Savitri has neglected her duties as a nurse.\nD) It shows the visitor seeing a craft that others overlooked.\n### lit40-medium-06-054 — skill text_structure_purpose · 유형 underlined_portion_function\n[지문]\n“Smoked eel or herring?” my sister Irena asked, as though I had been gone a week rather than two years. We walked the open-air market in Riga, past Assunta's stall of pickled mushrooms, where Irena had worked every morning while I was at the front. I knew, though she had never written it, that her wages had paid off the loan I took before I left. I had rehearsed a speech of thanks on the train. __At Assunta's stall, Irena paid for both our lunches before I could reach for my wallet, and counted out the coins with the same care she must have used every week I was away.__ I put my hand back in my pocket. We ate on a bench by the canal and talked about the weather, the price of eel, and whether the old tram line would ever reopen.\n\n[질문] Which choice best describes the function of the underlined sentence in the text as a whole?\nA) It hints at the unspoken debt through an ordinary act.\nB) It shows that Irena resents the burden her brother left her.\nC) It reveals that the narrator has forgotten what he owes.\nD) It introduces Assunta as the person who lent the money.\n### lit40-medium-06-055 — skill text_structure_purpose · 유형 underlined_portion_function\n[지문]\nI was fourteen when the rumor about my stepfather climbed the stairwell of our building in Istanbul. Someone on the third floor had decided that he drank, because he came home late and slowly. By the time the story reached our neighbor Yasmin, it had grown into something cruel, and Yasmin told it to the one person who should never have heard it: my mother. I listened from the landing as she repeated it. __My stepfather, coming up behind me with a sack of bread and a bandaged knee from his shift at the docks, stopped on the step below and waited until Yasmin had finished.__ Then he climbed past us, greeted her by name, and went inside to wash his hands. That night my mother unwrapped his knee herself, and I stopped calling him by his first name. I am Eda, I thought, and he is the one who waited.\n\n[질문] Which choice best describes the function of the underlined sentence in the text as a whole?\nA) It confirms that the rumor about the stepfather was accurate.\nB) It offers a quiet explanation for the habits behind the rumor.\nC) It shows the stepfather preparing to confront the neighbor.\nD) It shifts the focus from the stepfather to the narrator's mother.\n### lit40-medium-06-056 — skill central_ideas_details · 유형 narrator_attitude\n[지문]\nElan had been certain, for nearly an hour, that Beatriz was the woman who had promised to drive him to Flagstaff. They were the only two adults left in the camp dining hall on the plateau after the bus failed to arrive, and he had greeted her with the confidence of a man reminding someone of a debt. Beatriz, who had never seen him before, listened politely and then admitted she had been just as sure that he was the one who had promised to drive her. Neither had a car. Both had been told, by someone neither could name, that a ride was arranged. Elan considered this with great seriousness, as though the mystery deserved a committee. Then he offered her half of his peanut butter sandwich, which was, the narrator suspects, the only promise anyone kept that day.\n\n[질문] Which choice best describes the narrator's attitude toward Elan?\nA) Openly scornful of his foolish mistake\nB) Gently amused by his confusion\nC) Deeply worried about his poor memory\nD) Coolly indifferent to his predicament"
+}

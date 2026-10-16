@@ -1,0 +1,64 @@
+// 일반용 문항 생성 실행기 (2026-09-30) — mock-exam-generation/generate.ts 와 같은 파이프라인(runGenerationPipeline)을 쓰되
+// 출력 위치만 data/general-generation/<run>/<stage>/raw. DB 접근 없음. 재실행 안전(작업 단위별 저장 수만큼 건너뜀).
+// 실행: npx tsx scripts/general-generation/generate.ts --run <run-id> --stage stage1|full [--plan plan.json] [--only a,b] [--concurrency 4]
+import { readFileSync, writeFileSync, existsSync, mkdirSync, readdirSync } from "node:fs";
+import path from "node:path";
+import { randomUUID } from "node:crypto";
+
+const envPath = path.resolve(process.cwd(), ".env.local");
+if (existsSync(envPath)) for (const line of readFileSync(envPath, "utf-8").split("\n")) { const m = line.match(/^\s*([A-Z0-9_]+)\s*=\s*(.*)\s*$/); if (m && !process.env[m[1]]) process.env[m[1]] = m[2].replace(/^["']|["']$/g, ""); }
+const arg = (n: string) => { const i = process.argv.indexOf(n); return i > 0 ? process.argv[i + 1] : undefined; };
+
+async function main() {
+  const runId = arg("--run"); const stage = arg("--stage") ?? "stage1";
+  if (!runId) throw new Error("--run 필요");
+  const base = path.resolve("data/general-generation", runId, stage);
+  const only = arg("--only")?.split(",");
+  const concurrency = Number(arg("--concurrency") ?? 4);
+  const cells = (JSON.parse(readFileSync(arg("--plan") ?? path.join(base, "plan.json"), "utf-8")).cells as { system: string; domain: string; skill: string; difficulty: "easy" | "medium"; generate: number }[])
+    .filter((c) => c.generate > 0 && (!only || only.includes(c.skill)));
+  const { SKILL_CODES } = await import("../../lib/problem-taxonomy");
+  const { findProblemSkill } = await import("../../lib/problem-skills");
+  const { judgeMaterialNeed } = await import("../../lib/problem-material-need");
+  const { runGenerationPipeline } = await import("../../lib/problem-generation/pipeline");
+  const dir = path.join(base, "raw"); mkdirSync(dir, { recursive: true });
+  const round = Number(arg("--round") ?? 1); const tag = round > 1 ? `r${round}__` : "";
+  const countSaved = (prefix: string) => readdirSync(dir).filter((f) => f.startsWith(prefix) && f.endsWith(".json") && (round > 1 || !/__r\d+__/.test(f))).length;
+  type Job = { skill: string; domain: string; system: string; difficulty: "easy" | "medium"; format: "mc" | "spr"; want: number };
+  const jobs: Job[] = [];
+  for (const c of cells) {
+    const sprOk = c.system === "sat_math" && c.skill !== "evaluating_statistical_claims";
+    const spr = sprOk ? Math.round(c.generate * 0.25) : 0;
+    if (c.generate - spr > 0) jobs.push({ ...c, format: "mc", want: c.generate - spr });
+    if (spr > 0) jobs.push({ ...c, format: "spr", want: spr });
+  }
+  let calls = 0;
+  const runJob = async (job: Job) => {
+    const prefix = `${job.skill}__${job.difficulty}__${job.format}__${tag}`;
+    let have = countSaved(prefix);
+    const skill = SKILL_CODES.find((k) => k.code === job.skill)!;
+    const legacy = findProblemSkill(skill.legacySkill);
+    const need = judgeMaterialNeed({ examSystem: job.system, skillCode: skill.code, text: "" });
+    const figurePolicy = need.level === "none" ? "none" : need.kind === "plane" ? "require_plane" : need.kind === "geometry" ? "require_geometry" : need.kind === "figure_choice" ? "require_figure_choice" : "require_data";
+    let rounds = 0, barren = 0;
+    while (have < job.want && rounds < 8 && barren < 3) {
+      rounds += 1;
+      const n = Math.min(10, job.want - have);
+      try {
+        const result = await runGenerationPipeline({ subjectName: job.system === "sat_rw" ? "SAT Reading & Writing" : "SAT Math", skillType: legacy?.label ?? skill.label, skillCode: skill.code, examSystem: job.system, difficulty: job.difficulty, format: job.format, count: n, figurePolicy: figurePolicy as never });
+        calls += result.stats.modelCalls;
+        for (const a of result.accepted) {
+          const gid = randomUUID();
+          writeFileSync(path.join(dir, `${prefix}${gid}.json`), JSON.stringify({ gid, runId, skill: job.skill, domain: job.domain, examSystem: job.system, difficulty: job.difficulty, format: job.format, problem: a.problem, quality: a.quality, generatedAt: new Date().toISOString() }));
+          have += 1;
+        }
+        barren = result.accepted.length === 0 ? barren + 1 : 0;
+        process.stderr.write(`[${job.skill}/${job.difficulty}/${job.format}] ${have}/${job.want} (통과 ${result.accepted.length}/${n}, 호출 ${result.stats.modelCalls})\n`);
+      } catch (e) { process.stderr.write(`[${job.skill}/${job.difficulty}/${job.format}] 오류: ${e instanceof Error ? e.message : e}\n`); barren += 1; await new Promise((r) => setTimeout(r, 5000)); }
+    }
+  };
+  const queue = [...jobs];
+  await Promise.all(Array.from({ length: concurrency }, async () => { while (queue.length) await runJob(queue.shift()!); }));
+  process.stderr.write(`생성 완료 (모델 호출 ${calls})\n`);
+}
+main().catch((e) => { console.error(e); process.exit(1); });

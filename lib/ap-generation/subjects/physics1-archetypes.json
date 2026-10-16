@@ -1,0 +1,2177 @@
+[
+ {
+  "id": "ph_vt_displacement",
+  "topic": "1.2",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "exact fractions for trapezoid areas versus numpy trapezoid integration of a dense resampling of the same graph"
+  ],
+  "misconceptions": [
+   "Finds the area of only the first segment of the graph rather than the whole interval.",
+   "Multiplies the final velocity by the total time, assuming the velocity stayed at its last value.",
+   "Reports the total distance traveled (area of the graph ignoring sign) instead of the displacement."
+  ]
+ },
+ {
+  "id": "ph_at_velocity_change",
+  "topic": "1.2",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "exact fractions for segment areas versus numpy integration of a dense resampling"
+  ],
+  "misconceptions": [
+   "Multiplies the final acceleration by the elapsed time, treating the acceleration as constant.",
+   "Reports the change in velocity but forgets to add the initial velocity.",
+   "Uses only the largest acceleration on the graph times the elapsed time."
+  ]
+ },
+ {
+  "id": "ph_kinematics_time",
+  "topic": "1.2",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy solves the quadratic symbolically; a bisection root finder on the displacement function recomputes the time"
+  ],
+  "misconceptions": [
+   "Uses the final speed as if it were constant over the whole trip and divides the distance by it.",
+   "Divides the distance by the initial speed, ignoring the acceleration.",
+   "Divides the distance by the average of the initial speed and the acceleration, mixing units."
+  ]
+ },
+ {
+  "id": "ph_projectile_range",
+  "topic": "1.5",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "closed form range versus an RK4 integration of the equations of motion until the ball returns to the ground"
+  ],
+  "misconceptions": [
+   "Uses the vertical velocity component for the horizontal motion, giving $v_0^2\\sin^2\\theta\\cdot 2/g$.",
+   "Uses the full launch speed as the horizontal velocity, giving $2v_0^2\\sin\\theta/g$.",
+   "Omits the factor of two from $\\sin 2\\theta$, using $v_0^2\\sin\\theta\\cos\\theta/g$."
+  ]
+ },
+ {
+  "id": "ph_relative_velocity",
+  "topic": "1.4",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact symbolic square root versus numpy hypot of the component vector sum"
+  ],
+  "misconceptions": [
+   "Reports only the boat's speed relative to the water and ignores the current.",
+   "Subtracts the squares and takes the square root, using the wrong sign in the Pythagorean combination.",
+   "Subtracts the speeds, as if the boat pointed upstream."
+  ]
+ },
+ {
+  "id": "ph_launch_vs_drop",
+  "topic": "1.5",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "RK4 integration of the launched ball confirms it lands when the free-fall time from the same height elapses"
+  ],
+  "misconceptions": [
+   "Confuses a larger speed with a shorter fall time, ignoring that the vertical motion starts from rest for both.",
+   "Recognizes equal fall times but ignores the horizontal velocity of the launched ball.",
+   "Treats horizontal speed as taking time away from the vertical motion."
+  ]
+ },
+ {
+  "id": "ph_motion_diagram",
+  "topic": "1.3",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "diagram",
+  "verifiedBy": [
+   "numpy finite differences of the plotted positions give the velocity change sign, compared with the direction of increasing arrow length"
+  ],
+  "misconceptions": [
+   "Confuses kinematics, which describes the change in velocity, with dynamics.",
+   "Treats straight-line motion as unaccelerated even though the spacing between points changes.",
+   "Assumes the acceleration always points in the direction of the velocity (or the opposite) without checking whether the speed is increasing or decreasing."
+  ]
+ },
+ {
+  "id": "ph_xt_signs",
+  "topic": "1.3",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "numpy first and second differences of a dense sampling of the position function give the signs of velocity and acceleration at each labeled time"
+  ],
+  "misconceptions": [
+   "At point A the curve is rising, so the velocity is positive, and it bends downward, so the acceleration is negative; the speed is decreasing.",
+   "At point D the curve is rising, so the velocity is positive, and it bends upward, so the acceleration is positive; the speed is increasing.",
+   "At point B the curve is rising, so the velocity is positive, and it bends downward, so the acceleration is negative; the speed is decreasing."
+  ]
+ },
+ {
+  "id": "ph_three_stage_motion",
+  "topic": "1.2",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "a time-stepped simulation of the three stages reproduces the total distance"
+  ],
+  "misconceptions": [
+   "Uses the final speed times the time for the starting stage, $vt_1$, instead of the average speed.",
+   "Leaves out the braking stage and adds only the first two stages.",
+   "Leaves out the starting stage and adds only the cruising and braking stages."
+  ]
+ },
+ {
+  "id": "ph_sym_vertical_throw",
+  "topic": "1.2",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy solves the constant-acceleration equation; a dense numeric sampling or a small-time-step simulation of the motion reproduces the value, and the printed option is evaluated by a TeX evaluator"
+  ],
+  "misconceptions": [
+   "Gives a quantity with the units of a height times a time, using the square of the speed.",
+   "Gives only the time to reach the top and forgets the way down.",
+   "Takes a square root of the time formula, mixing the time with the distance relation."
+  ]
+ },
+ {
+  "id": "ph_rank_stop_distance",
+  "topic": "1.2",
+  "skill": "2.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "a dense numeric sampling of the position during each braking run gives the stopping distances, whose ordering matches $v_0^2/(2a)$"
+  ],
+  "misconceptions": [
+   "Ranks by the reciprocal of the braking acceleration alone.",
+   "Ranks by the initial speed alone, ignoring the braking acceleration.",
+   "Ranks from least to greatest instead of from greatest to least."
+  ]
+ },
+ {
+  "id": "ph_claim_free_fall",
+  "topic": "1.2",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "a time-stepped integration of the flight reproduces the stated acceleration, fall time or return speed"
+  ],
+  "misconceptions": [
+   "Thinks a smaller mass is accelerated more by gravity, forgetting that the force is smaller by the same factor.",
+   "Doubles the fall time with no justification, as if starting from rest delayed the motion.",
+   "Thinks a larger force means a larger acceleration, forgetting that the inertia is larger by the same factor."
+  ]
+ },
+ {
+  "id": "ph_pred_projectile_scale",
+  "topic": "1.5",
+  "skill": "2.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "a time-stepped integration of the motion gives the range, maximum height and time of flight for both launch speeds and their ratio equals the power of the speed factor"
+  ],
+  "misconceptions": [
+   "Takes the maximum height to be proportional to the square root of the launch speed.",
+   "Takes the maximum height to be proportional to the launch speed.",
+   "Takes the maximum height to be proportional to the cube of the launch speed."
+  ]
+ },
+ {
+  "id": "ph_evid_position_data",
+  "topic": "1.3",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "a quadratic least-squares fit of the position against time has a quadratic coefficient equal to half the acceleration, and the successive displacement differences are all equal"
+  ],
+  "misconceptions": [
+   "Confuses an increasing displacement with an increasing acceleration; a constant acceleration makes the displacement increase by the same amount each interval.",
+   "Reads a position that keeps increasing as a constant velocity, although the displacement in each interval is different.",
+   "Uses the constant-acceleration relation $x=\\tfrac12at^2$ as if the object had started at the origin from rest, ignoring the initial position and velocity in the data."
+  ]
+ },
+ {
+  "id": "ph_atwood_tension",
+  "topic": "2.5",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "diagram",
+  "verifiedBy": [
+   "sympy solves the two equations; numpy linalg.solve on the same linear system recomputes the tension"
+  ],
+  "misconceptions": [
+   "Takes the tension to be the weight of the heavier block, ignoring that the heavier block accelerates downward.",
+   "Computes the net force on the system divided by the number of blocks.",
+   "Takes the tension to be the weight of the lighter block, which holds only if the system is in equilibrium."
+  ]
+ },
+ {
+  "id": "ph_incline_friction",
+  "topic": "2.7",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "diagram",
+  "verifiedBy": [
+   "closed form acceleration versus an RK4 integration of the motion for one second whose displacement equals half the acceleration"
+  ],
+  "misconceptions": [
+   "Adds the friction term instead of subtracting it while the block slides down.",
+   "Uses the cosine for the component along the incline and the sine for the normal force, swapping the components.",
+   "Multiplies the friction term by the sine instead of the cosine, using $g\\sin\\theta(1-\\mu)$."
+  ]
+ },
+ {
+  "id": "ph_fbd_choice",
+  "topic": "2.2",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the scene model sums the force vectors with numpy trigonometry and checks the key diagram sums to zero while each distractor does not or adds a spurious force"
+  ],
+  "misconceptions": [
+   "Draws friction in the same direction as the push, but kinetic friction opposes the motion.",
+   "Omits the friction force even though the surface is rough and the box moves at constant velocity.",
+   "Draws a normal force smaller than the weight although there is no vertical acceleration, so the normal force must equal the weight."
+  ]
+ },
+ {
+  "id": "ph_elevator_scale",
+  "topic": "2.5",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "the slope is recomputed with numpy polyfit through the two vertices and the force from Newton's second law"
+  ],
+  "misconceptions": [
+   "Uses only $ma$ and forgets the weight of the person.",
+   "Gives the person's weight, which is correct only when the elevator does not accelerate.",
+   "Subtracts $ma$ from the weight, as if the elevator accelerated downward."
+  ]
+ },
+ {
+  "id": "ph_spring_k_graph",
+  "topic": "2.8",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "numpy polyfit of force against stretch in meters gives the slope that is compared with the generating constant"
+  ],
+  "misconceptions": [
+   "Multiplies the force by the stretch in meters, which gives an energy-like quantity rather than a slope.",
+   "Uses the stretch in centimeters as if it were meters in $F/x$ and then multiplies by $g$.",
+   "Divides the force by the stretch in meters but uses half the stretch, mixing up the plotted point."
+  ]
+ },
+ {
+  "id": "ph_circular_tension",
+  "topic": "2.9",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the force is recomputed directly from the angular speed as $m\\omega^2 r$ and compared with $mv^2/r$"
+  ],
+  "misconceptions": [
+   "Uses $mv^2$ and forgets to divide by the radius.",
+   "Uses $mv/r$, forgetting to square the speed.",
+   "Takes the tension to be the weight $mg$, ignoring the circular motion."
+  ]
+ },
+ {
+  "id": "ph_vertical_circle_top",
+  "topic": "2.9",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy rational arithmetic versus the float evaluation of $m(v^2/r-g)$ with an assertion that contact is maintained"
+  ],
+  "misconceptions": [
+   "Uses only $mv^2/r$ and forgets that the weight also points toward the center at the top.",
+   "Adds the weight instead of subtracting it, which is the result at the bottom of the loop.",
+   "Reports the weight $mg$, ignoring the circular motion."
+  ]
+ },
+ {
+  "id": "ph_gravity_scaling",
+  "topic": "2.6",
+  "skill": "2.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact Fraction arithmetic versus the force ratio computed with the numeric gravitational constant and sample masses"
+  ],
+  "misconceptions": [
+   "Ignores the mass changes and applies only the inverse-square distance factor.",
+   "Multiplies by the distance change, treating gravity as increasing with separation.",
+   "Applies the distance change as a factor of $r$ instead of $r^2$."
+  ]
+ },
+ {
+  "id": "ph_center_of_mass",
+  "topic": "2.1",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numpy average with weights versus the explicit mass-weighted sum divided by total mass"
+  ],
+  "misconceptions": [
+   "Takes the unweighted mean of the positions, ignoring the different masses.",
+   "Uses the midpoint of the two outer objects.",
+   "Weights by mass but divides by the number of objects rather than by the total mass."
+  ]
+ },
+ {
+  "id": "ph_third_law",
+  "topic": "2.3",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "momentum bookkeeping in a code check: equal and opposite impulses give momentum changes of equal magnitude for any masses"
+  ],
+  "misconceptions": [
+   "Thinks equality of the interaction forces depends on the objects' speeds.",
+   "Confuses the larger acceleration of the lighter object with a larger force on the heavier object.",
+   "Believes the more massive object exerts the larger force in an interaction."
+  ]
+ },
+ {
+  "id": "ph_contact_force_blocks",
+  "topic": "2.5",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "a linear system for the acceleration and the contact force is solved directly with numpy and agrees with the symbolic result"
+  ],
+  "misconceptions": [
+   "Swaps the masses, $Fm_1/(m_1+m_2)$.",
+   "Assumes the contact force equals the applied force, $F$.",
+   "Divides by the mass of the pushing block only, $Fm_2/m_1$."
+  ]
+ },
+ {
+  "id": "ph_incline_pulley",
+  "topic": "2.5",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the two equations of motion are solved as a linear system for the acceleration and tension with numpy"
+  ],
+  "misconceptions": [
+   "Ignores the component of weight along the incline, $m_2g/(m_1+m_2)$.",
+   "Treats the incline as vertical, $(m_2-m_1)g/(m_1+m_2)$.",
+   "Divides by the hanging mass only, $(m_2-m_1\\sin\\theta)g/m_2$."
+  ]
+ },
+ {
+  "id": "ph_push_angle_normal",
+  "topic": "2.2",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the vertical force balance is evaluated with explicit force vectors in numpy"
+  ],
+  "misconceptions": [
+   "Adds the horizontal component instead of the vertical one, $mg+F\\cos\\theta$.",
+   "Gives only the weight, $mg$, ignoring the vertical component of the push.",
+   "Subtracts the vertical component, $mg-F\\sin\\theta$, as if the person pulled upward."
+  ]
+ },
+ {
+  "id": "ph_crate_stop_distance",
+  "topic": "2.7",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "RK4 integration of the motion with the maximum deceleration $\\mu_sg$ gives the same stopping distance"
+  ],
+  "misconceptions": [
+   "Puts the coefficient in the numerator, $\\mu_s v^2/(2g)$.",
+   "Forgets $g$ and uses $v^2/(2\\mu_s)$.",
+   "Ignores friction and uses $v^2/(2g)$."
+  ]
+ },
+ {
+  "id": "ph_sym_incline_accel",
+  "topic": "2.7",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy solves the two force equations for the acceleration; numpy solves the same linear system at the chosen angle and friction coefficient, and the printed option is evaluated by a TeX evaluator"
+  ],
+  "misconceptions": [
+   "Swaps sine and cosine, using the component of gravity perpendicular to the incline as the driving force.",
+   "Points the kinetic friction force in the wrong direction along the incline, so the friction term has the opposite sign.",
+   "Gives only the friction force divided by the mass, leaving out the component of gravity along the incline."
+  ]
+ },
+ {
+  "id": "ph_sym_table_hanging",
+  "topic": "2.5",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy solves the two equations of motion; numpy solves the 2x2 linear system at the chosen masses, and the printed option is evaluated by a TeX evaluator"
+  ],
+  "misconceptions": [
+   "Takes the tension to equal the weight of the block on the table, which the string does not support.",
+   "Takes the tension to equal the weight of the hanging block, which holds only when the hanging block is in equilibrium.",
+   "Adds the two weights instead of finding the force that accelerates the block on the table."
+  ]
+ },
+ {
+  "id": "ph_rank_accel",
+  "topic": "2.5",
+  "skill": "2.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact fractions of force over mass are sorted and compared with the floating-point ordering"
+  ],
+  "misconceptions": [
+   "Ranks by the net force alone, ignoring the mass.",
+   "Ranks from least to greatest instead of from greatest to least.",
+   "Ranks by the mass, as if a more massive object accelerates more."
+  ]
+ },
+ {
+  "id": "ph_pred_centripetal",
+  "topic": "2.9",
+  "skill": "2.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the force $mv^2/r$ is evaluated directly for both trials and the ratio equals $a^2/b$"
+  ],
+  "misconceptions": [
+   "Multiplies by the radius factor instead of dividing, as if a larger circle needed a larger force.",
+   "Takes the force to be proportional to the speed, not to its square.",
+   "Multiplies the two factors, taking the force to be proportional to both the speed and the radius."
+  ]
+ },
+ {
+  "id": "ph_claim_const_velocity",
+  "topic": "2.4",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "a numeric solve of the net force for zero acceleration confirms that the unknown force equals the known opposing force"
+  ],
+  "misconceptions": [
+   "Thinks the resistance wins at high speed, which would make the car slow down instead of moving at constant speed.",
+   "Believes the forward force must exceed the resistive force to keep moving, which would make the car accelerate.",
+   "Equates the horizontal resistive force with the weight, mixing the vertical balance with the horizontal one."
+  ]
+ },
+ {
+  "id": "ph_evid_force_data",
+  "topic": "2.5",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "the normal equations for a line through the origin give the slope, and the mean of F/a agrees with the generating mass within four percent"
+  ],
+  "misconceptions": [
+   "Tests the product instead of the ratio, although for these data the product changes by a large factor.",
+   "Reads the reciprocal ratio $a/F$ as if it were the mass; its units are m/(s^2 N) = 1/kg.",
+   "Treats an increasing force as if it were an increasing mass."
+  ]
+ },
+ {
+  "id": "ph_rank_centripetal",
+  "topic": "2.9",
+  "skill": "2.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact fractions of v squared over r (times mass) are sorted and compared with the floating-point ordering"
+  ],
+  "misconceptions": [
+   "Ranks by the radius, as if a larger circle needs a larger centripetal acceleration.",
+   "Ranks by the speed alone, ignoring the radius.",
+   "Ranks from least to greatest instead of from greatest to least."
+  ]
+ },
+ {
+  "id": "ph_ke_scaling",
+  "topic": "3.1",
+  "skill": "2.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "a numeric evaluation of the energy ratio with sample mass and speed is compared with the exact integer factor"
+  ],
+  "misconceptions": [
+   "Applies the speed factor squared but ignores the mass change.",
+   "Adds the two factors rather than multiplying.",
+   "Squares the mass factor and the speed factor, instead of only the speed factor."
+  ]
+ },
+ {
+  "id": "ph_fx_work",
+  "topic": "3.2",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "exact fractions for segment areas versus numpy integration of the interpolated force over the interval"
+  ],
+  "misconceptions": [
+   "Uses only the area of the first segment.",
+   "Adds up the force values at the plotted points without multiplying by the intervals.",
+   "Multiplies the maximum force by the total displacement."
+  ]
+ },
+ {
+  "id": "ph_track_energy",
+  "topic": "3.4",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "the Lagrangian equation of motion for a block on a parabolic track is integrated with RK4 and the speed at the bottom matches the energy result"
+  ],
+  "misconceptions": [
+   "Reports the kinetic energy-like product $mgh$ as the speed.",
+   "Uses $v=\\sqrt{gh}$, forgetting the factor of two from the kinetic energy.",
+   "Takes $v=gh$ with no square root."
+  ]
+ },
+ {
+  "id": "ph_spring_launch",
+  "topic": "3.4",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "RK4 integration of the spring-mass motion gives the speed at the natural length, whose kinetic energy is converted with $v^2/2g$"
+  ],
+  "misconceptions": [
+   "Uses $\\tfrac12kx^2/(mg)$ without the half in the spring energy, giving double the height.",
+   "Divides the spring energy by the mass only and forgets the factor of $g$, using $\\tfrac12kx^2/m$.",
+   "Equates the spring energy to $mgh$ using $kx$ instead of $\\tfrac12kx^2$."
+  ]
+ },
+ {
+  "id": "ph_power_fv",
+  "topic": "3.5",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the work done in ten seconds is computed as force times distance and divided by the time to recover the power"
+  ],
+  "misconceptions": [
+   "Uses the friction coefficient times the speed times $g$ and forgets the mass.",
+   "Uses the weight $mg$ as the pulling force, ignoring that the force only balances kinetic friction.",
+   "Multiplies the friction coefficient by the mass and speed, omitting $g$."
+  ]
+ },
+ {
+  "id": "ph_friction_slide",
+  "topic": "3.4",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "RK4 integration of a constant deceleration over the patch gives the exit speed"
+  ],
+  "misconceptions": [
+   "Omits the factor of two, using $\\sqrt{v_0^2-\\mu g d}$.",
+   "Uses the friction work as if it were the final kinetic energy per unit mass.",
+   "Subtracts the friction work from the speed instead of from the kinetic energy."
+  ]
+ },
+ {
+  "id": "ph_energy_bar_choice",
+  "topic": "3.3",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the scene model sums the bars of each state and the key chart conserves the total while each distractor changes the total or the form of energy"
+  ],
+  "misconceptions": [
+   "Shows all of the energy as internal energy even though the surface is frictionless.",
+   "Shows more total energy in the final state than in the initial state, violating energy conservation.",
+   "Describes the block at the midpoint of the slide, not at the bottom where the height is zero."
+  ]
+ },
+ {
+  "id": "ph_w_angle_force",
+  "topic": "3.2",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the work is recomputed as the dot product of the force vector and the displacement vector in numpy"
+  ],
+  "misconceptions": [
+   "Uses the sine of the angle (the vertical component of the force), $Fd\\sin\\theta$.",
+   "Ignores the angle and multiplies the full tension by the distance, $Fd$.",
+   "Divides by the cosine instead of multiplying, $Fd/\\cos\\theta$."
+  ]
+ },
+ {
+  "id": "ph_net_work_speed",
+  "topic": "3.1",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "RK4 integration of the motion under the constant net force reproduces the speed after the stated distance"
+  ],
+  "misconceptions": [
+   "Sets the net work equal to $mv^2$ instead of $\\tfrac12mv^2$, giving $\\sqrt{W_{net}/m}$.",
+   "Ignores friction and uses only the applied force, $\\sqrt{2Fd/m}$.",
+   "Uses the work done by friction alone as the net work, $\\sqrt{2fd/m}$."
+  ]
+ },
+ {
+  "id": "ph_vert_spring_compress",
+  "topic": "3.4",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy solves the energy quadratic exactly and a bisection root finder on the energy balance gives the same compression"
+  ],
+  "misconceptions": [
+   "Reports the equilibrium compression $mg/k$ instead of the maximum compression.",
+   "Ignores the gravitational energy lost while the spring compresses, $x=\\sqrt{2mgh/k}$.",
+   "Drops the factor of one half in the spring energy, $x=\\sqrt{mgh/k}$."
+  ]
+ },
+ {
+  "id": "ph_pendulum_bottom",
+  "topic": "3.4",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "RK4 integration of the pendulum equation of motion gives the angular speed at the bottom, multiplied by the length"
+  ],
+  "misconceptions": [
+   "Drops the factor of two from the energy equation, $\\sqrt{gL(1-\\cos\\theta)}$.",
+   "Uses the full string length as the height lost, $\\sqrt{2gL}$.",
+   "Uses $L\\cos\\theta$ as the height lost, $\\sqrt{2gL\\cos\\theta}$."
+  ]
+ },
+ {
+  "id": "ph_ux_force_graph",
+  "topic": "3.3",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "exact fractions for the segment slope versus a numpy gradient of a dense resampling of the graph"
+  ],
+  "misconceptions": [
+   "Takes the force equal to the slope of the graph instead of the negative of the slope.",
+   "Reports the change in potential energy over the interval without dividing by the distance.",
+   "Divides the potential energy at the right end of the interval by its position, $U/x$."
+  ]
+ },
+ {
+  "id": "ph_vt_work_energy",
+  "topic": "3.1",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "numpy integration of $m\\,a\\,v$ over the interval from a dense resampling of the graph matches the kinetic energy change"
+  ],
+  "misconceptions": [
+   "Reports the change in momentum $m(v_2-v_1)$ as the work.",
+   "Squares the change in speed instead of taking the change in the squares, $\\tfrac12m(v_2-v_1)^2$.",
+   "Reports the initial kinetic energy instead of the change in kinetic energy."
+  ]
+ },
+ {
+  "id": "ph_power_accel",
+  "topic": "3.5",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the rate of increase of kinetic plus gravitational potential energy over a very short time step is compared with the force times velocity"
+  ],
+  "misconceptions": [
+   "Uses only the net force, $mav$, and forgets that the cable must also support the weight.",
+   "Uses only the weight, $mgv$, as if the load moved at constant speed.",
+   "Forgets the mass and uses $(g+a)v$."
+  ]
+ },
+ {
+  "id": "ph_fx_speed_graph",
+  "topic": "3.2",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "RK4 integration of the motion under the interpolated force reproduces the final speed"
+  ],
+  "misconceptions": [
+   "Uses the largest force times the whole distance as the work.",
+   "Drops the factor of two, $\\sqrt{v_0^2+W/m}$.",
+   "Ignores the initial kinetic energy, $\\sqrt{2W/m}$."
+  ]
+ },
+ {
+  "id": "ph_bounce_energy_loss",
+  "topic": "3.4",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "RK4 integration of the fall and the rise gives the speeds just before and after the bounce; the kinetic energy difference equals the energy lost"
+  ],
+  "misconceptions": [
+   "Reports the initial gravitational energy, which is the total available, not the energy lost.",
+   "Reports the gravitational energy at the rebound height, which is the energy the ball keeps, not the energy lost.",
+   "Forgets $g$ and uses $m(h_1-h_2)$."
+  ]
+ },
+ {
+  "id": "ph_ramp_friction_energy",
+  "topic": "3.4",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "diagram",
+  "verifiedBy": [
+   "RK4 integration of the constant acceleration $g(\\sin\\theta-\\mu\\cos\\theta)$ along the incline gives the speed after the length of the slope"
+  ],
+  "misconceptions": [
+   "Computes the friction work with the vertical drop instead of the distance along the slope: $\\sqrt{2gh-2\\mu g h\\cos\\theta}$.",
+   "Reports $v^2=2gh-2\\mu g L\\cos\\theta$ as if it were the speed.",
+   "Ignores friction, $\\sqrt{2gh}$."
+  ]
+ },
+ {
+  "id": "ph_gravity_work_path",
+  "topic": "3.2",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "summing the dot product of the gravitational force with small displacement vectors along the path in numpy gives the same work"
+  ],
+  "misconceptions": [
+   "Forgets $g$ and uses $-mL\\sin\\theta$.",
+   "Gives the work the wrong sign: gravity does negative work when the object rises.",
+   "Uses the length of the ramp as the height gained, $-mgL$."
+  ]
+ },
+ {
+  "id": "ph_pt_graph_speed",
+  "topic": "3.5",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "exact fractions for the trapezoid areas versus RK4 integration of $dE/dt=P(t)$"
+  ],
+  "misconceptions": [
+   "Reports the energy divided by the mass, $E/m$, as the speed.",
+   "Drops the factor of two, $v=\\sqrt{E/m}$.",
+   "Uses the largest power times the total time as the energy."
+  ]
+ },
+ {
+  "id": "ph_spring_energy_graph",
+  "topic": "3.3",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "numpy integration of the force over the interval matches $\\tfrac12k(x_2^2-x_1^2)$"
+  ],
+  "misconceptions": [
+   "Multiplies the force at the final stretch by the change in stretch, treating the force as constant.",
+   "Squares the change in stretch, $\\tfrac12k(x_2-x_1)^2$.",
+   "Uses the force at the initial stretch times the change in stretch."
+  ]
+ },
+ {
+  "id": "ph_bars_statement",
+  "topic": "3.4",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "diagram",
+  "verifiedBy": [
+   "the scene model sums the bars of both states and the totals agree, with the internal energy bar equal to the loss of mechanical energy"
+  ],
+  "misconceptions": [
+   "Looks only at the mechanical energy bars and forgets that the total energy of the system is conserved when internal energy is included.",
+   "Applies conservation of mechanical energy to a slide in which the chart shows an internal energy bar.",
+   "Treats any gain in kinetic energy as proof that no dissipative force acted, ignoring the internal energy bar."
+  ]
+ },
+ {
+  "id": "ph_coaster_speed",
+  "topic": "3.4",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "RK4 integration of the motion down a frictionless incline that drops the same height reproduces the speed"
+  ],
+  "misconceptions": [
+   "Uses the height at the top instead of the drop, $\\sqrt{v_0^2+2gH}$.",
+   "Drops the factor of two, $\\sqrt{v_0^2+g(H-h)}$.",
+   "Adds the speeds instead of combining the energies, $v_0+\\sqrt{2g(H-h)}$."
+  ]
+ },
+ {
+  "id": "ph_proj_speed_height",
+  "topic": "3.4",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "RK4 integration of the projectile motion gives the speed when the height first reaches the stated value"
+  ],
+  "misconceptions": [
+   "Reports only the horizontal component of the velocity, $v_0\\cos\\theta$.",
+   "Subtracts the speeds, $v_0-\\sqrt{2gy}$.",
+   "Reports the launch speed, ignoring the energy lost to the rise."
+  ]
+ },
+ {
+  "id": "ph_pulley_energy",
+  "topic": "3.4",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "diagram",
+  "verifiedBy": [
+   "RK4 integration of the constant acceleration from Newton's second law gives the speed after the stated distance"
+  ],
+  "misconceptions": [
+   "Uses only the heavier mass as the moving mass, $\\sqrt{2(m_2-m_1)gd/m_2}$.",
+   "Treats the heavier block as in free fall, $\\sqrt{2gd}$.",
+   "Drops the factor of two, $\\sqrt{(m_2-m_1)gd/(m_1+m_2)}$."
+  ]
+ },
+ {
+  "id": "ph_loop_release_height",
+  "topic": "3.4",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "a bisection search on the release height for the smallest value with non-negative normal force at the top matches $2.5R$"
+  ],
+  "misconceptions": [
+   "Forgets the factor of one half in the kinetic energy at the top, $h=3R$.",
+   "Reports the release height above the center of the loop rather than above the bottom, $1.5R$.",
+   "Only reaches the top of the loop with zero speed, $h=2R$, ignoring the speed needed to stay on the track."
+  ]
+ },
+ {
+  "id": "ph_power_efficiency",
+  "topic": "3.5",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the energy supplied over ten seconds, found from the work done on the crate divided by the efficiency, gives the same input power"
+  ],
+  "misconceptions": [
+   "Forgets $g$ and uses $mv/\\eta$.",
+   "Ignores the efficiency and reports the useful power, $mgv$.",
+   "Multiplies by the efficiency instead of dividing, $\\eta mgv$."
+  ]
+ },
+ {
+  "id": "ph_zero_work_cases",
+  "topic": "3.2",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the dot product of the force and displacement vectors is evaluated numerically at several points and is zero in every case"
+  ],
+  "misconceptions": [
+   "Splits the circle into halves although the angle between force and displacement is $90^\\circ$ everywhere.",
+   "Treats a force that changes the direction of motion as if it also added energy.",
+   "Multiplies the force by the distance traveled without checking the angle between force and displacement."
+  ]
+ },
+ {
+  "id": "ph_ramps_compare",
+  "topic": "3.4",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "a numeric integration of each motion under gravity gives the same speed at the bottom regardless of the path or the mass"
+  ],
+  "misconceptions": [
+   "Equates the same height with the same energy, forgetting that the energy lost is $mgh$ and scales with the mass.",
+   "Believes a larger mass falls faster, ignoring that the mass cancels in the energy equation.",
+   "Mixes up the acceleration with the net force; on a frictionless incline both accelerate at the same rate."
+  ]
+ },
+ {
+  "id": "ph_sym_track_patch",
+  "topic": "3.4",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy solves the energy equation; a small-time-step simulation of the braking over the rough section reproduces the speed, and the printed option is evaluated by a TeX evaluator"
+  ],
+  "misconceptions": [
+   "Reports $v^2$ rather than $v$, leaving out the square root.",
+   "Drops the factor 2 from the kinetic energy $\\tfrac12mv^2$, so the energy balance gives $gh$ rather than $2gh$.",
+   "Adds the friction work to the starting height, treating friction as if it added energy."
+  ]
+ },
+ {
+  "id": "ph_rank_ramp_bottom",
+  "topic": "3.4",
+  "skill": "2.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "a time-stepped simulation of the motion down an equivalent 30 degree incline gives the same ordering as the energy formula"
+  ],
+  "misconceptions": [
+   "Ranks by the mass alone, ignoring the height lost.",
+   "Ranks by the height divided by the mass.",
+   "Ranks from least to greatest instead of from greatest to least."
+  ]
+ },
+ {
+  "id": "ph_pred_stop_factor",
+  "topic": "3.2",
+  "skill": "2.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "a dense numeric sampling of the braking motion of both cars gives the ratio of their stopping distances, which equals the square of the speed ratio"
+  ],
+  "misconceptions": [
+   "Takes the stopping distance to be proportional to the momentum, which grows with both the mass and the speed.",
+   "Thinks the heavier car stops in a shorter distance because the friction force is larger, forgetting that its inertia is larger by the same factor.",
+   "Takes the stopping distance to be proportional to the speed, not to its square."
+  ]
+ },
+ {
+  "id": "ph_pred_spring_pe",
+  "topic": "3.3",
+  "skill": "2.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the energy $\\tfrac12kx^2$ is evaluated directly for both springs and the ratio equals the product of the factors"
+  ],
+  "misconceptions": [
+   "Thinks the same force always stores the same energy, whatever the spring.",
+   "Takes the energy to be proportional to the spring constant, so a stiffer spring stores more energy.",
+   "Divides by the square of the factor, treating the stretch as proportional to the energy."
+  ]
+ },
+ {
+  "id": "ph_sym_pendulum_bottom",
+  "topic": "3.4",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy solves the energy and force equations; an RK4 integration of the nonlinear pendulum equation of motion gives the speed at the lowest point (and the tension from it), and the printed option is evaluated by a TeX evaluator"
+  ],
+  "misconceptions": [
+   "Uses the sine instead of the cosine of the angle from the vertical.",
+   "Takes the tension to equal the weight, ignoring the centripetal force needed at the lowest point.",
+   "Gives only the centripetal part $mv^2/L$ and forgets to add the weight."
+  ]
+ },
+ {
+  "id": "ph_rank_work",
+  "topic": "3.2",
+  "skill": "2.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the dot product of the force and displacement vectors is sorted and compared with the cosine formula ordering"
+  ],
+  "misconceptions": [
+   "Ranks using the sine instead of the cosine of the angle between the force and the displacement.",
+   "Ranks by the distance moved alone.",
+   "Ranks by the magnitude of the force alone."
+  ]
+ },
+ {
+  "id": "ph_evid_energy_data",
+  "topic": "3.4",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "a least-squares slope of v squared against h through the origin matches 2g within six percent, while the ratio v over h varies by more than forty percent"
+  ],
+  "misconceptions": [
+   "Judges the energy loss from the size of the speeds instead of comparing $v^2/h$ with $2g$.",
+   "Tests the ratio $v/h$ for a direct proportion, but for these data it falls from $9.7$ to $4.33$ s$^{-1}$.",
+   "Forgets the factor of 2 in $v^2=2gh$ and compares $v^2/h$ with $g$ instead of $2g$."
+  ]
+ },
+ {
+  "id": "ph_ft_impulse",
+  "topic": "4.2",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "exact trapezoid area versus numpy integration of the interpolated force over the interval"
+  ],
+  "misconceptions": [
+   "Uses the impulse as the change in velocity without dividing by the mass.",
+   "Divides the peak force by the mass, which gives an acceleration and ignores the duration.",
+   "Multiplies the peak force by the total time, overestimating the area of the trapezoid."
+  ]
+ },
+ {
+  "id": "ph_inelastic_collision",
+  "topic": "4.3",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "diagram",
+  "verifiedBy": [
+   "sympy solves the conservation equation symbolically and the result matches the direct numeric ratio"
+  ],
+  "misconceptions": [
+   "Averages the two speeds without weighting by mass.",
+   "Divides the total momentum by the mass of the first object only.",
+   "Ignores the sign of the second velocity and adds the momenta as magnitudes."
+  ]
+ },
+ {
+  "id": "ph_recoil",
+  "topic": "4.3",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the momentum sum is recomputed with numpy and checked to vanish for the returned speed"
+  ],
+  "misconceptions": [
+   "Uses the ratio of speeds equal to the ratio of masses the wrong way around.",
+   "Takes the two speeds to be equal, as if the objects had equal masses.",
+   "Multiplies the two masses and divides by the speed."
+  ]
+ },
+ {
+  "id": "ph_collision_type",
+  "topic": "4.4",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "diagram",
+  "verifiedBy": [
+   "the final velocities are generated from the momentum and restitution equations; the kinetic energies are recomputed with numpy from the stated velocities"
+  ],
+  "misconceptions": [
+   "Believes the time of contact matters for classifying the collision type.",
+   "Uses conservation of momentum to classify the collision, but momentum is conserved in every isolated collision.",
+   "Mixes up bouncing apart with energy loss, or sticking together with energy conservation."
+  ]
+ },
+ {
+  "id": "ph_pt_slope_force",
+  "topic": "4.2",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "exact fractions for the segment slope versus a numpy gradient of a dense resampling"
+  ],
+  "misconceptions": [
+   "Takes the inverse of the slope, $\\Delta t/\\Delta p$.",
+   "Reports the net force on the neighboring segment instead of the stated interval.",
+   "Reports the change in momentum over the interval without dividing by the elapsed time."
+  ]
+ },
+ {
+  "id": "ph_three_body_explosion",
+  "topic": "4.3",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the conservation equation is solved as a linear system with numpy and agrees with the symbolic result"
+  ],
+  "misconceptions": [
+   "Gives the velocity the wrong sign, $+(m_1v_1+m_2v_2)/m_3$.",
+   "Ignores the second piece, $-m_1v_1/m_3$.",
+   "Adds the magnitudes of the two momenta instead of the signed momenta, $(m_1|v_1|+m_2|v_2|)/m_3$ directed to the left."
+  ]
+ },
+ {
+  "id": "ph_wall_bounce_impulse",
+  "topic": "4.2",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "RK4 integration of the velocity under a constant force of that size over the contact time takes the ball from $+v_1$ to $-v_2$"
+  ],
+  "misconceptions": [
+   "Gives the impulse without dividing by the contact time, $m(v_1+v_2)$.",
+   "Subtracts the speeds, ignoring that the velocity reverses, $m(v_1-v_2)/\\Delta t$.",
+   "Ignores the rebound and uses only the incoming momentum, $mv_1/\\Delta t$."
+  ]
+ },
+ {
+  "id": "ph_sym_collision",
+  "topic": "4.3",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy solves the momentum equation; the center-of-mass velocity computed with numpy gives the same value, and the printed option is evaluated by a TeX evaluator"
+  ],
+  "misconceptions": [
+   "Divides the momentum difference by the difference of the masses instead of the total mass.",
+   "Adds the two momenta, treating both carts as moving in the same direction.",
+   "Subtracts the speeds instead of the momenta before dividing by the total mass."
+  ]
+ },
+ {
+  "id": "ph_rank_impulse",
+  "topic": "4.2",
+  "skill": "2.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact fractions of m(v_in + v_out) are sorted and compared with the floating-point ordering"
+  ],
+  "misconceptions": [
+   "Ranks by the incoming momentum alone, ignoring the change of direction.",
+   "Ranks by the final momentum, as if the impulse were the momentum after the collision.",
+   "Treats a rebound as a smaller change in momentum than sticking, because the ball keeps moving."
+  ]
+ },
+ {
+  "id": "ph_claim_momentum_system",
+  "topic": "4.3",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the center-of-mass velocity of the system is computed numerically and compared with the statement's speed"
+  ],
+  "misconceptions": [
+   "Inverts the mass ratio so the heavier skater ends up faster.",
+   "Takes equal and opposite forces to mean equal speeds, ignoring the different masses.",
+   "Thinks that only the pusher gains momentum; the momentum gained by one skater is lost by the other in the total."
+  ]
+ },
+ {
+  "id": "ph_evid_collision_data",
+  "topic": "4.4",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the final velocities are recomputed from the center-of-mass velocity and the coefficient of restitution, and the totals of momentum and kinetic energy are compared"
+  ],
+  "misconceptions": [
+   "Follows the momentum of one cart instead of the total momentum of the two carts.",
+   "Thinks that carts moving apart indicate an inelastic collision, but the kinetic energy computed from the data is unchanged.",
+   "Looks at the kinetic energy of one cart instead of the total, which is the same before and after."
+  ]
+ },
+ {
+  "id": "ph_sym_bounce_force",
+  "topic": "4.2",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "a numeric integration of a force pulse over the contact time gives the impulse, whose ratio to the contact time is compared with the change in momentum divided by the time, and the printed option is evaluated by a TeX evaluator"
+  ],
+  "misconceptions": [
+   "Uses the kinetic energy instead of the momentum.",
+   "Divides by the contact time but includes a rebound speed that the ball does not have.",
+   "Multiplies the momentum by the contact time instead of dividing."
+  ]
+ },
+ {
+  "id": "ph_pred_collision_speed",
+  "topic": "4.3",
+  "skill": "2.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the center-of-mass velocity of the system is computed for both trials and the ratio equals 2/(1+b)"
+  ],
+  "misconceptions": [
+   "Compares the new final speed with the initial speed of the moving cart instead of with the original final speed.",
+   "Takes the final speed to be inversely proportional to the mass of the target cart alone.",
+   "Takes the final speed to be unchanged because the momentum of the system is conserved."
+  ]
+ },
+ {
+  "id": "ph_torque_angle",
+  "topic": "5.3",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numpy cross product of the position and force vectors gives the torque magnitude"
+  ],
+  "misconceptions": [
+   "Ignores the angle and uses $rF$.",
+   "Uses $rF\\cos\\theta$, which pairs the angle with the wrong component.",
+   "Uses $rF\\tan\\theta$."
+  ]
+ },
+ {
+  "id": "ph_beam_balance",
+  "topic": "5.5",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "diagram",
+  "verifiedBy": [
+   "a bisection root finder on the net torque as a function of the hanging mass recomputes the balancing mass"
+  ],
+  "misconceptions": [
+   "Swaps the two lever arms, using $Mx_p/(L/2)$.",
+   "Uses $L/2$ instead of $L/2-x_p$ as the lever arm of the beam's weight, giving $M(L/2)/x_p$.",
+   "Uses the distance from the pivot to the far end, $L-x_p$, as the lever arm of the beam's weight."
+  ]
+ },
+ {
+  "id": "ph_wire_tension",
+  "topic": "5.5",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "a bisection root finder on the net torque about the hinge recomputes the tension"
+  ],
+  "misconceptions": [
+   "Uses cosine in place of sine for the component of the tension perpendicular to the beam.",
+   "Takes the tension to be half the weight and ignores the angle.",
+   "Multiplies by the sine instead of dividing by it."
+  ]
+ },
+ {
+  "id": "ph_inertia_points",
+  "topic": "5.4",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numpy sum of $m r^2$ over the list of masses and distances versus the explicit two-term expression"
+  ],
+  "misconceptions": [
+   "Uses the total mass times the square of the largest distance.",
+   "Includes only the heavier mass.",
+   "Uses distances without squaring them: $\\sum mr$."
+  ]
+ },
+ {
+  "id": "ph_alpha_hanging",
+  "topic": "5.6",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy solves the symbolic system; numpy linalg.solve on the same linear system recomputes the acceleration"
+  ],
+  "misconceptions": [
+   "Divides by the wheel's rotational inertia plus the mass without the $R^2$ factor.",
+   "Ignores the rotational inertia of the wheel and reports free-fall acceleration.",
+   "Uses $a=mg/I$ with no radius, mixing linear and rotational quantities."
+  ]
+ },
+ {
+  "id": "ph_wt_angle_graph",
+  "topic": "5.1",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "exact fractions for the area versus numpy trapezoid integration of a dense resampling, divided by $2\\pi$"
+  ],
+  "misconceptions": [
+   "Reports the angle in radians as if it were revolutions.",
+   "Multiplies by $2\\pi$ instead of dividing, converting in the wrong direction.",
+   "Uses the largest angular speed for the whole interval, $\\omega_{max}T/(2\\pi)$."
+  ]
+ },
+ {
+  "id": "ph_rim_acceleration",
+  "topic": "5.2",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "finite differences of the position of the rim point as it turns reproduce the total acceleration vector"
+  ],
+  "misconceptions": [
+   "Adds the two magnitudes, $\\omega^2r+\\alpha r$, instead of combining them as perpendicular vectors.",
+   "Reports $\\omega r$, the speed, as if it were an acceleration.",
+   "Reports only the tangential part, $\\alpha r$."
+  ]
+ },
+ {
+  "id": "ph_net_torque_alpha",
+  "topic": "5.6",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "integrating the angular speed under the constant net torque with RK4 gives the same angular acceleration"
+  ],
+  "misconceptions": [
+   "Uses the moment of inertia of a hoop, $MR^2$, instead of a solid disk.",
+   "Adds the two torques instead of subtracting, $(F_1R+F_2r)/I$.",
+   "Uses the net force and the outer radius only, ignoring the inner force's lever arm: $(F_1-F_2)R/I$."
+  ]
+ },
+ {
+  "id": "ph_inertia_scaling",
+  "topic": "5.4",
+  "skill": "2.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "a numerical sum of $dm\\,R^2$ over mass elements gives the ratio of the two inertias"
+  ],
+  "misconceptions": [
+   "Squares both factors, as if the mass also entered squared.",
+   "Adds the factors, $a+b^2$, instead of multiplying.",
+   "Treats the rotational inertia as proportional to the mass and the radius, not the radius squared."
+  ]
+ },
+ {
+  "id": "ph_rot_kin_stop",
+  "topic": "5.1",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "a time-stepped integration of the angle under constant angular deceleration reproduces the number of revolutions"
+  ],
+  "misconceptions": [
+   "Reports the angle in radians instead of revolutions, $\\pi Nt/60$.",
+   "Halves the average twice, $Nt/240$.",
+   "Uses the rpm value as if it were in rad/s, $Nt/(4\\pi)$."
+  ]
+ },
+ {
+  "id": "ph_sym_beam_cable",
+  "topic": "5.5",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy solves the torque balance about the hinge; numpy solves the linear system for the cable tension, and the printed option is evaluated by a TeX evaluator"
+  ],
+  "misconceptions": [
+   "Treats the hanging mass as acting at the center of the beam, so only half its weight enters the torque.",
+   "Places the weight of the beam at its end instead of at its center.",
+   "Multiplies by the sine instead of dividing, so the tension shrinks as the cable gets steeper."
+  ]
+ },
+ {
+  "id": "ph_rank_torque",
+  "topic": "5.3",
+  "skill": "2.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the z component of the two-dimensional cross product of the position and force vectors is sorted and compared with the sine formula ordering"
+  ],
+  "misconceptions": [
+   "Ranks by the force times the sine of the angle, ignoring the distance from the pivot.",
+   "Ranks by the distance from the pivot alone.",
+   "Ranks by the magnitude of the force alone."
+  ]
+ },
+ {
+  "id": "ph_claim_torque_balance",
+  "topic": "5.5",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the net torque about the pivot is computed from position and force vectors and is zero at the balancing distance"
+  ],
+  "misconceptions": [
+   "Places the child at the same distance, as if equal distances balance whatever the weights.",
+   "Adds a distance proportional to the mass difference, treating balance as a difference of weights instead of torques.",
+   "Inverts the mass ratio, so the heavier child sits farther out instead of closer in."
+  ]
+ },
+ {
+  "id": "ph_rolling_incline",
+  "topic": "6.5",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "RK4 integration of the constant center-of-mass acceleration $g\\sin\\theta/(1+k)$ along the incline gives the speed at the bottom"
+  ],
+  "misconceptions": [
+   "Drops the factor of two in the kinetic energy and ignores the rotational part, using $\\sqrt{gh}$.",
+   "Treats the object as sliding without friction and uses $\\sqrt{2gh}$, ignoring the rotational kinetic energy.",
+   "Drops the factor of two and keeps the rotational term, using $\\sqrt{gh/(1+k)}$."
+  ]
+ },
+ {
+  "id": "ph_ang_mom_platform",
+  "topic": "6.4",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the final angular speed is checked by recomputing $L_i$ and $L_f$ with numpy and asserting equality"
+  ],
+  "misconceptions": [
+   "Uses conservation of kinetic energy instead of angular momentum.",
+   "Uses the object's distance from the axis as the full rotational inertia of the system.",
+   "Keeps the angular speed unchanged because the platform is not acted on by a torque."
+  ]
+ },
+ {
+  "id": "ph_orbit_period_ratio",
+  "topic": "6.6",
+  "skill": "2.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the periods are computed from the real gravitational parameter of Earth and an actual radius, and their ratio is compared with the exponent $3/2$ result"
+  ],
+  "misconceptions": [
+   "Takes the period to be proportional to the square of the orbital radius.",
+   "Uses $\\sqrt{r}$, the dependence of the speed on the radius.",
+   "Takes the period to be proportional to the orbital radius."
+  ]
+ },
+ {
+  "id": "ph_torque_time_area",
+  "topic": "6.3",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "exact trapezoid area versus numpy integration of the interpolated torque"
+  ],
+  "misconceptions": [
+   "Uses the average of the first and last torques times the elapsed time over $I$.",
+   "Divides by the rotational inertia twice.",
+   "Reports the area, which is the change in angular momentum, as if it were the angular speed."
+  ]
+ },
+ {
+  "id": "ph_flywheel_ke",
+  "topic": "6.1",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the disk's rotational inertia is recomputed by integrating $r^2\\,dm$ over concentric rings numerically"
+  ],
+  "misconceptions": [
+   "Uses the rotational inertia of a hoop, $MR^2$, instead of a solid disk.",
+   "Uses the rpm value as the angular speed in rad/s, $\\tfrac12I N^2$.",
+   "Leaves out the square on the angular speed, $\\tfrac12I\\omega$."
+  ]
+ },
+ {
+  "id": "ph_torque_work_power",
+  "topic": "6.2",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numpy integration of the torque over the angle turned gives the same work"
+  ],
+  "misconceptions": [
+   "Divides by $2\\pi$ instead of multiplying, $\\tau n/(2\\pi)$.",
+   "Uses the number of revolutions as the angle squared, $\\tau(2\\pi n)^2$.",
+   "Uses only one revolution, $2\\pi\\tau$."
+  ]
+ },
+ {
+  "id": "ph_skater_ke_change",
+  "topic": "6.4",
+  "skill": "2.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numerical evaluation of the angular speed and energy before and after the arms are pulled in gives the energy ratio"
+  ],
+  "misconceptions": [
+   "Says the kinetic energy stays the same, as if energy were conserved.",
+   "Squares the factor, treating the energy as proportional to the angular speed squared with the speed changed by the same factor and the inertia ignored.",
+   "Uses the factor the inertia decreases by, as the factor by which the energy decreases."
+  ]
+ },
+ {
+  "id": "ph_orbit_speed_ratio",
+  "topic": "6.6",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the energy conservation equation with $GM$ fixed by the orbit confirms the speed found from angular momentum conservation"
+  ],
+  "misconceptions": [
+   "Assumes the speed does not change, $v_p$.",
+   "Inverts the ratio, $v_pr_a/r_p$.",
+   "Uses the square of the radius ratio, $v_p(r_p/r_a)^2$."
+  ]
+ },
+ {
+  "id": "ph_rank_rolling",
+  "topic": "6.5",
+  "skill": "2.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the incline acceleration of each object is found by solving the linear system of translational and rotational equations, and the ordering agrees with the energy-based ordering"
+  ],
+  "misconceptions": [
+   "Ranks the objects in the reverse of the correct order.",
+   "Ranks by the radius of the objects, as if a larger object rolls faster.",
+   "Ranks by the speed at the bottom alone, forgetting that the translational kinetic energy also depends on the mass."
+  ]
+ },
+ {
+  "id": "ph_claim_angular_momentum",
+  "topic": "6.4",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the final angular speed from $L=I\\omega$ is computed numerically and the kinetic energy before and after is compared"
+  ],
+  "misconceptions": [
+   "Claims kinetic energy is conserved although the clay sticks, which is a perfectly inelastic process.",
+   "Ignores that the added mass at the rim increases the rotational inertia.",
+   "Inverts the ratio of the rotational inertias so the disk speeds up."
+  ]
+ },
+ {
+  "id": "ph_sym_orbit",
+  "topic": "6.6",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy solves the force equation; an RK4 integration of the two-dimensional motion under the inverse-square force measures the speed or the time for one revolution, and the printed option is evaluated by a TeX evaluator"
+  ],
+  "misconceptions": [
+   "Leaves out the factor $2\\pi$, which converts the angular frequency to a period.",
+   "Uses the mass of the satellite in place of the mass of the planet.",
+   "Inverts the ratio under the root, so a larger orbit would have a shorter period."
+  ]
+ },
+ {
+  "id": "ph_pred_orbit",
+  "topic": "6.6",
+  "skill": "2.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the speed from the centripetal condition and the period from the speed and the circumference are evaluated for both radii and their ratio is computed"
+  ],
+  "misconceptions": [
+   "Takes the period to be proportional to the square root of the radius.",
+   "Takes the period to decrease with the radius, as if the satellite moved faster in a larger orbit.",
+   "Takes the period to be proportional to the square of the radius."
+  ]
+ },
+ {
+  "id": "ph_period_scaling",
+  "topic": "7.2",
+  "skill": "2.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the period of each system is measured from an RK4 simulation of the equation of motion and the ratio is compared with the closed form"
+  ],
+  "misconceptions": [
+   "Takes the period to be proportional to the spring constant.",
+   "Takes the period to be proportional to the mass instead of its square root.",
+   "Uses $\\sqrt{b/a}$, inverting the dependence on mass and on the spring constant."
+  ]
+ },
+ {
+  "id": "ph_shm_vmax",
+  "topic": "7.3",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "numpy gradient of the sampled position function gives the maximum speed that is compared with $2\\pi A/P$"
+  ],
+  "misconceptions": [
+   "Reports the maximum acceleration $4\\pi^2A/P^2$ instead of the maximum speed.",
+   "Uses $\\pi A/P$, dropping one factor of two from $2\\pi A/P$.",
+   "Takes the maximum speed to be the amplitude divided by the period, $A/P$, omitting the factor of $2\\pi$."
+  ]
+ },
+ {
+  "id": "ph_shm_energy",
+  "topic": "7.4",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "RK4 integration of the equation of motion gives the speed at the displacement whose kinetic energy matches the energy result"
+  ],
+  "misconceptions": [
+   "Reports the total energy $\\tfrac12kA^2$ as the kinetic energy.",
+   "Reports the elastic potential energy at that position, $\\tfrac12kx^2$, not the kinetic energy.",
+   "Subtracts the amplitude and position without squaring: $\\tfrac12k(A-x)$."
+  ]
+ },
+ {
+  "id": "ph_pendulum_moon",
+  "topic": "7.2",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "RK4 integration of the pendulum equation with the Moon's field strength measures the quarter period, which matches $2\\pi\\sqrt{L/g_M}/4$"
+  ],
+  "misconceptions": [
+   "Leaves out the factor $2\\pi$, $\\sqrt{L/g_M}$.",
+   "Inverts the ratio under the root, $2\\pi\\sqrt{g_ML}$.",
+   "Uses Earth's field strength $g_E=9.8\\text{ N/kg}$ instead of the Moon's, $2\\pi\\sqrt{L/g_E}$."
+  ]
+ },
+ {
+  "id": "ph_shm_signs",
+  "topic": "7.3",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "numpy first and second differences of the sampled position function give the signs of velocity and acceleration at each labeled time"
+  ],
+  "misconceptions": [
+   "At point B the position is positive, so the acceleration, which points opposite to the position, is negative; the slope is negative, so the velocity is negative.",
+   "At point C the position is negative, so the acceleration, which points opposite to the position, is positive; the slope is negative, so the velocity is negative.",
+   "At point A the position is negative, so the acceleration, which points opposite to the position, is positive; the slope is negative, so the velocity is negative."
+  ]
+ },
+ {
+  "id": "ph_t2_m_graph",
+  "topic": "7.2",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "numpy polyfit of $T^2$ against mass gives the slope, from which $k=4\\pi^2/\\text{slope}$ is compared with the generating constant"
+  ],
+  "misconceptions": [
+   "Multiplies the slope by $4\\pi^2$.",
+   "Uses $2\\pi/\\text{slope}$.",
+   "Divides the slope by $4\\pi^2$ instead of dividing $4\\pi^2$ by the slope."
+  ]
+ },
+ {
+  "id": "ph_vertical_spring_period",
+  "topic": "7.2",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "RK4 integration of the oscillator with $k=mg/d$ measures the quarter period, which matches $T/4$"
+  ],
+  "misconceptions": [
+   "Inverts the ratio under the root, $2\\pi\\sqrt{g/d}$.",
+   "Uses $2\\pi\\sqrt{2d/g}$, doubling the stretch.",
+   "Leaves out $2\\pi$, $\\sqrt{d/g}$."
+  ]
+ },
+ {
+  "id": "ph_xt_max_accel",
+  "topic": "7.3",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "numpy second differences of the sampled position function give the maximum acceleration, compared with $4\\pi^2A/P^2$"
+  ],
+  "misconceptions": [
+   "Uses $A/P^2$, leaving out $4\\pi^2$.",
+   "Uses $4\\pi A/P^2$, with a single factor of $2\\pi$.",
+   "Forgets to square the angular frequency, $2\\pi A/P$ times $\\pi$."
+  ]
+ },
+ {
+  "id": "ph_sym_spring_speed",
+  "topic": "7.4",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy solves the energy balance; an RK4 integration of the equation of motion over half a period reproduces the maximum speed or the speed at the position, and the printed option is evaluated by a TeX evaluator"
+  ],
+  "misconceptions": [
+   "Adds the elastic energy at the position to the total instead of subtracting it.",
+   "Squares the difference $(A-x)$ instead of taking the difference of the squares in the energy balance.",
+   "Reports $v^2$ rather than $v$, leaving out the square root."
+  ]
+ },
+ {
+  "id": "ph_rank_period",
+  "topic": "7.2",
+  "skill": "2.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "an RK4 integration of each equation of motion measures the time of the first zero crossing (a quarter period), and the measured periods have the same ordering as the formula"
+  ],
+  "misconceptions": [
+   "Ranks by the product of the length and the field strength instead of their ratio.",
+   "Ranks by the gravitational field strength, as if a stronger field gave a longer period.",
+   "Ranks from shortest to longest period instead of longest to shortest."
+  ]
+ },
+ {
+  "id": "ph_claim_shm_energy",
+  "topic": "7.4",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "an RK4 integration of the oscillator reproduces the maximum speed, period or endpoint acceleration quoted in the correct statement"
+  ],
+  "misconceptions": [
+   "Applies the amplitude independence of the period to the maximum speed as well.",
+   "Thinks a longer path means a longer period, ignoring that the speed also increases.",
+   "Thinks a larger restoring force shortens the period, forgetting that the distance traveled increases too."
+  ]
+ },
+ {
+  "id": "ph_evid_pendulum_data",
+  "topic": "7.2",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "a least-squares fit of log T against log L gives an exponent within 0.03 of one half, and the spread of T squared over L is under six percent"
+  ],
+  "misconceptions": [
+   "Reads a decreasing quantity as an inverse relationship, but the period increases with the length in the table.",
+   "Tests the ratio $T/L$ for a direct proportion, but for these data it falls from $4.46$ to $1.82$ s/m.",
+   "Assumes the period grows by the same factor as the length, whereas the data show a factor of only $2.4$."
+  ]
+ },
+ {
+  "id": "ph_float_fraction",
+  "topic": "8.3",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "a bisection root finder on the net vertical force as a function of the submerged fraction recomputes the fraction"
+  ],
+  "misconceptions": [
+   "Uses the square root of the density ratio.",
+   "Takes half the volume to be submerged for any floating object.",
+   "Reports one minus the correct fraction, the fraction above the surface."
+  ]
+ },
+ {
+  "id": "ph_gauge_pressure",
+  "topic": "8.2",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact rational arithmetic on the three terms versus the float evaluation of the pressure"
+  ],
+  "misconceptions": [
+   "Uses $\\rho h$ instead of $\\rho g h$, forgetting the gravitational field strength: $P_0+\\rho h$.",
+   "Counts the liquid column twice, using $P_0+2\\rho g h$.",
+   "Reports only atmospheric pressure, ignoring the depth."
+  ]
+ },
+ {
+  "id": "ph_continuity",
+  "topic": "8.4",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the cross-sectional areas are computed numerically from $\\pi r^2$ and the speeds from the flow rate; the result matches the squared diameter ratio"
+  ],
+  "misconceptions": [
+   "Inverts the area ratio, as if the fluid slowed in the narrow pipe.",
+   "Uses the ratio of the diameters instead of the ratio of the areas.",
+   "Uses the ratio of radii cubed."
+  ]
+ },
+ {
+  "id": "ph_bernoulli_dp",
+  "topic": "8.4",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy rational arithmetic on the Bernoulli expression versus its float evaluation"
+  ],
+  "misconceptions": [
+   "Uses $\\rho(v_2-v_1)$, forgetting to square the speeds.",
+   "Uses only the faster speed: $\\tfrac12\\rho v_2^2$.",
+   "Omits the factor of one half."
+  ]
+ },
+ {
+  "id": "ph_torricelli_range",
+  "topic": "8.4",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "diagram",
+  "verifiedBy": [
+   "RK4 integration of the horizontal projectile from the hole height with the Bernoulli exit speed lands at the closed-form range"
+  ],
+  "misconceptions": [
+   "Uses $4\\sqrt{dh}$.",
+   "Uses the full height of the water surface above the ground, $d+h$, in place of the depth $d$, giving $2\\sqrt{(d+h)h}$.",
+   "Uses $\\sqrt{dh}$ without the factor of two, halving the range."
+  ]
+ },
+ {
+  "id": "ph_hydraulic_lift",
+  "topic": "8.2",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the piston areas are computed numerically from $\\pi r^2$ and the force from equal pressures; the result matches the squared diameter ratio"
+  ],
+  "misconceptions": [
+   "Inverts the ratio, giving a smaller force on the larger piston.",
+   "Uses the ratio of the diameters instead of the ratio of the areas.",
+   "Uses the ratio of the diameters cubed."
+  ]
+ },
+ {
+  "id": "ph_apparent_weight",
+  "topic": "8.3",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact arithmetic on $(\\rho-\\rho_w)Vg$ versus the separately computed weight minus buoyant force"
+  ],
+  "misconceptions": [
+   "Adds the buoyant force to the weight, as if the water pushed down.",
+   "Uses the mass of water displaced as if it were a force with no factor of $g$.",
+   "Reports the buoyant force instead of the apparent weight."
+  ]
+ },
+ {
+  "id": "ph_density_weighing",
+  "topic": "8.3",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the volume is computed from the buoyant force and the density from the mass in a separate numeric step"
+  ],
+  "misconceptions": [
+   "Uses the fraction of the weight lost, $\\rho_w(W_{air}-W_{water})/W_{air}$.",
+   "Divides the buoyant force by the apparent weight, $\\rho_w(W_{air}-W_{water})/W_{water}$.",
+   "Puts the apparent weight in the numerator instead of the weight in air, $\\rho_wW_{water}/(W_{air}-W_{water})$."
+  ]
+ },
+ {
+  "id": "ph_hatch_force",
+  "topic": "8.2",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numerical summation of the pressure over thin horizontal strips of the hatch matches the gauge pressure times area"
+  ],
+  "misconceptions": [
+   "Forgets to convert the area from cm$^2$ to m$^2$.",
+   "Reports the pressure instead of the force, $\\rho gd$.",
+   "Forgets the depth, $\\rho gA$."
+  ]
+ },
+ {
+  "id": "ph_buoyant_tension",
+  "topic": "8.3",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the vertical force balance is solved numerically for the tension and agrees with the symbolic result"
+  ],
+  "misconceptions": [
+   "Reports the buoyant force only, $\\rho_wVg$.",
+   "Adds the buoyant force to the weight, $(\\rho+\\rho_w)Vg$.",
+   "Reports the weight of the object only, $\\rho Vg$."
+  ]
+ },
+ {
+  "id": "ph_bernoulli_height",
+  "topic": "8.4",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy solves the Bernoulli equation symbolically and the numeric result is compared with direct arithmetic on the three terms"
+  ],
+  "misconceptions": [
+   "Gives the speed term the wrong sign, $p_1+\\tfrac12\\rho(v_2^2-v_1^2)-\\rho gh$.",
+   "Gives the height term the wrong sign, $p_1+\\tfrac12\\rho(v_1^2-v_2^2)+\\rho gh$.",
+   "Leaves out the height term, $p_1+\\tfrac12\\rho(v_1^2-v_2^2)$."
+  ]
+ },
+ {
+  "id": "ph_sym_float_force",
+  "topic": "8.3",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy solves the force balance; a bisection search on the submerged volume or the numeric force difference reproduces the value, and the printed option is evaluated by a TeX evaluator"
+  ],
+  "misconceptions": [
+   "Adds the buoyant force to the weight instead of subtracting it.",
+   "Uses only the weight of the object, leaving out the buoyant force that the fluid exerts.",
+   "Uses only the buoyant force, as if the string supported the displaced fluid instead of the object."
+  ]
+ },
+ {
+  "id": "ph_rank_pressure",
+  "topic": "8.2",
+  "skill": "2.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact fractions of density times depth are sorted and compared with the floating-point ordering"
+  ],
+  "misconceptions": [
+   "Ranks by the density of the liquid alone, ignoring the depth.",
+   "Ranks from least to greatest instead of from greatest to least.",
+   "Ranks by the depth alone, ignoring the density of the liquid."
+  ]
+ },
+ {
+  "id": "ph_pred_fluid_scale",
+  "topic": "8.3",
+  "skill": "2.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the quantity is evaluated directly in both states and the ratio equals the product of the factors"
+  ],
+  "misconceptions": [
+   "Thinks the submerged volume is the same because the buoyant force equals the same weight, forgetting that the displaced volume depends on the density.",
+   "Takes the square root of the density factor, as if the submerged volume scaled like a length.",
+   "Squares the density factor in the denominator, as if the submerged volume depended on the square of the density."
+  ]
+ },
+ {
+  "id": "ph_claim_buoyancy",
+  "topic": "8.3",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the buoyant force from the displaced volume and the force balance from the weight are computed numerically and agree where the stated value is given"
+  ],
+  "misconceptions": [
+   "Mixes the net force on the sphere with the buoyant force, which is the same on both.",
+   "Thinks the buoyant force grows with the mass of the object instead of the displaced volume.",
+   "Thinks a sinking object receives no buoyant force."
+  ]
+ },
+ {
+  "id": "phs_vt_set_q1",
+  "topic": "1.2",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact fractions versus numpy integration or polyfit of the same graph"
+  ],
+  "misconceptions": [
+   "Averages the first and last velocities and multiplies by the time.",
+   "Uses only the first segment.",
+   "Multiplies the final velocity by the total time."
+  ]
+ },
+ {
+  "id": "phs_vt_set_q2",
+  "topic": "1.2",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact fractions versus numpy integration or polyfit of the same graph"
+  ],
+  "misconceptions": [
+   "Divides the final velocity by the total time of the trip.",
+   "Reports the change in velocity over the last segment without dividing by the elapsed time.",
+   "Averages the velocities at the ends of the last segment, which is not a rate of change."
+  ]
+ },
+ {
+  "id": "phs_collision_set_q1",
+  "topic": "4.3",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy conservation equations versus numpy arithmetic; the energy loss is also recomputed from the reduced mass formula"
+  ],
+  "misconceptions": [
+   "Divides total momentum by the first cart's mass.",
+   "Ignores the sign of the second velocity.",
+   "Divides the first cart's momentum by the total mass only."
+  ]
+ },
+ {
+  "id": "phs_collision_set_q2",
+  "topic": "4.4",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy conservation equations versus numpy arithmetic; the energy loss is also recomputed from the reduced mass formula"
+  ],
+  "misconceptions": [
+   "Reports the final kinetic energy instead of the energy lost.",
+   "Reports the change in momentum of the first cart as an energy.",
+   "Subtracts the speeds before squaring: $\\tfrac12(m_1+m_2)(v_1-v)^2$."
+  ]
+ },
+ {
+  "id": "phs_fx_set_q1",
+  "topic": "3.2",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact fractions for the area versus numpy integration of a dense resampling; the speed from the energy equation"
+  ],
+  "misconceptions": [
+   "Uses only the area of the first segment.",
+   "Adds the force values at the plotted points without multiplying by the intervals.",
+   "Multiplies the largest force by the total distance."
+  ]
+ },
+ {
+  "id": "phs_fx_set_q2",
+  "topic": "3.2",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact fractions for the area versus numpy integration of a dense resampling; the speed from the energy equation"
+  ],
+  "misconceptions": [
+   "Reports $W/m$ as the speed.",
+   "Uses the largest force times the distance as the work.",
+   "Drops the factor of two, $\\sqrt{W/m}$."
+  ]
+ },
+ {
+  "id": "phs_wt_set_q1",
+  "topic": "5.1",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact fractions versus numpy integration or polyfit of the same graph"
+  ],
+  "misconceptions": [
+   "Reports the change in angular speed over the last segment without dividing by the elapsed time.",
+   "Divides the final angular speed by the total time of the graph.",
+   "Gives the acceleration the opposite sign by subtracting in the wrong order."
+  ]
+ },
+ {
+  "id": "phs_wt_set_q2",
+  "topic": "5.1",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact fractions versus numpy integration or polyfit of the same graph"
+  ],
+  "misconceptions": [
+   "Averages the first and last angular speeds and multiplies by the total time.",
+   "Uses the largest angular speed times the total time.",
+   "Uses only the first segment of the graph."
+  ]
+ },
+ {
+  "id": "phs_spring_set_q1",
+  "topic": "7.2",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "RK4 integration with the computed spring constant reproduces the period and the speed at the equilibrium position"
+  ],
+  "misconceptions": [
+   "Inverts the relation, $T^2/(4\\pi^2m)$.",
+   "Leaves out the square on the angular frequency, $m(2\\pi/T)$.",
+   "Uses the frequency instead of the angular frequency, $m/T^2$."
+  ]
+ },
+ {
+  "id": "phs_spring_set_q2",
+  "topic": "7.2",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "RK4 integration with the computed spring constant reproduces the period and the speed at the equilibrium position"
+  ],
+  "misconceptions": [
+   "Reports $A/T$, leaving out the factor of $2\\pi$.",
+   "Reports $\\pi A/T$, with one factor of two missing.",
+   "Reports the maximum acceleration $4\\pi^2A/T^2$ instead of the maximum speed."
+  ]
+ }
+]

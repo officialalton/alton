@@ -1,0 +1,117 @@
+{
+ "runs": [
+  "macro-p1-a"
+ ],
+ "rows": 52,
+ "passed": 37,
+ "rejected": 15,
+ "passRate": 0.712,
+ "mc": {
+  "rows": 52,
+  "passed": 37,
+  "passRate": 0.712
+ },
+ "frq": {
+  "rows": 0,
+  "passed": 0,
+  "passRate": 0
+ },
+ "unitsPassed": {
+  "1": 6,
+  "2": 8,
+  "3": 8,
+  "4": 7,
+  "5": 4,
+  "6": 4
+ },
+ "skillsPassed": {
+  "1.C": 8,
+  "1.B": 4,
+  "3.A": 15,
+  "2.C": 2,
+  "3.C": 5,
+  "2.B": 2,
+  "3.B": 1
+ },
+ "figPassed": {
+  "table": 6,
+  "none": 24,
+  "graph": 7
+ },
+ "figAll": {
+  "table": 6,
+  "none": 36,
+  "graph": 10
+ },
+ "figPassRate": {
+  "table": "6/6",
+  "none": "24/36",
+  "graph": "7/10"
+ },
+ "renderTypesPassed": {
+  "ap_table": 6,
+  "none": 24,
+  "ap_graph:econ_curves": 7
+ },
+ "archetypesPassed": {
+  "ma_ppc_opp_cost": 2,
+  "ma_demand_shift": 2,
+  "ma_market_graph_shift": 2,
+  "ma_gdp_expenditure": 2,
+  "ma_unemp_rate": 2,
+  "ma_cpi_inflation": 2,
+  "ma_unemp_types": 2,
+  "ma_multiplier_calc": 2,
+  "ma_adas_shock": 1,
+  "ma_adas_gap_graph": 2,
+  "ma_lr_adjust": 1,
+  "ma_sras_determinants": 2,
+  "ma_money_multiplier": 2,
+  "ma_money_market_graph": 1,
+  "ma_lf_events": 1,
+  "ma_omo_effects": 2,
+  "ma_real_rate": 1,
+  "ma_policy_mix": 2,
+  "ma_crowding_out": 1,
+  "ma_quantity_theory": 1,
+  "ma_fx_events": 1,
+  "ma_fx_graph": 2,
+  "ma_exchange_calc": 1
+ },
+ "archetypesAll": {
+  "ma_ppc_opp_cost": 2,
+  "ma_demand_shift": 2,
+  "ma_market_graph_shift": 2,
+  "ma_gdp_expenditure": 2,
+  "ma_unemp_rate": 2,
+  "ma_cpi_inflation": 2,
+  "ma_unemp_types": 2,
+  "ma_multiplier_calc": 2,
+  "ma_adas_shock": 2,
+  "ma_adas_gap_graph": 2,
+  "ma_lr_adjust": 2,
+  "ma_fiscal_policy_gap": 2,
+  "ma_sras_determinants": 2,
+  "ma_money_multiplier": 2,
+  "ma_money_market_graph": 2,
+  "ma_lf_events": 2,
+  "ma_omo_effects": 2,
+  "ma_real_rate": 2,
+  "ma_policy_mix": 2,
+  "ma_phillips_graph": 2,
+  "ma_crowding_out": 2,
+  "ma_quantity_theory": 2,
+  "ma_fx_events": 2,
+  "ma_fx_graph": 2,
+  "ma_exchange_calc": 2,
+  "ma_ppc_shift": 2
+ },
+ "failedArchetypes": [
+  "ma_fiscal_policy_gap",
+  "ma_phillips_graph",
+  "ma_ppc_shift"
+ ],
+ "costUsd": {
+  "macro-p1-a": 1.7976
+ }
+}

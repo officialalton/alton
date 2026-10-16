@@ -1,0 +1,43 @@
+{
+ "itemId": "inference_margin_error.population_estimate.NL.P",
+ "generatedAt": "2026-10-07T05:02:01.123Z",
+ "codeHash": "80798e95cb9442351f3f34f59c59af4b84928ecba667f96b252bf3ffd29c58df",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/d-registry.ts",
+  "lib/problem-figures/templates/number-line.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/inference_margin_error.population_estimate.NL.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/nl-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "inference_margin_error.population_estimate.NL.P.png",
+   "mobileFile": "inference_margin_error.population_estimate.NL.P.m375.png",
+   "archetypeId": "ime.population_estimate.NL.P.chain2",
+   "seed": 11,
+   "signature": "number_line",
+   "stimulus": "Researchers surveyed a random sample of teachers about whether they use a new grading app. The interval graphed on the number line shown contains the plausible values for the percent of all teachers in Harbor School District who use a new grading app. The interval is the sample percent plus or minus the margin of error. There are 700 teachers in the population. Notice which endpoints are filled and which are open.",
+   "question": "Based on the number line, what is the largest plausible number of teachers in the population who use a new grading app?",
+   "options": [
+    "238",
+    "273",
+    "39",
+    "203"
+   ],
+   "correctIndex": 1,
+   "answer": "273",
+   "explanation": "(1) 수직선에서 구간의 두 끝을 읽는다: 29% ~ 39%. (2) 위 끝은 39% 이다. (3) 모집단은 700 명이다. (4) 700 × 0.39 = 273 이다. (5) 따라서 답은 273 이다. 따라서 정답은 273이다.",
+   "structuralIssues": []
+  }
+ ]
+}

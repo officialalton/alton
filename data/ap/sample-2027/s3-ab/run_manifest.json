@@ -1,0 +1,37 @@
+{
+ "run": "s3-ab",
+ "subject": "ap_calculus_ab",
+ "generatorCommit": "5db3b7f5+dirty",
+ "gateVersion": "v2-code-first-final-2026-10-08",
+ "reviewerPromptHash": "699bede9dc6e",
+ "difficultyPromptHash": "9bda2250d42c",
+ "arm": "S3 legacy full re-validation",
+ "repairDefinition": "none (validation only)",
+ "parserHash": "66ad0da7e962",
+ "models": {
+  "gen": "claude-sonnet-5-5",
+  "solve": "claude-opus-5-5",
+  "review": "claude-sonnet-5-5",
+  "difficulty": "claude-sonnet-5-5",
+  "spot": "claude-fable-5-1"
+ },
+ "policy": {
+  "firstCandidatesPerCell": 1,
+  "repairLimit": 1,
+  "codeChecksBeforeLlm": true,
+  "independentVerification": true,
+  "templateStop": {
+   "window": 4,
+   "maxSameReason": 2
+  },
+  "denominator": "first_candidates",
+  "manifestFile": "run_manifest.json"
+ },
+ "seeds": {
+  "first": [
+   0
+  ],
+  "note": "seed0 = first seed tried per archetype; packs.json records pack_id = archetype-sSEED"
+ },
+ "frozenAt": "2026-10-08T20:04:44.705Z"
+}

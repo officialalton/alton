@@ -1,0 +1,385 @@
+[
+ {
+  "key": "ap_calculus_ab-m01-k0",
+  "cellId": "ap_calculus_ab-m01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "F'(x)=xe^{-x/3}-0.6 equals 0 at x≈0.778 and x≈7.628. It is positive between these roots, since at x=3 the value is 3/e−0.6≈0.50>0.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "(0.778, 7.628)"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 6.5 accumulation function increasing from sign of integrand; calculator needed for roots. Fits."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "f negative on (0,0.778), positive on (0.778,7.628), negative after. Key unique and correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Stem is clear and complete. The option 'value' fields contain meaningless numbers (15.403057, 84.279241), which is minor data noise."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Option A explanation says it gives where 'f is decreasing', but f is increasing on (0,0.778); F is decreasing there. Option B explanation is a fragment that does not explain the misconception. Misconceptions are not cleanly distinct or accurately described."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 100 s, calculator use is appropriate, and there is no needless arithmetic."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is mathematically sound with a correct, unique key, but the distractor explanations are inaccurate (A says f is decreasing, which is wrong) or incomplete (B). The option value fields also hold meaningless numbers. Failing on the distractor explanation criterion."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires FTC Part 1 to get F'(x)=xe^{-x/3}-0.6, a calculator solve for two roots (0.778, 7.628), and a sign analysis across three subintervals to justify increasing behavior. Distractors reflect real misconceptions (F' starting negative, endpoint handling). Standard AP 6.5 difficulty with no unfair sources.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_calculus_ab-m02-k0",
+  "cellId": "ap_calculus_ab-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Curves intersect at x≈0.750; area = ∫(2e^{-0.5x}-1-x/2)dx from 0 to 0.750 ≈ 0.360",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "0.360"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Area between curves in x with calculator-found intersection; fits 8.4 and 1.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Unique intersection near 0.75; area ≈0.360 is correct and unique among the options."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is complete and unambiguous."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The 0.890 and 1.250 distractors match the area under only one curve. 11.92 is the total absolute area over [0,6], but the 6 is not in the stem, so it is unmotivated and its explanation is loose. The reversed-order option is absent."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 95 seconds, calculator active, clean numbers."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound item with a unique correct key. One distractor (11.920) relies on an arbitrary bound of 6 that the stem never mentions, which is a minor weakness, not a failure."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard calculator-active area-between-curves item. The student must find the intersection numerically, identify the upper and lower curves, set bounds from the y-axis to the intersection, and evaluate the integral. Concept depth is moderate, the reading load is low, and the numbers are clean. It is typical of a full-mock item rather than introductory practice or an advanced extension.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_calculus_ab-m03-k0",
+  "cellId": "ap_calculus_ab-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "V=π∫0^3 2x e^{-x/2}dx = 2π(4-10e^{-1.5}) ≈ 11.113",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "11.113"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Disc method about x-axis with calculator; fits 8.9 and the procedure-choice skill."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "V=2π(4-10e^{-1.5})≈11.113; unique correct option. Left bound x=0 implied by the function meeting the x-axis."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Missing pi, wrong axis (9π, weak but plausible), and pi*f instead of pi*f^2 (about 10.008) are distinct misconceptions; each is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 90 s, calculator-appropriate, no ugly arithmetic."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean calculator disc-volume item with plausible distractors; acceptable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-procedure disc method about the x-axis: square the function, set up pi*integral from 0 to 3 of 2x e^{-x/2}, and evaluate with a calculator. The only modest demand is recognizing that the radius is squared (sqrt removed) and that the lower bound is x=0 from the radicand domain/x-axis. Distractors include omitting pi (3.537) and a common setup error. No unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_calculus_ab-m04-k0",
+  "cellId": "ap_calculus_ab-m04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "2.2914, an overestimate",
+     "brief_reasoning": "f(1)=2ln3≈2.1972, f'(1)=ln3/4+2/3≈0.9413, approx≈2.2914; f''(1)≈-0.090<0 so concave down, overestimate.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Tangent line approximation with over/under comparison via concavity matches 4.6 and skill 1.F."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Key 2.2914, overestimate is unique and verified; f'' negative at 1 and the interval is short."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors encode distinct misconceptions (no slope, reversed concavity, double step) and the explanation covers each."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Calculator is needed for f, f' and the sign of f''; the load is a bit heavy but acceptable for a calculator-required item."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is acceptable. The key is verified, the distractors are distinct, and the task fits topic 4.6 and skill 1.F. The only concern is the heavy f'' computation, which is tolerable with a calculator."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires f(1), f'(1) via product and chain rules, building the tangent line approximation, then computing f''(1) to determine concavity and decide over- or underestimate. Multi-step with a misconception-rich option set (right value with wrong direction, f(1) given as the answer). Numbers are calculator-friendly, the wording is unambiguous, and the content stays within AB scope.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 240
+  }
+ },
+ {
+  "key": "ap_calculus_ab-m05-k0",
+  "cellId": "ap_calculus_ab-m05",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "1.111",
+     "brief_reasoning": "Set v(t)=0, so cos t = 0.4t. The root is t≈1.111. Velocity is positive before this time and negative after it, so the particle changes direction here. For t>2.5, 0.4t>1 ≥ cos t, so v stays negative and there are no later sign changes.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Solving v(t)=0 numerically and checking the sign change is on target for 4.2 and 1.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key 1.111 is the unique first sign-change root; v stays negative afterward."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The stem is complete and clear; no stimulus is needed."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The option 6.299 is outside the domain [0,6] and is trivially eliminable. Its stated rationale (position at turning time) is unsupported because no position function or initial position is given, and the value is not that position. The 3.000 midpoint distractor is also weak and arbitrary. The explanation for these options is inaccurate."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 90 seconds, calculator needed, typical AP load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and the item is in scope. It fails on distractor quality: 6.299 lies outside the domain and its stated misconception (a position value) is false, and the 3.000 midpoint option is weak. The explanation is therefore inaccurate for those options."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single procedure: use the calculator to solve v(t)=0 on [0,6] and confirm the sign change from positive to negative. One representation (an expression), little reading, and no multi-step reasoning or theorem checking. The distractors are only mildly misconception-based. It fits direct application of the straight-line motion rules (skill 1.E) at an introductory level.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_calculus_ab-m06-k0",
+  "cellId": "ap_calculus_ab-m06",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Trapezoids in y, each height 2: 4+5+3+5=17",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "17"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Area with respect to y from a piecewise-linear graph fits topic 8.5; the skill demand is light but acceptable."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Trapezoids give 4+5+3+5=17; the key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Vertices are complete and the axes are labeled; the stem wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors 40 (the integral of x squared dy), 17/2 (half the area) and 88/5 (average x times 8) each correspond to a distinct misconception, and each has an explanation."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 90 seconds, no calculator needed, simple numbers."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and clean: the key is 17, the stimulus is complete, and the distractors are plausible and distinct. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Area between x=f(y) and the y-axis from a piecewise-linear graph. Read the vertices and sum four trapezoid areas (4+5+3+5=17), or integrate f(y) dy. There is one concept (horizontal slices) with simple arithmetic and no theorem checks or procedure choices. Distractors reflect the bounding-rectangle and halving misconceptions.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_calculus_ab-m07-k0",
+  "cellId": "ap_calculus_ab-m07",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "V=(√3/4)∫f². Integrate segment by segment with (h/3)(a²+ab+b²): 14+86/3+72+104/3=448/3. So V=112√3/3.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "112√3/3"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "Integer vertices and exact-form options suit non-calculator use. The piecewise integral of f^2 is moderate and fits the time.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, complete and well-formed, and every criterion passes."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires deriving the equilateral triangle cross-section area (sqrt3/4)s^2, reading a piecewise-linear graph, and integrating f^2 over four segments by hand. The distractors reflect common misconceptions (omitting the sqrt3/4 factor, using the wrong area factor). Numbers are small and clean, and the wording is unambiguous.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 200
+  }
+ }
+]

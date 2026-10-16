@@ -1,0 +1,23 @@
+{
+ "itemId": "two_variable_data.intercept_residual_interpretation.SC.P#1",
+ "verdict": "pass",
+ "reviewedAt": "2026-10-06T07:00:00Z",
+ "reviewer": "claude-sonnet-5.5 (math-C session)",
+ "codeHash": "af990c786aee5fdb03964f96ff590663d6fd098cb5ecc00f735cdb7b2885c289",
+ "samples": [
+  "two_variable_data.intercept_residual_interpretation.SC.P#1.png"
+ ],
+ "checklist": {
+  "figure_present": "pass",
+  "proportion_matches_values": "pass",
+  "labels_placed_and_legible": "pass",
+  "multi_figure_consistent": "n/a",
+  "text_matches_figure_and_solvable": "pass",
+  "axes_ticks_units_legend": "pass",
+  "choice_distinct_one_rule": "n/a",
+  "sat_visual_style": "pass",
+  "mobile_375_readable": "pass"
+ },
+ "defects": [],
+ "notes": "그림만 보고 풀이: 추세선 (0,100)→(10,140) 기울기 4, x=7 예측 128, 점 y≈139 → 잔차 11 (D). 점·추세선·눈금 판독 가능, 375px 양호. (메타 정답: 11)"
+}

@@ -9,22 +9,12 @@ vi.mock("./payouts-data", () => ({
   computePayoutAmounts: computePayoutAmountsMock,
 }));
 
-const existingCheckMock = vi.fn();
-const payoutsInsertMock = vi.fn().mockResolvedValue({ error: null });
-
+// R10 corrective(요구사항 3, 2026-09-07 리뷰) — runGeneratePayouts()가
+// teacher_payouts에 대해 어떤 테이블 접근도 하지 않는지 확인한다. fromMock이
+// 한 번이라도 호출되면(어떤 테이블이든) 실패시켜, "amounts는 계산하되
+// teacher_payouts에는 쓰지 않는다"는 no-op 계약을 강제한다.
 const fromMock = vi.fn((table: string) => {
-  if (table === "teacher_payouts") {
-    return {
-      select: (cols: string) => {
-        if (cols === "id") {
-          return { eq: () => ({ eq: () => ({ eq: existingCheckMock }) }) };
-        }
-        throw new Error(`unexpected select ${cols}`);
-      },
-      insert: payoutsInsertMock,
-    };
-  }
-  throw new Error(`unexpected table ${table}`);
+  throw new Error(`no-op이어야 하는 runGeneratePayouts가 테이블 ${table}에 접근했습니다.`);
 });
 
 vi.mock("@/lib/supabase-admin", () => ({
@@ -33,7 +23,7 @@ vi.mock("@/lib/supabase-admin", () => ({
   }),
 }));
 
-describe("generatePayoutsAsCron", () => {
+describe("generatePayoutsAsCron (R10 corrective: no-op)", () => {
   beforeEach(() => {
     vi.clearAllMocks();
     computePayoutAmountsMock.mockResolvedValue({
@@ -42,11 +32,9 @@ describe("generatePayoutsAsCron", () => {
       ],
       skipped: [{ teacherId: "t2", teacherName: "이도현" }],
     });
-    existingCheckMock.mockResolvedValue({ data: [] });
-    payoutsInsertMock.mockResolvedValue({ error: null });
   });
 
-  it("requireAdmin을 호출하지 않고 service_role admin 클라이언트로 바로 실행한다", async () => {
+  it("teacher_payouts에 전혀 쓰지 않고 created:0을 반환한다(레거시 쓰기 경로 완전 제거)", async () => {
     const { generatePayoutsAsCron } = await import("./payouts-cron");
     const { requireAdmin } = await import("@/lib/admin-auth");
 
@@ -56,16 +44,9 @@ describe("generatePayoutsAsCron", () => {
     });
 
     expect(requireAdmin).not.toHaveBeenCalled();
-    expect(fromMock).toHaveBeenCalledWith("teacher_payouts");
-    expect(payoutsInsertMock).toHaveBeenCalledWith({
-      teacher_id: "t1",
-      amount_krw: 75000,
-      period_start: "2026-08-01",
-      period_end: "2026-08-31",
-      status: "pending",
-    });
+    expect(fromMock).not.toHaveBeenCalled();
     expect(result).toEqual({
-      created: 1,
+      created: 0,
       skippedNoRate: [{ teacherId: "t2", teacherName: "이도현" }],
     });
   });

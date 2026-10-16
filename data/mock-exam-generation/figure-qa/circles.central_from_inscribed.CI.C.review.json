@@ -1,0 +1,23 @@
+{
+ "itemId": "circles.central_from_inscribed.CI.C",
+ "verdict": "pass",
+ "reviewedAt": "2026-10-06T07:03:22Z",
+ "reviewer": "claude-sonnet-5.5 (math-B session)",
+ "codeHash": "b60a3c8949bfd76742d938dff17a70d958c7f5e30f873156a10db03e11e0e2d8",
+ "samples": [
+  "circles.central_from_inscribed.CI.C.png"
+ ],
+ "checklist": {
+  "figure_present": "pass",
+  "proportion_matches_values": "pass",
+  "labels_placed_and_legible": "pass",
+  "multi_figure_consistent": "pass",
+  "text_matches_figure_and_solvable": "pass",
+  "axes_ticks_units_legend": "pass",
+  "choice_distinct_one_rule": "pass",
+  "sat_visual_style": "pass",
+  "mobile_375_readable": "pass"
+ },
+ "defects": [],
+ "notes": "원 선택지 4개(같은 점, 원주각 꼭짓점·끝점 위치만 다름) 샘플 데스크톱·375px 확인: 정답만 지문 관계(x = 2y 등)를 만족, 오답은 작은 호 위 꼭짓점·끝점 한쪽만 일치 규칙, 네 그림 크기·점 이름 동일, 라벨 겹침 없음(중심각 80°~120°)."
+}

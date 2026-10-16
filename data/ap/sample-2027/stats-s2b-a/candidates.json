@@ -1,0 +1,1863 @@
+[
+ {
+  "candidateKey": "ap_statistics-m01-k0",
+  "cellId": "ap_statistics-m01",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "1.1",
+  "unitCode": "1",
+  "skillPrimary": "1.A",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_question_type",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-step conceptual classification: students identify that 'typical number of visits' refers to the center of the distribution of one quantitative variable. No computation, one short stimulus-free stem, distractors are standard variable-type confusions (categorical proportion, two-variable relationship, association). Directly targets the 1.1/1.A skill at introductory depth.",
+  "payload": {
+   "archetype": "st_question_type",
+   "topic": "1.1",
+   "skill": "1.A",
+   "calculator": "allowed",
+   "stem": "A researcher plans to collect data from a random sample of adult members of a fitness center to answer the following investigative question: \"What is the typical number of visits to the center in a month for adult members of a fitness center?\" Which of the following best describes what this question asks about?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "A question about the proportion of individuals in one category of a categorical variable",
+     "why": "The question names one quantitative variable, not one categorical variable.",
+     "value": null
+    },
+    {
+     "text": "A question about the relationship between two quantitative variables",
+     "why": "The question names one quantitative variable, not two quantitative variables.",
+     "value": null
+    },
+    {
+     "text": "A question about the distribution of one quantitative variable",
+     "why": "The question names one quantitative variable, which is the structure this option describes.",
+     "value": null
+    },
+    {
+     "text": "A question about the association between two categorical variables",
+     "why": "The question names one quantitative variable, not two categorical variables.",
+     "value": null
+    }
+   ],
+   "key_index": 2,
+   "est_seconds": 70,
+   "facts": [
+    "kind=one_quant"
+   ],
+   "blueprint": {
+    "id": "st_question_type",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Recognize what an investigative question asks about: one distribution, a comparison of groups or an association",
+    "topic": "1.1",
+    "skill": "1.A",
+    "student_thinking": [
+     "List the variables that the question names and decide whether each is quantitative or categorical",
+     "Match the number and types of variables, and whether groups are compared, to the one option with the same structure"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "a valid investigative question names the variables it asks about, so its structure follows from the variables named",
+      "evidence": "the question is stated in the stem and every option describes a different variable structure"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "wrong_variable_count",
+      "description": "names one variable when the question names two or the reverse"
+     },
+     {
+      "id": "wrong_variable_type",
+      "description": "mixes up quantitative and categorical variables"
+     },
+     {
+      "id": "comparison_vs_relationship",
+      "description": "mixes up comparing two groups with a relationship between two variables"
+     }
+    ],
+    "verification": {
+     "independent_path": "the five question structures are generated from a table of (quantitative count, categorical count, groups compared) and exactly one row matches the question",
+     "method": "variable-structure table enumeration"
+    },
+    "judgment_demand": [
+     "interpretation",
+     "claim_justification"
+    ]
+   },
+   "seed": 9200,
+   "pack_id": "st_question_type-s9200",
+   "explanation_en": "The correct answer is A question about the distribution of one quantitative variable. The question names one quantitative variable, which is the structure this option describes.\nA question about the proportion of individuals in one category of a categorical variable is incorrect: The question names one quantitative variable, not one categorical variable.\nA question about the relationship between two quantitative variables is incorrect: The question names one quantitative variable, not two quantitative variables.\nA question about the association between two categorical variables is incorrect: The question names one quantitative variable, not two categorical variables."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_question_type",
+   "facts": [
+    "kind=one_quant"
+   ],
+   "seed": 9200
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Classifying the variable structure of an investigative question fits topic 1.1 and skill 1.A; no out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Typical monthly visits is a single quantitative variable; only the distribution option fits. Unique key."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors encode wrong variable count and wrong variable type, and the explanation addresses each. The explanations are formulaic but adequate."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, quick to read, no calculation, about 60-70 seconds."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean, unambiguous item on identifying the variable structure of an investigative question, with a unique key and parallel options. It is somewhat easy, but it is acceptable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step conceptual classification: students identify that 'typical number of visits' refers to the center of the distribution of one quantitative variable. No computation, one short stimulus-free stem, distractors are standard variable-type confusions (categorical proportion, two-variable relationship, association). Directly targets the 1.1/1.A skill at introductory depth.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m02-k0",
+  "cellId": "ap_statistics-m02",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "1.10",
+  "unitCode": "1",
+  "skillPrimary": "1.A",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_question_revision",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept recognition: a valid statistical investigative question anticipates variability in data and asks about a summary of a distribution. The distractors are an opinion/value judgment, a fixed count that needs no statistics, and a single-individual question. No computation and one reasoning step; this fits foundational learning, not mock-exam depth.",
+  "payload": {
+   "archetype": "st_question_revision",
+   "topic": "1.10",
+   "skill": "1.A",
+   "calculator": "allowed",
+   "stem": "A student wants to study how long bus riders in a city wait at their stops. The student's first draft of an investigative question is: \"Should the city add more buses to its routes?\" Which of the following is the best revision that gives a valid investigative question requiring a statistical investigation?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Is waiting for a bus an unfair burden on the bus riders of the city?",
+     "why": "Still asks for an opinion rather than for data that vary among individuals in a population.",
+     "value": null
+    },
+    {
+     "text": "How many bus routes does the city operate?",
+     "why": "Asks for a single count that can be looked up, so no variability among individuals is anticipated.",
+     "value": null
+    },
+    {
+     "text": "How long did Ms. Alvarez wait at her bus stop this morning?",
+     "why": "Asks about one individual, so there is no population and no variability to study.",
+     "value": null
+    },
+    {
+     "text": "What is the typical amount of time that bus riders in the city wait at their stops?",
+     "why": "Keeps the topic of the draft, names the population, anticipates variability among the individuals and can be answered by collecting and analyzing data.",
+     "value": null
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 85,
+   "facts": [
+    "draft=opinion"
+   ],
+   "blueprint": {
+    "id": "st_question_revision",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Diagnose why a draft question is not a valid investigative question and choose the revision that fixes it",
+    "topic": "1.10",
+    "skill": "1.A",
+    "student_thinking": [
+     "Decide which property the draft lacks: variability among individuals, a population, or answerability with data",
+     "Choose the revision that has all three properties, not one that only rewords the flaw"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "a valid investigative question anticipates variability, refers to a population and can be answered with data",
+      "evidence": "the draft and each revision are stated in the stem and the options"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "same_flaw_reworded",
+      "description": "keeps the flaw of the draft in new words"
+     },
+     {
+      "id": "other_flaw",
+      "description": "fixes the draft but introduces a different flaw"
+     },
+     {
+      "id": "individual_not_population",
+      "description": "asks about one individual instead of a population"
+     }
+    ],
+    "verification": {
+     "independent_path": "each revision is generated from the property table (variability, population, answerable with data); the draft flaw is one row, and exactly one revision has all three properties",
+     "method": "property table enumeration"
+    },
+    "judgment_demand": [
+     "claim_justification",
+     "interpretation"
+    ]
+   },
+   "seed": 9200,
+   "pack_id": "st_question_revision-s9200",
+   "explanation_en": "The correct answer is What is the typical amount of time that bus riders in the city wait at their stops?. Keeps the topic of the draft, names the population, anticipates variability among the individuals and can be answered by collecting and analyzing data.\nIs waiting for a bus an unfair burden on the bus riders of the city? is incorrect: Still asks for an opinion rather than for data that vary among individuals in a population.\nHow many bus routes does the city operate? is incorrect: Asks for a single count that can be looked up, so no variability among individuals is anticipated.\nHow long did Ms. Alvarez wait at her bus stop this morning? is incorrect: Asks about one individual, so there is no population and no variability to study."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_question_revision",
+   "facts": [
+    "draft=opinion"
+   ],
+   "seed": 9200
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item is short, needs no calculation, and fits the 60-100 second reading load. The calculator designation is harmless.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean 1.A question with a unique key and three distinct, well-explained distractors. It is suitable for the exam."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept recognition: a valid statistical investigative question anticipates variability in data and asks about a summary of a distribution. The distractors are an opinion/value judgment, a fixed count that needs no statistics, and a single-individual question. No computation and one reasoning step; this fits foundational learning, not mock-exam depth.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m03-k0",
+  "cellId": "ap_statistics-m03",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "1.10",
+  "unitCode": "1",
+  "skillPrimary": "1.A",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_question_scope",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "The student matches the investigative question to the population actually sampled (random sample from one clinic's records). Distractors are extrapolation to another population, extrapolation to all adults, and a causal question with no treatment assigned. The item needs one conceptual idea, no computation, and short reading.",
+  "payload": {
+   "archetype": "st_question_scope",
+   "topic": "1.10",
+   "skill": "1.A",
+   "calculator": "allowed",
+   "stem": "A researcher collects data on the number of days waiting for an appointment from a sample of $200$ patients selected at random from the records of all patients of one regional clinic. No treatment is assigned to anyone. Which of the following investigative questions can be answered using the data from this sample?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "What is the typical number of days waiting for an appointment for patients of a clinic in another state?",
+     "why": "The sample was not drawn from this population, so the data say nothing about it.",
+     "value": null
+    },
+    {
+     "text": "Would hiring more nurses cause patients to wait fewer days for an appointment?",
+     "why": "A cause-and-effect question needs an experiment with random assignment, but the data come only from a random sample that was observed.",
+     "value": null
+    },
+    {
+     "text": "What is the typical number of days waiting for an appointment for all adults in the country?",
+     "why": "The sample was drawn from a smaller population, so the data cannot be used to answer a question about this larger population.",
+     "value": null
+    },
+    {
+     "text": "What is the typical number of days waiting for an appointment for patients of the regional clinic?",
+     "why": "The question refers to the population from which the sample was drawn at random, and it can be answered by summarizing the data collected.",
+     "value": null
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 85,
+   "facts": [
+    "pop=patients of the regional clinic"
+   ],
+   "blueprint": {
+    "id": "st_question_scope",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Decide which investigative question the sample can answer from the population it was drawn from",
+    "topic": "1.10",
+    "skill": "1.A",
+    "student_thinking": [
+     "Identify the population from which the sample was selected at random",
+     "Reject questions about a larger or different population and questions that need random assignment to answer"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "data from a random sample can answer questions about the population sampled, and only an experiment supports cause and effect",
+      "evidence": "the stem names the sampling frame and says that no treatment was assigned"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "generalizes_beyond_population",
+      "description": "applies the result to a larger population than the one sampled"
+     },
+     {
+      "id": "different_population",
+      "description": "applies the result to a population that was not sampled"
+     },
+     {
+      "id": "causal_from_observation",
+      "description": "asks a cause-and-effect question of observational data"
+     }
+    ],
+    "verification": {
+     "independent_path": "the population of each question is compared with the sampling frame and the study type is checked against the claim; exactly one question matches both",
+     "method": "population and study type comparison"
+    },
+    "judgment_demand": [
+     "claim_justification",
+     "condition_check"
+    ]
+   },
+   "seed": 9200,
+   "pack_id": "st_question_scope-s9200",
+   "explanation_en": "The correct answer is What is the typical number of days waiting for an appointment for patients of the regional clinic?. The question refers to the population from which the sample was drawn at random, and it can be answered by summarizing the data collected.\nWhat is the typical number of days waiting for an appointment for patients of a clinic in another state? is incorrect: The sample was not drawn from this population, so the data say nothing about it.\nWould hiring more nurses cause patients to wait fewer days for an appointment? is incorrect: A cause-and-effect question needs an experiment with random assignment, but the data come only from a random sample that was observed.\nWhat is the typical number of days waiting for an appointment for all adults in the country? is incorrect: The sample was drawn from a smaller population, so the data cannot be used to answer a question about this larger population."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_question_scope",
+   "facts": [
+    "pop=patients of the regional clinic"
+   ],
+   "seed": 9200
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Directly targets skill 1.A and topic 1.10: choosing the investigative question that the sampled population and study type can answer. It stays within Unit 1 scope."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option D is the only question about the sampled population (patients of the regional clinic) that can be answered without a causal claim. A is a different population, B is causal from observational data, and C is a larger population than the sampling frame."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem states the sampling frame (all patients of one regional clinic), the random selection, and that no treatment was assigned. The wording is clear US English."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception: a different population, a causal claim from observational data, and generalizing to a larger population. The explanation addresses every wrong option. The options are similar in length and parallel in form."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The reading load is short and the item takes about 60 to 85 seconds. It requires no calculation, which is fine even though a calculator is allowed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is clean and has a unique key. It tests which investigative question the data can answer, given the population sampled and the study type, and each distractor reflects a distinct named misconception. The one style point is that the stem says \"number of days waiting\" where \"number of days spent waiting\" would read more smoothly, which is not a reason to reject."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The student matches the investigative question to the population actually sampled (random sample from one clinic's records). Distractors are extrapolation to another population, extrapolation to all adults, and a causal question with no treatment assigned. The item needs one conceptual idea, no computation, and short reading.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m04-k0",
+  "cellId": "ap_statistics-m04",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "1.12",
+  "unitCode": "1",
+  "skillPrimary": "2.B",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_sampling_bias",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept identification of response bias from a short scenario. The student picks among four named bias types, and the sample is stated to be random, which rules out undercoverage and voluntary response. There is no computation and only one reasoning step. The item is standard definitional recognition at the core level of topic 1.12.",
+  "payload": {
+   "archetype": "st_sampling_bias",
+   "topic": "1.12",
+   "skill": "2.B",
+   "calculator": "allowed",
+   "stem": "An interviewer in uniform asks a random sample of students whether they have ever cheated on an exam, with the principal standing nearby. Which of the following is the most likely source of bias in this study?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Nonresponse bias",
+     "why": "Nonresponse bias occurs when individuals who were selected do not respond or cannot be reached. That is not what happens here: the setting may lead students to answer untruthfully.",
+     "value": null
+    },
+    {
+     "text": "Voluntary response bias",
+     "why": "Voluntary response bias occurs when individuals choose for themselves whether to take part. That is not what happens here: the setting may lead students to answer untruthfully.",
+     "value": null
+    },
+    {
+     "text": "Undercoverage",
+     "why": "Undercoverage occurs when some members of the population have no chance of being selected. That is not what happens here: the setting may lead students to answer untruthfully.",
+     "value": null
+    },
+    {
+     "text": "Response bias",
+     "why": "Response bias occurs when individuals answer inaccurately, for example because of the wording of a question or the setting. In this scenario, the setting may lead students to answer untruthfully.",
+     "value": null
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 75,
+   "facts": [
+    "bias=resp"
+   ],
+   "blueprint": {
+    "id": "st_sampling_bias",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Identify the source of bias in a sampling plan from how individuals were selected and how they answered",
+    "topic": "1.12",
+    "skill": "2.B",
+    "student_thinking": [
+     "Decide who had a chance of being selected, who chose to respond, who was selected but did not respond and whether answers were accurate",
+     "Match the one clue in the scenario to the one type of bias with that definition"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "each type of bias has its own defining feature: excluded group, self-selection, nonresponse or inaccurate answers",
+      "evidence": "the scenario gives exactly one defining clue"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "undercoverage_vs_nonresponse",
+      "description": "mixes up units that could not be selected with selected units that did not respond"
+     },
+     {
+      "id": "voluntary_vs_nonresponse",
+      "description": "mixes up self-selection with nonresponse"
+     },
+     {
+      "id": "response_vs_selection",
+      "description": "mixes up inaccurate answers with how units were selected"
+     }
+    ],
+    "verification": {
+     "independent_path": "each scenario is built from one defining clue of a four-row table of bias types, and exactly one type matches that clue",
+     "method": "defining-clue table enumeration"
+    },
+    "judgment_demand": [
+     "procedure_choice",
+     "claim_justification"
+    ]
+   },
+   "seed": 9200,
+   "pack_id": "st_sampling_bias-s9200",
+   "explanation_en": "The correct answer is Response bias. Response bias occurs when individuals answer inaccurately, for example because of the wording of a question or the setting. In this scenario, the setting may lead students to answer untruthfully.\nNonresponse bias is incorrect: Nonresponse bias occurs when individuals who were selected do not respond or cannot be reached. That is not what happens here: the setting may lead students to answer untruthfully.\nVoluntary response bias is incorrect: Voluntary response bias occurs when individuals choose for themselves whether to take part. That is not what happens here: the setting may lead students to answer untruthfully.\nUndercoverage is incorrect: Undercoverage occurs when some members of the population have no chance of being selected. That is not what happens here: the setting may lead students to answer untruthfully."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_sampling_bias",
+   "facts": [
+    "bias=resp"
+   ],
+   "seed": 9200
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item is a short recall-and-application question that takes about 60 seconds, which is typical for AP Statistics. It needs no calculator, and the allowed designation is harmless.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, unambiguous identification of response bias with distinct distractors, and it meets all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept identification of response bias from a short scenario. The student picks among four named bias types, and the sample is stated to be random, which rules out undercoverage and voluntary response. There is no computation and only one reasoning step. The item is standard definitional recognition at the core level of topic 1.12.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m05-k0",
+  "cellId": "ap_statistics-m05",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "1.13",
+  "unitCode": "1",
+  "skillPrimary": "2.B",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_blocking_design",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "criterion_failed_stimulus_expression; criterion_failed_distractor_explanation",
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Classic blocking recognition: the stem states that classes differ, so the best design randomizes within each class (block). Distractors are clearly flawed (expectation-based assignment, confounding treatment with class, ignoring the class difference). It requires one concept and one reasoning step, with no computation or representation changes. The item is short and direct, which suits foundational learning more than a full-mock item.",
+  "payload": {
+   "archetype": "st_blocking_design",
+   "topic": "1.13",
+   "skill": "2.B",
+   "calculator": "allowed",
+   "stem": "A principal plans an experiment to compare the new study guide with the old study guide on the score on a final exam, using $20$ students in each of two classes taught by different teachers. The score on a final exam is expected to differ between the two classs even without any treatment. Which of the following designs is the best way to carry out the experiment?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Let the students in each class be assigned to the treatment that the principal expects to work better",
+     "why": "The assignment is not random, so the choice of the experimenter can be confounded with the response.",
+     "value": null
+    },
+    {
+     "text": "Number all of the students in both classs together and randomly assign half of all of them to the new study guide and the rest to the old study guide, ignoring the class",
+     "why": "The assignment is random, but it does not guarantee that each class receives both treatments in equal numbers, so it does not control for the difference between the classs.",
+     "value": null
+    },
+    {
+     "text": "Use the new study guide for all of the students in one class and the old study guide for all of the students in the other class",
+     "why": "Each treatment is used in only one class, so the treatment is confounded with the difference between the classs.",
+     "value": null
+    },
+    {
+     "text": "Within each class, randomly assign half of the students to the new study guide and the other half to the old study guide",
+     "why": "Random assignment within each class gives both treatments the same share of each class, so differences between the classs cannot be mistaken for a treatment effect.",
+     "value": null
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 90,
+   "facts": [
+    "unit=students"
+   ],
+   "blueprint": {
+    "id": "st_blocking_design",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Justify a randomized block design when the response is expected to differ between known groups",
+    "topic": "1.13",
+    "skill": "2.B",
+    "student_thinking": [
+     "Notice that the response is expected to differ between the blocks, so the treatments must be balanced within each block",
+     "Check that the assignment is random and that every block receives both treatments"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "a randomized block design randomly assigns the treatments within each block so that block differences are not confounded with the treatment",
+      "evidence": "the stem says the response is expected to differ between the blocks"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "confounded_with_block",
+      "description": "uses a different treatment in each block"
+     },
+     {
+      "id": "experimenter_choice",
+      "description": "lets the experimenter choose the treatments"
+     },
+     {
+      "id": "ignores_blocks",
+      "description": "randomizes without regard to the blocks"
+     }
+    ],
+    "verification": {
+     "independent_path": "each design is generated from a property table (random assignment, both treatments in every block, block effect separated) and exactly one design has every property",
+     "method": "design property table"
+    },
+    "judgment_demand": [
+     "procedure_choice",
+     "claim_justification"
+    ]
+   },
+   "seed": 9200,
+   "pack_id": "st_blocking_design-s9200",
+   "explanation_en": "The correct answer is Within each class, randomly assign half of the students to the new study guide and the other half to the old study guide. Random assignment within each class gives both treatments the same share of each class, so differences between the classs cannot be mistaken for a treatment effect.\nLet the students in each class be assigned to the treatment that the principal expects to work better is incorrect: The assignment is not random, so the choice of the experimenter can be confounded with the response.\nNumber all of the students in both classs together and randomly assign half of all of them to the new study guide and the rest to the old study guide, ignoring the class is incorrect: The assignment is random, but it does not guarantee that each class receives both treatments in equal numbers, so it does not control for the difference between the classs.\nUse the new study guide for all of the students in one class and the old study guide for all of the students in the other class is incorrect: Each treatment is used in only one class, so the treatment is confounded with the difference between the classs."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_blocking_design",
+   "facts": [
+    "unit=students"
+   ],
+   "seed": 9200
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Blocking design justification fits 1.13 / 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option D is the unique randomized block design."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "Repeated typo 'classs' in stem and options; awkward phrasing; not publishable US English."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Distractors are distinct and well explained, but the explanation text repeats the 'classs' typo."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, no calculator load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The content is sound and the key is correct. The item fails on wording: 'classs' appears throughout the stem, options and explanation. Fix the typo and the phrasing before use."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Classic blocking recognition: the stem states that classes differ, so the best design randomizes within each class (block). Distractors are clearly flawed (expectation-based assignment, confounding treatment with class, ignoring the class difference). It requires one concept and one reasoning step, with no computation or representation changes. The item is short and direct, which suits foundational learning more than a full-mock item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m06-k0",
+  "cellId": "ap_statistics-m06",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "2.3",
+  "unitCode": "2",
+  "skillPrimary": "2.A",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_simulation_design",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Standard simulation design item. The student must assign digits to match p=0.3 (3 of 10 digits), use 4 digits per trial, and count \"at least 2\". Each distractor fails one clear feature (wrong number of digits, \"exactly\" instead of \"at least\", wrong probability). There is no computation and little reading, and the item is a direct application of the simulation setup procedure.",
+  "payload": {
+   "archetype": "st_simulation_design",
+   "topic": "2.3",
+   "skill": "2.A",
+   "calculator": "allowed",
+   "stem": "A seed company states that each of its seeds germinates with probability $0.3$, independently of other seeds. A researcher wants to use a table of random digits, in which each digit from $0$ to $9$ is equally likely, to estimate the probability that at least $2$ of $4$ seeds germinate. Which of the following describes a correct simulation?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "The digits $0$ through $2$ represent that a seed germinates and $3$ through $9$ that it is not; each trial reads $6$ random digits and records whether at least $2$ of them are in the first group, repeated for many trials",
+     "why": "A trial uses a different number of digits than the $4$ seeds in the scenario, so the simulated event is not the one asked about.",
+     "value": null
+    },
+    {
+     "text": "The digits $0$ through $2$ represent that a seed germinates and $3$ through $9$ that it is not; each trial reads $4$ random digits and records whether at least $2$ of them are in the first group, repeated for many trials",
+     "why": "The probability that a seed germinates is $0.3$, so $3$ of the $10$ equally likely digits represent it; one trial has $4$ seeds, and the event counted is at least $2$.",
+     "value": null
+    },
+    {
+     "text": "The digits $0$ through $2$ represent that a seed germinates and $3$ through $9$ that it is not; each trial reads $4$ random digits and records whether exactly $2$ of them are in the first group, repeated for many trials",
+     "why": "Counts a different event: the scenario asks for at least $2$, not exactly $2$.",
+     "value": null
+    },
+    {
+     "text": "The digits $0$ through $4$ represent that a seed germinates and $5$ through $9$ that it is not; each trial reads $4$ random digits and records whether at least $2$ of them are in the first group, repeated for many trials",
+     "why": "The share of digits assigned to the event does not match the stated probability, so the simulation estimates a different probability.",
+     "value": null
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 95,
+   "facts": [
+    "p=3",
+    "n=4",
+    "k=2",
+    "rule=at least"
+   ],
+   "blueprint": {
+    "id": "st_simulation_design",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Identify a correct simulation design (digit assignment, trial length and event counted) for a probability question",
+    "topic": "2.3",
+    "skill": "2.A",
+    "student_thinking": [
+     "Assign digits so that the share of digits for the event equals the given probability",
+     "Make one trial a set of digits equal to the number of individuals and count the event exactly as the question states"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "a simulation must reproduce the probability of one outcome, the number of independent repetitions in a trial and the event that is counted",
+      "evidence": "the stem gives the probability, the number of individuals in a trial and the event"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "wrong_probability_share",
+      "description": "assigns the wrong share of digits to the event"
+     },
+     {
+      "id": "wrong_trial_length",
+      "description": "uses the wrong number of digits per trial"
+     },
+     {
+      "id": "wrong_event_counted",
+      "description": "counts a different event than the one asked about"
+     }
+    ],
+    "verification": {
+     "independent_path": "each design is a triple (digits for the event, digits per trial, counting rule) and is accepted as correct only when all three equal the target triple; the three wrong designs each differ in exactly one component",
+     "method": "triple comparison"
+    },
+    "judgment_demand": [
+     "procedure_choice",
+     "condition_check"
+    ]
+   },
+   "seed": 9200,
+   "pack_id": "st_simulation_design-s9200",
+   "explanation_en": "The correct answer is The digits $0$ through $2$ represent that a seed germinates and $3$ through $9$ that it is not; each trial reads $4$ random digits and records whether at least $2$ of them are in the first group, repeated for many trials. The probability that a seed germinates is $0.3$, so $3$ of the $10$ equally likely digits represent it; one trial has $4$ seeds, and the event counted is at least $2$.\nThe digits $0$ through $2$ represent that a seed germinates and $3$ through $9$ that it is not; each trial reads $6$ random digits and records whether at least $2$ of them are in the first group, repeated for many trials is incorrect: A trial uses a different number of digits than the $4$ seeds in the scenario, so the simulated event is not the one asked about.\nThe digits $0$ through $2$ represent that a seed germinates and $3$ through $9$ that it is not; each trial reads $4$ random digits and records whether exactly $2$ of them are in the first group, repeated for many trials is incorrect: Counts a different event: the scenario asks for at least $2$, not exactly $2$.\nThe digits $0$ through $4$ represent that a seed germinates and $5$ through $9$ that it is not; each trial reads $4$ random digits and records whether at least $2$ of them are in the first group, repeated for many trials is incorrect: The share of digits assigned to the event does not match the stated probability, so the simulation estimates a different probability."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_simulation_design",
+   "facts": [
+    "p=3",
+    "n=4",
+    "k=2",
+    "rule=at least"
+   ],
+   "seed": 9200
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Simulation design with digit assignment, trial length and event counted fits topic 2.3 and identifying the needed information (2.A)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option B is the only one matching all three components (0.3 share, 4 digits, at least 2). Unique key."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; stem is complete and clear, with the random digit table described in words."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option differs in exactly one component, with distinct misconceptions; explanation covers each. Options are parallel and similar in length."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 95 seconds, with typical reading load and no arithmetic."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean simulation-design item with a unique key and three single-component distractors. It is suitable for the exam."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Standard simulation design item. The student must assign digits to match p=0.3 (3 of 10 digits), use 4 digits per trial, and count \"at least 2\". Each distractor fails one clear feature (wrong number of digits, \"exactly\" instead of \"at least\", wrong probability). There is no computation and little reading, and the item is a direct application of the simulation setup procedure.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m07-k0",
+  "cellId": "ap_statistics-m07",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "4.4",
+  "unitCode": "4",
+  "skillPrimary": "2.E",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_hypotheses_means",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Matched-pairs hypothesis setup where the difference is defined as before minus after, so the claimed increase translates to Ha: mu_d < 0. Requires one reasoning step (sign direction) plus avoiding the statistic-vs-parameter notation trap and the two-sided alternative. No computation, short reading, in scope for topic 4.4 and skill 2.E.",
+  "payload": {
+   "archetype": "st_hypotheses_means",
+   "topic": "4.4",
+   "skill": "2.E",
+   "calculator": "allowed",
+   "stem": "A teacher wants to know whether a review session changes test scores. Each student's score is recorded on a test before the session and on a similar test after the session, and the difference is found as before minus after. The teacher suspects that the review session raises the mean score. Let $\\mu_d$ be the mean difference (before minus after), in points, for all students. Which of the following pairs of hypotheses should be tested?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "$H_0: \\bar{x}_d = 0$ and $H_a: \\bar{x}_d < 0$",
+     "why": "Writes the hypotheses about a sample mean, but hypotheses are always about the population parameter.",
+     "value": null
+    },
+    {
+     "text": "$H_0: \\mu_d = 0$ and $H_a: \\mu_d \\ne 0$",
+     "why": "Writes a two-sided alternative although the suspicion has a direction.",
+     "value": null
+    },
+    {
+     "text": "$H_0: \\mu_d = 0$ and $H_a: \\mu_d > 0$",
+     "why": "Reverses the direction of the alternative hypothesis relative to the suspicion. The direction of a mean difference follows the order of subtraction in its definition.",
+     "value": null
+    },
+    {
+     "text": "$H_0: \\mu_d = 0$ and $H_a: \\mu_d < 0$",
+     "why": "The parameter is the mean difference (before minus after), in points, for all students; the null hypothesis states the claimed value and the alternative matches the suspicion and the order of subtraction in the definition.",
+     "value": null
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 85,
+   "facts": [
+    "kind=paired",
+    "tail=greater",
+    "ha=<"
+   ],
+   "blueprint": {
+    "id": "st_hypotheses_means",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Choose the null and alternative hypotheses about a population mean or mean difference",
+    "topic": "4.4",
+    "skill": "2.E",
+    "student_thinking": [
+     "Identify the population parameter (a mean or a mean difference) and the claimed value for the null hypothesis",
+     "Use the direction of the suspicion and, for a difference, the order of subtraction to choose the alternative"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the null hypothesis states equality with the claimed value and the alternative reflects the suspicion in the direction fixed by how the parameter is defined",
+      "evidence": "the stem defines the parameter and states the suspicion"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "wrong_direction",
+      "description": "uses the alternative in the wrong direction"
+     },
+     {
+      "id": "statistic_not_parameter",
+      "description": "writes hypotheses about a sample mean"
+     },
+     {
+      "id": "two_sided_for_directional",
+      "description": "uses a two-sided alternative for a directional suspicion"
+     }
+    ],
+    "verification": {
+     "independent_path": "each option is generated from a table of direction, symbol and roles; the direction of a paired alternative is derived from the stated order of subtraction and the suspicion",
+     "method": "role table enumeration"
+    },
+    "judgment_demand": [
+     "procedure_choice",
+     "interpretation"
+    ]
+   },
+   "seed": 9200,
+   "pack_id": "st_hypotheses_means-s9200",
+   "explanation_en": "The correct answer is $H_0: \\mu_d = 0$ and $H_a: \\mu_d < 0$. The parameter is the mean difference (before minus after), in points, for all students; the null hypothesis states the claimed value and the alternative matches the suspicion and the order of subtraction in the definition.\n$H_0: \\bar{x}_d = 0$ and $H_a: \\bar{x}_d < 0$ is incorrect: Writes the hypotheses about a sample mean, but hypotheses are always about the population parameter.\n$H_0: \\mu_d = 0$ and $H_a: \\mu_d \\ne 0$ is incorrect: Writes a two-sided alternative although the suspicion has a direction.\n$H_0: \\mu_d = 0$ and $H_a: \\mu_d > 0$ is incorrect: Reverses the direction of the alternative hypothesis relative to the suspicion. The direction of a mean difference follows the order of subtraction in its definition."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_hypotheses_means",
+   "facts": [
+    "kind=paired",
+    "tail=greater",
+    "ha=<"
+   ],
+   "seed": 9200
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Directly targets setting up hypotheses for a matched-pairs mean (4.4, skill 2.E)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Before minus after with a suspected increase in scores gives mu_d < 0. This is the unique correct option."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The parameter and the order of subtraction are defined clearly in the stem."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception: a statistic in the hypotheses, a two-sided alternative, and a reversed direction. The explanation addresses each one."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "A short item that fits within about 85 seconds, with no arithmetic."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean, unique-key item on paired-difference hypotheses. The order-of-subtraction direction is explicit in the stem and the distractors are distinct. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Matched-pairs hypothesis setup where the difference is defined as before minus after, so the claimed increase translates to Ha: mu_d < 0. Requires one reasoning step (sign direction) plus avoiding the statistic-vs-parameter notation trap and the two-sided alternative. No computation, short reading, in scope for topic 4.4 and skill 2.E.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m08-k0",
+  "cellId": "ap_statistics-m08",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "4.2",
+  "unitCode": "4",
+  "skillPrimary": "2.D",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_ci_width_effect",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "The item requires weighing two competing effects (a lower confidence level narrows the interval, a smaller sample size widens it) and concluding the net effect, with s cancelling in the comparison. The concept is standard for Unit 4 and there is one extra reasoning step. The reading and computation load are light, so this is a typical mock-exam item rather than a basic or advanced one.",
+  "payload": {
+   "archetype": "st_ci_width_effect",
+   "topic": "4.2",
+   "skill": "2.D",
+   "calculator": "allowed",
+   "stem": "A $95\\%$ confidence interval for the mean number of hours of sleep that students at a university get each night is constructed from a random sample of $49$ students using a one-sample $t$-interval. A researcher then constructs a $90\\%$ confidence interval from a new random sample of $16$ students. Assume that the sample standard deviation is the same for both samples and that the conditions for inference are met. Which of the following statements about the width of the new interval compared with the original interval is correct?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "The new interval will have the same width as the original interval",
+     "why": "Assumes the two effects cancel exactly, but the new margin of error is about $1.53$ times the original margin of error.",
+     "value": null
+    },
+    {
+     "text": "The new interval will be narrower than the original interval",
+     "why": "Lets the lower confidence level dominate, but the new margin of error is about $1.53$ times the original margin of error, so the smaller sample size has the larger effect and the interval is wider.",
+     "value": null
+    },
+    {
+     "text": "The new interval will be wider than the original interval",
+     "why": "The smaller sample size has the larger effect: the new margin of error is about $1.53$ times the original margin of error, so the interval is wider.",
+     "value": null
+    },
+    {
+     "text": "The relative width of the new interval cannot be determined without knowing the value of the sample standard deviation",
+     "why": "The sample standard deviation is the same in both intervals, so it cancels from the ratio of the margins of error, and the relative width can be determined.",
+     "value": null
+    }
+   ],
+   "key_index": 2,
+   "est_seconds": 100,
+   "facts": [
+    "n=49,16",
+    "conf=0.95,0.9",
+    "ratio=1.526"
+   ],
+   "blueprint": {
+    "id": "st_ci_width_effect",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Judge the net effect on the width of a t-interval when the sample size and the confidence level change together in opposite directions",
+    "topic": "4.2",
+    "skill": "2.D",
+    "student_thinking": [
+     "Recall that a larger sample size reduces the standard error and a higher confidence level increases the critical value",
+     "Compare the two margins of error to decide which effect is larger, using the critical values and the square roots of the sample sizes"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the margin of error is t-star times s over the square root of n, so the width depends on the critical value and the sample size together",
+      "evidence": "the stem gives both sample sizes and both confidence levels and says the standard deviations are equal"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "effects_cancel_exactly",
+      "description": "believes the two opposite effects cancel exactly"
+     },
+     {
+      "id": "only_one_effect",
+      "description": "considers only the change in the sample size or only the confidence level"
+     },
+     {
+      "id": "needs_s",
+      "description": "believes the standard deviation is needed although it cancels"
+     }
+    ],
+    "verification": {
+     "independent_path": "the ratio of the margins of error is computed from t critical values found with scipy and again by bisection on the numerically integrated t cdf, and the ratio must differ from 1 by at least 15 percent",
+     "method": "ratio of margins of error"
+    },
+    "judgment_demand": [
+     "procedure_choice",
+     "calculated_value_decision"
+    ]
+   },
+   "seed": 9200,
+   "pack_id": "st_ci_width_effect-s9200",
+   "explanation_en": "The correct answer is The new interval will be wider than the original interval. The smaller sample size has the larger effect: the new margin of error is about $1.53$ times the original margin of error, so the interval is wider.\nThe new interval will have the same width as the original interval is incorrect: Assumes the two effects cancel exactly, but the new margin of error is about $1.53$ times the original margin of error.\nThe new interval will be narrower than the original interval is incorrect: Lets the lower confidence level dominate, but the new margin of error is about $1.53$ times the original margin of error, so the smaller sample size has the larger effect and the interval is wider.\nThe relative width of the new interval cannot be determined without knowing the value of the sample standard deviation is incorrect: The sample standard deviation is the same in both intervals, so it cancels from the ratio of the margins of error, and the relative width can be determined."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_ci_width_effect",
+   "facts": [
+    "n=49,16",
+    "conf=0.95,0.9",
+    "ratio=1.526"
+   ],
+   "seed": 9200
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Relationship among CI components (confidence level, n, width) fits 2.D and Topic 4.2."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Ratio of margins of error is about 1.53, so wider is the unique correct answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed. The stem is complete and clear, and states equal s and that conditions are met."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor maps to a distinct misconception and every wrong option is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 100 seconds, calculator use is appropriate, and the format is typical of AP."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. The key (wider) is the unique correct answer, the distractors are distinct misconceptions with explanations, and the scope and skill fit. It is acceptable."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The item requires weighing two competing effects (a lower confidence level narrows the interval, a smaller sample size widens it) and concluding the net effect, with s cancelling in the comparison. The concept is standard for Unit 4 and there is one extra reasoning step. The reading and computation load are light, so this is a typical mock-exam item rather than a basic or advanced one.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m09-k0",
+  "cellId": "ap_statistics-m09",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "3.8",
+  "unitCode": "3",
+  "skillPrimary": "2.D",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_power_effect",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept recall: with alpha fixed, increasing sample size increases power and reduces Type II error probability. The other options either raise Type I error (increase alpha) or increase Type II error (decrease alpha or n). No computation, representation change, or multi-step reasoning. Minor scope note: stem uses a test for a mean (t procedure, Unit 4), but the reasoning is procedure-independent, so this does not add difficulty.",
+  "payload": {
+   "archetype": "st_power_effect",
+   "topic": "3.8",
+   "skill": "2.D",
+   "calculator": "allowed",
+   "stem": "A researcher tests $H_0: \\mu = 70$ versus $H_a: \\mu > 70$, where $\\mu$ is the mean score of all students on a reading test, at significance level $\\alpha = 0.05$ using a random sample of $50$ students. The researcher wants to reduce the probability of a Type II error without increasing the probability of a Type I error. Which of the following changes should the researcher make?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Decrease the significance level while keeping the sample size the same",
+     "why": "A smaller significance level makes it harder to reject the null hypothesis, which raises the probability of a Type II error.",
+     "value": null
+    },
+    {
+     "text": "Decrease the sample size while keeping the significance level the same",
+     "why": "A smaller sample size increases the variability of the sampling distribution, which raises the probability of a Type II error.",
+     "value": null
+    },
+    {
+     "text": "Increase the significance level while keeping the sample size the same",
+     "why": "This lowers the probability of a Type II error, but it raises the probability of a Type I error, which the researcher wants to avoid.",
+     "value": null
+    },
+    {
+     "text": "Increase the sample size while keeping the significance level the same",
+     "why": "A larger sample size reduces the variability of the sampling distribution, which increases power and lowers the probability of a Type II error without changing the probability of a Type I error.",
+     "value": null
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 80,
+   "facts": [
+    "change=n_up"
+   ],
+   "blueprint": {
+    "id": "st_power_effect",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Relate sample size and significance level to the probabilities of Type I and Type II errors",
+    "topic": "3.8",
+    "skill": "2.D",
+    "student_thinking": [
+     "Recall how the sample size and the significance level each change the probability of a Type I error and of a Type II error",
+     "Choose the one change that lowers the probability of a Type II error and does not raise the probability of a Type I error"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "a larger sample size raises power without changing the probability of a Type I error, while a larger significance level raises power only by raising the probability of a Type I error",
+      "evidence": "the stem states the goal as two requirements on the error probabilities"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "alpha_increase_trade_off",
+      "description": "raises the significance level and ignores the Type I error"
+     },
+     {
+      "id": "alpha_decrease_lowers_power",
+      "description": "thinks a smaller significance level raises power"
+     },
+     {
+      "id": "sample_size_direction",
+      "description": "thinks a smaller sample size raises power"
+     }
+    ],
+    "verification": {
+     "independent_path": "each change is encoded as a pair (change in sample size, change in significance level) and the effects on both error probabilities are evaluated from a rule table; exactly one change meets both requirements",
+     "method": "effect rule table"
+    },
+    "judgment_demand": [
+     "procedure_choice",
+     "interpretation"
+    ]
+   },
+   "seed": 9200,
+   "pack_id": "st_power_effect-s9200",
+   "explanation_en": "The correct answer is Increase the sample size while keeping the significance level the same. A larger sample size reduces the variability of the sampling distribution, which increases power and lowers the probability of a Type II error without changing the probability of a Type I error.\nDecrease the significance level while keeping the sample size the same is incorrect: A smaller significance level makes it harder to reject the null hypothesis, which raises the probability of a Type II error.\nDecrease the sample size while keeping the significance level the same is incorrect: A smaller sample size increases the variability of the sampling distribution, which raises the probability of a Type II error.\nIncrease the significance level while keeping the sample size the same is incorrect: This lowers the probability of a Type II error, but it raises the probability of a Type I error, which the researcher wants to avoid."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_power_effect",
+   "facts": [
+    "change=n_up"
+   ],
+   "seed": 9200
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Directly targets Type I/II error and power relationships (3.8, 2.D)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Increasing n with fixed alpha is the unique choice that lowers beta without raising alpha."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception and the explanation covers every wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, conceptual, about 80 seconds, no arithmetic."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound: it has a unique key, parallel options, distinct misconceptions, and fits topic 3.8 and skill 2.D."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept recall: with alpha fixed, increasing sample size increases power and reduces Type II error probability. The other options either raise Type I error (increase alpha) or increase Type II error (decrease alpha or n). No computation, representation change, or multi-step reasoning. Minor scope note: stem uses a test for a mean (t procedure, Unit 4), but the reasoning is procedure-independent, so this does not add difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m10-k0",
+  "cellId": "ap_statistics-m10",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "4.4",
+  "unitCode": "4",
+  "skillPrimary": "2.C",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_method_choice_means",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-step procedure identification: one sample of quantitative data compared to a hypothesized mean points directly to a one-sample t-test. Distractors are standard, clearly distinguishable procedures (proportion, matched pairs, two-sample). No computation, no representation change, short and clear wording.",
+  "payload": {
+   "archetype": "st_method_choice_means",
+   "topic": "4.4",
+   "skill": "2.C",
+   "calculator": "allowed",
+   "stem": "A coach wants to test whether the mean time for all of her runners to finish a mile is less than $7$ minutes, using the times of a random sample of $25$ runners. Which of the following procedures is appropriate?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "A one-sample z-test for a population proportion",
+     "why": "Needs a count of successes in a category, but each individual contributes a measurement of a quantitative variable.",
+     "value": null
+    },
+    {
+     "text": "A matched-pairs t-test for a mean difference",
+     "why": "Needs two measurements on the same individual or on matched individuals, but each individual is measured only once, so there are no pairs.",
+     "value": null
+    },
+    {
+     "text": "A two-sample t-test for a difference in population means",
+     "why": "Needs two independent samples to compare, but the scenario has only one sample from one population.",
+     "value": null
+    },
+    {
+     "text": "A one-sample t-test for a population mean",
+     "why": "The variables, the number of samples and the way the data were collected in the scenario match this procedure.",
+     "value": null
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 85,
+   "facts": [
+    "key=one_t"
+   ],
+   "blueprint": {
+    "id": "st_method_choice_means",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Choose the inference procedure for a mean or a mean difference",
+    "topic": "4.4",
+    "skill": "2.C",
+    "student_thinking": [
+     "Decide whether the data are categorical counts or quantitative measurements, and whether the measurements are paired",
+     "Count the samples and the variables, then match the one procedure that fits the data collection"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the type of variable, the number of samples, pairing and the number of variables determine the procedure",
+      "evidence": "the scenario states the variables, the sampling and the goal"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "two_sample_for_paired_or_one_sample",
+      "description": "uses two independent samples where there is a pairing or only one sample"
+     },
+     {
+      "id": "pairs_without_pairs",
+      "description": "uses matched pairs when there are no pairs"
+     },
+     {
+      "id": "proportion_for_measurements",
+      "description": "uses a proportion procedure for measurements"
+     }
+    ],
+    "verification": {
+     "independent_path": "each procedure is tied to a feature table (variable type, number of samples, pairing, number of variables) and exactly one procedure matches the scenario; each wrong option is rejected by a stated feature",
+     "method": "feature table enumeration"
+    },
+    "judgment_demand": [
+     "procedure_choice",
+     "condition_check"
+    ]
+   },
+   "seed": 9200,
+   "pack_id": "st_method_choice_means-s9200",
+   "explanation_en": "The correct answer is A one-sample t-test for a population mean. The variables, the number of samples and the way the data were collected in the scenario match this procedure.\nA one-sample z-test for a population proportion is incorrect: Needs a count of successes in a category, but each individual contributes a measurement of a quantitative variable.\nA matched-pairs t-test for a mean difference is incorrect: Needs two measurements on the same individual or on matched individuals, but each individual is measured only once, so there are no pairs.\nA two-sample t-test for a difference in population means is incorrect: Needs two independent samples to compare, but the scenario has only one sample from one population."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_method_choice_means",
+   "facts": [
+    "key=one_t"
+   ],
+   "seed": 9200
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 60 to 85 seconds, involves no arithmetic, and the calculator designation is harmless.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, standard procedure-choice question with a unique key and distinct distractors. It passes all five criteria with no instant-reject conditions."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step procedure identification: one sample of quantitative data compared to a hypothesized mean points directly to a one-sample t-test. Distractors are standard, clearly distinguishable procedures (proportion, matched pairs, two-sample). No computation, no representation change, short and clear wording.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m11-k0",
+  "cellId": "ap_statistics-m11",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "3.14",
+  "unitCode": "3",
+  "skillPrimary": "2.C",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_method_choice_cat",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-step procedure identification: one sample classified by two categorical variables with 4 categories each points directly to a chi-square test of independence. Distractors (one-proportion z, two-sample t, two-proportion z) are easily eliminated since the variables are categorical with more than two categories. No computation, a short stem, and no representation changes are needed.",
+  "payload": {
+   "archetype": "st_method_choice_cat",
+   "topic": "3.14",
+   "skill": "2.C",
+   "calculator": "allowed",
+   "stem": "A school wants to test for an association between the favorite subject (math, science, history or art) and the grade level (freshman, sophomore, junior or senior) of students, using one random sample of $240$ students classified by both variables. Which of the following procedures is appropriate?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "A one-sample z-test for a population proportion",
+     "why": "Tests one proportion for a single categorical variable, but each individual here is classified by two categorical variables.",
+     "value": null
+    },
+    {
+     "text": "A two-sample t-test for a difference in population means",
+     "why": "Compares the means of a quantitative variable in two groups, but both variables in the scenario are categorical.",
+     "value": null
+    },
+    {
+     "text": "A two-sample z-test for a difference in population proportions",
+     "why": "Compares exactly two proportions, but a variable in the scenario has more than two categories, so there is no single difference in proportions to test.",
+     "value": null
+    },
+    {
+     "text": "A chi-square test of independence",
+     "why": "The variables, the number of samples and the way the data were collected in the scenario match this procedure.",
+     "value": null
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 85,
+   "facts": [
+    "key=chi_ind"
+   ],
+   "blueprint": {
+    "id": "st_method_choice_cat",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Choose the chi-square test of independence for two categorical variables",
+    "topic": "3.14",
+    "skill": "2.C",
+    "student_thinking": [
+     "Decide whether the data are categorical counts or quantitative measurements, and whether the measurements are paired",
+     "Count the samples and the variables, then match the one procedure that fits the data collection"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the type of variable, the number of samples, pairing and the number of variables determine the procedure",
+      "evidence": "the scenario states the variables, the sampling and the goal"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "two_proportion_for_many_categories",
+      "description": "uses a two-proportion procedure when a variable has more than two categories"
+     },
+     {
+      "id": "one_proportion_for_two_variables",
+      "description": "uses a one-proportion procedure for two variables"
+     },
+     {
+      "id": "means_for_categorical",
+      "description": "uses a means procedure for categorical variables"
+     }
+    ],
+    "verification": {
+     "independent_path": "each procedure is tied to a feature table (variable type, number of samples, pairing, number of variables) and exactly one procedure matches the scenario; each wrong option is rejected by a stated feature",
+     "method": "feature table enumeration"
+    },
+    "judgment_demand": [
+     "procedure_choice",
+     "condition_check"
+    ]
+   },
+   "seed": 9200,
+   "pack_id": "st_method_choice_cat-s9200",
+   "explanation_en": "The correct answer is A chi-square test of independence. The variables, the number of samples and the way the data were collected in the scenario match this procedure.\nA one-sample z-test for a population proportion is incorrect: Tests one proportion for a single categorical variable, but each individual here is classified by two categorical variables.\nA two-sample t-test for a difference in population means is incorrect: Compares the means of a quantitative variable in two groups, but both variables in the scenario are categorical.\nA two-sample z-test for a difference in population proportions is incorrect: Compares exactly two proportions, but a variable in the scenario has more than two categories, so there is no single difference in proportions to test."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_method_choice_cat",
+   "facts": [
+    "key=chi_ind"
+   ],
+   "seed": 9200
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Directly targets choosing the chi-square test of independence (3.14, 2.C). No out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Unique correct answer: one sample, two categorical variables with 4 categories each. Minor: explanation text says 'A' while key_index is 3 (D); likely a lettering artifact."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception (one-proportion, means for categorical, two-proportion with many categories) and each is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, about 85 seconds, no arithmetic, typical of AP method-choice items."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Clean procedure-choice item with a unique key and well-explained distractors. The only blemish is that the explanation names the correct option as 'A' while the key index points to D, probably a lettering artifact from shuffled options."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step procedure identification: one sample classified by two categorical variables with 4 categories each points directly to a chi-square test of independence. Distractors (one-proportion z, two-sample t, two-proportion z) are easily eliminated since the variables are categorical with more than two categories. No computation, a short stem, and no representation changes are needed.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m12-k0",
+  "cellId": "ap_statistics-m12",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "3.7",
+  "unitCode": "3",
+  "skillPrimary": "4.E",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_conditions_prop",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept item: verify the random, 10%, and large counts conditions for a one-proportion z-test. The key discriminator is using p0 rather than the sample count in the large counts check. The 10% check is one simple comparison (120 < 168.2). Distractors are standard misconceptions. It has no representation changes, minimal computation, and a short stem.",
+  "payload": {
+   "archetype": "st_conditions_prop",
+   "topic": "3.7",
+   "skill": "4.E",
+   "calculator": "allowed",
+   "stem": "In a school district with $1682$ students, a random sample of $120$ students is selected. Of the sampled students, $8$ ride the bus to school. The sample is used to test $H_0: p = 0.25$ versus $H_a: p \\ne 0.25$, where $p$ is the proportion of all district students who ride the bus to school. Which of the following statements about the conditions for a one-sample $z$-test for a proportion is correct?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "The large counts condition is not satisfied, because the number of sampled students who ride the bus to school is $8$, which is less than $10$",
+     "why": "Checks the large counts condition with the sample counts, but a test uses the null value: $np_0 = 30$ and $n(1-p_0) = 90$ are both at least $10$.",
+     "value": null
+    },
+    {
+     "text": "The $10\\%$ condition is not satisfied, because $n = 120$ is more than $10\\%$ of $N = 1682$",
+     "why": "Claims the $10\\%$ condition fails, but $n = 120$ is less than $10\\%$ of $N = 1682$, which is $168.2$.",
+     "value": null
+    },
+    {
+     "text": "All three conditions are satisfied, because the sample is random, $n = 120$ is less than $10\\%$ of $N = 1682$, and $np_0 = 30$ and $n(1-p_0) = 90$ are both at least $10$",
+     "why": "The sample is random, $n = 120$ is less than $10\\%$ of $N = 1682$ (that is, $168.2$), and $np_0 = 30$ and $n(1-p_0) = 90$ are both at least $10$.",
+     "value": null
+    },
+    {
+     "text": "The random condition is not satisfied, because only a small part of all district students was included in the sample",
+     "why": "The sample was selected at random, and a small part of the population being sampled does not make a sample non-random.",
+     "value": null
+    }
+   ],
+   "key_index": 2,
+   "est_seconds": 110,
+   "facts": [
+    "fail=none",
+    "n=120",
+    "N=1682",
+    "p0=0.25",
+    "x=8"
+   ],
+   "blueprint": {
+    "id": "st_conditions_prop",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Verify the conditions for a one-sample z-test for a proportion",
+    "topic": "3.7",
+    "skill": "4.E",
+    "student_thinking": [
+     "Check random selection, then compare n with ten percent of N for independence",
+     "Check large counts with the null value p0, not with the sample proportion, then decide which single condition fails or that none does"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "a z-test for a proportion needs random selection, n at most 10 percent of N, and np0 and n(1-p0) both at least 10",
+      "evidence": "the stem gives the sampling method, N, n, the number of successes in the sample and the null value"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "uses_sample_proportion",
+      "description": "checks large counts with the sample counts instead of the null value"
+     },
+     {
+      "id": "false_ten_percent_failure",
+      "description": "claims the 10 percent condition fails when it holds"
+     },
+     {
+      "id": "confuses_small_fraction_with_nonrandom",
+      "description": "treats a small sampled fraction as a random-selection problem"
+     }
+    ],
+    "verification": {
+     "independent_path": "each condition is evaluated separately in code from N, n, p0 and the sample count, and exactly one of the four verdicts agrees with all three evaluations; the verdict from the sample counts is checked to disagree with the verdict from p0",
+     "method": "separate evaluation of each condition plus sample-count trap check"
+    },
+    "judgment_demand": [
+     "condition_check",
+     "claim_justification"
+    ]
+   },
+   "seed": 9200,
+   "pack_id": "st_conditions_prop-s9200",
+   "explanation_en": "The correct answer is All three conditions are satisfied, because the sample is random, $n = 120$ is less than $10\\%$ of $N = 1682$, and $np_0 = 30$ and $n(1-p_0) = 90$ are both at least $10$. The sample is random, $n = 120$ is less than $10\\%$ of $N = 1682$ (that is, $168.2$), and $np_0 = 30$ and $n(1-p_0) = 90$ are both at least $10$.\nThe large counts condition is not satisfied, because the number of sampled students who ride the bus to school is $8$, which is less than $10$ is incorrect: Checks the large counts condition with the sample counts, but a test uses the null value: $np_0 = 30$ and $n(1-p_0) = 90$ are both at least $10$.\nThe $10\\%$ condition is not satisfied, because $n = 120$ is more than $10\\%$ of $N = 1682$ is incorrect: Claims the $10\\%$ condition fails, but $n = 120$ is less than $10\\%$ of $N = 1682$, which is $168.2$.\nThe random condition is not satisfied, because only a small part of all district students was included in the sample is incorrect: The sample was selected at random, and a small part of the population being sampled does not make a sample non-random."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_conditions_prop",
+   "facts": [
+    "fail=none",
+    "n=120",
+    "N=1682",
+    "p0=0.25",
+    "x=8"
+   ],
+   "seed": 9200
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Verifying random, 10%, and large counts conditions with p0 for a one-proportion z-test; matches topic 3.7 and skill 4.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Unique correct answer: all conditions hold (np0=30, n(1-p0)=90, 120<168.2, random sample). Other options are clearly false."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; stem gives N, n, count, null value, and sampling method clearly."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct named misconceptions; explanation addresses each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60-90 seconds, minimal arithmetic, no calculator needed; the key is slightly longer but acceptable."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Clean conditions-check item with a correct unique key and well-targeted distractors. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: verify the random, 10%, and large counts conditions for a one-proportion z-test. The key discriminator is using p0 rather than the sample count in the large counts check. The 10% check is one simple comparison (120 < 168.2). Distractors are standard misconceptions. It has no representation changes, minimal computation, and a short stem.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ }
+]

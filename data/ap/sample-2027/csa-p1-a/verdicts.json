@@ -1,0 +1,2447 @@
+[
+ {
+  "key": "ap_computer_science_a-m01-k0",
+  "cellId": "ap_computer_science_a-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Integer division 17/3=5, *2=10; 20%3=2; sum 12",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "12"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Integer division, remainder and precedence in one expression is squarely topic 1.3 and skill 3.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The output is 12, and this is the only defensible answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Short code segment, complete and clearly worded."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option maps to a distinct misconception and is explained. The explanation of 0 is slightly loose but still correct, since (17/3*2+20)%3 = 0."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Quick to solve, no calculator needed, typical of AP exam items."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, in scope, and has distinct distractors, so it passes."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single expression evaluation using integer division, multiplication, modulus, and left-to-right precedence. Four short steps with small numbers and no representation changes. The distractors target integer-division and precedence misconceptions, which are core 1.3 concepts. This is a foundational check, easier than typical full-mock items.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m01-k1",
+  "cellId": "ap_computer_science_a-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Integer division 11/2=5; 5*3=15; 16%2=0; 15+0=15",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "15"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Integer division, remainder and precedence in one expression; fits 1.3 and 3.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "15 is the unique correct output."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Complete code segment, clear stem."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor (18, 1, 23) results from a distinct named misconception; all are explained. The rationale for 1 is slightly loose but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short trace, no calculator needed, options are parallel integers."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean, in-scope item with distinct plausible distractors."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single expression requiring operator precedence, left-to-right evaluation, integer division (11/2=5) and modulus (16%2=0), giving 15. Short code, small numbers, no loops, aliasing, or multi-representation work. Core 1.3 content with one mild integer-division subtlety; fair and unambiguous, but more foundational than full-mock level.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m02-k0",
+  "cellId": "ap_computer_science_a-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "substring(3,6)=\"cti\", indexOf(\"c\")=3, length=8; string concatenation gives cti38",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "cti38"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "Short task, typical of AP CSA, with no calculator load.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, in scope, well distracted, and suitable for the exam."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single short code segment tracing substring (exclusive end index), indexOf, length, and string concatenation with ints. About 4 simple steps with near-miss distractors (inclusive end index, off-by-one on index/length). Tests core 1.15 concepts without layered subtleties, so it fits foundational practice rather than full-mock level.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m02-k1",
+  "cellId": "ap_computer_science_a-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "le37",
+     "brief_reasoning": "substring(3,5)=\"le\", indexOf(\"l\")=3, length=7; string concatenation gives le37",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Tests substring, indexOf and length (topic 1.15). The dominant demand is tracing the output (3.B)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The output is le37. The key is unique, and the other three options differ in output."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The code is complete and compilable, and the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct named misconception: inclusive end index, 1-based indexOf, and last index instead of length. The explanation covers each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 95 seconds, a short trace, no arithmetic burden, and the options are short parallel strings."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a correct, clean string-method trace. The key le37 is unique and the distractors are well differentiated. It is acceptable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Short 3-step trace: substring with exclusive end index, indexOf, length, then string concatenation of ints. Distractors target the substring end bound and off-by-one errors. Core Unit 1.15 skill with minimal reading and computation; suitable for basic learning rather than a full mock's harder items.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m03-k0",
+  "cellId": "ap_computer_science_a-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "You can't assign a String literal to an int variable. The other three statements are legal: a char literal goes into a char, a relational expression gives a boolean, and an int is widened to long.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "int m = \"7\";"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "About 60 seconds with minimal reading, no arithmetic, and no calculator. This matches the reference pattern for a short MC item.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, unambiguous compile-error identification for topic 1.2. The key is unique and correct, the distractors are parallel with explanations, and the time load is appropriate."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: match each declared type to its initializer. The only compile error is assigning a String literal to an int. The distractors (char literal, boolean expression, int widened to long) are all valid and standard for topic 1.2. It needs one reasoning step, with no tracing, arithmetic, or heavy reading, which is below full-mock exam level.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m03-k1",
+  "cellId": "ap_computer_science_a-m03",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "'ab' is an invalid char literal (multiple characters in single quotes), and a char can't be assigned to a String anyway. The other three compile.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "String t = 'ab';"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is valid, with a unique key, but the distractors are weak and the explanation is thin, so it fails the distractor criterion. Scope and skill fit is fine (1.2, 3.D). Exactly one option fails to compile, the 'ab' multi-character literal, and the other three compile.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The item fits topic 1.2, declarations and data types, and skill 3.D, finding a compile error. It uses only Unit 1 content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key is unique. `'ab'` is an invalid character literal and fails to compile, and the three other statements are valid."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear and the options are short, parallel statements."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The three distractors are all trivially valid statements, and none encodes a realistic misconception about a compile error. The \"why\" text for each is a generic \"This statement compiles\" with a one-line reason. The explanation also does not say why the key fails: the 'ab' literal is not a valid char, and a char could not be assigned to a String anyway. The item is easy, and students can pick the key by spotting the odd single quotes. Better distractors would be near-miss errors, such as `int x = 3.9;`, `double d = \"2\";`, or `boolean b = 1;`."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 60 seconds and needs no calculator. It is suitable in length and load, though it is somewhat too easy."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: distinguish String literals (double quotes) from char literals (single quotes). The distractors are all plainly valid declarations, including an explicit cast, so no tracing, casting subtlety, or multi-step reasoning is required. Reading and computation load are minimal, and the item is a direct recall/recognition check on 1.2.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m04-k0",
+  "cellId": "ap_computer_science_a-m04",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "AX",
+     "brief_reasoning": "&& has higher precedence: A || (B && C). A returns true so the right side is short-circuited; prints A then X.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Short-circuit and precedence tracing, topic 2.5, skill 3.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "AX is the unique correct output."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Complete compilable code; clear stem."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The ABCY rationale ('evaluates right operand of || even when left is true but skips && operands') does not match the option: it prints B and C (the && operands) and ends in Y, which is incoherent. The explanation merely restates this flawed description rather than explaining the error. ABCX and ACY rationales are fine."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 90 seconds, short code, no calculator."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound and the key AX is unique and correct, but the explanation for distractor ABCY (misconception m3) describes behavior that contradicts the option's actual output, so the distractor explanation criterion fails. Fix the m3 rationale or redesign that distractor."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires knowing that && binds tighter than || and that || short-circuits when the left operand is true, so the printing side effects of B and C never occur. The correct output is AX. Distractors target common misconceptions (evaluating all operands, wrong grouping, wrong branch). Concept depth is moderate, the code is short, and there is no heavy computation or reading.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m04-k1",
+  "cellId": "ap_computer_science_a-m04",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "&& has higher precedence: A || (B && C). A prints and is true, short-circuit skips B and C, prints X. Output AX.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "AX"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Compound boolean with short-circuit and precedence; tracing output. Fits 2.5 / 3.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "A || (B && C): A prints and is true, so the rest is skipped; prints AX. Unique and correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Code is complete, compiles, and the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The rationale for ABCY is incoherent. It says the code evaluates the right operand of || but skips && operands, yet ABCY prints B and C. ABCY also prints Y, which cannot come from the stated misconception, since A || ... with A true yields X under any evaluation order. The ACY and ABCX rationales are fine."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short trace, about 90 seconds, no calculator needed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key (AX) is correct and unique and the scope fits. The distractor ABCY has an incoherent rationale and an implausible output (Y printed even though A is true), so it does not encode a distinct, realistic misconception. Fail on distractor quality; fixing the distractor and its explanation would resolve it."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires short-circuit evaluation of || with side-effecting method calls and knowing && binds tighter than ||. The trace is short (A is true, so B and C are never called, then X prints). Distractors reflect plausible misconceptions: evaluating all operands, or evaluating the && side first. No heavy arithmetic or reading; the code is unambiguous and in scope.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m05-k0",
+  "cellId": "ap_computer_science_a-m05",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Trace: n goes 5→14→32→68 and count reaches 3. The loop stops because 68 is not less than 39, so it prints 68 3.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "68 3"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Tracing a while loop to its exit, a direct fit for 2.7 and skill 3.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The trace 5, 14, 32, 68 with count 3 gives '68 3'. The key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The code is complete and unambiguous, and the stem is standard."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor corresponds to a distinct mutation (n*(2+4), add-then-double, reversed comparison), and the explanation addresses every wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "A short 3-iteration trace with no calculator needed, about 90 seconds."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean, correct while-loop trace item with a unique key and distinct misconception-based distractors. It is appropriate in scope and load."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single while loop traced for 3 iterations with simple arithmetic (n = n*2+4). Requires tracking two variables and checking the loop condition each pass, but there are no aliasing, casting, or nested-structure complications. Distractors are near-miss results from stopping early or miscounting iterations. This is a straightforward, foundational loop trace appropriate for initial learning of while loops.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m05-k1",
+  "cellId": "ap_computer_science_a-m05",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "4->12 (count 1), 12->28 (count 2), loop exits since 28>=24.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "28 2"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The trace is only 2 iterations with simple arithmetic, so it fits the typical time and reading load.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, correct while-loop trace with distinct distractors, and it is suitable for the exam."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Short 2-iteration while loop trace with a changed update (n*2+4) and a boundary condition; distractors are near-misses (stopping after 1 iteration, skipping the loop, wrong arithmetic). Standard AP-style tracing with minimal reading and trivial arithmetic; fits a full mock as a routine item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m06-k0",
+  "cellId": "ap_computer_science_a-m06",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "For i from 1 to 6, the inner loop runs 7-i times, giving 6+5+4+3+2+1 = 21. For i = 7 it runs 0 times. Total 21.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "21"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Nested iteration with dependent inner start; tracing output (3.A). In scope."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "21 is unique and correct; the other options are not defensible."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Complete compilable code segment; clear stem."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "15, 42 and 6 map to distinct misconceptions; the explanation covers each. The rationale for 6 is slightly loose but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 90 seconds, no calculator needed, typical of AP."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a correct, clean nested-loop count with a boundary case where the inner loop runs zero times. The key is unique and the distractors are reasonable and explained. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Nested loop with inner start dependent on outer variable (triangular count). Outer bound 7 exceeds inner limit 6, so the last outer iteration executes zero times, a plausible off-by-one trap. Distractors (42, 15, 6) correspond to common errors. Concept depth is typical of AP CSA 2.11 tracing. Reading and arithmetic are minimal and the trace is short (7 outer iterations, summing 6+5+4+3+2+1+0=21).",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m06-k1",
+  "cellId": "ap_computer_science_a-m06",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Inner loop runs 4,3,2,1,0,0 times for i=1..6; sum=10.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "10"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Nested loop with dependent inner start; trace of statement execution; in scope."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "10 is correct and unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Code complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The rationale for 4, 'counts only the passes of the outer loop', is inaccurate because the outer loop runs 6 times, not 4. The value 4 matches the inner bound or the first inner run. The rationale and value are mismatched, so the explanation is misleading."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, no calculator needed, typical load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and well scoped. It is failed only because the rationale for option 4 misdescribes the code: the outer loop runs 6 times, not 4. Fix that explanation (or the distractor) and the item is fine."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Nested loop whose inner start depends on the outer variable; the solver must notice that i=5 and 6 skip the inner loop and sum 4+3+2+1=10. The distractors 24, 4 and 6 correspond to common misreadings. The code is short, the arithmetic is trivial and the scope is correct, so it suits a full mock as a moderate item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m07-k0",
+  "cellId": "ap_computer_science_a-m07",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "if (i % 5 == 0) { count++; }",
+     "brief_reasoning": "i % 5 == 0 tests whether i is a multiple of 5, and count++ adds one each time that happens. Choice A sets count to i instead of counting. Choice C counts the numbers that are not multiples. Choice D uses integer division, which is 0 only when i < 5.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Valid, unambiguous loop-body completion with a unique key. Each distractor embodies a distinct misconception and fails a boundary test. Easy but suitable.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Completing a filtering accumulator in a for loop fits 2.9 and skill 2.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Only the % 5 == 0 with count++ option is correct; the others fail n=1, 5, or 16."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The code is complete and the spec states inclusive bounds. The data object is minimal but sufficient."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct named misconceptions, similar in length and format. The explanation covers each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, no calculator, a typical AP-style item. Difficulty is on the low side."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: pick the if-body that uses % 5 == 0 with count++ inside a given for loop. Distractors are common near-misses (count = i, negated condition, integer division instead of modulus) but are easy to eliminate with a quick check. No tracing beyond a mental spot-check, short code, no heavy reading or arithmetic, in scope for topic 2.9. This is a foundational counting-pattern item, below typical full-mock depth.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m07-k1",
+  "cellId": "ap_computer_science_a-m07",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "if (i % 5 == 0) { count++; }",
+     "brief_reasoning": "i%5==0 tests for a multiple of 5, and count++ adds one to the tally each time. Option A stores i instead of counting, C checks i/5==0 (true only when i<5), and D counts the numbers that are not multiples.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean 2.9 loop-completion question. The key (i % 5 == 0 with count++) is the only correct option. The distractors each embody a distinct misconception: assigning instead of counting, integer division instead of remainder, and inverted condition. The explanation covers every wrong option, and the load is appropriate at about 100 seconds.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Fits 2.9 and skill 2.A: the task is writing the body of a filtering accumulator."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option B is the only one that passes every test case. A gives 20 for n=20 instead of 4, C gives 4 for n=16 instead of 3, and D counts non-multiples."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The code is complete and compiles. The Javadoc and the stem agree on the specification."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option has a distinct named misconception, and the explanation addresses all three. The options are parallel in length and format."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short reading and no arithmetic burden. It is typical of the AP exam's code-completion items."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: complete a for-loop counting pattern with an if using the modulus operator. The distractors are standard near-misses (assignment instead of increment, integer division instead of modulus, negated condition). It needs about one reasoning step per option and no tracing or representation changes. It is a straightforward check of basic selection and iteration implementation.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m08-k0",
+  "cellId": "ap_computer_science_a-m08",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "result += s.substring(i, i + 1);",
+     "brief_reasoning": "Going backward through s and adding each one-character substring to the end of result reverses the string. A adds whole suffixes, C keeps only the last assignment (the first character), and D puts the original order back.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Completing a String reversal loop with substring fits topic 2.10 and skill 2.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option B is the unique correct answer. A, C and D each fail on simple inputs."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The code is complete and compiles, and the specification is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The three distractors each encode a distinct, realistic misconception, and each wrong option is explained. The key's rationale is somewhat generic."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, typical AP load, no calculator needed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound string-reversal completion item with a unique key and distinct distractors. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single core concept: building a reversed String by traversing backward and appending one character with substring(i, i+1). Distractors are near-miss (suffix append, overwrite, prepend that restores the original order) but each is eliminated with a quick 2-3 character trace. No nested logic, casting subtleties, or aliasing. Short stimulus, minimal reading and no arithmetic. Standard introductory string-algorithm pattern, so more suited to basic learning than full-mock exam prep.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m08-k1",
+  "cellId": "ap_computer_science_a-m08",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "A",
+     "brief_reasoning": "The loop runs from the last index down to 0. Adding each single character to the end of result builds the reversed string. D puts each character in front, which keeps the original order. B overwrites result each time. C adds whole suffixes instead of one character.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "2.10 String algorithm with substring and a backward loop; dominant demand is completing code to implement the algorithm (2.A). No out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "A is the unique correct completion. B overwrites, C appends suffixes, and D prepends while looping backward, which gives the original order."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The code is complete and compilable, with the method contract in a comment. The stem is clear, and the stimulus is needed."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct, realistic misconception and each wrong option is explained. The key rationale is somewhat generic but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short and parallel options, no arithmetic, and a typical AP completion item at about 60-90 seconds."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A sound String-reversal code-completion item with a unique key and distinct misconception-based distractors. It is in scope and suited to the exam."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Standard string-reversal idiom: iterate backward and append one character via substring(i, i+1). Requires knowing substring semantics and distinguishing append vs. overwrite vs. prepend vs. suffix substring. Distractors are plausible near-misses, but each is quickly eliminated with a 2-3 character mental trace. Short stimulus, no arithmetic, in scope for 2.10.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m09-k0",
+  "cellId": "ap_computer_science_a-m09",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "The loop compares s.charAt(i) with its mirror character s.charAt(len-1-i) for the first half of the string. It returns false at the first mismatch, so it returns true only when s is a palindrome.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "whether s reads the same forward and backward"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Palindrome check via charAt loop; squarely 2.10, describe behavior (4.A)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Key B unique; A, C, D each fail on simple inputs (aba, abca, aba)."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Complete code, clear stem, parallel options."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors encode distinct misconceptions. The key rationale is meta ('on every test input run...') and does not actually explain the mirror-comparison behavior; minor wording flaw."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 85 seconds, no calculator, typical of AP CSA."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound: a palindrome-check description with a unique key and distinct distractor misconceptions. The only flaw is the key's rationale, which is test-run meta-text instead of an explanation of the loop's behavior."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Classic palindrome check: a single loop compares s.charAt(i) with its mirror at s.length()-1-i for the first half. The student only needs to recognize the mirrored-index pattern and optionally confirm the integer-division bound handles odd lengths. Distractors (all same, first/last only, adjacent equal) are clearly distinguishable with a quick trace of one or two strings. The reading load is minimal, there is no heavy computation, and the difficulty does not come from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m09-k1",
+  "cellId": "ap_computer_science_a-m09",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "The loop compares character i with its mirror character, length-1-i, for every i in the first half of the string, and returns false at the first mismatch. So it returns true exactly when s is a palindrome. Empty and one-character strings also return true, which matches.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "whether s reads the same forward and backward"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "String palindrome check by charAt mirror comparison; the task is to describe the code's behavior (4.A) in topic 2.10."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key is the unique correct description. The odd-length middle character, the empty string and one-character strings are all handled correctly."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The code is complete and compilable, with no missing preconditions. The stem is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The three distractors map to distinct, realistic misconceptions. The key's rationale is meta-language about test runs rather than a reasoned explanation, which is a minor weakness. The distractor explanations are terse but adequate."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short code, about 85 seconds, no calculator needed, options are parallel in length and format."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound, with a unique key and distinct distractors. The only flaw is that the key rationale reads as generated verification text rather than a reasoned explanation. I recommend accepting it, with that explanation reworded."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Classic palindrome-check pattern in a short method with one loop and one condition. Students must recognize that comparing charAt(i) with charAt(length-1-i) up to length/2 tests symmetry. Distractors are clearly distinct from the correct answer. The only subtlety is that the middle character of an odd-length string is skipped, which is standard and does not affect the result. Little reading and no arithmetic.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m10-k0",
+  "cellId": "ap_computer_science_a-m10",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Parameters shadow fields; must use this. to assign each field from matching parameter.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "this.width = width; this.height = height;"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Constructor with shadowed parameters and this. assignment; squarely 3.4/2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Only option D initializes both fields correctly; others fail on order, self-assignment, or duplicate width."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Complete class with Javadoc spec and accessors; clear wording."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct named misconceptions; each wrong option explained. Parallel format, no length giveaway."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, no arithmetic, typical AP load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Clean, correct constructor-completion item with a unique key and realistic distractors; passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single core concept: constructor parameters shadowing instance variables, resolved with this. The student picks the correct body among near-miss options (swapped assignment, shadowed self-assignment, duplicated width). It needs minimal reasoning and no computation, and the code is short. This is a foundational skill rather than multi-step exam-level reasoning.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m10-k1",
+  "cellId": "ap_computer_science_a-m10",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "C",
+     "brief_reasoning": "The parameters have the same names as the fields, so you need this. to set the fields. Option D only assigns each parameter to itself. Options A and B put the wrong values in the fields.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Constructor initialization with parameter/field shadowing and this; fits 3.4 and 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Only option C sets both fields correctly; the others fail on width, height, or default values."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Complete compilable class; stem is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct realistic misconceptions, all explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, no arithmetic, typical AP style."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound, unique-key constructor item with good distractors; passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: recognize that parameters shadow instance variables and that this.x = x is needed to initialize fields. Distractors are near-miss options (both fields set to width, swapped assignment, self-assignment with no this). Minimal reading, no computation, one reasoning step, and no representation changes. This is a standard introductory constructor check, below full-mock exam depth.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m11-k0",
+  "cellId": "ap_computer_science_a-m11",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "if (isPassing(s)) { count++; }",
+     "brief_reasoning": "The loop checks each score s with isPassing and adds 1 to count when it passes. Choice A checks count instead of s, C counts the failing scores, and D sets count to the score instead of adding 1.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a sound, short helper-method completion question with a unique key and four distinct distractors. The distractor explanations cover each wrong option. It fits the allowed difficulty levers and has no out-of-scope content.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The item asks the student to call a helper method with the correct argument inside a loop. That is a procedural-abstraction task and fits topic 3.5 and skill 2.C. It contains no content from later units."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Only option B counts the scores that are 70 or more. Option A tests count rather than the score. Option C counts the failing scores. Option D assigns count = s instead of incrementing. The key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The code is complete and compiles, and the specification is stated in the method comments. The stem wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor reflects a distinct, realistic error: the wrong argument, inverted logic, or an assignment in place of an increment. The explanation addresses every wrong option. The options are parallel and similar in length, so there is no format giveaway."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item is short and can be done in about 60 seconds, with no arithmetic load. It is consistent with the no-calculator designation."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The student must call the helper with the loop variable s and increment count when it returns true. The distractors (wrong argument, negated condition, assignment instead of increment) are each easy to rule out. The item is a short, single-concept completion on using a helper method, with no tracing or tricky subtlety.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m11-k1",
+  "cellId": "ap_computer_science_a-m11",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "if (isPassing(s)) { count++; }",
+     "brief_reasoning": "Count each element s for which isPassing(s) returns true; the other choices count failing scores, check the counter instead of the score, or set count to the score.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Calling a helper method with the correct argument inside a loop fits topic 3.5 and skill 2.C. It is within Unit 3 scope and uses no inheritance or later-unit content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option A is the only one that counts scores with isPassing(s) true. B counts failing scores, C passes count instead of the score, and D assigns count = s. The stem defines passing as 65 or more, so the key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The code is complete and compilable, with Javadoc comments specifying both methods. The stem is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The three distractors each encode a distinct misconception, and the explanation addresses every wrong option. The options are short, parallel, and similar in length."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item is quick to answer, at about 60-100 seconds. It needs no calculator and has a single dominant skill. It is a fairly easy item but acceptable."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, unambiguous helper-method completion with a unique key and distinct distractors. It is suitable for the exam."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: call a boolean helper in an enhanced for loop and increment a counter. Distractors are obvious near-misses (negated condition, wrong argument, assignment instead of increment) that are eliminated with a one- or two-step read. No tracing, aliasing, casting, or boundary subtleties. Appropriate for initial learning of method use and procedural abstraction, below typical full-mock difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m12-k0",
+  "cellId": "ap_computer_science_a-m12",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Shifting left: a[i]=a[i+1] for i in 0..4 gives 7,2,8,9,1, and the last element stays 1.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "7 2 8 9 1 1"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Array traversal trace, 4.4 / 3.B, in scope."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Output 7 2 8 9 1 1; unique correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Complete code, clear stem."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors tied to named misconceptions; explanation covers each option. Option 2's rationale is somewhat vague but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short trace, typical AP load, no calculator."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound, concise array-shift trace item with a unique key and plausible distractors; acceptable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Short 6-element array with one loop that shifts elements left. It requires 5 simple trace steps and one boundary check (the bound a.length - 1 avoids an out-of-bounds access), then an enhanced-for print. The concept is standard for 4.4, there is no aliasing or casting, and the distractors are plausible misconceptions (wrong shift direction, exception, overwrite). This is a straightforward trace suitable for initial learning rather than full-mock exam difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m12-k1",
+  "cellId": "ap_computer_science_a-m12",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Each element gets the next one's value, for i from 0 to 3. The last element stays 3, so the array becomes 8 8 1 3 3.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "8 8 1 3 3"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Array traversal tracing (4.4), skill 3.B, in scope."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Output 8 8 1 3 3 is unique and correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Code complete, stem clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "All distractors are explained. The rationale for 8 8 8 1 3 is weakly worded but plausible as a shift-direction error."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short trace, typical AP load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and suitable. The shift-left trace gives 8 8 1 3 3, the key is unique, and the distractors are plausible, with one weakly worded rationale."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Short 4-iteration trace of an in-place left shift with a changed loop bound (length-1). Requires noticing that the array is mutated as it is read, and that the bound avoids an exception. Distractors target the exception misconception, the copy misconception, and the overwrite-all misconception. Low reading and computation load, in scope for 4.4, and fits skill 3.B.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m13-k0",
+  "cellId": "ap_computer_science_a-m13",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "[6, 7, 7, 6]",
+     "brief_reasoning": "Removing an element shifts the next one into index i, and then i++ skips it. So the second 6 and the 6 after the 2 are skipped. The result is [6,7,7,6].",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Classic ArrayList removal during traversal, 4.9 / 3.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Trace gives [6, 7, 7, 6]; unique correct option."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Complete code, clear stem."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Option [6, 6, 7, 2, 6, 10] is not what removing odd values would produce (that would be [6,6,2,6,10]), so its stated misconception does not match. The exception option explanation says the original size is used as the bound, but the code uses nums.size(), so it mismatches the code. The explanation does not clearly account for the 10 being removed."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short trace, typical time."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and the item is suitable, but two distractor rationales do not match their options or the code, so the distractor criterion fails."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Tracing removal during an ArrayList traversal: the index skips the element after each removal, so the adjacent 6 survives. Requires about 6 loop iterations while tracking a changing list and size. The distractors are plausible misconceptions (all evens removed, no change, exception). Typical AP-style trace with low reading and computation load.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m13-k1",
+  "cellId": "ap_computer_science_a-m13",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "[6, 3, 7, 6]",
+     "brief_reasoning": "Each removal shifts the next element into index i, and then i++ skips over it. So the 6 after 4 is skipped, and so is the last 6 after 8, since the loop ends when i=4 and size=4.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "ArrayList traversal with remove; trace output, in scope for 4.9 and 3.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Trace gives [6, 3, 7, 6]; unique correct answer; no exception since size() is re-evaluated."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Complete code, clear stem."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distinct misconceptions. The exception distractor's rationale says the original size is used as the bound, which is slightly inaccurate for this code, but it describes the student's misconception, so this is minor."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short trace, ~6 steps, typical AP load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean item on skipped elements when removing in a forward loop. Key verified by trace. A minor wording imprecision in the exception distractor rationale does not affect defensibility."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Classic remove-during-forward-traversal pitfall: after remove(i), elements shift left and the next element is skipped. Student must trace 5 iterations tracking index shifts and the shrinking size() bound. Distractors are plausible near-misses (all evens removed, exception, only first removed). Short trace, in scope for 4.9, no unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m14-k0",
+  "cellId": "ap_computer_science_a-m14",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Diagonal sum 8+8+3=19; upper-triangle sum 20+10+9=39; 19-39=-20",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "-20"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "2D traversal tracing with a diagonal/upper-triangle condition fits 4.12 and 3.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The diagonal sums to 19 and the upper triangle to 39, so the output is -20. The key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The code is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The key's explanation is generic and never shows the computation (19 - 39). The exception option is attributed to swapped indexes, but that is not a result of executing code that embodies the misconception. The 11 option's misconception description does not clearly map to how 11 is produced. The explanation does not walk through the wrong options' values."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is about 110 seconds, with no calculator needed and small arithmetic."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound and the key -20 is correct. It fails on distractor quality and explanation: the explanations are generic and the misconception labels do not map cleanly to the wrong options, especially the run-time exception option and the 11 option."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Trace nested loops over a non-square 2D array with an if/else-if on the row and column indices (diagonal added, upper triangle subtracted, lower ignored). The solver must track which cells meet each condition and accumulate a signed sum. This requires moderate reasoning, but the arithmetic is small and the code is concise. The exception distractor tests the 3x4 bounds. All of the difficulty comes from the concept, not from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m14-k1",
+  "cellId": "ap_computer_science_a-m14",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Diagonal sum 6+1+3=10; upper elements 3+3+8+3+5+1=23; 10-23=-13",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "-13"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "2D row-major traversal with a diagonal/upper condition; a trace-the-output item for 3.B in topic 4.12."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Diagonal 10 minus upper elements 23 gives -13; the key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Complete code with a clear stem; the grid is non-square, which is fine."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "10 and -3 are computed from real misconceptions. The exception option is plausible via swapped indexes on a 3x4 array. The explanation of the key is generic and doesn't show the trace, but each wrong option is addressed."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 12 elements to trace, typical load, no calculator needed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound 2D-array trace item. The key -13 is verified, and the distractors map to named misconceptions. The only weakness is a vague key rationale, which is not disqualifying."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Nested traversal of a non-square 2D array with a diagonal add and strict-upper-triangle subtract. Requires correctly applying r==c and c>r over 12 cells and tracking the sign. The 4th column beyond the diagonal is a plausible miss. Distractors reflect near-miss errors (diagonal only, partial sums). Short code, small arithmetic, no unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 100
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m15-k0",
+  "cellId": "ap_computer_science_a-m15",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch",
+   "resembles_known_exam_item"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Factorial: 5*4*3*2*1*1 = 120",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "120"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": true,
+   "summary": "The key (120) is correct and unique, and the topic and skill fit, but the options and explanation are defective. The option data is inconsistent: the \"16\" option has value 16.000000 and the \"120\" option has value 120.00000. The \"run-time exception\" option has a null value and carries the distractor note \"Skips every other factor\", which does not match its text. The \"16\" option (\"adds instead of multiplying\") is not what adding would give (5+4+3+2+1+1 = 16 does match, so it is plausible), and \"skips every other factor\" is listed as a misconception but is not attached to any option. The explanation for the correct answer is generic. The item is a trivial factorial trace that closely resembles a standard College Board-style recursion example.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Recursion tracing fits 4.16 and skill 3.C."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key 120 is correct and unique."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The stimulus code is complete. The option value fields are malformed (16.000000, 120.00000, null) and the options are mismatched with their rationales."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The exception option is explained with the misconception \"Skips every other factor\", which is wrong for that option. One named misconception (m3) is not encoded by any option, and the exception option has no realistic misconception behind it. The explanation does not correctly explain each wrong option."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The factorial trace is a very standard and easy item, and it is too close to well-known sample items."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Classic recursive factorial with an explicit base case and a single recursive call. Tracing mystery(5) takes about 5 levels and the arithmetic is small (5*4*3*2*1*1 = 120). The distractors are simple misconceptions (adding instead of multiplying, a base case that returns 0, infinite recursion or exception). It requires no representation changes and has no boundary or aliasing trap beyond the base case returning 1. This is an introductory recursion item, below typical full-mock depth.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m15-k1",
+  "cellId": "ap_computer_science_a-m15",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Factorial: 4*3*2*1*1 = 24",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "24"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Recursive factorial trace fits 4.16 / 3.C."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "mystery(4)=24, unique correct option."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Code complete and compilable. Option value fields have odd float formatting (24.000000) but displayed text is clean."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distinct misconceptions (base case 0, add, skip factors); each wrong option explained. Key explanation is generic but adequate."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, no calculator need, typical easy AP recursion item."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean factorial recursion trace item with distinct distractors. Minor cosmetic inconsistency in option value fields. Acceptable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Classic factorial recursion with a clear base case (n==0 returns 1). The trace is 4*3*2*1*1 = 24, about 5 calls with trivial arithmetic. It has no alias, off-by-one, or near-miss subtleties beyond simple distractors, so it suits introductory practice on recursion tracing rather than a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m16-k0",
+  "cellId": "ap_computer_science_a-m16",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Option B checks every i from 1 to length-1 and uses a strict >. Option A skips the last index. Option C starts at i = 0, so arr[-1] throws an exception. Option D uses >= and so counts equal neighbours too.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "B"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Array algorithm completion with loop bounds; fits 4.5 / 2.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "B is the unique correct body; A, C and D each fail a test case."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Code and Javadoc are complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct named misconceptions with equal-format options. The key rationale has slightly loose wording ('initializes from the first element', 'all-negative') but is not wrong."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 90 seconds, short code, no calculator needed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound: the key is unique, the three distractors are distinct misconceptions, and the load is typical for an AP CS A multiple-choice item. The only blemish is slightly imprecise wording in the key's rationale."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept array traversal with a counting accumulator. Distractors are standard boundary and operator errors: the loop ends one early, starts at 0 so arr[i-1] is out of bounds, or uses >= instead of >. The solver checks start, end and comparison with no tracing or representation changes. This fits foundational learning for topic 4.5 more than full-mock exam prep.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m16-k1",
+  "cellId": "ap_computer_science_a-m16",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "A",
+     "brief_reasoning": "A loops i=1..length-1 with strict >. B goes out of bounds at i=0, C skips the last index, and D also counts equal neighbors.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Array traversal algorithm completion, topic 4.5, skill 2.A; in scope."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option A is the unique correct body; B throws on arr[-1], C misses last pair, D counts ties."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Code stimulus with clear Javadoc spec; complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct realistic misconceptions, similar lengths, each explained. Key rationale wording slightly loose but fine."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Typical AP code-completion MC; light reading and no arithmetic."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound array-scan completion item with a unique key and three distinct misconception distractors. Passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept array traversal comparing adjacent elements. Distractors are standard boundary and operator errors (start at 0 causing arr[-1], stopping at length-1, >= instead of >). Checking each near-miss takes a few quick steps, with no arithmetic and a short stimulus.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m17-k0",
+  "cellId": "ap_computer_science_a-m17",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Go through every row r from 0 to grid.length-1 and add grid[r][col]. A uses the wrong index order, C adds up a row instead of a column, and D leaves out the last row.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "B"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Standard 2D-array column-traversal completion item. The key B is unique and correct. Distractors cover swapped indexes, summing a row instead of a column, and an off-by-one that skips the last row. The stimulus is complete and the load is appropriate.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 4.13 and skill 2.A; the dominant demand is writing a 2D array column traversal."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "B is the only option that sums column col over all rows. A and C index rows with col or sum a row. D skips the last row."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The code, method header, precondition and placeholder are all present. Wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor has a distinct named misconception and the explanation covers all of them."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 100 seconds, has no arithmetic burden and needs no calculator."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-loop column traversal of a 2D array. The student must distinguish grid[r][col] from the swapped-index form and spot an off-by-one bound in a near-miss distractor. It takes one concept, a short code stimulus, and no arithmetic. This is a routine 4.13 skill with minimal reasoning depth.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m17-k1",
+  "cellId": "ap_computer_science_a-m17",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "A",
+     "brief_reasoning": "To sum a column you go down every row r from 0 to grid.length-1 and add grid[r][col]. B and C swap the indices, so they sum a row (or go out of bounds). D stops one row early and misses the last row.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Standard 2D array column-sum completion. Key A is unique: it iterates over all rows with a fixed column index. B sums a row. C swaps the indexes, which can go out of bounds on non-square arrays. D skips the last row. The code is short and the precondition is stated (rectangular, at least one row). The distractors map to distinct misconceptions, and the load is about 60-100 seconds.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Matches 4.13 and skill 2.A: the item asks the student to implement a 2D array algorithm (a column traversal)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Only option A is correct. B sums a row, C swaps the indexes, and D omits the last row."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The code stimulus is complete and the precondition is stated. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option is explained and tied to a distinct misconception. The explanations are brief but sufficient."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short code, no calculator needed, typical AP load."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: summing one column of a 2D array with one loop over rows. Distractors are standard near-misses (row/column indices swapped, wrong loop bound, off-by-one with length-1). The code is short and there is no computation. It checks recognition of grid[r][col] against grid.length, which makes it a foundational 4.13 item rather than a full-mock exam_prep item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m18-k0",
+  "cellId": "ap_computer_science_a-m18",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "B",
+     "brief_reasoning": "Traversing backward, removing at i shifts only already-checked elements, so no skips. A replaces instead of removing, C also removes zeros, D's extra decrement skips an element.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 60-100 seconds, has a short code stimulus, and needs no calculator. It matches the style of AP CS A completion items.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is clean and passes all five criteria. The key is unique, the distractors map to distinct misconceptions, and the load is appropriate for the exam."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard ArrayList removal-during-traversal pattern. The student must recognize that backward iteration makes remove(i) safe and reject near-miss completions: set instead of remove, <= boundary that also removes zeros, and an extra i-- that would wrongly skip an element in a backward loop. Requires moderate concept depth with minimal reading and no computation, and the difficulty comes from legitimate conceptual levers.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m18-k1",
+  "cellId": "ap_computer_science_a-m18",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "A",
+     "brief_reasoning": "Walking backward means remove(i) only shifts elements that were already checked, so none are skipped. B also removes zeros, C replaces negatives instead of removing them, and D's extra i-- skips an element.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item can be done in about 90 seconds, needs no arithmetic, and is a typical AP format.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean 4.10 code-completion item with a unique key and distinct distractors. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Single concept (removing from an ArrayList during traversal) with a backward loop that makes plain remove correct. Students must evaluate near-miss completions: the <= boundary, set instead of remove, and an extra i-- that wrongly skips an element. Short code, no arithmetic, and a well-known pattern, so it suits a full mock as a standard-difficulty item. It is not advanced because there is little tracing and no alias or multi-structure complexity.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m19-k0",
+  "cellId": "ap_computer_science_a-m19",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Loop goes from i=1 and counts each a[i] > a[0], so it returns how many elements after the first are greater than the first.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "B"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Describes behavior of a counting array algorithm; fits 4.5/4.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "B is the unique correct description; A, C, D are each false in general."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Code complete and clear; no preconditions issue (a.length>=1 implied)."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The key rationale is a templated sentence ('On every test input the value returned by running the method equals this description') rather than a real explanation of the loop. Distractor A's misconception is weak and implausible. The key is the longest option, a mild length giveaway."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60-85 seconds, no calculator load; typical of an AP CSA describe-code item."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and in scope, but the explanation is templated and does not explain the code. The key is also the longest option, and distractor A is weak. Failing on distractor and explanation quality, not on correctness."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single short loop with a count-style pattern comparing each element to a[0]. Student must note the loop starts at index 1 and the comparison is > a[0], then choose among near-miss descriptions. No arithmetic or multi-representation work, so it fits a basic skill check rather than full-mock difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m19-k1",
+  "cellId": "ap_computer_science_a-m19",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Loop from index 1 counts a[i] > a[0].",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "A"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "Short code, about 85 seconds, parallel options, no calculator needed.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Clean describe-the-behavior item. The key is unique, the distractors are plausible and distinct, and the load is appropriate. Passes."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single counting loop comparing each element to a[0], starting at index 1. Requires recognizing a standard count-with-condition pattern and noting the loop starts at 1. Distractors (last element, max, less than) are easily eliminated by reading the condition. No arithmetic, aliasing, or tricky boundaries.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m20-k0",
+  "cellId": "ap_computer_science_a-m20",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "instant_reject_out_of_scope_knowledge",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "Tools.next(new int[]{4,5,6}, 2)",
+     "brief_reasoning": "i=2 accesses a[3], which is out of bounds for length 3 and throws ArrayIndexOutOfBoundsException. The other calls access a[0], a[1] or a[2].",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": "Requires array creation and array indexing (int[] a, a[i+1], ArrayIndexOutOfBounds), which belong to Unit 4, not Unit 1. The dominant demand is array bounds, not method signatures (1.9)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Only the call with i=2 accesses a[3] and throws; key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Code is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors are distinct boundary cases; explanations are terse but cover each option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, no calculator load."
+   },
+   "instant_reject": [
+    "out_of_scope_knowledge"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and unique, but the item depends on array indexing and ArrayIndexOutOfBoundsException (Unit 4 content), which is out of scope for Unit 1 topic 1.9. It also does not really assess method signatures. Rejected for out-of-scope knowledge."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single short static method; student checks index i+1 against array length 3 for four calls. The only subtlety is that i=-1 is safe (index 0) while i=2 yields index 3 and throws ArrayIndexOutOfBoundsException. Minimal reading, trivial arithmetic, one concept (preconditions on parameters), a small boundary trap but few reasoning steps.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 50
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m20-k1",
+  "cellId": "ap_computer_science_a-m20",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "instant_reject_out_of_scope_knowledge"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "Tools.next(new int[]{4,5,6}, 2)",
+     "brief_reasoning": "i=2 makes the code run a[3], which is out of bounds for a length-3 array. The other calls run a[1], a[0] and a[2], which are all valid.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [
+    "out_of_scope_knowledge"
+   ],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and clear, but it relies on array content that is outside Unit 1 scope, so it fails scope and skill fit.",
+   "scope_skill": {
+    "pass": false,
+    "notes": "The item requires array indexing and ArrayIndexOutOfBoundsException, which are Unit 4 content and outside the Unit 1 scope. The dominant demand is array bounds, not method signatures."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Unique key: only index 3 on a length-3 array throws."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The code is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option is explained, though the misconceptions are shallow."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Time and load are appropriate."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single short method; student evaluates i+1 against array bounds for four calls. Off-by-one boundary and the negative-argument distractor (i=-1 yields valid index 0) add mild subtlety, but the concept is simple preconditions/array bounds with minimal steps and no heavy reading or computation.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m21-k0-q1",
+  "cellId": "ap_computer_science_a-m21",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:The code segment the stem refers to is missing, so the answer can't be determined. Aliasing versus separate objects could make several options defensible.",
+   "criterion_failed_scope_skill",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "instant_reject_missing_condition",
+   "instant_reject_wrong_stimulus",
+   "reference_pattern_mismatch",
+   "difficulty_from_unfair_sources"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "The stem asks what a code segment prints, but only the Playlist class is given. Without the segment, the output can't be worked out.",
+     "ambiguous_or_flawed": true,
+     "flaw_note": "The code segment the stem refers to is missing, so the answer can't be determined. Aliasing versus separate objects could make several options defensible.",
+     "choice_index": null
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": ""
+   },
+   "notes": "The item is unsolvable as presented, so it is not usable on an exam.",
+   "key_scoring": {
+    "pass": false,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": ""
+   },
+   "instant_reject": [
+    "missing_condition",
+    "wrong_stimulus"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The stem asks for the output of \"the code segment\", but the stimulus gives only the Playlist class and no driver code. The key \"4 4\" therefore cannot be determined, and the item is rejected for the missing condition and incomplete stimulus."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The Playlist class is trivial (simple getters, add, and increment methods), so the intended task is probably a short trace of a few method calls with no deep concept. However, the stem refers to a code segment that is not provided, so the item cannot be solved as written (missing precondition). Difficulty is provisional and the item needs repair before use.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": true,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m21-k0-q2",
+  "cellId": "ap_computer_science_a-m21",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "D",
+     "brief_reasoning": "Choice D is the only one that checks for an empty list before dividing, so it returns 0 when there are no songs and otherwise returns plays / size() using integer division. A divides the wrong way round, B multiplies instead of dividing, and C throws an ArithmeticException when size() is 0.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Writing a method using other class methods with a guarded division fits 3.5 and 2.C."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Only D handles the empty playlist and otherwise gives plays/size(). A, B and C each fail a test case."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The class code is complete enough; the ArrayList import is omitted, as is conventional on the exam. The stem is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The three distractors reflect distinct misconceptions (wrong order, wrong operator, missing guard) and each is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 90 seconds, short parallel options, no calculator needed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is clean: it tests the topic directly, has a unique key, and its distractors map to distinct misconceptions. No instant-reject condition applies."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item asks which method body correctly returns plays divided by song count, guarding against an empty playlist. The student must notice the operand order (plays / size()) and the zero-size guard, which would otherwise cause an ArithmeticException. The distractors are clear: reversed division, multiplication, and a missing guard. The ternary is a common Java form. There is no tracing, the code is short, and the integer division is intended. This is a single-concept check of writing a method with a return value and a boundary guard, so it suits basic learning.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m21-k1-q1",
+  "cellId": "ap_computer_science_a-m21",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:The code segment the stem refers to is missing from the item.",
+   "criterion_failed_scope_skill",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "instant_reject_missing_condition",
+   "instant_reject_wrong_stimulus",
+   "instant_reject_wrong_key",
+   "reference_pattern_mismatch",
+   "difficulty_from_unfair_sources"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "The stem asks what a code segment prints, but no code segment is given, only the Playlist class. The output can't be determined.",
+     "ambiguous_or_flawed": true,
+     "choice_index": null,
+     "final_answer": "Cannot be determined",
+     "flaw_note": "The code segment the stem refers to is missing from the item."
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [
+    "missing_condition",
+    "wrong_stimulus",
+    "wrong_key"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The stem asks for the output of \"the code segment\", but only the Playlist class is shown. The client code with the add, play and print calls is missing, so the item is unanswerable and the key is unsupported. The independent solver confirmed this. Reject.",
+   "scope_skill": {
+    "pass": false,
+    "notes": "The target skill is to determine the output of code. Without the client code, there is nothing to trace, so the skill cannot be assessed."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "The key \"3 2\" cannot be derived from the stem or stimulus. The number of add and play calls is never given, so any option is equally defensible."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The stimulus shows only the class definition. The code segment the stem refers to (object construction, add and play calls, print statement) is missing, so the data is incomplete."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The explanations refer to a sequence of calls (3 adds, 2 plays) that the student never sees. Distractors such as \"play adds a song\" cannot be evaluated against absent code."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "An item whose question refers to nonexistent code is not usable on an exam."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The Playlist class is simple, with one-line accessor and mutator methods and no aliasing, shadowing, or boundary subtleties. The likely task is to trace a few add and play calls and read size() and getPlays(), which needs one or two reasoning steps and little computation. The item is also malformed: the stem refers to a code segment that is not provided, so the answer cannot be determined as written and needs a fix before use. That defect is a flaw in the item, not a source of conceptual difficulty. The class also uses ArrayList without an import, which is minor.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": true,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m21-k1-q2",
+  "cellId": "ap_computer_science_a-m21",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Option C returns 0 when the playlist is empty, so it avoids dividing by zero. Otherwise it uses integer division to give the whole-number average plays per song. Option A throws an ArithmeticException when there are no songs, B divides the wrong way, and D multiplies.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "C"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Writing a method that calls another method in the same class and guards a division fits 3.5 and skill 2.C. It uses only unit 1-3 content (integer division, conditional expression, accessors)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option C is the only one that returns 0 for an empty playlist and the integer average otherwise. A throws an ArithmeticException on an empty playlist, B divides in the wrong order, and D multiplies. The key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The class is complete enough for the task. The ArrayList import is not shown, which is typical for AP stimuli. The ternary operator is fine, though not a common AP style. The stimulus data is just java_code and language, which is adequate for a text snippet."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct error: a missing guard, reversed operands, or the wrong operator. The explanation covers every wrong option. The distractors are somewhat obvious, but they are acceptable. A and B both fail the empty case in different ways, and B also gives wrong values."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Reading load is light and the time is about 60-100 seconds. No calculator is needed. All options are short and parallel in format."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, unique-key method-writing question on a boundary guard, with distinct distractors and a typical AP load. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item on writing a method body: pick the option that guards the empty case and divides plays by size. Distractors are obvious near-misses (no zero guard, inverted ratio, multiplication). Needs a quick check of integer division and the divide-by-zero edge case, with no tracing, aliasing, or heavy reading. Ternary syntax is the only slightly extra element.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ }
+]

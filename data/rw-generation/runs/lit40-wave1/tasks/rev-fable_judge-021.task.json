@@ -1,0 +1,278 @@
+{
+ "schema": "rw-session-task/v1",
+ "kind": "review",
+ "role": "fable_judge",
+ "runId": "lit40-wave1",
+ "taskId": "rev-fable_judge-021",
+ "chunkId": "rev-fable_judge-021",
+ "suggestedModel": "fable",
+ "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-fable_judge-021.result.json",
+ "outputSchema": {
+  "chunkId": "청크 ID",
+  "model": "fable",
+  "items": [
+   {
+    "candidateId": "id",
+    "picked_letter": "A|B|C|D",
+    "other_defensible": "정답 외 방어 가능한 선택지가 있으면 true",
+    "est_difficulty": "easy|medium|hard (실제 체감, 요청 난이도에 맞추지 말 것)",
+    "hard_fit": "실제 SAT hard 수준의 사고 단계가 필요하면 true(지문 길이·난어만이면 false)",
+    "plausible_distractors": "오답 3개가 모두 그럴듯하고 서로 다른 오개념에서 나왔으면 true",
+    "length_balanced": "네 선택지 길이·구체성이 비슷해 정답이 형식으로 드러나지 않으면 true",
+    "multi_answer_risk": "복수 정답 위험이 있으면 true",
+    "issues": "한 줄 메모"
+   }
+  ]
+ },
+ "items": [
+  {
+   "candidateId": "lit40-medium-02-005",
+   "attempt": 1,
+   "skill": "inferences",
+   "questionType": "relationship_between_characters",
+   "requestedDifficulty": "medium",
+   "passage": "I unfolded the scarf on the barge's narrow deck while the Red River slid brown and slow beneath us in Hanoi. It was mustard yellow, a color I have avoided since childhood. Faris, who tutors my younger brother three afternoons a week, had wrapped it in newspaper folded with a draftsman's care. He did not look at the scarf; he looked at my hands. My brother, I suspected, had chosen the color, since he believes a joke is the highest form of affection. I tied the scarf at my throat and remarked that it matched the lanterns on the far bank. Faris exhaled and began reporting, too quickly, the boy's progress with fractions, and I asked a question about every one. Along the bank, a woman was hanging fish to dry on a line of bamboo poles.",
+   "question": "Based on the text, which choice best describes the relationship between the narrator, Kainoa, and Faris?",
+   "options": [
+    "Kainoa is quietly irritated by Faris but hides it to protect her brother.",
+    "Kainoa is eager to impress Faris, who closely judges how she receives his gift.",
+    "Faris and Kainoa are old friends who share a private joke about her brother.",
+    "Faris is anxious for Kainoa's approval, and she takes care to ease his worry."
+   ],
+   "recipeBeyondMedium": "두 문장의 단서를 연결해야 하고 오답은 한쪽 감정만 반영한다"
+  },
+  {
+   "candidateId": "lit40-medium-02-022",
+   "attempt": 1,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "medium",
+   "passage": "Who decides what a nine-year-old is ready to hear? I put that question to Father Thiago on the Clyde bridge in the winter of 1987, though I had not set foot in his church for three years. My younger brother had asked why our mother no longer came home, and I had told him she was resting, which was what our aunts said. Thiago watched the river for a long while. A truth told gently, he said finally, is a lantern, not a stone. I had expected scripture, or a scolding for my absence, and got neither. That night I sat on my brother's bed and told him plainly where she had gone and why. He cried, and then he asked a dozen questions, each more practical than the last. In the morning he walked ahead of me to school, choosing the turns himself.",
+   "question": "As used in the text, the phrase “a lantern, not a stone” most nearly suggests that a hard truth told gently",
+   "options": [
+    "will weigh less on the boy than the comforting story the aunts had offered.",
+    "is something the adult should carry so that the boy need not bear it.",
+    "can help the boy find his way forward rather than merely burden him.",
+    "may frighten the boy at first but will fade from his memory with time."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-02-023",
+   "attempt": 1,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "medium",
+   "passage": "Wind hissed through the pines above the mountain bus stop near Porto Alegre, and my mother, Mingyu, smelled of the orange peel she chews when she is deciding something. Our family rule had come down from her grandmother, who married in a valley town with two roads to the chapel: a bride must not see the wedding road before the wedding day. I was the bride, Booker was the groom, and up here there was exactly one road, which every bus took. My mother read the timetable twice, then folded it into a small square. Rules are coats, she said, and her own mother's had been let out twice before it ever reached her. She tucked the timetable into my pocket, and when the bus came, she climbed on beside me without looking away from the road.",
+   "question": "As used in the text, the phrase “Rules are coats” most nearly suggests that the family rule",
+   "options": [
+    "protects the family, as a coat guards against the harsh mountain weather.",
+    "can be put on or taken off whenever a bride finds it inconvenient.",
+    "is handed down with love and must be kept in its original form.",
+    "was cut for earlier circumstances and may need altering to fit now."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-02-033",
+   "attempt": 1,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "medium",
+   "passage": "Solder smoke and old dust hang over the bench of a Gdansk radio repair shop. MARTA, seventy, bends over an opened receiver; KSENIA, nineteen, turns the dial of another by the window.\nKSENIA: Warsaw. Berlin. Something from Lisbon. Every one of them is a place I have never been.\nMARTA: And every one of them is broken until we fix it. Pliers, traveler.\nKSENIA: I have a berth on a ship in May.\n(MARTA does not take the pliers. The static rises and falls.)\nMARTA: My husband had a berth in May once. He was going to send for me. For forty years I kept the sign over this door exactly the same, so he would know the shop.\nKSENIA: Marta, I—\nMARTA: (holding out her hand at last) Pliers. And write down the name of the ship before you forget it.",
+   "question": "Which choice best describes the shift in tone in the text?",
+   "options": [
+    "From cheerful to bitter, as Marta comes to resent Ksenia's plan to leave",
+    "From restless to resigned, as Ksenia gives up her plan to travel abroad",
+    "From teasing to wistful, as Marta's memory softens her reply to the news",
+    "From somber to playful, as Marta jokes about the stations Ksenia names"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-02-036",
+   "attempt": 1,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "medium",
+   "passage": "Three things, brother Bartolo, I must set down before the festival: the shop owes four months' rent, the dock planks are soft under our rehearsal spot, and you still rush the second verse. I write this by the lake at Oaxaca, where we practiced again tonight while the fishermen pretended not to listen. I had meant to give you a full reckoning, column by column, as our father would have done. Yet as I write I keep hearing how the water carried your guitar across to the far shore, and how an old fisherman stood up in his boat and took off his hat. Perhaps the shop will close. Perhaps it must. On Sunday, I think, we will play as if someone on the far shore is waiting for us. Mend the third string before then. Your brother, Emiliano",
+   "question": "Which choice best describes the shift in tone in the text?",
+   "options": [
+    "From fond teasing to sober worry about the shop's mounting debts",
+    "From sober tallying to cautious hopefulness about the performance",
+    "From frustration to firm confidence that the shop can still be saved",
+    "From regret to calm acceptance that the festival will be a failure"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-02-046",
+   "attempt": 1,
+   "skill": "text_structure_purpose",
+   "questionType": "underlined_portion_function",
+   "requestedDifficulty": "medium",
+   "passage": "Lyon was two hours below us, and the road down had vanished under snow by noon. For three days Mathis and I argued about the woodstove: whether to bank it at night, how many logs, whose turn it was to crack the damper. It is only a stove, Camille, he said the first night, which made it worse. I was fifteen and had decided that everything he did in that cabin was wrong. On the third night he let the fire die, on purpose, I was sure, and I said so loudly. __He did not answer; he only took my mother's old wool coat from the hook and laid it over my shoulders.__ I knew the coat at once, and the smell of her soap still in its collar. Neither of us had said her name since October. In the morning we shoveled the path together, trading the one good shovel back and forth.",
+   "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+   "options": [
+    "It reveals that Mathis let the fire die on purpose in order to teach Camille a lesson.",
+    "It marks the point at which Camille admits that Mathis was right about the stove.",
+    "It shows that Mathis is too worn out from the snowstorm to keep arguing.",
+    "It introduces an object that turns the narrator toward the grief beneath the quarrel."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-02-055",
+   "attempt": 1,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "medium",
+   "passage": "We have been three days on the barge down to Dhaka, and my grandson has taken to reading the cargo list aloud to the boatmen. This morning he found my old trunk among the jute bales and read out the name painted on its lid: Clara. He asked who she was. I told him she was a girl who once conjugated English verbs at a mission school and believed she would never live anywhere but beside a cold sea. He said it was a pretty name and asked why no one says it. I could not answer him at once. Since then he has said it twice more, testing it, and each time I have found some small reason to linger near him on the deck. Chana I have been for fifty years, and Chana I shall stay. Before supper I asked him to leave the lid as it is, and he promised not to paint over a single letter.",
+   "question": "Which choice best describes the diarist's attitude toward the name Clara?",
+   "options": [
+    "Tenderly attached to it, yet content to leave it in the past",
+    "Wistfully regretful, wishing she had kept the name of her girlhood",
+    "Uneasy, worried that the name will raise questions she cannot answer",
+    "Detached, regarding the name as belonging to someone else entirely"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-02-070",
+   "attempt": 1,
+   "skill": "inferences",
+   "questionType": "character_motivation",
+   "requestedDifficulty": "medium",
+   "passage": "Why do I always reach for the pen once more? I write this at the baker's counter in Marrakesh before dawn, while the loaves are still pale in the oven. Omar has arrived at five every morning this month and waited without complaint while I, Yasmin, struck out lines I had already struck out twice. Last week he read me his French version of my second chapter. In it I heard a sentence I had abandoned years ago, which he had quietly restored from the margins of my draft. Today, when he held out his hand, I gave him the last pages without rereading them. He seemed so startled that he nearly dropped them into the flour. The baker's boy is now dragging the first trays toward the door.",
+   "question": "Based on the text, why does Yasmin most likely give Omar the last pages without rereading them?",
+   "options": [
+    "She is too worn out from rising before dawn to look over the pages again.",
+    "She means to startle Omar out of his habit of waiting silently each morning.",
+    "She has come to trust that Omar's version keeps what she meant to say.",
+    "She must hurry so that the baker can open the shop on his usual schedule."
+   ],
+   "recipeBeyondMedium": "단서를 두 문장 이상 연결해야 하며 오답 중 하나는 결과를 동기로 착각하는 전형적 오독이다"
+  },
+  {
+   "candidateId": "lit40-medium-02-072",
+   "attempt": 1,
+   "skill": "inferences",
+   "questionType": "tone_or_mood",
+   "requestedDifficulty": "medium",
+   "passage": "Who returns a thing after eleven years? Isadora wondered this as the young woman crossed toward the Lisbon depot bench where she waited each evening for the 28. Rafaela had once been the silent child in the back row of her fourth-grade class; now she was grown, and in her hands was the red umbrella Isadora had lent her one stormy afternoon in 1979. Isadora remembered the day that child had first raised her hand, and she sat a little straighter. Had something happened, she wondered, that the girl should come now, without a word of warning? Rafaela held out the umbrella, unopened, and smiled, and Isadora found herself smiling back before she had decided to. Somewhere behind them, a mechanic was hosing down the bay floor.",
+   "question": "Which choice best describes the overall tone of the text?",
+   "options": [
+    "Warm, though briefly tinged with uncertainty",
+    "Uneasy, focused on what prompted the visit",
+    "Anxious, eased only for a moment by a smile",
+    "Wistful, dwelling on lost years of teaching"
+   ],
+   "recipeBeyondMedium": "두 정서의 비중을 판단해야 하며, 오답은 정반대가 아니라 비중이 틀린 어조다"
+  },
+  {
+   "candidateId": "lit40-medium-02-077",
+   "attempt": 1,
+   "skill": "inferences",
+   "questionType": "tone_or_mood",
+   "requestedDifficulty": "medium",
+   "passage": "Bergen in July smelled of tar and wet lilac, and the long dining hall of the summer school where I worked as a boy smelled of both. I was the gardener's son, trimming hedges for Thorvald, who had bought the estate that spring. One evening he called me in while the students ate and announced, before all of them, that he would pay my fees at the cathedral school in autumn. My face burned; I was holding a rake, and my boots had left a trail across his clean floor. Yet when he shook my hand, his grip was so earnest that I forgot the boots, and I thanked him twice, the second time louder. Jens, my father, was waiting by the kitchen door. Through the windows, gulls wheeled above the fish market.",
+   "question": "Which choice best describes the overall tone of the text?",
+   "options": [
+    "Embarrassed, dwelling mainly on the narrator's muddy clothes",
+    "Grateful, though at first clouded by self-conscious shame",
+    "Ashamed, with thanks offered largely out of politeness",
+    "Wary, suspicious of the new owner's public generosity"
+   ],
+   "recipeBeyondMedium": "두 정서의 비중을 판단해야 하며, 오답은 정반대가 아니라 비중이 틀린 어조다"
+  },
+  {
+   "candidateId": "lit40-medium-02-078",
+   "attempt": 1,
+   "skill": "inferences",
+   "questionType": "tone_or_mood",
+   "requestedDifficulty": "medium",
+   "passage": "By Thursday the water in the cellar had sunk to my ankles, Grandpa Lachlan, so I finally went down with a lantern. Your Gaelic cards were drifting in the corner, and some of the ink had bled into small blue clouds. I sat on the bottom stair longer than I want to admit. Still, our dictionary is only half finished, and you always said a word half learned is a word waiting. I have pinned the cards along the patio line in alphabetical order, the way you would want. Forty can be read; nineteen cannot. I am rebuilding those from memory, and where memory fails I leave a blank square for you to fill when you come home. Señora Ruiz says the damp will lift by Sunday. She has promised to bring her fan down after supper.",
+   "question": "Which choice best describes the overall tone of the text?",
+   "options": [
+    "Quietly mournful, dwelling mainly on what the flood has ruined",
+    "Weary and resigned, lightened only now and then by resolve",
+    "Steadily resolved, though touched by lingering traces of loss",
+    "Wistful, longing chiefly for the grandfather's distant homeland"
+   ],
+   "recipeBeyondMedium": "두 정서의 비중을 판단해야 하며, 오답은 정반대가 아니라 비중이 틀린 어조다"
+  },
+  {
+   "candidateId": "lit40-medium-02-079",
+   "attempt": 1,
+   "skill": "inferences",
+   "questionType": "relationship_between_characters",
+   "requestedDifficulty": "medium",
+   "passage": "I had not spoken to Greta in four years, not since her poppy-seed rolls drew my best customer across the square. When the stationmaster announced that the new Hamburg café would give us a single pastry table, I, Annika, signed the agreement without looking at her. On the first morning she took the left side and I took the right, and she remarked to no one that almond cakes always dry out by noon. By noon, though, her tray had shifted an inch, and my cakes sat in the window light. I said nothing. That evening I left a jar of my almond paste on her side of the shelf, unlabeled. Two days later her rolls carried a thin almond glaze, and she still called my cakes dry. Above the platforms, the departure board clattered through its letters.",
+   "question": "Which choice best describes the relationship between Annika and Greta as presented in the text?",
+   "options": [
+    "Annika has softened toward Greta, who remains as hostile as she was four years ago.",
+    "Greta has come to depend on Annika's approval, which Annika withholds out of pride.",
+    "They are partners who stage a rivalry at the table to draw customers to the café.",
+    "Their old rivalry persists, but each is quietly making room for the other's work."
+   ],
+   "recipeBeyondMedium": "두 문장의 단서를 연결해야 하고 오답은 한쪽 감정만 반영한다"
+  },
+  {
+   "candidateId": "lit40-medium-02-080",
+   "attempt": 1,
+   "skill": "inferences",
+   "questionType": "relationship_between_characters",
+   "requestedDifficulty": "medium",
+   "passage": "Years later, I still remember the frost on the guesthouse windows the morning Aunt Itzel and I had to settle which of us would stay. We owed the brothers a winter of lodging on the plateau, and the abbot had agreed that one of us could work it off through spring. I, Nova, announced that I would stay; I was nineteen, and she had a job waiting in Flagstaff. Itzel did not argue. She asked the abbot about the roof repairs, then about the bread ovens, and wrote both lists in her own hand. When I came back from loading the truck, my duffel was already behind the seat. She mentioned only that my mother had once been nineteen too, and that someone had stayed for her. Snow drifted against the mesa's red flank as I passed the cattle guard.",
+   "question": "Which choice best describes the relationship between Itzel and Nova as presented in the text?",
+   "options": [
+    "Itzel quietly overrules Nova's offer to spare her, as someone once spared her mother.",
+    "Nova yields to Itzel mostly because she fears disappointing her aunt in front of others.",
+    "Itzel relies on Nova's youth and strength but lets her think the choice was her own.",
+    "They are distant relatives held together mainly by the debt they owe to the brothers."
+   ],
+   "recipeBeyondMedium": "두 문장의 단서를 연결해야 하고 오답은 한쪽 감정만 반영한다"
+  },
+  {
+   "candidateId": "lit40-medium-02-081",
+   "attempt": 1,
+   "skill": "inferences",
+   "questionType": "relationship_between_characters",
+   "requestedDifficulty": "medium",
+   "passage": "When the looms of the Tbilisi weaving cooperative fall silent each evening, I set two chairs by the window, and Anushka begins on the tangled yarn the weavers leave behind. We used to play here on Fridays; now nobody asks.\nIRENA: You could leave the yarn tonight.\nANUSHKA: (sharply, without looking up) Then what would we do on time?\nIRENA: (after a pause) Practice, maybe.\nANUSHKA: Practice for whom?\n(IRENA reaches for her violin case. ANUSHKA slides the spool across first, so that IRENA holds one end while she winds.)\nANUSHKA: (still not looking up) Your left wrist again. Rest it on the sill.\n(IRENA does. They wind in silence. Neither mentions the hall that cancelled their booking.)\nIRENA: Same tempo tomorrow?\nANUSHKA: Slower.\n(Outside, a tram rattles past, and the courtyard lamps come on one by one.)",
+   "question": "Based on the text, how would the relationship between Irena and Anushka most likely be described?",
+   "options": [
+    "Anushka quietly blames Irena for the duo's decline and keeps her at a careful distance.",
+    "Though their music is fading, each still looks after the other through a shared habit.",
+    "Irena relies on Anushka's patience, though Anushka has grown weary of their evenings.",
+    "They are rivals for the weavers' notice, each hoping to perform alone on Fridays again."
+   ],
+   "recipeBeyondMedium": "두 문장의 단서를 연결해야 하고 오답은 한쪽 감정만 반영한다"
+  },
+  {
+   "candidateId": "lit40-medium-02-092",
+   "attempt": 1,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "medium",
+   "passage": "Rain dripped from the tin roof of the bus shelter in the hills above Auckland as I buttoned my mother's coat to her chin. I am Tui, and for two years I have been the one who remembers her pills, her appointments, the names of her old friends. This morning she wanted the bus to her church, where the women still save her a seat; I had promised my new manager I would be at the clinic by nine, and my phone buzzed twice in my pocket. My mother did not ask me to stay. She only rested her hand on my arm, a small anchor, and kept her eyes on the road. When the clinic bus came around the bend, I read its number, and I let it pass. Mist slid down the slope and settled over the empty road.",
+   "question": "As used in the text, the phrase “a small anchor” most nearly suggests that the mother's touch",
+   "options": [
+    "pulls Tui toward a sadness she has been trying to avoid",
+    "steadies the mother herself against her fear of the rain",
+    "keeps Tui from leaving though it is light and unspoken",
+    "gives Tui the courage she needs to choose her new job"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-02-097",
+   "attempt": 1,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "medium",
+   "passage": "Anything to declare? asked Lorenzo, the customs officer, as my mother and I reached the little checkpoint on the Cornish coast, where an old tale says brides once paid their toll in shells. My mother had nothing but a photograph she had found that morning in a box of my grandmother's linens, a box she had not opened in thirty years. It showed her own wedding, the groom's half torn away. I had thought it lost in the flood of '89, she said, and I wanted Callum to see it before we choose the chapel. Lorenzo studied it and waved us through. On the cliff path she told me that the torn-away man had drowned off this coast before I was born, and that the man I call father had married her the next spring. The photograph was a locked chest washed ashore, and I could not decide whether I wanted the key. Gulls hung above the checkpoint roof, motionless against the wind.",
+   "question": "As used in the text, the phrase “a locked chest washed ashore” most nearly suggests that the photograph",
+   "options": [
+    "is a valuable keepsake that the customs officer must inspect",
+    "is a burden the mother has finally chosen to cast away",
+    "hides a secret the mother has carefully guarded for decades",
+    "holds a buried past that has resurfaced without warning"
+   ]
+  }
+ ],
+ "instructions": "당신은 디지털 SAT 독립 채점자다. 정답 표시가 없다. 먼저 문항을 직접 풀고(picked_letter), 이어서 난이도·hard 적합·오답 품질을 판정한다. 요청 난이도에 맞추려 하지 말고 실제로 느끼는 대로 답한다.\n청크 rev-fable_judge-021 — 16문항.\n출력: Write 도구로 정확히 이 경로에 JSON 한 파일을 쓴다 → /Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-fable_judge-021.result.json\n출력 JSON 스키마(예시 구조): {\"chunkId\":\"청크 ID\",\"model\":\"fable\",\"items\":[{\"candidateId\":\"id\",\"picked_letter\":\"A|B|C|D\",\"other_defensible\":\"정답 외 방어 가능한 선택지가 있으면 true\",\"est_difficulty\":\"easy|medium|hard (실제 체감, 요청 난이도에 맞추지 말 것)\",\"hard_fit\":\"실제 SAT hard 수준의 사고 단계가 필요하면 true(지문 길이·난어만이면 false)\",\"plausible_distractors\":\"오답 3개가 모두 그럴듯하고 서로 다른 오개념에서 나왔으면 true\",\"length_balanced\":\"네 선택지 길이·구체성이 비슷해 정답이 형식으로 드러나지 않으면 true\",\"multi_answer_risk\":\"복수 정답 위험이 있으면 true\",\"issues\":\"한 줄 메모\"}]}\n허용 값: picked_letter ∈ {A,B,C,D}, 불리언 필드는 true/false, est_difficulty ∈ {easy,medium,hard}. candidateId 를 바꾸지 않고 모든 항목에 답한다.\n금지: 결과 파일 외의 파일 생성·수정, 다른 명령 실행, 문항 수정·재작성. 끝나면 'done <항목 수>' 한 줄만 답한다.\n\n## 문항\n### lit40-medium-02-005 — skill inferences · 유형 relationship_between_characters · 요청 난이도 medium · hard 기준: 두 문장의 단서를 연결해야 하고 오답은 한쪽 감정만 반영한다\n[지문]\nI unfolded the scarf on the barge's narrow deck while the Red River slid brown and slow beneath us in Hanoi. It was mustard yellow, a color I have avoided since childhood. Faris, who tutors my younger brother three afternoons a week, had wrapped it in newspaper folded with a draftsman's care. He did not look at the scarf; he looked at my hands. My brother, I suspected, had chosen the color, since he believes a joke is the highest form of affection. I tied the scarf at my throat and remarked that it matched the lanterns on the far bank. Faris exhaled and began reporting, too quickly, the boy's progress with fractions, and I asked a question about every one. Along the bank, a woman was hanging fish to dry on a line of bamboo poles.\n\n[질문] Based on the text, which choice best describes the relationship between the narrator, Kainoa, and Faris?\nA) Kainoa is quietly irritated by Faris but hides it to protect her brother.\nB) Kainoa is eager to impress Faris, who closely judges how she receives his gift.\nC) Faris and Kainoa are old friends who share a private joke about her brother.\nD) Faris is anxious for Kainoa's approval, and she takes care to ease his worry.\n### lit40-medium-02-022 — skill words_in_context · 유형 figurative_language · 요청 난이도 medium\n[지문]\nWho decides what a nine-year-old is ready to hear? I put that question to Father Thiago on the Clyde bridge in the winter of 1987, though I had not set foot in his church for three years. My younger brother had asked why our mother no longer came home, and I had told him she was resting, which was what our aunts said. Thiago watched the river for a long while. A truth told gently, he said finally, is a lantern, not a stone. I had expected scripture, or a scolding for my absence, and got neither. That night I sat on my brother's bed and told him plainly where she had gone and why. He cried, and then he asked a dozen questions, each more practical than the last. In the morning he walked ahead of me to school, choosing the turns himself.\n\n[질문] As used in the text, the phrase “a lantern, not a stone” most nearly suggests that a hard truth told gently\nA) will weigh less on the boy than the comforting story the aunts had offered.\nB) is something the adult should carry so that the boy need not bear it.\nC) can help the boy find his way forward rather than merely burden him.\nD) may frighten the boy at first but will fade from his memory with time.\n### lit40-medium-02-023 — skill words_in_context · 유형 figurative_language · 요청 난이도 medium\n[지문]\nWind hissed through the pines above the mountain bus stop near Porto Alegre, and my mother, Mingyu, smelled of the orange peel she chews when she is deciding something. Our family rule had come down from her grandmother, who married in a valley town with two roads to the chapel: a bride must not see the wedding road before the wedding day. I was the bride, Booker was the groom, and up here there was exactly one road, which every bus took. My mother read the timetable twice, then folded it into a small square. Rules are coats, she said, and her own mother's had been let out twice before it ever reached her. She tucked the timetable into my pocket, and when the bus came, she climbed on beside me without looking away from the road.\n\n[질문] As used in the text, the phrase “Rules are coats” most nearly suggests that the family rule\nA) protects the family, as a coat guards against the harsh mountain weather.\nB) can be put on or taken off whenever a bride finds it inconvenient.\nC) is handed down with love and must be kept in its original form.\nD) was cut for earlier circumstances and may need altering to fit now.\n### lit40-medium-02-033 — skill text_structure_purpose · 유형 tone_shift · 요청 난이도 medium\n[지문]\nSolder smoke and old dust hang over the bench of a Gdansk radio repair shop. MARTA, seventy, bends over an opened receiver; KSENIA, nineteen, turns the dial of another by the window.\nKSENIA: Warsaw. Berlin. Something from Lisbon. Every one of them is a place I have never been.\nMARTA: And every one of them is broken until we fix it. Pliers, traveler.\nKSENIA: I have a berth on a ship in May.\n(MARTA does not take the pliers. The static rises and falls.)\nMARTA: My husband had a berth in May once. He was going to send for me. For forty years I kept the sign over this door exactly the same, so he would know the shop.\nKSENIA: Marta, I—\nMARTA: (holding out her hand at last) Pliers. And write down the name of the ship before you forget it.\n\n[질문] Which choice best describes the shift in tone in the text?\nA) From cheerful to bitter, as Marta comes to resent Ksenia's plan to leave\nB) From restless to resigned, as Ksenia gives up her plan to travel abroad\nC) From teasing to wistful, as Marta's memory softens her reply to the news\nD) From somber to playful, as Marta jokes about the stations Ksenia names\n### lit40-medium-02-036 — skill text_structure_purpose · 유형 tone_shift · 요청 난이도 medium\n[지문]\nThree things, brother Bartolo, I must set down before the festival: the shop owes four months' rent, the dock planks are soft under our rehearsal spot, and you still rush the second verse. I write this by the lake at Oaxaca, where we practiced again tonight while the fishermen pretended not to listen. I had meant to give you a full reckoning, column by column, as our father would have done. Yet as I write I keep hearing how the water carried your guitar across to the far shore, and how an old fisherman stood up in his boat and took off his hat. Perhaps the shop will close. Perhaps it must. On Sunday, I think, we will play as if someone on the far shore is waiting for us. Mend the third string before then. Your brother, Emiliano\n\n[질문] Which choice best describes the shift in tone in the text?\nA) From fond teasing to sober worry about the shop's mounting debts\nB) From sober tallying to cautious hopefulness about the performance\nC) From frustration to firm confidence that the shop can still be saved\nD) From regret to calm acceptance that the festival will be a failure\n### lit40-medium-02-046 — skill text_structure_purpose · 유형 underlined_portion_function · 요청 난이도 medium\n[지문]\nLyon was two hours below us, and the road down had vanished under snow by noon. For three days Mathis and I argued about the woodstove: whether to bank it at night, how many logs, whose turn it was to crack the damper. It is only a stove, Camille, he said the first night, which made it worse. I was fifteen and had decided that everything he did in that cabin was wrong. On the third night he let the fire die, on purpose, I was sure, and I said so loudly. __He did not answer; he only took my mother's old wool coat from the hook and laid it over my shoulders.__ I knew the coat at once, and the smell of her soap still in its collar. Neither of us had said her name since October. In the morning we shoveled the path together, trading the one good shovel back and forth.\n\n[질문] Which choice best describes the function of the underlined sentence in the text as a whole?\nA) It reveals that Mathis let the fire die on purpose in order to teach Camille a lesson.\nB) It marks the point at which Camille admits that Mathis was right about the stove.\nC) It shows that Mathis is too worn out from the snowstorm to keep arguing.\nD) It introduces an object that turns the narrator toward the grief beneath the quarrel.\n### lit40-medium-02-055 — skill central_ideas_details · 유형 narrator_attitude · 요청 난이도 medium\n[지문]\nWe have been three days on the barge down to Dhaka, and my grandson has taken to reading the cargo list aloud to the boatmen. This morning he found my old trunk among the jute bales and read out the name painted on its lid: Clara. He asked who she was. I told him she was a girl who once conjugated English verbs at a mission school and believed she would never live anywhere but beside a cold sea. He said it was a pretty name and asked why no one says it. I could not answer him at once. Since then he has said it twice more, testing it, and each time I have found some small reason to linger near him on the deck. Chana I have been for fifty years, and Chana I shall stay. Before supper I asked him to leave the lid as it is, and he promised not to paint over a single letter.\n\n[질문] Which choice best describes the diarist's attitude toward the name Clara?\nA) Tenderly attached to it, yet content to leave it in the past\nB) Wistfully regretful, wishing she had kept the name of her girlhood\nC) Uneasy, worried that the name will raise questions she cannot answer\nD) Detached, regarding the name as belonging to someone else entirely\n### lit40-medium-02-070 — skill inferences · 유형 character_motivation · 요청 난이도 medium · hard 기준: 단서를 두 문장 이상 연결해야 하며 오답 중 하나는 결과를 동기로 착각하는 전형적 오독이다\n[지문]\nWhy do I always reach for the pen once more? I write this at the baker's counter in Marrakesh before dawn, while the loaves are still pale in the oven. Omar has arrived at five every morning this month and waited without complaint while I, Yasmin, struck out lines I had already struck out twice. Last week he read me his French version of my second chapter. In it I heard a sentence I had abandoned years ago, which he had quietly restored from the margins of my draft. Today, when he held out his hand, I gave him the last pages without rereading them. He seemed so startled that he nearly dropped them into the flour. The baker's boy is now dragging the first trays toward the door.\n\n[질문] Based on the text, why does Yasmin most likely give Omar the last pages without rereading them?\nA) She is too worn out from rising before dawn to look over the pages again.\nB) She means to startle Omar out of his habit of waiting silently each morning.\nC) She has come to trust that Omar's version keeps what she meant to say.\nD) She must hurry so that the baker can open the shop on his usual schedule.\n### lit40-medium-02-072 — skill inferences · 유형 tone_or_mood · 요청 난이도 medium · hard 기준: 두 정서의 비중을 판단해야 하며, 오답은 정반대가 아니라 비중이 틀린 어조다\n[지문]\nWho returns a thing after eleven years? Isadora wondered this as the young woman crossed toward the Lisbon depot bench where she waited each evening for the 28. Rafaela had once been the silent child in the back row of her fourth-grade class; now she was grown, and in her hands was the red umbrella Isadora had lent her one stormy afternoon in 1979. Isadora remembered the day that child had first raised her hand, and she sat a little straighter. Had something happened, she wondered, that the girl should come now, without a word of warning? Rafaela held out the umbrella, unopened, and smiled, and Isadora found herself smiling back before she had decided to. Somewhere behind them, a mechanic was hosing down the bay floor.\n\n[질문] Which choice best describes the overall tone of the text?\nA) Warm, though briefly tinged with uncertainty\nB) Uneasy, focused on what prompted the visit\nC) Anxious, eased only for a moment by a smile\nD) Wistful, dwelling on lost years of teaching\n### lit40-medium-02-077 — skill inferences · 유형 tone_or_mood · 요청 난이도 medium · hard 기준: 두 정서의 비중을 판단해야 하며, 오답은 정반대가 아니라 비중이 틀린 어조다\n[지문]\nBergen in July smelled of tar and wet lilac, and the long dining hall of the summer school where I worked as a boy smelled of both. I was the gardener's son, trimming hedges for Thorvald, who had bought the estate that spring. One evening he called me in while the students ate and announced, before all of them, that he would pay my fees at the cathedral school in autumn. My face burned; I was holding a rake, and my boots had left a trail across his clean floor. Yet when he shook my hand, his grip was so earnest that I forgot the boots, and I thanked him twice, the second time louder. Jens, my father, was waiting by the kitchen door. Through the windows, gulls wheeled above the fish market.\n\n[질문] Which choice best describes the overall tone of the text?\nA) Embarrassed, dwelling mainly on the narrator's muddy clothes\nB) Grateful, though at first clouded by self-conscious shame\nC) Ashamed, with thanks offered largely out of politeness\nD) Wary, suspicious of the new owner's public generosity\n### lit40-medium-02-078 — skill inferences · 유형 tone_or_mood · 요청 난이도 medium · hard 기준: 두 정서의 비중을 판단해야 하며, 오답은 정반대가 아니라 비중이 틀린 어조다\n[지문]\nBy Thursday the water in the cellar had sunk to my ankles, Grandpa Lachlan, so I finally went down with a lantern. Your Gaelic cards were drifting in the corner, and some of the ink had bled into small blue clouds. I sat on the bottom stair longer than I want to admit. Still, our dictionary is only half finished, and you always said a word half learned is a word waiting. I have pinned the cards along the patio line in alphabetical order, the way you would want. Forty can be read; nineteen cannot. I am rebuilding those from memory, and where memory fails I leave a blank square for you to fill when you come home. Señora Ruiz says the damp will lift by Sunday. She has promised to bring her fan down after supper.\n\n[질문] Which choice best describes the overall tone of the text?\nA) Quietly mournful, dwelling mainly on what the flood has ruined\nB) Weary and resigned, lightened only now and then by resolve\nC) Steadily resolved, though touched by lingering traces of loss\nD) Wistful, longing chiefly for the grandfather's distant homeland\n### lit40-medium-02-079 — skill inferences · 유형 relationship_between_characters · 요청 난이도 medium · hard 기준: 두 문장의 단서를 연결해야 하고 오답은 한쪽 감정만 반영한다\n[지문]\nI had not spoken to Greta in four years, not since her poppy-seed rolls drew my best customer across the square. When the stationmaster announced that the new Hamburg café would give us a single pastry table, I, Annika, signed the agreement without looking at her. On the first morning she took the left side and I took the right, and she remarked to no one that almond cakes always dry out by noon. By noon, though, her tray had shifted an inch, and my cakes sat in the window light. I said nothing. That evening I left a jar of my almond paste on her side of the shelf, unlabeled. Two days later her rolls carried a thin almond glaze, and she still called my cakes dry. Above the platforms, the departure board clattered through its letters.\n\n[질문] Which choice best describes the relationship between Annika and Greta as presented in the text?\nA) Annika has softened toward Greta, who remains as hostile as she was four years ago.\nB) Greta has come to depend on Annika's approval, which Annika withholds out of pride.\nC) They are partners who stage a rivalry at the table to draw customers to the café.\nD) Their old rivalry persists, but each is quietly making room for the other's work.\n### lit40-medium-02-080 — skill inferences · 유형 relationship_between_characters · 요청 난이도 medium · hard 기준: 두 문장의 단서를 연결해야 하고 오답은 한쪽 감정만 반영한다\n[지문]\nYears later, I still remember the frost on the guesthouse windows the morning Aunt Itzel and I had to settle which of us would stay. We owed the brothers a winter of lodging on the plateau, and the abbot had agreed that one of us could work it off through spring. I, Nova, announced that I would stay; I was nineteen, and she had a job waiting in Flagstaff. Itzel did not argue. She asked the abbot about the roof repairs, then about the bread ovens, and wrote both lists in her own hand. When I came back from loading the truck, my duffel was already behind the seat. She mentioned only that my mother had once been nineteen too, and that someone had stayed for her. Snow drifted against the mesa's red flank as I passed the cattle guard.\n\n[질문] Which choice best describes the relationship between Itzel and Nova as presented in the text?\nA) Itzel quietly overrules Nova's offer to spare her, as someone once spared her mother.\nB) Nova yields to Itzel mostly because she fears disappointing her aunt in front of others.\nC) Itzel relies on Nova's youth and strength but lets her think the choice was her own.\nD) They are distant relatives held together mainly by the debt they owe to the brothers.\n### lit40-medium-02-081 — skill inferences · 유형 relationship_between_characters · 요청 난이도 medium · hard 기준: 두 문장의 단서를 연결해야 하고 오답은 한쪽 감정만 반영한다\n[지문]\nWhen the looms of the Tbilisi weaving cooperative fall silent each evening, I set two chairs by the window, and Anushka begins on the tangled yarn the weavers leave behind. We used to play here on Fridays; now nobody asks.\nIRENA: You could leave the yarn tonight.\nANUSHKA: (sharply, without looking up) Then what would we do on time?\nIRENA: (after a pause) Practice, maybe.\nANUSHKA: Practice for whom?\n(IRENA reaches for her violin case. ANUSHKA slides the spool across first, so that IRENA holds one end while she winds.)\nANUSHKA: (still not looking up) Your left wrist again. Rest it on the sill.\n(IRENA does. They wind in silence. Neither mentions the hall that cancelled their booking.)\nIRENA: Same tempo tomorrow?\nANUSHKA: Slower.\n(Outside, a tram rattles past, and the courtyard lamps come on one by one.)\n\n[질문] Based on the text, how would the relationship between Irena and Anushka most likely be described?\nA) Anushka quietly blames Irena for the duo's decline and keeps her at a careful distance.\nB) Though their music is fading, each still looks after the other through a shared habit.\nC) Irena relies on Anushka's patience, though Anushka has grown weary of their evenings.\nD) They are rivals for the weavers' notice, each hoping to perform alone on Fridays again.\n### lit40-medium-02-092 — skill words_in_context · 유형 figurative_language · 요청 난이도 medium\n[지문]\nRain dripped from the tin roof of the bus shelter in the hills above Auckland as I buttoned my mother's coat to her chin. I am Tui, and for two years I have been the one who remembers her pills, her appointments, the names of her old friends. This morning she wanted the bus to her church, where the women still save her a seat; I had promised my new manager I would be at the clinic by nine, and my phone buzzed twice in my pocket. My mother did not ask me to stay. She only rested her hand on my arm, a small anchor, and kept her eyes on the road. When the clinic bus came around the bend, I read its number, and I let it pass. Mist slid down the slope and settled over the empty road.\n\n[질문] As used in the text, the phrase “a small anchor” most nearly suggests that the mother's touch\nA) pulls Tui toward a sadness she has been trying to avoid\nB) steadies the mother herself against her fear of the rain\nC) keeps Tui from leaving though it is light and unspoken\nD) gives Tui the courage she needs to choose her new job\n### lit40-medium-02-097 — skill words_in_context · 유형 figurative_language · 요청 난이도 medium\n[지문]\nAnything to declare? asked Lorenzo, the customs officer, as my mother and I reached the little checkpoint on the Cornish coast, where an old tale says brides once paid their toll in shells. My mother had nothing but a photograph she had found that morning in a box of my grandmother's linens, a box she had not opened in thirty years. It showed her own wedding, the groom's half torn away. I had thought it lost in the flood of '89, she said, and I wanted Callum to see it before we choose the chapel. Lorenzo studied it and waved us through. On the cliff path she told me that the torn-away man had drowned off this coast before I was born, and that the man I call father had married her the next spring. The photograph was a locked chest washed ashore, and I could not decide whether I wanted the key. Gulls hung above the checkpoint roof, motionless against the wind.\n\n[질문] As used in the text, the phrase “a locked chest washed ashore” most nearly suggests that the photograph\nA) is a valuable keepsake that the customs officer must inspect\nB) is a burden the mother has finally chosen to cast away\nC) hides a secret the mother has carefully guarded for decades\nD) holds a buried past that has resurfaced without warning"
+}

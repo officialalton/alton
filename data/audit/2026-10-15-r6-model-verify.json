@@ -1,0 +1,156 @@
+{
+ "mc": {
+  "R6-STAT2-MC28": {
+   "keyIndex": 2,
+   "opus": {
+    "choice": 2,
+    "ambiguous": false,
+    "note": "One sample with two categorical variables, so this is a chi-square test of independence. The null hypothesis is independence in the population. df = (3-1)(4-1) = 6."
+   },
+   "sonnet": {
+    "choice": 2,
+    "ambiguous": false,
+    "note": "Single sample, two categorical variables, so a test of independence. df = (3-1)(4-1) = 6. H0 states independence in the population."
+   }
+  },
+  "R6-PHYS1-MC9": {
+   "keyIndex": 3,
+   "opus": {
+    "choice": 3,
+    "ambiguous": false,
+    "note": "Along the incline, the net force is mg sinθ minus the kinetic friction μmg cosθ, so a = g(sinθ − μcosθ)."
+   },
+   "sonnet": {
+    "choice": 3,
+    "ambiguous": false,
+    "note": "Along the incline, ma = mg sinθ − μ mg cosθ, so a = g(sinθ − μ cosθ)."
+   }
+  },
+  "R6-MICRO1-MC53": {
+   "keyIndex": 3,
+   "opus": {
+    "choice": 3,
+    "ambiguous": false,
+    "note": "The next worker's MRP is $30, which is more than the $26 wage. Hiring that worker adds $4 to profit, so the firm should keep hiring until MRP equals the wage."
+   },
+   "sonnet": {
+    "choice": 3,
+    "ambiguous": false,
+    "note": "Hire while MRP > wage ($30 > $26), so hire more workers. Option 3 gives the correct marginal reasoning. Option 4 uses average product, which is not the hiring rule."
+   }
+  },
+  "R6-MACRO1-MC28": {
+   "keyIndex": 1,
+   "opus": {
+    "choice": 1,
+    "ambiguous": false,
+    "note": "Checkable deposits are in M1, so M1 falls by $1,000. Both checking and savings deposits are in M2, so the transfer leaves M2 unchanged."
+   },
+   "sonnet": {
+    "choice": 1,
+    "ambiguous": false,
+    "note": "Under the given definitions, checking is in M1 and savings is not, so M1 falls by $1,000. Both accounts are in M2, so M2 is unchanged."
+   }
+  },
+  "R6-CHEM2-MC29": {
+   "keyIndex": 0,
+   "opus": {
+    "choice": 0,
+    "ambiguous": false,
+    "note": "Delivered volumes are 21.45, 20.35 and 21.40 mL. Trial 2 is the outlier because it differs from both other trials by more than 0.50 mL. The average of the remaining two is 21.425, which rounds to 21.43 mL."
+   },
+   "sonnet": {
+    "choice": 0,
+    "ambiguous": false,
+    "note": "Delivered volumes are 21.45, 20.35, and 21.40 mL. Trial 2 is the outlier, so the answer is the average of trials 1 and 3: 21.425, which rounds to 21.43 mL."
+   }
+  }
+ },
+ "frq": {
+  "R6-CSA2-FRQ4": {
+   "resolved": true,
+   "new_errors": [],
+   "note": "The fix works. The `r == 0 ||` guard means the first row's sum always replaces the starting value of 0, so the 0 never acts as a cutoff. I traced the reported case: for {{-2000000},{-1500000}}, row 0 sets bestSum to -2000000, then row 1 (-1500000 > -2000000) wins, so the method returns 1 as it should. The check still uses strict >, so a tie keeps the smaller row index, and the prompt example still"
+  },
+  "R6-STAT2-FRQ1C": {
+   "resolved": true,
+   "new_errors": [],
+   "note": "The fix works. Part C now says the routine is assigned and followed for several weeks before anyone is asked about homework, so the treatment comes first. The reference answer for C(ii) matches the new prompt. Parts A and D can stay as they are: \"exercises before school\" there describes a regular habit, so homework the previous night can still count as the response. Part B is unchanged and still c"
+  },
+  "R6-PHYS2-FRQ1D": {
+   "resolved": true,
+   "new_errors": [],
+   "note": "From energy conservation, mgh = μmg·d, so d = h/μ = 1.5/0.25 = 6 m for the first release. Released from 2h, the block slides 12 m, so the factor in part (D) is 2. The passage and part (D) now both say the rough section is long enough for the block to stop in the 2h release too, which covers the 12 m case. The new wording adds no numbers and does not contradict d = h/μ or the factor-of-2 answer. Th"
+  },
+  "R6-PHYS1-FRQ1D": {
+   "resolved": true,
+   "new_errors": [],
+   "note": "Part D now says the larger kinetic friction coefficient is still small enough that the blocks, released from rest, accelerate. That rules out the case where the blocks stop or never start (static friction), so the system stays in kinetic sliding. The expected answer still holds: a = (m2 − μm1)g/(m1+m2) gets smaller as μ grows, so T = m2(g − a) increases. The new wording doesn't conflict with the s"
+  },
+  "R6-MICRO2-FRQ1E": {
+   "resolved": true,
+   "new_errors": [],
+   "note": "The fix resolves the issue and adds no new errors. Part (E) now states the constant-cost assumption: input prices and each firm's cost curves stay the same when firms enter or exit. So the long-run price must return to $18, which is minimum ATC. Both explanation fields were updated to match the new (E) prompt, and the rubric line still matches. I rechecked the numbers against the table and they ho"
+  },
+  "R6-MICRO2-FRQ3C": {
+   "resolved": true,
+   "new_errors": [],
+   "note": "Part (C) no longer says '$ ... million'. It now gives 37 and 43 'in the units used by the payoff matrix', so it adds no unit the prompt never states. I checked the payoffs against the matrix and they're right. X's dominant strategy is low fare (61>49, 37>32). Given that X plays low fare, Y's best response is low fare (43>35). So the Nash equilibrium is (low, low) with payoffs (37, 43). In part (D)"
+  },
+  "R6-STAT1-FRQ4D": {
+   "resolved": true,
+   "new_errors": [],
+   "note": "Resolved. Part (D) now states there are more than 1810 freshmen. That is 10 × 181, and 181 is the number of freshmen in the table (76 + 105). So the 10% condition can now be checked from the prompt. The new conditions sentence in the reference answer is correct: the sample is random, the population is more than 10 times 181, and both 76 and 105 are at least 10. I rechecked every number. 76/181 = 0"
+  },
+  "R6-MACRO1-FRQ1DE": {
+   "resolved": true,
+   "new_errors": [],
+   "note": "The new text resolves the issue. Part E's reference answer no longer says AD2 meets SRAS exactly at YF. It now says AD shifts right by 80 at the original price level, output rises toward YF, and PL2 is above PL1. It also says output rises by less than the 80 shift because the price level rises along SRAS, which is correct. Part D now says the 2.5 multiplier holds the price level constant, which ma"
+  },
+  "R6-ELA2-FRQ1": {
+   "resolved": true,
+   "new_errors": [],
+   "note": "The false claim that cost per visit \"always looks better\" once hard-to-serve people stop coming is gone from both explanation fields. The new sentence says only that a per-visit average cannot show who has stopped coming. That holds up: the measure counts visits, not people, so it says nothing about which residents dropped out. It also no longer contradicts the sample's own figures earlier in the "
+  },
+  "R6-ELA2-FRQ2": {
+   "resolved": true,
+   "new_errors": [],
+   "note": "I found no new errors. The edits fix all three places that said the wharf was \"losing money\" or a \"failing business\", in both explanation fields. The new wording (\"under economic pressure\", \"facilities were in decline\", \"a business under economic pressure\") matches what ¶3 actually concedes: the fleet is smaller, the ice house closed in 2011, the fuel dock loses money three months a year, and the "
+  },
+  "R6-ELA1-FRQ1": {
+   "resolved": true,
+   "new_errors": [],
+   "note": "The source-count floor now matches the official general rubric. Using fewer than two sources is now listed as a Row B 0. Using two sources, or three or more that are only summarized with no explanation, earns a 1. That fits the official 1-point line (\"at least two sources; summarizes without explaining\"). The 2 line didn't change and wasn't shown here, but because the old 1 line covered \"fewer tha"
+  },
+  "R6-ELA1-FRQ3": {
+   "resolved": true,
+   "new_errors": [],
+   "note": "The fix resolves the issue. Row C 0 no longer gives 0 for a one-sided position. It now gives 0 for oversimplifying the issue, which matches the official sophistication row's typical-response wording (\"oversimplifying complexities\"). The new parenthetical says a firm, even one-sided, position is not penalized by itself. It only removes the penalty and does not say that precise reasoning earns the p"
+  },
+  "R6-PSY1-EBQ": {
+   "resolved": true,
+   "new_errors": [],
+   "note": "The fix resolves both reported problems, and I found no new errors.\n\n- **Part C (Source 1):** The attention/encoding account is now offered as \"a possible explanation.\" The answer also says the experiment compared a bundle of differences (phone off in a bag vs. phone on the desk with notification sounds). That means it can't isolate the sound alone, and attention and encoding weren't measured dire"
+  },
+  "R6-PSY2-EBQ": {
+   "resolved": true,
+   "new_errors": [],
+   "note": "Part C now offers the social responsibility norm as one possible explanation (\"may have been more likely\") instead of a proven cause. It also says that students were not assigned to the two kinds of schools, that school and selection differences cannot be ruled out, and that the norm was not measured. All of this matches Source 1's own caveat. Part C still links the evidence to the claim and appli"
+  },
+  "R6-BIO1-FRQ1D": {
+   "resolved": true,
+   "new_errors": [],
+   "note": "The fix resolves the issue. The Part D prompt now begins \"Assuming that compound X is a competitive inhibitor,\" and the Part D reference answer in both explanation fields now starts \"If compound X is a competitive inhibitor, as hypothesized.\" So the prediction is stated as following from the hypothesis, not from the table. The rubric lines still match the reference answer. I rechecked the unchange"
+  },
+  "R6-BIO1-FRQ3CD": {
+   "resolved": true,
+   "new_errors": [],
+   "note": "Part C now asks students to predict how the oxygen volume at 70 °C compares with the volume at 37 °C. That gives Part D's \"justify your prediction about 70 °C\" a prediction to refer back to. The new Part C answer (rises from 10 to 37 °C, lower at 70 °C than at 37 °C) fits the setup and Part D's statement that 70 °C is far above catalase's optimum. It also matches Part D's answer about denaturation"
+  },
+  "R6-BIO2-FRQ2": {
+   "resolved": true,
+   "new_errors": [],
+   "note": "Both parts of the reported issue are fixed. First, the title is no longer cut off: it now reads \"oxygen production at different light intensities.\" Second, part D's prompt now asks students to predict using the factor they named in part C. The reference answer splits the prediction to match: the rate increases if CO2 is limiting, and changes little or not at all if Calvin-cycle enzyme amount is li"
+  }
+ }
+}

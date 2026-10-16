@@ -1,0 +1,1012 @@
+[
+ {
+  "key": "ap_biology-m01-k0",
+  "cellId": "ap_biology-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "Count the snails in the quadrats at all of the distances at the same time of day",
+     "brief_reasoning": "Time of day is a confounding variable. Counting every distance at the same time of day holds it constant, so distance is the only thing that changes.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Evaluates a field sampling design and proposes a revision (3.D); density measurement context fits 8.4 adequately."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Same time of day for all distances is the unique best revision; the other options are clearly flawed."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem states the design and the confound clearly."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct flaw (added variable, confound merely reversed, a single distance) and each is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short reading, about 70 seconds, no arithmetic; typical of AP Biology experimental-design items."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Clean, unambiguous experimental-design revision item with a unique key and distinct distractors. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: identify the confound (time of day perfectly correlated with distance) and choose the standard control. No data, calculation or representation change. Distractors are clearly flawed (new confound, reversed confound, removes the independent variable). Short stem with clearly stated conditions. Suitable for foundational practice on experimental design, not full-mock difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_biology-m01-k1",
+  "cellId": "ap_biology-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Using a larger number of random samples cuts down sampling error, so the mean density estimate becomes more reliable. The other options either bias the sample or bring in inconsistent sampling.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "Count clover in many more randomly placed quadrats of the same size"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "The item asks the student to revise a quadrat sampling design to reduce chance variation in a density estimate. That is a proposal for improving an investigation (3.D), and it sits in the population density and sampling context of 8.4. The link to 8.4 is somewhat loose, since it concerns sampling method rather than density-dependent effects. It is still within Unit 8 and uses no later content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option C, many more random quadrats of the same size, is the unique defensible answer. A is biased selection, B uses a non-representative subset, and D introduces a variable and inconsistent sampling. The independent solver chose C."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed and the stem is self-contained. The conditions (5 random quadrats of 1 m², counts of 2 to 40) are stated clearly, and the wording is clear US English."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception: excluding data, relying on a non-representative subset, and varying quadrat size. The explanation addresses every wrong option. The option lengths are similar, so there is no giveaway."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 60 to 70 seconds with a short reading load and no arithmetic, which is typical of an AP MC item. The calculator is allowed but not needed, which is fine."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean, single-key MC item on improving a quadrat sampling design (3.D). The distractors are distinct and plausible, and the load is light. The topic link to 8.4 is somewhat loose but acceptable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: increasing the number of randomly placed quadrats reduces sampling error. No data table, no calculation, and short text. The distractors describe obvious bias or inconsistency (selective counting, discarding data, varying quadrat size). Students only need to recognize a sound sampling design, so this is below typical full-mock difficulty even though the skill is 3.D.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_biology-m01-k2",
+  "cellId": "ap_biology-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Using more quadrats, placed at random across the whole field, cuts out the sampling bias from counting only near the path. It also makes the sample bigger, which lowers random error.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "D"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Quadrat sampling for density fits 8.4; proposing a revision to a flawed design is 3.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Random placement of more quadrats is the unique best revision; the other options increase bias, shrink the sample, or only recount."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem states all conditions clearly."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception and the explanation addresses each one."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 70 seconds, no calculation, option lengths parallel."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound 3.D item on improving a quadrat sampling design. The key is unique, the distractors are distinct, and the load is appropriate for the exam."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: identify sampling bias (quadrats clustered near the path) and choose random placement with more replicates. No data, no calculation, short stem, and distractors are clearly flawed. It fits skill 3.D at an introductory level, so it suits basic learning rather than a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_biology-m02-k0",
+  "cellId": "ap_biology-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "Repeated trials at both temperatures",
+     "brief_reasoning": "Replicate trials show whether the difference holds up consistently and is larger than the trial-to-trial spread, which tests whether it is just random error.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Environmental effect (temperature) on enzyme activity, with the demand to propose additional data or an investigation to test a claim of experimental error. This fits topic 3.2 and skill 3.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Replication at both temperatures is the unique defensible way to test whether the difference is real or random error. The other three options do not address the claim."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is self-contained and clearly worded."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors encode distinct flaws: irrelevant measurement, a new confounding variable, and a single trial at a new temperature. The explanation addresses each wrong option. Option lengths are parallel."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short reading load, about 70 seconds, no calculation, typical of AP Biology multiple choice."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A sound item: the key is unique, the distractors are distinct and plausible, and the load is appropriate for topic 3.2 and skill 3.D."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step reasoning: recognize that replication tests whether a difference exceeds experimental error. No data to read, no calculation, no representation change. The distractors (room temperature, a different enzyme, a single trial at 100 C) are clearly weaker designs. This is a straightforward experimental-design check and falls below the depth and multi-step reasoning typical of full mock exam items.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_biology-m02-k1",
+  "cellId": "ap_biology-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "The error happened because the substrate broke down while the bottle sat uncovered. Using freshly prepared H2O2 that stays covered keeps its concentration at the intended value. None of the other options deal with substrate breakdown.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "Use freshly prepared, covered hydrogen peroxide"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item passes every criterion. The key (fresh, covered H2O2) is the only revision that addresses the lost substrate, and the solver agrees. Each distractor encodes a distinct flaw and its rationale is specific. The stem is complete and the load is typical for a 70-second item.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The item is a catalase investigation (topic 3.2) that asks the student to revise the procedure to fix an identified error, which fits the skill of proposing a change after evaluating the design."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Only option C restores the intended substrate concentration. The other options either leave the lost substrate unaddressed or add a new variable."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem gives all the conditions and the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor has its own named flaw: enzyme amount as a second variable, unequal collection times as a second variable, and removal of the independent variable. The explanation covers each one. The correct option is only slightly longer than the others, not enough to be a giveaway."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The reading and reasoning load fits about 70 seconds, with no arithmetic. The calculator designation is consistent."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step experimental design revision: recognize that the substrate degraded and choose the fix that controls substrate concentration (fresh, covered H2O2). No data, no calculation, no representation change. Distractors (more enzyme, longer collection at one temperature, a single temperature) are plainly wrong because they either do not address the substrate problem or remove the variable being tested. Concept depth is shallow and the wording is clear, with no unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "key": "ap_biology-m02-k2",
+  "cellId": "ap_biology-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "Repeat trials and calculate the mean",
+     "brief_reasoning": "Running several trials at each temperature and averaging them reduces the effect of random variation. The other options either add a confounding variable, bias the data, or still use only one trial per temperature.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "Short reading load, about 60 seconds, no arithmetic. This is typical of the AP exam.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean experimental-design item. The key is unique, the distractors reflect distinct misconceptions, and the item fits topic 3.2 and skill 3.D."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item asks which design change reduces random error: replicate trials and average them. This is one reasoning step with a concrete catalase scenario, no stimulus, and no calculation. The distractors are clearly flawed: varying enzyme amount confounds the test, cherry-picking trials is biased, and single trials at more temperatures do not address random error. The concept depth is shallow, with no data interpretation or representation changes. Skill 3.D is only lightly tested, because the proposed improvement is the standard replication answer. The item stays within the CED and is not hard for unfair reasons.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "key": "ap_biology-m03-k0",
+  "cellId": "ap_biology-m03",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "A",
+     "brief_reasoning": "Crossing two heterozygotes (Rr x Rr) gives an expected 3:1 red:brown ratio under simple Mendelian inheritance. Counting the offspring can test this.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 5.3 fits. Skill 3.A (identify a testable question) is addressed, though it is mostly a 3:1 ratio recall."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "A is the unique defensible answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed, and the stem is complete."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Options C and D are non-testable throwaways and are not realistic student misconceptions. Only B encodes a real misconception (test cross ratio). The option set is not parallel."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "Low discrimination. Two options are trivially eliminated, and the item largely reduces to knowing that Aa x Aa gives 3:1. It is not a rigorous test of the skill of identifying a testable question."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and the scope is acceptable. The distractors are weak: two options are non-testable throwaways, so the item does not discriminate and falls short of AP standards for skill 3.A."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: recognize that an Aa x Aa cross predicts a 3:1 phenotypic ratio and that a testable question must be answerable by counting offspring. Two distractors are non-testable or evolutionary-purpose questions, and one uses the 1:1 ratio expected from a test cross. There is no data, no representation change and no calculation, and the reading load is minimal.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "key": "ap_biology-m03-k1",
+  "cellId": "ap_biology-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "C",
+     "brief_reasoning": "A dihybrid cross with independent assortment should give a 9:3:3:1 phenotype ratio. Counting the offspring phenotypes and running a chi-square test checks this directly. A asks 'why' and D asks about 'importance', so neither can be tested. B gives the wrong expected ratio.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Targets 3.A (identify a testable question) in a Mendelian dihybrid context (5.3). Dominant demand is choosing the testable question tied to the independent assortment test."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The 9:3:3:1 question is the only one that tests independent assortment from counted phenotypes. The 1:1 option is also testable in principle but does not address the stated aim, and it is not the question that tests independence. Key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is complete and clear, and every condition is stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors encode distinct flaws: a why/mechanism question, a wrong expected ratio, and an untestable value judgment. Each is explained. Option lengths are similar."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 60 seconds with short options and no arithmetic. The calculator designation is fine."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean 3.A item on a Mendelian dihybrid cross. The key is unique, the distractors are distinct and explained, and the item has no stimulus problems or scope issues."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step recognition of a testable question tied to the dihybrid cross. Distractors are clearly non-testable (why/importance) or mismatched to the cross (1:1). Requires knowing the 9:3:3:1 expectation for independent assortment, but there is no data, calculation, or multi-step reasoning. Suitable for initial learning rather than full mock exams.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_biology-m03-k2",
+  "cellId": "ap_biology-m03",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Testcross Ll x ll gives 1/2 Ll (long) : 1/2 ll (short), a 1:1 ratio, which can be tested with offspring counts.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "D: 1:1 long to short"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Choosing a testable hypothesis for a testcross fits 3.A and topic 5.3. The skill demand is light, since it reduces to knowing that a testcross gives 1:1, but it is acceptable."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "A heterozygote crossed with a short-winged (homozygous recessive) fly gives a 1:1 ratio. Option C is not testable by counting offspring, and A and B are wrong predictions. The key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem states all conditions: heterozygous parent, dominant long wings, short-winged (recessive) mate, and counting offspring."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The option 'will all have long wings' is a weak distractor because the stem says the parent is heterozygous. The rationale for option C is accurate, but it is a transparent distractor, since it is the only option that is not about offspring counts. The correct option is also the only one that is both testable and correct for a testcross. The rationales are short but specific to each option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 60 seconds and has low reading load, and no calculator is needed. The 'best testable hypothesis' format resembles AP Biology 3.A items."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and clear, with a unique key. It is easy and its distractors are somewhat transparent, but it is acceptable for 3.A on topic 5.3."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: recognize that a heterozygote x homozygous recessive testcross predicts a 1:1 phenotypic ratio, and that this is a testable, measurable prediction. Distractors are the 3:1 ratio (monohybrid cross misconception), all long wings, and an untestable-from-counts flight claim. No stimulus, minimal reading, and only a trivial Punnett square. This is straightforward Mendelian application, below typical full-mock complexity.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_biology-m04-k0",
+  "cellId": "ap_biology-m04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "Egg white mixed with an equal volume of distilled water at 25 degrees Celsius",
+     "brief_reasoning": "Distilled water is close to neutral, so it controls for the effect of adding liquid. Everything else stays the same: equal volume, 25 C and 10 minutes.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Identifying the control in a protein denaturation (pH) investigation fits topic 1.7 and skill 3.C. Dominant demand is experimental design."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Equal-volume distilled water at 25 C is the unique appropriate negative control. The other options change volume or temperature, or omit egg white."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem gives volumes, temperature and time. The wording is clear. Distilled water's near-neutral pH is a standard assumption."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception (no protein in the tube, changed volume, changed temperature). The explanation addresses each one. The 'why' for option B is slightly terse but accurate."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 65 seconds of reading, no calculation, four parallel options. The answer is not given away by option length. This is typical of AP Biology experimental-design items."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, single-skill control-identification question in a protein denaturation context. The key is unique, the distractors are distinct and plausible, and the load is appropriate. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must apply the concept of a negative control to a concrete protein denaturation experiment: the control should match the added volume and temperature but lack the pH variable. Distractors test rejecting a no-protein tube, a changed volume, and a different variable (heat). Requires experimental-design reasoning without data or calculation, which is typical AP skill 3.C at the easier end of exam-level items.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_biology-m04-k1",
+  "cellId": "ap_biology-m04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Controlled variables (temperature, egg white volume, timing) must be held constant so pH is the only independent variable.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "Keep the temperature, the volume of egg white, and the time before measuring the same for all samples"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item passes all five criteria. It tests identifying controlled variables in a protein denaturation (egg white, pH) investigation, which fits topic 1.7 and skill 3.C. Only option C is a valid design improvement; A and D add a second changing variable, and B removes the independent variable. The stem is complete and clear, and the item takes about 65 seconds, which is typical for an MC item. The correct option is somewhat longer than the others, but only by a few words, which is acceptable.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The item asks the student to identify the variables and controls in a protein denaturation investigation. This matches skill 3.C and topic 1.7 (protein structure and denaturation by pH)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option C is the only defensible answer. Options A and D each introduce a second changing variable, and B eliminates the independent variable."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed and the stem is self-contained. The wording is clear US English, and the conditions (equal volumes, 10 minutes, four pH values) are stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option has a specific rationale: A and D add a second changing variable (volume or time), and B removes the tested variable. The explanation covers each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 65 seconds, requires no calculation and has a low reading load. The \"calculator allowed\" designation is consistent with the other items in this subject."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step identification of controlled variables in a simple pH and protein denaturation experiment. Correct answer (keep temperature, volume, and time constant) is a standard controlled-experiment principle. Distractors are clearly flawed (varying volume, holding the independent variable constant, varying time). There is no data, no calculation, and no representation change, and minimal reading. Concept depth is shallow, so it fits foundational learning rather than a full mock exam.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_biology-m04-k2",
+  "cellId": "ap_biology-m04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "The student deliberately changes the pH of the added solution. Cloudiness is what gets measured, so it is the dependent variable. Temperature and volume are kept the same, so they are controlled variables.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "The pH of the solution added to each sample"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Identifying the independent variable in a protein denaturation (pH) investigation fits topic 1.7 and skill 3.C. The cloudiness measure ties to protein denaturation."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The pH of the solution is the only factor the student deliberately varies, so it is uniquely the independent variable. Cloudiness is dependent. Temperature (25 C) and equal volumes are stated constant."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem states all conditions: pH values of 2, 4, 7, 10; equal volumes; 25 C; 10 minutes. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception (dependent variable, constant temperature, constant volume), and each is explained. The options are parallel in length and format."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item is short, takes about 60 seconds, and needs no calculation. It is typical of AP Biology experimental design items."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, unambiguous variable-identification question that fits topic 1.7 and skill 3.C. It passes all five criteria with no instant-reject conditions."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "One-step identification of the independent variable in a short, clear scenario. Distractors are the dependent variable and two controlled variables. No data, calculation, or representation changes. The protein denaturation context is simple, and the difficulty is appropriate for foundational practice rather than full-mock level.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_biology-f01-k0",
+  "cellId": "ap_biology-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Law of segregation: homologous chromosomes, one carrying the dominant allele and one the recessive allele, pair up and separate during anaphase I. Each gamete ends up with only one allele, and half of the gametes carry each allele.",
+     "final_answer": "During meiosis I, homologous chromosomes separate, so the long-wing allele and the vestigial allele go into different cells. Each gamete gets one allele, with a 50% chance of either.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Temperature affects how flies develop and survive, and in fruit flies it can even change how the vestigial trait is expressed. If temperature varied between vials, it could change the wing phenotypes or offspring numbers.",
+     "final_answer": "Keep the temperature the same (food would also work). That way, any differences in wing phenotype come from genotype and not from environmental effects on development or survival.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "In a test cross of Ll × ll, simple Mendelian inheritance predicts a 1:1 ratio of phenotypes.",
+     "final_answer": "There is no significant difference between the observed counts and the expected 1:1 ratio (200 long : 200 vestigial). Any difference is due to chance.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Check: the expected count is 200 in each group. (15²/200) + (15²/200) = 2.25, which matches the student's value. Since 2.25 < 3.84, p > 0.05.",
+     "final_answer": "The null hypothesis cannot be rejected. The chi-square value of 2.25 is less than the critical value of 3.84, so the difference from a 1:1 ratio is not statistically significant and can be explained by chance.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Short FRQ with four 1-point parts that follows the Q3 structure (describe, identify a controlled variable, null hypothesis, justify). The chi-square value of 2.25 and the critical value of 3.84 are consistent with the counts. The rubrics list alternative answers. Part B is somewhat weak because the stem already states that temperature and food are constant, but it is still acceptable.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The bundle as a whole requires Mendelian segregation and test-cross reasoning (topic 5.3). The part skills match the official Q3 purposes."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All four keys are correct and unique. The rubric rows are consistent and list alternative accepted answers."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus is complete and clear. All numbers used appear in the stem or in the part prompt."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to an FRQ; the common errors are listed for each part."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The reading and writing load is light and typical of a short FRQ. The calculator is not needed because the chi-square value is given."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Four short parts: allele segregation in meiosis, naming a controlled variable with its purpose, writing a null hypothesis for a 1:1 test cross, and comparing a given chi-square value (2.25) to the critical value (3.84). The given chi-square value is consistent with the counts (expected 200/200). Reasoning is standard AP FRQ level with no heavy computation and no unclear wording. It targets experimental design skills (variables, controls, hypothesis testing) within Mendelian genetics.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "key": "ap_biology-f02-k0",
+  "cellId": "ap_biology-f02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "As maternal age increases, the mean percent of abnormal eggs increases: 2.0% at 3 months, 9.2% at 12 months, 28.5% at 18 months. The increase is steeper at later ages.",
+     "final_answer": "Abnormal eggs increase with age (2.0% → 9.2% → 28.5%), and the increase speeds up at older ages.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "(28.5-2.0)/2.0 x 100 = 1325%",
+     "final_answer": "1325% increase",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "The 18-month range is 25.12-31.88%. The 12-month range is 8.3-10.1% and the 3-month range is 1.8-2.2%. The 18-month range does not overlap either one, so the difference is likely statistically significant.",
+     "final_answer": "Supported: the ±2SE range at 18 months (25.12–31.88%) does not overlap the ranges at 12 months (8.3–10.1%) or 3 months (1.8–2.2%).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Nondisjunction happens when homologous chromosomes fail to separate in meiosis I, or sister chromatids fail to separate in meiosis II. One daughter cell then gets an extra chromosome and the other is missing one. The egg ends up with n+1 or n-1 chromosomes (aneuploidy).",
+     "final_answer": "Failure of homologs or sister chromatids to separate gives an egg with an extra or missing chromosome (n+1 or n-1).",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Short Q6-style FRQ with four 1-point parts: describe, calculate, evaluate with ±2SE, and explain nondisjunction. Keys are unique and correct. The table is complete (n, units, mean ± 2SE). Minor nit: Part A's rubric says to use values, but requires_numbers is false.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Four-part FRQ on a small 3-row table. A: describe the increasing trend with values. B: one percent-change calculation with clean numbers, (28.5-2.0)/2.0 x 100 = 1325%. C: compare mean ± 2SE ranges (25.12-31.88 vs 8.30-10.10 and 1.80-2.20), which do not overlap, so the claim is supported. D: explain nondisjunction producing an egg with an abnormal chromosome number. The levers are all allowed (table reading, one formula-sheet calculation, 2SE comparison, concept explanation tied to the scenario). Reading is light and arithmetic is short, so any difficulty comes from the multi-skill demand typical of a full-mock FRQ rather than from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "ap_biology-f02-k1",
+  "cellId": "ap_biology-f02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "As maternal age increases, the mean percent of eggs with an abnormal chromosome number increases: 2.0% at 3 months, 9.1% at 12 months and 27.2% at 18 months. The increase is larger in the later interval: +7.1 points from 3 to 12 months and +18.1 points from 12 to 18 months.",
+     "final_answer": "Abnormal eggs increase with age (2.0% to 9.1% to 27.2%), and the rise speeds up at older ages.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Percent change = (27.2 − 2.0) / 2.0 × 100 = 25.2 / 2.0 × 100 = 1260%.",
+     "final_answer": "1260% increase",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "The ±2SE ranges are 1.8–2.2 at 3 months, 8.3–9.9 at 12 months and 25.12–29.28 at 18 months. The 18-month range does not overlap either of the other two ranges, so the difference is likely statistically significant.",
+     "final_answer": "Yes, the data support the claim because the 18-month ±2SE range (25.12–29.28) does not overlap the other ranges.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "In nondisjunction, homologous chromosomes fail to separate in meiosis I, or sister chromatids fail to separate in meiosis II. One daughter cell then gets an extra copy of a chromosome and the other is missing one. The egg ends up with n+1 or n−1 chromosomes, which is aneuploidy.",
+     "final_answer": "When chromosomes fail to separate (nondisjunction), the egg receives one extra or one missing chromosome (n+1 or n−1).",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a valid Q6-style short FRQ with four 1-point parts on age-related meiotic errors. The table is complete, the keys are unique and correct, and the task load is light. Only minor labeling inconsistencies in the rubric metadata (requires_numbers on part A, causation scope on the claim).",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 5.1 is required by part D and fits the data context. The mixed skills across parts match the official Q6 structure."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The percent change (1260%) and the non-overlap conclusion are unique and defensible. Part A's description is accepted whenever it states the increasing trend with table values."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table gives the mean ± 2SE, n and the units, and the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ with no options. The rubric lists plausible common errors for each part."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is light and typical of a short FRQ. One simple calculation is allowed with a calculator, and the designation is consistent."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Four-part short FRQ on a small 3-row table. A: describe the trend with values. B: one percent-change calculation with clean numbers (1260%). C: compare mean ± 2SE ranges (25.12-29.28 vs 8.3-9.9 and 1.8-2.2; no overlap, so the claim is supported). D: explain nondisjunction, which the prompt names. All levers are within scope (table reading, one formula-sheet calculation, 2SE comparison). Arithmetic is short, wording is unambiguous, and reading load is low. This matches the standard AP exam-level FRQ format.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "ap_biology-f03-k0",
+  "cellId": "ap_biology-f03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Moths survived more when their color matched the bark. Dark moths on dark bark: 68.5%. Light moths on dark bark: 32.6%. Dark moths on light bark: 29.5%. Survival was roughly half or less when the moths did not match.",
+     "final_answer": "Moths that matched the bark survived more (68.5%) than moths that did not match (32.6% and 29.5%).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "(29.5-68.5)/68.5 x 100 = -56.9%",
+     "final_answer": "About -56.9% (a decrease of roughly 57%)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Dark moths on dark bark: 62.18-74.82. Light moths on dark bark: 29.38-35.82. Dark moths on light bark: 26.02-32.98. The first interval does not overlap either of the other two, so the difference is likely statistically significant.",
+     "final_answer": "The data support the claim. The ±2SE intervals do not overlap.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Birds hunt by sight, so they eat more moths that stand out against the bark. Moths that match the bark survive and reproduce more. Because color is heritable, the matching color becomes more common in later generations. The environment (bark color) is what selects.",
+     "final_answer": "Birds remove more moths that stand out. Moths that match survive and reproduce more and pass on the heritable color allele, so its frequency rises in that environment.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Short FRQ (four 1-point parts) on Q6 Analyze Data lines, with natural selection in the moth scenario. Keys are unique and verified, the rubric rows are consistent with listed alternatives, the data are complete, and the load is appropriate.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Part A is 4.B description and part B is a calculation, both legitimate for a short FRQ. Parts C and D require the natural selection concept in the moth context."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The ±2SE ranges for the dark-on-dark group do not overlap those of the other two groups, so the claim is supported. The percent change of -56.9% is correct and has a tolerance. The rubric rows are consistent."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table has columns, rows, units, and n stated in the description. Every number the parts use appears in the stimulus. The wording in part C (\"levels\") is slightly loose but not ambiguous."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to free response. The common errors listed are reasonable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The workload is light for four 1-point parts, and the calculator use is minimal and consistent with the designation."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Four-part item on a small 3-row table. A: describe pattern with values (skill 4.B). B: one percent-change calculation with short numbers, about -56.9%. C: compare mean ± 2SE ranges (62.18-74.82 vs 29.38-35.82 and 26.02-32.98; no overlap), so the claim is supported. D: explain natural selection using a heritable trait, differential survival and reproduction, and camouflage against predation. All difficulty comes from allowed levers: reading a table, one formula calculation, error-range comparison, and applying the governing concept. Wording is clear, arithmetic is short, and the context is brief. This is appropriate for a full mock exam rather than basic learning, and it is not beyond the AP scope.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "key": "ap_biology-f03-k1",
+  "cellId": "ap_biology-f03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Moths survived best when their color matched the bark. Dark moths on dark bark had 68.3% survival. Light moths on dark bark had 32.3%, and dark moths on light bark had 28.2%.",
+     "final_answer": "Survival was highest when moth color matched the bark (68.3%). It was about half or less when the colors did not match (32.3% and 28.2%).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "(28.2 − 68.3)/68.3 × 100 = −40.1/68.3 × 100 ≈ −58.7%",
+     "final_answer": "About −58.7% (a 58.7% decrease)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Dark moths on dark bark: 62.6–74.0. Light moths on dark bark: 29.5–35.1. Dark moths on light bark: 26.0–30.4. The first range does not overlap either of the others, so the difference is likely statistically significant and the claim is supported.",
+     "final_answer": "Supported. The ±2SE range for dark moths on dark bark (62.6–74.0) does not overlap the other two ranges.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Moth color varies and is heritable. Birds that hunt by sight eat more of the moths that stand out against the bark. Moths that match the bark survive and reproduce more, so their color alleles become more common in later generations.",
+     "final_answer": "Camouflaged moths survive bird predation better (68% vs about 30%) and leave more offspring. Because color is heritable, the matching color becomes more frequent in the population over generations. This is natural selection.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Short FRQ with four 1-point parts (describe, calculate, evaluate with ±2SE, relate to principle) on moth survival and natural selection. Keys are unique and verified: percent change is -58.7, and the greatest group's ±2SE range does not overlap either other range. Stimulus is complete with n and the heritability statement. Acceptable.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Part A assesses 4.B. Part D requires the 7.2 concept. The bundle as a whole fits topic 7.2."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All keys are unique and consistent with the table. Rubric alt_solutions cover equivalent wordings."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table includes mean ± 2SE, n, and the context. Wording is clear. The generic \"levels\" wording in part C is minor."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Common errors are specific for each part."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Light reading and a single-step calculation. Matches the short-FRQ Q6 structure."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Four 1-point parts on a small 3-row table, with a clear scope fit to Unit 7.2 and skill 4.B. Part A is a describe-the-pattern task using table values. Part B is a single percent-change calculation, (28.2-68.3)/68.3, with rounded inputs and a result of about -58.7 percent. Part C compares mean ± 2SE ranges (62.6-74.0 vs 29.48-35.12 and 26.04-30.36), which do not overlap, so the claim is supported. Part D explains natural selection, linking heritable color variation, differential predation by sight-hunting birds based on camouflage, and differential survival and reproduction. The item does not require out-of-scope knowledge, and the stimulus is short and unambiguous. The reasoning is moderate and fits a full-mock FRQ: not purely introductory, but with no advanced extension demands.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ }
+]

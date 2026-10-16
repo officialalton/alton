@@ -1,0 +1,46 @@
+{
+ "itemId": "lines_angles_triangles.triangle_angle_sum.TR.C",
+ "generatedAt": "2026-10-07T05:02:00.938Z",
+ "codeHash": "ffcdad1fe40d22eff43095fa879d5eb3f772bc48f02b7892b9504a9988c4a0e8",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/figure-choice.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/geo-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/graph-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/lines_angles_triangles.triangle_angle_sum.TR.C.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/trc-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/tri-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "lines_angles_triangles.triangle_angle_sum.TR.C.png",
+   "mobileFile": "lines_angles_triangles.triangle_angle_sum.TR.C.m375.png",
+   "archetypeId": "lat.triangle_angle_sum.TR.C.compose_kind",
+   "seed": 11,
+   "signature": "figure_choice[triangle:scalene]",
+   "stimulus": "A teacher describes a triangle to the class. In triangle $BDH$, angle $B$ = 41° and angle $D$ is 27° more than angle $H$.",
+   "question": "Which of the following figures shows triangle $BDH$?",
+   "options": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "correctIndex": 1,
+   "answer": "B",
+   "explanation": "(1) ∠B = 41° 이고 ∠D = ∠H + 27° 이다. (2) 나머지 두 각의 합 = 180° - 41° = 139° 이다. (3) 작은 각 = (139 - 27) ÷ 2 = 56° 이다. (4) 큰 각 = 56 + 27 = 83° 이다. (5) 각은 41°, 83°, 56° 이다. 따라서 정답은 B이다.",
+   "structuralIssues": []
+  }
+ ]
+}

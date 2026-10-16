@@ -1,0 +1,122 @@
+"use server";
+
+import { revalidatePath } from "next/cache";
+import { requireAdmin } from "@/lib/admin-auth";
+import { createAdminClient } from "@/lib/supabase-admin";
+import { currentRequestOrigin } from "@/lib/request-origin";
+import { appendVercelProtectionBypass } from "@/lib/vercel-protection-bypass";
+import {
+  loadTeacherAgreementState,
+  sendTeacherAgreementInternal,
+  TeacherAgreementNotReadyError,
+  type TeacherAgreementState,
+} from "@/lib/teacher-agreements/send";
+import { retryTeacherAgreementArchive } from "@/lib/teacher-agreements/archive";
+import {
+  loadRateAddendumState,
+  RateAddendumNotReadyError,
+  sendRateAddendumInternal,
+  type RateAddendumState,
+} from "@/lib/teacher-agreements/addendum";
+import { validateTeacherAgreementInputs } from "@/lib/teacher-agreements/validate-inputs";
+import type { TeacherAgreementInputs } from "@/lib/teacher-agreements/prepare";
+
+export type TeacherAgreementActionResult<T = undefined> = ({ ok: true } & (T extends undefined ? object : { data: T })) | { ok: false; error: string };
+
+export async function getTeacherAgreementStateAction(teacherId: string): Promise<TeacherAgreementActionResult<TeacherAgreementState>> {
+  try {
+    await requireAdmin();
+    return { ok: true, data: await loadTeacherAgreementState(createAdminClient(), teacherId) };
+  } catch (e) {
+    return { ok: false, error: e instanceof Error ? e.message : "계약 상태를 불러오지 못했습니다." };
+  }
+}
+
+export async function saveTeacherAgreementInputsAction(
+  teacherId: string,
+  raw: Partial<Record<keyof TeacherAgreementInputs, string | null>>
+): Promise<TeacherAgreementActionResult<TeacherAgreementState>> {
+  try {
+    const { adminUserId } = await requireAdmin();
+    const validated = validateTeacherAgreementInputs(raw);
+    if (!validated.ok) return { ok: false, error: validated.error };
+    const admin = createAdminClient();
+    const { error } = await admin
+      .from("teacher_agreement_inputs")
+      .upsert({ teacher_id: teacherId, ...validated.value, updated_by: adminUserId, updated_at: new Date().toISOString() });
+    if (error) return { ok: false, error: error.message };
+    return { ok: true, data: await loadTeacherAgreementState(admin, teacherId) };
+  } catch (e) {
+    return { ok: false, error: e instanceof Error ? e.message : "저장에 실패했습니다." };
+  }
+}
+
+/** 관리자가 직접 누르는 발송이다 — 자동 발송 토글과 무관하며, 누락 입력이 있으면 DocuSign 호출 전에 막힌다. */
+export async function sendTeacherAgreementAction(teacherId: string): Promise<TeacherAgreementActionResult<TeacherAgreementState>> {
+  try {
+    const { adminUserId } = await requireAdmin();
+    const admin = createAdminClient();
+    const siteUrl = await currentRequestOrigin();
+    await sendTeacherAgreementInternal(admin, {
+      teacherId,
+      actorUserId: adminUserId,
+      webhookUrl: appendVercelProtectionBypass(`${siteUrl}/api/webhooks/docusign`),
+    });
+    revalidatePath("/admin");
+    return { ok: true, data: await loadTeacherAgreementState(admin, teacherId) };
+  } catch (e) {
+    if (e instanceof TeacherAgreementNotReadyError) return { ok: false, error: e.message };
+    return { ok: false, error: e instanceof Error ? e.message : "발송에 실패했습니다." };
+  }
+}
+
+/** 서명본 Drive 보관 재시도 — 서명 상태는 그대로 두고 보관만 다시 시도한다. */
+export async function retryTeacherAgreementArchiveAction(teacherId: string): Promise<TeacherAgreementActionResult<TeacherAgreementState>> {
+  try {
+    await requireAdmin();
+    const admin = createAdminClient();
+    await retryTeacherAgreementArchive(admin, teacherId);
+    return { ok: true, data: await loadTeacherAgreementState(admin, teacherId) };
+  } catch (e) {
+    return { ok: false, error: e instanceof Error ? e.message : "보관 재시도에 실패했습니다." };
+  }
+}
+
+export async function getRateAddendumStateAction(teacherId: string): Promise<TeacherAgreementActionResult<RateAddendumState>> {
+  try {
+    await requireAdmin();
+    return { ok: true, data: await loadRateAddendumState(createAdminClient(), teacherId) };
+  } catch (e) {
+    return { ok: false, error: e instanceof Error ? e.message : "합의서 상태를 불러오지 못했습니다." };
+  }
+}
+
+/**
+ * 시급 변경 합의서 발송. 시스템의 시급은 여기서 바뀌지 않는다 — 선생님 서명 완료(회사 승인은 문서에 이미 기록됨) 웹훅이
+ * 적용 시작일부터 새 시급을 teacher_rate_history에 기록한다.
+ */
+export async function sendRateAddendumAction(
+  teacherId: string,
+  raw: { amount: string; currency: string; effectiveDate: string }
+): Promise<TeacherAgreementActionResult<RateAddendumState>> {
+  try {
+    const { adminUserId } = await requireAdmin();
+    const currency = raw.currency === "USD" ? "USD" : raw.currency === "KRW" ? "KRW" : null;
+    const amount = Number(raw.amount);
+    if (!currency || !Number.isFinite(amount) || amount <= 0) return { ok: false, error: "새 시급과 통화를 올바르게 입력하세요." };
+    const newAmountMinor = currency === "USD" ? Math.round(amount * 100) : Math.round(amount);
+    const admin = createAdminClient();
+    const siteUrl = await currentRequestOrigin();
+    await sendRateAddendumInternal(admin, {
+      teacherId,
+      actorUserId: adminUserId,
+      webhookUrl: appendVercelProtectionBypass(`${siteUrl}/api/webhooks/docusign`),
+      input: { newAmountMinor, newCurrency: currency, effectiveDate: raw.effectiveDate },
+    });
+    revalidatePath("/admin");
+    return { ok: true, data: await loadRateAddendumState(admin, teacherId) };
+  } catch (e) {
+    if (e instanceof RateAddendumNotReadyError) return { ok: false, error: e.message };
+    return { ok: false, error: e instanceof Error ? e.message : "발송에 실패했습니다." };
+  }
+}

@@ -1,0 +1,349 @@
+{
+ "schema": "rw-session-task/v1",
+ "kind": "review",
+ "role": "explanation_audit",
+ "runId": "lit40-wave1",
+ "taskId": "rev-explanation_audit-053",
+ "chunkId": "rev-explanation_audit-053",
+ "suggestedModel": "sonnet",
+ "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-explanation_audit-053.result.json",
+ "outputSchema": {
+  "chunkId": "청크 ID",
+  "model": "sonnet",
+  "items": [
+   {
+    "candidateId": "id",
+    "answer_correct": "표시된 정답이 정말 정답이면 true",
+    "explanation_consistent": "해설이 정답·오답 판단과 일치하고 글자 참조가 맞으면 true",
+    "explanation_factual": "해설에 사실 오류가 없으면 true",
+    "issues": "한 줄 메모"
+   }
+  ]
+ },
+ "items": [
+  {
+   "candidateId": "lit40-easy-01-020",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "tone_or_mood",
+   "requestedDifficulty": "easy",
+   "passage": "The isle was barren. Far as hawk may scan\nIn moors it roll’d up to a headland bare\nSave for one narrow patch, by ceaseless care\nSumptuous with corn. Against the sky a Man\nDigging the waste I saw,—bow’d veteran\nA stubborn spade he drave in stubborn ground\nAnd root and rock flung sheer without a sound\nOver the bleak edge.... Then anew began.\n\n“You, who have lodged in the teeth of the abyss\nYour cabin low, and triumph rich as this\nWrung from the ocean-bitter mountain side,\nWhat help’d you most to bring such treasure out?”\nHe stood, and after scrutiny replied,\n“The thing on which I lean, the Spade of Doubt.”",
+   "question": "Which choice best describes the tone of the text?",
+   "options": [
+    "Mocking and dismissive",
+    "Joyful and carefree",
+    "Fearful and despairing",
+    "Admiring and contemplative"
+   ],
+   "correct_letter": "D",
+   "explanation": "화자는 척박한 땅에서 쉬지 않고 일하는 노인을 'bow'd veteran'이라 부르며 그 수확을 'triumph rich as this'라고 칭송한다. 마지막에 노인이 'the Spade of Doubt'라고 답하며 생각할 거리를 남긴다. 따라서 D가 정답이다. 조롱(A), 근심 없는 기쁨(B), 절망(C)은 지문의 존경 어린 시선과 맞지 않는다."
+  },
+  {
+   "candidateId": "lit40-easy-01-021",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "tone_or_mood",
+   "requestedDifficulty": "easy",
+   "passage": "Good nature is something born with us--an easy, contented disposition, and a tendency to take things quietly and pleasantly. We inherit it. There is little merit in possessing it. Good humor is the result of pleasant surroundings and agreeable circumstances. A good-humored man is so when everything goes right; when things go wrong, his good humor departs and bad humor takes its place. But good temper results from training and self-control--keeping constant watch over our passions and feelings, and above all being in constant harmony with God; for he who is at peace with God is at peace with man, and will keep the \"even tenor of his way.\"",
+   "question": "Which choice best describes the overall tone of the text?",
+   "options": [
+    "earnest and instructive",
+    "bitter and accusatory",
+    "playful and mocking",
+    "anxious and uncertain"
+   ],
+   "correct_letter": "A",
+   "explanation": "지문은 good nature, good humor, good temper를 차례로 구분하며 독자가 훈련과 자제를 통해 좋은 기질을 길러야 한다고 진지하게 가르친다. 'results from training and self-control'과 'in constant harmony with God' 같은 표현이 교훈적이고 진지한 태도를 보여 주므로 A가 정답이다. B는 누군가를 비난하는 표현이 없어 틀리다. C는 조롱이나 장난스러운 표현이 없고, D는 필자가 자신의 주장에 확신을 갖고 있어 틀리다."
+  },
+  {
+   "candidateId": "lit40-easy-01-022",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "tone_or_mood",
+   "requestedDifficulty": "easy",
+   "passage": "You will soon be as well as ever, and we shall all be rejoiced at your return. You must not, however, become impatient at the gradual progress you must necessarily make, but be content with the steady advance you are making to health and strength. Your progress will be the more certain and your recovery more confirmed. Do not let Sherman capture you, and I will endeavor to hold Grant till you come. I am glad to hear such good accounts of my little namesake. Good lungs are a great blessing, and nothing expands them better than a full, hearty yell. I hope Mrs. Longstreet is well, and that she is enjoying the good peaches and melons of Georgia.",
+   "question": "Which choice best describes the overall tone of the text?",
+   "options": [
+    "stern and disapproving",
+    "warm and encouraging",
+    "formal and detached",
+    "grieving and somber"
+   ],
+   "correct_letter": "B",
+   "explanation": "필자는 상대가 곧 회복할 것이라며 'we shall all be rejoiced at your return'이라고 말하고, 조급해하지 말라고 다정하게 당부한다. 또한 어린 이름 동명이와 부인의 안부를 묻고 'a full, hearty yell'이라는 가벼운 농담도 덧붙여 따뜻한 격려의 어조를 만든다. 따라서 B가 정답이다. A는 꾸짖는 내용이 없고, C는 개인적 관심이 드러나 거리감이 없으며, D는 슬픔이 아니라 희망을 말하므로 틀리다."
+  },
+  {
+   "candidateId": "lit40-easy-01-023",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "relationship_between_characters",
+   "requestedDifficulty": "easy",
+   "passage": "Though I have traveled close to a million miles behind the iron horse I cannot ride backwards on a railroad train. In that respect I am like the husband who when about to die said to his wife: \"I want to make a special request of you, and that is, see that I am buried face down; it always did make me sick to travel backwards.\" When a boy I could not swing as could other boys. My head is not level on my shoulders. I have never crossed the ocean and never will. I cannot ride the rolling waves. Some years ago when out on a little coast ride for pleasure, (if that's what you call it) I said to the captain: \"How long till we reach the shore?\"",
+   "question": "Based on the text, which choice best describes the narrator's relationship with the captain?",
+   "options": [
+    "The narrator is a fellow sailor helping the captain steer the boat.",
+    "The narrator is an old friend who often sails with the captain.",
+    "The narrator is an uneasy passenger relying on the captain's knowledge.",
+    "The narrator is a rival captain testing the other's skill at sea."
+   ],
+   "correct_letter": "C",
+   "explanation": "화자는 자신이 'cannot ride the rolling waves'라고 하며 배 타기를 몹시 힘들어하는 사람임을 밝힌다. 그런 화자가 짧은 해안 유람 중 선장에게 'How long till we reach the shore?'라고 묻는 것은 불편한 승객이 선장에게 의지하는 관계를 보여 준다. 따라서 C가 정답이다. A와 D는 화자가 배를 다루는 사람이라는 근거가 없고, B는 화자가 바다를 건넌 적도 없다고 해 자주 함께 항해한다는 내용과 맞지 않는다."
+  },
+  {
+   "candidateId": "lit40-easy-01-024",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "relationship_between_characters",
+   "requestedDifficulty": "easy",
+   "passage": "I was treated like a dog, ordered about like a servant, and made to do three times as much work as had been agreed with my guardian. I felt that it was right to resist. There was no one to fight my battle, and that of my poor sister, but myself. I am well aware that I took upon myself a great responsibility in deciding this question. Perhaps, without the counsel of my brother, I should not have dared to proceed as I did. Bad as the consequences threatened to be, I did not regret that I had permitted the log to drift ashore.",
+   "question": "Based on the text, which choice best describes the narrator's relationship with his brother?",
+   "options": [
+    "The brother is a rival who opposed the narrator's decision to resist.",
+    "The brother is the person who forced the narrator to do extra work.",
+    "The brother is unaware of the hardships the narrator has endured.",
+    "The brother is a trusted adviser whose counsel gave the narrator courage."
+   ],
+   "correct_letter": "D",
+   "explanation": "화자는 부당한 대우에 맞서기로 한 결정이 큰 책임이었다고 말한 뒤 'without the counsel of my brother, I should not have dared'라고 고백한다. 이는 형제의 조언이 화자에게 용기를 준 믿을 만한 지지였음을 보여 주므로 D가 정답이다. A는 형제가 결정을 반대했다는 근거가 없고, B는 화자를 혹사한 사람은 형제가 아니라 일을 시킨 쪽이다. C는 형제가 조언을 했다는 점에서 사정을 알고 있었으므로 틀리다."
+  },
+  {
+   "candidateId": "lit40-easy-01-025",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "relationship_between_characters",
+   "requestedDifficulty": "easy",
+   "passage": "In France, mothers always visit with their daughters; and if restraint upon unmarried people is carried to excess there, we certainly err on the opposite extreme. We allow too much freedom, and we allow it too soon. I believe it is much better for a very young lady never to go about alone, or visit for any length of time from home, without her mother.\n\nYouth must have friends, and those friends, being loved ardently, will have prodigious influence. The choice requires extreme caution. The whole of human destiny is often materially affected by those with whom we are intimate at fourteen or fifteen years of age.",
+   "question": "Based on the text, how does the author view the ideal relationship between a very young lady and her mother?",
+   "options": [
+    "The mother should serve as a close guide who accompanies her daughter.",
+    "The daughter should act as an equal who travels freely without her mother.",
+    "The mother should remain a distant authority who is consulted only rarely.",
+    "The daughter should let her friends replace her mother as her chief guide."
+   ],
+   "correct_letter": "A",
+   "explanation": "필자는 프랑스에서는 어머니가 늘 딸과 함께 방문한다고 소개하고, 어린 숙녀는 'never to go about alone'해야 하며 어머니 없이 집을 떠나지 말아야 한다고 주장한다. 또한 열넷, 열다섯 살의 친구 선택이 운명을 좌우하므로 매우 신중해야 한다고 덧붙인다. 따라서 어머니가 곁에서 이끄는 동반자여야 한다는 A가 정답이다. B는 필자가 지나친 자유를 비판하므로 틀리고, C와 D는 어머니의 동행을 강조하는 주장과 반대된다."
+  },
+  {
+   "candidateId": "lit40-easy-01-026",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "relationship_between_characters",
+   "requestedDifficulty": "easy",
+   "passage": "The gentleman replied that that information was to be obtained from the result of the schooling of the population generally. Every boy and girl around us could read and write, and could enjoy reading and writing. There was therefore evidence to show that they remained at school sufficiently long for the required purposes. It was fair that I should judge of the system from the results. Here in England, we generally object to much that the Americans have adopted into their form of government, and think that many of their political theories are wrong. We do not like universal suffrage.",
+   "question": "Based on the text, which choice best describes the relationship between the narrator and the gentleman?",
+   "options": [
+    "A teacher is correcting a pupil who has failed to learn to read and write.",
+    "A host is explaining local schooling to a visitor who judges it by results.",
+    "Two political allies are agreeing that universal suffrage should be adopted.",
+    "Two rivals are debating so fiercely that neither listens to the other."
+   ],
+   "correct_letter": "B",
+   "explanation": "신사는 교육 성과를 주민들의 학교 교육 결과로 알 수 있다고 설명하고, 화자는 'It was fair that I should judge of the system from the results'라고 받아들인다. 이어 'Here in England'라며 미국 제도를 바라보는 영국인의 시각을 밝히므로, 화자는 설명을 듣고 판단하는 방문자이다. 따라서 B가 정답이다. A는 화자가 학생이라는 근거가 없고, C는 화자가 보통선거를 좋아하지 않는다고 했으므로 틀리며, D는 화자가 신사의 설명을 공정하다고 인정해 맞지 않는다."
+  },
+  {
+   "candidateId": "lit40-easy-01-027",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "symbolism",
+   "requestedDifficulty": "easy",
+   "passage": "There is a fascination in it; there is a magnetism stronger than that of the rock which drew the nails from Sindbad's ship. You are like a bird let out with a string tied to the foot to flutter a little way and return again. It is not business, for you may have none, in the ordinary sense; it is not \"society,\" it is not pleasure. It is the presence of man in his myriads. There is something in the heart which cannot be satisfied away from it.\n\nIt is a curious thing that your next-door neighbour may be a stranger, but there are no strangers in a vast crowd.",
+   "question": "In the text, the image of a bird with a string tied to its foot mainly represents",
+   "options": [
+    "the freedom a person gains by leaving the city for the countryside.",
+    "the loneliness a person feels when living beside an unknown neighbor.",
+    "the pull of the crowd that draws a person back after any brief absence.",
+    "the burden of business duties that keep a person tied to an office."
+   ],
+   "correct_letter": "C",
+   "explanation": "필자는 도시의 군중에 'a magnetism stronger than that of the rock'이 있다고 말하며, 사람을 줄 묶인 새처럼 잠시 날아갔다가 다시 돌아오게 만든다고 묘사한다. 그 끌림은 사업이나 사교가 아니라 'the presence of man in his myriads'라고 밝히므로 C가 정답이다. A는 새가 결국 돌아온다는 점과 반대되고, B는 이웃 이야기가 새의 이미지와 직접 연결되지 않는다. D는 필자가 그것이 사업 때문이 아니라고 분명히 말하므로 틀리다."
+  },
+  {
+   "candidateId": "lit40-easy-01-028",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "symbolism",
+   "requestedDifficulty": "easy",
+   "passage": "The hot, sleepy streets were waking up in the red glow of the fading day. People in the town, now that the glare had died from their eyes, were telling each other that the air was cool, and trying to believe it.\n\nOutside, however, the assertion had more truth in it. A ripple of refreshment was slowly spreading up from the distant river. The shadows of the straight-lined trees lay across the brick road in great black stripes. The fields looked as if their dusty grass was turning green again beneath the darkening sky; in the dull ditches stood the cattle, dreamily content.\n\nThe girls walked on in silence till they reached a point where the road swerved off into a little thicket. This was the spot which Romeo must have had in his mind.",
+   "question": "In the text, the ripple of refreshment spreading up from the distant river mainly represents",
+   "options": [
+    "a coming storm that threatens the girls on their walk to the thicket.",
+    "a false hope that the townspeople invent to forget the summer heat.",
+    "a sign that the fields have been ruined by a long season of drought.",
+    "a gentle relief that arrives as the oppressive day finally ends."
+   ],
+   "correct_letter": "D",
+   "explanation": "지문 앞부분에서 마을 사람들은 공기가 시원하다고 'trying to believe it'하지만, 바깥에서는 그 말이 'had more truth in it'이라고 한다. 강에서 퍼지는 상쾌함과 함께 풀이 다시 푸르러 보이고 소들이 'dreamily content'한 모습은 무더운 하루 끝에 찾아온 안도를 나타낸다. 따라서 D가 정답이다. A는 폭풍의 조짐이 없고, B는 마을 밖에서는 시원함이 실제라고 했으므로 틀리며, C는 들판이 되살아나는 듯하다는 묘사와 반대된다."
+  },
+  {
+   "candidateId": "lit40-easy-01-029",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "symbolism",
+   "requestedDifficulty": "easy",
+   "passage": "In each black little seed is a whole vine packed away.\n\nAfter a time the old vine will fade away. It will fall and turn brown. It will do no more work of changing gases and minerals into living plant. It will not again have green leaves and bear bright flowers.\n\nBut there will be more morning-glories, for the vine has stored some of its life in the seeds, and they will not fade and cease to work. All that is left of the life of the vine is in the seeds. All the morning-glories that will grow and delight us with their bright flowers next summer lie packed away in the dark seeds.\n\nDear little seeds, live on through the cold winter; without you we never again could see our bright morning-glories!",
+   "question": "In the text, the seeds of the morning-glory vine mainly represent",
+   "options": [
+    "the continuation of the vine's life after the old vine fades away.",
+    "the harsh winter that destroys every flower in the garden each year.",
+    "the work of changing gases and minerals into green leaves and flowers.",
+    "the darkness that remains once the bright summer flowers are gone."
+   ],
+   "correct_letter": "A",
+   "explanation": "필자는 'In each black little seed is a whole vine packed away'라고 말하고, 늙은 덩굴이 시들어도 덩굴이 생명의 일부를 씨앗에 저장해 두었다고 설명한다. 'All that is left of the life of the vine is in the seeds'라는 문장도 씨앗이 생명의 이어짐을 상징함을 보여 주므로 A가 정답이다. B는 씨앗이 겨울을 견디는 존재이지 겨울 자체가 아니라서 틀리다. C는 시드는 늙은 덩굴이 하던 일이고, D는 씨앗의 색만 보고 의미를 잘못 읽은 것이다."
+  },
+  {
+   "candidateId": "lit40-easy-01-030",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "symbolism",
+   "requestedDifficulty": "easy",
+   "passage": "I rode up to the house and dismounted, hitched my horse to a post at the door, and proceeded to ring the bell. A tall, stately lady made her appearance, and invited me in with much apparent courtesy. She was dressed in deep mourning, which was very becoming to her pale, sad face. She seemed to be about thirty years of age, very prepossessing in appearance, and evidently belonged to one of the \"F. F. V's.\" As soon as I was seated she inquired: \"To what fortunate circumstance am I to attribute the pleasure of this unexpected call?\" I told her in a few words the nature of my business. The intelligence seemed to cast a deep shadow over her pale features, which all her efforts could not control.",
+   "question": "In the text, the lady's deep mourning dress mainly represents",
+   "options": [
+    "the wealth and high rank that make her look down on her visitor.",
+    "the recent grief that already shadows her face and her manner.",
+    "the formal custom she follows whenever a stranger comes to call.",
+    "the pride she takes in looking elegant before unexpected guests."
+   ],
+   "correct_letter": "B",
+   "explanation": "화자는 부인이 'dressed in deep mourning'이었고 그것이 'pale, sad face'에 어울렸다고 묘사한다. 화자가 용건을 말하자 소식이 'cast a deep shadow over her pale features'하여 감정을 감추지 못하므로, 상복은 그녀를 이미 짓누르고 있는 슬픔을 나타낸다. 따라서 B가 정답이다. A는 부인이 정중하게 맞이했으므로 틀리고, C와 D는 상복을 단순한 관습이나 멋으로만 보아 슬픔의 단서를 놓친다."
+  },
+  {
+   "candidateId": "lit40-easy-01-031",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "easy",
+   "passage": "In a few minutes twenty-five hundred men were in simultaneous movement. Five companies of cavalry wheeled into column of companies, and advanced at a trot through the fields, seeking to gain the shelter of the forest. The six infantry regiments slid up alongside of each other, and pushed on in six parallel columns of march, two on the right of the road and four on the left. The artillery, which alone left the highway, followed at a distance of two or three hundred yards. The remaining cavalry made a wide detour to the right as if to flank the enemy’s left.\n\nIt was a mile and a quarter--it was a march of fully twenty minutes--to the edge of the woodland, the proposed cover of the column.",
+   "question": "As used in the text, the phrase “slid up alongside of each other” most nearly suggests",
+   "options": [
+    "that the regiments moved into position smoothly and in close order.",
+    "that the soldiers lost their footing on the wet and muddy road.",
+    "that the regiments retreated quietly to avoid the enemy's notice.",
+    "that the soldiers mixed together until the columns could not be told apart."
+   ],
+   "correct_letter": "A",
+   "explanation": "이 구절 앞에서는 'twenty-five hundred men were in simultaneous movement'라고 하여 대규모 부대가 함께 움직이는 장면을 보여 준다. 뒤이어 연대들이 'six parallel columns of march'로 나아갔다고 하므로, 'slid up'은 미끄러지듯 매끄럽게 나란히 정렬한 움직임을 뜻한다. 따라서 A가 정답이다. B는 문자 그대로 미끄러졌다고 읽은 오해이고, C는 부대가 전진하므로 틀리며, D는 평행한 대열이 유지되었다는 내용과 반대된다."
+  },
+  {
+   "candidateId": "lit40-easy-01-032",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "easy",
+   "passage": "A look of wild amazement swept over her face. It had not disappeared with her touch. It smiled upon her yet. No venomous thing had sprung from those parted and smiling lips. It was herself gazing upon herself. She was there—and it was there—oh! how that poor brain worked and toiled to solve the question of its double self. Was she, the creature of pain, with her temples full of fire, which had no power to melt the snow from her hair, an evil growth from the loveliness before her, and that perfect still? After wandering so many years, with age upon her limbs, and a curse at her heart, had she come back upon her own young self to be met with smiles and pleasant looks, as if no wickedness had ever crept between them?",
+   "question": "As used in the text, the phrase “temples full of fire” most nearly suggests",
+   "options": [
+    "that the woman is filled with fierce anger at her own reflection.",
+    "that the woman is suffering from a burning, feverish pain in her head.",
+    "that the woman has recently escaped from a house that caught fire.",
+    "that the woman's hair has been darkened and scorched by the heat."
+   ],
+   "correct_letter": "B",
+   "explanation": "지문은 그녀를 'the creature of pain'이라고 부르며 이 구절을 쓰고, 그 불이 'had no power to melt the snow from her hair'라고 덧붙인다. 또 'that poor brain worked and toiled'라는 표현이 머리의 고통과 혼란을 강조하므로, 관자놀이 속 불은 열에 들뜬 듯한 머리의 고통을 뜻한다. 따라서 B가 정답이다. A는 그녀가 분노보다 놀라움과 혼란을 느끼므로 틀리고, C와 D는 비유를 실제 화재로 오해한 것이다."
+  },
+  {
+   "candidateId": "lit40-easy-01-033",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "easy",
+   "passage": "There the old armorial stones dwellers seldom read;\nThere the ivy clambers like the rankest weed;\nThere the Cambridge lawyers sometimes scale the wall\nTo the grave of Helen, loveliest of all.\n\nEven here the fairest of the little band\nStrangers call the fairest girls in Maryland,\nLike the peach her color ere its dyes are fast,\nAnd her form as slender as the virgin mast.\n\nLike a vessel gliding with a net in tow,\nUp the street of evenings Helen seemed to flow,\nLeaving light behind her and a nameless spell\nMurmured in the young men, like an ocean shell.",
+   "question": "As used in the text, the phrase “like an ocean shell” most nearly suggests",
+   "options": [
+    "that Helen spoke to the young men in a loud and commanding voice.",
+    "that the young men collected shells as gifts to win Helen's favor.",
+    "that Helen's charm lingered in the young men like a faint echo.",
+    "that the young men feared Helen as sailors fear a stormy ocean."
+   ],
+   "correct_letter": "C",
+   "explanation": "시는 Helen이 거리를 흐르듯 지나가며 'Leaving light behind her and a nameless spell'을 남긴다고 묘사한다. 그 매력이 젊은이들 속에서 소라 껍데기처럼 'Murmured'한다는 것은 그녀가 떠난 뒤에도 은은한 울림처럼 남는다는 뜻이므로 C가 정답이다. A는 'murmured'라는 낮은 소리와 맞지 않고, B는 비유를 실제 조개 수집으로 오해했다. D는 시 전체가 그녀의 아름다움을 찬미하므로 두려움과 거리가 멀다."
+  },
+  {
+   "candidateId": "lit40-easy-01-035",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "easy",
+   "passage": "Sometimes it charms us; sometimes it repels. But we can no more be oblivious to it than we can to the temperature of the air. Its possessor has but to enter the room, and insensibly we are conscious of a presence. It is as if we had suddenly been placed in the field of a magnetic force.\n\nOn the other hand there are people who produce no effect upon us whatever. They come and go with a like indifference. They are as unimportant psychically as if they were any other portion of the furniture. They never stir us. We might live with them for fifty years and be hardly able to tell, for any influence upon ourselves, whether they existed or not.",
+   "question": "As used in the text, the phrase “placed in the field of a magnetic force” most nearly suggests",
+   "options": [
+    "that such a person exerts a strong, invisible pull on everyone nearby.",
+    "that such a person makes others feel physically uncomfortable and hot.",
+    "that such a person works in a laboratory studying electricity and magnets.",
+    "that such a person forces others to agree with whatever is said aloud."
+   ],
+   "correct_letter": "A",
+   "explanation": "필자는 그런 사람이 방에 들어오기만 해도 'insensibly we are conscious of a presence'라고 말한다. 반대로 영향력 없는 사람들은 'They never stir us'라고 대비되므로, 자기장 비유는 눈에 보이지 않지만 강하게 끌어당기는 존재감을 뜻한다. 따라서 A가 정답이다. B는 기온 비유를 신체적 불편으로 잘못 읽었고, C는 비유를 문자 그대로 받아들였으며, D는 끌림이 'charms us'일 수도 'repels'일 수도 있다는 내용과 맞지 않는다."
+  },
+  {
+   "candidateId": "lit40-easy-01-036",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "easy",
+   "passage": "All at once--strange as it may seem, it is true,--the vessel stopped, in the mid sea, as fast as if it was fixed on the ground. The men, astonished, pulled at their oars, and spread more sail, trying to make progress by the aid of both, but all in vain. Ivy twined round the oars and hindered their motion, and clung to the sails, with heavy clusters of berries. A vine, laden with grapes, ran up the mast, and along the sides of the vessel. The sound of flutes was heard and the odor of fragrant wine spread all around.",
+   "question": "As used in the text, the phrase “as fast as if it was fixed on the ground” most nearly suggests",
+   "options": [
+    "that the vessel was moving at a great speed across the open sea.",
+    "that the vessel stopped completely, as though held by solid land.",
+    "that the vessel had run aground on a hidden sandbar near the coast.",
+    "that the vessel slowed gradually as the wind died down around it."
+   ],
+   "correct_letter": "B",
+   "explanation": "지문은 배가 'in the mid sea'에서 갑자기 멈췄다고 하므로 실제 육지에 걸린 것이 아니다. 선원들이 노를 젓고 돛을 더 펼쳐도 'all in vain'이었다는 점에서, 이 비유는 배가 땅에 고정된 듯 꼼짝 않고 멈춘 상태를 뜻한다. 따라서 B가 정답이다. A는 'fast'를 속도로 오해한 것이고, C는 바다 한가운데라는 설정과 맞지 않으며, D는 갑작스러운 정지를 점진적 감속으로 바꾸어 틀리다."
+  },
+  {
+   "candidateId": "lit40-easy-01-043",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "easy",
+   "passage": "One can always see trouble who looks for it. I had never been across the plains and before the time for the train to start I walked to the front of the engine and looking along the track as it reached out across the prairie I saw trouble. What was it? Why, six miles ahead the track wasn't wide enough. Yes, I saw it. Then on six miles more the rails came together, with my destination nineteen hundred miles away. Soon the train moved and as we neared the difficulty, the track opened to welcome us. Not a pin was torn up nor a rail displaced. Again I looked ahead and a mountain was on the track, but before I had time to get off the mountain got off.",
+   "question": "Which choice best describes the shift in tone that occurs in the text?",
+   "options": [
+    "From alarm about obstacles ahead to wry amusement as they vanish",
+    "From cheerful confidence about the trip to deep regret over a missed destination",
+    "From quiet boredom with the prairie to angry frustration at the slow train",
+    "From calm curiosity about the engine to grim fear of a coming accident"
+   ],
+   "correct_letter": "A",
+   "explanation": "글은 화자가 앞길에서 'trouble'을 보았다며 걱정스러운 듯 시작한다. 그러나 기차가 다가가자 'the track opened to welcome us'라며 선로가 좁아 보인 것이 착시였음이 드러나고, 산조차 'got off'했다는 익살로 끝난다. 따라서 겉보기의 경계심에서 재치 있는 유머로 바뀌는 A가 정답이다. B, C, D는 후회·분노·공포를 제시하지만 글 후반의 가벼운 어조와 맞지 않는다."
+  },
+  {
+   "candidateId": "lit40-easy-01-044",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "easy",
+   "passage": "Is your world a small one, made unendurable by a thousand petty cares? Are the heart and soul of you cast down by bitter disappointment? Would you leave it all, if only for an hour, and come back with a new point of view? Then open the covers of a book.\n\nWith this gentle comrade, you may journey to the very end of the world and even to the beginning of civilisation. There is no land which you may not visit, from Arctic snows to the loftiest peaks of southern mountains. Gallant gentlemen will go with you and tell you how to appreciate what you see.",
+   "question": "Which choice best describes the shift in tone that occurs in the text?",
+   "options": [
+    "From cheerful praise of travel to stern warnings about the dangers of reading",
+    "From sympathy for readers' troubles to warm encouragement to read",
+    "From playful teasing of the reader to bitter complaints about civilisation",
+    "From formal description of distant lands to sorrowful memories of home"
+   ],
+   "correct_letter": "B",
+   "explanation": "글은 'small', 'petty cares', 'bitter disappointment' 같은 표현으로 독자의 괴로움을 묻는 공감 어린 질문으로 시작한다. 이후 'Then open the covers of a book' 다음부터는 책을 'gentle comrade'로 부르며 어디든 갈 수 있다는 따뜻한 권유로 바뀐다. 따라서 B가 정답이다. A의 경고, C의 불평, D의 슬픈 회상은 지문에 나타나지 않는다."
+  },
+  {
+   "candidateId": "lit40-easy-01-045",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "easy",
+   "passage": "Because your strife and labour have been vain,\nYe who have striven, shall I forego, forget\nThe far-off goal where to my feet were set\nIn the old days when life was first made plain?\nUpward in April, who, meeting with the rain,\nDid turn, the first shy mayflowers still are met?\nI who have sought, yea, who am seeking yet,\nWhat pain have I like unto your sore pain?\nSo let me go as one yearning, that braves,\nWith shipmen that have knowledge of the sea,\nThe wind disastrous and the ponderous waves\n(Because his love dwells in some far countree),\nCrying, \"Not one of all your million graves\nIs deep enough to keep my love from me!\"",
+   "question": "Which choice best describes the shift in tone that occurs in the text?",
+   "options": [
+    "From joyful celebration of spring to quiet grief over a lost friend",
+    "From angry blame of others to calm acceptance of a shared failure",
+    "From doubt about a distant goal to bold, defiant devotion",
+    "From hopeful planning of a voyage to fearful dread of the sea"
+   ],
+   "correct_letter": "C",
+   "explanation": "앞부분에서 화자는 다른 이들의 노력이 헛되었다고 해서 자신도 목표를 잊어야 하는지 'shall I forego, forget'처럼 의문을 품는다. 그러나 'So let me go' 이후로는 거친 바람과 파도를 무릅쓰는 뱃사람처럼 나아가겠다며 'Not one of all your million graves / Is deep enough'라고 외친다. 따라서 망설임에서 대담한 헌신으로 바뀌는 C가 정답이다. A, B, D는 각각 슬픔, 분노, 두려움을 제시해 시의 흐름과 맞지 않는다."
+  }
+ ],
+ "instructions": "당신은 문항 감사관이다. 표시된 정답과 해설을 받아, 정답이 맞는지·해설이 일관되고 사실에 맞는지 점검한다(고치지 않고 판정만).\n청크 rev-explanation_audit-053 — 19문항.\n출력: Write 도구로 정확히 이 경로에 JSON 한 파일을 쓴다 → /Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-explanation_audit-053.result.json\n출력 JSON 스키마(예시 구조): {\"chunkId\":\"청크 ID\",\"model\":\"sonnet\",\"items\":[{\"candidateId\":\"id\",\"answer_correct\":\"표시된 정답이 정말 정답이면 true\",\"explanation_consistent\":\"해설이 정답·오답 판단과 일치하고 글자 참조가 맞으면 true\",\"explanation_factual\":\"해설에 사실 오류가 없으면 true\",\"issues\":\"한 줄 메모\"}]}\n허용 값: picked_letter ∈ {A,B,C,D}, 불리언 필드는 true/false, est_difficulty ∈ {easy,medium,hard}. candidateId 를 바꾸지 않고 모든 항목에 답한다.\n금지: 결과 파일 외의 파일 생성·수정, 다른 명령 실행, 문항 수정·재작성. 끝나면 'done <항목 수>' 한 줄만 답한다.\n\n## 문항\n### lit40-easy-01-020 — skill inferences · 유형 tone_or_mood\n[지문]\nThe isle was barren. Far as hawk may scan\nIn moors it roll’d up to a headland bare\nSave for one narrow patch, by ceaseless care\nSumptuous with corn. Against the sky a Man\nDigging the waste I saw,—bow’d veteran\nA stubborn spade he drave in stubborn ground\nAnd root and rock flung sheer without a sound\nOver the bleak edge.... Then anew began.\n\n“You, who have lodged in the teeth of the abyss\nYour cabin low, and triumph rich as this\nWrung from the ocean-bitter mountain side,\nWhat help’d you most to bring such treasure out?”\nHe stood, and after scrutiny replied,\n“The thing on which I lean, the Spade of Doubt.”\n\n[질문] Which choice best describes the tone of the text?\nA) Mocking and dismissive\nB) Joyful and carefree\nC) Fearful and despairing\nD) Admiring and contemplative\n\n[표시된 정답] D\n[해설]\n화자는 척박한 땅에서 쉬지 않고 일하는 노인을 'bow'd veteran'이라 부르며 그 수확을 'triumph rich as this'라고 칭송한다. 마지막에 노인이 'the Spade of Doubt'라고 답하며 생각할 거리를 남긴다. 따라서 D가 정답이다. 조롱(A), 근심 없는 기쁨(B), 절망(C)은 지문의 존경 어린 시선과 맞지 않는다.\n### lit40-easy-01-021 — skill inferences · 유형 tone_or_mood\n[지문]\nGood nature is something born with us--an easy, contented disposition, and a tendency to take things quietly and pleasantly. We inherit it. There is little merit in possessing it. Good humor is the result of pleasant surroundings and agreeable circumstances. A good-humored man is so when everything goes right; when things go wrong, his good humor departs and bad humor takes its place. But good temper results from training and self-control--keeping constant watch over our passions and feelings, and above all being in constant harmony with God; for he who is at peace with God is at peace with man, and will keep the \"even tenor of his way.\"\n\n[질문] Which choice best describes the overall tone of the text?\nA) earnest and instructive\nB) bitter and accusatory\nC) playful and mocking\nD) anxious and uncertain\n\n[표시된 정답] A\n[해설]\n지문은 good nature, good humor, good temper를 차례로 구분하며 독자가 훈련과 자제를 통해 좋은 기질을 길러야 한다고 진지하게 가르친다. 'results from training and self-control'과 'in constant harmony with God' 같은 표현이 교훈적이고 진지한 태도를 보여 주므로 A가 정답이다. B는 누군가를 비난하는 표현이 없어 틀리다. C는 조롱이나 장난스러운 표현이 없고, D는 필자가 자신의 주장에 확신을 갖고 있어 틀리다.\n### lit40-easy-01-022 — skill inferences · 유형 tone_or_mood\n[지문]\nYou will soon be as well as ever, and we shall all be rejoiced at your return. You must not, however, become impatient at the gradual progress you must necessarily make, but be content with the steady advance you are making to health and strength. Your progress will be the more certain and your recovery more confirmed. Do not let Sherman capture you, and I will endeavor to hold Grant till you come. I am glad to hear such good accounts of my little namesake. Good lungs are a great blessing, and nothing expands them better than a full, hearty yell. I hope Mrs. Longstreet is well, and that she is enjoying the good peaches and melons of Georgia.\n\n[질문] Which choice best describes the overall tone of the text?\nA) stern and disapproving\nB) warm and encouraging\nC) formal and detached\nD) grieving and somber\n\n[표시된 정답] B\n[해설]\n필자는 상대가 곧 회복할 것이라며 'we shall all be rejoiced at your return'이라고 말하고, 조급해하지 말라고 다정하게 당부한다. 또한 어린 이름 동명이와 부인의 안부를 묻고 'a full, hearty yell'이라는 가벼운 농담도 덧붙여 따뜻한 격려의 어조를 만든다. 따라서 B가 정답이다. A는 꾸짖는 내용이 없고, C는 개인적 관심이 드러나 거리감이 없으며, D는 슬픔이 아니라 희망을 말하므로 틀리다.\n### lit40-easy-01-023 — skill inferences · 유형 relationship_between_characters\n[지문]\nThough I have traveled close to a million miles behind the iron horse I cannot ride backwards on a railroad train. In that respect I am like the husband who when about to die said to his wife: \"I want to make a special request of you, and that is, see that I am buried face down; it always did make me sick to travel backwards.\" When a boy I could not swing as could other boys. My head is not level on my shoulders. I have never crossed the ocean and never will. I cannot ride the rolling waves. Some years ago when out on a little coast ride for pleasure, (if that's what you call it) I said to the captain: \"How long till we reach the shore?\"\n\n[질문] Based on the text, which choice best describes the narrator's relationship with the captain?\nA) The narrator is a fellow sailor helping the captain steer the boat.\nB) The narrator is an old friend who often sails with the captain.\nC) The narrator is an uneasy passenger relying on the captain's knowledge.\nD) The narrator is a rival captain testing the other's skill at sea.\n\n[표시된 정답] C\n[해설]\n화자는 자신이 'cannot ride the rolling waves'라고 하며 배 타기를 몹시 힘들어하는 사람임을 밝힌다. 그런 화자가 짧은 해안 유람 중 선장에게 'How long till we reach the shore?'라고 묻는 것은 불편한 승객이 선장에게 의지하는 관계를 보여 준다. 따라서 C가 정답이다. A와 D는 화자가 배를 다루는 사람이라는 근거가 없고, B는 화자가 바다를 건넌 적도 없다고 해 자주 함께 항해한다는 내용과 맞지 않는다.\n### lit40-easy-01-024 — skill inferences · 유형 relationship_between_characters\n[지문]\nI was treated like a dog, ordered about like a servant, and made to do three times as much work as had been agreed with my guardian. I felt that it was right to resist. There was no one to fight my battle, and that of my poor sister, but myself. I am well aware that I took upon myself a great responsibility in deciding this question. Perhaps, without the counsel of my brother, I should not have dared to proceed as I did. Bad as the consequences threatened to be, I did not regret that I had permitted the log to drift ashore.\n\n[질문] Based on the text, which choice best describes the narrator's relationship with his brother?\nA) The brother is a rival who opposed the narrator's decision to resist.\nB) The brother is the person who forced the narrator to do extra work.\nC) The brother is unaware of the hardships the narrator has endured.\nD) The brother is a trusted adviser whose counsel gave the narrator courage.\n\n[표시된 정답] D\n[해설]\n화자는 부당한 대우에 맞서기로 한 결정이 큰 책임이었다고 말한 뒤 'without the counsel of my brother, I should not have dared'라고 고백한다. 이는 형제의 조언이 화자에게 용기를 준 믿을 만한 지지였음을 보여 주므로 D가 정답이다. A는 형제가 결정을 반대했다는 근거가 없고, B는 화자를 혹사한 사람은 형제가 아니라 일을 시킨 쪽이다. C는 형제가 조언을 했다는 점에서 사정을 알고 있었으므로 틀리다.\n### lit40-easy-01-025 — skill inferences · 유형 relationship_between_characters\n[지문]\nIn France, mothers always visit with their daughters; and if restraint upon unmarried people is carried to excess there, we certainly err on the opposite extreme. We allow too much freedom, and we allow it too soon. I believe it is much better for a very young lady never to go about alone, or visit for any length of time from home, without her mother.\n\nYouth must have friends, and those friends, being loved ardently, will have prodigious influence. The choice requires extreme caution. The whole of human destiny is often materially affected by those with whom we are intimate at fourteen or fifteen years of age.\n\n[질문] Based on the text, how does the author view the ideal relationship between a very young lady and her mother?\nA) The mother should serve as a close guide who accompanies her daughter.\nB) The daughter should act as an equal who travels freely without her mother.\nC) The mother should remain a distant authority who is consulted only rarely.\nD) The daughter should let her friends replace her mother as her chief guide.\n\n[표시된 정답] A\n[해설]\n필자는 프랑스에서는 어머니가 늘 딸과 함께 방문한다고 소개하고, 어린 숙녀는 'never to go about alone'해야 하며 어머니 없이 집을 떠나지 말아야 한다고 주장한다. 또한 열넷, 열다섯 살의 친구 선택이 운명을 좌우하므로 매우 신중해야 한다고 덧붙인다. 따라서 어머니가 곁에서 이끄는 동반자여야 한다는 A가 정답이다. B는 필자가 지나친 자유를 비판하므로 틀리고, C와 D는 어머니의 동행을 강조하는 주장과 반대된다.\n### lit40-easy-01-026 — skill inferences · 유형 relationship_between_characters\n[지문]\nThe gentleman replied that that information was to be obtained from the result of the schooling of the population generally. Every boy and girl around us could read and write, and could enjoy reading and writing. There was therefore evidence to show that they remained at school sufficiently long for the required purposes. It was fair that I should judge of the system from the results. Here in England, we generally object to much that the Americans have adopted into their form of government, and think that many of their political theories are wrong. We do not like universal suffrage.\n\n[질문] Based on the text, which choice best describes the relationship between the narrator and the gentleman?\nA) A teacher is correcting a pupil who has failed to learn to read and write.\nB) A host is explaining local schooling to a visitor who judges it by results.\nC) Two political allies are agreeing that universal suffrage should be adopted.\nD) Two rivals are debating so fiercely that neither listens to the other.\n\n[표시된 정답] B\n[해설]\n신사는 교육 성과를 주민들의 학교 교육 결과로 알 수 있다고 설명하고, 화자는 'It was fair that I should judge of the system from the results'라고 받아들인다. 이어 'Here in England'라며 미국 제도를 바라보는 영국인의 시각을 밝히므로, 화자는 설명을 듣고 판단하는 방문자이다. 따라서 B가 정답이다. A는 화자가 학생이라는 근거가 없고, C는 화자가 보통선거를 좋아하지 않는다고 했으므로 틀리며, D는 화자가 신사의 설명을 공정하다고 인정해 맞지 않는다.\n### lit40-easy-01-027 — skill inferences · 유형 symbolism\n[지문]\nThere is a fascination in it; there is a magnetism stronger than that of the rock which drew the nails from Sindbad's ship. You are like a bird let out with a string tied to the foot to flutter a little way and return again. It is not business, for you may have none, in the ordinary sense; it is not \"society,\" it is not pleasure. It is the presence of man in his myriads. There is something in the heart which cannot be satisfied away from it.\n\nIt is a curious thing that your next-door neighbour may be a stranger, but there are no strangers in a vast crowd.\n\n[질문] In the text, the image of a bird with a string tied to its foot mainly represents\nA) the freedom a person gains by leaving the city for the countryside.\nB) the loneliness a person feels when living beside an unknown neighbor.\nC) the pull of the crowd that draws a person back after any brief absence.\nD) the burden of business duties that keep a person tied to an office.\n\n[표시된 정답] C\n[해설]\n필자는 도시의 군중에 'a magnetism stronger than that of the rock'이 있다고 말하며, 사람을 줄 묶인 새처럼 잠시 날아갔다가 다시 돌아오게 만든다고 묘사한다. 그 끌림은 사업이나 사교가 아니라 'the presence of man in his myriads'라고 밝히므로 C가 정답이다. A는 새가 결국 돌아온다는 점과 반대되고, B는 이웃 이야기가 새의 이미지와 직접 연결되지 않는다. D는 필자가 그것이 사업 때문이 아니라고 분명히 말하므로 틀리다.\n### lit40-easy-01-028 — skill inferences · 유형 symbolism\n[지문]\nThe hot, sleepy streets were waking up in the red glow of the fading day. People in the town, now that the glare had died from their eyes, were telling each other that the air was cool, and trying to believe it.\n\nOutside, however, the assertion had more truth in it. A ripple of refreshment was slowly spreading up from the distant river. The shadows of the straight-lined trees lay across the brick road in great black stripes. The fields looked as if their dusty grass was turning green again beneath the darkening sky; in the dull ditches stood the cattle, dreamily content.\n\nThe girls walked on in silence till they reached a point where the road swerved off into a little thicket. This was the spot which Romeo must have had in his mind.\n\n[질문] In the text, the ripple of refreshment spreading up from the distant river mainly represents\nA) a coming storm that threatens the girls on their walk to the thicket.\nB) a false hope that the townspeople invent to forget the summer heat.\nC) a sign that the fields have been ruined by a long season of drought.\nD) a gentle relief that arrives as the oppressive day finally ends.\n\n[표시된 정답] D\n[해설]\n지문 앞부분에서 마을 사람들은 공기가 시원하다고 'trying to believe it'하지만, 바깥에서는 그 말이 'had more truth in it'이라고 한다. 강에서 퍼지는 상쾌함과 함께 풀이 다시 푸르러 보이고 소들이 'dreamily content'한 모습은 무더운 하루 끝에 찾아온 안도를 나타낸다. 따라서 D가 정답이다. A는 폭풍의 조짐이 없고, B는 마을 밖에서는 시원함이 실제라고 했으므로 틀리며, C는 들판이 되살아나는 듯하다는 묘사와 반대된다.\n### lit40-easy-01-029 — skill inferences · 유형 symbolism\n[지문]\nIn each black little seed is a whole vine packed away.\n\nAfter a time the old vine will fade away. It will fall and turn brown. It will do no more work of changing gases and minerals into living plant. It will not again have green leaves and bear bright flowers.\n\nBut there will be more morning-glories, for the vine has stored some of its life in the seeds, and they will not fade and cease to work. All that is left of the life of the vine is in the seeds. All the morning-glories that will grow and delight us with their bright flowers next summer lie packed away in the dark seeds.\n\nDear little seeds, live on through the cold winter; without you we never again could see our bright morning-glories!\n\n[질문] In the text, the seeds of the morning-glory vine mainly represent\nA) the continuation of the vine's life after the old vine fades away.\nB) the harsh winter that destroys every flower in the garden each year.\nC) the work of changing gases and minerals into green leaves and flowers.\nD) the darkness that remains once the bright summer flowers are gone.\n\n[표시된 정답] A\n[해설]\n필자는 'In each black little seed is a whole vine packed away'라고 말하고, 늙은 덩굴이 시들어도 덩굴이 생명의 일부를 씨앗에 저장해 두었다고 설명한다. 'All that is left of the life of the vine is in the seeds'라는 문장도 씨앗이 생명의 이어짐을 상징함을 보여 주므로 A가 정답이다. B는 씨앗이 겨울을 견디는 존재이지 겨울 자체가 아니라서 틀리다. C는 시드는 늙은 덩굴이 하던 일이고, D는 씨앗의 색만 보고 의미를 잘못 읽은 것이다.\n### lit40-easy-01-030 — skill inferences · 유형 symbolism\n[지문]\nI rode up to the house and dismounted, hitched my horse to a post at the door, and proceeded to ring the bell. A tall, stately lady made her appearance, and invited me in with much apparent courtesy. She was dressed in deep mourning, which was very becoming to her pale, sad face. She seemed to be about thirty years of age, very prepossessing in appearance, and evidently belonged to one of the \"F. F. V's.\" As soon as I was seated she inquired: \"To what fortunate circumstance am I to attribute the pleasure of this unexpected call?\" I told her in a few words the nature of my business. The intelligence seemed to cast a deep shadow over her pale features, which all her efforts could not control.\n\n[질문] In the text, the lady's deep mourning dress mainly represents\nA) the wealth and high rank that make her look down on her visitor.\nB) the recent grief that already shadows her face and her manner.\nC) the formal custom she follows whenever a stranger comes to call.\nD) the pride she takes in looking elegant before unexpected guests.\n\n[표시된 정답] B\n[해설]\n화자는 부인이 'dressed in deep mourning'이었고 그것이 'pale, sad face'에 어울렸다고 묘사한다. 화자가 용건을 말하자 소식이 'cast a deep shadow over her pale features'하여 감정을 감추지 못하므로, 상복은 그녀를 이미 짓누르고 있는 슬픔을 나타낸다. 따라서 B가 정답이다. A는 부인이 정중하게 맞이했으므로 틀리고, C와 D는 상복을 단순한 관습이나 멋으로만 보아 슬픔의 단서를 놓친다.\n### lit40-easy-01-031 — skill words_in_context · 유형 figurative_language\n[지문]\nIn a few minutes twenty-five hundred men were in simultaneous movement. Five companies of cavalry wheeled into column of companies, and advanced at a trot through the fields, seeking to gain the shelter of the forest. The six infantry regiments slid up alongside of each other, and pushed on in six parallel columns of march, two on the right of the road and four on the left. The artillery, which alone left the highway, followed at a distance of two or three hundred yards. The remaining cavalry made a wide detour to the right as if to flank the enemy’s left.\n\nIt was a mile and a quarter--it was a march of fully twenty minutes--to the edge of the woodland, the proposed cover of the column.\n\n[질문] As used in the text, the phrase “slid up alongside of each other” most nearly suggests\nA) that the regiments moved into position smoothly and in close order.\nB) that the soldiers lost their footing on the wet and muddy road.\nC) that the regiments retreated quietly to avoid the enemy's notice.\nD) that the soldiers mixed together until the columns could not be told apart.\n\n[표시된 정답] A\n[해설]\n이 구절 앞에서는 'twenty-five hundred men were in simultaneous movement'라고 하여 대규모 부대가 함께 움직이는 장면을 보여 준다. 뒤이어 연대들이 'six parallel columns of march'로 나아갔다고 하므로, 'slid up'은 미끄러지듯 매끄럽게 나란히 정렬한 움직임을 뜻한다. 따라서 A가 정답이다. B는 문자 그대로 미끄러졌다고 읽은 오해이고, C는 부대가 전진하므로 틀리며, D는 평행한 대열이 유지되었다는 내용과 반대된다.\n### lit40-easy-01-032 — skill words_in_context · 유형 figurative_language\n[지문]\nA look of wild amazement swept over her face. It had not disappeared with her touch. It smiled upon her yet. No venomous thing had sprung from those parted and smiling lips. It was herself gazing upon herself. She was there—and it was there—oh! how that poor brain worked and toiled to solve the question of its double self. Was she, the creature of pain, with her temples full of fire, which had no power to melt the snow from her hair, an evil growth from the loveliness before her, and that perfect still? After wandering so many years, with age upon her limbs, and a curse at her heart, had she come back upon her own young self to be met with smiles and pleasant looks, as if no wickedness had ever crept between them?\n\n[질문] As used in the text, the phrase “temples full of fire” most nearly suggests\nA) that the woman is filled with fierce anger at her own reflection.\nB) that the woman is suffering from a burning, feverish pain in her head.\nC) that the woman has recently escaped from a house that caught fire.\nD) that the woman's hair has been darkened and scorched by the heat.\n\n[표시된 정답] B\n[해설]\n지문은 그녀를 'the creature of pain'이라고 부르며 이 구절을 쓰고, 그 불이 'had no power to melt the snow from her hair'라고 덧붙인다. 또 'that poor brain worked and toiled'라는 표현이 머리의 고통과 혼란을 강조하므로, 관자놀이 속 불은 열에 들뜬 듯한 머리의 고통을 뜻한다. 따라서 B가 정답이다. A는 그녀가 분노보다 놀라움과 혼란을 느끼므로 틀리고, C와 D는 비유를 실제 화재로 오해한 것이다.\n### lit40-easy-01-033 — skill words_in_context · 유형 figurative_language\n[지문]\nThere the old armorial stones dwellers seldom read;\nThere the ivy clambers like the rankest weed;\nThere the Cambridge lawyers sometimes scale the wall\nTo the grave of Helen, loveliest of all.\n\nEven here the fairest of the little band\nStrangers call the fairest girls in Maryland,\nLike the peach her color ere its dyes are fast,\nAnd her form as slender as the virgin mast.\n\nLike a vessel gliding with a net in tow,\nUp the street of evenings Helen seemed to flow,\nLeaving light behind her and a nameless spell\nMurmured in the young men, like an ocean shell.\n\n[질문] As used in the text, the phrase “like an ocean shell” most nearly suggests\nA) that Helen spoke to the young men in a loud and commanding voice.\nB) that the young men collected shells as gifts to win Helen's favor.\nC) that Helen's charm lingered in the young men like a faint echo.\nD) that the young men feared Helen as sailors fear a stormy ocean.\n\n[표시된 정답] C\n[해설]\n시는 Helen이 거리를 흐르듯 지나가며 'Leaving light behind her and a nameless spell'을 남긴다고 묘사한다. 그 매력이 젊은이들 속에서 소라 껍데기처럼 'Murmured'한다는 것은 그녀가 떠난 뒤에도 은은한 울림처럼 남는다는 뜻이므로 C가 정답이다. A는 'murmured'라는 낮은 소리와 맞지 않고, B는 비유를 실제 조개 수집으로 오해했다. D는 시 전체가 그녀의 아름다움을 찬미하므로 두려움과 거리가 멀다.\n### lit40-easy-01-035 — skill words_in_context · 유형 figurative_language\n[지문]\nSometimes it charms us; sometimes it repels. But we can no more be oblivious to it than we can to the temperature of the air. Its possessor has but to enter the room, and insensibly we are conscious of a presence. It is as if we had suddenly been placed in the field of a magnetic force.\n\nOn the other hand there are people who produce no effect upon us whatever. They come and go with a like indifference. They are as unimportant psychically as if they were any other portion of the furniture. They never stir us. We might live with them for fifty years and be hardly able to tell, for any influence upon ourselves, whether they existed or not.\n\n[질문] As used in the text, the phrase “placed in the field of a magnetic force” most nearly suggests\nA) that such a person exerts a strong, invisible pull on everyone nearby.\nB) that such a person makes others feel physically uncomfortable and hot.\nC) that such a person works in a laboratory studying electricity and magnets.\nD) that such a person forces others to agree with whatever is said aloud.\n\n[표시된 정답] A\n[해설]\n필자는 그런 사람이 방에 들어오기만 해도 'insensibly we are conscious of a presence'라고 말한다. 반대로 영향력 없는 사람들은 'They never stir us'라고 대비되므로, 자기장 비유는 눈에 보이지 않지만 강하게 끌어당기는 존재감을 뜻한다. 따라서 A가 정답이다. B는 기온 비유를 신체적 불편으로 잘못 읽었고, C는 비유를 문자 그대로 받아들였으며, D는 끌림이 'charms us'일 수도 'repels'일 수도 있다는 내용과 맞지 않는다.\n### lit40-easy-01-036 — skill words_in_context · 유형 figurative_language\n[지문]\nAll at once--strange as it may seem, it is true,--the vessel stopped, in the mid sea, as fast as if it was fixed on the ground. The men, astonished, pulled at their oars, and spread more sail, trying to make progress by the aid of both, but all in vain. Ivy twined round the oars and hindered their motion, and clung to the sails, with heavy clusters of berries. A vine, laden with grapes, ran up the mast, and along the sides of the vessel. The sound of flutes was heard and the odor of fragrant wine spread all around.\n\n[질문] As used in the text, the phrase “as fast as if it was fixed on the ground” most nearly suggests\nA) that the vessel was moving at a great speed across the open sea.\nB) that the vessel stopped completely, as though held by solid land.\nC) that the vessel had run aground on a hidden sandbar near the coast.\nD) that the vessel slowed gradually as the wind died down around it.\n\n[표시된 정답] B\n[해설]\n지문은 배가 'in the mid sea'에서 갑자기 멈췄다고 하므로 실제 육지에 걸린 것이 아니다. 선원들이 노를 젓고 돛을 더 펼쳐도 'all in vain'이었다는 점에서, 이 비유는 배가 땅에 고정된 듯 꼼짝 않고 멈춘 상태를 뜻한다. 따라서 B가 정답이다. A는 'fast'를 속도로 오해한 것이고, C는 바다 한가운데라는 설정과 맞지 않으며, D는 갑작스러운 정지를 점진적 감속으로 바꾸어 틀리다.\n### lit40-easy-01-043 — skill text_structure_purpose · 유형 tone_shift\n[지문]\nOne can always see trouble who looks for it. I had never been across the plains and before the time for the train to start I walked to the front of the engine and looking along the track as it reached out across the prairie I saw trouble. What was it? Why, six miles ahead the track wasn't wide enough. Yes, I saw it. Then on six miles more the rails came together, with my destination nineteen hundred miles away. Soon the train moved and as we neared the difficulty, the track opened to welcome us. Not a pin was torn up nor a rail displaced. Again I looked ahead and a mountain was on the track, but before I had time to get off the mountain got off.\n\n[질문] Which choice best describes the shift in tone that occurs in the text?\nA) From alarm about obstacles ahead to wry amusement as they vanish\nB) From cheerful confidence about the trip to deep regret over a missed destination\nC) From quiet boredom with the prairie to angry frustration at the slow train\nD) From calm curiosity about the engine to grim fear of a coming accident\n\n[표시된 정답] A\n[해설]\n글은 화자가 앞길에서 'trouble'을 보았다며 걱정스러운 듯 시작한다. 그러나 기차가 다가가자 'the track opened to welcome us'라며 선로가 좁아 보인 것이 착시였음이 드러나고, 산조차 'got off'했다는 익살로 끝난다. 따라서 겉보기의 경계심에서 재치 있는 유머로 바뀌는 A가 정답이다. B, C, D는 후회·분노·공포를 제시하지만 글 후반의 가벼운 어조와 맞지 않는다.\n### lit40-easy-01-044 — skill text_structure_purpose · 유형 tone_shift\n[지문]\nIs your world a small one, made unendurable by a thousand petty cares? Are the heart and soul of you cast down by bitter disappointment? Would you leave it all, if only for an hour, and come back with a new point of view? Then open the covers of a book.\n\nWith this gentle comrade, you may journey to the very end of the world and even to the beginning of civilisation. There is no land which you may not visit, from Arctic snows to the loftiest peaks of southern mountains. Gallant gentlemen will go with you and tell you how to appreciate what you see.\n\n[질문] Which choice best describes the shift in tone that occurs in the text?\nA) From cheerful praise of travel to stern warnings about the dangers of reading\nB) From sympathy for readers' troubles to warm encouragement to read\nC) From playful teasing of the reader to bitter complaints about civilisation\nD) From formal description of distant lands to sorrowful memories of home\n\n[표시된 정답] B\n[해설]\n글은 'small', 'petty cares', 'bitter disappointment' 같은 표현으로 독자의 괴로움을 묻는 공감 어린 질문으로 시작한다. 이후 'Then open the covers of a book' 다음부터는 책을 'gentle comrade'로 부르며 어디든 갈 수 있다는 따뜻한 권유로 바뀐다. 따라서 B가 정답이다. A의 경고, C의 불평, D의 슬픈 회상은 지문에 나타나지 않는다.\n### lit40-easy-01-045 — skill text_structure_purpose · 유형 tone_shift\n[지문]\nBecause your strife and labour have been vain,\nYe who have striven, shall I forego, forget\nThe far-off goal where to my feet were set\nIn the old days when life was first made plain?\nUpward in April, who, meeting with the rain,\nDid turn, the first shy mayflowers still are met?\nI who have sought, yea, who am seeking yet,\nWhat pain have I like unto your sore pain?\nSo let me go as one yearning, that braves,\nWith shipmen that have knowledge of the sea,\nThe wind disastrous and the ponderous waves\n(Because his love dwells in some far countree),\nCrying, \"Not one of all your million graves\nIs deep enough to keep my love from me!\"\n\n[질문] Which choice best describes the shift in tone that occurs in the text?\nA) From joyful celebration of spring to quiet grief over a lost friend\nB) From angry blame of others to calm acceptance of a shared failure\nC) From doubt about a distant goal to bold, defiant devotion\nD) From hopeful planning of a voyage to fearful dread of the sea\n\n[표시된 정답] C\n[해설]\n앞부분에서 화자는 다른 이들의 노력이 헛되었다고 해서 자신도 목표를 잊어야 하는지 'shall I forego, forget'처럼 의문을 품는다. 그러나 'So let me go' 이후로는 거친 바람과 파도를 무릅쓰는 뱃사람처럼 나아가겠다며 'Not one of all your million graves / Is deep enough'라고 외친다. 따라서 망설임에서 대담한 헌신으로 바뀌는 C가 정답이다. A, B, D는 각각 슬픔, 분노, 두려움을 제시해 시의 흐름과 맞지 않는다."
+}

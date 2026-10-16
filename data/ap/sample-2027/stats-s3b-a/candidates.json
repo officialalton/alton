@@ -1,0 +1,4610 @@
+[
+ {
+  "candidateKey": "ap_statistics-m01-k0",
+  "cellId": "ap_statistics-m01",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "1.13",
+  "unitCode": "1",
+  "skillPrimary": "2.B",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_study_conclusion",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Standard conceptual check: random assignment supports causation, random sampling supports generalization to the population. The student only needs to match each design feature to the conclusion it supports. There is no computation or representation change, and the reading load is light. The four options are the full factorial of the two conclusions, which keeps the item straightforward.",
+  "payload": {
+   "archetype": "st_study_conclusion",
+   "topic": "1.13",
+   "skill": "2.B",
+   "calculator": "allowed",
+   "stem": "A random sample of $240$ employees is selected from a large company, and each is assigned at random to work a flexible schedule or to keep the regular schedule. After the study period, the mean job satisfaction score is higher in the group that used the flexible schedule, and the difference is statistically significant. Which conclusion is justified by the design of this study?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "The result does not show that the flexible schedule caused the higher mean job satisfaction score and cannot be generalized to all employees",
+     "why": "Refuses both conclusions, but random assignment allows a cause-and-effect conclusion, but random selection allows generalizing.",
+     "value": null
+    },
+    {
+     "text": "The flexible schedule caused the higher mean job satisfaction score, but the result cannot be generalized beyond the employees in the study",
+     "why": "Claims cause and refuses to generalize even though the sample was randomly selected.",
+     "value": null
+    },
+    {
+     "text": "The result can be generalized to all employees, but it does not show that the flexible schedule caused the higher mean job satisfaction score",
+     "why": "Refuses to conclude cause even though the groups were randomly assigned and generalizes.",
+     "value": null
+    },
+    {
+     "text": "The flexible schedule caused the higher mean job satisfaction score, and the result can be generalized to all employees",
+     "why": "Random assignment supports a cause-and-effect conclusion and random selection supports generalizing.",
+     "value": null
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 110,
+   "facts": [
+    "sel=True",
+    "asg=True"
+   ],
+   "blueprint": {
+    "id": "st_study_conclusion",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Decide which conclusions a study design justifies",
+    "topic": "1.13",
+    "skill": "2.B",
+    "student_thinking": [
+     "Check whether treatments were assigned at random, which decides whether a cause-and-effect conclusion is justified",
+     "Check whether participants were randomly selected, which decides whether results can be generalized to the population"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "random assignment allows a causal conclusion and random selection allows generalization",
+      "evidence": "the stem states how participants were selected and how they were assigned to groups"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "cause_without_random_assignment",
+      "description": "concludes cause from self-selected groups"
+     },
+     {
+      "id": "generalize_from_volunteers",
+      "description": "generalizes from volunteers"
+     },
+     {
+      "id": "refuse_valid_conclusion",
+      "description": "refuses a conclusion that the design justifies"
+     }
+    ],
+    "verification": {
+     "independent_path": "a truth table over the two design features is enumerated, exactly one of the four claims is allowed, and the sentences are generated from the same table",
+     "method": "exact arithmetic + independent numeric path"
+    },
+    "judgment_demand": [
+     "claim_justification",
+     "interpretation"
+    ]
+   },
+   "seed": 9600,
+   "pack_id": "st_study_conclusion-s9600",
+   "explanation_en": "The correct answer is The flexible schedule caused the higher mean job satisfaction score, and the result can be generalized to all employees. Random assignment supports a cause-and-effect conclusion and random selection supports generalizing.\nThe result does not show that the flexible schedule caused the higher mean job satisfaction score and cannot be generalized to all employees is incorrect: Refuses both conclusions, but random assignment allows a cause-and-effect conclusion, but random selection allows generalizing.\nThe flexible schedule caused the higher mean job satisfaction score, but the result cannot be generalized beyond the employees in the study is incorrect: Claims cause and refuses to generalize even though the sample was randomly selected.\nThe result can be generalized to all employees, but it does not show that the flexible schedule caused the higher mean job satisfaction score is incorrect: Refuses to conclude cause even though the groups were randomly assigned and generalizes."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_study_conclusion",
+   "facts": [
+    "sel=True",
+    "asg=True"
+   ],
+   "seed": 9600
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Core 1.13/2.B: random assignment gives causation, random selection gives generalization."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "D is unique. 'All employees' reads as all employees of the company given context; slight ambiguity but defensible."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; stem complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors are distinct combinations of wrongly refusing a conclusion. The key is the only option with no negation, a mild giveaway. The 'why' text for option A is awkwardly worded."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, typical AP reading load; calculator is not needed but harmless."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Acceptable standard design-conclusion item with a unique key. Minor issues are the 'all employees' scope wording, the mild negation giveaway in the distractors, and the awkward rationale text."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Standard conceptual check: random assignment supports causation, random sampling supports generalization to the population. The student only needs to match each design feature to the conclusion it supports. There is no computation or representation change, and the reading load is light. The four options are the full factorial of the two conclusions, which keeps the item straightforward.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m01-k1",
+  "cellId": "ap_statistics-m01",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "1.13",
+  "unitCode": "1",
+  "skillPrimary": "2.B",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_study_conclusion",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "solver_disagrees:Because the adults were a random sample from the city, the result applies to that city's adult population. D says it cannot be generalized beyond the adults in the study, which is too narrow. B says it applies to all adults, which is too broad. No option is fully correct.; criterion_failed_key_scoring; criterion_failed_stimulus_expression; criterion_failed_distractor_explanation; criterion_failed_exam_suitability; instant_reject_wrong_key; instant_reject_missing_condition; reference_pattern_mismatch",
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Standard scope-of-inference item: random assignment supports causation, random sampling from a single city limits generalization to that city. It requires checking two design features and matching them to a conclusion, with no computation and minimal reading. A slight wording mismatch (options say 'all adults' vs. the city population) does not add real difficulty.",
+  "payload": {
+   "archetype": "st_study_conclusion",
+   "topic": "1.13",
+   "skill": "2.B",
+   "calculator": "allowed",
+   "stem": "A random sample of $150$ adults is selected from a mid-sized city, and each is assigned at random to follow the exercise plan or to not follow it. After the study period, the mean weight loss is higher in the group that used the exercise plan, and the difference is statistically significant. Which conclusion is justified by the design of this study?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "The result can be generalized to all adults, but it does not show that the exercise plan caused the higher mean weight loss",
+     "why": "Refuses to conclude cause even though the groups were randomly assigned and generalizes.",
+     "value": null
+    },
+    {
+     "text": "The exercise plan caused the higher mean weight loss, and the result can be generalized to all adults",
+     "why": "Random assignment supports a cause-and-effect conclusion and random selection supports generalizing.",
+     "value": null
+    },
+    {
+     "text": "The result does not show that the exercise plan caused the higher mean weight loss and cannot be generalized to all adults",
+     "why": "Refuses both conclusions, but random assignment allows a cause-and-effect conclusion, but random selection allows generalizing.",
+     "value": null
+    },
+    {
+     "text": "The exercise plan caused the higher mean weight loss, but the result cannot be generalized beyond the adults in the study",
+     "why": "Claims cause and refuses to generalize even though the sample was randomly selected.",
+     "value": null
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 110,
+   "facts": [
+    "sel=True",
+    "asg=True"
+   ],
+   "blueprint": {
+    "id": "st_study_conclusion",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Decide which conclusions a study design justifies",
+    "topic": "1.13",
+    "skill": "2.B",
+    "student_thinking": [
+     "Check whether treatments were assigned at random, which decides whether a cause-and-effect conclusion is justified",
+     "Check whether participants were randomly selected, which decides whether results can be generalized to the population"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "random assignment allows a causal conclusion and random selection allows generalization",
+      "evidence": "the stem states how participants were selected and how they were assigned to groups"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "cause_without_random_assignment",
+      "description": "concludes cause from self-selected groups"
+     },
+     {
+      "id": "generalize_from_volunteers",
+      "description": "generalizes from volunteers"
+     },
+     {
+      "id": "refuse_valid_conclusion",
+      "description": "refuses a conclusion that the design justifies"
+     }
+    ],
+    "verification": {
+     "independent_path": "a truth table over the two design features is enumerated, exactly one of the four claims is allowed, and the sentences are generated from the same table",
+     "method": "exact arithmetic + independent numeric path"
+    },
+    "judgment_demand": [
+     "claim_justification",
+     "interpretation"
+    ]
+   },
+   "seed": 9601,
+   "pack_id": "st_study_conclusion-s9601",
+   "explanation_en": "The correct answer is The exercise plan caused the higher mean weight loss, and the result can be generalized to all adults. Random assignment supports a cause-and-effect conclusion and random selection supports generalizing.\nThe result can be generalized to all adults, but it does not show that the exercise plan caused the higher mean weight loss is incorrect: Refuses to conclude cause even though the groups were randomly assigned and generalizes.\nThe result does not show that the exercise plan caused the higher mean weight loss and cannot be generalized to all adults is incorrect: Refuses both conclusions, but random assignment allows a cause-and-effect conclusion, but random selection allows generalizing.\nThe exercise plan caused the higher mean weight loss, but the result cannot be generalized beyond the adults in the study is incorrect: Claims cause and refuses to generalize even though the sample was randomly selected."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_study_conclusion",
+   "facts": [
+    "sel=True",
+    "asg=True"
+   ],
+   "seed": 9601
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The format is typical, but the flawed population wording makes the item unsuitable for the exam as written. The calculator designation is unnecessary but harmless.",
+   "key_scoring": {
+    "pass": false,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": ""
+   },
+   "instant_reject": [
+    "wrong_key",
+    "missing_condition"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "Reject. The sample is randomly drawn from one mid-sized city, so generalization is justified only to that city's adults. The key claims generalization to all adults, which overreaches, and the other options are also not fully correct. The key is not defensible, and the explanation text is garbled."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Standard scope-of-inference item: random assignment supports causation, random sampling from a single city limits generalization to that city. It requires checking two design features and matching them to a conclusion, with no computation and minimal reading. A slight wording mismatch (options say 'all adults' vs. the city population) does not add real difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m02-k0",
+  "cellId": "ap_statistics-m02",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "1.10",
+  "unitCode": "1",
+  "skillPrimary": "1.A",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_investigative_question",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept recognition of what makes a question statistical (variability, group comparison, data needed). The correct option (B) compares commute distances between groups. The distractors are a simple count, a value-judgment question, and a single-individual lookup. Each can be eliminated with one idea. The item has no computation, no representation changes, and minimal reading. It is a first-lesson skill, not a full-mock exam item.",
+  "payload": {
+   "archetype": "st_investigative_question",
+   "topic": "1.10",
+   "skill": "1.A",
+   "calculator": "allowed",
+   "stem": "A researcher wants to study how far employees of a large company commute to work. Which of the following is a valid investigative question that requires a statistical investigation?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "How many employees does the company have at its headquarters?",
+     "why": "Asks for a single count that can be looked up, so no variability in data is anticipated and no statistical investigation is needed.",
+     "value": null
+    },
+    {
+     "text": "Do employees of the company who work downtown commute shorter distances than employees who work at other offices?",
+     "why": "Anticipates variability among the individuals, names the population and can be answered by collecting and analyzing data.",
+     "value": null
+    },
+    {
+     "text": "Should the company allow its employees to work from home?",
+     "why": "Asks for an opinion or a value judgment that data collection and analysis cannot settle.",
+     "value": null
+    },
+    {
+     "text": "How many miles did Mr. Gomez drive to work yesterday?",
+     "why": "Asks about one individual, so there is no population and no variability to investigate.",
+     "value": null
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 70,
+   "facts": [
+    "form=2"
+   ],
+   "blueprint": {
+    "id": "st_investigative_question",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Recognize a valid investigative question that requires a statistical investigation",
+    "topic": "1.10",
+    "skill": "1.A",
+    "student_thinking": [
+     "Check whether the question anticipates variability among individuals rather than asking for one fixed value",
+     "Check that the question names a population and can be answered by collecting and analyzing data, not by opinion"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "a valid investigative question anticipates variability, refers to a population and can be answered with data",
+      "evidence": "three options each lack exactly one of these three properties"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "single_known_value",
+      "description": "asks for a count or fact that can be looked up"
+     },
+     {
+      "id": "one_individual",
+      "description": "asks about one person"
+     },
+     {
+      "id": "opinion_not_data",
+      "description": "asks for an opinion"
+     }
+    ],
+    "verification": {
+     "independent_path": "each option is generated from a table of three properties (variability, population, answerable with data) and exactly one option has all three",
+     "method": "property table enumeration"
+    },
+    "judgment_demand": [
+     "interpretation",
+     "claim_justification"
+    ]
+   },
+   "seed": 9600,
+   "pack_id": "st_investigative_question-s9600",
+   "explanation_en": "The correct answer is Do employees of the company who work downtown commute shorter distances than employees who work at other offices?. Anticipates variability among the individuals, names the population and can be answered by collecting and analyzing data.\nHow many employees does the company have at its headquarters? is incorrect: Asks for a single count that can be looked up, so no variability in data is anticipated and no statistical investigation is needed.\nShould the company allow its employees to work from home? is incorrect: Asks for an opinion or a value judgment that data collection and analysis cannot settle.\nHow many miles did Mr. Gomez drive to work yesterday? is incorrect: Asks about one individual, so there is no population and no variability to investigate."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_investigative_question",
+   "facts": [
+    "form=2"
+   ],
+   "seed": 9600
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean 1.A item. Option B is the only question that anticipates variability, refers to a population, and can be answered with data. Each distractor lacks exactly one property and encodes a distinct misconception (a single lookup count, an opinion, one individual). No stimulus is needed, the options are parallel in form, and the reading and calculator load is minimal.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Directly assesses recognizing a valid investigative question (skill 1.A, topic 1.10)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "B is the unique defensible answer. A is a lookup count, C is a value judgment, and D concerns one person."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear and written in US English."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option has its own explanation and names a distinct misconception. The option lengths are fairly balanced, though the key is the longest."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 60 seconds to answer. It requires no calculation, so the calculator designation has no effect."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept recognition of what makes a question statistical (variability, group comparison, data needed). The correct option (B) compares commute distances between groups. The distractors are a simple count, a value-judgment question, and a single-individual lookup. Each can be eliminated with one idea. The item has no computation, no representation changes, and minimal reading. It is a first-lesson skill, not a full-mock exam item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m02-k1",
+  "cellId": "ap_statistics-m02",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "1.10",
+  "unitCode": "1",
+  "skillPrimary": "1.A",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_investigative_question",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept recognition of a statistical investigative question (anticipates variability across a population) versus a fixed-count, opinion/policy, or single-individual question. One or two reasoning steps, no computation, no representation changes, short clear wording.",
+  "payload": {
+   "archetype": "st_investigative_question",
+   "topic": "1.10",
+   "skill": "1.A",
+   "calculator": "allowed",
+   "stem": "A researcher wants to study how far employees of a large company commute to work. Which of the following is a valid investigative question that requires a statistical investigation?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "How many employees does the company have at its headquarters?",
+     "why": "Asks for a single count that can be looked up, so no variability in data is anticipated and no statistical investigation is needed.",
+     "value": null
+    },
+    {
+     "text": "What proportion of the company's employees commute more than twenty miles one way?",
+     "why": "Anticipates variability among the individuals, names the population and can be answered by collecting and analyzing data.",
+     "value": null
+    },
+    {
+     "text": "Should the company allow its employees to work from home?",
+     "why": "Asks for an opinion or a value judgment that data collection and analysis cannot settle.",
+     "value": null
+    },
+    {
+     "text": "How many miles did Mr. Gomez drive to work yesterday?",
+     "why": "Asks about one individual, so there is no population and no variability to investigate.",
+     "value": null
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 70,
+   "facts": [
+    "form=1"
+   ],
+   "blueprint": {
+    "id": "st_investigative_question",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Recognize a valid investigative question that requires a statistical investigation",
+    "topic": "1.10",
+    "skill": "1.A",
+    "student_thinking": [
+     "Check whether the question anticipates variability among individuals rather than asking for one fixed value",
+     "Check that the question names a population and can be answered by collecting and analyzing data, not by opinion"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "a valid investigative question anticipates variability, refers to a population and can be answered with data",
+      "evidence": "three options each lack exactly one of these three properties"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "single_known_value",
+      "description": "asks for a count or fact that can be looked up"
+     },
+     {
+      "id": "one_individual",
+      "description": "asks about one person"
+     },
+     {
+      "id": "opinion_not_data",
+      "description": "asks for an opinion"
+     }
+    ],
+    "verification": {
+     "independent_path": "each option is generated from a table of three properties (variability, population, answerable with data) and exactly one option has all three",
+     "method": "property table enumeration"
+    },
+    "judgment_demand": [
+     "interpretation",
+     "claim_justification"
+    ]
+   },
+   "seed": 9601,
+   "pack_id": "st_investigative_question-s9601",
+   "explanation_en": "The correct answer is What proportion of the company's employees commute more than twenty miles one way?. Anticipates variability among the individuals, names the population and can be answered by collecting and analyzing data.\nHow many employees does the company have at its headquarters? is incorrect: Asks for a single count that can be looked up, so no variability in data is anticipated and no statistical investigation is needed.\nShould the company allow its employees to work from home? is incorrect: Asks for an opinion or a value judgment that data collection and analysis cannot settle.\nHow many miles did Mr. Gomez drive to work yesterday? is incorrect: Asks about one individual, so there is no population and no variability to investigate."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_investigative_question",
+   "facts": [
+    "form=1"
+   ],
+   "seed": 9601
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "It takes about 60 seconds and involves no calculation. It is typical of the AP Statistics style for skill 1.A. The calculator designation is harmless.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "This is a clean, single-skill item on identifying a valid investigative question. The key is unique and the distractors map to distinct misconceptions. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept recognition of a statistical investigative question (anticipates variability across a population) versus a fixed-count, opinion/policy, or single-individual question. One or two reasoning steps, no computation, no representation changes, short clear wording.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m03-k0",
+  "cellId": "ap_statistics-m03",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "1.10",
+  "unitCode": "1",
+  "skillPrimary": "1.A",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_question_data_match",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Student matches candidate investigative questions to the recorded variables. Option A is a non-statistical question (it only asks for a list of values), C uses an unrecorded variable (annual income), and D is a causal question that observational data cannot answer. B is an association question that uses two recorded variables. The item requires one table lookup and recognition of statistical versus non-statistical and causal versus associational questions, with no computation and little reading. This is foundational for skill 1.A.",
+  "payload": {
+   "archetype": "st_question_data_match",
+   "topic": "1.10",
+   "skill": "1.A",
+   "calculator": "allowed",
+   "stem": "A random sample of $300$ households in a town was surveyed, and the variables in the table shown were recorded for each individual. Which of the following investigative questions can be answered using these data?",
+   "stimulus": {
+    "kind": "table",
+    "description": "Variables recorded for each of 300 households in a town.",
+    "data": {
+     "title": "Variables recorded",
+     "columns": [
+      "Variable",
+      "Type"
+     ],
+     "rows": [
+      [
+       "Number of residents",
+       "quantitative"
+      ],
+      [
+       "Owns or rents",
+       "categorical"
+      ],
+      [
+       "Monthly electric bill (dollars)",
+       "quantitative"
+      ]
+     ]
+    }
+   },
+   "options": [
+    {
+     "text": "What was the monthly electric bill for each of the households?",
+     "why": "Asks for a listing of individual values rather than a question about a population that can be answered by summarizing and analyzing the data.",
+     "value": null
+    },
+    {
+     "text": "Is there an association between the number of residents in a household and its monthly electric bill?",
+     "why": "Uses only variables that were recorded and asks about a relationship that the recorded data can address.",
+     "value": null
+    },
+    {
+     "text": "Do households with a higher annual income have a larger monthly electric bill?",
+     "why": "Needs a variable that was not recorded, so the data cannot answer it.",
+     "value": null
+    },
+    {
+     "text": "Would adding another resident to a household cause its monthly electric bill to increase?",
+     "why": "A cause-and-effect question needs data from a randomized experiment, but these data were only recorded, not assigned.",
+     "value": null
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 80,
+   "facts": [
+    "n=300"
+   ],
+   "blueprint": {
+    "id": "st_question_data_match",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Decide which investigative question the collected data can answer",
+    "topic": "1.10",
+    "skill": "1.A",
+    "student_thinking": [
+     "Match the variables named in each question to the variables in the table",
+     "Reject questions that need uncollected variables, need random assignment for a cause-and-effect claim, or ask for individual values"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "an investigative question must be answerable with the collected variables and the study design",
+      "evidence": "the table lists every variable that was recorded and the stem says the data come from a survey"
+     }
+    ],
+    "material": {
+     "type": "table",
+     "must_include": [
+      "variables recorded"
+     ]
+    },
+    "misconceptions": [
+     {
+      "id": "uncollected_variable",
+      "description": "needs a variable that was not recorded"
+     },
+     {
+      "id": "causal_from_survey",
+      "description": "asks a cause-and-effect question of survey data"
+     },
+     {
+      "id": "individual_listing",
+      "description": "asks for a list of individual values"
+     }
+    ],
+    "verification": {
+     "independent_path": "the variable names in each option are matched mechanically against the table and exactly one option uses only recorded variables and an association question",
+     "method": "variable set containment check"
+    },
+    "judgment_demand": [
+     "representation_reading",
+     "claim_justification"
+    ]
+   },
+   "seed": 9600,
+   "pack_id": "st_question_data_match-s9600",
+   "explanation_en": "The correct answer is Is there an association between the number of residents in a household and its monthly electric bill?. Uses only variables that were recorded and asks about a relationship that the recorded data can address.\nWhat was the monthly electric bill for each of the households? is incorrect: Asks for a listing of individual values rather than a question about a population that can be answered by summarizing and analyzing the data.\nDo households with a higher annual income have a larger monthly electric bill? is incorrect: Needs a variable that was not recorded, so the data cannot answer it.\nWould adding another resident to a household cause its monthly electric bill to increase? is incorrect: A cause-and-effect question needs data from a randomized experiment, but these data were only recorded, not assigned."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_question_data_match",
+   "facts": [
+    "n=300"
+   ],
+   "seed": 9600
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Directly targets 1.A: choosing a valid investigative question that the collected data can address. One dominant skill, within Unit 1."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "B uses only recorded variables and asks about an association, which a survey can address. A asks for a listing of values, not a question about a population. C needs income, which was not recorded. D is causal and cannot be answered from survey data. B is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table data are complete, with a title, columns and three variables with types. Minor wording flaw: the stem says 'each individual' while the units are households, so it should say 'each household'. 'was the monthly electric bill' in A is also slightly odd in tense."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception (individual listing, uncollected variable, causal claim from a survey), and the explanation addresses each. Option lengths are comparable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short reading, no calculation, about 80 seconds, typical of an AP Statistics multiple-choice item."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound and has a unique key with well-differentiated distractors. The only fix needed is changing 'each individual' to 'each household' in the stem."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Student matches candidate investigative questions to the recorded variables. Option A is a non-statistical question (it only asks for a list of values), C uses an unrecorded variable (annual income), and D is a causal question that observational data cannot answer. B is an association question that uses two recorded variables. The item requires one table lookup and recognition of statistical versus non-statistical and causal versus associational questions, with no computation and little reading. This is foundational for skill 1.A.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m03-k1",
+  "cellId": "ap_statistics-m03",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "1.10",
+  "unitCode": "1",
+  "skillPrimary": "1.A",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_question_data_match",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept item: identify which question is statistical and answerable with the recorded variables. Distractors are clearly flawed (variable not collected, causal claim from observational data, non-statistical question about individual values). No computation, minimal reading, one small table. Suited to basic learning of skill 1.A rather than a full mock exam item.",
+  "payload": {
+   "archetype": "st_question_data_match",
+   "topic": "1.10",
+   "skill": "1.A",
+   "calculator": "allowed",
+   "stem": "A random sample of $180$ adult members of a gym was surveyed, and the variables in the table shown were recorded for each individual. Which of the following investigative questions can be answered using these data?",
+   "stimulus": {
+    "kind": "table",
+    "description": "Variables recorded for each of 180 adult members of a gym.",
+    "data": {
+     "title": "Variables recorded",
+     "columns": [
+      "Variable",
+      "Type"
+     ],
+     "rows": [
+      [
+       "Membership type",
+       "categorical"
+      ],
+      [
+       "Visits last month",
+       "quantitative"
+      ],
+      [
+       "Years as a member",
+       "quantitative"
+      ]
+     ]
+    }
+   },
+   "options": [
+    {
+     "text": "Do members with a higher resting heart rate visit the gym more often?",
+     "why": "Needs a variable that was not recorded, so the data cannot answer it.",
+     "value": null
+    },
+    {
+     "text": "Is there an association between a gym member's years of membership and visits last month?",
+     "why": "Uses only variables that were recorded and asks about a relationship that the recorded data can address.",
+     "value": null
+    },
+    {
+     "text": "Would switching to a premium membership cause a member to visit the gym more often?",
+     "why": "A cause-and-effect question needs data from a randomized experiment, but these data were only recorded, not assigned.",
+     "value": null
+    },
+    {
+     "text": "What was the number of visits last month for each of the members?",
+     "why": "Asks for a listing of individual values rather than a question about a population that can be answered by summarizing and analyzing the data.",
+     "value": null
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 80,
+   "facts": [
+    "n=180"
+   ],
+   "blueprint": {
+    "id": "st_question_data_match",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Decide which investigative question the collected data can answer",
+    "topic": "1.10",
+    "skill": "1.A",
+    "student_thinking": [
+     "Match the variables named in each question to the variables in the table",
+     "Reject questions that need uncollected variables, need random assignment for a cause-and-effect claim, or ask for individual values"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "an investigative question must be answerable with the collected variables and the study design",
+      "evidence": "the table lists every variable that was recorded and the stem says the data come from a survey"
+     }
+    ],
+    "material": {
+     "type": "table",
+     "must_include": [
+      "variables recorded"
+     ]
+    },
+    "misconceptions": [
+     {
+      "id": "uncollected_variable",
+      "description": "needs a variable that was not recorded"
+     },
+     {
+      "id": "causal_from_survey",
+      "description": "asks a cause-and-effect question of survey data"
+     },
+     {
+      "id": "individual_listing",
+      "description": "asks for a list of individual values"
+     }
+    ],
+    "verification": {
+     "independent_path": "the variable names in each option are matched mechanically against the table and exactly one option uses only recorded variables and an association question",
+     "method": "variable set containment check"
+    },
+    "judgment_demand": [
+     "representation_reading",
+     "claim_justification"
+    ]
+   },
+   "seed": 9601,
+   "pack_id": "st_question_data_match-s9601",
+   "explanation_en": "The correct answer is Is there an association between a gym member's years of membership and visits last month?. Uses only variables that were recorded and asks about a relationship that the recorded data can address.\nDo members with a higher resting heart rate visit the gym more often? is incorrect: Needs a variable that was not recorded, so the data cannot answer it.\nWould switching to a premium membership cause a member to visit the gym more often? is incorrect: A cause-and-effect question needs data from a randomized experiment, but these data were only recorded, not assigned.\nWhat was the number of visits last month for each of the members? is incorrect: Asks for a listing of individual values rather than a question about a population that can be answered by summarizing and analyzing the data."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_question_data_match",
+   "facts": [
+    "n=180"
+   ],
+   "seed": 9601
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "About 80 seconds, minimal reading, no arithmetic. Matches the reference pattern for MC items.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is clean. It has a unique key, a complete stimulus, distinct distractors with explanations, and appropriate load. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: identify which question is statistical and answerable with the recorded variables. Distractors are clearly flawed (variable not collected, causal claim from observational data, non-statistical question about individual values). No computation, minimal reading, one small table. Suited to basic learning of skill 1.A rather than a full mock exam item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m04-k0",
+  "cellId": "ap_statistics-m04",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "1.11",
+  "unitCode": "1",
+  "skillPrimary": "2.B",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_sampling_method",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-step recognition of a simple random sample. The stem gives the defining property (every group of 50 equally likely) and a standard numbering and random-number-generator procedure. The distractors (convenience, stratified, cluster) are clearly different methods, and no computation or representation change is needed. The item is clear, short, and in scope.",
+  "payload": {
+   "archetype": "st_sampling_method",
+   "topic": "1.11",
+   "skill": "2.B",
+   "calculator": "allowed",
+   "stem": "The company wants a sample of $50$ employees from a list of $800$ in which every group of $50$ employees is equally likely to be chosen. The plan is to number the employees from $1$ to $800$ and use a random number generator to choose $50$ different numbers. Which of the following best describes this sampling method?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "A convenience sample",
+     "why": "Chooses whoever is easy to reach, which is likely to be biased and does not use random selection.",
+     "value": null
+    },
+    {
+     "text": "A simple random sample",
+     "why": "This method matches the goal: number the employees from $1$ to $800$ and use a random number generator to choose $50$ different numbers.",
+     "value": null
+    },
+    {
+     "text": "A stratified random sample",
+     "why": "Does not guarantee that each subgroup is represented in proportion; only random selection within each subgroup guarantees it.",
+     "value": null
+    },
+    {
+     "text": "A cluster sample",
+     "why": "Selects whole groups at random and surveys every member, which does not match a goal of spreading the sample across the list.",
+     "value": null
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 80,
+   "facts": [
+    "method=srs"
+   ],
+   "blueprint": {
+    "id": "st_sampling_method",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Justify a sampling method that fits a stated goal",
+    "topic": "1.11",
+    "skill": "2.B",
+    "student_thinking": [
+     "Identify the goal stated in the scenario, such as representation of subgroups, cost of reaching whole groups or equal chance for every group of the chosen size",
+     "Match that goal and the described plan to the one sampling method that has this property"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "each sampling method has a defining property that matches one goal",
+      "evidence": "the stem states both the goal and the selection plan"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "wrong_random_method",
+      "description": "names another random method"
+     },
+     {
+      "id": "wrong_random_method_2",
+      "description": "names a different random method"
+     },
+     {
+      "id": "convenience_is_random",
+      "description": "treats a convenience sample as random"
+     }
+    ],
+    "verification": {
+     "independent_path": "a table of methods and defining properties is used and exactly one method has the property required by the stated goal",
+     "method": "property table enumeration"
+    },
+    "judgment_demand": [
+     "procedure_choice",
+     "claim_justification"
+    ]
+   },
+   "seed": 9600,
+   "pack_id": "st_sampling_method-s9600",
+   "explanation_en": "The correct answer is A simple random sample. This method matches the goal: number the employees from $1$ to $800$ and use a random number generator to choose $50$ different numbers.\nA convenience sample is incorrect: Chooses whoever is easy to reach, which is likely to be biased and does not use random selection.\nA stratified random sample is incorrect: Does not guarantee that each subgroup is represented in proportion; only random selection within each subgroup guarantees it.\nA cluster sample is incorrect: Selects whole groups at random and surveys every member, which does not match a goal of spreading the sample across the list."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_sampling_method",
+   "facts": [
+    "method=srs"
+   ],
+   "seed": 9600
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 1.11 sampling method; justifying a method matching a stated goal fits skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Equal chance for every group of 50 plus random number selection defines an SRS; the key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors are distinct, covering convenience, stratified and cluster. Each is explained, though the stratified explanation is a little generic."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short item of about 80 seconds with parallel options and no arithmetic. It is somewhat easy."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean, easy item that asks the student to identify a simple random sample from its stated goal and plan. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step recognition of a simple random sample. The stem gives the defining property (every group of 50 equally likely) and a standard numbering and random-number-generator procedure. The distractors (convenience, stratified, cluster) are clearly different methods, and no computation or representation change is needed. The item is clear, short, and in scope.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m04-k1",
+  "cellId": "ap_statistics-m04",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "1.11",
+  "unitCode": "1",
+  "skillPrimary": "2.B",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_sampling_method",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept vocabulary identification: randomly selecting whole buildings and surveying all residents is a cluster sample. The stem contains a direct cue, distractors are the standard sampling types, and there is no computation, interpretation of output, or multi-step reasoning. Appropriate for initial learning of topic 1.11.",
+  "payload": {
+   "archetype": "st_sampling_method",
+   "topic": "1.11",
+   "skill": "2.B",
+   "calculator": "allowed",
+   "stem": "Traveling to many apartment buildings is too costly, so the manager wants to survey all residents in only a few buildings. The plan is to randomly select $5$ of the $40$ apartment buildings and survey every resident in the selected buildings. Which of the following best describes this sampling method?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "A stratified random sample",
+     "why": "Does not guarantee that each subgroup is represented in proportion; only random selection within each subgroup guarantees it.",
+     "value": null
+    },
+    {
+     "text": "A cluster sample",
+     "why": "This method matches the goal: randomly select $5$ of the $40$ apartment buildings and survey every resident in the selected buildings.",
+     "value": null
+    },
+    {
+     "text": "A simple random sample",
+     "why": "Gives every group of the chosen size the same chance, but does not guarantee representation of each subgroup.",
+     "value": null
+    },
+    {
+     "text": "A convenience sample",
+     "why": "Chooses whoever is easy to reach, which is likely to be biased and does not use random selection.",
+     "value": null
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 80,
+   "facts": [
+    "method=cluster"
+   ],
+   "blueprint": {
+    "id": "st_sampling_method",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Justify a sampling method that fits a stated goal",
+    "topic": "1.11",
+    "skill": "2.B",
+    "student_thinking": [
+     "Identify the goal stated in the scenario, such as representation of subgroups, cost of reaching whole groups or equal chance for every group of the chosen size",
+     "Match that goal and the described plan to the one sampling method that has this property"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "each sampling method has a defining property that matches one goal",
+      "evidence": "the stem states both the goal and the selection plan"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "wrong_random_method",
+      "description": "names another random method"
+     },
+     {
+      "id": "wrong_random_method_2",
+      "description": "names a different random method"
+     },
+     {
+      "id": "convenience_is_random",
+      "description": "treats a convenience sample as random"
+     }
+    ],
+    "verification": {
+     "independent_path": "a table of methods and defining properties is used and exactly one method has the property required by the stated goal",
+     "method": "property table enumeration"
+    },
+    "judgment_demand": [
+     "procedure_choice",
+     "claim_justification"
+    ]
+   },
+   "seed": 9601,
+   "pack_id": "st_sampling_method-s9601",
+   "explanation_en": "The correct answer is A cluster sample. This method matches the goal: randomly select $5$ of the $40$ apartment buildings and survey every resident in the selected buildings.\nA stratified random sample is incorrect: Does not guarantee that each subgroup is represented in proportion; only random selection within each subgroup guarantees it.\nA simple random sample is incorrect: Gives every group of the chosen size the same chance, but does not guarantee representation of each subgroup.\nA convenience sample is incorrect: Chooses whoever is easy to reach, which is likely to be biased and does not use random selection."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_sampling_method",
+   "facts": [
+    "method=cluster"
+   ],
+   "seed": 9601
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Matches sampling-method identification (topic 1.11) and justifying a method for the stated goal (cost), skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Randomly selecting 5 of 40 buildings and surveying all residents is a cluster sample; unique and defensible."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed. The stem is complete: the goal (cost) and the plan are both stated, and the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Stratified, SRS and convenience each represent a distinct misconception and are explained. Minor flaw: the explanation says 'A cluster sample' although the key is option B, a letter mismatch. The stratified/SRS explanations are somewhat generic but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, about 60-80 seconds, no calculation, typical of AP items."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. It is a straightforward cluster-sample identification with a unique key and distinct distractors. The only fix needed is the explanation's 'A cluster sample' wording, which does not match the key position (option B)."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept vocabulary identification: randomly selecting whole buildings and surveying all residents is a cluster sample. The stem contains a direct cue, distractors are the standard sampling types, and there is no computation, interpretation of output, or multi-step reasoning. Appropriate for initial learning of topic 1.11.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m05-k0",
+  "cellId": "ap_statistics-m05",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "1.9",
+  "unitCode": "1",
+  "skillPrimary": "4.A",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_boxplot_compare",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-step reading of five-number summaries from side-by-side boxplots; each option compares one statistic (Q3, max, IQR, median). Only trivial subtraction for IQR. No interpretation beyond reading values, so it fits basic learning of comparing distributions rather than full-mock exam prep.",
+  "payload": {
+   "archetype": "st_boxplot_compare",
+   "topic": "1.9",
+   "skill": "4.A",
+   "calculator": "allowed",
+   "stem": "The boxplots shown display delivery times, in minutes, for Store A and Store B. The gridlines mark equal steps on the horizontal axis. Which of the following statements is correct?",
+   "stimulus": {
+    "kind": "stat_chart",
+    "description": "Side-by-side boxplots of delivery times, in minutes",
+    "data": {
+     "chart": "boxplot",
+     "data": {
+      "xTitle": "Delivery times, in minutes",
+      "boxes": [
+       {
+        "name": "Store A",
+        "min": 41,
+        "q1": 56,
+        "median": 67,
+        "q3": 72,
+        "max": 77,
+        "outliers": []
+       },
+       {
+        "name": "Store B",
+        "min": 45,
+        "q1": 53,
+        "median": 57,
+        "q3": 79,
+        "max": 92,
+        "outliers": []
+       }
+      ]
+     }
+    }
+   },
+   "options": [
+    {
+     "text": "The third quartile of Store A is greater than the third quartile of Store B",
+     "why": "The third quartile of Store A is $72$ and that of Store B is $79$ (the right edge of each box), so this comparison is reversed.",
+     "value": null
+    },
+    {
+     "text": "The maximum of Store A is greater than the maximum of Store B",
+     "why": "The maximum of Store A is $77$ and that of Store B is $92$ (the right end of each upper whisker), so this comparison is reversed.",
+     "value": null
+    },
+    {
+     "text": "The interquartile range of Store A is greater than the interquartile range of Store B",
+     "why": "The interquartile range of Store A is $16$ and that of Store B is $26$ (the lengths of the boxes), so this comparison is reversed.",
+     "value": null
+    },
+    {
+     "text": "The median of Store A is greater than the median of Store B",
+     "why": "This comparison is true for the plotted five-number summaries.",
+     "value": null
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 85,
+   "facts": [
+    "med=67,57",
+    "iqr=16,26"
+   ],
+   "blueprint": {
+    "id": "st_boxplot_compare",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Compare two distributions displayed in boxplots",
+    "topic": "1.9",
+    "skill": "4.A",
+    "student_thinking": [
+     "Read the median, the quartiles and the whisker ends for each group from the boxplot",
+     "Evaluate each statement about center, spread or extremes and keep the one that matches the plotted values"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "a boxplot shows the minimum, the quartiles, the median and the maximum",
+      "evidence": "the boxplots show the five-number summaries of both groups with no outliers, and every compared statistic differs by at least six units"
+     }
+    ],
+    "material": {
+     "type": "boxplot",
+     "must_include": [
+      "both groups"
+     ]
+    },
+    "misconceptions": [
+     {
+      "id": "reversed_median_comparison",
+      "description": "reverses a comparison of medians"
+     },
+     {
+      "id": "reversed_spread_comparison",
+      "description": "reverses a comparison of spreads"
+     },
+     {
+      "id": "misread_whisker",
+      "description": "misreads a whisker end"
+     }
+    ],
+    "verification": {
+     "independent_path": "each statement is evaluated against the plotted five-number summaries, every compared statistic is required to differ by at least six units so the difference is visible, and exactly one of the four chosen statements is true",
+     "method": "statement evaluation against five-number summaries"
+    },
+    "judgment_demand": [
+     "representation_reading",
+     "interpretation"
+    ]
+   },
+   "seed": 9600,
+   "pack_id": "st_boxplot_compare-s9600",
+   "explanation_en": "The correct answer is The median of Store A is greater than the median of Store B. This comparison is true for the plotted five-number summaries.\nThe third quartile of Store A is greater than the third quartile of Store B is incorrect: The third quartile of Store A is $72$ and that of Store B is $79$ (the right edge of each box), so this comparison is reversed.\nThe maximum of Store A is greater than the maximum of Store B is incorrect: The maximum of Store A is $77$ and that of Store B is $92$ (the right end of each upper whisker), so this comparison is reversed.\nThe interquartile range of Store A is greater than the interquartile range of Store B is incorrect: The interquartile range of Store A is $16$ and that of Store B is $26$ (the lengths of the boxes), so this comparison is reversed."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_boxplot_compare",
+   "facts": [
+    "med=67,57",
+    "iqr=16,26"
+   ],
+   "seed": 9600
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 85 seconds with minimal reading and no needless arithmetic. The calculator is allowed but not needed, which is consistent with the designation.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. It has a unique key, a complete boxplot specification, and explanations for each wrong option. Its demand is low and the distractors are repetitive, but it is acceptable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step reading of five-number summaries from side-by-side boxplots; each option compares one statistic (Q3, max, IQR, median). Only trivial subtraction for IQR. No interpretation beyond reading values, so it fits basic learning of comparing distributions rather than full-mock exam prep.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m05-k1",
+  "cellId": "ap_statistics-m05",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "1.9",
+  "unitCode": "1",
+  "skillPrimary": "4.A",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_boxplot_compare",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Student reads quartiles, medians and extremes from side-by-side boxplots and computes two ranges by simple subtraction. Only one statement is true, and the distractors are clearly false on a direct read. No multi-step reasoning, interpretation, or procedure choice is needed. Fits a foundational check on comparing distributions.",
+  "payload": {
+   "archetype": "st_boxplot_compare",
+   "topic": "1.9",
+   "skill": "4.A",
+   "calculator": "allowed",
+   "stem": "The boxplots shown display delivery times, in minutes, for Store A and Store B. The gridlines mark equal steps on the horizontal axis. Which of the following statements is correct?",
+   "stimulus": {
+    "kind": "stat_chart",
+    "description": "Side-by-side boxplots of delivery times, in minutes",
+    "data": {
+     "chart": "boxplot",
+     "data": {
+      "xTitle": "Delivery times, in minutes",
+      "boxes": [
+       {
+        "name": "Store A",
+        "min": 40,
+        "q1": 50,
+        "median": 55,
+        "q3": 64,
+        "max": 82,
+        "outliers": []
+       },
+       {
+        "name": "Store B",
+        "min": 53,
+        "q1": 58,
+        "median": 69,
+        "q3": 82,
+        "max": 89,
+        "outliers": []
+       }
+      ]
+     }
+    }
+   },
+   "options": [
+    {
+     "text": "The third quartile of Store A is greater than the third quartile of Store B",
+     "why": "The third quartile of Store A is $64$ and that of Store B is $82$ (the right edge of each box), so this comparison is reversed.",
+     "value": null
+    },
+    {
+     "text": "The maximum of Store A is greater than the maximum of Store B",
+     "why": "The maximum of Store A is $82$ and that of Store B is $89$ (the right end of each upper whisker), so this comparison is reversed.",
+     "value": null
+    },
+    {
+     "text": "The median of Store A is greater than the median of Store B",
+     "why": "The median of Store A is $55$ and the median of Store B is $69$, so this comparison of medians is reversed.",
+     "value": null
+    },
+    {
+     "text": "The range of Store A is greater than the range of Store B",
+     "why": "This comparison is true for the plotted five-number summaries.",
+     "value": null
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 85,
+   "facts": [
+    "med=55,69",
+    "iqr=14,24"
+   ],
+   "blueprint": {
+    "id": "st_boxplot_compare",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Compare two distributions displayed in boxplots",
+    "topic": "1.9",
+    "skill": "4.A",
+    "student_thinking": [
+     "Read the median, the quartiles and the whisker ends for each group from the boxplot",
+     "Evaluate each statement about center, spread or extremes and keep the one that matches the plotted values"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "a boxplot shows the minimum, the quartiles, the median and the maximum",
+      "evidence": "the boxplots show the five-number summaries of both groups with no outliers, and every compared statistic differs by at least six units"
+     }
+    ],
+    "material": {
+     "type": "boxplot",
+     "must_include": [
+      "both groups"
+     ]
+    },
+    "misconceptions": [
+     {
+      "id": "reversed_median_comparison",
+      "description": "reverses a comparison of medians"
+     },
+     {
+      "id": "reversed_spread_comparison",
+      "description": "reverses a comparison of spreads"
+     },
+     {
+      "id": "misread_whisker",
+      "description": "misreads a whisker end"
+     }
+    ],
+    "verification": {
+     "independent_path": "each statement is evaluated against the plotted five-number summaries, every compared statistic is required to differ by at least six units so the difference is visible, and exactly one of the four chosen statements is true",
+     "method": "statement evaluation against five-number summaries"
+    },
+    "judgment_demand": [
+     "representation_reading",
+     "interpretation"
+    ]
+   },
+   "seed": 9601,
+   "pack_id": "st_boxplot_compare-s9601",
+   "explanation_en": "The correct answer is The range of Store A is greater than the range of Store B. This comparison is true for the plotted five-number summaries.\nThe third quartile of Store A is greater than the third quartile of Store B is incorrect: The third quartile of Store A is $64$ and that of Store B is $82$ (the right edge of each box), so this comparison is reversed.\nThe maximum of Store A is greater than the maximum of Store B is incorrect: The maximum of Store A is $82$ and that of Store B is $89$ (the right end of each upper whisker), so this comparison is reversed.\nThe median of Store A is greater than the median of Store B is incorrect: The median of Store A is $55$ and the median of Store B is $69$, so this comparison of medians is reversed."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_boxplot_compare",
+   "facts": [
+    "med=55,69",
+    "iqr=14,24"
+   ],
+   "seed": 9601
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Comparing boxplots, center/spread/extremes; fits 1.9/4.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Range A=42 > B=36; other three statements false; unique key."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Five-number summaries, axis title and group names complete. Stem mentions gridlines but the data give no tick values; the renderer picks the scale."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option is explained with values. The key rationale does not show the range values, and the distractors are largely one 'reversed comparison' type."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 85 seconds, minimal arithmetic, typical of the AP exam."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is valid with a unique, correct key and a complete stimulus. Minor weaknesses are a bare key rationale and distractors that are mostly reversed comparisons."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Student reads quartiles, medians and extremes from side-by-side boxplots and computes two ranges by simple subtraction. Only one statement is true, and the distractors are clearly false on a direct read. No multi-step reasoning, interpretation, or procedure choice is needed. Fits a foundational check on comparing distributions.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m06-k0",
+  "cellId": "ap_statistics-m06",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "1.1",
+  "unitCode": "1",
+  "skillPrimary": "1.A",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_question_type",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-step identification of variable types (both quantitative) in an investigative question. No computation, short reading, no representation changes. Distractors are straightforward alternatives (categorical-categorical, group comparison, single proportion). This is a foundational skill 1.A item for topic 1.1.",
+  "payload": {
+   "archetype": "st_question_type",
+   "topic": "1.1",
+   "skill": "1.A",
+   "calculator": "allowed",
+   "stem": "A researcher plans to collect data from a random sample of customers of a coffee shop to answer the following investigative question: \"Among customers of a coffee shop, is there a relationship between the number of minutes spent in the shop and the amount spent, in dollars, on a visit?\" Which of the following best describes what this question asks about?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "A question about the association between two categorical variables",
+     "why": "The question names two quantitative variables, not two categorical variables.",
+     "value": null
+    },
+    {
+     "text": "A question that compares a quantitative variable between two groups",
+     "why": "The question names two quantitative variables, not a quantitative variable and a categorical variable that defines two groups.",
+     "value": null
+    },
+    {
+     "text": "A question about the proportion of individuals in one category of a categorical variable",
+     "why": "The question names two quantitative variables, not one categorical variable.",
+     "value": null
+    },
+    {
+     "text": "A question about the relationship between two quantitative variables",
+     "why": "The question names two quantitative variables, which is the structure this option describes.",
+     "value": null
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 70,
+   "facts": [
+    "kind=two_quant"
+   ],
+   "blueprint": {
+    "id": "st_question_type",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Recognize what an investigative question asks about: one distribution, a comparison of groups or an association",
+    "topic": "1.1",
+    "skill": "1.A",
+    "student_thinking": [
+     "List the variables that the question names and decide whether each is quantitative or categorical",
+     "Match the number and types of variables, and whether groups are compared, to the one option with the same structure"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "a valid investigative question names the variables it asks about, so its structure follows from the variables named",
+      "evidence": "the question is stated in the stem and every option describes a different variable structure"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "wrong_variable_count",
+      "description": "names one variable when the question names two or the reverse"
+     },
+     {
+      "id": "wrong_variable_type",
+      "description": "mixes up quantitative and categorical variables"
+     },
+     {
+      "id": "comparison_vs_relationship",
+      "description": "mixes up comparing two groups with a relationship between two variables"
+     }
+    ],
+    "verification": {
+     "independent_path": "the five question structures are generated from a table of (quantitative count, categorical count, groups compared) and exactly one row matches the question",
+     "method": "variable-structure table enumeration"
+    },
+    "judgment_demand": [
+     "interpretation",
+     "claim_justification"
+    ]
+   },
+   "seed": 9600,
+   "pack_id": "st_question_type-s9600",
+   "explanation_en": "The correct answer is A question about the relationship between two quantitative variables. The question names two quantitative variables, which is the structure this option describes.\nA question about the association between two categorical variables is incorrect: The question names two quantitative variables, not two categorical variables.\nA question that compares a quantitative variable between two groups is incorrect: The question names two quantitative variables, not a quantitative variable and a categorical variable that defines two groups.\nA question about the proportion of individuals in one category of a categorical variable is incorrect: The question names two quantitative variables, not one categorical variable."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_question_type",
+   "facts": [
+    "kind=two_quant"
+   ],
+   "seed": 9600
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 60-70 seconds, has a light reading load, and needs no calculator use. The four options are short and parallel.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, unambiguous check on recognizing the variable structure of an investigative question. It has a unique key, plausible distractors, and appropriate exam load."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step identification of variable types (both quantitative) in an investigative question. No computation, short reading, no representation changes. Distractors are straightforward alternatives (categorical-categorical, group comparison, single proportion). This is a foundational skill 1.A item for topic 1.1.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m06-k1",
+  "cellId": "ap_statistics-m06",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "1.1",
+  "unitCode": "1",
+  "skillPrimary": "1.A",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_question_type",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Student identifies two quantitative variables (years as a member, monthly visits) in a single investigative question and picks the matching description. This is one-step classification at the introductory level, with no computation, a short stem, and clearly distinct options. The difficulty comes from concept recognition only, not from unfair sources.",
+  "payload": {
+   "archetype": "st_question_type",
+   "topic": "1.1",
+   "skill": "1.A",
+   "calculator": "allowed",
+   "stem": "A researcher plans to collect data from a random sample of adult members of a fitness center to answer the following investigative question: \"Among adult members of a fitness center, is there a relationship between the number of years as a member and the number of visits to the center in a month?\" Which of the following best describes what this question asks about?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "A question that compares a quantitative variable between two groups",
+     "why": "The question names two quantitative variables, not a quantitative variable and a categorical variable that defines two groups.",
+     "value": null
+    },
+    {
+     "text": "A question about the relationship between two quantitative variables",
+     "why": "The question names two quantitative variables, which is the structure this option describes.",
+     "value": null
+    },
+    {
+     "text": "A question about the distribution of one quantitative variable",
+     "why": "The question names two quantitative variables, not one quantitative variable.",
+     "value": null
+    },
+    {
+     "text": "A question about the proportion of individuals in one category of a categorical variable",
+     "why": "The question names two quantitative variables, not one categorical variable.",
+     "value": null
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 70,
+   "facts": [
+    "kind=two_quant"
+   ],
+   "blueprint": {
+    "id": "st_question_type",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Recognize what an investigative question asks about: one distribution, a comparison of groups or an association",
+    "topic": "1.1",
+    "skill": "1.A",
+    "student_thinking": [
+     "List the variables that the question names and decide whether each is quantitative or categorical",
+     "Match the number and types of variables, and whether groups are compared, to the one option with the same structure"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "a valid investigative question names the variables it asks about, so its structure follows from the variables named",
+      "evidence": "the question is stated in the stem and every option describes a different variable structure"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "wrong_variable_count",
+      "description": "names one variable when the question names two or the reverse"
+     },
+     {
+      "id": "wrong_variable_type",
+      "description": "mixes up quantitative and categorical variables"
+     },
+     {
+      "id": "comparison_vs_relationship",
+      "description": "mixes up comparing two groups with a relationship between two variables"
+     }
+    ],
+    "verification": {
+     "independent_path": "the five question structures are generated from a table of (quantitative count, categorical count, groups compared) and exactly one row matches the question",
+     "method": "variable-structure table enumeration"
+    },
+    "judgment_demand": [
+     "interpretation",
+     "claim_justification"
+    ]
+   },
+   "seed": 9601,
+   "pack_id": "st_question_type-s9601",
+   "explanation_en": "The correct answer is A question about the relationship between two quantitative variables. The question names two quantitative variables, which is the structure this option describes.\nA question that compares a quantitative variable between two groups is incorrect: The question names two quantitative variables, not a quantitative variable and a categorical variable that defines two groups.\nA question about the distribution of one quantitative variable is incorrect: The question names two quantitative variables, not one quantitative variable.\nA question about the proportion of individuals in one category of a categorical variable is incorrect: The question names two quantitative variables, not one categorical variable."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_question_type",
+   "facts": [
+    "kind=two_quant"
+   ],
+   "seed": 9601
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "About 60-70 seconds, light reading, no arithmetic. The calculator is allowed but not needed, which is consistent.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean, unambiguous item on identifying the structure of an investigative question, with a unique key and distinct distractors. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Student identifies two quantitative variables (years as a member, monthly visits) in a single investigative question and picks the matching description. This is one-step classification at the introductory level, with no computation, a short stem, and clearly distinct options. The difficulty comes from concept recognition only, not from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m07-k0",
+  "cellId": "ap_statistics-m07",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "2.6",
+  "unitCode": "2",
+  "skillPrimary": "3.C",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_cond_prob_table",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-step conditional probability from a two-way table: sum the Improved column (87) and divide 45 by it to get 0.517. Distractors reflect the reversed conditional (0.608), the marginal (0.474) and the joint (0.288). Light reading, trivial arithmetic, and one representation (table to probability). Core skill for topic 2.6 with no extra reasoning layers.",
+  "payload": {
+   "archetype": "st_cond_prob_table",
+   "topic": "2.6",
+   "skill": "3.C",
+   "calculator": "allowed",
+   "stem": "The table shown summarizes the responses of $156$ patients. One patient is selected at random. Given that the patient improved, what is the probability that the patient was treated at the North clinic? Round to three decimal places.",
+   "stimulus": {
+    "kind": "stat_chart",
+    "description": "Two-way table of clinic and response",
+    "data": {
+     "chart": "two_way",
+     "data": {
+      "rowHeader": "Clinic",
+      "rowLabels": [
+       "North",
+       "South"
+      ],
+      "colLabels": [
+       "Improved",
+       "Did not improve"
+      ],
+      "cells": [
+       [
+        45,
+        29
+       ],
+       [
+        42,
+        40
+       ]
+      ]
+     }
+    }
+   },
+   "options": [
+    {
+     "text": "$0.474$",
+     "why": "Reports the overall proportion in the row, ignoring the given information.",
+     "value": "0.47435897"
+    },
+    {
+     "text": "$0.608$",
+     "why": "Divides by the row total instead of the column total, which reverses the condition.",
+     "value": "0.60810811"
+    },
+    {
+     "text": "$0.517$",
+     "why": "Given the column, the total is $87$ and $45$ of them are in the row: $45/87 \\approx 0.517$.",
+     "value": "0.51724138"
+    },
+    {
+     "text": "$0.288$",
+     "why": "Divides by the grand total, which gives the probability of both events instead of the conditional probability.",
+     "value": "0.28846154"
+    }
+   ],
+   "key_index": 2,
+   "est_seconds": 85,
+   "facts": [
+    "N=156"
+   ],
+   "blueprint": {
+    "id": "st_cond_prob_table",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Compute a conditional probability from a two-way table",
+    "topic": "2.6",
+    "skill": "3.C",
+    "student_thinking": [
+     "Restrict attention to the group named by the given condition (one column)",
+     "Divide the count of the event within that group by the group total, not by the grand total or the row total"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "P(A given B) divides the joint count by the total for B",
+      "evidence": "the table gives all counts and the stem names the given condition"
+     }
+    ],
+    "material": {
+     "type": "two_way_table",
+     "must_include": [
+      "all cell counts"
+     ]
+    },
+    "misconceptions": [
+     {
+      "id": "reversed_condition",
+      "description": "divides by the row total"
+     },
+     {
+      "id": "joint_probability",
+      "description": "divides by the grand total"
+     },
+     {
+      "id": "marginal_probability",
+      "description": "ignores the given condition"
+     }
+    ],
+    "verification": {
+     "independent_path": "every respondent is expanded into an individual record and the conditional proportion is found by enumeration, independent of the cell-count ratio",
+     "method": "exact arithmetic + independent numeric path"
+    },
+    "judgment_demand": [
+     "procedure_choice",
+     "calculated_value_decision",
+     "representation_reading"
+    ]
+   },
+   "seed": 9600,
+   "pack_id": "st_cond_prob_table-s9600",
+   "explanation_en": "The correct answer is $0.517$. Given the column, the total is $87$ and $45$ of them are in the row: $45/87 \\approx 0.517$.\n$0.474$ is incorrect: Reports the overall proportion in the row, ignoring the given information.\n$0.608$ is incorrect: Divides by the row total instead of the column total, which reverses the condition.\n$0.288$ is incorrect: Divides by the grand total, which gives the probability of both events instead of the conditional probability."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_cond_prob_table",
+   "facts": [
+    "N=156"
+   ],
+   "seed": 9600
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Conditional probability from a two-way table, calculating a probability (3.C). Fits topic 2.6."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "45/87 = 0.517 is unique. Rounding is stated. The totals are consistent (156)."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table data are complete, with row and column labels and all cell counts. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception (marginal, reversed, joint) and the explanation covers every wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 85 seconds, minimal arithmetic, typical of an AP Statistics item."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean, correct conditional-probability item with a unique key and distinct distractors. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step conditional probability from a two-way table: sum the Improved column (87) and divide 45 by it to get 0.517. Distractors reflect the reversed conditional (0.608), the marginal (0.474) and the joint (0.288). Light reading, trivial arithmetic, and one representation (table to probability). Core skill for topic 2.6 with no extra reasoning layers.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m07-k1",
+  "cellId": "ap_statistics-m07",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "2.6",
+  "unitCode": "2",
+  "skillPrimary": "3.C",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_cond_prob_table",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-step conditional probability from a two-way table: sum the 'Did not improve' column (95) and divide the North cell (46) by it. Distractors capture common misreadings of the conditioning (row total, overall total, joint probability). Minimal reading, simple arithmetic, no representation change or additional reasoning link.",
+  "payload": {
+   "archetype": "st_cond_prob_table",
+   "topic": "2.6",
+   "skill": "3.C",
+   "calculator": "allowed",
+   "stem": "The table shown summarizes the responses of $154$ patients. One patient is selected at random. Given that the patient did not improve, what is the probability that the patient was treated at the North clinic? Round to three decimal places.",
+   "stimulus": {
+    "kind": "stat_chart",
+    "description": "Two-way table of clinic and response",
+    "data": {
+     "chart": "two_way",
+     "data": {
+      "rowHeader": "Clinic",
+      "rowLabels": [
+       "North",
+       "South"
+      ],
+      "colLabels": [
+       "Improved",
+       "Did not improve"
+      ],
+      "cells": [
+       [
+        39,
+        46
+       ],
+       [
+        20,
+        49
+       ]
+      ]
+     }
+    }
+   },
+   "options": [
+    {
+     "text": "$0.541$",
+     "why": "Divides by the row total instead of the column total, which reverses the condition.",
+     "value": "0.54117647"
+    },
+    {
+     "text": "$0.552$",
+     "why": "Reports the overall proportion in the row, ignoring the given information.",
+     "value": "0.55194805"
+    },
+    {
+     "text": "$0.484$",
+     "why": "Given the column, the total is $95$ and $46$ of them are in the row: $46/95 \\approx 0.484$.",
+     "value": "0.48421053"
+    },
+    {
+     "text": "$0.299$",
+     "why": "Divides by the grand total, which gives the probability of both events instead of the conditional probability.",
+     "value": "0.29870130"
+    }
+   ],
+   "key_index": 2,
+   "est_seconds": 85,
+   "facts": [
+    "N=154"
+   ],
+   "blueprint": {
+    "id": "st_cond_prob_table",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Compute a conditional probability from a two-way table",
+    "topic": "2.6",
+    "skill": "3.C",
+    "student_thinking": [
+     "Restrict attention to the group named by the given condition (one column)",
+     "Divide the count of the event within that group by the group total, not by the grand total or the row total"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "P(A given B) divides the joint count by the total for B",
+      "evidence": "the table gives all counts and the stem names the given condition"
+     }
+    ],
+    "material": {
+     "type": "two_way_table",
+     "must_include": [
+      "all cell counts"
+     ]
+    },
+    "misconceptions": [
+     {
+      "id": "reversed_condition",
+      "description": "divides by the row total"
+     },
+     {
+      "id": "joint_probability",
+      "description": "divides by the grand total"
+     },
+     {
+      "id": "marginal_probability",
+      "description": "ignores the given condition"
+     }
+    ],
+    "verification": {
+     "independent_path": "every respondent is expanded into an individual record and the conditional proportion is found by enumeration, independent of the cell-count ratio",
+     "method": "exact arithmetic + independent numeric path"
+    },
+    "judgment_demand": [
+     "procedure_choice",
+     "calculated_value_decision",
+     "representation_reading"
+    ]
+   },
+   "seed": 9601,
+   "pack_id": "st_cond_prob_table-s9601",
+   "explanation_en": "The correct answer is $0.484$. Given the column, the total is $95$ and $46$ of them are in the row: $46/95 \\approx 0.484$.\n$0.541$ is incorrect: Divides by the row total instead of the column total, which reverses the condition.\n$0.552$ is incorrect: Reports the overall proportion in the row, ignoring the given information.\n$0.299$ is incorrect: Divides by the grand total, which gives the probability of both events instead of the conditional probability."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_cond_prob_table",
+   "facts": [
+    "N=154"
+   ],
+   "seed": 9601
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item is short, has low reading load, and uses parallel decimal options.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, correct conditional probability question from a two-way table, with well-motivated distractors and complete stimulus data. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step conditional probability from a two-way table: sum the 'Did not improve' column (95) and divide the North cell (46) by it. Distractors capture common misreadings of the conditioning (row total, overall total, joint probability). Minimal reading, simple arithmetic, no representation change or additional reasoning link.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m08-k0",
+  "cellId": "ap_statistics-m08",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "2.6",
+  "unitCode": "2",
+  "skillPrimary": "3.C",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_tree_bayes",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "criterion_failed_distractor_explanation",
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Requires reading a tree diagram, computing joint probabilities, the total probability of flagged, and a reversed conditional (Bayes-type) probability. About 4 reasoning steps with one representation change. Arithmetic is light and the wording is clear. Distractors map to named errors: P(Flagged), P(Flagged|Work), and P(Work and Flagged). Appropriate for full-mock difficulty.",
+  "payload": {
+   "archetype": "st_tree_bayes",
+   "topic": "2.6",
+   "skill": "3.C",
+   "calculator": "allowed",
+   "stem": "At an email filter, each email comes from Inbox Work or Inbox Personal, as shown in the tree diagram. One email is selected at random and is flagged. What is the probability that the email is a work email? Round to three decimal places.",
+   "stimulus": {
+    "kind": "stat_chart",
+    "description": "Probability tree for Inbox and outcome",
+    "data": {
+     "chart": "tree",
+     "tree": {
+      "branches": [
+       {
+        "name": "Inbox Work",
+        "label": "0.60",
+        "next": [
+         {
+          "name": "Flagged",
+          "label": "0.10"
+         },
+         {
+          "name": "Unflagged",
+          "label": "0.90"
+         }
+        ]
+       },
+       {
+        "name": "Personal",
+        "label": "0.40",
+        "next": [
+         {
+          "name": "Flagged",
+          "label": "0.05"
+         },
+         {
+          "name": "Unflagged",
+          "label": "0.95"
+         }
+        ]
+       }
+      ]
+     }
+    }
+   },
+   "options": [
+    {
+     "text": "$0.750$",
+     "why": "$P(\\text{Work}\\mid \\text{flagged}) = 0.0600/0.0800 \\approx 0.750$: the branch for Work then flagged, divided by the total probability of flagged.",
+     "value": "0.75000000"
+    },
+    {
+     "text": "$0.080$",
+     "why": "Reports the overall probability of being flagged, not the probability of Work given that.",
+     "value": "0.080000000"
+    },
+    {
+     "text": "$0.100$",
+     "why": "Reports the probability of being flagged given Work, which reverses the conditional probability asked for.",
+     "value": "0.10000000"
+    },
+    {
+     "text": "$0.060$",
+     "why": "Reports the probability of Work and flagged together, without dividing by the probability of being flagged.",
+     "value": "0.060000000"
+    }
+   ],
+   "key_index": 0,
+   "est_seconds": 100,
+   "facts": [
+    "pa=3/5"
+   ],
+   "blueprint": {
+    "id": "st_tree_bayes",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Reverse a conditional probability using a probability tree",
+    "topic": "2.6",
+    "skill": "3.C",
+    "student_thinking": [
+     "Compute the probability of each path ending in the given outcome",
+     "Divide the path through the named source by the total probability of the outcome"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "P(source given outcome) = P(source and outcome) / P(outcome)",
+      "evidence": "the tree gives the source probabilities and the conditional outcome probabilities on each branch"
+     }
+    ],
+    "material": {
+     "type": "probability_tree",
+     "must_include": [
+      "branch probabilities"
+     ]
+    },
+    "misconceptions": [
+     {
+      "id": "reversed_conditional",
+      "description": "gives P(outcome given source)"
+     },
+     {
+      "id": "joint_only",
+      "description": "gives the joint probability"
+     },
+     {
+      "id": "total_probability",
+      "description": "gives the overall outcome probability"
+     },
+     {
+      "id": "prior",
+      "description": "gives the prior probability"
+     }
+    ],
+    "verification": {
+     "independent_path": "a population of 100000 items is built from the tree with integer counts per path and the conditional proportion is computed from the counts",
+     "method": "exact arithmetic + independent numeric path"
+    },
+    "judgment_demand": [
+     "procedure_choice",
+     "calculated_value_decision",
+     "representation_reading"
+    ]
+   },
+   "seed": 9600,
+   "pack_id": "st_tree_bayes-s9600",
+   "explanation_en": "The correct answer is $0.750$. $P(\\text{Work}\\mid \\text{flagged}) = 0.0600/0.0800 \\approx 0.750$: the branch for Work then flagged, divided by the total probability of flagged.\n$0.080$ is incorrect: Reports the overall probability of being flagged, not the probability of Work given that.\n$0.100$ is incorrect: Reports the probability of being flagged given Work, which reverses the conditional probability asked for.\n$0.060$ is incorrect: Reports the probability of Work and flagged together, without dividing by the probability of being flagged."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_tree_bayes",
+   "facts": [
+    "pa=3/5"
+   ],
+   "seed": 9600
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Reversing a conditional probability from a tree is squarely topic 2.6 with a calculation skill (3.C)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "0.06/0.08 = 0.750 is unique and correct. Rounding to three decimals is stated."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The tree data is complete, with branch probabilities, outcomes and conditional labels. Minor inconsistency: the branch names are 'Inbox Work' and 'Personal' while the stem says 'Inbox Personal', and 'Flagged' is not defined beyond the tree. This is not a blocking flaw."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The blueprint lists a 'prior' misconception (0.600), but that option is not used. The set instead includes 0.080 (total flagged), 0.100 (reversed conditional) and 0.060 (joint), which are distinct and plausible. The explanation covers every wrong option. 0.750 is the largest value among the options, though this is a weak giveaway. 0.060 is a possible concern because it is only a partial calculation, but it is realistic. Passing on balance, but the numeric ordering is slightly suspect."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short one-step task, about 60-100 seconds. Calculator use is permitted and not needed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound: a correct unique key, a complete tree, and distinct distractors. Minor wording inconsistency in the branch names ('Inbox Work' vs 'Personal'). The distractor set also omits the 'prior' option (0.600) listed in the blueprint, and this is not blocking."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires reading a tree diagram, computing joint probabilities, the total probability of flagged, and a reversed conditional (Bayes-type) probability. About 4 reasoning steps with one representation change. Arithmetic is light and the wording is clear. Distractors map to named errors: P(Flagged), P(Flagged|Work), and P(Work and Flagged). Appropriate for full-mock difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m08-k1",
+  "cellId": "ap_statistics-m08",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "2.6",
+  "unitCode": "2",
+  "skillPrimary": "3.C",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_tree_bayes",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Reverse conditional probability from a tree diagram: compute two joint probabilities (0.06 and 0.012), sum to get P(faulty)=0.072, then divide to get 0.833. Distractors correspond to common errors (prior, total probability, reversed conditional). Concept depth is moderate (Bayes-style reasoning), arithmetic is short, and reading load is minimal. This is typical of a full-mock AP item.",
+  "payload": {
+   "archetype": "st_tree_bayes",
+   "topic": "2.6",
+   "skill": "3.C",
+   "calculator": "allowed",
+   "stem": "At an electronics assembler, each part comes from Supplier A or Supplier B, as shown in the tree diagram. One part is selected at random and is faulty. What is the probability that the part came from Supplier A? Round to three decimal places.",
+   "stimulus": {
+    "kind": "stat_chart",
+    "description": "Probability tree for Supplier and outcome",
+    "data": {
+     "chart": "tree",
+     "tree": {
+      "branches": [
+       {
+        "name": "Supplier A",
+        "label": "0.60",
+        "next": [
+         {
+          "name": "Faulty",
+          "label": "0.10"
+         },
+         {
+          "name": "Working",
+          "label": "0.90"
+         }
+        ]
+       },
+       {
+        "name": "Supplier B",
+        "label": "0.40",
+        "next": [
+         {
+          "name": "Faulty",
+          "label": "0.03"
+         },
+         {
+          "name": "Working",
+          "label": "0.97"
+         }
+        ]
+       }
+      ]
+     }
+    }
+   },
+   "options": [
+    {
+     "text": "$0.600$",
+     "why": "Reports the probability of A before the faulty information is used.",
+     "value": "0.60000000"
+    },
+    {
+     "text": "$0.072$",
+     "why": "Reports the overall probability of being faulty, not the probability of A given that.",
+     "value": "0.072000000"
+    },
+    {
+     "text": "$0.833$",
+     "why": "$P(\\text{A}\\mid \\text{faulty}) = 0.0600/0.0720 \\approx 0.833$: the branch for A then faulty, divided by the total probability of faulty.",
+     "value": "0.83333333"
+    },
+    {
+     "text": "$0.100$",
+     "why": "Reports the probability of being faulty given A, which reverses the conditional probability asked for.",
+     "value": "0.10000000"
+    }
+   ],
+   "key_index": 2,
+   "est_seconds": 100,
+   "facts": [
+    "pa=3/5"
+   ],
+   "blueprint": {
+    "id": "st_tree_bayes",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Reverse a conditional probability using a probability tree",
+    "topic": "2.6",
+    "skill": "3.C",
+    "student_thinking": [
+     "Compute the probability of each path ending in the given outcome",
+     "Divide the path through the named source by the total probability of the outcome"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "P(source given outcome) = P(source and outcome) / P(outcome)",
+      "evidence": "the tree gives the source probabilities and the conditional outcome probabilities on each branch"
+     }
+    ],
+    "material": {
+     "type": "probability_tree",
+     "must_include": [
+      "branch probabilities"
+     ]
+    },
+    "misconceptions": [
+     {
+      "id": "reversed_conditional",
+      "description": "gives P(outcome given source)"
+     },
+     {
+      "id": "joint_only",
+      "description": "gives the joint probability"
+     },
+     {
+      "id": "total_probability",
+      "description": "gives the overall outcome probability"
+     },
+     {
+      "id": "prior",
+      "description": "gives the prior probability"
+     }
+    ],
+    "verification": {
+     "independent_path": "a population of 100000 items is built from the tree with integer counts per path and the conditional proportion is computed from the counts",
+     "method": "exact arithmetic + independent numeric path"
+    },
+    "judgment_demand": [
+     "procedure_choice",
+     "calculated_value_decision",
+     "representation_reading"
+    ]
+   },
+   "seed": 9601,
+   "pack_id": "st_tree_bayes-s9601",
+   "explanation_en": "The correct answer is $0.833$. $P(\\text{A}\\mid \\text{faulty}) = 0.0600/0.0720 \\approx 0.833$: the branch for A then faulty, divided by the total probability of faulty.\n$0.600$ is incorrect: Reports the probability of A before the faulty information is used.\n$0.072$ is incorrect: Reports the overall probability of being faulty, not the probability of A given that.\n$0.100$ is incorrect: Reports the probability of being faulty given A, which reverses the conditional probability asked for."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_tree_bayes",
+   "facts": [
+    "pa=3/5"
+   ],
+   "seed": 9601
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Reverse conditional probability from a tree; matches topic 2.6 and skill 3.C."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "0.833 is the unique correct value; the distractors are clearly different."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Tree data is complete with branch names and probabilities. Stem wording is clear and rounding is stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Prior, total probability and reversed conditional are distinct misconceptions, and each is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Typical AP load of about 100 seconds, with no extra reading and calculator use consistent with the designation."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, correct Bayes-from-tree question that passes all five criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Reverse conditional probability from a tree diagram: compute two joint probabilities (0.06 and 0.012), sum to get P(faulty)=0.072, then divide to get 0.833. Distractors correspond to common errors (prior, total probability, reversed conditional). Concept depth is moderate (Bayes-style reasoning), arithmetic is short, and reading load is minimal. This is typical of a full-mock AP item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m09-k0",
+  "cellId": "ap_statistics-m09",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "2.12",
+  "unitCode": "2",
+  "skillPrimary": "4.C",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_clt_describe",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Requires applying the CLT for shape, computing the SD of the sample mean as 30/sqrt(100)=3, and using the dotplot to confirm approximate normality and the center/spread. Distractors map to common misconceptions (population shape retained, SD not reduced, dividing by n instead of sqrt(n)). The arithmetic is trivial and the reading load is low, so the difficulty comes from the concepts and not from unfair sources.",
+  "payload": {
+   "archetype": "st_clt_describe",
+   "topic": "2.12",
+   "skill": "4.C",
+   "calculator": "allowed",
+   "stem": "The repair costs, in dollars, for repairs at a garage are skewed to the right with mean $60$ and standard deviation $30$. The dotplot shown displays the means of $40$ simulated random samples of $100$ values from this population. Which describes the sampling distribution of the sample mean for samples of size $100$?",
+   "stimulus": {
+    "kind": "stat_chart",
+    "description": "Dotplot of 40 simulated sample means",
+    "data": {
+     "chart": "dot_plot",
+     "data": {
+      "xTitle": "Sample mean (dollars)",
+      "dots": [
+       {
+        "value": 53,
+        "count": 1
+       },
+       {
+        "value": 55,
+        "count": 2
+       },
+       {
+        "value": 56,
+        "count": 2
+       },
+       {
+        "value": 57,
+        "count": 5
+       },
+       {
+        "value": 58,
+        "count": 5
+       },
+       {
+        "value": 59,
+        "count": 2
+       },
+       {
+        "value": 60,
+        "count": 7
+       },
+       {
+        "value": 61,
+        "count": 6
+       },
+       {
+        "value": 62,
+        "count": 6
+       },
+       {
+        "value": 63,
+        "count": 2
+       },
+       {
+        "value": 64,
+        "count": 1
+       },
+       {
+        "value": 68,
+        "count": 1
+       }
+      ]
+     }
+    }
+   },
+   "options": [
+    {
+     "text": "Approximately normal, with mean $60$ and standard deviation $30$",
+     "why": "Keeps the population standard deviation instead of dividing it by the square root of the sample size.",
+     "value": null
+    },
+    {
+     "text": "Skewed to the right like the population, with mean $60$ and standard deviation $3$",
+     "why": "Believes the sampling distribution keeps the shape of the skewed population even with a large sample size.",
+     "value": null
+    },
+    {
+     "text": "Approximately normal, with mean $60$ and standard deviation $0.3$",
+     "why": "Divides the population standard deviation by $n$ instead of by the square root of $n$.",
+     "value": null
+    },
+    {
+     "text": "Approximately normal, with mean $60$ and standard deviation $3$",
+     "why": "The mean of the sampling distribution is $\\mu=60$ and its standard deviation is $\\sigma/\\sqrt{n}=30/\\sqrt{100}=3$; with $100$ observations the Central Limit Theorem makes it approximately normal.",
+     "value": null
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 100,
+   "facts": [
+    "n=100",
+    "mu=60",
+    "sd=30"
+   ],
+   "blueprint": {
+    "id": "st_clt_describe",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Describe the sampling distribution of a sample mean using the Central Limit Theorem",
+    "topic": "2.12",
+    "skill": "4.C",
+    "student_thinking": [
+     "Find the mean and the standard deviation of the sampling distribution from the population values and the sample size",
+     "Decide the shape of the sampling distribution from the sample size even though the population is skewed"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the sampling distribution of the mean has mean mu, standard deviation sigma over root n and is approximately normal for large n",
+      "evidence": "the sample size is large (at least 30) and the population standard deviation is given"
+     }
+    ],
+    "material": {
+     "type": "dot_plot",
+     "must_include": [
+      "simulated sample means"
+     ]
+    },
+    "misconceptions": [
+     {
+      "id": "shape_of_population",
+      "description": "keeps the population shape"
+     },
+     {
+      "id": "population_standard_deviation",
+      "description": "keeps sigma"
+     },
+     {
+      "id": "divides_by_n",
+      "description": "divides sigma by n"
+     }
+    ],
+    "verification": {
+     "independent_path": "4000 simulated samples from a gamma population with the same mean and standard deviation reproduce the stated mean and standard deviation, and the plotted means are checked against them",
+     "method": "exact arithmetic + independent numeric path"
+    },
+    "judgment_demand": [
+     "interpretation",
+     "representation_reading"
+    ]
+   },
+   "seed": 9600,
+   "pack_id": "st_clt_describe-s9600",
+   "explanation_en": "The correct answer is Approximately normal, with mean $60$ and standard deviation $3$. The mean of the sampling distribution is $\\mu=60$ and its standard deviation is $\\sigma/\\sqrt{n}=30/\\sqrt{100}=3$; with $100$ observations the Central Limit Theorem makes it approximately normal.\nApproximately normal, with mean $60$ and standard deviation $30$ is incorrect: Keeps the population standard deviation instead of dividing it by the square root of the sample size.\nSkewed to the right like the population, with mean $60$ and standard deviation $3$ is incorrect: Believes the sampling distribution keeps the shape of the skewed population even with a large sample size.\nApproximately normal, with mean $60$ and standard deviation $0.3$ is incorrect: Divides the population standard deviation by $n$ instead of by the square root of $n$."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_clt_describe",
+   "facts": [
+    "n=100",
+    "mu=60",
+    "sd=30"
+   ],
+   "seed": 9600
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 2.12 CLT; describing the sampling distribution (center, spread, shape) fits skill 4.C."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option D is unique: normal, mean 60, SD 3. The dotplot (40 dots, mean about 59.4, SD about 3) is consistent."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The dotplot data is complete (x title, counts sum to 40) and matches the stem. The stem is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The three distractors encode distinct misconceptions (keeps sigma, keeps population shape, divides by n). All are explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short item with no arithmetic burden and a standard AP style. The dotplot is mildly redundant but harmless."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a sound CLT description question. The key is unique, the stimulus is consistent and complete, and the distractors are distinct and explained. No issues were found."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires applying the CLT for shape, computing the SD of the sample mean as 30/sqrt(100)=3, and using the dotplot to confirm approximate normality and the center/spread. Distractors map to common misconceptions (population shape retained, SD not reduced, dividing by n instead of sqrt(n)). The arithmetic is trivial and the reading load is low, so the difficulty comes from the concepts and not from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m09-k1",
+  "cellId": "ap_statistics-m09",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "2.12",
+  "unitCode": "2",
+  "skillPrimary": "4.C",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_clt_describe",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Direct application of CLT: recognize n=64 gives approximately normal shape despite skewed population, compute SD = 30/sqrt(64) = 3.75 (simple arithmetic), and optionally check against the dotplot. Distractors target named misconceptions (skewness persists, dividing by n, SD unchanged). Few steps, short reading, one supporting representation.",
+  "payload": {
+   "archetype": "st_clt_describe",
+   "topic": "2.12",
+   "skill": "4.C",
+   "calculator": "allowed",
+   "stem": "The lengths of phone calls, in minutes, for calls to a help line are skewed to the right with mean $60$ and standard deviation $30$. The dotplot shown displays the means of $40$ simulated random samples of $64$ values from this population. Which describes the sampling distribution of the sample mean for samples of size $64$?",
+   "stimulus": {
+    "kind": "stat_chart",
+    "description": "Dotplot of 40 simulated sample means",
+    "data": {
+     "chart": "dot_plot",
+     "data": {
+      "xTitle": "Sample mean (minutes)",
+      "dots": [
+       {
+        "value": 52,
+        "count": 1
+       },
+       {
+        "value": 55,
+        "count": 3
+       },
+       {
+        "value": 56,
+        "count": 3
+       },
+       {
+        "value": 57,
+        "count": 3
+       },
+       {
+        "value": 59,
+        "count": 4
+       },
+       {
+        "value": 60,
+        "count": 5
+       },
+       {
+        "value": 61,
+        "count": 5
+       },
+       {
+        "value": 62,
+        "count": 4
+       },
+       {
+        "value": 63,
+        "count": 1
+       },
+       {
+        "value": 64,
+        "count": 5
+       },
+       {
+        "value": 65,
+        "count": 3
+       },
+       {
+        "value": 66,
+        "count": 1
+       },
+       {
+        "value": 67,
+        "count": 2
+       }
+      ]
+     }
+    }
+   },
+   "options": [
+    {
+     "text": "Skewed to the right like the population, with mean $60$ and standard deviation $3.75$",
+     "why": "Believes the sampling distribution keeps the shape of the skewed population even with a large sample size.",
+     "value": null
+    },
+    {
+     "text": "Approximately normal, with mean $60$ and standard deviation $0.469$",
+     "why": "Divides the population standard deviation by $n$ instead of by the square root of $n$.",
+     "value": null
+    },
+    {
+     "text": "Approximately normal, with mean $60$ and standard deviation $30$",
+     "why": "Keeps the population standard deviation instead of dividing it by the square root of the sample size.",
+     "value": null
+    },
+    {
+     "text": "Approximately normal, with mean $60$ and standard deviation $3.75$",
+     "why": "The mean of the sampling distribution is $\\mu=60$ and its standard deviation is $\\sigma/\\sqrt{n}=30/\\sqrt{64}=3.75$; with $64$ observations the Central Limit Theorem makes it approximately normal.",
+     "value": null
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 100,
+   "facts": [
+    "n=64",
+    "mu=60",
+    "sd=30"
+   ],
+   "blueprint": {
+    "id": "st_clt_describe",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Describe the sampling distribution of a sample mean using the Central Limit Theorem",
+    "topic": "2.12",
+    "skill": "4.C",
+    "student_thinking": [
+     "Find the mean and the standard deviation of the sampling distribution from the population values and the sample size",
+     "Decide the shape of the sampling distribution from the sample size even though the population is skewed"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the sampling distribution of the mean has mean mu, standard deviation sigma over root n and is approximately normal for large n",
+      "evidence": "the sample size is large (at least 30) and the population standard deviation is given"
+     }
+    ],
+    "material": {
+     "type": "dot_plot",
+     "must_include": [
+      "simulated sample means"
+     ]
+    },
+    "misconceptions": [
+     {
+      "id": "shape_of_population",
+      "description": "keeps the population shape"
+     },
+     {
+      "id": "population_standard_deviation",
+      "description": "keeps sigma"
+     },
+     {
+      "id": "divides_by_n",
+      "description": "divides sigma by n"
+     }
+    ],
+    "verification": {
+     "independent_path": "4000 simulated samples from a gamma population with the same mean and standard deviation reproduce the stated mean and standard deviation, and the plotted means are checked against them",
+     "method": "exact arithmetic + independent numeric path"
+    },
+    "judgment_demand": [
+     "interpretation",
+     "representation_reading"
+    ]
+   },
+   "seed": 9601,
+   "pack_id": "st_clt_describe-s9601",
+   "explanation_en": "The correct answer is Approximately normal, with mean $60$ and standard deviation $3.75$. The mean of the sampling distribution is $\\mu=60$ and its standard deviation is $\\sigma/\\sqrt{n}=30/\\sqrt{64}=3.75$; with $64$ observations the Central Limit Theorem makes it approximately normal.\nSkewed to the right like the population, with mean $60$ and standard deviation $3.75$ is incorrect: Believes the sampling distribution keeps the shape of the skewed population even with a large sample size.\nApproximately normal, with mean $60$ and standard deviation $0.469$ is incorrect: Divides the population standard deviation by $n$ instead of by the square root of $n$.\nApproximately normal, with mean $60$ and standard deviation $30$ is incorrect: Keeps the population standard deviation instead of dividing it by the square root of the sample size."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_clt_describe",
+   "facts": [
+    "n=64",
+    "mu=60",
+    "sd=30"
+   ],
+   "seed": 9601
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Describes the sampling distribution of a sample mean using the CLT. This is topic 2.12 and skill 4.C."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key is unique. Normal shape, mean 60 and SD 3.75 all follow from the CLT, and the dotplot is consistent with them."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The dot counts sum to 40 and the axis title is given. The data are complete and the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct named misconceptions: population shape, sigma over n, and sigma unchanged. The explanation covers every option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 100 seconds, with minimal arithmetic and a calculator is not needed. The format is typical of AP items."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item passes all five criteria. It is a clean CLT description item with a consistent dotplot, a unique key and distinct distractors."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Direct application of CLT: recognize n=64 gives approximately normal shape despite skewed population, compute SD = 30/sqrt(64) = 3.75 (simple arithmetic), and optionally check against the dotplot. Distractors target named misconceptions (skewness persists, dividing by n, SD unchanged). Few steps, short reading, one supporting representation.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m10-k0",
+  "cellId": "ap_statistics-m10",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "3.5",
+  "unitCode": "3",
+  "skillPrimary": "2.E",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_hypotheses_setup",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-step identification of a two-sided alternative from the wording \"not correct\". There is no computation, no representation change, and very little reading. It tests the core skill directly, with the distractors being one-sided alternatives and a reversed null/alternative.",
+  "payload": {
+   "archetype": "st_hypotheses_setup",
+   "topic": "3.5",
+   "skill": "2.E",
+   "calculator": "allowed",
+   "stem": "A seed company states that $60\\%$ of its seeds germinate. A gardener suspects the stated value is not correct. Let $p$ be the proportion of all seeds that germinate. Which of the following pairs of hypotheses should be tested?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "$H_0: p = 0.6$ and $H_a: p < 0.6$",
+     "why": "Writes a one-sided alternative although the suspicion only says the claim is not accurate, without a direction. Picks the lower direction.",
+     "value": null
+    },
+    {
+     "text": "$H_0: p = 0.6$ and $H_a: p > 0.6$",
+     "why": "Writes a one-sided alternative although the suspicion only says the claim is not accurate, without a direction. Picks the upper direction.",
+     "value": null
+    },
+    {
+     "text": "$H_0: p < 0.6$ and $H_a: p = 0.6$",
+     "why": "Puts the claim of the suspicion in the null hypothesis and an equal sign in the alternative, instead of an equal sign in the null.",
+     "value": null
+    },
+    {
+     "text": "$H_0: p = 0.6$ and $H_a: p \\ne 0.6$",
+     "why": "The parameter is the proportion of all seeds that germinate; the null hypothesis states the claimed value and the alternative matches the suspicion, which is two-sided.",
+     "value": null
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 70,
+   "facts": [
+    "tail=two",
+    "kind=p"
+   ],
+   "blueprint": {
+    "id": "st_hypotheses_setup",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Choose the null and alternative hypotheses from a scenario",
+    "topic": "3.5",
+    "skill": "2.E",
+    "student_thinking": [
+     "Identify the population parameter and the claimed value that goes in the null hypothesis",
+     "Match the direction of the alternative hypothesis to the direction of the suspicion"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the null hypothesis states equality with the claimed value and the alternative reflects what is suspected",
+      "evidence": "the stem states the claim and the direction of the suspicion in words"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "wrong_direction",
+      "description": "uses an alternative in the wrong direction"
+     },
+     {
+      "id": "statistic_not_parameter",
+      "description": "writes hypotheses about a sample statistic"
+     },
+     {
+      "id": "claim_in_wrong_hypothesis",
+      "description": "swaps the roles of the two hypotheses"
+     }
+    ],
+    "verification": {
+     "independent_path": "each option is built from a table of direction, parameter symbol and role of the equality, and only one row matches the scenario's claim and suspicion",
+     "method": "role table enumeration"
+    },
+    "judgment_demand": [
+     "procedure_choice",
+     "interpretation"
+    ]
+   },
+   "seed": 9600,
+   "pack_id": "st_hypotheses_setup-s9600",
+   "explanation_en": "The correct answer is $H_0: p = 0.6$ and $H_a: p \\ne 0.6$. The parameter is the proportion of all seeds that germinate; the null hypothesis states the claimed value and the alternative matches the suspicion, which is two-sided.\n$H_0: p = 0.6$ and $H_a: p < 0.6$ is incorrect: Writes a one-sided alternative although the suspicion only says the claim is not accurate, without a direction. Picks the lower direction.\n$H_0: p = 0.6$ and $H_a: p > 0.6$ is incorrect: Writes a one-sided alternative although the suspicion only says the claim is not accurate, without a direction. Picks the upper direction.\n$H_0: p < 0.6$ and $H_a: p = 0.6$ is incorrect: Puts the claim of the suspicion in the null hypothesis and an equal sign in the alternative, instead of an equal sign in the null."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_hypotheses_setup",
+   "facts": [
+    "tail=two",
+    "kind=p"
+   ],
+   "seed": 9600
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 70 seconds, requires no arithmetic and has a light reading load. The options are short, parallel expressions.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, standard hypothesis-setup question with a unique key and distinct distractors. It is suitable for the exam."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step identification of a two-sided alternative from the wording \"not correct\". There is no computation, no representation change, and very little reading. It tests the core skill directly, with the distractors being one-sided alternatives and a reversed null/alternative.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m10-k1",
+  "cellId": "ap_statistics-m10",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "3.5",
+  "unitCode": "3",
+  "skillPrimary": "2.E",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_hypotheses_setup",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "One-step recognition of the null and alternative hypotheses for a one-proportion test. The stem states the claimed value and the direction of the suspicion. Distractors cover standard errors: using p-hat in the hypotheses, swapping H0 and Ha, and the wrong inequality direction. No computation, minimal reading, and no representation changes. This is a foundational skill rather than full-mock exam-level reasoning.",
+  "payload": {
+   "archetype": "st_hypotheses_setup",
+   "topic": "3.5",
+   "skill": "2.E",
+   "calculator": "allowed",
+   "stem": "A seed company states that $60\\%$ of its seeds germinate. A gardener suspects the true proportion is higher than stated. Let $p$ be the proportion of all seeds that germinate. Which of the following pairs of hypotheses should be tested?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "$H_0: \\hat{p} = 0.6$ and $H_a: \\hat{p} > 0.6$",
+     "why": "Writes the hypotheses about a sample statistic, but hypotheses are always about the population parameter.",
+     "value": null
+    },
+    {
+     "text": "$H_0: p > 0.6$ and $H_a: p = 0.6$",
+     "why": "Puts the claim of the suspicion in the null hypothesis and an equal sign in the alternative, instead of an equal sign in the null.",
+     "value": null
+    },
+    {
+     "text": "$H_0: p = 0.6$ and $H_a: p > 0.6$",
+     "why": "The parameter is the proportion of all seeds that germinate; the null hypothesis states the claimed value and the alternative matches the suspicion, which is one-sided.",
+     "value": null
+    },
+    {
+     "text": "$H_0: p = 0.6$ and $H_a: p < 0.6$",
+     "why": "Reverses the direction of the alternative hypothesis relative to the suspicion.",
+     "value": null
+    }
+   ],
+   "key_index": 2,
+   "est_seconds": 70,
+   "facts": [
+    "tail=greater",
+    "kind=p"
+   ],
+   "blueprint": {
+    "id": "st_hypotheses_setup",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Choose the null and alternative hypotheses from a scenario",
+    "topic": "3.5",
+    "skill": "2.E",
+    "student_thinking": [
+     "Identify the population parameter and the claimed value that goes in the null hypothesis",
+     "Match the direction of the alternative hypothesis to the direction of the suspicion"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the null hypothesis states equality with the claimed value and the alternative reflects what is suspected",
+      "evidence": "the stem states the claim and the direction of the suspicion in words"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "wrong_direction",
+      "description": "uses an alternative in the wrong direction"
+     },
+     {
+      "id": "statistic_not_parameter",
+      "description": "writes hypotheses about a sample statistic"
+     },
+     {
+      "id": "claim_in_wrong_hypothesis",
+      "description": "swaps the roles of the two hypotheses"
+     }
+    ],
+    "verification": {
+     "independent_path": "each option is built from a table of direction, parameter symbol and role of the equality, and only one row matches the scenario's claim and suspicion",
+     "method": "role table enumeration"
+    },
+    "judgment_demand": [
+     "procedure_choice",
+     "interpretation"
+    ]
+   },
+   "seed": 9601,
+   "pack_id": "st_hypotheses_setup-s9601",
+   "explanation_en": "The correct answer is $H_0: p = 0.6$ and $H_a: p > 0.6$. The parameter is the proportion of all seeds that germinate; the null hypothesis states the claimed value and the alternative matches the suspicion, which is one-sided.\n$H_0: \\hat{p} = 0.6$ and $H_a: \\hat{p} > 0.6$ is incorrect: Writes the hypotheses about a sample statistic, but hypotheses are always about the population parameter.\n$H_0: p > 0.6$ and $H_a: p = 0.6$ is incorrect: Puts the claim of the suspicion in the null hypothesis and an equal sign in the alternative, instead of an equal sign in the null.\n$H_0: p = 0.6$ and $H_a: p < 0.6$ is incorrect: Reverses the direction of the alternative hypothesis relative to the suspicion."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_hypotheses_setup",
+   "facts": [
+    "tail=greater",
+    "kind=p"
+   ],
+   "seed": 9601
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 70 seconds, has minimal reading, and needs no calculator, although calculator use is permitted. This is typical of the AP exam.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "This is a clean, standard hypothesis-setup item. The key is unique, the distractors reflect distinct misconceptions, and the scope and load are appropriate. I recommend acceptance."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "One-step recognition of the null and alternative hypotheses for a one-proportion test. The stem states the claimed value and the direction of the suspicion. Distractors cover standard errors: using p-hat in the hypotheses, swapping H0 and Ha, and the wrong inequality direction. No computation, minimal reading, and no representation changes. This is a foundational skill rather than full-mock exam-level reasoning.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m11-k0",
+  "cellId": "ap_statistics-m11",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "3.8",
+  "unitCode": "3",
+  "skillPrimary": "2.D",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_power_table_change",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "The student must link alpha to Type I error probability (increases from 0.05 to 0.1). They then read two cells of the power table, at n=40 with alpha=0.05 (0.47) and at n=30 with alpha=0.1 (0.53), and see that power increases despite the smaller n. They must carry both results into the correct pairing of effects. This meets the rubric of at least 3 steps and 2 combined concepts or sources. The tempting wrong option (power decreases because n is smaller) survives the first step and fails only at the table lookup. There is no arithmetic and the stem is short, so none of the difficulty comes from unfair sources.",
+  "payload": {
+   "archetype": "st_power_table_change",
+   "topic": "3.8",
+   "skill": "2.D",
+   "calculator": "allowed",
+   "stem": "A scientist tests $H_0: \\mu = 500$ versus $H_a: \\mu > 500$, where $\\mu$ is the mean lifetime, in hours, of all batteries of a new design, using a random sample of batteries from a population that is approximately normal with a known standard deviation of $80$ hours. The table shows the power of the test against the alternative $\\mu = 520$ for several sample sizes and significance levels. The researcher currently uses $n = 40$ and $\\alpha = 0.05$ and is considering a change to $n = 30$ and $\\alpha = 0.1$. Which of the following describes the effect of the change?",
+   "stimulus": {
+    "kind": "stat_chart",
+    "description": "Power of the test against the alternative mean for several sample sizes and significance levels",
+    "data": {
+     "chart": "table",
+     "data": {
+      "columns": [
+       "Sample size n",
+       "alpha = 0.1",
+       "alpha = 0.05",
+       "alpha = 0.01"
+      ],
+      "rows": [
+       [
+        "30",
+        "0.53",
+        "0.39",
+        "0.17"
+       ],
+       [
+        "40",
+        "0.62",
+        "0.47",
+        "0.23"
+       ],
+       [
+        "100",
+        "0.89",
+        "0.80",
+        "0.57"
+       ]
+      ]
+     },
+     "title": "Power of the test against the alternative mean 520"
+    }
+   },
+   "options": [
+    {
+     "text": "The probability of a Type I error increases and the power of the test decreases",
+     "why": "Lets one of the two changes dominate: the table shows the net change in power from $0.47$ to $0.53$, which is the other direction.",
+     "value": null
+    },
+    {
+     "text": "The probability of a Type I error decreases and the power of the test decreases",
+     "why": "Gets the Type I error backwards and also reads the change in power in the wrong direction.",
+     "value": null
+    },
+    {
+     "text": "The probability of a Type I error decreases and the power of the test increases",
+     "why": "Gets the Type I error backwards: its probability equals the new significance level, so it follows the change in the significance level, not the sample size.",
+     "value": null
+    },
+    {
+     "text": "The probability of a Type I error increases and the power of the test increases",
+     "why": "The probability of a Type I error equals the significance level, so it goes from $0.05$ to $0.1$; the table shows the power changing from $0.47$ to $0.53$.",
+     "value": null
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 115,
+   "facts": [
+    "n=40->30",
+    "alpha=0.05->0.1"
+   ],
+   "blueprint": {
+    "id": "st_power_table_change",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Judge the combined effect on the Type I error probability and the power of changing the significance level and the sample size together, using a table of powers",
+    "topic": "3.8",
+    "skill": "2.D",
+    "student_thinking": [
+     "Recall that the probability of a Type I error equals the significance level, so it follows the change in $\\alpha$",
+     "Locate the current and the proposed combination of sample size and significance level in the power table",
+     "Compare the two power values to find the net effect, since the two changes push the power in opposite directions"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the Type I error probability equals alpha, and the net effect on power of opposite changes is read from the table of powers",
+      "evidence": "the stem names both changes and the table gives the power for each combination"
+     }
+    ],
+    "material": {
+     "type": "table",
+     "must_include": [
+      "power values",
+      "sample sizes",
+      "significance levels"
+     ]
+    },
+    "misconceptions": [
+     {
+      "id": "type_i_follows_n",
+      "description": "thinks the Type I error probability changes with the sample size"
+     },
+     {
+      "id": "both_wrong",
+      "description": "reads both effects in the wrong direction"
+     },
+     {
+      "id": "one_effect_dominates",
+      "description": "lets only one of the two changes decide the direction of the power"
+     }
+    ],
+    "verification": {
+     "independent_path": "each power is computed with scipy's normal distribution and again from a bisection on math.erf; the compared powers must differ by at least 0.04 in the table",
+     "method": "power table dual computation"
+    },
+    "judgment_demand": [
+     "interpretation",
+     "representation_reading"
+    ]
+   },
+   "difficulty_signals": {
+    "steps": [
+     "Recall that the probability of a Type I error equals the significance level, so it follows the change in $\\alpha$",
+     "Locate the current and the proposed combination of sample size and significance level in the power table",
+     "Compare the two power values to find the net effect, since the two changes push the power in opposite directions"
+    ],
+    "concepts": [
+     "probability of Type I error and significance level",
+     "power as a function of sample size and significance level"
+    ],
+    "representations": 2,
+    "distractor_fail_step": {
+     "The probability of a Type I error decreases and the power of the test increases": 1,
+     "The probability of a Type I error decreases and the power of the test decreases": 1,
+     "The probability of a Type I error increases and the power of the test decreases": 3
+    },
+    "arithmetic": "none"
+   },
+   "seed": 9600,
+   "pack_id": "st_power_table_change-s9600",
+   "explanation_en": "The correct answer is The probability of a Type I error increases and the power of the test increases. The probability of a Type I error equals the significance level, so it goes from $0.05$ to $0.1$; the table shows the power changing from $0.47$ to $0.53$.\nThe probability of a Type I error increases and the power of the test decreases is incorrect: Lets one of the two changes dominate: the table shows the net change in power from $0.47$ to $0.53$, which is the other direction.\nThe probability of a Type I error decreases and the power of the test decreases is incorrect: Gets the Type I error backwards and also reads the change in power in the wrong direction.\nThe probability of a Type I error decreases and the power of the test increases is incorrect: Gets the Type I error backwards: its probability equals the new significance level, so it follows the change in the significance level, not the sample size."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_power_table_change",
+   "facts": [
+    "n=40->30",
+    "alpha=0.05->0.1"
+   ],
+   "seed": 9600
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item asks for the net effect of changing both n and alpha on the Type I error probability and the power. The key is unique and consistent with the table, and the table is complete. Each distractor targets a distinct misconception. The item is a single table read with no heavy arithmetic. One minor flaw is that the first distractor's explanation is awkwardly worded.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The student must link alpha to Type I error probability (increases from 0.05 to 0.1). They then read two cells of the power table, at n=40 with alpha=0.05 (0.47) and at n=30 with alpha=0.1 (0.53), and see that power increases despite the smaller n. They must carry both results into the correct pairing of effects. This meets the rubric of at least 3 steps and 2 combined concepts or sources. The tempting wrong option (power decreases because n is smaller) survives the first step and fails only at the table lookup. There is no arithmetic and the stem is short, so none of the difficulty comes from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m11-k1",
+  "cellId": "ap_statistics-m11",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "3.8",
+  "unitCode": "3",
+  "skillPrimary": "2.D",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_power_table_change",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "The student must link Type I error probability to alpha (it increases from 0.05 to 0.1), then read two table cells (0.55 at n=50, alpha=0.05 vs 0.49 at n=25, alpha=0.1), then compare them to see that power decreases. The competing effects of a smaller n and a larger alpha make the power direction non-obvious without the table. This meets the rubric: at least 3 sequential steps and 2 combined concepts/sources. There is no arithmetic and the reading load is low, which is by design and not an unfair source.",
+  "payload": {
+   "archetype": "st_power_table_change",
+   "topic": "3.8",
+   "skill": "2.D",
+   "calculator": "allowed",
+   "stem": "A scientist tests $H_0: \\mu = 500$ versus $H_a: \\mu > 500$, where $\\mu$ is the mean lifetime, in hours, of all batteries of a new design, using a random sample of batteries from a population that is approximately normal with a known standard deviation of $80$ hours. The table shows the power of the test against the alternative $\\mu = 520$ for several sample sizes and significance levels. The researcher currently uses $n = 50$ and $\\alpha = 0.05$ and is considering a change to $n = 25$ and $\\alpha = 0.1$. Which of the following describes the effect of the change?",
+   "stimulus": {
+    "kind": "stat_chart",
+    "description": "Power of the test against the alternative mean for several sample sizes and significance levels",
+    "data": {
+     "chart": "table",
+     "data": {
+      "columns": [
+       "Sample size n",
+       "alpha = 0.1",
+       "alpha = 0.05",
+       "alpha = 0.01"
+      ],
+      "rows": [
+       [
+        "15",
+        "0.38",
+        "0.25",
+        "0.09"
+       ],
+       [
+        "25",
+        "0.49",
+        "0.35",
+        "0.14"
+       ],
+       [
+        "50",
+        "0.69",
+        "0.55",
+        "0.29"
+       ]
+      ]
+     },
+     "title": "Power of the test against the alternative mean 520"
+    }
+   },
+   "options": [
+    {
+     "text": "The probability of a Type I error increases and the power of the test increases",
+     "why": "Lets one of the two changes dominate: the table shows the net change in power from $0.55$ to $0.49$, which is the other direction.",
+     "value": null
+    },
+    {
+     "text": "The probability of a Type I error decreases and the power of the test increases",
+     "why": "Gets the Type I error backwards and also reads the change in power in the wrong direction.",
+     "value": null
+    },
+    {
+     "text": "The probability of a Type I error increases and the power of the test decreases",
+     "why": "The probability of a Type I error equals the significance level, so it goes from $0.05$ to $0.1$; the table shows the power changing from $0.55$ to $0.49$.",
+     "value": null
+    },
+    {
+     "text": "The probability of a Type I error decreases and the power of the test decreases",
+     "why": "Gets the Type I error backwards: its probability equals the new significance level, so it follows the change in the significance level, not the sample size.",
+     "value": null
+    }
+   ],
+   "key_index": 2,
+   "est_seconds": 115,
+   "facts": [
+    "n=50->25",
+    "alpha=0.05->0.1"
+   ],
+   "blueprint": {
+    "id": "st_power_table_change",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Judge the combined effect on the Type I error probability and the power of changing the significance level and the sample size together, using a table of powers",
+    "topic": "3.8",
+    "skill": "2.D",
+    "student_thinking": [
+     "Recall that the probability of a Type I error equals the significance level, so it follows the change in $\\alpha$",
+     "Locate the current and the proposed combination of sample size and significance level in the power table",
+     "Compare the two power values to find the net effect, since the two changes push the power in opposite directions"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the Type I error probability equals alpha, and the net effect on power of opposite changes is read from the table of powers",
+      "evidence": "the stem names both changes and the table gives the power for each combination"
+     }
+    ],
+    "material": {
+     "type": "table",
+     "must_include": [
+      "power values",
+      "sample sizes",
+      "significance levels"
+     ]
+    },
+    "misconceptions": [
+     {
+      "id": "type_i_follows_n",
+      "description": "thinks the Type I error probability changes with the sample size"
+     },
+     {
+      "id": "both_wrong",
+      "description": "reads both effects in the wrong direction"
+     },
+     {
+      "id": "one_effect_dominates",
+      "description": "lets only one of the two changes decide the direction of the power"
+     }
+    ],
+    "verification": {
+     "independent_path": "each power is computed with scipy's normal distribution and again from a bisection on math.erf; the compared powers must differ by at least 0.04 in the table",
+     "method": "power table dual computation"
+    },
+    "judgment_demand": [
+     "interpretation",
+     "representation_reading"
+    ]
+   },
+   "difficulty_signals": {
+    "steps": [
+     "Recall that the probability of a Type I error equals the significance level, so it follows the change in $\\alpha$",
+     "Locate the current and the proposed combination of sample size and significance level in the power table",
+     "Compare the two power values to find the net effect, since the two changes push the power in opposite directions"
+    ],
+    "concepts": [
+     "probability of Type I error and significance level",
+     "power as a function of sample size and significance level"
+    ],
+    "representations": 2,
+    "distractor_fail_step": {
+     "The probability of a Type I error decreases and the power of the test decreases": 1,
+     "The probability of a Type I error decreases and the power of the test increases": 1,
+     "The probability of a Type I error increases and the power of the test increases": 3
+    },
+    "arithmetic": "none"
+   },
+   "seed": 9601,
+   "pack_id": "st_power_table_change-s9601",
+   "explanation_en": "The correct answer is The probability of a Type I error increases and the power of the test decreases. The probability of a Type I error equals the significance level, so it goes from $0.05$ to $0.1$; the table shows the power changing from $0.55$ to $0.49$.\nThe probability of a Type I error increases and the power of the test increases is incorrect: Lets one of the two changes dominate: the table shows the net change in power from $0.55$ to $0.49$, which is the other direction.\nThe probability of a Type I error decreases and the power of the test increases is incorrect: Gets the Type I error backwards and also reads the change in power in the wrong direction.\nThe probability of a Type I error decreases and the power of the test decreases is incorrect: Gets the Type I error backwards: its probability equals the new significance level, so it follows the change in the significance level, not the sample size."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_power_table_change",
+   "facts": [
+    "n=50->25",
+    "alpha=0.05->0.1"
+   ],
+   "seed": 9601
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item passes all five criteria with no instant-reject condition. Key: Type I error probability equals alpha, so it rises from 0.05 to 0.10, and the table shows power falling from 0.55 to 0.49. Only option C matches both effects.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The item tests Type I error and power, which fits topic 3.8 and skill 2.D. The z-based setup with known sigma avoids Unit 4 t procedures, and the stem states the known standard deviation."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key is unique. Type I error probability equals alpha, which increases. The table gives power 0.55 at n=50, alpha=0.05 and 0.49 at n=25, alpha=0.10, so power decreases."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table data is complete, with columns, rows and a title, and the stem states the alternative value of 520. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors cover distinct misconceptions: one change dominates the power, both effects are reversed, and Type I error is thought to follow sample size. The explanation addresses each wrong option. The first distractor's explanation is slightly loose but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The task is a short table read plus recall, about 60 to 90 seconds, with no arithmetic. The options are parallel in format."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The student must link Type I error probability to alpha (it increases from 0.05 to 0.1), then read two table cells (0.55 at n=50, alpha=0.05 vs 0.49 at n=25, alpha=0.1), then compare them to see that power decreases. The competing effects of a smaller n and a larger alpha make the power direction non-obvious without the table. This meets the rubric: at least 3 sequential steps and 2 combined concepts/sources. There is no arithmetic and the reading load is low, which is by design and not an unfair source.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m12-k0",
+  "cellId": "ap_statistics-m12",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "4.4",
+  "unitCode": "4",
+  "skillPrimary": "2.E",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_hypotheses_means",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept item: recognize matched-pairs context with a two-sided claim (\"changes\") and choose the hypotheses using the population parameter mu_d rather than a sample statistic. No computation, short reading, one reasoning step. Direction of subtraction does not matter for the two-sided alternative, so there is no hidden trap. Distractors are one-sided alternatives and a statistic-notation error, which are standard misconceptions at the basic level.",
+  "payload": {
+   "archetype": "st_hypotheses_means",
+   "topic": "4.4",
+   "skill": "2.E",
+   "calculator": "allowed",
+   "stem": "A teacher wants to know whether a review session changes test scores. Each student's score is recorded on a test before the session and on a similar test after the session, and the difference is found as before minus after. The teacher suspects only that the review session changes the mean score. Let $\\mu_d$ be the mean difference (before minus after), in points, for all students. Which of the following pairs of hypotheses should be tested?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "$H_0: \\mu_d = 0$ and $H_a: \\mu_d < 0$",
+     "why": "Writes a one-sided alternative in the lower direction, but the suspicion only says the value is different, without a direction.",
+     "value": null
+    },
+    {
+     "text": "$H_0: \\mu_d = 0$ and $H_a: \\mu_d \\ne 0$",
+     "why": "The parameter is the mean difference (before minus after), in points, for all students; the null hypothesis states the claimed value and the alternative matches the suspicion and the order of subtraction in the definition.",
+     "value": null
+    },
+    {
+     "text": "$H_0: \\bar{x}_d = 0$ and $H_a: \\bar{x}_d \\ne 0$",
+     "why": "Writes the hypotheses about a sample mean, but hypotheses are always about the population parameter.",
+     "value": null
+    },
+    {
+     "text": "$H_0: \\mu_d = 0$ and $H_a: \\mu_d > 0$",
+     "why": "Writes a one-sided alternative in the upper direction, but the suspicion only says the value is different, without a direction.",
+     "value": null
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 85,
+   "facts": [
+    "kind=paired",
+    "tail=two",
+    "ha=\\ne"
+   ],
+   "blueprint": {
+    "id": "st_hypotheses_means",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Choose the null and alternative hypotheses about a population mean or mean difference",
+    "topic": "4.4",
+    "skill": "2.E",
+    "student_thinking": [
+     "Identify the population parameter (a mean or a mean difference) and the claimed value for the null hypothesis",
+     "Use the direction of the suspicion and, for a difference, the order of subtraction to choose the alternative"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the null hypothesis states equality with the claimed value and the alternative reflects the suspicion in the direction fixed by how the parameter is defined",
+      "evidence": "the stem defines the parameter and states the suspicion"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "wrong_direction",
+      "description": "uses the alternative in the wrong direction"
+     },
+     {
+      "id": "statistic_not_parameter",
+      "description": "writes hypotheses about a sample mean"
+     },
+     {
+      "id": "two_sided_for_directional",
+      "description": "uses a two-sided alternative for a directional suspicion"
+     }
+    ],
+    "verification": {
+     "independent_path": "each option is generated from a table of direction, symbol and roles; the direction of a paired alternative is derived from the stated order of subtraction and the suspicion",
+     "method": "role table enumeration"
+    },
+    "judgment_demand": [
+     "procedure_choice",
+     "interpretation"
+    ]
+   },
+   "seed": 9600,
+   "pack_id": "st_hypotheses_means-s9600",
+   "explanation_en": "The correct answer is $H_0: \\mu_d = 0$ and $H_a: \\mu_d \\ne 0$. The parameter is the mean difference (before minus after), in points, for all students; the null hypothesis states the claimed value and the alternative matches the suspicion and the order of subtraction in the definition.\n$H_0: \\mu_d = 0$ and $H_a: \\mu_d < 0$ is incorrect: Writes a one-sided alternative in the lower direction, but the suspicion only says the value is different, without a direction.\n$H_0: \\bar{x}_d = 0$ and $H_a: \\bar{x}_d \\ne 0$ is incorrect: Writes the hypotheses about a sample mean, but hypotheses are always about the population parameter.\n$H_0: \\mu_d = 0$ and $H_a: \\mu_d > 0$ is incorrect: Writes a one-sided alternative in the upper direction, but the suspicion only says the value is different, without a direction."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_hypotheses_means",
+   "facts": [
+    "kind=paired",
+    "tail=two",
+    "ha=\\ne"
+   ],
+   "seed": 9600
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Directly targets Topic 4.4 and skill 2.E: choosing hypotheses for a matched-pairs mean difference. No out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The stem says the teacher suspects only that the mean 'changes', so the test is two-sided. H0: mu_d = 0 vs Ha: mu_d != 0 is the unique correct option. Both one-sided options are wrong, and the sample-mean option is invalid notation for hypotheses."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The parameter is defined clearly, including the order of subtraction and the units. The wording is clear US English."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception: a lower-direction one-sided alternative, an upper-direction one-sided alternative, and hypotheses about a statistic. The explanation covers every wrong option. The two one-sided distractors are somewhat similar, but together they test the same two-sided-versus-directional misconception from two directions. The key is not distinguishable by length or format."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 60-85 seconds, has a short stem, and needs no calculation. This is typical for the exam."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "This is a clean standalone item on setting up hypotheses for a matched-pairs mean difference. The key is unique and the distractors map to named misconceptions. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: recognize matched-pairs context with a two-sided claim (\"changes\") and choose the hypotheses using the population parameter mu_d rather than a sample statistic. No computation, short reading, one reasoning step. Direction of subtraction does not matter for the two-sided alternative, so there is no hidden trap. Distractors are one-sided alternatives and a statistic-notation error, which are standard misconceptions at the basic level.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m12-k1",
+  "cellId": "ap_statistics-m12",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "4.4",
+  "unitCode": "4",
+  "skillPrimary": "2.E",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_hypotheses_means",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "duplicate_gate_near_duplicate",
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept item on setting up hypotheses for a matched-pairs mean. The one extra step is translating \"lowers the mean score\" into a positive before-minus-after difference, so H_a: mu_d > 0. Distractors cover the wrong direction, a statistic in place of a parameter, and a two-sided alternative. There is no computation and the reading load is short and clear.",
+  "payload": {
+   "archetype": "st_hypotheses_means",
+   "topic": "4.4",
+   "skill": "2.E",
+   "calculator": "allowed",
+   "stem": "A teacher wants to know whether a review session changes test scores. Each student's score is recorded on a test before the session and on a similar test after the session, and the difference is found as before minus after. The teacher suspects that the review session lowers the mean score. Let $\\mu_d$ be the mean difference (before minus after), in points, for all students. Which of the following pairs of hypotheses should be tested?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "$H_0: \\mu_d = 0$ and $H_a: \\mu_d < 0$",
+     "why": "Reverses the direction of the alternative hypothesis relative to the suspicion. The direction of a mean difference follows the order of subtraction in its definition.",
+     "value": null
+    },
+    {
+     "text": "$H_0: \\mu_d = 0$ and $H_a: \\mu_d > 0$",
+     "why": "The parameter is the mean difference (before minus after), in points, for all students; the null hypothesis states the claimed value and the alternative matches the suspicion and the order of subtraction in the definition.",
+     "value": null
+    },
+    {
+     "text": "$H_0: \\bar{x}_d = 0$ and $H_a: \\bar{x}_d > 0$",
+     "why": "Writes the hypotheses about a sample mean, but hypotheses are always about the population parameter.",
+     "value": null
+    },
+    {
+     "text": "$H_0: \\mu_d = 0$ and $H_a: \\mu_d \\ne 0$",
+     "why": "Writes a two-sided alternative although the suspicion has a direction.",
+     "value": null
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 85,
+   "facts": [
+    "kind=paired",
+    "tail=less",
+    "ha=>"
+   ],
+   "blueprint": {
+    "id": "st_hypotheses_means",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Choose the null and alternative hypotheses about a population mean or mean difference",
+    "topic": "4.4",
+    "skill": "2.E",
+    "student_thinking": [
+     "Identify the population parameter (a mean or a mean difference) and the claimed value for the null hypothesis",
+     "Use the direction of the suspicion and, for a difference, the order of subtraction to choose the alternative"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the null hypothesis states equality with the claimed value and the alternative reflects the suspicion in the direction fixed by how the parameter is defined",
+      "evidence": "the stem defines the parameter and states the suspicion"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "wrong_direction",
+      "description": "uses the alternative in the wrong direction"
+     },
+     {
+      "id": "statistic_not_parameter",
+      "description": "writes hypotheses about a sample mean"
+     },
+     {
+      "id": "two_sided_for_directional",
+      "description": "uses a two-sided alternative for a directional suspicion"
+     }
+    ],
+    "verification": {
+     "independent_path": "each option is generated from a table of direction, symbol and roles; the direction of a paired alternative is derived from the stated order of subtraction and the suspicion",
+     "method": "role table enumeration"
+    },
+    "judgment_demand": [
+     "procedure_choice",
+     "interpretation"
+    ]
+   },
+   "seed": 9601,
+   "pack_id": "st_hypotheses_means-s9601",
+   "explanation_en": "The correct answer is $H_0: \\mu_d = 0$ and $H_a: \\mu_d > 0$. The parameter is the mean difference (before minus after), in points, for all students; the null hypothesis states the claimed value and the alternative matches the suspicion and the order of subtraction in the definition.\n$H_0: \\mu_d = 0$ and $H_a: \\mu_d < 0$ is incorrect: Reverses the direction of the alternative hypothesis relative to the suspicion. The direction of a mean difference follows the order of subtraction in its definition.\n$H_0: \\bar{x}_d = 0$ and $H_a: \\bar{x}_d > 0$ is incorrect: Writes the hypotheses about a sample mean, but hypotheses are always about the population parameter.\n$H_0: \\mu_d = 0$ and $H_a: \\mu_d \\ne 0$ is incorrect: Writes a two-sided alternative although the suspicion has a direction."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_hypotheses_means",
+   "facts": [
+    "kind=paired",
+    "tail=less",
+    "ha=>"
+   ],
+   "seed": 9601
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Setting up hypotheses for a matched-pairs mean; the dominant skill is 2.E in topic 4.4, with direction set by the order of subtraction."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The difference is before minus after, so a session that lowers scores gives a positive mean difference. Ha: mu_d > 0 is the unique correct choice."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem defines the parameter, the order of subtraction, and the suspicion clearly."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The three distractors are wrong direction, statistic instead of parameter, and two-sided alternative. Each is distinct, and the explanation covers every wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 85 seconds, no arithmetic, four short parallel options."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean, unambiguous hypotheses-setup item. The key is correct and unique, the distractors map to distinct misconceptions, and the load is appropriate for an AP MC item. It passes."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item on setting up hypotheses for a matched-pairs mean. The one extra step is translating \"lowers the mean score\" into a positive before-minus-after difference, so H_a: mu_d > 0. Distractors cover the wrong direction, a statistic in place of a parameter, and a two-sided alternative. There is no computation and the reading load is short and clear.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m13-k0",
+  "cellId": "ap_statistics-m13",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "5.2",
+  "unitCode": "5",
+  "skillPrimary": "4.D",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_influential_point",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "The student must read a scatterplot, identify the highlighted point as a high-leverage point in x that falls below the trend of the other points, and reason about how removing it changes r and slope. This is one concept (influential points) with a couple of reasoning steps and no heavy computation or reading. It is a typical AP exam-style item, neither basic recall nor advanced.",
+  "payload": {
+   "archetype": "st_influential_point",
+   "topic": "5.2",
+   "skill": "4.D",
+   "calculator": "allowed",
+   "stem": "The scatterplot shown displays $11$ observations of the daily high temperature (in degrees Fahrenheit) and the number of visitors to a park. The point circled in red is removed, and the least-squares line and the correlation coefficient are recomputed. Which statement describes the effect of removing the point?",
+   "stimulus": {
+    "kind": "stat_chart",
+    "description": "Scatterplot with one highlighted point",
+    "data": {
+     "chart": "scatter",
+     "data": {
+      "xTitle": "Temperature (F)",
+      "yTitle": "Visitors",
+      "xMin": 0,
+      "xMax": 40,
+      "xStep": 5,
+      "points": [
+       [
+        3.7,
+        29.5
+       ],
+       [
+        4.1,
+        37.3
+       ],
+       [
+        6.1,
+        46.4
+       ],
+       [
+        10.5,
+        49.3
+       ],
+       [
+        10.9,
+        60.1
+       ],
+       [
+        12.2,
+        60.3
+       ],
+       [
+        13.1,
+        61.6
+       ],
+       [
+        14.7,
+        65.6
+       ],
+       [
+        16.9,
+        65.6
+       ],
+       [
+        17.4,
+        68.4
+       ],
+       [
+        28.9,
+        64.6
+       ]
+      ],
+      "highlights": [
+       {
+        "index": 10
+       }
+      ]
+     }
+    }
+   },
+   "options": [
+    {
+     "text": "The correlation becomes stronger and the slope becomes steeper",
+     "why": "Without the circled point $|r|$ changes from $0.79$ to $0.95$ and the slope magnitude from $1.42$ to $2.54$.",
+     "value": null
+    },
+    {
+     "text": "The correlation becomes stronger and the slope becomes less steep",
+     "why": "Gets the effect on the slope backwards: the circled point was pulling the line flatter, so the slope gets steeper without it.",
+     "value": null
+    },
+    {
+     "text": "The correlation becomes weaker and the slope becomes steeper",
+     "why": "Gets the effect on the correlation backwards: the remaining points lie closer to a line, so the correlation gets stronger.",
+     "value": null
+    },
+    {
+     "text": "The correlation becomes weaker and the slope becomes less steep",
+     "why": "Treats the effects on the correlation and on the slope as opposite to what they are.",
+     "value": null
+    }
+   ],
+   "key_index": 0,
+   "est_seconds": 100,
+   "facts": [
+    "r_with=0.787",
+    "r_without=0.953"
+   ],
+   "blueprint": {
+    "id": "st_influential_point",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Describe how removing an influential point changes the correlation and the slope",
+    "topic": "5.2",
+    "skill": "4.D",
+    "student_thinking": [
+     "Notice that the circled point has an extreme x-value and does not follow the pattern of the other points",
+     "Decide how removing it changes the strength of the correlation and the steepness of the least-squares line"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "a high-leverage point far from the pattern weakens the correlation and changes the slope",
+      "evidence": "the plot shows the circled point far to the right of the other observations"
+     }
+    ],
+    "material": {
+     "type": "scatter",
+     "must_include": [
+      "highlighted point"
+     ]
+    },
+    "misconceptions": [
+     {
+      "id": "correlation_backwards",
+      "description": "gets the correlation change backwards"
+     },
+     {
+      "id": "slope_backwards",
+      "description": "gets the slope change backwards"
+     },
+     {
+      "id": "both_backwards",
+      "description": "gets both changes backwards"
+     }
+    ],
+    "verification": {
+     "independent_path": "slope and correlation are recomputed with and without the point by closed-form sums and by numpy polyfit and corrcoef, and the changes must exceed fixed thresholds so the options are distinct",
+     "method": "exact arithmetic + independent numeric path"
+    },
+    "judgment_demand": [
+     "interpretation",
+     "representation_reading"
+    ]
+   },
+   "seed": 9600,
+   "pack_id": "st_influential_point-s9600",
+   "explanation_en": "The correct answer is The correlation becomes stronger and the slope becomes steeper. Without the circled point $|r|$ changes from $0.79$ to $0.95$ and the slope magnitude from $1.42$ to $2.54$.\nThe correlation becomes stronger and the slope becomes less steep is incorrect: Gets the effect on the slope backwards: the circled point was pulling the line flatter, so the slope gets steeper without it.\nThe correlation becomes weaker and the slope becomes steeper is incorrect: Gets the effect on the correlation backwards: the remaining points lie closer to a line, so the correlation gets stronger.\nThe correlation becomes weaker and the slope becomes less steep is incorrect: Treats the effects on the correlation and on the slope as opposite to what they are."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_influential_point",
+   "facts": [
+    "r_with=0.787",
+    "r_without=0.953"
+   ],
+   "seed": 9600
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 5.2: effect of an influential point on r and slope, an interpretation of a visual. Skill 4.D is a reasonable fit."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The four options cover every combination of the two effects, so exactly one is correct. The key is stronger r and steeper slope, which agrees with the stated values (|r| 0.79 to 0.95, slope 1.42 to 2.54)."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The scatter data has axis titles, ranges and a highlighted point at index 10, which is the far-right point. The stem is clear. The temperature values (4 to 29 °F with a rising trend) are slightly odd for a park but not wrong."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option encodes a distinct error: slope backwards, correlation backwards, or both backwards. The explanation for the fourth option is vague, since it never says it reverses both effects."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item is short and typical of the AP exam, with one stimulus and parallel options, and the calculator load is trivial."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is acceptable: the key is unique and consistent with the data, the stimulus is complete, and the distractors encode distinct misconceptions. Minor weaknesses are the vague explanation for the fourth option and the slightly unrealistic temperature range."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The student must read a scatterplot, identify the highlighted point as a high-leverage point in x that falls below the trend of the other points, and reason about how removing it changes r and slope. This is one concept (influential points) with a couple of reasoning steps and no heavy computation or reading. It is a typical AP exam-style item, neither basic recall nor advanced.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m13-k1",
+  "cellId": "ap_statistics-m13",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "5.2",
+  "unitCode": "5",
+  "skillPrimary": "4.D",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_influential_point",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Student must reason about a high-leverage point lying below the trend of the other points, and judge its joint effect on slope and correlation from the scatterplot. This takes two linked judgments (slope direction, r strength) and a representation read, with no heavy computation. It is a standard exam-style item and is appropriate for full mocks.",
+  "payload": {
+   "archetype": "st_influential_point",
+   "topic": "5.2",
+   "skill": "4.D",
+   "calculator": "allowed",
+   "stem": "The scatterplot shown displays $11$ observations of the engine size (in liters) and the fuel efficiency (in miles per gallon). The point circled in red is removed, and the least-squares line and the correlation coefficient are recomputed. Which statement describes the effect of removing the point?",
+   "stimulus": {
+    "kind": "stat_chart",
+    "description": "Scatterplot with one highlighted point",
+    "data": {
+     "chart": "scatter",
+     "data": {
+      "xTitle": "Engine size (liters)",
+      "yTitle": "Fuel efficiency (mpg)",
+      "xMin": 0,
+      "xMax": 40,
+      "xStep": 5,
+      "points": [
+       [
+        3.8,
+        32.8
+       ],
+       [
+        5.5,
+        37.6
+       ],
+       [
+        7.7,
+        50.9
+       ],
+       [
+        7.8,
+        45.8
+       ],
+       [
+        9.9,
+        54.4
+       ],
+       [
+        12.2,
+        63.4
+       ],
+       [
+        13.2,
+        62.3
+       ],
+       [
+        14.7,
+        77
+       ],
+       [
+        14.9,
+        73.3
+       ],
+       [
+        18,
+        84.5
+       ],
+       [
+        33.4,
+        96.5
+       ]
+      ],
+      "highlights": [
+       {
+        "index": 10
+       }
+      ]
+     }
+    }
+   },
+   "options": [
+    {
+     "text": "The correlation becomes weaker and the slope becomes less steep",
+     "why": "Treats the effects on the correlation and on the slope as opposite to what they are.",
+     "value": null
+    },
+    {
+     "text": "The correlation becomes weaker and the slope becomes steeper",
+     "why": "Gets the effect on the correlation backwards: the remaining points lie closer to a line, so the correlation gets stronger.",
+     "value": null
+    },
+    {
+     "text": "The correlation becomes stronger and the slope becomes steeper",
+     "why": "Without the circled point $|r|$ changes from $0.92$ to $0.99$ and the slope magnitude from $2.26$ to $3.68$.",
+     "value": null
+    },
+    {
+     "text": "The correlation becomes stronger and the slope becomes less steep",
+     "why": "Gets the effect on the slope backwards: the circled point was pulling the line flatter, so the slope gets steeper without it.",
+     "value": null
+    }
+   ],
+   "key_index": 2,
+   "est_seconds": 100,
+   "facts": [
+    "r_with=0.922",
+    "r_without=0.988"
+   ],
+   "blueprint": {
+    "id": "st_influential_point",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Describe how removing an influential point changes the correlation and the slope",
+    "topic": "5.2",
+    "skill": "4.D",
+    "student_thinking": [
+     "Notice that the circled point has an extreme x-value and does not follow the pattern of the other points",
+     "Decide how removing it changes the strength of the correlation and the steepness of the least-squares line"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "a high-leverage point far from the pattern weakens the correlation and changes the slope",
+      "evidence": "the plot shows the circled point far to the right of the other observations"
+     }
+    ],
+    "material": {
+     "type": "scatter",
+     "must_include": [
+      "highlighted point"
+     ]
+    },
+    "misconceptions": [
+     {
+      "id": "correlation_backwards",
+      "description": "gets the correlation change backwards"
+     },
+     {
+      "id": "slope_backwards",
+      "description": "gets the slope change backwards"
+     },
+     {
+      "id": "both_backwards",
+      "description": "gets both changes backwards"
+     }
+    ],
+    "verification": {
+     "independent_path": "slope and correlation are recomputed with and without the point by closed-form sums and by numpy polyfit and corrcoef, and the changes must exceed fixed thresholds so the options are distinct",
+     "method": "exact arithmetic + independent numeric path"
+    },
+    "judgment_demand": [
+     "interpretation",
+     "representation_reading"
+    ]
+   },
+   "seed": 9601,
+   "pack_id": "st_influential_point-s9601",
+   "explanation_en": "The correct answer is The correlation becomes stronger and the slope becomes steeper. Without the circled point $|r|$ changes from $0.92$ to $0.99$ and the slope magnitude from $2.26$ to $3.68$.\nThe correlation becomes weaker and the slope becomes less steep is incorrect: Treats the effects on the correlation and on the slope as opposite to what they are.\nThe correlation becomes weaker and the slope becomes steeper is incorrect: Gets the effect on the correlation backwards: the remaining points lie closer to a line, so the correlation gets stronger.\nThe correlation becomes stronger and the slope becomes less steep is incorrect: Gets the effect on the slope backwards: the circled point was pulling the line flatter, so the slope gets steeper without it."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_influential_point",
+   "facts": [
+    "r_with=0.922",
+    "r_without=0.988"
+   ],
+   "seed": 9601
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Influential point effect on r and slope; in Unit 5 scope, interpretation of a result (4.D)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Point lies far below the trend of the others, so removing it strengthens r and steepens the slope. Unique key C."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Scatter data complete: titles, axis range, points, highlight index. Context is odd (mpg rising with engine size) but harmless."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Options are parallel and each is explained. Option A's explanation is vague (it is the both-backwards error), a minor flaw."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Quick, no arithmetic, single stimulus, typical AP load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound influential-point item with a unique key and a complete stimulus. The only minor weakness is that option A's explanation is vague and does not name the both-backwards error."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must reason about a high-leverage point lying below the trend of the other points, and judge its joint effect on slope and correlation from the scatterplot. This takes two linked judgments (slope direction, r strength) and a representation read, with no heavy computation. It is a standard exam-style item and is appropriate for full mocks.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ }
+]

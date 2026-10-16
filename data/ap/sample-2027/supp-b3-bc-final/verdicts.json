@@ -1,0 +1,489 @@
+[
+ {
+  "key": "ap_calculus_bc-m01-k0",
+  "cellId": "ap_calculus_bc-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "P=600/(1+19e^{-0.1t}); set 270 → e^{-0.1t}=11/171, t=10ln(171/11)≈27.438",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "27.438"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Logistic solution, solving for time; fits 7.9/1.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "t=10 ln(171/11)=27.438 unique and correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor maps to a distinct error and the explanation covers all three wrong options."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 105 seconds, a calculator is used for the logarithm, options are parallel numeric values."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean logistic time-solving item with distinct distractors. Passes all criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires applying the logistic solution form, finding A from the initial condition, and solving an exponential equation with logs. A standard multi-step procedural item with a misconception-rich option set (missing the 0.1 factor, wrong A). Numbers are clean and the wording is unambiguous.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_calculus_bc-m02-k0",
+  "cellId": "ap_calculus_bc-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Limaçon area 41π/2 minus 4π, plus the part of the circle outside the limaçon (θ from arccos(-2/3) to 2π − arccos(-2/3)), ≈ 1.775. Total ≈ 53.611.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "53.611"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Area between two polar curves, topic 9.9; requires finding intersection angles and choosing the (outer^2 - inner^2)/2 setup. In scope."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Verified: theta0=arccos(-2/3), area=(1/2)∫(12+24cos+9cos^2)=~53.611. Unique answer; the distractors are distinct values."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; stem is clear and complete, 'inside limacon and outside circle' is unambiguous."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors map to distinct misconceptions (squared difference, full circle, half region). The key rationale is a generic template, but every wrong option is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Calculator-appropriate, about 110 s, four numeric options, no giveaway."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean calculator MC on the area between polar curves; the key 53.611 is verified and the distractors are plausible and distinct."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP polar area between curves: find intersection angles from 4+3cos(theta)=2, choose the correct bounds and outer/inner radii, set up (1/2)∫(R^2 - r^2), and evaluate with a calculator. Moderate reasoning with a misconception-rich option set (half-range, wrong bounds). Numbers are clean and reading load is minimal.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 150
+  }
+ },
+ {
+  "key": "ap_calculus_bc-m03-k0",
+  "cellId": "ap_calculus_bc-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "dy/dθ = r'sinθ + r cosθ = 4.598; dx/dθ = r'cosθ − r sinθ = −4.964; slope = dy/dx ≈ −0.926",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "-0.926"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The task fits about 100 seconds, with a modest calculator load and a calculator designation consistent with the numeric options.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean polar tangent-slope calculation. The key is correct, the distractors are realistic, and it is suitable for the exam."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires recalling and applying the polar dy/dx formula: compute r and r' at the given angle, then evaluate a quotient with a calculator. It is a multi-step procedure with a misconception-based option set (e.g., tan(theta) as a distractor), but it has a single representation and no unfair difficulty sources. This is standard exam-level procedural work.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_calculus_bc-m04-k0",
+  "cellId": "ap_calculus_bc-m04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "8.642",
+     "brief_reasoning": "Speed^2=4t^2+25cos^2 t; increasing near end, max at t=4: sqrt(64+25cos^2 4)=8.642",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Speed from velocity vector, optimization with calculator; in scope for 9.6."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Max speed at t=4 is 8.642; derivative of s^2 positive at 4; unique answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distinct misconceptions; explanation covers each. Minor template leak 'a t' in the 8.000 rationale."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 105 seconds, calculator appropriate."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound item; key 8.642 verified as the endpoint maximum; distractors are distinct. Minor wording leak ('a t') in an option rationale."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single concept: speed is the magnitude of the velocity vector. The student forms sqrt(4t^2+25cos^2 t) and finds its maximum on a closed interval by calculator graph or endpoint evaluation. There are about 3 steps with one representation change (vector to scalar function). Distractors reflect real misconceptions (t=0 speed, x-component only, summing components). No unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_calculus_bc-m05-k0",
+  "cellId": "ap_calculus_bc-m05",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "C",
+     "brief_reasoning": "∫x^(-3/2) from 1 to ∞ = 2, so the integral is finite and the series converges. In the other three choices the integrals grow like (ln x)², ln(x²+1) or ln(ln x), so they diverge.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Integral test application, with the hypotheses given in the stem; fits 10.4 and skill 3.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Only the p=3/2 series has a convergent integral. The other three integrals diverge. The key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem states the hypotheses, and ln n/n is decreasing from n=3, so the stated condition holds."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors map to distinct misconceptions, and the explanation addresses each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 100 seconds, no calculator, simple exact integrals."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, correct integral-test choice question with a unique key and well-motivated distractors. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard integral test item: the student evaluates or recognizes improper integrals for four series (u-substitution for three, p-integral for one) and identifies the lone convergent one. Hypotheses are given in the stem. The distractors are common divergent cases (ln n/n, n/(n^2+1), 1/(n ln n)), which makes the option set somewhat misconception-rich. Depth is moderate, with a few reasoning steps and light computation.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_calculus_bc-m06-k0",
+  "cellId": "ap_calculus_bc-m06",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "ln(1+x)=x-x^2/2+..., so the limit is -1/2",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "-1/2"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Maclaurin series used for a limit; fits 10.14 and 1.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The limit is -1/2; the key is unique and correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The -1 and -1/4 distractors are somewhat vague, but the explanation covers every wrong option and the 0 distractor is realistic."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, no-calculator item with exact options."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, in-scope, and suitable. The explanations for the -1/4 and -1 distractors could be sharper, but the item is acceptable."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires recalling the Maclaurin series for ln(1+x), cancelling the linear term, and dividing by x^2 to read off the limit (L'Hopital is an alternative route). A short, clean multi-step procedure with simple numbers and distractors drawn from common errors (0, -1, -1/4). Standard AP-level application of Taylor series to limits.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_calculus_bc-m07-k0",
+  "cellId": "ap_calculus_bc-m07",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "arctan(1/√3)=π/6 = (1/√3)·Σ(-1)^n/((2n+1)3^n), so sum = √3π/6",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "√3π/6"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Series recognition of arctan Maclaurin series; fits 10.15 and 1.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Key sqrt3*pi/6 is unique and correct; the point x=1/sqrt3 lies inside the interval of convergence."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors reflect distinct misconceptions (arctan 1, missing factor, factor error). The wording of option A's rationale is slightly loose (dividing by sqrt3, not 3), but it is acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 95 seconds, no calculator needed, exact-form options."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and well scoped. The key is unique and the distractors are plausible, so it passes all criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires recognizing the arctan Maclaurin series, rewriting the terms to match x^(2n)/(2n+1), choosing x = 1/sqrt(3) from 3^n, and dividing by x to correct the exponent. Clean values and a misconception-rich option set (forgetting the 1/x factor, wrong x). Standard for a BC full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_calculus_bc-m08-k0",
+  "cellId": "ap_calculus_bc-m08",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "P4(1.5)=1+1.5+1.125+0.5625+0.2109375=4.3984375; e^1.5≈4.481689; difference≈0.0833",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "0.0833"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Maclaurin polynomial evaluation and actual error with calculator; fits 10.11 and 1.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Unique answer 0.0833; verified."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distinct misconceptions (degree 3, degree 5, polynomial value); explanation covers each wrong option. The Lagrange-bound misconception is listed but not used, which is minor."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 100 seconds, calculator use is appropriate, no heavy arithmetic."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound: the key is unique and correct, the distractors are distinct, and it fits the scope and the calculator designation. It passes."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Direct application of the Maclaurin polynomial procedure for e^x: build P4, evaluate at 1.5, compute e^1.5 with a calculator, subtract. One concept, no representation changes, no theorem hypotheses to check. Distractors reflect plausible slips (P4 value alone, degree-3 polynomial). Arithmetic is modest and the wording is unambiguous.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_calculus_bc-m09-k0",
+  "cellId": "ap_calculus_bc-m09",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "f'(x)=sum x^{n-1}/6^n = 1/(6-x); f'(3)=1/3",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "1/3"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Term-by-term differentiation of a power series and summing a geometric series; fits 10.15 and skill 1.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "f'(x)=1/(6-x), f'(3)=1/3; the key is unique. The domain |x|<6 is stated in the stem."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed; the stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors are f(3)=ln2, the wrong power (1), and the dropped factor (2). Each is distinct and explained correctly."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 90 seconds, no calculator needed, exact-form options."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and well-formed, with plausible distractors that are each explained. It is suitable for the non-calculator section."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires termwise differentiation of a power series, cancelling n, recognizing a geometric series with first term 1/6 and ratio x/6, summing it to 1/(6-x), and evaluating at x=3 within the interval of convergence. Light arithmetic, concise wording, and distractors based on plausible misconceptions (e.g., ln 2 from integrating instead of differentiating). Typical of a standard AP exam item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ }
+]

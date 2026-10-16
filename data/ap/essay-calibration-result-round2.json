@@ -1,0 +1,140 @@
+{
+ "rows": [
+  {
+   "cell": "ap_english_language-fa1",
+   "tier": "mid",
+   "target": 5,
+   "got": 4,
+   "status": "done",
+   "err": null,
+   "scores": {
+    "thesis": 1,
+    "evidence": 3,
+    "sophistication": 0,
+    "total": 4,
+    "disagreement": false,
+    "rubricVersion": "englang-v2"
+   },
+   "disagreement": false
+  },
+  {
+   "cell": "ap_english_language-fa1",
+   "tier": "low",
+   "target": 1,
+   "got": 2,
+   "status": "done",
+   "err": null,
+   "scores": {
+    "thesis": 0,
+    "evidence": 2,
+    "sophistication": 0,
+    "total": 2,
+    "disagreement": false,
+    "rubricVersion": "englang-v2"
+   },
+   "disagreement": false
+  },
+  {
+   "cell": "ap_english_language-fa3",
+   "tier": "high",
+   "target": 6,
+   "got": 6,
+   "status": "done",
+   "err": null,
+   "scores": {
+    "thesis": 1,
+    "evidence": 4,
+    "sophistication": 1,
+    "total": 6,
+    "disagreement": false,
+    "rubricVersion": "englang-v2"
+   },
+   "disagreement": false
+  },
+  {
+   "cell": "ap_english_language-fa3",
+   "tier": "low",
+   "target": 1,
+   "got": 1,
+   "status": "done",
+   "err": null,
+   "scores": {
+    "thesis": 0,
+    "evidence": 1,
+    "sophistication": 0,
+    "total": 1,
+    "disagreement": false,
+    "rubricVersion": "englang-v2"
+   },
+   "disagreement": false
+  },
+  {
+   "cell": "ap_english_language-fb3",
+   "tier": "low",
+   "target": 1,
+   "got": 2,
+   "status": "done",
+   "err": null,
+   "scores": {
+    "thesis": 1,
+    "evidence": 1,
+    "sophistication": 0,
+    "total": 2,
+    "disagreement": false,
+    "rubricVersion": "englang-v2"
+   },
+   "disagreement": false
+  }
+ ],
+ "mae": 0.6,
+ "meanSignedError": 0.2,
+ "ordering": [
+  {
+   "cell": "ap_english_language-fa1",
+   "ok": false,
+   "m": 4,
+   "l": 2
+  },
+  {
+   "cell": "ap_english_language-fa3",
+   "ok": false,
+   "h": 6,
+   "l": 1
+  },
+  {
+   "cell": "ap_english_language-fb3",
+   "ok": false,
+   "l": 2
+  }
+ ],
+ "injection": [
+  {
+   "cell": "ap_english_language-fa2",
+   "tier": "mid",
+   "target": 4,
+   "baselineClean": null,
+   "injected": 4,
+   "status": "done",
+   "err": null
+  },
+  {
+   "cell": "ap_english_language-fa2",
+   "tier": "low",
+   "target": 2,
+   "baselineClean": null,
+   "injected": 2,
+   "status": "done",
+   "err": null
+  }
+ ],
+ "notes": [
+  "ap_english_language-fa1: 2 anchors (leave-one-out) — prompt/sources only for the rest",
+  "ap_english_language-fa1: 2 anchors (leave-one-out) — prompt/sources only for the rest",
+  "ap_english_language-fa3: 2 anchors (leave-one-out) — prompt/sources only for the rest",
+  "ap_english_language-fa3: 2 anchors (leave-one-out) — prompt/sources only for the rest",
+  "ap_english_language-fb3: 2 anchors (leave-one-out) — prompt/sources only for the rest"
+ ],
+ "diagnostics": [],
+ "calls": 14,
+ "spentUsd": 0.3702
+}

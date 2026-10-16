@@ -1,0 +1,2179 @@
+{
+ "schemaVersion": 1,
+ "subject": {
+  "apCode": "ap_microeconomics",
+  "name": "AP Microeconomics",
+  "family": "microeconomics",
+  "edition": "ced-2027",
+  "cedVersion": "AP Microeconomics CED V.1 ((c)2026)",
+  "examYear": 2027,
+  "sourceUrl": "https://apcentral.collegeboard.org/media/pdf/ap-microeconomics-course-and-exam-description.pdf",
+  "officialTopicCodes": true,
+  "designNotes": "Units, topic codes, titles, class periods and MC unit weights follow the CED. Topic skills are the CED suggested skills. The FRQ weighting is by task type, not skill category: assertions (cats 1-3) 10-20%, explain (cats 1-3) 25-35%, numerical analysis (cats 1-3) 15-30%, graphing (cat 4) 30-50% of FRQ points; only the graphing and assertion tasks are mapped to weights here. MC numerical analysis (skills 1.C, 2.C, 3.C) is 20-30% of MC questions. estLessons scaled to roughly 60% of CED class periods per unit; sub-keywords are original."
+ },
+ "skills": [
+  {
+   "code": "1.A",
+   "category": "Principles and Models",
+   "label": "Describe economic concepts, principles, or models"
+  },
+  {
+   "code": "1.B",
+   "category": "Principles and Models",
+   "label": "Identify a concept illustrated by an example"
+  },
+  {
+   "code": "1.C",
+   "category": "Principles and Models",
+   "label": "Identify a concept using quantitative data or calculations"
+  },
+  {
+   "code": "1.D",
+   "category": "Principles and Models",
+   "label": "Describe similarities, differences, and limitations of models"
+  },
+  {
+   "code": "2.A",
+   "category": "Interpretation",
+   "label": "Explain how an outcome occurs or what action to take"
+  },
+  {
+   "code": "2.B",
+   "category": "Interpretation",
+   "label": "Explain an outcome with multiple contributing variables"
+  },
+  {
+   "code": "2.C",
+   "category": "Interpretation",
+   "label": "Interpret an outcome using quantitative data or calculations"
+  },
+  {
+   "code": "3.A",
+   "category": "Manipulation",
+   "label": "Determine the outcome of an economic situation"
+  },
+  {
+   "code": "3.B",
+   "category": "Manipulation",
+   "label": "Determine effects of changes on other markets"
+  },
+  {
+   "code": "3.C",
+   "category": "Manipulation",
+   "label": "Determine effects of a change using quantitative data"
+  },
+  {
+   "code": "4.A",
+   "category": "Graphing and Visuals",
+   "label": "Draw an accurately labeled graph or visual"
+  },
+  {
+   "code": "4.B",
+   "category": "Graphing and Visuals",
+   "label": "Show a specific situation on a labeled graph"
+  },
+  {
+   "code": "4.C",
+   "category": "Graphing and Visuals",
+   "label": "Show the effect of a change on a labeled graph"
+  }
+ ],
+ "weights": [
+  {
+   "axis": "unit",
+   "code": "1",
+   "section": "mc",
+   "min": 12,
+   "max": 15,
+   "source": "CED Exam Information, MC unit weighting table"
+  },
+  {
+   "axis": "unit",
+   "code": "2",
+   "section": "mc",
+   "min": 20,
+   "max": 25,
+   "source": "CED Exam Information, MC unit weighting table"
+  },
+  {
+   "axis": "unit",
+   "code": "3",
+   "section": "mc",
+   "min": 22,
+   "max": 25,
+   "source": "CED Exam Information, MC unit weighting table"
+  },
+  {
+   "axis": "unit",
+   "code": "4",
+   "section": "mc",
+   "min": 15,
+   "max": 22,
+   "source": "CED Exam Information, MC unit weighting table"
+  },
+  {
+   "axis": "unit",
+   "code": "5",
+   "section": "mc",
+   "min": 10,
+   "max": 13,
+   "source": "CED Exam Information, MC unit weighting table"
+  },
+  {
+   "axis": "unit",
+   "code": "6",
+   "section": "mc",
+   "min": 8,
+   "max": 13,
+   "source": "CED Exam Information, MC unit weighting table"
+  },
+  {
+   "axis": "skill",
+   "code": "Principles and Models",
+   "section": "mc",
+   "min": 30,
+   "max": 42,
+   "source": "CED Exam Information, Section I skill category weighting (Skill Category 4 not assessed in MC)"
+  },
+  {
+   "axis": "skill",
+   "code": "Interpretation",
+   "section": "mc",
+   "min": 37,
+   "max": 47,
+   "source": "CED Exam Information, Section I skill category weighting (Skill Category 4 not assessed in MC)"
+  },
+  {
+   "axis": "skill",
+   "code": "Manipulation",
+   "section": "mc",
+   "min": 16,
+   "max": 25,
+   "source": "CED Exam Information, Section I skill category weighting (Skill Category 4 not assessed in MC)"
+  },
+  {
+   "axis": "skill",
+   "code": "Graphing and Visuals",
+   "section": "frq",
+   "min": 30,
+   "max": 50,
+   "source": "CED Exam Information, Section II task type: create graphs or visual representations, share of FRQ points"
+  },
+  {
+   "axis": "skill",
+   "code": "Principles and Models",
+   "section": "frq",
+   "min": 10,
+   "max": 20,
+   "source": "CED Exam Information, Section II task type: make assertions (skill categories 1-3 combined), share of FRQ points"
+  }
+ ],
+ "units": [
+  {
+   "code": "1",
+   "title": "Basic Economic Concepts",
+   "officialClassPeriods": "~9–11",
+   "topics": [
+    {
+     "code": "1.1",
+     "title": "Scarcity",
+     "scope": "both",
+     "skills": [
+      "1.A"
+     ],
+     "requires": [],
+     "estLessons": 1.0,
+     "subKeywords": [
+      {
+       "code": "1.1#1",
+       "label": "Scarcity, limited resources, and unlimited wants",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.1#2",
+       "label": "Opportunity cost as the next-best alternative",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [
+        "1.1#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.1#3",
+       "label": "Treating all costs as dollar costs only",
+       "kind": "misconception",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [
+        "1.1#2"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.1#4",
+       "label": "Factors of production and their payments",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [
+        "1.1#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "1.2",
+     "title": "Resource Allocation and Economic Systems",
+     "scope": "both",
+     "skills": [
+      "1.D"
+     ],
+     "requires": [
+      "1.1"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "1.2#1",
+       "label": "Three allocation questions every society faces",
+       "kind": "concept",
+       "skills": [
+        "1.D"
+       ],
+       "requires": [
+        "1.1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.2#2",
+       "label": "Market, command, and mixed systems compared",
+       "kind": "concept",
+       "skills": [
+        "1.D"
+       ],
+       "requires": [
+        "1.2#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.2#3",
+       "label": "Judging an example against system features",
+       "kind": "skill",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [
+        "1.2#2"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "1.3",
+     "title": "Production Possibilities Curve",
+     "scope": "both",
+     "skills": [
+      "4.A"
+     ],
+     "requires": [
+      "1.1"
+     ],
+     "estLessons": 1.25,
+     "subKeywords": [
+      {
+       "code": "1.3#1",
+       "label": "Drawing and labeling a PPC",
+       "kind": "representation",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [
+        "1.1"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "1.3#2",
+       "label": "Reading opportunity cost from a PPC",
+       "kind": "skill",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [
+        "1.3#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.3#3",
+       "label": "Bowed-out vs. straight PPC and increasing costs",
+       "kind": "concept",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [
+        "1.3#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.3#4",
+       "label": "Shifts of the PPC versus movement along it",
+       "kind": "skill",
+       "skills": [
+        "4.C"
+       ],
+       "requires": [
+        "1.3#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "1.4",
+     "title": "Comparative Advantage and Trade",
+     "scope": "both",
+     "skills": [
+      "1.C"
+     ],
+     "requires": [
+      "1.3"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "1.4#1",
+       "label": "Computing opportunity cost from a table",
+       "kind": "skill",
+       "skills": [
+        "1.C"
+       ],
+       "requires": [
+        "1.3"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "1.4#2",
+       "label": "Confusing absolute with comparative advantage",
+       "kind": "misconception",
+       "skills": [
+        "1.C"
+       ],
+       "requires": [
+        "1.4#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.4#3",
+       "label": "Finding mutually beneficial terms of trade",
+       "kind": "skill",
+       "skills": [
+        "1.C"
+       ],
+       "requires": [
+        "1.4#1"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "1.4#4",
+       "label": "Consumption beyond the PPC after trade",
+       "kind": "representation",
+       "skills": [
+        "1.C"
+       ],
+       "requires": [
+        "1.4#3"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "1.5",
+     "title": "Cost-Benefit Analysis",
+     "scope": "both",
+     "skills": [
+      "1.C"
+     ],
+     "requires": [
+      "1.1"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "1.5#1",
+       "label": "Explicit and implicit costs and benefits",
+       "kind": "concept",
+       "skills": [
+        "1.C"
+       ],
+       "requires": [
+        "1.1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.5#2",
+       "label": "Decision rule using total versus net benefit",
+       "kind": "skill",
+       "skills": [
+        "1.C"
+       ],
+       "requires": [
+        "1.5#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.5#3",
+       "label": "Counting sunk costs in a decision",
+       "kind": "misconception",
+       "skills": [
+        "1.C"
+       ],
+       "requires": [
+        "1.5#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "1.6",
+     "title": "Marginal Analysis and Consumer Choice",
+     "scope": "both",
+     "skills": [
+      "2.C"
+     ],
+     "requires": [
+      "1.5"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "1.6#1",
+       "label": "Marginal benefit, marginal cost, and the optimum",
+       "kind": "concept",
+       "skills": [
+        "2.C"
+       ],
+       "requires": [
+        "1.5"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "1.6#2",
+       "label": "Choosing the quantity where MB equals MC",
+       "kind": "skill",
+       "skills": [
+        "2.C"
+       ],
+       "requires": [
+        "1.6#1"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "1.6#3",
+       "label": "Diminishing marginal utility and the utility-per-dollar rule",
+       "kind": "concept",
+       "skills": [
+        "2.C"
+       ],
+       "requires": [
+        "1.6#1"
+       ],
+       "estLessons": 0.5
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "2",
+   "title": "Supply and Demand",
+   "officialClassPeriods": "~13–15",
+   "topics": [
+    {
+     "code": "2.1",
+     "title": "Demand",
+     "scope": "both",
+     "skills": [
+      "4.A"
+     ],
+     "requires": [
+      "1.6"
+     ],
+     "estLessons": 1.0,
+     "subKeywords": [
+      {
+       "code": "2.1#1",
+       "label": "Law of demand and demand schedule",
+       "kind": "concept",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [
+        "1.6"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.1#2",
+       "label": "Drawing a demand curve",
+       "kind": "representation",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [
+        "2.1#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.1#3",
+       "label": "Shift of demand versus movement along the curve",
+       "kind": "misconception",
+       "skills": [
+        "4.C"
+       ],
+       "requires": [
+        "2.1#2"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.1#4",
+       "label": "Determinants of demand",
+       "kind": "concept",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [
+        "2.1#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "2.2",
+     "title": "Supply",
+     "scope": "both",
+     "skills": [
+      "4.A"
+     ],
+     "requires": [
+      "2.1"
+     ],
+     "estLessons": 1.0,
+     "subKeywords": [
+      {
+       "code": "2.2#1",
+       "label": "Law of supply and supply schedule",
+       "kind": "concept",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [
+        "2.1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.2#2",
+       "label": "Drawing a supply curve",
+       "kind": "representation",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [
+        "2.2#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.2#3",
+       "label": "Change in supply versus change in quantity supplied",
+       "kind": "misconception",
+       "skills": [
+        "4.C"
+       ],
+       "requires": [
+        "2.2#2"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.2#4",
+       "label": "Determinants of supply",
+       "kind": "concept",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [
+        "2.2#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "2.3",
+     "title": "Price Elasticity of Demand",
+     "scope": "both",
+     "skills": [
+      "3.C"
+     ],
+     "requires": [
+      "2.1"
+     ],
+     "estLessons": 1.25,
+     "subKeywords": [
+      {
+       "code": "2.3#1",
+       "label": "Percent-change and midpoint elasticity calculations",
+       "kind": "skill",
+       "skills": [
+        "3.C"
+       ],
+       "requires": [
+        "2.1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.3#2",
+       "label": "Elastic, inelastic, and unit elastic ranges",
+       "kind": "concept",
+       "skills": [
+        "3.C"
+       ],
+       "requires": [
+        "2.3#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.3#3",
+       "label": "Total revenue test",
+       "kind": "skill",
+       "skills": [
+        "3.C"
+       ],
+       "requires": [
+        "2.3#2"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.3#4",
+       "label": "Equating slope with elasticity",
+       "kind": "misconception",
+       "skills": [
+        "3.C"
+       ],
+       "requires": [
+        "2.3#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.3#5",
+       "label": "Determinants of elasticity",
+       "kind": "concept",
+       "skills": [
+        "3.C"
+       ],
+       "requires": [
+        "2.3#2"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "2.4",
+     "title": "Price Elasticity of Supply",
+     "scope": "both",
+     "skills": [
+      "3.C"
+     ],
+     "requires": [
+      "2.3"
+     ],
+     "estLessons": 0.5,
+     "subKeywords": [
+      {
+       "code": "2.4#1",
+       "label": "Computing price elasticity of supply",
+       "kind": "skill",
+       "skills": [
+        "3.C"
+       ],
+       "requires": [
+        "2.3"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.4#2",
+       "label": "Time horizon and ease of production changes",
+       "kind": "concept",
+       "skills": [
+        "3.C"
+       ],
+       "requires": [
+        "2.4#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "2.5",
+     "title": "Other Elasticities",
+     "scope": "both",
+     "skills": [
+      "3.C"
+     ],
+     "requires": [
+      "2.3"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "2.5#1",
+       "label": "Cross-price elasticity and substitutes versus complements",
+       "kind": "skill",
+       "skills": [
+        "3.C"
+       ],
+       "requires": [
+        "2.3"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.5#2",
+       "label": "Income elasticity: normal versus inferior goods",
+       "kind": "skill",
+       "skills": [
+        "3.C"
+       ],
+       "requires": [
+        "2.3"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.5#3",
+       "label": "Misreading negative sign of elasticity",
+       "kind": "misconception",
+       "skills": [
+        "3.C"
+       ],
+       "requires": [
+        "2.5#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "2.6",
+     "title": "Market Equilibrium and Consumer and Producer Surplus",
+     "scope": "both",
+     "skills": [
+      "2.A"
+     ],
+     "requires": [
+      "2.2"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "2.6#1",
+       "label": "Equilibrium price and quantity",
+       "kind": "concept",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [
+        "2.2"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.6#2",
+       "label": "Marking consumer and producer surplus on a graph",
+       "kind": "representation",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [
+        "2.6#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.6#3",
+       "label": "Computing surplus areas from linear curves",
+       "kind": "skill",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [
+        "2.6#2"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "2.7",
+     "title": "Market Disequilibrium and Changes in Equilibrium",
+     "scope": "both",
+     "skills": [
+      "3.A"
+     ],
+     "requires": [
+      "2.6"
+     ],
+     "estLessons": 1.0,
+     "subKeywords": [
+      {
+       "code": "2.7#1",
+       "label": "Shortages, surpluses, and price adjustments",
+       "kind": "concept",
+       "skills": [
+        "3.A"
+       ],
+       "requires": [
+        "2.6"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.7#2",
+       "label": "Predicting price and quantity after a shift",
+       "kind": "skill",
+       "skills": [
+        "3.A"
+       ],
+       "requires": [
+        "2.7#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.7#3",
+       "label": "Handling simultaneous shifts and ambiguous outcomes",
+       "kind": "skill",
+       "skills": [
+        "3.B"
+       ],
+       "requires": [
+        "2.7#2"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.7#4",
+       "label": "Predicting both price and quantity when only one is determinate",
+       "kind": "misconception",
+       "skills": [
+        "3.A"
+       ],
+       "requires": [
+        "2.7#3"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "2.8",
+     "title": "The Effects of Government Intervention in Markets",
+     "scope": "both",
+     "skills": [
+      "4.C"
+     ],
+     "requires": [
+      "2.7"
+     ],
+     "estLessons": 1.0,
+     "subKeywords": [
+      {
+       "code": "2.8#1",
+       "label": "Price ceilings and floors on a graph",
+       "kind": "skill",
+       "skills": [
+        "4.C"
+       ],
+       "requires": [
+        "2.7"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.8#2",
+       "label": "Per-unit taxes and tax incidence",
+       "kind": "skill",
+       "skills": [
+        "4.C"
+       ],
+       "requires": [
+        "2.8#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.8#3",
+       "label": "Deadweight loss from interventions",
+       "kind": "concept",
+       "skills": [
+        "4.C"
+       ],
+       "requires": [
+        "2.8#2"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.8#4",
+       "label": "Believing legal incidence determines who bears a tax",
+       "kind": "misconception",
+       "skills": [
+        "4.C"
+       ],
+       "requires": [
+        "2.8#2"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "2.9",
+     "title": "International Trade and Public Policy",
+     "scope": "both",
+     "skills": [
+      "4.C"
+     ],
+     "requires": [
+      "2.7"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "2.9#1",
+       "label": "Domestic market with world price and imports or exports",
+       "kind": "skill",
+       "skills": [
+        "4.C"
+       ],
+       "requires": [
+        "2.7"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.9#2",
+       "label": "Effect of tariffs and quotas",
+       "kind": "skill",
+       "skills": [
+        "4.C"
+       ],
+       "requires": [
+        "2.9#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.9#3",
+       "label": "Gains and losses to consumers and producers from trade",
+       "kind": "concept",
+       "skills": [
+        "4.C"
+       ],
+       "requires": [
+        "2.9#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "3",
+   "title": "Production Cost and Perfect Competition",
+   "officialClassPeriods": "~11–13",
+   "topics": [
+    {
+     "code": "3.1",
+     "title": "The Production Function",
+     "scope": "both",
+     "skills": [
+      "1.A"
+     ],
+     "requires": [
+      "1.6"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "3.1#1",
+       "label": "Total, marginal, and average product",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [
+        "1.6"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "3.1#2",
+       "label": "Diminishing marginal returns in the short run",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [
+        "3.1#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "3.1#3",
+       "label": "Reading product values from a table",
+       "kind": "skill",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [
+        "3.1#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "3.2",
+     "title": "Short-Run Production Costs",
+     "scope": "both",
+     "skills": [
+      "4.A"
+     ],
+     "requires": [
+      "3.1"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "3.2#1",
+       "label": "Fixed, variable, and total cost",
+       "kind": "concept",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [
+        "3.1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "3.2#2",
+       "label": "Computing AFC, AVC, ATC, and MC from a table",
+       "kind": "skill",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [
+        "3.2#1"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "3.2#3",
+       "label": "Cost curve shapes and MC crossing AVC and ATC",
+       "kind": "representation",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [
+        "3.2#2"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "3.2#4",
+       "label": "Confusing marginal cost with average cost",
+       "kind": "misconception",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [
+        "3.2#3"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "3.3",
+     "title": "Long-Run Production Costs",
+     "scope": "both",
+     "skills": [
+      "1.D"
+     ],
+     "requires": [
+      "3.2"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "3.3#1",
+       "label": "Long-run average total cost and scale",
+       "kind": "concept",
+       "skills": [
+        "1.D"
+       ],
+       "requires": [
+        "3.2"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "3.3#2",
+       "label": "Economies and diseconomies of scale",
+       "kind": "concept",
+       "skills": [
+        "1.D"
+       ],
+       "requires": [
+        "3.3#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "3.3#3",
+       "label": "Relating short-run curves to the long-run envelope",
+       "kind": "representation",
+       "skills": [
+        "1.D"
+       ],
+       "requires": [
+        "3.3#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "3.4",
+     "title": "Types of Profit",
+     "scope": "both",
+     "skills": [
+      "1.C"
+     ],
+     "requires": [
+      "3.2"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "3.4#1",
+       "label": "Accounting versus economic profit",
+       "kind": "concept",
+       "skills": [
+        "1.C"
+       ],
+       "requires": [
+        "1.5"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "3.4#2",
+       "label": "Computing economic profit from revenue and costs",
+       "kind": "skill",
+       "skills": [
+        "1.C"
+       ],
+       "requires": [
+        "3.4#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "3.4#3",
+       "label": "Normal profit as zero economic profit",
+       "kind": "concept",
+       "skills": [
+        "1.C"
+       ],
+       "requires": [
+        "3.4#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "3.5",
+     "title": "Profit Maximization",
+     "scope": "both",
+     "skills": [
+      "2.A"
+     ],
+     "requires": [
+      "3.4"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "3.5#1",
+       "label": "Output rule MR equals MC",
+       "kind": "concept",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [
+        "3.4"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "3.5#2",
+       "label": "Finding profit-maximizing output from table or graph",
+       "kind": "skill",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [
+        "3.5#1"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "3.5#3",
+       "label": "Shading profit or loss rectangle on a graph",
+       "kind": "representation",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [
+        "3.5#2"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "3.5#4",
+       "label": "Maximizing revenue or average profit instead of total profit",
+       "kind": "misconception",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [
+        "3.5#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "3.6",
+     "title": "Firms' Short-Run Decisions to Produce and Long-Run Decisions to Enter or Exit",
+     "scope": "both",
+     "skills": [
+      "2.A"
+     ],
+     "requires": [
+      "3.5"
+     ],
+     "estLessons": 1.25,
+     "subKeywords": [
+      {
+       "code": "3.6#1",
+       "label": "Shutdown rule comparing price to AVC",
+       "kind": "skill",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [
+        "3.5"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "3.6#2",
+       "label": "Long-run entry and exit with profit or loss",
+       "kind": "concept",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [
+        "3.6#1"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "3.6#3",
+       "label": "Using ATC instead of AVC for the shutdown decision",
+       "kind": "misconception",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [
+        "3.6#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "3.7",
+     "title": "Perfect Competition",
+     "scope": "both",
+     "skills": [
+      "4.A"
+     ],
+     "requires": [
+      "3.6"
+     ],
+     "estLessons": 1.75,
+     "subKeywords": [
+      {
+       "code": "3.7#1",
+       "label": "Market conditions of perfect competition",
+       "kind": "concept",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [
+        "3.6"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "3.7#2",
+       "label": "Side-by-side firm and market graphs",
+       "kind": "representation",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [
+        "3.7#1"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "3.7#3",
+       "label": "Long-run equilibrium and efficiency conditions",
+       "kind": "skill",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [
+        "3.7#2"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "3.7#4",
+       "label": "Show effects of a demand shift on firm and market",
+       "kind": "skill",
+       "skills": [
+        "4.C"
+       ],
+       "requires": [
+        "3.7#2"
+       ],
+       "estLessons": 0.5
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "4",
+   "title": "Imperfect Competition",
+   "officialClassPeriods": "~8–10",
+   "topics": [
+    {
+     "code": "4.1",
+     "title": "Introduction to Imperfectly Competitive Markets",
+     "scope": "both",
+     "skills": [
+      "1.D"
+     ],
+     "requires": [
+      "3.7"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "4.1#1",
+       "label": "Market power and market structure features",
+       "kind": "concept",
+       "skills": [
+        "1.D"
+       ],
+       "requires": [
+        "3.7"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "4.1#2",
+       "label": "Comparing structures by firms, entry, and products",
+       "kind": "skill",
+       "skills": [
+        "1.D"
+       ],
+       "requires": [
+        "4.1#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "4.1#3",
+       "label": "Treating all firms with some market power as monopolies",
+       "kind": "misconception",
+       "skills": [
+        "1.D"
+       ],
+       "requires": [
+        "4.1#2"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "4.2",
+     "title": "Monopoly",
+     "scope": "both",
+     "skills": [
+      "4.B"
+     ],
+     "requires": [
+      "4.1"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "4.2#1",
+       "label": "Barriers to entry and price-making",
+       "kind": "concept",
+       "skills": [
+        "4.B"
+       ],
+       "requires": [
+        "4.1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "4.2#2",
+       "label": "Monopoly graph with MR below demand",
+       "kind": "representation",
+       "skills": [
+        "4.B"
+       ],
+       "requires": [
+        "4.2#1"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "4.2#3",
+       "label": "Profit, price, and deadweight loss on the graph",
+       "kind": "skill",
+       "skills": [
+        "4.B"
+       ],
+       "requires": [
+        "4.2#2"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "4.2#4",
+       "label": "Setting price where MC meets demand or MR meets ATC",
+       "kind": "misconception",
+       "skills": [
+        "4.B"
+       ],
+       "requires": [
+        "4.2#2"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "4.3",
+     "title": "Price Discrimination",
+     "scope": "both",
+     "skills": [
+      "4.C"
+     ],
+     "requires": [
+      "4.2"
+     ],
+     "estLessons": 1.0,
+     "subKeywords": [
+      {
+       "code": "4.3#1",
+       "label": "Conditions for price discrimination",
+       "kind": "concept",
+       "skills": [
+        "4.C"
+       ],
+       "requires": [
+        "4.2"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "4.3#2",
+       "label": "Perfect price discrimination graph",
+       "kind": "representation",
+       "skills": [
+        "4.C"
+       ],
+       "requires": [
+        "4.3#1"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "4.3#3",
+       "label": "Comparing output and surplus to single-price monopoly",
+       "kind": "skill",
+       "skills": [
+        "4.C"
+       ],
+       "requires": [
+        "4.3#2"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "4.4",
+     "title": "Monopolistic Competition",
+     "scope": "both",
+     "skills": [
+      "4.B"
+     ],
+     "requires": [
+      "4.2"
+     ],
+     "estLessons": 1.25,
+     "subKeywords": [
+      {
+       "code": "4.4#1",
+       "label": "Differentiated products and free entry",
+       "kind": "concept",
+       "skills": [
+        "4.B"
+       ],
+       "requires": [
+        "4.2"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "4.4#2",
+       "label": "Short-run profit versus long-run zero profit graphs",
+       "kind": "representation",
+       "skills": [
+        "4.B"
+       ],
+       "requires": [
+        "4.4#1"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "4.4#3",
+       "label": "Explaining excess capacity",
+       "kind": "skill",
+       "skills": [
+        "4.B"
+       ],
+       "requires": [
+        "4.4#2"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "4.4#4",
+       "label": "Assuming zero long-run profit means price equals MC",
+       "kind": "misconception",
+       "skills": [
+        "4.B"
+       ],
+       "requires": [
+        "4.4#2"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "4.5",
+     "title": "Oligopoly and Game Theory",
+     "scope": "both",
+     "skills": [
+      "2.C"
+     ],
+     "requires": [
+      "4.1"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "4.5#1",
+       "label": "Interdependence and collusion incentives",
+       "kind": "concept",
+       "skills": [
+        "2.C"
+       ],
+       "requires": [
+        "4.1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "4.5#2",
+       "label": "Payoff matrix",
+       "kind": "representation",
+       "skills": [
+        "2.C"
+       ],
+       "requires": [
+        "4.5#1"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "4.5#3",
+       "label": "Finding dominant strategy and Nash equilibrium",
+       "kind": "skill",
+       "skills": [
+        "2.C"
+       ],
+       "requires": [
+        "4.5#2"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "4.5#4",
+       "label": "Believing collusion is stable without enforcement",
+       "kind": "misconception",
+       "skills": [
+        "2.C"
+       ],
+       "requires": [
+        "4.5#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "5",
+   "title": "Factor Markets",
+   "officialClassPeriods": "~6–8",
+   "topics": [
+    {
+     "code": "5.1",
+     "title": "Introduction to Factor Markets",
+     "scope": "both",
+     "skills": [
+      "1.A"
+     ],
+     "requires": [
+      "3.1"
+     ],
+     "estLessons": 1.0,
+     "subKeywords": [
+      {
+       "code": "5.1#1",
+       "label": "Derived demand for resources",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [
+        "3.1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "5.1#2",
+       "label": "Marginal revenue product of labor",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [
+        "5.1#1"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "5.1#3",
+       "label": "Computing MRP from product table",
+       "kind": "skill",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [
+        "5.1#2"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "5.2",
+     "title": "Changes in Factor Demand and Factor Supply",
+     "scope": "both",
+     "skills": [
+      "3.B"
+     ],
+     "requires": [
+      "5.1"
+     ],
+     "estLessons": 1.0,
+     "subKeywords": [
+      {
+       "code": "5.2#1",
+       "label": "Shifts in factor demand and their determinants",
+       "kind": "skill",
+       "skills": [
+        "3.B"
+       ],
+       "requires": [
+        "5.1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "5.2#2",
+       "label": "Effects on wage and quantity from shifts",
+       "kind": "skill",
+       "skills": [
+        "3.B"
+       ],
+       "requires": [
+        "5.2#1"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "5.2#3",
+       "label": "Mixing factor shifts with movements along labor curves",
+       "kind": "misconception",
+       "skills": [
+        "3.B"
+       ],
+       "requires": [
+        "5.2#2"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "5.3",
+     "title": "Profit-Maximizing Behavior in Perfectly Competitive Factor Markets",
+     "scope": "both",
+     "skills": [
+      "2.C"
+     ],
+     "requires": [
+      "5.2"
+     ],
+     "estLessons": 1.25,
+     "subKeywords": [
+      {
+       "code": "5.3#1",
+       "label": "Hire where MRP equals wage",
+       "kind": "skill",
+       "skills": [
+        "2.C"
+       ],
+       "requires": [
+        "5.2"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "5.3#2",
+       "label": "Least-cost input combination rule",
+       "kind": "skill",
+       "skills": [
+        "2.C"
+       ],
+       "requires": [
+        "5.3#1"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "5.3#3",
+       "label": "Labor market graph with firm and market",
+       "kind": "representation",
+       "skills": [
+        "2.C"
+       ],
+       "requires": [
+        "5.3#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "5.4",
+     "title": "Monopsonistic Markets",
+     "scope": "both",
+     "skills": [
+      "2.A"
+     ],
+     "requires": [
+      "5.3"
+     ],
+     "estLessons": 1.0,
+     "subKeywords": [
+      {
+       "code": "5.4#1",
+       "label": "Monopsony and marginal factor cost above supply",
+       "kind": "concept",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [
+        "5.3"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "5.4#2",
+       "label": "Monopsony graph with wage below MRP",
+       "kind": "representation",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [
+        "5.4#1"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "5.4#3",
+       "label": "Setting wage where MRP meets supply instead of MFC",
+       "kind": "misconception",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [
+        "5.4#2"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "6",
+   "title": "Market Failure and the Role of Government",
+   "officialClassPeriods": "~9–11",
+   "topics": [
+    {
+     "code": "6.1",
+     "title": "Socially Efficient and Inefficient Market Outcomes",
+     "scope": "both",
+     "skills": [
+      "2.A"
+     ],
+     "requires": [
+      "2.6"
+     ],
+     "estLessons": 0.5,
+     "subKeywords": [
+      {
+       "code": "6.1#1",
+       "label": "Allocative efficiency and total surplus",
+       "kind": "concept",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [
+        "2.6"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "6.1#2",
+       "label": "Identifying deadweight loss relative to efficiency",
+       "kind": "skill",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [
+        "6.1#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "6.2",
+     "title": "Externalities",
+     "scope": "both",
+     "skills": [
+      "4.B"
+     ],
+     "requires": [
+      "6.1"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "6.2#1",
+       "label": "Positive and negative externalities",
+       "kind": "concept",
+       "skills": [
+        "4.B"
+       ],
+       "requires": [
+        "6.1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "6.2#2",
+       "label": "Graph with MSB or MSC versus private curves",
+       "kind": "representation",
+       "skills": [
+        "4.B"
+       ],
+       "requires": [
+        "6.2#1"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "6.2#3",
+       "label": "Corrective taxes and subsidies",
+       "kind": "skill",
+       "skills": [
+        "4.B"
+       ],
+       "requires": [
+        "6.2#2"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "6.2#4",
+       "label": "Mixing up the direction of private and social cost curves",
+       "kind": "misconception",
+       "skills": [
+        "4.B"
+       ],
+       "requires": [
+        "6.2#2"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "6.3",
+     "title": "Public and Private Goods",
+     "scope": "both",
+     "skills": [
+      "1.B"
+     ],
+     "requires": [
+      "6.1"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "6.3#1",
+       "label": "Rivalry and excludability",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [
+        "6.1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "6.3#2",
+       "label": "Classifying goods in the four-type grid",
+       "kind": "skill",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [
+        "6.3#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "6.3#3",
+       "label": "Free-rider problem",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [
+        "6.3#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "6.4",
+     "title": "The Effects of Government Intervention in Different Market Structures",
+     "scope": "both",
+     "skills": [
+      "4.C"
+     ],
+     "requires": [
+      "6.2"
+     ],
+     "estLessons": 1.25,
+     "subKeywords": [
+      {
+       "code": "6.4#1",
+       "label": "Price regulation of a natural monopoly",
+       "kind": "skill",
+       "skills": [
+        "4.C"
+       ],
+       "requires": [
+        "4.2"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "6.4#2",
+       "label": "Antitrust versus regulation tradeoffs",
+       "kind": "concept",
+       "skills": [
+        "4.C"
+       ],
+       "requires": [
+        "6.4#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "6.4#3",
+       "label": "Effect of taxes, subsidies, or regulations on firm cost graph",
+       "kind": "skill",
+       "skills": [
+        "4.C"
+       ],
+       "requires": [
+        "3.7"
+       ],
+       "estLessons": 0.5
+      }
+     ]
+    },
+    {
+     "code": "6.5",
+     "title": "Inequality",
+     "scope": "both",
+     "skills": [
+      "1.A"
+     ],
+     "requires": [
+      "6.1"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "6.5#1",
+       "label": "Lorenz curve and Gini coefficient",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [
+        "6.1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "6.5#2",
+       "label": "Progressive, proportional, and regressive taxes",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [
+        "6.5#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "6.5#3",
+       "label": "Interpreting income distribution data",
+       "kind": "skill",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [
+        "6.5#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

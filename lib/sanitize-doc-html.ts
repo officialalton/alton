@@ -61,8 +61,21 @@ export function sanitizeDocHtml(html: string): string {
       "th",
       "td",
       "blockquote",
+      // P2/P3 5단계 — 교재에 삽입한 그림·도표가 저장 시점에 통째로 사라지고
+      // 있었다(img가 허용 목록에 없어 sanitize 단계에서 제거됐다). 학습
+      // 자료에서 그림은 본문의 일부라 반드시 살아남아야 한다.
+      "img",
+      "figure",
+      "figcaption",
     ],
-    allowedAttributes: Object.fromEntries(STYLED_TAGS.map((tag) => [tag, ["style"]])),
+    allowedAttributes: {
+      ...Object.fromEntries(STYLED_TAGS.map((tag) => [tag, ["style"]])),
+      // src는 아래 allowedSchemes가 http/https/data로 제한한다(javascript: 차단).
+      img: ["src", "alt", "width", "height", "style"],
+      figure: ["style"],
+      figcaption: ["style"],
+    },
+    allowedSchemesByTag: { img: ["http", "https", "data"] },
     allowedStyles: {
       "*": {
         color: [COLOR_PATTERN],
@@ -79,6 +92,8 @@ export function sanitizeDocHtml(html: string): string {
         margin: [LENGTH_PATTERN],
         width: [LENGTH_PATTERN],
         "border-radius": [LENGTH_PATTERN],
+        "max-width": [LENGTH_PATTERN],
+        height: [LENGTH_PATTERN, /^auto$/],
       },
     },
   });

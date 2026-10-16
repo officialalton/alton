@@ -1,0 +1,537 @@
+{
+ "models": {
+  "graders": [
+   "claude-opus-5-5",
+   "claude-sonnet-5-5"
+  ],
+  "fact": "claude-fable-5-1"
+ },
+ "grades": {
+  "grade-0-low-1": {
+   "thesis": 0,
+   "context": 0,
+   "docs": 1,
+   "outside": 0,
+   "sourcing": 0,
+   "complexity": 0,
+   "rationale": "The thesis (\"changed a lot\", \"a good thing\") barely evaluates the extent of change and sets up no line of reasoning. Context is only a passing mention of inventions and travel. Four documents (2, 6, 1, 7) are described accurately with some tie to the topic, but the use is shallow and mostly summary, so the documents row earns 1 rather than 2. There is no outside evidence, no sourcing analysis, and no complex understanding beyond a brief note that slaves had problems."
+  },
+  "grade-0-high-1": {
+   "thesis": 1,
+   "context": 1,
+   "docs": 2,
+   "outside": 1,
+   "sourcing": 1,
+   "complexity": 1,
+   "rationale": "The thesis is defensible and evaluates extent (large but uneven change by region, race, class and gender). The context paragraph on the American System, the Erie Canal and the cotton gin is relevant and tied to the prompt. Seven documents are used to support claims, not just described. Outside evidence includes the Panic of 1837 and the domestic slave trade, which are distinct from the context. Sourcing is explained for Robinson (1898 memory), Jackson (election audience), Document 4 (unknown maker) and Thoreau (chosen simple life). Complexity is awarded narrowly: the response sustains a qualification of change by region and race, links Northern mills to slave-grown cotton, and weighs opportunity against dependence, though the cotton-textile link is brief."
+  },
+  "grade-0-mid-1": {
+   "thesis": 1,
+   "context": 1,
+   "docs": 2,
+   "outside": 1,
+   "sourcing": 0,
+   "complexity": 0,
+   "rationale": "Thesis: defensible, evaluates extent (large change, uneven by group), sets up a line of reasoning, so 1. Context: the opening describes the Erie Canal lowering shipping costs and western migration, tying them to the prompt; borderline but sufficient, so 1. Documents: six documents (1, 2, 4, 5, 6, 7) are used with accurate content to support claims, so 2, though the Doc 4 reading is naive. Outside evidence: the Erie Canal (1825) is specific and accurate, so 1, though it overlaps with the context. Sourcing: no analysis of point of view, purpose, or audience; authors are only named, so 0. Complexity: only a brief qualification that change was not the same for everyone, without sustained argument, so 0."
+  },
+  "grade-0-high-0": {
+   "thesis": 1,
+   "context": 1,
+   "docs": 2,
+   "outside": 1,
+   "sourcing": 1,
+   "complexity": 1,
+   "rationale": "Thesis (1): The essay argues for change \"to a large extent, but unevenly.\" It says the market revolution transformed work, movement and expectations in the North and West, deepened slavery in the South and created new insecurities. That is defensible, it judges the extent of change, and it sets up a line of reasoning.\n\nContextualization (1): The opening explains how nationalism after the War of 1812 led to Clay's American System, the Erie Canal (1825), steamboats and railroads, and how the cotton gin pushed slavery into the Southwest. It connects all of this to the prompt.\n\nDocuments (2): The essay uses all seven documents to support its argument, not just to summarize them:\n- Doc 2: savings deposits as a sign of independence, and the strike as a sign of conflict.\n- Doc 6: Midwest growth tied to commercial farming.\n- Doc 3: restlessness and mobility.\n- Doc 4: the mills shown as a reassuring image.\n- Doc 1: fear of privilege.\n- Doc 7: where slavery was concentrated.\n- Doc 5: criticism of railroads and the labor that built them.\nThe content is described accurately. The 1836 turn-out does match Robinson's account of the board charge.\n\nOutside evidence (1): The Panic of 1837 and the domestic slave trade from the Upper South to the Deep South are specific, accurate and used in the argument. Both are separate from the context material (the American System, the Erie Canal and the cotton gin). The figure of about four million enslaved people in 1860 is also accurate.\n\nSourcing (1): The essay gives real sourcing analysis for at least two documents:\n- Doc 2: Robinson wrote in 1898 as a proud former mill girl, so her picture of independence may be too warm.\n- Doc 4: the print's maker and purpose are unknown, so it is best read as a reassuring image rather than evidence of conditions inside the mills.\n- Doc 1: Jackson wrote during an election campaign to an audience of farmers and laborers.\n- Doc 5: Thoreau chose a simple life and was not a typical worker.\nEach point explains why the source's situation affects how it can be used.\n\nComplexity (1): The essay weighs opportunity against conflict and insecurity throughout. It qualifies change by region, race, gender and class, and it uses outside knowledge to tie the Lowell mills to slave-grown cotton and the domestic slave trade. It also uses documents that point in different directions (Docs 1, 2 and 5) to modify the claim. This sophisticated argument runs through the whole essay, not just one sentence.\n\nTotal: 7/7. These are rubric-based estimates, not official AP scores."
+  },
+  "grade-0-low-0": {
+   "thesis": 0,
+   "context": 0,
+   "docs": 1,
+   "outside": 0,
+   "sourcing": 0,
+   "complexity": 0,
+   "rationale": "Thesis (0): The opening says the market revolution \"changed things a lot\" and \"changed the lives of many people in the North and also the South.\" That mostly repeats the prompt. The conclusion says it was \"a good thing because it made life better for many people, but some people had problems like the slaves.\" This hints at a qualified claim, but it is too vague to set up a real line of reasoning. It doesn't say how lives changed or why, so it falls just short. Contextualization (0): \"New inventions and new ways to travel\" is a passing mention. The response never describes the American System, the transportation revolution, early industrialization or the spread of cotton and slavery. Documents (1): It accurately describes Docs 2, 6, 1 and 7 in ways that touch the topic. Doc 2 shows mill girls' savings as earnings, Doc 6 shows Midwest growth as westward movement, and Doc 7 shows that enslaved people lacked opportunity. Doc 1 is only summarized (\"Jackson did not like it because it helped rich people\") and never tied to the argument about how lives changed. That leaves fewer than four documents actually supporting an argument, so the response earns 1 point, not 2. Outside evidence (0): It gives no specific evidence beyond the documents. Sourcing (0): It doesn't analyze any document's point of view, purpose, situation or audience. Complexity (0): The brief nod to slaves having \"problems\" is a single phrase, not sustained qualification or corroboration. Total: 1/6."
+  },
+  "grade-0-mid-0": {
+   "thesis": 1,
+   "context": 0,
+   "docs": 2,
+   "outside": 1,
+   "sourcing": 0,
+   "complexity": 0,
+   "rationale": "Thesis (1): The opening claim says the market revolution changed lives 'a lot' through market connections and new work, which evaluates extent and sets up a line of reasoning. The conclusion adds a defensible limit for enslaved people and workers. Context (0): The Erie Canal and westward migration appear only briefly as examples, with no fuller description of the broader setting (nationalism/American System, industrialization, cotton and slavery). Since the Erie Canal is the essay's only outside evidence, it cannot earn both points. Docs (2): Docs 2, 6, 4, 1, 5 and 7 are used to support the argument: women's wages and savings, Midwest growth, factory towns, Jackson and Thoreau as critics, and slavery as a limit. Outside (1): The Erie Canal (finished 1825) is accurate and specific, and it cut shipping costs for Western farmers. Sourcing (0): No document's point of view, purpose, situation or audience is explained. Saying the Lowell print 'looks clean and peaceful' describes the image rather than analyzing its maker or purpose. Complexity (0): The qualifications (Jackson, Thoreau, slavery) stay general ('not the same for every group'). The essay leaves out the strike in Doc 2 and doesn't connect slavery to the cotton market or the mills, so the argument doesn't reach sophisticated qualification."
+  },
+  "grade-1-high-1": {
+   "thesis": 1,
+   "context": 1,
+   "docs": 2,
+   "outside": 1,
+   "sourcing": 1,
+   "complexity": 1,
+   "rationale": "The thesis evaluates the extent of regulation (significant but reactive and narrow) and sets up a line of reasoning. Context covers Wabash, rebates, and fear of trust influence. All seven documents are used to support the argument. Outside evidence includes E. C. Knight, the Pullman injunction, the Hepburn Act, and the 1906 laws. Sourcing explains the purpose of Doc 6, Sumner's audience, and Sinclair's socialist aim against the public reaction. Complexity is sustained: the response weighs demands for regulation against court limits, weak enforcement, and laissez-faire and market-based opposition, and it separates Sinclair's aim from the public's reaction."
+  },
+  "grade-1-mid-1": {
+   "thesis": 1,
+   "context": 0,
+   "docs": 2,
+   "outside": 1,
+   "sourcing": 0,
+   "complexity": 0,
+   "rationale": "Thesis: the conclusion gives a minimal but defensible qualified claim (greater regulation, but not completely), so 1 over a restatement. Context: no broader context is described, only a passing reference to anger, so 0. Docs: six documents are used and tied to claims about regulation, power, and opposition, so 2. Outside: Roosevelt's trust-busting suits and the 1906 Meat Inspection Act are specific and accurate, so 1. Sourcing: no point-of-view, purpose, or audience analysis, so 0. Complexity: the qualification is only a brief phrase, not sustained, so 0."
+  },
+  "grade-1-high-0": {
+   "thesis": 1,
+   "context": 1,
+   "docs": 2,
+   "outside": 1,
+   "sourcing": 1,
+   "complexity": 1,
+   "rationale": "Thesis (1): The claim is defensible and evaluates extent. It says regulation expanded significantly but was reactive and narrow, aimed at specific abuses like rebates, monopoly and unsafe food rather than corporate size. It adds that courts, weak enforcement and business influence weakened the laws. This sets up the essay's line of reasoning.\n\nContextualization (1): The opening describes how fast railroads and trusts grew after the Civil War, farmers' and shippers' complaints about rebates, the 1886 Wabash decision and fears that trusts bought political influence. It connects all of this to the push for federal action.\n\nDocuments (2): All seven documents support the argument:\n- Doc 5: shippers' anger over unequal rates.\n- Doc 3: belief that business controlled the Senate.\n- Doc 2: the Interstate Commerce Act's ban on rate discrimination.\n- Doc 4: the Sherman Act.\n- Doc 7: public pressure that led to the 1906 food laws, which the response correctly treats as outside evidence.\n- Doc 6: continued fears of Standard Oil's power.\n- Doc 1: laissez-faire opposition to regulation.\nThe descriptions are accurate and tied to claims.\n\nOutside evidence (1): The response cites E. C. Knight (1895), the use of the Sherman Act against the Pullman strikers (1894), the Hepburn Act (1906) giving the ICC power to set maximum rates, and the Meat Inspection Act and Pure Food and Drug Act (1906). All are accurate, relevant and separate from the Wabash material used for context.\n\nSourcing (1): The response explains why point of view, purpose or audience matters for more than two documents:\n- Doc 6: the cartoon's persuasive purpose and exaggeration limit its value as proof, but it still shows how critics saw things.\n- Doc 1: Sumner was a theorist writing for educated readers against reformers, so he does not speak for all business, though his ideas shaped courts and lawmakers.\n- Doc 7: Sinclair wrote as a socialist exposing worker exploitation, but readers reacted to the meat, not the workers.\n\nComplexity (1): The argument is complex throughout. It weighs demands for regulation against court limits, weak enforcement and opposition. It shows that the anti-trust oil men wanted fair play rather than government control. It contrasts Sinclair's aim with the public's reaction and refines the thesis: regulation came when abuses touched middle-class consumers, not simply when corporations grew."
+  },
+  "grade-1-mid-0": {
+   "thesis": 1,
+   "context": 0,
+   "docs": 2,
+   "outside": 1,
+   "sourcing": 0,
+   "complexity": 0,
+   "rationale": "Thesis (1): The introduction alone mostly restates the prompt. The conclusion, though, judges the extent: regulation grew \"but not completely, because the trusts stayed powerful and there were people who opposed regulation.\" Together they give a defensible claim with a basic line of reasoning (public anger led to laws, while lasting trust power and opposition limited them).\n\nContextualization (0): The essay describes no broader context, such as post-Civil War industrial growth, farmers' complaints about rates, the Wabash decision or Progressive reform. The mention of Roosevelt as a \"trust buster\" is a passing reference and is not tied to a larger development.\n\nDocuments (2): The essay accurately uses the content of six documents to support its argument. Docs 2 and 4 show laws regulating railroads and trusts. Docs 3 and 6 show the belief that trusts controlled the government and stayed powerful after the Sherman Act. Doc 1 shows opposition to regulation. Doc 7 shows weak inspection. Each document is tied to a claim about how far regulation went.\n\nOutside evidence (1): The Meat Inspection Act of 1906 is specific, accurate and outside the documents, and it is linked to the argument about rising federal regulation. The Roosevelt \"sued companies\" reference is too vague to count on its own, but it isn't needed.\n\nSourcing (0): No document gets analysis of point of view, purpose, audience or historical situation. Labeling Doc 3 \"a cartoon from 1889\" only gives a date, and the essay never discusses Puck's persuasive purpose, Sumner's ideology or Sinclair's muckraking intent.\n\nComplexity (0): The essay offers a brief counterpoint (\"On the other hand\") and a one-line qualification at the end. It never develops a real weighing of the pressures for regulation against resistance or weak enforcement, explains how the laws responded to specific abuses, or uses documents that disagree to meaningfully modify the argument. That is a brief reference, not sophisticated argumentation.\n\nTotal: 4/6."
+  },
+  "grade-1-low-1": {
+   "thesis": 0,
+   "context": 0,
+   "docs": 1,
+   "outside": 0,
+   "sourcing": 0,
+   "complexity": 0,
+   "rationale": "Thesis is a thin claim (\"regulated a lot because there were many laws; corporations still had power\") with no line of reasoning, so it does not earn the point. Context is only a passing mention of corporate growth and the two laws. Documents are accurately summarized one by one (6 docs), which earns 1, but they are not used to support an argument, so not 2. No outside evidence. Sourcing is only an identification of Sumner as a professor who opposed government action, with no explanation of why that perspective matters. The qualification that corporations kept power is a brief phrase, not complexity."
+  },
+  "grade-1-low-0": {
+   "thesis": 0,
+   "context": 0,
+   "docs": 1,
+   "outside": 0,
+   "sourcing": 0,
+   "complexity": 0,
+   "rationale": "Thesis (0): The introduction mostly restates the prompt. The conclusion does take a position on extent (\"regulated business a lot because there were many laws... corporations still had a lot of power though\"), but the only reason given is \"many laws,\" and the essay names just two. That doesn't set up a real line of reasoning, so the response doesn't fully meet the descriptor, though it comes close.\nContextualization (0): \"Large corporations became very powerful in the late 1800s\" is only a passing reference. It doesn't describe broader developments such as railroad expansion, farmer protests, laissez-faire thought or Progressive reform.\nDocuments (1): The essay accurately describes the content of Docs 1, 2, 3, 4, 6 and 7 in ways tied to the topic: railroad law, the Sherman Act, cartoons showing powerful trusts, the inspector not doing his job, and the professor opposing government action. But it only summarizes them. It never uses them to support an argument about how much federal regulation grew, so it doesn't earn the second point.\nOutside evidence (0): The Sherman Act and the Interstate Commerce Act are both in the documents. The essay gives no evidence from beyond them, such as E. C. Knight, the Hepburn Act or the 1906 food laws.\nSourcing (0): Calling Sumner \"a professor who did not want the government to do much\" just restates content and authorship. It doesn't explain why his point of view or purpose matters, and no other document gets any sourcing.\nComplexity (0): The closing line that corporations \"still had a lot of power\" is a brief qualification. It isn't developed with evidence or argument."
+  }
+ },
+ "facts": {
+  "fact-dbq-1": {
+   "verdicts": [
+    {
+     "where": "Doc1",
+     "verdict": "sound",
+     "note": "Sumner 1883, Yale professor, laissez-faire advocate; death year 1910 correct; excerpt reads as a genuine contiguous passage."
+    },
+    {
+     "where": "Doc2",
+     "verdict": "sound",
+     "note": "Interstate Commerce Act, Feb. 4, 1887, 49th Congress 2nd Session; Section 2 text matches the statute; context accurate."
+    },
+    {
+     "where": "Doc3",
+     "verdict": "sound",
+     "note": "Image matches: money-bag trusts (salt, envelope, paper bag, coal, sugar, tin, iron, Standard Oil, copper, steel beam, nail), 'Senate of the Monopolists by the Monopolists and for the Monopolists' sign, People's Entrance closed, Entrance for Monopolists open. Joseph Keppler, Puck Jan. 23, 1889; indirect election of senators statement correct."
+    },
+    {
+     "where": "Doc4",
+     "verdict": "sound",
+     "note": "Sherman Act July 2, 1890, 51st Congress 1st Session; text of Secs. 1-2 matches the National Archives transcript."
+    },
+    {
+     "where": "Doc5",
+     "verdict": "sound",
+     "note": "Tarbell 1904, McClure's series 1902-04, South Improvement Company 1872; passage matches the book; sourcing note on her sympathies is fair (her father was an independent producer)."
+    },
+    {
+     "where": "Doc6",
+     "verdict": "sound",
+     "note": "Image matches alt text: Standard Oil tank-octopus, tentacles around Capitol (Congress flag) and State House, White House lower left with a tentacle approaching, figures crushed lower right. Udo Keppler, Puck Sept. 7, 1904; 14 years after Sherman Act correct."
+    },
+    {
+     "where": "Doc7",
+     "verdict": "sound",
+     "note": "The Jungle ch. 3 passage verbatim; serialized 1905 (Appeal to Reason), book 1906; Sinclair a socialist; Durham's correct."
+    },
+    {
+     "where": "Prompt",
+     "verdict": "sound",
+     "note": "Answerable with multiple defensible theses from the set; documents include pro-regulation evidence, critics' views, and anti-regulation/market views (Docs 1, 5)."
+    },
+    {
+     "where": "EvidenceMap",
+     "verdict": "sound",
+     "note": "Mappings defensible; Doc 5 listed under both 'significant' (shows abuses generating demands) and 'market answers' is slightly double-edged but consistent with the sourcing note."
+    },
+    {
+     "where": "Rubric",
+     "verdict": "sound",
+     "note": "Dates and sequencing notes (Doc 6 predates Hepburn 1906 and 1911 breakup; Doc 7 predates June 1906 laws) correct."
+    },
+    {
+     "where": "OutsideEvidence",
+     "verdict": "sound",
+     "note": "All items accurate. Clayton Act/FTC (1914) and Standard Oil (1911) fall outside the 1880-1910 window but can be relevant as evidence of continuity/consequence."
+    },
+    {
+     "where": "Facts",
+     "verdict": "sound",
+     "note": "All facts verified: ICC 1887; Sherman July 2, 1890; E. C. Knight 1895 manufacturing/commerce holding; Hepburn 1906 maximum rates; both food laws signed June 30, 1906; Standard Oil 1911; Wabash 1886."
+    },
+    {
+     "where": "SampleHigh",
+     "verdict": "sound",
+     "note": "Claims about documents and outside evidence (Wabash 1886, E. C. Knight 1895, Pullman 1894, Hepburn 1906, 1906 food laws) accurate; contextualization and outside evidence are distinct; image descriptions match the cartoons."
+    },
+    {
+     "where": "SampleMid",
+     "verdict": "sound",
+     "note": "Document characterizations accurate; Roosevelt trust-buster and Meat Inspection Act 1906 correct."
+    },
+    {
+     "where": "SampleLow",
+     "verdict": "sound",
+     "note": "Minimal but no inaccurate claims; descriptions match documents."
+    }
+   ],
+   "flags": []
+  },
+  "fact-dbq-0": {
+   "verdicts": [
+    {
+     "where": "Doc1",
+     "verdict": "sound",
+     "note": "Quotation matches the July 10, 1832 veto message; context and sourcing (Senate address, election year, Jackson a slaveholding planter, Bank supporters' credit argument) are accurate."
+    },
+    {
+     "where": "Doc2",
+     "verdict": "sound",
+     "note": "Excerpts match Loom and Spindle (1898); Robinson began as a doffer in 1835 at age ten, was a child during the October 1836 turn-out, and later was a suffrage activist. Figures (25 cents board, one dollar a week, 1,200-1,500 strikers, 1848 savings depositors) are as in the book."
+    },
+    {
+     "where": "Doc3",
+     "verdict": "sound",
+     "note": "Reeve translation passage is accurate; tour of roughly nine months in 1831-32 and 1840 publication of vol. 2 are correct."
+    },
+    {
+     "where": "Doc4",
+     "verdict": "sound",
+     "note": "Alt text and notes match the attached image: hand-colored print, mills and spires along the far bank, river and meadow, foreground tree at right, no visible crowding or labor. Provenance and c. 1840 date consistent with LoC record."
+    },
+    {
+     "where": "Doc5",
+     "verdict": "sound",
+     "note": "Walden passage accurate; Walden residence 1845-47 and 1854 publication correct. Reading of 'sleepers' as laborers (Irish and Yankee) is a defensible gloss of Thoreau's metaphor."
+    },
+    {
+     "where": "Doc6",
+     "verdict": "sound",
+     "note": "Regional totals match Gibson & Jung Working Paper 56 and sum to the U.S. total in every year; the note's figures (51,006 to 9,096,716; South ~2.6 to 11.1 million) are correctly read."
+    },
+    {
+     "where": "Doc7",
+     "verdict": "sound",
+     "note": "Alt text matches the Hergesheimer map (county shading, darkest along the lower Mississippi and the South Carolina coast, shade legend, 1860 census table); provenance and September 1861 date correct."
+    },
+    {
+     "where": "Prompt",
+     "verdict": "sound",
+     "note": "Standard, answerable 'evaluate the extent' prompt; the seven documents allow great, mixed, or limited-change theses."
+    },
+    {
+     "where": "EvidenceMap",
+     "verdict": "sound",
+     "note": "Assignments are defensible; Doc 1's link to the market revolution (bank/credit as market institution) is somewhat indirect but conventional in APUSH framing."
+    },
+    {
+     "where": "Rubric",
+     "verdict": "sound",
+     "note": "Task-specific language, notes on Doc 6/Doc 7, and the context-vs-outside-evidence rule are consistent with AP scoring practice."
+    },
+    {
+     "where": "OutsideEvidence",
+     "verdict": "sound",
+     "note": "All dates correct (Erie Canal 1825, Panic of 1837, cotton gin 1794, Commonwealth v. Hunt 1842, telegraph 1844, Gibbons v. Ogden 1824)."
+    },
+    {
+     "where": "Facts",
+     "verdict": "sound",
+     "note": "All facts verified, including 1834 and October 1836 Lowell turn-outs and ~3.95 million enslaved in 1860."
+    },
+    {
+     "where": "SampleHigh",
+     "verdict": "sound",
+     "note": "Document readings and outside evidence (American System, Erie Canal, cotton gin, Panic of 1837, domestic slave trade, ~4 million enslaved in 1860) are accurate; sourcing and complexity claims stay within what the documents show. Score of 6 is a reasonable estimate (arguably 7)."
+    },
+    {
+     "where": "SampleMid",
+     "verdict": "sound",
+     "note": "Document claims accurate; the inference that the clean-looking print means factories 'seemed like a good thing' is a mild overreach typical of a mid-level essay and consistent with the intended score of 4 (no sourcing, no separate outside evidence)."
+    },
+    {
+     "where": "SampleLow",
+     "verdict": "sound",
+     "note": "Document summaries are accurate if thin; thesis plus minimal document use fits an intended score of 2."
+    }
+   ],
+   "flags": []
+  }
+ },
+ "frq": {
+  "ap_us_history-real_b_dbq_market": {
+   "scores": {
+    "high": {
+     "thesis": 1,
+     "context": 1,
+     "docs": 2,
+     "outside": 1,
+     "sourcing": 1,
+     "complexity": 1
+    },
+    "mid": {
+     "thesis": 1,
+     "context": 1,
+     "docs": 2,
+     "outside": 1,
+     "sourcing": 0,
+     "complexity": 0
+    },
+    "low": {
+     "thesis": 0,
+     "context": 0,
+     "docs": 1,
+     "outside": 0,
+     "sourcing": 0,
+     "complexity": 0
+    }
+   },
+   "totals": {
+    "high": 7,
+    "mid": 5,
+    "low": 1
+   },
+   "graderTotals": {
+    "high": [
+     7,
+     7
+    ],
+    "mid": [
+     4,
+     5
+    ],
+    "low": [
+     1,
+     1
+    ]
+   },
+   "factVerdicts": [
+    {
+     "where": "Doc1",
+     "verdict": "sound",
+     "note": "Quotation matches the July 10, 1832 veto message; context and sourcing (Senate address, election year, Jackson a slaveholding planter, Bank supporters' credit argument) are accurate."
+    },
+    {
+     "where": "Doc2",
+     "verdict": "sound",
+     "note": "Excerpts match Loom and Spindle (1898); Robinson began as a doffer in 1835 at age ten, was a child during the October 1836 turn-out, and later was a suffrage activist. Figures (25 cents board, one dollar a week, 1,200-1,500 strikers, 1848 savings depositors) are as in the book."
+    },
+    {
+     "where": "Doc3",
+     "verdict": "sound",
+     "note": "Reeve translation passage is accurate; tour of roughly nine months in 1831-32 and 1840 publication of vol. 2 are correct."
+    },
+    {
+     "where": "Doc4",
+     "verdict": "sound",
+     "note": "Alt text and notes match the attached image: hand-colored print, mills and spires along the far bank, river and meadow, foreground tree at right, no visible crowding or labor. Provenance and c. 1840 date consistent with LoC record."
+    },
+    {
+     "where": "Doc5",
+     "verdict": "sound",
+     "note": "Walden passage accurate; Walden residence 1845-47 and 1854 publication correct. Reading of 'sleepers' as laborers (Irish and Yankee) is a defensible gloss of Thoreau's metaphor."
+    },
+    {
+     "where": "Doc6",
+     "verdict": "sound",
+     "note": "Regional totals match Gibson & Jung Working Paper 56 and sum to the U.S. total in every year; the note's figures (51,006 to 9,096,716; South ~2.6 to 11.1 million) are correctly read."
+    },
+    {
+     "where": "Doc7",
+     "verdict": "sound",
+     "note": "Alt text matches the Hergesheimer map (county shading, darkest along the lower Mississippi and the South Carolina coast, shade legend, 1860 census table); provenance and September 1861 date correct."
+    },
+    {
+     "where": "Prompt",
+     "verdict": "sound",
+     "note": "Standard, answerable 'evaluate the extent' prompt; the seven documents allow great, mixed, or limited-change theses."
+    },
+    {
+     "where": "EvidenceMap",
+     "verdict": "sound",
+     "note": "Assignments are defensible; Doc 1's link to the market revolution (bank/credit as market institution) is somewhat indirect but conventional in APUSH framing."
+    },
+    {
+     "where": "Rubric",
+     "verdict": "sound",
+     "note": "Task-specific language, notes on Doc 6/Doc 7, and the context-vs-outside-evidence rule are consistent with AP scoring practice."
+    },
+    {
+     "where": "OutsideEvidence",
+     "verdict": "sound",
+     "note": "All dates correct (Erie Canal 1825, Panic of 1837, cotton gin 1794, Commonwealth v. Hunt 1842, telegraph 1844, Gibbons v. Ogden 1824)."
+    },
+    {
+     "where": "Facts",
+     "verdict": "sound",
+     "note": "All facts verified, including 1834 and October 1836 Lowell turn-outs and ~3.95 million enslaved in 1860."
+    },
+    {
+     "where": "SampleHigh",
+     "verdict": "sound",
+     "note": "Document readings and outside evidence (American System, Erie Canal, cotton gin, Panic of 1837, domestic slave trade, ~4 million enslaved in 1860) are accurate; sourcing and complexity claims stay within what the documents show. Score of 6 is a reasonable estimate (arguably 7)."
+    },
+    {
+     "where": "SampleMid",
+     "verdict": "sound",
+     "note": "Document claims accurate; the inference that the clean-looking print means factories 'seemed like a good thing' is a mild overreach typical of a mid-level essay and consistent with the intended score of 4 (no sourcing, no separate outside evidence)."
+    },
+    {
+     "where": "SampleLow",
+     "verdict": "sound",
+     "note": "Document summaries are accurate if thin; thesis plus minimal document use fits an intended score of 2."
+    }
+   ],
+   "flags": [],
+   "ok": true,
+   "why": []
+  },
+  "ap_us_history-real_b_dbq_regulation": {
+   "scores": {
+    "high": {
+     "thesis": 1,
+     "context": 1,
+     "docs": 2,
+     "outside": 1,
+     "sourcing": 1,
+     "complexity": 1
+    },
+    "mid": {
+     "thesis": 1,
+     "context": 0,
+     "docs": 2,
+     "outside": 1,
+     "sourcing": 0,
+     "complexity": 0
+    },
+    "low": {
+     "thesis": 0,
+     "context": 0,
+     "docs": 1,
+     "outside": 0,
+     "sourcing": 0,
+     "complexity": 0
+    }
+   },
+   "totals": {
+    "high": 7,
+    "mid": 4,
+    "low": 1
+   },
+   "graderTotals": {
+    "high": [
+     7,
+     7
+    ],
+    "mid": [
+     4,
+     4
+    ],
+    "low": [
+     1,
+     1
+    ]
+   },
+   "factVerdicts": [
+    {
+     "where": "Doc1",
+     "verdict": "sound",
+     "note": "Sumner 1883, Yale professor, laissez-faire advocate; death year 1910 correct; excerpt reads as a genuine contiguous passage."
+    },
+    {
+     "where": "Doc2",
+     "verdict": "sound",
+     "note": "Interstate Commerce Act, Feb. 4, 1887, 49th Congress 2nd Session; Section 2 text matches the statute; context accurate."
+    },
+    {
+     "where": "Doc3",
+     "verdict": "sound",
+     "note": "Image matches: money-bag trusts (salt, envelope, paper bag, coal, sugar, tin, iron, Standard Oil, copper, steel beam, nail), 'Senate of the Monopolists by the Monopolists and for the Monopolists' sign, People's Entrance closed, Entrance for Monopolists open. Joseph Keppler, Puck Jan. 23, 1889; indirect election of senators statement correct."
+    },
+    {
+     "where": "Doc4",
+     "verdict": "sound",
+     "note": "Sherman Act July 2, 1890, 51st Congress 1st Session; text of Secs. 1-2 matches the National Archives transcript."
+    },
+    {
+     "where": "Doc5",
+     "verdict": "sound",
+     "note": "Tarbell 1904, McClure's series 1902-04, South Improvement Company 1872; passage matches the book; sourcing note on her sympathies is fair (her father was an independent producer)."
+    },
+    {
+     "where": "Doc6",
+     "verdict": "sound",
+     "note": "Image matches alt text: Standard Oil tank-octopus, tentacles around Capitol (Congress flag) and State House, White House lower left with a tentacle approaching, figures crushed lower right. Udo Keppler, Puck Sept. 7, 1904; 14 years after Sherman Act correct."
+    },
+    {
+     "where": "Doc7",
+     "verdict": "sound",
+     "note": "The Jungle ch. 3 passage verbatim; serialized 1905 (Appeal to Reason), book 1906; Sinclair a socialist; Durham's correct."
+    },
+    {
+     "where": "Prompt",
+     "verdict": "sound",
+     "note": "Answerable with multiple defensible theses from the set; documents include pro-regulation evidence, critics' views, and anti-regulation/market views (Docs 1, 5)."
+    },
+    {
+     "where": "EvidenceMap",
+     "verdict": "sound",
+     "note": "Mappings defensible; Doc 5 listed under both 'significant' (shows abuses generating demands) and 'market answers' is slightly double-edged but consistent with the sourcing note."
+    },
+    {
+     "where": "Rubric",
+     "verdict": "sound",
+     "note": "Dates and sequencing notes (Doc 6 predates Hepburn 1906 and 1911 breakup; Doc 7 predates June 1906 laws) correct."
+    },
+    {
+     "where": "OutsideEvidence",
+     "verdict": "sound",
+     "note": "All items accurate. Clayton Act/FTC (1914) and Standard Oil (1911) fall outside the 1880-1910 window but can be relevant as evidence of continuity/consequence."
+    },
+    {
+     "where": "Facts",
+     "verdict": "sound",
+     "note": "All facts verified: ICC 1887; Sherman July 2, 1890; E. C. Knight 1895 manufacturing/commerce holding; Hepburn 1906 maximum rates; both food laws signed June 30, 1906; Standard Oil 1911; Wabash 1886."
+    },
+    {
+     "where": "SampleHigh",
+     "verdict": "sound",
+     "note": "Claims about documents and outside evidence (Wabash 1886, E. C. Knight 1895, Pullman 1894, Hepburn 1906, 1906 food laws) accurate; contextualization and outside evidence are distinct; image descriptions match the cartoons."
+    },
+    {
+     "where": "SampleMid",
+     "verdict": "sound",
+     "note": "Document characterizations accurate; Roosevelt trust-buster and Meat Inspection Act 1906 correct."
+    },
+    {
+     "where": "SampleLow",
+     "verdict": "sound",
+     "note": "Minimal but no inaccurate claims; descriptions match documents."
+    }
+   ],
+   "flags": [],
+   "ok": true,
+   "why": []
+  }
+ }
+}

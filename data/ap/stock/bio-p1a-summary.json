@@ -1,0 +1,109 @@
+{
+ "runs": [
+  "bio-p1-a"
+ ],
+ "rows": 42,
+ "passed": 20,
+ "rejected": 22,
+ "passRate": 0.476,
+ "mc": {
+  "rows": 42,
+  "passed": 20,
+  "passRate": 0.476
+ },
+ "frq": {
+  "rows": 0,
+  "passed": 0,
+  "passRate": 0
+ },
+ "unitsPassed": {
+  "1": 1,
+  "2": 5,
+  "3": 1,
+  "4": 2,
+  "5": 2,
+  "6": 3,
+  "7": 3,
+  "8": 3
+ },
+ "skillsPassed": {
+  "5.A": 11,
+  "5.C": 2,
+  "4.B": 3,
+  "5.D": 1,
+  "2.A": 1,
+  "2.B": 1,
+  "1.B": 1
+ },
+ "figPassed": {
+  "none": 8,
+  "table": 10,
+  "graph": 2
+ },
+ "figAll": {
+  "none": 14,
+  "table": 24,
+  "graph": 4
+ },
+ "figPassRate": {
+  "none": "8/14",
+  "table": "10/24",
+  "graph": "2/4"
+ },
+ "renderTypesPassed": {
+  "none": 8,
+  "ap_table": 10,
+  "ap_graph:bio_line": 2
+ },
+ "archetypesPassed": {
+  "bi_dehydration_count": 1,
+  "bi_sa_v_ratio": 1,
+  "bi_water_potential": 2,
+  "bi_cell_cycle_time": 2,
+  "bi_chi_square": 2,
+  "bi_translation": 1,
+  "bi_hw_allele_freq": 2,
+  "bi_logistic": 1,
+  "bi_simpson": 1,
+  "bi_transport_type": 2,
+  "bi_enzyme_inhibitor_data": 1,
+  "bi_mutation_effect": 1,
+  "bi_selection_type": 1,
+  "bi_predator_prey_graph": 1,
+  "bi_replication_enzymes": 1
+ },
+ "archetypesAll": {
+  "bi_dehydration_count": 2,
+  "bi_sa_v_ratio": 2,
+  "bi_water_potential": 2,
+  "bi_enzyme_rate_calc": 2,
+  "bi_cell_cycle_time": 2,
+  "bi_chi_square": 2,
+  "bi_translation": 2,
+  "bi_hw_allele_freq": 2,
+  "bi_logistic": 2,
+  "bi_simpson": 2,
+  "bi_transport_type": 2,
+  "bi_enzyme_inhibitor_data": 2,
+  "bi_pathway_mutant_table": 2,
+  "bi_mutation_effect": 2,
+  "bi_phylo_characters": 2,
+  "bi_selection_type": 2,
+  "bi_predator_prey_graph": 2,
+  "bi_replication_enzymes": 2,
+  "bi_design_variable_enzyme": 2,
+  "bi_error_bars_overlap": 2,
+  "bis_enzyme_set": 2
+ },
+ "failedArchetypes": [
+  "bi_enzyme_rate_calc",
+  "bi_pathway_mutant_table",
+  "bi_phylo_characters",
+  "bi_design_variable_enzyme",
+  "bi_error_bars_overlap",
+  "bis_enzyme_set"
+ ],
+ "costUsd": {
+  "bio-p1-a": 1.9898
+ }
+}

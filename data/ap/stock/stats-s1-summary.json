@@ -1,0 +1,28 @@
+{
+ "runs": [
+  "stats-s1-l-final",
+  "stats-s1-m-final",
+  "stats-s1-h-final"
+ ],
+ "rows": 20,
+ "passed": 20,
+ "rejected": 0,
+ "exactDuplicates": 0,
+ "uniqueItems": 20,
+ "structureFamilies": 20,
+ "itemFamilyIds": 20,
+ "perUnit": {
+  "1": 5,
+  "2": 5,
+  "3": 4,
+  "4": 3,
+  "5": 3
+ },
+ "perSkillCategory": {
+  "2": 2,
+  "3": 10,
+  "4": 8
+ },
+ "lookAlikeClustersContainingPilot": [],
+ "lookAlikeComparedAgainst": "358 existing auto_passed MC (all subjects) + 20 pilot items"
+}

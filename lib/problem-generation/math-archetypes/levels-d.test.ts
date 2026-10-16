@@ -1,0 +1,88 @@
+import { describe, expect, it } from "vitest";
+import { readFileSync } from "node:fs";
+import { D_ARCHETYPES } from "./registry-d";
+import { ARCHETYPES } from "./registry";
+import { checkBindings, levelRecord, sweepLevel, verifyLevel, withBind, type BInstance, type LArch } from "./levels-d";
+import { generateOne } from "./sweep";
+
+const hard = D_ARCHETYPES.filter((a) => a.level === "hard");
+const lev = D_ARCHETYPES.filter((a) => a.level !== "hard");
+
+describe("담당 D 원형 메타데이터", () => {
+  it("id 규칙·개념·추가 사고 서술·중복 없음", () => {
+    const ids = new Set<string>();
+    for (const a of D_ARCHETYPES) {
+      if (a.level === "hard") expect(a.id.endsWith(`.${a.operator}`), a.id).toBe(true);
+      expect(a.concepts.length, a.id).toBeGreaterThanOrEqual(2);
+      expect(a.extraThinking.length, a.id).toBeGreaterThan(a.level === "hard" ? 12 : 6);
+      expect(a.structure.length, a.id).toBeGreaterThan(a.level === "hard" ? 12 : 6);
+      expect(ids.has(a.id), `중복 ${a.id}`).toBe(false); ids.add(a.id);
+    }
+  });
+  it("같은 세부 패턴의 hard 원형 4개는 서로 다른 연산자를 쓴다", () => {
+    const byKind = new Map<string, string[]>();
+    for (const a of hard) byKind.set(`${a.skill}.${a.kind}`, [...(byKind.get(`${a.skill}.${a.kind}`) ?? []), a.operator]);
+    // 정성 판단형(evaluating_statistical_claims)은 풀이 구조가 3가지를 넘으면 2×2 조합 매핑으로 환원되므로 세부 패턴당 3개(보고서 근거).
+    // 단, 자료(표) 조합(kind 가 `….ST.P`·`….TB.P` 꼴로 조합 ID 를 달고 있고 figureItem 이 선언된 것)은 상세표의 값을 읽고 계산하는 단계가 붙어 구조가 실제로 달라지므로 게이트 G2(조합당 hard 4·서로 다른 연산자)에 따라 4개다.
+    const figKinds = new Set(hard.filter((a) => a.figureItem).map((a) => `${a.skill}.${a.kind}`));
+    // 수치 단답 kind(SPR 공급용)는 정성형이 아니므로 4개를 요구한다.
+    for (const [k, ops] of byKind) { const qualKind = hard.filter((x) => `${x.skill}.${x.kind}` === k).every((x) => x.qualitative); const want = k.startsWith("evaluating_statistical_claims.") && !figKinds.has(k) && qualKind ? 3 : 4; expect(ops.length, k).toBe(want); expect(new Set(ops).size, k).toBe(want); }
+  });
+  it("hard 의 mediumSteps 는 medium 컴파일러 실측 단계 이상이다", () => {
+    const base = JSON.parse(readFileSync("data/mock-exam-generation/math-medium-baseline.json", "utf-8")) as Record<string, { medium: number }>;
+    for (const a of hard) { const m = base[`${a.skill}.${a.kind}`]; if (m && m.medium > 0) expect(a.mediumSteps, a.id).toBeGreaterThanOrEqual(Math.ceil(m.medium)); }
+  });
+  it("수치형 hard 원형은 registry.ts 에도 등록돼 공용 검증 대상이다", () => {
+    const reg = new Set(ARCHETYPES.map((a) => a.id));
+    for (const a of hard.filter((x) => !x.qualitative)) expect(reg.has(a.id), a.id).toBe(true);
+  });
+});
+
+describe("담당 D 원형 시드 스윕 — 정답 재계산·선지 겹침·표기·의미 일치", () => {
+  for (const a of D_ARCHETYPES) {
+    it(`${a.id}(${a.level}): 400 시드 검증 실패 0·예외 0·독립 변형 30 이상`, () => {
+      const st = sweepLevel(a, 400);
+      expect(st.thrown, st.thrownSamples.join("|")).toBe(0);
+      expect(st.verifyFail, JSON.stringify(st.failSeeds[0])).toBe(0);
+      expect(st.produced).toBeGreaterThan(20);
+      if (a.level === "hard") expect(st.independent, "독립 변형").toBeGreaterThanOrEqual(30);
+      else for (const [v, n] of Object.entries(st.independentByVariant)) expect(n, `그룹 ${v}`).toBeGreaterThanOrEqual(30);
+    }, 120_000);
+    it(`${a.id}: 같은 시드는 같은 문항(재현성)`, () => {
+      let c = 0;
+      for (let s = 0; s < 60 && c < 3; s++) { const x = generateOne(a, s), y = generateOne(a, s); expect(JSON.stringify(x)).toBe(JSON.stringify(y)); if (x.ok) c++; }
+      expect(c).toBeGreaterThan(0);
+    });
+  }
+});
+
+describe("정성형 검증기 돌연변이(evaluating_statistical_claims)", () => {
+  const q = D_ARCHETYPES.find((x) => x.id === "esc.cause_vs_association.repr_shift") as LArch;
+  const good = (() => { for (let s = 0; s < 50; s++) { const g = generateOne(q, s); if (g.ok) return g.inst as BInstance; } throw new Error("no"); })();
+  it("원본 통과", () => expect(verifyLevel(q, good).ok).toBe(true));
+  it("정답 키를 바꾸면 verification_js 재계산과 어긋나 실패", () => expect(verifyLevel(q, { ...good, correctIndex: (good.correctIndex + 1) % 4 }).ok).toBe(false));
+  it("지문의 배정 방식을 바꾸면(무작위 ↔ 선택) 같은 선지로는 실패", () => {
+    const flipped = good.stimulus.includes("randomly assigned") || /coin|random number|hat/.test(good.stimulus) ? good.stimulus.replace(/Each participant was randomly assigned[^.]*\./, "Each participant chose whether to use it.").replace(/A computer randomly assigned[^.]*\./, "Each participant chose whether to use it.") : good.stimulus;
+    if (flipped !== good.stimulus) expect(verifyLevel(q, { ...good, stimulus: flipped }).ok).toBe(false);
+  });
+  it("선지에 같은 문장이 두 번 있으면 실패", () => { const o = [...good.options]; o[(good.correctIndex + 1) % 4] = o[good.correctIndex]; expect(verifyLevel(q, { ...good, options: o }).ok).toBe(false); });
+});
+
+describe("검증기 돌연변이(담당 D)", () => {
+  const a = lev.find((x) => x.id === "lat.triangle_angle_sum.med_expressions") as LArch;
+  const good = (() => { for (let s = 0; s < 50; s++) { const g = generateOne(a, s); if (g.ok) return g.inst as BInstance; } throw new Error("no"); })();
+  it("원본 통과", () => expect(verifyLevel(a, good).ok).toBe(true));
+  it("정답 키 변경 시 실패", () => expect(verifyLevel(a, { ...good, correctIndex: (good.correctIndex + 1) % 4 }).ok).toBe(false));
+  it("의미 일치: 명사와 값이 다른 문장·먼 거리로 떨어지면 실패", () => {
+    expect(checkBindings(withBind(good, [{ noun: "angle", value: 99999 }])).length).toBeGreaterThan(0);
+    expect(checkBindings(withBind({ ...good, stimulus: "Angle A is big. " + "x ".repeat(60) + "It is 55.", question: "q" }, [{ noun: "angle a", value: 55 }])).length).toBeGreaterThan(0);
+    expect(checkBindings(withBind({ ...good, stimulus: "Angle A measures 55 degrees.", question: "q" }, [{ noun: "angle a", value: 55 }])).length).toBe(0);
+    expect(checkBindings(withBind({ ...good, stimulus: "The angle is half of the other.", question: "q" }, [{ noun: "angle", value: 2 }])).length).toBe(0);
+  });
+  it("easy/medium 은 풀이 단계가 너무 적으면 실패", () => expect(verifyLevel(a, { ...good, trace: good.trace.slice(0, 1) }).ok).toBe(false));
+  it("레코드 형태: confirmed·그룹 키", () => {
+    const r = levelRecord(a, good, 1, "run", 3);
+    expect(r.difficulty).toBe("medium"); expect(r.subpattern.startsWith(`${a.id}/`)).toBe(true);
+    expect((r.quality.mockExamGeneration as { difficultyStatus: string }).difficultyStatus).toBe("confirmed");
+  });
+});

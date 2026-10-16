@@ -1,0 +1,44 @@
+{
+ "itemId": "one_variable_data.outlier_effect.BX.P",
+ "generatedAt": "2026-10-07T05:02:00.907Z",
+ "codeHash": "c57a249162b808130af4ca3cfa19100390d1777d0abf986f2a47b68157458f9e",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/data.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/data-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/graph-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/one_variable_data.outlier_effect.BX.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "one_variable_data.outlier_effect.BX.P.png",
+   "mobileFile": "one_variable_data.outlier_effect.BX.P.m375.png",
+   "archetypeId": "ovd.outlier_effect.BX.P.chain2",
+   "seed": 11,
+   "signature": "data:boxplot",
+   "stimulus": "A statistics class reviews a data set. The box plot shown summarizes the monthly electricity bills for households in a neighborhood. One more value, 66 dollars, is recorded and added to the data. It is much greater than the maximum in the plot.",
+   "question": "After the new value is added, what is the range, in dollars?",
+   "options": [
+    "26",
+    "66",
+    "8",
+    "18"
+   ],
+   "correctIndex": 0,
+   "answer": "26",
+   "explanation": "(1) 상자그림에서 다섯 수를 읽는다: 최솟값 40, Q1 41, 중앙값 44, Q3 46, 최댓값 48. (2) 새 값 66 는 원래 최댓값 48 보다 크므로 새 최댓값이 된다. (3) 최솟값은 40 그대로이다. (4) 새 범위 = 66 - 40 = 26 이다. (5) 따라서 범위는 26 dollars 이다. 따라서 정답은 26이다.",
+   "structuralIssues": []
+  }
+ ]
+}

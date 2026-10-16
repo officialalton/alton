@@ -1,0 +1,74 @@
+{
+ "runs": [
+  "ush-p2-a"
+ ],
+ "rows": 60,
+ "passed": 48,
+ "rejected": 12,
+ "mcSets": {
+  "rows": 60,
+  "passed": 48
+ },
+ "frqSets": {
+  "rows": 0,
+  "passed": 0
+ },
+ "mcItems": {
+  "generated": 240,
+  "deterministicPass": 226,
+  "solvers3of3": 216,
+  "finalPass": 183,
+  "firstPassRate": 0.762
+ },
+ "failureReasons": {
+  "solver_disagreement_or_missing": 24,
+  "panel_missing": 24,
+  "paired_item_not_comparative": 5,
+  "solver_second_defensible": 21,
+  "panel_second_defensible": 2,
+  "panel_flag_second_defensible": 2,
+  "panel_set_flag": 12,
+  "set_gate_failed": 4,
+  "number": 13,
+  "panel_flag_inaccurate": 1
+ },
+ "keyConfidence": {
+  "items": 174,
+  "high": 0,
+  "medium": 0,
+  "mean": 0
+ },
+ "categoriesPassed": {
+  "1": 18,
+  "2": 21,
+  "3": 62,
+  "4": 45,
+  "5": 28
+ },
+ "skillsPassed": {
+  "2.B": 7,
+  "3.A": 20,
+  "4.B": 26,
+  "5.A": 13,
+  "3.B": 20,
+  "3.D": 19,
+  "4.A": 19,
+  "5.B": 15,
+  "2.A": 14,
+  "1.B": 16,
+  "3.C": 3,
+  "1.A": 2
+ },
+ "renderTypesPassed": {
+  "none": 47,
+  "ap_table": 1
+ },
+ "frqAudit": [],
+ "costUsd": {
+  "ush-p2-a": {
+   "gen": 4.3034,
+   "panel": 1.243,
+   "solve": 0.6191
+  }
+ }
+}

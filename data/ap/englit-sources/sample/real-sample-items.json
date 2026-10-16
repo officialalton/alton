@@ -1,0 +1,4799 @@
+[
+ {
+  "cellId": "ap_english_literature-real-rs1",
+  "apSubjectCode": "ap_english_literature",
+  "kind": "mc",
+  "calculator": "na",
+  "reserve": false,
+  "wording": "source_first_real_text",
+  "candidateKey": "ap_english_literature-real-rs1-k0",
+  "structure": "shared_stimulus_set",
+  "archetype": "lt_real_poetry_rs1",
+  "pipeline": "real_text_v1",
+  "releaseTier": "sample_not_loaded",
+  "expertStatus": "unreviewed",
+  "renderVerified": false,
+  "screenVerified": false,
+  "sourceKind": "real_public_domain",
+  "registryId": "dickinson-chariot",
+  "keywordCode": "U5.3",
+  "unitCode": "5",
+  "skillPrimary": "6.C",
+  "reviewState": "auto_passed",
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "payload": {
+   "layout_status": "not verified identical to the official AP Central preview: layout was checked only against the ALTON PassageBlock at 390px and 1280px (docs/ap/englit-material-audit.md section 6)",
+   "archetype": "lt_real_poetry_rs1",
+   "topic": "U5.3",
+   "skill": "6.C",
+   "calculator": "na",
+   "set_intro": "Public-domain source text\nThe Chariot (\"Because I could not stop for Death\")\nby Emily Dickinson\nThe following poem is by Emily Dickinson (1890).\n\n```passage\nBecause I could not stop for Death,\nHe kindly stopped for me;\nThe carriage held but just ourselves\nAnd Immortality.\n\nWe slowly drove, he knew no haste,\nAnd I had put away\nMy labor, and my leisure too,\nFor his civility.\n\nWe passed the school where children played,\nTheir lessons scarcely done;\nWe passed the fields of gazing grain,\nWe passed the setting sun.\n\nWe paused before a house that seemed\nA swelling of the ground;\nThe roof was scarcely visible,\nThe cornice but a mound.\n\nSince then 't is centuries; but each\nFeels shorter than the day\nI first surmised the horses' heads\nWere toward eternity.\n```",
+   "lt_passage": {
+    "form": "poem",
+    "group": "poetry",
+    "title": "The Chariot (\"Because I could not stop for Death\")",
+    "headnote": "The following poem is by Emily Dickinson (1890).",
+    "stanzas": [
+     [
+      "Because I could not stop for Death,",
+      "He kindly stopped for me;",
+      "The carriage held but just ourselves",
+      "And Immortality."
+     ],
+     [
+      "We slowly drove, he knew no haste,",
+      "And I had put away",
+      "My labor, and my leisure too,",
+      "For his civility."
+     ],
+     [
+      "We passed the school where children played,",
+      "Their lessons scarcely done;",
+      "We passed the fields of gazing grain,",
+      "We passed the setting sun."
+     ],
+     [
+      "We paused before a house that seemed",
+      "A swelling of the ground;",
+      "The roof was scarcely visible,",
+      "The cornice but a mound."
+     ],
+     [
+      "Since then 't is centuries; but each",
+      "Feels shorter than the day",
+      "I first surmised the horses' heads",
+      "Were toward eternity."
+     ]
+    ],
+    "line_count": 20
+   },
+   "provenance": {
+    "kind": "public_domain",
+    "registry_id": "dickinson-chariot",
+    "author": "Emily Dickinson",
+    "translator": null,
+    "year": 1890,
+    "repository": "Project Gutenberg (gutenberg.org)",
+    "url": "https://www.gutenberg.org/ebooks/12242",
+    "reuse_basis": "United States public domain: poem and 1890 edition published before 1929; author died 1886. The repository states the eBook is not protected by U.S. copyright; the text is reproduced without the repository's trademark or license header.",
+    "text_sha256": "fe0a7bffeb75412b66c7b23b8be485c00555b76b0fb28d5eba11b6b8d9a914f7",
+    "excerpt": {
+     "unit": "line",
+     "from": 1,
+     "to": 20,
+     "whole_work": true,
+     "note": "Complete poem (heading 'XXVII. The Chariot.' omitted)."
+    },
+    "modifications": [
+     "Removed heading lines and the section number.",
+     "Line and stanza structure unchanged."
+    ]
+   },
+   "text_map": {
+    "central_idea": "Speaking from centuries after her death, the speaker remembers dying as a polite, unhurried carriage ride with a courteous Death. The ride passes images of a whole life and stops at a grave described as a sunken house. Only at the end does she reveal that she slowly realized the ride led to eternity. The calm, mannerly surface keeps death's finality half-hidden until the last stanza.",
+    "speaker_or_narrator": "A first-person speaker who has died. She looks back from an eternity that has lasted 'centuries' to the day Death called for her. She was Death's passenger and, in effect, the woman he was courting.",
+    "structure_and_shifts": [
+     {
+      "quote": "We passed the school where children played",
+      "from": "Death picking up the speaker, told in the language of a social call",
+      "to": "the journey itself, a run of passing images"
+     },
+     {
+      "quote": "We paused before a house that seemed",
+      "from": "movement past scenes of life",
+      "to": "a stop at a grave described as a house"
+     },
+     {
+      "quote": "Since then 't is centuries; but each",
+      "from": "a past-tense account of the ride",
+      "to": "a view from eternity, looking back over centuries"
+     }
+    ],
+    "devices": [
+     {
+      "device": "personification",
+      "quote": "He kindly stopped for me",
+      "function": "Turns Death into a polite gentleman caller, so a feared event looks like a social courtesy."
+     },
+     {
+      "device": "diction",
+      "quote": "For his civility",
+      "function": "The vocabulary of manners and courtship gives the encounter a decorous, almost romantic feel."
+     },
+     {
+      "device": "anaphora",
+      "quote": "We passed the setting sun",
+      "function": "The repeated 'We passed' strings together stages of life (childhood, ripeness, decline) as scenery going by."
+     },
+     {
+      "device": "symbol",
+      "quote": "We passed the setting sun",
+      "function": "The setting sun stands for the end of life and the coming of death."
+     },
+     {
+      "device": "personification",
+      "quote": "fields of gazing grain",
+      "function": "The grain seems to watch the speaker go by, as if the living world is looking on while she leaves it."
+     },
+     {
+      "device": "metaphor",
+      "quote": "A swelling of the ground",
+      "function": "Presents the grave as a house, a new home, without ever naming it."
+     },
+     {
+      "device": "understatement",
+      "quote": "The cornice but a mound",
+      "function": "Calmly describes the sunken tomb in architectural terms, softening the horror of burial."
+     },
+     {
+      "device": "paradox",
+      "quote": "Feels shorter than the day",
+      "function": "Centuries feel shorter than one day, which shows how much the moment of realization weighed on her."
+     },
+     {
+      "device": "shift_in_tone",
+      "quote": "Were toward eternity",
+      "function": "The calm ride ends with the speaker finally understanding that its destination was eternity."
+     }
+    ],
+    "skills_supported": [
+     {
+      "skill": "6.C",
+      "why_supported": "Death is personified as a kind, courteous caller.",
+      "quote": "He kindly stopped for me"
+     },
+     {
+      "skill": "1.D",
+      "why_supported": "The shared carriage and the 'civility' suggest a courtship-like relationship between the speaker and Death.",
+      "quote": "The carriage held but just ourselves"
+     },
+     {
+      "skill": "1.E",
+      "why_supported": "The speaker who 'could not stop' still gives up both labor and leisure, which shows a complex surrender.",
+      "quote": "My labor, and my leisure too"
+     },
+     {
+      "skill": "4.C",
+      "why_supported": "The diction of the second stanza sets an unhurried tone.",
+      "quote": "We slowly drove, he knew no haste"
+     },
+     {
+      "skill": "3.B",
+      "why_supported": "The three images passed in order follow the stages of a life.",
+      "quote": "We passed the fields of gazing grain"
+     },
+     {
+      "skill": "4.D",
+      "why_supported": "The speaker describes the grave only as a house, so the reader has to infer what she does not say.",
+      "quote": "We paused before a house that seemed"
+     },
+     {
+      "skill": "3.C",
+      "why_supported": "The final stanza changes the time frame and reveals where the ride was going.",
+      "quote": "Since then 't is centuries; but each"
+     },
+     {
+      "skill": "5.B",
+      "why_supported": "'Surmised' suggests a slow, tentative realization.",
+      "quote": "I first surmised the horses' heads"
+     },
+     {
+      "skill": "4.A",
+      "why_supported": "The speaker's position after death is shown by the passing of centuries.",
+      "quote": "Were toward eternity"
+     },
+     {
+      "skill": "7.B",
+      "why_supported": "The poem's calm treatment of death and its delayed sense of finality support thesis-level interpretation.",
+      "quote": "For his civility"
+     }
+    ]
+   },
+   "items": [
+    {
+     "archetype": "lt_poetry_6C",
+     "topic": "U5.3",
+     "skill": "6.C",
+     "cognitive": "explain",
+     "stem": "The personification of Death in (line 2) primarily serves to",
+     "options": [
+      {
+       "text": "present death as a courteous caller, making a feared event seem a polite visit",
+       "why": "'Kindly' and the act of stopping for someone make Death a considerate gentleman, so dying looks like a social courtesy.",
+       "value": null,
+       "label": "correct"
+      },
+      {
+       "text": "show that the speaker literally refused to halt her carriage for a stranger",
+       "why": "'Could not stop' is figurative: she was too busy living. She did not literally refuse anything, and she did not own a carriage.",
+       "value": null,
+       "label": "literal_for_figurative"
+      },
+      {
+       "text": "suggest that all people secretly long for death as a welcome release from their toil",
+       "why": "The poem tells one speaker's experience. It makes no general claim about what all people long for.",
+       "value": null,
+       "label": "too_broad"
+      },
+      {
+       "text": "portray death as a menacing pursuer who seizes the speaker against her will",
+       "why": "Death stops 'kindly' and acts with 'civility'. Nothing about him is threatening.",
+       "value": null,
+       "label": "reversal"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is \"present death as a courteous caller, making a feared event seem a polite visit\". 'Kindly' and the act of stopping for someone make Death a considerate gentleman, so dying looks like a social courtesy.\n\"show that the speaker literally refused to halt her carriage for a stranger\" is incorrect: 'Could not stop' is figurative: she was too busy living. She did not literally refuse anything, and she did not own a carriage.\n\"suggest that all people secretly long for death as a welcome release from their toil\" is incorrect: The poem tells one speaker's experience. It makes no general claim about what all people long for.\n\"portray death as a menacing pursuer who seizes the speaker against her will\" is incorrect: Death stops 'kindly' and acts with 'civility'. Nothing about him is threatening.",
+     "est_seconds": 55,
+     "evidence_quotes": [
+      "He kindly stopped for me"
+     ],
+     "ref_lines": {
+      "r1": {
+       "from": 2,
+       "to": 2
+      }
+     },
+     "devices_used": [
+      "personification"
+     ],
+     "real_text": {
+      "registry_id": "dickinson-chariot",
+      "skill": "6.C",
+      "key_evidence": {
+       "quote": "He kindly stopped for me",
+       "from": 2,
+       "to": 2,
+       "ref": "line 2",
+       "unit": "stanza 1"
+      },
+      "distractor_evidence": [
+       {
+        "index": 1,
+        "label": "literal_for_figurative",
+        "why": "'Could not stop' is figurative: she was too busy living. She did not literally refuse anything, and she did not own a carriage.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "Because I could not stop for Death",
+         "from": 1,
+         "to": 1,
+         "ref": "line 1",
+         "unit": "stanza 1"
+        }
+       },
+       {
+        "index": 2,
+        "label": "too_broad",
+        "why": "The poem tells one speaker's experience. It makes no general claim about what all people long for.",
+        "evidence_kind": "absence",
+        "evidence": null
+       },
+       {
+        "index": 3,
+        "label": "reversal",
+        "why": "Death stops 'kindly' and acts with 'civility'. Nothing about him is threatening.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "For his civility",
+         "from": 8,
+         "to": 8,
+         "ref": "line 8",
+         "unit": "stanza 2"
+        }
+       }
+      ],
+      "verification": {
+       "solvers": [
+        "claude-opus-5-5",
+        "claude-sonnet-5-5"
+       ],
+       "solver_votes": [
+        0,
+        0
+       ],
+       "adversary": "none",
+       "judge": "key_clearly_better",
+       "panel_model": "claude-fable-5-1",
+       "panel_choice": 0,
+       "panel_agree": true,
+       "score": 1,
+       "band": "high",
+       "verified": true
+      }
+     },
+     "key_confidence": {
+      "score": 1,
+      "band": "high",
+      "solver_agreement": 1,
+      "adversary": "none",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 0,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 0,
+        "confidence": "certain"
+       },
+       {
+        "choice": 0,
+        "confidence": "certain"
+       }
+      ]
+     }
+    },
+    {
+     "archetype": "lt_poetry_1E",
+     "topic": "U2.1",
+     "skill": "1.E",
+     "cognitive": "explain",
+     "stem": "Taken together, the speaker's statement that she \"could not stop for Death\" (line 1) and her admission that she \"had put away\" her pursuits (line 7) suggest that she",
+     "options": [
+      {
+       "text": "had long planned for death and so had already ended both work and pleasure",
+       "why": "Reads 'had put away' as advance planning. The opening line shows she was not ready or waiting for death.",
+       "value": null,
+       "label": "lexical_trap"
+      },
+      {
+       "text": "regrets chiefly the loss of her work, which she abandons with deep, bitter reluctance",
+       "why": "She gives up 'leisure too', not just work, and the tone is calm rather than bitter.",
+       "value": null,
+       "label": "wrong_tone"
+      },
+      {
+       "text": "was too absorbed in living to seek death, yet yields to it entirely and willingly",
+       "why": "At first she is too busy to stop. Then she sets aside both labor and leisure 'For his civility', a complete and gracious surrender that sits uneasily with how busy she was.",
+       "value": null,
+       "label": "correct"
+      },
+      {
+       "text": "resists Death's summons throughout and is carried off only by superior force",
+       "why": "She puts her life aside out of courtesy. There is no resistance and no force.",
+       "value": null,
+       "label": "reversal"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is \"was too absorbed in living to seek death, yet yields to it entirely and willingly\". At first she is too busy to stop. Then she sets aside both labor and leisure 'For his civility', a complete and gracious surrender that sits uneasily with how busy she was.\n\"had long planned for death and so had already ended both work and pleasure\" is incorrect: Reads 'had put away' as advance planning. The opening line shows she was not ready or waiting for death.\n\"regrets chiefly the loss of her work, which she abandons with deep, bitter reluctance\" is incorrect: She gives up 'leisure too', not just work, and the tone is calm rather than bitter.\n\"resists Death's summons throughout and is carried off only by superior force\" is incorrect: She puts her life aside out of courtesy. There is no resistance and no force.",
+     "est_seconds": 75,
+     "evidence_quotes": [
+      "Because I could not stop for Death",
+      "My labor, and my leisure too",
+      "For his civility"
+     ],
+     "ref_lines": {
+      "r1": {
+       "from": 1,
+       "to": 1
+      },
+      "r2": {
+       "from": 7,
+       "to": 7
+      }
+     },
+     "devices_used": [
+      "contrast",
+      "diction"
+     ],
+     "real_text": {
+      "registry_id": "dickinson-chariot",
+      "skill": "1.E",
+      "key_evidence": {
+       "quote": "My labor, and my leisure too",
+       "from": 7,
+       "to": 7,
+       "ref": "line 7",
+       "unit": "stanza 2"
+      },
+      "distractor_evidence": [
+       {
+        "index": 0,
+        "label": "lexical_trap",
+        "why": "Reads 'had put away' as advance planning. The opening line shows she was not ready or waiting for death.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "Because I could not stop for Death",
+         "from": 1,
+         "to": 1,
+         "ref": "line 1",
+         "unit": "stanza 1"
+        }
+       },
+       {
+        "index": 1,
+        "label": "wrong_tone",
+        "why": "She gives up 'leisure too', not just work, and the tone is calm rather than bitter.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "We slowly drove, he knew no haste",
+         "from": 5,
+         "to": 5,
+         "ref": "line 5",
+         "unit": "stanza 2"
+        }
+       },
+       {
+        "index": 3,
+        "label": "reversal",
+        "why": "She puts her life aside out of courtesy. There is no resistance and no force.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "For his civility",
+         "from": 8,
+         "to": 8,
+         "ref": "line 8",
+         "unit": "stanza 2"
+        }
+       }
+      ],
+      "verification": {
+       "solvers": [
+        "claude-opus-5-5",
+        "claude-sonnet-5-5"
+       ],
+       "solver_votes": [
+        2,
+        2
+       ],
+       "adversary": "weak",
+       "judge": "key_clearly_better",
+       "panel_model": "claude-fable-5-1",
+       "panel_choice": 2,
+       "panel_agree": true,
+       "score": 0.829,
+       "band": "medium",
+       "verified": true
+      }
+     },
+     "key_confidence": {
+      "score": 0.829,
+      "band": "medium",
+      "solver_agreement": 1,
+      "adversary": "weak",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 2,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 2,
+        "confidence": "certain"
+       },
+       {
+        "choice": 2,
+        "confidence": "likely"
+       }
+      ]
+     }
+    },
+    {
+     "archetype": "lt_poetry_4C",
+     "topic": "U9.2",
+     "skill": "4.C",
+     "cognitive": "identify",
+     "stem": "The tone of the second stanza, particularly in (line 5), is best described as",
+     "options": [
+      {
+       "text": "bitter and resentful",
+       "why": "She speaks of Death's 'civility'. Nothing she says is resentful.",
+       "value": null,
+       "label": "wrong_tone"
+      },
+      {
+       "text": "grieving and somber",
+       "why": "The subject is death, but the speaker does not grieve. She calmly sets her life aside out of courtesy.",
+       "value": null,
+       "label": "partially_right"
+      },
+      {
+       "text": "anxious and hurried",
+       "why": "The stanza says outright that there was no haste.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "calm and unhurried",
+       "why": "'Slowly' and 'knew no haste' create a leisurely, composed pace.",
+       "value": null,
+       "label": "correct"
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is \"calm and unhurried\". 'Slowly' and 'knew no haste' create a leisurely, composed pace.\n\"bitter and resentful\" is incorrect: She speaks of Death's 'civility'. Nothing she says is resentful.\n\"grieving and somber\" is incorrect: The subject is death, but the speaker does not grieve. She calmly sets her life aside out of courtesy.\n\"anxious and hurried\" is incorrect: The stanza says outright that there was no haste.",
+     "est_seconds": 45,
+     "evidence_quotes": [
+      "We slowly drove, he knew no haste"
+     ],
+     "ref_lines": {
+      "r1": {
+       "from": 5,
+       "to": 5
+      }
+     },
+     "devices_used": [
+      "diction"
+     ],
+     "real_text": {
+      "registry_id": "dickinson-chariot",
+      "skill": "4.C",
+      "key_evidence": {
+       "quote": "We slowly drove, he knew no haste",
+       "from": 5,
+       "to": 5,
+       "ref": "line 5",
+       "unit": "stanza 2"
+      },
+      "distractor_evidence": [
+       {
+        "index": 0,
+        "label": "wrong_tone",
+        "why": "She speaks of Death's 'civility'. Nothing she says is resentful.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "For his civility",
+         "from": 8,
+         "to": 8,
+         "ref": "line 8",
+         "unit": "stanza 2"
+        }
+       },
+       {
+        "index": 1,
+        "label": "partially_right",
+        "why": "The subject is death, but the speaker does not grieve. She calmly sets her life aside out of courtesy.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "And I had put away",
+         "from": 6,
+         "to": 6,
+         "ref": "line 6",
+         "unit": "stanza 2"
+        }
+       },
+       {
+        "index": 2,
+        "label": "reversal",
+        "why": "The stanza says outright that there was no haste.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "We slowly drove, he knew no haste",
+         "from": 5,
+         "to": 5,
+         "ref": "line 5",
+         "unit": "stanza 2"
+        }
+       }
+      ],
+      "verification": {
+       "solvers": [
+        "claude-opus-5-5",
+        "claude-sonnet-5-5"
+       ],
+       "solver_votes": [
+        3,
+        3
+       ],
+       "adversary": "none",
+       "judge": "key_clearly_better",
+       "panel_model": "claude-fable-5-1",
+       "panel_choice": 3,
+       "panel_agree": true,
+       "score": 1,
+       "band": "high",
+       "verified": true
+      }
+     },
+     "key_confidence": {
+      "score": 1,
+      "band": "high",
+      "solver_agreement": 1,
+      "adversary": "none",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 3,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 3,
+        "confidence": "certain"
+       },
+       {
+        "choice": 3,
+        "confidence": "certain"
+       }
+      ]
+     }
+    },
+    {
+     "archetype": "lt_poetry_4D",
+     "topic": "U7.1",
+     "skill": "4.D",
+     "cognitive": "evaluate",
+     "stem": "The speaker's description of the house in the fourth stanza (line 13) affects the reader's interpretation chiefly by",
+     "options": [
+      {
+       "text": "revealing that the speaker deliberately lies to conceal her terror of burial",
+       "why": "'Seemed' marks an honest impression, not a lie, and the speaker never shows terror.",
+       "value": null,
+       "label": "unsupported"
+      },
+      {
+       "text": "inviting the reader to recognize a grave the speaker never names directly",
+       "why": "A 'house' that is 'A swelling of the ground', with a roof barely visible and a cornice that is only a mound, is clearly a grave. The speaker keeps calling it a house, so the reader has to supply what she leaves unsaid.",
+       "value": null,
+       "label": "correct"
+      },
+      {
+       "text": "suggesting that the speaker's entire account of the journey is only a dream",
+       "why": "Treats one veiled image as if it cast doubt on the whole poem. The speaker says centuries have really passed since that day.",
+       "value": null,
+       "label": "wrong_scope"
+      },
+      {
+       "text": "establishing that the journey ends at the speaker's new home among the living",
+       "why": "Takes 'house' literally. A dwelling that is only a mound in the ground is a grave, not a home among the living.",
+       "value": null,
+       "label": "literal_for_figurative"
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is \"inviting the reader to recognize a grave the speaker never names directly\". A 'house' that is 'A swelling of the ground', with a roof barely visible and a cornice that is only a mound, is clearly a grave. The speaker keeps calling it a house, so the reader has to supply what she leaves unsaid.\n\"revealing that the speaker deliberately lies to conceal her terror of burial\" is incorrect: 'Seemed' marks an honest impression, not a lie, and the speaker never shows terror.\n\"suggesting that the speaker's entire account of the journey is only a dream\" is incorrect: Treats one veiled image as if it cast doubt on the whole poem. The speaker says centuries have really passed since that day.\n\"establishing that the journey ends at the speaker's new home among the living\" is incorrect: Takes 'house' literally. A dwelling that is only a mound in the ground is a grave, not a home among the living.",
+     "est_seconds": 80,
+     "evidence_quotes": [
+      "A swelling of the ground",
+      "The roof was scarcely visible",
+      "The cornice but a mound"
+     ],
+     "ref_lines": {
+      "r1": {
+       "from": 13,
+       "to": 13
+      }
+     },
+     "devices_used": [
+      "metaphor",
+      "understatement",
+      "imagery"
+     ],
+     "real_text": {
+      "registry_id": "dickinson-chariot",
+      "skill": "4.D",
+      "key_evidence": {
+       "quote": "A swelling of the ground",
+       "from": 14,
+       "to": 14,
+       "ref": "line 14",
+       "unit": "stanza 4"
+      },
+      "distractor_evidence": [
+       {
+        "index": 0,
+        "label": "unsupported",
+        "why": "'Seemed' marks an honest impression, not a lie, and the speaker never shows terror.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "a house that seemed",
+         "from": 13,
+         "to": 13,
+         "ref": "line 13",
+         "unit": "stanza 4"
+        }
+       },
+       {
+        "index": 2,
+        "label": "wrong_scope",
+        "why": "Treats one veiled image as if it cast doubt on the whole poem. The speaker says centuries have really passed since that day.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "Since then 't is centuries; but each",
+         "from": 17,
+         "to": 17,
+         "ref": "line 17",
+         "unit": "stanza 5"
+        }
+       },
+       {
+        "index": 3,
+        "label": "literal_for_figurative",
+        "why": "Takes 'house' literally. A dwelling that is only a mound in the ground is a grave, not a home among the living.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "The cornice but a mound",
+         "from": 16,
+         "to": 16,
+         "ref": "line 16",
+         "unit": "stanza 4"
+        }
+       }
+      ],
+      "verification": {
+       "solvers": [
+        "claude-opus-5-5",
+        "claude-sonnet-5-5"
+       ],
+       "solver_votes": [
+        1,
+        1
+       ],
+       "adversary": "none",
+       "judge": "key_clearly_better",
+       "panel_model": "claude-fable-5-1",
+       "panel_choice": 1,
+       "panel_agree": true,
+       "score": 1,
+       "band": "high",
+       "verified": true
+      }
+     },
+     "key_confidence": {
+      "score": 1,
+      "band": "high",
+      "solver_agreement": 1,
+      "adversary": "none",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 1,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 1,
+        "confidence": "certain"
+       },
+       {
+        "choice": 1,
+        "confidence": "certain"
+       }
+      ]
+     }
+    },
+    {
+     "archetype": "lt_poetry_3C",
+     "topic": "U5.2",
+     "skill": "3.C",
+     "cognitive": "explain",
+     "stem": "The final stanza functions primarily to",
+     "options": [
+      {
+       "text": "describe the horses in detail, adding a last image of the carriage itself",
+       "why": "The horses' heads matter for the direction they point, which is what she realizes. They are not there as description.",
+       "value": null,
+       "label": "wrong_function"
+      },
+      {
+       "text": "express the speaker's anguish at the endless, weary boredom of her centuries dead",
+       "why": "She says the centuries feel short, not weary, and she shows no anguish.",
+       "value": null,
+       "label": "wrong_tone"
+      },
+      {
+       "text": "shift to a vantage beyond death, revealing where the ride was always headed",
+       "why": "'Since then 't is centuries' moves the speaker into eternity, and the stanza reveals that the horses were headed 'toward eternity' all along.",
+       "value": null,
+       "label": "correct"
+      },
+      {
+       "text": "return the speaker to life, ending the journey before it reaches its goal",
+       "why": "The stanza confirms that the ride's destination was eternity. It does not bring her back to life.",
+       "value": null,
+       "label": "reversal"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is \"shift to a vantage beyond death, revealing where the ride was always headed\". 'Since then 't is centuries' moves the speaker into eternity, and the stanza reveals that the horses were headed 'toward eternity' all along.\n\"describe the horses in detail, adding a last image of the carriage itself\" is incorrect: The horses' heads matter for the direction they point, which is what she realizes. They are not there as description.\n\"express the speaker's anguish at the endless, weary boredom of her centuries dead\" is incorrect: She says the centuries feel short, not weary, and she shows no anguish.\n\"return the speaker to life, ending the journey before it reaches its goal\" is incorrect: The stanza confirms that the ride's destination was eternity. It does not bring her back to life.",
+     "est_seconds": 65,
+     "evidence_quotes": [
+      "Since then 't is centuries; but each",
+      "Were toward eternity"
+     ],
+     "ref_lines": {},
+     "devices_used": [
+      "shift_in_tone",
+      "paradox"
+     ],
+     "real_text": {
+      "registry_id": "dickinson-chariot",
+      "skill": "3.C",
+      "key_evidence": {
+       "quote": "Since then 't is centuries; but each",
+       "from": 17,
+       "to": 17,
+       "ref": "line 17",
+       "unit": "stanza 5"
+      },
+      "distractor_evidence": [
+       {
+        "index": 0,
+        "label": "wrong_function",
+        "why": "The horses' heads matter for the direction they point, which is what she realizes. They are not there as description.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "I first surmised the horses' heads",
+         "from": 19,
+         "to": 19,
+         "ref": "line 19",
+         "unit": "stanza 5"
+        }
+       },
+       {
+        "index": 1,
+        "label": "wrong_tone",
+        "why": "She says the centuries feel short, not weary, and she shows no anguish.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "Feels shorter than the day",
+         "from": 18,
+         "to": 18,
+         "ref": "line 18",
+         "unit": "stanza 5"
+        }
+       },
+       {
+        "index": 3,
+        "label": "reversal",
+        "why": "The stanza confirms that the ride's destination was eternity. It does not bring her back to life.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "Were toward eternity",
+         "from": 20,
+         "to": 20,
+         "ref": "line 20",
+         "unit": "stanza 5"
+        }
+       }
+      ],
+      "verification": {
+       "solvers": [
+        "claude-opus-5-5",
+        "claude-sonnet-5-5"
+       ],
+       "solver_votes": [
+        2,
+        2
+       ],
+       "adversary": "none",
+       "judge": "key_clearly_better",
+       "panel_model": "claude-fable-5-1",
+       "panel_choice": 2,
+       "panel_agree": true,
+       "score": 0.959,
+       "band": "high",
+       "verified": true
+      }
+     },
+     "key_confidence": {
+      "score": 0.959,
+      "band": "high",
+      "solver_agreement": 1,
+      "adversary": "none",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 2,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 2,
+        "confidence": "certain"
+       },
+       {
+        "choice": 2,
+        "confidence": "likely"
+       }
+      ]
+     }
+    },
+    {
+     "archetype": "lt_poetry_5B",
+     "topic": "U8.2",
+     "skill": "5.B",
+     "cognitive": "identify",
+     "stem": "In context, the word \"surmised\" (line 19) most strongly suggests that the speaker",
+     "options": [
+      {
+       "text": "was surprised and alarmed when she noticed where the horses were facing",
+       "why": "Confuses 'surmised' with 'surprised'. The ride is calm and shows no alarm.",
+       "value": null,
+       "label": "lexical_trap"
+      },
+      {
+       "text": "grasped the journey's destination only gradually, by inference",
+       "why": "To 'surmise' is to guess from clues. Together with 'first', it shows a slow, tentative dawning of what the ride meant.",
+       "value": null,
+       "label": "correct"
+      },
+      {
+       "text": "doubted that the carriage was moving toward any destination at all",
+       "why": "What she surmised was a definite destination: eternity.",
+       "value": null,
+       "label": "unsupported"
+      },
+      {
+       "text": "knew from the very first moment exactly where Death was taking her",
+       "why": "'Surmised' describes a guess, not certain knowledge from the start.",
+       "value": null,
+       "label": "reversal"
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is \"grasped the journey's destination only gradually, by inference\". To 'surmise' is to guess from clues. Together with 'first', it shows a slow, tentative dawning of what the ride meant.\n\"was surprised and alarmed when she noticed where the horses were facing\" is incorrect: Confuses 'surmised' with 'surprised'. The ride is calm and shows no alarm.\n\"doubted that the carriage was moving toward any destination at all\" is incorrect: What she surmised was a definite destination: eternity.\n\"knew from the very first moment exactly where Death was taking her\" is incorrect: 'Surmised' describes a guess, not certain knowledge from the start.",
+     "est_seconds": 50,
+     "evidence_quotes": [
+      "I first surmised the horses' heads",
+      "Were toward eternity"
+     ],
+     "ref_lines": {
+      "r1": {
+       "from": 19,
+       "to": 19
+      }
+     },
+     "devices_used": [
+      "diction"
+     ],
+     "real_text": {
+      "registry_id": "dickinson-chariot",
+      "skill": "5.B",
+      "key_evidence": {
+       "quote": "I first surmised the horses' heads",
+       "from": 19,
+       "to": 19,
+       "ref": "line 19",
+       "unit": "stanza 5"
+      },
+      "distractor_evidence": [
+       {
+        "index": 0,
+        "label": "lexical_trap",
+        "why": "Confuses 'surmised' with 'surprised'. The ride is calm and shows no alarm.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "We slowly drove, he knew no haste",
+         "from": 5,
+         "to": 5,
+         "ref": "line 5",
+         "unit": "stanza 2"
+        }
+       },
+       {
+        "index": 2,
+        "label": "unsupported",
+        "why": "What she surmised was a definite destination: eternity.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "Were toward eternity",
+         "from": 20,
+         "to": 20,
+         "ref": "line 20",
+         "unit": "stanza 5"
+        }
+       },
+       {
+        "index": 3,
+        "label": "reversal",
+        "why": "'Surmised' describes a guess, not certain knowledge from the start.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "Feels shorter than the day",
+         "from": 18,
+         "to": 18,
+         "ref": "line 18",
+         "unit": "stanza 5"
+        }
+       }
+      ],
+      "verification": {
+       "solvers": [
+        "claude-opus-5-5",
+        "claude-sonnet-5-5"
+       ],
+       "solver_votes": [
+        1,
+        1
+       ],
+       "adversary": "weak",
+       "judge": "key_clearly_better",
+       "panel_model": "claude-fable-5-1",
+       "panel_choice": 1,
+       "panel_agree": true,
+       "score": 0.829,
+       "band": "medium",
+       "verified": true
+      }
+     },
+     "key_confidence": {
+      "score": 0.829,
+      "band": "medium",
+      "solver_agreement": 1,
+      "adversary": "weak",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 1,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 1,
+        "confidence": "likely"
+       },
+       {
+        "choice": 1,
+        "confidence": "certain"
+       }
+      ]
+     }
+    },
+    {
+     "archetype": "lt_poetry_4A",
+     "topic": "U1.3",
+     "skill": "4.A",
+     "cognitive": "identify",
+     "stem": "Which of the following best describes the speaker's situation as the poem presents it?",
+     "options": [
+      {
+       "text": "She speaks from beyond death, recalling the day Death came for her",
+       "why": "She says centuries have passed since the day of the ride, so she is speaking from eternity and looking back on her death.",
+       "value": null,
+       "label": "correct"
+      },
+      {
+       "text": "She speaks moments after death, still riding toward the graveyard",
+       "why": "She is dead, but she speaks centuries after the ride, not while it is happening.",
+       "value": null,
+       "label": "partially_right"
+      },
+      {
+       "text": "She is a mourner describing a friend's carriage ride to the grave",
+       "why": "Death stops 'for me'. The speaker herself is the passenger, not an onlooker.",
+       "value": null,
+       "label": "misread_speaker"
+      },
+      {
+       "text": "She is a dying woman imagining the funeral that awaits her tomorrow",
+       "why": "The ride is told in the past tense as something that already happened. She is not looking ahead to it.",
+       "value": null,
+       "label": "reversal"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is \"She speaks from beyond death, recalling the day Death came for her\". She says centuries have passed since the day of the ride, so she is speaking from eternity and looking back on her death.\n\"She speaks moments after death, still riding toward the graveyard\" is incorrect: She is dead, but she speaks centuries after the ride, not while it is happening.\n\"She is a mourner describing a friend's carriage ride to the grave\" is incorrect: Death stops 'for me'. The speaker herself is the passenger, not an onlooker.\n\"She is a dying woman imagining the funeral that awaits her tomorrow\" is incorrect: The ride is told in the past tense as something that already happened. She is not looking ahead to it.",
+     "est_seconds": 50,
+     "evidence_quotes": [
+      "Since then 't is centuries; but each",
+      "He kindly stopped for me"
+     ],
+     "ref_lines": {},
+     "devices_used": [
+      "shift_in_tone"
+     ],
+     "real_text": {
+      "registry_id": "dickinson-chariot",
+      "skill": "4.A",
+      "key_evidence": {
+       "quote": "Since then 't is centuries; but each",
+       "from": 17,
+       "to": 17,
+       "ref": "line 17",
+       "unit": "stanza 5"
+      },
+      "distractor_evidence": [
+       {
+        "index": 1,
+        "label": "partially_right",
+        "why": "She is dead, but she speaks centuries after the ride, not while it is happening.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "Feels shorter than the day",
+         "from": 18,
+         "to": 18,
+         "ref": "line 18",
+         "unit": "stanza 5"
+        }
+       },
+       {
+        "index": 2,
+        "label": "misread_speaker",
+        "why": "Death stops 'for me'. The speaker herself is the passenger, not an onlooker.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "He kindly stopped for me",
+         "from": 2,
+         "to": 2,
+         "ref": "line 2",
+         "unit": "stanza 1"
+        }
+       },
+       {
+        "index": 3,
+        "label": "reversal",
+        "why": "The ride is told in the past tense as something that already happened. She is not looking ahead to it.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "We slowly drove, he knew no haste",
+         "from": 5,
+         "to": 5,
+         "ref": "line 5",
+         "unit": "stanza 2"
+        }
+       }
+      ],
+      "verification": {
+       "solvers": [
+        "claude-opus-5-5",
+        "claude-sonnet-5-5"
+       ],
+       "solver_votes": [
+        0,
+        0
+       ],
+       "adversary": "none",
+       "judge": "key_clearly_better",
+       "panel_model": "claude-fable-5-1",
+       "panel_choice": 0,
+       "panel_agree": true,
+       "score": 1,
+       "band": "high",
+       "verified": true
+      }
+     },
+     "key_confidence": {
+      "score": 1,
+      "band": "high",
+      "solver_agreement": 1,
+      "adversary": "none",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 0,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 0,
+        "confidence": "certain"
+       },
+       {
+        "choice": 0,
+        "confidence": "certain"
+       }
+      ]
+     }
+    },
+    {
+     "archetype": "lt_poetry_7B",
+     "topic": "U8.3",
+     "skill": "7.B",
+     "cognitive": "evaluate",
+     "stem": "Which of the following statements is the most defensible thesis about the poem as a whole?",
+     "options": [
+      {
+       "text": "Through Death's courtly manners and the unhurried ride, the poem turns dying into a calm passage whose finality emerges only gradually",
+       "why": "Death's 'civility' and the slow pace make dying gentle. The disguised grave and the late 'surmised ... eternity' show that its finality dawns only slowly. The claim is specific and covers the whole poem.",
+       "value": null,
+       "label": "correct"
+      },
+      {
+       "text": "Through images of decay and darkness, the poem depicts death as a cruel abductor who violently tears the speaker away from a life she cherishes",
+       "why": "Death is 'kind' and civil, and the speaker gives up her pursuits willingly. Nothing is violent.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "The third stanza's catalog of school, grain, and sunset is the poem's central achievement, a pastoral portrait of village life",
+       "why": "Focuses on one stanza and misses its symbolism. The setting sun points to death, not to village life.",
+       "value": null,
+       "label": "too_narrow"
+      },
+      {
+       "text": "The poem argues that all human fear of death is irrational, since every life, however busy, ends in the same peaceful eternity",
+       "why": "The poem presents one speaker's experience. It makes no argument about everyone's fears.",
+       "value": null,
+       "label": "too_broad"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is \"Through Death's courtly manners and the unhurried ride, the poem turns dying into a calm passage whose finality emerges only gradually\". Death's 'civility' and the slow pace make dying gentle. The disguised grave and the late 'surmised ... eternity' show that its finality dawns only slowly. The claim is specific and covers the whole poem.\n\"Through images of decay and darkness, the poem depicts death as a cruel abductor who violently tears the speaker away from a life she cherishes\" is incorrect: Death is 'kind' and civil, and the speaker gives up her pursuits willingly. Nothing is violent.\n\"The third stanza's catalog of school, grain, and sunset is the poem's central achievement, a pastoral portrait of village life\" is incorrect: Focuses on one stanza and misses its symbolism. The setting sun points to death, not to village life.\n\"The poem argues that all human fear of death is irrational, since every life, however busy, ends in the same peaceful eternity\" is incorrect: The poem presents one speaker's experience. It makes no argument about everyone's fears.",
+     "est_seconds": 90,
+     "evidence_quotes": [
+      "For his civility",
+      "We slowly drove, he knew no haste",
+      "I first surmised the horses' heads"
+     ],
+     "ref_lines": {},
+     "devices_used": [
+      "personification",
+      "imagery",
+      "shift_in_tone"
+     ],
+     "real_text": {
+      "registry_id": "dickinson-chariot",
+      "skill": "7.B",
+      "key_evidence": {
+       "quote": "I first surmised the horses' heads",
+       "from": 19,
+       "to": 19,
+       "ref": "line 19",
+       "unit": "stanza 5"
+      },
+      "distractor_evidence": [
+       {
+        "index": 1,
+        "label": "reversal",
+        "why": "Death is 'kind' and civil, and the speaker gives up her pursuits willingly. Nothing is violent.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "He kindly stopped for me",
+         "from": 2,
+         "to": 2,
+         "ref": "line 2",
+         "unit": "stanza 1"
+        }
+       },
+       {
+        "index": 2,
+        "label": "too_narrow",
+        "why": "Focuses on one stanza and misses its symbolism. The setting sun points to death, not to village life.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "We passed the setting sun",
+         "from": 12,
+         "to": 12,
+         "ref": "line 12",
+         "unit": "stanza 3"
+        }
+       },
+       {
+        "index": 3,
+        "label": "too_broad",
+        "why": "The poem presents one speaker's experience. It makes no argument about everyone's fears.",
+        "evidence_kind": "absence",
+        "evidence": null
+       }
+      ],
+      "verification": {
+       "solvers": [
+        "claude-opus-5-5",
+        "claude-sonnet-5-5"
+       ],
+       "solver_votes": [
+        0,
+        0
+       ],
+       "adversary": "weak",
+       "judge": "key_clearly_better",
+       "panel_model": "claude-fable-5-1",
+       "panel_choice": 0,
+       "panel_agree": true,
+       "score": 0.87,
+       "band": "medium",
+       "verified": true
+      }
+     },
+     "key_confidence": {
+      "score": 0.87,
+      "band": "medium",
+      "solver_agreement": 1,
+      "adversary": "weak",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 0,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 0,
+        "confidence": "certain"
+       },
+       {
+        "choice": 0,
+        "confidence": "certain"
+       }
+      ]
+     }
+    }
+   ],
+   "excluded_items": [
+    {
+     "index": 1,
+     "skill": "1.D",
+     "stem": "The description of who rides in the carriage ([[r1]]) suggests that the relationship between the speaker and Death is best characterized as",
+     "reasons": [
+      "solver_reports_second_defensible_option"
+     ]
+    },
+    {
+     "index": 4,
+     "skill": "3.B",
+     "stem": "The sequence of images in the third stanza, moving from the school ([[r1]]) to the grain ([[r2]]) to the sun ([[r3]]), primarily serves to",
+     "reasons": [
+      "solver_reports_second_defensible_option"
+     ]
+    }
+   ],
+   "assignable_size": true,
+   "set_note": ""
+  }
+ },
+ {
+  "cellId": "ap_english_literature-real-rs2",
+  "apSubjectCode": "ap_english_literature",
+  "kind": "mc",
+  "calculator": "na",
+  "reserve": false,
+  "wording": "source_first_real_text",
+  "candidateKey": "ap_english_literature-real-rs2-k0",
+  "structure": "shared_stimulus_set",
+  "archetype": "lt_real_poetry_rs2",
+  "pipeline": "real_text_v1",
+  "releaseTier": "sample_not_loaded",
+  "expertStatus": "unreviewed",
+  "renderVerified": false,
+  "screenVerified": false,
+  "sourceKind": "real_public_domain",
+  "registryId": "dunbar-mask",
+  "keywordCode": "U2.3",
+  "unitCode": "2",
+  "skillPrimary": "6.B",
+  "reviewState": "auto_passed",
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "payload": {
+   "layout_status": "not verified identical to the official AP Central preview: layout was checked only against the ALTON PassageBlock at 390px and 1280px (docs/ap/englit-material-audit.md section 6)",
+   "archetype": "lt_real_poetry_rs2",
+   "topic": "U2.3",
+   "skill": "6.B",
+   "calculator": "na",
+   "set_intro": "Public-domain source text\nWe Wear the Mask\nby Paul Laurence Dunbar\nThe following poem is by Paul Laurence Dunbar (1896).\n\n```passage\nWe wear the mask that grins and lies,\nIt hides our cheeks and shades our eyes,--\nThis debt we pay to human guile;\nWith torn and bleeding hearts we smile,\nAnd mouth with myriad subtleties.\n\nWhy should the world be over-wise,\nIn counting all our tears and sighs?\nNay, let them only see us, while\n    We wear the mask.\n\nWe smile, but, O great Christ, our cries\nTo thee from tortured souls arise.\nWe sing, but oh the clay is vile\nBeneath our feet, and long the mile;\nBut let the world dream otherwise,\n    We wear the mask!\n```",
+   "lt_passage": {
+    "form": "poem",
+    "group": "poetry",
+    "title": "We Wear the Mask",
+    "headnote": "The following poem is by Paul Laurence Dunbar (1896).",
+    "stanzas": [
+     [
+      "We wear the mask that grins and lies,",
+      "It hides our cheeks and shades our eyes,--",
+      "This debt we pay to human guile;",
+      "With torn and bleeding hearts we smile,",
+      "And mouth with myriad subtleties."
+     ],
+     [
+      "Why should the world be over-wise,",
+      "In counting all our tears and sighs?",
+      "Nay, let them only see us, while",
+      "    We wear the mask."
+     ],
+     [
+      "We smile, but, O great Christ, our cries",
+      "To thee from tortured souls arise.",
+      "We sing, but oh the clay is vile",
+      "Beneath our feet, and long the mile;",
+      "But let the world dream otherwise,",
+      "    We wear the mask!"
+     ]
+    ],
+    "line_count": 15
+   },
+   "provenance": {
+    "kind": "public_domain",
+    "registry_id": "dunbar-mask",
+    "author": "Paul Laurence Dunbar",
+    "translator": null,
+    "year": 1896,
+    "repository": "Project Gutenberg (gutenberg.org)",
+    "url": "https://www.gutenberg.org/ebooks/18338",
+    "reuse_basis": "United States public domain: poem published 1896 and the collected edition in 1913; author died 1906. The repository states the eBook is not protected by U.S. copyright; the text is reproduced without the repository's trademark or license header.",
+    "text_sha256": "a77f49efde727ec08598865927263e552b97012d4e614f20b3f625133cbc0e40",
+    "excerpt": {
+     "unit": "line",
+     "from": 1,
+     "to": 15,
+     "whole_work": true,
+     "note": "Complete poem, 15 lines in three stanzas (5/4/6); the two refrain lines keep their relative indent."
+    },
+    "modifications": [
+     "Heading omitted.",
+     "Repository base indent removed; the 4-space relative indent of the two refrain lines kept."
+    ]
+   },
+   "text_map": {
+    "central_idea": "A collective speaker describes a smiling mask that a suffering group wears before an observing world. The poem presents the mask as a debt forced on the group and also as a chosen guard over their private grief. Only in the cry to Christ does the speaker name the anguish beneath it, and the poem then ends by declaring the mask again.",
+    "speaker_or_narrator": "A first-person plural voice ('we') speaking for a group that hides its suffering from 'the world'. In the third stanza the voice turns from the world and speaks directly to Christ.",
+    "structure_and_shifts": [
+     {
+      "quote": "This debt we pay to human guile",
+      "from": "description of the mask's deceiving surface",
+      "to": "explanation of the mask as an obligation exacted by others"
+     },
+     {
+      "quote": "Why should the world be over-wise",
+      "from": "declarative description",
+      "to": "a rhetorical challenge to the world's right to see the group's grief"
+     },
+     {
+      "quote": "O great Christ, our cries",
+      "from": "concealment before the world",
+      "to": "open confession of anguish to a divine listener"
+     },
+     {
+      "quote": "But let the world dream otherwise",
+      "from": "exposure of suffering",
+      "to": "a defiant return to the mask in the final refrain"
+     }
+    ],
+    "devices": [
+     {
+      "device": "metaphor",
+      "quote": "the mask that grins and lies",
+      "function": "Makes the group's forced public cheerfulness into a false face that deceives."
+     },
+     {
+      "device": "personification",
+      "quote": "the mask that grins and lies",
+      "function": "Gives the mask a will of its own, so the deception seems active and separate from the wearers' true feelings."
+     },
+     {
+      "device": "diction",
+      "quote": "This debt we pay to human guile",
+      "function": "The word 'debt' makes the mask an obligation forced on the wearers, not a free choice."
+     },
+     {
+      "device": "juxtaposition",
+      "quote": "With torn and bleeding hearts we smile",
+      "function": "Places inner wounds beside an outward smile and exposes the gap between the two."
+     },
+     {
+      "device": "syntax",
+      "quote": "Why should the world be over-wise",
+      "function": "The rhetorical question rejects the world's claim to look into the group's grief."
+     },
+     {
+      "device": "apostrophe",
+      "quote": "O great Christ, our cries",
+      "function": "Turns from the world to a divine listener who may hear the suffering the mask hides."
+     },
+     {
+      "device": "imagery",
+      "quote": "Beneath our feet, and long the mile",
+      "function": "Physical details of a hard road stand for a long, degrading struggle."
+     },
+     {
+      "device": "refrain",
+      "quote": "But let the world dream otherwise",
+      "function": "Leads into the closing 'We wear the mask!', whose exclamation changes the refrain into a defiant declaration."
+     },
+     {
+      "device": "shift_in_tone",
+      "quote": "To thee from tortured souls arise",
+      "function": "Moves from guarded concealment to open anguish."
+     }
+    ],
+    "skills_supported": [
+     {
+      "skill": "6.B",
+      "why_supported": "The central mask metaphor is set up in the opening lines.",
+      "quote": "the mask that grins and lies"
+     },
+     {
+      "skill": "5.B",
+      "why_supported": "The connotation of 'debt' shapes how the reader understands the mask.",
+      "quote": "This debt we pay to human guile"
+     },
+     {
+      "skill": "1.E",
+      "why_supported": "The collective figure's smile contradicts its wounded heart.",
+      "quote": "With torn and bleeding hearts we smile"
+     },
+     {
+      "skill": "4.C",
+      "why_supported": "The rhetorical question and the reply 'Nay' reveal the speaker's attitude toward the world.",
+      "quote": "Why should the world be over-wise"
+     },
+     {
+      "skill": "4.A",
+      "why_supported": "The plural 'we' and 'the world' define the speaker and the speaker's relation to the observers.",
+      "quote": "Nay, let them only see us"
+     },
+     {
+      "skill": "3.D",
+      "why_supported": "The third stanza turns from concealment to open cries.",
+      "quote": "O great Christ, our cries"
+     },
+     {
+      "skill": "5.A",
+      "why_supported": "The clay and mile images work literally and figuratively at once.",
+      "quote": "Beneath our feet, and long the mile"
+     },
+     {
+      "skill": "3.C",
+      "why_supported": "The final refrain line ends the poem with an exclamation.",
+      "quote": "But let the world dream otherwise"
+     },
+     {
+      "skill": "7.B",
+      "why_supported": "The poem as a whole supports a defensible thesis about concealment as both burden and choice.",
+      "quote": "With torn and bleeding hearts we smile"
+     }
+    ]
+   },
+   "items": [
+    {
+     "archetype": "lt_poetry_6B",
+     "topic": "U2.3",
+     "skill": "6.B",
+     "cognitive": "explain",
+     "stem": "In the opening lines (line 1 and line 2), the mask is presented primarily as",
+     "options": [
+      {
+       "text": "a symbol of the speakers' personal shame at having betrayed others through their many lies",
+       "why": "The guile belongs to others: the mask is a debt paid 'to human guile', not a mark of the wearers' own betrayal.",
+       "value": null,
+       "label": "unsupported"
+      },
+      {
+       "text": "a protective shield that lets the wearers express their grief openly and safely in public",
+       "why": "The mask hides cheeks and eyes. It stops grief from showing; it does not let it out.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "a literal theatrical costume worn during a public performance of songs and dances on stage",
+       "why": "The mask covers 'torn and bleeding hearts', which are emotional wounds, so it is figurative and not a stage costume.",
+       "value": null,
+       "label": "literal_for_figurative"
+      },
+      {
+       "text": "a false public face that actively deceives while concealing the wearer's true feelings",
+       "why": "The mask 'grins and lies' and 'hides' the face, so it both deceives others and covers what the wearer really feels.",
+       "value": null,
+       "label": "correct"
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is \"a false public face that actively deceives while concealing the wearer's true feelings\". The mask 'grins and lies' and 'hides' the face, so it both deceives others and covers what the wearer really feels.\n\"a symbol of the speakers' personal shame at having betrayed others through their many lies\" is incorrect: The guile belongs to others: the mask is a debt paid 'to human guile', not a mark of the wearers' own betrayal.\n\"a protective shield that lets the wearers express their grief openly and safely in public\" is incorrect: The mask hides cheeks and eyes. It stops grief from showing; it does not let it out.\n\"a literal theatrical costume worn during a public performance of songs and dances on stage\" is incorrect: The mask covers 'torn and bleeding hearts', which are emotional wounds, so it is figurative and not a stage costume.",
+     "est_seconds": 60,
+     "evidence_quotes": [
+      "the mask that grins and lies",
+      "It hides our cheeks and shades our eyes"
+     ],
+     "ref_lines": {
+      "r1": {
+       "from": 1,
+       "to": 1
+      },
+      "r2": {
+       "from": 2,
+       "to": 2
+      }
+     },
+     "devices_used": [
+      "metaphor",
+      "personification"
+     ],
+     "real_text": {
+      "registry_id": "dunbar-mask",
+      "skill": "6.B",
+      "key_evidence": {
+       "quote": "the mask that grins and lies",
+       "from": 1,
+       "to": 1,
+       "ref": "line 1",
+       "unit": "stanza 1"
+      },
+      "distractor_evidence": [
+       {
+        "index": 0,
+        "label": "unsupported",
+        "why": "The guile belongs to others: the mask is a debt paid 'to human guile', not a mark of the wearers' own betrayal.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "This debt we pay to human guile",
+         "from": 3,
+         "to": 3,
+         "ref": "line 3",
+         "unit": "stanza 1"
+        }
+       },
+       {
+        "index": 1,
+        "label": "reversal",
+        "why": "The mask hides cheeks and eyes. It stops grief from showing; it does not let it out.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "hides our cheeks and shades our eyes",
+         "from": 2,
+         "to": 2,
+         "ref": "line 2",
+         "unit": "stanza 1"
+        }
+       },
+       {
+        "index": 2,
+        "label": "literal_for_figurative",
+        "why": "The mask covers 'torn and bleeding hearts', which are emotional wounds, so it is figurative and not a stage costume.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "With torn and bleeding hearts we smile",
+         "from": 4,
+         "to": 4,
+         "ref": "line 4",
+         "unit": "stanza 1"
+        }
+       }
+      ],
+      "verification": {
+       "solvers": [
+        "claude-opus-5-5",
+        "claude-sonnet-5-5"
+       ],
+       "solver_votes": [
+        3,
+        3
+       ],
+       "adversary": "none",
+       "judge": "key_clearly_better",
+       "panel_model": "claude-fable-5-1",
+       "panel_choice": 3,
+       "panel_agree": true,
+       "score": 0.959,
+       "band": "high",
+       "verified": true
+      }
+     },
+     "key_confidence": {
+      "score": 0.959,
+      "band": "high",
+      "solver_agreement": 1,
+      "adversary": "none",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 3,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 3,
+        "confidence": "certain"
+       },
+       {
+        "choice": 3,
+        "confidence": "likely"
+       }
+      ]
+     }
+    },
+    {
+     "archetype": "lt_poetry_1E",
+     "topic": "U2.1",
+     "skill": "1.E",
+     "cognitive": "identify",
+     "stem": "The juxtaposition in line 4 most clearly reveals that the wearers",
+     "options": [
+      {
+       "text": "resent the world so deeply that they smile only in order to mock it",
+       "why": "Nothing in the poem presents the smile as mockery. It is a debt and a concealment.",
+       "value": null,
+       "label": "unsupported"
+      },
+      {
+       "text": "have learned to feel genuine joy despite the pain they once endured",
+       "why": "The suffering continues: the wearers' cries still rise to Christ, so the smile is not real joy.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "display cheerfulness outwardly while enduring deep inner suffering",
+       "why": "'Torn and bleeding hearts' sit right beside 'we smile', which sets inner pain against an outward show.",
+       "value": null,
+       "label": "correct"
+      },
+      {
+       "text": "have suffered a physical injury that they are struggling hard to hide",
+       "why": "The wound is figurative. Later the poem places the suffering in 'tortured souls', not in bodies.",
+       "value": null,
+       "label": "literal_for_figurative"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is \"display cheerfulness outwardly while enduring deep inner suffering\". 'Torn and bleeding hearts' sit right beside 'we smile', which sets inner pain against an outward show.\n\"resent the world so deeply that they smile only in order to mock it\" is incorrect: Nothing in the poem presents the smile as mockery. It is a debt and a concealment.\n\"have learned to feel genuine joy despite the pain they once endured\" is incorrect: The suffering continues: the wearers' cries still rise to Christ, so the smile is not real joy.\n\"have suffered a physical injury that they are struggling hard to hide\" is incorrect: The wound is figurative. Later the poem places the suffering in 'tortured souls', not in bodies.",
+     "est_seconds": 50,
+     "evidence_quotes": [
+      "With torn and bleeding hearts we smile"
+     ],
+     "ref_lines": {
+      "r1": {
+       "from": 4,
+       "to": 4
+      }
+     },
+     "devices_used": [
+      "juxtaposition"
+     ],
+     "real_text": {
+      "registry_id": "dunbar-mask",
+      "skill": "1.E",
+      "key_evidence": {
+       "quote": "With torn and bleeding hearts we smile",
+       "from": 4,
+       "to": 4,
+       "ref": "line 4",
+       "unit": "stanza 1"
+      },
+      "distractor_evidence": [
+       {
+        "index": 0,
+        "label": "unsupported",
+        "why": "Nothing in the poem presents the smile as mockery. It is a debt and a concealment.",
+        "evidence_kind": "absence",
+        "evidence": null
+       },
+       {
+        "index": 1,
+        "label": "reversal",
+        "why": "The suffering continues: the wearers' cries still rise to Christ, so the smile is not real joy.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "O great Christ, our cries",
+         "from": 10,
+         "to": 10,
+         "ref": "line 10",
+         "unit": "stanza 3"
+        }
+       },
+       {
+        "index": 3,
+        "label": "literal_for_figurative",
+        "why": "The wound is figurative. Later the poem places the suffering in 'tortured souls', not in bodies.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "from tortured souls arise",
+         "from": 11,
+         "to": 11,
+         "ref": "line 11",
+         "unit": "stanza 3"
+        }
+       }
+      ],
+      "verification": {
+       "solvers": [
+        "claude-opus-5-5",
+        "claude-sonnet-5-5"
+       ],
+       "solver_votes": [
+        2,
+        2
+       ],
+       "adversary": "none",
+       "judge": "key_clearly_better",
+       "panel_model": "claude-fable-5-1",
+       "panel_choice": 2,
+       "panel_agree": true,
+       "score": 1,
+       "band": "high",
+       "verified": true
+      }
+     },
+     "key_confidence": {
+      "score": 1,
+      "band": "high",
+      "solver_agreement": 1,
+      "adversary": "none",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 2,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 2,
+        "confidence": "certain"
+       },
+       {
+        "choice": 2,
+        "confidence": "certain"
+       }
+      ]
+     }
+    },
+    {
+     "archetype": "lt_poetry_4A",
+     "topic": "U1.3",
+     "skill": "4.A",
+     "cognitive": "identify",
+     "stem": "Throughout the poem, the speaker is best described as",
+     "options": [
+      {
+       "text": "a preacher urging a congregation to abandon its masks and speak honestly to God above",
+       "why": "The speaker chooses to keep the mask and lets the world see only that.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "a member of the deceived world who at last sees through the wearers' false smiling mask",
+       "why": "The speaker wears the mask and talks about the world in the third person. The world goes on dreaming and does not see through it.",
+       "value": null,
+       "label": "misread_speaker"
+      },
+      {
+       "text": "a voice speaking for a suffering group that hides its pain from an observing world",
+       "why": "The speaker always says 'we' and 'our' and sets the group against 'the world', from which the mask hides their faces.",
+       "value": null,
+       "label": "correct"
+      },
+      {
+       "text": "a lone individual confessing private sorrows that no one else in the world has shared",
+       "why": "The plural pronouns ('our tears') show a shared, collective experience, not one person's.",
+       "value": null,
+       "label": "too_narrow"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is \"a voice speaking for a suffering group that hides its pain from an observing world\". The speaker always says 'we' and 'our' and sets the group against 'the world', from which the mask hides their faces.\n\"a preacher urging a congregation to abandon its masks and speak honestly to God above\" is incorrect: The speaker chooses to keep the mask and lets the world see only that.\n\"a member of the deceived world who at last sees through the wearers' false smiling mask\" is incorrect: The speaker wears the mask and talks about the world in the third person. The world goes on dreaming and does not see through it.\n\"a lone individual confessing private sorrows that no one else in the world has shared\" is incorrect: The plural pronouns ('our tears') show a shared, collective experience, not one person's.",
+     "est_seconds": 45,
+     "evidence_quotes": [
+      "hides our cheeks and shades our eyes",
+      "Why should the world be over-wise"
+     ],
+     "ref_lines": {},
+     "devices_used": [
+      "diction"
+     ],
+     "real_text": {
+      "registry_id": "dunbar-mask",
+      "skill": "4.A",
+      "key_evidence": {
+       "quote": "hides our cheeks and shades our eyes",
+       "from": 2,
+       "to": 2,
+       "ref": "line 2",
+       "unit": "stanza 1"
+      },
+      "distractor_evidence": [
+       {
+        "index": 0,
+        "label": "reversal",
+        "why": "The speaker chooses to keep the mask and lets the world see only that.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "let them only see us",
+         "from": 8,
+         "to": 8,
+         "ref": "line 8",
+         "unit": "stanza 2"
+        }
+       },
+       {
+        "index": 1,
+        "label": "misread_speaker",
+        "why": "The speaker wears the mask and talks about the world in the third person. The world goes on dreaming and does not see through it.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "But let the world dream otherwise",
+         "from": 14,
+         "to": 14,
+         "ref": "line 14",
+         "unit": "stanza 3"
+        }
+       },
+       {
+        "index": 3,
+        "label": "too_narrow",
+        "why": "The plural pronouns ('our tears') show a shared, collective experience, not one person's.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "In counting all our tears",
+         "from": 7,
+         "to": 7,
+         "ref": "line 7",
+         "unit": "stanza 2"
+        }
+       }
+      ],
+      "verification": {
+       "solvers": [
+        "claude-opus-5-5",
+        "claude-sonnet-5-5"
+       ],
+       "solver_votes": [
+        2,
+        2
+       ],
+       "adversary": "none",
+       "judge": "key_clearly_better",
+       "panel_model": "claude-fable-5-1",
+       "panel_choice": 2,
+       "panel_agree": true,
+       "score": 1,
+       "band": "high",
+       "verified": true
+      }
+     },
+     "key_confidence": {
+      "score": 1,
+      "band": "high",
+      "solver_agreement": 1,
+      "adversary": "none",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 2,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 2,
+        "confidence": "certain"
+       },
+       {
+        "choice": 2,
+        "confidence": "certain"
+       }
+      ]
+     }
+    },
+    {
+     "archetype": "lt_poetry_3D",
+     "topic": "U8.1",
+     "skill": "3.D",
+     "cognitive": "explain",
+     "stem": "The address in line 10 marks a shift in the poem primarily by",
+     "options": [
+      {
+       "text": "abandoning the mask image entirely in favor of a direct, open appeal for rebellion",
+       "why": "The stanza returns to the mask and lets the world keep dreaming. It contains no call to rebel.",
+       "value": null,
+       "label": "wrong_function"
+      },
+      {
+       "text": "revealing to a divine listener the anguish that the mask conceals from the world",
+       "why": "The cries go 'To thee', meaning Christ, from 'tortured souls'. The pain hidden from the world is spoken only to God.",
+       "value": null,
+       "label": "correct"
+      },
+      {
+       "text": "introducing religious imagery that celebrates the wearers' patience and joy",
+       "why": "The stanza stresses vile clay and a long mile, not celebration or joy.",
+       "value": null,
+       "label": "wrong_tone"
+      },
+      {
+       "text": "showing that the wearers have stopped suffering now that they have turned to faith",
+       "why": "The souls are still tortured as they cry out, so the suffering has not ended.",
+       "value": null,
+       "label": "reversal"
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is \"revealing to a divine listener the anguish that the mask conceals from the world\". The cries go 'To thee', meaning Christ, from 'tortured souls'. The pain hidden from the world is spoken only to God.\n\"abandoning the mask image entirely in favor of a direct, open appeal for rebellion\" is incorrect: The stanza returns to the mask and lets the world keep dreaming. It contains no call to rebel.\n\"introducing religious imagery that celebrates the wearers' patience and joy\" is incorrect: The stanza stresses vile clay and a long mile, not celebration or joy.\n\"showing that the wearers have stopped suffering now that they have turned to faith\" is incorrect: The souls are still tortured as they cry out, so the suffering has not ended.",
+     "est_seconds": 60,
+     "evidence_quotes": [
+      "O great Christ, our cries",
+      "To thee from tortured souls arise"
+     ],
+     "ref_lines": {
+      "r1": {
+       "from": 10,
+       "to": 10
+      }
+     },
+     "devices_used": [
+      "apostrophe",
+      "shift_in_tone"
+     ],
+     "real_text": {
+      "registry_id": "dunbar-mask",
+      "skill": "3.D",
+      "key_evidence": {
+       "quote": "To thee from tortured souls arise",
+       "from": 11,
+       "to": 11,
+       "ref": "line 11",
+       "unit": "stanza 3"
+      },
+      "distractor_evidence": [
+       {
+        "index": 0,
+        "label": "wrong_function",
+        "why": "The stanza returns to the mask and lets the world keep dreaming. It contains no call to rebel.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "But let the world dream otherwise",
+         "from": 14,
+         "to": 14,
+         "ref": "line 14",
+         "unit": "stanza 3"
+        }
+       },
+       {
+        "index": 2,
+        "label": "wrong_tone",
+        "why": "The stanza stresses vile clay and a long mile, not celebration or joy.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "the clay is vile",
+         "from": 12,
+         "to": 12,
+         "ref": "line 12",
+         "unit": "stanza 3"
+        }
+       },
+       {
+        "index": 3,
+        "label": "reversal",
+        "why": "The souls are still tortured as they cry out, so the suffering has not ended.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "tortured souls arise",
+         "from": 11,
+         "to": 11,
+         "ref": "line 11",
+         "unit": "stanza 3"
+        }
+       }
+      ],
+      "verification": {
+       "solvers": [
+        "claude-opus-5-5",
+        "claude-sonnet-5-5"
+       ],
+       "solver_votes": [
+        1,
+        1
+       ],
+       "adversary": "none",
+       "judge": "key_clearly_better",
+       "panel_model": "claude-fable-5-1",
+       "panel_choice": 1,
+       "panel_agree": true,
+       "score": 1,
+       "band": "high",
+       "verified": true
+      }
+     },
+     "key_confidence": {
+      "score": 1,
+      "band": "high",
+      "solver_agreement": 1,
+      "adversary": "none",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 1,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 1,
+        "confidence": "certain"
+       },
+       {
+        "choice": 1,
+        "confidence": "certain"
+       }
+      ]
+     }
+    },
+    {
+     "archetype": "lt_poetry_7B",
+     "topic": "U5.4",
+     "skill": "7.B",
+     "cognitive": "evaluate",
+     "stem": "Which of the following statements is the most defensible thesis about the poem as a whole?",
+     "options": [
+      {
+       "text": "By returning to the mask, the poem presents concealment as both a painful obligation and a deliberate refusal to expose grief to the world",
+       "why": "The mask is a 'debt' worn over bleeding hearts, yet the speaker chooses to 'let the world dream otherwise'. The poem holds both meanings at once.",
+       "value": null,
+       "label": "correct"
+      },
+      {
+       "text": "The poem uses religious imagery mainly to condemn the wearers for deceiving the world instead of trusting God to relieve their suffering",
+       "why": "The poem presents the mask as a debt imposed by others' guile. It never condemns the wearers.",
+       "value": null,
+       "label": "unsupported"
+      },
+      {
+       "text": "The poem suggests that the mask gradually heals the wearers' grief, so that by the final line their smiles have become sincere and untroubled",
+       "why": "The last stanza still speaks of tortured souls. The grief is not healed.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "The poem argues that all human beings everywhere wear masks of some kind and that honesty is therefore impossible in any human society",
+       "why": "The poem separates a specific 'we' from 'the world' that watches. It is not a claim about all people.",
+       "value": null,
+       "label": "too_broad"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is \"By returning to the mask, the poem presents concealment as both a painful obligation and a deliberate refusal to expose grief to the world\". The mask is a 'debt' worn over bleeding hearts, yet the speaker chooses to 'let the world dream otherwise'. The poem holds both meanings at once.\n\"The poem uses religious imagery mainly to condemn the wearers for deceiving the world instead of trusting God to relieve their suffering\" is incorrect: The poem presents the mask as a debt imposed by others' guile. It never condemns the wearers.\n\"The poem suggests that the mask gradually heals the wearers' grief, so that by the final line their smiles have become sincere and untroubled\" is incorrect: The last stanza still speaks of tortured souls. The grief is not healed.\n\"The poem argues that all human beings everywhere wear masks of some kind and that honesty is therefore impossible in any human society\" is incorrect: The poem separates a specific 'we' from 'the world' that watches. It is not a claim about all people.",
+     "est_seconds": 90,
+     "evidence_quotes": [
+      "With torn and bleeding hearts we smile",
+      "But let the world dream otherwise"
+     ],
+     "ref_lines": {},
+     "devices_used": [
+      "metaphor",
+      "refrain"
+     ],
+     "real_text": {
+      "registry_id": "dunbar-mask",
+      "skill": "7.B",
+      "key_evidence": {
+       "quote": "With torn and bleeding hearts we smile",
+       "from": 4,
+       "to": 4,
+       "ref": "line 4",
+       "unit": "stanza 1"
+      },
+      "distractor_evidence": [
+       {
+        "index": 1,
+        "label": "unsupported",
+        "why": "The poem presents the mask as a debt imposed by others' guile. It never condemns the wearers.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "This debt we pay to human guile",
+         "from": 3,
+         "to": 3,
+         "ref": "line 3",
+         "unit": "stanza 1"
+        }
+       },
+       {
+        "index": 2,
+        "label": "reversal",
+        "why": "The last stanza still speaks of tortured souls. The grief is not healed.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "from tortured souls arise",
+         "from": 11,
+         "to": 11,
+         "ref": "line 11",
+         "unit": "stanza 3"
+        }
+       },
+       {
+        "index": 3,
+        "label": "too_broad",
+        "why": "The poem separates a specific 'we' from 'the world' that watches. It is not a claim about all people.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "Why should the world be over-wise",
+         "from": 6,
+         "to": 6,
+         "ref": "line 6",
+         "unit": "stanza 2"
+        }
+       }
+      ],
+      "verification": {
+       "solvers": [
+        "claude-opus-5-5",
+        "claude-sonnet-5-5"
+       ],
+       "solver_votes": [
+        0,
+        0
+       ],
+       "adversary": "none",
+       "judge": "key_clearly_better",
+       "panel_model": "claude-fable-5-1",
+       "panel_choice": 0,
+       "panel_agree": true,
+       "score": 0.959,
+       "band": "high",
+       "verified": true
+      }
+     },
+     "key_confidence": {
+      "score": 0.959,
+      "band": "high",
+      "solver_agreement": 1,
+      "adversary": "none",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 0,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 0,
+        "confidence": "certain"
+       },
+       {
+        "choice": 0,
+        "confidence": "likely"
+       }
+      ]
+     }
+    },
+    {
+     "archetype": "lt_poetry_7C",
+     "topic": "U8.3",
+     "skill": "7.C",
+     "cognitive": "evaluate",
+     "stem": "A student claims that the speaker refuses to let the wearers' suffering become a spectacle for others. Which of the following commentaries best explains how the phrase \"counting all our tears and sighs\" (line 7) supports this claim?",
+     "options": [
+      {
+       "text": "It reveals that the world has already counted every tear, so hiding them now has become pointless.",
+       "why": "The question is hypothetical, and the world still 'dreams otherwise.' It has not counted anything.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "It suggests the speaker wants sympathy, since listing tears and sighs invites readers to pity the wearers.",
+       "why": "The phrase sits inside a rejection. The speaker wants the world to see only the mask, not the grief.",
+       "value": null,
+       "label": "wrong_function"
+      },
+      {
+       "text": "It casts the world's interest as a cold tallying of grief, a scrutiny the speaker declines to feed.",
+       "why": "'Counting' turns the world's attention into detached tallying. Because the speaker asks why the world should do this, the phrase shows a refusal to be put on display.",
+       "value": null,
+       "label": "correct"
+      },
+      {
+       "text": "It shows that the wearers weep often, which proves how much pain the mask must hide from view.",
+       "why": "The tears are real, but this commentary never connects the phrase to the speaker's refusal to let the world look on.",
+       "value": null,
+       "label": "partially_right"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is \"It casts the world's interest as a cold tallying of grief, a scrutiny the speaker declines to feed.\". 'Counting' turns the world's attention into detached tallying. Because the speaker asks why the world should do this, the phrase shows a refusal to be put on display.\n\"It reveals that the world has already counted every tear, so hiding them now has become pointless.\" is incorrect: The question is hypothetical, and the world still 'dreams otherwise.' It has not counted anything.\n\"It suggests the speaker wants sympathy, since listing tears and sighs invites readers to pity the wearers.\" is incorrect: The phrase sits inside a rejection. The speaker wants the world to see only the mask, not the grief.\n\"It shows that the wearers weep often, which proves how much pain the mask must hide from view.\" is incorrect: The tears are real, but this commentary never connects the phrase to the speaker's refusal to let the world look on.",
+     "est_seconds": 80,
+     "evidence_quotes": [
+      "In counting all our tears and sighs?",
+      "Why should the world be over-wise,"
+     ],
+     "ref_lines": {
+      "r1": {
+       "from": 7,
+       "to": 7
+      }
+     },
+     "devices_used": [
+      "diction"
+     ],
+     "real_text": {
+      "registry_id": "dunbar-mask",
+      "skill": "7.C",
+      "key_evidence": {
+       "quote": "In counting all our tears and sighs?",
+       "from": 7,
+       "to": 7,
+       "ref": "line 7",
+       "unit": "stanza 2"
+      },
+      "distractor_evidence": [
+       {
+        "index": 0,
+        "label": "reversal",
+        "why": "The question is hypothetical, and the world still 'dreams otherwise.' It has not counted anything.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "But let the world dream otherwise,",
+         "from": 14,
+         "to": 14,
+         "ref": "line 14",
+         "unit": "stanza 3"
+        }
+       },
+       {
+        "index": 1,
+        "label": "wrong_function",
+        "why": "The phrase sits inside a rejection. The speaker wants the world to see only the mask, not the grief.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "Nay, let them only see us, while",
+         "from": 8,
+         "to": 8,
+         "ref": "line 8",
+         "unit": "stanza 2"
+        }
+       },
+       {
+        "index": 3,
+        "label": "partially_right",
+        "why": "The tears are real, but this commentary never connects the phrase to the speaker's refusal to let the world look on.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "Why should the world be over-wise,",
+         "from": 6,
+         "to": 6,
+         "ref": "line 6",
+         "unit": "stanza 2"
+        }
+       }
+      ],
+      "verification": {
+       "solvers": [
+        "claude-opus-5-5",
+        "claude-sonnet-5-5"
+       ],
+       "solver_votes": [
+        2,
+        2
+       ],
+       "adversary": "weak",
+       "judge": "key_clearly_better",
+       "panel_model": "claude-fable-5-1",
+       "panel_choice": 2,
+       "panel_agree": true,
+       "score": 0.87,
+       "band": "medium",
+       "verified": true
+      }
+     },
+     "key_confidence": {
+      "score": 0.87,
+      "band": "medium",
+      "solver_agreement": 1,
+      "adversary": "weak",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 2,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 2,
+        "confidence": "certain"
+       },
+       {
+        "choice": 2,
+        "confidence": "certain"
+       }
+      ]
+     }
+    },
+    {
+     "archetype": "lt_poetry_3B",
+     "topic": "U1.4",
+     "skill": "3.B",
+     "cognitive": "explain",
+     "stem": "The sequence of \"We smile, but\" (line 10) followed by \"We sing, but\" (line 12) primarily serves to",
+     "options": [
+      {
+       "text": "set each outward performance against the suffering beneath it",
+       "why": "Both clauses begin with a cheerful act (smiling, singing), and 'but' at once undercuts it with cries or vile clay. The structure acts out the gap between mask and face.",
+       "value": null,
+       "label": "correct"
+      },
+      {
+       "text": "mark the moment when the wearers finally remove the mask in public",
+       "why": "The world is still left to dream, and the mask stays on to the end.",
+       "value": null,
+       "label": "unsupported"
+      },
+      {
+       "text": "list the cheerful activities the world expects of all its people",
+       "why": "The lines are about the speaker's group and its hidden pain, not about what everyone is expected to do. The 'but' clauses turn to suffering.",
+       "value": null,
+       "label": "wrong_scope"
+      },
+      {
+       "text": "show that the wearers' joy steadily grows from smiling into singing",
+       "why": "Each act is followed by anguish, not by growing joy.",
+       "value": null,
+       "label": "reversal"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is \"set each outward performance against the suffering beneath it\". Both clauses begin with a cheerful act (smiling, singing), and 'but' at once undercuts it with cries or vile clay. The structure acts out the gap between mask and face.\n\"mark the moment when the wearers finally remove the mask in public\" is incorrect: The world is still left to dream, and the mask stays on to the end.\n\"list the cheerful activities the world expects of all its people\" is incorrect: The lines are about the speaker's group and its hidden pain, not about what everyone is expected to do. The 'but' clauses turn to suffering.\n\"show that the wearers' joy steadily grows from smiling into singing\" is incorrect: Each act is followed by anguish, not by growing joy.",
+     "est_seconds": 65,
+     "evidence_quotes": [
+      "We smile, but, O great Christ, our cries",
+      "We sing, but oh the clay is vile"
+     ],
+     "ref_lines": {
+      "r1": {
+       "from": 10,
+       "to": 10
+      },
+      "r2": {
+       "from": 12,
+       "to": 12
+      }
+     },
+     "devices_used": [
+      "syntax",
+      "repetition",
+      "contrast"
+     ],
+     "real_text": {
+      "registry_id": "dunbar-mask",
+      "skill": "3.B",
+      "key_evidence": {
+       "quote": "We sing, but oh the clay is vile",
+       "from": 12,
+       "to": 12,
+       "ref": "line 12",
+       "unit": "stanza 3"
+      },
+      "distractor_evidence": [
+       {
+        "index": 1,
+        "label": "unsupported",
+        "why": "The world is still left to dream, and the mask stays on to the end.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "But let the world dream otherwise,",
+         "from": 14,
+         "to": 14,
+         "ref": "line 14",
+         "unit": "stanza 3"
+        }
+       },
+       {
+        "index": 2,
+        "label": "wrong_scope",
+        "why": "The lines are about the speaker's group and its hidden pain, not about what everyone is expected to do. The 'but' clauses turn to suffering.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "Beneath our feet, and long the mile;",
+         "from": 13,
+         "to": 13,
+         "ref": "line 13",
+         "unit": "stanza 3"
+        }
+       },
+       {
+        "index": 3,
+        "label": "reversal",
+        "why": "Each act is followed by anguish, not by growing joy.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "To thee from tortured souls arise.",
+         "from": 11,
+         "to": 11,
+         "ref": "line 11",
+         "unit": "stanza 3"
+        }
+       }
+      ],
+      "verification": {
+       "solvers": [
+        "claude-opus-5-5",
+        "claude-sonnet-5-5"
+       ],
+       "solver_votes": [
+        0,
+        0
+       ],
+       "adversary": "none",
+       "judge": "key_clearly_better",
+       "panel_model": "claude-fable-5-1",
+       "panel_choice": 0,
+       "panel_agree": true,
+       "score": 1,
+       "band": "high",
+       "verified": true
+      }
+     },
+     "key_confidence": {
+      "score": 1,
+      "band": "high",
+      "solver_agreement": 1,
+      "adversary": "none",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 0,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 0,
+        "confidence": "certain"
+       },
+       {
+        "choice": 0,
+        "confidence": "certain"
+       }
+      ]
+     }
+    },
+    {
+     "archetype": "lt_poetry_1D",
+     "topic": "U8.1",
+     "skill": "1.D",
+     "cognitive": "identify",
+     "stem": "The line \"But let the world dream otherwise\" (line 14) most clearly characterizes the relationship between the wearers and the world as one in which",
+     "options": [
+      {
+       "text": "the wearers knowingly leave the world to its easy illusion",
+       "why": "'Let' shows a deliberate choice, and 'dream' suggests a comfortable false belief. The wearers knowingly leave the world unaware.",
+       "value": null,
+       "label": "correct"
+      },
+      {
+       "text": "the wearers forgive the world warmly for its ignorance of them",
+       "why": "The speaker blames 'human guile' for the mask, which suggests resentment rather than warm forgiveness.",
+       "value": null,
+       "label": "wrong_tone"
+      },
+      {
+       "text": "the world actively forces the wearers to dream of a better life",
+       "why": "In the line it is the world that dreams, and the wearers control what the world gets to see.",
+       "value": null,
+       "label": "lexical_trap"
+      },
+      {
+       "text": "the world sees through the mask but chooses to remain silent",
+       "why": "The speaker hopes the world will not become 'over-wise.' The world does not see through the mask.",
+       "value": null,
+       "label": "reversal"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is \"the wearers knowingly leave the world to its easy illusion\". 'Let' shows a deliberate choice, and 'dream' suggests a comfortable false belief. The wearers knowingly leave the world unaware.\n\"the wearers forgive the world warmly for its ignorance of them\" is incorrect: The speaker blames 'human guile' for the mask, which suggests resentment rather than warm forgiveness.\n\"the world actively forces the wearers to dream of a better life\" is incorrect: In the line it is the world that dreams, and the wearers control what the world gets to see.\n\"the world sees through the mask but chooses to remain silent\" is incorrect: The speaker hopes the world will not become 'over-wise.' The world does not see through the mask.",
+     "est_seconds": 50,
+     "evidence_quotes": [
+      "But let the world dream otherwise,"
+     ],
+     "ref_lines": {
+      "r1": {
+       "from": 14,
+       "to": 14
+      }
+     },
+     "devices_used": [
+      "diction",
+      "contrast"
+     ],
+     "real_text": {
+      "registry_id": "dunbar-mask",
+      "skill": "1.D",
+      "key_evidence": {
+       "quote": "But let the world dream otherwise,",
+       "from": 14,
+       "to": 14,
+       "ref": "line 14",
+       "unit": "stanza 3"
+      },
+      "distractor_evidence": [
+       {
+        "index": 1,
+        "label": "wrong_tone",
+        "why": "The speaker blames 'human guile' for the mask, which suggests resentment rather than warm forgiveness.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "This debt we pay to human guile",
+         "from": 3,
+         "to": 3,
+         "ref": "line 3",
+         "unit": "stanza 1"
+        }
+       },
+       {
+        "index": 2,
+        "label": "lexical_trap",
+        "why": "In the line it is the world that dreams, and the wearers control what the world gets to see.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "Nay, let them only see us, while",
+         "from": 8,
+         "to": 8,
+         "ref": "line 8",
+         "unit": "stanza 2"
+        }
+       },
+       {
+        "index": 3,
+        "label": "reversal",
+        "why": "The speaker hopes the world will not become 'over-wise.' The world does not see through the mask.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "Why should the world be over-wise,",
+         "from": 6,
+         "to": 6,
+         "ref": "line 6",
+         "unit": "stanza 2"
+        }
+       }
+      ],
+      "verification": {
+       "solvers": [
+        "claude-opus-5-5",
+        "claude-sonnet-5-5"
+       ],
+       "solver_votes": [
+        0,
+        0
+       ],
+       "adversary": "none",
+       "judge": "key_clearly_better",
+       "panel_model": "claude-fable-5-1",
+       "panel_choice": 0,
+       "panel_agree": true,
+       "score": 0.959,
+       "band": "high",
+       "verified": true
+      }
+     },
+     "key_confidence": {
+      "score": 0.959,
+      "band": "high",
+      "solver_agreement": 1,
+      "adversary": "none",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 0,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 0,
+        "confidence": "likely"
+       },
+       {
+        "choice": 0,
+        "confidence": "certain"
+       }
+      ]
+     }
+    },
+    {
+     "archetype": "lt_poetry_7A",
+     "topic": "U2.4",
+     "skill": "7.A",
+     "cognitive": "evaluate",
+     "stem": "Which of the following claims about the wearers is best supported by line 11?",
+     "options": [
+      {
+       "text": "They resent heaven for imposing the mask and demand that it be lifted.",
+       "why": "The prayer contains no blame of heaven and no demand. The poem says the mask comes from 'human guile.'",
+       "value": null,
+       "label": "unsupported"
+      },
+      {
+       "text": "Their true anguish is voiced only to a divine listener, not the world.",
+       "why": "The cries rise 'to thee,' meaning Christ. The world, meanwhile, is left to dream otherwise, so only God hears the real suffering.",
+       "value": null,
+       "label": "correct"
+      },
+      {
+       "text": "Their suffering is mainly of the body and is felt far less in the spirit.",
+       "why": "The cries come from 'tortured souls,' which places the suffering in the spirit.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "Their cries are shared openly with everyone, including the watching world.",
+       "why": "The world is allowed to see only the mask, so the cries are not shared with everyone.",
+       "value": null,
+       "label": "too_broad"
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is \"Their true anguish is voiced only to a divine listener, not the world.\". The cries rise 'to thee,' meaning Christ. The world, meanwhile, is left to dream otherwise, so only God hears the real suffering.\n\"They resent heaven for imposing the mask and demand that it be lifted.\" is incorrect: The prayer contains no blame of heaven and no demand. The poem says the mask comes from 'human guile.'\n\"Their suffering is mainly of the body and is felt far less in the spirit.\" is incorrect: The cries come from 'tortured souls,' which places the suffering in the spirit.\n\"Their cries are shared openly with everyone, including the watching world.\" is incorrect: The world is allowed to see only the mask, so the cries are not shared with everyone.",
+     "est_seconds": 60,
+     "evidence_quotes": [
+      "O great Christ, our cries",
+      "To thee from tortured souls arise."
+     ],
+     "ref_lines": {
+      "r1": {
+       "from": 11,
+       "to": 11
+      }
+     },
+     "devices_used": [
+      "apostrophe"
+     ],
+     "real_text": {
+      "registry_id": "dunbar-mask",
+      "skill": "7.A",
+      "key_evidence": {
+       "quote": "O great Christ, our cries",
+       "from": 10,
+       "to": 10,
+       "ref": "line 10",
+       "unit": "stanza 3"
+      },
+      "distractor_evidence": [
+       {
+        "index": 0,
+        "label": "unsupported",
+        "why": "The prayer contains no blame of heaven and no demand. The poem says the mask comes from 'human guile.'",
+        "evidence_kind": "absence",
+        "evidence": null
+       },
+       {
+        "index": 2,
+        "label": "reversal",
+        "why": "The cries come from 'tortured souls,' which places the suffering in the spirit.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "from tortured souls arise",
+         "from": 11,
+         "to": 11,
+         "ref": "line 11",
+         "unit": "stanza 3"
+        }
+       },
+       {
+        "index": 3,
+        "label": "too_broad",
+        "why": "The world is allowed to see only the mask, so the cries are not shared with everyone.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "Nay, let them only see us, while",
+         "from": 8,
+         "to": 8,
+         "ref": "line 8",
+         "unit": "stanza 2"
+        }
+       }
+      ],
+      "verification": {
+       "solvers": [
+        "claude-opus-5-5",
+        "claude-sonnet-5-5"
+       ],
+       "solver_votes": [
+        1,
+        1
+       ],
+       "adversary": "weak",
+       "judge": "key_clearly_better",
+       "panel_model": "claude-fable-5-1",
+       "panel_choice": 1,
+       "panel_agree": true,
+       "score": 0.87,
+       "band": "medium",
+       "verified": true
+      }
+     },
+     "key_confidence": {
+      "score": 0.87,
+      "band": "medium",
+      "solver_agreement": 1,
+      "adversary": "weak",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 1,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 1,
+        "confidence": "certain"
+       },
+       {
+        "choice": 1,
+        "confidence": "certain"
+       }
+      ]
+     }
+    },
+    {
+     "archetype": "lt_poetry_4B",
+     "topic": "U9.2",
+     "skill": "4.B",
+     "cognitive": "explain",
+     "stem": "The poem's consistent first-person plural voice, as in line 2, primarily has which effect?",
+     "options": [
+      {
+       "text": "It lets the speaker stand apart from and coldly judge the wearers",
+       "why": "The speaker is one of the wearers and shares their bleeding hearts, so there is no detached judgment.",
+       "value": null,
+       "label": "misread_speaker"
+      },
+      {
+       "text": "It presents the masked suffering as a shared, collective experience",
+       "why": "'We' and 'our' run throughout the poem, so the mask and the pain belong to a whole group, not to one person.",
+       "value": null,
+       "label": "correct"
+      },
+      {
+       "text": "It invites the world to join the wearers in exposing their grief",
+       "why": "The 'we' sets itself against the world and refuses to let the world become 'over-wise.'",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "It confines the poem to one person's private memory of one single day",
+       "why": "The plural voice and the 'long' mile suggest a shared, ongoing condition, not one person's memory of one day.",
+       "value": null,
+       "label": "too_narrow"
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is \"It presents the masked suffering as a shared, collective experience\". 'We' and 'our' run throughout the poem, so the mask and the pain belong to a whole group, not to one person.\n\"It lets the speaker stand apart from and coldly judge the wearers\" is incorrect: The speaker is one of the wearers and shares their bleeding hearts, so there is no detached judgment.\n\"It invites the world to join the wearers in exposing their grief\" is incorrect: The 'we' sets itself against the world and refuses to let the world become 'over-wise.'\n\"It confines the poem to one person's private memory of one single day\" is incorrect: The plural voice and the 'long' mile suggest a shared, ongoing condition, not one person's memory of one day.",
+     "est_seconds": 60,
+     "evidence_quotes": [
+      "It hides our cheeks and shades our eyes",
+      "With torn and bleeding hearts we smile"
+     ],
+     "ref_lines": {
+      "r1": {
+       "from": 2,
+       "to": 2
+      }
+     },
+     "devices_used": [
+      "diction"
+     ],
+     "real_text": {
+      "registry_id": "dunbar-mask",
+      "skill": "4.B",
+      "key_evidence": {
+       "quote": "It hides our cheeks and shades our eyes",
+       "from": 2,
+       "to": 2,
+       "ref": "line 2",
+       "unit": "stanza 1"
+      },
+      "distractor_evidence": [
+       {
+        "index": 0,
+        "label": "misread_speaker",
+        "why": "The speaker is one of the wearers and shares their bleeding hearts, so there is no detached judgment.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "With torn and bleeding hearts we smile",
+         "from": 4,
+         "to": 4,
+         "ref": "line 4",
+         "unit": "stanza 1"
+        }
+       },
+       {
+        "index": 2,
+        "label": "reversal",
+        "why": "The 'we' sets itself against the world and refuses to let the world become 'over-wise.'",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "Why should the world be over-wise,",
+         "from": 6,
+         "to": 6,
+         "ref": "line 6",
+         "unit": "stanza 2"
+        }
+       },
+       {
+        "index": 3,
+        "label": "too_narrow",
+        "why": "The plural voice and the 'long' mile suggest a shared, ongoing condition, not one person's memory of one day.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "Beneath our feet, and long the mile;",
+         "from": 13,
+         "to": 13,
+         "ref": "line 13",
+         "unit": "stanza 3"
+        }
+       }
+      ],
+      "verification": {
+       "solvers": [
+        "claude-opus-5-5",
+        "claude-sonnet-5-5"
+       ],
+       "solver_votes": [
+        1,
+        1
+       ],
+       "adversary": "none",
+       "judge": "key_clearly_better",
+       "panel_model": "claude-fable-5-1",
+       "panel_choice": 1,
+       "panel_agree": true,
+       "score": 1,
+       "band": "high",
+       "verified": true
+      }
+     },
+     "key_confidence": {
+      "score": 1,
+      "band": "high",
+      "solver_agreement": 1,
+      "adversary": "none",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 1,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 1,
+        "confidence": "certain"
+       },
+       {
+        "choice": 1,
+        "confidence": "certain"
+       }
+      ]
+     }
+    },
+    {
+     "archetype": "lt_poetry_3F",
+     "topic": "U9.1",
+     "skill": "3.F",
+     "cognitive": "identify",
+     "stem": "The central conflict developed across the poem is best described as a tension between",
+     "options": [
+      {
+       "text": "the world's urge to expose the wearers and their longing to be seen",
+       "why": "The world is not trying to expose anyone, and the wearers want to stay hidden, not be seen.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "the wearers' wish to sing and the hard road beneath their feet",
+       "why": "This takes one image from the third stanza and treats it as the conflict of the whole poem.",
+       "value": null,
+       "label": "too_narrow"
+      },
+      {
+       "text": "the speaker's faith in God and doubts about whether God exists",
+       "why": "The prayer to Christ expresses no doubt. The conflict is between inner pain and the outward mask.",
+       "value": null,
+       "label": "unsupported"
+      },
+      {
+       "text": "the wearers' private anguish and the composure they must display",
+       "why": "From the mask that 'hides' and 'shades' to the 'We smile, but' clauses, the poem keeps setting hidden suffering against a required outward calm.",
+       "value": null,
+       "label": "correct"
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is \"the wearers' private anguish and the composure they must display\". From the mask that 'hides' and 'shades' to the 'We smile, but' clauses, the poem keeps setting hidden suffering against a required outward calm.\n\"the world's urge to expose the wearers and their longing to be seen\" is incorrect: The world is not trying to expose anyone, and the wearers want to stay hidden, not be seen.\n\"the wearers' wish to sing and the hard road beneath their feet\" is incorrect: This takes one image from the third stanza and treats it as the conflict of the whole poem.\n\"the speaker's faith in God and doubts about whether God exists\" is incorrect: The prayer to Christ expresses no doubt. The conflict is between inner pain and the outward mask.",
+     "est_seconds": 50,
+     "evidence_quotes": [
+      "It hides our cheeks and shades our eyes",
+      "We smile, but, O great Christ, our cries"
+     ],
+     "ref_lines": {},
+     "devices_used": [
+      "contrast",
+      "metaphor"
+     ],
+     "real_text": {
+      "registry_id": "dunbar-mask",
+      "skill": "3.F",
+      "key_evidence": {
+       "quote": "It hides our cheeks and shades our eyes",
+       "from": 2,
+       "to": 2,
+       "ref": "line 2",
+       "unit": "stanza 1"
+      },
+      "distractor_evidence": [
+       {
+        "index": 0,
+        "label": "reversal",
+        "why": "The world is not trying to expose anyone, and the wearers want to stay hidden, not be seen.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "Why should the world be over-wise,",
+         "from": 6,
+         "to": 6,
+         "ref": "line 6",
+         "unit": "stanza 2"
+        }
+       },
+       {
+        "index": 1,
+        "label": "too_narrow",
+        "why": "This takes one image from the third stanza and treats it as the conflict of the whole poem.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "Beneath our feet, and long the mile;",
+         "from": 13,
+         "to": 13,
+         "ref": "line 13",
+         "unit": "stanza 3"
+        }
+       },
+       {
+        "index": 2,
+        "label": "unsupported",
+        "why": "The prayer to Christ expresses no doubt. The conflict is between inner pain and the outward mask.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "O great Christ, our cries",
+         "from": 10,
+         "to": 10,
+         "ref": "line 10",
+         "unit": "stanza 3"
+        }
+       }
+      ],
+      "verification": {
+       "solvers": [
+        "claude-opus-5-5",
+        "claude-sonnet-5-5"
+       ],
+       "solver_votes": [
+        3,
+        3
+       ],
+       "adversary": "weak",
+       "judge": "key_clearly_better",
+       "panel_model": "claude-fable-5-1",
+       "panel_choice": 3,
+       "panel_agree": true,
+       "score": 0.87,
+       "band": "medium",
+       "verified": true
+      }
+     },
+     "key_confidence": {
+      "score": 0.87,
+      "band": "medium",
+      "solver_agreement": 1,
+      "adversary": "weak",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 3,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 3,
+        "confidence": "certain"
+       },
+       {
+        "choice": 3,
+        "confidence": "certain"
+       }
+      ]
+     }
+    }
+   ],
+   "excluded_items": [
+    {
+     "index": 1,
+     "skill": "5.B",
+     "stem": "The word \"debt\" in [[r1]] suggests that wearing the mask is",
+     "reasons": []
+    },
+    {
+     "index": 3,
+     "skill": "4.C",
+     "stem": "The rhetorical question in [[r1]] and the reply that follows ([[r2]]) convey the speaker's",
+     "reasons": []
+    },
+    {
+     "index": 6,
+     "skill": "5.A",
+     "stem": "In context, the images of \"clay\" and \"mile\" in [[r1]] and [[r2]] function most fully as",
+     "reasons": []
+    },
+    {
+     "index": 7,
+     "skill": "3.C",
+     "stem": "Which of the following best describes the function of the poem's final line, \"We wear the mask!\", which follows [[r1]]?",
+     "reasons": []
+    },
+    {
+     "index": 0,
+     "skill": "1.A",
+     "stem": "The description of the wearers as they \"mouth with myriad subtleties\" ([[r1]]) most directly suggests that they",
+     "reasons": []
+    }
+   ],
+   "assignable_size": true,
+   "set_note": ""
+  }
+ },
+ {
+  "cellId": "ap_english_literature-real-rs3",
+  "apSubjectCode": "ap_english_literature",
+  "kind": "mc",
+  "calculator": "na",
+  "reserve": false,
+  "wording": "source_first_real_text",
+  "candidateKey": "ap_english_literature-real-rs3-k0",
+  "structure": "shared_stimulus_set",
+  "archetype": "lt_real_short_rs3",
+  "pipeline": "real_text_v1",
+  "releaseTier": "sample_not_loaded",
+  "expertStatus": "unreviewed",
+  "renderVerified": false,
+  "screenVerified": false,
+  "sourceKind": "real_public_domain",
+  "registryId": "chopin-silk-stockings",
+  "keywordCode": "U2.3",
+  "unitCode": "2",
+  "skillPrimary": "5.B",
+  "reviewState": "auto_passed",
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "payload": {
+   "layout_status": "not verified identical to the official AP Central preview: layout was checked only against the ALTON PassageBlock at 390px and 1280px (docs/ap/englit-material-audit.md section 6)",
+   "archetype": "lt_real_short_rs3",
+   "topic": "U2.3",
+   "skill": "5.B",
+   "calculator": "na",
+   "set_intro": "Public-domain source text\nA Pair of Silk Stockings\nby Kate Chopin\nThe following passage from a short story is by Kate Chopin (1897). This is an excerpt.\n\n```passage\n    Little Mrs. Sommers one day found herself the\nunexpected possessor of fifteen dollars. It seemed to\nher a very large amount of money, and the way in which\nit stuffed and bulged her worn old porte-monnaie gave\nher a feeling of importance such as she had not enjoyed\nfor years.\n\n    The question of investment was one that occupied her\ngreatly. For a day or two she walked about apparently in\na dreamy state, but really absorbed in speculation and\ncalculation. She did not wish to act hastily, to do\nanything she might afterward regret. But it was during\nthe still hours of the night when she lay awake\nrevolving plans in her mind that she seemed to see her\nway clearly toward a proper and judicious use of the\nmoney.\n\n    A dollar or two should be added to the price usually\npaid for Janie’s shoes, which would insure their lasting\nan appreciable time longer than they usually did. She\nwould buy so and so many yards of percale for new shirt\nwaists for the boys and Janie and Mag. She had intended\nto make the old ones do by skilful patching. Mag should\nhave another gown. She had seen some beautiful patterns,\nveritable bargains in the shop windows. And still there\nwould be left enough for new stockings—two pairs\napiece—and what darning that would save for a while! She\nwould get caps for the boys and sailor-hats for the\ngirls. The vision of her little brood looking fresh and\ndainty and new for once in their lives excited her and\nmade her restless and wakeful with anticipation.\n\n    The neighbors sometimes talked of certain “better\ndays” that little Mrs. Sommers had known before she had\never thought of being Mrs. Sommers. She herself indulged\nin no such morbid retrospection. She had no time—no\nsecond of time to devote to the past. The needs of the\npresent absorbed her every faculty. A vision of the\nfuture like some dim, gaunt monster sometimes appalled\nher, but luckily to-morrow never comes.\n\n    Mrs. Sommers was one who knew the value of bargains;\nwho could stand for hours making her way inch by inch\ntoward the desired object that was selling below cost.\nShe could elbow her way if need be; she had learned to\nclutch a piece of goods and hold it and stick to it with\npersistence and determination till her turn came to be\nserved, no matter when it came.\n\n    But that day she was a little faint and tired. She\nhad swallowed a light luncheon—no! when she came to\nthink of it, between getting the children fed and the\nplace righted, and preparing herself for the shopping\nbout, she had actually forgotten to eat any luncheon at\nall!\n\n    She sat herself upon a revolving stool before a\ncounter that was comparatively deserted, trying to\ngather strength and courage to charge through an eager\nmultitude that was besieging breastworks of shirting and\nfigured lawn. An all-gone limp feeling had come over her\nand she rested her hand aimlessly upon the counter. She\nwore no gloves. By degrees she grew aware that her hand\nhad encountered something very soothing, very pleasant\nto touch. She looked down to see that her hand lay upon\na pile of silk stockings. A placard near by announced\nthat they had been reduced in price from two dollars and\nfifty cents to one dollar and ninety-eight cents; and a\nyoung girl who stood behind the counter asked her if she\nwished to examine their line of silk hosiery. She\nsmiled, just as if she had been asked to inspect a tiara\nof diamonds with the ultimate view of purchasing it. But\nshe went on feeling the soft, sheeny luxurious\nthings—with both hands now, holding them up to see them\nglisten, and to feel them glide serpent-like through her\nfingers.\n```",
+   "lt_passage": {
+    "form": "prose",
+    "group": "short",
+    "title": "A Pair of Silk Stockings",
+    "headnote": "The following passage from a short story is by Kate Chopin (1897). This is an excerpt.",
+    "stanzas": [
+     [
+      "    Little Mrs. Sommers one day found herself the",
+      "unexpected possessor of fifteen dollars. It seemed to",
+      "her a very large amount of money, and the way in which",
+      "it stuffed and bulged her worn old porte-monnaie gave",
+      "her a feeling of importance such as she had not enjoyed",
+      "for years."
+     ],
+     [
+      "    The question of investment was one that occupied her",
+      "greatly. For a day or two she walked about apparently in",
+      "a dreamy state, but really absorbed in speculation and",
+      "calculation. She did not wish to act hastily, to do",
+      "anything she might afterward regret. But it was during",
+      "the still hours of the night when she lay awake",
+      "revolving plans in her mind that she seemed to see her",
+      "way clearly toward a proper and judicious use of the",
+      "money."
+     ],
+     [
+      "    A dollar or two should be added to the price usually",
+      "paid for Janie’s shoes, which would insure their lasting",
+      "an appreciable time longer than they usually did. She",
+      "would buy so and so many yards of percale for new shirt",
+      "waists for the boys and Janie and Mag. She had intended",
+      "to make the old ones do by skilful patching. Mag should",
+      "have another gown. She had seen some beautiful patterns,",
+      "veritable bargains in the shop windows. And still there",
+      "would be left enough for new stockings—two pairs",
+      "apiece—and what darning that would save for a while! She",
+      "would get caps for the boys and sailor-hats for the",
+      "girls. The vision of her little brood looking fresh and",
+      "dainty and new for once in their lives excited her and",
+      "made her restless and wakeful with anticipation."
+     ],
+     [
+      "    The neighbors sometimes talked of certain “better",
+      "days” that little Mrs. Sommers had known before she had",
+      "ever thought of being Mrs. Sommers. She herself indulged",
+      "in no such morbid retrospection. She had no time—no",
+      "second of time to devote to the past. The needs of the",
+      "present absorbed her every faculty. A vision of the",
+      "future like some dim, gaunt monster sometimes appalled",
+      "her, but luckily to-morrow never comes."
+     ],
+     [
+      "    Mrs. Sommers was one who knew the value of bargains;",
+      "who could stand for hours making her way inch by inch",
+      "toward the desired object that was selling below cost.",
+      "She could elbow her way if need be; she had learned to",
+      "clutch a piece of goods and hold it and stick to it with",
+      "persistence and determination till her turn came to be",
+      "served, no matter when it came."
+     ],
+     [
+      "    But that day she was a little faint and tired. She",
+      "had swallowed a light luncheon—no! when she came to",
+      "think of it, between getting the children fed and the",
+      "place righted, and preparing herself for the shopping",
+      "bout, she had actually forgotten to eat any luncheon at",
+      "all!"
+     ],
+     [
+      "    She sat herself upon a revolving stool before a",
+      "counter that was comparatively deserted, trying to",
+      "gather strength and courage to charge through an eager",
+      "multitude that was besieging breastworks of shirting and",
+      "figured lawn. An all-gone limp feeling had come over her",
+      "and she rested her hand aimlessly upon the counter. She",
+      "wore no gloves. By degrees she grew aware that her hand",
+      "had encountered something very soothing, very pleasant",
+      "to touch. She looked down to see that her hand lay upon",
+      "a pile of silk stockings. A placard near by announced",
+      "that they had been reduced in price from two dollars and",
+      "fifty cents to one dollar and ninety-eight cents; and a",
+      "young girl who stood behind the counter asked her if she",
+      "wished to examine their line of silk hosiery. She",
+      "smiled, just as if she had been asked to inspect a tiara",
+      "of diamonds with the ultimate view of purchasing it. But",
+      "she went on feeling the soft, sheeny luxurious",
+      "things—with both hands now, holding them up to see them",
+      "glisten, and to feel them glide serpent-like through her",
+      "fingers."
+     ]
+    ],
+    "line_count": 70
+   },
+   "provenance": {
+    "kind": "public_domain",
+    "registry_id": "chopin-silk-stockings",
+    "author": "Kate Chopin",
+    "translator": null,
+    "year": 1897,
+    "repository": "Project Gutenberg (gutenberg.org)",
+    "url": "https://www.gutenberg.org/ebooks/160",
+    "reuse_basis": "United States public domain: story published 1897; author died 1904. The repository states the eBook is not protected by U.S. copyright; the text is reproduced without the repository's trademark or license header.",
+    "text_sha256": "f79f437dc083d0c6acd7aa2d2ae4254f67d8a7e6e2ce522525fcc859131173ea",
+    "excerpt": {
+     "unit": "paragraph",
+     "from": 1,
+     "to": 7,
+     "whole_work": false,
+     "note": "Opening of the story: paragraphs 1-7 of the story (about 640 words), ending where Mrs. Sommers sits at the stocking counter."
+    },
+    "modifications": [
+     "Repository hard-wrap rejoined into paragraphs (one stored line per paragraph).",
+     "Removed italic underscore markup.",
+     "Title line omitted."
+    ]
+   },
+   "text_map": {
+    "central_idea": "A poor, self-denying mother who unexpectedly receives fifteen dollars carefully plans to spend all of it on her children. On the shopping day, tired and unfed, she lets her guard down and is drawn by touch to a pile of silk stockings, a sensuous luxury meant only for herself.",
+    "speaker_or_narrator": "A third-person narrator who mostly stays close to Mrs. Sommers's mind, sometimes slipping into her voice (\"no! when she came to think of it\"). The narrator's tone is sympathetic but wry: grand words like \"investment\" and military diction are applied to ordinary shopping.",
+    "structure_and_shifts": [
+     {
+      "quote": "The question of investment was one that occupied her",
+      "from": "surprise at the windfall",
+      "to": "careful, sleepless planning"
+     },
+     {
+      "quote": "The neighbors sometimes talked of certain",
+      "from": "plans for the children",
+      "to": "what she will and will not think about (past and future)"
+     },
+     {
+      "quote": "But that day she was a little faint and tired",
+      "from": "habitual determination as a bargain hunter",
+      "to": "unusual weakness and fatigue"
+     },
+     {
+      "quote": "her hand had encountered something very soothing",
+      "from": "plan and effort",
+      "to": "chance contact and sensuous temptation"
+     }
+    ],
+    "devices": [
+     {
+      "device": "diction",
+      "quote": "The question of investment was one that occupied her",
+      "function": "A financial word gives a small sum mock-serious weight and shows how much the money means to her."
+     },
+     {
+      "device": "imagery",
+      "quote": "The vision of her little brood looking fresh and dainty",
+      "function": "Shows that her imagined pleasure is entirely the children's."
+     },
+     {
+      "device": "simile",
+      "quote": "like some dim, gaunt monster sometimes appalled her",
+      "function": "Makes the future a vague but menacing threat."
+     },
+     {
+      "device": "irony",
+      "quote": "but luckily to-morrow never comes",
+      "function": "A wry remark showing that she copes by refusing to look ahead."
+     },
+     {
+      "device": "free_indirect_discourse",
+      "quote": "when she came to think of it",
+      "function": "Puts the reader inside her startled discovery that she forgot to eat."
+     },
+     {
+      "device": "metaphor",
+      "quote": "charge through an eager multitude that was besieging breastworks",
+      "function": "Mock-heroic military diction turns shopping into a battle."
+     },
+     {
+      "device": "simile",
+      "quote": "just as if she had been asked to inspect a tiara",
+      "function": "Shows that she thinks of the luxury as far beyond her reach."
+     },
+     {
+      "device": "imagery",
+      "quote": "glide serpent-like through her fingers",
+      "function": "Sensuous, tempting detail suggests seduction."
+     },
+     {
+      "device": "contrast",
+      "quote": "Mrs. Sommers was one who knew the value of bargains",
+      "function": "Her usual toughness is set against her later weakness."
+     }
+    ],
+    "skills_supported": [
+     {
+      "skill": "5.B",
+      "why_supported": "The word \"investment\" has a weighty financial register.",
+      "quote": "The question of investment was one that occupied her"
+     },
+     {
+      "skill": "1.A",
+      "why_supported": "Her plans reveal that she puts her children first.",
+      "quote": "The vision of her little brood looking fresh and dainty"
+     },
+     {
+      "skill": "4.C",
+      "why_supported": "The narrator's wry asides and military diction reveal an attitude toward her.",
+      "quote": "but luckily to-morrow never comes"
+     },
+     {
+      "skill": "6.A",
+      "why_supported": "The text contains a simile comparing the future to a monster.",
+      "quote": "like some dim, gaunt monster sometimes appalled her"
+     },
+     {
+      "skill": "3.D",
+      "why_supported": "Her usual determination contrasts with her weakness on that day.",
+      "quote": "But that day she was a little faint and tired"
+     },
+     {
+      "skill": "4.B",
+      "why_supported": "The point of view slips into her own self-correcting voice.",
+      "quote": "when she came to think of it"
+     },
+     {
+      "skill": "3.E",
+      "why_supported": "The chance discovery of the stockings is the key event.",
+      "quote": "her hand had encountered something very soothing"
+     },
+     {
+      "skill": "1.E",
+      "why_supported": "Her smile conflicts with her continued handling of the stockings.",
+      "quote": "But she went on feeling the soft, sheeny luxurious"
+     },
+     {
+      "skill": "7.B",
+      "why_supported": "The whole passage supports a thesis about self-denial and desire.",
+      "quote": "glide serpent-like through her fingers"
+     }
+    ]
+   },
+   "items": [
+    {
+     "archetype": "lt_short_5B",
+     "topic": "U2.3",
+     "skill": "5.B",
+     "cognitive": "explain",
+     "stem": "The narrator's use of the word \"investment\" (line 7) primarily serves to",
+     "options": [
+      {
+       "text": "lend a modest sum the gravity of a weighty financial decision",
+       "why": "The financial word dignifies fifteen dollars and matches her serious, long deliberation over how to spend it.",
+       "value": null,
+       "label": "correct"
+      },
+      {
+       "text": "reveal her long past experience managing large sums of money",
+       "why": "The sum seems large to her, which shows she is not used to having money.",
+       "value": null,
+       "label": "unsupported"
+      },
+      {
+       "text": "suggest that she plans to grow the money through a business",
+       "why": "This takes \"investment\" literally. She plans to spend the money on goods.",
+       "value": null,
+       "label": "lexical_trap"
+      },
+      {
+       "text": "mock Mrs. Sommers for treating her windfall with careless haste",
+       "why": "She is deliberately careful, not hasty.",
+       "value": null,
+       "label": "reversal"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is \"lend a modest sum the gravity of a weighty financial decision\". The financial word dignifies fifteen dollars and matches her serious, long deliberation over how to spend it.\n\"reveal her long past experience managing large sums of money\" is incorrect: The sum seems large to her, which shows she is not used to having money.\n\"suggest that she plans to grow the money through a business\" is incorrect: This takes \"investment\" literally. She plans to spend the money on goods.\n\"mock Mrs. Sommers for treating her windfall with careless haste\" is incorrect: She is deliberately careful, not hasty.",
+     "est_seconds": 60,
+     "evidence_quotes": [
+      "The question of investment was one that occupied her",
+      "She did not wish to act hastily"
+     ],
+     "ref_lines": {
+      "r1": {
+       "from": 7,
+       "to": 7
+      }
+     },
+     "devices_used": [
+      "diction"
+     ],
+     "real_text": {
+      "registry_id": "chopin-silk-stockings",
+      "skill": "5.B",
+      "key_evidence": {
+       "quote": "The question of investment was one that occupied her",
+       "from": 7,
+       "to": 7,
+       "ref": "line 7",
+       "unit": "paragraph 2"
+      },
+      "distractor_evidence": [
+       {
+        "index": 1,
+        "label": "unsupported",
+        "why": "The sum seems large to her, which shows she is not used to having money.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "It seemed to her a very large amount of money",
+         "from": 2,
+         "to": 3,
+         "ref": "lines 2-3",
+         "unit": "paragraph 1"
+        }
+       },
+       {
+        "index": 2,
+        "label": "lexical_trap",
+        "why": "This takes \"investment\" literally. She plans to spend the money on goods.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "A dollar or two should be added to the price",
+         "from": 16,
+         "to": 16,
+         "ref": "line 16",
+         "unit": "paragraph 3"
+        }
+       },
+       {
+        "index": 3,
+        "label": "reversal",
+        "why": "She is deliberately careful, not hasty.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "She did not wish to act hastily",
+         "from": 10,
+         "to": 10,
+         "ref": "line 10",
+         "unit": "paragraph 2"
+        }
+       }
+      ],
+      "verification": {
+       "solvers": [
+        "claude-opus-5-5",
+        "claude-sonnet-5-5"
+       ],
+       "solver_votes": [
+        0,
+        0
+       ],
+       "adversary": "none",
+       "judge": "key_clearly_better",
+       "panel_model": "claude-fable-5-1",
+       "panel_choice": 0,
+       "panel_agree": true,
+       "score": 0.959,
+       "band": "high",
+       "verified": true
+      }
+     },
+     "key_confidence": {
+      "score": 0.959,
+      "band": "high",
+      "solver_agreement": 1,
+      "adversary": "none",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 0,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 0,
+        "confidence": "certain"
+       },
+       {
+        "choice": 0,
+        "confidence": "likely"
+       }
+      ]
+     }
+    },
+    {
+     "archetype": "lt_short_1A",
+     "topic": "U1.1",
+     "skill": "1.A",
+     "cognitive": "identify",
+     "stem": "The plans described in the third paragraph, culminating in \"The vision of her little brood\" (lines 27-28), most clearly reveal Mrs. Sommers as",
+     "options": [
+      {
+       "text": "impulsive in spending money as soon as it comes into her hands",
+       "why": "She deliberates for days and avoids acting hastily.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "devoted to her children's needs to the exclusion of her own",
+       "why": "Every item she plans to buy is for the children, and her excitement comes from imagining them dressed new.",
+       "value": null,
+       "label": "correct"
+      },
+      {
+       "text": "concerned chiefly with making her children's shoes last longer",
+       "why": "The shoes are only one item among many: percale, a gown, stockings and hats.",
+       "value": null,
+       "label": "too_narrow"
+      },
+      {
+       "text": "eager to impress her neighbors with her family's appearance",
+       "why": "Her plans never mention impressing the neighbors.",
+       "value": null,
+       "label": "unsupported"
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is \"devoted to her children's needs to the exclusion of her own\". Every item she plans to buy is for the children, and her excitement comes from imagining them dressed new.\n\"impulsive in spending money as soon as it comes into her hands\" is incorrect: She deliberates for days and avoids acting hastily.\n\"concerned chiefly with making her children's shoes last longer\" is incorrect: The shoes are only one item among many: percale, a gown, stockings and hats.\n\"eager to impress her neighbors with her family's appearance\" is incorrect: Her plans never mention impressing the neighbors.",
+     "est_seconds": 50,
+     "evidence_quotes": [
+      "The vision of her little brood looking fresh and dainty"
+     ],
+     "ref_lines": {
+      "r1": {
+       "from": 27,
+       "to": 28
+      }
+     },
+     "devices_used": [
+      "imagery"
+     ],
+     "real_text": {
+      "registry_id": "chopin-silk-stockings",
+      "skill": "1.A",
+      "key_evidence": {
+       "quote": "The vision of her little brood looking fresh and dainty",
+       "from": 27,
+       "to": 28,
+       "ref": "lines 27-28",
+       "unit": "paragraph 3"
+      },
+      "distractor_evidence": [
+       {
+        "index": 0,
+        "label": "reversal",
+        "why": "She deliberates for days and avoids acting hastily.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "She did not wish to act hastily",
+         "from": 10,
+         "to": 10,
+         "ref": "line 10",
+         "unit": "paragraph 2"
+        }
+       },
+       {
+        "index": 2,
+        "label": "too_narrow",
+        "why": "The shoes are only one item among many: percale, a gown, stockings and hats.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "She would buy so and so many yards of percale",
+         "from": 18,
+         "to": 19,
+         "ref": "lines 18-19",
+         "unit": "paragraph 3"
+        }
+       },
+       {
+        "index": 3,
+        "label": "unsupported",
+        "why": "Her plans never mention impressing the neighbors.",
+        "evidence_kind": "absence",
+        "evidence": null
+       }
+      ],
+      "verification": {
+       "solvers": [
+        "claude-opus-5-5",
+        "claude-sonnet-5-5"
+       ],
+       "solver_votes": [
+        1,
+        1
+       ],
+       "adversary": "none",
+       "judge": "key_clearly_better",
+       "panel_model": "claude-fable-5-1",
+       "panel_choice": 1,
+       "panel_agree": true,
+       "score": 0.918,
+       "band": "high",
+       "verified": true
+      }
+     },
+     "key_confidence": {
+      "score": 0.918,
+      "band": "high",
+      "solver_agreement": 1,
+      "adversary": "none",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 1,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 1,
+        "confidence": "likely"
+       },
+       {
+        "choice": 1,
+        "confidence": "likely"
+       }
+      ]
+     }
+    },
+    {
+     "archetype": "lt_short_4C",
+     "topic": "U4.3",
+     "skill": "4.C",
+     "cognitive": "explain",
+     "stem": "The narrator's remark \"but luckily to-morrow never comes\" (line 37) conveys a tone best described as",
+     "options": [
+      {
+       "text": "nostalgic, echoing the neighbors' talk of her lost and better days",
+       "why": "The nostalgia belongs to the neighbors, and the narrator says she rejects such retrospection.",
+       "value": null,
+       "label": "misread_speaker"
+      },
+      {
+       "text": "sincerely hopeful, assuring the reader that her future will be quite secure",
+       "why": "The future is described as a monster that appalls her, not as something secure.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "wryly ironic, treating her avoidance of the future as a fragile comfort",
+       "why": "\"Luckily\" is wry. Tomorrow always comes, so her escape from the dreaded future is only a way of coping.",
+       "value": null,
+       "label": "correct"
+      },
+      {
+       "text": "openly scornful, condemning her for failing to plan for her family",
+       "why": "The narrator is sympathetic, showing that present needs consume her and that she plans carefully.",
+       "value": null,
+       "label": "wrong_tone"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is \"wryly ironic, treating her avoidance of the future as a fragile comfort\". \"Luckily\" is wry. Tomorrow always comes, so her escape from the dreaded future is only a way of coping.\n\"nostalgic, echoing the neighbors' talk of her lost and better days\" is incorrect: The nostalgia belongs to the neighbors, and the narrator says she rejects such retrospection.\n\"sincerely hopeful, assuring the reader that her future will be quite secure\" is incorrect: The future is described as a monster that appalls her, not as something secure.\n\"openly scornful, condemning her for failing to plan for her family\" is incorrect: The narrator is sympathetic, showing that present needs consume her and that she plans carefully.",
+     "est_seconds": 60,
+     "evidence_quotes": [
+      "but luckily to-morrow never comes",
+      "like some dim, gaunt monster sometimes appalled her"
+     ],
+     "ref_lines": {
+      "r1": {
+       "from": 37,
+       "to": 37
+      }
+     },
+     "devices_used": [
+      "irony",
+      "diction"
+     ],
+     "real_text": {
+      "registry_id": "chopin-silk-stockings",
+      "skill": "4.C",
+      "key_evidence": {
+       "quote": "but luckily to-morrow never comes",
+       "from": 37,
+       "to": 37,
+       "ref": "line 37",
+       "unit": "paragraph 4"
+      },
+      "distractor_evidence": [
+       {
+        "index": 0,
+        "label": "misread_speaker",
+        "why": "The nostalgia belongs to the neighbors, and the narrator says she rejects such retrospection.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "She herself indulged in no such morbid retrospection",
+         "from": 32,
+         "to": 33,
+         "ref": "lines 32-33",
+         "unit": "paragraph 4"
+        }
+       },
+       {
+        "index": 1,
+        "label": "reversal",
+        "why": "The future is described as a monster that appalls her, not as something secure.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "like some dim, gaunt monster sometimes appalled her",
+         "from": 36,
+         "to": 37,
+         "ref": "lines 36-37",
+         "unit": "paragraph 4"
+        }
+       },
+       {
+        "index": 3,
+        "label": "wrong_tone",
+        "why": "The narrator is sympathetic, showing that present needs consume her and that she plans carefully.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "The needs of the present absorbed her every faculty",
+         "from": 34,
+         "to": 35,
+         "ref": "lines 34-35",
+         "unit": "paragraph 4"
+        }
+       }
+      ],
+      "verification": {
+       "solvers": [
+        "claude-opus-5-5",
+        "claude-sonnet-5-5"
+       ],
+       "solver_votes": [
+        2,
+        2
+       ],
+       "adversary": "none",
+       "judge": "key_clearly_better",
+       "panel_model": "claude-fable-5-1",
+       "panel_choice": 2,
+       "panel_agree": true,
+       "score": 0.959,
+       "band": "high",
+       "verified": true
+      }
+     },
+     "key_confidence": {
+      "score": 0.959,
+      "band": "high",
+      "solver_agreement": 1,
+      "adversary": "none",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 2,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 2,
+        "confidence": "certain"
+       },
+       {
+        "choice": 2,
+        "confidence": "likely"
+       }
+      ]
+     }
+    },
+    {
+     "archetype": "lt_short_6A",
+     "topic": "U7.3",
+     "skill": "6.A",
+     "cognitive": "identify",
+     "stem": "The simile in lines 36-37 primarily suggests that",
+     "options": [
+      {
+       "text": "the fifteen dollars will soon prove to be a burden rather than a gift",
+       "why": "The money gives her a feeling of importance. The simile concerns the future, not the money.",
+       "value": null,
+       "label": "unsupported"
+      },
+      {
+       "text": "her memories of the past torment her more than her worries about tomorrow",
+       "why": "She gives no time at all to the past.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "Mrs. Sommers is haunted at night by frightening dreams of creatures",
+       "why": "The monster is a figure of speech. At night she lies awake making plans.",
+       "value": null,
+       "label": "literal_for_figurative"
+      },
+      {
+       "text": "the future looms as a vague but menacing threat she cannot afford to face",
+       "why": "\"Dim\" makes the threat vague and \"gaunt monster\" makes it menacing, with a hint of want, so she pushes it away.",
+       "value": null,
+       "label": "correct"
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is \"the future looms as a vague but menacing threat she cannot afford to face\". \"Dim\" makes the threat vague and \"gaunt monster\" makes it menacing, with a hint of want, so she pushes it away.\n\"the fifteen dollars will soon prove to be a burden rather than a gift\" is incorrect: The money gives her a feeling of importance. The simile concerns the future, not the money.\n\"her memories of the past torment her more than her worries about tomorrow\" is incorrect: She gives no time at all to the past.\n\"Mrs. Sommers is haunted at night by frightening dreams of creatures\" is incorrect: The monster is a figure of speech. At night she lies awake making plans.",
+     "est_seconds": 50,
+     "evidence_quotes": [
+      "A vision of the future like some dim, gaunt monster"
+     ],
+     "ref_lines": {
+      "r1": {
+       "from": 36,
+       "to": 37
+      }
+     },
+     "devices_used": [
+      "simile"
+     ],
+     "real_text": {
+      "registry_id": "chopin-silk-stockings",
+      "skill": "6.A",
+      "key_evidence": {
+       "quote": "A vision of the future like some dim, gaunt monster",
+       "from": 35,
+       "to": 36,
+       "ref": "lines 35-36",
+       "unit": "paragraph 4"
+      },
+      "distractor_evidence": [
+       {
+        "index": 0,
+        "label": "unsupported",
+        "why": "The money gives her a feeling of importance. The simile concerns the future, not the money.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "gave her a feeling of importance",
+         "from": 4,
+         "to": 5,
+         "ref": "lines 4-5",
+         "unit": "paragraph 1"
+        }
+       },
+       {
+        "index": 1,
+        "label": "reversal",
+        "why": "She gives no time at all to the past.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "no second of time to devote to the past",
+         "from": 33,
+         "to": 34,
+         "ref": "lines 33-34",
+         "unit": "paragraph 4"
+        }
+       },
+       {
+        "index": 2,
+        "label": "literal_for_figurative",
+        "why": "The monster is a figure of speech. At night she lies awake making plans.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "she lay awake revolving plans in her mind",
+         "from": 12,
+         "to": 13,
+         "ref": "lines 12-13",
+         "unit": "paragraph 2"
+        }
+       }
+      ],
+      "verification": {
+       "solvers": [
+        "claude-opus-5-5",
+        "claude-sonnet-5-5"
+       ],
+       "solver_votes": [
+        3,
+        3
+       ],
+       "adversary": "none",
+       "judge": "key_clearly_better",
+       "panel_model": "claude-fable-5-1",
+       "panel_choice": 3,
+       "panel_agree": true,
+       "score": 0.959,
+       "band": "high",
+       "verified": true
+      }
+     },
+     "key_confidence": {
+      "score": 0.959,
+      "band": "high",
+      "solver_agreement": 1,
+      "adversary": "none",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 3,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 3,
+        "confidence": "certain"
+       },
+       {
+        "choice": 3,
+        "confidence": "likely"
+       }
+      ]
+     }
+    },
+    {
+     "archetype": "lt_short_3D",
+     "topic": "U4.4",
+     "skill": "3.D",
+     "cognitive": "explain",
+     "stem": "The shift from the fifth paragraph's portrait of Mrs. Sommers as a persistent bargain hunter to the sentence beginning \"But that day\" (line 45) primarily serves to",
+     "options": [
+      {
+       "text": "emphasize only the physical cost of skipping a meal on a busy shopping day",
+       "why": "Her hunger is real, but the shift matters because it leads to her encounter with the stockings.",
+       "value": null,
+       "label": "partially_right"
+      },
+      {
+       "text": "explain why she will abandon shopping and return home without buying",
+       "why": "She is resting to gather strength to go on shopping, not to give up.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "show that her bargain-hunting skills have always been exaggerated by others",
+       "why": "The narrator affirms her skill and never suggests that others exaggerate it.",
+       "value": null,
+       "label": "unsupported"
+      },
+      {
+       "text": "mark a rare lapse in her habitual vigilance, leaving her open to temptation",
+       "why": "Her usual toughness is set against an unusual limpness, which prepares for her surrender to the stockings.",
+       "value": null,
+       "label": "correct"
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is \"mark a rare lapse in her habitual vigilance, leaving her open to temptation\". Her usual toughness is set against an unusual limpness, which prepares for her surrender to the stockings.\n\"emphasize only the physical cost of skipping a meal on a busy shopping day\" is incorrect: Her hunger is real, but the shift matters because it leads to her encounter with the stockings.\n\"explain why she will abandon shopping and return home without buying\" is incorrect: She is resting to gather strength to go on shopping, not to give up.\n\"show that her bargain-hunting skills have always been exaggerated by others\" is incorrect: The narrator affirms her skill and never suggests that others exaggerate it.",
+     "est_seconds": 70,
+     "evidence_quotes": [
+      "An all-gone limp feeling had come over her",
+      "Mrs. Sommers was one who knew the value of bargains"
+     ],
+     "ref_lines": {
+      "r1": {
+       "from": 45,
+       "to": 45
+      }
+     },
+     "devices_used": [
+      "contrast",
+      "shift_in_tone"
+     ],
+     "real_text": {
+      "registry_id": "chopin-silk-stockings",
+      "skill": "3.D",
+      "key_evidence": {
+       "quote": "An all-gone limp feeling had come over her",
+       "from": 55,
+       "to": 55,
+       "ref": "line 55",
+       "unit": "paragraph 7"
+      },
+      "distractor_evidence": [
+       {
+        "index": 0,
+        "label": "partially_right",
+        "why": "Her hunger is real, but the shift matters because it leads to her encounter with the stockings.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "By degrees she grew aware that her hand",
+         "from": 57,
+         "to": 57,
+         "ref": "line 57",
+         "unit": "paragraph 7"
+        }
+       },
+       {
+        "index": 1,
+        "label": "reversal",
+        "why": "She is resting to gather strength to go on shopping, not to give up.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "trying to gather strength and courage",
+         "from": 52,
+         "to": 53,
+         "ref": "lines 52-53",
+         "unit": "paragraph 7"
+        }
+       },
+       {
+        "index": 2,
+        "label": "unsupported",
+        "why": "The narrator affirms her skill and never suggests that others exaggerate it.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "Mrs. Sommers was one who knew the value of bargains",
+         "from": 38,
+         "to": 38,
+         "ref": "line 38",
+         "unit": "paragraph 5"
+        }
+       }
+      ],
+      "verification": {
+       "solvers": [
+        "claude-opus-5-5",
+        "claude-sonnet-5-5"
+       ],
+       "solver_votes": [
+        3,
+        3
+       ],
+       "adversary": "none",
+       "judge": "key_clearly_better",
+       "panel_model": "claude-fable-5-1",
+       "panel_choice": 3,
+       "panel_agree": true,
+       "score": 0.959,
+       "band": "high",
+       "verified": true
+      }
+     },
+     "key_confidence": {
+      "score": 0.959,
+      "band": "high",
+      "solver_agreement": 1,
+      "adversary": "none",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 3,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 3,
+        "confidence": "certain"
+       },
+       {
+        "choice": 3,
+        "confidence": "likely"
+       }
+      ]
+     }
+    },
+    {
+     "archetype": "lt_short_4B",
+     "topic": "U4.3",
+     "skill": "4.B",
+     "cognitive": "explain",
+     "stem": "In the sixth paragraph, the narration's abrupt self-correction after \"She had swallowed a light luncheon\" (lines 45-46) primarily serves to",
+     "options": [
+      {
+       "text": "reveal that the narrator distrusts her and exposes her as dishonest",
+       "why": "The error is an honest lapse of memory that she corrects herself, not a lie that someone exposes.",
+       "value": null,
+       "label": "wrong_tone"
+      },
+      {
+       "text": "render her own startled discovery of how thoroughly she neglects herself",
+       "why": "The narration slips into her voice (\"no!\") as she realizes that caring for the children left her no time to eat.",
+       "value": null,
+       "label": "correct"
+      },
+      {
+       "text": "shift the story permanently into the voice of an outside observer",
+       "why": "The passage moves closer to her mind and recounts her own sense of the day's tasks.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "show the gossiping neighbors correcting a false story she has told about herself",
+       "why": "The neighbors only appear earlier, talking about her past. The correction is her own thought.",
+       "value": null,
+       "label": "misread_speaker"
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is \"render her own startled discovery of how thoroughly she neglects herself\". The narration slips into her voice (\"no!\") as she realizes that caring for the children left her no time to eat.\n\"reveal that the narrator distrusts her and exposes her as dishonest\" is incorrect: The error is an honest lapse of memory that she corrects herself, not a lie that someone exposes.\n\"shift the story permanently into the voice of an outside observer\" is incorrect: The passage moves closer to her mind and recounts her own sense of the day's tasks.\n\"show the gossiping neighbors correcting a false story she has told about herself\" is incorrect: The neighbors only appear earlier, talking about her past. The correction is her own thought.",
+     "est_seconds": 65,
+     "evidence_quotes": [
+      "she had actually forgotten to eat any luncheon",
+      "when she came to think of it"
+     ],
+     "ref_lines": {
+      "r1": {
+       "from": 45,
+       "to": 46
+      }
+     },
+     "devices_used": [
+      "free_indirect_discourse",
+      "syntax"
+     ],
+     "real_text": {
+      "registry_id": "chopin-silk-stockings",
+      "skill": "4.B",
+      "key_evidence": {
+       "quote": "she had actually forgotten to eat any luncheon",
+       "from": 49,
+       "to": 49,
+       "ref": "line 49",
+       "unit": "paragraph 6"
+      },
+      "distractor_evidence": [
+       {
+        "index": 0,
+        "label": "wrong_tone",
+        "why": "The error is an honest lapse of memory that she corrects herself, not a lie that someone exposes.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "when she came to think of it",
+         "from": 46,
+         "to": 47,
+         "ref": "lines 46-47",
+         "unit": "paragraph 6"
+        }
+       },
+       {
+        "index": 2,
+        "label": "reversal",
+        "why": "The passage moves closer to her mind and recounts her own sense of the day's tasks.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "between getting the children fed and the place righted",
+         "from": 47,
+         "to": 48,
+         "ref": "lines 47-48",
+         "unit": "paragraph 6"
+        }
+       },
+       {
+        "index": 3,
+        "label": "misread_speaker",
+        "why": "The neighbors only appear earlier, talking about her past. The correction is her own thought.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "The neighbors sometimes talked of certain",
+         "from": 30,
+         "to": 30,
+         "ref": "line 30",
+         "unit": "paragraph 4"
+        }
+       }
+      ],
+      "verification": {
+       "solvers": [
+        "claude-opus-5-5",
+        "claude-sonnet-5-5"
+       ],
+       "solver_votes": [
+        1,
+        1
+       ],
+       "adversary": "none",
+       "judge": "key_clearly_better",
+       "panel_model": "claude-fable-5-1",
+       "panel_choice": 1,
+       "panel_agree": true,
+       "score": 0.959,
+       "band": "high",
+       "verified": true
+      }
+     },
+     "key_confidence": {
+      "score": 0.959,
+      "band": "high",
+      "solver_agreement": 1,
+      "adversary": "none",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 1,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 1,
+        "confidence": "certain"
+       },
+       {
+        "choice": 1,
+        "confidence": "likely"
+       }
+      ]
+     }
+    },
+    {
+     "archetype": "lt_short_4C",
+     "topic": "U4.3",
+     "skill": "4.C",
+     "cognitive": "identify",
+     "stem": "The narrator's description of the shoppers in lines 53-54 relies on diction that presents the store as",
+     "options": [
+      {
+       "text": "a marketplace where she is too proud to compete with others",
+       "why": "She is ready to elbow her way through and compete.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "a garden, recalling the green lawns of her more prosperous past",
+       "why": "\"Lawn\" here is a fabric listed alongside shirting, not grass.",
+       "value": null,
+       "label": "lexical_trap"
+      },
+      {
+       "text": "a battlefield, lending mock-heroic weight to ordinary shopping",
+       "why": "\"Charge,\" \"besieging\" and \"breastworks\" are military terms applied wryly to a crowd around cloth counters.",
+       "value": null,
+       "label": "correct"
+      },
+      {
+       "text": "a sanctuary, offering her a peaceful refuge from her household",
+       "why": "She needs courage to face the crowd, so the store is not presented as peaceful.",
+       "value": null,
+       "label": "wrong_tone"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is \"a battlefield, lending mock-heroic weight to ordinary shopping\". \"Charge,\" \"besieging\" and \"breastworks\" are military terms applied wryly to a crowd around cloth counters.\n\"a marketplace where she is too proud to compete with others\" is incorrect: She is ready to elbow her way through and compete.\n\"a garden, recalling the green lawns of her more prosperous past\" is incorrect: \"Lawn\" here is a fabric listed alongside shirting, not grass.\n\"a sanctuary, offering her a peaceful refuge from her household\" is incorrect: She needs courage to face the crowd, so the store is not presented as peaceful.",
+     "est_seconds": 50,
+     "evidence_quotes": [
+      "charge through an eager multitude that was besieging breastworks"
+     ],
+     "ref_lines": {
+      "r1": {
+       "from": 53,
+       "to": 54
+      }
+     },
+     "devices_used": [
+      "diction",
+      "metaphor"
+     ],
+     "real_text": {
+      "registry_id": "chopin-silk-stockings",
+      "skill": "4.C",
+      "key_evidence": {
+       "quote": "charge through an eager multitude that was besieging breastworks",
+       "from": 53,
+       "to": 54,
+       "ref": "lines 53-54",
+       "unit": "paragraph 7"
+      },
+      "distractor_evidence": [
+       {
+        "index": 0,
+        "label": "reversal",
+        "why": "She is ready to elbow her way through and compete.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "She could elbow her way if need be",
+         "from": 41,
+         "to": 41,
+         "ref": "line 41",
+         "unit": "paragraph 5"
+        }
+       },
+       {
+        "index": 1,
+        "label": "lexical_trap",
+        "why": "\"Lawn\" here is a fabric listed alongside shirting, not grass.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "breastworks of shirting and figured lawn",
+         "from": 54,
+         "to": 55,
+         "ref": "lines 54-55",
+         "unit": "paragraph 7"
+        }
+       },
+       {
+        "index": 3,
+        "label": "wrong_tone",
+        "why": "She needs courage to face the crowd, so the store is not presented as peaceful.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "trying to gather strength and courage",
+         "from": 52,
+         "to": 53,
+         "ref": "lines 52-53",
+         "unit": "paragraph 7"
+        }
+       }
+      ],
+      "verification": {
+       "solvers": [
+        "claude-opus-5-5",
+        "claude-sonnet-5-5"
+       ],
+       "solver_votes": [
+        2,
+        2
+       ],
+       "adversary": "none",
+       "judge": "key_clearly_better",
+       "panel_model": "claude-fable-5-1",
+       "panel_choice": 2,
+       "panel_agree": true,
+       "score": 1,
+       "band": "high",
+       "verified": true
+      }
+     },
+     "key_confidence": {
+      "score": 1,
+      "band": "high",
+      "solver_agreement": 1,
+      "adversary": "none",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 2,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 2,
+        "confidence": "certain"
+       },
+       {
+        "choice": 2,
+        "confidence": "certain"
+       }
+      ]
+     }
+    },
+    {
+     "archetype": "lt_short_3E",
+     "topic": "U9.1",
+     "skill": "3.E",
+     "cognitive": "explain",
+     "stem": "The way Mrs. Sommers comes upon the silk stockings (lines 57-58) is significant chiefly because the discovery",
+     "options": [
+      {
+       "text": "results from the shopgirl's aggressive effort to sell to her",
+       "why": "The girl only asks a polite question after Mrs. Sommers has already touched the stockings.",
+       "value": null,
+       "label": "misread_speaker"
+      },
+      {
+       "text": "happens by chance through touch, not by any choice she has made",
+       "why": "Her hand rests \"aimlessly,\" and she only gradually becomes aware of what it is touching, so desire arrives before any decision.",
+       "value": null,
+       "label": "correct"
+      },
+      {
+       "text": "proves that she has always secretly longed for luxury goods",
+       "why": "Nothing in the passage describes a lifelong secret longing for luxury.",
+       "value": null,
+       "label": "unsupported"
+      },
+      {
+       "text": "fulfills her earlier plan to buy new stockings for the children",
+       "why": "The planned stockings were ordinary ones for the children, while these are silk stockings she handles for herself.",
+       "value": null,
+       "label": "lexical_trap"
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is \"happens by chance through touch, not by any choice she has made\". Her hand rests \"aimlessly,\" and she only gradually becomes aware of what it is touching, so desire arrives before any decision.\n\"results from the shopgirl's aggressive effort to sell to her\" is incorrect: The girl only asks a polite question after Mrs. Sommers has already touched the stockings.\n\"proves that she has always secretly longed for luxury goods\" is incorrect: Nothing in the passage describes a lifelong secret longing for luxury.\n\"fulfills her earlier plan to buy new stockings for the children\" is incorrect: The planned stockings were ordinary ones for the children, while these are silk stockings she handles for herself.",
+     "est_seconds": 60,
+     "evidence_quotes": [
+      "she rested her hand aimlessly upon the counter",
+      "By degrees she grew aware that her hand"
+     ],
+     "ref_lines": {
+      "r1": {
+       "from": 57,
+       "to": 58
+      }
+     },
+     "devices_used": [
+      "imagery"
+     ],
+     "real_text": {
+      "registry_id": "chopin-silk-stockings",
+      "skill": "3.E",
+      "key_evidence": {
+       "quote": "she rested her hand aimlessly upon the counter",
+       "from": 56,
+       "to": 56,
+       "ref": "line 56",
+       "unit": "paragraph 7"
+      },
+      "distractor_evidence": [
+       {
+        "index": 0,
+        "label": "misread_speaker",
+        "why": "The girl only asks a polite question after Mrs. Sommers has already touched the stockings.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "asked her if she wished to examine their line",
+         "from": 63,
+         "to": 64,
+         "ref": "lines 63-64",
+         "unit": "paragraph 7"
+        }
+       },
+       {
+        "index": 2,
+        "label": "unsupported",
+        "why": "Nothing in the passage describes a lifelong secret longing for luxury.",
+        "evidence_kind": "absence",
+        "evidence": null
+       },
+       {
+        "index": 3,
+        "label": "lexical_trap",
+        "why": "The planned stockings were ordinary ones for the children, while these are silk stockings she handles for herself.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "would be left enough for new stockings",
+         "from": 24,
+         "to": 24,
+         "ref": "line 24",
+         "unit": "paragraph 3"
+        }
+       }
+      ],
+      "verification": {
+       "solvers": [
+        "claude-opus-5-5",
+        "claude-sonnet-5-5"
+       ],
+       "solver_votes": [
+        1,
+        1
+       ],
+       "adversary": "weak",
+       "judge": "key_clearly_better",
+       "panel_model": "claude-fable-5-1",
+       "panel_choice": 1,
+       "panel_agree": true,
+       "score": 0.829,
+       "band": "medium",
+       "verified": true
+      }
+     },
+     "key_confidence": {
+      "score": 0.829,
+      "band": "medium",
+      "solver_agreement": 1,
+      "adversary": "weak",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 1,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 1,
+        "confidence": "certain"
+       },
+       {
+        "choice": 1,
+        "confidence": "likely"
+       }
+      ]
+     }
+    },
+    {
+     "archetype": "lt_short_1E",
+     "topic": "U7.1",
+     "skill": "1.E",
+     "cognitive": "evaluate",
+     "stem": "Mrs. Sommers's smile (line 65), followed by the statement that \"she went on feeling\" the stockings (lines 66-67), suggests that she",
+     "options": [
+      {
+       "text": "dismisses the luxury as beyond her even as she is drawn to it",
+       "why": "The tiara comparison treats buying as absurd, but \"But\" introduces her hands lingering, now both of them, so her mind and her desire pull apart.",
+       "value": null,
+       "label": "correct"
+      },
+      {
+       "text": "is embarrassed by the clerk and wants to leave the counter at once",
+       "why": "She stays and handles the stockings even more eagerly.",
+       "value": null,
+       "label": "wrong_tone"
+      },
+      {
+       "text": "mistakes the silk stockings for a far more costly piece of jewelry",
+       "why": "The tiara is a comparison. She has seen the actual stockings and their marked price.",
+       "value": null,
+       "label": "literal_for_figurative"
+      },
+      {
+       "text": "has already decided to buy the stockings and feels no hesitation",
+       "why": "The smile treats a purchase as being as unlikely as buying diamonds, so she has not decided.",
+       "value": null,
+       "label": "reversal"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is \"dismisses the luxury as beyond her even as she is drawn to it\". The tiara comparison treats buying as absurd, but \"But\" introduces her hands lingering, now both of them, so her mind and her desire pull apart.\n\"is embarrassed by the clerk and wants to leave the counter at once\" is incorrect: She stays and handles the stockings even more eagerly.\n\"mistakes the silk stockings for a far more costly piece of jewelry\" is incorrect: The tiara is a comparison. She has seen the actual stockings and their marked price.\n\"has already decided to buy the stockings and feels no hesitation\" is incorrect: The smile treats a purchase as being as unlikely as buying diamonds, so she has not decided.",
+     "est_seconds": 75,
+     "evidence_quotes": [
+      "just as if she had been asked to inspect a tiara",
+      "But she went on feeling the soft, sheeny luxurious"
+     ],
+     "ref_lines": {
+      "r1": {
+       "from": 65,
+       "to": 65
+      },
+      "r2": {
+       "from": 66,
+       "to": 67
+      }
+     },
+     "devices_used": [
+      "simile",
+      "juxtaposition"
+     ],
+     "real_text": {
+      "registry_id": "chopin-silk-stockings",
+      "skill": "1.E",
+      "key_evidence": {
+       "quote": "But she went on feeling the soft, sheeny luxurious",
+       "from": 66,
+       "to": 67,
+       "ref": "lines 66-67",
+       "unit": "paragraph 7"
+      },
+      "distractor_evidence": [
+       {
+        "index": 1,
+        "label": "wrong_tone",
+        "why": "She stays and handles the stockings even more eagerly.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "with both hands now, holding them up",
+         "from": 68,
+         "to": 68,
+         "ref": "line 68",
+         "unit": "paragraph 7"
+        }
+       },
+       {
+        "index": 2,
+        "label": "literal_for_figurative",
+        "why": "The tiara is a comparison. She has seen the actual stockings and their marked price.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "reduced in price from two dollars and fifty cents",
+         "from": 61,
+         "to": 62,
+         "ref": "lines 61-62",
+         "unit": "paragraph 7"
+        }
+       },
+       {
+        "index": 3,
+        "label": "reversal",
+        "why": "The smile treats a purchase as being as unlikely as buying diamonds, so she has not decided.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "with the ultimate view of purchasing it",
+         "from": 66,
+         "to": 66,
+         "ref": "line 66",
+         "unit": "paragraph 7"
+        }
+       }
+      ],
+      "verification": {
+       "solvers": [
+        "claude-opus-5-5",
+        "claude-sonnet-5-5"
+       ],
+       "solver_votes": [
+        0,
+        0
+       ],
+       "adversary": "none",
+       "judge": "key_clearly_better",
+       "panel_model": "claude-fable-5-1",
+       "panel_choice": 0,
+       "panel_agree": true,
+       "score": 0.918,
+       "band": "high",
+       "verified": true
+      }
+     },
+     "key_confidence": {
+      "score": 0.918,
+      "band": "high",
+      "solver_agreement": 1,
+      "adversary": "none",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 0,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 0,
+        "confidence": "likely"
+       },
+       {
+        "choice": 0,
+        "confidence": "likely"
+       }
+      ]
+     }
+    },
+    {
+     "archetype": "lt_short_7B",
+     "topic": "U7.4",
+     "skill": "7.B",
+     "cognitive": "evaluate",
+     "stem": "Which of the following is the most defensible thesis about the passage as a whole?",
+     "options": [
+      {
+       "text": "The passage contrasts a mother's selfless planning with a sensuous temptation, showing how fatigue loosens her habit of self-denial.",
+       "why": "The plans are all for the children, but once she is tired and unfed she yields to the tempting, serpent-like silk.",
+       "value": null,
+       "label": "correct"
+      },
+      {
+       "text": "The passage portrays Mrs. Sommers as a shrewd bargain hunter whose skill at the counter defines her whole identity and worth.",
+       "why": "She is a skilled bargain hunter, but she is defined chiefly by her family's needs and by the passage's turn toward desire.",
+       "value": null,
+       "label": "partially_right"
+      },
+      {
+       "text": "The passage mocks Mrs. Sommers's nostalgia for her former better days, exposing her vanity as the true source of her poverty.",
+       "why": "She refuses to dwell on the past, and nothing in the passage blames vanity for her poverty.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "The passage argues that all poverty inevitably corrupts the moral character of every person who must endure it for many long, weary years.",
+       "why": "This makes a sweeping claim about everyone. Mrs. Sommers is shown as careful and conscientious.",
+       "value": null,
+       "label": "too_broad"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is \"The passage contrasts a mother's selfless planning with a sensuous temptation, showing how fatigue loosens her habit of self-denial.\". The plans are all for the children, but once she is tired and unfed she yields to the tempting, serpent-like silk.\n\"The passage portrays Mrs. Sommers as a shrewd bargain hunter whose skill at the counter defines her whole identity and worth.\" is incorrect: She is a skilled bargain hunter, but she is defined chiefly by her family's needs and by the passage's turn toward desire.\n\"The passage mocks Mrs. Sommers's nostalgia for her former better days, exposing her vanity as the true source of her poverty.\" is incorrect: She refuses to dwell on the past, and nothing in the passage blames vanity for her poverty.\n\"The passage argues that all poverty inevitably corrupts the moral character of every person who must endure it for many long, weary years.\" is incorrect: This makes a sweeping claim about everyone. Mrs. Sommers is shown as careful and conscientious.",
+     "est_seconds": 90,
+     "evidence_quotes": [
+      "The vision of her little brood looking fresh and dainty",
+      "glide serpent-like through her fingers"
+     ],
+     "ref_lines": {},
+     "devices_used": [
+      "contrast",
+      "imagery"
+     ],
+     "real_text": {
+      "registry_id": "chopin-silk-stockings",
+      "skill": "7.B",
+      "key_evidence": {
+       "quote": "glide serpent-like through her fingers",
+       "from": 69,
+       "to": 70,
+       "ref": "lines 69-70",
+       "unit": "paragraph 7"
+      },
+      "distractor_evidence": [
+       {
+        "index": 1,
+        "label": "partially_right",
+        "why": "She is a skilled bargain hunter, but she is defined chiefly by her family's needs and by the passage's turn toward desire.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "The needs of the present absorbed her every faculty",
+         "from": 34,
+         "to": 35,
+         "ref": "lines 34-35",
+         "unit": "paragraph 4"
+        }
+       },
+       {
+        "index": 2,
+        "label": "reversal",
+        "why": "She refuses to dwell on the past, and nothing in the passage blames vanity for her poverty.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "She herself indulged in no such morbid retrospection",
+         "from": 32,
+         "to": 33,
+         "ref": "lines 32-33",
+         "unit": "paragraph 4"
+        }
+       },
+       {
+        "index": 3,
+        "label": "too_broad",
+        "why": "This makes a sweeping claim about everyone. Mrs. Sommers is shown as careful and conscientious.",
+        "evidence_kind": "text",
+        "evidence": {
+         "quote": "toward a proper and judicious use of the",
+         "from": 14,
+         "to": 14,
+         "ref": "line 14",
+         "unit": "paragraph 2"
+        }
+       }
+      ],
+      "verification": {
+       "solvers": [
+        "claude-opus-5-5",
+        "claude-sonnet-5-5"
+       ],
+       "solver_votes": [
+        0,
+        0
+       ],
+       "adversary": "none",
+       "judge": "key_clearly_better",
+       "panel_model": "claude-fable-5-1",
+       "panel_choice": 0,
+       "panel_agree": true,
+       "score": 1,
+       "band": "high",
+       "verified": true
+      }
+     },
+     "key_confidence": {
+      "score": 1,
+      "band": "high",
+      "solver_agreement": 1,
+      "adversary": "none",
+      "judge": "key_clearly_better",
+      "panel": {
+       "model": "claude-fable-5-1",
+       "choice": 0,
+       "agree": true
+      },
+      "solver_votes": [
+       {
+        "choice": 0,
+        "confidence": "certain"
+       },
+       {
+        "choice": 0,
+        "confidence": "certain"
+       }
+      ]
+     }
+    }
+   ],
+   "excluded_items": [],
+   "assignable_size": true,
+   "set_note": ""
+  }
+ }
+]

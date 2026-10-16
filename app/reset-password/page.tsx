@@ -14,25 +14,25 @@ export default async function ResetPasswordPage({
           ALTON <span className="text-red">EDUCATION</span>
         </div>
         <h1 className="text-center text-[21px] font-extrabold text-ink mb-2">
-          비밀번호 재설정
+          Reset your password
         </h1>
         <p className="text-center text-[13.5px] text-grey-500 mb-8 leading-[1.6]">
-          가입 시 사용한 이메일을 입력하시면
+          Enter the email on your account
           <br />
-          재설정 링크를 보내드립니다.
+          and we&apos;ll send you a reset link.
         </p>
 
         {sent ? (
           <p className="text-center text-[14px] text-ink mb-6 leading-[1.6]">
-            입력하신 이메일로 재설정 링크를 보냈어요.
+            We sent a reset link to that email.
             <br />
-            메일함을 확인해주세요.
+            Please check your inbox.
           </p>
         ) : (
           <form action={requestReset}>
             <div className="mb-4">
               <label htmlFor="email" className="block text-[13px] font-bold text-ink mb-1.5">
-                이메일
+                Email
               </label>
               <input
                 id="email"
@@ -47,14 +47,14 @@ export default async function ResetPasswordPage({
               type="submit"
               className="block w-full text-center bg-red text-white font-bold text-[15px] py-3.5 rounded-lg hover:bg-[#a80e26]"
             >
-              재설정 링크 받기
+              Send reset link
             </button>
           </form>
         )}
 
         <p className="text-center text-[13px] text-grey-500 mt-[22px]">
           <a href="/login" className="text-red font-bold">
-            ← 로그인으로 돌아가기
+            ← Back to login
           </a>
         </p>
       </div>

@@ -1,0 +1,42 @@
+{
+ "itemId": "ratios_rates_units.proportion.TB.P",
+ "generatedAt": "2026-10-07T05:02:00.492Z",
+ "codeHash": "dbe523d3d50d48d5425bcb8db2c01cfe6376e789c021db1a3ff41f35571be4b4",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/data.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/ratios_rates_units.proportion.TB.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "ratios_rates_units.proportion.TB.P.png",
+   "mobileFile": "ratios_rates_units.proportion.TB.P.m375.png",
+   "archetypeId": "rru.proportion.TB.P.chain2",
+   "seed": 11,
+   "signature": "data:table",
+   "stimulus": "A builder makes concrete mix using the amounts in the table, which make the number of batches stated in its title. The ingredients stay in the same ratio for any amount.",
+   "question": "How many buckets of ingredients in all are needed for 9 batches?",
+   "options": [
+    "31.5",
+    "24.9",
+    "252",
+    "28"
+   ],
+   "correctIndex": 0,
+   "answer": "31.5",
+   "explanation": "(1) 표: 8 batches 기준, Cement 12, Lime 7, Sand 5, Water 1, Gravel 3. (2) 배율 = 9 ÷ 8 = 1.13 이다. (3) 기준 합계 = 12 + 7 + 5 + 1 + 3 = 28 이다. (4) 28 × 9 ÷ 8 = 31.5 이다. (5) 따라서 31.5 buckets 이다. 따라서 정답은 31.5이다.",
+   "structuralIssues": []
+  }
+ ]
+}

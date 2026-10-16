@@ -1,0 +1,832 @@
+[
+ {
+  "cellId": "ap_us_history-real_r1",
+  "apSubjectCode": "ap_us_history",
+  "kind": "mc",
+  "calculator": "na",
+  "reserve": false,
+  "wording": "authored_from_real_source",
+  "candidateKey": "ap_us_history-real_r1-k0",
+  "keywordCode": "7.4",
+  "unitCode": "7",
+  "skillPrimary": "3.A",
+  "structure": "shared_stimulus_set",
+  "archetype": "ush_real_real_r1",
+  "reviewState": "verified_by_independent_models",
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficulty": [
+   {
+    "label": "basic_learning"
+   },
+   {
+    "label": "exam_prep"
+   },
+   {
+    "label": "basic_learning"
+   }
+  ],
+  "run": "ush-real-1",
+  "stockKey": "ush-real-1:ap_us_history-real_r1-k0",
+  "stimulusOrigin": "real_historical_source",
+  "sourceRegistryIds": [
+   "txt-jungle-1906"
+  ],
+  "payload": {
+   "archetype": "ush_real_real_r1",
+   "topic": "7.4",
+   "skill": "3.A",
+   "calculator": "na",
+   "set_intro": "Historical source (real document)\n(primary source)\nThe Jungle, chapter 3 (excerpt on the government inspector)\nUpton Sinclair, 1906. Project Gutenberg eBook #140 (Release date 2006-03-11). Reuse: public domain in the United States (published before 1929). Excerpt: excerpted (one contiguous passage); line breaks converted to spaces; curly apostrophe kept as in source.\n\n\"Before the carcass was admitted here, however, it had to pass a government inspector, who sat in the doorway and felt of the glands in the neck for tuberculosis. This government inspector did not have the manner of a man who was worked to death; he was apparently not haunted by a fear that the hog might get by him before he had finished his testing. If you were a sociable person, he was quite willing to enter into conversation with you, and to explain to you the deadly nature of the ptomaines which are found in tubercular pork; and while he was talking with you you could hardly be so ungrateful as to notice that a dozen carcasses were passing him untouched. This inspector wore a blue uniform, with brass buttons, and he gave an atmosphere of authority to the scene, and, as it were, put the stamp of official approval upon the things which were done in Durham’s.\"",
+   "ush_set": {
+    "period": 7,
+    "stim_type": "primary_text",
+    "theme": "Meat inspection in Progressive Era Chicago",
+    "title": "The Government Inspector in the Packinghouse",
+    "sources": [
+     {
+      "id": "A",
+      "kind": "primary_text",
+      "title": "The Jungle, chapter 3 (excerpt on the government inspector)",
+      "attribution": "Upton Sinclair, 1906. Project Gutenberg eBook #140 (Release date 2006-03-11). Reuse: public domain in the United States (published before 1929). Excerpt: excerpted (one contiguous passage); line breaks converted to spaces; curly apostrophe kept as in source.",
+      "real_data": true,
+      "source_registry_id": "txt-jungle-1906",
+      "source_sha256": "d489393235dd6db8d485914465f1db0a148adf66f5cbefed6f5acc4701b4cd82"
+     }
+    ]
+   },
+   "items": [
+    {
+     "archetype": "ush_real_3A",
+     "topic": "7.4",
+     "skill": "3.A",
+     "stem": "Which of the following claims about meatpacking is most directly made in the excerpt?",
+     "options": [
+      {
+       "text": "Government inspectors had forced the packers to adopt costly new safety methods in every plant.",
+       "why": "The excerpt describes an inspector who lets a dozen carcasses pass untouched while he talks; it shows no safety changes forced on the packers.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "Federal inspection gave an appearance of safety while few carcasses were closely checked.",
+       "why": "The inspector feels the glands of one hog at a time while 'a dozen carcasses were passing him untouched,' yet his uniform lends 'the stamp of official approval' to the plant.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "Tuberculosis had become so rare in hogs that inspection was no longer necessary.",
+       "why": "The inspector himself explains 'the deadly nature of the ptomaines which are found in tubercular pork,' so the excerpt treats the disease as a real danger.",
+       "value": null,
+       "label": "unsupported_by_source"
+      },
+      {
+       "text": "Inspectors worked so many hours that they were exhausted and could not do their jobs.",
+       "why": "The excerpt says the inspector 'did not have the manner of a man who was worked to death,' which is the opposite of overwork.",
+       "value": null,
+       "label": "reversal"
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is \"Federal inspection gave an appearance of safety while few carcasses were closely checked.\". The inspector feels the glands of one hog at a time while 'a dozen carcasses were passing him untouched,' yet his uniform lends 'the stamp of official approval' to the plant.\n\"Government inspectors had forced the packers to adopt costly new safety methods in every plant.\" is incorrect: The excerpt describes an inspector who lets a dozen carcasses pass untouched while he talks; it shows no safety changes forced on the packers.\n\"Tuberculosis had become so rare in hogs that inspection was no longer necessary.\" is incorrect: The inspector himself explains 'the deadly nature of the ptomaines which are found in tubercular pork,' so the excerpt treats the disease as a real danger.\n\"Inspectors worked so many hours that they were exhausted and could not do their jobs.\" is incorrect: The excerpt says the inspector 'did not have the manner of a man who was worked to death,' which is the opposite of overwork.",
+     "est_seconds": 75,
+     "facts": [
+      "Upton Sinclair's The Jungle (1906) is a novel based on his reporting in Chicago's packinghouses.",
+      "The excerpt shows a government inspector who checks few carcasses."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "3.A",
+      "key_evidence_in_source": "'a dozen carcasses were passing him untouched' and 'put the stamp of official approval upon the things which were done in Durham's'"
+     },
+     "verification": {
+      "status": "verified",
+      "blind_solvers": [
+       "claude-opus-5-5",
+       "claude-sonnet-5-5"
+      ],
+      "solver_choices": [
+       1,
+       1
+      ],
+      "solver_confidence": [
+       "certain",
+       "certain"
+      ],
+      "fact_checker": "claude-fable-5-1",
+      "fact_verdict": "sound",
+      "flags": []
+     }
+    },
+    {
+     "archetype": "ush_real_2B",
+     "topic": "7.4",
+     "skill": "2.B",
+     "stem": "Sinclair's description of the inspector is best understood as an effort to",
+     "options": [
+      {
+       "text": "show that state governments handled meat inspection better than the federal government did.",
+       "why": "The excerpt names a 'government inspector' without contrasting state and federal work, and gives no evidence about state inspectors.",
+       "value": null,
+       "label": "unsupported_by_source"
+      },
+      {
+       "text": "praise the efficiency of large packinghouses as a model for other American industries.",
+       "why": "The description mocks the inspector's casual manner and the false 'authority' of his uniform, so it is critical rather than admiring.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "argue that consumers, not government, should bear the responsibility for judging whether meat is safe.",
+       "why": "The excerpt faults an official for not doing his job; it does not suggest that shoppers should inspect meat themselves.",
+       "value": null,
+       "label": "misattributed"
+      },
+      {
+       "text": "criticize the packing industry and the weakness of the oversight that was supposed to check it.",
+       "why": "A novelist who shows an inspector letting carcasses pass while lending official approval is exposing both the packers and the weak public oversight of them.",
+       "value": null,
+       "label": "key"
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is \"criticize the packing industry and the weakness of the oversight that was supposed to check it.\". A novelist who shows an inspector letting carcasses pass while lending official approval is exposing both the packers and the weak public oversight of them.\n\"show that state governments handled meat inspection better than the federal government did.\" is incorrect: The excerpt names a 'government inspector' without contrasting state and federal work, and gives no evidence about state inspectors.\n\"praise the efficiency of large packinghouses as a model for other American industries.\" is incorrect: The description mocks the inspector's casual manner and the false 'authority' of his uniform, so it is critical rather than admiring.\n\"argue that consumers, not government, should bear the responsibility for judging whether meat is safe.\" is incorrect: The excerpt faults an official for not doing his job; it does not suggest that shoppers should inspect meat themselves.",
+     "est_seconds": 75,
+     "facts": [
+      "The Jungle was written to expose conditions in the meatpacking industry and the treatment of its immigrant workers.",
+      "Muckraking journalists and novelists criticized business practices in the Progressive Era."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "2.B",
+      "key_evidence_in_source": "inspector 'gave an atmosphere of authority to the scene' while a dozen carcasses 'passed him untouched'"
+     },
+     "verification": {
+      "status": "verified",
+      "blind_solvers": [
+       "claude-opus-5-5",
+       "claude-sonnet-5-5"
+      ],
+      "solver_choices": [
+       3,
+       3
+      ],
+      "solver_confidence": [
+       "certain",
+       "certain"
+      ],
+      "fact_checker": "claude-fable-5-1",
+      "fact_verdict": "sound",
+      "flags": []
+     }
+    },
+    {
+     "archetype": "ush_real_4A",
+     "topic": "7.4",
+     "skill": "4.A",
+     "stem": "Public reaction to accounts like the excerpt contributed most directly to which of the following developments in 1906?",
+     "options": [
+      {
+       "text": "Congress passed the Meat Inspection Act and Pure Food and Drug Act to expand federal oversight.",
+       "why": "Both laws were signed on June 30, 1906, after the outcry over packinghouse conditions that followed The Jungle and the federal investigation it prompted.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "Congress passed the Sherman Antitrust Act to break up the trusts that controlled key industries.",
+       "why": "The Sherman Antitrust Act dates from 1890, sixteen years earlier, and concerned monopolies rather than food safety.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "Congress created the Federal Reserve System to make the banking system more stable.",
+       "why": "The Federal Reserve Act was passed in 1913 and addressed banking, not the safety of food.",
+       "value": null,
+       "label": "unrelated_development"
+      },
+      {
+       "text": "Congress passed the Interstate Commerce Act to regulate the rates charged by railroads.",
+       "why": "The Interstate Commerce Act dates from 1887 and concerned railroad rates, not meatpacking.",
+       "value": null,
+       "label": "wrong_period"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is \"Congress passed the Meat Inspection Act and Pure Food and Drug Act to expand federal oversight.\". Both laws were signed on June 30, 1906, after the outcry over packinghouse conditions that followed The Jungle and the federal investigation it prompted.\n\"Congress passed the Sherman Antitrust Act to break up the trusts that controlled key industries.\" is incorrect: The Sherman Antitrust Act dates from 1890, sixteen years earlier, and concerned monopolies rather than food safety.\n\"Congress created the Federal Reserve System to make the banking system more stable.\" is incorrect: The Federal Reserve Act was passed in 1913 and addressed banking, not the safety of food.\n\"Congress passed the Interstate Commerce Act to regulate the rates charged by railroads.\" is incorrect: The Interstate Commerce Act dates from 1887 and concerned railroad rates, not meatpacking.",
+     "est_seconds": 75,
+     "facts": [
+      "The Meat Inspection Act and the Pure Food and Drug Act were both signed on June 30, 1906.",
+      "The Sherman Antitrust Act (1890), Interstate Commerce Act (1887) and Federal Reserve Act (1913) are different laws."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "4.A",
+      "key_evidence_in_source": "(outside knowledge; the excerpt shows the weakness of inspection that the 1906 laws addressed)"
+     },
+     "verification": {
+      "status": "verified",
+      "blind_solvers": [
+       "claude-opus-5-5",
+       "claude-sonnet-5-5"
+      ],
+      "solver_choices": [
+       0,
+       0
+      ],
+      "solver_confidence": [
+       "certain",
+       "certain"
+      ],
+      "fact_checker": "claude-fable-5-1",
+      "fact_verdict": "sound",
+      "flags": []
+     }
+    }
+   ],
+   "excluded_items": []
+  }
+ },
+ {
+  "cellId": "ap_us_history-real_r2",
+  "apSubjectCode": "ap_us_history",
+  "kind": "mc",
+  "calculator": "na",
+  "reserve": false,
+  "wording": "authored_from_real_source",
+  "candidateKey": "ap_us_history-real_r2-k0",
+  "keywordCode": "8.14",
+  "unitCode": "8",
+  "skillPrimary": "1.A",
+  "structure": "shared_stimulus_set",
+  "archetype": "ush_real_real_r2",
+  "reviewState": "verified_by_independent_models",
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficulty": [
+   {
+    "label": "basic_learning"
+   },
+   {
+    "label": "exam_prep"
+   },
+   {
+    "label": "basic_learning"
+   }
+  ],
+  "run": "ush-real-1",
+  "stockKey": "ush-real-1:ap_us_history-real_r2-k0",
+  "stimulusOrigin": "real_historical_source",
+  "sourceRegistryIds": [
+   "stat-foreign-born-region-1900-1990"
+  ],
+  "payload": {
+   "archetype": "ush_real_real_r2",
+   "topic": "8.14",
+   "skill": "1.A",
+   "calculator": "na",
+   "set_intro": "Historical source (real document)\n(table)\nForeign-born population by world region of birth, selected census years 1900-1990\nCampbell Gibson and Kay Jung, U.S. Census Bureau, Population Division, 2006 (Working Paper No. 81, Feb. 2006; figures from decennial censuses). U.S. Census Bureau. Reuse: public domain (U.S. government work). excerpted (selected rows/columns; values unchanged). Census Bureau, Working Paper No. 81, Table 2 (selected years; sample data for 1960-1990). Counts are residents at each census, not annual arrivals.\n\nThe table for this source appears below.",
+   "stimulus": {
+    "kind": "table",
+    "description": "Foreign-born residents of the United States by region of birth in selected census years, 1900 to 1990.",
+    "data": {
+     "columns": [
+      "Year",
+      "Total foreign-born",
+      "Born in Europe",
+      "Born in Asia",
+      "Born in Latin America",
+      "Born in Northern America"
+     ],
+     "rows": [
+      [
+       "1900",
+       "10,341,276",
+       "8,881,548",
+       "120,248",
+       "137,458",
+       "1,179,922"
+      ],
+      [
+       "1910",
+       "13,515,886",
+       "11,810,115",
+       "191,484",
+       "279,514",
+       "1,209,717"
+      ],
+      [
+       "1920",
+       "13,920,692",
+       "11,916,048",
+       "237,950",
+       "588,843",
+       "1,138,174"
+      ],
+      [
+       "1930",
+       "14,204,149",
+       "11,784,010",
+       "275,665",
+       "791,840",
+       "1,310,369"
+      ],
+      [
+       "1960",
+       "9,738,091",
+       "7,256,311",
+       "490,996",
+       "908,309",
+       "952,500"
+      ],
+      [
+       "1970",
+       "9,619,302",
+       "5,740,891",
+       "824,887",
+       "1,803,970",
+       "812,421"
+      ],
+      [
+       "1980",
+       "14,079,906",
+       "5,149,572",
+       "2,539,777",
+       "4,372,487",
+       "853,427"
+      ],
+      [
+       "1990",
+       "19,767,316",
+       "4,350,403",
+       "4,979,037",
+       "8,407,837",
+       "753,917"
+      ]
+     ]
+    }
+   },
+   "ush_set": {
+    "period": 8,
+    "stim_type": "quantitative",
+    "theme": "Changing origins of the foreign-born population",
+    "title": "Where the Foreign-Born Were Born, 1900-1990",
+    "sources": [
+     {
+      "id": "A",
+      "kind": "table",
+      "title": "Foreign-born population by world region of birth, selected census years 1900-1990",
+      "attribution": "Campbell Gibson and Kay Jung, U.S. Census Bureau, Population Division, 2006 (Working Paper No. 81, Feb. 2006; figures from decennial censuses). U.S. Census Bureau. Reuse: public domain (U.S. government work). excerpted (selected rows/columns; values unchanged).",
+      "real_data": true,
+      "source_registry_id": "stat-foreign-born-region-1900-1990",
+      "source_sha256": "bf9a187faedc438aacb240fb56fffbfb7d78052acef3e1b3383dce344f813f20"
+     }
+    ]
+   },
+   "items": [
+    {
+     "archetype": "ush_real_1A",
+     "topic": "8.14",
+     "skill": "1.A",
+     "stem": "Which of the following trends is shown in the table for the period from 1960 to 1990?",
+     "options": [
+      {
+       "text": "Residents born in Northern America became the largest group of the foreign-born population by 1990.",
+       "why": "Northern America-born residents fell from 952,500 in 1960 to 753,917 in 1990, far below the Asian and Latin American totals.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "The total foreign-born population fell at every census year shown after 1960.",
+       "why": "The total dropped slightly in 1970 (9,738,091 to 9,619,302) but rose to 14,079,906 in 1980 and 19,767,316 in 1990.",
+       "value": null,
+       "label": "overstated"
+      },
+      {
+       "text": "The number born in Asia and in Latin America rose while the number born in Europe fell.",
+       "why": "Asian-born residents rose from 490,996 to 4,979,037 and Latin American-born from 908,309 to 8,407,837, while European-born fell from 7,256,311 to 4,350,403.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "Europe remained the leading region of birth for the foreign-born in every year shown.",
+       "why": "Europe led through 1980 (5,149,572 versus 4,372,487 for Latin America), but in 1990 Latin America (8,407,837) and Asia (4,979,037) both exceeded Europe (4,350,403).",
+       "value": null,
+       "label": "overstated"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is \"The number born in Asia and in Latin America rose while the number born in Europe fell.\". Asian-born residents rose from 490,996 to 4,979,037 and Latin American-born from 908,309 to 8,407,837, while European-born fell from 7,256,311 to 4,350,403.\n\"Residents born in Northern America became the largest group of the foreign-born population by 1990.\" is incorrect: Northern America-born residents fell from 952,500 in 1960 to 753,917 in 1990, far below the Asian and Latin American totals.\n\"The total foreign-born population fell at every census year shown after 1960.\" is incorrect: The total dropped slightly in 1970 (9,738,091 to 9,619,302) but rose to 14,079,906 in 1980 and 19,767,316 in 1990.\n\"Europe remained the leading region of birth for the foreign-born in every year shown.\" is incorrect: Europe led through 1980 (5,149,572 versus 4,372,487 for Latin America), but in 1990 Latin America (8,407,837) and Asia (4,979,037) both exceeded Europe (4,350,403).",
+     "est_seconds": 75,
+     "facts": [
+      "Foreign-born residents from Asia and Latin America increased after 1960 while those from Europe decreased.",
+      "Europe was the leading region of birth through 1980 but not in 1990."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "1.A",
+      "key_evidence_in_source": "Europe 7,256,311 (1960) to 4,350,403 (1990); Asia 490,996 to 4,979,037; Latin America 908,309 to 8,407,837"
+     },
+     "verification": {
+      "status": "verified",
+      "blind_solvers": [
+       "claude-opus-5-5",
+       "claude-sonnet-5-5"
+      ],
+      "solver_choices": [
+       2,
+       2
+      ],
+      "solver_confidence": [
+       "certain",
+       "certain"
+      ],
+      "fact_checker": "claude-fable-5-1",
+      "fact_verdict": "sound",
+      "flags": []
+     }
+    },
+    {
+     "archetype": "ush_real_4B",
+     "topic": "8.14",
+     "skill": "4.B",
+     "stem": "Which of the following most directly helped cause the change in the number of Asian-born residents between 1970 and 1990?",
+     "options": [
+      {
+       "text": "The Immigration and Nationality Act of 1965 ended national-origins quotas and favored family ties.",
+       "why": "The 1965 law replaced the 1920s quota system with a preference system that opened immigration from Asia, and Asian-born residents rose from 824,887 in 1970 to 4,979,037 in 1990.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "The Chinese Exclusion Act of 1882 barred Chinese laborers from entering the United States for years.",
+       "why": "The Chinese Exclusion Act restricted Asian immigration and dates from 1882, so it cannot explain a rise after 1970.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "The Immigration Act of 1924 limited immigration through quotas based on national origin.",
+       "why": "The 1924 law restricted Asian and southern and eastern European immigration; it was replaced by the 1965 law, not responsible for growth after 1970.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "The Marshall Plan sent American aid to rebuild the economies of Western Europe after the war.",
+       "why": "The Marshall Plan (1948) aided Western Europe and had no direct effect on migration from Asia to the United States.",
+       "value": null,
+       "label": "unrelated_development"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is \"The Immigration and Nationality Act of 1965 ended national-origins quotas and favored family ties.\". The 1965 law replaced the 1920s quota system with a preference system that opened immigration from Asia, and Asian-born residents rose from 824,887 in 1970 to 4,979,037 in 1990.\n\"The Chinese Exclusion Act of 1882 barred Chinese laborers from entering the United States for years.\" is incorrect: The Chinese Exclusion Act restricted Asian immigration and dates from 1882, so it cannot explain a rise after 1970.\n\"The Immigration Act of 1924 limited immigration through quotas based on national origin.\" is incorrect: The 1924 law restricted Asian and southern and eastern European immigration; it was replaced by the 1965 law, not responsible for growth after 1970.\n\"The Marshall Plan sent American aid to rebuild the economies of Western Europe after the war.\" is incorrect: The Marshall Plan (1948) aided Western Europe and had no direct effect on migration from Asia to the United States.",
+     "est_seconds": 75,
+     "facts": [
+      "The Immigration and Nationality Act of 1965 abolished the national-origins quota system.",
+      "The Chinese Exclusion Act (1882) and Immigration Act of 1924 restricted immigration."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "4.B",
+      "key_evidence_in_source": "Asia-born 824,887 (1970), 2,539,777 (1980), 4,979,037 (1990)"
+     },
+     "verification": {
+      "status": "verified",
+      "blind_solvers": [
+       "claude-opus-5-5",
+       "claude-sonnet-5-5"
+      ],
+      "solver_choices": [
+       0,
+       0
+      ],
+      "solver_confidence": [
+       "certain",
+       "certain"
+      ],
+      "fact_checker": "claude-fable-5-1",
+      "fact_verdict": "sound",
+      "flags": []
+     }
+    },
+    {
+     "archetype": "ush_real_4A",
+     "topic": "8.14",
+     "skill": "4.A",
+     "stem": "The decline in the number of European-born residents between 1930 and 1960 is best explained in part by which of the following?",
+     "options": [
+      {
+       "text": "The Immigration and Nationality Act of 1965 ended the use of national-origins quotas.",
+       "why": "That law was passed in 1965, after the 1960 census, so it cannot explain the change between 1930 and 1960.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "The federal government deported most European-born residents after the Second World War ended.",
+       "why": "No such mass deportation occurred; the table shows 7,256,311 European-born residents still living in the country in 1960.",
+       "value": null,
+       "label": "unsupported_by_source"
+      },
+      {
+       "text": "The Homestead Act drew large numbers of European farmers to the Great Plains.",
+       "why": "The Homestead Act dates from 1862 and encouraged earlier settlement; it cannot explain a decline after 1930.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "Quotas set in the 1920s sharply limited new European immigration.",
+       "why": "The Emergency Quota Act (1921) and Immigration Act of 1924 cut European arrivals, and the Depression and war kept them low, so the European-born population aged and shrank (11,784,010 in 1930 to 7,256,311 in 1960).",
+       "value": null,
+       "label": "key"
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is \"Quotas set in the 1920s sharply limited new European immigration.\". The Emergency Quota Act (1921) and Immigration Act of 1924 cut European arrivals, and the Depression and war kept them low, so the European-born population aged and shrank (11,784,010 in 1930 to 7,256,311 in 1960).\n\"The Immigration and Nationality Act of 1965 ended the use of national-origins quotas.\" is incorrect: That law was passed in 1965, after the 1960 census, so it cannot explain the change between 1930 and 1960.\n\"The federal government deported most European-born residents after the Second World War ended.\" is incorrect: No such mass deportation occurred; the table shows 7,256,311 European-born residents still living in the country in 1960.\n\"The Homestead Act drew large numbers of European farmers to the Great Plains.\" is incorrect: The Homestead Act dates from 1862 and encouraged earlier settlement; it cannot explain a decline after 1930.",
+     "est_seconds": 75,
+     "facts": [
+      "The Emergency Quota Act (1921) and the Immigration Act of 1924 set national-origins quotas.",
+      "Immigration was low during the Great Depression and the Second World War."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "4.A",
+      "key_evidence_in_source": "Europe-born 11,784,010 (1930) to 7,256,311 (1960)"
+     },
+     "verification": {
+      "status": "verified",
+      "blind_solvers": [
+       "claude-opus-5-5",
+       "claude-sonnet-5-5"
+      ],
+      "solver_choices": [
+       3,
+       3
+      ],
+      "solver_confidence": [
+       "certain",
+       "certain"
+      ],
+      "fact_checker": "claude-fable-5-1",
+      "fact_verdict": "sound",
+      "flags": []
+     }
+    }
+   ],
+   "excluded_items": []
+  }
+ },
+ {
+  "cellId": "ap_us_history-real_r3",
+  "apSubjectCode": "ap_us_history",
+  "kind": "mc",
+  "calculator": "na",
+  "reserve": false,
+  "wording": "authored_from_real_source",
+  "candidateKey": "ap_us_history-real_r3-k0",
+  "keywordCode": "5.6",
+  "unitCode": "5",
+  "skillPrimary": "3.A",
+  "structure": "shared_stimulus_set",
+  "archetype": "ush_real_real_r3",
+  "reviewState": "verified_by_independent_models",
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficulty": [
+   {
+    "label": "basic_learning"
+   },
+   {
+    "label": "basic_learning"
+   },
+   {
+    "label": "exam_prep"
+   }
+  ],
+  "run": "ush-real-1",
+  "stockKey": "ush-real-1:ap_us_history-real_r3-k0",
+  "stimulusOrigin": "real_historical_source",
+  "sourceRegistryIds": [
+   "map-reynolds-1856"
+  ],
+  "payload": {
+   "archetype": "ush_real_real_r3",
+   "topic": "5.6",
+   "skill": "3.A",
+   "calculator": "na",
+   "set_intro": "Historical source (real document)\n(map)\nReynolds's political map of the United States, designed to exhibit the comparative area of the free and slave states and the territory open to slavery or freedom by the repeal of the Missouri Compromise\nWilliam C. Reynolds and J. C. Jones, publishers (New York); Rufus Blanchard (Chicago), 1856. Library of Congress, Geography and Map Division. Reuse: public domain (published 1856, before 1929; LoC GMD free to use and reuse). unmodified except LoC's IIIF 12.5% rendering (979x887 px).\n\nThe map for this source appears below.",
+   "stimulus": {
+    "kind": "image",
+    "description": "An 1856 political map of the United States in which free states are colored red, slave states gray and western territories green; portraits of John C. Fremont and William L. Dayton appear at the top corners, with tables of census statistics for the free and slave states below the map.",
+    "data": {
+     "path": "ap-sources/map-reynolds-1856/image.jpg",
+     "alt": "An 1856 political map of the United States in which free states are colored red, slave states gray and western territories green; portraits of John C. Fremont and William L. Dayton appear at the top corners, with tables of census statistics for the free and slave states below the map.",
+     "credit": "Reynolds's Political Map of the United States, 1856. Library of Congress, Geography and Map Division (G3701.E9 1856 .R4). Public domain."
+    }
+   },
+   "ush_set": {
+    "period": 5,
+    "stim_type": "image",
+    "theme": "The territorial question on the eve of the 1856 election",
+    "title": "Free States, Slave States, and the Western Territories, 1856",
+    "sources": [
+     {
+      "id": "A",
+      "kind": "map",
+      "title": "Reynolds's political map of the United States, designed to exhibit the comparative area of the free and slave states and the territory open to slavery or freedom by the repeal of the Missouri Compromise",
+      "attribution": "William C. Reynolds and J. C. Jones, publishers (New York); Rufus Blanchard (Chicago), 1856. Library of Congress, Geography and Map Division. Reuse: public domain (published 1856, before 1929; LoC GMD free to use and reuse). unmodified except LoC's IIIF 12.5% rendering (979x887 px).",
+      "real_data": true,
+      "source_registry_id": "map-reynolds-1856",
+      "source_sha256": "752cec3f44c1bccf40e032200a94f9a30a173fbb0f9a221edf4d83a500c820a0"
+     }
+    ]
+   },
+   "items": [
+    {
+     "archetype": "ush_real_3A",
+     "topic": "5.6",
+     "skill": "3.A",
+     "stem": "The title of the map suggests that its publishers wanted viewers to focus on which of the following issues?",
+     "options": [
+      {
+       "text": "Whether the Confederate States could win recognition as an independent nation.",
+       "why": "The map was published in 1856; the Confederacy did not exist until 1861.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "Whether slavery would be allowed to spread into the western territories.",
+       "why": "The title refers to 'the territory open to slavery or freedom by the repeal of the Missouri Compromise,' naming the expansion of slavery as the issue.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "Whether high tariffs should be used to protect Northern manufacturers.",
+       "why": "The title and the colors by free and slave status address slavery, not tariff policy.",
+       "value": null,
+       "label": "unrelated_development"
+      },
+      {
+       "text": "Whether the federal government should build a railroad to the Pacific coast.",
+       "why": "Nothing in the title concerns railroads; it concerns the free and slave states and the territories.",
+       "value": null,
+       "label": "unrelated_development"
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is \"Whether slavery would be allowed to spread into the western territories.\". The title refers to 'the territory open to slavery or freedom by the repeal of the Missouri Compromise,' naming the expansion of slavery as the issue.\n\"Whether the Confederate States could win recognition as an independent nation.\" is incorrect: The map was published in 1856; the Confederacy did not exist until 1861.\n\"Whether high tariffs should be used to protect Northern manufacturers.\" is incorrect: The title and the colors by free and slave status address slavery, not tariff policy.\n\"Whether the federal government should build a railroad to the Pacific coast.\" is incorrect: Nothing in the title concerns railroads; it concerns the free and slave states and the territories.",
+     "est_seconds": 75,
+     "facts": [
+      "The map's title concerns the comparative area of free and slave states and territory opened by the repeal of the Missouri Compromise.",
+      "The Confederacy was formed in 1861."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "3.A",
+      "key_evidence_in_source": "title: 'the territory open to slavery or freedom by the repeal of the Missouri Compromise'"
+     },
+     "verification": {
+      "status": "verified",
+      "blind_solvers": [
+       "claude-opus-5-5",
+       "claude-sonnet-5-5"
+      ],
+      "solver_choices": [
+       1,
+       1
+      ],
+      "solver_confidence": [
+       "certain",
+       "certain"
+      ],
+      "fact_checker": "claude-fable-5-1",
+      "fact_verdict": "sound",
+      "flags": []
+     }
+    },
+    {
+     "archetype": "ush_real_4A",
+     "topic": "5.6",
+     "skill": "4.A",
+     "stem": "The repeal of the Missouri Compromise mentioned in the title was accomplished by which of the following?",
+     "options": [
+      {
+       "text": "The Compromise of 1850, which admitted California as a free state.",
+       "why": "The Compromise of 1850 left the Missouri Compromise line in place for the Louisiana Purchase lands; the line was repealed four years later.",
+       "value": null,
+       "label": "misattributed"
+      },
+      {
+       "text": "The Wilmot Proviso, which proposed banning slavery in lands taken from Mexico.",
+       "why": "The Wilmot Proviso of 1846 never passed the Senate and did not repeal anything.",
+       "value": null,
+       "label": "misattributed"
+      },
+      {
+       "text": "The Kansas-Nebraska Act, which let settlers decide the slavery question by popular sovereignty.",
+       "why": "The Kansas-Nebraska Act (1854) organized two territories north of the 36 30 line and repealed the Missouri Compromise restriction there, which is the event the map's title cites.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "The Dred Scott decision, which ruled that Congress could not ban slavery in the territories at all.",
+       "why": "Dred Scott was decided in 1857, after this 1856 map was published, and was a court ruling that called the Missouri line unconstitutional rather than a repeal.",
+       "value": null,
+       "label": "wrong_period"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is \"The Kansas-Nebraska Act, which let settlers decide the slavery question by popular sovereignty.\". The Kansas-Nebraska Act (1854) organized two territories north of the 36 30 line and repealed the Missouri Compromise restriction there, which is the event the map's title cites.\n\"The Compromise of 1850, which admitted California as a free state.\" is incorrect: The Compromise of 1850 left the Missouri Compromise line in place for the Louisiana Purchase lands; the line was repealed four years later.\n\"The Wilmot Proviso, which proposed banning slavery in lands taken from Mexico.\" is incorrect: The Wilmot Proviso of 1846 never passed the Senate and did not repeal anything.\n\"The Dred Scott decision, which ruled that Congress could not ban slavery in the territories at all.\" is incorrect: Dred Scott was decided in 1857, after this 1856 map was published, and was a court ruling that called the Missouri line unconstitutional rather than a repeal.",
+     "est_seconds": 75,
+     "facts": [
+      "The Kansas-Nebraska Act of 1854 repealed the Missouri Compromise's ban on slavery north of 36 30 in the Louisiana Purchase lands.",
+      "Dred Scott v. Sandford was decided in 1857."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "4.A",
+      "key_evidence_in_source": "title says the territory was opened 'by the repeal of the Missouri Compromise' (map dated 1856)"
+     },
+     "verification": {
+      "status": "verified",
+      "blind_solvers": [
+       "claude-opus-5-5",
+       "claude-sonnet-5-5"
+      ],
+      "solver_choices": [
+       2,
+       2
+      ],
+      "solver_confidence": [
+       "certain",
+       "certain"
+      ],
+      "fact_checker": "claude-fable-5-1",
+      "fact_verdict": "sound",
+      "flags": []
+     }
+    },
+    {
+     "archetype": "ush_real_2B",
+     "topic": "5.6",
+     "skill": "2.B",
+     "stem": "The portraits of John C. Fremont and William L. Dayton at the top of the map most likely indicate that the publishers wanted to",
+     "options": [
+      {
+       "text": "promote the 1856 Republican presidential ticket by making the case against extending slavery.",
+       "why": "Fremont and Dayton were the Republican presidential and vice-presidential candidates in 1856, and the map presents the free-versus-slave comparison as a campaign argument.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "support the Democratic candidate James Buchanan, who favored letting settlers decide on slavery.",
+       "why": "Fremont and Dayton ran against Buchanan, the Democratic nominee, in 1856, so their portraits do not promote him.",
+       "value": null,
+       "label": "misattributed"
+      },
+      {
+       "text": "celebrate the Whig party's long record of winning presidential elections.",
+       "why": "The Whig party had collapsed by 1856, and its former members were divided among the Republican and American parties.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "announce a compromise ticket meant to unite Northern and Southern voters in 1856.",
+       "why": "The Republican ticket was entirely sectional, drawing support from the North, and not a compromise between sections.",
+       "value": null,
+       "label": "reversal"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is \"promote the 1856 Republican presidential ticket by making the case against extending slavery.\". Fremont and Dayton were the Republican presidential and vice-presidential candidates in 1856, and the map presents the free-versus-slave comparison as a campaign argument.\n\"support the Democratic candidate James Buchanan, who favored letting settlers decide on slavery.\" is incorrect: Fremont and Dayton ran against Buchanan, the Democratic nominee, in 1856, so their portraits do not promote him.\n\"celebrate the Whig party's long record of winning presidential elections.\" is incorrect: The Whig party had collapsed by 1856, and its former members were divided among the Republican and American parties.\n\"announce a compromise ticket meant to unite Northern and Southern voters in 1856.\" is incorrect: The Republican ticket was entirely sectional, drawing support from the North, and not a compromise between sections.",
+     "est_seconds": 75,
+     "facts": [
+      "John C. Fremont and William L. Dayton were the Republican nominees for president and vice president in 1856.",
+      "James Buchanan won the 1856 election as the Democratic candidate."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "2.B",
+      "key_evidence_in_source": "portraits labeled 'JOHN C. FREMONT' and 'WM. L. DAYTON' at the top corners of the map"
+     },
+     "verification": {
+      "status": "verified",
+      "blind_solvers": [
+       "claude-opus-5-5",
+       "claude-sonnet-5-5"
+      ],
+      "solver_choices": [
+       0,
+       0
+      ],
+      "solver_confidence": [
+       "certain",
+       "certain"
+      ],
+      "fact_checker": "claude-fable-5-1",
+      "fact_verdict": "sound",
+      "flags": []
+     }
+    }
+   ],
+   "excluded_items": []
+  }
+ }
+]

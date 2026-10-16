@@ -9,6 +9,8 @@ import {
   reactivateTeacher,
   getTeacherActivationChecklist,
 } from "./workspace-actions";
+import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
+import { fmtDate } from "@/lib/format-datetime";
 
 const STATUS_LABEL: Record<string, string> = {
   not_started: "시작 전",
@@ -36,6 +38,7 @@ export default function WorkspaceTab({
 }: {
   provisionings: WorkspaceProvisioningItem[];
 }) {
+  const tz = useViewerTimezone();
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
   const [busyId, setBusyId] = useState<string | null>(null);
@@ -127,11 +130,7 @@ export default function WorkspaceTab({
   }
 
   return (
-    <div className="max-w-[760px] px-8 py-8">
-      <h1 className="text-[20px] font-extrabold text-ink mb-5">
-        선생님 Google Workspace 프로비저닝
-      </h1>
-
+    <div className="max-w-[760px]">
       {error && (
         <div className="bg-red/10 text-red text-[13px] font-semibold rounded-lg px-4 py-3 mb-4">
           {error}
@@ -237,7 +236,7 @@ export default function WorkspaceTab({
                       {c.satisfied ? "✅" : "⬜"} {CONDITION_LABEL[c.condition] ?? c.condition}
                     </span>
                     <span className="text-grey-400">
-                      {c.evidence_at ? new Date(c.evidence_at).toLocaleDateString("ko-KR") : "—"}
+                      {c.evidence_at ? fmtDate(c.evidence_at, undefined, tz) : "—"}
                     </span>
                   </li>
                 ))}

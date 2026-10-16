@@ -1,0 +1,209 @@
+[
+ {
+  "cellId": "ap_calculus_bc-m01",
+  "archetype": "int_by_parts",
+  "kind": "mc",
+  "unitCode": "6",
+  "topic": "6.11",
+  "skill": "1.C",
+  "calculator": "not_allowed",
+  "candidates": 4,
+  "extraTopics": []
+ },
+ {
+  "cellId": "ap_calculus_bc-m02",
+  "archetype": "partial_fractions",
+  "kind": "mc",
+  "unitCode": "6",
+  "topic": "6.12",
+  "skill": "1.C",
+  "calculator": "not_allowed",
+  "candidates": 4,
+  "extraTopics": []
+ },
+ {
+  "cellId": "ap_calculus_bc-m03",
+  "archetype": "improper_integral",
+  "kind": "mc",
+  "unitCode": "6",
+  "topic": "6.13",
+  "skill": "3.D",
+  "calculator": "not_allowed",
+  "candidates": 4,
+  "extraTopics": []
+ },
+ {
+  "cellId": "ap_calculus_bc-m04",
+  "archetype": "euler_method",
+  "kind": "mc",
+  "unitCode": "7",
+  "topic": "7.5",
+  "skill": "1.E",
+  "calculator": "not_allowed",
+  "candidates": 4,
+  "extraTopics": []
+ },
+ {
+  "cellId": "ap_calculus_bc-m05",
+  "archetype": "logistic",
+  "kind": "mc",
+  "unitCode": "7",
+  "topic": "7.9",
+  "skill": "1.D",
+  "calculator": "not_allowed",
+  "candidates": 4,
+  "extraTopics": []
+ },
+ {
+  "cellId": "ap_calculus_bc-m06",
+  "archetype": "arc_length_calc",
+  "kind": "mc",
+  "unitCode": "8",
+  "topic": "8.13",
+  "skill": "1.E",
+  "calculator": "required",
+  "candidates": 4,
+  "extraTopics": []
+ },
+ {
+  "cellId": "ap_calculus_bc-m07",
+  "archetype": "param_dydx",
+  "kind": "mc",
+  "unitCode": "9",
+  "topic": "9.1",
+  "skill": "1.E",
+  "calculator": "not_allowed",
+  "candidates": 4,
+  "extraTopics": []
+ },
+ {
+  "cellId": "ap_calculus_bc-m08",
+  "archetype": "param_speed_calc",
+  "kind": "mc",
+  "unitCode": "9",
+  "topic": "9.6",
+  "skill": "1.E",
+  "calculator": "required",
+  "candidates": 4,
+  "extraTopics": []
+ },
+ {
+  "cellId": "ap_calculus_bc-m09",
+  "archetype": "param_second",
+  "kind": "mc",
+  "unitCode": "9",
+  "topic": "9.2",
+  "skill": "1.E",
+  "calculator": "not_allowed",
+  "candidates": 4,
+  "extraTopics": []
+ },
+ {
+  "cellId": "ap_calculus_bc-m10",
+  "archetype": "param_arclength_calc",
+  "kind": "mc",
+  "unitCode": "9",
+  "topic": "9.3",
+  "skill": "1.D",
+  "calculator": "required",
+  "candidates": 4,
+  "extraTopics": []
+ },
+ {
+  "cellId": "ap_calculus_bc-m11",
+  "archetype": "polar_area_calc",
+  "kind": "mc",
+  "unitCode": "9",
+  "topic": "9.8",
+  "skill": "1.D",
+  "calculator": "required",
+  "candidates": 4,
+  "extraTopics": []
+ },
+ {
+  "cellId": "ap_calculus_bc-m12",
+  "archetype": "series_test",
+  "kind": "mc",
+  "unitCode": "10",
+  "topic": "10.9",
+  "skill": "3.D",
+  "calculator": "not_allowed",
+  "candidates": 4,
+  "extraTopics": []
+ },
+ {
+  "cellId": "ap_calculus_bc-m13",
+  "archetype": "taylor_coeff",
+  "kind": "mc",
+  "unitCode": "10",
+  "topic": "10.14",
+  "skill": "1.E",
+  "calculator": "not_allowed",
+  "candidates": 4,
+  "extraTopics": []
+ },
+ {
+  "cellId": "ap_calculus_bc-m14",
+  "archetype": "radius_interval",
+  "kind": "mc",
+  "unitCode": "10",
+  "topic": "10.13",
+  "skill": "1.E",
+  "calculator": "not_allowed",
+  "candidates": 4,
+  "extraTopics": []
+ },
+ {
+  "cellId": "ap_calculus_bc-m15",
+  "archetype": "geometric_sum",
+  "kind": "mc",
+  "unitCode": "10",
+  "topic": "10.2",
+  "skill": "1.E",
+  "calculator": "not_allowed",
+  "candidates": 4,
+  "extraTopics": []
+ },
+ {
+  "cellId": "ap_calculus_bc-m16",
+  "archetype": "lagrange_error",
+  "kind": "mc",
+  "unitCode": "10",
+  "topic": "10.12",
+  "skill": "3.D",
+  "calculator": "not_allowed",
+  "candidates": 4,
+  "extraTopics": []
+ },
+ {
+  "cellId": "ap_calculus_bc-f01",
+  "archetype": "frq_series",
+  "kind": "frq_bundle",
+  "unitCode": "10",
+  "topic": "10.14",
+  "skill": "1.E",
+  "calculator": "not_allowed",
+  "candidates": 4,
+  "extraTopics": [
+   "10.13",
+   "10.10"
+  ],
+  "template": "series_taylor_convergence"
+ },
+ {
+  "cellId": "ap_calculus_bc-f02",
+  "archetype": "frq_parametric",
+  "kind": "frq_bundle",
+  "unitCode": "9",
+  "topic": "9.6",
+  "skill": "1.E",
+  "calculator": "required",
+  "candidates": 4,
+  "extraTopics": [
+   "9.1",
+   "9.2",
+   "9.3"
+  ],
+  "template": "parametric_motion_calc"
+ }
+]

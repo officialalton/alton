@@ -1,0 +1,73 @@
+{
+ "version": "v1-englang-s2b",
+ "run": "englang-s2b",
+ "subject": "ap_english_language",
+ "mode": "mc",
+ "capUsd": 3.4,
+ "hardStopCumulativeUsd": 138,
+ "myTotalCapUsd": 31,
+ "syncStages": [
+  "gen"
+ ],
+ "stages": [
+  "gen",
+  "check",
+  "solve",
+  "adv",
+  "judge",
+  "finalize"
+ ],
+ "plan": {
+  "reading": {
+   "sets": 2,
+   "seed": 9421,
+   "startIndex": 30
+  },
+  "writing": {
+   "sets": 2,
+   "seed": 9422,
+   "startIndex": 30
+  }
+ },
+ "models": {
+  "gen": "claude-fable-5-1",
+  "solvers": [
+   "claude-opus-5-5",
+   "claude-sonnet-5-5",
+   "claude-fable-5-1"
+  ],
+  "adversary": "claude-fable-5-1",
+  "judge": "claude-opus-5-5",
+  "review": "claude-sonnet-5-5",
+  "sampleHigh": "claude-opus-5-5",
+  "sampleLow": "claude-sonnet-5-5",
+  "graders": [
+   "claude-opus-5-5",
+   "claude-sonnet-5-5",
+   "claude-fable-5-1"
+  ]
+ },
+ "genModels": {
+  "reading": "claude-fable-5-1",
+  "writing": "claude-opus-5-5"
+ },
+ "effort": "medium",
+ "genEffort": "low",
+ "minKeyConfidence": 0.8,
+ "corpusExclude": [],
+ "generatorFiles": [
+  "lib/ap-generation/englang-gates.ts",
+  "lib/ap-generation/englang-frq.ts",
+  "lib/ap-generation/englang-plan.ts",
+  "lib/ap-generation/englang-prompts.ts",
+  "lib/ap-generation/english-text-stats.ts",
+  "lib/ap-generation/subjects/englang.ts",
+  "lib/ap-exam/elang-rules.ts",
+  "scripts/ap-generation/englang-pipeline.ts",
+  "scripts/mock-exam-generation/batch-lib.ts"
+ ],
+ "expected": {
+  "hash": "e134e39b5564"
+ },
+ "_note": "EL2 supplement top-up: S-R and writing shortfall after s2a."
+}

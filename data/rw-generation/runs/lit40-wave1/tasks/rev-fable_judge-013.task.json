@@ -1,0 +1,315 @@
+{
+ "schema": "rw-session-task/v1",
+ "kind": "review",
+ "role": "fable_judge",
+ "runId": "lit40-wave1",
+ "taskId": "rev-fable_judge-013",
+ "chunkId": "rev-fable_judge-013",
+ "suggestedModel": "fable",
+ "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-fable_judge-013.result.json",
+ "outputSchema": {
+  "chunkId": "청크 ID",
+  "model": "fable",
+  "items": [
+   {
+    "candidateId": "id",
+    "picked_letter": "A|B|C|D",
+    "other_defensible": "정답 외 방어 가능한 선택지가 있으면 true",
+    "est_difficulty": "easy|medium|hard (실제 체감, 요청 난이도에 맞추지 말 것)",
+    "hard_fit": "실제 SAT hard 수준의 사고 단계가 필요하면 true(지문 길이·난어만이면 false)",
+    "plausible_distractors": "오답 3개가 모두 그럴듯하고 서로 다른 오개념에서 나왔으면 true",
+    "length_balanced": "네 선택지 길이·구체성이 비슷해 정답이 형식으로 드러나지 않으면 true",
+    "multi_answer_risk": "복수 정답 위험이 있으면 true",
+    "issues": "한 줄 메모"
+   }
+  ]
+ },
+ "items": [
+  {
+   "candidateId": "lit40-medium-02-021",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "medium",
+   "passage": "Rails clicked under the floor, and the compartment smelled of wet umbrellas and green tea gone cold. Akari, who had taught Haoran calligraphy for six years, sat across from him with her hands folded. Somewhere between their last lesson and this trip to Kyoto, one of them had promised the other something. Neither could say what. Each suspected the other remembered and was waiting to be reminded. So they watched the rice fields slide past, and the silence between them became a sealed envelope, carried carefully, addressed to both of them, opened by neither. When the conductor called their station, Haoran reached for her bag before she could, the way he always had after class, and Akari let him take it without a word.",
+   "question": "As used in the text, the phrase “a sealed envelope” most nearly suggests that the silence between Akari and Haoran is",
+   "options": [
+    "a message that one of them has deliberately hidden from the other.",
+    "something they share and guard but are both reluctant to examine.",
+    "a formal barrier that has replaced the warmth of their earlier bond.",
+    "an obligation that Akari intends to fulfill once they arrive."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-02-022",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "medium",
+   "passage": "Who decides what a nine-year-old is ready to hear? I put that question to Father Thiago on the Clyde bridge in the winter of 1987, though I had not set foot in his church for three years. My younger brother had asked me why our mother no longer came home, and I wanted the priest to give me an answer I could repeat. Thiago leaned on the cold stone and watched the river for a long while. Then he said that a hard truth told gently was a lantern, not a stone; the boy could carry it in front of him instead of on his back. I, Saoirse, the lapsed one, had expected scripture. Instead he offered me something I could use, and that night I sat on my brother's bed and told him plainly.",
+   "question": "As used in the text, the phrase “a lantern, not a stone” most nearly suggests that a hard truth told gently",
+   "options": [
+    "is a burden that the boy will gradually learn to ignore.",
+    "should be postponed until the boy is old enough to carry it.",
+    "can help the boy see his way rather than simply weigh on him.",
+    "must come from the church rather than from the boy's own family."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-02-023",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "medium",
+   "passage": "Wind hissed through the pines above the mountain bus stop near Porto Alegre, and my mother, Mingyu, smelled of the orange peel she always chewed when nervous. In our family, a rule had come down like an heirloom: a bride must not see the wedding road before the wedding day. I was the bride, Booker was the groom, and the only road to the chapel was this one. Every bus would carry me past it. My mother studied the timetable as if it were scripture, then folded it into a small square. Rules are coats, she said at last, cut for the shoulders of whoever first wore them. She tucked the timetable into my pocket, and when the bus came, she climbed on beside me without looking away from the road.",
+   "question": "As used in the text, the phrase “Rules are coats” most nearly suggests that the family rule",
+   "options": [
+    "protects the family from the harsh conditions of the mountains.",
+    "is a disguise that hides the bride's true feelings about marriage.",
+    "must be worn proudly by every bride who joins the family.",
+    "was shaped for earlier circumstances and may not fit the present."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-02-030",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "medium",
+   "passage": "\"They printed your name in the county paper, Odessa,\" Lucius said, leaning on the cemetery gate he had owned, along with the cottage beside it, for thirty years. I had grown the prize-winning cotton in the plot he rented me, and for a moment we both laughed like old friends at a picnic. He even tipped his hat. Then he looked past me at the field, and his voice cooled. A tenant who wins prizes, he said, can afford a landlord's new price. He named a figure twice what I paid. I folded the newspaper along its crease, the way one folds a flag, and set it on the gate between us.",
+   "question": "Which choice best describes the shift in tone in the text?",
+   "options": [
+    "From grieving to festive, as Odessa recalls her family's long history on the land",
+    "From hostile to forgiving, as Lucius regrets an old quarrel with Odessa",
+    "From anxious to relieved, as Odessa learns that her rent will not change",
+    "From cordial to calculating, as Lucius turns Odessa's success into leverage"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-02-031",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "medium",
+   "passage": "We had climbed four flights of the Haifa stairwell before Amit, the visiting surveyor, mentioned the promise. Avraham, who kept the building, was in good humor, tapping each banister and naming the families who had lived behind each door: the baker, the violinist, the twins who chalked the landings. Amit listened, smiling, and wrote nothing. On the fifth landing he stopped beside a child's chalk drawing of a tree. The building would come down in spring, he said quietly. Avraham's hand stayed on the banister. He had told the girl upstairs that her tree would outlast them both, and now he stood looking at it as though it were already being washed away.",
+   "question": "Which choice best describes the shift in tone in the text?",
+   "options": [
+    "From genial reminiscence to quiet dismay",
+    "From cautious suspicion to open relief",
+    "From mournful regret to renewed hope",
+    "From brisk efficiency to lighthearted teasing"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-02-032",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "medium",
+   "passage": "Kai, the captain, found him at dawn\nbehind the rooftop tank in Mumbai,\na stowaway from the harbor, salt still in his hair,\nand laughed, and shared his tea, and called him lucky.\nThey traded jokes about the gulls,\nabout the city's thousand radios.\nThen Nikhil spoke: he had come to say\nhe was sorry for the fire on the old ship,\nthe one that took the captain's brother.\nKai set down the cup.\nThe tank dripped. The radios went on.\nAn apology, he said, is a boat\nthat must leave while the tide is high.",
+   "question": "Which choice best describes the shift in tone in the poem?",
+   "options": [
+    "From mournful to joyful, as Kai at last accepts Nikhil's late apology",
+    "From lighthearted to grave, as Nikhil's confession alters it",
+    "From fearful to confident, as Nikhil realizes he will not be punished",
+    "From formal to intimate, as the two men discover a shared past"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-02-033",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "medium",
+   "passage": "Solder smoke and old dust hang over the bench of a Gdansk radio repair shop. MARTA, seventy, bends over an opened receiver; KSENIA, nineteen, paces by the window.\nKSENIA: Listen. Warsaw, Berlin, a station from Lisbon. Every one of them is somewhere I have never been.\nMARTA: (laughing) And every one of them is broken until we fix it. Pass me the small pliers, traveler.\nKSENIA: I mean it. I have a place on a ship in May.\n(MARTA stops. She sets down the receiver, and the hiss of static fills the room.)\nMARTA: My husband said May, too. He meant to send for me. I kept the shop open forty years so he could find it.\nKSENIA: (quietly) Then you know why I have to go.",
+   "question": "Which choice best describes the shift in tone in the text?",
+   "options": [
+    "From bitter to forgiving, as Marta pardons Ksenia for leaving",
+    "From anxious to excited, as Ksenia describes her travel plans",
+    "From teasing to sorrowful, as Marta recalls her own lost hope",
+    "From formal to playful, as the two women become closer friends"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-02-034",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "medium",
+   "passage": "Once, in the summer my uncle sent me to Tehran, I, Soraya, served as clerk to a retired judge, Etienne, who spent his holidays arbitrating quarrels at a camp beside the mountains. Each evening in the long dining hall, among clattering plates and the smell of saffron rice, he read aloud the judgments we had drafted together, and the children cheered. I glowed through every reading. Then one night the camp's oldest pupil asked him who had written the part about the stolen kite. Etienne smiled and said that he had. I had written it alone, word for word, and I sat very still, my spoon cooling in my hand, as the cheering began again.",
+   "question": "Which choice best describes the shift in tone in the text?",
+   "options": [
+    "From fearful to reassured, as the narrator realizes Etienne trusts her",
+    "From resentful to forgiving, as the narrator accepts Etienne's apology",
+    "From bored to amused, as the narrator joins in the children's cheering",
+    "From contented to stung, as the narrator sees her work claimed by him"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-02-035",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "medium",
+   "passage": "By the third hour in the Auckland barbershop, Makana had stopped pretending to read the magazines. My father ran the harbor ferry, and I, Ingrid, swept hair for the barber on Saturdays; Makana was a passenger who had missed the morning boat and was waiting for a call from the hospital about his wife. At first he joked with the barber about the rugby scores and let me tease him about his crooked part. When the phone finally rang, he crossed the room in two steps. He listened, said thank you, and sat down very slowly. Then he laughed, a loose, astonished laugh, and asked whether there was still time for a proper haircut before the evening ferry.",
+   "question": "Which choice best describes the shift in tone in the text?",
+   "options": [
+    "From strained patience to deep relief",
+    "From quiet grief to bitter disappointment",
+    "From cheerful confidence to sudden fear",
+    "From mild irritation to calm indifference"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-02-036",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "medium",
+   "passage": "Three things, brother Bartolo, I must set down before the festival: the shop owes four months' rent, the dock planks are rotting under our rehearsal spot, and you still play the second verse too fast. I write this by the lake at Oaxaca, where we practiced again tonight while the fishermen pretended not to listen. I meant this letter to be a ledger of our failures. Yet as I write I keep hearing how the water carried your guitar across to the far shore, and how an old fisherman stood up in his boat and took off his hat. Perhaps the shop will close. Perhaps it must. But on Sunday, I think, we will play as if someone on the far shore is waiting for us. Your brother, Emiliano",
+   "question": "Which choice best describes the shift in tone in the text?",
+   "options": [
+    "From playful teasing to stern disapproval",
+    "From grim accounting to tentative hope",
+    "From open despair to bitter resignation",
+    "From formal politeness to casual humor"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-02-037",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "medium",
+   "passage": "Ink on my thumbs again, and Mama Lindiwe watching me scrub them at the press-room sink. Nairobi, March 1984. Tonight her son and I leave for Mombasa, and she has spent all week at the press teaching me the proper goodbye: a printed card for each neighbor, set in her own type, the margins exact. I hated every card. I wanted to hug people, not hand them paper. This afternoon she locked the last frame and pulled one proof for herself. It said only, To my daughter, Kenya. She did not hand it to me. She pinned it above the press where the light falls, and then she turned away and told me the ink would never come off my thumbs if I kept fussing.",
+   "question": "Which choice best describes the shift in tone in the diary entry?",
+   "options": [
+    "From grateful to resentful, as Kenya learns she must print the cards alone",
+    "From cheerful to anxious, as Kenya worries about her move to Mombasa",
+    "From irritated to moved, as Kenya sees what the goodbye means to Lindiwe",
+    "From tender to cold, as Lindiwe refuses to give Kenya the final card"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-02-038",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "medium",
+   "passage": "Salt keeps every footprint. So the people of the white flats beyond Lima told it, and so you will hear it, as Renata the seamstress heard it on the night the caravan was to leave. Only one of you can stay to tend the well, the elders said, and Renata, laughing, offered her apprentice Nicolas a needle and a joke: whoever sewed the straighter seam would get to go. You can picture them racing by lamplight, teasing each other, thread snapping. But when Nicolas held up his perfect seam, Renata did not laugh. She looked at the long line of their footprints on the salt, all leading one way, and quietly unpicked her own seam so that his would win.",
+   "question": "Which choice best describes the shift in tone in the text?",
+   "options": [
+    "From solemn to comic, as the contest turns into a lighthearted game",
+    "From hopeful to bitter, as Renata resents losing the contest to Nicolas",
+    "From fearful to calm, as the elders settle the dispute on their behalf",
+    "From playful to selfless, as Renata quietly lets Nicolas go"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-02-041",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "text_structure",
+   "requestedDifficulty": "medium",
+   "passage": "I was hired to translate for Yusuf, not to argue on his behalf. That spring he had brought his late father's pocket watch to a clock-maker's shop near the cathedral in Seville, and the owner recited the house rule: no repair on any piece without a receipt of purchase. 'Tell him, Señorita Pilar,' he said, and every customer in the narrow room nodded, as though the rule had been handed down with the clocks themselves. I rendered it into Arabic word for word, and Yusuf only folded the watch back into his handkerchief. On the walk home I kept turning the phrase over. A receipt proves a sale, I thought, but not an inheritance; a son could own a thing more fully than any buyer. The next week I returned alone and asked the clock-maker, in my plainest Spanish, whom the rule was meant to protect. He was quiet for a long while, then wrote his own name on a slip of paper and slid it across the counter as though it were a receipt.",
+   "question": "Which choice best describes the overall structure of the text?",
+   "options": [
+    "The narrator explains a shop's rule, praises the customers who follow it, and then persuades Yusuf to accept it.",
+    "The narrator recounts Yusuf's loud protest against a rule and then describes how the clock-maker punished him.",
+    "The narrator conveys a rule as instructed, privately doubts its fairness, and then challenges it on her own.",
+    "The narrator compares two shops in Seville and then explains why one of them refused to repair the watch."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-02-042",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "text_structure",
+   "requestedDifficulty": "medium",
+   "passage": "Jianguo ran the rooftop laundry line above the dye works in Chengdu, and in my third week I tangled a whole row of sheets in the wind and said nothing. He rehung them himself before dawn. That night I wrote him an apology on the back of a ration slip and carried it in my pocket for a month, never quite handing it over. I meant to, each morning, as we pinned wet cotton to the wires. Then, in late autumn, he was transferred to the river mill, and the slip went soft with washing. Years afterward, training a nervous boy of my own on that same roof, I watched him snarl a line and freeze. I said only, 'Help me with the far end,' and we untangled it together. Only then did I see that Jianguo's silence had been a kind of answer.",
+   "question": "Which choice best describes the overall structure of the text?",
+   "options": [
+    "The narrator describes a workplace accident, explains how the foreman punished it, and then defends that punishment.",
+    "The narrator lists the duties of a laundry worker and then contrasts the methods of two different foremen.",
+    "The narrator recalls writing an apology, describes delivering it, and then reflects on the foreman's reply.",
+    "The narrator recounts an apology left undelivered and then shifts to a later scene that reframes the foreman's response."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-02-043",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "text_structure",
+   "requestedDifficulty": "medium",
+   "passage": "Three rules governed the guesthouse of the monastery outside Vienna: no talking after Compline, no fires in the rooms, and no leaving while snow closed the pass. So Linus and Kian, strangers who had arrived on the same stalled coach, found themselves sharing a bench and a long silence. Linus carried a violin he could not play; his uncle had wanted it to go to a pupil, but the will named the nephew. Kian, a carpenter, hummed while he worked a splinter from his thumb. On the second evening Linus opened the case and handed the violin across. Kian tuned it by ear and played so softly that the rule about talking seemed not to apply to music. On the fourth morning the pass opened. Kian boarded the eastbound coach with the violin under his arm, and Linus carried the empty case west, lighter than he had expected.",
+   "question": "Which choice best describes the overall structure of the text?",
+   "options": [
+    "It sets out rules and a reluctant heir, shows a quiet exchange, and ends with the instrument passing on.",
+    "It traces a violin's long history, explains the uncle's mistake, and ends with Linus learning to play it.",
+    "It presents a dispute between two travelers, shows the monks settling it, and ends with both leaving together.",
+    "It lists the guesthouse rules, shows the travelers breaking each one, and ends with the monks punishing them."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-02-044",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "underlined_portion_function",
+   "requestedDifficulty": "medium",
+   "passage": "Cyrus drove the Saturday route that ended at the open-air market in Vermont, and Gunnar rode it every week with the same cracked radio on his lap. Each time, Gunnar carried it to the stall where an old man soldered loose wires for a dollar, and each time the radio played for a day or two before falling silent again. Cyrus once remarked that a new radio would cost less than a year of repairs. Gunnar only smiled. __'My wife used to tune it to the farm report while she shelled peas,' he said, setting it gently on the seat beside him.__ After that, Cyrus stopped offering advice. On the ride home he turned down his own radio, and the two of them listened to the engine as the maples went by.",
+   "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+   "options": [
+    "It shows that Gunnar disputes Cyrus's estimate of how much the weekly repairs at the market cost.",
+    "It reveals why Gunnar keeps repairing the radio, which accounts for Cyrus's later change in behavior.",
+    "It suggests that Gunnar plans to buy a new radio once the old one finally stops working for good.",
+    "It introduces a conflict between Gunnar and the repairman that the rest of the text goes on to resolve."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-02-045",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "underlined_portion_function",
+   "requestedDifficulty": "medium",
+   "passage": "Seeds keep better than promises. Aigerim had told the members of the cooperative this for years, sorting millet and cowpea into labeled jars in the cool back room off a Dakar side street. On the morning Noa was to leave for university, he found her there before sunrise. Neither of them spoke of the envelope the cooperative had pressed into her hands in June, or of the jars she had promised to refill for every franc of it. __Instead she gave him a small paper packet of okra seed, folded twice and sealed with wax.__ 'For a windowsill,' she said. He tucked it into his jacket beside his ticket. On the bus north, he counted the seeds through the paper and decided he would someday send back twice as many.",
+   "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+   "options": [
+    "It explains how the cooperative decided to lend Aigerim the money for Noa's university tuition.",
+    "It shows Aigerim refusing to discuss Noa's plans because she quietly disapproves of them.",
+    "It presents a gesture that stands in for the debt the two characters avoid naming aloud.",
+    "It describes the routine sorting work Aigerim does at the cooperative early each morning."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-02-046",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "underlined_portion_function",
+   "requestedDifficulty": "medium",
+   "passage": "Lyon was two hours below us, and the road down had vanished under snow by noon. For three days Mathis and I argued about the woodstove: whether to bank it at night, how many logs, whose turn it was to crack the damper. 'Camille, it is only a stove,' he said the first night, which made it worse. I was fifteen and had decided that everything he did in that cabin was wrong. On the third night he let the fire die, on purpose, I was sure, and I said so loudly. __He did not answer; he only took my mother's old wool coat from the hook and laid it over my shoulders.__ I knew the coat at once. We had not spoken of her since the funeral, and the stove, I realized, had never been the point. In the morning we shoveled the path together, trading the one good shovel back and forth.",
+   "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+   "options": [
+    "It shows that Mathis has finally come to agree with Camille about how to manage the stove.",
+    "It emphasizes how bitterly cold the cabin has become after the fire went out overnight.",
+    "It suggests that Mathis wants to stop arguing because he is worn out from shoveling snow.",
+    "It introduces an object that turns the narrator toward the grief beneath their argument."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-02-047",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "underlined_portion_function",
+   "requestedDifficulty": "medium",
+   "passage": "By the last week of the rainy season, my grandmother's house on the hillside terrace above Manila held only one thing: a carved camphor chest I had priced for my secondhand shop and could not bring myself to sell. Putri came for it four times. She offered cash, then more cash, then a trade of two cabinets. Each time I found a reason: a cracked hinge, a buyer already promised, a lock without a key. On her fifth visit she simply sat on the lid and asked what my grandmother had kept inside. __I told her the truth: nothing at all, only the smell of camphor, which my grandmother said kept moths away from memories.__ Putri laughed, then stood and said she would come back once I had found something to put in it. That evening I swept the empty rooms and left the chest where it was.",
+   "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+   "options": [
+    "It reveals the sentimental reason behind the narrator's repeated excuses for not selling the chest.",
+    "It shows that the chest is far less valuable than Putri had believed it to be all along.",
+    "It explains why Putri decides to raise her offer for the chest once more on her final visit.",
+    "It confirms that the narrator's grandmother had hidden valuables inside the chest for years."
+   ]
+  }
+ ],
+ "instructions": "당신은 디지털 SAT 독립 채점자다. 정답 표시가 없다. 먼저 문항을 직접 풀고(picked_letter), 이어서 난이도·hard 적합·오답 품질을 판정한다. 요청 난이도에 맞추려 하지 말고 실제로 느끼는 대로 답한다.\n청크 rev-fable_judge-013 — 19문항.\n출력: Write 도구로 정확히 이 경로에 JSON 한 파일을 쓴다 → /Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-fable_judge-013.result.json\n출력 JSON 스키마(예시 구조): {\"chunkId\":\"청크 ID\",\"model\":\"fable\",\"items\":[{\"candidateId\":\"id\",\"picked_letter\":\"A|B|C|D\",\"other_defensible\":\"정답 외 방어 가능한 선택지가 있으면 true\",\"est_difficulty\":\"easy|medium|hard (실제 체감, 요청 난이도에 맞추지 말 것)\",\"hard_fit\":\"실제 SAT hard 수준의 사고 단계가 필요하면 true(지문 길이·난어만이면 false)\",\"plausible_distractors\":\"오답 3개가 모두 그럴듯하고 서로 다른 오개념에서 나왔으면 true\",\"length_balanced\":\"네 선택지 길이·구체성이 비슷해 정답이 형식으로 드러나지 않으면 true\",\"multi_answer_risk\":\"복수 정답 위험이 있으면 true\",\"issues\":\"한 줄 메모\"}]}\n허용 값: picked_letter ∈ {A,B,C,D}, 불리언 필드는 true/false, est_difficulty ∈ {easy,medium,hard}. candidateId 를 바꾸지 않고 모든 항목에 답한다.\n금지: 결과 파일 외의 파일 생성·수정, 다른 명령 실행, 문항 수정·재작성. 끝나면 'done <항목 수>' 한 줄만 답한다.\n\n## 문항\n### lit40-medium-02-021 — skill words_in_context · 유형 figurative_language · 요청 난이도 medium\n[지문]\nRails clicked under the floor, and the compartment smelled of wet umbrellas and green tea gone cold. Akari, who had taught Haoran calligraphy for six years, sat across from him with her hands folded. Somewhere between their last lesson and this trip to Kyoto, one of them had promised the other something. Neither could say what. Each suspected the other remembered and was waiting to be reminded. So they watched the rice fields slide past, and the silence between them became a sealed envelope, carried carefully, addressed to both of them, opened by neither. When the conductor called their station, Haoran reached for her bag before she could, the way he always had after class, and Akari let him take it without a word.\n\n[질문] As used in the text, the phrase “a sealed envelope” most nearly suggests that the silence between Akari and Haoran is\nA) a message that one of them has deliberately hidden from the other.\nB) something they share and guard but are both reluctant to examine.\nC) a formal barrier that has replaced the warmth of their earlier bond.\nD) an obligation that Akari intends to fulfill once they arrive.\n### lit40-medium-02-022 — skill words_in_context · 유형 figurative_language · 요청 난이도 medium\n[지문]\nWho decides what a nine-year-old is ready to hear? I put that question to Father Thiago on the Clyde bridge in the winter of 1987, though I had not set foot in his church for three years. My younger brother had asked me why our mother no longer came home, and I wanted the priest to give me an answer I could repeat. Thiago leaned on the cold stone and watched the river for a long while. Then he said that a hard truth told gently was a lantern, not a stone; the boy could carry it in front of him instead of on his back. I, Saoirse, the lapsed one, had expected scripture. Instead he offered me something I could use, and that night I sat on my brother's bed and told him plainly.\n\n[질문] As used in the text, the phrase “a lantern, not a stone” most nearly suggests that a hard truth told gently\nA) is a burden that the boy will gradually learn to ignore.\nB) should be postponed until the boy is old enough to carry it.\nC) can help the boy see his way rather than simply weigh on him.\nD) must come from the church rather than from the boy's own family.\n### lit40-medium-02-023 — skill words_in_context · 유형 figurative_language · 요청 난이도 medium\n[지문]\nWind hissed through the pines above the mountain bus stop near Porto Alegre, and my mother, Mingyu, smelled of the orange peel she always chewed when nervous. In our family, a rule had come down like an heirloom: a bride must not see the wedding road before the wedding day. I was the bride, Booker was the groom, and the only road to the chapel was this one. Every bus would carry me past it. My mother studied the timetable as if it were scripture, then folded it into a small square. Rules are coats, she said at last, cut for the shoulders of whoever first wore them. She tucked the timetable into my pocket, and when the bus came, she climbed on beside me without looking away from the road.\n\n[질문] As used in the text, the phrase “Rules are coats” most nearly suggests that the family rule\nA) protects the family from the harsh conditions of the mountains.\nB) is a disguise that hides the bride's true feelings about marriage.\nC) must be worn proudly by every bride who joins the family.\nD) was shaped for earlier circumstances and may not fit the present.\n### lit40-medium-02-030 — skill text_structure_purpose · 유형 tone_shift · 요청 난이도 medium\n[지문]\n\"They printed your name in the county paper, Odessa,\" Lucius said, leaning on the cemetery gate he had owned, along with the cottage beside it, for thirty years. I had grown the prize-winning cotton in the plot he rented me, and for a moment we both laughed like old friends at a picnic. He even tipped his hat. Then he looked past me at the field, and his voice cooled. A tenant who wins prizes, he said, can afford a landlord's new price. He named a figure twice what I paid. I folded the newspaper along its crease, the way one folds a flag, and set it on the gate between us.\n\n[질문] Which choice best describes the shift in tone in the text?\nA) From grieving to festive, as Odessa recalls her family's long history on the land\nB) From hostile to forgiving, as Lucius regrets an old quarrel with Odessa\nC) From anxious to relieved, as Odessa learns that her rent will not change\nD) From cordial to calculating, as Lucius turns Odessa's success into leverage\n### lit40-medium-02-031 — skill text_structure_purpose · 유형 tone_shift · 요청 난이도 medium\n[지문]\nWe had climbed four flights of the Haifa stairwell before Amit, the visiting surveyor, mentioned the promise. Avraham, who kept the building, was in good humor, tapping each banister and naming the families who had lived behind each door: the baker, the violinist, the twins who chalked the landings. Amit listened, smiling, and wrote nothing. On the fifth landing he stopped beside a child's chalk drawing of a tree. The building would come down in spring, he said quietly. Avraham's hand stayed on the banister. He had told the girl upstairs that her tree would outlast them both, and now he stood looking at it as though it were already being washed away.\n\n[질문] Which choice best describes the shift in tone in the text?\nA) From genial reminiscence to quiet dismay\nB) From cautious suspicion to open relief\nC) From mournful regret to renewed hope\nD) From brisk efficiency to lighthearted teasing\n### lit40-medium-02-032 — skill text_structure_purpose · 유형 tone_shift · 요청 난이도 medium\n[지문]\nKai, the captain, found him at dawn\nbehind the rooftop tank in Mumbai,\na stowaway from the harbor, salt still in his hair,\nand laughed, and shared his tea, and called him lucky.\nThey traded jokes about the gulls,\nabout the city's thousand radios.\nThen Nikhil spoke: he had come to say\nhe was sorry for the fire on the old ship,\nthe one that took the captain's brother.\nKai set down the cup.\nThe tank dripped. The radios went on.\nAn apology, he said, is a boat\nthat must leave while the tide is high.\n\n[질문] Which choice best describes the shift in tone in the poem?\nA) From mournful to joyful, as Kai at last accepts Nikhil's late apology\nB) From lighthearted to grave, as Nikhil's confession alters it\nC) From fearful to confident, as Nikhil realizes he will not be punished\nD) From formal to intimate, as the two men discover a shared past\n### lit40-medium-02-033 — skill text_structure_purpose · 유형 tone_shift · 요청 난이도 medium\n[지문]\nSolder smoke and old dust hang over the bench of a Gdansk radio repair shop. MARTA, seventy, bends over an opened receiver; KSENIA, nineteen, paces by the window.\nKSENIA: Listen. Warsaw, Berlin, a station from Lisbon. Every one of them is somewhere I have never been.\nMARTA: (laughing) And every one of them is broken until we fix it. Pass me the small pliers, traveler.\nKSENIA: I mean it. I have a place on a ship in May.\n(MARTA stops. She sets down the receiver, and the hiss of static fills the room.)\nMARTA: My husband said May, too. He meant to send for me. I kept the shop open forty years so he could find it.\nKSENIA: (quietly) Then you know why I have to go.\n\n[질문] Which choice best describes the shift in tone in the text?\nA) From bitter to forgiving, as Marta pardons Ksenia for leaving\nB) From anxious to excited, as Ksenia describes her travel plans\nC) From teasing to sorrowful, as Marta recalls her own lost hope\nD) From formal to playful, as the two women become closer friends\n### lit40-medium-02-034 — skill text_structure_purpose · 유형 tone_shift · 요청 난이도 medium\n[지문]\nOnce, in the summer my uncle sent me to Tehran, I, Soraya, served as clerk to a retired judge, Etienne, who spent his holidays arbitrating quarrels at a camp beside the mountains. Each evening in the long dining hall, among clattering plates and the smell of saffron rice, he read aloud the judgments we had drafted together, and the children cheered. I glowed through every reading. Then one night the camp's oldest pupil asked him who had written the part about the stolen kite. Etienne smiled and said that he had. I had written it alone, word for word, and I sat very still, my spoon cooling in my hand, as the cheering began again.\n\n[질문] Which choice best describes the shift in tone in the text?\nA) From fearful to reassured, as the narrator realizes Etienne trusts her\nB) From resentful to forgiving, as the narrator accepts Etienne's apology\nC) From bored to amused, as the narrator joins in the children's cheering\nD) From contented to stung, as the narrator sees her work claimed by him\n### lit40-medium-02-035 — skill text_structure_purpose · 유형 tone_shift · 요청 난이도 medium\n[지문]\nBy the third hour in the Auckland barbershop, Makana had stopped pretending to read the magazines. My father ran the harbor ferry, and I, Ingrid, swept hair for the barber on Saturdays; Makana was a passenger who had missed the morning boat and was waiting for a call from the hospital about his wife. At first he joked with the barber about the rugby scores and let me tease him about his crooked part. When the phone finally rang, he crossed the room in two steps. He listened, said thank you, and sat down very slowly. Then he laughed, a loose, astonished laugh, and asked whether there was still time for a proper haircut before the evening ferry.\n\n[질문] Which choice best describes the shift in tone in the text?\nA) From strained patience to deep relief\nB) From quiet grief to bitter disappointment\nC) From cheerful confidence to sudden fear\nD) From mild irritation to calm indifference\n### lit40-medium-02-036 — skill text_structure_purpose · 유형 tone_shift · 요청 난이도 medium\n[지문]\nThree things, brother Bartolo, I must set down before the festival: the shop owes four months' rent, the dock planks are rotting under our rehearsal spot, and you still play the second verse too fast. I write this by the lake at Oaxaca, where we practiced again tonight while the fishermen pretended not to listen. I meant this letter to be a ledger of our failures. Yet as I write I keep hearing how the water carried your guitar across to the far shore, and how an old fisherman stood up in his boat and took off his hat. Perhaps the shop will close. Perhaps it must. But on Sunday, I think, we will play as if someone on the far shore is waiting for us. Your brother, Emiliano\n\n[질문] Which choice best describes the shift in tone in the text?\nA) From playful teasing to stern disapproval\nB) From grim accounting to tentative hope\nC) From open despair to bitter resignation\nD) From formal politeness to casual humor\n### lit40-medium-02-037 — skill text_structure_purpose · 유형 tone_shift · 요청 난이도 medium\n[지문]\nInk on my thumbs again, and Mama Lindiwe watching me scrub them at the press-room sink. Nairobi, March 1984. Tonight her son and I leave for Mombasa, and she has spent all week at the press teaching me the proper goodbye: a printed card for each neighbor, set in her own type, the margins exact. I hated every card. I wanted to hug people, not hand them paper. This afternoon she locked the last frame and pulled one proof for herself. It said only, To my daughter, Kenya. She did not hand it to me. She pinned it above the press where the light falls, and then she turned away and told me the ink would never come off my thumbs if I kept fussing.\n\n[질문] Which choice best describes the shift in tone in the diary entry?\nA) From grateful to resentful, as Kenya learns she must print the cards alone\nB) From cheerful to anxious, as Kenya worries about her move to Mombasa\nC) From irritated to moved, as Kenya sees what the goodbye means to Lindiwe\nD) From tender to cold, as Lindiwe refuses to give Kenya the final card\n### lit40-medium-02-038 — skill text_structure_purpose · 유형 tone_shift · 요청 난이도 medium\n[지문]\nSalt keeps every footprint. So the people of the white flats beyond Lima told it, and so you will hear it, as Renata the seamstress heard it on the night the caravan was to leave. Only one of you can stay to tend the well, the elders said, and Renata, laughing, offered her apprentice Nicolas a needle and a joke: whoever sewed the straighter seam would get to go. You can picture them racing by lamplight, teasing each other, thread snapping. But when Nicolas held up his perfect seam, Renata did not laugh. She looked at the long line of their footprints on the salt, all leading one way, and quietly unpicked her own seam so that his would win.\n\n[질문] Which choice best describes the shift in tone in the text?\nA) From solemn to comic, as the contest turns into a lighthearted game\nB) From hopeful to bitter, as Renata resents losing the contest to Nicolas\nC) From fearful to calm, as the elders settle the dispute on their behalf\nD) From playful to selfless, as Renata quietly lets Nicolas go\n### lit40-medium-02-041 — skill text_structure_purpose · 유형 text_structure · 요청 난이도 medium\n[지문]\nI was hired to translate for Yusuf, not to argue on his behalf. That spring he had brought his late father's pocket watch to a clock-maker's shop near the cathedral in Seville, and the owner recited the house rule: no repair on any piece without a receipt of purchase. 'Tell him, Señorita Pilar,' he said, and every customer in the narrow room nodded, as though the rule had been handed down with the clocks themselves. I rendered it into Arabic word for word, and Yusuf only folded the watch back into his handkerchief. On the walk home I kept turning the phrase over. A receipt proves a sale, I thought, but not an inheritance; a son could own a thing more fully than any buyer. The next week I returned alone and asked the clock-maker, in my plainest Spanish, whom the rule was meant to protect. He was quiet for a long while, then wrote his own name on a slip of paper and slid it across the counter as though it were a receipt.\n\n[질문] Which choice best describes the overall structure of the text?\nA) The narrator explains a shop's rule, praises the customers who follow it, and then persuades Yusuf to accept it.\nB) The narrator recounts Yusuf's loud protest against a rule and then describes how the clock-maker punished him.\nC) The narrator conveys a rule as instructed, privately doubts its fairness, and then challenges it on her own.\nD) The narrator compares two shops in Seville and then explains why one of them refused to repair the watch.\n### lit40-medium-02-042 — skill text_structure_purpose · 유형 text_structure · 요청 난이도 medium\n[지문]\nJianguo ran the rooftop laundry line above the dye works in Chengdu, and in my third week I tangled a whole row of sheets in the wind and said nothing. He rehung them himself before dawn. That night I wrote him an apology on the back of a ration slip and carried it in my pocket for a month, never quite handing it over. I meant to, each morning, as we pinned wet cotton to the wires. Then, in late autumn, he was transferred to the river mill, and the slip went soft with washing. Years afterward, training a nervous boy of my own on that same roof, I watched him snarl a line and freeze. I said only, 'Help me with the far end,' and we untangled it together. Only then did I see that Jianguo's silence had been a kind of answer.\n\n[질문] Which choice best describes the overall structure of the text?\nA) The narrator describes a workplace accident, explains how the foreman punished it, and then defends that punishment.\nB) The narrator lists the duties of a laundry worker and then contrasts the methods of two different foremen.\nC) The narrator recalls writing an apology, describes delivering it, and then reflects on the foreman's reply.\nD) The narrator recounts an apology left undelivered and then shifts to a later scene that reframes the foreman's response.\n### lit40-medium-02-043 — skill text_structure_purpose · 유형 text_structure · 요청 난이도 medium\n[지문]\nThree rules governed the guesthouse of the monastery outside Vienna: no talking after Compline, no fires in the rooms, and no leaving while snow closed the pass. So Linus and Kian, strangers who had arrived on the same stalled coach, found themselves sharing a bench and a long silence. Linus carried a violin he could not play; his uncle had wanted it to go to a pupil, but the will named the nephew. Kian, a carpenter, hummed while he worked a splinter from his thumb. On the second evening Linus opened the case and handed the violin across. Kian tuned it by ear and played so softly that the rule about talking seemed not to apply to music. On the fourth morning the pass opened. Kian boarded the eastbound coach with the violin under his arm, and Linus carried the empty case west, lighter than he had expected.\n\n[질문] Which choice best describes the overall structure of the text?\nA) It sets out rules and a reluctant heir, shows a quiet exchange, and ends with the instrument passing on.\nB) It traces a violin's long history, explains the uncle's mistake, and ends with Linus learning to play it.\nC) It presents a dispute between two travelers, shows the monks settling it, and ends with both leaving together.\nD) It lists the guesthouse rules, shows the travelers breaking each one, and ends with the monks punishing them.\n### lit40-medium-02-044 — skill text_structure_purpose · 유형 underlined_portion_function · 요청 난이도 medium\n[지문]\nCyrus drove the Saturday route that ended at the open-air market in Vermont, and Gunnar rode it every week with the same cracked radio on his lap. Each time, Gunnar carried it to the stall where an old man soldered loose wires for a dollar, and each time the radio played for a day or two before falling silent again. Cyrus once remarked that a new radio would cost less than a year of repairs. Gunnar only smiled. __'My wife used to tune it to the farm report while she shelled peas,' he said, setting it gently on the seat beside him.__ After that, Cyrus stopped offering advice. On the ride home he turned down his own radio, and the two of them listened to the engine as the maples went by.\n\n[질문] Which choice best describes the function of the underlined sentence in the text as a whole?\nA) It shows that Gunnar disputes Cyrus's estimate of how much the weekly repairs at the market cost.\nB) It reveals why Gunnar keeps repairing the radio, which accounts for Cyrus's later change in behavior.\nC) It suggests that Gunnar plans to buy a new radio once the old one finally stops working for good.\nD) It introduces a conflict between Gunnar and the repairman that the rest of the text goes on to resolve.\n### lit40-medium-02-045 — skill text_structure_purpose · 유형 underlined_portion_function · 요청 난이도 medium\n[지문]\nSeeds keep better than promises. Aigerim had told the members of the cooperative this for years, sorting millet and cowpea into labeled jars in the cool back room off a Dakar side street. On the morning Noa was to leave for university, he found her there before sunrise. Neither of them spoke of the envelope the cooperative had pressed into her hands in June, or of the jars she had promised to refill for every franc of it. __Instead she gave him a small paper packet of okra seed, folded twice and sealed with wax.__ 'For a windowsill,' she said. He tucked it into his jacket beside his ticket. On the bus north, he counted the seeds through the paper and decided he would someday send back twice as many.\n\n[질문] Which choice best describes the function of the underlined sentence in the text as a whole?\nA) It explains how the cooperative decided to lend Aigerim the money for Noa's university tuition.\nB) It shows Aigerim refusing to discuss Noa's plans because she quietly disapproves of them.\nC) It presents a gesture that stands in for the debt the two characters avoid naming aloud.\nD) It describes the routine sorting work Aigerim does at the cooperative early each morning.\n### lit40-medium-02-046 — skill text_structure_purpose · 유형 underlined_portion_function · 요청 난이도 medium\n[지문]\nLyon was two hours below us, and the road down had vanished under snow by noon. For three days Mathis and I argued about the woodstove: whether to bank it at night, how many logs, whose turn it was to crack the damper. 'Camille, it is only a stove,' he said the first night, which made it worse. I was fifteen and had decided that everything he did in that cabin was wrong. On the third night he let the fire die, on purpose, I was sure, and I said so loudly. __He did not answer; he only took my mother's old wool coat from the hook and laid it over my shoulders.__ I knew the coat at once. We had not spoken of her since the funeral, and the stove, I realized, had never been the point. In the morning we shoveled the path together, trading the one good shovel back and forth.\n\n[질문] Which choice best describes the function of the underlined sentence in the text as a whole?\nA) It shows that Mathis has finally come to agree with Camille about how to manage the stove.\nB) It emphasizes how bitterly cold the cabin has become after the fire went out overnight.\nC) It suggests that Mathis wants to stop arguing because he is worn out from shoveling snow.\nD) It introduces an object that turns the narrator toward the grief beneath their argument.\n### lit40-medium-02-047 — skill text_structure_purpose · 유형 underlined_portion_function · 요청 난이도 medium\n[지문]\nBy the last week of the rainy season, my grandmother's house on the hillside terrace above Manila held only one thing: a carved camphor chest I had priced for my secondhand shop and could not bring myself to sell. Putri came for it four times. She offered cash, then more cash, then a trade of two cabinets. Each time I found a reason: a cracked hinge, a buyer already promised, a lock without a key. On her fifth visit she simply sat on the lid and asked what my grandmother had kept inside. __I told her the truth: nothing at all, only the smell of camphor, which my grandmother said kept moths away from memories.__ Putri laughed, then stood and said she would come back once I had found something to put in it. That evening I swept the empty rooms and left the chest where it was.\n\n[질문] Which choice best describes the function of the underlined sentence in the text as a whole?\nA) It reveals the sentimental reason behind the narrator's repeated excuses for not selling the chest.\nB) It shows that the chest is far less valuable than Putri had believed it to be all along.\nC) It explains why Putri decides to raise her offer for the chest once more on her final visit.\nD) It confirms that the narrator's grandmother had hidden valuables inside the chest for years."
+}

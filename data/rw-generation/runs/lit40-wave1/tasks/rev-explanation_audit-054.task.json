@@ -1,0 +1,349 @@
+{
+ "schema": "rw-session-task/v1",
+ "kind": "review",
+ "role": "explanation_audit",
+ "runId": "lit40-wave1",
+ "taskId": "rev-explanation_audit-054",
+ "chunkId": "rev-explanation_audit-054",
+ "suggestedModel": "sonnet",
+ "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-explanation_audit-054.result.json",
+ "outputSchema": {
+  "chunkId": "청크 ID",
+  "model": "sonnet",
+  "items": [
+   {
+    "candidateId": "id",
+    "answer_correct": "표시된 정답이 정말 정답이면 true",
+    "explanation_consistent": "해설이 정답·오답 판단과 일치하고 글자 참조가 맞으면 true",
+    "explanation_factual": "해설에 사실 오류가 없으면 true",
+    "issues": "한 줄 메모"
+   }
+  ]
+ },
+ "items": [
+  {
+   "candidateId": "lit40-easy-01-046",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "easy",
+   "passage": "ELSIE.\n\nWhen I grow up I shall have eleven babies, because I have eleven favorite names, and I shall have them all at once, so they can have nice, happy times playing together, and there won't have to be any horrid older brother and sister, always getting the best of everything.\n\nTERESA.\n\nAnd I'll tell you what! I'll have eleven children too, to marry yours.\n\nBOB.\n\nNo, I'll marry one of them.\n\nELSIE.\n\nNo, you must marry one of us.\n\nBOB.\n\nWhich one?\n\nELSIE.\n\nWell, I think it would be best for you to marry me and be father for my eleven children. I want them to have a father. I love my father.",
+   "question": "Which choice best describes the shift in tone that occurs in the text?",
+   "options": [
+    "From bitter quarreling among the children to a tearful apology from Bob",
+    "From serious talk about family duties to mocking laughter at the parents",
+    "From shy silence among the children to loud boasting about their toys",
+    "From playful fantasy about babies to sincere love for a parent"
+   ],
+   "correct_letter": "D",
+   "explanation": "Elsie는 아이 열한 명을 한꺼번에 낳겠다는 엉뚱하고 장난스러운 상상으로 대화를 시작하고, 친구들도 결혼 상대를 정하는 놀이에 끼어든다. 그러다 마지막에 'I want them to have a father. I love my father.'라며 아버지에 대한 진심 어린 애정이 드러난다. 따라서 D가 정답이다. A의 사과, B의 조롱, C의 자랑은 대화에 없다."
+  },
+  {
+   "candidateId": "lit40-easy-01-047",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "easy",
+   "passage": "The flower clusters are nearly ready to bloom, but the buds are still green. The tall stem has lifted them up into the air and sunlight, and, although the air is still cold, they continue to grow.\n\nSoon the green buds undergo a change. The topmost one on each flower cluster softens to a tender blue or pink.\n\nThe green buds grow lovely as they stand on their stems in the sun. Delicate tints steal over them, the green color fades away, and many colors take its place.\n\nThey open into charming flowers and give forth a delightful fragrance.",
+   "question": "Which choice best describes the shift in tone that occurs in the text?",
+   "options": [
+    "From plain notes on green buds to delighted praise of the blossoms",
+    "From eager hope for spring to disappointment at a late, cold spring",
+    "From scientific detachment about plants to anxious worry about frost",
+    "From gloomy description of winter to bored indifference toward flowers"
+   ],
+   "correct_letter": "A",
+   "explanation": "처음에는 꽃봉오리가 아직 초록색이고 줄기가 자란다는 사실을 담담하게 관찰한다. 이후 'grow lovely', 'Delicate tints', 'charming flowers', 'delightful fragrance' 같은 표현이 이어지며 감탄하는 어조로 바뀐다. 따라서 A가 정답이다. B, C, D는 실망·걱정·무관심을 말하지만 글은 점점 기쁨을 드러낸다."
+  },
+  {
+   "candidateId": "lit40-easy-01-048",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "easy",
+   "passage": "Nevertheless the reporter, in summing up the achievement, is bound to declare that that other book has not been learned. Under this constitution of which I have been speaking, the American people have achieved much material success and great political power. As a people they have been happy and prosperous. Their freedom has been secured to them, and for a period of seventy-five years they have lived and prospered without subjection to any form of tyranny. This in itself is much, and should, I think, be held as a preparation for greater things to follow. Such, I think, should be our opinion, although the nation is at the present burdened by so heavy a load of troubles.",
+   "question": "Which choice best describes the shift in tone that occurs in the text?",
+   "options": [
+    "From joyful praise of the nation to angry rejection of its constitution",
+    "From criticism of an unlearned lesson to measured praise of gains",
+    "From hopeful predictions about the future to grim despair over present troubles",
+    "From humorous mockery of reporters to solemn respect for political leaders"
+   ],
+   "correct_letter": "B",
+   "explanation": "글은 'that other book has not been learned'라며 아직 배우지 못한 것이 있다는 비판적 판단으로 시작한다. 이어서 물질적 성공, 정치적 힘, 자유와 번영을 나열하며 'This in itself is much'라고 절제된 칭찬으로 바뀐다. 따라서 B가 정답이다. A의 분노, C의 절망, D의 조롱은 지문의 어조와 맞지 않는다."
+  },
+  {
+   "candidateId": "lit40-easy-01-049",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "easy",
+   "passage": "Three honest generations of us have kept it clean and honorable, and our wives have done the same for us all down to you--all except my wife. I used to think that in marrying me you had placed me deeper in your debt than I could ever repay. Ever since the first time I saw you I loved you; and after that meeting I put my arms about no woman--arms that had been free enough before--until I put them around you. And since then the same. I have been an absolutely faithful husband to you. Do you understand what that means? I don't believe so. I preferred you to every other woman in the world.",
+   "question": "Which choice best describes the shift in tone that occurs in the text?",
+   "options": [
+    "From cheerful joking about his family to playful teasing of his wife",
+    "From cold anger at his wife to sudden forgiveness of her faults",
+    "From family pride to a pained insistence on his own loyalty",
+    "From calm business talk to nervous confusion about his past"
+   ],
+   "correct_letter": "C",
+   "explanation": "글은 'Three honest generations'로 가문의 명예를 자랑스럽게 이야기하며 시작한다. 그러나 'all except my wife' 이후에는 아내를 처음부터 사랑했고 'absolutely faithful husband'였다고 절박하고 개인적으로 호소한다. 'Do you understand what that means? I don't believe so.'에는 상처받은 감정이 드러나므로 C가 정답이다. A, B, D의 장난, 용서, 혼란은 지문에서 찾을 수 없다."
+  },
+  {
+   "candidateId": "lit40-easy-01-050",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "text_structure",
+   "requestedDifficulty": "easy",
+   "passage": "Suddenly the roof was lifted and whirled down the swollen arroyo into the broad river. Floating logs struck against it, and as they tore along under the bridge they struck against the buttress with terrific force. Onward they were whirled; they could see the lights in the houses of the village and could hear the voices of men and women along the bluffs or in the trees where they had sought shelter.\n\nThe rain ceased falling, but the wind did not go down, rolling the waves over their raft. Once they lodged for a moment against a great oak where Crescimir strove in vain to make fast.",
+   "question": "Which choice best describes the overall structure of the text?",
+   "options": [
+    "It explains why a flood happened and then describes how the village was rebuilt",
+    "It describes a calm evening and then recalls an earlier storm in the village",
+    "It introduces Crescimir's past and then explains why he fears the river",
+    "It traces the roof's rush downstream and then a failed try to stop it"
+   ],
+   "correct_letter": "D",
+   "explanation": "글은 지붕이 들려 강으로 휩쓸려 가고 통나무에 부딪히며 마을을 지나가는 과정을 순서대로 묘사한다. 이어서 비는 그쳤지만 바람이 계속되고, 큰 참나무에 잠시 걸렸을 때 Crescimir가 'strove in vain to make fast'했다는 실패한 시도로 끝난다. 따라서 D가 정답이다. A의 재건, B의 회상, C의 인물 과거는 지문에 없다."
+  },
+  {
+   "candidateId": "lit40-easy-01-051",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "text_structure",
+   "requestedDifficulty": "easy",
+   "passage": "I threw out my arms, expecting to catch the living body of some person; but not so--I caught nothing. As I turned round I felt the same touch on my right cheek. It might have been imagination, but I thought I again heard Lottie calling my name. The truth is, I was so much overcome with excitement that I scarcely knew what was going on around me. Harry was out but a few moments, returning accompanied by the fireman, who immediately lighted the lamp. We procured a lantern and began to search for the mysterious passenger. We carefully examined every seat, looking under each bench, but could find nobody. We went out and examined the rear platform, thinking that probably some one might be stealing a ride, but nothing of the sort was to be seen.",
+   "question": "Which choice best describes the overall structure of the text?",
+   "options": [
+    "It moves from a strange touch to a careful search that finds no one",
+    "It moves from a cheerful journey with Harry to an argument with the fireman",
+    "It moves from a search of the train to a calm explanation of the noise",
+    "It moves from Lottie's arrival to the narrator's decision to leave the car"
+   ],
+   "correct_letter": "A",
+   "explanation": "화자는 먼저 뺨에 닿는 이상한 감촉과 Lottie가 부르는 듯한 소리를 경험한다. 이후 Harry와 소방수가 등불을 켜고 좌석 밑과 뒤쪽 승강장까지 살피지만 'could find nobody'라고 한다. 따라서 이상한 경험에서 아무도 찾지 못한 수색으로 이어지는 A가 정답이다. B의 말다툼, C의 설명, D의 Lottie 도착은 지문에 없다."
+  },
+  {
+   "candidateId": "lit40-easy-01-052",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "text_structure",
+   "requestedDifficulty": "easy",
+   "passage": "In most things we have given up the theory. It was soonest given up as regards food, because the evidence against it was there plainest and most overwhelming, in the severe suffering inflicted on some people by things \"disagreeing with them,\" as it was called, which others relished and profited by. It has only been surrendered with regard to children and youths, however, after a hard struggle. The idea of a young person being entitled to special treatment of any kind--that is, having in any respect a marked individuality--remains to this day odious to a great many of our theologians and teachers. It is, however, rapidly making its way, and has already obtained a secure footing in some of the colleges.",
+   "question": "Which choice best describes the overall structure of the text?",
+   "options": [
+    "It praises a theory and then lists the colleges that first adopted it",
+    "It notes where a theory was dropped, then its slow retreat in schools",
+    "It describes a personal illness and then blames teachers for causing it",
+    "It defends theologians and then predicts that their views will spread"
+   ],
+   "correct_letter": "B",
+   "explanation": "글은 먼저 사람마다 다르게 대하지 않는다는 이론이 음식에서는 가장 빨리 포기되었다고 설명한다. 이어서 아이와 청년에 대해서는 'after a hard struggle'로 늦게 포기되었고, 지금도 일부 신학자와 교사는 거부하지만 'rapidly making its way'라고 한다. 따라서 B가 정답이다. A, C, D는 지문의 흐름이나 입장과 맞지 않는다."
+  },
+  {
+   "candidateId": "lit40-easy-01-053",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "text_structure",
+   "requestedDifficulty": "easy",
+   "passage": "Against this preference shown the sketch it may be urged that to appreciate such suggestions presupposes as much art in the public as in the painter. But the ability to appreciate a thing when expressed is but half that necessary to express it. Some understanding must exist in the observer for any work to be intelligible. It is only a question of degree. The greater the art-sense in the person addressed, the more had better be left to it. Now in Japan the public is singularly artistic. In fact, the artistic appreciation of the masses there is something astonishing to us, accustomed to our immense intellectual differences between man and man. Sketches are thus peculiarly fitting to such a land.",
+   "question": "Which choice best describes the overall structure of the text?",
+   "options": [
+    "It tells a story about a painter and then describes his travels in Japan",
+    "It praises detailed paintings and then criticizes the Japanese public",
+    "It answers an objection to sketches and then applies it to Japan",
+    "It compares several artists and then ranks their finished works"
+   ],
+   "correct_letter": "C",
+   "explanation": "글은 스케치를 선호하는 것에 대해 대중에게도 화가만큼의 예술 감각이 필요하다는 반론을 제시한다. 이어 감상하는 능력은 표현하는 능력의 절반이면 된다고 답하고, 일본 대중의 예술 감각이 뛰어나므로 'Sketches are thus peculiarly fitting'이라고 결론짓는다. 따라서 C가 정답이다. A의 여행, B의 비판, D의 순위는 지문에 없다."
+  },
+  {
+   "candidateId": "lit40-easy-01-058",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "easy",
+   "passage": "Washington Flagg was gone, but his shadow was to linger for a while longer on our household. It was difficult to realize that the weight which had oppressed us had been removed. We were scarcely conscious of how heavy it had been until it was lifted. I was now and then forced to make an effort not to expect the colonel to dinner.\n\nA month or two after his disappearance an incident occurred which brought him back very vividly and in a somewhat sinister shape to our imaginations. Quite late one night there was a sharp ring at the door. Mary having gone to bed, I answered the bell.",
+   "question": "Which choice best describes the narrator's attitude toward Washington Flagg?",
+   "options": [
+    "Relief at his absence mixed with a lingering unease",
+    "Deep sorrow over his departure and eagerness for his quick return",
+    "Amused fondness for his habits and regret at having sent him away",
+    "Complete indifference to him and his effect on the household"
+   ],
+   "correct_letter": "A",
+   "explanation": "화자는 그가 떠나 'the weight which had oppressed us'가 사라졌다고 하며 안도감을 드러낸다. 그러나 'his shadow was to linger'와 그가 'in a somewhat sinister shape'로 다시 떠올랐다는 표현에서 여전한 불안이 보인다. 따라서 A가 정답이다. B와 C는 그를 그리워하는 태도로 지문과 반대이고, D는 그의 영향을 계속 의식한다는 점과 맞지 않는다."
+  },
+  {
+   "candidateId": "lit40-easy-01-059",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "easy",
+   "passage": "I went mad, mad, I really did. I made up my mind to have a house I could live in comfortably, and I was generous enough to let my husband have something he liked too. Do you know, before he married me, fond as he was of his pictures and china and things, it had never occurred to him to build a place to put them in? But I changed all that. I practically rebuilt the house, as you see; let in a little light and air into the musty corners; let him have a gallery which has become the joy of his heart.",
+   "question": "Which choice best describes the narrator's attitude toward the changes she made to the house?",
+   "options": [
+    "She regrets them because they ruined her husband's collection",
+    "She is proud of them and sees them as a gift to him",
+    "She is unsure of them and worries that guests will disapprove",
+    "She is bored by them and wishes she had left the house alone"
+   ],
+   "correct_letter": "B",
+   "explanation": "화자는 집을 거의 다시 지었다며 'But I changed all that'이라고 자신 있게 말한다. 또 남편에게 갤러리를 마련해 주어 'the joy of his heart'가 되었다고 하며 'generous enough'라고 스스로를 칭찬한다. 따라서 자랑스러워하며 남편을 위한 선물로 여기는 B가 정답이다. A, C, D의 후회, 불안, 지루함은 지문에서 찾을 수 없다."
+  },
+  {
+   "candidateId": "lit40-easy-01-060",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "easy",
+   "passage": "Ye dwell beside our paths and homes,\nOur paths of sin, our homes of sorrow,\nAnd guilty man, where'er he roams,\nYour innocent mirth may borrow.\nThe birds of air before us fleet,\nThey cannot brook our shame to meet--\nBut we may taste your solace sweet,\nAnd come again to-morrow.\n\nYe fearless in your nests abide--\nNor may we scorn, too proudly wise,\nYour silent lessons undescried\nBy all but lowly eyes;\nFor ye could draw th' admiring gaze\nOf Him who worlds and hearts surveys:\nYour order wild, your fragrant maze,\nHe taught us how to prize.",
+   "question": "Which choice best describes the speaker's attitude toward the flowers addressed in the poem?",
+   "options": [
+    "Fearful suspicion of their wild and tangled growth",
+    "Mild annoyance that they distract people from prayer",
+    "Humble admiration for their comfort and lessons",
+    "Proud scorn for their silent and lowly existence"
+   ],
+   "correct_letter": "C",
+   "explanation": "화자는 꽃들이 죄와 슬픔의 길가에 있으면서 'innocent mirth'와 'solace sweet'를 준다고 말한다. 또 'Nor may we scorn, too proudly wise'라며 꽃의 'silent lessons'를 겸손한 눈만이 알아본다고 하고, 신도 그것을 소중히 여기라 가르쳤다고 한다. 따라서 C가 정답이다. A와 B는 부정적 태도이고, D는 화자가 직접 부정한 오만한 경멸이다."
+  },
+  {
+   "candidateId": "lit40-easy-01-061",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "easy",
+   "passage": "Having received nothing, I have nothing to give. Fortunately, the only thing of importance to be said this evening can be said without technical knowledge of any kind. The School of Art needs better accommodation. The financial details will be explained to you by those who are more conversant with them than I am. I will only say that parsimony in this matter on the part of the government or other public bodies will, in my humble opinion, be unwise. I am not for a lavish expenditure of public money, even on education. It would be a misfortune if parental duty were to be cast on the State, and parents were to be allowed to forget that they are bound to provide their children with education as well as with bread.",
+   "question": "Which choice best describes the speaker's attitude toward public spending on the School of Art?",
+   "options": [
+    "He opposes any public money for art education.",
+    "He is indifferent and leaves the matter to experts.",
+    "He favors generous state funding for all schooling.",
+    "He supports it but warns against excessive outlay."
+   ],
+   "correct_letter": "D",
+   "explanation": "화자는 미술학교에 더 나은 시설이 필요하며 정부의 인색함은 현명하지 않다고 말한다. 동시에 교육에도 공공 자금을 사치스럽게 쓰는 것에는 반대한다고 밝힌다. 따라서 지지하되 과도한 지출은 경계하는 D가 정답이다. A는 지지 발언과 어긋나고, B는 화자가 분명한 의견을 내므로 틀리며, C는 'lavish expenditure'에 반대한다는 말과 모순된다."
+  },
+  {
+   "candidateId": "lit40-easy-01-062",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "easy",
+   "passage": "Bearings were taken to several remarkable hills for the purpose of connecting the survey.\n\nTwo swans passed over the valley to the north-west, which we considered as a sign that water lay in that direction.\n\nJune 20.--The weather broke up during the night, and the morning was fair and pleasant. However desirable it was that the horses should remain another day in this valley to recruit, yet, in the present unsettled state of the season, I was unwilling to lose an hour more than was absolutely necessary. We here left all the spare horse-shoes, broken axes, etc. in order to lighten the burden of the horses.",
+   "question": "Which choice best describes the narrator's attitude toward staying longer in the valley?",
+   "options": [
+    "Reluctant, given the uncertain season ahead",
+    "Eager, since the horses badly needed rest",
+    "Indifferent, as the weather had improved",
+    "Fearful, because the swans signaled danger"
+   ],
+   "correct_letter": "A",
+   "explanation": "서술자는 말들이 쉬면 좋겠다고 인정하면서도 계절이 불안정하므로 꼭 필요한 시간 이상은 한 시간도 잃고 싶지 않다고 말한다. 짐을 줄이려 여분의 편자와 도끼까지 남겨 두는 행동도 서두름을 보여 준다. 따라서 A가 정답이다. B는 휴식의 필요만 강조해 태도를 뒤집고, C·D는 지문의 근거가 없다(백조는 물의 신호로 해석된다)."
+  },
+  {
+   "candidateId": "lit40-easy-01-063",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "easy",
+   "passage": "I parted from my pleasant Parisian friend and his family, however, with real regret. They were polite and refined, and had given me their intimacy voluntarily and without reserve. I shook hands with them on the quay, and wished the pale and quiet invalid better health, with more of feeling than is common with acquaintances of a day. I believe them kind and sincere, and I have not found these qualities growing so thickly in the world that I can thrust aside anything that resembles them, with a willing mistrust.\n\nThe quay of Marseilles is one of the most varied scenes to be met with in Europe. Vessels of all nations come trading to its port, and nearly every costume in the world may be seen in its busy crowds.",
+   "question": "Which choice best describes the narrator's attitude toward his Parisian friend and family?",
+   "options": [
+    "Polite but privately suspicious of their motives",
+    "Warmly fond and willing to trust their kindness",
+    "Relieved to be free of their constant company",
+    "Amused by how quickly they offered friendship"
+   ],
+   "correct_letter": "B",
+   "explanation": "서술자는 이들과 '진심으로 아쉬워하며' 헤어졌다고 하고, 그들이 친절하고 진실하다고 믿는다고 말한다. 또 그런 자질이 드물기에 불신으로 밀어내지 않겠다고 덧붙인다. 따라서 B가 정답이다. A는 'willing mistrust'를 거부한다는 내용과 반대이고, C·D는 아쉬움과 진지함이라는 어조와 맞지 않는다."
+  },
+  {
+   "candidateId": "lit40-easy-01-064",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "easy",
+   "passage": "I am about to descend into that cupboard and to bring you one of those tablets. I saw you lock the cupboard half an hour ago, and I know you have the key in your possession. But I descend from Space; the doors, you see, remain unmoved. Now I am in the cupboard and am taking the tablet. Now I have it. Now I ascend with it.\n\nI rushed to the closet and dashed the door open. One of the tablets was gone. With a mocking laugh, the Stranger appeared in the other corner of the room, and at the same time the tablet appeared upon the floor.",
+   "question": "Which choice best states the main purpose of the text?",
+   "options": [
+    "To show the narrator catching a thief in the act",
+    "To explain how the cupboard was secretly opened",
+    "To present a visitor proving an uncanny power",
+    "To describe an argument over a missing key"
+   ],
+   "correct_letter": "C",
+   "explanation": "낯선 존재는 잠긴 찬장에서 문을 열지 않고 알약을 꺼내겠다고 예고한다. 서술자가 확인해 보니 실제로 알약이 사라졌고, 그 존재는 방 다른 구석에 나타나 알약을 바닥에 내놓는다. 따라서 초자연적 능력을 증명하는 장면을 보여 주는 C가 정답이다. A는 도둑을 잡는 내용이 아니고, B는 문이 열리지 않았다는 점과 어긋나며, D의 열쇠 다툼은 없다."
+  },
+  {
+   "candidateId": "lit40-easy-01-065",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "easy",
+   "passage": "At least it may account for an apparent inconsistency, in that she married him without much hesitation.\n\nShe welcomed the admiration and attention of the friends he brought to the house by one means or another during the first few weeks. If she was surprised to find them cultured, clever, agreeable specimens, she failed to mention the discovery to him. They amused her and therefore served a purpose. She charmed them in exchange for the tribute they paid to her.\n\nThose whom she liked the least she took no pains to please; in fact, she endured them so politely that while they may have secretly resented her indifference, they could do no less than openly profess admiration for her.",
+   "question": "Which choice best states the main purpose of the text?",
+   "options": [
+    "To show a wife growing fond of her husband's friends",
+    "To explain why the husband's friends resented him",
+    "To describe a woman openly rude to unwelcome guests",
+    "To portray a woman who accepts admiration coolly"
+   ],
+   "correct_letter": "D",
+   "explanation": "지문은 그녀가 남편의 친구들이 주는 찬사를 반기되, 그들이 자신을 즐겁게 해 주므로 '쓸모'가 있었다고 서술한다. 덜 좋아하는 이들에게도 무관심하지만 예의 바르게 대해 결국 찬사를 받아낸다. 따라서 D가 정답이다. A는 애정이 아닌 이해관계가 드러나므로 틀리고, B는 남편이 아닌 그녀가 대상이며, C는 '정중하게 견뎠다'는 내용과 반대다."
+  },
+  {
+   "candidateId": "lit40-easy-01-066",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "easy",
+   "passage": "In after years, how often came to those two the memory of that brief morn. Alone, with folded arms, Neil stood and watched the setting sun, as it went down across the waters at West End. The white sails of countless pleasure boats were framed against the sky. There came a strange, wild yearning in his heart to be upon the deep once more--to go forever from all this! And yet he could not leave her. He thought of taking her with him to foreign lands and beginning anew his life.",
+   "question": "Which choice best states the main purpose of the text?",
+   "options": [
+    "To show a man torn between escape and devotion",
+    "To describe a lively regatta at West End",
+    "To explain why Neil decided to sail abroad alone",
+    "To recount a quarrel between two lovers at sunset"
+   ],
+   "correct_letter": "A",
+   "explanation": "닐은 석양을 보며 다시 바다로 나가 모든 것을 떠나고 싶은 강렬한 갈망을 느낀다. 그러나 곧 '그녀를 떠날 수는 없다'고 하며 함께 외국으로 가는 것을 생각한다. 따라서 탈출과 애정 사이에서 갈등하는 모습을 보여 주는 A가 정답이다. B는 배경 묘사에 불과하고, C는 혼자 떠나기로 결정하지 않았으며, D의 다툼은 없다."
+  },
+  {
+   "candidateId": "lit40-easy-01-067",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "easy",
+   "passage": "The eggs were all hatched, and the mother bird was hovering near. I shall never forget the curious expression of those young hawks sitting there on the ground. The expression was not one of youth, but of extreme age. Such an ancient, infirm look as they had,—the sharp, dark, and shrunken look about the face and eyes, and their feeble, tottering motions! They sat upon their elbows and the hind part of their bodies, and their pale, withered legs and feet extended before them in the most helpless fashion.",
+   "question": "Which choice best states the main purpose of the text?",
+   "options": [
+    "To explain how hawks build nests on the ground",
+    "To convey how oddly aged the young hawks looked",
+    "To show the mother bird defending her offspring",
+    "To argue that young hawks are unusually strong"
+   ],
+   "correct_letter": "B",
+   "explanation": "서술자는 갓 부화한 매 새끼들의 표정이 젊음이 아니라 '극도의 노쇠함'이었다고 말한다. 이어 쪼그라든 얼굴, 비틀거리는 동작, 시든 다리 등을 묘사해 그 인상을 강조한다. 따라서 B가 정답이다. A의 둥지 짓기 설명은 없고, C는 어미가 근처를 맴돌 뿐이며, D는 '무력한' 모습과 반대다."
+  },
+  {
+   "candidateId": "lit40-easy-01-068",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "easy",
+   "passage": "Unfortunately, it is in this quality of personal effort that the sentiment of interest in the poor, upon which we have to depend, is too often lacking. People who are willing to give money feel that that ought to be enough. It is not. The money thus given is too apt to be wasted along with the sentiment that prompted the gift.\n\nEven when it comes to the third of the ways I spoke of as effective in dealing with the tenement-house problem, the building of model structures, the personal interest in the matter must form a large share of the capital invested, if it is to yield full returns.",
+   "question": "Which choice best states the main purpose of the text?",
+   "options": [
+    "To praise donors for their generous financial gifts",
+    "To argue that model buildings should be abandoned",
+    "To stress that personal effort must accompany money",
+    "To describe the daily lives of tenement residents"
+   ],
+   "correct_letter": "C",
+   "explanation": "글쓴이는 돈을 내는 사람들이 그것으로 충분하다고 여기지만 '그렇지 않다'고 단언한다. 모범 주택을 짓는 방법에서도 개인적 관심이 투자 자본의 큰 몫이어야 한다고 말한다. 따라서 C가 정답이다. A는 기부만으로는 부족하다는 주장과 반대이고, B는 모범 주택을 유효한 방법으로 언급하므로 틀리며, D의 생활 묘사는 없다."
+  }
+ ],
+ "instructions": "당신은 문항 감사관이다. 표시된 정답과 해설을 받아, 정답이 맞는지·해설이 일관되고 사실에 맞는지 점검한다(고치지 않고 판정만).\n청크 rev-explanation_audit-054 — 19문항.\n출력: Write 도구로 정확히 이 경로에 JSON 한 파일을 쓴다 → /Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-explanation_audit-054.result.json\n출력 JSON 스키마(예시 구조): {\"chunkId\":\"청크 ID\",\"model\":\"sonnet\",\"items\":[{\"candidateId\":\"id\",\"answer_correct\":\"표시된 정답이 정말 정답이면 true\",\"explanation_consistent\":\"해설이 정답·오답 판단과 일치하고 글자 참조가 맞으면 true\",\"explanation_factual\":\"해설에 사실 오류가 없으면 true\",\"issues\":\"한 줄 메모\"}]}\n허용 값: picked_letter ∈ {A,B,C,D}, 불리언 필드는 true/false, est_difficulty ∈ {easy,medium,hard}. candidateId 를 바꾸지 않고 모든 항목에 답한다.\n금지: 결과 파일 외의 파일 생성·수정, 다른 명령 실행, 문항 수정·재작성. 끝나면 'done <항목 수>' 한 줄만 답한다.\n\n## 문항\n### lit40-easy-01-046 — skill text_structure_purpose · 유형 tone_shift\n[지문]\nELSIE.\n\nWhen I grow up I shall have eleven babies, because I have eleven favorite names, and I shall have them all at once, so they can have nice, happy times playing together, and there won't have to be any horrid older brother and sister, always getting the best of everything.\n\nTERESA.\n\nAnd I'll tell you what! I'll have eleven children too, to marry yours.\n\nBOB.\n\nNo, I'll marry one of them.\n\nELSIE.\n\nNo, you must marry one of us.\n\nBOB.\n\nWhich one?\n\nELSIE.\n\nWell, I think it would be best for you to marry me and be father for my eleven children. I want them to have a father. I love my father.\n\n[질문] Which choice best describes the shift in tone that occurs in the text?\nA) From bitter quarreling among the children to a tearful apology from Bob\nB) From serious talk about family duties to mocking laughter at the parents\nC) From shy silence among the children to loud boasting about their toys\nD) From playful fantasy about babies to sincere love for a parent\n\n[표시된 정답] D\n[해설]\nElsie는 아이 열한 명을 한꺼번에 낳겠다는 엉뚱하고 장난스러운 상상으로 대화를 시작하고, 친구들도 결혼 상대를 정하는 놀이에 끼어든다. 그러다 마지막에 'I want them to have a father. I love my father.'라며 아버지에 대한 진심 어린 애정이 드러난다. 따라서 D가 정답이다. A의 사과, B의 조롱, C의 자랑은 대화에 없다.\n### lit40-easy-01-047 — skill text_structure_purpose · 유형 tone_shift\n[지문]\nThe flower clusters are nearly ready to bloom, but the buds are still green. The tall stem has lifted them up into the air and sunlight, and, although the air is still cold, they continue to grow.\n\nSoon the green buds undergo a change. The topmost one on each flower cluster softens to a tender blue or pink.\n\nThe green buds grow lovely as they stand on their stems in the sun. Delicate tints steal over them, the green color fades away, and many colors take its place.\n\nThey open into charming flowers and give forth a delightful fragrance.\n\n[질문] Which choice best describes the shift in tone that occurs in the text?\nA) From plain notes on green buds to delighted praise of the blossoms\nB) From eager hope for spring to disappointment at a late, cold spring\nC) From scientific detachment about plants to anxious worry about frost\nD) From gloomy description of winter to bored indifference toward flowers\n\n[표시된 정답] A\n[해설]\n처음에는 꽃봉오리가 아직 초록색이고 줄기가 자란다는 사실을 담담하게 관찰한다. 이후 'grow lovely', 'Delicate tints', 'charming flowers', 'delightful fragrance' 같은 표현이 이어지며 감탄하는 어조로 바뀐다. 따라서 A가 정답이다. B, C, D는 실망·걱정·무관심을 말하지만 글은 점점 기쁨을 드러낸다.\n### lit40-easy-01-048 — skill text_structure_purpose · 유형 tone_shift\n[지문]\nNevertheless the reporter, in summing up the achievement, is bound to declare that that other book has not been learned. Under this constitution of which I have been speaking, the American people have achieved much material success and great political power. As a people they have been happy and prosperous. Their freedom has been secured to them, and for a period of seventy-five years they have lived and prospered without subjection to any form of tyranny. This in itself is much, and should, I think, be held as a preparation for greater things to follow. Such, I think, should be our opinion, although the nation is at the present burdened by so heavy a load of troubles.\n\n[질문] Which choice best describes the shift in tone that occurs in the text?\nA) From joyful praise of the nation to angry rejection of its constitution\nB) From criticism of an unlearned lesson to measured praise of gains\nC) From hopeful predictions about the future to grim despair over present troubles\nD) From humorous mockery of reporters to solemn respect for political leaders\n\n[표시된 정답] B\n[해설]\n글은 'that other book has not been learned'라며 아직 배우지 못한 것이 있다는 비판적 판단으로 시작한다. 이어서 물질적 성공, 정치적 힘, 자유와 번영을 나열하며 'This in itself is much'라고 절제된 칭찬으로 바뀐다. 따라서 B가 정답이다. A의 분노, C의 절망, D의 조롱은 지문의 어조와 맞지 않는다.\n### lit40-easy-01-049 — skill text_structure_purpose · 유형 tone_shift\n[지문]\nThree honest generations of us have kept it clean and honorable, and our wives have done the same for us all down to you--all except my wife. I used to think that in marrying me you had placed me deeper in your debt than I could ever repay. Ever since the first time I saw you I loved you; and after that meeting I put my arms about no woman--arms that had been free enough before--until I put them around you. And since then the same. I have been an absolutely faithful husband to you. Do you understand what that means? I don't believe so. I preferred you to every other woman in the world.\n\n[질문] Which choice best describes the shift in tone that occurs in the text?\nA) From cheerful joking about his family to playful teasing of his wife\nB) From cold anger at his wife to sudden forgiveness of her faults\nC) From family pride to a pained insistence on his own loyalty\nD) From calm business talk to nervous confusion about his past\n\n[표시된 정답] C\n[해설]\n글은 'Three honest generations'로 가문의 명예를 자랑스럽게 이야기하며 시작한다. 그러나 'all except my wife' 이후에는 아내를 처음부터 사랑했고 'absolutely faithful husband'였다고 절박하고 개인적으로 호소한다. 'Do you understand what that means? I don't believe so.'에는 상처받은 감정이 드러나므로 C가 정답이다. A, B, D의 장난, 용서, 혼란은 지문에서 찾을 수 없다.\n### lit40-easy-01-050 — skill text_structure_purpose · 유형 text_structure\n[지문]\nSuddenly the roof was lifted and whirled down the swollen arroyo into the broad river. Floating logs struck against it, and as they tore along under the bridge they struck against the buttress with terrific force. Onward they were whirled; they could see the lights in the houses of the village and could hear the voices of men and women along the bluffs or in the trees where they had sought shelter.\n\nThe rain ceased falling, but the wind did not go down, rolling the waves over their raft. Once they lodged for a moment against a great oak where Crescimir strove in vain to make fast.\n\n[질문] Which choice best describes the overall structure of the text?\nA) It explains why a flood happened and then describes how the village was rebuilt\nB) It describes a calm evening and then recalls an earlier storm in the village\nC) It introduces Crescimir's past and then explains why he fears the river\nD) It traces the roof's rush downstream and then a failed try to stop it\n\n[표시된 정답] D\n[해설]\n글은 지붕이 들려 강으로 휩쓸려 가고 통나무에 부딪히며 마을을 지나가는 과정을 순서대로 묘사한다. 이어서 비는 그쳤지만 바람이 계속되고, 큰 참나무에 잠시 걸렸을 때 Crescimir가 'strove in vain to make fast'했다는 실패한 시도로 끝난다. 따라서 D가 정답이다. A의 재건, B의 회상, C의 인물 과거는 지문에 없다.\n### lit40-easy-01-051 — skill text_structure_purpose · 유형 text_structure\n[지문]\nI threw out my arms, expecting to catch the living body of some person; but not so--I caught nothing. As I turned round I felt the same touch on my right cheek. It might have been imagination, but I thought I again heard Lottie calling my name. The truth is, I was so much overcome with excitement that I scarcely knew what was going on around me. Harry was out but a few moments, returning accompanied by the fireman, who immediately lighted the lamp. We procured a lantern and began to search for the mysterious passenger. We carefully examined every seat, looking under each bench, but could find nobody. We went out and examined the rear platform, thinking that probably some one might be stealing a ride, but nothing of the sort was to be seen.\n\n[질문] Which choice best describes the overall structure of the text?\nA) It moves from a strange touch to a careful search that finds no one\nB) It moves from a cheerful journey with Harry to an argument with the fireman\nC) It moves from a search of the train to a calm explanation of the noise\nD) It moves from Lottie's arrival to the narrator's decision to leave the car\n\n[표시된 정답] A\n[해설]\n화자는 먼저 뺨에 닿는 이상한 감촉과 Lottie가 부르는 듯한 소리를 경험한다. 이후 Harry와 소방수가 등불을 켜고 좌석 밑과 뒤쪽 승강장까지 살피지만 'could find nobody'라고 한다. 따라서 이상한 경험에서 아무도 찾지 못한 수색으로 이어지는 A가 정답이다. B의 말다툼, C의 설명, D의 Lottie 도착은 지문에 없다.\n### lit40-easy-01-052 — skill text_structure_purpose · 유형 text_structure\n[지문]\nIn most things we have given up the theory. It was soonest given up as regards food, because the evidence against it was there plainest and most overwhelming, in the severe suffering inflicted on some people by things \"disagreeing with them,\" as it was called, which others relished and profited by. It has only been surrendered with regard to children and youths, however, after a hard struggle. The idea of a young person being entitled to special treatment of any kind--that is, having in any respect a marked individuality--remains to this day odious to a great many of our theologians and teachers. It is, however, rapidly making its way, and has already obtained a secure footing in some of the colleges.\n\n[질문] Which choice best describes the overall structure of the text?\nA) It praises a theory and then lists the colleges that first adopted it\nB) It notes where a theory was dropped, then its slow retreat in schools\nC) It describes a personal illness and then blames teachers for causing it\nD) It defends theologians and then predicts that their views will spread\n\n[표시된 정답] B\n[해설]\n글은 먼저 사람마다 다르게 대하지 않는다는 이론이 음식에서는 가장 빨리 포기되었다고 설명한다. 이어서 아이와 청년에 대해서는 'after a hard struggle'로 늦게 포기되었고, 지금도 일부 신학자와 교사는 거부하지만 'rapidly making its way'라고 한다. 따라서 B가 정답이다. A, C, D는 지문의 흐름이나 입장과 맞지 않는다.\n### lit40-easy-01-053 — skill text_structure_purpose · 유형 text_structure\n[지문]\nAgainst this preference shown the sketch it may be urged that to appreciate such suggestions presupposes as much art in the public as in the painter. But the ability to appreciate a thing when expressed is but half that necessary to express it. Some understanding must exist in the observer for any work to be intelligible. It is only a question of degree. The greater the art-sense in the person addressed, the more had better be left to it. Now in Japan the public is singularly artistic. In fact, the artistic appreciation of the masses there is something astonishing to us, accustomed to our immense intellectual differences between man and man. Sketches are thus peculiarly fitting to such a land.\n\n[질문] Which choice best describes the overall structure of the text?\nA) It tells a story about a painter and then describes his travels in Japan\nB) It praises detailed paintings and then criticizes the Japanese public\nC) It answers an objection to sketches and then applies it to Japan\nD) It compares several artists and then ranks their finished works\n\n[표시된 정답] C\n[해설]\n글은 스케치를 선호하는 것에 대해 대중에게도 화가만큼의 예술 감각이 필요하다는 반론을 제시한다. 이어 감상하는 능력은 표현하는 능력의 절반이면 된다고 답하고, 일본 대중의 예술 감각이 뛰어나므로 'Sketches are thus peculiarly fitting'이라고 결론짓는다. 따라서 C가 정답이다. A의 여행, B의 비판, D의 순위는 지문에 없다.\n### lit40-easy-01-058 — skill central_ideas_details · 유형 narrator_attitude\n[지문]\nWashington Flagg was gone, but his shadow was to linger for a while longer on our household. It was difficult to realize that the weight which had oppressed us had been removed. We were scarcely conscious of how heavy it had been until it was lifted. I was now and then forced to make an effort not to expect the colonel to dinner.\n\nA month or two after his disappearance an incident occurred which brought him back very vividly and in a somewhat sinister shape to our imaginations. Quite late one night there was a sharp ring at the door. Mary having gone to bed, I answered the bell.\n\n[질문] Which choice best describes the narrator's attitude toward Washington Flagg?\nA) Relief at his absence mixed with a lingering unease\nB) Deep sorrow over his departure and eagerness for his quick return\nC) Amused fondness for his habits and regret at having sent him away\nD) Complete indifference to him and his effect on the household\n\n[표시된 정답] A\n[해설]\n화자는 그가 떠나 'the weight which had oppressed us'가 사라졌다고 하며 안도감을 드러낸다. 그러나 'his shadow was to linger'와 그가 'in a somewhat sinister shape'로 다시 떠올랐다는 표현에서 여전한 불안이 보인다. 따라서 A가 정답이다. B와 C는 그를 그리워하는 태도로 지문과 반대이고, D는 그의 영향을 계속 의식한다는 점과 맞지 않는다.\n### lit40-easy-01-059 — skill central_ideas_details · 유형 narrator_attitude\n[지문]\nI went mad, mad, I really did. I made up my mind to have a house I could live in comfortably, and I was generous enough to let my husband have something he liked too. Do you know, before he married me, fond as he was of his pictures and china and things, it had never occurred to him to build a place to put them in? But I changed all that. I practically rebuilt the house, as you see; let in a little light and air into the musty corners; let him have a gallery which has become the joy of his heart.\n\n[질문] Which choice best describes the narrator's attitude toward the changes she made to the house?\nA) She regrets them because they ruined her husband's collection\nB) She is proud of them and sees them as a gift to him\nC) She is unsure of them and worries that guests will disapprove\nD) She is bored by them and wishes she had left the house alone\n\n[표시된 정답] B\n[해설]\n화자는 집을 거의 다시 지었다며 'But I changed all that'이라고 자신 있게 말한다. 또 남편에게 갤러리를 마련해 주어 'the joy of his heart'가 되었다고 하며 'generous enough'라고 스스로를 칭찬한다. 따라서 자랑스러워하며 남편을 위한 선물로 여기는 B가 정답이다. A, C, D의 후회, 불안, 지루함은 지문에서 찾을 수 없다.\n### lit40-easy-01-060 — skill central_ideas_details · 유형 narrator_attitude\n[지문]\nYe dwell beside our paths and homes,\nOur paths of sin, our homes of sorrow,\nAnd guilty man, where'er he roams,\nYour innocent mirth may borrow.\nThe birds of air before us fleet,\nThey cannot brook our shame to meet--\nBut we may taste your solace sweet,\nAnd come again to-morrow.\n\nYe fearless in your nests abide--\nNor may we scorn, too proudly wise,\nYour silent lessons undescried\nBy all but lowly eyes;\nFor ye could draw th' admiring gaze\nOf Him who worlds and hearts surveys:\nYour order wild, your fragrant maze,\nHe taught us how to prize.\n\n[질문] Which choice best describes the speaker's attitude toward the flowers addressed in the poem?\nA) Fearful suspicion of their wild and tangled growth\nB) Mild annoyance that they distract people from prayer\nC) Humble admiration for their comfort and lessons\nD) Proud scorn for their silent and lowly existence\n\n[표시된 정답] C\n[해설]\n화자는 꽃들이 죄와 슬픔의 길가에 있으면서 'innocent mirth'와 'solace sweet'를 준다고 말한다. 또 'Nor may we scorn, too proudly wise'라며 꽃의 'silent lessons'를 겸손한 눈만이 알아본다고 하고, 신도 그것을 소중히 여기라 가르쳤다고 한다. 따라서 C가 정답이다. A와 B는 부정적 태도이고, D는 화자가 직접 부정한 오만한 경멸이다.\n### lit40-easy-01-061 — skill central_ideas_details · 유형 narrator_attitude\n[지문]\nHaving received nothing, I have nothing to give. Fortunately, the only thing of importance to be said this evening can be said without technical knowledge of any kind. The School of Art needs better accommodation. The financial details will be explained to you by those who are more conversant with them than I am. I will only say that parsimony in this matter on the part of the government or other public bodies will, in my humble opinion, be unwise. I am not for a lavish expenditure of public money, even on education. It would be a misfortune if parental duty were to be cast on the State, and parents were to be allowed to forget that they are bound to provide their children with education as well as with bread.\n\n[질문] Which choice best describes the speaker's attitude toward public spending on the School of Art?\nA) He opposes any public money for art education.\nB) He is indifferent and leaves the matter to experts.\nC) He favors generous state funding for all schooling.\nD) He supports it but warns against excessive outlay.\n\n[표시된 정답] D\n[해설]\n화자는 미술학교에 더 나은 시설이 필요하며 정부의 인색함은 현명하지 않다고 말한다. 동시에 교육에도 공공 자금을 사치스럽게 쓰는 것에는 반대한다고 밝힌다. 따라서 지지하되 과도한 지출은 경계하는 D가 정답이다. A는 지지 발언과 어긋나고, B는 화자가 분명한 의견을 내므로 틀리며, C는 'lavish expenditure'에 반대한다는 말과 모순된다.\n### lit40-easy-01-062 — skill central_ideas_details · 유형 narrator_attitude\n[지문]\nBearings were taken to several remarkable hills for the purpose of connecting the survey.\n\nTwo swans passed over the valley to the north-west, which we considered as a sign that water lay in that direction.\n\nJune 20.--The weather broke up during the night, and the morning was fair and pleasant. However desirable it was that the horses should remain another day in this valley to recruit, yet, in the present unsettled state of the season, I was unwilling to lose an hour more than was absolutely necessary. We here left all the spare horse-shoes, broken axes, etc. in order to lighten the burden of the horses.\n\n[질문] Which choice best describes the narrator's attitude toward staying longer in the valley?\nA) Reluctant, given the uncertain season ahead\nB) Eager, since the horses badly needed rest\nC) Indifferent, as the weather had improved\nD) Fearful, because the swans signaled danger\n\n[표시된 정답] A\n[해설]\n서술자는 말들이 쉬면 좋겠다고 인정하면서도 계절이 불안정하므로 꼭 필요한 시간 이상은 한 시간도 잃고 싶지 않다고 말한다. 짐을 줄이려 여분의 편자와 도끼까지 남겨 두는 행동도 서두름을 보여 준다. 따라서 A가 정답이다. B는 휴식의 필요만 강조해 태도를 뒤집고, C·D는 지문의 근거가 없다(백조는 물의 신호로 해석된다).\n### lit40-easy-01-063 — skill central_ideas_details · 유형 narrator_attitude\n[지문]\nI parted from my pleasant Parisian friend and his family, however, with real regret. They were polite and refined, and had given me their intimacy voluntarily and without reserve. I shook hands with them on the quay, and wished the pale and quiet invalid better health, with more of feeling than is common with acquaintances of a day. I believe them kind and sincere, and I have not found these qualities growing so thickly in the world that I can thrust aside anything that resembles them, with a willing mistrust.\n\nThe quay of Marseilles is one of the most varied scenes to be met with in Europe. Vessels of all nations come trading to its port, and nearly every costume in the world may be seen in its busy crowds.\n\n[질문] Which choice best describes the narrator's attitude toward his Parisian friend and family?\nA) Polite but privately suspicious of their motives\nB) Warmly fond and willing to trust their kindness\nC) Relieved to be free of their constant company\nD) Amused by how quickly they offered friendship\n\n[표시된 정답] B\n[해설]\n서술자는 이들과 '진심으로 아쉬워하며' 헤어졌다고 하고, 그들이 친절하고 진실하다고 믿는다고 말한다. 또 그런 자질이 드물기에 불신으로 밀어내지 않겠다고 덧붙인다. 따라서 B가 정답이다. A는 'willing mistrust'를 거부한다는 내용과 반대이고, C·D는 아쉬움과 진지함이라는 어조와 맞지 않는다.\n### lit40-easy-01-064 — skill central_ideas_details · 유형 main_idea_or_purpose\n[지문]\nI am about to descend into that cupboard and to bring you one of those tablets. I saw you lock the cupboard half an hour ago, and I know you have the key in your possession. But I descend from Space; the doors, you see, remain unmoved. Now I am in the cupboard and am taking the tablet. Now I have it. Now I ascend with it.\n\nI rushed to the closet and dashed the door open. One of the tablets was gone. With a mocking laugh, the Stranger appeared in the other corner of the room, and at the same time the tablet appeared upon the floor.\n\n[질문] Which choice best states the main purpose of the text?\nA) To show the narrator catching a thief in the act\nB) To explain how the cupboard was secretly opened\nC) To present a visitor proving an uncanny power\nD) To describe an argument over a missing key\n\n[표시된 정답] C\n[해설]\n낯선 존재는 잠긴 찬장에서 문을 열지 않고 알약을 꺼내겠다고 예고한다. 서술자가 확인해 보니 실제로 알약이 사라졌고, 그 존재는 방 다른 구석에 나타나 알약을 바닥에 내놓는다. 따라서 초자연적 능력을 증명하는 장면을 보여 주는 C가 정답이다. A는 도둑을 잡는 내용이 아니고, B는 문이 열리지 않았다는 점과 어긋나며, D의 열쇠 다툼은 없다.\n### lit40-easy-01-065 — skill central_ideas_details · 유형 main_idea_or_purpose\n[지문]\nAt least it may account for an apparent inconsistency, in that she married him without much hesitation.\n\nShe welcomed the admiration and attention of the friends he brought to the house by one means or another during the first few weeks. If she was surprised to find them cultured, clever, agreeable specimens, she failed to mention the discovery to him. They amused her and therefore served a purpose. She charmed them in exchange for the tribute they paid to her.\n\nThose whom she liked the least she took no pains to please; in fact, she endured them so politely that while they may have secretly resented her indifference, they could do no less than openly profess admiration for her.\n\n[질문] Which choice best states the main purpose of the text?\nA) To show a wife growing fond of her husband's friends\nB) To explain why the husband's friends resented him\nC) To describe a woman openly rude to unwelcome guests\nD) To portray a woman who accepts admiration coolly\n\n[표시된 정답] D\n[해설]\n지문은 그녀가 남편의 친구들이 주는 찬사를 반기되, 그들이 자신을 즐겁게 해 주므로 '쓸모'가 있었다고 서술한다. 덜 좋아하는 이들에게도 무관심하지만 예의 바르게 대해 결국 찬사를 받아낸다. 따라서 D가 정답이다. A는 애정이 아닌 이해관계가 드러나므로 틀리고, B는 남편이 아닌 그녀가 대상이며, C는 '정중하게 견뎠다'는 내용과 반대다.\n### lit40-easy-01-066 — skill central_ideas_details · 유형 main_idea_or_purpose\n[지문]\nIn after years, how often came to those two the memory of that brief morn. Alone, with folded arms, Neil stood and watched the setting sun, as it went down across the waters at West End. The white sails of countless pleasure boats were framed against the sky. There came a strange, wild yearning in his heart to be upon the deep once more--to go forever from all this! And yet he could not leave her. He thought of taking her with him to foreign lands and beginning anew his life.\n\n[질문] Which choice best states the main purpose of the text?\nA) To show a man torn between escape and devotion\nB) To describe a lively regatta at West End\nC) To explain why Neil decided to sail abroad alone\nD) To recount a quarrel between two lovers at sunset\n\n[표시된 정답] A\n[해설]\n닐은 석양을 보며 다시 바다로 나가 모든 것을 떠나고 싶은 강렬한 갈망을 느낀다. 그러나 곧 '그녀를 떠날 수는 없다'고 하며 함께 외국으로 가는 것을 생각한다. 따라서 탈출과 애정 사이에서 갈등하는 모습을 보여 주는 A가 정답이다. B는 배경 묘사에 불과하고, C는 혼자 떠나기로 결정하지 않았으며, D의 다툼은 없다.\n### lit40-easy-01-067 — skill central_ideas_details · 유형 main_idea_or_purpose\n[지문]\nThe eggs were all hatched, and the mother bird was hovering near. I shall never forget the curious expression of those young hawks sitting there on the ground. The expression was not one of youth, but of extreme age. Such an ancient, infirm look as they had,—the sharp, dark, and shrunken look about the face and eyes, and their feeble, tottering motions! They sat upon their elbows and the hind part of their bodies, and their pale, withered legs and feet extended before them in the most helpless fashion.\n\n[질문] Which choice best states the main purpose of the text?\nA) To explain how hawks build nests on the ground\nB) To convey how oddly aged the young hawks looked\nC) To show the mother bird defending her offspring\nD) To argue that young hawks are unusually strong\n\n[표시된 정답] B\n[해설]\n서술자는 갓 부화한 매 새끼들의 표정이 젊음이 아니라 '극도의 노쇠함'이었다고 말한다. 이어 쪼그라든 얼굴, 비틀거리는 동작, 시든 다리 등을 묘사해 그 인상을 강조한다. 따라서 B가 정답이다. A의 둥지 짓기 설명은 없고, C는 어미가 근처를 맴돌 뿐이며, D는 '무력한' 모습과 반대다.\n### lit40-easy-01-068 — skill central_ideas_details · 유형 main_idea_or_purpose\n[지문]\nUnfortunately, it is in this quality of personal effort that the sentiment of interest in the poor, upon which we have to depend, is too often lacking. People who are willing to give money feel that that ought to be enough. It is not. The money thus given is too apt to be wasted along with the sentiment that prompted the gift.\n\nEven when it comes to the third of the ways I spoke of as effective in dealing with the tenement-house problem, the building of model structures, the personal interest in the matter must form a large share of the capital invested, if it is to yield full returns.\n\n[질문] Which choice best states the main purpose of the text?\nA) To praise donors for their generous financial gifts\nB) To argue that model buildings should be abandoned\nC) To stress that personal effort must accompany money\nD) To describe the daily lives of tenement residents\n\n[표시된 정답] C\n[해설]\n글쓴이는 돈을 내는 사람들이 그것으로 충분하다고 여기지만 '그렇지 않다'고 단언한다. 모범 주택을 짓는 방법에서도 개인적 관심이 투자 자본의 큰 몫이어야 한다고 말한다. 따라서 C가 정답이다. A는 기부만으로는 부족하다는 주장과 반대이고, B는 모범 주택을 유효한 방법으로 언급하므로 틀리며, D의 생활 묘사는 없다."
+}

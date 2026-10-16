@@ -1,0 +1,971 @@
+[
+ {
+  "cellId": "ap_world_history-wh1_saq3",
+  "apSubjectCode": "ap_world_history",
+  "kind": "frq_bundle",
+  "calculator": "na",
+  "reserve": false,
+  "wording": "designed_from_real_source",
+  "candidateKey": "ap_world_history-wh1_saq3-k0",
+  "keywordCode": "4.1",
+  "unitCode": "4",
+  "skillPrimary": "1.B",
+  "structure": "frq_multipart",
+  "archetype": "whfrq_wh1_saq3",
+  "reviewState": "verified_by_independent_models",
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "gateOverride": "wh-f2-2026-10-15",
+  "run": "wh-f2",
+  "stockKey": "wh-f2:ap_world_history-wh1_saq3-k0",
+  "pipeline": "real_source_v1",
+  "validation": "auto_passed",
+  "gateVersion": "wh-f2-2026-10-15",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "selectedForSample": true,
+  "legacyReserve": false,
+  "family": "ap_world_history",
+  "itemFamilyId": "fam:wh-f2:ap_world_history-wh1_saq3-k0",
+  "canonicalKey": "wh-f2:ap_world_history-wh1_saq3-k0",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_world_history:4.1",
+  "sharedWith": [],
+  "stockCell": "ap_world_history|4.1|1.B|frq_multipart|na",
+  "history": [
+   {
+    "run": "wh-f2",
+    "gateVersion": "wh-f2-2026-10-15",
+    "outcome": "passed",
+    "reasons": null
+   }
+  ],
+  "stimulusOrigin": "real_historical_source",
+  "sourceRegistryIds": [
+   "img-piri-reis-1513"
+  ],
+  "exam": "WH1",
+  "payload": {
+   "archetype": "whfrq_wh1_saq3",
+   "template": "saq3",
+   "topic": "4.1",
+   "extra_topics": [],
+   "skill": "1.B",
+   "representative_skill": "1.B",
+   "calculator": "na",
+   "title": "The Piri Reis Map of 1513 and Ottoman Knowledge of the Atlantic World",
+   "set_intro": "Historical source (real document)\n(map)\nPiri Reis world map (surviving western fragment)\nPiri Reis (Ottoman naval captain and cartographer), 1513. Wikimedia Commons (file page records the source institution and public-domain tag). Reuse: public domain (16th-century work). unmodified except Wikimedia Commons' scaled JPEG rendering of the file (upload.wikimedia.org thumbnail; 960 px wide for tall images, 1280 px wide for wide images).\nContext: Piri Reis, an Ottoman naval commander, drew this world map in 1513; only the western part of the map survives.\n\nThe image for this source is shown below. Select the image to open it full size.",
+   "stimulus": {
+    "kind": "image",
+    "description": "A torn, yellowed parchment map fragment with red and black compass-rose lines: the west coast of Africa and Iberia appear at the right edge, the east coast of South America with animals and rivers at the lower left, ships sail on the Atlantic between them, and many lines of Ottoman Turkish handwriting fill the margins.",
+    "data": {
+     "path": "ap-sources/img-piri-reis-1513/image.jpg",
+     "alt": "A torn, yellowed parchment map fragment with red and black compass-rose lines: the west coast of Africa and Iberia appear at the right edge, the east coast of South America with animals and rivers at the lower left, ships sail on the Atlantic between them, and many lines of Ottoman Turkish handwriting fill the margins.",
+     "credit": "Piri Reis world map (fragment), 1513. Topkapi Palace Library via Wikimedia Commons (public domain)."
+    }
+   },
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "Briefly describe ONE feature of the map that shows how its maker understood the Atlantic world in 1513.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "1.B"
+     ],
+     "topic_codes": [
+      "4.1"
+     ],
+     "model_answer": "The map shows West Africa and Iberia at its right edge and the east coast of South America at its left, with ships sailing on the Atlantic between them, showing that the maker saw the ocean as a connected zone of travel.",
+     "rubric_rows": [
+      {
+       "row_id": "a",
+       "points": 1,
+       "criterion": "Describes a visible feature of the map tied to how the Atlantic world was understood in 1513: for example, it shows both the west coast of Africa and Iberia and the east coast of South America, with the Atlantic Ocean between them; ships are drawn sailing on the Atlantic; compass roses and lines radiating from them cover the sea, as on navigational charts; the coasts of South America carry drawings of animals and rivers; the margins hold long written notes in Ottoman Turkish.",
+       "required_elements": [
+        "The map shows West Africa and Iberia at its right edge and the east coast of South America at its left, with ships sailing on the Atlantic between them, showing that the maker saw the ocean as a connected zone of travel.",
+        "Compass roses with many crossing lines cover the ocean, like a sailing chart, which shows that the map was built on practical navigation knowledge.",
+        "The coast of South America is filled with drawings of animals and rivers, showing that the maker treated the newly reached lands as real places with their own features.",
+        "Long notes in Ottoman Turkish fill the margins, showing that knowledge of the Atlantic was being recorded for Ottoman readers."
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "Briefly explain ONE specific historical development from the period 1450 to 1513 that helps explain how an Ottoman cartographer could show the coasts of both Africa and South America on a map drawn in 1513.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "1.B"
+     ],
+     "topic_codes": [
+      "4.1"
+     ],
+     "model_answer": "Columbus's voyages beginning in 1492 brought back information about the Caribbean and the American coasts, which was recorded on charts that later circulated around the Mediterranean.",
+     "rubric_rows": [
+      {
+       "row_id": "b",
+       "points": 1,
+       "criterion": "Explains a specific development from 1450 to 1513 that made information about Atlantic and African coasts available, such as the voyages of Columbus beginning in 1492, the Portuguese voyages along the African coast including Dias rounding the Cape of Good Hope in 1488 and da Gama reaching India in 1498, Cabral reaching the coast of Brazil in 1500, the Treaty of Tordesillas of 1494, the spread of printing that circulated reports and maps, or the growth of Ottoman naval power and Mediterranean contact after the conquest of Constantinople in 1453.",
+       "required_elements": [
+        "Columbus's voyages beginning in 1492 brought back information about the Caribbean and the American coasts, which was recorded on charts that later circulated around the Mediterranean.",
+        "Portuguese voyages along Africa, such as Dias rounding the Cape of Good Hope in 1488, mapped the West African coast shown on the map.",
+        "Cabral's landing on the coast of Brazil in 1500 added Portuguese knowledge of the eastern South American coast.",
+        "The spread of printing in Europe after the mid-1400s circulated reports and maps of the new voyages more widely, so they could reach cartographers outside Iberia."
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "Briefly explain ONE way the Ottoman Empire responded to European, especially Portuguese, maritime expansion in the Indian Ocean region in the period 1500 to 1600.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "1.B"
+     ],
+     "topic_codes": [
+      "4.1"
+     ],
+     "model_answer": "After conquering Egypt in 1517, the Ottomans used Suez as a naval base and sent fleets into the Red Sea to block Portuguese attempts to control that route.",
+     "rubric_rows": [
+      {
+       "row_id": "c",
+       "points": 1,
+       "criterion": "Explains a specific Ottoman response to Portuguese or other European expansion in the Indian Ocean region from 1500 to 1600, such as the conquest of Egypt in 1517 giving the Ottomans a base on the Red Sea, sending naval expeditions from Suez into the Red Sea and Arabian Sea to challenge Portuguese fleets and forts, expanding control of the Red Sea and Persian Gulf coasts including Aden and Basra, or sending military aid such as gunners and cannon to the Sultanate of Aceh in Sumatra.",
+       "required_elements": [
+        "After conquering Egypt in 1517, the Ottomans used Suez as a naval base and sent fleets into the Red Sea to block Portuguese attempts to control that route.",
+        "Ottoman expeditions in the sixteenth century attacked Portuguese positions in the Arabian Sea and Persian Gulf, trying to protect Muslim trade routes and pilgrimage routes.",
+        "The Ottomans took control of Red Sea and Gulf ports such as Aden and Basra, strengthening their position against Portuguese sea power.",
+        "In the 1560s the Ottomans sent gunners and cannon to the Sultanate of Aceh, which was fighting the Portuguese at Malacca."
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ]
+    }
+   ],
+   "reference_text": "Scoring guide (ALTON reference — not official AP scoring). This question is worth 3 points.\nPart A (0-1): Describes a visible feature of the map tied to how the Atlantic world was understood in 1513: for example, it shows both the west coast of Africa and Iberia and the east coast of South America, with the Atlantic Ocean between them; ships are drawn sailing on the Atlantic; compass roses and lines radiating from them cover the sea, as on navigational charts; the coasts of South America carry drawings of animals and rivers; the margins hold long written notes in Ottoman Turkish.\n   - 1: The response accurately describes one specific feature of the map and connects it to the maker's picture of the Atlantic world, such as linking Africa, Europe and the Americas across an ocean traveled by ships.\n   - 0: The response does not describe an accurate feature of the map, or only restates the title or date without describing anything the map shows.\nPart B (0-1): Explains a specific development from 1450 to 1513 that made information about Atlantic and African coasts available, such as the voyages of Columbus beginning in 1492, the Portuguese voyages along the African coast including Dias rounding the Cape of Good Hope in 1488 and da Gama reaching India in 1498, Cabral reaching the coast of Brazil in 1500, the Treaty of Tordesillas of 1494, the spread of printing that circulated reports and maps, or the growth of Ottoman naval power and Mediterranean contact after the conquest of Constantinople in 1453.\n   - 1: The response explains one accurate, specific development from 1450 to 1513 and shows how it produced or spread geographic knowledge of the coasts the map shows.\n   - 0: The response names a development outside 1450 to 1513, gives an inaccurate or vague development, or does not explain how it relates to the knowledge shown on the map.\nPart C (0-1): Explains a specific Ottoman response to Portuguese or other European expansion in the Indian Ocean region from 1500 to 1600, such as the conquest of Egypt in 1517 giving the Ottomans a base on the Red Sea, sending naval expeditions from Suez into the Red Sea and Arabian Sea to challenge Portuguese fleets and forts, expanding control of the Red Sea and Persian Gulf coasts including Aden and Basra, or sending military aid such as gunners and cannon to the Sultanate of Aceh in Sumatra.\n   - 1: The response explains one accurate, specific Ottoman action in the Indian Ocean region from 1500 to 1600 and links it to competition with Portuguese or other European sea power.\n   - 0: The response gives an inaccurate or vague answer, describes a response outside the Indian Ocean region or outside 1500 to 1600, or does not explain the connection to European maritime expansion.\nNote: Part A should be scored on what the image shows; do not require knowledge of the map's sources. A response that accurately notes the map uses earlier European information, including a map linked to Columbus, may earn the point if tied to a feature of the map.\nNote: In Part B, the voyage or event must fit the 1450 to 1513 range; Magellan's voyage (1519 to 1522) does not count.\nNote: In Part C, Mediterranean events such as the Battle of Lepanto in 1571 do not earn the point unless the response explicitly and accurately links them to the Indian Ocean region, which is rarely possible.\nNote: Accept answers that use correct historical evidence even if the wording is informal; one accurate, explained example is enough for each part.\nNote: ALTON reference — not official AP scoring\nAcceptable answers for A: The map shows West Africa and Iberia at its right edge and the east coast of South America at its left, with ships sailing on the Atlantic between them, showing that the maker saw the ocean as a connected zone of travel. / Compass roses with many crossing lines cover the ocean, like a sailing chart, which shows that the map was built on practical navigation knowledge. / The coast of South America is filled with drawings of animals and rivers, showing that the maker treated the newly reached lands as real places with their own features. / Long notes in Ottoman Turkish fill the margins, showing that knowledge of the Atlantic was being recorded for Ottoman readers.\nAcceptable answers for B: Columbus's voyages beginning in 1492 brought back information about the Caribbean and the American coasts, which was recorded on charts that later circulated around the Mediterranean. / Portuguese voyages along Africa, such as Dias rounding the Cape of Good Hope in 1488, mapped the West African coast shown on the map. / Cabral's landing on the coast of Brazil in 1500 added Portuguese knowledge of the eastern South American coast. / The spread of printing in Europe after the mid-1400s circulated reports and maps of the new voyages more widely, so they could reach cartographers outside Iberia.\nAcceptable answers for C: After conquering Egypt in 1517, the Ottomans used Suez as a naval base and sent fleets into the Red Sea to block Portuguese attempts to control that route. / Ottoman expeditions in the sixteenth century attacked Portuguese positions in the Arabian Sea and Persian Gulf, trying to protect Muslim trade routes and pilgrimage routes. / The Ottomans took control of Red Sea and Gulf ports such as Aden and Basra, strengthening their position against Portuguese sea power. / In the 1560s the Ottomans sent gunners and cannon to the Sultanate of Aceh, which was fighting the Portuguese at Malacca.\n\nSample response, high score (3/3; Part A 1, Part B 1, Part C 1):\n(A) One feature of the map is that it shows the west coast of Africa and Iberia on the right side and the east coast of South America on the lower left, with ships drawn sailing on the Atlantic Ocean between them. This shows that Piri Reis understood the Atlantic as an ocean that linked Europe, Africa, and the Americas, one that ships were already crossing regularly by 1513. The red and black compass roses and lines that cover the sea also show he saw the Atlantic as a space to be navigated, as on sailors' charts.\n\n(B) Columbus's voyages, starting in 1492, and Cabral reaching the coast of Brazil in 1500 gave Europeans firsthand knowledge of the eastern coasts of the Americas, while Portuguese sailors had already mapped much of West Africa's coast, with Dias rounding the Cape of Good Hope in 1488. Explorers recorded what they saw on charts, and those charts spread around the Mediterranean, where an Ottoman naval captain like Piri Reis could collect them. Because of this, he was able to put the African and South American coasts together on one map by 1513.\n\n(C) After the Ottomans conquered Egypt in 1517, they gained a base on the Red Sea and used it to send fleets from Suez into the Red Sea and the Arabian Sea to challenge Portuguese ships and forts. The Portuguese were trying to control the spice trade by force, so the Ottomans fought back to protect Muslim trade routes and their own trade revenue, and they took control of places like Aden and Basra. They also sent gunners and cannon to the Sultanate of Aceh in Sumatra so it could resist the Portuguese.\n   - \"with ships drawn sailing on the Atlantic Ocean between them\" - This is an accurate feature you can see on the map. The essay ties it to how the maker understood the Atlantic as a link between continents, so it earns the point.\n   - \"compass roses and lines that cover the sea\" - A second accurate feature that supports the point by tying the map to navigational charts.\n   - \"Cabral reaching the coast of Brazil in 1500\" - A specific, accurately dated development inside 1450-1513 that explains the South American coast.\n   - \"those charts spread around the Mediterranean, where an Ottoman naval captain like Piri Reis could collect them\" - This explains how the knowledge reached an Ottoman cartographer, which completes the explanation and earns the point.\n   - \"send fleets from Suez into the Red Sea and the Arabian Sea to challenge Portuguese ships and forts\" - A specific, accurate Ottoman action in the Indian Ocean region during 1500-1600.\n   - \"The Portuguese were trying to control the spice trade by force, so the Ottomans fought back\" - This links the action to competition with Portuguese sea power, so it earns the point. The Aceh aid adds more support.\n\nSample response, middle score (2/3; Part A 1, Part B 0, Part C 1):\n(A) One feature of the map is that it shows the west coast of Africa and Iberia on the right side and the east coast of South America on the lower left, with the Atlantic Ocean in between them. There are also ships drawn sailing on the ocean. This shows that the mapmaker saw the Atlantic as a sea that connected Europe, Africa and the Americas and that people traveled across it by ship.\n\n(B) One development was that Europeans did a lot of exploring in the 1400s and early 1500s. Many voyages happened and sailors learned about new places. This gave people more knowledge about the world, so a mapmaker like Piri Reis could put the coasts on his map.\n\n(C) One way the Ottoman Empire responded to Portuguese expansion was by sending a navy into the Red Sea and the Arabian Sea to fight the Portuguese. After the Ottomans conquered Egypt in 1517 they had ports on the Red Sea like Suez where they could build ships. The Portuguese had come into the Indian Ocean after da Gama reached India and they were trying to control the spice trade and take trade away from Muslim merchants. The Ottomans sent fleets from Suez to challenge Portuguese forts and ships so that they could protect their own trade routes and the pilgrimage routes to Mecca.\n   - \"the west coast of Africa and Iberia on the right side and the east coast of South America on the lower left, with the Atlantic Ocean in between them\" - Accurate, specific visible feature of the map, matching the rubric example. This is the kind of description Part A needs.\n   - \"This shows that the mapmaker saw the Atlantic as a sea that connected Europe, Africa and the Americas\" - Connects the feature to the maker's picture of the Atlantic world, which earns the Part A point.\n   - \"Europeans did a lot of exploring in the 1400s and early 1500s\" - Too vague. It names no specific voyage, person, treaty or date such as Columbus in 1492 or Dias in 1488, so it does not identify a specific development.\n   - \"This gave people more knowledge about the world, so a mapmaker like Piri Reis could put the coasts on his map.\" - Gives only a general link. It does not explain how this knowledge reached an Ottoman mapmaker or which coasts were learned about, so Part B earns no credit.\n   - \"After the Ottomans conquered Egypt in 1517 they had ports on the Red Sea like Suez where they could build ships.\" - Accurate, specific Ottoman development within 1500 to 1600, matching the rubric's example of Egypt and the Red Sea base.\n   - \"The Ottomans sent fleets from Suez to challenge Portuguese forts and ships so that they could protect their own trade routes\" - Explains an Ottoman action and links it to competition with Portuguese sea power, so Part C earns the point.\n\nSample response, low score (1/3; Part A 0, Part B 0, Part C 1):\n(A) The map was made by Piri Reis in 1513 and it is a really old map of the world. It shows that Piri Reis knew a lot about geography back then and he was an Ottoman captain.\n\n(B) One development was that Europeans were exploring more during this time. Lots of explorers went on voyages and so people learned more about the world and the coasts. This is how the mapmaker could know about Africa and South America.\n\n(C) One way the Ottoman Empire responded was by conquering Egypt in 1517, which gave them a base on the Red Sea. After that the Ottomans sent a naval fleet from Suez into the Red Sea and Arabian Sea to fight the Portuguese, who were trying to take over the spice trade in the Indian Ocean with their forts and ships. The Ottomans wanted to protect their own trade routes and the Muslim pilgrims going to Mecca, so they built up control of places like Aden and challenged Portuguese sea power.\n   - \"it is a really old map of the world\" - Only restates the title and date and says nothing the map actually shows (coasts, ships, compass lines). No visible feature is described, so no credit.\n   - \"he was an Ottoman captain\" - Background about the maker, not a feature of the map tied to how the Atlantic world was understood.\n   - \"Europeans were exploring more during this time\" - Too vague. It names no specific voyage or event (such as Columbus in 1492 or da Gama in 1498) and no date, so it earns no credit.\n   - \"This is how the mapmaker could know about Africa and South America.\" - The link to the coasts is asserted without explaining how the knowledge reached an Ottoman mapmaker, so the explanation is missing.\n   - \"conquering Egypt in 1517, which gave them a base on the Red Sea\" - Accurate and specific Ottoman action within 1500 to 1600, correctly dated.\n   - \"sent a naval fleet from Suez into the Red Sea and Arabian Sea to fight the Portuguese\" - Links the Ottoman naval response directly to competition with Portuguese sea power in the Indian Ocean, which earns the point.",
+   "whap_frq": {
+    "schema_version": "whap-frq-1",
+    "task_type": "saq",
+    "template": "saq3",
+    "era": 2,
+    "units": [
+     4
+    ],
+    "title": "The Piri Reis Map of 1513 and Ottoman Knowledge of the Atlantic World",
+    "prompt": {
+     "scenario": "In the period c. 1450 to c. 1750, Iberian voyages across the Atlantic and around Africa produced new geographic knowledge. Mapmakers in many states, including the Ottoman Empire, collected that knowledge and put it to use.",
+     "task": "Using the image, answer (a), (b), and (c).",
+     "requirements": [
+      "Each part requires one specific, accurate answer stated in one to three sentences.",
+      "Part A must be based on what the map actually shows.",
+      "Parts B and C require specific historical evidence beyond the map itself, from the years named in each part."
+     ],
+     "parts": [
+      {
+       "label": "A",
+       "prompt": "Briefly describe ONE feature of the map that shows how its maker understood the Atlantic world in 1513.",
+       "points": 1
+      },
+      {
+       "label": "B",
+       "prompt": "Briefly explain ONE specific historical development from the period 1450 to 1513 that helps explain how an Ottoman cartographer could show the coasts of both Africa and South America on a map drawn in 1513.",
+       "points": 1
+      },
+      {
+       "label": "C",
+       "prompt": "Briefly explain ONE way the Ottoman Empire responded to European, especially Portuguese, maritime expansion in the Indian Ocean region in the period 1500 to 1600.",
+       "points": 1
+      }
+     ]
+    },
+    "sources": [
+     {
+      "id": "A",
+      "kind": "image",
+      "title": "Piri Reis world map (surviving western fragment)",
+      "attribution": "Piri Reis (Ottoman naval captain and cartographer), 1513. Wikimedia Commons (file page records the source institution and public-domain tag). Reuse: public domain (16th-century work). unmodified except Wikimedia Commons' scaled JPEG rendering of the file (upload.wikimedia.org thumbnail; 960 px wide for tall images, 1280 px wide for wide images).",
+      "context": "Piri Reis, an Ottoman naval commander, drew this world map in 1513; only the western part of the map survives.",
+      "real_data": true,
+      "source_registry_id": "img-piri-reis-1513",
+      "source_sha256": "5f604f78fa454affcf454d749f9e1599b222278b8b743a61964aa6dbe5cd6da6",
+      "body": "A torn, yellowed parchment map fragment with red and black compass-rose lines: the west coast of Africa and Iberia appear at the right edge, the east coast of South America with animals and rivers at the lower left, ships sail on the Atlantic between them, and many lines of Ottoman Turkish handwriting fill the margins.",
+      "image": {
+       "path": "ap-sources/img-piri-reis-1513/image.jpg",
+       "alt": "A torn, yellowed parchment map fragment with red and black compass-rose lines: the west coast of Africa and Iberia appear at the right edge, the east coast of South America with animals and rivers at the lower left, ships sail on the Atlantic between them, and many lines of Ottoman Turkish handwriting fill the margins.",
+       "credit": "Piri Reis world map (fragment), 1513. Topkapi Palace Library via Wikimedia Commons (public domain)."
+      },
+      "provenance": {
+       "kind": "real_historical_source",
+       "real_data": true,
+       "note": "registry img-piri-reis-1513"
+      }
+     }
+    ],
+    "rubric": {
+     "rubric_id": "whap-v1",
+     "total_points": 3,
+     "rows": [
+      {
+       "row_id": "a",
+       "name": "Part A",
+       "max": 1,
+       "descriptors": {
+        "0": "The response does not describe an accurate feature of the map, or only restates the title or date without describing anything the map shows.",
+        "1": "The response accurately describes one specific feature of the map and connects it to the maker's picture of the Atlantic world, such as linking Africa, Europe and the Americas across an ocean traveled by ships."
+       },
+       "task_specific": "Describes a visible feature of the map tied to how the Atlantic world was understood in 1513: for example, it shows both the west coast of Africa and Iberia and the east coast of South America, with the Atlantic Ocean between them; ships are drawn sailing on the Atlantic; compass roses and lines radiating from them cover the sea, as on navigational charts; the coasts of South America carry drawings of animals and rivers; the margins hold long written notes in Ottoman Turkish."
+      },
+      {
+       "row_id": "b",
+       "name": "Part B",
+       "max": 1,
+       "descriptors": {
+        "0": "The response names a development outside 1450 to 1513, gives an inaccurate or vague development, or does not explain how it relates to the knowledge shown on the map.",
+        "1": "The response explains one accurate, specific development from 1450 to 1513 and shows how it produced or spread geographic knowledge of the coasts the map shows."
+       },
+       "task_specific": "Explains a specific development from 1450 to 1513 that made information about Atlantic and African coasts available, such as the voyages of Columbus beginning in 1492, the Portuguese voyages along the African coast including Dias rounding the Cape of Good Hope in 1488 and da Gama reaching India in 1498, Cabral reaching the coast of Brazil in 1500, the Treaty of Tordesillas of 1494, the spread of printing that circulated reports and maps, or the growth of Ottoman naval power and Mediterranean contact after the conquest of Constantinople in 1453."
+      },
+      {
+       "row_id": "c",
+       "name": "Part C",
+       "max": 1,
+       "descriptors": {
+        "0": "The response gives an inaccurate or vague answer, describes a response outside the Indian Ocean region or outside 1500 to 1600, or does not explain the connection to European maritime expansion.",
+        "1": "The response explains one accurate, specific Ottoman action in the Indian Ocean region from 1500 to 1600 and links it to competition with Portuguese or other European sea power."
+       },
+       "task_specific": "Explains a specific Ottoman response to Portuguese or other European expansion in the Indian Ocean region from 1500 to 1600, such as the conquest of Egypt in 1517 giving the Ottomans a base on the Red Sea, sending naval expeditions from Suez into the Red Sea and Arabian Sea to challenge Portuguese fleets and forts, expanding control of the Red Sea and Persian Gulf coasts including Aden and Basra, or sending military aid such as gunners and cannon to the Sultanate of Aceh in Sumatra."
+      }
+     ],
+     "scoring_notes": [
+      "Part A should be scored on what the image shows; do not require knowledge of the map's sources. A response that accurately notes the map uses earlier European information, including a map linked to Columbus, may earn the point if tied to a feature of the map.",
+      "In Part B, the voyage or event must fit the 1450 to 1513 range; Magellan's voyage (1519 to 1522) does not count.",
+      "In Part C, Mediterranean events such as the Battle of Lepanto in 1571 do not earn the point unless the response explicitly and accurately links them to the Indian Ocean region, which is rarely possible.",
+      "Accept answers that use correct historical evidence even if the wording is informal; one accurate, explained example is enough for each part.",
+      "ALTON reference — not official AP scoring"
+     ]
+    },
+    "expected_features": {
+     "defensible_theses": [],
+     "contextualization_ideas": [
+      "Iberian expansion across the Atlantic and around Africa from the late 1400s.",
+      "Ottoman growth as a land and naval power after 1453.",
+      "Competition between empires for control of sea routes and trade in the sixteenth century."
+     ],
+     "outside_evidence": [
+      "Columbus 1492",
+      "Dias 1488",
+      "da Gama 1498",
+      "Cabral 1500",
+      "Treaty of Tordesillas 1494",
+      "Ottoman conquest of Egypt 1517",
+      "Ottoman aid to Aceh"
+     ],
+     "reasoning_types": [
+      "Sourcing a visual source",
+      "Causation",
+      "Contextualization"
+     ],
+     "doc_uses": [
+      {
+       "source_id": "Piri Reis map 1513",
+       "usable_for": "Part A visual evidence of Atlantic coasts, ships and navigation lines",
+       "sourcing": "Drawn by an Ottoman naval commander in 1513; only the western fragment survives."
+      }
+     ],
+     "saq_answers": {
+      "a": [
+       "The map shows West Africa and Iberia at its right edge and the east coast of South America at its left, with ships sailing on the Atlantic between them, showing that the maker saw the ocean as a connected zone of travel.",
+       "Compass roses with many crossing lines cover the ocean, like a sailing chart, which shows that the map was built on practical navigation knowledge.",
+       "The coast of South America is filled with drawings of animals and rivers, showing that the maker treated the newly reached lands as real places with their own features.",
+       "Long notes in Ottoman Turkish fill the margins, showing that knowledge of the Atlantic was being recorded for Ottoman readers."
+      ],
+      "b": [
+       "Columbus's voyages beginning in 1492 brought back information about the Caribbean and the American coasts, which was recorded on charts that later circulated around the Mediterranean.",
+       "Portuguese voyages along Africa, such as Dias rounding the Cape of Good Hope in 1488, mapped the West African coast shown on the map.",
+       "Cabral's landing on the coast of Brazil in 1500 added Portuguese knowledge of the eastern South American coast.",
+       "The spread of printing in Europe after the mid-1400s circulated reports and maps of the new voyages more widely, so they could reach cartographers outside Iberia."
+      ],
+      "c": [
+       "After conquering Egypt in 1517, the Ottomans used Suez as a naval base and sent fleets into the Red Sea to block Portuguese attempts to control that route.",
+       "Ottoman expeditions in the sixteenth century attacked Portuguese positions in the Arabian Sea and Persian Gulf, trying to protect Muslim trade routes and pilgrimage routes.",
+       "The Ottomans took control of Red Sea and Gulf ports such as Aden and Basra, strengthening their position against Portuguese sea power.",
+       "In the 1560s the Ottomans sent gunners and cannon to the Sultanate of Aceh, which was fighting the Portuguese at Malacca."
+      ]
+     },
+     "common_pitfalls": [
+      "Claiming the map proves knowledge that it does not show, such as advanced or secret ancient knowledge of Antarctica; scoring should rely on mainstream history.",
+      "In Part A, describing the map only as old or torn without connecting a feature to the Atlantic world.",
+      "In Part B, citing events after 1513, such as Magellan's circumnavigation or the conquest of Mexico.",
+      "In Part C, discussing Ottoman wars in Europe or the Mediterranean rather than the Indian Ocean region.",
+      "Treating the Ottomans as isolated from European maritime developments, when Mediterranean contact allowed information to pass between them."
+     ],
+     "facts": [
+      "Piri Reis was an Ottoman naval commander and cartographer who drew the map in 1513.",
+      "Only the western part of the map survives; it shows the Atlantic with Iberia and West Africa on one side and South America on the other.",
+      "Columbus first crossed the Atlantic in 1492 for Castile.",
+      "Bartolomeu Dias rounded the Cape of Good Hope in 1488; Vasco da Gama reached India in 1498.",
+      "Pedro Alvares Cabral reached the coast of Brazil in 1500.",
+      "The Treaty of Tordesillas of 1494 divided newly claimed lands between Spain and Portugal.",
+      "The Ottomans conquered Constantinople in 1453 and Mamluk Egypt in 1517.",
+      "In the sixteenth century the Ottomans sent fleets into the Red Sea and Indian Ocean to contest Portuguese power and aided the Sultanate of Aceh."
+     ]
+    },
+    "samples": [
+     {
+      "tier": "high",
+      "target_total": 3,
+      "essay": "(A) One feature of the map is that it shows the west coast of Africa and Iberia on the right side and the east coast of South America on the lower left, with ships drawn sailing on the Atlantic Ocean between them. This shows that Piri Reis understood the Atlantic as an ocean that linked Europe, Africa, and the Americas, one that ships were already crossing regularly by 1513. The red and black compass roses and lines that cover the sea also show he saw the Atlantic as a space to be navigated, as on sailors' charts.\n\n(B) Columbus's voyages, starting in 1492, and Cabral reaching the coast of Brazil in 1500 gave Europeans firsthand knowledge of the eastern coasts of the Americas, while Portuguese sailors had already mapped much of West Africa's coast, with Dias rounding the Cape of Good Hope in 1488. Explorers recorded what they saw on charts, and those charts spread around the Mediterranean, where an Ottoman naval captain like Piri Reis could collect them. Because of this, he was able to put the African and South American coasts together on one map by 1513.\n\n(C) After the Ottomans conquered Egypt in 1517, they gained a base on the Red Sea and used it to send fleets from Suez into the Red Sea and the Arabian Sea to challenge Portuguese ships and forts. The Portuguese were trying to control the spice trade by force, so the Ottomans fought back to protect Muslim trade routes and their own trade revenue, and they took control of places like Aden and Basra. They also sent gunners and cannon to the Sultanate of Aceh in Sumatra so it could resist the Portuguese.",
+      "word_count": 282,
+      "rubric_scores": {
+       "a": 1,
+       "b": 1,
+       "c": 1,
+       "total": 3
+      },
+      "annotations": [
+       {
+        "quote": "with ships drawn sailing on the Atlantic Ocean between them",
+        "comment": "This is an accurate feature you can see on the map. The essay ties it to how the maker understood the Atlantic as a link between continents, so it earns the point.",
+        "row_id": "a"
+       },
+       {
+        "quote": "compass roses and lines that cover the sea",
+        "comment": "A second accurate feature that supports the point by tying the map to navigational charts.",
+        "row_id": "a"
+       },
+       {
+        "quote": "Cabral reaching the coast of Brazil in 1500",
+        "comment": "A specific, accurately dated development inside 1450-1513 that explains the South American coast.",
+        "row_id": "b"
+       },
+       {
+        "quote": "those charts spread around the Mediterranean, where an Ottoman naval captain like Piri Reis could collect them",
+        "comment": "This explains how the knowledge reached an Ottoman cartographer, which completes the explanation and earns the point.",
+        "row_id": "b"
+       },
+       {
+        "quote": "send fleets from Suez into the Red Sea and the Arabian Sea to challenge Portuguese ships and forts",
+        "comment": "A specific, accurate Ottoman action in the Indian Ocean region during 1500-1600.",
+        "row_id": "c"
+       },
+       {
+        "quote": "The Portuguese were trying to control the spice trade by force, so the Ottomans fought back",
+        "comment": "This links the action to competition with Portuguese sea power, so it earns the point. The Aceh aid adds more support.",
+        "row_id": "c"
+       }
+      ]
+     },
+     {
+      "tier": "mid",
+      "target_total": 2,
+      "essay": "(A) One feature of the map is that it shows the west coast of Africa and Iberia on the right side and the east coast of South America on the lower left, with the Atlantic Ocean in between them. There are also ships drawn sailing on the ocean. This shows that the mapmaker saw the Atlantic as a sea that connected Europe, Africa and the Americas and that people traveled across it by ship.\n\n(B) One development was that Europeans did a lot of exploring in the 1400s and early 1500s. Many voyages happened and sailors learned about new places. This gave people more knowledge about the world, so a mapmaker like Piri Reis could put the coasts on his map.\n\n(C) One way the Ottoman Empire responded to Portuguese expansion was by sending a navy into the Red Sea and the Arabian Sea to fight the Portuguese. After the Ottomans conquered Egypt in 1517 they had ports on the Red Sea like Suez where they could build ships. The Portuguese had come into the Indian Ocean after da Gama reached India and they were trying to control the spice trade and take trade away from Muslim merchants. The Ottomans sent fleets from Suez to challenge Portuguese forts and ships so that they could protect their own trade routes and the pilgrimage routes to Mecca.",
+      "word_count": 225,
+      "rubric_scores": {
+       "a": 1,
+       "b": 0,
+       "c": 1,
+       "total": 2
+      },
+      "annotations": [
+       {
+        "quote": "the west coast of Africa and Iberia on the right side and the east coast of South America on the lower left, with the Atlantic Ocean in between them",
+        "comment": "Accurate, specific visible feature of the map, matching the rubric example. This is the kind of description Part A needs.",
+        "row_id": "a"
+       },
+       {
+        "quote": "This shows that the mapmaker saw the Atlantic as a sea that connected Europe, Africa and the Americas",
+        "comment": "Connects the feature to the maker's picture of the Atlantic world, which earns the Part A point.",
+        "row_id": "a"
+       },
+       {
+        "quote": "Europeans did a lot of exploring in the 1400s and early 1500s",
+        "comment": "Too vague. It names no specific voyage, person, treaty or date such as Columbus in 1492 or Dias in 1488, so it does not identify a specific development.",
+        "row_id": "b"
+       },
+       {
+        "quote": "This gave people more knowledge about the world, so a mapmaker like Piri Reis could put the coasts on his map.",
+        "comment": "Gives only a general link. It does not explain how this knowledge reached an Ottoman mapmaker or which coasts were learned about, so Part B earns no credit.",
+        "row_id": "b"
+       },
+       {
+        "quote": "After the Ottomans conquered Egypt in 1517 they had ports on the Red Sea like Suez where they could build ships.",
+        "comment": "Accurate, specific Ottoman development within 1500 to 1600, matching the rubric's example of Egypt and the Red Sea base.",
+        "row_id": "c"
+       },
+       {
+        "quote": "The Ottomans sent fleets from Suez to challenge Portuguese forts and ships so that they could protect their own trade routes",
+        "comment": "Explains an Ottoman action and links it to competition with Portuguese sea power, so Part C earns the point.",
+        "row_id": "c"
+       }
+      ]
+     },
+     {
+      "tier": "low",
+      "target_total": 1,
+      "essay": "(A) The map was made by Piri Reis in 1513 and it is a really old map of the world. It shows that Piri Reis knew a lot about geography back then and he was an Ottoman captain.\n\n(B) One development was that Europeans were exploring more during this time. Lots of explorers went on voyages and so people learned more about the world and the coasts. This is how the mapmaker could know about Africa and South America.\n\n(C) One way the Ottoman Empire responded was by conquering Egypt in 1517, which gave them a base on the Red Sea. After that the Ottomans sent a naval fleet from Suez into the Red Sea and Arabian Sea to fight the Portuguese, who were trying to take over the spice trade in the Indian Ocean with their forts and ships. The Ottomans wanted to protect their own trade routes and the Muslim pilgrims going to Mecca, so they built up control of places like Aden and challenged Portuguese sea power.",
+      "word_count": 170,
+      "rubric_scores": {
+       "a": 0,
+       "b": 0,
+       "c": 1,
+       "total": 1
+      },
+      "annotations": [
+       {
+        "quote": "it is a really old map of the world",
+        "comment": "Only restates the title and date and says nothing the map actually shows (coasts, ships, compass lines). No visible feature is described, so no credit.",
+        "row_id": "a"
+       },
+       {
+        "quote": "he was an Ottoman captain",
+        "comment": "Background about the maker, not a feature of the map tied to how the Atlantic world was understood.",
+        "row_id": "a"
+       },
+       {
+        "quote": "Europeans were exploring more during this time",
+        "comment": "Too vague. It names no specific voyage or event (such as Columbus in 1492 or da Gama in 1498) and no date, so it earns no credit.",
+        "row_id": "b"
+       },
+       {
+        "quote": "This is how the mapmaker could know about Africa and South America.",
+        "comment": "The link to the coasts is asserted without explaining how the knowledge reached an Ottoman mapmaker, so the explanation is missing.",
+        "row_id": "b"
+       },
+       {
+        "quote": "conquering Egypt in 1517, which gave them a base on the Red Sea",
+        "comment": "Accurate and specific Ottoman action within 1500 to 1600, correctly dated.",
+        "row_id": "c"
+       },
+       {
+        "quote": "sent a naval fleet from Suez into the Red Sea and Arabian Sea to fight the Portuguese",
+        "comment": "Links the Ottoman naval response directly to competition with Portuguese sea power in the Indian Ocean, which earns the point.",
+        "row_id": "c"
+       }
+      ]
+     }
+    ],
+    "provenance": {
+     "kind": "alton_authored_from_real_sources",
+     "note": "Prompts, rubric text, expected answers and sample responses are ALTON-authored practice material; every source is a real historical document, image or dataset (see sources[].source_registry_id)."
+    }
+   },
+   "design": {
+    "source_fixed_first": true,
+    "documents_chosen_before_prompt": true
+   },
+   "verification": {
+    "fact_checker": "claude-fable-5-1",
+    "graders": [
+     "claude-opus-5-5",
+     "claude-sonnet-5-5"
+    ],
+    "fact_flags": [
+     {
+      "where": "Rubric Part B (and outside_evidence list) — 'the Treaty of Tordesillas of 1494' offered as a development that 'made information about Atlantic and African coasts available'",
+      "kind": "other",
+      "detail": "The 1494 treaty divided claims between Castile and Portugal; it did not itself generate or circulate geographic knowledge of coastlines. Listing it as a qualifying example for a question asking what explains how a cartographer could show those coasts is a weak fit and could lead graders to award the point for an answer that does not actually explain the map's knowledge. The chronology (1494) is correct; the issue is relevance to the prompt's causal question."
+     }
+    ],
+    "sample_totals": {
+     "high": 3,
+     "mid": 2,
+     "low": 1
+    },
+    "bands": {
+     "high": [
+      3,
+      3
+     ],
+     "mid": [
+      2,
+      2
+     ],
+     "low": [
+      1,
+      1
+     ]
+    }
+   }
+  }
+ },
+ {
+  "cellId": "ap_world_history-wh2_leq",
+  "apSubjectCode": "ap_world_history",
+  "kind": "frq_bundle",
+  "calculator": "na",
+  "reserve": false,
+  "wording": "designed_from_real_source",
+  "candidateKey": "ap_world_history-wh2_leq-k0",
+  "keywordCode": "5.1",
+  "unitCode": "5",
+  "skillPrimary": "6.A",
+  "structure": "frq_multipart",
+  "archetype": "whfrq_wh2_leq",
+  "reviewState": "verified_by_independent_models",
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "gateOverride": "wh-f2-2026-10-15",
+  "run": "wh-f2",
+  "stockKey": "wh-f2:ap_world_history-wh2_leq-k0",
+  "pipeline": "real_source_v1",
+  "validation": "auto_passed",
+  "gateVersion": "wh-f2-2026-10-15",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "selectedForSample": true,
+  "legacyReserve": false,
+  "family": "ap_world_history",
+  "itemFamilyId": "fam:wh-f2:ap_world_history-wh2_leq-k0",
+  "canonicalKey": "wh-f2:ap_world_history-wh2_leq-k0",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_world_history:5.1",
+  "sharedWith": [],
+  "stockCell": "ap_world_history|5.1|6.A|frq_multipart|na",
+  "history": [
+   {
+    "run": "wh-f2",
+    "gateVersion": "wh-f2-2026-10-15",
+    "outcome": "passed",
+    "reasons": null
+   }
+  ],
+  "stimulusOrigin": "real_historical_source",
+  "sourceRegistryIds": [],
+  "exam": "WH2",
+  "payload": {
+   "archetype": "whfrq_wh2_leq",
+   "template": "leq",
+   "topic": "5.1",
+   "extra_topics": [],
+   "skill": "6.A",
+   "representative_skill": "6.A",
+   "calculator": "na",
+   "title": "Long Essay: Continuity and Change in Resistance to Foreign Rule, c. 1750 to the Present",
+   "set_intro": "",
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "Between the mid-1700s and the present, people in the Americas, Africa, Asia, and parts of Europe challenged rule by foreign empires and states. Some of these challenges were armed revolts, some were political organizations or mass campaigns, and many drew on new ideas about the nation, popular sovereignty, and self-determination.\n\nEvaluate the extent to which the goals and methods of resistance to foreign rule changed from c. 1750 to the present. You are not expected to address the entire time period.\n\nIn your response you should do the following:\n- Make a historically defensible claim (thesis) that establishes a line of reasoning about the extent of change and continuity in resistance to foreign rule.\n- Describe a broader historical context relevant to the prompt.\n- Support your argument with at least two pieces of specific, relevant evidence.\n- Use historical reasoning (continuity and change) to frame or structure your argument.\n- Use the evidence to demonstrate a complex understanding of the prompt, for example by explaining both change and continuity, by comparing movements in different regions, or by explaining why some movements succeeded while others did not.",
+     "points": 6,
+     "response_mode": "essay",
+     "skill_codes": [
+      "6.A"
+     ],
+     "topic_codes": [
+      "5.1"
+     ],
+     "model_answer": "From the late 1700s to the late 1900s, resistance to foreign rule changed a lot in its goals but less in its methods. Early resistance movements were often led by elites or local leaders who wanted to restore older orders or gain control for their own group, but by the 20th century most movements were mass nationalist movements that wanted fully independent nation-states based on popular sovereignty. Even so, armed struggle stayed a common method throughout the period, and nonviolent mass campaigns were added to it rather than replacing it.\n\nTo understand this change it helps to look at the larger context. In the late 1700s, Enlightenment thinkers like Locke and Rousseau spread ideas about natural rights and the idea that government gets its power from the people. These ideas helped cause the Atlantic Revolutions. Then in the 1800s, industrialization gave Europeans the steamships, guns, and medicine they needed to take over most of Africa and much of Asia, especially after the Berlin Conference of 1884 to 1885. Later, the two world wars weakened Britain and France and made colonial people expect more rights, since many had fought for the empires. This mix of new ideas and weakened empires explains why goals moved toward national independence.\n\nIn the earlier part of the period, many revolts aimed to throw out foreigners and bring back older rulers or traditions. The Indian Rebellion of 1857 started when sepoys in the British East India Company's army were angry about new rifle cartridges that were rumored to be greased with cow and pig fat, which offended both Hindus and Muslims. The rebels rallied around the old Mughal emperor, which shows they were looking back to an earlier order instead of trying to make a new Indian nation. The rebellion was crushed, and Britain then took direct control of India. Latin American independence is a bit different, since creole leaders like Simon Bolivar used Enlightenment ideas about popular sovereignty. But the creoles mostly wanted power for themselves, and the social hierarchy stayed mostly the same, so their goals were still limited.\n\nBy the 20th century the goals had clearly changed. The Indian independence movement, led by the Indian National Congress, wanted a self-governing Indian nation. Gandhi used nonviolent methods like boycotts of British cloth and the Salt March in 1930 to bring millions of ordinary people into the movement, which was very different from the soldiers' revolt of 1857. India became independent in 1947. In Ghana, Kwame Nkrumah also used strikes and mass political organizing, and Ghana became independent in 1957 as one of the first sub-Saharan African colonies to do so.\n\nHowever, armed struggle never went away. In Algeria, the FLN fought a violent war against France from 1954 to 1962, partly because France saw Algeria as part of France and had many European settlers there who refused to leave. This shows that methods depended on the situation. Where the colonial power was willing to negotiate, like Britain in Ghana, mass peaceful campaigns could work, but where there were large settler populations, resistance often turned violent, just as it had in earlier times. The goal in Algeria was still a modern independent nation, though, which is the same as in India and Ghana.\n\nIn conclusion, resistance to foreign rule changed from mostly local or elite revolts that tried to restore old orders into mass nationalist movements that demanded independent nation-states. Methods expanded to include nonviolence and political parties, but violence continued where empires refused to leave.",
+     "rubric_rows": [
+      {
+       "row_id": "thesis",
+       "points": 1,
+       "criterion": "A claim about how far the goals and methods of resistance to foreign rule changed over the period, with a line of reasoning, such as moving from local revolts that sought to restore earlier orders toward mass nationalist movements that sought independent nation-states, while armed struggle remained a common method.",
+       "required_elements": [],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "context",
+       "points": 1,
+       "criterion": "Situates the argument in broader developments such as Enlightenment ideas and the Atlantic Revolutions, nineteenth-century industrial imperialism and the partition of Africa, the effects of the two world wars on colonial empires, or Cold War pressures during decolonization.",
+       "required_elements": [],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "evidence",
+       "points": 2,
+       "criterion": "Specific examples of resistance to foreign rule from c. 1750 to the present, such as the Haitian Revolution, Latin American independence, the Indian Rebellion of 1857, the Battle of Adwa, the Maji Maji Rebellion, the Indian independence movement, the Algerian War, or Ghanaian independence.",
+       "required_elements": [],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "analysis",
+       "points": 2,
+       "criterion": "Uses continuity and change reasoning to structure the argument and shows a complex understanding, for example by weighing both change and continuity, comparing regions, or explaining why methods shifted.",
+       "required_elements": [],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ]
+    }
+   ],
+   "reference_text": "Scoring guide (ALTON reference — not official AP scoring). This question is worth 6 points.\nThesis/claim (0-1): A claim about how far the goals and methods of resistance to foreign rule changed over the period, with a line of reasoning, such as moving from local revolts that sought to restore earlier orders toward mass nationalist movements that sought independent nation-states, while armed struggle remained a common method.\n   - 1: Gives a defensible claim about the extent of change and continuity in the goals or methods of resistance and indicates a line of reasoning.\n   - 0: No defensible claim, or the response only restates the prompt or makes a claim that does not address extent of change.\nContextualization (0-1): Situates the argument in broader developments such as Enlightenment ideas and the Atlantic Revolutions, nineteenth-century industrial imperialism and the partition of Africa, the effects of the two world wars on colonial empires, or Cold War pressures during decolonization.\n   - 1: Describes a broader historical context that relates to the topic of the prompt and is linked to the argument.\n   - 0: No relevant context, or only a passing phrase.\nEvidence (0-2): Specific examples of resistance to foreign rule from c. 1750 to the present, such as the Haitian Revolution, Latin American independence, the Indian Rebellion of 1857, the Battle of Adwa, the Maji Maji Rebellion, the Indian independence movement, the Algerian War, or Ghanaian independence.\n   - 2: Uses at least two specific examples to support an argument about the extent of change and continuity in resistance to foreign rule.\n   - 1: Identifies at least two specific examples relevant to the topic of the prompt.\n   - 0: No specific relevant examples.\nAnalysis and reasoning (0-2): Uses continuity and change reasoning to structure the argument and shows a complex understanding, for example by weighing both change and continuity, comparing regions, or explaining why methods shifted.\n   - 2: Demonstrates a complex understanding, such as explaining both change and continuity, using evidence from different regions and periods to qualify the argument, or explaining causes of the shift in goals or methods.\n   - 1: Uses continuity and change reasoning to frame or structure an argument about resistance to foreign rule.\n   - 0: No use of historical reasoning to structure the argument.\nNote: The thesis may appear in the introduction or the conclusion, but it must be at least one sentence and must do more than repeat the prompt.\nNote: Context must be more than a single phrase and must connect to the argument about resistance to foreign rule.\nNote: Examples may come from any region; a response focused on only one region can still earn full credit if it argues about change over time.\nNote: The complexity point must come from analysis carried through the essay. A single sentence of 'on the other hand' does not earn it.\nNote: Do not reward claims that endorse imperial ideas of racial or civilizational superiority; students may describe and analyze such ideas as causes of resistance.\nNote: Writers should not lose points for leaving out leaders' names. Accurate descriptions of what movements did and what they wanted count as specific evidence.\nNote: ALTON reference — not official AP scoring\n\nSample response, high score (6/6; Thesis/claim 1, Contextualization 1, Evidence 2, Analysis and reasoning 2):\nFrom the late 1700s to the late 1900s, resistance to foreign rule changed a lot in its goals but less in its methods. Early resistance movements were often led by elites or local leaders who wanted to restore older orders or gain control for their own group, but by the 20th century most movements were mass nationalist movements that wanted fully independent nation-states based on popular sovereignty. Even so, armed struggle stayed a common method throughout the period, and nonviolent mass campaigns were added to it rather than replacing it.\n\nTo understand this change it helps to look at the larger context. In the late 1700s, Enlightenment thinkers like Locke and Rousseau spread ideas about natural rights and the idea that government gets its power from the people. These ideas helped cause the Atlantic Revolutions. Then in the 1800s, industrialization gave Europeans the steamships, guns, and medicine they needed to take over most of Africa and much of Asia, especially after the Berlin Conference of 1884 to 1885. Later, the two world wars weakened Britain and France and made colonial people expect more rights, since many had fought for the empires. This mix of new ideas and weakened empires explains why goals moved toward national independence.\n\nIn the earlier part of the period, many revolts aimed to throw out foreigners and bring back older rulers or traditions. The Indian Rebellion of 1857 started when sepoys in the British East India Company's army were angry about new rifle cartridges that were rumored to be greased with cow and pig fat, which offended both Hindus and Muslims. The rebels rallied around the old Mughal emperor, which shows they were looking back to an earlier order instead of trying to make a new Indian nation. The rebellion was crushed, and Britain then took direct control of India. Latin American independence is a bit different, since creole leaders like Simon Bolivar used Enlightenment ideas about popular sovereignty. But the creoles mostly wanted power for themselves, and the social hierarchy stayed mostly the same, so their goals were still limited.\n\nBy the 20th century the goals had clearly changed. The Indian independence movement, led by the Indian National Congress, wanted a self-governing Indian nation. Gandhi used nonviolent methods like boycotts of British cloth and the Salt March in 1930 to bring millions of ordinary people into the movement, which was very different from the soldiers' revolt of 1857. India became independent in 1947. In Ghana, Kwame Nkrumah also used strikes and mass political organizing, and Ghana became independent in 1957 as one of the first sub-Saharan African colonies to do so.\n\nHowever, armed struggle never went away. In Algeria, the FLN fought a violent war against France from 1954 to 1962, partly because France saw Algeria as part of France and had many European settlers there who refused to leave. This shows that methods depended on the situation. Where the colonial power was willing to negotiate, like Britain in Ghana, mass peaceful campaigns could work, but where there were large settler populations, resistance often turned violent, just as it had in earlier times. The goal in Algeria was still a modern independent nation, though, which is the same as in India and Ghana.\n\nIn conclusion, resistance to foreign rule changed from mostly local or elite revolts that tried to restore old orders into mass nationalist movements that demanded independent nation-states. Methods expanded to include nonviolence and political parties, but violence continued where empires refused to leave.\n   - \"Early resistance movements were often led by elites or local leaders who wanted to restore older orders\" - Defensible claim about extent of change in goals, with a line of reasoning that separates goals from methods.\n   - \"armed struggle stayed a common method throughout the period\" - The thesis names a continuity as well as a change, so it sets up a full CCOT argument.\n   - \"the two world wars weakened Britain and France\" - Context on Enlightenment ideas, industrial imperialism and the world wars, tied back to why goals shifted. Earns the point.\n   - \"The rebels rallied around the old Mughal emperor\" - Specific, accurate evidence about 1857, used to support the claim that early revolts looked backward.\n   - \"the Salt March in 1930\" - Specific evidence, explicitly contrasted with 1857 to show a change in methods and goals. Together with Algeria and Ghana, this earns 2.\n   - \"Where the colonial power was willing to negotiate, like Britain in Ghana, mass peaceful campaigns could work\" - Complexity: explains why methods differed across regions (settler colonies vs. others) and weighs change against continuity. The analysis runs through several paragraphs.\n   - \"the creoles mostly wanted power for themselves, and the social hierarchy stayed mostly the same\" - Qualifies the argument by showing that Enlightenment-inspired goals were still limited. Adds nuance, though the Latin American example is less developed than the others, which keeps the essay just short of top level.\n\nSample response, middle score (4/6; Thesis/claim 1, Contextualization 0, Evidence 2, Analysis and reasoning 1):\nResistance to foreign rule changed a lot between 1750 and today in its goals, but the methods stayed fairly similar because armed fighting was used in many time periods. Early resistance mostly wanted to remove a foreign ruler, while later resistance wanted a new independent nation.\n\nIdeas about liberty spread in the 1700s and this affected some colonies. One example is the Haitian Revolution, which began in 1791 in the French colony of Saint-Domingue. Enslaved people rose up against their French masters and the plantation owners. They fought a long war, and Haiti became independent in 1804. It was the first time enslaved people overthrew their rulers and made their own country. The revolt was violent and involved armies and battles, and the people who led it wanted freedom from slavery and from France.\n\nAnother example is the Indian Rebellion of 1857. Indian soldiers who worked for the British East India Company, called sepoys, rebelled against the British. They were upset about things like the new rifle cartridges, which many believed were greased with animal fat, and about British control of their land. The rebellion spread across parts of northern India, but the British defeated it in the end. After it, the British government took over India from the Company in 1858. This shows that the rebels used armed force and that they lost this time.\n\nLater in the 1900s, resistance looked different in some places. In India, the independence movement under Gandhi used nonviolent protest like the Salt March in 1930, and India became independent in 1947. In other places, like Algeria, people fought a war against France in the 1950s and early 1960s and won independence in 1962. So methods could be violent or nonviolent depending on the place.\n\nIn conclusion, the goals of resistance changed from fighting a particular ruler to building new nations, but the methods were a mix of armed fighting and peaceful protest at different times. There was both change and continuity, since people always wanted to be free of outside control even though how they did it was not always the same.\n   - \"Resistance to foreign rule changed a lot between 1750 and today in its goals, but the methods stayed fairly similar because armed fighting was used in many time periods.\" - Defensible claim about extent of change (goals) and continuity (methods) with a basic line of reasoning. Earns the thesis point.\n   - \"Ideas about liberty spread in the 1700s and this affected some colonies.\" - Only a one-sentence, vague mention of context. It names no specific developments (Enlightenment, Atlantic Revolutions) and is not tied to the argument, so no contextualization credit.\n   - \"Enslaved people rose up against their French masters and the plantation owners.\" - Accurate, specific description of the Haitian Revolution. Counts toward identifying a specific example, but it is described rather than used to prove a point about change or continuity.\n   - \"Indian soldiers who worked for the British East India Company, called sepoys, rebelled against the British.\" - Second accurate, specific example (1857). Together the two earn 1 of 2 evidence points; neither is explicitly linked back to the thesis, so the second point is not earned.\n   - \"This shows that the rebels used armed force and that they lost this time.\" - Gestures at the argument but only restates what happened. It does not explain why goals or methods shifted, so evidence is not used to support a claim.\n   - \"So methods could be violent or nonviolent depending on the place.\" - Organization is mostly a list of events in order. The essay notes variation but never explains causes of change (such as the effects of the world wars or mass politics), so no reasoning or complexity credit.\n   - \"There was both change and continuity, since people always wanted to be free of outside control\" - Names change and continuity in the conclusion but does not develop it with analysis, so it is not enough for a reasoning point.\n\nSample response, low score (2/6; Thesis/claim 1, Contextualization 0, Evidence 0, Analysis and reasoning 1):\nResistance to foreign rule changed a lot between 1750 and today, but some things stayed the same. In the early period people mostly wanted to get rid of foreign rulers, and later they wanted their own nations, but fighting stayed an important method the whole time.\n\nMany things were going on in the world during this time. Empires were powerful and many people did not like being ruled by them. Ideas were spreading and people were upset about how they were treated, so they started to resist in different places.\n\nOne example is the Haitian Revolution, where enslaved people fought against French rule and won. This showed that people could use armed revolt to challenge foreign control. Later on, resistance in other places also became bigger and more organized. People in many colonies got together in groups and wanted freedom for their countries.\n\nOverall, the goals changed because people wanted independence and a nation of their own, while the methods changed to include more than just fighting. However, there was still continuity because people kept resisting foreign rule and wanted to be free. So resistance changed in some ways and stayed the same in other ways from 1750 to the present.\n   - \"In the early period people mostly wanted to get rid of foreign rulers, and later they wanted their own nations, but fighting stayed an important method the whole time.\" - Defensible claim about change in goals and continuity in armed methods, with a basic line of reasoning. This earns the thesis point.\n   - \"Many things were going on in the world during this time. Empires were powerful and many people did not like being ruled by them.\" - Context is vague and generic. It names no specific development such as the Enlightenment, the Atlantic Revolutions, or the world wars, and it is not tied to the argument. No credit.\n   - \"One example is the Haitian Revolution, where enslaved people fought against French rule and won.\" - Only one specific example is given and it is not developed. The claim about later movements names no cases, so the two-example threshold is not met. No credit.\n   - \"Later on, resistance in other places also became bigger and more organized.\" - This is a general assertion with no evidence behind it and no explanation of why goals or methods shifted. There is no real continuity and change reasoning.\n   - \"However, there was still continuity because people kept resisting foreign rule and wanted to be free.\" - The continuity point is only a restatement and does not weigh change against continuity with evidence. It does not show complex understanding.",
+   "whap_frq": {
+    "schema_version": "whap-frq-1",
+    "task_type": "leq",
+    "template": "leq",
+    "era": 3,
+    "units": [
+     5,
+     6,
+     7,
+     8,
+     9
+    ],
+    "title": "Long Essay: Continuity and Change in Resistance to Foreign Rule, c. 1750 to the Present",
+    "prompt": {
+     "scenario": "Between the mid-1700s and the present, people in the Americas, Africa, Asia, and parts of Europe challenged rule by foreign empires and states. Some of these challenges were armed revolts, some were political organizations or mass campaigns, and many drew on new ideas about the nation, popular sovereignty, and self-determination.",
+     "task": "Evaluate the extent to which the goals and methods of resistance to foreign rule changed from c. 1750 to the present. You are not expected to address the entire time period.",
+     "requirements": [
+      "Make a historically defensible claim (thesis) that establishes a line of reasoning about the extent of change and continuity in resistance to foreign rule.",
+      "Describe a broader historical context relevant to the prompt.",
+      "Support your argument with at least two pieces of specific, relevant evidence.",
+      "Use historical reasoning (continuity and change) to frame or structure your argument.",
+      "Use the evidence to demonstrate a complex understanding of the prompt, for example by explaining both change and continuity, by comparing movements in different regions, or by explaining why some movements succeeded while others did not."
+     ]
+    },
+    "sources": [],
+    "rubric": {
+     "rubric_id": "whap-v1",
+     "total_points": 6,
+     "rows": [
+      {
+       "row_id": "thesis",
+       "name": "Thesis/claim",
+       "max": 1,
+       "descriptors": {
+        "0": "No defensible claim, or the response only restates the prompt or makes a claim that does not address extent of change.",
+        "1": "Gives a defensible claim about the extent of change and continuity in the goals or methods of resistance and indicates a line of reasoning."
+       },
+       "task_specific": "A claim about how far the goals and methods of resistance to foreign rule changed over the period, with a line of reasoning, such as moving from local revolts that sought to restore earlier orders toward mass nationalist movements that sought independent nation-states, while armed struggle remained a common method."
+      },
+      {
+       "row_id": "context",
+       "name": "Contextualization",
+       "max": 1,
+       "descriptors": {
+        "0": "No relevant context, or only a passing phrase.",
+        "1": "Describes a broader historical context that relates to the topic of the prompt and is linked to the argument."
+       },
+       "task_specific": "Situates the argument in broader developments such as Enlightenment ideas and the Atlantic Revolutions, nineteenth-century industrial imperialism and the partition of Africa, the effects of the two world wars on colonial empires, or Cold War pressures during decolonization."
+      },
+      {
+       "row_id": "evidence",
+       "name": "Evidence",
+       "max": 2,
+       "descriptors": {
+        "0": "No specific relevant examples.",
+        "1": "Identifies at least two specific examples relevant to the topic of the prompt.",
+        "2": "Uses at least two specific examples to support an argument about the extent of change and continuity in resistance to foreign rule."
+       },
+       "task_specific": "Specific examples of resistance to foreign rule from c. 1750 to the present, such as the Haitian Revolution, Latin American independence, the Indian Rebellion of 1857, the Battle of Adwa, the Maji Maji Rebellion, the Indian independence movement, the Algerian War, or Ghanaian independence."
+      },
+      {
+       "row_id": "analysis",
+       "name": "Analysis and reasoning",
+       "max": 2,
+       "descriptors": {
+        "0": "No use of historical reasoning to structure the argument.",
+        "1": "Uses continuity and change reasoning to frame or structure an argument about resistance to foreign rule.",
+        "2": "Demonstrates a complex understanding, such as explaining both change and continuity, using evidence from different regions and periods to qualify the argument, or explaining causes of the shift in goals or methods."
+       },
+       "task_specific": "Uses continuity and change reasoning to structure the argument and shows a complex understanding, for example by weighing both change and continuity, comparing regions, or explaining why methods shifted."
+      }
+     ],
+     "scoring_notes": [
+      "The thesis may appear in the introduction or the conclusion, but it must be at least one sentence and must do more than repeat the prompt.",
+      "Context must be more than a single phrase and must connect to the argument about resistance to foreign rule.",
+      "Examples may come from any region; a response focused on only one region can still earn full credit if it argues about change over time.",
+      "The complexity point must come from analysis carried through the essay. A single sentence of 'on the other hand' does not earn it.",
+      "Do not reward claims that endorse imperial ideas of racial or civilizational superiority; students may describe and analyze such ideas as causes of resistance.",
+      "Writers should not lose points for leaving out leaders' names. Accurate descriptions of what movements did and what they wanted count as specific evidence.",
+      "ALTON reference — not official AP scoring"
+     ]
+    },
+    "expected_features": {
+     "defensible_theses": [
+      "From c. 1750 to the present, the goals of resistance to foreign rule changed a great deal. Many early revolts aimed to restore local rulers, religious authority, or older rights, while twentieth-century movements usually demanded fully independent nation-states. Methods changed less, because armed struggle stayed common even as mass political parties and nonviolent campaigns grew.",
+      "Resistance changed mainly in scale and organization. Revolts that were local or regional, such as the Indian Rebellion of 1857 or the Maji Maji Rebellion, gave way to nationalist movements with parties, newspapers, and mass followings, such as the Indian National Congress. Still, the basic aim of ending foreign control and the use of armed force where negotiation failed stayed the same.",
+      "Resistance to foreign rule changed only partly. The idea of popular sovereignty from the Atlantic Revolutions runs from Haiti and Latin America to twentieth-century decolonization. What changed was who resisted and where: the main centers moved from the Americas around 1800 to Africa and Asia after 1900, and new international forums such as the United Nations shaped the struggle."
+     ],
+     "contextualization_ideas": [
+      "Enlightenment ideas about natural rights and popular sovereignty, along with the American and French Revolutions, spread new arguments that people could rightly overthrow rulers they had not consented to.",
+      "In the nineteenth century, industrialization pushed European states and Japan to expand empires in Africa and Asia, as seen in the Berlin Conference of 1884 to 1885 and the partition of Africa, and this provoked many armed and political responses.",
+      "The two world wars weakened European colonial powers. Colonial soldiers' service, Wilsonian self-determination, the Atlantic Charter, and the founding of the United Nations encouraged demands for independence, and Cold War rivalry shaped many decolonization struggles."
+     ],
+     "outside_evidence": [
+      "The Tupac Amaru II rebellion in the Andes (1780 to 1781) was a large Indigenous-led revolt against Spanish colonial abuses such as forced labor and taxation.",
+      "The Haitian Revolution (1791 to 1804) ended French rule and slavery in Saint-Domingue and created the independent state of Haiti in 1804.",
+      "Independence movements in Spanish America in the 1810s and 1820s, many led by creoles influenced by Enlightenment ideas, produced new states such as Mexico, which became independent in 1821.",
+      "Greece won independence from the Ottoman Empire, which was internationally recognized in 1830, an early example of a European nationalist movement against imperial rule.",
+      "The Indian Rebellion of 1857 against the British East India Company led Parliament to end Company rule and place India under direct Crown rule in 1858.",
+      "The Indian National Congress, founded in 1885, became a mass nationalist organization. Gandhi's nonviolent campaigns, including the Salt March of 1930, contributed to Indian independence in 1947, which came with partition.",
+      "Ethiopian forces defeated an Italian army at the Battle of Adwa in 1896, and Ethiopia stayed independent during the partition of Africa.",
+      "The Boxer Rebellion in China (1899 to 1901) attacked foreigners and Chinese Christians and was put down by a multinational foreign force.",
+      "The Maji Maji Rebellion (1905 to 1907) in German East Africa resisted forced cotton cultivation and was brutally suppressed.",
+      "Vietnamese forces defeated France at Dien Bien Phu in 1954, which ended French rule in Indochina.",
+      "The Algerian War of Independence (1954 to 1962) was a prolonged armed struggle that ended with Algerian independence from France in 1962.",
+      "Ghana became independent from Britain in 1957 under Kwame Nkrumah, one of the first sub-Saharan African colonies to do so, largely through mass party politics.",
+      "The Bandung Conference of 1955 brought together newly independent Asian and African states opposed to colonialism."
+     ],
+     "reasoning_types": [
+      "Continuity and change over time",
+      "Causation (why the goals and methods of resistance shifted)",
+      "Comparison (across regions or between armed and nonviolent movements)"
+     ],
+     "common_pitfalls": [
+      "Writing a list of rebellions without making a claim about the extent of change and continuity.",
+      "Treating all resistance as nationalist, when many earlier revolts were based on religious, local, or dynastic loyalties.",
+      "Focusing only on the American Revolution or on European history instead of resistance in Africa, Asia, and Latin America.",
+      "Saying nonviolence replaced armed struggle entirely, which ignores cases like Algeria, Vietnam, and Kenya.",
+      "Context that is too general, such as 'imperialism was bad', with no link to the argument.",
+      "Getting dates wrong, for example placing Indian independence before the Second World War or placing the Haitian Revolution after 1850."
+     ],
+     "facts": [
+      "Haiti became independent from France in 1804.",
+      "Mexico became independent from Spain in 1821.",
+      "Greek independence from the Ottoman Empire was recognized in 1830.",
+      "After the Indian Rebellion of 1857, British Crown rule replaced East India Company rule in 1858.",
+      "The Indian National Congress was founded in 1885.",
+      "The Berlin Conference took place in 1884 to 1885.",
+      "Ethiopia defeated Italy at Adwa in 1896.",
+      "The Boxer Rebellion took place in 1899 to 1901.",
+      "The Maji Maji Rebellion took place in 1905 to 1907.",
+      "The Salt March took place in 1930.",
+      "India and Pakistan became independent in 1947.",
+      "The Bandung Conference was held in 1955.",
+      "Ghana became independent in 1957.",
+      "Algeria became independent in 1962 after a war that began in 1954."
+     ]
+    },
+    "samples": [
+     {
+      "tier": "high",
+      "target_total": 6,
+      "essay": "From the late 1700s to the late 1900s, resistance to foreign rule changed a lot in its goals but less in its methods. Early resistance movements were often led by elites or local leaders who wanted to restore older orders or gain control for their own group, but by the 20th century most movements were mass nationalist movements that wanted fully independent nation-states based on popular sovereignty. Even so, armed struggle stayed a common method throughout the period, and nonviolent mass campaigns were added to it rather than replacing it.\n\nTo understand this change it helps to look at the larger context. In the late 1700s, Enlightenment thinkers like Locke and Rousseau spread ideas about natural rights and the idea that government gets its power from the people. These ideas helped cause the Atlantic Revolutions. Then in the 1800s, industrialization gave Europeans the steamships, guns, and medicine they needed to take over most of Africa and much of Asia, especially after the Berlin Conference of 1884 to 1885. Later, the two world wars weakened Britain and France and made colonial people expect more rights, since many had fought for the empires. This mix of new ideas and weakened empires explains why goals moved toward national independence.\n\nIn the earlier part of the period, many revolts aimed to throw out foreigners and bring back older rulers or traditions. The Indian Rebellion of 1857 started when sepoys in the British East India Company's army were angry about new rifle cartridges that were rumored to be greased with cow and pig fat, which offended both Hindus and Muslims. The rebels rallied around the old Mughal emperor, which shows they were looking back to an earlier order instead of trying to make a new Indian nation. The rebellion was crushed, and Britain then took direct control of India. Latin American independence is a bit different, since creole leaders like Simon Bolivar used Enlightenment ideas about popular sovereignty. But the creoles mostly wanted power for themselves, and the social hierarchy stayed mostly the same, so their goals were still limited.\n\nBy the 20th century the goals had clearly changed. The Indian independence movement, led by the Indian National Congress, wanted a self-governing Indian nation. Gandhi used nonviolent methods like boycotts of British cloth and the Salt March in 1930 to bring millions of ordinary people into the movement, which was very different from the soldiers' revolt of 1857. India became independent in 1947. In Ghana, Kwame Nkrumah also used strikes and mass political organizing, and Ghana became independent in 1957 as one of the first sub-Saharan African colonies to do so.\n\nHowever, armed struggle never went away. In Algeria, the FLN fought a violent war against France from 1954 to 1962, partly because France saw Algeria as part of France and had many European settlers there who refused to leave. This shows that methods depended on the situation. Where the colonial power was willing to negotiate, like Britain in Ghana, mass peaceful campaigns could work, but where there were large settler populations, resistance often turned violent, just as it had in earlier times. The goal in Algeria was still a modern independent nation, though, which is the same as in India and Ghana.\n\nIn conclusion, resistance to foreign rule changed from mostly local or elite revolts that tried to restore old orders into mass nationalist movements that demanded independent nation-states. Methods expanded to include nonviolence and political parties, but violence continued where empires refused to leave.",
+      "word_count": 581,
+      "rubric_scores": {
+       "thesis": 1,
+       "context": 1,
+       "evidence": 2,
+       "analysis": 2,
+       "total": 6
+      },
+      "annotations": [
+       {
+        "quote": "Early resistance movements were often led by elites or local leaders who wanted to restore older orders",
+        "comment": "Defensible claim about extent of change in goals, with a line of reasoning that separates goals from methods.",
+        "row_id": "thesis/claim"
+       },
+       {
+        "quote": "armed struggle stayed a common method throughout the period",
+        "comment": "The thesis names a continuity as well as a change, so it sets up a full CCOT argument.",
+        "row_id": "thesis/claim"
+       },
+       {
+        "quote": "the two world wars weakened Britain and France",
+        "comment": "Context on Enlightenment ideas, industrial imperialism and the world wars, tied back to why goals shifted. Earns the point.",
+        "row_id": "contextualization"
+       },
+       {
+        "quote": "The rebels rallied around the old Mughal emperor",
+        "comment": "Specific, accurate evidence about 1857, used to support the claim that early revolts looked backward.",
+        "row_id": "evidence"
+       },
+       {
+        "quote": "the Salt March in 1930",
+        "comment": "Specific evidence, explicitly contrasted with 1857 to show a change in methods and goals. Together with Algeria and Ghana, this earns 2.",
+        "row_id": "evidence"
+       },
+       {
+        "quote": "Where the colonial power was willing to negotiate, like Britain in Ghana, mass peaceful campaigns could work",
+        "comment": "Complexity: explains why methods differed across regions (settler colonies vs. others) and weighs change against continuity. The analysis runs through several paragraphs.",
+        "row_id": "analysis and reasoning"
+       },
+       {
+        "quote": "the creoles mostly wanted power for themselves, and the social hierarchy stayed mostly the same",
+        "comment": "Qualifies the argument by showing that Enlightenment-inspired goals were still limited. Adds nuance, though the Latin American example is less developed than the others, which keeps the essay just short of top level.",
+        "row_id": "analysis and reasoning"
+       }
+      ]
+     },
+     {
+      "tier": "mid",
+      "target_total": 4,
+      "essay": "Resistance to foreign rule changed a lot between 1750 and today in its goals, but the methods stayed fairly similar because armed fighting was used in many time periods. Early resistance mostly wanted to remove a foreign ruler, while later resistance wanted a new independent nation.\n\nIdeas about liberty spread in the 1700s and this affected some colonies. One example is the Haitian Revolution, which began in 1791 in the French colony of Saint-Domingue. Enslaved people rose up against their French masters and the plantation owners. They fought a long war, and Haiti became independent in 1804. It was the first time enslaved people overthrew their rulers and made their own country. The revolt was violent and involved armies and battles, and the people who led it wanted freedom from slavery and from France.\n\nAnother example is the Indian Rebellion of 1857. Indian soldiers who worked for the British East India Company, called sepoys, rebelled against the British. They were upset about things like the new rifle cartridges, which many believed were greased with animal fat, and about British control of their land. The rebellion spread across parts of northern India, but the British defeated it in the end. After it, the British government took over India from the Company in 1858. This shows that the rebels used armed force and that they lost this time.\n\nLater in the 1900s, resistance looked different in some places. In India, the independence movement under Gandhi used nonviolent protest like the Salt March in 1930, and India became independent in 1947. In other places, like Algeria, people fought a war against France in the 1950s and early 1960s and won independence in 1962. So methods could be violent or nonviolent depending on the place.\n\nIn conclusion, the goals of resistance changed from fighting a particular ruler to building new nations, but the methods were a mix of armed fighting and peaceful protest at different times. There was both change and continuity, since people always wanted to be free of outside control even though how they did it was not always the same.",
+      "word_count": 349,
+      "rubric_scores": {
+       "thesis": 1,
+       "context": 0,
+       "evidence": 2,
+       "analysis": 1,
+       "total": 4
+      },
+      "annotations": [
+       {
+        "quote": "Resistance to foreign rule changed a lot between 1750 and today in its goals, but the methods stayed fairly similar because armed fighting was used in many time periods.",
+        "comment": "Defensible claim about extent of change (goals) and continuity (methods) with a basic line of reasoning. Earns the thesis point.",
+        "row_id": "thesis"
+       },
+       {
+        "quote": "Ideas about liberty spread in the 1700s and this affected some colonies.",
+        "comment": "Only a one-sentence, vague mention of context. It names no specific developments (Enlightenment, Atlantic Revolutions) and is not tied to the argument, so no contextualization credit.",
+        "row_id": "context"
+       },
+       {
+        "quote": "Enslaved people rose up against their French masters and the plantation owners.",
+        "comment": "Accurate, specific description of the Haitian Revolution. Counts toward identifying a specific example, but it is described rather than used to prove a point about change or continuity.",
+        "row_id": "evidence"
+       },
+       {
+        "quote": "Indian soldiers who worked for the British East India Company, called sepoys, rebelled against the British.",
+        "comment": "Second accurate, specific example (1857). Together the two earn 1 of 2 evidence points; neither is explicitly linked back to the thesis, so the second point is not earned.",
+        "row_id": "evidence"
+       },
+       {
+        "quote": "This shows that the rebels used armed force and that they lost this time.",
+        "comment": "Gestures at the argument but only restates what happened. It does not explain why goals or methods shifted, so evidence is not used to support a claim.",
+        "row_id": "evidence"
+       },
+       {
+        "quote": "So methods could be violent or nonviolent depending on the place.",
+        "comment": "Organization is mostly a list of events in order. The essay notes variation but never explains causes of change (such as the effects of the world wars or mass politics), so no reasoning or complexity credit.",
+        "row_id": "analysis"
+       },
+       {
+        "quote": "There was both change and continuity, since people always wanted to be free of outside control",
+        "comment": "Names change and continuity in the conclusion but does not develop it with analysis, so it is not enough for a reasoning point.",
+        "row_id": "analysis"
+       }
+      ]
+     },
+     {
+      "tier": "low",
+      "target_total": 2,
+      "essay": "Resistance to foreign rule changed a lot between 1750 and today, but some things stayed the same. In the early period people mostly wanted to get rid of foreign rulers, and later they wanted their own nations, but fighting stayed an important method the whole time.\n\nMany things were going on in the world during this time. Empires were powerful and many people did not like being ruled by them. Ideas were spreading and people were upset about how they were treated, so they started to resist in different places.\n\nOne example is the Haitian Revolution, where enslaved people fought against French rule and won. This showed that people could use armed revolt to challenge foreign control. Later on, resistance in other places also became bigger and more organized. People in many colonies got together in groups and wanted freedom for their countries.\n\nOverall, the goals changed because people wanted independence and a nation of their own, while the methods changed to include more than just fighting. However, there was still continuity because people kept resisting foreign rule and wanted to be free. So resistance changed in some ways and stayed the same in other ways from 1750 to the present.",
+      "word_count": 201,
+      "rubric_scores": {
+       "thesis": 1,
+       "context": 0,
+       "evidence": 0,
+       "analysis": 1,
+       "total": 2
+      },
+      "annotations": [
+       {
+        "quote": "In the early period people mostly wanted to get rid of foreign rulers, and later they wanted their own nations, but fighting stayed an important method the whole time.",
+        "comment": "Defensible claim about change in goals and continuity in armed methods, with a basic line of reasoning. This earns the thesis point.",
+        "row_id": "thesis"
+       },
+       {
+        "quote": "Many things were going on in the world during this time. Empires were powerful and many people did not like being ruled by them.",
+        "comment": "Context is vague and generic. It names no specific development such as the Enlightenment, the Atlantic Revolutions, or the world wars, and it is not tied to the argument. No credit.",
+        "row_id": "context"
+       },
+       {
+        "quote": "One example is the Haitian Revolution, where enslaved people fought against French rule and won.",
+        "comment": "Only one specific example is given and it is not developed. The claim about later movements names no cases, so the two-example threshold is not met. No credit.",
+        "row_id": "evidence"
+       },
+       {
+        "quote": "Later on, resistance in other places also became bigger and more organized.",
+        "comment": "This is a general assertion with no evidence behind it and no explanation of why goals or methods shifted. There is no real continuity and change reasoning.",
+        "row_id": "analysis"
+       },
+       {
+        "quote": "However, there was still continuity because people kept resisting foreign rule and wanted to be free.",
+        "comment": "The continuity point is only a restatement and does not weigh change against continuity with evidence. It does not show complex understanding.",
+        "row_id": "analysis"
+       }
+      ]
+     }
+    ],
+    "provenance": {
+     "kind": "alton_authored_from_real_sources",
+     "note": "Prompts, rubric text, expected answers and sample responses are ALTON-authored practice material; every source is a real historical document, image or dataset (see sources[].source_registry_id)."
+    }
+   },
+   "design": {
+    "source_fixed_first": true,
+    "documents_chosen_before_prompt": true
+   },
+   "verification": {
+    "fact_checker": "claude-fable-5-1",
+    "graders": [
+     "claude-opus-5-5",
+     "claude-sonnet-5-5"
+    ],
+    "fact_flags": [],
+    "sample_totals": {
+     "high": 6,
+     "mid": 4,
+     "low": 2
+    },
+    "bands": {
+     "high": [
+      5,
+      6
+     ],
+     "mid": [
+      3,
+      5
+     ],
+     "low": [
+      1,
+      3
+     ]
+    }
+   }
+  }
+ }
+]

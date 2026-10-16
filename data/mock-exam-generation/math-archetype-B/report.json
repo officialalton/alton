@@ -1,0 +1,2160 @@
+{
+ "seeds": 5000,
+ "sweeps": [
+  {
+   "id": "le.solve.param_condition",
+   "skill": "linear_equations_one_var",
+   "kind": "solve",
+   "difficulty": "hard",
+   "operator": "param_condition",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 400,
+   "variants": {
+    "infinitely_many": 3035,
+    "no_solution": 1965
+   }
+  },
+  {
+   "id": "le.solve.constraint_select",
+   "skill": "linear_equations_one_var",
+   "kind": "solve",
+   "difficulty": "hard",
+   "operator": "constraint_select",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 71,
+   "variants": {
+    "count_solutions": 2627,
+    "find_solution": 2373
+   }
+  },
+  {
+   "id": "le.solve.chain2",
+   "skill": "linear_equations_one_var",
+   "kind": "solve",
+   "difficulty": "hard",
+   "operator": "chain2",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 400,
+   "variants": {
+    "relation_the_opposite_of": 946,
+    "relation_4_less_than": 862,
+    "relation_3_more_than": 897,
+    "relation_1_more_than_twice": 802,
+    "relation_twice": 834,
+    "relation_three_times": 659
+   }
+  },
+  {
+   "id": "le.solve.compose_kind",
+   "skill": "linear_equations_one_var",
+   "kind": "solve",
+   "difficulty": "hard",
+   "operator": "compose_kind",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 62,
+   "variants": {
+    "perimeter_to_area": 5000
+   }
+  },
+  {
+   "id": "le.word_problem_translate.chain2",
+   "skill": "linear_equations_one_var",
+   "kind": "word_problem_translate",
+   "difficulty": "hard",
+   "operator": "chain2",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 52,
+   "variants": {
+    "consecutive_even_odd": 2496,
+    "consecutive_integers": 2504
+   }
+  },
+  {
+   "id": "le.word_problem_translate.unit_ratio",
+   "skill": "linear_equations_one_var",
+   "kind": "word_problem_translate",
+   "difficulty": "hard",
+   "operator": "unit_ratio",
+   "seeds": 5000,
+   "produced": 4999,
+   "genFail": 1,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 236,
+   "variants": {
+    "work_then_alone": 4999
+   }
+  },
+  {
+   "id": "le.word_problem_translate.constraint_select",
+   "skill": "linear_equations_one_var",
+   "kind": "word_problem_translate",
+   "difficulty": "hard",
+   "operator": "constraint_select",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 269,
+   "variants": {
+    "future_sum": 2759,
+    "past_multiple": 2241
+   }
+  },
+  {
+   "id": "le.word_problem_translate.repr_shift",
+   "skill": "linear_equations_one_var",
+   "kind": "word_problem_translate",
+   "difficulty": "hard",
+   "operator": "repr_shift",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 400,
+   "variants": {
+    "three_item_types": 5000
+   }
+  },
+  {
+   "id": "le.literal_rearrange.compose_kind",
+   "skill": "linear_equations_one_var",
+   "kind": "literal_rearrange",
+   "difficulty": "hard",
+   "operator": "compose_kind",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 93,
+   "variants": {
+    "factor_then_substitute": 5000
+   }
+  },
+  {
+   "id": "le.literal_rearrange.inverse",
+   "skill": "linear_equations_one_var",
+   "kind": "literal_rearrange",
+   "difficulty": "hard",
+   "operator": "inverse",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 125,
+   "variants": {
+    "thin_lens": 1207,
+    "parallel_resistors": 1282,
+    "combined_time": 2511
+   }
+  },
+  {
+   "id": "le.literal_rearrange.chain2",
+   "skill": "linear_equations_one_var",
+   "kind": "literal_rearrange",
+   "difficulty": "hard",
+   "operator": "chain2",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 136,
+   "variants": {
+    "warmer": 2450,
+    "cooler": 2550
+   }
+  },
+  {
+   "id": "le.literal_rearrange.param_condition",
+   "skill": "linear_equations_one_var",
+   "kind": "literal_rearrange",
+   "difficulty": "hard",
+   "operator": "param_condition",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 60,
+   "variants": {
+    "collect_and_divide": 5000
+   }
+  },
+  {
+   "id": "li.solve_one_var.param_condition",
+   "skill": "linear_inequalities",
+   "kind": "solve_one_var",
+   "difficulty": "hard",
+   "operator": "param_condition",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 400,
+   "variants": {
+    "sign_of_coefficient": 5000
+   }
+  },
+  {
+   "id": "li.solve_one_var.constraint_select",
+   "skill": "linear_inequalities",
+   "kind": "solve_one_var",
+   "difficulty": "hard",
+   "operator": "constraint_select",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 120,
+   "variants": {
+    "compound_least": 1234,
+    "compound_count": 1191,
+    "compound_sum": 1337,
+    "compound_greatest": 1238
+   }
+  },
+  {
+   "id": "li.solve_one_var.chain2",
+   "skill": "linear_inequalities",
+   "kind": "solve_one_var",
+   "difficulty": "hard",
+   "operator": "chain2",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 344,
+   "variants": {
+    "least_k": 1984,
+    "greatest_k": 3016
+   }
+  },
+  {
+   "id": "li.solve_one_var.compose_kind",
+   "skill": "linear_inequalities",
+   "kind": "solve_one_var",
+   "difficulty": "hard",
+   "operator": "compose_kind",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 115,
+   "variants": {
+    "perimeter_area_bound": 5000
+   }
+  },
+  {
+   "id": "li.point_in_solution.inverse",
+   "skill": "linear_inequalities",
+   "kind": "point_in_solution",
+   "difficulty": "hard",
+   "operator": "inverse",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 106,
+   "variants": {
+    "unknown_constant_count": 5000
+   }
+  },
+  {
+   "id": "li.point_in_solution.constraint_select",
+   "skill": "linear_inequalities",
+   "kind": "point_in_solution",
+   "difficulty": "hard",
+   "operator": "constraint_select",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 129,
+   "variants": {
+    "lattice_between_lines": 5000
+   }
+  },
+  {
+   "id": "li.point_in_solution.repr_shift",
+   "skill": "linear_inequalities",
+   "kind": "point_in_solution",
+   "difficulty": "hard",
+   "operator": "repr_shift",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 95,
+   "variants": {
+    "revenue_goal_round_up": 5000
+   }
+  },
+  {
+   "id": "li.point_in_solution.compare_scenarios",
+   "skill": "linear_inequalities",
+   "kind": "point_in_solution",
+   "difficulty": "hard",
+   "operator": "compare_scenarios",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 239,
+   "variants": {
+    "plan_crossover": 5000
+   }
+  },
+  {
+   "id": "li.table_verification.repr_shift",
+   "skill": "linear_inequalities",
+   "kind": "table_verification",
+   "difficulty": "hard",
+   "operator": "repr_shift",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 53,
+   "variants": {
+    "sentence_to_inequality": 5000
+   }
+  },
+  {
+   "id": "li.table_verification.constraint_select",
+   "skill": "linear_inequalities",
+   "kind": "table_verification",
+   "difficulty": "hard",
+   "operator": "constraint_select",
+   "seeds": 5000,
+   "produced": 4508,
+   "genFail": 492,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 90,
+   "variants": {
+    "unknown_slope_all_points": 4508
+   }
+  },
+  {
+   "id": "li.table_verification.inverse",
+   "skill": "linear_inequalities",
+   "kind": "table_verification",
+   "difficulty": "hard",
+   "operator": "inverse",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 78,
+   "variants": {
+    "rebuild_from_boundary_points": 5000
+   }
+  },
+  {
+   "id": "li.table_verification.compare_scenarios",
+   "skill": "linear_inequalities",
+   "kind": "table_verification",
+   "difficulty": "hard",
+   "operator": "compare_scenarios",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 94,
+   "variants": {
+    "first_but_not_second": 5000
+   }
+  },
+  {
+   "id": "lf.evaluate.chain2",
+   "skill": "linear_functions",
+   "kind": "evaluate",
+   "difficulty": "hard",
+   "operator": "chain2",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 151,
+   "variants": {
+    "two_compositions": 5000
+   }
+  },
+  {
+   "id": "lf.evaluate.compose_kind",
+   "skill": "linear_functions",
+   "kind": "evaluate",
+   "difficulty": "hard",
+   "operator": "compose_kind",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 40,
+   "variants": {
+    "restore_then_evaluate": 5000
+   }
+  },
+  {
+   "id": "lf.evaluate.repr_shift",
+   "skill": "linear_functions",
+   "kind": "evaluate",
+   "difficulty": "hard",
+   "operator": "repr_shift",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 37,
+   "variants": {
+    "from_intercepts": 5000
+   }
+  },
+  {
+   "id": "lf.evaluate.compare_scenarios",
+   "skill": "linear_functions",
+   "kind": "evaluate",
+   "difficulty": "hard",
+   "operator": "compare_scenarios",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 73,
+   "variants": {
+    "two_shops_difference": 5000
+   }
+  },
+  {
+   "id": "lf.find_x_for_value.inverse",
+   "skill": "linear_functions",
+   "kind": "find_x_for_value",
+   "difficulty": "hard",
+   "operator": "inverse",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 42,
+   "variants": {
+    "equal_to_sum_of_values": 5000
+   }
+  },
+  {
+   "id": "lf.find_x_for_value.chain2",
+   "skill": "linear_functions",
+   "kind": "find_x_for_value",
+   "difficulty": "hard",
+   "operator": "chain2",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 111,
+   "variants": {
+    "composite_equals_target": 5000
+   }
+  },
+  {
+   "id": "lf.find_x_for_value.compose_kind",
+   "skill": "linear_functions",
+   "kind": "find_x_for_value",
+   "difficulty": "hard",
+   "operator": "compose_kind",
+   "seeds": 5000,
+   "produced": 4854,
+   "genFail": 146,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 114,
+   "variants": {
+    "percent_of_value": 4854
+   }
+  },
+  {
+   "id": "lf.find_x_for_value.constraint_select",
+   "skill": "linear_functions",
+   "kind": "find_x_for_value",
+   "difficulty": "hard",
+   "operator": "constraint_select",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 159,
+   "variants": {
+    "range_with_parity": 5000
+   }
+  },
+  {
+   "id": "lf.slope_from_two_points.inverse",
+   "skill": "linear_functions",
+   "kind": "slope_from_two_points",
+   "difficulty": "hard",
+   "operator": "inverse",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 131,
+   "variants": {
+    "missing_x": 2564,
+    "missing_y": 2436
+   }
+  },
+  {
+   "id": "lf.slope_from_two_points.compose_kind",
+   "skill": "linear_functions",
+   "kind": "slope_from_two_points",
+   "difficulty": "hard",
+   "operator": "compose_kind",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 353,
+   "variants": {
+    "parallel_intercept": 2525,
+    "perpendicular_intercept": 2475
+   }
+  },
+  {
+   "id": "lf.slope_from_two_points.repr_shift",
+   "skill": "linear_functions",
+   "kind": "slope_from_two_points",
+   "difficulty": "hard",
+   "operator": "repr_shift",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 52,
+   "variants": {
+    "intercepts_of_standard_form": 5000
+   }
+  },
+  {
+   "id": "lf.slope_from_two_points.compare_scenarios",
+   "skill": "linear_functions",
+   "kind": "slope_from_two_points",
+   "difficulty": "hard",
+   "operator": "compare_scenarios",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 122,
+   "variants": {
+    "slope_difference": 5000
+   }
+  },
+  {
+   "id": "lf.interpret_slope.unit_ratio",
+   "skill": "linear_functions",
+   "kind": "interpret_slope",
+   "difficulty": "hard",
+   "operator": "unit_ratio",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 54,
+   "variants": {
+    "rate_in_other_units": 5000
+   }
+  },
+  {
+   "id": "lf.interpret_slope.repr_shift",
+   "skill": "linear_functions",
+   "kind": "interpret_slope",
+   "difficulty": "hard",
+   "operator": "repr_shift",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 104,
+   "variants": {
+    "rate_from_two_observations": 5000
+   }
+  },
+  {
+   "id": "lf.interpret_slope.compare_scenarios",
+   "skill": "linear_functions",
+   "kind": "interpret_slope",
+   "difficulty": "hard",
+   "operator": "compare_scenarios",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 99,
+   "variants": {
+    "difference_of_changes": 5000
+   }
+  },
+  {
+   "id": "lf.interpret_slope.chain2",
+   "skill": "linear_functions",
+   "kind": "interpret_slope",
+   "difficulty": "hard",
+   "operator": "chain2",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 232,
+   "variants": {
+    "slope_relation_then_value": 5000
+   }
+  },
+  {
+   "id": "lf.interpret_intercept.unit_ratio",
+   "skill": "linear_functions",
+   "kind": "interpret_intercept",
+   "difficulty": "hard",
+   "operator": "unit_ratio",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 48,
+   "variants": {
+    "starting_value_other_units": 5000
+   }
+  },
+  {
+   "id": "lf.interpret_intercept.repr_shift",
+   "skill": "linear_functions",
+   "kind": "interpret_intercept",
+   "difficulty": "hard",
+   "operator": "repr_shift",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 66,
+   "variants": {
+    "extrapolate_to_start": 5000
+   }
+  },
+  {
+   "id": "lf.interpret_intercept.inverse",
+   "skill": "linear_functions",
+   "kind": "interpret_intercept",
+   "difficulty": "hard",
+   "operator": "inverse",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 400,
+   "variants": {
+    "work_backward_to_start": 5000
+   }
+  },
+  {
+   "id": "lf.interpret_intercept.compare_scenarios",
+   "skill": "linear_functions",
+   "kind": "interpret_intercept",
+   "difficulty": "hard",
+   "operator": "compare_scenarios",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 82,
+   "variants": {
+    "equation_vs_table_start": 5000
+   }
+  },
+  {
+   "id": "l2.intersection_x.compose_kind",
+   "skill": "linear_equations_two_var",
+   "kind": "intersection_x",
+   "difficulty": "hard",
+   "operator": "compose_kind",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 115,
+   "variants": {
+    "point_slope_then_intersect": 5000
+   }
+  },
+  {
+   "id": "l2.intersection_x.inverse",
+   "skill": "linear_equations_two_var",
+   "kind": "intersection_x",
+   "difficulty": "hard",
+   "operator": "inverse",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 135,
+   "variants": {
+    "unknown_constant_from_x": 5000
+   }
+  },
+  {
+   "id": "l2.intersection_x.compare_scenarios",
+   "skill": "linear_equations_two_var",
+   "kind": "intersection_x",
+   "difficulty": "hard",
+   "operator": "compare_scenarios",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 271,
+   "variants": {
+    "equal_cost_point": 5000
+   }
+  },
+  {
+   "id": "l2.intersection_x.repr_shift",
+   "skill": "linear_equations_two_var",
+   "kind": "intersection_x",
+   "difficulty": "hard",
+   "operator": "repr_shift",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 35,
+   "variants": {
+    "lines_from_tables": 5000
+   }
+  },
+  {
+   "id": "l2.intersection_y.chain2",
+   "skill": "linear_equations_two_var",
+   "kind": "intersection_y",
+   "difficulty": "hard",
+   "operator": "chain2",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 94,
+   "variants": {
+    "third_line_at_intersection_x": 5000
+   }
+  },
+  {
+   "id": "l2.intersection_y.inverse",
+   "skill": "linear_equations_two_var",
+   "kind": "intersection_y",
+   "difficulty": "hard",
+   "operator": "inverse",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 103,
+   "variants": {
+    "unknown_constant_from_y": 5000
+   }
+  },
+  {
+   "id": "l2.intersection_y.constraint_select",
+   "skill": "linear_equations_two_var",
+   "kind": "intersection_y",
+   "difficulty": "hard",
+   "operator": "constraint_select",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 116,
+   "variants": {
+    "integer_solutions_sum_of_y": 5000
+   }
+  },
+  {
+   "id": "l2.intersection_y.compose_kind",
+   "skill": "linear_equations_two_var",
+   "kind": "intersection_y",
+   "difficulty": "hard",
+   "operator": "compose_kind",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 69,
+   "variants": {
+    "two_points_then_intersect_y": 5000
+   }
+  },
+  {
+   "id": "l2.intersection_sum.param_condition",
+   "skill": "linear_equations_two_var",
+   "kind": "intersection_sum",
+   "difficulty": "hard",
+   "operator": "param_condition",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 44,
+   "variants": {
+    "solution_on_y_equals_x": 5000
+   }
+  },
+  {
+   "id": "l2.intersection_sum.inverse",
+   "skill": "linear_equations_two_var",
+   "kind": "intersection_sum",
+   "difficulty": "hard",
+   "operator": "inverse",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 100,
+   "variants": {
+    "unknown_constant_from_coordinate_sum": 5000
+   }
+  },
+  {
+   "id": "l2.intersection_sum.compose_kind",
+   "skill": "linear_equations_two_var",
+   "kind": "intersection_sum",
+   "difficulty": "hard",
+   "operator": "compose_kind",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 47,
+   "variants": {
+    "symmetric_system_sum": 5000
+   }
+  },
+  {
+   "id": "l2.intersection_sum.constraint_select",
+   "skill": "linear_equations_two_var",
+   "kind": "intersection_sum",
+   "difficulty": "hard",
+   "operator": "constraint_select",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 103,
+   "variants": {
+    "integer_solutions_sum_of_coordinates": 5000
+   }
+  },
+  {
+   "id": "l2.slope.chain2",
+   "skill": "linear_equations_two_var",
+   "kind": "slope",
+   "difficulty": "hard",
+   "operator": "chain2",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 74,
+   "variants": {
+    "slope_through_intersection": 5000
+   }
+  },
+  {
+   "id": "l2.slope.inverse",
+   "skill": "linear_equations_two_var",
+   "kind": "slope",
+   "difficulty": "hard",
+   "operator": "inverse",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 70,
+   "variants": {
+    "perpendicular_condition_for_coefficient": 5000
+   }
+  },
+  {
+   "id": "l2.slope.compose_kind",
+   "skill": "linear_equations_two_var",
+   "kind": "slope",
+   "difficulty": "hard",
+   "operator": "compose_kind",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 132,
+   "variants": {
+    "slope_from_origin_to_intersection": 5000
+   }
+  },
+  {
+   "id": "l2.slope.repr_shift",
+   "skill": "linear_equations_two_var",
+   "kind": "slope",
+   "difficulty": "hard",
+   "operator": "repr_shift",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 62,
+   "variants": {
+    "exchange_rate_from_budget": 5000
+   }
+  },
+  {
+   "id": "l2.intercept.inverse",
+   "skill": "linear_equations_two_var",
+   "kind": "intercept",
+   "difficulty": "hard",
+   "operator": "inverse",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 42,
+   "variants": {
+    "y_intercept_from_x_intercept": 5000
+   }
+  },
+  {
+   "id": "l2.intercept.chain2",
+   "skill": "linear_equations_two_var",
+   "kind": "intercept",
+   "difficulty": "hard",
+   "operator": "chain2",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 68,
+   "variants": {
+    "line_through_intersection_intercept": 5000
+   }
+  },
+  {
+   "id": "l2.intercept.repr_shift",
+   "skill": "linear_equations_two_var",
+   "kind": "intercept",
+   "difficulty": "hard",
+   "operator": "repr_shift",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 67,
+   "variants": {
+    "intercept_meaning_from_budget": 5000
+   }
+  },
+  {
+   "id": "l2.intercept.compare_scenarios",
+   "skill": "linear_equations_two_var",
+   "kind": "intercept",
+   "difficulty": "hard",
+   "operator": "compare_scenarios",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 35,
+   "variants": {
+    "intercepts_of_two_forms": 5000
+   }
+  },
+  {
+   "id": "l2.num_solutions.param_condition",
+   "skill": "linear_equations_two_var",
+   "kind": "num_solutions",
+   "difficulty": "hard",
+   "operator": "param_condition",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 197,
+   "variants": {
+    "no_solution_condition": 2568,
+    "infinitely_many_condition": 2432
+   }
+  },
+  {
+   "id": "l2.num_solutions.inverse",
+   "skill": "linear_equations_two_var",
+   "kind": "num_solutions",
+   "difficulty": "hard",
+   "operator": "inverse",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 290,
+   "variants": {
+    "infinitely_many_two_unknowns": 5000
+   }
+  },
+  {
+   "id": "l2.num_solutions.constraint_select",
+   "skill": "linear_equations_two_var",
+   "kind": "num_solutions",
+   "difficulty": "hard",
+   "operator": "constraint_select",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 294,
+   "variants": {
+    "unique_solution_count": 5000
+   }
+  },
+  {
+   "id": "l2.num_solutions.compose_kind",
+   "skill": "linear_equations_two_var",
+   "kind": "num_solutions",
+   "difficulty": "hard",
+   "operator": "compose_kind",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 69,
+   "variants": {
+    "positive_integer_solutions_count": 5000
+   }
+  },
+  {
+   "id": "sl.substitution_solve.inverse",
+   "skill": "systems_linear",
+   "kind": "substitution_solve",
+   "difficulty": "hard",
+   "operator": "inverse",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 166,
+   "variants": {
+    "unknown_constant_by_substitution": 5000
+   }
+  },
+  {
+   "id": "sl.substitution_solve.compose_kind",
+   "skill": "systems_linear",
+   "kind": "substitution_solve",
+   "difficulty": "hard",
+   "operator": "compose_kind",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 259,
+   "variants": {
+    "length_width_perimeter_area": 5000
+   }
+  },
+  {
+   "id": "sl.substitution_solve.repr_shift",
+   "skill": "systems_linear",
+   "kind": "substitution_solve",
+   "difficulty": "hard",
+   "operator": "repr_shift",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 147,
+   "variants": {
+    "sum_and_multiple_relation": 5000
+   }
+  },
+  {
+   "id": "sl.substitution_solve.chain2",
+   "skill": "systems_linear",
+   "kind": "substitution_solve",
+   "difficulty": "hard",
+   "operator": "chain2",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 184,
+   "variants": {
+    "three_variable_chain": 5000
+   }
+  },
+  {
+   "id": "sl.elimination_value.inverse",
+   "skill": "systems_linear",
+   "kind": "elimination_value",
+   "difficulty": "hard",
+   "operator": "inverse",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 49,
+   "variants": {
+    "unknown_coefficient_by_elimination": 5000
+   }
+  },
+  {
+   "id": "sl.elimination_value.chain2",
+   "skill": "systems_linear",
+   "kind": "elimination_value",
+   "difficulty": "hard",
+   "operator": "chain2",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 38,
+   "variants": {
+    "eliminate_then_evaluate_expression": 5000
+   }
+  },
+  {
+   "id": "sl.elimination_value.constraint_select",
+   "skill": "systems_linear",
+   "kind": "elimination_value",
+   "difficulty": "hard",
+   "operator": "constraint_select",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 297,
+   "variants": {
+    "positive_integer_solutions_sum_of_k": 5000
+   }
+  },
+  {
+   "id": "sl.elimination_value.compare_scenarios",
+   "skill": "systems_linear",
+   "kind": "elimination_value",
+   "difficulty": "hard",
+   "operator": "compare_scenarios",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 124,
+   "variants": {
+    "difference_of_two_solutions": 5000
+   }
+  },
+  {
+   "id": "sl.param_no_solution.param_condition",
+   "skill": "systems_linear",
+   "kind": "param_no_solution",
+   "difficulty": "hard",
+   "operator": "param_condition",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 36,
+   "variants": {
+    "parallel_quadratic_in_k": 5000
+   }
+  },
+  {
+   "id": "sl.param_no_solution.inverse",
+   "skill": "systems_linear",
+   "kind": "param_no_solution",
+   "difficulty": "hard",
+   "operator": "inverse",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 156,
+   "variants": {
+    "infinitely_many_proportional": 5000
+   }
+  },
+  {
+   "id": "sl.param_no_solution.constraint_select",
+   "skill": "systems_linear",
+   "kind": "param_no_solution",
+   "difficulty": "hard",
+   "operator": "constraint_select",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 242,
+   "variants": {
+    "no_solution_vs_infinite_candidates": 5000
+   }
+  },
+  {
+   "id": "sl.param_no_solution.compose_kind",
+   "skill": "systems_linear",
+   "kind": "param_no_solution",
+   "difficulty": "hard",
+   "operator": "compose_kind",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 79,
+   "variants": {
+    "parallel_then_point_constant": 5000
+   }
+  },
+  {
+   "id": "sl.word_system.repr_shift",
+   "skill": "systems_linear",
+   "kind": "word_system",
+   "difficulty": "hard",
+   "operator": "repr_shift",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 199,
+   "variants": {
+    "relation_and_revenue": 5000
+   }
+  },
+  {
+   "id": "sl.word_system.unit_ratio",
+   "skill": "systems_linear",
+   "kind": "word_system",
+   "difficulty": "hard",
+   "operator": "unit_ratio",
+   "seeds": 5000,
+   "produced": 4988,
+   "genFail": 12,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 157,
+   "variants": {
+    "mixture_concentration": 4988
+   }
+  },
+  {
+   "id": "sl.word_system.compare_scenarios",
+   "skill": "systems_linear",
+   "kind": "word_system",
+   "difficulty": "hard",
+   "operator": "compare_scenarios",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 59,
+   "variants": {
+    "common_cost_at_crossover": 5000
+   }
+  },
+  {
+   "id": "sl.word_system.chain2",
+   "skill": "systems_linear",
+   "kind": "word_system",
+   "difficulty": "hard",
+   "operator": "chain2",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 115,
+   "variants": {
+    "prices_then_new_order": 5000
+   }
+  },
+  {
+   "id": "li.solve_one_var.e_integer_edge",
+   "skill": "linear_inequalities",
+   "kind": "solve_one_var",
+   "difficulty": "easy",
+   "operator": "frame",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 100,
+   "variants": {
+    "integer_edge": 5000
+   }
+  },
+  {
+   "id": "li.point_in_solution.e_count_values",
+   "skill": "linear_inequalities",
+   "kind": "point_in_solution",
+   "difficulty": "easy",
+   "operator": "frame",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 121,
+   "variants": {
+    "count_true_values": 5000
+   }
+  },
+  {
+   "id": "li.table_verification.e_budget_items",
+   "skill": "linear_inequalities",
+   "kind": "table_verification",
+   "difficulty": "easy",
+   "operator": "frame",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 400,
+   "variants": {
+    "budget_items": 5000
+   }
+  },
+  {
+   "id": "li.solve_one_var.m_negative_coefficient",
+   "skill": "linear_inequalities",
+   "kind": "solve_one_var",
+   "difficulty": "medium",
+   "operator": "frame",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 79,
+   "variants": {
+    "negative_coefficient": 5000
+   }
+  },
+  {
+   "id": "li.solve_one_var.m_fee_per_unit",
+   "skill": "linear_inequalities",
+   "kind": "solve_one_var",
+   "difficulty": "medium",
+   "operator": "frame",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 103,
+   "variants": {
+    "fee_plus_rate": 5000
+   }
+  },
+  {
+   "id": "li.solve_one_var.m_double_inequality",
+   "skill": "linear_inequalities",
+   "kind": "solve_one_var",
+   "difficulty": "medium",
+   "operator": "frame",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 50,
+   "variants": {
+    "double_inequality_count": 5000
+   }
+  },
+  {
+   "id": "li.point_in_solution.m_least_y",
+   "skill": "linear_inequalities",
+   "kind": "point_in_solution",
+   "difficulty": "medium",
+   "operator": "frame",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 67,
+   "variants": {
+    "least_y_on_vertical_line": 5000
+   }
+  },
+  {
+   "id": "li.table_verification.m_count_pairs",
+   "skill": "linear_inequalities",
+   "kind": "table_verification",
+   "difficulty": "medium",
+   "operator": "frame",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 177,
+   "variants": {
+    "count_true_pairs": 5000
+   }
+  },
+  {
+   "id": "le.solve.e_two_step",
+   "skill": "linear_equations_one_var",
+   "kind": "solve",
+   "difficulty": "easy",
+   "operator": "frame",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 103,
+   "variants": {
+    "two_step": 5000
+   }
+  },
+  {
+   "id": "le.word_problem_translate.e_number_puzzle",
+   "skill": "linear_equations_one_var",
+   "kind": "word_problem_translate",
+   "difficulty": "easy",
+   "operator": "frame",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 97,
+   "variants": {
+    "number_puzzle": 5000
+   }
+  },
+  {
+   "id": "le.literal_rearrange.e_product_formula",
+   "skill": "linear_equations_one_var",
+   "kind": "literal_rearrange",
+   "difficulty": "easy",
+   "operator": "frame",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 380,
+   "variants": {
+    "product_relationship": 5000
+   }
+  },
+  {
+   "id": "le.solve.m_both_sides",
+   "skill": "linear_equations_one_var",
+   "kind": "solve",
+   "difficulty": "medium",
+   "operator": "frame",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 147,
+   "variants": {
+    "both_sides": 5000
+   }
+  },
+  {
+   "id": "le.solve.m_parentheses",
+   "skill": "linear_equations_one_var",
+   "kind": "solve",
+   "difficulty": "medium",
+   "operator": "frame",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 82,
+   "variants": {
+    "parentheses": 5000
+   }
+  },
+  {
+   "id": "le.solve.m_fraction",
+   "skill": "linear_equations_one_var",
+   "kind": "solve",
+   "difficulty": "medium",
+   "operator": "frame",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 64,
+   "variants": {
+    "fraction_equation": 5000
+   }
+  },
+  {
+   "id": "le.word_problem_translate.m_flat_plus_rate",
+   "skill": "linear_equations_one_var",
+   "kind": "word_problem_translate",
+   "difficulty": "medium",
+   "operator": "frame",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 199,
+   "variants": {
+    "flat_plus_rate": 5000
+   }
+  },
+  {
+   "id": "le.literal_rearrange.m_formula_value",
+   "skill": "linear_equations_one_var",
+   "kind": "literal_rearrange",
+   "difficulty": "medium",
+   "operator": "frame",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 143,
+   "variants": {
+    "two_term_formula": 5000
+   }
+  },
+  {
+   "id": "lf.evaluate.e_plug_in",
+   "skill": "linear_functions",
+   "kind": "evaluate",
+   "difficulty": "easy",
+   "operator": "frame",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 400,
+   "variants": {
+    "plug_in": 5000
+   }
+  },
+  {
+   "id": "lf.find_x_for_value.e_solve_for_input",
+   "skill": "linear_functions",
+   "kind": "find_x_for_value",
+   "difficulty": "easy",
+   "operator": "frame",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 400,
+   "variants": {
+    "solve_for_input": 5000
+   }
+  },
+  {
+   "id": "lf.slope_from_two_points.e_two_points",
+   "skill": "linear_functions",
+   "kind": "slope_from_two_points",
+   "difficulty": "easy",
+   "operator": "frame",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 82,
+   "variants": {
+    "two_points": 5000
+   }
+  },
+  {
+   "id": "lf.evaluate.m_expression_value",
+   "skill": "linear_functions",
+   "kind": "evaluate",
+   "difficulty": "medium",
+   "operator": "frame",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 400,
+   "variants": {
+    "expression_of_values": 5000
+   }
+  },
+  {
+   "id": "lf.find_x_for_value.m_fraction_slope",
+   "skill": "linear_functions",
+   "kind": "find_x_for_value",
+   "difficulty": "medium",
+   "operator": "frame",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 351,
+   "variants": {
+    "fraction_slope": 5000
+   }
+  },
+  {
+   "id": "lf.slope_from_two_points.m_fractional_slope",
+   "skill": "linear_functions",
+   "kind": "slope_from_two_points",
+   "difficulty": "medium",
+   "operator": "frame",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 57,
+   "variants": {
+    "fractional_slope": 5000
+   }
+  },
+  {
+   "id": "lf.interpret_slope.m_rate_context",
+   "skill": "linear_functions",
+   "kind": "interpret_slope",
+   "difficulty": "medium",
+   "operator": "frame",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 251,
+   "variants": {
+    "rate_in_context": 5000
+   }
+  },
+  {
+   "id": "lf.interpret_intercept.m_start_context",
+   "skill": "linear_functions",
+   "kind": "interpret_intercept",
+   "difficulty": "medium",
+   "operator": "frame",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 220,
+   "variants": {
+    "start_in_context": 5000
+   }
+  },
+  {
+   "id": "l2.intersection_x.e_y_form",
+   "skill": "linear_equations_two_var",
+   "kind": "intersection_x",
+   "difficulty": "easy",
+   "operator": "frame",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 52,
+   "variants": {
+    "y_form_x": 5000
+   }
+  },
+  {
+   "id": "l2.slope.e_slope_of_equation",
+   "skill": "linear_equations_two_var",
+   "kind": "slope",
+   "difficulty": "easy",
+   "operator": "frame",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 194,
+   "variants": {
+    "read_slope": 5000
+   }
+  },
+  {
+   "id": "l2.num_solutions.e_parallel_k",
+   "skill": "linear_equations_two_var",
+   "kind": "num_solutions",
+   "difficulty": "easy",
+   "operator": "frame",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 228,
+   "variants": {
+    "parallel_k": 5000
+   }
+  },
+  {
+   "id": "l2.intersection_y.m_y_form",
+   "skill": "linear_equations_two_var",
+   "kind": "intersection_y",
+   "difficulty": "medium",
+   "operator": "frame",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 47,
+   "variants": {
+    "y_form_y": 5000
+   }
+  },
+  {
+   "id": "l2.intersection_x.m_standard_form",
+   "skill": "linear_equations_two_var",
+   "kind": "intersection_x",
+   "difficulty": "medium",
+   "operator": "frame",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 63,
+   "variants": {
+    "standard_form_x": 5000
+   }
+  },
+  {
+   "id": "l2.intercept.m_standard_form",
+   "skill": "linear_equations_two_var",
+   "kind": "intercept",
+   "difficulty": "medium",
+   "operator": "frame",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 169,
+   "variants": {
+    "standard_form_intercept": 5000
+   }
+  },
+  {
+   "id": "l2.slope.m_standard_form",
+   "skill": "linear_equations_two_var",
+   "kind": "slope",
+   "difficulty": "medium",
+   "operator": "frame",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 71,
+   "variants": {
+    "standard_form_slope": 5000
+   }
+  },
+  {
+   "id": "l2.intersection_sum.m_y_form_sum",
+   "skill": "linear_equations_two_var",
+   "kind": "intersection_sum",
+   "difficulty": "medium",
+   "operator": "frame",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 55,
+   "variants": {
+    "y_form_sum": 5000
+   }
+  },
+  {
+   "id": "sl.elimination_value.e_add_equations",
+   "skill": "systems_linear",
+   "kind": "elimination_value",
+   "difficulty": "easy",
+   "operator": "frame",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 113,
+   "variants": {
+    "add_equations": 5000
+   }
+  },
+  {
+   "id": "sl.substitution_solve.e_y_equals_multiple",
+   "skill": "systems_linear",
+   "kind": "substitution_solve",
+   "difficulty": "easy",
+   "operator": "frame",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 72,
+   "variants": {
+    "y_equals_multiple_of_x": 5000
+   }
+  },
+  {
+   "id": "sl.word_system.e_two_numbers",
+   "skill": "systems_linear",
+   "kind": "word_system",
+   "difficulty": "easy",
+   "operator": "frame",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 80,
+   "variants": {
+    "sum_and_difference": 5000
+   }
+  },
+  {
+   "id": "sl.substitution_solve.m_x_solved",
+   "skill": "systems_linear",
+   "kind": "substitution_solve",
+   "difficulty": "medium",
+   "operator": "frame",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 152,
+   "variants": {
+    "x_solved_form": 5000
+   }
+  },
+  {
+   "id": "sl.elimination_value.m_scale_one",
+   "skill": "systems_linear",
+   "kind": "elimination_value",
+   "difficulty": "medium",
+   "operator": "frame",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 63,
+   "variants": {
+    "scale_one_equation": 5000
+   }
+  },
+  {
+   "id": "sl.elimination_value.m_sum_of_solution",
+   "skill": "systems_linear",
+   "kind": "elimination_value",
+   "difficulty": "medium",
+   "operator": "frame",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 66,
+   "variants": {
+    "sum_of_solution": 5000
+   }
+  },
+  {
+   "id": "sl.param_no_solution.m_find_k",
+   "skill": "systems_linear",
+   "kind": "param_no_solution",
+   "difficulty": "medium",
+   "operator": "frame",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 179,
+   "variants": {
+    "find_k_parallel": 5000
+   }
+  },
+  {
+   "id": "sl.word_system.m_item_counts",
+   "skill": "systems_linear",
+   "kind": "word_system",
+   "difficulty": "medium",
+   "operator": "frame",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 81,
+   "variants": {
+    "item_counts_and_cost": 5000
+   }
+  }
+ ],
+ "supply": [
+  {
+   "skill": "linear_equations_one_var",
+   "difficulty": "easy",
+   "need": 30,
+   "groups": 3,
+   "produced": 90,
+   "minGroup": 0,
+   "feasible30": true,
+   "perSet": 1
+  },
+  {
+   "skill": "linear_equations_one_var",
+   "difficulty": "medium",
+   "need": 90,
+   "groups": 5,
+   "produced": 150,
+   "minGroup": 0,
+   "feasible30": true,
+   "perSet": 3
+  },
+  {
+   "skill": "linear_equations_one_var",
+   "difficulty": "hard",
+   "need": 20,
+   "groups": 23,
+   "produced": 150,
+   "minGroup": 0,
+   "feasible30": true,
+   "perSet": 0.6666666666666666
+  },
+  {
+   "skill": "linear_functions",
+   "difficulty": "easy",
+   "need": 30,
+   "groups": 3,
+   "produced": 90,
+   "minGroup": 0,
+   "feasible30": true,
+   "perSet": 1
+  },
+  {
+   "skill": "linear_functions",
+   "difficulty": "medium",
+   "need": 90,
+   "groups": 5,
+   "produced": 150,
+   "minGroup": 0,
+   "feasible30": true,
+   "perSet": 3
+  },
+  {
+   "skill": "linear_functions",
+   "difficulty": "hard",
+   "need": 20,
+   "groups": 22,
+   "produced": 150,
+   "minGroup": 0,
+   "feasible30": true,
+   "perSet": 0.6666666666666666
+  },
+  {
+   "skill": "linear_equations_two_var",
+   "difficulty": "easy",
+   "need": 30,
+   "groups": 3,
+   "produced": 90,
+   "minGroup": 0,
+   "feasible30": true,
+   "perSet": 1
+  },
+  {
+   "skill": "linear_equations_two_var",
+   "difficulty": "medium",
+   "need": 90,
+   "groups": 5,
+   "produced": 150,
+   "minGroup": 0,
+   "feasible30": true,
+   "perSet": 3
+  },
+  {
+   "skill": "linear_equations_two_var",
+   "difficulty": "hard",
+   "need": 20,
+   "groups": 25,
+   "produced": 150,
+   "minGroup": 0,
+   "feasible30": true,
+   "perSet": 0.6666666666666666
+  },
+  {
+   "skill": "systems_linear",
+   "difficulty": "easy",
+   "need": 30,
+   "groups": 3,
+   "produced": 90,
+   "minGroup": 0,
+   "feasible30": true,
+   "perSet": 1
+  },
+  {
+   "skill": "systems_linear",
+   "difficulty": "medium",
+   "need": 90,
+   "groups": 5,
+   "produced": 150,
+   "minGroup": 0,
+   "feasible30": true,
+   "perSet": 3
+  },
+  {
+   "skill": "systems_linear",
+   "difficulty": "hard",
+   "need": 20,
+   "groups": 16,
+   "produced": 150,
+   "minGroup": 0,
+   "feasible30": true,
+   "perSet": 0.6666666666666666
+  },
+  {
+   "skill": "linear_inequalities",
+   "difficulty": "easy",
+   "need": 30,
+   "groups": 3,
+   "produced": 90,
+   "minGroup": 0,
+   "feasible30": true,
+   "perSet": 1
+  },
+  {
+   "skill": "linear_inequalities",
+   "difficulty": "medium",
+   "need": 90,
+   "groups": 5,
+   "produced": 150,
+   "minGroup": 0,
+   "feasible30": true,
+   "perSet": 3
+  },
+  {
+   "skill": "linear_inequalities",
+   "difficulty": "hard",
+   "need": 10,
+   "groups": 16,
+   "produced": 150,
+   "minGroup": 0,
+   "feasible30": true,
+   "perSet": 0.3333333333333333
+  }
+ ]
+}

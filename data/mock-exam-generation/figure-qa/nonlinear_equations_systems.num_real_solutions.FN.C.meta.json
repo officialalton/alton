@@ -1,0 +1,49 @@
+{
+ "itemId": "nonlinear_equations_systems.num_real_solutions.FN.C",
+ "generatedAt": "2026-10-07T05:02:00.715Z",
+ "codeHash": "7168053facaf2a3ed5bba78d1b52438a9f62652f54f78b8e80db23532ea85556",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/coordinate-plane.ts",
+  "lib/problem-figures/templates/figure-choice.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/cplane-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/data-c-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/fnc-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/graph-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/nonlinear_equations_systems.num_real_solutions.FN.C.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/ln-b-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/pure-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "nonlinear_equations_systems.num_real_solutions.FN.C.png",
+   "mobileFile": "nonlinear_equations_systems.num_real_solutions.FN.C.m375.png",
+   "archetypeId": "nnc.num_real_solutions.FN.C.repr_shift",
+   "seed": 11,
+   "signature": "figure_choice[plane]",
+   "stimulus": "The four graphs shown are parabolas drawn on identical $xy$-plane axes.",
+   "question": "Which of the four graphs shown is a parabola that meets the horizontal line $y = -2$ at exactly two points and opens downward?",
+   "options": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "correctIndex": 0,
+   "answer": "A",
+   "explanation": "(1) 아래로 열리고 꼭짓점 높이 2 보다 아래인 y = -2 와 두 점에서 만난다. (2) 각 그래프에서 꼭짓점·열린 방향·지나는 점을 읽는다. (3) 첫째 조건을 어긴 그래프를 지운다. (4) 둘째 조건을 어긴 그래프를 지운다. (5) 남은 그래프가 정답이다. (6) 다른 그래프는 조건 하나 이상이 어긋난다. 따라서 정답은 A이다.",
+   "structuralIssues": []
+  }
+ ]
+}

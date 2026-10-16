@@ -1,0 +1,80 @@
+{
+ "version": "v1-englang-p2-b",
+ "run": "englang-p2-b",
+ "subject": "ap_english_language",
+ "mode": "frq",
+ "capUsd": 4,
+ "hardStopCumulativeUsd": 125,
+ "myTotalCapUsd": 24,
+ "syncStages": [
+  "frq-gen"
+ ],
+ "stages": [
+  "frq-gen",
+  "frq-samples",
+  "frq-grade",
+  "frq-finalize"
+ ],
+ "frqPlan": [
+  {
+   "id": "fb1",
+   "type": "synthesis",
+   "theme": "whether a school district should move to a four-day school week",
+   "seed": 9401
+  },
+  {
+   "id": "fb2",
+   "type": "rhetorical_analysis",
+   "theme": "a hospital night nurse's address to graduating nursing students about the discipline of paying attention",
+   "seed": 9402
+  },
+  {
+   "id": "fb3",
+   "type": "argument",
+   "theme": "the extent to which a city should limit private cars in its downtown",
+   "seed": 9403
+  }
+ ],
+ "models": {
+  "gen": "claude-fable-5-1",
+  "solvers": [
+   "claude-opus-5-5",
+   "claude-sonnet-5-5",
+   "claude-fable-5-1"
+  ],
+  "adversary": "claude-fable-5-1",
+  "judge": "claude-opus-5-5",
+  "review": "claude-sonnet-5-5",
+  "sampleHigh": "claude-opus-5-5",
+  "sampleLow": "claude-sonnet-5-5",
+  "graders": [
+   "claude-opus-5-5",
+   "claude-sonnet-5-5",
+   "claude-fable-5-1"
+  ]
+ },
+ "effort": "medium",
+ "genEffort": "low",
+ "gradeEffort": "low",
+ "sampleCands": 1,
+ "minKeyConfidence": 0.8,
+ "corpusExclude": [
+  "englang-p1-a",
+  "englang-p1-b",
+  "englang-p1-a2"
+ ],
+ "generatorFiles": [
+  "lib/ap-generation/englang-gates.ts",
+  "lib/ap-generation/englang-frq.ts",
+  "lib/ap-generation/englang-plan.ts",
+  "lib/ap-generation/englang-prompts.ts",
+  "lib/ap-generation/english-text-stats.ts",
+  "lib/ap-generation/subjects/englang.ts",
+  "lib/ap-exam/elang-rules.ts",
+  "scripts/ap-generation/englang-pipeline.ts",
+  "scripts/mock-exam-generation/batch-lib.ts"
+ ],
+ "expected": {
+  "hash": "67c71facf94a"
+ }
+}

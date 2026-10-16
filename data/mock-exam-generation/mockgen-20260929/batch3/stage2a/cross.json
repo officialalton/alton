@@ -1,0 +1,913 @@
+{
+ "summary": {
+  "sat_rw": {
+   "cand": 25,
+   "genFail": 0,
+   "formatFail": 0,
+   "detPass": 24,
+   "crossScored": 24,
+   "correct": {
+    "agree": 19,
+    "of": 24,
+    "fablePass": 24,
+    "opusPass": 19
+   },
+   "compliance": {
+    "agree": 23,
+    "of": 24,
+    "fablePass": 24,
+    "opusPass": 23
+   },
+   "hardFit": {
+    "agree": 15,
+    "of": 24,
+    "fablePass": 19,
+    "opusPass": 12
+   },
+   "adoptedBoth": 8,
+   "adoptedOneOnly": 12,
+   "yieldBoth": 0.32,
+   "costUsd": 4.142,
+   "costPerAdoptedBoth": 0.518,
+   "fableOnlyPass": 11,
+   "opusOnlyPass": 1
+  },
+  "sat_math": {
+   "cand": 3,
+   "genFail": 0,
+   "formatFail": 0,
+   "detPass": 3,
+   "crossScored": 3,
+   "correct": {
+    "agree": 3,
+    "of": 3,
+    "fablePass": 3,
+    "opusPass": 3
+   },
+   "compliance": {
+    "agree": 3,
+    "of": 3,
+    "fablePass": 3,
+    "opusPass": 3
+   },
+   "hardFit": {
+    "agree": 1,
+    "of": 3,
+    "fablePass": 3,
+    "opusPass": 1
+   },
+   "adoptedBoth": 1,
+   "adoptedOneOnly": 2,
+   "yieldBoth": 0.333,
+   "costUsd": 0.439,
+   "costPerAdoptedBoth": 0.439,
+   "fableOnlyPass": 2,
+   "opusOnlyPass": 0
+  },
+  "adoptedHardFableRule": {
+   "total": 19,
+   "rw": 16,
+   "math": 3,
+   "correctBothRequired": true
+  }
+ },
+ "items": [
+  {
+   "cid": "recipe-central_ideas_details-00",
+   "skill": "central_ideas_details",
+   "system": "sat_rw",
+   "recipeId": "central_ideas_details_dual_stance_reaction",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "dual_source_synthesis",
+     "evidence_weighting_under_partial_data"
+    ],
+    "note": "정답 A 검증: 역사가는 '닮은 점은 우연'이라 주장하나 욘스도티르는 배치·연대·경계벽의 밀접한 일치를 발견했고, 동시에 연회장·부는 후대 과장으로 봄 → 부분적 정확성 + 윤색 인정 = A. B는 과장 발견만 반영(한쪽만), C는 욘스도티르를 전면 신뢰론자로 과장하고 역사가 입장을 뒤바꿈, D는 작성 시기 문제 제기라는 텍스트 밖 제3 입장. 해설은 정답과 오답 논리를 정확히 뒷받침함. 체크리스트 1 미충족: Text 1/Text 2로 분리되지 않고 단일 지문의 두 문단으로 제시되며 질문이 '(second paragraph)/(first paragraph)'로 지칭함. 두 입장이 명확히 구분되어 있어 기능적으로는 답변 가능하고 실제 SAT에도 단일 지문 내 '어떻게 반응할 것인가' 문항이 존재하므로 형식 자체는 허용 범위로 판정하되, 레시피(두 텍스트 제시) 기준으로는 미충족. 실존 인물 Hrefna Jónsdóttir의 특정 발굴 주장이 사실인지 확인되지 않으나 가상의 연구 설정으로 보여 사실 오류로 처리하지 않음. 난이도: 두 입장을 통합하고 '부분적 일치+부분적 윤색'이라는 미묘한 위치를 추론해야 하므로 medium 이상.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "dual_source_synthesis",
+     "evidence_weighting_under_partial_data"
+    ],
+    "note": "Text 1/Text 2 라벨 없이 두 문단으로 제시되고 질문은 'the texts'라고 부름. 사실상 두 입장이 짝을 이루는 구조라 수용 가능하지만, 실제 SAT 형식이라면 Text 1/Text 2로 표기하는 것이 좋음. A는 일치하는 부분(우연설 반박)과 윤색된 부분을 함께 통합해야 도출됨. B는 한쪽 증거만 반영한 오답, C는 입장을 뒤바꾸고 과장한 오답, D는 지문 밖 주장임.",
+    "issue": ""
+   },
+   "cost": 0.194444
+  },
+  {
+   "cid": "recipe-central_ideas_details-01",
+   "skill": "central_ideas_details",
+   "system": "sat_rw",
+   "recipeId": "central_ideas_details_underlying_implication",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "paradox_and_implicit_inference",
+     "scope_calibration"
+    ],
+    "note": "지문은 Wren의 공개 발언(\"natural transition\", \"larger than any single player\")과 이후 행동(오디션 두 차례 연기, 오보에 독주곡 제외, 객원 독주 요청)을 병치하여 표면 진술과 실제 상황의 어긋남을 제시함. 정답 A는 명시 문장이 아닌 이 어긋남에서 추론되며, B는 발언을 그대로 옮긴 오답, C는 어긋남의 방향을 뒤집은 오답, D는 과잉일반화 오답으로 기능. 해설은 각 선지에 대해 지문 근거를 정확히 인용하며 모순 없음. 창작 시나리오로 저작권 우려 없음. 형식(4지선다, 단일 정답, SAT 스타일 질문) 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "paradox_and_implicit_inference"
+    ],
+    "note": "말과 행동이 어긋나는 구조가 분명하다. 정답은 세 가지 행동을 종합해 추론해야만 도출된다. 오답 설계도 적절하다: B는 지문 문장 인용, C는 어긋남의 방향을 뒤집은 해석, D는 과잉일반화다. 다만 행동 단서가 매우 노골적이라 hard 문항으로서는 쉬운 편이다.",
+    "issue": ""
+   },
+   "cost": 0.13627999999999998
+  },
+  {
+   "cid": "recipe-central_ideas_details-02",
+   "skill": "central_ideas_details",
+   "system": "sat_rw",
+   "recipeId": "central_ideas_details_right_size_claim",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "scope_calibration",
+     "structural_sequence_integration"
+    ],
+    "note": "지문은 기존 견해(카르텔) → Marsh의 수정 주장(품질 인증) → 브뤼헤 봉인 사례 → 양보(경쟁 제한 인정)+설명적 결론(원거리 상인의 선호)이라는 4단 구조를 갖는다. 정답 A는 양보·핵심 주장·설명 대상을 모두 포괄하는 적절한 범위로 진술되어 있고, 직접 검산 결과 옳다. B는 사례만 취한 과잉축소, C는 '전근대 경제 전체'·'소비자 순이익'·'demonstrates'로 범위와 확실성을 넘어선 과잉확장, D는 봉인이라는 세부를 Marsh가 반박하는 관점과 잘못 결합한 왜곡으로, 세 오답 모두 기능이 분명하다. 해설은 정답과 논리적으로 일치하며 모순이 없다. 난이도 면에서는 양보 구조와 인과적 설명(왜 원거리 상인이 길드 회원을 선호했는가)을 통합해야 하고, D처럼 세부사실을 잘못된 논지에 붙인 매력적 오답이 있어 전형적 medium보다 추가 사고를 요구한다고 판단한다. 다만 hard 특성 중 dual_source나 역설적 함의는 없어 hard 상한선에서는 다소 보수적인 문항이다. Lena Marsh는 가상의 학자로 보이며 브뤼헤 직물 봉인 관행은 역사적으로 그럴듯하여 사실 오류로 볼 사항은 없다.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [],
+    "note": "정답과 해설은 정확하고 레시피 4개 항목을 모두 충족함. 다만 전형적인 '기존 견해 → 수정 주장 → 사례 → 양보' 구조라 요지를 찾기 쉬움. 오답도 B는 사례만 옮긴 과잉축소, C는 'throughout premodern'·'demonstrates'가 들어간 과잉확장, D는 기존 견해를 그대로 가져온 왜곡이라 표지가 뚜렷해 금방 걸러짐. 정답 A가 가장 길고 양보절까지 담고 있어 형태만 보고도 고를 수 있음. scope_calibration 수준은 medium 문항과 다르지 않고, 역설 인식·두 출처 종합·부분 근거 판단 같은 hard 특성은 없음. 난이도는 어휘와 문장 길이에서만 나옴.",
+    "issue": ""
+   },
+   "cost": 0.17824600000000002
+  },
+  {
+   "cid": "recipe-central_ideas_details-03",
+   "skill": "central_ideas_details",
+   "system": "sat_rw",
+   "recipeId": "central_ideas_details_dual_stance_reaction",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "dual_source_synthesis",
+     "paradox_and_implicit_inference"
+    ],
+    "note": "정답 A 검증: 역사가들은 '극적 효과 없음→바꿀 이유 없음→신뢰'로 추론하고, Hallsdóttir는 '너무 평범해서 의심 없이 당대 상황을 투영'했다고 결론 → 같은 '평범함'이 신뢰 근거에서 오류 원인으로 뒤집히는 역설을 포착해야 하므로 hard 적합. B는 텍스트1만 반영, C는 대화/경제세부 신뢰 관계를 전도, D는 '의도적 위조·가문 토지권'이라는 근거 없는 제3 입장으로 오답 구성 정상. 해설도 정답·오답 근거를 정확히 뒷받침. 경미한 형식 지적: 두 텍스트가 'Text 1 / Text 2' 표지 없이 단락으로만 제시되어 있어 \"Based on the texts\"라는 질문 문구와 표기 일관성이 약함(내용상 두 입장은 명확히 구분됨). 가상의 인물·연구로 사실 오류나 저작권 문제 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": false,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "dual_source_synthesis",
+     "paradox_and_implicit_inference"
+    ],
+    "note": "지문은 두 문단짜리 단일 지문이고 'Text 1/Text 2' 표시가 없는데, 질문은 'Based on the texts'라고 한다. 따라서 쌍지문 형식이 갖춰지지 않아 형식과 체크리스트 1번이 불충족이다. 정답 A는 역설 구조를 정확히 짚는다. 역사가들이 신뢰의 근거로 든 '평범함'이 오히려 저자들이 자기 시대를 과거에 투영한 원인이라는 점이다. B는 한쪽 텍스트만 반영한 오답, C는 입장을 뒤바꾼 오답, D는 지문에 없는 제3의 입장으로 모두 적절하다.",
+    "issue": ""
+   },
+   "cost": 0.187948
+  },
+  {
+   "cid": "recipe-inferences-00",
+   "skill": "inferences",
+   "system": "sat_rw",
+   "recipeId": "inferences_theory_direction_reversal",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "theory_to_case_application",
+     "evidence_sufficiency_evaluation"
+    ],
+    "note": "이론(체류 시간↑→분산 거리↑)이 명시되고, 새 사례(거북→새, 체류 시간 1/10)에 적용하는 구조가 명확함. A가 이론 방향을 그대로 유지한 유일한 결론. B는 방향 반전(+이론 외 요소인 섭취량 도입), C는 인과 전도, D는 지문에 제시된 '유사한 채식 범위'라는 제3 정보를 미끼로 사용해 이론의 핵심 변수를 무시하게 유도하는 함정으로, 단순 방향 확인 이상의 증거 적합성 판단을 요구함. 형식·길이·문체 모두 디지털 SAT 기준에 부합하며 해설도 정답을 정확히 뒷받침함.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "theory_to_case_application"
+    ],
+    "note": "이론 적용 방향이 명확하다. D의 '비슷한 채식 범위'라는 방해 요소 때문에, 새가 비슷한 범위를 돌아다녀도 배출 전 이동 시간이 줄어든다는 점을 생각해야 해서 medium보다 사고가 한 단계 더 필요하다. 다만 body size 문장은 쓰이지 않는다.",
+    "issue": ""
+   },
+   "cost": 0.168422
+  },
+  {
+   "cid": "recipe-inferences-01",
+   "skill": "inferences",
+   "system": "sat_rw",
+   "recipeId": "inferences_graph_text_combine",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "theory_to_case_application",
+     "multi_source_integration",
+     "evidence_sufficiency_evaluation"
+    ],
+    "note": "A는 절충 가설(텍스트)과 표의 수치(Birch 1.2가 저UV 호수 1.5/0.9에 가깝고 Alder 4.1과 멀다)를 결합해야만 도출되는 결론으로 정답 타당. Alder–Birch는 물고기 유무만 다르므로 포식 위험이 UV 방어 이점을 압도한다는 추론이 성립. B는 표만 보고 가설과 Alder–Cedar 대비를 무시, C는 가설의 이점 측만 반영해 표와 충돌, D는 Dunmore/Cedar를 잘못 짝지은 결론으로 각 오답 기능이 명확. 다만 D의 '0.9 대 1.5가 sharply/far less가 아니다'라는 해설 근거는 다소 주관적이나, 핵심 오답 사유(Birch 관련 결론이 아님)가 충분해 문제 없음. 실제 연구 배경(고산 호수 요각류 카로티노이드–어류 포식 절충)과도 일치.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": false,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "theory_to_case_application",
+     "multi_source_integration"
+    ],
+    "note": "정답 A는 맞다. Birch의 1.2는 자외선이 약한 호수들(1.5, 0.9)에 가깝고 Alder(4.1)보다 훨씬 낮다. 여기에 절충 가설을 적용하면 A가 도출된다. 이를 위해 Alder와 Birch의 대조 비교를 찾아야 하며, 이 부분이 hard 수준에 해당한다. 문제는 D 해설의 오독뿐이다.",
+    "issue": "D의 해설이 선택지를 잘못 읽었다. 문제 문장이 Birch 호수를 묻고 있으므로 D의 'there'는 Birch를 가리킨다. 따라서 D는 Birch(1.2)와 Cedar(1.5)를 비교한 것이지, 해설처럼 Dunmore(0.9)와 Cedar를 비교한 것이 아니다. D가 틀린 진짜 이유는 두 가지다. 첫째, Birch는 자외선이 강한 호수인데 D는 '자외선이 약한 곳에서도'라고 말한다. 둘째, 1.2와 1.5의 차이는 '훨씬 적다'고 할 만큼 크지 않다. 결론(D는 오답)은 맞지만 해설의 근거와 수치가 선택지와 맞지 않는다."
+   },
+   "cost": 0.216584
+  },
+  {
+   "cid": "recipe-inferences-02",
+   "skill": "inferences",
+   "system": "sat_rw",
+   "recipeId": "inferences_claim_support_or_undermine",
+   "detIssues": [
+    "contract:contract_evidence"
+   ],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": null,
+   "opus": null,
+   "cost": 0.042364
+  },
+  {
+   "cid": "recipe-words_in_context-00",
+   "skill": "words_in_context",
+   "system": "sat_rw",
+   "recipeId": "words_in_context_reversal_signal",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "reversed_relation_inference"
+    ],
+    "note": "정답 C(integral)는 통념(incidental) → However → 실험 결과(수분 손실·과열) → 'rather than being a minor feature'의 흐름과 정확히 일치하며 유일하게 성립한다. 오답 배치(A 통념 방향, B 강도 약화, D 무관)도 레시피대로 구성되어 있고 해설도 정답을 정확히 뒷받침한다. 다만 hard 적합성은 부족하다: 빈칸 직전의 'rather than being a minor feature'가 정답 방향을 거의 명시적으로 지시하고, 부정어 처리·다단계 담화 구조·다중 근거 종합·확신도 조정 등 hard 특성은 요구되지 않는다. 전형적 medium 수준의 통념-반전 문항으로, 난이도가 복잡성에서 오는 것도 아니고 단순히 추가 사고가 없다.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [],
+    "note": "정답 C는 맞고 레시피 항목도 모두 충족한다. 다만 'However' 뒤의 실험 결과에 더해 빈칸 바로 앞의 'rather than being a minor feature'가 반대 방향을 직접 알려 준다. 그래서 통념이 뒤집히는 관계를 추론할 필요가 거의 없다. 오답도 쉽게 걸러진다. D는 의미가 무관하고, A는 통념과 같은 방향이며, B는 강도가 약하다. 정답 판단에 부정 구조 처리, 여러 단서 종합, 확신도 조절도 필요하지 않다. 따라서 전형적인 medium 수준의 문항이다.",
+    "issue": ""
+   },
+   "cost": 0.16337400000000002
+  },
+  {
+   "cid": "recipe-words_in_context-01",
+   "skill": "words_in_context",
+   "system": "sat_rw",
+   "recipeId": "words_in_context_negation_polarity",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "reversed_relation_inference",
+     "negation_layer_processing",
+     "multi_evidence_integration"
+    ],
+    "note": "'not a sign of negligence but rather ~' 구조가 마지막 문장에 명확히 있고, 정답 scrupulousness는 negligence의 반대 극성으로 검산상 옳다. A(carelessness)는 부정어 무시 오답, B(duplicity)는 '부주의가 아니면 고의적 → 사기'로 이중 반전한 오답이며, 수정치가 더 정확한 기록과 일치했다는 증거로 배제되므로 증거 통합이 요구된다. C는 형태 유사 오답. 초기 학자 견해→Ferrante 반박 구조로 관계 역전 추론이 필요하고, 해설도 정답을 정확히 뒷받침하며 모순 없음. 가상의 역사가·사료 설정으로 사실 오류나 저작권 문제 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "negation_layer_processing",
+     "reversed_relation_inference"
+    ],
+    "note": "초기 학자들의 통념(부주의)을 새 증거(선적 영수증과의 대조)가 뒤집는 구조와 not…but rather 구조가 함께 들어 있다. 정답 D는 부정된 개념과 반대 극성이고 증거와도 들어맞는다. A는 부정어를 무시한 오답, B는 극성을 이중으로 뒤집은 오답, C는 철자가 비슷한 함정이다. 빈칸이 있는 문장만으로도 극성을 판단할 수 있어 난이도가 hard 경계선에 있지만, 어휘 수준(scrupulousness, scurrility)과 B 함정 덕분에 medium보다는 어렵다.",
+    "issue": ""
+   },
+   "cost": 0.16169399999999998
+  },
+  {
+   "cid": "recipe-words_in_context-02",
+   "skill": "words_in_context",
+   "system": "sat_rw",
+   "recipeId": "words_in_context_stage_shift",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "reversed_relation_inference",
+     "discourse_stage_structuring",
+     "multi_evidence_integration"
+    ],
+    "note": "지문이 '역사학자들의 회의론(수십 년, 2세기 후 기록)' → 'however + 고고학자의 반박(콜론 뒤 발굴 증거)'의 두 단계로 명확히 구분되며, 빈칸은 두 번째 단계 시작부의 'considers this skepticism ___' 목적격 보어 자리에 위치한다. 콜론 뒤 증거(부스 유적의 수·배치가 사가 묘사와 일치 → 사가 저자가 실제 지역 지식에 의거)를 종합하면 회의론이 '근거 없다(unwarranted)'는 판단이 논리적으로 도출되어 정답 C가 유일하게 성립한다. A entrenched는 'for decades'라는 첫 단계 단서에 끌리는 오답, B familiar는 중립적 평가로 반박 기능이 없음, D baselessly는 의미 유사하나 부사로 보어 자리에 부적합하여 체크리스트 4·5를 충족한다. 해설은 정답과 오답 배제 근거를 정확히 뒷받침하며 모순 없음. 가공의 인물·발굴이지만 중세 아이슬란드 사가·의회 유적·잔디 부스 등 배경은 사실과 충돌하지 않음. 난이도는 'however'로 인한 관계 역전 파악, 두 서술 단계 구조화, 콜론 뒤 증거와 첫 단계 논거의 종합에서 오므로 단순 복잡성이 아닌 hard 특성을 실제로 요구한다.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [],
+    "note": "정답은 명확하다. 다만 'however + 콜론 뒤 반증 근거'라는 전형적인 구조여서 medium 수준의 반박 인식만으로 풀린다. D는 품사 때문에 바로 소거되고, A와 B는 평가 기능이 약해 쉽게 걸러진다. 통념 역전 구조는 있지만 표면적인 대조 단서가 너무 뚜렷해서 hard 수준의 추가 추론이 필요하지 않다.",
+    "issue": ""
+   },
+   "cost": 0.17349000000000003
+  },
+  {
+   "cid": "recipe-words_in_context-03",
+   "skill": "words_in_context",
+   "system": "sat_rw",
+   "recipeId": "words_in_context_reversal_signal",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "negation_layer_processing"
+    ],
+    "note": "정답 A(instrumental) 타당. 통념(무기능)→However→증거(경쟁자 접근 시 노래, 탈취 확률 유의미하게 감소)→'far from incidental; instead' 구조가 명확하고 오답 배치(B 통념 방향, C 같은 축 약한 강도, D 제3의미)도 레시피에 부합. 해설은 정답과 논리·수치적으로 일치. 다만 'far from incidental; instead'와 'significantly less likely' 같은 강한 어휘 단서가 정답 방향을 거의 직접 지시하여, 부정어 재구성 외에 hard 특성(다중 증거 통합, 담화 단계 구조화, 확신도 조정)이 실질적으로 요구되지 않음. 전형적 medium 수준 문항으로 판정.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "reversed_relation_inference",
+     "negation_layer_processing"
+    ],
+    "note": "통념(무기능)→However 증거→'far from incidental; instead'의 부정 구조를 거쳐 기능 방향(instrumental)이 유일하게 결정된다. B는 통념 방향, C는 같은 방향에서 강도만 다른 오답, D는 의미 영역을 벗어난 유혹 오답이다. 다만 far from incidental이 방향을 꽤 직접적으로 알려 주고 오답 세 개가 모두 뚜렷하게 부정 방향이라, hard 중에서는 쉬운 편이다.",
+    "issue": ""
+   },
+   "cost": 0.17424
+  },
+  {
+   "cid": "recipe-words_in_context-04",
+   "skill": "words_in_context",
+   "system": "sat_rw",
+   "recipeId": "words_in_context_negation_polarity",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "negation_layer_processing"
+    ],
+    "note": "Endler의 great bowerbird 강제 원근(forced perspective) 연구(작은 물체는 입구 근처, 큰 물체는 멀리) 사실 부합. 'not random ... but rather ___ constructions, shaped to produce a particular visual effect'로 정답이 문장 내에서 거의 직접 주어져 단일 단계 반의어 추론만 요구된다. D(deliverable)는 형태 유사 무의미 오답, B·C는 모두 random 유사어로 사실상 같은 오답이어서 변별 부담이 낮다. 초기 통념→반박 구조(reversed_relation)가 있으나 표면적이며, 다중 근거 통합·확신도 조정 등 hard 특성은 요구되지 않는다. medium 수준으로 판정.",
+    "issue": "C를 '극성을 이중으로 뒤집은' 오답으로 설명하지만, 이중 반전은 결국 원래 극성(random)으로 되돌아오므로 B(arbitrary)와 C(accidental)는 실질적으로 동일 유형(random의 유사어) 오답이다. 논리적 오류는 아니나 오답 유형 구분이 형식적이다."
+   },
+   "opus": {
+    "correct": false,
+    "comp": true,
+    "fit": false,
+    "which": [],
+    "note": "'not random but rather ___' 문장 하나만 보면 바로 답이 나온다. B와 C는 둘 다 random의 동의어라 오답끼리 겹친다. D는 철자만 비슷한 단어라 SAT다운 오답이 아니고 매력도도 없다. 이중 극성 반전 오답이 제대로 만들어지지 않았다. hard 특성 가운데 실제로 요구되는 것이 없어 medium 수준이다.",
+    "issue": "C 해설의 '이중 부정으로 극성을 다시 뒤집었다'는 설명이 억지스럽다. accidental은 B(arbitrary)와 마찬가지로 random과 같은 극성의 동의어일 뿐이고, 두 오답이 실질적으로 구별되지 않는다."
+   },
+   "cost": 0.16649919999999999
+  },
+  {
+   "cid": "recipe-rhetorical_synthesis-00",
+   "skill": "rhetorical_synthesis",
+   "system": "sat_rw",
+   "recipeId": "rhetorical_synthesis_dual_fact_merge",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "purpose_scope_calibration",
+     "multi_source_goal_integration"
+    ],
+    "note": "정답 A는 노트 3·5의 발광 목적(은신 vs 유인)을 'Whereas'로 정확히 대비하며 노트와 일치. B는 오징어만(한쪽), C는 두 동물을 다루지만 거주지를 대비하여 목표 차원 불일치, D는 '짝에게 신호'라는 노트 외 정보 추가로 오답. 해설은 각 선택지 판정과 정확히 부합. 사실 검증: 반딧불오징어(일본 연안, 하부 발광기관에 의한 counter-illumination) 및 Melanocetus johnsonii(심해, 발광 루어) 모두 실제 사실과 부합. hard 적합성: C(같은 '대비' 형식이나 잘못된 대비 차원)와 D(정답과 거의 동일하나 노트 외 정보 첨가)가 근접 오답으로 목표 범위 판별과 노트 대조를 동시에 요구하여 전형적 medium보다 다소 높은 변별을 요구하나, 구조 자체는 표준적이어서 hard 상한에 걸친 경계 수준으로 판단.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [],
+    "note": "전형적인 medium 수준 대비 문항이다. 정답은 'Whereas'로 목적을 대비하는 유일한 선택지라 바로 찾을 수 있다. 오답도 한쪽만 담기(B), 엉뚱한 속성 대비(C), 노트에 없는 정보 추가(D)로, 거짓 대비나 확실성 판별, 범위 조정 같은 hard 요소가 없다.",
+    "issue": ""
+   },
+   "cost": 0.164338
+  },
+  {
+   "cid": "recipe-rhetorical_synthesis-01",
+   "skill": "rhetorical_synthesis",
+   "system": "sat_rw",
+   "recipeId": "rhetorical_synthesis_goal_scope_match",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "multi_source_goal_integration"
+    ],
+    "note": "목표(long-lasting usefulness)가 명확하고 정답 A는 '2,500년 전 건설'+'현재 4만 명 공급' 두 노트를 종합하여 정확히 부합. B는 구조 세부(과잉 구체), C는 개관(과잉 포괄), D는 유네스코 등재(목표 무관)로 오답 기능이 분명. 해설도 정답과 일치하며 오류 없음. 다만 정답 A가 두 노트를 거의 그대로 이어 붙인 문장이고 '2,500 years ago'+'still...today'라는 신호어가 노출되어 오답 배제가 즉각적이므로, 전형적 medium 수준의 rhetorical_synthesis와 사고량 차이가 거의 없다. hard 특성 중 multi_source 통합만 약하게 충족되고 확실성 구분·관계 방향 판단·배경 위계 설정 등은 요구되지 않아 hard 적합성은 미흡.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "multi_source_goal_integration"
+    ],
+    "note": "정답 A는 '과거 건설'과 '현재 사용'을 결합하는 전형적 구조다. B, C, D에는 둘 중 하나 또는 둘 다가 빠져 있어 키워드 대조만으로 즉시 소거된다. C에 증발 억제가 들어간 점만 약간의 함정이다. 확실성 판별, 관계 방향 판단, 독자 배경 고려 같은 요소가 없어 medium 수준에 그친다.",
+    "issue": ""
+   },
+   "cost": 0.14411000000000002
+  },
+  {
+   "cid": "recipe-rhetorical_synthesis-02",
+   "skill": "rhetorical_synthesis",
+   "system": "sat_rw",
+   "recipeId": "rhetorical_synthesis_certainty_level_choice",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "claim_certainty_discrimination",
+     "multi_source_goal_integration",
+     "purpose_scope_calibration"
+    ],
+    "note": "노트에 DNA 확정 진술(confirmed)과 상관관계 잠정 진술(correlation, 인과 아님 경고)이 공존하며, 별도 실험(황소개구리)이 범위 외 정보로 기능한다. D는 확정 사실은 confirmed로, 상관은 tend to/may not be the cause로 정확히 반영. A는 increases로 인과 과장(과잉 일반화), B는 확정된 DNA 결과를 may로 과도 축소, C는 14개 연못 연구가 아닌 별도 실험을 끌어와 목표 범위 위반(추가로 확정적 실험 결과를 약화). 해설은 각 오답 사유를 정확히 짚고 모순 없음. 두 결과의 확실성 수준을 각각 판별하고 연구 범위를 걸러내야 하므로 medium 이상의 사고 요구.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "claim_certainty_discrimination",
+     "multi_source_goal_integration",
+     "purpose_scope_calibration"
+    ],
+    "note": "두 결과의 확실성 수준이 다르고, 선택지마다 과장(A), 과소(B), 범위 이탈(C) 오류가 하나씩 들어 있어 잘 구분된다. D가 유일하게 두 결과를 각각 알맞은 확실성으로 제시한다. 다만 오답의 확실성 오류가 표지어(increases/may)로 비교적 드러나 있어 hard 치고는 중간 이상 수준이다.",
+    "issue": "\"\""
+   },
+   "cost": 0.16314
+  },
+  {
+   "cid": "recipe-rhetorical_synthesis-03",
+   "skill": "rhetorical_synthesis",
+   "system": "sat_rw",
+   "recipeId": "rhetorical_synthesis_dual_fact_merge",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "multi_source_goal_integration",
+     "relation_direction_judgment",
+     "claim_certainty_discrimination"
+    ],
+    "note": "노트 5개 사실 독립적. 정답 A는 완보동물의 툰 상태(체수분 상실)와 담륜충의 완전 건조 생존을 'Like'로 결합해 공통점을 정확히 강조. B는 담륜충 한쪽만(체크 4), C는 두 대상 모두 포함하나 'While'로 서식지 차이를 대조해 목표 방향과 반대(관계 방향 판별 요구), D는 담륜충의 방사선 내성과 휴면 상태 인과를 노트 밖에서 추가·과잉 일반화(체크 5). 해설이 각 오답 유형을 정확히 설명하며 모순 없음. R. varieornatus ~4,000 Gy 내성, 시베리아 영구동토 약 24,000년 담륜충 회생(2021 보고)은 사실과 부합. 유사 형식(C, D)의 오답이 목표 부합 여부와 사실 충실도를 동시에 검토하게 하므로 medium 이상의 사고를 요구함.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [],
+    "note": "정답은 타당하다. 다만 전형적인 medium 수준 구조다. B는 한쪽 사실만 담았고, C는 대조를 뜻하는 'While'이 쓰였으며, D는 노트에 없는 내용을 넣은 것이 한눈에 드러난다. 'Like'나 'Both' 같은 표지어만 보고도 정답을 고를 수 있다. 확실성 수준이나 범위를 따져야 하는 매력적인 오답이 없어서 hard의 추가 사고를 요구하지 않는다.",
+    "issue": ""
+   },
+   "cost": 0.1638444
+  },
+  {
+   "cid": "recipe-transitions-00",
+   "skill": "transitions",
+   "system": "sat_rw",
+   "recipeId": "transitions_purpose_filter_sentence",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "goal_vs_content_discrimination",
+     "abstract_relation_beyond_surface_contrast"
+    ],
+    "note": "지문은 부수적 결과(식생 회복·방목)와 설계 목적(대수층 충전)을 분리 제시하고, 마지막 문장은 목적에서 도출되는 평가 기준이므로 'Accordingly'가 유일하게 성립한다. 검산: 셋째 문장 however가 이미 대조를 처리했고, 마지막 문장은 그 목적의 논리적 귀결이므로 B(양보)는 방향 오류, A는 둘째 문장의 나열식 부수 결과에 이어 붙일 때 유혹되는 오답, C는 예시 관계 아님. 'not by … but by …' 표면 대조가 B를 유혹하게 만들어 표면 대조 이상의 인과 관계 식별을 요구하며, 목적 vs 가시적 결과의 구분이 필요해 medium 이상. 해설은 정답 및 각 오답 배제 근거를 정확히 뒷받침하며 모순 없음. 가상의 인물·사건이지만 사실 오류나 저작권 문제 없음. 문장 길이·어휘도 적정.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "goal_vs_content_discrimination"
+    ],
+    "note": "부수적 결과(풀, 방목)와 본래 목적(대수층 함양)을 구분해야 한다. 앞 문장의 however와 뒤 문장의 not-by 대조 표현이 B를 매력적인 오답으로 만든다. 정답은 유일하다.",
+    "issue": ""
+   },
+   "cost": 0.16528120000000002
+  },
+  {
+   "cid": "recipe-transitions-01",
+   "skill": "transitions",
+   "system": "sat_rw",
+   "recipeId": "transitions_contradictory_evidence_synthesis",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "multi_step_logical_inference",
+     "abstract_relation_beyond_surface_contrast"
+    ],
+    "note": "정답 C 검증: 마지막 문장은 야외 관찰(도시 새가 고음)과 사육 실험(같은 환경에서는 동일 음높이)을 모두 전제로 '유전이 아닌 소음 적응'이라는 결론을 도출하므로 'Taken together,'가 유일하게 논리적. A는 'However'로 이미 대조가 처리된 뒤 결론 문장을 다시 대조로 오독하게 만드는 함정, B는 사육 실험만 구체화하는 것으로 오독하게 하는 함정으로 레시피 3·4 충족. 'these findings'가 정답 단서를 다소 강하게 제공하는 점은 있으나, 'However' 직후 대조 구조에 이끌려 A를 고를 유혹이 있어 표면적 대조와 종합 결론을 구별하는 추가 사고를 요구함. Slabbekoorn의 실제 연구(2003, 도시 박새 고음)는 사실이지만 동일 사육장 양육 실험은 실제 보고와 정확히 일치하지 않을 수 있음—SAT식 가상 시나리오로 허용 범위이나 참고 요망.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [],
+    "note": "정답 C는 옳다. 레시피 항목은 모두 충족한다. 다만 빈칸 뒤 'these findings'라는 복수 표현이 종합의 신호 역할을 해서 정답이 거의 바로 드러난다. 'However'로 두 관찰의 대립도 이미 문장에 표시되어 있어 수험자가 직접 여러 단계를 추론할 필요가 적다. 전형적인 medium 수준이다. 'Specifically'도 'these findings'(복수)와 맞지 않아 쉽게 걸러진다.",
+    "issue": ""
+   },
+   "cost": 0.1759
+  },
+  {
+   "cid": "recipe-transitions-02",
+   "skill": "transitions",
+   "system": "sat_rw",
+   "recipeId": "transitions_distant_referent_link",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "expectation-vs-outcome contrast inference (weak)",
+     "non-local referent tracking (nominal only)"
+    ],
+    "note": "정답 B는 옳고 해설도 일관됨. 그러나 hard 설계가 실질적으로 작동하지 않음: (1) 'they have thick, strong beaks'의 지시 대상은 복수 대명사 'they'로 인해 단수인 shrub/Beno로 오독될 여지가 거의 없어 non-local referent tracking이 형식적 수준에 그침. (2) 마지막 문장의 'a puzzle'이 대조 관계를 직접 명시해 정답 도출이 지시 대상 파악에 의존하지 않고 표면 단서만으로 가능함(체크리스트 2 미충족). (3) 오답 A(Similarly)의 '인접 명사 오독' 시나리오도 해설상 설정일 뿐 실제 유인력이 약함. 결과적으로 전형적 medium 수준의 기대-반전 대조 문항으로 판단됨.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": false,
+    "comp": false,
+    "fit": false,
+    "which": [],
+    "note": "정답 B는 옳다. 같은 씨앗을 먹는데도 부리가 다르다는 것은 예상과 반대되는 결과이기 때문이다. 다만 이 문항은 전형적인 medium 수준의 대조 문항이다. 'they'가 핀치를 가리킨다는 것은 자명하므로 멀리 떨어진 지시 대상을 추적할 필요가 없고, 정답도 지시 대상 파악에 의존하지 않는다. 오답 A와 D도 인접 명사를 잘못 지시 대상으로 본 경우로 설계되지 않았다. hard 난이도 요건을 충족하지 못한다.",
+    "issue": "A 오답 해설이 억지스럽다. 'thick beaks'를 Beno의 것으로 잘못 읽어도 빈칸 뒤 문장은 Beno의 핀치가 가는 부리를 가졌다고 하므로 'Similarly'가 나올 근거가 없다. D 해설(관목을 일반 진술로 착각)도 실제로 있을 법한 오독이 아니다. 해설은 지시 대상 추적이 필요하다고 주장하지만, 관목이나 섬이 부리를 가질 수 없으므로 실제로는 그런 추론이 필요하지 않다."
+   },
+   "cost": 0.1812856
+  },
+  {
+   "cid": "recipe-boundaries-00",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": "boundaries_dangling_modifier_subject_matching",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "dangling_modifier_subject_matching"
+    ],
+    "note": "문두 분사구 'Trained originally as a meteorologist...'의 의미적 대상은 사람(Loewe)이며 A만 이에 부합. B는 Loewe의 소유격 명사(fieldwork)로 의미적 근접성을 이용한 매력적 오답, C·D는 사물 주어. 네 선택지 모두 과거시제·수일치 문제가 없어 수일치만으로는 판별 불가하며, 오답 3개 모두 문법적으로 완전한 문장. 해설은 정답 및 각 오답 이유를 정확히 뒷받침함. Fritz Loewe 관련 서술은 세부가 일부 일반화되어 있으나 SAT 지문 관례상 명백한 사실 오류로 보기 어려움.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "dangling_modifier_subject_matching"
+    ],
+    "note": "B(Loewe's fieldwork)는 사람과 관련된 소유격 명사를 쓴 함정 선택지로, 수식 대상의 범주가 사람이 아니라 활동이다. 네 선택지 모두 수일치에 문제가 없어 수일치만으로는 정답을 고를 수 없다. 사실관계 확인 필요: Loewe가 기상학자로 교육받은 점은 맞지만, '1950년대 그린란드'라는 시기·장소와 적설 구덩이 밀도법을 Loewe가 고안했다는 부분은 역사적으로 확실하지 않다. 적설 구덩이 층서 연구는 흔히 Benson의 업적으로 알려져 있다. 다만 확실한 오류로 단정할 수 없어 factual_error는 false로 두었다.",
+    "issue": ""
+   },
+   "cost": 0.1590368
+  },
+  {
+   "cid": "recipe-form_structure_sense-00",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": "form_structure_sense_dangling_modifier_agent_trace",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "dangling_modifier_subject_matching"
+    ],
+    "note": "분사구 \"Working with cassava-starch paste as a resist\"의 의미상 주어는 local dyers이며 D만이 이를 주절 주어로 둠. A는 인접 무생물 명사(the paste's patterns)+관계절에 dyers 삽입, B는 배경 명사(markets), C는 사람 주어(traders)이나 문맥상 행위자가 아님. 네 선택지 모두 'dyers'가 등장해 단순 명사 탐색으로 풀 수 없고 문맥상 행위자 추적을 요구함. adire·Abeokuta·카사바 전분 방염(adire eleko)은 사실과 부합. 해설은 정답을 정확히 뒷받침하고 오답 각 함정을 정확히 설명함.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "dangling_modifier_subject_matching"
+    ],
+    "note": "D는 행위자(dyers)를 주절 주어로 둔 유일한 선택지다. C는 사람 주어이지만 앞 문장을 보면 traders는 구매자일 뿐이므로 문맥으로 걸러야 한다. A는 수식어에서 가장 가까운 명사(paste)를 쓰고 dyers를 관계절 안에 숨긴 함정이다. B는 배경 명사(시장)를 주어로 삼았다. 전형적인 현수 수식어 문항보다는 약간 더 어렵지만 추가 사고의 폭은 크지 않다.",
+    "issue": ""
+   },
+   "cost": 0.163848
+  },
+  {
+   "cid": "recipe-form_structure_sense-01",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": "form_structure_sense_clause_logic_first_punctuation",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "clause_relation_punctuation"
+    ],
+    "note": "두 독립절(과거의 가정 vs. 최근 지도화 결과)의 대조 관계가 'For decades... assumed' / 'recent mapping... indicates' 및 'no particular plan' / 'deliberately arranged'의 의미 대립으로 접속어 없이 파악 가능. A는 세미콜론+접속부사+콤마로 형식·논리 모두 충족. B 콤마 스플라이스, C는 형식은 맞으나 인과(반대 논리), D는 and+however 중복 및 나열 의미 충돌로 각각 레시피 오답 유형에 정확히 대응. 해설의 판단 근거도 정답과 일치하며 모순 없음. 구두점 판단 전에 절 간 의미 관계를 먼저 판별해야 C를 배제할 수 있어 medium 수준의 단순 형식 문항을 넘어선다. Diquís 석구의 솔스티스 정렬 서술은 지문 내 주장('indicates')으로 제시되어 사실 오류로 보기 어렵다.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "clause_relation_punctuation"
+    ],
+    "note": "정답과 해설은 옳다. 다만 \"For decades, archaeologists assumed\"와 \"recent mapping... indicates\"가 대조를 노골적으로 드러낸다. 게다가 오답 B·D는 형식만 봐도 탈락하고, C도 한 번만 봐도 논리 오류가 보여서 전형적인 medium 수준의 세미콜론+접속부사 문항에 그친다. 대조 신호를 약하게 하거나 맞는 구두점 구조를 여러 개 두는 식으로 추가 판단을 요구하는 장치가 없다.",
+    "issue": ""
+   },
+   "cost": 0.173794
+  },
+  {
+   "cid": "recipe-form_structure_sense-02",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": "form_structure_sense_tense_consistency_across_quote",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "tense_agreement_across_context"
+    ],
+    "note": "인용문 내 swept, sorted, watched 병렬 + 바깥 문장의 현재 시제(notes, shapes, trains)가 D를 유혹적으로 만드는 구조. A가 유일한 정답이며 B(현재완료), C(진행형 병렬 파괴), D(외부 문맥 시제) 모두 체크리스트 오답 유형에 정확히 대응. 해설에 모순 없음. 가상 인물·인용문으로 저작권 문제 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "tense_agreement_across_context"
+    ],
+    "note": "정답은 A(watched)가 맞습니다. 해설도 일관되고 레시피 요건도 모두 충족합니다. 다만 swept, sorted가 빈칸 바로 앞에 나란히 있어 단순 과거형이라는 게 바로 드러납니다. 그래서 전형적인 medium 수준의 병렬 시제 문항에 가깝습니다. D의 현재 시제 틀(notes/trains today)로 유도하는 장치는 약하고, 문맥 전체를 추적할 필요가 거의 없습니다. 참고로 지문 자체에 described/said와 notes의 시제 전환이 있지만 허용 범위입니다.",
+    "issue": ""
+   },
+   "cost": 0.134882
+  },
+  {
+   "cid": "recipe-form_structure_sense-03",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": "form_structure_sense_dangling_modifier_agent_trace",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "dangling_modifier_subject_matching",
+     "multi_step_evidence_inference"
+    ],
+    "note": "D는 문법적·의미적으로 유일하게 완전한 정답이며 해설도 정확하다. A·B는 무생물 명사 주어로 명백한 현수 수식어. 다만 C(Reyes, working with Ortega, confirmed)는 순수 문법(conventions) 차원에서는 분사구문의 주어가 주절 주어와 일치하므로 적법한 문장이고, 오답 근거가 앞 문장의 사실 정보(Reyes는 배에 남아 수온만 기록, Ortega가 'alone' 잠수)에 의존한다. 레시피 항목 5와 hard 특성('의미상 행위자 판별')이 의도한 설계이므로 체크리스트는 충족하나, 실제 SAT 'conventions of Standard English' 문항 관행보다 내용 추론 의존도가 높다는 점은 검토 참고 사항. 'personally cataloging' 및 'dove alone'이 단서로 명시되어 있어 정답 방어는 가능.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": false,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "dangling_modifier_subject_matching"
+    ],
+    "note": "D는 정답이다. 다만 C('Reyes, working with Ortega, confirmed')는 문법적으로 완전히 적법한 현수수식 해소안이다. 따라서 C는 지문 내용과의 사실 불일치로만 배제된다. 'conforms to the conventions of Standard English'라는 발문으로는 정답이 하나로 좁혀지지 않아 방어 가능성이 약하다. 사실 측면에서도 문제가 있다. 벨리즈 뇌산호는 보통 늦여름(8~9월)에 산란하므로 'three winters'는 부정확하다. 산호 산란은 달의 위상과 강하게 연동되므로 'regardless of lunar phase'도 오해 소지가 있다. 첫 문장의 'Each night'과 'dove alone'이 C를 배제하는 단서로 작동하므로 hard용 추가 사고(의미상 행위자 추적)는 요구된다.",
+    "issue": "C를 오답으로 본 근거가 문법이 아니라 지문 내용(Reyes는 배에 남아 있었음)과의 불일치이다. 문법 관습(Conventions)을 묻는 발문과 성격이 맞지 않지만, 해설 자체에 모순은 없다."
+   },
+   "cost": 0.2028532
+  },
+  {
+   "cid": "recipe-form_structure_sense-04",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": "form_structure_sense_clause_logic_first_punctuation",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "clause_relation_punctuation"
+    ],
+    "note": "A는 세미콜론+접속부사 'evidently,'로 독립절 두 개를 올바르게 연결하며, 앞 절(끊김 없는 꽃가루 층=증거)→뒤 절(계속 경작=추론된 결론)의 인과·추론 관계와 부합한다. B는 콤마 스플라이스, C는 형식은 맞으나 대조 접속부사로 논리 불일치, D는 and+evidently+therefore가 겹친 연결어 중복(문장도 부자연스러움). 지문 전체가 '기존 가정을 뒤집는' 대조 서술이어서 C의 'nevertheless'가 강한 유인 오답으로 작동하며, 절 간 관계를 문장 수준에서 정확히 판별해야 하므로 medium 이상의 사고를 요구한다. 사소한 점: D의 오류 근거가 '중복'인데 'and therefore' 자체는 표준 영어에서 허용되므로 'evidently'와의 겹침 및 어색한 위치가 핵심임을 해설이 조금 더 명확히 하면 좋겠으나 판정에는 영향 없음. 'Mendoa'는 가상 인명으로 보이며 사실 오류 아님.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "clause_relation_punctuation"
+    ],
+    "note": "정답은 A로 타당하다. B는 콤마 스플라이스, C는 대조 관계라 논리가 맞지 않는다. D는 'and'+부사 두 개를 쌓은 구조인데, 'and therefore'가 문법적으로 허용되므로 명확한 접속사 중복 오류가 아니다. 대표적인 중복 오류는 'although ... but' 같은 형태다. 앞 절이 근거이고 뒤 절이 추론이라는 관계는 쉽게 드러나서, 전형적인 medium 수준의 전환어·구두점 문제를 넘어서는 추가 사고를 요구하지 않는다.",
+    "issue": "D를 오답으로 보는 근거가 '중복'뿐이라 약하다. 'and therefore'는 표준 영어에서 흔히 쓰이는 결합이라 D가 문법 오류라고 단정하기 어렵고, 오히려 문체상 어색한 선택지에 가깝다."
+   },
+   "cost": 0.18644840000000001
+  },
+  {
+   "cid": "recipe-linear_equations_two_var-00",
+   "skill": "linear_equations_two_var",
+   "system": "sat_math",
+   "recipeId": "linear_equations_two_var_param_then_intersection",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": "pass",
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "implicit_condition_derivation",
+     "parameter_based_reasoning",
+     "multi_step_synthesis"
+    ],
+    "note": "검산: ℓ 기울기 2/5, m 기울기 -k/2, 수직조건 -k/5=-1 → k=5. 연립 5x+2y=54, 2x-5y=10 → x=10, y=2 (검증 50+4=54, 20-10=10). a+b=12로 정답 D 옳음. 해설 계산 모두 정확, 오답 분석도 합리적(k=5, a-b=8, a=10). 레시피 3항목 모두 충족. 수직 조건을 스스로 기울기 곱 -1로 번역해 미지 계수 k를 결정한 뒤 교점을 구하는 다단계 구조로 medium 이상.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [],
+    "note": "검산: k=5, 교점 (10,2), 5·10+2·2=54와 2·10−5·2=10을 모두 만족하므로 a+b=12이고 정답이 맞다. 해설 계산도 정확하다. 다만 수직 조건으로 k를 구하고 연립방정식을 푸는 순차적 절차에 불과하다. 전형적 medium 문항의 단계를 이어 붙인 수준이며 숨은 조건 도출, 표현 간 대응, 매개변수 소거 같은 추가 사고가 없어 hard로는 부적합하다.",
+    "issue": ""
+   },
+   "cost": 0.1480104
+  },
+  {
+   "cid": "recipe-linear_equations_two_var-01",
+   "skill": "linear_equations_two_var",
+   "system": "sat_math",
+   "recipeId": "linear_equations_two_var_two_points_and_meet",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": "pass",
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "parameter_based_reasoning",
+     "multi_step_synthesis"
+    ],
+    "note": "검산: p 기울기 -3/2, y절편 4; 교점 (6,-5); c=-6/5; q의 y절편 -15; 차 19. 오답 분석의 수치도 모두 재현됨. 미지 상수 c를 교점 조건으로 결정한 뒤 절편으로 환원하는 다단계 종합이 필요하여 medium 이상.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [],
+    "note": "검산 결과: 기울기 -3/2, b=4, 교점 (6,-5), c=-6/5, q의 y절편 -15, 차 19로 정답이 맞다. 오답 7·9·11의 오류 경로도 해설 설명과 수치가 모두 일치한다. 다만 기울기→절편→대입→계수 결정의 표준 절차를 순서대로 이어 붙인 것일 뿐이다. 암묵적 조건 도출, 매개변수 소거, 표현 간 대응 같은 추가 사고는 요구하지 않으므로 hard보다 medium 수준이며, 난이도는 단계 수에서만 나온다.",
+    "issue": ""
+   },
+   "cost": 0.1528308
+  },
+  {
+   "cid": "recipe-nonlinear_equations_systems-00",
+   "skill": "nonlinear_equations_systems",
+   "system": "sat_math",
+   "recipeId": "nonlinear_equations_systems_tangent_then_point",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": "pass",
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "implicit_condition_translation",
+     "multi_step_variable_isolation"
+    ],
+    "note": "검산: x²−kx+4=0, 판별식 k²−16=0 → k=4(k>0), (x−2)²=0 → x=2. 정답 B 옳음. 해설의 각 단계와 오답 분석(4=k, 10=y좌표, −2=부호 오류)이 모두 일치. 접함 조건을 스스로 판별식으로 번역하고, 계수 k를 먼저 결정한 후 접점을 구하는 2단계 구조로 medium 이상의 사고를 요구하며 계산 자체는 단순함.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "implicit_condition_translation",
+     "constraint_filtering_after_solution",
+     "multi_step_variable_isolation"
+    ],
+    "note": "x^2-kx+4=0, 판별식 k^2-16=0, k>0이므로 k=4, (x-2)^2=0에서 x=2로 검산 완료. 오답 4는 계수 k, 10은 y좌표, -2는 k=-4(부호 조건 무시)를 반영함.",
+    "issue": ""
+   },
+   "cost": 0.138418
+  }
+ ]
+}

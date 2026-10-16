@@ -1,0 +1,1868 @@
+[
+ {
+  "key": "ap_biology-m01-k0",
+  "cellId": "ap_biology-m01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "B",
+     "brief_reasoning": "A bag of water in water has no glucose source. If glucose is detected anyway, that points to contamination or a false-positive test rather than glucose crossing the membrane.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Dialysis permeability setup; asks to identify a control (3.C)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "B is the best negative control; A lacks the bag, so it is weaker."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Standalone stem is clear; glucose detection method is implied only in option B."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Rationale for A ('same measurement as the experimental setup') is inaccurate: A has no bag and no glucose, so it differs from the experiment. The true flaw is that it omits the bag. Rationale for D is vague."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, typical load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key and scope are fine, but the explanation for distractor A is inaccurate (A has no bag, so it is not the same measurement as the experiment) and D's rationale is vague. Fail on the distractor criterion; the rationales need rewriting."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Short, clear scenario requiring the student to reason about what a negative control should isolate (the tubing and water as a source of false-positive glucose) and to reject distractors that change the independent variable or remove the gradient. It requires moderate conceptual depth in experimental design with no calculation and minimal reading, which fits typical AP exam multiple-choice practice for skill 3.C.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_biology-m01-k1",
+  "cellId": "ap_biology-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "The volume of solution in each bag and the time in the beaker",
+     "brief_reasoning": "Controlled variables are the bag volume and the time spent in the beaker. The starting concentration is the independent variable, and the test strip reading and the amount of glucose in the beaker at the end are dependent variables.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Identifies controlled vs independent vs dependent variables in a dialysis permeability investigation; fits 2.4 and 3.C."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option A is the unique correct answer; B and D are dependent variables, C is the independent variable."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is clear. The test strip in option B is not mentioned in the stem, a minor awkwardness."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option has an accurate rationale. B and D both describe dependent variables, so they overlap slightly in the misconception they encode, but they are acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, about 60 seconds, no calculation, typical AP style."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean, unique-key item on identifying controlled variables in a dialysis investigation. Minor weaknesses are that B and D overlap in the misconception they encode and that the test strip is not introduced in the stem. Acceptable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step identification of controlled variables in a simple dialysis tubing setup. The student must separate the independent variable (initial glucose concentration), the dependent variables (test strip reading, glucose in beaker) and constants (volume, time). No data, calculation or multi-step reasoning is needed. The distractors are clearly dependent or independent variables, so the item sits at an introductory level for skill 3.C rather than at full-mock depth.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_biology-m01-k2",
+  "cellId": "ap_biology-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Glucose concentration is the independent variable and the glucose in the beaker or test strip reading is the dependent variable. Volume and time are controlled variables.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "The volume of solution in each bag and the time in the beaker"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 60 seconds, needs no calculation, and has a short stem, which fits the AP pattern.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. It has a unique key, a clear experimental-design focus, distinct distractors that are each explained, and a suitable length."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item requires one-step classification of independent, dependent, and controlled variables in a simple dialysis tubing setup. The distractors are the manipulated variable and two measured outcomes. There is no data, no calculation, and little reading. This is an introductory experimental-design check rather than full-mock level reasoning.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "key": "ap_biology-m02-k0",
+  "cellId": "ap_biology-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "B",
+     "brief_reasoning": "The agar cube setup measures how far the chemical diffuses into cubes of different sizes. From that you can work out what fraction of each cube's volume the chemical reached, which is the surface-area-to-volume relationship. The other options are about chromosomes, division rate and ribosomes, and these data don't measure any of those.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "About 70 seconds, with low reading load and no calculation. Calculator use is not needed but is allowed, which is consistent.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Acceptable item. The key is unique and tests hypothesis selection for the agar-cube cell-size model. The distractors are off-topic and somewhat easy to eliminate, but each encodes a clear misconception, so the item passes."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step item on the standard agar cube model of surface area-to-volume ratio. The student picks the hypothesis that matches what the experiment measures (diffusion into cubes of different sizes). There is no data table and no calculation. The distractors are clearly unrelated to diffusion (chromosome number, division rate, ribosome density), so little reasoning is needed. This suits early concept learning more than a full mock exam.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_biology-m02-k1",
+  "cellId": "ap_biology-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "For a sphere, SA:V = 6/d. X: 6 per µm, Y: 1.5 per µm. X has the bigger SA:V ratio, so it exchanges materials more efficiently per unit volume.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "A"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 2.2 SA:V; asks for a prediction based on the relationship, which fits 3.B reasonably."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "A is the unique correct answer: the smaller sphere has the larger SA:V. B is false, C is the reverse, D is false."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem gives the diameters and the shape, so it is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception (larger surface area means larger ratio; reversed relationship; same shape means same ratio). The explanations are accurate, although the wording of 'why' for B is a correct fact rather than a named misconception label."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Quick item (~60 s), no arithmetic is needed, and the options are parallel sentences of similar length. The archetype id mentions agar cubes, but the item itself is about bacteria."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Clean, unambiguous SA:V prediction item with a unique key and distinct distractors. It is somewhat easy and close to recall, but it is acceptable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: smaller sphere has larger SA/V (3/r), so X exchanges more efficiently per unit volume. No data representation, minimal reading, at most one trivial proportional check. Distractors target common misconceptions (absolute surface area, same shape implies same ratio) but the reasoning is one step, which suits foundational learning rather than a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_biology-m02-k2",
+  "cellId": "ap_biology-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "For a sphere, SA:V = 6/d. X has 6 per µm and Y has 1.5 per µm, so X has 4 times the SA:V and exchanges materials more efficiently per unit of volume.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "B"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "B is uniquely correct; SA:V = 6/d gives X four times Y."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception with accurate rationale."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60-70 seconds, light reading, no arithmetic required."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound, correct item on SA:V. Key B is unique, distractors are distinct and well explained, and the load is appropriate."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single core concept (SA:V decreases as cell size increases) applied to a simple two-cell comparison. Students must pick the governing relationship and reject two common misconceptions (same shape means equal efficiency; greater surface area means greater ratio), but there is no data stimulus, no formula calculation required, and minimal reading. Predicting the outcome takes about two reasoning steps. Appropriate for foundational practice rather than full-mock exam-prep depth.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_biology-m03-k0",
+  "cellId": "ap_biology-m03",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_exam_suitability",
+   "instant_reject_missing_condition",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "B",
+     "brief_reasoning": "Peroxide decomposed, so its concentration is lower than assumed. That means less substrate in every trial and less O2 measured. It's a systematic error that affects all trials.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": "The item asks about the effect of an error, which is identifying a source of error. It does not ask the student to propose a new investigation or a design revision, which is what 3.D requires. It is also only weakly tied to environmental impacts on enzyme function, since the error is substrate decay."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "B is the best answer. The statement 'lower in every trial' assumes the reaction runs to completion or that substrate is limiting, which is unstated, but no other option is defensible."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "Option A refers to a 'trial at the highest temperature' that the stem never describes, so the experimental design is incompletely stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option has an explanation, though A is a throwaway and D is a weak misconception. The explanations are accurate."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The time load is fine, but the item does not match the target skill 3.D, and the calculator designation has no relevance."
+   },
+   "instant_reject": [
+    "missing_condition"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The item tests the effect of an error, not a proposed investigation or design revision, so it misses skill 3.D. The experimental conditions are also underspecified: the stem never describes the temperature trials that option A refers to. Rejected."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Short, concrete scenario with no data. The student identifies that decomposed hydrogen peroxide means less substrate than assumed, so less oxygen is produced in every trial. Distractors target named misconceptions: a temperature effect, enzyme activation energy being changed, and a selective effect on one trial. It requires about two reasoning steps with no calculation or representation change. It evaluates a design flaw rather than proposing a new investigation, so it is modest in depth for skill 3.D.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_biology-m03-k1",
+  "cellId": "ap_biology-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "Repeated trials at both temperatures",
+     "brief_reasoning": "Doing repeated trials shows how much the results vary from trial to trial. If the 60°C volume is lower every time, the difference is real and not random error.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "The item asks which additional data would test whether a temperature difference is real or experimental error. That is skill 3.D (propose a new investigation from evaluating evidence) applied to the 3.2 temperature-effect context, so it fits."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Repeated trials at both temperatures is the only option that directly tests whether the difference is reliable. The other three options are clearly inadequate, so the key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is self-contained and the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct flaw: an irrelevant variable (room temperature), a single new temperature that does not address the 37 versus 60 comparison, and a changed enzyme that adds a new variable. The explanation covers every wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The reading load is short, no calculation is needed, and the 70-second estimate is typical for an AP item."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean 3.D question with a unique key, distinct distractors, a concise stem, and no instant-reject conditions. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step reasoning: recognize that replication across trials is how to distinguish a real temperature effect from random experimental error. Distractors are clearly flawed (irrelevant variable, no replication, changed enzyme). No data to read, no calculation, and little concept depth beyond basic experimental design. Suitable for introductory practice rather than full mocks.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_biology-m03-k2",
+  "cellId": "ap_biology-m03",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "Repeated trials at both temperatures",
+     "brief_reasoning": "Replication shows whether the difference is consistent and larger than trial-to-trial variability, which directly tests the experimental-error claim.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and the item is clean. It fails scope/skill because it tests generic replication logic rather than proposing a new investigation from evaluated evidence, and it does not require any 3.2 enzyme content.",
+   "scope_skill": {
+    "pass": false,
+    "notes": "Skill 3.D asks students to propose a new investigation after evaluating a design or evidence. This item asks which replication addresses the claim of experimental error. That is generic experimental-design knowledge (replication reduces random error) with almost no enzyme content. The catalase setting is only a backdrop, and the answer does not depend on how temperature affects enzyme function (topic 3.2). The data have not been evaluated, since no results are given, so the question is closer to identifying error than to proposing a follow-up investigation. The fit to topic 3.2 and skill 3.D is weak."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key is unique and defensible. Repeated trials at both temperatures are the only option that directly tests whether the difference is more than random error."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The stem is clear and self-contained, and no stimulus is needed. The 60 and 37 degree values are given, but no actual volumes are provided."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor has a distinct, specific rationale. The distractors are fairly weak and easy to eliminate."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Timing and reading load are appropriate. The item is easy and is typical of a basic experimental-design question."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "One-step evaluation of experimental design: replication distinguishes a real effect from random error. No data to read, no calculation, short stem. Distractors (a single trial at a more extreme temperature, a different enzyme, room temperature) are clearly off-target. It tests a core idea (replication/consistency of results) at an introductory level, so it suits basic learning rather than a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_biology-m04-k0",
+  "cellId": "ap_biology-m04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Controlled variables (temperature, egg white volume, timing) must be held constant so pH is the only independent variable.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "Keep the temperature, the volume of egg white, and the time before measuring the same for all samples"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Tests identifying variables and controls (3.C) in a protein denaturation context (egg white and pH), which fits topic 1.7. The dominant demand is experimental design, as the skill requires."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option B is the only defensible answer. Option A removes the independent variable, and options C and D each add a second changing variable. The independent solver chose B."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed, and the stem is clear and complete. The pH values, equal volumes and 10-minute measurement time are all stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option encodes a distinct misconception: controlling the tested variable, uneven timing, and uneven volume. The explanation addresses every wrong option. The correct option is longer, but only because it lists three controls, so it is not a real giveaway. Options C and D are close in kind, but both are specific to the stem."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 65 seconds, with a light reading load, no arithmetic, and four options. This is typical of an AP Biology experimental-design item."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean experimental-design question on controls in a protein pH investigation. The key is unique and the distractors are distinct and explained, so it passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step identification of controlled variables in a simple protein denaturation (egg white, pH) experiment. The independent variable is stated in the stem, and three distractors each obviously break experimental design (holding pH constant, varying time, varying volume). No data, calculation, or representation change is needed. It tests a foundational experimental-design concept at a level below typical full-mock difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "key": "ap_biology-m04-k1",
+  "cellId": "ap_biology-m04",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "A",
+     "brief_reasoning": "When a protein denatures, it unfolds and clumps together, which makes the sample cloudier. If the pH 2 sample is cloudier than the pH 7 control under the same conditions, that supports denaturation by the acid.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": ""
+   },
+   "notes": "The reading load and time are fine. However, the item is too trivial and too close to restating the prediction, and it does not match the official pattern for 3.C items, which ask about variables, controls, or procedures.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct, but the item tests result prediction rather than identifying variables or controls (skill 3.C). The setup is underspecified, and the distractors are negations of the prediction or an irrelevant temperature variable. Fail."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Short item with no data or stimulus. The student needs to connect protein denaturation to increased cloudiness (aggregation) and recognize that the pH 7 sample is the comparison control. The correct option essentially restates the stated prediction, and the distractors (temperature, reversed result, no difference) are easy to reject. There is no calculation and no representation change, and only 2-3 reasoning steps, so it is more suitable for basic learning than for a full mock exam.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_biology-m04-k2",
+  "cellId": "ap_biology-m04",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "instant_reject_missing_condition",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "B",
+     "brief_reasoning": "When a protein denatures, it unfolds and clumps together, so the sample turns cloudy. If the pH 2 sample is cloudier than the pH 7 control under the same conditions, that supports the idea that acid denatured the protein.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": "Targets 3.C (identify variables/controls) but actually asks which outcome would support a prediction. No variable, control or procedure identification is required. The dominant skill is outcome interpretation."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Key B depends on an unstated premise that cloudiness measures denaturation. The stem does not give this, and the stem is partly circular. D is not clearly wrong without added context."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "No stimulus is needed, but the stem omits the measurement method and conditions (temperature, volumes, egg white amount). The 'best evidence' wording is vague."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "A and C are the trivial reverse and null outcomes. D is an implausible distractor with a bare-assertion rationale. No distinct named misconceptions about controls or variables are encoded."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "Timing is fine, but the item does not resemble real 3.C items (identify the independent variable, the control group, or a needed control)."
+   },
+   "instant_reject": [
+    "missing_condition"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The item does not test the 3.C skill of identifying variables and controls. It tests which outcome supports a prediction, and it relies on an unstated cloudiness-denaturation link. The distractors are weak. Reject."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step item with no stimulus. The student has to connect the stated prediction (more cloudiness at pH 2) with denaturation causing protein aggregation, and recognize that the same-conditions comparison supports the prediction. Option B restates the prediction almost directly, and the distractors (reverse result, no difference, temperature) are easy to reject. The concept depth is shallow: pH disrupts protein structure. There is no data to read, no calculation, and little reading. Experimental-design content is limited to identifying the expected outcome of the treatment versus the control. This fits foundational practice, not full-mock difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "key": "ap_biology-m05-k0",
+  "cellId": "ap_biology-m05",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "The amount of water, the light, and the length of time of growth",
+     "brief_reasoning": "Temperature is the independent variable and height is the dependent variable. To isolate the effect of temperature, other variables like water, light and growth time must be controlled.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Identifying controlled variables in an environment-on-phenotype experiment fits 5.5 and skill 3.C."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Only option B lists the controlled variables. The other three options are the dependent variable, the independent variable, and the outcome, which are all expected to differ. The key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear and states that the plants are clones, so genotype is already controlled."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option has a distinct, accurate rationale, and the options are parallel. The correct option is longer, but only by a few words."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short reading load, about 60 seconds, no calculation, and the calculator designation is consistent."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "This is a clean, simple 3.C item with a unique key and distinct distractors. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step identification of controlled variables in a simple experiment. Temperature is the independent variable and height is the dependent variable, so only the other growth conditions (water, light, time) should be held constant. The stem is short and unambiguous. No data, calculation, or representation changes are needed. The distractors are the independent variable (D) and the dependent variable (A, C). This tests foundational experimental-design understanding rather than full-mock exam-level reasoning.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_biology-m05-k1",
+  "cellId": "ap_biology-m05",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "Grow genetically identical plants in soils of different pH under otherwise identical conditions and record flower color",
+     "brief_reasoning": "This option changes only pH, keeps genotype and all other conditions the same, and measures the right outcome (flower color).",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 5.5 (environmental effects on phenotype) with skill 3.C (identify variables and controls). The task is to choose the design that varies pH and controls genotype and other conditions, which is the target skill."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option A is the only design that varies pH alone, holds genotype and other conditions constant, and measures flower color. B changes species and measures height. C does not vary pH. D adds a second variable (light). The key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed and the stem is self-contained. The wording is clear US English. The \"best way\" phrasing is acceptable because only one option controls variables properly."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct flaw: wrong species and outcome (B), no independent-variable manipulation (C), confounding variable (D). The explanation addresses each wrong option. The correct option is a bit longer than the others, but only by a few words, so it is not a giveaway."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 65 seconds, short reading load, no calculation. This fits the AP pattern for an experimental-design item."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "This is a clean, unambiguous experimental-design item with a unique key and distinct distractors, and its length and difficulty are appropriate. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step experimental design item. The student identifies the option that isolates soil pH as the only independent variable, with genotype and other conditions held constant and flower color as the dependent variable. There is no data, calculation, or representation change. Distractors each violate one obvious design principle: wrong species and measured variable, no pH variation, or a confounding variable (light). The concept is in scope for 5.5 and the wording is clear.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_biology-m05-k2",
+  "cellId": "ap_biology-m05",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "B",
+     "brief_reasoning": "To test pH, it has to be the only variable that changes. That means genetically identical plants, soils at different pH, and every other condition kept the same.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Tests identifying variable and controls (genotype, environment) in a 5.5 context; matches skill 3.C."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "B is the unique defensible design; others fail to vary pH, add a confound, or change species and the measured response."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option encodes a distinct flaw (no independent variable, confounding variable, wrong species/response) and each is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 65 s, short reading, no calculation; typical of AP Biology experimental-design items."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Clean, single-key experimental design item on environmental effects on phenotype; distractors are distinct and explained. Passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step identification of a controlled experimental design: vary only soil pH, hold genotype and other conditions constant. Distractors each violate an obvious control principle (varied genotype, confounded light, wrong species/dependent variable). No data, calculation, or representation change; short and unambiguous wording. Suitable for initial learning of variables and controls rather than full-mock exam depth.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_biology-m06-k0",
+  "cellId": "ap_biology-m06",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "A dihybrid cross with independent assortment should give a 9:3:3:1 ratio, so you can test this by counting the offspring and running a chi-square test. The other options either give the wrong ratio or can't be tested.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "Do the phenotypes of the offspring appear in a 9:3:3:1 ratio?"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "Short reading load, about 60 seconds, no arithmetic. Option lengths are parallel, and the calculator designation is consistent.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A sound, concise 3.A item on a testable question for a dihybrid cross. The key is unique and defensible, the distractors encode distinct flaws, and the exam load is appropriate."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step item: the student picks the testable question that matches a dihybrid cross of two heterozygotes (9:3:3:1 for independent assortment). The distractors are easy to reject: a 1:1 ratio does not fit a dihybrid cross, and the other two options are untestable or ask about importance or \"why\". It needs no data reading and no calculation. The stem is short and unambiguous, and recalling the 9:3:3:1 ratio is within Unit 5.3 scope.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_biology-m06-k1",
+  "cellId": "ap_biology-m06",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "3/4 red, 1/4 brown",
+     "brief_reasoning": "Crossing two heterozygotes (Rr x Rr) gives a 3:1 ratio of dominant to recessive phenotypes.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": "Target skill 3.A (identify or pose a testable question) is not what is assessed. The hypothesis is given and the student just predicts the 3:1 ratio from a monohybrid cross, which is a prediction skill, not question identification."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Rr x Rr gives 3:1 red to brown, so option A is unique and correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option has a specific rationale (reversed ratio, test-cross 1:1, all dominant). The 'all red' option is a weak but acceptable distractor."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Timing is fine, but the item is low difficulty and close to recall of the 3:1 ratio."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and unique, but the item assesses prediction of a 3:1 monohybrid ratio rather than the target skill 3.A (identify or pose a testable question), so it fails on skill fit."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step recognition that a cross of two heterozygotes yields a 3:1 dominant:recessive phenotype ratio. No data, calculation, or representation change. Distractors are the standard 1:3, 1:1, and all-dominant patterns. The item also aligns weakly with skill 3.A (it asks for a predicted outcome, not a testable question), but its difficulty is low and not inflated by unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_biology-m06-k2",
+  "cellId": "ap_biology-m06",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Crossing Rr x Rr gives 3:1 phenotypic ratio, so about 3/4 red and 1/4 brown.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "3/4 red, 1/4 brown"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": "Labeled 3.A (identify or pose a testable question), but the task is predicting the phenotypic ratio of an Rr x Rr cross. That is topic 5.3 content, not identifying or posing a testable question. The hypothesis is given in the stem rather than chosen by the student."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Rr x Rr gives 3:1, so the key (3/4 red, 1/4 brown) is unique and correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option encodes a distinct misconception (test-cross ratio, no recessive offspring, reversed ratio), and each is explained accurately."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short reading and no calculation. The item is easy but realistic in time."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and the distractors are sound, but the item assesses a predicted monohybrid ratio rather than the target skill 3.A (identify or pose a testable question). It fails on skill fit and should be rewritten, for example to ask which question or cross is testable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept recall and application: a monohybrid cross of two heterozygotes gives a 3:1 dominant:recessive phenotype ratio. There is no data, no representation change, and no calculation beyond a simple Punnett square. The distractors are the common wrong ratios (1:1, all dominant, reversed 1:3). The item is clear and has no unfair difficulty sources, but it is too straightforward for full-mock exam_prep and only loosely matches skill 3.A.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_biology-m07-k0",
+  "cellId": "ap_biology-m07",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "The number of woodlice on each side of the chamber",
+     "brief_reasoning": "Light level is the variable being changed (independent). Temperature, humidity and total number of woodlice are kept the same (controlled). The thing being measured is how many woodlice end up on each side, so that is the dependent variable.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Choice-chamber design is a standard 8.1 behavioral-response context. Identifying the dependent variable fits skill 3.C (variables, controls)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The number of woodlice on each side is the measured response, so it is the only defensible dependent variable. The other three options are clearly controlled or independent. A minor wording flaw is that 'the same number is used in each trial' appears in the rationale, but the stem describes only one trial."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem states all conditions (10 woodlice, dark and light sides, same temperature and humidity, count after 10 minutes). The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception: the total number is treated as the dependent variable, temperature is treated as the dependent variable, and the independent variable is confused with the dependent variable. The explanations are accurate and specific to each option. The option lengths are parallel."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The question is very easy and close to vocabulary matching ('which is the dependent variable'). It requires little judgment beyond the definition applied to an obvious case. AP items on 3.C usually ask for a control, a procedure or a justification of design. Difficulty is below AP level, though it is not banned pure definition matching because a situation is given."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and clear, with good distractors. However, it is low in cognitive demand, a one-step identification of the dependent variable in an obvious design. That makes it a weak fit for AP exam rigor on skill 3.C, so I fail it on exam suitability."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step identification of the dependent variable in a short, fully specified choice-chamber experiment. Distractors are the independent variable (light), a controlled variable (temperature), and a constant (number of woodlice). No data, calculation, or representation change is required. It is clear and in scope, but it is below the depth and multi-step reasoning expected of full-mock exam_prep items.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_biology-m07-k1",
+  "cellId": "ap_biology-m07",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Doing more trials with new groups of woodlice makes the result more reliable. The other choices pick only the data that fits, add a confounding variable or keep a single trial.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "Repeat the trial several times with new groups of woodlice and compare the results"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Choice-chamber design for a behavioral response (taxis) fits 8.1 and skill 3.C (experimental procedures, replication). No out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Repeating with new groups is the only option that improves reliability. The others involve cherry-picking, a confound, or a single later measurement. Key A is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is complete and clear. It does not mention a control such as a no-gradient chamber, but the question does not require one."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct flaw: selective data use, a confound, and a changed measurement time. The explanations are brief but specific. Option D's rationale is somewhat weak but acceptable. Option A is slightly longer than the others, but only by a few words."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 65 seconds, short reading, no calculation. Typical of an AP item."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean, short design item on replication in a choice-chamber experiment. The key is unique and the distractors are distinct and plausible. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept experimental design item: recognizing that replication with independent samples increases reliability. No data, calculation, or representation changes. Distractors (cherry-picking data, reusing the same animals after a treatment, using only a later count) are clearly flawed. Wording is clear and conditions are stated. This is a straightforward, foundational skill 3.C item and is better suited to early learning than to a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "key": "ap_biology-m07-k2",
+  "cellId": "ap_biology-m07",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "Repeat the trial several times with new groups of woodlice and compare the results",
+     "brief_reasoning": "Running the trial again with new, independent groups makes the sample bigger and shows whether the result holds up. The other options either bring in a confounding factor (dark-adapting the same woodlice), throw away data, or pick out only the results that fit (cherry-picking).",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Choice-chamber design for a behavioral response (taxis) fits topic 8.1. Judging whether a single trial is enough evidence is a legitimate 3.C experimental-design task."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Repeating the trial with new groups is the unique best answer. Option A adds a variable and changes the animals' condition. Option C changes the time and discards data. Option D cherry-picks trials."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem gives the setup: 10 woodlice, dark and light sides, 10 minutes, one trial. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors are plausible and each rationale is specific. D is somewhat transparently bad because cherry-picking is an obvious flaw. The four options are similar in length and the explanation addresses each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 65 seconds, needs no calculator, and has a typical AP reading load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "This is a sound, clear 3.C item on experimental design for a behavioral response. The key is unique and the distractors map to named flaws. Distractor D is somewhat weak but acceptable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept experimental design item (replication to improve reliability) with no data, no calculation, and clear wording. Distractors are standard flawed-design options (pre-conditioning animals, cherry-picking a trial, changing the measurement time). It requires one or two reasoning steps and fits skill 3.C at an introductory level.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_biology-m08-k0",
+  "cellId": "ap_biology-m08",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "B",
+     "brief_reasoning": "A larger random sample cuts down the effect of chance variation, so the estimate should be closer to the true density.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": "Does not require proposing a new investigation (3.D); it only compares two sampling designs. It also has no link to density effects (8.4), since quadrat sampling error fits 8.3 better."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option B is the unique defensible answer. Minor ambiguity: the stem does not state whether the first student's quadrats were random."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors encode distinct misconceptions and each is explained."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The item is recall-level, with no data or experimental reasoning. It is too easy and generic for the stated skill and topic."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "Fails on scope/skill and exam suitability. The item tests the basic fact that a larger sample reduces sampling error. It does not ask the student to propose a new investigation (3.D) and does not address density effects (8.4). The key is correct and the distractors are fine."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: a larger random sample reduces chance variation in a density estimate. It needs one reasoning step, with no data, calculation, or representation change, and the distractors are easily rejected. It also does not really require proposing a new investigation (3.D); it only compares two sampling designs. The stem leaves the random placement for student 1 unstated, which is a minor wording gap.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "key": "ap_biology-m08-k1",
+  "cellId": "ap_biology-m08",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "instant_reject_missing_condition",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "A",
+     "brief_reasoning": "Counting in the morning one day and the afternoon the next means time of day changes between counts. Snail activity depends on time of day, so this adds a confounding variable.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": "Item asks to identify a confounding variable, not to propose a new investigation (3.D). Density concept in 8.4 not required."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "A is defensible, but the stem is contradictory/ambiguous about which counts were taken when and at which distances."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "No stimulus is needed, but the stem wording is confusing ('only in the morning... on the first day and in the afternoon on the second day')."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "B uses 'always'; C contradicts the stem; D is absurd. None encodes a realistic named misconception; rationales are thin."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "Distractor quality and stem ambiguity make it unsuitable for the AP exam."
+   },
+   "instant_reject": [
+    "missing_condition"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "Rejected. The item assesses error identification instead of proposing a new investigation (3.D) and does not require 8.4 density concepts. The stem is ambiguous about which counts were made when and where. Distractors are implausible or use absolute wording."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "One-step recognition of a confounding variable (time of day) in a simple field design. No data, no calculation, no representation change. Distractors are clearly wrong (e.g., 'always more accurate', 'impossible to compare'). The stem wording ('only in the morning... and in the afternoon') is internally inconsistent and should be fixed, and the item evaluates a design flaw rather than asking the student to propose a new investigation, so it under-targets skill 3.D. This is a clarity issue that does not raise difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_biology-m08-k2",
+  "cellId": "ap_biology-m08",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "B",
+     "brief_reasoning": "Counting in the morning on one day and in the afternoon on the next adds time of day as an uncontrolled variable. That could change how many snails are seen, which confounds the effect of distance.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": "Target skill 3.D is to propose a new investigation or improvement from evaluating a design or evidence. The stem only asks which statement describes the effect of the procedure. That is identifying a confounding variable (closer to 3.C/3.B evaluation) and does not require proposing a new or improved investigation. The topic link to 8.4 (density and distribution sampling) is also weak: the item is about general experimental design, not the effect of density on populations."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Option B is the best answer. However, the stem has an unclear condition: 'counts only in the morning ... on the first day and in the afternoon on the second day' contradicts itself, since 'only in the morning' conflicts with an afternoon count. This weakens the stated experimental conditions. Option D is worded differently in the stem ('always makes the results more accurate') than the rationale suggests, but it is still clearly wrong."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The stimulus is none, which is acceptable. The stem is awkward and self-contradictory ('only in the morning ... and in the afternoon on the second day'). It also does not state that the quadrat size is the same or how the quadrats are placed, which are needed for options A and C to be clearly wrong."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The distractors are weak and not very plausible. Option A is a straw man, because distance is plainly the independent variable. Option C is implausible. Option D uses 'always', which is an obvious giveaway. The rationales are brief and partly rephrase the misconception statements rather than explaining distinct realistic student errors. The explanation for D says it 'can add error' but does not state the real issue."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Reading load and timing are fine for an MC item, and no calculation is needed. The calculator designation is harmless."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key (B) is defensible, but the item does not assess skill 3.D, since it identifies a flaw rather than proposing a new investigation or improvement. The topic fit to 8.4 is loose. The stem contradicts itself ('only in the morning' versus an afternoon count) and the distractors are weak straw men, including an 'always' giveaway in D. Fail."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step identification of an uncontrolled variable (time of day) in a simple quadrat sampling design. No data, no calculation, and the distractors are plainly flawed. Concept depth is shallow and only one reasoning step is needed. The stem wording is slightly contradictory (\"only in the morning... and in the afternoon\"), and the item evaluates a design flaw rather than proposing a new investigation, so it only loosely fits skill 3.D. This does not make the item harder.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_biology-m09-k0",
+  "cellId": "ap_biology-m09",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "B",
+     "brief_reasoning": "As the diameter goes up, the height goes down: 46, 30, 21, then 15 mm. So the smaller tubes have taller columns.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item passes all five criteria. It asks the student to describe a trend in a table, which fits skill 4.B, and the water context fits topic 1.1. Option B is the only correct statement, since the heights fall as the diameter rises (46, 30, 21, 15 mm). Distractors A, C, and D each encode a distinct misreading: equal steps, no change, and the reversed trend. The task is short and needs no calculator.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The item requires describing a trend in table data about capillary rise in water, which relates to cohesion and adhesion in topic 1.1. This matches skill 4.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "B is the unique correct statement. The heights decrease and the decreases are unequal (16, 9, 6), so A is false. C is false because the means differ. D is the reverse of the actual trend."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table data are complete, with labeled columns and units. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option has a specific rationale that matches a distinct misreading of the table. The option lengths are parallel, so there is no length giveaway."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item can be answered in about 55 seconds, with a small table and no arithmetic. It fits the reference pattern of a short MC with a needed stimulus."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single small table with a clear monotonic inverse trend. The student only has to describe the pattern and eliminate three distractors (constant increase, no change, direct relationship). No calculation is required, and no outside knowledge beyond reading the table. This is a foundational describe-data task, below full-mock exam_prep depth.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_biology-m09-k1",
+  "cellId": "ap_biology-m09",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Times go 62, 41, 27, 18 as temperature rises, so the time decreases as temperature increases.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "A"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Describing a table trend fits 4.B; evaporation of water is a topic 1.1 context. Data-skill items need not require the topic concept."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option A is unique and correct. B, C and D are each clearly false against the table."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete, with headers, units and all four rows. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The distractors are trivial contradictions of the table, not realistic distinct misconceptions. The shortest time at 20 and the equal time at 20 and 30 are not plausible student errors. The reversed trend is just the opposite of the key. The rationales are accurate but only restate the table."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The item is too easy for the AP exam. It involves no reasoning beyond noticing that values fall monotonically, with no quantitative comparison and no link to water properties. The distractors can be eliminated at a glance."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key, stimulus and scope are fine. The distractors are trivial and not realistic misconceptions, and the item demands too little for AP exam level. It fails on distractor quality and exam suitability."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The student reads a small 4-row, 2-column table and identifies the overall trend (time decreases as temperature increases). The distractors are the reverse trend, a misreading of the minimum, and a false equality. No calculation is needed and the concept demand is minimal (the link to hydrogen bonding is implicit). This fits skill 4.B at an introductory level. It is appropriate for basic learning rather than full mock exams.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "key": "ap_biology-m09-k2",
+  "cellId": "ap_biology-m09",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Going from 20 to 50 °C, the mean evaporation time drops from 62 to 41 to 27 to 18 minutes. So the time gets shorter as temperature rises.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "B"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": ""
+   },
+   "notes": "The item is far too easy. It is a read-the-table trend question with no biological reasoning, and the calculator is irrelevant. It is also disconnected from hydrogen bonding, so it would not discriminate among students on the target topic. A real AP item would ask about the effect of hydrogen bonds or heat on the water.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and the table is complete. However, the item does not meaningfully assess topic 1.1, since it has no hydrogen bonding or cohesion content. Two of the three distractors are trivial and not realistic misconceptions. The item is too easy for AP exam suitability, so it fails."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item asks the student to read a small 4-row table and identify a single monotonic trend (evaporation time decreases as temperature increases). No calculation, no linking to hydrogen bonding, and no multi-step reasoning is required. The distractors are direction reversals or simple misreadings of the table, so this is a foundational data-description item rather than a full-mock exam item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_biology-m10-k0",
+  "cellId": "ap_biology-m10",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "196 gray and 204 black is close to 1:1, which is what a test cross of a heterozygote should give.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "Approximately equal numbers"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item is short, takes about 55 seconds, and needs no calculation. Option lengths are parallel with no giveaway. The task is easy but appropriate for 4.B.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, simple 4.B table-description item on a test cross. It has a unique key, complete stimulus data, plausible distractors, and appropriate exam load."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Skill 4.B at its simplest: read a two-row table and pick the verbal description that matches. The counts 196 and 204 are nearly equal, so no calculation or chi-square is needed. The distractors (all gray, mostly black, 3:1) are quickly ruled out by looking at the numbers. The test-cross context is brief and gives the student no extra reasoning to do. Conceptual depth is low and only one comparison is needed.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_biology-m10-k1",
+  "cellId": "ap_biology-m10",
+  "passed": false,
+  "reasons": [
+   "resembles_known_exam_item"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "A",
+     "brief_reasoning": "Round, yellow has the highest count (315) and wrinkled, green the lowest (32). The counts are close to a 9:3:3:1 ratio, not equal numbers.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": true,
+   "summary": "The item is a clean, correct table-description question. It resembles the classic Mendel 9:3:3:1 dihybrid data, but it is a standard textbook scenario rather than a specific College Board sample item. It passes all criteria.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The item asks the student to describe a table of dihybrid cross counts, which fits skill 4.B and the Mendelian genetics context of topic 5.3."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option A is the only correct statement. Round, yellow has the highest count (315) and wrinkled, green the lowest (32). The other options are clearly false."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete and clear: it gives phenotype names and counts, and the stem states the cross and what was counted."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option has a specific rationale tied to the table values. Distractors B and D are structurally similar (each names a wrong phenotype as most common), and option A is the longest. These are minor weaknesses and do not make the key guessable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item can be answered in under a minute, needs no calculation, and has little reading load."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item only asks the student to read a four-row table and identify the largest and smallest counts (315 and 32). It takes one reasoning step, needs no calculation and no ratio or chi-square analysis, and has no representation change. The distractors are easy to reject by comparing numbers, so the item does not reach the depth expected of a full mock exam question.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_biology-m10-k2",
+  "cellId": "ap_biology-m10",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Round, yellow has the highest count at 315 and wrinkled, green has the lowest at 32. This matches the expected 9:3:3:1 ratio.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "B"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and unique and the table is complete, but the item is trivially easy: students only find the max and min in a four-row table. The distractors are obviously false statements rather than realistic misconceptions, and their rationales just restate counts. The item lacks AP-level rigor.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Table description in a dihybrid cross context fits 4.B and 5.3."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "B is uniquely correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table data are complete and the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Distractors are trivially falsified by glancing at the table. The rationales restate counts and name no misconception, such as expecting equal phenotype frequencies or a 1:1:1:1 ratio."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "Cognitive demand is far below AP level. No ratio reasoning or comparison with expected Mendelian proportions is required, and the correct option is the longest."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item asks students to read a four-row table and identify the most and least common phenotypes (315 vs 32). No calculation, ratio analysis, or chi-square is needed. Only one representation (the table) is used. The distractors are easy to reject: equal numbers contradicts the counts, and the two other options name the wrong phenotype as most common. The concept depth is low (describing data, aligned with skill 4.B). Reading load is minimal and the numbers are small and unrounded-free. Nothing in the item is hard for unfair reasons.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "key": "ap_biology-m11-k0",
+  "cellId": "ap_biology-m11",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch",
+   "resembles_known_exam_item"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Percent drops as the cubes get bigger: 100 at 1 cm, 78 at 2 cm, 52 at 3 cm. So larger cubes have a lower percent of their volume reached.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "The percent of the volume reached by the dye is lower for the larger cubes."
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": true,
+   "summary": "The key is correct and unique, and the table is complete. However, the item is trivially low-level: it only asks the student to read a monotonic trend, with no link to surface-area-to-volume reasoning. The distractors are weak (a misreading of one cell, \"same\", and a reversed trend). The agar-cube diffusion scenario is a classic, well-known cell size lab, so it resembles a known exam scenario. It is likely too easy and too shallow for AP-level discrimination.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The item describes data from a table (skill 4.B) in the cell size context, which fits. The topic concept is only weakly engaged because the answer can be read directly from the table, which is permitted for data-skill items."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Exactly one option is true given the table: 100, 78, 52 decrease with size. The other three are clearly false."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table data are complete, with clear column labels and units. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The distractors are trivial, and the explanations merely restate the data. The options are not distinct named misconceptions; they are simply false readings of the table, such as the \"same\" option and the reversed trend. The explanation text is accurate but generic."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The item takes about 20 seconds and has very low cognitive demand, well below the typical AP item depth. The calculator designation is irrelevant. It lacks any reasoning step, such as linking the trend to the surface-area-to-volume ratio."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-trend reading of a 3-row table; the student only has to see that the percent reached falls as cube size rises. No calculation, no multi-step reasoning, and the distractors are plain misreadings (wrong row, same values, reversed trend). Good for introducing skill 4.B but too easy for a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_biology-m11-k1",
+  "cellId": "ap_biology-m11",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Times are 4, 15 and 33 minutes, so time goes up as diameter goes up. The jumps are 11 and then 18 minutes, which are not equal.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "A"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Describing a trend in a table of agar-sphere size and diffusion time fits 2.2 (cell size, surface area to volume) and skill 4.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option A is the only true statement. Times increase with diameter, increments are 11 and 18 (not equal), and times are not constant or decreasing."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table has complete columns, units and rows. The stem is clear and every number used appears in the table."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The distractors 'decreases' and 'same for all' are trivially false from a glance at the table and encode no realistic misconception. Only the 'same amount' option is a plausible misconception (linear vs. nonlinear). The rationales are accurate but merely restate the data."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The reading load is short and the item takes about 55 seconds. No calculation is needed, so it is consistent with the allowed-calculator designation. It is a simple but legitimate 4.B description item."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is scientifically correct with a unique key and a clear stimulus. It fails only on distractor quality: two of the three wrong options are implausible, so they do not encode distinct, realistic misconceptions. The item is also very easy."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item asks the student to read a three-row table and identify the overall trend (time increases with diameter). The only extra step is rejecting the \"same amount per increase\" distractor by comparing differences (11 vs 18 min). There is no formula, no multi-step calculation, and no representation change. This is a straightforward skill 4.B description item that suits foundational practice rather than a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_biology-m11-k2",
+  "cellId": "ap_biology-m11",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "B",
+     "brief_reasoning": "Time rises with diameter (4, 15, 33 minutes). The increases are +11 and +18, which are not equal, so D is wrong.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "A table of diffusion time versus sphere size is a standard 2.2 context, and describing the trend is skill 4.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "B is uniquely correct: times of 4, 15 and 33 minutes increase. A and C are false, and D is false because the increases are 11 and 18."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table data are complete, with columns and rows. The wording is clear. Mean times are given, but there are no units issues."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor is a distinct wrong description (inverse trend, no change, linear trend) and each is explained. The option lengths are similar."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Quick to answer (about 55 seconds), no calculator needed, and the reading load is low."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, simple table-description question with a unique key and distinct distractors. It is suitable for 4.B on topic 2.2."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Item requires reading a 3-row table and identifying a monotonic increasing trend (skill 4.B). Distractors (decrease, constant, linear increase) are rejected with a glance or by checking differences of 11 vs 18. No formula, calculation, or multi-concept reasoning is required; the link to surface area-to-volume is not even needed to answer. Reading load is minimal and the scenario is clear and unambiguous.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ }
+]

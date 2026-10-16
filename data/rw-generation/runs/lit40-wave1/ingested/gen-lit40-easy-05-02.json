@@ -1,0 +1,628 @@
+{
+ "taskId": "gen-lit40-easy-05-02",
+ "passed": [
+  {
+   "candidateId": "lit40-easy-05-020",
+   "task": "gen-lit40-easy-05-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-easy-05-020",
+    "batchId": "lit40-easy-05",
+    "route": "excerpt",
+    "skill": "words_in_context",
+    "difficulty": "easy",
+    "questionType": "figurative_language",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 19,
+     "genre": "novel_excerpt",
+     "pov": "first",
+     "styleEra": "19c",
+     "names": [
+      "Leilani",
+      "Hemi"
+     ],
+     "nameCultures": [
+      "pacific_maori_hawaiian",
+      "pacific_maori_hawaiian"
+     ],
+     "locale": "Auckland",
+     "setting": "a vineyard at harvest",
+     "relationship": "a retired sailor and his neighbor",
+     "conflict": "over whether to sell a shared inheritance",
+     "openingStyle": "과거를 회상하는 문장으로 시작('Years later', 'Once' 등)",
+     "topicSeed": "a vineyard at harvest in Auckland; a retired sailor and his neighbor over whether to sell a shared inheritance"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "If the conduct of the men had been alarming in the boat, it became truly threatening when they had come aboard. They lay about the deck growling together in talk. The slightest order was received with a black look, and grudgingly and carelessly obeyed. Even the honest hands must have caught the infection, for there was not one man aboard to mend another. Mutiny, it was plain, hung over us like a thunder-cloud.\n\nAnd it was not only we of the cabin party who perceived the danger. Long John was hard at work going from group to group, spending himself in good advice, and as for example no man could have shown a better.",
+    "question": "As used in the text, the phrase “hung over us like a thunder-cloud” most nearly suggests that",
+    "options": [
+     "the crew had already openly seized control of the ship",
+     "a dangerous revolt seemed ready to break out at any moment",
+     "stormy weather was delaying the progress of the voyage",
+     "the sailors were grieving over companions lost at sea"
+    ],
+    "correct_letter": "B",
+    "explanation": "'thunder-cloud'는 아직 터지지 않았지만 곧 쏟아질 듯한 위협을 비유한다. 앞 문장들에서 선원들이 투덜거리고 명령에 험악한 표정으로 마지못해 따른다고 하여 반란의 기운이 감돌고 있음을 보여 준다. 따라서 B가 정답이다. A는 반란이 이미 일어났다고 보아 틀리고, C는 비유를 실제 날씨로 읽은 오류이며, D는 지문에 근거가 없다."
+   },
+   "notes": [],
+   "tone": [
+    "tense",
+    "ominous"
+   ],
+   "devices": [
+    "simile"
+   ],
+   "producerModel": "opus",
+   "excerpt": {
+    "text": "If the conduct of the men had been alarming in the boat, it became truly threatening when they had come aboard. They lay about the deck growling together in talk. The slightest order was received with a black look, and grudgingly and carelessly obeyed. Even the honest hands must have caught the infection, for there was not one man aboard to mend another. Mutiny, it was plain, hung over us like a thunder-cloud.\n\nAnd it was not only we of the cabin party who perceived the danger. Long John was hard at work going from group to group, spending himself in good advice, and as for example no man could have shown a better.",
+    "source": {
+     "author": "Stevenson, Robert Louis",
+     "work": "The Works of Robert Louis Stevenson - Swanston Edition, Vol. 06",
+     "year": null,
+     "yearSource": "unknown(코퍼스 메타에 발행연도 없음)",
+     "authorDeathYear": 1894,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/30393",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg:gutenberg-30393",
+     "corpusTextSha256": "551588ab8340909abb2588edaa735b7f8463744b6da2f7cc8a26359682812181",
+     "excerptSha256": "883eedd5cc4ac5a912aa318274eeb8565ca23297772407e68533e6cea5f6cb42",
+     "sliceSha256": "e845522322dd540eafcf00a9e16b7c4d19e55e26bced1eb18fd4472e2ddfb342",
+     "location": {
+      "startChar": 136645,
+      "endChar": 137267,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 25
+     },
+     "genre": "novel_excerpt",
+     "workForm": "novel_excerpt"
+    }
+   },
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-easy-05-023",
+   "task": "gen-lit40-easy-05-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-easy-05-023",
+    "batchId": "lit40-easy-05",
+    "route": "excerpt",
+    "skill": "words_in_context",
+    "difficulty": "easy",
+    "questionType": "figurative_language",
+    "genre": "short_story",
+    "seed": {
+     "index": 22,
+     "genre": "short_story",
+     "pov": "first",
+     "styleEra": "19c",
+     "names": [
+      "Mohan",
+      "Zaynab"
+     ],
+     "nameCultures": [
+      "indian_subcontinent",
+      "arabic_levantine"
+     ],
+     "locale": "Mumbai",
+     "setting": "a kite-maker's yard",
+     "relationship": "an old teacher and a former pupil",
+     "conflict": "about who gets credit for shared work",
+     "openingStyle": "시간·날짜 표현으로 시작('By', 'On', 'After' 등)",
+     "topicSeed": "a kite-maker's yard in Mumbai; an old teacher and a former pupil about who gets credit for shared work"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "When Sepeli dropped both pig and Chancellor, a talking man from the windward coast picked up the carcass. Cornelius was on his feet and running, when the pig caught him on the legs and tripped him. The people and the army, with shouts and laughter, joined in the sport.\n\nTwist and dodge as he would, everywhere the ex-Chancellor of the Exchequer was met or overtaken by the flying pig. He scuttled like a frightened rabbit in and out among the avocados and the palms. No hand was laid upon him, and his tormentors made way before him, but ever they pursued, and ever the pig flew as fast as hands could pick it up.",
+    "question": "As used in the text, the phrase “scuttled like a frightened rabbit” most nearly suggests that",
+    "options": [
+     "moved in a hurried, panicked way to escape his pursuers",
+     "carefully planned a clever route to a safe hiding place",
+     "enjoyed the lively game as much as the crowd did",
+     "waited quietly among the trees until the crowd tired"
+    ],
+    "correct_letter": "A",
+    "explanation": "'frightened rabbit'는 겁에 질려 이리저리 급히 달아나는 모습을 비유한다. 앞에서 그가 몸을 비틀고 피하려 해도 돼지에 계속 쫓긴다고 묘사되어 있다. 따라서 A가 정답이다. B는 계획성을, C는 즐거움을, D는 가만히 기다림을 말해 지문의 다급한 도주와 맞지 않는다."
+   },
+   "notes": [],
+   "tone": [
+    "comic",
+    "mocking"
+   ],
+   "devices": [
+    "simile"
+   ],
+   "producerModel": "opus",
+   "excerpt": {
+    "text": "When Sepeli dropped both pig and Chancellor, a talking man from the windward coast picked up the carcass. Cornelius was on his feet and running, when the pig caught him on the legs and tripped him. The people and the army, with shouts and laughter, joined in the sport.\n\nTwist and dodge as he would, everywhere the ex-Chancellor of the Exchequer was met or overtaken by the flying pig. He scuttled like a frightened rabbit in and out among the avocados and the palms. No hand was laid upon him, and his tormentors made way before him, but ever they pursued, and ever the pig flew as fast as hands could pick it up.",
+    "source": {
+     "author": "London, Jack",
+     "work": "A Son of the Sun",
+     "year": null,
+     "yearSource": "unknown(코퍼스 메타에 발행연도 없음)",
+     "authorDeathYear": 1916,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/21971",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg:gutenberg-21971",
+     "corpusTextSha256": "1ed7cfc889d65e922ff60659c2d04b41a6ab65db078447342fd09bd98f2392ca",
+     "excerptSha256": "4dd0030a26720cb6643c58f3912d5577fed05073108d84dd47fd434f0d3af02a",
+     "sliceSha256": "2945a159da7b639fffbc3f3bfaffe927f75aeca0319514a13df3e6d3a01bf4c5",
+     "location": {
+      "startChar": 267039,
+      "endChar": 267653,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 83
+     },
+     "genre": "short_story",
+     "workForm": "short_story"
+    }
+   },
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-easy-05-029",
+   "task": "gen-lit40-easy-05-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-easy-05-029",
+    "batchId": "lit40-easy-05",
+    "route": "excerpt",
+    "skill": "words_in_context",
+    "difficulty": "easy",
+    "questionType": "figurative_language",
+    "genre": "short_story",
+    "seed": {
+     "index": 28,
+     "genre": "short_story",
+     "pov": "first",
+     "styleEra": "19c",
+     "names": [
+      "Hala",
+      "Miriam"
+     ],
+     "nameCultures": [
+      "arabic_levantine",
+      "hebrew_jewish"
+     ],
+     "locale": "Cairo",
+     "setting": "a courtyard with a dry fountain",
+     "relationship": "a daughter and her absent father's friend",
+     "conflict": "after a mistake that only one person noticed",
+     "openingStyle": "장소 이름으로 시작",
+     "topicSeed": "a courtyard with a dry fountain in Cairo; a daughter and her absent father's friend after a mistake that only one person noticed"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "In the country school I attended, there was a debating society. Parents as well as their sons were admitted to the society and the public was invited to the debates. On one occasion the question for debate was: \"Which is the more attractive, the works of nature or the works of art?\"\n\nThere had been an appeal from a general debate and this time one speaker was chosen from each side. My father was chosen to represent the negative and I the affirmative. My father was a good speaker but so fond of facts he had no use for rhetoric. I had the opening address of thirty minutes, my father had forty-five minutes and I had fifteen minutes to close the debate.",
+    "question": "As used in the text, the phrase “had no use for rhetoric” most nearly suggests that",
+    "options": [
+     "could not afford to pay for training in public speaking",
+     "lacked the books he needed to prepare his speech",
+     "cared little for ornate, persuasive language in his arguments",
+     "had grown tired of joining debates at the school"
+    ],
+    "correct_letter": "C",
+    "explanation": "'had no use for'는 실제로 쓸 수 없다는 뜻이 아니라 가치를 두지 않는다는 관용 표현이다. 바로 앞의 'so fond of facts'와 대조되어 그가 꾸밈 있는 말보다 사실을 중시했음을 보여 준다. 따라서 C가 정답이다. A와 B는 돈이나 자료 부족으로 읽은 오류이고, D는 그가 토론에 참여했다는 사실과 맞지 않는다."
+   },
+   "notes": [],
+   "tone": [
+    "reflective",
+    "nostalgic"
+   ],
+   "devices": [
+    "idiom"
+   ],
+   "producerModel": "opus",
+   "excerpt": {
+    "text": "In the country school I attended, there was a debating society. Parents as well as their sons were admitted to the society and the public was invited to the debates. On one occasion the question for debate was: \"Which is the more attractive, the works of nature or the works of art?\"\n\nThere had been an appeal from a general debate and this time one speaker was chosen from each side. My father was chosen to represent the negative and I the affirmative. My father was a good speaker but so fond of facts he had no use for rhetoric. I had the opening address of thirty minutes, my father had forty-five minutes and I had fifteen minutes to close the debate.",
+    "source": {
+     "author": "Bain, George W.",
+     "work": "Wit, humor, reason, rhetoric, prose, poetry and story woven into eight popular lectures",
+     "year": 1915,
+     "yearSource": "text-header(copyright/published line)",
+     "authorDeathYear": 1927,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/16858",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg_humanities:gutenberg-16858",
+     "corpusTextSha256": "932849bf0220826503b20b17061c504f18ced938a609e9a37c63af9f220711f2",
+     "excerptSha256": "f7bc20a5c7f5daf9ce04f3ef829f21f7f959ebd1f33b057fa37ef1cfd1deed99",
+     "sliceSha256": "5ab1514f08fc8da62d17eebe16016e4688f083863e512eeda071398330ba1a8e",
+     "location": {
+      "startChar": 268636,
+      "endChar": 269293,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 72
+     },
+     "genre": "short_story",
+     "workForm": "poetry"
+    }
+   },
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-easy-05-033",
+   "task": "gen-lit40-easy-05-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-easy-05-033",
+    "batchId": "lit40-easy-05",
+    "route": "excerpt",
+    "skill": "words_in_context",
+    "difficulty": "easy",
+    "questionType": "figurative_language",
+    "genre": "short_story",
+    "seed": {
+     "index": 32,
+     "genre": "short_story",
+     "pov": "third_omniscient",
+     "styleEra": "19c",
+     "names": [
+      "Clara",
+      "Kwame"
+     ],
+     "nameCultures": [
+      "english",
+      "west_african"
+     ],
+     "locale": "the Cornish coast",
+     "setting": "a lighthouse station",
+     "relationship": "a priest and a lapsed parishioner",
+     "conflict": "over a plan that depends on a lie",
+     "openingStyle": "짧은 단언문으로 시작",
+     "topicSeed": "a lighthouse station in the Cornish coast; a priest and a lapsed parishioner over a plan that depends on a lie"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Beyond all that, the situation was a commanding one. The prospect from almost every window was beautiful. Hillsides covered with thrifty crops—maple groves that became gorgeous in the autumn—farm-houses that gave an idea of elegance as well as comfort, formed lovely rural pictures whereon the inmates of the institution looked. Indeed, within or without, there was nothing to excite the brain or give an unpleasant emotion. Authority there was, certainly, firm and judicious, but so concealed in all its rugged points, that even the sharp suspicion of insanity failed to jar against it. Indeed, the ruling spirit of this place was Mrs. Barr, whose charity was ever prevailing, and whose firm goodness was rendered efficient by proportionate strength. To her the inmates of this building were objects of unlimited interest.",
+    "question": "As used in the text, the phrase “the ruling spirit of this place was Mrs. Barr” most nearly suggests that",
+    "options": [
+     "Mrs. Barr was a ghost said to haunt the institution",
+     "Mrs. Barr held a title but had no real influence",
+     "Mrs. Barr was the guiding influence that shaped the place",
+     "Mrs. Barr's changing moods controlled the inmates"
+    ],
+    "correct_letter": "C",
+    "explanation": "'ruling spirit'는 유령이 아니라 그곳을 이끄는 중심 인물을 뜻한다. 뒤에서 그녀의 자비와 굳은 선함이 효과적으로 작용했다고 하고, 앞에서 권위가 부드럽게 감춰져 있었다고 한다. 따라서 C가 정답이다. A는 'spirit'를 문자 그대로 읽은 오류이고, B와 D는 지문의 긍정적 묘사와 어긋난다."
+   },
+   "notes": [],
+   "tone": [
+    "approving",
+    "calm"
+   ],
+   "devices": [
+    "metaphor"
+   ],
+   "producerModel": "opus",
+   "excerpt": {
+    "text": "Beyond all that, the situation was a commanding one. The prospect from almost every window was beautiful. Hillsides covered with thrifty crops—maple groves that became gorgeous in the autumn—farm-houses that gave an idea of elegance as well as comfort, formed lovely rural pictures whereon the inmates of the institution looked. Indeed, within or without, there was nothing to excite the brain or give an unpleasant emotion. Authority there was, certainly, firm and judicious, but so concealed in all its rugged points, that even the sharp suspicion of insanity failed to jar against it. Indeed, the ruling spirit of this place was Mrs. Barr, whose charity was ever prevailing, and whose firm goodness was rendered efficient by proportionate strength. To her the inmates of this building were objects of unlimited interest.",
+    "source": {
+     "author": "Stephens, Ann S. (Ann Sophia)",
+     "work": "The curse of gold",
+     "year": null,
+     "yearSource": "unknown(코퍼스 메타에 발행연도 없음)",
+     "authorDeathYear": 1886,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/70134",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg:gutenberg-70134",
+     "corpusTextSha256": "1091a5115f3eb09b3b6fa21c62e6a6432dfbcfdfd29af2725d7c8b6f99eef6ea",
+     "excerptSha256": "b60ce9043c60abcd96b06e96e6c011664fb6eb9d746215296623546f7748cac6",
+     "sliceSha256": "4b5e8caf80dc82dfc09644c7b52ec288ad2e8803f269d8ca41b44c5c157b0c36",
+     "location": {
+      "startChar": 292269,
+      "endChar": 293092,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 40
+     },
+     "genre": "short_story",
+     "workForm": "novel(scene used for short_story slot)"
+    }
+   },
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-easy-05-035",
+   "task": "gen-lit40-easy-05-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-easy-05-035",
+    "batchId": "lit40-easy-05",
+    "route": "excerpt",
+    "skill": "words_in_context",
+    "difficulty": "easy",
+    "questionType": "figurative_language",
+    "genre": "short_story",
+    "seed": {
+     "index": 34,
+     "genre": "short_story",
+     "pov": "first",
+     "styleEra": "contemporary",
+     "names": [
+      "Emre",
+      "Eda"
+     ],
+     "nameCultures": [
+      "greek_balkan_turkish",
+      "greek_balkan_turkish"
+     ],
+     "locale": "Naples",
+     "setting": "a beekeeper's yard",
+     "relationship": "a stepfather and his stepdaughter",
+     "conflict": "when a visitor arrives and sees what the family does not",
+     "openingStyle": "대화 한 줄로 시작",
+     "topicSeed": "a beekeeper's yard in Naples; a stepfather and his stepdaughter when a visitor arrives and sees what the family does not"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "I had faltered, and my cause was lost. What have I accomplished? Am I able to gloat over you? What have I wrought, after all? I weakened under the love she bore for you, I permitted it to creep in and fill my heart. Do you understand? I do not hate you now. It is something to know that you have worshipped her all these years. You were true to her. What you did long, long ago was not your fault. You believed that she had wronged you. But you went on loving her. That is what weakened my resolve. You loved her to the end, she loved you to the end. Well, in the face of that, could I go on hating you? You must have been worthy of her love.",
+    "question": "As used in the text, the phrase “permitted it to creep in and fill my heart” most nearly suggests that",
+    "options": [
+     "the speaker's feelings changed gradually, almost without notice",
+     "the speaker suddenly decided to forgive in a single moment",
+     "the speaker felt fear of someone sneaking into the house",
+     "the speaker tried hard to hide his love from others"
+    ],
+    "correct_letter": "A",
+    "explanation": "'creep in'은 조용히 조금씩 스며드는 모습을 비유한다. 앞에서 화자는 자신이 'faltered'했다고 하고, 뒤에서는 그 사랑 때문에 결심이 약해져 더 이상 미워하지 않는다고 말한다. 따라서 A가 정답이다. B는 점진적 변화와 반대이고, C는 비유를 실제 침입으로 읽은 오류이며, D는 지문에 근거가 없다."
+   },
+   "notes": [],
+   "tone": [
+    "confessional",
+    "resigned"
+   ],
+   "devices": [
+    "metaphor"
+   ],
+   "producerModel": "opus",
+   "excerpt": {
+    "text": "I had faltered, and my cause was lost. What have I accomplished? Am I able to gloat over you? What have I wrought, after all? I weakened under the love she bore for you, I permitted it to creep in and fill my heart. Do you understand? I do not hate you now. It is something to know that you have worshipped her all these years. You were true to her. What you did long, long ago was not your fault. You believed that she had wronged you. But you went on loving her. That is what weakened my resolve. You loved her to the end, she loved you to the end. Well, in the face of that, could I go on hating you? You must have been worthy of her love.",
+    "source": {
+     "author": "McCutcheon, George Barr",
+     "work": "Black is White",
+     "year": null,
+     "yearSource": "unknown(코퍼스 메타에 발행연도 없음)",
+     "authorDeathYear": 1928,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/54097",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg:gutenberg-54097",
+     "corpusTextSha256": "1f5b73f1d9d67f5c6b52127cf3f23d73bece718813f2aa01c66f5799a18791fa",
+     "excerptSha256": "9cd5de7455bae4d5c7add1e074ad92af53f37d22f28cfa6735f7ab5f9d3adece",
+     "sliceSha256": "1c5dd566f784c7490fdefa8abe70384e4787843288534859dc625265179dca8b",
+     "location": {
+      "startChar": 480057,
+      "endChar": 480699,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 93
+     },
+     "genre": "short_story",
+     "workForm": "novel(scene used for short_story slot)"
+    }
+   },
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-easy-05-037",
+   "task": "gen-lit40-easy-05-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-easy-05-037",
+    "batchId": "lit40-easy-05",
+    "route": "excerpt",
+    "skill": "words_in_context",
+    "difficulty": "easy",
+    "questionType": "figurative_language",
+    "genre": "short_story",
+    "seed": {
+     "index": 36,
+     "genre": "short_story",
+     "pov": "first",
+     "styleEra": "19c",
+     "names": [
+      "Chana",
+      "Dvora"
+     ],
+     "nameCultures": [
+      "hebrew_jewish",
+      "hebrew_jewish"
+     ],
+     "locale": "Haifa",
+     "setting": "a laundromat",
+     "relationship": "a father and his stubborn son",
+     "conflict": "about starting over somewhere unfamiliar",
+     "openingStyle": "인물의 이름으로 시작",
+     "topicSeed": "a laundromat in Haifa; a father and his stubborn son about starting over somewhere unfamiliar"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Many of these are secretly for us. They would join me, but they fear to do so lest their estates be confiscated. These are to be assured that what they may lose now by aiding me shall some day be restored to them. Here is a list of a number of such gentlemen in the province of Berry, and you are to give them the assurances necessary to enlist them in our cause. Use what persuasions you can. Take your company, and find some place of concealment among the hills of the southern border of Berry. You can thus provide escort in crossing the border for those who may need it.",
+    "question": "As used in the text, the phrase “enlist them in our cause” most nearly suggests that",
+    "options": [
+     "sign them up as soldiers in the royal army",
+     "write their names on an official list for the province",
+     "persuade them to openly join and support the effort",
+     "force them to give up their estates to the leader"
+    ],
+    "correct_letter": "C",
+    "explanation": "'enlist'는 원래 군에 입대시킨다는 뜻이지만 여기서는 대의에 동참하도록 설득한다는 의미로 쓰였다. 바로 뒤의 'Use what persuasions you can'과 앞의 그들이 몰래 지지하지만 두려워한다는 설명이 이를 뒷받침한다. 따라서 C가 정답이다. A와 B는 단어를 문자 그대로 읽은 오류이고, D는 재산을 돌려주겠다는 약속과 어긋난다."
+   },
+   "notes": [],
+   "tone": [
+    "urgent",
+    "conspiratorial"
+   ],
+   "devices": [
+    "metaphor"
+   ],
+   "producerModel": "opus",
+   "excerpt": {
+    "text": "Many of these are secretly for us. They would join me, but they fear to do so lest their estates be confiscated. These are to be assured that what they may lose now by aiding me shall some day be restored to them. Here is a list of a number of such gentlemen in the province of Berry, and you are to give them the assurances necessary to enlist them in our cause. Use what persuasions you can. Take your company, and find some place of concealment among the hills of the southern border of Berry. You can thus provide escort in crossing the border for those who may need it.",
+    "source": {
+     "author": "Stephens, Robert Neilson",
+     "work": "An Enemy to the King\r From the Recently Discovered Memoirs of the Sieur de la Tournoire",
+     "year": null,
+     "yearSource": "unknown(코퍼스 메타에 발행연도 없음)",
+     "authorDeathYear": 1906,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/9965",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg:gutenberg-9965",
+     "corpusTextSha256": "e6ad28f24f7e18cd7ce7f3214e556ce026c4e71072bdebeab26ff919d39ffce2",
+     "excerptSha256": "858d51d41a33c78f898ff0275a9537f581e9eca943ca15535c7f295c22dab9a3",
+     "sliceSha256": "c8e1a8d3fd298c1e574d9fbba5c165883a398981842c588025abca479ef19511",
+     "location": {
+      "startChar": 208453,
+      "endChar": 209027,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 37
+     },
+     "genre": "short_story",
+     "workForm": "novel(scene used for short_story slot)"
+    }
+   },
+   "wordRetries": 0,
+   "rewrites": 0
+  }
+ ],
+ "rejected": [
+  {
+   "candidateId": "lit40-easy-05-021",
+   "stage": "format",
+   "reasons": [
+    "발췌 지문이 제공된 원문과 다름"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-05-022",
+   "stage": "format",
+   "reasons": [
+    "발췌 지문이 제공된 원문과 다름"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-05-024",
+   "stage": "distractor",
+   "reasons": [
+    "정답이 가장 긴 선택지(12단어, 다음 10)"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-05-025",
+   "stage": "format",
+   "reasons": [
+    "발췌 지문이 제공된 원문과 다름"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-05-026",
+   "stage": "format",
+   "reasons": [
+    "발췌 지문이 제공된 원문과 다름"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-05-027",
+   "stage": "distractor",
+   "reasons": [
+    "정답이 가장 긴 선택지(11단어, 다음 9)"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-05-028",
+   "stage": "format",
+   "reasons": [
+    "발췌 지문이 제공된 원문과 다름"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-05-030",
+   "stage": "format",
+   "reasons": [
+    "발췌 지문이 제공된 원문과 다름"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-05-031",
+   "stage": "distractor",
+   "reasons": [
+    "정답이 가장 긴 선택지(11단어, 다음 9)"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-05-032",
+   "stage": "format",
+   "reasons": [
+    "발췌 지문이 제공된 원문과 다름"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-05-034",
+   "stage": "format",
+   "reasons": [
+    "발췌 지문이 제공된 원문과 다름"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-05-036",
+   "stage": "format",
+   "reasons": [
+    "발췌 지문이 제공된 원문과 다름"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-05-038",
+   "stage": "format",
+   "reasons": [
+    "발췌 지문이 제공된 원문과 다름"
+   ]
+  }
+ ],
+ "retryWords": [],
+ "extraIgnored": []
+}

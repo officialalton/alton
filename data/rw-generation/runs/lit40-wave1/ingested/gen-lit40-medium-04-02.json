@@ -1,0 +1,1028 @@
+{
+ "taskId": "gen-lit40-medium-04-02",
+ "passed": [
+  {
+   "candidateId": "lit40-medium-04-022",
+   "task": "gen-lit40-medium-04-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-04-022",
+    "batchId": "lit40-medium-04",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "medium",
+    "questionType": "tone_shift",
+    "genre": "short_story",
+    "seed": {
+     "index": 21,
+     "genre": "short_story",
+     "pov": "first",
+     "styleEra": "early_20c",
+     "names": [
+      "Takeshi",
+      "Kenji"
+     ],
+     "nameCultures": [
+      "japanese",
+      "japanese"
+     ],
+     "locale": "Kyoto",
+     "setting": "a hillside terrace",
+     "relationship": "two strangers sharing a delay",
+     "conflict": "over a recipe that was never written down",
+     "openingStyle": "장소 이름으로 시작",
+     "topicSeed": "a hillside terrace in Kyoto; two strangers sharing a delay over a recipe that was never written down"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Kyoto's eastern hills were slick with rain when the funicular stalled halfway up, and the attendant herded its two passengers onto a terrace café to wait. Takeshi chose the table farthest from Kenji, nodded once, and opened a newspaper he did not read. Kenji ordered tea and apologized to no one in particular for the weather. For twenty minutes their only exchange concerned the sugar bowl. Then the owner set down a dish of pickled plums, and Kenji, tasting one, murmured that his grandmother had made them saltier, with a shiso leaf folded inside each. Takeshi lowered his paper. His mother, he said, had done the same, and had refused to write the method down because a written recipe, she claimed, would stop listening to the cook. Kenji laughed, pulled his chair closer, and began to guess at proportions. By the time the funicular hummed back to life, they had filled a napkin with crossed-out numbers and were arguing, happily, about how long to dry the leaves.",
+    "question": "Which choice best describes the shift in tone that occurs in the text?",
+    "options": [
+     "From guarded politeness to warm nostalgia",
+     "From cheerful curiosity to quiet disappointment",
+     "From open hostility to cautious mutual respect",
+     "From playful banter to solemn, shared grief"
+    ],
+    "correct_letter": "A",
+    "explanation": "처음에 Takeshi는 가장 먼 자리에 앉아 읽지도 않는 신문을 펼치고, 두 사람의 대화는 설탕 그릇에 관한 것뿐이어서 경계 섞인 예의가 드러난다. 매실 장아찌를 계기로 두 사람이 할머니와 어머니의 기록되지 않은 조리법을 떠올리며 의자를 당기고 즐겁게 논쟁하므로 A가 정답이다. C는 처음 상태를 적대감으로 과장했고, B와 D는 실망이나 슬픔으로 끝난다고 보지만 지문은 따뜻하고 활기찬 분위기로 마무리된다."
+   },
+   "notes": [],
+   "tone": [
+    "reserved",
+    "warm",
+    "nostalgic"
+   ],
+   "devices": [
+    "turning_point",
+    "sensory_detail"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-04-023",
+   "task": "gen-lit40-medium-04-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-04-023",
+    "batchId": "lit40-medium-04",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "medium",
+    "questionType": "tone_shift",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 22,
+     "genre": "novel_excerpt",
+     "pov": "third_limited",
+     "styleEra": "19c",
+     "names": [
+      "Kamal",
+      "Shamsuddin"
+     ],
+     "nameCultures": [
+      "south_asian_muslim_sri_lankan",
+      "south_asian_muslim_sri_lankan"
+     ],
+     "locale": "Colombo",
+     "setting": "a fishing harbor",
+     "relationship": "a mayor and the town's only doctor",
+     "conflict": "over an invitation one of them refuses",
+     "openingStyle": "감각 묘사(소리·냄새·촉감)로 시작",
+     "topicSeed": "a fishing harbor in Colombo; a mayor and the town's only doctor over an invitation one of them refuses"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Diesel, brine, and the sweet rot of yesterday's catch hung over the Colombo harbor as Kamal strode down the jetty, his sash already pinned for the evening. He found Shamsuddin rinsing his hands at the fish market tap and pressed the gilt card on him with a flourish. The new breakwater would be dedicated at sunset, Kamal announced; there would be speeches, a brass band, his own name cut into the stone. The doctor read the card twice and handed it back. He could not come, he said. Three boys from the eastern quay were in his clinic with fever, and their fathers had spent the week hauling rock for that breakwater without pay. Kamal opened his mouth for a ready answer and found none. He looked down at the card, then out at the grey wall where the band was tuning, and for the first time that day he did not seem sure which way to walk.",
+    "question": "Which choice best describes the shift in tone that occurs in the text?",
+    "options": [
+     "It moves from mournful reflection to festive celebration.",
+     "It moves from brisk self-assurance to doubt.",
+     "It moves from bitter accusation to gentle forgiveness.",
+     "It moves from detached observation to playful mockery."
+    ],
+    "correct_letter": "B",
+    "explanation": "앞부분에서 Kamal은 띠를 미리 두르고 성큼성큼 걸으며 초대장을 과시하듯 건네는 자신만만한 모습이다. 의사가 열병에 걸린 아이들과 무임금으로 돌을 나른 아버지들을 언급하며 거절하자, Kamal은 대답을 찾지 못하고 어디로 걸어야 할지 모르는 듯 보이므로 B가 정답이다. C는 의사의 말을 신랄한 비난으로 보지만 그는 담담하게 사정을 설명할 뿐이고, 용서의 장면도 없다. A와 D는 어조 변화의 방향을 반대로 읽거나 지문에 없는 조롱을 가정한다."
+   },
+   "notes": [],
+   "tone": [
+    "confident",
+    "sobering",
+    "uncertain"
+   ],
+   "devices": [
+    "juxtaposition",
+    "sensory_detail",
+    "turning_point"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-04-024",
+   "task": "gen-lit40-medium-04-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-04-024",
+    "batchId": "lit40-medium-04",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "medium",
+    "questionType": "tone_shift",
+    "genre": "poetry",
+    "seed": {
+     "index": 23,
+     "genre": "poetry",
+     "pov": "first",
+     "styleEra": "19c",
+     "names": [
+      "Rashid",
+      "Callum"
+     ],
+     "nameCultures": [
+      "arabic_levantine",
+      "irish_scottish"
+     ],
+     "locale": "Glasgow",
+     "setting": "a quiet library",
+     "relationship": "a mother and a daughter planning a wedding",
+     "conflict": "over a repair that could never really fix it",
+     "openingStyle": "숫자·목록·규칙을 말하며 시작",
+     "topicSeed": "a quiet library in Glasgow; a mother and a daughter planning a wedding over a repair that could never really fix it"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Three hymns, two readings, one cake of four tiers—\nRashid reads the list in the library hush\nas if the reference room were a shop floor\nand every item could be ticked and bought.\nCallum, beside her, is gluing the spine\nof her grandmother's prayer book, torn in the move,\npressing the cloth with a bone folder, firm,\nas though a seam held tight enough\ncould seat one more guest at the table.\nThe clock above the atlases ticks on.\nThen the glue dries crooked, a small ridge\nthat no thumb will ever smooth,\nand Rashid stops reading. She lays the list down.\nShe runs one finger along the scar\nand says, softly, that it will do—\nthat a book can be opened\neven where it once came apart,\nand that the empty chair can stay\nwith a flower on it, and a name.",
+    "question": "Which choice best describes the shift in tone that occurs in the poem?",
+    "options": [
+     "It shifts from quiet grief to defiant, noisy joy.",
+     "It shifts from hushed wonder to mild irritation.",
+     "It shifts from brisk practicality to acceptance.",
+     "It shifts from anxious haste to confident triumph."
+    ],
+    "correct_letter": "C",
+    "explanation": "시의 앞부분은 찬송가·낭독·케이크 개수를 나열하고 도서관을 상점처럼 대하는 등 일을 처리하듯 바쁘고 실용적인 어조를 보인다. 접착제가 비뚤게 말라 지울 수 없는 흔적이 남자 Rashid는 목록 읽기를 멈추고, 갈라졌던 책도 펼칠 수 있으며 빈 의자를 꽃과 이름으로 남겨 두자고 부드럽게 말하므로 C가 정답이다. D는 앞부분의 서두름을 근거로 하지만 끝이 승리감이 아니라 상실의 수용이라 맞지 않는다. A와 B는 지문에 없는 소란스러운 기쁨이나 짜증을 가정한다."
+   },
+   "notes": [],
+   "tone": [
+    "brisk",
+    "tender",
+    "accepting"
+   ],
+   "devices": [
+    "list",
+    "metaphor",
+    "volta"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-04-025",
+   "task": "gen-lit40-medium-04-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-04-025",
+    "batchId": "lit40-medium-04",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "medium",
+    "questionType": "tone_shift",
+    "genre": "drama",
+    "seed": {
+     "index": 24,
+     "genre": "drama",
+     "pov": "mixed_or_none",
+     "styleEra": "early_20c",
+     "names": [
+      "Lan",
+      "Albert"
+     ],
+     "nameCultures": [
+      "southeast_asian",
+      "english"
+     ],
+     "locale": "Surabaya",
+     "setting": "a hospital waiting room",
+     "relationship": "a retired sailor and his neighbor",
+     "conflict": "after a teacher's remark that changed everything",
+     "openingStyle": "대화 한 줄로 시작",
+     "topicSeed": "a hospital waiting room in Surabaya; a retired sailor and his neighbor after a teacher's remark that changed everything"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "\"Sit, Albert, or you'll wear a trench in their good linoleum.\"\nA hospital waiting room in Surabaya, past midnight. LAN, a retired sailor, sprawls across two plastic chairs. ALBERT, his neighbor, paces beneath a buzzing fan.\nALBERT: Four hours. They said two.\nLAN: Surgeons lie about time the way captains lie about weather. Have a peanut.\nALBERT: How can you joke? She could—\nLAN: (Sitting up; the grin goes.) When I was eleven, my teacher held up my chart of the harbor and told the class I would never find my way out of a bathtub. I believed him for a week. Then I decided to prove him wrong, and I did not stop proving it for forty years. Your wife is stubborn in exactly that way. I have watched her bargain at the market. She will come out of there, Albert. Sit down beside me and wait for her properly.",
+    "question": "Which choice best describes the shift in tone that occurs in the text?",
+    "options": [
+     "It shifts from earnest comfort to biting sarcasm.",
+     "It shifts from quiet dread to sudden open relief.",
+     "It shifts from fond nostalgia to lasting bitterness.",
+     "It shifts from joking deflection to sincerity."
+    ],
+    "correct_letter": "D",
+    "explanation": "처음에 Lan은 리놀륨 바닥과 선장의 날씨 거짓말을 들먹이며 땅콩을 권하는 등 농담으로 긴장을 비켜 간다. 무대 지시에서 미소가 사라진 뒤 그는 선생님의 말을 이겨 낸 자신의 경험을 진지하게 털어놓고, 아내가 무사히 나올 것이라며 Albert를 위로하므로 D가 정답이다. B는 Albert의 불안을 근거로 하지만 수술 결과가 나오지 않아 안도로 바뀌는 장면이 없다. A와 C는 Lan의 말을 냉소나 원한으로 잘못 읽은 것이다."
+   },
+   "notes": [],
+   "tone": [
+    "teasing",
+    "earnest",
+    "reassuring"
+   ],
+   "devices": [
+    "stage_direction",
+    "anecdote",
+    "simile"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-04-026",
+   "task": "gen-lit40-medium-04-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-04-026",
+    "batchId": "lit40-medium-04",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "medium",
+    "questionType": "tone_shift",
+    "genre": "personal_essay",
+    "seed": {
+     "index": 25,
+     "genre": "personal_essay",
+     "pov": "mixed_or_none",
+     "styleEra": "late_20c",
+     "names": [
+      "Weiqi",
+      "Faris"
+     ],
+     "nameCultures": [
+      "chinese",
+      "arabic_levantine"
+     ],
+     "locale": "Beirut",
+     "setting": "a kite-maker's yard",
+     "relationship": "a landlord and a long-term tenant",
+     "conflict": "over whether to sell a shared inheritance",
+     "openingStyle": "짧은 단언문으로 시작",
+     "topicSeed": "a kite-maker's yard in Beirut; a landlord and a long-term tenant over whether to sell a shared inheritance"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Kites do not haggle. My landlord, Faris, does, and for eleven years I have rented the room above his yard in Beirut and watched him do it with every buyer who climbs the stairs. Bamboo, paper, glue: he prices each one as if it were gold leaf, then throws in a tail for free and calls it charity. So when a developer offered to buy the yard, the house, and my room, I assumed I would be treated to the performance of a lifetime. Instead Faris, who shares the deed with his brother abroad, sat on an overturned crate and said nothing for a long while. Then he showed me the diamond kite his father had built the year they arrived, its frame mended so often that hardly any of the first wood remains. I had thought of the yard as a stage for his bargaining. That evening it looked more like a ledger of everything his family had refused to let go.",
+    "question": "Which choice best describes the shift in tone that occurs in the text?",
+    "options": [
+     "It shifts from wry amusement to tenderness.",
+     "It shifts from open anger to calm indifference.",
+     "It shifts from solemn grief to cheerful resolve.",
+     "It shifts from firm certainty to bewildered panic."
+    ],
+    "correct_letter": "A",
+    "explanation": "앞부분에서 화자는 대나무와 종이를 금박처럼 값 매기다 꼬리를 공짜로 얹어 주는 Faris의 흥정을 재치 있게 묘사하며 일생일대의 공연을 기대한다. 그러나 매각 제안을 받은 Faris가 말없이 앉아 수없이 고친 아버지의 연을 보여 주자, 화자는 마당을 가족이 지켜 온 것의 장부로 보게 되므로 A가 정답이다. D는 화자의 예상이 빗나간 점에 주목하지만 당황이나 공포는 드러나지 않는다. B와 C는 지문에 없는 분노나 명랑한 결심을 가정한다."
+   },
+   "notes": [],
+   "tone": [
+    "wry",
+    "tender"
+   ],
+   "devices": [
+    "metaphor",
+    "irony",
+    "turning_point"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-04-029",
+   "task": "gen-lit40-medium-04-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-04-029",
+    "batchId": "lit40-medium-04",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "medium",
+    "questionType": "text_structure",
+    "genre": "short_story",
+    "seed": {
+     "index": 28,
+     "genre": "short_story",
+     "pov": "third_limited",
+     "styleEra": "late_20c",
+     "names": [
+      "Ishaan",
+      "Arjun"
+     ],
+     "nameCultures": [
+      "indian_subcontinent",
+      "indian_subcontinent"
+     ],
+     "locale": "Dhaka",
+     "setting": "a ship's galley",
+     "relationship": "a grandmother and her grandson",
+     "conflict": "over silence kept to protect someone",
+     "openingStyle": "의문문으로 시작",
+     "topicSeed": "a ship's galley in Dhaka; a grandmother and her grandson over silence kept to protect someone"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Why did his grandmother always cook two portions of fish curry when the ferry crew numbered only eleven? Arjun had wondered this since his first season in the galley of the river ferry out of Dhaka. Each evening she ladled twelve bowls, covered the last with a tin plate, and set it on the shelf by the porthole. By morning it was empty and scrubbed. Arjun assumed a rat, or a greedy deckhand, and said nothing. Then one night he stayed awake behind the rice sacks and saw his uncle Ishaan, whom the family spoke of as lost in debt and shame, climb through the cargo hatch and eat in silence. His grandmother sat beside him, mending a net, and did not look up. In the morning Arjun asked her nothing. He only covered the twelfth bowl himself, and set it by the porthole.",
+    "question": "Which choice best describes the overall structure of the text?",
+    "options": [
+     "A conflict between two crew members is introduced and then settled by the grandmother.",
+     "A family memory is recounted and then contrasted with a failure in the present day.",
+     "A plan the grandson devises is described step by step and then shown to fail.",
+     "A puzzling routine is presented, and a discovery then explains and continues it."
+    ],
+    "correct_letter": "D",
+    "explanation": "지문은 왜 할머니가 늘 한 그릇을 더 담는지 묻는 질문으로 시작해, 열두 번째 그릇을 덮어 두는 반복된 일상을 묘사한다. 이어 Arjun이 밤에 몰래 지켜보다 숨어 지내는 삼촌 Ishaan을 발견하면서 일상의 이유가 밝혀지고, 마지막에는 Arjun이 직접 그릇을 덮어 그 침묵을 이어 가므로 D가 정답이다. C는 Arjun이 숨어서 지켜본 행동을 계획으로 보지만 그 계획은 실패하지 않고 오히려 진실을 드러낸다. A와 B는 선원 간 갈등이나 현재의 실패처럼 지문에 없는 요소를 가정한다."
+   },
+   "notes": [],
+   "tone": [
+    "mysterious",
+    "quiet",
+    "tender"
+   ],
+   "devices": [
+    "rhetorical_question",
+    "repetition",
+    "revelation"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-04-030",
+   "task": "gen-lit40-medium-04-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-04-030",
+    "batchId": "lit40-medium-04",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "medium",
+    "questionType": "text_structure",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 29,
+     "genre": "novel_excerpt",
+     "pov": "first",
+     "styleEra": "19c",
+     "names": [
+      "Siti",
+      "Nguyen"
+     ],
+     "nameCultures": [
+      "southeast_asian",
+      "southeast_asian"
+     ],
+     "locale": "Hanoi",
+     "setting": "a seed-saving cooperative",
+     "relationship": "a teenage cook and her stern aunt",
+     "conflict": "when a long silence is finally broken",
+     "openingStyle": "인물의 이름으로 시작",
+     "topicSeed": "a seed-saving cooperative in Hanoi; a teenage cook and her stern aunt when a long silence is finally broken"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Siti had worked at the seed-saving cooperative in Hanoi for two years before her aunt spoke to her about anything except labels. Nguyen ran the drying room like a clinic. Seeds were weighed, sealed, and dated; packets were stacked by month; mistakes were corrected with a finger tapping the shelf, never a word. Siti learned the work by watching that finger. She cooked lunch for the volunteers and ate hers alone on the steps. Then, one wet afternoon, she found an unlabeled jar of small black beans behind the rice drawers and began, as she had been taught, to write unknown. Nguyen took the pen from her. These were your mother's, she said. She grew them on the roof the year you were born, and I have not been able to say her name in this room since. She wrote it on the label herself, slowly, and handed the pen back.",
+    "question": "Which choice best describes the overall structure of the text?",
+    "options": [
+     "It describes a long, wordless routine and then presents the moment it is broken.",
+     "It recounts a sharp argument and then explains the misunderstanding behind it.",
+     "It contrasts two workplaces and then explains why one character prefers the first.",
+     "It introduces a mystery about a jar and then leaves the jar's origin unresolved."
+    ],
+    "correct_letter": "A",
+    "explanation": "지문 앞부분은 라벨 외에는 말이 없는 숙모, 손가락으로만 실수를 고치는 방식, 혼자 점심을 먹는 Siti 등 오랜 침묵 속 일상을 자세히 묘사한다. 이후 라벨 없는 콩 항아리를 계기로 Nguyen이 Siti의 어머니 이야기를 꺼내며 침묵이 깨지므로 A가 정답이다. D는 항아리가 등장한다는 점에서 그럴듯하지만 콩의 출처는 어머니의 것으로 밝혀진다. B와 C는 지문에 없는 말다툼이나 두 일터의 대비를 가정한다."
+   },
+   "notes": [],
+   "tone": [
+    "restrained",
+    "poignant"
+   ],
+   "devices": [
+    "simile",
+    "turning_point",
+    "characterization"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-04-033",
+   "task": "gen-lit40-medium-04-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-04-033",
+    "batchId": "lit40-medium-04",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "medium",
+    "questionType": "underlined_portion_function",
+    "genre": "short_story",
+    "seed": {
+     "index": 32,
+     "genre": "short_story",
+     "pov": "first",
+     "styleEra": "contemporary",
+     "names": [
+      "Malek",
+      "Lindiwe"
+     ],
+     "nameCultures": [
+      "arabic_levantine",
+      "east_south_african"
+     ],
+     "locale": "Marrakesh",
+     "setting": "a salt flat",
+     "relationship": "a foreman and a young hire",
+     "conflict": "over a tool or instrument inherited by the wrong person",
+     "openingStyle": "짧은 단언문으로 시작",
+     "topicSeed": "a salt flat in Marrakesh; a foreman and a young hire over a tool or instrument inherited by the wrong person"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Salt keeps nothing secret. On the flats outside Marrakesh it shows every footprint, every drag of a rake, and so the whole crew saw Malek stop when Lindiwe arrived with the old rake-master's wooden rake on her shoulder. She was nineteen, three weeks on the job, and the old man's granddaughter; the rake had come to her in his will. Malek assigned her the farthest pan and said nothing about it. __When he took off his gloves at noon, the ridges across his palms matched, groove for groove, the worn places on that handle, where for twenty years he had pulled it beside the old man.__ Lindiwe noticed. She worked the far pan until dusk, then walked back across the white crust and leaned the rake against Malek's shed. It pulls left, she told him. You will know how to correct it. He did not thank her, but the next morning he moved her pan closer to his own.",
+    "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+    "options": [
+     "It suggests that Malek is too exhausted to work alongside the rest of the crew.",
+     "It shows that Lindiwe has already mastered the rake despite her short time there.",
+     "It indicates that the rake was badly damaged before Lindiwe inherited it.",
+     "It reveals the personal history behind Malek's reaction to the inheritance."
+    ],
+    "correct_letter": "D",
+    "explanation": "밑줄 문장 앞에서 Malek은 Lindiwe가 물려받은 갈퀴를 보고 멈춰 서고 그녀를 가장 먼 염전에 배치하지만, 그 이유는 설명되지 않는다. 밑줄 문장은 그의 손바닥 굳은살이 20년 동안 스승 곁에서 그 갈퀴를 잡아 생긴 자국과 들어맞는다고 보여 주어 그의 반응 뒤에 있는 개인사를 드러내므로 D가 정답이다. 이 정보를 알아챈 Lindiwe가 갈퀴를 돌려주는 이후 행동도 이 해석을 뒷받침한다. C는 손잡이의 닳은 자국을 손상으로 오해했고, A와 B는 피로나 Lindiwe의 숙련도처럼 밑줄 문장이 다루지 않는 내용이다."
+   },
+   "notes": [],
+   "tone": [
+    "restrained",
+    "quiet",
+    "generous"
+   ],
+   "devices": [
+    "symbolism",
+    "physical_detail",
+    "understatement"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-04-034",
+   "task": "gen-lit40-medium-04-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-04-034",
+    "batchId": "lit40-medium-04",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "medium",
+    "questionType": "underlined_portion_function",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 33,
+     "genre": "novel_excerpt",
+     "pov": "first",
+     "styleEra": "late_20c",
+     "names": [
+      "Seoyeon",
+      "Hassan"
+     ],
+     "nameCultures": [
+      "korean",
+      "south_asian_muslim_sri_lankan"
+     ],
+     "locale": "Lagos",
+     "setting": "a dried-riverbed crossing",
+     "relationship": "a widow and the delivery boy",
+     "conflict": "about what to tell a younger sibling",
+     "openingStyle": "의문문으로 시작",
+     "topicSeed": "a dried-riverbed crossing in Lagos; a widow and the delivery boy about what to tell a younger sibling"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "What do you tell a seven-year-old when the money stops? Hassan asked it of no one as he pushed his delivery bicycle across the dried riverbed on the edge of Lagos, the crates of bread rattling behind him. Since his father's shop had closed, he had been telling his little sister that their father was traveling for business. Seoyeon, the widow who bought six loaves every Friday, was waiting at the far bank. She had overheard his sister boasting about the trip. __Children forgive the hard truth sooner than they forgive the kind lie, she said, because the lie tells them they were not trusted.__ Hassan wanted to argue, but she had already turned toward her gate. That evening he sat his sister on the step, gave her the heel of the last loaf, and told her, carefully, that their father was home every day now and was looking for work, and that the family would need her help.",
+    "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+    "options": [
+     "It offers advice that Hassan resists at first but later follows.",
+     "It explains why Seoyeon has decided to stop buying bread from Hassan.",
+     "It reveals that Seoyeon once misled her own children about money.",
+     "It shows that Hassan's sister already knows the truth about the shop."
+    ],
+    "correct_letter": "A",
+    "explanation": "앞부분에서 Hassan은 어린 여동생에게 아버지가 출장 중이라고 거짓말해 왔고, 무엇을 말해야 할지 고민한다. 밑줄 문장에서 Seoyeon은 친절한 거짓말보다 힘든 진실이 낫다고 조언하고, Hassan은 반박하고 싶어 하지만 그날 저녁 여동생에게 사실을 털어놓으므로 A가 정답이다. C는 Seoyeon이 과부라는 점에서 그럴듯한 추측이지만 그녀 자신의 과거에 대한 근거는 없다. B와 D는 빵 구매 중단이나 여동생이 이미 진실을 안다는 등 지문과 맞지 않는 내용이다."
+   },
+   "notes": [],
+   "tone": [
+    "thoughtful",
+    "gentle"
+   ],
+   "devices": [
+    "aphorism",
+    "dialogue",
+    "rhetorical_question"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-04-035",
+   "task": "gen-lit40-medium-04-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-04-035",
+    "batchId": "lit40-medium-04",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "medium",
+    "questionType": "underlined_portion_function",
+    "genre": "personal_essay",
+    "seed": {
+     "index": 34,
+     "genre": "personal_essay",
+     "pov": "third_limited",
+     "styleEra": "early_20c",
+     "names": [
+      "Chiyo",
+      "Aiko"
+     ],
+     "nameCultures": [
+      "japanese",
+      "japanese"
+     ],
+     "locale": "Hokkaido",
+     "setting": "a night bus",
+     "relationship": "a farmer and a surveyor from the city",
+     "conflict": "over a promise made to a child",
+     "openingStyle": "대화 한 줄로 시작",
+     "topicSeed": "a night bus in Hokkaido; a farmer and a surveyor from the city over a promise made to a child"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "\"You are the one with the map, then,\" the farmer said as I took the seat beside her on the night bus out of Sapporo. Her name was Chiyo, and she had recognized the city survey office's logo on my tube of drawings. I am Aiko; I mark where roads will go. For an hour she told me, without bitterness, about the cherry tree at the corner of her field, and about the promise she had made to her granddaughter that it would bloom there until the girl was grown. I knew the corner. My line ran through it. __Somewhere past Asahikawa, I unrolled the drawing on my knees and folded it so that the small red cross over her field disappeared into the crease.__ I told myself it was only to keep the paper from sliding. In the morning I filed my report as written. But I asked my supervisor, for the first time in six years, whether the line could bend.",
+    "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+    "options": [
+     "It shows the narrator deciding to destroy the survey drawing in secret.",
+     "It signals the narrator's first private unease about her assignment.",
+     "It indicates that the narrator was careless with her official documents.",
+     "It reveals that Chiyo had asked the narrator directly to alter the map."
+    ],
+    "correct_letter": "B",
+    "explanation": "밑줄 문장 앞에서 화자는 자신의 측량선이 Chiyo가 손녀에게 지키겠다고 약속한 벚나무를 지난다는 사실을 안다. 밑줄 문장에서 화자는 들판 위 빨간 표시가 접힌 선 속으로 사라지게 도면을 접는데, 이는 자기 임무에 대한 첫 번째 남모를 불편함을 보여 주므로 B가 정답이다. 이후 6년 만에 처음으로 선을 휠 수 있는지 묻는 행동이 이를 뒷받침한다. A는 도면을 접는 행동을 파기로 과장했고, C와 D는 부주의나 Chiyo의 직접 요청처럼 지문에 없는 내용이다."
+   },
+   "notes": [],
+   "tone": [
+    "quiet",
+    "conflicted",
+    "humane"
+   ],
+   "devices": [
+    "symbolic_gesture",
+    "foreshadowing",
+    "dialogue"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-04-036",
+   "task": "gen-lit40-medium-04-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-04-036",
+    "batchId": "lit40-medium-04",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "medium",
+    "questionType": "underlined_portion_function",
+    "genre": "memoir",
+    "seed": {
+     "index": 35,
+     "genre": "memoir",
+     "pov": "mixed_or_none",
+     "styleEra": "contemporary",
+     "names": [
+      "Darnell",
+      "Marcus"
+     ],
+     "nameCultures": [
+      "african_american",
+      "african_american"
+     ],
+     "locale": "the Mississippi Delta",
+     "setting": "a weaving cooperative",
+     "relationship": "twin brothers dividing a house",
+     "conflict": "while one of them is pretending not to be proud",
+     "openingStyle": "대명사 I 또는 We 로 시작",
+     "topicSeed": "a weaving cooperative in the Mississippi Delta; twin brothers dividing a house while one of them is pretending not to be proud"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "We split the house our mother left us the way she had taught us to split a bolt of cloth at the weaving cooperative: measure twice, cut once, argue never. Marcus took the kitchen and the back porch. I took the front rooms and the loom. When the cooperative's director called to say that Marcus's quilt had been chosen for the state museum, he shrugged into the phone and said it was just scraps. He told me the same thing that night, twice, while we taped boxes. He said the museum probably needed something to fill a wall. __Yet when he packed the quilt to send it, he folded it so that the little muslin tag stitched with his name lay on top, square in the center, where anyone opening the box would see it first.__ I did not mention it. I only wrote fragile on the box in my best letters, and let him think I had not noticed.",
+    "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+    "options": [
+     "It suggests that Marcus plans to keep the quilt rather than send it.",
+     "It explains why the brothers chose to divide the house the way they did.",
+     "It provides a detail that quietly undercuts Marcus's claim of indifference.",
+     "It reveals that the narrator resents the attention his brother is receiving."
+    ],
+    "correct_letter": "C",
+    "explanation": "밑줄 문장 앞에서 Marcus는 박물관 선정 소식에 어깨를 으쓱하며 퀼트가 그저 자투리라고 여러 번 말한다. 그러나 밑줄 문장에서 그는 자기 이름이 수놓인 태그가 상자를 연 사람에게 가장 먼저 보이도록 퀼트를 접으므로, 무관심하다는 그의 주장을 은근히 뒤집는 세부 묘사라는 C가 정답이다. 화자가 이를 알아채고도 모르는 척하는 마지막 장면도 이 해석을 뒷받침한다. D는 형제 사이 관계에 주목하지만 화자는 원망이 아니라 너그러움을 보이며, A와 B는 지문과 맞지 않는다."
+   },
+   "notes": [],
+   "tone": [
+    "affectionate",
+    "wry"
+   ],
+   "devices": [
+    "irony",
+    "telling_detail",
+    "simile"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-04-037",
+   "task": "gen-lit40-medium-04-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-04-037",
+    "batchId": "lit40-medium-04",
+    "route": "ai_passage",
+    "skill": "central_ideas_details",
+    "difficulty": "medium",
+    "questionType": "narrator_attitude",
+    "genre": "short_story",
+    "seed": {
+     "index": 36,
+     "genre": "short_story",
+     "pov": "first",
+     "styleEra": "early_20c",
+     "names": [
+      "Thorvald",
+      "Freja"
+     ],
+     "nameCultures": [
+      "dutch_nordic",
+      "dutch_nordic"
+     ],
+     "locale": "Rotterdam",
+     "setting": "a summer camp dining hall",
+     "relationship": "a seamstress and her only apprentice",
+     "conflict": "while one of them quietly changes their mind",
+     "openingStyle": "구체적인 사물이나 동작으로 시작(관사 The 로 시작하지 말 것)",
+     "topicSeed": "a summer camp dining hall in Rotterdam; a seamstress and her only apprentice while one of them quietly changes their mind"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Pins bristled from Freja's sleeve like the quills of a small, offended animal as she marched the length of the summer camp dining hall in Rotterdam, inspecting the costumes laid out on the long tables. She had sewn for the camp's play for thirty summers and had never once let an apprentice cut the cloth. Thorvald, her only apprentice, sixteen and earnest, had asked every morning for a week. Every morning she had told him his hands were too hasty, and every afternoon she had left the good shears, quite by accident, a little closer to his end of the table. On the eighth day she announced, to the rafters rather than to him, that her wrists ached and that someone might as well ruin the velvet as let it sit. Then she sat down with her tea and pretended, with tremendous concentration, not to watch his first cut.",
+    "question": "Which choice best describes the narrator's attitude toward Freja?",
+    "options": [
+     "Open scorn for her refusal to share her craft",
+     "Affectionate amusement at her stubborn pride",
+     "Detached neutrality toward her daily routine",
+     "Anxious pity for her failing health and wrists"
+    ],
+    "correct_letter": "B",
+    "explanation": "서술자는 Freja의 소매에 꽂힌 핀을 기분 상한 작은 동물의 가시에 비유하고, 그녀가 '우연히' 가위를 Thorvald 쪽으로 옮겨 두는 모습을 짓궂게 묘사한다. 또 손목이 아프다며 서까래에 대고 선언하거나 엄청난 집중력으로 보지 않는 척하는 장면에서 고집스러운 자존심을 다정하게 웃으며 바라보는 태도가 드러나므로 B가 정답이다. D는 손목 통증 언급에 주목하지만 이는 체면을 지키려는 핑계로 그려진다. A와 C는 서술의 따뜻한 유머를 놓친 선택지다."
+   },
+   "notes": [],
+   "tone": [
+    "humorous",
+    "affectionate"
+   ],
+   "devices": [
+    "simile",
+    "irony",
+    "hyperbole"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-04-038",
+   "task": "gen-lit40-medium-04-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-04-038",
+    "batchId": "lit40-medium-04",
+    "route": "ai_passage",
+    "skill": "central_ideas_details",
+    "difficulty": "medium",
+    "questionType": "narrator_attitude",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 37,
+     "genre": "novel_excerpt",
+     "pov": "second",
+     "styleEra": "contemporary",
+     "names": [
+      "Seun",
+      "Ama"
+     ],
+     "nameCultures": [
+      "west_african",
+      "west_african"
+     ],
+     "locale": "Accra",
+     "setting": "a language school classroom",
+     "relationship": "a brother and sister reading their mother's letters",
+     "conflict": "over unequal sacrifices made in the past",
+     "openingStyle": "숫자·목록·규칙을 말하며 시작",
+     "topicSeed": "a language school classroom in Accra; a brother and sister reading their mother's letters over unequal sacrifices made in the past"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Forty-one letters, two rubber bands, one shoebox: that was what Ama carried into the empty classroom at the language school in Accra where she now taught French in the evenings. Our mother had written them to me, Seun, during my six years at university abroad, and Ama had kept them after the funeral. We read them at a student's desk under the buzzing tube light. In every letter our mother praised my examinations. In almost every letter, near the end, she mentioned in passing that Ama had taken another shift at the market, or had postponed her own course for another year. I had read those lines at the time and skimmed past them. Now Ama read them aloud in an even voice, smoothing each page flat, and when she reached the one about the year she gave up her scholarship, she only said that the handwriting was very neat that month. I could not look at her, and I could not look away.",
+    "question": "Which choice best describes the narrator's attitude toward Ama?",
+    "options": [
+     "Resentful envy of the praise Ama now receives",
+     "Amused tolerance of Ama's careful habits",
+     "Remorseful admiration for Ama's sacrifice",
+     "Cautious suspicion of Ama's reasons for sharing"
+    ],
+    "correct_letter": "C",
+    "explanation": "화자는 어머니의 편지 끝에 적힌 Ama의 희생에 관한 문장을 예전에는 건너뛰었다고 고백해 뒤늦은 자책을 드러낸다. 동시에 장학금을 포기한 해의 편지를 읽으면서도 글씨가 단정하다고만 말하는 Ama의 담담함을 바라보며, 그녀를 볼 수도 외면할 수도 없다고 말하므로 C가 정답이다. D는 Ama가 상자를 가져온 의도를 의심할 수 있다는 점에서 그럴듯하지만 지문에 의심의 근거는 없다. A와 B는 질투나 가벼운 관용처럼 화자의 무거운 감정과 맞지 않는다."
+   },
+   "notes": [],
+   "tone": [
+    "remorseful",
+    "somber",
+    "admiring"
+   ],
+   "devices": [
+    "list",
+    "understatement",
+    "contrast"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-04-039",
+   "task": "gen-lit40-medium-04-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-04-039",
+    "batchId": "lit40-medium-04",
+    "route": "ai_passage",
+    "skill": "central_ideas_details",
+    "difficulty": "medium",
+    "questionType": "narrator_attitude",
+    "genre": "poetry",
+    "seed": {
+     "index": 38,
+     "genre": "poetry",
+     "pov": "first",
+     "styleEra": "contemporary",
+     "names": [
+      "Santiago",
+      "Renata"
+     ],
+     "nameCultures": [
+      "latin_american",
+      "latin_american"
+     ],
+     "locale": "Lima",
+     "setting": "a school gymnasium",
+     "relationship": "a mother-in-law and a new bride",
+     "conflict": "when an expected rival turns out to be an ally",
+     "openingStyle": "구체적인 사물이나 동작으로 시작(관사 The 로 시작하지 말 것)",
+     "topicSeed": "a school gymnasium in Lima; a mother-in-law and a new bride when an expected rival turns out to be an ally"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Folding chairs in rows on the gymnasium floor,\nthe Lima heat pressing through the high windows,\nand I in my borrowed white, braced\nfor Renata, Santiago's mother,\nwho had said, the week before, that I was too young\nto know what I was promising.\nI had rehearsed my answers to her like a debate.\nBut when the sound system shrieked and died\nand the aunts began to murmur,\nit was Renata who climbed onto a bench,\nher good shoes in one hand,\nand sang the first hymn without a microphone\nuntil the whole room followed.\nLater she pinned my slipping veil\nwith a clip from her own hair\nand told me, gruffly, that she had been too young once, too.\nI keep that clip in a dish by the door.\nI still do not know all her reasons.\nI know whose voice filled the room\nwhen mine would not come.",
+    "question": "Which choice best describes the speaker's attitude toward Renata?",
+    "options": [
+     "Lingering suspicion of Renata's true motives",
+     "Playful mockery of Renata's gruff manner",
+     "Polite indifference toward Renata's gestures",
+     "Newfound gratitude that replaces wariness"
+    ],
+    "correct_letter": "D",
+    "explanation": "시의 앞부분에서 화자는 자신이 너무 어리다고 말했던 시어머니 Renata에게 대비하며 토론처럼 답변을 연습했다고 말해 경계심을 드러낸다. 그러나 음향 장비가 고장 나자 Renata가 의자에 올라 찬송을 이끌고 자기 머리핀으로 면사포를 고정해 주며, 화자는 그 핀을 지금도 간직하고 목소리가 나오지 않을 때 누구의 목소리가 방을 채웠는지 안다고 말하므로 D가 정답이다. A는 '모든 이유를 알지는 못한다'는 구절을 근거로 하지만, 이는 의심보다 감사의 맥락에서 나온다. B와 C는 화자의 깊은 고마움을 놓친다."
+   },
+   "notes": [],
+   "tone": [
+    "wary",
+    "grateful",
+    "warm"
+   ],
+   "devices": [
+    "free_verse",
+    "simile",
+    "symbolic_object"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-04-040",
+   "task": "gen-lit40-medium-04-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-04-040",
+    "batchId": "lit40-medium-04",
+    "route": "ai_passage",
+    "skill": "central_ideas_details",
+    "difficulty": "medium",
+    "questionType": "narrator_attitude",
+    "genre": "personal_essay",
+    "seed": {
+     "index": 39,
+     "genre": "personal_essay",
+     "pov": "first",
+     "styleEra": "late_20c",
+     "names": [
+      "Sergio",
+      "Chiara"
+     ],
+     "nameCultures": [
+      "spanish_iberian",
+      "italian"
+     ],
+     "locale": "Galicia",
+     "setting": "an apartment stairwell",
+     "relationship": "a returning soldier and his younger sister",
+     "conflict": "over how to mark an anniversary",
+     "openingStyle": "감각 묘사(소리·냄새·촉감)로 시작",
+     "topicSeed": "an apartment stairwell in Galicia; a returning soldier and his younger sister over how to mark an anniversary"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Bleach, damp plaster, and the neighbor's frying onions filled the stairwell of our building in Galicia the evening my brother came home. Sergio climbed the four flights slowly, as if counting them, and stopped on each landing to touch the rail. I, Chiara, had planned the anniversary for weeks: a dinner for our father's old friends, candles, his favorite songs on the record player. Sergio listened to the plan on the third-floor landing and said he could not sit in a room full of people tonight. I wanted to argue. Instead I noticed how he kept his back to the wall, and how his hand flinched when a door banged above us. So I cancelled the dinner by text, one guest at a time, while he waited beside me. We marked the day on the stairs instead, sharing a single candle and our father's harmonica, which neither of us could play, until the timer light clicked off and we did not bother to turn it on again.",
+    "question": "Which choice best describes the narrator's attitude toward Sergio?",
+    "options": [
+     "Protective tenderness toward his fragile state",
+     "Resentful impatience with his refusal of her plan",
+     "Bemused detachment from his unusual behavior",
+     "Fearful awe of his experiences as a soldier"
+    ],
+    "correct_letter": "A",
+    "explanation": "화자는 Sergio가 계단을 세듯 천천히 오르고 벽에 등을 붙이며 문 소리에 움찔하는 모습을 세심하게 관찰한다. 몇 주 준비한 저녁 모임을 반대하고 싶었지만 그의 상태를 보고 손님에게 하나씩 취소 문자를 보내며 계단에서 함께 기일을 보내므로, 연약한 오빠를 보호하려는 다정함이라는 A가 정답이다. B는 화자가 처음에 따지고 싶었다는 부분을 근거로 하지만 그녀는 곧 그 마음을 접는다. C와 D는 화자의 관찰이 지닌 따뜻한 관심을 무관심이나 두려움으로 잘못 읽었다."
+   },
+   "notes": [],
+   "tone": [
+    "tender",
+    "protective",
+    "quiet"
+   ],
+   "devices": [
+    "sensory_detail",
+    "symbolic_object",
+    "understatement"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  }
+ ],
+ "rejected": [
+  {
+   "candidateId": "lit40-medium-04-021",
+   "stage": "distractor",
+   "reasons": [
+    "선택지 단어 수 범위 밖(2~40)"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-04-027",
+   "stage": "similarity",
+   "reasons": [
+    "문두 집중(3건 이미 같은 문두)"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-04-028",
+   "stage": "passage_schema",
+   "reasons": [
+    "text:마크업·모델 잔재·플레이스홀더"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-04-031",
+   "stage": "distractor",
+   "reasons": [
+    "정답만 구체적(쉼표·절 구분이 정답에만 있음)"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-04-032",
+   "stage": "distractor",
+   "reasons": [
+    "정답만 구체적(쉼표·절 구분이 정답에만 있음)"
+   ]
+  }
+ ],
+ "retryWords": [],
+ "extraIgnored": []
+}

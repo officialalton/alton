@@ -20,11 +20,16 @@ vi.mock("@/utils/supabase/client", () => ({
   }),
 }));
 
+const confirmOwnEmailMock = vi.fn().mockResolvedValue(undefined);
+vi.mock("./actions", () => ({
+  confirmOwnEmailAfterPasswordSet: () => confirmOwnEmailMock(),
+}));
+
 function fillAndSubmit(password = "password123") {
-  fireEvent.change(screen.getByLabelText("새 비밀번호"), { target: { value: password } });
-  fireEvent.change(screen.getByLabelText("새 비밀번호 확인"), { target: { value: password } });
-  fireEvent.click(screen.getByLabelText(/이용약관/));
-  fireEvent.click(screen.getByText("비밀번호 설정하고 계속하기"));
+  fireEvent.change(screen.getByLabelText("New password"), { target: { value: password } });
+  fireEvent.change(screen.getByLabelText("Confirm new password"), { target: { value: password } });
+  fireEvent.click(screen.getByLabelText(/Terms of Service/));
+  fireEvent.click(screen.getByText("Set password and continue"));
 }
 
 describe("SetPasswordPage", () => {
@@ -44,7 +49,7 @@ describe("SetPasswordPage", () => {
     });
     render(<SetPasswordPage />);
     await waitFor(() => {
-      expect(screen.getByLabelText(/추천인 코드/)).toBeInTheDocument();
+      expect(screen.getByLabelText(/Referral code/)).toBeInTheDocument();
     });
   });
 
@@ -55,7 +60,7 @@ describe("SetPasswordPage", () => {
     });
     render(<SetPasswordPage />);
     await waitFor(() => {
-      expect(screen.queryByLabelText(/추천인 코드/)).not.toBeInTheDocument();
+      expect(screen.queryByLabelText(/Referral code/)).not.toBeInTheDocument();
     });
   });
 
@@ -101,7 +106,7 @@ describe("SetPasswordPage", () => {
     fillAndSubmit();
 
     await waitFor(() => {
-      expect(screen.getByText(/링크가 만료되었거나 유효하지 않아요/)).toBeInTheDocument();
+      expect(screen.getByText(/This link has expired or is invalid/)).toBeInTheDocument();
     });
     expect(setSessionMock).not.toHaveBeenCalled();
     expect(verifyOtpMock).not.toHaveBeenCalled();
@@ -137,7 +142,7 @@ describe("SetPasswordPage", () => {
     fillAndSubmit();
 
     await waitFor(() => {
-      expect(screen.getByText(/링크가 만료되었거나 이미 사용됐어요/)).toBeInTheDocument();
+      expect(screen.getByText(/This link has expired or was already used/)).toBeInTheDocument();
     });
     expect(updateUserMock).not.toHaveBeenCalled();
   });
@@ -150,6 +155,17 @@ describe("SetPasswordPage", () => {
 
     await waitFor(() => {
       expect(pushMock).toHaveBeenCalledWith("/post-auth");
+    });
+  });
+
+  it("비밀번호 설정에 성공하면 email_confirm을 올리는 액션도 호출한다(학생 이메일 실검증 이벤트, 2026-09-05)", async () => {
+    window.location.hash = "#access_token=tok-a&refresh_token=ref-a&type=invite";
+    render(<SetPasswordPage />);
+
+    fillAndSubmit();
+
+    await waitFor(() => {
+      expect(confirmOwnEmailMock).toHaveBeenCalled();
     });
   });
 });

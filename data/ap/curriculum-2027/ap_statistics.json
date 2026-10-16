@@ -1,0 +1,3400 @@
+{
+ "schemaVersion": 1,
+ "subject": {
+  "apCode": "ap_statistics",
+  "name": "AP Statistics",
+  "family": "statistics",
+  "edition": "ced-2027",
+  "cedVersion": "AP Statistics CED (2027 exam, 5-unit framework, (c)2026)",
+  "examYear": 2027,
+  "sourceUrl": "https://apcentral.collegeboard.org/media/pdf/ap-statistics-course-and-exam-description.pdf",
+  "officialTopicCodes": true,
+  "designNotes": "Topic codes, titles (shortened), unit class periods, MC unit and practice weights are from the 2027 CED (five units, Statistical Practices 1-4). Per-topic skills are the CED's suggested skills. Sub-keywords, kinds, requires and estLessons are original tutoring-sequence proposals. FRQ weighting is by question (4 FRQs at 12.5% each: Q1 Practices 1-2, Q2 Practices 3-4, Q3 inference, Q4 Practices 2-4), not by practice, so no frq skill weights are given. Topic order follows the CED."
+ },
+ "skills": [
+  {
+   "code": "1.A",
+   "category": "Practice 1: Formulate Questions",
+   "label": "Determine a valid investigative question that requires a statistical investigation"
+  },
+  {
+   "code": "2.A",
+   "category": "Practice 2: Collect Data",
+   "label": "Identify information to answer a question or solve a problem"
+  },
+  {
+   "code": "2.B",
+   "category": "Practice 2: Collect Data",
+   "label": "Justify an appropriate method for ethically gathering and representing data"
+  },
+  {
+   "code": "2.C",
+   "category": "Practice 2: Collect Data",
+   "label": "Identify appropriate statistical inference methods"
+  },
+  {
+   "code": "2.D",
+   "category": "Practice 2: Collect Data",
+   "label": "Identify types of errors and relationships among components in statistical inference methods"
+  },
+  {
+   "code": "2.E",
+   "category": "Practice 2: Collect Data",
+   "label": "Identify the null and alternative hypotheses"
+  },
+  {
+   "code": "3.A",
+   "category": "Practice 3: Analyze Data",
+   "label": "Construct tabular and graphical representations of data and distributions"
+  },
+  {
+   "code": "3.B",
+   "category": "Practice 3: Analyze Data",
+   "label": "Calculate summary statistics, relative positions of points within a distribution, and predicted responses"
+  },
+  {
+   "code": "3.C",
+   "category": "Practice 3: Analyze Data",
+   "label": "Calculate and estimate expected counts, percentages, probabilities, and intervals"
+  },
+  {
+   "code": "3.D",
+   "category": "Practice 3: Analyze Data",
+   "label": "Calculate means, standard deviations, and parameters for probability distributions"
+  },
+  {
+   "code": "3.E",
+   "category": "Practice 3: Analyze Data",
+   "label": "Calculate appropriate statistical inference method results"
+  },
+  {
+   "code": "4.A",
+   "category": "Practice 4: Interpret Results",
+   "label": "Describe and compare tabular and graphical representations of data, as well as summary statistics"
+  },
+  {
+   "code": "4.B",
+   "category": "Practice 4: Interpret Results",
+   "label": "Justify a claim based on statistical calculations and results"
+  },
+  {
+   "code": "4.C",
+   "category": "Practice 4: Interpret Results",
+   "label": "Describe distributions and compare relative positions of points within a distribution"
+  },
+  {
+   "code": "4.D",
+   "category": "Practice 4: Interpret Results",
+   "label": "Interpret statistical calculations and results to assess meaning or a claim"
+  },
+  {
+   "code": "4.E",
+   "category": "Practice 4: Interpret Results",
+   "label": "Justify the use of a chosen statistical inference method by verifying conditions"
+  },
+  {
+   "code": "4.F",
+   "category": "Practice 4: Interpret Results",
+   "label": "Interpret results of statistical inference methods"
+  },
+  {
+   "code": "4.G",
+   "category": "Practice 4: Interpret Results",
+   "label": "Justify a claim based on statistical inference method results"
+  }
+ ],
+ "weights": [
+  {
+   "axis": "unit",
+   "code": "1",
+   "section": "mc",
+   "min": 20,
+   "max": 30,
+   "source": "AP Statistics CED (2027 exam), Unit overview / Exam Information: MC unit weighting"
+  },
+  {
+   "axis": "unit",
+   "code": "2",
+   "section": "mc",
+   "min": 15,
+   "max": 25,
+   "source": "AP Statistics CED (2027 exam), Unit overview / Exam Information: MC unit weighting"
+  },
+  {
+   "axis": "unit",
+   "code": "3",
+   "section": "mc",
+   "min": 15,
+   "max": 25,
+   "source": "AP Statistics CED (2027 exam), Unit overview / Exam Information: MC unit weighting"
+  },
+  {
+   "axis": "unit",
+   "code": "4",
+   "section": "mc",
+   "min": 10,
+   "max": 20,
+   "source": "AP Statistics CED (2027 exam), Unit overview / Exam Information: MC unit weighting"
+  },
+  {
+   "axis": "unit",
+   "code": "5",
+   "section": "mc",
+   "min": 10,
+   "max": 20,
+   "source": "AP Statistics CED (2027 exam), Unit overview / Exam Information: MC unit weighting"
+  },
+  {
+   "axis": "skill",
+   "code": "Practice 1: Formulate Questions",
+   "section": "mc",
+   "min": 5,
+   "max": 10,
+   "source": "AP Statistics CED Exam Information: MC practice weighting"
+  },
+  {
+   "axis": "skill",
+   "code": "Practice 2: Collect Data",
+   "section": "mc",
+   "min": 20,
+   "max": 30,
+   "source": "AP Statistics CED Exam Information: MC practice weighting"
+  },
+  {
+   "axis": "skill",
+   "code": "Practice 3: Analyze Data",
+   "section": "mc",
+   "min": 25,
+   "max": 35,
+   "source": "AP Statistics CED Exam Information: MC practice weighting"
+  },
+  {
+   "axis": "skill",
+   "code": "Practice 4: Interpret Results",
+   "section": "mc",
+   "min": 25,
+   "max": 35,
+   "source": "AP Statistics CED Exam Information: MC practice weighting"
+  }
+ ],
+ "units": [
+  {
+   "code": "1",
+   "title": "Exploring One-Variable Data and Collecting Data",
+   "officialClassPeriods": "~26",
+   "topics": [
+    {
+     "code": "1.1",
+     "title": "Introducing Statistics: What Can We Learn from Data?",
+     "scope": "both",
+     "skills": [
+      "1.A",
+      "2.A"
+     ],
+     "requires": [],
+     "estLessons": 0.5,
+     "subKeywords": [
+      {
+       "code": "1.1#1",
+       "label": "Statistical vs. non-statistical question",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.1#2",
+       "label": "Population, sample, parameter, statistic",
+       "kind": "concept",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.1#3",
+       "label": "Matching a question to the data needed",
+       "kind": "skill",
+       "skills": [
+        "1.A",
+        "2.A"
+       ],
+       "requires": [
+        "1.1#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "1.2",
+     "title": "Variables",
+     "scope": "both",
+     "skills": [
+      "2.A"
+     ],
+     "requires": [
+      "1.1"
+     ],
+     "estLessons": 0.5,
+     "subKeywords": [
+      {
+       "code": "1.2#1",
+       "label": "Individuals, variables, and the data table",
+       "kind": "representation",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.2#2",
+       "label": "Categorical vs. quantitative variables",
+       "kind": "concept",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [
+        "1.2#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.2#3",
+       "label": "Numeric codes that are not quantitative (zip, ID)",
+       "kind": "misconception",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [
+        "1.2#2"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "1.3",
+     "title": "Tables and Summary Statistics for One Categorical Variable",
+     "scope": "both",
+     "skills": [
+      "3.A",
+      "4.A"
+     ],
+     "requires": [
+      "1.2"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "1.3#1",
+       "label": "Frequency and relative frequency tables",
+       "kind": "representation",
+       "skills": [
+        "3.A"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.3#2",
+       "label": "Percent vs. count when comparing groups",
+       "kind": "misconception",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [
+        "1.3#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.3#3",
+       "label": "Describing a categorical distribution in context",
+       "kind": "skill",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [
+        "1.3#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "1.4",
+     "title": "Graphs for One Categorical Variable",
+     "scope": "both",
+     "skills": [
+      "3.A",
+      "4.A",
+      "4.B"
+     ],
+     "requires": [
+      "1.3"
+     ],
+     "estLessons": 0.5,
+     "subKeywords": [
+      {
+       "code": "1.4#1",
+       "label": "Bar graph and pie chart construction",
+       "kind": "representation",
+       "skills": [
+        "3.A"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.4#2",
+       "label": "Bar graph vs. histogram confusion",
+       "kind": "misconception",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [
+        "1.4#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.4#3",
+       "label": "Misleading axes and scales in graphs",
+       "kind": "misconception",
+       "skills": [
+        "4.B"
+       ],
+       "requires": [
+        "1.4#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "1.5",
+     "title": "Graphs for One Quantitative Variable",
+     "scope": "both",
+     "skills": [
+      "3.A"
+     ],
+     "requires": [
+      "1.2"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "1.5#1",
+       "label": "Dotplots and stemplots",
+       "kind": "representation",
+       "skills": [
+        "3.A"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.5#2",
+       "label": "Building a histogram from raw data",
+       "kind": "representation",
+       "skills": [
+        "3.A"
+       ],
+       "requires": [
+        "1.5#1"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "1.5#3",
+       "label": "Bin width changes the apparent shape",
+       "kind": "misconception",
+       "skills": [
+        "3.A"
+       ],
+       "requires": [
+        "1.5#2"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.5#4",
+       "label": "Cumulative relative frequency graph",
+       "kind": "representation",
+       "skills": [
+        "3.A"
+       ],
+       "requires": [
+        "1.5#2"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "1.6",
+     "title": "Describing a Quantitative Distribution",
+     "scope": "both",
+     "skills": [
+      "4.A",
+      "4.B"
+     ],
+     "requires": [
+      "1.5"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "1.6#1",
+       "label": "Shape: symmetry, skew, modes",
+       "kind": "concept",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.6#2",
+       "label": "Naming skew by the tail, not the bulk",
+       "kind": "misconception",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [
+        "1.6#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.6#3",
+       "label": "Center, spread, and unusual features",
+       "kind": "concept",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [
+        "1.6#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.6#4",
+       "label": "Writing a complete description in context",
+       "kind": "skill",
+       "skills": [
+        "4.A",
+        "4.B"
+       ],
+       "requires": [
+        "1.6#3"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "1.7",
+     "title": "Summary Statistics for One Quantitative Variable",
+     "scope": "both",
+     "skills": [
+      "3.B",
+      "4.A",
+      "4.B"
+     ],
+     "requires": [
+      "1.6"
+     ],
+     "estLessons": 1.25,
+     "subKeywords": [
+      {
+       "code": "1.7#1",
+       "label": "Mean, median, and mode by hand",
+       "kind": "skill",
+       "skills": [
+        "3.B"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.7#2",
+       "label": "Standard deviation as typical distance from the mean",
+       "kind": "concept",
+       "skills": [
+        "3.B",
+        "4.A"
+       ],
+       "requires": [
+        "1.7#1"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "1.7#3",
+       "label": "Range, quartiles, and IQR",
+       "kind": "skill",
+       "skills": [
+        "3.B"
+       ],
+       "requires": [
+        "1.7#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.7#4",
+       "label": "Resistant vs. non-resistant measures",
+       "kind": "misconception",
+       "skills": [
+        "4.B"
+       ],
+       "requires": [
+        "1.7#1",
+        "1.7#3"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.7#5",
+       "label": "Outlier rule using 1.5 times IQR",
+       "kind": "skill",
+       "skills": [
+        "3.B"
+       ],
+       "requires": [
+        "1.7#3"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "1.8",
+     "title": "Graphical Representations of Summary Statistics",
+     "scope": "both",
+     "skills": [
+      "3.A",
+      "4.A"
+     ],
+     "requires": [
+      "1.7"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "1.8#1",
+       "label": "Five-number summary",
+       "kind": "concept",
+       "skills": [
+        "3.B"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.8#2",
+       "label": "Boxplot and modified boxplot construction",
+       "kind": "representation",
+       "skills": [
+        "3.A"
+       ],
+       "requires": [
+        "1.8#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.8#3",
+       "label": "Reading a boxplot as spread, not as counts",
+       "kind": "misconception",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [
+        "1.8#2"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "1.9",
+     "title": "Comparing Distributions of One Quantitative Variable",
+     "scope": "both",
+     "skills": [
+      "3.B",
+      "4.A",
+      "4.B",
+      "4.C"
+     ],
+     "requires": [
+      "1.8"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "1.9#1",
+       "label": "Side-by-side comparison of center, spread, shape",
+       "kind": "skill",
+       "skills": [
+        "4.A",
+        "4.B"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.9#2",
+       "label": "Comparison statements need both groups named",
+       "kind": "misconception",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [
+        "1.9#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.9#3",
+       "label": "z-score and percentile as relative position",
+       "kind": "concept",
+       "skills": [
+        "3.B",
+        "4.C"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.9#4",
+       "label": "Effect of shifting or rescaling a data set",
+       "kind": "concept",
+       "skills": [
+        "3.B"
+       ],
+       "requires": [
+        "1.9#3"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "1.10",
+     "title": "Investigative Question Revisited and Data Collection",
+     "scope": "both",
+     "skills": [
+      "1.A",
+      "2.A",
+      "2.B"
+     ],
+     "requires": [
+      "1.1"
+     ],
+     "estLessons": 0.5,
+     "subKeywords": [
+      {
+       "code": "1.10#1",
+       "label": "Observational study vs. experiment vs. survey",
+       "kind": "concept",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.10#2",
+       "label": "Choosing a study type for a given question",
+       "kind": "skill",
+       "skills": [
+        "1.A",
+        "2.B"
+       ],
+       "requires": [
+        "1.10#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.10#3",
+       "label": "Ethical data collection and consent",
+       "kind": "concept",
+       "skills": [
+        "2.B"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "1.11",
+     "title": "Random Sampling",
+     "scope": "both",
+     "skills": [
+      "2.A",
+      "2.B"
+     ],
+     "requires": [
+      "1.10"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "1.11#1",
+       "label": "Simple random sample and random selection",
+       "kind": "concept",
+       "skills": [
+        "2.B"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.11#2",
+       "label": "Stratified, cluster, and systematic samples",
+       "kind": "concept",
+       "skills": [
+        "2.B"
+       ],
+       "requires": [
+        "1.11#1"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "1.11#3",
+       "label": "Stratified vs. cluster mix-up",
+       "kind": "misconception",
+       "skills": [
+        "2.B"
+       ],
+       "requires": [
+        "1.11#2"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.11#4",
+       "label": "Using random digits or technology to sample",
+       "kind": "skill",
+       "skills": [
+        "2.B"
+       ],
+       "requires": [
+        "1.11#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "1.12",
+     "title": "Potential Problems with Sampling",
+     "scope": "both",
+     "skills": [
+      "2.A"
+     ],
+     "requires": [
+      "1.11"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "1.12#1",
+       "label": "Sources of bias in sampling",
+       "kind": "concept",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.12#2",
+       "label": "A bigger sample does not cure bias",
+       "kind": "misconception",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [
+        "1.12#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.12#3",
+       "label": "Question wording and response bias",
+       "kind": "concept",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [
+        "1.12#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "1.13",
+     "title": "Experimental Design",
+     "scope": "both",
+     "skills": [
+      "2.A",
+      "2.B"
+     ],
+     "requires": [
+      "1.12"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "1.13#1",
+       "label": "Treatments, units, response, confounding",
+       "kind": "concept",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.13#2",
+       "label": "Control group, placebo, blinding",
+       "kind": "concept",
+       "skills": [
+        "2.B"
+       ],
+       "requires": [
+        "1.13#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.13#3",
+       "label": "Random assignment vs. random sampling",
+       "kind": "misconception",
+       "skills": [
+        "2.B"
+       ],
+       "requires": [
+        "1.13#1",
+        "1.11#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.13#4",
+       "label": "Completely randomized, blocked, matched pairs",
+       "kind": "concept",
+       "skills": [
+        "2.B"
+       ],
+       "requires": [
+        "1.13#1"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "1.13#5",
+       "label": "Causal claims only from randomized experiments",
+       "kind": "misconception",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [
+        "1.13#4",
+        "1.10#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.13#6",
+       "label": "Diagramming an experimental design",
+       "kind": "representation",
+       "skills": [
+        "2.B"
+       ],
+       "requires": [
+        "1.13#4"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "2",
+   "title": "Probability, Random Variables, and Probability Distributions",
+   "officialClassPeriods": "~24",
+   "topics": [
+    {
+     "code": "2.1",
+     "title": "Two Categorical Variables: Tables and Graphs",
+     "scope": "both",
+     "skills": [
+      "4.A",
+      "4.B"
+     ],
+     "requires": [
+      "1.3"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "2.1#1",
+       "label": "Two-way table, joint and marginal counts",
+       "kind": "representation",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.1#2",
+       "label": "Conditional relative frequencies",
+       "kind": "concept",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [
+        "2.1#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.1#3",
+       "label": "Segmented and mosaic bar graphs",
+       "kind": "representation",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [
+        "2.1#2"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.1#4",
+       "label": "Judging association from conditional percentages",
+       "kind": "misconception",
+       "skills": [
+        "4.B"
+       ],
+       "requires": [
+        "2.1#2"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "2.2",
+     "title": "Summary Statistics for Two Categorical Variables",
+     "scope": "both",
+     "skills": [
+      "3.B",
+      "4.A",
+      "4.B"
+     ],
+     "requires": [
+      "2.1"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "2.2#1",
+       "label": "Computing conditional proportions",
+       "kind": "skill",
+       "skills": [
+        "3.B"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.2#2",
+       "label": "Describing association between two categorical variables",
+       "kind": "skill",
+       "skills": [
+        "4.A",
+        "4.B"
+       ],
+       "requires": [
+        "2.2#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.2#3",
+       "label": "Association is not causation",
+       "kind": "misconception",
+       "skills": [
+        "4.B"
+       ],
+       "requires": [
+        "2.2#2",
+        "1.13#5"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "2.3",
+     "title": "Estimating Probabilities Using Simulation",
+     "scope": "both",
+     "skills": [
+      "3.C"
+     ],
+     "requires": [
+      "1.11"
+     ],
+     "estLessons": 0.5,
+     "subKeywords": [
+      {
+       "code": "2.3#1",
+       "label": "Setting up a simulation with random digits",
+       "kind": "skill",
+       "skills": [
+        "3.C"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.3#2",
+       "label": "Estimating a probability from simulated trials",
+       "kind": "concept",
+       "skills": [
+        "3.C"
+       ],
+       "requires": [
+        "2.3#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.3#3",
+       "label": "Too few trials give unstable estimates",
+       "kind": "misconception",
+       "skills": [
+        "3.C"
+       ],
+       "requires": [
+        "2.3#2"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "2.4",
+     "title": "Introduction to Probability",
+     "scope": "both",
+     "skills": [
+      "3.C"
+     ],
+     "requires": [
+      "2.3"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "2.4#1",
+       "label": "Sample space and basic probability rules",
+       "kind": "concept",
+       "skills": [
+        "3.C"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.4#2",
+       "label": "Complement rule",
+       "kind": "skill",
+       "skills": [
+        "3.C"
+       ],
+       "requires": [
+        "2.4#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.4#3",
+       "label": "Long-run relative frequency",
+       "kind": "concept",
+       "skills": [
+        "3.C"
+       ],
+       "requires": [
+        "2.3#2"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.4#4",
+       "label": "Law of large numbers misread as evening-out",
+       "kind": "misconception",
+       "skills": [
+        "3.C"
+       ],
+       "requires": [
+        "2.4#3"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "2.5",
+     "title": "Mutually Exclusive Events",
+     "scope": "both",
+     "skills": [
+      "4.B"
+     ],
+     "requires": [
+      "2.4"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "2.5#1",
+       "label": "Mutually exclusive events and the addition rule",
+       "kind": "concept",
+       "skills": [
+        "3.C"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.5#2",
+       "label": "Venn diagrams for events",
+       "kind": "representation",
+       "skills": [
+        "3.C"
+       ],
+       "requires": [
+        "2.5#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.5#3",
+       "label": "Mutually exclusive vs. independent",
+       "kind": "misconception",
+       "skills": [
+        "4.B"
+       ],
+       "requires": [
+        "2.5#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "2.6",
+     "title": "Conditional Probability",
+     "scope": "both",
+     "skills": [
+      "3.C"
+     ],
+     "requires": [
+      "2.5",
+      "2.2"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "2.6#1",
+       "label": "Conditional probability formula and tables",
+       "kind": "concept",
+       "skills": [
+        "3.C"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.6#2",
+       "label": "General multiplication rule",
+       "kind": "skill",
+       "skills": [
+        "3.C"
+       ],
+       "requires": [
+        "2.6#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.6#3",
+       "label": "Tree diagrams",
+       "kind": "representation",
+       "skills": [
+        "3.C"
+       ],
+       "requires": [
+        "2.6#2"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.6#4",
+       "label": "Reversing the condition: P(A|B) vs. P(B|A)",
+       "kind": "misconception",
+       "skills": [
+        "3.C"
+       ],
+       "requires": [
+        "2.6#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "2.7",
+     "title": "Independent Events and Unions of Events",
+     "scope": "both",
+     "skills": [
+      "3.C"
+     ],
+     "requires": [
+      "2.6"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "2.7#1",
+       "label": "Testing independence with probabilities",
+       "kind": "concept",
+       "skills": [
+        "3.C"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.7#2",
+       "label": "Multiplication rule for independent events",
+       "kind": "skill",
+       "skills": [
+        "3.C"
+       ],
+       "requires": [
+        "2.7#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.7#3",
+       "label": "General addition rule for unions",
+       "kind": "skill",
+       "skills": [
+        "3.C"
+       ],
+       "requires": [
+        "2.5#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.7#4",
+       "label": "At-least-one problems via the complement",
+       "kind": "skill",
+       "skills": [
+        "3.C"
+       ],
+       "requires": [
+        "2.7#2"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "2.8",
+     "title": "Introduction to Random Variables and Probability Distributions",
+     "scope": "both",
+     "skills": [
+      "3.A"
+     ],
+     "requires": [
+      "2.7"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "2.8#1",
+       "label": "Discrete random variable and its distribution table",
+       "kind": "representation",
+       "skills": [
+        "3.A"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.8#2",
+       "label": "Valid probability distribution conditions",
+       "kind": "concept",
+       "skills": [
+        "3.A"
+       ],
+       "requires": [
+        "2.8#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.8#3",
+       "label": "Probabilities of events from a distribution",
+       "kind": "skill",
+       "skills": [
+        "3.C"
+       ],
+       "requires": [
+        "2.8#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "2.9",
+     "title": "Parameters of Random Variables",
+     "scope": "both",
+     "skills": [
+      "3.B",
+      "4.D"
+     ],
+     "requires": [
+      "2.8",
+      "1.7"
+     ],
+     "estLessons": 1.25,
+     "subKeywords": [
+      {
+       "code": "2.9#1",
+       "label": "Expected value of a discrete variable",
+       "kind": "skill",
+       "skills": [
+        "3.B"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.9#2",
+       "label": "Expected value is not a typical single outcome",
+       "kind": "misconception",
+       "skills": [
+        "4.D"
+       ],
+       "requires": [
+        "2.9#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.9#3",
+       "label": "Variance and standard deviation of a random variable",
+       "kind": "skill",
+       "skills": [
+        "3.B"
+       ],
+       "requires": [
+        "2.9#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.9#4",
+       "label": "Linear transformations of a random variable",
+       "kind": "skill",
+       "skills": [
+        "3.B"
+       ],
+       "requires": [
+        "2.9#3"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.9#5",
+       "label": "Sums and differences of independent variables",
+       "kind": "misconception",
+       "skills": [
+        "3.B"
+       ],
+       "requires": [
+        "2.9#3"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "2.10",
+     "title": "The Binomial Distribution",
+     "scope": "both",
+     "skills": [
+      "3.C",
+      "3.D",
+      "4.B",
+      "4.D"
+     ],
+     "requires": [
+      "2.9",
+      "2.7"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "2.10#1",
+       "label": "Conditions for a binomial setting",
+       "kind": "concept",
+       "skills": [
+        "4.B"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.10#2",
+       "label": "Binomial probabilities with formula and technology",
+       "kind": "skill",
+       "skills": [
+        "3.C"
+       ],
+       "requires": [
+        "2.10#1"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "2.10#3",
+       "label": "Mean and standard deviation of a binomial",
+       "kind": "skill",
+       "skills": [
+        "3.D"
+       ],
+       "requires": [
+        "2.10#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.10#4",
+       "label": "Using binomial without checking independence or fixed n",
+       "kind": "misconception",
+       "skills": [
+        "4.D"
+       ],
+       "requires": [
+        "2.10#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "2.11",
+     "title": "The Normal Distribution",
+     "scope": "both",
+     "skills": [
+      "3.C",
+      "3.D",
+      "4.C"
+     ],
+     "requires": [
+      "1.9",
+      "2.8"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "2.11#1",
+       "label": "Normal curve and empirical rule",
+       "kind": "concept",
+       "skills": [
+        "4.C"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.11#2",
+       "label": "Areas from z-scores, tables, and technology",
+       "kind": "skill",
+       "skills": [
+        "3.C"
+       ],
+       "requires": [
+        "2.11#1",
+        "1.9#3"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "2.11#3",
+       "label": "Finding a value from a percentile",
+       "kind": "skill",
+       "skills": [
+        "3.D"
+       ],
+       "requires": [
+        "2.11#2"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.11#4",
+       "label": "Sketching and shading the right tail or interval",
+       "kind": "misconception",
+       "skills": [
+        "3.C"
+       ],
+       "requires": [
+        "2.11#2"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.11#5",
+       "label": "Normal as an approximate model, not exact",
+       "kind": "concept",
+       "skills": [
+        "4.C"
+       ],
+       "requires": [
+        "2.11#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "2.12",
+     "title": "Sampling Distributions and the Central Limit Theorem",
+     "scope": "both",
+     "skills": [
+      "4.C"
+     ],
+     "requires": [
+      "2.11",
+      "2.9",
+      "1.12"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "2.12#1",
+       "label": "Sampling distribution as repeated-sample variation",
+       "kind": "concept",
+       "skills": [
+        "4.C"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.12#2",
+       "label": "Parameter is fixed, statistic varies",
+       "kind": "misconception",
+       "skills": [
+        "4.C"
+       ],
+       "requires": [
+        "2.12#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.12#3",
+       "label": "Mean and SD of the sample mean",
+       "kind": "concept",
+       "skills": [
+        "3.D"
+       ],
+       "requires": [
+        "2.12#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.12#4",
+       "label": "Central limit theorem and sample-size conditions",
+       "kind": "concept",
+       "skills": [
+        "4.C"
+       ],
+       "requires": [
+        "2.12#3"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "2.12#5",
+       "label": "Simulated sampling distributions",
+       "kind": "representation",
+       "skills": [
+        "4.C"
+       ],
+       "requires": [
+        "2.12#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "3",
+   "title": "Inference for Categorical Data: Proportions",
+   "officialClassPeriods": "~30",
+   "topics": [
+    {
+     "code": "3.1",
+     "title": "Estimators",
+     "scope": "both",
+     "skills": [
+      "3.D",
+      "4.B"
+     ],
+     "requires": [
+      "2.12"
+     ],
+     "estLessons": 0.5,
+     "subKeywords": [
+      {
+       "code": "3.1#1",
+       "label": "Point estimate vs. parameter",
+       "kind": "concept",
+       "skills": [
+        "3.D"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "3.1#2",
+       "label": "Bias and variability of an estimator",
+       "kind": "concept",
+       "skills": [
+        "4.B"
+       ],
+       "requires": [
+        "3.1#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "3.1#3",
+       "label": "Unbiased does not mean accurate",
+       "kind": "misconception",
+       "skills": [
+        "4.B"
+       ],
+       "requires": [
+        "3.1#2"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "3.2",
+     "title": "Sampling Distributions for Sample Proportions",
+     "scope": "both",
+     "skills": [
+      "3.D",
+      "4.D",
+      "4.E"
+     ],
+     "requires": [
+      "3.1",
+      "2.10"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "3.2#1",
+       "label": "Mean and SD of a sample proportion",
+       "kind": "concept",
+       "skills": [
+        "3.D"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "3.2#2",
+       "label": "Large-counts and 10 percent conditions",
+       "kind": "concept",
+       "skills": [
+        "4.E"
+       ],
+       "requires": [
+        "3.2#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "3.2#3",
+       "label": "Probabilities for sample proportions",
+       "kind": "skill",
+       "skills": [
+        "4.D"
+       ],
+       "requires": [
+        "3.2#2",
+        "2.11#2"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "3.2#4",
+       "label": "SD of p-hat uses p, not the sample value",
+       "kind": "misconception",
+       "skills": [
+        "3.D"
+       ],
+       "requires": [
+        "3.2#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "3.3",
+     "title": "Confidence Interval for a Population Proportion",
+     "scope": "both",
+     "skills": [
+      "2.C",
+      "3.E",
+      "4.E"
+     ],
+     "requires": [
+      "3.2"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "3.3#1",
+       "label": "Structure: estimate plus margin of error",
+       "kind": "concept",
+       "skills": [
+        "3.E"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "3.3#2",
+       "label": "One-proportion z-interval procedure",
+       "kind": "skill",
+       "skills": [
+        "2.C",
+        "3.E"
+       ],
+       "requires": [
+        "3.3#1"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "3.3#3",
+       "label": "Checking random, independent, large-counts conditions",
+       "kind": "skill",
+       "skills": [
+        "4.E"
+       ],
+       "requires": [
+        "3.3#2"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "3.3#4",
+       "label": "Four-step writeup of an interval",
+       "kind": "skill",
+       "skills": [
+        "3.E"
+       ],
+       "requires": [
+        "3.3#2"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "3.3#5",
+       "label": "Choosing sample size for a margin of error",
+       "kind": "skill",
+       "skills": [
+        "3.E"
+       ],
+       "requires": [
+        "3.3#2"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "3.4",
+     "title": "Justifying a Claim from a Proportion Confidence Interval",
+     "scope": "both",
+     "skills": [
+      "2.D",
+      "4.F",
+      "4.G"
+     ],
+     "requires": [
+      "3.3"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "3.4#1",
+       "label": "Interpreting the interval in context",
+       "kind": "skill",
+       "skills": [
+        "4.F"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "3.4#2",
+       "label": "Interpreting the confidence level as a method rate",
+       "kind": "misconception",
+       "skills": [
+        "4.F"
+       ],
+       "requires": [
+        "3.4#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "3.4#3",
+       "label": "What changes the width of an interval",
+       "kind": "concept",
+       "skills": [
+        "2.D"
+       ],
+       "requires": [
+        "3.3#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "3.4#4",
+       "label": "Using an interval to support or reject a claimed value",
+       "kind": "skill",
+       "skills": [
+        "4.G"
+       ],
+       "requires": [
+        "3.4#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "3.5",
+     "title": "Setting Up a Test for a Population Proportion",
+     "scope": "both",
+     "skills": [
+      "2.C",
+      "2.E",
+      "4.E"
+     ],
+     "requires": [
+      "3.4"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "3.5#1",
+       "label": "Null and alternative hypotheses",
+       "kind": "concept",
+       "skills": [
+        "2.E"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "3.5#2",
+       "label": "Hypotheses written about parameters, not statistics",
+       "kind": "misconception",
+       "skills": [
+        "2.E"
+       ],
+       "requires": [
+        "3.5#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "3.5#3",
+       "label": "Conditions for the one-proportion z-test",
+       "kind": "skill",
+       "skills": [
+        "4.E"
+       ],
+       "requires": [
+        "3.5#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "3.5#4",
+       "label": "Selecting a test or interval for a situation",
+       "kind": "skill",
+       "skills": [
+        "2.C"
+       ],
+       "requires": [
+        "3.5#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "3.6",
+     "title": "p-Values",
+     "scope": "both",
+     "skills": [
+      "4.F"
+     ],
+     "requires": [
+      "3.5"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "3.6#1",
+       "label": "Meaning of a p-value",
+       "kind": "concept",
+       "skills": [
+        "4.F"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "3.6#2",
+       "label": "p-value is not the probability the null is true",
+       "kind": "misconception",
+       "skills": [
+        "4.F"
+       ],
+       "requires": [
+        "3.6#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "3.6#3",
+       "label": "Significance level and decision rule",
+       "kind": "concept",
+       "skills": [
+        "4.F"
+       ],
+       "requires": [
+        "3.6#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "3.7",
+     "title": "Carrying Out a Test for a Population Proportion",
+     "scope": "both",
+     "skills": [
+      "3.E",
+      "4.G"
+     ],
+     "requires": [
+      "3.6"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "3.7#1",
+       "label": "Test statistic and p-value computation",
+       "kind": "skill",
+       "skills": [
+        "3.E"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "3.7#2",
+       "label": "Concluding in context without proving the null",
+       "kind": "misconception",
+       "skills": [
+        "4.G"
+       ],
+       "requires": [
+        "3.7#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "3.7#3",
+       "label": "Complete four-step test writeup",
+       "kind": "skill",
+       "skills": [
+        "4.G"
+       ],
+       "requires": [
+        "3.7#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "3.8",
+     "title": "Potential Errors When Performing Tests",
+     "scope": "both",
+     "skills": [
+      "2.D",
+      "3.C",
+      "4.D"
+     ],
+     "requires": [
+      "3.7"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "3.8#1",
+       "label": "Type I and Type II errors in context",
+       "kind": "concept",
+       "skills": [
+        "2.D"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "3.8#2",
+       "label": "Significance level equals Type I error rate",
+       "kind": "concept",
+       "skills": [
+        "2.D"
+       ],
+       "requires": [
+        "3.8#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "3.8#3",
+       "label": "Power and what increases it",
+       "kind": "concept",
+       "skills": [
+        "3.C"
+       ],
+       "requires": [
+        "3.8#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "3.8#4",
+       "label": "Statistical vs. practical significance",
+       "kind": "misconception",
+       "skills": [
+        "4.D"
+       ],
+       "requires": [
+        "3.8#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "3.9",
+     "title": "Sampling Distributions for Differences of Sample Proportions",
+     "scope": "both",
+     "skills": [
+      "3.D",
+      "4.D",
+      "4.E"
+     ],
+     "requires": [
+      "3.2"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "3.9#1",
+       "label": "Mean and SD of p-hat1 minus p-hat2",
+       "kind": "concept",
+       "skills": [
+        "3.D"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "3.9#2",
+       "label": "Conditions for two independent samples",
+       "kind": "concept",
+       "skills": [
+        "4.E"
+       ],
+       "requires": [
+        "3.9#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "3.9#3",
+       "label": "Subtracting SDs instead of adding variances",
+       "kind": "misconception",
+       "skills": [
+        "3.D"
+       ],
+       "requires": [
+        "3.9#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "3.10",
+     "title": "Confidence Interval for a Difference of Two Proportions",
+     "scope": "both",
+     "skills": [
+      "2.C",
+      "3.E",
+      "4.E"
+     ],
+     "requires": [
+      "3.9",
+      "3.3"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "3.10#1",
+       "label": "Two-proportion z-interval procedure",
+       "kind": "skill",
+       "skills": [
+        "2.C",
+        "3.E"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "3.10#2",
+       "label": "Verifying conditions in both groups",
+       "kind": "skill",
+       "skills": [
+        "4.E"
+       ],
+       "requires": [
+        "3.10#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "3.10#3",
+       "label": "Choosing one- vs. two-sample proportion methods",
+       "kind": "skill",
+       "skills": [
+        "2.C"
+       ],
+       "requires": [
+        "3.10#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "3.11",
+     "title": "Justifying a Claim from a Two-Proportion Interval",
+     "scope": "both",
+     "skills": [
+      "4.F",
+      "4.G"
+     ],
+     "requires": [
+      "3.10",
+      "3.4"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "3.11#1",
+       "label": "Interpreting an interval for a difference",
+       "kind": "skill",
+       "skills": [
+        "4.F"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "3.11#2",
+       "label": "Interval containing zero is not proof of no difference",
+       "kind": "misconception",
+       "skills": [
+        "4.G"
+       ],
+       "requires": [
+        "3.11#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "3.11#3",
+       "label": "Linking interval and two-sided test conclusions",
+       "kind": "concept",
+       "skills": [
+        "4.G"
+       ],
+       "requires": [
+        "3.11#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "3.12",
+     "title": "Setting Up a Test for a Difference of Two Proportions",
+     "scope": "both",
+     "skills": [
+      "2.C",
+      "2.E",
+      "4.E"
+     ],
+     "requires": [
+      "3.11",
+      "3.5"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "3.12#1",
+       "label": "Hypotheses for equal population proportions",
+       "kind": "concept",
+       "skills": [
+        "2.E"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "3.12#2",
+       "label": "Pooled proportion and why it is used",
+       "kind": "concept",
+       "skills": [
+        "4.E"
+       ],
+       "requires": [
+        "3.12#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "3.12#3",
+       "label": "Conditions with pooled counts",
+       "kind": "skill",
+       "skills": [
+        "4.E"
+       ],
+       "requires": [
+        "3.12#2"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "3.13",
+     "title": "Carrying Out a Test for a Difference of Two Proportions",
+     "scope": "both",
+     "skills": [
+      "3.E",
+      "4.F",
+      "4.G"
+     ],
+     "requires": [
+      "3.12",
+      "3.7"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "3.13#1",
+       "label": "Two-proportion z statistic and p-value",
+       "kind": "skill",
+       "skills": [
+        "3.E"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "3.13#2",
+       "label": "Conclusion about groups in context",
+       "kind": "skill",
+       "skills": [
+        "4.F",
+        "4.G"
+       ],
+       "requires": [
+        "3.13#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "3.13#3",
+       "label": "Causal wording only after a randomized experiment",
+       "kind": "misconception",
+       "skills": [
+        "4.G"
+       ],
+       "requires": [
+        "3.13#2",
+        "1.13#5"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "3.14",
+     "title": "Setting Up a Chi-Square Test for Homogeneity or Independence",
+     "scope": "both",
+     "skills": [
+      "2.C",
+      "2.E",
+      "4.C",
+      "4.E"
+     ],
+     "requires": [
+      "3.13",
+      "2.1"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "3.14#1",
+       "label": "Choosing homogeneity vs. independence vs. goodness-of-fit",
+       "kind": "concept",
+       "skills": [
+        "2.C"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "3.14#2",
+       "label": "Hypotheses written for each chi-square setting",
+       "kind": "skill",
+       "skills": [
+        "2.E"
+       ],
+       "requires": [
+        "3.14#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "3.14#3",
+       "label": "Expected counts under the null",
+       "kind": "skill",
+       "skills": [
+        "4.C"
+       ],
+       "requires": [
+        "3.14#1",
+        "2.7#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "3.14#4",
+       "label": "Expected counts all at least five condition",
+       "kind": "concept",
+       "skills": [
+        "4.E"
+       ],
+       "requires": [
+        "3.14#3"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "3.15",
+     "title": "Carrying Out a Chi-Square Test",
+     "scope": "both",
+     "skills": [
+      "3.C",
+      "3.E",
+      "4.F",
+      "4.G"
+     ],
+     "requires": [
+      "3.14"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "3.15#1",
+       "label": "Chi-square statistic and degrees of freedom",
+       "kind": "skill",
+       "skills": [
+        "3.C",
+        "3.E"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "3.15#2",
+       "label": "Chi-square p-value and conclusion",
+       "kind": "skill",
+       "skills": [
+        "3.E",
+        "4.G"
+       ],
+       "requires": [
+        "3.15#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "3.15#3",
+       "label": "Following up with contribution to chi-square",
+       "kind": "skill",
+       "skills": [
+        "4.F"
+       ],
+       "requires": [
+        "3.15#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "3.15#4",
+       "label": "Chi-square shows association, not strength or cause",
+       "kind": "misconception",
+       "skills": [
+        "4.G"
+       ],
+       "requires": [
+        "3.15#2",
+        "1.13#5"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "4",
+   "title": "Inference for Quantitative Data: Means",
+   "officialClassPeriods": "~18",
+   "topics": [
+    {
+     "code": "4.1",
+     "title": "Sampling Distributions for Sample Means",
+     "scope": "both",
+     "skills": [
+      "3.D",
+      "4.D",
+      "4.E"
+     ],
+     "requires": [
+      "2.12",
+      "3.2"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "4.1#1",
+       "label": "Shape, center, and spread of x-bar",
+       "kind": "concept",
+       "skills": [
+        "3.D"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "4.1#2",
+       "label": "Normality condition by sample size or shape",
+       "kind": "concept",
+       "skills": [
+        "4.E"
+       ],
+       "requires": [
+        "4.1#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "4.1#3",
+       "label": "Probabilities for a sample mean",
+       "kind": "skill",
+       "skills": [
+        "4.D"
+       ],
+       "requires": [
+        "4.1#1",
+        "2.11#2"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "4.2",
+     "title": "Confidence Interval for a Mean or Mean Difference",
+     "scope": "both",
+     "skills": [
+      "2.C",
+      "3.E",
+      "4.C",
+      "4.E"
+     ],
+     "requires": [
+      "4.1",
+      "3.3"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "4.2#1",
+       "label": "t-distributions and degrees of freedom",
+       "kind": "concept",
+       "skills": [
+        "4.C"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "4.2#2",
+       "label": "One-sample t-interval procedure",
+       "kind": "skill",
+       "skills": [
+        "2.C",
+        "3.E"
+       ],
+       "requires": [
+        "4.2#1"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "4.2#3",
+       "label": "Why t instead of z",
+       "kind": "misconception",
+       "skills": [
+        "4.E"
+       ],
+       "requires": [
+        "4.2#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "4.2#4",
+       "label": "Paired data: interval for mean difference",
+       "kind": "skill",
+       "skills": [
+        "2.C",
+        "3.E"
+       ],
+       "requires": [
+        "4.2#2"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "4.2#5",
+       "label": "Paired vs. two independent samples",
+       "kind": "misconception",
+       "skills": [
+        "2.C"
+       ],
+       "requires": [
+        "4.2#4"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "4.3",
+     "title": "Justifying a Claim from a Mean Confidence Interval",
+     "scope": "both",
+     "skills": [
+      "2.D",
+      "4.F",
+      "4.G"
+     ],
+     "requires": [
+      "4.2",
+      "3.4"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "4.3#1",
+       "label": "Interpreting a t-interval in context",
+       "kind": "skill",
+       "skills": [
+        "4.F"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "4.3#2",
+       "label": "Interval estimates the population mean, not individuals",
+       "kind": "misconception",
+       "skills": [
+        "4.F"
+       ],
+       "requires": [
+        "4.3#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "4.3#3",
+       "label": "Margin of error and sample size for means",
+       "kind": "concept",
+       "skills": [
+        "2.D"
+       ],
+       "requires": [
+        "4.3#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "4.4",
+     "title": "Setting Up a Test for a Mean or Mean Difference",
+     "scope": "both",
+     "skills": [
+      "2.C",
+      "2.E",
+      "4.E"
+     ],
+     "requires": [
+      "4.3",
+      "3.5"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "4.4#1",
+       "label": "Hypotheses for a mean or paired mean difference",
+       "kind": "concept",
+       "skills": [
+        "2.E"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "4.4#2",
+       "label": "Conditions: random, independent, near-normal",
+       "kind": "skill",
+       "skills": [
+        "4.E"
+       ],
+       "requires": [
+        "4.4#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "4.4#3",
+       "label": "Paired differences as one sample",
+       "kind": "skill",
+       "skills": [
+        "2.C"
+       ],
+       "requires": [
+        "4.4#1",
+        "4.2#4"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "4.5",
+     "title": "Carrying Out a Test for a Mean or Mean Difference",
+     "scope": "both",
+     "skills": [
+      "3.E",
+      "4.F",
+      "4.G"
+     ],
+     "requires": [
+      "4.4",
+      "3.7"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "4.5#1",
+       "label": "One-sample t statistic and p-value",
+       "kind": "skill",
+       "skills": [
+        "3.E"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "4.5#2",
+       "label": "Conclusion in context",
+       "kind": "skill",
+       "skills": [
+        "4.F",
+        "4.G"
+       ],
+       "requires": [
+        "4.5#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "4.5#3",
+       "label": "Matching test result and interval conclusion",
+       "kind": "concept",
+       "skills": [
+        "4.G"
+       ],
+       "requires": [
+        "4.5#1",
+        "4.3#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "4.6",
+     "title": "Sampling Distributions for Difference of Two Sample Means",
+     "scope": "both",
+     "skills": [
+      "3.D",
+      "4.D",
+      "4.E"
+     ],
+     "requires": [
+      "4.1",
+      "3.9"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "4.6#1",
+       "label": "Mean and SD of difference of two means",
+       "kind": "concept",
+       "skills": [
+        "3.D"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "4.6#2",
+       "label": "Independence between two groups",
+       "kind": "concept",
+       "skills": [
+        "4.E"
+       ],
+       "requires": [
+        "4.6#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "4.6#3",
+       "label": "Adding variances, never standard deviations",
+       "kind": "misconception",
+       "skills": [
+        "3.D"
+       ],
+       "requires": [
+        "4.6#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "4.7",
+     "title": "Confidence Interval for a Difference of Two Means",
+     "scope": "both",
+     "skills": [
+      "2.C",
+      "3.E",
+      "4.E"
+     ],
+     "requires": [
+      "4.6",
+      "4.2"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "4.7#1",
+       "label": "Two-sample t-interval procedure",
+       "kind": "skill",
+       "skills": [
+        "2.C",
+        "3.E"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "4.7#2",
+       "label": "Conditions for both samples",
+       "kind": "skill",
+       "skills": [
+        "4.E"
+       ],
+       "requires": [
+        "4.7#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "4.7#3",
+       "label": "Pooling is not assumed in AP two-sample t",
+       "kind": "misconception",
+       "skills": [
+        "3.E"
+       ],
+       "requires": [
+        "4.7#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "4.8",
+     "title": "Justifying a Claim from a Two-Mean Interval",
+     "scope": "both",
+     "skills": [
+      "4.F",
+      "4.G"
+     ],
+     "requires": [
+      "4.7",
+      "4.3"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "4.8#1",
+       "label": "Interpreting the difference in means",
+       "kind": "skill",
+       "skills": [
+        "4.F"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "4.8#2",
+       "label": "Interval ordering and sign of the difference",
+       "kind": "misconception",
+       "skills": [
+        "4.F"
+       ],
+       "requires": [
+        "4.8#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "4.8#3",
+       "label": "Supporting a claim about which group is higher",
+       "kind": "skill",
+       "skills": [
+        "4.G"
+       ],
+       "requires": [
+        "4.8#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "4.9",
+     "title": "Setting Up a Test for a Difference of Two Means",
+     "scope": "both",
+     "skills": [
+      "2.C",
+      "2.E",
+      "4.E"
+     ],
+     "requires": [
+      "4.8",
+      "4.4"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "4.9#1",
+       "label": "Hypotheses for two population means",
+       "kind": "concept",
+       "skills": [
+        "2.E"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "4.9#2",
+       "label": "Two-sample vs. paired setup decision",
+       "kind": "skill",
+       "skills": [
+        "2.C"
+       ],
+       "requires": [
+        "4.9#1",
+        "4.2#4"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "4.9#3",
+       "label": "Checking conditions for two groups",
+       "kind": "skill",
+       "skills": [
+        "4.E"
+       ],
+       "requires": [
+        "4.9#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "4.10",
+     "title": "Carrying Out a Test for a Difference of Two Means",
+     "scope": "both",
+     "skills": [
+      "3.E",
+      "4.F",
+      "4.G"
+     ],
+     "requires": [
+      "4.9",
+      "4.5"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "4.10#1",
+       "label": "Two-sample t statistic and p-value",
+       "kind": "skill",
+       "skills": [
+        "3.E"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "4.10#2",
+       "label": "Concluding about two populations in context",
+       "kind": "skill",
+       "skills": [
+        "4.F",
+        "4.G"
+       ],
+       "requires": [
+        "4.10#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "4.10#3",
+       "label": "Selecting among all inference procedures",
+       "kind": "skill",
+       "skills": [
+        "4.G"
+       ],
+       "requires": [
+        "4.10#1",
+        "3.13#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "5",
+   "title": "Regression Analysis",
+   "officialClassPeriods": "~9",
+   "topics": [
+    {
+     "code": "5.1",
+     "title": "Graphical Representations of Two Quantitative Variables",
+     "scope": "both",
+     "skills": [
+      "3.A",
+      "4.A",
+      "4.B"
+     ],
+     "requires": [
+      "1.6"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "5.1#1",
+       "label": "Scatterplot with explanatory and response variables",
+       "kind": "representation",
+       "skills": [
+        "3.A"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "5.1#2",
+       "label": "Direction, form, strength, unusual points",
+       "kind": "concept",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [
+        "5.1#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "5.1#3",
+       "label": "Choosing which variable is explanatory",
+       "kind": "misconception",
+       "skills": [
+        "4.B"
+       ],
+       "requires": [
+        "5.1#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "5.2",
+     "title": "Correlation",
+     "scope": "both",
+     "skills": [
+      "4.D"
+     ],
+     "requires": [
+      "5.1"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "5.2#1",
+       "label": "Correlation coefficient r and its properties",
+       "kind": "concept",
+       "skills": [
+        "4.D"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "5.2#2",
+       "label": "Interpreting r for strength of linear association",
+       "kind": "skill",
+       "skills": [
+        "4.D"
+       ],
+       "requires": [
+        "5.2#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "5.2#3",
+       "label": "Correlation does not imply causation",
+       "kind": "misconception",
+       "skills": [
+        "4.D"
+       ],
+       "requires": [
+        "5.2#1",
+        "1.13#5"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "5.2#4",
+       "label": "Outliers and nonlinear patterns versus r",
+       "kind": "misconception",
+       "skills": [
+        "4.D"
+       ],
+       "requires": [
+        "5.2#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "5.3",
+     "title": "Linear Regression Models",
+     "scope": "both",
+     "skills": [
+      "3.B"
+     ],
+     "requires": [
+      "5.2"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "5.3#1",
+       "label": "Regression line, slope, and intercept",
+       "kind": "concept",
+       "skills": [
+        "3.B"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "5.3#2",
+       "label": "Interpreting slope and intercept in context",
+       "kind": "skill",
+       "skills": [
+        "3.B"
+       ],
+       "requires": [
+        "5.3#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "5.3#3",
+       "label": "Predicting a response value",
+       "kind": "skill",
+       "skills": [
+        "3.B"
+       ],
+       "requires": [
+        "5.3#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "5.3#4",
+       "label": "Extrapolation beyond the data",
+       "kind": "misconception",
+       "skills": [
+        "3.B"
+       ],
+       "requires": [
+        "5.3#3"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "5.4",
+     "title": "Residuals",
+     "scope": "both",
+     "skills": [
+      "3.B",
+      "4.A",
+      "4.D"
+     ],
+     "requires": [
+      "5.3"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "5.4#1",
+       "label": "Residual as observed minus predicted",
+       "kind": "concept",
+       "skills": [
+        "3.B"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "5.4#2",
+       "label": "Residual plot and linear fit check",
+       "kind": "representation",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [
+        "5.4#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "5.4#3",
+       "label": "Reading residual patterns",
+       "kind": "skill",
+       "skills": [
+        "4.D"
+       ],
+       "requires": [
+        "5.4#2"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "5.4#4",
+       "label": "Sign of residual flipped",
+       "kind": "misconception",
+       "skills": [
+        "3.B"
+       ],
+       "requires": [
+        "5.4#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "5.5",
+     "title": "Least-Squares Regression",
+     "scope": "both",
+     "skills": [
+      "3.B",
+      "4.D"
+     ],
+     "requires": [
+      "5.4"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "5.5#1",
+       "label": "Least-squares criterion and line through the means",
+       "kind": "concept",
+       "skills": [
+        "3.B"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "5.5#2",
+       "label": "Computing slope and intercept from summary statistics",
+       "kind": "skill",
+       "skills": [
+        "3.B"
+       ],
+       "requires": [
+        "5.5#1",
+        "1.7#2"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "5.5#3",
+       "label": "Coefficient of determination r-squared",
+       "kind": "concept",
+       "skills": [
+        "4.D"
+       ],
+       "requires": [
+        "5.5#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "5.5#4",
+       "label": "Interpreting r-squared as variation explained",
+       "kind": "misconception",
+       "skills": [
+        "4.D"
+       ],
+       "requires": [
+        "5.5#3"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "5.5#5",
+       "label": "Influential points and leverage",
+       "kind": "concept",
+       "skills": [
+        "4.D"
+       ],
+       "requires": [
+        "5.5#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,597 @@
+[
+ {
+  "key": "ap_statistics-m01-k0",
+  "cellId": "ap_statistics-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "C",
+     "brief_reasoning": "The block means differ by about 21. The treatment differences within the blocks are 6.5 and 5.2, about 6 each. Blocking accounts for the field-to-field variation, but random assignment within each block is still needed to support a cause-and-effect conclusion.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Blocking and randomization within blocks with a table reading; fits topic 1.13 and skill 4.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Key C is unique. Table values support 21 vs about 6 differences. The phrase 'removed the block differences' is loose but defensible."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete with block, treatment, n, mean and SD, and it matches the stem."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions, each explained. The key is the longest option, which is a mild giveaway."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The time and reading load are reasonable. No heavy arithmetic is needed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is acceptable. It has a unique key, a consistent table, and distractors that each encode a distinct misconception. The only minor issues are the loose wording 'removed the block differences' and that the key is the longest option."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Meets the exam_prep rubric: 3 sequential steps (read the block difference and within-block treatment differences from the table, link them to the purpose of blocking, then connect to the role of random assignment for causal claims) and 2 combined concepts (blocking, random assignment within blocks). Two distractors survive the first step and fail only later. Short stem and light arithmetic; difficulty comes from the reasoning, not unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_statistics-m02-k0",
+  "cellId": "ap_statistics-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "P(J1∩S2)=40/156; P(S2)=20/156+40/156=60/156; ratio=2/3≈0.667",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "0.667"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Conditional probability from a tree, in scope for 2.6 and skill 3.C."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "P(J1|S2) = (40/156)/(60/156) = 2/3 = 0.667. The key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The tree data is complete, with first-draw and second-draw branch labels. The rounding convention is stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception (denominator only, reversed branch, joint without division), and the explanation covers each one."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical of an AP item, with light arithmetic and a calculator allowed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and well formed. The key 0.667 is unique, the tree is complete, and the distractors map to distinct misconceptions."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must read the tree, compute the joint P(J1 and S2) = 10/39, compute P(S2) via total probability across both branches = 15/39, then divide to get 2/3 = 0.667. This requires 3 sequential steps, combining conditional probability with total probability on dependent draws, and carrying results forward. The distractors (0.385 = P(S2), 0.417 = 5/12, 0.256 = joint) reflect real misconceptions. Arithmetic is light fractions, the stem is short, the tree is consistent with the stem, and there are no unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_statistics-m03-k0",
+  "cellId": "ap_statistics-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "There is one random sample, and each customer is classified by two categorical variables (3 brands × 4 regions). Testing whether the two variables are associated calls for a chi-square test of independence.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "A chi-square test of independence"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item asks the student to choose the chi-square test of independence for one sample with two categorical variables. It fits topic 3.14 and skill 2.C. The key is unique: one random sample classified by two categorical variables (3 brands by 4 regions) calls for the test of independence. Each distractor is rejected for a distinct reason: a t-test for means, a one-proportion test, and a two-proportion test that cannot handle more than two categories. The load is light, about 85 seconds, and no stimulus is needed.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The dominant demand is choosing the inference procedure for two categorical variables from one sample, which matches 2.C and topic 3.14."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Only the chi-square test of independence fits a single sample classified by two categorical variables. A chi-square test of homogeneity is not offered as an option, so there is no second defensible answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The wording is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option encodes a distinct misconception (means procedure for categorical data, one-proportion test for two variables, two-proportion test for many categories). The explanation addresses each option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item is short with no arithmetic, and the options are parallel and similar in length."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step procedure identification: one random sample classified by two categorical variables (3 brands x 4 regions) points directly to a chi-square test of independence. Distractors are easily eliminated (means, one proportion, only two groups). No computation, no representation changes, minimal reading. Fits foundational recognition of the topic rather than full-mock exam-level reasoning.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_statistics-m04-k0",
+  "cellId": "ap_statistics-m04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "Conditions met; ≈0.882",
+     "brief_reasoning": "np=70 and n(1-p)=130 are both at least 10, and 200 is under 10% of 25,000. SD = sqrt(0.35*0.65/200) ≈ 0.0337, so z ≈ 1.186 and P(Z < 1.186) ≈ 0.882.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 3.2 normal model for p-hat with condition check and probability; fits skill 3.C."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Unique correct option; 0.882 is the left-tail probability, the conditions hold, and rounding is stated."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is complete, with N, n, p and the event given."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions (p must equal 0.5, wrong tail, missing root n); each is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 90-120 seconds, calculator use is appropriate, and the option format is parallel."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound, with a unique key, distinct distractors and appropriate scope. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The student must check the normal-model conditions (success/failure counts and the 10% condition), compute the standard deviation of p-hat, and then find the z-score and the normal probability. Each result feeds the next step. Two distractors survive the conditions check and fail only in the calculation, such as the complement 0.118 or a wrong SD. The arithmetic is light and the wording is clear, so no unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_statistics-m05-k0",
+  "cellId": "ap_statistics-m05",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "C",
+     "brief_reasoning": "There is one simple random sample, and each person is classified on two categorical variables. That makes this a chi-square test of independence. Hypotheses are about the population, not the sample. The degrees of freedom are (3-1)(4-1)=6. The table adds up to 392, which matches the sample size. Option D describes a homogeneity test, which would need separate samples from each age group.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Dominant demand is identifying the correct null hypothesis (independence vs homogeneity) from the design; df is a light add-on. In scope for Unit 3 topic 3.14."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "One SRS classified on two variables gives a test of independence with a population-level H0 and df = 6; option C is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Two-way table data is complete with headers, labels and cells summing to 392. Wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception (cells minus 1, sample-level hypothesis, homogeneity). The explanation covers each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Typical AP MC load. No arithmetic burden. Calculator designation is fine."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item passes all five criteria: the key is unique, the stimulus is complete, the distractors are distinct, and the load is typical."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The student must (1) identify from the sampling design (one SRS, two variables classified) that the test is independence rather than homogeneity, (2) state the null hypothesis about the population rather than the sample, and (3) compute df = (3-1)(4-1) = 6 and match it with the hypothesis. Distractors fail at different steps: wrong df, a sample-based hypothesis, and homogeneity wording. This meets the 3-step, 2-concept rubric. There is no arithmetic burden, the reading load is light, and the scope is within Unit 3.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_statistics-m06-k0",
+  "cellId": "ap_statistics-m06",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "A",
+     "brief_reasoning": "The sample is random. With n=16, the dotplot shows data from 14 to 24 that is roughly symmetric, with no strong skew or outliers. So the t-procedure is reasonable.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "Quick to read, no arithmetic, and consistent with the reference pattern for a single-skill MC item. The key is slightly longer than the other options, which is a negligible cue.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean conditions-check question with a unique key, a complete dotplot and distinct distractors, so it passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-condition check: with n=16 (<30), normality must be justified from the graph. The student reads the dotplot (roughly symmetric, no outliers) and rejects the misconceptions about n<30 and unknown sigma. No computation and minimal reading. This is a core, direct application of the t-procedure conditions.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_statistics-m07-k0",
+  "cellId": "ap_statistics-m07",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "Narrower",
+     "brief_reasoning": "Width is proportional to t*/sqrt(n). Original: 2.030/6 ≈ 0.338. New: 2.626/10 ≈ 0.263. The new interval is narrower, and s cancels out because it is the same for both samples.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Fits 4.2 and skill 2.D: relationship between sample size, confidence level and interval width."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Margin-of-error ratio is about 0.776, so narrower is the unique correct answer. The other options are false."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is complete and clear and states that conditions are met and s is equal."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions (needs s, effects cancel exactly, only confidence level considered). Each wrong option is explained, and the options are parallel."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 100 seconds. Calculator use is optional and consistent with the allowed designation."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean item on the joint effect of n and confidence level on t-interval width. The key is unique, the distractors reflect distinct misconceptions, and the load is typical of the exam. Accept."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The item requires recognizing two competing effects on interval width: a higher confidence level raises t*, and a larger n lowers the standard error. The student must then judge which effect dominates, using approximate t* values (about 2.63 vs 2.03) and the sqrt(n) ratio (6/10), giving a width ratio of about 0.78, so the new interval is narrower. Computation is light and the wording is clear. The item stays within Unit 4 scope and fits skill 2.D on relationships among components of inference. This is a typical mock-exam multiple-choice item, above pure recall but not deep.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_statistics-m08-k0",
+  "cellId": "ap_statistics-m08",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "B",
+     "brief_reasoning": "The samples are independent, so this calls for a two-sample t procedure. The first sample has 42 plants, which is at least 30, so its skew is acceptable. The second sample has only 19 plants and is strongly skewed with an outlier, so the normality condition fails.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Choosing a two-sample t procedure from the design and verifying the normality condition for each sample is squarely topic 4.4 and skill 4.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option B is the unique correct answer. The samples are independent, and the second sample (n=19, strongly skewed with an outlier) fails the condition. Option D is wrong because both samples must meet the condition. Option A is wrong because equal sizes are not required. Option C is wrong because it pools independent samples into one."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem gives the sample sizes, independence, and dotplot shapes. The wording is clear. Two sentences about the dotplots are redundant but harmless."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception: equal sizes required, combining samples, and checking only one sample. The explanation addresses every wrong option. The correct option is the longest, but only slightly."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short reading load, no arithmetic, and about 100 seconds. This is typical for the AP exam."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean conditions-check question with a unique key and distinct distractors. It is suitable for the exam."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The student must (1) recognize independent samples and choose the two-sample t procedure, (2) check normality for each sample separately, and (3) conclude the condition fails because n=19 is below 30 and the data are strongly skewed with an outlier. Two concepts are combined, and two distractors survive step 1 and fail only later. There is no arithmetic, the stem is short, and all content is in Unit 4 scope. This meets the rubric for exam_prep.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_statistics-m09-k0",
+  "cellId": "ap_statistics-m09",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "Fail to reject H0",
+     "brief_reasoning": "The 90% CI matches a one-sided test at α=0.05, and 912.2 is inside the interval. Here x̄=916, SE≈12.73, t≈0.30, p≈0.38 > 0.05.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Duality of CI and one-sided test, justifying a claim; fits 4.3/4.G."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "912.2 is inside the interval, so the decision is fail to reject. The P-value is about 0.38 > 0.05. The key D is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed. The stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions, and each wrong option is explained. The 'why' for option A is slightly muddled but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, no arithmetic, typical MC load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound, with a unique key, distinct distractors and a complete stem. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The student must (1) match the 90% CI to a one-sided test at alpha = 0.05, (2) see that 912.2 lies inside the interval, so the test fails to reject, and (3) choose the correctly worded conclusion that fits the direction of Ha. This meets the rubric's 3 or more steps and 2 combined concepts (CI-test duality, decision wording and direction). Two distractors survive the first step and fail only later. The stem is short, there is no arithmetic, and the content is in scope for Unit 4.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_statistics-m10-k0",
+  "cellId": "ap_statistics-m10",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "Mean 60, SD 2, approximately normal",
+     "brief_reasoning": "The sampling distribution of x̄ is centered at the population mean, μ = 60. Its standard deviation is σ/√n = 20/√100 = 2. Since n = 100 is large, the CLT says it is approximately normal even though the population is skewed.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item passes all five criteria. It targets the mean, SD and shape of the sampling distribution of x-bar (topic 4.1, skill 3.D). The key (mean 60, SD 2, approximately normal) is the only correct option, and each distractor encodes a distinct misconception (centering at the observed mean, dividing by n instead of root n, withholding the CLT). The stem is self-contained, needs no stimulus, and is about 100 seconds of work.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The item asks for the center, spread and shape of the sampling distribution of x-bar, which is exactly topic 4.1 and skill 3.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Mean 60, SD 20/sqrt(100)=2, approximately normal by the CLT. This is the only defensible option, since the other three each contain an error."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is complete and clearly worded, and the mean of 55 from one sample is a deliberate distractor."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option has a distinct named misconception and an explanation. The option lengths and formats are parallel, so there is no giveaway."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Light arithmetic, typical AP length, four parallel short options, and consistent with calculator-allowed."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The student must (1) identify the mean of the sampling distribution as mu = 60, not the single sample's 55, (2) compute the standard error sigma/sqrt(n) = 20/10 = 2, and (3) apply the CLT with n = 100 to conclude the shape is approximately normal despite the skewed population. Two concepts are combined (standard error and CLT shape). Two distractors survive the first step and fail only later. Reading load and arithmetic are light, so the difficulty comes from the reasoning rather than unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_statistics-m11-k0",
+  "cellId": "ap_statistics-m11",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "C",
+     "brief_reasoning": "The residuals start positive, turn negative and end positive, so the plot shows a curved pattern. A high r^2 does not mean the relationship is linear.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Residual plot reading plus r-squared interpretation; fits 5.4 and 4.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The plot is a clear U-shaped curve, so C is the unique best response. A is false, B contradicts the plot, and D gives a reason that is true of every model."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The data include axis titles, 28 points matching n, and a zero line. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct named misconceptions; the explanation addresses each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 110 seconds, no arithmetic, typical of an AP item."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. The residual plot is clearly curved, the key is unique, the distractors are distinct, and the stimulus data are complete. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must read the residual plot and recognize a curved (U-shaped) pattern, recall that a high r^2 does not establish linearity, and then choose the response that combines both ideas. This matches the rubric: 3 sequential steps and 2 combined concepts or sources. Two distractors survive the first step and fail later. The lever is an interpretation among named misinterpretations, which is allowed. There is no arithmetic and the reading load is light.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ }
+]

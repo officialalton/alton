@@ -1,0 +1,908 @@
+[
+ {
+  "key": "s2-micro-01-k0",
+  "cellId": "s2-micro-01",
+  "passed": true,
+  "reasons": [],
+  "soft": [
+   "explanation_does_not_cover_distractors"
+  ],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Set MFC=MRP: 8+L=32-0.5L gives L=16; wage read off supply W=8+0.5(16)=$16.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "16 aides at $16 per hour"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The reading load is typical for the exam, there is no calculator need, and it takes about 90 seconds.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, clean, and well suited to the exam; the key (16 aides at $16) is verified."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard monopsony item: set MFC = MRP to find quantity (16), then read the wage from the supply curve ($16). It requires distinguishing the quantity-determining curve from the wage-determining curve; distractors target common errors (wage read from MRP/MFC, competitive outcome). Numbers are clean, reading is light, and the content is in scope, so this suits a full mock exam rather than basic learning or an advanced supplement.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "s2-micro-02-k0",
+  "cellId": "s2-micro-02",
+  "passed": true,
+  "reasons": [],
+  "soft": [
+   "explanation_does_not_cover_distractors"
+  ],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "B",
+     "brief_reasoning": "MR=MC at Q=12, P=14 > ATC=11, so profit is positive. Under free entry, new firms selling close substitutes shift this firm's demand left and make it more elastic until P=ATC and economic profit is zero.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 4.4 long-run adjustment under free entry; explaining how the outcome occurs fits skill 2.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "MR=MC at Q=12, P=14, ATC=11, profit $36. B is the unique correct answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table data is complete and internally consistent with the stated demand and MR. Wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor has a distinct, realistic misconception, and the explanation addresses every wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Roughly 90 seconds, no calculator needed, five options as required."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. The table is consistent, the key B is unique and correct, the distractors are distinct, and it is suitable for the exam."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Student reads the table to find MR=MC at Q=12 (P=14 > ATC=11, so positive profit), then recalls the standard long-run monopolistic competition result: entry of close substitutes shifts demand left and makes it more elastic until P=ATC and economic profit is zero. Distractors are common misconceptions (demand right, exit under profit, MC rising, P=MC). Concept is core to the topic, steps are few, computation is minimal, and reading is short.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "s2-micro-03-k0",
+  "cellId": "s2-micro-03",
+  "passed": true,
+  "reasons": [],
+  "soft": [
+   "explanation_does_not_cover_distractors"
+  ],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "B",
+     "brief_reasoning": "At Q=10, MSC=18+2(10)=38 > MSB=30, so the market overproduces compared with the efficient Q=8.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 6.1 externality efficiency, describe skill; fits."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Verified: Q=10 market, Q=8 efficient, MSC(10)=38 > MSB=30. B unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Curves with equations, points, axes and note fully specified."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option is addressed with a distinct misconception; option C is somewhat weak but clearly false."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 90 seconds, five options, no calculator."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, well-specified negative-externality item; key B verified; distractors distinct. Acceptable."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard Unit 6 item: the student must read a three-curve graph, find MSC at the market quantity (38 vs MSB 30), and link it to overproduction from a negative externality. Concept depth is moderate and the distractors require careful comparison of MSB, MSC, and private MC, but the arithmetic is trivial and all content is in scope. This fits a full-mock item rather than a basic-learning or advanced one.",
+   "reading_load": "medium",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "s2-micro-04-k0",
+  "cellId": "s2-micro-04",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill"
+  ],
+  "soft": [
+   "explanation_does_not_cover_distractors"
+  ],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "Monopoly: P=$60, Q=20; Competitive: P=$20, Q=40",
+     "brief_reasoning": "Under competition P=MC: 100-2Q=20 gives Q=40, P=20. For the monopoly, MR=100-4Q. Setting MR=20 gives Q=20, and P=100-2(20)=60.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": "Dominant demand is deriving MR and solving MR=MC, which is Topic 4.2/4.3 monopoly profit maximization, not the 4.1 introduction (market characteristics, model comparison/limitations). Skill 1.D is only loosely served."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Verified: competition Q=40, P=20; monopoly Q=20, P=60. Option C is unique and correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Demand, MC, and model descriptions are complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors encode distinct misconceptions and each is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 90 seconds, five options, no calculator needed; reasonable load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and the item is well built, but it mainly tests monopoly MR=MC computation (topics 4.2/4.3) rather than the 4.1 introduction to imperfect competition and model comparison. Failing on scope/topic fit."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires knowing P=MC for perfect competition and deriving MR (slope doubling) for monopoly, then solving two simple linear equations and matching to the correct option. Standard AP micro mock-level item with light reading and easy mental arithmetic; distractors target common errors (using MR=P, wrong quantity). Not hard for unfair reasons.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "s2-micro-05-k0",
+  "cellId": "s2-micro-05",
+  "passed": true,
+  "reasons": [],
+  "soft": [
+   "explanation_does_not_cover_distractors"
+  ],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "1.2 sorghum per wheat; higher because resources are not equally productive in both crops",
+     "brief_reasoning": "D to E: 24/20 = 1.2, compared with 6/20 = 0.3 from A to B. The cost rises because resources are specialized.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "About 90 seconds, five options, simple arithmetic, no calculator needed.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and clean. The key is verified, the data are complete, and the distractors are distinct and explained."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must read the table, compute the opportunity cost for two segments (24/20 = 1.2 and 6/20 = 0.3), compare them, and select the correct economic explanation (increasing opportunity cost because resources are not equally adaptable to both goods) while rejecting distractors on technology, efficiency, and unit direction. The concept is core to topic 1.3, the arithmetic is trivial, and the reading load is light, so the difficulty comes from the legitimate skill of linking the calculation to the explanation.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "s2-micro-06-k0",
+  "cellId": "s2-micro-06",
+  "passed": true,
+  "reasons": [],
+  "soft": [
+   "explanation_does_not_cover_distractors"
+  ],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "C",
+     "brief_reasoning": "Low is dominant for both trucks, so the Nash equilibrium is (Low, Low) with $200 each. Combined profit is $400, which is $200 less than the $600 from (High, High).",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Dominant strategy/Nash equilibrium in a payoff matrix with interpretation of the numbers; fits 4.5 and 2.C."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Verified: Low dominant for both, (Low,Low) gives combined 400 vs 600, so $200 less. Unique correct option."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Payoff matrix fully specified with all four cells, units, and simultaneous one-shot conditions."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option reflects a distinct misconception and is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 90 seconds, simple arithmetic, five options, no calculator needed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean prisoner's dilemma item with a unique key, a complete stimulus, and good distractors. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Classic prisoners' dilemma with a clear dominant strategy for each player. The student finds the (Low, Low) equilibrium and compares combined profit ($400 vs $600). Distractors target standard misconceptions. Concept depth is moderate and the computation is trivial, so it suits foundational learning more than a full mock's discriminating items.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "s2-micro-07-k0",
+  "cellId": "s2-micro-07",
+  "passed": true,
+  "reasons": [],
+  "soft": [
+   "explanation_does_not_cover_distractors"
+  ],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 4,
+     "final_answer": "E",
+     "brief_reasoning": "Imports fall from 45k to 15k. Consumer surplus lost is $1.4M. Producer surplus gained is $0.8M and tariff revenue is $0.3M, together $1.1M. Total surplus falls by $300k.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "Five options, reasonable load; the answer can be reached qualitatively or with simple area calculations.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and well specified; the numbers check out and E is the unique key."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must read the graph's key points to find imports before and after the tariff (45 to 15), then reason about the welfare effects of the tariff: the consumer surplus loss, the producer surplus gain, the tariff revenue, and the resulting deadweight loss. Distractors test common errors (domestic consumers unaffected, total surplus rises, wrong revenue figure, quantity demanded rising). Key values are given, so only light arithmetic is needed; the concept is standard AP Micro tariff analysis.",
+   "reading_load": "medium",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 100
+  }
+ },
+ {
+  "key": "s2-micro-08-k0",
+  "cellId": "s2-micro-08",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [
+   "explanation_does_not_cover_distractors"
+  ],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "D",
+     "brief_reasoning": "MP = 30, 40, 30, 20, 10, 0. MP rises through worker 2, then diminishes, and reaches zero at worker 6.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Production function, MP and diminishing returns from a table; fits 3.1 and skill 1.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "MP = 30, 40, 30, 20, 10, 0. D is uniquely correct and the other options are each clearly false."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete and clear, with fixed input specified."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The explanation says 'the first option is correct' although the key is the fourth option (D). This is a minor inconsistency. The per-option 'why' notes are otherwise accurate."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Quick to answer, no calculator needed, five options, typical AP load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound and the key D is correct. The only flaw is that the explanation refers to 'the first option' as correct when the key is the fourth option; this should be fixed before use."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The solver computes marginal product from the total output table (30, 40, 30, 20, 10, 0), recognizes the initial increasing returns followed by diminishing returns, and checks each option against those values. The distractors target common misconceptions: constant average product, MP falling from the start, total output falling, and confusing maximum total output with maximum MP. Concept depth is moderate, the arithmetic is simple subtraction, and the reading load is light. The item is typical of AP Micro multiple-choice questions on the production function.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "s2-micro-09-k0",
+  "cellId": "s2-micro-09",
+  "passed": true,
+  "reasons": [],
+  "soft": [
+   "explanation_does_not_cover_distractors"
+  ],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "C",
+     "brief_reasoning": "Marginal products are 30, 40, 30, 20, 10, 0. Marginal product first falls with the third worker.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 3.1, marginal product and diminishing returns; fits skill 1.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "MP = 30,40,30,20,10,0; first decline at worker 3. Key C is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table fully specified, with fixed and variable inputs named."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distinct misconceptions. Option A's stated AP claim is itself false (AP at 2 workers is 35), but the explanation correctly rejects A via MP."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Five options, about 75 seconds, no calculator needed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, unique key (third worker). Clean table, distinct distractors, suitable for the exam."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single core concept (diminishing marginal returns). Student computes marginal products from a small table (30, 40, 30, 20, 10, 0) and identifies where MP first falls, at the 3rd worker. Distractors target common misconceptions (average vs marginal product, total output leveling off, confusing diminishing with negative returns). Short stem, simple subtraction, no representation changes beyond reading the table.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "s2-micro-10-k0",
+  "cellId": "s2-micro-10",
+  "passed": true,
+  "reasons": [],
+  "soft": [
+   "explanation_does_not_cover_distractors"
+  ],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Cross-price effect 1.5*8%=12%; income effect 2.0*3%=6%; sum = 18% increase (smartwatch price unchanged).",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "An increase of 18%"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Cross-price and income elasticity applied to find a combined quantity change; fits topic 2.5 and skill 3.C."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "1.5x8=12, 2x3=6, sum 18%. The key B is unique. The price change of 0% is stated, so the own-price effect is zero."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete and clear. All elasticities and expected changes are given."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor maps to a distinct error: omitting one effect, averaging, or a sign error. The explanation covers each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The arithmetic is simple and doable without a calculator in about 75 seconds. The option count is five. The stimulus is needed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and clean. The key is verified at +18%, the distractors are realistic, and the load is appropriate for a non-calculator item."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must apply the cross-price and income elasticity formulas (%change in Qd = elasticity x %change in determinant), interpret the signs, and sum the two effects (12% + 6% = 18%). The concept is within the AP scope of topic 2.5, and the arithmetic is simple and doable without a calculator. Distractors target common errors: using only one effect (12%, 6%), averaging (9%), or sign confusion (-6%). This is a typical full-mock quantitative item and is neither basic recall nor advanced.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "s2-micro-11-k0",
+  "cellId": "s2-micro-11",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "100-5P=10P-20 gives P=8, Q=60",
+     "final_answer": "P = $8 per crate, Q = 60 crates per week",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "b",
+     "brief_reasoning": "CS=0.5*60*(20-8)=360; PS=0.5*60*(8-2)=180",
+     "final_answer": "CS = $360 per week; PS = $180 per week",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "c",
+     "brief_reasoning": "|E|=5*8/60=0.67<1 so inelastic",
+     "final_answer": "|Ed| ≈ 0.67 (2/3); inelastic since less than 1",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Dominant demand is equilibrium and surplus (2.6). Part c adds point elasticity (a topic 2.3 prerequisite in the same unit), which is acceptable but peripheral."
+   },
+   "key_scoring": {
+    "pass": true,
+    "note": "",
+    "notes": "All answers verified: P=8, Q=60; CS=360, PS=180; |Ed|=2/3, inelastic. Rubric rows are consistent and have alternatives."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Equations and schedule are consistent and complete, with units. The calculator metadata is inconsistent (allowed vs na), which is minor."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "FRQ: common errors are listed per rubric row and are realistic."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "5 points in about 11 minutes is reasonable for a short FRQ, and the arithmetic is light."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and clean. The only minor issues are the calculator flag inconsistency and the elasticity part reaching slightly outside topic 2.6. It passes."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Three-part item: solve linear system (P=8, Q=60), invert the equations to find intercepts (demand choke price 20, supply intercept 2), compute the two triangle areas (CS=360, PS=180), then compute point elasticity (5*8/60=0.67) and classify it as inelastic. Standard AP Micro content with light arithmetic and a moderate multi-step chain; the schedule helps verify the answers. Note a minor metadata inconsistency (calculator 'na' vs 'allowed') that does not affect difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 7,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 300
+  }
+ },
+ {
+  "key": "s2-micro-12-k0",
+  "cellId": "s2-micro-12",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "For Firm A: if B picks High, Low gives 80 vs 60. If B picks Low, Low gives 45 vs 30. So Low is dominant for A. The game is symmetric, so Low is dominant for B too. Nash equilibrium is (Low, Low) with payoffs (45, 45).",
+     "final_answer": "Both firms have Low price as a dominant strategy. A: 80>60 when B is High; 45>30 when B is Low. Nash equilibrium: both charge Low, (45,45).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "b",
+     "brief_reasoning": "Nash total is 45+45 = 90. Both-High total is 60+60 = 120. The difference is 30.",
+     "final_answer": "Nash total = $90 million; both High = $120 million; combined profit is $30 million lower at the Nash equilibrium.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "c",
+     "brief_reasoning": "If A cheats it gains 80-60 = 20 once. After that it earns 45 instead of 60 every year, a loss of 15 per year forever. With many future years the losses add up to more than the one-time gain.",
+     "final_answer": "Cheating raises A's profit from 60 to 80 for one year (+$20M). After that B charges Low forever, so A earns 45 instead of 60 each year (−$15M per year). Over many years the total loss (15 × number of years) is bigger than the one-time $20M gain, so A keeps the High price.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 4.5 game theory, dominant strategy, Nash equilibrium, repeated game. Interpretation of quantitative outcomes fits 2.C."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Verified: Low dominant for both, NE (45,45); 90 vs 120, difference 30; gain 20 once, loss 15/yr. Rubric rows consistent."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Payoff matrix fully specified with units and format."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "FRQ; common error noted for (a). Acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "5-point short FRQ with 2/1/2 split; light load. Minor calculator label inconsistency (allowed vs na) but no calculation needed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and complete: the payoff matrix is fully specified, the answers check out, and the 2/1/2 point split fits a short FRQ. The only blemish is the minor calculator label inconsistency, which has no effect since no calculation is needed."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "This is a standard 2x2 prisoner's dilemma. Part a asks the student to find the dominant strategy by comparing payoffs: for Firm A, Low gives 80 vs 60 against High, and 45 vs 30 against Low. The matrix is symmetric, so Firm B follows the same logic, and the Nash equilibrium is Low/Low at (45, 45). Part b is simple addition and subtraction: 90 vs 120, a reduction of 30. Part c is a conceptual explanation of a repeated game with a punishment threat, comparing a one-time gain of 80 vs 60 against the loss of 60 vs 45 in every later year. The concepts are core to the topic, there are about 4-5 short reasoning steps, and the only representation is one payoff matrix. Reading and arithmetic loads are minimal. The metadata says the calculator is not applicable while the item says 'allowed', a minor inconsistency that does not affect difficulty. The item is more of a learning check than a full-mock item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 240
+  }
+ },
+ {
+  "key": "s2-micro-13-k0",
+  "cellId": "s2-micro-13",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_exam_suitability",
+   "instant_reject_out_of_scope_knowledge",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "MR = 100 - 4Q. Setting MR = MC gives 100 - 4Q = 20, so Q = 20. Price from demand: P = 100 - 2(20) = 60. Demand meets the price axis at 100 and the quantity axis at 50. MR meets the price axis at 100 and the quantity axis at 25. MC and ATC are the same horizontal line at 20.",
+     "final_answer": "Qm = 20, Pm = $60. Demand intercepts: P = 100, Q = 50. MR intercepts: P = 100, Q = 25. MC = ATC is a horizontal line at $20.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "b",
+     "brief_reasoning": "Profit = (P - ATC) × Q = (60 - 20) × 20 = 800. Shade the rectangle between $20 and $60 from Q = 0 to Q = 20.",
+     "final_answer": "$800",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "c",
+     "brief_reasoning": "Under perfect competition, P = MC = 20, so Q = 40. DWL = 0.5 × (40 - 20) × (60 - 20) = 400. Shade the triangle between demand and MC from Q = 20 to Q = 40.",
+     "final_answer": "$400",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "d",
+     "brief_reasoning": "At a price of $40, buyers demand Q = 30. Up to Q = 30, MR stays flat at $40 because the firm can't raise its price above the ceiling. Since $40 is greater than MC of $20, every unit up to 30 adds to profit. After Q = 30, the firm moves back onto the original MR curve, which is below MC (100 - 4(30) = -20). So the firm produces 30. Profit = (40 - 20) × 30 = 600.",
+     "final_answer": "Q = 30 and profit = $600. Quantity rises because the ceiling makes MR equal to $40 up to 30 units, and that is above MC. The firm no longer has to cut its price to sell more units.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": "Parts b-d are mostly calculation/explanation, not graph drawing. Part (d) price ceiling with MR flattening is beyond 4.2 (regulation of monopoly belongs to later topic)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All numbers verified: Qm=20, Pm=60, profit 800, DWL 400, ceiling Q=30, profit 600."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Data fully specified; no figure needed."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "FRQ; not applicable, common errors sparse but acceptable."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "Calculator marked required but all arithmetic is trivial; part (d) needs the kinked-MR-under-ceiling reasoning, which is unusual for AP Micro."
+   },
+   "instant_reject": [
+    "out_of_scope_knowledge"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "Math is correct, but part (d) goes beyond topic 4.2 scope, the dominant skill drifts from graphing to calculation, and the calculator designation is unjustified."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP Micro monopoly FRQ: derive MR from linear demand, find the MR=MC optimum, compute profit and DWL, and draw/label and shade the graph. Part (d) adds a price ceiling that makes MR horizontal at $40 up to Q=30, which requires a conceptual step beyond the basic monopoly model but is in scope for the course. Arithmetic is simple, reading is light, and nothing is vague or out of scope, so the difficulty comes from legitimate concept depth.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 8,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "s2-micro-14-k0",
+  "cellId": "s2-micro-14",
+  "passed": true,
+  "reasons": [],
+  "soft": [
+   "explanation_does_not_cover_distractors"
+  ],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "B",
+     "brief_reasoning": "The price of pears, a substitute, went up. That shifts apple demand to the right: quantity demanded is 15 bags higher at every price, including at $4 (50 to 65). The apple price itself did not change.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Determinants of demand: substitute price shifts demand. Matches 2.1 and the explain skill."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "B is uniquely correct. The table shows a +15 shift at every price. The apple price is unchanged, and the goods are substitutes."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete and consistent with the stem. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors encode distinct misconceptions: movement along vs shift, wrong direction, wrong mechanism, and complements. Each is explained. The explanation for C is slightly loose but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 75 seconds, no calculator, five options. Typical of the AP exam."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. The key B is unique and correct, the table is consistent, and the distractors are distinct and explained. Acceptable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Tests a single core concept: a substitute's price increase shifts demand right (change in demand vs. change in quantity demanded). The table is simple and the same shift occurs at every price. Reaching the answer takes a short chain of reasoning: spot the rise at every price, identify the cause as the substitute, and conclude it is a shift. The distractors are standard misconceptions (movement along the curve, complements, expectations, price change), so no heavy reading or computation is involved.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "s2-micro-15-k0",
+  "cellId": "s2-micro-15",
+  "passed": true,
+  "reasons": [],
+  "soft": [
+   "explanation_does_not_cover_distractors"
+  ],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "About 1.17 (elastic); total revenue increases",
+     "brief_reasoning": "Midpoint method: (48/144)/(1/3.5) = 0.333/0.2857 ≈ 1.17. Total revenue rises from $480 to $504.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Midpoint elasticity plus total revenue effect; squarely topic 2.3, skill 3.C."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Verified: %ΔQ=33.3%, %ΔP=28.6%, Ed≈1.17 elastic; TR 480→504. Key C unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table fully specified with two price-quantity pairs; clear wording."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors encode starting-point base (1.60), inverted ratio (0.86), and wrong revenue rule; explanation covers each."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Five options, ~100 seconds, manageable arithmetic without a calculator."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean item; key verified (1.17, elastic, revenue rises). Distractors are realistic and the explanation covers them all."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP midpoint-method elasticity calculation from a two-row table, followed by a link to the total revenue test. The concept is core, the multi-step reasoning is moderate, and the arithmetic is light (48/144 over 1/3.5, then 480 vs 504). Distractors target common errors such as the wrong base and the wrong revenue direction. It is well suited to a full mock exam and is not unfairly hard.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "s2-micro-16-k0",
+  "cellId": "s2-micro-16",
+  "passed": false,
+  "reasons": [
+   "reference_time_out_of_range"
+  ],
+  "soft": []
+ },
+ {
+  "key": "s2-micro-17-k0",
+  "cellId": "s2-micro-17",
+  "passed": false,
+  "reasons": [
+   "part_b_calculation_without_answer_row"
+  ],
+  "soft": []
+ }
+]

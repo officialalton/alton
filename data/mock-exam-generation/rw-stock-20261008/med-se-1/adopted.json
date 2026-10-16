@@ -1,0 +1,1916 @@
+[
+ {
+  "gid": "medium-boundaries-300",
+  "runId": "rw-supplement-medium",
+  "skill": "boundaries",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "The bdelloid rotifer, a microscopic freshwater animal that has reproduced without males for tens of millions of years, survives drought by drying out completely and entering a dormant state known as anhydrobiosis. Geneticists sequencing the animal's genome noticed something unexpected about its DNA______ roughly ten percent of its active genes appear to have been acquired directly from bacteria, fungi, and plants.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "The bdelloid rotifer, a microscopic freshwater animal that has reproduced without males for tens of millions of years, survives drought by drying out completely and entering a dormant state known as anhydrobiosis. Geneticists sequencing the animal's genome noticed something unexpected about its DNA______ roughly ten percent of its active genes appear to have been acquired directly from bacteria, fungi, and plants.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    ":",
+    ",",
+    "that",
+    "no punctuation"
+   ],
+   "correctIndex": 0,
+   "answers": null,
+   "explanation": "빈칸 앞 'Geneticists ... about its DNA'와 뒤 'roughly ten percent ... plants'는 각각 독립절이며, 뒤 절은 앞의 'something unexpected'가 무엇인지 구체적으로 설명합니다. 따라서 독립절 뒤에서 설명을 이끄는 콜론을 쓴 A가 정답입니다. B는 쉼표만으로 두 독립절을 이어 콤마 스플라이스가 됩니다. C는 'that'이 DNA를 꾸미는 관계절처럼 보이지만 뒤 절에 빈자리가 없어 문법적으로 성립하지 않습니다. D는 문장부호 없이 두 독립절을 붙인 무종지문(run-on)입니다.",
+   "explanationEn": "The text before the blank (\"Geneticists ... about its DNA\") and the text after it (\"roughly ten percent ... plants\") are both independent clauses, and the second clause explains what the \"something unexpected\" is. A colon is the right mark for introducing that kind of explanation after a complete clause, so A is correct. B joins two independent clauses with only a comma, which makes a comma splice. C might look like it starts a relative clause describing \"DNA,\" but the clause after the blank isn't missing anything, so \"that\" doesn't fit grammatically. D runs the two independent clauses together with no punctuation, which makes a run-on sentence.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "A",
+   "seed": "자연과학(생물·생태)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "빈칸 앞뒤 모두 독립절이며 뒤 절이 'something unexpected'를 구체화하므로 콜론(A)이 정확함. B는 콤마 스플라이스, C는 관계절에 빈자리가 없어 비문, D는 run-on. 벨로이드 로티퍼의 외래 유전자 비율(약 10%), 무성생식·무수생활(anhydrobiosis) 등 사실관계도 정확. 한·영 해설 결론·글자 참조 일치, 영어 해설 자연스러움. 독립절 판단 + 콜론 기능 확인의 두 단계 판단이 필요하고 B·C가 비교를 요하는 오답으로 medium에 적합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "독립절+설명 콜론 문항. B·D(콤마 스플라이스/무종지문)는 표준 오답이고, C(that)는 'something unexpected ... that'을 동격절로 읽으면 언뜻 말이 되는 것처럼 보이는 함정이다. 사실관계(브델로이드 윤충의 외래 유전자 약 8~10%)는 대체로 정확하다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "medium-boundaries-301",
+  "runId": "rw-supplement-medium",
+  "skill": "boundaries",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "In Lena Okafor's novel The Lamplighter's Debt, the house at Wrenfield has stood empty for eleven winters. Its last tenant—a retired ship's surgeon who, according to village gossip, kept a drowned sailor's compass on his mantel______ behind nothing but a ledger of unpaid debts and a single unopened letter addressed to his daughter.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "In Lena Okafor's novel The Lamplighter's Debt, the house at Wrenfield has stood empty for eleven winters. Its last tenant—a retired ship's surgeon who, according to village gossip, kept a drowned sailor's compass on his mantel______ behind nothing but a ledger of unpaid debts and a single unopened letter addressed to his daughter.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    ", had left",
+    "—had left",
+    "; had left",
+    "had left"
+   ],
+   "correctIndex": 1,
+   "answers": null,
+   "explanation": "\"tenant\" 뒤에서 대시로 시작한 동격 삽입구(a retired ship's surgeon ... mantel)는 대시로 닫아야 하고, 그 뒤에 주어 \"Its last tenant\"의 동사 \"had left\"가 와야 한다. 따라서 B가 정답이다. A는 쉼표로 삽입구를 닫아 여는 대시와 짝이 맞지 않는다. C의 세미콜론은 주어와 동사를 갈라 놓아 앞부분이 독립절이 되지 못한다. D는 삽입구를 닫지 않아 \"had left\"가 관계절 \"who ... kept\"에 이어지는 것처럼 읽혀 주절의 동사가 사라진다.",
+   "explanationEn": "The dash after \"tenant\" opens an appositive (a retired ship's surgeon ... on his mantel), so a second dash has to close it. After that comes \"had left,\" the verb for the subject \"Its last tenant.\" That makes B correct. A closes the appositive with a comma, which doesn't match the opening dash. C puts a semicolon between the subject and its verb, and a semicolon should join two independent clauses, but the text before it isn't one. D never closes the appositive, so \"had left\" reads as part of the \"who ... kept\" clause, and the main clause is left with no verb.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "B",
+   "seed": "문학(19세기 소설 분위기의 현대 서술)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "\"tenant—\" 뒤의 삽입구가 길고 내부에 쉼표 삽입(\"who, according to village gossip, kept\")이 있어 여는 대시를 놓치면 A(쉼표)나 D(무표점)를 고르기 쉽게 설계됨. B가 유일하게 대시 짝을 맞추고 주어-동사를 연결함. 한국어·영어 해설 모두 B를 일관되게 뒷받침하며 글자 참조 일치, 한글 혼입 없음. 가상의 소설 인용으로 저작권 문제 없음."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "대시 쌍으로 삽입구를 닫는 전형적인 문항이다. 삽입구가 길고 그 안에 관계절(who ... kept)이 들어 있어서 훑어 읽으면 A(쉼표)나 D(구두점 없음)를 고르기 쉽다. 중간 난이도에 맞다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "medium-boundaries-304",
+  "runId": "rw-supplement-medium",
+  "skill": "boundaries",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "In 2019, engineers at a Dutch startup tested a new kind of bicycle path built from recycled plastic bottles, a material chosen partly because it weighs far less than ______ the hollow modules could be assembled off-site and lowered into place in a single afternoon, sparing commuters weeks of detours.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "In 2019, engineers at a Dutch startup tested a new kind of bicycle path built from recycled plastic bottles, a material chosen partly because it weighs far less than ______ the hollow modules could be assembled off-site and lowered into place in a single afternoon, sparing commuters weeks of detours.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "asphalt; as a result,",
+    "asphalt, as a result,",
+    "asphalt as a result;",
+    "asphalt, as a result"
+   ],
+   "correctIndex": 0,
+   "answers": null,
+   "explanation": "'In 2019 ... weighs far less than asphalt'는 하나의 독립절이고, 'the hollow modules could be assembled...'도 독립절이므로 두 절 사이에 강한 경계가 필요하다. 'as a result'는 앞 내용(가벼움)의 결과로 조립이 가능했다는 뒤 절을 이끄는 접속부사이므로 세미콜론 뒤에 오고 쉼표가 따라야 한다. 따라서 A가 정답이다. B와 D는 쉼표만으로 두 독립절을 이어 무종지문(comma splice)이 된다. C는 세미콜론 위치는 그럴듯하지만 'as a result'를 앞 절에 붙여 무게가 가벼운 것이 결과인 것처럼 논리를 뒤집는다.",
+   "explanationEn": "The text contains two independent clauses: one ending with \"weighs far less than asphalt\" and one beginning with \"the hollow modules could be assembled.\" These need a strong boundary between them. \"As a result\" introduces the second clause, since the modules could be assembled off-site because the material is light. So it belongs after a semicolon and should be followed by a comma, which makes A correct. B and D join two independent clauses with only commas, so they create comma splices. C uses a semicolon, but it attaches \"as a result\" to the first clause, which wrongly makes the plastic's light weight sound like the result.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "A",
+   "seed": "기술·공학 사례",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "두 독립절 경계를 세미콜론으로 구분하고 접속부사 'as a result'를 뒤 절에 쉼표와 함께 두는 A가 유일하게 옳다. B·D는 comma splice, C는 세미콜론 위치는 맞지만 'as a result'가 앞 절에 붙어 인과 논리가 뒤집힌다(문법적으로는 성립하므로 '말이 되는' 오답 역할). 해설 한·영 모두 일치하고 글자 참조 정확. 실제 PlasticRoad 시범 구간은 2018년 즈볼러에 개통되었으나 지문은 특정 명칭을 쓰지 않은 일반 서술이라 중대한 사실 오류로 보지 않음. 난이도는 경계 판단 + 접속부사 위치 판단의 두 단계가 필요해 medium에 적합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "전형적인 접속부사 경계 문항이다. 두 독립절이 있는지 확인하고, 'as a result'가 앞 절과 뒤 절 중 어디에 붙는지 의미로 판단해야 하므로 두 단계 판단이 필요하다. C는 세미콜론을 써서 그럴듯해 보이는 함정이고, B와 D는 쉼표 위치만 다르다. 어느 쪽도 사실 오류는 없다. 2019년 네덜란드 재활용 플라스틱 자전거 도로(PlasticRoad) 실제 사례와도 맞다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "medium-boundaries-305",
+  "runId": "rw-supplement-medium",
+  "skill": "boundaries",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "The bombardier beetle (Brachinus) defends itself in a remarkable way. When threatened, it mixes two chemicals stored separately in its abdomen inside a reinforced reaction chamber, a process that heats the mixture to nearly the boiling point of water ______ the beetle then sprays the scalding liquid at its attacker, aiming the stream by rotating the tip of its abdomen.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "The bombardier beetle (Brachinus) defends itself in a remarkable way. When threatened, it mixes two chemicals stored separately in its abdomen inside a reinforced reaction chamber, a process that heats the mixture to nearly the boiling point of water ______ the beetle then sprays the scalding liquid at its attacker, aiming the stream by rotating the tip of its abdomen.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    ", ",
+    "; ",
+    " and ",
+    ", which "
+   ],
+   "correctIndex": 1,
+   "answers": null,
+   "explanation": "\"it mixes ... water\"는 동격구 \"a process that...\"로 끝나는 독립절이고, \"the beetle then sprays...\"도 주어와 동사를 갖춘 독립절이다. 두 독립절은 세미콜론으로 연결할 수 있으므로 B가 정답이다. A는 쉼표만으로 두 독립절을 이어 쉼표 오용(comma splice)이 된다. C는 쉼표 없이 and로 연결해 동격구 안의 관계절 \"that heats ...\"에 이어지는 것처럼 읽혀 구조가 어색해지고, 독립절을 잇는 문장부호도 빠져 있다. D는 which가 관계대명사인데 뒤 절에 이미 주어(the beetle)와 목적어(the scalding liquid)가 모두 있어서 문법적으로 성립하지 않는다.",
+   "explanationEn": "\"It mixes ... water\" is an independent clause that ends with the long appositive phrase \"a process that...,\" and \"the beetle then sprays...\" is also an independent clause with its own subject and verb. A semicolon can correctly join two independent clauses, so B is correct. A joins the two clauses with only a comma, which creates a comma splice. C uses \"and\" without a comma, so the second clause reads as if it continues the relative clause \"that heats ...,\" and there's still no proper punctuation joining the two independent clauses. D is wrong because \"which\" is a relative pronoun, but the clause after it already has a subject (the beetle) and an object (the scalding liquid), so it doesn't work grammatically.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "B",
+   "seed": "자연과학(생물·생태)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "검산: 빈칸 앞 \"it mixes ... chamber, a process that heats ... water\"는 동격구로 끝나는 독립절, 뒤 \"the beetle then sprays ...\"도 독립절 → 세미콜론(B) 적합. A는 comma splice, C는 쉼표 없는 and로 독립절 연결(SAT 기준 불가) 및 관계절 \"that heats ... and the beetle then sprays\"로 오독될 구조, D는 which 뒤 절에 주어·목적어가 모두 있어 성립 불가. 한·영 해설 결론·글자 참조 일치, 영어 자연스러움. 폭탄먼지벌레 사실(두 화학물질 혼합, 끓는점 근접 가열, 복부 끝 회전 조준) 정확. 긴 동격구 뒤에서 절 경계를 찾아야 하므로 medium 적합. 다만 C(\"and\" 단독)는 비교적 약한 오답임."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "B만 어법상 옳다: 두 독립절을 세미콜론으로 이었다. 앞 절 끝에 긴 동격구가 붙어 있어서 절의 경계가 잘 보이지 않는다. 그래서 문장을 훑어 읽으면 A(쉼표 오용)나 C(쉼표 없이 and만 씀)를 고르기 쉽고, 이 점이 medium 난이도에 맞는다. 폭탄먼지벌레가 두 화학물질을 섞어 약 100°C의 액체를 분사하고, 배 끝을 돌려 방향을 조절한다는 과학 내용도 정확하다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "medium-boundaries-307",
+  "runId": "rw-supplement-medium",
+  "skill": "boundaries",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "Along the coast of Bangladesh, the Sundarbans mangrove forest acts as a living barrier against cyclones. Researchers studying the 2007 storm known as Cyclone Sidr found that villages sheltered behind dense stands of mangroves suffered far less flooding than exposed settlements did. The reason, the researchers ______ the tangled roots and trunks slow incoming storm surges, draining much of the water's energy before it reaches the shore.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "Along the coast of Bangladesh, the Sundarbans mangrove forest acts as a living barrier against cyclones. Researchers studying the 2007 storm known as Cyclone Sidr found that villages sheltered behind dense stands of mangroves suffered far less flooding than exposed settlements did. The reason, the researchers ______ the tangled roots and trunks slow incoming storm surges, draining much of the water's energy before it reaches the shore.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "concluded, is that,",
+    "concluded is that",
+    "concluded, is that;",
+    "concluded, is that"
+   ],
+   "correctIndex": 3,
+   "answers": null,
+   "explanation": "\"the researchers concluded\"는 주어 \"The reason\"과 동사 \"is\" 사이에 끼어든 삽입구라서 앞뒤에 쉼표가 짝을 이뤄야 한다. 또 \"is that\" 뒤에는 that절이 보어로 바로 이어지므로 부호를 넣으면 안 된다. 따라서 D가 정답이다. A는 삽입구 쉼표는 맞지만 \"that\"과 그 절 사이에 불필요한 쉼표를 넣었다. B는 삽입구 뒤쪽 쉼표가 빠져 쌍을 이루지 못한다. C는 세미콜론이 \"is that\"과 그 보어 절을 떼어 놓아 앞부분이 완결되지 않은 문장이 된다.",
+   "explanationEn": "\"the researchers concluded\" is an interrupting phrase between the subject \"The reason\" and the verb \"is,\" so it has to be set off by a pair of commas. On top of that, the that-clause after \"is that\" acts as the complement and should follow directly, with no punctuation. That makes D the answer. A sets off the interrupter correctly but adds a comma between \"that\" and its clause, which you don't need. B leaves out the comma that should close the interrupter, so the commas aren't paired. C puts a semicolon between \"is that\" and its complement, which leaves the first part as an incomplete sentence.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "D",
+   "seed": "환경·지리",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "검산: \"The reason, the researchers concluded, is that the tangled roots... slow...\" — 삽입구 쉼표 쌍 + \"is that\" 뒤 무부호가 유일한 올바른 조합(D). A는 that 뒤 불필요한 쉼표, B는 닫는 쉼표 누락, C는 세미콜론으로 앞절 미완결. 한국어·영어 해설 모두 결론·글자 참조 일치, 영어 자연스럽고 한글 없음. 사실 오류(사이클론 시드르 2007, 순다르반스 방글라데시) 없음. 난이도: 삽입구 쉼표 쌍 판단 + that절 연결 확인의 두 단계이며 A·B가 부분적으로 맞는 근거를 가져 medium에 적합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "지문에 이미 \"researchers\" 뒤 쉼표가 있어 여는 쉼표가 확보됨. D가 유일하게 옳음. 함정 A, B는 부분적으로 그럴듯해 medium에 적합.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "medium-boundaries-311",
+  "runId": "rw-supplement-medium",
+  "skill": "boundaries",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "In Maren Holloway's novel The Lamplighter's Daughter, the narrator, a widowed seamstress living above a shuttered apothecary in a fog-bound harbor town, rarely speaks of her own grief. Instead, she describes the objects her late husband left ______ a cracked pocket watch that still ticks, a ledger of unpaid debts, and a pair of boots she polishes every Sunday though no one will wear them again.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "In Maren Holloway's novel The Lamplighter's Daughter, the narrator, a widowed seamstress living above a shuttered apothecary in a fog-bound harbor town, rarely speaks of her own grief. Instead, she describes the objects her late husband left ______ a cracked pocket watch that still ticks, a ledger of unpaid debts, and a pair of boots she polishes every Sunday though no one will wear them again.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "behind;",
+    "behind, and",
+    "behind, these are",
+    "behind:"
+   ],
+   "correctIndex": 3,
+   "answers": null,
+   "explanation": "빈칸 앞은 \"she describes the objects her late husband left behind\"라는 완전한 독립절이고, 그 뒤에는 그 물건들을 구체적으로 나열하는 명사구가 온다. 완전한 절 뒤에 목록이나 설명을 붙일 때는 콜론을 쓰므로 D가 정답이다. A의 세미콜론은 양쪽에 독립절이 있어야 하는데, 뒤쪽이 명사구 목록일 뿐이라 쓸 수 없다. B의 \"and\"는 \"describes\"와 나란히 놓일 동사나 절이 없는 상태에서 명사구를 연결하므로 문장 구조가 어색하고 논리적으로도 맞지 않는다. C는 두 독립절을 쉼표만으로 이어 쉼표 접합 오류(comma splice)가 생긴다.",
+   "explanationEn": "The text before the blank, \"she describes the objects her late husband left behind,\" is a complete independent clause. What follows is a noun-phrase list naming those objects. A colon is the right way to introduce a list or explanation after a complete clause, so D is correct. A is wrong because a semicolon needs an independent clause on both sides, and the second part here is only a list of noun phrases. B is wrong because \"and\" ends up joining the list to the clause even though there is no matching verb or clause to pair it with, which makes the sentence ungrammatical and illogical. C is wrong because it joins two independent clauses with only a comma, which creates a comma splice.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "D",
+   "seed": "문학(19세기 소설 분위기의 현대 서술)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "\"she describes the objects her late husband left behind\"는 완전한 독립절이고 뒤는 명사구 목록이므로 콜론(D)이 유일하게 적합. A(세미콜론)는 뒤가 독립절이 아니어서 불가, C는 쉼표 접합, B는 \"and\"가 연결할 병렬 요소가 없어 비문. 한국어·영어 해설 모두 정답 및 선택지 글자와 일치하고 모순 없음. 가상의 소설·작가명으로 저작권 우려 없음. 독립절 판단 + 뒤 구조(목록) 확인의 두 단계가 필요하고 A·C가 그럴듯한 오답이라 medium에 적합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": false,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "독립절 뒤에 목록이 오므로 콜론이 정답. 세미콜론과 쉼표+and 오답이 그럴듯하게 설계되어 있다. 목표 난이도 medium으로 적절하다(다소 쉬운 편).",
+    "passed": false
+   }
+  }
+ },
+ {
+  "gid": "medium-boundaries-312",
+  "runId": "rw-supplement-medium",
+  "skill": "boundaries",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "The Okavango Delta in northern Botswana is unusual among the world's large deltas, most of which empty into seas or ______ waters, carried south each year from rainfall in the Angolan highlands, never reach the coast at all, instead evaporating or seeping into the sands of the Kalahari Desert.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "The Okavango Delta in northern Botswana is unusual among the world's large deltas, most of which empty into seas or ______ waters, carried south each year from rainfall in the Angolan highlands, never reach the coast at all, instead evaporating or seeping into the sands of the Kalahari Desert.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "oceans; its",
+    "oceans, its",
+    "oceans its",
+    "oceans, so its"
+   ],
+   "correctIndex": 0,
+   "answers": null,
+   "explanation": "빈칸 앞은 관계절(most of which ...)까지 포함한 하나의 독립절이고, 빈칸 뒤 'its waters ... never reach the coast'도 삽입구를 지나 동사 reach를 갖춘 독립절이다. 두 독립절은 세미콜론으로 연결해야 하므로 A가 정답이다. B는 쉼표만으로 두 독립절을 이어 comma splice가 된다. C는 문장부호 없이 이어 run-on 문장이 된다. D는 문법적으로 연결은 되지만 so가 인과 관계를 나타내는데, 다른 삼각주가 바다로 흐르는 것이 오카방고 물이 해안에 닿지 않는 원인이 아니므로 논리가 맞지 않는다.",
+   "explanationEn": "The text before the blank, including the relative clause \"most of which empty into seas or oceans,\" is one independent clause. After the blank, once you skip the inserted phrase, \"its waters ... never reach the coast\" is a second independent clause with its own verb, \"reach.\" Two independent clauses can be joined with a semicolon, so A is correct. B joins them with only a comma, which is a comma splice, and C uses no punctuation at all, which makes a run-on sentence. D is grammatical, but \"so\" signals cause and effect, and other deltas flowing to the sea doesn't cause the Okavango's water to stop short of the coast, so the logic doesn't work.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "A",
+   "seed": "환경·지리",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "빈칸 앞 'most of which ... oceans' 관계절과 빈칸 뒤 삽입구 'carried south ... highlands'를 건너 'its waters ... never reach'가 독립절임을 확인해야 하므로 두 단계 판단이 필요. A 세미콜론이 유일한 정답. B comma splice, C run-on, D는 문법적으로는 가능하나 'so'의 인과 논리가 맞지 않음(표준 SAT boundaries 오답이 대부분 문법 오류인 점에 비해 D는 논리 기반 배제라 다소 비전형적이나 허용 범위). 오카방고 삼각주 사실관계(앙골라 고지대 강우, 칼라하리 사막으로 증발·침투) 정확. 해설 한·영 일치, 한글 혼입 없음."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "관계절과 삽입구 때문에 절 경계를 파악하기가 조금 어렵다. 그래서 두 단계 판단이 필요하며, 이는 medium 난이도에 맞다. D는 문법상 연결은 되지만 논리 때문에 배제되는 오답이다. 오카방고 삼각주의 물이 앙골라 고원에서 오고 칼라하리에서 증발·침투한다는 내용은 사실과 맞다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "medium-boundaries-313",
+  "runId": "rw-supplement-medium",
+  "skill": "boundaries",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "Founded in 1823, the London Mechanics' Institute offered evening lectures in chemistry, mechanics, and geometry to workers who had left school at an early age. Its founders—among them the Scottish physician George Birkbeck, whose earlier classes in Glasgow had drawn hundreds of artisans—hoped the lectures would sharpen workers' practical skills______ many factory owners suspected that educated laborers would simply demand higher wages.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "Founded in 1823, the London Mechanics' Institute offered evening lectures in chemistry, mechanics, and geometry to workers who had left school at an early age. Its founders—among them the Scottish physician George Birkbeck, whose earlier classes in Glasgow had drawn hundreds of artisans—hoped the lectures would sharpen workers' practical skills______ many factory owners suspected that educated laborers would simply demand higher wages.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    ", however,",
+    "; however,",
+    ", however;",
+    "however,"
+   ],
+   "correctIndex": 1,
+   "answers": null,
+   "explanation": "긴 대시 삽입구를 걷어내면 \"Its founders ... hoped the lectures would sharpen workers' practical skills\"와 \"many factory owners suspected ...\"라는 두 독립절이 이어진다. 접속부사 however가 두 번째 절을 이끌므로 그 앞에 세미콜론, 뒤에 쉼표를 둔 B가 정답이다. A는 쉼표만으로 두 독립절을 이어 콤마 스플라이스가 된다. C는 however를 첫 절에 붙여 의미상 대조가 엉뚱한 곳에 걸리고 두 번째 절과의 연결이 어색하다. D는 절 사이에 구두점이 없어 무종지문(run-on)이 된다.",
+   "explanationEn": "If you set aside the long interruption between the dashes, you get two independent clauses: \"Its founders ... hoped the lectures would sharpen workers' practical skills\" and \"many factory owners suspected ...\". The conjunctive adverb \"however\" begins the second clause, so it needs a semicolon before it and a comma after it, which is choice B. Choice A joins the two independent clauses with only commas, which makes a comma splice. Choice C attaches \"however\" to the first clause, so the contrast lands in the wrong place and the clauses don't connect logically. Choice D has no punctuation between the clauses, which makes a run-on sentence.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "B",
+   "seed": "역사(근대 사회 변화)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "긴 대시 삽입구를 걷어내고 두 독립절을 식별한 뒤 접속부사 however의 구두점 규칙을 적용하는 두 단계 판단이 필요. B(; however,)가 유일하게 올바름. A는 콤마 스플라이스, D는 run-on, C(, however;)는 세미콜론 자체는 독립절 연결에 가능하나 however가 첫 절 끝에 붙어 대조 관계가 논리적으로 성립하지 않아 SAT 표준 오답 유형에 해당. 해설(한·영) 모두 정답 및 선택지 글자와 일치하며 자연스러움. 1823년 런던 기계공 학원·버크벡 관련 사실도 정확. 난이도 medium 적합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "대시 삽입구를 걷어내야 하고, 이어서 however를 어느 절에 붙일지 판단해야 하는 두 단계 문항이다. C는 문법상으로는 성립하지만 논리상 대조가 엉뚱한 곳에 걸려 배제되므로 매력적인 오답 역할을 한다. 사실관계(1823년, Birkbeck, Glasgow)도 정확하다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "medium-boundaries-314",
+  "runId": "rw-supplement-medium",
+  "skill": "boundaries",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "In 1978, structural engineer William LeMessurier discovered a serious flaw in New York's Citicorp Center, a 59-story tower he had helped design. The bolted joints in the tower's diagonal bracing, which a contractor had substituted for welded joints to reduce costs, ______ the building could buckle in a strong storm striking it diagonally. Crews secretly reinforced the joints at night over the following months.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "In 1978, structural engineer William LeMessurier discovered a serious flaw in New York's Citicorp Center, a 59-story tower he had helped design. The bolted joints in the tower's diagonal bracing, which a contractor had substituted for welded joints to reduce costs, ______ the building could buckle in a strong storm striking it diagonally. Crews secretly reinforced the joints at night over the following months.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "were too weak, the result was that",
+    "were too weak, and, as a result",
+    "were too weak, meaning that",
+    "were too weak; meaning that"
+   ],
+   "correctIndex": 2,
+   "answers": null,
+   "explanation": "주어 \"The bolted joints\"는 쉼표 사이의 관계절을 건너뛴 뒤 동사 \"were\"와 연결되며, 빈칸 뒤 \"the building could buckle...\"는 완전한 절이다. C는 분사구 \"meaning that\"으로 뒤의 절을 that절로 이끌기 때문에 문법적으로 옳다. A는 두 독립절을 쉼표로만 잇는 쉼표 오류(comma splice)이다. B는 \"as a result\" 뒤에 쉼표가 없어 삽입구가 열리기만 하고 닫히지 않으므로 구두점이 맞지 않는다. D의 세미콜론 뒤에는 독립절이 와야 하는데, \"meaning that...\"은 독립절이 아닌 구이다.",
+   "explanationEn": "The subject \"The bolted joints\" skips over the comma-enclosed relative clause and connects to the verb \"were,\" and the words after the blank, \"the building could buckle...,\" form a full clause. Choice C works because the participial phrase \"meaning that\" turns what follows into a that-clause, so the sentence is grammatical. Choice A joins two independent clauses with only a comma, which is a comma splice. Choice B opens an interrupting phrase with \"and, as a result\" but never closes it with a comma, so the punctuation is unbalanced. Choice D is wrong because a semicolon must be followed by an independent clause, and \"meaning that...\" is a phrase, not an independent clause.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "C",
+   "seed": "기술·공학 사례",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "정답 C 검산 완료: \"were too weak, meaning that + 완전한 절\"은 표준 분사구 연결로 옳음. A는 comma splice, D는 세미콜론 뒤 비독립절로 명확한 오답. B는 \"and, as a result the building...\"에서 삽입구 쉼표가 비대칭이라 관례상 오류이나, 유일한 결함이 쉼표 하나 누락이라 오답 근거가 다소 약함(판정에는 영향 없음). 사실관계(1978 Citicorp Center, LeMessurier, 용접→볼트 교체, 대각 방향 풍하중, 야간 비밀 보강) 정확. 한·영 해설 결론 및 선택지 참조 일치, 한글 혼입 없음. 난이도: 주어-동사 연결 확인 후 접속 방식 비교 필요하여 medium에 적합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "C만 정답이다. A는 comma splice이고, B는 삽입구 뒤를 닫는 쉼표가 빠져 있으며, D는 세미콜론 뒤에 독립절이 아닌 구가 온다. 설명된 사실(1978년, 볼트 접합으로 바꾼 일, 사선 방향 바람에 취약했던 점, 야간 보강 공사)은 정확하다. B의 구두점 함정과 D의 세미콜론 함정을 가려내려면 비교가 필요하므로 medium 난이도에 맞다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "medium-boundaries-316",
+  "runId": "rw-supplement-medium",
+  "skill": "boundaries",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "In Mara Ellison's novel The Lamplighter's Daughter, set in a fog-bound harbor town, the young governess Celia Vane discovers a packet of unsent letters hidden beneath the floorboards of her employer's study. The letters, written in a cramped and trembling ______ the true reason the household never speaks of the drowned elder son.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "In Mara Ellison's novel The Lamplighter's Daughter, set in a fog-bound harbor town, the young governess Celia Vane discovers a packet of unsent letters hidden beneath the floorboards of her employer's study. The letters, written in a cramped and trembling ______ the true reason the household never speaks of the drowned elder son.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "hand, reveal",
+    "hand reveal",
+    "hand; reveal",
+    "hand, and reveal"
+   ],
+   "correctIndex": 0,
+   "answers": null,
+   "explanation": "\"written in a cramped and trembling hand\"는 주어 \"The letters\"와 동사 \"reveal\" 사이에 끼어든 비필수 삽입구이므로 앞뒤를 쉼표 한 쌍으로 묶어야 하고, 앞의 쉼표가 이미 있으니 뒤에도 쉼표가 필요하다. 따라서 A가 정답이다. B는 닫는 쉼표가 빠져 삽입구가 동사까지 이어지는 것처럼 읽힌다. C의 세미콜론은 독립절 두 개를 잇는 부호인데, 세미콜론 앞부분은 동사가 없어 독립절이 아니며 주어와 동사를 갈라 놓는다. D는 \"and\"를 넣어 \"reveal\"이 주어와 연결될 주동사를 잃게 만들어, 문장에 주어 \"The letters\"의 동사가 없게 된다.",
+   "explanationEn": "The phrase \"written in a cramped and trembling hand\" is a nonessential modifier that sits between the subject \"The letters\" and the verb \"reveal,\" so it needs a pair of commas around it; since the opening comma is already there, you need a closing comma too. That makes A correct. B leaves out the closing comma, so the modifier seems to run right into the verb. C uses a semicolon, which should join two independent clauses, but the part before it has no main verb and isn't an independent clause, and the semicolon also cuts the subject off from its verb. D adds \"and,\" which leaves \"The letters\" without a main verb, so the sentence never becomes a complete clause.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "A",
+   "seed": "문학(19세기 소설 분위기의 현대 서술)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "검산: \"The letters, written in a cramped and trembling hand, reveal the true reason...\" — 주어 \"The letters\" + 비필수 분사구 + 주동사 \"reveal\". A만 삽입구를 쉼표 쌍으로 닫고 주어-동사를 올바르게 연결함. B는 닫는 쉼표 누락, C는 세미콜론 앞이 독립절이 아님(동사 없음), D는 \"and\"로 인해 주동사 상실(조각문). 한국어·영어 해설 모두 동일 결론·글자 참조이며 영어 해설에 한글 없음. 가상의 소설·작가로 저작권 문제 없음. 난이도: 삽입구 인식 + 뒤 구조 확인의 두 단계 판단이 필요하고, B·C·D가 각각 그럴듯하여 medium에 부합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": false,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "정답 A를 직접 검산했고 맞다. 완성 문장은 \"The letters, written in a cramped and trembling hand, reveal the true reason the household never speaks of the drowned elder son.\"이다. 삽입된 수식어구를 닫는 쉼표가 들어가 문법적으로 올바르다. 오답은 각각 그럴듯하다. B는 닫는 쉼표가 빠졌고, C는 세미콜론을 잘못 썼으며, D는 \"and\"를 넣어 주동사가 없어진다. 문장 구조를 파악하고 쉼표 짝 규칙을 적용하는 두 단계가 필요하므로 medium 난이도에 맞는다. D의 한국어 해설은 문장이 약간 어색하지만 내용은 정확하고, 영어 해설과 결론이 같다.",
+    "passed": false
+   }
+  }
+ },
+ {
+  "gid": "medium-boundaries-317",
+  "runId": "rw-supplement-medium",
+  "skill": "boundaries",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "Most rivers eventually empty into an ocean, but the Okavango River ends far inland. The Okavango Delta—a vast wetland in northern Botswana where seasonal floodwaters fan out across the dry sands of the Kalahari Basin______ the sea; instead, nearly all of its water evaporates, is absorbed by plants, or seeps into the ground.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "Most rivers eventually empty into an ocean, but the Okavango River ends far inland. The Okavango Delta—a vast wetland in northern Botswana where seasonal floodwaters fan out across the dry sands of the Kalahari Basin______ the sea; instead, nearly all of its water evaporates, is absorbed by plants, or seeps into the ground.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    ", never reaches",
+    "—never reaches",
+    "; never reaches",
+    "—it never reaches"
+   ],
+   "correctIndex": 1,
+   "answers": null,
+   "explanation": "주어 'The Okavango Delta' 뒤에 대시로 시작한 비필수 동격 삽입구가 'Basin'에서 끝나므로, 같은 대시로 닫은 뒤 본동사 'never reaches'로 이어져야 한다. 따라서 B가 정답이다. A는 대시로 연 삽입구를 쉼표로 닫아 부호 짝이 맞지 않는다. C의 세미콜론은 주어와 동사를 갈라놓아 앞부분을 동사 없는 불완전한 문장으로 만든다. D는 대시는 맞지만 'it'을 넣어 주어 'Delta'를 불필요하게 반복하므로 주어가 하나 남게 되고 문장이 성립하지 않는다.",
+   "explanationEn": "The subject \"The Okavango Delta\" is followed by a nonessential appositive. That appositive opens with a dash and ends at \"Basin,\" so it must close with a matching dash before the main verb \"never reaches.\" That makes B correct. A closes the dash-opened phrase with a comma, so the punctuation marks don't match. C uses a semicolon, which cuts the subject off from its verb and leaves the first part as a fragment with no verb. D uses the right dash but adds \"it,\" which repeats the subject \"Delta.\" That leaves \"Delta\" without a verb, so the sentence doesn't work.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "B",
+   "seed": "환경·지리",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "정답 B 검산 확인: 'The Okavango Delta—[동격 삽입구]—never reaches the sea' 구조로 대시 짝이 맞고 주어·동사가 연결된다. A는 대시–쉼표 불일치, C는 주어와 동사 사이 세미콜론으로 앞부분이 단편, D는 'it' 중복으로 'Delta'가 동사 없이 남는다. 한·영 해설이 동일한 결론과 선택지 참조를 가지며 모순 없음. 지리적 사실(보츠와나 북부, 칼라하리 분지, 내륙 종결) 정확. 삽입구가 길어 시작 대시를 되짚어야 하고 D가 그럴듯한 오답으로 기능하므로 medium 적합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "대시로 연 긴 삽입구를 같은 대시로 닫는 문제다. 삽입구가 길어서 주어를 놓치기 쉽다. 오답 A, C, D는 각각 그럴듯한 함정이며, 특히 D를 배제하려면 주어와 동사의 연결을 확인해야 한다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "medium-boundaries-318",
+  "runId": "rw-supplement-medium",
+  "skill": "boundaries",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "In 1850, the British Parliament passed the Public Libraries Act, which allowed towns to fund free libraries through local taxes. Adoption was slow at first—many ratepayers objected to the added expense—but the idea gradually spread. Among the earliest adopters was Manchester, whose library opened in 1852 at a ceremony attended by the novelist Charles Dickens______ for the first time, the city's factory workers could borrow books without paying a subscription fee.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "In 1850, the British Parliament passed the Public Libraries Act, which allowed towns to fund free libraries through local taxes. Adoption was slow at first—many ratepayers objected to the added expense—but the idea gradually spread. Among the earliest adopters was Manchester, whose library opened in 1852 at a ceremony attended by the novelist Charles Dickens______ for the first time, the city's factory workers could borrow books without paying a subscription fee.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    ",",
+    ", which",
+    ";",
+    "(no punctuation)"
+   ],
+   "correctIndex": 2,
+   "answers": null,
+   "explanation": "빈칸 앞 \"Among the earliest adopters ... Charles Dickens\"는 도치된 독립절이고, 빈칸 뒤 \"for the first time, the city's factory workers could borrow books...\"도 주어와 동사를 갖춘 독립절이다. 접속사 없이 두 독립절을 연결하려면 세미콜론이 필요하므로 C가 정답이다. A는 쉼표만으로 두 독립절을 이어 쉼표 오용(comma splice)이 된다. B의 \"which\"는 뒤에 이미 완전한 절이 있어 관계절이 성립하지 않는다. D는 아무 부호 없이 두 절을 붙인 무종지문(run-on)이다.",
+   "explanationEn": "The text before the blank (\"Among the earliest adopters ... Charles Dickens\") is an inverted independent clause, and the text after it (\"for the first time, the city's factory workers could borrow books...\") is also an independent clause with its own subject and verb. When two independent clauses are joined without a conjunction, you need a semicolon, so C is correct. A joins the two clauses with only a comma, which creates a comma splice. B adds \"which,\" but the clause that follows is already complete, so it can't work as a relative clause. D runs the two clauses together with no punctuation at all, which creates a run-on sentence.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "C",
+   "seed": "역사(근대 사회 변화)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "빈칸 앞 \"Among the earliest adopters was Manchester, whose library ... Charles Dickens\"는 도치 구조와 whose 관계절을 포함한 독립절, 빈칸 뒤 \"for the first time, the city's factory workers could borrow...\"는 도입구 뒤 완전한 독립절. 접속사 없이 연결하므로 세미콜론(C)만 적합. A는 comma splice, B는 which 뒤에 완전절이 와서 비문, D는 run-on. 한·영 해설 모두 정답과 글자 참조가 일치하고 모순 없음. 도치·관계절·도입구가 섞여 절 경계를 정독해야 하므로 medium에 부합. 1850 Public Libraries Act, Manchester 1852 Dickens 참석 등 역사 사실도 정확."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": false,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "도치 구문과 중간의 whose 관계절 때문에 앞 절이 독립절인지 판단이 어려워 medium 난이도로 적절함. 사실관계(1850년 법 제정, 1852년 맨체스터 도서관 개관, 디킨스 참석)도 맞음. 다만 B(which)는 매력도가 약한 오답임.",
+    "passed": false
+   }
+  }
+ },
+ {
+  "gid": "medium-boundaries-319",
+  "runId": "rw-supplement-medium",
+  "skill": "boundaries",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "In 1978, engineers reviewing the Citicorp Center in Manhattan realized that the skyscraper, which rests on four nine-story stilts positioned at the midpoints of its sides rather than at its corners, was far more vulnerable to diagonal winds than its designers had calculated______ welders spent the following weeks working overnight to reinforce more than two hundred bolted joints with thick steel plates.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "In 1978, engineers reviewing the Citicorp Center in Manhattan realized that the skyscraper, which rests on four nine-story stilts positioned at the midpoints of its sides rather than at its corners, was far more vulnerable to diagonal winds than its designers had calculated______ welders spent the following weeks working overnight to reinforce more than two hundred bolted joints with thick steel plates.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    ", welders",
+    ", and, welders",
+    " and welders",
+    "; welders"
+   ],
+   "correctIndex": 3,
+   "answers": null,
+   "explanation": "빈칸 앞의 'engineers ... realized that ... had calculated'는 삽입된 관계절을 지나 완결되는 독립절이고, 빈칸 뒤의 'welders spent ...'도 독립절이다. 두 독립절은 세미콜론으로 연결할 수 있으므로 D가 정답이다. A는 쉼표만으로 두 독립절을 이어 쉼표 오용(comma splice)이 된다. B는 쉼표+등위접속사 조합을 쓰려 했지만 and 뒤에 불필요한 쉼표가 들어가 있다. C는 쉼표 없이 and만으로 긴 독립절 두 개를 이어 표준 문장부호 관례에 어긋난다.",
+   "explanationEn": "The text before the blank (\"engineers ... realized that ... had calculated\") is a complete independent clause once you read past the inserted relative clause, and \"welders spent ...\" is also an independent clause. A semicolon can join two independent clauses, so D is correct. A joins them with only a comma, which creates a comma splice. B tries to use a comma plus a coordinating conjunction but puts an extra comma after \"and.\" C joins two long independent clauses with \"and\" and no comma, which doesn't follow standard punctuation conventions.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "D",
+   "seed": "기술·공학 사례",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "빈칸 앞은 긴 삽입 관계절을 포함한 완결 독립절, 뒤도 독립절이므로 세미콜론(D)이 유일하게 명확히 옳다. A는 comma splice, B는 and 뒤 불필요한 쉼표, C는 긴 두 독립절을 쉼표 없이 and로 연결해 관례 위반(오답 중 가장 약한 매력도지만 SAT 관행상 배제 가능). Citicorp Center 1978 사실관계(중앙 기둥, 대각선 바람 취약, 야간 용접 보강 200여 개 접합부)도 정확. 선택지 C 앞 이중 공백은 사소한 표기 문제."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "정답은 D이다. 앞 절은 긴 삽입 관계절 때문에 독립절로 알아보기 어렵다. 그래서 훑어 읽으면 틀리기 쉬워 medium 난이도에 맞다. C(쉼표 없이 and만 쓴 경우)를 오답으로 보는 근거는 SAT 관례로 인정되지만, 일반 문체 기준에서는 다소 논쟁의 여지가 있다. B(and 뒤 쉼표)는 비교적 쉽게 걸러진다. 사실관계는 정확하다. 1978년 Citicorp Center, 대각선 방향 바람(quartering winds), 200여 개 접합부의 야간 용접 보강이 모두 사실과 맞다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "medium-boundaries-320",
+  "runId": "rw-supplement-medium",
+  "skill": "boundaries",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "The bdelloid rotifer, a microscopic freshwater animal that has reproduced without males for tens of millions of years, survives droughts by drying out completely and entering a dormant state. Biologist Chiara Boschetti found that during this process the rotifer's DNA shatters into fragments, yet the animal recovers when water ______ as it repairs its broken genome, it sometimes incorporates genes borrowed from bacteria and fungi.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "The bdelloid rotifer, a microscopic freshwater animal that has reproduced without males for tens of millions of years, survives droughts by drying out completely and entering a dormant state. Biologist Chiara Boschetti found that during this process the rotifer's DNA shatters into fragments, yet the animal recovers when water ______ as it repairs its broken genome, it sometimes incorporates genes borrowed from bacteria and fungi.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "returns; moreover,",
+    "returns, moreover,",
+    "returns; moreover",
+    "returns moreover,"
+   ],
+   "correctIndex": 0,
+   "answers": null,
+   "explanation": "빈칸 앞 \"yet the animal recovers when water returns\"와 뒤 \"as it repairs ..., it sometimes incorporates ...\"는 각각 독립절이므로 둘 사이에 세미콜론 같은 강한 경계가 필요하며, 접속부사 moreover는 뒤에 쉼표를 둔다. 따라서 A가 정답이다. B는 쉼표만으로 두 독립절을 이어 쉼표 이음(comma splice)이 된다. C는 세미콜론은 맞지만 moreover 뒤 쉼표가 없어, moreover가 \"as it repairs\"라는 종속절과 그대로 이어지므로 도입 부사가 분리되지 않는다. D는 두 독립절 사이에 아무 경계도 없어 무종지문(run-on)이 된다.",
+   "explanationEn": "The words before the blank (\"yet the animal recovers when water returns\") and the words after it (\"as it repairs its broken genome, it sometimes incorporates...\") are both independent clauses, so they need a strong boundary such as a semicolon, and the conjunctive adverb \"moreover\" should be followed by a comma. That makes A correct. B joins two independent clauses with only commas, which creates a comma splice. C gets the semicolon right but leaves out the comma after \"moreover,\" so the adverb runs straight into the dependent clause \"as it repairs\" without being set off. D puts no boundary at all between the two independent clauses, which makes it a run-on sentence.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "A",
+   "seed": "자연과학(생물·생태)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "검산: \"yet the animal recovers when water returns\"와 \"as it repairs its broken genome, it sometimes incorporates...\"는 모두 독립절 → 세미콜론 + 접속부사 moreover + 쉼표(A)가 표준 규약에 부합. B는 comma splice, D는 run-on, C는 접속부사 뒤 쉼표 누락으로 SAT 기준 오답. 두 단계 판단(절 구조 파악 + 접속부사 구두점)이 필요하고 B·C가 부분적으로 그럴듯해 medium에 적합. 사실관계(벨로이드 윤충의 무성생식, 건조 시 DNA 절단과 회복, Boschetti의 수평 유전자 전달 연구)도 문제없음. 한·영 해설 모두 A를 일관되게 뒷받침하며 선택지 참조 일치, 영어 해설에 한글 없음."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "A가 정답이다. 두 독립절이 세미콜론으로 구분되고 접속부사 뒤에 쉼표가 온다. B는 쉼표 이음, D는 무종지문이라 확실한 오답이다. C는 moreover 뒤 쉼표가 빠진 것이 오답 근거인데, 이는 SAT 관행상으로는 오답으로 보지만 약간 약한 근거이다. 그래도 바로 뒤에 as 종속절이 이어지기 때문에 쉼표가 필요하다는 논리는 성립한다. 오답 B와 C가 부분적으로 맞는 근거를 갖추고 있어 medium 난이도에 적합하다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "medium-boundaries-322",
+  "runId": "rw-supplement-medium",
+  "skill": "boundaries",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "The Okavango Delta in northern Botswana is unusual among the world's great river deltas: rather than emptying into an ocean or sea, the Okavango River spreads across the sands of the Kalahari Basin and disappears, most of its water lost to evaporation and plant transpiration. Each year, floodwaters that fell as rain in the Angolan highlands months earlier arrive during Botswana's dry ______ the delta swells to nearly three times its low-water size just when surrounding grasslands are at their most parched.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "The Okavango Delta in northern Botswana is unusual among the world's great river deltas: rather than emptying into an ocean or sea, the Okavango River spreads across the sands of the Kalahari Basin and disappears, most of its water lost to evaporation and plant transpiration. Each year, floodwaters that fell as rain in the Angolan highlands months earlier arrive during Botswana's dry ______ the delta swells to nearly three times its low-water size just when surrounding grasslands are at their most parched.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "season, as a result,",
+    "season, and, as a result",
+    "season; as a result,",
+    "season as a result,"
+   ],
+   "correctIndex": 2,
+   "answers": null,
+   "explanation": "빈칸 앞 \"floodwaters ... arrive during Botswana's dry season\"은 독립절이고, 뒤의 \"the delta swells ...\"도 독립절이므로 두 절을 올바르게 이어야 한다. C는 세미콜론으로 두 독립절을 연결하고 접속부사 as a result 뒤에 쉼표를 두어 정답이다. A는 접속부사를 쓰면서 두 독립절을 쉼표로만 이어 쉼표 오류(comma splice)가 된다. B는 and로 절을 잇지만 삽입구 as a result를 쉼표로 열기만 하고 닫지 않아 문장부호가 맞지 않는다. D는 두 독립절 사이에 아무 경계 표시도 없어 무종지문(run-on)이 된다.",
+   "explanationEn": "The text before the blank, \"floodwaters ... arrive during Botswana's dry season,\" is an independent clause, and so is the text after it, \"the delta swells ...,\" so the two clauses have to be joined correctly. Choice C is correct because it uses a semicolon to join the two independent clauses and puts a comma after the transition \"as a result.\" Choice A joins the two independent clauses with only a comma, even though it uses a transition, so it creates a comma splice. Choice B uses \"and\" to join the clauses, but it opens the interrupting phrase \"as a result\" with a comma and never closes it, so the punctuation is wrong. Choice D puts no boundary mark at all between the two independent clauses, so it creates a run-on sentence.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "C",
+   "seed": "환경·지리",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "빈칸 앞뒤 모두 독립절(\"floodwaters ... arrive during Botswana's dry season\" / \"the delta swells ...\")임을 확인. C(세미콜론 + as a result,)만 올바름. A는 접속부사 comma splice, B는 \"and, as a result the delta\"로 삽입구 쉼표가 열리고 닫히지 않음, D는 run-on. 한국어·영어 해설 모두 정답과 글자 참조가 일치하고 모순 없음. 오카방고 삼각주 관련 서술(앙골라 고지대 강우, 건기 범람, 약 3배 팽창)도 사실에 부합. A가 흔한 오답 함정이고 B는 쉼표 균형을 세심히 봐야 배제되므로 medium에 적합. 다만 B는 \"and\" 뒤 쉼표 불균형이라는 다소 세부적 근거로 배제되는 점이 약간 약하나 SAT 관례상 수용 가능."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "C만 올바름. 선택지 A는 쉼표 오류, B는 삽입구를 닫는 쉼표 누락, D는 무종지문. 지문 사실(우기 후 수개월 지연된 홍수가 건기에 도달, 범람 면적 약 3배 확대)도 대체로 정확하다. 표준적인 중간 난이도 문항이다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "medium-boundaries-323",
+  "runId": "rw-supplement-medium",
+  "skill": "boundaries",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "During the late nineteenth century, public health reformers in several British industrial cities began hiring paid \"health visitors\" to call on working-class households. Rather than lecturing families from a distance, the programs sent women directly into crowded homes______ many of whom had themselves grown up in the neighborhoods they served, offered practical advice on ventilation, cleanliness, and infant feeding.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "During the late nineteenth century, public health reformers in several British industrial cities began hiring paid \"health visitors\" to call on working-class households. Rather than lecturing families from a distance, the programs sent women directly into crowded homes______ many of whom had themselves grown up in the neighborhoods they served, offered practical advice on ventilation, cleanliness, and infant feeding.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    ", these women,",
+    "; these women",
+    ": and these women,",
+    "; these women,"
+   ],
+   "correctIndex": 3,
+   "answers": null,
+   "explanation": "빈칸 앞 \"the programs sent women directly into crowded homes\"는 독립절이고, 뒤의 \"these women ... offered practical advice\"도 독립절이므로 두 절 사이에 세미콜론 같은 경계가 필요하다. 또한 \"many of whom ... served\"는 비필수 삽입절이므로 앞뒤로 쉼표가 있어야 하는데, 뒤 쉼표는 이미 지문에 있으므로 \"women\" 뒤에도 쉼표가 필요하다. D는 두 조건을 모두 충족한다. A는 삽입절 쉼표는 맞지만 쉼표만으로 독립절을 이어 콤마 스플라이스가 된다. B는 세미콜론은 맞지만 \"women\" 뒤 쉼표가 빠져 삽입절이 제대로 감싸지지 않는다. C는 콜론 뒤에 등위접속사 \"and\"를 붙여 관습에 어긋난다.",
+   "explanationEn": "The text before the blank (\"the programs sent women directly into crowded homes\") is an independent clause, and \"these women ... offered practical advice\" is another independent clause, so you need a proper boundary like a semicolon between them. Also, \"many of whom ... served\" is a nonessential clause, so it must be set off by commas on both sides; the closing comma is already there, so a comma is needed after \"women.\" Choice D satisfies both requirements. Choice A correctly opens the nonessential clause but joins two independent clauses with only a comma, creating a comma splice. Choice B uses a correct semicolon but omits the comma after \"women,\" leaving the nonessential clause unbalanced. Choice C incorrectly places the coordinating conjunction \"and\" after a colon.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "D",
+   "seed": "역사(근대 사회 변화)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "검산: \"the programs sent women directly into crowded homes\"와 \"these women ... offered practical advice\"는 모두 독립절이므로 세미콜론이 필요하고, \"many of whom ... served\"는 비필수 삽입절이므로 \"women\" 뒤 쉼표가 필요함. D만 두 조건을 충족. A는 콤마 스플라이스, B는 삽입절 여는 쉼표 누락, C는 콜론 뒤 등위접속사 \"and\"로 비관습적. 해설(한/영) 모두 정답과 선택지 참조가 일치하고 모순 없음. 난이도: 독립절 경계 판단 + 삽입절 쉼표 짝 확인의 두 단계가 필요하며 A·B가 부분적으로 맞는 근거를 가져 medium에 적합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "두 단계 판단이 필요하다(절 경계 + 비필수절 쉼표 짝). A와 B는 각각 한 가지 조건만 충족하는 부분 정답형 오답이다. C는 상대적으로 약한 오답이지만 그럴듯하다. medium 난이도에 적합하다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "medium-form_structure_sense-301",
+  "runId": "rw-supplement-medium",
+  "skill": "form_structure_sense",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "Researchers estimate that a few thousand people in northeastern Turkey can still communicate across steep valleys using kuş dili, or \"bird language,\" a whistled form of Turkish. The version of kuş dili spoken in the village of Kuşköy, along with the farming terms and family names that residents have learned to encode in its piercing tones, ______ now taught in the village's primary school as part of an effort to keep the practice alive.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "Researchers estimate that a few thousand people in northeastern Turkey can still communicate across steep valleys using kuş dili, or \"bird language,\" a whistled form of Turkish. The version of kuş dili spoken in the village of Kuşköy, along with the farming terms and family names that residents have learned to encode in its piercing tones, ______ now taught in the village's primary school as part of an effort to keep the practice alive.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "are",
+    "have been",
+    "is",
+    "being"
+   ],
+   "correctIndex": 2,
+   "answers": null,
+   "explanation": "이 문장의 주어는 단수 명사 \"The version\"이다. \"along with ~ tones\"는 삽입된 수식어구일 뿐이라 주어를 복수로 만들지 않는다. 또한 이 문장에는 정동사가 따로 없으므로 빈칸에 단수 정동사가 들어가야 한다. 따라서 C \"is\"가 정답이다. A \"are\"와 B \"have been\"은 정동사이긴 하지만 바로 앞의 \"terms\", \"names\", \"tones\"에 이끌린 복수형이어서 단수 주어와 맞지 않는다. D \"being\"은 분사여서 정동사가 아니므로 완전한 문장이 되지 않는다.",
+   "explanationEn": "The subject of this sentence is the singular noun \"The version.\" The phrase \"along with... tones\" is just an interrupting modifier, so it doesn't make the subject plural. The sentence also has no other main verb, so the blank needs a singular finite verb. That makes C, \"is,\" the answer. A (\"are\") and B (\"have been\") are finite verbs, but they're plural forms that match the nearby nouns \"terms,\" \"names,\" and \"tones\" instead of the singular subject. D (\"being\") is a participle, not a finite verb, so it leaves the sentence incomplete.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "C",
+   "seed": "언어·인류학",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "주어 \"The version\"(단수)과 \"along with ~\" 삽입구 사이의 거리가 멀고, 삽입구 끝의 복수 명사(\"terms\", \"names\", \"tones\")가 근접 오류를 유도하므로 A/B가 부분적 타당성을 가진 오답으로 기능한다. D는 정동사 부재 오류로 말이 되는 오답. 한·영 해설 모두 정답 C를 정확히 뒷받침하고 글자 참조가 일치한다. kuş dili·Kuşköy 관련 사실도 실제와 부합한다."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "긴 삽입구(along with...)와 근접 복수명사로 주어-동사 수일치를 묻는 전형적 medium 문항. 수동태 \"is taught\"도 정상이며 \"have been taught\"는 복수라 오답. 쿠쉬코이 휘파람 언어 관련 사실도 대체로 정확함.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "medium-form_structure_sense-302",
+  "runId": "rw-supplement-medium",
+  "skill": "form_structure_sense",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "The elevated galleries of Lina Bo Bardi's art museum in São Paulo, which seem to float above an open public plaza while resting on just four red concrete pillars, ______ visitors who expect a building of such size to sit heavily on the ground. Critics have argued that this sense of weightlessness is central to Bo Bardi's vision of architecture as a shared civic space.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "The elevated galleries of Lina Bo Bardi's art museum in São Paulo, which seem to float above an open public plaza while resting on just four red concrete pillars, ______ visitors who expect a building of such size to sit heavily on the ground. Critics have argued that this sense of weightlessness is central to Bo Bardi's vision of architecture as a shared civic space.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "continues to surprise",
+    "continuing to surprise",
+    "having continued to surprise",
+    "continue to surprise"
+   ],
+   "correctIndex": 3,
+   "answers": null,
+   "explanation": "이 문장의 주어는 복수 명사 'galleries'이고, 'which ... pillars'는 삽입된 관계절이므로 빈칸에는 복수 주어와 일치하는 정동사가 와야 합니다. 따라서 D가 정답입니다. A는 정동사이지만 단수형이어서, 가까이 있는 'museum'이나 'plaza'를 주어로 착각할 때 고르기 쉬운 오답입니다. B는 현재분사이고 C는 완료분사라서, 둘 중 어느 것을 넣어도 주절에 정동사가 없는 불완전한 문장이 됩니다.",
+   "explanationEn": "The subject of this sentence is the plural noun \"galleries.\" The clause \"which ... pillars\" is just an interruption, so the blank needs a finite verb that agrees with a plural subject. That makes D correct. A is a finite verb, but it's singular, so it's an easy trap if you mistake the nearby \"museum\" or \"plaza\" for the subject. B is a present participle and C is a perfect participle, so either one would leave the main clause without a finite verb, and the sentence would be incomplete.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "D",
+   "seed": "예술·건축 비평",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "주어 'galleries'(복수) + 삽입 관계절(which ... pillars) 뒤 정동사 필요 → 'continue to surprise'(D) 맞음. A는 인접 단수명사(museum/plaza)에 끌린 수일치 함정, B·C는 비정형 동사로 주절 동사 부재. 한·영 해설 결론 및 선택지 참조 일치, 영어 해설 자연스럽고 한글 없음. MASP(상파울루 미술관, 리나 보 바르디, 네 개의 붉은 콘크리트 기둥) 사실관계 문제 없음. 삽입절 속 단수 명사로 주어 식별 + 정동사 판단의 두 단계가 요구되어 medium 적합. 다만 B·C는 둘 다 비정형이라 실질 경쟁 오답은 A 하나뿐인 점은 참고."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "주어 galleries와 동사 사이에 'of ... museum'과 관계절이 끼어 있어 수일치를 판단하려면 두 단계를 거쳐야 함. A는 근접 명사 함정으로 유효함. 분사 오답 B와 C는 비교적 쉽게 배제되지만 medium 난이도에는 맞음. MASP는 네 개의 붉은 기둥 위에 떠 있는 구조라 사실관계도 정확함.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "medium-form_structure_sense-303",
+  "runId": "rw-supplement-medium",
+  "skill": "form_structure_sense",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "The collection of more than 500 pressed specimens that Mexican American botanist Ynés Mexía gathered during her expeditions through Mexico, Brazil, and Peru in the 1920s and 1930s ______ now stored at several herbaria, where researchers consult it to track how plant ranges have shifted over the past century.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "The collection of more than 500 pressed specimens that Mexican American botanist Ynés Mexía gathered during her expeditions through Mexico, Brazil, and Peru in the 1920s and 1930s ______ now stored at several herbaria, where researchers consult it to track how plant ranges have shifted over the past century.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "is",
+    "are",
+    "being",
+    "having been"
+   ],
+   "correctIndex": 0,
+   "answers": null,
+   "explanation": "이 문장의 주어는 단수 명사 \"The collection\"이며, \"of more than 500 pressed specimens\"와 \"that ... 1930s\" 관계절은 이를 꾸미는 수식어일 뿐이다. 따라서 빈칸에는 단수 주어와 일치하는 정동사가 필요하고, \"now\"가 현재를 가리키므로 A가 정답이다. B는 시제는 맞지만 바로 앞의 복수 명사(specimens, the 1920s and 1930s)에 잘못 일치시킨 복수형이다. C와 D는 분사 형태로 정동사가 아니므로, 주절에 본동사가 없는 불완전한 문장이 된다.",
+   "explanationEn": "The subject of this sentence is the singular noun \"The collection.\" The phrase \"of more than 500 pressed specimens\" and the relative clause \"that ... 1930s\" only modify it. That means the blank needs a finite verb that agrees with a singular subject, and \"now\" calls for the present tense, so A is correct. B uses the right tense, but it's plural, so it wrongly agrees with nearby plural nouns like \"specimens.\" C and D are participles, not finite verbs, so either one would leave the main clause without a main verb and make the sentence a fragment.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "A",
+   "seed": "인물 소개(과학자·예술가)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "주어 \"The collection\"(단수) + 긴 수식어(전치사구+관계절, 복수 명사 specimens/1920s and 1930s 삽입) 뒤 \"is now stored\"가 유일한 정동사 선택지. B는 근접 복수 명사 오일치 유인, C/D는 비정동사로 주절 동사 부재. 해설 한·영 모두 정답 A를 일관되게 뒷받침하며 선택지 참조 정확. Mexía 관련 사실(멕시코·브라질·페루 채집, 1920~30년대) 무리 없음. 긴 삽입 수식어로 인해 표준 SAT medium 수준에 부합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "주어 'The collection'과 동사 사이에 긴 수식어가 끼어 있고, 그 안에 복수 명사(specimens, 1920s and 1930s)가 들어 있어 수 일치를 헷갈리게 하는 구조다. 뒤에 나오는 대명사 'it'도 단수와 맞아떨어진다. C와 D는 정동사가 아니어서 쉽게 배제되지만 B는 그럴듯한 오답이라 medium 난이도로 적절하다. 사실관계 메모: 메히아는 실제로 약 145,000점의 표본을 채집했다. 따라서 'more than 500'은 엄밀히 틀린 말은 아니지만 실제보다 크게 축소된 수치다. 채집 지역도 알래스카, 에콰도르 등으로 더 넓었다. 이 부분은 수정을 검토할 만하다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "medium-form_structure_sense-305",
+  "runId": "rw-supplement-medium",
+  "skill": "form_structure_sense",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "In a field study of bus commuters, behavioral economist Rosa Quispe examined how default settings on prepaid transit cards influenced riders' choices. Each new card was automatically enrolled in a monthly payment plan unless the rider actively selected a different one. Quispe found that the proportion of riders who stayed on that automatic plan through the full twelve months of the study ______ nearly 80 percent, even though cheaper alternatives were clearly advertised at every station.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "In a field study of bus commuters, behavioral economist Rosa Quispe examined how default settings on prepaid transit cards influenced riders' choices. Each new card was automatically enrolled in a monthly payment plan unless the rider actively selected a different one. Quispe found that the proportion of riders who stayed on that automatic plan through the full twelve months of the study ______ nearly 80 percent, even though cheaper alternatives were clearly advertised at every station.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "were",
+    "are",
+    "was",
+    "have been"
+   ],
+   "correctIndex": 2,
+   "answers": null,
+   "explanation": "이 절의 주어는 단수 명사 'the proportion'이며, 'of riders who stayed on that automatic plan through the full twelve months of the study'는 주어와 동사 사이에 끼어든 수식어구이다. 따라서 단수 동사가 필요하고, 'found', 'were clearly advertised'처럼 과거 시제로 서술된 완료된 연구이므로 과거형 'was'(C)가 맞다. A의 'were'는 시제는 맞지만 가까이 있는 복수 명사 'riders'나 'months'에 수를 맞춘 복수형이다. B의 'are'는 복수형인 데다 현재 시제이다. D의 'have been'도 복수형이며, 현재완료는 끝난 연구를 서술하는 과거 시제 문맥과 맞지 않는다.",
+   "explanationEn": "The subject of this clause is the singular noun \"the proportion.\" The phrase \"of riders who stayed on that automatic plan through the full twelve months of the study\" is a modifier that sits between the subject and the verb. That means you need a singular verb, and because the passage describes a finished study in the past tense (\"found,\" \"were clearly advertised\"), the past-tense \"was\" in C is correct. A has the right tense, but \"were\" is plural, so it matches the nearby plural nouns \"riders\" or \"months\" instead of the real subject. B is plural and also in the present tense. D is plural too, and the present perfect doesn't fit the past-tense account of a completed study.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "C",
+   "seed": "사회과학(경제·행동)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "주어 'the proportion'(단수) + 긴 삽입 수식어구(riders, months 등 복수 명사 포함), 과거 시제 문맥('found', 'were clearly advertised')에 따라 'was'가 유일한 정답. A는 시제는 맞지만 수 불일치, B·D는 수·시제 모두 불일치. 수 일치 + 시제 확인의 두 단계 판단이 필요하며 근접 명사 유인이 있어 medium에 적합. 해설 한·영 일치, 영어 자연스럽고 한글 없음. 가상 연구자·연구로 저작권 문제 없음."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": false,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "주어(proportion)와 동사 사이에 긴 수식어구가 끼어 있는 수 일치 문제에 시제 판단이 더해져 두 단계로 풀어야 한다. 매력적 오답 were(A)도 있어 medium 난이도에 맞다. 'the proportion ... was'는 표준 문법에 맞는 단수 일치이다.",
+    "passed": false
+   }
+  }
+ },
+ {
+  "gid": "medium-form_structure_sense-306",
+  "runId": "rw-supplement-medium",
+  "skill": "form_structure_sense",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "For decades, researchers interested in how Mongolian herding communities name colors, winds, and horse markings had to travel to a single library in Ulaanbaatar to consult the original sources. That changed recently: the archive of handwritten field notebooks compiled by anthropologists working among herders in the country's northern provinces during the 1960s ______ fully digitized, allowing scholars anywhere to search its thousands of vocabulary entries.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "For decades, researchers interested in how Mongolian herding communities name colors, winds, and horse markings had to travel to a single library in Ulaanbaatar to consult the original sources. That changed recently: the archive of handwritten field notebooks compiled by anthropologists working among herders in the country's northern provinces during the 1960s ______ fully digitized, allowing scholars anywhere to search its thousands of vocabulary entries.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "have been",
+    "were",
+    "being",
+    "has been"
+   ],
+   "correctIndex": 3,
+   "answers": null,
+   "explanation": "이 문장의 주어는 단수 명사 'the archive'이고, 'of handwritten field notebooks ... during the 1960s'는 주어를 꾸미는 긴 수식어구이므로 단수 정동사가 필요하다. D의 'has been'은 단수형이고, 'changed recently'와 'allowing scholars anywhere'가 가리키는 최근 완료된 결과와도 맞는다. A는 완료 시제는 맞지만 'notebooks'나 'anthropologists'에 잘못 일치시킨 복수형이다. B 역시 복수형이라 단수 주어와 맞지 않는다. C는 분사라서 콜론 뒤 절에 정동사가 없게 된다.",
+   "explanationEn": "The subject of this clause is the singular noun \"the archive.\" Everything from \"of handwritten field notebooks\" through \"during the 1960s\" is a long modifier describing that subject, so you need a singular finite verb. D, \"has been,\" is singular, and it also fits the context: \"That changed recently\" and \"allowing scholars anywhere\" point to a recently completed result. A uses the right perfect tense, but it's plural, as if the verb agreed with \"notebooks\" or \"anthropologists.\" B is plural too, so it doesn't agree with the singular subject. C is a participle, which would leave the clause after the colon with no main verb.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "D",
+   "seed": "언어·인류학",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "주어 'the archive'(단수)와 긴 수식어구('of handwritten field notebooks ... during the 1960s') 사이의 거리로 인해 'notebooks'/'anthropologists'에 끌려 복수형(A, B)을 고르기 쉽게 설계됨. D 'has been'이 유일한 단수 정동사이며 문맥(최근 완료)과도 부합. C는 정동사 부재. 한국어·영어 해설 모두 정답과 일치하고 선택지 참조 정확. 수 일치 + 수식어구 식별의 두 단계 판단이 필요하여 medium에 적합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "주어 'the archive'와 동사 사이에 복수 명사(notebooks, herders, provinces)가 끼어 있는 전형적인 주어-동사 일치 문항이다. 수식어구가 길어 훑어 읽으면 A나 B를 고르기 쉽다. 'were'(B)의 시제는 'recently'와 어울리긴 하지만, 수가 맞지 않아 오답이다. medium 난이도에 적합하다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "medium-form_structure_sense-307",
+  "runId": "rw-supplement-medium",
+  "skill": "form_structure_sense",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "The cantilevered reading rooms of the Moravec Library, which architect Ilse Varga suspended above a sunken courtyard so that each patron seems to float among the treetops, ______ many critics who had once dismissed her designs as cold and austere.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "The cantilevered reading rooms of the Moravec Library, which architect Ilse Varga suspended above a sunken courtyard so that each patron seems to float among the treetops, ______ many critics who had once dismissed her designs as cold and austere.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "have won over",
+    "has won over",
+    "having won over",
+    "to win over"
+   ],
+   "correctIndex": 0,
+   "answers": null,
+   "explanation": "이 문장의 주어는 복수 명사 rooms이고, 관계절 'which ... treetops' 뒤에 주절의 정동사가 와야 한다. 따라서 복수 정동사인 A가 정답이다. B도 정동사이지만 단수형이다. 사이에 끼어 있는 단수 명사 Library나 patron에 수를 맞춘 오답이다. C는 분사이고 D는 부정사라서 둘 다 주어에 대응하는 정동사가 되지 못하므로 문장이 불완전해진다.",
+   "explanationEn": "The subject of this sentence is the plural noun \"rooms.\" After the clause \"which ... treetops,\" the sentence still needs a main verb. That makes A correct, because it's a plural main verb. B is also a main verb, but it's singular, so it wrongly agrees with nearby singular nouns like \"Library\" or \"patron.\" C is a participle and D is an infinitive, so neither can serve as the main verb, and either one would leave the sentence incomplete.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "A",
+   "seed": "예술·건축 비평",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "주어 'rooms'(복수)와 긴 관계절 뒤 정동사 필요 → 'have won over'(A) 정확. B는 근접 단수명사(Library, patron, courtyard)에 끌린 오답, C/D는 비정동사로 문장 불완전. 한·영 해설 결론·글자 참조 일치, 영어 자연스러움, 한글 없음. 가상의 도서관·건축가로 저작권·사실 오류 없음. 긴 삽입절+근접 단수명사 함정 구조는 표준 SAT medium에 적합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "주어 rooms와 동사 사이에 긴 관계절과 단수 명사(Library, patron, courtyard)가 끼어 있어서, 정동사 판단과 수일치를 함께 따져야 하는 두 단계 문항이다. 중간 난이도에 맞다. 정동사가 아닌 C와 D는 비교적 쉽게 걸러진다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "medium-form_structure_sense-308",
+  "runId": "rw-supplement-medium",
+  "skill": "form_structure_sense",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "Ceramicist Lena Okafor rarely uses commercial glazes. Instead, her recent series of stoneware vessels, each fired for three days in a wood-burning kiln that she built by hand behind her studio, ______ the subtle speckles of ash that settle on the clay and melt into a natural glaze as the fire burns.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "Ceramicist Lena Okafor rarely uses commercial glazes. Instead, her recent series of stoneware vessels, each fired for three days in a wood-burning kiln that she built by hand behind her studio, ______ the subtle speckles of ash that settle on the clay and melt into a natural glaze as the fire burns.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "showcase",
+    "showcases",
+    "showcasing",
+    "have showcased"
+   ],
+   "correctIndex": 1,
+   "answers": null,
+   "explanation": "이 절의 주어는 단수 명사 'series'이며, 'of stoneware vessels'와 'each fired ... studio'라는 긴 수식어구는 주어와 동사 사이에 끼어든 것일 뿐이다. 따라서 단수 정동사가 필요하고, 정답은 B이다. A와 D는 정동사이긴 하지만 바로 앞의 복수 명사 'vessels'에 맞춘 복수형이므로 주어 'series'와 수가 일치하지 않는다. C는 분사이기 때문에 이 절에 정동사가 없어 문장이 완성되지 않는다.",
+   "explanationEn": "The subject of this clause is the singular noun \"series.\" The long phrases \"of stoneware vessels\" and \"each fired ... behind her studio\" just sit between the subject and its verb. That means you need a singular finite verb, so B is correct. A and D are finite verbs, but they're plural forms that match the nearby plural noun \"vessels,\" so they don't agree with \"series.\" C is a participle, which leaves the clause without a main verb, so the sentence is incomplete.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "B",
+   "seed": "인물 소개(과학자·예술가)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "주어 'her recent series'(단수)와 동사 사이에 'of stoneware vessels'와 'each fired ... studio' 수식어구가 끼어들어 근접 복수명사 'vessels'에 끌리도록 설계됨. B 'showcases'가 유일하게 수 일치하는 정동사. A·D는 복수형, C는 분사로 정동사 부재. 해설(한·영) 결론 및 선택지 참조 일치, 영어 자연스러움. 주어 식별 + 끼어든 수식어 무시의 두 단계 판단이 필요하여 medium에 부합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "'her recent series'는 단수 한정사 맥락이므로 단수 동사 showcases가 맞다. 'vessels'와 길게 끼어든 수식어구가 복수 동사로 유인하는 함정이 되고, 정동사가 아닌 C 함정까지 있어 두 단계 판단이 필요하다. 그래서 medium 난이도에 맞는다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "medium-form_structure_sense-311",
+  "runId": "rw-supplement-medium",
+  "skill": "form_structure_sense",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "Among the Ayoreo-speaking communities of the Gran Chaco, linguist Lucía Benítez found that personal names do more than identify individuals. The set of naming conventions that elders pass down to each new generation of children, which includes rules about borrowing names from deceased relatives and about avoiding certain sounds, ______ a record of clan history that outsiders rarely notice.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "Among the Ayoreo-speaking communities of the Gran Chaco, linguist Lucía Benítez found that personal names do more than identify individuals. The set of naming conventions that elders pass down to each new generation of children, which includes rules about borrowing names from deceased relatives and about avoiding certain sounds, ______ a record of clan history that outsiders rarely notice.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "preserves",
+    "preserve",
+    "have preserved",
+    "preserving"
+   ],
+   "correctIndex": 0,
+   "answers": null,
+   "explanation": "정답은 A이다. 이 문장의 주어는 단수 명사 'The set'이며, 'of naming conventions ... sounds'까지는 모두 주어를 꾸미는 수식어구이므로 단수 동사 'preserves'가 필요하다. B와 C는 정동사이긴 하지만 바로 앞의 복수 명사 'sounds'나 'conventions'에 맞춘 복수형이라 단수 주어와 일치하지 않는다. D의 'preserving'은 분사여서 문장에 정동사가 없는 불완전한 문장이 된다.",
+   "explanationEn": "The correct answer is A. The subject of this sentence is the singular noun \"The set,\" and everything from \"of naming conventions\" through \"sounds\" is just a modifier describing it, so you need the singular verb \"preserves.\" B and C are finite verbs, but they're plural forms that agree with nearby plural nouns like \"sounds\" or \"conventions\" instead of the actual singular subject. D, \"preserving,\" is a participle, so the sentence would be left without a main verb and wouldn't be complete.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "A",
+   "seed": "언어·인류학",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "주어 'The set'(단수)과 동사 사이에 긴 전치사구·관계절('of naming conventions ... sounds')이 끼어 있어 수 일치 판단에 두 단계(주어 식별 + 수식어 배제)가 필요하다. 정답 A 'preserves'는 검산상 옳다. B·C는 인접 복수 명사(conventions, sounds, relatives)에 이끌린 복수형이라 부분적으로 그럴듯한 오답이며, D는 정동사 부재로 배제된다. 한·영 해설 모두 동일한 결론과 글자 참조를 갖고 모순이 없으며 영어도 자연스럽다. Ayoreo·Gran Chaco는 실제 존재하나 인물·연구 내용은 가공으로 보여 사실 오류나 저작권 문제 없음. 표준 SAT medium 수준에 적합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "주어와 동사 사이의 긴 수식어구(전치사구, 관계절 및 그 안의 복수 명사들)가 복수형 오답을 유도함. 오답 B와 C는 근처 명사에 끌리기 쉬워 medium 수준에 맞음. 가상 인물 Lucía Benítez는 SAT 형식상 허용됨.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "medium-form_structure_sense-312",
+  "runId": "rw-supplement-medium",
+  "skill": "form_structure_sense",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "Architecture critic Lena Okafor had expected Mira Valdés to repeat the stark concrete surfaces of her earlier civic buildings. Instead, the renovated reading room of the Halvorsen Library, with its tiers of honey-colored oak shelving and a vaulted skylight assembled from more than four hundred hand-cut glass panes, ______ Okafor and many other reviewers, who now describe Valdés's work as unexpectedly warm.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "Architecture critic Lena Okafor had expected Mira Valdés to repeat the stark concrete surfaces of her earlier civic buildings. Instead, the renovated reading room of the Halvorsen Library, with its tiers of honey-colored oak shelving and a vaulted skylight assembled from more than four hundred hand-cut glass panes, ______ Okafor and many other reviewers, who now describe Valdés's work as unexpectedly warm.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "have surprised",
+    "has surprised",
+    "surprising",
+    "were surprising"
+   ],
+   "correctIndex": 1,
+   "answers": null,
+   "explanation": "이 문장의 주어는 단수 명사 'reading room'이고, 'with its tiers ... glass panes'는 주어와 동사 사이에 삽입된 수식어구이다. 이 절에는 정동사가 필요하므로 단수 정동사인 B 'has surprised'가 알맞다. A와 D는 정동사이지만 빈칸 바로 앞의 복수 명사 'panes'나 'shelving/tiers'에 수를 맞춘 복수형이라 단수 주어와 일치하지 않는다. C는 분사이기 때문에 주어 'reading room'에 정동사가 없는 불완전한 문장이 된다.",
+   "explanationEn": "The subject of this clause is the singular noun \"reading room.\" The phrase \"with its tiers ... glass panes\" is a modifier that comes between the subject and its verb. The clause needs a finite verb, so the singular form in B, \"has surprised,\" is correct. A and D are finite verbs, but they are plural and agree with nearby nouns like \"panes\" instead of the singular subject. C is a participle, so the subject \"reading room\" would have no main verb, and the sentence would be incomplete.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "B",
+   "seed": "예술·건축 비평",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "주어 'reading room'(단수)과 동사 사이에 긴 'with its tiers ... panes' 수식어구가 삽입되어 있고, 빈칸은 주절의 정동사 자리이므로 단수 정동사 B 'has surprised'가 유일하게 옳다. A·D는 복수형(근접 명사 'panes'에 끌리는 오답), C는 비정형 분사로 주절 동사가 없어진다. 한국어 해설의 'shelving/tiers' 언급은 'shelving'이 단수라 다소 부정확하나 결론에는 영향 없음. 한·영 해설 결론·글자 참조 일치, 영어 자연스럽고 한글 없음. 주어 식별 + 정동사 여부 판단의 두 단계 요구, 표준 SAT medium에 부합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "유형 라벨은 form_structure_sense이며, 주어-동사 수일치(삽입구 개입) 문제로 적절함. 긴 삽입구 때문에 두 단계 판단이 필요하고 A·D가 매력적인 오답이어서 medium 수준에 맞음. 정답 B 검증 완료.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "medium-form_structure_sense-313",
+  "runId": "rw-supplement-medium",
+  "skill": "form_structure_sense",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "In the early twentieth century, San Ildefonso Pueblo potter Maria Martinez and her husband, Julian, developed a striking black-on-black firing technique that drew on ancestral methods. Today, the polished vessels produced by Martinez, whose work helped revive a centuries-old ceramic tradition in the American Southwest, ______ in the collections of major museums, including the Smithsonian.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "In the early twentieth century, San Ildefonso Pueblo potter Maria Martinez and her husband, Julian, developed a striking black-on-black firing technique that drew on ancestral methods. Today, the polished vessels produced by Martinez, whose work helped revive a centuries-old ceramic tradition in the American Southwest, ______ in the collections of major museums, including the Smithsonian.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "is held",
+    "being held",
+    "are held",
+    "having been held"
+   ],
+   "correctIndex": 2,
+   "answers": null,
+   "explanation": "이 문장의 주어는 'the polished vessels'(복수)이고, 'produced by ... Southwest'는 긴 수식어구이므로 빈칸에는 복수 주어에 맞는 정동사가 필요하다. 따라서 C 'are held'가 정답이다. A 'is held'는 정동사이긴 하지만 바로 앞의 단수 명사 'Martinez'나 'tradition'에 수를 맞춘 것이어서 복수 주어와 일치하지 않는다. B 'being held'와 D 'having been held'는 분사 형태여서 문장에 본동사가 없게 되어 완전한 문장이 되지 않는다.",
+   "explanationEn": "The subject of the sentence is \"the polished vessels,\" which is plural. The long phrase \"produced by ... Southwest\" only modifies that subject, so the blank needs a finite verb that agrees with a plural subject. That makes C, \"are held,\" correct. A, \"is held,\" is a finite verb, but it agrees with a nearby singular noun like \"Martinez\" or \"tradition\" rather than with the actual subject. B, \"being held,\" and D, \"having been held,\" are participles, so with either one the sentence has no main verb and is incomplete.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "C",
+   "seed": "인물 소개(과학자·예술가)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "주어 'the polished vessels'(복수) + 긴 수식어구(produced by Martinez, whose work ... Southwest) 뒤 정동사 필요 → C 'are held' 정답 확인. A는 근접 단수명사(Martinez/tradition) 함정, B·D는 비정동사로 문장 불완전. 한국어·영어 해설 모두 결론·글자 참조 일치, 영어 자연스럽고 한글 없음. Maria/Julian Martinez의 black-on-black 기법 사실 정확. 오답 중 B·D가 동일 유형(분사)이라 부분적 타당성이 다소 약하지만, 긴 삽입구와 근접 단수명사 함정이 있어 표준 SAT medium 수준으로 적합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "주어-동사 수일치 문항이며 긴 삽입절로 주의를 분산시킨다. 이 문항은 SAT 분류상 Form, Structure, and Sense 유형에 해당한다. B와 D는 정동사가 아니어서 쉽게 배제되므로, 부분적으로 그럴듯한 오답은 A 하나뿐이다. 그래도 표준 SAT 수일치 문항으로서 medium 난이도로 인정할 수 있다. Martinez 관련 사실관계(San Ildefonso 출신, 남편 Julian과 black-on-black 기법 개발)도 정확하다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "medium-form_structure_sense-315",
+  "runId": "rw-supplement-medium",
+  "skill": "form_structure_sense",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "In a 2019 field experiment, behavioral economist Ruth Okafor examined whether small, voluntary commitments influence how people save. The participants, recruited from several rural cooperatives in which each member pools seasonal harvest earnings with neighbors, ______ asked to sign a nonbinding savings pledge before receiving their payouts; those who signed set aside noticeably more money over the following six months than those who did not.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "In a 2019 field experiment, behavioral economist Ruth Okafor examined whether small, voluntary commitments influence how people save. The participants, recruited from several rural cooperatives in which each member pools seasonal harvest earnings with neighbors, ______ asked to sign a nonbinding savings pledge before receiving their payouts; those who signed set aside noticeably more money over the following six months than those who did not.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "were",
+    "was",
+    "are",
+    "is"
+   ],
+   "correctIndex": 0,
+   "answers": null,
+   "explanation": "빈칸의 주어는 긴 분사구와 관계절을 건너뛴 앞쪽의 복수 명사 \"The participants\"이므로 복수 동사가 필요하다. 또 2019년 실험을 설명하고 뒤 문장도 \"signed\", \"set aside\"처럼 과거 시제이므로 과거형이어야 한다. 따라서 정답은 A이다. B는 과거 시제는 맞지만 단수형이라, 바로 앞의 \"each member\"에 이끌려 고른 답이다. C는 복수형이지만 현재 시제라 과거 실험이라는 문맥과 맞지 않고, D는 수와 시제가 모두 틀렸다.",
+   "explanationEn": "The subject of the blank is the plural noun \"The participants,\" which comes before a long participial phrase and relative clause, so you need a plural verb. The text also describes a 2019 experiment, and the rest of the sentence uses past-tense verbs (\"signed,\" \"set aside\"), so the verb must be in the past tense. That makes A correct. B has the right tense but is singular, so it tempts readers who match the verb to the nearby \"each member.\" C is plural but in the present tense, which clashes with the past-tense context, and D is wrong in both number and tense.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "A",
+   "seed": "사회과학(경제·행동)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "주어 \"The participants\"(복수) + 2019년 과거 문맥(signed, set aside)으로 \"were\"가 유일한 정답. 긴 수식어구와 \"each member\", \"neighbors\", \"earnings\" 등 개입 명사가 수 일치 함정으로 작동하고, 시제 판단까지 두 단계가 요구되어 medium에 적합. B(시제 맞음), C(수 맞음)는 부분적 근거가 있어 비교가 필요. 해설은 한·영 모두 일관되고 정확하며 영어 해설에 한글 없음. 가상 연구자 설정으로 저작권 문제 없음."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "주어-동사 수 일치와 시제를 함께 판단해야 하는 2단계 문항이다. 삽입절의 \"each member\", \"pools\"가 단수 쪽으로 유인하고, 오답 B와 C는 각각 부분적으로 맞는 근거를 가진다. 중간 난이도에 적합하다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "medium-form_structure_sense-316",
+  "runId": "rw-supplement-medium",
+  "skill": "form_structure_sense",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "The whistled languages of La Gomera in the Canary Islands, the Turkish village of Kuşköy, and several mountain communities in Oaxaca, Mexico, though separated by thousands of kilometers and unrelated in their underlying grammar, ______ a striking acoustic strategy: speakers transform the pitch contours or vowel qualities of ordinary speech into whistles that can carry across steep valleys.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "The whistled languages of La Gomera in the Canary Islands, the Turkish village of Kuşköy, and several mountain communities in Oaxaca, Mexico, though separated by thousands of kilometers and unrelated in their underlying grammar, ______ a striking acoustic strategy: speakers transform the pitch contours or vowel qualities of ordinary speech into whistles that can carry across steep valleys.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "shares",
+    "share",
+    "sharing",
+    "having shared"
+   ],
+   "correctIndex": 1,
+   "answers": null,
+   "explanation": "이 문장의 주어는 복수 명사 'The whistled languages'이고, 'of La Gomera ... Oaxaca, Mexico'와 'though separated ... grammar' 수식어구가 주어와 빈칸 사이를 길게 떨어뜨려 놓았다. 문장에는 아직 정동사가 없으므로 빈칸에는 복수 주어와 일치하는 정동사가 와야 하고, 따라서 B 'share'가 정답이다. A 'shares'는 정동사이긴 하지만 빈칸 바로 앞의 단수 명사 'grammar'나 'Mexico'에 맞춘 단수형이라 복수 주어와 일치하지 않는다. C 'sharing'과 D 'having shared'는 분사 형태이므로 문장에 정동사가 없어 비문이 된다.",
+   "explanationEn": "The subject of this sentence is the plural noun \"The whistled languages.\" Two long modifiers (\"of La Gomera ... Oaxaca, Mexico\" and \"though separated ... grammar\") separate it from the blank. The sentence has no main verb yet, so the blank needs a finite verb that agrees with a plural subject, which makes B, \"share,\" correct. A, \"shares,\" is a finite verb, but it is singular because it matches nearby singular nouns like \"grammar\" or \"Mexico\" instead of the actual subject. C, \"sharing,\" and D, \"having shared,\" are participles, so with either one the sentence would have no main verb.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "B",
+   "seed": "언어·인류학",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "주어 'The whistled languages'(복수)와 빈칸 사이에 긴 전치사구·분사구 삽입; 문장에 정동사가 없으므로 복수 정동사 'share'(B)가 유일하게 적합. A는 근접 단수명사(grammar/Mexico)에 이끌린 오답, C/D는 비정형 동사로 문장 성립 불가. 한국어·영어 해설 모두 정답과 글자 참조 일치, 사실관계(라 고메라 실보, 쿠슈쾨이, 오악사카 휘파람 언어) 문제 없음. 두 단계 판단(정동사 필요 + 진짜 주어 식별)이 요구되는 표준 medium 수준."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "긴 수식어로 주어와 동사가 떨어진 수 일치 문항으로, 표준적인 medium 난이도다. 'grammar'와 'Mexico'라는 단수 명사가 오답 A를 고르게 만드는 함정 역할을 한다. 사실관계(실보 고메로, 쿠슈쾨이, 오악사카 휘파람 언어)도 정확하다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "medium-form_structure_sense-317",
+  "runId": "rw-supplement-medium",
+  "skill": "form_structure_sense",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "Since the Halvorsen Library opened in 2019, its cantilevered reading rooms, which architect Mira Okafor designed to hover above a sunken courtyard paved with local basalt, ______ critics as a rare example of daring engineering that still feels intimate to the people working inside.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "Since the Halvorsen Library opened in 2019, its cantilevered reading rooms, which architect Mira Okafor designed to hover above a sunken courtyard paved with local basalt, ______ critics as a rare example of daring engineering that still feels intimate to the people working inside.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "has struck",
+    "striking",
+    "have struck",
+    "strikes"
+   ],
+   "correctIndex": 2,
+   "answers": null,
+   "explanation": "이 문장의 주어는 복수 명사 'rooms'이고, 관계절 'which ... basalt'는 주어를 꾸미는 삽입어구일 뿐이다. 또 'Since ... 2019'는 과거부터 지금까지 이어지는 일을 나타내므로 현재완료가 필요하다. 그래서 복수형 현재완료인 C가 정답이다. A는 시제는 맞지만, 바로 앞의 단수 명사 'basalt'에 맞춘 단수형이라 주어와 수가 일치하지 않는다. B는 분사여서 문장에 본동사가 없게 되고, D는 단수형인 데다 'since'와 함께 쓸 수 있는 시제도 아니다.",
+   "explanationEn": "The subject of this sentence is the plural noun \"rooms.\" The clause \"which ... basalt\" only describes that subject, so it doesn't change the verb. The phrase \"Since ... 2019\" describes something that started in the past and continues now, so the sentence needs the present perfect. That makes C correct, because it is the plural present perfect form. A uses the right tense, but it is singular, as if it agreed with the nearby noun \"basalt,\" so it doesn't agree with \"rooms.\" B is a participle, which would leave the sentence without a main verb. D is singular, and its simple present tense doesn't fit with \"since.\"",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "C",
+   "seed": "예술·건축 비평",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "주어 'reading rooms'(복수)와 'Since ... 2019'(현재완료 요구)를 결합해야 C(have struck)가 도출되며, 직접 검산 결과 정답이 옳다. A는 시제는 맞으나 수 불일치(근접 명사 'basalt'에 유인), D는 단수·단순현재로 이중 오류, B는 본동사 부재로 각각 적절히 배제된다. 한국어·영어 해설 모두 동일한 결론과 선택지 참조를 가지며 영어 해설에 한글 없음. 긴 삽입 관계절 + since/현재완료의 두 단계 판단으로 medium 난이도에 부합. 가상의 건물·건축가로 사실 오류·저작권 문제 없음."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "주어 'rooms'와 동사 사이에 긴 관계절(단수 명사 'basalt'로 끝남)이 끼어 있고, 'Since 2019'가 현재완료를 요구한다. 두 단계 판단이 필요해 중간 난이도에 맞다. 오답 A는 수 일치를, D는 수 일치와 시제를 둘 다 어겨 비교해야 배제된다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "medium-form_structure_sense-318",
+  "runId": "rw-supplement-medium",
+  "skill": "form_structure_sense",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "Ceramicist Lucía Ferrand spent nearly a decade visiting abandoned kiln sites, first in the Andes and later in southern Japan, recording how ancient potters controlled heat and airflow. A series of glazed vessels that Ferrand produced after comparing the firing techniques of these distant workshops ______ on display at the Halvorsen Museum of Craft since last spring, drawing visitors interested in both art and materials science.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "Ceramicist Lucía Ferrand spent nearly a decade visiting abandoned kiln sites, first in the Andes and later in southern Japan, recording how ancient potters controlled heat and airflow. A series of glazed vessels that Ferrand produced after comparing the firing techniques of these distant workshops ______ on display at the Halvorsen Museum of Craft since last spring, drawing visitors interested in both art and materials science.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "have been placed",
+    "were placed",
+    "having been placed",
+    "has been placed"
+   ],
+   "correctIndex": 3,
+   "answers": null,
+   "explanation": "문장의 주어는 단수 명사 'A series'이고, 'of glazed vessels that ... workshops'는 이 주어를 꾸미는 수식어구다. 또한 'since last spring'은 과거에 시작돼 현재까지 이어지는 상태를 나타내므로 현재완료 단수형이 필요하다. 따라서 D가 정답이다. A는 현재완료 시제는 맞지만, 가까운 복수 명사에 맞춰 복수형을 써서 주어와 수가 일치하지 않는다. B는 단순과거라서 'since'와 함께 쓸 수 없다. C는 분사이므로 문장에 정동사가 없게 된다.",
+   "explanationEn": "The subject of this sentence is the singular noun \"A series.\" The words \"of glazed vessels that ... workshops\" form a long modifier that comes between that subject and its verb. The phrase \"since last spring\" describes a situation that started in the past and is still going on, so you need a singular present perfect verb. That makes D correct. A uses the right tense, but it is plural, which means it agrees with the nearby plural nouns instead of the real subject. B is simple past, which doesn't work with \"since,\" and C is a participle, so the sentence would be left without a main verb.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "D",
+   "seed": "인물 소개(과학자·예술가)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "주어 'A series'(단수) + 긴 수식어구 'of glazed vessels that ... workshops' 뒤 동사 → 단수 필요, 'since last spring' → 현재완료 필요. D만 두 조건 모두 충족. A(현재완료이나 복수, 근접 복수명사 'vessels/workshops/techniques'에 이끌림), B(단수/복수 구분 없는 단순과거로 since와 불일치), C(분사, 정동사 부재)로 오답 구성이 적절하며 두 단계 판단을 요구해 medium에 부합. 한국어·영어 해설 모두 정답과 선택지 참조가 일치하고 모순 없음. 사소한 점: 'has been placed on display since last spring'은 'has been on display since'보다 다소 어색한 표현이나(placed는 일회성 동작), 정답 판정에는 영향 없음. 가상 인물·기관 사용으로 저작권 우려 없음."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "'A series of' 뒤 동사의 수일치는 SAT 관행상 단수로 처리한다. 주어와 동사 사이에 긴 수식어와 복수 명사(vessels, techniques, workshops)가 끼어 있고, since 때문에 시제도 판단해야 한다. 이렇게 수일치와 시제를 함께 봐야 하므로 medium에 적합하다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "medium-form_structure_sense-321",
+  "runId": "rw-supplement-medium",
+  "skill": "form_structure_sense",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "The collection of whistled-speech recordings that linguist Julien Meyer and his colleagues gathered in mountain villages across the Canary Islands, northern Turkey, and Oaxaca, Mexico, ______ researchers to compare how different communities convert spoken vowels into distinct pitch contours.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "The collection of whistled-speech recordings that linguist Julien Meyer and his colleagues gathered in mountain villages across the Canary Islands, northern Turkey, and Oaxaca, Mexico, ______ researchers to compare how different communities convert spoken vowels into distinct pitch contours.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "allow",
+    "allowing",
+    "has allowed",
+    "have allowed"
+   ],
+   "correctIndex": 2,
+   "answers": null,
+   "explanation": "이 문장의 주어는 단수 명사 \"collection\"이고, \"of whistled-speech recordings that ... Mexico\"는 이 주어를 꾸미는 긴 수식어구이다. 따라서 빈칸에는 단수 주어와 일치하는 정동사가 필요하므로 C가 정답이다. A와 D는 수식어구 안의 복수 명사 \"recordings\"(또는 \"colleagues\", \"villages\")에 수를 맞춘 복수 동사이므로 주어와 일치하지 않는다. B는 분사이기 때문에 문장에 정동사가 없게 되어 완전한 문장이 되지 못한다.",
+   "explanationEn": "The subject of this sentence is the singular noun \"collection.\" The long phrase \"of whistled-speech recordings that ... Mexico\" only describes that subject. So the blank needs a finite verb that agrees with a singular subject, and that makes C correct. A and D are plural verbs. They agree with the nearby plural nouns inside the modifier (\"recordings,\" \"colleagues,\" \"villages\") instead of with the actual subject. B is a participle, so it leaves the sentence without a main verb, and the result is a fragment.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "C",
+   "seed": "언어·인류학",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "주어 \"collection\"(단수)과 긴 수식어구 내 복수 명사(recordings, colleagues, villages)가 분리되어 있어 주어 식별 + 수 일치의 두 단계 판단이 필요. 정답 C(has allowed) 검산 완료. A·D는 근접 복수 명사에 이끌리는 오답, B는 정동사 부재로 단편이 되는 오답으로 모두 그럴듯함. 한·영 해설이 동일 결론·글자 참조를 가지며 영어 자연스럽고 한글 없음. Julien Meyer의 휘파람 언어 연구 지역(카나리아 제도, 터키 북부, 오악사카)은 사실과 부합. 표준 SAT medium에 적합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "주어 collection(단수)과 동사 사이에 긴 수식어구와 복수 명사 여럿이 끼어 있는 전형적인 SAT 수일치 문항이다. 주어를 찾고 정동사가 필요한지 확인하는 두 단계 판단이 필요하다. 훑어 읽으면 Mexico 바로 앞에 있는 복수 명사에 끌려 A나 D를 고르게 된다. Julien Meyer는 실제로 휘파람 언어를 연구하는 학자이지만, 지문의 구체적인 서술은 문법 판단에 영향을 주지 않는다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "medium-form_structure_sense-323",
+  "runId": "rw-supplement-medium",
+  "skill": "form_structure_sense",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "In 1947, sculptor Ruth Asawa traveled to Toluca, Mexico, where local artisans taught her a looped-wire technique used to make egg baskets. The suspended wire forms that she went on to create with this technique, now exhibited in museums from San Francisco to New York, ______ light in such a way that each sculpture casts layered shadows that seem to double it on the surrounding walls.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "In 1947, sculptor Ruth Asawa traveled to Toluca, Mexico, where local artisans taught her a looped-wire technique used to make egg baskets. The suspended wire forms that she went on to create with this technique, now exhibited in museums from San Francisco to New York, ______ light in such a way that each sculpture casts layered shadows that seem to double it on the surrounding walls.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "catch",
+    "catches",
+    "catching",
+    "has caught"
+   ],
+   "correctIndex": 0,
+   "answers": null,
+   "explanation": "이 문장의 주어는 복수 명사 'forms'이다. 관계절 'that she went on to create with this technique'와 분사구 'now exhibited in museums...'는 주어를 꾸미는 수식어일 뿐이고, 문장에는 아직 본동사가 없다. 따라서 복수 주어와 수가 일치하는 정동사 A(catch)가 들어가야 한다. B와 D는 정동사이지만 단수형이어서, 빈칸 가까이에 있는 'technique'나 'New York'을 주어로 잘못 본 경우에 고르게 된다. C는 분사이므로 문장에 본동사가 없는 비문이 된다.",
+   "explanationEn": "The subject of this sentence is the plural noun \"forms.\" The relative clause \"that she went on to create with this technique\" and the phrase \"now exhibited in museums...\" only modify that subject, so the sentence still needs a main verb. Choice A, \"catch,\" is a finite verb that agrees with the plural subject, so it is correct. Choices B and D are finite verbs, but they are singular, so they would only work if you mistook a nearby noun such as \"technique\" or \"New York\" for the subject. Choice C is a participle, which would leave the sentence without a main verb.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "A",
+   "seed": "인물 소개(과학자·예술가)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "주어 'forms'(복수)와 본동사 일치 문제. 관계절·분사구 수식어가 주어와 빈칸 사이에 길게 끼어 있고, 빈칸 근처의 단수 명사 'technique', 'New York'이 B/D를 유인하는 구조로 medium에 적합. C는 정동사 부재 오류로 적절한 오답. 루스 아사와의 1947년 톨루카 방문 및 루프 와이어 기법 학습은 사실과 부합. 해설 양 언어 모두 정답과 일치하며 모순 없음."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "주어와 동사 사이에 관계절과 분사구가 길게 끼어 있고, 빈칸 앞의 단수 명사(technique, New York)가 함정으로 작동한다. 수 일치를 판단하고 본동사가 필요한지 확인해야 하는 두 단계 구조라 medium에 적합하다. 다만 D의 has caught는 시제상으로도 다소 어색하다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "medium-form_structure_sense-324",
+  "runId": "rw-supplement-medium",
+  "skill": "form_structure_sense",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "In 1974, astronomers Russell Hulse and Joseph Taylor discovered a pulsar locked in a tight orbit with a companion neutron star. Over the following decades, precise timing of the pulsar's radio pulses revealed that the orbit of the two dense stars, each packing more mass than the Sun into a sphere only about 20 kilometers across, ______ by roughly 3.5 meters per year, exactly the rate predicted if the system were losing energy through gravitational waves.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "In 1974, astronomers Russell Hulse and Joseph Taylor discovered a pulsar locked in a tight orbit with a companion neutron star. Over the following decades, precise timing of the pulsar's radio pulses revealed that the orbit of the two dense stars, each packing more mass than the Sun into a sphere only about 20 kilometers across, ______ by roughly 3.5 meters per year, exactly the rate predicted if the system were losing energy through gravitational waves.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "were shrinking",
+    "was shrinking",
+    "shrinking",
+    "having shrunk"
+   ],
+   "correctIndex": 1,
+   "answers": null,
+   "explanation": "that절의 주어는 단수 명사 \"the orbit\"이고, \"of the two dense stars\"와 삽입된 긴 수식어구는 주어를 꾸밀 뿐이므로 절에는 단수 정동사가 필요하다. 따라서 B \"was shrinking\"이 정답이다. A는 정동사이긴 하지만 바로 앞의 복수 명사 \"stars\"에 수를 맞춘 것이라 단수 주어 \"orbit\"과 일치하지 않는다. C와 D는 분사형이라 정동사 역할을 할 수 없어 that절이 동사 없는 불완전한 절이 된다.",
+   "explanationEn": "The subject of the \"that\" clause is the singular noun \"the orbit.\" The phrase \"of the two dense stars\" and the long modifier set off by commas only describe that subject, so the clause needs a singular finite verb. That makes B, \"was shrinking,\" correct. A is a finite verb, but it agrees with the nearby plural noun \"stars\" rather than with \"orbit.\" C and D are participles, so neither can work as the main verb, and either one would leave the \"that\" clause without a verb.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "B",
+   "seed": "자연과학(물리·천문)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "that절 주어 \"the orbit\"(단수)와 긴 삽입 수식어(\"of the two dense stars, each packing...\") 뒤의 정동사 일치 문제. B \"was shrinking\"이 유일한 정답이며, A는 인접 복수명사 \"stars\"에 끌린 오답, C·D는 비정형 동사로 절이 불완전해짐. 해설(한·영) 모두 정답을 정확히 뒷받침하고 선택지 참조가 일치함. 사실관계(1974년 Hulse–Taylor 발견, 연간 약 3.5m 궤도 축소, 중성자별 약 20km·태양 질량 초과) 정확. 주어 식별 + 수 일치의 두 단계 판단이 필요해 medium에 적합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "주어와 동사가 긴 삽입구로 떨어져 있고, 바로 앞에 복수 명사 stars가 있어 오답을 유도한다. 이 때문에 수 일치와 정동사 여부를 함께 확인해야 하는 2단계 판단이 필요하며, 중간 난이도에 맞다. 사실관계도 맞다(헐스-테일러 1974년 발견, 궤도 감소 연 약 3.5m, 중성자별 지름 약 20km). 다만 A의 'were'는 가정법으로 읽힐 여지가 있다. 그래도 직설 맥락이라 배제가 분명하다.",
+    "passed": true
+   }
+  }
+ }
+]

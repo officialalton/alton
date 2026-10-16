@@ -1,0 +1,38 @@
+{
+ "run": "supp-r3c-ab",
+ "subject": "ap_calculus_ab",
+ "generatedAt": "2026-10-13T01:50:03.661Z",
+ "totalCostUsd": 0.69,
+ "newSpendSinceBaseline": 0.69,
+ "cap": 50,
+ "calls": 40,
+ "candidates": 10,
+ "mcCandidates": 0,
+ "frqCandidates": 10,
+ "passedAll": 6,
+ "adopted": 6,
+ "mcAdopted": 0,
+ "frqAdopted": 6,
+ "reserve": 0,
+ "yield": 0.6,
+ "costPerAdopted": 0.115,
+ "callsPerAdopted": 6.7,
+ "duplicateRejected": 0,
+ "spotChecked": 0,
+ "wording": {
+  "llm": 2,
+  "template": 8
+ },
+ "rejectionReasons": {
+  "criterion_failed_scope_skill": 2,
+  "criterion_failed_key_scoring": 3,
+  "reference_pattern_mismatch": 1,
+  "criterion_failed_stimulus_expression": 2
+ },
+ "unfilledCells": [
+  "ap_calculus_ab-f02",
+  "ap_calculus_ab-f05",
+  "ap_calculus_ab-f08",
+  "ap_calculus_ab-f10"
+ ]
+}

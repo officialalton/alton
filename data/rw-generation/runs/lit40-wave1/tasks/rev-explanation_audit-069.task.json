@@ -1,0 +1,349 @@
+{
+ "schema": "rw-session-task/v1",
+ "kind": "review",
+ "role": "explanation_audit",
+ "runId": "lit40-wave1",
+ "taskId": "rev-explanation_audit-069",
+ "chunkId": "rev-explanation_audit-069",
+ "suggestedModel": "sonnet",
+ "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-explanation_audit-069.result.json",
+ "outputSchema": {
+  "chunkId": "청크 ID",
+  "model": "sonnet",
+  "items": [
+   {
+    "candidateId": "id",
+    "answer_correct": "표시된 정답이 정말 정답이면 true",
+    "explanation_consistent": "해설이 정답·오답 판단과 일치하고 글자 참조가 맞으면 true",
+    "explanation_factual": "해설에 사실 오류가 없으면 true",
+    "issues": "한 줄 메모"
+   }
+  ]
+ },
+ "items": [
+  {
+   "candidateId": "lit40-easy-04-097",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "easy",
+   "passage": "Under our eyes were green trees and the gleam of crystal streams; in our ears the songs of birds we had never expected to hear again. Chance had brought us direct to the path, the only one by which the valley can be reached from the upper plain. Inspirited by the fair spectacle below, we gained strength enough to descend. We drank of the sweet water, and procured food from the branches of the trees that shaded it. It was the season when fruits and berries were abundant.",
+   "question": "Which choice best describes the narrator's attitude toward the valley?",
+   "options": [
+    "Fearful suspicion of its hidden dangers",
+    "Relieved delight at its green abundance",
+    "Bored indifference to its quiet scenery",
+    "Bitter disappointment in its poor fruit"
+   ],
+   "correct_letter": "B",
+   "explanation": "화자는 다시는 듣지 못할 줄 알았던 새소리와 맑은 시냇물을 보며 아름다운 광경에 힘을 얻었다고 말한다. 또한 단 물을 마시고 풍성한 과일과 열매로 먹을 것을 구했다고 서술한다. 따라서 안도와 기쁨을 나타내는 B가 정답이다. A, C, D의 의심·무관심·실망은 지문의 감사하는 어조와 맞지 않는다."
+  },
+  {
+   "candidateId": "lit40-easy-04-098",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "easy",
+   "passage": "I told the girl a good many of my river adventures, and made myself out a good deal of a hero; Tom tried to make himself appear to be a hero, too, and succeeded to some extent, but then he always had a way of embroidering. However, virtue is its own reward, so I was a barely perceptible trifle ahead in the contest. About this time something happened which promised handsomely for me: the pilots decided to sound the crossing at the head of 21. This would occur about nine or ten o'clock at night, when the passengers would be still up; it would be Mr. Thornburg's watch, therefore my chief would have to do the sounding.",
+   "question": "Which choice best states the main purpose of the text?",
+   "options": [
+    "To explain how pilots measure the depth of a river crossing at night",
+    "To show why Mr. Thornburg grew tired of the passengers on board",
+    "To show the narrator competing with Tom for a girl's admiration",
+    "To reveal that Tom finally admitted his river stories were false"
+   ],
+   "correct_letter": "C",
+   "explanation": "화자는 소녀에게 강 모험담을 들려주며 자신을 영웅처럼 꾸몄고 Tom도 그렇게 했다고 말한다. 이어 승객들이 깨어 있을 시간에 측심 작업이 생겨 자신에게 유리한 기회가 왔다고 기대한다. 따라서 Tom과 소녀의 관심을 두고 경쟁하는 모습을 보여 주는 C가 정답이다. A는 세부일 뿐이며, B와 D는 지문에 근거가 없다."
+  },
+  {
+   "candidateId": "lit40-easy-04-100",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "easy",
+   "passage": "Six months ago, only six months between the moment when he had in dumb hopelessness acquiesced in the fact that their paths must for ever diverge, and this in which they are, for all eternity, merged in one. His eyes have dropped to the gravel, as if seeking the print of her dear feet, that he may stoop and kiss it. His back is, as on that former occasion that his imagination has so potently summoned from its grave, turned towards the gate. He is alone. There are no witnesses to make him ridiculous.",
+   "question": "As used in the text, the phrase “summoned from its grave” most nearly suggests that his imagination has",
+   "options": [
+    "led him to visit a real burial ground near the gate",
+    "vividly revived a past moment that had seemed dead",
+    "caused him to forget the day their paths diverged",
+    "filled him with a sudden and lasting fear of death"
+   ],
+   "correct_letter": "B",
+   "explanation": "지문은 여섯 달 전 그가 그녀와 길이 갈라졌다고 체념하던 순간을 떠올린다. 그의 상상력이 그 이전 장면을 무덤에서 불러냈다는 표현은 끝난 줄 알았던 과거를 생생히 되살렸다는 뜻이다. 따라서 B가 정답이다. A는 비유를 실제 묘지로 오해했고, C는 오히려 기억한다는 내용과 반대이며, D의 죽음에 대한 두려움은 지문에 없다."
+  },
+  {
+   "candidateId": "lit40-easy-05-003",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "easy",
+   "passage": "By that rule everything is a failure. Married life is a failure; its laws are grossly violated. Home life is a failure; there are many miserable homes. The school is a failure; many a father has put thousands of dollars into the education of his son and found it wasted in riotous living. The church is a failure; many of its members are Christians only in name and not a few are hypocrites. But we know by the loyal, loving husbands and wives of every community that married life is not a failure. We know by the happy homes about us, with sweetest of household ties binding the family circle, that home life is not a failure.",
+   "question": "Which choice best describes the shift in tone that occurs in the text?",
+   "options": [
+    "It moves from hopeful praise of the family to bitter doubt about the church.",
+    "It moves from playful mockery of schools to solemn grief over lost sons.",
+    "It moves from firm confidence in marriage to growing uncertainty about the happy home.",
+    "It moves from a bleak list of failures to a confident affirmation of their worth."
+   ],
+   "correct_letter": "D",
+   "explanation": "글 앞부분은 결혼·가정·학교·교회를 차례로 'a failure'라고 부르는 어두운 나열이다. 'But we know'부터는 충실한 부부와 행복한 가정을 근거로 그것들이 실패가 아니라고 확신 있게 말한다. 따라서 D가 정답이다. A와 C는 어조 변화의 방향이 반대이고, B의 장난스러운 조롱은 지문에 없다."
+  },
+  {
+   "candidateId": "lit40-easy-05-004",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "text_structure",
+   "requestedDifficulty": "easy",
+   "passage": "The first emotion her presence excited was a quick sense of the strange fact that, after all these years of loneliness, such a magnificent person should be his wife. For she was magnificent, in the maturity of her beauty, her head erect, her complexion splendid, her auburn tresses undimmed, a certain plenitude in her very glance. He saw in a moment that she wished to seem to him beautiful, she had endeavored to dress herself to the best effect. Perhaps, after all, it was only for this she had delayed; she wished to give herself every possible touch. For some moments they said nothing; they had not stood face to face for nearly ten years, and they met now as adversaries.",
+   "question": "Which choice best describes the overall structure of the text?",
+   "options": [
+    "It records a man's admiration of his wife's looks and then reveals the tension between them.",
+    "It recounts a couple's long separation and then explains the reasons for their first quarrel.",
+    "It praises a woman's careful dressing and then describes her refusal to meet her husband.",
+    "It presents a man's loneliness and then shows his decision to leave his wife for good."
+   ],
+   "correct_letter": "A",
+   "explanation": "글은 남자가 아내의 'magnificent' 아름다움에 놀라는 데서 시작해 그녀가 아름다워 보이려 했다는 추측으로 이어진다. 마지막에는 두 사람이 10년 만에 'as adversaries'로 마주한다고 말해 긴장을 드러낸다. 따라서 A가 정답이다. B의 다툼 이유 설명, C의 만남 거절, D의 떠나는 결심은 지문에 없다."
+  },
+  {
+   "candidateId": "lit40-easy-05-006",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "easy",
+   "passage": "How changed we were from what we had been a few short hours before! Hopeless, sad-eyed misery, hunger, feverish anxiety, desperation, then; thankfulness, serenity, joy too deep for utterance now. That I know was the cheeriest hour of my eventful life. The winds howled, and blew the snow wildly about our prison house, but they were powerless to distress us any more. I liked Harris. He might have been better done, perhaps, but I am free to say that no man ever agreed with me better than Harris, or afforded me so large a degree of satisfaction.",
+   "question": "Which choice best describes the narrator's attitude toward Harris?",
+   "options": [
+    "Suspicious, because Harris caused the misery of the earlier hungry hours",
+    "Indifferent, because the narrator is focused only on the storm",
+    "Regretful, because the narrator wishes Harris had stayed away",
+    "Warmly approving, because Harris gave the narrator great satisfaction"
+   ],
+   "correct_letter": "D",
+   "explanation": "서술자는 'I liked Harris'라고 직접 말한다. 또한 누구도 Harris만큼 자신과 잘 맞거나 'so large a degree of satisfaction'을 준 적이 없다고 덧붙인다. 따라서 D가 정답이다. A와 C는 이 호감과 반대이고, B는 폭풍이 더 이상 괴롭히지 못한다고 한 뒤 Harris 이야기로 넘어가는 흐름과 맞지 않는다."
+  },
+  {
+   "candidateId": "lit40-easy-05-007",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "easy",
+   "passage": "There has, unfortunately, been some evidence in the past year that another such conspiracy is on foot. The danger to which these fiends expose their fellow-tenants is appalling. A fire-panic at night in a tenement, by no means among the rare experiences in New York, with the surging, half-smothered crowds on stairs and fire-escapes, the frantic mothers and crying children, the wild struggle to save the little that is their all, is a horror that has few parallels in human experience.\n\nI cannot think without a shudder of one such scene in a First Avenue tenement. It was in the middle of the night. The fire had swept up with sudden fury from a restaurant on the street floor, cutting off escape.",
+   "question": "Which choice best states the main purpose of the text?",
+   "options": [
+    "To stress the terrible danger of tenement fires and begin recalling one such fire",
+    "To argue that restaurants should never be allowed on the street floors of tenements",
+    "To praise the mothers who saved their children during a fire on First Avenue",
+    "To explain how fire-escapes were first added to tenements in New York"
+   ],
+   "correct_letter": "A",
+   "explanation": "글은 공동주택 화재가 'appalling'하며 거의 비할 데 없는 공포라고 강조한다. 이어 서술자는 First Avenue 공동주택에서 겪은 한 장면을 떨며 떠올리기 시작한다. 따라서 A가 정답이다. B의 규제 주장, C의 어머니 칭송, D의 비상계단 역사는 지문에 나오지 않는다."
+  },
+  {
+   "candidateId": "lit40-easy-05-008",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "easy",
+   "passage": "In moodily turning over a heap of mining clothing, blankets, and india-rubber boots, he had come upon an old pickaxe--the one he had found in the shaft; the one he had carefully preserved for a year, and then forgotten! Why had he not remembered it before? He was frightened, not only at this sudden resurrection of the proof he was seeking, but at his own fateful forgetfulness. Why had he never thought of this when Slinn was speaking? A sense of shame, as if he had voluntarily withheld it from the wronged man, swept over him.",
+   "question": "As used in the text, the phrase “sudden resurrection of the proof” most nearly suggests that",
+   "options": [
+    "a piece of forgotten evidence has unexpectedly reappeared",
+    "a buried object has been dug up again from the bottom of the shaft",
+    "a dead man has been brought back to tell his story",
+    "a lost tool has been repaired and made useful again"
+   ],
+   "correct_letter": "A",
+   "explanation": "그는 옷더미를 뒤지다가 1년 동안 보관하고는 잊어버린 곡괭이를 우연히 발견한다. 이 곡괭이는 그가 찾던 증거이므로 'resurrection'은 잊힌 증거가 갑자기 다시 나타났다는 뜻이다. 따라서 A가 정답이다. B는 곡괭이가 옷더미에서 나왔다는 사실과 맞지 않고, C와 D는 비유를 글자 그대로 잘못 읽은 것이다."
+  },
+  {
+   "candidateId": "lit40-easy-05-009",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "easy",
+   "passage": "You need me because you are a strong man and are afraid that your very strength will lead you into ignoble warfare. You are afraid of your strength, not of your weakness. So you ask me to help you. Without thinking, you ask me to marry you to-morrow. The idea came to you like a flash of light in the darkness. Five minutes--yes, one minute before you asked it of me, Freddy dear, you were floundering in the darkness, uncertain which way to turn. You were afraid of the things you could not see. You looked for some place in which to hide.",
+   "question": "As used in the text, the phrase “like a flash of light in the darkness” most nearly suggests that the idea",
+   "options": [
+    "came slowly after many nights of careful thought",
+    "arrived suddenly and showed a way out of confusion",
+    "frightened Freddy as much as the unseen things did",
+    "was a dangerous impulse that should be ignored"
+   ],
+   "correct_letter": "B",
+   "explanation": "화자는 청혼 바로 몇 분 전까지 Freddy가 'floundering in the darkness'하며 어디로 갈지 몰랐다고 말한다. 그러므로 어둠 속 섬광은 생각이 갑자기 떠올라 혼란 속에서 길을 보여 주었다는 뜻이다. 따라서 B가 정답이다. A는 'Without thinking'과 반대이고, C와 D는 생각이 그를 돕는 역할을 했다는 맥락과 맞지 않는다."
+  },
+  {
+   "candidateId": "lit40-easy-05-012",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "easy",
+   "passage": "There might have been a slight blush on her cheek at appearing before so many people on such an undertaking; but yet, with a slight laugh and a smile on her lips, she advanced towards the stone. There was a perfect silence among the crowd of spectators as she touched the stone. It did not move. Again and again she touched it, with all the force she could exert. The stone remained as immovable as if part of the mass on which it rested. There was a general groan uttered by the crowd, an evidence of their full belief in the truth of the legend, while, at the same moment, a piercing cry was heard, and the unhappy damsel was seen to fall fainting to the ground.",
+   "question": "Which choice best describes the shift in tone that occurs in the text?",
+   "options": [
+    "It moves from fearful dread to relieved laughter as the crowd cheers.",
+    "It moves from solemn silence to playful teasing among the spectators.",
+    "It moves from light confidence to dismay as the stone refuses to move.",
+    "It moves from angry defiance to calm acceptance of the old legend."
+   ],
+   "correct_letter": "C",
+   "explanation": "처음에 그녀는 'a slight laugh and a smile'을 띠고 가볍게 돌로 다가간다. 그러나 돌이 꿈쩍도 하지 않자 군중이 신음하고 그녀는 비명과 함께 쓰러진다. 따라서 가벼운 자신감에서 낙담으로 바뀌는 C가 정답이다. A와 B는 방향이 반대이고, D의 분노와 체념은 지문에 없다."
+  },
+  {
+   "candidateId": "lit40-easy-05-015",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "easy",
+   "passage": "To make a long story short, three years later Ralph returned to the capital, and, after having worn out several tutors, actually succeeded in entering the University.\n\nThe first year of college life is a happy time to every young man, and Ralph enjoyed its processions, its parliamentary gatherings, and its leisure, as well as the rest. He was certainly not the man to be sentimental over the loss of a young girl whom, moreover, he had only known for a few weeks. Nevertheless, he thought of her at odd times, but not enough to disturb his pleasure. The standing of his family, his own handsome appearance, and his immaculate linen opened to him the best houses of the city, and he became a great favorite in society.",
+   "question": "As used in the text, the phrase “worn out several tutors” most nearly suggests that Ralph",
+   "options": [
+    "was so hard to teach that his tutors gave up one after another",
+    "owned so many old books that his tutors could not read them all",
+    "spent so much money that his family could not pay his tutors",
+    "traveled so much that his tutors grew tired of following him"
+   ],
+   "correct_letter": "A",
+   "explanation": "Ralph는 여러 가정교사를 거친 끝에야 'actually succeeded' 대학에 들어갔다고 한다. 'actually'는 입학이 뜻밖일 만큼 그가 가르치기 어려운 학생이었음을 보여 준다. 따라서 A가 정답이다. B, C, D는 책·돈·여행처럼 지문에 근거가 없는 이유를 든다."
+  },
+  {
+   "candidateId": "lit40-easy-05-016",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "easy",
+   "passage": "Not a change did the family make in their routine, for they had still plenty of time for everything. Not a fresh incongruous article was added to the old simple seasoned household gods. Athole had not an additional gown of costlier material. Dr. Peter even bought fewer books than usual, and denied himself an improved telescope which he had thought of buying. He could do star-gazing without it, every time he was called out on a clear night, and perhaps it was not worth the while of a man of his age to fix the study on the latest scientific basis. It seemed as if the family were called upon to testify to a different order of things, and to utter their small protest against the opposite extreme.",
+   "question": "As used in the text, the phrase “old simple seasoned household gods” most nearly suggests the family's",
+   "options": [
+    "new purchases chosen to impress the neighbors",
+    "familiar, long-used belongings that they valued",
+    "religious statues kept in a special room",
+    "costly treasures hidden away for later use"
+   ],
+   "correct_letter": "B",
+   "explanation": "가족은 일상을 바꾸지 않았고 새 물건도 더하지 않았으며 Athole은 비싼 옷을 사지 않았다고 한다. 이 맥락에서 'household gods'는 오래 써서 정든 소박한 살림살이를 가리킨다. 따라서 B가 정답이다. A와 D는 새 물건이나 값비싼 물건이라 맥락과 반대이고, C는 비유를 글자 그대로 읽은 것이다."
+  },
+  {
+   "candidateId": "lit40-easy-05-019",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "easy",
+   "passage": "There was a band of music playing in the tent, and people were sitting drinking and smoking at one end. Katie shrank back with horror; everybody had such a coarse, bold look, so different from anything she had ever seen before. And her own knowledge of right and wrong, and the modest way in which she had been brought up, at once warned her not to accept the invitation. She was already beginning heartily to repent having come to Oakfield. Her head ached with all the noise and excitement; and she felt the truth of the saying that unlawful pleasures can never bring true happiness. She fancied she had more influence with Fanny than with the rest, and hastily drew her on one side.",
+   "question": "As used in the text, the phrase “shrank back with horror” most nearly suggests that Katie",
+   "options": [
+    "pulled away at once from a scene that shocked her",
+    "grew physically smaller and weaker as the crowd in the tent pressed in",
+    "felt sick because of the smoke in the tent",
+    "feared that the band would ask her to play"
+   ],
+   "correct_letter": "A",
+   "explanation": "Katie는 천막 안 사람들이 'coarse, bold'해 보여 자신이 보아 온 것과 너무 다르다고 느낀다. 이어 바른 교육을 받은 그녀의 양심이 초대를 받지 말라고 경고하므로, 이 표현은 충격받아 즉시 물러서는 반응을 뜻한다. 따라서 A가 정답이다. B는 비유를 글자 그대로 읽은 것이고, C와 D는 지문에 근거가 없다."
+  },
+  {
+   "candidateId": "lit40-easy-05-020",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "easy",
+   "passage": "If the conduct of the men had been alarming in the boat, it became truly threatening when they had come aboard. They lay about the deck growling together in talk. The slightest order was received with a black look, and grudgingly and carelessly obeyed. Even the honest hands must have caught the infection, for there was not one man aboard to mend another. Mutiny, it was plain, hung over us like a thunder-cloud.\n\nAnd it was not only we of the cabin party who perceived the danger. Long John was hard at work going from group to group, spending himself in good advice, and as for example no man could have shown a better.",
+   "question": "As used in the text, the phrase “hung over us like a thunder-cloud” most nearly suggests that",
+   "options": [
+    "the crew had already openly seized control of the ship",
+    "a dangerous revolt seemed ready to break out at any moment",
+    "stormy weather was delaying the progress of the voyage",
+    "the sailors were grieving over companions lost at sea"
+   ],
+   "correct_letter": "B",
+   "explanation": "'thunder-cloud'는 아직 터지지 않았지만 곧 쏟아질 듯한 위협을 비유한다. 앞 문장들에서 선원들이 투덜거리고 명령에 험악한 표정으로 마지못해 따른다고 하여 반란의 기운이 감돌고 있음을 보여 준다. 따라서 B가 정답이다. A는 반란이 이미 일어났다고 보아 틀리고, C는 비유를 실제 날씨로 읽은 오류이며, D는 지문에 근거가 없다."
+  },
+  {
+   "candidateId": "lit40-easy-05-023",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "easy",
+   "passage": "When Sepeli dropped both pig and Chancellor, a talking man from the windward coast picked up the carcass. Cornelius was on his feet and running, when the pig caught him on the legs and tripped him. The people and the army, with shouts and laughter, joined in the sport.\n\nTwist and dodge as he would, everywhere the ex-Chancellor of the Exchequer was met or overtaken by the flying pig. He scuttled like a frightened rabbit in and out among the avocados and the palms. No hand was laid upon him, and his tormentors made way before him, but ever they pursued, and ever the pig flew as fast as hands could pick it up.",
+   "question": "As used in the text, the phrase “scuttled like a frightened rabbit” most nearly suggests that",
+   "options": [
+    "moved in a hurried, panicked way to escape his pursuers",
+    "carefully planned a clever route to a safe hiding place",
+    "enjoyed the lively game as much as the crowd did",
+    "waited quietly among the trees until the crowd tired"
+   ],
+   "correct_letter": "A",
+   "explanation": "'frightened rabbit'는 겁에 질려 이리저리 급히 달아나는 모습을 비유한다. 앞에서 그가 몸을 비틀고 피하려 해도 돼지에 계속 쫓긴다고 묘사되어 있다. 따라서 A가 정답이다. B는 계획성을, C는 즐거움을, D는 가만히 기다림을 말해 지문의 다급한 도주와 맞지 않는다."
+  },
+  {
+   "candidateId": "lit40-easy-05-029",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "easy",
+   "passage": "In the country school I attended, there was a debating society. Parents as well as their sons were admitted to the society and the public was invited to the debates. On one occasion the question for debate was: \"Which is the more attractive, the works of nature or the works of art?\"\n\nThere had been an appeal from a general debate and this time one speaker was chosen from each side. My father was chosen to represent the negative and I the affirmative. My father was a good speaker but so fond of facts he had no use for rhetoric. I had the opening address of thirty minutes, my father had forty-five minutes and I had fifteen minutes to close the debate.",
+   "question": "As used in the text, the phrase “had no use for rhetoric” most nearly suggests that",
+   "options": [
+    "could not afford to pay for training in public speaking",
+    "lacked the books he needed to prepare his speech",
+    "cared little for ornate, persuasive language in his arguments",
+    "had grown tired of joining debates at the school"
+   ],
+   "correct_letter": "C",
+   "explanation": "'had no use for'는 실제로 쓸 수 없다는 뜻이 아니라 가치를 두지 않는다는 관용 표현이다. 바로 앞의 'so fond of facts'와 대조되어 그가 꾸밈 있는 말보다 사실을 중시했음을 보여 준다. 따라서 C가 정답이다. A와 B는 돈이나 자료 부족으로 읽은 오류이고, D는 그가 토론에 참여했다는 사실과 맞지 않는다."
+  },
+  {
+   "candidateId": "lit40-easy-05-033",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "easy",
+   "passage": "Beyond all that, the situation was a commanding one. The prospect from almost every window was beautiful. Hillsides covered with thrifty crops—maple groves that became gorgeous in the autumn—farm-houses that gave an idea of elegance as well as comfort, formed lovely rural pictures whereon the inmates of the institution looked. Indeed, within or without, there was nothing to excite the brain or give an unpleasant emotion. Authority there was, certainly, firm and judicious, but so concealed in all its rugged points, that even the sharp suspicion of insanity failed to jar against it. Indeed, the ruling spirit of this place was Mrs. Barr, whose charity was ever prevailing, and whose firm goodness was rendered efficient by proportionate strength. To her the inmates of this building were objects of unlimited interest.",
+   "question": "As used in the text, the phrase “the ruling spirit of this place was Mrs. Barr” most nearly suggests that",
+   "options": [
+    "Mrs. Barr was a ghost said to haunt the institution",
+    "Mrs. Barr held a title but had no real influence",
+    "Mrs. Barr was the guiding influence that shaped the place",
+    "Mrs. Barr's changing moods controlled the inmates"
+   ],
+   "correct_letter": "C",
+   "explanation": "'ruling spirit'는 유령이 아니라 그곳을 이끄는 중심 인물을 뜻한다. 뒤에서 그녀의 자비와 굳은 선함이 효과적으로 작용했다고 하고, 앞에서 권위가 부드럽게 감춰져 있었다고 한다. 따라서 C가 정답이다. A는 'spirit'를 문자 그대로 읽은 오류이고, B와 D는 지문의 긍정적 묘사와 어긋난다."
+  },
+  {
+   "candidateId": "lit40-easy-05-035",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "easy",
+   "passage": "I had faltered, and my cause was lost. What have I accomplished? Am I able to gloat over you? What have I wrought, after all? I weakened under the love she bore for you, I permitted it to creep in and fill my heart. Do you understand? I do not hate you now. It is something to know that you have worshipped her all these years. You were true to her. What you did long, long ago was not your fault. You believed that she had wronged you. But you went on loving her. That is what weakened my resolve. You loved her to the end, she loved you to the end. Well, in the face of that, could I go on hating you? You must have been worthy of her love.",
+   "question": "As used in the text, the phrase “permitted it to creep in and fill my heart” most nearly suggests that",
+   "options": [
+    "the speaker's feelings changed gradually, almost without notice",
+    "the speaker suddenly decided to forgive in a single moment",
+    "the speaker felt fear of someone sneaking into the house",
+    "the speaker tried hard to hide his love from others"
+   ],
+   "correct_letter": "A",
+   "explanation": "'creep in'은 조용히 조금씩 스며드는 모습을 비유한다. 앞에서 화자는 자신이 'faltered'했다고 하고, 뒤에서는 그 사랑 때문에 결심이 약해져 더 이상 미워하지 않는다고 말한다. 따라서 A가 정답이다. B는 점진적 변화와 반대이고, C는 비유를 실제 침입으로 읽은 오류이며, D는 지문에 근거가 없다."
+  },
+  {
+   "candidateId": "lit40-easy-05-037",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "easy",
+   "passage": "Many of these are secretly for us. They would join me, but they fear to do so lest their estates be confiscated. These are to be assured that what they may lose now by aiding me shall some day be restored to them. Here is a list of a number of such gentlemen in the province of Berry, and you are to give them the assurances necessary to enlist them in our cause. Use what persuasions you can. Take your company, and find some place of concealment among the hills of the southern border of Berry. You can thus provide escort in crossing the border for those who may need it.",
+   "question": "As used in the text, the phrase “enlist them in our cause” most nearly suggests that",
+   "options": [
+    "sign them up as soldiers in the royal army",
+    "write their names on an official list for the province",
+    "persuade them to openly join and support the effort",
+    "force them to give up their estates to the leader"
+   ],
+   "correct_letter": "C",
+   "explanation": "'enlist'는 원래 군에 입대시킨다는 뜻이지만 여기서는 대의에 동참하도록 설득한다는 의미로 쓰였다. 바로 뒤의 'Use what persuasions you can'과 앞의 그들이 몰래 지지하지만 두려워한다는 설명이 이를 뒷받침한다. 따라서 C가 정답이다. A와 B는 단어를 문자 그대로 읽은 오류이고, D는 재산을 돌려주겠다는 약속과 어긋난다."
+  }
+ ],
+ "instructions": "당신은 문항 감사관이다. 표시된 정답과 해설을 받아, 정답이 맞는지·해설이 일관되고 사실에 맞는지 점검한다(고치지 않고 판정만).\n청크 rev-explanation_audit-069 — 19문항.\n출력: Write 도구로 정확히 이 경로에 JSON 한 파일을 쓴다 → /Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-explanation_audit-069.result.json\n출력 JSON 스키마(예시 구조): {\"chunkId\":\"청크 ID\",\"model\":\"sonnet\",\"items\":[{\"candidateId\":\"id\",\"answer_correct\":\"표시된 정답이 정말 정답이면 true\",\"explanation_consistent\":\"해설이 정답·오답 판단과 일치하고 글자 참조가 맞으면 true\",\"explanation_factual\":\"해설에 사실 오류가 없으면 true\",\"issues\":\"한 줄 메모\"}]}\n허용 값: picked_letter ∈ {A,B,C,D}, 불리언 필드는 true/false, est_difficulty ∈ {easy,medium,hard}. candidateId 를 바꾸지 않고 모든 항목에 답한다.\n금지: 결과 파일 외의 파일 생성·수정, 다른 명령 실행, 문항 수정·재작성. 끝나면 'done <항목 수>' 한 줄만 답한다.\n\n## 문항\n### lit40-easy-04-097 — skill central_ideas_details · 유형 narrator_attitude\n[지문]\nUnder our eyes were green trees and the gleam of crystal streams; in our ears the songs of birds we had never expected to hear again. Chance had brought us direct to the path, the only one by which the valley can be reached from the upper plain. Inspirited by the fair spectacle below, we gained strength enough to descend. We drank of the sweet water, and procured food from the branches of the trees that shaded it. It was the season when fruits and berries were abundant.\n\n[질문] Which choice best describes the narrator's attitude toward the valley?\nA) Fearful suspicion of its hidden dangers\nB) Relieved delight at its green abundance\nC) Bored indifference to its quiet scenery\nD) Bitter disappointment in its poor fruit\n\n[표시된 정답] B\n[해설]\n화자는 다시는 듣지 못할 줄 알았던 새소리와 맑은 시냇물을 보며 아름다운 광경에 힘을 얻었다고 말한다. 또한 단 물을 마시고 풍성한 과일과 열매로 먹을 것을 구했다고 서술한다. 따라서 안도와 기쁨을 나타내는 B가 정답이다. A, C, D의 의심·무관심·실망은 지문의 감사하는 어조와 맞지 않는다.\n### lit40-easy-04-098 — skill central_ideas_details · 유형 main_idea_or_purpose\n[지문]\nI told the girl a good many of my river adventures, and made myself out a good deal of a hero; Tom tried to make himself appear to be a hero, too, and succeeded to some extent, but then he always had a way of embroidering. However, virtue is its own reward, so I was a barely perceptible trifle ahead in the contest. About this time something happened which promised handsomely for me: the pilots decided to sound the crossing at the head of 21. This would occur about nine or ten o'clock at night, when the passengers would be still up; it would be Mr. Thornburg's watch, therefore my chief would have to do the sounding.\n\n[질문] Which choice best states the main purpose of the text?\nA) To explain how pilots measure the depth of a river crossing at night\nB) To show why Mr. Thornburg grew tired of the passengers on board\nC) To show the narrator competing with Tom for a girl's admiration\nD) To reveal that Tom finally admitted his river stories were false\n\n[표시된 정답] C\n[해설]\n화자는 소녀에게 강 모험담을 들려주며 자신을 영웅처럼 꾸몄고 Tom도 그렇게 했다고 말한다. 이어 승객들이 깨어 있을 시간에 측심 작업이 생겨 자신에게 유리한 기회가 왔다고 기대한다. 따라서 Tom과 소녀의 관심을 두고 경쟁하는 모습을 보여 주는 C가 정답이다. A는 세부일 뿐이며, B와 D는 지문에 근거가 없다.\n### lit40-easy-04-100 — skill words_in_context · 유형 figurative_language\n[지문]\nSix months ago, only six months between the moment when he had in dumb hopelessness acquiesced in the fact that their paths must for ever diverge, and this in which they are, for all eternity, merged in one. His eyes have dropped to the gravel, as if seeking the print of her dear feet, that he may stoop and kiss it. His back is, as on that former occasion that his imagination has so potently summoned from its grave, turned towards the gate. He is alone. There are no witnesses to make him ridiculous.\n\n[질문] As used in the text, the phrase “summoned from its grave” most nearly suggests that his imagination has\nA) led him to visit a real burial ground near the gate\nB) vividly revived a past moment that had seemed dead\nC) caused him to forget the day their paths diverged\nD) filled him with a sudden and lasting fear of death\n\n[표시된 정답] B\n[해설]\n지문은 여섯 달 전 그가 그녀와 길이 갈라졌다고 체념하던 순간을 떠올린다. 그의 상상력이 그 이전 장면을 무덤에서 불러냈다는 표현은 끝난 줄 알았던 과거를 생생히 되살렸다는 뜻이다. 따라서 B가 정답이다. A는 비유를 실제 묘지로 오해했고, C는 오히려 기억한다는 내용과 반대이며, D의 죽음에 대한 두려움은 지문에 없다.\n### lit40-easy-05-003 — skill text_structure_purpose · 유형 tone_shift\n[지문]\nBy that rule everything is a failure. Married life is a failure; its laws are grossly violated. Home life is a failure; there are many miserable homes. The school is a failure; many a father has put thousands of dollars into the education of his son and found it wasted in riotous living. The church is a failure; many of its members are Christians only in name and not a few are hypocrites. But we know by the loyal, loving husbands and wives of every community that married life is not a failure. We know by the happy homes about us, with sweetest of household ties binding the family circle, that home life is not a failure.\n\n[질문] Which choice best describes the shift in tone that occurs in the text?\nA) It moves from hopeful praise of the family to bitter doubt about the church.\nB) It moves from playful mockery of schools to solemn grief over lost sons.\nC) It moves from firm confidence in marriage to growing uncertainty about the happy home.\nD) It moves from a bleak list of failures to a confident affirmation of their worth.\n\n[표시된 정답] D\n[해설]\n글 앞부분은 결혼·가정·학교·교회를 차례로 'a failure'라고 부르는 어두운 나열이다. 'But we know'부터는 충실한 부부와 행복한 가정을 근거로 그것들이 실패가 아니라고 확신 있게 말한다. 따라서 D가 정답이다. A와 C는 어조 변화의 방향이 반대이고, B의 장난스러운 조롱은 지문에 없다.\n### lit40-easy-05-004 — skill text_structure_purpose · 유형 text_structure\n[지문]\nThe first emotion her presence excited was a quick sense of the strange fact that, after all these years of loneliness, such a magnificent person should be his wife. For she was magnificent, in the maturity of her beauty, her head erect, her complexion splendid, her auburn tresses undimmed, a certain plenitude in her very glance. He saw in a moment that she wished to seem to him beautiful, she had endeavored to dress herself to the best effect. Perhaps, after all, it was only for this she had delayed; she wished to give herself every possible touch. For some moments they said nothing; they had not stood face to face for nearly ten years, and they met now as adversaries.\n\n[질문] Which choice best describes the overall structure of the text?\nA) It records a man's admiration of his wife's looks and then reveals the tension between them.\nB) It recounts a couple's long separation and then explains the reasons for their first quarrel.\nC) It praises a woman's careful dressing and then describes her refusal to meet her husband.\nD) It presents a man's loneliness and then shows his decision to leave his wife for good.\n\n[표시된 정답] A\n[해설]\n글은 남자가 아내의 'magnificent' 아름다움에 놀라는 데서 시작해 그녀가 아름다워 보이려 했다는 추측으로 이어진다. 마지막에는 두 사람이 10년 만에 'as adversaries'로 마주한다고 말해 긴장을 드러낸다. 따라서 A가 정답이다. B의 다툼 이유 설명, C의 만남 거절, D의 떠나는 결심은 지문에 없다.\n### lit40-easy-05-006 — skill central_ideas_details · 유형 narrator_attitude\n[지문]\nHow changed we were from what we had been a few short hours before! Hopeless, sad-eyed misery, hunger, feverish anxiety, desperation, then; thankfulness, serenity, joy too deep for utterance now. That I know was the cheeriest hour of my eventful life. The winds howled, and blew the snow wildly about our prison house, but they were powerless to distress us any more. I liked Harris. He might have been better done, perhaps, but I am free to say that no man ever agreed with me better than Harris, or afforded me so large a degree of satisfaction.\n\n[질문] Which choice best describes the narrator's attitude toward Harris?\nA) Suspicious, because Harris caused the misery of the earlier hungry hours\nB) Indifferent, because the narrator is focused only on the storm\nC) Regretful, because the narrator wishes Harris had stayed away\nD) Warmly approving, because Harris gave the narrator great satisfaction\n\n[표시된 정답] D\n[해설]\n서술자는 'I liked Harris'라고 직접 말한다. 또한 누구도 Harris만큼 자신과 잘 맞거나 'so large a degree of satisfaction'을 준 적이 없다고 덧붙인다. 따라서 D가 정답이다. A와 C는 이 호감과 반대이고, B는 폭풍이 더 이상 괴롭히지 못한다고 한 뒤 Harris 이야기로 넘어가는 흐름과 맞지 않는다.\n### lit40-easy-05-007 — skill central_ideas_details · 유형 main_idea_or_purpose\n[지문]\nThere has, unfortunately, been some evidence in the past year that another such conspiracy is on foot. The danger to which these fiends expose their fellow-tenants is appalling. A fire-panic at night in a tenement, by no means among the rare experiences in New York, with the surging, half-smothered crowds on stairs and fire-escapes, the frantic mothers and crying children, the wild struggle to save the little that is their all, is a horror that has few parallels in human experience.\n\nI cannot think without a shudder of one such scene in a First Avenue tenement. It was in the middle of the night. The fire had swept up with sudden fury from a restaurant on the street floor, cutting off escape.\n\n[질문] Which choice best states the main purpose of the text?\nA) To stress the terrible danger of tenement fires and begin recalling one such fire\nB) To argue that restaurants should never be allowed on the street floors of tenements\nC) To praise the mothers who saved their children during a fire on First Avenue\nD) To explain how fire-escapes were first added to tenements in New York\n\n[표시된 정답] A\n[해설]\n글은 공동주택 화재가 'appalling'하며 거의 비할 데 없는 공포라고 강조한다. 이어 서술자는 First Avenue 공동주택에서 겪은 한 장면을 떨며 떠올리기 시작한다. 따라서 A가 정답이다. B의 규제 주장, C의 어머니 칭송, D의 비상계단 역사는 지문에 나오지 않는다.\n### lit40-easy-05-008 — skill words_in_context · 유형 figurative_language\n[지문]\nIn moodily turning over a heap of mining clothing, blankets, and india-rubber boots, he had come upon an old pickaxe--the one he had found in the shaft; the one he had carefully preserved for a year, and then forgotten! Why had he not remembered it before? He was frightened, not only at this sudden resurrection of the proof he was seeking, but at his own fateful forgetfulness. Why had he never thought of this when Slinn was speaking? A sense of shame, as if he had voluntarily withheld it from the wronged man, swept over him.\n\n[질문] As used in the text, the phrase “sudden resurrection of the proof” most nearly suggests that\nA) a piece of forgotten evidence has unexpectedly reappeared\nB) a buried object has been dug up again from the bottom of the shaft\nC) a dead man has been brought back to tell his story\nD) a lost tool has been repaired and made useful again\n\n[표시된 정답] A\n[해설]\n그는 옷더미를 뒤지다가 1년 동안 보관하고는 잊어버린 곡괭이를 우연히 발견한다. 이 곡괭이는 그가 찾던 증거이므로 'resurrection'은 잊힌 증거가 갑자기 다시 나타났다는 뜻이다. 따라서 A가 정답이다. B는 곡괭이가 옷더미에서 나왔다는 사실과 맞지 않고, C와 D는 비유를 글자 그대로 잘못 읽은 것이다.\n### lit40-easy-05-009 — skill words_in_context · 유형 figurative_language\n[지문]\nYou need me because you are a strong man and are afraid that your very strength will lead you into ignoble warfare. You are afraid of your strength, not of your weakness. So you ask me to help you. Without thinking, you ask me to marry you to-morrow. The idea came to you like a flash of light in the darkness. Five minutes--yes, one minute before you asked it of me, Freddy dear, you were floundering in the darkness, uncertain which way to turn. You were afraid of the things you could not see. You looked for some place in which to hide.\n\n[질문] As used in the text, the phrase “like a flash of light in the darkness” most nearly suggests that the idea\nA) came slowly after many nights of careful thought\nB) arrived suddenly and showed a way out of confusion\nC) frightened Freddy as much as the unseen things did\nD) was a dangerous impulse that should be ignored\n\n[표시된 정답] B\n[해설]\n화자는 청혼 바로 몇 분 전까지 Freddy가 'floundering in the darkness'하며 어디로 갈지 몰랐다고 말한다. 그러므로 어둠 속 섬광은 생각이 갑자기 떠올라 혼란 속에서 길을 보여 주었다는 뜻이다. 따라서 B가 정답이다. A는 'Without thinking'과 반대이고, C와 D는 생각이 그를 돕는 역할을 했다는 맥락과 맞지 않는다.\n### lit40-easy-05-012 — skill text_structure_purpose · 유형 tone_shift\n[지문]\nThere might have been a slight blush on her cheek at appearing before so many people on such an undertaking; but yet, with a slight laugh and a smile on her lips, she advanced towards the stone. There was a perfect silence among the crowd of spectators as she touched the stone. It did not move. Again and again she touched it, with all the force she could exert. The stone remained as immovable as if part of the mass on which it rested. There was a general groan uttered by the crowd, an evidence of their full belief in the truth of the legend, while, at the same moment, a piercing cry was heard, and the unhappy damsel was seen to fall fainting to the ground.\n\n[질문] Which choice best describes the shift in tone that occurs in the text?\nA) It moves from fearful dread to relieved laughter as the crowd cheers.\nB) It moves from solemn silence to playful teasing among the spectators.\nC) It moves from light confidence to dismay as the stone refuses to move.\nD) It moves from angry defiance to calm acceptance of the old legend.\n\n[표시된 정답] C\n[해설]\n처음에 그녀는 'a slight laugh and a smile'을 띠고 가볍게 돌로 다가간다. 그러나 돌이 꿈쩍도 하지 않자 군중이 신음하고 그녀는 비명과 함께 쓰러진다. 따라서 가벼운 자신감에서 낙담으로 바뀌는 C가 정답이다. A와 B는 방향이 반대이고, D의 분노와 체념은 지문에 없다.\n### lit40-easy-05-015 — skill words_in_context · 유형 figurative_language\n[지문]\nTo make a long story short, three years later Ralph returned to the capital, and, after having worn out several tutors, actually succeeded in entering the University.\n\nThe first year of college life is a happy time to every young man, and Ralph enjoyed its processions, its parliamentary gatherings, and its leisure, as well as the rest. He was certainly not the man to be sentimental over the loss of a young girl whom, moreover, he had only known for a few weeks. Nevertheless, he thought of her at odd times, but not enough to disturb his pleasure. The standing of his family, his own handsome appearance, and his immaculate linen opened to him the best houses of the city, and he became a great favorite in society.\n\n[질문] As used in the text, the phrase “worn out several tutors” most nearly suggests that Ralph\nA) was so hard to teach that his tutors gave up one after another\nB) owned so many old books that his tutors could not read them all\nC) spent so much money that his family could not pay his tutors\nD) traveled so much that his tutors grew tired of following him\n\n[표시된 정답] A\n[해설]\nRalph는 여러 가정교사를 거친 끝에야 'actually succeeded' 대학에 들어갔다고 한다. 'actually'는 입학이 뜻밖일 만큼 그가 가르치기 어려운 학생이었음을 보여 준다. 따라서 A가 정답이다. B, C, D는 책·돈·여행처럼 지문에 근거가 없는 이유를 든다.\n### lit40-easy-05-016 — skill words_in_context · 유형 figurative_language\n[지문]\nNot a change did the family make in their routine, for they had still plenty of time for everything. Not a fresh incongruous article was added to the old simple seasoned household gods. Athole had not an additional gown of costlier material. Dr. Peter even bought fewer books than usual, and denied himself an improved telescope which he had thought of buying. He could do star-gazing without it, every time he was called out on a clear night, and perhaps it was not worth the while of a man of his age to fix the study on the latest scientific basis. It seemed as if the family were called upon to testify to a different order of things, and to utter their small protest against the opposite extreme.\n\n[질문] As used in the text, the phrase “old simple seasoned household gods” most nearly suggests the family's\nA) new purchases chosen to impress the neighbors\nB) familiar, long-used belongings that they valued\nC) religious statues kept in a special room\nD) costly treasures hidden away for later use\n\n[표시된 정답] B\n[해설]\n가족은 일상을 바꾸지 않았고 새 물건도 더하지 않았으며 Athole은 비싼 옷을 사지 않았다고 한다. 이 맥락에서 'household gods'는 오래 써서 정든 소박한 살림살이를 가리킨다. 따라서 B가 정답이다. A와 D는 새 물건이나 값비싼 물건이라 맥락과 반대이고, C는 비유를 글자 그대로 읽은 것이다.\n### lit40-easy-05-019 — skill words_in_context · 유형 figurative_language\n[지문]\nThere was a band of music playing in the tent, and people were sitting drinking and smoking at one end. Katie shrank back with horror; everybody had such a coarse, bold look, so different from anything she had ever seen before. And her own knowledge of right and wrong, and the modest way in which she had been brought up, at once warned her not to accept the invitation. She was already beginning heartily to repent having come to Oakfield. Her head ached with all the noise and excitement; and she felt the truth of the saying that unlawful pleasures can never bring true happiness. She fancied she had more influence with Fanny than with the rest, and hastily drew her on one side.\n\n[질문] As used in the text, the phrase “shrank back with horror” most nearly suggests that Katie\nA) pulled away at once from a scene that shocked her\nB) grew physically smaller and weaker as the crowd in the tent pressed in\nC) felt sick because of the smoke in the tent\nD) feared that the band would ask her to play\n\n[표시된 정답] A\n[해설]\nKatie는 천막 안 사람들이 'coarse, bold'해 보여 자신이 보아 온 것과 너무 다르다고 느낀다. 이어 바른 교육을 받은 그녀의 양심이 초대를 받지 말라고 경고하므로, 이 표현은 충격받아 즉시 물러서는 반응을 뜻한다. 따라서 A가 정답이다. B는 비유를 글자 그대로 읽은 것이고, C와 D는 지문에 근거가 없다.\n### lit40-easy-05-020 — skill words_in_context · 유형 figurative_language\n[지문]\nIf the conduct of the men had been alarming in the boat, it became truly threatening when they had come aboard. They lay about the deck growling together in talk. The slightest order was received with a black look, and grudgingly and carelessly obeyed. Even the honest hands must have caught the infection, for there was not one man aboard to mend another. Mutiny, it was plain, hung over us like a thunder-cloud.\n\nAnd it was not only we of the cabin party who perceived the danger. Long John was hard at work going from group to group, spending himself in good advice, and as for example no man could have shown a better.\n\n[질문] As used in the text, the phrase “hung over us like a thunder-cloud” most nearly suggests that\nA) the crew had already openly seized control of the ship\nB) a dangerous revolt seemed ready to break out at any moment\nC) stormy weather was delaying the progress of the voyage\nD) the sailors were grieving over companions lost at sea\n\n[표시된 정답] B\n[해설]\n'thunder-cloud'는 아직 터지지 않았지만 곧 쏟아질 듯한 위협을 비유한다. 앞 문장들에서 선원들이 투덜거리고 명령에 험악한 표정으로 마지못해 따른다고 하여 반란의 기운이 감돌고 있음을 보여 준다. 따라서 B가 정답이다. A는 반란이 이미 일어났다고 보아 틀리고, C는 비유를 실제 날씨로 읽은 오류이며, D는 지문에 근거가 없다.\n### lit40-easy-05-023 — skill words_in_context · 유형 figurative_language\n[지문]\nWhen Sepeli dropped both pig and Chancellor, a talking man from the windward coast picked up the carcass. Cornelius was on his feet and running, when the pig caught him on the legs and tripped him. The people and the army, with shouts and laughter, joined in the sport.\n\nTwist and dodge as he would, everywhere the ex-Chancellor of the Exchequer was met or overtaken by the flying pig. He scuttled like a frightened rabbit in and out among the avocados and the palms. No hand was laid upon him, and his tormentors made way before him, but ever they pursued, and ever the pig flew as fast as hands could pick it up.\n\n[질문] As used in the text, the phrase “scuttled like a frightened rabbit” most nearly suggests that\nA) moved in a hurried, panicked way to escape his pursuers\nB) carefully planned a clever route to a safe hiding place\nC) enjoyed the lively game as much as the crowd did\nD) waited quietly among the trees until the crowd tired\n\n[표시된 정답] A\n[해설]\n'frightened rabbit'는 겁에 질려 이리저리 급히 달아나는 모습을 비유한다. 앞에서 그가 몸을 비틀고 피하려 해도 돼지에 계속 쫓긴다고 묘사되어 있다. 따라서 A가 정답이다. B는 계획성을, C는 즐거움을, D는 가만히 기다림을 말해 지문의 다급한 도주와 맞지 않는다.\n### lit40-easy-05-029 — skill words_in_context · 유형 figurative_language\n[지문]\nIn the country school I attended, there was a debating society. Parents as well as their sons were admitted to the society and the public was invited to the debates. On one occasion the question for debate was: \"Which is the more attractive, the works of nature or the works of art?\"\n\nThere had been an appeal from a general debate and this time one speaker was chosen from each side. My father was chosen to represent the negative and I the affirmative. My father was a good speaker but so fond of facts he had no use for rhetoric. I had the opening address of thirty minutes, my father had forty-five minutes and I had fifteen minutes to close the debate.\n\n[질문] As used in the text, the phrase “had no use for rhetoric” most nearly suggests that\nA) could not afford to pay for training in public speaking\nB) lacked the books he needed to prepare his speech\nC) cared little for ornate, persuasive language in his arguments\nD) had grown tired of joining debates at the school\n\n[표시된 정답] C\n[해설]\n'had no use for'는 실제로 쓸 수 없다는 뜻이 아니라 가치를 두지 않는다는 관용 표현이다. 바로 앞의 'so fond of facts'와 대조되어 그가 꾸밈 있는 말보다 사실을 중시했음을 보여 준다. 따라서 C가 정답이다. A와 B는 돈이나 자료 부족으로 읽은 오류이고, D는 그가 토론에 참여했다는 사실과 맞지 않는다.\n### lit40-easy-05-033 — skill words_in_context · 유형 figurative_language\n[지문]\nBeyond all that, the situation was a commanding one. The prospect from almost every window was beautiful. Hillsides covered with thrifty crops—maple groves that became gorgeous in the autumn—farm-houses that gave an idea of elegance as well as comfort, formed lovely rural pictures whereon the inmates of the institution looked. Indeed, within or without, there was nothing to excite the brain or give an unpleasant emotion. Authority there was, certainly, firm and judicious, but so concealed in all its rugged points, that even the sharp suspicion of insanity failed to jar against it. Indeed, the ruling spirit of this place was Mrs. Barr, whose charity was ever prevailing, and whose firm goodness was rendered efficient by proportionate strength. To her the inmates of this building were objects of unlimited interest.\n\n[질문] As used in the text, the phrase “the ruling spirit of this place was Mrs. Barr” most nearly suggests that\nA) Mrs. Barr was a ghost said to haunt the institution\nB) Mrs. Barr held a title but had no real influence\nC) Mrs. Barr was the guiding influence that shaped the place\nD) Mrs. Barr's changing moods controlled the inmates\n\n[표시된 정답] C\n[해설]\n'ruling spirit'는 유령이 아니라 그곳을 이끄는 중심 인물을 뜻한다. 뒤에서 그녀의 자비와 굳은 선함이 효과적으로 작용했다고 하고, 앞에서 권위가 부드럽게 감춰져 있었다고 한다. 따라서 C가 정답이다. A는 'spirit'를 문자 그대로 읽은 오류이고, B와 D는 지문의 긍정적 묘사와 어긋난다.\n### lit40-easy-05-035 — skill words_in_context · 유형 figurative_language\n[지문]\nI had faltered, and my cause was lost. What have I accomplished? Am I able to gloat over you? What have I wrought, after all? I weakened under the love she bore for you, I permitted it to creep in and fill my heart. Do you understand? I do not hate you now. It is something to know that you have worshipped her all these years. You were true to her. What you did long, long ago was not your fault. You believed that she had wronged you. But you went on loving her. That is what weakened my resolve. You loved her to the end, she loved you to the end. Well, in the face of that, could I go on hating you? You must have been worthy of her love.\n\n[질문] As used in the text, the phrase “permitted it to creep in and fill my heart” most nearly suggests that\nA) the speaker's feelings changed gradually, almost without notice\nB) the speaker suddenly decided to forgive in a single moment\nC) the speaker felt fear of someone sneaking into the house\nD) the speaker tried hard to hide his love from others\n\n[표시된 정답] A\n[해설]\n'creep in'은 조용히 조금씩 스며드는 모습을 비유한다. 앞에서 화자는 자신이 'faltered'했다고 하고, 뒤에서는 그 사랑 때문에 결심이 약해져 더 이상 미워하지 않는다고 말한다. 따라서 A가 정답이다. B는 점진적 변화와 반대이고, C는 비유를 실제 침입으로 읽은 오류이며, D는 지문에 근거가 없다.\n### lit40-easy-05-037 — skill words_in_context · 유형 figurative_language\n[지문]\nMany of these are secretly for us. They would join me, but they fear to do so lest their estates be confiscated. These are to be assured that what they may lose now by aiding me shall some day be restored to them. Here is a list of a number of such gentlemen in the province of Berry, and you are to give them the assurances necessary to enlist them in our cause. Use what persuasions you can. Take your company, and find some place of concealment among the hills of the southern border of Berry. You can thus provide escort in crossing the border for those who may need it.\n\n[질문] As used in the text, the phrase “enlist them in our cause” most nearly suggests that\nA) sign them up as soldiers in the royal army\nB) write their names on an official list for the province\nC) persuade them to openly join and support the effort\nD) force them to give up their estates to the leader\n\n[표시된 정답] C\n[해설]\n'enlist'는 원래 군에 입대시킨다는 뜻이지만 여기서는 대의에 동참하도록 설득한다는 의미로 쓰였다. 바로 뒤의 'Use what persuasions you can'과 앞의 그들이 몰래 지지하지만 두려워한다는 설명이 이를 뒷받침한다. 따라서 C가 정답이다. A와 B는 단어를 문자 그대로 읽은 오류이고, D는 재산을 돌려주겠다는 약속과 어긋난다."
+}

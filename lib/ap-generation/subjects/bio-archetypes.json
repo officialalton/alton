@@ -1,0 +1,4082 @@
+[
+ {
+  "id": "bi_activation_energy_graph",
+  "topic": "3.1",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "peak differences read from the plotted vertices vs the generating parameters"
+  ],
+  "misconceptions": [
+   "Gives the free energy change the wrong sign.",
+   "Uses the activation energy of the uncatalyzed reaction as the free energy change.",
+   "Uses the activation energy of the catalyzed reaction as the free energy change."
+  ]
+ },
+ {
+  "id": "bi_allele_freq_graph",
+  "topic": "7.4",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "mean absolute generation-to-generation change and maximum deviation of each simulated series vs the generating population sizes"
+  ],
+  "misconceptions": [
+   "Starting at the same value does not make the populations equal in size; their behavior differs.",
+   "The large fluctuations show strong drift, which occurs in small populations.",
+   "Slow change is expected in a large population, in which chance effects are small."
+  ]
+ },
+ {
+  "id": "bi_amino_acid_property",
+  "topic": "1.7",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 1.7 (amino acid R groups and protein structure)"
+  ],
+  "misconceptions": [
+   "Changing one amino acid does not change the class of macromolecule.",
+   "A nonpolar surface group does not guarantee tighter binding and can reduce stability.",
+   "Replacing an amino acid changes the amino acid sequence, which is the primary structure."
+  ]
+ },
+ {
+  "id": "bi_antibiotic_data",
+  "topic": "7.8",
+  "skill": "6.B",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "trend of the table (monotonic increase) vs the generating selection model"
+  ],
+  "misconceptions": [
+   "Populations do not change because they need to; selection favored existing resistance alleles.",
+   "Bacteria do not learn habits; resistance is a heritable trait.",
+   "Resistance arose from existing variation; exposure did not make individual bacteria resistant."
+  ]
+ },
+ {
+  "id": "bi_antibiotic_survival_claim",
+  "topic": "7.8",
+  "skill": "6.B",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 7.8"
+  ],
+  "misconceptions": [
+   "The data show survival and do not show a change in the mutation rate.",
+   "The data are population percents and do not show that individual cells changed.",
+   "Resistance does not arise in response to exposure; it comes from existing variation."
+  ]
+ },
+ {
+  "id": "bi_artificial_selection",
+  "topic": "7.3",
+  "skill": "1.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 7.3"
+  ],
+  "misconceptions": [
+   "Reduced variation can increase health problems.",
+   "Selective breeding changes allele frequencies.",
+   "Selecting a few individuals tends to reduce variation."
+  ]
+ },
+ {
+  "id": "bi_bar_biomass",
+  "topic": "8.2",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "ratio of the first two bars vs the generating transfer efficiency"
+  ],
+  "misconceptions": [
+   "Reports the energy of the primary consumers in kcal rather than as a percent.",
+   "Compares the secondary consumers with the producers.",
+   "Reports the energy lost between levels as a percent of the producers."
+  ]
+ },
+ {
+  "id": "bi_bar_expression",
+  "topic": "6.6",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "argmax and argmin of the plotted values vs the generating values"
+  ],
+  "misconceptions": [
+   "The brain has the lowest level.",
+   "All of the somatic cells of an organism have the same genes.",
+   "Every tissue has some mRNA for the gene."
+  ]
+ },
+ {
+  "id": "bi_behavior_response",
+  "topic": "8.1",
+  "skill": "1.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 8.1"
+  ],
+  "misconceptions": [
+   "The timing is controlled by cues and is not random.",
+   "Plants do not make decisions as animals do; they respond to cues.",
+   "The response is triggered by the length of the night."
+  ]
+ },
+ {
+  "id": "bi_biodiversity_concept",
+  "topic": "8.6",
+  "skill": "6.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 8.6"
+  ],
+  "misconceptions": [
+   "Diversity means that no single species dominates.",
+   "Area is not what explains stability here.",
+   "Diverse ecosystems usually have more interactions."
+  ]
+ },
+ {
+  "id": "bi_cancer_mutation",
+  "topic": "4.6",
+  "skill": "6.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 4.6"
+  ],
+  "misconceptions": [
+   "A silent mutation does not change the protein.",
+   "Only changes that disrupt cell-cycle control are likely to contribute to cancer.",
+   "A more active suppressor would further slow division."
+  ]
+ },
+ {
+  "id": "bi_carb_structure",
+  "topic": "1.4",
+  "skill": "1.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 1.4"
+  ],
+  "misconceptions": [
+   "Genetic information is carried by nucleic acids and not by glycogen.",
+   "Branching does not change glucose into fatty acids.",
+   "Glycogen is broken down when glucose is needed; branching speeds this up."
+  ]
+ },
+ {
+  "id": "bi_cell_compartment",
+  "topic": "2.9",
+  "skill": "1.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 2.9"
+  ],
+  "misconceptions": [
+   "Mitochondria carry out respiration and do not make glucose from carbon dioxide.",
+   "Cristae are not involved in protein synthesis for the nucleus.",
+   "Cristae increase the surface area, and the matrix contains many enzymes."
+  ]
+ },
+ {
+  "id": "bi_cell_cycle_events",
+  "topic": "4.5",
+  "skill": "1.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 4.5"
+  ],
+  "misconceptions": [
+   "This is cytokinesis, which follows mitosis.",
+   "This occurs in prometaphase of mitosis.",
+   "This occurs during metaphase of mitosis."
+  ]
+ },
+ {
+  "id": "bi_cell_cycle_question",
+  "topic": "4.6",
+  "skill": "3.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 4.6"
+  ],
+  "misconceptions": [
+   "Better off is not a measurable quantity, so the question cannot be tested.",
+   "Importance is a judgment, and the question gives no measurable variable to test.",
+   "Whether a treatment is ethical is a matter of values, so no experiment can answer it."
+  ]
+ },
+ {
+  "id": "bi_cell_cycle_time",
+  "topic": "4.5",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "exact fraction (count/total) x cycle length vs numpy float evaluation"
+  ],
+  "misconceptions": [
+   "Reports the percent of cells in the phase instead of the time.",
+   "Divides the number of cells by the cycle length.",
+   "Multiplies the count by the cycle length without dividing by the total number of cells."
+  ]
+ },
+ {
+  "id": "bi_cell_specialization",
+  "topic": "6.6",
+  "skill": "1.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 6.6"
+  ],
+  "misconceptions": [
+   "Intestinal cells express genes; the experiment is about the presence of the genes.",
+   "The nucleus provides the DNA used for development.",
+   "The tadpole developed normally, so the genes were still present."
+  ]
+ },
+ {
+  "id": "bi_central_dogma_inhibitor",
+  "topic": "6.3",
+  "skill": "6.E",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 6.3 and 6.4"
+  ],
+  "misconceptions": [
+   "mRNA is not converted into DNA by ribosomes.",
+   "Ribosomes do not copy DNA.",
+   "Ribosomes are not part of RNA polymerase."
+  ]
+ },
+ {
+  "id": "bi_chargaff",
+  "topic": "1.6",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "linear system (A=T, G=C, total 100) solved symbolically vs the closed form 50 - A"
+  ],
+  "misconceptions": [
+   "Sets guanine equal to adenine, ignoring that G pairs with C and A pairs with T.",
+   "Reports the combined percentage of guanine and cytosine as the guanine percentage.",
+   "Assumes the bases other than adenine split the remaining percentage unevenly, giving 100 minus the adenine percentage."
+  ]
+ },
+ {
+  "id": "bi_checkpoint",
+  "topic": "4.6",
+  "skill": "6.E",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 4.6"
+  ],
+  "misconceptions": [
+   "The lack of cyclin does not cause re-replication of DNA.",
+   "A cell blocked at a checkpoint is arrested; it does not skip phases.",
+   "CDKs need cyclin to be active."
+  ]
+ },
+ {
+  "id": "bi_checkpoint_mutation_claim",
+  "topic": "4.6",
+  "skill": "6.D",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 4.6"
+  ],
+  "misconceptions": [
+   "The mutated cells still divided, so they did replicate their DNA.",
+   "The normal cells divided less often when their DNA was damaged, so the gene slows division.",
+   "More damaged cells divided, which shows that fewer cells were stopped, not that repair was faster."
+  ]
+ },
+ {
+  "id": "bi_chemiosmosis",
+  "topic": "3.4",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 3.4 and 3.5"
+  ],
+  "misconceptions": [
+   "ATP synthase does not use glucose to pump protons.",
+   "The gradient decreases when protons leak, and the chain can continue.",
+   "Leaking protons bypass ATP synthase, so less ATP is made."
+  ]
+ },
+ {
+  "id": "bi_chi_square",
+  "topic": "5.3",
+  "skill": "5.C",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "floating-point chi-square vs exact-fraction chi-square; critical value from the formula sheet table"
+  ],
+  "misconceptions": [
+   "Sums the squared differences without dividing by the expected counts.",
+   "Computes the statistic correctly but draws the opposite conclusion from the comparison with the critical value.",
+   "Uses the number of phenotype classes as the degrees of freedom instead of the number minus one."
+  ]
+ },
+ {
+  "id": "bi_chi_square_hypothesis",
+  "topic": "5.3",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 5.3 and the formula sheet"
+  ],
+  "misconceptions": [
+   "A small statistic is not evidence of error in the experiment.",
+   "A statistical test does not prove a hypothesis.",
+   "Rejection occurs when the statistic exceeds the critical value."
+  ]
+ },
+ {
+  "id": "bi_ci_interpretation",
+  "topic": "8.4",
+  "skill": "5.B",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "range overlap computed from the table values vs the generating means and SE"
+  ],
+  "misconceptions": [
+   "Ranges that overlap mean that chance can explain the difference, so this reverses the rule for comparing ranges.",
+   "A difference between two means is not enough by itself; the \u00b12SE ranges overlap, so chance can explain it.",
+   "The mean and \u00b12SE values are enough to compare the ranges, so the individual measurements are not needed."
+  ]
+ },
+ {
+  "id": "bi_common_ancestry",
+  "topic": "7.7",
+  "skill": "6.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 7.7"
+  ],
+  "misconceptions": [
+   "The differences among species show that the sequence has changed.",
+   "Having the same protein does not show descent in this direction.",
+   "Identical sequences suggest a shared ancestor, not descent from each other."
+  ]
+ },
+ {
+  "id": "bi_communication_types",
+  "topic": "4.1",
+  "skill": "1.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 4.1"
+  ],
+  "misconceptions": [
+   "Tight junctions seal the space between animal cells.",
+   "Desmosomes anchor animal cells and do not connect the cytoplasm.",
+   "Gap junctions are channels between animal cells."
+  ]
+ },
+ {
+  "id": "bi_community_interaction",
+  "topic": "8.5",
+  "skill": "1.B",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "lookup of the sign pair in a relation table vs the generating relationship"
+  ],
+  "misconceptions": [
+   "Parasitism requires one species to benefit while the other is harmed, which does not match the table.",
+   "Commensalism requires one species to be unaffected, which does not match the table.",
+   "Mutualism requires both species to benefit, which does not match the table."
+  ]
+ },
+ {
+  "id": "bi_continuing_evolution",
+  "topic": "7.8",
+  "skill": "6.E",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 7.8"
+  ],
+  "misconceptions": [
+   "Mutations do not occur in all individuals at once to meet a need.",
+   "The change is in the population and not in the insecticide.",
+   "Learned behavior does not explain a heritable change in resistance."
+  ]
+ },
+ {
+  "id": "bi_control_choice_membrane",
+  "topic": "2.4",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 2.4"
+  ],
+  "misconceptions": [
+   "A change in temperature introduces a second variable.",
+   "Without the tubing the movement across the membrane cannot be tested.",
+   "A different concentration tests another variable."
+  ]
+ },
+ {
+  "id": "bi_cyclin_graph",
+  "topic": "4.6",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "argmax of the plotted CDK series vs the generating peak time"
+  ],
+  "misconceptions": [
+   "Cyclin begins to rise before CDK activity is high enough to trigger mitosis.",
+   "CDK activity has fallen by this time, which is after mitosis has begun.",
+   "CDK activity is near its minimum at this time, so mitosis is not triggered."
+  ]
+ },
+ {
+  "id": "bi_dehydration_count",
+  "topic": "1.3",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "stepwise loop joining monomers one at a time vs the closed form n-1"
+  ],
+  "misconceptions": [
+   "Counts one extra bond because the chain has two ends.",
+   "Assumes hydrolysis releases water instead of using it, giving half the unit count.",
+   "Assumes one water is used for every glucose unit rather than for every bond."
+  ]
+ },
+ {
+  "id": "bi_density_factor",
+  "topic": "8.4",
+  "skill": "1.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 8.4"
+  ],
+  "misconceptions": [
+   "The carrying capacity is set by the environment and does not increase because the population grows.",
+   "No population grows without limit; resources constrain it.",
+   "Competition for resources depends on how many individuals share them."
+  ]
+ },
+ {
+  "id": "bi_describe_growth_table",
+  "topic": "8.4",
+  "skill": "4.B",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "interval increases computed from the table vs the generating logistic parameters"
+  ],
+  "misconceptions": [
+   "The yearly increases are not constant; they speed up and then slow down.",
+   "The population increases in every interval in the table.",
+   "The increases become smaller near the end as the population levels off at about 298."
+  ]
+ },
+ {
+  "id": "bi_describe_trend_enzyme",
+  "topic": "3.2",
+  "skill": "4.B",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "argmax of the table values vs the generating optimum"
+  ],
+  "misconceptions": [
+   "The rate changes strongly with temperature.",
+   "The pattern is the reverse of the data: the rate first increases.",
+   "The rate falls at temperatures above 40 \u00b0C."
+  ]
+ },
+ {
+  "id": "bi_design_control_photosynthesis",
+  "topic": "3.4",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 3.4"
+  ],
+  "misconceptions": [
+   "Bicarbonate does not stop respiration.",
+   "Bicarbonate does not replace light as the energy source.",
+   "The oxygen that makes the disks float is produced by the disks."
+  ]
+ },
+ {
+  "id": "bi_design_variable_enzyme",
+  "topic": "3.2",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 3.2"
+  ],
+  "misconceptions": [
+   "The experiment does not measure the structure of hydrogen peroxide.",
+   "The investigation does not address organisms as a whole.",
+   "This question cannot be tested with the data collected."
+  ]
+ },
+ {
+  "id": "bi_design_variable_osmosis",
+  "topic": "2.7",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 2.7 and science practice 3"
+  ],
+  "misconceptions": [
+   "The results should reflect the effect of the variable, not be forced to be equal.",
+   "The purpose is to isolate an effect, not to produce a result.",
+   "Controlled factors are kept constant and do not change the independent variable."
+  ]
+ },
+ {
+  "id": "bi_dihybrid_prob",
+  "topic": "5.3",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "count of the 16 Punnett combinations meeting the condition vs the product of the two monohybrid probabilities"
+  ],
+  "misconceptions": [
+   "Uses 1/16 for any phenotype because there are 16 boxes in the Punnett square.",
+   "Uses 9/16 as the probability for every phenotype class.",
+   "Adds the probabilities for the two genes instead of multiplying them."
+  ]
+ },
+ {
+  "id": "bi_dna_bonds_concept",
+  "topic": "1.6",
+  "skill": "1.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 6.1"
+  ],
+  "misconceptions": [
+   "Size is not the reason; the number of hydrogen bonds differs.",
+   "All base pairs are held together by hydrogen bonds.",
+   "The numbers of hydrogen bonds are reversed."
+  ]
+ },
+ {
+  "id": "bi_dna_content_graph",
+  "topic": "4.5",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "the segment with a positive slope among the plotted vertices vs the generating phase lengths"
+  ],
+  "misconceptions": [
+   "DNA content stays at 4 units in G2, after replication is finished.",
+   "DNA content stays at 2 units during G1, so no DNA is replicated in this interval.",
+   "DNA content falls from 4 to 2 units as the cell divides, so DNA is being partitioned and not replicated."
+  ]
+ },
+ {
+  "id": "bi_dna_hbonds",
+  "topic": "1.6",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "diagram",
+  "verifiedBy": [
+   "sum over base pairs using a pairing table vs 2*(A+T pairs)+3*(G+C pairs)"
+  ],
+  "misconceptions": [
+   "Counts the hydrogen bonds of A-T pairs only.",
+   "Gives every base pair two hydrogen bonds, as for A-T pairs.",
+   "Counts the hydrogen bonds of G-C pairs only."
+  ]
+ },
+ {
+  "id": "bi_dna_structure",
+  "topic": "6.1",
+  "skill": "1.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 6.1"
+  ],
+  "misconceptions": [
+   "The strands are not parallel; they run in opposite directions.",
+   "Complementary refers to base pairing and does not describe direction.",
+   "This term describes DNA replication in which each new molecule has one old and one new strand."
+  ]
+ },
+ {
+  "id": "bi_ecosystem_disruption",
+  "topic": "8.7",
+  "skill": "6.E",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 8.7"
+  ],
+  "misconceptions": [
+   "Ocean acidification affects shell-forming organisms.",
+   "Lower pH makes shell formation harder.",
+   "Some photosynthetic organisms may increase growth when carbon dioxide increases."
+  ]
+ },
+ {
+  "id": "bi_elements_life",
+  "topic": "1.2",
+  "skill": "1.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 1.2 and 1.3"
+  ],
+  "misconceptions": [
+   "Calcium is not part of the covalent backbone of the major macromolecules.",
+   "Sulfur occurs in only some amino acids and not in nucleotides.",
+   "Amino acids do not contain phosphorus as a standard component."
+  ]
+ },
+ {
+  "id": "bi_endomembrane_path",
+  "topic": "2.1",
+  "skill": "1.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 2.1 and 2.8"
+  ],
+  "misconceptions": [
+   "Blocking vesicle transport does not directly stop transcription.",
+   "Ribosomes are not in the nucleus, and the block does not move protein synthesis there.",
+   "If transport from the ER is blocked, proteins do not reach the Golgi."
+  ]
+ },
+ {
+  "id": "bi_endosymbiosis",
+  "topic": "2.10",
+  "skill": "6.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 2.10"
+  ],
+  "misconceptions": [
+   "Mitochondria are organelles of eukaryotic cells.",
+   "Mitochondria contain DNA and reproduce within the cell.",
+   "Mitochondria do not divide by mitosis, and this would not suggest a prokaryotic origin."
+  ]
+ },
+ {
+  "id": "bi_energy_coupling",
+  "topic": "3.3",
+  "skill": "1.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 3.3"
+  ],
+  "misconceptions": [
+   "Exergonic reactions can proceed without enzymes, although slowly.",
+   "This describes an endergonic reaction.",
+   "Products with more free energy mean energy must be added."
+  ]
+ },
+ {
+  "id": "bi_energy_flow_concept",
+  "topic": "8.2",
+  "skill": "1.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 8.2"
+  ],
+  "misconceptions": [
+   "Heat loss by consumers is not net primary productivity.",
+   "Net primary productivity refers to producers and not to the top predator.",
+   "That is gross primary productivity."
+  ]
+ },
+ {
+  "id": "bi_environment_phenotype",
+  "topic": "5.5",
+  "skill": "1.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 5.5"
+  ],
+  "misconceptions": [
+   "The pattern requires both a gene and a temperature-sensitive process.",
+   "The experiment shows a response to temperature, not a location-specific allele.",
+   "A temperature change does not change the DNA sequence."
+  ]
+ },
+ {
+  "id": "bi_enzyme_active_site",
+  "topic": "3.1",
+  "skill": "1.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 3.1"
+  ],
+  "misconceptions": [
+   "The enzyme is released unchanged after the reaction.",
+   "Enzymes do not change the products or the energy released.",
+   "Enzymes do not heat the substrate."
+  ]
+ },
+ {
+  "id": "bi_enzyme_inhibitor_data",
+  "topic": "3.1",
+  "skill": "4.B",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "sum of squared errors between the table and the two kinetic models vs the generating model"
+  ],
+  "misconceptions": [
+   "At every substrate concentration the rate with X (19 at the highest) is lower than the rate without X (75), so X reduces and does not increase the rate.",
+   "A rate that rises with substrate in both columns does not mean there is no effect: at the highest substrate concentration the rates are 75 without X and 19 with X.",
+   "The inhibited rate stays near 25% of the normal rate at every substrate concentration, so it does not approach the normal rate when substrate is added; a competitive inhibitor would be overcome by more substrate."
+  ]
+ },
+ {
+  "id": "bi_enzyme_ph_graph",
+  "topic": "3.2",
+  "skill": "4.B",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "argmax of the plotted series vs the generating optimum"
+  ],
+  "misconceptions": [
+   "The highest activity at a pH indicates the optimum, not denaturation.",
+   "The graph shows activity falling sharply away from the optimum, so it does not work at every pH.",
+   "Matches the optimum pH to the wrong part of the digestive tract."
+  ]
+ },
+ {
+  "id": "bi_enzyme_rate_calc",
+  "topic": "3.1",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "(y_b - y_a)/(b - a) vs the time-weighted mean of the segment slopes"
+  ],
+  "misconceptions": [
+   "Uses only the final amount of product divided by the final time.",
+   "Divides the interval length by the change in product.",
+   "Uses the initial linear rate and ignores the slowing between the two times."
+  ]
+ },
+ {
+  "id": "bi_enzyme_substrate_graph",
+  "topic": "3.1",
+  "skill": "6.E",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "second differences of the plotted rate (concave saturation) vs the generating Michaelis-Menten form"
+  ],
+  "misconceptions": [
+   "Enzymes are not consumed in the reactions that they catalyze.",
+   "Denaturation would lower the rate, but the curve shows a stable maximum.",
+   "More substrate makes it less likely that the substrate would be used up."
+  ]
+ },
+ {
+  "id": "bi_enzyme_temp_pred",
+  "topic": "3.2",
+  "skill": "6.E",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 3.2"
+  ],
+  "misconceptions": [
+   "A constant temperature does not raise activation energy; enzymes lower it.",
+   "Enzymes are proteins, not DNA.",
+   "Maintaining temperature allows enzymes to function."
+  ]
+ },
+ {
+  "id": "bi_error_bars_overlap",
+  "topic": "3.2",
+  "skill": "5.B",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "interval overlap computed from the displayed mean and 2SE vs the generating means and standard errors"
+  ],
+  "misconceptions": [
+   "A difference between two means is not enough by itself; the \u00b12SE ranges overlap, so chance can explain it.",
+   "Ranges that overlap mean that chance can explain the difference, so this reverses the rule for comparing ranges.",
+   "The mean and \u00b12SE values are enough to compare the ranges, so the individual measurements are not needed."
+  ]
+ },
+ {
+  "id": "bi_evidence_evolution",
+  "topic": "7.6",
+  "skill": "1.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 7.6"
+  ],
+  "misconceptions": [
+   "Analogous structures do not indicate close relationship.",
+   "Both wings function in flight.",
+   "Different structures and origins do not support homology."
+  ]
+ },
+ {
+  "id": "bi_exp_growth",
+  "topic": "8.3",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "direct product vs a numerical derivative of N(t) = N0 exp(rt)"
+  ],
+  "misconceptions": [
+   "Adds the growth rate to the population size.",
+   "Uses the square of the population size.",
+   "Divides the growth rate by the population size."
+  ]
+ },
+ {
+  "id": "bi_expression_tissue_table",
+  "topic": "6.6",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 6.6"
+  ],
+  "misconceptions": [
+   "All cells of one organism have the same genes, and the muscle cells also made some mRNA.",
+   "The liver value rose with the hormone, so this reverses the direction of the change.",
+   "The liver value rose by 50, while the muscle value did not change."
+  ]
+ },
+ {
+  "id": "bi_feedback_graph",
+  "topic": "4.4",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "shape tests on the plotted series (return to baseline vs accelerating growth) vs the generating model"
+  ],
+  "misconceptions": [
+   "The accelerating increase indicates a feedback loop.",
+   "The decrease at the end occurs when the process is finished and not because the response opposed the change.",
+   "The variable does not stay near a set point; it keeps rising."
+  ]
+ },
+ {
+  "id": "bi_feedback_type",
+  "topic": "4.4",
+  "skill": "1.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 4.4"
+  ],
+  "misconceptions": [
+   "Plants use signaling molecules, including ethylene, and regulate responses with feedback.",
+   "Gases can act as signals that amplify responses.",
+   "Ethylene promotes ripening and does not stop it."
+  ]
+ },
+ {
+  "id": "bi_fermentation",
+  "topic": "3.5",
+  "skill": "6.E",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 3.5"
+  ],
+  "misconceptions": [
+   "Lactate is not directly converted to ATP.",
+   "The Calvin cycle occurs in chloroplasts, not in muscle cells.",
+   "Lactate is not an electron acceptor in the chain."
+  ]
+ },
+ {
+  "id": "bi_fitness_allele_change",
+  "topic": "7.4",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "allele list built from every surviving individual vs the closed form (Aa + 2 aa) / (2 N)"
+  ],
+  "misconceptions": [
+   "Counts each heterozygote as having one allele a for the whole genotype but divides by the number of individuals.",
+   "Reports the frequency of the allele before selection.",
+   "Counts the proportion of homozygous recessive individuals instead of the allele frequency."
+  ]
+ },
+ {
+  "id": "bi_food_web_prediction",
+  "topic": "8.5",
+  "skill": "6.E",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 8.5"
+  ],
+  "misconceptions": [
+   "Changes in an intermediate level affect the levels above and below it.",
+   "Foxes lose food when rabbits decline.",
+   "Fewer rabbits means less grazing and less food for foxes."
+  ]
+ },
+ {
+  "id": "bi_gamete_combos",
+  "topic": "5.2",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "enumeration of all orientations with itertools.product vs 2**n"
+  ],
+  "misconceptions": [
+   "Squares the haploid number.",
+   "Raises two to the diploid number rather than to the haploid number.",
+   "Doubles the haploid number instead of raising two to that power."
+  ]
+ },
+ {
+  "id": "bi_gel_interpretation",
+  "topic": "6.8",
+  "skill": "4.B",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "set equality of fragment sizes vs the generating match index"
+  ],
+  "misconceptions": [
+   "Suspect B's pattern contains a fragment of 2100 bp that is not in the crime scene sample, so the patterns do not match.",
+   "Suspect C's pattern contains a fragment of 1600 bp that is not in the crime scene sample, so the patterns do not match.",
+   "One suspect has a fragment pattern identical to the crime scene sample, so one suspect is consistent with it."
+  ]
+ },
+ {
+  "id": "bi_gene_regulation",
+  "topic": "6.5",
+  "skill": "1.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 6.5"
+  ],
+  "misconceptions": [
+   "The modification described is on DNA and is associated with reduced transcription.",
+   "Methylation does not change codons.",
+   "Methylation does not change the DNA sequence."
+  ]
+ },
+ {
+  "id": "bi_genetic_drift",
+  "topic": "7.4",
+  "skill": "1.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 7.4 and 7.11"
+  ],
+  "misconceptions": [
+   "The mainland population is the source; its allele frequencies did not change because of the colonization.",
+   "The birds live on the island and not the mainland.",
+   "Mutation is random and does not occur in all the birds because of the environment."
+  ]
+ },
+ {
+  "id": "bi_graph_dose_response",
+  "topic": "4.2",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "second differences of the plotted response (concave saturation) vs the generating hyperbolic form"
+  ],
+  "misconceptions": [
+   "Receptors bind signaling molecules and do not destroy them.",
+   "The plateau is explained by saturation of existing receptors and not by loss of receptors.",
+   "A higher concentration means more signaling molecule is available, not less."
+  ]
+ },
+ {
+  "id": "bi_graph_membrane_temp",
+  "topic": "2.3",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "slope change in the plotted series vs the generating onset temperature"
+  ],
+  "misconceptions": [
+   "The graph shows the leakage of pigment and does not measure how much pigment is made.",
+   "The graph shows a low rate at low temperatures and a steep rise at high temperatures.",
+   "More selective membranes would hold the pigment inside, not release it."
+  ]
+ },
+ {
+  "id": "bi_graph_pcr_cycles",
+  "topic": "6.8",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "ratio of successive plotted values (about two) in the early cycles vs the generating doubling"
+  ],
+  "misconceptions": [
+   "The graph shows a large increase in DNA.",
+   "The graph does not show a decrease in DNA.",
+   "The early part of the graph shows an increasing rate, not a constant amount of increase."
+  ]
+ },
+ {
+  "id": "bi_growth_graph_K",
+  "topic": "8.4",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "mean of the last plotted values vs the generating K"
+  ],
+  "misconceptions": [
+   "Reads the highest value of the y axis rather than the plateau.",
+   "Reads the population size at 10 days, which is still increasing.",
+   "Reads half of the plateau, where growth is fastest."
+  ]
+ },
+ {
+  "id": "bi_growth_graph_fastest",
+  "topic": "8.4",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "largest increase between successive plotted points vs K/2"
+  ],
+  "misconceptions": [
+   "Chooses the initial population size.",
+   "Chooses the carrying capacity, where the population stops growing.",
+   "Chooses one quarter of the carrying capacity."
+  ]
+ },
+ {
+  "id": "bi_hw_allele_freq",
+  "topic": "7.5",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "symbolic solution of p^2 + 2pq + q^2 = 1 vs square roots from the phenotype frequency"
+  ],
+  "misconceptions": [
+   "Reports the carrier frequency.",
+   "Reports the frequency of the recessive allele, q.",
+   "Reports q squared, the proportion of affected individuals."
+  ]
+ },
+ {
+  "id": "bi_hw_conditions",
+  "topic": "7.5",
+  "skill": "1.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 7.5 and 7.4"
+  ],
+  "misconceptions": [
+   "Gene flow does not by itself produce a new species.",
+   "Mutation is not caused by the arrival of new seeds.",
+   "Equilibrium is maintained only if the conditions remain met."
+  ]
+ },
+ {
+  "id": "bi_hw_expected_counts",
+  "topic": "7.5",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "N x genotype frequency from p, q vs binomial expansion with exact fractions"
+  ],
+  "misconceptions": [
+   "Uses p times q without the factor of 2.",
+   "Uses p squared for every genotype.",
+   "Uses q squared for every genotype."
+  ]
+ },
+ {
+  "id": "bi_hw_migration_scenario",
+  "topic": "7.5",
+  "skill": "1.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 7.5"
+  ],
+  "misconceptions": [
+   "Dominance of an allele does not change the equilibrium conditions.",
+   "The population still exists, and the change comes from unequal survival, not from size alone.",
+   "Predation does not cause mutations; it changes which snails survive."
+  ]
+ },
+ {
+  "id": "bi_hypothesis_heredity",
+  "topic": "5.3",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 5.3"
+  ],
+  "misconceptions": [
+   "The two homozygous genotypes give different results and do not both give a 1:1 ratio.",
+   "A homozygous recessive plant would produce only recessive offspring.",
+   "A homozygous dominant plant would produce only dominant offspring."
+  ]
+ },
+ {
+  "id": "bi_hypothesis_signal",
+  "topic": "4.2",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 4.2 and science practice 3"
+  ],
+  "misconceptions": [
+   "This statement is not testable as a statement of no effect.",
+   "This predicts an effect and a comparison.",
+   "This is an alternative hypothesis."
+  ]
+ },
+ {
+  "id": "bi_invasive_species",
+  "topic": "8.7",
+  "skill": "6.E",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 8.7"
+  ],
+  "misconceptions": [
+   "The island has native prey that the predator can eat.",
+   "Predators can limit prey populations.",
+   "Their adaptations do not include defenses against a predator they never encountered."
+  ]
+ },
+ {
+  "id": "bi_justify_hypothesis_signal",
+  "topic": "4.3",
+  "skill": "6.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 4.3 and 4.6"
+  ],
+  "misconceptions": [
+   "The signal molecule does not change into a different activator by being blocked.",
+   "The block is at the first step.",
+   "A blocked receptor would not activate the pathway."
+  ]
+ },
+ {
+  "id": "bi_lac_operon",
+  "topic": "6.5",
+  "skill": "6.C",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "gene-logic predictions for each candidate mutation compared with the table vs the generating assignment"
+  ],
+  "misconceptions": [
+   "Mutations in regulatory regions or in regulatory proteins can change expression, and one strain fits the data.",
+   "Strain 1 makes enzymes only when lactose is present, which is the regulated pattern of a normal operon and does not match the described mutation.",
+   "Strain 2 makes no enzymes in either condition, which fits a defective promoter and not loss of repression."
+  ]
+ },
+ {
+  "id": "bi_leaf_disk_et50",
+  "topic": "3.4",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "exact fraction interpolation between the bracketing points vs numpy.interp over the whole table"
+  ],
+  "misconceptions": [
+   "Reports the first measured time at which at least five disks had floated.",
+   "Reports the last measured time before five disks had floated.",
+   "Averages all the measured times."
+  ]
+ },
+ {
+  "id": "bi_limiting_factor",
+  "topic": "3.4",
+  "skill": "4.B",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "plateau of each plotted series vs the generating minimum of the light-driven and carbon-dioxide-limited rates"
+  ],
+  "misconceptions": [
+   "The high-carbon dioxide curve shows that a higher rate is possible at this light intensity.",
+   "The low-carbon dioxide curve is already flat, so more light does not increase the rate.",
+   "The high-carbon dioxide curve shows a higher rate, so reducing carbon dioxide would not help."
+  ]
+ },
+ {
+  "id": "bi_linkage_map",
+  "topic": "5.4",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "classification of each offspring class against the parental haplotypes vs the generating recombination frequency"
+  ],
+  "misconceptions": [
+   "Reports the percent for only one recombinant class.",
+   "Doubles the percent of recombinants.",
+   "Divides the recombinant count by the number of parental offspring instead of the total."
+  ]
+ },
+ {
+  "id": "bi_lipid_structure",
+  "topic": "1.5",
+  "skill": "1.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 1.5"
+  ],
+  "misconceptions": [
+   "Oils are nonpolar and do not dissolve in water.",
+   "Kinks come from double bonds and prevent tight packing; this reverses the roles of the two fats.",
+   "Plant oils are lipids made of fatty acids and are not made of carbohydrates."
+  ]
+ },
+ {
+  "id": "bi_logistic",
+  "topic": "8.4",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "formula evaluation vs numerical derivative of the closed-form logistic solution"
+  ],
+  "misconceptions": [
+   "Multiplies by (K + N)/K instead of by (K - N)/K.",
+   "Ignores the effect of the carrying capacity and uses exponential growth.",
+   "Leaves out the division by K, using r N (K - N) in place of r N (K - N)/K."
+  ]
+ },
+ {
+  "id": "bi_macromolecule_id",
+  "topic": "1.3",
+  "skill": "1.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 1.3 and 1.4-1.7; distractors name the confusion between classes"
+  ],
+  "misconceptions": [
+   "Nucleic acids are polymers of nucleotides and contain phosphate and nitrogenous bases.",
+   "Proteins are polymers of amino acids and contain nitrogen in every monomer.",
+   "Carbohydrates are made of sugars and are usually soluble in water."
+  ]
+ },
+ {
+  "id": "bi_macromolecule_table",
+  "topic": "1.3",
+  "skill": "4.B",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "element sets read from the table vs the generating assignment"
+  ],
+  "misconceptions": [
+   "The table shows that sample X has the elements expected for a nucleic acid, so one sample fits.",
+   "Sample Y has the element pattern of a protein, not of a nucleic acid.",
+   "Sample Z has the element pattern of a carbohydrate, not of a nucleic acid."
+  ]
+ },
+ {
+  "id": "bi_mean_calc",
+  "topic": "8.1",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sum divided by count vs numpy.mean"
+  ],
+  "misconceptions": [
+   "Reports the range instead of the mean.",
+   "Divides the sum by one less than the number of values.",
+   "Reports the sum of the values."
+  ]
+ },
+ {
+  "id": "bi_meiosis_chromosomes",
+  "topic": "5.1",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "explicit chromosome objects carried through S phase and meiosis I vs the closed forms n and 2(2n)"
+  ],
+  "misconceptions": [
+   "Quadruples the diploid number.",
+   "Counts the chromosomes in a haploid gamete.",
+   "Counts the chromosomes and ignores that each has two sister chromatids."
+  ]
+ },
+ {
+  "id": "bi_meiosis_crossing_scenario",
+  "topic": "5.2",
+  "skill": "1.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 5.2"
+  ],
+  "misconceptions": [
+   "Replication makes copies of the same alleles and does not mix combinations.",
+   "The combinations are present in the gametes before fertilization takes place.",
+   "Crossing over occurs between homologous chromosomes in prophase I, not in prophase II."
+  ]
+ },
+ {
+  "id": "bi_meiosis_variation",
+  "topic": "5.2",
+  "skill": "1.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 5.2"
+  ],
+  "misconceptions": [
+   "Cytokinesis divides the cytoplasm and does not shuffle alleles.",
+   "Sister chromatids are identical apart from crossing over, so separating them does not create new combinations.",
+   "Replication makes copies and does not shuffle chromosomes."
+  ]
+ },
+ {
+  "id": "bi_membrane_graph",
+  "topic": "2.6",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "second differences of the plotted series (linear vs concave) vs the generating model"
+  ],
+  "misconceptions": [
+   "Leveling off of the rate at high external concentration is not caused by equal concentrations; it indicates saturation.",
+   "A rate that rises without limit in proportion to concentration indicates simple diffusion and not a saturable protein.",
+   "Active transport requires energy and works against gradients; the data do not show ATP use."
+  ]
+ },
+ {
+  "id": "bi_membrane_permeability",
+  "topic": "2.4",
+  "skill": "1.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 2.4"
+  ],
+  "misconceptions": [
+   "Hydrophilic substances do not dissolve in the lipid tails.",
+   "A concentration difference does not make a charged ion able to cross the lipid core.",
+   "Large charged polar molecules cannot cross the hydrophobic core."
+  ]
+ },
+ {
+  "id": "bi_membrane_structure",
+  "topic": "2.3",
+  "skill": "1.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 2.3"
+  ],
+  "misconceptions": [
+   "Phospholipids with unsaturated tails are still amphipathic and form bilayers.",
+   "The polar heads are unchanged by this treatment.",
+   "Unsaturated tails pack less tightly because of their kinks."
+  ]
+ },
+ {
+  "id": "bi_mitotic_index",
+  "topic": "4.6",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "percent change from the two mitotic indexes vs 100 x (1 - treated/control cell counts)"
+  ],
+  "misconceptions": [
+   "Reports the mitotic index of the treated cells instead of the percent decrease.",
+   "Reports the ratio of control to treated mitotic indexes.",
+   "Reports the difference in mitotic index in percentage points rather than the percent decrease."
+  ]
+ },
+ {
+  "id": "bi_molecular_clock",
+  "topic": "7.7",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "time-stepping loop adding differences from both lineages vs d / (2r)"
+  ],
+  "misconceptions": [
+   "Divides by twice the rate and then by two again.",
+   "Doubles the number of differences before dividing.",
+   "Multiplies the differences by the rate."
+  ]
+ },
+ {
+  "id": "bi_monohybrid_prob",
+  "topic": "5.3",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "enumeration of every Punnett combination across offspring vs the product rule"
+  ],
+  "misconceptions": [
+   "Gives the probability of the recessive phenotype for one offspring only.",
+   "Squares the probability of the dominant phenotype.",
+   "Squares the probability of the recessive phenotype."
+  ]
+ },
+ {
+  "id": "bi_monomer_hydrolysis",
+  "topic": "1.3",
+  "skill": "1.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 1.3"
+  ],
+  "misconceptions": [
+   "One water is used for each bond broken, not for each amino acid.",
+   "Enzymes lower activation energy; hydrolysis still uses water.",
+   "Breaking bonds by hydrolysis consumes water."
+  ]
+ },
+ {
+  "id": "bi_mutation_effect",
+  "topic": "6.7",
+  "skill": "5.D",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "translate both sequences and classify by comparison vs the generating mutation type"
+  ],
+  "misconceptions": [
+   "The polypeptide changed, so the mutation is not silent.",
+   "More than one amino acid differs or the length changed, so one amino acid replacement does not describe the result.",
+   "No premature stop codon appears in the mutated sequence, so the polypeptide is not shortened that way."
+  ]
+ },
+ {
+  "id": "bi_natural_selection_conditions",
+  "topic": "7.2",
+  "skill": "1.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 7.1 and 7.2"
+  ],
+  "misconceptions": [
+   "Differential survival and reproduction are needed for selection.",
+   "The environment selects among existing variation and does not create alleles to fit it.",
+   "Traits acquired during an organism's life are not passed to offspring by genetic inheritance."
+  ]
+ },
+ {
+  "id": "bi_new_investigation_cellsize",
+  "topic": "2.2",
+  "skill": "3.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 2.2"
+  ],
+  "misconceptions": [
+   "The model does not claim anything about the shape of real cells.",
+   "The data are about the distance the dye travels, not about the dye changing the cubes.",
+   "Larger cubes have a smaller ratio."
+  ]
+ },
+ {
+  "id": "bi_new_investigation_enzyme",
+  "topic": "3.1",
+  "skill": "3.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 3.1"
+  ],
+  "misconceptions": [
+   "The pH of the compound does not show how it binds to the enzyme.",
+   "The mass of the compound does not test the type of inhibition.",
+   "Temperature does not test competition for the active site."
+  ]
+ },
+ {
+  "id": "bi_new_investigation_selection",
+  "topic": "7.2",
+  "skill": "3.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 7.2"
+  ],
+  "misconceptions": [
+   "Painting all moths dark removes the comparison between phenotypes.",
+   "The number of trees does not test the effect of predation.",
+   "Wing length is not related to the hypothesis about predation on color."
+  ]
+ },
+ {
+  "id": "bi_nondisjunction",
+  "topic": "5.1",
+  "skill": "6.E",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 5.1 and 5.2"
+  ],
+  "misconceptions": [
+   "One abnormal cell gains and one loses a chromosome; the numbers of abnormal products are not both gains.",
+   "Not all of the cells lose the chromosome.",
+   "Only one of the two meiosis II divisions is affected."
+  ]
+ },
+ {
+  "id": "bi_nonmendelian",
+  "topic": "5.4",
+  "skill": "1.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 5.4"
+  ],
+  "misconceptions": [
+   "Nothing in the example involves sex chromosomes.",
+   "Intermediate phenotypes are not the key pattern in this case.",
+   "This pattern involves alleles of one gene and not an interaction between two genes."
+  ]
+ },
+ {
+  "id": "bi_nucleic_polarity",
+  "topic": "1.6",
+  "skill": "2.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "reverse complement computed in one step vs complement then reversal"
+  ],
+  "misconceptions": [
+   "Writes the complement in the same left-to-right order, which gives the 3' to 5' direction instead of 5' to 3'.",
+   "Uses uracil in place of thymine in the new DNA strand.",
+   "Reverses the sequence without taking the complement."
+  ]
+ },
+ {
+  "id": "bi_nucleotide_components",
+  "topic": "1.6",
+  "skill": "1.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 6.1"
+  ],
+  "misconceptions": [
+   "Adjacent sugars are connected through a phosphate group.",
+   "The phosphate links to the sugar and not to the base of the next nucleotide.",
+   "Bases pair with bases on the opposite strand."
+  ]
+ },
+ {
+  "id": "bi_null_hypothesis_ecology",
+  "topic": "8.1",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 8.1"
+  ],
+  "misconceptions": [
+   "One plot and one measurement do not provide a reliable comparison.",
+   "Changing two variables makes it impossible to identify the cause.",
+   "Without a control group the effect of fertilizer cannot be separated from other changes."
+  ]
+ },
+ {
+  "id": "bi_organelle_function",
+  "topic": "2.1",
+  "skill": "1.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 2.1"
+  ],
+  "misconceptions": [
+   "Fungal cells have walls but lack chloroplasts.",
+   "Bacteria lack membrane-bound organelles such as chloroplasts.",
+   "Animal cells do not have chloroplasts or cell walls."
+  ]
+ },
+ {
+  "id": "bi_organism_response_data",
+  "topic": "8.1",
+  "skill": "4.B",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "comparison of the test distribution with the even control distribution vs the generating preference"
+  ],
+  "misconceptions": [
+   "In the test most of the organisms were on one side, unlike the even split in the control.",
+   "The control shows an even distribution, which means no side preference without the cue.",
+   "The table shows more of the pill bugs on the dark side in the test."
+  ]
+ },
+ {
+  "id": "bi_origin_of_life",
+  "topic": "7.12",
+  "skill": "6.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 7.12"
+  ],
+  "misconceptions": [
+   "DNA is copied by cells every cell cycle.",
+   "Most enzymes are proteins.",
+   "DNA is generally more stable than RNA."
+  ]
+ },
+ {
+  "id": "bi_osmosis_mass_change",
+  "topic": "2.7",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "linear interpolation between the two points that bracket zero vs least-squares line x-intercept"
+  ],
+  "misconceptions": [
+   "Reads the molarity with the greatest mass loss instead of the molarity with no change.",
+   "Averages all the molarities tested.",
+   "Reads the molarity with the greatest mass gain instead of the molarity with no change."
+  ]
+ },
+ {
+  "id": "bi_pathway_mutant_table",
+  "topic": "4.3",
+  "skill": "4.B",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "direct simulation of the linear pathway with a defect at each position vs inference from the first rescuing treatment"
+  ],
+  "misconceptions": [
+   "Supplying normal protein B did not restore expression, so protein B is not the nonfunctional component; the defect is further down the pathway.",
+   "Supplying normal protein A did not restore expression, so protein A is not the nonfunctional component; the defect is further down the pathway.",
+   "Supplying normal receptor did not restore expression, so receptor is not the nonfunctional component; the defect is further down the pathway."
+  ]
+ },
+ {
+  "id": "bi_pcr",
+  "topic": "6.8",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "stepwise doubling loop vs the closed form m x 2^n"
+  ],
+  "misconceptions": [
+   "Multiplies the starting number by the number of cycles.",
+   "Doubles once fewer than the number of cycles, as if the first cycle made no copies.",
+   "Raises the starting number to the power of the number of cycles."
+  ]
+ },
+ {
+  "id": "bi_pedigree_mode",
+  "topic": "5.3",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "enumeration of the four candidate modes against each parent-child relationship in the table vs the generating mode"
+  ],
+  "misconceptions": [
+   "A Y-linked trait would be passed to all sons and to no daughters, which is the opposite of the pattern.",
+   "Daughters of an affected father and a noncarrier mother would be unaffected carriers if the trait were recessive.",
+   "A recessive trait would require the unaffected mother to carry the allele, and she is not a carrier."
+  ]
+ },
+ {
+  "id": "bi_photosynthesis_data",
+  "topic": "3.4",
+  "skill": "6.B",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "argmin/argmax of the table vs the pigment-absorption model used to generate it"
+  ],
+  "misconceptions": [
+   "The color of a plant comes from reflected light, which is not used efficiently.",
+   "The data show a small amount of oxygen released at every wavelength, so photosynthesis did not stop.",
+   "The greatest release in the data is at a shorter wavelength, and longer wavelengths carry less energy."
+  ]
+ },
+ {
+  "id": "bi_photosynthesis_inputs",
+  "topic": "3.4",
+  "skill": "1.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 3.4"
+  ],
+  "misconceptions": [
+   "The stages are linked through ATP and NADPH.",
+   "Glucose is made in the Calvin cycle, and oxygen comes from splitting water in the light reactions.",
+   "The roles are reversed: the light reactions produce ATP and NADPH."
+  ]
+ },
+ {
+  "id": "bi_phylo_characters",
+  "topic": "7.9",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "count of shared derived characters for every pair vs the generating nested pattern"
+  ],
+  "misconceptions": [
+   "Taxon B has the most characters because of character 4, which no other taxon has; a character found in only one taxon does not show a relationship.",
+   "Character 1 is present in every taxon of the ingroup, so sharing it gives no information about which pair is most closely related.",
+   "Taxa D and A share only characters 1 and 2, while the best pair also shares character 3, so they are less closely related."
+  ]
+ },
+ {
+  "id": "bi_phylo_dna_data",
+  "topic": "7.9",
+  "skill": "4.B",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "minimum of the pairwise table vs the generating divergence times"
+  ],
+  "misconceptions": [
+   "Species P and Q differ at 22 positions, more than the closest pair, so their common ancestor is older.",
+   "Species R and S differ at 32 positions, more than the closest pair, so their common ancestor is older.",
+   "Species P and S differ at 22 positions, more than the closest pair, so their common ancestor is older."
+  ]
+ },
+ {
+  "id": "bi_pop_growth_calc",
+  "topic": "8.3",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "simulated yearly update of the population vs dN/dt = B - D"
+  ],
+  "misconceptions": [
+   "Divides the deaths alone by the population size.",
+   "Reports the net change without dividing by the population size.",
+   "Divides the births alone by the population size."
+  ]
+ },
+ {
+  "id": "bi_predator_prey_graph",
+  "topic": "8.5",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "location of the first maximum of each integrated series vs the sign of the lag"
+  ],
+  "misconceptions": [
+   "The two cycles have the same length but one is delayed, and the delay shows which population depends on the other for food.",
+   "A predator population is expected to peak after its prey increases.",
+   "Predators are usually less numerous than their prey, and the size of the peaks does not identify the predator; the lag does."
+  ]
+ },
+ {
+  "id": "bi_prediction_gene",
+  "topic": "6.5",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 6.5"
+  ],
+  "misconceptions": [
+   "The normal pattern requires the operator and repressor.",
+   "The operator is a regulatory sequence and does not code for lactose.",
+   "Deleting the operator does not remove the promoter."
+  ]
+ },
+ {
+  "id": "bi_procedure_choice_dna",
+  "topic": "6.8",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 6.8"
+  ],
+  "misconceptions": [
+   "Temperature in the dark does not test for the plasmid.",
+   "Movement does not show whether the plasmid was taken up.",
+   "Growth without the antibiotic does not show uptake of the plasmid."
+  ]
+ },
+ {
+  "id": "bi_prokaryote_eukaryote",
+  "topic": "2.1",
+  "skill": "1.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 2.1"
+  ],
+  "misconceptions": [
+   "The endoplasmic reticulum is found only in eukaryotic cells.",
+   "Mitochondria are found only in eukaryotic cells.",
+   "A nucleus is found only in eukaryotic cells."
+  ]
+ },
+ {
+  "id": "bi_protein_function_shape",
+  "topic": "1.7",
+  "skill": "1.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 1.7"
+  ],
+  "misconceptions": [
+   "The change is in the amino acid sequence of the protein, not in the membrane DNA.",
+   "A change in the amino acid sequence can also alter function.",
+   "A single substitution can change the interactions that determine the shape."
+  ]
+ },
+ {
+  "id": "bi_protein_level",
+  "topic": "1.7",
+  "skill": "1.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 1.7; wrong options are level-of-structure confusions"
+  ],
+  "misconceptions": [
+   "Tertiary structure is the folding of a single polypeptide chain.",
+   "Secondary structure refers to local folding such as alpha helices and beta sheets.",
+   "Primary structure is the linear sequence of amino acids in one chain."
+  ]
+ },
+ {
+  "id": "bi_question_testable_cellcycle",
+  "topic": "4.6",
+  "skill": "3.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 4.5 and 4.6"
+  ],
+  "misconceptions": [
+   "The question concerns the arrest of cells that entered mitosis.",
+   "Without chromosome separation, cells do not complete division.",
+   "The spindle is not needed for DNA replication."
+  ]
+ },
+ {
+  "id": "bi_question_testable_ecology",
+  "topic": "8.4",
+  "skill": "3.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 8.4"
+  ],
+  "misconceptions": [
+   "Plants in the dark cannot carry out photosynthesis and are expected to grow poorly.",
+   "This prediction is unrelated to the hypothesis about light.",
+   "This prediction does not isolate light as the limiting resource."
+  ]
+ },
+ {
+  "id": "bi_reasoning_dna_replication",
+  "topic": "6.2",
+  "skill": "6.C",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "predicted bands for the three models for generations 1 and 2 compared with the table"
+  ],
+  "misconceptions": [
+   "Dispersive replication would not give a separate light band in generation 2.",
+   "The intermediate band shows that the original heavy strands were used as templates.",
+   "Conservative replication would give heavy and light bands in generation 1, not one intermediate band."
+  ]
+ },
+ {
+  "id": "bi_reasoning_griffith",
+  "topic": "6.1",
+  "skill": "6.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 6.1"
+  ],
+  "misconceptions": [
+   "The results identify DNA as the material that carried the trait.",
+   "Destroying RNA did not prevent transformation.",
+   "Destroying protein did not prevent transformation."
+  ]
+ },
+ {
+  "id": "bi_reasoning_osmosis_data",
+  "topic": "2.7",
+  "skill": "6.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 2.7"
+  ],
+  "misconceptions": [
+   "The change occurs too quickly to be caused by making new wall material.",
+   "The change in firmness is caused by water movement, not by salt movement.",
+   "The directions are reversed."
+  ]
+ },
+ {
+  "id": "bi_reasoning_pea_ratio",
+  "topic": "5.3",
+  "skill": "6.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 5.3"
+  ],
+  "misconceptions": [
+   "Heterozygous plants produce two kinds of gametes in equal numbers.",
+   "Homozygous recessive plants would not be purple.",
+   "Homozygous dominant plants would produce only purple offspring."
+  ]
+ },
+ {
+  "id": "bi_replication_enzyme_scenario",
+  "topic": "6.2",
+  "skill": "1.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 6.2"
+  ],
+  "misconceptions": [
+   "Primase builds the RNA primers, and DNA ligase does not make them.",
+   "DNA polymerase adds nucleotides, and the leading strand is made without fragments.",
+   "Helicase unwinds the double helix, and DNA ligase joins fragments."
+  ]
+ },
+ {
+  "id": "bi_replication_enzymes",
+  "topic": "6.2",
+  "skill": "1.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 6.2"
+  ],
+  "misconceptions": [
+   "The parent strands are used as templates and remain in the daughter molecules.",
+   "That describes dispersive replication.",
+   "That describes conservative replication."
+  ]
+ },
+ {
+  "id": "bi_replication_strands",
+  "topic": "6.2",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "diagram",
+  "verifiedBy": [
+   "synthesis direction derived from each template's polarity compared with the fork direction, checked from both templates"
+  ],
+  "misconceptions": [
+   "DNA polymerase works only in the 5' to 3' direction, and only one strand is discontinuous.",
+   "One strand must be made in fragments because both new strands are synthesized 5' to 3' on antiparallel templates.",
+   "Synthesis on that template proceeds toward the fork, so it is the continuous leading strand."
+  ]
+ },
+ {
+  "id": "bi_respiration_concept",
+  "topic": "3.5",
+  "skill": "1.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 3.5"
+  ],
+  "misconceptions": [
+   "Glycolysis occurs outside the mitochondrion.",
+   "Neither stage occurs in these structures.",
+   "The locations are reversed."
+  ]
+ },
+ {
+  "id": "bi_respiration_rates",
+  "topic": "3.5",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "ratio of end-point rates vs ratio of least-squares slopes"
+  ],
+  "misconceptions": [
+   "Subtracts the two rates instead of dividing them.",
+   "Compares the totals at 5 minutes with the totals at 20 minutes.",
+   "Divides the slower rate by the faster rate."
+  ]
+ },
+ {
+  "id": "bi_restriction_gel",
+  "topic": "6.8",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "differences of consecutive cut positions with the circular wrap-around vs numpy.diff over the unrolled coordinates"
+  ],
+  "misconceptions": [
+   "Treats the circular DNA as if it were linear, which gives one extra fragment.",
+   "Leaves out the largest fragment.",
+   "Gives the total length as a single fragment, as if the enzyme did not cut."
+  ]
+ },
+ {
+  "id": "bi_rna_processing",
+  "topic": "6.3",
+  "skill": "1.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 6.3"
+  ],
+  "misconceptions": [
+   "Introns are removed before translation.",
+   "The gene is identical in all of the cells; the splicing differs.",
+   "Alternative splicing allows multiple products."
+  ]
+ },
+ {
+  "id": "bi_sa_v_concept",
+  "topic": "2.2",
+  "skill": "1.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 2.2"
+  ],
+  "misconceptions": [
+   "Folds and projections are surface-area adaptations and not storage features.",
+   "The structures are for absorption and do not make cells impermeable.",
+   "The folds increase the surface area; they do not slow digestion by shrinking it."
+  ]
+ },
+ {
+  "id": "bi_sa_v_ratio",
+  "topic": "2.2",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "symbolic ratio (sympy) vs direct numeric evaluation of the surface area and volume"
+  ],
+  "misconceptions": [
+   "Uses 2/r by treating the sphere like a circle.",
+   "Uses the diameter in place of the radius in 3/r.",
+   "Divides volume by surface area instead."
+  ]
+ },
+ {
+  "id": "bi_sa_v_table",
+  "topic": "2.2",
+  "skill": "4.B",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "ratio computed from the table columns vs the closed form 6/s for a cube"
+  ],
+  "misconceptions": [
+   "Cell R has a ratio of 0.75 per \u00b5m, which is lower than cell Q; its larger size means less surface area per unit volume.",
+   "The ratio changes with size, so cells of different sizes do not have equal ratios.",
+   "Cell P has a ratio of 0.60 per \u00b5m, which is lower than cell Q; its larger size means less surface area per unit volume. It has the greatest surface area, which is not the same as the greatest ratio."
+  ]
+ },
+ {
+  "id": "bi_se_calc",
+  "topic": "8.1",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "s / sqrt(n) computed numerically vs exact symbolic evaluation"
+  ],
+  "misconceptions": [
+   "Multiplies the standard deviation by the square root of n.",
+   "Divides n by the standard deviation.",
+   "Divides the standard deviation by n instead of the square root of n."
+  ]
+ },
+ {
+  "id": "bi_selection_claim_data",
+  "topic": "7.2",
+  "skill": "6.B",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 7.2"
+  ],
+  "misconceptions": [
+   "Variation arises by mutation and does not appear because of a need.",
+   "Which form is favored depends on the environment, and the data come from one habitat.",
+   "The data count whole populations and do not show any individual changing color."
+  ]
+ },
+ {
+  "id": "bi_selection_data_table",
+  "topic": "7.2",
+  "skill": "6.B",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "direction of the mean change in the table vs the generating selection pressure"
+  ],
+  "misconceptions": [
+   "Populations do not change because they need to; selection acts on existing heritable variation.",
+   "Changes that individuals acquire during life are not inherited; natural selection acts on heritable variation among individuals.",
+   "Mutations occur randomly and not in response to an environmental change."
+  ]
+ },
+ {
+  "id": "bi_selection_followup_design",
+  "topic": "7.2",
+  "skill": "3.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 7.2"
+  ],
+  "misconceptions": [
+   "Seed hardness on another island does not test the trait in this population.",
+   "A count of birds does not test whether the beak depth is inherited.",
+   "The same birds measured twice would test growth in individuals and not inheritance."
+  ]
+ },
+ {
+  "id": "bi_selection_type",
+  "topic": "7.2",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "mean, standard deviation, and peak count of the plotted series vs the generating kind"
+  ],
+  "misconceptions": [
+   "Selection can change the position or the shape of the distribution while variation remains.",
+   "After selection there is one narrow peak near 5, not two peaks near the two ends of the range.",
+   "The most common value stays near 5 after selection, so the distribution did not shift toward one end."
+  ]
+ },
+ {
+  "id": "bi_sex_linked",
+  "topic": "5.4",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "Punnett enumeration of X and Y combinations vs a reasoning by chromosome inheritance"
+  ],
+  "misconceptions": [
+   "Reports the probability that a child of either sex has normal vision.",
+   "Assumes no child is affected.",
+   "Gives the probability that a son is color blind."
+  ]
+ },
+ {
+  "id": "bi_signal_amplification",
+  "topic": "4.3",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "product of the step multipliers vs a stepwise loop counting molecules at each tier"
+  ],
+  "misconceptions": [
+   "Multiplies only the first two numbers and forgets the last step.",
+   "Adds the three numbers instead of multiplying them.",
+   "Multiplies the largest number by the number of steps."
+  ]
+ },
+ {
+  "id": "bi_signal_mutation",
+  "topic": "4.3",
+  "skill": "6.E",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 4.3"
+  ],
+  "misconceptions": [
+   "A kinase mutation does not change the receptor.",
+   "The mutation affects an intracellular kinase, not the signal molecule.",
+   "A kinase that cannot be activated would not increase the response."
+  ]
+ },
+ {
+  "id": "bi_signal_receptor_prediction",
+  "topic": "4.2",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 4.2"
+  ],
+  "misconceptions": [
+   "A blocked receptor cannot trigger the pathway, so glucose release is not triggered.",
+   "A hormone that works through a surface receptor cannot cross the membrane to bypass it.",
+   "A drug that blocks the receptor does not activate it, so the response is not increased."
+  ]
+ },
+ {
+  "id": "bi_signal_steps",
+  "topic": "4.2",
+  "skill": "1.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 4.1 and 4.2"
+  ],
+  "misconceptions": [
+   "The signal is transduced before the cell responds.",
+   "The response is the final stage.",
+   "A signal must be received before it can be transduced."
+  ]
+ },
+ {
+  "id": "bi_simpson",
+  "topic": "8.6",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "floating-point sum vs exact fractions"
+  ],
+  "misconceptions": [
+   "Divides the number of species by the number of individuals: 4/196 = 0.02.",
+   "Reports the sum of the squared proportions, \u03a3(n/N)\u00b2 = 0.30, without subtracting it from 1.",
+   "Uses only the most abundant species: 1 \u2212 (75/196)\u00b2 = 0.85."
+  ]
+ },
+ {
+  "id": "bi_simpson_compare",
+  "topic": "8.6",
+  "skill": "4.B",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "Simpson's index for each community from the table vs the generating evenness"
+  ],
+  "misconceptions": [
+   "Fewer individuals of the rarest species does not make a community more diverse.",
+   "A community dominated by one species has a lower diversity index, not a higher one.",
+   "Diversity also depends on how evenly individuals are distributed among the species."
+  ]
+ },
+ {
+  "id": "bi_sp_describe_cohesion_table",
+  "topic": "1.1",
+  "skill": "4.B",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "fixed values in the table, trend statements checked against the listed means"
+  ],
+  "misconceptions": [
+   "The heights decrease, and they do not change by equal amounts.",
+   "The means differ and the smallest tube has the highest column.",
+   "The values in the table decrease as the diameter increases."
+  ]
+ },
+ {
+  "id": "bi_sp_describe_offspring_counts",
+  "topic": "5.3",
+  "skill": "4.B",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "fixed values in the table, statements checked against the listed counts"
+  ],
+  "misconceptions": [
+   "204 of the 400 offspring had black bodies.",
+   "The counts differ by only 8 offspring out of 400.",
+   "The counts of 196 and 204 are nearly equal and not in a 3 to 1 ratio."
+  ]
+ },
+ {
+  "id": "bi_sp_describe_svr_table",
+  "topic": "2.2",
+  "skill": "4.B",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "fixed values in the table, statements checked against the listed values"
+  ],
+  "misconceptions": [
+   "Only the 1 cm cube was completely reached; the 2 cm cube had 78 percent.",
+   "The percents differ among the three cubes.",
+   "The percents decrease as the cube size increases."
+  ]
+ },
+ {
+  "id": "bi_sp_design_choice_chamber",
+  "topic": "8.1",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 8.1 and science practice 3"
+  ],
+  "misconceptions": [
+   "The same number of woodlice is used in each trial, so it is a controlled variable.",
+   "The temperature is the same on both sides, so it is a controlled variable.",
+   "The light is the factor that differs between the sides, which is the independent variable."
+  ]
+ },
+ {
+  "id": "bi_sp_design_dialysis",
+  "topic": "2.4",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 2.4 and science practice 3"
+  ],
+  "misconceptions": [
+   "This is the same measurement as the experimental setup and gives no baseline.",
+   "This changes the concentration and is a second treatment, not a control.",
+   "Glucose is on both sides, so this setup does not show a baseline for the test."
+  ]
+ },
+ {
+  "id": "bi_sp_design_phenotype_environment",
+  "topic": "5.5",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 5.5 and science practice 3"
+  ],
+  "misconceptions": [
+   "The phenotype is the measured outcome and is expected to differ.",
+   "Height is the dependent variable that is measured.",
+   "Temperature is the independent variable that the researcher changes."
+  ]
+ },
+ {
+  "id": "bi_sp_design_protein_ph",
+  "topic": "1.7",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 1.7 and science practice 3"
+  ],
+  "misconceptions": [
+   "The pH is the variable that is being tested and must differ among the samples.",
+   "Different times would add a second changing variable.",
+   "Different volumes would add a second changing variable."
+  ]
+ },
+ {
+  "id": "bi_sp_error_catalase",
+  "topic": "3.2",
+  "skill": "3.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 3.2 and science practice 3.D"
+  ],
+  "misconceptions": [
+   "A longer time for some trials adds a second variable and does not fix the substrate.",
+   "Running every trial at one temperature removes the independent variable.",
+   "Changing the amount of enzyme adds a second variable and does not correct the lost substrate."
+  ]
+ },
+ {
+  "id": "bi_sp_error_quadrat",
+  "topic": "8.4",
+  "skill": "3.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 8.4 and science practice 3.D"
+  ],
+  "misconceptions": [
+   "Using two selected quadrats does not represent the whole field.",
+   "Different quadrat sizes make the counts harder to compare and add a variable.",
+   "Excluding quadrats biases the estimate."
+  ]
+ },
+ {
+  "id": "bi_sp_hypothesis_flycross",
+  "topic": "5.3",
+  "skill": "3.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 5.3 and science practice 3"
+  ],
+  "misconceptions": [
+   "A 1:1 ratio is not expected from a cross of two double heterozygotes.",
+   "Importance to the plant cannot be tested by counting offspring.",
+   "This question asks for a reason and is not answered by counting offspring phenotypes."
+  ]
+ },
+ {
+  "id": "bi_sp_predict_agar_cubes",
+  "topic": "2.2",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 2.2 (surface area to volume ratio, formulas V = 4/3 pi r^3 and A = 4 pi r^2)"
+  ],
+  "misconceptions": [
+   "Cell size does not determine chromosome number and the cubes cannot test it.",
+   "The investigation does not measure cell division.",
+   "The cubes do not model ribosomes or any other cell structures."
+  ]
+ },
+ {
+  "id": "bi_speciation",
+  "topic": "7.10",
+  "skill": "1.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 7.10"
+  ],
+  "misconceptions": [
+   "The scenario describes differences in timing and not in structure.",
+   "The two species live in the same pond.",
+   "The species do not mate, so no offspring are produced."
+  ]
+ },
+ {
+  "id": "bi_testcross",
+  "topic": "5.3",
+  "skill": "6.B",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "distance of the observed counts from each expected ratio vs the generating genotype"
+  ],
+  "misconceptions": [
+   "Showing a dominant phenotype does not mean that the genotype is heterozygous.",
+   "A heterozygous parent would produce about half recessive offspring.",
+   "The parent shows the dominant phenotype, so it is not homozygous recessive."
+  ]
+ },
+ {
+  "id": "bi_tonicity_pred",
+  "topic": "2.7",
+  "skill": "6.E",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 2.7"
+  ],
+  "misconceptions": [
+   "Plant cells take up water readily by osmosis.",
+   "The cell wall resists expansion and prevents bursting.",
+   "Plasmolysis occurs in hypertonic solutions when water leaves the cell."
+  ]
+ },
+ {
+  "id": "bi_transcription",
+  "topic": "6.3",
+  "skill": "2.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "complement with uracil of the 3' to 5' template vs reverse complement of the 5' to 3' template written as RNA"
+  ],
+  "misconceptions": [
+   "Reverses the template and replaces T with U, without taking the complement.",
+   "Builds the correct complement but reads it from the wrong end and labels it 5' to 3'.",
+   "Copies the template strand and replaces T with U, without taking the complement."
+  ]
+ },
+ {
+  "id": "bi_transcription_concept",
+  "topic": "6.3",
+  "skill": "1.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 6.3"
+  ],
+  "misconceptions": [
+   "Copying a template is transcription, which is not the function of the cap and tail.",
+   "Introns are removed by splicing, which is a different modification.",
+   "Amino acids are added during translation by ribosomes, not by modifying the mRNA."
+  ]
+ },
+ {
+  "id": "bi_transformation",
+  "topic": "6.8",
+  "skill": "6.B",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "logic of controls (no plasmid on ampicillin) vs the experimental plate"
+  ],
+  "misconceptions": [
+   "A lawn on plain agar does not show which cells took up the plasmid.",
+   "Plate 2 is a control showing that untransformed bacteria are killed by ampicillin.",
+   "Growth on plain agar shows that the bacteria are alive but not that transformation occurred."
+  ]
+ },
+ {
+  "id": "bi_translation",
+  "topic": "6.4",
+  "skill": "2.D",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "translate() over the first AUG vs a manual codon-table loop"
+  ],
+  "misconceptions": [
+   "Lists the correct amino acids in reverse order.",
+   "Begins reading at the nucleotide just before the start codon.",
+   "Begins reading at the first nucleotide of the mRNA instead of at the start codon AUG."
+  ]
+ },
+ {
+  "id": "bi_translation_concept",
+  "topic": "6.4",
+  "skill": "1.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 6.4"
+  ],
+  "misconceptions": [
+   "Ribosomes are not attached to DNA at nuclear pores.",
+   "The E site is the exit site for uncharged tRNAs.",
+   "The A site holds the incoming aminoacyl-tRNA."
+  ]
+ },
+ {
+  "id": "bi_transport_type",
+  "topic": "2.5",
+  "skill": "4.B",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "rule-based classifier on the table attributes vs the generating label"
+  ],
+  "misconceptions": [
+   "Active transport moves a solute against its gradient using ATP, which does not match the data in the table.",
+   "Osmosis is the diffusion of water, and the table describes the movement of a solute instead.",
+   "Simple diffusion needs no protein and no ATP, but the data show that a protein or ATP is required."
+  ]
+ },
+ {
+  "id": "bi_trna_anticodon",
+  "topic": "6.4",
+  "skill": "2.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "complement written 3' to 5' vs reverse of the 5' to 3' anticodon"
+  ],
+  "misconceptions": [
+   "Writes the complement with thymine in place of uracil.",
+   "Writes the anticodon identical to the codon.",
+   "Gives the DNA coding sequence complement of the codon written with thymine."
+  ]
+ },
+ {
+  "id": "bi_trophic_energy",
+  "topic": "8.2",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "repeated multiplication by 0.1 per trophic transfer vs E x 0.1^(level - 1)"
+  ],
+  "misconceptions": [
+   "Applies 10 percent only once, regardless of the trophic level.",
+   "Divides the energy of the producers by the number of trophic levels.",
+   "Counts one fewer trophic transfer, applying 10 percent once too few times."
+  ]
+ },
+ {
+  "id": "bi_variation_populations",
+  "topic": "7.11",
+  "skill": "1.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 7.11"
+  ],
+  "misconceptions": [
+   "Crossing over shuffles existing alleles into new combinations.",
+   "Drift changes the frequencies of alleles by chance.",
+   "Selection changes the frequencies of existing alleles."
+  ]
+ },
+ {
+  "id": "bi_vesicle_transport",
+  "topic": "2.8",
+  "skill": "1.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 2.8"
+  ],
+  "misconceptions": [
+   "Vesicle fusion does not move individual molecules through pump proteins.",
+   "Osmosis is the movement of water and not of neurotransmitter vesicles.",
+   "Endocytosis brings materials into the cell."
+  ]
+ },
+ {
+  "id": "bi_water_flow_direction",
+  "topic": "2.7",
+  "skill": "5.D",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "sum of components per side compared numerically vs the generating condition (with and without pressure)"
+  ],
+  "misconceptions": [
+   "Ignores the pressure potential of the cell and compares only solute potentials.",
+   "Water moves toward the lower water potential, which is not decided by the solute concentration alone.",
+   "Draws the right idea of potential but applies the comparison to the wrong side, so the direction is reversed."
+  ]
+ },
+ {
+  "id": "bi_water_potential",
+  "topic": "2.7",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact rational arithmetic (sympy) vs floating-point evaluation of -iCRT"
+  ],
+  "misconceptions": [
+   "Gives the solute potential a positive sign.",
+   "Uses the temperature in degrees Celsius instead of kelvins.",
+   "Uses 0.831 in place of 0.0831 for the pressure constant."
+  ]
+ },
+ {
+  "id": "bi_water_property",
+  "topic": "1.1",
+  "skill": "1.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 1.1 (hydrogen bonding and properties of water); distractors are named misconceptions"
+  ],
+  "misconceptions": [
+   "Surface tension is a result of cohesion at an air-water boundary and cannot by itself lift a column of water.",
+   "Water is polar and is attracted to xylem walls; hydrophobic interactions would repel it.",
+   "These thermal properties affect temperature regulation, not the upward movement of a water column."
+  ]
+ },
+ {
+  "id": "bi_water_solvent",
+  "topic": "1.1",
+  "skill": "1.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 1.1; each wrong option is a named solubility misconception"
+  ],
+  "misconceptions": [
+   "Density does not decide whether a molecule dissolves.",
+   "Dissolving is based on weak interactions, not new covalent bonds.",
+   "Hydroxyl groups are polar, not nonpolar."
+  ]
+ },
+ {
+  "id": "bi_x_antibiotic_generations",
+  "topic": "7.8",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "doubling loop until the counts cross vs a base-2 logarithm"
+  ],
+  "misconceptions": [
+   "Treats the ratio of surviving sensitive cells to resistant cells as the number of generations.",
+   "Rounds the number of generations down, so the resistant cells have not yet outnumbered the surviving sensitive cells.",
+   "Ignores the antibiotic and waits for the resistant cells to outnumber the original sensitive population."
+  ]
+ },
+ {
+  "id": "bi_x_blood_type_inference",
+  "topic": "5.4",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "gamete enumeration for the ABO locus and the Rh locus vs product of two single-gene probabilities"
+  ],
+  "misconceptions": [
+   "Gives the probability for the Rh factor only and leaves out the blood type.",
+   "Gives the probability for the blood type only and leaves out the Rh factor.",
+   "Treats the Rh cross as Dd x dd, which gives one half for each Rh phenotype."
+  ]
+ },
+ {
+  "id": "bi_x_cascade_amplification",
+  "topic": "4.3",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "step-by-step update of the molecule count vs the product formula"
+  ],
+  "misconceptions": [
+   "Leaves out the number of receptors and counts the cascade for one receptor.",
+   "Leaves out the phosphatase, so no activated molecules are lost at the second step.",
+   "Adds the number of receptors and the numbers of molecules activated at each step instead of multiplying them."
+  ]
+ },
+ {
+  "id": "bi_x_cell_size_limit",
+  "topic": "2.2",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "scan of radii comparing supply and demand vs r = 3j/k"
+  ],
+  "misconceptions": [
+   "Treats the surface-area-to-volume ratio as 2/r, as for a long cylinder, instead of 3/r.",
+   "Divides by three instead of multiplying by three when the surface area and volume are set equal.",
+   "Gives the diameter of the cell instead of the radius."
+  ]
+ },
+ {
+  "id": "bi_x_dna_meiosis_amount",
+  "topic": "5.1",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "count of chromatids per cell after each division vs the doubling-and-halving rule"
+  ],
+  "misconceptions": [
+   "Gives the amount after S phase, before the cell divides.",
+   "Divides the amount per cell after meiosis I by four instead of by two.",
+   "Gives the amount per cell after meiosis I, which forgets the second division."
+  ]
+ },
+ {
+  "id": "bi_x_enzyme_rate_percent",
+  "topic": "3.2",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "two rates from the table vs the generating percent increase"
+  ],
+  "misconceptions": [
+   "Uses the increase in rate in \u00b5mol per minute as the percent.",
+   "Reports the higher rate as a percent of the lower rate, which leaves out subtracting the original 100 percent.",
+   "Divides the increase in rate by the new rate instead of the original rate."
+  ]
+ },
+ {
+  "id": "bi_x_gel_size_estimate",
+  "topic": "6.8",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "line equation through two standards vs interpolation by fraction of the distance"
+  ],
+  "misconceptions": [
+   "Uses the larger of the two bracketing standards.",
+   "Uses the size of the nearest standard band.",
+   "Uses the midpoint of the two bracketing sizes."
+  ]
+ },
+ {
+  "id": "bi_x_gene_flow_freq",
+  "topic": "7.4",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "allele counts per generation vs repeated weighted average"
+  ],
+  "misconceptions": [
+   "Gives the average of the island and mainland frequencies.",
+   "Gives the allele frequency after only one generation of gene flow.",
+   "Adds the mainland contribution m x q in each of the two generations to the original frequency without removing the emigrating part."
+  ]
+ },
+ {
+  "id": "bi_x_gpp_respired",
+  "topic": "8.2",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "fraction arithmetic vs percent formula"
+  ],
+  "misconceptions": [
+   "Divides the respiration by the total gross primary productivity of all four ecosystems.",
+   "Gives the percent of the gross primary productivity that remains as net primary productivity.",
+   "Divides the respiration by the net primary productivity instead of by the gross primary productivity."
+  ]
+ },
+ {
+  "id": "bi_x_gross_productivity",
+  "topic": "3.4",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "hour-by-hour bookkeeping of both bottles vs (net + respiration)/time"
+  ],
+  "misconceptions": [
+   "Reports the oxygen used in respiration per hour, from the dark bottle only.",
+   "Divides the net change in the light bottle by the time and does not add the oxygen used in respiration.",
+   "Subtracts the oxygen used in respiration from the net gain instead of adding it."
+  ]
+ },
+ {
+  "id": "bi_x_hbond_count",
+  "topic": "1.6",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "explicit base list pairing vs closed-form 2(A-T)+3(G-C)"
+  ],
+  "misconceptions": [
+   "Counts only the G-C pairs, three hydrogen bonds each, and leaves out the A-T pairs.",
+   "Counts one hydrogen bond for each base pair.",
+   "Swaps the bond numbers, giving three hydrogen bonds to A-T pairs and two to G-C pairs."
+  ]
+ },
+ {
+  "id": "bi_x_hw_carriers",
+  "topic": "7.5",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "1 - p^2 - q^2 vs 2pq"
+  ],
+  "misconceptions": [
+   "Uses q as the carrier frequency, which leaves out the factor 2p.",
+   "Gives the number of homozygous dominant individuals.",
+   "Gives the number of affected individuals instead of carriers."
+  ]
+ },
+ {
+  "id": "bi_x_hw_selection_next_gen",
+  "topic": "7.4",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "allele counting among reproducing genotypes vs q/(1+q)"
+  ],
+  "misconceptions": [
+   "Halves the allele frequency because half of the genotypes carry the allele.",
+   "Subtracts the frequency of the removed genotype from the allele frequency without correcting for the smaller number of remaining individuals.",
+   "Reports the frequency of the allele before selection."
+  ]
+ },
+ {
+  "id": "bi_x_invasive_percent_change",
+  "topic": "8.7",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "percent change recomputed from reconstructed counts vs the generating changes"
+  ],
+  "misconceptions": [
+   "Gives the control change as a gain, but the number of native species in the plots where the plant was left decreased.",
+   "Reports the change in the number of species as a percent without dividing by the starting richness.",
+   "Divides each change by the final richness instead of the starting richness."
+  ]
+ },
+ {
+  "id": "bi_x_linkage_class_count",
+  "topic": "5.4",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "class frequency from the generating haplotypes vs a fraction of gametes"
+  ],
+  "misconceptions": [
+   "Assumes independent assortment, so each of the four classes has one quarter of the offspring.",
+   "Uses the parental class frequency for the recombinant class, or the reverse, which mixes up the linkage phase.",
+   "Gives the number of offspring that are parental types of both kinds together."
+  ]
+ },
+ {
+  "id": "bi_x_logistic_ratio",
+  "topic": "8.4",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numerical derivative of the logistic solution vs the formula ratio"
+  ],
+  "misconceptions": [
+   "Compares the two values of (K - N)/K as differences.",
+   "Compares only the population sizes and leaves out the (K - N)/K term.",
+   "Compares only the (K - N) terms and leaves out the population sizes."
+  ]
+ },
+ {
+  "id": "bi_x_mitosis_hours",
+  "topic": "4.5",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "durations for each group vs the combined difference formula"
+  ],
+  "misconceptions": [
+   "Gives the estimated duration of mitosis in the treated group only.",
+   "Gives the estimated duration of mitosis in the control group only.",
+   "Divides the difference in the number of dividing cells by the number in the control group and multiplies by the cycle time."
+  ]
+ },
+ {
+  "id": "bi_x_new_mutations",
+  "topic": "6.7",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "mutations counted per base-pair class vs a chain of fractions"
+  ],
+  "misconceptions": [
+   "Stops after finding the new mutations in the whole genome.",
+   "Counts the haploid genome once and leaves out the second set of chromosomes.",
+   "Stops after finding the new mutations in the coding regions, without taking only those that change an amino acid."
+  ]
+ },
+ {
+  "id": "bi_x_okazaki_primers",
+  "topic": "6.2",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "primers counted fork by fork vs L/F + 2"
+  ],
+  "misconceptions": [
+   "Counts both new strands of each fork as lagging strands, which doubles the number of Okazaki fragments.",
+   "Counts only the primers for the lagging strands and leaves out the primer for each leading strand.",
+   "Counts the primers for one replication fork only."
+  ]
+ },
+ {
+  "id": "bi_x_pedigree_carrier_prob",
+  "topic": "5.3",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "share of carriers among unaffected genotypes of two-carrier crosses vs product of 2/3, partner chance and 1/4"
+  ],
+  "misconceptions": [
+   "Uses one half as the chance that the unaffected sibling is a carrier.",
+   "Uses one half as the chance that a carrier passes the recessive allele to a child.",
+   "Assumes that the unaffected sibling is certainly a carrier, which leaves out the 2/3 chance."
+  ]
+ },
+ {
+  "id": "bi_x_plant_osmosis",
+  "topic": "2.7",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "solution \u03a8_S = -iCRT and cell \u03a8 = \u03a8_P + \u03a8_S vs a direct difference calculation"
+  ],
+  "misconceptions": [
+   "Water moves from higher water potential to lower water potential, so the direction of movement is reversed.",
+   "Uses only the solute potential of the cell and leaves out its pressure potential, so the difference in water potential is wrong.",
+   "Uses the temperature in degrees Celsius instead of kelvins when calculating the solute potential of the solution."
+  ]
+ },
+ {
+  "id": "bi_x_respirometer_ratio",
+  "topic": "3.5",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "corrected rates as separate numbers vs the generating multiplier"
+  ],
+  "misconceptions": [
+   "Compares the uncorrected readings of the germinating peas and does not subtract the control.",
+   "Divides the lower-temperature rate by the higher-temperature rate.",
+   "Subtracts the two corrected readings instead of dividing them."
+  ]
+ },
+ {
+  "id": "bi_x_sd_to_se_overlap",
+  "topic": "3.4",
+  "skill": "5.B",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "difference between means vs the sum of the two 2SE half-widths"
+  ],
+  "misconceptions": [
+   "Ranges that do not overlap support a real difference, so this reverses the rule for comparing ranges.",
+   "A difference between two means is not enough by itself; the \u00b12SE ranges must be compared, and here they do not overlap.",
+   "The standard error is the standard deviation divided by the square root of the number of trials, so the table has enough information."
+  ]
+ },
+ {
+  "id": "bi_x_selection_coefficient",
+  "topic": "7.4",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "relative fitness through the ratio of survival rates vs 1 - w"
+  ],
+  "misconceptions": [
+   "Reports the fraction of aa individuals that did not survive, which uses survival itself instead of fitness relative to the best genotype.",
+   "Reports the relative fitness of aa instead of the selection coefficient.",
+   "Reports the survival rate of aa."
+  ]
+ },
+ {
+  "id": "bi_x_template_to_peptide",
+  "topic": "6.4",
+  "skill": "2.D",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "mutated template transcribed again vs direct codon substitution"
+  ],
+  "misconceptions": [
+   "The new mRNA codon GAG codes for Glu, not Gln, so the amino acid changes.",
+   "Reads the template strand directly as the mRNA codon instead of reading its complement.",
+   "Reads the complement of the template in the wrong direction, which reverses the order of the bases in the codon."
+  ]
+ },
+ {
+  "id": "bi_x_transformation_eff",
+  "topic": "6.8",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "total colonies per ng converted to \u00b5g vs a single combined formula"
+  ],
+  "misconceptions": [
+   "Multiplies the colonies on the plate by the micrograms of DNA instead of dividing.",
+   "Divides the colonies on the plate by the micrograms of DNA and does not scale up to the whole culture.",
+   "Scales to the whole culture but divides by the nanograms of DNA, which gives colonies per ng."
+  ]
+ },
+ {
+  "id": "bi_x_trihybrid_prob",
+  "topic": "5.3",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "gamete-pair enumeration for each gene vs table of phenotype probabilities"
+  ],
+  "misconceptions": [
+   "Uses the probability for one gene only.",
+   "Uses the probability of the recessive phenotype (1/4 for an Aa x Aa gene and 1/2 for an Aa x aa gene) for every gene, whatever phenotype is asked for.",
+   "Counts only the heterozygous offspring, with probability one half, for each Aa x Aa gene with a dominant phenotype, which leaves out the AA offspring."
+  ]
+ },
+ {
+  "id": "bi_x_trophic_chain_energy",
+  "topic": "8.2",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "forward multiplication of the producer energy vs backward division"
+  ],
+  "misconceptions": [
+   "Uses 10% for every transfer instead of the stated efficiencies.",
+   "Divides by the efficiency of only two of the three transfers.",
+   "Multiplies the energy in the top level by the three efficiencies, which moves the energy the wrong way."
+  ]
+ },
+ {
+  "id": "bi_x_xlinked_two_children",
+  "topic": "5.3",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "enumeration of gamete pairs vs product of phenotype-by-sex probabilities"
+  ],
+  "misconceptions": [
+   "Gives the probability that a single child is an affected son.",
+   "Considers only whether the second child is affected, which ignores its sex and treats the first child as certain.",
+   "Gives the probability that the first child is a carrier daughter and the second is an affected son."
+  ]
+ },
+ {
+  "id": "bi_y_carrying_capacity_drop",
+  "topic": "8.4",
+  "skill": "6.E",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "short-time change in the closed-form logistic solution vs the logistic equation"
+  ],
+  "misconceptions": [
+   "The growth rate depends on K as well as on N, so reducing K changes the rate even if N does not change.",
+   "The growth rate becomes negative when the population is above the new carrying capacity, so the sign is wrong.",
+   "The logistic equation divides by K, so leaving that out gives a rate that is too large."
+  ]
+ },
+ {
+  "id": "bi_y_enzyme_graph_slopes",
+  "topic": "3.1",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "least-squares slopes vs the generating rate ratio"
+  ],
+  "misconceptions": [
+   "Subtracts the two rates and adds the result to the enzyme amount in tube 1.",
+   "Compares the amounts of product at 4 minutes instead of the rates, which includes the product already present at time zero.",
+   "Divides the rate of tube 1 by the rate of tube 2."
+  ]
+ },
+ {
+  "id": "bi_y_exponential_predict",
+  "topic": "8.3",
+  "skill": "6.E",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "year-by-year update of births and deaths vs a power of the yearly factor"
+  ],
+  "misconceptions": [
+   "Leaves out the deaths and grows the population only by births.",
+   "Adds the yearly net increase of the starting population three times, which does not let the increase grow with the population.",
+   "Applies the death rate as a gain instead of a loss."
+  ]
+ },
+ {
+  "id": "bi_y_expression_normalized",
+  "topic": "6.6",
+  "skill": "4.B",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "normalized ratios of each sample vs the generating fold change"
+  ],
+  "misconceptions": [
+   "Compares the signals of the gene of interest without dividing by the control gene, which includes the change in the amount of RNA loaded.",
+   "Divides the untreated normalized value by the treated normalized value.",
+   "Subtracts the normalized values instead of dividing them."
+  ]
+ },
+ {
+  "id": "bi_y_hw_equilibrium_claim",
+  "topic": "7.5",
+  "skill": "6.B",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "allele list recount of q and expected 2pqN vs the generating counts"
+  ],
+  "misconceptions": [
+   "Any sample adds up to its sample size; equilibrium depends on whether the genotype counts match the expected frequencies.",
+   "This reverses the comparison: the observed number of heterozygotes is on the other side of the expected number.",
+   "Equilibrium depends on genotype frequencies matching p\u00b2, 2pq, and q\u00b2, not on whether both alleles are common."
+  ]
+ },
+ {
+  "id": "bi_y_incomplete_dom_counts",
+  "topic": "5.4",
+  "skill": "6.E",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "16-square Punnett enumeration vs product of single-gene probabilities"
+  ],
+  "misconceptions": [
+   "Leaves out the height gene and uses only the flower color ratio.",
+   "Treats flower color as completely dominant, so pink flowers are counted together with red flowers.",
+   "Uses one half for each gene."
+  ]
+ },
+ {
+  "id": "bi_y_inhibitor_half",
+  "topic": "3.2",
+  "skill": "4.B",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "dense interpolation grid search vs linear interpolation between the bracketing points"
+  ],
+  "misconceptions": [
+   "Uses the midpoint of the two concentrations on either side without interpolating.",
+   "Uses the concentration at which the rate is half of the rate with the highest concentration of inhibitor.",
+   "Uses the concentration with the rate closest to half of the rate without the inhibitor, with no interpolation."
+  ]
+ },
+ {
+  "id": "bi_y_light_halved_o2",
+  "topic": "3.4",
+  "skill": "6.E",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "hour-by-hour bookkeeping vs a closed-form net rate"
+  ],
+  "misconceptions": [
+   "Assumes that the light does not change.",
+   "Halves the net rate measured in bright light instead of halving only the gross production.",
+   "Leaves out the oxygen used in respiration and counts only the halved gross production."
+  ]
+ },
+ {
+  "id": "bi_y_logistic_graph_peak",
+  "topic": "8.4",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "largest one-day increase between plotted points vs r_max K/4"
+  ],
+  "misconceptions": [
+   "Uses the carrying capacity in place of the population size in r_max N (K - N)/K, which gives r_max times K.",
+   "Uses half of the carrying capacity but leaves out the factor (K - N)/K.",
+   "Calculates N(K - N)/K at the midpoint but forgets to multiply by r_max."
+  ]
+ },
+ {
+  "id": "bi_y_null_recombinants",
+  "topic": "5.4",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "four-class enumeration vs the generating expectation N/2"
+  ],
+  "misconceptions": [
+   "A large deficit of these classes is not what independent assortment predicts, so the data do not support independent assortment.",
+   "The observed number refers to offspring with exactly one dominant allele (Aabb and aaBb), which is a different pair of classes from the one named in this option.",
+   "Each of the four classes has one quarter of the offspring, so the two classes together make up one half, not one quarter."
+  ]
+ },
+ {
+  "id": "bi_y_phylo_distance_tree",
+  "topic": "7.9",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "smallest-distance pair vs the generating tree heights"
+  ],
+  "misconceptions": [
+   "Q and S have the largest difference, so they are the most distantly related pair and not the most closely related pair.",
+   "The table gives the total difference between the two taxa, which is the sum of changes on both lineages; each lineage has half of it.",
+   "The pair with the smallest difference is the most closely related pair, and R and Q differ more than R and P do."
+  ]
+ },
+ {
+  "id": "bi_y_potato_predict",
+  "topic": "2.7",
+  "skill": "6.E",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "least-squares line through all points vs interpolation between the two bracketing points"
+  ],
+  "misconceptions": [
+   "Gives the correct size with the wrong sign.",
+   "Averages the percent changes of the two molarities on either side, which treats M as the midpoint between them.",
+   "Uses the percent change of the nearest molarity in the table."
+  ]
+ },
+ {
+  "id": "bi_y_rates_percent_greatest",
+  "topic": "3.2",
+  "skill": "4.B",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "rates and percent changes recomputed from the table vs the generating rate sequence"
+  ],
+  "misconceptions": [
+   "This interval has the largest increase in \u00b5mol per minute (4.8), but its percent increase (60%) is not the largest.",
+   "The rate decreased in this interval, so it is a percent decrease of 50% and not an increase.",
+   "The number is the increase in the rate in \u00b5mol per minute and not a percent of the starting rate."
+  ]
+ },
+ {
+  "id": "bi_y_selection_partial",
+  "topic": "7.4",
+  "skill": "6.E",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "allele counting among 10,000 weighted individuals vs q'=(q-sq^2)/(1-sq^2)"
+  ],
+  "misconceptions": [
+   "Multiplies the allele frequency by the fitness of aa, which treats the allele frequency as a genotype frequency.",
+   "Subtracts the loss of a alleles from the aa individuals but does not divide by the mean fitness of the population.",
+   "Reports the frequency of the allele before selection."
+  ]
+ },
+ {
+  "id": "bi_yeast_respiration_scenario",
+  "topic": "3.5",
+  "skill": "1.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED 3.5"
+  ],
+  "misconceptions": [
+   "The Calvin cycle occurs in photosynthetic cells and fixes carbon dioxide; it does not make ethanol.",
+   "Yeast cells do not photosynthesize, and the flask contains no light-driven reactions.",
+   "The flask has no oxygen, so the electron transport chain cannot run."
+  ]
+ },
+ {
+  "id": "bi_z_bag_percent_change",
+  "topic": "2.7",
+  "skill": "4.B",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "final/initial ratios vs the generating percent changes"
+  ],
+  "misconceptions": [
+   "The number is the change in mass in grams, not the percent of the starting mass.",
+   "Bag D lost mass, so its change is a decrease and not an increase.",
+   "Bag B gained the most mass in grams (4.0 g), but its percent increase is not the greatest."
+  ]
+ },
+ {
+  "id": "bi_z_beet_leakage",
+  "topic": "2.4",
+  "skill": "4.B",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "corrected ratios vs the generating leakage fractions"
+  ],
+  "misconceptions": [
+   "The corrected absorbance is not a percent; it must be divided by the corrected absorbance of the boiled sample and multiplied by 100.",
+   "The values are reversed: leakage is lower at the lower temperature.",
+   "This does not subtract the absorbance of the water blank from the readings before comparing them with the boiled sample."
+  ]
+ },
+ {
+  "id": "bi_z_biomagnification",
+  "topic": "8.7",
+  "skill": "6.E",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "trophic level by trophic level update vs a closed-form product"
+  ],
+  "misconceptions": [
+   "This leaves out the concentration of the substance in the producers, which is the concentration in the water multiplied by the factor for the producers.",
+   "This applies the increase from one trophic level to the next only twice; there are three transfers from the producers to the tertiary consumers.",
+   "The substance becomes more concentrated at each trophic level by a factor, so the increases are multiplied and not added."
+  ]
+ },
+ {
+  "id": "bi_z_cell_growth_supply",
+  "topic": "2.2",
+  "skill": "6.E",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "direct surface-area and volume formulas at both radii vs the ratio 3j/(kr)"
+  ],
+  "misconceptions": [
+   "The surface area of a sphere increases with the square of the radius, so doubling the radius increases the surface area four-fold and not two-fold.",
+   "The volume of a sphere increases with the cube of the radius, so doubling the radius increases the volume eight-fold and not two-fold.",
+   "The surface area to volume ratio decreases as the radius increases, so the fraction of demand that uptake can supply decreases."
+  ]
+ },
+ {
+  "id": "bi_z_cell_volume_osmolarity",
+  "topic": "2.7",
+  "skill": "6.E",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "solute-conservation volume calculation vs ratio of osmolarities"
+  ],
+  "misconceptions": [
+   "The final volume is the ratio of the cell osmolarity to the solution osmolarity, which is a multiple of the original volume and not an increase of that amount.",
+   "A red blood cell bursts when its volume exceeds 1.5 times the original volume; 1.50 is below this value.",
+   "The solution has a lower solute concentration than the cell, so water moves into the cell, and the cell swells."
+  ]
+ },
+ {
+  "id": "bi_z_dna_content_counts",
+  "topic": "4.5",
+  "skill": "4.B",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "percent of each class computed from exact fractions vs the generating percents"
+  ],
+  "misconceptions": [
+   "This reverses the control and treated groups.",
+   "The counts must be divided by the total number of cells before percents are compared, and the percent did not necessarily double.",
+   "The percent of cells in S phase did not change; the largest changes are in the cells with 2C and 4C of DNA."
+  ]
+ },
+ {
+  "id": "bi_z_dna_sample_prediction",
+  "topic": "1.6",
+  "skill": "6.E",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "Chargaff equalities per sample then maximum G+C among double-stranded samples vs the generating GC percents"
+  ],
+  "misconceptions": [
+   "All three DNA samples have equal amounts of A and T and of G and C, so this feature does not distinguish them.",
+   "This sample has uracil and unequal amounts of A and U and of G and C, so it is single-stranded RNA and has no second strand to separate.",
+   "A-T pairs have two hydrogen bonds, fewer than the three of G-C pairs, so a sample rich in A-T pairs separates at a lower temperature."
+  ]
+ },
+ {
+  "id": "bi_z_gene_order",
+  "topic": "5.4",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "test of each gene as the middle gene (distances add) vs the generating order"
+  ],
+  "misconceptions": [
+   "The distance between the outer genes is the sum of the two shorter distances and not their difference.",
+   "The two genes with the largest recombination frequency (A and B) are the outer genes, so C is in the middle and not A.",
+   "The largest recombination frequency is between A and B, which places them at the two ends and C between them."
+  ]
+ },
+ {
+  "id": "bi_z_p53_predict",
+  "topic": "4.6",
+  "skill": "6.E",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "cell-by-cell count vs the product of fractions"
+  ],
+  "misconceptions": [
+   "Gives the number of damaged cells that would enter S phase in a culture with a functioning checkpoint.",
+   "Uses the percent of damaged cells that are stopped by the mutant checkpoint instead of the percent that continue.",
+   "Leaves out the percent of cells with damaged DNA and applies the checkpoint to all cells in the culture."
+  ]
+ },
+ {
+  "id": "bi_z_pcr_cycles_predict",
+  "topic": "6.8",
+  "skill": "6.E",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "cycle-by-cycle update vs a product of two powers"
+  ],
+  "misconceptions": [
+   "Leaves out the first cycles at full efficiency.",
+   "Doubles the number of copies in every cycle, including the cycles at lower efficiency.",
+   "Multiplies the copies by the efficiency instead of by one plus the efficiency in the last cycles."
+  ]
+ },
+ {
+  "id": "bi_z_stage_time_claim",
+  "topic": "4.5",
+  "skill": "6.B",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "exact fractions of the cycle time vs the generating counts"
+  ],
+  "misconceptions": [
+   "These times are ten times too large; a stage occupying a small fraction of the cells uses only that fraction of the cell cycle time.",
+   "A larger fraction of cells in a stage means that cells spend more time in that stage, if the total cycle length is unchanged.",
+   "Anaphase is shorter because fewer cells reach it from the blocked metaphase, which does not mean that the cycle is faster; the largest change is the accumulation of cells in metaphase."
+  ]
+ },
+ {
+  "id": "bis_cell_cycle_set_q1",
+  "topic": "4.6",
+  "skill": "4.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "stage counts compared between groups vs the generating drug effect"
+  ],
+  "misconceptions": [
+   "The treated group still has cells in each stage of mitosis.",
+   "The number of cells in each stage differs between the control and the treated group.",
+   "The number of cells counted was the same in both groups."
+  ]
+ },
+ {
+  "id": "bis_cell_cycle_set_q2",
+  "topic": "4.6",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact fraction of non-interphase cells vs float computation"
+  ],
+  "misconceptions": [
+   "Reports the percent of control cells in interphase.",
+   "Divides the cells in mitosis by the cells in interphase.",
+   "Reports the percent of cells in prophase only."
+  ]
+ },
+ {
+  "id": "bis_cell_cycle_set_q3",
+  "topic": "4.6",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "(treated - control)/control x 100 vs ratio form"
+  ],
+  "misconceptions": [
+   "Reports the difference in percentage points rather than the percent change.",
+   "Reports the ratio of the treated index to the control index as a percent.",
+   "Reports the mitotic index of the treated group."
+  ]
+ },
+ {
+  "id": "bis_cell_cycle_set_q4",
+  "topic": "4.6",
+  "skill": "6.E",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "stage with the largest relative change vs the generating drug"
+  ],
+  "misconceptions": [
+   "The mitotic index changed strongly.",
+   "The treated group has fewer cells in mitosis.",
+   "The data do not show an accumulation of cells in metaphase."
+  ]
+ },
+ {
+  "id": "bis_chi_square_set_q1",
+  "topic": "5.3",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "N x ratio/16 vs exact fractions"
+  ],
+  "misconceptions": [
+   "Uses the ratio number as the count.",
+   "Multiplies the total by the ratio number without dividing by 16.",
+   "Divides the total by 4 as if the four classes were equally likely."
+  ]
+ },
+ {
+  "id": "bis_chi_square_set_q2",
+  "topic": "5.3",
+  "skill": "5.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "floating-point sum vs exact fractions"
+  ],
+  "misconceptions": [
+   "Does not square the differences, using the sum of the absolute differences divided by the expected numbers.",
+   "Divides the sum of the squared differences by the total number of offspring.",
+   "Does not divide by the expected numbers."
+  ]
+ },
+ {
+  "id": "bis_chi_square_set_q3",
+  "topic": "5.3",
+  "skill": "5.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "decision rule with df = 3 vs the generating comparison"
+  ],
+  "misconceptions": [
+   "A statistical test cannot prove the null hypothesis.",
+   "The degrees of freedom are the number of classes minus one, which is 3.",
+   "States the opposite decision from the comparison of the calculated and critical values."
+  ]
+ },
+ {
+  "id": "bis_chi_square_set_q4",
+  "topic": "5.3",
+  "skill": "6.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "decision rule outcome vs the generating deviation"
+  ],
+  "misconceptions": [
+   "A test cannot prove the hypothesis; it shows consistency.",
+   "Linked genes would give a significant departure from the expected ratio.",
+   "Nothing in the data indicates sex linkage."
+  ]
+ },
+ {
+  "id": "bis_enzyme_set_q1",
+  "topic": "3.2",
+  "skill": "4.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "argmax of the table means vs the generating optimum"
+  ],
+  "misconceptions": [
+   "The rate at pH 8 (18.5) is the greatest value in the table, not the least.",
+   "The rate at pH 10 (7.1) is lower than the rate at pH 8 (18.5), so the rate does not keep rising.",
+   "The rate at pH 8 (18.5) is higher than the rate at pH 4 (6.0), so the rate does not fall steadily."
+  ]
+ },
+ {
+  "id": "bis_enzyme_set_q2",
+  "topic": "3.2",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "(new - old)/old x 100 vs ratio-based form"
+  ],
+  "misconceptions": [
+   "Reports the difference in rates rather than the percent change.",
+   "Reverses the starting and ending means.",
+   "Divides the change by the larger mean instead of the starting mean."
+  ]
+ },
+ {
+  "id": "bis_enzyme_set_q3",
+  "topic": "3.2",
+  "skill": "5.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "interval overlap from the displayed values vs the generating means and SE"
+  ],
+  "misconceptions": [
+   "A difference between two means is not enough by itself; the \u00b12SE ranges overlap, so chance can explain it.",
+   "Ranges that overlap mean that chance can explain the difference, so this reverses the rule for comparing ranges.",
+   "The mean and \u00b12SE values are enough to compare the ranges, so the individual measurements are not needed."
+  ]
+ },
+ {
+  "id": "bis_enzyme_set_q4",
+  "topic": "3.2",
+  "skill": "6.E",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "trend of the table beyond the optimum vs the denaturation model"
+  ],
+  "misconceptions": [
+   "Each enzyme has an optimum pH, and the table shows a lower rate at the pH values on either side of the maximum.",
+   "Many enzymes work in basic solutions, and the lower rate at pH 10 shows a decline and not a complete loss of activity.",
+   "The table shows that pH changes the rate between pH values that are only a few units apart, so no effect beyond the range is unsupported."
+  ]
+ },
+ {
+  "id": "bis_hw_set_q1",
+  "topic": "7.5",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "allele counting vs the generating q"
+  ],
+  "misconceptions": [
+   "Reports the frequency of the dominant allele.",
+   "Counts the proportion of homozygous recessive individuals instead of the allele frequency.",
+   "Divides the number of a alleles by the number of individuals instead of the number of alleles."
+  ]
+ },
+ {
+  "id": "bis_hw_set_q2",
+  "topic": "7.5",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "2pqN vs binomial expansion"
+  ],
+  "misconceptions": [
+   "Uses p squared times the population size.",
+   "Uses p times q times the population size, without the factor of 2.",
+   "Uses q squared times the population size."
+  ]
+ },
+ {
+  "id": "bis_hw_set_q3",
+  "topic": "7.5",
+  "skill": "4.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "observed minus expected heterozygotes vs the generating inbreeding"
+  ],
+  "misconceptions": [
+   "The observed number differs a lot from the expected number.",
+   "The observed number of heterozygotes is lower than expected, not higher.",
+   "Hardy-Weinberg applies to alleles of a gene in a population."
+  ]
+ },
+ {
+  "id": "bis_hw_set_q4",
+  "topic": "7.5",
+  "skill": "6.E",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "deficit pattern vs the generating cause"
+  ],
+  "misconceptions": [
+   "Random mating is a condition for equilibrium, not a violation.",
+   "The absence of mutation would help keep equilibrium.",
+   "A large population helps maintain equilibrium and would not cause a heterozygote deficit."
+  ]
+ },
+ {
+  "id": "bis_leafdisk_set_q1",
+  "topic": "3.4",
+  "skill": "4.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "counts compared at each time vs the generating light effect"
+  ],
+  "misconceptions": [
+   "The numbers of floating disks differ between the two light intensities.",
+   "The table shows more disks floating in bright light at each early time.",
+   "Disks floated in both light intensities."
+  ]
+ },
+ {
+  "id": "bis_leafdisk_set_q2",
+  "topic": "3.4",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact fraction interpolation vs the generating logistic midpoint"
+  ],
+  "misconceptions": [
+   "Reports the time for the dim light treatment.",
+   "Reports the last measured time before more than five disks had floated in bright light.",
+   "Reports the first measured time at which more than five disks had floated in bright light."
+  ]
+ },
+ {
+  "id": "bis_leafdisk_set_q3",
+  "topic": "3.4",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "ratio of interpolated times vs the generating midpoints"
+  ],
+  "misconceptions": [
+   "Divides the time for bright light by the time for dim light.",
+   "Subtracts the two times instead of dividing one by the other.",
+   "Adds the two times instead of dividing one by the other."
+  ]
+ },
+ {
+  "id": "bis_leafdisk_set_q4",
+  "topic": "3.4",
+  "skill": "6.E",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "trend of the half-floating time against light vs the light-reaction model"
+  ],
+  "misconceptions": [
+   "The data show that less light slows floating, and carbon dioxide supply is not changed by light.",
+   "The data show that the time at which disks float changes with light intensity.",
+   "Disks floated under dim light, so oxygen production continues at lower light intensities."
+  ]
+ },
+ {
+  "id": "bis_population_set_q1",
+  "topic": "8.4",
+  "skill": "4.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "interval increases vs the generating logistic curve"
+  ],
+  "misconceptions": [
+   "The population increases in every interval.",
+   "The increases differ from interval to interval.",
+   "The increases become smaller near the end."
+  ]
+ },
+ {
+  "id": "bis_population_set_q2",
+  "topic": "8.3",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "(N2 - N1)/(t2 - t1) vs the mean of the yearly increments"
+  ],
+  "misconceptions": [
+   "Reports the change in population without dividing by time.",
+   "Reports the population size at the end of the interval divided by the interval.",
+   "Divides the change by the final year instead of the interval length."
+  ]
+ },
+ {
+  "id": "bis_population_set_q3",
+  "topic": "8.4",
+  "skill": "4.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "last values of the table vs the generating K"
+  ],
+  "misconceptions": [
+   "Reads the starting population size.",
+   "Reads half of the final value.",
+   "Reads the population size in the year of fastest growth."
+  ]
+ },
+ {
+  "id": "bis_population_set_q4",
+  "topic": "8.4",
+  "skill": "6.E",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "logistic model with a smaller K vs the generating population"
+  ],
+  "misconceptions": [
+   "The carrying capacity is set by the resources, which have decreased.",
+   "A loss of resources lowers, not raises, the carrying capacity.",
+   "A reduction of the food supply does not remove limits on a population."
+  ]
+ },
+ {
+  "id": "bis_translation_set_q1",
+  "topic": "6.4",
+  "skill": "2.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "codon-table loop on both strings vs translate()"
+  ],
+  "misconceptions": [
+   "The mutated codon GUA specifies Val, so no stop codon appears early and both polypeptides have 5 amino acids.",
+   "Only one codon differs and no nucleotide was added or removed, so the reading frame and the later amino acids are unchanged.",
+   "The codons at position 2 differ (GAA and GUA) and specify Glu and Val, so the polypeptides are not identical."
+  ]
+ },
+ {
+  "id": "bis_translation_set_q2",
+  "topic": "6.7",
+  "skill": "1.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "comparison of the translated polypeptides vs the generating substitution"
+  ],
+  "misconceptions": [
+   "The mutated codon GUA does not specify a stop, and the mutant polypeptide still has 5 amino acids.",
+   "A silent mutation keeps the same amino acid, but the amino acid at position 2 changed from Glu to Val.",
+   "A frameshift needs an insertion or deletion; here the sequence length is the same and the codons after the change are unchanged."
+  ]
+ },
+ {
+  "id": "bis_translation_set_q3",
+  "topic": "6.4",
+  "skill": "2.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "complement of the mutated codon vs reverse complement written in the opposite direction"
+  ],
+  "misconceptions": [
+   "This is the anticodon for the codon GAA of the original sequence, which specifies Glu, not Val.",
+   "The anticodon pairs antiparallel with the codon, so its bases are not the complement read in the same order written 5' to 3'.",
+   "The anticodon is complementary to the codon, so it cannot have the same sequence as the codon."
+  ]
+ },
+ {
+  "id": "bis_translation_set_q4",
+  "topic": "6.7",
+  "skill": "6.E",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "codon table lookup of each single-nucleotide neighbor vs the generating synonymous codon"
+  ],
+  "misconceptions": [
+   "GAU specifies Asp, which is different from Glu, so the amino acid would change.",
+   "GCA specifies Ala, which is different from Glu, so the amino acid would change.",
+   "GGA specifies Gly, which is different from Glu, so the amino acid would change."
+  ]
+ },
+ {
+  "id": "bis_water_potential_set_q1",
+  "topic": "2.7",
+  "skill": "4.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sign pattern of the table vs the generating model"
+  ],
+  "misconceptions": [
+   "The percent change is positive at low molarity.",
+   "The masses changed in every solution except possibly near the isotonic point.",
+   "The percent change is negative at higher molarity."
+  ]
+ },
+ {
+  "id": "bis_water_potential_set_q2",
+  "topic": "2.7",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "interpolation between bracketing points vs least-squares x-intercept"
+  ],
+  "misconceptions": [
+   "Uses the molarity with the largest mass loss.",
+   "Uses the midpoint of the two molarities that bracket zero without interpolating.",
+   "Uses the molarity with the largest mass gain."
+  ]
+ },
+ {
+  "id": "bis_water_potential_set_q3",
+  "topic": "2.7",
+  "skill": "6.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "direction of the mass change vs the sign of the water potential difference"
+  ],
+  "misconceptions": [
+   "The solution had no sucrose, so none could move in.",
+   "A lower solute concentration gives a higher, not lower, water potential.",
+   "Water moves from higher to lower water potential, which is into the cells."
+  ]
+ },
+ {
+  "id": "bis_water_potential_set_q4",
+  "topic": "2.7",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact rational arithmetic vs float evaluation"
+  ],
+  "misconceptions": [
+   "Forgets the molar concentration.",
+   "Uses the temperature in degrees Celsius instead of kelvins.",
+   "Uses 0.831 in place of 0.0831 for the pressure constant."
+  ]
+ }
+]

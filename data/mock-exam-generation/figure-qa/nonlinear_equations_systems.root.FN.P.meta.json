@@ -1,0 +1,46 @@
+{
+ "itemId": "nonlinear_equations_systems.root.FN.P",
+ "generatedAt": "2026-10-07T05:02:00.572Z",
+ "codeHash": "33971e3a193e674d3400b7cd2b3dba63d7f97266d4282902ac8a966c5a7c2f00",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/coordinate-plane.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/graph-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/_t5-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/nonlinear_equations_systems.root.FN.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/pure-fn-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/pure-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "nonlinear_equations_systems.root.FN.P.png",
+   "mobileFile": "nonlinear_equations_systems.root.FN.P.m375.png",
+   "archetypeId": "nesg.root.FN.P.repr_shift",
+   "seed": 11,
+   "signature": "plane",
+   "stimulus": "A student is studying a function in algebra class. The parabola shown is the graph of the quadratic function $q$ in the $xy$-plane. Three points on it are marked. The graph of $y = q(x)$ crosses the $x$-axis at two points.",
+   "question": "What is the greater solution?",
+   "options": [
+    "-7",
+    "2",
+    "-2",
+    "7"
+   ],
+   "correctIndex": 3,
+   "answer": "7",
+   "explanation": "(1) 그래프에 표시된 점을 읽는다: (5, -6), (6, -4), (8, 6). (2) y = ax² + bx + c 에 세 점을 대입해 세 식을 만든다. (3) 연립해 풀면 a = 1, b = -9, c = 14 이다. (4) 식: y = 1x² - 9x + 14 이다. (5) q(x) = 1(x - (2))(x - (7)) 로 인수분해한다. (6) 해는 2, 7 이고 큰 해는 7 이다. 따라서 정답은 7이다.",
+   "structuralIssues": []
+  }
+ ]
+}

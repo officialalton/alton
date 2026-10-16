@@ -1,0 +1,49 @@
+{
+ "itemId": "linear_inequalities.point_in_solution.LN.C",
+ "generatedAt": "2026-10-07T05:02:00.707Z",
+ "codeHash": "9624373cab0f453071d2c5b6516d9612cf99f807906eef990cd1ea11dac46a04",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/coordinate-plane.ts",
+  "lib/problem-figures/templates/figure-choice.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/cplane-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/data-c-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/graph-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/linear_inequalities.point_in_solution.LN.C.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/ln-b-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/lnc-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/pure-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "linear_inequalities.point_in_solution.LN.C.png",
+   "mobileFile": "linear_inequalities.point_in_solution.LN.C.m375.png",
+   "archetypeId": "pisc.point_in_solution.LN.C.repr_shift",
+   "seed": 11,
+   "signature": "figure_choice[plane]",
+   "stimulus": "Each of the four graphs shown has a boundary line and a shaded area, drawn on identical axes.",
+   "question": "Which graph shown represents an inequality such that the point with $x$-coordinate -2 and $y$-coordinate -4 is not a solution, and the point with $x$-coordinate 2 and $y$-coordinate 4 is a solution?",
+   "options": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "correctIndex": 2,
+   "answer": "C",
+   "explanation": "(1) 점 (2, 4) 은 해, 점 (-2, -4) 은 해가 아님. (2) 각 그래프에서 각 점이 음영 안에 있는지, 경계선 위인지 확인한다. (3) 조건을 하나라도 어긴 그래프를 지운다. (4) 남은 그래프가 정답이다. (5) 다른 그래프는 점 판정이 하나 이상 어긋난다. 따라서 정답은 C이다.",
+   "structuralIssues": []
+  }
+ ]
+}

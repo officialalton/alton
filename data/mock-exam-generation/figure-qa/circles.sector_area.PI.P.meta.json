@@ -1,0 +1,43 @@
+{
+ "itemId": "circles.sector_area.PI.P",
+ "generatedAt": "2026-10-07T05:02:01.113Z",
+ "codeHash": "b748fe23a2e2540e2d98d15c474e9f3f2d4664be70e84e50adfd533282a5d7dd",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/d-registry.ts",
+  "lib/problem-figures/templates/pie.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/circles.sector_area.PI.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/pi-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "circles.sector_area.PI.P.png",
+   "mobileFile": "circles.sector_area.PI.P.m375.png",
+   "archetypeId": "ci.sector_area.PI.P.chain2",
+   "seed": 11,
+   "signature": "pie",
+   "stimulus": "The pie chart shown gives the favorite sport of the students surveyed at a school. The size of each section is labeled as its central angle in degrees. The pie chart is drawn as a circle with a radius of 40 inches. The combined area of the sections \"Swimming\" and \"Volleyball\" is $k\\pi$ square inches. Study the pie chart carefully before answering.",
+   "question": "What is the value of $k$?",
+   "options": [
+    "1600",
+    "560",
+    "1040",
+    "480"
+   ],
+   "correctIndex": 2,
+   "answer": "1040",
+   "explanation": "(1) 원그래프에서 각 부채꼴의 값을 읽는다: Tennis 72°, Swimming 108°, Soccer 54°, Volleyball 126°. (2) 두 부채꼴의 비율 = 30% + 35% = 65% 이다. (3) 원 전체의 넓이 = π × 40² = 1600π 이다. (4) 1600π × 0.65 = 1040π 이다. (5) 따라서 답은 1040 이다. 따라서 정답은 1040이다.",
+   "structuralIssues": []
+  }
+ ]
+}

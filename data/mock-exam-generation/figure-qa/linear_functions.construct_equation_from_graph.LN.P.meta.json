@@ -1,0 +1,43 @@
+{
+ "itemId": "linear_functions.construct_equation_from_graph.LN.P",
+ "generatedAt": "2026-10-07T05:02:00.546Z",
+ "codeHash": "8e23c56d8324db6decc93cb84c70af6003923ade5285871bcb6116a6a89a1834",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/coordinate-plane.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/graph-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/linear_functions.construct_equation_from_graph.LN.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "linear_functions.construct_equation_from_graph.LN.P.png",
+   "mobileFile": "linear_functions.construct_equation_from_graph.LN.P.m375.png",
+   "archetypeId": "lf.construct_equation_from_graph.LN.P.repr_shift",
+   "seed": 11,
+   "signature": "plane",
+   "stimulus": "In the graph shown, the amount of water pumped depends linearly on the number of hours a pump runs. Let $x$ represent the number of hours a pump runs, in hours, and let $y$ represent the amount of water pumped, in gallons.",
+   "question": "Which equation gives $y$ in terms of $x$? $y =$",
+   "options": [
+    "$15x + 5$",
+    "$5x + 15$",
+    "$5x + 30$",
+    "$10x + 15$"
+   ],
+   "correctIndex": 1,
+   "answer": "$5x + 15$",
+   "explanation": "(1) 그래프에 표시된 두 점 (3, 30) 과 (5, 40) 을 읽는다. (2) 기울기 = (40 - 30) ÷ (5 - 3) = 5 이다. (3) x = 0 일 때 값: 30 - (5) × 3 = 15 이다. (4) 식: y = 5x + 15 이다. (5) 그래프의 다른 점 (7, 50) 로 확인한다. 따라서 정답은 $5x + 15$이다.",
+   "structuralIssues": []
+  }
+ ]
+}

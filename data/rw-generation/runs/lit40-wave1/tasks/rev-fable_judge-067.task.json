@@ -1,0 +1,330 @@
+{
+ "schema": "rw-session-task/v1",
+ "kind": "review",
+ "role": "fable_judge",
+ "runId": "lit40-wave1",
+ "taskId": "rev-fable_judge-067",
+ "chunkId": "rev-fable_judge-067",
+ "suggestedModel": "fable",
+ "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-fable_judge-067.result.json",
+ "outputSchema": {
+  "chunkId": "청크 ID",
+  "model": "fable",
+  "items": [
+   {
+    "candidateId": "id",
+    "picked_letter": "A|B|C|D",
+    "other_defensible": "정답 외 방어 가능한 선택지가 있으면 true",
+    "est_difficulty": "easy|medium|hard (실제 체감, 요청 난이도에 맞추지 말 것)",
+    "hard_fit": "실제 SAT hard 수준의 사고 단계가 필요하면 true(지문 길이·난어만이면 false)",
+    "plausible_distractors": "오답 3개가 모두 그럴듯하고 서로 다른 오개념에서 나왔으면 true",
+    "length_balanced": "네 선택지 길이·구체성이 비슷해 정답이 형식으로 드러나지 않으면 true",
+    "multi_answer_risk": "복수 정답 위험이 있으면 true",
+    "issues": "한 줄 메모"
+   }
+  ]
+ },
+ "items": [
+  {
+   "candidateId": "lit40-easy-04-010",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "easy",
+   "passage": "Rushes that grow by the black water\nWhen will I see you more?\nWhen will the sorrowful heart forget you,\nLand of the green, green shore?\nWhen will the field and the small cabin\nSee us more\nIn the old country?\n\nWhat is to me all the gold yonder?\nShe that bore me is gone.\nKnees that dandled and hands that blessed me\nColder than any stone;\nStranger to me than the face of strangers\nAre my own\nIn the old country.",
+   "question": "As used in the text, the phrase “Colder than any stone” most nearly suggests that the speaker's mother",
+   "options": [
+    "was strict and unkind to her child",
+    "lives in a harsh, wintry place",
+    "has died and is beyond the speaker's reach",
+    "no longer remembers the speaker"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-04-012",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "easy",
+   "passage": "The purpose of the ministry filled him with shame and indignation. Confronted abruptly with the course which four months before had seemed to him natural and proper, the shock brought out the fulness of the change through which he had passed meantime. He has no illusions about Corsica. The inhabitants had disappointed all the expectations of the British,--\"At a peace I should rejoice at having given up the island.\" But the days passing over his head had brought wider and maturer views of the general policy of Great Britain, as well as increasing faith in the powers of the fleet, vigorously used in aggressive warfare.",
+   "question": "As used in the text, the phrase “the days passing over his head” most nearly suggests",
+   "options": [
+    "the gradual passing of time that broadened his understanding",
+    "a series of storms that damaged the fleet",
+    "the many orders he received from the ministry",
+    "the burden of his growing age and illness"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-04-019",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "easy",
+   "passage": "The heartfelt emotion which thrilled in these words would have softened a woman less self-willed, less hardened in her own caprices than Lady Sarah. As it was, she was only frightened, not touched to tenderness. It was he who was ashamed of the feelings which threatened to overpower him.\n\nAshamed of his own weakness, and fearing that he was only irritating instead of softening her, he suddenly let her go, and raising her hand to his lips, pressed one tender kiss upon it and then, turning sharply away, felt in his pocket for the keys of his gallery and went out of the study.\n\nLady Sarah listened a few moments, until she heard the key turn in the gallery door, and knew that her husband had shut himself in with his treasures for the evening.",
+   "question": "Which choice best describes how the tone changes over the course of the text?",
+   "options": [
+    "It moves from playful teasing to joyful reconciliation.",
+    "It moves from intense emotion to a quiet, lonely withdrawal.",
+    "It moves from cold anger to open celebration.",
+    "It moves from calm description to a violent quarrel."
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-04-021",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "easy",
+   "passage": "What great race has ever been won by any man, or by any nation, without some such fall during its course? Have we not all declared that some check to that career was necessary? Men in their pursuit of intelligence had forgotten to be honest; in struggling for greatness they had discarded purity. The nation has been great, but the statesmen of the nation have been little. Men have hardly been ambitious to govern, but they have coveted the wages of governors. Corruption has crept into high places,--into places that should have been high,--till of all holes and corners in the land they have become the lowest. No public man has been trusted for ordinary honesty.",
+   "question": "Which choice best describes the shift in tone that occurs in the text?",
+   "options": [
+    "From bitter resentment of a rival nation to cautious praise of its leaders",
+    "From playful mockery of statesmen to sincere sympathy for their burdens",
+    "From hopeful anticipation of reform to quiet resignation about failure",
+    "From reflective acceptance of a setback to blunt condemnation of corruption"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-04-022",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "text_structure",
+   "requestedDifficulty": "easy",
+   "passage": "Upon mentioning this I found that it had been noticed in elm avenues and groups a hundred miles distant, so that it is not a local circumstance.\n\nAs far as yet appears, the elms do not seem materially injured, the damage being outwardly confined to the bough attacked. These brown spots looked very remarkable just after the trees had become green. They were quite distinct from the damage caused by the snow of October 1880. The boughs broken by the snow had leaves upon them which at once turned brown, and in the case of the oak were visible, the following spring, as brown spots among the green.",
+   "question": "Which choice best describes the overall structure of the text?",
+   "options": [
+    "It notes that a tree condition is widespread, assesses its effects, and separates it from earlier damage.",
+    "It explains the cause of a tree disease, then proposes a method for preventing its spread.",
+    "It recalls a snowstorm in detail, then argues that the storm permanently weakened the elms.",
+    "It compares elms and oaks in general, then concludes that oaks are the hardier trees."
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-04-023",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "text_structure",
+   "requestedDifficulty": "easy",
+   "passage": "Really, Sir Hugo was worthy of it on his own individual merits. He was a fine young fellow. The foundation of his principles had been laid by a good mother--a widow who had never ceased to mourn for the husband of her youth, whose son, her only child, was the apple of her eye. From her he had derived a remarkable amount of ingenuousness and a dash of enthusiasm, which such intercourse with the world as he had commanded had failed to extinguish. He was regarded as something of a young Quixote at his University, which had been his world for the most part, but he had possessed wit to defend his views. He was manly, rather rash, and a little thoughtless; but in his very thoughtlessness he was generous and honest--a lad to be liked first and trusted afterwards.",
+   "question": "Which choice best describes the overall structure of the text?",
+   "options": [
+    "It describes a mother's grief, then shows how her sorrow eventually ruined her son.",
+    "It asserts a young man's merit, traces the source of his principles, and summarizes his traits.",
+    "It recounts a university quarrel, then explains how a young man was punished for it.",
+    "It lists a young man's faults, then reveals that others refused to trust him."
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-04-024",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "text_structure",
+   "requestedDifficulty": "easy",
+   "passage": "We cannot suppose that life would develop in any important degree in a region of perpetual frost, such as the polar regions of our globe. But we do not find any end to it as the climate becomes warmer. On the contrary, every one knows that the tropics are the most fertile regions of the globe in its production. The luxuriance of the vegetation and the number of the animals continually increase the more tropical the climate becomes. Where the limit may be set no one can say. But it would doubtless be far above the present temperature of the equatorial regions.\n\nIt has often been said that this does not apply to the human race, that men lack vigor in the tropics.",
+   "question": "Which choice best describes the overall structure of the text?",
+   "options": [
+    "It describes polar wildlife, then argues that cold regions support the most life.",
+    "It questions whether tropical regions exist, then defends that claim with examples.",
+    "It presents a claim linking warmth to abundant life, then introduces an objection about humans.",
+    "It praises human vigor in the tropics, then explains why vegetation is scarce there."
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-04-029",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "easy",
+   "passage": "When I arrived at home I of course went to see Lottie before talking with any one else. I found my darling all that heart could wish. She was more beautiful, more charming in my eyes than ever. The large, dreamy blue eyes were swimming in tears of joy as I held her to my glad heart, and I saw a look of love that satisfied me that I was the possessor of a treasure of great value. I lingered by my darling’s side until late at night. Every little trifling incident was described--the days of old were alluded to and discussed, while the present and future came in for a full share.",
+   "question": "Which choice best describes the narrator's attitude toward Lottie?",
+   "options": [
+    "Deep affection and delight in her company",
+    "Polite respect mixed with quiet doubt",
+    "Mild irritation at her emotional display",
+    "Guilty unease about his long absence"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-04-031",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "easy",
+   "passage": "We had sunk together into the slough of despond, and she contrived to scramble out of it and leave me in the mire. She was clever enough to make use of me to accomplish her escape, sent me out among hard-hearted humanity to borrow, beg, or steal the means by which she meant to separate herself from my fallen fortunes. Do you think I came across the world to seek for her? No, Dick, I am not such a fool. I have been cheated once. I shall never be her dupe again. Do you think I could ever trust her any more?--that if fortune smiled upon us, and she pretended to love me, I could feel any confidence in her truth, any security in her affection?",
+   "question": "Which choice best states the main idea of the text?",
+   "options": [
+    "The speaker hopes to find the woman and win back her love.",
+    "The speaker blames himself alone for their shared misfortune.",
+    "The speaker insists he will never again trust a woman who deceived him.",
+    "The speaker asks Dick to help him borrow money for a journey."
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-04-033",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "easy",
+   "passage": "Eight miles meant nearly three hours’ steaming for us, and I could also see suspicious ripples at the upper end of the reach. Nevertheless, I was annoyed beyond expression at the delay, and most unreasonably, too, since one night more could not matter much after so many months. As we had plenty of wood, and caution was the word, I brought up in the middle of the stream. The reach was narrow, straight, with high sides like a railway cutting. The dusk came gliding into it long before the sun had set. The current ran smooth and swift, but a dumb immobility sat on the banks.",
+   "question": "As used in the text, the phrase “a dumb immobility sat on the banks” most nearly suggests that the riverbanks",
+   "options": [
+    "were crowded with people waiting silently",
+    "were too steep for the boat to approach",
+    "were slowly being worn away by the current",
+    "were eerily silent and still"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-04-034",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "easy",
+   "passage": "\"I had grottos, and fountains, and orange-tree groves,\nI had all that enchantment has told;\nI had sweet shady walks for the gods and their loves,\nI had mountains of coral and gold.\n\n\"But a storm that I felt not had risen and rolled,\nWhile wrapped in a slumber I lay;\nAnd when I looked out in the morning, behold,\nMy Castle was carried away.\n\n\"It passed over rivers and valleys and groves,\nThe world it was all in my view;\nI thought of my friends, of their fates, of their loves,\nAnd often, full often, of you.",
+   "question": "As used in the text, the phrase “My Castle was carried away” most nearly suggests that the speaker",
+   "options": [
+    "lost the splendid world of the imagination",
+    "fled from a real fortress during a storm",
+    "gave away riches to friends",
+    "moved to a new home in the mountains"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-04-043",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "easy",
+   "passage": "Conrad Dasipodius was a man for whom the simplest objects of daily life had borne a significance. It had been his nature to see “sermons in stones, and good in everything”; and could he have looked on this scene before him, with all its wedded glory of nature and of art, he must have found in it some anodyne for the gnawing pain of hope disappointed. But he could have no part now in such joys, and to him the world was a dull leaden-hued wilderness. Winter and summer, day and night, in all the years to come, the same. A dismal chaos, a dark and thorny way indeed, where love and friendship had left him in his utmost need, to blunder on alone.",
+   "question": "Which choice best describes how the tone of the text shifts?",
+   "options": [
+    "From mild amusement to quiet pride in Conrad's achievements",
+    "From harsh criticism to gentle forgiveness of Conrad's faults",
+    "From restless anticipation to calm contentment with the scene",
+    "From appreciation of Conrad's outlook to bleak desolation"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-04-044",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "text_structure",
+   "requestedDifficulty": "easy",
+   "passage": "The girl, tall and strong, walking with the ease that comes from health and a steadfast mind; the eager, restless boy running and jumping by her side. Barebone must have seen them as soon as they saw him. They were part of Farlingford, these two. He had a sudden feeling of having been away for years, with this difference--that he came back and found nothing changed. Whereas, in reality, he who returns after a long absence usually finds no one awaiting him.\n\nHe did as Sep had foretold--crossing to the far side of the river, and then gaining the mouth of the creek in one tack.",
+   "question": "Which choice best describes the overall structure of the text?",
+   "options": [
+    "It describes two figures, gives Barebone's reflection on returning, then shows him sailing.",
+    "It recounts a quarrel between two figures, then explains why Barebone left the town.",
+    "It praises Farlingford's landscape, then lists the changes Barebone finds on his return.",
+    "It presents Sep's warning about the river, then describes the girl's response to it."
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-04-045",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "text_structure",
+   "requestedDifficulty": "easy",
+   "passage": "The dawn was breaking, and at its first sign the escort of Saladin’s soldiers had turned and left them, saying that now they were safe in their own country. All night they had ridden fast and far. The plain was behind them, and their road ran among hills. Suddenly it turned, and in the flaming lights of the new-born day showed them a sight so beautiful that for a moment all that little company drew rein to gaze. For yonder before them, though far away as yet, throned upon her hills, stood the holy city of Jerusalem.",
+   "question": "Which choice best describes the overall structure of the text?",
+   "options": [
+    "It explains why the escort left, then describes a battle with Saladin's soldiers.",
+    "It recounts a night's journey into the hills, then reveals a striking view of Jerusalem.",
+    "It describes Jerusalem in detail, then recalls the hardships of reaching the city.",
+    "It contrasts the plain with the hills, then explains why the company turned back."
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-04-048",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "easy",
+   "passage": "At the supper-table he talked much and well, exceedingly well, I thought, except when he touched on the war, which he was continually doing, and then I was on tenter-hooks. His point of view was so opposed to ours as to threaten in several instances to bring on an engagement all along the line. This calamity was averted by my passing something to him at the critical moment. Now I checked his advance by a slice of cold tongue, and now I turned his flank with another cup of tea; but I questioned my ability to preserve peace throughout the evening. Before the meal was at an end there had crept into Clara's manner a polite calmness which I never liked to see.",
+   "question": "Which choice best describes the narrator's attitude toward the supper conversation?",
+   "options": [
+    "Bored indifference to the guest's lengthy remarks about the war",
+    "Open hostility toward the guest's opinions about the war",
+    "Delighted admiration for Clara's skill in calming the guest",
+    "Anxious but wry watchfulness over a dispute about to erupt"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-04-051",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "easy",
+   "passage": "There was no time to protest or to ask questions. And Juliette felt herself passed on from one pair of strong arms to another, until she was standing on the deck under the humming rigging, surrounded by men who seemed huge in their gleaming oil-skins.\n\n\"This way, mademoiselle,\" said one, who was even larger than the others, in English, of which she understood enough to catch his meaning. \"I will take you to your father. Show a light this way, one of you.\"\n\nHis fingers closed round her arm, and he led her, unconscious of a strength that almost lifted her from her feet, toward an open door, where a lamp burnt dimly within.",
+   "question": "Which choice best states the main idea of the text?",
+   "options": [
+    "Juliette argues with the sailors before agreeing to board.",
+    "Juliette struggles to understand the sailors' foreign speech.",
+    "Juliette is brought aboard and led toward her father.",
+    "Juliette searches the deck alone for a lamp and a door."
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-04-052",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "easy",
+   "passage": "I bent my head, and seemed to receive the Atlantic on my back. The world seemed going to destruction. I could not see anything, the flood poured down savagely. I raised my head, with open mouth, and the most of the American cataract went down my throat. If I had sprung a leak now I had been lost. And at this moment I discovered that the bridge had ceased, and we must trust for a foothold to the slippery and precipitous rocks. I never was so scared before and survived it. But we got through at last, and emerged into the open day, where we could stand in front of the laced and frothy and seething world of descending water, and look at it.",
+   "question": "As used in the text, the phrase “receive the Atlantic on my back” most nearly suggests",
+   "options": [
+    "the overwhelming weight of the falling water",
+    "the narrator's wish to swim across the ocean",
+    "the chill of a sea breeze along the bridge",
+    "the narrator's pride in carrying heavy loads"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-04-053",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "easy",
+   "passage": "I slipped through one of these cracks, went up a swept and ungarnished staircase, as arid as a desert, and opened the first door I came to. Two women, one fat and the other slim, sat on straw-bottomed chairs, knitting black wool. The slim one got up and walked straight at me—still knitting with downcast eyes—and only just as I began to think of getting out of her way, as you would for a somnambulist, stood still, and looked up. Her dress was as plain as an umbrella-cover, and she turned round without a word and preceded me into a waiting-room. I gave my name, and looked about. Deal table in the middle, plain chairs all round the walls, on one end a large shining map, marked with all the colours of a rainbow.",
+   "question": "As used in the text, the phrase “as arid as a desert” most nearly suggests",
+   "options": [
+    "a place made dangerous by heat and dust",
+    "a space that is bare and without warmth",
+    "a building located in a remote dry region",
+    "a stairway too steep and long to climb"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-04-055",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "easy",
+   "passage": "One last word about our amiable author. His great book remains eminently alive, and wields after two centuries and a half a permanent influence. When you refer to it, you must not expect a logical development of philosophical theory. We do not look to find a system in a book of maxims and portraits. La Bruyere was a moralist, pure and simple; he awakened sensibility, he encouraged refinement, and he exposed the vicious difference which existed around him--and which no one else had seemed to notice--that the possession of more or fewer pieces of money made between human beings otherwise equal.",
+   "question": "As used in the text, the phrase “eminently alive” most nearly suggests that the book",
+   "options": [
+    "is filled with vivid scenes of physical action",
+    "describes its author's long and healthy life",
+    "was recently rediscovered after being lost",
+    "continues to be widely read and influential"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-04-056",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "easy",
+   "passage": "I took off its hat and cloak to see if there were any strings cutting its neck or choking it. Then I glanced at the feet, and lo! there was the trouble. The boots were at least one size too small. I took them off, and the stockings, too, and found the feet as cold as ice and the prints of the stockings clearly traced on the tender flesh. We all know the agony of tight boots. I rubbed the feet and held them in my hands until they were warm, when the poor little thing fell asleep.",
+   "question": "As used in the text, the phrase “as cold as ice” most nearly suggests that the child's feet were",
+   "options": [
+    "painfully chilled from poor circulation",
+    "unusually hard and stiff from walking",
+    "frozen solid after a winter accident",
+    "pale because the stockings were white"
+   ]
+  }
+ ],
+ "instructions": "당신은 디지털 SAT 독립 채점자다. 정답 표시가 없다. 먼저 문항을 직접 풀고(picked_letter), 이어서 난이도·hard 적합·오답 품질을 판정한다. 요청 난이도에 맞추려 하지 말고 실제로 느끼는 대로 답한다.\n청크 rev-fable_judge-067 — 20문항.\n출력: Write 도구로 정확히 이 경로에 JSON 한 파일을 쓴다 → /Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-fable_judge-067.result.json\n출력 JSON 스키마(예시 구조): {\"chunkId\":\"청크 ID\",\"model\":\"fable\",\"items\":[{\"candidateId\":\"id\",\"picked_letter\":\"A|B|C|D\",\"other_defensible\":\"정답 외 방어 가능한 선택지가 있으면 true\",\"est_difficulty\":\"easy|medium|hard (실제 체감, 요청 난이도에 맞추지 말 것)\",\"hard_fit\":\"실제 SAT hard 수준의 사고 단계가 필요하면 true(지문 길이·난어만이면 false)\",\"plausible_distractors\":\"오답 3개가 모두 그럴듯하고 서로 다른 오개념에서 나왔으면 true\",\"length_balanced\":\"네 선택지 길이·구체성이 비슷해 정답이 형식으로 드러나지 않으면 true\",\"multi_answer_risk\":\"복수 정답 위험이 있으면 true\",\"issues\":\"한 줄 메모\"}]}\n허용 값: picked_letter ∈ {A,B,C,D}, 불리언 필드는 true/false, est_difficulty ∈ {easy,medium,hard}. candidateId 를 바꾸지 않고 모든 항목에 답한다.\n금지: 결과 파일 외의 파일 생성·수정, 다른 명령 실행, 문항 수정·재작성. 끝나면 'done <항목 수>' 한 줄만 답한다.\n\n## 문항\n### lit40-easy-04-010 — skill words_in_context · 유형 figurative_language · 요청 난이도 easy\n[지문]\nRushes that grow by the black water\nWhen will I see you more?\nWhen will the sorrowful heart forget you,\nLand of the green, green shore?\nWhen will the field and the small cabin\nSee us more\nIn the old country?\n\nWhat is to me all the gold yonder?\nShe that bore me is gone.\nKnees that dandled and hands that blessed me\nColder than any stone;\nStranger to me than the face of strangers\nAre my own\nIn the old country.\n\n[질문] As used in the text, the phrase “Colder than any stone” most nearly suggests that the speaker's mother\nA) was strict and unkind to her child\nB) lives in a harsh, wintry place\nC) has died and is beyond the speaker's reach\nD) no longer remembers the speaker\n### lit40-easy-04-012 — skill words_in_context · 유형 figurative_language · 요청 난이도 easy\n[지문]\nThe purpose of the ministry filled him with shame and indignation. Confronted abruptly with the course which four months before had seemed to him natural and proper, the shock brought out the fulness of the change through which he had passed meantime. He has no illusions about Corsica. The inhabitants had disappointed all the expectations of the British,--\"At a peace I should rejoice at having given up the island.\" But the days passing over his head had brought wider and maturer views of the general policy of Great Britain, as well as increasing faith in the powers of the fleet, vigorously used in aggressive warfare.\n\n[질문] As used in the text, the phrase “the days passing over his head” most nearly suggests\nA) the gradual passing of time that broadened his understanding\nB) a series of storms that damaged the fleet\nC) the many orders he received from the ministry\nD) the burden of his growing age and illness\n### lit40-easy-04-019 — skill text_structure_purpose · 유형 tone_shift · 요청 난이도 easy\n[지문]\nThe heartfelt emotion which thrilled in these words would have softened a woman less self-willed, less hardened in her own caprices than Lady Sarah. As it was, she was only frightened, not touched to tenderness. It was he who was ashamed of the feelings which threatened to overpower him.\n\nAshamed of his own weakness, and fearing that he was only irritating instead of softening her, he suddenly let her go, and raising her hand to his lips, pressed one tender kiss upon it and then, turning sharply away, felt in his pocket for the keys of his gallery and went out of the study.\n\nLady Sarah listened a few moments, until she heard the key turn in the gallery door, and knew that her husband had shut himself in with his treasures for the evening.\n\n[질문] Which choice best describes how the tone changes over the course of the text?\nA) It moves from playful teasing to joyful reconciliation.\nB) It moves from intense emotion to a quiet, lonely withdrawal.\nC) It moves from cold anger to open celebration.\nD) It moves from calm description to a violent quarrel.\n### lit40-easy-04-021 — skill text_structure_purpose · 유형 tone_shift · 요청 난이도 easy\n[지문]\nWhat great race has ever been won by any man, or by any nation, without some such fall during its course? Have we not all declared that some check to that career was necessary? Men in their pursuit of intelligence had forgotten to be honest; in struggling for greatness they had discarded purity. The nation has been great, but the statesmen of the nation have been little. Men have hardly been ambitious to govern, but they have coveted the wages of governors. Corruption has crept into high places,--into places that should have been high,--till of all holes and corners in the land they have become the lowest. No public man has been trusted for ordinary honesty.\n\n[질문] Which choice best describes the shift in tone that occurs in the text?\nA) From bitter resentment of a rival nation to cautious praise of its leaders\nB) From playful mockery of statesmen to sincere sympathy for their burdens\nC) From hopeful anticipation of reform to quiet resignation about failure\nD) From reflective acceptance of a setback to blunt condemnation of corruption\n### lit40-easy-04-022 — skill text_structure_purpose · 유형 text_structure · 요청 난이도 easy\n[지문]\nUpon mentioning this I found that it had been noticed in elm avenues and groups a hundred miles distant, so that it is not a local circumstance.\n\nAs far as yet appears, the elms do not seem materially injured, the damage being outwardly confined to the bough attacked. These brown spots looked very remarkable just after the trees had become green. They were quite distinct from the damage caused by the snow of October 1880. The boughs broken by the snow had leaves upon them which at once turned brown, and in the case of the oak were visible, the following spring, as brown spots among the green.\n\n[질문] Which choice best describes the overall structure of the text?\nA) It notes that a tree condition is widespread, assesses its effects, and separates it from earlier damage.\nB) It explains the cause of a tree disease, then proposes a method for preventing its spread.\nC) It recalls a snowstorm in detail, then argues that the storm permanently weakened the elms.\nD) It compares elms and oaks in general, then concludes that oaks are the hardier trees.\n### lit40-easy-04-023 — skill text_structure_purpose · 유형 text_structure · 요청 난이도 easy\n[지문]\nReally, Sir Hugo was worthy of it on his own individual merits. He was a fine young fellow. The foundation of his principles had been laid by a good mother--a widow who had never ceased to mourn for the husband of her youth, whose son, her only child, was the apple of her eye. From her he had derived a remarkable amount of ingenuousness and a dash of enthusiasm, which such intercourse with the world as he had commanded had failed to extinguish. He was regarded as something of a young Quixote at his University, which had been his world for the most part, but he had possessed wit to defend his views. He was manly, rather rash, and a little thoughtless; but in his very thoughtlessness he was generous and honest--a lad to be liked first and trusted afterwards.\n\n[질문] Which choice best describes the overall structure of the text?\nA) It describes a mother's grief, then shows how her sorrow eventually ruined her son.\nB) It asserts a young man's merit, traces the source of his principles, and summarizes his traits.\nC) It recounts a university quarrel, then explains how a young man was punished for it.\nD) It lists a young man's faults, then reveals that others refused to trust him.\n### lit40-easy-04-024 — skill text_structure_purpose · 유형 text_structure · 요청 난이도 easy\n[지문]\nWe cannot suppose that life would develop in any important degree in a region of perpetual frost, such as the polar regions of our globe. But we do not find any end to it as the climate becomes warmer. On the contrary, every one knows that the tropics are the most fertile regions of the globe in its production. The luxuriance of the vegetation and the number of the animals continually increase the more tropical the climate becomes. Where the limit may be set no one can say. But it would doubtless be far above the present temperature of the equatorial regions.\n\nIt has often been said that this does not apply to the human race, that men lack vigor in the tropics.\n\n[질문] Which choice best describes the overall structure of the text?\nA) It describes polar wildlife, then argues that cold regions support the most life.\nB) It questions whether tropical regions exist, then defends that claim with examples.\nC) It presents a claim linking warmth to abundant life, then introduces an objection about humans.\nD) It praises human vigor in the tropics, then explains why vegetation is scarce there.\n### lit40-easy-04-029 — skill central_ideas_details · 유형 narrator_attitude · 요청 난이도 easy\n[지문]\nWhen I arrived at home I of course went to see Lottie before talking with any one else. I found my darling all that heart could wish. She was more beautiful, more charming in my eyes than ever. The large, dreamy blue eyes were swimming in tears of joy as I held her to my glad heart, and I saw a look of love that satisfied me that I was the possessor of a treasure of great value. I lingered by my darling’s side until late at night. Every little trifling incident was described--the days of old were alluded to and discussed, while the present and future came in for a full share.\n\n[질문] Which choice best describes the narrator's attitude toward Lottie?\nA) Deep affection and delight in her company\nB) Polite respect mixed with quiet doubt\nC) Mild irritation at her emotional display\nD) Guilty unease about his long absence\n### lit40-easy-04-031 — skill central_ideas_details · 유형 main_idea_or_purpose · 요청 난이도 easy\n[지문]\nWe had sunk together into the slough of despond, and she contrived to scramble out of it and leave me in the mire. She was clever enough to make use of me to accomplish her escape, sent me out among hard-hearted humanity to borrow, beg, or steal the means by which she meant to separate herself from my fallen fortunes. Do you think I came across the world to seek for her? No, Dick, I am not such a fool. I have been cheated once. I shall never be her dupe again. Do you think I could ever trust her any more?--that if fortune smiled upon us, and she pretended to love me, I could feel any confidence in her truth, any security in her affection?\n\n[질문] Which choice best states the main idea of the text?\nA) The speaker hopes to find the woman and win back her love.\nB) The speaker blames himself alone for their shared misfortune.\nC) The speaker insists he will never again trust a woman who deceived him.\nD) The speaker asks Dick to help him borrow money for a journey.\n### lit40-easy-04-033 — skill words_in_context · 유형 figurative_language · 요청 난이도 easy\n[지문]\nEight miles meant nearly three hours’ steaming for us, and I could also see suspicious ripples at the upper end of the reach. Nevertheless, I was annoyed beyond expression at the delay, and most unreasonably, too, since one night more could not matter much after so many months. As we had plenty of wood, and caution was the word, I brought up in the middle of the stream. The reach was narrow, straight, with high sides like a railway cutting. The dusk came gliding into it long before the sun had set. The current ran smooth and swift, but a dumb immobility sat on the banks.\n\n[질문] As used in the text, the phrase “a dumb immobility sat on the banks” most nearly suggests that the riverbanks\nA) were crowded with people waiting silently\nB) were too steep for the boat to approach\nC) were slowly being worn away by the current\nD) were eerily silent and still\n### lit40-easy-04-034 — skill words_in_context · 유형 figurative_language · 요청 난이도 easy\n[지문]\n\"I had grottos, and fountains, and orange-tree groves,\nI had all that enchantment has told;\nI had sweet shady walks for the gods and their loves,\nI had mountains of coral and gold.\n\n\"But a storm that I felt not had risen and rolled,\nWhile wrapped in a slumber I lay;\nAnd when I looked out in the morning, behold,\nMy Castle was carried away.\n\n\"It passed over rivers and valleys and groves,\nThe world it was all in my view;\nI thought of my friends, of their fates, of their loves,\nAnd often, full often, of you.\n\n[질문] As used in the text, the phrase “My Castle was carried away” most nearly suggests that the speaker\nA) lost the splendid world of the imagination\nB) fled from a real fortress during a storm\nC) gave away riches to friends\nD) moved to a new home in the mountains\n### lit40-easy-04-043 — skill text_structure_purpose · 유형 tone_shift · 요청 난이도 easy\n[지문]\nConrad Dasipodius was a man for whom the simplest objects of daily life had borne a significance. It had been his nature to see “sermons in stones, and good in everything”; and could he have looked on this scene before him, with all its wedded glory of nature and of art, he must have found in it some anodyne for the gnawing pain of hope disappointed. But he could have no part now in such joys, and to him the world was a dull leaden-hued wilderness. Winter and summer, day and night, in all the years to come, the same. A dismal chaos, a dark and thorny way indeed, where love and friendship had left him in his utmost need, to blunder on alone.\n\n[질문] Which choice best describes how the tone of the text shifts?\nA) From mild amusement to quiet pride in Conrad's achievements\nB) From harsh criticism to gentle forgiveness of Conrad's faults\nC) From restless anticipation to calm contentment with the scene\nD) From appreciation of Conrad's outlook to bleak desolation\n### lit40-easy-04-044 — skill text_structure_purpose · 유형 text_structure · 요청 난이도 easy\n[지문]\nThe girl, tall and strong, walking with the ease that comes from health and a steadfast mind; the eager, restless boy running and jumping by her side. Barebone must have seen them as soon as they saw him. They were part of Farlingford, these two. He had a sudden feeling of having been away for years, with this difference--that he came back and found nothing changed. Whereas, in reality, he who returns after a long absence usually finds no one awaiting him.\n\nHe did as Sep had foretold--crossing to the far side of the river, and then gaining the mouth of the creek in one tack.\n\n[질문] Which choice best describes the overall structure of the text?\nA) It describes two figures, gives Barebone's reflection on returning, then shows him sailing.\nB) It recounts a quarrel between two figures, then explains why Barebone left the town.\nC) It praises Farlingford's landscape, then lists the changes Barebone finds on his return.\nD) It presents Sep's warning about the river, then describes the girl's response to it.\n### lit40-easy-04-045 — skill text_structure_purpose · 유형 text_structure · 요청 난이도 easy\n[지문]\nThe dawn was breaking, and at its first sign the escort of Saladin’s soldiers had turned and left them, saying that now they were safe in their own country. All night they had ridden fast and far. The plain was behind them, and their road ran among hills. Suddenly it turned, and in the flaming lights of the new-born day showed them a sight so beautiful that for a moment all that little company drew rein to gaze. For yonder before them, though far away as yet, throned upon her hills, stood the holy city of Jerusalem.\n\n[질문] Which choice best describes the overall structure of the text?\nA) It explains why the escort left, then describes a battle with Saladin's soldiers.\nB) It recounts a night's journey into the hills, then reveals a striking view of Jerusalem.\nC) It describes Jerusalem in detail, then recalls the hardships of reaching the city.\nD) It contrasts the plain with the hills, then explains why the company turned back.\n### lit40-easy-04-048 — skill central_ideas_details · 유형 narrator_attitude · 요청 난이도 easy\n[지문]\nAt the supper-table he talked much and well, exceedingly well, I thought, except when he touched on the war, which he was continually doing, and then I was on tenter-hooks. His point of view was so opposed to ours as to threaten in several instances to bring on an engagement all along the line. This calamity was averted by my passing something to him at the critical moment. Now I checked his advance by a slice of cold tongue, and now I turned his flank with another cup of tea; but I questioned my ability to preserve peace throughout the evening. Before the meal was at an end there had crept into Clara's manner a polite calmness which I never liked to see.\n\n[질문] Which choice best describes the narrator's attitude toward the supper conversation?\nA) Bored indifference to the guest's lengthy remarks about the war\nB) Open hostility toward the guest's opinions about the war\nC) Delighted admiration for Clara's skill in calming the guest\nD) Anxious but wry watchfulness over a dispute about to erupt\n### lit40-easy-04-051 — skill central_ideas_details · 유형 main_idea_or_purpose · 요청 난이도 easy\n[지문]\nThere was no time to protest or to ask questions. And Juliette felt herself passed on from one pair of strong arms to another, until she was standing on the deck under the humming rigging, surrounded by men who seemed huge in their gleaming oil-skins.\n\n\"This way, mademoiselle,\" said one, who was even larger than the others, in English, of which she understood enough to catch his meaning. \"I will take you to your father. Show a light this way, one of you.\"\n\nHis fingers closed round her arm, and he led her, unconscious of a strength that almost lifted her from her feet, toward an open door, where a lamp burnt dimly within.\n\n[질문] Which choice best states the main idea of the text?\nA) Juliette argues with the sailors before agreeing to board.\nB) Juliette struggles to understand the sailors' foreign speech.\nC) Juliette is brought aboard and led toward her father.\nD) Juliette searches the deck alone for a lamp and a door.\n### lit40-easy-04-052 — skill words_in_context · 유형 figurative_language · 요청 난이도 easy\n[지문]\nI bent my head, and seemed to receive the Atlantic on my back. The world seemed going to destruction. I could not see anything, the flood poured down savagely. I raised my head, with open mouth, and the most of the American cataract went down my throat. If I had sprung a leak now I had been lost. And at this moment I discovered that the bridge had ceased, and we must trust for a foothold to the slippery and precipitous rocks. I never was so scared before and survived it. But we got through at last, and emerged into the open day, where we could stand in front of the laced and frothy and seething world of descending water, and look at it.\n\n[질문] As used in the text, the phrase “receive the Atlantic on my back” most nearly suggests\nA) the overwhelming weight of the falling water\nB) the narrator's wish to swim across the ocean\nC) the chill of a sea breeze along the bridge\nD) the narrator's pride in carrying heavy loads\n### lit40-easy-04-053 — skill words_in_context · 유형 figurative_language · 요청 난이도 easy\n[지문]\nI slipped through one of these cracks, went up a swept and ungarnished staircase, as arid as a desert, and opened the first door I came to. Two women, one fat and the other slim, sat on straw-bottomed chairs, knitting black wool. The slim one got up and walked straight at me—still knitting with downcast eyes—and only just as I began to think of getting out of her way, as you would for a somnambulist, stood still, and looked up. Her dress was as plain as an umbrella-cover, and she turned round without a word and preceded me into a waiting-room. I gave my name, and looked about. Deal table in the middle, plain chairs all round the walls, on one end a large shining map, marked with all the colours of a rainbow.\n\n[질문] As used in the text, the phrase “as arid as a desert” most nearly suggests\nA) a place made dangerous by heat and dust\nB) a space that is bare and without warmth\nC) a building located in a remote dry region\nD) a stairway too steep and long to climb\n### lit40-easy-04-055 — skill words_in_context · 유형 figurative_language · 요청 난이도 easy\n[지문]\nOne last word about our amiable author. His great book remains eminently alive, and wields after two centuries and a half a permanent influence. When you refer to it, you must not expect a logical development of philosophical theory. We do not look to find a system in a book of maxims and portraits. La Bruyere was a moralist, pure and simple; he awakened sensibility, he encouraged refinement, and he exposed the vicious difference which existed around him--and which no one else had seemed to notice--that the possession of more or fewer pieces of money made between human beings otherwise equal.\n\n[질문] As used in the text, the phrase “eminently alive” most nearly suggests that the book\nA) is filled with vivid scenes of physical action\nB) describes its author's long and healthy life\nC) was recently rediscovered after being lost\nD) continues to be widely read and influential\n### lit40-easy-04-056 — skill words_in_context · 유형 figurative_language · 요청 난이도 easy\n[지문]\nI took off its hat and cloak to see if there were any strings cutting its neck or choking it. Then I glanced at the feet, and lo! there was the trouble. The boots were at least one size too small. I took them off, and the stockings, too, and found the feet as cold as ice and the prints of the stockings clearly traced on the tender flesh. We all know the agony of tight boots. I rubbed the feet and held them in my hands until they were warm, when the poor little thing fell asleep.\n\n[질문] As used in the text, the phrase “as cold as ice” most nearly suggests that the child's feet were\nA) painfully chilled from poor circulation\nB) unusually hard and stiff from walking\nC) frozen solid after a winter accident\nD) pale because the stockings were white"
+}

@@ -1,0 +1,49 @@
+{
+ "itemId": "coordinate_geometry.parallel_perpendicular_slopes.LN.C",
+ "generatedAt": "2026-10-07T05:02:00.691Z",
+ "codeHash": "6e09e67d8c5ac1f42af7375d660fac19988cc9bd3486c0d92a4999761d98a7b2",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/coordinate-plane.ts",
+  "lib/problem-figures/templates/figure-choice.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/cplane-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/data-c-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/graph-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/coordinate_geometry.parallel_perpendicular_slopes.LN.C.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/ln-b-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/lnc-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/pure-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "coordinate_geometry.parallel_perpendicular_slopes.LN.C.png",
+   "mobileFile": "coordinate_geometry.parallel_perpendicular_slopes.LN.C.m375.png",
+   "archetypeId": "cppc.parallel_perpendicular_slopes.LN.C.repr_shift",
+   "seed": 11,
+   "signature": "figure_choice[plane]",
+   "stimulus": "A designer compares curves on a coordinate grid. The choices shown are four line graphs that share one set of axes.",
+   "question": "Which graph shown is the graph of a line that passes through the point where $x = -6$ and $y = -4$ and is perpendicular to a line whose slope is -2?",
+   "options": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "correctIndex": 1,
+   "answer": "B",
+   "explanation": "(1) 수직이므로 기울기의 곱이 -1: m = -1 ÷ -2 = 0.5 이다. (2) 점 (-6, -4) 을 지나므로 b = -1 이다. (3) 각 선택지 그래프에서 기울기와 y 절편(또는 지나는 점)을 읽는다. (4) 첫째 조건을 만족하지 못하는 그래프를 지운다. (5) 둘째 조건을 만족하지 못하는 그래프를 지운다. (6) 남은 그래프가 정답이다. (7) 다른 그래프는 조건 하나 이상이 어긋난다. 따라서 정답은 B이다.",
+   "structuralIssues": []
+  }
+ ]
+}

@@ -1,0 +1,74 @@
+{
+ "version": "v1-csa-s2-short-mc",
+ "run": "csa-s2-short-mc",
+ "subject": "ap_computer_science_a",
+ "archetypeList": "csa_s2_short_mc",
+ "seed0": 8500,
+ "candidatesPerCell": 1,
+ "capUsd": 1.4,
+ "repair": false,
+ "env": {
+  "AP_REQUIRE_BLUEPRINT": "1",
+  "AP_SUBJECT_NOTES": "1",
+  "AP_FLAT_REVIEW": "1",
+  "AP_MC_CANDS": "3",
+  "AP_SYNC_CONC": "10",
+  "AP_FIXED_WORDING": "1"
+ },
+ "generatorFiles": [
+  "scripts/ap-generation/archetypes/",
+  "lib/ap-generation/subjects/graph-archetypes.json",
+  "lib/ap-generation/gates.ts",
+  "lib/ap-generation/guide-gates.ts",
+  "lib/ap-generation/subjects/calc-ab.ts",
+  "lib/ap-generation/subjects/calc-bc.ts",
+  "lib/ap-generation/part-refine.ts",
+  "lib/ap-generation/blueprint.ts",
+  "lib/ap-generation/review-parse.ts",
+  "lib/ap-generation/generator-defects.ts",
+  "lib/ap-generation/math-wrapping.ts",
+  "lib/ap-generation/frozen-config.ts",
+  "scripts/ap-generation/pipeline2.ts",
+  "scripts/ap-generation/py.ts",
+  "lib/ap-generation/stats-set.ts",
+  "lib/ap-generation/stats-difficulty.ts",
+  "lib/ap-generation/subjects/csa.ts",
+  "lib/ap-generation/subjects/csa-archetypes.json"
+ ],
+ "skipStages": [
+  "gen"
+ ],
+ "hardStopCumulativeUsd": 93.54,
+ "expected": {
+  "generatorHash": "UNFROZEN",
+  "reviewerPromptHash": "UNFROZEN",
+  "difficultyPromptHash": "UNFROZEN",
+  "parserHash": "UNFROZEN",
+  "models": {
+   "gen": "claude-sonnet-5-5",
+   "solve": "claude-opus-5-5",
+   "review": "claude-sonnet-5-5",
+   "difficulty": "claude-sonnet-5-5",
+   "spot": "claude-fable-5-1"
+  },
+  "flags": {
+   "flatReview": true,
+   "subjectNotes": true,
+   "requireBlueprint": true,
+   "legacyItems": false,
+   "repair": false
+  }
+ },
+ "_template": "TEMPLATE, NOT FROZEN (2026-10-13, docs/ap/csa-groundwork.md section 8). Do not run as is: expected hashes are placeholders so --check-only fails on purpose. To use: copy to <name>.v1.json, run `npx tsx scripts/ap-generation/run-frozen.ts --config <copy> --freeze`, commit, then --check-only, and only then the paid run after the owner approves the step. hardStopCumulativeUsd = 80.04 cumulative at the start of the CS A work + the caps of this and every earlier step in the plan (93.44) + a 0.1 margin, assuming every earlier cap is fully used; recompute from `ledger-total.ts` before freezing. Budget stop line 95 USD, hard cap 100 USD (owner decision 2026-10-13).",
+ "_budget_estimate": {
+  "step": "shortfall MC: only the archetypes that cs-assign reports as virtual after the stock is screened; fill STAGE_S2_SHORT_MC first; 3 candidates per cell",
+  "cells": "10 cells (planning assumption; the real list comes from the cs-assign report)",
+  "perCellUsd": "0.117 expected per cell = 3 candidates x 0.039 (Physics/Chemistry/Micro observed 0.039 per MC candidate)",
+  "perCellCapUsd": 0.176,
+  "expectedUsd": "1.17 = 10 single-question equivalents (10 cells; a two-question set counts as 2) x 0.117",
+  "capUsd": 1.4,
+  "passRateAssumption": "MC first pass 60-75% (Physics 52%, Chemistry 76%, Micro in range; code-verified keys should sit in the upper half); FRQ first pass about 45-55%",
+  "cumulativeAfterStepIfAllCapsUsed": 93.44
+ },
+ "_java": "The generator executes every item with a real JDK (scripts/ap-generation/archetypes/csa_java.py). Record `java -version` (OpenJDK 21.0.x, /opt/homebrew/opt/openjdk@21) in the freeze commit message; a different JDK major version is a different generator. Results are content-addressed and deterministic."
+}

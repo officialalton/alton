@@ -1,0 +1,59 @@
+{
+ "runs": [
+  "chem-p1-a"
+ ],
+ "rows": 42,
+ "passed": 15,
+ "rejected": 27,
+ "passRate": 0.357,
+ "singles": {
+  "candidates": 42
+ },
+ "unitsPassed": {
+  "1": 2,
+  "3": 3,
+  "4": 2,
+  "5": 1,
+  "6": 1,
+  "7": 3,
+  "8": 2,
+  "9": 1
+ },
+ "figPassed": {
+  "none": 12,
+  "graph": 3
+ },
+ "figAll": {
+  "none": 36,
+  "scene": 2,
+  "graph": 4
+ },
+ "figPassRate": {
+  "none": "12/36",
+  "scene": "0/2",
+  "graph": "3/4"
+ },
+ "renderTypesPassed": {
+  "none": 10,
+  "ap_table": 2,
+  "ap_graph:calc_multi_curve": 2,
+  "ap_graph:calc_function_or_derivative": 1
+ },
+ "archetypesPassed": {
+  "ch_moles_of_atoms": 2,
+  "ch_beer_lambert": 1,
+  "ch_limiting_reagent": 1,
+  "ch_rate_law_initial": 1,
+  "ch_calorimetry": 1,
+  "ch_ice_table": 2,
+  "ch_buffer_ph": 1,
+  "ch_cell_potential": 1,
+  "ch_mb_curves": 2,
+  "ch_titration_error": 1,
+  "ch_q_vs_k": 1,
+  "chs_titration_set_q1": 1
+ },
+ "costUsd": {
+  "chem-p1-a": 1.76
+ }
+}

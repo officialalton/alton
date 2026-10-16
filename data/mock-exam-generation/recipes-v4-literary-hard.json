@@ -1,0 +1,954 @@
+{
+ "_readme": "레시피 v4 문학 hard(2026-10-01): 웨이브 1 hard 100건 중 채택 7건(7%) 분석을 반영해 문학 문항 유형 11종 모두의 hard 레시피를 새로 설계했다. 구조는 v3(recipe-v3.ts)와 호환되며 v4 필드(version·passageDesign·answerDesign·selfCheck)를 더했다. 핵심 원칙: (1) 오답은 지문의 모든 명시 문장과 양립한다 — 소거 근거가 '지문 사실과 충돌'이면 쉽다 (2) 정답을 정하는 결정 단서는 행동·시점·누락 한 곳에 둔다 (3) 앞 단서가 표면 해석을 지지하고 뒤 단서가 그것을 바꾼다 (4) 선택지 네 개의 문장틀·길이·접속 구조를 통일한다 (5) 마지막 문장은 정답을 요약하지 않는다. scripts/rw-generation/recipe-v3.ts 의 validateRecipesV4 가 검증하고, loadRecipesAll 이 v3 와 합쳐 같은 skill·유형·난이도에서 v4 를 우선한다. skill 키는 계획용 skill(QTYPES)과 같다.",
+ "inferences": [
+  {
+   "id": "inferences_lit_character_motivation_hard_v4",
+   "version": 4,
+   "difficulty": "hard",
+   "questionType": "character_motivation",
+   "genres": [
+    "short_story",
+    "novel_excerpt",
+    "memoir",
+    "letter"
+   ],
+   "passageWords": {
+    "min": 120,
+    "max": 180
+   },
+   "instruction": "인물이 한 행동의 이유를 묻는다. 인물이 대사나 서술로 댄 '표면 명분'을 한 번 지문에 넣는다(예: 좋은 좌석 때문에, 바빠서). 진짜 동기는 문장으로 쓰지 않고 (1) 앞부분의 습관·반복 행동 (2) 중간의 시점·순서 단서(날짜, 누가 먼저 움직이는지, 무엇을 숨기는지) (3) 끝의 사물·동작으로만 암시한다. 앞 단서는 처음 읽으면 표면 명분을 지지하고, 중간 단서가 그 의미를 바꾸게 설계한다. 정답은 표면 명분을 부정하지 않으면서 두 단서를 함께 설명하는 동기다. 오답 3개는 모두 지문의 명시 문장과 양립해야 하며, 틀린 이유는 '행동의 순서·시점을 설명하지 못한다'는 한 가지여야 한다.",
+   "beyondMedium": "동기를 한 문장에서 읽을 수 없고, 표면 명분을 받아들인 학생이 시점 단서에서 걸리도록 설계되어 있으며, 오답이 지문 사실과 충돌하지 않는다",
+   "checklist": [
+    "진짜 동기가 지문 어디에도 문장으로 서술되지 않는가",
+    "표면 명분이 지문에 한 번 나오고 오답 하나가 그것을 그대로 받았는가",
+    "동기를 가르는 시점·순서 단서가 앞 단서와 떨어진 곳(2문장 이상)에 있는가",
+    "오답 3개가 지문의 어떤 문장과도 충돌하지 않는가",
+    "마지막 문장이 사물·동작으로 끝나 동기를 요약하지 않는가"
+   ],
+   "minMet": 4,
+   "evidenceSpread": {
+    "minSpans": 2,
+    "minSentenceGap": 2,
+    "finalSentenceMustNotStateAnswer": true
+   },
+   "distractorPlan": [
+    {
+     "id": "surface_claim",
+     "kind": "passage_wording",
+     "rule": "인물이 지문에서 댄 표면 명분을 그대로 동기로 삼은 선택지. 지문과 충돌하지 않지만 시점·순서 단서를 설명하지 못한다"
+    },
+    {
+     "id": "one_clue_only",
+     "kind": "partial_evidence",
+     "rule": "앞 단서(습관)만 또는 중간 단서(시점)만 설명하는 동기. 나머지 단서를 '설명하지 못할 뿐' 부정하지는 않는다"
+    },
+    {
+     "id": "other_feeling",
+     "kind": "plausible_emotion",
+     "rule": "이 인물이 가질 법한 다른 감정(미안함·자존심·두려움 중 정답과 다른 것)에서 나온 동기. 같은 행동을 설명하지만 행동의 순서와 맞지 않는다"
+    }
+   ],
+   "bannedPatterns": [
+    "표면 명분을 지문이 직접 반박하는 문장을 넣어 표면 오답을 쉽게 지운다",
+    "정답이 지문 마지막 문장(또는 밑줄 문장 직후 문장)을 거의 그대로 바꿔 말한 문장이다",
+    "오답이 지문과 정반대 정서·사실이거나 지문의 명시 문장과 충돌해 지문 사실만 확인해도 소거된다(오답은 지문의 모든 명시 문장과 양립해야 한다)",
+    "오답에 always·never·only·completely·entirely 같은 절대어나 -ly 극단 수식어를 쓴다(과잉 일반화 오답은 온건한 어휘로 범위만 넓힌다)",
+    "정답만 길거나 구체적이거나 'yet·despite·but' 같은 양가 접속 구조를 갖는다(네 선택지의 문장틀·길이(±2단어)·접속 구조를 맞춘다)",
+    "정답을 판정하는 근거가 한 문장·한 곳에 몰려 있다",
+    "정답의 핵심 어휘가 지문에 그대로 나온다(지문 어휘 차용은 오답 쪽에만 둔다)"
+   ],
+   "passageDesign": {
+    "evidenceSites": [
+     "앞: 반복 습관 또는 일상 행동",
+     "중간: 날짜·순서·숨김 같은 시점 단서",
+     "끝: 사물이나 동작(감정어 없음)"
+    ],
+    "directStatementBan": "동기를 나타내는 감정어·동사(afraid, ashamed, wanted to protect 등)와 'because' 절 금지",
+    "devices": [
+     "표면 명분 대사",
+     "순서 뒤집기",
+     "사물 클로즈업"
+    ]
+   },
+   "answerDesign": {
+    "inferenceSteps": 2,
+    "combine": "앞 단서(습관)와 중간 단서(시점)를 결합해 표면 명분을 기각하고 동기를 세움"
+   },
+   "selfCheck": [
+    "표면 명분만 믿으면 끝 장면(시점·동작)이 설명되지 않는가",
+    "동기를 가르는 단서 두 개를 서로 떨어뜨려 놓았는가",
+    "오답 3개 각각을 지문의 모든 명시 문장과 대조해 충돌하는 문장이 하나도 없는가(충돌하면 고친다)",
+    "정답을 고르기 전 학생이 처음 떠올릴 해석(표면 해석)이 오답 중 하나로 들어 있는가",
+    "정답만 남기는 결정 단서가 지문의 한 곳(행동·시점·누락)에 있는가 — 없으면 복수 정답, 있어도 한 문장에 직설이면 쉬움",
+    "지문 마지막 문장을 지우고 풀어도 정답이 유지되는가"
+   ],
+   "evidence": [],
+   "officialDifficulty": null,
+   "difficultySource": "웨이브 1(lit40-wave1) hard 100건 채택 7건 분석(docs/qa/2026-10-01-rw-lit-hard-recipes.md): character_motivation hard 1/9 채택(v3 레시피 사용) · 채택 1건은 '표면 진술+두 단서' 구조"
+  },
+  {
+   "id": "inferences_lit_tone_or_mood_hard_v4",
+   "version": 4,
+   "difficulty": "hard",
+   "questionType": "tone_or_mood",
+   "genres": [
+    "short_story",
+    "novel_excerpt",
+    "personal_essay",
+    "memoir",
+    "poetry"
+   ],
+   "passageWords": {
+    "min": 110,
+    "max": 170
+   },
+   "instruction": "지문 전체의 어조·분위기를 묻는다. 정답 어조는 한 단어 감정이 아니라 겉 어조와 속 어조의 두 층(예: wry but tender, courteous yet wary)이다. 지문에는 감정 형용사·감정 동사를 쓰지 않고 어휘 선택(건조한 사실 나열), 문장 리듬(짧게 끊기다 한 번 길어짐), 세부 디테일의 선택(무엇을 보고 무엇을 지나치는가)으로만 어조를 만든다. 겉 어조 단서는 앞부분, 속 어조 단서는 뒤쪽·결말 동작에 둔다. 네 선택지는 모두 '두 층' 문장틀('형용사 and 형용사 toward X')로 통일하고, 오답은 (a) 겉 층만 (b) 속 층이 있으나 그 원인을 뒤집은 것 (c) 같은 감정군에서 범위만 넓힌 것으로 만든다.",
+   "beyondMedium": "겉 어조만 읽으면 오답에 걸리고 속 어조의 원인까지 맞혀야 하며, 네 선택지 구조가 동일해 형식 단서가 없다",
+   "checklist": [
+    "지문에 어조를 직접 가리키는 감정어가 없는가",
+    "겉 어조 단서와 속 어조 단서가 서로 다른 문장(2문장 이상 간격)에 있는가",
+    "네 선택지가 같은 문장틀·비슷한 길이이고 정답만 양가 구조가 아닌가",
+    "오답 3개가 지문의 모든 문장과 양립하는가(분위기가 정반대인 오답이 없는가)",
+    "마지막 문장이 어조를 요약하지 않고 동작·사물로 끝나는가"
+   ],
+   "minMet": 4,
+   "evidenceSpread": {
+    "minSpans": 2,
+    "minSentenceGap": 2,
+    "finalSentenceMustNotStateAnswer": true
+   },
+   "distractorPlan": [
+    {
+     "id": "surface_only",
+     "kind": "partial_evidence",
+     "rule": "겉 어조 층만 포착한 선택지(예: 유쾌하다). 속 층 단서를 설명하지 못할 뿐 지문과 충돌하지 않는다"
+    },
+    {
+     "id": "cause_flipped",
+     "kind": "reversed_cause",
+     "rule": "속 어조는 맞게 잡았으나 그 원인 방향을 뒤집은 선택지(슬픔 때문이 아니라 안도 때문인 침묵 등). 지문 사실과 양립한다"
+    },
+    {
+     "id": "same_family_wider",
+     "kind": "overgeneralization",
+     "rule": "정답과 같은 감정군이지만 대상·범위를 넓히거나 줄인 선택지. 절대어 없이 온건한 어휘로 쓴다"
+    }
+   ],
+   "bannedPatterns": [
+    "선택지를 감정 한 단어씩으로 써서 분위기만 알아도 소거되게 한다",
+    "정답이 지문 마지막 문장(또는 밑줄 문장 직후 문장)을 거의 그대로 바꿔 말한 문장이다",
+    "오답이 지문과 정반대 정서·사실이거나 지문의 명시 문장과 충돌해 지문 사실만 확인해도 소거된다(오답은 지문의 모든 명시 문장과 양립해야 한다)",
+    "오답에 always·never·only·completely·entirely 같은 절대어나 -ly 극단 수식어를 쓴다(과잉 일반화 오답은 온건한 어휘로 범위만 넓힌다)",
+    "정답만 길거나 구체적이거나 'yet·despite·but' 같은 양가 접속 구조를 갖는다(네 선택지의 문장틀·길이(±2단어)·접속 구조를 맞춘다)",
+    "정답을 판정하는 근거가 한 문장·한 곳에 몰려 있다",
+    "정답의 핵심 어휘가 지문에 그대로 나온다(지문 어휘 차용은 오답 쪽에만 둔다)"
+   ],
+   "passageDesign": {
+    "evidenceSites": [
+     "앞: 겉 어조(건조한 사실 나열·농담조 문장 리듬)",
+     "중간: 어조와 어긋나는 디테일(지나치는 사물, 멈칫하는 동작)",
+     "끝: 속 어조를 보여 주는 동작(감정어 없음)"
+    ],
+    "directStatementBan": "감정 형용사·감정 동사·'felt'·'seemed to'와 어조를 설명하는 비유 금지",
+    "devices": [
+     "understatement",
+     "irony",
+     "리듬 변화"
+    ]
+   },
+   "answerDesign": {
+    "inferenceSteps": 2,
+    "combine": "겉 어조 단서와 속 어조 단서를 겹쳐 두 층 어조를 구성하고, 그 원인 방향을 판정"
+   },
+   "selfCheck": [
+    "선택지 4개를 어조 단어만 가리면 형식으로 정답이 구분되지 않는가",
+    "겉 층만 고른 학생이 어느 선택지에서 걸리는가",
+    "오답 3개 각각을 지문의 모든 명시 문장과 대조해 충돌하는 문장이 하나도 없는가(충돌하면 고친다)",
+    "정답을 고르기 전 학생이 처음 떠올릴 해석(표면 해석)이 오답 중 하나로 들어 있는가",
+    "정답만 남기는 결정 단서가 지문의 한 곳(행동·시점·누락)에 있는가 — 없으면 복수 정답, 있어도 한 문장에 직설이면 쉬움",
+    "지문 마지막 문장을 지우고 풀어도 정답이 유지되는가"
+   ],
+   "evidence": [],
+   "officialDifficulty": null,
+   "difficultySource": "웨이브 1(lit40-wave1) hard 100건 채택 7건 분석(docs/qa/2026-10-01-rw-lit-hard-recipes.md): tone_or_mood hard 0/6(est 전부 medium) · 사유는 정답만 'yet' 양가 구조, 오답이 '-ly' 극단 수식어"
+  },
+  {
+   "id": "inferences_lit_relationship_between_characters_hard_v4",
+   "version": 4,
+   "difficulty": "hard",
+   "questionType": "relationship_between_characters",
+   "genres": [
+    "short_story",
+    "novel_excerpt",
+    "drama",
+    "letter"
+   ],
+   "passageWords": {
+    "min": 120,
+    "max": 180
+   },
+   "instruction": "두 인물의 관계를 묻는다. 관계 이름(친구·부녀·라이벌)을 지문에 쓰지 않고 호칭·물건을 주고받는 방향·누가 누구를 기다리는가로만 보여 준다. 겉 관계(공식 호칭·직함·예의)와 실제 관계(오랜 빚·보호·미결 갈등)가 다르게 읽히도록 두 층을 만든다. 겉 관계 단서는 앞부분 호칭, 실제 관계 단서는 뒤쪽 행동의 방향(누가 먼저 양보하는가, 누가 조용히 비용을 치르는가)에 둔다. 정답은 실제 관계와 그 방향을 함께 말한다. 오답 3개는 (a) 호칭이 말하는 공식 관계 (b) 한 장면만 반영한 관계 (c) 의존·보호의 방향을 뒤집은 관계이며 모두 지문 사실과 양립해야 한다.",
+   "beyondMedium": "관계의 방향(누가 누구에게 의존·양보하는가)을 읽어야 하고, 호칭이 주는 표면 관계가 가장 강한 오답으로 작동하며, 오답이 지문과 충돌하지 않는다",
+   "checklist": [
+    "관계를 나타내는 명사(friends, rivals 등)와 감정어가 지문에 없는가",
+    "겉 관계 단서와 실제 관계 단서(행동의 방향)가 2문장 이상 떨어져 있는가",
+    "오답 하나가 호칭·직함이 말하는 공식 관계인가",
+    "오답 하나가 의존·보호의 방향을 뒤집은 것이고 지문과 충돌하지 않는가",
+    "마지막 문장이 관계를 요약하지 않는가"
+   ],
+   "minMet": 4,
+   "evidenceSpread": {
+    "minSpans": 2,
+    "minSentenceGap": 2,
+    "finalSentenceMustNotStateAnswer": true
+   },
+   "distractorPlan": [
+    {
+     "id": "formal_title",
+     "kind": "passage_wording",
+     "rule": "지문의 호칭·직함이 가리키는 공식 관계. 지문과 충돌하지 않지만 행동의 방향을 설명하지 못한다"
+    },
+    {
+     "id": "one_scene",
+     "kind": "partial_evidence",
+     "rule": "한 장면(앞 또는 뒤)의 행동만으로 세운 관계. 다른 장면은 '설명하지 못할 뿐' 모순되지 않는다"
+    },
+    {
+     "id": "direction_flipped",
+     "kind": "reversed_cause",
+     "rule": "누가 누구를 돌보고 의지하는지 방향을 뒤집은 관계. 지문의 행동이 양쪽 방향으로 읽힐 여지는 있되 결정 단서(누가 먼저 비용을 치르는가) 한 곳이 방향을 정한다"
+    }
+   ],
+   "bannedPatterns": [
+    "끝 장면에서 인물이 관계를 한 문장으로 선언하거나 서로를 이름 붙여 부른다",
+    "정답이 지문 마지막 문장(또는 밑줄 문장 직후 문장)을 거의 그대로 바꿔 말한 문장이다",
+    "오답이 지문과 정반대 정서·사실이거나 지문의 명시 문장과 충돌해 지문 사실만 확인해도 소거된다(오답은 지문의 모든 명시 문장과 양립해야 한다)",
+    "오답에 always·never·only·completely·entirely 같은 절대어나 -ly 극단 수식어를 쓴다(과잉 일반화 오답은 온건한 어휘로 범위만 넓힌다)",
+    "정답만 길거나 구체적이거나 'yet·despite·but' 같은 양가 접속 구조를 갖는다(네 선택지의 문장틀·길이(±2단어)·접속 구조를 맞춘다)",
+    "정답을 판정하는 근거가 한 문장·한 곳에 몰려 있다",
+    "정답의 핵심 어휘가 지문에 그대로 나온다(지문 어휘 차용은 오답 쪽에만 둔다)"
+   ],
+   "passageDesign": {
+    "evidenceSites": [
+     "앞: 공식 호칭·거리 두는 예의",
+     "중간: 물건·시간·돈이 오가는 방향",
+     "끝: 한 인물의 조용한 양보 동작"
+    ],
+    "directStatementBan": "관계 명사, '사랑·미움·고마움' 같은 감정어, 한 인물이 상대를 평가하는 대사 금지",
+    "devices": [
+     "호칭 대비",
+     "비용을 치르는 방향",
+     "침묵"
+    ]
+   },
+   "answerDesign": {
+    "inferenceSteps": 2,
+    "combine": "호칭이 주는 표면 관계를 행동의 방향 단서로 수정"
+   },
+   "selfCheck": [
+    "호칭만 보면 어느 선택지가 고르게 되는가(그것이 오답인가)",
+    "관계의 방향을 정하는 결정 단서가 한 곳에 분명히 있는가",
+    "오답 3개 각각을 지문의 모든 명시 문장과 대조해 충돌하는 문장이 하나도 없는가(충돌하면 고친다)",
+    "정답을 고르기 전 학생이 처음 떠올릴 해석(표면 해석)이 오답 중 하나로 들어 있는가",
+    "정답만 남기는 결정 단서가 지문의 한 곳(행동·시점·누락)에 있는가 — 없으면 복수 정답, 있어도 한 문장에 직설이면 쉬움",
+    "지문 마지막 문장을 지우고 풀어도 정답이 유지되는가"
+   ],
+   "evidence": [],
+   "officialDifficulty": null,
+   "difficultySource": "웨이브 1(lit40-wave1) hard 100건 채택 7건 분석(docs/qa/2026-10-01-rw-lit-hard-recipes.md): relationship hard 0/6 · 사유는 결말 장면이 관계를 명시하거나 오답이 지문과 충돌"
+  },
+  {
+   "id": "inferences_lit_symbolism_hard_v4",
+   "version": 4,
+   "difficulty": "hard",
+   "questionType": "symbolism",
+   "genres": [
+    "short_story",
+    "novel_excerpt",
+    "poetry",
+    "memoir"
+   ],
+   "passageWords": {
+    "min": 120,
+    "max": 180
+   },
+   "instruction": "반복되는 사물·이미지가 상징하는 바를 묻는다. 사물은 서로 떨어진 두 맥락에서 등장하고(예: 처음엔 도구로, 뒤에는 인물이 대하는 방식이 달라진 채), 마지막에 사물을 대하는 인물의 동작이 한 번 바뀐다. 사물의 의미를 정의하거나 인물이 의미를 말하는 대사는 쓰지 않는다. 정답은 두 맥락을 모두 포괄하는 추상적 의미다. 오답 3개는 (a) 사물의 문자적 기능 (b) 앞 맥락만 반영한 의미 (c) 인물과 인물 사이 관계의 손상·회복으로 읽은 의미(인물이 사물을 대하는 방식을 뒤집어 읽은 해석)이며 모두 그럴듯한 상징 해석이어야 한다.",
+   "beyondMedium": "사물이 두 맥락에서 다른 의미를 띠고, 가장 강한 오답이 인물 관계로 읽은 그럴듯한 상징 해석이다",
+   "checklist": [
+    "사물의 의미를 정의하는 문장·대사가 없는가",
+    "사물이 서로 2문장 이상 떨어진 두 맥락에 등장하는가",
+    "마지막에 사물을 대하는 인물의 동작이 바뀌는가",
+    "오답 3개가 모두 상징 해석으로 읽을 수 있고(문자 해석은 하나 이하) 지문과 충돌하지 않는가",
+    "마지막 문장이 상징을 설명하지 않는가"
+   ],
+   "minMet": 4,
+   "evidenceSpread": {
+    "minSpans": 2,
+    "minSentenceGap": 2,
+    "finalSentenceMustNotStateAnswer": true
+   },
+   "distractorPlan": [
+    {
+     "id": "literal_function",
+     "kind": "passage_wording",
+     "rule": "사물의 문자적 기능이나 지문 표현을 그대로 의미로 삼은 선택지(문자 해석은 이 하나만)"
+    },
+    {
+     "id": "first_context",
+     "kind": "partial_evidence",
+     "rule": "앞 맥락의 의미만으로 세운 상징 해석. 뒤 맥락을 설명하지 못한다"
+    },
+    {
+     "id": "relation_reading",
+     "kind": "reversed_cause",
+     "rule": "사물을 대하는 인물의 태도를 뒤집어 읽어 인물 사이 관계의 손상·회복으로 본 상징 해석. 그럴듯하지만 결정 단서(마지막 동작)가 맞지 않는다"
+    }
+   ],
+   "bannedPatterns": [
+    "인물이 사물의 의미를 말로 설명하거나 서술자가 '마치 ~처럼'으로 의미를 풀어 준다",
+    "정답이 지문 마지막 문장(또는 밑줄 문장 직후 문장)을 거의 그대로 바꿔 말한 문장이다",
+    "오답이 지문과 정반대 정서·사실이거나 지문의 명시 문장과 충돌해 지문 사실만 확인해도 소거된다(오답은 지문의 모든 명시 문장과 양립해야 한다)",
+    "오답에 always·never·only·completely·entirely 같은 절대어나 -ly 극단 수식어를 쓴다(과잉 일반화 오답은 온건한 어휘로 범위만 넓힌다)",
+    "정답만 길거나 구체적이거나 'yet·despite·but' 같은 양가 접속 구조를 갖는다(네 선택지의 문장틀·길이(±2단어)·접속 구조를 맞춘다)",
+    "정답을 판정하는 근거가 한 문장·한 곳에 몰려 있다",
+    "정답의 핵심 어휘가 지문에 그대로 나온다(지문 어휘 차용은 오답 쪽에만 둔다)"
+   ],
+   "passageDesign": {
+    "evidenceSites": [
+     "앞: 사물의 기능적 등장",
+     "중간: 인물이 사물을 대하는 방식이 달라지는 지점",
+     "끝: 사물을 다루는 인물의 마지막 동작"
+    ],
+    "directStatementBan": "사물이 무엇을 뜻하는지 말하는 대사·서술, 사물을 비유로 푸는 문장 금지",
+    "devices": [
+     "motif",
+     "recontextualization",
+     "silence"
+    ]
+   },
+   "answerDesign": {
+    "inferenceSteps": 3,
+    "combine": "앞 맥락 의미와 달라진 맥락을 연결해 둘을 포괄하는 추상 의미로 올림"
+   },
+   "selfCheck": [
+    "상징이 두 맥락을 모두 설명하는 것은 정답뿐인가",
+    "관계로 읽은 오답이 정말 그럴듯해 학생을 유인하는가",
+    "오답 3개 각각을 지문의 모든 명시 문장과 대조해 충돌하는 문장이 하나도 없는가(충돌하면 고친다)",
+    "정답을 고르기 전 학생이 처음 떠올릴 해석(표면 해석)이 오답 중 하나로 들어 있는가",
+    "정답만 남기는 결정 단서가 지문의 한 곳(행동·시점·누락)에 있는가 — 없으면 복수 정답, 있어도 한 문장에 직설이면 쉬움",
+    "지문 마지막 문장을 지우고 풀어도 정답이 유지되는가"
+   ],
+   "evidence": [],
+   "officialDifficulty": null,
+   "difficultySource": "웨이브 1(lit40-wave1) hard 100건 채택 7건 분석(docs/qa/2026-10-01-rw-lit-hard-recipes.md): symbolism hard 1/6 채택(레시피 없음) · 채택 1건 064는 '관계 손상' 오답이 가장 강한 함정이었음"
+  }
+ ],
+ "central_ideas_details": [
+  {
+   "id": "central_ideas_details_lit_main_idea_or_purpose_hard_v4",
+   "version": 4,
+   "difficulty": "hard",
+   "questionType": "main_idea_or_purpose",
+   "genres": [
+    "personal_essay",
+    "memoir",
+    "short_story",
+    "novel_excerpt",
+    "letter"
+   ],
+   "passageWords": {
+    "min": 130,
+    "max": 190
+   },
+   "instruction": "글 전체의 요지(또는 서술 목적)를 묻는다. 지문에는 요지를 말하는 문장이 없고 서로 다른 두 사건(또는 두 시점)이 있어, 정답은 두 사건의 '관계'(둘이 서로 의미를 바꾸는 대조·반복·아이러니)를 진술한다. 사건 1은 앞부분, 사건 2는 뒷부분에 두고 그 사이에 미해결로 남는 디테일을 하나 둔다. 오답 3개는 (a) 사건 1의 요지 (b) 사건 2의 요지 (c) 두 사건을 함께 말하되 인과 방향을 뒤집은 요지이며, 셋 모두 지문 사실과 양립하는 온건한 진술로 쓴다. 절대어로 과장하지 않는다.",
+   "beyondMedium": "요지가 한 사건이 아닌 두 사건의 관계이며, 오답이 모두 지문 사실과 양립하는 부분 요지·인과 뒤집기다",
+   "checklist": [
+    "지문에 요지·교훈·결론 문장이 없는가",
+    "서로 다른 두 사건이 각각 앞·뒤에 있고 의미가 서로를 바꾸는가",
+    "오답 (a)(b)가 각각 한 사건의 사실에 충실한 부분 요지인가",
+    "오답 (c)가 두 사건을 말하되 인과 방향만 뒤집었는가",
+    "오답에 극단어가 없고 지문과 충돌하는 진술이 없는가"
+   ],
+   "minMet": 4,
+   "evidenceSpread": {
+    "minSpans": 2,
+    "minSentenceGap": 3,
+    "finalSentenceMustNotStateAnswer": true
+   },
+   "distractorPlan": [
+    {
+     "id": "event_one",
+     "kind": "partial_evidence",
+     "rule": "사건 1의 요지만 말하는 선택지. 지문 사실에 충실하다"
+    },
+    {
+     "id": "event_two",
+     "kind": "passage_wording",
+     "rule": "사건 2의 요지만, 사건 2의 표현을 빌려 말하는 선택지. 지문 사실에 충실하다"
+    },
+    {
+     "id": "both_flipped",
+     "kind": "reversed_cause",
+     "rule": "두 사건을 모두 언급하지만 한 사건이 다른 사건의 원인·결과라는 방향을 뒤집은 선택지. 지문의 시간 순서와는 충돌하지 않게 쓴다"
+    }
+   ],
+   "bannedPatterns": [
+    "사건 2의 마지막 문장이 교훈·깨달음을 직접 말한다",
+    "정답이 지문 마지막 문장(또는 밑줄 문장 직후 문장)을 거의 그대로 바꿔 말한 문장이다",
+    "오답이 지문과 정반대 정서·사실이거나 지문의 명시 문장과 충돌해 지문 사실만 확인해도 소거된다(오답은 지문의 모든 명시 문장과 양립해야 한다)",
+    "오답에 always·never·only·completely·entirely 같은 절대어나 -ly 극단 수식어를 쓴다(과잉 일반화 오답은 온건한 어휘로 범위만 넓힌다)",
+    "정답만 길거나 구체적이거나 'yet·despite·but' 같은 양가 접속 구조를 갖는다(네 선택지의 문장틀·길이(±2단어)·접속 구조를 맞춘다)",
+    "정답을 판정하는 근거가 한 문장·한 곳에 몰려 있다",
+    "정답의 핵심 어휘가 지문에 그대로 나온다(지문 어휘 차용은 오답 쪽에만 둔다)"
+   ],
+   "passageDesign": {
+    "evidenceSites": [
+     "앞: 사건 1",
+     "중간: 미해결 디테일(설명하지 않음)",
+     "뒤: 사건 2(사건 1을 다시 읽게 함)"
+    ],
+    "directStatementBan": "교훈·깨달음 문장, 인물의 총평 대사, 'learned that'·'realized' 금지",
+    "devices": [
+     "대조",
+     "반복되는 모티프",
+     "아이러니"
+    ]
+   },
+   "answerDesign": {
+    "inferenceSteps": 3,
+    "combine": "사건 1 의미 파악 -> 사건 2가 그 의미를 바꿈 -> 둘의 관계로 요지를 진술"
+   },
+   "selfCheck": [
+    "부분 요지 두 개가 각각 한 사건에 대해서는 정확한가(틀린 사실이 없는가)",
+    "정답을 한 사건만 읽고 고를 수 없는가",
+    "오답 3개 각각을 지문의 모든 명시 문장과 대조해 충돌하는 문장이 하나도 없는가(충돌하면 고친다)",
+    "정답을 고르기 전 학생이 처음 떠올릴 해석(표면 해석)이 오답 중 하나로 들어 있는가",
+    "정답만 남기는 결정 단서가 지문의 한 곳(행동·시점·누락)에 있는가 — 없으면 복수 정답, 있어도 한 문장에 직설이면 쉬움",
+    "지문 마지막 문장을 지우고 풀어도 정답이 유지되는가"
+   ],
+   "evidence": [],
+   "officialDifficulty": null,
+   "difficultySource": "웨이브 1(lit40-wave1) hard 100건 채택 7건 분석(docs/qa/2026-10-01-rw-lit-hard-recipes.md): main_idea hard 0/12 · 사유는 오답이 지문과 직접 충돌·극단어(과장)·정답 요약이 지문 마지막 문장과 거의 동일"
+  },
+  {
+   "id": "central_ideas_details_lit_narrator_attitude_hard_v4",
+   "version": 4,
+   "difficulty": "hard",
+   "questionType": "narrator_attitude",
+   "genres": [
+    "short_story",
+    "novel_excerpt",
+    "memoir",
+    "personal_essay",
+    "letter",
+    "diary"
+   ],
+   "passageWords": {
+    "min": 120,
+    "max": 180
+   },
+   "instruction": "화자가 대상에 대해 갖는 태도를 묻는다. 1인칭(또는 가까운 3인칭) 서술에서 화자의 '말투'(불평·농담·건조한 평가)와 '행동'(조용히 해 주는 일, 피하는 화제)이 어긋나게 한다. 말투 단서는 앞부분, 행동 단서는 뒤쪽, 둘 사이에 화자가 스스로를 정정하는 어구(not lying, exactly 같은 완화·망설임)를 한 번 둔다. 정답은 말투 아래 놓인 태도를 말한다. 네 선택지는 모두 '태도 A despite/while 태도 B' 같은 양가 구조로 통일해 정답만 양가형이 되지 않게 하고, 오답은 (a) 말투만 읽은 태도 (b) 존경·애정이지만 이유가 다른 태도 (c) 지문 어휘를 빌린 태도로 만든다.",
+   "beyondMedium": "말투와 행동의 어긋남을 읽어야 하고, 네 선택지가 같은 양가 구조라 형식 단서가 없다",
+   "checklist": [
+    "태도를 가리키는 평가어·감정어가 화자의 서술에 직접 없는가",
+    "말투 단서와 행동 단서가 2문장 이상 떨어져 있는가",
+    "화자의 자기 정정·망설임 어구가 한 곳에 있는가",
+    "네 선택지가 같은 양가 구조이고 길이 차가 2단어 이내인가",
+    "오답 3개가 지문 사실과 충돌하지 않는가"
+   ],
+   "minMet": 4,
+   "evidenceSpread": {
+    "minSpans": 2,
+    "minSentenceGap": 2,
+    "finalSentenceMustNotStateAnswer": true
+   },
+   "distractorPlan": [
+    {
+     "id": "tone_only",
+     "kind": "partial_evidence",
+     "rule": "화자의 말투(불평·농담)만 읽어 낸 태도. 행동 단서를 설명하지 못한다"
+    },
+    {
+     "id": "right_feeling_wrong_reason",
+     "kind": "reversed_cause",
+     "rule": "태도의 방향(애정·존중)은 같으나 이유를 뒤집은 선택지(상대가 해 준 일 때문이 아니라 화자 자신의 죄책감 때문이라는 식)"
+    },
+    {
+     "id": "borrowed_wording",
+     "kind": "passage_wording",
+     "rule": "지문의 표현을 빌려 태도로 일반화한 선택지. 지문 사실과 양립하지만 화자의 정정 어구와 맞지 않는다"
+    }
+   ],
+   "bannedPatterns": [
+    "화자가 상대에 대한 마음을 직접 평가하는 문장을 마지막에 둔다",
+    "정답이 지문 마지막 문장(또는 밑줄 문장 직후 문장)을 거의 그대로 바꿔 말한 문장이다",
+    "오답이 지문과 정반대 정서·사실이거나 지문의 명시 문장과 충돌해 지문 사실만 확인해도 소거된다(오답은 지문의 모든 명시 문장과 양립해야 한다)",
+    "오답에 always·never·only·completely·entirely 같은 절대어나 -ly 극단 수식어를 쓴다(과잉 일반화 오답은 온건한 어휘로 범위만 넓힌다)",
+    "정답만 길거나 구체적이거나 'yet·despite·but' 같은 양가 접속 구조를 갖는다(네 선택지의 문장틀·길이(±2단어)·접속 구조를 맞춘다)",
+    "정답을 판정하는 근거가 한 문장·한 곳에 몰려 있다",
+    "정답의 핵심 어휘가 지문에 그대로 나온다(지문 어휘 차용은 오답 쪽에만 둔다)"
+   ],
+   "passageDesign": {
+    "evidenceSites": [
+     "앞: 화자의 말투(불평·농담)",
+     "중간: 자기 정정·망설임 어구",
+     "뒤: 화자가 조용히 해 주는 행동 또는 피하는 화제"
+    ],
+    "directStatementBan": "화자의 직접 평가어(admire, resent, grateful 등)와 '마음'을 말하는 문장 금지",
+    "devices": [
+     "understatement",
+     "self-correction",
+     "행동으로 보이는 존중"
+    ]
+   },
+   "answerDesign": {
+    "inferenceSteps": 2,
+    "combine": "말투와 행동의 어긋남을 결합해 말투 아래 태도를 추론"
+   },
+   "selfCheck": [
+    "선택지를 가렸을 때 정답만 접속 구조가 다르지 않은가",
+    "말투만 믿은 학생이 걸리는 오답이 있는가",
+    "오답 3개 각각을 지문의 모든 명시 문장과 대조해 충돌하는 문장이 하나도 없는가(충돌하면 고친다)",
+    "정답을 고르기 전 학생이 처음 떠올릴 해석(표면 해석)이 오답 중 하나로 들어 있는가",
+    "정답만 남기는 결정 단서가 지문의 한 곳(행동·시점·누락)에 있는가 — 없으면 복수 정답, 있어도 한 문장에 직설이면 쉬움",
+    "지문 마지막 문장을 지우고 풀어도 정답이 유지되는가"
+   ],
+   "evidence": [],
+   "officialDifficulty": null,
+   "difficultySource": "웨이브 1(lit40-wave1) hard 100건 채택 7건 분석(docs/qa/2026-10-01-rw-lit-hard-recipes.md): narrator_attitude hard 2/15 채택(레시피 없음) · 탈락 사유는 정답만 yet/despite 양가 구조, 마지막 문장이 정답을 거의 명시"
+  }
+ ],
+ "words_in_context": [
+  {
+   "id": "words_in_context_lit_figurative_language_hard_v4",
+   "version": 4,
+   "difficulty": "hard",
+   "questionType": "figurative_language",
+   "genres": [
+    "short_story",
+    "novel_excerpt",
+    "poetry",
+    "personal_essay",
+    "memoir"
+   ],
+   "passageWords": {
+    "min": 110,
+    "max": 170
+   },
+   "instruction": "지문에 있는 비유 구절이 문맥에서 전하는 의미를 묻는다. 관용 표현·상투적 은유는 쓰지 않고 이 지문 안에서만 의미가 정해지는 신선한 비유를 쓴다. 비유가 가리키는 대상의 의미를 정하는 단서는 비유 앞의 두 곳과 비유 뒤의 한 곳에 나눠 두며, 비유 바로 다음 문장이 해석을 알려 주면 안 된다. 오답 3개는 모두 비유로서 합리적인 해석이어야 하며 문자 해석은 많아야 하나다. 오답은 비유가 가진 서로 다른 속성(무게·한계·소리·온도 등)을 하나씩 골라 해석한 것이고, 정답은 두 단서를 만족하는 속성이다.",
+   "beyondMedium": "관용 해석으로 풀 수 없고, 오답이 비유의 다른 속성에서 나온 그럴듯한 해석이며 정답은 두 곳 이상의 단서가 정한다",
+   "checklist": [
+    "비유가 관용구가 아니라 지문 안에서만 의미가 정해지는가",
+    "의미를 정하는 단서가 비유 앞뒤 서로 다른 세 문장에 흩어져 있는가",
+    "비유 직후 문장이 해석을 알려 주지 않는가",
+    "오답 3개가 모두 비유의 서로 다른 속성에서 나온 해석이고 문자 해석은 하나 이하인가",
+    "질문에 인용한 구절이 지문 문자열과 일치하고 지문 본문에 따옴표가 없는가"
+   ],
+   "minMet": 4,
+   "evidenceSpread": {
+    "minSpans": 2,
+    "minSentenceGap": 2,
+    "finalSentenceMustNotStateAnswer": true
+   },
+   "distractorPlan": [
+    {
+     "id": "attribute_a",
+     "kind": "partial_evidence",
+     "rule": "비유의 한 속성(예: 무게)에서 나온 해석. 앞 단서 한 곳만 설명한다"
+    },
+    {
+     "id": "attribute_b_wording",
+     "kind": "passage_wording",
+     "rule": "지문 표현을 빌려 다른 속성(예: 한계)에서 나온 해석. 뒤 단서를 설명하지 못한다"
+    },
+    {
+     "id": "literal_or_scope",
+     "kind": "overgeneralization",
+     "rule": "문자 해석이거나 정답의 의미 범위를 한 단계 넓힌 해석. 절대어 없이 온건하게 쓴다"
+    }
+   ],
+   "bannedPatterns": [
+    "비유 직후 문장이 비유를 풀어 쓴다",
+    "관용적으로 의미가 알려진 비유(stone in the chest 등)를 쓴다",
+    "정답이 지문 마지막 문장(또는 밑줄 문장 직후 문장)을 거의 그대로 바꿔 말한 문장이다",
+    "오답이 지문과 정반대 정서·사실이거나 지문의 명시 문장과 충돌해 지문 사실만 확인해도 소거된다(오답은 지문의 모든 명시 문장과 양립해야 한다)",
+    "오답에 always·never·only·completely·entirely 같은 절대어나 -ly 극단 수식어를 쓴다(과잉 일반화 오답은 온건한 어휘로 범위만 넓힌다)",
+    "정답만 길거나 구체적이거나 'yet·despite·but' 같은 양가 접속 구조를 갖는다(네 선택지의 문장틀·길이(±2단어)·접속 구조를 맞춘다)",
+    "정답을 판정하는 근거가 한 문장·한 곳에 몰려 있다",
+    "정답의 핵심 어휘가 지문에 그대로 나온다(지문 어휘 차용은 오답 쪽에만 둔다)"
+   ],
+   "passageDesign": {
+    "evidenceSites": [
+     "비유 앞 1: 대상이 처한 상황",
+     "비유 앞 2: 인물의 반복 행동",
+     "비유 뒤: 해석을 한 번 뒤집는 사소한 디테일(해석을 주지 않음)"
+    ],
+    "directStatementBan": "비유의 뜻을 풀어 주는 문장, 동격·'that is' 정의 금지",
+    "devices": [
+     "extended metaphor",
+     "understated aftermath"
+    ]
+   },
+   "answerDesign": {
+    "inferenceSteps": 2,
+    "combine": "비유의 후보 속성 중 앞 단서와 뒤 단서를 동시에 만족하는 속성을 선택"
+   },
+   "selfCheck": [
+    "비유를 문맥 없이 읽었을 때 가장 먼저 떠오르는 해석이 오답인가",
+    "세 오답 사이에 같은 속성이 중복되지 않는가",
+    "오답 3개 각각을 지문의 모든 명시 문장과 대조해 충돌하는 문장이 하나도 없는가(충돌하면 고친다)",
+    "정답을 고르기 전 학생이 처음 떠올릴 해석(표면 해석)이 오답 중 하나로 들어 있는가",
+    "정답만 남기는 결정 단서가 지문의 한 곳(행동·시점·누락)에 있는가 — 없으면 복수 정답, 있어도 한 문장에 직설이면 쉬움",
+    "지문 마지막 문장을 지우고 풀어도 정답이 유지되는가"
+   ],
+   "evidence": [],
+   "officialDifficulty": null,
+   "difficultySource": "웨이브 1(lit40-wave1) hard 100건 채택 7건 분석(docs/qa/2026-10-01-rw-lit-hard-recipes.md): figurative_language hard 0/10(est easy 2·medium 6) · 사유는 관용 해석이 표준적이고 문자 해석 오답이 노골적, 비유를 문장이 직접 설명"
+  },
+  {
+   "id": "words_in_context_lit_word_in_context_hard_v4",
+   "version": 4,
+   "difficulty": "hard",
+   "questionType": "word_in_context",
+   "genres": [
+    "short_story",
+    "novel_excerpt",
+    "memoir",
+    "personal_essay"
+   ],
+   "passageWords": {
+    "min": 100,
+    "max": 150
+   },
+   "instruction": "빈칸 ______ 을 정확히 하나 두고 가장 논리적이고 정확한 말을 고르게 한다. 빈칸 뒤에 동격구·정의 구문·'that is'를 두지 않는다(웨이브 1에서 빈칸 뒤가 정답을 정의해 쉬웠다). 빈칸이 만족해야 할 제약 두 가지를 서로 떨어진 곳에 둔다: (1) 앞쪽 인물의 행동과 일관되어야 하는 의미 (2) 뒤쪽 행동과 맞물려야 하는 정도·어조. 선택지는 코드 게이트(단어 수 2~40, 최장/최단 비율 1.8 이하) 때문에 모두 2~3단어 구로 쓰고 같은 품사 구조로 통일한다(예: 'quietly relieved' 형태의 부사+형용사 또는 동사+목적어). 오답 3개는 문법상 모두 들어가고 의미 영역이 같으며, (a) 제약 하나만 만족 (b) 정답과 정도·어조만 다른 근접 표현 (c) 지문의 주제어를 빌린 표현이다.",
+   "beyondMedium": "빈칸 뒤 정의가 없고 두 제약을 동시에 만족하는 표현만 정답이며, 오답이 모두 문법적으로 맞고 의미 영역이 같다",
+   "checklist": [
+    "빈칸이 정확히 하나이고 빈칸 뒤에 동격·정의 구문이 없는가",
+    "두 제약 단서가 서로 2문장 이상 떨어져 있는가",
+    "선택지 4개가 모두 2~3단어이고 같은 문법 구조·비슷한 길이인가",
+    "오답 3개가 문법상 들어가고 한 제약만 만족하거나 정도만 다른가",
+    "사전 의미만으로는 정답이 하나로 정해지지 않고 문맥이 결정하는가"
+   ],
+   "minMet": 4,
+   "evidenceSpread": {
+    "minSpans": 2,
+    "minSentenceGap": 2,
+    "finalSentenceMustNotStateAnswer": true
+   },
+   "distractorPlan": [
+    {
+     "id": "one_constraint",
+     "kind": "partial_evidence",
+     "rule": "두 제약 중 하나(앞 행동과의 일관성)만 만족하는 표현"
+    },
+    {
+     "id": "degree_off",
+     "kind": "overgeneralization",
+     "rule": "정답과 의미가 가깝지만 정도·어조가 한 단계 다른 근접 표현. 절대어 없이 쓴다"
+    },
+    {
+     "id": "topic_word",
+     "kind": "passage_wording",
+     "rule": "지문의 주제어·인물 행동에서 빌린 표현. 문법상 들어가나 뒤 제약과 맞지 않는다"
+    }
+   ],
+   "bannedPatterns": [
+    "선택지를 한 단어로 써서 길이 게이트(2단어 이상)에 걸리게 한다",
+    "빈칸 바로 뒤에 의미를 풀이하는 구를 둔다",
+    "정답이 지문 마지막 문장(또는 밑줄 문장 직후 문장)을 거의 그대로 바꿔 말한 문장이다",
+    "오답이 지문과 정반대 정서·사실이거나 지문의 명시 문장과 충돌해 지문 사실만 확인해도 소거된다(오답은 지문의 모든 명시 문장과 양립해야 한다)",
+    "오답에 always·never·only·completely·entirely 같은 절대어나 -ly 극단 수식어를 쓴다(과잉 일반화 오답은 온건한 어휘로 범위만 넓힌다)",
+    "정답만 길거나 구체적이거나 'yet·despite·but' 같은 양가 접속 구조를 갖는다(네 선택지의 문장틀·길이(±2단어)·접속 구조를 맞춘다)",
+    "정답을 판정하는 근거가 한 문장·한 곳에 몰려 있다",
+    "정답의 핵심 어휘가 지문에 그대로 나온다(지문 어휘 차용은 오답 쪽에만 둔다)"
+   ],
+   "passageDesign": {
+    "evidenceSites": [
+     "앞: 인물의 습관적·반복 행동(제약 1)",
+     "중간: 사건이 한 번 전환되는 지점",
+     "빈칸 이후 문장: 제약 2를 만드는 행동(빈칸 의미를 정의하지 않음)"
+    ],
+    "directStatementBan": "빈칸 뒤 동격구, 'that is', 대시 뒤 풀이 금지",
+    "devices": [
+     "precision of diction",
+     "register"
+    ]
+   },
+   "answerDesign": {
+    "inferenceSteps": 2,
+    "combine": "앞 행동의 방향과 뒤 행동의 정도를 동시에 만족하는 표현을 선택"
+   },
+   "selfCheck": [
+    "오답 하나를 넣어도 문법·의미가 이상하지 않은가(그래야 그럴듯함)",
+    "정답을 빈칸 뒤 문장만으로 고를 수 없는가",
+    "오답 3개 각각을 지문의 모든 명시 문장과 대조해 충돌하는 문장이 하나도 없는가(충돌하면 고친다)",
+    "정답을 고르기 전 학생이 처음 떠올릴 해석(표면 해석)이 오답 중 하나로 들어 있는가",
+    "정답만 남기는 결정 단서가 지문의 한 곳(행동·시점·누락)에 있는가 — 없으면 복수 정답, 있어도 한 문장에 직설이면 쉬움",
+    "지문 마지막 문장을 지우고 풀어도 정답이 유지되는가"
+   ],
+   "evidence": [],
+   "officialDifficulty": null,
+   "difficultySource": "웨이브 1(lit40-wave1) hard 100건 채택 7건 분석(docs/qa/2026-10-01-rw-lit-hard-recipes.md): word_in_context hard 0/10 · 9건이 선택지 한 단어라 코드 게이트(2~40단어)에서 탈락, 나머지는 빈칸 뒤 동격구가 정답을 정의"
+  }
+ ],
+ "text_structure_purpose": [
+  {
+   "id": "text_structure_purpose_lit_tone_shift_hard_v4",
+   "version": 4,
+   "difficulty": "hard",
+   "questionType": "tone_shift",
+   "genres": [
+    "short_story",
+    "novel_excerpt",
+    "memoir",
+    "personal_essay",
+    "letter",
+    "poetry"
+   ],
+   "passageWords": {
+    "min": 120,
+    "max": 180
+   },
+   "instruction": "글 중간에서 어조가 바뀌는 지점과 의미를 묻는다. 전환은 'but·however' 같은 표지나 감정어로 알리지 않고 (1) 문장 길이와 세부 묘사의 해상도 변화 (2) 화제의 이탈(말하던 대상이 사라짐) (3) 겉 어조(정중함 등)는 유지한 채 속 어조만 바뀌는 방식으로 만든다. 전환 지점 앞뒤에 단서를 나눠 두고, 전환 후 어조의 '원인'은 끝 동작 한 곳에서만 읽히게 한다. 선택지는 모두 '전환 방향과 의미'를 같은 문장틀로 쓴다. 오답 3개는 (a) 겉 어조 변화만 포착 (b) 방향은 맞으나 원인을 뒤집음 (c) 방향은 맞고 정도·성격을 한 단계 달리 읽음이며 지문 사실과 모두 양립한다.",
+   "beyondMedium": "전환이 명시되지 않고 겉 어조는 그대로여서 겉 변화만 읽으면 걸리며, 오답이 방향·원인·정도 중 하나만 틀린다",
+   "checklist": [
+    "전환을 알리는 접속 표지·감정어가 없는가",
+    "전환 전후 단서가 서로 2문장 이상 떨어져 있는가",
+    "겉 어조는 유지되고 속 어조만 바뀌는가",
+    "오답 3개가 방향·원인·정도 중 서로 다른 한 가지만 틀리고 지문과 충돌하지 않는가",
+    "마지막 문장이 전환의 이유를 설명하지 않는가"
+   ],
+   "minMet": 4,
+   "evidenceSpread": {
+    "minSpans": 2,
+    "minSentenceGap": 2,
+    "finalSentenceMustNotStateAnswer": true
+   },
+   "distractorPlan": [
+    {
+     "id": "surface_change",
+     "kind": "partial_evidence",
+     "rule": "겉 어조 변화만 포착한 선택지(유지된 정중함을 변화로 읽음). 속 변화 단서를 설명하지 못한다"
+    },
+    {
+     "id": "cause_flipped",
+     "kind": "reversed_cause",
+     "rule": "전환의 방향은 맞지만 원인을 뒤집은 선택지(상대의 행동 때문이 아니라 화자 자신의 행동 때문이라는 식). 지문과 충돌하지 않는다"
+    },
+    {
+     "id": "degree_off",
+     "kind": "overgeneralization",
+     "rule": "방향은 맞지만 성격·정도를 한 단계 달리 읽은 선택지(조용한 재검토를 분노로 읽는 등). 절대어 없이 온건하게 쓴다"
+    }
+   ],
+   "bannedPatterns": [
+    "전환 전과 후의 감정어를 한 문장씩 나란히 둔다",
+    "전환 후 문장이 전환 이유를 서술한다",
+    "정답이 지문 마지막 문장(또는 밑줄 문장 직후 문장)을 거의 그대로 바꿔 말한 문장이다",
+    "오답이 지문과 정반대 정서·사실이거나 지문의 명시 문장과 충돌해 지문 사실만 확인해도 소거된다(오답은 지문의 모든 명시 문장과 양립해야 한다)",
+    "오답에 always·never·only·completely·entirely 같은 절대어나 -ly 극단 수식어를 쓴다(과잉 일반화 오답은 온건한 어휘로 범위만 넓힌다)",
+    "정답만 길거나 구체적이거나 'yet·despite·but' 같은 양가 접속 구조를 갖는다(네 선택지의 문장틀·길이(±2단어)·접속 구조를 맞춘다)",
+    "정답을 판정하는 근거가 한 문장·한 곳에 몰려 있다",
+    "정답의 핵심 어휘가 지문에 그대로 나온다(지문 어휘 차용은 오답 쪽에만 둔다)"
+   ],
+   "passageDesign": {
+    "evidenceSites": [
+     "앞: 겉 어조와 세부 묘사가 촘촘한 구간",
+     "전환 지점: 화제 이탈 또는 문장 길이 변화",
+     "끝: 원인을 암시하는 동작 하나"
+    ],
+    "directStatementBan": "'but·however·suddenly', 감정어, 전환의 이유를 서술하는 문장 금지",
+    "devices": [
+     "register hold",
+     "topic drop",
+     "sentence rhythm"
+    ]
+   },
+   "answerDesign": {
+    "inferenceSteps": 2,
+    "combine": "전환 지점의 형식적 변화와 끝 동작의 원인 단서를 결합"
+   },
+   "selfCheck": [
+    "전환 후 어조의 원인을 정답만 만족하는가",
+    "겉 어조만 보는 학생이 걸리는 오답이 있는가",
+    "오답 3개 각각을 지문의 모든 명시 문장과 대조해 충돌하는 문장이 하나도 없는가(충돌하면 고친다)",
+    "정답을 고르기 전 학생이 처음 떠올릴 해석(표면 해석)이 오답 중 하나로 들어 있는가",
+    "정답만 남기는 결정 단서가 지문의 한 곳(행동·시점·누락)에 있는가 — 없으면 복수 정답, 있어도 한 문장에 직설이면 쉬움",
+    "지문 마지막 문장을 지우고 풀어도 정답이 유지되는가"
+   ],
+   "evidence": [],
+   "officialDifficulty": null,
+   "difficultySource": "웨이브 1(lit40-wave1) hard 100건 채택 7건 분석(docs/qa/2026-10-01-rw-lit-hard-recipes.md): tone_shift hard 0/10(est medium 8·easy 1) · 사유는 전후 대비가 명시적, 오답은 방향 반대라 소거 쉬움"
+  },
+  {
+   "id": "text_structure_purpose_lit_text_structure_hard_v4",
+   "version": 4,
+   "difficulty": "hard",
+   "questionType": "text_structure",
+   "genres": [
+    "short_story",
+    "novel_excerpt",
+    "memoir",
+    "personal_essay"
+   ],
+   "passageWords": {
+    "min": 130,
+    "max": 190
+   },
+   "instruction": "글 전체의 구조(전개 순서·초점의 이동)를 묻는다. 지문 중간에서 인물의 인식 또는 서술의 초점이 한 번 이동하고, 마지막은 해결되지 않는다. 정답은 '관찰·제스처를 기술한 뒤, 요청(또는 사건)이 그 제스처를 다시 읽게 만든다'처럼 재해석 단계를 포함한 구조 서술이다. 선택지 4개는 모두 'begins with X, then Y, ends with Z' 형태의 구조 서술이며, 모든 선택지의 사건 서술은 지문 사실과 일치해야 한다(지문에 없는 사건·사과·언쟁을 넣지 않는다). 오답은 (a) 전반부만 요약한 구조 (b) 인식 변화의 방향·순서를 뒤집은 구조 (c) 결말의 기능을 오독한 구조다.",
+   "beyondMedium": "오답이 모두 지문 사실과 일치하고 순서·초점·결말 기능 중 하나만 틀리며, 정답은 재해석 단계를 포함한다",
+   "checklist": [
+    "지문 중간에 초점·인식이 한 번 이동하는가",
+    "결말이 해결되지 않고 열려 있는가",
+    "선택지 4개가 모두 같은 구조 서술 틀이고 사건 서술이 지문 사실과 일치하는가",
+    "오답이 각각 전반부만·순서 뒤집기·결말 기능 오독 중 서로 다른 한 가지만 틀리는가",
+    "정답만 재해석 단계를 담고 있는가"
+   ],
+   "minMet": 4,
+   "evidenceSpread": {
+    "minSpans": 2,
+    "minSentenceGap": 3,
+    "finalSentenceMustNotStateAnswer": true
+   },
+   "distractorPlan": [
+    {
+     "id": "first_half",
+     "kind": "partial_evidence",
+     "rule": "전반부 전개만 구조로 요약한 선택지. 지문 사실에 충실하다"
+    },
+    {
+     "id": "order_flipped",
+     "kind": "reversed_cause",
+     "rule": "인식 변화의 방향·순서를 뒤집은 구조(처음 오해했다가 바로잡는 순서를 반대로 서술). 사건 서술 자체는 지문과 일치한다"
+    },
+    {
+     "id": "ending_function",
+     "kind": "passage_wording",
+     "rule": "지문 표현을 빌려 결말의 기능을 해결·결론으로 오독한 구조"
+    }
+   ],
+   "bannedPatterns": [
+    "오답에 지문에 없는 사건(언쟁·사과·이사 결정)을 넣어 사실 오류로 소거되게 한다",
+    "정답이 지문 마지막 문장(또는 밑줄 문장 직후 문장)을 거의 그대로 바꿔 말한 문장이다",
+    "오답이 지문과 정반대 정서·사실이거나 지문의 명시 문장과 충돌해 지문 사실만 확인해도 소거된다(오답은 지문의 모든 명시 문장과 양립해야 한다)",
+    "오답에 always·never·only·completely·entirely 같은 절대어나 -ly 극단 수식어를 쓴다(과잉 일반화 오답은 온건한 어휘로 범위만 넓힌다)",
+    "정답만 길거나 구체적이거나 'yet·despite·but' 같은 양가 접속 구조를 갖는다(네 선택지의 문장틀·길이(±2단어)·접속 구조를 맞춘다)",
+    "정답을 판정하는 근거가 한 문장·한 곳에 몰려 있다",
+    "정답의 핵심 어휘가 지문에 그대로 나온다(지문 어휘 차용은 오답 쪽에만 둔다)"
+   ],
+   "passageDesign": {
+    "evidenceSites": [
+     "앞: 관찰·제스처 묘사",
+     "중간: 요청 또는 사건이 제스처를 다시 읽게 함",
+     "끝: 해결되지 않은 장면"
+    ],
+    "directStatementBan": "구조를 말해 주는 메타 문장('Looking back', 'It was then that she understood') 금지",
+    "devices": [
+     "reframing",
+     "open ending"
+    ]
+   },
+   "answerDesign": {
+    "inferenceSteps": 3,
+    "combine": "초기 묘사 의미 -> 사건으로 인한 재해석 -> 열린 결말의 기능을 구조 서술로 결합"
+   },
+   "selfCheck": [
+    "오답에 지문에 없는 사건이 한 건도 없는가",
+    "재해석 단계를 모르는 학생이 어느 오답을 고르는가",
+    "오답 3개 각각을 지문의 모든 명시 문장과 대조해 충돌하는 문장이 하나도 없는가(충돌하면 고친다)",
+    "정답을 고르기 전 학생이 처음 떠올릴 해석(표면 해석)이 오답 중 하나로 들어 있는가",
+    "정답만 남기는 결정 단서가 지문의 한 곳(행동·시점·누락)에 있는가 — 없으면 복수 정답, 있어도 한 문장에 직설이면 쉬움",
+    "지문 마지막 문장을 지우고 풀어도 정답이 유지되는가"
+   ],
+   "evidence": [],
+   "officialDifficulty": null,
+   "difficultySource": "웨이브 1(lit40-wave1) hard 100건 채택 7건 분석(docs/qa/2026-10-01-rw-lit-hard-recipes.md): text_structure hard 1/8 채택 · 채택 1건 081 은 재해석 단계 요구, 오답 A·B는 사실 오류라 약하다는 평가"
+  },
+  {
+   "id": "text_structure_purpose_lit_underlined_portion_function_hard_v4",
+   "version": 4,
+   "difficulty": "hard",
+   "questionType": "underlined_portion_function",
+   "genres": [
+    "short_story",
+    "novel_excerpt",
+    "memoir",
+    "personal_essay"
+   ],
+   "passageWords": {
+    "min": 120,
+    "max": 190
+   },
+   "instruction": "지문의 문장 하나를 __문장__ 처럼 두 밑줄 기호로 감싸 정확히 하나만 표시하고, 질문에 'underlined' 를 넣어 그 문장이 글 전체에서 하는 기능을 묻는다. 밑줄 문장은 단독으로 읽으면 한 가지 기능(배경 설명·성격 묘사·분위기 전환)으로 보이지만, 지문 뒤쪽 사건이 그 기능을 바꿔 놓는다(복선·반어). 밑줄 문장 바로 앞뒤 문장은 기능을 설명하거나 뒤집지 않는다. 오답 3개는 모두 밑줄 문장과 지문 사실에 근거한 기능이어야 하며 (a) 밑줄 문장만 본 기능 (b) 바로 뒤 문장과의 관계로 본 기능 (c) 지문 표현을 빌려 일반화한 기능이다.",
+   "beyondMedium": "밑줄 문장의 기능을 지문 후반 사건이 바꾸므로 밑줄 근처만 읽으면 오답에 걸리고, 오답이 모두 지문에 근거한 기능이다",
+   "checklist": [
+    "밑줄이 정확히 한 문장이고 직후 문장이 기능을 설명하거나 뒤집지 않는가",
+    "밑줄 문장의 기능을 바꾸는 단서가 지문 뒤쪽(밑줄과 2문장 이상 거리)에 있는가",
+    "오답 3개가 모두 지문 사실에 근거한 기능 서술이고 지문과 충돌하지 않는가",
+    "선택지 4개가 같은 문장틀이고 길이 차가 2단어 이내인가",
+    "마지막 문장이 기능을 요약하지 않는가"
+   ],
+   "minMet": 4,
+   "evidenceSpread": {
+    "minSpans": 2,
+    "minSentenceGap": 3,
+    "finalSentenceMustNotStateAnswer": true
+   },
+   "distractorPlan": [
+    {
+     "id": "underlined_only",
+     "kind": "partial_evidence",
+     "rule": "밑줄 문장만 단독으로 읽은 기능(배경 설명 등). 지문 후반 단서를 설명하지 못한다"
+    },
+    {
+     "id": "next_sentence",
+     "kind": "reversed_cause",
+     "rule": "바로 뒤 문장과의 관계로 읽어 기능의 방향을 뒤집은 선택지(복선이 아니라 해소로 읽음)"
+    },
+    {
+     "id": "borrowed_generalization",
+     "kind": "passage_wording",
+     "rule": "지문의 표현을 빌려 일반적 기능으로 넓힌 선택지. 지문과 양립하지만 후반 단서와 맞지 않는다"
+    }
+   ],
+   "bannedPatterns": [
+    "밑줄 문장 바로 뒤에서 의미를 뒤집거나 설명한다",
+    "정답 외 선택지가 지문 사실과 정면 충돌한다",
+    "정답이 지문 마지막 문장(또는 밑줄 문장 직후 문장)을 거의 그대로 바꿔 말한 문장이다",
+    "오답이 지문과 정반대 정서·사실이거나 지문의 명시 문장과 충돌해 지문 사실만 확인해도 소거된다(오답은 지문의 모든 명시 문장과 양립해야 한다)",
+    "오답에 always·never·only·completely·entirely 같은 절대어나 -ly 극단 수식어를 쓴다(과잉 일반화 오답은 온건한 어휘로 범위만 넓힌다)",
+    "정답만 길거나 구체적이거나 'yet·despite·but' 같은 양가 접속 구조를 갖는다(네 선택지의 문장틀·길이(±2단어)·접속 구조를 맞춘다)",
+    "정답을 판정하는 근거가 한 문장·한 곳에 몰려 있다",
+    "정답의 핵심 어휘가 지문에 그대로 나온다(지문 어휘 차용은 오답 쪽에만 둔다)"
+   ],
+   "passageDesign": {
+    "evidenceSites": [
+     "앞: 밑줄 문장(단독으로는 배경 설명처럼 보임)",
+     "중간: 기능과 무관해 보이는 장면",
+     "뒤: 밑줄 문장을 복선·반어로 읽게 하는 사건"
+    ],
+    "directStatementBan": "밑줄 문장의 의미를 풀이하는 인접 문장, 'foreshadow'류 메타 서술 금지",
+    "devices": [
+     "foreshadowing",
+     "irony",
+     "delayed payoff"
+    ]
+   },
+   "answerDesign": {
+    "inferenceSteps": 3,
+    "combine": "밑줄 문장의 표면 기능 -> 후반 사건 확인 -> 기능 재해석"
+   },
+   "selfCheck": [
+    "밑줄 직전·직후 문장만 읽고 정답을 고를 수 없는가",
+    "표면 기능을 고른 학생이 걸리는 오답이 있는가",
+    "오답 3개 각각을 지문의 모든 명시 문장과 대조해 충돌하는 문장이 하나도 없는가(충돌하면 고친다)",
+    "정답을 고르기 전 학생이 처음 떠올릴 해석(표면 해석)이 오답 중 하나로 들어 있는가",
+    "정답만 남기는 결정 단서가 지문의 한 곳(행동·시점·누락)에 있는가 — 없으면 복수 정답, 있어도 한 문장에 직설이면 쉬움",
+    "지문 마지막 문장을 지우고 풀어도 정답이 유지되는가"
+   ],
+   "evidence": [],
+   "officialDifficulty": null,
+   "difficultySource": "웨이브 1(lit40-wave1) hard 100건 채택 7건 분석(docs/qa/2026-10-01-rw-lit-hard-recipes.md): underlined_portion_function hard 2/8 채택(최고 효율) · 채택 건은 밑줄 문장과 결말을 연결해야 하는 구조, 탈락은 직후 문장이 답을 줌"
+  }
+ ]
+}

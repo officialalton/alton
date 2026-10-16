@@ -1,0 +1,73 @@
+[
+ {
+  "key": "ap_calculus_bc-f01-k0",
+  "cellId": "ap_calculus_bc-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "A = 1/2∫_0^{π/2}(3+cosθ)^2 dθ = 19π/8+3",
+     "final_answer": "A = (1/2)∫_0^{π/2}(3+cosθ)^2 dθ ≈ 10.461",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "b",
+     "brief_reasoning": "dr/dθ=-sinθ = -√3/2",
+     "final_answer": "dr/dθ ≈ -0.866; at θ=π/3 the distance from the origin is decreasing at about 0.866 units per radian",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "c",
+     "brief_reasoning": "dy/dθ=1, dx/dθ=-2√3",
+     "final_answer": "dy/dx = -1/(2√3) ≈ -0.289",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "d",
+     "brief_reasoning": "y=(3+cosθ)sinθ; dy/dθ=2cos²θ+3cosθ-1=0 → cosθ=(-3+√17)/4; candidates: y(0)=0, y(π/2)=3, critical y≈3.149",
+     "final_answer": "y ≈ 3.149",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is acceptable. The values are correct and unique, the parts fit topics 9.8 and 9.7, and the load suits the AP exam. The one weakness is that part d says \"Justify your answer\" but the rubric has no row for comparing the critical value with the endpoints.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Part a is 9.8; parts b to d are 9.7, which is allowed for this bundle. The skills are consistent with the part labels."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All keys were confirmed by the solver. In part d the critical value 3.149 exceeds the endpoint values 0 and 3, so the answer is unique. The rubric does not award a point for the justification that part d requests."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The curve and interval are fully specified. The \"1 cos\" coefficient is stylistically awkward but not ambiguous."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so distractors do not apply. The common_errors lists are empty, which is a minor weakness."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "There are 9 points over four parts in about 15 minutes, and a calculator is needed for the area and the numerical solve. The load is typical of the AP exam."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Four-part polar FRQ covering area, dr/dtheta with interpretation, tangent slope via dy/dx, and maximizing y = r sin(theta) with justification. Each part is a standard procedure, but together they need several reasoning steps and a calculator solve with a max justification. Numbers are clean and the wording is unambiguous, which fits a full-mock item.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 9,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 900
+  }
+ }
+]

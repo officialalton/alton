@@ -1,0 +1,532 @@
+{
+ "subject": "ush",
+ "rows": [
+  {
+   "cell": "ap_us_history-saq1_3",
+   "tier": "high",
+   "target": 3,
+   "got": 3,
+   "status": "done",
+   "err": null,
+   "scores": {
+    "a": 1,
+    "b": 1,
+    "c": 1,
+    "total": 3,
+    "disagreement": false,
+    "rubricVersion": "ushistory-v1",
+    "taskType": "saq"
+   },
+   "disagreement": false
+  },
+  {
+   "cell": "ap_us_history-saq1_3",
+   "tier": "mid",
+   "target": 2,
+   "got": 2,
+   "status": "done",
+   "err": null,
+   "scores": {
+    "a": 1,
+    "b": 1,
+    "c": 0,
+    "total": 2,
+    "disagreement": false,
+    "rubricVersion": "ushistory-v1",
+    "taskType": "saq"
+   },
+   "disagreement": false
+  },
+  {
+   "cell": "ap_us_history-saq1_3",
+   "tier": "low",
+   "target": 1,
+   "got": 1,
+   "status": "done",
+   "err": null,
+   "scores": {
+    "a": 1,
+    "b": 0,
+    "c": 0,
+    "total": 1,
+    "disagreement": false,
+    "rubricVersion": "ushistory-v1",
+    "taskType": "saq"
+   },
+   "disagreement": false
+  },
+  {
+   "cell": "ap_us_history-saq2_1",
+   "tier": "high",
+   "target": 3,
+   "got": 3,
+   "status": "done",
+   "err": null,
+   "scores": {
+    "a": 1,
+    "b": 1,
+    "c": 1,
+    "total": 3,
+    "disagreement": false,
+    "rubricVersion": "ushistory-v1",
+    "taskType": "saq"
+   },
+   "disagreement": false
+  },
+  {
+   "cell": "ap_us_history-saq2_1",
+   "tier": "mid",
+   "target": 2,
+   "got": 2,
+   "status": "done",
+   "err": null,
+   "scores": {
+    "a": 1,
+    "b": 0,
+    "c": 1,
+    "total": 2,
+    "disagreement": false,
+    "rubricVersion": "ushistory-v1",
+    "taskType": "saq"
+   },
+   "disagreement": false
+  },
+  {
+   "cell": "ap_us_history-saq2_1",
+   "tier": "low",
+   "target": 1,
+   "got": 1,
+   "status": "done",
+   "err": null,
+   "scores": {
+    "a": 1,
+    "b": 0,
+    "c": 0,
+    "total": 1,
+    "disagreement": false,
+    "rubricVersion": "ushistory-v1",
+    "taskType": "saq"
+   },
+   "disagreement": false
+  },
+  {
+   "cell": "ap_us_history-saq3_1",
+   "tier": "high",
+   "target": 3,
+   "got": 3,
+   "status": "done",
+   "err": null,
+   "scores": {
+    "a": 1,
+    "b": 1,
+    "c": 1,
+    "total": 3,
+    "disagreement": false,
+    "rubricVersion": "ushistory-v1",
+    "taskType": "saq"
+   },
+   "disagreement": false
+  },
+  {
+   "cell": "ap_us_history-saq3_1",
+   "tier": "mid",
+   "target": 2,
+   "got": 2,
+   "status": "done",
+   "err": null,
+   "scores": {
+    "a": 1,
+    "b": 1,
+    "c": 0,
+    "total": 2,
+    "disagreement": false,
+    "rubricVersion": "ushistory-v1",
+    "taskType": "saq"
+   },
+   "disagreement": false
+  },
+  {
+   "cell": "ap_us_history-saq3_1",
+   "tier": "low",
+   "target": 1,
+   "got": 1,
+   "status": "done",
+   "err": null,
+   "scores": {
+    "a": 1,
+    "b": 0,
+    "c": 0,
+    "total": 1,
+    "disagreement": false,
+    "rubricVersion": "ushistory-v1",
+    "taskType": "saq"
+   },
+   "disagreement": false
+  }
+ ],
+ "mae": 0,
+ "meanSignedError": 0,
+ "ordering": [
+  {
+   "cell": "ap_us_history-saq1_3",
+   "ok": true,
+   "h": 3,
+   "m": 2,
+   "l": 1
+  },
+  {
+   "cell": "ap_us_history-saq2_1",
+   "ok": true,
+   "h": 3,
+   "m": 2,
+   "l": 1
+  },
+  {
+   "cell": "ap_us_history-saq3_1",
+   "ok": true,
+   "h": 3,
+   "m": 2,
+   "l": 1
+  }
+ ],
+ "injection": [],
+ "notes": [
+  "ap_us_history-saq1_3: 2 anchors (leave-one-out) — prompt/sources only for the rest",
+  "ap_us_history-saq1_3: 2 anchors (leave-one-out) — prompt/sources only for the rest",
+  "ap_us_history-saq1_3: 2 anchors (leave-one-out) — prompt/sources only for the rest",
+  "ap_us_history-saq2_1: 2 anchors (leave-one-out) — prompt/sources only for the rest",
+  "ap_us_history-saq2_1: 2 anchors (leave-one-out) — prompt/sources only for the rest",
+  "ap_us_history-saq2_1: 2 anchors (leave-one-out) — prompt/sources only for the rest",
+  "ap_us_history-saq3_1: 2 anchors (leave-one-out) — prompt/sources only for the rest",
+  "ap_us_history-saq3_1: 2 anchors (leave-one-out) — prompt/sources only for the rest",
+  "ap_us_history-saq3_1: 2 anchors (leave-one-out) — prompt/sources only for the rest"
+ ],
+ "diagnostics": [
+  {
+   "reason": "bad_score_thesis",
+   "outTokens": 495,
+   "types": {
+    "a": "number",
+    "a_rationale": "string",
+    "b": "number",
+    "b_rationale": "string",
+    "c": "number",
+    "c_rationale": "string",
+    "improve": "array"
+   },
+   "nums": {
+    "a": 1,
+    "b": 1,
+    "c": 1
+   }
+  },
+  {
+   "reason": "bad_score_thesis",
+   "outTokens": 480,
+   "types": {
+    "a": "number",
+    "a_rationale": "string",
+    "b": "number",
+    "b_rationale": "string",
+    "c": "number",
+    "c_rationale": "string",
+    "improve": "array"
+   },
+   "nums": {
+    "a": 1,
+    "b": 1,
+    "c": 1
+   }
+  },
+  {
+   "reason": "bad_score_thesis",
+   "outTokens": 492,
+   "types": {
+    "a": "number",
+    "a_rationale": "string",
+    "b": "number",
+    "b_rationale": "string",
+    "c": "number",
+    "c_rationale": "string",
+    "improve": "array"
+   },
+   "nums": {
+    "a": 1,
+    "b": 1,
+    "c": 0
+   }
+  },
+  {
+   "reason": "bad_score_thesis",
+   "outTokens": 491,
+   "types": {
+    "a": "number",
+    "a_rationale": "string",
+    "b": "number",
+    "b_rationale": "string",
+    "c": "number",
+    "c_rationale": "string",
+    "improve": "array"
+   },
+   "nums": {
+    "a": 1,
+    "b": 1,
+    "c": 0
+   }
+  },
+  {
+   "reason": "bad_score_thesis",
+   "outTokens": 528,
+   "types": {
+    "a": "number",
+    "a_rationale": "string",
+    "b": "number",
+    "b_rationale": "string",
+    "c": "number",
+    "c_rationale": "string",
+    "improve": "array"
+   },
+   "nums": {
+    "a": 1,
+    "b": 0,
+    "c": 0
+   }
+  },
+  {
+   "reason": "bad_score_thesis",
+   "outTokens": 569,
+   "types": {
+    "a": "number",
+    "a_rationale": "string",
+    "b": "number",
+    "b_rationale": "string",
+    "c": "number",
+    "c_rationale": "string",
+    "improve": "array"
+   },
+   "nums": {
+    "a": 1,
+    "b": 0,
+    "c": 0
+   }
+  },
+  {
+   "reason": "bad_score_thesis",
+   "outTokens": 507,
+   "types": {
+    "a": "number",
+    "a_rationale": "string",
+    "b": "number",
+    "b_rationale": "string",
+    "c": "number",
+    "c_rationale": "string",
+    "improve": "array"
+   },
+   "nums": {
+    "a": 1,
+    "b": 1,
+    "c": 1
+   }
+  },
+  {
+   "reason": "bad_score_thesis",
+   "outTokens": 500,
+   "types": {
+    "a": "number",
+    "a_rationale": "string",
+    "b": "number",
+    "b_rationale": "string",
+    "c": "number",
+    "c_rationale": "string",
+    "improve": "array"
+   },
+   "nums": {
+    "a": 1,
+    "b": 1,
+    "c": 1
+   }
+  },
+  {
+   "reason": "bad_score_thesis",
+   "outTokens": 589,
+   "types": {
+    "a": "number",
+    "b": "number",
+    "c": "number",
+    "a_rationale": "string",
+    "b_rationale": "string",
+    "c_rationale": "string",
+    "improve": "array"
+   },
+   "nums": {
+    "a": 1,
+    "b": 0,
+    "c": 1
+   }
+  },
+  {
+   "reason": "bad_score_thesis",
+   "outTokens": 555,
+   "types": {
+    "a": "number",
+    "a_rationale": "string",
+    "b": "number",
+    "b_rationale": "string",
+    "c": "number",
+    "c_rationale": "string",
+    "improve": "array"
+   },
+   "nums": {
+    "a": 1,
+    "b": 0,
+    "c": 1
+   }
+  },
+  {
+   "reason": "bad_score_thesis",
+   "outTokens": 500,
+   "types": {
+    "a": "number",
+    "a_rationale": "string",
+    "b": "number",
+    "b_rationale": "string",
+    "c": "number",
+    "c_rationale": "string",
+    "improve": "array"
+   },
+   "nums": {
+    "a": 1,
+    "b": 0,
+    "c": 0
+   }
+  },
+  {
+   "reason": "bad_score_thesis",
+   "outTokens": 540,
+   "types": {
+    "a": "number",
+    "a_rationale": "string",
+    "b": "number",
+    "b_rationale": "string",
+    "c": "number",
+    "c_rationale": "string",
+    "improve": "array"
+   },
+   "nums": {
+    "a": 1,
+    "b": 0,
+    "c": 0
+   }
+  },
+  {
+   "reason": "bad_score_thesis",
+   "outTokens": 483,
+   "types": {
+    "a": "number",
+    "a_rationale": "string",
+    "b": "number",
+    "b_rationale": "string",
+    "c": "number",
+    "c_rationale": "string",
+    "improve": "array"
+   },
+   "nums": {
+    "a": 1,
+    "b": 1,
+    "c": 1
+   }
+  },
+  {
+   "reason": "bad_score_thesis",
+   "outTokens": 477,
+   "types": {
+    "a": "number",
+    "a_rationale": "string",
+    "b": "number",
+    "b_rationale": "string",
+    "c": "number",
+    "c_rationale": "string",
+    "improve": "array"
+   },
+   "nums": {
+    "a": 1,
+    "b": 1,
+    "c": 1
+   }
+  },
+  {
+   "reason": "bad_score_thesis",
+   "outTokens": 502,
+   "types": {
+    "a": "number",
+    "a_rationale": "string",
+    "b": "number",
+    "b_rationale": "string",
+    "c": "number",
+    "c_rationale": "string",
+    "improve": "array"
+   },
+   "nums": {
+    "a": 1,
+    "b": 1,
+    "c": 0
+   }
+  },
+  {
+   "reason": "bad_score_thesis",
+   "outTokens": 449,
+   "types": {
+    "a": "number",
+    "a_rationale": "string",
+    "b": "number",
+    "b_rationale": "string",
+    "c": "number",
+    "c_rationale": "string",
+    "improve": "array"
+   },
+   "nums": {
+    "a": 1,
+    "b": 1,
+    "c": 0
+   }
+  },
+  {
+   "reason": "bad_score_thesis",
+   "outTokens": 531,
+   "types": {
+    "a": "number",
+    "b": "number",
+    "c": "number",
+    "a_rationale": "string",
+    "b_rationale": "string",
+    "c_rationale": "string",
+    "improve": "array"
+   },
+   "nums": {
+    "a": 1,
+    "b": 0,
+    "c": 0
+   }
+  },
+  {
+   "reason": "bad_score_thesis",
+   "outTokens": 554,
+   "types": {
+    "a": "number",
+    "b": "number",
+    "c": "number",
+    "a_rationale": "string",
+    "b_rationale": "string",
+    "c_rationale": "string",
+    "improve": "array"
+   },
+   "nums": {
+    "a": 1,
+    "b": 0,
+    "c": 0
+   }
+  }
+ ],
+ "calls": 18,
+ "spentUsd": 0.4331
+}

@@ -1,0 +1,684 @@
+{
+ "cells": [
+  {
+   "system": "sat_rw",
+   "domain": "rw_information_ideas",
+   "skill": "central_ideas_details",
+   "difficulty": "medium",
+   "target": 13,
+   "supply": 1,
+   "shortfall": 4,
+   "generate": 9
+  },
+  {
+   "system": "sat_rw",
+   "domain": "rw_information_ideas",
+   "skill": "central_ideas_details",
+   "difficulty": "hard",
+   "target": 2,
+   "supply": 0,
+   "shortfall": 3,
+   "generate": 6
+  },
+  {
+   "system": "sat_rw",
+   "domain": "rw_information_ideas",
+   "skill": "inferences",
+   "difficulty": "easy",
+   "target": 3,
+   "supply": 0,
+   "shortfall": 1,
+   "generate": 3
+  },
+  {
+   "system": "sat_rw",
+   "domain": "rw_information_ideas",
+   "skill": "inferences",
+   "difficulty": "medium",
+   "target": 11,
+   "supply": 1,
+   "shortfall": 5,
+   "generate": 12
+  },
+  {
+   "system": "sat_rw",
+   "domain": "rw_information_ideas",
+   "skill": "inferences",
+   "difficulty": "hard",
+   "target": 2,
+   "supply": 0,
+   "shortfall": 3,
+   "generate": 7
+  },
+  {
+   "system": "sat_rw",
+   "domain": "rw_information_ideas",
+   "skill": "command_of_evidence_text",
+   "difficulty": "easy",
+   "target": 3,
+   "supply": 0,
+   "shortfall": 2,
+   "generate": 5
+  },
+  {
+   "system": "sat_rw",
+   "domain": "rw_information_ideas",
+   "skill": "command_of_evidence_text",
+   "difficulty": "medium",
+   "target": 11,
+   "supply": 0,
+   "shortfall": 4,
+   "generate": 9
+  },
+  {
+   "system": "sat_rw",
+   "domain": "rw_information_ideas",
+   "skill": "command_of_evidence_text",
+   "difficulty": "hard",
+   "target": 2,
+   "supply": 0,
+   "shortfall": 3,
+   "generate": 7
+  },
+  {
+   "system": "sat_rw",
+   "domain": "rw_information_ideas",
+   "skill": "command_of_evidence_quant",
+   "difficulty": "easy",
+   "target": 3,
+   "supply": 0,
+   "shortfall": 1,
+   "generate": 3
+  },
+  {
+   "system": "sat_rw",
+   "domain": "rw_information_ideas",
+   "skill": "command_of_evidence_quant",
+   "difficulty": "medium",
+   "target": 8,
+   "supply": 2,
+   "shortfall": 4,
+   "generate": 10
+  },
+  {
+   "system": "sat_rw",
+   "domain": "rw_information_ideas",
+   "skill": "command_of_evidence_quant",
+   "difficulty": "hard",
+   "target": 1,
+   "supply": 0,
+   "shortfall": 3,
+   "generate": 7
+  },
+  {
+   "system": "sat_rw",
+   "domain": "rw_craft_structure",
+   "skill": "words_in_context",
+   "difficulty": "easy",
+   "target": 7,
+   "supply": 0,
+   "shortfall": 3,
+   "generate": 7
+  },
+  {
+   "system": "sat_rw",
+   "domain": "rw_craft_structure",
+   "skill": "words_in_context",
+   "difficulty": "medium",
+   "target": 21,
+   "supply": 0,
+   "shortfall": 14,
+   "generate": 40
+  },
+  {
+   "system": "sat_rw",
+   "domain": "rw_craft_structure",
+   "skill": "words_in_context",
+   "difficulty": "hard",
+   "target": 3,
+   "supply": 0,
+   "shortfall": 5,
+   "generate": 18
+  },
+  {
+   "system": "sat_rw",
+   "domain": "rw_craft_structure",
+   "skill": "text_structure_purpose",
+   "difficulty": "easy",
+   "target": 5,
+   "supply": 0,
+   "shortfall": 1,
+   "generate": 3
+  },
+  {
+   "system": "sat_rw",
+   "domain": "rw_craft_structure",
+   "skill": "text_structure_purpose",
+   "difficulty": "medium",
+   "target": 16,
+   "supply": 2,
+   "shortfall": 8,
+   "generate": 22
+  },
+  {
+   "system": "sat_rw",
+   "domain": "rw_craft_structure",
+   "skill": "text_structure_purpose",
+   "difficulty": "hard",
+   "target": 3,
+   "supply": 0,
+   "shortfall": 4,
+   "generate": 15
+  },
+  {
+   "system": "sat_rw",
+   "domain": "rw_craft_structure",
+   "skill": "cross_text_connections",
+   "difficulty": "medium",
+   "target": 9,
+   "supply": 1,
+   "shortfall": 5,
+   "generate": 13
+  },
+  {
+   "system": "sat_rw",
+   "domain": "rw_craft_structure",
+   "skill": "cross_text_connections",
+   "difficulty": "hard",
+   "target": 2,
+   "supply": 0,
+   "shortfall": 4,
+   "generate": 9
+  },
+  {
+   "system": "sat_rw",
+   "domain": "rw_expression_ideas",
+   "skill": "rhetorical_synthesis",
+   "difficulty": "easy",
+   "target": 5,
+   "supply": 0,
+   "shortfall": 1,
+   "generate": 3
+  },
+  {
+   "system": "sat_rw",
+   "domain": "rw_expression_ideas",
+   "skill": "rhetorical_synthesis",
+   "difficulty": "medium",
+   "target": 16,
+   "supply": 1,
+   "shortfall": 6,
+   "generate": 14
+  },
+  {
+   "system": "sat_rw",
+   "domain": "rw_expression_ideas",
+   "skill": "rhetorical_synthesis",
+   "difficulty": "hard",
+   "target": 3,
+   "supply": 0,
+   "shortfall": 5,
+   "generate": 18
+  },
+  {
+   "system": "sat_rw",
+   "domain": "rw_expression_ideas",
+   "skill": "transitions",
+   "difficulty": "easy",
+   "target": 5,
+   "supply": 0,
+   "shortfall": 1,
+   "generate": 3
+  },
+  {
+   "system": "sat_rw",
+   "domain": "rw_expression_ideas",
+   "skill": "transitions",
+   "difficulty": "medium",
+   "target": 16,
+   "supply": 3,
+   "shortfall": 2,
+   "generate": 5
+  },
+  {
+   "system": "sat_rw",
+   "domain": "rw_expression_ideas",
+   "skill": "transitions",
+   "difficulty": "hard",
+   "target": 3,
+   "supply": 0,
+   "shortfall": 5,
+   "generate": 18
+  },
+  {
+   "system": "sat_rw",
+   "domain": "rw_standard_english",
+   "skill": "boundaries",
+   "difficulty": "easy",
+   "target": 7,
+   "supply": 0,
+   "shortfall": 3,
+   "generate": 7
+  },
+  {
+   "system": "sat_rw",
+   "domain": "rw_standard_english",
+   "skill": "boundaries",
+   "difficulty": "hard",
+   "target": 4,
+   "supply": 0,
+   "shortfall": 5,
+   "generate": 18
+  },
+  {
+   "system": "sat_rw",
+   "domain": "rw_standard_english",
+   "skill": "form_structure_sense",
+   "difficulty": "easy",
+   "target": 7,
+   "supply": 0,
+   "shortfall": 2,
+   "generate": 5
+  },
+  {
+   "system": "sat_rw",
+   "domain": "rw_standard_english",
+   "skill": "form_structure_sense",
+   "difficulty": "medium",
+   "target": 21,
+   "supply": 0,
+   "shortfall": 2,
+   "generate": 5
+  },
+  {
+   "system": "sat_rw",
+   "domain": "rw_standard_english",
+   "skill": "form_structure_sense",
+   "difficulty": "hard",
+   "target": 3,
+   "supply": 0,
+   "shortfall": 4,
+   "generate": 15
+  },
+  {
+   "system": "sat_math",
+   "domain": "algebra",
+   "skill": "linear_equations_one_var",
+   "difficulty": "easy",
+   "target": 3,
+   "supply": 2,
+   "shortfall": 1,
+   "generate": 3
+  },
+  {
+   "system": "sat_math",
+   "domain": "algebra",
+   "skill": "linear_equations_one_var",
+   "difficulty": "medium",
+   "target": 9,
+   "supply": 10,
+   "shortfall": 1,
+   "generate": 3
+  },
+  {
+   "system": "sat_math",
+   "domain": "algebra",
+   "skill": "linear_equations_one_var",
+   "difficulty": "hard",
+   "target": 2,
+   "supply": 1,
+   "shortfall": 2,
+   "generate": 4
+  },
+  {
+   "system": "sat_math",
+   "domain": "algebra",
+   "skill": "linear_functions",
+   "difficulty": "easy",
+   "target": 3,
+   "supply": 4,
+   "shortfall": 1,
+   "generate": 3
+  },
+  {
+   "system": "sat_math",
+   "domain": "algebra",
+   "skill": "linear_functions",
+   "difficulty": "hard",
+   "target": 2,
+   "supply": 2,
+   "shortfall": 2,
+   "generate": 5
+  },
+  {
+   "system": "sat_math",
+   "domain": "algebra",
+   "skill": "linear_equations_two_var",
+   "difficulty": "easy",
+   "target": 3,
+   "supply": 0,
+   "shortfall": 1,
+   "generate": 3
+  },
+  {
+   "system": "sat_math",
+   "domain": "algebra",
+   "skill": "linear_equations_two_var",
+   "difficulty": "medium",
+   "target": 9,
+   "supply": 1,
+   "shortfall": 1,
+   "generate": 3
+  },
+  {
+   "system": "sat_math",
+   "domain": "algebra",
+   "skill": "linear_equations_two_var",
+   "difficulty": "hard",
+   "target": 2,
+   "supply": 0,
+   "shortfall": 4,
+   "generate": 7
+  },
+  {
+   "system": "sat_math",
+   "domain": "algebra",
+   "skill": "systems_linear",
+   "difficulty": "easy",
+   "target": 3,
+   "supply": 1,
+   "shortfall": 1,
+   "generate": 3
+  },
+  {
+   "system": "sat_math",
+   "domain": "algebra",
+   "skill": "systems_linear",
+   "difficulty": "medium",
+   "target": 9,
+   "supply": 4,
+   "shortfall": 2,
+   "generate": 5
+  },
+  {
+   "system": "sat_math",
+   "domain": "algebra",
+   "skill": "systems_linear",
+   "difficulty": "hard",
+   "target": 2,
+   "supply": 0,
+   "shortfall": 4,
+   "generate": 8
+  },
+  {
+   "system": "sat_math",
+   "domain": "algebra",
+   "skill": "linear_inequalities",
+   "difficulty": "easy",
+   "target": 3,
+   "supply": 2,
+   "shortfall": 2,
+   "generate": 5
+  },
+  {
+   "system": "sat_math",
+   "domain": "algebra",
+   "skill": "linear_inequalities",
+   "difficulty": "medium",
+   "target": 9,
+   "supply": 7,
+   "shortfall": 2,
+   "generate": 5
+  },
+  {
+   "system": "sat_math",
+   "domain": "algebra",
+   "skill": "linear_inequalities",
+   "difficulty": "hard",
+   "target": 1,
+   "supply": 1,
+   "shortfall": 2,
+   "generate": 5
+  },
+  {
+   "system": "sat_math",
+   "domain": "advanced_math",
+   "skill": "equivalent_expressions",
+   "difficulty": "easy",
+   "target": 5,
+   "supply": 1,
+   "shortfall": 1,
+   "generate": 3
+  },
+  {
+   "system": "sat_math",
+   "domain": "advanced_math",
+   "skill": "equivalent_expressions",
+   "difficulty": "medium",
+   "target": 15,
+   "supply": 7,
+   "shortfall": 1,
+   "generate": 3
+  },
+  {
+   "system": "sat_math",
+   "domain": "advanced_math",
+   "skill": "equivalent_expressions",
+   "difficulty": "hard",
+   "target": 3,
+   "supply": 0,
+   "shortfall": 5,
+   "generate": 18
+  },
+  {
+   "system": "sat_math",
+   "domain": "advanced_math",
+   "skill": "nonlinear_equations_systems",
+   "difficulty": "medium",
+   "target": 15,
+   "supply": 2,
+   "shortfall": 2,
+   "generate": 5
+  },
+  {
+   "system": "sat_math",
+   "domain": "advanced_math",
+   "skill": "nonlinear_equations_systems",
+   "difficulty": "hard",
+   "target": 3,
+   "supply": 0,
+   "shortfall": 5,
+   "generate": 18
+  },
+  {
+   "system": "sat_math",
+   "domain": "advanced_math",
+   "skill": "nonlinear_functions",
+   "difficulty": "easy",
+   "target": 5,
+   "supply": 3,
+   "shortfall": 2,
+   "generate": 4
+  },
+  {
+   "system": "sat_math",
+   "domain": "advanced_math",
+   "skill": "nonlinear_functions",
+   "difficulty": "hard",
+   "target": 3,
+   "supply": 1,
+   "shortfall": 4,
+   "generate": 7
+  },
+  {
+   "system": "sat_math",
+   "domain": "problem_solving_data",
+   "skill": "ratios_rates_units",
+   "difficulty": "easy",
+   "target": 1,
+   "supply": 1,
+   "shortfall": 2,
+   "generate": 8
+  },
+  {
+   "system": "sat_math",
+   "domain": "problem_solving_data",
+   "skill": "ratios_rates_units",
+   "difficulty": "hard",
+   "target": 1,
+   "supply": 0,
+   "shortfall": 3,
+   "generate": 11
+  },
+  {
+   "system": "sat_math",
+   "domain": "problem_solving_data",
+   "skill": "percentages",
+   "difficulty": "easy",
+   "target": 1,
+   "supply": 1,
+   "shortfall": 2,
+   "generate": 5
+  },
+  {
+   "system": "sat_math",
+   "domain": "problem_solving_data",
+   "skill": "percentages",
+   "difficulty": "hard",
+   "target": 1,
+   "supply": 1,
+   "shortfall": 2,
+   "generate": 5
+  },
+  {
+   "system": "sat_math",
+   "domain": "problem_solving_data",
+   "skill": "one_variable_data",
+   "difficulty": "easy",
+   "target": 1,
+   "supply": 2,
+   "shortfall": 1,
+   "generate": 3
+  },
+  {
+   "system": "sat_math",
+   "domain": "problem_solving_data",
+   "skill": "two_variable_data",
+   "difficulty": "easy",
+   "target": 1,
+   "supply": 1,
+   "shortfall": 2,
+   "generate": 5
+  },
+  {
+   "system": "sat_math",
+   "domain": "problem_solving_data",
+   "skill": "probability",
+   "difficulty": "easy",
+   "target": 1,
+   "supply": 1,
+   "shortfall": 2,
+   "generate": 5
+  },
+  {
+   "system": "sat_math",
+   "domain": "problem_solving_data",
+   "skill": "inference_margin_error",
+   "difficulty": "easy",
+   "target": 1,
+   "supply": 0,
+   "shortfall": 1,
+   "generate": 2
+  },
+  {
+   "system": "sat_math",
+   "domain": "problem_solving_data",
+   "skill": "inference_margin_error",
+   "difficulty": "medium",
+   "target": 3,
+   "supply": 4,
+   "shortfall": 1,
+   "generate": 2
+  },
+  {
+   "system": "sat_math",
+   "domain": "problem_solving_data",
+   "skill": "evaluating_statistical_claims",
+   "difficulty": "easy",
+   "target": 1,
+   "supply": 1,
+   "shortfall": 2,
+   "generate": 5
+  },
+  {
+   "system": "sat_math",
+   "domain": "problem_solving_data",
+   "skill": "evaluating_statistical_claims",
+   "difficulty": "medium",
+   "target": 3,
+   "supply": 4,
+   "shortfall": 1,
+   "generate": 3
+  },
+  {
+   "system": "sat_math",
+   "domain": "geometry_trig",
+   "skill": "lines_angles_triangles",
+   "difficulty": "easy",
+   "target": 2,
+   "supply": 0,
+   "shortfall": 1,
+   "generate": 3
+  },
+  {
+   "system": "sat_math",
+   "domain": "geometry_trig",
+   "skill": "lines_angles_triangles",
+   "difficulty": "medium",
+   "target": 5,
+   "supply": 0,
+   "shortfall": 3,
+   "generate": 7
+  },
+  {
+   "system": "sat_math",
+   "domain": "geometry_trig",
+   "skill": "lines_angles_triangles",
+   "difficulty": "hard",
+   "target": 1,
+   "supply": 0,
+   "shortfall": 3,
+   "generate": 7
+  },
+  {
+   "system": "sat_math",
+   "domain": "geometry_trig",
+   "skill": "right_triangles_trigonometry",
+   "difficulty": "easy",
+   "target": 2,
+   "supply": 1,
+   "shortfall": 2,
+   "generate": 8
+  },
+  {
+   "system": "sat_math",
+   "domain": "geometry_trig",
+   "skill": "right_triangles_trigonometry",
+   "difficulty": "hard",
+   "target": 1,
+   "supply": 0,
+   "shortfall": 3,
+   "generate": 11
+  },
+  {
+   "system": "sat_math",
+   "domain": "geometry_trig",
+   "skill": "circles",
+   "difficulty": "hard",
+   "target": 1,
+   "supply": 2,
+   "shortfall": 1,
+   "generate": 3
+  }
+ ]
+}

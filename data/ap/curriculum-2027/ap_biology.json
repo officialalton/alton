@@ -1,0 +1,3801 @@
+{
+ "schemaVersion": 1,
+ "subject": {
+  "apCode": "ap_biology",
+  "name": "AP Biology",
+  "family": "biology",
+  "edition": "ced-2027",
+  "cedVersion": "AP Biology CED (V.1, (c)2025; 2027 exam hybrid digital)",
+  "examYear": 2027,
+  "sourceUrl": "https://apcentral.collegeboard.org/media/pdf/ap-biology-course-and-exam-description.pdf",
+  "officialTopicCodes": true,
+  "designNotes": "Unit/topic codes, titles (shortened where long), class periods, MC unit weights and per-topic suggested skills follow the CED. Exam: 60 MC questions (50%, 90 min) + 6 FRQ (50%, 90 min) per CED exam overview. The CED publishes no percentage weights per science practice, so no skill weights are recorded; all six practices are assessed in both sections. Sub-keywords, kinds, prerequisites and estLessons are original tutoring-design judgement, not CED content. Sub-keyword skill codes default to the topic's first suggested skill unless a more specific one is given. Per-topic 'skills' list the CED suggested skills (CED lists one to two per topic)."
+ },
+ "skills": [
+  {
+   "code": "1.A",
+   "category": "Practice 1: Concept Explanation",
+   "label": "Describe biological concepts and processes"
+  },
+  {
+   "code": "1.B",
+   "category": "Practice 1: Concept Explanation",
+   "label": "Explain biological concepts and processes"
+  },
+  {
+   "code": "1.C",
+   "category": "Practice 1: Concept Explanation",
+   "label": "Explain biological concepts and processes in applied contexts"
+  },
+  {
+   "code": "2.A",
+   "category": "Practice 2: Visual Representations",
+   "label": "Describe characteristics of visual representations"
+  },
+  {
+   "code": "2.B",
+   "category": "Practice 2: Visual Representations",
+   "label": "Explain relationships between model characteristics in theory and application"
+  },
+  {
+   "code": "2.C",
+   "category": "Practice 2: Visual Representations",
+   "label": "Explain how models relate to larger principles or theories"
+  },
+  {
+   "code": "2.D",
+   "category": "Practice 2: Visual Representations",
+   "label": "Represent relationships within biological models"
+  },
+  {
+   "code": "3.A",
+   "category": "Practice 3: Questions and Methods",
+   "label": "Identify or pose a testable question"
+  },
+  {
+   "code": "3.B",
+   "category": "Practice 3: Questions and Methods",
+   "label": "State the null hypothesis or predict experimental results"
+  },
+  {
+   "code": "3.C",
+   "category": "Practice 3: Questions and Methods",
+   "label": "Identify experimental procedures (variables, controls)"
+  },
+  {
+   "code": "3.D",
+   "category": "Practice 3: Questions and Methods",
+   "label": "Propose a new investigation from evaluating design or evidence"
+  },
+  {
+   "code": "4.A",
+   "category": "Practice 4: Representing and Describing Data",
+   "label": "Construct a graph to represent data"
+  },
+  {
+   "code": "4.B",
+   "category": "Practice 4: Representing and Describing Data",
+   "label": "Describe data from a table or graph"
+  },
+  {
+   "code": "5.A",
+   "category": "Practice 5: Statistical Tests and Data Analysis",
+   "label": "Perform mathematical calculations"
+  },
+  {
+   "code": "5.B",
+   "category": "Practice 5: Statistical Tests and Data Analysis",
+   "label": "Use confidence intervals and error bars"
+  },
+  {
+   "code": "5.C",
+   "category": "Practice 5: Statistical Tests and Data Analysis",
+   "label": "Perform chi-square hypothesis testing"
+  },
+  {
+   "code": "5.D",
+   "category": "Practice 5: Statistical Tests and Data Analysis",
+   "label": "Use data to evaluate a hypothesis or prediction"
+  },
+  {
+   "code": "6.A",
+   "category": "Practice 6: Argumentation",
+   "label": "Make a scientific claim"
+  },
+  {
+   "code": "6.B",
+   "category": "Practice 6: Argumentation",
+   "label": "Support a claim with evidence"
+  },
+  {
+   "code": "6.C",
+   "category": "Practice 6: Argumentation",
+   "label": "Provide reasoning connecting evidence to theory"
+  },
+  {
+   "code": "6.D",
+   "category": "Practice 6: Argumentation",
+   "label": "Explain how results relate to larger concepts"
+  },
+  {
+   "code": "6.E",
+   "category": "Practice 6: Argumentation",
+   "label": "Predict causes or effects of a change in a biological system"
+  }
+ ],
+ "weights": [
+  {
+   "axis": "unit",
+   "code": "1",
+   "section": "mc",
+   "min": 8,
+   "max": 11,
+   "source": "AP Biology CED (V.1, 2025), Exam Information, unit exam weighting table (multiple-choice section)"
+  },
+  {
+   "axis": "unit",
+   "code": "2",
+   "section": "mc",
+   "min": 10,
+   "max": 13,
+   "source": "AP Biology CED (V.1, 2025), Exam Information, unit exam weighting table (multiple-choice section)"
+  },
+  {
+   "axis": "unit",
+   "code": "3",
+   "section": "mc",
+   "min": 12,
+   "max": 16,
+   "source": "AP Biology CED (V.1, 2025), Exam Information, unit exam weighting table (multiple-choice section)"
+  },
+  {
+   "axis": "unit",
+   "code": "4",
+   "section": "mc",
+   "min": 10,
+   "max": 15,
+   "source": "AP Biology CED (V.1, 2025), Exam Information, unit exam weighting table (multiple-choice section)"
+  },
+  {
+   "axis": "unit",
+   "code": "5",
+   "section": "mc",
+   "min": 8,
+   "max": 11,
+   "source": "AP Biology CED (V.1, 2025), Exam Information, unit exam weighting table (multiple-choice section)"
+  },
+  {
+   "axis": "unit",
+   "code": "6",
+   "section": "mc",
+   "min": 12,
+   "max": 16,
+   "source": "AP Biology CED (V.1, 2025), Exam Information, unit exam weighting table (multiple-choice section)"
+  },
+  {
+   "axis": "unit",
+   "code": "7",
+   "section": "mc",
+   "min": 13,
+   "max": 20,
+   "source": "AP Biology CED (V.1, 2025), Exam Information, unit exam weighting table (multiple-choice section)"
+  },
+  {
+   "axis": "unit",
+   "code": "8",
+   "section": "mc",
+   "min": 10,
+   "max": 15,
+   "source": "AP Biology CED (V.1, 2025), Exam Information, unit exam weighting table (multiple-choice section)"
+  }
+ ],
+ "units": [
+  {
+   "code": "1",
+   "title": "Chemistry of Life",
+   "officialClassPeriods": "~9–11",
+   "topics": [
+    {
+     "code": "1.1",
+     "title": "Structure of Water and Hydrogen Bonding",
+     "scope": "both",
+     "skills": [
+      "2.A"
+     ],
+     "requires": [],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "1.1#1",
+       "label": "Polarity of the water molecule",
+       "kind": "concept",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [],
+       "estLessons": 0.15
+      },
+      {
+       "code": "1.1#2",
+       "label": "Hydrogen bonds and water's properties",
+       "kind": "concept",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [
+        "1.1#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "1.1#3",
+       "label": "Cohesion vs adhesion in plants and drops",
+       "kind": "misconception",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [
+        "1.1#2"
+       ],
+       "estLessons": 0.15
+      },
+      {
+       "code": "1.1#4",
+       "label": "Reading water-molecule and bonding diagrams",
+       "kind": "representation",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [
+        "1.1#2"
+       ],
+       "estLessons": 0.15
+      }
+     ]
+    },
+    {
+     "code": "1.2",
+     "title": "Elements of Life",
+     "scope": "both",
+     "skills": [
+      "2.A"
+     ],
+     "requires": [
+      "1.1"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "1.2#1",
+       "label": "Core elements and why carbon is versatile",
+       "kind": "concept",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [],
+       "estLessons": 0.15
+      },
+      {
+       "code": "1.2#2",
+       "label": "Monomer, polymer, dehydration and hydrolysis",
+       "kind": "concept",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [
+        "1.2#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "1.2#3",
+       "label": "Mixing up synthesis and breakdown reactions",
+       "kind": "misconception",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [
+        "1.2#2"
+       ],
+       "estLessons": 0.15
+      },
+      {
+       "code": "1.2#4",
+       "label": "Interpreting structural formulas",
+       "kind": "representation",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [
+        "1.2#1"
+       ],
+       "estLessons": 0.15
+      }
+     ]
+    },
+    {
+     "code": "1.3",
+     "title": "Introduction to Macromolecules",
+     "scope": "both",
+     "skills": [
+      "2.A"
+     ],
+     "requires": [
+      "1.2"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "1.3#1",
+       "label": "Four macromolecule classes and their monomers",
+       "kind": "concept",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [
+        "1.2"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "1.3#2",
+       "label": "Matching functional groups to molecule class",
+       "kind": "skill",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [
+        "1.3#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "1.3#3",
+       "label": "Assuming every polymer is made of one repeating unit",
+       "kind": "misconception",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [
+        "1.3#1"
+       ],
+       "estLessons": 0.15
+      }
+     ]
+    },
+    {
+     "code": "1.4",
+     "title": "Carbohydrates",
+     "scope": "both",
+     "skills": [
+      "1.A"
+     ],
+     "requires": [
+      "1.3"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "1.4#1",
+       "label": "Monosaccharide to polysaccharide structures",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [
+        "1.3"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "1.4#2",
+       "label": "Glycosidic links: starch vs cellulose vs glycogen",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [
+        "1.4#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "1.4#3",
+       "label": "Ring and chain sugar drawings",
+       "kind": "representation",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [
+        "1.4#1"
+       ],
+       "estLessons": 0.15
+      }
+     ]
+    },
+    {
+     "code": "1.5",
+     "title": "Lipids",
+     "scope": "both",
+     "skills": [
+      "6.E"
+     ],
+     "requires": [
+      "1.3"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "1.5#1",
+       "label": "Fats, phospholipids and steroids compared",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [
+        "1.3"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "1.5#2",
+       "label": "Saturated vs unsaturated tail effects",
+       "kind": "concept",
+       "skills": [
+        "6.E"
+       ],
+       "requires": [
+        "1.5#1"
+       ],
+       "estLessons": 0.15
+      },
+      {
+       "code": "1.5#3",
+       "label": "Thinking hydrophobic means lipids cannot interact with water",
+       "kind": "misconception",
+       "skills": [
+        "6.E"
+       ],
+       "requires": [
+        "1.5#1"
+       ],
+       "estLessons": 0.15
+      },
+      {
+       "code": "1.5#4",
+       "label": "Predicting membrane or fat behavior from structure",
+       "kind": "skill",
+       "skills": [
+        "6.E"
+       ],
+       "requires": [
+        "1.5#2"
+       ],
+       "estLessons": 0.15
+      }
+     ]
+    },
+    {
+     "code": "1.6",
+     "title": "Nucleic Acids",
+     "scope": "both",
+     "skills": [
+      "2.A"
+     ],
+     "requires": [
+      "1.3"
+     ],
+     "estLessons": 1.0,
+     "subKeywords": [
+      {
+       "code": "1.6#1",
+       "label": "Nucleotide parts and 5' to 3' direction",
+       "kind": "concept",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [
+        "1.3"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "1.6#2",
+       "label": "DNA vs RNA structure and base pairing",
+       "kind": "concept",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [
+        "1.6#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "1.6#3",
+       "label": "Reading antiparallel strand diagrams",
+       "kind": "representation",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [
+        "1.6#1"
+       ],
+       "estLessons": 0.15
+      },
+      {
+       "code": "1.6#4",
+       "label": "Confusing which strand is which polarity",
+       "kind": "misconception",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [
+        "1.6#3"
+       ],
+       "estLessons": 0.15
+      }
+     ]
+    },
+    {
+     "code": "1.7",
+     "title": "Proteins",
+     "scope": "both",
+     "skills": [
+      "6.E"
+     ],
+     "requires": [
+      "1.3",
+      "1.4"
+     ],
+     "estLessons": 1.25,
+     "subKeywords": [
+      {
+       "code": "1.7#1",
+       "label": "Amino acid R groups and peptide bonds",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [
+        "1.3"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "1.7#2",
+       "label": "Four levels of protein structure",
+       "kind": "concept",
+       "skills": [
+        "6.E"
+       ],
+       "requires": [
+        "1.7#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "1.7#3",
+       "label": "Primary sequence changes alter folding and function",
+       "kind": "skill",
+       "skills": [
+        "6.E"
+       ],
+       "requires": [
+        "1.7#2"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "1.7#4",
+       "label": "Confusing secondary with tertiary interactions",
+       "kind": "misconception",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [
+        "1.7#2"
+       ],
+       "estLessons": 0.15
+      },
+      {
+       "code": "1.7#5",
+       "label": "Interpreting folded-protein models",
+       "kind": "representation",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [
+        "1.7#2"
+       ],
+       "estLessons": 0.15
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "2",
+   "title": "Cells",
+   "officialClassPeriods": "~14–16",
+   "topics": [
+    {
+     "code": "2.1",
+     "title": "Cell Structure and Function",
+     "scope": "both",
+     "skills": [
+      "1.A",
+      "6.A"
+     ],
+     "requires": [
+      "1.7"
+     ],
+     "estLessons": 1.0,
+     "subKeywords": [
+      {
+       "code": "2.1#1",
+       "label": "Organelle functions and cooperation",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [
+        "1.7"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "2.1#2",
+       "label": "Prokaryote vs eukaryote features",
+       "kind": "concept",
+       "skills": [
+        "1.A",
+        "6.A"
+       ],
+       "requires": [],
+       "estLessons": 0.3
+      },
+      {
+       "code": "2.1#3",
+       "label": "Claiming organelle roles with evidence",
+       "kind": "skill",
+       "skills": [
+        "6.A"
+       ],
+       "requires": [
+        "2.1#1"
+       ],
+       "estLessons": 0.15
+      },
+      {
+       "code": "2.1#4",
+       "label": "Reading labeled cell diagrams",
+       "kind": "representation",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [
+        "2.1#1"
+       ],
+       "estLessons": 0.15
+      }
+     ]
+    },
+    {
+     "code": "2.2",
+     "title": "Cell Size",
+     "scope": "both",
+     "skills": [
+      "2.D",
+      "5.A"
+     ],
+     "requires": [
+      "2.1"
+     ],
+     "estLessons": 1.0,
+     "subKeywords": [
+      {
+       "code": "2.2#1",
+       "label": "Surface-area-to-volume ratio",
+       "kind": "concept",
+       "skills": [
+        "2.D"
+       ],
+       "requires": [
+        "2.1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "2.2#2",
+       "label": "Calculating SA:V for cubes and spheres",
+       "kind": "skill",
+       "skills": [
+        "5.A"
+       ],
+       "requires": [
+        "2.2#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "2.2#3",
+       "label": "Bigger cell always has more exchange so does better",
+       "kind": "misconception",
+       "skills": [
+        "2.D"
+       ],
+       "requires": [
+        "2.2#1"
+       ],
+       "estLessons": 0.15
+      },
+      {
+       "code": "2.2#4",
+       "label": "Modeling exchange with diagrams",
+       "kind": "representation",
+       "skills": [
+        "2.D"
+       ],
+       "requires": [
+        "2.2#1"
+       ],
+       "estLessons": 0.15
+      }
+     ]
+    },
+    {
+     "code": "2.3",
+     "title": "Plasma Membrane",
+     "scope": "both",
+     "skills": [
+      "2.A"
+     ],
+     "requires": [
+      "1.5",
+      "2.1"
+     ],
+     "estLessons": 1.0,
+     "subKeywords": [
+      {
+       "code": "2.3#1",
+       "label": "Fluid mosaic structure",
+       "kind": "concept",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [
+        "1.5"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "2.3#2",
+       "label": "Roles of proteins, cholesterol and carbohydrates",
+       "kind": "concept",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [
+        "2.3#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "2.3#3",
+       "label": "Reading membrane cross-section models",
+       "kind": "representation",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [
+        "2.3#1"
+       ],
+       "estLessons": 0.15
+      },
+      {
+       "code": "2.3#4",
+       "label": "Thinking the membrane is a rigid wall",
+       "kind": "misconception",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [
+        "2.3#1"
+       ],
+       "estLessons": 0.15
+      }
+     ]
+    },
+    {
+     "code": "2.4",
+     "title": "Membrane Permeability",
+     "scope": "both",
+     "skills": [
+      "5.D"
+     ],
+     "requires": [
+      "2.3"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "2.4#1",
+       "label": "Which molecules cross and why",
+       "kind": "concept",
+       "skills": [
+        "5.D"
+       ],
+       "requires": [
+        "2.3"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "2.4#2",
+       "label": "Using data to judge a permeability hypothesis",
+       "kind": "skill",
+       "skills": [
+        "5.D"
+       ],
+       "requires": [
+        "2.4#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "2.4#3",
+       "label": "Treating small as always permeable",
+       "kind": "misconception",
+       "skills": [
+        "5.D"
+       ],
+       "requires": [
+        "2.4#1"
+       ],
+       "estLessons": 0.15
+      }
+     ]
+    },
+    {
+     "code": "2.5",
+     "title": "Membrane Transport",
+     "scope": "both",
+     "skills": [
+      "3.D"
+     ],
+     "requires": [
+      "2.4"
+     ],
+     "estLessons": 1.0,
+     "subKeywords": [
+      {
+       "code": "2.5#1",
+       "label": "Passive vs active movement and energy",
+       "kind": "concept",
+       "skills": [
+        "3.D"
+       ],
+       "requires": [
+        "2.4"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "2.5#2",
+       "label": "Concentration gradients and free diffusion",
+       "kind": "concept",
+       "skills": [
+        "3.D"
+       ],
+       "requires": [
+        "2.5#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "2.5#3",
+       "label": "Designing a follow-up transport experiment",
+       "kind": "skill",
+       "skills": [
+        "3.D"
+       ],
+       "requires": [
+        "2.5#2"
+       ],
+       "estLessons": 0.15
+      },
+      {
+       "code": "2.5#4",
+       "label": "Assuming molecules stop moving at equilibrium",
+       "kind": "misconception",
+       "skills": [
+        "3.D"
+       ],
+       "requires": [
+        "2.5#2"
+       ],
+       "estLessons": 0.15
+      }
+     ]
+    },
+    {
+     "code": "2.6",
+     "title": "Facilitated Diffusion",
+     "scope": "both",
+     "skills": [
+      "6.E"
+     ],
+     "requires": [
+      "2.5"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "2.6#1",
+       "label": "Channel and carrier proteins",
+       "kind": "concept",
+       "skills": [
+        "6.E"
+       ],
+       "requires": [
+        "2.5"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "2.6#2",
+       "label": "Predicting transport after protein loss",
+       "kind": "skill",
+       "skills": [
+        "6.E"
+       ],
+       "requires": [
+        "2.6#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "2.6#3",
+       "label": "Confusing facilitated diffusion with active transport",
+       "kind": "misconception",
+       "skills": [
+        "6.E"
+       ],
+       "requires": [
+        "2.6#1"
+       ],
+       "estLessons": 0.15
+      }
+     ]
+    },
+    {
+     "code": "2.7",
+     "title": "Tonicity and Osmoregulation",
+     "scope": "both",
+     "skills": [
+      "4.A"
+     ],
+     "requires": [
+      "2.5"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "2.7#1",
+       "label": "Water potential and osmosis direction",
+       "kind": "concept",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [
+        "2.5"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "2.7#2",
+       "label": "Hypo-, hyper-, isotonic effects on cells",
+       "kind": "concept",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [
+        "2.7#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "2.7#3",
+       "label": "Solute moves vs water moves mix-up",
+       "kind": "misconception",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [
+        "2.7#1"
+       ],
+       "estLessons": 0.15
+      },
+      {
+       "code": "2.7#4",
+       "label": "Graphing mass change versus solute concentration",
+       "kind": "skill",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [
+        "2.7#2"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "2.7#5",
+       "label": "Computing water potential",
+       "kind": "skill",
+       "skills": [
+        "5.A"
+       ],
+       "requires": [
+        "2.7#1"
+       ],
+       "estLessons": 0.3
+      }
+     ]
+    },
+    {
+     "code": "2.8",
+     "title": "Mechanisms of Transport",
+     "scope": "both",
+     "skills": [
+      "1.B"
+     ],
+     "requires": [
+      "2.6",
+      "2.7"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "2.8#1",
+       "label": "Bulk transport: endo- and exocytosis",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [
+        "2.7"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "2.8#2",
+       "label": "Coupled and primary active transport",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [
+        "2.6"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "2.8#3",
+       "label": "Comparing transport mechanisms in a chart",
+       "kind": "representation",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [
+        "2.8#1"
+       ],
+       "estLessons": 0.15
+      }
+     ]
+    },
+    {
+     "code": "2.9",
+     "title": "Cell Compartmentalization",
+     "scope": "both",
+     "skills": [
+      "6.E"
+     ],
+     "requires": [
+      "2.3",
+      "2.8"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "2.9#1",
+       "label": "Why internal membranes help reactions",
+       "kind": "concept",
+       "skills": [
+        "6.E"
+       ],
+       "requires": [
+        "2.1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "2.9#2",
+       "label": "Predicting effects of organelle disruption",
+       "kind": "skill",
+       "skills": [
+        "6.E"
+       ],
+       "requires": [
+        "2.9#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "2.9#3",
+       "label": "Membrane surface area in mitochondria and ER",
+       "kind": "concept",
+       "skills": [
+        "6.E"
+       ],
+       "requires": [
+        "2.9#1"
+       ],
+       "estLessons": 0.15
+      }
+     ]
+    },
+    {
+     "code": "2.10",
+     "title": "Origins of Cell Compartmentalization",
+     "scope": "both",
+     "skills": [
+      "6.B"
+     ],
+     "requires": [
+      "2.9"
+     ],
+     "estLessons": 0.5,
+     "subKeywords": [
+      {
+       "code": "2.10#1",
+       "label": "Endosymbiotic theory evidence",
+       "kind": "concept",
+       "skills": [
+        "6.B"
+       ],
+       "requires": [
+        "2.9"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "2.10#2",
+       "label": "Organelles that have their own DNA",
+       "kind": "concept",
+       "skills": [
+        "6.B"
+       ],
+       "requires": [
+        "2.10#1"
+       ],
+       "estLessons": 0.15
+      },
+      {
+       "code": "2.10#3",
+       "label": "Thinking mitochondria evolved from the nucleus",
+       "kind": "misconception",
+       "skills": [
+        "6.B"
+       ],
+       "requires": [
+        "2.10#1"
+       ],
+       "estLessons": 0.15
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "3",
+   "title": "Cellular Energetics",
+   "officialClassPeriods": "~12–14",
+   "topics": [
+    {
+     "code": "3.1",
+     "title": "Enzymes",
+     "scope": "both",
+     "skills": [
+      "1.B",
+      "3.C"
+     ],
+     "requires": [
+      "1.7"
+     ],
+     "estLessons": 1.25,
+     "subKeywords": [
+      {
+       "code": "3.1#1",
+       "label": "Active site, substrate and specificity",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [
+        "1.7"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "3.1#2",
+       "label": "Activation energy and catalysis",
+       "kind": "concept",
+       "skills": [
+        "1.B",
+        "3.C"
+       ],
+       "requires": [
+        "3.1#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "3.1#3",
+       "label": "Enzymes are used up or change the reaction's products",
+       "kind": "misconception",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [
+        "3.1#2"
+       ],
+       "estLessons": 0.15
+      },
+      {
+       "code": "3.1#4",
+       "label": "Setting up variables and controls in enzyme labs",
+       "kind": "skill",
+       "skills": [
+        "3.C"
+       ],
+       "requires": [
+        "3.1#2"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "3.1#5",
+       "label": "Reading energy-profile diagrams",
+       "kind": "representation",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [
+        "3.1#2"
+       ],
+       "estLessons": 0.15
+      }
+     ]
+    },
+    {
+     "code": "3.2",
+     "title": "Environmental Impacts on Enzyme Function",
+     "scope": "both",
+     "skills": [
+      "6.E"
+     ],
+     "requires": [
+      "3.1"
+     ],
+     "estLessons": 1.0,
+     "subKeywords": [
+      {
+       "code": "3.2#1",
+       "label": "Temperature and pH effects on rate",
+       "kind": "concept",
+       "skills": [
+        "6.E"
+       ],
+       "requires": [
+        "3.1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "3.2#2",
+       "label": "Competitive vs noncompetitive inhibition",
+       "kind": "concept",
+       "skills": [
+        "6.E"
+       ],
+       "requires": [
+        "3.2#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "3.2#3",
+       "label": "Denaturation seen as reversible at any temperature",
+       "kind": "misconception",
+       "skills": [
+        "6.E"
+       ],
+       "requires": [
+        "3.2#1"
+       ],
+       "estLessons": 0.15
+      },
+      {
+       "code": "3.2#4",
+       "label": "Predicting rate from changes in the environment",
+       "kind": "skill",
+       "skills": [
+        "6.E"
+       ],
+       "requires": [
+        "3.2#2"
+       ],
+       "estLessons": 0.3
+      }
+     ]
+    },
+    {
+     "code": "3.3",
+     "title": "Cellular Energy",
+     "scope": "both",
+     "skills": [
+      "6.C"
+     ],
+     "requires": [
+      "3.1",
+      "1.6"
+     ],
+     "estLessons": 1.0,
+     "subKeywords": [
+      {
+       "code": "3.3#1",
+       "label": "Free energy and coupled reactions",
+       "kind": "concept",
+       "skills": [
+        "6.C"
+       ],
+       "requires": [
+        "3.1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "3.3#2",
+       "label": "ATP as a coupling molecule",
+       "kind": "concept",
+       "skills": [
+        "6.C"
+       ],
+       "requires": [
+        "3.3#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "3.3#3",
+       "label": "Energy is made rather than transformed",
+       "kind": "misconception",
+       "skills": [
+        "6.C"
+       ],
+       "requires": [
+        "3.3#1"
+       ],
+       "estLessons": 0.15
+      },
+      {
+       "code": "3.3#4",
+       "label": "Justifying claims with energy-flow reasoning",
+       "kind": "skill",
+       "skills": [
+        "6.C"
+       ],
+       "requires": [
+        "3.3#2"
+       ],
+       "estLessons": 0.15
+      }
+     ]
+    },
+    {
+     "code": "3.4",
+     "title": "Photosynthesis",
+     "scope": "both",
+     "skills": [
+      "6.B"
+     ],
+     "requires": [
+      "3.3",
+      "2.9"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "3.4#1",
+       "label": "Light reactions and electron transport",
+       "kind": "concept",
+       "skills": [
+        "6.B"
+       ],
+       "requires": [
+        "3.3",
+        "2.9"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "3.4#2",
+       "label": "Calvin cycle and carbon fixation",
+       "kind": "concept",
+       "skills": [
+        "6.B"
+       ],
+       "requires": [
+        "3.4#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "3.4#3",
+       "label": "Cyclic vs noncyclic electron flow mix-up",
+       "kind": "misconception",
+       "skills": [
+        "6.B"
+       ],
+       "requires": [
+        "3.4#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "3.4#4",
+       "label": "Tracing inputs and outputs of each stage",
+       "kind": "representation",
+       "skills": [
+        "6.B"
+       ],
+       "requires": [
+        "3.4#1",
+        "3.4#2"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "3.4#5",
+       "label": "Plants only photosynthesize, never respire",
+       "kind": "misconception",
+       "skills": [
+        "6.B"
+       ],
+       "requires": [
+        "3.4#2"
+       ],
+       "estLessons": 0.15
+      }
+     ]
+    },
+    {
+     "code": "3.5",
+     "title": "Cellular Respiration",
+     "scope": "both",
+     "skills": [
+      "4.A"
+     ],
+     "requires": [
+      "3.3",
+      "3.4"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "3.5#1",
+       "label": "Glycolysis and fermentation",
+       "kind": "concept",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [
+        "3.3"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "3.5#2",
+       "label": "Krebs cycle and oxidative phosphorylation",
+       "kind": "concept",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [
+        "3.5#1"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "3.5#3",
+       "label": "Confusing where ATP comes from versus where CO2 is released",
+       "kind": "misconception",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [
+        "3.5#2"
+       ],
+       "estLessons": 0.15
+      },
+      {
+       "code": "3.5#4",
+       "label": "Graphing respiration rate data",
+       "kind": "skill",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [
+        "3.5#2"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "3.5#5",
+       "label": "Comparing photosynthesis and respiration side by side",
+       "kind": "representation",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [
+        "3.4#1"
+       ],
+       "estLessons": 0.15
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "4",
+   "title": "Cell Communication and Cell Cycle",
+   "officialClassPeriods": "~12–14",
+   "topics": [
+    {
+     "code": "4.1",
+     "title": "Cell Communication",
+     "scope": "both",
+     "skills": [
+      "1.B"
+     ],
+     "requires": [
+      "2.3"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "4.1#1",
+       "label": "Signal types: local vs long distance",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [
+        "2.3"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "4.1#2",
+       "label": "Cell-to-cell contact and quorum sensing",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [
+        "4.1#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "4.1#3",
+       "label": "Hormone reaches every cell, so every cell responds",
+       "kind": "misconception",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [
+        "4.1#1"
+       ],
+       "estLessons": 0.15
+      }
+     ]
+    },
+    {
+     "code": "4.2",
+     "title": "Introduction to Signal Transduction",
+     "scope": "both",
+     "skills": [
+      "1.A"
+     ],
+     "requires": [
+      "4.1"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "4.2#1",
+       "label": "Reception, transduction, response",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [
+        "4.1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "4.2#2",
+       "label": "Receptor types and ligand fit",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [
+        "4.2#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "4.2#3",
+       "label": "Sketching a pathway from ligand to response",
+       "kind": "representation",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [
+        "4.2#1"
+       ],
+       "estLessons": 0.15
+      }
+     ]
+    },
+    {
+     "code": "4.3",
+     "title": "Signal Transduction Pathways",
+     "scope": "both",
+     "skills": [
+      "6.C"
+     ],
+     "requires": [
+      "4.2"
+     ],
+     "estLessons": 1.0,
+     "subKeywords": [
+      {
+       "code": "4.3#1",
+       "label": "Phosphorylation cascades and second messengers",
+       "kind": "concept",
+       "skills": [
+        "6.C"
+       ],
+       "requires": [
+        "4.2"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "4.3#2",
+       "label": "Amplification of signals",
+       "kind": "concept",
+       "skills": [
+        "6.C"
+       ],
+       "requires": [
+        "4.3#1"
+       ],
+       "estLessons": 0.15
+      },
+      {
+       "code": "4.3#3",
+       "label": "Justifying how a mutated component changes output",
+       "kind": "skill",
+       "skills": [
+        "6.C"
+       ],
+       "requires": [
+        "4.3#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "4.3#4",
+       "label": "Signal enters the nucleus directly in every case",
+       "kind": "misconception",
+       "skills": [
+        "6.C"
+       ],
+       "requires": [
+        "4.3#1"
+       ],
+       "estLessons": 0.15
+      }
+     ]
+    },
+    {
+     "code": "4.4",
+     "title": "Feedback",
+     "scope": "both",
+     "skills": [
+      "6.E"
+     ],
+     "requires": [
+      "4.3"
+     ],
+     "estLessons": 1.0,
+     "subKeywords": [
+      {
+       "code": "4.4#1",
+       "label": "Negative feedback and homeostasis",
+       "kind": "concept",
+       "skills": [
+        "6.E"
+       ],
+       "requires": [
+        "4.3"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "4.4#2",
+       "label": "Positive feedback examples",
+       "kind": "concept",
+       "skills": [
+        "6.E"
+       ],
+       "requires": [
+        "4.4#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "4.4#3",
+       "label": "Negative feedback means the result is bad",
+       "kind": "misconception",
+       "skills": [
+        "6.E"
+       ],
+       "requires": [
+        "4.4#1"
+       ],
+       "estLessons": 0.15
+      },
+      {
+       "code": "4.4#4",
+       "label": "Predicting outcomes of broken feedback loops",
+       "kind": "skill",
+       "skills": [
+        "6.E"
+       ],
+       "requires": [
+        "4.4#2"
+       ],
+       "estLessons": 0.3
+      }
+     ]
+    },
+    {
+     "code": "4.5",
+     "title": "Cell Cycle",
+     "scope": "both",
+     "skills": [
+      "4.B",
+      "5.A"
+     ],
+     "requires": [
+      "1.6",
+      "2.1"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "4.5#1",
+       "label": "Interphase and mitosis stages",
+       "kind": "concept",
+       "skills": [
+        "4.B",
+        "5.A"
+       ],
+       "requires": [
+        "2.1"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "4.5#2",
+       "label": "Cytokinesis in animal vs plant cells",
+       "kind": "concept",
+       "skills": [
+        "4.B",
+        "5.A"
+       ],
+       "requires": [
+        "4.5#1"
+       ],
+       "estLessons": 0.15
+      },
+      {
+       "code": "4.5#3",
+       "label": "Reading cell-count data from stage frequencies",
+       "kind": "skill",
+       "skills": [
+        "4.B"
+       ],
+       "requires": [
+        "4.5#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "4.5#4",
+       "label": "Calculating percent of time in each stage",
+       "kind": "skill",
+       "skills": [
+        "5.A"
+       ],
+       "requires": [
+        "4.5#3"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "4.5#5",
+       "label": "Chromosome vs chromatid counts across stages",
+       "kind": "misconception",
+       "skills": [
+        "4.B",
+        "5.A"
+       ],
+       "requires": [
+        "4.5#1"
+       ],
+       "estLessons": 0.3
+      }
+     ]
+    },
+    {
+     "code": "4.6",
+     "title": "Regulation of Cell Cycle",
+     "scope": "both",
+     "skills": [
+      "6.E"
+     ],
+     "requires": [
+      "4.5",
+      "4.4"
+     ],
+     "estLessons": 1.0,
+     "subKeywords": [
+      {
+       "code": "4.6#1",
+       "label": "Checkpoints and cyclin/CDK control",
+       "kind": "concept",
+       "skills": [
+        "6.E"
+       ],
+       "requires": [
+        "4.5"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "4.6#2",
+       "label": "Uncontrolled division and cancer",
+       "kind": "concept",
+       "skills": [
+        "6.E"
+       ],
+       "requires": [
+        "4.6#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "4.6#3",
+       "label": "Predicting effects of checkpoint failure",
+       "kind": "skill",
+       "skills": [
+        "6.E"
+       ],
+       "requires": [
+        "4.6#1"
+       ],
+       "estLessons": 0.3
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "5",
+   "title": "Heredity",
+   "officialClassPeriods": "~8–10",
+   "topics": [
+    {
+     "code": "5.1",
+     "title": "Meiosis",
+     "scope": "both",
+     "skills": [
+      "1.B"
+     ],
+     "requires": [
+      "4.5"
+     ],
+     "estLessons": 1.25,
+     "subKeywords": [
+      {
+       "code": "5.1#1",
+       "label": "Two divisions and ploidy changes",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [
+        "4.5"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "5.1#2",
+       "label": "Homologous chromosomes and tetrads",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [
+        "5.1#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "5.1#3",
+       "label": "Mitosis vs meiosis outcomes mix-up",
+       "kind": "misconception",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [
+        "5.1#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "5.1#4",
+       "label": "Reading meiosis stage diagrams",
+       "kind": "representation",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [
+        "5.1#2"
+       ],
+       "estLessons": 0.15
+      }
+     ]
+    },
+    {
+     "code": "5.2",
+     "title": "Meiosis and Genetic Diversity",
+     "scope": "both",
+     "skills": [
+      "3.A"
+     ],
+     "requires": [
+      "5.1"
+     ],
+     "estLessons": 1.0,
+     "subKeywords": [
+      {
+       "code": "5.2#1",
+       "label": "Crossing over and independent assortment",
+       "kind": "concept",
+       "skills": [
+        "3.A"
+       ],
+       "requires": [
+        "5.1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "5.2#2",
+       "label": "Counting possible gamete combinations",
+       "kind": "skill",
+       "skills": [
+        "3.A"
+       ],
+       "requires": [
+        "5.2#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "5.2#3",
+       "label": "Fertilization adds variation",
+       "kind": "concept",
+       "skills": [
+        "3.A"
+       ],
+       "requires": [
+        "5.2#1"
+       ],
+       "estLessons": 0.15
+      },
+      {
+       "code": "5.2#4",
+       "label": "Posing a testable question about nondisjunction",
+       "kind": "skill",
+       "skills": [
+        "3.A"
+       ],
+       "requires": [
+        "5.2#1"
+       ],
+       "estLessons": 0.15
+      }
+     ]
+    },
+    {
+     "code": "5.3",
+     "title": "Mendelian Genetics",
+     "scope": "both",
+     "skills": [
+      "5.C",
+      "6.E"
+     ],
+     "requires": [
+      "5.2"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "5.3#1",
+       "label": "Dominance, alleles and Punnett squares",
+       "kind": "concept",
+       "skills": [
+        "5.C",
+        "6.E"
+       ],
+       "requires": [
+        "5.2"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "5.3#2",
+       "label": "Multi-trait crosses and probability rules",
+       "kind": "skill",
+       "skills": [
+        "5.A"
+       ],
+       "requires": [
+        "5.3#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "5.3#3",
+       "label": "Reading and building pedigrees",
+       "kind": "representation",
+       "skills": [
+        "5.C",
+        "6.E"
+       ],
+       "requires": [
+        "5.3#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "5.3#4",
+       "label": "Chi-square test for expected ratios",
+       "kind": "skill",
+       "skills": [
+        "5.C"
+       ],
+       "requires": [
+        "5.3#2"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "5.3#5",
+       "label": "Dominant means more common or stronger",
+       "kind": "misconception",
+       "skills": [
+        "5.C",
+        "6.E"
+       ],
+       "requires": [
+        "5.3#1"
+       ],
+       "estLessons": 0.15
+      }
+     ]
+    },
+    {
+     "code": "5.4",
+     "title": "Non-Mendelian Genetics",
+     "scope": "both",
+     "skills": [
+      "5.A",
+      "5.C"
+     ],
+     "requires": [
+      "5.3"
+     ],
+     "estLessons": 1.25,
+     "subKeywords": [
+      {
+       "code": "5.4#1",
+       "label": "Incomplete and codominance",
+       "kind": "concept",
+       "skills": [
+        "5.A",
+        "5.C"
+       ],
+       "requires": [
+        "5.3"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "5.4#2",
+       "label": "Sex linkage and X-linked inheritance",
+       "kind": "concept",
+       "skills": [
+        "5.A",
+        "5.C"
+       ],
+       "requires": [
+        "5.4#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "5.4#3",
+       "label": "Linked genes and recombination frequency",
+       "kind": "concept",
+       "skills": [
+        "5.A"
+       ],
+       "requires": [
+        "5.4#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "5.4#4",
+       "label": "Interpreting test-cross data with chi-square",
+       "kind": "skill",
+       "skills": [
+        "5.C"
+       ],
+       "requires": [
+        "5.4#3"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "5.4#5",
+       "label": "Blending inheritance misconception",
+       "kind": "misconception",
+       "skills": [
+        "5.A",
+        "5.C"
+       ],
+       "requires": [
+        "5.4#1"
+       ],
+       "estLessons": 0.15
+      }
+     ]
+    },
+    {
+     "code": "5.5",
+     "title": "Environmental Effects on Phenotype",
+     "scope": "both",
+     "skills": [
+      "1.C"
+     ],
+     "requires": [
+      "5.4"
+     ],
+     "estLessons": 0.5,
+     "subKeywords": [
+      {
+       "code": "5.5#1",
+       "label": "Genotype plus environment shape phenotype",
+       "kind": "concept",
+       "skills": [
+        "1.C"
+       ],
+       "requires": [
+        "5.4"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "5.5#2",
+       "label": "Applied examples such as temperature-sensitive coat color",
+       "kind": "concept",
+       "skills": [
+        "1.C"
+       ],
+       "requires": [
+        "5.5#1"
+       ],
+       "estLessons": 0.15
+      },
+      {
+       "code": "5.5#3",
+       "label": "Environment-caused traits are inherited",
+       "kind": "misconception",
+       "skills": [
+        "1.C"
+       ],
+       "requires": [
+        "5.5#1"
+       ],
+       "estLessons": 0.15
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "6",
+   "title": "Gene Expression and Regulation",
+   "officialClassPeriods": "~18–20",
+   "topics": [
+    {
+     "code": "6.1",
+     "title": "DNA and RNA Structure",
+     "scope": "both",
+     "skills": [
+      "1.C"
+     ],
+     "requires": [
+      "1.6"
+     ],
+     "estLessons": 0.5,
+     "subKeywords": [
+      {
+       "code": "6.1#1",
+       "label": "Nucleotide structure revisited for replication and expression",
+       "kind": "concept",
+       "skills": [
+        "1.C"
+       ],
+       "requires": [
+        "1.6"
+       ],
+       "estLessons": 0.15
+      },
+      {
+       "code": "6.1#2",
+       "label": "Prokaryotic vs eukaryotic genome organization",
+       "kind": "concept",
+       "skills": [
+        "1.C"
+       ],
+       "requires": [
+        "6.1#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "6.1#3",
+       "label": "Genetic information in nonnuclear DNA",
+       "kind": "concept",
+       "skills": [
+        "1.C"
+       ],
+       "requires": [
+        "6.1#2"
+       ],
+       "estLessons": 0.15
+      }
+     ]
+    },
+    {
+     "code": "6.2",
+     "title": "DNA Replication",
+     "scope": "both",
+     "skills": [
+      "2.B"
+     ],
+     "requires": [
+      "6.1"
+     ],
+     "estLessons": 1.0,
+     "subKeywords": [
+      {
+       "code": "6.2#1",
+       "label": "Semiconservative replication",
+       "kind": "concept",
+       "skills": [
+        "2.B"
+       ],
+       "requires": [
+        "6.1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "6.2#2",
+       "label": "Enzymes at the replication fork",
+       "kind": "concept",
+       "skills": [
+        "2.B"
+       ],
+       "requires": [
+        "6.2#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "6.2#3",
+       "label": "Leading vs lagging strand",
+       "kind": "misconception",
+       "skills": [
+        "2.B"
+       ],
+       "requires": [
+        "6.2#2"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "6.2#4",
+       "label": "Reading replication fork diagrams",
+       "kind": "representation",
+       "skills": [
+        "2.B"
+       ],
+       "requires": [
+        "6.2#2"
+       ],
+       "estLessons": 0.15
+      }
+     ]
+    },
+    {
+     "code": "6.3",
+     "title": "Transcription and RNA Processing",
+     "scope": "both",
+     "skills": [
+      "2.B"
+     ],
+     "requires": [
+      "6.2"
+     ],
+     "estLessons": 1.0,
+     "subKeywords": [
+      {
+       "code": "6.3#1",
+       "label": "Initiation, elongation and termination",
+       "kind": "concept",
+       "skills": [
+        "2.B"
+       ],
+       "requires": [
+        "6.2"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "6.3#2",
+       "label": "Template vs coding strand",
+       "kind": "misconception",
+       "skills": [
+        "2.B"
+       ],
+       "requires": [
+        "6.3#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "6.3#3",
+       "label": "Splicing, cap and tail",
+       "kind": "concept",
+       "skills": [
+        "2.B"
+       ],
+       "requires": [
+        "6.3#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "6.3#4",
+       "label": "Writing mRNA from a DNA template",
+       "kind": "skill",
+       "skills": [
+        "2.B"
+       ],
+       "requires": [
+        "6.3#2"
+       ],
+       "estLessons": 0.15
+      }
+     ]
+    },
+    {
+     "code": "6.4",
+     "title": "Translation",
+     "scope": "both",
+     "skills": [
+      "2.D",
+      "6.E"
+     ],
+     "requires": [
+      "6.3"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "6.4#1",
+       "label": "Ribosome, tRNA and codon reading",
+       "kind": "concept",
+       "skills": [
+        "2.D",
+        "6.E"
+       ],
+       "requires": [
+        "6.3"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "6.4#2",
+       "label": "Using the codon table",
+       "kind": "skill",
+       "skills": [
+        "2.D"
+       ],
+       "requires": [
+        "6.4#1"
+       ],
+       "estLessons": 0.15
+      },
+      {
+       "code": "6.4#3",
+       "label": "Start, stop and reading frame",
+       "kind": "concept",
+       "skills": [
+        "2.D",
+        "6.E"
+       ],
+       "requires": [
+        "6.4#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "6.4#4",
+       "label": "Predicting protein changes from sequence changes",
+       "kind": "skill",
+       "skills": [
+        "6.E"
+       ],
+       "requires": [
+        "6.4#2"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "6.4#5",
+       "label": "Confusing anticodon with codon",
+       "kind": "misconception",
+       "skills": [
+        "2.D",
+        "6.E"
+       ],
+       "requires": [
+        "6.4#1"
+       ],
+       "estLessons": 0.15
+      }
+     ]
+    },
+    {
+     "code": "6.5",
+     "title": "Regulation of Gene Expression",
+     "scope": "both",
+     "skills": [
+      "6.A"
+     ],
+     "requires": [
+      "6.4"
+     ],
+     "estLessons": 1.25,
+     "subKeywords": [
+      {
+       "code": "6.5#1",
+       "label": "Operons and the lac system",
+       "kind": "concept",
+       "skills": [
+        "6.A"
+       ],
+       "requires": [
+        "6.4"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "6.5#2",
+       "label": "Transcription factors and enhancers in eukaryotes",
+       "kind": "concept",
+       "skills": [
+        "6.A"
+       ],
+       "requires": [
+        "6.5#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "6.5#3",
+       "label": "Genes are always on unless mutated",
+       "kind": "misconception",
+       "skills": [
+        "6.A"
+       ],
+       "requires": [
+        "6.5#2"
+       ],
+       "estLessons": 0.15
+      },
+      {
+       "code": "6.5#4",
+       "label": "Making a claim about regulation outcomes",
+       "kind": "skill",
+       "skills": [
+        "6.A"
+       ],
+       "requires": [
+        "6.5#1"
+       ],
+       "estLessons": 0.3
+      }
+     ]
+    },
+    {
+     "code": "6.6",
+     "title": "Gene Expression and Cell Specialization",
+     "scope": "both",
+     "skills": [
+      "6.B"
+     ],
+     "requires": [
+      "6.5"
+     ],
+     "estLessons": 1.0,
+     "subKeywords": [
+      {
+       "code": "6.6#1",
+       "label": "Differential expression in cell types",
+       "kind": "concept",
+       "skills": [
+        "6.B"
+       ],
+       "requires": [
+        "6.5"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "6.6#2",
+       "label": "Epigenetic modifications",
+       "kind": "concept",
+       "skills": [
+        "6.B"
+       ],
+       "requires": [
+        "6.6#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "6.6#3",
+       "label": "Different cell types have different DNA",
+       "kind": "misconception",
+       "skills": [
+        "6.B"
+       ],
+       "requires": [
+        "6.6#1"
+       ],
+       "estLessons": 0.15
+      },
+      {
+       "code": "6.6#4",
+       "label": "Evidence-backed claims from expression data",
+       "kind": "skill",
+       "skills": [
+        "6.B"
+       ],
+       "requires": [
+        "6.6#1"
+       ],
+       "estLessons": 0.15
+      }
+     ]
+    },
+    {
+     "code": "6.7",
+     "title": "Mutations",
+     "scope": "both",
+     "skills": [
+      "2.C"
+     ],
+     "requires": [
+      "6.4"
+     ],
+     "estLessons": 1.0,
+     "subKeywords": [
+      {
+       "code": "6.7#1",
+       "label": "Substitution, insertion, deletion and frameshift",
+       "kind": "concept",
+       "skills": [
+        "2.C"
+       ],
+       "requires": [
+        "6.4"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "6.7#2",
+       "label": "Silent, missense and nonsense effects",
+       "kind": "concept",
+       "skills": [
+        "2.C"
+       ],
+       "requires": [
+        "6.7#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "6.7#3",
+       "label": "All mutations are harmful",
+       "kind": "misconception",
+       "skills": [
+        "2.C"
+       ],
+       "requires": [
+        "6.7#2"
+       ],
+       "estLessons": 0.15
+      },
+      {
+       "code": "6.7#4",
+       "label": "Genetic variation sources in bacteria",
+       "kind": "concept",
+       "skills": [
+        "2.C"
+       ],
+       "requires": [
+        "6.7#1"
+       ],
+       "estLessons": 0.3
+      }
+     ]
+    },
+    {
+     "code": "6.8",
+     "title": "Biotechnology",
+     "scope": "both",
+     "skills": [
+      "6.D"
+     ],
+     "requires": [
+      "6.2",
+      "6.7"
+     ],
+     "estLessons": 1.0,
+     "subKeywords": [
+      {
+       "code": "6.8#1",
+       "label": "Gel electrophoresis and DNA fingerprints",
+       "kind": "concept",
+       "skills": [
+        "6.D"
+       ],
+       "requires": [
+        "6.2"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "6.8#2",
+       "label": "PCR and recombinant DNA",
+       "kind": "concept",
+       "skills": [
+        "6.D"
+       ],
+       "requires": [
+        "6.8#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "6.8#3",
+       "label": "Reading gel band patterns",
+       "kind": "representation",
+       "skills": [
+        "6.D"
+       ],
+       "requires": [
+        "6.8#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "6.8#4",
+       "label": "Linking lab results to larger concepts",
+       "kind": "skill",
+       "skills": [
+        "6.D"
+       ],
+       "requires": [
+        "6.8#3"
+       ],
+       "estLessons": 0.15
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "7",
+   "title": "Natural Selection",
+   "officialClassPeriods": "~19–21",
+   "topics": [
+    {
+     "code": "7.1",
+     "title": "Introduction to Natural Selection",
+     "scope": "both",
+     "skills": [
+      "2.A"
+     ],
+     "requires": [
+      "6.7"
+     ],
+     "estLessons": 0.5,
+     "subKeywords": [
+      {
+       "code": "7.1#1",
+       "label": "Variation, heritability and differential fitness",
+       "kind": "concept",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [
+        "6.7"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "7.1#2",
+       "label": "Reading selection diagrams",
+       "kind": "representation",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [
+        "7.1#1"
+       ],
+       "estLessons": 0.15
+      },
+      {
+       "code": "7.1#3",
+       "label": "Individuals evolve during their lifetime",
+       "kind": "misconception",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [
+        "7.1#1"
+       ],
+       "estLessons": 0.15
+      }
+     ]
+    },
+    {
+     "code": "7.2",
+     "title": "Natural Selection",
+     "scope": "both",
+     "skills": [
+      "1.B"
+     ],
+     "requires": [
+      "7.1"
+     ],
+     "estLessons": 1.0,
+     "subKeywords": [
+      {
+       "code": "7.2#1",
+       "label": "Fitness and adaptation",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [
+        "7.1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "7.2#2",
+       "label": "Directional, stabilizing and disruptive selection",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [
+        "7.2#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "7.2#3",
+       "label": "Need drives mutation",
+       "kind": "misconception",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [
+        "7.2#1"
+       ],
+       "estLessons": 0.15
+      },
+      {
+       "code": "7.2#4",
+       "label": "Explaining selection with environmental change",
+       "kind": "skill",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [
+        "7.2#2"
+       ],
+       "estLessons": 0.15
+      }
+     ]
+    },
+    {
+     "code": "7.3",
+     "title": "Artificial Selection",
+     "scope": "both",
+     "skills": [
+      "4.B"
+     ],
+     "requires": [
+      "7.2"
+     ],
+     "estLessons": 0.5,
+     "subKeywords": [
+      {
+       "code": "7.3#1",
+       "label": "Selective breeding versus natural pressures",
+       "kind": "concept",
+       "skills": [
+        "4.B"
+       ],
+       "requires": [
+        "7.2"
+       ],
+       "estLessons": 0.15
+      },
+      {
+       "code": "7.3#2",
+       "label": "Reading trend data across generations",
+       "kind": "skill",
+       "skills": [
+        "4.B"
+       ],
+       "requires": [
+        "7.3#1"
+       ],
+       "estLessons": 0.3
+      }
+     ]
+    },
+    {
+     "code": "7.4",
+     "title": "Population Genetics",
+     "scope": "both",
+     "skills": [
+      "3.B"
+     ],
+     "requires": [
+      "7.2",
+      "5.3"
+     ],
+     "estLessons": 1.0,
+     "subKeywords": [
+      {
+       "code": "7.4#1",
+       "label": "Allele frequency and gene pool",
+       "kind": "concept",
+       "skills": [
+        "3.B"
+       ],
+       "requires": [
+        "7.2",
+        "5.3"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "7.4#2",
+       "label": "Drift, bottleneck, founder effects",
+       "kind": "concept",
+       "skills": [
+        "3.B"
+       ],
+       "requires": [
+        "7.4#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "7.4#3",
+       "label": "Gene flow and migration",
+       "kind": "concept",
+       "skills": [
+        "3.B"
+       ],
+       "requires": [
+        "7.4#1"
+       ],
+       "estLessons": 0.15
+      },
+      {
+       "code": "7.4#4",
+       "label": "Predicting results for a population-change experiment",
+       "kind": "skill",
+       "skills": [
+        "3.B"
+       ],
+       "requires": [
+        "7.4#2"
+       ],
+       "estLessons": 0.15
+      }
+     ]
+    },
+    {
+     "code": "7.5",
+     "title": "Hardy–Weinberg Equilibrium",
+     "scope": "both",
+     "skills": [
+      "1.C",
+      "5.A"
+     ],
+     "requires": [
+      "7.4"
+     ],
+     "estLessons": 1.25,
+     "subKeywords": [
+      {
+       "code": "7.5#1",
+       "label": "Five Hardy–Weinberg conditions",
+       "kind": "concept",
+       "skills": [
+        "1.C"
+       ],
+       "requires": [
+        "7.4"
+       ],
+       "estLessons": 0.15
+      },
+      {
+       "code": "7.5#2",
+       "label": "Using p+q=1 and p^2+2pq+q^2=1",
+       "kind": "skill",
+       "skills": [
+        "5.A"
+       ],
+       "requires": [
+        "7.5#1"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "7.5#3",
+       "label": "Mixing up q and q^2",
+       "kind": "misconception",
+       "skills": [
+        "5.A"
+       ],
+       "requires": [
+        "7.5#2"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "7.5#4",
+       "label": "Detecting evolution from changing frequencies",
+       "kind": "skill",
+       "skills": [
+        "1.C"
+       ],
+       "requires": [
+        "7.5#2"
+       ],
+       "estLessons": 0.3
+      }
+     ]
+    },
+    {
+     "code": "7.6",
+     "title": "Evidence of Evolution",
+     "scope": "both",
+     "skills": [
+      "4.B"
+     ],
+     "requires": [
+      "7.2"
+     ],
+     "estLessons": 1.0,
+     "subKeywords": [
+      {
+       "code": "7.6#1",
+       "label": "Fossil, anatomical and molecular evidence",
+       "kind": "concept",
+       "skills": [
+        "4.B"
+       ],
+       "requires": [
+        "7.2"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "7.6#2",
+       "label": "Homologous vs analogous structures",
+       "kind": "misconception",
+       "skills": [
+        "4.B"
+       ],
+       "requires": [
+        "7.6#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "7.6#3",
+       "label": "Reading molecular-difference tables",
+       "kind": "skill",
+       "skills": [
+        "4.B"
+       ],
+       "requires": [
+        "7.6#1"
+       ],
+       "estLessons": 0.3
+      }
+     ]
+    },
+    {
+     "code": "7.7",
+     "title": "Common Ancestry",
+     "scope": "both",
+     "skills": [
+      "6.E"
+     ],
+     "requires": [
+      "7.6"
+     ],
+     "estLessons": 0.5,
+     "subKeywords": [
+      {
+       "code": "7.7#1",
+       "label": "Shared features across all life",
+       "kind": "concept",
+       "skills": [
+        "6.E"
+       ],
+       "requires": [
+        "7.6"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "7.7#2",
+       "label": "Predicting effects of loss of conserved genes",
+       "kind": "skill",
+       "skills": [
+        "6.E"
+       ],
+       "requires": [
+        "7.7#1"
+       ],
+       "estLessons": 0.3
+      }
+     ]
+    },
+    {
+     "code": "7.8",
+     "title": "Continuing Evolution",
+     "scope": "both",
+     "skills": [
+      "3.D"
+     ],
+     "requires": [
+      "7.4"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "7.8#1",
+       "label": "Antibiotic resistance and pesticide resistance",
+       "kind": "concept",
+       "skills": [
+        "3.D"
+       ],
+       "requires": [
+        "7.4"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "7.8#2",
+       "label": "Evolution is over for humans",
+       "kind": "misconception",
+       "skills": [
+        "3.D"
+       ],
+       "requires": [
+        "7.8#1"
+       ],
+       "estLessons": 0.15
+      },
+      {
+       "code": "7.8#3",
+       "label": "Proposing an investigation of ongoing change",
+       "kind": "skill",
+       "skills": [
+        "3.D"
+       ],
+       "requires": [
+        "7.8#1"
+       ],
+       "estLessons": 0.3
+      }
+     ]
+    },
+    {
+     "code": "7.9",
+     "title": "Phylogeny",
+     "scope": "both",
+     "skills": [
+      "2.D"
+     ],
+     "requires": [
+      "7.7"
+     ],
+     "estLessons": 1.25,
+     "subKeywords": [
+      {
+       "code": "7.9#1",
+       "label": "Parts of a phylogenetic tree",
+       "kind": "representation",
+       "skills": [
+        "2.D"
+       ],
+       "requires": [
+        "7.7"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "7.9#2",
+       "label": "Reading nodes and shared derived traits",
+       "kind": "skill",
+       "skills": [
+        "2.D"
+       ],
+       "requires": [
+        "7.9#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "7.9#3",
+       "label": "Tip order implies closeness",
+       "kind": "misconception",
+       "skills": [
+        "2.D"
+       ],
+       "requires": [
+        "7.9#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "7.9#4",
+       "label": "Building a cladogram from character data",
+       "kind": "skill",
+       "skills": [
+        "2.D"
+       ],
+       "requires": [
+        "7.9#2"
+       ],
+       "estLessons": 0.3
+      }
+     ]
+    },
+    {
+     "code": "7.10",
+     "title": "Speciation",
+     "scope": "both",
+     "skills": [
+      "2.B",
+      "6.E"
+     ],
+     "requires": [
+      "7.9",
+      "7.4"
+     ],
+     "estLessons": 1.0,
+     "subKeywords": [
+      {
+       "code": "7.10#1",
+       "label": "Biological species concept",
+       "kind": "concept",
+       "skills": [
+        "2.B",
+        "6.E"
+       ],
+       "requires": [
+        "7.9"
+       ],
+       "estLessons": 0.15
+      },
+      {
+       "code": "7.10#2",
+       "label": "Prezygotic vs postzygotic barriers",
+       "kind": "concept",
+       "skills": [
+        "2.B",
+        "6.E"
+       ],
+       "requires": [
+        "7.10#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "7.10#3",
+       "label": "Allopatric and sympatric speciation",
+       "kind": "concept",
+       "skills": [
+        "2.B",
+        "6.E"
+       ],
+       "requires": [
+        "7.10#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "7.10#4",
+       "label": "Predicting effects of reproductive isolation",
+       "kind": "skill",
+       "skills": [
+        "6.E"
+       ],
+       "requires": [
+        "7.10#3"
+       ],
+       "estLessons": 0.15
+      }
+     ]
+    },
+    {
+     "code": "7.11",
+     "title": "Variations in Populations",
+     "scope": "both",
+     "skills": [
+      "6.C"
+     ],
+     "requires": [
+      "7.10"
+     ],
+     "estLessons": 0.5,
+     "subKeywords": [
+      {
+       "code": "7.11#1",
+       "label": "Why diversity helps survival",
+       "kind": "concept",
+       "skills": [
+        "6.C"
+       ],
+       "requires": [
+        "7.10"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "7.11#2",
+       "label": "Reasoning from data on variation and fitness",
+       "kind": "skill",
+       "skills": [
+        "6.C"
+       ],
+       "requires": [
+        "7.11#1"
+       ],
+       "estLessons": 0.3
+      }
+     ]
+    },
+    {
+     "code": "7.12",
+     "title": "Origins of Life on Earth",
+     "scope": "both",
+     "skills": [
+      "3.B"
+     ],
+     "requires": [
+      "7.7",
+      "1.6"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "7.12#1",
+       "label": "Early Earth conditions and abiotic synthesis",
+       "kind": "concept",
+       "skills": [
+        "3.B"
+       ],
+       "requires": [
+        "7.7"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "7.12#2",
+       "label": "RNA world hypothesis",
+       "kind": "concept",
+       "skills": [
+        "3.B"
+       ],
+       "requires": [
+        "7.12#1"
+       ],
+       "estLessons": 0.15
+      },
+      {
+       "code": "7.12#3",
+       "label": "Predicting experimental results about origin hypotheses",
+       "kind": "skill",
+       "skills": [
+        "3.B"
+       ],
+       "requires": [
+        "7.12#1"
+       ],
+       "estLessons": 0.3
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "8",
+   "title": "Ecology",
+   "officialClassPeriods": "~19–21",
+   "topics": [
+    {
+     "code": "8.1",
+     "title": "Responses to the Environment",
+     "scope": "both",
+     "skills": [
+      "3.C"
+     ],
+     "requires": [
+      "4.4"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "8.1#1",
+       "label": "Behavioral and physiological responses",
+       "kind": "concept",
+       "skills": [
+        "3.C"
+       ],
+       "requires": [
+        "4.4"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "8.1#2",
+       "label": "Designing choice-chamber experiments",
+       "kind": "skill",
+       "skills": [
+        "3.C"
+       ],
+       "requires": [
+        "8.1#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "8.1#3",
+       "label": "Animal behavior is random",
+       "kind": "misconception",
+       "skills": [
+        "3.C"
+       ],
+       "requires": [
+        "8.1#1"
+       ],
+       "estLessons": 0.15
+      }
+     ]
+    },
+    {
+     "code": "8.2",
+     "title": "Energy Flow Through Ecosystems",
+     "scope": "both",
+     "skills": [
+      "6.D"
+     ],
+     "requires": [
+      "3.4",
+      "3.5"
+     ],
+     "estLessons": 1.0,
+     "subKeywords": [
+      {
+       "code": "8.2#1",
+       "label": "Trophic levels and the 10 percent rule",
+       "kind": "concept",
+       "skills": [
+        "6.D"
+       ],
+       "requires": [
+        "3.4"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "8.2#2",
+       "label": "Energy flows through, matter cycles",
+       "kind": "misconception",
+       "skills": [
+        "6.D"
+       ],
+       "requires": [
+        "8.2#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "8.2#3",
+       "label": "Reading food web diagrams",
+       "kind": "representation",
+       "skills": [
+        "6.D"
+       ],
+       "requires": [
+        "8.2#1"
+       ],
+       "estLessons": 0.15
+      },
+      {
+       "code": "8.2#4",
+       "label": "Connecting measured data to energy theory",
+       "kind": "skill",
+       "skills": [
+        "6.D"
+       ],
+       "requires": [
+        "8.2#2"
+       ],
+       "estLessons": 0.15
+      }
+     ]
+    },
+    {
+     "code": "8.3",
+     "title": "Population Ecology",
+     "scope": "both",
+     "skills": [
+      "4.A"
+     ],
+     "requires": [
+      "8.2"
+     ],
+     "estLessons": 1.0,
+     "subKeywords": [
+      {
+       "code": "8.3#1",
+       "label": "Exponential vs logistic growth",
+       "kind": "concept",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [
+        "8.2"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "8.3#2",
+       "label": "Carrying capacity",
+       "kind": "concept",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [
+        "8.3#1"
+       ],
+       "estLessons": 0.15
+      },
+      {
+       "code": "8.3#3",
+       "label": "Graphing and reading growth curves",
+       "kind": "skill",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [
+        "8.3#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "8.3#4",
+       "label": "Log-scale axes on growth graphs",
+       "kind": "representation",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [
+        "8.3#3"
+       ],
+       "estLessons": 0.15
+      }
+     ]
+    },
+    {
+     "code": "8.4",
+     "title": "Effect of Density on Populations",
+     "scope": "both",
+     "skills": [
+      "5.A"
+     ],
+     "requires": [
+      "8.3"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "8.4#1",
+       "label": "Density-dependent vs independent factors",
+       "kind": "concept",
+       "skills": [
+        "5.A"
+       ],
+       "requires": [
+        "8.3"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "8.4#2",
+       "label": "Growth-rate calculations",
+       "kind": "skill",
+       "skills": [
+        "5.A"
+       ],
+       "requires": [
+        "8.4#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "8.4#3",
+       "label": "Treating every limiting factor as density dependent",
+       "kind": "misconception",
+       "skills": [
+        "5.A"
+       ],
+       "requires": [
+        "8.4#1"
+       ],
+       "estLessons": 0.15
+      }
+     ]
+    },
+    {
+     "code": "8.5",
+     "title": "Community Ecology",
+     "scope": "both",
+     "skills": [
+      "5.B"
+     ],
+     "requires": [
+      "8.4"
+     ],
+     "estLessons": 1.0,
+     "subKeywords": [
+      {
+       "code": "8.5#1",
+       "label": "Species interactions: competition, predation, symbiosis",
+       "kind": "concept",
+       "skills": [
+        "5.B"
+       ],
+       "requires": [
+        "8.2"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "8.5#2",
+       "label": "Keystone and invasive species",
+       "kind": "concept",
+       "skills": [
+        "5.B"
+       ],
+       "requires": [
+        "8.5#1"
+       ],
+       "estLessons": 0.15
+      },
+      {
+       "code": "8.5#3",
+       "label": "Error bars and overlapping confidence intervals",
+       "kind": "skill",
+       "skills": [
+        "5.B"
+       ],
+       "requires": [
+        "8.5#1"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "8.5#4",
+       "label": "Reading data with standard error",
+       "kind": "representation",
+       "skills": [
+        "5.B"
+       ],
+       "requires": [
+        "8.5#3"
+       ],
+       "estLessons": 0.15
+      }
+     ]
+    },
+    {
+     "code": "8.6",
+     "title": "Biodiversity",
+     "scope": "both",
+     "skills": [
+      "6.E"
+     ],
+     "requires": [
+      "8.5"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "8.6#1",
+       "label": "Species richness and evenness",
+       "kind": "concept",
+       "skills": [
+        "6.E"
+       ],
+       "requires": [
+        "8.5"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "8.6#2",
+       "label": "Predicting effects of species loss",
+       "kind": "skill",
+       "skills": [
+        "6.E"
+       ],
+       "requires": [
+        "8.6#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "8.6#3",
+       "label": "More species always means more stable",
+       "kind": "misconception",
+       "skills": [
+        "6.E"
+       ],
+       "requires": [
+        "8.6#1"
+       ],
+       "estLessons": 0.15
+      }
+     ]
+    },
+    {
+     "code": "8.7",
+     "title": "Disruptions in Ecosystems",
+     "scope": "both",
+     "skills": [
+      "5.D"
+     ],
+     "requires": [
+      "8.6"
+     ],
+     "estLessons": 1.0,
+     "subKeywords": [
+      {
+       "code": "8.7#1",
+       "label": "Natural and human disruptions",
+       "kind": "concept",
+       "skills": [
+        "5.D"
+       ],
+       "requires": [
+        "8.6"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "8.7#2",
+       "label": "Using data to evaluate disruption hypotheses",
+       "kind": "skill",
+       "skills": [
+        "5.D"
+       ],
+       "requires": [
+        "8.7#1"
+       ],
+       "estLessons": 0.3
+      },
+      {
+       "code": "8.7#3",
+       "label": "Climate change and invasive species effects",
+       "kind": "concept",
+       "skills": [
+        "5.D"
+       ],
+       "requires": [
+        "8.7#1"
+       ],
+       "estLessons": 0.3
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

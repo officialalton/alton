@@ -2,13 +2,15 @@
 // next/headers 등 서버 전용 모듈을 import하는 코드(lib/auth.ts)와 분리해서,
 // 클라이언트 컴포넌트(SessionShell 등)가 이 파일만 import하도록 한다.
 
-export type ProfileRole = "student" | "parent" | "teacher" | "admin";
+export type ProfileRole = "student" | "parent" | "teacher" | "admin" | "consultant";
 
 const ROLE_HOME_PATH: Record<ProfileRole, string> = {
   student: "/student",
   parent: "/parent",
   teacher: "/teacher",
   admin: "/admin",
+  // 2026-09-22(컨설턴트 포지션) — 관리자와 완전히 별도인 role·포털.
+  consultant: "/consultant",
 };
 
 export function getRoleHomePath(role?: string | null) {

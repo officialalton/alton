@@ -1,0 +1,408 @@
+[
+ {
+  "gid": "sesup-medium-boundaries-40",
+  "runId": "rw-supplement-medium-se2",
+  "skill": "boundaries",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "In the cloud forests of Ecuador, the glass frog Hyalinobatrachium valerioi exhibits an unusual form of parental care. The male, whose translucent belly reveals his beating heart and internal organs, guards clutches of eggs laid on the undersides of leaves hanging over streams for several ______ he defends them from predatory wasps and periodically moistens them with water from his own skin to prevent the developing embryos from drying out.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "In the cloud forests of Ecuador, the glass frog Hyalinobatrachium valerioi exhibits an unusual form of parental care. The male, whose translucent belly reveals his beating heart and internal organs, guards clutches of eggs laid on the undersides of leaves hanging over streams for several ______ he defends them from predatory wasps and periodically moistens them with water from his own skin to prevent the developing embryos from drying out.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "weeks; during this time,",
+    "weeks, during this time,",
+    "weeks during this time;",
+    "weeks, during this time"
+   ],
+   "correctIndex": 0,
+   "answers": null,
+   "explanation": "'The male ... guards clutches ... for several weeks'가 첫 번째 독립절이고, 'during this time, he defends ...'가 두 번째 독립절이므로 둘 사이에는 세미콜론이 와야 한다. 'during this time'은 앞서 말한 '몇 주'를 가리키므로 뒤 절의 첫머리에 놓이는 것이 자연스럽고, 도입 부사구라서 뒤에 쉼표를 찍는다. 따라서 정답은 A이다. B와 D는 두 독립절을 쉼표만으로 이어 쉼표 오용(comma splice)이 된다. C는 세미콜론을 'during this time' 뒤에 두어 이 구가 앞 절에 붙는데, 'for several weeks during this time'은 의미가 중복되고 어색하며 뒤 절이 시간 표지를 잃는다.",
+   "explanationEn": "The text contains two independent clauses. The first is \"The male ... guards clutches ... for several weeks,\" and the second is \"during this time, he defends them ...,\" so you need a semicolon between them. The phrase \"during this time\" points back to the \"several weeks,\" so it belongs at the start of the second clause, and because it's an introductory phrase, a comma follows it. That makes A the answer. B and D connect the two independent clauses with only a comma, which creates a comma splice. C puts the semicolon after \"during this time,\" which attaches the phrase to the first clause; \"for several weeks during this time\" is redundant and awkward, and the second clause loses its time marker.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "A",
+   "seed": "자연과학(생물·생태)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "검산: 첫 절 'The male ... guards ... for several weeks'와 둘째 절 'he defends ... and periodically moistens ...'는 모두 독립절. A는 세미콜론+도입구 쉼표로 올바름. B·D는 comma splice. C는 문법적으로는 세미콜론 분리가 성립하지만 'this time'의 지시 대상이 앞에 없어 논리적으로 부적절(SAT 전형적 오답). 해설 한·영 결론 및 글자 참조 일치. H. valerioi 분포(에콰도르 포함)·수컷 알 보호 행동은 사실과 부합; '운무림'은 다소 과장이나 명백한 오류는 아님. 난이도: 독립절 식별+도입구 쉼표 두 단계 판단으로 medium 적합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "전형적인 세미콜론 위치 문항이다. C가 그럴듯한 오답 역할을 해서 문맥 판단이 필요하다. 유리개구리 수컷이 알을 지키는 습성은 사실과 맞다. 다만 이 종의 분포지가 에콰도르로 한정되는지는 다소 단순화된 서술이지만 문항 풀이에는 영향이 없다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "sesup-medium-boundaries-42",
+  "runId": "rw-supplement-medium-se2",
+  "skill": "boundaries",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "The Atacama Desert's fog oases, known locally as lomas, depend almost entirely on moisture drawn from coastal clouds. The camanchaca—a dense marine fog that rolls inland from the Pacific Ocean on winter ______ condenses on the leaves of cacti and shrubs, sustaining plant communities in a region where measurable rain may not fall for years.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "The Atacama Desert's fog oases, known locally as lomas, depend almost entirely on moisture drawn from coastal clouds. The camanchaca—a dense marine fog that rolls inland from the Pacific Ocean on winter ______ condenses on the leaves of cacti and shrubs, sustaining plant communities in a region where measurable rain may not fall for years.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "mornings, condenses",
+    "mornings; condenses",
+    "mornings—condenses",
+    "mornings condenses"
+   ],
+   "correctIndex": 2,
+   "answers": null,
+   "explanation": "주어 The camanchaca와 동사 condenses 사이에 대시로 시작한 동격 삽입구가 있으므로, 삽입구를 닫을 때도 대시를 써야 합니다. 그래서 C가 정답입니다. A는 삽입구를 닫는 쉼표가 자연스러워 보이지만, 대시로 연 삽입구를 쉼표로 닫으면 부호가 짝을 이루지 않습니다. B의 세미콜론은 앞뒤에 독립절이 있어야 하는데, 앞부분에는 동사가 없고 주어와 동사가 끊어집니다. D는 삽입구를 닫지 않아 'winter mornings condenses'처럼 잘못 읽힙니다.",
+   "explanationEn": "There is an interrupting appositive between the subject \"The camanchaca\" and its verb \"condenses,\" and it opens with a dash, so it has to close with a dash too. That makes C correct. A may look natural, but closing a dash-opened interrupter with a comma leaves the marks unmatched. B uses a semicolon, which needs an independent clause on each side; here the part before it has no verb, and the semicolon cuts the subject off from its verb. D never closes the interrupter, so it misreads as \"winter mornings condenses.\"",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "C",
+   "seed": "환경·지리",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "주어 The camanchaca 뒤 대시로 연 동격 삽입구를 대시로 닫고 동사 condenses로 이어지는 C가 맞음. A(쉼표)는 부호 불일치, B(세미콜론)는 앞에 독립절 없음, D는 삽입구 미종결. 한·영 해설 모두 정답·선택지 참조 일치, 영어 해설에 한글 없음. 대시 짝 맞추기 + 쉼표 오답 비교가 필요해 medium 적합. 저작권·사실 오류 의심 없음."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "삽입구를 대시로 열었으면 대시로 닫아야 한다는 규칙을 묻는 표준 문항입니다. 여는 대시와 닫는 부호 사이가 멀어서, 훑어 읽으면 쉼표(A)를 고르기 쉬워 중간 난이도에 맞습니다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "sesup-medium-boundaries-43",
+  "runId": "rw-supplement-medium-se2",
+  "skill": "boundaries",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "In the 1880s, Danish dairy farmers began pooling their milk at cooperative creameries, processing plants owned jointly by the very farmers who supplied them______ each member, regardless of how many cows he kept, received a single vote in decisions about how the creamery would be run. Historians credit this arrangement with spreading democratic habits through the Danish countryside.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "In the 1880s, Danish dairy farmers began pooling their milk at cooperative creameries, processing plants owned jointly by the very farmers who supplied them______ each member, regardless of how many cows he kept, received a single vote in decisions about how the creamery would be run. Historians credit this arrangement with spreading democratic habits through the Danish countryside.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    ", each",
+    " each",
+    " and each",
+    "; each"
+   ],
+   "correctIndex": 3,
+   "answers": null,
+   "explanation": "빈칸 앞은 긴 동격 수식어(processing plants owned jointly by ... supplied them)로 끝나는 독립절이고, 빈칸 뒤 'each member ... received a single vote ...'도 주어와 동사를 갖춘 독립절이다. 두 독립절은 세미콜론으로 연결할 수 있으므로 D가 정답이다. A는 쉼표만으로 두 독립절을 이어 쉼표 오류(comma splice)가 된다. B는 아무 문장부호 없이 두 절을 붙여 무종지문(run-on)이 된다. C는 등위접속사 and를 썼지만 두 독립절 사이에 필요한 쉼표가 없고, 긴 동격 수식어 때문에 문장 경계가 흐려진다.",
+   "explanationEn": "The text before the blank is an independent clause that ends with a long appositive (processing plants owned jointly by ... supplied them). The text after the blank, \"each member ... received a single vote ...,\" is also an independent clause, with its own subject and verb. A semicolon can join two independent clauses, so D is correct. A joins the two clauses with only a comma, which creates a comma splice. B runs the two clauses together with no punctuation, which creates a run-on sentence. C uses the conjunction \"and\" but leaves out the comma needed before it when it joins two independent clauses, and the long appositive makes the break between the clauses hard to see.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "D",
+   "seed": "역사(근대 사회 변화)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "빈칸 앞(독립절 + 긴 동격구)과 뒤(each member ... received ...) 모두 독립절이므로 세미콜론(D)이 유일하게 적합. A는 comma splice, B는 run-on, C는 쉼표 없는 and로 경계가 불명확('supplied them and each member'로 오독 가능). 긴 동격 수식어가 경계를 흐려 정독이 필요하므로 medium 적합. 역사적 사실(1880년대 덴마크 협동조합 낙농장, 1인 1표)도 정확. B 선택지의 앞 공백은 사소한 표기 문제로 판정에 영향 없음."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "두 독립절을 잇는 표준 boundaries 문항이다. 긴 동격구가 첫 절의 끝을 가려서 독립절 경계를 판단하는 단계가 하나 더 필요하다. 오답 C(쉼표 없는 and)는 그럴듯해서 비교해야 배제된다. 선택지 B·C 앞에 공백이 두 칸 들어간 것은 사소한 표기 문제다. D는 문법적으로 맞는 유일한 선택지다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "sesup-medium-form_structure_sense-41",
+  "runId": "rw-supplement-medium-se2",
+  "skill": "form_structure_sense",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "On La Gomera, one of the Canary Islands, herders have long communicated across deep ravines using Silbo Gomero, a whistled form of Spanish that replaces spoken vowels and consonants with shifts in pitch and duration. A 2005 study of islanders who had learned the whistled system as children ______ that these listeners process whistled sentences in the same brain regions that handle ordinary spoken language.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "On La Gomera, one of the Canary Islands, herders have long communicated across deep ravines using Silbo Gomero, a whistled form of Spanish that replaces spoken vowels and consonants with shifts in pitch and duration. A 2005 study of islanders who had learned the whistled system as children ______ that these listeners process whistled sentences in the same brain regions that handle ordinary spoken language.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "have found",
+    "finding",
+    "found",
+    "were finding"
+   ],
+   "correctIndex": 2,
+   "answers": null,
+   "explanation": "이 문장의 주어는 단수 명사 'study'이고, 'of islanders who had learned the whistled system as children'은 주어를 꾸미는 수식어일 뿐이다. 따라서 빈칸에는 단수 주어와 맞는 정동사가 필요하며, 2005년이라는 과거 시점과도 맞는 C의 'found'가 정답이다. A와 D는 정동사이지만 복수형이라서 가까이 있는 복수 명사 'islanders'나 'children'에 맞춘 오답이다. B의 'finding'은 분사여서 문장에 정동사가 없게 된다.",
+   "explanationEn": "The subject of this sentence is the singular noun \"study.\" The phrase \"of islanders who had learned the whistled system as children\" only modifies it. That means the blank needs a finite verb that agrees with a singular subject, and C, \"found,\" works and also fits the past time frame set by \"2005.\" A and D are finite verbs, but they're plural forms that agree with the nearby plural nouns \"islanders\" or \"children,\" not with the actual subject. B, \"finding,\" is a participle, so it would leave the sentence without a main verb.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "C",
+   "seed": "언어·인류학",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "주어 'A 2005 study'(단수)와 긴 수식어 'of islanders who had learned ... as children' 사이의 거리 때문에 가까운 복수 명사에 이끌리도록 설계된 전형적인 주어-동사 일치 문항. A·D는 복수형 정동사(근접 명사 유인), B는 비정동사로 배제되며 C 'found'만 단수 주어 및 2005년 과거 시점에 부합한다. 한·영 해설 모두 동일한 결론과 글자 참조를 갖고 정확하다. 사실 배경(Carreiras 외 2005년 Nature 논문, 실보 고메로 처리 뇌 영역)도 실제 연구와 부합. 수식어 건너뛰기 + 정동사 판단의 두 단계 추론으로 medium에 적합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": false,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "주어 'study'와 정답 사이에 긴 수식어가 끼어 있어 주어-동사 일치를 묻는 전형적인 중간 난이도 문항이다. 정답 C는 단수 과거형이고, A와 D는 복수형이며, B는 정동사가 아닌 분사다. 오답 근거는 복수 수식어인 'islanders'에 이끌리는 것이다. 'children'은 관계절 안에 있어서 실제로 끌려갈 가능성은 낮지만, 해설에 문제가 될 정도는 아니다. 사실관계도 맞다. Carreiras et al.(2005) 연구에서 실보 사용자의 언어 영역이 활성화된 것으로 나타났다.",
+    "passed": false
+   }
+  }
+ },
+ {
+  "gid": "sesup-medium-form_structure_sense-42",
+  "runId": "rw-supplement-medium-se2",
+  "skill": "form_structure_sense",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "The series of cantilevered balconies that architect Lina Ferreira designed for a hillside library in Porto, each one angled to catch a different hour of afternoon light, ______ many critics who had once dismissed her work as merely decorative.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "The series of cantilevered balconies that architect Lina Ferreira designed for a hillside library in Porto, each one angled to catch a different hour of afternoon light, ______ many critics who had once dismissed her work as merely decorative.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "have won over",
+    "winning over",
+    "were winning over",
+    "has won over"
+   ],
+   "correctIndex": 3,
+   "answers": null,
+   "explanation": "이 문장의 주어는 단수 명사 'series'이며, 'of cantilevered balconies'부터 'afternoon light'까지는 모두 수식어구이므로 빈칸에는 단수 정동사가 필요하다. D는 단수 정동사이므로 정답이다. A와 C는 정동사라는 점은 맞지만, 빈칸 가까이에 있는 복수 명사 'balconies'나 'light' 앞의 수식어에 이끌린 복수형이어서 주어와 수가 일치하지 않는다. B는 분사이므로 문장에 정동사가 없게 되어 완전한 문장이 되지 않는다.",
+   "explanationEn": "The subject of this sentence is the singular noun \"series.\" Everything from \"of cantilevered balconies\" through \"afternoon light\" only modifies that subject, so the blank needs a singular finite verb. D supplies one, so it is correct. A and C are finite verbs, but they are plural forms that seem to agree with the nearby plural noun \"balconies.\" Because of that, they don't agree with the singular subject. B is a participle, which would leave the sentence without a main verb and make it a fragment.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "D",
+   "seed": "예술·건축 비평",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "주어 'series'(단수) + 긴 전치사구·분사구 수식어 뒤 단수 정동사 'has won over'가 정답으로 검산됨. A/C는 근접 복수명사 'balconies'에 끌리는 그럴듯한 오답, B는 정동사 부재로 fragment. 주어 식별 + 수식어 범위 파악의 2단계 판단이 필요해 medium에 적합. 한국어 해설의 'light' 언급만 소폭 다듬을 여지가 있음."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "긴 수식어(관계절과 독립분사구)로 주어와 동사 사이가 멀어져 있어 수 일치 판단이 필요하다. 정동사인지 여부와 수 일치를 함께 따져야 하므로 medium 난이도에 적합하다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "sesup-medium-form_structure_sense-43",
+  "runId": "rw-supplement-medium-se2",
+  "skill": "form_structure_sense",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "Trained as a textile designer in Lagos before turning to sculpture, Nigerian artist Ngozi Adebayo builds towering figures from discarded fishing nets she collects along the Gulf of Guinea coast. The knotted, sun-bleached strands of nylon that give each piece its distinctive texture ______ visitors of both the craft traditions Adebayo learned as a student and the environmental damage that abandoned gear causes in coastal waters.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "Trained as a textile designer in Lagos before turning to sculpture, Nigerian artist Ngozi Adebayo builds towering figures from discarded fishing nets she collects along the Gulf of Guinea coast. The knotted, sun-bleached strands of nylon that give each piece its distinctive texture ______ visitors of both the craft traditions Adebayo learned as a student and the environmental damage that abandoned gear causes in coastal waters.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "remind",
+    "reminds",
+    "reminding",
+    "has reminded"
+   ],
+   "correctIndex": 0,
+   "answers": null,
+   "explanation": "이 문장의 주어는 'strands'(복수)이고, 'of nylon'과 'that give each piece its distinctive texture'는 주어를 꾸미는 수식어이다. 따라서 복수 정동사 A 'remind'가 맞다. B 'reminds'와 D 'has reminded'는 바로 앞의 단수 명사 'texture'나 'nylon'에 맞춘 단수 형태여서 복수 주어와 일치하지 않는다. C 'reminding'은 분사라서 정동사가 될 수 없고, 그러면 문장에 본동사가 없게 된다.",
+   "explanationEn": "The subject of this sentence is the plural noun \"strands.\" The phrase \"of nylon\" and the clause \"that give each piece its distinctive texture\" both just modify it. So the sentence needs a plural main verb, and A, \"remind,\" is correct. B (\"reminds\") and D (\"has reminded\") are singular forms that match nearby nouns like \"texture\" or \"nylon\" instead of the actual subject. C (\"reminding\") is a participle, which can't work as a main verb, so choosing it would leave the sentence without one.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "A",
+   "seed": "인물 소개(과학자·예술가)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "주어 'strands'(복수)와 정동사 'remind' 일치 확인. 'of nylon', 'that give ... texture'는 수식어이며, 가장 가까운 단수 명사 'texture'/'nylon'이 B·D의 함정으로 작동하고 C는 정동사 부재. 해설(국·영) 모두 정답과 글자 참조가 일치하고 모순 없음. 가상 작가 설정으로 사실 오류·저작권 문제 없음. 수식어로 분리된 주어를 찾고 수 일치를 적용하는 두 단계 판단이 필요하여 medium에 적합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "긴 수식어(of nylon + 관계절)가 주어와 동사 사이에 끼어 있고, 바로 앞에 단수 명사 texture가 있어 훑어 읽으면 틀리기 쉽다. 오답 B와 D는 그럴듯한 함정이다. 가상 인물이라 저작권 문제는 없다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "sesup-medium-form_structure_sense-44",
+  "runId": "rw-supplement-medium-se2",
+  "skill": "form_structure_sense",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "First detected in 2013, when the object passed in front of a distant star and the starlight dimmed briefly on either side of it, the two narrow rings encircling Chariklo, a small icy body that orbits the Sun between Saturn and Uranus, ______ astronomers, who had assumed that such a tiny world lacked the gravity to hold ring material in place.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "First detected in 2013, when the object passed in front of a distant star and the starlight dimmed briefly on either side of it, the two narrow rings encircling Chariklo, a small icy body that orbits the Sun between Saturn and Uranus, ______ astronomers, who had assumed that such a tiny world lacked the gravity to hold ring material in place.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "continues to puzzle",
+    "continue to puzzle",
+    "continuing to puzzle",
+    "has continued to puzzle"
+   ],
+   "correctIndex": 1,
+   "answers": null,
+   "explanation": "이 문장의 주어는 'the two narrow rings'(복수)이고, 빈칸에는 본동사가 와야 한다. 따라서 복수 정동사인 B가 정답이다. A와 D는 정동사이지만 단수형이다. 바로 앞의 단수 명사 'Chariklo'나 'a small icy body'를 주어로 착각하면 고르게 된다. C는 분사이므로 문장에 정동사가 없어져 문장이 불완전해진다.",
+   "explanationEn": "The subject of this sentence is \"the two narrow rings,\" which is plural, and the blank must supply the main verb. That makes B, a plural finite verb, correct. A and D are finite verbs, but they are singular. You might pick them if you mistake the nearby singular nouns \"Chariklo\" or \"a small icy body\" for the subject. C is a participle, so it would leave the sentence without a main verb, making it incomplete.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "B",
+   "seed": "자연과학(물리·천문)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "주어 'the two narrow rings'(복수)와 동사 사이에 긴 분사구·동격구(단수 명사 Chariklo, a small icy body)가 끼어 있어 주어 식별 + 수 일치의 두 단계 판단이 필요함. A·D는 단수 정동사로 근접 명사 오인 시 선택 가능한 그럴듯한 오답, C는 비정동사 오답. 정답 B 검산 완료. Chariklo 고리(2013년 엄폐 관측으로 발견, 켄타우로스 천체) 사실관계도 정확. 한·영 해설 결론 및 선택지 참조 일치."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "주어 'rings'와 본동사 사이에 긴 분사구문과 동격어구가 끼어 있고, 바로 앞의 단수 명사가 오답을 유도한다. 정답을 고르려면 동사의 수 일치와 정동사 여부를 모두 따져야 한다. 2013년 엄폐 관측으로 고리를 발견했다는 내용과 토성·천왕성 사이 궤도라는 사실관계도 맞다.",
+    "passed": true
+   }
+  }
+ }
+]

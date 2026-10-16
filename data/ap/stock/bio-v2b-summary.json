@@ -1,0 +1,96 @@
+{
+ "runs": [
+  "bio-v2b"
+ ],
+ "rows": 48,
+ "passed": 27,
+ "rejected": 21,
+ "passRate": 0.563,
+ "mc": {
+  "rows": 48,
+  "passed": 27,
+  "passRate": 0.563
+ },
+ "frq": {
+  "rows": 0,
+  "passed": 0,
+  "passRate": 0
+ },
+ "unitsPassed": {
+  "2": 3,
+  "3": 9,
+  "5": 3,
+  "6": 2,
+  "7": 7,
+  "8": 3
+ },
+ "skillsPassed": {
+  "6.E": 10,
+  "6.B": 2,
+  "2.B": 6,
+  "4.B": 6,
+  "3.B": 1,
+  "5.A": 1,
+  "5.B": 1
+ },
+ "figPassed": {
+  "none": 8,
+  "table": 16,
+  "graph": 3
+ },
+ "figAll": {
+  "none": 18,
+  "table": 24,
+  "graph": 6
+ },
+ "figPassRate": {
+  "none": "8/18",
+  "table": "16/24",
+  "graph": "3/6"
+ },
+ "renderTypesPassed": {
+  "none": 8,
+  "ap_table": 16,
+  "ap_graph:bio_line": 3
+ },
+ "archetypesPassed": {
+  "bi_y_selection_partial": 2,
+  "bi_y_carrying_capacity_drop": 1,
+  "bi_y_potato_predict": 3,
+  "bi_y_exponential_predict": 1,
+  "bi_y_incomplete_dom_counts": 1,
+  "bi_y_light_halved_o2": 2,
+  "bi_y_hw_equilibrium_claim": 2,
+  "bi_y_logistic_graph_peak": 1,
+  "bi_y_phylo_distance_tree": 3,
+  "bi_y_enzyme_graph_slopes": 2,
+  "bi_y_rates_percent_greatest": 2,
+  "bi_y_expression_normalized": 2,
+  "bi_y_null_recombinants": 1,
+  "bi_y_inhibitor_half": 2,
+  "bi_x_pedigree_carrier_prob": 1,
+  "bi_x_sd_to_se_overlap": 1
+ },
+ "archetypesAll": {
+  "bi_y_selection_partial": 3,
+  "bi_y_carrying_capacity_drop": 3,
+  "bi_y_potato_predict": 3,
+  "bi_y_exponential_predict": 3,
+  "bi_y_incomplete_dom_counts": 3,
+  "bi_y_light_halved_o2": 3,
+  "bi_y_hw_equilibrium_claim": 3,
+  "bi_y_logistic_graph_peak": 3,
+  "bi_y_phylo_distance_tree": 3,
+  "bi_y_enzyme_graph_slopes": 3,
+  "bi_y_rates_percent_greatest": 3,
+  "bi_y_expression_normalized": 3,
+  "bi_y_null_recombinants": 3,
+  "bi_y_inhibitor_half": 3,
+  "bi_x_pedigree_carrier_prob": 3,
+  "bi_x_sd_to_se_overlap": 3
+ },
+ "failedArchetypes": [],
+ "costUsd": {
+  "bio-v2b": 1.7997
+ }
+}

@@ -4,6 +4,7 @@ const getUserMock = vi.fn().mockResolvedValue({ data: { user: { id: "admin1" } }
 const profileSingleMock = vi.fn().mockResolvedValue({ data: { role: "admin" } });
 const rpcMock = vi.fn();
 const deleteUserMock = vi.fn().mockResolvedValue({ error: null });
+const accountMergesOrderMock = vi.fn().mockResolvedValue({ data: [], error: null });
 
 vi.mock("@/utils/supabase/server", () => ({
   createClient: async () => ({
@@ -11,6 +12,9 @@ vi.mock("@/utils/supabase/server", () => ({
     from: (table: string) => {
       if (table === "profiles") {
         return { select: () => ({ eq: () => ({ single: profileSingleMock }) }) };
+      }
+      if (table === "account_merges") {
+        return { select: () => ({ is: () => ({ order: accountMergesOrderMock }) }) };
       }
       throw new Error(`unexpected table ${table}`);
     },
@@ -144,5 +148,73 @@ describe("anonymizeMergedAccount", () => {
     const { anonymizeMergedAccount } = await import("./merge-actions");
 
     await expect(anonymizeMergedAccount("m1")).resolves.toBeUndefined();
+  });
+});
+
+describe("findAccountForMergeByEmail", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+    getUserMock.mockResolvedValue({ data: { user: { id: "admin1" } } });
+    // profileSingleMock is called twice: once for the admin-auth check
+    // (requireAdminOrCapability), once for the searched profile itself.
+    // mockReset() first so a leftover queued "once" value from a previous
+    // test can't shift this test's consumption order by one.
+    profileSingleMock.mockReset();
+    profileSingleMock
+      .mockResolvedValueOnce({ data: { role: "admin" } })
+      .mockResolvedValueOnce({ data: { id: "found1", name: "홍길동", role: "student" } });
+  });
+
+  it("이메일로 찾은 계정을 반환한다", async () => {
+    rpcMock.mockResolvedValue({ data: "found1", error: null });
+    const { findAccountForMergeByEmail } = await import("./merge-actions");
+
+    const result = await findAccountForMergeByEmail("dup@example.com");
+
+    expect(rpcMock).toHaveBeenCalledWith("find_profile_id_by_email", { p_email: "dup@example.com" });
+    expect(result).toEqual({ id: "found1", name: "홍길동", role: "student", email: "dup@example.com" });
+  });
+
+  it("일치하는 계정이 없으면 null을 반환한다", async () => {
+    rpcMock.mockResolvedValue({ data: null, error: null });
+    const { findAccountForMergeByEmail } = await import("./merge-actions");
+
+    await expect(findAccountForMergeByEmail("nobody@example.com")).resolves.toBeNull();
+  });
+
+  it("빈 이메일은 RPC를 부르지 않고 null을 반환한다", async () => {
+    const { findAccountForMergeByEmail } = await import("./merge-actions");
+
+    await expect(findAccountForMergeByEmail("   ")).resolves.toBeNull();
+    expect(rpcMock).not.toHaveBeenCalled();
+  });
+});
+
+describe("listPendingAnonymizations", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+    getUserMock.mockResolvedValue({ data: { user: { id: "admin1" } } });
+    profileSingleMock.mockReset();
+    profileSingleMock.mockResolvedValue({ data: { role: "admin" } });
+  });
+
+  it("30일 유예 경과 여부를 함께 계산해 반환한다", async () => {
+    const longAgo = new Date(Date.now() - 40 * 24 * 60 * 60 * 1000).toISOString();
+    const recent = new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString();
+    accountMergesOrderMock.mockResolvedValue({
+      data: [
+        { merged_id: "m1", survivor_id: "s1", merged_at: longAgo, reason: "중복", anonymized_at: null, merged: { name: "구계정" }, survivor: { name: "생존계정" } },
+        { merged_id: "m2", survivor_id: "s2", merged_at: recent, reason: null, anonymized_at: null, merged: { name: "구계정2" }, survivor: { name: "생존계정2" } },
+      ],
+      error: null,
+    });
+    const { listPendingAnonymizations } = await import("./merge-actions");
+
+    const result = await listPendingAnonymizations();
+
+    expect(result).toEqual([
+      { mergedId: "m1", mergedName: "구계정", survivorId: "s1", survivorName: "생존계정", mergedAt: longAgo, reason: "중복", eligibleNow: true },
+      { mergedId: "m2", mergedName: "구계정2", survivorId: "s2", survivorName: "생존계정2", mergedAt: recent, reason: null, eligibleNow: false },
+    ]);
   });
 });

@@ -1,0 +1,81 @@
+{
+ "kind": "ap_new_version_swap_plan",
+ "set": "BC1",
+ "sourceSetName": "AP Calculus BC — Practice Exam 1",
+ "sourceVersionNo": 1,
+ "generatedBy": "scripts/audit/ap-external-audit-swap-plans.ts",
+ "note": "external audit triage 2026-10-13 (docs/audit/2026-10-13-external-audit-triage.md); verifier violations checked across all 6 full sets",
+ "swapCount": 3,
+ "verifierViolations": [],
+ "swaps": [
+  {
+   "section": "ap_mc_a",
+   "position": 7,
+   "removeKey": "run2:ap_calculus_ab-m17-k3",
+   "addKey": "run2:ap_calculus_ab-m18-k0",
+   "reason": "external audit: fprime_graph_statements premises contradict (f' increasing from its own sign-change point while negative)",
+   "remove": {
+    "unit": 5,
+    "skill": 2,
+    "calculator": "not_allowed",
+    "graph": false,
+    "family": "la:run2:ap_calculus_ab-m17-k2",
+    "type": "5.9"
+   },
+   "add": {
+    "unit": 5,
+    "skill": 2,
+    "calculator": "not_allowed",
+    "graph": false,
+    "family": "la:run2:ap_calculus_ab-m18-k0",
+    "type": "5.6"
+   }
+  },
+  {
+   "section": "ap_frq_a",
+   "position": 2,
+   "removeKey": "s1a-final:ap_calculus_ab-f04-k0",
+   "addKey": "supp-r3c-ab-final:ap_calculus_ab-f03-k0",
+   "reason": "external audit: the BC set has only one real-world-context FRQ; official minimum is two",
+   "remove": {
+    "unit": 8,
+    "skill": 1,
+    "calculator": "required",
+    "graph": true,
+    "family": "fam:run2:ap_calculus_ab-f04-k0",
+    "type": "frq_area_volume"
+   },
+   "add": {
+    "unit": 5,
+    "skill": 3,
+    "calculator": "required",
+    "graph": false,
+    "family": "fam:supp-r3c-ab-final:ap_calculus_ab-f03-k0",
+    "type": "frq_marginal_profit"
+   }
+  },
+  {
+   "section": "ap_frq_b",
+   "position": 2,
+   "removeKey": "run1:ap_calculus_ab-f03-k10",
+   "addKey": "supp-r3c-ab-final:ap_calculus_ab-f09-k0",
+   "reason": "external audit: the BC set has only one real-world-context FRQ; official minimum is two",
+   "remove": {
+    "unit": 7,
+    "skill": 1,
+    "calculator": "na",
+    "graph": false,
+    "family": "fam:run1:ap_calculus_ab-f03-k10",
+    "type": "7.6"
+   },
+   "add": {
+    "unit": 5,
+    "skill": 3,
+    "calculator": "not_allowed",
+    "graph": false,
+    "family": "fam:supp-r3c-ab-final:ap_calculus_ab-f09-k0",
+    "type": "frq_pen_cost"
+   }
+  }
+ ]
+}

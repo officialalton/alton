@@ -1,0 +1,1042 @@
+{
+ "schema": "rw-session-task/v1",
+ "kind": "generate",
+ "runId": "lit40-wave1",
+ "taskId": "gen-lit40-medium-02-01",
+ "chunkId": "gen-lit40-medium-02-01",
+ "batchId": "lit40-medium-02",
+ "attempt": 0,
+ "suggestedModel": "opus",
+ "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/gen-lit40-medium-02-01.result.json",
+ "outputSchema": {
+  "chunkId": "작업 파일의 chunkId 를 그대로",
+  "model": "당신의 모델 이름(예: opus)",
+  "items": [
+   {
+    "candidateId": "후보의 candidateId 를 그대로",
+    "passage": "영어 지문(문항의 질문은 넣지 않는다)",
+    "question": "영어 질문 한 문장",
+    "options": [
+     "선택지 A",
+     "선택지 B",
+     "선택지 C",
+     "선택지 D"
+    ],
+    "correct_letter": "A|B|C|D (targetLetter 와 같게)",
+    "explanation": "한국어 해설 3~5문장",
+    "tone": [
+     "지문 어조 영어 단어 1~3개"
+    ],
+    "devices": [
+     "쓰인 문학 장치 영어 단어"
+    ],
+    "declaration": {
+     "original": true,
+     "noRealWorkQuoted": true,
+     "noCopyrightedSource": true
+    }
+   }
+  ]
+ },
+ "candidates": [
+  {
+   "candidateId": "lit40-medium-02-001",
+   "route": "ai_passage",
+   "skill": "inferences",
+   "difficulty": "medium",
+   "questionType": "tone_or_mood",
+   "genre": "drama",
+   "targetLetter": "D",
+   "words": {
+    "min": 90,
+    "max": 150
+   },
+   "recipeId": "inferences_lit_tone_or_mood_medium",
+   "spec": {
+    "candidateId": "lit40-medium-02-001",
+    "batchId": "lit40-medium-02",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "medium",
+    "questionType": "tone_or_mood",
+    "genre": "drama",
+    "seed": {
+     "index": 0,
+     "genre": "drama",
+     "pov": "third_omniscient",
+     "styleEra": "early_20c",
+     "names": [
+      "Sequoia",
+      "Wenhua"
+     ],
+     "nameCultures": [
+      "indigenous_american",
+      "chinese"
+     ],
+     "locale": "the Navajo plateau",
+     "setting": "a ship's galley",
+     "relationship": "a teenage cook and her stern aunt",
+     "conflict": "after discovering a letter meant for someone else",
+     "openingStyle": "대화 한 줄로 시작",
+     "topicSeed": "a ship's galley in the Navajo plateau; a teenage cook and her stern aunt after discovering a letter meant for someone else"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 90,
+     "max": 150
+    },
+    "recipeId": "inferences_lit_tone_or_mood_medium"
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a ship's galley in the Navajo plateau; a teenage cook and her stern aunt after discovering a letter meant for someone else\n인물 이름: Sequoia, Wenhua 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 대화 한 줄로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 90~150단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 D 에 둔다. correct_letter 는 D 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 D 로 정한 뒤 나머지 선택지를 채운다.\n레시피(inferences_lit_tone_or_mood_medium, 난이도 medium): 지문 전체의 어조·분위기를 묻는다. 지문에 서로 다른 두 정서(예: 설렘과 불안)가 섞여 있게 하고 한 쪽이 더 두드러지도록 쓴다. 마지막 문장은 분위기를 명명하지 않는다. 오답 3개는 (a) 덜 두드러진 정서만 말한 어조 (b) 두 정서를 섞었지만 비중을 뒤집은 어조 (c) 지문 소재와 어울리지만 지문에 단서가 약한 어조로 만들고 정반대 분위기는 쓰지 않는다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 1 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 덜 두드러진 정서만 말한 어조 (2) 두 정서의 비중을 뒤집은 어조 (3) 소재와 어울리지만 단서가 약한 어조\n금지: 정답이 지문 마지막 문장을 거의 그대로 바꿔 말한 문장이다 / 오답 3개가 지문의 분위기와 정반대 정서·행동이라 지문 분위기만 알아도 소거된다 / 정답만 길고 구체적이며 오답은 짧고 막연하다 / 지문 어딘가에 정답의 핵심어가 한 문장에 몰려 있다(근거가 한 곳)\n지문 길이: 90~150단어."
+  },
+  {
+   "candidateId": "lit40-medium-02-002",
+   "route": "ai_passage",
+   "skill": "inferences",
+   "difficulty": "medium",
+   "questionType": "tone_or_mood",
+   "genre": "personal_essay",
+   "targetLetter": "A",
+   "words": {
+    "min": 90,
+    "max": 150
+   },
+   "recipeId": "inferences_lit_tone_or_mood_medium",
+   "spec": {
+    "candidateId": "lit40-medium-02-002",
+    "batchId": "lit40-medium-02",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "medium",
+    "questionType": "tone_or_mood",
+    "genre": "personal_essay",
+    "seed": {
+     "index": 1,
+     "genre": "personal_essay",
+     "pov": "third_limited",
+     "styleEra": "late_20c",
+     "names": [
+      "Moira",
+      "Mika"
+     ],
+     "nameCultures": [
+      "irish_scottish",
+      "pacific_maori_hawaiian"
+     ],
+     "locale": "Maui",
+     "setting": "a salt-water pool",
+     "relationship": "a gardener and the house's new owner",
+     "conflict": "about an object that belonged to someone gone",
+     "openingStyle": "짧은 단언문으로 시작",
+     "topicSeed": "a salt-water pool in Maui; a gardener and the house's new owner about an object that belonged to someone gone"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 90,
+     "max": 150
+    },
+    "recipeId": "inferences_lit_tone_or_mood_medium"
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a salt-water pool in Maui; a gardener and the house's new owner about an object that belonged to someone gone\n인물 이름: Moira, Mika 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 짧은 단언문으로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 90~150단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 A 에 둔다. correct_letter 는 A 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 A 로 정한 뒤 나머지 선택지를 채운다.\n레시피(inferences_lit_tone_or_mood_medium, 난이도 medium): 지문 전체의 어조·분위기를 묻는다. 지문에 서로 다른 두 정서(예: 설렘과 불안)가 섞여 있게 하고 한 쪽이 더 두드러지도록 쓴다. 마지막 문장은 분위기를 명명하지 않는다. 오답 3개는 (a) 덜 두드러진 정서만 말한 어조 (b) 두 정서를 섞었지만 비중을 뒤집은 어조 (c) 지문 소재와 어울리지만 지문에 단서가 약한 어조로 만들고 정반대 분위기는 쓰지 않는다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 1 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 덜 두드러진 정서만 말한 어조 (2) 두 정서의 비중을 뒤집은 어조 (3) 소재와 어울리지만 단서가 약한 어조\n금지: 정답이 지문 마지막 문장을 거의 그대로 바꿔 말한 문장이다 / 오답 3개가 지문의 분위기와 정반대 정서·행동이라 지문 분위기만 알아도 소거된다 / 정답만 길고 구체적이며 오답은 짧고 막연하다 / 지문 어딘가에 정답의 핵심어가 한 문장에 몰려 있다(근거가 한 곳)\n지문 길이: 90~150단어."
+  },
+  {
+   "candidateId": "lit40-medium-02-003",
+   "route": "ai_passage",
+   "skill": "inferences",
+   "difficulty": "medium",
+   "questionType": "tone_or_mood",
+   "genre": "memoir",
+   "targetLetter": "B",
+   "words": {
+    "min": 90,
+    "max": 150
+   },
+   "recipeId": "inferences_lit_tone_or_mood_medium",
+   "spec": {
+    "candidateId": "lit40-medium-02-003",
+    "batchId": "lit40-medium-02",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "medium",
+    "questionType": "tone_or_mood",
+    "genre": "memoir",
+    "seed": {
+     "index": 2,
+     "genre": "memoir",
+     "pov": "first",
+     "styleEra": "late_20c",
+     "names": [
+      "Tatiana",
+      "Dainius"
+     ],
+     "nameCultures": [
+      "slavic_baltic",
+      "slavic_baltic"
+     ],
+     "locale": "Tbilisi",
+     "setting": "a bookbinder's workshop",
+     "relationship": "old rivals in a chess club",
+     "conflict": "when someone returns after years without explaining",
+     "openingStyle": "장소 이름으로 시작",
+     "topicSeed": "a bookbinder's workshop in Tbilisi; old rivals in a chess club when someone returns after years without explaining"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 90,
+     "max": 150
+    },
+    "recipeId": "inferences_lit_tone_or_mood_medium"
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a bookbinder's workshop in Tbilisi; old rivals in a chess club when someone returns after years without explaining\n인물 이름: Tatiana, Dainius 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 장소 이름으로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 90~150단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 B 에 둔다. correct_letter 는 B 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 B 로 정한 뒤 나머지 선택지를 채운다.\n레시피(inferences_lit_tone_or_mood_medium, 난이도 medium): 지문 전체의 어조·분위기를 묻는다. 지문에 서로 다른 두 정서(예: 설렘과 불안)가 섞여 있게 하고 한 쪽이 더 두드러지도록 쓴다. 마지막 문장은 분위기를 명명하지 않는다. 오답 3개는 (a) 덜 두드러진 정서만 말한 어조 (b) 두 정서를 섞었지만 비중을 뒤집은 어조 (c) 지문 소재와 어울리지만 지문에 단서가 약한 어조로 만들고 정반대 분위기는 쓰지 않는다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 1 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 덜 두드러진 정서만 말한 어조 (2) 두 정서의 비중을 뒤집은 어조 (3) 소재와 어울리지만 단서가 약한 어조\n금지: 정답이 지문 마지막 문장을 거의 그대로 바꿔 말한 문장이다 / 오답 3개가 지문의 분위기와 정반대 정서·행동이라 지문 분위기만 알아도 소거된다 / 정답만 길고 구체적이며 오답은 짧고 막연하다 / 지문 어딘가에 정답의 핵심어가 한 문장에 몰려 있다(근거가 한 곳)\n지문 길이: 90~150단어."
+  },
+  {
+   "candidateId": "lit40-medium-02-004",
+   "route": "ai_passage",
+   "skill": "inferences",
+   "difficulty": "medium",
+   "questionType": "tone_or_mood",
+   "genre": "letter",
+   "targetLetter": "C",
+   "words": {
+    "min": 90,
+    "max": 150
+   },
+   "recipeId": "inferences_lit_tone_or_mood_medium",
+   "spec": {
+    "candidateId": "lit40-medium-02-004",
+    "batchId": "lit40-medium-02",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "medium",
+    "questionType": "tone_or_mood",
+    "genre": "letter",
+    "seed": {
+     "index": 3,
+     "genre": "letter",
+     "pov": "first",
+     "styleEra": "19c",
+     "names": [
+      "Esperanza",
+      "Jens"
+     ],
+     "nameCultures": [
+      "latin_american",
+      "dutch_nordic"
+     ],
+     "locale": "Tromso",
+     "setting": "a bakery before opening",
+     "relationship": "twin brothers dividing a house",
+     "conflict": "when the plan works and nobody feels better",
+     "openingStyle": "시간·날짜 표현으로 시작('By', 'On', 'After' 등)",
+     "topicSeed": "a bakery before opening in Tromso; twin brothers dividing a house when the plan works and nobody feels better"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 90,
+     "max": 150
+    },
+    "recipeId": "inferences_lit_tone_or_mood_medium"
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a bakery before opening in Tromso; twin brothers dividing a house when the plan works and nobody feels better\n인물 이름: Esperanza, Jens 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 시간·날짜 표현으로 시작('By', 'On', 'After' 등). 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 90~150단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 C 에 둔다. correct_letter 는 C 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 C 로 정한 뒤 나머지 선택지를 채운다.\n레시피(inferences_lit_tone_or_mood_medium, 난이도 medium): 지문 전체의 어조·분위기를 묻는다. 지문에 서로 다른 두 정서(예: 설렘과 불안)가 섞여 있게 하고 한 쪽이 더 두드러지도록 쓴다. 마지막 문장은 분위기를 명명하지 않는다. 오답 3개는 (a) 덜 두드러진 정서만 말한 어조 (b) 두 정서를 섞었지만 비중을 뒤집은 어조 (c) 지문 소재와 어울리지만 지문에 단서가 약한 어조로 만들고 정반대 분위기는 쓰지 않는다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 1 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 덜 두드러진 정서만 말한 어조 (2) 두 정서의 비중을 뒤집은 어조 (3) 소재와 어울리지만 단서가 약한 어조\n금지: 정답이 지문 마지막 문장을 거의 그대로 바꿔 말한 문장이다 / 오답 3개가 지문의 분위기와 정반대 정서·행동이라 지문 분위기만 알아도 소거된다 / 정답만 길고 구체적이며 오답은 짧고 막연하다 / 지문 어딘가에 정답의 핵심어가 한 문장에 몰려 있다(근거가 한 곳)\n지문 길이: 90~150단어."
+  },
+  {
+   "candidateId": "lit40-medium-02-005",
+   "route": "ai_passage",
+   "skill": "inferences",
+   "difficulty": "medium",
+   "questionType": "relationship_between_characters",
+   "genre": "short_story",
+   "targetLetter": "D",
+   "words": {
+    "min": 90,
+    "max": 150
+   },
+   "recipeId": "inferences_lit_relationship_between_characters_medium",
+   "spec": {
+    "candidateId": "lit40-medium-02-005",
+    "batchId": "lit40-medium-02",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "medium",
+    "questionType": "relationship_between_characters",
+    "genre": "short_story",
+    "seed": {
+     "index": 4,
+     "genre": "short_story",
+     "pov": "second",
+     "styleEra": "19c",
+     "names": [
+      "Kainoa",
+      "Faris"
+     ],
+     "nameCultures": [
+      "pacific_maori_hawaiian",
+      "arabic_levantine"
+     ],
+     "locale": "Hanoi",
+     "setting": "a river barge",
+     "relationship": "a sister and her younger brother's tutor",
+     "conflict": "while pretending to enjoy a gift that is wrong",
+     "openingStyle": "대명사 I 또는 We 로 시작",
+     "topicSeed": "a river barge in Hanoi; a sister and her younger brother's tutor while pretending to enjoy a gift that is wrong"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 90,
+     "max": 150
+    },
+    "recipeId": "inferences_lit_relationship_between_characters_medium"
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a river barge in Hanoi; a sister and her younger brother's tutor while pretending to enjoy a gift that is wrong\n인물 이름: Kainoa, Faris 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 대명사 I 또는 We 로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 90~150단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 D 에 둔다. correct_letter 는 D 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 D 로 정한 뒤 나머지 선택지를 채운다.\n레시피(inferences_lit_relationship_between_characters_medium, 난이도 medium): 두 인물의 관계를 추론하게 한다. 관계는 직접 서술하지 않고 두 문장 안의 대화·행동으로 드러내되 이어 읽으면 알 수 있게 한다. 마지막 문장은 관계와 무관한 장면 묘사로 끝낸다. 오답 3개는 (a) 인물 중 한쪽의 감정만 반영한 관계 (b) 지문 어휘를 쓰지만 반대 방향의 관계 (c) 일반적 통념에서 고른 관계로 만들되 모두 지문의 단어를 한두 개 사용한다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 1 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 한쪽 감정만 반영한 관계 (2) 지문 어휘를 쓰지만 방향이 반대인 관계 (3) 일반적 통념에서 고른 관계\n금지: 정답이 지문 마지막 문장을 거의 그대로 바꿔 말한 문장이다 / 오답 3개가 지문의 분위기와 정반대 정서·행동이라 지문 분위기만 알아도 소거된다 / 정답만 길고 구체적이며 오답은 짧고 막연하다 / 지문 어딘가에 정답의 핵심어가 한 문장에 몰려 있다(근거가 한 곳)\n지문 길이: 90~150단어."
+  },
+  {
+   "candidateId": "lit40-medium-02-006",
+   "route": "ai_passage",
+   "skill": "inferences",
+   "difficulty": "medium",
+   "questionType": "relationship_between_characters",
+   "genre": "novel_excerpt",
+   "targetLetter": "A",
+   "words": {
+    "min": 90,
+    "max": 150
+   },
+   "recipeId": "inferences_lit_relationship_between_characters_medium",
+   "spec": {
+    "candidateId": "lit40-medium-02-006",
+    "batchId": "lit40-medium-02",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "medium",
+    "questionType": "relationship_between_characters",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 5,
+     "genre": "novel_excerpt",
+     "pov": "mixed_or_none",
+     "styleEra": "early_20c",
+     "names": [
+      "Agnes",
+      "Rukhsana"
+     ],
+     "nameCultures": [
+      "english",
+      "south_asian_muslim_sri_lankan"
+     ],
+     "locale": "Colombo",
+     "setting": "a courtyard with a dry fountain",
+     "relationship": "best friends after a move",
+     "conflict": "after a public embarrassment",
+     "openingStyle": "인물의 이름으로 시작",
+     "topicSeed": "a courtyard with a dry fountain in Colombo; best friends after a move after a public embarrassment"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 90,
+     "max": 150
+    },
+    "recipeId": "inferences_lit_relationship_between_characters_medium"
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a courtyard with a dry fountain in Colombo; best friends after a move after a public embarrassment\n인물 이름: Agnes, Rukhsana 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 인물의 이름으로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 90~150단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 A 에 둔다. correct_letter 는 A 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 A 로 정한 뒤 나머지 선택지를 채운다.\n레시피(inferences_lit_relationship_between_characters_medium, 난이도 medium): 두 인물의 관계를 추론하게 한다. 관계는 직접 서술하지 않고 두 문장 안의 대화·행동으로 드러내되 이어 읽으면 알 수 있게 한다. 마지막 문장은 관계와 무관한 장면 묘사로 끝낸다. 오답 3개는 (a) 인물 중 한쪽의 감정만 반영한 관계 (b) 지문 어휘를 쓰지만 반대 방향의 관계 (c) 일반적 통념에서 고른 관계로 만들되 모두 지문의 단어를 한두 개 사용한다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 1 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 한쪽 감정만 반영한 관계 (2) 지문 어휘를 쓰지만 방향이 반대인 관계 (3) 일반적 통념에서 고른 관계\n금지: 정답이 지문 마지막 문장을 거의 그대로 바꿔 말한 문장이다 / 오답 3개가 지문의 분위기와 정반대 정서·행동이라 지문 분위기만 알아도 소거된다 / 정답만 길고 구체적이며 오답은 짧고 막연하다 / 지문 어딘가에 정답의 핵심어가 한 문장에 몰려 있다(근거가 한 곳)\n지문 길이: 90~150단어."
+  },
+  {
+   "candidateId": "lit40-medium-02-007",
+   "route": "ai_passage",
+   "skill": "inferences",
+   "difficulty": "medium",
+   "questionType": "relationship_between_characters",
+   "genre": "drama",
+   "targetLetter": "B",
+   "words": {
+    "min": 90,
+    "max": 150
+   },
+   "recipeId": "inferences_lit_relationship_between_characters_medium",
+   "spec": {
+    "candidateId": "lit40-medium-02-007",
+    "batchId": "lit40-medium-02",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "medium",
+    "questionType": "relationship_between_characters",
+    "genre": "drama",
+    "seed": {
+     "index": 6,
+     "genre": "drama",
+     "pov": "third_limited",
+     "styleEra": "early_20c",
+     "names": [
+      "Ingeborg",
+      "Freja"
+     ],
+     "nameCultures": [
+      "dutch_nordic",
+      "dutch_nordic"
+     ],
+     "locale": "Rotterdam",
+     "setting": "a community garden",
+     "relationship": "a conductor and the youngest violinist",
+     "conflict": "while pretending nothing has changed",
+     "openingStyle": "부사절·전치사구로 시작('When', 'Although', 'Beside' 등)",
+     "topicSeed": "a community garden in Rotterdam; a conductor and the youngest violinist while pretending nothing has changed"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 90,
+     "max": 150
+    },
+    "recipeId": "inferences_lit_relationship_between_characters_medium"
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a community garden in Rotterdam; a conductor and the youngest violinist while pretending nothing has changed\n인물 이름: Ingeborg, Freja 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 부사절·전치사구로 시작('When', 'Although', 'Beside' 등). 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 90~150단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 B 에 둔다. correct_letter 는 B 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 B 로 정한 뒤 나머지 선택지를 채운다.\n레시피(inferences_lit_relationship_between_characters_medium, 난이도 medium): 두 인물의 관계를 추론하게 한다. 관계는 직접 서술하지 않고 두 문장 안의 대화·행동으로 드러내되 이어 읽으면 알 수 있게 한다. 마지막 문장은 관계와 무관한 장면 묘사로 끝낸다. 오답 3개는 (a) 인물 중 한쪽의 감정만 반영한 관계 (b) 지문 어휘를 쓰지만 반대 방향의 관계 (c) 일반적 통념에서 고른 관계로 만들되 모두 지문의 단어를 한두 개 사용한다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 1 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 한쪽 감정만 반영한 관계 (2) 지문 어휘를 쓰지만 방향이 반대인 관계 (3) 일반적 통념에서 고른 관계\n금지: 정답이 지문 마지막 문장을 거의 그대로 바꿔 말한 문장이다 / 오답 3개가 지문의 분위기와 정반대 정서·행동이라 지문 분위기만 알아도 소거된다 / 정답만 길고 구체적이며 오답은 짧고 막연하다 / 지문 어딘가에 정답의 핵심어가 한 문장에 몰려 있다(근거가 한 곳)\n지문 길이: 90~150단어."
+  },
+  {
+   "candidateId": "lit40-medium-02-008",
+   "route": "ai_passage",
+   "skill": "inferences",
+   "difficulty": "medium",
+   "questionType": "relationship_between_characters",
+   "genre": "personal_essay",
+   "targetLetter": "C",
+   "words": {
+    "min": 90,
+    "max": 150
+   },
+   "recipeId": "inferences_lit_relationship_between_characters_medium",
+   "spec": {
+    "candidateId": "lit40-medium-02-008",
+    "batchId": "lit40-medium-02",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "medium",
+    "questionType": "relationship_between_characters",
+    "genre": "personal_essay",
+    "seed": {
+     "index": 7,
+     "genre": "personal_essay",
+     "pov": "first",
+     "styleEra": "19c",
+     "names": [
+      "Samira",
+      "Hamza"
+     ],
+     "nameCultures": [
+      "arabic_levantine",
+      "arabic_levantine"
+     ],
+     "locale": "Marrakesh",
+     "setting": "a lighthouse station",
+     "relationship": "two night-shift coworkers",
+     "conflict": "about borrowed money and borrowed time",
+     "openingStyle": "과거를 회상하는 문장으로 시작('Years later', 'Once' 등)",
+     "topicSeed": "a lighthouse station in Marrakesh; two night-shift coworkers about borrowed money and borrowed time"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 90,
+     "max": 150
+    },
+    "recipeId": "inferences_lit_relationship_between_characters_medium"
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a lighthouse station in Marrakesh; two night-shift coworkers about borrowed money and borrowed time\n인물 이름: Samira, Hamza 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 과거를 회상하는 문장으로 시작('Years later', 'Once' 등). 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 90~150단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 C 에 둔다. correct_letter 는 C 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 C 로 정한 뒤 나머지 선택지를 채운다.\n레시피(inferences_lit_relationship_between_characters_medium, 난이도 medium): 두 인물의 관계를 추론하게 한다. 관계는 직접 서술하지 않고 두 문장 안의 대화·행동으로 드러내되 이어 읽으면 알 수 있게 한다. 마지막 문장은 관계와 무관한 장면 묘사로 끝낸다. 오답 3개는 (a) 인물 중 한쪽의 감정만 반영한 관계 (b) 지문 어휘를 쓰지만 반대 방향의 관계 (c) 일반적 통념에서 고른 관계로 만들되 모두 지문의 단어를 한두 개 사용한다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 1 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 한쪽 감정만 반영한 관계 (2) 지문 어휘를 쓰지만 방향이 반대인 관계 (3) 일반적 통념에서 고른 관계\n금지: 정답이 지문 마지막 문장을 거의 그대로 바꿔 말한 문장이다 / 오답 3개가 지문의 분위기와 정반대 정서·행동이라 지문 분위기만 알아도 소거된다 / 정답만 길고 구체적이며 오답은 짧고 막연하다 / 지문 어딘가에 정답의 핵심어가 한 문장에 몰려 있다(근거가 한 곳)\n지문 길이: 90~150단어."
+  },
+  {
+   "candidateId": "lit40-medium-02-009",
+   "route": "ai_passage",
+   "skill": "inferences",
+   "difficulty": "medium",
+   "questionType": "relationship_between_characters",
+   "genre": "memoir",
+   "targetLetter": "D",
+   "words": {
+    "min": 90,
+    "max": 150
+   },
+   "recipeId": "inferences_lit_relationship_between_characters_medium",
+   "spec": {
+    "candidateId": "lit40-medium-02-009",
+    "batchId": "lit40-medium-02",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "medium",
+    "questionType": "relationship_between_characters",
+    "genre": "memoir",
+    "seed": {
+     "index": 8,
+     "genre": "memoir",
+     "pov": "mixed_or_none",
+     "styleEra": "19c",
+     "names": [
+      "Kamal",
+      "Xiulan"
+     ],
+     "nameCultures": [
+      "south_asian_muslim_sri_lankan",
+      "chinese"
+     ],
+     "locale": "Taipei",
+     "setting": "a bus depot",
+     "relationship": "two women who once shared a stage",
+     "conflict": "after a quiet act of generosity",
+     "openingStyle": "감각 묘사(소리·냄새·촉감)로 시작",
+     "topicSeed": "a bus depot in Taipei; two women who once shared a stage after a quiet act of generosity"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 90,
+     "max": 150
+    },
+    "recipeId": "inferences_lit_relationship_between_characters_medium"
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a bus depot in Taipei; two women who once shared a stage after a quiet act of generosity\n인물 이름: Kamal, Xiulan 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 감각 묘사(소리·냄새·촉감)로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 90~150단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 D 에 둔다. correct_letter 는 D 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 D 로 정한 뒤 나머지 선택지를 채운다.\n레시피(inferences_lit_relationship_between_characters_medium, 난이도 medium): 두 인물의 관계를 추론하게 한다. 관계는 직접 서술하지 않고 두 문장 안의 대화·행동으로 드러내되 이어 읽으면 알 수 있게 한다. 마지막 문장은 관계와 무관한 장면 묘사로 끝낸다. 오답 3개는 (a) 인물 중 한쪽의 감정만 반영한 관계 (b) 지문 어휘를 쓰지만 반대 방향의 관계 (c) 일반적 통념에서 고른 관계로 만들되 모두 지문의 단어를 한두 개 사용한다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 1 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 한쪽 감정만 반영한 관계 (2) 지문 어휘를 쓰지만 방향이 반대인 관계 (3) 일반적 통념에서 고른 관계\n금지: 정답이 지문 마지막 문장을 거의 그대로 바꿔 말한 문장이다 / 오답 3개가 지문의 분위기와 정반대 정서·행동이라 지문 분위기만 알아도 소거된다 / 정답만 길고 구체적이며 오답은 짧고 막연하다 / 지문 어딘가에 정답의 핵심어가 한 문장에 몰려 있다(근거가 한 곳)\n지문 길이: 90~150단어."
+  },
+  {
+   "candidateId": "lit40-medium-02-010",
+   "route": "ai_passage",
+   "skill": "inferences",
+   "difficulty": "medium",
+   "questionType": "relationship_between_characters",
+   "genre": "letter",
+   "targetLetter": "A",
+   "words": {
+    "min": 90,
+    "max": 150
+   },
+   "recipeId": "inferences_lit_relationship_between_characters_medium",
+   "spec": {
+    "candidateId": "lit40-medium-02-010",
+    "batchId": "lit40-medium-02",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "medium",
+    "questionType": "relationship_between_characters",
+    "genre": "letter",
+    "seed": {
+     "index": 9,
+     "genre": "letter",
+     "pov": "first",
+     "styleEra": "19c",
+     "names": [
+      "Ottilie",
+      "Lena"
+     ],
+     "nameCultures": [
+      "german_austrian",
+      "german_austrian"
+     ],
+     "locale": "Hamburg",
+     "setting": "a rented farmhouse",
+     "relationship": "two musicians in a failing duo",
+     "conflict": "about a translation that changes the meaning",
+     "openingStyle": "장소 이름으로 시작",
+     "topicSeed": "a rented farmhouse in Hamburg; two musicians in a failing duo about a translation that changes the meaning"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 90,
+     "max": 150
+    },
+    "recipeId": "inferences_lit_relationship_between_characters_medium"
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a rented farmhouse in Hamburg; two musicians in a failing duo about a translation that changes the meaning\n인물 이름: Ottilie, Lena 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 장소 이름으로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 90~150단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 A 에 둔다. correct_letter 는 A 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 A 로 정한 뒤 나머지 선택지를 채운다.\n레시피(inferences_lit_relationship_between_characters_medium, 난이도 medium): 두 인물의 관계를 추론하게 한다. 관계는 직접 서술하지 않고 두 문장 안의 대화·행동으로 드러내되 이어 읽으면 알 수 있게 한다. 마지막 문장은 관계와 무관한 장면 묘사로 끝낸다. 오답 3개는 (a) 인물 중 한쪽의 감정만 반영한 관계 (b) 지문 어휘를 쓰지만 반대 방향의 관계 (c) 일반적 통념에서 고른 관계로 만들되 모두 지문의 단어를 한두 개 사용한다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 1 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 한쪽 감정만 반영한 관계 (2) 지문 어휘를 쓰지만 방향이 반대인 관계 (3) 일반적 통념에서 고른 관계\n금지: 정답이 지문 마지막 문장을 거의 그대로 바꿔 말한 문장이다 / 오답 3개가 지문의 분위기와 정반대 정서·행동이라 지문 분위기만 알아도 소거된다 / 정답만 길고 구체적이며 오답은 짧고 막연하다 / 지문 어딘가에 정답의 핵심어가 한 문장에 몰려 있다(근거가 한 곳)\n지문 길이: 90~150단어."
+  },
+  {
+   "candidateId": "lit40-medium-02-011",
+   "route": "ai_passage",
+   "skill": "inferences",
+   "difficulty": "medium",
+   "questionType": "relationship_between_characters",
+   "genre": "fable_or_folktale_retelling",
+   "targetLetter": "B",
+   "words": {
+    "min": 90,
+    "max": 150
+   },
+   "recipeId": "inferences_lit_relationship_between_characters_medium",
+   "spec": {
+    "candidateId": "lit40-medium-02-011",
+    "batchId": "lit40-medium-02",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "medium",
+    "questionType": "relationship_between_characters",
+    "genre": "fable_or_folktale_retelling",
+    "seed": {
+     "index": 10,
+     "genre": "fable_or_folktale_retelling",
+     "pov": "first",
+     "styleEra": "contemporary",
+     "names": [
+      "Kemoy",
+      "Dwayne"
+     ],
+     "nameCultures": [
+      "caribbean",
+      "caribbean"
+     ],
+     "locale": "Kingston",
+     "setting": "a laundromat",
+     "relationship": "two neighbors with a shared wall",
+     "conflict": "over whether to tell the truth to a dying friend",
+     "openingStyle": "감각 묘사(소리·냄새·촉감)로 시작",
+     "topicSeed": "a laundromat in Kingston; two neighbors with a shared wall over whether to tell the truth to a dying friend"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 90,
+     "max": 150
+    },
+    "recipeId": "inferences_lit_relationship_between_characters_medium"
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a laundromat in Kingston; two neighbors with a shared wall over whether to tell the truth to a dying friend\n인물 이름: Kemoy, Dwayne 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 감각 묘사(소리·냄새·촉감)로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 90~150단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 B 에 둔다. correct_letter 는 B 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 B 로 정한 뒤 나머지 선택지를 채운다.\n레시피(inferences_lit_relationship_between_characters_medium, 난이도 medium): 두 인물의 관계를 추론하게 한다. 관계는 직접 서술하지 않고 두 문장 안의 대화·행동으로 드러내되 이어 읽으면 알 수 있게 한다. 마지막 문장은 관계와 무관한 장면 묘사로 끝낸다. 오답 3개는 (a) 인물 중 한쪽의 감정만 반영한 관계 (b) 지문 어휘를 쓰지만 반대 방향의 관계 (c) 일반적 통념에서 고른 관계로 만들되 모두 지문의 단어를 한두 개 사용한다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 1 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 한쪽 감정만 반영한 관계 (2) 지문 어휘를 쓰지만 방향이 반대인 관계 (3) 일반적 통념에서 고른 관계\n금지: 정답이 지문 마지막 문장을 거의 그대로 바꿔 말한 문장이다 / 오답 3개가 지문의 분위기와 정반대 정서·행동이라 지문 분위기만 알아도 소거된다 / 정답만 길고 구체적이며 오답은 짧고 막연하다 / 지문 어딘가에 정답의 핵심어가 한 문장에 몰려 있다(근거가 한 곳)\n지문 길이: 90~150단어."
+  },
+  {
+   "candidateId": "lit40-medium-02-012",
+   "route": "ai_passage",
+   "skill": "inferences",
+   "difficulty": "medium",
+   "questionType": "symbolism",
+   "genre": "short_story",
+   "targetLetter": "C",
+   "words": {
+    "min": 60,
+    "max": 220
+   },
+   "recipeId": null,
+   "spec": {
+    "candidateId": "lit40-medium-02-012",
+    "batchId": "lit40-medium-02",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "medium",
+    "questionType": "symbolism",
+    "genre": "short_story",
+    "seed": {
+     "index": 11,
+     "genre": "short_story",
+     "pov": "mixed_or_none",
+     "styleEra": "contemporary",
+     "names": [
+      "Noemie",
+      "Remy"
+     ],
+     "nameCultures": [
+      "french",
+      "french"
+     ],
+     "locale": "Marseille",
+     "setting": "a night bus",
+     "relationship": "a violin student and an exacting teacher",
+     "conflict": "when old loyalties collide with new ones",
+     "openingStyle": "대명사 I 또는 We 로 시작",
+     "topicSeed": "a night bus in Marseille; a violin student and an exacting teacher when old loyalties collide with new ones"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a night bus in Marseille; a violin student and an exacting teacher when old loyalties collide with new ones\n인물 이름: Noemie, Remy 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 대명사 I 또는 We 로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 C 에 둔다. correct_letter 는 C 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 C 로 정한 뒤 나머지 선택지를 채운다."
+  },
+  {
+   "candidateId": "lit40-medium-02-013",
+   "route": "ai_passage",
+   "skill": "inferences",
+   "difficulty": "medium",
+   "questionType": "symbolism",
+   "genre": "novel_excerpt",
+   "targetLetter": "D",
+   "words": {
+    "min": 60,
+    "max": 220
+   },
+   "recipeId": null,
+   "spec": {
+    "candidateId": "lit40-medium-02-013",
+    "batchId": "lit40-medium-02",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "medium",
+    "questionType": "symbolism",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 12,
+     "genre": "novel_excerpt",
+     "pov": "second",
+     "styleEra": "19c",
+     "names": [
+      "Ivy",
+      "Hortense"
+     ],
+     "nameCultures": [
+      "caribbean",
+      "caribbean"
+     ],
+     "locale": "Port of Spain",
+     "setting": "a beekeeper's yard",
+     "relationship": "an old teacher and a former pupil",
+     "conflict": "about whether a small kindness was a cover for something else",
+     "openingStyle": "대화 한 줄로 시작",
+     "topicSeed": "a beekeeper's yard in Port of Spain; an old teacher and a former pupil about whether a small kindness was a cover for something else"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a beekeeper's yard in Port of Spain; an old teacher and a former pupil about whether a small kindness was a cover for something else\n인물 이름: Ivy, Hortense 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 대화 한 줄로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 D 에 둔다. correct_letter 는 D 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 D 로 정한 뒤 나머지 선택지를 채운다."
+  },
+  {
+   "candidateId": "lit40-medium-02-014",
+   "route": "ai_passage",
+   "skill": "inferences",
+   "difficulty": "medium",
+   "questionType": "symbolism",
+   "genre": "poetry",
+   "targetLetter": "A",
+   "words": {
+    "min": 60,
+    "max": 220
+   },
+   "recipeId": null,
+   "spec": {
+    "candidateId": "lit40-medium-02-014",
+    "batchId": "lit40-medium-02",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "medium",
+    "questionType": "symbolism",
+    "genre": "poetry",
+    "seed": {
+     "index": 13,
+     "genre": "poetry",
+     "pov": "first",
+     "styleEra": "19c",
+     "names": [
+      "Dewi",
+      "Nora"
+     ],
+     "nameCultures": [
+      "southeast_asian",
+      "english"
+     ],
+     "locale": "Bologna",
+     "setting": "a weaving cooperative",
+     "relationship": "an uncle and a nephew with a debt",
+     "conflict": "when an expected rival turns out to be an ally",
+     "openingStyle": "숫자·목록·규칙을 말하며 시작",
+     "topicSeed": "a weaving cooperative in Bologna; an uncle and a nephew with a debt when an expected rival turns out to be an ally"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a weaving cooperative in Bologna; an uncle and a nephew with a debt when an expected rival turns out to be an ally\n인물 이름: Dewi, Nora 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 숫자·목록·규칙을 말하며 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 A 에 둔다. correct_letter 는 A 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 A 로 정한 뒤 나머지 선택지를 채운다."
+  },
+  {
+   "candidateId": "lit40-medium-02-015",
+   "route": "ai_passage",
+   "skill": "inferences",
+   "difficulty": "medium",
+   "questionType": "symbolism",
+   "genre": "personal_essay",
+   "targetLetter": "B",
+   "words": {
+    "min": 60,
+    "max": 220
+   },
+   "recipeId": null,
+   "spec": {
+    "candidateId": "lit40-medium-02-015",
+    "batchId": "lit40-medium-02",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "medium",
+    "questionType": "symbolism",
+    "genre": "personal_essay",
+    "seed": {
+     "index": 14,
+     "genre": "personal_essay",
+     "pov": "third_limited",
+     "styleEra": "late_20c",
+     "names": [
+      "Roshane",
+      "Valentina"
+     ],
+     "nameCultures": [
+      "caribbean",
+      "latin_american"
+     ],
+     "locale": "Havana",
+     "setting": "a rural post office",
+     "relationship": "a new teacher and a wary student",
+     "conflict": "about teaching a skill that is dying out",
+     "openingStyle": "장소 이름으로 시작",
+     "topicSeed": "a rural post office in Havana; a new teacher and a wary student about teaching a skill that is dying out"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a rural post office in Havana; a new teacher and a wary student about teaching a skill that is dying out\n인물 이름: Roshane, Valentina 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 장소 이름으로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 B 에 둔다. correct_letter 는 B 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 B 로 정한 뒤 나머지 선택지를 채운다."
+  },
+  {
+   "candidateId": "lit40-medium-02-016",
+   "route": "ai_passage",
+   "skill": "inferences",
+   "difficulty": "medium",
+   "questionType": "symbolism",
+   "genre": "memoir",
+   "targetLetter": "C",
+   "words": {
+    "min": 60,
+    "max": 220
+   },
+   "recipeId": null,
+   "spec": {
+    "candidateId": "lit40-medium-02-016",
+    "batchId": "lit40-medium-02",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "medium",
+    "questionType": "symbolism",
+    "genre": "memoir",
+    "seed": {
+     "index": 15,
+     "genre": "memoir",
+     "pov": "mixed_or_none",
+     "styleEra": "19c",
+     "names": [
+      "Wilhelmina",
+      "Leopoldina"
+     ],
+     "nameCultures": [
+      "dutch_nordic",
+      "portuguese_brazilian"
+     ],
+     "locale": "Bergen",
+     "setting": "a boarding-house kitchen",
+     "relationship": "a father and his stubborn son",
+     "conflict": "after a mistake that only one person noticed",
+     "openingStyle": "시간·날짜 표현으로 시작('By', 'On', 'After' 등)",
+     "topicSeed": "a boarding-house kitchen in Bergen; a father and his stubborn son after a mistake that only one person noticed"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a boarding-house kitchen in Bergen; a father and his stubborn son after a mistake that only one person noticed\n인물 이름: Wilhelmina, Leopoldina 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 시간·날짜 표현으로 시작('By', 'On', 'After' 등). 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 C 에 둔다. correct_letter 는 C 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 C 로 정한 뒤 나머지 선택지를 채운다."
+  },
+  {
+   "candidateId": "lit40-medium-02-017",
+   "route": "ai_passage",
+   "skill": "inferences",
+   "difficulty": "medium",
+   "questionType": "symbolism",
+   "genre": "fable_or_folktale_retelling",
+   "targetLetter": "D",
+   "words": {
+    "min": 60,
+    "max": 220
+   },
+   "recipeId": null,
+   "spec": {
+    "candidateId": "lit40-medium-02-017",
+    "batchId": "lit40-medium-02",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "medium",
+    "questionType": "symbolism",
+    "genre": "fable_or_folktale_retelling",
+    "seed": {
+     "index": 16,
+     "genre": "fable_or_folktale_retelling",
+     "pov": "first",
+     "styleEra": "early_20c",
+     "names": [
+      "Albert",
+      "Ephraim"
+     ],
+     "nameCultures": [
+      "english",
+      "english"
+     ],
+     "locale": "the Cornish coast",
+     "setting": "a fishing harbor",
+     "relationship": "a grandfather and a granddaughter learning his language",
+     "conflict": "over whether to sell a shared inheritance",
+     "openingStyle": "장소 이름으로 시작",
+     "topicSeed": "a fishing harbor in the Cornish coast; a grandfather and a granddaughter learning his language over whether to sell a shared inheritance"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a fishing harbor in the Cornish coast; a grandfather and a granddaughter learning his language over whether to sell a shared inheritance\n인물 이름: Albert, Ephraim 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 장소 이름으로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 D 에 둔다. correct_letter 는 D 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 D 로 정한 뒤 나머지 선택지를 채운다."
+  },
+  {
+   "candidateId": "lit40-medium-02-018",
+   "route": "ai_passage",
+   "skill": "words_in_context",
+   "difficulty": "medium",
+   "questionType": "figurative_language",
+   "genre": "short_story",
+   "targetLetter": "C",
+   "words": {
+    "min": 60,
+    "max": 220
+   },
+   "recipeId": null,
+   "spec": {
+    "candidateId": "lit40-medium-02-018",
+    "batchId": "lit40-medium-02",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "medium",
+    "questionType": "figurative_language",
+    "genre": "short_story",
+    "seed": {
+     "index": 17,
+     "genre": "short_story",
+     "pov": "first",
+     "styleEra": "late_20c",
+     "names": [
+      "Bogdan"
+     ],
+     "nameCultures": [
+      "slavic_baltic"
+     ],
+     "locale": "Riga",
+     "setting": "a school gymnasium",
+     "relationship": "a daughter caring for her mother",
+     "conflict": "while one of them prepares to leave for good",
+     "openingStyle": "인물의 이름으로 시작",
+     "topicSeed": "a school gymnasium in Riga; a daughter caring for her mother while one of them prepares to leave for good"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a school gymnasium in Riga; a daughter caring for her mother while one of them prepares to leave for good\n인물 이름: Bogdan 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 인물의 이름으로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 C 에 둔다. correct_letter 는 C 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 C 로 정한 뒤 나머지 선택지를 채운다."
+  },
+  {
+   "candidateId": "lit40-medium-02-019",
+   "route": "ai_passage",
+   "skill": "words_in_context",
+   "difficulty": "medium",
+   "questionType": "figurative_language",
+   "genre": "novel_excerpt",
+   "targetLetter": "D",
+   "words": {
+    "min": 60,
+    "max": 220
+   },
+   "recipeId": null,
+   "spec": {
+    "candidateId": "lit40-medium-02-019",
+    "batchId": "lit40-medium-02",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "medium",
+    "questionType": "figurative_language",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 18,
+     "genre": "novel_excerpt",
+     "pov": "first",
+     "styleEra": "19c",
+     "names": [
+      "Imani",
+      "Themba"
+     ],
+     "nameCultures": [
+      "east_south_african",
+      "east_south_african"
+     ],
+     "locale": "Addis Ababa",
+     "setting": "a kite-maker's yard",
+     "relationship": "a pair of rival bakers",
+     "conflict": "over blame for a lost opportunity",
+     "openingStyle": "부사절·전치사구로 시작('When', 'Although', 'Beside' 등)",
+     "topicSeed": "a kite-maker's yard in Addis Ababa; a pair of rival bakers over blame for a lost opportunity"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a kite-maker's yard in Addis Ababa; a pair of rival bakers over blame for a lost opportunity\n인물 이름: Imani, Themba 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 부사절·전치사구로 시작('When', 'Although', 'Beside' 등). 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 D 에 둔다. correct_letter 는 D 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 D 로 정한 뒤 나머지 선택지를 채운다."
+  },
+  {
+   "candidateId": "lit40-medium-02-020",
+   "route": "ai_passage",
+   "skill": "words_in_context",
+   "difficulty": "medium",
+   "questionType": "figurative_language",
+   "genre": "poetry",
+   "targetLetter": "A",
+   "words": {
+    "min": 60,
+    "max": 220
+   },
+   "recipeId": null,
+   "spec": {
+    "candidateId": "lit40-medium-02-020",
+    "batchId": "lit40-medium-02",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "medium",
+    "questionType": "figurative_language",
+    "genre": "poetry",
+    "seed": {
+     "index": 19,
+     "genre": "poetry",
+     "pov": "first",
+     "styleEra": "19c",
+     "names": [
+      "Rafael",
+      "Esteban"
+     ],
+     "nameCultures": [
+      "spanish_iberian",
+      "spanish_iberian"
+     ],
+     "locale": "Galicia",
+     "setting": "a flooded cellar",
+     "relationship": "a nurse and her night patient",
+     "conflict": "when a gift is returned instead of thanked",
+     "openingStyle": "과거를 회상하는 문장으로 시작('Years later', 'Once' 등)",
+     "topicSeed": "a flooded cellar in Galicia; a nurse and her night patient when a gift is returned instead of thanked"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a flooded cellar in Galicia; a nurse and her night patient when a gift is returned instead of thanked\n인물 이름: Rafael, Esteban 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 과거를 회상하는 문장으로 시작('Years later', 'Once' 등). 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 A 에 둔다. correct_letter 는 A 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 A 로 정한 뒤 나머지 선택지를 채운다."
+  }
+ ],
+ "instructions": "당신은 디지털 SAT Reading & Writing 문학 지문 문항 출제 위원이다. 아래 20개 후보 각각에 대해 문항 1개를 만들어 JSON 한 파일로 저장한다.\n작업: 새 문항 생성 · 청크 gen-lit40-medium-02-01\n규칙:\n1. 지문은 전부 새로 쓴 창작이다. 실제 작품의 문장·플롯·고유한 인물 설정을 쓰지 말고, 실존 작가·작품 이름이나 'From … by …' 같은 출처 머리글을 붙이지 않는다(발췌 지문 작업은 제공된 발췌를 한 글자도 바꾸지 않는다).\n2. 지문·질문·선택지는 영어만 쓴다. 해설(explanation)만 한국어 3~5문장이며, 글자 참조는 선택지 글자(A~D)로만 한다.\n3. 선택지는 정확히 4개, 정답은 1개이고 정답 위치는 후보별 targetLetter 와 같아야 한다(어기면 코드가 선택지를 재배치하거나 탈락시킨다).\n4. 선택지 길이·문체를 비슷하게 맞춘다. 정답이 가장 길거나 구체적이면 탈락한다. 오답 3개는 서로 다른 그럴듯한 오개념에서 나오게 하고 지문 표현을 일부 활용한다.\n5. 정답이 지문 마지막 문장을 거의 그대로 바꿔 말한 것이면 탈락한다. 근거를 서로 떨어진 둘 이상의 문장에 둔다.\n6. 후보별 names 에 있는 이름만 인물 이름으로 쓴다. 지정되지 않은 이름·'Tobias'·'Odalys'·'Wren' 은 쓰지 않는다. 후보별 openingStyle 을 따르고 첫 단어를 The·You·It·There 로 시작하지 않는다.\n7. 지문 단어 수는 후보별 words.min~words.max 안이어야 한다(코드가 센다). 시는 줄바꿈을 \\n 으로 유지한다.\n8. XML 태그·마크다운·내부 메모·플레이스홀더·'As an AI' 류 문장을 출력에 넣지 않는다. 밑줄 표시는 앱 규격대로 두 밑줄 기호 __문장__ 만 쓴다. 출처·작가를 지어내지 않는다.\n9. 선언: 모든 항목에 declaration 3개(original, noRealWorkQuoted, noCopyrightedSource)를 true 로 쓴다. 그럴 수 없는 항목은 만들지 말고 candidateId 만 빼라(탈락 처리된다).\n지문과 문항을 함께 새로 쓴다.\n출력: Write 도구로 정확히 이 경로에 JSON 한 파일을 쓴다 → /Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/gen-lit40-medium-02-01.result.json\n출력 JSON 스키마(예시 구조): {\"chunkId\":\"작업 파일의 chunkId 를 그대로\",\"model\":\"당신의 모델 이름(예: opus)\",\"items\":[{\"candidateId\":\"후보의 candidateId 를 그대로\",\"passage\":\"영어 지문(문항의 질문은 넣지 않는다)\",\"question\":\"영어 질문 한 문장\",\"options\":[\"선택지 A\",\"선택지 B\",\"선택지 C\",\"선택지 D\"],\"correct_letter\":\"A|B|C|D (targetLetter 와 같게)\",\"explanation\":\"한국어 해설 3~5문장\",\"tone\":[\"지문 어조 영어 단어 1~3개\"],\"devices\":[\"쓰인 문학 장치 영어 단어\"],\"declaration\":{\"original\":true,\"noRealWorkQuoted\":true,\"noCopyrightedSource\":true}}]}\n허용 값: correct_letter ∈ {A,B,C,D}, options 길이 4, declaration 3개 모두 true. 후보의 candidateId 를 바꾸지 않는다. 항목 순서는 후보 순서를 따른다.\n금지: 결과 파일 외의 파일 생성·수정, 다른 명령 실행, 후보 임의 추가·삭제, 이 작업 파일 수정. 끝나면 'done <항목 수>' 한 줄만 답한다.\n\n## 후보\n### lit40-medium-02-001 — skill inferences · 유형 tone_or_mood · 난이도 medium · 장르 drama · targetLetter D\n유형 지시: 지문 전체의 어조나 분위기를 묻는다.\n난이도 지시: medium: 단서를 두 군데 이상 연결해야 하고 오답 중 하나 이상이 그럴듯하다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a ship's galley in the Navajo plateau; a teenage cook and her stern aunt after discovering a letter meant for someone else\n인물 이름: Sequoia, Wenhua 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 대화 한 줄로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 90~150단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 D 에 둔다. correct_letter 는 D 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 D 로 정한 뒤 나머지 선택지를 채운다.\n레시피(inferences_lit_tone_or_mood_medium, 난이도 medium): 지문 전체의 어조·분위기를 묻는다. 지문에 서로 다른 두 정서(예: 설렘과 불안)가 섞여 있게 하고 한 쪽이 더 두드러지도록 쓴다. 마지막 문장은 분위기를 명명하지 않는다. 오답 3개는 (a) 덜 두드러진 정서만 말한 어조 (b) 두 정서를 섞었지만 비중을 뒤집은 어조 (c) 지문 소재와 어울리지만 지문에 단서가 약한 어조로 만들고 정반대 분위기는 쓰지 않는다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 1 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 덜 두드러진 정서만 말한 어조 (2) 두 정서의 비중을 뒤집은 어조 (3) 소재와 어울리지만 단서가 약한 어조\n금지: 정답이 지문 마지막 문장을 거의 그대로 바꿔 말한 문장이다 / 오답 3개가 지문의 분위기와 정반대 정서·행동이라 지문 분위기만 알아도 소거된다 / 정답만 길고 구체적이며 오답은 짧고 막연하다 / 지문 어딘가에 정답의 핵심어가 한 문장에 몰려 있다(근거가 한 곳)\n지문 길이: 90~150단어.\n### lit40-medium-02-002 — skill inferences · 유형 tone_or_mood · 난이도 medium · 장르 personal_essay · targetLetter A\n유형 지시: 지문 전체의 어조나 분위기를 묻는다.\n난이도 지시: medium: 단서를 두 군데 이상 연결해야 하고 오답 중 하나 이상이 그럴듯하다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a salt-water pool in Maui; a gardener and the house's new owner about an object that belonged to someone gone\n인물 이름: Moira, Mika 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 짧은 단언문으로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 90~150단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 A 에 둔다. correct_letter 는 A 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 A 로 정한 뒤 나머지 선택지를 채운다.\n레시피(inferences_lit_tone_or_mood_medium, 난이도 medium): 지문 전체의 어조·분위기를 묻는다. 지문에 서로 다른 두 정서(예: 설렘과 불안)가 섞여 있게 하고 한 쪽이 더 두드러지도록 쓴다. 마지막 문장은 분위기를 명명하지 않는다. 오답 3개는 (a) 덜 두드러진 정서만 말한 어조 (b) 두 정서를 섞었지만 비중을 뒤집은 어조 (c) 지문 소재와 어울리지만 지문에 단서가 약한 어조로 만들고 정반대 분위기는 쓰지 않는다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 1 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 덜 두드러진 정서만 말한 어조 (2) 두 정서의 비중을 뒤집은 어조 (3) 소재와 어울리지만 단서가 약한 어조\n금지: 정답이 지문 마지막 문장을 거의 그대로 바꿔 말한 문장이다 / 오답 3개가 지문의 분위기와 정반대 정서·행동이라 지문 분위기만 알아도 소거된다 / 정답만 길고 구체적이며 오답은 짧고 막연하다 / 지문 어딘가에 정답의 핵심어가 한 문장에 몰려 있다(근거가 한 곳)\n지문 길이: 90~150단어.\n### lit40-medium-02-003 — skill inferences · 유형 tone_or_mood · 난이도 medium · 장르 memoir · targetLetter B\n유형 지시: 지문 전체의 어조나 분위기를 묻는다.\n난이도 지시: medium: 단서를 두 군데 이상 연결해야 하고 오답 중 하나 이상이 그럴듯하다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a bookbinder's workshop in Tbilisi; old rivals in a chess club when someone returns after years without explaining\n인물 이름: Tatiana, Dainius 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 장소 이름으로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 90~150단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 B 에 둔다. correct_letter 는 B 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 B 로 정한 뒤 나머지 선택지를 채운다.\n레시피(inferences_lit_tone_or_mood_medium, 난이도 medium): 지문 전체의 어조·분위기를 묻는다. 지문에 서로 다른 두 정서(예: 설렘과 불안)가 섞여 있게 하고 한 쪽이 더 두드러지도록 쓴다. 마지막 문장은 분위기를 명명하지 않는다. 오답 3개는 (a) 덜 두드러진 정서만 말한 어조 (b) 두 정서를 섞었지만 비중을 뒤집은 어조 (c) 지문 소재와 어울리지만 지문에 단서가 약한 어조로 만들고 정반대 분위기는 쓰지 않는다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 1 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 덜 두드러진 정서만 말한 어조 (2) 두 정서의 비중을 뒤집은 어조 (3) 소재와 어울리지만 단서가 약한 어조\n금지: 정답이 지문 마지막 문장을 거의 그대로 바꿔 말한 문장이다 / 오답 3개가 지문의 분위기와 정반대 정서·행동이라 지문 분위기만 알아도 소거된다 / 정답만 길고 구체적이며 오답은 짧고 막연하다 / 지문 어딘가에 정답의 핵심어가 한 문장에 몰려 있다(근거가 한 곳)\n지문 길이: 90~150단어.\n### lit40-medium-02-004 — skill inferences · 유형 tone_or_mood · 난이도 medium · 장르 letter · targetLetter C\n유형 지시: 지문 전체의 어조나 분위기를 묻는다.\n난이도 지시: medium: 단서를 두 군데 이상 연결해야 하고 오답 중 하나 이상이 그럴듯하다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a bakery before opening in Tromso; twin brothers dividing a house when the plan works and nobody feels better\n인물 이름: Esperanza, Jens 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 시간·날짜 표현으로 시작('By', 'On', 'After' 등). 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 90~150단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 C 에 둔다. correct_letter 는 C 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 C 로 정한 뒤 나머지 선택지를 채운다.\n레시피(inferences_lit_tone_or_mood_medium, 난이도 medium): 지문 전체의 어조·분위기를 묻는다. 지문에 서로 다른 두 정서(예: 설렘과 불안)가 섞여 있게 하고 한 쪽이 더 두드러지도록 쓴다. 마지막 문장은 분위기를 명명하지 않는다. 오답 3개는 (a) 덜 두드러진 정서만 말한 어조 (b) 두 정서를 섞었지만 비중을 뒤집은 어조 (c) 지문 소재와 어울리지만 지문에 단서가 약한 어조로 만들고 정반대 분위기는 쓰지 않는다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 1 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 덜 두드러진 정서만 말한 어조 (2) 두 정서의 비중을 뒤집은 어조 (3) 소재와 어울리지만 단서가 약한 어조\n금지: 정답이 지문 마지막 문장을 거의 그대로 바꿔 말한 문장이다 / 오답 3개가 지문의 분위기와 정반대 정서·행동이라 지문 분위기만 알아도 소거된다 / 정답만 길고 구체적이며 오답은 짧고 막연하다 / 지문 어딘가에 정답의 핵심어가 한 문장에 몰려 있다(근거가 한 곳)\n지문 길이: 90~150단어.\n### lit40-medium-02-005 — skill inferences · 유형 relationship_between_characters · 난이도 medium · 장르 short_story · targetLetter D\n유형 지시: 두 인물의 관계를 단서로 추론하게 한다.\n난이도 지시: medium: 단서를 두 군데 이상 연결해야 하고 오답 중 하나 이상이 그럴듯하다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a river barge in Hanoi; a sister and her younger brother's tutor while pretending to enjoy a gift that is wrong\n인물 이름: Kainoa, Faris 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 대명사 I 또는 We 로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 90~150단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 D 에 둔다. correct_letter 는 D 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 D 로 정한 뒤 나머지 선택지를 채운다.\n레시피(inferences_lit_relationship_between_characters_medium, 난이도 medium): 두 인물의 관계를 추론하게 한다. 관계는 직접 서술하지 않고 두 문장 안의 대화·행동으로 드러내되 이어 읽으면 알 수 있게 한다. 마지막 문장은 관계와 무관한 장면 묘사로 끝낸다. 오답 3개는 (a) 인물 중 한쪽의 감정만 반영한 관계 (b) 지문 어휘를 쓰지만 반대 방향의 관계 (c) 일반적 통념에서 고른 관계로 만들되 모두 지문의 단어를 한두 개 사용한다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 1 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 한쪽 감정만 반영한 관계 (2) 지문 어휘를 쓰지만 방향이 반대인 관계 (3) 일반적 통념에서 고른 관계\n금지: 정답이 지문 마지막 문장을 거의 그대로 바꿔 말한 문장이다 / 오답 3개가 지문의 분위기와 정반대 정서·행동이라 지문 분위기만 알아도 소거된다 / 정답만 길고 구체적이며 오답은 짧고 막연하다 / 지문 어딘가에 정답의 핵심어가 한 문장에 몰려 있다(근거가 한 곳)\n지문 길이: 90~150단어.\n### lit40-medium-02-006 — skill inferences · 유형 relationship_between_characters · 난이도 medium · 장르 novel_excerpt · targetLetter A\n유형 지시: 두 인물의 관계를 단서로 추론하게 한다.\n난이도 지시: medium: 단서를 두 군데 이상 연결해야 하고 오답 중 하나 이상이 그럴듯하다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a courtyard with a dry fountain in Colombo; best friends after a move after a public embarrassment\n인물 이름: Agnes, Rukhsana 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 인물의 이름으로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 90~150단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 A 에 둔다. correct_letter 는 A 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 A 로 정한 뒤 나머지 선택지를 채운다.\n레시피(inferences_lit_relationship_between_characters_medium, 난이도 medium): 두 인물의 관계를 추론하게 한다. 관계는 직접 서술하지 않고 두 문장 안의 대화·행동으로 드러내되 이어 읽으면 알 수 있게 한다. 마지막 문장은 관계와 무관한 장면 묘사로 끝낸다. 오답 3개는 (a) 인물 중 한쪽의 감정만 반영한 관계 (b) 지문 어휘를 쓰지만 반대 방향의 관계 (c) 일반적 통념에서 고른 관계로 만들되 모두 지문의 단어를 한두 개 사용한다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 1 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 한쪽 감정만 반영한 관계 (2) 지문 어휘를 쓰지만 방향이 반대인 관계 (3) 일반적 통념에서 고른 관계\n금지: 정답이 지문 마지막 문장을 거의 그대로 바꿔 말한 문장이다 / 오답 3개가 지문의 분위기와 정반대 정서·행동이라 지문 분위기만 알아도 소거된다 / 정답만 길고 구체적이며 오답은 짧고 막연하다 / 지문 어딘가에 정답의 핵심어가 한 문장에 몰려 있다(근거가 한 곳)\n지문 길이: 90~150단어.\n### lit40-medium-02-007 — skill inferences · 유형 relationship_between_characters · 난이도 medium · 장르 drama · targetLetter B\n유형 지시: 두 인물의 관계를 단서로 추론하게 한다.\n난이도 지시: medium: 단서를 두 군데 이상 연결해야 하고 오답 중 하나 이상이 그럴듯하다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a community garden in Rotterdam; a conductor and the youngest violinist while pretending nothing has changed\n인물 이름: Ingeborg, Freja 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 부사절·전치사구로 시작('When', 'Although', 'Beside' 등). 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 90~150단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 B 에 둔다. correct_letter 는 B 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 B 로 정한 뒤 나머지 선택지를 채운다.\n레시피(inferences_lit_relationship_between_characters_medium, 난이도 medium): 두 인물의 관계를 추론하게 한다. 관계는 직접 서술하지 않고 두 문장 안의 대화·행동으로 드러내되 이어 읽으면 알 수 있게 한다. 마지막 문장은 관계와 무관한 장면 묘사로 끝낸다. 오답 3개는 (a) 인물 중 한쪽의 감정만 반영한 관계 (b) 지문 어휘를 쓰지만 반대 방향의 관계 (c) 일반적 통념에서 고른 관계로 만들되 모두 지문의 단어를 한두 개 사용한다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 1 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 한쪽 감정만 반영한 관계 (2) 지문 어휘를 쓰지만 방향이 반대인 관계 (3) 일반적 통념에서 고른 관계\n금지: 정답이 지문 마지막 문장을 거의 그대로 바꿔 말한 문장이다 / 오답 3개가 지문의 분위기와 정반대 정서·행동이라 지문 분위기만 알아도 소거된다 / 정답만 길고 구체적이며 오답은 짧고 막연하다 / 지문 어딘가에 정답의 핵심어가 한 문장에 몰려 있다(근거가 한 곳)\n지문 길이: 90~150단어.\n### lit40-medium-02-008 — skill inferences · 유형 relationship_between_characters · 난이도 medium · 장르 personal_essay · targetLetter C\n유형 지시: 두 인물의 관계를 단서로 추론하게 한다.\n난이도 지시: medium: 단서를 두 군데 이상 연결해야 하고 오답 중 하나 이상이 그럴듯하다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a lighthouse station in Marrakesh; two night-shift coworkers about borrowed money and borrowed time\n인물 이름: Samira, Hamza 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 과거를 회상하는 문장으로 시작('Years later', 'Once' 등). 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 90~150단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 C 에 둔다. correct_letter 는 C 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 C 로 정한 뒤 나머지 선택지를 채운다.\n레시피(inferences_lit_relationship_between_characters_medium, 난이도 medium): 두 인물의 관계를 추론하게 한다. 관계는 직접 서술하지 않고 두 문장 안의 대화·행동으로 드러내되 이어 읽으면 알 수 있게 한다. 마지막 문장은 관계와 무관한 장면 묘사로 끝낸다. 오답 3개는 (a) 인물 중 한쪽의 감정만 반영한 관계 (b) 지문 어휘를 쓰지만 반대 방향의 관계 (c) 일반적 통념에서 고른 관계로 만들되 모두 지문의 단어를 한두 개 사용한다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 1 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 한쪽 감정만 반영한 관계 (2) 지문 어휘를 쓰지만 방향이 반대인 관계 (3) 일반적 통념에서 고른 관계\n금지: 정답이 지문 마지막 문장을 거의 그대로 바꿔 말한 문장이다 / 오답 3개가 지문의 분위기와 정반대 정서·행동이라 지문 분위기만 알아도 소거된다 / 정답만 길고 구체적이며 오답은 짧고 막연하다 / 지문 어딘가에 정답의 핵심어가 한 문장에 몰려 있다(근거가 한 곳)\n지문 길이: 90~150단어.\n### lit40-medium-02-009 — skill inferences · 유형 relationship_between_characters · 난이도 medium · 장르 memoir · targetLetter D\n유형 지시: 두 인물의 관계를 단서로 추론하게 한다.\n난이도 지시: medium: 단서를 두 군데 이상 연결해야 하고 오답 중 하나 이상이 그럴듯하다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a bus depot in Taipei; two women who once shared a stage after a quiet act of generosity\n인물 이름: Kamal, Xiulan 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 감각 묘사(소리·냄새·촉감)로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 90~150단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 D 에 둔다. correct_letter 는 D 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 D 로 정한 뒤 나머지 선택지를 채운다.\n레시피(inferences_lit_relationship_between_characters_medium, 난이도 medium): 두 인물의 관계를 추론하게 한다. 관계는 직접 서술하지 않고 두 문장 안의 대화·행동으로 드러내되 이어 읽으면 알 수 있게 한다. 마지막 문장은 관계와 무관한 장면 묘사로 끝낸다. 오답 3개는 (a) 인물 중 한쪽의 감정만 반영한 관계 (b) 지문 어휘를 쓰지만 반대 방향의 관계 (c) 일반적 통념에서 고른 관계로 만들되 모두 지문의 단어를 한두 개 사용한다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 1 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 한쪽 감정만 반영한 관계 (2) 지문 어휘를 쓰지만 방향이 반대인 관계 (3) 일반적 통념에서 고른 관계\n금지: 정답이 지문 마지막 문장을 거의 그대로 바꿔 말한 문장이다 / 오답 3개가 지문의 분위기와 정반대 정서·행동이라 지문 분위기만 알아도 소거된다 / 정답만 길고 구체적이며 오답은 짧고 막연하다 / 지문 어딘가에 정답의 핵심어가 한 문장에 몰려 있다(근거가 한 곳)\n지문 길이: 90~150단어.\n### lit40-medium-02-010 — skill inferences · 유형 relationship_between_characters · 난이도 medium · 장르 letter · targetLetter A\n유형 지시: 두 인물의 관계를 단서로 추론하게 한다.\n난이도 지시: medium: 단서를 두 군데 이상 연결해야 하고 오답 중 하나 이상이 그럴듯하다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a rented farmhouse in Hamburg; two musicians in a failing duo about a translation that changes the meaning\n인물 이름: Ottilie, Lena 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 장소 이름으로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 90~150단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 A 에 둔다. correct_letter 는 A 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 A 로 정한 뒤 나머지 선택지를 채운다.\n레시피(inferences_lit_relationship_between_characters_medium, 난이도 medium): 두 인물의 관계를 추론하게 한다. 관계는 직접 서술하지 않고 두 문장 안의 대화·행동으로 드러내되 이어 읽으면 알 수 있게 한다. 마지막 문장은 관계와 무관한 장면 묘사로 끝낸다. 오답 3개는 (a) 인물 중 한쪽의 감정만 반영한 관계 (b) 지문 어휘를 쓰지만 반대 방향의 관계 (c) 일반적 통념에서 고른 관계로 만들되 모두 지문의 단어를 한두 개 사용한다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 1 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 한쪽 감정만 반영한 관계 (2) 지문 어휘를 쓰지만 방향이 반대인 관계 (3) 일반적 통념에서 고른 관계\n금지: 정답이 지문 마지막 문장을 거의 그대로 바꿔 말한 문장이다 / 오답 3개가 지문의 분위기와 정반대 정서·행동이라 지문 분위기만 알아도 소거된다 / 정답만 길고 구체적이며 오답은 짧고 막연하다 / 지문 어딘가에 정답의 핵심어가 한 문장에 몰려 있다(근거가 한 곳)\n지문 길이: 90~150단어.\n### lit40-medium-02-011 — skill inferences · 유형 relationship_between_characters · 난이도 medium · 장르 fable_or_folktale_retelling · targetLetter B\n유형 지시: 두 인물의 관계를 단서로 추론하게 한다.\n난이도 지시: medium: 단서를 두 군데 이상 연결해야 하고 오답 중 하나 이상이 그럴듯하다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a laundromat in Kingston; two neighbors with a shared wall over whether to tell the truth to a dying friend\n인물 이름: Kemoy, Dwayne 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 감각 묘사(소리·냄새·촉감)로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 90~150단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 B 에 둔다. correct_letter 는 B 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 B 로 정한 뒤 나머지 선택지를 채운다.\n레시피(inferences_lit_relationship_between_characters_medium, 난이도 medium): 두 인물의 관계를 추론하게 한다. 관계는 직접 서술하지 않고 두 문장 안의 대화·행동으로 드러내되 이어 읽으면 알 수 있게 한다. 마지막 문장은 관계와 무관한 장면 묘사로 끝낸다. 오답 3개는 (a) 인물 중 한쪽의 감정만 반영한 관계 (b) 지문 어휘를 쓰지만 반대 방향의 관계 (c) 일반적 통념에서 고른 관계로 만들되 모두 지문의 단어를 한두 개 사용한다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 1 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 한쪽 감정만 반영한 관계 (2) 지문 어휘를 쓰지만 방향이 반대인 관계 (3) 일반적 통념에서 고른 관계\n금지: 정답이 지문 마지막 문장을 거의 그대로 바꿔 말한 문장이다 / 오답 3개가 지문의 분위기와 정반대 정서·행동이라 지문 분위기만 알아도 소거된다 / 정답만 길고 구체적이며 오답은 짧고 막연하다 / 지문 어딘가에 정답의 핵심어가 한 문장에 몰려 있다(근거가 한 곳)\n지문 길이: 90~150단어.\n### lit40-medium-02-012 — skill inferences · 유형 symbolism · 난이도 medium · 장르 short_story · targetLetter C\n유형 지시: 반복·강조된 사물·이미지가 상징하는 바를 추론하게 한다.\n난이도 지시: medium: 단서를 두 군데 이상 연결해야 하고 오답 중 하나 이상이 그럴듯하다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a night bus in Marseille; a violin student and an exacting teacher when old loyalties collide with new ones\n인물 이름: Noemie, Remy 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 대명사 I 또는 We 로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 C 에 둔다. correct_letter 는 C 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 C 로 정한 뒤 나머지 선택지를 채운다.\n### lit40-medium-02-013 — skill inferences · 유형 symbolism · 난이도 medium · 장르 novel_excerpt · targetLetter D\n유형 지시: 반복·강조된 사물·이미지가 상징하는 바를 추론하게 한다.\n난이도 지시: medium: 단서를 두 군데 이상 연결해야 하고 오답 중 하나 이상이 그럴듯하다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a beekeeper's yard in Port of Spain; an old teacher and a former pupil about whether a small kindness was a cover for something else\n인물 이름: Ivy, Hortense 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 대화 한 줄로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 D 에 둔다. correct_letter 는 D 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 D 로 정한 뒤 나머지 선택지를 채운다.\n### lit40-medium-02-014 — skill inferences · 유형 symbolism · 난이도 medium · 장르 poetry · targetLetter A\n유형 지시: 반복·강조된 사물·이미지가 상징하는 바를 추론하게 한다.\n난이도 지시: medium: 단서를 두 군데 이상 연결해야 하고 오답 중 하나 이상이 그럴듯하다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a weaving cooperative in Bologna; an uncle and a nephew with a debt when an expected rival turns out to be an ally\n인물 이름: Dewi, Nora 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 숫자·목록·규칙을 말하며 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 A 에 둔다. correct_letter 는 A 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 A 로 정한 뒤 나머지 선택지를 채운다.\n### lit40-medium-02-015 — skill inferences · 유형 symbolism · 난이도 medium · 장르 personal_essay · targetLetter B\n유형 지시: 반복·강조된 사물·이미지가 상징하는 바를 추론하게 한다.\n난이도 지시: medium: 단서를 두 군데 이상 연결해야 하고 오답 중 하나 이상이 그럴듯하다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a rural post office in Havana; a new teacher and a wary student about teaching a skill that is dying out\n인물 이름: Roshane, Valentina 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 장소 이름으로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 B 에 둔다. correct_letter 는 B 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 B 로 정한 뒤 나머지 선택지를 채운다.\n### lit40-medium-02-016 — skill inferences · 유형 symbolism · 난이도 medium · 장르 memoir · targetLetter C\n유형 지시: 반복·강조된 사물·이미지가 상징하는 바를 추론하게 한다.\n난이도 지시: medium: 단서를 두 군데 이상 연결해야 하고 오답 중 하나 이상이 그럴듯하다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a boarding-house kitchen in Bergen; a father and his stubborn son after a mistake that only one person noticed\n인물 이름: Wilhelmina, Leopoldina 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 시간·날짜 표현으로 시작('By', 'On', 'After' 등). 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 C 에 둔다. correct_letter 는 C 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 C 로 정한 뒤 나머지 선택지를 채운다.\n### lit40-medium-02-017 — skill inferences · 유형 symbolism · 난이도 medium · 장르 fable_or_folktale_retelling · targetLetter D\n유형 지시: 반복·강조된 사물·이미지가 상징하는 바를 추론하게 한다.\n난이도 지시: medium: 단서를 두 군데 이상 연결해야 하고 오답 중 하나 이상이 그럴듯하다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a fishing harbor in the Cornish coast; a grandfather and a granddaughter learning his language over whether to sell a shared inheritance\n인물 이름: Albert, Ephraim 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 장소 이름으로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 D 에 둔다. correct_letter 는 D 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 D 로 정한 뒤 나머지 선택지를 채운다.\n### lit40-medium-02-018 — skill words_in_context · 유형 figurative_language · 난이도 medium · 장르 short_story · targetLetter C\n유형 지시: 비유 표현이 문맥에서 전달하는 의미를 묻는다. 질문은 'As used in the text, the phrase “…” most nearly suggests …' 형식이고 인용한 구절이 지문에 있어야 하며, 지문 본문에는 따옴표(\" “ ”)를 쓰지 않는다(대사는 따옴표 없이 서술).\n난이도 지시: medium: 단서를 두 군데 이상 연결해야 하고 오답 중 하나 이상이 그럴듯하다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a school gymnasium in Riga; a daughter caring for her mother while one of them prepares to leave for good\n인물 이름: Bogdan 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 인물의 이름으로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 C 에 둔다. correct_letter 는 C 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 C 로 정한 뒤 나머지 선택지를 채운다.\n### lit40-medium-02-019 — skill words_in_context · 유형 figurative_language · 난이도 medium · 장르 novel_excerpt · targetLetter D\n유형 지시: 비유 표현이 문맥에서 전달하는 의미를 묻는다. 질문은 'As used in the text, the phrase “…” most nearly suggests …' 형식이고 인용한 구절이 지문에 있어야 하며, 지문 본문에는 따옴표(\" “ ”)를 쓰지 않는다(대사는 따옴표 없이 서술).\n난이도 지시: medium: 단서를 두 군데 이상 연결해야 하고 오답 중 하나 이상이 그럴듯하다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a kite-maker's yard in Addis Ababa; a pair of rival bakers over blame for a lost opportunity\n인물 이름: Imani, Themba 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 부사절·전치사구로 시작('When', 'Although', 'Beside' 등). 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 D 에 둔다. correct_letter 는 D 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 D 로 정한 뒤 나머지 선택지를 채운다.\n### lit40-medium-02-020 — skill words_in_context · 유형 figurative_language · 난이도 medium · 장르 poetry · targetLetter A\n유형 지시: 비유 표현이 문맥에서 전달하는 의미를 묻는다. 질문은 'As used in the text, the phrase “…” most nearly suggests …' 형식이고 인용한 구절이 지문에 있어야 하며, 지문 본문에는 따옴표(\" “ ”)를 쓰지 않는다(대사는 따옴표 없이 서술).\n난이도 지시: medium: 단서를 두 군데 이상 연결해야 하고 오답 중 하나 이상이 그럴듯하다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a flooded cellar in Galicia; a nurse and her night patient when a gift is returned instead of thanked\n인물 이름: Rafael, Esteban 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 과거를 회상하는 문장으로 시작('Years later', 'Once' 등). 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 A 에 둔다. correct_letter 는 A 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 A 로 정한 뒤 나머지 선택지를 채운다."
+}

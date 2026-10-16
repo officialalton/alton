@@ -1,0 +1,148 @@
+{
+ "runs": [
+  "micro-p2-a"
+ ],
+ "rows": 76,
+ "passed": 59,
+ "rejected": 17,
+ "passRate": 0.776,
+ "mc": {
+  "rows": 76,
+  "passed": 59,
+  "passRate": 0.776
+ },
+ "frq": {
+  "rows": 0,
+  "passed": 0,
+  "passRate": 0
+ },
+ "unitsPassed": {
+  "1": 6,
+  "2": 11,
+  "3": 11,
+  "4": 21,
+  "5": 6,
+  "6": 4
+ },
+ "skillsPassed": {
+  "1.A": 10,
+  "2.A": 11,
+  "1.C": 5,
+  "1.B": 3,
+  "2.B": 8,
+  "3.A": 10,
+  "1.D": 4,
+  "3.C": 2,
+  "2.C": 5,
+  "3.B": 1
+ },
+ "figPassed": {
+  "none": 42,
+  "payoff_matrix": 2,
+  "graph": 8,
+  "table": 7
+ },
+ "figAll": {
+  "none": 58,
+  "payoff_matrix": 2,
+  "graph": 8,
+  "table": 8
+ },
+ "figPassRate": {
+  "none": "42/58",
+  "payoff_matrix": "2/2",
+  "graph": "8/8",
+  "table": "7/8"
+ },
+ "renderTypesPassed": {
+  "none": 42,
+  "ap_table:payoff_matrix": 2,
+  "ap_graph:econ_curves": 8,
+  "ap_table": 7
+ },
+ "archetypesPassed": {
+  "mi_barriers": 2,
+  "mi_consumer_rule": 2,
+  "mi_cr4": 1,
+  "mi_demand_determinant": 2,
+  "mi_efficiency_types": 1,
+  "mi_factor_derived": 2,
+  "mi_firm_supply": 1,
+  "mi_fixed_variable": 1,
+  "mi_free_rider": 1,
+  "mi_game_dominant": 2,
+  "mi_hhi": 2,
+  "mi_lorenz_gini": 2,
+  "mi_lr_economies": 2,
+  "mi_mc_excess_capacity": 2,
+  "mi_mc_graph_longrun": 2,
+  "mi_min_wage_monopsony": 1,
+  "mi_monopoly_graph": 2,
+  "mi_monopoly_numeric": 2,
+  "mi_monopsony_concept": 1,
+  "mi_mr_demand": 2,
+  "mi_mrp_value": 2,
+  "mi_normal_profit": 1,
+  "mi_pc_graph_decision": 2,
+  "mi_pc_longrun": 1,
+  "mi_pd_conditions": 2,
+  "mi_pd_perfect": 2,
+  "mi_pe_revenue": 2,
+  "mi_profit_max_table": 2,
+  "mi_public_good_efficient": 1,
+  "mi_related_market": 1,
+  "mi_subsidy_effect": 2,
+  "mi_sunk_cost": 2,
+  "mi_surplus_concept": 2,
+  "mi_tax_incidence_elasticity": 2,
+  "mi_utility_rule": 2
+ },
+ "archetypesAll": {
+  "mi_barriers": 2,
+  "mi_cartel_cheat": 2,
+  "mi_consumer_rule": 2,
+  "mi_cr4": 2,
+  "mi_demand_determinant": 2,
+  "mi_economic_systems": 2,
+  "mi_efficiency_types": 2,
+  "mi_factor_derived": 2,
+  "mi_firm_supply": 2,
+  "mi_fixed_variable": 2,
+  "mi_free_rider": 2,
+  "mi_game_dominant": 2,
+  "mi_hhi": 2,
+  "mi_lorenz_gini": 2,
+  "mi_lr_economies": 2,
+  "mi_mc_excess_capacity": 2,
+  "mi_mc_graph_longrun": 2,
+  "mi_min_wage_monopsony": 2,
+  "mi_monopoly_graph": 2,
+  "mi_monopoly_numeric": 2,
+  "mi_monopoly_vs_pc": 2,
+  "mi_monopsony_concept": 2,
+  "mi_mr_demand": 2,
+  "mi_mrp_value": 2,
+  "mi_normal_profit": 2,
+  "mi_pc_graph_decision": 2,
+  "mi_pc_longrun": 2,
+  "mi_pd_conditions": 2,
+  "mi_pd_perfect": 2,
+  "mi_pe_revenue": 2,
+  "mi_profit_max_table": 2,
+  "mi_public_good_efficient": 2,
+  "mi_related_market": 2,
+  "mi_subsidy_effect": 2,
+  "mi_sunk_cost": 2,
+  "mi_surplus_concept": 2,
+  "mi_tax_incidence_elasticity": 2,
+  "mi_utility_rule": 2
+ },
+ "failedArchetypes": [
+  "mi_cartel_cheat",
+  "mi_economic_systems",
+  "mi_monopoly_vs_pc"
+ ],
+ "costUsd": {
+  "micro-p2-a": 2.3977
+ }
+}

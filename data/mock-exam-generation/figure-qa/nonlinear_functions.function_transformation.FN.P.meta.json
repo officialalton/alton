@@ -1,0 +1,44 @@
+{
+ "itemId": "nonlinear_functions.function_transformation.FN.P",
+ "generatedAt": "2026-10-07T05:02:00.739Z",
+ "codeHash": "a2b72d6e5d3e21d9496f0026184d12ad3779c42d5c0ea3afcfa16793476321f1",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/coordinate-plane.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/graph-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/nonlinear_functions.function_transformation.FN.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/pure-fn-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "nonlinear_functions.function_transformation.FN.P.png",
+   "mobileFile": "nonlinear_functions.function_transformation.FN.P.m375.png",
+   "archetypeId": "ftfp.function_transformation.FN.P.repr_shift",
+   "seed": 11,
+   "signature": "plane",
+   "stimulus": "In a practice set, a function is shown as a graph. For the quadratic function $p$, the graph shown gives selected points $(x, p(x))$. The function $w$ is defined by $w(x) = p(x + 3) + 4$.",
+   "question": "At what value of $x$ does the graph of $w$ reach its vertex?",
+   "options": [
+    "-3",
+    "3",
+    "0",
+    "11"
+   ],
+   "correctIndex": 0,
+   "answer": "-3",
+   "explanation": "(1) 그래프에 표시된 점을 읽는다: (-4, -9), (2, 3), (3, -2). (2) y = ax² + bx + c 에 세 점을 대입해 세 식을 만든다. (3) 연립해 풀면 a = -1, b = 0, c = 7 이다. (4) 식: y = -1x² + 0x + 7 이다. (5) f 의 꼭짓점 x = -b/(2a) = 0 이다. (6) g 는 f 를 왼쪽으로 3 옮기므로 x 좌표가 0 - 3 가 된다. (7) 따라서 -3 이다. 따라서 정답은 -3이다.",
+   "structuralIssues": []
+  }
+ ]
+}

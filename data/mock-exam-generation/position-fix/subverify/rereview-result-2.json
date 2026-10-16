@@ -1,0 +1,142 @@
+[
+ {
+  "gid": "a397f4d3-5024-46a0-97c9-1cc5c89d2011",
+  "ok": true,
+  "issue": "",
+  "severity": "minor",
+  "shuffle_induced": false
+ },
+ {
+  "gid": "3ffadb71-ec91-4301-a7bb-1be8ef2857d1",
+  "ok": true,
+  "issue": "",
+  "severity": "minor",
+  "shuffle_induced": false
+ },
+ {
+  "gid": "3884c2fe-2839-4880-a900-74169bba6cea",
+  "ok": true,
+  "issue": "",
+  "severity": "minor",
+  "shuffle_induced": false
+ },
+ {
+  "gid": "8600dd40-4fa9-433f-a386-5369b8eb5b78",
+  "ok": true,
+  "issue": "",
+  "severity": "minor",
+  "shuffle_induced": false
+ },
+ {
+  "gid": "1262e758-b8b3-4d5c-a700-8ade981c29ef",
+  "ok": true,
+  "issue": "",
+  "severity": "minor",
+  "shuffle_induced": false
+ },
+ {
+  "gid": "43f4e230-7140-4235-8372-1d02a3aab02d",
+  "ok": true,
+  "issue": "",
+  "severity": "minor",
+  "shuffle_induced": false
+ },
+ {
+  "gid": "c7fc6582-5a85-48c4-8708-a9cbd433342c",
+  "ok": true,
+  "issue": "",
+  "severity": "minor",
+  "shuffle_induced": false
+ },
+ {
+  "gid": "2efde84c-c181-4b62-9538-c8dc44fc7893",
+  "ok": true,
+  "issue": "",
+  "severity": "minor",
+  "shuffle_induced": false
+ },
+ {
+  "gid": "731678ed-acf9-495f-bcc8-db5c90eb8327",
+  "ok": true,
+  "issue": "",
+  "severity": "minor",
+  "shuffle_induced": false
+ },
+ {
+  "gid": "f8c5a429-a8dc-4e2b-ba3f-bacfff2a6a5e",
+  "ok": false,
+  "issue": "해설 A 서술(홍수 문제 배경만 설명)이 실제 A 내용(환경단체 우려로 장벽 사용 축소)과 맞지 않음. 섞기 매핑 자체는 일관되며 원래 해설의 내용 불일치(원래 B).",
+  "severity": "minor",
+  "shuffle_induced": false
+ },
+ {
+  "gid": "92641ca8-30b6-4b8b-950f-38a97bb42157",
+  "ok": false,
+  "issue": "영어 해설 \"makes A correct\"가 섞기 후에도 남음. 정답은 B(위치 1)인데 같은 해설에서 A를 오답(species 오류 날조)으로 서술해 자기모순. 한국어 해설은 B로 정확.",
+  "severity": "blocking",
+  "shuffle_induced": true
+ },
+ {
+  "gid": "1c98e99c-6be7-4f5a-81cd-b6902143a131",
+  "ok": true,
+  "issue": "",
+  "severity": "minor",
+  "shuffle_induced": false
+ },
+ {
+  "gid": "b8e84492-52f9-40cf-bf55-f4adf07d37d1",
+  "ok": true,
+  "issue": "",
+  "severity": "minor",
+  "shuffle_induced": false
+ },
+ {
+  "gid": "d23cf4a8-3271-47b2-adb3-2fa866fd00c0",
+  "ok": true,
+  "issue": "",
+  "severity": "minor",
+  "shuffle_induced": false
+ },
+ {
+  "gid": "9241c25d-dedf-4afb-95ec-ec84f1f54808",
+  "ok": true,
+  "issue": "",
+  "severity": "minor",
+  "shuffle_induced": false
+ },
+ {
+  "gid": "15751477-128f-4f57-8083-a473f11b0ac9",
+  "ok": true,
+  "issue": "",
+  "severity": "minor",
+  "shuffle_induced": false
+ },
+ {
+  "gid": "4eaf03a4-797e-4bf1-9ada-adc2b2e0b63b",
+  "ok": false,
+  "issue": "A를 \"오차범위를 절반만 적용\"이라 서술하지만 A(26.0 to 27.0)는 27±0.6(26.4~27.6)이 아님. 원래 해설(B) 부정확. 섞기 매핑은 일관.",
+  "severity": "minor",
+  "shuffle_induced": false
+ },
+ {
+  "gid": "078f6eba-f914-4c11-b60b-d763aa1633e8",
+  "ok": false,
+  "issue": "영어 해설 \"This makes A correct\"가 남음. 정답은 C(진동이 원인). 같은 해설에서 A는 습도 원인론 오답으로 서술해 모순. 한국어 해설은 C로 정확.",
+  "severity": "blocking",
+  "shuffle_induced": true
+ },
+ {
+  "gid": "8f815027-71f2-4d31-97d4-8672c82e00a6",
+  "ok": false,
+  "issue": "해설 B(\"작품 수만 언급\")와 D(\"그림 주제\")가 실제 내용(B: 1600년대 활동·비용절감 시기, D: 라피스라줄리 수입 기원)과 맞지 않음. 원래 해설 결함이며 글자 매핑은 일관.",
+  "severity": "minor",
+  "shuffle_induced": false
+ },
+ {
+  "gid": "ab53385c-6ee6-4b62-83f8-e204c49fa65c",
+  "ok": true,
+  "issue": "",
+  "severity": "minor",
+  "shuffle_induced": false
+ }
+]

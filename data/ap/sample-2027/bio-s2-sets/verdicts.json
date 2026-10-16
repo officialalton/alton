@@ -1,0 +1,1793 @@
+[
+ {
+  "key": "ap_biology-m01-k0-q1",
+  "cellId": "ap_biology-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "C",
+     "brief_reasoning": "Both groups total 400 cells. In the treated group, metaphase rose from 12 to 57 and anaphase fell from 9 to 1, so the distribution among the stages changed.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Describing cell-stage count data under a drug treatment fits 4.6 and 4.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Both groups total 400. Only C is correct; A, B and D are each clearly false."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table data is complete and consistent with N = 400, and the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option is explained accurately and specifically. The distractors are plausible misreadings of the table."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60 seconds, with a low reading load and no arithmetic needed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean 4.B table-description item with a unique key (C), accurate distractor rationales and appropriate load. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single small table, no calculation needed. The student compares control and treated counts, notices that metaphase rises (12 to 57) and anaphase falls (9 to 1), and rejects three clearly flawed distractors: all stages present means no effect, total cell number changed (both are 400), and all cells in interphase (312 of 400). It tests basic data description (skill 4.B) with little reasoning depth and no named-misconception subtlety beyond simple rejection.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_biology-m01-k0-q2",
+  "cellId": "ap_biology-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Mitotic cells in control = 27+12+9+13 = 61; 61/400 = 15.25% ≈ 15%",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "15%"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Mitotic index calculation from stage counts fits topic 4.6 and skill 5.A with one proportion calculation."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Control mitosis = 61/400 = 15.25%, which rounds to 15%. The key is unique and the other options are clearly different."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete, the control counts sum to 400, and the mitotic index is defined in the stem. The Treated column is unused but harmless."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor matches a distinct, computable error (61/339, interphase percent, prophase only), and the explanation addresses each one."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item is short, takes about 60 seconds, and its calculation is light."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and clean. The key of 15% follows from 61/400, the distractors reflect distinct errors, and the item fits the topic, skill and time expectations."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step data use: read the control column, sum the four mitotic stages (61), and divide by 400 to get about 15%. The definition of mitotic index is given in the stem. There is no use of the treated group, no interpretation of the drug effect, and no multi-step biological reasoning. Numbers are small and the arithmetic is easy. This fits a basic skill check rather than a full-mock exam item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_biology-m01-k0-q3",
+  "cellId": "ap_biology-m01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Mitotic index control 61/400=15.25%, treated 88/400=22%; change 27/61≈+44%",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "+44%"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": "Item is a pure mitotic index and percent change calculation. It never requires regulation of the cell cycle (cyclin, CDK, checkpoints, or a drug's effect on regulation), so it fits topic 4.5 better than 4.6."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Mitotic index is 61/400 for control and 88/400 for treated, so the change is about +44%. The key is unique and each distractor is a distinct wrong value."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table is complete and both columns sum to 400. The stem does not define mitotic index, which is a minor issue."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The key rationale is a generic template ('Applying the relationship to the values given...') and never shows the mitotic index or percent change calculation. The distractor rationales are brief but accurate."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Single-step calculation with a calculator, about 75 seconds, typical for AP Biology."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and the table is complete. The item fails scope, because it is a generic mitotic index calculation that never requires cell cycle regulation (4.6), and it fails the explanation criterion, because the key rationale is a placeholder and not a real explanation."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must read the table, identify that mitotic index = mitotic cells / total cells (excluding interphase), sum the four mitotic stages for each group, then apply the percent change formula. Distractors target the classic errors: reporting the treated index, the percentage-point difference, or the ratio instead of the change. Arithmetic is small and the context is brief, and the scope is within CED 4.5/4.6 and skill 5.A. This is appropriate difficulty for a full mock exam.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_biology-m01-k0-q4",
+  "cellId": "ap_biology-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "C",
+     "brief_reasoning": "Metaphase count rises from 12 to 57 and anaphase falls from 9 to 1, so cells are stuck at metaphase. This fits a drug that disrupts spindle fibers. Totals are 400 in both groups.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Infers cause of a cell-cycle disruption from stage counts; fits 4.6 and 6.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Metaphase accumulation with an anaphase drop uniquely supports the spindle/metaphase block. Other options are contradicted by the data."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table is complete, columns sum to 400, and the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option has a distinct misconception and a specific rationale."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 70 seconds, a short table, no heavy arithmetic."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean item: the key is unique, the table is consistent, and the distractors are well differentiated. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must read the table, compare stage counts between groups, identify the metaphase pile-up with fewer anaphase and telophase cells, and infer a spindle/metaphase-to-anaphase block. Distractors are plausible misconceptions that can be rejected using the data (interphase decreased, so no replication block; telophase decreased, so no faster cytokinesis). Moderate reasoning with no heavy arithmetic or reading, and within the CED scope of cell cycle regulation.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_biology-m02-k0-q1",
+  "cellId": "ap_biology-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Under a 9:3:3:1 ratio, wrinkled green is 1/16 of the offspring, so 480/16 = 30.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "30"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 60 seconds and needs little arithmetic. A calculator is allowed, which is consistent with the item. The expected-count step is typical of the first step of a chi-square item.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, single-step expected-count calculation from a 9:3:3:1 ratio, with a unique key and distinct distractors. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "One-step expected-count calculation: identify the 1/16 fraction for wrinkled, green from the stated 9:3:3:1 ratio and multiply by the 480 total (30). Distractors are the observed count, the ratio term, and the total. The ratio is given in the table notes, there is no chi-square, and the arithmetic is clean and short. This fits the allowed lever of one proportional calculation and involves no unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_biology-m02-k0-q2",
+  "cellId": "ap_biology-m02",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Expected counts for a 9:3:3:1 ratio out of 480 are 270, 90, 90 and 30. Chi-square = 0.833 + 0 + 4.9 + 1.2 = 6.93.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "6.93"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Chi-square on a dihybrid cross; fits 5.3 and 5.C."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "6.93 is correct and unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table, total and hypothesis are given; expected counts are derivable."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The stated misconception for 192.69 (adding observed and expected before squaring) does not reproduce that value; (o+e)^2/e terms are much larger. The explanation is therefore inaccurate for this option. The other two distractors are consistent with their rationales."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 90 seconds, calculator allowed, typical load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and the item is well scoped and suitable. It fails on distractor quality: the rationale for 192.69 claims a misconception that does not generate that value, so the explanation is inaccurate."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must derive expected counts from the 9:3:3:1 ratio and the total of 480 (270, 90, 90, 30), then apply the chi-square formula across four phenotype classes and sum (0.83 + 0 + 4.90 + 1.20 = 6.93). Numbers are clean and a calculator is allowed. Distractors reflect plausible errors (using the wrong expected values or omitting the division by expected). The item is in scope (5.3, skill 5.C), has a single stimulus table, and uses one formula-sheet equation. This is typical full-mock difficulty, neither a basic recall item nor an advanced extension.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_biology-m02-k0-q3",
+  "cellId": "ap_biology-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "D",
+     "brief_reasoning": "Expected counts are 270, 90, 90 and 30. Chi-square = 0.833 + 0 + 4.9 + 1.2 ≈ 6.93. With 3 degrees of freedom the critical value is 7.81, and 6.93 < 7.81, so the null hypothesis is not rejected.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Chi-square test of a 9:3:3:1 dihybrid cross; fits 5.3 and skill 5.C."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Chi-square = 6.93 < 7.81 at df = 3, so not rejected. Key D is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table gives observed counts, total and hypothesis; complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions (wrong df, reversed decision, proving null). Option A's explanation covers only df, not its wrong decision; minor."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 70 seconds, calculator appropriate, typical AP format."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, well-formed chi-square decision item. Key verified, distractors distinct, and the stimulus is complete. Passes."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP chi-square goodness-of-fit item. Student must read the table, compute expected counts from 9:3:3:1 (270, 90, 90, 30), calculate chi-square (about 6.93), determine df = 3, and compare to the given critical value 7.81 to fail to reject the null. Distractors target df errors, 'proving' the null, and reversed comparison logic. Numbers are clean and the calculation is short, so difficulty comes from the intended skill rather than arithmetic or reading load.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 150
+  }
+ },
+ {
+  "key": "ap_biology-m02-k0-q4",
+  "cellId": "ap_biology-m02",
+  "passed": false,
+  "reasons": [
+   "resembles_known_exam_item"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "The data are consistent with independent assortment",
+     "brief_reasoning": "Chi-square ≈6.93 < 7.81 (df=3, p=0.05); fail to reject null.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The load is one short chi-square calculation, about 65 seconds, and calculator use is consistent.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": "<parameter name=\"value\">true",
+   "resembles_known_exam_item": "<parameter name=\"value\">false",
+   "summary": "Sound chi-square interpretation item with a unique key and reasonable distractors. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must compute expected counts from a 9:3:3:1 ratio, calculate a four-term chi-square (about 6.93, df = 3), compare it to the critical value (7.81), and choose the conclusion that does not overclaim. Distractors target named misconceptions (linkage, sex chromosomes, 'prove'). The numbers are clean and a calculator is allowed, so the load comes from the reasoning, not from the arithmetic. This is a typical AP-style stats-in-genetics item and fits full mocks.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 150
+  }
+ },
+ {
+  "key": "ap_biology-m03-k0-q1",
+  "cellId": "ap_biology-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "D",
+     "brief_reasoning": "Rates 5.9, 14.2, 18.8, 6.7: rise to max at pH 8, then fall.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 55 seconds, needs no calculation and has a light reading load. It is easy but acceptable for a 4.B item.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, unambiguous table-description question with a unique key and distinct distractors. It is suitable for the exam."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Student reads a small 4-row table and identifies the trend in the mean rate (rise to a maximum at pH 8, then a fall). No calculation is needed, and the ±2SE values are not required to answer. Distractors are simple direction errors (monotonic rise or fall, or a minimum instead of a maximum). It tests basic description of data on pH and enzyme activity and does not require comparing SE ranges or explaining the cause, so it is below full-mock exam_prep depth.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_biology-m03-k0-q2",
+  "cellId": "ap_biology-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "32%",
+     "brief_reasoning": "(18.8-14.2)/14.2 = 4.6/14.2 ≈ 0.324, which is about 32%.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key of 32% is correct and unique. The item fits skill 5.A with an enzyme-pH data context, and the distractors are distinct and accurately explained. Minor flaw: option 4.6 has no percent sign, which makes the options slightly inconsistent in format.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The percent-change calculation is a legitimate 5.A skill, and the enzyme-pH table fits topic 3.2 as context."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "(18.8-14.2)/14.2*100 = 32.4%, which gives 32%. The other options are distinct wrong results."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete: pH, mean ± 2SE and number of trials. The extra columns are harmless. Option 4.6 lacks a percent sign."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option is explained accurately: difference only, ratio as a percent, and dividing by the larger mean."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 65 seconds with a simple calculator calculation, which is appropriate."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "One table read and one percent-change calculation (4.6/14.2 ≈ 32%) with small rounded numbers. Distractors map to common errors (raw difference, ratio, wrong denominator). No multi-step reasoning or representation changes; the 2SE data are unused. Option formatting is slightly inconsistent but does not add difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_biology-m03-k0-q3",
+  "cellId": "ap_biology-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "The difference is likely real, because the ±2SE ranges do not overlap.",
+     "brief_reasoning": "pH4 range 5.4–6.4; pH8 range 17.08–20.52; no overlap indicates likely significant difference.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "About 70 seconds, with a light reading load and no needless arithmetic.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Clean, correctly keyed ±2SE interpretation item with distinct distractors, and it fits the topic and skill."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step interpretation of mean ± 2SE: pH 4 range (5.4-6.4) and pH 8 range (17.08-20.52) are far apart and do not overlap, so the difference is likely real (C). Distractors target named misconceptions (comparing means alone, needing raw data, contradictory chance claim). No heavy arithmetic, reading, or out-of-scope content; the stimulus is a small table with rounded values. Lower concept depth than typical full-mock items because there is no borderline overlap case and no extra reasoning about the enzyme.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_biology-m03-k0-q4",
+  "cellId": "ap_biology-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "B",
+     "brief_reasoning": "The rate is highest at pH 8 and drops at pH 10, so at pH 12 it should be lower than at the optimum. Extreme pH disrupts the ionic and hydrogen bonds that hold the enzyme's shape, which can denature it.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is acceptable. B is the unique best-supported prediction, and the table is complete. Each distractor encodes a distinct misconception. The only weakness is that the option D rationale refutes \"zero at pH 12\" somewhat indirectly.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 3.2 with skill 6.E (prediction beyond the tested range); no out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "B is the unique best-supported answer. The zero-rate option is defensibly wrong because its premise that no enzyme works in bases is false."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table data are complete and clear. The phrase \"mean of the trials\" is slightly loose."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors are parallel in form and length and each is explained. The option D rationale is slightly indirect but accurate."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 65 seconds, with no calculation needed and light reading."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student reads a short table, identifies the optimum near pH 8 and the decline at pH 10, then predicts the effect of a more extreme pH by linking it to disruption of the bonds that maintain enzyme shape. Distractors target named misconceptions (bases speed enzymes, no effect beyond tested range, absolute zero activity). Core in-scope 3.2 concept with moderate reasoning and no heavy reading or arithmetic. This is a typical full-mock item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_biology-m04-k0-q1",
+  "cellId": "ap_biology-m04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Count a alleles: 2(159)+282=600 out of 2000 total alleles, so q=0.30.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "0.30"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The task is one short calculation from a table, taking about 65 seconds. Options are short, parallel decimal values.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean allele-counting calculation with a unique key and distinct distractors, and it is suitable for the exam."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step allele counting from a small table: (2x159 + 282)/2000 = 0.30. Numbers are round and the calculation is short. Distractors target common errors (genotype frequency 0.16, dividing by individuals instead of alleles 0.60, and the A allele frequency 0.70). It requires only recognizing that each individual carries two alleles, with no equilibrium assumptions, p/q equations, or multi-step reasoning, so it fits foundational learning rather than a full-mock item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_biology-m04-k0-q2",
+  "cellId": "ap_biology-m04",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_exam_suitability",
+   "instant_reject_missing_condition",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "p = (2*559+282)/2000 = 0.7, q = 0.3; 2pq = 0.42; 0.42*1000 = 420 heterozygotes",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "420"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The reference to a previous question makes the item unusable as a standalone exam item. The load otherwise fits the exam, since the calculator is allowed and the arithmetic is simple.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": ""
+   },
+   "instant_reject": [
+    "missing_condition"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The calculation and key are correct, but the stem depends on \"the previous question\", which does not exist. The item is not self-contained, so it is rejected for a missing condition."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The student reads a genotype table, derives p and q from genotype counts, applies 2pq from the formula sheet, and converts the frequency to a count. The arithmetic is short and clean. The distractors reflect common errors: 0.42 is a frequency, 490 is p^2, and 210 omits the factor of 2. The reference to 'the previous question' is a minor clarity flaw, but the item is solvable from the table alone.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_biology-m04-k0-q3",
+  "cellId": "ap_biology-m04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "p=0.7, q=0.3; expected 2pq*1000=420; observed 282 < 420, a heterozygote deficit, so not in HWE.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "Fewer heterozygotes than expected; not in HWE"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "HW expected heterozygote calculation from a genotype table; fits 7.5 and 4.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "p=0.7, expected Aa=420, observed 282, so fewer than expected. Unique key."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table is complete; the sample size and genotype counts are given. The stem is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option has a specific, accurate rationale and encodes a distinct error: wrong direction, equilibrium claimed, and a false restriction of HW to dominant alleles."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 70 seconds, calculator allowed, one formula-sheet calculation."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound item: the key is correct and unique, and the stimulus is complete. The distractors are plausible, and the timing and calculator load are suitable."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The student must read genotype counts from a table, compute allele frequency p = 0.70 (and q = 0.30), apply 2pq to get the expected 420 heterozygotes, and compare this with the observed 282 to judge equilibrium. This is a single formula-sheet calculation with a table-to-frequency representation change. The numbers are clean and calculator-friendly, the reading is minimal, and the wording is unambiguous. The distractors target common misconceptions (direction of the difference, \"about expected\", and \"dominant alleles only\"). This is typical full-mock difficulty and not basic recall or advanced.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_biology-m04-k0-q4",
+  "cellId": "ap_biology-m04",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:Options 0 and 2 both point to the same answer. Option 0 names the Hardy-Weinberg condition (random mating). Option 2 describes the violation (nonrandom mating), which is not itself a condition. Because the stem asks which condition was violated, option 0 fits best, but option 2 is also defensible.",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "instant_reject_multiple_correct",
+   "instant_reject_wrong_key",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "Random mating",
+     "brief_reasoning": "p=(1118+282)/2000=0.7, q=0.3. Expected: 490 AA, 420 Aa, 90 aa. Observed: 559, 282, 159. There are too many homozygotes and too few heterozygotes, which points to nonrandom mating such as inbreeding. The condition that was violated is random mating.",
+     "ambiguous_or_flawed": true,
+     "flaw_note": "Options 0 and 2 both point to the same answer. Option 0 names the Hardy-Weinberg condition (random mating). Option 2 describes the violation (nonrandom mating), which is not itself a condition. Because the stem asks which condition was violated, option 0 fits best, but option 2 is also defensible."
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [
+    "multiple_correct",
+    "wrong_key"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "Options A and C describe the same violation: A names the condition (random mating) and C its violation (nonrandom mating). The stem asks which condition is violated, so A is defensible and the independent solver chose it. The rationale for A misreads the stem, and C is longer and carries its own justification, which signals the key.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The item fits topic 7.5 and the skill of predicting causes in a biological system."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "The key (C) and option A (random mating) both fit the stem \"which condition is violated\". The key is not unique."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The table is complete. The stem does not rule out other causes of a heterozygote deficit, such as population structure or selection against heterozygotes."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The rationale for A, \"random mating is a condition, not a violation\", misreads the stem. A encodes no distinct misconception."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "Option C is longer and carries its own justification, which signals the key."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must read the genotype table, calculate allele frequencies (p=0.70, q=0.30), derive expected HW genotype counts (490/420/90), compare them with the observed counts (559/282/159), and infer a homozygote excess from nonrandom mating, rejecting the other HW conditions. This involves one formula-sheet calculation with round numbers, a table-to-inference representation change, and a prediction of cause, so it is typical of a full-mock AP item. The correct option's wording hints at the answer, which slightly lowers difficulty. No unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_biology-m05-k0-q1",
+  "cellId": "ap_biology-m05",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "More disks floated sooner in bright light than in dim light.",
+     "brief_reasoning": "Bright light reached 10 floating disks by 10 min. Dim light didn't reach 10 until 14 min, and it had fewer disks floating at every time point from 2 to 12 min.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 55 seconds, needs no calculator, and has a light reading load. Distractor 2 is easy, which is acceptable for a 4.B description item.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "This is a clean, simple table-description item. The key is unique and correct, the stimulus is complete, and the distractors are explained. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item asks students to read a small two-column table and pick the statement that matches the trend: bright light gives more floating disks at each early time point. It needs no calculation, no multi-step inference and no misconception rejection. Distractors are plainly contradicted by the data (reversed trend, none floated, identical counts). It fits skill 4.B at a basic level, with a single table reading and a qualitative comparison.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_biology-m05-k0-q2",
+  "cellId": "ap_biology-m05",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Linear interpolation between 4 min (3 disks) and 6 min (7 disks): 5 disks at 5.0 min.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "5.0 minutes"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Interpolation calculation from a photosynthesis leaf-disk table fits 5.A and topic 3.4 as a data-skill item."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "5.0 min is correct by linear interpolation between 4 and 6 min; the key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete, the stem is clear, and the interpolation assumption is stated."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The 9.0 option rationale 'time for the dim light treatment' is inaccurate; dim light half-floating is about 9.5 min by interpolation, and 9.0 matches no clear dim-light quantity. The explanation for the correct answer is generic boilerplate with no worked interpolation."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 75 seconds, a light load, and calculator use is appropriate."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and the stimulus is sound. It fails on distractor and explanation quality: the 9.0 option's rationale is inaccurate and the key explanation is generic filler. Fail when unsure, so this needs revision."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single table read plus one linear interpolation between 4 and 6 min (3 to 7 disks) gives 5.0 min. Round numbers, minimal reading, and little biological reasoning beyond recognizing the float-disk assay. Skill 5.A is met at an entry level, so it is more suitable for basic practice than for a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_biology-m05-k0-q3",
+  "cellId": "ap_biology-m05",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "instant_reject_missing_condition",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Interpolating to 5 disks gives ET50 = 5 min in bright light (3 disks at 4 min, 7 at 6 min) and 9 min in dim light (3 at 8 min, 7 at 10 min). Rate ratio = 9/5 = 1.8.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "1.8"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "Includes a hidden interpolation step that is not stated, so the item is ambiguous for students.",
+   "key_scoring": {
+    "pass": false,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": ""
+   },
+   "instant_reject": [
+    "missing_condition"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key of 1.8 depends on interpolating to 5 disks, which the stem does not specify. An alternative reading, the first tabulated time at which at least half had floated, gives 10/6 = 1.67, which is not among the options. The item is rejected for a missing condition."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must read the table, find the time at which 5 of 10 disks floated in each condition (interpolating between rows), and apply an inverse proportional relationship to compute a single ratio (9/5 = 1.8). It involves one proportional calculation with small, clean numbers and tests the common misconception of inverting the ratio. The scope is within CED topic 3.4 and skill 5.A, and it has no excess reading.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_biology-m05-k0-q4",
+  "cellId": "ap_biology-m05",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "C",
+     "brief_reasoning": "In the data, the disks floated later in dim light than in bright light. Less light means the light reactions run more slowly, so oxygen builds up more slowly and the disks would float even later.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Predicting the effect of a light change on oxygen production via the light reactions fits topic 3.4 and skill 6.E. The table is read, then the prediction is reasoned from the trend and the process."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option C is the only defensible answer. The data show a later float time as light decreases, and very dim light would extend that trend. The other options contradict the data or the process."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete, with clear columns and rows. The stem states the setup (bicarbonate solution, ten disks, floating from oxygen) and describes the third treatment unambiguously."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option encodes a distinct misconception: CO2 removal, oxygen made in the dark, and light having no effect. Each rationale is specific. The correct option is a bit longer, but only by a few words, which is acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short table, no arithmetic, about 70 seconds. The calculator designation is consistent."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean 6.E prediction question on photosynthesis with a unique key, a complete table, and distinct misconception-based distractors. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student reads a short table, identifies that lower light delays disk flotation, links light intensity to light-reaction rate and O2 production, and extrapolates to a lower-light condition while rejecting named misconceptions (O2 made in the dark, light has no effect, CO2 removal). It requires applying the governing relationship and a prediction, with no computation or heavy reading. This is typical full-mock difficulty and not advanced.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_biology-m06-k0-q1",
+  "cellId": "ap_biology-m06",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Increases of 33, 119, 264, 243, 98, 25 show slow, then fast, then leveling growth (logistic) near carrying capacity ~800.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "C"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "About 60 seconds, with light reading and no calculation needed.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean table-description question with a unique key and distinct distractors, and it passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single table with 7 rows; the student only needs to notice that the population increases slowly, then rapidly, then plateaus near ~790, matching a logistic pattern. No calculation is needed, and the distractors (decrease, constant rate, accelerating growth) are readily eliminated from the data. This is a straightforward describe-data task (skill 4.B) with minimal reasoning steps and no representation change. The difficulty is low and arises from legitimate sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_biology-m06-k0-q2",
+  "cellId": "ap_biology-m06",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "(426-162)/(6-4)=264/2=132 mice per year",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "132 mice per year"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The task load is appropriate, but the flawed option B text makes the item unsuitable as written.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct, but distractor B is displayed as \"0.0 mice per year\" when its value is 0.00758. This rounding defect breaks the option text and its rationale. The item should be fixed (for example, show 0.008) before use."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "One-step application: read two table values, compute change in N over change in time ((426-162)/2 = 132 mice/yr). Small whole numbers, short stem, no concept selection beyond average rate. Distractors reflect common slips (omitting division by time, halving the wrong value). Fits foundational practice of skill 5.A rather than a full-mock item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_biology-m06-k0-q3",
+  "cellId": "ap_biology-m06",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "The growth is logistic. It levels off near 792, which makes that value the best estimate of the carrying capacity among the choices.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "792"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": "The item is topic 8.4 (density effects and carrying capacity) with a logistic table, which fits the topic. The target skill is 2.B (explain relationships between model characteristics). The task is only to read the last table value as K. That is a 4.B/5.A-style read-off, not an explanation of a relationship, so the skill fit is weak."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "792 is the best estimate: the series is plateauing (767, 792), and no other option is plausible. Strictly, K could be slightly higher than the last value, but 792 is the only defensible choice among the options."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table data is complete and consistent with the stem. The stem is clear."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The rationale for the correct option is a generic template (\"Applying the relationship...\") and explains nothing about the biology. The distractors are reasonable, but 10 (starting size) is trivially implausible. The year-of-fastest-growth claim for 426 is approximately right, since the largest increase is between years 4 and 6 and 426 is the end of that interval. Distractor quality is thin."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item is quick and needs no calculation, so the load is fine. It is very easy for AP level."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and the stimulus is complete. The item is a simple table read-off for carrying capacity rather than an explanation of a model relationship (skill 2.B). The correct-option rationale is a generic placeholder, and the distractor set is weak, so the item fails on skill fit and on distractor/explanation quality."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step item: read a short 7-row table, notice growth leveling off near 792, and identify that plateau as carrying capacity. Concept is foundational (logistic growth plateau), no calculation, minimal reading, and distractors are early or mid-growth values. It does not require choosing between competing relationships or multi-step reasoning, so it is below typical full-mock difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_biology-m06-k0-q4",
+  "cellId": "ap_biology-m06",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "C",
+     "brief_reasoning": "The data follow logistic growth and level off near a carrying capacity of about 800. A drought means less food, which lowers the carrying capacity, so the population would fall toward a new, smaller size.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "The item fits 8.4 (resource limitation and carrying capacity) and skill 6.E (predict the effect of a change). The table shows logistic growth leveling off near 800, and the student must predict the effect of a drought on carrying capacity. This is in scope."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option C is the only defensible answer. A has K unchanged and growth continuing at the same rate, which contradicts the drought. B has unlimited growth, which contradicts limited resources. D has carrying capacity increasing, which contradicts the loss of food. The stem does not state the drought's severity, but the direction of the effect is unambiguous."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table data are complete, with columns, rows, and units of years and individuals. The wording is clear. The table is only loosely necessary, since it shows the plateau near 800 and supports the idea of carrying capacity."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors encode distinct misconceptions: K is unaffected by resources, growth is unlimited, and scarcity raises K. The explanation covers each wrong option. Option C is a few words longer than the others, but not enough to be a giveaway."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 65 seconds, needs no calculation, and has a light reading load. This is typical of the AP exam."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "This is a clean, standard item on predicting the effect of resource loss on carrying capacity. It has a unique key, distinct distractors, and a complete stimulus. The table is only mildly necessary. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The table shows logistic growth plateauing near 800. The student identifies this as carrying capacity and applies one relationship: less food lowers carrying capacity, so the population declines. There is no calculation, and the distractors rely on obvious misconceptions (unlimited growth, higher capacity under scarcity). The item is a single-concept prediction with minimal data interpretation. It is clear and fair, but below the multi-step demand of a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_biology-m07-k0-q1",
+  "cellId": "ap_biology-m07",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "Met-His-Ser-Asp-Val",
+     "brief_reasoning": "Codons AUG CAU UCC GAU GUG UGA translate to Met-His-Ser-Asp-Val, then UGA is a stop codon, which ends translation and adds no amino acid.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and unique. The item fails on stimulus, skill and suitability grounds. The two mutated sequences are never used, which adds irrelevant reading load and a misleading \"compares\" setup. The task is a rote codon-table lookup that does not require representing a relationship within a model (skill 2.D). No codon table is provided, and AP does not supply one on the exam. The item is weak for the exam.",
+   "scope_skill": {
+    "pass": false,
+    "notes": "Topic 6.4 is covered, but the dominant demand is a codon lookup, with little modeling or representation of relationships (2.D)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "AUG CAU UCC GAU GUG UGA gives Met-His-Ser-Asp-Val followed by a stop. The key is correct and unique."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The Mutation 1 and Mutation 2 rows are unused. The stem says \"compares\" but asks only about the original sequence. Extra reading load with no purpose."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The rationales are accurate and specific: the frame shift, the reversed order, and the stop codon counted as an amino acid. The \"Stop\" distractor is somewhat weak."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The task is low-demand rote translation. The unused mutation rows are needless material. The standard codon table is not provided, although the stem tells students to use it."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item is a direct codon-table translation of one short mRNA read in triplets from AUG. It takes one representation change (sequence to codons to amino acids) and no calculation. Distractors test reversed direction and mishandling of the stop codon. The mutation rows are not used for this question, so they are only mild extra reading. The item does not require predicting the effect of a mutation or comparing sequences, so it falls below exam_prep depth.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_biology-m07-k0-q2",
+  "cellId": "ap_biology-m07",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "instant_reject_missing_condition",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "Missense",
+     "brief_reasoning": "Codon 4 GAU (Asp) changes to GAA (Glu): one amino acid is substituted and the frame and stop codon stay the same.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": ""
+   },
+   "notes": "Without a codon table, the item requires memorized codon-to-amino-acid knowledge, which is not typical for AP Biology. The calculator is irrelevant.",
+   "key_scoring": {
+    "pass": false,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": ""
+   },
+   "instant_reject": [
+    "missing_condition"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The item is rejected because the codon table is missing, so the key cannot be derived from the stimulus. It is also a weak fit for 5.D, and the distractor rationales are thin."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The student splits an 18-nucleotide mRNA into codons and compares the original with mutation 1. Mutation 1 is a single substitution (GAU to GAA) that changes Asp to Glu, so it is missense. Distractors cover silent, frameshift and nonsense mutations. This takes one short reasoning chain with a codon-table lookup and no calculation. It is mostly mutation-type classification, with only light data use, so it fits basic learning rather than full-mock exam prep.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_biology-m07-k0-q3",
+  "cellId": "ap_biology-m07",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "C",
+     "brief_reasoning": "Original: AUG CAU UCC GAU GUG UGA (Met-His-Ser-Asp-Val-Stop). Mutation 2 has 17 nucleotides because one A (from GAU) was deleted. Read in codons, it becomes AUG CAU UCC GUG UGU GA (Met-His-Ser-Val-Cys...). The reading frame shifts after the deletion, so this is a frameshift mutation.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key (frameshift) is unique and correct: Mutation 2 has 17 nucleotides, one fewer than the original, with no premature stop. The skill fit to 5.D is weak but acceptable, since the item requires reading a table and comparing sequences. The stimulus is complete, and the distractors are distinct and plausible, though the option A rationale is slightly weak. The item is exam-suitable.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 6.7 fits. The skill is a loose 5.D (table comparison), acceptable."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "One-nucleotide deletion gives a frameshift; unique answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete. Mutation 1 is unused, but harmless."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option is addressed. The option A rationale is a little imprecise, but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 70 seconds, with low reading load."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must split the sequences into codons, detect a single-nucleotide deletion in mutation 2 by comparing it with the original, and classify it as a frameshift rather than nonsense, missense or silent. Mutation 1 is a plausible distractor (missense). This requires a few reasoning steps and short sequences, with no long arithmetic, vague wording or out-of-scope content.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_biology-m07-k0-q4",
+  "cellId": "ap_biology-m07",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "C",
+     "brief_reasoning": "Mutation 1 is a substitution GAU→GAA (Asp→Glu, missense). Mutation 2 deletes one nucleotide, causing a frameshift that alters downstream codons (Val, Cys, loss of stop codon). Frameshift is more likely to destroy function.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 6.7 mutations; predicting the effect of a substitution versus a frameshift matches skill 6.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Mutation 1 is an Asp to Glu missense change. Mutation 2 deletes one nucleotide, causing a frameshift with loss of the stop codon. C is the unique best answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete, the sequences are verifiable, and the note says each sequence begins at the start codon."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option encodes a distinct misconception and the explanation addresses each one. Options A and D are somewhat weak but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 75 seconds, short reading load, no arithmetic needed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. The key (C) is unique and verified from the sequences, the stimulus is complete, and the distractors map to distinct misconceptions. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must compare sequences in a table, recognize that Mutation 1 is a single-nucleotide substitution (a codon-level change affecting at most one amino acid) and Mutation 2 is a single-nucleotide deletion causing a frameshift that alters all downstream codons, then predict the relative effect on protein function while rejecting misconceptions (equal effect from one nucleotide change, start codon protects function, missense changes everything). Reasoning is conceptual with minimal reading and no calculation; it matches the typical AP skill 6.E prediction item and is suitable for a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_biology-m08-k0-q1",
+  "cellId": "ap_biology-m08",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Mass went up at 0.0 and 0.2 M and went down at 0.4 M and above, so cores gained mass in the lower-molarity solutions and lost it in the higher ones.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "C"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Describing table of potato core mass change across sucrose molarity fits 2.7 and 4.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "C is unique: positive at 0.0 and 0.2, negative at 0.4 and above. Others contradicted by data."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table is complete with columns, rows and description. Conditions (equal mass, 24 h) stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option is explained and tied to a distinct misconception. The rationale for B has a slightly hedged phrase ('except possibly near the isotonic point') but is acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 55 s, no arithmetic, typical reading load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean 4.B table-description question on tonicity and passes all five criteria. The one flaw is a slightly hedged distractor rationale for option B, which does not affect the key."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Skill 4.B item that only asks the student to describe a simple trend in a small 5-row table. The sign of the percent change flips from positive (0.0 and 0.2 M) to negative (0.4 M and above), and the correct option states this directly. No calculation, no estimate of the solute potential at equilibrium, and no explanation of osmosis is required. Distractors (gain in all solutions, no change, loss in all solutions) are each refuted by a glance at the table. Wording is clear and experimental conditions are fully stated, so none of the difficulty comes from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_biology-m08-k0-q2",
+  "cellId": "ap_biology-m08",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Mass change is linear, dropping 4.8% for every 0.2 M (that is, 24% per M). Zero change happens at 8.4/24 = 0.35 M, between +3.6 at 0.2 M and -1.2 at 0.4 M.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "0.35 M"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Isotonic point by interpolation from potato-core data fits 2.7 and skill 5.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Linear data; zero crossing exactly 0.35 M; unique answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table is complete with columns and rows; stem states conditions (equal mass, 24 h)."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct named misconceptions (largest loss, largest gain, midpoint without interpolation); each is explained. The correct-option rationale is generic boilerplate but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 75 s, a small table, one calculation, calculator allowed; typical of AP Biology."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound item: the 0.35 M key is correct, the distractors encode distinct errors, and the load is appropriate. The only weakness is the boilerplate explanation for the correct option, which is a minor issue."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must connect isotonic to zero net mass change, read the table to find the sign change between 0.2 and 0.4 M, and do one simple linear interpolation (0.2 + 0.2 x 3.6/4.8 = 0.35 M). Concept depth is moderate, calculation is short with clean numbers, reading load is low, and the wording and conditions are unambiguous. The distractors (0.30 M, 0.00 M, 0.80 M) target plausible errors such as rough estimating, picking the zero-molarity row, and picking the largest mass loss.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_biology-m08-k0-q3",
+  "cellId": "ap_biology-m08",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Pure water has water potential 0, higher than the potato cells' (negative) water potential. Water moved into the cores, so their mass increased by 8.4%. Option D gets the direction of movement right but wrongly says the water potential is lower.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "A"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item is short, needs no arithmetic, and can be answered in about 70 seconds. The calculator designation is harmless.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, unambiguous MC on water potential with a potato-core table. It has a unique key and distinct distractors, and I found no instant-reject conditions."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: read one row of a small table (0.0 M gives +8.4% mass), then apply the water potential and osmosis relationship to pick the correct explanation. Distractors target common misconceptions (water leaving, sucrose entering, reversed solute/water potential relationship). No calculation, light reading, and one representation change. This fits foundational practice rather than the multi-step reasoning expected of a full mock exam item. The difficulty comes from the biology itself, not from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_biology-m08-k0-q4",
+  "cellId": "ap_biology-m08",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Ψs=-iCRT=-(1)(0.6)(0.0831)(298)=-14.86 bars; open beaker so Ψp=0, Ψ=-14.86 bars",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "-14.86 bars"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Water potential calculation with formula-sheet equation fits 2.7 and 5.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "-14.86 bars is unique; the stem gives temperature, open beaker and i."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete and consistent with the stem, though not needed for the calculation beyond the 0.6 M value."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distinct misconceptions (sign, constant off by 10x, omitted concentration), each explained accurately."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 80 seconds, one calculation, calculator allowed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. The key of -14.86 bars is unique, the distractors are distinct and explained, and the load is typical. The only weakness is the table, which is largely decorative."
+  },
+  "difficulty": null
+ }
+]

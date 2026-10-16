@@ -1,0 +1,80 @@
+// @vitest-environment jsdom
+import { cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { afterEach, describe, expect, it, vi } from "vitest";
+import type { MercuryPayoutRow } from "./mercury-payout-actions";
+
+const row = (over: Partial<MercuryPayoutRow>): MercuryPayoutRow => ({
+  attemptId: "a1", settlementId: "s1", recipientId: "p1", recipientName: "Test Teacher", recipientKind: "teacher",
+  periodStart: "2026-10-01", periodEnd: "2026-10-15", paymentDeadline: "2026-10-26", scheduledTransferDate: "2026-10-21",
+  provider: "mercury", rail: "ach", kind: "normal", attemptNo: 1, status: "queued", manualExecution: false,
+  requestedAmountMinor: 50000, requestedCurrency: "USD", contractualAmountMinor: 50000, contractualCurrency: "USD",
+  bankName: "Test Bank", accountLast4: "1234", recipientLinkStatus: "verified", approvedAt: "2026-10-10T00:00:00Z", approvalInvalidated: false,
+  sentAt: null, receivedConfirmedAt: null, actualUsdPrincipalMinor: null, actualUsdFeeMinor: null, actualUsdTotalDebitMinor: null,
+  providerTransactionId: null, trackingUrl: null, receiptUrl: null, mercuryDashboardUrl: null, estimatedDeliveryDate: null, mercuryFailedAt: null, reasons: [], reconciliationFlag: "pending", failureReason: null, returnReason: null, ...over,
+});
+
+const list = vi.fn();
+vi.mock("./mercury-payout-actions", () => ({
+  listMercuryPayoutsAction: (...a: unknown[]) => list(...a),
+  approvePayoutAttemptAction: vi.fn(), createResendAttemptAction: vi.fn(), failOrCancelAttemptAction: vi.fn(),
+  linkTransactionAction: vi.fn(), markManualAttemptSentAction: vi.fn(), recordActualsAction: vi.fn(), recordReturnAction: vi.fn(), requestPayoutAttemptAction: vi.fn(),
+}));
+import MercuryPayoutsPanel from "./MercuryPayoutsPanel";
+
+afterEach(() => {
+  cleanup();
+  list.mockReset();
+});
+
+describe("MercuryPayoutsPanel", () => {
+  it("스위치가 닫혀 있으면 이유를 보여 주고 Mercury 요청 버튼을 비활성화한다(영어 화면)", async () => {
+    list.mockResolvedValue({ ok: true, data: { rows: [row({})], gateOpen: false, mercuryEnabled: false } });
+    render(<MercuryPayoutsPanel />);
+    await waitFor(() => expect(screen.getByTestId("mercury-row")).toBeTruthy());
+    expect(screen.getByTestId("mercury-switches").textContent).toContain("Disbursement gate: closed");
+    expect((screen.getByRole("button", { name: "Request via Mercury" }) as HTMLButtonElement).disabled).toBe(true);
+    expect(screen.getByText("Download reconciliation file")).toBeTruthy();
+  });
+  it("sent는 지급 완료로 표시하고 수취 확인 입력은 없다(반환 기록만)", async () => {
+    list.mockResolvedValue({ ok: true, data: { rows: [row({ status: "sent", sentAt: "2026-10-20T00:00:00Z", providerTransactionId: "tx1" })], gateOpen: true, mercuryEnabled: true } });
+    render(<MercuryPayoutsPanel />);
+    await waitFor(() => expect(screen.getByTestId("mercury-status").textContent).toBe("Sent (paid)"));
+    expect(screen.queryByText(/receipt not confirmed/i)).toBeNull();
+    fireEvent.click(screen.getByRole("button", { name: "Details & records" }));
+    expect(screen.queryByText(/Confirm receipt/i)).toBeNull();
+    expect(screen.getAllByText(/Record return/).length).toBeGreaterThan(0);
+  });
+  it("KRW 정산은 원화 금액과 USD 출금을 따로 표시한다", async () => {
+    list.mockResolvedValue({
+      ok: true,
+      data: { rows: [row({ requestedCurrency: "KRW", contractualCurrency: "KRW", requestedAmountMinor: 1500000, manualExecution: true, rail: "international_wire", actualUsdPrincipalMinor: 1100000, actualUsdFeeMinor: 11000, actualUsdTotalDebitMinor: 1111000 })], gateOpen: false, mercuryEnabled: false },
+    });
+    render(<MercuryPayoutsPanel />);
+    await waitFor(() => expect(screen.getByTestId("mercury-row")).toBeTruthy());
+    const text = screen.getByTestId("mercury-row").textContent ?? "";
+    expect(text).toContain("KRW 1,500,000");
+    expect(text).toContain("USD debit: USD 11,000.00 + fees USD 110.00 = USD 11,110.00");
+    expect(screen.queryByRole("button", { name: "Request via Mercury" })).toBeNull();
+  });
+  it("Mercury 대시보드 링크(새 탭, noopener)와 예상 도착일을 보여 준다", async () => {
+    list.mockResolvedValue({ ok: true, data: { rows: [row({ status: "processing", providerTransactionId: "tx1", mercuryDashboardUrl: "https://app.mercury.com/transactions/tx1", estimatedDeliveryDate: "2026-10-12" })], gateOpen: false, mercuryEnabled: false } });
+    render(<MercuryPayoutsPanel />);
+    const a = (await screen.findByTestId("mercury-dashboard-link")) as HTMLAnchorElement;
+    expect(a.href).toBe("https://app.mercury.com/transactions/tx1");
+    expect(a.target).toBe("_blank");
+    expect(a.rel).toContain("noopener");
+    expect(screen.getByTestId("mercury-row").textContent).toContain("Estimated delivery:");
+  });
+  it("승인 무효화·플래그를 배지로 보여 준다", async () => {
+    list.mockResolvedValue({ ok: true, data: { rows: [row({ status: "needs_review", approvalInvalidated: true, reasons: ["recipient_changed"] })], gateOpen: false, mercuryEnabled: false } });
+    render(<MercuryPayoutsPanel />);
+    await waitFor(() => expect(screen.getByText("Approval invalidated — re-approval required")).toBeTruthy());
+    expect(screen.getByText("Bank details changed")).toBeTruthy();
+  });
+  it("빈 목록과 오류를 안내한다", async () => {
+    list.mockResolvedValue({ ok: false, error: "You do not have permission for this action." });
+    render(<MercuryPayoutsPanel />);
+    await waitFor(() => expect(screen.getByRole("status").textContent).toContain("permission"));
+    expect(screen.getByTestId("mercury-empty")).toBeTruthy();
+  });
+});

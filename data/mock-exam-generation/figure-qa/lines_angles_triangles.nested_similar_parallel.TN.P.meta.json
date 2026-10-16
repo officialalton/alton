@@ -1,0 +1,42 @@
+{
+ "itemId": "lines_angles_triangles.nested_similar_parallel.TN.P",
+ "generatedAt": "2026-10-07T05:02:01.166Z",
+ "codeHash": "c3a33afa13c70a5bd5a72fd26548a3b00986be7513403c37c7b0e575266ca8f8",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/triangle-nested.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/lines_angles_triangles.nested_similar_parallel.TN.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/tn-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "lines_angles_triangles.nested_similar_parallel.TN.P.png",
+   "mobileFile": "lines_angles_triangles.nested_similar_parallel.TN.P.m375.png",
+   "archetypeId": "lat.nested_similar_parallel.TN.P.chain2",
+   "seed": 11,
+   "signature": "triangle_nested:parallel",
+   "stimulus": "A student draws a figure for a geometry assignment. The figure shows triangle $UHT$ with $\\overline{BA}$ parallel to the base $\\overline{HT}$. Triangle $UBA$ is nested inside triangle $UHT$. The area of triangle $UBA$ is 72 square units.",
+   "question": "What is the area, in square units, of trapezoid $BHTA$?",
+   "options": [
+    "56",
+    "24",
+    "62",
+    "128"
+   ],
+   "correctIndex": 0,
+   "answer": "56",
+   "explanation": "(1) 그림에서 AD, DB 길이 라벨을 읽는다. (2) 닮음비 AB/AD = 8/6 이고 넓이의 비는 그 제곱이다. (3) 삼각형 ABC 의 넓이 = 72 × (8/6)² = 128 이다. (4) 사다리꼴 = 128 - 72 = 56 이다. (5) 따라서 56 이다. 따라서 정답은 56이다.",
+   "structuralIssues": []
+  }
+ ]
+}

@@ -1,0 +1,56 @@
+{
+ "runs": [
+  "chem-s2-f1",
+  "chem-s2-f2",
+  "chem-s2-f3",
+  "chem-s2-f4"
+ ],
+ "rows": 48,
+ "passed": 22,
+ "rejected": 26,
+ "passRate": 0.458,
+ "singles": {
+  "candidates": 48
+ },
+ "unitsPassed": {
+  "1": 4,
+  "2": 4,
+  "4": 3,
+  "5": 3,
+  "7": 2,
+  "8": 3,
+  "9": 3
+ },
+ "figPassed": {
+  "none": 18,
+  "scene": 4
+ },
+ "figAll": {
+  "none": 42,
+  "scene": 6
+ },
+ "figPassRate": {
+  "none": "18/42",
+  "scene": "4/6"
+ },
+ "renderTypesPassed": {
+  "text": 15,
+  "ap_table": 3,
+  "ap_diagram:chem_pes": 4
+ },
+ "archetypesPassed": {
+  "chf_long_titration": 3,
+  "chf_long_thermo": 3,
+  "chf_short_stoich": 3,
+  "chf_long_kinetics": 3,
+  "chf_short_pes": 4,
+  "chf_short_bonding": 4,
+  "chf_short_equilibrium": 2
+ },
+ "costUsd": {
+  "chem-s2-f1": 0.5646,
+  "chem-s2-f2": 0.7514,
+  "chem-s2-f3": 0.2351,
+  "chem-s2-f4": 0.6709
+ }
+}

@@ -1,0 +1,743 @@
+[
+ {
+  "key": "ap_microeconomics-f01-k0",
+  "cellId": "ap_microeconomics-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Draw a downward-sloping demand curve and an upward-sloping supply curve. Label the axes Price and Quantity. They cross where Qd = Qs = 60, so P_E = $15 and Q_E = 60.",
+     "final_answer": "Graph with a downward-sloping D and an upward-sloping S crossing at P_E = $15 and Q_E = 60",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "At $15, quantity demanded equals quantity supplied (60 = 60).",
+     "final_answer": "60 units",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Draw a horizontal line at $12, below P_E. The quantity traded is set by supply at that price, so Q_C = 51. The shortage is the horizontal gap between Qs = 51 and Qd = 72.",
+     "final_answer": "Horizontal ceiling line at $12 below equilibrium. Q_C is on the supply curve at 51. The shortage is the gap from 51 to 72.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Read the $12 row: quantity demanded is 72 and quantity supplied is 51. Shortage = 72 − 51 = 21.",
+     "final_answer": "Qd = 72, Qs = 51, shortage = 21 units",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "Only 51 units are traded instead of 60. For the 9 lost units, buyers would have paid more than it costs sellers to produce them, so those beneficial trades never happen. The surplus they would have created is lost, and that loss is the deadweight loss.",
+     "final_answer": "The ceiling cuts the quantity traded from 60 to 51. The 9 units where buyers' value is greater than sellers' marginal cost are not traded, so their surplus is lost. That lost surplus is the deadweight loss.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "F",
+     "brief_reasoning": "$18 is above the equilibrium price of $15, so the ceiling does not bind. The market still clears at $15.",
+     "final_answer": "The quantity traded stays at 60. An $18 ceiling is above the $15 equilibrium price, so it is non-binding and the market stays at equilibrium.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The 10-point long FRQ is consistent with the linear model Qd = 120 - 4P and Qs = 15 + 3P, and every table row matches it. Equilibrium is $15 and 60. At the $12 ceiling, Qd = 72, Qs = 51 and the shortage is 21. The rubric rows are consistent and meaning-based, and the $18 ceiling is correctly nonbinding. Each part is judged against its own skill, and the points follow the official long-FRQ grain. The calculator designation is harmless.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "This is a multi-part free-response item on price ceilings (topic 2.8) with supporting equilibrium work (2.6). It fits the full-mock target. Part A requires converting a table into a correctly labeled supply and demand graph. Part B reads the equilibrium directly from the table, where Qd = Qs at $15. Part C requires showing the binding ceiling, Q_C at the quantity supplied, and the shortage on the graph. Part D reads Qd = 72 and Qs = 51 at $12, so the shortage is 21, which is simple subtraction. Part E is a conceptual explanation of deadweight loss: mutually beneficial trades go unmade. Part F asks about a non-binding ceiling below equilibrium price, so the quantity traded is unchanged at 60. The concepts are core, with no calculus, no out-of-scope content, and light reading. The numbers are small and clean, and the table is exact with no unrounded arithmetic. The difficulty comes from the amount of graphing and labeling and from recognizing binding versus non-binding ceilings, which are legitimate levers.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "ap_microeconomics-f01-k1",
+  "cellId": "ap_microeconomics-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "The graph has price on the vertical axis and quantity on the horizontal axis, a downward-sloping demand curve and an upward-sloping supply curve. They cross at P_E = $12 and Q_E = 80.",
+     "final_answer": "Demand slopes down and supply slopes up, crossing at P_E = $12 and Q_E = 80.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "At $12, quantity demanded (80) equals quantity supplied (80).",
+     "final_answer": "80 units",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "The $9 ceiling is below equilibrium, so it binds. Draw a horizontal line at $9. The amount actually traded is the amount supplied at $9, so Q_C = 74. The shortage is the horizontal gap between supply (74) and demand (95) at $9.",
+     "final_answer": "Horizontal line at $9 below P_E. Q_C = 74, read off the supply curve. The shortage is the gap from 74 to 95.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "From the table at $9: quantity demanded is 95 and quantity supplied is 74. The shortage is 95 − 74 = 21.",
+     "final_answer": "Quantity demanded = 95, quantity supplied = 74, shortage = 21 units",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "Only 74 units are traded instead of 80. For units 74 to 80, buyers value the units more than it costs to make them, but those units are not produced. The surplus those trades would have created is lost.",
+     "final_answer": "The ceiling cuts the quantity traded below the efficient 80, to 74. For the units between 74 and 80, buyers value them more than their marginal cost, but they are not traded. That lost surplus is the deadweight loss.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "F",
+     "brief_reasoning": "A $14 ceiling is above the $12 equilibrium price. It does not bind, so the market stays at equilibrium.",
+     "final_answer": "The quantity traded does not change and stays at 80. The $14 ceiling is above the $12 equilibrium price, so it does not bind and the market still clears at equilibrium.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The values check out: equilibrium $12 and 80, at the $9 ceiling Qd = 95 and Qs = 74, shortage 21, and the $14 ceiling is nonbinding. The rubric is consistent and in scope for topics 2.8 and 2.6. The only flaw is minor: part C's graphing task is tagged 4.B instead of 4.A. The 10-point long-FRQ format and load are appropriate.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parts assess graphing, table reading and explanation within topics 2.6 and 2.8. Part C's graphing task is tagged 4.B, a minor tagging inconsistency."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All values are correct and unique. Rubric rows are consistent, with proper dependencies."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete and the wording is clear. The prices are unevenly spaced, which is harmless."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Common-error lists are realistic and distinct."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "10 points in about 25 minutes, with light arithmetic, which is typical for a long FRQ."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Typical AP Micro FRQ on price ceilings. Students must read a table to find equilibrium (P=$12, Q=80), draw a labeled supply-and-demand graph, show a binding ceiling with Q_C at the quantity supplied and the shortage as the gap, compute the shortage (95-74=21), explain deadweight loss (mutually beneficial trades forgone, with marginal benefit above marginal cost on units between Q_C and Q_E), and recognize that a ceiling above equilibrium is non-binding. All concepts are in the Unit 2 scope. The moderate difficulty comes from the graph labeling and the multi-part structure, not from the arithmetic or the reading.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_microeconomics-f02-k0",
+  "cellId": "ap_microeconomics-f02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Country A: 12 chairs/36 laptops = 1/3 chair per laptop. Country B: 30 chairs/15 laptops = 2 chairs per laptop.",
+     "final_answer": "Country A: 1/3 (about 0.33) chair per laptop; Country B: 2 chairs per laptop",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Country A gives up fewer chairs per laptop (1/3 vs 2), so its opportunity cost is lower.",
+     "final_answer": "Country A",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "The price of 1.17 chairs per laptop lies between the two opportunity costs (1/3 and 2). Country A gets 1.17 chairs for each laptop, which is more than the 1/3 chair it gives up to make one. Country B gets each laptop for 1.17 chairs, which is less than the 2 chairs it would give up to make one itself. So both can consume beyond their own production possibilities curves.",
+     "final_answer": "Both gain because 1/3 < 1.17 < 2: Country A receives more chairs than its opportunity cost, and Country B pays less than its opportunity cost.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Opportunity cost is constant, so the curve is a straight line between the two intercepts.",
+     "final_answer": "Straight-line PPC with Laptops on the horizontal axis and Chairs on the vertical axis, running from 12 chairs on the vertical axis to 36 laptops on the horizontal axis.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The short FRQ (5 points) on opportunity cost, comparative advantage, terms of trade and a PPC fits topics 1.4 and 1.3. The solver confirmed every key: 1/3 and 2 chairs per laptop, Country A has the advantage, and 1.17 lies between the two opportunity costs. The table data is complete and states the constant-cost assumption. The rubric rows are consistent, with units, numbers, and explanations of gains from trade covered. Part A's 0.33 is a rounded value, and the rubric also accepts the ratio form, so the rounding is acceptable. Part D (draw) is a 1-point task consistent with the short-FRQ format.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Each part is judged against its own skill (1.C, 2.A, 4.A). All content is in Unit 1 (topics 1.3 and 1.4)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Keys are unique and correct. The rubric rows are meaning-based and accept alternative wordings."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table gives complete maximum outputs for both countries and states constant opportunity cost. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so there are no distractors. The common_errors lists in the rubric rows cover typical misconceptions: inverting the ratio, using absolute advantage, and saying only the exporter gains."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The workload is light at about 11 minutes. The calculations are simple, and a calculator is allowed but not needed."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The item is a standard Unit 1 comparative advantage task. Part A is a ratio from table data (A: 12/36 = 1/3 chair per laptop; B: 30/15 = 2 chairs per laptop). Part B compares those two costs. Part C asks for a short explanation that the trade price (1.17 chairs per laptop) lies between the two opportunity costs, so each country gets laptops or chairs more cheaply than it can produce them. Part D is a labeled linear PPC with intercepts of 36 laptops and 12 chairs. The concepts are core and the arithmetic is clean. The required representation changes are table to ratios, ratios to a verbal argument, and table to graph. One flaw is that the stated price of 1.17 chairs per laptop is not a clean number, and it is not meaningfully part of the intended range (1/3 to 2). It is still a valid price within the range, so it adds no real ambiguity or computation burden. Reading load is low and the constant-cost assumption is stated explicitly. Multi-part scaffolding makes this suitable for a full mock, but it is not an advanced item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 300
+  }
+ },
+ {
+  "key": "ap_microeconomics-f02-k1",
+  "cellId": "ap_microeconomics-f02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Country A: 20/36 ≈ 0.56 shirts per corn. Country B: 36/15 = 2.4 shirts per corn.",
+     "final_answer": "A: 5/9 ≈ 0.56 shirts; B: 2.4 shirts",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Country A gives up fewer shirts for each unit of corn (0.56 vs 2.4).",
+     "final_answer": "Country A",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "The price of 1.48 shirts per corn falls between the two opportunity costs, 0.56 and 2.4.",
+     "final_answer": "Country A gets 1.48 shirts for each unit of corn, which is more than its opportunity cost of 0.56 shirts. Country B pays 1.48 shirts for each unit of corn, which is less than the 2.4 shirts it would give up to make the corn itself. So both countries can consume beyond their own PPCs.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "The PPC is a straight line because the opportunity cost is constant.",
+     "final_answer": "Put corn on the horizontal axis and shirts on the vertical axis. Draw a straight, downward-sloping line from 20 shirts on the vertical axis to 36 corn on the horizontal axis. Label it PPC.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, unambiguous short FRQ on comparative advantage and gains from trade. Rubric is consistent with the answer key, and the stimulus is complete with the constant-cost assumption stated. Minor note: the rubric could explicitly accept 5/9 as equivalent to 0.56.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard comparative advantage item: read the table, compute constant opportunity costs (20/36 and 36/15), identify the comparative advantage, and explain mutual gains with terms of trade between the two opportunity costs, then draw a linear PPC. The concepts are core Unit 1 content with modest reasoning, and the multi-part format with an explanation and a graph is typical of AP free-response and full mocks. Arithmetic is light, with one repeating decimal (0.56) that is easy to round. The item is not advanced, and it is more than a single-step basic recall item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 300
+  }
+ },
+ {
+  "key": "ap_microeconomics-f03-k0",
+  "cellId": "ap_microeconomics-f03",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:A:numeric"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "%ΔQ=-100/750=-13.33%, %ΔP=1/10.5=9.52%; |E|=1.4",
+     "final_answer": "1.4",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "|E|>1",
+     "final_answer": "Elastic",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Elastic demand: % drop in quantity exceeds % rise in price, so TR falls ($8000 to $7700).",
+     "final_answer": "Total revenue decreases",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "-6%/4% = -1.5; negative so complements",
+     "final_answer": "-1.5; complements",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item passes all five criteria. It is a 5-point short FRQ on midpoint elasticity, its classification, the total revenue effect, and cross-price elasticity, which fits topics 2.3 and 2.5. Parts A, B and D assess skill 1.C, and Part C is labeled 2.A and is judged against that label. The table data are complete, and the separate salad study is stated explicitly as a note. The rubric rows are consistent with the model answers. The task load is light and suits a short FRQ. The independent solver's answers agree with the key.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parts A, B and D assess skill 1.C on topics 2.3 and 2.5. Part C is labeled skill 2.A and is judged against that label. All parts are in Unit 2 scope."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All four keys are unique and correct. The rubric rows are consistent with the model answers. The midpoint percentages (13.3 and 9.5), elasticity (1.40), classification (elastic), revenue direction (falls from $8,000 to $7,700) and cross-price value (-1.50, complements) are mutually coherent."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table data are complete. The note about the separate study is clearly stated as a different market, so there is no ambiguity."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so distractors do not apply. The rubric lists realistic common errors, such as dividing by the initial value, inverting the ratio, and reversing the sign interpretation."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical of a short FRQ, and the calculator is allowed. The arithmetic is light."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Four-part FRQ-style item on core Unit 2 content. Each part needs one standard step: midpoint elasticity (about 1.4), classification as elastic, a link to the total revenue test, and a cross-price elasticity sign check (-1.5, complements). The numbers are clean and the reading is short. The multiple parts and the link between elasticity and revenue make it typical of an exam item, but the concepts are not beyond the course scope.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 300
+  }
+ },
+ {
+  "key": "ap_microeconomics-f03-k1",
+  "cellId": "ap_microeconomics-f03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "%ΔQ=-40/780≈-5.13%; %ΔP=2/6≈33.3%; |E|≈0.15",
+     "final_answer": "≈0.15 (40/780 ÷ 2/6 = 0.154)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "|E|<1",
+     "final_answer": "Inelastic",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Inelastic demand: percent drop in quantity is smaller than percent rise in price, so total revenue rises ($4000 to $5320).",
+     "final_answer": "Total revenue increases",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "-5%/2% = -2.5; negative means complements",
+     "final_answer": "-2.5; complements",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Short FRQ (2/1/1/1) on midpoint elasticity, revenue and cross-price elasticity. Keys are correct and the independent solver agrees. Minor concerns: rubric A uses rounded values (0.15) with no tolerance, and there is no follow-through credit for B and C if A is wrong.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topics 2.3 and 2.5 are in scope. Each part is judged against its own skill; part C is 2.A, which is fine."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All keys are correct: 0.154 is rounded to 0.15, inelastic, revenue rises from $4000 to $5320, and cross-price elasticity is -2.5 (complements). There is no numeric tolerance and no follow-through rule, which is a minor weakness."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete. The note about the separate study is slightly awkward but unambiguous."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ; the rubric lists common errors such as dividing by the initial value, inverting the ratio and reversing the sign interpretation."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical of a 5-point short FRQ and the calculator designation is consistent."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part FRQ-style item. Requires the midpoint formula from table data (A), classifying elasticity (B), linking elasticity to the total revenue effect (C), and a cross-price elasticity calculation with sign interpretation (D). Concepts are core Unit 2 (2.3 and 2.5), the arithmetic is simple (about 5.1% / 33.3% = 0.15; -5/2 = -2.5), reading load is low, and wording is unambiguous. The depth and number of steps are typical of a full-mock item rather than a basic learning exercise.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 240
+  }
+ },
+ {
+  "key": "ap_microeconomics-f04-k0",
+  "cellId": "ap_microeconomics-f04",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Graph a downward-sloping demand curve with MR below it, an upward-sloping MC curve and a U-shaped ATC curve. Profit is highest where MR = MC, which happens at Q=20. Reading up to demand there gives the price.",
+     "final_answer": "Q1 = 20, P1 = $100, where MR = MC = $60. The price comes from the demand curve at Q1.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Shade the rectangle between P1 = $100 and ATC = $80, from 0 to Q1 = 20.",
+     "final_answer": "Economic profit = ($100 − $80) × 20 = $400. Shade the area between P1 and ATC at Q1.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Positive economic profit draws new firms into the market. They take customers away, so this firm's demand falls.",
+     "final_answer": "Demand (and MR) shifts left and becomes more elastic as new firms enter. This continues until demand is tangent to ATC, so P = ATC and economic profit is zero.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "The firm still faces a downward-sloping demand curve, so in long-run equilibrium MR = MC < P.",
+     "final_answer": "Price is greater than marginal cost (P > MC).",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The item has defects in scoring, stimulus clarity and exam suitability. Rubric row A1 accepts a horizontal MC curve, which contradicts the table's rising MC (40, 60, 80, 100). The table lists ATC $76.67, a rounded repeating decimal that adds needless arithmetic noise. Part D's rubric requires a \"because\" justification that the prompt (\"Identify\") does not ask for. The graph in Part A does not require the table's values, so the stimulus adds little to the task. The scope and skill fit and the distractor handling are acceptable.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The item targets 4.4 and graphing skill 4.A in Part A, with mixed skills in the other parts, which is acceptable."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Rubric row A1 accepts a horizontal MC, which contradicts the table's rising MC. Part D's required elements include a justification that the prompt does not request."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The table's ATC of $76.67 is a rounded repeating decimal. The graph in Part A is not tied to the table's values, so the stimulus adds little."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Common errors are listed per rubric row and are realistic. The item has no MC options, so this criterion is not materially applicable."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The grain of 5 points across parts of 1–2 points fits the short FRQ format. Part A's demand to draw all four curves plus labeled optimum, then shade profit in Part B, partly duplicates the same graphing demand. The invalid alternative in A1 weakens the consistency."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP-style multi-part graphing FRQ on monopolistic competition. Students must read a table, find MR = MC at Q = 20, get P = $100 from the demand column, compare it with ATC = $80 to shade profit, then reason about long-run entry shifting demand left until P = ATC, and conclude P > MC. Concepts are core to the unit, the arithmetic is minimal (one subtraction), the wording is unambiguous, and the reading load is light. The main demand is translating table data into an accurately labeled graph, which is typical of full-mock FRQ items rather than a basic recall item or an advanced extension.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "key": "ap_microeconomics-f04-k1",
+  "cellId": "ap_microeconomics-f04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Profit is maximized where MR = MC. In the table, MR = MC = $70 at Q = 20, and the demand curve gives P = $110 at that quantity. The graph shows downward-sloping demand, MR below demand, an upward-sloping MC, and a U-shaped ATC.",
+     "final_answer": "Q1 = 20; P1 = $110 (read from demand at Q = 20). Demand slopes down, MR lies below demand, MC slopes up, ATC is U-shaped; at Q1, ATC = $90, which is below P1.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Economic profit = (P − ATC) × Q = ($110 − $90) × 20 = $400.",
+     "final_answer": "Shade the rectangle between P = $110 and ATC = $90, from Q = 0 to Q = 20. This is an economic profit of $400.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Positive economic profit attracts new firms. They take customers away, so the firm's demand falls until economic profit is zero.",
+     "final_answer": "New firms enter because there is positive economic profit. This firm's demand (and MR) shifts left and becomes more elastic until demand is tangent to ATC, so P = ATC and economic profit is zero.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "The demand curve slopes downward, so MR < P. Since MR = MC at the profit-maximizing output, P > MC.",
+     "final_answer": "Price is greater than marginal cost.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Table is internally consistent with P=150-2Q, MC=30+2Q, TC=800+30Q+Q^2. The optimum is Q=20, P=110, ATC=90, and profit is 400. Parts A-D align with topic 4.4 and the official 5-point short FRQ grain. Rubrics are meaning-based and consistent, and the solver agrees. The only blemish is a minor one: the rubric alternative allowing a horizontal MC does not match the table's rising MC.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Part A tests drawing the graph (4.A); the other parts test profit shading, entry, and P > MC in topic 4.4. This is in scope."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Q1=20 and P1=110 are unique from the table. The profit rectangle is 20 x 20 = 400. Long-run demand shifts left, and P > MC. The rubric rows are consistent."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete, with all four cost and revenue columns. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so there are no distractors. The common errors listed in the rubric rows are realistic."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Appropriate length and load for a 5-point short FRQ, with no calculator needed."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP-style FRQ on monopolistic competition. The student reads a table, finds MR = MC at Q = 20, reads P = $110 off demand and ATC = $90, and draws and labels a graph with the profit rectangle shaded. Long-run parts (demand decreases and becomes more elastic as firms enter; P > MC at zero economic profit) are core recall. Arithmetic is minimal and clean, the model is explicit, and the scope fits Unit 4.4 and skill 4.A. Moderate depth fits a full mock rather than a basic learning item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 480
+  }
+ },
+ {
+  "key": "ap_microeconomics-f05-k0",
+  "cellId": "ap_microeconomics-f05",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "If Y picks high fare, X gets 100 with low fare and 73 with high fare. If Y picks low fare, X gets 51 with low fare and 36 with high fare. Low fare pays more either way.",
+     "final_answer": "Yes. Low fare is Airline X's dominant strategy: 100 > 73 when Y picks high fare, and 51 > 36 when Y picks low fare.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "The game is symmetric, so low fare is also dominant for Airline Y. Both firms playing their dominant strategy gives the equilibrium.",
+     "final_answer": "Airline X: low fare, Airline Y: low fare",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Payoff in the low fare, low fare cell.",
+     "final_answer": "Airline X $51 million, Airline Y $51 million",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "This is a prisoner's dilemma: each firm gains by cheating on the high-fare outcome.",
+     "final_answer": "Each firm has an incentive to cheat. If the other firm sets a high fare, a firm earns $100M by switching to a low fare instead of $73M by keeping a high fare. Low fare is dominant for both, and without an enforceable agreement neither can trust the other to keep a high fare. So both choose low fare and end up at ($51M, $51M).",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean one-shot prisoner's dilemma in Topic 4.5. The key is unique and verified, with a stated simultaneous one-shot assumption and a fully specified matrix. The 5-point short FRQ grain matches the official format. The rubric rows are meaning-based and consistent. Part D is tagged 2.B, which is fine because each part is judged on its own skill.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Each part is judged against its own skill. Parts A-C interpret the matrix quantitatively (2.C), and part D explains the incentive problem. Everything stays within Topic 4.5, with no mixed strategies or repeated games."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Low fare is dominant for X (100>73, 51>36). The Nash equilibrium is (low, low) with payoffs (51, 51). Rubric rows are consistent, and A2 correctly depends on A1."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The payoff matrix data is complete, with all four cells, the players' strategies, units and format. The simultaneous one-shot assumption is stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item. The rubric's common_errors entries cover the typical mistakes: a best response against one rival choice only, naming the cooperative cell, and the highest-total justification."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item is a short 5-point FRQ with light reading and no calculation, which fits a short micro FRQ."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Standard 2x2 prisoner's dilemma with a single dominant strategy for each firm. Part A needs two simple payoff comparisons, B and C follow directly from A, and D is a conceptual explanation of the incentive to defect without enforceable agreements. The question is a core application of the topic and involves no heavy computation, a short and unambiguous stimulus, and no out-of-scope ideas such as repeated games or mixed strategies.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 150
+  }
+ },
+ {
+  "key": "ap_microeconomics-f05-k1",
+  "cellId": "ap_microeconomics-f05",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "If Y picks high fare, X earns 61 with low fare and 49 with high fare. If Y picks low fare, X earns 37 with low fare and 32 with high fare. Low fare is better for X either way.",
+     "final_answer": "Yes. Low fare is Airline X's dominant strategy: 61 > 49 when Y picks high fare, and 37 > 32 when Y picks low fare.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "X will choose low fare because it is dominant. Y has no dominant strategy (55 > 29 if X is high; 43 > 35 if X is low). Since X plays low fare, Y's best response is low fare (43 > 35). Neither firm gains by changing its choice alone.",
+     "final_answer": "Airline X: low fare, Airline Y: low fare",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "These are the payoffs in the low-fare, low-fare cell.",
+     "final_answer": "Airline X earns $37 million; Airline Y earns $43 million",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "If Y charges a high fare, X can earn 61 by switching to a low fare instead of 49. Low fare is dominant for X, so any promise to keep fares high is not credible. Y expects X to cut its fare, and if X cuts it, Y does better with a low fare (43 > 35). Without an enforceable agreement, the firms end up at low fare, low fare.",
+     "final_answer": "Airline X has an incentive to cheat on a high-fare deal, earning 61 instead of 49 by charging a low fare. Low fare is X's dominant strategy, so its promise to keep fares high isn't credible. Y expects X to cut its fare and responds with a low fare, so the firms end up at the Nash equilibrium.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The matrix is fully specified and the keys are correct and unique: X's dominant strategy is low fare, the Nash equilibrium is (low, low) with payoffs (37, 43), and the (high, high) cell is mutually better. The rubric rows are meaning-based and consistent with the model answers. The 5-point, 2/1/1/1 structure fits the short-FRQ format. Part D is tagged 2.B, which suits its explanation task. All parts stay within topic 4.5.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard one-shot 2x2 game. Part A requires comparing X's payoffs against each of Y's choices to find the dominant strategy (low fare). Parts B and C require using Y's best response to X's dominant strategy to reach the Nash equilibrium (low, low) with payoffs (37, 43). Part D asks why (high, high) is not reached: X gains by deviating (61 > 49), even though both firms are better off at (high, high). The payoffs are small integers, so the item involves no long arithmetic. Wording is clear. It is in scope: a single simultaneous game, with no repeated or mixed strategies. Y has no dominant strategy, which adds a mild reasoning step but is not tricky. The item is suitable for a full mock exam.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 240
+  }
+ }
+]

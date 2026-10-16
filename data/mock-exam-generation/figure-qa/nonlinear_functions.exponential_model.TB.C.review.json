@@ -1,0 +1,25 @@
+{
+ "itemId": "nonlinear_functions.exponential_model.TB.C",
+ "verdict": "pass",
+ "reviewedAt": "2026-10-05T19:42:52Z",
+ "reviewer": "visual-review-agent-SB",
+ "codeHash": "46fb9658461c0dfc6928ebebd999c30ea80a84e130aa94e5ac7c57b0754a49a6",
+ "samples": [
+  "nonlinear_functions.exponential_model.TB.C.png"
+ ],
+ "checklist": {
+  "figure_present": "pass",
+  "proportion_matches_values": "pass",
+  "labels_placed_and_legible": "pass",
+  "multi_figure_consistent": "pass",
+  "text_matches_figure_and_solvable": "pass",
+  "axes_ticks_units_legend": "pass",
+  "choice_distinct_one_rule": "pass",
+  "sat_visual_style": "pass",
+  "mobile_375_readable": "pass"
+ },
+ "defects": [],
+ "notes": "32,48,72,108 (x1.5) 표 C가 정답. A 반대 배율, B 한 주기 밀림, D 등차(가산). 4개 표 모두 보임. 표 전용 항목이라 곡선/직선 라벨 제거 규칙의 영향 없음.",
+ "restampedAt": "2026-10-05T00:00:00Z",
+ "restampNote": "2026-10-05 영문화로 ProblemFigure.tsx(해시 대상) 문구만 변경 — SVG·PNG 바이트 동일, 해시만 갱신"
+}

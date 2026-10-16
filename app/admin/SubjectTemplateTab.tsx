@@ -9,8 +9,14 @@ import {
   updateSubjectUnit,
   removeSubjectUnit,
   moveSubjectUnit,
+  assignUnitKeyword,
+  removeUnitKeyword,
 } from "./subject-actions";
-import type { AdminSubject, SubjectUnit } from "./subject-data";
+import type { AdminSubject, KeywordFolder, SubjectKeyword, SubjectUnit } from "./subject-data";
+import KeywordDictionaryManager from "./KeywordDictionaryManager";
+import { GroupedKeywordList } from "@/app/components/GroupedKeywords";
+
+import UnderlineSubTabs from "@/app/components/UnderlineSubTabs";
 
 export default function SubjectTemplateTab({
   subjects,
@@ -21,6 +27,8 @@ export default function SubjectTemplateTab({
 }) {
   const [openSubjectId, setOpenSubjectId] = useState<string | null>(null);
   const [adding, setAdding] = useState(false);
+  const [showArchived, setShowArchived] = useState(false);
+  const [query, setQuery] = useState("");
   const [newName, setNewName] = useState("");
   const [error, setError] = useState<string | null>(null);
 
@@ -65,30 +73,88 @@ export default function SubjectTemplateTab({
           setOpenSubjectId(null);
         }}
         onUnitsChange={(units) => patchSubject(open.subjectId, { units })}
+        onKeywordsChange={(keywords, folders) => patchSubject(open.subjectId, folders ? { keywords, folders } : { keywords })}
+        onArchived={(reason) =>
+          patchSubject(open.subjectId, { archivedAt: new Date().toISOString(), archivedReason: reason })
+        }
       />
     );
   }
+
+  // 보관됨과 현재를 한 목록에 섞지 않는다. 기본 진입은 현재이고, 검색도 지금
+  // 보고 있는 구분 안에서만 동작한다 — 섞으면 "왜 이게 선택지에 안 나오지"를
+  // 목록만 보고 알 수 없다.
+  const visibleSubjects = subjects.filter((s) =>
+    (showArchived ? Boolean(s.archivedAt) : !s.archivedAt) &&
+    (query.trim() === "" || s.subjectName.toLowerCase().includes(query.trim().toLowerCase()))
+  );
 
   return (
     <div className="max-w-[640px] px-8 py-8">
       <h1 className="text-[20px] font-extrabold text-ink mb-1.5">과목 템플릿</h1>
       <p className="text-[13px] text-grey-500 mb-5">
-        여기서 관리하는 과목·회차는 선생님의 커리큘럼 템플릿, 교재 생성 폼 등
-        다른 화면의 선택지로 그대로 사용됩니다.
+        여기서 바꾸면 선생님 커리큘럼 템플릿·교재 생성 폼 등 다른 화면의 선택지도 함께 바뀝니다.
       </p>
 
-      {subjects.map((s) => (
+      <UnderlineSubTabs
+        className="mb-3"
+        items={[
+          { id: "current", label: `현재 (${subjects.filter((s) => !s.archivedAt).length})` },
+          { id: "archived", label: `보관됨 (${subjects.filter((s) => Boolean(s.archivedAt)).length})` },
+        ]}
+        activeId={showArchived ? "archived" : "current"}
+        onSelect={(id) => setShowArchived(id === "archived")}
+      />
+
+      <input
+        aria-label="과목 검색"
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        placeholder={showArchived ? "보관된 과목에서 찾기" : "과목 이름으로 찾기"}
+        className="w-full text-[12.5px] border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 mb-3"
+      />
+
+      {showArchived && (
+        <p className="text-[12px] text-grey-500 mb-3">
+          보관된 과목은 새 배정·교재 생성 선택지에 나오지 않습니다. 기존 연결과 과거 기록은 그대로 남아 있어
+          여기서 열어볼 수 있습니다.
+        </p>
+      )}
+
+      {visibleSubjects.length === 0 && (
+        <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center mb-3">
+          {query.trim()
+            ? "찾는 과목이 없습니다."
+            : showArchived
+              ? "보관된 과목이 없습니다."
+              : "아직 만든 과목이 없습니다."}
+        </div>
+      )}
+
+      {visibleSubjects.map((s) => (
         <div
           key={s.subjectId}
-          className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-2.5 flex items-center justify-between"
+          className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-2.5 flex items-center justify-between gap-3"
         >
-          <div>
-            <div className="text-[13.5px] font-bold text-ink">{s.subjectName}</div>
-            <div className="text-[12px] text-grey-500 mt-0.5">{s.units.length}개 회차</div>
+          <div className="min-w-0">
+            <div className="text-[13.5px] font-bold text-ink flex items-center gap-1.5 min-w-0">
+              <span className="truncate">{s.subjectName}</span>
+              {s.archivedAt && (
+                <span className="text-[10.5px] font-bold px-1.5 py-0.5 rounded bg-grey-100 text-grey-500">
+                  보관됨
+                </span>
+              )}
+            </div>
+            {/* 보관 사유가 길면 예전에는 이 줄이 늘어나 '편집' 버튼을 밀어
+                두 줄로 깨뜨렸다. 설명 쪽이 줄어들게 한다. */}
+            <div className="text-[12px] text-grey-500 mt-0.5 truncate">
+              {s.units.length}개 회차
+              {s.archivedAt && s.archivedReason ? ` · ${s.archivedReason}` : ""}
+            </div>
           </div>
           <button
             onClick={() => setOpenSubjectId(s.subjectId)}
-            className="text-[12px] font-bold px-3.5 py-2 rounded-lg border-[1.5px] border-grey-200 text-ink"
+            className="text-[12px] font-bold px-3.5 py-2 rounded-lg border-[1.5px] border-grey-200 text-ink whitespace-nowrap flex-shrink-0"
           >
             편집
           </button>
@@ -140,20 +206,56 @@ function SubjectDetailEditor({
   onRenamed,
   onDeleted,
   onUnitsChange,
+  onKeywordsChange,
+  onArchived,
 }: {
   subject: AdminSubject;
   onBack: () => void;
   onRenamed: (name: string) => void;
   onDeleted: () => void;
   onUnitsChange: (units: SubjectUnit[]) => void;
+  onKeywordsChange: (keywords: SubjectKeyword[], folders?: KeywordFolder[]) => void;
+  onArchived: (reason: string | null) => void;
 }) {
   const [units, setUnits] = useState(subject.units);
+  const [tab, setTab] = useState<"sessions" | "keywords">("sessions");
+  const [openKeywordUnits, setOpenKeywordUnits] = useState<Set<string>>(new Set()); // 회차별 키워드 선택기: 기본 접힘
+  const [allOpen, setAllOpen] = useState(false);
+  const [removingUnitId, setRemovingUnitId] = useState<string | null>(null);
+  const [keywords, setKeywords] = useState(subject.keywords ?? []);
+  const [keywordError, setKeywordError] = useState<string | null>(null);
   const [confirmingDelete, setConfirmingDelete] = useState(false);
   const [deleteError, setDeleteError] = useState<string | null>(null);
+  const [archivedNotice, setArchivedNotice] = useState<string | null>(
+    subject.archivedAt ? subject.archivedReason ?? "이 과목은 보관 처리되어 있습니다." : null
+  );
 
   function commit(next: SubjectUnit[]) {
     setUnits(next);
     onUnitsChange(next);
+  }
+
+  async function handleToggleUnitKeyword(unitId: string, keywordId: string, currentlyTagged: boolean) {
+    setKeywordError(null);
+    const result = currentlyTagged
+      ? await removeUnitKeyword(unitId, keywordId)
+      : await assignUnitKeyword(unitId, keywordId);
+    if (!result.ok) {
+      setKeywordError(result.error);
+      return;
+    }
+    commit(
+      units.map((u) =>
+        u.id === unitId
+          ? {
+              ...u,
+              keywordIds: currentlyTagged
+                ? (u.keywordIds ?? []).filter((id) => id !== keywordId)
+                : [...(u.keywordIds ?? []), keywordId],
+            }
+          : u
+      )
+    );
   }
 
   async function handleRename(name: string) {
@@ -165,7 +267,13 @@ function SubjectDetailEditor({
   async function handleDelete() {
     setDeleteError(null);
     try {
-      await deleteSubject(subject.subjectId);
+      const result = await deleteSubject(subject.subjectId);
+      setConfirmingDelete(false);
+      if (result.archived) {
+        setArchivedNotice(result.reason ?? "이 과목은 보관 처리되었습니다.");
+        onArchived(result.reason);
+        return;
+      }
       onDeleted();
     } catch (e) {
       setDeleteError(e instanceof Error ? e.message : "삭제에 실패했습니다.");
@@ -181,8 +289,13 @@ function SubjectDetailEditor({
   }
 
   async function handleRemove(unitId: string) {
-    await removeSubjectUnit(unitId);
-    commit(units.filter((u) => u.id !== unitId));
+    setRemovingUnitId(unitId);
+    try {
+      await removeSubjectUnit(unitId);
+      commit(units.filter((u) => u.id !== unitId));
+    } finally {
+      setRemovingUnitId(null);
+    }
   }
 
   async function handleField(unitId: string, field: "unitTitle" | "note", value: string) {
@@ -207,7 +320,7 @@ function SubjectDetailEditor({
     <div className="max-w-[640px] px-8 py-8">
       <button
         onClick={onBack}
-        className="text-[13px] text-grey-500 font-semibold mb-4"
+        className="text-[13px] text-grey-600 font-semibold mb-4 border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 hover:bg-grey-100 active:scale-95 transition-transform"
       >
         ← 뒤로
       </button>
@@ -218,6 +331,55 @@ function SubjectDetailEditor({
         className="text-[20px] font-extrabold text-ink mb-5 w-full px-2 py-1 border-[1.5px] border-transparent hover:border-grey-200 focus:border-grey-200 rounded-lg -ml-2"
       />
 
+      <UnderlineSubTabs
+        className="mb-4"
+        items={[
+          { id: "sessions", label: "회차 구성" },
+          { id: "keywords", label: "키워드 사전" },
+        ]}
+        activeId={tab}
+        onSelect={setTab}
+      />
+
+      {/* 키워드 사전 탭은 상태를 보존하려고 숨기기만 한다(언마운트하지 않음). */}
+      <div hidden={tab !== "keywords"}>
+      {/* 과목 공용 키워드 사전(2026-09-09) — 2026-10-08부터 폴더 기반 관리 화면.
+          여기서 만든 키워드가 아래 회차별 태깅, 교사 운영 커리큘럼 오버레이, 교재/문제
+          태깅에서 그대로 재사용되는 원본이다(키워드 id는 이름·폴더를 바꿔도 그대로). */}
+      <KeywordDictionaryManager
+        subjectId={subject.subjectId}
+        initial={{ folders: subject.folders ?? [], keywords }}
+        onChange={(d) => {
+          setKeywords(d.keywords);
+          onKeywordsChange(d.keywords, d.folders);
+        }}
+      />
+      {keywordError && (
+        <p role="alert" className="text-[12px] text-red mb-2">
+          {keywordError}
+        </p>
+      )}
+
+      </div>
+
+      <div hidden={tab !== "sessions"}>
+      {units.length > 0 && (
+        <div className="flex items-center justify-between mb-3">
+          <span className="text-[12px] text-grey-500">
+            {units.length}회차{keywords.length > 0 ? ` · 키워드 ${keywords.length}개` : ""}
+          </span>
+          <button
+            type="button"
+            onClick={() => {
+              setAllOpen((v) => !v);
+              setOpenKeywordUnits(allOpen ? new Set() : new Set(units.map((x) => x.id)));
+            }}
+            className="text-[12px] font-semibold text-grey-600 border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1"
+          >
+            {allOpen ? "키워드 모두 접기" : "키워드 모두 펼치기"}
+          </button>
+        </div>
+      )}
       {units.map((u, idx) => (
         <div
           key={u.id}
@@ -227,6 +389,7 @@ function SubjectDetailEditor({
             <span className="text-[12px] font-bold text-grey-500 w-14 shrink-0">
               {u.position}회차
             </span>
+            <LessonBadges u={u} />
             <input
               defaultValue={u.unitTitle}
               onBlur={(e) => handleField(u.id, "unitTitle", e.target.value)}
@@ -239,7 +402,56 @@ function SubjectDetailEditor({
             onBlur={(e) => handleField(u.id, "note", e.target.value)}
             className="w-full px-3 py-1.5 border-[1.5px] border-grey-200 rounded-lg text-[12.5px] mb-2"
           />
+          {keywords.length > 0 && (
+            <div className="mb-2">
+              <button
+                type="button"
+                aria-expanded={openKeywordUnits.has(u.id)}
+                aria-label={`${u.unitTitle} 회차 키워드 ${openKeywordUnits.has(u.id) ? "접기" : "펼치기"}`}
+                onClick={() => setOpenKeywordUnits((prev) => { const n = new Set(prev); if (n.has(u.id)) n.delete(u.id); else n.add(u.id); return n; })}
+                className="text-[12px] font-semibold text-grey-600 mb-1 focus-visible:outline focus-visible:outline-2 rounded"
+              >
+                <span aria-hidden="true" className="inline-block w-4 text-grey-400">{openKeywordUnits.has(u.id) ? "▾" : "▸"}</span>
+                키워드 {(u.keywordIds ?? []).length}개
+              </button>
+              {openKeywordUnits.has(u.id) && (
+              <GroupedKeywordList
+                defaultOpen={false}
+                items={keywords}
+                otherLabel="기타"
+                selectedIds={u.keywordIds ?? []}
+                renderItem={(k) => {
+                  const tagged = (u.keywordIds ?? []).includes(k.id);
+                  return (
+                    <button
+                      key={k.id}
+                      // 사전 칩과 회차 태그 버튼이 같은 글자를 갖는다 — 무엇을 누르는
+                      // 자리인지 이름으로 구분해 둔다.
+                      aria-label={`${u.unitTitle} 회차에 ${k.label} ${tagged ? "해제" : "태그"}`}
+                      aria-pressed={tagged}
+                      onClick={() => handleToggleUnitKeyword(u.id, k.id, tagged)}
+                      className={
+                        "text-[11px] font-semibold px-2 py-1 rounded-full border-[1.5px] " +
+                        (tagged ? "bg-ink text-white border-ink" : "border-grey-200 text-grey-500")
+                      }
+                    >
+                      {k.label}
+                    </button>
+                  );
+                }}
+              />
+              )}
+            </div>
+          )}
           <div className="flex items-center gap-3">
+            {/* 4절 — 관리자 기준본 회차에서도 같은 준비 화면으로 들어간다.
+                이름은 세 계층 모두 "수업 준비"로 같다. */}
+            <a
+              href={`/lesson-prep/catalog/${u.id}`}
+              className="text-[12px] font-bold text-ink underline underline-offset-2"
+            >
+              수업 준비
+            </a>
             <button
               disabled={idx === 0}
               onClick={() => handleMove(idx, -1)}
@@ -255,10 +467,11 @@ function SubjectDetailEditor({
               ↓ 아래로
             </button>
             <button
+              disabled={removingUnitId === u.id}
               onClick={() => handleRemove(u.id)}
-              className="text-[12px] font-semibold text-red ml-auto"
+              className="text-[12px] font-semibold text-red border border-red/30 rounded px-2 py-1 ml-auto disabled:opacity-50"
             >
-              삭제
+              {removingUnitId === u.id ? "삭제 중..." : "삭제"}
             </button>
           </div>
         </div>
@@ -270,12 +483,24 @@ function SubjectDetailEditor({
       >
         + 회차 추가
       </button>
+      </div>
 
       <div className="border-t border-grey-200 pt-5">
+        {archivedNotice && (
+          <p className="text-[12.5px] text-ink bg-grey-100 rounded-lg px-3 py-2 mb-3">
+            이 과목은 보관 처리되었습니다: {archivedNotice}
+            <br />
+            <span className="text-grey-500">
+              이름·기존 이력은 그대로 유지되며, 신규 배정·템플릿 선택·교재 연결
+              후보에서만 제외됩니다.
+            </span>
+          </p>
+        )}
         {confirmingDelete ? (
           <div className="flex items-center gap-3">
             <span className="text-[12.5px] text-ink">
-              정말 &quot;{subject.subjectName}&quot; 과목을 삭제하시겠습니까?
+              정말 &quot;{subject.subjectName}&quot; 과목을 삭제하시겠습니까? 사용
+              이력이 있으면 삭제 대신 보관 처리됩니다.
             </span>
             <button
               onClick={handleDelete}
@@ -301,5 +526,22 @@ function SubjectDetailEditor({
         {deleteError && <p className="text-[12px] text-red mt-2">{deleteError}</p>}
       </div>
     </div>
+  );
+}
+
+const KIND_LABEL: Record<string, string> = { content: "내용", unit_review: "단원 복습", exam_prep: "시험 준비" };
+const TRACK_LABEL: Record<string, string> = { compact: "컴팩트", full: "전체 과정" };
+const CHIP = "text-[10.5px] font-bold px-1.5 py-0.5 rounded bg-grey-100 text-grey-600 shrink-0";
+
+/** AP 회차 배지(종류·단원·과정·수업 분). 일반 회차(lessonKind 없음)에는 아무것도 그리지 않는다. */
+function LessonBadges({ u }: { u: SubjectUnit }) {
+  if (!u.lessonKind) return null;
+  return (
+    <span className="flex items-center gap-1" data-testid="lesson-badges">
+      <span className={CHIP}>{KIND_LABEL[u.lessonKind] ?? u.lessonKind}</span>
+      {u.cedUnitCode && <span className={CHIP}>Unit {u.cedUnitCode}</span>}
+      {u.trackSet && <span className={CHIP}>{TRACK_LABEL[u.trackSet] ?? u.trackSet}</span>}
+      {u.estMinutes ? <span className={CHIP}>{u.estMinutes}분</span> : null}
+    </span>
   );
 }

@@ -1,0 +1,45 @@
+{
+ "itemId": "area_volume.cylinder_volume_radius.SO.P",
+ "generatedAt": "2026-10-07T05:02:01.074Z",
+ "codeHash": "01df996a18b1b0cbc68c16423759dc287806da912dbfefb32130b32566d75efc",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/cyl-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/ext-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/geo-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/area_volume.cylinder_volume_radius.SO.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/pg-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/so-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "area_volume.cylinder_volume_radius.SO.P.png",
+   "mobileFile": "area_volume.cylinder_volume_radius.SO.P.m375.png",
+   "archetypeId": "av.cylinder_volume_radius.SO.P.compose_kind",
+   "seed": 11,
+   "signature": "solid:cylinder",
+   "stimulus": "A student studies the solid shown. Use the labels in the figure. The solid in the figure is a cylindrical water tank with labeled measurements.",
+   "question": "Express the volume of the solid in terms of $\\pi$.",
+   "options": [
+    "$4000\\pi$",
+    "$200\\pi$",
+    "$1000\\pi$",
+    "$100\\pi$"
+   ],
+   "correctIndex": 2,
+   "answer": "$1000\\pi$",
+   "explanation": "(1) 그림에서 반지름 10 과 높이 10 를 읽는다. (2) 밑면은 반지름 10 인 원이다. (3) 밑면의 넓이 = π × 10² = 100π 이다. (4) 부피 = 100π × 10 이다. (5) 따라서 1000π 이다. 따라서 정답은 $1000\\pi$이다.",
+   "structuralIssues": []
+  }
+ ]
+}

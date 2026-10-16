@@ -1,14 +1,14 @@
 "use server";
 
-import { requireUser } from "@/lib/auth";
+import { requireStudentFeature } from "@/lib/feature-access";
 import type { ChatMessage } from "./chat-data";
 
 export async function sendChatMessage(
   threadId: string,
   text: string
 ): Promise<ChatMessage> {
-  if (!text.trim()) throw new Error("메시지를 입력해주세요.");
-  const { supabase } = await requireUser();
+  if (!text.trim()) throw new Error("Please enter a message.");
+  const { supabase } = await requireStudentFeature("teacher_chat");
   const { data, error } = await supabase
     .from("chat_messages")
     .insert({ thread_id: threadId, sender_role: "student", text: text.trim() })

@@ -1,0 +1,46 @@
+{
+ "runs": [
+  "csa-s2-short-frq"
+ ],
+ "rows": 2,
+ "passed": 1,
+ "rejected": 1,
+ "passRate": 0.5,
+ "mc": {
+  "rows": 0,
+  "passed": 0,
+  "passRate": 0
+ },
+ "frq": {
+  "rows": 2,
+  "passed": 1,
+  "passRate": 0.5
+ },
+ "unitsPassed": {},
+ "skillsPassed": {},
+ "figPassed": {
+  "text": 1
+ },
+ "figAll": {
+  "text": 2
+ },
+ "figPassRate": {
+  "text": "1/2"
+ },
+ "renderTypesPassed": {
+  "text": 1
+ },
+ "archetypesPassed": {
+  "csf_2d_best_row": 1
+ },
+ "archetypesAll": {
+  "csf_2d_best_row": 1,
+  "csf_2d_transpose": 1
+ },
+ "failedArchetypes": [
+  "csf_2d_transpose"
+ ],
+ "costUsd": {
+  "csa-s2-short-frq": 0.0809
+ }
+}

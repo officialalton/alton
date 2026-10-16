@@ -1,0 +1,422 @@
+{
+ "totalRwItems": 972,
+ "mixTol": 0.04,
+ "perCell": [
+  {
+   "cell": "transitions|medium",
+   "demand": 53,
+   "need": {
+    "literature_fiction": 8.54,
+    "humanities": 1.3000000000000007,
+    "social_science": 0.7699999999999996,
+    "science_physical": 1.12
+   },
+   "total": 12
+  },
+  {
+   "cell": "central_ideas_details|medium",
+   "demand": 145,
+   "need": {
+    "humanities": 1.5,
+    "social_science": 2.049999999999999,
+    "science_life": 2.1500000000000004,
+    "science_earth_space": 1.3500000000000005,
+    "science_physical": 0.7999999999999998,
+    "technology": 1.4500000000000002
+   },
+   "total": 10
+  },
+  {
+   "cell": "form_structure_sense|medium",
+   "demand": 90,
+   "need": {
+    "literature_fiction": 9.2
+   },
+   "total": 10
+  },
+  {
+   "cell": "boundaries|medium",
+   "demand": 90,
+   "need": {
+    "literature_fiction": 5.199999999999999,
+    "economics_business": 0.6000000000000001
+   },
+   "total": 6
+  },
+  {
+   "cell": "words_in_context|medium",
+   "demand": 78,
+   "need": {
+    "humanities": 0.8000000000000007,
+    "history_civics": 0.23999999999999932,
+    "economics_business": 2.12,
+    "science_earth_space": 0.3400000000000003,
+    "science_physical": 1.12
+   },
+   "total": 5
+  },
+  {
+   "cell": "rhetorical_synthesis|medium",
+   "demand": 55,
+   "need": {
+    "literature_fiction": 4.9
+   },
+   "total": 5
+  },
+  {
+   "cell": "text_structure_purpose|medium",
+   "demand": 94,
+   "need": {
+    "social_science": 2.459999999999999,
+    "science_physical": 0.7600000000000002
+   },
+   "total": 4
+  },
+  {
+   "cell": "command_of_evidence_text|medium",
+   "demand": 16,
+   "need": {
+    "literature_fiction": 2.88,
+    "history_civics": 0.2799999999999998,
+    "technology": 0.16000000000000003
+   },
+   "total": 4
+  },
+  {
+   "cell": "command_of_evidence_quant|medium",
+   "demand": 11,
+   "need": {
+    "literature_fiction": 1.98,
+    "humanities": 1.1,
+    "history_civics": 0.8799999999999999
+   },
+   "total": 4
+  },
+  {
+   "cell": "rhetorical_synthesis|easy",
+   "demand": 24,
+   "need": {
+    "literature_fiction": 2.3200000000000003
+   },
+   "total": 3
+  },
+  {
+   "cell": "cross_text_connections|medium",
+   "demand": 8,
+   "need": {
+    "literature_fiction": 1.44,
+    "social_science": 0.72,
+    "science_earth_space": 0.24000000000000005,
+    "science_physical": 0.32,
+    "technology": 0.08000000000000002
+   },
+   "total": 3
+  },
+  {
+   "cell": "inferences|medium",
+   "demand": 8,
+   "need": {
+    "literature_fiction": 1.44,
+    "social_science": 0.72,
+    "economics_business": 0.32,
+    "science_physical": 0.32,
+    "technology": 0.08000000000000002
+   },
+   "total": 3
+  },
+  {
+   "cell": "boundaries|hard",
+   "demand": 12,
+   "need": {
+    "literature_fiction": 2.16
+   },
+   "total": 3
+  },
+  {
+   "cell": "form_structure_sense|hard",
+   "demand": 12,
+   "need": {
+    "literature_fiction": 2.16,
+    "technology": 0.12000000000000002
+   },
+   "total": 3
+  },
+  {
+   "cell": "cross_text_connections|hard",
+   "demand": 11,
+   "need": {
+    "literature_fiction": 1.98,
+    "science_physical": 0.44,
+    "technology": 0.11000000000000001
+   },
+   "total": 3
+  },
+  {
+   "cell": "rhetorical_synthesis|hard",
+   "demand": 12,
+   "need": {
+    "literature_fiction": 2.16,
+    "humanities": 0.20000000000000018,
+    "social_science": 0.08000000000000007
+   },
+   "total": 3
+  },
+  {
+   "cell": "transitions|hard",
+   "demand": 12,
+   "need": {
+    "literature_fiction": 2.16,
+    "humanities": 0.20000000000000018,
+    "social_science": 0.08000000000000007,
+    "technology": 0.12000000000000002
+   },
+   "total": 3
+  },
+  {
+   "cell": "command_of_evidence_text|easy",
+   "demand": 9,
+   "need": {
+    "literature_fiction": 1.6199999999999999,
+    "science_earth_space": 0.2700000000000001,
+    "science_physical": 0.36
+   },
+   "total": 3
+  },
+  {
+   "cell": "inferences|easy",
+   "demand": 10,
+   "need": {
+    "literature_fiction": 1.7999999999999998,
+    "science_physical": 0.4,
+    "technology": 0.10000000000000002
+   },
+   "total": 3
+  },
+  {
+   "cell": "command_of_evidence_text|hard",
+   "demand": 8,
+   "need": {
+    "literature_fiction": 1.44,
+    "science_earth_space": 0.24000000000000005,
+    "science_physical": 0.32,
+    "technology": 0.08000000000000002
+   },
+   "total": 3
+  },
+  {
+   "cell": "boundaries|easy",
+   "demand": 24,
+   "need": {
+    "literature_fiction": 0.3200000000000003,
+    "humanities": 0.40000000000000036,
+    "social_science": 1.1600000000000001
+   },
+   "total": 2
+  },
+  {
+   "cell": "form_structure_sense|easy",
+   "demand": 24,
+   "need": {
+    "literature_fiction": 1.3200000000000003,
+    "social_science": 0.16000000000000014
+   },
+   "total": 2
+  },
+  {
+   "cell": "cross_text_connections|easy",
+   "demand": 5,
+   "need": {
+    "social_science": 0.44999999999999996,
+    "history_civics": 0.3999999999999999,
+    "science_physical": 0.2,
+    "technology": 0.05000000000000001
+   },
+   "total": 2
+  },
+  {
+   "cell": "command_of_evidence_quant|easy",
+   "demand": 4,
+   "need": {
+    "literature_fiction": 0.72,
+    "humanities": 0.4,
+    "social_science": 0.36,
+    "history_civics": 0.31999999999999995,
+    "science_physical": 0.16,
+    "technology": 0.04000000000000001
+   },
+   "total": 2
+  },
+  {
+   "cell": "inferences|hard",
+   "demand": 6,
+   "need": {
+    "literature_fiction": 1.08,
+    "economics_business": 0.24,
+    "science_earth_space": 0.18000000000000005,
+    "science_physical": 0.24,
+    "technology": 0.06000000000000001
+   },
+   "total": 2
+  },
+  {
+   "cell": "words_in_context|hard",
+   "demand": 13,
+   "need": {
+    "humanities": 0.30000000000000004,
+    "social_science": 0.16999999999999993,
+    "science_earth_space": 0.39000000000000007,
+    "science_physical": 0.52,
+    "technology": 0.13000000000000003
+   },
+   "total": 2
+  },
+  {
+   "cell": "command_of_evidence_quant|hard",
+   "demand": 2,
+   "need": {
+    "literature_fiction": 0.36,
+    "humanities": 0.2,
+    "social_science": 0.18,
+    "history_civics": 0.15999999999999998,
+    "economics_business": 0.08,
+    "science_earth_space": 0.06000000000000001,
+    "science_physical": 0.08,
+    "technology": 0.020000000000000004
+   },
+   "total": 2
+  },
+  {
+   "cell": "words_in_context|easy",
+   "demand": 33,
+   "need": {
+    "science_physical": 0.32000000000000006
+   },
+   "total": 1
+  },
+  {
+   "cell": "text_structure_purpose|easy",
+   "demand": 34,
+   "need": {
+    "science_earth_space": 0.02000000000000024,
+    "technology": 0.3400000000000001
+   },
+   "total": 1
+  },
+  {
+   "cell": "central_ideas_details|hard",
+   "demand": 8,
+   "need": {
+    "science_earth_space": 0.24000000000000005,
+    "technology": 0.08000000000000002
+   },
+   "total": 1
+  },
+  {
+   "cell": "text_structure_purpose|hard",
+   "demand": 12,
+   "need": {
+    "technology": 0.12000000000000002
+   },
+   "total": 1
+  }
+ ],
+ "bySubjectCellLevel": {
+  "science_physical": 8,
+  "literature_fiction": 58,
+  "humanities": 7,
+  "social_science": 10,
+  "science_earth_space": 4,
+  "technology": 4,
+  "history_civics": 3,
+  "science_life": 3,
+  "economics_business": 4
+ },
+ "totalItemsCellLevel": 101,
+ "global": [
+  {
+   "subject": "literature_fiction",
+   "targetItems": 214,
+   "minItems": 174,
+   "usableSupply": 616,
+   "globalShortfall": 0
+  },
+  {
+   "subject": "humanities",
+   "targetItems": 136,
+   "minItems": 97,
+   "usableSupply": 142,
+   "globalShortfall": 0
+  },
+  {
+   "subject": "social_science",
+   "targetItems": 126,
+   "minItems": 87,
+   "usableSupply": 99,
+   "globalShortfall": 0
+  },
+  {
+   "subject": "history_civics",
+   "targetItems": 117,
+   "minItems": 77,
+   "usableSupply": 137,
+   "globalShortfall": 0
+  },
+  {
+   "subject": "economics_business",
+   "targetItems": 78,
+   "minItems": 38,
+   "usableSupply": 72,
+   "globalShortfall": 0
+  },
+  {
+   "subject": "science_life",
+   "targetItems": 107,
+   "minItems": 68,
+   "usableSupply": 189,
+   "globalShortfall": 0
+  },
+  {
+   "subject": "science_earth_space",
+   "targetItems": 68,
+   "minItems": 29,
+   "usableSupply": 90,
+   "globalShortfall": 0
+  },
+  {
+   "subject": "science_physical",
+   "targetItems": 78,
+   "minItems": 38,
+   "usableSupply": 52,
+   "globalShortfall": 0
+  },
+  {
+   "subject": "technology",
+   "targetItems": 49,
+   "minItems": 9,
+   "usableSupply": 69,
+   "globalShortfall": 0
+  }
+ ],
+ "estCostUsd": {
+  "adopted_0_22": 22.22,
+  "hard_0_5": 50.5
+ },
+ "sensitivity": [
+  {
+   "mixTol": 0,
+   "items": 271
+  },
+  {
+   "mixTol": 0.02,
+   "items": 173
+  },
+  {
+   "mixTol": 0.04,
+   "items": 101
+  },
+  {
+   "mixTol": 0.06,
+   "items": 60
+  }
+ ]
+}

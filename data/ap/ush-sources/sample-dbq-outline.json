@@ -1,0 +1,105 @@
+{
+ "id": "real_dbq_outline_1",
+ "status": "outline_only_unresolved_documents",
+ "period": 6,
+ "periods": [
+  6,
+  7
+ ],
+ "topics": [
+  "6.6",
+  "6.12",
+  "7.4"
+ ],
+ "prompt": "Evaluate the extent to which concentrated economic power led to demands for greater government regulation of business in the United States between 1880 and 1915.",
+ "skills": [
+  "6.A",
+  "6.B",
+  "6.C",
+  "6.D"
+ ],
+ "documents": [
+  {
+   "n": 1,
+   "registry_id": "img-bosses-senate-1889",
+   "type": "political_cartoon",
+   "hipp": "Keppler, in the humor magazine Puck (1889), a critic of trusts; audience: magazine readers; purpose: argue that trusts control the Senate",
+   "supports": "trust power over politics and a closed 'people's entrance'",
+   "complication": "A satirical cartoon exaggerates and shows no evidence about actual legislation; use for argument about perceptions of corruption."
+  },
+  {
+   "n": 2,
+   "registry_id": "txt-jungle-1906",
+   "type": "primary_text (novel)",
+   "hipp": "Sinclair, a socialist novelist, 1906; purpose: expose packinghouse conditions and weak inspection",
+   "supports": "public reaction leading to the 1906 federal Meat Inspection and Pure Food and Drug laws",
+   "complication": "A novel, not an official record; Sinclair's goal was worker conditions, while the public reacted to food safety."
+  },
+  {
+   "n": 3,
+   "registry_id": "stat-foreign-born-1850-1940",
+   "type": "statistic_table",
+   "hipp": "Census Bureau counts (2006 compilation of decennial census data)",
+   "supports": "context: immigrants were 13 to 15 percent of residents in 1880-1910, the labor force of the industries criticized (weak fit; better document to be sourced)",
+   "complication": "Does not itself address regulation; flagged as the weakest of the three and a candidate for replacement."
+  },
+  {
+   "n": 4,
+   "registry_id": null,
+   "type": "UNRESOLVED",
+   "needed": "Sherman Antitrust Act (1890) text or Interstate Commerce Act (1887), from archives.gov or a Statutes at Large scan"
+  },
+  {
+   "n": 5,
+   "registry_id": null,
+   "type": "UNRESOLVED",
+   "needed": "Theodore Roosevelt, 'New Nationalism' speech (1910) excerpt, from a verified repository"
+  },
+  {
+   "n": 6,
+   "registry_id": null,
+   "type": "UNRESOLVED",
+   "needed": "A business-side or limited-government source (for example an 1890s court or Social Darwinist text) with verified text and rights"
+  },
+  {
+   "n": 7,
+   "registry_id": null,
+   "type": "UNRESOLVED",
+   "needed": "A second visual or a verified historical statistic on industrial concentration (HSUS or Census table)"
+  }
+ ],
+ "notes": "Outline only. The real documents are fixed first; the prompt, thesis lines and document uses were designed from them. Not loadable until documents 4-7 are fixed and verified.",
+ "verification": {
+  "fact_checker": "claude-fable-5-1",
+  "verdicts": [
+   {
+    "where": "Doc1",
+    "verdict": "sound",
+    "note": "Joseph Keppler's 'The Bosses of the Senate' (Puck, Jan. 23, 1889) is correctly identified. Image content as described checks out: bloated moneybag trusts (Copper, Steel Beam, Standard Oil, Iron, Sugar, Tin, Coal, Paper Bag, Envelope, Salt, Nail, etc.) entering through an 'Entrance for Monopolists'; 'People's Entrance' marked 'Closed'; sign reading 'This is a Senate of the Monopolists by the Monopolists and for the Monopolists.' HIPP, supports, and complication are accurate. Note (not a flag): because it predates the Sherman Act (1890) by a year, it is useful evidence that demands for regulation preceded the legislation."
+   },
+   {
+    "where": "Doc2",
+    "verdict": "sound",
+    "note": "Excerpt is genuine (The Jungle, ch. 3). Sinclair was a socialist; novel published in book form 1906; it fed public pressure for the Meat Inspection Act and Pure Food and Drug Act (both June 30, 1906). The complication (Sinclair aimed at labor conditions, public reacted to food safety—'hit it in the stomach') is a standard and accurate point. Minor: the excerpt documents lax inspection, not concentration per se; writers should link it to the Beef Trust explicitly to fit the prompt."
+   },
+   {
+    "where": "Doc3",
+    "verdict": "sound",
+    "note": "Figures match Census Bureau historical data (Gibson & Jung, 2006 working paper): foreign-born share 13.3% (1880), 14.8% (1890), 13.6% (1900), 14.7% (1910), so the '13 to 15 percent' claim is correct. Table does not address regulation or concentration; the outline already flags it as weak fit and a replacement candidate, which is the right call."
+   },
+   {
+    "where": "Prompt",
+    "verdict": "fix",
+    "note": "Prompt is historically well-formed and standard for Period 6/7. However, with only three resolved documents—two from critics of trusts and one contextual immigration table unrelated to regulation—the set does not yet support a balanced 'evaluate the extent' argument. It needs at least the legislative text (Doc 4), the Roosevelt excerpt (Doc 5), and especially a business/limited-government counter-source (Doc 6) before it is answerable as a DBQ."
+   }
+  ],
+  "flags": [
+   {
+    "where": "Prompt / document set",
+    "kind": "other",
+    "detail": "Documents 4–7 are unresolved; the current three documents all come from the anti-trust or contextual side, with no counter-perspective (e.g., U.S. v. E.C. Knight 1895, Sumner, or Carnegie), so the prompt cannot presently be evaluated for 'extent.' Doc 3 is acknowledged as a poor fit and should be replaced with an industrial-concentration statistic (e.g., HSUS data on mergers 1895–1904 or share of output by largest firms)."
+   }
+  ],
+  "result": "outline facts sound; prompt NOT answerable until documents 4-7 (incl. a counter-perspective) are fixed"
+ }
+}

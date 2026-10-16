@@ -1,0 +1,4169 @@
+[
+ {
+  "candidateKey": "ap_statistics-m01-k0",
+  "cellId": "ap_statistics-m01",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "4.4",
+  "unitCode": "4",
+  "skillPrimary": "4.E",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_t_procedure_conditions",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "The student must (1) recognize the twin pairing as matched pairs, (2) recognize that normality must be checked on the differences rather than on either group's values, and (3) read the dotplot description and judge that n=14 is too small to overcome strong skew and an outlier. The result of each step carries into the next. Two distractors survive step 1 and fail only on the normality check. The stem is short, there is no arithmetic, and the wording is clear, so no unfair sources are involved.",
+  "payload": {
+   "archetype": "st_t_procedure_conditions",
+   "topic": "4.4",
+   "skill": "4.E",
+   "calculator": "allowed",
+   "stem": "A nutritionist wants to know whether a new diet changes the mean weight loss compared with a standard diet. In each of $14$ randomly selected pairs of twins, one twin is randomly assigned to each diet. A dotplot of the $14$ differences (new diet minus standard diet) is strongly right-skewed with an outlier, and a dotplot of the $14$ weight losses on the new diet is roughly symmetric with no outliers. Which of the following identifies the appropriate $t$ procedure to compare the means and states whether its normality condition is met?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Two-sample $t$ procedure; the normality condition is met, because the dotplot of the $14$ weight losses on the new diet is roughly symmetric with no outliers",
+     "why": "Treats the two sets of measurements as two independent samples although the same individuals (or matched pairs) produced both sets.",
+     "value": null
+    },
+    {
+     "text": "Matched-pairs $t$ procedure; the normality condition is met, because the dotplot of the $14$ weight losses on the new diet is roughly symmetric with no outliers",
+     "why": "Checks the shape of one set of measurements instead of the shape of the differences.",
+     "value": null
+    },
+    {
+     "text": "Matched-pairs $t$ procedure; the normality condition is not met, because the values before and after are dependent",
+     "why": "The pairs are meant to be dependent; the normality condition is about the shape of the differences, not about independence of the two measurements.",
+     "value": null
+    },
+    {
+     "text": "Matched-pairs $t$ procedure; the normality condition is not met, because there are only $14$ differences and they are strongly right-skewed with an outlier",
+     "why": "The pairs are the units, so the differences must be checked: $14 < 30$ and their dotplot is strongly skewed, so the condition is not met.",
+     "value": null
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 115,
+   "facts": [
+    "paired",
+    "n=14",
+    "verdict=not"
+   ],
+   "blueprint": {
+    "id": "st_t_procedure_conditions",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Choose between a matched-pairs and a two-sample t procedure from the design and verify the normality condition on the correct data",
+    "topic": "4.4",
+    "skill": "4.E",
+    "student_thinking": [
+     "Decide from the design that the same units are measured twice, so the data are matched pairs",
+     "Identify the quantity whose distribution must be checked: the differences, not the separate sets of measurements",
+     "Apply the sample-size and dotplot guideline to the differences to decide whether the condition is met"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the design (same units measured twice) decides the procedure, and the normality condition is checked on the differences",
+      "evidence": "the stem states how the data were collected and describes the dotplots of the differences and of one set of measurements"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "independent_samples_for_pairs",
+      "description": "uses a two-sample procedure for data from the same individuals"
+     },
+     {
+      "id": "wrong_data_checked",
+      "description": "checks the shape of the original measurements instead of the differences"
+     },
+     {
+      "id": "rule_misapplied",
+      "description": "uses the sample-size rule or independence in place of the shape of the differences"
+     }
+    ],
+    "verification": {
+     "independent_path": "the verdict is recomputed from a table of (shape, size) pairs for the differences and for the measurements; exactly one option has the correct procedure, the correct data and the correct verdict",
+     "method": "design and shape/size truth table"
+    },
+    "judgment_demand": [
+     "procedure_choice",
+     "condition_check"
+    ]
+   },
+   "difficulty_signals": {
+    "steps": [
+     "Decide from the design that the same units are measured twice, so the data are matched pairs",
+     "Identify the quantity whose distribution must be checked: the differences, not the separate sets of measurements",
+     "Apply the sample-size and dotplot guideline to the differences to decide whether the condition is met"
+    ],
+    "concepts": [
+     "choosing matched-pairs versus two independent samples",
+     "normality condition for t procedures"
+    ],
+    "representations": 1,
+    "distractor_fail_step": {
+     "Two-sample $t$ procedure; the normality condition is met, because the dotplot of the $14$ weight losses on the new diet is roughly symmetric with no outliers": 1,
+     "Matched-pairs $t$ procedure; the normality condition is met, because the dotplot of the $14$ weight losses on the new diet is roughly symmetric with no outliers": 2,
+     "Matched-pairs $t$ procedure; the normality condition is not met, because the values before and after are dependent": 3
+    },
+    "arithmetic": "none"
+   },
+   "seed": 9400,
+   "pack_id": "st_t_procedure_conditions-s9400",
+   "explanation_en": "The correct answer is Matched-pairs $t$ procedure; the normality condition is not met, because there are only $14$ differences and they are strongly right-skewed with an outlier. The pairs are the units, so the differences must be checked: $14 < 30$ and their dotplot is strongly skewed, so the condition is not met.\nTwo-sample $t$ procedure; the normality condition is met, because the dotplot of the $14$ weight losses on the new diet is roughly symmetric with no outliers is incorrect: Treats the two sets of measurements as two independent samples although the same individuals (or matched pairs) produced both sets.\nMatched-pairs $t$ procedure; the normality condition is met, because the dotplot of the $14$ weight losses on the new diet is roughly symmetric with no outliers is incorrect: Checks the shape of one set of measurements instead of the shape of the differences.\nMatched-pairs $t$ procedure; the normality condition is not met, because the values before and after are dependent is incorrect: The pairs are meant to be dependent; the normality condition is about the shape of the differences, not about independence of the two measurements."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_t_procedure_conditions",
+   "facts": [
+    "paired",
+    "n=14",
+    "verdict=not"
+   ],
+   "seed": 9400
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. The twin-pair design makes this a matched-pairs setting, and the 14 differences are strongly skewed with an outlier, so normality fails. Option D is the unique key. Each distractor encodes a distinct misconception and the explanation covers all three.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Targets choosing the procedure and checking the normality condition, which fits topic 4.4 and skill 4.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option D is the only correct choice, and the independent solver agrees."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors are independent samples, wrong data checked, and dependence confused with normality. The explanation covers each one."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short reading load, no arithmetic, calculator designation consistent."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The student must (1) recognize the twin pairing as matched pairs, (2) recognize that normality must be checked on the differences rather than on either group's values, and (3) read the dotplot description and judge that n=14 is too small to overcome strong skew and an outlier. The result of each step carries into the next. Two distractors survive step 1 and fail only on the normality check. The stem is short, there is no arithmetic, and the wording is clear, so no unfair sources are involved.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m01-k1",
+  "cellId": "ap_statistics-m01",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "4.4",
+  "unitCode": "4",
+  "skillPrimary": "4.E",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_t_procedure_conditions",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Student must (1) recognize the before/after design as matched pairs, (2) identify that normality applies to the differences rather than the before scores, and (3) judge that n=20 with strong right skew and an outlier fails the normality condition. This combines procedure choice with condition checking, and two distractors survive the first step and fail only later. No arithmetic, brief stem, in-scope content, and no ambiguity, so the difficulty comes from legitimate reasoning.",
+  "payload": {
+   "archetype": "st_t_procedure_conditions",
+   "topic": "4.4",
+   "skill": "4.E",
+   "calculator": "allowed",
+   "stem": "A teacher wants to know whether a tutoring program changes the mean score on a vocabulary quiz. Each of $20$ randomly selected students takes the quiz before the program and takes a similar quiz after the program. A dotplot of the $20$ differences (after minus before) is strongly right-skewed with an outlier, and a dotplot of the $20$ before scores is roughly symmetric with no outliers. Which of the following identifies the appropriate $t$ procedure to compare the means and states whether its normality condition is met?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Matched-pairs $t$ procedure; the normality condition is not met, because the values before and after are dependent",
+     "why": "The pairs are meant to be dependent; the normality condition is about the shape of the differences, not about independence of the two measurements.",
+     "value": null
+    },
+    {
+     "text": "Matched-pairs $t$ procedure; the normality condition is not met, because there are only $20$ differences and they are strongly right-skewed with an outlier",
+     "why": "The pairs are the units, so the differences must be checked: $20 < 30$ and their dotplot is strongly skewed, so the condition is not met.",
+     "value": null
+    },
+    {
+     "text": "Matched-pairs $t$ procedure; the normality condition is met, because the dotplot of the $20$ before scores is roughly symmetric with no outliers",
+     "why": "Checks the shape of one set of measurements instead of the shape of the differences.",
+     "value": null
+    },
+    {
+     "text": "Two-sample $t$ procedure; the normality condition is met, because the dotplot of the $20$ before scores is roughly symmetric with no outliers",
+     "why": "Treats the two sets of measurements as two independent samples although the same individuals (or matched pairs) produced both sets.",
+     "value": null
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 115,
+   "facts": [
+    "paired",
+    "n=20",
+    "verdict=not"
+   ],
+   "blueprint": {
+    "id": "st_t_procedure_conditions",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Choose between a matched-pairs and a two-sample t procedure from the design and verify the normality condition on the correct data",
+    "topic": "4.4",
+    "skill": "4.E",
+    "student_thinking": [
+     "Decide from the design that the same units are measured twice, so the data are matched pairs",
+     "Identify the quantity whose distribution must be checked: the differences, not the separate sets of measurements",
+     "Apply the sample-size and dotplot guideline to the differences to decide whether the condition is met"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the design (same units measured twice) decides the procedure, and the normality condition is checked on the differences",
+      "evidence": "the stem states how the data were collected and describes the dotplots of the differences and of one set of measurements"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "independent_samples_for_pairs",
+      "description": "uses a two-sample procedure for data from the same individuals"
+     },
+     {
+      "id": "wrong_data_checked",
+      "description": "checks the shape of the original measurements instead of the differences"
+     },
+     {
+      "id": "rule_misapplied",
+      "description": "uses the sample-size rule or independence in place of the shape of the differences"
+     }
+    ],
+    "verification": {
+     "independent_path": "the verdict is recomputed from a table of (shape, size) pairs for the differences and for the measurements; exactly one option has the correct procedure, the correct data and the correct verdict",
+     "method": "design and shape/size truth table"
+    },
+    "judgment_demand": [
+     "procedure_choice",
+     "condition_check"
+    ]
+   },
+   "difficulty_signals": {
+    "steps": [
+     "Decide from the design that the same units are measured twice, so the data are matched pairs",
+     "Identify the quantity whose distribution must be checked: the differences, not the separate sets of measurements",
+     "Apply the sample-size and dotplot guideline to the differences to decide whether the condition is met"
+    ],
+    "concepts": [
+     "choosing matched-pairs versus two independent samples",
+     "normality condition for t procedures"
+    ],
+    "representations": 1,
+    "distractor_fail_step": {
+     "Two-sample $t$ procedure; the normality condition is met, because the dotplot of the $20$ before scores is roughly symmetric with no outliers": 1,
+     "Matched-pairs $t$ procedure; the normality condition is met, because the dotplot of the $20$ before scores is roughly symmetric with no outliers": 2,
+     "Matched-pairs $t$ procedure; the normality condition is not met, because the values before and after are dependent": 3
+    },
+    "arithmetic": "none"
+   },
+   "seed": 9401,
+   "pack_id": "st_t_procedure_conditions-s9401",
+   "explanation_en": "The correct answer is Matched-pairs $t$ procedure; the normality condition is not met, because there are only $20$ differences and they are strongly right-skewed with an outlier. The pairs are the units, so the differences must be checked: $20 < 30$ and their dotplot is strongly skewed, so the condition is not met.\nMatched-pairs $t$ procedure; the normality condition is not met, because the values before and after are dependent is incorrect: The pairs are meant to be dependent; the normality condition is about the shape of the differences, not about independence of the two measurements.\nMatched-pairs $t$ procedure; the normality condition is met, because the dotplot of the $20$ before scores is roughly symmetric with no outliers is incorrect: Checks the shape of one set of measurements instead of the shape of the differences.\nTwo-sample $t$ procedure; the normality condition is met, because the dotplot of the $20$ before scores is roughly symmetric with no outliers is incorrect: Treats the two sets of measurements as two independent samples although the same individuals (or matched pairs) produced both sets."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_t_procedure_conditions",
+   "facts": [
+    "paired",
+    "n=20",
+    "verdict=not"
+   ],
+   "seed": 9401
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key (B) is the unique correct answer: the design is matched pairs, and the normality condition fails because the 20 differences are strongly skewed with an outlier. Each distractor encodes a distinct misconception and is explained. The reading load is light and the scope matches Topic 4.4 / Skill 4.E. The only weakness is that the correct option is the longest, which is a mild giveaway.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must (1) recognize the before/after design as matched pairs, (2) identify that normality applies to the differences rather than the before scores, and (3) judge that n=20 with strong right skew and an outlier fails the normality condition. This combines procedure choice with condition checking, and two distractors survive the first step and fail only later. No arithmetic, brief stem, in-scope content, and no ambiguity, so the difficulty comes from legitimate reasoning.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m02-k0",
+  "cellId": "ap_statistics-m02",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "4.3",
+  "unitCode": "4",
+  "skillPrimary": "4.G",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_ci_test_consistency",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "The student must see that the 95% CI corresponds to a two-sided test at alpha = 0.05, check that 11.7 falls outside (10.7, 11.5), and turn that into a reject decision with correctly worded evidence. This needs 3 sequential steps and 2 combined concepts (CI-test duality, decision wording). Two distractors survive the first step and fail only on the decision or its wording. There is no arithmetic, the reading load is light, and no unfair difficulty sources are present.",
+  "payload": {
+   "archetype": "st_ci_test_consistency",
+   "topic": "4.3",
+   "skill": "4.G",
+   "calculator": "allowed",
+   "stem": "A random sample of $25$ bags of coffee gives a $95\\%$ confidence interval of $(10.7, 11.5)$ for $\\mu$, the mean weight, in ounces, of all bags of coffee filled by a machine. The same sample is used to test $H_0: \\mu = 11.7$ against $H_a: \\mu \\ne 11.7$ at significance level $\\alpha = 0.05$. Assume that the conditions for inference are met. Which of the following is a correct conclusion?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Fail to reject $H_0$; there is not convincing evidence that $\\mu \\ne 11.7$",
+     "why": "Places $11.7$ inside the interval, but it lies outside $(10.7, 11.5)$.",
+     "value": null
+    },
+    {
+     "text": "No conclusion can be reached, because a confidence interval cannot be used to carry out a significance test",
+     "why": "Treats the interval and the test as unrelated, but a two-sided interval at confidence level $1-\\alpha$ gives the decision for a two-sided test at level $\\alpha$.",
+     "value": null
+    },
+    {
+     "text": "Fail to reject $H_0$; there is convincing evidence that $\\mu = 11.7$",
+     "why": "Failing to reject $H_0$ never gives evidence that $H_0$ is true.",
+     "value": null
+    },
+    {
+     "text": "Reject $H_0$; there is convincing evidence that $\\mu \\ne 11.7$",
+     "why": "The $95\\%$ interval matches a two-sided test at $\\alpha = 0.05$, and $11.7$ is outside $(10.7, 11.5)$, so $H_0$ is rejected (the P-value is about $0.005$).",
+     "value": null
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 115,
+   "facts": [
+    "type=two_out",
+    "conf=95",
+    "p=0.0049"
+   ],
+   "blueprint": {
+    "id": "st_ci_test_consistency",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Use a confidence interval to reach the decision of a matching significance test, including the direction of a one-sided alternative",
+    "topic": "4.3",
+    "skill": "4.G",
+    "student_thinking": [
+     "Match the confidence level of the interval to the significance level and the sidedness of the test",
+     "Locate the hypothesized value relative to the interval and relative to the direction of the alternative hypothesis",
+     "Turn the location into a decision about $H_0$ and state the conclusion about the claim without accepting the null hypothesis"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "a two-sided interval at confidence level $1-2\\alpha$ matches a one-sided test at level $\\alpha$, and a two-sided interval at level $1-\\alpha$ matches a two-sided test",
+      "evidence": "the stem gives the interval, the null value, the alternative and the significance level"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "interval_unrelated_to_test",
+      "description": "believes an interval cannot give a test decision"
+     },
+     {
+      "id": "location_misread_or_direction_ignored",
+      "description": "misplaces the null value or ignores the direction of the alternative"
+     },
+     {
+      "id": "accepting_the_null",
+      "description": "treats failing to reject as evidence that the null hypothesis is true"
+     }
+    ],
+    "verification": {
+     "independent_path": "the decision is found from the position of the null value in the rounded interval and again from the t statistic and P-value (scipy and a numerically integrated t cdf), and the two must agree with a margin from the significance level",
+     "method": "interval position and recomputed P-value"
+    },
+    "judgment_demand": [
+     "claim_justification",
+     "interpretation"
+    ]
+   },
+   "difficulty_signals": {
+    "steps": [
+     "Match the confidence level of the interval to the significance level and the sidedness of the test",
+     "Locate the hypothesized value relative to the interval and relative to the direction of the alternative hypothesis",
+     "Turn the location into a decision about $H_0$ and state the conclusion about the claim without accepting the null hypothesis"
+    ],
+    "concepts": [
+     "duality of confidence intervals and significance tests",
+     "decision wording and direction of the alternative hypothesis"
+    ],
+    "representations": 1,
+    "distractor_fail_step": {
+     "Fail to reject $H_0$; there is not convincing evidence that $\\mu \\ne 11.7$": 2,
+     "Fail to reject $H_0$; there is convincing evidence that $\\mu = 11.7$": 3,
+     "No conclusion can be reached, because a confidence interval cannot be used to carry out a significance test": 1
+    },
+    "arithmetic": "none"
+   },
+   "seed": 9400,
+   "pack_id": "st_ci_test_consistency-s9400",
+   "explanation_en": "The correct answer is Reject $H_0$; there is convincing evidence that $\\mu \\ne 11.7$. The $95\\%$ interval matches a two-sided test at $\\alpha = 0.05$, and $11.7$ is outside $(10.7, 11.5)$, so $H_0$ is rejected (the P-value is about $0.005$).\nFail to reject $H_0$; there is not convincing evidence that $\\mu \\ne 11.7$ is incorrect: Places $11.7$ inside the interval, but it lies outside $(10.7, 11.5)$.\nNo conclusion can be reached, because a confidence interval cannot be used to carry out a significance test is incorrect: Treats the interval and the test as unrelated, but a two-sided interval at confidence level $1-\\alpha$ gives the decision for a two-sided test at level $\\alpha$.\nFail to reject $H_0$; there is convincing evidence that $\\mu = 11.7$ is incorrect: Failing to reject $H_0$ never gives evidence that $H_0$ is true."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_ci_test_consistency",
+   "facts": [
+    "type=two_out",
+    "conf=95",
+    "p=0.0049"
+   ],
+   "seed": 9400
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Duality of CI and two-sided test; justifying a claim from an interval (4.3/4.G)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "11.7 is outside (10.7, 11.5), so reject H0; the key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The stem is self-contained and the stimulus is correctly none. The wording is clear and the conditions are stated as met."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions, each explained in the rationale; no format giveaway."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, no arithmetic, typical AP load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, well-scoped duality question with a unique key and three distinct misconception distractors, and it passes all five criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The student must see that the 95% CI corresponds to a two-sided test at alpha = 0.05, check that 11.7 falls outside (10.7, 11.5), and turn that into a reject decision with correctly worded evidence. This needs 3 sequential steps and 2 combined concepts (CI-test duality, decision wording). Two distractors survive the first step and fail only on the decision or its wording. There is no arithmetic, the reading load is light, and no unfair difficulty sources are present.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m02-k1",
+  "cellId": "ap_statistics-m02",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "4.3",
+  "unitCode": "4",
+  "skillPrimary": "4.G",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_ci_test_consistency",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Meets the exam_prep rubric: 3 sequential steps and 2 combined concepts. The student must link a 95% two-sided CI to a one-sided test at alpha=0.025, notice that 29.8 lies above the interval, and then check this against the direction of Ha to conclude fail to reject. Two distractors survive the duality step and fail only at the direction check. No arithmetic, low reading load, and relevant context, so the difficulty comes from legitimate reasoning.",
+  "payload": {
+   "archetype": "st_ci_test_consistency",
+   "topic": "4.3",
+   "skill": "4.G",
+   "calculator": "allowed",
+   "stem": "A random sample of $17$ commuters gives a $95\\%$ confidence interval of $(20.8, 27.6)$ for $\\mu$, the mean time, in minutes, that all commuters in a city spend on the way to work. The same sample is used to test $H_0: \\mu = 29.8$ against $H_a: \\mu > 29.8$ at significance level $\\alpha = 0.025$. Assume that the conditions for inference are met. Which of the following is a correct conclusion?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "No conclusion can be reached, because a confidence interval cannot be used to carry out a significance test",
+     "why": "Treats the interval and the test as unrelated, but a two-sided interval at confidence level $1-2\\alpha$ gives the decision for a test at level $\\alpha$ in the direction supported by the interval.",
+     "value": null
+    },
+    {
+     "text": "Reject $H_0$; there is convincing evidence that $\\mu > 29.8$",
+     "why": "Sees $29.8$ outside the interval but ignores which side supports $H_a$.",
+     "value": null
+    },
+    {
+     "text": "Fail to reject $H_0$; there is not convincing evidence that $\\mu > 29.8$",
+     "why": "A $95\\%$ two-sided interval matches a one-sided test at $\\alpha = 0.025$; $29.8$ lies above the interval, on the side opposite to the alternative, so the sample gives no support for $H_a$ and $H_0$ is not rejected (the P-value is about $0.998$).",
+     "value": null
+    },
+    {
+     "text": "Reject $H_0$; there is convincing evidence that $\\mu < 29.8$",
+     "why": "Rejects in the direction opposite to the alternative hypothesis, which the test does not support.",
+     "value": null
+    }
+   ],
+   "key_index": 2,
+   "est_seconds": 115,
+   "facts": [
+    "type=one_other",
+    "conf=95",
+    "p=0.9985"
+   ],
+   "blueprint": {
+    "id": "st_ci_test_consistency",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Use a confidence interval to reach the decision of a matching significance test, including the direction of a one-sided alternative",
+    "topic": "4.3",
+    "skill": "4.G",
+    "student_thinking": [
+     "Match the confidence level of the interval to the significance level and the sidedness of the test",
+     "Locate the hypothesized value relative to the interval and relative to the direction of the alternative hypothesis",
+     "Turn the location into a decision about $H_0$ and state the conclusion about the claim without accepting the null hypothesis"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "a two-sided interval at confidence level $1-2\\alpha$ matches a one-sided test at level $\\alpha$, and a two-sided interval at level $1-\\alpha$ matches a two-sided test",
+      "evidence": "the stem gives the interval, the null value, the alternative and the significance level"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "interval_unrelated_to_test",
+      "description": "believes an interval cannot give a test decision"
+     },
+     {
+      "id": "location_misread_or_direction_ignored",
+      "description": "misplaces the null value or ignores the direction of the alternative"
+     },
+     {
+      "id": "accepting_the_null",
+      "description": "treats failing to reject as evidence that the null hypothesis is true"
+     }
+    ],
+    "verification": {
+     "independent_path": "the decision is found from the position of the null value in the rounded interval and again from the t statistic and P-value (scipy and a numerically integrated t cdf), and the two must agree with a margin from the significance level",
+     "method": "interval position and recomputed P-value"
+    },
+    "judgment_demand": [
+     "claim_justification",
+     "interpretation"
+    ]
+   },
+   "difficulty_signals": {
+    "steps": [
+     "Match the confidence level of the interval to the significance level and the sidedness of the test",
+     "Locate the hypothesized value relative to the interval and relative to the direction of the alternative hypothesis",
+     "Turn the location into a decision about $H_0$ and state the conclusion about the claim without accepting the null hypothesis"
+    ],
+    "concepts": [
+     "duality of confidence intervals and significance tests",
+     "decision wording and direction of the alternative hypothesis"
+    ],
+    "representations": 1,
+    "distractor_fail_step": {
+     "Reject $H_0$; there is convincing evidence that $\\mu > 29.8$": 3,
+     "Reject $H_0$; there is convincing evidence that $\\mu < 29.8$": 3,
+     "No conclusion can be reached, because a confidence interval cannot be used to carry out a significance test": 1
+    },
+    "arithmetic": "none"
+   },
+   "seed": 9401,
+   "pack_id": "st_ci_test_consistency-s9401",
+   "explanation_en": "The correct answer is Fail to reject $H_0$; there is not convincing evidence that $\\mu > 29.8$. A $95\\%$ two-sided interval matches a one-sided test at $\\alpha = 0.025$; $29.8$ lies above the interval, on the side opposite to the alternative, so the sample gives no support for $H_a$ and $H_0$ is not rejected (the P-value is about $0.998$).\nNo conclusion can be reached, because a confidence interval cannot be used to carry out a significance test is incorrect: Treats the interval and the test as unrelated, but a two-sided interval at confidence level $1-2\\alpha$ gives the decision for a test at level $\\alpha$ in the direction supported by the interval.\nReject $H_0$; there is convincing evidence that $\\mu > 29.8$ is incorrect: Sees $29.8$ outside the interval but ignores which side supports $H_a$.\nReject $H_0$; there is convincing evidence that $\\mu < 29.8$ is incorrect: Rejects in the direction opposite to the alternative hypothesis, which the test does not support."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_ci_test_consistency",
+   "facts": [
+    "type=one_other",
+    "conf=95",
+    "p=0.9985"
+   ],
+   "seed": 9401
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Duality of CI and test with a one-sided alternative; justifying a claim from an interval fits 4.3 and skill 4.G."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The interval lies below 29.8, so the data oppose H_a and the P-value is about 0.998. Fail to reject H0 is the unique correct choice."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is complete: interval, hypotheses, alpha, and conditions assumed met."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The three distractors encode distinct misconceptions (interval unrelated to test, direction ignored, wrong direction of rejection). The explanation covers each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "No arithmetic; the item takes about a minute. Option lengths are parallel enough. It is a typical AP-style conceptual item."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. It tests the CI-test duality with a one-sided alternative, has a unique key (fail to reject), distinct distractors, and a light reading and computation load."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Meets the exam_prep rubric: 3 sequential steps and 2 combined concepts. The student must link a 95% two-sided CI to a one-sided test at alpha=0.025, notice that 29.8 lies above the interval, and then check this against the direction of Ha to conclude fail to reject. Two distractors survive the duality step and fail only at the direction check. No arithmetic, low reading load, and relevant context, so the difficulty comes from legitimate reasoning.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m03-k0",
+  "cellId": "ap_statistics-m03",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "4.1",
+  "unitCode": "4",
+  "skillPrimary": "3.D",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_sampling_dist_xbar",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "The student must (1) recognize that the mean of the sampling distribution equals mu = 72, not the single observed sample mean of 75, (2) compute the standard error sigma/sqrt(n) = 20/5 = 4, and (3) justify the shape: a normal population gives a normal sampling distribution. Two concepts are combined (standard error and shape). Two distractors survive the first step and fail later, e.g. the right mean with the wrong SD or shape. The arithmetic is light and the stem is short, so the difficulty comes from the concepts rather than from unfair sources.",
+  "payload": {
+   "archetype": "st_sampling_dist_xbar",
+   "topic": "4.1",
+   "skill": "3.D",
+   "calculator": "allowed",
+   "stem": "The population distribution of the amount of time, in minutes, that customers wait to be served at a bank is approximately normal, with mean $\\mu = 72$ and standard deviation $\\sigma = 20$. One random sample of $25$ observations from this population has a sample mean of $75$. Consider the sample means of all possible random samples of size $25$ from this population. Which of the following describes the sampling distribution of the sample mean $\\bar{x}$?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Mean $72$, standard deviation $4$, skewed to the right",
+     "why": "Requires a sample size of at least $30$ even though the population is already approximately normal.",
+     "value": null
+    },
+    {
+     "text": "Mean $72$, standard deviation $4$, approximately normal",
+     "why": "The mean of $\\bar{x}$ is $\\mu=72$, the standard deviation is $\\sigma/\\sqrt{n} = 20/\\sqrt{25} = 4$. The population is approximately normal, so the sampling distribution of $\\bar{x}$ is approximately normal for every sample size.",
+     "value": null
+    },
+    {
+     "text": "Mean $75$, standard deviation $4$, approximately normal",
+     "why": "Centers the sampling distribution at the mean of the one sample that was observed instead of at the population mean.",
+     "value": null
+    },
+    {
+     "text": "Mean $72$, standard deviation $0.8$, approximately normal",
+     "why": "Divides the population standard deviation by $n$ instead of by $\\sqrt{n}$.",
+     "value": null
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 105,
+   "facts": [
+    "case=normal_small",
+    "n=25",
+    "sigma=20"
+   ],
+   "blueprint": {
+    "id": "st_sampling_dist_xbar",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Describe the center, spread and shape of the sampling distribution of a sample mean from the population and the sample size",
+    "topic": "4.1",
+    "skill": "3.D",
+    "student_thinking": [
+     "Identify the center of the sampling distribution as the population mean, not the mean of the one observed sample",
+     "Compute the standard deviation of the sample mean as the population standard deviation divided by the square root of the sample size",
+     "Use the shape of the population and the sample size to decide whether the Central Limit Theorem makes the sampling distribution approximately normal"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the sampling distribution of the mean has mean mu, standard deviation sigma over root n, and is approximately normal when the population is normal or the sample size is large",
+      "evidence": "the stem gives the population shape, mean and standard deviation, the sample size and one observed sample mean"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "center_at_observed_mean",
+      "description": "centers the distribution at the one observed sample mean"
+     },
+     {
+      "id": "spread_not_reduced",
+      "description": "forgets to divide by the square root of the sample size"
+     },
+     {
+      "id": "shape_clt_misapplied",
+      "description": "applies or withholds the Central Limit Theorem incorrectly"
+     }
+    ],
+    "verification": {
+     "independent_path": "the standard deviation of a mean of n independent observations is recomputed from the variance of a weighted sum with numpy and compared with the closed form; the shape follows from a table of (population shape, sample size)",
+     "method": "variance of a weighted sum and shape table"
+    },
+    "judgment_demand": [
+     "interpretation",
+     "calculated_value_decision"
+    ]
+   },
+   "difficulty_signals": {
+    "steps": [
+     "Identify the center of the sampling distribution as the population mean, not the mean of the one observed sample",
+     "Compute the standard deviation of the sample mean as the population standard deviation divided by the square root of the sample size",
+     "Use the shape of the population and the sample size to decide whether the Central Limit Theorem makes the sampling distribution approximately normal"
+    ],
+    "concepts": [
+     "standard error of a sample mean",
+     "Central Limit Theorem and shape"
+    ],
+    "representations": 1,
+    "distractor_fail_step": {
+     "Mean $75$, standard deviation $4$, approximately normal": 1,
+     "Mean $72$, standard deviation $0.8$, approximately normal": 2,
+     "Mean $72$, standard deviation $4$, skewed to the right": 3
+    },
+    "arithmetic": "light"
+   },
+   "seed": 9400,
+   "pack_id": "st_sampling_dist_xbar-s9400",
+   "explanation_en": "The correct answer is Mean $72$, standard deviation $4$, approximately normal. The mean of $\\bar{x}$ is $\\mu=72$, the standard deviation is $\\sigma/\\sqrt{n} = 20/\\sqrt{25} = 4$. The population is approximately normal, so the sampling distribution of $\\bar{x}$ is approximately normal for every sample size.\nMean $72$, standard deviation $4$, skewed to the right is incorrect: Requires a sample size of at least $30$ even though the population is already approximately normal.\nMean $75$, standard deviation $4$, approximately normal is incorrect: Centers the sampling distribution at the mean of the one sample that was observed instead of at the population mean.\nMean $72$, standard deviation $0.8$, approximately normal is incorrect: Divides the population standard deviation by $n$ instead of by $\\sqrt{n}$."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_sampling_dist_xbar",
+   "facts": [
+    "case=normal_small",
+    "n=25",
+    "sigma=20"
+   ],
+   "seed": 9400
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Sampling distribution of a sample mean (center, spread, shape) fits topic 4.1 and skill 3.D (calculating the mean and standard deviation of a distribution). No out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Key is unique: mean 72, SD 20/5 = 4, approximately normal because the population is normal. The other options each have exactly one defect."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed, and the stem is complete and clear. The observed sample mean of 75 is an intentional distractor."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception: centering at the observed mean, dividing by n, and misapplying the CLT to shape. The explanation covers each one. The first distractor's 'why' text is slightly awkward (it says the shape 'requires n at least 30'), but it is acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Light arithmetic, short reading, and typical AP length. The options are parallel in format. Calculator use is permitted but not needed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean, standard item on the sampling distribution of a sample mean. The key is unique and the distractors are distinct and realistic. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The student must (1) recognize that the mean of the sampling distribution equals mu = 72, not the single observed sample mean of 75, (2) compute the standard error sigma/sqrt(n) = 20/5 = 4, and (3) justify the shape: a normal population gives a normal sampling distribution. Two concepts are combined (standard error and shape). Two distractors survive the first step and fail later, e.g. the right mean with the wrong SD or shape. The arithmetic is light and the stem is short, so the difficulty comes from the concepts rather than from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m03-k1",
+  "cellId": "ap_statistics-m03",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "4.1",
+  "unitCode": "4",
+  "skillPrimary": "3.D",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_sampling_dist_xbar",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Student must identify the mean of the sampling distribution as mu (not the single sample mean 57), compute SE = 12/sqrt(16) = 3, and judge shape: n = 16 is too small for CLT to override strong right skew. This is 3 chained steps over 2 concepts (standard error and CLT/shape), and distractors fail at later steps. Arithmetic is light and the stem is short, so difficulty comes from concept integration, not unfair sources.",
+  "payload": {
+   "archetype": "st_sampling_dist_xbar",
+   "topic": "4.1",
+   "skill": "3.D",
+   "calculator": "allowed",
+   "stem": "The population distribution of the weight, in pounds, of the luggage checked by passengers on a flight is strongly skewed to the right, with mean $\\mu = 60$ and standard deviation $\\sigma = 12$. One random sample of $16$ observations from this population has a sample mean of $57$. Consider the sample means of all possible random samples of size $16$ from this population. Which of the following describes the sampling distribution of the sample mean $\\bar{x}$?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Mean $60$, standard deviation $3$, approximately normal",
+     "why": "Applies the Central Limit Theorem to a sample size that is too small for it when the population is strongly skewed.",
+     "value": null
+    },
+    {
+     "text": "Mean $60$, standard deviation $3$, skewed to the right",
+     "why": "The mean of $\\bar{x}$ is $\\mu=60$, the standard deviation is $\\sigma/\\sqrt{n} = 12/\\sqrt{16} = 3$. The population is strongly skewed and $16 < 30$, so the Central Limit Theorem does not apply and the sampling distribution of $\\bar{x}$ is still skewed to the right.",
+     "value": null
+    },
+    {
+     "text": "Mean $60$, standard deviation $0.75$, skewed to the right",
+     "why": "Divides the population standard deviation by $n$ instead of by $\\sqrt{n}$.",
+     "value": null
+    },
+    {
+     "text": "Mean $57$, standard deviation $3$, skewed to the right",
+     "why": "Centers the sampling distribution at the mean of the one sample that was observed instead of at the population mean.",
+     "value": null
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 105,
+   "facts": [
+    "case=skew_small",
+    "n=16",
+    "sigma=12"
+   ],
+   "blueprint": {
+    "id": "st_sampling_dist_xbar",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Describe the center, spread and shape of the sampling distribution of a sample mean from the population and the sample size",
+    "topic": "4.1",
+    "skill": "3.D",
+    "student_thinking": [
+     "Identify the center of the sampling distribution as the population mean, not the mean of the one observed sample",
+     "Compute the standard deviation of the sample mean as the population standard deviation divided by the square root of the sample size",
+     "Use the shape of the population and the sample size to decide whether the Central Limit Theorem makes the sampling distribution approximately normal"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the sampling distribution of the mean has mean mu, standard deviation sigma over root n, and is approximately normal when the population is normal or the sample size is large",
+      "evidence": "the stem gives the population shape, mean and standard deviation, the sample size and one observed sample mean"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "center_at_observed_mean",
+      "description": "centers the distribution at the one observed sample mean"
+     },
+     {
+      "id": "spread_not_reduced",
+      "description": "forgets to divide by the square root of the sample size"
+     },
+     {
+      "id": "shape_clt_misapplied",
+      "description": "applies or withholds the Central Limit Theorem incorrectly"
+     }
+    ],
+    "verification": {
+     "independent_path": "the standard deviation of a mean of n independent observations is recomputed from the variance of a weighted sum with numpy and compared with the closed form; the shape follows from a table of (population shape, sample size)",
+     "method": "variance of a weighted sum and shape table"
+    },
+    "judgment_demand": [
+     "interpretation",
+     "calculated_value_decision"
+    ]
+   },
+   "difficulty_signals": {
+    "steps": [
+     "Identify the center of the sampling distribution as the population mean, not the mean of the one observed sample",
+     "Compute the standard deviation of the sample mean as the population standard deviation divided by the square root of the sample size",
+     "Use the shape of the population and the sample size to decide whether the Central Limit Theorem makes the sampling distribution approximately normal"
+    ],
+    "concepts": [
+     "standard error of a sample mean",
+     "Central Limit Theorem and shape"
+    ],
+    "representations": 1,
+    "distractor_fail_step": {
+     "Mean $57$, standard deviation $3$, skewed to the right": 1,
+     "Mean $60$, standard deviation $0.75$, skewed to the right": 2,
+     "Mean $60$, standard deviation $3$, approximately normal": 3
+    },
+    "arithmetic": "light"
+   },
+   "seed": 9401,
+   "pack_id": "st_sampling_dist_xbar-s9401",
+   "explanation_en": "The correct answer is Mean $60$, standard deviation $3$, skewed to the right. The mean of $\\bar{x}$ is $\\mu=60$, the standard deviation is $\\sigma/\\sqrt{n} = 12/\\sqrt{16} = 3$. The population is strongly skewed and $16 < 30$, so the Central Limit Theorem does not apply and the sampling distribution of $\\bar{x}$ is still skewed to the right.\nMean $60$, standard deviation $3$, approximately normal is incorrect: Applies the Central Limit Theorem to a sample size that is too small for it when the population is strongly skewed.\nMean $60$, standard deviation $0.75$, skewed to the right is incorrect: Divides the population standard deviation by $n$ instead of by $\\sqrt{n}$.\nMean $57$, standard deviation $3$, skewed to the right is incorrect: Centers the sampling distribution at the mean of the one sample that was observed instead of at the population mean."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_sampling_dist_xbar",
+   "facts": [
+    "case=skew_small",
+    "n=16",
+    "sigma=12"
+   ],
+   "seed": 9401
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Sampling distribution of x-bar: center, SD, shape via CLT. Matches 4.1 and 3.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Mean 60, SD 3, skewed right (n=16<30, strongly skewed population). Unique among options."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct named misconceptions; explanation covers each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 100 seconds, light arithmetic, typical AP MC format."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Clean, standard item on the sampling distribution of a sample mean with a unique key and distinct misconception-based distractors. Passes all criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must identify the mean of the sampling distribution as mu (not the single sample mean 57), compute SE = 12/sqrt(16) = 3, and judge shape: n = 16 is too small for CLT to override strong right skew. This is 3 chained steps over 2 concepts (standard error and CLT/shape), and distractors fail at later steps. Arithmetic is light and the stem is short, so difficulty comes from concept integration, not unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m04-k0",
+  "cellId": "ap_statistics-m04",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "5.4",
+  "unitCode": "5",
+  "skillPrimary": "4.D",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_residual_r2_model",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "The student must (1) read the residual plot and see there is no pattern, (2) interpret r^2 = 0.48 as the percent of variation explained, not as a measure of linearity, and (3) link both results to judge the student's claim. This combines two concepts and two sources, and distractors such as the residuals-sum-to-zero option and the r^2 cutoff option fail only at later steps. There is no arithmetic, the reading load is light, and the content stays within Unit 5 scope.",
+  "payload": {
+   "archetype": "st_residual_r2_model",
+   "topic": "5.4",
+   "skill": "4.D",
+   "calculator": "allowed",
+   "stem": "A least-squares regression line is used to predict the selling price of the car from the age of a car (in years), using $20$ observations. The residual plot is shown, and the coefficient of determination is $r^2 = 0.48$. A student says that a linear model is not appropriate because $r^2 = 0.48$ is small. Which of the following is the best response to the student?",
+   "stimulus": {
+    "kind": "stat_chart",
+    "description": "Residual plot with a horizontal line at zero",
+    "data": {
+     "chart": "scatter",
+     "data": {
+      "xTitle": "Age (years)",
+      "yTitle": "Residual",
+      "points": [
+       [
+        5,
+        0.12
+       ],
+       [
+        7,
+        2.25
+       ],
+       [
+        10,
+        -3.32
+       ],
+       [
+        11,
+        -0.23
+       ],
+       [
+        14,
+        -0.97
+       ],
+       [
+        16,
+        1.48
+       ],
+       [
+        24,
+        -1.75
+       ],
+       [
+        26,
+        3.92
+       ],
+       [
+        28,
+        -0.78
+       ],
+       [
+        32,
+        2.25
+       ],
+       [
+        34,
+        -0.73
+       ],
+       [
+        37,
+        -0.35
+       ],
+       [
+        39,
+        -0.67
+       ],
+       [
+        40,
+        -2.36
+       ],
+       [
+        41,
+        0.78
+       ],
+       [
+        45,
+        -0.7
+       ],
+       [
+        46,
+        0.48
+       ],
+       [
+        52,
+        3.34
+       ],
+       [
+        53,
+        -4
+       ],
+       [
+        59,
+        1.24
+       ]
+      ],
+      "fitLine": {
+       "slope": 0,
+       "intercept": 0
+      }
+     }
+    }
+   },
+   "options": [
+    {
+     "text": "The linear model is appropriate, because the residuals add up to $0$",
+     "why": "Reaches the right decision for the wrong reason: least-squares residuals always add up to $0$, whatever the model.",
+     "value": null
+    },
+    {
+     "text": "The linear model is appropriate, because the residual plot shows no pattern; the small $r^2$ means only that the model explains $48\\%$ of the variation in the response",
+     "why": "The residuals scatter randomly about $0$ with no pattern, so the linear model is appropriate; $r^2 = 0.48$ says the line explains about $48\\%$ of the variation but does not mean the form is wrong.",
+     "value": null
+    },
+    {
+     "text": "The linear model is not appropriate, because the residual plot shows a curved pattern that the line does not capture",
+     "why": "Misreads the residual plot: the residuals are randomly scattered, not curved.",
+     "value": null
+    },
+    {
+     "text": "The linear model is not appropriate, because an $r^2$ below $0.60$ shows that the relationship is not linear",
+     "why": "Treats a small $r^2$ as evidence that the form is not linear; a linear relationship with a lot of scatter can have a small $r^2$.",
+     "value": null
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 110,
+   "facts": [
+    "pattern=random",
+    "r2=0.48"
+   ],
+   "blueprint": {
+    "id": "st_residual_r2_model",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Assess a linear model from the residual plot and a stated r squared, and respond to a claim that uses r squared as the criterion",
+    "topic": "5.4",
+    "skill": "4.D",
+    "student_thinking": [
+     "Read the residual plot for a systematic pattern such as a curve rather than random scatter about zero",
+     "Recognize that the size of $r^2$ measures the share of variation explained and does not decide whether a linear form is appropriate",
+     "State the decision about the linear model with the residual pattern as the evidence"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the form of the relationship is judged from the residual pattern, while r squared only measures the share of variation explained",
+      "evidence": "the stem shows the residual plot, gives r squared and states a student's claim"
+     }
+    ],
+    "material": {
+     "type": "scatter",
+     "must_include": [
+      "residuals",
+      "zero line"
+     ]
+    },
+    "misconceptions": [
+     {
+      "id": "residual_pattern_misread",
+      "description": "sees random scatter in a curve or a curve in random scatter"
+     },
+     {
+      "id": "r_squared_as_linearity",
+      "description": "uses the size of r squared as proof or disproof of linearity"
+     },
+     {
+      "id": "right_decision_wrong_reason",
+      "description": "gives the right decision with a reason that is true of every model"
+     }
+    ],
+    "verification": {
+     "independent_path": "residuals are made orthogonal to x like least-squares residuals; a quadratic fit R squared and the correlation of absolute residuals with x classify the pattern, which must match the intended pattern",
+     "method": "quadratic fit classification"
+    },
+    "judgment_demand": [
+     "interpretation",
+     "representation_reading"
+    ]
+   },
+   "difficulty_signals": {
+    "steps": [
+     "Read the residual plot for a systematic pattern such as a curve rather than random scatter about zero",
+     "Recognize that the size of $r^2$ measures the share of variation explained and does not decide whether a linear form is appropriate",
+     "State the decision about the linear model with the residual pattern as the evidence"
+    ],
+    "concepts": [
+     "residual plot as evidence about the form of the model",
+     "interpretation of the coefficient of determination"
+    ],
+    "representations": 2,
+    "distractor_fail_step": {
+     "The linear model is not appropriate, because the residual plot shows a curved pattern that the line does not capture": 1,
+     "The linear model is not appropriate, because an $r^2$ below $0.60$ shows that the relationship is not linear": 2,
+     "The linear model is appropriate, because the residuals add up to $0$": 3
+    },
+    "arithmetic": "none"
+   },
+   "seed": 9400,
+   "pack_id": "st_residual_r2_model-s9400",
+   "explanation_en": "The correct answer is The linear model is appropriate, because the residual plot shows no pattern; the small $r^2$ means only that the model explains $48\\%$ of the variation in the response. The residuals scatter randomly about $0$ with no pattern, so the linear model is appropriate; $r^2 = 0.48$ says the line explains about $48\\%$ of the variation but does not mean the form is wrong.\nThe linear model is appropriate, because the residuals add up to $0$ is incorrect: Reaches the right decision for the wrong reason: least-squares residuals always add up to $0$, whatever the model.\nThe linear model is not appropriate, because the residual plot shows a curved pattern that the line does not capture is incorrect: Misreads the residual plot: the residuals are randomly scattered, not curved.\nThe linear model is not appropriate, because an $r^2$ below $0.60$ shows that the relationship is not linear is incorrect: Treats a small $r^2$ as evidence that the form is not linear; a linear relationship with a lot of scatter can have a small $r^2$."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_residual_r2_model",
+   "facts": [
+    "pattern=random",
+    "r2=0.48"
+   ],
+   "seed": 9400
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Residual plot reading plus r-squared interpretation; fits topic 5.4 and skill 4.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "B is the unique defensible response: the plot shows no pattern, and r^2 does not determine linearity. A gives a reason true of every least-squares fit, so it is not a valid justification."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Plot data complete with axis titles and a zero line; the residual units are not stated, and the wording 'the selling price of the car from the age of a car' is slightly awkward, but both are minor."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception (right decision with a wrong reason, misread pattern, r^2 as linearity), and each is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Typical AP length and load; the key option is a bit longer than the others, but this is not a significant giveaway."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound item with a unique key, distinct distractors, and a complete stimulus; only minor wording and units nits."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The student must (1) read the residual plot and see there is no pattern, (2) interpret r^2 = 0.48 as the percent of variation explained, not as a measure of linearity, and (3) link both results to judge the student's claim. This combines two concepts and two sources, and distractors such as the residuals-sum-to-zero option and the r^2 cutoff option fail only at later steps. There is no arithmetic, the reading load is light, and the content stays within Unit 5 scope.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m04-k1",
+  "cellId": "ap_statistics-m04",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "5.4",
+  "unitCode": "5",
+  "skillPrimary": "4.D",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_residual_r2_model",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "The student must read the residual plot and judge that it shows no clear pattern. They must then interpret r^2 = 0.40 as the share of variation explained, and link both results to the claim about model appropriateness. This matches the rubric: 3 sequential steps and 2 combined concepts/sources, with a named-misinterpretation lever (small r^2 does not mean non-linear). There is no arithmetic, the reading is short, and the wording is unambiguous.",
+  "payload": {
+   "archetype": "st_residual_r2_model",
+   "topic": "5.4",
+   "skill": "4.D",
+   "calculator": "allowed",
+   "stem": "A least-squares regression line is used to predict the exam score from the number of hours studied, using $24$ observations. The residual plot is shown, and the coefficient of determination is $r^2 = 0.40$. A student says that a linear model is not appropriate because $r^2 = 0.40$ is small. Which of the following is the best response to the student?",
+   "stimulus": {
+    "kind": "stat_chart",
+    "description": "Residual plot with a horizontal line at zero",
+    "data": {
+     "chart": "scatter",
+     "data": {
+      "xTitle": "Hours studied",
+      "yTitle": "Residual",
+      "points": [
+       [
+        5,
+        0.59
+       ],
+       [
+        6,
+        -0.62
+       ],
+       [
+        8,
+        0.32
+       ],
+       [
+        9,
+        -0.71
+       ],
+       [
+        15,
+        -0.47
+       ],
+       [
+        16,
+        -0.01
+       ],
+       [
+        18,
+        -0.11
+       ],
+       [
+        24,
+        -1.61
+       ],
+       [
+        25,
+        4
+       ],
+       [
+        28,
+        0.41
+       ],
+       [
+        30,
+        -0.61
+       ],
+       [
+        31,
+        -0.25
+       ],
+       [
+        32,
+        -0.77
+       ],
+       [
+        34,
+        -1.11
+       ],
+       [
+        36,
+        0.93
+       ],
+       [
+        38,
+        1.81
+       ],
+       [
+        43,
+        0.06
+       ],
+       [
+        45,
+        -1.29
+       ],
+       [
+        48,
+        -0.15
+       ],
+       [
+        50,
+        -2.51
+       ],
+       [
+        51,
+        -0.24
+       ],
+       [
+        52,
+        1.4
+       ],
+       [
+        58,
+        0.72
+       ],
+       [
+        59,
+        0.22
+       ]
+      ],
+      "fitLine": {
+       "slope": 0,
+       "intercept": 0
+      }
+     }
+    }
+   },
+   "options": [
+    {
+     "text": "The linear model is appropriate, because the residuals add up to $0$",
+     "why": "Reaches the right decision for the wrong reason: least-squares residuals always add up to $0$, whatever the model.",
+     "value": null
+    },
+    {
+     "text": "The linear model is not appropriate, because the residual plot shows a curved pattern that the line does not capture",
+     "why": "Misreads the residual plot: the residuals are randomly scattered, not curved.",
+     "value": null
+    },
+    {
+     "text": "The linear model is appropriate, because the residual plot shows no pattern; the small $r^2$ means only that the model explains $40\\%$ of the variation in the response",
+     "why": "The residuals scatter randomly about $0$ with no pattern, so the linear model is appropriate; $r^2 = 0.40$ says the line explains about $40\\%$ of the variation but does not mean the form is wrong.",
+     "value": null
+    },
+    {
+     "text": "The linear model is not appropriate, because an $r^2$ below $0.60$ shows that the relationship is not linear",
+     "why": "Treats a small $r^2$ as evidence that the form is not linear; a linear relationship with a lot of scatter can have a small $r^2$.",
+     "value": null
+    }
+   ],
+   "key_index": 2,
+   "est_seconds": 110,
+   "facts": [
+    "pattern=random",
+    "r2=0.4"
+   ],
+   "blueprint": {
+    "id": "st_residual_r2_model",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Assess a linear model from the residual plot and a stated r squared, and respond to a claim that uses r squared as the criterion",
+    "topic": "5.4",
+    "skill": "4.D",
+    "student_thinking": [
+     "Read the residual plot for a systematic pattern such as a curve rather than random scatter about zero",
+     "Recognize that the size of $r^2$ measures the share of variation explained and does not decide whether a linear form is appropriate",
+     "State the decision about the linear model with the residual pattern as the evidence"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the form of the relationship is judged from the residual pattern, while r squared only measures the share of variation explained",
+      "evidence": "the stem shows the residual plot, gives r squared and states a student's claim"
+     }
+    ],
+    "material": {
+     "type": "scatter",
+     "must_include": [
+      "residuals",
+      "zero line"
+     ]
+    },
+    "misconceptions": [
+     {
+      "id": "residual_pattern_misread",
+      "description": "sees random scatter in a curve or a curve in random scatter"
+     },
+     {
+      "id": "r_squared_as_linearity",
+      "description": "uses the size of r squared as proof or disproof of linearity"
+     },
+     {
+      "id": "right_decision_wrong_reason",
+      "description": "gives the right decision with a reason that is true of every model"
+     }
+    ],
+    "verification": {
+     "independent_path": "residuals are made orthogonal to x like least-squares residuals; a quadratic fit R squared and the correlation of absolute residuals with x classify the pattern, which must match the intended pattern",
+     "method": "quadratic fit classification"
+    },
+    "judgment_demand": [
+     "interpretation",
+     "representation_reading"
+    ]
+   },
+   "difficulty_signals": {
+    "steps": [
+     "Read the residual plot for a systematic pattern such as a curve rather than random scatter about zero",
+     "Recognize that the size of $r^2$ measures the share of variation explained and does not decide whether a linear form is appropriate",
+     "State the decision about the linear model with the residual pattern as the evidence"
+    ],
+    "concepts": [
+     "residual plot as evidence about the form of the model",
+     "interpretation of the coefficient of determination"
+    ],
+    "representations": 2,
+    "distractor_fail_step": {
+     "The linear model is not appropriate, because the residual plot shows a curved pattern that the line does not capture": 1,
+     "The linear model is not appropriate, because an $r^2$ below $0.60$ shows that the relationship is not linear": 2,
+     "The linear model is appropriate, because the residuals add up to $0$": 3
+    },
+    "arithmetic": "none"
+   },
+   "seed": 9401,
+   "pack_id": "st_residual_r2_model-s9401",
+   "explanation_en": "The correct answer is The linear model is appropriate, because the residual plot shows no pattern; the small $r^2$ means only that the model explains $40\\%$ of the variation in the response. The residuals scatter randomly about $0$ with no pattern, so the linear model is appropriate; $r^2 = 0.40$ says the line explains about $40\\%$ of the variation but does not mean the form is wrong.\nThe linear model is appropriate, because the residuals add up to $0$ is incorrect: Reaches the right decision for the wrong reason: least-squares residuals always add up to $0$, whatever the model.\nThe linear model is not appropriate, because the residual plot shows a curved pattern that the line does not capture is incorrect: Misreads the residual plot: the residuals are randomly scattered, not curved.\nThe linear model is not appropriate, because an $r^2$ below $0.60$ shows that the relationship is not linear is incorrect: Treats a small $r^2$ as evidence that the form is not linear; a linear relationship with a lot of scatter can have a small $r^2$."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_residual_r2_model",
+   "facts": [
+    "pattern=random",
+    "r2=0.4"
+   ],
+   "seed": 9401
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 5.4 residual plots plus r-squared interpretation; the dominant demand is interpreting results to assess a claim (4.D). No out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option C is the unique defensible answer: no curved pattern in the residuals, and r^2 does not determine linearity. The other options have false reasoning or misread the plot."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The residual plot data has axis titles, 24 points that match n=24, and a zero line (fitLine slope 0, intercept 0). The one residual of 4 at x=25 is a mild outlier but does not create a pattern. Wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The three distractors encode distinct misconceptions: right decision for a reason true of every model, misreading the residual plot, and treating a small r^2 as nonlinearity. The explanation addresses each. Option lengths are similar."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 90-110 seconds, no arithmetic, and one stimulus that is needed. This is typical of AP Statistics MC."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean, standard item. The residual plot shows random scatter, so the linear model is appropriate despite r^2 = 0.40. The key is unique and the distractors map to distinct misconceptions. Accept."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The student must read the residual plot and judge that it shows no clear pattern. They must then interpret r^2 = 0.40 as the share of variation explained, and link both results to the claim about model appropriateness. This matches the rubric: 3 sequential steps and 2 combined concepts/sources, with a named-misinterpretation lever (small r^2 does not mean non-linear). There is no arithmetic, the reading is short, and the wording is unambiguous.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m05-k0",
+  "cellId": "ap_statistics-m05",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "5.2",
+  "unitCode": "5",
+  "skillPrimary": "4.D",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_outlier_effect",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "criterion_failed_stimulus_expression; criterion_failed_distractor_explanation",
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "The student must classify the highlighted point as a vertical outlier with low leverage because x = 10 is mid-range. They then recall that such a point changes the slope little but weakens the correlation noticeably. Finally they link both effects to the correct option and reject distractors that survive the first step. This meets the rubric: 3 sequential steps and 2 combined concepts (leverage versus vertical outlier, and effect on r and slope). It uses a single scatterplot, needs no arithmetic, and is in Unit 5 scope.",
+  "payload": {
+   "archetype": "st_outlier_effect",
+   "topic": "5.2",
+   "skill": "4.D",
+   "calculator": "allowed",
+   "stem": "The scatterplot shown displays $12$ observations of the number of hours of sleep and a reaction time score (in milliseconds). The point circled in red is removed, and the correlation coefficient and the least-squares line are recomputed. Which of the following best describes the effect of removing the point?",
+   "stimulus": {
+    "kind": "stat_chart",
+    "description": "Scatterplot with one highlighted point",
+    "data": {
+     "chart": "scatter",
+     "data": {
+      "xTitle": "Hours of sleep",
+      "yTitle": "Reaction time (ms)",
+      "xMin": 0,
+      "xMax": 40,
+      "xStep": 5,
+      "points": [
+       [
+        5.3,
+        43.8
+       ],
+       [
+        5.4,
+        40.2
+       ],
+       [
+        5.5,
+        42.9
+       ],
+       [
+        7.3,
+        49.9
+       ],
+       [
+        10,
+        51.2
+       ],
+       [
+        11.3,
+        59.5
+       ],
+       [
+        12.7,
+        60.8
+       ],
+       [
+        12.9,
+        67.2
+       ],
+       [
+        13.6,
+        63.6
+       ],
+       [
+        15.5,
+        69.4
+       ],
+       [
+        17.7,
+        75.4
+       ],
+       [
+        10,
+        13.5
+       ]
+      ],
+      "highlights": [
+       {
+        "index": 11
+       }
+      ]
+     }
+    }
+   },
+   "options": [
+    {
+     "text": "The correlation becomes stronger and the slope of the least-squares line becomes noticeably steeper",
+     "why": "Misjudges what kind of point the circled point is: it treats a point of one type (extreme in $x$ and on the trend, extreme in $x$ and off the trend, or extreme only in $y$) as if it were another type.",
+     "value": null
+    },
+    {
+     "text": "The correlation becomes stronger and the slope of the least-squares line becomes about the same",
+     "why": "Without the circled point $|r|$ changes from $0.69$ to $0.98$ and the slope magnitude from $2.83$ to $2.69$.",
+     "value": null
+    },
+    {
+     "text": "The correlation becomes weaker and the slope of the least-squares line becomes about the same",
+     "why": "Gets the effect on the correlation backwards: the point lies away from the line and pulls the correlation down, so without it the correlation is stronger.",
+     "value": null
+    },
+    {
+     "text": "The correlation becomes stronger and the slope of the least-squares line becomes noticeably less steep",
+     "why": "Gets the effect on the slope wrong: the point is near the middle of the $x$-values, so removing it leaves the slope about the same.",
+     "value": null
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 110,
+   "facts": [
+    "type=y_out",
+    "r_with=0.692",
+    "r_without=0.982"
+   ],
+   "blueprint": {
+    "id": "st_outlier_effect",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Predict how removing a high-leverage point on the trend, a high-leverage point off the trend or a vertical outlier changes the correlation and the slope",
+    "topic": "5.2",
+    "skill": "4.D",
+    "student_thinking": [
+     "Classify the circled point by its position: far from the other $x$-values (leverage) or only far in the $y$-direction, and on or off the trend of the other points",
+     "Decide how removing a point of that type changes the strength of the correlation",
+     "Decide whether removing a point of that type changes the slope of the least-squares line noticeably"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "a high-leverage point on the trend strengthens the correlation and barely moves the slope, a high-leverage point off the trend weakens the correlation and moves the slope, and a vertical outlier in the middle weakens the correlation and barely moves the slope",
+      "evidence": "the plot shows the circled point relative to the other observations"
+     }
+    ],
+    "material": {
+     "type": "scatter",
+     "must_include": [
+      "highlighted point"
+     ]
+    },
+    "misconceptions": [
+     {
+      "id": "point_type_misjudged",
+      "description": "treats the circled point as a different type of unusual point"
+     },
+     {
+      "id": "correlation_backwards",
+      "description": "gets the effect on the correlation backwards"
+     },
+     {
+      "id": "slope_effect_wrong",
+      "description": "gets the effect on the slope wrong"
+     }
+    ],
+    "verification": {
+     "independent_path": "slope and correlation are recomputed with and without the point by closed-form sums and by numpy polyfit and corrcoef; the point type is enforced by thresholds on the change in |r| and on the relative change in the slope",
+     "method": "with/without recomputation"
+    },
+    "judgment_demand": [
+     "interpretation",
+     "representation_reading"
+    ]
+   },
+   "difficulty_signals": {
+    "steps": [
+     "Classify the circled point by its position: far from the other $x$-values (leverage) or only far in the $y$-direction, and on or off the trend of the other points",
+     "Decide how removing a point of that type changes the strength of the correlation",
+     "Decide whether removing a point of that type changes the slope of the least-squares line noticeably"
+    ],
+    "concepts": [
+     "leverage versus vertical outlier",
+     "effect of unusual points on correlation and slope"
+    ],
+    "representations": 1,
+    "distractor_fail_step": {
+     "The correlation becomes weaker and the slope of the least-squares line becomes about the same": 2,
+     "The correlation becomes stronger and the slope of the least-squares line becomes noticeably less steep": 3,
+     "The correlation becomes stronger and the slope of the least-squares line becomes noticeably steeper": 1
+    },
+    "arithmetic": "none"
+   },
+   "seed": 9400,
+   "pack_id": "st_outlier_effect-s9400",
+   "explanation_en": "The correct answer is The correlation becomes stronger and the slope of the least-squares line becomes about the same. Without the circled point $|r|$ changes from $0.69$ to $0.98$ and the slope magnitude from $2.83$ to $2.69$.\nThe correlation becomes stronger and the slope of the least-squares line becomes noticeably steeper is incorrect: Misjudges what kind of point the circled point is: it treats a point of one type (extreme in $x$ and on the trend, extreme in $x$ and off the trend, or extreme only in $y$) as if it were another type.\nThe correlation becomes weaker and the slope of the least-squares line becomes about the same is incorrect: Gets the effect on the correlation backwards: the point lies away from the line and pulls the correlation down, so without it the correlation is stronger.\nThe correlation becomes stronger and the slope of the least-squares line becomes noticeably less steep is incorrect: Gets the effect on the slope wrong: the point is near the middle of the $x$-values, so removing it leaves the slope about the same."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_outlier_effect",
+   "facts": [
+    "type=y_out",
+    "r_with=0.692",
+    "r_without=0.982"
+   ],
+   "seed": 9400
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "One reading step at about 110 seconds, with four parallel options and no arithmetic burden.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The content and key are correct. The item fails on the stimulus (x-axis range 0-40 for data ending near 18, no y-range) and on the generic, mismatched explanation for the first distractor. Fixing the axis range and rewriting that explanation would resolve both."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The student must classify the highlighted point as a vertical outlier with low leverage because x = 10 is mid-range. They then recall that such a point changes the slope little but weakens the correlation noticeably. Finally they link both effects to the correct option and reject distractors that survive the first step. This meets the rubric: 3 sequential steps and 2 combined concepts (leverage versus vertical outlier, and effect on r and slope). It uses a single scatterplot, needs no arithmetic, and is in Unit 5 scope.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m05-k1",
+  "cellId": "ap_statistics-m05",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "5.2",
+  "unitCode": "5",
+  "skillPrimary": "4.D",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_outlier_effect",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "criterion_failed_distractor_explanation",
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Student must recognize the circled point as high-leverage and off the linear trend of the other points, then reason about its effect on the slope (pulled down, so removal makes it steeper) and on the correlation (removal strengthens it), and match both to an option. The distractors differ in only one of the two effects, so a student has to track both. No arithmetic; scope and wording are fair.",
+  "payload": {
+   "archetype": "st_outlier_effect",
+   "topic": "5.2",
+   "skill": "4.D",
+   "calculator": "allowed",
+   "stem": "The scatterplot shown displays $12$ observations of the engine size (in liters) and the fuel efficiency (in miles per gallon). The point circled in red is removed, and the correlation coefficient and the least-squares line are recomputed. Which of the following best describes the effect of removing the point?",
+   "stimulus": {
+    "kind": "stat_chart",
+    "description": "Scatterplot with one highlighted point",
+    "data": {
+     "chart": "scatter",
+     "data": {
+      "xTitle": "Engine size (liters)",
+      "yTitle": "Fuel efficiency (mpg)",
+      "xMin": 0,
+      "xMax": 40,
+      "xStep": 5,
+      "points": [
+       [
+        6.3,
+        49.5
+       ],
+       [
+        8.6,
+        49.8
+       ],
+       [
+        9.3,
+        54.8
+       ],
+       [
+        9.5,
+        59.2
+       ],
+       [
+        11.4,
+        61
+       ],
+       [
+        11.5,
+        59.9
+       ],
+       [
+        12,
+        66.6
+       ],
+       [
+        13.1,
+        66.2
+       ],
+       [
+        14.2,
+        73.4
+       ],
+       [
+        15.1,
+        76.7
+       ],
+       [
+        15.2,
+        75.5
+       ],
+       [
+        29.9,
+        76.6
+       ]
+      ],
+      "highlights": [
+       {
+        "index": 11
+       }
+      ]
+     }
+    }
+   },
+   "options": [
+    {
+     "text": "The correlation becomes stronger and the slope of the least-squares line becomes about the same",
+     "why": "Misjudges what kind of point the circled point is: it treats a point of one type (extreme in $x$ and on the trend, extreme in $x$ and off the trend, or extreme only in $y$) as if it were another type.",
+     "value": null
+    },
+    {
+     "text": "The correlation becomes stronger and the slope of the least-squares line becomes noticeably steeper",
+     "why": "Without the circled point $|r|$ changes from $0.75$ to $0.97$ and the slope magnitude from $1.26$ to $3.27$.",
+     "value": null
+    },
+    {
+     "text": "The correlation becomes stronger and the slope of the least-squares line becomes noticeably less steep",
+     "why": "Gets the effect on the slope wrong: the point pulls the line, so removing it changes the slope noticeably, and the direction of the change is given by the fitted lines.",
+     "value": null
+    },
+    {
+     "text": "The correlation becomes weaker and the slope of the least-squares line becomes noticeably steeper",
+     "why": "Gets the effect on the correlation backwards: the point lies away from the line and pulls the correlation down, so without it the correlation is stronger.",
+     "value": null
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 110,
+   "facts": [
+    "type=lev_off",
+    "r_with=0.755",
+    "r_without=0.966"
+   ],
+   "blueprint": {
+    "id": "st_outlier_effect",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Predict how removing a high-leverage point on the trend, a high-leverage point off the trend or a vertical outlier changes the correlation and the slope",
+    "topic": "5.2",
+    "skill": "4.D",
+    "student_thinking": [
+     "Classify the circled point by its position: far from the other $x$-values (leverage) or only far in the $y$-direction, and on or off the trend of the other points",
+     "Decide how removing a point of that type changes the strength of the correlation",
+     "Decide whether removing a point of that type changes the slope of the least-squares line noticeably"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "a high-leverage point on the trend strengthens the correlation and barely moves the slope, a high-leverage point off the trend weakens the correlation and moves the slope, and a vertical outlier in the middle weakens the correlation and barely moves the slope",
+      "evidence": "the plot shows the circled point relative to the other observations"
+     }
+    ],
+    "material": {
+     "type": "scatter",
+     "must_include": [
+      "highlighted point"
+     ]
+    },
+    "misconceptions": [
+     {
+      "id": "point_type_misjudged",
+      "description": "treats the circled point as a different type of unusual point"
+     },
+     {
+      "id": "correlation_backwards",
+      "description": "gets the effect on the correlation backwards"
+     },
+     {
+      "id": "slope_effect_wrong",
+      "description": "gets the effect on the slope wrong"
+     }
+    ],
+    "verification": {
+     "independent_path": "slope and correlation are recomputed with and without the point by closed-form sums and by numpy polyfit and corrcoef; the point type is enforced by thresholds on the change in |r| and on the relative change in the slope",
+     "method": "with/without recomputation"
+    },
+    "judgment_demand": [
+     "interpretation",
+     "representation_reading"
+    ]
+   },
+   "difficulty_signals": {
+    "steps": [
+     "Classify the circled point by its position: far from the other $x$-values (leverage) or only far in the $y$-direction, and on or off the trend of the other points",
+     "Decide how removing a point of that type changes the strength of the correlation",
+     "Decide whether removing a point of that type changes the slope of the least-squares line noticeably"
+    ],
+    "concepts": [
+     "leverage versus vertical outlier",
+     "effect of unusual points on correlation and slope"
+    ],
+    "representations": 1,
+    "distractor_fail_step": {
+     "The correlation becomes weaker and the slope of the least-squares line becomes noticeably steeper": 2,
+     "The correlation becomes stronger and the slope of the least-squares line becomes noticeably less steep": 3,
+     "The correlation becomes stronger and the slope of the least-squares line becomes about the same": 1
+    },
+    "arithmetic": "none"
+   },
+   "seed": 9401,
+   "pack_id": "st_outlier_effect-s9401",
+   "explanation_en": "The correct answer is The correlation becomes stronger and the slope of the least-squares line becomes noticeably steeper. Without the circled point $|r|$ changes from $0.75$ to $0.97$ and the slope magnitude from $1.26$ to $3.27$.\nThe correlation becomes stronger and the slope of the least-squares line becomes about the same is incorrect: Misjudges what kind of point the circled point is: it treats a point of one type (extreme in $x$ and on the trend, extreme in $x$ and off the trend, or extreme only in $y$) as if it were another type.\nThe correlation becomes stronger and the slope of the least-squares line becomes noticeably less steep is incorrect: Gets the effect on the slope wrong: the point pulls the line, so removing it changes the slope noticeably, and the direction of the change is given by the fitted lines.\nThe correlation becomes weaker and the slope of the least-squares line becomes noticeably steeper is incorrect: Gets the effect on the correlation backwards: the point lies away from the line and pulls the correlation down, so without it the correlation is stronger."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_outlier_effect",
+   "facts": [
+    "type=lev_off",
+    "r_with=0.755",
+    "r_without=0.966"
+   ],
+   "seed": 9401
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Effect of an influential point on r and slope is squarely Unit 5 topic 5.2 and skill 4.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Without the point, r is about 0.97 and the slope about 3.3; with it, r is about 0.75 and the slope about 1.26. So the correlation is stronger and the slope noticeably steeper, and the key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The scatter data has axis titles, ranges and a highlighted point. Complete. The positive engine size vs mpg relation is unrealistic but harmless."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The explanation for the first distractor is a generic template listing all point types, not specific to this item. The explanation for the third distractor does not state the actual direction of the slope change, so the explanations are weak."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Reasonable time and reading load; no arithmetic is needed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key and stimulus are correct and in scope. The item fails on distractor explanations: the first option's rationale is a generic template and the third option's does not state the real slope direction."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must recognize the circled point as high-leverage and off the linear trend of the other points, then reason about its effect on the slope (pulled down, so removal makes it steeper) and on the correlation (removal strengthens it), and match both to an option. The distractors differ in only one of the two effects, so a student has to track both. No arithmetic; scope and wording are fair.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m06-k0",
+  "cellId": "ap_statistics-m06",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "3.8",
+  "unitCode": "3",
+  "skillPrimary": "2.D",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_power_table_change",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "criterion_failed_scope_skill; instant_reject_out_of_scope_knowledge",
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Student must link Type I error probability to alpha (0.05 to 0.01, so it decreases), read the power table for the two settings (0.38 to 0.63, so power increases), and combine both into one choice. This meets 3 steps and 2 concepts/sources. Reading and computation are minimal, and the item is in scope and unambiguous.",
+  "payload": {
+   "archetype": "st_power_table_change",
+   "topic": "3.8",
+   "skill": "2.D",
+   "calculator": "allowed",
+   "stem": "A researcher tests $H_0: \\mu = 70$ versus $H_a: \\mu > 70$, where $\\mu$ is the mean score of all students at a school on a reading test, using a random sample of students from a population that is approximately normal with a known standard deviation of $15$. The table shows the power of the test against the alternative $\\mu = 74$ for several sample sizes and significance levels. The researcher currently uses $n = 25$ and $\\alpha = 0.05$ and is considering a change to $n = 100$ and $\\alpha = 0.01$. Which of the following describes the effect of the change?",
+   "stimulus": {
+    "kind": "stat_chart",
+    "description": "Power of the test against the alternative mean for several sample sizes and significance levels",
+    "data": {
+     "chart": "table",
+     "data": {
+      "columns": [
+       "Sample size n",
+       "alpha = 0.1",
+       "alpha = 0.05",
+       "alpha = 0.01"
+      ],
+      "rows": [
+       [
+        "20",
+        "0.46",
+        "0.33",
+        "0.13"
+       ],
+       [
+        "25",
+        "0.52",
+        "0.38",
+        "0.16"
+       ],
+       [
+        "100",
+        "0.92",
+        "0.85",
+        "0.63"
+       ]
+      ]
+     },
+     "title": "Power of the test against the alternative mean 74"
+    }
+   },
+   "options": [
+    {
+     "text": "The probability of a Type I error increases and the power of the test decreases",
+     "why": "Gets the Type I error backwards and also reads the change in power in the wrong direction.",
+     "value": null
+    },
+    {
+     "text": "The probability of a Type I error decreases and the power of the test increases",
+     "why": "The probability of a Type I error equals the significance level, so it goes from $0.05$ to $0.01$; the table shows the power changing from $0.38$ to $0.63$.",
+     "value": null
+    },
+    {
+     "text": "The probability of a Type I error decreases and the power of the test decreases",
+     "why": "Lets one of the two changes dominate: the table shows the net change in power from $0.38$ to $0.63$, which is the other direction.",
+     "value": null
+    },
+    {
+     "text": "The probability of a Type I error increases and the power of the test increases",
+     "why": "Gets the Type I error backwards: its probability equals the new significance level, so it follows the change in the significance level, not the sample size.",
+     "value": null
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 115,
+   "facts": [
+    "n=25->100",
+    "alpha=0.05->0.01"
+   ],
+   "blueprint": {
+    "id": "st_power_table_change",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Judge the combined effect on the Type I error probability and the power of changing the significance level and the sample size together, using a table of powers",
+    "topic": "3.8",
+    "skill": "2.D",
+    "student_thinking": [
+     "Recall that the probability of a Type I error equals the significance level, so it follows the change in $\\alpha$",
+     "Locate the current and the proposed combination of sample size and significance level in the power table",
+     "Compare the two power values to find the net effect, since the two changes push the power in opposite directions"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the Type I error probability equals alpha, and the net effect on power of opposite changes is read from the table of powers",
+      "evidence": "the stem names both changes and the table gives the power for each combination"
+     }
+    ],
+    "material": {
+     "type": "table",
+     "must_include": [
+      "power values",
+      "sample sizes",
+      "significance levels"
+     ]
+    },
+    "misconceptions": [
+     {
+      "id": "type_i_follows_n",
+      "description": "thinks the Type I error probability changes with the sample size"
+     },
+     {
+      "id": "both_wrong",
+      "description": "reads both effects in the wrong direction"
+     },
+     {
+      "id": "one_effect_dominates",
+      "description": "lets only one of the two changes decide the direction of the power"
+     }
+    ],
+    "verification": {
+     "independent_path": "each power is computed with scipy's normal distribution and again from a bisection on math.erf; the compared powers must differ by at least 0.04 in the table",
+     "method": "power table dual computation"
+    },
+    "judgment_demand": [
+     "interpretation",
+     "representation_reading"
+    ]
+   },
+   "difficulty_signals": {
+    "steps": [
+     "Recall that the probability of a Type I error equals the significance level, so it follows the change in $\\alpha$",
+     "Locate the current and the proposed combination of sample size and significance level in the power table",
+     "Compare the two power values to find the net effect, since the two changes push the power in opposite directions"
+    ],
+    "concepts": [
+     "probability of Type I error and significance level",
+     "power as a function of sample size and significance level"
+    ],
+    "representations": 2,
+    "distractor_fail_step": {
+     "The probability of a Type I error increases and the power of the test increases": 1,
+     "The probability of a Type I error increases and the power of the test decreases": 1,
+     "The probability of a Type I error decreases and the power of the test decreases": 3
+    },
+    "arithmetic": "none"
+   },
+   "seed": 9400,
+   "pack_id": "st_power_table_change-s9400",
+   "explanation_en": "The correct answer is The probability of a Type I error decreases and the power of the test increases. The probability of a Type I error equals the significance level, so it goes from $0.05$ to $0.01$; the table shows the power changing from $0.38$ to $0.63$.\nThe probability of a Type I error increases and the power of the test decreases is incorrect: Gets the Type I error backwards and also reads the change in power in the wrong direction.\nThe probability of a Type I error decreases and the power of the test decreases is incorrect: Lets one of the two changes dominate: the table shows the net change in power from $0.38$ to $0.63$, which is the other direction.\nThe probability of a Type I error increases and the power of the test increases is incorrect: Gets the Type I error backwards: its probability equals the new significance level, so it follows the change in the significance level, not the sample size."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_power_table_change",
+   "facts": [
+    "n=25->100",
+    "alpha=0.05->0.01"
+   ],
+   "seed": 9400
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": "Topic 3.8 and skill 2.D are targeted well, but the setting is a test of a population mean with known sigma, which is outside Unit 3's listed procedures (proportions, chi-square) and not an AP Statistics procedure. A proportion-based context would fit the scope."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key is unique: Type I probability equals alpha, which goes from 0.05 to 0.01 and so decreases. The power goes from 0.38 to 0.63 and so increases."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete, with sample sizes, alphas, and powers, and the alternative value is stated in the title."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors encode distinct misconceptions and all are explained. The first explanation is somewhat generic."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, no arithmetic, consistent with a calculator-allowed exam."
+   },
+   "instant_reject": [
+    "out_of_scope_knowledge"
+   ],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is well constructed with a unique key. However, it is set in a z-test for a mean with known sigma, which falls outside the Unit 3 scope of proportions and chi-square. The item fails on scope and is rejected as out-of-scope knowledge."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must link Type I error probability to alpha (0.05 to 0.01, so it decreases), read the power table for the two settings (0.38 to 0.63, so power increases), and combine both into one choice. This meets 3 steps and 2 concepts/sources. Reading and computation are minimal, and the item is in scope and unambiguous.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m06-k1",
+  "cellId": "ap_statistics-m06",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "3.8",
+  "unitCode": "3",
+  "skillPrimary": "2.D",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_power_table_change",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Meets the exam_prep rubric: 3 sequential steps (Type I error equals alpha, so it increases from 0.05 to 0.1; read the table for power at n=80, alpha=0.05 (0.72) and at n=20, alpha=0.1 (0.44); compare and match the pair of effects to an option) and 2 combined concepts (significance level as Type I error probability; power as a function of n and alpha). The student must combine the stem with the table. Opposing effects of the two changes make the power direction non-obvious without the table. Short stem, no arithmetic, in Unit 3 scope.",
+  "payload": {
+   "archetype": "st_power_table_change",
+   "topic": "3.8",
+   "skill": "2.D",
+   "calculator": "allowed",
+   "stem": "A scientist tests $H_0: \\mu = 500$ versus $H_a: \\mu > 500$, where $\\mu$ is the mean lifetime, in hours, of all batteries of a new design, using a random sample of batteries from a population that is approximately normal with a known standard deviation of $80$ hours. The table shows the power of the test against the alternative $\\mu = 520$ for several sample sizes and significance levels. The researcher currently uses $n = 80$ and $\\alpha = 0.05$ and is considering a change to $n = 20$ and $\\alpha = 0.1$. Which of the following describes the effect of the change?",
+   "stimulus": {
+    "kind": "stat_chart",
+    "description": "Power of the test against the alternative mean for several sample sizes and significance levels",
+    "data": {
+     "chart": "table",
+     "data": {
+      "columns": [
+       "Sample size n",
+       "alpha = 0.1",
+       "alpha = 0.05",
+       "alpha = 0.01"
+      ],
+      "rows": [
+       [
+        "20",
+        "0.44",
+        "0.30",
+        "0.11"
+       ],
+       [
+        "80",
+        "0.83",
+        "0.72",
+        "0.46"
+       ],
+       [
+        "100",
+        "0.89",
+        "0.80",
+        "0.57"
+       ]
+      ]
+     },
+     "title": "Power of the test against the alternative mean 520"
+    }
+   },
+   "options": [
+    {
+     "text": "The probability of a Type I error increases and the power of the test increases",
+     "why": "Lets one of the two changes dominate: the table shows the net change in power from $0.72$ to $0.44$, which is the other direction.",
+     "value": null
+    },
+    {
+     "text": "The probability of a Type I error increases and the power of the test decreases",
+     "why": "The probability of a Type I error equals the significance level, so it goes from $0.05$ to $0.1$; the table shows the power changing from $0.72$ to $0.44$.",
+     "value": null
+    },
+    {
+     "text": "The probability of a Type I error decreases and the power of the test increases",
+     "why": "Gets the Type I error backwards and also reads the change in power in the wrong direction.",
+     "value": null
+    },
+    {
+     "text": "The probability of a Type I error decreases and the power of the test decreases",
+     "why": "Gets the Type I error backwards: its probability equals the new significance level, so it follows the change in the significance level, not the sample size.",
+     "value": null
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 115,
+   "facts": [
+    "n=80->20",
+    "alpha=0.05->0.1"
+   ],
+   "blueprint": {
+    "id": "st_power_table_change",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Judge the combined effect on the Type I error probability and the power of changing the significance level and the sample size together, using a table of powers",
+    "topic": "3.8",
+    "skill": "2.D",
+    "student_thinking": [
+     "Recall that the probability of a Type I error equals the significance level, so it follows the change in $\\alpha$",
+     "Locate the current and the proposed combination of sample size and significance level in the power table",
+     "Compare the two power values to find the net effect, since the two changes push the power in opposite directions"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the Type I error probability equals alpha, and the net effect on power of opposite changes is read from the table of powers",
+      "evidence": "the stem names both changes and the table gives the power for each combination"
+     }
+    ],
+    "material": {
+     "type": "table",
+     "must_include": [
+      "power values",
+      "sample sizes",
+      "significance levels"
+     ]
+    },
+    "misconceptions": [
+     {
+      "id": "type_i_follows_n",
+      "description": "thinks the Type I error probability changes with the sample size"
+     },
+     {
+      "id": "both_wrong",
+      "description": "reads both effects in the wrong direction"
+     },
+     {
+      "id": "one_effect_dominates",
+      "description": "lets only one of the two changes decide the direction of the power"
+     }
+    ],
+    "verification": {
+     "independent_path": "each power is computed with scipy's normal distribution and again from a bisection on math.erf; the compared powers must differ by at least 0.04 in the table",
+     "method": "power table dual computation"
+    },
+    "judgment_demand": [
+     "interpretation",
+     "representation_reading"
+    ]
+   },
+   "difficulty_signals": {
+    "steps": [
+     "Recall that the probability of a Type I error equals the significance level, so it follows the change in $\\alpha$",
+     "Locate the current and the proposed combination of sample size and significance level in the power table",
+     "Compare the two power values to find the net effect, since the two changes push the power in opposite directions"
+    ],
+    "concepts": [
+     "probability of Type I error and significance level",
+     "power as a function of sample size and significance level"
+    ],
+    "representations": 2,
+    "distractor_fail_step": {
+     "The probability of a Type I error decreases and the power of the test decreases": 1,
+     "The probability of a Type I error decreases and the power of the test increases": 1,
+     "The probability of a Type I error increases and the power of the test increases": 3
+    },
+    "arithmetic": "none"
+   },
+   "seed": 9401,
+   "pack_id": "st_power_table_change-s9401",
+   "explanation_en": "The correct answer is The probability of a Type I error increases and the power of the test decreases. The probability of a Type I error equals the significance level, so it goes from $0.05$ to $0.1$; the table shows the power changing from $0.72$ to $0.44$.\nThe probability of a Type I error increases and the power of the test increases is incorrect: Lets one of the two changes dominate: the table shows the net change in power from $0.72$ to $0.44$, which is the other direction.\nThe probability of a Type I error decreases and the power of the test increases is incorrect: Gets the Type I error backwards and also reads the change in power in the wrong direction.\nThe probability of a Type I error decreases and the power of the test decreases is incorrect: Gets the Type I error backwards: its probability equals the new significance level, so it follows the change in the significance level, not the sample size."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_power_table_change",
+   "facts": [
+    "n=80->20",
+    "alpha=0.05->0.1"
+   ],
+   "seed": 9401
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key (Type I error increases, power decreases) is the unique correct answer. The table is complete, the item fits topic 3.8 and skill 2.D, and the load is light. The explanations for options A and C are a little thin, but each wrong option is addressed.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option has an explanation. The explanations for options A and C are somewhat vague, but they are acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Meets the exam_prep rubric: 3 sequential steps (Type I error equals alpha, so it increases from 0.05 to 0.1; read the table for power at n=80, alpha=0.05 (0.72) and at n=20, alpha=0.1 (0.44); compare and match the pair of effects to an option) and 2 combined concepts (significance level as Type I error probability; power as a function of n and alpha). The student must combine the stem with the table. Opposing effects of the two changes make the power direction non-obvious without the table. Short stem, no arithmetic, in Unit 3 scope.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m07-k0",
+  "cellId": "ap_statistics-m07",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "2.6",
+  "unitCode": "2",
+  "skillPrimary": "3.C",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_two_draw_conditional",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "The student must read the tree and compute P(second red) by total probability over two dependent branches (56/156 + 40/156). They then form the Bayes-style conditional 40/96 = 0.417. This is 3 sequential steps that combine conditional probability with total probability. Distractors correspond to the joint probability (0.256), the marginal P(first red) (0.615), and a branch probability (0.667). Arithmetic is light and the stem is short, so there are no unfair difficulty sources.",
+  "payload": {
+   "archetype": "st_two_draw_conditional",
+   "topic": "2.6",
+   "skill": "3.C",
+   "calculator": "allowed",
+   "stem": "A bag contains $8$ red marbles and $5$ blue marbles. Two marbles are drawn at random, one after the other, without replacement. The tree diagram shows the probabilities of the first and second draws. Given that the second marble is red, what is the probability that the first marble was blue? Round to three decimal places.",
+   "stimulus": {
+    "kind": "stat_chart",
+    "description": "Probability tree for two draws without replacement",
+    "data": {
+     "chart": "tree",
+     "tree": {
+      "branches": [
+       {
+        "name": "Red",
+        "label": "8/13",
+        "next": [
+         {
+          "name": "Red",
+          "label": "7/12"
+         },
+         {
+          "name": "Blue",
+          "label": "5/12"
+         }
+        ]
+       },
+       {
+        "name": "Blue",
+        "label": "5/13",
+        "next": [
+         {
+          "name": "Red",
+          "label": "2/3"
+         },
+         {
+          "name": "Blue",
+          "label": "1/3"
+         }
+        ]
+       }
+      ]
+     }
+    }
+   },
+   "options": [
+    {
+     "text": "$0.256$",
+     "why": "Finds the probability that the first is blue and the second is red but does not divide by the probability of the given event.",
+     "value": "0.25641026"
+    },
+    {
+     "text": "$0.615$",
+     "why": "Reports the overall probability that the second draw is red, which is the denominator rather than the conditional probability.",
+     "value": "0.61538462"
+    },
+    {
+     "text": "$0.667$",
+     "why": "Reads the branch probability for the second draw given the first, which reverses the conditional probability that is asked for.",
+     "value": "0.66666667"
+    },
+    {
+     "text": "$0.417$",
+     "why": "Add the two paths whose second draw is red: the probability of that event is $0.6154$; the path through blue first has probability $0.2564$, so the answer is $0.2564/0.6154 \\approx 0.417$.",
+     "value": "0.41666667"
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 125,
+   "facts": [
+    "a=8",
+    "b=5"
+   ],
+   "blueprint": {
+    "id": "st_two_draw_conditional",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Find the probability of the first draw given the second draw from a tree for draws without replacement",
+    "topic": "2.6",
+    "skill": "3.C",
+    "student_thinking": [
+     "Identify the two paths of the tree on which the second draw is the given outcome, and the one of them that starts with the first outcome asked about",
+     "Multiply along each of those paths and add the two path probabilities to get the probability of the given event",
+     "Divide the probability of the path asked about by the probability of the given event"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "P(first given second) = P(first and second) / P(second), with the second-draw probabilities depending on the first draw",
+      "evidence": "the tree gives the first-draw probabilities and the second-draw probabilities conditional on the first draw"
+     }
+    ],
+    "material": {
+     "type": "probability_tree",
+     "must_include": [
+      "first-draw probabilities",
+      "second-draw conditional probabilities"
+     ]
+    },
+    "misconceptions": [
+     {
+      "id": "branch_instead_of_path",
+      "description": "reads the conditional branch probability for the reversed condition"
+     },
+     {
+      "id": "joint_without_division",
+      "description": "reports the joint probability of the two draws"
+     },
+     {
+      "id": "denominator_only",
+      "description": "reports the probability of the given event"
+     }
+    ],
+    "verification": {
+     "independent_path": "all ordered pairs of distinguishable objects are enumerated and the conditional proportion is counted directly, independent of the tree arithmetic",
+     "method": "ordered-pair enumeration"
+    },
+    "judgment_demand": [
+     "procedure_choice",
+     "calculated_value_decision",
+     "representation_reading"
+    ]
+   },
+   "difficulty_signals": {
+    "steps": [
+     "Identify the two paths of the tree on which the second draw is the given outcome, and the one of them that starts with the first outcome asked about",
+     "Multiply along each of those paths and add the two path probabilities to get the probability of the given event",
+     "Divide the probability of the path asked about by the probability of the given event"
+    ],
+    "concepts": [
+     "conditional probability read from a tree",
+     "total probability with dependent draws"
+    ],
+    "representations": 2,
+    "distractor_fail_step": {
+     "$0.667$": 1,
+     "$0.256$": 2,
+     "$0.615$": 3
+    },
+    "arithmetic": "light"
+   },
+   "seed": 9400,
+   "pack_id": "st_two_draw_conditional-s9400",
+   "explanation_en": "The correct answer is $0.417$. Add the two paths whose second draw is red: the probability of that event is $0.6154$; the path through blue first has probability $0.2564$, so the answer is $0.2564/0.6154 \\approx 0.417$.\n$0.256$ is incorrect: Finds the probability that the first is blue and the second is red but does not divide by the probability of the given event.\n$0.615$ is incorrect: Reports the overall probability that the second draw is red, which is the denominator rather than the conditional probability.\n$0.667$ is incorrect: Reads the branch probability for the second draw given the first, which reverses the conditional probability that is asked for."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_two_draw_conditional",
+   "facts": [
+    "a=8",
+    "b=5"
+   ],
+   "seed": 9400
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Conditional probability from a tree with dependent draws; fits 2.6/3.C."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "0.417 is correct and unique; rounding stated."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Tree data complete with branch labels and probabilities."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions, each explained; the key is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Light arithmetic, calculator allowed, typical load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound: the key is unique and correct, the tree stimulus is complete, and the distractors map to distinct misconceptions."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The student must read the tree and compute P(second red) by total probability over two dependent branches (56/156 + 40/156). They then form the Bayes-style conditional 40/96 = 0.417. This is 3 sequential steps that combine conditional probability with total probability. Distractors correspond to the joint probability (0.256), the marginal P(first red) (0.615), and a branch probability (0.667). Arithmetic is light and the stem is short, so there are no unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m07-k1",
+  "cellId": "ap_statistics-m07",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "2.6",
+  "unitCode": "2",
+  "skillPrimary": "3.C",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_two_draw_conditional",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "The student must compute the joint probability P(N1 and W2) from the tree branches, sum the two paths to get P(W2) (total probability with dependent draws), and then divide to get the reversed conditional probability. This is 3 sequential steps combining conditional probability and total probability, and the result of each step feeds the next. Distractors such as 0.400 (P(W2)) and 0.444 (the branch P(W2|N1)) are plausible partial results. The arithmetic uses small fractions with a clean answer of 0.667, the stem is short, and the tree is consistent with the stem, so none of the difficulty comes from unfair sources.",
+  "payload": {
+   "archetype": "st_two_draw_conditional",
+   "topic": "2.6",
+   "skill": "3.C",
+   "calculator": "allowed",
+   "stem": "A raffle drum contains $4$ winning tickets and $6$ non-winning tickets. Two tickets are drawn at random, one after the other, without replacement. The tree diagram shows the probabilities of the first and second draws. Given that the second ticket is winning, what is the probability that the first ticket was non-winning? Round to three decimal places.",
+   "stimulus": {
+    "kind": "stat_chart",
+    "description": "Probability tree for two draws without replacement",
+    "data": {
+     "chart": "tree",
+     "tree": {
+      "branches": [
+       {
+        "name": "Winning",
+        "label": "2/5",
+        "next": [
+         {
+          "name": "Winning",
+          "label": "1/3"
+         },
+         {
+          "name": "Not win",
+          "label": "2/3"
+         }
+        ]
+       },
+       {
+        "name": "Not win",
+        "label": "3/5",
+        "next": [
+         {
+          "name": "Winning",
+          "label": "4/9"
+         },
+         {
+          "name": "Not win",
+          "label": "5/9"
+         }
+        ]
+       }
+      ]
+     }
+    }
+   },
+   "options": [
+    {
+     "text": "$0.400$",
+     "why": "Reports the overall probability that the second draw is winning, which is the denominator rather than the conditional probability.",
+     "value": "0.40000000"
+    },
+    {
+     "text": "$0.667$",
+     "why": "Add the two paths whose second draw is winning: the probability of that event is $0.4000$; the path through non-winning first has probability $0.2667$, so the answer is $0.2667/0.4000 \\approx 0.667$.",
+     "value": "0.66666667"
+    },
+    {
+     "text": "$0.267$",
+     "why": "Finds the probability that the first is non-winning and the second is winning but does not divide by the probability of the given event.",
+     "value": "0.26666667"
+    },
+    {
+     "text": "$0.444$",
+     "why": "Reads the branch probability for the second draw given the first, which reverses the conditional probability that is asked for.",
+     "value": "0.44444444"
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 125,
+   "facts": [
+    "a=4",
+    "b=6"
+   ],
+   "blueprint": {
+    "id": "st_two_draw_conditional",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Find the probability of the first draw given the second draw from a tree for draws without replacement",
+    "topic": "2.6",
+    "skill": "3.C",
+    "student_thinking": [
+     "Identify the two paths of the tree on which the second draw is the given outcome, and the one of them that starts with the first outcome asked about",
+     "Multiply along each of those paths and add the two path probabilities to get the probability of the given event",
+     "Divide the probability of the path asked about by the probability of the given event"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "P(first given second) = P(first and second) / P(second), with the second-draw probabilities depending on the first draw",
+      "evidence": "the tree gives the first-draw probabilities and the second-draw probabilities conditional on the first draw"
+     }
+    ],
+    "material": {
+     "type": "probability_tree",
+     "must_include": [
+      "first-draw probabilities",
+      "second-draw conditional probabilities"
+     ]
+    },
+    "misconceptions": [
+     {
+      "id": "branch_instead_of_path",
+      "description": "reads the conditional branch probability for the reversed condition"
+     },
+     {
+      "id": "joint_without_division",
+      "description": "reports the joint probability of the two draws"
+     },
+     {
+      "id": "denominator_only",
+      "description": "reports the probability of the given event"
+     }
+    ],
+    "verification": {
+     "independent_path": "all ordered pairs of distinguishable objects are enumerated and the conditional proportion is counted directly, independent of the tree arithmetic",
+     "method": "ordered-pair enumeration"
+    },
+    "judgment_demand": [
+     "procedure_choice",
+     "calculated_value_decision",
+     "representation_reading"
+    ]
+   },
+   "difficulty_signals": {
+    "steps": [
+     "Identify the two paths of the tree on which the second draw is the given outcome, and the one of them that starts with the first outcome asked about",
+     "Multiply along each of those paths and add the two path probabilities to get the probability of the given event",
+     "Divide the probability of the path asked about by the probability of the given event"
+    ],
+    "concepts": [
+     "conditional probability read from a tree",
+     "total probability with dependent draws"
+    ],
+    "representations": 2,
+    "distractor_fail_step": {
+     "$0.444$": 1,
+     "$0.267$": 2,
+     "$0.400$": 3
+    },
+    "arithmetic": "light"
+   },
+   "seed": 9401,
+   "pack_id": "st_two_draw_conditional-s9401",
+   "explanation_en": "The correct answer is $0.667$. Add the two paths whose second draw is winning: the probability of that event is $0.4000$; the path through non-winning first has probability $0.2667$, so the answer is $0.2667/0.4000 \\approx 0.667$.\n$0.400$ is incorrect: Reports the overall probability that the second draw is winning, which is the denominator rather than the conditional probability.\n$0.267$ is incorrect: Finds the probability that the first is non-winning and the second is winning but does not divide by the probability of the given event.\n$0.444$ is incorrect: Reads the branch probability for the second draw given the first, which reverses the conditional probability that is asked for."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_two_draw_conditional",
+   "facts": [
+    "a=4",
+    "b=6"
+   ],
+   "seed": 9401
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Reversing a conditional probability from a tree is squarely 2.6 and 3.C."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "(4/15)/(6/15)=0.667 is unique; the distractors are distinct values."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The tree data is complete and consistent with the stem; rounding is stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option encodes a distinct misconception and is explained. The 0.444 explanation wording is slightly loose but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The multi-step but light arithmetic and the calculator allowance are typical of the AP exam."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clear, in-scope item with a complete tree and distinct distractors; it passes."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The student must compute the joint probability P(N1 and W2) from the tree branches, sum the two paths to get P(W2) (total probability with dependent draws), and then divide to get the reversed conditional probability. This is 3 sequential steps combining conditional probability and total probability, and the result of each step feeds the next. Distractors such as 0.400 (P(W2)) and 0.444 (the branch P(W2|N1)) are plausible partial results. The arithmetic uses small fractions with a clean answer of 0.667, the stem is short, and the tree is consistent with the stem, so none of the difficulty comes from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m08-k0",
+  "cellId": "ap_statistics-m08",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "3.2",
+  "unitCode": "3",
+  "skillPrimary": "3.C",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_phat_normal_prob",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "The item requires checking the normal-model conditions (np, n(1-p), and the 10% condition), computing the standard deviation of p-hat, and then finding the z-score and the normal probability. A student must carry the result from each step into the next. The distractors include a wrong tail (0.042), a wrong center or SD (0.549), and a misconception about needing p = 0.5. Arithmetic is light and the stem is short, so the difficulty comes from concept depth and not from unfair sources.",
+  "payload": {
+   "archetype": "st_phat_normal_prob",
+   "topic": "3.2",
+   "skill": "3.C",
+   "calculator": "allowed",
+   "stem": "Suppose that $60\\%$ of the $40000$ registered voters in a large city support a proposed tax. A simple random sample of $200$ of them is selected, and $\\hat{p}$ is the proportion of the sample who support a proposed tax. Which of the following is the best statement about the conditions for a normal model for $\\hat{p}$ and about $P(\\hat{p} < 0.66)$? Round the probability to three decimal places.",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "The conditions are met, and the probability is approximately $0.549$",
+     "why": "Uses $\\sqrt{p(1-p)}$ as the standard deviation of $\\hat{p}$ without dividing by $\\sqrt{n}$.",
+     "value": "0.54873838"
+    },
+    {
+     "text": "The conditions are met, and the probability is approximately $0.042$",
+     "why": "Finds the probability in the wrong tail: the area to the left of the value is the one asked for.",
+     "value": "0.041632258"
+    },
+    {
+     "text": "The normal model is not appropriate, because the population proportion is not equal to $0.5$",
+     "why": "Treats a population proportion of exactly $0.5$ as a requirement; the large counts condition is that $np$ and $n(1-p)$ are both at least $10$, which holds here.",
+     "value": null
+    },
+    {
+     "text": "The conditions are met, and the probability is approximately $0.958$",
+     "why": "$np = 120$ and $n(1-p) = 80$ are both at least $10$ and the sample is less than $10\\%$ of the population, so $\\hat{p}$ is approximately normal with mean $0.6$ and standard deviation $\\sqrt{0.6(1-0.6)/200} \\approx 0.0346$; $z = 1.73$ gives $0.958$.",
+     "value": "0.95836774"
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 120,
+   "facts": [
+    "p=0.6",
+    "n=200",
+    "c=0.66"
+   ],
+   "blueprint": {
+    "id": "st_phat_normal_prob",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Verify the conditions for a normal model for a sample proportion and find a probability about the sample proportion",
+    "topic": "3.2",
+    "skill": "3.C",
+    "student_thinking": [
+     "Check the large counts condition with the population proportion and the 10% condition for independence before using a normal model",
+     "Compute the mean and the standard deviation of the sampling distribution of $\\hat{p}$ and standardize the stated value",
+     "Find the area in the tail that the event describes"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "p-hat is approximately normal with mean p and standard deviation sqrt(p(1-p)/n) when np and n(1-p) are at least 10 and the sample is under 10 percent of the population",
+      "evidence": "the stem gives the population proportion, the sample size, the population size and the event for p-hat"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "standard_deviation_without_root_n",
+      "description": "omits the square root of n"
+     },
+     {
+      "id": "wrong_tail",
+      "description": "uses the wrong tail"
+     },
+     {
+      "id": "sample_size_rule_misapplied",
+      "description": "rejects the normal model with a rule that does not apply"
+     }
+    ],
+    "verification": {
+     "independent_path": "the normal probability is computed with math.erf and again with scipy; an exact binomial probability must be within 0.03 of the normal value so the approximation is sound",
+     "method": "erf versus scipy plus exact binomial"
+    },
+    "judgment_demand": [
+     "condition_check",
+     "calculated_value_decision"
+    ]
+   },
+   "difficulty_signals": {
+    "steps": [
+     "Check the large counts condition with the population proportion and the 10% condition for independence before using a normal model",
+     "Compute the mean and the standard deviation of the sampling distribution of $\\hat{p}$ and standardize the stated value",
+     "Find the area in the tail that the event describes"
+    ],
+    "concepts": [
+     "conditions for the sampling distribution of a sample proportion",
+     "normal probability calculation for a sample proportion"
+    ],
+    "representations": 1,
+    "distractor_fail_step": {
+     "The conditions are met, and the probability is approximately $0.549$": 2,
+     "The conditions are met, and the probability is approximately $0.042$": 3,
+     "The normal model is not appropriate, because the population proportion is not equal to $0.5$": 1
+    },
+    "arithmetic": "light"
+   },
+   "seed": 9400,
+   "pack_id": "st_phat_normal_prob-s9400",
+   "explanation_en": "The correct answer is The conditions are met, and the probability is approximately $0.958$. $np = 120$ and $n(1-p) = 80$ are both at least $10$ and the sample is less than $10\\%$ of the population, so $\\hat{p}$ is approximately normal with mean $0.6$ and standard deviation $\\sqrt{0.6(1-0.6)/200} \\approx 0.0346$; $z = 1.73$ gives $0.958$.\nThe conditions are met, and the probability is approximately $0.549$ is incorrect: Uses $\\sqrt{p(1-p)}$ as the standard deviation of $\\hat{p}$ without dividing by $\\sqrt{n}$.\nThe conditions are met, and the probability is approximately $0.042$ is incorrect: Finds the probability in the wrong tail: the area to the left of the value is the one asked for.\nThe normal model is not appropriate, because the population proportion is not equal to $0.5$ is incorrect: Treats a population proportion of exactly $0.5$ as a requirement; the large counts condition is that $np$ and $n(1-p)$ are both at least $10$, which holds here."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_phat_normal_prob",
+   "facts": [
+    "p=0.6",
+    "n=200",
+    "c=0.66"
+   ],
+   "seed": 9400
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Sampling distribution of p-hat, conditions, normal probability; fits 3.2 and 3.C."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Key 0.958 verified; unique correct option."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; rounding stated; all needed information given (p, N, n, event)."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception (missing sqrt n, wrong tail, misapplied p=0.5 rule); the explanation addresses each one."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 90-120 seconds, calculator use is appropriate, light arithmetic."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound item with a correct, unique key and distinct distractors. The only weakness is a minor format asymmetry in the options (one rejects the model, three accept it), which does not make the item fail."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The item requires checking the normal-model conditions (np, n(1-p), and the 10% condition), computing the standard deviation of p-hat, and then finding the z-score and the normal probability. A student must carry the result from each step into the next. The distractors include a wrong tail (0.042), a wrong center or SD (0.549), and a misconception about needing p = 0.5. Arithmetic is light and the stem is short, so the difficulty comes from concept depth and not from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m08-k1",
+  "cellId": "ap_statistics-m08",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "3.2",
+  "unitCode": "3",
+  "skillPrimary": "3.C",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_phat_normal_prob",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "The item needs three linked steps: verify the normal-model conditions (np and n(1-p) at least 10, plus the 10% condition), compute the standard deviation and z-score, then find the upper-tail probability and match it to an option. It combines two concepts, conditions and a normal probability for p-hat. Two distractors (wrong tail, other miscalculation) pass the conditions step and fail only later. Arithmetic is light, the stem is short and unambiguous, and the answer 0.838 checks out (SD about 0.0406, z about -0.985). This fits the exam_prep rubric.",
+  "payload": {
+   "archetype": "st_phat_normal_prob",
+   "topic": "3.2",
+   "skill": "3.C",
+   "calculator": "allowed",
+   "stem": "Suppose that $45\\%$ of the $60000$ customers of a large online retailer return at least one item. A simple random sample of $150$ of them is selected, and $\\hat{p}$ is the proportion of the sample who return at least one item. Which of the following is the best statement about the conditions for a normal model for $\\hat{p}$ and about $P(\\hat{p} > 0.41)$? Round the probability to three decimal places.",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "The normal model is not appropriate, because the population proportion is not equal to $0.5$",
+     "why": "Treats a population proportion of exactly $0.5$ as a requirement; the large counts condition is that $np$ and $n(1-p)$ are both at least $10$, which holds here.",
+     "value": null
+    },
+    {
+     "text": "The conditions are met, and the probability is approximately $0.838$",
+     "why": "$np = 67.5$ and $n(1-p) = 82.5$ are both at least $10$ and the sample is less than $10\\%$ of the population, so $\\hat{p}$ is approximately normal with mean $0.45$ and standard deviation $\\sqrt{0.45(1-0.45)/150} \\approx 0.0406$; $z = -0.98$ gives $0.838$.",
+     "value": "0.83762212"
+    },
+    {
+     "text": "The conditions are met, and the probability is approximately $0.162$",
+     "why": "Finds the probability in the wrong tail: the area to the right of the value is the one asked for.",
+     "value": "0.16237788"
+    },
+    {
+     "text": "The conditions are met, and the probability is approximately $0.532$",
+     "why": "Uses $\\sqrt{p(1-p)}$ as the standard deviation of $\\hat{p}$ without dividing by $\\sqrt{n}$.",
+     "value": "0.53204164"
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 120,
+   "facts": [
+    "p=0.45",
+    "n=150",
+    "c=0.41"
+   ],
+   "blueprint": {
+    "id": "st_phat_normal_prob",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Verify the conditions for a normal model for a sample proportion and find a probability about the sample proportion",
+    "topic": "3.2",
+    "skill": "3.C",
+    "student_thinking": [
+     "Check the large counts condition with the population proportion and the 10% condition for independence before using a normal model",
+     "Compute the mean and the standard deviation of the sampling distribution of $\\hat{p}$ and standardize the stated value",
+     "Find the area in the tail that the event describes"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "p-hat is approximately normal with mean p and standard deviation sqrt(p(1-p)/n) when np and n(1-p) are at least 10 and the sample is under 10 percent of the population",
+      "evidence": "the stem gives the population proportion, the sample size, the population size and the event for p-hat"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "standard_deviation_without_root_n",
+      "description": "omits the square root of n"
+     },
+     {
+      "id": "wrong_tail",
+      "description": "uses the wrong tail"
+     },
+     {
+      "id": "sample_size_rule_misapplied",
+      "description": "rejects the normal model with a rule that does not apply"
+     }
+    ],
+    "verification": {
+     "independent_path": "the normal probability is computed with math.erf and again with scipy; an exact binomial probability must be within 0.03 of the normal value so the approximation is sound",
+     "method": "erf versus scipy plus exact binomial"
+    },
+    "judgment_demand": [
+     "condition_check",
+     "calculated_value_decision"
+    ]
+   },
+   "difficulty_signals": {
+    "steps": [
+     "Check the large counts condition with the population proportion and the 10% condition for independence before using a normal model",
+     "Compute the mean and the standard deviation of the sampling distribution of $\\hat{p}$ and standardize the stated value",
+     "Find the area in the tail that the event describes"
+    ],
+    "concepts": [
+     "conditions for the sampling distribution of a sample proportion",
+     "normal probability calculation for a sample proportion"
+    ],
+    "representations": 1,
+    "distractor_fail_step": {
+     "The conditions are met, and the probability is approximately $0.532$": 2,
+     "The conditions are met, and the probability is approximately $0.162$": 3,
+     "The normal model is not appropriate, because the population proportion is not equal to $0.5$": 1
+    },
+    "arithmetic": "light"
+   },
+   "seed": 9401,
+   "pack_id": "st_phat_normal_prob-s9401",
+   "explanation_en": "The correct answer is The conditions are met, and the probability is approximately $0.838$. $np = 67.5$ and $n(1-p) = 82.5$ are both at least $10$ and the sample is less than $10\\%$ of the population, so $\\hat{p}$ is approximately normal with mean $0.45$ and standard deviation $\\sqrt{0.45(1-0.45)/150} \\approx 0.0406$; $z = -0.98$ gives $0.838$.\nThe normal model is not appropriate, because the population proportion is not equal to $0.5$ is incorrect: Treats a population proportion of exactly $0.5$ as a requirement; the large counts condition is that $np$ and $n(1-p)$ are both at least $10$, which holds here.\nThe conditions are met, and the probability is approximately $0.162$ is incorrect: Finds the probability in the wrong tail: the area to the right of the value is the one asked for.\nThe conditions are met, and the probability is approximately $0.532$ is incorrect: Uses $\\sqrt{p(1-p)}$ as the standard deviation of $\\hat{p}$ without dividing by $\\sqrt{n}$."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_phat_normal_prob",
+   "facts": [
+    "p=0.45",
+    "n=150",
+    "c=0.41"
+   ],
+   "seed": 9401
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 3.2: checks the conditions and computes a normal probability for p-hat. This matches skill 3.C."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key is unique. 0.838 is correct and the conditions are met. The wrong options are either false claims or errors that give different values."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is complete, gives N, n and p, and states the rounding convention."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct error (a misapplied rule, the wrong tail, a missing sqrt(n)), and the explanation covers all of them. The options are parallel in form."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 90-120 seconds, needs only a light calculator step, and has a typical AP reading load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. The key is correct and unique, the conditions are met, the rounding is stated, and each distractor encodes a distinct misconception."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The item needs three linked steps: verify the normal-model conditions (np and n(1-p) at least 10, plus the 10% condition), compute the standard deviation and z-score, then find the upper-tail probability and match it to an option. It combines two concepts, conditions and a normal probability for p-hat. Two distractors (wrong tail, other miscalculation) pass the conditions step and fail only later. Arithmetic is light, the stem is short and unambiguous, and the answer 0.838 checks out (SD about 0.0406, z about -0.985). This fits the exam_prep rubric.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m09-k0",
+  "cellId": "ap_statistics-m09",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "1.13",
+  "unitCode": "1",
+  "skillPrimary": "4.B",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_block_table",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "The student must compute or compare differences between treatments within blocks (about 6 in each block) and differences between blocks (about 29), then link this to the purpose of blocking (removing block-to-block variability), and finally recognize that random assignment within blocks is still needed for causal conclusions. This is 3 sequential steps combining 2 concepts (blocking and random assignment), and two distractors survive the first step and fail only later. Arithmetic is light, the stem is short, and the scope is within Unit 1 experimental design, so nothing here is an unfair source of difficulty.",
+  "payload": {
+   "archetype": "st_block_table",
+   "topic": "1.13",
+   "skill": "4.B",
+   "calculator": "allowed",
+   "stem": "An experiment compares two treatments using $60$ patients. The patients were first separated into two blocks, and within each block the treatments were assigned at random so that each treatment was given to $15$ patients. The table summarizes the reduction in blood pressure, in points. Which of the following conclusions is best supported by the table and the design?",
+   "stimulus": {
+    "kind": "stat_chart",
+    "description": "Summary of the response by block and treatment",
+    "data": {
+     "chart": "table",
+     "data": {
+      "columns": [
+       "Block",
+       "Treatment",
+       "n",
+       "Mean",
+       "SD"
+      ],
+      "rows": [
+       [
+        "Younger patients",
+        "The new exercise program",
+        "15",
+        "17.9",
+        "3.5"
+       ],
+       [
+        "Younger patients",
+        "The standard program",
+        "15",
+        "11.6",
+        "1.9"
+       ],
+       [
+        "Older patients",
+        "The new exercise program",
+        "15",
+        "46.5",
+        "2.4"
+       ],
+       [
+        "Older patients",
+        "The standard program",
+        "15",
+        "40.8",
+        "3.3"
+       ]
+      ]
+     },
+     "title": "Summary statistics by block and treatment"
+    }
+   },
+   "options": [
+    {
+     "text": "Blocking guarantees that the new exercise program caused the difference of about $6$, so random assignment of the treatments within the blocks was not necessary in this design",
+     "why": "Blocking controls only the blocking variable; random assignment within each block is still needed to balance all other variables.",
+     "value": null
+    },
+    {
+     "text": "The new exercise program works much better in older patients than in younger patients, so the effect of the treatment depends on the block and blocking was not useful in this experiment",
+     "why": "Misreads the table: the treatment means differ by about the same amount ($6.3$ and $5.7$) in the two blocks.",
+     "value": null
+    },
+    {
+     "text": "The difference of about $29$ between the blocks is an effect of the treatments, so the blocks should be ignored and all $60$ patients compared as one group",
+     "why": "Attributes the difference between the blocks to the treatments, although every block received both treatments.",
+     "value": null
+    },
+    {
+     "text": "The reduction in blood pressure differs by about $29$ between the blocks but by only about $6$ between the treatments in each block, so blocking removed the block differences while random assignment within blocks is still needed",
+     "why": "Within each block the treatment means differ by $6.3$ and $5.7$, while the block means differ by about $28.9$ and the standard deviations are small; blocking removes the block-to-block variation, and randomizing within blocks balances the other variables.",
+     "value": null
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 120,
+   "facts": [
+    "nn=15",
+    "d=6.3,5.7",
+    "gap=28.9"
+   ],
+   "blueprint": {
+    "id": "st_block_table",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Judge from a table of means and standard deviations by block and treatment what blocking accomplished and what random assignment is still needed for",
+    "topic": "1.13",
+    "skill": "4.B",
+    "student_thinking": [
+     "Compare the treatment means within each block and see that the difference is about the same in both blocks",
+     "Compare the difference between the blocks with the differences within blocks and the standard deviations",
+     "Connect the pattern to the purpose of blocking and to the role of random assignment within blocks"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "blocking separates a large block difference from the treatment comparison, and random assignment within blocks is still needed to balance other variables",
+      "evidence": "the stem describes the randomized block design and the table gives the means and standard deviations by block and treatment"
+     }
+    ],
+    "material": {
+     "type": "table",
+     "must_include": [
+      "block",
+      "treatment",
+      "mean",
+      "standard deviation"
+     ]
+    },
+    "misconceptions": [
+     {
+      "id": "treatment_effect_misread",
+      "description": "reads the table as a treatment effect that depends on the block"
+     },
+     {
+      "id": "block_difference_credited_to_treatment",
+      "description": "credits the block difference to the treatments"
+     },
+     {
+      "id": "blocking_replaces_randomization",
+      "description": "believes blocking makes random assignment unnecessary"
+     }
+    ],
+    "verification": {
+     "independent_path": "the cell means and standard deviations are recomputed from the raw simulated data with numpy and with the statistics module; the within-block differences, the block gap and the standard deviations must satisfy fixed thresholds",
+     "method": "raw-data recomputation"
+    },
+    "judgment_demand": [
+     "claim_justification",
+     "representation_reading"
+    ]
+   },
+   "difficulty_signals": {
+    "steps": [
+     "Compare the treatment means within each block and see that the difference is about the same in both blocks",
+     "Compare the difference between the blocks with the differences within blocks and the standard deviations",
+     "Connect the pattern to the purpose of blocking and to the role of random assignment within blocks"
+    ],
+    "concepts": [
+     "purpose and benefit of blocking",
+     "role of random assignment within blocks"
+    ],
+    "representations": 2,
+    "distractor_fail_step": {
+     "The new exercise program works much better in older patients than in younger patients, so the effect of the treatment depends on the block and blocking was not useful in this experiment": 1,
+     "The difference of about $29$ between the blocks is an effect of the treatments, so the blocks should be ignored and all $60$ patients compared as one group": 2,
+     "Blocking guarantees that the new exercise program caused the difference of about $6$, so random assignment of the treatments within the blocks was not necessary in this design": 3
+    },
+    "arithmetic": "light"
+   },
+   "seed": 9400,
+   "pack_id": "st_block_table-s9400",
+   "explanation_en": "The correct answer is The reduction in blood pressure differs by about $29$ between the blocks but by only about $6$ between the treatments in each block, so blocking removed the block differences while random assignment within blocks is still needed. Within each block the treatment means differ by $6.3$ and $5.7$, while the block means differ by about $28.9$ and the standard deviations are small; blocking removes the block-to-block variation, and randomizing within blocks balances the other variables.\nBlocking guarantees that the new exercise program caused the difference of about $6$, so random assignment of the treatments within the blocks was not necessary in this design is incorrect: Blocking controls only the blocking variable; random assignment within each block is still needed to balance all other variables.\nThe new exercise program works much better in older patients than in younger patients, so the effect of the treatment depends on the block and blocking was not useful in this experiment is incorrect: Misreads the table: the treatment means differ by about the same amount ($6.3$ and $5.7$) in the two blocks.\nThe difference of about $29$ between the blocks is an effect of the treatments, so the blocks should be ignored and all $60$ patients compared as one group is incorrect: Attributes the difference between the blocks to the treatments, although every block received both treatments."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_block_table",
+   "facts": [
+    "nn=15",
+    "d=6.3,5.7",
+    "gap=28.9"
+   ],
+   "seed": 9400
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Blocking and random assignment within blocks, justified from a table. Fits topic 1.13 and skill 4.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option D is the unique defensible answer. The treatment differences of 6.3 and 5.7 are similar and the block gap is about 29. The phrase 'removed the block differences' is loose but acceptable."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table data is complete, with columns, rows, n, mean, SD, and units given in the stem. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception (blocking replaces randomization, treatment effect depends on block, block difference credited to treatment), and the explanation addresses each. The key option is somewhat longer than the others, a mild giveaway."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 120 seconds, light arithmetic, and the calculator is not needed. The options are long, but the load is acceptable."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. The key is unique and consistent with the table, and the distractors are distinct misconceptions. The only minor flaws are the slightly longer key option and the loose phrase 'removed the block differences'."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The student must compute or compare differences between treatments within blocks (about 6 in each block) and differences between blocks (about 29), then link this to the purpose of blocking (removing block-to-block variability), and finally recognize that random assignment within blocks is still needed for causal conclusions. This is 3 sequential steps combining 2 concepts (blocking and random assignment), and two distractors survive the first step and fail only later. Arithmetic is light, the stem is short, and the scope is within Unit 1 experimental design, so nothing here is an unfair source of difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m09-k1",
+  "cellId": "ap_statistics-m09",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "1.13",
+  "unitCode": "1",
+  "skillPrimary": "4.B",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_block_table",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "The student must (1) compare means across blocks (about 20 points) and within blocks (about 5 points), (2) connect that pattern to the purpose of blocking, and (3) recognize that random assignment within blocks is still needed for causal claims. This meets the rubric's 3 or more steps and 2 or more combined concepts. Two of the three distractors survive the first step and fail only later. Arithmetic is light, the reading is short, and everything stays within Unit 1 scope.",
+  "payload": {
+   "archetype": "st_block_table",
+   "topic": "1.13",
+   "skill": "4.B",
+   "calculator": "allowed",
+   "stem": "An experiment compares two treatments using $48$ students. The students were first separated into two blocks, and within each block the treatments were assigned at random so that each treatment was given to $12$ students. The table summarizes the score on a final exam, in points. Which of the following conclusions is best supported by the table and the design?",
+   "stimulus": {
+    "kind": "stat_chart",
+    "description": "Summary of the response by block and treatment",
+    "data": {
+     "chart": "table",
+     "data": {
+      "columns": [
+       "Block",
+       "Treatment",
+       "n",
+       "Mean",
+       "SD"
+      ],
+      "rows": [
+       [
+        "Class 1",
+        "The new study guide",
+        "12",
+        "65.6",
+        "5.1"
+       ],
+       [
+        "Class 1",
+        "The old study guide",
+        "12",
+        "59.7",
+        "5.5"
+       ],
+       [
+        "Class 2",
+        "The new study guide",
+        "12",
+        "84.9",
+        "3.5"
+       ],
+       [
+        "Class 2",
+        "The old study guide",
+        "12",
+        "80.2",
+        "3.7"
+       ]
+      ]
+     },
+     "title": "Summary statistics by block and treatment"
+    }
+   },
+   "options": [
+    {
+     "text": "The difference of about $20$ between the blocks is an effect of the treatments, so the blocks should be ignored and all $48$ students compared as one group",
+     "why": "Attributes the difference between the blocks to the treatments, although every block received both treatments.",
+     "value": null
+    },
+    {
+     "text": "Blocking guarantees that the new study guide caused the difference of about $5$, so random assignment of the treatments within the blocks was not necessary in this design",
+     "why": "Blocking controls only the blocking variable; random assignment within each block is still needed to balance all other variables.",
+     "value": null
+    },
+    {
+     "text": "The new study guide works much better in class 2 than in class 1, so the effect of the treatment depends on the block and blocking was not useful in this experiment",
+     "why": "Misreads the table: the treatment means differ by about the same amount ($5.9$ and $4.7$) in the two blocks.",
+     "value": null
+    },
+    {
+     "text": "The exam score differs by about $20$ between the blocks but by only about $5$ between the treatments in each block, so blocking removed the block differences while random assignment within blocks is still needed",
+     "why": "Within each block the treatment means differ by $5.9$ and $4.7$, while the block means differ by about $19.9$ and the standard deviations are small; blocking removes the block-to-block variation, and randomizing within blocks balances the other variables.",
+     "value": null
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 120,
+   "facts": [
+    "nn=12",
+    "d=5.9,4.7",
+    "gap=19.9"
+   ],
+   "blueprint": {
+    "id": "st_block_table",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Judge from a table of means and standard deviations by block and treatment what blocking accomplished and what random assignment is still needed for",
+    "topic": "1.13",
+    "skill": "4.B",
+    "student_thinking": [
+     "Compare the treatment means within each block and see that the difference is about the same in both blocks",
+     "Compare the difference between the blocks with the differences within blocks and the standard deviations",
+     "Connect the pattern to the purpose of blocking and to the role of random assignment within blocks"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "blocking separates a large block difference from the treatment comparison, and random assignment within blocks is still needed to balance other variables",
+      "evidence": "the stem describes the randomized block design and the table gives the means and standard deviations by block and treatment"
+     }
+    ],
+    "material": {
+     "type": "table",
+     "must_include": [
+      "block",
+      "treatment",
+      "mean",
+      "standard deviation"
+     ]
+    },
+    "misconceptions": [
+     {
+      "id": "treatment_effect_misread",
+      "description": "reads the table as a treatment effect that depends on the block"
+     },
+     {
+      "id": "block_difference_credited_to_treatment",
+      "description": "credits the block difference to the treatments"
+     },
+     {
+      "id": "blocking_replaces_randomization",
+      "description": "believes blocking makes random assignment unnecessary"
+     }
+    ],
+    "verification": {
+     "independent_path": "the cell means and standard deviations are recomputed from the raw simulated data with numpy and with the statistics module; the within-block differences, the block gap and the standard deviations must satisfy fixed thresholds",
+     "method": "raw-data recomputation"
+    },
+    "judgment_demand": [
+     "claim_justification",
+     "representation_reading"
+    ]
+   },
+   "difficulty_signals": {
+    "steps": [
+     "Compare the treatment means within each block and see that the difference is about the same in both blocks",
+     "Compare the difference between the blocks with the differences within blocks and the standard deviations",
+     "Connect the pattern to the purpose of blocking and to the role of random assignment within blocks"
+    ],
+    "concepts": [
+     "purpose and benefit of blocking",
+     "role of random assignment within blocks"
+    ],
+    "representations": 2,
+    "distractor_fail_step": {
+     "The new study guide works much better in class 2 than in class 1, so the effect of the treatment depends on the block and blocking was not useful in this experiment": 1,
+     "The difference of about $20$ between the blocks is an effect of the treatments, so the blocks should be ignored and all $48$ students compared as one group": 2,
+     "Blocking guarantees that the new study guide caused the difference of about $5$, so random assignment of the treatments within the blocks was not necessary in this design": 3
+    },
+    "arithmetic": "light"
+   },
+   "seed": 9401,
+   "pack_id": "st_block_table-s9401",
+   "explanation_en": "The correct answer is The exam score differs by about $20$ between the blocks but by only about $5$ between the treatments in each block, so blocking removed the block differences while random assignment within blocks is still needed. Within each block the treatment means differ by $5.9$ and $4.7$, while the block means differ by about $19.9$ and the standard deviations are small; blocking removes the block-to-block variation, and randomizing within blocks balances the other variables.\nThe difference of about $20$ between the blocks is an effect of the treatments, so the blocks should be ignored and all $48$ students compared as one group is incorrect: Attributes the difference between the blocks to the treatments, although every block received both treatments.\nBlocking guarantees that the new study guide caused the difference of about $5$, so random assignment of the treatments within the blocks was not necessary in this design is incorrect: Blocking controls only the blocking variable; random assignment within each block is still needed to balance all other variables.\nThe new study guide works much better in class 2 than in class 1, so the effect of the treatment depends on the block and blocking was not useful in this experiment is incorrect: Misreads the table: the treatment means differ by about the same amount ($5.9$ and $4.7$) in the two blocks."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_block_table",
+   "facts": [
+    "nn=12",
+    "d=5.9,4.7",
+    "gap=19.9"
+   ],
+   "seed": 9401
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Blocking and randomization within blocks, with a claim justified from a table; fits 1.13 and 4.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "D is uniquely supported. A, B and C each contain a clearly false claim."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete with title, columns and rows. n is consistent with the 48 students in the stem."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The three distractors encode distinct misconceptions, and the explanation covers each. Option lengths are similar."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Reasonable load; options are somewhat long but acceptable. No arithmetic is needed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A sound blocking-design item with a unique key, a complete table, and distinct misconception distractors. Passes all criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The student must (1) compare means across blocks (about 20 points) and within blocks (about 5 points), (2) connect that pattern to the purpose of blocking, and (3) recognize that random assignment within blocks is still needed for causal claims. This meets the rubric's 3 or more steps and 2 or more combined concepts. Two of the three distractors survive the first step and fail only later. Arithmetic is light, the reading is short, and everything stays within Unit 1 scope.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m10-k0",
+  "cellId": "ap_statistics-m10",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "3.14",
+  "unitCode": "3",
+  "skillPrimary": "2.E",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_chisq_setup",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Student must (1) recognize the design as a test of homogeneity (fixed independent samples per school), (2) select the matching null hypothesis about equal distributions in the population rather than sample proportions or independence, and (3) compute df=(4-1)(3-1)=6 from the table. Two combined concepts (homogeneity vs independence, df). Distractors survive the df step and fail on hypothesis wording, or vice versa. Short stem, no arithmetic burden, in-scope Unit 3 content.",
+  "payload": {
+   "archetype": "st_chisq_setup",
+   "topic": "3.14",
+   "skill": "2.E",
+   "calculator": "allowed",
+   "stem": "A researcher takes an independent random sample of $100$ students from each of $4$ schools and records the preferred way to get to school of each student in the table shown. The researcher will carry out a chi-square test using these counts. Which of the following gives the appropriate null hypothesis and degrees of freedom?",
+   "stimulus": {
+    "kind": "stat_chart",
+    "description": "Two-way table of school and preferred way to get to school",
+    "data": {
+     "chart": "two_way",
+     "data": {
+      "rowHeader": "School",
+      "rowLabels": [
+       "School 1",
+       "School 2",
+       "School 3",
+       "School 4"
+      ],
+      "colLabels": [
+       "Bus",
+       "Car",
+       "Walk"
+      ],
+      "cells": [
+       [
+        35,
+        32,
+        33
+       ],
+       [
+        23,
+        41,
+        36
+       ],
+       [
+        26,
+        44,
+        30
+       ],
+       [
+        45,
+        20,
+        35
+       ]
+      ]
+     }
+    }
+   },
+   "options": [
+    {
+     "text": "$H_0$: the distribution of preferred way to get to school is the same for all $4$ schools; $df = 6$",
+     "why": "Separate random samples were taken from each of the $4$ schools, so this is a test of homogeneity: the null hypothesis says that the distribution of the response is the same in every group; $df = (4-1)(3-1) = 6$.",
+     "value": null
+    },
+    {
+     "text": "$H_0$: the sample proportions of preferred way to get to school are equal for all $4$ schools; $df = 6$",
+     "why": "States the hypothesis about sample proportions in the table; hypotheses are about population parameters, and the sample proportions differ by chance.",
+     "value": null
+    },
+    {
+     "text": "$H_0$: the distribution of preferred way to get to school is the same for all $4$ schools; $df = 11$",
+     "why": "Uses the number of cells minus $1$ for the degrees of freedom instead of $(4-1)(3-1)$.",
+     "value": null
+    },
+    {
+     "text": "$H_0$: school and preferred way to get to school are independent in the population of all students; $df = 6$",
+     "why": "Describes a test of independence, which is for one random sample classified on two variables; here the samples were taken separately from each group.",
+     "value": null
+    }
+   ],
+   "key_index": 0,
+   "est_seconds": 110,
+   "facts": [
+    "hom=True",
+    "dim=4x3"
+   ],
+   "blueprint": {
+    "id": "st_chisq_setup",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Choose the null hypothesis and the degrees of freedom of a chi-square test from the sampling design and the dimensions of the table",
+    "topic": "3.14",
+    "skill": "2.E",
+    "student_thinking": [
+     "Decide from the sampling design whether the situation is one sample classified on two variables (independence) or separate samples from several groups (homogeneity)",
+     "Choose the null hypothesis that matches the design and is stated about the population",
+     "Find the degrees of freedom from the dimensions of the table as the number of rows minus one times the number of columns minus one"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "one sample classified on two variables gives a test of independence and separate samples from several groups give a test of homogeneity; the degrees of freedom are (rows - 1)(columns - 1)",
+      "evidence": "the stem states how the data were collected and the table shows the counts"
+     }
+    ],
+    "material": {
+     "type": "two_way_table",
+     "must_include": [
+      "all cell counts",
+      "row and column labels"
+     ]
+    },
+    "misconceptions": [
+     {
+      "id": "independence_homogeneity_swapped",
+      "description": "uses the null hypothesis of the other kind of test"
+     },
+     {
+      "id": "statistic_not_parameter",
+      "description": "states the hypothesis about the sample"
+     },
+     {
+      "id": "degrees_of_freedom_cells_minus_one",
+      "description": "uses the number of cells minus one"
+     }
+    ],
+    "verification": {
+     "independent_path": "the degrees of freedom and the expected counts are recomputed with scipy's chi-square contingency routine, and every expected count must be at least 5",
+     "method": "scipy contingency dof and expected counts"
+    },
+    "judgment_demand": [
+     "procedure_choice",
+     "representation_reading"
+    ]
+   },
+   "difficulty_signals": {
+    "steps": [
+     "Decide from the sampling design whether the situation is one sample classified on two variables (independence) or separate samples from several groups (homogeneity)",
+     "Choose the null hypothesis that matches the design and is stated about the population",
+     "Find the degrees of freedom from the dimensions of the table as the number of rows minus one times the number of columns minus one"
+    ],
+    "concepts": [
+     "chi-square test of independence versus homogeneity",
+     "degrees of freedom for a two-way table"
+    ],
+    "representations": 2,
+    "distractor_fail_step": {
+     "$H_0$: school and preferred way to get to school are independent in the population of all students; $df = 6$": 1,
+     "$H_0$: the sample proportions of preferred way to get to school are equal for all $4$ schools; $df = 6$": 2,
+     "$H_0$: the distribution of preferred way to get to school is the same for all $4$ schools; $df = 11$": 3
+    },
+    "arithmetic": "none"
+   },
+   "seed": 9400,
+   "pack_id": "st_chisq_setup-s9400",
+   "explanation_en": "The correct answer is $H_0$: the distribution of preferred way to get to school is the same for all $4$ schools; $df = 6$. Separate random samples were taken from each of the $4$ schools, so this is a test of homogeneity: the null hypothesis says that the distribution of the response is the same in every group; $df = (4-1)(3-1) = 6$.\n$H_0$: the sample proportions of preferred way to get to school are equal for all $4$ schools; $df = 6$ is incorrect: States the hypothesis about sample proportions in the table; hypotheses are about population parameters, and the sample proportions differ by chance.\n$H_0$: the distribution of preferred way to get to school is the same for all $4$ schools; $df = 11$ is incorrect: Uses the number of cells minus $1$ for the degrees of freedom instead of $(4-1)(3-1)$.\n$H_0$: school and preferred way to get to school are independent in the population of all students; $df = 6$ is incorrect: Describes a test of independence, which is for one random sample classified on two variables; here the samples were taken separately from each group."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_chisq_setup",
+   "facts": [
+    "hom=True",
+    "dim=4x3"
+   ],
+   "seed": 9400
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Setting up the chi-square test: homogeneity vs independence from design, plus df. Fits 3.14/2.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Separate random samples from 4 schools give homogeneity, df=6. Option A is the unique correct choice."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Two-way table has complete labels and counts; wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions; each wrong option is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, no arithmetic burden, parallel options."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. The key is unique, the table is complete, and each distractor encodes a distinct misconception. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must (1) recognize the design as a test of homogeneity (fixed independent samples per school), (2) select the matching null hypothesis about equal distributions in the population rather than sample proportions or independence, and (3) compute df=(4-1)(3-1)=6 from the table. Two combined concepts (homogeneity vs independence, df). Distractors survive the df step and fail on hypothesis wording, or vice versa. Short stem, no arithmetic burden, in-scope Unit 3 content.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m10-k1",
+  "cellId": "ap_statistics-m10",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "3.14",
+  "unitCode": "3",
+  "skillPrimary": "2.E",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_chisq_setup",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "The student must (1) recognize that independent samples of 100 from each of 4 schools make this a test of homogeneity, (2) pick the null hypothesis worded as equal distributions across schools, not as independence or as sample proportions, and (3) compute df = (4-1)(3-1) = 6. This meets the rubric of at least 3 steps and 2 combined concepts. Distractors include a sample-statistic null, an independence null that fits the wrong design, and a wrong df of 11. Arithmetic is trivial, the reading load is low, and the content is in scope for topic 3.14.",
+  "payload": {
+   "archetype": "st_chisq_setup",
+   "topic": "3.14",
+   "skill": "2.E",
+   "calculator": "allowed",
+   "stem": "A researcher takes an independent random sample of $100$ students from each of $4$ schools and records the preferred way to get to school of each student in the table shown. The researcher will carry out a chi-square test using these counts. Which of the following gives the appropriate null hypothesis and degrees of freedom?",
+   "stimulus": {
+    "kind": "stat_chart",
+    "description": "Two-way table of school and preferred way to get to school",
+    "data": {
+     "chart": "two_way",
+     "data": {
+      "rowHeader": "School",
+      "rowLabels": [
+       "School 1",
+       "School 2",
+       "School 3",
+       "School 4"
+      ],
+      "colLabels": [
+       "Bus",
+       "Car",
+       "Walk"
+      ],
+      "cells": [
+       [
+        29,
+        25,
+        46
+       ],
+       [
+        31,
+        30,
+        39
+       ],
+       [
+        25,
+        53,
+        22
+       ],
+       [
+        41,
+        23,
+        36
+       ]
+      ]
+     }
+    }
+   },
+   "options": [
+    {
+     "text": "$H_0$: the sample proportions of preferred way to get to school are equal for all $4$ schools; $df = 6$",
+     "why": "States the hypothesis about sample proportions in the table; hypotheses are about population parameters, and the sample proportions differ by chance.",
+     "value": null
+    },
+    {
+     "text": "$H_0$: the distribution of preferred way to get to school is the same for all $4$ schools; $df = 6$",
+     "why": "Separate random samples were taken from each of the $4$ schools, so this is a test of homogeneity: the null hypothesis says that the distribution of the response is the same in every group; $df = (4-1)(3-1) = 6$.",
+     "value": null
+    },
+    {
+     "text": "$H_0$: school and preferred way to get to school are independent in the population of all students; $df = 6$",
+     "why": "Describes a test of independence, which is for one random sample classified on two variables; here the samples were taken separately from each group.",
+     "value": null
+    },
+    {
+     "text": "$H_0$: the distribution of preferred way to get to school is the same for all $4$ schools; $df = 11$",
+     "why": "Uses the number of cells minus $1$ for the degrees of freedom instead of $(4-1)(3-1)$.",
+     "value": null
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 110,
+   "facts": [
+    "hom=True",
+    "dim=4x3"
+   ],
+   "blueprint": {
+    "id": "st_chisq_setup",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Choose the null hypothesis and the degrees of freedom of a chi-square test from the sampling design and the dimensions of the table",
+    "topic": "3.14",
+    "skill": "2.E",
+    "student_thinking": [
+     "Decide from the sampling design whether the situation is one sample classified on two variables (independence) or separate samples from several groups (homogeneity)",
+     "Choose the null hypothesis that matches the design and is stated about the population",
+     "Find the degrees of freedom from the dimensions of the table as the number of rows minus one times the number of columns minus one"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "one sample classified on two variables gives a test of independence and separate samples from several groups give a test of homogeneity; the degrees of freedom are (rows - 1)(columns - 1)",
+      "evidence": "the stem states how the data were collected and the table shows the counts"
+     }
+    ],
+    "material": {
+     "type": "two_way_table",
+     "must_include": [
+      "all cell counts",
+      "row and column labels"
+     ]
+    },
+    "misconceptions": [
+     {
+      "id": "independence_homogeneity_swapped",
+      "description": "uses the null hypothesis of the other kind of test"
+     },
+     {
+      "id": "statistic_not_parameter",
+      "description": "states the hypothesis about the sample"
+     },
+     {
+      "id": "degrees_of_freedom_cells_minus_one",
+      "description": "uses the number of cells minus one"
+     }
+    ],
+    "verification": {
+     "independent_path": "the degrees of freedom and the expected counts are recomputed with scipy's chi-square contingency routine, and every expected count must be at least 5",
+     "method": "scipy contingency dof and expected counts"
+    },
+    "judgment_demand": [
+     "procedure_choice",
+     "representation_reading"
+    ]
+   },
+   "difficulty_signals": {
+    "steps": [
+     "Decide from the sampling design whether the situation is one sample classified on two variables (independence) or separate samples from several groups (homogeneity)",
+     "Choose the null hypothesis that matches the design and is stated about the population",
+     "Find the degrees of freedom from the dimensions of the table as the number of rows minus one times the number of columns minus one"
+    ],
+    "concepts": [
+     "chi-square test of independence versus homogeneity",
+     "degrees of freedom for a two-way table"
+    ],
+    "representations": 2,
+    "distractor_fail_step": {
+     "$H_0$: school and preferred way to get to school are independent in the population of all students; $df = 6$": 1,
+     "$H_0$: the sample proportions of preferred way to get to school are equal for all $4$ schools; $df = 6$": 2,
+     "$H_0$: the distribution of preferred way to get to school is the same for all $4$ schools; $df = 11$": 3
+    },
+    "arithmetic": "none"
+   },
+   "seed": 9401,
+   "pack_id": "st_chisq_setup-s9401",
+   "explanation_en": "The correct answer is $H_0$: the distribution of preferred way to get to school is the same for all $4$ schools; $df = 6$. Separate random samples were taken from each of the $4$ schools, so this is a test of homogeneity: the null hypothesis says that the distribution of the response is the same in every group; $df = (4-1)(3-1) = 6$.\n$H_0$: the sample proportions of preferred way to get to school are equal for all $4$ schools; $df = 6$ is incorrect: States the hypothesis about sample proportions in the table; hypotheses are about population parameters, and the sample proportions differ by chance.\n$H_0$: school and preferred way to get to school are independent in the population of all students; $df = 6$ is incorrect: Describes a test of independence, which is for one random sample classified on two variables; here the samples were taken separately from each group.\n$H_0$: the distribution of preferred way to get to school is the same for all $4$ schools; $df = 11$ is incorrect: Uses the number of cells minus $1$ for the degrees of freedom instead of $(4-1)(3-1)$."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_chisq_setup",
+   "facts": [
+    "hom=True",
+    "dim=4x3"
+   ],
+   "seed": 9401
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. Separate samples from 4 schools make this a homogeneity test, so the key is B with df = 6. The distractors encode distinct misconceptions, the table is complete, and the task load is appropriate.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The student must (1) recognize that independent samples of 100 from each of 4 schools make this a test of homogeneity, (2) pick the null hypothesis worded as equal distributions across schools, not as independence or as sample proportions, and (3) compute df = (4-1)(3-1) = 6. This meets the rubric of at least 3 steps and 2 combined concepts. Distractors include a sample-statistic null, an independence null that fits the wrong design, and a wrong df of 11. Arithmetic is trivial, the reading load is low, and the content is in scope for topic 3.14.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ }
+]

@@ -1,0 +1,494 @@
+{
+ "summary": {
+  "sat_rw": {
+   "cand": 14,
+   "genFail": 0,
+   "formatFail": 0,
+   "detPass": 12,
+   "crossScored": 12,
+   "correct": {
+    "agree": 12,
+    "of": 12,
+    "fablePass": 12,
+    "opusPass": 12
+   },
+   "compliance": {
+    "agree": 12,
+    "of": 12,
+    "fablePass": 12,
+    "opusPass": 12
+   },
+   "hardFit": {
+    "agree": 12,
+    "of": 12,
+    "fablePass": 12,
+    "opusPass": 12
+   },
+   "adoptedBoth": 12,
+   "adoptedOneOnly": 0,
+   "yieldBoth": 0.857,
+   "costUsd": 1.541,
+   "costPerAdoptedBoth": 0.128,
+   "fableOnlyPass": 0,
+   "opusOnlyPass": 0
+  },
+  "sat_math": {
+   "cand": 0,
+   "genFail": 0,
+   "formatFail": 0,
+   "detPass": 0,
+   "crossScored": 0,
+   "correct": {
+    "agree": 0,
+    "of": 0,
+    "fablePass": 0,
+    "opusPass": 0
+   },
+   "compliance": {
+    "agree": 0,
+    "of": 0,
+    "fablePass": 0,
+    "opusPass": 0
+   },
+   "hardFit": {
+    "agree": 0,
+    "of": 0,
+    "fablePass": 0,
+    "opusPass": 0
+   },
+   "adoptedBoth": 0,
+   "adoptedOneOnly": 0,
+   "yieldBoth": 0,
+   "costUsd": 0,
+   "costPerAdoptedBoth": null,
+   "fableOnlyPass": 0,
+   "opusOnlyPass": 0
+  },
+  "adoptedHardFableRule": {
+   "total": 12,
+   "rw": 12,
+   "math": 0,
+   "correctBothRequired": true
+  }
+ },
+ "items": [
+  {
+   "cid": "easy-boundaries-00",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "정답 A 검증: 'strike the shell against the rock.'로 독립절 종결 후 'Once the shell cracks, the otter scoops...'가 완전한 문장. B는 쉼표 스플라이스, C는 'once'절이 앞에 붙은 뒤 쉼표 스플라이스, D는 'once' 뒤 불필요한 쉼표로 종속절 분리. 단일 규칙(독립절 경계)으로 해결 가능하며 오답은 전형적 오개념 — easy 적합. 해달의 돌 사용 서술도 사실과 부합.",
+    "issue": "C에 대한 설명이 다소 부정확함: C는 'once the shell cracks'가 앞 절에 붙은 뒤 'cracks, the otter scoops'에서 쉼표 스플라이스가 생기는 구조인데, 해설은 이를 '문장부호 없이 이어 붙인 융합문'으로 표현함. 결론(오답)과 글자 참조는 정확하며 모순은 없음.Same minor mislabel as the Korean version: C is better described as a comma splice (after \"cracks\") than as a sentence \"with no punctuation.\" Conclusions and letter references match the Korean explanation; no Korean characters present."
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "A는 두 독립절을 마침표로 올바르게 나눈다. B는 쉼표 스플라이스, C는 융합문, D는 'once' 뒤 쉼표로 종속절이 잘못 끊긴다. 하나의 규칙(독립절 경계)만으로 풀 수 있는 전형적 easy 문항이다.",
+    "issue": ""
+   },
+   "cost": 0.15767399999999998
+  },
+  {
+   "cid": "easy-boundaries-01",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [
+    "contract:contract_blank_duplicate_word",
+    "contract:contract_blank_duplicate_word",
+    "contract:contract_blank_duplicate_word",
+    "contract:contract_blank_duplicate_word"
+   ],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": null,
+   "opus": null,
+   "cost": 0.029332
+  },
+  {
+   "cid": "easy-boundaries-02",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "두 독립절(It takes several months ... channels / the delta often reaches ... season)을 접속부사 'as a result'로 연결하는 전형적 boundaries 문항. 세미콜론+쉼표(C)만이 올바르며 A·D는 쉼표 스플라이스, B는 run-on으로 명확히 배제됨. 오카방고 삼각주가 건기 중에 앙골라 고지대 강우로 범람한다는 배경 사실도 정확. 한·영 해설 모두 선택지 참조 일치, 한글 혼입 없음. 단일 규칙으로 해결되는 easy 난이도에 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "독립절 + 접속부사 세미콜론이라는 하나의 규칙만 알면 풀린다. 오답은 전형적인 쉼표 스플라이스/무종지문이다. 오카방고 델타 관련 사실(앙골라 고지대 강우, 건기에 최고 수위)도 정확하다.",
+    "issue": ""
+   },
+   "cost": 0.11278400000000001
+  },
+  {
+   "cid": "easy-boundaries-03",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [
+    "contract:contract_blank_duplicate_word",
+    "contract:contract_blank_duplicate_word",
+    "contract:contract_blank_duplicate_word",
+    "contract:contract_blank_duplicate_word"
+   ],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": null,
+   "opus": null,
+   "cost": 0.028536
+  },
+  {
+   "cid": "easy-form_structure_sense-00",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "정답 A 검산 완료: 지문 전체가 과거 시제(built, were, stayed, ended)이므로 \"gave\"가 적절. B·C는 시제 불일치에 더해 단수형이라 복수 주어 \"libraries\"와 수 일치도 어긋나지만, 해설이 시제 근거만 든 것은 오류가 아닌 생략 수준. 한·영 해설 결론·글자 참조 일치, 한글 혼입 없음. 역사적 배경(19세기 후반 영국 공공도서관 확산) 사실관계 문제 없음. 단일 규칙(시제 일관성)으로 풀리고 단서가 명시적이어서 easy에 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "과거 시제 단서가 명확한 동사 시제 문항이다. 오답들은 전형적인 시제 오개념이다. 다만 A를 뺀 세 선택지가 모두 단수형이라 수 일치만으로도 답을 고를 수 있다. 그래도 easy 난이도에는 맞다.",
+    "issue": "사소한 누락: B(gives)와 C(has given)도 단수형이라 복수 주어 'libraries'와 수 일치가 안 되는데, 해설은 D에서만 수 일치를 지적한다. 틀린 내용은 아니며 정답 근거는 충분하다.한국어 해설과 같은 누락(B와 C의 수 일치 오류를 언급하지 않음)이 있다. 그 외에는 정확하고 자연스럽다."
+   },
+   "cost": 0.125938
+  },
+  {
+   "cid": "easy-form_structure_sense-01",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "주어 \"the paint\"(단수)에 대한 수 일치 단일 규칙으로 해결. 오답 A/C/D는 모두 복수형이며 앞 문장의 \"stones\" 때문에 그럴듯한 오개념 유도. B \"absorbs\"는 \"releases\"와 시제도 병치됨. 한·영 해설 결론 및 글자 참조 일치, 영어 해설에 한글 없음. 지문 창작 수준으로 저작권 의심 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "주어-동사 수일치 단일 규칙. 주어 \"the paint\"는 빈칸 바로 앞에 있다. 오답 A, C, D는 모두 복수형이고, 앞 문장의 \"stones\"에 끌려 고를 수 있는 전형적 오개념이다. 실제 사례인 Van Gogh-Roosegaarde 자전거길과도 사실상 부합한다.",
+    "issue": ""
+   },
+   "cost": 0.11549
+  },
+  {
+   "cid": "easy-form_structure_sense-02",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "주어 \"the kelp\"(단수·불가산) + \"grown\" → 현재완료 \"has grown\"으로 C가 유일한 정답. A는 인접 복수 명사(areas, populations)에 의한 전형적 수 일치 오개념, B·D는 복수형이자 수동태를 만들어 배제됨. 단일 규칙(주어-동사 수 일치 + 완료형 조동사)으로 풀리고 단서가 명시적이어서 easy에 적합. 해양수달-성게-켈프 생태 설명도 사실에 부합.",
+    "issue": "사소함: B/D의 수동태 예시를 \"the kelp was grown\"으로 들었는데 선택지는 \"were/are\"이므로 \"were grown\"으로 쓰는 편이 더 정확함. 결론·글자 참조에는 문제 없음."
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "물질명사 kelp는 단수 취급하므로 has grown(현재완료)이 맞다. 주어-동사 수일치라는 규칙 하나로 풀리고, 근처의 복수 명사(areas, populations)가 전형적인 함정이라 easy에 적합하다.",
+    "issue": "사소한 점: 수동태의 뜻을 \"켈프가 자라게 되었다\"로 옮겼는데, \"길러졌다/재배되었다\"가 더 정확하다. 결론에는 영향 없음."
+   },
+   "cost": 0.1329096
+  },
+  {
+   "cid": "easy-form_structure_sense-03",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "주어 \"letters\"(복수) + 짧은 전치사구 \"inside the box\" 구조로 복수 동사 \"are\"가 유일한 정답임을 직접 확인. 오답 A·B·C는 모두 단수형으로 인접 명사 \"box\"를 주어로 오인한 전형적 오개념을 반영하며, 현재 시제 서술과도 일치. 한국어·영어 해설 모두 동일 결론과 선택지 참조로 모순 없음. 가상의 소설·작가 사용으로 저작권 문제 없음. 한 가지 규칙(주어-동사 수 일치, 단일 전치사구 간섭)만으로 풀리는 easy 난이도에 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "주어-동사 수일치 하나만 보면 풀린다. 오답 셋은 모두 단수형이라 'box'에 이끌리는 전형적 오개념이다. 소설과 작가는 가상으로 보인다.",
+    "issue": ""
+   },
+   "cost": 0.1118336
+  },
+  {
+   "cid": "easy-transitions-00",
+   "skill": "transitions",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "앞 문장(초반 장들의 긴 풍경 묘사)이 원인, 뒤 문장(엘라이자가 50쪽을 기다림)이 결과로 명확히 연결되어 A가 가장 논리적임. D(Similarly)는 두 문장이 별개의 유사 사례가 아니라 동일 현상의 원인·결과이므로 배제 가능하나, 뒤 문장의 'just as readers of older novels often did'와 맞물려 다소 그럴듯한 오답으로 작동함(easy 수준에서 허용 가능한 전형적 오개념). 한국어·영어 해설 모두 정답 A와 오답 배제 근거가 일치하며 한글 혼입 없음. 가상 작가·작품으로 저작권 문제 없음. 단일 인과 관계 규칙으로 풀리므로 easy 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "바로 앞 문장(긴 묘사)과의 인과 관계가 분명해 A가 가장 적절함. C는 첫 문장의 '느린 문체'를 보여 주는 예로 읽힐 여지가 약간 있지만, 바로 앞 문장과 연결하면 결과 관계가 더 자연스러움. 쉬운 난이도에 맞음.",
+    "issue": ""
+   },
+   "cost": 0.15674200000000002
+  },
+  {
+   "cid": "easy-transitions-01",
+   "skill": "transitions",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "극도의 건조함(원인) → 토양에 생명체가 거의 없음(결과)이라는 단일 인과 관계로 B가 명확히 성립. A(대조), C(예시), D(유사 사례)는 규칙을 알면 바로 배제되지만 전형적 오개념으로 그럴듯함. 아타카마 사막이 화성 탐사 장비 테스트지로 쓰인다는 내용도 사실에 부합. 한·영 해설 모두 동일 결론·글자 참조, 영어 자연스럽고 한글 없음. easy 난이도 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "두 번째 문장이 극도의 건조함에서 비롯된 결과(생명체가 거의 없는 토양)를 직접 보여 주므로 인과 관계를 나타내는 연결어로 바로 풀린다. 오답 However·For example·Similarly는 연결어 문항에서 흔히 보는 그럴듯한 오개념이다. 아타카마 사막이 화성 탐사 장비 시험장으로 쓰인다는 내용도 사실에 맞다.",
+    "issue": ""
+   },
+   "cost": 0.110094
+  },
+  {
+   "cid": "easy-transitions-02",
+   "skill": "transitions",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "지문: 1850년 공공도서관법(Public Libraries Act 1850)으로 지방세 재원 무료 도서관 설립 허용 → 맨체스터 노동자들이 처음 책을 빌릴 수 있게 됨. 명백한 원인→결과 구조로 C \"As a result\"가 유일하게 성립. A(대조), B(예시), D(유사 추가)는 관계를 잘못 짚은 전형적 오개념이며 규칙을 알면 즉시 배제됨. 역사적 사실(1850년 법, 맨체스터가 초기 적용 도시 중 하나)도 정확. 한국어·영어 해설 모두 C를 뒷받침하고 글자 참조 일치, 한글 혼입 없음, 영어 자연스러움. 단일 개념·한 단계 추론·평이한 어휘로 easy 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "원인(1850년 공공도서관법)과 결과(노동자들의 첫 도서 대출)의 관계가 지문에 직접 드러나 있다. 한 단계 추론으로 풀리므로 easy 난이도에 맞다. B는 'Manchester' 예시 때문에 그럴듯해 보이는 오답이라 오답으로서 적절하다. 사실관계도 맞다(1850년 법 제정, 맨체스터 무료도서관 1852년 개관).",
+    "issue": ""
+   },
+   "cost": 0.12391399999999998
+  },
+  {
+   "cid": "easy-rhetorical_synthesis-00",
+   "skill": "rhetorical_synthesis",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "정답 D는 유일하게 외관(27개 대리석 꽃잎, 연꽃 모양) 정보를 담아 목표에 부합. 오답 A·B·C는 모두 노트의 사실을 정확히 반영하되 외관과 무관한 전형적 오개념(위치/개방, 설계자/연도, 연도/위치)으로 구성됨. 사실관계(Fariborz Sahba 설계, 1986 완공, 27개 대리석 꽃잎, 모든 종교 개방) 정확. 한국어·영어 해설 모두 D를 일관되게 뒷받침하며 글자 참조 일치, 영어 자연스럽고 한글 없음. 표준 Rhetorical Synthesis 형식에 부합하며 easy 난이도 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "정답 D가 맞습니다. 외관에 관한 메모가 하나뿐이어서 한 단계 추론으로 풀 수 있습니다. 오답 A·B·C는 메모 내용과 맞는 사실이지만 문항의 목표와는 관련이 없습니다. 이는 easy 난이도의 전형적인 오답 구성입니다. 사실관계(1986년 완공, 설계자 사흐바, 꽃잎 27개)에도 오류가 없습니다.",
+    "issue": ""
+   },
+   "cost": 0.1183
+  },
+  {
+   "cid": "easy-rhetorical_synthesis-01",
+   "skill": "rhetorical_synthesis",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "A는 이름·직업·대표작을 담아 소개 목적에 부합. B·C는 이름 미언급, D는 메모(샌프란시스코)와 모순되는 사실 오류로 모두 명확히 배제됨. 메모 내용은 실제 Ruth Asawa 사실과 일치(1947 멕시코 톨루카 철사 고리 기법, 샌프란시스코 예술고교 공동 설립, 2010년 개명). 한·영 해설 결론 및 선택지 참조 일치, 영어 자연스러움. 공개 SAT 문항과 동일한 표현 없음. easy 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "정답 A가 맞다. 오답 D는 메모 내용을 틀리게 옮긴 선택지(샌프란시스코→멕시코)다. 실제 SAT의 rhetorical synthesis 문항은 오답도 보통 메모 내용을 정확히 옮기고, 목표에 맞지 않는다는 이유로만 틀리게 만든다. 그래서 D는 실제 시험 형식과 조금 다르다. 다만 치명적인 문제는 아니다. B와 C는 이름을 밝히지 않아 쉽게 배제되므로 easy 난이도에 맞다.",
+    "issue": ""
+   },
+   "cost": 0.1108428
+  },
+  {
+   "cid": "easy-rhetorical_synthesis-02",
+   "skill": "rhetorical_synthesis",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "B만이 '이유(원인)'를 제시하며 노트 1·2의 정보를 정확히 종합한다. A·C·D는 모두 노트에 근거한 사실이지만 목표(이유 설명)와 무관한 전형적 오답으로, easy 수준의 한 단계 판단으로 배제 가능. 사실 관계(1967년 Bell Burnell, 1.34초 주기)도 실제 역사와 일치. 해설 한·영 모두 글자 참조·결론 일치, 한글 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "'why/cause' 목표와 직접 대응하는 단일 선택지. 오답은 모두 노트의 관련 정보를 사용해 그럴듯하지만 원인 설명이 없음. Bell Burnell 1967, 1.337초 주기 사실과 부합. easy에 적합.",
+    "issue": ""
+   },
+   "cost": 0.10708279999999999
+  }
+ ]
+}

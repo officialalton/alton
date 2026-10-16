@@ -1,0 +1,367 @@
+{
+ "schema": "rw-session-task/v1",
+ "kind": "review",
+ "role": "explanation_audit",
+ "runId": "lit40-wave1",
+ "taskId": "rev-explanation_audit-015",
+ "chunkId": "rev-explanation_audit-015",
+ "suggestedModel": "sonnet",
+ "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-explanation_audit-015.result.json",
+ "outputSchema": {
+  "chunkId": "청크 ID",
+  "model": "sonnet",
+  "items": [
+   {
+    "candidateId": "id",
+    "answer_correct": "표시된 정답이 정말 정답이면 true",
+    "explanation_consistent": "해설이 정답·오답 판단과 일치하고 글자 참조가 맞으면 true",
+    "explanation_factual": "해설에 사실 오류가 없으면 true",
+    "issues": "한 줄 메모"
+   }
+  ]
+ },
+ "items": [
+  {
+   "candidateId": "lit40-medium-02-067",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "character_motivation",
+   "requestedDifficulty": "medium",
+   "passage": "I was fourteen the summer the stream below our house dried to a bed of gray stones, and my father, who had poled visitors across it for twenty years, had nothing left to ferry. That August a boy named Marcus, staying with an aunt up the road, challenged me, Nalani, to race across the riverbed and back. He mentioned, while we stretched, that his parents were splitting up and that he was flying home to Ohio on Sunday to learn which of them he would live with. I knew every loose stone on that crossing. Halfway back, I let my foot find the wobbly one I always stepped over, and I stumbled just long enough. Marcus whooped at the far bank. My father, watching from the porch, only lifted his coffee cup. That fall the rains returned and filled the channel to its old banks.",
+   "question": "Based on the text, why does the narrator most likely stumble during the race?",
+   "options": [
+    "She is suddenly frightened by the loose stones on the unfamiliar crossing.",
+    "She wants her father to stop watching her from the porch during the race.",
+    "She hopes that losing will convince Marcus to stay on the island longer.",
+    "She wants to give Marcus a small victory before he faces a hard change."
+   ],
+   "recipeBeyondMedium": "단서를 두 문장 이상 연결해야 하며 오답 중 하나는 결과를 동기로 착각하는 전형적 오독이다",
+   "correct_letter": "D",
+   "explanation": "경주 전에 Marcus는 부모의 이혼과 일요일에 집으로 돌아가야 한다는 사정을 털어놓는다. 이어 화자는 건널목의 돌을 모두 알고 있으면서도 늘 피하던 흔들리는 돌을 일부러 밟는다. 두 단서를 연결하면 힘든 변화를 앞둔 Marcus에게 작은 승리를 주려 했음을 알 수 있으므로 D가 정답이다. A는 지문과 다른 감정, C는 결과를 동기로 착각한 것이며, B는 지문에 없는 원인이다."
+  },
+  {
+   "candidateId": "lit40-medium-02-068",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "character_motivation",
+   "requestedDifficulty": "medium",
+   "passage": "Clay still drying on your wrists, you came down to the Lyon studio that morning in 1919, Elodie, to find Marcel already at the wheel, his army coat folded on the stool. Before the war he could raise a bowl in four turns, and you had spent three years telling the neighbors so. You watched from the doorway as the walls of the bowl rose, then trembled, then slumped, while his right hand would not stop shaking. When he heard your step, he swept the ruined bowl behind the kiln and said he had only been testing the clay. Later he asked whether you still told people about his four turns, and you said yes, of course. He nodded and looked at his hands. In the yard, the pigeons were quarreling over spilled grain.",
+   "question": "Based on the text, why does Marcel most likely hide the bowl behind the kiln?",
+   "options": [
+    "He does not want his sister to see that his skill has faded since the war.",
+    "He is angry that the clay was prepared far too poorly to hold its shape well.",
+    "He hopes to finish shaping the bowl later when the studio is left empty.",
+    "He has been warned by the neighbors that his pottery no longer sells."
+   ],
+   "recipeBeyondMedium": "단서를 두 문장 이상 연결해야 하며 오답 중 하나는 결과를 동기로 착각하는 전형적 오독이다",
+   "correct_letter": "A",
+   "explanation": "Elodie는 전쟁 전 Marcel이 네 번 만에 그릇을 빚었다고 이웃에게 자랑해 왔고, Marcel은 손이 떨려 그릇이 무너지자 발소리를 듣고 그것을 가마 뒤로 치운다. 이후 그는 동생이 아직도 그 이야기를 하는지 묻고 자기 손을 내려다본다. 두 단서를 이으면 그는 동생 앞에서 전쟁 뒤 기량이 떨어진 사실을 숨기려 했으므로 A가 정답이다. B는 다른 감정, C는 행동 뒤의 결과, D는 지문에 없는 외부 원인을 동기로 삼았다."
+  },
+  {
+   "candidateId": "lit40-medium-02-069",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "character_motivation",
+   "requestedDifficulty": "medium",
+   "passage": "When the hives were opened yesterday, Senhor Bruno, my brother stood at the edge of the yard with your Latin grammar under his arm, unopened, as it has been since the evening you left our house. I will not pretend that I have forgotten the words you spoke to my father at supper, nor that I think them any kinder now than I did then. Yet the boy has not recited a single verb in six weeks, and when the smoke drifted over him he did not even step back from the bees. I therefore enclose a jar of this season's honey and ask that you resume his lessons on Monday next, at the usual hour. My father has agreed to stay in town on those days. Our oldest hive, I should tell you, swarmed this morning and settled in the orange tree. Benedita",
+   "question": "Based on the text, why does Benedita most likely ask Bruno to return?",
+   "options": [
+    "She has come to believe that Bruno's harsh words to her father were justified.",
+    "She is troubled by how listless her brother has become since Bruno departed.",
+    "She wishes to repay Bruno for lessons that went unpaid when he left the house.",
+    "She fears that the swarming bees will be lost without Bruno's help in the yard."
+   ],
+   "recipeBeyondMedium": "단서를 두 문장 이상 연결해야 하며 오답 중 하나는 결과를 동기로 착각하는 전형적 오독이다",
+   "correct_letter": "B",
+   "explanation": "편지 앞부분에서 Benedita는 동생이 Bruno가 떠난 뒤 문법책을 한 번도 펴지 않았다고 쓴다. 이어 그녀는 Bruno의 말을 용서하지 않았다고 분명히 하면서도, 동생이 6주 동안 동사 하나 외우지 않고 벌 연기에도 물러서지 않을 만큼 무기력해졌다고 덧붙인다. 두 단서를 이으면 그녀가 그를 다시 부르는 이유는 동생의 무기력함 때문이므로 B가 정답이다. A는 지문과 반대되는 감정이고, C와 D는 지문에 없는 외부 원인을 끌어왔다."
+  },
+  {
+   "candidateId": "lit40-medium-02-070",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "character_motivation",
+   "requestedDifficulty": "medium",
+   "passage": "Why do I always reach for the pen once more? I write this at the baker's counter in Marrakesh before dawn, while the loaves are still pale in the oven. Omar arrived at five, as he has every morning this month, and waited without complaint while I, Yasmin, struck out a line I had already struck out twice. Yesterday he read me his French version of my second chapter, and I heard in it a sentence I had abandoned years ago, which he had somehow restored from the margins of my draft. Today, when he held out his hand, I gave him the last pages without rereading them. He seemed so startled that he nearly dropped them into the flour. The baker's boy is now dragging the first trays toward the door.",
+   "question": "Based on the text, why does Yasmin most likely give Omar the last pages without rereading them?",
+   "options": [
+    "She is too exhausted from working before dawn to look over the pages again.",
+    "She wants to finish quickly so that the baker can open the shop on schedule.",
+    "She has come to trust that Omar understands her writing as well as she does.",
+    "She has been told by her publisher that the translation is already overdue."
+   ],
+   "recipeBeyondMedium": "단서를 두 문장 이상 연결해야 하며 오답 중 하나는 결과를 동기로 착각하는 전형적 오독이다",
+   "correct_letter": "C",
+   "explanation": "Yasmin은 같은 줄을 몇 번이고 지우는 습관이 있고, Omar는 매일 아침 묵묵히 기다린다. 전날 Omar의 번역에서 자신이 오래전 버린 문장이 여백에서 되살아난 것을 듣고, 오늘 그녀는 처음으로 다시 읽지 않고 원고를 건넨다. 두 단서를 연결하면 그녀가 Omar가 자신의 글을 깊이 이해한다고 믿게 되었음을 알 수 있으므로 C가 정답이다. A는 다른 상태, B는 장면의 배경을 동기로 오해한 것이며, D는 지문에 없는 외부 원인이다."
+  },
+  {
+   "candidateId": "lit40-medium-02-071",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "character_motivation",
+   "requestedDifficulty": "medium",
+   "passage": "Smell of wet glue and salt filled the Marseille workshop on the morning after the great storm, in the year the harbor wall broke, or so the old binders still tell it. I was the newest hand, and the day before I had hidden a crooked spine of mine beneath the press, sure no one had seen. Konrad, the foreman, had seen; he only raised an eyebrow and said nothing. Overnight the rain had washed the soil from the yard and uncovered a rotted crate full of bindings, each one lopsided, each stamped with the small anchor Konrad had used as an apprentice. He lifted the worst of them, wiped it on his apron, and set it in my hands beside my own. Colette, he said, and nothing more. Then he went out to sweep the gutter, where a gull was picking at a drowned crab.",
+   "question": "Based on the text, why does Konrad most likely place his old binding in the narrator's hands?",
+   "options": [
+    "He wants the narrator to repair the damaged bindings that the storm uncovered.",
+    "He is ashamed of the crate and hopes the narrator will dispose of it quietly.",
+    "He means to warn the narrator that hidden mistakes are eventually punished.",
+    "He wishes to show the narrator that her own error need not be hidden away."
+   ],
+   "recipeBeyondMedium": "단서를 두 문장 이상 연결해야 하며 오답 중 하나는 결과를 동기로 착각하는 전형적 오독이다",
+   "correct_letter": "D",
+   "explanation": "Konrad는 화자가 비뚤어진 제본을 압착기 밑에 숨기는 것을 보고도 아무 말 하지 않았다. 폭풍 뒤 드러난 상자에는 그가 견습 시절 만든 비뚤어진 제본이 가득했고, 그는 그중 가장 못한 것을 화자의 제본 옆에 놓아 준다. 두 단서를 이으면 누구나 실수를 하니 숨길 필요가 없다는 뜻을 전하려 한 것이므로 D가 정답이다. B는 다른 감정, A는 지문에 없는 목적, C는 상황을 반대로 읽은 해석이다."
+  },
+  {
+   "candidateId": "lit40-medium-02-072",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "tone_or_mood",
+   "requestedDifficulty": "medium",
+   "passage": "Who returns a thing after eleven years? Isadora wondered this as the young woman crossed toward the Lisbon depot bench where she waited each evening for the 28. Rafaela, once the silent child in the back row of her fourth-grade class, was grown now, and in her hands she held the red umbrella Isadora had lent her one stormy afternoon in 1979. Isadora felt a warmth rise in her chest, the kind she had felt whenever a shy pupil finally raised a hand. Still, a small worry pricked at her: had something happened, that the girl should come now? Rafaela held out the umbrella, unopened, and smiled without a word, and Isadora found herself smiling back, the worry loosening. Somewhere behind them, a mechanic was hosing down the bay floor.",
+   "question": "Which choice best describes the overall tone of the text?",
+   "options": [
+    "Warmly hopeful, with a brief undercurrent of worry",
+    "Quietly uneasy about the reason for the visit",
+    "Mostly anxious, with only a fleeting moment of warmth",
+    "Wistfully nostalgic about years in the classroom"
+   ],
+   "recipeBeyondMedium": "두 정서의 비중을 판단해야 하며, 오답은 정반대가 아니라 비중이 틀린 어조다",
+   "correct_letter": "A",
+   "explanation": "Isadora는 수줍던 제자가 우산을 돌려주러 오자 가슴에 따뜻함이 차오르는 것을 느낀다. 한편 무슨 일이 있었나 하는 작은 걱정이 스치지만, 말없이 웃는 Rafaela를 보며 그 걱정은 풀린다. 따라서 따뜻한 희망이 중심이고 걱정은 잠시 스치는 정서이므로 A가 정답이다. B는 덜 두드러진 정서만 말했고, C는 두 정서의 비중을 뒤집었으며, D는 소재와 어울리지만 지문 단서가 약하다."
+  },
+  {
+   "candidateId": "lit40-medium-02-073",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "tone_or_mood",
+   "requestedDifficulty": "medium",
+   "passage": "Rain-streaked windows rattled as the night bus pulled away from Piccadilly, and Jonah dropped into the seat beside me as if we had planned it. Three weeks earlier he had hidden among the rope lockers on my boat, and so he had seen, as no one else had, the moment I, Leah, misjudged the tide and scraped the pier. \"They'll ask me tomorrow,\" he said. \"At the hearing. What do I say?\" My stomach tightened; I had rehearsed a gentler version of that night so many times it almost felt true. But I looked at him, sixteen and soaked through, and told him to say exactly what he saw, every second of it, and that I would say the same. He nodded slowly. At Ardwick a woman boarded carrying a sleeping terrier wrapped in a scarf.",
+   "question": "Which choice best describes the overall tone of the text?",
+   "options": [
+    "Guilt-ridden, with the narrator dwelling on her past error",
+    "Resolute, though tinged with the narrator's lingering guilt",
+    "Guilty above all, with only a passing flicker of resolve",
+    "Resentful of the boy for hiding aboard the narrator's boat"
+   ],
+   "recipeBeyondMedium": "두 정서의 비중을 판단해야 하며, 오답은 정반대가 아니라 비중이 틀린 어조다",
+   "correct_letter": "B",
+   "explanation": "Leah는 사고 장면을 떠올리며 속이 조이고, 더 부드러운 거짓 설명을 연습해 왔다고 고백하며 죄책감을 드러낸다. 그러나 젖은 소년을 보고는 본 그대로 말하라고, 자신도 그렇게 하겠다고 단호하게 말한다. 죄책감이 남아 있지만 정직하겠다는 결의가 더 두드러지므로 B가 정답이다. A는 덜 두드러진 정서만, C는 비중을 뒤집은 어조이며, D는 지문에 단서가 약하다."
+  },
+  {
+   "candidateId": "lit40-medium-02-075",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "tone_or_mood",
+   "requestedDifficulty": "medium",
+   "passage": "Wind tugging at their coats, NEEMA and ASTER meet midway across the old stone bridge in Cape Town. Below, the canal runs brown after rain.\nASTER: (holding out a small tin box) I found it behind the stove when I moved the shelves. I think it was your father's.\nNEEMA: (opening it; inside, a pocket watch and a folded bus ticket) He kept the flat before I ever rented it to you. I thought this was lost when we cleared his things.\n(She is quiet. Her thumb rests on the ticket.)\nASTER: I almost kept it another week. I didn't know how to give it back.\nNEEMA: (laughing softly, eyes wet) Twenty-two years you've paid rent on time, and now you're late with this.\nASTER: Am I evicted?\nNEEMA: You're forgiven.\n(A cyclist rings his bell twice and swerves around them.)",
+   "question": "Which choice best describes the overall tone of the text?",
+   "options": [
+    "Grieving, centered on Neema's sense of her father's absence",
+    "Mournful, with only a moment of warmth between the women",
+    "Tense, marked by a dispute over the tenant's overdue rent",
+    "Warm and grateful, though touched by the ache of a loss"
+   ],
+   "recipeBeyondMedium": "두 정서의 비중을 판단해야 하며, 오답은 정반대가 아니라 비중이 틀린 어조다",
+   "correct_letter": "D",
+   "explanation": "Neema는 아버지의 유품을 받고 표를 쓰다듬으며 잠시 말을 잃어 상실의 아픔을 드러낸다. 그러나 곧 눈물 젖은 채 웃으며 Aster에게 농담을 건네고 용서한다고 말해 따뜻함과 고마움이 장면을 이끈다. 따뜻함이 중심이고 슬픔은 배어 있는 정서이므로 D가 정답이다. A는 덜 두드러진 정서만, B는 비중을 뒤집었으며, C는 농담 속 집세 언급을 실제 갈등으로 오해했다."
+  },
+  {
+   "candidateId": "lit40-medium-02-076",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "tone_or_mood",
+   "requestedDifficulty": "medium",
+   "passage": "Ink, hot metal, and the steady thud of the flatbed: I still smell and hear the press room in Mumbai whenever Sergio telephones. We set type side by side there for nine years before he moved to Goa, and he still calls me, Ishaan, his apprentice, though I outlasted him by a decade. Last week he rang about our old foreman, who is dying and keeps asking whether the shop he founded still runs. It does not; it closed in 1994. Sergio thinks we should tell him the truth. I keep picturing the foreman tapping each line of type with his thumb, proud as a father, and I am not sure what I will say. Still, I laughed when Sergio reminded me how I once printed a wedding card with the groom's name upside down. My neighbor's radio is playing an old film song through the wall.",
+   "question": "Which choice best describes the overall tone of the text?",
+   "options": [
+    "Fondly affectionate, though unsettled by an unresolved choice",
+    "Troubled by the hard choice about what to tell the foreman",
+    "Deeply uncertain, with only a passing note of fond memory",
+    "Proud, celebrating the narrator's long career as a typesetter"
+   ],
+   "recipeBeyondMedium": "두 정서의 비중을 판단해야 하며, 오답은 정반대가 아니라 비중이 틀린 어조다",
+   "correct_letter": "A",
+   "explanation": "화자는 인쇄실의 냄새와 소리, 친구 Sergio의 농담과 거꾸로 찍힌 청첩장 일화를 떠올리며 웃는 등 애정 어린 정서를 곳곳에 드러낸다. 다만 죽어 가는 감독에게 진실을 말할지 정하지 못한 망설임이 함께 섞여 있다. 애정이 중심이고 망설임은 그 아래의 정서이므로 A가 정답이다. B는 덜 두드러진 정서만, C는 비중을 뒤집었으며, D는 지문에 단서가 약하다."
+  },
+  {
+   "candidateId": "lit40-medium-02-077",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "tone_or_mood",
+   "requestedDifficulty": "medium",
+   "passage": "Bergen in July smelled of tar and wet lilac, and the long dining hall of the summer school where I worked as a boy smelled of both. I was the gardener's son, trimming hedges for Thorvald, who had bought the estate that spring. One evening he called me in while the students ate and told me, before all of them, that he would pay my fees at the cathedral school in autumn. I felt my face burn; I was holding a rake, and my boots were caked with mud. Yet when he shook my hand, his grip was so earnest that the burning turned, slowly, to something like gladness, and I thanked him twice. Jens, my father, was waiting by the kitchen door. Through the windows, gulls wheeled above the fish market.",
+   "question": "Which choice best describes the overall tone of the text?",
+   "options": [
+    "Embarrassed, focused on the narrator's muddy appearance",
+    "Grateful, though first colored by a sense of embarrassment",
+    "Humiliated, with only a faint trace of thankfulness",
+    "Resentful of the new owner for staging a public display"
+   ],
+   "recipeBeyondMedium": "두 정서의 비중을 판단해야 하며, 오답은 정반대가 아니라 비중이 틀린 어조다",
+   "correct_letter": "B",
+   "explanation": "화자는 학생들 앞에서 장학금 소식을 듣자 진흙투성이 차림 때문에 얼굴이 달아오른다. 그러나 Thorvald의 진심 어린 악수에 그 부끄러움이 기쁨으로 바뀌고 두 번이나 감사를 표한다. 부끄러움이 먼저 있지만 감사가 더 두드러지므로 B가 정답이다. A는 덜 두드러진 정서만, C는 비중을 뒤집었고, D는 지문에 단서가 약한 어조다."
+  },
+  {
+   "candidateId": "lit40-medium-02-078",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "tone_or_mood",
+   "requestedDifficulty": "medium",
+   "passage": "By the time you read this, Grandpa Lachlan, the water in the Havana cellar will have gone down, or so the neighbors promise. I waded in this morning to find your Gaelic word cards floating like little rafts, the ink on the S's running blue. For an hour I could only stand there and count the ruined ones. Then I remembered how you made me repeat your goodnight phrase every evening until I stopped stumbling, and I began lifting the cards out one by one and pegging them on the line across the patio. Many can still be read. I am copying each onto fresh paper, and I have learned eleven new words already, though I am sure I say half of them wrong. Your Ximena. Señora Ruiz from upstairs has lent me her fan to dry them.",
+   "question": "Which choice best describes the overall tone of the text?",
+   "options": [
+    "Dismayed, dwelling on the ruined cards in the flooded cellar",
+    "Discouraged, with only a slight hint of determination",
+    "Determined and hopeful, after a moment of dismay",
+    "Bitter toward the neighbors for their empty promises"
+   ],
+   "recipeBeyondMedium": "두 정서의 비중을 판단해야 하며, 오답은 정반대가 아니라 비중이 틀린 어조다",
+   "correct_letter": "C",
+   "explanation": "Ximena는 물에 뜬 단어 카드를 보고 한 시간 동안 망가진 것만 세며 낙담한다. 그러나 할아버지와의 기억을 떠올린 뒤 카드를 건져 말리고 새 종이에 옮기며 새 단어를 익힌다. 잠깐의 낙담 뒤 결의와 희망이 더 두드러지므로 C가 정답이다. A는 덜 두드러진 정서만, B는 비중을 뒤집었으며, D는 지문에 단서가 약하다."
+  },
+  {
+   "candidateId": "lit40-medium-02-079",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "relationship_between_characters",
+   "requestedDifficulty": "medium",
+   "passage": "We had not spoken in four years, Greta and I, not since she lured my best customer across the square with her poppy-seed rolls. So when the stationmaster told us that the new café at the Hamburg terminal would have only one table for pastries, and that we must share it, I, Annika, nearly refused. On the first morning she set her rolls on the left and I set my almond cakes on the right, and neither of us looked up. By noon, though, I noticed she had moved her tray an inch to give my cakes the light from the window. Before closing, I tasted one of her rolls in the stockroom; it was better than mine, and I told her so the next day. She only sniffed and said my almonds were too dry. A train from Altona hissed to a stop beyond the glass.",
+   "question": "Which choice best describes the relationship between Annika and Greta as presented in the text?",
+   "options": [
+    "Greta resents Annika and tries to keep her from selling well at the café.",
+    "Annika admires Greta, who has come to rely on Annika's baking judgment.",
+    "They are old friends who quarrel only to amuse the café's customers.",
+    "They are rivals who are beginning to show each other a wary respect."
+   ],
+   "recipeBeyondMedium": "두 문장의 단서를 연결해야 하고 오답은 한쪽 감정만 반영한다",
+   "correct_letter": "D",
+   "explanation": "두 사람은 4년 동안 말도 하지 않은 경쟁자였고 첫날에도 서로 쳐다보지 않는다. 그러나 Greta는 Annika의 케이크에 햇빛이 들도록 쟁반을 옮겨 주고, Annika는 Greta의 빵이 더 낫다고 인정한다. 두 장면을 이으면 경쟁 관계 속에서 조심스러운 존중이 싹트고 있으므로 D가 정답이다. A는 한쪽 감정만, B는 방향을 뒤집은 관계이며, C는 지문에 근거가 없는 통념이다."
+  },
+  {
+   "candidateId": "lit40-medium-02-080",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "relationship_between_characters",
+   "requestedDifficulty": "medium",
+   "passage": "Years later, I still remember the frost on the guesthouse windows the morning Aunt Itzel and I had to decide which of us would stay. We owed the brothers for a whole winter of lodging on the plateau, and the abbot had agreed that one of us could work it off through spring while the other drove home to Flagstaff. I, Nova, said I would stay; I was nineteen and strong, and she had a job waiting. Itzel only poured me coffee and slid the truck keys across the table toward my hand. When I pushed them back, she closed my fingers around them and said that she had stayed behind for my mother once, too, and had never regretted it. I left at noon. Snow was drifting against the mesa's red flank as I passed the cattle guard.",
+   "question": "Which choice best describes the relationship between Itzel and Nova as presented in the text?",
+   "options": [
+    "Itzel insists on sacrificing for Nova, who wants to bear the burden herself.",
+    "Nova resents Itzel for forcing her to leave the plateau guesthouse before spring.",
+    "Itzel depends on Nova, who reluctantly agrees to stay behind and work.",
+    "They are distant relatives bound together mainly by the debt they share."
+   ],
+   "recipeBeyondMedium": "두 문장의 단서를 연결해야 하고 오답은 한쪽 감정만 반영한다",
+   "correct_letter": "A",
+   "explanation": "Nova는 젊고 튼튼하다며 자신이 남겠다고 나서지만, Itzel은 말없이 트럭 열쇠를 Nova 쪽으로 밀어 준다. Nova가 열쇠를 돌려보내자 Itzel은 그녀의 손에 열쇠를 쥐여 주며 예전에도 Nova의 어머니를 위해 남았다고 말한다. 두 행동을 이으면 Itzel은 Nova를 위해 희생하려 하고 Nova는 짐을 직접 지려 하는 관계이므로 A가 정답이다. B는 한쪽 감정만, C는 방향을 뒤집은 관계이며, D는 일반적 통념에서 고른 관계다."
+  },
+  {
+   "candidateId": "lit40-medium-02-081",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "relationship_between_characters",
+   "requestedDifficulty": "medium",
+   "passage": "When the looms of the Tbilisi weaving cooperative fall silent each evening, I set two chairs by the window, and Anushka begins unwinding the tangled yarn the weavers leave behind. We used to play here for them on Fridays; now nobody asks. IRENA: You could leave the yarn tonight. ANUSHKA: (without looking up) And give up the only thing we still do on time? Later, when I reach for my violin case, she slides the spool toward me first, as she always does, so that I hold one end while she winds. Neither of us mentions the concert hall that cancelled our booking. IRENA: Same tempo as yesterday? ANUSHKA: Slower. Your hands are tired. Outside, a tram rattles past and the courtyard lamps flicker on one by one.",
+   "question": "Based on the text, how would the relationship between Irena and Anushka most likely be described?",
+   "options": [
+    "Anushka resents Irena for the cancelled booking and uses the yarn to avoid talking to her.",
+    "Though their partnership is faltering, they stay attentive to each other through a familiar routine.",
+    "Irena depends on Anushka's guidance, but Anushka has grown tired of the yarn and of Irena.",
+    "They are rivals for the weavers' attention, each secretly hoping to perform alone on Fridays."
+   ],
+   "recipeBeyondMedium": "두 문장의 단서를 연결해야 하고 오답은 한쪽 감정만 반영한다",
+   "correct_letter": "B",
+   "explanation": "Anushka는 실 감기를 '아직 제때 하는 유일한 일'이라 부르며 둘의 공연 활동이 기울었음을 드러낸다. 동시에 Irena에게 먼저 실패를 건네고, 손이 피곤하다며 템포를 늦추자고 하는 행동은 서로를 세심하게 살피는 관계임을 보여 준다. 따라서 B가 정답이다. A와 C는 한쪽의 감정만 부정적으로 확대했고, D는 지문에 근거 없는 경쟁 관계라는 통념이다."
+  },
+  {
+   "candidateId": "lit40-medium-02-082",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "relationship_between_characters",
+   "requestedDifficulty": "medium",
+   "passage": "Rotterdam on market mornings smelled of herring and wet canvas, and it was there, between the cheese stalls, that Ayesha met Bronislaw each week to carry his violin home. He had never asked her to; she believed he once had, years ago, though neither of them could recall the words. He corrected her bowing even as they walked, tapping her wrist with two fingers whenever her arm drooped beneath the case. Yet when a fishmonger jostled her, Bronislaw stepped between them without a word and took the case himself for the length of a stall. By the canal he handed it back, remarking only that her left shoulder was still too high. Gulls wheeled over the awnings, and a bell somewhere across the water struck ten.",
+   "question": "Based on the text, how would the relationship between Ayesha and Bronislaw most likely be described?",
+   "options": [
+    "Ayesha feels obligated to Bronislaw, who regards her as little more than a porter for his case.",
+    "Ayesha shields Bronislaw from the crowd, while he relies on her to correct his habits.",
+    "Bronislaw is exacting about Ayesha's playing but quietly protective of her beyond the lesson.",
+    "They have given up formal lessons and now meet only as friendly equals at the market."
+   ],
+   "recipeBeyondMedium": "두 문장의 단서를 연결해야 하고 오답은 한쪽 감정만 반영한다",
+   "correct_letter": "C",
+   "explanation": "Bronislaw는 걸으면서도 손목을 두드리며 활 자세를 고치고, 운하에서는 어깨가 높다고 지적하는 엄격한 선생이다. 그러나 생선 장수가 Ayesha를 밀치자 말없이 사이에 서서 가방을 대신 드는 행동은 그녀를 보호하려는 마음을 드러낸다. 두 단서를 연결하면 C가 정답이다. A는 Ayesha 쪽 의무감만 반영했고, B는 보호와 교정의 방향을 뒤바꿨으며, D는 계속되는 교정과 맞지 않는다."
+  },
+  {
+   "candidateId": "lit40-medium-02-083",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "relationship_between_characters",
+   "requestedDifficulty": "medium",
+   "passage": "By the winter of 1994, Joon had conducted the Busan youth orchestra for eleven years, and every Thursday he still sat in the same barbershop chair beside Jakub, its youngest violinist. Jakub had given up a scholarship abroad to stay with the ensemble when two players quit; Joon knew this, and Jakub knew that he knew. That afternoon Joon paid for both haircuts before Jakub could reach his wallet, then busied himself with a newspaper. Jakub, for his part, folded the receipt carefully into his coat rather than throwing it away. Later, at rehearsal, Joon gave him the solo that had always gone to the concertmaster, and no one in the hall questioned it. Snow had started again by the time the barber swept the floor and pulled the shutter halfway down.",
+   "question": "Based on the text, how would the relationship between Joon and Jakub most likely be described?",
+   "options": [
+    "Jakub resents Joon for the lost scholarship and refuses to accept any of his gestures.",
+    "Jakub feels indebted to Joon, who once gave up a scholarship to keep the orchestra going.",
+    "Joon treats Jakub as most conductors treat junior players, with distant formality.",
+    "Joon feels indebted to Jakub and tries, without speaking of it, to repay him."
+   ],
+   "recipeBeyondMedium": "두 문장의 단서를 연결해야 하고 오답은 한쪽 감정만 반영한다",
+   "correct_letter": "D",
+   "explanation": "Jakub이 오케스트라를 위해 해외 장학금을 포기했고 Joon이 그 사실을 안다는 점이 먼저 제시된다. 이후 Joon이 이발비를 몰래 먼저 내고 신문 뒤로 숨는 행동, 그리고 늘 악장에게 가던 솔로를 Jakub에게 주는 행동은 말없이 빚을 갚으려는 마음을 보여 준다. 따라서 D가 정답이다. A는 영수증을 소중히 접는 행동과 맞지 않고, B는 희생의 방향을 뒤집었으며, C는 지휘자에 대한 일반적 통념이다."
+  },
+  {
+   "candidateId": "lit40-medium-02-084",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "relationship_between_characters",
+   "requestedDifficulty": "medium",
+   "passage": "I am writing from the back room of a tailor's shop on Burns Road, among bolts of cotton, because it is the only quiet place in Karachi tonight. When the council told me you would speak at Thursday's meeting, I prepared for an attack on my road plan; you have opposed me on nearly every vote since I became mayor. Instead you stood and urged the council to pass it, saying the ambulance could not reach the hill villages without it. I learned afterward that you had spent two nights checking my figures so they would survive the auditors. I do not yet know how to thank a doctor I spent a year arguing with, Pouya, except to say that I was wrong about you. The tailor has begun pressing collars beside me, and steam is clouding the lamp.",
+   "question": "Based on the letter, how would Danish, the mayor writing it, most likely describe his relationship with Pouya?",
+   "options": [
+    "He had expected Pouya to oppose him but now sees the doctor as a valued supporter.",
+    "Pouya has long admired him, though he still regards the doctor as a dangerous critic.",
+    "He supported Pouya's plans in council, and Pouya now owes him thanks for that help.",
+    "They remain political enemies who cooperate only when the auditors require it."
+   ],
+   "recipeBeyondMedium": "두 문장의 단서를 연결해야 하고 오답은 한쪽 감정만 반영한다",
+   "correct_letter": "A",
+   "explanation": "편지의 화자인 시장은 Pouya가 거의 모든 표결에서 자신에게 반대해 왔기에 공격을 예상했다고 말한다. 그러나 Pouya는 도로 계획 통과를 촉구했고, 감사를 통과하도록 이틀 밤 수치를 검토해 주었으며, 시장은 그에 대해 틀렸다고 인정한다. 이 단서들을 이으면 A가 정답이다. B는 감정의 방향을 왜곡했고, C는 도움을 준 쪽을 뒤바꿨으며, D는 정적 관계라는 통념에 머문다."
+  },
+  {
+   "candidateId": "lit40-medium-02-085",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "relationship_between_characters",
+   "requestedDifficulty": "medium",
+   "passage": "Brass gears ticked on every wall of Tatiana's clock shop in Riga, where an old rule held that no clock could be sold until it had run a full year without losing a minute. Everyone obeyed it, though customers grumbled and many fine clocks were melted down for a single lost minute. On the morning Jakub was to leave for university, he found his mother lifting down the small clock he had built at twelve, which had once lost four minutes in a single winter. Keep it, she said, pressing it into his bag. A year is too long to wait for some things. Jakub said nothing, but at the station he wound it carefully and set it to her time. Snow drifted against the shop window long after the train had gone, and the wall clocks struck noon together.",
+   "question": "Based on the text, how would the relationship between Tatiana and Jakub most likely be described?",
+   "options": [
+    "Jakub is eager to escape his mother's rules, while Tatiana hopes the clock will keep him home.",
+    "Tatiana bends a long-obeyed rule for her son, who quietly honors what her gesture means.",
+    "Jakub persuades his mother to break the rule, and she reluctantly gives up the clock.",
+    "Like most parents and children, they argue about rules until the son finally leaves."
+   ],
+   "recipeBeyondMedium": "두 문장의 단서를 연결해야 하고 오답은 한쪽 감정만 반영한다",
+   "correct_letter": "B",
+   "explanation": "모두가 지켜 온 '1년 무오차' 규칙 아래에서 Tatiana는 오차가 났던 아들의 시계를 가방에 넣어 주며 규칙을 스스로 굽힌다. Jakub은 말없이 역에서 시계를 감아 어머니의 시간에 맞추는데, 이는 어머니의 마음을 존중하는 행동이다. 두 장면을 연결하면 B가 정답이다. A는 한쪽 감정을 지어냈고, C는 설득의 방향을 뒤집었으며, D는 부모 자식 갈등에 대한 통념이다."
+  },
+  {
+   "candidateId": "lit40-medium-02-086",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "symbolism",
+   "requestedDifficulty": "medium",
+   "passage": "When Zofia climbed to the roof that last evening in Thessaloniki, her father was already kneeling beside the water tank, a tin of sealant open at his knee. For eleven summers the tank had wept a thin rust-colored line down the wall, and for eleven summers he had said he would fix it next week. Eda, from the next roof, used to joke that the stain was older than Zofia's English. Zofia had stopped noticing it, the way she had stopped noticing that he never asked about the school prize ceremony he had missed. Now he pressed the sealant into the seam with his thumb and said, in Greek, that he should have done this long ago. She answered in English that it was fine, though her suitcase was already packed downstairs. Below them, the harbor lights came on and a ferry horn sounded twice.",
+   "question": "In the text, the leaking water tank most likely represents",
+   "options": [
+    "the father's pride in his practical skills, which Zofia has never truly valued",
+    "the family's lack of money, which has kept them from making needed repairs",
+    "a long-neglected hurt that her father tries to mend only as she is leaving",
+    "the language gap between father and daughter, which neither one can bridge"
+   ],
+   "correct_letter": "C",
+   "explanation": "물탱크는 11년 동안 새면서도 '다음 주'로 미뤄졌고, Zofia가 그 얼룩을 잊은 방식은 아버지가 놓친 시상식을 잊은 방식과 겹쳐 서술된다. 아버지는 딸이 떠나는 날에야 틈을 메우며 진작 했어야 했다고 말하고, 딸의 가방은 이미 싸여 있다. 따라서 탱크는 너무 늦게 다뤄지는 오래된 상처를 상징하므로 C가 정답이다. D는 언어 차이가 언급되어 그럴듯하지만 반복된 수리 지연과 사과의 맥락을 설명하지 못하고, A와 B는 근거가 없다."
+  }
+ ],
+ "instructions": "당신은 문항 감사관이다. 표시된 정답과 해설을 받아, 정답이 맞는지·해설이 일관되고 사실에 맞는지 점검한다(고치지 않고 판정만).\n청크 rev-explanation_audit-015 — 19문항.\n출력: Write 도구로 정확히 이 경로에 JSON 한 파일을 쓴다 → /Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-explanation_audit-015.result.json\n출력 JSON 스키마(예시 구조): {\"chunkId\":\"청크 ID\",\"model\":\"sonnet\",\"items\":[{\"candidateId\":\"id\",\"answer_correct\":\"표시된 정답이 정말 정답이면 true\",\"explanation_consistent\":\"해설이 정답·오답 판단과 일치하고 글자 참조가 맞으면 true\",\"explanation_factual\":\"해설에 사실 오류가 없으면 true\",\"issues\":\"한 줄 메모\"}]}\n허용 값: picked_letter ∈ {A,B,C,D}, 불리언 필드는 true/false, est_difficulty ∈ {easy,medium,hard}. candidateId 를 바꾸지 않고 모든 항목에 답한다.\n금지: 결과 파일 외의 파일 생성·수정, 다른 명령 실행, 문항 수정·재작성. 끝나면 'done <항목 수>' 한 줄만 답한다.\n\n## 문항\n### lit40-medium-02-067 — skill inferences · 유형 character_motivation\n[지문]\nI was fourteen the summer the stream below our house dried to a bed of gray stones, and my father, who had poled visitors across it for twenty years, had nothing left to ferry. That August a boy named Marcus, staying with an aunt up the road, challenged me, Nalani, to race across the riverbed and back. He mentioned, while we stretched, that his parents were splitting up and that he was flying home to Ohio on Sunday to learn which of them he would live with. I knew every loose stone on that crossing. Halfway back, I let my foot find the wobbly one I always stepped over, and I stumbled just long enough. Marcus whooped at the far bank. My father, watching from the porch, only lifted his coffee cup. That fall the rains returned and filled the channel to its old banks.\n\n[질문] Based on the text, why does the narrator most likely stumble during the race?\nA) She is suddenly frightened by the loose stones on the unfamiliar crossing.\nB) She wants her father to stop watching her from the porch during the race.\nC) She hopes that losing will convince Marcus to stay on the island longer.\nD) She wants to give Marcus a small victory before he faces a hard change.\n\n[표시된 정답] D\n[해설]\n경주 전에 Marcus는 부모의 이혼과 일요일에 집으로 돌아가야 한다는 사정을 털어놓는다. 이어 화자는 건널목의 돌을 모두 알고 있으면서도 늘 피하던 흔들리는 돌을 일부러 밟는다. 두 단서를 연결하면 힘든 변화를 앞둔 Marcus에게 작은 승리를 주려 했음을 알 수 있으므로 D가 정답이다. A는 지문과 다른 감정, C는 결과를 동기로 착각한 것이며, B는 지문에 없는 원인이다.\n### lit40-medium-02-068 — skill inferences · 유형 character_motivation\n[지문]\nClay still drying on your wrists, you came down to the Lyon studio that morning in 1919, Elodie, to find Marcel already at the wheel, his army coat folded on the stool. Before the war he could raise a bowl in four turns, and you had spent three years telling the neighbors so. You watched from the doorway as the walls of the bowl rose, then trembled, then slumped, while his right hand would not stop shaking. When he heard your step, he swept the ruined bowl behind the kiln and said he had only been testing the clay. Later he asked whether you still told people about his four turns, and you said yes, of course. He nodded and looked at his hands. In the yard, the pigeons were quarreling over spilled grain.\n\n[질문] Based on the text, why does Marcel most likely hide the bowl behind the kiln?\nA) He does not want his sister to see that his skill has faded since the war.\nB) He is angry that the clay was prepared far too poorly to hold its shape well.\nC) He hopes to finish shaping the bowl later when the studio is left empty.\nD) He has been warned by the neighbors that his pottery no longer sells.\n\n[표시된 정답] A\n[해설]\nElodie는 전쟁 전 Marcel이 네 번 만에 그릇을 빚었다고 이웃에게 자랑해 왔고, Marcel은 손이 떨려 그릇이 무너지자 발소리를 듣고 그것을 가마 뒤로 치운다. 이후 그는 동생이 아직도 그 이야기를 하는지 묻고 자기 손을 내려다본다. 두 단서를 이으면 그는 동생 앞에서 전쟁 뒤 기량이 떨어진 사실을 숨기려 했으므로 A가 정답이다. B는 다른 감정, C는 행동 뒤의 결과, D는 지문에 없는 외부 원인을 동기로 삼았다.\n### lit40-medium-02-069 — skill inferences · 유형 character_motivation\n[지문]\nWhen the hives were opened yesterday, Senhor Bruno, my brother stood at the edge of the yard with your Latin grammar under his arm, unopened, as it has been since the evening you left our house. I will not pretend that I have forgotten the words you spoke to my father at supper, nor that I think them any kinder now than I did then. Yet the boy has not recited a single verb in six weeks, and when the smoke drifted over him he did not even step back from the bees. I therefore enclose a jar of this season's honey and ask that you resume his lessons on Monday next, at the usual hour. My father has agreed to stay in town on those days. Our oldest hive, I should tell you, swarmed this morning and settled in the orange tree. Benedita\n\n[질문] Based on the text, why does Benedita most likely ask Bruno to return?\nA) She has come to believe that Bruno's harsh words to her father were justified.\nB) She is troubled by how listless her brother has become since Bruno departed.\nC) She wishes to repay Bruno for lessons that went unpaid when he left the house.\nD) She fears that the swarming bees will be lost without Bruno's help in the yard.\n\n[표시된 정답] B\n[해설]\n편지 앞부분에서 Benedita는 동생이 Bruno가 떠난 뒤 문법책을 한 번도 펴지 않았다고 쓴다. 이어 그녀는 Bruno의 말을 용서하지 않았다고 분명히 하면서도, 동생이 6주 동안 동사 하나 외우지 않고 벌 연기에도 물러서지 않을 만큼 무기력해졌다고 덧붙인다. 두 단서를 이으면 그녀가 그를 다시 부르는 이유는 동생의 무기력함 때문이므로 B가 정답이다. A는 지문과 반대되는 감정이고, C와 D는 지문에 없는 외부 원인을 끌어왔다.\n### lit40-medium-02-070 — skill inferences · 유형 character_motivation\n[지문]\nWhy do I always reach for the pen once more? I write this at the baker's counter in Marrakesh before dawn, while the loaves are still pale in the oven. Omar arrived at five, as he has every morning this month, and waited without complaint while I, Yasmin, struck out a line I had already struck out twice. Yesterday he read me his French version of my second chapter, and I heard in it a sentence I had abandoned years ago, which he had somehow restored from the margins of my draft. Today, when he held out his hand, I gave him the last pages without rereading them. He seemed so startled that he nearly dropped them into the flour. The baker's boy is now dragging the first trays toward the door.\n\n[질문] Based on the text, why does Yasmin most likely give Omar the last pages without rereading them?\nA) She is too exhausted from working before dawn to look over the pages again.\nB) She wants to finish quickly so that the baker can open the shop on schedule.\nC) She has come to trust that Omar understands her writing as well as she does.\nD) She has been told by her publisher that the translation is already overdue.\n\n[표시된 정답] C\n[해설]\nYasmin은 같은 줄을 몇 번이고 지우는 습관이 있고, Omar는 매일 아침 묵묵히 기다린다. 전날 Omar의 번역에서 자신이 오래전 버린 문장이 여백에서 되살아난 것을 듣고, 오늘 그녀는 처음으로 다시 읽지 않고 원고를 건넨다. 두 단서를 연결하면 그녀가 Omar가 자신의 글을 깊이 이해한다고 믿게 되었음을 알 수 있으므로 C가 정답이다. A는 다른 상태, B는 장면의 배경을 동기로 오해한 것이며, D는 지문에 없는 외부 원인이다.\n### lit40-medium-02-071 — skill inferences · 유형 character_motivation\n[지문]\nSmell of wet glue and salt filled the Marseille workshop on the morning after the great storm, in the year the harbor wall broke, or so the old binders still tell it. I was the newest hand, and the day before I had hidden a crooked spine of mine beneath the press, sure no one had seen. Konrad, the foreman, had seen; he only raised an eyebrow and said nothing. Overnight the rain had washed the soil from the yard and uncovered a rotted crate full of bindings, each one lopsided, each stamped with the small anchor Konrad had used as an apprentice. He lifted the worst of them, wiped it on his apron, and set it in my hands beside my own. Colette, he said, and nothing more. Then he went out to sweep the gutter, where a gull was picking at a drowned crab.\n\n[질문] Based on the text, why does Konrad most likely place his old binding in the narrator's hands?\nA) He wants the narrator to repair the damaged bindings that the storm uncovered.\nB) He is ashamed of the crate and hopes the narrator will dispose of it quietly.\nC) He means to warn the narrator that hidden mistakes are eventually punished.\nD) He wishes to show the narrator that her own error need not be hidden away.\n\n[표시된 정답] D\n[해설]\nKonrad는 화자가 비뚤어진 제본을 압착기 밑에 숨기는 것을 보고도 아무 말 하지 않았다. 폭풍 뒤 드러난 상자에는 그가 견습 시절 만든 비뚤어진 제본이 가득했고, 그는 그중 가장 못한 것을 화자의 제본 옆에 놓아 준다. 두 단서를 이으면 누구나 실수를 하니 숨길 필요가 없다는 뜻을 전하려 한 것이므로 D가 정답이다. B는 다른 감정, A는 지문에 없는 목적, C는 상황을 반대로 읽은 해석이다.\n### lit40-medium-02-072 — skill inferences · 유형 tone_or_mood\n[지문]\nWho returns a thing after eleven years? Isadora wondered this as the young woman crossed toward the Lisbon depot bench where she waited each evening for the 28. Rafaela, once the silent child in the back row of her fourth-grade class, was grown now, and in her hands she held the red umbrella Isadora had lent her one stormy afternoon in 1979. Isadora felt a warmth rise in her chest, the kind she had felt whenever a shy pupil finally raised a hand. Still, a small worry pricked at her: had something happened, that the girl should come now? Rafaela held out the umbrella, unopened, and smiled without a word, and Isadora found herself smiling back, the worry loosening. Somewhere behind them, a mechanic was hosing down the bay floor.\n\n[질문] Which choice best describes the overall tone of the text?\nA) Warmly hopeful, with a brief undercurrent of worry\nB) Quietly uneasy about the reason for the visit\nC) Mostly anxious, with only a fleeting moment of warmth\nD) Wistfully nostalgic about years in the classroom\n\n[표시된 정답] A\n[해설]\nIsadora는 수줍던 제자가 우산을 돌려주러 오자 가슴에 따뜻함이 차오르는 것을 느낀다. 한편 무슨 일이 있었나 하는 작은 걱정이 스치지만, 말없이 웃는 Rafaela를 보며 그 걱정은 풀린다. 따라서 따뜻한 희망이 중심이고 걱정은 잠시 스치는 정서이므로 A가 정답이다. B는 덜 두드러진 정서만 말했고, C는 두 정서의 비중을 뒤집었으며, D는 소재와 어울리지만 지문 단서가 약하다.\n### lit40-medium-02-073 — skill inferences · 유형 tone_or_mood\n[지문]\nRain-streaked windows rattled as the night bus pulled away from Piccadilly, and Jonah dropped into the seat beside me as if we had planned it. Three weeks earlier he had hidden among the rope lockers on my boat, and so he had seen, as no one else had, the moment I, Leah, misjudged the tide and scraped the pier. \"They'll ask me tomorrow,\" he said. \"At the hearing. What do I say?\" My stomach tightened; I had rehearsed a gentler version of that night so many times it almost felt true. But I looked at him, sixteen and soaked through, and told him to say exactly what he saw, every second of it, and that I would say the same. He nodded slowly. At Ardwick a woman boarded carrying a sleeping terrier wrapped in a scarf.\n\n[질문] Which choice best describes the overall tone of the text?\nA) Guilt-ridden, with the narrator dwelling on her past error\nB) Resolute, though tinged with the narrator's lingering guilt\nC) Guilty above all, with only a passing flicker of resolve\nD) Resentful of the boy for hiding aboard the narrator's boat\n\n[표시된 정답] B\n[해설]\nLeah는 사고 장면을 떠올리며 속이 조이고, 더 부드러운 거짓 설명을 연습해 왔다고 고백하며 죄책감을 드러낸다. 그러나 젖은 소년을 보고는 본 그대로 말하라고, 자신도 그렇게 하겠다고 단호하게 말한다. 죄책감이 남아 있지만 정직하겠다는 결의가 더 두드러지므로 B가 정답이다. A는 덜 두드러진 정서만, C는 비중을 뒤집은 어조이며, D는 지문에 단서가 약하다.\n### lit40-medium-02-075 — skill inferences · 유형 tone_or_mood\n[지문]\nWind tugging at their coats, NEEMA and ASTER meet midway across the old stone bridge in Cape Town. Below, the canal runs brown after rain.\nASTER: (holding out a small tin box) I found it behind the stove when I moved the shelves. I think it was your father's.\nNEEMA: (opening it; inside, a pocket watch and a folded bus ticket) He kept the flat before I ever rented it to you. I thought this was lost when we cleared his things.\n(She is quiet. Her thumb rests on the ticket.)\nASTER: I almost kept it another week. I didn't know how to give it back.\nNEEMA: (laughing softly, eyes wet) Twenty-two years you've paid rent on time, and now you're late with this.\nASTER: Am I evicted?\nNEEMA: You're forgiven.\n(A cyclist rings his bell twice and swerves around them.)\n\n[질문] Which choice best describes the overall tone of the text?\nA) Grieving, centered on Neema's sense of her father's absence\nB) Mournful, with only a moment of warmth between the women\nC) Tense, marked by a dispute over the tenant's overdue rent\nD) Warm and grateful, though touched by the ache of a loss\n\n[표시된 정답] D\n[해설]\nNeema는 아버지의 유품을 받고 표를 쓰다듬으며 잠시 말을 잃어 상실의 아픔을 드러낸다. 그러나 곧 눈물 젖은 채 웃으며 Aster에게 농담을 건네고 용서한다고 말해 따뜻함과 고마움이 장면을 이끈다. 따뜻함이 중심이고 슬픔은 배어 있는 정서이므로 D가 정답이다. A는 덜 두드러진 정서만, B는 비중을 뒤집었으며, C는 농담 속 집세 언급을 실제 갈등으로 오해했다.\n### lit40-medium-02-076 — skill inferences · 유형 tone_or_mood\n[지문]\nInk, hot metal, and the steady thud of the flatbed: I still smell and hear the press room in Mumbai whenever Sergio telephones. We set type side by side there for nine years before he moved to Goa, and he still calls me, Ishaan, his apprentice, though I outlasted him by a decade. Last week he rang about our old foreman, who is dying and keeps asking whether the shop he founded still runs. It does not; it closed in 1994. Sergio thinks we should tell him the truth. I keep picturing the foreman tapping each line of type with his thumb, proud as a father, and I am not sure what I will say. Still, I laughed when Sergio reminded me how I once printed a wedding card with the groom's name upside down. My neighbor's radio is playing an old film song through the wall.\n\n[질문] Which choice best describes the overall tone of the text?\nA) Fondly affectionate, though unsettled by an unresolved choice\nB) Troubled by the hard choice about what to tell the foreman\nC) Deeply uncertain, with only a passing note of fond memory\nD) Proud, celebrating the narrator's long career as a typesetter\n\n[표시된 정답] A\n[해설]\n화자는 인쇄실의 냄새와 소리, 친구 Sergio의 농담과 거꾸로 찍힌 청첩장 일화를 떠올리며 웃는 등 애정 어린 정서를 곳곳에 드러낸다. 다만 죽어 가는 감독에게 진실을 말할지 정하지 못한 망설임이 함께 섞여 있다. 애정이 중심이고 망설임은 그 아래의 정서이므로 A가 정답이다. B는 덜 두드러진 정서만, C는 비중을 뒤집었으며, D는 지문에 단서가 약하다.\n### lit40-medium-02-077 — skill inferences · 유형 tone_or_mood\n[지문]\nBergen in July smelled of tar and wet lilac, and the long dining hall of the summer school where I worked as a boy smelled of both. I was the gardener's son, trimming hedges for Thorvald, who had bought the estate that spring. One evening he called me in while the students ate and told me, before all of them, that he would pay my fees at the cathedral school in autumn. I felt my face burn; I was holding a rake, and my boots were caked with mud. Yet when he shook my hand, his grip was so earnest that the burning turned, slowly, to something like gladness, and I thanked him twice. Jens, my father, was waiting by the kitchen door. Through the windows, gulls wheeled above the fish market.\n\n[질문] Which choice best describes the overall tone of the text?\nA) Embarrassed, focused on the narrator's muddy appearance\nB) Grateful, though first colored by a sense of embarrassment\nC) Humiliated, with only a faint trace of thankfulness\nD) Resentful of the new owner for staging a public display\n\n[표시된 정답] B\n[해설]\n화자는 학생들 앞에서 장학금 소식을 듣자 진흙투성이 차림 때문에 얼굴이 달아오른다. 그러나 Thorvald의 진심 어린 악수에 그 부끄러움이 기쁨으로 바뀌고 두 번이나 감사를 표한다. 부끄러움이 먼저 있지만 감사가 더 두드러지므로 B가 정답이다. A는 덜 두드러진 정서만, C는 비중을 뒤집었고, D는 지문에 단서가 약한 어조다.\n### lit40-medium-02-078 — skill inferences · 유형 tone_or_mood\n[지문]\nBy the time you read this, Grandpa Lachlan, the water in the Havana cellar will have gone down, or so the neighbors promise. I waded in this morning to find your Gaelic word cards floating like little rafts, the ink on the S's running blue. For an hour I could only stand there and count the ruined ones. Then I remembered how you made me repeat your goodnight phrase every evening until I stopped stumbling, and I began lifting the cards out one by one and pegging them on the line across the patio. Many can still be read. I am copying each onto fresh paper, and I have learned eleven new words already, though I am sure I say half of them wrong. Your Ximena. Señora Ruiz from upstairs has lent me her fan to dry them.\n\n[질문] Which choice best describes the overall tone of the text?\nA) Dismayed, dwelling on the ruined cards in the flooded cellar\nB) Discouraged, with only a slight hint of determination\nC) Determined and hopeful, after a moment of dismay\nD) Bitter toward the neighbors for their empty promises\n\n[표시된 정답] C\n[해설]\nXimena는 물에 뜬 단어 카드를 보고 한 시간 동안 망가진 것만 세며 낙담한다. 그러나 할아버지와의 기억을 떠올린 뒤 카드를 건져 말리고 새 종이에 옮기며 새 단어를 익힌다. 잠깐의 낙담 뒤 결의와 희망이 더 두드러지므로 C가 정답이다. A는 덜 두드러진 정서만, B는 비중을 뒤집었으며, D는 지문에 단서가 약하다.\n### lit40-medium-02-079 — skill inferences · 유형 relationship_between_characters\n[지문]\nWe had not spoken in four years, Greta and I, not since she lured my best customer across the square with her poppy-seed rolls. So when the stationmaster told us that the new café at the Hamburg terminal would have only one table for pastries, and that we must share it, I, Annika, nearly refused. On the first morning she set her rolls on the left and I set my almond cakes on the right, and neither of us looked up. By noon, though, I noticed she had moved her tray an inch to give my cakes the light from the window. Before closing, I tasted one of her rolls in the stockroom; it was better than mine, and I told her so the next day. She only sniffed and said my almonds were too dry. A train from Altona hissed to a stop beyond the glass.\n\n[질문] Which choice best describes the relationship between Annika and Greta as presented in the text?\nA) Greta resents Annika and tries to keep her from selling well at the café.\nB) Annika admires Greta, who has come to rely on Annika's baking judgment.\nC) They are old friends who quarrel only to amuse the café's customers.\nD) They are rivals who are beginning to show each other a wary respect.\n\n[표시된 정답] D\n[해설]\n두 사람은 4년 동안 말도 하지 않은 경쟁자였고 첫날에도 서로 쳐다보지 않는다. 그러나 Greta는 Annika의 케이크에 햇빛이 들도록 쟁반을 옮겨 주고, Annika는 Greta의 빵이 더 낫다고 인정한다. 두 장면을 이으면 경쟁 관계 속에서 조심스러운 존중이 싹트고 있으므로 D가 정답이다. A는 한쪽 감정만, B는 방향을 뒤집은 관계이며, C는 지문에 근거가 없는 통념이다.\n### lit40-medium-02-080 — skill inferences · 유형 relationship_between_characters\n[지문]\nYears later, I still remember the frost on the guesthouse windows the morning Aunt Itzel and I had to decide which of us would stay. We owed the brothers for a whole winter of lodging on the plateau, and the abbot had agreed that one of us could work it off through spring while the other drove home to Flagstaff. I, Nova, said I would stay; I was nineteen and strong, and she had a job waiting. Itzel only poured me coffee and slid the truck keys across the table toward my hand. When I pushed them back, she closed my fingers around them and said that she had stayed behind for my mother once, too, and had never regretted it. I left at noon. Snow was drifting against the mesa's red flank as I passed the cattle guard.\n\n[질문] Which choice best describes the relationship between Itzel and Nova as presented in the text?\nA) Itzel insists on sacrificing for Nova, who wants to bear the burden herself.\nB) Nova resents Itzel for forcing her to leave the plateau guesthouse before spring.\nC) Itzel depends on Nova, who reluctantly agrees to stay behind and work.\nD) They are distant relatives bound together mainly by the debt they share.\n\n[표시된 정답] A\n[해설]\nNova는 젊고 튼튼하다며 자신이 남겠다고 나서지만, Itzel은 말없이 트럭 열쇠를 Nova 쪽으로 밀어 준다. Nova가 열쇠를 돌려보내자 Itzel은 그녀의 손에 열쇠를 쥐여 주며 예전에도 Nova의 어머니를 위해 남았다고 말한다. 두 행동을 이으면 Itzel은 Nova를 위해 희생하려 하고 Nova는 짐을 직접 지려 하는 관계이므로 A가 정답이다. B는 한쪽 감정만, C는 방향을 뒤집은 관계이며, D는 일반적 통념에서 고른 관계다.\n### lit40-medium-02-081 — skill inferences · 유형 relationship_between_characters\n[지문]\nWhen the looms of the Tbilisi weaving cooperative fall silent each evening, I set two chairs by the window, and Anushka begins unwinding the tangled yarn the weavers leave behind. We used to play here for them on Fridays; now nobody asks. IRENA: You could leave the yarn tonight. ANUSHKA: (without looking up) And give up the only thing we still do on time? Later, when I reach for my violin case, she slides the spool toward me first, as she always does, so that I hold one end while she winds. Neither of us mentions the concert hall that cancelled our booking. IRENA: Same tempo as yesterday? ANUSHKA: Slower. Your hands are tired. Outside, a tram rattles past and the courtyard lamps flicker on one by one.\n\n[질문] Based on the text, how would the relationship between Irena and Anushka most likely be described?\nA) Anushka resents Irena for the cancelled booking and uses the yarn to avoid talking to her.\nB) Though their partnership is faltering, they stay attentive to each other through a familiar routine.\nC) Irena depends on Anushka's guidance, but Anushka has grown tired of the yarn and of Irena.\nD) They are rivals for the weavers' attention, each secretly hoping to perform alone on Fridays.\n\n[표시된 정답] B\n[해설]\nAnushka는 실 감기를 '아직 제때 하는 유일한 일'이라 부르며 둘의 공연 활동이 기울었음을 드러낸다. 동시에 Irena에게 먼저 실패를 건네고, 손이 피곤하다며 템포를 늦추자고 하는 행동은 서로를 세심하게 살피는 관계임을 보여 준다. 따라서 B가 정답이다. A와 C는 한쪽의 감정만 부정적으로 확대했고, D는 지문에 근거 없는 경쟁 관계라는 통념이다.\n### lit40-medium-02-082 — skill inferences · 유형 relationship_between_characters\n[지문]\nRotterdam on market mornings smelled of herring and wet canvas, and it was there, between the cheese stalls, that Ayesha met Bronislaw each week to carry his violin home. He had never asked her to; she believed he once had, years ago, though neither of them could recall the words. He corrected her bowing even as they walked, tapping her wrist with two fingers whenever her arm drooped beneath the case. Yet when a fishmonger jostled her, Bronislaw stepped between them without a word and took the case himself for the length of a stall. By the canal he handed it back, remarking only that her left shoulder was still too high. Gulls wheeled over the awnings, and a bell somewhere across the water struck ten.\n\n[질문] Based on the text, how would the relationship between Ayesha and Bronislaw most likely be described?\nA) Ayesha feels obligated to Bronislaw, who regards her as little more than a porter for his case.\nB) Ayesha shields Bronislaw from the crowd, while he relies on her to correct his habits.\nC) Bronislaw is exacting about Ayesha's playing but quietly protective of her beyond the lesson.\nD) They have given up formal lessons and now meet only as friendly equals at the market.\n\n[표시된 정답] C\n[해설]\nBronislaw는 걸으면서도 손목을 두드리며 활 자세를 고치고, 운하에서는 어깨가 높다고 지적하는 엄격한 선생이다. 그러나 생선 장수가 Ayesha를 밀치자 말없이 사이에 서서 가방을 대신 드는 행동은 그녀를 보호하려는 마음을 드러낸다. 두 단서를 연결하면 C가 정답이다. A는 Ayesha 쪽 의무감만 반영했고, B는 보호와 교정의 방향을 뒤바꿨으며, D는 계속되는 교정과 맞지 않는다.\n### lit40-medium-02-083 — skill inferences · 유형 relationship_between_characters\n[지문]\nBy the winter of 1994, Joon had conducted the Busan youth orchestra for eleven years, and every Thursday he still sat in the same barbershop chair beside Jakub, its youngest violinist. Jakub had given up a scholarship abroad to stay with the ensemble when two players quit; Joon knew this, and Jakub knew that he knew. That afternoon Joon paid for both haircuts before Jakub could reach his wallet, then busied himself with a newspaper. Jakub, for his part, folded the receipt carefully into his coat rather than throwing it away. Later, at rehearsal, Joon gave him the solo that had always gone to the concertmaster, and no one in the hall questioned it. Snow had started again by the time the barber swept the floor and pulled the shutter halfway down.\n\n[질문] Based on the text, how would the relationship between Joon and Jakub most likely be described?\nA) Jakub resents Joon for the lost scholarship and refuses to accept any of his gestures.\nB) Jakub feels indebted to Joon, who once gave up a scholarship to keep the orchestra going.\nC) Joon treats Jakub as most conductors treat junior players, with distant formality.\nD) Joon feels indebted to Jakub and tries, without speaking of it, to repay him.\n\n[표시된 정답] D\n[해설]\nJakub이 오케스트라를 위해 해외 장학금을 포기했고 Joon이 그 사실을 안다는 점이 먼저 제시된다. 이후 Joon이 이발비를 몰래 먼저 내고 신문 뒤로 숨는 행동, 그리고 늘 악장에게 가던 솔로를 Jakub에게 주는 행동은 말없이 빚을 갚으려는 마음을 보여 준다. 따라서 D가 정답이다. A는 영수증을 소중히 접는 행동과 맞지 않고, B는 희생의 방향을 뒤집었으며, C는 지휘자에 대한 일반적 통념이다.\n### lit40-medium-02-084 — skill inferences · 유형 relationship_between_characters\n[지문]\nI am writing from the back room of a tailor's shop on Burns Road, among bolts of cotton, because it is the only quiet place in Karachi tonight. When the council told me you would speak at Thursday's meeting, I prepared for an attack on my road plan; you have opposed me on nearly every vote since I became mayor. Instead you stood and urged the council to pass it, saying the ambulance could not reach the hill villages without it. I learned afterward that you had spent two nights checking my figures so they would survive the auditors. I do not yet know how to thank a doctor I spent a year arguing with, Pouya, except to say that I was wrong about you. The tailor has begun pressing collars beside me, and steam is clouding the lamp.\n\n[질문] Based on the letter, how would Danish, the mayor writing it, most likely describe his relationship with Pouya?\nA) He had expected Pouya to oppose him but now sees the doctor as a valued supporter.\nB) Pouya has long admired him, though he still regards the doctor as a dangerous critic.\nC) He supported Pouya's plans in council, and Pouya now owes him thanks for that help.\nD) They remain political enemies who cooperate only when the auditors require it.\n\n[표시된 정답] A\n[해설]\n편지의 화자인 시장은 Pouya가 거의 모든 표결에서 자신에게 반대해 왔기에 공격을 예상했다고 말한다. 그러나 Pouya는 도로 계획 통과를 촉구했고, 감사를 통과하도록 이틀 밤 수치를 검토해 주었으며, 시장은 그에 대해 틀렸다고 인정한다. 이 단서들을 이으면 A가 정답이다. B는 감정의 방향을 왜곡했고, C는 도움을 준 쪽을 뒤바꿨으며, D는 정적 관계라는 통념에 머문다.\n### lit40-medium-02-085 — skill inferences · 유형 relationship_between_characters\n[지문]\nBrass gears ticked on every wall of Tatiana's clock shop in Riga, where an old rule held that no clock could be sold until it had run a full year without losing a minute. Everyone obeyed it, though customers grumbled and many fine clocks were melted down for a single lost minute. On the morning Jakub was to leave for university, he found his mother lifting down the small clock he had built at twelve, which had once lost four minutes in a single winter. Keep it, she said, pressing it into his bag. A year is too long to wait for some things. Jakub said nothing, but at the station he wound it carefully and set it to her time. Snow drifted against the shop window long after the train had gone, and the wall clocks struck noon together.\n\n[질문] Based on the text, how would the relationship between Tatiana and Jakub most likely be described?\nA) Jakub is eager to escape his mother's rules, while Tatiana hopes the clock will keep him home.\nB) Tatiana bends a long-obeyed rule for her son, who quietly honors what her gesture means.\nC) Jakub persuades his mother to break the rule, and she reluctantly gives up the clock.\nD) Like most parents and children, they argue about rules until the son finally leaves.\n\n[표시된 정답] B\n[해설]\n모두가 지켜 온 '1년 무오차' 규칙 아래에서 Tatiana는 오차가 났던 아들의 시계를 가방에 넣어 주며 규칙을 스스로 굽힌다. Jakub은 말없이 역에서 시계를 감아 어머니의 시간에 맞추는데, 이는 어머니의 마음을 존중하는 행동이다. 두 장면을 연결하면 B가 정답이다. A는 한쪽 감정을 지어냈고, C는 설득의 방향을 뒤집었으며, D는 부모 자식 갈등에 대한 통념이다.\n### lit40-medium-02-086 — skill inferences · 유형 symbolism\n[지문]\nWhen Zofia climbed to the roof that last evening in Thessaloniki, her father was already kneeling beside the water tank, a tin of sealant open at his knee. For eleven summers the tank had wept a thin rust-colored line down the wall, and for eleven summers he had said he would fix it next week. Eda, from the next roof, used to joke that the stain was older than Zofia's English. Zofia had stopped noticing it, the way she had stopped noticing that he never asked about the school prize ceremony he had missed. Now he pressed the sealant into the seam with his thumb and said, in Greek, that he should have done this long ago. She answered in English that it was fine, though her suitcase was already packed downstairs. Below them, the harbor lights came on and a ferry horn sounded twice.\n\n[질문] In the text, the leaking water tank most likely represents\nA) the father's pride in his practical skills, which Zofia has never truly valued\nB) the family's lack of money, which has kept them from making needed repairs\nC) a long-neglected hurt that her father tries to mend only as she is leaving\nD) the language gap between father and daughter, which neither one can bridge\n\n[표시된 정답] C\n[해설]\n물탱크는 11년 동안 새면서도 '다음 주'로 미뤄졌고, Zofia가 그 얼룩을 잊은 방식은 아버지가 놓친 시상식을 잊은 방식과 겹쳐 서술된다. 아버지는 딸이 떠나는 날에야 틈을 메우며 진작 했어야 했다고 말하고, 딸의 가방은 이미 싸여 있다. 따라서 탱크는 너무 늦게 다뤄지는 오래된 상처를 상징하므로 C가 정답이다. D는 언어 차이가 언급되어 그럴듯하지만 반복된 수리 지연과 사과의 맥락을 설명하지 못하고, A와 B는 근거가 없다."
+}

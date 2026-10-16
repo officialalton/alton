@@ -11,14 +11,14 @@ export default function InviteManualReviewPage() {
           ALTON <span className="text-red">EDUCATION</span>
         </div>
         <h1 className="text-[21px] font-extrabold text-ink mb-3">
-          관리자 확인이 필요합니다
+          We need to review this
         </h1>
         <p className="text-[13.5px] text-grey-500 leading-[1.6]">
-          입력하신 이메일로 이미 계정이 존재합니다.
+          An account already exists for this email.
           <br />
-          안전한 연결을 위해 관리자가 직접 확인한 뒤 처리해드립니다.
+          To keep things secure, our team will review and link it manually.
           <br />
-          잠시만 기다려주세요.
+          We&apos;ll be in touch shortly.
         </p>
       </div>
     </main>

@@ -1,0 +1,23 @@
+{
+ "itemId": "linear_inequalities.compound_inequality_number_line.NL.P",
+ "verdict": "pass",
+ "reviewedAt": "2026-10-06T08:00:06Z",
+ "reviewer": "claude-sonnet-5.5 (math-D session)",
+ "codeHash": "54f21e822df634c2fbaf186ca2de971a1dfb86ff71bbabfd9f73218b0b7bc1ac",
+ "samples": [
+  "linear_inequalities.compound_inequality_number_line.NL.P.png"
+ ],
+ "checklist": {
+  "figure_present": "pass",
+  "proportion_matches_values": "pass",
+  "labels_placed_and_legible": "pass",
+  "text_matches_figure_and_solvable": "pass",
+  "axes_ticks_units_legend": "pass",
+  "sat_visual_style": "pass",
+  "mobile_375_readable": "pass",
+  "multi_figure_consistent": "n/a",
+  "choice_distinct_one_rule": "n/a"
+ },
+ "defects": [],
+ "notes": "수직선: 눈금 균일, 찬 점·빈 점·반직선 방향·구간이 데이터와 일치, 선택지형은 같은 축·크기의 4개 그래프, 데스크톱·375px 읽음. [재스탬프: easy/medium 문구 변형 추가, 샘플 본문·렌더 동일 확인]"
+}

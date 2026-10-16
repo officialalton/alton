@@ -1,0 +1,242 @@
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import { describe, expect, it, vi } from "vitest";
+import ConsultationSchedulingPanel from "./ConsultationSchedulingPanel";
+import * as consultActions from "./consultation-scheduling-actions";
+import * as subscriptionActions from "./workspace-events-actions";
+
+// M1/R6(2026-09-03, Sandbox v3 재검증 중 발견된 버그 2건에 대한 회귀 테스트) —
+// 1) "상담 결과 기록" 버튼이 completionReadiness==='summary_missing'일 때도(즉 요약을
+//    아직 안 썼을 때) 폼을 열 수 있어야 한다 — 예전엔 'ready'(=요약이 이미 있어야 함)
+//    일 때만 열려서 순환 참조로 영원히 못 여는 버그였다.
+// 2) Workspace Events 구독 상태 목록에 정지·삭제 버튼이 실제로 연결돼 있어야 한다.
+
+vi.mock("./consultation-scheduling-actions", () => ({
+  listConsultationsForAdmin: vi.fn(),
+  listPendingConsultationRequests: vi.fn(),
+  acceptConsultationRequest: vi.fn(),
+  rejectConsultationRequest: vi.fn(),
+  rescheduleConsultationRequest: vi.fn(),
+  cancelConsultationRequest: vi.fn(),
+  recordConsultationOutcome: vi.fn(),
+  retryTrialEntitlementGrant: vi.fn(),
+  retryFailedConsultationCalendarSyncs: vi.fn(),
+  resyncConsultationCalendar: vi.fn(),
+  reprocessUnlinkedConsultationSmartNotesEvents: vi.fn(),
+  listConsultAvailabilityRules: vi.fn(),
+  addConsultAvailabilityRule: vi.fn(),
+  deactivateConsultAvailabilityRule: vi.fn(),
+  listConsultAvailabilityExceptions: vi.fn(),
+  addConsultAvailabilityException: vi.fn(),
+  removeConsultAvailabilityException: vi.fn(),
+}));
+
+vi.mock("./workspace-events-actions", () => ({
+  listWorkspaceEventsSubscriptions: vi.fn(),
+  retryExpiringWorkspaceEventsSubscriptions: vi.fn(),
+  runSmartNotesReconciliation: vi.fn(),
+  disableWorkspaceEventsSubscriptionForOrganizer: vi.fn(),
+}));
+
+vi.mock("@/lib/timezone-actions", () => ({
+  getMyTimezoneSettings: vi.fn().mockResolvedValue({
+    profileTimezone: null,
+    householdId: null,
+    householdDefaultTimezone: null,
+    isPrimaryGuardian: false,
+    resolvedTimezone: "Asia/Seoul",
+  }),
+}));
+
+const BASE_CONSULTATION = {
+  id: "consult-1",
+  contact_name: "김민지",
+  contact_email: "minji@example.com",
+  contact_phone: null,
+  student_grade: null,
+  concerns: null,
+  status: "scheduled",
+  source: "homepage",
+  starts_at: "2026-10-01T09:00:00.000Z",
+  ends_at: "2026-10-01T10:00:00.000Z",
+  scheduled_at: "2026-10-01T09:00:00.000Z",
+  hold_expires_at: null,
+  google_event_id: "evt-1",
+  google_meet_link: "https://meet.google.com/abc-defg-hij",
+  google_sync_status: "synced",
+  google_sync_retry_count: 0,
+  google_sync_last_error: null,
+  smart_notes_config_status: "applied",
+  smart_notes_config_error: null,
+  smart_notes_drive_file_id: "drive-1",
+  admin_review_summary: null,
+  outcome: null,
+  outcome_notes: null,
+  prospect_contact_id: null,
+  consent_version_id: "consent-1",
+  consent_confirmed_at: "2026-09-30T00:00:00.000Z",
+  child_id: null,
+  trial_intent_confirmed_at: null,
+  trial_entitlement_grant_id: null,
+  trial_entitlement_grant_status: "not_applicable" as const,
+  trial_entitlement_grant_error: null,
+  trial_entitlement_grant_expires_at: null,
+  family_root_consultation_id: null,
+  is_child_onboarding_card: false,
+  source_link_child_id: null,
+  admissions_consultant_id: null,
+  consultReadiness: "ready" as const,
+  // 요약(admin_review_summary)이 아직 없어 completionReadiness가 'summary_missing' —
+  // 이게 바로 예전 버그가 재현되던 조합이다.
+  completionReadiness: "summary_missing" as const,
+};
+
+function mockBaseData() {
+  vi.mocked(consultActions.listPendingConsultationRequests).mockResolvedValue([]);
+  vi.mocked(consultActions.listConsultationsForAdmin).mockResolvedValue([BASE_CONSULTATION]);
+  vi.mocked(consultActions.listConsultAvailabilityRules).mockResolvedValue([]);
+  vi.mocked(consultActions.listConsultAvailabilityExceptions).mockResolvedValue([]);
+  vi.mocked(subscriptionActions.listWorkspaceEventsSubscriptions).mockResolvedValue([
+    { id: "sub-1", organizer_email: "official@alton.education", organizer_role: "consult_organizer", status: "active", expires_at: null, last_verified_at: null, last_renewed_at: null, last_error: null },
+  ]);
+}
+
+describe("ConsultationSchedulingPanel — 상담 결과 기록 버튼 회귀(요약 미작성 상태에서도 폼이 열려야 함)", () => {
+  it("completionReadiness가 'summary_missing'이어도 '상담 결과 기록' 버튼이 활성화되고 폼이 열린다", async () => {
+    mockBaseData();
+    render(<ConsultationSchedulingPanel />);
+
+    const button = await screen.findByRole("button", { name: "상담 결과 기록" });
+    expect(button).not.toBeDisabled();
+
+    fireEvent.click(button);
+    // 폼이 열렸는지는 "기록 저장" 제출 버튼의 존재로 확인한다(라벨 텍스트가 textarea와
+    // 같은 <label> 안에서 텍스트 노드로 쪼개져 매칭이 불안정할 수 있어 더 안정적인
+    // 쿼리를 쓴다).
+    expect(await screen.findByRole("button", { name: "기록 저장" })).toBeInTheDocument();
+  });
+
+  it("아무 조건도 안 맞으면(예: not_applicable) 버튼은 여전히 비활성화된다", async () => {
+    vi.mocked(consultActions.listPendingConsultationRequests).mockResolvedValue([]);
+    vi.mocked(consultActions.listConsultationsForAdmin).mockResolvedValue([
+      { ...BASE_CONSULTATION, completionReadiness: "not_applicable" },
+    ]);
+    vi.mocked(consultActions.listConsultAvailabilityRules).mockResolvedValue([]);
+    vi.mocked(consultActions.listConsultAvailabilityExceptions).mockResolvedValue([]);
+    vi.mocked(subscriptionActions.listWorkspaceEventsSubscriptions).mockResolvedValue([]);
+
+    render(<ConsultationSchedulingPanel />);
+    const button = await screen.findByRole("button", { name: "상담 결과 기록" });
+    expect(button).toBeDisabled();
+  });
+});
+
+describe("ConsultationSchedulingPanel — 공용 상담 가능시간 제거(2026-09-29 오너 규칙)", () => {
+  it("공용 상담 가능시간 관리 섹션이 더 이상 렌더링되지 않는다", async () => {
+    render(<ConsultationSchedulingPanel />);
+    await waitFor(() => expect(consultActions.listPendingConsultationRequests).toHaveBeenCalled());
+    expect(screen.queryByText("공용 상담 가능시간")).not.toBeInTheDocument();
+    expect(screen.queryByText("반복 가능시간 추가")).not.toBeInTheDocument();
+  });
+});
+
+describe("ConsultationSchedulingPanel — Workspace Events 구독 정지·삭제 버튼", () => {
+  it("활성 구독에 정지·삭제 버튼이 있고, 사유 입력 후 제출하면 실제 액션을 호출한다", async () => {
+    mockBaseData();
+    vi.mocked(subscriptionActions.disableWorkspaceEventsSubscriptionForOrganizer).mockResolvedValue(undefined);
+    render(<ConsultationSchedulingPanel />);
+
+    const disableButton = await screen.findByRole("button", { name: "구독 정지·삭제" });
+    fireEvent.click(disableButton);
+
+    const input = screen.getByPlaceholderText("정지·삭제 사유");
+    fireEvent.change(input, { target: { value: "테스트 정지" } });
+    fireEvent.click(screen.getByRole("button", { name: "정지·삭제 확정" }));
+
+    await waitFor(() =>
+      expect(subscriptionActions.disableWorkspaceEventsSubscriptionForOrganizer).toHaveBeenCalledWith("official@alton.education", "테스트 정지")
+    );
+  });
+});
+
+// 2026-09-06 — "Calendar 재처리 실행" 등 버튼을 눌러도 성공/실패가 눈에 띄게
+// 표시되지 않고 그대로 머물러 있는 것처럼 보인다는 지적을 고쳤다. 성공/실패
+// 모두 토스트로 몇 초간 명확히 보여야 한다.
+describe("ConsultationSchedulingPanel — 관리자 액션 버튼의 성공/실패 토스트", () => {
+  it("Calendar 재처리 실행을 누르면 성공 토스트가 뜬다", async () => {
+    mockBaseData();
+    vi.mocked(consultActions.retryFailedConsultationCalendarSyncs).mockResolvedValue({ processed: 1 });
+    render(<ConsultationSchedulingPanel />);
+
+    fireEvent.click(await screen.findByRole("button", { name: "Calendar 재처리 실행" }));
+
+    const toast = await screen.findByTestId("admin-toast");
+    expect(toast).toHaveAttribute("data-kind", "success");
+    expect(toast.textContent).toContain("Calendar 재처리 완료");
+  });
+
+  it("Calendar 재처리 실행이 실패하면 에러 내용이 담긴 실패 토스트가 뜬다", async () => {
+    mockBaseData();
+    vi.mocked(consultActions.retryFailedConsultationCalendarSyncs).mockRejectedValue(new Error("네트워크 오류"));
+    render(<ConsultationSchedulingPanel />);
+
+    fireEvent.click(await screen.findByRole("button", { name: "Calendar 재처리 실행" }));
+
+    const toast = await screen.findByTestId("admin-toast");
+    expect(toast).toHaveAttribute("data-kind", "error");
+    expect(toast.textContent).toContain("네트워크 오류");
+  });
+
+  it("만료 임박 구독 갱신 실행을 누르면 성공 토스트가 뜬다", async () => {
+    mockBaseData();
+    vi.mocked(subscriptionActions.retryExpiringWorkspaceEventsSubscriptions).mockResolvedValue({ processed: 1 });
+    render(<ConsultationSchedulingPanel />);
+
+    fireEvent.click(await screen.findByRole("button", { name: "만료 임박 구독 갱신 실행" }));
+
+    const toast = await screen.findByTestId("admin-toast");
+    expect(toast).toHaveAttribute("data-kind", "success");
+    expect(toast.textContent).toContain("만료 임박 구독 갱신 완료");
+  });
+});
+
+describe("ConsultationSchedulingPanel — Google 재동기화(2026-09-29)", () => {
+  function setup(rows: Array<Record<string, unknown>>) {
+    vi.mocked(consultActions.listPendingConsultationRequests).mockResolvedValue([]);
+    vi.mocked(consultActions.listConsultationsForAdmin).mockResolvedValue(rows as never);
+    vi.mocked(consultActions.listConsultAvailabilityRules).mockResolvedValue([]);
+    vi.mocked(consultActions.listConsultAvailabilityExceptions).mockResolvedValue([]);
+    vi.mocked(subscriptionActions.listWorkspaceEventsSubscriptions).mockResolvedValue([]);
+    vi.mocked(consultActions.resyncConsultationCalendar).mockResolvedValue("synced");
+  }
+
+  it("synced 상담에는 재동기화 UI가 없다", async () => {
+    setup([BASE_CONSULTATION]);
+    render(<ConsultationSchedulingPanel />);
+    await screen.findByRole("button", { name: "상담 결과 기록" });
+    expect(screen.queryByRole("button", { name: "Google 재동기화" })).not.toBeInTheDocument();
+  });
+
+  it("failed: 시도 횟수·사유·자동 재시도 대기 문구와 버튼을 보여주고, 버튼은 액션을 호출한다", async () => {
+    setup([{ ...BASE_CONSULTATION, google_sync_status: "failed", google_sync_retry_count: 2, google_sync_last_error: "Calendar 500" }]);
+    render(<ConsultationSchedulingPanel />);
+    const box = await screen.findByTestId("consult-sync-status-consult-1");
+    expect(box.textContent).toContain("자동 재시도 대기(2/5회)");
+    expect(box.textContent).toContain("Calendar 500");
+    fireEvent.click(screen.getByRole("button", { name: "Google 재동기화" }));
+    await waitFor(() => expect(consultActions.resyncConsultationCalendar).toHaveBeenCalledWith("consult-1"));
+  });
+
+  it("reconciliation_needed: 자동 재시도 중단으로 표시한다", async () => {
+    setup([{ ...BASE_CONSULTATION, google_sync_status: "reconciliation_needed", google_sync_retry_count: 5 }]);
+    render(<ConsultationSchedulingPanel />);
+    const box = await screen.findByTestId("consult-sync-status-consult-1");
+    expect(box.textContent).toContain("자동 재시도 중단(5/5회)");
+  });
+
+  it("취소됐지만 이벤트 삭제가 실패한 상담도 재동기화 대상으로 보인다", async () => {
+    setup([{ ...BASE_CONSULTATION, status: "cancelled", google_sync_status: "failed", google_sync_retry_count: 1 }]);
+    render(<ConsultationSchedulingPanel />);
+    const box = await screen.findByTestId("consult-sync-status-consult-1");
+    expect(box.textContent).toContain("이벤트 삭제 실패");
+  });
+});

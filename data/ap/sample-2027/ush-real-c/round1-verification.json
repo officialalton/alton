@@ -1,0 +1,678 @@
+{
+ "models": {
+  "solvers": [
+   "claude-opus-5-5",
+   "claude-sonnet-5-5"
+  ],
+  "fact": "claude-fable-5-1"
+ },
+ "solve": {
+  "solve-ap_us_history-real_c_emanc-0": [
+   {
+    "q": 1,
+    "choice": 2,
+    "confidence": "certain",
+    "also": null,
+    "note": "Lincoln invokes his power 'as Commander-in-Chief' and calls the proclamation a 'fit and necessary war measure' for putting down the rebellion."
+   },
+   {
+    "q": 2,
+    "choice": 0,
+    "confidence": "certain",
+    "also": null,
+    "note": "The proclamation made ending slavery a Union war aim alongside restoring the Union. The other options get the timing or the facts wrong."
+   },
+   {
+    "q": 3,
+    "choice": 3,
+    "confidence": "certain",
+    "also": null,
+    "note": "The full proclamation allowed Black men to serve in the armed forces, and about 180,000 joined the Army plus others in the Navy. It did not free enslaved people in the border states, it helped keep Britain and France from recognizing the Confederacy, and it caused no pause in fighting."
+   }
+  ],
+  "solve-ap_us_history-real_c_emanc-1": [
+   {
+    "q": 1,
+    "choice": 2,
+    "confidence": "certain",
+    "also": null,
+    "note": "Excerpt cites power as Commander-in-Chief and a war measure."
+   },
+   {
+    "q": 2,
+    "choice": 0,
+    "confidence": "certain",
+    "also": null,
+    "note": "Union war aims broadened to include emancipation."
+   },
+   {
+    "q": 3,
+    "choice": 3,
+    "confidence": "certain",
+    "also": null,
+    "note": "Proclamation authorized enlisting Black men; about 180,000 served in the Union army, and many more in the navy."
+   }
+  ],
+  "solve-ap_us_history-real_c_monroe-0": [
+   {
+    "q": 1,
+    "choice": 1,
+    "confidence": "certain",
+    "also": null,
+    "note": "The Holy Alliance might help Spain take back its former colonies, and Monroe warns against any European 'interposition' against governments that have declared independence."
+   },
+   {
+    "q": 2,
+    "choice": 3,
+    "confidence": "certain",
+    "also": null,
+    "note": "Monroe says the U.S. 'shall not interfere' with existing colonies but would treat oppression of the newly independent states as unfriendly."
+   },
+   {
+    "q": 3,
+    "choice": 0,
+    "confidence": "certain",
+    "also": null,
+    "note": "The message responds to the Latin American revolutions and to European monarchies' interest in restoring control. The other options are later events."
+   },
+   {
+    "q": 4,
+    "choice": 2,
+    "confidence": "certain",
+    "also": null,
+    "note": "Monroe's line about staying out of European wars continues Washington's 1793 Neutrality Proclamation and the advice in his Farewell Address."
+   }
+  ],
+  "solve-ap_us_history-real_c_monroe-1": [
+   {
+    "q": 1,
+    "choice": 1,
+    "confidence": "certain",
+    "also": null,
+    "note": "Monroe warned against European interposition to oppress newly independent governments, reflecting fear of Holy Alliance intervention."
+   },
+   {
+    "q": 2,
+    "choice": 3,
+    "confidence": "certain",
+    "also": null,
+    "note": "Text says no interference with existing colonies but any interposition against independent governments is unfriendly."
+   },
+   {
+    "q": 3,
+    "choice": 0,
+    "confidence": "certain",
+    "also": null,
+    "note": "Context is Latin American independence movements and European monarchies' interest in restoring Spanish control."
+   },
+   {
+    "q": 4,
+    "choice": 2,
+    "confidence": "certain",
+    "also": null,
+    "note": "Non-involvement in European wars echoes Washington's neutrality policy and Farewell Address advice."
+   }
+  ],
+  "solve-ap_us_history-real_c_fsa-0": [
+   {
+    "q": 1,
+    "choice": 3,
+    "confidence": "certain",
+    "also": null,
+    "note": "The act required citizens to help, kept the accused from testifying, penalized anyone who helped an escape, and paid commissioners more for returning a person. All of this made it easier for slaveholders to recover people who had escaped."
+   },
+   {
+    "q": 2,
+    "choice": 1,
+    "confidence": "certain",
+    "also": null,
+    "note": "The excerpt orders 'all good citizens' to help when needed and sets fines and jail time for helping a fugitive escape."
+   },
+   {
+    "q": 3,
+    "choice": 2,
+    "confidence": "certain",
+    "also": null,
+    "note": "The act was part of the Compromise of 1850, which came out of the sectional fight over slavery in the land gained from Mexico."
+   },
+   {
+    "q": 4,
+    "choice": 0,
+    "confidence": "certain",
+    "also": null,
+    "note": "Northern anger at the law fed personal liberty laws, Uncle Tom's Cabin (1852), and growing antislavery feeling."
+   }
+  ],
+  "solve-ap_us_history-real_c_fsa-1": [
+   {
+    "q": 1,
+    "choice": 3,
+    "confidence": "certain",
+    "also": null,
+    "note": "The act strengthened slaveholders' ability to recover escaped people, with commands to citizens, no testimony by the accused, and penalties for aiding escapes."
+   },
+   {
+    "q": 2,
+    "choice": 1,
+    "confidence": "certain",
+    "also": null,
+    "note": "The excerpt commands good citizens to assist and punishes anyone who aids an escape or harbors a fugitive."
+   },
+   {
+    "q": 3,
+    "choice": 2,
+    "confidence": "certain",
+    "also": null,
+    "note": "The law was part of the Compromise of 1850, which followed the Mexican Cession and the dispute over slavery in the new territories."
+   },
+   {
+    "q": 4,
+    "choice": 0,
+    "confidence": "certain",
+    "also": null,
+    "note": "Northern outrage led to personal liberty laws, the popularity of Uncle Tom's Cabin, and more antislavery sentiment. The law was not repealed until 1864, and support for the Underground Railroad grew rather than declined."
+   }
+  ],
+  "solve-ap_us_history-real_c_jones-0": [
+   {
+    "q": 1,
+    "choice": 0,
+    "confidence": "likely",
+    "also": null,
+    "note": "Jones reports that the crowd said they were hungry. He blames the looting on exempted foreign residents who 'incited' it, not on the women and boys themselves. The other options are contradicted by the excerpt or not supported by it. One flaw: the excerpt never mentions speculators. That part comes from Jones's wider diary, where he often attacks 'extortioners.'"
+   },
+   {
+    "q": 2,
+    "choice": 2,
+    "confidence": "certain",
+    "also": null,
+    "note": "He says that the few men in the crowd were foreign residents 'with exemptions in their pockets.' He also says these exempted aliens incited the crowd to pillage valuables."
+   },
+   {
+    "q": 3,
+    "choice": 1,
+    "confidence": "certain",
+    "also": null,
+    "note": "Confederate inflation and scarcity came from the Union blockade, demands from the army, and heavy printing of paper money."
+   },
+   {
+    "q": 4,
+    "choice": 3,
+    "confidence": "certain",
+    "also": null,
+    "note": "Both complaints are about unfair draft exemptions. In the North, the $300 commutation fee and hiring of substitutes fed resentment, which broke out in the 1863 New York City draft riots."
+   }
+  ],
+  "solve-ap_us_history-real_c_jones-1": [
+   {
+    "q": 1,
+    "choice": 0,
+    "confidence": "unsure",
+    "also": null,
+    "note": "Jones notes hunger and high prices and hopes people leave the city, which shows some sympathy. He blames aliens with exemptions for inciting pillage, not speculators. Still, option 3 is the closest fit, since the other options are clearly wrong."
+   },
+   {
+    "q": 2,
+    "choice": 2,
+    "confidence": "certain",
+    "also": null,
+    "note": "The text says the few men present were mostly foreign residents with exemptions in their pockets, and that they incited pillage."
+   },
+   {
+    "q": 3,
+    "choice": 1,
+    "confidence": "certain",
+    "also": null,
+    "note": "Blockade, army demand and the printing of paper money drove Confederate inflation and shortages."
+   },
+   {
+    "q": 4,
+    "choice": 3,
+    "confidence": "certain",
+    "also": null,
+    "note": "Exemptions favoring some groups resemble the Northern anger over substitutes and commutation fees, which fed the 1863 New York City draft riots."
+   }
+  ]
+ },
+ "fact": {
+  "fact-ap_us_history-real_c_emanc": {
+   "verdicts": [
+    {
+     "where": "Q1",
+     "verdict": "sound",
+     "note": "Key is directly supported by the quoted 'Commander-in-Chief ... fit and necessary war measure' language. Distractor rationales are accurate: 13th Amendment ratified Dec. 1865; no Supreme Court ruling; border states not mentioned and slavery untouched in exempted areas."
+    },
+    {
+     "where": "Q2",
+     "verdict": "sound",
+     "note": "Shift in Union war aims toward emancipation alongside Union is the standard contextualization for Jan. 1863. Distractors are clearly wrong and their rationales are historically accurate."
+    },
+    {
+     "where": "Q3",
+     "verdict": "sound",
+     "note": "Full proclamation did provide that freed persons 'will be received into the armed service'; ~180,000 Black men served in the Union army (plus ~19,000 in the navy). Britain and France never recognized the Confederacy; border-state slavery ended by state action (MD 1864, MO 1865) and the 13th Amendment (KY, DE). Stem correctly signals the enlistment clause is outside the excerpt."
+    }
+   ],
+   "flags": []
+  },
+  "fact-ap_us_history-real_c_fsa": {
+   "verdicts": [
+    {
+     "where": "Q1",
+     "verdict": "sound",
+     "note": "Key clearly supported by the excerpt; distractor rationales accurate."
+    },
+    {
+     "where": "Q2",
+     "verdict": "sound",
+     "note": "Key matches the excerpt's command to citizens and penalty clause; rationale for [3] correctly reflects Section 6's 'without process' seizure provision."
+    },
+    {
+     "where": "Q3",
+     "verdict": "fix",
+     "note": "Key correct; one distractor rationale misstates what the Fugitive Slave Act itself addressed."
+    },
+    {
+     "where": "Q4",
+     "verdict": "sound",
+     "note": "Key is the standard causal connection; 1864 repeal date and growth of resistance are accurate."
+    }
+   ],
+   "flags": [
+    {
+     "where": "Q3 option [1] rationale",
+     "kind": "inaccurate",
+     "detail": "Says 'the 1850 act addressed the new territories and the return of fugitives.' The Fugitive Slave Act itself did not address the territories; the territorial provisions were in separate measures of the Compromise of 1850 (Utah and New Mexico acts, California statehood). Reword to refer to the Compromise of 1850 as a package."
+    }
+   ]
+  },
+  "fact-ap_us_history-real_c_monroe": {
+   "verdicts": [
+    {
+     "where": "Q1",
+     "verdict": "fix",
+     "note": "Key and stem are sound, but the rationale for distractor [2] asserts the excerpt 'mentions a Russian proposal to negotiate'; the supplied excerpt contains no reference to Russia (that passage of the message was cut before the first segment). Rewrite the rationale to rely on what is in the excerpt (policy stated toward all European powers; no alliance mentioned)."
+    },
+    {
+     "where": "Q2",
+     "verdict": "fix",
+     "note": "Key is clearly supported. Rationale for distractor [2] says the excerpt 'defends the American system as different'; the excerpt only warns against Europeans extending 'their system' to the hemisphere—the 'essentially different' political-system passage is not included. Minor wording fix."
+    },
+    {
+     "where": "Q3",
+     "verdict": "sound",
+     "note": "Key and distractor rationales are accurate (French/Holy Alliance restoration of Ferdinand VII in 1823; Mexican War 1846; nullification 1832; Plains settlement post-1865)."
+    },
+    {
+     "where": "Q4",
+     "verdict": "sound",
+     "note": "Neutrality Proclamation 1793 and Farewell Address 1796 correctly cited; distractor descriptions accurate."
+    }
+   ],
+   "flags": [
+    {
+     "where": "Q1 distractor [2] rationale",
+     "kind": "source_misread",
+     "detail": "Claims the excerpt mentions a Russian proposal to negotiate. The supplied excerpt does not mention Russia at all; the Russian-negotiation reference in the full message precedes the first excerpted segment and was omitted."
+    },
+    {
+     "where": "Q2 distractor [2] rationale",
+     "kind": "source_misread",
+     "detail": "States the excerpt 'defends the American system as different.' The excerpt does not contain the message's 'political system of the allied powers is essentially different' passage; it only warns against extending the European 'system' to the hemisphere. Minor overstatement of what the excerpt shows."
+    }
+   ]
+  },
+  "fact-ap_us_history-real_c_jones": {
+   "verdicts": [
+    {
+     "where": "Q1",
+     "verdict": "fix",
+     "note": "The key is still the best option by elimination, but the key rationale and the designer's cited evidence ('in the hands of the extortioners'; 'I could not ... refrain from expressing the hope that they might be successful') are not in the supplied excerpt. The excerpt as given never mentions extortioners or speculators, so 'blames speculators' cannot be verified from the source as presented. Either add that passage to the excerpt or revise the option/rationale to match what is actually quoted."
+    },
+    {
+     "where": "Q2",
+     "verdict": "sound",
+     "note": "Key directly supported by 'foreign residents, with exemptions in their pockets' and 'incited to pillage valuables ... by the class of residents (aliens) exempted from military duty'. Distractor rationales accurate."
+    },
+    {
+     "where": "Q3",
+     "verdict": "sound",
+     "note": "Key correctly identifies blockade, army demand, and Confederate paper-money inflation; distractor rationales are historically accurate."
+    },
+    {
+     "where": "Q4",
+     "verdict": "sound",
+     "note": "Enrollment Act of March 1863 allowed substitutes and the $300 commutation fee; resentment fueled the July 1863 New York City draft riots. Comparison is apt and distractors clearly inapplicable."
+    }
+   ],
+   "flags": [
+    {
+     "where": "Q1 key rationale / designer evidence",
+     "kind": "source_misread",
+     "detail": "The quoted evidence ('in the hands of the extortioners'; 'expressing the hope that they might be successful') does not appear in the supplied excerpt. Those lines exist in the full April 2, 1863 entry, but the excerpt as provided omits them, so the key's claim that the author 'blames speculators' rests on text the student cannot see. The excerpt only shows him sympathizing that they 'were hungry' and blaming exempted aliens for inciting pillage."
+    },
+    {
+     "where": "Q1 key rationale",
+     "kind": "source_misread",
+     "detail": "Rationale says the author 'calls prices the grim specter'. In the entry, 'another stride of the grim specter' refers to approaching famine/starvation, of which the prices are evidence; the specter is not the prices themselves. Minor, but the phrasing misreads the source."
+    }
+   ]
+  }
+ },
+ "items": {
+  "ap_us_history-real_c_emanc#1": {
+   "keyIndex": 2,
+   "solverChoices": [
+    2,
+    2
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "sound",
+   "factNote": "Key is directly supported by the quoted 'Commander-in-Chief ... fit and necessary war measure' language. Distractor rationales are accurate: 13th Amendment ratified Dec. 1865; no Supreme Court ruling; border states not mentioned and slavery untouched in exempted areas.",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_c_emanc#2": {
+   "keyIndex": 0,
+   "solverChoices": [
+    0,
+    0
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "sound",
+   "factNote": "Shift in Union war aims toward emancipation alongside Union is the standard contextualization for Jan. 1863. Distractors are clearly wrong and their rationales are historically accurate.",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_c_emanc#3": {
+   "keyIndex": 3,
+   "solverChoices": [
+    3,
+    3
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "sound",
+   "factNote": "Full proclamation did provide that freed persons 'will be received into the armed service'; ~180,000 Black men served in the Union army (plus ~19,000 in the navy). Britain and France never recognized the Confederacy; border-state slavery ended by state action (MD 1864, MO 1865) and the 13th Amendment (KY, DE). Stem correctly signals the enlistment clause is outside the excerpt.",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_c_monroe#1": {
+   "keyIndex": 1,
+   "solverChoices": [
+    1,
+    1
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "fix",
+   "factNote": "Key and stem are sound, but the rationale for distractor [2] asserts the excerpt 'mentions a Russian proposal to negotiate'; the supplied excerpt contains no reference to Russia (that passage of the message was cut before the first segment). Rewrite the rationale to rely on what is in the excerpt (policy stated toward all European powers; no alliance mentioned).",
+   "flags": [
+    {
+     "where": "Q1 distractor [2] rationale",
+     "kind": "source_misread",
+     "detail": "Claims the excerpt mentions a Russian proposal to negotiate. The supplied excerpt does not mention Russia at all; the Russian-negotiation reference in the full message precedes the first excerpted segment and was omitted."
+    }
+   ],
+   "status": "unresolved"
+  },
+  "ap_us_history-real_c_monroe#2": {
+   "keyIndex": 3,
+   "solverChoices": [
+    3,
+    3
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "fix",
+   "factNote": "Key is clearly supported. Rationale for distractor [2] says the excerpt 'defends the American system as different'; the excerpt only warns against Europeans extending 'their system' to the hemisphere—the 'essentially different' political-system passage is not included. Minor wording fix.",
+   "flags": [
+    {
+     "where": "Q2 distractor [2] rationale",
+     "kind": "source_misread",
+     "detail": "States the excerpt 'defends the American system as different.' The excerpt does not contain the message's 'political system of the allied powers is essentially different' passage; it only warns against extending the European 'system' to the hemisphere. Minor overstatement of what the excerpt shows."
+    }
+   ],
+   "status": "unresolved"
+  },
+  "ap_us_history-real_c_monroe#3": {
+   "keyIndex": 0,
+   "solverChoices": [
+    0,
+    0
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "sound",
+   "factNote": "Key and distractor rationales are accurate (French/Holy Alliance restoration of Ferdinand VII in 1823; Mexican War 1846; nullification 1832; Plains settlement post-1865).",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_c_monroe#4": {
+   "keyIndex": 2,
+   "solverChoices": [
+    2,
+    2
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "sound",
+   "factNote": "Neutrality Proclamation 1793 and Farewell Address 1796 correctly cited; distractor descriptions accurate.",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_c_fsa#1": {
+   "keyIndex": 3,
+   "solverChoices": [
+    3,
+    3
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "sound",
+   "factNote": "Key clearly supported by the excerpt; distractor rationales accurate.",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_c_fsa#2": {
+   "keyIndex": 1,
+   "solverChoices": [
+    1,
+    1
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "sound",
+   "factNote": "Key matches the excerpt's command to citizens and penalty clause; rationale for [3] correctly reflects Section 6's 'without process' seizure provision.",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_c_fsa#3": {
+   "keyIndex": 2,
+   "solverChoices": [
+    2,
+    2
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "fix",
+   "factNote": "Key correct; one distractor rationale misstates what the Fugitive Slave Act itself addressed.",
+   "flags": [
+    {
+     "where": "Q3 option [1] rationale",
+     "kind": "inaccurate",
+     "detail": "Says 'the 1850 act addressed the new territories and the return of fugitives.' The Fugitive Slave Act itself did not address the territories; the territorial provisions were in separate measures of the Compromise of 1850 (Utah and New Mexico acts, California statehood). Reword to refer to the Compromise of 1850 as a package."
+    }
+   ],
+   "status": "unresolved"
+  },
+  "ap_us_history-real_c_fsa#4": {
+   "keyIndex": 0,
+   "solverChoices": [
+    0,
+    0
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "sound",
+   "factNote": "Key is the standard causal connection; 1864 repeal date and growth of resistance are accurate.",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_c_jones#1": {
+   "keyIndex": 0,
+   "solverChoices": [
+    0,
+    0
+   ],
+   "solverConfidence": [
+    "likely",
+    "unsure"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "fix",
+   "factNote": "The key is still the best option by elimination, but the key rationale and the designer's cited evidence ('in the hands of the extortioners'; 'I could not ... refrain from expressing the hope that they might be successful') are not in the supplied excerpt. The excerpt as given never mentions extortioners or speculators, so 'blames speculators' cannot be verified from the source as presented. Either add that passage to the excerpt or revise the option/rationale to match what is actually quoted.",
+   "flags": [
+    {
+     "where": "Q1 key rationale / designer evidence",
+     "kind": "source_misread",
+     "detail": "The quoted evidence ('in the hands of the extortioners'; 'expressing the hope that they might be successful') does not appear in the supplied excerpt. Those lines exist in the full April 2, 1863 entry, but the excerpt as provided omits them, so the key's claim that the author 'blames speculators' rests on text the student cannot see. The excerpt only shows him sympathizing that they 'were hungry' and blaming exempted aliens for inciting pillage."
+    },
+    {
+     "where": "Q1 key rationale",
+     "kind": "source_misread",
+     "detail": "Rationale says the author 'calls prices the grim specter'. In the entry, 'another stride of the grim specter' refers to approaching famine/starvation, of which the prices are evidence; the specter is not the prices themselves. Minor, but the phrasing misreads the source."
+    }
+   ],
+   "status": "unresolved"
+  },
+  "ap_us_history-real_c_jones#2": {
+   "keyIndex": 2,
+   "solverChoices": [
+    2,
+    2
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "sound",
+   "factNote": "Key directly supported by 'foreign residents, with exemptions in their pockets' and 'incited to pillage valuables ... by the class of residents (aliens) exempted from military duty'. Distractor rationales accurate.",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_c_jones#3": {
+   "keyIndex": 1,
+   "solverChoices": [
+    1,
+    1
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "sound",
+   "factNote": "Key correctly identifies blockade, army demand, and Confederate paper-money inflation; distractor rationales are historically accurate.",
+   "flags": [],
+   "status": "verified"
+  },
+  "ap_us_history-real_c_jones#4": {
+   "keyIndex": 3,
+   "solverChoices": [
+    3,
+    3
+   ],
+   "solverConfidence": [
+    "certain",
+    "certain"
+   ],
+   "solverAlso": [
+    null,
+    null
+   ],
+   "factVerdict": "sound",
+   "factNote": "Enrollment Act of March 1863 allowed substitutes and the $300 commutation fee; resentment fueled the July 1863 New York City draft riots. Comparison is apt and distractors clearly inapplicable.",
+   "flags": [],
+   "status": "verified"
+  }
+ }
+}

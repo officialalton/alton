@@ -1,0 +1,1872 @@
+{
+ "summary": {
+  "sat_rw": {
+   "cand": 60,
+   "genFail": 0,
+   "formatFail": 0,
+   "detPass": 52,
+   "crossScored": 52,
+   "correct": {
+    "agree": 43,
+    "of": 52,
+    "fablePass": 46,
+    "opusPass": 37
+   },
+   "compliance": {
+    "agree": 52,
+    "of": 52,
+    "fablePass": 52,
+    "opusPass": 52
+   },
+   "hardFit": {
+    "agree": 49,
+    "of": 52,
+    "fablePass": 49,
+    "opusPass": 50
+   },
+   "adoptedBoth": 34,
+   "adoptedOneOnly": 10,
+   "yieldBoth": 0.567,
+   "costUsd": 7.576,
+   "costPerAdoptedBoth": 0.223,
+   "fableOnlyPass": 9,
+   "opusOnlyPass": 1
+  },
+  "sat_math": {
+   "cand": 0,
+   "genFail": 0,
+   "formatFail": 0,
+   "detPass": 0,
+   "crossScored": 0,
+   "correct": {
+    "agree": 0,
+    "of": 0,
+    "fablePass": 0,
+    "opusPass": 0
+   },
+   "compliance": {
+    "agree": 0,
+    "of": 0,
+    "fablePass": 0,
+    "opusPass": 0
+   },
+   "hardFit": {
+    "agree": 0,
+    "of": 0,
+    "fablePass": 0,
+    "opusPass": 0
+   },
+   "adoptedBoth": 0,
+   "adoptedOneOnly": 0,
+   "yieldBoth": 0,
+   "costUsd": 0,
+   "costPerAdoptedBoth": null,
+   "fableOnlyPass": 0,
+   "opusOnlyPass": 0
+  },
+  "adoptedHardFableRule": {
+   "total": 35,
+   "rw": 35,
+   "math": 0,
+   "correctBothRequired": true
+  }
+ },
+ "items": [
+  {
+   "cid": "medium-boundaries-300",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [
+    "contract:contract_format",
+    "contract:contract_rw_options",
+    "contract:contract_option_empty"
+   ],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": null,
+   "opus": null,
+   "cost": 0.041932
+  },
+  {
+   "cid": "medium-boundaries-301",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": false,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "핵심 결함: 선택지 A가 Standard English 관례상 수용 가능한 문장을 만들어 정답이 두 개가 된다. \"..., and in fact, the novel's quiet tension arises...\"는 쉼표+and로 독립절을 연결한 정상 구조이며, \"and in fact,\"는 널리 쓰이는 표준 표기다. 지정 정답 B 자체는 옳으나 유일성이 깨져 문항으로서 성립하지 않는다(answer_correct=false는 '유일 정답 아님' 의미). 형식(빈칸 위치, 선택지 구성, 가상의 소설 사용)은 문제 없음. 난이도는 독립절 2개 식별 + 접속부사/접속사 구분이라는 두 단계 판단을 요구해 medium에 부합하나, A 문제를 해결(예: \"and in fact the\" 등으로 명확히 오답화하거나 다른 오답으로 교체)해야 한다.",
+    "issue": "B(세미콜론 + indeed,)는 문법적으로 옳지만, A(\"sinister, and in fact, the novel's...\")도 '쉼표+등위접속사 and'로 두 독립절을 올바르게 연결한 표준 구문이다. 접속사 뒤의 짧은 전환어구 \"in fact\" 앞에 쉼표를 생략하는 것은 Chicago 등 주요 스타일에서 허용되는 관행이므로, 해설이 A를 배제하는 근거(\"in fact 앞 쉼표 부재로 삽입구 처리가 틀림\", \"의미상 어색\")는 문법적 오류 지적이 아니라 주관적 판단이다. 결과적으로 정답이 유일하지 않다. C·D의 comma splice 설명은 타당하다.Same flaw as the Korean explanation: the claim that A is wrong because \"in fact\" has a comma after it but none before it is not a valid grammatical objection. \"..., and in fact, [clause]\" is standard punctuation (comma + coordinating conjunction joining two independent clauses, with \"in fact\" treated as a short introductory phrase; no comma is required between \"and\" and \"in fact\"). The appeal to A being \"awkward\" is subjective, not a conventions-of-Standard-English basis."
+   },
+   "opus": {
+    "correct": false,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "복수 정답 문제입니다. B도 옳지만 A(쉼표+and로 독립절 연결, 그 뒤 도입구 in fact,)도 표준 영어 규칙에 맞아 정답이 하나로 정해지지 않습니다. A를 \"sinister and in fact\" 등 명백한 오류가 있는 선택지로 바꿔야 합니다.",
+    "issue": "A를 배제하는 근거가 잘못되었습니다. \"sinister, and in fact, the novel's...\"는 쉼표와 등위접속사로 두 독립절을 바르게 잇습니다. 등위접속사 바로 뒤의 짧은 도입구 앞에 쉼표를 반드시 넣어야 하는 것은 아니므로(and in fact,) 표준 영어 규칙에 맞습니다. 해설이 \"삽입구 처리 오류\"와 \"의미상 어색함\"을 이유로 든 것은 규칙상 근거가 없습니다.한국어 해설과 같은 문제가 있습니다. \"unbalanced\"라는 이유로 A를 배제하지만, \"and in fact,\"는 허용되는 구두점입니다."
+   },
+   "cost": 0.219906
+  },
+  {
+   "cid": "medium-boundaries-302",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "긴 동격구와 'even though' 종속절 뒤에서 첫 독립절의 끝을 찾아야 하고, 빈칸 뒤 절이 독립절임을 확인해야 하는 두 단계 판단. C(세미콜론)만 두 독립절을 올바르게 연결. A는 comma splice, D는 fused sentence로 명확히 오답. B는 SAT 관례상 쉼표 없는 'and'로 두 긴 독립절을 잇는 것이 오답 처리되며 해설도 이를 설명함(다만 엄밀한 문법에서는 쉼표 생략이 완전한 오류는 아니므로 B의 배제 근거가 다소 관례 의존적임—출제 의도와 정답에는 지장 없음). 해설 한·영 일치, 사실 오류 없음(오카방고 삼각주의 겨울 범람 현상은 사실). 난이도 medium 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "긴 동격구와 'even though' 종속절 때문에 앞부분이 독립절인지 판단하기가 어렵다. 그래서 문장을 정독해야 풀리는 medium 수준에 맞다. 오답 B는 'and'가 있어 그럴듯해 보이지만 쉼표가 없고 논리 관계도 맞지 않는다. 정답 C는 옳다.",
+    "issue": "사소한 문제: '두 독립절을 이으려면 세미콜론을 써야 한다'는 표현이 지나치게 단정적이다. 쉼표+등위접속사나 마침표로도 이을 수 있으므로, 주어진 선택지 안에서 세미콜론이 유일하게 옳다는 뜻으로 쓰는 것이 정확하다.한국어 해설과 같은 사소한 문제: 'you need a semicolon'이 지나치게 단정적이다."
+   },
+   "cost": 0.17066
+  },
+  {
+   "cid": "medium-boundaries-303",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [
+    "contract:contract_blank_duplicate_word",
+    "contract:contract_blank_duplicate_word",
+    "contract:contract_blank_duplicate_word",
+    "contract:contract_blank_duplicate_word"
+   ],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": null,
+   "opus": null,
+   "cost": 0.043096
+  },
+  {
+   "cid": "medium-boundaries-304",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [
+    "contract:contract_blank_duplicate_word",
+    "contract:contract_blank_duplicate_word",
+    "contract:contract_blank_duplicate_word",
+    "contract:contract_blank_duplicate_word"
+   ],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": null,
+   "opus": null,
+   "cost": 0.032004
+  },
+  {
+   "cid": "medium-boundaries-305",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "빈칸 앞뒤 모두 독립절이며 \"instead\"는 접속부사이므로 세미콜론+쉼표(B)가 유일하게 올바름. A·D는 comma splice, C는 run-on. 해설 한/영 모두 정답 및 선택지 참조와 일치하고 영어 해설 자연스러움. 긴 주어(동격·관계절 포함)로 절 경계 식별이 필요하고, A가 쉼표 양쪽 삽입 형태로 그럴듯하여 medium에 적합. 과학적 사실(bdelloid rotifer의 수평적 유전자 이동)도 정확.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "긴 수식어구 때문에 절의 경계를 찾기 어려워 두 단계 판단이 필요하다. 접속부사를 다루는 전형적인 medium 문항이다. 브델로이드 윤형동물의 수평 유전자 전달 내용도 사실에 부합한다.",
+    "issue": ""
+   },
+   "cost": 0.128422
+  },
+  {
+   "cid": "medium-boundaries-306",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": false,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "치명적 결함: 정답 복수. C(세미콜론)와 B(쉼표+and) 모두 두 독립절을 올바르게 연결하는 Standard English 구조이며, 디지털 SAT boundaries 문항은 문법적으로 수용 가능한 선택지가 하나뿐이어야 한다. 지정 정답 C가 틀린 것은 아니지만 B를 배제할 수 없으므로 문항 자체가 무효. A(comma splice), D(run-on)는 정상적인 오답. 난이도 구조(동격구로 첫 절의 끝을 가리는 설계)는 medium에 적합하나, 정답 유일성 문제로 사용 불가. 지문은 가상의 작가/소설로 저작권 문제 없음.",
+    "issue": "B(wax, and)는 쉼표+등위접속사로 두 독립절을 잇는 완전히 표준적인 구조이므로 문법적으로 정답과 동등하게 성립한다. 해설이 B를 배제하는 근거('and'가 동격구 안의 bound…and stained 병렬을 이어가는 것처럼 읽힌다, 긴밀한 연결이 흐려진다)는 문체·의미상의 주관적 주장이지 Standard English 규칙 위반이 아니다. 'and' 뒤에 완전한 주어+동사 절이 오므로 병렬 혼동도 실제로 발생하지 않는다. C 자체는 옳으나 해설이 지정 정답의 유일성을 뒷받침하지 못한다.Same flaw as the Korean explanation: the rejection of B (\"and\" reads as continuing the 'bound ... and stained' series) is not a Standard English conventions argument. \", and\" followed by a full independent clause is the textbook way to join two independent clauses; a reader cannot parse \"and each entry she recites reveals...\" as part of the participial series. English itself is natural and free of Korean."
+   },
+   "opus": {
+    "correct": false,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "정답이 둘(B, C)이다. B를 'wax' 같은 비문 형태(예: 'wax, and while')로 바꿔야 한다.",
+    "issue": "B('wax, and')는 쉼표와 등위접속사로 두 독립절을 잇는 표준 영어에 맞는 형태다. 해설은 B를 문법이 아니라 수사적 이유('긴밀한 연결이 흐려진다')로만 배제하는데, 이는 Standard English 규칙 문항에서 오답 근거가 될 수 없다. 'stained' 뒤에 'and'가 오면 병렬 구조로 오독될 수 있다는 주장도 성립하지 않는다. 'each entry ... reveals'는 완전한 절이기 때문이다.한국어 해설과 같은 결함이 있다. 문법적으로 옳은 B를 근거 없이 배제한다."
+   },
+   "cost": 0.17365360000000002
+  },
+  {
+   "cid": "medium-boundaries-307",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "빈칸 앞뒤 모두 독립절이며 'instead'는 접속부사이므로 세미콜론이 필요함(D 정답 검증 완료). A·C는 comma splice, B는 무문장부호 run-on으로 모두 배제됨. 동격구·which절의 쉼표가 절 경계를 흐리게 하여 두 단계 판단(절 구조 파악 + 접속부사 규칙)이 필요하므로 medium 적합. 오카방고 삼각주 관련 사실(앙골라 고지대 발원, 칼라하리 사막 내 증발·침투)도 정확. 한·영 해설 결론 및 선택지 참조 일치, 영어 해설에 한글 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "Okavango 사실관계 정확(앙골라 고원 강수, 수개월 지연 도달, 증발·침투). 표준적인 접속부사 경계 문항으로, 쉼표가 많은 삽입구 때문에 medium 난이도에 적합하다. B는 instead를 첫 절에 붙여 읽을 수도 있지만 그렇게 읽어도 두 절이 쉼표만으로 이어진 comma splice가 되므로 오답이다. 해설의 'run-on' 설명은 대체로 맞다.",
+    "issue": ""
+   },
+   "cost": 0.1318876
+  },
+  {
+   "cid": "medium-boundaries-308",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "검산: 빈칸 앞 \"Reformer James Kay, [삽입구], documented the conditions he observed in a widely read pamphlet\"는 완전한 독립절, 뒤 \"his detailed descriptions ... helped persuade officials ...\"도 독립절 → 세미콜론(A) 적합. B는 comma splice, C는 and 뒤 불필요한 쉼표, D는 run-on. 해설(한/영) 결론·글자 참조 일치, 영어 해설 자연스럽고 한글 없음. 역사적 배경(James Kay 1832 콜레라, 맨체스터 노동계급 보고서) 사실과 부합. 긴 삽입구 때문에 첫 절의 독립성을 판단해야 하는 두 단계 구조이며 B·C가 부분적으로 타당한 오답으로 기능하므로 medium 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "긴 동격구가 들어 있어 앞 절이 독립절인지 판단하려면 한 번 더 생각해야 하므로 medium 난이도에 맞다. 다만 오답 C(and,)는 비교적 쉽게 배제된다. 사실관계도 맞다(1832년 출간된 Kay의 팸플릿, Ancoats 지역).",
+    "issue": "한국어 해설에서 \"a physician ... 1832\"를 '삽입구'라고 불렀는데, 엄밀히는 관계절을 포함한 동격 명사구다. 판정에 영향을 줄 정도의 문제는 아니다."
+   },
+   "cost": 0.1359996
+  },
+  {
+   "cid": "medium-boundaries-309",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "검산: 'the PulseGuard valve—a palm-sized device ... hours' 뒤에 주절 'installed ... in sixty neighborhoods'가 이어지므로 동격 삽입구를 여는 대시와 짝이 되는 대시(B)가 유일하게 올바름. A는 부호 불일치(쉼표–대시 혼용), C는 뒤에 독립절 없음, D는 콜론이 삽입구를 닫지 못함. 한국어·영어 해설 모두 B를 일관되게 뒷받침하고 선택지 참조가 정확하며 영어 해설에 한글 없음. 난이도: 긴 삽입구 때문에 앞의 여는 대시를 찾아 연결해야 하는 두 단계 판단이 필요하고, A(쉼표 비필수구)와 C(독립절처럼 보이는 긴 구조)가 부분적 근거를 가진 오답으로 작동함 → medium 적합. PulseGuard는 가상 장치로 사실 오류·저작권 의심 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "대시 짝 맞추기 문항으로, 삽입구가 길어서 앞쪽 대시를 놓치기 쉽다. 그래서 두 단계 판단이 필요하며 medium 난이도에 맞다. 'in sixty neighborhoods' 뒤의 ', and' 구조도 맞다.",
+    "issue": ""
+   },
+   "cost": 0.1398096
+  },
+  {
+   "cid": "medium-boundaries-310",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [
+    "contract:contract_blank_duplicate_word",
+    "contract:contract_blank_duplicate_word",
+    "contract:contract_blank_duplicate_word",
+    "contract:contract_blank_duplicate_word",
+    "explanation_en_too_long"
+   ],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": null,
+   "opus": null,
+   "cost": 0.0209716
+  },
+  {
+   "cid": "medium-boundaries-311",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "빈칸 앞(긴 삽입절 포함 주절)과 뒤(\"readers instead infer...\") 모두 독립절이므로 세미콜론 D가 유일하게 올바름. A는 콤마 스플라이스, B는 무종지문. C는 등위접속사 앞 쉼표가 빠진 형태로, 긴 두 독립절에서는 관례상 쉼표가 필요하므로 오답으로 성립하나, 이 유형의 오답은 일부 학습자가 허용 가능하다고 느낄 수 있어 변별력이 약간 약한 편(판정은 유효). 한국어·영어 해설 모두 정답과 선택지 참조가 일치하고 모순 없음. 긴 삽입절을 걸러 내어 주절을 파악한 뒤 경계 규칙을 적용하는 두 단계 판단이 요구되며, A·C가 부분적으로 그럴듯한 오답이므로 medium에 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "문장 앞의 긴 삽입절과 'in which' 관계절 때문에 주절을 찾아야 하는 두 번째 단계가 생긴다. C는 쉼표가 빠졌고 'and ... instead'의 논리도 어색해 오답 근거가 충분하다. 선택지 구성이 전형적인 SAT 경계(boundaries) 문항 형식이다.",
+    "issue": ""
+   },
+   "cost": 0.1619016
+  },
+  {
+   "cid": "medium-boundaries-312",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [
+    "contract:contract_format",
+    "contract:contract_rw_options",
+    "contract:contract_option_empty"
+   ],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": null,
+   "opus": null,
+   "cost": 0.029471599999999997
+  },
+  {
+   "cid": "medium-boundaries-313",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "검산: \"Railway time, as the new standard was soon called, quickly spread…\" — 쉼표로 연 비필수 삽입절을 쉼표로 닫는 B가 유일하게 옳음. A는 세미콜론 앞이 독립절 아님, C는 삽입절 미종결, D는 쉼표–대시 짝 불일치. 한국어·영어 해설 모두 B를 일관되게 뒷받침하고 글자 참조 정확, 영어 자연스럽고 한글 없음. 역사적 사실(GWR 1840년 런던 시간 채택, 1855년 공공시계 대다수 통일)도 통설과 부합. 삽입절 식별 + 여닫는 부호 일치라는 두 단계 판단이 필요하고 C·D가 부분적 근거를 가진 오답이라 medium에 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "쉼표로 연 비필수 삽입절은 쉼표로 닫아야 한다는 표준 문항이다. 학생은 삽입절의 경계를 찾고 주어와 동사의 연결을 확인하는 두 단계로 풀어야 한다. 대시와 세미콜론 오답은 그럴듯해서 비교해 봐야 배제된다. 역사적 사실(1840년 GWR의 런던 시간 채택, 1855년 대부분의 공공 시계)도 통상적인 서술과 일치한다.",
+    "issue": ""
+   },
+   "cost": 0.14105959999999998
+  },
+  {
+   "cid": "medium-boundaries-314",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "삽입 동격구가 대시로 열렸으므로 대시로 닫아야 하며, 그 뒤에 주어 \"The engineers\"의 동사 \"chose\"가 이어진다. A는 부호 짝 불일치, B/D는 앞부분이 독립절이 아니므로 배제. 검산 결과 C가 유일하게 옳다. 해설(한·영) 결론과 글자 참조 일치, 한글 혼입 없음. 사실관계(1997년 완공, 두 개의 강철 게이트, 양안 드라이독 보관, 예보 시 수로로 부유 이동, 에펠탑 높이 비유)도 통상적 설명과 부합. 대시 짝 찾기 + 주어·동사 구조 확인의 두 단계 판단이 필요하고 A가 강한 오답으로 기능하므로 medium 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "대시 짝 맞추기와 주어-동사 분리 금지라는 두 가지를 판단해야 하는 전형적인 중간 난이도 문항이다. 빈칸 앞 주어부에 관계절 동사 designed가 있어 독립절처럼 보이는 함정도 적절하다. 사실관계(1997년 완공, 속이 빈 강철 게이트, 양쪽 강둑의 건식 도크에 보관)도 대체로 정확하다. 다만 Eiffel Tower 비교는 수사적 표현이라 약간 느슨하다(암 길이 약 237m, 에펠탑 높이 약 300m).",
+    "issue": ""
+   },
+   "cost": 0.1468956
+  },
+  {
+   "cid": "medium-boundaries-315",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [
+    "contract:contract_blank_duplicate_word",
+    "contract:contract_blank_duplicate_word",
+    "contract:contract_blank_duplicate_word",
+    "contract:contract_blank_duplicate_word"
+   ],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": null,
+   "opus": null,
+   "cost": 0.021271599999999998
+  },
+  {
+   "cid": "medium-boundaries-316",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [
+    "contract:contract_blank_duplicate_word",
+    "contract:contract_blank_duplicate_word",
+    "contract:contract_blank_duplicate_word",
+    "contract:contract_blank_duplicate_word"
+   ],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": null,
+   "opus": null,
+   "cost": 0.0302516
+  },
+  {
+   "cid": "medium-boundaries-317",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "검산: 빈칸 앞(\"the floodwaters ... spread ... and slowly disappear\")과 뒤(\"more than 95 percent of the water is lost ...\")는 모두 독립절. B 콜론은 뒤 절이 앞 절의 설명이므로 적절. A는 comma splice, C는 which가 뒤 절에서 문법적 역할이 없어 비문, D는 run-on. 정답 B 확정. 사실관계(오카방고 삼각주: 보츠와나 북부 내륙 습지, 앙골라 고원 발원, 약 95% 이상 증발·증산 손실)는 통설과 부합. 한국어·영어 해설 모두 B를 일관되게 뒷받침하며 글자 참조 일치, 영어 해설에 한글 없음. 난이도: 독립절 2개 판별 + 콜론의 설명 기능 확인이라는 두 단계 판단이 필요하고, A(쉼표 연결)·C(which로 부연처럼 보임)가 훑어 읽으면 그럴듯한 오답이라 medium에 부합. 다만 문법적으로 성립하는 선택지가 B 하나뿐이어서 세미콜론/마침표 등 경쟁 선택지가 있는 전형적 medium 문항보다는 다소 쉬운 편(경계선).",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "문장 경계 문제로 표준적인 형태다. 오가방고 델타의 증발산 비율이 95% 이상이라는 내용도 사실에 맞다. 오답 C는 비교적 쉽게 배제되지만 A와 D는 그럴듯한 함정이어서 medium 난이도로 볼 수 있다.",
+    "issue": ""
+   },
+   "cost": 0.1577856
+  },
+  {
+   "cid": "medium-boundaries-318",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "빈칸 앞뒤 모두 독립절이며 뒤 절이 앞 절의 구체화이므로 콜론(C)이 유일하게 적합. A는 run-on, B는 comma splice, D는 \"which\"가 뒤 절에서 문법적 역할이 없어 비문. 해설(한·영) 결론·글자 참조 일치, 영어 자연스러움. 사실관계(1871년 마에지마 히소카, 도쿄–오사카 우편, 1875년 우편저금 시작→\"within a decade\") 문제 없음. 두 독립절 판별 + 콜론 용법 확인의 2단계 판단이 필요하고 B·D가 그럴듯한 오답이라 medium에 부합(다소 표준적이라 하한선에 가까움).",
+    "issue": ""
+   },
+   "opus": {
+    "correct": false,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "문법 판단은 맞음: C의 콜론이 두 독립절을 바르게 연결함. 사실관계는 정확하지 않음: 마에지마 히소카는 1871년 우편 제도를 만들 때 현직 정부 관리(민부·대장성 소속)였으므로 'former government official'은 틀린 표현임. 또 우편저금은 1875년에 시작되었고, 'millions of rural households'와 'first access'는 근거가 확인되지 않은 과장된 주장임. 난이도는 중간이 맞음: run-on과 comma splice 오답은 비교해 봐야 배제되지만, D는 비교적 쉽게 걸러짐.",
+    "issue": ""
+   },
+   "cost": 0.1463936
+  },
+  {
+   "cid": "medium-boundaries-319",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "검산: 빈칸 앞 \"engineers attached six compact dampers beneath a steel footbridge whose deck had bounced ... joggers\"는 독립절(관계절 whose deck...이 내부 수식어), 빈칸 뒤 \"the deck's vertical oscillations dropped by nearly 80 percent\"도 독립절. 쉼표+and(D)가 유일하게 올바름. A는 콤마 스플라이스, B는 주어-동사 사이 쉼표, C는 콜론+and 비표준. 해설(한·영) 모두 D를 일관되게 뒷받침하고 글자 참조 정확. 긴 수식어로 인해 첫 절의 경계를 찾는 2단계 판단이 필요하고, B(대시+and 자체는 가능)와 A가 부분적 타당성을 가져 medium에 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "긴 관계절 때문에 절의 경계를 찾아야 하고, 그다음 접속 방식을 판단해야 하는 2단계 문항이다. A는 훑어 읽으면 맞아 보이는 함정이다. 정답 D는 맞다.",
+    "issue": "C 배제 근거('콜론+and는 비표준')가 다소 단정적이지만 SAT 기준에서 수용 가능."
+   },
+   "cost": 0.14148760000000002
+  },
+  {
+   "cid": "medium-boundaries-320",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "검산: 'The bigclaw snapping shrimp ... hunts in an unusual way'와 'it creates a jet ...'은 독립절 두 개이며 'by snapping its oversized claw shut'은 두 번째 절의 도입 수식어구. A의 콜론은 두 절을 연결하고 뒤 절이 '특이한 방식'을 설명하므로 적절. B는 comma splice, C는 대시 쌍을 제거하면 'way it creates'로 run-on, D는 경계 부호 없음. 한국어·영어 해설 모두 동일 결론·글자 참조로 일치하고 한글 혼입 없음. 사실(Alpheus heterochaelis 약 5cm, 산호 잔해·해초 서식, 캐비테이션 기포로 먹이 기절) 문제 없음. 난이도: 독립절 식별 + 수식어구 소속 판단의 두 단계가 필요하고 B·C가 부분적으로 그럴듯해 medium 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "수식어구가 두 번째 절 앞에 오기 때문에 절의 경계가 어디인지 판단해야 한다. 그 결과 오답 B와 C가 겉보기에는 그럴듯해 보인다. 정답 A만 문법적으로 옳다.",
+    "issue": ""
+   },
+   "cost": 0.1694676
+  },
+  {
+   "cid": "medium-boundaries-321",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "검산: 주어 \"The second ledger\" + 비필수 관계절(which ... attic) + 동사 \"is\" + 보어. B(\"attic, is\")만 관계절을 쉼표로 닫고 동사-보어 사이에 부호가 없어 올바름. A는 is 뒤 불필요한 쉼표, C는 관계절 닫는 쉼표 누락, D는 세미콜론으로 주어-동사 분리. 한국어·영어 해설 모두 B를 정확히 뒷받침하며 글자 참조 일치. 가상의 소설이므로 저작권 문제 없음. 비필수 관계절 경계 식별 + 동사-보어 무부호 확인의 두 단계 판단이 필요하고, A·C가 부분적 근거를 가진 오답이라 medium에 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "비필수 관계절을 닫는 쉼표를 찾는 전형적인 문항이다. 관계절이 길어서 주어와 동사의 연결을 추적해야 하고, A와 C가 부분적으로 맞는 매력적인 오답이라서 medium 난이도에 맞다.",
+    "issue": ""
+   },
+   "cost": 0.13059759999999998
+  },
+  {
+   "cid": "medium-boundaries-322",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "검산: \"...than exposed villages did.\" (독립절 종료) + \"The explanation is simple:\" + 설명 독립절. C만 두 경계를 모두 올바르게 처리. A는 쉼표 두 개로 삼중 쉼표 연결, B는 첫 경계 쉼표 연결, D는 둘째 경계 쉼표 연결로 각각 오류. B·D가 한 경계씩만 맞는 부분 정답 근거를 가져 비교가 필요하므로 medium 적합. 한국어·영어 해설 모두 선택지 글자와 결론이 일치하고 영어 해설에 한글 없음. 순다르반스 맹그로브의 폭풍해일 완충 효과는 사실과 부합하며 인물은 가상 설정으로 문제 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "경계가 두 곳인 표준 문항이다. B와 D는 각각 경계 하나만 맞게 처리해 부분적으로 맞는 오답 역할을 한다. 정답 C가 유일하게 옳다. 'Rahim Chowdhury'는 가상 인물로 보이나 형식상 문제는 없다.",
+    "issue": ""
+   },
+   "cost": 0.1318076
+  },
+  {
+   "cid": "medium-boundaries-323",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": false,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "D(콜론)는 문법적으로 옳지만 유일한 정답이 아님. C \", and for the first time, many legislators heard...\"는 쉼표+등위접속사로 두 독립절을 연결한 완전히 적격한 Standard English 문장으로, SAT boundaries 문항에서는 콜론과 ', and'가 동시에 선택지로 나오면 안 됨. 따라서 정답 유일성 결함으로 answer_correct를 false 처리. 역사적 사실(Sarah Bagley, LFLRA, 10시간 노동 청원, 1845년 매사추세츠 의회 공청회에서 여성 노동자 최초 증언)은 정확함. 난이도는 A/B 배제 후 C/D 비교 구조로 medium에 맞으나, C를 오답으로 만들려면 C의 문법적 결함(예: 'and' 뒤 쉼표 삭제로 다른 구조 유도 등)이 필요함.",
+    "issue": "해설이 C를 \"문법상 연결은 되지만\"이라고 스스로 인정하면서 문맥상 이유로만 배제함. 문항 발문은 'conforms to the conventions of Standard English'이므로 문법적으로 적격한 선택지가 두 개(C: 쉼표+and, D: 콜론)인 것은 문항 자체의 결함이며, 해설이 이를 정당화하지 못함. A·B에 대한 설명(깨진 구조/run-on)은 타당함.Same flaw as the Korean version: it concedes C is \"grammatically acceptable\" and rejects it only on a stylistic/logical-relationship basis, which does not match a Standard English conventions stem. English itself is accurate and natural, no Korean characters."
+   },
+   "opus": {
+    "correct": false,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "정답이 둘이다. C('debate, and for the first time, many legislators heard...')는 쉼표와 등위접속사로 두 독립절을 이은 완전히 규범적인 문장이어서 D와 함께 정답이 된다. C를 비문으로 바꾸어야 한다. 예를 들어 'debate, for'를 다른 형태의 comma splice로 바꾸거나 'debate; and for'로 바꾸는 방법이 있다.",
+    "issue": "해설은 C가 '문법상 연결은 된다'고 스스로 인정하면서도 수사적 이유(문맥 관계를 흐림)로 C를 배제한다. 그런데 이 유형은 표준 영어 규범(Conventions)을 묻는 문항이므로 문법적으로 옳은 선택지는 오답이 될 수 없다. 또 A에 대한 설명도 어색하다. 실제 결함은 'for'의 이중 역할이 아니다. 'for the first time'을 부사구로 읽으면 쉼표 하나로 두 독립절을 이은 comma splice가 된다는 점이 핵심이다.한국어 해설과 같은 결함이 있다. C의 문법적 타당성을 인정하면서 수사적 이유로 배제하고, A의 오류를 comma splice로 정확히 설명하지 못한다."
+   },
+   "cost": 0.2088756
+  },
+  {
+   "cid": "medium-boundaries-324",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "정답 A 검산 완료: \"Lou Ottens, the project's lead engineer, addressed...\" 동격어구를 쉼표 쌍으로 닫고 본동사가 이어짐. B는 닫는 쉼표 누락, C는 세미콜론 뒤 주어 없는 조각, D는 and로 주어-동사 연결이 끊김. 한국어·영어 해설 모두 동일 결론·글자 참조이며 모순 없음. 역사적 사실(오텐스의 나무 블록 프로토타입)은 실제 일화와 부합하며, 1959년이라는 연도는 개발 착수 시점 추정치로 허용 범위. 난이도는 동격어구 인식 + 쉼표 짝 확인의 두 단계 판단이 필요하고 B·D가 그럴듯한 오답이라 medium에 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "비필수 동격어구를 닫는 쉼표를 고르는 표준 문항이다. 정답 A가 맞다. 연대가 '1959년'으로 되어 있는데, 오텐스가 필립스 하셀트 공장의 제품개발 책임자가 된 시점과 카세트 개발 시점(대략 1960~1962년)과는 약간 어긋날 수 있다. 다만 문항의 정답에는 영향이 없다.",
+    "issue": ""
+   },
+   "cost": 0.1322856
+  },
+  {
+   "cid": "medium-boundaries-325",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "빈칸 앞은 독립절+긴 동격어구(whose 관계절 포함), 뒤는 독립절 'field surveys ... suggest'이므로 세미콜론(B)이 유일하게 옳다. A는 'and' 자체는 타당하나 뒤의 쉼표가 불필요, C는 comma splice, D는 run-on. 한·영 해설 모두 B를 정확히 뒷받침하며 글자 참조 일치. 긴 동격어구 때문에 절 경계를 정확히 파악해야 하므로 medium에 적합(다소 표준적인 유형이라 하단 경계).",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "B는 정답이다. 빈칸 앞은 동격어구가 붙은 독립절이고, 빈칸 뒤도 독립절이므로 세미콜론이 맞다. 긴 동격어구 때문에 첫 번째 독립절이 어디서 끝나는지 정확히 찾아야 하므로 중간 난이도에 맞는다. A는 접속사를 써서 그럴듯해 보이는 오답이고, C는 쉼표 오용(comma splice), D는 무종지문(run-on)이다. 연구자는 가상의 인물로 보이며, 개구리 체색 변화 내용도 실제 연구와 크게 어긋나지 않는다.",
+    "issue": ""
+   },
+   "cost": 0.1422476
+  },
+  {
+   "cid": "medium-boundaries-326",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "주어 \"the widow Marchbank\" 뒤 쉼표로 열린 비필수 관계절(내부에 \"the villagers believed\" 삽입 포함)을 동사 \"set\" 앞에서 쉼표로 닫아야 하므로 C가 정답임을 직접 확인. A(세미콜론)는 주어-동사 분리, B(대시)는 여는 쉼표와 짝 불일치, D는 닫는 부호 누락. 한·영 해설 모두 동일 결론·글자 참조이며 영어 자연스러움. 긴 관계절과 내부 삽입구 때문에 여는 쉼표 위치를 추적해야 하고 B·D가 그럴듯한 오답으로 기능하므로 medium에 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "긴 비필수 관계절 안에 'the villagers believed' 삽입구가 겹쳐 있어, 수험생이 여는 쉼표를 찾아 짝을 맞추는 두 단계 판단을 해야 한다. 대시(B)와 무부호(D)는 그럴듯한 오답이다. 세미콜론(A)은 비교적 쉽게 배제된다.",
+    "issue": ""
+   },
+   "cost": 0.1408516
+  },
+  {
+   "cid": "medium-boundaries-327",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "검산: 빈칸 앞은 긴 동격구를 포함한 완전한 독립절, 뒤 'those rains take several months...'도 독립절이므로 세미콜론(D)이 유일하게 올바름. A는 comma splice, B는 run-on, C는 콜론+and 비표준. 해설 한/영 모두 결론·글자 참조 일치. 사실관계(오카방고 삼각주의 건기 범람, 앙골라 고원 강우, 수개월 소요) 정확. 난이도: 긴 삽입구를 걷어내고 절 경계를 판단하는 2단계 과정 필요, A·C가 그럴듯한 오답으로 기능하여 medium 적합. 사소: 선택지 B 앞 공백이 두 칸으로 표기됨(채점에는 영향 없음).",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "긴 동격 삽입구 때문에 주절 구조를 먼저 파악한 뒤 절 연결 규칙을 적용해야 하므로 두 단계 판단이 필요하다. A(쉼표 오용)와 B(무종지문)는 그럴듯한 오답이다. C는 상대적으로 쉽게 배제되지만 말이 되는 선택지다. 오카방고 삼각주가 건기에 범람하고 앙골라 고원의 강우가 수개월에 걸쳐 흘러 내려온다는 내용은 사실과 맞다. 선택지 B 앞에 공백이 두 칸 들어간 것은 사소한 표기 문제다.",
+    "issue": ""
+   },
+   "cost": 0.1385476
+  },
+  {
+   "cid": "medium-boundaries-328",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "주어 \"The introduction of Rural Free Delivery\" 뒤 쉼표로 열린 동격구를 쉼표로 닫아야 하므로 A가 옳음. B(세미콜론)는 주어-동사 분리, C는 동격 미종결, D는 쉼표-대시 불일치. 한/영 해설 모두 정답·글자 참조 일치, 영어 자연스럽고 한글 없음. RFD(1896년 시작) 역사 서술도 사실에 부합. 열린 부호 확인 후 짝 맞추기의 두 단계 판단 필요, D가 부분적 타당성을 지닌 오답으로 medium 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "쉼표로 연 동격구를 쉼표로 닫는 표준 문항이다. 주어와 동사 사이에 동격구가 길게 끼어 있어 구조를 먼저 파악해야 하므로 두 단계 판단이 필요하다. 대시(D)와 무부호(C) 선택지는 훑어 읽으면 그럴듯해 보인다. Rural Free Delivery는 1896년에 시작되었으므로 사실관계에도 문제가 없다.",
+    "issue": ""
+   },
+   "cost": 0.1318116
+  },
+  {
+   "cid": "medium-boundaries-329",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "검산: \"The vents, which let gusts pass through the deck rather than push against it, reduce the pressure difference...\" — 삽입 관계절을 닫는 쉼표 + 주절 본동사 구조로 B가 유일하게 성립. A는 세미콜론 앞이 종속절 포함 주어구만 남아 단편, C는 \"and\"로 인해 주절 동사가 사라짐, D는 여는 쉼표와 짝이 없음. 한국어·영어 해설 모두 B를 일관되게 뒷받침하고 글자 참조 일치, 영어 해설에 한글 없음. 난이도: 긴 삽입절 끝을 식별한 뒤 주어-동사 연결을 확인해야 하는 두 단계 판단이며, C(\"and\" 병렬처럼 보임)와 D(쉼표 생략이 자연스러워 보임)가 그럴듯한 오답으로 기능하여 medium에 적합. 사실 관계: 칭마대교 1997년 개통, 1998년 \"companion structures\"는 다소 모호하지만 명백한 오류로 보기 어렵고 문법 문항의 정답에 영향 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "B가 문법적으로 유일한 정답이다(비제한 관계절을 닫는 쉼표 + 본동사 reduce). C는 정답처럼 보이는 유력한 오답이고, A·D도 그럴듯하다. 사실관계는 다소 의심스럽다. Tsing Ma Bridge는 1997년에 개통했고, '1998년 동반 구조물'과 '비행기 날개형 데크'라는 서술은 모호하거나 지어낸 것일 수 있다. 다만 SAT 문항 본문으로서 정답 판단에는 영향이 없다.",
+    "issue": ""
+   },
+   "cost": 0.1453456
+  },
+  {
+   "cid": "medium-form_structure_sense-300",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "주어 \"The seedlings\"(복수)와 긴 삽입 수식구(\"that sprout...\", \"unlike ... in the soil\") 뒤에 정동사가 필요하므로 C \"show\"가 유일한 정답. A·D는 비정동사형으로 문장 불완전, B는 인접 단수 명사(avocado, soil)에 끌린 오답. 한·영 해설 모두 정답과 글자 참조가 일치하고 모순 없음. 수식구를 건너 주어를 찾고 수 일치를 판단하는 두 단계 구조로 medium에 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "주어와 동사 사이에 긴 삽입구가 끼어 있어 수일치를 판단해야 하는 전형적인 문항이다. 바로 앞의 단수 명사(soil, an adult avocado)가 B를 고르도록 유도한다. A와 D는 비교적 쉽게 배제되지만 중간 난이도로는 적절하다. 학술 맥락에서 'the soil'이 단수 명사로 해석되는 점도 맞다. 참고로 지문 속 인물 Mariela Fonseca는 가상 인물로 보이며 문제 될 점은 없다.",
+    "issue": ""
+   },
+   "cost": 0.12720399999999998
+  },
+  {
+   "cid": "medium-form_structure_sense-301",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "주어 \"The letters\"(복수)와 긴 수식구(관계절+분사구) 뒤에 정동사 필요 → D \"reveal\" 정답 확인. A는 근접 명사(farmhouse/aunt)에 의한 단수 오류로 그럴듯한 오답, B·C는 비정동사로 문장 단편화. 해설(한·영) 모두 정답과 선택지 참조 일치, 영어 자연스럽고 한글 없음. 난이도: 주어 식별 + 정동사 필요성 판단의 두 단계로 medium 적합. 다만 B·C가 같은 유형의 오답이라 \"부분적으로 맞는 오답 2개\" 기준에는 다소 약함.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "긴 수식어가 끼어든 주어-동사 일치와 정동사 필요 여부를 함께 판단해야 하므로 medium에 적합하다. 다만 빈칸 바로 앞 명사가 복수형 \"bills\"라서 단수형 오답 A의 유인력이 약하다.",
+    "issue": "사소한 문제: A가 빈칸 가까이 있는 \"farmhouse\"나 \"aunt\"에 일치시킨 형태라고 설명하지만, 빈칸 바로 앞 명사는 복수형 \"bills\"이다. 그래서 단수 유인 설명이 다소 부정확하다. 결론에는 영향이 없다.한국어 해설과 같은 사소한 문제가 있다. 단수 유인의 근거로 든 \"nearby nouns\"가 실제로는 빈칸에서 가장 가까운 명사가 아니다."
+   },
+   "cost": 0.1317364
+  },
+  {
+   "cid": "medium-form_structure_sense-302",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "주어 \"the network\"(단수)와 빈칸 사이에 전치사구 2개와 관계절(\"which can extend ... and fill ...\")이 끼어 있어, 주어 식별 + 수 일치의 두 단계 판단이 필요하다. 정답 A \"channels\" 검산 완료. B는 정동사이나 복수형(인접 복수명사 \"tunnels\"에 끌림), C는 관계절 동사를 주절 동사로 착각하면 고르기 쉬운 분사형으로 모두 부분적 근거가 있고, D도 문법 형태상 말이 되는 오답이다. 영어 해설은 한국어와 동일한 결론·글자 참조를 가지며 자연스럽고 한글이 없다. 한국어 해설의 \"관계절 속 burrows\" 위치 서술만 경미하게 부정확하다.",
+    "issue": "한국어 해설이 \"burrows\"를 \"관계절 속\"에 있다고 서술했으나, \"burrows\"는 첫 문장(\"the burrows dug by fiddler crabs\")에 있고 관계절(which can extend ... and fill ...)에는 없다. 정답 도출·글자 참조에는 영향 없는 경미한 위치 서술 오류."
+   },
+   "opus": {
+    "correct": false,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "주어와 동사 사이에 긴 수식어와 관계절이 끼어 있어 수 일치 판단이 medium 수준에 적합하다. 다만 C·D는 정동사가 아니어서 비교적 쉽게 배제된다.",
+    "issue": "B 설명에서 \"관계절 속 'burrows'\"라고 했으나, \"burrows\"는 첫 문장의 주어 부분에 있고 빈칸 문장의 관계절(which can extend... fill...)에는 없다. 오답 유인 근거를 잘못 서술했다.\"nearby plural nouns 'tunnels' or 'burrows'\"라고 했지만, \"burrows\"는 이전 문장에 있어 빈칸 근처에 있지 않다. 한국어 해설의 오류가 표현만 바뀐 채 이어진다."
+   },
+   "cost": 0.1527824
+  },
+  {
+   "cid": "medium-form_structure_sense-303",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "주어 \"network\"(단수)와 빈칸 사이에 복수 명사(libraries, towns)를 포함한 긴 수식어구가 끼어 있고, \"In the decades after 1870\"으로 과거 시제가 요구됨. B \"provided\"만 단수·과거 정동사로 적합. A(복수 과거진행), C(복수 현재완료)는 정동사라는 점에서 부분적으로 그럴듯해 비교가 필요하고, D는 정동사 부재. 수일치+시제 두 단계 판단이 필요해 medium에 적합. 한국어·영어 해설 모두 정답과 선택지 참조가 일치하며 모순 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "긴 수식어구 뒤의 단수 주어 network와 수 일치하고, 과거 시점 표현에 맞춰 시제를 판단해야 하는 두 단계 문항이다. A와 C는 바로 앞의 복수 명사에 끌리는 함정이고 D는 정동사가 없는 문장을 만든다. 정답은 B 하나로 확정된다.",
+    "issue": ""
+   },
+   "cost": 0.1274224
+  },
+  {
+   "cid": "medium-form_structure_sense-304",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "주어 'Their solution' + 긴 동격 삽입구(내부에 분사 'embedded', 'carrying' 포함) 뒤에 정동사 필요. C 'shortened'만 정동사이며 A/B(분사), D(관계절)는 모두 본동사 없는 미완성 문장. 한국어·영어 해설 모두 정답과 일치하고 글자 참조 정확, 영어 해설에 한글 없음. 후버댐 냉각 파이프 관련 서술도 역사적 사실과 부합. 긴 삽입구와 분사 함정으로 훑어 읽으면 틀리기 쉬워 medium 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "긴 동격 삽입구와 그 안의 분사(embedded, carrying)가 주어-동사 연결을 흐리게 해 중간 난이도에 적합하다. 사실관계(후버댐 파이프 냉각, 냉각에 100년 이상 소요될 것이라는 추정)도 대체로 정확하다.",
+    "issue": ""
+   },
+   "cost": 0.1218424
+  },
+  {
+   "cid": "medium-form_structure_sense-305",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "주어 'seeds'(복수)와 정동사 일치 문제. 삽입 수식어('of nearly every orchid species', which절) 때문에 가까운 단수 명사 'species'에 끌려 A를 고르기 쉬우며, C는 정동사이나 단수, B는 분사로 정동사 부재. 수식어 제거 + 수 일치의 두 단계 판단이 필요해 medium 적합. 난초 종자의 균근 의존 및 Hanne Rasmussen 연구 언급은 사실과 부합.",
+    "issue": "사소한 부정확: 한국어 해설이 단수 동사 오답의 유인 명사로 'species'와 함께 'reserves'를 언급하나, 'reserves'는 복수이므로 단수형 오답의 근거가 될 수 없음(영어 해설은 'species'만 언급). 결론·글자 참조는 정확함."
+   },
+   "opus": {
+    "correct": false,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "긴 수식어(전치사구와 관계절) 때문에 주어와 동사가 멀리 떨어진 표준적인 수 일치 문항이다. 단수형 오답 두 개(A·C)가 가까운 단수 명사로 학생을 유인한다. 한국어 해설에서 'reserves'를 단수 동사의 오인 요소로 언급한 부분만 고치면 된다.",
+    "issue": "한국어 해설은 단수형 A·C가 가까이 있는 'species'나 'reserves'와 맞는 것처럼 보일 수 있다고 설명한다. 그러나 'reserves'는 복수이므로 단수 동사를 끌어들이는 오인 요소가 될 수 없다. 'every orchid species'만 단수로 볼 수 있다. 정답 D는 올바르다.영어 해설은 정확하며, 오인 요소로 'species'만 든다. 한국어 해설에 있는 'reserves' 오류가 영어 해설에는 없어서 두 해설의 세부 내용이 조금 다르다."
+   },
+   "cost": 0.1403304
+  },
+  {
+   "cid": "medium-form_structure_sense-306",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "도치 구문(장소 전치사구 + 동사 + 주어)에서 주어 'a crumbling stone chapel'(단수)에 일치하는 단수 정동사 'stands'가 유일하게 적절함. B·D는 인접한 복수 명사(yews, sons)에 끌린 오답으로 비교가 필요하고, C는 정동사 부재. 한국어·영어 해설 모두 정답과 선택지 참조가 일치하며 모순 없음. 작품·저자는 가상으로 보여 저작권 우려 없음. 도치 식별 + 수 일치의 두 단계 판단이 요구되어 medium에 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "장소 전치사구로 시작하는 도치 구문이라 주어는 단수인 'a crumbling stone chapel'이고, 따라서 정답은 A(stands)가 맞다. 'yews'와 'sons' 같은 복수 명사가 사이에 끼어 있어, 훑어 읽으면 B나 D를 고르기 쉽다. 그래서 규칙 적용과 문맥 확인의 두 단계가 필요해 목표 난이도(medium)에 맞는다. 작품과 작가는 가상의 것으로 보인다.",
+    "issue": ""
+   },
+   "cost": 0.1347884
+  },
+  {
+   "cid": "medium-form_structure_sense-307",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": false,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "정답 B 검산 완료: that절 주어 \"the stretches\"(복수)에 과거형 정동사 produced가 적합. A는 단수 was로 수 불일치, C·D는 비정동사로 절이 불완전. 관계절+삽입구로 주어-동사가 분리된 표준 medium 수준의 수 일치 문항. 해설의 'plots를 단수 명사로 지칭한' 사소한 오기만 수정 필요.",
+    "issue": "한국어 해설 A 설명에서 \"바로 앞의 단수 명사 marsh나 plots\"라고 했으나 plots는 복수 명사이며 빈칸 바로 앞에 있는 단어이다. was가 plots와 일치할 수 없으므로 이 서술은 부정확하다(결론 자체는 옳음). 영어 해설은 marsh만 언급해 한·영 해설 간 세부 내용이 약간 다르다."
+   },
+   "opus": {
+    "correct": false,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "관계절과 삽입구가 주어와 동사를 떼어 놓아, 주어를 찾고 정동사인지 확인하는 두 단계 판단이 필요함. A는 근접 명사 함정이고, C와 D는 비정동사 함정으로 적절함. 정답 B는 맞음. 수정할 것은 한국어 해설에서 plots를 단수로 표기한 부분.",
+    "issue": "A 해설에서 \"바로 앞의 단수 명사 marsh나 plots\"라고 해 복수 명사 plots를 단수로 잘못 분류함. 바로 앞 명사는 plots(복수)인데, 단수 was를 끌어들이는 명사는 marsh뿐임.영어 해설에는 오류가 없음. 다만 한국어판처럼 plots를 언급하지 않아, 한국어 해설과 세부 내용이 약간 다름."
+   },
+   "cost": 0.1515464
+  },
+  {
+   "cid": "medium-form_structure_sense-308",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "주어 'the number'(단수)와 긴 전치사구 수식어 뒤의 정동사 선택 문제. C 'rose'는 단수·복수 모두 가능한 과거형으로 유일하게 주어 일치·시제·정동사 요건을 모두 충족한다. A는 시제는 맞으나 복수 'were', B는 복수 'have'(+현재완료), D는 비정동사로 배제된다. 한국어·영어 해설 모두 정답 C와 글자 참조가 일치하며 논리적 모순 없음. 1870년 Forster 교육법이 선출된 지역 학교위원회(school boards)를 설립했다는 역사적 배경도 정확. 주어 식별 + 시제/정동사 확인의 두 단계 판단이 필요하고, 근접 복수 명사 'children/charities'에 의한 함정이 설계되어 있어 medium에 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "주어-동사 일치(긴 수식어 개입)와 시제·정동사 판단을 함께 요구한다. A·B는 부분적으로 그럴듯한 오답이다. 'the number ... rose'가 정답이다.",
+    "issue": ""
+   },
+   "cost": 0.1262964
+  },
+  {
+   "cid": "medium-form_structure_sense-309",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "검산: 빈칸은 \"cantilevers that ___ outward...\" 관계절 내부로 that이 주어인 정동사가 필요하며, 주절 동사는 뒤의 allowed. D extended만 적합. A/B는 비정동사, C는 주어 중복 — 정답 D 확인. 사실관계(1880년대 Forth Bridge, 강철 캔틸레버, 세 개의 중앙 타워, 가설 비계 없이 자체 지지 시공) 문제 없음. 해설 한·영 모두 결론·글자 참조 일치, 영어 자연스러움, 한글 혼입 없음. 난이도: 긴 삽입 동격구 뒤 주절 동사 allowed를 식별하고 관계절 구조를 파악하는 두 단계 판단이 필요해 medium 적합. 다만 that 뒤 빈칸이라는 단서가 비교적 직접적이어서 A/B 오답의 유인력이 다소 약한 편(경계선상의 medium).",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "정답은 that 관계절의 정동사 D. 오답 A는 'cantilevers extending'처럼 훑어 읽으면 그럴듯하고, 이 오답을 배제하려면 that 관계절과 주절 동사 allowed를 함께 확인해야 하므로 medium 난이도에 적합하다. 다리에 관한 사실관계(1880년대, 3개의 탑, 캔틸레버 구조)에도 이상이 없다.",
+    "issue": ""
+   },
+   "cost": 0.1444144
+  },
+  {
+   "cid": "medium-form_structure_sense-310",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "that절 주어 'the urchins'(복수) 뒤에 긴 분사 수식어구('left behind…', 'hidden… and feeding…')가 삽입되어 있고, 빈칸에는 정동사가 필요하므로 복수형 'cause'(A)가 유일한 정답. B는 인접 명사 'kelp'에 이끌린 단수형 오답, C·D는 비정동사로 절이 불완전해짐. 한국어·영어 해설 모두 동일 결론과 글자 참조를 가지며 정확함. 주어 식별 + 정동사 필요성 판단의 두 단계가 요구되는 표준 medium 수준으로 적합. 지문은 자체 작성된 것으로 보이며 과학적 내용(해달-성게-켈프 관계)도 사실에 부합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "주어-동사 수일치 문제로, 주어와 동사 사이에 긴 수식어가 끼어 있음. 'kelp'가 끌림 오답(causes)을 유도하고, 분사형 오답 둘은 정동사 여부로 배제됨. 중간 난이도에 적합함. 'urchins in otter-free areas do'와 병렬을 이루므로 'cause'가 맞는지도 다시 확인됨.",
+    "issue": ""
+   },
+   "cost": 0.12627639999999998
+  },
+  {
+   "cid": "medium-form_structure_sense-311",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "주어 \"The chapters\"(복수)와 긴 수식어구(\"describing ... books\" 분사구 + \"each page annotated ... read\" 절대구) 뒤에 정동사 필요 → B \"contain\" 정답 확인. A는 근접 단수 명사(search/page)에 끌린 오답으로 비교 필요, C/D는 정동사 부재. 한·영 해설 결론·글자 참조 일치, 영어 해설에 한글 없음. 가상의 작가·작품으로 저작권 문제 없음. 주어-동사 분리 거리가 길어 medium 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": false,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "주어 \"chapters\"와 동사 사이에 긴 수식어가 끼어 있어 수 일치를 판단해야 하는 전형적인 medium 문항입니다. 분사 오답 C와 D는 다소 쉽게 배제되지만, A가 효과적인 함정 역할을 합니다.",
+    "issue": "한국어 해설은 \"contains\"가 '빈칸 바로 앞의 단수 명사 search나 page'에 수를 맞춘 것이라고 설명하지만, 빈칸 바로 앞의 명사는 \"cipher\"(그 뒤에 \"she must teach herself to read\"가 이어짐)입니다. search와 page는 빈칸에서 떨어져 있으므로 이 서술은 사실과 다릅니다. 정답 B로 이어지는 논리 자체는 타당합니다.영어 해설은 \"near the blank\"라고 표현해 문제가 되지 않습니다. 다만 가장 강하게 끌어당기는 단수 명사 \"cipher\"를 언급하지 않은 점은 아쉽습니다."
+   },
+   "cost": 0.12672440000000001
+  },
+  {
+   "cid": "medium-form_structure_sense-312",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "주어 'network'(단수)와 'together with' 삽입구·관계절·전치사구 수식어를 걸러내야 하는 2단계 판단 구조로 medium에 적합. A는 'roots'/'together with' 인접 복수 명사 함정, B·D는 정동사 부재 오답으로 전형적 SAT 구성. 해설 한·영 일치하며 오류 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "주어 'network'과 동사 사이에 'roots', 'tree', 'together with the silt', 'floods'가 끼어 있어 수일치 판단을 흐린다. 주어를 찾은 뒤 'together with' 구가 주어의 수를 바꾸지 않음을 확인해야 하므로 두 단계 판단이 필요하다. 오답 A는 훑어 읽으면 그럴듯하고, B와 D는 정동사가 없다는 점으로 배제된다. medium 난이도에 적합하다.",
+    "issue": ""
+   },
+   "cost": 0.1105404
+  },
+  {
+   "cid": "medium-form_structure_sense-313",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "주어 'The network'(단수) 뒤에 관계절 'that spread...'와 분사구 'offering...'이 긴 수식어로 이어지고, 빈칸이 유일한 주절 정동사 자리임을 확인함. D 'was helping'만 단수 일치 정동사. A는 인접 복수 명사에 끌린 오답, B·C는 비정동사로 주절 동사 부재. 해설(한/영) 모두 정확·일관, 한글 혼입 없음. 1820~30년대 영국 mechanics' institutes 서술도 역사적으로 타당. 긴 수식어 속 주어 식별 + 정동사/수일치 두 단계 판단이 필요해 medium에 부합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "주어와 동사가 멀리 떨어져 있고 사이에 복수 명사가 여러 개 끼어 있어 수 일치를 확인하기가 어렵습니다. 이는 표준적인 중간 난이도 문항에 해당합니다. 해설에서 말한 관계절은 'that spread...'이며 정확합니다.",
+    "issue": ""
+   },
+   "cost": 0.13458440000000002
+  },
+  {
+   "cid": "medium-form_structure_sense-314",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "주어 \"Their solution\"(단수) + 긴 동격어구(\"a set of three massive cantilever towers linked by suspended spans\") 뒤에 정동사가 필요한 구조. A \"required\"만 단수·과거 정동사로 적합. B·D는 분사형이라 주절 동사 부재, C는 인접 복수 명사(spans/towers)에 이끌린 수 일치 오류. 한국어·영어 해설 모두 동일한 결론과 선택지 참조로 정확하며 한글 혼입 없음. Forth Bridge 사실(1880년대 건설, 3개 캔틸레버 타워, 과잉설계 비판, 현재도 철도 운행)도 문제 없음. 동격어구 건너뛰기 + 정동사/수 일치 두 단계 판단이 필요하고 C가 그럴듯한 오답으로 기능하므로 medium 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "주어-동격어구-정동사 구조로 중간 난이도에 맞음. 포스 교는 1882~1890년에 건설된 캔틸레버 교량으로 사실관계 문제 없음(테이 교 붕괴 이후 현수교 설계가 폐기됨). 오답 C는 가까운 복수명사에 끌리는 함정이고 B/D는 비정형 동사 함정.",
+    "issue": ""
+   },
+   "cost": 0.1279824
+  },
+  {
+   "cid": "medium-form_structure_sense-315",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "주어 'The number'(단수)와 긴 삽입구, 과거 시점 표지('after otters recolonized ... late twentieth century')를 결합해 판단해야 하는 2단계 문항. B 'fell'만 단수 과거 정동사로 적합. A는 복수·현재, C는 복수·현재완료(특정 과거 시점과 불일치), D는 비정동사. 한국어·영어 해설 모두 정답과 선택지 참조가 일치하고 영어 해설에 한글 없음. 해양생태 내용도 사실에 부합. 난이도 medium 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "주어-동사 수 일치에 시제 판단을 더해야 하는 두 단계 문항이다. 긴 삽입구가 끼어 있어 훑어 읽으면 A나 C를 고르기 쉽다. 해커 오답이 'urchins'·'stations'에 맞춘 복수형인 점이 적절하다. 다만 D(분사)는 비교적 쉽게 배제된다.",
+    "issue": ""
+   },
+   "cost": 0.12539240000000001
+  },
+  {
+   "cid": "medium-form_structure_sense-316",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "주어 \"The letters\"(복수)와 빈칸 사이에 분사구와 관계절(그 안에 \"cargo\", \"hall\" 등 단수 명사 포함)이 길게 끼어 있어, 주어 식별 + 수 일치라는 두 단계 판단이 필요하다. 정답 C \"mark\"가 유일한 복수 정동사이며, A는 근접 명사에 이끌린 단수형 오답, B·D는 비정동사형으로 본동사 부재를 만든다. 문학 현재시제(recalls)와도 어울린다. 한국어·영어 해설 모두 정답과 선택지 글자 참조가 정확하고 결론이 일치하며, 영어 해설에 한글이 없다. 가상 작가·작품으로 저작권 문제 없음. 표준 SAT medium 수준의 주어-동사 일치 문항으로 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "Subject-verb agreement with a long interrupter (participial phrase + relative clause). The two-step reasoning (find the main verb, then match it to the distant plural subject) and the attractor nouns cargo/hall/fire suit medium difficulty. Option labels and explanations match.",
+    "issue": ""
+   },
+   "cost": 0.1239584
+  },
+  {
+   "cid": "medium-form_structure_sense-317",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "주어 \"The cushion bogs\"(복수) + 긴 동격구 삽입 후 정동사 필요 → \"store\"(D)가 유일한 정답. A(분사)·C(관계절)는 정동사 부재, B는 단수형으로 인접 단수 명사(decade)에 이끌리는 오류. 한·영 해설 모두 D를 일관되게 뒷받침하고 선택지 참조가 정확하며 영어 해설에 한글 없음. 긴 삽입구를 건너 주어를 찾고 수 일치까지 판단해야 하는 두 단계 구조로 medium에 적합. 내용(Astelia pumila 쿠션 이탄지, 탄소 저장량)도 사실적으로 타당.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "주어와 동사 사이에 긴 동격구가 끼어 있고, 그 안에 단수 명사(decade, Astelia pumila)가 들어 있어 수 일치를 헷갈리게 하는 전형적인 medium 문항이다. 동격구 안의 'that add'(복수 일치, plants 수식)가 문장 구조를 더 복잡하게 만든다. 'Cushion bogs가 탄소 저장량이 크다'는 내용은 실제 연구 보고와 대체로 맞는다.",
+    "issue": ""
+   },
+   "cost": 0.12125040000000001
+  },
+  {
+   "cid": "medium-form_structure_sense-318",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "주어 'the network'(단수)와 빈칸 사이에 'libraries', 'institutes', 'members' 등 복수 명사가 끼어 있어 주어 식별 + 수 일치/정동사 판단의 두 단계가 필요. A 'greatly expanded'만 단수 주어와 일치하는 정동사이며 과거 맥락에 부합. B·D는 근접 복수 명사에 끌린 그럴듯한 오답, C는 정동사 부재. 해설 한·영 모두 일관되고 정확함. 표준 SAT medium 수준에 적합.",
+    "issue": "사소: 'institutes'나 'members'가 \"come right before the blank\"라고 했으나 빈칸 직전 단어는 'a penny a week'임. 의미 전달에는 지장 없음."
+   },
+   "opus": {
+    "correct": false,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "주어와 동사 사이에 전치사구와 관계절이 끼어 있고, 정동사 여부와 수 일치를 함께 판단해야 하는 구조라 medium 난이도에 적합하다. 해설에서 함정 명사를 잘못 짚은 부분만 고치면 된다.",
+    "issue": "해설이 정답 A를 뒷받침하고 B·C·D를 배제하는 논리는 맞다. 다만 주어와 헷갈리기 쉬운 복수 명사로 'institutes'와 'members'를 든 것이 문제다. 주어 'network'를 직접 수식하는 'of small lending libraries'의 복수 명사 'libraries'가 핵심 함정인데, 해설은 이를 언급하지 않는다. 또 빈칸 바로 앞 명사는 'week'이므로 'institutes·members가 빈칸 바로 앞에 있다'는 서술은 지문과 맞지 않는다.한국어 해설과 같은 오류가 있다. \"institutes\" and \"members,\" which come right before the blank라고 했지만 이는 지문과 맞지 않는다. 빈칸 바로 앞 명사는 'week'이며, 핵심 함정인 'libraries'를 언급하지 않는다."
+   },
+   "cost": 0.14569439999999997
+  },
+  {
+   "cid": "medium-form_structure_sense-319",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "주어 'The barrier'(단수) + 긴 동격어구(쉼표 사이) 뒤 정동사 필요 → B 'guides' 정답 확인. 첫 문장의 과거시제(began)와 무관하게 장치의 일반적 작동을 서술하는 현재형은 자연스러움. A는 인접 복수명사 'tubes'에 끌린 그럴듯한 오답, C/D는 비정동사형으로 문장에 본동사가 없어짐. 한국어·영어 해설 모두 동일 결론·글자 참조, 모순 없음. 삽입구 건너뛰기 + 수 일치라는 두 단계 판단이 요구되어 medium에 부합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": false,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "주어 'The barrier' 뒤에 긴 동격어구가 오고, 그 안에 복수 명사 'tubes'가 끼어 있다. 그래서 정동사 판별(C, D 배제)과 수 일치 판별(A 배제)의 두 단계가 필요하다. 이는 medium 난이도에 적합하다. 분사형 C와 D는 비교적 쉽게 배제된다.",
+    "issue": "한국어 해설은 A 'guide'가 \"'tubes'나 'surface' 근처 어구에 끌린 복수형\"이라고 설명한다. 그러나 'surface'는 단수 명사라서 복수형으로 끌어당기는 요인이 될 수 없다. 혼동을 일으키는 복수 명사는 'tubes'뿐이다. 결론(B)과 선택지 글자 참조는 맞다.영어 해설은 정확하고 자연스럽다. 'tubes'만 끌림 요인으로 들어 오히려 한국어 해설보다 정확하다. 다만 한국어 해설에 있는 'surface' 언급이 빠져 있어 두 해설이 완전히 같지는 않다."
+   },
+   "cost": 0.1316864
+  },
+  {
+   "cid": "medium-form_structure_sense-320",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "주어 \"the abundance\"(단수)와 긴 수식어구 뒤 정동사 요구를 결합한 표준 수 일치 문항. 정답 C \"was\" 검산 결과 옳고, 과거시제도 \"found\"와 자연스럽게 맞음. A·D는 인접 복수 명사(colonies, rockfish)에 끌리는 근접 오류 유인, B는 비정형 동사 함정으로 오답 설계가 적절함. 한·영 해설 모두 정답과 글자 참조가 일치하며 영어 해설에 한글 없음. 해양 생태 내용(수달-성게-켈프)은 사실에 부합하며 저작권 의심 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "Subject-verb agreement with a long intervening modifier (rockfish, fronds, sites, colonies) is a standard medium-level form_structure_sense item. The distractors are well built: A and D are finite verbs that could be wrongly matched to a nearby plural noun, and B is a nonfinite participle that leaves the clause without a verb. The tense in D also differs, but it is clearly ruled out by agreement. No issues found.",
+    "issue": ""
+   },
+   "cost": 0.1123644
+  },
+  {
+   "cid": "medium-form_structure_sense-321",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "주어 'narrator'(단수) + 긴 동격구('a young archivist who ... notebook') 뒤 정동사 필요. D 'earns'만 정동사·단수 일치. A/B는 비정동사로 본동사 부재, C는 복수형. 정답 검산 결과 옳음. 오답 중 C는 인접 복수명사 오인으로 그럴듯하고, A/B는 분사·부정사 구조상 매력적이어서 medium 기준 충족. 가공의 소설·작가로 저작권 문제 없음. 영어 해설은 한글 없이 자연스럽고 결론 일치.",
+    "issue": "한국어 해설에서 \"빈칸 바로 앞의 'corridors'나 'servants'\"라고 했으나 'servants'는 빈칸 뒤에 나오며, 빈칸 바로 앞 명사는 'notebook'이다. 정답 논리에는 영향 없는 경미한 위치 서술 오류."
+   },
+   "opus": {
+    "correct": false,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "정답 D(earns)는 맞습니다. 단수 주어 narrator 뒤에 긴 동격 어구와 관계절이 끼어 있어 주어-동사 수 일치를 묻는 중간 난이도 문항으로 적절합니다. 다만 한국어 해설에서 유인 명사의 위치를 설명한 부분은 고쳐야 합니다.",
+    "issue": "한국어 해설은 'corridors'나 'servants'가 \"빈칸 바로 앞\"에 있다고 하지만, 빈칸 바로 앞 단어는 'notebook'입니다. 'corridors'는 앞쪽에 있되 바로 앞이 아니고, 'servants'는 빈칸 뒤에 나옵니다. 오답 C의 유인 근거를 사실과 다르게 설명했습니다.영어 해설은 'corridors'를 \"nearby plural noun\"으로만 언급해 정확합니다. 다만 'servants'를 뺐고 '바로 앞'이라는 표현도 쓰지 않아 한국어 해설과 세부 내용이 다릅니다."
+   },
+   "cost": 0.15253239999999998
+  },
+  {
+   "cid": "medium-form_structure_sense-322",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "주어 'the network'(단수) + 수식어구 'of sinkholes...' 뒤 정동사 필요 → 'provides'(A) 정답 확인. 분사 도입구(Formed...)와 since 종속절 외에 정동사가 없으므로 C/D는 문장 불완전, B는 근접 복수명사 'sinkholes'에 끌린 오답. 한·영 해설 모두 결론·글자 참조 일치, 영어 자연스러움. 난이도: 수일치 + 정동사/비정동사 판별 두 단계로 medium 적합. 참고: 유카탄 세노테는 빙하 융빙수보다 빗물·지하수에 의한 석회암 용식으로 형성된 것이 일반적 설명이나, 문법 문항 판정에는 영향 없는 배경 서술 수준.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": false,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "지문의 사실 오류: 유카탄 반도에는 빙하가 없었습니다. 세노테(싱크홀)는 '빙하 융수가 수로를 깎아' 생긴 것이 아닙니다. 빗물·지하수가 석회암을 용해하고, 빙하기 해수면 변동이 겹친 뒤 지반이 붕괴해 형성되었습니다. 문법 구조(긴 수식어 뒤의 단수 주어와 동사 수 일치, 정동사 필요)는 medium 난이도에 적합합니다. 정답 A는 옳습니다.",
+    "issue": "B 설명에 붙은 괄호 '(또는 'Peninsula' 근처의 명사들)'은 잘못된 설명입니다. 'Peninsula'는 단수 명사라서 복수형 'provide'가 일치할 대상이 될 수 없습니다. 부정확하고 혼란을 주는 서술입니다."
+   },
+   "cost": 0.1258524
+  },
+  {
+   "cid": "medium-form_structure_sense-323",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [
+    "explanation_en_too_short"
+   ],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": null,
+   "opus": null,
+   "cost": 0.0184564
+  },
+  {
+   "cid": "medium-form_structure_sense-324",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "주어 \"The sequence\"(단수) + 긴 삽입 수식어구(\"of sealed iron pipes laid…\", \"each joined…collars\") 뒤에 정동사가 필요. C \"moved\"만 정동사이면서 단수 주어와 일치. A는 정동사이지만 복수형(인접 명사 pipes/collars에 끌림), B·D는 분사라 문장에 정동사가 없음. 정답 검산 완료. 한·영 해설 모두 동일 결론·글자 참조, 모순 없음, 영어 자연스럽고 한글 없음. 두 단계 판단(정동사 필요 + 삽입구 건너뛴 수일치)이 요구되고 A가 강력한 오답, B는 주변 분사(laid, joined)와의 유사성으로 그럴듯하여 medium 적합. 가상 인물·구조물 사용으로 사실오류·저작권 문제 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "주어(sequence)와 동사 사이에 복수 명사와 독립분사구가 끼어 있다. 그래서 주어를 찾고 정동사가 필요한지 판단하는 두 단계를 거쳐야 하며, A는 주어-동사 수일치를 노린 매력적인 오답이다. 다만 B와 D가 모두 비정동사라 비슷한 이유로 배제되므로 변별력은 중간 수준이다. Lucien Morel이라는 인물과 다리는 가상의 소재로 보인다.",
+    "issue": "사소한 점: 'moved'는 수에 따라 형태가 바뀌지 않으므로 '단수 주어와 일치'한다기보다 단수 주어와 함께 쓸 수 있는 형태라고 하는 편이 더 정확하다. 결론에는 영향이 없다."
+   },
+   "cost": 0.1334324
+  },
+  {
+   "cid": "medium-form_structure_sense-325",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": false,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "검산: 주어 \"burrows\"(복수) + 긴 분사구 수식어 뒤의 빈칸에 복수 정동사가 필요하며, 후반부 과거 시제(grew, produced)와 일치하는 D \"delivered\"가 유일한 정답. A·C는 단수 정동사, B는 비정형. 지문 내용(Bertness의 Uca pugnax–Spartina alterniflora 연구, 굴이 토양 산소 공급·배수 개선, 게 제거 시 생산량 감소)은 사실과 부합. 난이도: 긴 수식어구를 건너 주어를 찾는 단계 + 시제 확인 단계의 두 단계 판단이 필요해 medium 적합. 수정 권고: 해설에서 'banks'를 단수명사 예시에서 제외할 것.",
+    "issue": "결론(D)과 선택지 글자 참조는 정확하나, 해설이 \"바로 앞의 단수명사 'banks'나 'mud'\"라고 서술함. 'banks'는 복수명사이므로 단수형 동사(A, C)의 오답 유인 근거로 들 수 없음. 'mud'만 단수명사로 언급해야 정확함. 정답 판정 자체에는 영향 없음.Same inaccuracy as the Korean: \"a nearby singular noun like 'mud' or 'banks'\" — \"banks\" is plural, so it cannot serve as the singular-noun trap. Otherwise the English is natural, matches the Korean conclusion and letter references, and contains no Korean characters."
+   },
+   "opus": {
+    "correct": false,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "정답 D는 맞다. 복수 주어 \"burrows\"와 일치하고 과거 시제 문맥에도 맞는다. 긴 수식어구가 끼어든 주어-동사 일치 문항이라 중간 난이도에 적합하다. 해설에서 \"banks\"를 단수로 잘못 부른 부분만 고치면 된다.",
+    "issue": "해설은 \"banks\"를 단수명사라고 하지만 \"banks\"는 복수다. 단수 동사를 유도할 수 있는 가까운 단수명사는 \"mud\"(또는 \"marsh's\")뿐이다. 오답 함정 설명에 사실 오류가 있다.한국어 해설과 같은 오류가 있다. \"a nearby singular noun like 'mud' or 'banks'\"라고 했지만 \"banks\"는 복수다."
+   },
+   "cost": 0.1809684
+  },
+  {
+   "cid": "medium-form_structure_sense-326",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "주어 'the letters'(복수) + 관계절 + 삽입 분사구 뒤 정동사 자리. 'reveal'(A)이 수 일치·정동사 요건 모두 충족. B는 근접 명사(desk/ribbon)에 끌린 단수형 오답, C·D는 비정동사로 문장 단편화. 해설 한·영 모두 결론·글자 참조 일치, 영어 자연스러움. 가상의 소설·작가로 저작권 문제 없음. 두 단계 판단(정동사 여부 + 수 일치)이 필요한 표준 medium 수준.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "주어와 동사 사이의 긴 삽입구, 단수 명사 유인(desk, ribbon), 비정동사 2개. 전형적인 중간 난이도 수일치 문항이다. 가상의 소설이라 문제없다.",
+    "issue": "B에 대해 '앞의 단수 명사 desk나 ribbon에 맞춘' 형태라고 했는데, 엄밀히는 빈칸 바로 앞 명사는 gray(형용사구 끝)이고 오답 유도 근거 설명으로는 무리가 없다. 사소함."
+   },
+   "cost": 0.12429040000000001
+  },
+  {
+   "cid": "medium-form_structure_sense-327",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": false,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "문항 자체는 양호: 복수 주어 'The islands' + 긴 삽입 관계사절 뒤 본동사 필요 → B 'play'. 정동사/비정동사 판별과 수일치의 두 단계 판단이 필요해 medium에 적합. 오답 C는 수일치 오류, A·D는 본동사 부재로 각각 그럴듯함. 문제점은 한국어 해설의 C 설명(trees를 단수라 함)으로, 수정 필요.",
+    "issue": "정답 결론(B)과 글자 참조는 맞으나, C 배제 근거가 혼란스럽고 오류가 있음: 'trees'를 \"바로 앞의 단수 명사\"라고 했는데 trees는 복수이며, 'mounds'도 복수임. \"단수처럼 보이는 수식어에 이끌린\" 설명이 실제 문장 구조와 맞지 않아 학습자에게 혼동을 줌. 또한 \"many of which...\"는 관계사절이지만 'colonized by trees'까지 포함해 삽입구 전체를 지칭하는 것은 괜찮음.한국어 해설의 'trees 단수' 오류는 없으며 결론·글자 참조 일치. 다만 \"a nearby noun\"이 무엇인지 모호해 한국어 해설과 세부 근거가 완전히 동일하지는 않음(경미)."
+   },
+   "opus": {
+    "correct": false,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "긴 삽입절을 건너뛰어 주어 'islands'와 본동사를 찾는 2단계 판단이 필요하다. 다만 삽입절 명사가 모두 복수여서 C 'plays'로 유도하는 힘이 약하다. 그래서 난이도는 medium 가운데서도 쉬운 편이다.",
+    "issue": "C 해설이 사실과 맞지 않고 앞뒤가 맞지 않는다. 'trees'를 '단수 명사'라고 하고, 복수형인 'mounds'를 '단수처럼 보이는 수식어'라고 했다. 삽입절에 있는 명사(trees, mounds)는 모두 복수이므로 단수형 'plays'로 끌어당기는 근처 명사라는 설명은 성립하지 않는다.한국어 해설의 오류를 옮겨 오지 않았다. 결론과 선택지 글자 참조는 같고, 영어도 자연스럽다."
+   },
+   "cost": 0.1511204
+  },
+  {
+   "cid": "medium-form_structure_sense-328",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "주어 'The reports'(복수)와 동사 사이에 관계절·독립분사구가 끼어 있어 주어 식별 + 정동사 필요 판단의 두 단계가 요구됨. C 'remain'이 유일한 복수 정동사로 정답 확인. A는 인접 단수 명사에 끌리는 오답, B/D는 비정동사로 주절 동사 부재. 한·영 해설 모두 정확하고 선택지 참조 일치. Factory Act 1833·검사관 제도 사실관계도 문제없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": false,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "주어 'The reports'와 동사 사이에 관계절과 독립 분사구가 길게 끼어 있다. 또 빈칸 바로 앞에 단수 명사 'machinery'가 있어 수 일치를 혼동하게 만든다. 두 단계 판단(정동사 필요 여부 확인과 주어 찾기)이 필요하므로 medium 난이도에 적합하다. Factory Act 1833 관련 사실관계도 무리가 없다.",
+    "issue": "한국어 해설은 A가 '빈칸 바로 앞의 단수 명사 machinery나 labor'에 수를 맞춘 형태라고 설명한다. 그러나 'labor'는 빈칸 뒤 문장 끝에 있으므로 '빈칸 바로 앞'이라는 설명은 사실과 다르다. 빈칸 바로 앞에 있는 명사는 'machinery'뿐이다. 정답 판단에는 영향이 없다."
+   },
+   "cost": 0.1327024
+  },
+  {
+   "cid": "medium-form_structure_sense-329",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "주어 'Their solution'(단수) 뒤 긴 동격구(복수 명사 pipes/blocks 포함)를 지나 정동사가 필요하므로 D 'reduced'가 유일하게 옳음. A·C는 분사형으로 정동사 부재, B는 인접 복수 명사에 끌린 수 불일치. 한국어·영어 해설 모두 결론·글자 참조 일치, 영어 자연스럽고 한글 없음. 후버댐 냉각 파이프·100년 이상 냉각 소요 등 배경 사실도 통설과 부합. 긴 동격구 건너뛰기 + 수 일치 확인의 두 단계 판단으로 medium에 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "긴 동격구로 주어와 동사 사이 거리가 멀고 근접 복수명사 함정(B)이 있어 medium에 적합. 후버댐 냉각 파이프와 블록 타설, 냉각 없으면 100년 이상, 약 2년 이내라는 내용은 사실과 부합.",
+    "issue": ""
+   },
+   "cost": 0.12477240000000002
+  }
+ ]
+}

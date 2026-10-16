@@ -30,7 +30,9 @@ const teachers: TeacherListItem[] = [
     teacherId: "t1",
     name: "박서연 선생님",
     school: "서울대학교 수리과학부 재학 · SAT Math 전담",
-    subjects: [{ subjectName: "SAT Math", currentSession: 8, totalSessions: 12 }],
+    subjects: [
+      { subjectName: "SAT Math", currentSession: 8, totalSessions: 12, curriculumSourceLabel: "Based on teacher-run curriculum" },
+    ],
   },
 ];
 
@@ -55,7 +57,7 @@ const chatThreads = {
 };
 
 describe("TeacherTab", () => {
-  it("선생님 카드에 이름/학교/과목·회차를 보여준다", () => {
+  it("선생님 카드에 이름/학교/과목·진도(curriculum_overlay_units 기준)·출처를 보여준다", () => {
     render(
       <TeacherTab
         teachers={teachers}
@@ -65,7 +67,8 @@ describe("TeacherTab", () => {
       />
     );
     expect(screen.getByText("박서연 선생님")).toBeInTheDocument();
-    expect(screen.getByText(/SAT Math · 8\/12회차/)).toBeInTheDocument();
+    expect(screen.getByText(/SAT Math · Progress 8 \/ 12 sessions/)).toBeInTheDocument();
+    expect(screen.getByText("Based on teacher-run curriculum")).toBeInTheDocument();
   });
 
   it("프로필 보기를 누르면 학교/자기소개를 보여준다", () => {
@@ -77,7 +80,7 @@ describe("TeacherTab", () => {
         chatThreads={chatThreads}
       />
     );
-    fireEvent.click(screen.getByText("프로필 보기"));
+    fireEvent.click(screen.getByText("View profile"));
     expect(screen.getByText("SAT Math 800점 만점 지도 경험 다수.")).toBeInTheDocument();
   });
 
@@ -90,9 +93,9 @@ describe("TeacherTab", () => {
         chatThreads={chatThreads}
       />
     );
-    fireEvent.click(screen.getByText("프로필 보기"));
-    fireEvent.click(screen.getByText("이 선생님과 진행한 수업 내역 보기"));
-    expect(screen.getByText(/SAT Math · 7회차/)).toBeInTheDocument();
+    fireEvent.click(screen.getByText("View profile"));
+    fireEvent.click(screen.getByText("View lessons with this teacher"));
+    expect(screen.getByText(/SAT Math · Session 7/)).toBeInTheDocument();
   });
 
   it("메시지 버튼을 누르면 ChatPanel이 뜬다", () => {
@@ -104,10 +107,10 @@ describe("TeacherTab", () => {
         chatThreads={chatThreads}
       />
     );
-    fireEvent.click(screen.getByText("💬 메시지"));
-    expect(screen.getByText("박서연 선생님과의 메시지")).toBeInTheDocument();
+    fireEvent.click(screen.getByText("💬 Message"));
+    expect(screen.getByText("Messages with 박서연 선생님")).toBeInTheDocument();
     expect(
-      screen.getByText("이 대화는 학부모님과 관리자가 항상 열람할 수 있습니다.")
+      screen.getByText("Your parent and the ALTON team can always view this conversation.")
     ).toBeInTheDocument();
   });
 });

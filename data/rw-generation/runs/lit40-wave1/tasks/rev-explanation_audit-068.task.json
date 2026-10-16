@@ -1,0 +1,349 @@
+{
+ "schema": "rw-session-task/v1",
+ "kind": "review",
+ "role": "explanation_audit",
+ "runId": "lit40-wave1",
+ "taskId": "rev-explanation_audit-068",
+ "chunkId": "rev-explanation_audit-068",
+ "suggestedModel": "sonnet",
+ "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-explanation_audit-068.result.json",
+ "outputSchema": {
+  "chunkId": "청크 ID",
+  "model": "sonnet",
+  "items": [
+   {
+    "candidateId": "id",
+    "answer_correct": "표시된 정답이 정말 정답이면 true",
+    "explanation_consistent": "해설이 정답·오답 판단과 일치하고 글자 참조가 맞으면 true",
+    "explanation_factual": "해설에 사실 오류가 없으면 true",
+    "issues": "한 줄 메모"
+   }
+  ]
+ },
+ "items": [
+  {
+   "candidateId": "lit40-easy-04-063",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "easy",
+   "passage": "Redcastle is suddenly awakened to the consciousness of loveliness that scarcely moved it to admiration two years ago, although the girl’s beauty had then the bloom and freshness of unchastened youth. Perhaps she is really lovelier now. Sorrow and passion have passed there, and left the exalted look of an awakened soul, where there was before only girlish innocence, curious and wondering about a world of which it knew nothing. She has eaten of the tree of knowledge of good and evil. The mystery of life has been revealed to her. Be sure that Eve’s beauty had a deeper meaning after she came out by the fatal gate where the angel with the flaming sword kept watch and ward.",
+   "question": "Which choice best describes how the tone shifts in the text?",
+   "options": [
+    "From cheerful praise of the girl to harsh criticism of her sorrow",
+    "From admiring description of the girl to reflection on how experience deepens beauty",
+    "From gloomy warning about Redcastle to lighthearted mockery of him",
+    "From confusion about the girl's looks to certainty that her beauty has faded"
+   ],
+   "correct_letter": "B",
+   "explanation": "지문은 Redcastle이 소녀의 아름다움을 새삼 깨닫는 묘사로 시작한다. 중간부터 슬픔과 열정이 '깨어난 영혼'의 표정을 남겼다고 말하고, 선악과와 이브의 비유를 들어 경험이 아름다움에 깊은 의미를 더한다고 성찰한다. 따라서 B가 정답이다. A의 비판, C의 조롱은 없고, D는 그녀가 오히려 더 아름다워졌다는 진술과 반대된다."
+  },
+  {
+   "candidateId": "lit40-easy-04-068",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "easy",
+   "passage": "I tried to think that this indifference and sunny idleness were perhaps the natural reaction of that larger life of emotion and activity from which he had just emerged. I reflected a great deal on that life, and, though I lamented the fact that he had drawn his sword on the wrong side, there was, down deep in my heart, an involuntary sympathetic throb for the valor that had not availed. I suppose the inexplicable ties of kinship had something to do with all this.\n\nWashington Flagg had now been with us five weeks. He usually lingered awhile after dinner; sometimes spent the entire evening with the family, or, rather, with me, for Mrs. Wesley preferred the sitting-room to my den when I had company.",
+   "question": "Which choice best describes the narrator's attitude toward Washington Flagg?",
+   "options": [
+    "Open contempt for his idleness and long visits",
+    "Fearful suspicion of his reasons for staying",
+    "Complete indifference to his past and company",
+    "Sympathy mixed with mild disapproval of his past"
+   ],
+   "correct_letter": "D",
+   "explanation": "서술자는 Flagg의 무관심과 게으름을 큰 감정적 삶 뒤의 자연스러운 반동이라고 이해하려 한다. 그가 '잘못된 편'에서 칼을 뽑은 것을 안타까워하면서도, 헛되이 끝난 용기에 마음속 깊이 공감한다고 밝힌다. 따라서 공감과 약간의 불찬성이 섞인 D가 정답이다. A의 경멸, B의 의심, C의 무관심은 서술자의 이해하려는 태도와 맞지 않는다."
+  },
+  {
+   "candidateId": "lit40-easy-04-069",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "easy",
+   "passage": "Far less than half-way to the hamlet, very little beyond the bottom of the hill, we must come forth into the moonlight. Nor was this all, for the sound of several footsteps running came already to our ears, and as we looked back in their direction, a light tossing to and fro, and still rapidly advancing, showed that one of the new-comers carried a lantern.\n\n\"My dear,\" said my mother suddenly, \"take the money and run on. I am going to faint.\"\n\nThis was certainly the end for both of us, I thought. How I cursed the cowardice of the neighbours; how I blamed my poor mother for her honesty and her greed, for her past foolhardiness and present weakness!",
+   "question": "Which choice best describes the narrator's attitude toward his mother?",
+   "options": [
+    "Exasperated blame softened by pity",
+    "Calm admiration for her courage",
+    "Cheerful confidence in her plan",
+    "Cold indifference to her fate"
+   ],
+   "correct_letter": "A",
+   "explanation": "추격자들이 다가오는 순간 어머니가 기절하겠다고 말하자 서술자는 이제 끝이라고 생각한다. 그는 어머니의 정직함과 욕심, 무모함과 나약함을 탓하지만, 동시에 'my poor mother'라고 불러 연민을 드러낸다. 따라서 연민이 섞인 짜증 어린 비난이라는 A가 정답이다. B와 C는 그의 절망과 맞지 않고, D는 감정이 강하게 드러난 문장과 모순된다."
+  },
+  {
+   "candidateId": "lit40-easy-04-070",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "easy",
+   "passage": "I was also present for one day during the races. The course is two miles in length, and in excellent condition, being railed off the whole distance. I saw one race, which was admirably contested; but the ground was not well attended, and the others did not go off with spirit. I was told, however, that there was a great prospect of improvement, as the Canadians were beginning to be fond of the sport. The excitement would have been much greater if it had lasted but two days instead of four; and a public ball afterwards would not have been amiss.",
+   "question": "Which choice best states the main purpose of the text?",
+   "options": [
+    "To describe how the Canadians invented a new kind of racing",
+    "To give a mixed view of the races and suggest improvements",
+    "To complain that the racecourse was in very poor condition",
+    "To recount the narrator's own victory in a close race"
+   ],
+   "correct_letter": "B",
+   "explanation": "서술자는 경주로가 훌륭하고 한 경주는 잘 겨루어졌다고 칭찬하지만, 관중이 적고 다른 경주는 활기가 없었다고 지적한다. 이어 기간을 이틀로 줄이고 무도회를 열면 좋겠다고 제안한다. 따라서 장단점을 함께 평가하고 개선점을 제시한다는 B가 정답이다. C는 '훌륭한 상태'라는 묘사와 반대되며, A와 D는 근거가 없다."
+  },
+  {
+   "candidateId": "lit40-easy-04-072",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "easy",
+   "passage": "John Milton had rowed back without lifting his eyes to Mrs. Ashwood's receding figure. He believed that he was right in declining her invitation, although he had a miserable feeling that it entailed seeing her for the last time. With all that he believed was his previous experience of the affections, he was still so untutored as to be confused as to his reasons for declining, or his right to have been shocked and disappointed at her manner. It seemed to him sufficiently plain that he had offended the most perfect woman he had ever known without knowing more. The feeling he had for her was none the less powerful because, in his great simplicity, it was vague and unformulated.",
+   "question": "As used in the text, the phrase “so untutored” most nearly suggests that John Milton was",
+   "options": [
+    "poorly educated in his school subjects",
+    "unwilling to learn from other people",
+    "inexperienced in understanding his own feelings",
+    "too proud to admit he had made an error"
+   ],
+   "correct_letter": "C",
+   "explanation": "'untutored'는 원래 교육을 받지 못했다는 뜻이지만, 여기서는 애정 문제에 대해 쓰였다. 그는 거절한 이유나 실망할 권리에 대해 혼란스러워하고, 그녀에 대한 감정도 막연하고 정리되지 않았다고 서술된다. 따라서 자기 감정을 이해하는 데 미숙하다는 C가 정답이다. A는 문자적 의미에 머물고, B와 D의 고집이나 자존심은 지문에 근거가 없다."
+  },
+  {
+   "candidateId": "lit40-easy-04-073",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "easy",
+   "passage": "If I might see a smile on her face, if the look of yielding would but come back there and remain! Surely her scruples would pass when I should bring her father to her. What imaginary barrier could stand before the combined forces of love and gratitude? The rescue of her father must not be longer deferred. I must form my plan immediately. Yet I continued to waste time thinking of the future, of the day when she should acknowledge herself mine. I took off my hat and removed from it the glove that she had given me. It was like a part of her; it was fashioned by use to the very form of her hand.",
+   "question": "As used in the text, the phrase “It was like a part of her” most nearly suggests that the glove was",
+   "options": [
+    "a worn object the narrator planned to discard",
+    "a gift she had demanded that he return",
+    "a disguise that he used to hide his identity",
+    "a treasured token that seemed to hold her presence"
+   ],
+   "correct_letter": "D",
+   "explanation": "서술자는 그녀가 준 장갑을 모자에서 꺼내며 그녀의 일부 같다고 말한다. 바로 뒤에서 장갑이 사용으로 그녀 손의 모양을 그대로 띠게 되었다고 설명해 그녀의 존재가 담긴 물건임을 강조한다. 따라서 D가 정답이다. 그는 미래를 꿈꾸며 장갑을 소중히 여기므로 A의 버림, B의 반환 요구, C의 변장은 맞지 않는다."
+  },
+  {
+   "candidateId": "lit40-easy-04-074",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "easy",
+   "passage": "\"The city boasts an old and learned college,\nWhere you'd think the leading industry was Greek;\nEven there the favoured instruments of knowledge\nAre a driver, and a putter, and a cleek.\n\n\"All the natives and the residents are patrons\nOf this royal, ancient, irritating game;\nAll the old men, all the young men, maids and matrons,\nWith this passion burn in hard and gem-like flame.\n\n\"In the morning, as the light grows strong and stronger,\nYou may see the players going out in shoals;\nAnd when night forbids their playing any longer,\nThey will tell you how they did the different holes.",
+   "question": "As used in the text, the phrase “With this passion burn in hard and gem-like flame” most nearly suggests that the townspeople",
+   "options": [
+    "feel an intense and lasting enthusiasm for golf",
+    "are angry about the game's irritating rules",
+    "suffer from the summer heat on the course",
+    "pretend to enjoy golf to please their neighbors"
+   ],
+   "correct_letter": "A",
+   "explanation": "시는 대학 도시에서도 지식의 도구가 골프채일 만큼 모두가 골프를 즐긴다고 말한다. 노인과 젊은이, 처녀와 부인 모두가 이 열정으로 불탄다는 비유 뒤에 아침부터 밤까지 경기하고 홀 이야기를 늘어놓는 모습이 이어진다. 따라서 강렬하고 지속적인 열정을 뜻하는 A가 정답이다. 'irritating'은 장난스러운 표현일 뿐 분노가 아니므로 B는 틀리고, C와 D도 근거가 없다."
+  },
+  {
+   "candidateId": "lit40-easy-04-075",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "easy",
+   "passage": "Of course we all know from the books that their intention is to find a suitable spot in which to bury this ball, and such being the case, with what astonishing stupidity do they urge on that labor! Here certainly is just the right spot for you, Mrs. Tumble-bug! Stop rolling and dig! But no, she will not listen to reason. She mounts the top of the ball, and, creeping far out upon it, pulls it over forward with her back feet, while Mr. Tumble-bug helps her in a most singular fashion. Does he stand up on his hind legs on the opposite side, and push with his powerful front feet? Oh no; he stands on his head, and pushes with his hind legs. As he pushes, and as the ball rolls merrily on, Mrs. Tumble-bug is continually rolled around with it, and must needs climb backward at a lively rate to keep her place.",
+   "question": "As used in the text, the phrase “she will not listen to reason” most nearly suggests that Mrs. Tumble-bug",
+   "options": [
+    "cannot hear the observer over the noise of rolling",
+    "stubbornly ignores what seems sensible to the observer",
+    "is waiting for Mr. Tumble-bug to give her advice",
+    "has already found a good spot in which to dig"
+   ],
+   "correct_letter": "B",
+   "explanation": "서술자는 공을 묻을 적당한 자리를 발견하고 멈춰서 파라고 쇠똥구리에게 말을 건넨다. 그러나 쇠똥구리는 계속 공을 굴리므로, 이성에 귀 기울이지 않는다는 표현은 관찰자가 보기에 합리적인 선택을 고집스럽게 무시한다는 뜻의 의인화다. 따라서 B가 정답이다. A는 문자 그대로의 청각으로 오해했고, C와 D는 지문 내용과 맞지 않는다."
+  },
+  {
+   "candidateId": "lit40-easy-04-076",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "easy",
+   "passage": "Determined to carry to a successful completion every project we take in hand, we went to work to organize the meeting. A chairman is essential to any meeting. They are necessary to keep the meeting in order, and give the assemblage proper dignity. We were unanimously chosen chairman and took our seat amid the most profound silence. But a difficulty, wholly unexpected now presented itself. A secretary to keep the record of the proceedings is equally indispensable. There was no one to make secretary. Not to be thwarted by minor obstacles, we finally with much reluctance, consented to assume this arduous position also.",
+   "question": "As used in the text, the phrase “this arduous position” most nearly suggests that the role of secretary was",
+   "options": [
+    "a truly exhausting job that required long training",
+    "a post that other members fought hard to obtain",
+    "a mock-serious exaggeration of a trivial duty",
+    "a dangerous role that the narrator greatly feared"
+   ],
+   "correct_letter": "C",
+   "explanation": "서술자는 혼자서 회의를 조직하며 만장일치로 의장에 뽑혔고, 깊은 침묵 속에 자리에 앉았다고 과장된 격식으로 말한다. 서기를 맡을 사람이 없어 '마지못해' 그 자리까지 맡았다는 설명도 같은 희극적 어조다. 따라서 'arduous'는 사소한 일을 일부러 거창하게 부풀린 표현이므로 C가 정답이다. 다른 지원자가 없으므로 B는 틀리고, A와 D는 반어를 문자 그대로 읽은 것이다."
+  },
+  {
+   "candidateId": "lit40-easy-04-082",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "easy",
+   "passage": "The thought became intolerable to him as he pondered seriously, always with his head between his hands. He began once more to pace up and down the room heavily, but hastily--with a heavy foot, but not the deliberate quietness of legitimate thought. Such reflections as these tire a man and hurry him; there is no peace in them. Passing the door of the turret-room, he looked in, and a sudden gust of anger rose. A stool was standing in the middle of the room, a book lying open on the floor.",
+   "question": "Which choice best describes the shift in tone in the text?",
+   "options": [
+    "From calm satisfaction to gentle amusement",
+    "From cheerful planning to quiet regret",
+    "From restless brooding to sudden anger",
+    "From fierce anger to calm acceptance"
+   ],
+   "correct_letter": "C",
+   "explanation": "앞부분에서 인물은 머리를 감싸 쥐고 방을 서성이며 평화 없는 생각에 시달린다. 그러다 탑방 문을 지나며 갑작스러운 분노가 치솟는다고 서술된다. 따라서 불안한 고민에서 갑작스러운 분노로 바뀌는 C가 정답이다. A, B는 처음의 어두운 분위기와 맞지 않고, D는 변화 방향이 반대이다."
+  },
+  {
+   "candidateId": "lit40-easy-04-083",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "easy",
+   "passage": "Had the simple, manly patience with which he had paid the penalty reversed the result in character, in the subtle workings by which good may triumph over evil? Had Bob become less and she more worldly-minded since they parted? Had his nature been softened, mellowed, purified in his ceaseless toil for his sick wife and helpless children, while she in her comparative ease, her leisure for her bible and her kirk, had lost sight of magnanimity and mercy and learnt only vindictiveness and malice? And if so, had she not been doubly defrauded? Was Bob to cheat her not only of earthly, but of heavenly happiness?",
+   "question": "Which choice best describes the shift in tone in the text?",
+   "options": [
+    "From bitter anger to forgiving calm",
+    "From joyful hope to quiet sorrow",
+    "From amused teasing to deep fear",
+    "From searching doubt to bitter grievance"
+   ],
+   "correct_letter": "D",
+   "explanation": "지문은 처음에 Bob과 그녀 중 누가 변했는지 묻는 성찰적 의문문으로 시작한다. 뒤로 갈수록 그녀가 이중으로 속았다거나 Bob이 천상의 행복까지 빼앗는다는 원망 섞인 질문으로 바뀐다. 따라서 탐색적 의심에서 쓰라린 불만으로 이동하는 D가 정답이다. A는 방향이 반대이고, B와 C의 기쁨·장난은 지문에 없다."
+  },
+  {
+   "candidateId": "lit40-easy-04-084",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "text_structure",
+   "requestedDifficulty": "easy",
+   "passage": "The look of straightforward gratitude and trust on his face as he exchanged looks with her was balm to her heart.\n\n“And now,” he said, “I can’t thank you. I can only pray that--that your advice has come--in time.”\n\nThe look of gravity on his face showed Rhoda, who shivered as she glanced at him, that he appreciated the extent of the danger to which his easy-going temper had brought him and his wife.\n\nRhoda dared not say any more; she was in terror now lest he should proceed to question her about the picture and its restoration.",
+   "question": "Which choice best describes the overall structure of the text?",
+   "options": [
+    "It shows a man's grateful response and then turns to a woman's hidden fear",
+    "It describes a picture's restoration and then a couple's later quarrel",
+    "It presents a woman's advice and then the man's firm refusal of it",
+    "It recounts a danger in detail and then explains its happy ending"
+   ],
+   "correct_letter": "A",
+   "explanation": "지문은 먼저 남자가 감사와 신뢰의 표정으로 Rhoda에게 고마움을 전하는 장면을 보여 준다. 마지막 부분에서는 Rhoda가 그림과 복원에 대해 질문받을까 두려워한다는 내면으로 초점이 이동한다. 따라서 A가 정답이다. B의 복원 과정·다툼, C의 거절, D의 행복한 결말은 지문에 나타나지 않는다."
+  },
+  {
+   "candidateId": "lit40-easy-04-085",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "text_structure",
+   "requestedDifficulty": "easy",
+   "passage": "While, from its yellow, scintillating eyes, it emitted a glance of such malignant ferocity as, had it been more fully grown, might have alarmed a braver man than he.\n\n'Oh, how cruel to kick that poor little half-drowned thing!' Bella exclaimed reproachfully; 'it never meant to hurt you, only it was frightened. Poor little thing!' she said again, and, even as she spoke, she knelt down on the deck and stroked the wet, striped ball that lay there. And it seemed as if her gentleness had some power to soothe whatever ferocious instincts--still dormant and undeveloped at present--were smouldering within it. For, instead of now using its paws as weapons with which to strike out and attack anything near it, it played with her as a kitten plays with a ball, tapping at her hand and trying to catch it, and pushing and kicking against her with its hind legs.",
+   "question": "Which choice best describes the overall structure of the text?",
+   "options": [
+    "It shows a woman's fear of an animal and then her escape from it",
+    "It describes a creature's fierce look and then how kindness calms it",
+    "It praises a man's bravery and then describes his reward from Bella",
+    "It shows a kitten at play and then its sudden turn toward danger"
+   ],
+   "correct_letter": "B",
+   "explanation": "지문은 먼저 작은 동물이 사나운 눈빛을 내뿜는 모습을 묘사한다. 이어 Bella가 꾸짖으며 동물을 쓰다듬자 그 동물이 공격 대신 새끼 고양이처럼 장난친다. 따라서 사나운 모습에서 친절로 진정되는 과정을 담은 B가 정답이다. A는 Bella가 두려워하지 않으므로 틀리고, C와 D는 순서와 내용이 지문과 다르다."
+  },
+  {
+   "candidateId": "lit40-easy-04-088",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "easy",
+   "passage": "If the Miss Mackinnons had advertised for the owner of that basket they would have been clever if they had found her. Now, we are all right, thank you--at least, we are fast getting right. I open the door, for of course I am the youngest, and the stairs try me least, and I take in all the parcels. If there is anything very suspicious, even for my extensive requirements, I carry it to my room, and Miss Janet is too much of a lady to meddle with what I do there.",
+   "question": "Which choice best describes the narrator's attitude toward her role in the household?",
+   "options": [
+    "Bitter resentment toward Miss Janet",
+    "Fearful worry about being found out",
+    "Sad longing for an easier past",
+    "Good-humored confidence in her duties"
+   ],
+   "correct_letter": "D",
+   "explanation": "화자는 \"we are all right, thank you\"라며 가볍게 상황을 정리하고, 가장 젊으니 문을 열고 소포를 받는다고 자연스럽게 말한다. 수상한 물건은 자기 방으로 가져가도 Miss Janet이 간섭하지 않는다고 여유 있게 덧붙인다. 따라서 유쾌하고 자신감 있는 태도인 D가 정답이다. A, B, C의 원망·두려움·그리움은 지문의 밝은 어조와 맞지 않는다."
+  },
+  {
+   "candidateId": "lit40-easy-04-089",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "easy",
+   "passage": "In all there was free play for individual ideas and development. One Bible class in particular I would mention, that conducted for many years by Mr. Wilbur, and which had more than one hundred members. In a variety of ways, by freedom of discussion in the class, by excursions, receptions, entertainments of various kinds, it bound the young people together, helped greatly to build up the church, and particularly contributed to its social life. How firmly it was established is witnessed by the fact that it has never weakened, even in the changes that have come in the membership, or the official direction of the church.",
+   "question": "Which choice best states the main purpose of the text?",
+   "options": [
+    "To praise a Bible class that united young people and lastingly helped the church",
+    "To criticize the changes in church leadership that weakened the congregation",
+    "To explain why the church lost so many of its younger members over time",
+    "To describe the early life of Mr. Wilbur before he began teaching his class"
+   ],
+   "correct_letter": "A",
+   "explanation": "지문은 Mr. Wilbur가 이끈 백 명 넘는 성경반이 토론·소풍·행사로 젊은이들을 묶었다고 설명한다. 또한 그 모임이 교회 성장과 사교 생활에 기여했고 이후 변화 속에서도 약해지지 않았다고 강조한다. 따라서 A가 정답이다. B와 C는 지문의 긍정적 평가와 반대이고, D의 개인사는 다루지 않는다."
+  },
+  {
+   "candidateId": "lit40-easy-04-090",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "easy",
+   "passage": "The agent went out, and the runaway drew one of the chairs up in front of the stove and sat down in it. He was provided for for the night, but what should he do when morning came? Should he stay there at the tank-station and look for work, or would it be better for him to start for Oxford on foot, begging his meals as he went like any other tramp? That was what he intended to do when he first made up his mind to desert the academy, and he could not see that there was any other course open to him now. While he was thinking about it, he fell asleep. He did not know when the lightning express and the fast freight went through, but he heard the whistle of the morning train, and hurried to the door to see the accommodation approaching.",
+   "question": "As used in the text, the phrase “like any other tramp” most nearly suggests that the runaway expects to",
+   "options": [
+    "live as a poor wanderer who depends on strangers",
+    "travel quickly and comfortably by the morning train",
+    "work steadily at the tank-station for good wages",
+    "return to the academy and apologize for leaving"
+   ],
+   "correct_letter": "A",
+   "explanation": "지문에서 소년은 Oxford까지 걸어가며 끼니를 구걸할지 고민한다. \"like any other tramp\"는 그가 집 없는 떠돌이처럼 남의 도움에 기대어 살게 될 처지를 나타낸다. 따라서 A가 정답이다. B는 걸어간다는 계획과 어긋나고, C와 D는 그가 고려하거나 원하는 것과 다르다."
+  },
+  {
+   "candidateId": "lit40-easy-04-091",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "easy",
+   "passage": "There was a lapse of some kind that she could neither account for nor describe even to herself. She tried to put it into seconds and minutes, and then realised that it was not a matter to be reckoned as time. Yet there had been a distinct, unmistakable gap in her existence. Something had stopped--she knew not for how long--and then she had found herself breathing, thinking once more. In spite of the conviction that she had passed through a period of utter oblivion, she could account for every second of time with an absolute clearness of memory.\n\nThere was not an instant, nor a sensation, nor an impulse that was not fully recorded in her alert brain.",
+   "question": "As used in the text, the phrase “a distinct, unmistakable gap in her existence” most nearly suggests",
+   "options": [
+    "a long journey she once took far away from home",
+    "a moment when her awareness seemed to stop",
+    "a stretch of time she could measure exactly",
+    "an empty space left in the room around her"
+   ],
+   "correct_letter": "B",
+   "explanation": "지문은 그녀가 설명할 수 없는 공백을 겪었다고 말하며, 무언가가 멈췄다가 다시 숨 쉬고 생각하게 되었다고 서술한다. 따라서 그 구절은 의식이 잠시 끊긴 순간을 뜻하므로 B가 정답이다. C는 그것을 초와 분으로 셀 수 없었다는 내용과 어긋난다. A와 D는 비유를 실제 여행이나 물리적 공간으로 잘못 해석한 것이다."
+  },
+  {
+   "candidateId": "lit40-easy-04-094",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "easy",
+   "passage": "People who have nothing to do get rid of a great deal of time in trying to make impressions and in speculating as to what impressions they have made. Jane--hastening toward Martha's to get out of the sun which could not but injure a complexion so delicately fine as hers--gave herself up to this form of occupation. What did he think of her? Did he really have as little sense of her physical charm as he seemed? No woman could hope to be attractive to every man. Still--this man surely must be at least not altogether insensible.",
+   "question": "Which choice best describes the shift in tone in the text?",
+   "options": [
+    "From detached irony to anxious, hopeful self-questioning",
+    "From joyful excitement to sudden and open anger",
+    "From quiet grief to a calm and settled acceptance",
+    "From fear of the sun to relief at reaching shade"
+   ],
+   "correct_letter": "A",
+   "explanation": "지문은 할 일 없는 사람들이 인상을 남기는 일로 시간을 보낸다는 서술자의 냉소적 논평으로 시작한다. 이후 Jane이 그가 자신을 어떻게 생각했는지 연달아 묻고, 그래도 완전히 무감각하지는 않을 것이라 기대한다. 따라서 거리를 둔 아이러니에서 불안하지만 희망 섞인 자문으로 바뀌는 A가 정답이다. B, C는 지문에 없는 감정이고, D는 햇볕이라는 세부를 잘못 확대했다."
+  },
+  {
+   "candidateId": "lit40-easy-04-095",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "text_structure",
+   "requestedDifficulty": "easy",
+   "passage": "The wretched merchant, overcome by the terrors with which his soul had been appalled, and reduced to the last extremity of impotence by misery and disease, gave up his wearied spirit on the floor. There was no other creature in existence, to whom Bochari dared to intrust the secret of his infernal design. He had not the time to accomplish it himself, for the sounds of shoutings were already echoing through the air. To execute the work partially, would only expose him to discovery, and to certain revenge. There were upwards of five hundred vases on the tables.",
+   "question": "Which choice best describes the overall structure of the text?",
+   "options": [
+    "It describes a festive gathering and then a merchant's sudden illness",
+    "It reports one man's death and then turns to another man's dilemma",
+    "It explains how a plan succeeded and then how it was discovered",
+    "It lists the vases on the tables and then traces their long history"
+   ],
+   "correct_letter": "B",
+   "explanation": "지문은 먼저 비참한 상인이 바닥에서 숨을 거두는 장면을 보고한다. 이어 Bochari가 비밀 계획을 맡길 사람도, 직접 해낼 시간도 없는 곤경으로 초점이 옮겨 간다. 따라서 B가 정답이다. A의 축제, C의 성공과 발각, D의 꽃병 역사는 지문에 나타나지 않는다."
+  }
+ ],
+ "instructions": "당신은 문항 감사관이다. 표시된 정답과 해설을 받아, 정답이 맞는지·해설이 일관되고 사실에 맞는지 점검한다(고치지 않고 판정만).\n청크 rev-explanation_audit-068 — 19문항.\n출력: Write 도구로 정확히 이 경로에 JSON 한 파일을 쓴다 → /Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-explanation_audit-068.result.json\n출력 JSON 스키마(예시 구조): {\"chunkId\":\"청크 ID\",\"model\":\"sonnet\",\"items\":[{\"candidateId\":\"id\",\"answer_correct\":\"표시된 정답이 정말 정답이면 true\",\"explanation_consistent\":\"해설이 정답·오답 판단과 일치하고 글자 참조가 맞으면 true\",\"explanation_factual\":\"해설에 사실 오류가 없으면 true\",\"issues\":\"한 줄 메모\"}]}\n허용 값: picked_letter ∈ {A,B,C,D}, 불리언 필드는 true/false, est_difficulty ∈ {easy,medium,hard}. candidateId 를 바꾸지 않고 모든 항목에 답한다.\n금지: 결과 파일 외의 파일 생성·수정, 다른 명령 실행, 문항 수정·재작성. 끝나면 'done <항목 수>' 한 줄만 답한다.\n\n## 문항\n### lit40-easy-04-063 — skill text_structure_purpose · 유형 tone_shift\n[지문]\nRedcastle is suddenly awakened to the consciousness of loveliness that scarcely moved it to admiration two years ago, although the girl’s beauty had then the bloom and freshness of unchastened youth. Perhaps she is really lovelier now. Sorrow and passion have passed there, and left the exalted look of an awakened soul, where there was before only girlish innocence, curious and wondering about a world of which it knew nothing. She has eaten of the tree of knowledge of good and evil. The mystery of life has been revealed to her. Be sure that Eve’s beauty had a deeper meaning after she came out by the fatal gate where the angel with the flaming sword kept watch and ward.\n\n[질문] Which choice best describes how the tone shifts in the text?\nA) From cheerful praise of the girl to harsh criticism of her sorrow\nB) From admiring description of the girl to reflection on how experience deepens beauty\nC) From gloomy warning about Redcastle to lighthearted mockery of him\nD) From confusion about the girl's looks to certainty that her beauty has faded\n\n[표시된 정답] B\n[해설]\n지문은 Redcastle이 소녀의 아름다움을 새삼 깨닫는 묘사로 시작한다. 중간부터 슬픔과 열정이 '깨어난 영혼'의 표정을 남겼다고 말하고, 선악과와 이브의 비유를 들어 경험이 아름다움에 깊은 의미를 더한다고 성찰한다. 따라서 B가 정답이다. A의 비판, C의 조롱은 없고, D는 그녀가 오히려 더 아름다워졌다는 진술과 반대된다.\n### lit40-easy-04-068 — skill central_ideas_details · 유형 narrator_attitude\n[지문]\nI tried to think that this indifference and sunny idleness were perhaps the natural reaction of that larger life of emotion and activity from which he had just emerged. I reflected a great deal on that life, and, though I lamented the fact that he had drawn his sword on the wrong side, there was, down deep in my heart, an involuntary sympathetic throb for the valor that had not availed. I suppose the inexplicable ties of kinship had something to do with all this.\n\nWashington Flagg had now been with us five weeks. He usually lingered awhile after dinner; sometimes spent the entire evening with the family, or, rather, with me, for Mrs. Wesley preferred the sitting-room to my den when I had company.\n\n[질문] Which choice best describes the narrator's attitude toward Washington Flagg?\nA) Open contempt for his idleness and long visits\nB) Fearful suspicion of his reasons for staying\nC) Complete indifference to his past and company\nD) Sympathy mixed with mild disapproval of his past\n\n[표시된 정답] D\n[해설]\n서술자는 Flagg의 무관심과 게으름을 큰 감정적 삶 뒤의 자연스러운 반동이라고 이해하려 한다. 그가 '잘못된 편'에서 칼을 뽑은 것을 안타까워하면서도, 헛되이 끝난 용기에 마음속 깊이 공감한다고 밝힌다. 따라서 공감과 약간의 불찬성이 섞인 D가 정답이다. A의 경멸, B의 의심, C의 무관심은 서술자의 이해하려는 태도와 맞지 않는다.\n### lit40-easy-04-069 — skill central_ideas_details · 유형 narrator_attitude\n[지문]\nFar less than half-way to the hamlet, very little beyond the bottom of the hill, we must come forth into the moonlight. Nor was this all, for the sound of several footsteps running came already to our ears, and as we looked back in their direction, a light tossing to and fro, and still rapidly advancing, showed that one of the new-comers carried a lantern.\n\n\"My dear,\" said my mother suddenly, \"take the money and run on. I am going to faint.\"\n\nThis was certainly the end for both of us, I thought. How I cursed the cowardice of the neighbours; how I blamed my poor mother for her honesty and her greed, for her past foolhardiness and present weakness!\n\n[질문] Which choice best describes the narrator's attitude toward his mother?\nA) Exasperated blame softened by pity\nB) Calm admiration for her courage\nC) Cheerful confidence in her plan\nD) Cold indifference to her fate\n\n[표시된 정답] A\n[해설]\n추격자들이 다가오는 순간 어머니가 기절하겠다고 말하자 서술자는 이제 끝이라고 생각한다. 그는 어머니의 정직함과 욕심, 무모함과 나약함을 탓하지만, 동시에 'my poor mother'라고 불러 연민을 드러낸다. 따라서 연민이 섞인 짜증 어린 비난이라는 A가 정답이다. B와 C는 그의 절망과 맞지 않고, D는 감정이 강하게 드러난 문장과 모순된다.\n### lit40-easy-04-070 — skill central_ideas_details · 유형 main_idea_or_purpose\n[지문]\nI was also present for one day during the races. The course is two miles in length, and in excellent condition, being railed off the whole distance. I saw one race, which was admirably contested; but the ground was not well attended, and the others did not go off with spirit. I was told, however, that there was a great prospect of improvement, as the Canadians were beginning to be fond of the sport. The excitement would have been much greater if it had lasted but two days instead of four; and a public ball afterwards would not have been amiss.\n\n[질문] Which choice best states the main purpose of the text?\nA) To describe how the Canadians invented a new kind of racing\nB) To give a mixed view of the races and suggest improvements\nC) To complain that the racecourse was in very poor condition\nD) To recount the narrator's own victory in a close race\n\n[표시된 정답] B\n[해설]\n서술자는 경주로가 훌륭하고 한 경주는 잘 겨루어졌다고 칭찬하지만, 관중이 적고 다른 경주는 활기가 없었다고 지적한다. 이어 기간을 이틀로 줄이고 무도회를 열면 좋겠다고 제안한다. 따라서 장단점을 함께 평가하고 개선점을 제시한다는 B가 정답이다. C는 '훌륭한 상태'라는 묘사와 반대되며, A와 D는 근거가 없다.\n### lit40-easy-04-072 — skill words_in_context · 유형 figurative_language\n[지문]\nJohn Milton had rowed back without lifting his eyes to Mrs. Ashwood's receding figure. He believed that he was right in declining her invitation, although he had a miserable feeling that it entailed seeing her for the last time. With all that he believed was his previous experience of the affections, he was still so untutored as to be confused as to his reasons for declining, or his right to have been shocked and disappointed at her manner. It seemed to him sufficiently plain that he had offended the most perfect woman he had ever known without knowing more. The feeling he had for her was none the less powerful because, in his great simplicity, it was vague and unformulated.\n\n[질문] As used in the text, the phrase “so untutored” most nearly suggests that John Milton was\nA) poorly educated in his school subjects\nB) unwilling to learn from other people\nC) inexperienced in understanding his own feelings\nD) too proud to admit he had made an error\n\n[표시된 정답] C\n[해설]\n'untutored'는 원래 교육을 받지 못했다는 뜻이지만, 여기서는 애정 문제에 대해 쓰였다. 그는 거절한 이유나 실망할 권리에 대해 혼란스러워하고, 그녀에 대한 감정도 막연하고 정리되지 않았다고 서술된다. 따라서 자기 감정을 이해하는 데 미숙하다는 C가 정답이다. A는 문자적 의미에 머물고, B와 D의 고집이나 자존심은 지문에 근거가 없다.\n### lit40-easy-04-073 — skill words_in_context · 유형 figurative_language\n[지문]\nIf I might see a smile on her face, if the look of yielding would but come back there and remain! Surely her scruples would pass when I should bring her father to her. What imaginary barrier could stand before the combined forces of love and gratitude? The rescue of her father must not be longer deferred. I must form my plan immediately. Yet I continued to waste time thinking of the future, of the day when she should acknowledge herself mine. I took off my hat and removed from it the glove that she had given me. It was like a part of her; it was fashioned by use to the very form of her hand.\n\n[질문] As used in the text, the phrase “It was like a part of her” most nearly suggests that the glove was\nA) a worn object the narrator planned to discard\nB) a gift she had demanded that he return\nC) a disguise that he used to hide his identity\nD) a treasured token that seemed to hold her presence\n\n[표시된 정답] D\n[해설]\n서술자는 그녀가 준 장갑을 모자에서 꺼내며 그녀의 일부 같다고 말한다. 바로 뒤에서 장갑이 사용으로 그녀 손의 모양을 그대로 띠게 되었다고 설명해 그녀의 존재가 담긴 물건임을 강조한다. 따라서 D가 정답이다. 그는 미래를 꿈꾸며 장갑을 소중히 여기므로 A의 버림, B의 반환 요구, C의 변장은 맞지 않는다.\n### lit40-easy-04-074 — skill words_in_context · 유형 figurative_language\n[지문]\n\"The city boasts an old and learned college,\nWhere you'd think the leading industry was Greek;\nEven there the favoured instruments of knowledge\nAre a driver, and a putter, and a cleek.\n\n\"All the natives and the residents are patrons\nOf this royal, ancient, irritating game;\nAll the old men, all the young men, maids and matrons,\nWith this passion burn in hard and gem-like flame.\n\n\"In the morning, as the light grows strong and stronger,\nYou may see the players going out in shoals;\nAnd when night forbids their playing any longer,\nThey will tell you how they did the different holes.\n\n[질문] As used in the text, the phrase “With this passion burn in hard and gem-like flame” most nearly suggests that the townspeople\nA) feel an intense and lasting enthusiasm for golf\nB) are angry about the game's irritating rules\nC) suffer from the summer heat on the course\nD) pretend to enjoy golf to please their neighbors\n\n[표시된 정답] A\n[해설]\n시는 대학 도시에서도 지식의 도구가 골프채일 만큼 모두가 골프를 즐긴다고 말한다. 노인과 젊은이, 처녀와 부인 모두가 이 열정으로 불탄다는 비유 뒤에 아침부터 밤까지 경기하고 홀 이야기를 늘어놓는 모습이 이어진다. 따라서 강렬하고 지속적인 열정을 뜻하는 A가 정답이다. 'irritating'은 장난스러운 표현일 뿐 분노가 아니므로 B는 틀리고, C와 D도 근거가 없다.\n### lit40-easy-04-075 — skill words_in_context · 유형 figurative_language\n[지문]\nOf course we all know from the books that their intention is to find a suitable spot in which to bury this ball, and such being the case, with what astonishing stupidity do they urge on that labor! Here certainly is just the right spot for you, Mrs. Tumble-bug! Stop rolling and dig! But no, she will not listen to reason. She mounts the top of the ball, and, creeping far out upon it, pulls it over forward with her back feet, while Mr. Tumble-bug helps her in a most singular fashion. Does he stand up on his hind legs on the opposite side, and push with his powerful front feet? Oh no; he stands on his head, and pushes with his hind legs. As he pushes, and as the ball rolls merrily on, Mrs. Tumble-bug is continually rolled around with it, and must needs climb backward at a lively rate to keep her place.\n\n[질문] As used in the text, the phrase “she will not listen to reason” most nearly suggests that Mrs. Tumble-bug\nA) cannot hear the observer over the noise of rolling\nB) stubbornly ignores what seems sensible to the observer\nC) is waiting for Mr. Tumble-bug to give her advice\nD) has already found a good spot in which to dig\n\n[표시된 정답] B\n[해설]\n서술자는 공을 묻을 적당한 자리를 발견하고 멈춰서 파라고 쇠똥구리에게 말을 건넨다. 그러나 쇠똥구리는 계속 공을 굴리므로, 이성에 귀 기울이지 않는다는 표현은 관찰자가 보기에 합리적인 선택을 고집스럽게 무시한다는 뜻의 의인화다. 따라서 B가 정답이다. A는 문자 그대로의 청각으로 오해했고, C와 D는 지문 내용과 맞지 않는다.\n### lit40-easy-04-076 — skill words_in_context · 유형 figurative_language\n[지문]\nDetermined to carry to a successful completion every project we take in hand, we went to work to organize the meeting. A chairman is essential to any meeting. They are necessary to keep the meeting in order, and give the assemblage proper dignity. We were unanimously chosen chairman and took our seat amid the most profound silence. But a difficulty, wholly unexpected now presented itself. A secretary to keep the record of the proceedings is equally indispensable. There was no one to make secretary. Not to be thwarted by minor obstacles, we finally with much reluctance, consented to assume this arduous position also.\n\n[질문] As used in the text, the phrase “this arduous position” most nearly suggests that the role of secretary was\nA) a truly exhausting job that required long training\nB) a post that other members fought hard to obtain\nC) a mock-serious exaggeration of a trivial duty\nD) a dangerous role that the narrator greatly feared\n\n[표시된 정답] C\n[해설]\n서술자는 혼자서 회의를 조직하며 만장일치로 의장에 뽑혔고, 깊은 침묵 속에 자리에 앉았다고 과장된 격식으로 말한다. 서기를 맡을 사람이 없어 '마지못해' 그 자리까지 맡았다는 설명도 같은 희극적 어조다. 따라서 'arduous'는 사소한 일을 일부러 거창하게 부풀린 표현이므로 C가 정답이다. 다른 지원자가 없으므로 B는 틀리고, A와 D는 반어를 문자 그대로 읽은 것이다.\n### lit40-easy-04-082 — skill text_structure_purpose · 유형 tone_shift\n[지문]\nThe thought became intolerable to him as he pondered seriously, always with his head between his hands. He began once more to pace up and down the room heavily, but hastily--with a heavy foot, but not the deliberate quietness of legitimate thought. Such reflections as these tire a man and hurry him; there is no peace in them. Passing the door of the turret-room, he looked in, and a sudden gust of anger rose. A stool was standing in the middle of the room, a book lying open on the floor.\n\n[질문] Which choice best describes the shift in tone in the text?\nA) From calm satisfaction to gentle amusement\nB) From cheerful planning to quiet regret\nC) From restless brooding to sudden anger\nD) From fierce anger to calm acceptance\n\n[표시된 정답] C\n[해설]\n앞부분에서 인물은 머리를 감싸 쥐고 방을 서성이며 평화 없는 생각에 시달린다. 그러다 탑방 문을 지나며 갑작스러운 분노가 치솟는다고 서술된다. 따라서 불안한 고민에서 갑작스러운 분노로 바뀌는 C가 정답이다. A, B는 처음의 어두운 분위기와 맞지 않고, D는 변화 방향이 반대이다.\n### lit40-easy-04-083 — skill text_structure_purpose · 유형 tone_shift\n[지문]\nHad the simple, manly patience with which he had paid the penalty reversed the result in character, in the subtle workings by which good may triumph over evil? Had Bob become less and she more worldly-minded since they parted? Had his nature been softened, mellowed, purified in his ceaseless toil for his sick wife and helpless children, while she in her comparative ease, her leisure for her bible and her kirk, had lost sight of magnanimity and mercy and learnt only vindictiveness and malice? And if so, had she not been doubly defrauded? Was Bob to cheat her not only of earthly, but of heavenly happiness?\n\n[질문] Which choice best describes the shift in tone in the text?\nA) From bitter anger to forgiving calm\nB) From joyful hope to quiet sorrow\nC) From amused teasing to deep fear\nD) From searching doubt to bitter grievance\n\n[표시된 정답] D\n[해설]\n지문은 처음에 Bob과 그녀 중 누가 변했는지 묻는 성찰적 의문문으로 시작한다. 뒤로 갈수록 그녀가 이중으로 속았다거나 Bob이 천상의 행복까지 빼앗는다는 원망 섞인 질문으로 바뀐다. 따라서 탐색적 의심에서 쓰라린 불만으로 이동하는 D가 정답이다. A는 방향이 반대이고, B와 C의 기쁨·장난은 지문에 없다.\n### lit40-easy-04-084 — skill text_structure_purpose · 유형 text_structure\n[지문]\nThe look of straightforward gratitude and trust on his face as he exchanged looks with her was balm to her heart.\n\n“And now,” he said, “I can’t thank you. I can only pray that--that your advice has come--in time.”\n\nThe look of gravity on his face showed Rhoda, who shivered as she glanced at him, that he appreciated the extent of the danger to which his easy-going temper had brought him and his wife.\n\nRhoda dared not say any more; she was in terror now lest he should proceed to question her about the picture and its restoration.\n\n[질문] Which choice best describes the overall structure of the text?\nA) It shows a man's grateful response and then turns to a woman's hidden fear\nB) It describes a picture's restoration and then a couple's later quarrel\nC) It presents a woman's advice and then the man's firm refusal of it\nD) It recounts a danger in detail and then explains its happy ending\n\n[표시된 정답] A\n[해설]\n지문은 먼저 남자가 감사와 신뢰의 표정으로 Rhoda에게 고마움을 전하는 장면을 보여 준다. 마지막 부분에서는 Rhoda가 그림과 복원에 대해 질문받을까 두려워한다는 내면으로 초점이 이동한다. 따라서 A가 정답이다. B의 복원 과정·다툼, C의 거절, D의 행복한 결말은 지문에 나타나지 않는다.\n### lit40-easy-04-085 — skill text_structure_purpose · 유형 text_structure\n[지문]\nWhile, from its yellow, scintillating eyes, it emitted a glance of such malignant ferocity as, had it been more fully grown, might have alarmed a braver man than he.\n\n'Oh, how cruel to kick that poor little half-drowned thing!' Bella exclaimed reproachfully; 'it never meant to hurt you, only it was frightened. Poor little thing!' she said again, and, even as she spoke, she knelt down on the deck and stroked the wet, striped ball that lay there. And it seemed as if her gentleness had some power to soothe whatever ferocious instincts--still dormant and undeveloped at present--were smouldering within it. For, instead of now using its paws as weapons with which to strike out and attack anything near it, it played with her as a kitten plays with a ball, tapping at her hand and trying to catch it, and pushing and kicking against her with its hind legs.\n\n[질문] Which choice best describes the overall structure of the text?\nA) It shows a woman's fear of an animal and then her escape from it\nB) It describes a creature's fierce look and then how kindness calms it\nC) It praises a man's bravery and then describes his reward from Bella\nD) It shows a kitten at play and then its sudden turn toward danger\n\n[표시된 정답] B\n[해설]\n지문은 먼저 작은 동물이 사나운 눈빛을 내뿜는 모습을 묘사한다. 이어 Bella가 꾸짖으며 동물을 쓰다듬자 그 동물이 공격 대신 새끼 고양이처럼 장난친다. 따라서 사나운 모습에서 친절로 진정되는 과정을 담은 B가 정답이다. A는 Bella가 두려워하지 않으므로 틀리고, C와 D는 순서와 내용이 지문과 다르다.\n### lit40-easy-04-088 — skill central_ideas_details · 유형 narrator_attitude\n[지문]\nIf the Miss Mackinnons had advertised for the owner of that basket they would have been clever if they had found her. Now, we are all right, thank you--at least, we are fast getting right. I open the door, for of course I am the youngest, and the stairs try me least, and I take in all the parcels. If there is anything very suspicious, even for my extensive requirements, I carry it to my room, and Miss Janet is too much of a lady to meddle with what I do there.\n\n[질문] Which choice best describes the narrator's attitude toward her role in the household?\nA) Bitter resentment toward Miss Janet\nB) Fearful worry about being found out\nC) Sad longing for an easier past\nD) Good-humored confidence in her duties\n\n[표시된 정답] D\n[해설]\n화자는 \"we are all right, thank you\"라며 가볍게 상황을 정리하고, 가장 젊으니 문을 열고 소포를 받는다고 자연스럽게 말한다. 수상한 물건은 자기 방으로 가져가도 Miss Janet이 간섭하지 않는다고 여유 있게 덧붙인다. 따라서 유쾌하고 자신감 있는 태도인 D가 정답이다. A, B, C의 원망·두려움·그리움은 지문의 밝은 어조와 맞지 않는다.\n### lit40-easy-04-089 — skill central_ideas_details · 유형 main_idea_or_purpose\n[지문]\nIn all there was free play for individual ideas and development. One Bible class in particular I would mention, that conducted for many years by Mr. Wilbur, and which had more than one hundred members. In a variety of ways, by freedom of discussion in the class, by excursions, receptions, entertainments of various kinds, it bound the young people together, helped greatly to build up the church, and particularly contributed to its social life. How firmly it was established is witnessed by the fact that it has never weakened, even in the changes that have come in the membership, or the official direction of the church.\n\n[질문] Which choice best states the main purpose of the text?\nA) To praise a Bible class that united young people and lastingly helped the church\nB) To criticize the changes in church leadership that weakened the congregation\nC) To explain why the church lost so many of its younger members over time\nD) To describe the early life of Mr. Wilbur before he began teaching his class\n\n[표시된 정답] A\n[해설]\n지문은 Mr. Wilbur가 이끈 백 명 넘는 성경반이 토론·소풍·행사로 젊은이들을 묶었다고 설명한다. 또한 그 모임이 교회 성장과 사교 생활에 기여했고 이후 변화 속에서도 약해지지 않았다고 강조한다. 따라서 A가 정답이다. B와 C는 지문의 긍정적 평가와 반대이고, D의 개인사는 다루지 않는다.\n### lit40-easy-04-090 — skill words_in_context · 유형 figurative_language\n[지문]\nThe agent went out, and the runaway drew one of the chairs up in front of the stove and sat down in it. He was provided for for the night, but what should he do when morning came? Should he stay there at the tank-station and look for work, or would it be better for him to start for Oxford on foot, begging his meals as he went like any other tramp? That was what he intended to do when he first made up his mind to desert the academy, and he could not see that there was any other course open to him now. While he was thinking about it, he fell asleep. He did not know when the lightning express and the fast freight went through, but he heard the whistle of the morning train, and hurried to the door to see the accommodation approaching.\n\n[질문] As used in the text, the phrase “like any other tramp” most nearly suggests that the runaway expects to\nA) live as a poor wanderer who depends on strangers\nB) travel quickly and comfortably by the morning train\nC) work steadily at the tank-station for good wages\nD) return to the academy and apologize for leaving\n\n[표시된 정답] A\n[해설]\n지문에서 소년은 Oxford까지 걸어가며 끼니를 구걸할지 고민한다. \"like any other tramp\"는 그가 집 없는 떠돌이처럼 남의 도움에 기대어 살게 될 처지를 나타낸다. 따라서 A가 정답이다. B는 걸어간다는 계획과 어긋나고, C와 D는 그가 고려하거나 원하는 것과 다르다.\n### lit40-easy-04-091 — skill words_in_context · 유형 figurative_language\n[지문]\nThere was a lapse of some kind that she could neither account for nor describe even to herself. She tried to put it into seconds and minutes, and then realised that it was not a matter to be reckoned as time. Yet there had been a distinct, unmistakable gap in her existence. Something had stopped--she knew not for how long--and then she had found herself breathing, thinking once more. In spite of the conviction that she had passed through a period of utter oblivion, she could account for every second of time with an absolute clearness of memory.\n\nThere was not an instant, nor a sensation, nor an impulse that was not fully recorded in her alert brain.\n\n[질문] As used in the text, the phrase “a distinct, unmistakable gap in her existence” most nearly suggests\nA) a long journey she once took far away from home\nB) a moment when her awareness seemed to stop\nC) a stretch of time she could measure exactly\nD) an empty space left in the room around her\n\n[표시된 정답] B\n[해설]\n지문은 그녀가 설명할 수 없는 공백을 겪었다고 말하며, 무언가가 멈췄다가 다시 숨 쉬고 생각하게 되었다고 서술한다. 따라서 그 구절은 의식이 잠시 끊긴 순간을 뜻하므로 B가 정답이다. C는 그것을 초와 분으로 셀 수 없었다는 내용과 어긋난다. A와 D는 비유를 실제 여행이나 물리적 공간으로 잘못 해석한 것이다.\n### lit40-easy-04-094 — skill text_structure_purpose · 유형 tone_shift\n[지문]\nPeople who have nothing to do get rid of a great deal of time in trying to make impressions and in speculating as to what impressions they have made. Jane--hastening toward Martha's to get out of the sun which could not but injure a complexion so delicately fine as hers--gave herself up to this form of occupation. What did he think of her? Did he really have as little sense of her physical charm as he seemed? No woman could hope to be attractive to every man. Still--this man surely must be at least not altogether insensible.\n\n[질문] Which choice best describes the shift in tone in the text?\nA) From detached irony to anxious, hopeful self-questioning\nB) From joyful excitement to sudden and open anger\nC) From quiet grief to a calm and settled acceptance\nD) From fear of the sun to relief at reaching shade\n\n[표시된 정답] A\n[해설]\n지문은 할 일 없는 사람들이 인상을 남기는 일로 시간을 보낸다는 서술자의 냉소적 논평으로 시작한다. 이후 Jane이 그가 자신을 어떻게 생각했는지 연달아 묻고, 그래도 완전히 무감각하지는 않을 것이라 기대한다. 따라서 거리를 둔 아이러니에서 불안하지만 희망 섞인 자문으로 바뀌는 A가 정답이다. B, C는 지문에 없는 감정이고, D는 햇볕이라는 세부를 잘못 확대했다.\n### lit40-easy-04-095 — skill text_structure_purpose · 유형 text_structure\n[지문]\nThe wretched merchant, overcome by the terrors with which his soul had been appalled, and reduced to the last extremity of impotence by misery and disease, gave up his wearied spirit on the floor. There was no other creature in existence, to whom Bochari dared to intrust the secret of his infernal design. He had not the time to accomplish it himself, for the sounds of shoutings were already echoing through the air. To execute the work partially, would only expose him to discovery, and to certain revenge. There were upwards of five hundred vases on the tables.\n\n[질문] Which choice best describes the overall structure of the text?\nA) It describes a festive gathering and then a merchant's sudden illness\nB) It reports one man's death and then turns to another man's dilemma\nC) It explains how a plan succeeded and then how it was discovered\nD) It lists the vases on the tables and then traces their long history\n\n[표시된 정답] B\n[해설]\n지문은 먼저 비참한 상인이 바닥에서 숨을 거두는 장면을 보고한다. 이어 Bochari가 비밀 계획을 맡길 사람도, 직접 해낼 시간도 없는 곤경으로 초점이 옮겨 간다. 따라서 B가 정답이다. A의 축제, C의 성공과 발각, D의 꽃병 역사는 지문에 나타나지 않는다."
+}

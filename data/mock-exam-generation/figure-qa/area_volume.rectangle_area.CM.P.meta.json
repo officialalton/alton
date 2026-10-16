@@ -1,0 +1,41 @@
+{
+ "itemId": "area_volume.rectangle_area.CM.P",
+ "generatedAt": "2026-10-07T05:02:01.005Z",
+ "codeHash": "2178e37969c9be8c49f4b23d90de8f5901021f4d66149f36d06fcfb3ea3f0ab5",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/geo-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/area_volume.rectangle_area.CM.P.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "area_volume.rectangle_area.CM.P.png",
+   "mobileFile": "area_volume.rectangle_area.CM.P.m375.png",
+   "archetypeId": "av.rectangle_area.CM.P.compose_kind",
+   "seed": 11,
+   "signature": "composite",
+   "stimulus": "A teacher shows the class the diagram below. The figure is not meant to be measured; use the labels. A picture frame is modeled in the figure shown: the shaded part is the frame, and the unshaded rectangle is the opening.",
+   "question": "Find the area of the shaded region.",
+   "options": [
+    "224",
+    "44",
+    "180",
+    "68"
+   ],
+   "correctIndex": 2,
+   "answer": "180",
+   "explanation": "(1) 그림에서 바깥 28 × 8, 안쪽 11 × 4 를 읽는다. (2) 바깥의 넓이 = 28 × 8 = 224 이다. (3) 안쪽의 넓이 = 11 × 4 = 44 이다. (4) 음영 = 224 - 44 이다. (5) 따라서 180 이다. 따라서 정답은 180이다.",
+   "structuralIssues": []
+  }
+ ]
+}

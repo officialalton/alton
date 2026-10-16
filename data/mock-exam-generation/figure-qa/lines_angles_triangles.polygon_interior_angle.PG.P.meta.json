@@ -1,0 +1,43 @@
+{
+ "itemId": "lines_angles_triangles.polygon_interior_angle.PG.P",
+ "generatedAt": "2026-10-07T05:02:00.975Z",
+ "codeHash": "6398e29db34b06ae4c4a3ea7e4a181ce43a2d53c20580fbc7c07626414388cd4",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/ext-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/geo-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/lines_angles_triangles.polygon_interior_angle.PG.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/pg-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "lines_angles_triangles.polygon_interior_angle.PG.P.png",
+   "mobileFile": "lines_angles_triangles.polygon_interior_angle.PG.P.m375.png",
+   "archetypeId": "lat.polygon_interior_angle.PG.P.compose_kind",
+   "seed": 11,
+   "signature": "polygon:regular",
+   "stimulus": "A museum builds a display case in the shape below. Look at the regular polygon in the figure. Pieces of this shape will be fitted together without gaps along one edge.",
+   "question": "How many degrees do all the interior angles of the polygon measure altogether?",
+   "options": [
+    "720",
+    "900",
+    "540",
+    "360"
+   ],
+   "correctIndex": 2,
+   "answer": "540",
+   "explanation": "(1) 그림의 다각형은 꼭짓점이 5개이므로 변이 5개이다. (2) n 각형은 3 개의 삼각형으로 나뉜다. (3) 삼각형 한 개의 내각의 합은 180° 이다. (4) 합 = (5 - 2) × 180° = 540° 이다. (5) 따라서 540 이다. 따라서 정답은 540이다.",
+   "structuralIssues": []
+  }
+ ]
+}

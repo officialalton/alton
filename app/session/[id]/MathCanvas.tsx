@@ -82,7 +82,7 @@ export default function MathCanvas({
           onClick={clearCanvas}
           className="text-[11px] font-bold px-2.5 py-1 rounded-md border border-grey-200"
         >
-          지우기
+          Clear
         </button>
       </div>
       <canvas
@@ -100,7 +100,7 @@ export default function MathCanvas({
           onClick={handleSubmit}
           className="text-[12px] font-bold px-4 py-2 rounded-lg bg-green text-white disabled:opacity-50"
         >
-          제출하기
+          Submit
         </button>
       </div>
     </div>

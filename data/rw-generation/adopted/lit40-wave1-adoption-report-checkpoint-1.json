@@ -1,0 +1,94 @@
+{
+ "runId": "lit40-wave1",
+ "generated": 900,
+ "passedGenGates": 623,
+ "awaitingReview": 0,
+ "review": {
+  "adopted": 293,
+  "rejected": 317,
+  "pending": 13,
+  "rewriteEligible": 33
+ },
+ "adopted": 293,
+ "adoptedByDifficulty": {
+  "easy": 0,
+  "medium": 220,
+  "hard": 73
+ },
+ "rejectedByReason": {
+  "review:difficulty_too_easy": 246,
+  "gen:distractor": 138,
+  "review:distractors_not_plausible": 112,
+  "review:fable_multi_defensible": 36,
+  "review:options_length_imbalance": 34,
+  "review:explanation_factual_error": 31,
+  "gen:similarity": 23,
+  "gen:render": 17,
+  "review:multi_answer_risk": 11,
+  "review:second_multi_defensible": 9,
+  "gen:passage_schema": 7,
+  "review:difficulty_too_hard": 6,
+  "review:explanation_inconsistent": 3,
+  "gen:diversity": 2,
+  "review:second_answer_mismatch": 2,
+  "review:fable_answer_mismatch": 1
+ },
+ "rewriteEligible": [
+  "lit40-hard-01-014",
+  "lit40-hard-01-056",
+  "lit40-hard-02-024",
+  "lit40-hard-02-026",
+  "lit40-hard-02-046",
+  "lit40-medium-01-080",
+  "lit40-medium-02-063",
+  "lit40-medium-02-084",
+  "lit40-medium-02-096",
+  "lit40-medium-03-087",
+  "lit40-medium-04-004",
+  "lit40-medium-04-005",
+  "lit40-medium-04-009",
+  "lit40-medium-04-010",
+  "lit40-medium-04-022",
+  "lit40-medium-04-048",
+  "lit40-medium-04-052",
+  "lit40-medium-04-063",
+  "lit40-medium-04-065",
+  "lit40-medium-04-066",
+  "lit40-medium-04-067",
+  "lit40-medium-04-069",
+  "lit40-medium-04-070",
+  "lit40-medium-04-071",
+  "lit40-medium-04-079",
+  "lit40-medium-04-080",
+  "lit40-medium-04-091",
+  "lit40-medium-04-094",
+  "lit40-medium-05-001",
+  "lit40-medium-05-054",
+  "lit40-medium-05-057",
+  "lit40-medium-05-078",
+  "lit40-medium-05-080"
+ ],
+ "cost": {
+  "session": {
+   "tasks": 52,
+   "items": 962,
+   "usd": 0,
+   "byStep": {
+    "generate": {
+     "tasks": 40,
+     "items": 800
+    },
+    "rewrite": {
+     "tasks": 12,
+     "items": 162
+    }
+   }
+  },
+  "api": {
+   "calls": 0,
+   "items": 0,
+   "usd": 0,
+   "byStep": {}
+  }
+ }
+}

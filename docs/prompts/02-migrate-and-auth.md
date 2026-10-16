@@ -1,5 +1,7 @@
 # 프롬프트 02 — 마이그레이션 + 인증 (스키마 승인 후에만 진행)
 
+> **문서 상태: 실행 금지·초기 구축 이력.** 이 문서가 전제하는 구형 스키마는 현재 승인 기준이 아니다. Gate B·C 승인 전 신규 마이그레이션을 실행하지 않는다.
+
 ## 사전 준비
 - Supabase 프로젝트를 직접 만들고 (supabase.com), 프로젝트 URL/anon key/service role key를 `.env.local`에 넣는다
 - `docs/spec/schema-draft.md`가 이미 승인된 상태여야 함

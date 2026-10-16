@@ -1,0 +1,12 @@
+# micro-assign sets=MI1,MI2 재고 단독 184 FRQ 11
+status=optimal 목적값(가상×1000 + 단원 이탈)=11.739999999999998 노드 0 가상 문항=0
+독립 검증기 위반: 0
+- MI1: 단독 60+가상 0, FRQ 3+가상 0, 단원 {"1":9,"2":13,"3":14,"4":12,"5":6,"6":6}
+    MC exam_prep 19/60
+    범주 {"1":19,"2":26,"3":15} 수치 분석 18 스킬 코드 {"3.C":6,"2.C":7,"3.A":8,"1.C":5,"2.B":6,"1.B":6,"1.A":4,"2.A":13,"1.D":4,"3.B":1}
+    FRQ mif_short_externality + mif_short_labor + mif_long_market_policy
+- MI2: 단독 60+가상 0, FRQ 3+가상 0, 단원 {"1":8,"2":13,"3":15,"4":11,"5":6,"6":7}
+    MC exam_prep 7/60
+    범주 {"1":23,"2":22,"3":15} 수치 분석 17 스킬 코드 {"1.C":6,"2.C":7,"3.C":4,"3.A":9,"2.A":10,"1.A":7,"1.B":8,"1.D":2,"2.B":5,"3.B":2}
+    FRQ mif_long_pc_firm + mif_short_trade + frq_micro_game
+보고서 기록: data/ap/stock/assembled/micro-mi1-mi2.json

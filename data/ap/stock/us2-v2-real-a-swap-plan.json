@@ -1,0 +1,66 @@
+{
+ "kind": "ap_new_version_swap_plan",
+ "set": "US2",
+ "sourceSetName": "AP U.S. History — Practice Exam 2",
+ "sourceVersionNo": 1,
+ "generatedBy": "scripts/ap-generation/ush-stage-a-plans.ts",
+ "note": "Stage A: 가공(합성) 표 자료를 실제 Census Bureau 자료로 교체. 같은 위치·같은 크기·같은 단원 순서·같은 스킬 범주·같은 시대. 순서: 배치 ush-real-a 적재 → US1 새 버전(이 계획) → US2 새 버전 → 각각 '새 버전 공개'. 두 계획은 서로 독립이다(교체해 넣는 문항이 서로 다르다).",
+ "swapCount": 2,
+ "verifierViolations": [],
+ "swaps": [
+  {
+   "section": "ap_mc",
+   "position": 39,
+   "removeKey": "ush-p3-a:ap_us_history-u719-k0",
+   "addKey": "ush-real-a:ap_us_history-real_a_imm-k0",
+   "remove": {
+    "kind": "mc_set",
+    "units": [
+     "7",
+     "7",
+     "6"
+    ],
+    "skills": [
+     "1.B",
+     "4.B",
+     "5.A"
+    ],
+    "period": 7,
+    "theme": "Red Scare and immigration restriction in the 1920s",
+    "stim": "quantitative"
+   },
+   "add": {
+    "kind": "mc_set",
+    "units": [
+     "7",
+     "7",
+     "6"
+    ],
+    "skills": [
+     "1.B",
+     "4.B",
+     "5.A"
+    ],
+    "period": 7,
+    "theme": "Immigration restriction in the 1920s",
+    "stim": "quantitative"
+   }
+  },
+  {
+   "section": "ap_saq",
+   "position": 3,
+   "removeKey": "ush-p1-b:ap_us_history-saq3_3-k0",
+   "addKey": "ush-real-a:ap_us_history-real_a_saq3_plains-k0",
+   "remove": {
+    "kind": "saq3",
+    "period": 6,
+    "template": "saq3"
+   },
+   "add": {
+    "kind": "saq3",
+    "period": 6,
+    "template": "saq3"
+   }
+  }
+ ]
+}

@@ -1,0 +1,138 @@
+{
+ "kind": "ap_new_version_swap_plan",
+ "set": "US1",
+ "sourceSetName": "AP U.S. History — Practice Exam 1",
+ "sourceVersionNo": 3,
+ "generatedBy": "scripts/ap-generation/ush-stage-cd-plans.ts",
+ "note": "Stage C·D: MC 자료 세트 3개를 실제 자료 세트로 교체(같은 크기·시대·후보 단원·스킬 범주 순서). 순서: 배치 ush-real-c·ush-real-d 적재 → 이 계획으로 새 버전(v4) 초안 → 확인 → '새 버전 공개'. 두 계획(US1·US2)은 서로 독립이다.",
+ "swapCount": 3,
+ "verifierViolations": [],
+ "swaps": [
+  {
+   "section": "ap_mc",
+   "position": 22,
+   "removeKey": "ush-p2-a:ap_us_history-u528-k0",
+   "addKey": "ush-real-c:ap_us_history-real_c_fsa-k0",
+   "remove": {
+    "kind": "mc_set",
+    "units": [
+     "5",
+     "5",
+     "5",
+     "5"
+    ],
+    "skills": [
+     "2.A",
+     "3.A",
+     "4.A",
+     "1.B"
+    ],
+    "period": 5,
+    "theme": "Compromise of 1850 and the Fugitive Slave Act",
+    "stim": "primary_text"
+   },
+   "add": {
+    "kind": "mc_set",
+    "units": [
+     "5",
+     "5",
+     "5",
+     "5"
+    ],
+    "skills": [
+     "2.A",
+     "3.A",
+     "4.A",
+     "1.B"
+    ],
+    "period": 5,
+    "theme": "The Fugitive Slave Act",
+    "stim": "primary_text"
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 26,
+   "removeKey": "ush-p2-a:ap_us_history-u531-k0",
+   "addKey": "ush-real-c:ap_us_history-real_c_jones-k0",
+   "remove": {
+    "kind": "mc_set",
+    "units": [
+     "5",
+     "5",
+     "5",
+     "5"
+    ],
+    "skills": [
+     "2.A",
+     "3.A",
+     "4.A",
+     "5.A"
+    ],
+    "period": 5,
+    "theme": "Northern and Southern wartime economies and the draft",
+    "stim": "primary_text"
+   },
+   "add": {
+    "kind": "mc_set",
+    "units": [
+     "5",
+     "5",
+     "5",
+     "5"
+    ],
+    "skills": [
+     "2.A",
+     "3.A",
+     "4.A",
+     "5.A"
+    ],
+    "period": 5,
+    "theme": "Wartime shortages and exemptions in the Confederacy",
+    "stim": "primary_text"
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 34,
+   "removeKey": "ush-p3-a:ap_us_history-u616-k0",
+   "addKey": "ush-real-d:ap_us_history-real_d_reserv-k0",
+   "remove": {
+    "kind": "mc_set",
+    "units": [
+     "6",
+     "6",
+     "6",
+     "7"
+    ],
+    "skills": [
+     "3.A",
+     "3.D",
+     "4.A",
+     "5.A"
+    ],
+    "period": 6,
+    "theme": "Plains Indian wars and the Dawes Act",
+    "stim": "secondary_text"
+   },
+   "add": {
+    "kind": "mc_set",
+    "units": [
+     "6",
+     "6",
+     "6",
+     "7"
+    ],
+    "skills": [
+     "3.A",
+     "3.D",
+     "4.A",
+     "5.A"
+    ],
+    "period": 6,
+    "theme": "Indian reservations in 1892",
+    "stim": "visual"
+   }
+  }
+ ]
+}

@@ -1,0 +1,2359 @@
+[
+ {
+  "set": "u101",
+  "i": 0,
+  "skill": "2.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u101",
+  "i": 1,
+  "skill": "3.A",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u101",
+  "i": 2,
+  "skill": "4.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u101",
+  "i": 3,
+  "skill": "5.A",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u102",
+  "i": 0,
+  "skill": "3.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u102",
+  "i": 1,
+  "skill": "3.D",
+  "det": [],
+  "reasons": [
+   "solver_disagreement_or_missing",
+   "panel_missing"
+  ],
+  "pass": false,
+  "solverAgree": 0.5
+ },
+ {
+  "set": "u102",
+  "i": 2,
+  "skill": "4.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u102",
+  "i": 3,
+  "skill": "5.A",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u103",
+  "i": 0,
+  "skill": "3.C",
+  "det": [
+   "paired_item_not_comparative"
+  ],
+  "reasons": [
+   "paired_item_not_comparative",
+   "solver_disagreement_or_missing",
+   "panel_missing"
+  ],
+  "pass": false,
+  "solverAgree": 0
+ },
+ {
+  "set": "u103",
+  "i": 1,
+  "skill": "3.D",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u103",
+  "i": 2,
+  "skill": "4.A",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u103",
+  "i": 3,
+  "skill": "5.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u104",
+  "i": 0,
+  "skill": "2.A",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u104",
+  "i": 1,
+  "skill": "3.A",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u104",
+  "i": 2,
+  "skill": "4.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u104",
+  "i": 3,
+  "skill": "5.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u205",
+  "i": 0,
+  "skill": "3.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u205",
+  "i": 1,
+  "skill": "3.D",
+  "det": [],
+  "reasons": [
+   "solver_second_defensible",
+   "panel_second_defensible",
+   "panel_flag_second_defensible"
+  ],
+  "pass": false,
+  "solverAgree": 1
+ },
+ {
+  "set": "u205",
+  "i": 2,
+  "skill": "4.B",
+  "det": [],
+  "reasons": [
+   "solver_second_defensible"
+  ],
+  "pass": false,
+  "solverAgree": 1
+ },
+ {
+  "set": "u205",
+  "i": 3,
+  "skill": "5.A",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u206",
+  "i": 0,
+  "skill": "3.A",
+  "det": [],
+  "reasons": [
+   "panel_set_flag"
+  ],
+  "pass": false,
+  "solverAgree": 1
+ },
+ {
+  "set": "u206",
+  "i": 1,
+  "skill": "3.D",
+  "det": [],
+  "reasons": [
+   "solver_second_defensible",
+   "panel_set_flag"
+  ],
+  "pass": false,
+  "solverAgree": 1
+ },
+ {
+  "set": "u206",
+  "i": 2,
+  "skill": "4.B",
+  "det": [],
+  "reasons": [
+   "panel_set_flag"
+  ],
+  "pass": false,
+  "solverAgree": 1
+ },
+ {
+  "set": "u206",
+  "i": 3,
+  "skill": "5.A",
+  "det": [],
+  "reasons": [
+   "panel_set_flag"
+  ],
+  "pass": false,
+  "solverAgree": 1
+ },
+ {
+  "set": "u207",
+  "i": 0,
+  "skill": "2.A",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u207",
+  "i": 1,
+  "skill": "3.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u207",
+  "i": 2,
+  "skill": "4.A",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u207",
+  "i": 3,
+  "skill": "5.A",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u208",
+  "i": 0,
+  "skill": "3.A",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u208",
+  "i": 1,
+  "skill": "3.D",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u208",
+  "i": 2,
+  "skill": "4.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u208",
+  "i": 3,
+  "skill": "5.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u309",
+  "i": 0,
+  "skill": "2.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u309",
+  "i": 1,
+  "skill": "3.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u309",
+  "i": 2,
+  "skill": "4.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u309",
+  "i": 3,
+  "skill": "5.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u310",
+  "i": 0,
+  "skill": "3.A",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u310",
+  "i": 1,
+  "skill": "3.D",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u310",
+  "i": 2,
+  "skill": "4.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u310",
+  "i": 3,
+  "skill": "5.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u311",
+  "i": 0,
+  "skill": "3.A",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u311",
+  "i": 1,
+  "skill": "3.D",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u311",
+  "i": 2,
+  "skill": "4.A",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u311",
+  "i": 3,
+  "skill": "5.A",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u312",
+  "i": 0,
+  "skill": "2.A",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u312",
+  "i": 1,
+  "skill": "3.A",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u312",
+  "i": 2,
+  "skill": "4.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u312",
+  "i": 3,
+  "skill": "5.A",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u313",
+  "i": 0,
+  "skill": "3.A",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u313",
+  "i": 1,
+  "skill": "3.D",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u313",
+  "i": 2,
+  "skill": "4.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u313",
+  "i": 3,
+  "skill": "5.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u314",
+  "i": 0,
+  "skill": "2.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u314",
+  "i": 1,
+  "skill": "3.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u314",
+  "i": 2,
+  "skill": "4.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u314",
+  "i": 3,
+  "skill": "1.A",
+  "det": [],
+  "reasons": [
+   "solver_disagreement_or_missing",
+   "panel_missing"
+  ],
+  "pass": false,
+  "solverAgree": 0.5
+ },
+ {
+  "set": "u315",
+  "i": 0,
+  "skill": "3.A",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u315",
+  "i": 1,
+  "skill": "3.D",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u315",
+  "i": 2,
+  "skill": "4.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u315",
+  "i": 3,
+  "skill": "5.A",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u316",
+  "i": 0,
+  "skill": "3.C",
+  "det": [
+   "paired_item_not_comparative"
+  ],
+  "reasons": [
+   "paired_item_not_comparative",
+   "solver_disagreement_or_missing",
+   "panel_missing"
+  ],
+  "pass": false,
+  "solverAgree": 0
+ },
+ {
+  "set": "u316",
+  "i": 1,
+  "skill": "3.D",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u316",
+  "i": 2,
+  "skill": "4.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u316",
+  "i": 3,
+  "skill": "5.A",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u417",
+  "i": 0,
+  "skill": "1.B",
+  "det": [],
+  "reasons": [
+   "solver_disagreement_or_missing",
+   "panel_missing",
+   "set_gate_failed"
+  ],
+  "pass": false,
+  "solverAgree": 0
+ },
+ {
+  "set": "u417",
+  "i": 1,
+  "skill": "3.B",
+  "det": [
+   "number_1840_not_in_data"
+  ],
+  "reasons": [
+   "number_1840_not_in_data",
+   "solver_disagreement_or_missing",
+   "panel_missing",
+   "set_gate_failed"
+  ],
+  "pass": false,
+  "solverAgree": 0
+ },
+ {
+  "set": "u417",
+  "i": 2,
+  "skill": "4.A",
+  "det": [],
+  "reasons": [
+   "solver_disagreement_or_missing",
+   "panel_missing",
+   "set_gate_failed"
+  ],
+  "pass": false,
+  "solverAgree": 0
+ },
+ {
+  "set": "u417",
+  "i": 3,
+  "skill": "5.A",
+  "det": [],
+  "reasons": [
+   "solver_disagreement_or_missing",
+   "panel_missing",
+   "set_gate_failed"
+  ],
+  "pass": false,
+  "solverAgree": 0
+ },
+ {
+  "set": "u418",
+  "i": 0,
+  "skill": "2.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u418",
+  "i": 1,
+  "skill": "3.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u418",
+  "i": 2,
+  "skill": "4.A",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u418",
+  "i": 3,
+  "skill": "1.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u419",
+  "i": 0,
+  "skill": "3.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u419",
+  "i": 1,
+  "skill": "3.D",
+  "det": [],
+  "reasons": [
+   "solver_second_defensible"
+  ],
+  "pass": false,
+  "solverAgree": 1
+ },
+ {
+  "set": "u419",
+  "i": 2,
+  "skill": "4.A",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u419",
+  "i": 3,
+  "skill": "5.B",
+  "det": [],
+  "reasons": [
+   "solver_second_defensible"
+  ],
+  "pass": false,
+  "solverAgree": 1
+ },
+ {
+  "set": "u420",
+  "i": 0,
+  "skill": "2.A",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u420",
+  "i": 1,
+  "skill": "3.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u420",
+  "i": 2,
+  "skill": "4.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u420",
+  "i": 3,
+  "skill": "1.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u421",
+  "i": 0,
+  "skill": "3.A",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u421",
+  "i": 1,
+  "skill": "3.D",
+  "det": [],
+  "reasons": [
+   "solver_second_defensible"
+  ],
+  "pass": false,
+  "solverAgree": 1
+ },
+ {
+  "set": "u421",
+  "i": 2,
+  "skill": "4.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u421",
+  "i": 3,
+  "skill": "1.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u422",
+  "i": 0,
+  "skill": "3.C",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u422",
+  "i": 1,
+  "skill": "3.D",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u422",
+  "i": 2,
+  "skill": "4.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u422",
+  "i": 3,
+  "skill": "5.A",
+  "det": [],
+  "reasons": [
+   "solver_second_defensible",
+   "panel_second_defensible",
+   "panel_flag_second_defensible"
+  ],
+  "pass": false,
+  "solverAgree": 1
+ },
+ {
+  "set": "u423",
+  "i": 0,
+  "skill": "2.A",
+  "det": [],
+  "reasons": [
+   "panel_set_flag"
+  ],
+  "pass": false,
+  "solverAgree": 1
+ },
+ {
+  "set": "u423",
+  "i": 1,
+  "skill": "3.B",
+  "det": [],
+  "reasons": [
+   "panel_set_flag"
+  ],
+  "pass": false,
+  "solverAgree": 1
+ },
+ {
+  "set": "u423",
+  "i": 2,
+  "skill": "4.B",
+  "det": [],
+  "reasons": [
+   "panel_set_flag"
+  ],
+  "pass": false,
+  "solverAgree": 1
+ },
+ {
+  "set": "u423",
+  "i": 3,
+  "skill": "1.B",
+  "det": [],
+  "reasons": [
+   "panel_set_flag"
+  ],
+  "pass": false,
+  "solverAgree": 1
+ },
+ {
+  "set": "u424",
+  "i": 0,
+  "skill": "3.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u424",
+  "i": 1,
+  "skill": "3.D",
+  "det": [],
+  "reasons": [
+   "solver_second_defensible"
+  ],
+  "pass": false,
+  "solverAgree": 1
+ },
+ {
+  "set": "u424",
+  "i": 2,
+  "skill": "4.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u424",
+  "i": 3,
+  "skill": "5.A",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u525",
+  "i": 0,
+  "skill": "1.B",
+  "det": [
+   "number_160_not_in_data"
+  ],
+  "reasons": [
+   "number_160_not_in_data",
+   "solver_disagreement_or_missing",
+   "panel_missing"
+  ],
+  "pass": false,
+  "solverAgree": 0
+ },
+ {
+  "set": "u525",
+  "i": 1,
+  "skill": "3.A",
+  "det": [],
+  "reasons": [
+   "solver_disagreement_or_missing",
+   "panel_missing"
+  ],
+  "pass": false,
+  "solverAgree": 0
+ },
+ {
+  "set": "u525",
+  "i": 2,
+  "skill": "4.A",
+  "det": [],
+  "reasons": [
+   "solver_disagreement_or_missing",
+   "panel_missing"
+  ],
+  "pass": false,
+  "solverAgree": 0
+ },
+ {
+  "set": "u525",
+  "i": 3,
+  "skill": "5.A",
+  "det": [
+   "number_1880_not_in_data"
+  ],
+  "reasons": [
+   "number_1880_not_in_data",
+   "solver_disagreement_or_missing",
+   "panel_missing"
+  ],
+  "pass": false,
+  "solverAgree": 0
+ },
+ {
+  "set": "u526",
+  "i": 0,
+  "skill": "2.A",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u526",
+  "i": 1,
+  "skill": "3.B",
+  "det": [],
+  "reasons": [
+   "solver_second_defensible"
+  ],
+  "pass": false,
+  "solverAgree": 1
+ },
+ {
+  "set": "u526",
+  "i": 2,
+  "skill": "4.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u526",
+  "i": 3,
+  "skill": "1.A",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u527",
+  "i": 0,
+  "skill": "3.A",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u527",
+  "i": 1,
+  "skill": "3.D",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u527",
+  "i": 2,
+  "skill": "4.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u527",
+  "i": 3,
+  "skill": "5.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u528",
+  "i": 0,
+  "skill": "2.A",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u528",
+  "i": 1,
+  "skill": "3.A",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u528",
+  "i": 2,
+  "skill": "4.A",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u528",
+  "i": 3,
+  "skill": "1.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u529",
+  "i": 0,
+  "skill": "3.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u529",
+  "i": 1,
+  "skill": "3.D",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u529",
+  "i": 2,
+  "skill": "4.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u529",
+  "i": 3,
+  "skill": "5.A",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u530",
+  "i": 0,
+  "skill": "3.C",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u530",
+  "i": 1,
+  "skill": "3.D",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u530",
+  "i": 2,
+  "skill": "4.A",
+  "det": [],
+  "reasons": [
+   "solver_second_defensible"
+  ],
+  "pass": false,
+  "solverAgree": 1
+ },
+ {
+  "set": "u530",
+  "i": 3,
+  "skill": "5.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u531",
+  "i": 0,
+  "skill": "2.A",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u531",
+  "i": 1,
+  "skill": "3.A",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u531",
+  "i": 2,
+  "skill": "4.A",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u531",
+  "i": 3,
+  "skill": "5.A",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u532",
+  "i": 0,
+  "skill": "3.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u532",
+  "i": 1,
+  "skill": "3.D",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u532",
+  "i": 2,
+  "skill": "4.A",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u532",
+  "i": 3,
+  "skill": "5.A",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u633",
+  "i": 0,
+  "skill": "3.C",
+  "det": [
+   "paired_item_not_comparative"
+  ],
+  "reasons": [
+   "paired_item_not_comparative",
+   "solver_disagreement_or_missing",
+   "panel_missing"
+  ],
+  "pass": false,
+  "solverAgree": 0
+ },
+ {
+  "set": "u633",
+  "i": 1,
+  "skill": "3.D",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u633",
+  "i": 2,
+  "skill": "4.B",
+  "det": [],
+  "reasons": [
+   "solver_second_defensible"
+  ],
+  "pass": false,
+  "solverAgree": 1
+ },
+ {
+  "set": "u633",
+  "i": 3,
+  "skill": "5.A",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u634",
+  "i": 0,
+  "skill": "2.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u634",
+  "i": 1,
+  "skill": "3.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u634",
+  "i": 2,
+  "skill": "4.A",
+  "det": [],
+  "reasons": [
+   "panel_flag_inaccurate"
+  ],
+  "pass": false,
+  "solverAgree": 1
+ },
+ {
+  "set": "u634",
+  "i": 3,
+  "skill": "5.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u635",
+  "i": 0,
+  "skill": "3.A",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u635",
+  "i": 1,
+  "skill": "3.D",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u635",
+  "i": 2,
+  "skill": "4.A",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u635",
+  "i": 3,
+  "skill": "5.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u636",
+  "i": 0,
+  "skill": "1.A",
+  "det": [],
+  "reasons": [
+   "solver_disagreement_or_missing",
+   "panel_missing"
+  ],
+  "pass": false,
+  "solverAgree": 0
+ },
+ {
+  "set": "u636",
+  "i": 1,
+  "skill": "3.A",
+  "det": [],
+  "reasons": [
+   "solver_disagreement_or_missing",
+   "panel_missing"
+  ],
+  "pass": false,
+  "solverAgree": 0
+ },
+ {
+  "set": "u636",
+  "i": 2,
+  "skill": "4.B",
+  "det": [
+   "number_1870_not_in_data"
+  ],
+  "reasons": [
+   "number_1870_not_in_data",
+   "solver_disagreement_or_missing",
+   "panel_missing"
+  ],
+  "pass": false,
+  "solverAgree": 0
+ },
+ {
+  "set": "u636",
+  "i": 3,
+  "skill": "5.B",
+  "det": [
+   "number_1920_not_in_data"
+  ],
+  "reasons": [
+   "number_1920_not_in_data",
+   "solver_disagreement_or_missing",
+   "panel_missing"
+  ],
+  "pass": false,
+  "solverAgree": 0
+ },
+ {
+  "set": "u637",
+  "i": 0,
+  "skill": "2.B",
+  "det": [],
+  "reasons": [
+   "panel_set_flag"
+  ],
+  "pass": false,
+  "solverAgree": 1
+ },
+ {
+  "set": "u637",
+  "i": 1,
+  "skill": "3.B",
+  "det": [],
+  "reasons": [
+   "panel_set_flag"
+  ],
+  "pass": false,
+  "solverAgree": 1
+ },
+ {
+  "set": "u637",
+  "i": 2,
+  "skill": "4.B",
+  "det": [],
+  "reasons": [
+   "panel_set_flag"
+  ],
+  "pass": false,
+  "solverAgree": 1
+ },
+ {
+  "set": "u637",
+  "i": 3,
+  "skill": "5.A",
+  "det": [],
+  "reasons": [
+   "panel_set_flag"
+  ],
+  "pass": false,
+  "solverAgree": 1
+ },
+ {
+  "set": "u638",
+  "i": 0,
+  "skill": "3.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u638",
+  "i": 1,
+  "skill": "3.D",
+  "det": [],
+  "reasons": [
+   "solver_second_defensible"
+  ],
+  "pass": false,
+  "solverAgree": 1
+ },
+ {
+  "set": "u638",
+  "i": 2,
+  "skill": "4.B",
+  "det": [],
+  "reasons": [
+   "solver_second_defensible"
+  ],
+  "pass": false,
+  "solverAgree": 1
+ },
+ {
+  "set": "u638",
+  "i": 3,
+  "skill": "5.A",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u639",
+  "i": 0,
+  "skill": "2.A",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u639",
+  "i": 1,
+  "skill": "3.B",
+  "det": [],
+  "reasons": [
+   "solver_second_defensible"
+  ],
+  "pass": false,
+  "solverAgree": 1
+ },
+ {
+  "set": "u639",
+  "i": 2,
+  "skill": "4.A",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u639",
+  "i": 3,
+  "skill": "1.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u640",
+  "i": 0,
+  "skill": "3.A",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u640",
+  "i": 1,
+  "skill": "3.D",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u640",
+  "i": 2,
+  "skill": "4.A",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u640",
+  "i": 3,
+  "skill": "1.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u741",
+  "i": 0,
+  "skill": "3.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u741",
+  "i": 1,
+  "skill": "3.D",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u741",
+  "i": 2,
+  "skill": "4.B",
+  "det": [],
+  "reasons": [
+   "solver_second_defensible"
+  ],
+  "pass": false,
+  "solverAgree": 1
+ },
+ {
+  "set": "u741",
+  "i": 3,
+  "skill": "1.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u742",
+  "i": 0,
+  "skill": "2.A",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u742",
+  "i": 1,
+  "skill": "3.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u742",
+  "i": 2,
+  "skill": "4.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u742",
+  "i": 3,
+  "skill": "1.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u743",
+  "i": 0,
+  "skill": "3.A",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u743",
+  "i": 1,
+  "skill": "3.D",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u743",
+  "i": 2,
+  "skill": "4.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u743",
+  "i": 3,
+  "skill": "1.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u744",
+  "i": 0,
+  "skill": "3.C",
+  "det": [
+   "paired_item_not_comparative"
+  ],
+  "reasons": [
+   "paired_item_not_comparative",
+   "solver_disagreement_or_missing",
+   "panel_missing"
+  ],
+  "pass": false,
+  "solverAgree": 0
+ },
+ {
+  "set": "u744",
+  "i": 1,
+  "skill": "3.D",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u744",
+  "i": 2,
+  "skill": "4.A",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u744",
+  "i": 3,
+  "skill": "5.A",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u745",
+  "i": 0,
+  "skill": "2.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u745",
+  "i": 1,
+  "skill": "3.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u745",
+  "i": 2,
+  "skill": "4.A",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u745",
+  "i": 3,
+  "skill": "5.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u746",
+  "i": 0,
+  "skill": "3.A",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u746",
+  "i": 1,
+  "skill": "3.D",
+  "det": [],
+  "reasons": [
+   "solver_second_defensible"
+  ],
+  "pass": false,
+  "solverAgree": 1
+ },
+ {
+  "set": "u746",
+  "i": 2,
+  "skill": "4.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u746",
+  "i": 3,
+  "skill": "5.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u747",
+  "i": 0,
+  "skill": "1.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u747",
+  "i": 1,
+  "skill": "3.A",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u747",
+  "i": 2,
+  "skill": "4.A",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u747",
+  "i": 3,
+  "skill": "5.A",
+  "det": [
+   "number_1970_not_in_data",
+   "number_1980_not_in_data"
+  ],
+  "reasons": [
+   "number_1970_not_in_data",
+   "number_1980_not_in_data",
+   "solver_disagreement_or_missing",
+   "panel_missing"
+  ],
+  "pass": false,
+  "solverAgree": 0
+ },
+ {
+  "set": "u748",
+  "i": 0,
+  "skill": "2.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u748",
+  "i": 1,
+  "skill": "3.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u748",
+  "i": 2,
+  "skill": "4.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u748",
+  "i": 3,
+  "skill": "5.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u849",
+  "i": 0,
+  "skill": "3.A",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u849",
+  "i": 1,
+  "skill": "3.D",
+  "det": [],
+  "reasons": [
+   "solver_second_defensible"
+  ],
+  "pass": false,
+  "solverAgree": 1
+ },
+ {
+  "set": "u849",
+  "i": 2,
+  "skill": "4.A",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u849",
+  "i": 3,
+  "skill": "5.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u850",
+  "i": 0,
+  "skill": "2.A",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u850",
+  "i": 1,
+  "skill": "3.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u850",
+  "i": 2,
+  "skill": "4.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u850",
+  "i": 3,
+  "skill": "1.A",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u851",
+  "i": 0,
+  "skill": "3.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u851",
+  "i": 1,
+  "skill": "3.D",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u851",
+  "i": 2,
+  "skill": "4.A",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u851",
+  "i": 3,
+  "skill": "1.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u852",
+  "i": 0,
+  "skill": "2.A",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u852",
+  "i": 1,
+  "skill": "3.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u852",
+  "i": 2,
+  "skill": "4.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u852",
+  "i": 3,
+  "skill": "1.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u853",
+  "i": 0,
+  "skill": "3.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u853",
+  "i": 1,
+  "skill": "3.D",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u853",
+  "i": 2,
+  "skill": "4.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u853",
+  "i": 3,
+  "skill": "1.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u854",
+  "i": 0,
+  "skill": "3.C",
+  "det": [
+   "paired_item_not_comparative"
+  ],
+  "reasons": [
+   "paired_item_not_comparative",
+   "solver_disagreement_or_missing",
+   "panel_missing"
+  ],
+  "pass": false,
+  "solverAgree": 0
+ },
+ {
+  "set": "u854",
+  "i": 1,
+  "skill": "3.D",
+  "det": [],
+  "reasons": [
+   "solver_second_defensible"
+  ],
+  "pass": false,
+  "solverAgree": 1
+ },
+ {
+  "set": "u854",
+  "i": 2,
+  "skill": "4.A",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u854",
+  "i": 3,
+  "skill": "5.A",
+  "det": [],
+  "reasons": [
+   "solver_second_defensible"
+  ],
+  "pass": false,
+  "solverAgree": 1
+ },
+ {
+  "set": "u855",
+  "i": 0,
+  "skill": "2.A",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u855",
+  "i": 1,
+  "skill": "3.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u855",
+  "i": 2,
+  "skill": "4.A",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u855",
+  "i": 3,
+  "skill": "1.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u856",
+  "i": 0,
+  "skill": "3.A",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u856",
+  "i": 1,
+  "skill": "3.D",
+  "det": [],
+  "reasons": [
+   "solver_second_defensible"
+  ],
+  "pass": false,
+  "solverAgree": 1
+ },
+ {
+  "set": "u856",
+  "i": 2,
+  "skill": "4.A",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u856",
+  "i": 3,
+  "skill": "5.A",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u957",
+  "i": 0,
+  "skill": "2.A",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u957",
+  "i": 1,
+  "skill": "3.A",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u957",
+  "i": 2,
+  "skill": "4.A",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u957",
+  "i": 3,
+  "skill": "1.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u958",
+  "i": 0,
+  "skill": "1.B",
+  "det": [],
+  "reasons": [
+   "solver_disagreement_or_missing",
+   "panel_missing"
+  ],
+  "pass": false,
+  "solverAgree": 0
+ },
+ {
+  "set": "u958",
+  "i": 1,
+  "skill": "3.B",
+  "det": [
+   "number_600_not_in_data",
+   "number_100_not_in_data"
+  ],
+  "reasons": [
+   "number_600_not_in_data",
+   "number_100_not_in_data",
+   "solver_disagreement_or_missing",
+   "panel_missing"
+  ],
+  "pass": false,
+  "solverAgree": 0
+ },
+ {
+  "set": "u958",
+  "i": 2,
+  "skill": "4.B",
+  "det": [
+   "number_1980_not_in_data",
+   "number_2000_not_in_data"
+  ],
+  "reasons": [
+   "number_1980_not_in_data",
+   "number_2000_not_in_data",
+   "solver_disagreement_or_missing",
+   "panel_missing"
+  ],
+  "pass": false,
+  "solverAgree": 0
+ },
+ {
+  "set": "u958",
+  "i": 3,
+  "skill": "5.A",
+  "det": [
+   "number_1970_not_in_data",
+   "number_1980_not_in_data"
+  ],
+  "reasons": [
+   "number_1970_not_in_data",
+   "number_1980_not_in_data",
+   "solver_disagreement_or_missing",
+   "panel_missing"
+  ],
+  "pass": false,
+  "solverAgree": 0
+ },
+ {
+  "set": "u959",
+  "i": 0,
+  "skill": "3.C",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u959",
+  "i": 1,
+  "skill": "3.D",
+  "det": [],
+  "reasons": [
+   "solver_second_defensible"
+  ],
+  "pass": false,
+  "solverAgree": 1
+ },
+ {
+  "set": "u959",
+  "i": 2,
+  "skill": "4.A",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u959",
+  "i": 3,
+  "skill": "5.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u960",
+  "i": 0,
+  "skill": "2.A",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u960",
+  "i": 1,
+  "skill": "3.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u960",
+  "i": 2,
+  "skill": "4.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ },
+ {
+  "set": "u960",
+  "i": 3,
+  "skill": "1.B",
+  "det": [],
+  "reasons": [],
+  "pass": true,
+  "solverAgree": 1
+ }
+]

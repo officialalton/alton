@@ -1,0 +1,108 @@
+{
+ "kind": "ap_new_version_swap_plan",
+ "set": "US1",
+ "sourceSetName": "AP U.S. History — Practice Exam 1",
+ "sourceVersionNo": 1,
+ "generatedBy": "scripts/ap-generation/ush-stage-a-plans.ts",
+ "note": "Stage A + 균형 교체: ① u747 → real_a_gm, ② saq3_1 → real_a_saq3_own(가공 표 → 실제 Census 자료), ③ u313 → u418(같은 크기 4문항, 단원 3 → 4). ③ 은 게시 US1 v1 이 후보 keyword_code 단원 기준으로 이미 단원 3 = 11(최대 10)·단원 4 = 4(최소 5)라 관리자 새 버전 검증이 막히기 때문에 필요하다. 교체 뒤 단원별 MC 수 = 3/3/7/8/8/8/7/7/4. 모든 교체 문항은 변환 완료(review_env_ready)이고 US2 v1·v2 와 겹치지 않는다.",
+ "swapCount": 3,
+ "verifierViolations": [],
+ "swaps": [
+  {
+   "section": "ap_mc",
+   "position": 42,
+   "removeKey": "ush-p2-a:ap_us_history-u747-k0",
+   "addKey": "ush-real-a:ap_us_history-real_a_gm-k0",
+   "remove": {
+    "kind": "mc_set",
+    "units": [
+     "7",
+     "7",
+     "6"
+    ],
+    "skills": [
+     "1.B",
+     "3.A",
+     "4.A"
+    ],
+    "period": 7,
+    "theme": "Great Migration",
+    "stim": "quantitative"
+   },
+   "add": {
+    "kind": "mc_set",
+    "units": [
+     "7",
+     "7",
+     "6"
+    ],
+    "skills": [
+     "1.B",
+     "3.A",
+     "4.A"
+    ],
+    "period": 7,
+    "theme": "The Great Migration",
+    "stim": "quantitative"
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 7,
+   "removeKey": "ush-p2-a:ap_us_history-u313-k0",
+   "addKey": "ush-p2-a:ap_us_history-u418-k0",
+   "remove": {
+    "kind": "mc_set",
+    "units": [
+     "3",
+     "4",
+     "3",
+     "4"
+    ],
+    "skills": [
+     "3.A",
+     "3.D",
+     "4.B",
+     "5.B"
+    ],
+    "period": 3,
+    "theme": "Compromises at the Constitutional Convention",
+    "stim": "secondary_text"
+   },
+   "add": {
+    "kind": "mc_set",
+    "units": [
+     "4",
+     "4",
+     "4",
+     "4"
+    ],
+    "skills": [
+     "2.B",
+     "3.B",
+     "4.A",
+     "1.B"
+    ],
+    "period": 4,
+    "theme": "American System and internal improvements",
+    "stim": "primary_text"
+   }
+  },
+  {
+   "section": "ap_saq",
+   "position": 3,
+   "removeKey": "ush-p1-b:ap_us_history-saq3_1-k0",
+   "addKey": "ush-real-a:ap_us_history-real_a_saq3_own-k0",
+   "remove": {
+    "kind": "saq3",
+    "period": 8,
+    "template": "saq3"
+   },
+   "add": {
+    "kind": "saq3",
+    "period": 8,
+    "template": "saq3"
+   }
+  }
+ ]
+}

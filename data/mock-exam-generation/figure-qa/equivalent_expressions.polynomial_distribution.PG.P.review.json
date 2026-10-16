@@ -1,0 +1,23 @@
+{
+ "itemId": "equivalent_expressions.polynomial_distribution.PG.P",
+ "verdict": "pass",
+ "reviewedAt": "2026-10-06T06:44:29Z",
+ "reviewer": "claude-sonnet-5.5 (math-B session)",
+ "codeHash": "b750c5d5404c8c8b5973b7e14fb8024a4d954c4b5b08be5206c5fe317c31c5d1",
+ "samples": [
+  "equivalent_expressions.polynomial_distribution.PG.P.png"
+ ],
+ "checklist": {
+  "figure_present": "pass",
+  "proportion_matches_values": "pass",
+  "labels_placed_and_legible": "pass",
+  "multi_figure_consistent": "n/a",
+  "text_matches_figure_and_solvable": "pass",
+  "axes_ticks_units_legend": "pass",
+  "choice_distinct_one_rule": "n/a",
+  "sat_visual_style": "pass",
+  "mobile_375_readable": "pass"
+ },
+ "defects": [],
+ "notes": "직사각형(식 라벨 3x - 2, 4x - 8, notToScale) 샘플 데스크톱·375px 확인(샘플 갱신): 식 라벨이 숫자로 오독되지 않고(polygon parseSideLabel), 변 라벨·꼭짓점 이름·'Note' 겹침 없음, 전개 x 계수 -32 가 정답."
+}

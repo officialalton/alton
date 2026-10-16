@@ -1,0 +1,45 @@
+{
+ "itemId": "nonlinear_functions.function_transformation.FN.B",
+ "generatedAt": "2026-10-07T05:02:01.187Z",
+ "codeHash": "6563b708e762964a8a0db5209e0b3211ff8ab49981c06e614a8c2e2d548c90bb",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/coordinate-plane.ts",
+  "lib/problem-figures/templates/figure-bundle.ts",
+  "lib/problem-figures/templates/figure-choice.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/graph-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/nonlinear_functions.function_transformation.FN.B.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "nonlinear_functions.function_transformation.FN.B.png",
+   "mobileFile": "nonlinear_functions.function_transformation.FN.B.m375.png",
+   "archetypeId": "nf.function_transformation.FN.B.repr_shift",
+   "seed": 11,
+   "signature": "figure_bundle[plane>plane]",
+   "stimulus": "A graphing program plots a figure. The first figure shows the graph of a quadratic function $f$ in the $xy$-plane. The first graph is the given figure, and four graphs with the same axes are shown as choices. Decide what changes between the given graph and the correct choice, and then check each option. The function $g$ is defined so that the graph of $g$ is the graph of $y = f(x) - 3$.",
+   "question": "Which one of the four graphs represents $g$?",
+   "options": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "correctIndex": 0,
+   "answer": "A",
+   "explanation": "(1) 기준 그래프에서 꼭짓점 (H, K) 과 열린 방향(A 의 부호)을 읽는다. (2) f 의 꼭짓점은 (1, 0) 이다. (3) f(x) - 3 는 그래프를 아래로 3 옮긴다. (4) g 의 꼭짓점은 (1, -3) 이고 열린 방향은 같다. (5) 좌우로 옮기거나 반대 방향으로 옮기거나 뒤집은 그래프는 오답이다. 따라서 정답은 A이다.",
+   "structuralIssues": []
+  }
+ ]
+}

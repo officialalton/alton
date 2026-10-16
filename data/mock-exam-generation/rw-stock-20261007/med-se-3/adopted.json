@@ -1,0 +1,350 @@
+[
+ {
+  "gid": "medium-boundaries-800",
+  "runId": "rw-supplement-medium",
+  "skill": "boundaries",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "The bdelloid rotifer, a microscopic freshwater animal able to survive complete dehydration for years at a time______ has long puzzled evolutionary biologists: genetic evidence suggests that the species has reproduced without males for tens of millions of years.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "The bdelloid rotifer, a microscopic freshwater animal able to survive complete dehydration for years at a time______ has long puzzled evolutionary biologists: genetic evidence suggests that the species has reproduced without males for tens of millions of years.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    ",",
+    ";",
+    ":",
+    "(no punctuation)"
+   ],
+   "correctIndex": 0,
+   "answers": null,
+   "explanation": "'a microscopic freshwater animal ... at a time'는 주어 The bdelloid rotifer를 설명하는 비필수 동격어구로, 앞에서 쉼표로 열렸으므로 끝에서도 쉼표로 닫아야 주어와 동사 has puzzled가 올바르게 연결된다. 따라서 A가 정답이다. B의 세미콜론은 두 독립절을 연결하는 부호인데, 앞부분은 동사가 없어 독립절이 아니다. C의 콜론도 앞에 완전한 독립절이 와야 하므로 주어와 동사 사이에 쓸 수 없다(콜론은 문장 뒤쪽에 이미 올바르게 쓰였다). D는 동격어구를 닫지 않아 여는 쉼표와 짝이 맞지 않는다.",
+   "explanationEn": "The phrase \"a microscopic freshwater animal able to survive complete dehydration for years at a time\" is a nonessential appositive that describes the subject, \"The bdelloid rotifer.\" It opens with a comma, so it must also close with a comma. That lets the subject connect cleanly to its verb, \"has long puzzled,\" which makes A correct. B is wrong because a semicolon has to join two independent clauses, and the words before the blank have no main verb. C is wrong because a colon must follow a complete independent clause, so it can't separate a subject from its verb (the sentence already uses a colon correctly later on). D is wrong because it leaves the appositive unclosed, so the opening comma has no matching comma.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "A",
+   "seed": "자연과학(생물·생태)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "정답 A 검산 완료: 'The bdelloid rotifer, [동격어구], has long puzzled' 구조에서 여는 쉼표와 짝을 이루는 닫는 쉼표가 필요. B·C는 앞부분에 독립절이 없어 불가, D는 쉼표 짝 불일치. 한·영 해설 결론 및 글자 참조 일치, 영어 자연스럽고 한글 없음. 담륜충(bdelloid rotifer)의 건조 생존·수천만 년 무성생식 내용은 사실과 부합. 긴 동격어구(내부에 'able to survive ... at a time' 수식구 포함)를 추적해 주어-동사를 연결해야 하고, 문장 후반의 콜론이 B·C를 그럴듯하게 만들어 medium에 적합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "동격어구가 길어서 앞의 여는 쉼표를 놓치면 D를 고르기 쉽다. 뒤쪽에 이미 콜론이 있는 점도 C를 고르게 만드는 함정이다. 정답을 찾으려면 두 단계를 거쳐야 한다. 먼저 동격어구가 쉼표로 열렸는지 확인하고, 이어서 주어와 동사가 어떻게 연결되는지 판단해야 한다. 따라서 중간 난이도에 적합하다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "medium-boundaries-803",
+  "runId": "rw-supplement-medium",
+  "skill": "boundaries",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "In 1883, North American railroads abandoned the dozens of local \"sun times\" that had made printed schedules nearly impossible to follow and adopted four standardized time zones. The new system—though at first resisted by towns that took pride in setting clocks by their own noon______soon reshaped daily routines far beyond the rail lines, as factories, schools, and courthouses began keeping \"railroad time.\"\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "In 1883, North American railroads abandoned the dozens of local \"sun times\" that had made printed schedules nearly impossible to follow and adopted four standardized time zones. The new system—though at first resisted by towns that took pride in setting clocks by their own noon______soon reshaped daily routines far beyond the rail lines, as factories, schools, and courthouses began keeping \"railroad time.\"",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "; it",
+    ", and",
+    ",",
+    "—"
+   ],
+   "correctIndex": 3,
+   "answers": null,
+   "explanation": "\"though at first resisted ... their own noon\" 부분은 대시로 시작된 삽입구이므로, 같은 대시로 닫아 주어 \"The new system\"과 동사 \"reshaped\"를 이어 주어야 한다. 그래서 정답은 D이다. A는 세미콜론 뒤에 독립절을 만들지만, 앞부분 \"The new system\"에는 동사가 없어 완전한 문장이 되지 못하고 대시도 닫히지 않는다. B는 \"and\"로 서술어를 병렬 연결하려 하지만 앞에는 \"reshaped\"와 짝을 이룰 본동사가 없다. C는 대시로 시작한 삽입구를 쉼표로 닫아 문장부호의 짝이 맞지 않는다.",
+   "explanationEn": "The phrase \"though at first resisted ... their own noon\" is a supplementary element that opens with a dash, so it has to close with a matching dash. That dash lets the subject \"The new system\" connect to its verb \"reshaped,\" which makes D correct. A puts a semicolon before a new independent clause, but \"The new system\" never gets a verb of its own, so the part before the semicolon isn't a complete sentence, and the dash is never closed. B uses \"and\" to join two predicates, but there is no main verb before the blank for \"reshaped\" to pair with. C closes a dash-opened interruption with a comma, so the punctuation marks don't match.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "D",
+   "seed": "역사(근대 사회 변화)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "\"The new system—though ... noon—soon reshaped\" : 대시로 연 삽입구를 대시로 닫아 주어와 동사를 연결하는 D가 유일하게 올바름. A는 앞부분이 동사 없는 단편이고 대시 미닫힘, B는 병렬할 본동사 없음, C는 대시-쉼표 짝 불일치. 한·영 해설 모두 정답 D와 선택지 참조가 일치하며 오류 없음. 1883년 북미 철도 4개 표준시간대 채택은 사실에 부합. 삽입구 범위를 파악한 뒤 짝 문장부호를 골라야 하므로 medium에 적합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "1883년 철도 표준시 도입은 사실과 맞다. 대시 짝 맞추기는 전형적인 중간 난이도 문항이다. 삽입구가 길어서 C(쉼표)가 그럴듯한 오답으로 작동한다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "medium-form_structure_sense-801",
+  "runId": "rw-supplement-medium",
+  "skill": "form_structure_sense",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "Engineers designing the Millau Viaduct in southern France faced a problem: winds sweeping through the Tarn River valley could exceed 200 kilometers per hour. Their solution, a set of curved windscreens mounted along both edges of the deck, which were tested repeatedly in wind tunnels before construction began, ______ the force of crosswinds on passing vehicles by roughly half.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "Engineers designing the Millau Viaduct in southern France faced a problem: winds sweeping through the Tarn River valley could exceed 200 kilometers per hour. Their solution, a set of curved windscreens mounted along both edges of the deck, which were tested repeatedly in wind tunnels before construction began, ______ the force of crosswinds on passing vehicles by roughly half.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "reducing",
+    "reduces",
+    "reduce",
+    "having reduced"
+   ],
+   "correctIndex": 1,
+   "answers": null,
+   "explanation": "이 문장의 주어는 단수 명사 \"Their solution\"이고, 동격어구 \"a set of curved windscreens\"와 관계절 \"which were tested...began\"이 주어와 동사 사이에 끼어 있다. 따라서 빈칸에는 단수 주어에 맞는 정동사가 필요하므로 B \"reduces\"가 정답이다. C \"reduce\"는 정동사이긴 하지만 가까이 있는 복수 명사 windscreens나 edges에 이끌린 복수형이라 주어와 수가 일치하지 않는다. A \"reducing\"과 D \"having reduced\"는 분사형이어서 문장에 정동사가 없게 되므로 완전한 문장이 되지 않는다.",
+   "explanationEn": "The subject of this sentence is the singular noun \"Their solution.\" Between it and the verb come an appositive (\"a set of curved windscreens...\") and a relative clause (\"which were tested...began\"). So the blank needs a finite verb that agrees with a singular subject, and that makes B, \"reduces,\" correct. C, \"reduce,\" is a finite verb, but it's plural. It agrees with the nearby plural nouns \"windscreens\" or \"edges\" instead of the real subject. A, \"reducing,\" and D, \"having reduced,\" are participles, which would leave the sentence without a main verb.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "B",
+   "seed": "기술·공학 사례",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "주어 \"Their solution\"(단수) 뒤에 동격구와 관계절이 끼어 있어 정동사 식별 + 수 일치의 두 단계 판단 필요. B \"reduces\"가 유일한 단수 정동사로 정답 확인. C는 인접 복수명사(windscreens/edges) 유인 오답, A/D는 정동사 부재로 배제. 한·영 해설 결론·글자 참조 일치, 영어 자연스럽고 한글 없음. 밀로 고가교 윈드스크린 관련 사실 무리 없음. 표준 SAT medium 수준에 적합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "긴 동격어구와 관계절이 단수 주어와 동사 사이에 끼어 있어, 정동사인지와 수 일치를 함께 판단해야 하는 두 단계 문항이다. 복수형 오답 C는 바로 앞의 복수 명사들 때문에 끌리기 쉬운 함정이다. 밀라우 고가교 방풍막이 바람의 힘을 약 절반으로 줄인다는 서술은 실제 사실과 대체로 맞는다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "medium-form_structure_sense-802",
+  "runId": "rw-supplement-medium",
+  "skill": "form_structure_sense",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "In the kelp forests off the coast of central California, sea otters prey heavily on purple sea urchins, which graze on the holdfasts of giant kelp. Ecologist Joshua Smith and colleagues found that otters preferentially target urchins inside intact kelp stands, where the urchins are well fed and nutritious. The urchins clustered on nearby barren rock, by contrast, offering otters little energy because of their starved, nearly empty bodies, ______ largely ignored—an outcome that helps explain why urchin barrens can persist even where otter populations are recovering.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "In the kelp forests off the coast of central California, sea otters prey heavily on purple sea urchins, which graze on the holdfasts of giant kelp. Ecologist Joshua Smith and colleagues found that otters preferentially target urchins inside intact kelp stands, where the urchins are well fed and nutritious. The urchins clustered on nearby barren rock, by contrast, offering otters little energy because of their starved, nearly empty bodies, ______ largely ignored—an outcome that helps explain why urchin barrens can persist even where otter populations are recovering.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "being",
+    "which are",
+    "are",
+    "having been"
+   ],
+   "correctIndex": 2,
+   "answers": null,
+   "explanation": "이 문장의 주어는 \"The urchins\"이고, \"clustered on nearby barren rock\"과 \"offering otters little energy...\"는 모두 주어를 꾸미는 분사구이다. 따라서 빈칸에는 문장을 완성하는 정동사가 필요하며, 복수 주어와 일치하는 C \"are\"가 정답이다. A \"being\"과 D \"having been\"은 분사이므로 정동사가 없는 불완전한 문장이 된다. B \"which are\"는 관계절을 만들어 주어를 또 꾸미게 되므로 이 역시 주절의 동사가 없는 문장이 된다.",
+   "explanationEn": "The subject of this sentence is \"The urchins,\" and both \"clustered on nearby barren rock\" and \"offering otters little energy...\" are participial phrases modifying that subject. That means the blank needs a finite main verb to complete the sentence. Choice C, \"are,\" agrees with the plural subject, so it is correct. Choices A (\"being\") and D (\"having been\") are participles, so the sentence would still have no main verb. Choice B (\"which are\") starts a relative clause that only adds another modifier to the subject, so the main clause would still be missing its verb.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "C",
+   "seed": "자연과학(생물·생태)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "주어 \"The urchins\" + 과거분사구 \"clustered on nearby barren rock\" + 삽입구 \"by contrast\" + 현재분사구 \"offering...\" 뒤에 정동사가 필요하므로 C \"are\"가 맞다. A·D는 비정형, B는 관계절이라 주절 동사가 없다. 해설은 한·영 모두 정답 및 선택지 참조가 일치하고 정확하다. Joshua Smith 연구(2021, PNAS) 내용도 사실과 부합. 다만 \"clustered\"를 정동사로 읽을 가능성이 이론상 존재하나, 쉼표 배치와 \"offering\" 분사구 구조상 축약 관계절로 읽는 것이 표준 해석이므로 문항 성립에 문제는 없음. 긴 수식어 사이에서 주어-동사를 찾는 2단계 판단이 필요해 medium에 적합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "주어와 동사 사이에 긴 분사구 두 개가 끼어 있어 정동사가 빠졌다는 걸 알아채야 풀린다. 오답 셋 모두 그럴듯하므로 medium에 맞다. 내용은 Smith et al.(2021)의 연구 결과와 일치한다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "medium-form_structure_sense-803",
+  "runId": "rw-supplement-medium",
+  "skill": "form_structure_sense",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "In Marguerite Ostlund's 2019 novel The Lamplighter's Ledger, set in a fog-bound Baltic port in the 1870s, the widowed clerk Henrik Vaal keeps a secret account of every debt the town's merchants owe one another. The collection of yellowed ledgers that he hides beneath the floorboards of his rented room ______ the novel's central symbol, gradually revealing how private obligation shapes public reputation.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "In Marguerite Ostlund's 2019 novel The Lamplighter's Ledger, set in a fog-bound Baltic port in the 1870s, the widowed clerk Henrik Vaal keeps a secret account of every debt the town's merchants owe one another. The collection of yellowed ledgers that he hides beneath the floorboards of his rented room ______ the novel's central symbol, gradually revealing how private obligation shapes public reputation.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "become",
+    "having become",
+    "were becoming",
+    "becomes"
+   ],
+   "correctIndex": 3,
+   "answers": null,
+   "explanation": "이 문장의 주어는 단수 명사 \"collection\"이고, \"of yellowed ledgers\"와 관계절 \"that he hides … room\"은 주어를 꾸미는 수식어일 뿐이다. 따라서 단수 정동사 D \"becomes\"가 와야 한다. A \"become\"과 C \"were becoming\"은 바로 앞의 복수 명사 \"ledgers\"나 \"floorboards\"에 수를 맞춘 것이라 주어 \"collection\"과 일치하지 않는다. B \"having become\"은 분사여서 문장에 정동사가 없게 되므로 틀렸다.",
+   "explanationEn": "The subject of this sentence is the singular noun \"collection.\" The phrase \"of yellowed ledgers\" and the clause \"that he hides … room\" only modify that subject. So you need a singular finite verb, and D, \"becomes,\" is correct. A (\"become\") and C (\"were becoming\") are plural forms that match the nearby nouns \"ledgers\" or \"floorboards\" instead of the actual subject, \"collection.\" B (\"having become\") is a participle, so it would leave the sentence without a main verb.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "D",
+   "seed": "문학(19세기 소설 분위기의 현대 서술)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "주어 \"The collection\"(단수)과 정동사 일치 문제. 전치사구 \"of yellowed ledgers\"와 관계절 \"that he hides beneath the floorboards of his rented room\"이 복수 명사(ledgers, floorboards)로 끝나 A/C가 유인력을 가지며, B는 정동사 부재. D \"becomes\"가 유일하게 옳음(현재시제도 \"hides\", \"keeps\"와 일치). 한·영 해설 모두 정답 D와 선택지 글자 참조가 일치하고 모순 없음, 영어 해설에 한글 없음. 가상 소설·작가로 저작권·사실 오류 문제 없음. 수식어를 건너 진주어를 찾고 수·시제를 확인하는 두 단계 판단이 필요하며 오답 2개가 근접 명사에 근거한 부분적 타당성을 가져 medium에 적합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "긴 수식어(of 구 + 관계절) 뒤에서 주어와 동사의 수를 일치시키는 표준적인 medium 문항이다. 현재 시제 \"keeps\"와도 일관된다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "medium-form_structure_sense-805",
+  "runId": "rw-supplement-medium",
+  "skill": "form_structure_sense",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "The Public Libraries Act of 1850, which permitted town councils in England and Wales to levy a small local tax to fund free libraries open to working people, ______ adopted slowly at first: by 1870, fewer than fifty towns had taken advantage of its provisions.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "The Public Libraries Act of 1850, which permitted town councils in England and Wales to levy a small local tax to fund free libraries open to working people, ______ adopted slowly at first: by 1870, fewer than fifty towns had taken advantage of its provisions.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "were",
+    "was",
+    "being",
+    "has been"
+   ],
+   "correctIndex": 1,
+   "answers": null,
+   "explanation": "이 문장의 주어는 단수 명사 'The Public Libraries Act of 1850'이고, which 관계절은 주어를 꾸미는 수식어일 뿐이므로 빈칸에는 단수 정동사가 필요하다. 또한 'by 1870'과 'had taken'이 과거 시점을 나타내므로 과거형 B가 정답이다. A는 과거형이지만 바로 앞의 복수 명사 people이나 councils에 수를 맞춘 복수형이라 틀렸다. C는 분사여서 문장에 정동사가 없게 된다. D는 수는 맞지만 현재완료라 콜론 뒤의 과거 시간틀과 맞지 않는다.",
+   "explanationEn": "The subject of this sentence is the singular noun \"The Public Libraries Act of 1850.\" The \"which\" clause only modifies that subject, so the blank needs a singular finite verb. The phrases \"by 1870\" and \"had taken\" also set a past timeframe, which makes B, the singular past form, the correct answer. A is past tense, but it's plural, so it agrees with the nearby noun \"people\" or \"councils\" instead of the real subject. C is a participle, which would leave the sentence with no main verb. D is singular, but the present perfect doesn't fit the past timeframe set after the colon.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "B",
+   "seed": "역사(근대 사회 변화)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "주어 'The Public Libraries Act of 1850'(단수)와 수식 관계절 뒤의 빈칸에 'was adopted'가 유일하게 수·시제·정동사 요건을 모두 충족. A(복수형, 인접 명사 people/councils 유인), D(단수이나 현재완료로 'at first'·'by 1870'·'had taken'의 과거 틀과 불일치), C(분사, 정동사 부재)로 오답 배제 근거 명확. 수 일치 판단 + 시제 문맥 확인의 두 단계가 필요하여 medium 적합. 한국어·영어 해설 모두 정답 B와 글자 참조가 일치하며 모순 없음. 1850년 공공도서관법 및 1870년 보급 현황 서술도 사실과 부합(실제 1870년까지 약 35~50개 도시만 채택)."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "긴 관계절이 주어와 동사 사이에 끼어 있어 수 일치를 판단한 뒤 시제까지 확인해야 하므로 두 단계 판단이 필요하다. 오답 A(were)와 D(has been)는 각각 부분적으로 맞는 근거가 있어 medium 난이도에 적합하다. 다만 1870년까지 법을 채택한 도시 수(50곳 미만)는 대체로 그럴듯하지만, 문항 해결에는 영향이 없다.",
+    "passed": true
+   }
+  }
+ }
+]

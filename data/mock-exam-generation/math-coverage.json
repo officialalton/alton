@@ -1,0 +1,648 @@
+[
+ {
+  "skill": "linear_equations_two_var",
+  "difficulty": "easy",
+  "kindsInCatalog": 6,
+  "sampled": 1500,
+  "compileFail": 0,
+  "groups": 6,
+  "independent25": 13,
+  "independent50": 16,
+  "independent100": 21,
+  "perKindIndependent": {
+   "intersection_x": 1,
+   "intersection_y": 1,
+   "intersection_sum": 1,
+   "slope": 1,
+   "intercept": 1,
+   "num_solutions": 15
+  }
+ },
+ {
+  "skill": "linear_equations_two_var",
+  "difficulty": "medium",
+  "kindsInCatalog": 6,
+  "sampled": 1500,
+  "compileFail": 0,
+  "groups": 6,
+  "independent25": 12,
+  "independent50": 15,
+  "independent100": 19,
+  "perKindIndependent": {
+   "intersection_x": 1,
+   "intersection_y": 1,
+   "intersection_sum": 1,
+   "slope": 1,
+   "intercept": 1,
+   "num_solutions": 16
+  }
+ },
+ {
+  "skill": "systems_linear",
+  "difficulty": "easy",
+  "kindsInCatalog": 0,
+  "sampled": 1500,
+  "compileFail": 0,
+  "groups": 4,
+  "independent25": 4,
+  "independent50": 4,
+  "independent100": 4,
+  "perKindIndependent": {
+   "intersection_x": 1,
+   "intercept": 1,
+   "intersection_y": 1,
+   "slope": 1
+  }
+ },
+ {
+  "skill": "systems_linear",
+  "difficulty": "medium",
+  "kindsInCatalog": 0,
+  "sampled": 1500,
+  "compileFail": 0,
+  "groups": 6,
+  "independent25": 13,
+  "independent50": 16,
+  "independent100": 21,
+  "perKindIndependent": {
+   "intersection_x": 1,
+   "intercept": 1,
+   "intersection_sum": 1,
+   "intersection_y": 1,
+   "num_solutions": 14,
+   "slope": 1
+  }
+ },
+ {
+  "skill": "linear_inequalities",
+  "difficulty": "easy",
+  "kindsInCatalog": 3,
+  "sampled": 1500,
+  "compileFail": 0,
+  "groups": 3,
+  "independent25": 4,
+  "independent50": 4,
+  "independent100": 4,
+  "perKindIndependent": {
+   "solve_one_var": 2,
+   "point_in_solution": 1,
+   "table_verification": 1
+  }
+ },
+ {
+  "skill": "linear_inequalities",
+  "difficulty": "medium",
+  "kindsInCatalog": 3,
+  "sampled": 1500,
+  "compileFail": 0,
+  "groups": 3,
+  "independent25": 4,
+  "independent50": 4,
+  "independent100": 4,
+  "perKindIndependent": {
+   "solve_one_var": 2,
+   "point_in_solution": 1,
+   "table_verification": 1
+  }
+ },
+ {
+  "skill": "linear_equations_one_var",
+  "difficulty": "easy",
+  "kindsInCatalog": 3,
+  "sampled": 1500,
+  "compileFail": 0,
+  "groups": 3,
+  "independent25": 102,
+  "independent50": 226,
+  "independent100": 476,
+  "perKindIndependent": {
+   "solve": 2,
+   "word_problem_translate": 1,
+   "literal_rearrange": 472
+  }
+ },
+ {
+  "skill": "linear_equations_one_var",
+  "difficulty": "medium",
+  "kindsInCatalog": 3,
+  "sampled": 1500,
+  "compileFail": 0,
+  "groups": 3,
+  "independent25": 103,
+  "independent50": 221,
+  "independent100": 476,
+  "perKindIndependent": {
+   "solve": 2,
+   "word_problem_translate": 1,
+   "literal_rearrange": 472
+  }
+ },
+ {
+  "skill": "linear_functions",
+  "difficulty": "easy",
+  "kindsInCatalog": 5,
+  "sampled": 1500,
+  "compileFail": 0,
+  "groups": 5,
+  "independent25": 10,
+  "independent50": 11,
+  "independent100": 11,
+  "perKindIndependent": {
+   "evaluate": 1,
+   "find_x_for_value": 1,
+   "slope_from_two_points": 1,
+   "interpret_slope": 4,
+   "interpret_intercept": 6
+  }
+ },
+ {
+  "skill": "linear_functions",
+  "difficulty": "medium",
+  "kindsInCatalog": 5,
+  "sampled": 1500,
+  "compileFail": 0,
+  "groups": 5,
+  "independent25": 7,
+  "independent50": 8,
+  "independent100": 8,
+  "perKindIndependent": {
+   "evaluate": 1,
+   "find_x_for_value": 1,
+   "slope_from_two_points": 1,
+   "interpret_slope": 4,
+   "interpret_intercept": 4
+  }
+ },
+ {
+  "skill": "equivalent_expressions",
+  "difficulty": "easy",
+  "kindsInCatalog": 2,
+  "sampled": 1500,
+  "compileFail": 0,
+  "groups": 2,
+  "independent25": 3,
+  "independent50": 3,
+  "independent100": 3,
+  "perKindIndependent": {
+   "polynomial_distribution": 2,
+   "rational_equivalence": 1
+  }
+ },
+ {
+  "skill": "equivalent_expressions",
+  "difficulty": "medium",
+  "kindsInCatalog": 2,
+  "sampled": 1500,
+  "compileFail": 0,
+  "groups": 2,
+  "independent25": 3,
+  "independent50": 3,
+  "independent100": 3,
+  "perKindIndependent": {
+   "polynomial_distribution": 2,
+   "rational_equivalence": 1
+  }
+ },
+ {
+  "skill": "nonlinear_equations_systems",
+  "difficulty": "easy",
+  "kindsInCatalog": 9,
+  "sampled": 1530,
+  "compileFail": 0,
+  "groups": 9,
+  "independent25": 12,
+  "independent50": 14,
+  "independent100": 15,
+  "perKindIndependent": {
+   "root": 1,
+   "sum_of_roots": 1,
+   "product_of_roots": 1,
+   "num_real_solutions": 5,
+   "irrational_sum_of_roots": 1,
+   "irrational_product_of_roots": 1,
+   "irrational_root_radical_form": 1,
+   "linear_quadratic_intersection": 5,
+   "parameter_discriminant": 1
+  }
+ },
+ {
+  "skill": "nonlinear_equations_systems",
+  "difficulty": "medium",
+  "kindsInCatalog": 9,
+  "sampled": 1530,
+  "compileFail": 0,
+  "groups": 9,
+  "independent25": 12,
+  "independent50": 12,
+  "independent100": 14,
+  "perKindIndependent": {
+   "root": 1,
+   "sum_of_roots": 1,
+   "product_of_roots": 1,
+   "num_real_solutions": 4,
+   "irrational_sum_of_roots": 1,
+   "irrational_product_of_roots": 1,
+   "irrational_root_radical_form": 1,
+   "linear_quadratic_intersection": 5,
+   "parameter_discriminant": 1
+  }
+ },
+ {
+  "skill": "nonlinear_functions",
+  "difficulty": "easy",
+  "kindsInCatalog": 6,
+  "sampled": 1500,
+  "compileFail": 0,
+  "groups": 6,
+  "independent25": 14,
+  "independent50": 14,
+  "independent100": 14,
+  "perKindIndependent": {
+   "evaluate": 1,
+   "vertex_x": 1,
+   "vertex_y": 1,
+   "find_x_for_value": 4,
+   "interpret_a": 4,
+   "interpret_b": 4
+  }
+ },
+ {
+  "skill": "nonlinear_functions",
+  "difficulty": "medium",
+  "kindsInCatalog": 6,
+  "sampled": 1500,
+  "compileFail": 0,
+  "groups": 6,
+  "independent25": 14,
+  "independent50": 14,
+  "independent100": 14,
+  "perKindIndependent": {
+   "evaluate": 1,
+   "vertex_x": 1,
+   "vertex_y": 1,
+   "find_x_for_value": 4,
+   "interpret_a": 4,
+   "interpret_b": 4
+  }
+ },
+ {
+  "skill": "ratios_rates_units",
+  "difficulty": "easy",
+  "kindsInCatalog": 2,
+  "sampled": 1500,
+  "compileFail": 0,
+  "groups": 2,
+  "independent25": 12,
+  "independent50": 12,
+  "independent100": 12,
+  "perKindIndependent": {
+   "proportion": 5,
+   "chained_conversion": 7
+  }
+ },
+ {
+  "skill": "ratios_rates_units",
+  "difficulty": "medium",
+  "kindsInCatalog": 2,
+  "sampled": 1500,
+  "compileFail": 0,
+  "groups": 2,
+  "independent25": 12,
+  "independent50": 12,
+  "independent100": 12,
+  "perKindIndependent": {
+   "proportion": 5,
+   "chained_conversion": 7
+  }
+ },
+ {
+  "skill": "percentages",
+  "difficulty": "easy",
+  "kindsInCatalog": 5,
+  "sampled": 1500,
+  "compileFail": 0,
+  "groups": 5,
+  "independent25": 6,
+  "independent50": 6,
+  "independent100": 6,
+  "perKindIndependent": {
+   "percent_of": 1,
+   "find_whole": 1,
+   "percent_change": 1,
+   "find_percent": 1,
+   "compound_change": 2
+  }
+ },
+ {
+  "skill": "percentages",
+  "difficulty": "medium",
+  "kindsInCatalog": 5,
+  "sampled": 1500,
+  "compileFail": 0,
+  "groups": 5,
+  "independent25": 6,
+  "independent50": 6,
+  "independent100": 6,
+  "perKindIndependent": {
+   "percent_of": 1,
+   "find_whole": 1,
+   "percent_change": 1,
+   "find_percent": 1,
+   "compound_change": 2
+  }
+ },
+ {
+  "skill": "one_variable_data",
+  "difficulty": "easy",
+  "kindsInCatalog": 4,
+  "sampled": 1520,
+  "compileFail": 0,
+  "groups": 4,
+  "independent25": 2,
+  "independent50": 2,
+  "independent100": 2,
+  "perKindIndependent": {
+   "mean": 1,
+   "median": 1,
+   "range": 1,
+   "grouped_median_interval": 1
+  }
+ },
+ {
+  "skill": "one_variable_data",
+  "difficulty": "medium",
+  "kindsInCatalog": 4,
+  "sampled": 1520,
+  "compileFail": 0,
+  "groups": 4,
+  "independent25": 2,
+  "independent50": 2,
+  "independent100": 2,
+  "perKindIndependent": {
+   "mean": 1,
+   "median": 1,
+   "range": 1,
+   "grouped_median_interval": 1
+  }
+ },
+ {
+  "skill": "two_variable_data",
+  "difficulty": "easy",
+  "kindsInCatalog": 7,
+  "sampled": 660,
+  "compileFail": 1320,
+  "groups": 3,
+  "independent25": 7,
+  "independent50": 7,
+  "independent100": 7,
+  "perKindIndependent": {
+   "cell": 3,
+   "row_total": 1,
+   "conditional_share": 3
+  }
+ },
+ {
+  "skill": "two_variable_data",
+  "difficulty": "medium",
+  "kindsInCatalog": 7,
+  "sampled": 660,
+  "compileFail": 1320,
+  "groups": 3,
+  "independent25": 7,
+  "independent50": 7,
+  "independent100": 7,
+  "perKindIndependent": {
+   "cell": 3,
+   "row_total": 1,
+   "conditional_share": 3
+  }
+ },
+ {
+  "skill": "probability",
+  "difficulty": "easy",
+  "kindsInCatalog": 3,
+  "sampled": 1000,
+  "compileFail": 750,
+  "groups": 2,
+  "independent25": 2,
+  "independent50": 2,
+  "independent100": 2,
+  "perKindIndependent": {
+   "simple": 1,
+   "conditional": 1
+  }
+ },
+ {
+  "skill": "probability",
+  "difficulty": "medium",
+  "kindsInCatalog": 3,
+  "sampled": 1000,
+  "compileFail": 750,
+  "groups": 2,
+  "independent25": 2,
+  "independent50": 2,
+  "independent100": 2,
+  "perKindIndependent": {
+   "simple": 1,
+   "conditional": 1
+  }
+ },
+ {
+  "skill": "inference_margin_error",
+  "difficulty": "easy",
+  "kindsInCatalog": 0,
+  "sampled": 1500,
+  "compileFail": 0,
+  "groups": 1,
+  "independent25": 4,
+  "independent50": 4,
+  "independent100": 4,
+  "perKindIndependent": {
+   "-": 4
+  }
+ },
+ {
+  "skill": "inference_margin_error",
+  "difficulty": "medium",
+  "kindsInCatalog": 0,
+  "sampled": 1500,
+  "compileFail": 0,
+  "groups": 1,
+  "independent25": 4,
+  "independent50": 4,
+  "independent100": 4,
+  "perKindIndependent": {
+   "-": 4
+  }
+ },
+ {
+  "skill": "evaluating_statistical_claims",
+  "difficulty": "easy",
+  "kindsInCatalog": 0,
+  "sampled": 1500,
+  "compileFail": 0,
+  "groups": 1,
+  "independent25": 4,
+  "independent50": 4,
+  "independent100": 4,
+  "perKindIndependent": {
+   "-": 4
+  }
+ },
+ {
+  "skill": "evaluating_statistical_claims",
+  "difficulty": "medium",
+  "kindsInCatalog": 0,
+  "sampled": 1500,
+  "compileFail": 0,
+  "groups": 1,
+  "independent25": 4,
+  "independent50": 4,
+  "independent100": 4,
+  "perKindIndependent": {
+   "-": 4
+  }
+ },
+ {
+  "skill": "area_volume",
+  "difficulty": "easy",
+  "kindsInCatalog": 6,
+  "sampled": 1500,
+  "compileFail": 0,
+  "groups": 6,
+  "independent25": 5,
+  "independent50": 5,
+  "independent100": 5,
+  "perKindIndependent": {
+   "rectangle_area": 1,
+   "triangle_area": 1,
+   "prism_volume": 1,
+   "prism_missing_dimension": 1,
+   "cylinder_volume_radius": 1,
+   "cylinder_volume_diameter": 1
+  }
+ },
+ {
+  "skill": "area_volume",
+  "difficulty": "medium",
+  "kindsInCatalog": 6,
+  "sampled": 1500,
+  "compileFail": 0,
+  "groups": 6,
+  "independent25": 5,
+  "independent50": 5,
+  "independent100": 5,
+  "perKindIndependent": {
+   "rectangle_area": 1,
+   "triangle_area": 1,
+   "prism_volume": 1,
+   "prism_missing_dimension": 1,
+   "cylinder_volume_radius": 1,
+   "cylinder_volume_diameter": 1
+  }
+ },
+ {
+  "skill": "lines_angles_triangles",
+  "difficulty": "easy",
+  "kindsInCatalog": 4,
+  "sampled": 1140,
+  "compileFail": 570,
+  "groups": 3,
+  "independent25": 3,
+  "independent50": 3,
+  "independent100": 3,
+  "perKindIndependent": {
+   "triangle_angle_sum": 1,
+   "isosceles_base_angle": 1,
+   "similar_triangles": 1
+  }
+ },
+ {
+  "skill": "lines_angles_triangles",
+  "difficulty": "medium",
+  "kindsInCatalog": 4,
+  "sampled": 1140,
+  "compileFail": 570,
+  "groups": 3,
+  "independent25": 3,
+  "independent50": 3,
+  "independent100": 3,
+  "perKindIndependent": {
+   "triangle_angle_sum": 1,
+   "isosceles_base_angle": 1,
+   "similar_triangles": 1
+  }
+ },
+ {
+  "skill": "right_triangles_trigonometry",
+  "difficulty": "easy",
+  "kindsInCatalog": 3,
+  "sampled": 1500,
+  "compileFail": 0,
+  "groups": 3,
+  "independent25": 1,
+  "independent50": 1,
+  "independent100": 1,
+  "perKindIndependent": {
+   "pythagorean_hypotenuse": 1,
+   "pythagorean_leg": 1,
+   "trig_ratio": 1
+  }
+ },
+ {
+  "skill": "right_triangles_trigonometry",
+  "difficulty": "medium",
+  "kindsInCatalog": 3,
+  "sampled": 1500,
+  "compileFail": 0,
+  "groups": 3,
+  "independent25": 1,
+  "independent50": 1,
+  "independent100": 1,
+  "perKindIndependent": {
+   "pythagorean_hypotenuse": 1,
+   "pythagorean_leg": 1,
+   "trig_ratio": 1
+  }
+ },
+ {
+  "skill": "circles",
+  "difficulty": "easy",
+  "kindsInCatalog": 7,
+  "sampled": 1540,
+  "compileFail": 0,
+  "groups": 7,
+  "independent25": 7,
+  "independent50": 7,
+  "independent100": 7,
+  "perKindIndependent": {
+   "circumference_radius": 1,
+   "circumference_diameter": 1,
+   "arc_length": 1,
+   "sector_area": 1,
+   "central_from_inscribed": 1,
+   "inscribed_from_central": 1,
+   "circle_equation_transform": 3
+  }
+ },
+ {
+  "skill": "circles",
+  "difficulty": "medium",
+  "kindsInCatalog": 7,
+  "sampled": 1540,
+  "compileFail": 0,
+  "groups": 7,
+  "independent25": 7,
+  "independent50": 7,
+  "independent100": 7,
+  "perKindIndependent": {
+   "circumference_radius": 1,
+   "circumference_diameter": 1,
+   "arc_length": 1,
+   "sector_area": 1,
+   "central_from_inscribed": 1,
+   "inscribed_from_central": 1,
+   "circle_equation_transform": 3
+  }
+ }
+]

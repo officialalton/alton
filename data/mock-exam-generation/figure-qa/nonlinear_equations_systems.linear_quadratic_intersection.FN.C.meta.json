@@ -1,0 +1,49 @@
+{
+ "itemId": "nonlinear_equations_systems.linear_quadratic_intersection.FN.C",
+ "generatedAt": "2026-10-07T05:02:00.778Z",
+ "codeHash": "58e29074b8b5f874d10ac0a5587aa4f38aee36ba640a957d9ba80567b05f74ea",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/coordinate-plane.ts",
+  "lib/problem-figures/templates/figure-choice.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/cplane-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/data-c-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/graph-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/nonlinear_equations_systems.linear_quadratic_intersection.FN.C.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/ln-b-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/pure-fn-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/pure-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "nonlinear_equations_systems.linear_quadratic_intersection.FN.C.png",
+   "mobileFile": "nonlinear_equations_systems.linear_quadratic_intersection.FN.C.m375.png",
+   "archetypeId": "lqcc.linear_quadratic_intersection.FN.C.repr_shift",
+   "seed": 11,
+   "signature": "figure_choice[plane]",
+   "stimulus": "In a practice set, students compare graphs in the $xy$-plane. The choices shown are four graphs of a parabola and a line in the same $xy$-plane.",
+   "question": "Exactly one of the four graphs shown has this property: the parabola opens upward and the line crosses it at exactly two points. Which one is it?",
+   "options": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "correctIndex": 1,
+   "answer": "B",
+   "explanation": "(1) 교점이 두 개이고 포물선은 위로 열린다. (2) 각 그래프에서 직선과 포물선이 만나는 점의 개수를 센다. (3) 첫째 조건을 어긴 그래프를 지운다. (4) 둘째 조건을 어긴 그래프를 지운다. (5) 남은 그래프가 정답이다. (6) 다른 그래프는 조건 하나 이상이 어긋난다. 따라서 정답은 B이다.",
+   "structuralIssues": []
+  }
+ ]
+}

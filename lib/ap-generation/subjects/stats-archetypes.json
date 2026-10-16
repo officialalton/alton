@@ -1,0 +1,907 @@
+[
+ {
+  "id": "st_hist_median_interval",
+  "topic": "1.7",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "the data are expanded into a sorted list using class midpoints and the median is taken with numpy, independent of the cumulative-count rule"
+  ],
+  "misconceptions": [
+   "picks the tallest bar as the median class",
+   "picks the middle class of the axis",
+   "reports the class of the first or third quartile"
+  ]
+ },
+ {
+  "id": "st_box_outlier_fence",
+  "topic": "1.7",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "candidate values at the boundary plus and minus 0.01 are tested against the rule with exact fractions, and the plotted whisker end and outlier are checked to lie below and above the boundary"
+  ],
+  "misconceptions": [
+   "adds IQR rather than 1.5 IQR",
+   "reports 1.5 IQR alone",
+   "uses the lower boundary",
+   "reads the whisker end"
+  ]
+ },
+ {
+  "id": "st_z_compare",
+  "topic": "1.7",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "normal percentile ranks from scipy.stats.norm.cdf are compared and must order the tests exactly as the z-scores do"
+  ],
+  "misconceptions": [
+   "compares raw scores",
+   "compares distance from the mean in points",
+   "says scores cannot be compared"
+  ]
+ },
+ {
+  "id": "st_cond_prob_table",
+  "topic": "2.6",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "every respondent is expanded into an individual record and the conditional proportion is found by enumeration, independent of the cell-count ratio"
+  ],
+  "misconceptions": [
+   "divides by the row total",
+   "divides by the grand total",
+   "ignores the given condition"
+  ]
+ },
+ {
+  "id": "st_tree_bayes",
+  "topic": "2.6",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "a population of 100000 items is built from the tree with integer counts per path and the conditional proportion is computed from the counts"
+  ],
+  "misconceptions": [
+   "gives P(outcome given source)",
+   "gives the joint probability",
+   "gives the overall outcome probability",
+   "gives the prior probability"
+  ]
+ },
+ {
+  "id": "st_binomial_exact",
+  "topic": "2.10",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the probability is recomputed with math.comb and powers directly, independent of scipy.stats.binom"
+  ],
+  "misconceptions": [
+   "finds P(X <= k)",
+   "finds P(X >= k)",
+   "omits the binomial coefficient",
+   "swaps p and 1 - p"
+  ]
+ },
+ {
+  "id": "st_normal_area",
+  "topic": "2.11",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "the upper-tail area is computed from math.erf, independent of scipy.stats.norm.sf, and the plotted curve is a density with unit area"
+  ],
+  "misconceptions": [
+   "uses the lower tail",
+   "doubles the tail",
+   "divides by the variance"
+  ]
+ },
+ {
+  "id": "st_z_test_decision",
+  "topic": "3.7",
+  "skill": "3.E",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the P-value is recomputed from math.erf rather than scipy.stats.norm and every wrong option is checked to round to a different pair of values"
+  ],
+  "misconceptions": [
+   "puts p-hat in the standard error",
+   "uses the wrong number of tails",
+   "reports the complement area"
+  ]
+ },
+ {
+  "id": "st_t_test_stats",
+  "topic": "4.5",
+  "skill": "3.E",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "the t tail area is obtained by numerically integrating the t density with scipy.integrate.quad, independent of scipy.stats.t"
+  ],
+  "misconceptions": [
+   "uses the normal distribution",
+   "divides by the square root of n - 1",
+   "uses the wrong number of tails"
+  ]
+ },
+ {
+  "id": "st_two_sample_t",
+  "topic": "4.7",
+  "skill": "3.E",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "scipy.stats.ttest_ind_from_stats confidence_interval reproduces the endpoints and the t critical value is found by inverting the numerically integrated t cdf"
+  ],
+  "misconceptions": [
+   "uses z star",
+   "adds standard errors",
+   "reverses the order of subtraction"
+  ]
+ },
+ {
+  "id": "st_study_conclusion",
+  "topic": "1.13",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "a truth table over the two design features is enumerated, exactly one of the four claims is allowed, and the sentences are generated from the same table"
+  ],
+  "misconceptions": [
+   "concludes cause from self-selected groups",
+   "generalizes from volunteers",
+   "refuses a conclusion that the design justifies"
+  ]
+ },
+ {
+  "id": "st_clt_describe",
+  "topic": "2.12",
+  "skill": "4.C",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "4000 simulated samples from a gamma population with the same mean and standard deviation reproduce the stated mean and standard deviation, and the plotted means are checked against them"
+  ],
+  "misconceptions": [
+   "keeps the population shape",
+   "keeps sigma",
+   "divides sigma by n"
+  ]
+ },
+ {
+  "id": "st_chisq_output",
+  "topic": "3.15",
+  "skill": "4.G",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "the chi-square statistic is recomputed from the expected counts, scipy.stats.chi2_contingency agrees and the tail area is also obtained by numerically integrating the chi-square density"
+  ],
+  "misconceptions": [
+   "reads association as cause",
+   "treats failing to reject as proof of independence",
+   "limits the conclusion to the sample",
+   "reverses the P-value rule"
+  ]
+ },
+ {
+  "id": "st_t_output_claim",
+  "topic": "4.10",
+  "skill": "4.G",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "the Welch statistic, degrees of freedom, P-value (by numerical integration of the t density) and interval are recomputed from the summary statistics, and the interval and P-value must agree on the decision"
+  ],
+  "misconceptions": [
+   "draws the opposite conclusion from the interval",
+   "misstates the comparison of P with alpha",
+   "reverses the meaning of a small P-value"
+  ]
+ },
+ {
+  "id": "st_residual_plot",
+  "topic": "5.4",
+  "skill": "4.D",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "residuals are made exactly orthogonal to x like least-squares residuals and a quadratic fit R squared and the correlation of absolute residuals with x classify the pattern, which must match the intended pattern"
+  ],
+  "misconceptions": [
+   "overlooks the curve",
+   "sees a pattern in random scatter",
+   "judges by size of residuals",
+   "uses residuals adding to zero"
+  ]
+ },
+ {
+  "id": "st_influential_point",
+  "topic": "5.2",
+  "skill": "4.D",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "slope and correlation are recomputed with and without the point by closed-form sums and by numpy polyfit and corrcoef, and the changes must exceed fixed thresholds so the options are distinct"
+  ],
+  "misconceptions": [
+   "gets the correlation change backwards",
+   "gets the slope change backwards",
+   "gets both changes backwards"
+  ]
+ },
+ {
+  "id": "st_confounder",
+  "topic": "1.13",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "each scenario is written with exactly one variable linked to both variables and three named non-confounders drawn from a fixed catalog that was checked by hand for uniqueness"
+  ],
+  "misconceptions": [
+   "names the response variable",
+   "names the sample size",
+   "names a variable unrelated to both"
+  ]
+ },
+ {
+  "id": "st_ci_interpretation",
+  "topic": "3.4",
+  "skill": "4.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the interval is recomputed with the z critical value from statistics.NormalDist (independent of scipy.stats.norm) and the large counts condition is verified"
+  ],
+  "misconceptions": [
+   "assigns a probability to the fixed parameter",
+   "describes other samples",
+   "describes the sample instead of the population"
+  ]
+ },
+ {
+  "id": "st_pvalue_interpretation",
+  "topic": "3.6",
+  "skill": "4.F",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "the upper-tail area is computed from math.erf and the shaded region and marked value are generated from the same sample proportion and standard error as the P-value"
+  ],
+  "misconceptions": [
+   "reads the P-value as the probability that H0 is true",
+   "reads it as the probability that Ha is true",
+   "uses exactly the observed value instead of at least as extreme"
+  ]
+ },
+ {
+  "id": "st_slope_interp",
+  "topic": "5.5",
+  "skill": "4.D",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "the least-squares slope is recomputed from the closed-form sums of deviations and compared with numpy polyfit; the coefficient shown in the output is the rounded fitted value"
+  ],
+  "misconceptions": [
+   "treats the prediction as exact",
+   "reverses x and y",
+   "confuses the slope with the intercept"
+  ]
+ },
+ {
+  "id": "st_investigative_question",
+  "topic": "1.10",
+  "skill": "1.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "each option is generated from a table of three properties (variability, population, answerable with data) and exactly one option has all three"
+  ],
+  "misconceptions": [
+   "asks for a count or fact that can be looked up",
+   "asks about one person",
+   "asks for an opinion"
+  ]
+ },
+ {
+  "id": "st_question_data_match",
+  "topic": "1.10",
+  "skill": "1.A",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "the variable names in each option are matched mechanically against the table and exactly one option uses only recorded variables and an association question"
+  ],
+  "misconceptions": [
+   "needs a variable that was not recorded",
+   "asks a cause-and-effect question of survey data",
+   "asks for a list of individual values"
+  ]
+ },
+ {
+  "id": "st_hypotheses_setup",
+  "topic": "3.5",
+  "skill": "2.E",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "each option is built from a table of direction, parameter symbol and role of the equality, and only one row matches the scenario's claim and suspicion"
+  ],
+  "misconceptions": [
+   "uses an alternative in the wrong direction",
+   "writes hypotheses about a sample statistic",
+   "swaps the roles of the two hypotheses"
+  ]
+ },
+ {
+  "id": "st_method_choice_means",
+  "topic": "4.4",
+  "skill": "2.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "each procedure is tied to a feature table (variable type, number of samples, pairing, number of variables) and exactly one procedure matches the scenario; each wrong option is rejected by a stated feature"
+  ],
+  "misconceptions": [
+   "uses two independent samples where there is a pairing or only one sample",
+   "uses matched pairs when there are no pairs",
+   "uses a proportion procedure for measurements"
+  ]
+ },
+ {
+  "id": "st_method_choice_cat",
+  "topic": "3.14",
+  "skill": "2.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "each procedure is tied to a feature table (variable type, number of samples, pairing, number of variables) and exactly one procedure matches the scenario; each wrong option is rejected by a stated feature"
+  ],
+  "misconceptions": [
+   "uses a two-proportion procedure when a variable has more than two categories",
+   "uses a one-proportion procedure for two variables",
+   "uses a means procedure for categorical variables"
+  ]
+ },
+ {
+  "id": "st_type_errors",
+  "topic": "3.8",
+  "skill": "2.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the four options are the four cells of the truth-by-decision table; exactly one cell matches the requested error type"
+  ],
+  "misconceptions": [
+   "swaps Type I and Type II",
+   "calls a correct decision an error",
+   "calls the other correct decision an error"
+  ]
+ },
+ {
+  "id": "st_sampling_method",
+  "topic": "1.11",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "a table of methods and defining properties is used and exactly one method has the property required by the stated goal"
+  ],
+  "misconceptions": [
+   "names another random method",
+   "names a different random method",
+   "treats a convenience sample as random"
+  ]
+ },
+ {
+  "id": "st_conditions_prop",
+  "topic": "3.7",
+  "skill": "4.E",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "each condition is evaluated separately in code from N, n, p0 and the sample count, and exactly one of the four verdicts agrees with all three evaluations; the verdict from the sample counts is checked to disagree with the verdict from p0"
+  ],
+  "misconceptions": [
+   "checks large counts with the sample counts instead of the null value",
+   "claims the 10 percent condition fails when it holds",
+   "treats a small sampled fraction as a random-selection problem"
+  ]
+ },
+ {
+  "id": "st_conditions_t",
+  "topic": "4.2",
+  "skill": "4.E",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "the sample is simulated and the skewness, interquartile outlier count and sample size are computed independently of the plotted counts; the case is accepted only if the rule agrees with the planned case"
+  ],
+  "misconceptions": [
+   "rejects a small symmetric sample",
+   "applies the Central Limit Theorem to a small sample",
+   "cites an unknown sigma as the problem"
+  ]
+ },
+ {
+  "id": "st_conditions_two_t",
+  "topic": "4.7",
+  "skill": "4.E",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "the outlier rule is applied again to the plotted five-number summaries, and the decision rule is evaluated separately from the planned case"
+  ],
+  "misconceptions": [
+   "treats unequal sample sizes as a problem",
+   "rejects every small sample regardless of the graphs",
+   "believes the boxplot cannot show a problem"
+  ]
+ },
+ {
+  "id": "st_two_prop_ci_claim",
+  "topic": "3.11",
+  "skill": "4.G",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the interval is recomputed from counts with z* found by bisection on the normal cdf and the claim is derived from the sign pattern of the endpoints"
+  ],
+  "misconceptions": [
+   "treats inclusion of zero as proof of no difference",
+   "reverses the direction of the difference",
+   "gives a probability interpretation of the confidence level"
+  ]
+ },
+ {
+  "id": "st_regression_residual_output",
+  "topic": "5.4",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "the residual is recomputed from the coefficients and checked against the side of the line (above or below) on which the observed point lies"
+  ],
+  "misconceptions": [
+   "subtracts in the wrong order",
+   "swaps slope and intercept",
+   "leaves out the intercept"
+  ]
+ },
+ {
+  "id": "st_r2_interp",
+  "topic": "5.5",
+  "skill": "4.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "r squared is checked as the square of a correlation r whose sign matches the described direction, and the sentences are generated from a fixed set of interpretations"
+  ],
+  "misconceptions": [
+   "reads r squared as points on the line",
+   "reads r squared as a slope",
+   "confuses r squared with r"
+  ]
+ },
+ {
+  "id": "st_boxplot_compare",
+  "topic": "1.9",
+  "skill": "4.A",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "each statement is evaluated against the plotted five-number summaries, every compared statistic is required to differ by at least six units so the difference is visible, and exactly one of the four chosen statements is true"
+  ],
+  "misconceptions": [
+   "reverses a comparison of medians",
+   "reverses a comparison of spreads",
+   "misreads a whisker end"
+  ]
+ },
+ {
+  "id": "st_independence_check",
+  "topic": "2.7",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "the table is expanded into individual records and P(A given B) and P(A) are found by enumeration, independent of the cell-ratio calculation"
+  ],
+  "misconceptions": [
+   "thinks independence needs equal counts",
+   "confuses independence with mutual exclusivity",
+   "compares the wrong probabilities"
+  ]
+ },
+ {
+  "id": "st_set_binomial_q1",
+  "topic": "2.9",
+  "skill": "3.D",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "the mean is recomputed as the sum of x times P(X = x) over the table and compared with n times p"
+  ],
+  "misconceptions": [
+   "uses n(1-p) instead of np",
+   "reports p instead of the mean",
+   "reports n divided by two as the mean"
+  ]
+ },
+ {
+  "id": "st_set_binomial_q2",
+  "topic": "2.8",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "the table probabilities are summed from x = 2 up and compared with the complement, using binomial probabilities computed from the combinations formula and scipy"
+  ],
+  "misconceptions": [
+   "uses more than 2 instead of at least 2",
+   "uses exactly 2 instead of at least 2",
+   "subtracts only one value from 1"
+  ]
+ },
+ {
+  "id": "st_set_binomial_q3",
+  "topic": "2.8",
+  "skill": "4.D",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "the sentences are generated from the definition of X and the table value; the event wording is checked against X = 0"
+  ],
+  "misconceptions": [
+   "confuses with the probability for one item",
+   "reads it as a guaranteed percentage",
+   "reverses the event"
+  ]
+ },
+ {
+  "id": "st_set_regression_q1",
+  "topic": "5.3",
+  "skill": "4.D",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "the interpretation sentences are generated from the slope sign and units, and the slope is checked against the sign implied by the correlation"
+  ],
+  "misconceptions": [
+   "claims an exact change",
+   "reverses the variables",
+   "uses percent"
+  ]
+ },
+ {
+  "id": "st_set_regression_q2",
+  "topic": "5.3",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "the prediction is recomputed from the printed coefficients and compared with the generating line"
+  ],
+  "misconceptions": [
+   "leaves out the intercept",
+   "swaps slope and intercept",
+   "adds instead of multiplies"
+  ]
+ },
+ {
+  "id": "st_set_regression_q3",
+  "topic": "5.2",
+  "skill": "3.B",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "r is recomputed as the square root of the printed R-Sq with the slope's sign and rounded to two decimals; options are at least 0.04 apart"
+  ],
+  "misconceptions": [
+   "reports r squared",
+   "uses the wrong sign",
+   "divides r by two"
+  ]
+ },
+ {
+  "id": "st_question_type",
+  "topic": "1.1",
+  "skill": "1.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the five question structures are generated from a table of (quantitative count, categorical count, groups compared) and exactly one row matches the question"
+  ],
+  "misconceptions": [
+   "names one variable when the question names two or the reverse",
+   "mixes up quantitative and categorical variables",
+   "mixes up comparing two groups with a relationship between two variables"
+  ]
+ },
+ {
+  "id": "st_question_revision",
+  "topic": "1.10",
+  "skill": "1.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "each revision is generated from the property table (variability, population, answerable with data); the draft flaw is one row, and exactly one revision has all three properties"
+  ],
+  "misconceptions": [
+   "keeps the flaw of the draft in new words",
+   "fixes the draft but introduces a different flaw",
+   "asks about one individual instead of a population"
+  ]
+ },
+ {
+  "id": "st_question_scope",
+  "topic": "1.10",
+  "skill": "1.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the population of each question is compared with the sampling frame and the study type is checked against the claim; exactly one question matches both"
+  ],
+  "misconceptions": [
+   "applies the result to a larger population than the one sampled",
+   "applies the result to a population that was not sampled",
+   "asks a cause-and-effect question of observational data"
+  ]
+ },
+ {
+  "id": "st_sampling_bias",
+  "topic": "1.12",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "each scenario is built from one defining clue of a four-row table of bias types, and exactly one type matches that clue"
+  ],
+  "misconceptions": [
+   "mixes up units that could not be selected with selected units that did not respond",
+   "mixes up self-selection with nonresponse",
+   "mixes up inaccurate answers with how units were selected"
+  ]
+ },
+ {
+  "id": "st_blocking_design",
+  "topic": "1.13",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "each design is generated from a property table (random assignment, both treatments in every block, block effect separated) and exactly one design has every property"
+  ],
+  "misconceptions": [
+   "uses a different treatment in each block",
+   "lets the experimenter choose the treatments",
+   "randomizes without regard to the blocks"
+  ]
+ },
+ {
+  "id": "st_simulation_design",
+  "topic": "2.3",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "each design is a triple (digits for the event, digits per trial, counting rule) and is accepted as correct only when all three equal the target triple; the three wrong designs each differ in exactly one component"
+  ],
+  "misconceptions": [
+   "assigns the wrong share of digits to the event",
+   "uses the wrong number of digits per trial",
+   "counts a different event than the one asked about"
+  ]
+ },
+ {
+  "id": "st_hypotheses_means",
+  "topic": "4.4",
+  "skill": "2.E",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "each option is generated from a table of direction, symbol and roles; the direction of a paired alternative is derived from the stated order of subtraction and the suspicion"
+  ],
+  "misconceptions": [
+   "uses the alternative in the wrong direction",
+   "writes hypotheses about a sample mean",
+   "uses a two-sided alternative for a directional suspicion"
+  ]
+ },
+ {
+  "id": "st_ci_width_effect",
+  "topic": "4.2",
+  "skill": "2.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the ratio of the margins of error is computed from t critical values found with scipy and again by bisection on the numerically integrated t cdf, and the ratio must differ from 1 by at least 15 percent"
+  ],
+  "misconceptions": [
+   "believes the two opposite effects cancel exactly",
+   "considers only the change in the sample size or only the confidence level",
+   "believes the standard deviation is needed although it cancels"
+  ]
+ },
+ {
+  "id": "st_power_effect",
+  "topic": "3.8",
+  "skill": "2.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "each change is encoded as a pair (change in sample size, change in significance level) and the effects on both error probabilities are evaluated from a rule table; exactly one change meets both requirements"
+  ],
+  "misconceptions": [
+   "raises the significance level and ignores the Type I error",
+   "thinks a smaller significance level raises power",
+   "thinks a smaller sample size raises power"
+  ]
+ },
+ {
+  "id": "st_t_procedure_conditions",
+  "topic": "4.4",
+  "skill": "4.E",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the verdict is recomputed from a table of (shape, size) pairs for each sample; exactly one option has the correct procedure, the correct data and the correct verdict"
+  ],
+  "misconceptions": [
+   "combines the samples or uses a one-sample or matched-pairs procedure for independent samples",
+   "checks only one sample or the combined sample",
+   "uses equal sample sizes or the sample-size rule alone as the criterion"
+  ]
+ },
+ {
+  "id": "st_ci_test_consistency",
+  "topic": "4.3",
+  "skill": "4.G",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the decision is found from the position of the null value in the rounded interval and again from the t statistic and P-value (scipy and a numerically integrated t cdf), and the two must agree with a margin from the significance level"
+  ],
+  "misconceptions": [
+   "believes an interval cannot give a test decision",
+   "misplaces the null value or ignores the direction of the alternative",
+   "treats failing to reject as evidence that the null hypothesis is true"
+  ]
+ },
+ {
+  "id": "st_sampling_dist_xbar",
+  "topic": "4.1",
+  "skill": "3.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the standard deviation of a mean of n independent observations is recomputed from the variance of a weighted sum with numpy and compared with the closed form; the shape follows from a table of (population shape, sample size)"
+  ],
+  "misconceptions": [
+   "centers the distribution at the one observed sample mean",
+   "forgets to divide by the square root of the sample size",
+   "applies or withholds the Central Limit Theorem incorrectly"
+  ]
+ },
+ {
+  "id": "st_residual_r2_model",
+  "topic": "5.4",
+  "skill": "4.D",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "residuals are made orthogonal to x like least-squares residuals; a quadratic fit R squared and the correlation of absolute residuals with x classify the pattern, which must match the intended pattern"
+  ],
+  "misconceptions": [
+   "sees random scatter in a curve or a curve in random scatter",
+   "uses the size of r squared as proof or disproof of linearity",
+   "gives the right decision with a reason that is true of every model"
+  ]
+ },
+ {
+  "id": "st_outlier_effect",
+  "topic": "5.2",
+  "skill": "4.D",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "slope and correlation are recomputed with and without the point by closed-form sums and by numpy polyfit and corrcoef; the point type is enforced by thresholds on the change in |r| and on the relative change in the slope"
+  ],
+  "misconceptions": [
+   "treats the circled point as a different type of unusual point",
+   "gets the effect on the correlation backwards",
+   "gets the effect on the slope wrong"
+  ]
+ },
+ {
+  "id": "st_power_table_change",
+  "topic": "3.8",
+  "skill": "2.D",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "each power is computed with scipy's normal distribution and again from a bisection on math.erf; the compared powers must differ by at least 0.04 in the table"
+  ],
+  "misconceptions": [
+   "thinks the Type I error probability changes with the sample size",
+   "reads both effects in the wrong direction",
+   "lets only one of the two changes decide the direction of the power"
+  ]
+ },
+ {
+  "id": "st_two_draw_conditional",
+  "topic": "2.6",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "all ordered pairs of distinguishable objects are enumerated and the conditional proportion is counted directly, independent of the tree arithmetic"
+  ],
+  "misconceptions": [
+   "reads the conditional branch probability for the reversed condition",
+   "reports the joint probability of the two draws",
+   "reports the probability of the given event"
+  ]
+ },
+ {
+  "id": "st_phat_normal_prob",
+  "topic": "3.2",
+  "skill": "3.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the normal probability is computed with math.erf and again with scipy; an exact binomial probability must be within 0.03 of the normal value so the approximation is sound"
+  ],
+  "misconceptions": [
+   "omits the square root of n",
+   "uses the wrong tail",
+   "rejects the normal model with a rule that does not apply"
+  ]
+ },
+ {
+  "id": "st_block_table",
+  "topic": "1.13",
+  "skill": "4.B",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "the cell means and standard deviations are recomputed from the raw simulated data with numpy and with the statistics module; the within-block differences, the block gap and the standard deviations must satisfy fixed thresholds"
+  ],
+  "misconceptions": [
+   "reads the table as a treatment effect that depends on the block",
+   "credits the block difference to the treatments",
+   "believes blocking makes random assignment unnecessary"
+  ]
+ },
+ {
+  "id": "st_chisq_setup",
+  "topic": "3.14",
+  "skill": "2.E",
+  "calculator": "allowed",
+  "stimulus": "stat_chart",
+  "verifiedBy": [
+   "the degrees of freedom and the expected counts are recomputed with scipy's chi-square contingency routine, and every expected count must be at least 5"
+  ],
+  "misconceptions": [
+   "uses the null hypothesis of the other kind of test",
+   "states the hypothesis about the sample",
+   "uses the number of cells minus one"
+  ]
+ }
+]

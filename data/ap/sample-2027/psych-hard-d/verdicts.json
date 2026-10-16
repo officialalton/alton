@@ -1,0 +1,1191 @@
+[
+ {
+  "key": "ap_psychology-m01-k0",
+  "cellId": "ap_psychology-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "D",
+     "brief_reasoning": "Net input is 10+8-5 = +13, which is below the +15 threshold, so the neuron does not fire. Adding +4 brings it to +17, which is above threshold, so it fires. Action potentials are all-or-none, so it is normal-sized.",
+     "ambiguous_or_flawed": false,
+     "flaw_note": "Minor point: 'later' assumes the earlier input hasn't decayed before the +4 arrives. That is the intended reading."
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Applies threshold, excitatory/inhibitory input, and all-or-none principle (EK 1.3.A) to a scenario. Fits 1.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Net +13 below threshold, then +17 fires; all-or-none gives a normal-size action potential. Unique correct answer D. The solver agrees."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed. The stem is clear and complete. The persistence of input between the two signals is implied by the wording."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception (ignoring inhibition and larger spikes, permanent inhibition, smaller spike from earlier inhibition). Each wrong option is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 95 seconds, simple arithmetic, no calculator, four options."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is accurate, with a unique key (D) and distinct, plausible distractors. Its scope and load fit AP Psychology. The only flaws are minor: the blueprint label mentions myelin, which the item does not use, and the stem leaves the persistence of the earlier input implicit. Pass."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must (1) sum excitatory and inhibitory inputs to +13 and judge it below the +15 threshold, (2) carry that net value forward and add +4 to reach +17, so the neuron fires, and (3) apply the all-or-none principle to reject larger or smaller action potential claims. This combines threshold/summation with all-or-none firing. Two distractors pass the first step and fail only later. Arithmetic is trivial, reading is short, and all content is in Unit 1 scope, so no unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_psychology-m01-k1",
+  "cellId": "ap_psychology-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Myelin insulates the axon and enables saltatory conduction. When it breaks down, as in multiple sclerosis, signals travel more slowly or fail.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "D"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Myelin function, EK 1.3.A; simple application to a disease scenario."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "D is uniquely correct; the other options are factually false."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions; each wrong option is explained. Minor: the key reuses the stem's terminology."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, no calculator, about 95 seconds. Fairly easy, but acceptable."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Accurate, unambiguous myelin item with a unique key and distinct distractors. It is low difficulty, but it passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item applies one named concept (myelin sheath function) to a short disease scenario. The student recalls that myelin speeds conduction and then rejects distractors that assign the functions of other neuron parts to myelin. The generator's claimed concepts (threshold, summation, all-or-none) do not appear in the stem or options, so the text supports about 2 steps and a single concept, which fits basic_learning under the rubric. The distractors are clearly wrong once the myelin function is known, and there is no figure, table, or computation.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_psychology-m02-k0",
+  "cellId": "ap_psychology-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "B",
+     "brief_reasoning": "The patient has lost touch but can still move the hand, so the damage is to sensory processing, not motor control. Touch is processed in the somatosensory cortex of the parietal lobe, and each side of the brain handles the opposite side of the body. So the damage is in the left parietal lobe.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Applies lobe function and contralateral processing to a scenario; fits 1.4 and skill 1.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Left parietal somatosensory cortex is the unique correct answer; the solver agrees."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed; the stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception (wrong lobe, wrong side, wrong sense), and the explanation addresses each one."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The task load is typical, and no calculator is needed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Accurate, unambiguous item with a unique key and plausible distractors, so it passes all criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The student must (1) separate the sensory deficit from the intact movement, (2) map touch to the somatosensory cortex in the parietal lobe, and (3) apply contralateral processing to choose the left hemisphere. Each distractor fails at a different step: option 1 confuses sensory and motor cortex, option 3 ignores contralateral processing, and option 4 names the wrong lobe. This meets the rubric of at least 3 steps and 2 combined concepts (lobe function and contralateral processing). The scenario is unambiguous and entirely within Topic 1.4 scope. Reading is minimal and there is no arithmetic.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_psychology-m02-k1",
+  "cellId": "ap_psychology-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "B",
+     "brief_reasoning": "The eyes and pupillary reflexes work normally, so the retina and brainstem pathways are intact. Losing the left visual field fits damage to the right occipital visual cortex.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Matches 1.4 and 1.A: infer the brain region from a pattern of lost and preserved function."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "B is the unique correct answer: the eyes and pupils work, and the visual-field loss points to occipital visual cortex damage."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor targets a distinct misconception (motor cortex, retina as brain, temporal lobe as all senses). The explanation covers every wrong option. D is somewhat easy to rule out but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, about 60-95 seconds, with no calculator, typical of AP Psychology."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is accurate and well scoped, with a unique key (B) and distinct, plausible distractors. No instant-reject condition applies, so it passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item reduces to one core concept: the occipital lobe/visual cortex processes vision, and intact eye and pupil responses point to a brain-based deficit. The contralateral-processing concept listed in the generator count is never required, because no option references hemisphere or side, so the left-field detail does not change which answer is right. Distractors are eliminated directly by lobe-function knowledge or by the stem's own statement that the eyes work normally. This is 2 or fewer effective steps with a single concept, which fits basic_learning rather than exam_prep.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "key": "ap_psychology-m03-k0",
+  "cellId": "ap_psychology-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Loud snoring and pauses in breathing point to sleep apnea. Each pause ends with a brief awakening that restarts breathing, and these awakenings break up his sleep, which causes the daytime sleepiness. Option B is wrong because the awakenings are usually too short to remember, they happen many times an hour rather than once an hour, and they don't cut his sleep to four hours.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "C"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Sleep apnea is in scope for 1.5; the item applies the concept to a scenario (1.A)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "C is the unique correct option. Snoring and breathing pauses indicate apnea, and the restart awakenings fragment sleep."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option has a stated reason. Option B is a somewhat weak distractor, but it is clearly wrong given the eight hours of sleep in the stem."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 95 seconds, no calculation, four options. The item is on the easy side."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is accurate, in scope, and has a unique key. Option B is a weak but acceptable distractor. Pass."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The student must identify sleep apnea from the symptoms, eliminate the narcolepsy and insomnia options, and then connect the disorder to its effect (fragmented sleep causing daytime sleepiness) to separate the two apnea options. This meets the rubric: 3 sequential steps and 2 combined concepts. One distractor passes the first step and fails only on the mechanism. Everything is within Unit 1 scope, with a single defensible answer.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_psychology-m03-k1",
+  "cellId": "ap_psychology-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "Narcolepsy; REM intrudes into waking hours due to disrupted sleep stage sequence.",
+     "brief_reasoning": "Sudden sleep attacks that go straight into REM are the classic signs of narcolepsy. Option B describes acting out dreams, which is REM sleep behavior disorder. Options C and D name the wrong disorders.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Narcolepsy application within 1.5; the disorders named are in scope."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "A is uniquely correct. REM intruding into wakefulness is standard textbook language; the other options name wrong disorders or wrong mechanisms."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear and self-contained."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor targets a distinct misconception, and the explanation addresses each wrong option. Option B is a good near-miss that confuses narcolepsy with REM sleep behavior disorder."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 95 seconds, no calculator, four options, parallel structure."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key (narcolepsy with REM intrusion) is correct and the item is in scope. The distractors are plausible and distinct. The item is somewhat recall-heavy but acceptable."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The student must identify the disorder from the symptoms (sudden sleep attacks, direct entry into REM). The student must then evaluate each option's explanation of the mechanism, including the near-miss narcolepsy option that wrongly describes acting out dreams (REM sleep behavior disorder). The student must carry the disorder identification into judging which statement is accurate. This meets the rubric of at least 3 steps and 2 combined concepts. The disorders are all in scope, the stem is short, there is no arithmetic, and one distractor survives the first step, so the item is moderate rather than advanced.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_psychology-m04-k0",
+  "cellId": "ap_psychology-m04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "Functional fixedness",
+     "brief_reasoning": "This is Duncker's candle problem. When the tacks are inside the box, people see the box only as a container. When the box is empty, it's easier to see it as a platform.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Applies functional fixedness (CED 2.2.B) to a scenario; matches 1.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Duncker candle problem is the textbook functional fixedness example; unique key."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Mental set, availability, and confirmation bias are distinct, clearly wrong; each is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, about 90 seconds, four options, no calculator."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, unambiguous functional fixedness item with plausible distractors and full explanations. Passes all criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The item requires identifying the procedure (the tacks-in-box manipulation of the candle problem), recognizing that the box's typical function as a container blocks its use as a platform, and discriminating functional fixedness from the near-miss concept of mental set, then checking the option's explanation against the scenario. This matches the generator's counted 3 sequential steps and 2 combined concepts. The wrong options (mental set, availability, confirmation bias) are plausible at first glance and fail only on closer reading of the scenario. All content is in CED scope, wording is plain, and there is no arithmetic or heavy reading.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 50
+  }
+ },
+ {
+  "key": "ap_psychology-m04-k1",
+  "cellId": "ap_psychology-m04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Persisting with a previously successful strategy despite a better one is mental set; practicing alternative approaches reduces it.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "Mental set"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Mental set applied to a scenario; squarely 2.2 / 1.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Mental set is the unique correct concept; remedy of practicing alternative strategies is standard. Other options are clearly wrong."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Standalone stem; the 'she' in option C versus 'the student' in the stem is a minor pronoun inconsistency. Option A is wordy."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors are real near-miss concepts (insight, functional fixedness, hindsight bias) and each is explained. They are weak in plausibility because the paired remedies are contrived (pencils, 'she knew it all along'), and option A's 'no further help needed' is a giveaway."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, about 60-90 seconds, no calculator. The two-part concept-plus-remedy format is slightly unusual for AP but acceptable."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, unique key (mental set). The item is in scope and suitable. Its weaknesses are minor: some distractors are easy to eliminate because of their contrived remedies, and the pronoun in option C does not match the stem."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must (1) identify the scenario as persisting with an old strategy despite a better one (mental set), (2) discriminate it from near-miss concepts such as functional fixedness, insight, and hindsight bias, and (3) match the correct remedy to the concept. This meets the rubric of at least 3 sequential steps and 2 combined concepts, with a result carried from step to step. All three distractors survive initial scrutiny and fail only on the concept or remedy. The scenario is unambiguous and uses only in-scope Unit 2.2 content, so there are no unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_psychology-m05-k0",
+  "cellId": "ap_psychology-m05",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "A",
+     "brief_reasoning": "This is overgeneralization (overregularization). She is applying the past-tense -ed rule and the plural -s rule to irregular words. That shows she knows the rules and isn't just copying adults.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Overregularization applied to a scenario; fits 3.5 and 1.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "A is the unique correct answer; the other options are clearly wrong."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed; the stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor is explained. They are somewhat weak and use absolute wording (any, only, must), which is a mild giveaway, but each encodes a recognizable misconception."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60-90 seconds with low reading load; typical of AP items, though easy."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound, easy overregularization item with a unique key. The distractors are weak and the key is longest and hedged, but this is acceptable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item applies one named concept, overregularization as evidence of rule learning, to a short scenario. The correct option follows directly once the student recognizes \"goed\" and \"mouses\" as overregularization. The distractors use absolute wording (\"only by copying\", \"lacks any knowledge\") and a stage mismatch (babbling at age three), so they are easy to eliminate. The generator counted 3 steps and 2 concepts, but the item text shows about 2 steps: identify overregularization, then conclude she is applying rules rather than imitating. The stages concept only eliminates one distractor and is not carried forward as a separate reasoning step. The rubric's exam_prep threshold of 3 steps plus 2 combined concepts is therefore not met.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "key": "ap_psychology-m05-k1",
+  "cellId": "ap_psychology-m05",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Multi-word utterances made of content words (nouns/verbs) with function words omitted = telegraphic speech (two-word stage onward, ~age 2).",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "Telegraphic speech"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "3.5 telegraphic speech applied to a scenario; fits 1.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Telegraphic speech is the unique correct answer; the other stages clearly do not fit."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors are real related concepts (overregularization, one-word stage, babbling) and each is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, about 60-95 seconds, four options, no calculator."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Accurate, unambiguous concept-application item on telegraphic speech. The key is correct, the distractors are plausible but clearly wrong, and the load is suitable for the exam."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The stem gives two-word utterances that are a textbook example of telegraphic speech, so the student matches one example to one named stage. The distractors (overregularization, one-word stage, babbling) are each clearly ruled out by the stem. This is single-concept recognition with at most 1-2 steps, which is below the exam_prep threshold of 3 steps and 2 combined concepts. The generator's count of 3 steps is not supported by the item text. Overregularization appears only as a distractor and does not have to be applied.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_psychology-m06-k0",
+  "cellId": "ap_psychology-m06",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Taking away the phone removes something he likes, and the behavior (missing curfew) happens less afterward. That is negative punishment.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "Negative punishment"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Applies operant conditioning categories to a scenario (3.8, 1.A)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Negative punishment is unique and correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors cover the other three quadrants; the explanation addresses each one."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short and typical of the exam."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and clean. The scenario is a phone removed after a missed curfew, and the keyed answer, negative punishment, is the only defensible one."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The item requires applying operant conditioning to a scenario in three sequential steps: (1) identify whether a stimulus was added or removed (phone removed), (2) identify whether the behavior increased or decreased (curfew violations decreased, so punishment rather than reinforcement), (3) combine the results to name the correct quadrant (negative punishment). This combines two concepts (added vs. removed; reinforcement vs. punishment) and matches the rubric for exam_prep (3 steps, 2 combined concepts). It is a near-miss discrimination, and one distractor (positive punishment) survives the first step and fails later. The scenario is unambiguous, the vocabulary is within CED content, the reading is short, and there is no arithmetic. The difficulty comes from legitimate concept discrimination, not unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_psychology-m06-k1",
+  "cellId": "ap_psychology-m06",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "Negative reinforcement",
+     "brief_reasoning": "Cleaning makes the nagging (an aversive stimulus) stop, and after that the cleaning happens more often. Taking away something unpleasant so that a behavior increases is negative reinforcement. Because she starts cleaning earlier, it also looks like avoidance learning.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Applies negative reinforcement to a scenario; squarely 3.8 / 1.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Aversive nagging removed, behavior increases: negative reinforcement. Unique answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distractors cover the other grid cells; each is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, no calculator, typical AP load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clear, standard 3.8 concept-application item with a unique key and distinct distractors. Accept."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must (1) identify whether a stimulus is added or removed (nagging removed), (2) determine the behavior's direction of change (cleaning increases), and (3) combine these to select reinforcement vs punishment with positive vs negative. This meets the rubric of 3 sequential steps and 2 combined concepts. Distractors are near-miss operant terms, which is an allowed lever. The scenario is unambiguous, the reading load is light, and there is no arithmetic.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_psychology-m07-k0",
+  "cellId": "ap_psychology-m07",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "B",
+     "brief_reasoning": "First she fits the horse into the dog schema she already has (assimilation). Then she changes her schemas by making a new category for horses (accommodation), as in Piaget's theory.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Piaget assimilation/accommodation applied to a scenario; fits 3.4 and 1.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "B is the unique correct answer: assimilation first, then accommodation."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors encode distinct misconceptions (unrelated concepts, reversed order), and the explanation addresses each one."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, typical AP length, no calculator."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Accurate, unambiguous concept-application item. The key B is correct and the distractors are plausible and distinct. Passes all criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must identify the first reaction as assimilation, identify the later schema change as accommodation, and keep the order straight while rejecting near-miss concepts (conservation, object permanence) and the reversed sequence. This meets the rubric: 3 sequential steps and 2 combined concepts. Content is in scope for 3.4, the scenario has a single defensible answer, wording is plain, and there is no arithmetic. It is a low-end exam_prep item because the concepts are core and commonly taught.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_psychology-m07-k1",
+  "cellId": "ap_psychology-m07",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "B",
+     "brief_reasoning": "Piaget says object permanence develops during the sensorimotor stage, at about 8 months. The 10-month-old searches under the cloth for the hidden toy, so it shows object permanence. The 7-month-old looks away, so it does not yet show it.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Object permanence applied to a scenario; 3.4 and 1.A fit."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "B is uniquely correct: sensorimotor stage, object permanence emerges around 8 months, so the 10-month-old shows it and the 7-month-old does not."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed. The stem is clear and gives everything required."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor is a distinct error (reversed infants and wrong stage, wrong concept, both infants credited). All are explained. D's 'always' wording is a mild giveaway."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 95 seconds, four options, no calculator. Typical for AP Psychology."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is accurate and well formed: the key B is unique, the distractors are distinct, and the load is appropriate. Minor issues are that the key is the longest option and the blueprint concept line does not match the item content."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item applies a single named concept, object permanence in Piaget's sensorimotor stage, to a short scenario. The student identifies which infant shows the behavior and matches it to the correct stage. The distractors (wrong stage, wrong concept, overgeneralization) are easy to eliminate once the concept is known. The generator's count of 3 steps and 2 concepts (assimilation and accommodation) does not match the item text, since assimilation and accommodation never appear. The text shows about 2 steps and one concept, which meets the basic_learning criteria and not the exam_prep threshold.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "key": "ap_psychology-m08-k0",
+  "cellId": "ap_psychology-m08",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "B",
+     "brief_reasoning": "People across cultures recognize the basic facial expressions (Ekman's universality finding). Display rules, which are cultural norms about when it is acceptable to show an emotion, explain why some countries rarely show anger in public.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Matches CED 4.7.A, universal expressions vs display rules; concept application."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "B is uniquely correct; the other options deny a stated finding or misapply display rules."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; stem is clear and self-contained."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions; the explanation covers each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 95 seconds, no calculator or arithmetic, typical AP reading load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound item with a unique key matching the blind solver, plausible distinct distractors, and appropriate scope."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The student must (1) interpret the cross-cultural recognition finding as evidence of universal basic expressions, (2) interpret the finding that some countries rarely show anger in public as a cultural norm about display, and (3) integrate both findings to pick the statement that accounts for each. This matches the 3 counted steps and 2 combined concepts, so it meets the exam_prep rubric. Two distractors are partly plausible at first and fail only later, because they overgeneralize one finding or contradict the other. The stem is short, with no arithmetic and no out-of-scope content. It applies cultural norms to emotional expression (skill 1.B) without naming any theory of emotion.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_psychology-m08-k1",
+  "cellId": "ap_psychology-m08",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "Display rules",
+     "brief_reasoning": "Both groups feel about the same grief but show it differently, which is what cultural display rules describe.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Display rules apply directly to CED 4.7 and skill 1.B (cultural norms applied to behavior)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Display rules is the unique correct answer. The stem gives similar grief with different expected expression, and the other three concepts do not explain this."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear, in US English, and has no double negatives."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor targets a distinct misconception (dissonance, universality, arousal), and the explanation covers all three. The distractors are somewhat extreme in wording, and the key is the longest option, but neither is disqualifying."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 60-90 seconds, needs no calculator, and has a short stem with four options."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a sound concept-application question on display rules. Its key is unique and correct, and the distractors are distinct. It is slightly easy because of the cue word 'expected' and the extreme wording of the distractors. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Counted structure meets the exam_prep rubric: 3 sequential steps and 2 combined concepts (universal expressions vs. display rules). The student must (1) notice that the felt emotion is the same across cultures, (2) recognize that only the outward expression differs by cultural norm, and (3) reject near-miss options such as universal expression, dissonance, and arousal alone. This is a concept-application item (skill 1.B) built on one named concept in a brief scenario, with no arithmetic. The scenario has one defensible answer, with no trick wording and no out-of-scope content.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_psychology-m09-k0",
+  "cellId": "ap_psychology-m09",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "D",
+     "brief_reasoning": "The manager's belief is a generalization about a group, which makes it a stereotype. Refusing to interview her because of that belief is a behavior, so it is discrimination.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Stereotype/prejudice/discrimination in 4.1 concept application."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "D is unique: belief = stereotype, acting on it = discrimination."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor targets a distinct misconception (reversed order, in-group bias, belief-only); all are explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, typical AP length, no calculator."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is accurate and unambiguous; the key (D) is unique and the distractors are distinct and plausible. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The student must (1) identify the belief as a stereotype, (2) identify the refusal to interview as discrimination, and (3) match the correct relationship between the two against the options. Two distractors survive the first step and fail only later: one reverses the stereotype/discrimination relationship, the other misdefines prejudice. This meets the rubric of at least 3 steps and at least 2 combined concepts. The scenario is short and has one defensible answer. There is no arithmetic and the wording is not tricky, so the difficulty does not come from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_psychology-m09-k1",
+  "cellId": "ap_psychology-m09",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "In-group bias",
+     "brief_reasoning": "Students rate their own team's members more favorably than the rival team's, before meeting anyone. Favoring your own group over others is in-group bias.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "In-group bias is CED 4.1 content (essential knowledge 4.1.B). Applying a named concept to a short scenario fits skill 1.B. The blueprint label (stereotype/prejudice/discrimination chain) is slightly off from the item as written, but this is a loose label only."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "In-group bias is the unique defensible answer. Every option's definition is correct for its own term, and none fits the scenario. Someone could argue the scenario also shows prejudice, but prejudice is not offered as an option."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear and complete, with no double negatives."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors are three real course concepts: dissonance, foot-in-the-door and the fundamental attribution error. The fundamental attribution error is the most plausible, as a near-miss within attribution. The explanation addresses each wrong option. One weakness is that the correct option's definition is longer than the others, which is a minor format cue."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 60 to 90 seconds and has four options. It is easy but suitable. It involves no calculation."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is accurate and the key is unique. It is a standard concept-application question with plausible distractors, and it passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item asks the student to match one scenario to one named concept, in-group bias. Wrong options are largely distant concepts, and the fundamental attribution error is eliminated quickly because the scenario involves no explanation of behavior. The item text shows about two steps (identify the pattern, select the matching definition) and a single concept, so the generator's count of 3 steps and 2 concepts is not supported. Under the rubric (2 or fewer steps or a single concept), this is basic_learning.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_psychology-m10-k0",
+  "cellId": "ap_psychology-m10",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Blocking reuptake (an SSRI) leaves more serotonin in the synapse. A drug is a biomedical treatment.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "D"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 5.5 biomedical treatment and the mechanism of an SSRI; the skill is applying the concept to a drug scenario. Somewhat recall-like but acceptable."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "D is the unique correct answer. Reuptake blockade increases synaptic serotonin and a medication is a biomedical treatment. The other three options each contain a clear error."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct error: reversed effect, misclassifying the drug as psychotherapy, or confusing reuptake blockade with receptor blockade plus misclassification. The explanation covers each wrong option. Distractor C is mildly implausible."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, with about 90 seconds of reading and thinking, no calculator, four options."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and unique, the item is in scope, and the distractors are distinct and clearly wrong. The item is mildly recall-heavy but acceptable."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must (1) recognize that blocking reuptake leaves more serotonin in the synapse, (2) classify the drug as a biomedical treatment, and (3) combine both results to pick the one option that is correct on both parts. The distractors include a near-miss that gets the mechanism right but the treatment type wrong. The stem is short and unambiguous, with no arithmetic, so the difficulty comes from concept application and not from unfair sources. It meets the rubric for exam_prep (at least 3 steps and 2 combined concepts).",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_psychology-m10-k1",
+  "cellId": "ap_psychology-m10",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "C",
+     "brief_reasoning": "A drug that blocks receptors is an antagonist, so it lowers dopamine's effect on those neurons. This matches the dopamine hypothesis of schizophrenia.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Matches 5.5.C; schizophrenia is in the listed disorders; one concept applied."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Antagonist that reduces dopamine's effect is uniquely correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions, each explained; options are parallel in form and length."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, with no calculator, and suitable for the exam. The stem is somewhat definitional but framed as a scenario."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is accurate and clean. The key (antagonist, reduces dopamine's effect) is unique and the distractors are distinct. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The student must map \"blocks receptors\" to antagonist, link that to a reduced dopamine effect, and discriminate against the near-miss reuptake-inhibitor and agonist options. One distractor (antagonist with increased effect) passes the first step and fails only on the effect. The code-counted structure of 3 steps and 2 combined concepts meets the exam_prep rubric. The concepts are in scope and the item has a single defensible answer. It sits at the low end of exam_prep.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_psychology-m11-k0",
+  "cellId": "ap_psychology-m11",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "C",
+     "brief_reasoning": "APA/IACUC guidelines say research needs institutional approval and humane care, pain should be kept as low as possible, and any harm must be justified by the knowledge gained. The other choices each break one of these rules: starting before review, skipping anesthesia, or using too many animals.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Animal-research ethics (CED 1.4.C) in a brain lesion context; skill 2.D matched."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "C is the unique option with all required safeguards; A, B and D each violate a guideline."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; wording is clear and the options are parallel."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes one distinct violation and the explanation covers all three. The key is slightly longer than the others, which is minor."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short recall-application item with no calculation."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound: C is the unique correct answer, the distractors are plausible single-violation options, and the load is appropriate for the exam."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The item requires evaluating each option against three ethical criteria (institutional review, humane care, pain minimization justified by benefit), combining two concepts. Two distractors satisfy some criteria and fail only later, so students must check all elements rather than stopping at the first. Content is in scope and the scenario is unambiguous. Each violation is fairly recognizable, so the item is at the lower end of exam_prep. It meets the rubric thresholds of 3 steps and 2 combined concepts.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 50
+  }
+ },
+ {
+  "key": "ap_psychology-m11-k1",
+  "cellId": "ap_psychology-m11",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "D",
+     "brief_reasoning": "Under animal research ethics, an IACUC committee has to review the plan, stress has to be kept to the minimum the question allows, and the animals need humane care. Only option D meets all three. A skips committee review, B makes the stress more severe than needed, and C uses poor, isolated housing.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "D is the unique option with review, minimized harm, and humane care. A skips review, B maximizes distress, C uses barren isolation. The solver agrees."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor fails one distinct requirement and the explanation addresses each. The correct option is the longest and most complete, a mild cue but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60 to 90 seconds, no calculator, typical AP load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound ethics item with a unique, correct key and distinct distractor misconceptions. The topic label is slightly loose and the key option is the longest, but neither is disqualifying."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Meets the exam_prep rubric: 3 required sequential steps (committee review, minimal stress and duration, humane care) and 2 combined concepts (institutional review of animal research, minimizing pain and humane care). Two of the three distractors satisfy some criteria and fail only on a later one, so students must check every option against all criteria. Reading load is low, there is no arithmetic, and the scenario has one defensible answer within CED research ethics content.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ }
+]

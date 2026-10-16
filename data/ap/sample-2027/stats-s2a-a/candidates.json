@@ -1,0 +1,2562 @@
+[
+ {
+  "candidateKey": "ap_statistics-m01-k0",
+  "cellId": "ap_statistics-m01",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "1.10",
+  "unitCode": "1",
+  "skillPrimary": "1.A",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_investigative_question",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept recognition task. The student identifies the question that anticipates variability across a population and needs sampled data (proportion of students above a threshold). The distractors are a single-individual fact, a fixed enrollment count, and a policy/opinion question. It needs no computation, no representation changes, and one reasoning step, and it is clearly worded with minimal reading.",
+  "payload": {
+   "archetype": "st_investigative_question",
+   "topic": "1.10",
+   "skill": "1.A",
+   "calculator": "allowed",
+   "stem": "A researcher wants to study how much time students at the high schools of a school district spend using the school library each week. Which of the following is a valid investigative question that requires a statistical investigation?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "How much time did Maria, a junior at one of the high schools, spend in the school library last Tuesday?",
+     "why": "Asks about one individual, so there is no population and no variability to investigate.",
+     "value": null
+    },
+    {
+     "text": "How many students are enrolled at the largest high school in the district this year?",
+     "why": "Asks for a single count that can be looked up, so no variability in data is anticipated and no statistical investigation is needed.",
+     "value": null
+    },
+    {
+     "text": "What proportion of students at the district's high schools spend more than two hours per week using the school library?",
+     "why": "Anticipates variability among the individuals, names the population and can be answered by collecting and analyzing data.",
+     "value": null
+    },
+    {
+     "text": "Should the district spend more money on its school libraries?",
+     "why": "Asks for an opinion or a value judgment that data collection and analysis cannot settle.",
+     "value": null
+    }
+   ],
+   "key_index": 2,
+   "est_seconds": 70,
+   "facts": [
+    "form=1"
+   ],
+   "blueprint": {
+    "id": "st_investigative_question",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Recognize a valid investigative question that requires a statistical investigation",
+    "topic": "1.10",
+    "skill": "1.A",
+    "student_thinking": [
+     "Check whether the question anticipates variability among individuals rather than asking for one fixed value",
+     "Check that the question names a population and can be answered by collecting and analyzing data, not by opinion"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "a valid investigative question anticipates variability, refers to a population and can be answered with data",
+      "evidence": "three options each lack exactly one of these three properties"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "single_known_value",
+      "description": "asks for a count or fact that can be looked up"
+     },
+     {
+      "id": "one_individual",
+      "description": "asks about one person"
+     },
+     {
+      "id": "opinion_not_data",
+      "description": "asks for an opinion"
+     }
+    ],
+    "verification": {
+     "independent_path": "each option is generated from a table of three properties (variability, population, answerable with data) and exactly one option has all three",
+     "method": "property table enumeration"
+    },
+    "judgment_demand": [
+     "interpretation",
+     "claim_justification"
+    ]
+   },
+   "seed": 8800,
+   "pack_id": "st_investigative_question-s8800",
+   "explanation_en": "The correct answer is What proportion of students at the district's high schools spend more than two hours per week using the school library?. Anticipates variability among the individuals, names the population and can be answered by collecting and analyzing data.\nHow much time did Maria, a junior at one of the high schools, spend in the school library last Tuesday? is incorrect: Asks about one individual, so there is no population and no variability to investigate.\nHow many students are enrolled at the largest high school in the district this year? is incorrect: Asks for a single count that can be looked up, so no variability in data is anticipated and no statistical investigation is needed.\nShould the district spend more money on its school libraries? is incorrect: Asks for an opinion or a value judgment that data collection and analysis cannot settle."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_investigative_question",
+   "facts": [
+    "form=1"
+   ],
+   "seed": 8800
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Directly targets topic 1.10 / skill 1.A: recognizing a valid investigative question that anticipates variability, names a population and can be answered with data. No out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option C is the only question that anticipates variability, names a population and is answerable with data. A concerns one individual, B is a single lookup count, and D is a value judgment. The key is unique and defensible."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed and the stem is self-contained. The wording is clear US English. The stem calls the item a 'statistical investigation' question without needless extra reading."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception (one individual, single known value, opinion) and the explanation addresses each wrong option. Option lengths are comparable. The key is the longest, but only slightly, so it is not a real giveaway."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 60-70 seconds, needs no calculation, and its format matches the CED style for investigative-question items."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, single-skill MC on valid investigative questions. It has a unique key, three distinct and realistic distractors, and a complete explanation. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept recognition task. The student identifies the question that anticipates variability across a population and needs sampled data (proportion of students above a threshold). The distractors are a single-individual fact, a fixed enrollment count, and a policy/opinion question. It needs no computation, no representation changes, and one reasoning step, and it is clearly worded with minimal reading.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m02-k0",
+  "cellId": "ap_statistics-m02",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "1.10",
+  "unitCode": "1",
+  "skillPrimary": "1.A",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_question_data_match",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Student eliminates four options by checking whether each question is statistical (not a simple lookup), uses only recorded variables, and avoids a causal claim from observational data. It is a single-concept elimination with a small table and no computation, so it fits basic learning rather than full-mock exam prep.",
+  "payload": {
+   "archetype": "st_question_data_match",
+   "topic": "1.10",
+   "skill": "1.A",
+   "calculator": "allowed",
+   "stem": "A random sample of $300$ households in a town was surveyed, and the variables in the table shown were recorded for each individual. Which of the following investigative questions can be answered using these data?",
+   "stimulus": {
+    "kind": "table",
+    "description": "Variables recorded for each of 300 households in a town.",
+    "data": {
+     "title": "Variables recorded",
+     "columns": [
+      "Variable",
+      "Type"
+     ],
+     "rows": [
+      [
+       "Number of residents",
+       "quantitative"
+      ],
+      [
+       "Owns or rents",
+       "categorical"
+      ],
+      [
+       "Monthly electric bill (dollars)",
+       "quantitative"
+      ]
+     ]
+    }
+   },
+   "options": [
+    {
+     "text": "What was the monthly electric bill for each of the households?",
+     "why": "Asks for a listing of individual values rather than a question about a population that can be answered by summarizing and analyzing the data.",
+     "value": null
+    },
+    {
+     "text": "Would adding another resident to a household cause its monthly electric bill to increase?",
+     "why": "A cause-and-effect question needs data from a randomized experiment, but these data were only recorded, not assigned.",
+     "value": null
+    },
+    {
+     "text": "Is there an association between the number of residents in a household and its monthly electric bill?",
+     "why": "Uses only variables that were recorded and asks about a relationship that the recorded data can address.",
+     "value": null
+    },
+    {
+     "text": "Do households with a higher annual income have a larger monthly electric bill?",
+     "why": "Needs a variable that was not recorded, so the data cannot answer it.",
+     "value": null
+    }
+   ],
+   "key_index": 2,
+   "est_seconds": 80,
+   "facts": [
+    "n=300"
+   ],
+   "blueprint": {
+    "id": "st_question_data_match",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Decide which investigative question the collected data can answer",
+    "topic": "1.10",
+    "skill": "1.A",
+    "student_thinking": [
+     "Match the variables named in each question to the variables in the table",
+     "Reject questions that need uncollected variables, need random assignment for a cause-and-effect claim, or ask for individual values"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "an investigative question must be answerable with the collected variables and the study design",
+      "evidence": "the table lists every variable that was recorded and the stem says the data come from a survey"
+     }
+    ],
+    "material": {
+     "type": "table",
+     "must_include": [
+      "variables recorded"
+     ]
+    },
+    "misconceptions": [
+     {
+      "id": "uncollected_variable",
+      "description": "needs a variable that was not recorded"
+     },
+     {
+      "id": "causal_from_survey",
+      "description": "asks a cause-and-effect question of survey data"
+     },
+     {
+      "id": "individual_listing",
+      "description": "asks for a list of individual values"
+     }
+    ],
+    "verification": {
+     "independent_path": "the variable names in each option are matched mechanically against the table and exactly one option uses only recorded variables and an association question",
+     "method": "variable set containment check"
+    },
+    "judgment_demand": [
+     "representation_reading",
+     "claim_justification"
+    ]
+   },
+   "seed": 8800,
+   "pack_id": "st_question_data_match-s8800",
+   "explanation_en": "The correct answer is Is there an association between the number of residents in a household and its monthly electric bill?. Uses only variables that were recorded and asks about a relationship that the recorded data can address.\nWhat was the monthly electric bill for each of the households? is incorrect: Asks for a listing of individual values rather than a question about a population that can be answered by summarizing and analyzing the data.\nWould adding another resident to a household cause its monthly electric bill to increase? is incorrect: A cause-and-effect question needs data from a randomized experiment, but these data were only recorded, not assigned.\nDo households with a higher annual income have a larger monthly electric bill? is incorrect: Needs a variable that was not recorded, so the data cannot answer it."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_question_data_match",
+   "facts": [
+    "n=300"
+   ],
+   "seed": 8800
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Matches topic 1.10 / skill 1.A: choose a valid investigative question that the collected data and design can address. No out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "C is the only question that uses only recorded variables and is not causal. A asks for a listing of values, B is causal from a survey, and D needs an unrecorded variable. The key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete, with a title, variable names and types. A minor wording issue: the stem says 'recorded for each individual' but the data are households, so 'household' would be clearer. This is not a flaw that affects the key."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct named misconception (individual listing, causal claim from a survey, uncollected variable). The explanation addresses every wrong option. Option lengths are parallel."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 80 seconds of reading with no arithmetic. The calculator designation is harmless."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is clean and well aligned to 1.A: the key is unique, the stimulus is complete, and each distractor reflects a distinct misconception. One small wording fix is advisable: change 'each individual' to 'each household' in the stem."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Student eliminates four options by checking whether each question is statistical (not a simple lookup), uses only recorded variables, and avoids a causal claim from observational data. It is a single-concept elimination with a small table and no computation, so it fits basic learning rather than full-mock exam prep.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m03-k0",
+  "cellId": "ap_statistics-m03",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "3.5",
+  "unitCode": "3",
+  "skillPrimary": "2.E",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_hypotheses_setup",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-step identification of a one-sided alternative from the wording 'higher than'. Distractors cover standard errors (two-sided alternative, swapped null and alternative, statistic p-hat in place of parameter p). No computation, minimal reading, no representation changes. Foundational skill suited to initial learning rather than a full mock exam.",
+  "payload": {
+   "archetype": "st_hypotheses_setup",
+   "topic": "3.5",
+   "skill": "2.E",
+   "calculator": "allowed",
+   "stem": "A company claims that $80\\%$ of its customers are satisfied. A consumer group suspects the true proportion is higher than the claim. Let $p$ be the proportion of all customers who are satisfied. Which of the following pairs of hypotheses should be tested?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "$H_0: p = 0.8$ and $H_a: p > 0.8$",
+     "why": "The parameter is the proportion of all customers who are satisfied; the null hypothesis states the claimed value and the alternative matches the suspicion, which is one-sided.",
+     "value": null
+    },
+    {
+     "text": "$H_0: p = 0.8$ and $H_a: p \\ne 0.8$",
+     "why": "Writes a two-sided alternative although the suspicion has a direction.",
+     "value": null
+    },
+    {
+     "text": "$H_0: p > 0.8$ and $H_a: p = 0.8$",
+     "why": "Puts the claim of the suspicion in the null hypothesis and an equal sign in the alternative, instead of an equal sign in the null.",
+     "value": null
+    },
+    {
+     "text": "$H_0: \\hat{p} = 0.8$ and $H_a: \\hat{p} > 0.8$",
+     "why": "Writes the hypotheses about a sample statistic, but hypotheses are always about the population parameter.",
+     "value": null
+    }
+   ],
+   "key_index": 0,
+   "est_seconds": 70,
+   "facts": [
+    "tail=greater",
+    "kind=p"
+   ],
+   "blueprint": {
+    "id": "st_hypotheses_setup",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Choose the null and alternative hypotheses from a scenario",
+    "topic": "3.5",
+    "skill": "2.E",
+    "student_thinking": [
+     "Identify the population parameter and the claimed value that goes in the null hypothesis",
+     "Match the direction of the alternative hypothesis to the direction of the suspicion"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the null hypothesis states equality with the claimed value and the alternative reflects what is suspected",
+      "evidence": "the stem states the claim and the direction of the suspicion in words"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "wrong_direction",
+      "description": "uses an alternative in the wrong direction"
+     },
+     {
+      "id": "statistic_not_parameter",
+      "description": "writes hypotheses about a sample statistic"
+     },
+     {
+      "id": "claim_in_wrong_hypothesis",
+      "description": "swaps the roles of the two hypotheses"
+     }
+    ],
+    "verification": {
+     "independent_path": "each option is built from a table of direction, parameter symbol and role of the equality, and only one row matches the scenario's claim and suspicion",
+     "method": "role table enumeration"
+    },
+    "judgment_demand": [
+     "procedure_choice",
+     "interpretation"
+    ]
+   },
+   "seed": 8800,
+   "pack_id": "st_hypotheses_setup-s8800",
+   "explanation_en": "The correct answer is $H_0: p = 0.8$ and $H_a: p > 0.8$. The parameter is the proportion of all customers who are satisfied; the null hypothesis states the claimed value and the alternative matches the suspicion, which is one-sided.\n$H_0: p = 0.8$ and $H_a: p \\ne 0.8$ is incorrect: Writes a two-sided alternative although the suspicion has a direction.\n$H_0: p > 0.8$ and $H_a: p = 0.8$ is incorrect: Puts the claim of the suspicion in the null hypothesis and an equal sign in the alternative, instead of an equal sign in the null.\n$H_0: \\hat{p} = 0.8$ and $H_a: \\hat{p} > 0.8$ is incorrect: Writes the hypotheses about a sample statistic, but hypotheses are always about the population parameter."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_hypotheses_setup",
+   "facts": [
+    "tail=greater",
+    "kind=p"
+   ],
+   "seed": 8800
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "Quick item of about 60 seconds with no arithmetic. It is typical of AP Statistics hypothesis-setup items. The calculator designation is harmless.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is clean and unambiguous, with a unique key and distinct misconception-based distractors. It fits topic 3.5 and skill 2.E and passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step identification of a one-sided alternative from the wording 'higher than'. Distractors cover standard errors (two-sided alternative, swapped null and alternative, statistic p-hat in place of parameter p). No computation, minimal reading, no representation changes. Foundational skill suited to initial learning rather than a full mock exam.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m04-k0",
+  "cellId": "ap_statistics-m04",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "4.4",
+  "unitCode": "4",
+  "skillPrimary": "2.C",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_method_choice_means",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "criterion_failed_distractor_explanation",
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-step procedure identification: one sample of quantitative data compared to a fixed value implies a one-sample t-test for a mean. No computation, no conditions to check, no representation changes, short stem. Distractors are the standard wrong-procedure choices (proportion, two-sample, matched pairs). Appropriate as a basic check of topic 4.4 understanding rather than a full-mock exam item.",
+  "payload": {
+   "archetype": "st_method_choice_means",
+   "topic": "4.4",
+   "skill": "2.C",
+   "calculator": "allowed",
+   "stem": "A coach wants to test whether the mean time for all of her runners to finish a mile is less than $7$ minutes, using the times of a random sample of $25$ runners. Which of the following procedures is appropriate?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "A one-sample z-test for a population proportion",
+     "why": "Chooses a one-sample z-test for a population proportion, but the scenario's data are measurements, not counts of a category.",
+     "value": null
+    },
+    {
+     "text": "A two-sample t-test for a difference in population means",
+     "why": "Chooses a two-sample t-test for a difference in population means, but the number of samples does not fit the scenario.",
+     "value": null
+    },
+    {
+     "text": "A one-sample t-test for a population mean",
+     "why": "The variables, the number of samples and the goal in the scenario match this procedure.",
+     "value": null
+    },
+    {
+     "text": "A matched-pairs t-test for a mean difference",
+     "why": "Chooses a matched-pairs t-test for a mean difference, but the scenario's data are measurements, not counts of a category; the number of samples does not fit the scenario.",
+     "value": null
+    }
+   ],
+   "key_index": 2,
+   "est_seconds": 80,
+   "facts": [
+    "method=('quant', 1, 'test')"
+   ],
+   "blueprint": {
+    "id": "st_method_choice_means",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Choose the statistical inference procedure that fits a scenario",
+    "topic": "4.4",
+    "skill": "2.C",
+    "student_thinking": [
+     "Decide whether the data are categorical counts or measurements and whether the individuals are paired",
+     "Count the samples and decide whether the goal is an interval or a test, then match the procedure"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the type of variable, the number of samples, pairing and the goal determine the procedure",
+      "evidence": "the scenario states the variable, the sampling and the goal"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "mismatched_data_type",
+      "description": "mixes up proportions and means"
+     },
+     {
+      "id": "mismatched_sampling",
+      "description": "uses the wrong number of samples or ignores pairing"
+     },
+     {
+      "id": "mismatched_goal",
+      "description": "uses a test when an interval is needed or the reverse"
+     }
+    ],
+    "verification": {
+     "independent_path": "a feature table (variable type, sample count, pairing, goal) is matched against each procedure and exactly one procedure matches the scenario",
+     "method": "feature table enumeration"
+    },
+    "judgment_demand": [
+     "procedure_choice"
+    ]
+   },
+   "seed": 8800,
+   "pack_id": "st_method_choice_means-s8800",
+   "explanation_en": "The correct answer is A one-sample t-test for a population mean. The variables, the number of samples and the goal in the scenario match this procedure.\nA one-sample z-test for a population proportion is incorrect: Chooses a one-sample z-test for a population proportion, but the scenario's data are measurements, not counts of a category.\nA two-sample t-test for a difference in population means is incorrect: Chooses a two-sample t-test for a difference in population means, but the number of samples does not fit the scenario.\nA matched-pairs t-test for a mean difference is incorrect: Chooses a matched-pairs t-test for a mean difference, but the scenario's data are measurements, not counts of a category; the number of samples does not fit the scenario."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_method_choice_means",
+   "facts": [
+    "method=('quant', 1, 'test')"
+   ],
+   "seed": 8800
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Procedure choice for a mean fits 4.4 / 2.C."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "One-sample t-test is the unique correct choice."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The matched-pairs rationale wrongly says the data are 'measurements, not counts of a category', which does not distinguish it from the key since paired data are also measurements. It also gives a vague 'number of samples' reason instead of the lack of pairing. The two-sample rationale is also vague. Distractor explanations should be rewritten to name the actual misconception for each option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Quick, no calculation, typical load, though easy."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is valid and the key is unique. It fails on distractor explanations: the matched-pairs rationale is incorrect and boilerplate (the 'measurements not counts' reason does not rule it out), and the 'number of samples' wording is vague for the matched-pairs and two-sample options. Revise the explanations."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step procedure identification: one sample of quantitative data compared to a fixed value implies a one-sample t-test for a mean. No computation, no conditions to check, no representation changes, short stem. Distractors are the standard wrong-procedure choices (proportion, two-sample, matched pairs). Appropriate as a basic check of topic 4.4 understanding rather than a full-mock exam item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m05-k0",
+  "cellId": "ap_statistics-m05",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "3.14",
+  "unitCode": "3",
+  "skillPrimary": "2.C",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_method_choice_cat",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "criterion_failed_scope_skill; criterion_failed_distractor_explanation; reference_pattern_mismatch",
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-step procedure identification: one sample, one categorical variable (support or not), goal is to estimate a population proportion, so a one-sample z-interval for a proportion. Distractors are clearly distinguishable (mean vs proportion, two groups, two categorical variables). No computation, no condition checking, no representation change, minimal reading. Note the item does not target the chi-square setup topic 3.14 and sits at recall/recognition level.",
+  "payload": {
+   "archetype": "st_method_choice_cat",
+   "topic": "3.14",
+   "skill": "2.C",
+   "calculator": "allowed",
+   "stem": "A polling firm wants to estimate the proportion of all registered voters in a city who support a proposed park, using a random sample of $400$ voters. Which of the following procedures is appropriate?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "A one-sample t-interval for a population mean",
+     "why": "Chooses a one-sample t-interval for a population mean, but the scenario's data are counts of a category.",
+     "value": null
+    },
+    {
+     "text": "A chi-square test of independence",
+     "why": "Chooses a chi-square test of independence, but the scenario's data are counts of a category; the scenario's goal is an interval, not a test.",
+     "value": null
+    },
+    {
+     "text": "A one-sample z-interval for a population proportion",
+     "why": "The variables, the number of samples and the goal in the scenario match this procedure.",
+     "value": null
+    },
+    {
+     "text": "A two-sample z-test for a difference in population proportions",
+     "why": "Chooses a two-sample z-test for a difference in population proportions, but the number of samples does not fit the scenario; the scenario's goal is an interval, not a test.",
+     "value": null
+    }
+   ],
+   "key_index": 2,
+   "est_seconds": 80,
+   "facts": [
+    "method=('cat', 1, 'interval')"
+   ],
+   "blueprint": {
+    "id": "st_method_choice_cat",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Choose the statistical inference procedure that fits a scenario",
+    "topic": "3.14",
+    "skill": "2.C",
+    "student_thinking": [
+     "Decide whether the data are categorical counts or measurements and whether the individuals are paired",
+     "Count the samples and decide whether the goal is an interval or a test, then match the procedure"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the type of variable, the number of samples, pairing and the goal determine the procedure",
+      "evidence": "the scenario states the variable, the sampling and the goal"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "mismatched_data_type",
+      "description": "mixes up proportions and means"
+     },
+     {
+      "id": "mismatched_sampling",
+      "description": "uses the wrong number of samples or ignores pairing"
+     },
+     {
+      "id": "mismatched_goal",
+      "description": "uses a test when an interval is needed or the reverse"
+     }
+    ],
+    "verification": {
+     "independent_path": "a feature table (variable type, sample count, pairing, goal) is matched against each procedure and exactly one procedure matches the scenario",
+     "method": "feature table enumeration"
+    },
+    "judgment_demand": [
+     "procedure_choice"
+    ]
+   },
+   "seed": 8800,
+   "pack_id": "st_method_choice_cat-s8800",
+   "explanation_en": "The correct answer is A one-sample z-interval for a population proportion. The variables, the number of samples and the goal in the scenario match this procedure.\nA one-sample t-interval for a population mean is incorrect: Chooses a one-sample t-interval for a population mean, but the scenario's data are counts of a category.\nA chi-square test of independence is incorrect: Chooses a chi-square test of independence, but the scenario's data are counts of a category; the scenario's goal is an interval, not a test.\nA two-sample z-test for a difference in population proportions is incorrect: Chooses a two-sample z-test for a difference in population proportions, but the number of samples does not fit the scenario; the scenario's goal is an interval, not a test."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_method_choice_cat",
+   "facts": [
+    "method=('cat', 1, 'interval')"
+   ],
+   "seed": 8800
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": "Assigned topic is 3.14 (setting up chi-square homogeneity/independence). The item is a one-proportion z-interval selection; chi-square appears only as a throwaway distractor. Dominant demand is not the target topic. A t-interval option also points to Unit 4 content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Key C (one-sample z-interval for a proportion) is unique and defensible."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The chi-square distractor is implausible and not tied to a realistic misconception for this topic. The explanation says 'data are counts of a category', which is a weak rationale since chi-square also uses counts. The distractors do not test the choice between homogeneity, independence and other procedures."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Time and load are fine for an MC item."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct, but the item does not assess topic 3.14. It is a generic one-proportion procedure choice in which the chi-square option is a trivial distractor. Fail on scope/topic fit and weak distractor design. A fix would present a scenario with two categorical variables, or several groups, and ask the student to choose between homogeneity, independence and two-proportion procedures."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step procedure identification: one sample, one categorical variable (support or not), goal is to estimate a population proportion, so a one-sample z-interval for a proportion. Distractors are clearly distinguishable (mean vs proportion, two groups, two categorical variables). No computation, no condition checking, no representation change, minimal reading. Note the item does not target the chi-square setup topic 3.14 and sits at recall/recognition level.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m06-k0",
+  "cellId": "ap_statistics-m06",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "3.8",
+  "unitCode": "3",
+  "skillPrimary": "2.D",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_type_errors",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept item: identify a Type I error (reject H0 when H0 is true) in a short context. It requires mapping the definition onto the shipment scenario and distinguishing it from Type II and from correct decisions. There is no computation, no condition check, and no representation change. The wording is clear and the reading load is low, so it is suited to basic learning rather than full-mock exam prep.",
+  "payload": {
+   "archetype": "st_type_errors",
+   "topic": "3.8",
+   "skill": "2.D",
+   "calculator": "allowed",
+   "stem": "An inspector tests whether the proportion of defective parts in a shipment exceeds the allowed limit, using the null hypothesis that the true proportion of defective parts is at most the allowed limit and the alternative hypothesis that the true proportion of defective parts is above the allowed limit. Which of the following describes a Type I error in this context?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "The test leads to the decision to reject the shipment and the true proportion of defective parts is above the allowed limit",
+     "why": "Describes a correct decision (rejecting a false null hypothesis), not an error.",
+     "value": null
+    },
+    {
+     "text": "The test does not lead to the decision to reject the shipment and the true proportion of defective parts is at most the allowed limit",
+     "why": "Describes a correct decision (failing to reject a true null hypothesis), not an error.",
+     "value": null
+    },
+    {
+     "text": "The test leads to the decision to reject the shipment even though the true proportion of defective parts is at most the allowed limit",
+     "why": "A Type I error is rejecting a null hypothesis that is true.",
+     "value": null
+    },
+    {
+     "text": "The test does not lead to the decision to reject the shipment even though the true proportion of defective parts is above the allowed limit",
+     "why": "Describes a Type II error, mixing up the two types of error.",
+     "value": null
+    }
+   ],
+   "key_index": 2,
+   "est_seconds": 85,
+   "facts": [
+    "type=I"
+   ],
+   "blueprint": {
+    "id": "st_type_errors",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Describe a Type I error in context",
+    "topic": "3.8",
+    "skill": "2.D",
+    "student_thinking": [
+     "Recall that a Type I error rejects a true null hypothesis and a Type II error fails to reject a false null hypothesis",
+     "Translate the decision and the state of nature into the words of the scenario"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the type of error is determined by the true state of the null hypothesis and the decision",
+      "evidence": "the stem states the null and alternative hypotheses and what rejecting leads to"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "swapped_error_types",
+      "description": "swaps Type I and Type II"
+     },
+     {
+      "id": "correct_decision_not_error",
+      "description": "calls a correct decision an error"
+     },
+     {
+      "id": "correct_decision_rejected",
+      "description": "calls the other correct decision an error"
+     }
+    ],
+    "verification": {
+     "independent_path": "the four options are the four cells of the truth-by-decision table; exactly one cell matches the requested error type",
+     "method": "2x2 truth table enumeration"
+    },
+    "judgment_demand": [
+     "interpretation",
+     "procedure_choice"
+    ]
+   },
+   "seed": 8800,
+   "pack_id": "st_type_errors-s8800",
+   "explanation_en": "The correct answer is The test leads to the decision to reject the shipment even though the true proportion of defective parts is at most the allowed limit. A Type I error is rejecting a null hypothesis that is true.\nThe test leads to the decision to reject the shipment and the true proportion of defective parts is above the allowed limit is incorrect: Describes a correct decision (rejecting a false null hypothesis), not an error.\nThe test does not lead to the decision to reject the shipment and the true proportion of defective parts is at most the allowed limit is incorrect: Describes a correct decision (failing to reject a true null hypothesis), not an error.\nThe test does not lead to the decision to reject the shipment even though the true proportion of defective parts is above the allowed limit is incorrect: Describes a Type II error, mixing up the two types of error."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_type_errors",
+   "facts": [
+    "type=I"
+   ],
+   "seed": 8800
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a standard, clean Type I error identification in context. The key (C) is the unique correct choice because it is the only option that rejects a true null hypothesis. Each distractor is explained and maps to a distinct misconception. The item has no stimulus, a light reading load, and no calculation, so it fits the topic and the exam time.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The item targets Type I error in context (topic 3.8). The stem states both hypotheses, and the skill is a good fit."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option C is the only one that pairs rejecting the shipment with a true null (true proportion at most the limit). The null and alternative are stated clearly. The independent solver also chose C."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The wording is clear, and the options are parallel in structure."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Two distractors describe correct decisions, and one describes a Type II error. The explanation addresses each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 60-90 seconds and needs no calculation. Marking the calculator as allowed is acceptable."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: identify a Type I error (reject H0 when H0 is true) in a short context. It requires mapping the definition onto the shipment scenario and distinguishing it from Type II and from correct decisions. There is no computation, no condition check, and no representation change. The wording is clear and the reading load is low, so it is suited to basic learning rather than full-mock exam prep.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m07-k0",
+  "cellId": "ap_statistics-m07",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "1.11",
+  "unitCode": "1",
+  "skillPrimary": "2.B",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_sampling_method",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-step recognition of a simple random sample from its definition (every group of n equally likely) and the standard procedure (number the list, use a random number generator). The distractors are standard named sampling methods, with no computation, no representation change, and minimal reading. It checks core vocabulary and is not at full-mock exam level.",
+  "payload": {
+   "archetype": "st_sampling_method",
+   "topic": "1.11",
+   "skill": "2.B",
+   "calculator": "allowed",
+   "stem": "The company wants a sample of $50$ employees from a list of $800$ in which every group of $50$ employees is equally likely to be chosen. The plan is to number the employees from $1$ to $800$ and use a random number generator to choose $50$ different numbers. Which of the following best describes this sampling method?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "A convenience sample",
+     "why": "Chooses whoever is easy to reach, which is likely to be biased and does not use random selection.",
+     "value": null
+    },
+    {
+     "text": "A cluster sample",
+     "why": "Selects whole groups at random and surveys every member, which does not match a goal of spreading the sample across the list.",
+     "value": null
+    },
+    {
+     "text": "A simple random sample",
+     "why": "This method matches the goal: number the employees from $1$ to $800$ and use a random number generator to choose $50$ different numbers.",
+     "value": null
+    },
+    {
+     "text": "A stratified random sample",
+     "why": "Does not guarantee that each subgroup is represented in proportion; only random selection within each subgroup guarantees it.",
+     "value": null
+    }
+   ],
+   "key_index": 2,
+   "est_seconds": 80,
+   "facts": [
+    "method=srs"
+   ],
+   "blueprint": {
+    "id": "st_sampling_method",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Justify a sampling method that fits a stated goal",
+    "topic": "1.11",
+    "skill": "2.B",
+    "student_thinking": [
+     "Identify the goal stated in the scenario, such as representation of subgroups, cost of reaching whole groups or equal chance for every group of the chosen size",
+     "Match that goal and the described plan to the one sampling method that has this property"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "each sampling method has a defining property that matches one goal",
+      "evidence": "the stem states both the goal and the selection plan"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "wrong_random_method",
+      "description": "names another random method"
+     },
+     {
+      "id": "wrong_random_method_2",
+      "description": "names a different random method"
+     },
+     {
+      "id": "convenience_is_random",
+      "description": "treats a convenience sample as random"
+     }
+    ],
+    "verification": {
+     "independent_path": "a table of methods and defining properties is used and exactly one method has the property required by the stated goal",
+     "method": "property table enumeration"
+    },
+    "judgment_demand": [
+     "procedure_choice",
+     "claim_justification"
+    ]
+   },
+   "seed": 8800,
+   "pack_id": "st_sampling_method-s8800",
+   "explanation_en": "The correct answer is A simple random sample. This method matches the goal: number the employees from $1$ to $800$ and use a random number generator to choose $50$ different numbers.\nA convenience sample is incorrect: Chooses whoever is easy to reach, which is likely to be biased and does not use random selection.\nA cluster sample is incorrect: Selects whole groups at random and surveys every member, which does not match a goal of spreading the sample across the list.\nA stratified random sample is incorrect: Does not guarantee that each subgroup is represented in proportion; only random selection within each subgroup guarantees it."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_sampling_method",
+   "facts": [
+    "method=srs"
+   ],
+   "seed": 8800
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 30-60 seconds, requires no calculation, and has a light reading load. It is a bit easy, but it is typical of a definition-matching item.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a valid, unambiguous SRS identification item with a unique key and distinct distractors. The only flaw is that the explanation text labels the key as 'A' although it is option C. I am passing it."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step recognition of a simple random sample from its definition (every group of n equally likely) and the standard procedure (number the list, use a random number generator). The distractors are standard named sampling methods, with no computation, no representation change, and minimal reading. It checks core vocabulary and is not at full-mock exam level.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m08-k0",
+  "cellId": "ap_statistics-m08",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "3.7",
+  "unitCode": "3",
+  "skillPrimary": "4.E",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_conditions_prop",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "criterion_failed_distractor_explanation; criterion_failed_exam_suitability",
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Routine verification of the three standard conditions for a one-proportion z-test: random sample stated, n=60 is less than 10% of 8000, and np0 = n(1-p0) = 30, which is at least 10. Only simple mental arithmetic and a single concept are needed, with no representation changes and short reading. The correct answer is 'All three conditions are satisfied'.",
+  "payload": {
+   "archetype": "st_conditions_prop",
+   "topic": "3.7",
+   "skill": "4.E",
+   "calculator": "allowed",
+   "stem": "In a company with $8000$ employees, a random sample of $60$ employees is used to test $H_0: p = 0.5$, where $p$ is the proportion of all employees who work remotely at least one day a week. A one-sample z-test for a proportion is planned. Which of the following statements about the conditions for this test is correct?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "The $10\\%$ condition is not satisfied",
+     "why": "Claims the $10\\%$ condition fails even though $60$ is less than $10\\%$ of $8000$.",
+     "value": null
+    },
+    {
+     "text": "The large counts condition is not satisfied",
+     "why": "Claims the large counts condition fails even though $np_0 = 30$ and $n(1-p_0) = 30$ are both at least $10$.",
+     "value": null
+    },
+    {
+     "text": "All three conditions are satisfied",
+     "why": "Each condition is verified: the sample is random, $60 < 10\\%$ of $8000$, and both expected counts are at least $10$.",
+     "value": null
+    },
+    {
+     "text": "The random condition is not satisfied",
+     "why": "Claims the sample is not random even though the sample was selected at random.",
+     "value": null
+    }
+   ],
+   "key_index": 2,
+   "est_seconds": 100,
+   "facts": [
+    "fail=none",
+    "n=60",
+    "N=8000",
+    "p0=0.5"
+   ],
+   "blueprint": {
+    "id": "st_conditions_prop",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Verify the conditions for a one-sample z-test for a proportion",
+    "topic": "3.7",
+    "skill": "4.E",
+    "student_thinking": [
+     "Check each condition separately: random selection, the 10 percent condition for independence and the large counts condition using the null value",
+     "Find the single condition that fails, or decide that all are met"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "a z-test for a proportion needs random selection, a sample under 10 percent of the population and both np0 and n(1-p0) at least 10",
+      "evidence": "the stem gives the sampling method, the sample and population sizes and the null value"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "claims_all_met",
+      "description": "says conditions are met when one fails"
+     },
+     {
+      "id": "false_random_failure",
+      "description": "claims random fails"
+     },
+     {
+      "id": "false_count_failure",
+      "description": "claims large counts fails"
+     }
+    ],
+    "verification": {
+     "independent_path": "each condition is evaluated separately in code and exactly one statement agrees with all three evaluations",
+     "method": "separate evaluation of each condition"
+    },
+    "judgment_demand": [
+     "condition_check",
+     "claim_justification"
+    ]
+   },
+   "seed": 8800,
+   "pack_id": "st_conditions_prop-s8800",
+   "explanation_en": "The correct answer is All three conditions are satisfied. Each condition is verified: the sample is random, $60 < 10\\%$ of $8000$, and both expected counts are at least $10$.\nThe $10\\%$ condition is not satisfied is incorrect: Claims the $10\\%$ condition fails even though $60$ is less than $10\\%$ of $8000$.\nThe large counts condition is not satisfied is incorrect: Claims the large counts condition fails even though $np_0 = 30$ and $n(1-p_0) = 30$ are both at least $10$.\nThe random condition is not satisfied is incorrect: Claims the sample is not random even though the sample was selected at random."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_conditions_prop",
+   "facts": [
+    "fail=none",
+    "n=60",
+    "N=8000",
+    "p0=0.5"
+   ],
+   "seed": 8800
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item is too easy, with all conditions clearly satisfied and no tension. An official item would typically have one condition fail or require a judgment. \"All three conditions are satisfied\" is a weak, giveaway-style key.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and in scope, but the item is trivial. Every condition is clearly met and the distractors are unrealistic false-failure claims. It fails on distractor quality and exam suitability."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Routine verification of the three standard conditions for a one-proportion z-test: random sample stated, n=60 is less than 10% of 8000, and np0 = n(1-p0) = 30, which is at least 10. Only simple mental arithmetic and a single concept are needed, with no representation changes and short reading. The correct answer is 'All three conditions are satisfied'.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m09-k0",
+  "cellId": "ap_statistics-m09",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "4.2",
+  "unitCode": "4",
+  "skillPrimary": "4.E",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_conditions_t",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Single-condition check (normality via sample size) with a dotplot showing skew and outliers. The student must reject distractors based on misconceptions: the 'sigma unknown' claim, the 'any shape' claim, and the 'skewed, so no' claim. The correct reasoning is the CLT with n >= 30. No computation, minimal reading, and the difficulty comes only from allowed levers.",
+  "payload": {
+   "archetype": "st_conditions_t",
+   "topic": "4.2",
+   "skill": "4.E",
+   "calculator": "allowed",
+   "stem": "A random sample of $45$ lengths, in centimeters, of fish caught in a lake is selected. The dotplot shown displays the sample data. The researcher plans to construct a $95\\%$ confidence interval for the population mean using a t-procedure. Which of the following statements is correct?",
+   "stimulus": {
+    "kind": "stat_chart",
+    "description": "Dotplot of 45 sample values",
+    "data": {
+     "chart": "dot_plot",
+     "data": {
+      "xTitle": "Length (centimeters)",
+      "dots": [
+       {
+        "value": 1,
+        "count": 2
+       },
+       {
+        "value": 2,
+        "count": 3
+       },
+       {
+        "value": 3,
+        "count": 4
+       },
+       {
+        "value": 4,
+        "count": 3
+       },
+       {
+        "value": 5,
+        "count": 6
+       },
+       {
+        "value": 6,
+        "count": 3
+       },
+       {
+        "value": 7,
+        "count": 1
+       },
+       {
+        "value": 8,
+        "count": 3
+       },
+       {
+        "value": 9,
+        "count": 1
+       },
+       {
+        "value": 10,
+        "count": 5
+       },
+       {
+        "value": 11,
+        "count": 1
+       },
+       {
+        "value": 12,
+        "count": 3
+       },
+       {
+        "value": 13,
+        "count": 3
+       },
+       {
+        "value": 14,
+        "count": 2
+       },
+       {
+        "value": 16,
+        "count": 1
+       },
+       {
+        "value": 17,
+        "count": 1
+       },
+       {
+        "value": 18,
+        "count": 1
+       },
+       {
+        "value": 27,
+        "count": 1
+       },
+       {
+        "value": 29,
+        "count": 1
+       }
+      ]
+     }
+    }
+   },
+   "options": [
+    {
+     "text": "A t-procedure is not reasonable because the population standard deviation is not known",
+     "why": "A t-procedure is designed for an unknown population standard deviation, so this is not a reason to reject it.",
+     "value": null
+    },
+    {
+     "text": "A t-procedure is reasonable because t procedures work for any sample size and any shape",
+     "why": "Believes the t-procedures work for any sample size and shape, but strong skewness or outliers in a small sample are a problem.",
+     "value": null
+    },
+    {
+     "text": "A t-procedure is reasonable because the sample size $45$ is at least $30$, so the sampling distribution of the sample mean is approximately normal",
+     "why": "Since $45 \\ge 30$ the Central Limit Theorem makes the sampling distribution of the mean approximately normal even though the sample is skewed.",
+     "value": null
+    },
+    {
+     "text": "A t-procedure is not reasonable because the dotplot is skewed",
+     "why": "Ignores that a sample size of at least $30$ allows the procedure even when the sample is skewed.",
+     "value": null
+    }
+   ],
+   "key_index": 2,
+   "est_seconds": 100,
+   "facts": [
+    "case=large_skew",
+    "n=45"
+   ],
+   "blueprint": {
+    "id": "st_conditions_t",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Verify the normality condition for a t-procedure from the sample size and a graph",
+    "topic": "4.2",
+    "skill": "4.E",
+    "student_thinking": [
+     "Check the sample size: at least 30 allows the Central Limit Theorem to apply",
+     "For a smaller sample, read the dotplot for strong skewness or outliers before deciding"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "a t-procedure for a mean is justified by n at least 30 or by a graph that shows no strong skewness or outliers",
+      "evidence": "the stem gives the sample size and the dotplot shows the sample data"
+     }
+    ],
+    "material": {
+     "type": "dot_plot",
+     "must_include": [
+      "sample values"
+     ]
+    },
+    "misconceptions": [
+     {
+      "id": "rejects_small_symmetric",
+      "description": "rejects a small symmetric sample"
+     },
+     {
+      "id": "clt_for_small_n",
+      "description": "applies the Central Limit Theorem to a small sample"
+     },
+     {
+      "id": "sigma_unknown_reason",
+      "description": "cites an unknown sigma as the problem"
+     }
+    ],
+    "verification": {
+     "independent_path": "the sample is simulated and the skewness, interquartile outlier count and sample size are computed independently of the plotted counts; the case is accepted only if the rule agrees with the planned case",
+     "method": "simulation plus separate rule evaluation"
+    },
+    "judgment_demand": [
+     "condition_check",
+     "representation_reading"
+    ]
+   },
+   "seed": 8800,
+   "pack_id": "st_conditions_t-s8800",
+   "explanation_en": "The correct answer is A t-procedure is reasonable because the sample size $45$ is at least $30$, so the sampling distribution of the sample mean is approximately normal. Since $45 \\ge 30$ the Central Limit Theorem makes the sampling distribution of the mean approximately normal even though the sample is skewed.\nA t-procedure is not reasonable because the population standard deviation is not known is incorrect: A t-procedure is designed for an unknown population standard deviation, so this is not a reason to reject it.\nA t-procedure is reasonable because t procedures work for any sample size and any shape is incorrect: Believes the t-procedures work for any sample size and shape, but strong skewness or outliers in a small sample are a problem.\nA t-procedure is not reasonable because the dotplot is skewed is incorrect: Ignores that a sample size of at least $30$ allows the procedure even when the sample is skewed."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_conditions_t",
+   "facts": [
+    "case=large_skew",
+    "n=45"
+   ],
+   "seed": 8800
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Verifying normality condition for t interval via n>=30; fits 4.2/4.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "C is unique under CED rule; B is clearly false, A and D wrong. Dotplot has outliers at 27 and 29, but n=45>=30 still justifies it per CED."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Dot counts sum to 45; axis title with units given; random sample stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors map to distinct misconceptions; each wrong option explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, one dominant skill, no arithmetic."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound conditions-check item; the key follows the CED n>=30 rule and the options are distinct. Passes."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Single-condition check (normality via sample size) with a dotplot showing skew and outliers. The student must reject distractors based on misconceptions: the 'sigma unknown' claim, the 'any shape' claim, and the 'skewed, so no' claim. The correct reasoning is the CLT with n >= 30. No computation, minimal reading, and the difficulty comes only from allowed levers.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m10-k0",
+  "cellId": "ap_statistics-m10",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "4.7",
+  "unitCode": "4",
+  "skillPrimary": "4.E",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_conditions_two_t",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single condition check (normality via sample size/graph) using one boxplot read. Student notes n<30 for both groups and a visible outlier in Program B, so the t procedure is not justified. Distractors are common misconceptions (equal spread, equal sample sizes, boxplots can't show problems). No computation, minimal reading, no unfair difficulty sources. Fits core skill 4.E at an introductory level rather than a multi-step full-mock item.",
+  "payload": {
+   "archetype": "st_conditions_two_t",
+   "topic": "4.7",
+   "skill": "4.E",
+   "calculator": "allowed",
+   "stem": "A researcher compares the time to run a mile, in minutes, for athletes in two training programs, Program A and Program B, using independent random samples of $12$ and $14$ observations, respectively. The boxplots shown display the sample data. The researcher plans a two-sample t-interval for the difference in population means. Which statement about the normality condition is correct?",
+   "stimulus": {
+    "kind": "stat_chart",
+    "description": "Side-by-side boxplots for Program A and Program B",
+    "data": {
+     "chart": "boxplot",
+     "data": {
+      "xTitle": "Time to run a mile (minutes)",
+      "boxes": [
+       {
+        "name": "Program A",
+        "min": 34,
+        "q1": 40,
+        "median": 46,
+        "q3": 50,
+        "max": 53,
+        "outliers": []
+       },
+       {
+        "name": "Program B",
+        "min": 49,
+        "q1": 54,
+        "median": 59,
+        "q3": 62,
+        "max": 66,
+        "outliers": [
+         79
+        ]
+       }
+      ]
+     }
+    }
+   },
+   "options": [
+    {
+     "text": "A two-sample t-procedure is not reasonable because a sample size is less than $30$ and the boxplot for Program B shows an outlier",
+     "why": "With a sample size below $30$ an outlier in the boxplot for Program B is a problem for the normality condition.",
+     "value": null
+    },
+    {
+     "text": "A two-sample t-procedure is reasonable because the two boxplots have about the same spread",
+     "why": "Equal spread is not the condition: the shapes of the two distributions must be checked, not their spreads.",
+     "value": null
+    },
+    {
+     "text": "A two-sample t-procedure is not reasonable because the two sample sizes are not equal",
+     "why": "The sample sizes do not need to be equal for a two-sample t-procedure.",
+     "value": null
+    },
+    {
+     "text": "A two-sample t-procedure is reasonable because boxplots can never show a problem with the normality condition",
+     "why": "Boxplots do display outliers, so they can show a problem with the normality condition.",
+     "value": null
+    }
+   ],
+   "key_index": 0,
+   "est_seconds": 105,
+   "facts": [
+    "case=small_outlier",
+    "n1=12",
+    "n2=14"
+   ],
+   "blueprint": {
+    "id": "st_conditions_two_t",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Verify the normality condition for a two-sample t-procedure from sample sizes and boxplots",
+    "topic": "4.7",
+    "skill": "4.E",
+    "student_thinking": [
+     "Check each sample size: at least 30 allows the Central Limit Theorem to apply",
+     "For smaller samples, read each boxplot for outliers or strong skewness before deciding"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "a two-sample t-procedure is justified when both samples are at least 30 or the graphs show no strong skewness or outliers",
+      "evidence": "the stem gives both sample sizes and the boxplots show the sample data"
+     }
+    ],
+    "material": {
+     "type": "boxplot",
+     "must_include": [
+      "both samples"
+     ]
+    },
+    "misconceptions": [
+     {
+      "id": "unequal_sizes_problem",
+      "description": "treats unequal sample sizes as a problem"
+     },
+     {
+      "id": "small_n_rejects_all",
+      "description": "rejects every small sample regardless of the graphs"
+     },
+     {
+      "id": "boxplot_cannot_show_outliers",
+      "description": "believes the boxplot cannot show a problem"
+     }
+    ],
+    "verification": {
+     "independent_path": "the outlier rule is applied again to the plotted five-number summaries, and the decision rule is evaluated separately from the planned case",
+     "method": "rule evaluation on plotted summaries"
+    },
+    "judgment_demand": [
+     "condition_check",
+     "representation_reading"
+    ]
+   },
+   "seed": 8800,
+   "pack_id": "st_conditions_two_t-s8800",
+   "explanation_en": "The correct answer is A two-sample t-procedure is not reasonable because a sample size is less than $30$ and the boxplot for Program B shows an outlier. With a sample size below $30$ an outlier in the boxplot for Program B is a problem for the normality condition.\nA two-sample t-procedure is reasonable because the two boxplots have about the same spread is incorrect: Equal spread is not the condition: the shapes of the two distributions must be checked, not their spreads.\nA two-sample t-procedure is not reasonable because the two sample sizes are not equal is incorrect: The sample sizes do not need to be equal for a two-sample t-procedure.\nA two-sample t-procedure is reasonable because boxplots can never show a problem with the normality condition is incorrect: Boxplots do display outliers, so they can show a problem with the normality condition."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_conditions_two_t",
+   "facts": [
+    "case=small_outlier",
+    "n1=12",
+    "n2=14"
+   ],
+   "seed": 8800
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Verifying the normality condition for a two-sample t procedure from sample sizes and boxplots matches topic 4.7 and skill 4.E. No out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Program B fence is 62+1.5*8=74, so 79 is an outlier. Both n are under 30. Key A is unique and defensible."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Boxplot data is complete: axis title, five-number summaries and the outlier. The summaries are consistent. Mile times of 34 to 79 minutes are unrealistic but harmless."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a named misconception and the explanation addresses each one. D is somewhat absurd and the key is longer than the others, a mild cue, but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short reading load, one dominant skill, no arithmetic, and four parallel options. This is typical of the AP exam."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and in scope. The key is unique and verified via the 1.5 IQR fence. The distractors are somewhat weak and the key is longer than the others, but the item is acceptable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single condition check (normality via sample size/graph) using one boxplot read. Student notes n<30 for both groups and a visible outlier in Program B, so the t procedure is not justified. Distractors are common misconceptions (equal spread, equal sample sizes, boxplots can't show problems). No computation, minimal reading, no unfair difficulty sources. Fits core skill 4.E at an introductory level rather than a multi-step full-mock item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m11-k0",
+  "cellId": "ap_statistics-m11",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "3.11",
+  "unitCode": "3",
+  "skillPrimary": "4.G",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_two_prop_ci_claim",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-step justification: the interval contains 0, so no convincing evidence of a difference. Distractors are standard named misinterpretations (probability statement about the sample statistic, claiming a direction, accepting equality). No computation, short reading, no representation changes. This is a core, early-learning application of topic 3.11 rather than a full-mock-level multi-step item.",
+  "payload": {
+   "archetype": "st_two_prop_ci_claim",
+   "topic": "3.11",
+   "skill": "4.G",
+   "calculator": "allowed",
+   "stem": "A study compares the proportion of patients who attend their scheduled appointment for a group using a new reminder text message (Reminder group) and a comparison group (Control group), using independent random samples of $274$ and $183$ patients, and the conditions for inference are met. A $95\\%$ confidence interval for $p_1 - p_2$ is $(-0.061,\\ 0.115)$, where $p_1$ is the proportion for the reminder group and $p_2$ is the proportion for the control group. Which of the following claims is justified by the interval?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "There is a $95\\%$ probability that the difference in sample proportions lies in the interval $(-0.061,\\ 0.115)$",
+     "why": "Interprets the confidence level as a probability about the sample statistic instead of describing the method.",
+     "value": null
+    },
+    {
+     "text": "There is convincing evidence that the proportion of patients who attend their scheduled appointment is greater for the reminder group than for the control group",
+     "why": "Claims a positive difference even though the interval includes $0$.",
+     "value": null
+    },
+    {
+     "text": "The interval contains $0$, so there is convincing evidence that the two population proportions are equal",
+     "why": "Treats an interval that contains $0$ as proof that the proportions are equal instead of as a lack of evidence for a difference.",
+     "value": null
+    },
+    {
+     "text": "There is not convincing evidence of a difference in the proportions of patients who attend their scheduled appointment between the two groups",
+     "why": "The interval $(-0.061,\\ 0.115)$ contains $0$, so $0$ is a plausible value for the difference and a difference is not supported.",
+     "value": null
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 110,
+   "facts": [
+    "kind=contains",
+    "lo=-0.061",
+    "hi=0.115"
+   ],
+   "blueprint": {
+    "id": "st_two_prop_ci_claim",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Justify a claim about a difference of proportions from a confidence interval",
+    "topic": "3.11",
+    "skill": "4.G",
+    "student_thinking": [
+     "Check whether zero is inside the interval for the difference",
+     "If zero is outside, use the sign of the interval to decide which population proportion is larger"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "an interval for a difference that excludes 0 supports a difference in the direction of its sign, and an interval containing 0 does not",
+      "evidence": "the stem gives the interval, defines p1 and p2 and says the conditions are met"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "accepts_null_when_zero_inside",
+      "description": "treats inclusion of zero as proof of no difference"
+     },
+     {
+      "id": "reversed_direction",
+      "description": "reverses the direction of the difference"
+     },
+     {
+      "id": "probability_interpretation",
+      "description": "gives a probability interpretation of the confidence level"
+     }
+    ],
+    "verification": {
+     "independent_path": "the interval is recomputed from counts with z* found by bisection on the normal cdf and the claim is derived from the sign pattern of the endpoints",
+     "method": "interval recomputation and sign rule"
+    },
+    "judgment_demand": [
+     "claim_justification",
+     "interpretation"
+    ]
+   },
+   "seed": 8800,
+   "pack_id": "st_two_prop_ci_claim-s8800",
+   "explanation_en": "The correct answer is There is not convincing evidence of a difference in the proportions of patients who attend their scheduled appointment between the two groups. The interval $(-0.061,\\ 0.115)$ contains $0$, so $0$ is a plausible value for the difference and a difference is not supported.\nThere is a $95\\%$ probability that the difference in sample proportions lies in the interval $(-0.061,\\ 0.115)$ is incorrect: Interprets the confidence level as a probability about the sample statistic instead of describing the method.\nThere is convincing evidence that the proportion of patients who attend their scheduled appointment is greater for the reminder group than for the control group is incorrect: Claims a positive difference even though the interval includes $0$.\nThe interval contains $0$, so there is convincing evidence that the two population proportions are equal is incorrect: Treats an interval that contains $0$ as proof that the proportions are equal instead of as a lack of evidence for a difference."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_two_prop_ci_claim",
+   "facts": [
+    "kind=contains",
+    "lo=-0.061",
+    "hi=0.115"
+   ],
+   "seed": 8800
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Directly targets 3.11/4.G: justify a claim from a two-proportion interval using whether 0 is in the interval. Single dominant skill."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The interval (-0.061, 0.115) contains 0, so only option D is justified. A is a probability misinterpretation about the statistic. B claims a positive difference despite the interval containing 0. C treats failure to find a difference as proof of equality. The key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem defines p1 and p2, gives the sample sizes, states that the conditions are met, and gives the interval. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors encode three distinct named misconceptions: probability interpretation, claiming a direction when 0 is inside the interval, and accepting equality. The explanation covers each wrong option. Option D is slightly longer than the others, but only slightly, so it is not a real giveaway."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "No arithmetic is needed. The reading load is light and fits the typical 60-100 second timing for this reference pattern. The calculator designation is consistent."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, standard two-proportion interval claim question with a unique key and distinct, realistic distractors. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step justification: the interval contains 0, so no convincing evidence of a difference. Distractors are standard named misinterpretations (probability statement about the sample statistic, claiming a direction, accepting equality). No computation, short reading, no representation changes. This is a core, early-learning application of topic 3.11 rather than a full-mock-level multi-step item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m12-k0",
+  "cellId": "ap_statistics-m12",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "5.4",
+  "unitCode": "5",
+  "skillPrimary": "3.B",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_regression_residual_output",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept item: read intercept and slope from computer output, compute the predicted value for x=4, then subtract from the actual value (residual = actual - predicted). Arithmetic is short and clean, with one rounding step. Distractors target sign/order errors and misreading the output. Fits core skill 3.B at an introductory level with no multi-condition reasoning.",
+  "payload": {
+   "archetype": "st_regression_residual_output",
+   "topic": "5.4",
+   "skill": "3.B",
+   "calculator": "allowed",
+   "stem": "A least-squares regression line is used to predict exam score, in points, from the number of hours a student studied. The computer output shown is for the regression. For one student with hours equal to $4$, the actual score is $58.6$. What is the residual for this student? Round to one decimal place.",
+   "stimulus": {
+    "kind": "stat_chart",
+    "description": "Computer output for a least-squares regression",
+    "data": {
+     "chart": "output",
+     "output": {
+      "title": "Regression Analysis: Score versus Hours",
+      "sections": [
+       {
+        "columns": [
+         "Predictor",
+         "Coef",
+         "SE Coef",
+         "T",
+         "P"
+        ],
+        "rows": [
+         [
+          "Constant",
+          "43.10",
+          "1.152",
+          "37.41",
+          "0.000"
+         ],
+         [
+          "Hours",
+          "5.37",
+          "0.576",
+          "9.32",
+          "0.000"
+         ]
+        ]
+       },
+       {
+        "columns": [
+         "S",
+         "R-Sq"
+        ],
+        "rows": [
+         [
+          "2.1",
+          "78.0%"
+         ]
+        ]
+       }
+      ]
+     }
+    }
+   },
+   "options": [
+    {
+     "text": "$6.0$",
+     "why": "Subtracts in the wrong order (predicted minus observed), which reverses the sign of the residual.",
+     "value": "6.0000000"
+    },
+    {
+     "text": "$-119.2$",
+     "why": "Uses the slope as the intercept and the intercept as the slope when computing the predicted value.",
+     "value": "-119.20000"
+    },
+    {
+     "text": "$-6.0$",
+     "why": "The predicted value is $\\hat y = 43.1 + (5.37)(4) \\approx 64.58$, and the residual is observed minus predicted, $58.6 - 64.58 \\approx -6.0$.",
+     "value": "-6.0000000"
+    },
+    {
+     "text": "$37.1$",
+     "why": "Leaves out the intercept and predicts with the slope times $x$ alone.",
+     "value": "37.100000"
+    }
+   ],
+   "key_index": 2,
+   "est_seconds": 105,
+   "facts": [
+    "a=43.1",
+    "b=5.37",
+    "x=4",
+    "y=58.6"
+   ],
+   "blueprint": {
+    "id": "st_regression_residual_output",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Compute a residual from regression computer output",
+    "topic": "5.4",
+    "skill": "3.B",
+    "student_thinking": [
+     "Read the intercept and the slope from the Coef column of the output",
+     "Compute the predicted value and subtract it from the observed value, in that order"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "a residual is the observed response minus the value predicted by the least-squares line",
+      "evidence": "the output gives the coefficients and the stem gives the x value and the observed y"
+     }
+    ],
+    "material": {
+     "type": "computer_output",
+     "must_include": [
+      "Coef column"
+     ]
+    },
+    "misconceptions": [
+     {
+      "id": "sign_reversed",
+      "description": "subtracts in the wrong order"
+     },
+     {
+      "id": "coefficients_swapped",
+      "description": "swaps slope and intercept"
+     },
+     {
+      "id": "intercept_omitted",
+      "description": "leaves out the intercept"
+     }
+    ],
+    "verification": {
+     "independent_path": "the residual is recomputed from the coefficients and checked against the side of the line (above or below) on which the observed point lies",
+     "method": "recomputation and side-of-line check"
+    },
+    "judgment_demand": [
+     "representation_reading",
+     "calculated_value_decision"
+    ]
+   },
+   "seed": 8800,
+   "pack_id": "st_regression_residual_output-s8800",
+   "explanation_en": "The correct answer is $-6.0$. The predicted value is $\\hat y = 43.1 + (5.37)(4) \\approx 64.58$, and the residual is observed minus predicted, $58.6 - 64.58 \\approx -6.0$.\n$6.0$ is incorrect: Subtracts in the wrong order (predicted minus observed), which reverses the sign of the residual.\n$-119.2$ is incorrect: Uses the slope as the intercept and the intercept as the slope when computing the predicted value.\n$37.1$ is incorrect: Leaves out the intercept and predicts with the slope times $x$ alone."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_regression_residual_output",
+   "facts": [
+    "a=43.1",
+    "b=5.37",
+    "x=4",
+    "y=58.6"
+   ],
+   "seed": 8800
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Residual from computer output; matches 5.4 and 3.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Predicted 64.58, residual -5.98, which rounds to -6.0. The key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Output data is complete, rounding is stated, and the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Sign reversal, swapped coefficients and omitted intercept are distinct misconceptions, each explained, and each distractor value checks out."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short task, calculator use is light, and the load is typical."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is clean: a unique key, distinct distractors that each match a named misconception, a complete output stimulus, and appropriate scope and load."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: read intercept and slope from computer output, compute the predicted value for x=4, then subtract from the actual value (residual = actual - predicted). Arithmetic is short and clean, with one rounding step. Distractors target sign/order errors and misreading the output. Fits core skill 3.B at an introductory level with no multi-condition reasoning.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m13-k0",
+  "cellId": "ap_statistics-m13",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "5.5",
+  "unitCode": "5",
+  "skillPrimary": "4.D",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_r2_interp",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Direct recall of the standard interpretation of r-squared. Distractors are common named misconceptions (slope as percent change, percent of points on the line, r confused with r^2). It needs one concept and no computation, representation change, or multi-step linking, so it is below typical full-mock exam_prep depth.",
+  "payload": {
+   "archetype": "st_r2_interp",
+   "topic": "5.5",
+   "skill": "4.D",
+   "calculator": "allowed",
+   "stem": "A least-squares regression line is used to describe the relationship between the number of hours of practice per week and a musician's performance score. The relationship is positive, and the coefficient of determination is $r^2 = 0.64$. Which of the following is the correct interpretation of $r^2$?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Performance score increases by $64\\%$ for each one-unit increase in practice time",
+     "why": "Confuses $r^2$ with the slope and interprets it as a percent change in the response.",
+     "value": null
+    },
+    {
+     "text": "About $64\\%$ of the points in the scatterplot lie exactly on the least-squares line",
+     "why": "Misreads $r^2$ as the percent of data points that fall on the regression line.",
+     "value": null
+    },
+    {
+     "text": "About $64\\%$ of the variation in performance score is accounted for by the linear relationship with practice time",
+     "why": "$r^2 = 0.64$ is the proportion of the variation in the response that is explained by the linear relationship with the explanatory variable.",
+     "value": null
+    },
+    {
+     "text": "The correlation between practice time and performance score is $0.64$",
+     "why": "Confuses $r^2$ with the correlation coefficient $r$: the correlation here is the square root of $r^2$ with the sign of the slope.",
+     "value": null
+    }
+   ],
+   "key_index": 2,
+   "est_seconds": 80,
+   "facts": [
+    "r2=0.64",
+    "r=0.8"
+   ],
+   "blueprint": {
+    "id": "st_r2_interp",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Interpret the coefficient of determination in context",
+    "topic": "5.5",
+    "skill": "4.D",
+    "student_thinking": [
+     "Recall that r squared is the proportion of the variation in the response accounted for by the linear relationship with the explanatory variable",
+     "Reject options that treat r squared as a percent of points on the line, a slope or the correlation"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "r squared is the proportion of variation in y explained by the linear relationship with x",
+      "evidence": "the stem gives r squared and the direction of the association"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "points_on_line",
+      "description": "reads r squared as points on the line"
+     },
+     {
+      "id": "slope_as_percent",
+      "description": "reads r squared as a slope"
+     },
+     {
+      "id": "r_instead_of_r2",
+      "description": "confuses r squared with r"
+     }
+    ],
+    "verification": {
+     "independent_path": "r squared is checked as the square of a correlation r whose sign matches the described direction, and the sentences are generated from a fixed set of interpretations",
+     "method": "square of r recomputation"
+    },
+    "judgment_demand": [
+     "interpretation"
+    ]
+   },
+   "seed": 8800,
+   "pack_id": "st_r2_interp-s8800",
+   "explanation_en": "The correct answer is About $64\\%$ of the variation in performance score is accounted for by the linear relationship with practice time. $r^2 = 0.64$ is the proportion of the variation in the response that is explained by the linear relationship with the explanatory variable.\nPerformance score increases by $64\\%$ for each one-unit increase in practice time is incorrect: Confuses $r^2$ with the slope and interprets it as a percent change in the response.\nAbout $64\\%$ of the points in the scatterplot lie exactly on the least-squares line is incorrect: Misreads $r^2$ as the percent of data points that fall on the regression line.\nThe correlation between practice time and performance score is $0.64$ is incorrect: Confuses $r^2$ with the correlation coefficient $r$: the correlation here is the square root of $r^2$ with the sign of the slope."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_r2_interp",
+   "facts": [
+    "r2=0.64",
+    "r=0.8"
+   ],
+   "seed": 8800
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a standard r-squared interpretation question with one correct sentence and three distinct named misinterpretations. It passes all five criteria.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The item targets r-squared interpretation in Unit 5 (topic 5.5, skill 4.D). It uses no deleted content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option C is the only correct interpretation: r-squared is the proportion of variation in the response accounted for by the linear relationship. The wrong options are clearly wrong. The correlation r would be about 0.8, not 0.64, so option D is wrong."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is complete and clear, and it states the direction of the association and the r-squared value."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option encodes a distinct misconception (slope as percent change, points on the line, r confused with r-squared), and the explanation addresses each one. The options are similar in length and format."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 60 to 80 seconds, needs no calculation, and has four options with a standard structure."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Direct recall of the standard interpretation of r-squared. Distractors are common named misconceptions (slope as percent change, percent of points on the line, r confused with r^2). It needs one concept and no computation, representation change, or multi-step linking, so it is below typical full-mock exam_prep depth.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m14-k0",
+  "cellId": "ap_statistics-m14",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "1.9",
+  "unitCode": "1",
+  "skillPrimary": "4.A",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_boxplot_compare",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "criterion_failed_key_scoring; criterion_failed_stimulus_expression; criterion_failed_exam_suitability; reference_pattern_mismatch",
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Item requires reading five-number summaries from side-by-side boxplots and comparing statistics. Three distractors are refuted by direct reading (Q3, max, median all larger for Class B). The key (option 2) needs one simple subtraction per class (IQR 17 vs 16), a close but easy comparison. Single concept, no multi-step reasoning, small arithmetic, short reading. Difficulty is fair and not due to unfair sources.",
+  "payload": {
+   "archetype": "st_boxplot_compare",
+   "topic": "1.9",
+   "skill": "4.A",
+   "calculator": "allowed",
+   "stem": "The boxplots shown display test scores, in points, for Class A and Class B. Which of the following statements is correct?",
+   "stimulus": {
+    "kind": "stat_chart",
+    "description": "Side-by-side boxplots of test scores, in points",
+    "data": {
+     "chart": "boxplot",
+     "data": {
+      "xTitle": "Test scores, in points",
+      "boxes": [
+       {
+        "name": "Class A",
+        "min": 49,
+        "q1": 57,
+        "median": 70,
+        "q3": 74,
+        "max": 82,
+        "outliers": []
+       },
+       {
+        "name": "Class B",
+        "min": 67,
+        "q1": 75,
+        "median": 79,
+        "q3": 91,
+        "max": 98,
+        "outliers": []
+       }
+      ]
+     }
+    }
+   },
+   "options": [
+    {
+     "text": "The third quartile of Class A is greater than the third quartile of Class B",
+     "why": "The right edge of the box for the other class is farther right, so this comparison is reversed.",
+     "value": null
+    },
+    {
+     "text": "The interquartile range of Class A is greater than the interquartile range of Class B",
+     "why": "This comparison is true for the plotted five-number summaries.",
+     "value": null
+    },
+    {
+     "text": "The maximum of Class A is greater than the maximum of Class B",
+     "why": "The upper whisker of the other class extends farther right, so this comparison is reversed.",
+     "value": null
+    },
+    {
+     "text": "The median of Class A is greater than the median of Class B",
+     "why": "The line inside the box of the other class is higher, so this comparison of medians is reversed.",
+     "value": null
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 85,
+   "facts": [
+    "med=70,79",
+    "iqr=17,16"
+   ],
+   "blueprint": {
+    "id": "st_boxplot_compare",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Compare two distributions displayed in boxplots",
+    "topic": "1.9",
+    "skill": "4.A",
+    "student_thinking": [
+     "Read the median, the quartiles and the whisker ends for each group from the boxplot",
+     "Evaluate each statement about center, spread or extremes and keep the one that matches the plotted values"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "a boxplot shows the minimum, the quartiles, the median and the maximum",
+      "evidence": "the boxplots show the five-number summaries of both groups with no outliers"
+     }
+    ],
+    "material": {
+     "type": "boxplot",
+     "must_include": [
+      "both groups"
+     ]
+    },
+    "misconceptions": [
+     {
+      "id": "reversed_median_comparison",
+      "description": "reverses a comparison of medians"
+     },
+     {
+      "id": "reversed_spread_comparison",
+      "description": "reverses a comparison of spreads"
+     },
+     {
+      "id": "misread_whisker",
+      "description": "misreads a whisker end"
+     }
+    ],
+    "verification": {
+     "independent_path": "each statement is evaluated against the plotted five-number summaries and exactly one of the four chosen statements is true",
+     "method": "statement evaluation against five-number summaries"
+    },
+    "judgment_demand": [
+     "representation_reading",
+     "interpretation"
+    ]
+   },
+   "seed": 8800,
+   "pack_id": "st_boxplot_compare-s8800",
+   "explanation_en": "The correct answer is The interquartile range of Class A is greater than the interquartile range of Class B. This comparison is true for the plotted five-number summaries.\nThe third quartile of Class A is greater than the third quartile of Class B is incorrect: The right edge of the box for the other class is farther right, so this comparison is reversed.\nThe maximum of Class A is greater than the maximum of Class B is incorrect: The upper whisker of the other class extends farther right, so this comparison is reversed.\nThe median of Class A is greater than the median of Class B is incorrect: The line inside the box of the other class is higher, so this comparison of medians is reversed."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_boxplot_compare",
+   "facts": [
+    "med=70,79",
+    "iqr=17,16"
+   ],
+   "seed": 8800
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Comparing boxplots, topic 1.9 and skill 4.A fit."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "The key is correct arithmetically (IQR 17 vs 16), but it is defensible only if exact values can be read. A 1-point difference cannot be reliably discriminated from a rendered boxplot, so the item is not reliably answerable from the figure."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "Data gives no axis scale or tick spec, no orientation, and no value labels, so the IQR comparison depends on a visual reading that cannot be made precise."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "All three wrong options are explained, but only generically (reversed comparisons) without the actual values."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "An official item would make the IQR difference clearly visible; a 17 vs 16 difference is an unrealistic and unfair discrimination from a graph."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key is arithmetically correct and unique, but the IQRs differ by only 1 point (17 vs 16). That cannot be judged from a rendered boxplot without labeled values or a fine scale. The item should be revised so the spread difference is clearly visible, or the stimulus should give values."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Item requires reading five-number summaries from side-by-side boxplots and comparing statistics. Three distractors are refuted by direct reading (Q3, max, median all larger for Class B). The key (option 2) needs one simple subtraction per class (IQR 17 vs 16), a close but easy comparison. Single concept, no multi-step reasoning, small arithmetic, short reading. Difficulty is fair and not due to unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "candidateKey": "ap_statistics-m15-k0",
+  "cellId": "ap_statistics-m15",
+  "apSubjectCode": "ap_statistics",
+  "kind": "mc",
+  "keywordCode": "2.7",
+  "unitCode": "2",
+  "skillPrimary": "3.C",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "st_independence_check",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-concept check of independence from a small two-way table. Compute P(A)=60/180 and P(A|B)=20/60, then compare. Distractors target familiar misconceptions (confusing independence with mutual exclusivity or equal cell counts). Arithmetic is trivial, reading load is low, and there is no representation change beyond reading the table.",
+  "payload": {
+   "archetype": "st_independence_check",
+   "topic": "2.7",
+   "skill": "3.C",
+   "calculator": "allowed",
+   "stem": "The table shown summarizes the responses of $180$ students. One student is selected at random. Let $A$ be the event that the student is a freshman and let $B$ be the event that the student has a job. Which of the following statements is correct? Round probabilities to three decimal places.",
+   "stimulus": {
+    "kind": "stat_chart",
+    "description": "Two-way table of grade level and response",
+    "data": {
+     "chart": "two_way",
+     "data": {
+      "rowHeader": "Grade level",
+      "rowLabels": [
+       "Freshman",
+       "Senior"
+      ],
+      "colLabels": [
+       "Has a job",
+       "No job"
+      ],
+      "cells": [
+       [
+        20,
+        40
+       ],
+       [
+        40,
+        80
+       ]
+      ]
+     }
+    }
+   },
+   "options": [
+    {
+     "text": "The events are not independent because they can both occur at the same time",
+     "why": "Confuses independent events with mutually exclusive events.",
+     "value": null
+    },
+    {
+     "text": "The events are not independent because the number of students in each cell is not the same",
+     "why": "Thinks independence requires equal cell counts instead of equal conditional probabilities.",
+     "value": null
+    },
+    {
+     "text": "The events are not independent because $P(A \\text{ and } B) \\approx 0.111$ is not equal to $P(A) = 0.333$",
+     "why": "Compares the joint probability with $P(A)$ instead of with $P(A)\\cdot P(B)$.",
+     "value": null
+    },
+    {
+     "text": "The events are independent because $P(A\\mid B) = P(A) = 0.333$",
+     "why": "Independent events satisfy $P(A\\mid B)=P(A)$; the table gives the counts needed to compare the two.",
+     "value": null
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 100,
+   "facts": [
+    "N=180",
+    "independent=True"
+   ],
+   "blueprint": {
+    "id": "st_independence_check",
+    "subject": "ap_statistics",
+    "kind": "mc",
+    "concept": "Decide whether two events are independent from a two-way table",
+    "topic": "2.7",
+    "skill": "3.C",
+    "student_thinking": [
+     "Find P(A) and the conditional probability P(A given B) from the table",
+     "Compare the two: events are independent only when they are equal"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "events A and B are independent exactly when P(A given B) equals P(A)",
+      "evidence": "the table gives all counts"
+     }
+    ],
+    "material": {
+     "type": "two_way_table",
+     "must_include": [
+      "all cell counts"
+     ]
+    },
+    "misconceptions": [
+     {
+      "id": "equal_cell_counts",
+      "description": "thinks independence needs equal counts"
+     },
+     {
+      "id": "mutually_exclusive_confusion",
+      "description": "confuses independence with mutual exclusivity"
+     },
+     {
+      "id": "wrong_comparison",
+      "description": "compares the wrong probabilities"
+     }
+    ],
+    "verification": {
+     "independent_path": "the table is expanded into individual records and P(A given B) and P(A) are found by enumeration, independent of the cell-ratio calculation",
+     "method": "record enumeration"
+    },
+    "judgment_demand": [
+     "procedure_choice",
+     "claim_justification",
+     "representation_reading"
+    ]
+   },
+   "seed": 8800,
+   "pack_id": "st_independence_check-s8800",
+   "explanation_en": "The correct answer is The events are independent because $P(A\\mid B) = P(A) = 0.333$. Independent events satisfy $P(A\\mid B)=P(A)$; the table gives the counts needed to compare the two.\nThe events are not independent because they can both occur at the same time is incorrect: Confuses independent events with mutually exclusive events.\nThe events are not independent because the number of students in each cell is not the same is incorrect: Thinks independence requires equal cell counts instead of equal conditional probabilities.\nThe events are not independent because $P(A \\text{ and } B) \\approx 0.111$ is not equal to $P(A) = 0.333$ is incorrect: Compares the joint probability with $P(A)$ instead of with $P(A)\\cdot P(B)$."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "st_independence_check",
+   "facts": [
+    "N=180",
+    "independent=True"
+   ],
+   "seed": 8800
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 2.7 independence check from a two-way table, calculating conditional probabilities (3.C). In scope."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "P(A)=P(A|B)=1/3, so the events are independent. Only the key says independent, so it is the unique answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Two-way table has headers, labels, and all cell counts. Rounding is stated in the stem."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct named misconceptions (mutually exclusive confusion, equal counts, wrong comparison). Each wrong option is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 100 seconds with light reading and little arithmetic. Fits the AP exam with a calculator allowed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and clean. The key is unique, the distractors are distinct misconceptions, and the stimulus is complete. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept check of independence from a small two-way table. Compute P(A)=60/180 and P(A|B)=20/60, then compare. Distractors target familiar misconceptions (confusing independence with mutual exclusivity or equal cell counts). Arithmetic is trivial, reading load is low, and there is no representation change beyond reading the table.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ }
+]

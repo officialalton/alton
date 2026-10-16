@@ -1,0 +1,25 @@
+{
+ "itemId": "evaluating_statistical_claims.causal_vs_association.ST.P",
+ "verdict": "pass",
+ "reviewedAt": "2026-10-05T19:42:43Z",
+ "reviewer": "visual-review-agent-SA",
+ "codeHash": "0c758e3666971bb8e09c5608c3b7721763f74b9ff51b0f91a4ace0af9165e553",
+ "samples": [
+  "evaluating_statistical_claims.causal_vs_association.ST.P.png"
+ ],
+ "checklist": {
+  "figure_present": "pass",
+  "proportion_matches_values": "pass",
+  "labels_placed_and_legible": "pass",
+  "multi_figure_consistent": "n/a",
+  "text_matches_figure_and_solvable": "pass",
+  "axes_ticks_units_legend": "pass",
+  "choice_distinct_one_rule": "n/a",
+  "sat_visual_style": "pass",
+  "mobile_375_readable": "pass"
+ },
+ "defects": [],
+ "notes": "무작위 배정(computer draw), 평균 49 vs 71 → 인과적으로 더 낮음 = A. 표만으로 풀림. 선 라벨 없음, 규칙 영향 없음.",
+ "restampedAt": "2026-10-05T00:00:00Z",
+ "restampNote": "2026-10-05 영문화로 ProblemFigure.tsx(해시 대상) 문구만 변경 — SVG·PNG 바이트 동일, 해시만 갱신"
+}

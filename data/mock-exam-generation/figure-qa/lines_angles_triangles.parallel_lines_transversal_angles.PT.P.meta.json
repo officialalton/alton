@@ -1,0 +1,42 @@
+{
+ "itemId": "lines_angles_triangles.parallel_lines_transversal_angles.PT.P",
+ "generatedAt": "2026-10-07T05:02:00.924Z",
+ "codeHash": "04a60c93cf8fac93526ee81ce1a1d61e25f8ac1543152563ff8ab5c513d2c731",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/geo-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/geo-pt-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/lines_angles_triangles.parallel_lines_transversal_angles.PT.P.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "lines_angles_triangles.parallel_lines_transversal_angles.PT.P.png",
+   "mobileFile": "lines_angles_triangles.parallel_lines_transversal_angles.PT.P.m375.png",
+   "archetypeId": "lat.parallel_lines_transversal_angles.PT.P.repr_shift",
+   "seed": 11,
+   "signature": "parallel_transversal",
+   "stimulus": "A figure is shown in which lines $c$ and $d$ are parallel; transversal $t$ is drawn across both lines. Some angle measures are marked in degrees.",
+   "question": "What value of $x$ is shown in the figure?",
+   "options": [
+    "22",
+    "65",
+    "23",
+    "42"
+   ],
+   "correctIndex": 0,
+   "answer": "22",
+   "explanation": "(1) 그림에서 평행선 c, d 과 횡단선 t 의 각 라벨을 읽는다. (2) 두 각의 라벨: ((2x+21)), ((3x+49)). (3) 두 각은 합이 180° 이다(보각·동측내각 관계). (4) 두 식 2x + 21 과 3x + 49 를 관계식에 넣어 x = 22 를 얻는다. (5) 따라서 22 이다. 따라서 정답은 22이다.",
+   "structuralIssues": []
+  }
+ ]
+}

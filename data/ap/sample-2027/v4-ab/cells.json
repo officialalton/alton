@@ -1,0 +1,67 @@
+[
+ {
+  "cellId": "ap_calculus_ab-m01",
+  "archetype": "graph_fprime_extremum",
+  "kind": "mc",
+  "unitCode": "5",
+  "topic": "5.4",
+  "skill": "2.D",
+  "calculator": "not_allowed",
+  "candidates": 4,
+  "extraTopics": []
+ },
+ {
+  "cellId": "ap_calculus_ab-m02",
+  "archetype": "graph_accum_value",
+  "kind": "mc",
+  "unitCode": "6",
+  "topic": "6.4",
+  "skill": "2.B",
+  "calculator": "not_allowed",
+  "candidates": 4,
+  "extraTopics": []
+ },
+ {
+  "cellId": "ap_calculus_ab-f01",
+  "archetype": "frq_particle_motion",
+  "kind": "frq_bundle",
+  "unitCode": "4",
+  "topic": "4.2",
+  "skill": "3.E",
+  "calculator": "required",
+  "candidates": 3,
+  "extraTopics": [
+   "8.2"
+  ],
+  "template": "particle_motion_calc"
+ },
+ {
+  "cellId": "ap_calculus_ab-f02",
+  "archetype": "frq_related_rates",
+  "kind": "frq_bundle",
+  "unitCode": "4",
+  "topic": "4.5",
+  "skill": "1.E",
+  "calculator": "not_allowed",
+  "candidates": 3,
+  "extraTopics": [
+   "4.4",
+   "3.2"
+  ],
+  "template": "related_rates_setup"
+ },
+ {
+  "cellId": "ap_calculus_ab-f03",
+  "archetype": "frq_implicit_diff",
+  "kind": "frq_bundle",
+  "unitCode": "3",
+  "topic": "3.2",
+  "skill": "1.E",
+  "calculator": "not_allowed",
+  "candidates": 3,
+  "extraTopics": [
+   "5.7"
+  ],
+  "template": "implicit_differentiation"
+ }
+]

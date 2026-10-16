@@ -1,0 +1,335 @@
+{
+ "schema": "rw-session-task/v1",
+ "kind": "review",
+ "role": "fable_judge",
+ "runId": "lit40-wave1",
+ "taskId": "rev-fable_judge-004",
+ "chunkId": "rev-fable_judge-004",
+ "suggestedModel": "fable",
+ "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-fable_judge-004.result.json",
+ "outputSchema": {
+  "chunkId": "청크 ID",
+  "model": "fable",
+  "items": [
+   {
+    "candidateId": "id",
+    "picked_letter": "A|B|C|D",
+    "other_defensible": "정답 외 방어 가능한 선택지가 있으면 true",
+    "est_difficulty": "easy|medium|hard (실제 체감, 요청 난이도에 맞추지 말 것)",
+    "hard_fit": "실제 SAT hard 수준의 사고 단계가 필요하면 true(지문 길이·난어만이면 false)",
+    "plausible_distractors": "오답 3개가 모두 그럴듯하고 서로 다른 오개념에서 나왔으면 true",
+    "length_balanced": "네 선택지 길이·구체성이 비슷해 정답이 형식으로 드러나지 않으면 true",
+    "multi_answer_risk": "복수 정답 위험이 있으면 true",
+    "issues": "한 줄 메모"
+   }
+  ]
+ },
+ "items": [
+  {
+   "candidateId": "lit40-hard-01-081",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "text_structure",
+   "requestedDifficulty": "hard",
+   "passage": "When Anacleto came up to the terrace on Thursdays, he brought his grammar and, without fail, a small paper of coffee, which he set on the wall beside my inkstand as though it had arrived there by itself. I never thanked him, and he never waited to be thanked. We read our verbs while the bay below us went from grey to silver. Some months before, I had paid the physician who attended his father, and neither of us had spoken of it since; I believed the matter forgotten, as I had wished it to be. This Thursday, however, he recited the conditional mood without a single error and then asked, quite formally, whether I might set him harder lessons, longer ones, as many as I pleased. Rosalinda, my housekeeper, laughed from the doorway at such appetite. I did not laugh. I looked at the coffee on the wall, and then at his careful hands, which had already opened the grammar to a page we had not reached.",
+   "question": "Which choice best describes the overall structure of the text?",
+   "options": [
+    "A weekly lesson is described, and then a quarrel about payment arises that the housekeeper settles.",
+    "The narrator recalls a past kindness, regrets having offered it, and then resolves to end the lessons.",
+    "A student's eagerness for harder work is portrayed, and then the narrator decides to praise him openly.",
+    "A routine gesture is introduced, a past favor is disclosed, and a later request recasts the gesture."
+   ]
+  },
+  {
+   "candidateId": "lit40-hard-01-082",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "text_structure",
+   "requestedDifficulty": "hard",
+   "passage": "Tromso's last bus left the harbor at a quarter past one, and Giacomo rode it every night whether or not he had anywhere to be. Moana, who lived across the landing from him, had learned this the way neighbors learn things, by the sound of his door. Tonight she sat two rows behind him, carrying a parcel of his post that had come to her flat by mistake. At the stop near the old ferry quay he stood, nodded to the driver, and did not get off; he only watched the dark water until the doors closed again. Moana had heard him say once that sailors never wave from a deck, because waving invites the shore to wave back. When the bus reached their street, she handed him the parcel. He weighed it in his palm, thanked her, and asked whether she would be leaving for her sister's in the spring, as the building said. She said she might. On the stairs he went up ahead of her, and at his door he lifted one hand to the height of his shoulder and held it there, not moving it, until her own door shut.",
+   "question": "Which choice best describes the overall structure of the text?",
+   "options": [
+    "It presents a man's nightly habit, recalls a remark he once made, and ends with a gesture shaped by that remark.",
+    "It describes a mistaken delivery of mail, explains why it upset the neighbor, and ends with her plan to move.",
+    "It recounts a bus journey, contrasts the driver with the passengers, and closes with an argument on the stairs.",
+    "It introduces a neighbor's suspicion about a sailor, confirms it at the ferry quay, and ends with his apology."
+   ]
+  },
+  {
+   "candidateId": "lit40-hard-01-085",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "underlined_portion_function",
+   "requestedDifficulty": "hard",
+   "passage": "Folding chairs, forty of them, stood stacked against the wall of the music room where the mourners had eaten. Amara and Mandla had not seen each other in nine years, and during the service they had sat at opposite ends of the same row. Afterward, when the guests began drifting out into the courtyard, Mandla picked up a chair, and Amara, without being asked, took the one beside it. As children they had done this every Friday for their grandfather, who taught singing in this room and would not let a lesson end until the floor was bare. __Neither of them mentioned that he was no longer there to count the chairs.__ They worked in the order he had insisted on, the back row first, the legs turned inward, while an aunt called to them twice that the hired men would see to it. When the floor was clear, Mandla stood by the piano, closed its lid, and waited, as if for a nod that would let them go home.",
+   "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+   "options": [
+    "It reveals that the cousins have forgotten the purpose of the chore they are carrying out.",
+    "It explains why the cousins sat apart from each other during the funeral service.",
+    "It suggests that the cousins resent being left to clean the room after the guests.",
+    "It points to a shared loss the cousins leave unspoken as they keep the ritual."
+   ]
+  },
+  {
+   "candidateId": "lit40-hard-01-086",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "underlined_portion_function",
+   "requestedDifficulty": "hard",
+   "passage": "Three rules, Bruno told every group he led: carry water, carry a map, and never let anyone see you check it twice. Now he stood in the ferry terminal at Cais do Sodre with Matheus, the hiker who had wandered from the coastal trail the day before and been found, hungry and sunburned, by a fisherman rather than by the park service. Matheus kept thanking him anyway. Bruno accepted the thanks and bought him a coffee and a pastry from the counter. He did not mention that he had searched the wrong cove for four hours, following a route he had drawn himself. __When Matheus asked how he had known where to look, Bruno folded his map into a smaller square and said the sea usually tells you.__ The ferry horn sounded across the river. Matheus shouldered his pack, shook Bruno's hand, and joined the line, and Bruno watched until the boat was well out before he unfolded the map again and studied the coastline as if it had changed.",
+   "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+   "options": [
+    "It shows Bruno deflecting a question so that his earlier mistake stays hidden.",
+    "It reveals that Bruno truly relied on his knowledge of the sea during the search.",
+    "It indicates that Bruno has grown impatient with Matheus's repeated thanks.",
+    "It suggests that Bruno hopes to teach Matheus the rules he gives his groups."
+   ]
+  },
+  {
+   "candidateId": "lit40-hard-01-087",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "underlined_portion_function",
+   "requestedDifficulty": "hard",
+   "passage": "Tehran in late October is mild enough to sit outside, so my brother Bahram and I read our mother's letters on the bench by the cemetery gate rather than in the empty house. We had sold the carpets, given the books to the mosque library, and left only the brass samovar, which neither of us would claim. In the letters, written to her sister over thirty years, the samovar appears again and again: polished for Nowruz, dented in a move, mended by a man who charged too much. __I had always believed she kept it only because it was too heavy to give away.__ Bahram read one passage aloud twice, in which she wrote that the samovar was the first thing she unpacked in every new home, before the beds. Neither of us spoke for a while. Then he folded the letter, slid it back into its envelope, and said he would bring the car around, since the samovar would fit in the back if we laid it on a blanket.",
+   "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+   "options": [
+    "It explains why the narrator and her brother had argued over the samovar.",
+    "It records an assumption that the letters go on to quietly overturn.",
+    "It summarizes the mother's attitude as she describes it in her letters.",
+    "It reveals the narrator's resentment toward her mother's love of objects."
+   ]
+  },
+  {
+   "candidateId": "lit40-hard-01-088",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "underlined_portion_function",
+   "requestedDifficulty": "hard",
+   "passage": "My father never liked to change buses. In the eleven years we rented the flat above the bus depot in Krakow, he took the number 4 everywhere, even when it meant walking twenty minutes from the end of the line. When his legs began to fail, it was Jakub, our landlord's son, who first said the stairs would have to be given up. I told him my father would not hear of it. Jakub did not argue; he simply began appearing at the depot gate each morning at seven, when my father went down for his newspaper, and walking back up with him, one step behind. __After a month he asked me, 'Niamh, has he ever seen the ground-floor flats at the end of the number 4 line?'__ I said no. That Sunday the three of us rode the number 4 to its last stop, and my father, on Jakub's arm, walked the twenty minutes as he always had, until he stopped in front of a building with no stairs at the door.",
+   "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+   "options": [
+    "It marks the moment Jakub abandons his plan to persuade the narrator's father.",
+    "It shows the narrator's anger at Jakub for interfering in her family's affairs.",
+    "It shows Jakub turning his patient daily effort into a carefully indirect proposal.",
+    "It reveals that the narrator had already chosen a new home for her father."
+   ]
+  },
+  {
+   "candidateId": "lit40-hard-01-089",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "hard",
+   "passage": "I had known Bronislaw for forty years before his granddaughter's wedding in Riga, and in all that time we had spoken of the bridge only once. We had designed it together, the footbridge over the canal, though the plaque bears his name alone. At the reception a young man from the city council stood to praise it, and the guests turned toward Bronislaw and raised their glasses. I raised mine too. I noticed that he did not drink; he held the glass at his chest and looked at the tablecloth. Later, when the band began, he crossed the crowded hall to my table, set down a slice of cake I had not asked for, and said, 'Dainius, the railing was yours. It was always the best part.' I told him the railing was the easiest part. He laughed, and I let him think I had meant it as a joke, and we watched the dancers until the candles burned down.",
+   "question": "Which choice best describes the narrator's attitude toward Bronislaw?",
+   "options": [
+    "Quiet affection that leaves an old grievance deliberately unpressed",
+    "Bitter resentment barely concealed beneath polite celebration",
+    "Indifference toward both the bridge and the praise it receives",
+    "Open gratitude for Bronislaw's public recognition of his work"
+   ]
+  },
+  {
+   "candidateId": "lit40-hard-01-090",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "hard",
+   "passage": "Mabel had driven the harbor route for nineteen years, and in that time she had come to regard the 7:40 as hers in the way some people regard a pew. Nikhil boarded it every morning at the chapel stop with a flask and a crossword, and every morning she waited, engine running, if he was late. On Monday he was not at the chapel stop. He was standing at the new shelter by the fish market, two hundred yards on, where the council had moved the stop without consulting anyone, least of all Mabel. She drew up beside him with a face that would have curdled milk. He apologized, as though the council were his doing. She told him it made no difference to her where anybody stood. All week, though, she slowed at the chapel anyway, a habit her hands seemed to keep without her, and on Friday, when a gull settled on the old empty post, she gave it a short, dignified toot of the horn.",
+   "question": "Which choice best describes the narrator's attitude toward Mabel?",
+   "options": [
+    "Stern disapproval of her rudeness toward a loyal passenger",
+    "Gently amused fondness for her pride and stubborn habits",
+    "Detached neutrality that records her actions without comment",
+    "Earnest admiration for her resistance to the council's decision"
+   ]
+  },
+  {
+   "candidateId": "lit40-hard-01-091",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "hard",
+   "passage": "Three rules for guests, the warden posted:\nno shoes past the mat, no lamps past ten,\nno questions to the brothers at their prayers.\nSoraya kept all three, and kept a fourth\nof her own making, never posted: Leila's name.\nHer grandson broke it on the second night,\nsitting up in the narrow bed to ask\nwhy his mother never came on these trips.\nSoraya told him of the blue domes,\nthe tilework, the ten thousand tiny stars\nthat masons set by hand into the ceilings.\nHe listened, as children do, and then he asked again.\nI write this now, his grandmother, years on,\nand see that I was counting stars for him\nthe way one counts out coins to pay a fare\nthat no amount will cover. Even so,\nI left the lamp lit past ten that night.",
+   "question": "Which choice best describes the speaker's attitude toward her response to her grandson's question?",
+   "options": [
+    "Defiant pride in having shielded the boy from a painful truth",
+    "Lingering anger at the grandson for breaking the guesthouse rules",
+    "Rueful self-awareness about the inadequacy of her earlier answer",
+    "Detached curiosity about the history of the monastery's ceilings"
+   ]
+  },
+  {
+   "candidateId": "lit40-hard-01-092",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "hard",
+   "passage": "Baoyu missed three practices in March, and I benched him for the semifinal, which is what the rules I wrote for the team require. I found him the following week in the reading room of the district library, a place so quiet that I could hear the radiator tick. He had a ledger open beside a calculus textbook, and he was entering numbers in two columns, the way his father did at the noodle shop on Wuding Road. He told me, without looking up, that his father's hands had become too unsteady for the late shift. I had prepared a short speech about commitment. I did not give it. Instead I asked which column was rent. He showed me, and I checked his additions, and he checked my checking, and for an hour neither of us said a word about basketball. I still think the rule was a fair one. I have not changed it. But I now hold practice on Tuesdays and Thursdays, the two evenings the shop closes early.",
+   "question": "Which choice best describes the narrator's attitude toward Baoyu's situation?",
+   "options": [
+    "Firm conviction that Baoyu's absences showed a lack of commitment",
+    "Deep regret over having enforced a rule he now considers unjust",
+    "Polite detachment from a family matter he believes is not his concern",
+    "Respectful sympathy that adapts his practice without dropping his rule"
+   ]
+  },
+  {
+   "candidateId": "lit40-hard-01-093",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "hard",
+   "passage": "Chalk dust and wet wool: that is what I remember of the classroom on Oxford Road where Genevieve taught us English on Saturday mornings. I was twelve and newly arrived, and the old man who sold fish at the market on our street came to the same class, though he was seventy and had spoken English for years. That spring Genevieve held a spelling contest, with a dictionary as the prize. The final came down to the two of us. He was given 'necessary,' a word I had seen painted on the sign above his stall every week for six months, and he spelled it with one s. On Monday, when I stopped for my mother's mackerel, he wrapped it in a page of newspaper and asked whether the dictionary was heavy. I said it was. He nodded, satisfied, and charged me the usual price, and for years I let my own children believe I had won that contest fair.",
+   "question": "Which choice best describes the narrator's attitude toward the old man's loss in the contest?",
+   "options": [
+    "Belated, affectionate recognition of a kindness he once simply accepted",
+    "Lasting embarrassment at being outspelled by a much older student",
+    "Mild suspicion that the old man resented the outcome of the contest",
+    "Proud certainty that he had earned the dictionary through his own effort"
+   ]
+  },
+  {
+   "candidateId": "lit40-hard-01-094",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "hard",
+   "passage": "Who gives a new bride a used umbrella? The young woman had carried that question for a month, ever since Beulah pressed one into her hands at the wedding, black and heavy, with one rib mended in green thread. She had thanked her and set it in the closet, sure it was a comment on her, on Isaiah's choice, on everything. Now, on the platform with the rain coming sideways under the canopy, she watched Beulah step off the incoming train carrying no umbrella at all. 'You'll get soaked,' the bride said, and opened hers over them both. Beulah looked up at the green thread and touched it. She said that Isaiah's father had mended that rib the winter they were married, on a bench in this very station, with thread from her sewing kit. She did not say more. The two women stood beneath it while the next train rattled in, sharing the dry patch in the middle and letting their outer shoulders take the rain.",
+   "question": "Which choice best states the main idea of the text?",
+   "options": [
+    "A bride is offended at her wedding by a gift that seems to criticize her husband's choice.",
+    "A gift first read as a slight turns out to carry family history and draws two women closer.",
+    "Old belongings are more valuable than new ones because they hold the memories of a marriage.",
+    "Sharing an umbrella in a storm proves that the two women have fully resolved their conflict."
+   ],
+   "recipeBeyondMedium": "요지가 세 곳의 근거를 종합해야 나오고, 오답은 각각 한 곳만 요약한 부분 요지다"
+  },
+  {
+   "candidateId": "lit40-hard-01-095",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "hard",
+   "passage": "'You brought rice,' the girl said, as if accusing him of something. Arjun set the steel tiffin on the low table of the waiting room, beside the foil tray of stuffed vine leaves she had carried from her grandmother's kitchen. They had been waiting four hours for news of Karim, her grandfather, and neither of them had eaten. At home she ate her mother's food and he ate his own, at the same table but from separate dishes, an arrangement everyone called respectful. Here, though, the table was the size of a newspaper, and there was only one spoon. He offered it to her. She used it for the vine leaves, then, after a moment, dipped it into his rice and lentils and ate without comment. When the nurse came through the swinging doors, they both stood, and he noticed that she had pushed the two containers together so that their edges touched, and that a grain of rice had stuck to one of the leaves.",
+   "question": "Which choice best states the main idea of the text?",
+   "options": [
+    "A stepdaughter resents her stepfather for bringing his own food to the hospital.",
+    "Families stay respectful by keeping their separate traditions strictly apart.",
+    "A shared wait in a cramped space quietly loosens a careful separation.",
+    "A single grain of rice shows that two family traditions have fully merged."
+   ],
+   "recipeBeyondMedium": "요지가 세 곳의 근거를 종합해야 나오고, 오답은 각각 한 곳만 요약한 부분 요지다"
+  },
+  {
+   "candidateId": "lit40-hard-01-096",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "hard",
+   "passage": "Two languages, one rule: an interpreter repeats what is said, not what is meant. I have followed that rule for fifteen years, and it is how I came to stand at the edge of a soccer field on the plateau at dusk, translating for Nova, a scout from Lisbon who had flown out to meet a coach everyone called the best finder of talent in the West. Nova expected tactics. Instead the coach talked about driving. Every Saturday for twenty years, he said, he had driven the school van three hours each way to collect players from sheep camps that had no road. He had never lost a player to distance. I translated each sentence exactly, and for once the words and their meaning seemed to be the same thing. Nova wrote nothing down. When it grew too dark to see the goals, the coach switched on the van's headlights, and the boys kept playing in their long beams.",
+   "question": "Which choice best states the main idea of the text?",
+   "options": [
+    "A scout travels a long way to observe a famous coach's methods of training young players.",
+    "An interpreter must always repeat exactly what is said rather than what is meant.",
+    "Headlights on a dark field show that the boys care about soccer more than anything else.",
+    "A coach's renown proves to rest on unseen effort, not on a gift for spotting talent."
+   ],
+   "recipeBeyondMedium": "요지가 세 곳의 근거를 종합해야 나오고, 오답은 각각 한 곳만 요약한 부분 요지다"
+  },
+  {
+   "candidateId": "lit40-hard-01-098",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "character_motivation",
+   "requestedDifficulty": "hard",
+   "passage": "Four kilns, eleven shelves, and one rule: nobody touched Ksenia's father's bowls until they had cooled for a full day. Kofi, who had worked beside her father since before she was born, enforced the rule more strictly than her father ever had. When a buyer from Accra arrived that afternoon, she walked the shelves slowly and stopped at the newest bowls, the ones her father had thrown since his eyes began to cloud. She ran a thumb along a rim and said, pleasantly, that the glaze was uneven, almost as if the potter could not see it. Ksenia's mother laughed and called it a new style. Kofi said nothing. He offered the buyer tea and asked about the roads from the coast. That evening, after the buyer had gone, Ksenia found him in the studio with a lamp, though the bowls were still warm, turning each one under the light and setting the worst three on the floor beneath the bottom shelf, behind a sack of clay.",
+   "question": "Based on the text, why does Kofi most likely move the three bowls?",
+   "options": [
+    "He wants to punish Ksenia's father for ignoring the studio's rule about cooling.",
+    "He wants to hide a decline in her father's work that the family will not admit.",
+    "He wants to set aside the best bowls for the buyer before she comes back.",
+    "He wants to prove to the buyer that the uneven glaze was a deliberate style."
+   ],
+   "recipeBeyondMedium": "동기를 한 문장에서 읽을 수 없고 떨어진 두 단서를 결합해야 하며, 오답이 한 단서만 설명하는 부분 정답이다"
+  },
+  {
+   "candidateId": "lit40-hard-01-099",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "character_motivation",
+   "requestedDifficulty": "hard",
+   "passage": "Two sugars, stirred twice, then the spoon laid face down on the saucer: Tyrese had watched his grandfather take his coffee that way at Janelle's counter every Sunday of his life. Now he did it himself, on the first Sunday since the hurricane had flattened the banana walk and his grandfather had stopped leaving the house. Janelle had known the old man fifty years. She poured the coffee, asked after the roof, and when Tyrese began to explain the bank's letter, she turned to wipe a counter that was already clean. He reached for his wallet when he was done. She waved it off and said the old man had a tab. Tyrese knew there had never been a tab; his grandfather paid in cash and complained about it. He put the money on the counter anyway, under the face-down spoon, and Janelle left it there while she took the next order, and she was still leaving it there when he pulled out onto the road.",
+   "question": "Based on the text, why does Tyrese most likely leave the money on the counter?",
+   "options": [
+    "He suspects Janelle is inventing the tab so she can collect a larger debt later.",
+    "He wants to show Janelle that the bank's letter has not worried him at all.",
+    "He wants to keep up his grandfather's habits, including paying his own way.",
+    "He is embarrassed that Janelle turned away while he talked about the letter."
+   ],
+   "recipeBeyondMedium": "동기를 한 문장에서 읽을 수 없고 떨어진 두 단서를 결합해야 하며, 오답이 한 단서만 설명하는 부분 정답이다"
+  },
+  {
+   "candidateId": "lit40-medium-01-001",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "medium",
+   "passage": "Flour rose in a pale cloud as Takeshi slapped the dough onto the marble, and the ovens behind her ticked as they warmed. Eitan stood by the door with his hat in both hands, as though he had come to collect the rent rather than to ask a favor. He had brought a card, cream-colored and edged in gilt, inviting her family to his sister's wedding. Takeshi read it, set it beside the scales, and said she could not leave the shop on a Saturday. Neither of them believed this. She had closed the shop for lesser reasons, and he had guessed her answer before he ever crossed the street; yet he lingered, praising the loaves as though they were the reason for his visit. Outside, the first carts rattled toward the market, and a boy began sweeping the pavement in long, patient strokes.",
+   "question": "Which choice best describes the narrator's attitude toward Eitan and Takeshi?",
+   "options": [
+    "Gently amused by the polite pretenses both of them maintain",
+    "Openly critical of Takeshi for rejecting such a generous offer",
+    "Deeply anxious about the rent Takeshi's family owes to Eitan",
+    "Quietly admiring of Eitan's persistence in courting Takeshi"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-01-002",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "medium",
+   "passage": "When the last students had filed out of the classroom, I found Jomo still at the back desk, turning an old photograph over in his fingers. I had borrowed the room from the language school because our pitch was flooded, and the whiteboard still listed French verbs in someone else's tidy hand. The photograph showed our team two seasons ago, Jomo lifted on his teammates' shoulders, his mouth open in a shout. He asked whether I remembered that match. I said I did, which was true, and that it had nothing to do with Saturday's lineup, which was also true. Even so, I could not stop looking at the boy in the picture, and I envied him a little for being so certain of what he was owed. Outside, a minibus honked twice in the Addis Ababa traffic, and the rain eased into a thin, warm drizzle.",
+   "question": "Which choice best describes the narrator's attitude toward Jomo and the photograph?",
+   "options": [
+    "Dismissive, regarding the photograph as a childish keepsake",
+    "Firm on the lineup yet privately moved by the memory",
+    "Regretful about benching Jomo and ready to restore him",
+    "Suspicious that Jomo brought the photograph to shame him"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-01-003",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "medium",
+   "passage": "Shanghai wakes late in this lane of kilns,\nand I arrive before the studio doors are open.\nJiayi, who farmed rice until the city reached her,\nshapes a bowl as if she is patting soil flat.\nHer daughter Ruoxi, home from surveying new roads,\nmeasures the shelf with her eyes and calls it crowded.\nThey argue about price, about glaze, about space.\nNeither notices how every bowl leans the same way,\na small tilt toward the window, like seedlings\nlooking for weather. I do not tell them.\nSome knowledge belongs to the hands that made it,\nand a guest should carry her cup carefully.\nOn the tram back, a man sells chestnuts from a tin,\nand the steam fogs the glass in quick white circles.",
+   "question": "Which choice best describes the speaker's attitude toward the bowls Jiayi makes?",
+   "options": [
+    "Critical of the family's habit of arguing over the bowls' price",
+    "Envious of the skill Jiayi has carried from the farm to the studio",
+    "Quietly tender toward a pattern the family itself overlooks",
+    "Puzzled by the bowls' tilt and eager to discover its cause"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-01-004",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "medium",
+   "passage": "By my third winter in Riga, I knew the stairwell of my building better than my own kitchen: the cracked fourth step, the radiator that knocked like a guest. Jiwoo, who drove the bus I took each morning, lived two floors below. One evening I found her sitting on the landing beside Beatriz, the widow from the top floor, who had forgotten her keys again and had been weeping. Jiwoo held a finger to her lips when she saw me. The next morning on the bus, she said nothing about it, and neither did I, though we had talked about everything else for years: snow, fares, her son's exams. I used to think silence between friends meant distance. Now I count that quiet among the few promises I have kept well. On Saturdays the stairwell smells of cabbage and floor wax, and someone on the second floor practices scales on an out-of-tune piano.",
+   "question": "Which choice best describes the narrator's attitude toward the silence she shares with Jiwoo?",
+   "options": [
+    "Uneasy, since the silence has weakened her friendship with Jiwoo",
+    "Amused by how seriously Jiwoo treats a minor neighborly mishap",
+    "Guilty about not offering Beatriz help on the landing that night",
+    "Appreciative of the silence as a shared act of loyalty to Beatriz"
+   ]
+  }
+ ],
+ "instructions": "당신은 디지털 SAT 독립 채점자다. 정답 표시가 없다. 먼저 문항을 직접 풀고(picked_letter), 이어서 난이도·hard 적합·오답 품질을 판정한다. 요청 난이도에 맞추려 하지 말고 실제로 느끼는 대로 답한다.\n청크 rev-fable_judge-004 — 20문항.\n출력: Write 도구로 정확히 이 경로에 JSON 한 파일을 쓴다 → /Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-fable_judge-004.result.json\n출력 JSON 스키마(예시 구조): {\"chunkId\":\"청크 ID\",\"model\":\"fable\",\"items\":[{\"candidateId\":\"id\",\"picked_letter\":\"A|B|C|D\",\"other_defensible\":\"정답 외 방어 가능한 선택지가 있으면 true\",\"est_difficulty\":\"easy|medium|hard (실제 체감, 요청 난이도에 맞추지 말 것)\",\"hard_fit\":\"실제 SAT hard 수준의 사고 단계가 필요하면 true(지문 길이·난어만이면 false)\",\"plausible_distractors\":\"오답 3개가 모두 그럴듯하고 서로 다른 오개념에서 나왔으면 true\",\"length_balanced\":\"네 선택지 길이·구체성이 비슷해 정답이 형식으로 드러나지 않으면 true\",\"multi_answer_risk\":\"복수 정답 위험이 있으면 true\",\"issues\":\"한 줄 메모\"}]}\n허용 값: picked_letter ∈ {A,B,C,D}, 불리언 필드는 true/false, est_difficulty ∈ {easy,medium,hard}. candidateId 를 바꾸지 않고 모든 항목에 답한다.\n금지: 결과 파일 외의 파일 생성·수정, 다른 명령 실행, 문항 수정·재작성. 끝나면 'done <항목 수>' 한 줄만 답한다.\n\n## 문항\n### lit40-hard-01-081 — skill text_structure_purpose · 유형 text_structure · 요청 난이도 hard\n[지문]\nWhen Anacleto came up to the terrace on Thursdays, he brought his grammar and, without fail, a small paper of coffee, which he set on the wall beside my inkstand as though it had arrived there by itself. I never thanked him, and he never waited to be thanked. We read our verbs while the bay below us went from grey to silver. Some months before, I had paid the physician who attended his father, and neither of us had spoken of it since; I believed the matter forgotten, as I had wished it to be. This Thursday, however, he recited the conditional mood without a single error and then asked, quite formally, whether I might set him harder lessons, longer ones, as many as I pleased. Rosalinda, my housekeeper, laughed from the doorway at such appetite. I did not laugh. I looked at the coffee on the wall, and then at his careful hands, which had already opened the grammar to a page we had not reached.\n\n[질문] Which choice best describes the overall structure of the text?\nA) A weekly lesson is described, and then a quarrel about payment arises that the housekeeper settles.\nB) The narrator recalls a past kindness, regrets having offered it, and then resolves to end the lessons.\nC) A student's eagerness for harder work is portrayed, and then the narrator decides to praise him openly.\nD) A routine gesture is introduced, a past favor is disclosed, and a later request recasts the gesture.\n### lit40-hard-01-082 — skill text_structure_purpose · 유형 text_structure · 요청 난이도 hard\n[지문]\nTromso's last bus left the harbor at a quarter past one, and Giacomo rode it every night whether or not he had anywhere to be. Moana, who lived across the landing from him, had learned this the way neighbors learn things, by the sound of his door. Tonight she sat two rows behind him, carrying a parcel of his post that had come to her flat by mistake. At the stop near the old ferry quay he stood, nodded to the driver, and did not get off; he only watched the dark water until the doors closed again. Moana had heard him say once that sailors never wave from a deck, because waving invites the shore to wave back. When the bus reached their street, she handed him the parcel. He weighed it in his palm, thanked her, and asked whether she would be leaving for her sister's in the spring, as the building said. She said she might. On the stairs he went up ahead of her, and at his door he lifted one hand to the height of his shoulder and held it there, not moving it, until her own door shut.\n\n[질문] Which choice best describes the overall structure of the text?\nA) It presents a man's nightly habit, recalls a remark he once made, and ends with a gesture shaped by that remark.\nB) It describes a mistaken delivery of mail, explains why it upset the neighbor, and ends with her plan to move.\nC) It recounts a bus journey, contrasts the driver with the passengers, and closes with an argument on the stairs.\nD) It introduces a neighbor's suspicion about a sailor, confirms it at the ferry quay, and ends with his apology.\n### lit40-hard-01-085 — skill text_structure_purpose · 유형 underlined_portion_function · 요청 난이도 hard\n[지문]\nFolding chairs, forty of them, stood stacked against the wall of the music room where the mourners had eaten. Amara and Mandla had not seen each other in nine years, and during the service they had sat at opposite ends of the same row. Afterward, when the guests began drifting out into the courtyard, Mandla picked up a chair, and Amara, without being asked, took the one beside it. As children they had done this every Friday for their grandfather, who taught singing in this room and would not let a lesson end until the floor was bare. __Neither of them mentioned that he was no longer there to count the chairs.__ They worked in the order he had insisted on, the back row first, the legs turned inward, while an aunt called to them twice that the hired men would see to it. When the floor was clear, Mandla stood by the piano, closed its lid, and waited, as if for a nod that would let them go home.\n\n[질문] Which choice best describes the function of the underlined sentence in the text as a whole?\nA) It reveals that the cousins have forgotten the purpose of the chore they are carrying out.\nB) It explains why the cousins sat apart from each other during the funeral service.\nC) It suggests that the cousins resent being left to clean the room after the guests.\nD) It points to a shared loss the cousins leave unspoken as they keep the ritual.\n### lit40-hard-01-086 — skill text_structure_purpose · 유형 underlined_portion_function · 요청 난이도 hard\n[지문]\nThree rules, Bruno told every group he led: carry water, carry a map, and never let anyone see you check it twice. Now he stood in the ferry terminal at Cais do Sodre with Matheus, the hiker who had wandered from the coastal trail the day before and been found, hungry and sunburned, by a fisherman rather than by the park service. Matheus kept thanking him anyway. Bruno accepted the thanks and bought him a coffee and a pastry from the counter. He did not mention that he had searched the wrong cove for four hours, following a route he had drawn himself. __When Matheus asked how he had known where to look, Bruno folded his map into a smaller square and said the sea usually tells you.__ The ferry horn sounded across the river. Matheus shouldered his pack, shook Bruno's hand, and joined the line, and Bruno watched until the boat was well out before he unfolded the map again and studied the coastline as if it had changed.\n\n[질문] Which choice best describes the function of the underlined sentence in the text as a whole?\nA) It shows Bruno deflecting a question so that his earlier mistake stays hidden.\nB) It reveals that Bruno truly relied on his knowledge of the sea during the search.\nC) It indicates that Bruno has grown impatient with Matheus's repeated thanks.\nD) It suggests that Bruno hopes to teach Matheus the rules he gives his groups.\n### lit40-hard-01-087 — skill text_structure_purpose · 유형 underlined_portion_function · 요청 난이도 hard\n[지문]\nTehran in late October is mild enough to sit outside, so my brother Bahram and I read our mother's letters on the bench by the cemetery gate rather than in the empty house. We had sold the carpets, given the books to the mosque library, and left only the brass samovar, which neither of us would claim. In the letters, written to her sister over thirty years, the samovar appears again and again: polished for Nowruz, dented in a move, mended by a man who charged too much. __I had always believed she kept it only because it was too heavy to give away.__ Bahram read one passage aloud twice, in which she wrote that the samovar was the first thing she unpacked in every new home, before the beds. Neither of us spoke for a while. Then he folded the letter, slid it back into its envelope, and said he would bring the car around, since the samovar would fit in the back if we laid it on a blanket.\n\n[질문] Which choice best describes the function of the underlined sentence in the text as a whole?\nA) It explains why the narrator and her brother had argued over the samovar.\nB) It records an assumption that the letters go on to quietly overturn.\nC) It summarizes the mother's attitude as she describes it in her letters.\nD) It reveals the narrator's resentment toward her mother's love of objects.\n### lit40-hard-01-088 — skill text_structure_purpose · 유형 underlined_portion_function · 요청 난이도 hard\n[지문]\nMy father never liked to change buses. In the eleven years we rented the flat above the bus depot in Krakow, he took the number 4 everywhere, even when it meant walking twenty minutes from the end of the line. When his legs began to fail, it was Jakub, our landlord's son, who first said the stairs would have to be given up. I told him my father would not hear of it. Jakub did not argue; he simply began appearing at the depot gate each morning at seven, when my father went down for his newspaper, and walking back up with him, one step behind. __After a month he asked me, 'Niamh, has he ever seen the ground-floor flats at the end of the number 4 line?'__ I said no. That Sunday the three of us rode the number 4 to its last stop, and my father, on Jakub's arm, walked the twenty minutes as he always had, until he stopped in front of a building with no stairs at the door.\n\n[질문] Which choice best describes the function of the underlined sentence in the text as a whole?\nA) It marks the moment Jakub abandons his plan to persuade the narrator's father.\nB) It shows the narrator's anger at Jakub for interfering in her family's affairs.\nC) It shows Jakub turning his patient daily effort into a carefully indirect proposal.\nD) It reveals that the narrator had already chosen a new home for her father.\n### lit40-hard-01-089 — skill central_ideas_details · 유형 narrator_attitude · 요청 난이도 hard\n[지문]\nI had known Bronislaw for forty years before his granddaughter's wedding in Riga, and in all that time we had spoken of the bridge only once. We had designed it together, the footbridge over the canal, though the plaque bears his name alone. At the reception a young man from the city council stood to praise it, and the guests turned toward Bronislaw and raised their glasses. I raised mine too. I noticed that he did not drink; he held the glass at his chest and looked at the tablecloth. Later, when the band began, he crossed the crowded hall to my table, set down a slice of cake I had not asked for, and said, 'Dainius, the railing was yours. It was always the best part.' I told him the railing was the easiest part. He laughed, and I let him think I had meant it as a joke, and we watched the dancers until the candles burned down.\n\n[질문] Which choice best describes the narrator's attitude toward Bronislaw?\nA) Quiet affection that leaves an old grievance deliberately unpressed\nB) Bitter resentment barely concealed beneath polite celebration\nC) Indifference toward both the bridge and the praise it receives\nD) Open gratitude for Bronislaw's public recognition of his work\n### lit40-hard-01-090 — skill central_ideas_details · 유형 narrator_attitude · 요청 난이도 hard\n[지문]\nMabel had driven the harbor route for nineteen years, and in that time she had come to regard the 7:40 as hers in the way some people regard a pew. Nikhil boarded it every morning at the chapel stop with a flask and a crossword, and every morning she waited, engine running, if he was late. On Monday he was not at the chapel stop. He was standing at the new shelter by the fish market, two hundred yards on, where the council had moved the stop without consulting anyone, least of all Mabel. She drew up beside him with a face that would have curdled milk. He apologized, as though the council were his doing. She told him it made no difference to her where anybody stood. All week, though, she slowed at the chapel anyway, a habit her hands seemed to keep without her, and on Friday, when a gull settled on the old empty post, she gave it a short, dignified toot of the horn.\n\n[질문] Which choice best describes the narrator's attitude toward Mabel?\nA) Stern disapproval of her rudeness toward a loyal passenger\nB) Gently amused fondness for her pride and stubborn habits\nC) Detached neutrality that records her actions without comment\nD) Earnest admiration for her resistance to the council's decision\n### lit40-hard-01-091 — skill central_ideas_details · 유형 narrator_attitude · 요청 난이도 hard\n[지문]\nThree rules for guests, the warden posted:\nno shoes past the mat, no lamps past ten,\nno questions to the brothers at their prayers.\nSoraya kept all three, and kept a fourth\nof her own making, never posted: Leila's name.\nHer grandson broke it on the second night,\nsitting up in the narrow bed to ask\nwhy his mother never came on these trips.\nSoraya told him of the blue domes,\nthe tilework, the ten thousand tiny stars\nthat masons set by hand into the ceilings.\nHe listened, as children do, and then he asked again.\nI write this now, his grandmother, years on,\nand see that I was counting stars for him\nthe way one counts out coins to pay a fare\nthat no amount will cover. Even so,\nI left the lamp lit past ten that night.\n\n[질문] Which choice best describes the speaker's attitude toward her response to her grandson's question?\nA) Defiant pride in having shielded the boy from a painful truth\nB) Lingering anger at the grandson for breaking the guesthouse rules\nC) Rueful self-awareness about the inadequacy of her earlier answer\nD) Detached curiosity about the history of the monastery's ceilings\n### lit40-hard-01-092 — skill central_ideas_details · 유형 narrator_attitude · 요청 난이도 hard\n[지문]\nBaoyu missed three practices in March, and I benched him for the semifinal, which is what the rules I wrote for the team require. I found him the following week in the reading room of the district library, a place so quiet that I could hear the radiator tick. He had a ledger open beside a calculus textbook, and he was entering numbers in two columns, the way his father did at the noodle shop on Wuding Road. He told me, without looking up, that his father's hands had become too unsteady for the late shift. I had prepared a short speech about commitment. I did not give it. Instead I asked which column was rent. He showed me, and I checked his additions, and he checked my checking, and for an hour neither of us said a word about basketball. I still think the rule was a fair one. I have not changed it. But I now hold practice on Tuesdays and Thursdays, the two evenings the shop closes early.\n\n[질문] Which choice best describes the narrator's attitude toward Baoyu's situation?\nA) Firm conviction that Baoyu's absences showed a lack of commitment\nB) Deep regret over having enforced a rule he now considers unjust\nC) Polite detachment from a family matter he believes is not his concern\nD) Respectful sympathy that adapts his practice without dropping his rule\n### lit40-hard-01-093 — skill central_ideas_details · 유형 narrator_attitude · 요청 난이도 hard\n[지문]\nChalk dust and wet wool: that is what I remember of the classroom on Oxford Road where Genevieve taught us English on Saturday mornings. I was twelve and newly arrived, and the old man who sold fish at the market on our street came to the same class, though he was seventy and had spoken English for years. That spring Genevieve held a spelling contest, with a dictionary as the prize. The final came down to the two of us. He was given 'necessary,' a word I had seen painted on the sign above his stall every week for six months, and he spelled it with one s. On Monday, when I stopped for my mother's mackerel, he wrapped it in a page of newspaper and asked whether the dictionary was heavy. I said it was. He nodded, satisfied, and charged me the usual price, and for years I let my own children believe I had won that contest fair.\n\n[질문] Which choice best describes the narrator's attitude toward the old man's loss in the contest?\nA) Belated, affectionate recognition of a kindness he once simply accepted\nB) Lasting embarrassment at being outspelled by a much older student\nC) Mild suspicion that the old man resented the outcome of the contest\nD) Proud certainty that he had earned the dictionary through his own effort\n### lit40-hard-01-094 — skill central_ideas_details · 유형 main_idea_or_purpose · 요청 난이도 hard · hard 기준: 요지가 세 곳의 근거를 종합해야 나오고, 오답은 각각 한 곳만 요약한 부분 요지다\n[지문]\nWho gives a new bride a used umbrella? The young woman had carried that question for a month, ever since Beulah pressed one into her hands at the wedding, black and heavy, with one rib mended in green thread. She had thanked her and set it in the closet, sure it was a comment on her, on Isaiah's choice, on everything. Now, on the platform with the rain coming sideways under the canopy, she watched Beulah step off the incoming train carrying no umbrella at all. 'You'll get soaked,' the bride said, and opened hers over them both. Beulah looked up at the green thread and touched it. She said that Isaiah's father had mended that rib the winter they were married, on a bench in this very station, with thread from her sewing kit. She did not say more. The two women stood beneath it while the next train rattled in, sharing the dry patch in the middle and letting their outer shoulders take the rain.\n\n[질문] Which choice best states the main idea of the text?\nA) A bride is offended at her wedding by a gift that seems to criticize her husband's choice.\nB) A gift first read as a slight turns out to carry family history and draws two women closer.\nC) Old belongings are more valuable than new ones because they hold the memories of a marriage.\nD) Sharing an umbrella in a storm proves that the two women have fully resolved their conflict.\n### lit40-hard-01-095 — skill central_ideas_details · 유형 main_idea_or_purpose · 요청 난이도 hard · hard 기준: 요지가 세 곳의 근거를 종합해야 나오고, 오답은 각각 한 곳만 요약한 부분 요지다\n[지문]\n'You brought rice,' the girl said, as if accusing him of something. Arjun set the steel tiffin on the low table of the waiting room, beside the foil tray of stuffed vine leaves she had carried from her grandmother's kitchen. They had been waiting four hours for news of Karim, her grandfather, and neither of them had eaten. At home she ate her mother's food and he ate his own, at the same table but from separate dishes, an arrangement everyone called respectful. Here, though, the table was the size of a newspaper, and there was only one spoon. He offered it to her. She used it for the vine leaves, then, after a moment, dipped it into his rice and lentils and ate without comment. When the nurse came through the swinging doors, they both stood, and he noticed that she had pushed the two containers together so that their edges touched, and that a grain of rice had stuck to one of the leaves.\n\n[질문] Which choice best states the main idea of the text?\nA) A stepdaughter resents her stepfather for bringing his own food to the hospital.\nB) Families stay respectful by keeping their separate traditions strictly apart.\nC) A shared wait in a cramped space quietly loosens a careful separation.\nD) A single grain of rice shows that two family traditions have fully merged.\n### lit40-hard-01-096 — skill central_ideas_details · 유형 main_idea_or_purpose · 요청 난이도 hard · hard 기준: 요지가 세 곳의 근거를 종합해야 나오고, 오답은 각각 한 곳만 요약한 부분 요지다\n[지문]\nTwo languages, one rule: an interpreter repeats what is said, not what is meant. I have followed that rule for fifteen years, and it is how I came to stand at the edge of a soccer field on the plateau at dusk, translating for Nova, a scout from Lisbon who had flown out to meet a coach everyone called the best finder of talent in the West. Nova expected tactics. Instead the coach talked about driving. Every Saturday for twenty years, he said, he had driven the school van three hours each way to collect players from sheep camps that had no road. He had never lost a player to distance. I translated each sentence exactly, and for once the words and their meaning seemed to be the same thing. Nova wrote nothing down. When it grew too dark to see the goals, the coach switched on the van's headlights, and the boys kept playing in their long beams.\n\n[질문] Which choice best states the main idea of the text?\nA) A scout travels a long way to observe a famous coach's methods of training young players.\nB) An interpreter must always repeat exactly what is said rather than what is meant.\nC) Headlights on a dark field show that the boys care about soccer more than anything else.\nD) A coach's renown proves to rest on unseen effort, not on a gift for spotting talent.\n### lit40-hard-01-098 — skill inferences · 유형 character_motivation · 요청 난이도 hard · hard 기준: 동기를 한 문장에서 읽을 수 없고 떨어진 두 단서를 결합해야 하며, 오답이 한 단서만 설명하는 부분 정답이다\n[지문]\nFour kilns, eleven shelves, and one rule: nobody touched Ksenia's father's bowls until they had cooled for a full day. Kofi, who had worked beside her father since before she was born, enforced the rule more strictly than her father ever had. When a buyer from Accra arrived that afternoon, she walked the shelves slowly and stopped at the newest bowls, the ones her father had thrown since his eyes began to cloud. She ran a thumb along a rim and said, pleasantly, that the glaze was uneven, almost as if the potter could not see it. Ksenia's mother laughed and called it a new style. Kofi said nothing. He offered the buyer tea and asked about the roads from the coast. That evening, after the buyer had gone, Ksenia found him in the studio with a lamp, though the bowls were still warm, turning each one under the light and setting the worst three on the floor beneath the bottom shelf, behind a sack of clay.\n\n[질문] Based on the text, why does Kofi most likely move the three bowls?\nA) He wants to punish Ksenia's father for ignoring the studio's rule about cooling.\nB) He wants to hide a decline in her father's work that the family will not admit.\nC) He wants to set aside the best bowls for the buyer before she comes back.\nD) He wants to prove to the buyer that the uneven glaze was a deliberate style.\n### lit40-hard-01-099 — skill inferences · 유형 character_motivation · 요청 난이도 hard · hard 기준: 동기를 한 문장에서 읽을 수 없고 떨어진 두 단서를 결합해야 하며, 오답이 한 단서만 설명하는 부분 정답이다\n[지문]\nTwo sugars, stirred twice, then the spoon laid face down on the saucer: Tyrese had watched his grandfather take his coffee that way at Janelle's counter every Sunday of his life. Now he did it himself, on the first Sunday since the hurricane had flattened the banana walk and his grandfather had stopped leaving the house. Janelle had known the old man fifty years. She poured the coffee, asked after the roof, and when Tyrese began to explain the bank's letter, she turned to wipe a counter that was already clean. He reached for his wallet when he was done. She waved it off and said the old man had a tab. Tyrese knew there had never been a tab; his grandfather paid in cash and complained about it. He put the money on the counter anyway, under the face-down spoon, and Janelle left it there while she took the next order, and she was still leaving it there when he pulled out onto the road.\n\n[질문] Based on the text, why does Tyrese most likely leave the money on the counter?\nA) He suspects Janelle is inventing the tab so she can collect a larger debt later.\nB) He wants to show Janelle that the bank's letter has not worried him at all.\nC) He wants to keep up his grandfather's habits, including paying his own way.\nD) He is embarrassed that Janelle turned away while he talked about the letter.\n### lit40-medium-01-001 — skill central_ideas_details · 유형 narrator_attitude · 요청 난이도 medium\n[지문]\nFlour rose in a pale cloud as Takeshi slapped the dough onto the marble, and the ovens behind her ticked as they warmed. Eitan stood by the door with his hat in both hands, as though he had come to collect the rent rather than to ask a favor. He had brought a card, cream-colored and edged in gilt, inviting her family to his sister's wedding. Takeshi read it, set it beside the scales, and said she could not leave the shop on a Saturday. Neither of them believed this. She had closed the shop for lesser reasons, and he had guessed her answer before he ever crossed the street; yet he lingered, praising the loaves as though they were the reason for his visit. Outside, the first carts rattled toward the market, and a boy began sweeping the pavement in long, patient strokes.\n\n[질문] Which choice best describes the narrator's attitude toward Eitan and Takeshi?\nA) Gently amused by the polite pretenses both of them maintain\nB) Openly critical of Takeshi for rejecting such a generous offer\nC) Deeply anxious about the rent Takeshi's family owes to Eitan\nD) Quietly admiring of Eitan's persistence in courting Takeshi\n### lit40-medium-01-002 — skill central_ideas_details · 유형 narrator_attitude · 요청 난이도 medium\n[지문]\nWhen the last students had filed out of the classroom, I found Jomo still at the back desk, turning an old photograph over in his fingers. I had borrowed the room from the language school because our pitch was flooded, and the whiteboard still listed French verbs in someone else's tidy hand. The photograph showed our team two seasons ago, Jomo lifted on his teammates' shoulders, his mouth open in a shout. He asked whether I remembered that match. I said I did, which was true, and that it had nothing to do with Saturday's lineup, which was also true. Even so, I could not stop looking at the boy in the picture, and I envied him a little for being so certain of what he was owed. Outside, a minibus honked twice in the Addis Ababa traffic, and the rain eased into a thin, warm drizzle.\n\n[질문] Which choice best describes the narrator's attitude toward Jomo and the photograph?\nA) Dismissive, regarding the photograph as a childish keepsake\nB) Firm on the lineup yet privately moved by the memory\nC) Regretful about benching Jomo and ready to restore him\nD) Suspicious that Jomo brought the photograph to shame him\n### lit40-medium-01-003 — skill central_ideas_details · 유형 narrator_attitude · 요청 난이도 medium\n[지문]\nShanghai wakes late in this lane of kilns,\nand I arrive before the studio doors are open.\nJiayi, who farmed rice until the city reached her,\nshapes a bowl as if she is patting soil flat.\nHer daughter Ruoxi, home from surveying new roads,\nmeasures the shelf with her eyes and calls it crowded.\nThey argue about price, about glaze, about space.\nNeither notices how every bowl leans the same way,\na small tilt toward the window, like seedlings\nlooking for weather. I do not tell them.\nSome knowledge belongs to the hands that made it,\nand a guest should carry her cup carefully.\nOn the tram back, a man sells chestnuts from a tin,\nand the steam fogs the glass in quick white circles.\n\n[질문] Which choice best describes the speaker's attitude toward the bowls Jiayi makes?\nA) Critical of the family's habit of arguing over the bowls' price\nB) Envious of the skill Jiayi has carried from the farm to the studio\nC) Quietly tender toward a pattern the family itself overlooks\nD) Puzzled by the bowls' tilt and eager to discover its cause\n### lit40-medium-01-004 — skill central_ideas_details · 유형 narrator_attitude · 요청 난이도 medium\n[지문]\nBy my third winter in Riga, I knew the stairwell of my building better than my own kitchen: the cracked fourth step, the radiator that knocked like a guest. Jiwoo, who drove the bus I took each morning, lived two floors below. One evening I found her sitting on the landing beside Beatriz, the widow from the top floor, who had forgotten her keys again and had been weeping. Jiwoo held a finger to her lips when she saw me. The next morning on the bus, she said nothing about it, and neither did I, though we had talked about everything else for years: snow, fares, her son's exams. I used to think silence between friends meant distance. Now I count that quiet among the few promises I have kept well. On Saturdays the stairwell smells of cabbage and floor wax, and someone on the second floor practices scales on an out-of-tune piano.\n\n[질문] Which choice best describes the narrator's attitude toward the silence she shares with Jiwoo?\nA) Uneasy, since the silence has weakened her friendship with Jiwoo\nB) Amused by how seriously Jiwoo treats a minor neighborly mishap\nC) Guilty about not offering Beatriz help on the landing that night\nD) Appreciative of the silence as a shared act of loyalty to Beatriz"
+}

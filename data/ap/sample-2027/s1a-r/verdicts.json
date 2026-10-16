@@ -1,0 +1,604 @@
+[
+ {
+  "key": "ap_calculus_ab-m03-r1-k0",
+  "cellId": "ap_calculus_ab-m03-r1",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Left limit 2k+1 must equal f(2)=4-2=2, so k=1/2.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "1/2"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Standard continuity-at-a-point piecewise problem; fits 1.11 / 1.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "2k+1=2 gives k=1/2; unique. Other options do not satisfy continuity."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Stem is complete and clear; no stimulus needed."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distinct misconceptions (ignoring the left piece's constant, derivative matching, sign error). The k=2 rationale wording 'forgets the +1' is slightly loose, since that would give k=1, but it is minor."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 80 seconds, no calculator, simple numbers."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean, in-scope MC item with a unique key and plausible distractors. The k=2 distractor rationale is slightly loosely worded, but it is acceptable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single standard procedure: equate the left piece 2k+1 with f(2)=2 and solve a linear equation to get k=1/2. There is no theorem hypothesis to check, no representation change, and the arithmetic is minimal. Distractors reflect simple slips, so this is a direct application suited to initial learning of continuity at a point.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_calculus_ab-m06-r0-k0",
+  "cellId": "ap_calculus_ab-m06-r0",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Both pieces equal 7 at x=2, so f is continuous there. The left derivative 2x=4 matches the right derivative 4, so f is also differentiable.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "Continuous and differentiable"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Fits topic 2.4; checks continuity and one-sided derivatives. Justification skill is only implicit."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Key (continuous and differentiable) is correct and unique: f(2)=7 from both pieces, left derivative 4 = right derivative 4."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Stem is clear and complete; no stimulus needed."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The option for 'continuous but not differentiable' is labeled 'Correct classification', which contradicts the key. The explanation_en repeats this incoherence. The wrong options' misconceptions (for example, assuming a corner at the junction) are not explained. The key rationale is vague."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Quick, no calculator, typical of AP MC."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The math and key are correct, but the explanation is contradictory. The 'continuous but not differentiable' distractor is described as 'Correct classification' even though it is wrong, and the distractor explanations do not address the misconceptions. It fails the distractor/explanation criterion and needs a rewrite."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Piecewise function with small numbers. The solver checks continuity (7 = 7), then compares one-sided derivatives (4 = 4). Two routine checks, with a standard misconception-based option set. Mostly a direct application of the definitions, with no extra context or heavy computation.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_calculus_ab-m08-r0-k0",
+  "cellId": "ap_calculus_ab-m08-r0",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Quotient rule: (f'g - fg')/g^2 = (-4*1 - 5*(-4))/1 = 16",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "16"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Direct quotient rule application, Unit 2, skill 1.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "q'(4)=16 unique; key_index 2 matches."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table data complete; all needed values given. Differentiability stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors reflect distinct misconceptions (wrong numerator sign pattern, reversed numerator, dividing derivatives); each explained. Correct-option rationale is terse but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60-80 seconds, simple arithmetic, no calculator needed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Clean, correct quotient-rule table item with distinct misconception distractors; passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single direct application of the quotient rule with table values; g(4)=1 makes the denominator trivial. Arithmetic is tiny, with one sign-handling step (subtracting a negative product). Distractors target sign errors but the item requires no multi-step reasoning, representation change, or procedure choice.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_calculus_ab-m10-r0-k0",
+  "cellId": "ap_calculus_ab-m10-r0",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Implicit differentiation: y' = -(2x+4y)/(4x+6y) = -10/16 = -5/8 at (1,2); point lies on curve.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "-5/8"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "First-derivative implicit differentiation with product and chain rule; fits 3.2 and 1.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Point is on curve; y'=-10/16=-5/8; unique correct option."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "B and C match the stated errors. D's rationale ('doubles') omits the sign flip but is still a plausible distractor. Minor imprecision."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Typical AP non-calculator MC; small integers; about 90 seconds."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and in scope, with a unique key of -5/8. The distractors are realistic, though the rationale for option D is slightly imprecise. It is suitable for the exam."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step implicit differentiation with a product rule term (4xy) and chain rule on 3y^2, then substitute (1,2) and solve a linear equation for y'. Small numbers, no representation changes, no theorem checks. Answer -5/8 (option A). Standard procedural skill 1.E practice, appropriate for initial learning rather than full mock difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_calculus_ab-m17-r0-k0",
+  "cellId": "ap_calculus_ab-m17-r0",
+  "passed": false,
+  "reasons": [
+   "explanation_does_not_cover_distractors"
+  ],
+  "soft": []
+ },
+ {
+  "key": "ap_calculus_ab-m23-r0-k0",
+  "cellId": "ap_calculus_ab-m23-r0",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "(√π/2)·erf(1.5) = 0.886227 × 0.966105 ≈ 0.856",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "0.856"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Calculator numerical integration of a definite integral without elementary antiderivative; acceptable for 6.7 / 1.E, though thin on FTC."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "0.856 is correct and unique; the other options are clearly different values."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The rationale for 0.298 is garbled and not a clear misconception. The 0.105 distractor (integrand value at the upper limit) is fine and the 0.777 distractor (e^(-x) instead of e^(-x^2)) is plausible. The key's explanation is minimal."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60 seconds, calculator required, consistent with the AP calculator section."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and exam-suitable, but the explanation for distractor 0.298 is incoherent, so it fails the distractor/explanation criterion and needs a rewritten rationale."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step calculator evaluation of a definite integral of a function with no elementary antiderivative. No representation changes, no theorem hypotheses to check, and minimal reading. It tests only the procedural skill of using the calculator's numerical integration. The correct value is about 0.856 (option D).",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_calculus_ab-m23-r1-k0",
+  "cellId": "ap_calculus_ab-m23-r1",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Evaluating numerically gives ∫0^1 e^(-x^2) dx ≈ 0.746824, which rounds to 0.747.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "0.747"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": "Pure calculator numerical integration of a function with no elementary antiderivative; does not exercise FTC evaluation, which is the focus of topic 6.7. Weak topic fit."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "0.747 is correct and unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is clear. The '1.0' upper limit is slightly odd but harmless."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The key explanation is empty of reasoning. The 0.316 rationale is muddled: the value is (1-e^-1)/2, and 'divides by 2b' is unclear. The explanation is thin overall."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60 seconds, light load, calculator use appropriate."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and the item is well formed. It fails on topic fit, since it is generic calculator numerical integration rather than FTC evaluation, and on thin, muddled distractor and key explanations. Overall it is a weak fit for topic 6.7 and skill 1.E."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step calculator evaluation of a definite integral with no elementary antiderivative; the student only needs to know to use the calculator's numerical integration. Distractors reflect plausible misconceptions (e^{-1}, 1-e^{-1}), but there is no multi-step reasoning, representation change, or theorem checking.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_calculus_ab-m24-r0-k0",
+  "cellId": "ap_calculus_ab-m24-r0",
+  "passed": false,
+  "reasons": [
+   "reference_stem_length_out_of_range"
+  ],
+  "soft": []
+ },
+ {
+  "key": "ap_calculus_ab-m24-r1-k0",
+  "cellId": "ap_calculus_ab-m24-r1",
+  "passed": false,
+  "reasons": [
+   "reference_stem_length_out_of_range"
+  ],
+  "soft": []
+ },
+ {
+  "key": "ap_calculus_ab-m26-r1-k0",
+  "cellId": "ap_calculus_ab-m26-r1",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "instant_reject_missing_condition",
+   "reference_pattern_mismatch",
+   "difficulty_from_unfair_sources"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Separate variables: ln y = x^2/2 + C, so y = 2e^{x^2/2} and f(1) = 2e^{1/2}.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "2e^{1/2}"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Separable DE with initial condition, topic 7.7, skill 1.E fits."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "If the DE is dy/dx = xy, key 2e^{1/2} is correct and unique; but the stem as written is ambiguous."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "Stem has malformed expression 'dy/dx=1xy' (template artifact for 1*x*y); unclear and not exam-quality wording."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Explanations reference 'k' and 'kx' which do not appear in the stem; they are generic templates and the explanation just repeats the why strings."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "Garbled DE expression makes the item unsuitable for exam use without rewriting."
+   },
+   "instant_reject": [
+    "missing_condition"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The mathematical content is fine, but the stem's differential equation is printed as 'dy/dx=1xy', a template artifact that makes it ambiguous. The distractor explanations refer to an undefined constant k. The item needs a rewrite as dy/dx = xy and cleaner explanations."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single standard separable equation dy/dx = xy (as interpreted): separate, integrate, apply initial condition, evaluate at x=1. No representation changes, minimal computation, direct application of procedure. Distractors are mild (missing the 1/2 exponent, wrong form). The stem text '1xy' appears to be a formatting error, which is a wording flaw but does not add difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": true,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_calculus_ab-m28-r1-k0",
+  "cellId": "ap_calculus_ab-m28-r1",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Curves intersect at x=0 and x=2; on that interval 2x >= x^2, so area = ∫0^2 (2x - x^2) dx = 4/3.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "∫_0^2 (2x - x^2) dx"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Area between curves setup in x, topic 8.4; choosing the integral setup fits 1.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Unique correct answer: the integral of (2x - x^2) from 0 to 2. The other options are clearly wrong."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The stem is complete and clear. No stimulus is needed. The rationale text contains a template artifact 'x=a', which is minor and affects the rationale only."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors represent distinct misconceptions: adding the functions, a wrong limit, and reversed order. Each wrong option is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, parallel options with no calculator needed. Typical AP load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A sound, standard area-between-curves setup item. The key is unique and correct, the distractors are distinct, and the load is appropriate. The only flaw is the template artifact \"x=a\" in the key's rationale, which is minor."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Standard single-region area between curves setup: solve 2x = x^2 for limits 0 and 2, identify the upper curve, and select the matching integral. Distractors cover common misconceptions (adding functions, using 4 as a limit, reversed subtraction). Minimal computation and reading, no representation changes, and nothing out of scope; it is a routine foundational item rather than a full-mock-level challenge.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_calculus_ab-m30-r0-k0",
+  "cellId": "ap_calculus_ab-m30-r0",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "50 + ∫0^8 (12+6sin(t/2))dt = 50 + 96 + 12(1−cos4) ≈ 165.84",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "165.84"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Accumulation in context with initial value; in scope for 8.3. Calculator needed for the sine integral."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "165.84 is the unique correct answer; verified by hand."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The stem is complete and clear; no stimulus is needed."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The 109.67 rationale says 'final rate times time' but omits that 50 is added (value is 50 + 8*R(8)), so the explanation is inaccurate. Explanations are terse and only restate the 'why' for each option, with no reasoning for the key."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Time and load are typical of an AP multiple-choice item; the calculator designation is consistent."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is mathematically sound and in scope, with a correct key. The distractor rationale for 109.67 is imprecise because it omits the initial 50 gallons, and the explanation text is minimal. I am failing the distractor/explanation criterion for those reasons."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept net change item: amount = initial value + definite integral of the rate. The calculator evaluates the integral in one step. The only reasoning is recognizing that the initial 50 gallons must be added to the integral. Distractors target forgetting the initial amount, dropping the sine term, and a degree/radian mode error. The answer is 50 + 115.84 = 165.84.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_calculus_ab-f01-r1-k0",
+  "cellId": "ap_calculus_ab-f01-r1",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "Trapezoidal sum: 3(84.2)/2 + 4(59.4)/2 + 3(47.7)/2 + 2(44)/2 = 126.3 + 118.8 + 71.55 + 44 = 360.65.",
+     "final_answer": "The integral is about 360.65 MB. It is the total amount of data, in megabytes, downloaded from t = 0 to t = 12 minutes.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "brief_reasoning": "R is decreasing, so on each subinterval the left endpoint gives the largest value of R. That makes the left sum larger than the integral.",
+     "final_answer": "Overestimate, because R is decreasing.",
+     "ambiguous_or_flawed": false,
+     "item": "b"
+    },
+    {
+     "item": "c",
+     "brief_reasoning": "(1/12)∫_0^12 (20 + 30e^{-t/4}) dt = (1/12)[240 + 120(1 − e^{-3})] = 30 − 10e^{-3}.",
+     "final_answer": "About 29.502 MB/min",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "d",
+     "brief_reasoning": "R is differentiable, so it is continuous on [0, 3]. Since R(0) = 50 > 42.1 > 34.2 = R(3), the Intermediate Value Theorem gives a c in (0, 3) with R(c) = 42.1.",
+     "final_answer": "Yes, by the Intermediate Value Theorem.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parts map to 6.2 (trapezoid, left sum), 8.1 (average value), and a prerequisite IVT check; mixed skills across parts are normal for an FRQ."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Key values (360.65, overestimate, 29.502, IVT with continuity from differentiability) are correct and unique. Rubric rows are consistent with dependencies."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table is complete with labels and units. Model M(t) is consistent with the table (M(0)=50). Wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "FRQ; the rubric is adequate, and common_errors are sparse but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "9 points in about 15 minutes, calculator needed only for the integral in (c), numbers are clean."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A sound 9-point table-rate FRQ with correct keys, a complete table, consistent rubric rows, and an appropriate calculator load. No defects found."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP FRQ-style multipart item on a rate table. It covers a trapezoidal sum with unequal subintervals plus a units interpretation, a left-sum over/underestimate argument from monotonicity, an average value computed by calculator, and an IVT justification that requires checking continuity from differentiability. Difficulty comes from legitimate levers (choosing procedures, checking a theorem hypothesis, moving between table and expression), not from ugly numbers or heavy reading. It is well suited to full mocks rather than basic learning or an advanced supplement.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 7,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ }
+]

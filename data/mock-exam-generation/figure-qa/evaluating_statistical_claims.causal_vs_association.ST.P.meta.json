@@ -1,0 +1,42 @@
+{
+ "itemId": "evaluating_statistical_claims.causal_vs_association.ST.P",
+ "generatedAt": "2026-10-07T05:02:00.527Z",
+ "codeHash": "0c758e3666971bb8e09c5608c3b7721763f74b9ff51b0f91a4ace0af9165e553",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/data.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/evaluating_statistical_claims.causal_vs_association.ST.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "evaluating_statistical_claims.causal_vs_association.ST.P.png",
+   "mobileFile": "evaluating_statistical_claims.causal_vs_association.ST.P.m375.png",
+   "archetypeId": "esc.causal_vs_association.ST.P.repr_shift",
+   "seed": 11,
+   "signature": "data:table",
+   "stimulus": "Researchers compared the driving test scores of drivers who used an online safety course with those of drivers who did not. Details of the study are shown in the table.",
+   "question": "Which statement about the study is most appropriate?",
+   "options": [
+    "Using an online safety course caused a lower mean driving test score among the participants.",
+    "Using an online safety course caused a higher mean driving test score among the participants.",
+    "Using an online safety course is associated with a higher mean driving test score, but the study does not show that it caused the difference.",
+    "Using an online safety course is associated with a lower mean driving test score, but the study does not show that it caused the difference."
+   ],
+   "correctIndex": 0,
+   "answer": "Using an online safety course caused a lower mean driving test score among the participants.",
+   "explanation": "(1) 처치 결정 방법을 읽는다: 무작위 배정. (2) 무작위 배정이면 두 조건의 다른 차이가 고르게 섞여 인과 결론이 가능하다. (3) 평균: 사용 49, 비사용 71 이다. (4) 사용자 평균이 더 낮다. (5) 따라서 인과 결론 + 해당 방향. 따라서 정답은 A이다.",
+   "structuralIssues": []
+  }
+ ]
+}

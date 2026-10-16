@@ -1,0 +1,1169 @@
+[
+ {
+  "candidateKey": "ap_calculus_ab-m01-k0",
+  "cellId": "ap_calculus_ab-m01",
+  "apSubjectCode": "ap_calculus_ab",
+  "kind": "mc",
+  "keywordCode": "6.5",
+  "unitCode": "6",
+  "skillPrimary": "3.E",
+  "structure": "standalone",
+  "calculator": "required",
+  "archetype": "c_accum_interval_calc",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "criterion_failed_distractor_explanation",
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Requires FTC Part 1 to get F'(x)=xe^{-x/3}-0.6, a calculator solve for two roots (0.778, 7.628), and a sign analysis across three subintervals to justify increasing behavior. Distractors reflect real misconceptions (F' starting negative, endpoint handling). Standard AP 6.5 difficulty with no unfair sources.",
+  "payload": {
+   "archetype": "c_accum_interval_calc",
+   "topic": "6.5",
+   "skill": "3.E",
+   "calculator": "required",
+   "stem": "Let $F(x)=\\int_0^x\\left(te^{-t/3}-0.6\\right)dt$ for $0\\le x\\le 8$. On which interval is $F$ increasing?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "$(0.000,0.778)$",
+     "why": "Gives the interval where f is decreasing, (0, r1), instead of where F is increasing.",
+     "value": "0.77751331"
+    },
+    {
+     "text": "$(0.000,7.628)$",
+     "why": "Gives (0, r2): F is decreasing on (0, r1).",
+     "value": "7.6279241"
+    },
+    {
+     "text": "$(0.778,7.628)$",
+     "why": "F'(x) = f(x) = x e^{-x/3} - 0.6 is positive between its two zeros, found with a calculator, so F is increasing on (r1, r2).",
+     "value": "15.403057"
+    },
+    {
+     "text": "$(7.628,8.000)$",
+     "why": "Gives (r2, 8): after the second zero f is negative, so F is decreasing there.",
+     "value": "84.279241"
+    }
+   ],
+   "key_index": 2,
+   "est_seconds": 100,
+   "facts": [
+    "b=3",
+    "c=0.6",
+    "roots=[0.7775133054572153, 7.627924073320581]"
+   ],
+   "blueprint": {
+    "id": "c_accum_interval_calc",
+    "subject": "ap_calculus_ab",
+    "kind": "mc",
+    "concept": "Determine where an accumulation function increases from the sign of its integrand, locating zeros with a calculator",
+    "topic": "6.5",
+    "skill": "3.E",
+    "student_thinking": [
+     "Use F' = f, the integrand",
+     "Find the zeros of the integrand numerically with a calculator",
+     "F increases where the integrand is positive"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "required",
+    "key_conditions": [
+     {
+      "condition": "F is differentiable with F' equal to the integrand",
+      "evidence": "Fundamental Theorem of Calculus; the integrand is continuous"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "where_f_decreasing",
+      "description": "uses where f decreases"
+     },
+     {
+      "id": "after_second_zero",
+      "description": "picks the interval after the second zero"
+     },
+     {
+      "id": "first_part_wrong",
+      "description": "starts at 0"
+     }
+    ],
+    "verification": {
+     "independent_path": "sign of the integrand on a fine grid and Brent roots (independent of the Fundamental Theorem argument)",
+     "method": "exact rational arithmetic + numeric cross-check"
+    }
+   },
+   "seed": 3903,
+   "pack_id": "c_accum_interval_calc-s3903",
+   "explanation_en": "The correct answer is (0.778,7.628). F'(x) = f(x) = x e^{-x/3} - 0.6 is positive between its two zeros, found with a calculator, so F is increasing on (r1, r2).\n(0.000,0.778) is incorrect: Gives the interval where f is decreasing, (0, r1), instead of where F is increasing.\n(0.000,7.628) is incorrect: Gives (0, r2): F is decreasing on (0, r1).\n(7.628,8.000) is incorrect: Gives (r2, 8): after the second zero f is negative, so F is decreasing there."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "c_accum_interval_calc",
+   "facts": [
+    "b=3",
+    "c=0.6",
+    "roots=[0.7775133054572153, 7.627924073320581]"
+   ],
+   "seed": 3903
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 6.5 accumulation function increasing from sign of integrand; calculator needed for roots. Fits."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "f negative on (0,0.778), positive on (0.778,7.628), negative after. Key unique and correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Stem is clear and complete. The option 'value' fields contain meaningless numbers (15.403057, 84.279241), which is minor data noise."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Option A explanation says it gives where 'f is decreasing', but f is increasing on (0,0.778); F is decreasing there. Option B explanation is a fragment that does not explain the misconception. Misconceptions are not cleanly distinct or accurately described."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 100 s, calculator use is appropriate, and there is no needless arithmetic."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is mathematically sound with a correct, unique key, but the distractor explanations are inaccurate (A says f is decreasing, which is wrong) or incomplete (B). The option value fields also hold meaningless numbers. Failing on the distractor explanation criterion."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires FTC Part 1 to get F'(x)=xe^{-x/3}-0.6, a calculator solve for two roots (0.778, 7.628), and a sign analysis across three subintervals to justify increasing behavior. Distractors reflect real misconceptions (F' starting negative, endpoint handling). Standard AP 6.5 difficulty with no unfair sources.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "candidateKey": "ap_calculus_ab-m02-k0",
+  "cellId": "ap_calculus_ab-m02",
+  "apSubjectCode": "ap_calculus_ab",
+  "kind": "mc",
+  "keywordCode": "8.4",
+  "unitCode": "8",
+  "skillPrimary": "1.D",
+  "structure": "standalone",
+  "calculator": "required",
+  "archetype": "c_area_between_calc",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Standard calculator-active area-between-curves item. The student must find the intersection numerically, identify the upper and lower curves, set bounds from the y-axis to the intersection, and evaluate the integral. Concept depth is moderate, the reading load is low, and the numbers are clean. It is typical of a full-mock item rather than introductory practice or an advanced extension.",
+  "payload": {
+   "archetype": "c_area_between_calc",
+   "topic": "8.4",
+   "skill": "1.D",
+   "calculator": "required",
+   "stem": "Let $R$ be the region in the first quadrant bounded by the graph of $y=2e^{-0.5x}$, the line $y=1+\\frac{1}{2}x$, and the $y$-axis. What is the area of $R$?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "$0.360$",
+     "why": "Find the intersection with a calculator, then integrate (upper - lower) = A e^{-cx} - (1 + x/2) from 0 to that x-value.",
+     "value": "0.36021796"
+    },
+    {
+     "text": "$0.890$",
+     "why": "Uses only the area under g from 0 to the intersection point.",
+     "value": "0.89013698"
+    },
+    {
+     "text": "$11.920$",
+     "why": "Integrates over [0, 6] instead of stopping at the intersection point.",
+     "value": "11.919584"
+    },
+    {
+     "text": "$1.250$",
+     "why": "Uses only the area under f from 0 to the intersection point.",
+     "value": "1.2503549"
+    }
+   ],
+   "key_index": 0,
+   "est_seconds": 95,
+   "facts": [
+    "A=2",
+    "c=0.5",
+    "root=0.749645",
+    "area=0.360218"
+   ],
+   "blueprint": {
+    "id": "c_area_between_calc",
+    "subject": "ap_calculus_ab",
+    "kind": "mc",
+    "concept": "Find the area between a decreasing exponential and a line using a calculator for the intersection",
+    "topic": "8.4",
+    "skill": "1.D",
+    "student_thinking": [
+     "Determine which curve is on top and find the intersection x-value numerically",
+     "Set up the integral of upper minus lower from 0 to the intersection",
+     "Evaluate with a calculator"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "required",
+    "key_conditions": [
+     {
+      "condition": "the exponential starts above the line and they intersect once for x > 0",
+      "evidence": "A > 1 and the line is increasing"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "wrong_limits",
+      "description": "integrates past the intersection"
+     },
+     {
+      "id": "wrong_order",
+      "description": "reverses the order"
+     },
+     {
+      "id": "area_under_f_only",
+      "description": "area under the curve only"
+     },
+     {
+      "id": "area_under_g_only",
+      "description": "area under the line only"
+     }
+    ],
+    "verification": {
+     "independent_path": "composite Simpson rule on f - g between the Brent root (independent of scipy quad)",
+     "method": "exact rational arithmetic + numeric cross-check"
+    }
+   },
+   "seed": 3900,
+   "pack_id": "c_area_between_calc-s3900",
+   "explanation_en": "The correct answer is 0.360. Find the intersection with a calculator, then integrate (upper - lower) = A e^{-cx} - (1 + x/2) from 0 to that x-value.\n0.890 is incorrect: Uses only the area under g from 0 to the intersection point.\n11.920 is incorrect: Integrates over [0, 6] instead of stopping at the intersection point.\n1.250 is incorrect: Uses only the area under f from 0 to the intersection point."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "c_area_between_calc",
+   "facts": [
+    "A=2",
+    "c=0.5",
+    "root=0.749645",
+    "area=0.360218"
+   ],
+   "seed": 3900
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Area between curves in x with calculator-found intersection; fits 8.4 and 1.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Unique intersection near 0.75; area ≈0.360 is correct and unique among the options."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is complete and unambiguous."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The 0.890 and 1.250 distractors match the area under only one curve. 11.92 is the total absolute area over [0,6], but the 6 is not in the stem, so it is unmotivated and its explanation is loose. The reversed-order option is absent."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 95 seconds, calculator active, clean numbers."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound item with a unique correct key. One distractor (11.920) relies on an arbitrary bound of 6 that the stem never mentions, which is a minor weakness, not a failure."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard calculator-active area-between-curves item. The student must find the intersection numerically, identify the upper and lower curves, set bounds from the y-axis to the intersection, and evaluate the integral. Concept depth is moderate, the reading load is low, and the numbers are clean. It is typical of a full-mock item rather than introductory practice or an advanced extension.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "candidateKey": "ap_calculus_ab-m03-k0",
+  "cellId": "ap_calculus_ab-m03",
+  "apSubjectCode": "ap_calculus_ab",
+  "kind": "mc",
+  "keywordCode": "8.9",
+  "unitCode": "8",
+  "skillPrimary": "1.D",
+  "structure": "standalone",
+  "calculator": "required",
+  "archetype": "c_disc_volume_calc",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single-procedure disc method about the x-axis: square the function, set up pi*integral from 0 to 3 of 2x e^{-x/2}, and evaluate with a calculator. The only modest demand is recognizing that the radius is squared (sqrt removed) and that the lower bound is x=0 from the radicand domain/x-axis. Distractors include omitting pi (3.537) and a common setup error. No unfair difficulty sources.",
+  "payload": {
+   "archetype": "c_disc_volume_calc",
+   "topic": "8.9",
+   "skill": "1.D",
+   "calculator": "required",
+   "stem": "The region bounded by the graph of $y=\\sqrt{2x}\\,e^{-x/4}$, the $x$-axis, and the line $x=3$ is revolved about the $x$-axis. What is the volume of the solid generated?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "$11.113$",
+     "why": "Disc method: V = pi times the integral of y^2 dx from 0 to 3, evaluated with a calculator.",
+     "value": "11.113060"
+    },
+    {
+     "text": "$28.274$",
+     "why": "Rotates about the y-axis with discs, pi times the integral of x^2 dx.",
+     "value": "28.274334"
+    },
+    {
+     "text": "$3.537$",
+     "why": "Leaves out the factor pi.",
+     "value": "3.5373968"
+    },
+    {
+     "text": "$10.008$",
+     "why": "Uses the radius f(x) as the area of the cross section, pi f(x), instead of pi f(x)^2.",
+     "value": "10.008237"
+    }
+   ],
+   "key_index": 0,
+   "est_seconds": 90,
+   "facts": [
+    "A=2",
+    "hi=3",
+    "V=11.113060"
+   ],
+   "blueprint": {
+    "id": "c_disc_volume_calc",
+    "subject": "ap_calculus_ab",
+    "kind": "mc",
+    "concept": "Set up and evaluate a disc-method volume with a calculator",
+    "topic": "8.9",
+    "skill": "1.D",
+    "student_thinking": [
+     "Identify the radius y = f(x) of each disc",
+     "Write V = pi times the integral of f squared",
+     "Evaluate numerically with a calculator"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "required",
+    "key_conditions": [
+     {
+      "condition": "the region lies above the x-axis so each cross section is a disc of radius f(x)",
+      "evidence": "f(x) >= 0 on the interval"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "missing_pi",
+      "description": "omits the factor pi"
+     },
+     {
+      "id": "square_of_integral",
+      "description": "squares the integral"
+     },
+     {
+      "id": "radius_as_area",
+      "description": "uses pi times f only"
+     },
+     {
+      "id": "wrong_axis",
+      "description": "uses the y-axis"
+     }
+    ],
+    "verification": {
+     "independent_path": "composite Simpson rule on pi f^2 (independent of scipy quad)",
+     "method": "exact rational arithmetic + numeric cross-check"
+    }
+   },
+   "seed": 3900,
+   "pack_id": "c_disc_volume_calc-s3900",
+   "explanation_en": "The correct answer is 11.113. Disc method: V = pi times the integral of y^2 dx from 0 to 3, evaluated with a calculator.\n28.274 is incorrect: Rotates about the y-axis with discs, pi times the integral of x^2 dx.\n3.537 is incorrect: Leaves out the factor pi.\n10.008 is incorrect: Uses the radius f(x) as the area of the cross section, pi f(x), instead of pi f(x)^2."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "c_disc_volume_calc",
+   "facts": [
+    "A=2",
+    "hi=3",
+    "V=11.113060"
+   ],
+   "seed": 3900
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Disc method about x-axis with calculator; fits 8.9 and the procedure-choice skill."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "V=2π(4-10e^{-1.5})≈11.113; unique correct option. Left bound x=0 implied by the function meeting the x-axis."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Missing pi, wrong axis (9π, weak but plausible), and pi*f instead of pi*f^2 (about 10.008) are distinct misconceptions; each is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 90 s, calculator-appropriate, no ugly arithmetic."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean calculator disc-volume item with plausible distractors; acceptable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-procedure disc method about the x-axis: square the function, set up pi*integral from 0 to 3 of 2x e^{-x/2}, and evaluate with a calculator. The only modest demand is recognizing that the radius is squared (sqrt removed) and that the lower bound is x=0 from the radicand domain/x-axis. Distractors include omitting pi (3.537) and a common setup error. No unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "candidateKey": "ap_calculus_ab-m04-k0",
+  "cellId": "ap_calculus_ab-m04",
+  "apSubjectCode": "ap_calculus_ab",
+  "kind": "mc",
+  "keywordCode": "4.6",
+  "unitCode": "4",
+  "skillPrimary": "1.F",
+  "structure": "standalone",
+  "calculator": "required",
+  "archetype": "c_linear_approx_overunder_calc",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Requires f(1), f'(1) via product and chain rules, building the tangent line approximation, then computing f''(1) to determine concavity and decide over- or underestimate. Multi-step with a misconception-rich option set (right value with wrong direction, f(1) given as the answer). Numbers are calculator-friendly, the wording is unambiguous, and the content stays within AB scope.",
+  "payload": {
+   "archetype": "c_linear_approx_overunder_calc",
+   "topic": "4.6",
+   "skill": "1.F",
+   "calculator": "required",
+   "stem": "Let $f(x)=\\sqrt{x+3}\\,\\ln(x+2)$. The tangent line to the graph of $f$ at $x=1$ is used to approximate $f(1.1)$. Which of the following gives the approximation and says how it compares with $f(1.1)$?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "$2.2914$, an overestimate",
+     "why": "f(a) + f'(a) dx = 2.2914; f'' is negative at x = 1, so the graph is concave down and the tangent line is above the curve.",
+     "value": null
+    },
+    {
+     "text": "$2.1972$, an underestimate",
+     "why": "Reports f(1) with no change along the tangent line and then reverses the comparison.",
+     "value": null
+    },
+    {
+     "text": "$2.2914$, an underestimate",
+     "why": "Computes the tangent line value correctly but reverses the concavity argument (f'' is negative).",
+     "value": null
+    },
+    {
+     "text": "$2.3855$, an overestimate",
+     "why": "Moves twice the step size along the tangent line.",
+     "value": null
+    }
+   ],
+   "key_index": 0,
+   "est_seconds": 105,
+   "facts": [
+    "a=1",
+    "k=3",
+    "L=2.291357"
+   ],
+   "blueprint": {
+    "id": "c_linear_approx_overunder_calc",
+    "subject": "ap_calculus_ab",
+    "kind": "mc",
+    "concept": "Use a tangent line approximation and decide over/under estimate from the sign of the second derivative, with a calculator",
+    "topic": "4.6",
+    "skill": "1.F",
+    "student_thinking": [
+     "Compute f(a) and f'(a) with a calculator and form the tangent line value",
+     "Find the sign of f'' at a with a calculator",
+     "Decide whether the tangent line lies below (concave up) or above (concave down) the curve"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "required",
+    "key_conditions": [
+     {
+      "condition": "f'' keeps its sign on the interval from a to a + dx so the tangent line stays on one side of the curve",
+      "evidence": "f'' is continuous and nonzero at a"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "reversed_concavity",
+      "description": "wrong over/under claim"
+     },
+     {
+      "id": "no_tangent_change",
+      "description": "ignores the slope"
+     },
+     {
+      "id": "double_step",
+      "description": "wrong step size"
+     }
+    ],
+    "verification": {
+     "independent_path": "the exact f(a + dx) is compared with the tangent line value (independent of the sign of f'')",
+     "method": "exact rational arithmetic + numeric cross-check"
+    }
+   },
+   "seed": 3900,
+   "pack_id": "c_linear_approx_overunder_calc-s3900",
+   "explanation_en": "The correct answer is 2.2914, an overestimate. f(a) + f'(a) dx = 2.2914; f'' is negative at x = 1, so the graph is concave down and the tangent line is above the curve.\n2.1972, an underestimate is incorrect: Reports f(1) with no change along the tangent line and then reverses the comparison.\n2.2914, an underestimate is incorrect: Computes the tangent line value correctly but reverses the concavity argument (f'' is negative).\n2.3855, an overestimate is incorrect: Moves twice the step size along the tangent line."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "c_linear_approx_overunder_calc",
+   "facts": [
+    "a=1",
+    "k=3",
+    "L=2.291357"
+   ],
+   "seed": 3900
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Tangent line approximation with over/under comparison via concavity matches 4.6 and skill 1.F."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Key 2.2914, overestimate is unique and verified; f'' negative at 1 and the interval is short."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors encode distinct misconceptions (no slope, reversed concavity, double step) and the explanation covers each."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Calculator is needed for f, f' and the sign of f''; the load is a bit heavy but acceptable for a calculator-required item."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is acceptable. The key is verified, the distractors are distinct, and the task fits topic 4.6 and skill 1.F. The only concern is the heavy f'' computation, which is tolerable with a calculator."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires f(1), f'(1) via product and chain rules, building the tangent line approximation, then computing f''(1) to determine concavity and decide over- or underestimate. Multi-step with a misconception-rich option set (right value with wrong direction, f(1) given as the answer). Numbers are calculator-friendly, the wording is unambiguous, and the content stays within AB scope.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 240
+  }
+ },
+ {
+  "candidateKey": "ap_calculus_ab-m05-k0",
+  "cellId": "ap_calculus_ab-m05",
+  "apSubjectCode": "ap_calculus_ab",
+  "kind": "mc",
+  "keywordCode": "4.2",
+  "unitCode": "4",
+  "skillPrimary": "1.E",
+  "structure": "standalone",
+  "calculator": "required",
+  "archetype": "c_motion_turn_calc",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "criterion_failed_distractor_explanation",
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single procedure: use the calculator to solve v(t)=0 on [0,6] and confirm the sign change from positive to negative. One representation (an expression), little reading, and no multi-step reasoning or theorem checking. The distractors are only mildly misconception-based. It fits direct application of the straight-line motion rules (skill 1.E) at an introductory level.",
+  "payload": {
+   "archetype": "c_motion_turn_calc",
+   "topic": "4.2",
+   "skill": "1.E",
+   "calculator": "required",
+   "stem": "A particle moves along the $x$-axis with velocity $v(t)=2\\cos t-0.8t$ for $0\\le t\\le 6$, where $t$ is in seconds. At what time $t$ does the particle first change direction?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "$1.111$",
+     "why": "The particle changes direction when v(t) = 0 and v changes sign; solve a cos t - b t = 0 with a calculator (first positive root).",
+     "value": "1.1105105"
+    },
+    {
+     "text": "$3.000$",
+     "why": "Takes the midpoint of the interval [0, 6].",
+     "value": "3.0000000"
+    },
+    {
+     "text": "$3.553$",
+     "why": "Reports the time when the acceleration is zero, found from v'(t) = 0, instead of when the velocity is zero.",
+     "value": "3.5531095"
+    },
+    {
+     "text": "$6.299$",
+     "why": "Reports the particle's position at the turning time instead of the time.",
+     "value": "6.2985577"
+    }
+   ],
+   "key_index": 0,
+   "est_seconds": 90,
+   "facts": [
+    "a=2",
+    "b=0.8",
+    "root=1.110511"
+   ],
+   "blueprint": {
+    "id": "c_motion_turn_calc",
+    "subject": "ap_calculus_ab",
+    "kind": "mc",
+    "concept": "Find the time a particle changes direction by solving v(t) = 0 numerically",
+    "topic": "4.2",
+    "skill": "1.E",
+    "student_thinking": [
+     "Recognize that a change of direction needs v = 0 with a sign change",
+     "Solve the transcendental equation with a calculator",
+     "Choose the first positive root"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "required",
+    "key_conditions": [
+     {
+      "condition": "v is continuous and changes sign at its first positive root",
+      "evidence": "v(0) > 0 and v decreases through zero"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "acceleration_zero",
+      "description": "solves v' = 0"
+     },
+     {
+      "id": "wrong_equation",
+      "description": "drops the linear term"
+     },
+     {
+      "id": "position_not_time",
+      "description": "reports a position"
+     },
+     {
+      "id": "midpoint",
+      "description": "guesses the midpoint"
+     }
+    ],
+    "verification": {
+     "independent_path": "bisection on v over a fine grid (independent of Brent's method)",
+     "method": "exact rational arithmetic + numeric cross-check"
+    }
+   },
+   "seed": 3900,
+   "pack_id": "c_motion_turn_calc-s3900",
+   "explanation_en": "The correct answer is 1.111. The particle changes direction when v(t) = 0 and v changes sign; solve a cos t - b t = 0 with a calculator (first positive root).\n3.000 is incorrect: Takes the midpoint of the interval [0, 6].\n3.553 is incorrect: Reports the time when the acceleration is zero, found from v'(t) = 0, instead of when the velocity is zero.\n6.299 is incorrect: Reports the particle's position at the turning time instead of the time."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "c_motion_turn_calc",
+   "facts": [
+    "a=2",
+    "b=0.8",
+    "root=1.110511"
+   ],
+   "seed": 3900
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Solving v(t)=0 numerically and checking the sign change is on target for 4.2 and 1.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key 1.111 is the unique first sign-change root; v stays negative afterward."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The stem is complete and clear; no stimulus is needed."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The option 6.299 is outside the domain [0,6] and is trivially eliminable. Its stated rationale (position at turning time) is unsupported because no position function or initial position is given, and the value is not that position. The 3.000 midpoint distractor is also weak and arbitrary. The explanation for these options is inaccurate."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 90 seconds, calculator needed, typical AP load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and the item is in scope. It fails on distractor quality: 6.299 lies outside the domain and its stated misconception (a position value) is false, and the 3.000 midpoint option is weak. The explanation is therefore inaccurate for those options."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single procedure: use the calculator to solve v(t)=0 on [0,6] and confirm the sign change from positive to negative. One representation (an expression), little reading, and no multi-step reasoning or theorem checking. The distractors are only mildly misconception-based. It fits direct application of the straight-line motion rules (skill 1.E) at an introductory level.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "candidateKey": "ap_calculus_ab-m06-k0",
+  "cellId": "ap_calculus_ab-m06",
+  "apSubjectCode": "ap_calculus_ab",
+  "kind": "mc",
+  "keywordCode": "8.5",
+  "unitCode": "8",
+  "skillPrimary": "1.D",
+  "structure": "standalone",
+  "calculator": "not_allowed",
+  "archetype": "g_area_y_graph",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Area between x=f(y) and the y-axis from a piecewise-linear graph. Read the vertices and sum four trapezoid areas (4+5+3+5=17), or integrate f(y) dy. There is one concept (horizontal slices) with simple arithmetic and no theorem checks or procedure choices. Distractors reflect the bounding-rectangle and halving misconceptions.",
+  "payload": {
+   "archetype": "g_area_y_graph",
+   "topic": "8.5",
+   "skill": "1.D",
+   "calculator": "not_allowed",
+   "stem": "The graph of $x=f(y)$ for $0\\le y\\le 8$ is shown and consists of line segments. Let $R$ be the region bounded by the graph, the $y$-axis, and the lines $y=0$ and $y=8$. What is the area of $R$?",
+   "stimulus": {
+    "kind": "graph",
+    "description": "Graph of x = f(y), consisting of line segments connecting the plotted vertices.",
+    "data": {
+     "x_axis": {
+      "label": "x",
+      "min": 0,
+      "max": 5,
+      "step": 1
+     },
+     "y_axis": {
+      "label": "y",
+      "min": 0,
+      "max": 8,
+      "step": 1
+     },
+     "vertices": [
+      [
+       1,
+       0
+      ],
+      [
+       3,
+       2
+      ],
+      [
+       2,
+       4
+      ],
+      [
+       1,
+       6
+      ],
+      [
+       4,
+       8
+      ]
+     ]
+    }
+   },
+   "options": [
+    {
+     "text": "$17$",
+     "why": "The region is described in terms of y: area = the integral of f(y) dy from 0 to 8, computed as trapezoids stacked along the y-axis.",
+     "value": "17.000000"
+    },
+    {
+     "text": "$40$",
+     "why": "Integrates x squared with respect to y, the volume integrand instead of the area.",
+     "value": "40.000000"
+    },
+    {
+     "text": "$\\frac{17}{2}$",
+     "why": "Halves the area, as for a triangle.",
+     "value": "8.5000000"
+    },
+    {
+     "text": "$\\frac{88}{5}$",
+     "why": "Averages the five x-values and multiplies by the height 8, which is not the area of this region.",
+     "value": "17.600000"
+    }
+   ],
+   "key_index": 0,
+   "est_seconds": 90,
+   "facts": [
+    "vx=[1, 3, 2, 1, 4]",
+    "A=17"
+   ],
+   "blueprint": {
+    "id": "g_area_y_graph",
+    "subject": "ap_calculus_ab",
+    "kind": "mc",
+    "concept": "Find the area of a region described with x as a function of y, integrating with respect to y",
+    "topic": "8.5",
+    "skill": "1.D",
+    "student_thinking": [
+     "Recognize that the boundary is x = f(y) so the area integral is taken in the y direction",
+     "Compute the area as trapezoids whose widths are the x-values and whose heights are the y-steps",
+     "Add the areas of the pieces"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "not_allowed",
+    "key_conditions": [
+     {
+      "condition": "the region lies between the y-axis and the graph for 0 <= y <= 8 and x = f(y) >= 0",
+      "evidence": "all plotted x-values are positive"
+     }
+    ],
+    "material": {
+     "type": "graph",
+     "must_include": [
+      "vertices of x = f(y) at y = 0, 2, 4, 6, 8"
+     ]
+    },
+    "misconceptions": [
+     {
+      "id": "average_times_height",
+      "description": "uses the average x-value"
+     },
+     {
+      "id": "half_area",
+      "description": "halves the area"
+     },
+     {
+      "id": "squared_integrand",
+      "description": "integrates x squared"
+     }
+    ],
+    "verification": {
+     "independent_path": "numerical quadrature of the interpolated x(y) over y in [0, 8] (independent of trapezoid areas)",
+     "method": "exact rational arithmetic + numeric cross-check"
+    }
+   },
+   "seed": 3900,
+   "pack_id": "g_area_y_graph-s3900",
+   "explanation_en": "The correct answer is 17. The region is described in terms of y: area = the integral of f(y) dy from 0 to 8, computed as trapezoids stacked along the y-axis.\n40 is incorrect: Integrates x squared with respect to y, the volume integrand instead of the area.\n\\frac{17}{2} is incorrect: Halves the area, as for a triangle.\n\\frac{88}{5} is incorrect: Averages the five x-values and multiplies by the height 8, which is not the area of this region."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "g_area_y_graph",
+   "facts": [
+    "vx=[1, 3, 2, 1, 4]",
+    "A=17"
+   ],
+   "seed": 3900
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Area with respect to y from a piecewise-linear graph fits topic 8.5; the skill demand is light but acceptable."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Trapezoids give 4+5+3+5=17; the key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Vertices are complete and the axes are labeled; the stem wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors 40 (the integral of x squared dy), 17/2 (half the area) and 88/5 (average x times 8) each correspond to a distinct misconception, and each has an explanation."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 90 seconds, no calculator needed, simple numbers."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and clean: the key is 17, the stimulus is complete, and the distractors are plausible and distinct. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Area between x=f(y) and the y-axis from a piecewise-linear graph. Read the vertices and sum four trapezoid areas (4+5+3+5=17), or integrate f(y) dy. There is one concept (horizontal slices) with simple arithmetic and no theorem checks or procedure choices. Distractors reflect the bounding-rectangle and halving misconceptions.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "candidateKey": "ap_calculus_ab-m07-k0",
+  "cellId": "ap_calculus_ab-m07",
+  "apSubjectCode": "ap_calculus_ab",
+  "kind": "mc",
+  "keywordCode": "8.8",
+  "unitCode": "8",
+  "skillPrimary": "1.D",
+  "structure": "standalone",
+  "calculator": "not_allowed",
+  "archetype": "g_volume_triangle_graph",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Requires deriving the equilateral triangle cross-section area (sqrt3/4)s^2, reading a piecewise-linear graph, and integrating f^2 over four segments by hand. The distractors reflect common misconceptions (omitting the sqrt3/4 factor, using the wrong area factor). Numbers are small and clean, and the wording is unambiguous.",
+  "payload": {
+   "archetype": "g_volume_triangle_graph",
+   "topic": "8.8",
+   "skill": "1.D",
+   "calculator": "not_allowed",
+   "stem": "The graph of the function $f$ is shown and consists of line segments. Let $R$ be the region bounded by the graph of $f$, the $x$-axis, and the lines $x=0$ and $x=8$. $R$ is the base of a solid whose cross sections perpendicular to the $x$-axis are equilateral triangles with one side in $R$. What is the volume of the solid?",
+   "stimulus": {
+    "kind": "graph",
+    "description": "Graph of f, consisting of line segments connecting the plotted vertices.",
+    "data": {
+     "x_axis": {
+      "label": "x",
+      "min": 0,
+      "max": 8,
+      "step": 1
+     },
+     "y_axis": {
+      "label": "y",
+      "min": -1,
+      "max": 7,
+      "step": 1
+     },
+     "vertices": [
+      [
+       0,
+       4
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       4,
+       6
+      ],
+      [
+       6,
+       6
+      ],
+      [
+       8,
+       2
+      ]
+     ]
+    }
+   },
+   "options": [
+    {
+     "text": "$\\frac{448}{3}$",
+     "why": "Leaves out sqrt(3)/4 and integrates only f squared.",
+     "value": "149.33333"
+    },
+    {
+     "text": "$\\frac{112 \\sqrt{3}}{3}$",
+     "why": "An equilateral triangle with side f(x) has area (sqrt(3)/4) f(x)^2, so V = (sqrt(3)/4) times the integral of f^2.",
+     "value": "64.663230"
+    },
+    {
+     "text": "$\\frac{224 \\sqrt{3}}{3}$",
+     "why": "Uses (sqrt(3)/2) f^2, the height of the triangle times its side, with no 1/2.",
+     "value": "129.32646"
+    },
+    {
+     "text": "$\\frac{224}{3}$",
+     "why": "Uses the area formula for a right isosceles triangle, (1/2) f^2, instead of an equilateral triangle.",
+     "value": "74.666667"
+    }
+   ],
+   "key_index": 1,
+   "est_seconds": 105,
+   "facts": [
+    "v=[4, 1, 6, 6, 2]",
+    "S=448/3"
+   ],
+   "blueprint": {
+    "id": "g_volume_triangle_graph",
+    "subject": "ap_calculus_ab",
+    "kind": "mc",
+    "concept": "Find a volume with equilateral triangle cross sections whose side is given by a graph",
+    "topic": "8.8",
+    "skill": "1.D",
+    "student_thinking": [
+     "Express the area of an equilateral triangle of side f(x) as (sqrt(3)/4) f squared",
+     "Integrate f squared over [0, 8] piece by piece from the graph",
+     "Multiply by sqrt(3)/4"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "not_allowed",
+    "key_conditions": [
+     {
+      "condition": "the side of each triangle lies in the base region and equals f(x)",
+      "evidence": "stated in the problem"
+     }
+    ],
+    "material": {
+     "type": "graph",
+     "must_include": [
+      "vertices of f at x = 0, 2, 4, 6, 8"
+     ]
+    },
+    "misconceptions": [
+     {
+      "id": "right_triangle_formula",
+      "description": "uses the factor 1/2"
+     },
+     {
+      "id": "no_half",
+      "description": "uses sqrt(3)/2"
+     },
+     {
+      "id": "missing_coefficient",
+      "description": "omits the coefficient"
+     },
+     {
+      "id": "square_of_area",
+      "description": "squares the area"
+     }
+    ],
+    "verification": {
+     "independent_path": "numerical quadrature of (sqrt(3)/4) f^2 on the interpolated graph (independent of exact quadratic pieces)",
+     "method": "exact rational arithmetic + numeric cross-check"
+    }
+   },
+   "seed": 3900,
+   "pack_id": "g_volume_triangle_graph-s3900",
+   "explanation_en": "The correct answer is \\frac{112 \\sqrt{3}}{3}. An equilateral triangle with side f(x) has area (sqrt(3)/4) f(x)^2, so V = (sqrt(3)/4) times the integral of f^2.\n\\frac{448}{3} is incorrect: Leaves out sqrt(3)/4 and integrates only f squared.\n\\frac{224 \\sqrt{3}}{3} is incorrect: Uses (sqrt(3)/2) f^2, the height of the triangle times its side, with no 1/2.\n\\frac{224}{3} is incorrect: Uses the area formula for a right isosceles triangle, (1/2) f^2, instead of an equilateral triangle."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "g_volume_triangle_graph",
+   "facts": [
+    "v=[4, 1, 6, 6, 2]",
+    "S=448/3"
+   ],
+   "seed": 3900
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "Integer vertices and exact-form options suit non-calculator use. The piecewise integral of f^2 is moderate and fits the time.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, complete and well-formed, and every criterion passes."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires deriving the equilateral triangle cross-section area (sqrt3/4)s^2, reading a piecewise-linear graph, and integrating f^2 over four segments by hand. The distractors reflect common misconceptions (omitting the sqrt3/4 factor, using the wrong area factor). Numbers are small and clean, and the wording is unambiguous.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 200
+  }
+ }
+]

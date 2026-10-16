@@ -1,0 +1,45 @@
+{
+ "itemId": "linear_equations_one_var.solve.LN.P",
+ "generatedAt": "2026-10-07T05:02:00.633Z",
+ "codeHash": "de1c808507459c0aa6cfc8d9c9f5d0441613d5e24d145192287ee5f0cd5418af",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/coordinate-plane.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/graph-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/linear_equations_one_var.solve.LN.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/pure-fn-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/pure-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "linear_equations_one_var.solve.LN.P.png",
+   "mobileFile": "linear_equations_one_var.solve.LN.P.m375.png",
+   "archetypeId": "leog.solve.LN.P.repr_shift",
+   "seed": 11,
+   "signature": "plane",
+   "stimulus": "The graphs of the linear functions $f$ and $g$ are shown in the $xy$-plane. Suppose $f(x) = g(x)$, for a number $x$.",
+   "question": "What number is $x$?",
+   "options": [
+    "11",
+    "-11",
+    "-17",
+    "12"
+   ],
+   "correctIndex": 0,
+   "answer": "11",
+   "explanation": "(1) 첫 번째 직선이 지나는 격자점 (-9, 3), (2, -8) 에서 기울기 -1, y 절편 -6 을 구한다. (2) 두 번째 직선이 지나는 격자점 (4, -3), (6, -7) 에서 기울기 -2, y 절편 5 을 구한다. (3) -1x + (-6) = -2x + (5) 로 놓고 연립한다. (4) (-1 - (-2))x = 5 - (-6) 이다. (5) x = 11 이다. 따라서 정답은 11이다.",
+   "structuralIssues": []
+  }
+ ]
+}

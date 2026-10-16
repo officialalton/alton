@@ -1,0 +1,2398 @@
+{
+ "schemaVersion": 1,
+ "subject": {
+  "apCode": "ap_macroeconomics",
+  "name": "AP Macroeconomics",
+  "family": "macroeconomics",
+  "edition": "ced-2027",
+  "cedVersion": "AP Macroeconomics CED (Course Framework V.1, (c)2026)",
+  "examYear": 2027,
+  "sourceUrl": "https://apcentral.collegeboard.org/media/pdf/ap-macroeconomics-course-and-exam-description.pdf",
+  "officialTopicCodes": true,
+  "designNotes": "Topic codes, titles (shortened), unit class periods, MC unit weights and MC skill-category weights come from the CED. Per-topic skills are the CED's suggested skills. Sub-keywords, kinds, requires and estLessons are original tutoring-sequence proposals. Skill Category 4 is not assessed in MC; its FRQ weight is the Create-graphs task share (30-50% of FRQ points). The other FRQ task types (assertions 10-20, explain 25-35, numerical analysis 10-25) span categories 1-3 and are not encoded as weights."
+ },
+ "skills": [
+  {
+   "code": "1.A",
+   "category": "Skill Category 1: Principles and Models",
+   "label": "Describe economic concepts, principles, or models"
+  },
+  {
+   "code": "1.B",
+   "category": "Skill Category 1: Principles and Models",
+   "label": "Identify an economic concept, principle, or model illustrated by an example"
+  },
+  {
+   "code": "1.C",
+   "category": "Skill Category 1: Principles and Models",
+   "label": "Identify an economic concept, principle, or model using quantitative data or calculations"
+  },
+  {
+   "code": "1.D",
+   "category": "Skill Category 1: Principles and Models",
+   "label": "Describe the similarities, differences, and limitations of economic concepts, principles, or models"
+  },
+  {
+   "code": "2.A",
+   "category": "Skill Category 2: Interpretation",
+   "label": "Using economic concepts, principles, or models, explain how a specific economic outcome occurs or what action should be taken to achieve it"
+  },
+  {
+   "code": "2.B",
+   "category": "Skill Category 2: Interpretation",
+   "label": "Explain how an outcome occurs when there are multiple contributing variables, or what multiple actions should be taken"
+  },
+  {
+   "code": "2.C",
+   "category": "Skill Category 2: Interpretation",
+   "label": "Interpret a specific economic outcome using quantitative data or calculations"
+  },
+  {
+   "code": "3.A",
+   "category": "Skill Category 3: Manipulation",
+   "label": "Determine the outcome of an economic situation using economic concepts, principles, or models"
+  },
+  {
+   "code": "3.B",
+   "category": "Skill Category 3: Manipulation",
+   "label": "Determine the effect(s) of one or more changes on other economic markets"
+  },
+  {
+   "code": "3.C",
+   "category": "Skill Category 3: Manipulation",
+   "label": "Determine the effect(s) of a change in an economic situation using quantitative data or calculations"
+  },
+  {
+   "code": "4.A",
+   "category": "Skill Category 4: Graphing and Visuals",
+   "label": "Draw an accurately labeled graph or visual to represent an economic model or market"
+  },
+  {
+   "code": "4.B",
+   "category": "Skill Category 4: Graphing and Visuals",
+   "label": "Demonstrate understanding of a specific economic situation on an accurately labeled graph or visual"
+  },
+  {
+   "code": "4.C",
+   "category": "Skill Category 4: Graphing and Visuals",
+   "label": "Demonstrate the effect of a change in an economic situation on an accurately labeled graph or visual"
+  }
+ ],
+ "weights": [
+  {
+   "axis": "unit",
+   "code": "1",
+   "section": "mc",
+   "min": 5,
+   "max": 10,
+   "source": "AP Macroeconomics CED, Exam Information: MC unit weighting"
+  },
+  {
+   "axis": "unit",
+   "code": "2",
+   "section": "mc",
+   "min": 12,
+   "max": 17,
+   "source": "AP Macroeconomics CED, Exam Information: MC unit weighting"
+  },
+  {
+   "axis": "unit",
+   "code": "3",
+   "section": "mc",
+   "min": 17,
+   "max": 27,
+   "source": "AP Macroeconomics CED, Exam Information: MC unit weighting"
+  },
+  {
+   "axis": "unit",
+   "code": "4",
+   "section": "mc",
+   "min": 18,
+   "max": 23,
+   "source": "AP Macroeconomics CED, Exam Information: MC unit weighting"
+  },
+  {
+   "axis": "unit",
+   "code": "5",
+   "section": "mc",
+   "min": 20,
+   "max": 30,
+   "source": "AP Macroeconomics CED, Exam Information: MC unit weighting"
+  },
+  {
+   "axis": "unit",
+   "code": "6",
+   "section": "mc",
+   "min": 10,
+   "max": 13,
+   "source": "AP Macroeconomics CED, Exam Information: MC unit weighting"
+  },
+  {
+   "axis": "skill",
+   "code": "Skill Category 1: Principles and Models",
+   "section": "mc",
+   "min": 30,
+   "max": 40,
+   "source": "AP Macroeconomics CED, Exam Information, Section I: MC skill-category weighting"
+  },
+  {
+   "axis": "skill",
+   "code": "Skill Category 2: Interpretation",
+   "section": "mc",
+   "min": 25,
+   "max": 32,
+   "source": "AP Macroeconomics CED, Exam Information, Section I: MC skill-category weighting"
+  },
+  {
+   "axis": "skill",
+   "code": "Skill Category 3: Manipulation",
+   "section": "mc",
+   "min": 30,
+   "max": 40,
+   "source": "AP Macroeconomics CED, Exam Information, Section I: MC skill-category weighting"
+  },
+  {
+   "axis": "skill",
+   "code": "Skill Category 4: Graphing and Visuals",
+   "section": "frq",
+   "min": 30,
+   "max": 50,
+   "source": "AP Macroeconomics CED, Exam Information, Section II: Create graphs or visual representations task, 30-50% of FRQ points (Skill Category 4)"
+  }
+ ],
+ "units": [
+  {
+   "code": "1",
+   "title": "Basic Economic Concepts",
+   "officialClassPeriods": "~8-10",
+   "topics": [
+    {
+     "code": "1.1",
+     "title": "Scarcity",
+     "scope": "both",
+     "skills": [
+      "1.A"
+     ],
+     "requires": [],
+     "estLessons": 0.5,
+     "subKeywords": [
+      {
+       "code": "1.1#1",
+       "label": "Scarcity, resources, and trade-offs",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.1#2",
+       "label": "Factors of production and their payments",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [
+        "1.1#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.1#3",
+       "label": "Scarcity applies to rich economies too",
+       "kind": "misconception",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [
+        "1.1#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "1.2",
+     "title": "Opportunity Cost and the Production Possibilities Curve",
+     "scope": "both",
+     "skills": [
+      "4.A"
+     ],
+     "requires": [
+      "1.1"
+     ],
+     "estLessons": 1.25,
+     "subKeywords": [
+      {
+       "code": "1.2#1",
+       "label": "Opportunity cost from tables and graphs",
+       "kind": "skill",
+       "skills": [
+        "1.C"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.2#2",
+       "label": "Drawing and labeling a PPC",
+       "kind": "representation",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [
+        "1.2#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.2#3",
+       "label": "Points inside, on, and outside the curve",
+       "kind": "concept",
+       "skills": [
+        "4.B"
+       ],
+       "requires": [
+        "1.2#2"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.2#4",
+       "label": "Straight vs. bowed-out PPC",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [
+        "1.2#2"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.2#5",
+       "label": "Shifting the PPC vs. moving along it",
+       "kind": "misconception",
+       "skills": [
+        "4.C"
+       ],
+       "requires": [
+        "1.2#3"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "1.3",
+     "title": "Comparative Advantage and Gains from Trade",
+     "scope": "both",
+     "skills": [
+      "1.C"
+     ],
+     "requires": [
+      "1.2"
+     ],
+     "estLessons": 1.25,
+     "subKeywords": [
+      {
+       "code": "1.3#1",
+       "label": "Absolute vs. comparative advantage",
+       "kind": "misconception",
+       "skills": [
+        "1.C"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.3#2",
+       "label": "Opportunity costs from output or input tables",
+       "kind": "skill",
+       "skills": [
+        "1.C"
+       ],
+       "requires": [
+        "1.3#1"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "1.3#3",
+       "label": "Terms of trade and mutual gains",
+       "kind": "concept",
+       "skills": [
+        "3.A"
+       ],
+       "requires": [
+        "1.3#2"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "1.4",
+     "title": "Demand",
+     "scope": "both",
+     "skills": [
+      "4.A"
+     ],
+     "requires": [
+      "1.1"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "1.4#1",
+       "label": "Law of demand and the demand curve",
+       "kind": "concept",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.4#2",
+       "label": "Determinants that shift demand",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [
+        "1.4#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.4#3",
+       "label": "Change in quantity demanded vs. change in demand",
+       "kind": "misconception",
+       "skills": [
+        "4.C"
+       ],
+       "requires": [
+        "1.4#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.4#4",
+       "label": "Substitutes, complements, and normal vs. inferior goods",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [
+        "1.4#2"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "1.5",
+     "title": "Supply",
+     "scope": "both",
+     "skills": [
+      "4.A"
+     ],
+     "requires": [
+      "1.4"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "1.5#1",
+       "label": "Law of supply and the supply curve",
+       "kind": "concept",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.5#2",
+       "label": "Determinants that shift supply",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [
+        "1.5#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.5#3",
+       "label": "Change in quantity supplied vs. change in supply",
+       "kind": "misconception",
+       "skills": [
+        "4.C"
+       ],
+       "requires": [
+        "1.5#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "1.6",
+     "title": "Market Equilibrium, Disequilibrium, and Changes in Equilibrium",
+     "scope": "both",
+     "skills": [
+      "4.C"
+     ],
+     "requires": [
+      "1.5"
+     ],
+     "estLessons": 1.25,
+     "subKeywords": [
+      {
+       "code": "1.6#1",
+       "label": "Equilibrium price and quantity",
+       "kind": "concept",
+       "skills": [
+        "4.B"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.6#2",
+       "label": "Surplus and shortage",
+       "kind": "concept",
+       "skills": [
+        "4.B"
+       ],
+       "requires": [
+        "1.6#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.6#3",
+       "label": "Single shifts and the new equilibrium",
+       "kind": "skill",
+       "skills": [
+        "4.C"
+       ],
+       "requires": [
+        "1.6#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.6#4",
+       "label": "Simultaneous shifts: determinate vs. indeterminate",
+       "kind": "misconception",
+       "skills": [
+        "3.B"
+       ],
+       "requires": [
+        "1.6#3"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.6#5",
+       "label": "Labeling axes and curves correctly",
+       "kind": "representation",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [
+        "1.6#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "2",
+   "title": "Economic Indicators and the Business Cycle",
+   "officialClassPeriods": "~9-11",
+   "topics": [
+    {
+     "code": "2.1",
+     "title": "The Circular Flow and GDP",
+     "scope": "both",
+     "skills": [
+      "1.A"
+     ],
+     "requires": [
+      "1.1"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "2.1#1",
+       "label": "Circular flow of income and spending",
+       "kind": "representation",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.1#2",
+       "label": "Expenditure approach: C + I + G + net exports",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [
+        "2.1#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.1#3",
+       "label": "What counts in GDP: final goods, current year",
+       "kind": "misconception",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [
+        "2.1#2"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.1#4",
+       "label": "Income approach and value added",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [
+        "2.1#2"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "2.2",
+     "title": "Limitations of GDP",
+     "scope": "both",
+     "skills": [
+      "1.D"
+     ],
+     "requires": [
+      "2.1"
+     ],
+     "estLessons": 0.5,
+     "subKeywords": [
+      {
+       "code": "2.2#1",
+       "label": "What GDP leaves out",
+       "kind": "concept",
+       "skills": [
+        "1.D"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.2#2",
+       "label": "GDP per capita as a welfare proxy",
+       "kind": "misconception",
+       "skills": [
+        "1.D"
+       ],
+       "requires": [
+        "2.2#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "2.3",
+     "title": "Unemployment",
+     "scope": "both",
+     "skills": [
+      "1.B"
+     ],
+     "requires": [
+      "2.1"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "2.3#1",
+       "label": "Labor force and unemployment rate calculation",
+       "kind": "skill",
+       "skills": [
+        "1.C"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.3#2",
+       "label": "Types: frictional, structural, cyclical",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [
+        "2.3#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.3#3",
+       "label": "Natural rate and full employment",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [
+        "2.3#2"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.3#4",
+       "label": "Discouraged workers and measurement limits",
+       "kind": "misconception",
+       "skills": [
+        "1.D"
+       ],
+       "requires": [
+        "2.3#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "2.4",
+     "title": "Price Indices and Inflation",
+     "scope": "both",
+     "skills": [
+      "2.C"
+     ],
+     "requires": [
+      "2.3"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "2.4#1",
+       "label": "Price index and inflation rate calculation",
+       "kind": "skill",
+       "skills": [
+        "2.C"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "2.4#2",
+       "label": "CPI vs. GDP deflator",
+       "kind": "concept",
+       "skills": [
+        "1.D"
+       ],
+       "requires": [
+        "2.4#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.4#3",
+       "label": "Inflation is a rise in the level, not a one-off price",
+       "kind": "misconception",
+       "skills": [
+        "2.C"
+       ],
+       "requires": [
+        "2.4#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "2.5",
+     "title": "Costs of Inflation",
+     "scope": "both",
+     "skills": [
+      "3.A"
+     ],
+     "requires": [
+      "2.4"
+     ],
+     "estLessons": 0.5,
+     "subKeywords": [
+      {
+       "code": "2.5#1",
+       "label": "Anticipated vs. unanticipated inflation",
+       "kind": "concept",
+       "skills": [
+        "3.A"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.5#2",
+       "label": "Winners and losers from inflation",
+       "kind": "concept",
+       "skills": [
+        "3.A"
+       ],
+       "requires": [
+        "2.5#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "2.6",
+     "title": "Real vs. Nominal GDP",
+     "scope": "both",
+     "skills": [
+      "1.C"
+     ],
+     "requires": [
+      "2.4",
+      "2.1"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "2.6#1",
+       "label": "Converting nominal GDP to real GDP",
+       "kind": "skill",
+       "skills": [
+        "1.C"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "2.6#2",
+       "label": "Growth rate of real GDP",
+       "kind": "skill",
+       "skills": [
+        "2.C"
+       ],
+       "requires": [
+        "2.6#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.6#3",
+       "label": "Nominal growth mistaken for real growth",
+       "kind": "misconception",
+       "skills": [
+        "2.C"
+       ],
+       "requires": [
+        "2.6#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "2.7",
+     "title": "Business Cycles",
+     "scope": "both",
+     "skills": [
+      "1.A"
+     ],
+     "requires": [
+      "2.6"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "2.7#1",
+       "label": "Expansion, peak, contraction, trough",
+       "kind": "representation",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.7#2",
+       "label": "Recession definition and indicators",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [
+        "2.7#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.7#3",
+       "label": "Linking the cycle to unemployment and inflation",
+       "kind": "concept",
+       "skills": [
+        "2.C"
+       ],
+       "requires": [
+        "2.7#1",
+        "2.3#3"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "3",
+   "title": "National Income and Price Determination",
+   "officialClassPeriods": "~10-12",
+   "topics": [
+    {
+     "code": "3.1",
+     "title": "Aggregate Demand (AD)",
+     "scope": "both",
+     "skills": [
+      "4.A"
+     ],
+     "requires": [
+      "2.1"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "3.1#1",
+       "label": "Downward-sloping AD: three effects",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "3.1#2",
+       "label": "AD is not the market demand curve",
+       "kind": "misconception",
+       "skills": [
+        "1.D"
+       ],
+       "requires": [
+        "3.1#1",
+        "1.4#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "3.1#3",
+       "label": "Determinants that shift AD",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [
+        "3.1#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "3.1#4",
+       "label": "Drawing AD correctly labeled",
+       "kind": "representation",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [
+        "3.1#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "3.2",
+     "title": "Multipliers",
+     "scope": "both",
+     "skills": [
+      "3.C"
+     ],
+     "requires": [
+      "3.1"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "3.2#1",
+       "label": "MPC, MPS, and spending multiplier",
+       "kind": "skill",
+       "skills": [
+        "3.C"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "3.2#2",
+       "label": "Tax multiplier and balanced-budget multiplier",
+       "kind": "skill",
+       "skills": [
+        "3.C"
+       ],
+       "requires": [
+        "3.2#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "3.2#3",
+       "label": "Using the wrong multiplier formula",
+       "kind": "misconception",
+       "skills": [
+        "3.C"
+       ],
+       "requires": [
+        "3.2#2"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "3.3",
+     "title": "Short-Run Aggregate Supply (SRAS)",
+     "scope": "both",
+     "skills": [
+      "4.A"
+     ],
+     "requires": [
+      "3.1"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "3.3#1",
+       "label": "Why SRAS slopes upward (sticky wages and prices)",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "3.3#2",
+       "label": "Determinants that shift SRAS",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [
+        "3.3#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "3.3#3",
+       "label": "Input prices and productivity vs. price level",
+       "kind": "misconception",
+       "skills": [
+        "4.C"
+       ],
+       "requires": [
+        "3.3#2"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "3.4",
+     "title": "Long-Run Aggregate Supply (LRAS)",
+     "scope": "both",
+     "skills": [
+      "1.A"
+     ],
+     "requires": [
+      "3.3"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "3.4#1",
+       "label": "Vertical LRAS at full-employment output",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "3.4#2",
+       "label": "What shifts LRAS",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [
+        "3.4#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "3.4#3",
+       "label": "SRAS shift vs. LRAS shift",
+       "kind": "misconception",
+       "skills": [
+        "1.D"
+       ],
+       "requires": [
+        "3.4#2",
+        "3.3#2"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "3.5",
+     "title": "Equilibrium in the AD-AS Model",
+     "scope": "both",
+     "skills": [
+      "4.B"
+     ],
+     "requires": [
+      "3.4"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "3.5#1",
+       "label": "Short-run equilibrium price level and output",
+       "kind": "representation",
+       "skills": [
+        "4.B"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "3.5#2",
+       "label": "Recessionary and inflationary gaps",
+       "kind": "concept",
+       "skills": [
+        "4.B"
+       ],
+       "requires": [
+        "3.5#1"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "3.5#3",
+       "label": "Reading gaps from output vs. potential output",
+       "kind": "skill",
+       "skills": [
+        "2.C"
+       ],
+       "requires": [
+        "3.5#2"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "3.6",
+     "title": "Changes in the AD-AS Model in the Short Run",
+     "scope": "both",
+     "skills": [
+      "4.C"
+     ],
+     "requires": [
+      "3.5"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "3.6#1",
+       "label": "AD shocks and their effect on price level and output",
+       "kind": "skill",
+       "skills": [
+        "4.C"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "3.6#2",
+       "label": "Supply shocks and stagflation",
+       "kind": "concept",
+       "skills": [
+        "4.C"
+       ],
+       "requires": [
+        "3.6#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "3.6#3",
+       "label": "Mapping the graph change to unemployment and inflation",
+       "kind": "skill",
+       "skills": [
+        "3.B"
+       ],
+       "requires": [
+        "3.6#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "3.6#4",
+       "label": "Drawing the shift in the wrong direction",
+       "kind": "misconception",
+       "skills": [
+        "4.C"
+       ],
+       "requires": [
+        "3.6#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "3.7",
+     "title": "Long-Run Self-Adjustment",
+     "scope": "both",
+     "skills": [
+      "3.A"
+     ],
+     "requires": [
+      "3.6"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "3.7#1",
+       "label": "Wage adjustment returns the economy to full employment",
+       "kind": "concept",
+       "skills": [
+        "3.A"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "3.7#2",
+       "label": "Self-correction from a gap, step by step on the graph",
+       "kind": "skill",
+       "skills": [
+        "4.C"
+       ],
+       "requires": [
+        "3.7#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "3.7#3",
+       "label": "Long-run price level changes but output returns to potential",
+       "kind": "misconception",
+       "skills": [
+        "3.A"
+       ],
+       "requires": [
+        "3.7#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "3.8",
+     "title": "Fiscal Policy",
+     "scope": "both",
+     "skills": [
+      "2.A"
+     ],
+     "requires": [
+      "3.7",
+      "3.2"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "3.8#1",
+       "label": "Expansionary vs. contractionary fiscal policy",
+       "kind": "concept",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "3.8#2",
+       "label": "Choosing the right policy for a gap",
+       "kind": "skill",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [
+        "3.8#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "3.8#3",
+       "label": "Taxes and spending effects with the multiplier",
+       "kind": "skill",
+       "skills": [
+        "3.C"
+       ],
+       "requires": [
+        "3.8#1",
+        "3.2#2"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "3.8#4",
+       "label": "Fiscal policy graphed on AD-AS",
+       "kind": "representation",
+       "skills": [
+        "4.C"
+       ],
+       "requires": [
+        "3.8#2"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "3.9",
+     "title": "Automatic Stabilizers",
+     "scope": "both",
+     "skills": [
+      "1.A"
+     ],
+     "requires": [
+      "3.8"
+     ],
+     "estLessons": 0.5,
+     "subKeywords": [
+      {
+       "code": "3.9#1",
+       "label": "Built-in stabilizers vs. discretionary policy",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "3.9#2",
+       "label": "Progressive taxes and transfers across the cycle",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [
+        "3.9#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "4",
+   "title": "Financial Sector",
+   "officialClassPeriods": "~11-13",
+   "topics": [
+    {
+     "code": "4.1",
+     "title": "Financial Assets",
+     "scope": "both",
+     "skills": [
+      "1.D"
+     ],
+     "requires": [
+      "1.1"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "4.1#1",
+       "label": "Stocks, bonds, and loans",
+       "kind": "concept",
+       "skills": [
+        "1.D"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "4.1#2",
+       "label": "Risk, return, and liquidity trade-offs",
+       "kind": "concept",
+       "skills": [
+        "1.D"
+       ],
+       "requires": [
+        "4.1#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "4.1#3",
+       "label": "Bond price and interest rate move in opposite directions",
+       "kind": "misconception",
+       "skills": [
+        "1.D"
+       ],
+       "requires": [
+        "4.1#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "4.2",
+     "title": "Nominal vs. Real Interest Rates",
+     "scope": "both",
+     "skills": [
+      "1.A"
+     ],
+     "requires": [
+      "4.1",
+      "2.4"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "4.2#1",
+       "label": "Real interest rate approximately nominal minus inflation",
+       "kind": "skill",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "4.2#2",
+       "label": "Expected inflation and lending decisions",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [
+        "4.2#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "4.2#3",
+       "label": "Using nominal rate when real rate is needed",
+       "kind": "misconception",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [
+        "4.2#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "4.3",
+     "title": "Definition, Measurement, and Functions of Money",
+     "scope": "both",
+     "skills": [
+      "1.B"
+     ],
+     "requires": [
+      "4.1"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "4.3#1",
+       "label": "Functions of money",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "4.3#2",
+       "label": "M1 and M2 and what counts as money",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [
+        "4.3#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "4.3#3",
+       "label": "Money vs. income vs. wealth",
+       "kind": "misconception",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [
+        "4.3#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "4.4",
+     "title": "Banking and the Expansion of the Money Supply",
+     "scope": "both",
+     "skills": [
+      "3.C"
+     ],
+     "requires": [
+      "4.3"
+     ],
+     "estLessons": 1.25,
+     "subKeywords": [
+      {
+       "code": "4.4#1",
+       "label": "Required reserves and excess reserves",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "4.4#2",
+       "label": "Money multiplier calculation",
+       "kind": "skill",
+       "skills": [
+        "3.C"
+       ],
+       "requires": [
+        "4.4#1"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "4.4#3",
+       "label": "Bank balance sheet and a deposit's ripple effect",
+       "kind": "representation",
+       "skills": [
+        "3.C"
+       ],
+       "requires": [
+        "4.4#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "4.4#4",
+       "label": "Applying the multiplier to total deposits vs. new loans",
+       "kind": "misconception",
+       "skills": [
+        "3.C"
+       ],
+       "requires": [
+        "4.4#2"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "4.5",
+     "title": "The Money Market",
+     "scope": "both",
+     "skills": [
+      "4.A"
+     ],
+     "requires": [
+      "4.4",
+      "4.2"
+     ],
+     "estLessons": 1.25,
+     "subKeywords": [
+      {
+       "code": "4.5#1",
+       "label": "Money demand slopes down with the nominal rate",
+       "kind": "concept",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "4.5#2",
+       "label": "Vertical money supply set by the central bank",
+       "kind": "representation",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [
+        "4.5#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "4.5#3",
+       "label": "Equilibrium nominal interest rate",
+       "kind": "representation",
+       "skills": [
+        "4.B"
+       ],
+       "requires": [
+        "4.5#2"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "4.5#4",
+       "label": "Shifts in money demand vs. money supply",
+       "kind": "concept",
+       "skills": [
+        "4.C"
+       ],
+       "requires": [
+        "4.5#3"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "4.5#5",
+       "label": "Mixing the money market with loanable funds",
+       "kind": "misconception",
+       "skills": [
+        "1.D"
+       ],
+       "requires": [
+        "4.5#3"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "4.6",
+     "title": "Monetary Policy",
+     "scope": "both",
+     "skills": [
+      "2.A"
+     ],
+     "requires": [
+      "4.5",
+      "3.6"
+     ],
+     "estLessons": 1.25,
+     "subKeywords": [
+      {
+       "code": "4.6#1",
+       "label": "Open market operations, discount rate, reserve ratio, IORB",
+       "kind": "concept",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "4.6#2",
+       "label": "Expansionary vs. contractionary monetary policy",
+       "kind": "skill",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [
+        "4.6#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "4.6#3",
+       "label": "Policy transmission from money market to AD",
+       "kind": "concept",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [
+        "4.6#2",
+        "3.6#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "4.6#4",
+       "label": "Fed buys bonds means lower rates, not fewer loans",
+       "kind": "misconception",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [
+        "4.6#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "4.7",
+     "title": "The Loanable Funds Market",
+     "scope": "both",
+     "skills": [
+      "4.C"
+     ],
+     "requires": [
+      "4.2"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "4.7#1",
+       "label": "Supply of and demand for loanable funds",
+       "kind": "representation",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "4.7#2",
+       "label": "Real interest rate on the axis",
+       "kind": "misconception",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [
+        "4.7#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "4.7#3",
+       "label": "Shifts from saving, government borrowing, investment demand",
+       "kind": "skill",
+       "skills": [
+        "4.C"
+       ],
+       "requires": [
+        "4.7#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "4.7#4",
+       "label": "Effects on investment and the real rate",
+       "kind": "skill",
+       "skills": [
+        "3.B"
+       ],
+       "requires": [
+        "4.7#3"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "5",
+   "title": "Long-Run Consequences of Stabilization Policies",
+   "officialClassPeriods": "~8-10",
+   "topics": [
+    {
+     "code": "5.1",
+     "title": "Fiscal and Monetary Policy Actions in the Short Run",
+     "scope": "both",
+     "skills": [
+      "2.B"
+     ],
+     "requires": [
+      "3.8",
+      "4.6"
+     ],
+     "estLessons": 1.25,
+     "subKeywords": [
+      {
+       "code": "5.1#1",
+       "label": "Combining policies for a gap",
+       "kind": "skill",
+       "skills": [
+        "2.B"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "5.1#2",
+       "label": "Linking money market, loanable funds, and AD-AS",
+       "kind": "skill",
+       "skills": [
+        "2.B"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "5.1#3",
+       "label": "Policy mixes and their side effects on interest rates",
+       "kind": "concept",
+       "skills": [
+        "3.B"
+       ],
+       "requires": [
+        "5.1#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "5.1#4",
+       "label": "Skipping a market in the chain of effects",
+       "kind": "misconception",
+       "skills": [
+        "2.B"
+       ],
+       "requires": [
+        "5.1#2"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "5.2",
+     "title": "The Phillips Curve",
+     "scope": "both",
+     "skills": [
+      "4.B"
+     ],
+     "requires": [
+      "3.6",
+      "2.3"
+     ],
+     "estLessons": 1.25,
+     "subKeywords": [
+      {
+       "code": "5.2#1",
+       "label": "Short-run Phillips curve trade-off",
+       "kind": "representation",
+       "skills": [
+        "4.B"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "5.2#2",
+       "label": "Moving along vs. shifting the short-run curve",
+       "kind": "misconception",
+       "skills": [
+        "4.C"
+       ],
+       "requires": [
+        "5.2#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "5.2#3",
+       "label": "Long-run Phillips curve at the natural rate",
+       "kind": "concept",
+       "skills": [
+        "4.B"
+       ],
+       "requires": [
+        "5.2#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "5.2#4",
+       "label": "Linking AD-AS shocks to Phillips curve movements",
+       "kind": "skill",
+       "skills": [
+        "4.C"
+       ],
+       "requires": [
+        "5.2#3",
+        "3.6#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "5.2#5",
+       "label": "Expected inflation and shifts of the curve",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [
+        "5.2#3"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "5.3",
+     "title": "Money Growth and Inflation",
+     "scope": "both",
+     "skills": [
+      "3.A"
+     ],
+     "requires": [
+      "4.4",
+      "5.2"
+     ],
+     "estLessons": 0.5,
+     "subKeywords": [
+      {
+       "code": "5.3#1",
+       "label": "Quantity theory: MV = PQ",
+       "kind": "concept",
+       "skills": [
+        "3.A"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "5.3#2",
+       "label": "Long-run link between money growth and inflation",
+       "kind": "concept",
+       "skills": [
+        "3.A"
+       ],
+       "requires": [
+        "5.3#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "5.4",
+     "title": "Government Deficits and the National Debt",
+     "scope": "both",
+     "skills": [
+      "3.A"
+     ],
+     "requires": [
+      "3.8"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "5.4#1",
+       "label": "Deficit vs. debt",
+       "kind": "misconception",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "5.4#2",
+       "label": "Financing deficits through borrowing",
+       "kind": "concept",
+       "skills": [
+        "3.A"
+       ],
+       "requires": [
+        "5.4#1",
+        "4.7#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "5.4#3",
+       "label": "Debt burden relative to GDP",
+       "kind": "concept",
+       "skills": [
+        "1.D"
+       ],
+       "requires": [
+        "5.4#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "5.5",
+     "title": "Crowding Out",
+     "scope": "both",
+     "skills": [
+      "3.B"
+     ],
+     "requires": [
+      "5.4",
+      "4.7"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "5.5#1",
+       "label": "Deficit spending raises the real interest rate",
+       "kind": "concept",
+       "skills": [
+        "3.B"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "5.5#2",
+       "label": "Crowding out of private investment on the loanable funds graph",
+       "kind": "skill",
+       "skills": [
+        "3.B"
+       ],
+       "requires": [
+        "5.5#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "5.5#3",
+       "label": "Crowding out offsets part of the AD gain",
+       "kind": "concept",
+       "skills": [
+        "3.B"
+       ],
+       "requires": [
+        "5.5#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "5.6",
+     "title": "Economic Growth",
+     "scope": "both",
+     "skills": [
+      "2.A"
+     ],
+     "requires": [
+      "3.4",
+      "1.2"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "5.6#1",
+       "label": "Sources of growth: capital, labor, technology",
+       "kind": "concept",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "5.6#2",
+       "label": "Growth shifts LRAS and the PPC outward",
+       "kind": "skill",
+       "skills": [
+        "4.C"
+       ],
+       "requires": [
+        "5.6#1",
+        "1.2#5"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "5.6#3",
+       "label": "Productivity growth vs. level of output",
+       "kind": "misconception",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [
+        "5.6#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "5.7",
+     "title": "Public Policy and Economic Growth",
+     "scope": "both",
+     "skills": [
+      "2.A"
+     ],
+     "requires": [
+      "5.6"
+     ],
+     "estLessons": 0.5,
+     "subKeywords": [
+      {
+       "code": "5.7#1",
+       "label": "Policies that raise long-run growth",
+       "kind": "concept",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "5.7#2",
+       "label": "Trade-offs of growth policies",
+       "kind": "concept",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [
+        "5.7#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "6",
+   "title": "Open Economy: International Trade and Finance",
+   "officialClassPeriods": "~5-7",
+   "topics": [
+    {
+     "code": "6.1",
+     "title": "Balance of Payments Accounts",
+     "scope": "both",
+     "skills": [
+      "1.A"
+     ],
+     "requires": [
+      "2.1"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "6.1#1",
+       "label": "Current account and capital/financial account",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "6.1#2",
+       "label": "Where each transaction is recorded",
+       "kind": "skill",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [
+        "6.1#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "6.1#3",
+       "label": "Accounts sum to zero in principle",
+       "kind": "misconception",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [
+        "6.1#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "6.2",
+     "title": "Exchange Rates",
+     "scope": "both",
+     "skills": [
+      "1.C"
+     ],
+     "requires": [
+      "6.1"
+     ],
+     "estLessons": 0.5,
+     "subKeywords": [
+      {
+       "code": "6.2#1",
+       "label": "Reading a quoted exchange rate",
+       "kind": "skill",
+       "skills": [
+        "1.C"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "6.2#2",
+       "label": "Appreciation and depreciation arithmetic",
+       "kind": "misconception",
+       "skills": [
+        "1.C"
+       ],
+       "requires": [
+        "6.2#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "6.3",
+     "title": "The Foreign Exchange Market",
+     "scope": "both",
+     "skills": [
+      "4.A"
+     ],
+     "requires": [
+      "6.2",
+      "1.6"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "6.3#1",
+       "label": "Supply and demand for a currency",
+       "kind": "representation",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "6.3#2",
+       "label": "Equilibrium exchange rate",
+       "kind": "representation",
+       "skills": [
+        "4.B"
+       ],
+       "requires": [
+        "6.3#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "6.3#3",
+       "label": "Which currency's market is graphed",
+       "kind": "misconception",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [
+        "6.3#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "6.4",
+     "title": "Effect of Changes in Policies and Economic Conditions on the Foreign Exchange Market",
+     "scope": "both",
+     "skills": [
+      "4.C"
+     ],
+     "requires": [
+      "6.3",
+      "4.6"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "6.4#1",
+       "label": "Interest rate, inflation, and income shifts of FX curves",
+       "kind": "concept",
+       "skills": [
+        "4.C"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "6.4#2",
+       "label": "Tastes and relative prices as determinants",
+       "kind": "concept",
+       "skills": [
+        "4.C"
+       ],
+       "requires": [
+        "6.4#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "6.4#3",
+       "label": "Policy changes shifting currency demand",
+       "kind": "skill",
+       "skills": [
+        "3.B"
+       ],
+       "requires": [
+        "6.4#1",
+        "4.6#2"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "6.4#4",
+       "label": "Depreciation shown on the wrong curve",
+       "kind": "misconception",
+       "skills": [
+        "4.C"
+       ],
+       "requires": [
+        "6.4#3"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "6.5",
+     "title": "Changes in the Foreign Exchange Market and Net Exports",
+     "scope": "both",
+     "skills": [
+      "3.A"
+     ],
+     "requires": [
+      "6.4"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "6.5#1",
+       "label": "Currency value and net exports",
+       "kind": "concept",
+       "skills": [
+        "3.A"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "6.5#2",
+       "label": "Effect on AD and GDP",
+       "kind": "skill",
+       "skills": [
+        "3.B"
+       ],
+       "requires": [
+        "6.5#1",
+        "3.1#3"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "6.5#3",
+       "label": "Strong currency is not automatically good",
+       "kind": "misconception",
+       "skills": [
+        "3.A"
+       ],
+       "requires": [
+        "6.5#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "6.6",
+     "title": "Real Interest Rates and International Capital Flows",
+     "scope": "both",
+     "skills": [
+      "3.B"
+     ],
+     "requires": [
+      "6.5",
+      "4.7"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "6.6#1",
+       "label": "Real interest rate differences and capital flows",
+       "kind": "concept",
+       "skills": [
+        "3.B"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "6.6#2",
+       "label": "Capital flows shifting the loanable funds and FX markets",
+       "kind": "skill",
+       "skills": [
+        "3.B"
+       ],
+       "requires": [
+        "6.6#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "6.6#3",
+       "label": "Net capital outflow equals net exports",
+       "kind": "concept",
+       "skills": [
+        "3.B"
+       ],
+       "requires": [
+        "6.6#2"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

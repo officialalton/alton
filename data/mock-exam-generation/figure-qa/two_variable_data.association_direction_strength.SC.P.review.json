@@ -1,0 +1,27 @@
+{
+ "itemId": "two_variable_data.association_direction_strength.SC.P",
+ "verdict": "pass",
+ "reviewedAt": "2026-10-05T19:42:48.651Z",
+ "reviewer": "visual-review-agent-SD",
+ "codeHash": "de74ee293e7e9c0eecf995e94bc02ff3d94f33f45ef14eb4b9ea2b04669b0000",
+ "samples": [
+  "two_variable_data.association_direction_strength.SC.P.png",
+  "two_variable_data.association_direction_strength.SC.P~compare_scenarios.png"
+ ],
+ "checklist": {
+  "figure_present": "pass",
+  "proportion_matches_values": "pass",
+  "labels_placed_and_legible": "pass",
+  "multi_figure_consistent": "pass",
+  "text_matches_figure_and_solvable": "pass",
+  "axes_ticks_units_legend": "pass",
+  "choice_distinct_one_rule": "n/a",
+  "sat_visual_style": "pass",
+  "mobile_375_readable": "pass"
+ },
+ "defects": [],
+ "notes": "Main plot: clearly rising, fairly tight though concave plateau -> strong positive = B (a student could waffle with 'moderate'; non-blocking nit). compare_scenarios: A tight negative, B scattered -> Plot A stronger = C. Panel titles Plot A/Plot B are drawn. [재스탬프: 비샘플 원형(chain2) 서술 변형 추가, 샘플 본문·렌더 동일 확인]",
+ "restampedAt": "2026-10-05T00:00:00Z",
+ "restampNote": "2026-10-05 영문화로 ProblemFigure.tsx(해시 대상) 문구만 변경 — SVG·PNG 바이트 동일, 해시만 갱신",
+ "leadReread": "2026-10-07 통합 후 데스크톱 PNG 재판독(축 제목 정리 반영) — 결함 없음"
+}

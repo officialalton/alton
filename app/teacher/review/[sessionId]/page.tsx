@@ -14,7 +14,7 @@ export default async function TeacherReviewPage({
   if (!context) {
     return (
       <div className="min-h-screen flex items-center justify-center px-5">
-        <p className="text-[14px] text-grey-500">세션을 찾을 수 없습니다.</p>
+        <p className="text-[14px] text-grey-500">Session not found.</p>
       </div>
     );
   }

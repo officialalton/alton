@@ -1,0 +1,44 @@
+{
+ "itemId": "one_variable_data.relative_cumulative_frequency.FO.P",
+ "generatedAt": "2026-10-07T05:02:01.136Z",
+ "codeHash": "57b0fe00b23c384c4bedb0d427dacf48b825b7a2b444205bcb854169632c2815",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_chart.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/d-registry.ts",
+  "lib/problem-figures/templates/freq-chart.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/fo-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/one_variable_data.relative_cumulative_frequency.FO.P.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "one_variable_data.relative_cumulative_frequency.FO.P.png",
+   "mobileFile": "one_variable_data.relative_cumulative_frequency.FO.P.m375.png",
+   "archetypeId": "ovd.relative_cumulative_frequency.FO.P.chain2",
+   "seed": 11,
+   "signature": "freq_chart:ogive",
+   "stimulus": "A cumulative percent graph is shown for the daily numbers of visitors at a museum, with every class 50 visitors wide. Refer to the graph when answering the question that follows.",
+   "question": "What percent of the values are greater than 350 visitors and less than or equal to 400 visitors?",
+   "options": [
+    "50",
+    "40",
+    "90",
+    "140"
+   ],
+   "correctIndex": 1,
+   "answer": "40",
+   "explanation": "(1) 누적 상대도수 그래프에서 각 경계의 누적 %를 읽는다: 250: 20%, 300: 40%, 350: 50%, 400: 90%, 450: 100%. (2) 400 이하: 90% 이다. (3) 350 이하: 50% 이다. (4) 차 = 40% 이다. (5) 따라서 답은 40 이다. 따라서 정답은 40이다.",
+   "structuralIssues": []
+  }
+ ]
+}

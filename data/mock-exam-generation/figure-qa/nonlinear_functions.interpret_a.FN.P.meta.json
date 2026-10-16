@@ -1,0 +1,46 @@
+{
+ "itemId": "nonlinear_functions.interpret_a.FN.P",
+ "generatedAt": "2026-10-07T05:02:00.611Z",
+ "codeHash": "3e44f4b496e28fdf76938be7e715134b2fff8833253b94e51c1d6108973a4224",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/coordinate-plane.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/graph-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/_t5-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/nonlinear_functions.interpret_a.FN.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/pure-fn-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/pure-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "nonlinear_functions.interpret_a.FN.P.png",
+   "mobileFile": "nonlinear_functions.interpret_a.FN.P.m375.png",
+   "archetypeId": "ifag.interpret_a.FN.P.repr_shift",
+   "seed": 11,
+   "signature": "plane",
+   "stimulus": "During a lesson on quadratic functions, a class graphs a parabola. Three marked points lie on the graph of $y = p(x)$ shown in the $xy$-plane, where $p$ is a quadratic function. The function is defined by $p(x) = ax² + bx + c$, where $a$, $b$, and $c$ are constants.",
+   "question": "What is $a$?",
+   "options": [
+    "5",
+    "-1",
+    "1",
+    "-2"
+   ],
+   "correctIndex": 1,
+   "answer": "-1",
+   "explanation": "(1) 그래프에 표시된 점을 읽는다: (-3, 2), (-2, 5), (2, -3). (2) y = ax² + bx + c 에 세 점을 대입해 세 식을 만든다. (3) 연립해 풀면 a = -1, b = -2, c = 5 이다. (4) 식: y = -1x² - 2x + 5 이다. (5) 따라서 a = -1 이다 (포물선은 아래로 열린다). 따라서 정답은 -1이다.",
+   "structuralIssues": []
+  }
+ ]
+}

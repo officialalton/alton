@@ -1,0 +1,341 @@
+{
+ "schema": "rw-session-task/v1",
+ "kind": "review",
+ "role": "fable_judge",
+ "runId": "lit40-wave1",
+ "taskId": "rev-fable_judge-006",
+ "chunkId": "rev-fable_judge-006",
+ "suggestedModel": "fable",
+ "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-fable_judge-006.result.json",
+ "outputSchema": {
+  "chunkId": "청크 ID",
+  "model": "fable",
+  "items": [
+   {
+    "candidateId": "id",
+    "picked_letter": "A|B|C|D",
+    "other_defensible": "정답 외 방어 가능한 선택지가 있으면 true",
+    "est_difficulty": "easy|medium|hard (실제 체감, 요청 난이도에 맞추지 말 것)",
+    "hard_fit": "실제 SAT hard 수준의 사고 단계가 필요하면 true(지문 길이·난어만이면 false)",
+    "plausible_distractors": "오답 3개가 모두 그럴듯하고 서로 다른 오개념에서 나왔으면 true",
+    "length_balanced": "네 선택지 길이·구체성이 비슷해 정답이 형식으로 드러나지 않으면 true",
+    "multi_answer_risk": "복수 정답 위험이 있으면 true",
+    "issues": "한 줄 메모"
+   }
+  ]
+ },
+ "items": [
+  {
+   "candidateId": "lit40-medium-01-027",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "tone_or_mood",
+   "requestedDifficulty": "medium",
+   "passage": "Once, the roof had been where the two of them hid cigarettes from the nuns. Now DOLORES and REMEDIOS pin sheets to the line, the wind off the estuary slapping them wet against their arms.\nDOLORES: He asked me again from his bed this morning whether the boat was sold.\nREMEDIOS: (a long pause, a clothespin in her teeth) And?\nDOLORES: I said the buyer was still deciding. (She smooths a sheet that is already smooth.) Was that wrong?\nREMEDIOS: You lied to a priest about a pear tree once. This is smaller.\nDOLORES: (almost laughing) It isn't smaller.\nREMEDIOS: No. (She lets the pin drop into the basket.) It isn't.\n(They stand side by side. Below, a gull lands on the bakery chimney and folds its wings.)",
+   "question": "Which choice best describes the overall tone of the scene?",
+   "options": [
+    "Playful teasing between old friends recalling childhood mischief",
+    "Wry amusement occasionally shadowed by brief flickers of doubt",
+    "Bitter resentment over a lie that one friend cannot forgive",
+    "Uneasy hesitation that is lightened now and then by wry humor"
+   ],
+   "recipeBeyondMedium": "두 정서의 비중을 판단해야 하며, 오답은 정반대가 아니라 비중이 틀린 어조다"
+  },
+  {
+   "candidateId": "lit40-medium-01-028",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "tone_or_mood",
+   "requestedDifficulty": "medium",
+   "passage": "I was a terrible liar at eleven. Still, I told Matteo, the old man who sold me carp from a dented cooler at the edge of the salt flat, that my mother had sent me for the largest fish he had. She had not; I meant to bring it home and pretend I had caught it myself. Matteo looked at my coins, then at me, and wrapped the fish in newspaper without a word. I remember the white crust of salt cracking under my sandals as I walked back, the fish cold against my ribs, my chest bright with something like triumph. Years later the small ache of that lie still surprises me, but mostly I think of how carefully he folded the paper, tucking in the corners as if for a gift. Beyond his stall the flat shimmered all the way to the hills.",
+   "question": "Which choice best describes the overall tone of the passage?",
+   "options": [
+    "Fond nostalgia mixed with a faint, lingering sense of guilt",
+    "Lasting guilt softened only slightly by moments of fondness",
+    "Lingering shame over a childish lie told to a kind stranger",
+    "Restless curiosity about a stranger whose past stays unknown"
+   ],
+   "recipeBeyondMedium": "두 정서의 비중을 판단해야 하며, 오답은 정반대가 아니라 비중이 틀린 어조다"
+  },
+  {
+   "candidateId": "lit40-medium-01-029",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "tone_or_mood",
+   "requestedDifficulty": "medium",
+   "passage": "Who else still remembered that our grandmother had called the house Two Ravens? Yona and I were selling what was left of it at the Saturday market, spreading her blankets and tin cups across a folding table in the wind. We had argued that morning over a cracked mirror, and for an hour we spoke only to customers. Then a woman lifted the carved sign from the bottom of a crate and read the name aloud. Yona looked at me, and I felt the old ease of being twins rush back, the way we used to finish each other's sentences at her table. Neither of us would sell it. We wrapped it in her red blanket and set it under the table, between our feet. By noon dust had settled on everything, and the vendor beside us was packing up his melons.",
+   "question": "Which choice best describes the overall mood of the passage?",
+   "options": [
+    "Strained tension that a shared memory eases only for a moment",
+    "Wistful affection that outlasts a brief strain between brothers",
+    "Quiet irritation between brothers forced to share a dull task",
+    "Cheerful excitement about bargaining with customers at market"
+   ],
+   "recipeBeyondMedium": "두 정서의 비중을 판단해야 하며, 오답은 정반대가 아니라 비중이 틀린 어조다"
+  },
+  {
+   "candidateId": "lit40-medium-01-030",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "tone_or_mood",
+   "requestedDifficulty": "medium",
+   "passage": "By the time this reaches you, Abena, the cooperative will have finished sorting the dry-season seed. I have been given the cowpea jars, which you would find funny, since you once swore I could not tell one bean from another. Mother says you promised, before you left, that we would plant the back plot together when you came home. Neither of us can remember you saying it, and I worry a little that you will arrive and find that promise a stranger. Still, I have already set aside two jars with your name on them in my worst handwriting, and I keep picturing your hands in that red soil. Come soon. The jars are labeled. The neighbor's goats have learned to open our gate, so bring wire.",
+   "question": "Which choice best describes the overall tone of the letter?",
+   "options": [
+    "Anxious uncertainty about whether the promise was ever made",
+    "Hesitant doubt relieved by only occasional moments of hope",
+    "Hopeful warmth that carries a slight trace of uncertainty",
+    "Dutiful formality suited to reporting on the cooperative"
+   ],
+   "recipeBeyondMedium": "두 정서의 비중을 판단해야 하며, 오답은 정반대가 아니라 비중이 틀린 어조다"
+  },
+  {
+   "candidateId": "lit40-medium-01-031",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "relationship_between_characters",
+   "requestedDifficulty": "medium",
+   "passage": "I had soldered the same joint three times when Bogdan took the iron from my hand. 'Again,' he said, and set a cold radio in front of me. I wanted to tell him that no one fixes radios anymore, that I could be in Tel Aviv learning to code by now. Then I saw the folded letter under his ledger, an offer from a conservatory, dated forty years ago and never answered; my mother had told me he stayed to keep this shop open after my grandfather fell ill. I picked up the iron without arguing. When he leaned over to check my work, I tilted the lamp toward his side so he would not have to squint. Outside, a bus groaned up the hill toward the port.",
+   "question": "Based on the passage, which choice best describes the relationship between Tamar and Bogdan?",
+   "options": [
+    "Tamar feels only frustration with an elder who refuses to modernize.",
+    "Bogdan feels indebted to Tamar's family for the sacrifices they made.",
+    "Bogdan is a stern master who treats Tamar as a mere hired hand.",
+    "Tamar chafes at Bogdan's demands yet honors what he gave up."
+   ],
+   "recipeBeyondMedium": "두 문장의 단서를 연결해야 하고 오답은 한쪽 감정만 반영한다"
+  },
+  {
+   "candidateId": "lit40-medium-01-032",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "relationship_between_characters",
+   "requestedDifficulty": "medium",
+   "passage": "Riccardo slid into the booth first, the way he always had back home, and ordered for both of them without asking. Koa let him. When the waitress brought pancakes instead of the eggs Riccardo had insisted Koa liked, Koa noticed the mix-up before anyone else and quietly cut into the stack as if he had wanted it all along. Earlier, on the drive in, Riccardo had admitted that nobody at his new school knew his name yet, and had laughed too loudly afterward. So Koa praised the syrup, asked for a second pot of coffee, and stayed until Riccardo stopped checking his phone. Rain beaded on the window, and trucks hissed past on the highway, their headlights smearing across the wet glass.",
+   "question": "Based on the passage, which choice best describes the relationship between Koa and Riccardo?",
+   "options": [
+    "Koa quietly guards Riccardo's pride while his friend struggles to adjust.",
+    "Riccardo patiently looks after Koa, who feels lonely at his new school.",
+    "Koa is growing tired of a friend who always orders for him without asking.",
+    "Riccardo and Koa compete, as old friends often do, over who knows best."
+   ],
+   "recipeBeyondMedium": "두 문장의 단서를 연결해야 하고 오답은 한쪽 감정만 반영한다"
+  },
+  {
+   "candidateId": "lit40-medium-01-033",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "relationship_between_characters",
+   "requestedDifficulty": "medium",
+   "passage": "Nobody sleeps in this room. SALMA, sixteen, sits beside RASHID, an old friend of her father's, under a buzzing light.\nSALMA: The car was blue. I saw it.\nRASHID: I saw gray. (He rubs his eyes.) But I was watching your father, not the road.\nSALMA: The police will believe you. You're older.\nRASHID: (turning the officer's notepad toward her) Then you write it. Your words, not mine.\n(Salma hesitates, then writes. Rashid reads over her shoulder and, where she pauses, quietly tells her the date.)\nSALMA: You're not going to change it?\nRASHID: (shaking his head) Your father taught me to trust what a careful person sees.\n(A nurse crosses with a tray of tea glasses that rattle softly.)",
+   "question": "Based on the scene, which choice best describes the relationship between Rashid and Salma?",
+   "options": [
+    "Salma relies on Rashid to speak for her because she fears the police.",
+    "Rashid trusts Salma's judgment enough to set his own account aside.",
+    "Salma defers to Rashid's account because he is the older witness.",
+    "Rashid acts as a strict guardian who must approve what Salma says."
+   ],
+   "recipeBeyondMedium": "두 문장의 단서를 연결해야 하고 오답은 한쪽 감정만 반영한다"
+  },
+  {
+   "candidateId": "lit40-medium-01-034",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "relationship_between_characters",
+   "requestedDifficulty": "medium",
+   "passage": "Years later, I still think about the back room of the tailor's shop in Valparaíso, where Benedita took over my lessons after my first teacher retired. She kept his chalk marks on the cutting table and never mentioned that his chair was empty. For weeks I answered her in single words and checked her stitches against his patterns when she wasn't looking. Then one afternoon she handed me his worn tape measure and asked me to show her how he had held it. I showed her, and she copied my grip exactly, without correcting me once. After that I began arriving early to sweep the threads before she came. Through the small window, cable cars climbed the hill, swaying above the painted roofs.",
+   "question": "Based on the passage, which choice best describes the relationship between Dariush and Benedita?",
+   "options": [
+    "Dariush resents Benedita for replacing a teacher whom he admired.",
+    "Benedita relies on Dariush to teach her a trade she does not know.",
+    "Dariush comes to trust Benedita because she honors his old teacher.",
+    "Benedita is a strict instructor who demands obedience from students."
+   ],
+   "recipeBeyondMedium": "두 문장의 단서를 연결해야 하고 오답은 한쪽 감정만 반영한다"
+  },
+  {
+   "candidateId": "lit40-medium-01-035",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "relationship_between_characters",
+   "requestedDifficulty": "medium",
+   "passage": "On the Monday the rumor reached Themba, I was waiting for the 6:40 bus under the shelter at the foot of the mountain. Someone had told him I was planning to sublet my flat to strangers and disappear, which was not true. I expected a letter, or a raised rent. Instead he sat down beside me on the bench, handed me half of his breakfast roll still warm in its paper, and said only, 'People talk. I told them you have lived in my building longer than my own sons.' When the bus came, he stood and waved it down for me, as if I could not do it myself. Mist was pouring over the ridge, soft as smoke, and the road shone wet below it.",
+   "question": "Based on the passage, which choice best describes the relationship between Themba and Thandiwe?",
+   "options": [
+    "Thandiwe fears Themba, who controls whether she may keep her home.",
+    "Thandiwe feels she must protect Themba from neighborhood gossip.",
+    "Themba treats Thandiwe as any landlord treats a reliable tenant.",
+    "Themba trusts Thandiwe and regards her almost as family."
+   ],
+   "recipeBeyondMedium": "두 문장의 단서를 연결해야 하고 오답은 한쪽 감정만 반영한다"
+  },
+  {
+   "candidateId": "lit40-medium-01-036",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "relationship_between_characters",
+   "requestedDifficulty": "medium",
+   "passage": "I am writing this on the back of a repair ticket, Dongsik, because the stall is slow tonight and I keep thinking about what you said. When I told you how my old teacher called me 'good with hands, not with books,' you didn't argue; you just slid the accounting textbook across the bench and said you'd cover the heel orders until midnight. You've done that four shifts in a row now, and I've noticed you never mention it when the manager counts the tickets. So I passed the first exam. I wanted you to hear it before anyone else. The rain came in sideways off the harbor around ten, and the lights over the stall flickered twice before they settled.",
+   "question": "Based on the letter, which choice best describes the relationship between Aroha and Dongsik?",
+   "options": [
+    "Dongsik quietly supports Aroha, who is grateful and eager to tell him.",
+    "Aroha covers shifts for Dongsik so that he can study for his own exams.",
+    "Aroha feels uneasy and indebted because of the favors Dongsik keeps doing.",
+    "Dongsik and Aroha are rivals who compete over who finishes more orders."
+   ],
+   "recipeBeyondMedium": "두 문장의 단서를 연결해야 하고 오답은 한쪽 감정만 반영한다"
+  },
+  {
+   "candidateId": "lit40-medium-01-037",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "relationship_between_characters",
+   "requestedDifficulty": "medium",
+   "passage": "A cracked clay jar lay at the bottom of the salt-water pool, where Alonso had dropped it while showing off for the fishermen's boys. In the old tellings, a jar that breaks in the sea keeps the voice of whoever broke it. Alonso's grandmother, Imtiaz, listened as he explained that a wave had knocked it from his hands. She did not scold him. She only waded in, lifted the shards, and held one to his ear. 'What does it say?' she asked. Alonso listened a long time. 'It says I was being foolish,' he admitted, and she pressed the shard into his palm as if he had earned it. Along the seawall, crows quarreled over a fish head in the noon glare.",
+   "question": "Based on the passage, which choice best describes the relationship between Imtiaz and Alonso?",
+   "options": [
+    "Alonso fears Imtiaz, whose strict punishments lead him to invent excuses.",
+    "Imtiaz gently guides Alonso toward honesty, and he trusts her guidance.",
+    "Alonso teaches Imtiaz to hear the old voices that the sea keeps in jars.",
+    "Imtiaz indulges Alonso as grandmothers often do, excusing every mistake."
+   ],
+   "recipeBeyondMedium": "두 문장의 단서를 연결해야 하고 오답은 한쪽 감정만 반영한다"
+  },
+  {
+   "candidateId": "lit40-medium-01-038",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "symbolism",
+   "requestedDifficulty": "medium",
+   "passage": "Radek tied the best knots in the building. Every Thursday at the corner laundromat, he bound the neighbors' laundry bags with a sailor's hitch, quick and neat, and every Thursday they stopped to admire it. 'A work of art,' Dmitri said, watching him cinch a bowline around a sack of towels. 'You should charge for that.' Radek only laughed. Later, when the dryers had finished, Dmitri saw the women at the folding table slip the knots loose with a single tug and toss the cords into the bin, still praising them as they left. Radek gathered the cords one by one and coiled them in his coat pocket. By the next Thursday he had tied them all again, as carefully as before. The machines thumped and turned behind the steamy windows.",
+   "question": "In the passage, the knots most likely represent which of the following?",
+   "options": [
+    "Radek's longing to return to the sea he left behind when he retired",
+    "The neighbors' deep gratitude for the kindness Radek shows them",
+    "Skilled care that others praise but neither reward nor preserve",
+    "The strict weekly routines that bind the neighbors to their chores"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-01-039",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "symbolism",
+   "requestedDifficulty": "medium",
+   "passage": "Bologna had flooded twice that spring, and the cellar still held a skin of brown water when Meera went down for the wedding linens. Her daughter followed with a torch. Near the stairs floated a paper crown, soft at the edges, its gold paint bleeding into the water. Meera lifted it out before her daughter could. Years ago, at six, the girl had made her promise to wear exactly that crown at the wedding, whoever the groom turned out to be. Upstairs, they spread the linens across chairs to dry and found every one of them ruined. The crown, pressed flat between two dictionaries, kept most of its shape. 'Marco will think we're mad,' her daughter said, but she was already testing it against her own hair. Rain began again on the courtyard tiles.",
+   "question": "In the passage, the paper crown most likely represents which of the following?",
+   "options": [
+    "The damage that the floods have done to the family's old home",
+    "Meera's fear that the wedding plans are being ruined by bad luck",
+    "The childish tastes that the daughter has now outgrown as an adult",
+    "A childhood bond that endures even as other things are spoiled"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-01-040",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "symbolism",
+   "requestedDifficulty": "medium",
+   "passage": "Smell of cut grass and the harbor's salt,\nand a ball thudding off the far goalpost.\nOkja sits on the bleacher's lowest step,\nher mother's medicine in a paper bag.\n\nThe boys kick it high, past the chalk line,\npast the fence, toward the road to Seoul,\nand every time it bounces back,\nfetched by someone smaller, running home.\n\nShe has packed a bag twice this year.\nTwice she has unpacked it by morning.\n\nWhen the ball rolls to her shoes at last,\nshe holds it for a while, feels its weight,\nthen tosses it gently back onto the field.\nThe floodlights blink on, one bank at a time,\nand gulls drift low across the stands.",
+   "question": "In the poem, the ball most likely represents which of the following?",
+   "options": [
+    "Okja's urge to leave, which keeps bringing her back home",
+    "The carefree childhood that Okja wishes she could return to",
+    "The heavy burden of caring for a mother who needs medicine",
+    "The boys' dreams of escaping the city as famous players"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-01-041",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "symbolism",
+   "requestedDifficulty": "medium",
+   "passage": "Why does a man wear a hat indoors? My daughter, Priya, asked this of Mayor Marlon one wet afternoon in the drying shed of the tea estate above Surabaya, where I had come, as the town's only doctor, to discuss the fever in the pickers' quarters. Marlon laughed and tipped the wide straw brim lower. He told me the clinic would get its new beds after the harvest, the same promise he had made after the last harvest. Each time I pressed him on the numbers, he adjusted the hat, and its shadow slid across his eyes like a shutter. Later, walking down between the rows, Priya said she thought he must have been cold. I told her yes, perhaps. But I had noticed that when the estate owner arrived in his car, Marlon took the hat off at once and held it against his chest, his face suddenly bare and eager.",
+   "question": "Based on the text, the mayor's hat most likely represents which of the following?",
+   "options": [
+    "The authority Marlon holds over the pickers and the clinic",
+    "Marlon's habit of concealing himself from people he owes",
+    "The damp, chilly weather that fills the drying shed",
+    "Marlon's embarrassment at being questioned by a child"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-01-042",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "symbolism",
+   "requestedDifficulty": "medium",
+   "passage": "“He would have come, Yuying, if the river had let him,” Camryn says, and you do not believe him. The wedding hall is so crowded that the fiddlers must lean back against the wall, yet beside you one chair stands empty, a white card propped upon it bearing your father's name. You remember the letter from the conservatory in Memphis, the one that arrived the spring your father took the family savings downriver and did not return. Camryn had travelled with him that spring; you have always held him half to blame. Now he rests his hand upon the empty chair as he speaks, the way a man steadies himself against a rail. When the dancing begins and a cousin tries to borrow the chair, Camryn stops her gently. Leave it, he tells her. You notice that his own glass has stood untouched all evening, and that he will not look at the card.",
+   "question": "Based on the text, the empty chair most likely symbolizes which of the following?",
+   "options": [
+    "The narrator's lost chance to study at the conservatory",
+    "The crowding of the hall and the family's lack of money",
+    "An unresolved loss that weighs on Camryn as well as Yuying",
+    "Camryn's wish to take the father's place in the family"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-01-043",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "symbolism",
+   "requestedDifficulty": "medium",
+   "passage": "Three rules governed the old weaving house in Lisbon, and you learned them on your first day: no lamp after midnight, no cloth cut before it is finished, and no news spoken until it is certain. Rafaela, who had bought the house that winter, kept all three. Each morning she climbed to the loom room while Mateo, the gardener, pruned the lemon trees below, and each morning she wove one more row of a blue cloth with no pattern anyone could name. The ship carrying her brother was weeks overdue. When Mateo asked why she did not weave something useful, a shawl or a blanket, she only said that the cloth was not finished. Rows gathered like days. Once, when a rumor of a wreck came up the hill, her hands stopped above the threads for a full hour; then she tied the next knot and went on. By midsummer, Mateo had begun bringing her a sprig of lemon blossom each dawn and laying it, without a word, beside the growing blue.",
+   "question": "Based on the text, the blue cloth most likely represents which of the following?",
+   "options": [
+    "Rafaela's wish to make the old house useful again",
+    "The strict household rules that came with the house",
+    "The friendship slowly forming between Rafaela and Mateo",
+    "Rafaela's refusal to stop expecting her brother's return"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-01-044",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "medium",
+   "passage": "Years later, Rangi would still remember the evening his son refused to leave the gymnasium in Lyon. It was the anniversary of Elodie's death, and Rangi had planned a quiet dinner at the restaurant she had loved. The boy, fourteen and immovable, had other ideas: he wanted to shoot free throws in the empty gym where his mother had once coached, one for every year since she had been gone. Rangi argued, then pleaded, then sat on the bottom bleacher with his coat still buttoned. His son did not answer. He simply kept shooting, building a wall of silence brick by brick with every bounce of the ball. Only on the fifth shot, when the ball rolled away toward the bleachers, did Rangi stand, pick it up, and pass it back.",
+   "question": "As used in the text, the phrase “building a wall of silence brick by brick” most nearly suggests that the son",
+   "options": [
+    "was damaging the gymnasium in his anger at his father",
+    "was growing too tired to keep arguing with his father",
+    "was shutting out his father's objections through steady repetition",
+    "was quietly showing off his skill to win his father's praise"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-01-045",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "medium",
+   "passage": "Night is honest. In the sanatorium above the lake outside Bergen, I learned that patients say at two in the morning what they hide by daylight. Thorvald, my night patient, could not sleep unless I wheeled him to the end of the dock, where the water lay black and still. On the fourth night he showed me an envelope addressed to his brother, sealed and stamped and eleven years old. He had written it the week after their quarrel. He never mailed it, he said, and his brother had died the following spring. He held it on his blanket while he talked, and I understood that the apology had become an anchor he dragged behind him, slowing every hour he had left. Before dawn he asked me, Sigrid, to keep it for him. I put it in my apron pocket, where it weighed almost nothing.",
+   "question": "As used in the text, the phrase “an anchor he dragged behind him” most nearly suggests that the unsent apology was",
+   "options": [
+    "a source of steadiness that kept Thorvald calm at night",
+    "a memory Thorvald was ready to throw into the lake",
+    "a hope of reconciliation that still guided his choices",
+    "a weight of regret that kept holding Thorvald back"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-01-046",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "medium",
+   "passage": "Who pays a clockmaker for the hours he gives away?\nMy father, Santiago, bent above his bench\non Forty-Third Street, where the trains shook dust\nfrom the rafters into every open case.\nOttavio came in winter with a watch\nhis wife had worn, its mainspring broken, its glass\nclouded like a frozen pond.\nHe counted out his nickels on the counter.\nMy father pushed them back without a word\nand worked past closing, past supper, past the lamps,\nspending his minutes like coins on a stranger\nwhile I translated nothing, for nothing needed saying.\nWhen the watch ticked, Ottavio wept in Italian.\nMy father answered him in Spanish.\nI stood between them with my English,\nthe only one who thought words were required.",
+   "question": "As used in the text, the phrase “spending his minutes like coins on a stranger” most nearly suggests that Santiago was",
+   "options": [
+    "giving his own time freely in place of taking payment",
+    "wasting time carelessly on a repair he did not value",
+    "charging Ottavio for every minute of his labor",
+    "hurrying to finish the repair so he could close"
+   ]
+  }
+ ],
+ "instructions": "당신은 디지털 SAT 독립 채점자다. 정답 표시가 없다. 먼저 문항을 직접 풀고(picked_letter), 이어서 난이도·hard 적합·오답 품질을 판정한다. 요청 난이도에 맞추려 하지 말고 실제로 느끼는 대로 답한다.\n청크 rev-fable_judge-006 — 20문항.\n출력: Write 도구로 정확히 이 경로에 JSON 한 파일을 쓴다 → /Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-fable_judge-006.result.json\n출력 JSON 스키마(예시 구조): {\"chunkId\":\"청크 ID\",\"model\":\"fable\",\"items\":[{\"candidateId\":\"id\",\"picked_letter\":\"A|B|C|D\",\"other_defensible\":\"정답 외 방어 가능한 선택지가 있으면 true\",\"est_difficulty\":\"easy|medium|hard (실제 체감, 요청 난이도에 맞추지 말 것)\",\"hard_fit\":\"실제 SAT hard 수준의 사고 단계가 필요하면 true(지문 길이·난어만이면 false)\",\"plausible_distractors\":\"오답 3개가 모두 그럴듯하고 서로 다른 오개념에서 나왔으면 true\",\"length_balanced\":\"네 선택지 길이·구체성이 비슷해 정답이 형식으로 드러나지 않으면 true\",\"multi_answer_risk\":\"복수 정답 위험이 있으면 true\",\"issues\":\"한 줄 메모\"}]}\n허용 값: picked_letter ∈ {A,B,C,D}, 불리언 필드는 true/false, est_difficulty ∈ {easy,medium,hard}. candidateId 를 바꾸지 않고 모든 항목에 답한다.\n금지: 결과 파일 외의 파일 생성·수정, 다른 명령 실행, 문항 수정·재작성. 끝나면 'done <항목 수>' 한 줄만 답한다.\n\n## 문항\n### lit40-medium-01-027 — skill inferences · 유형 tone_or_mood · 요청 난이도 medium · hard 기준: 두 정서의 비중을 판단해야 하며, 오답은 정반대가 아니라 비중이 틀린 어조다\n[지문]\nOnce, the roof had been where the two of them hid cigarettes from the nuns. Now DOLORES and REMEDIOS pin sheets to the line, the wind off the estuary slapping them wet against their arms.\nDOLORES: He asked me again from his bed this morning whether the boat was sold.\nREMEDIOS: (a long pause, a clothespin in her teeth) And?\nDOLORES: I said the buyer was still deciding. (She smooths a sheet that is already smooth.) Was that wrong?\nREMEDIOS: You lied to a priest about a pear tree once. This is smaller.\nDOLORES: (almost laughing) It isn't smaller.\nREMEDIOS: No. (She lets the pin drop into the basket.) It isn't.\n(They stand side by side. Below, a gull lands on the bakery chimney and folds its wings.)\n\n[질문] Which choice best describes the overall tone of the scene?\nA) Playful teasing between old friends recalling childhood mischief\nB) Wry amusement occasionally shadowed by brief flickers of doubt\nC) Bitter resentment over a lie that one friend cannot forgive\nD) Uneasy hesitation that is lightened now and then by wry humor\n### lit40-medium-01-028 — skill inferences · 유형 tone_or_mood · 요청 난이도 medium · hard 기준: 두 정서의 비중을 판단해야 하며, 오답은 정반대가 아니라 비중이 틀린 어조다\n[지문]\nI was a terrible liar at eleven. Still, I told Matteo, the old man who sold me carp from a dented cooler at the edge of the salt flat, that my mother had sent me for the largest fish he had. She had not; I meant to bring it home and pretend I had caught it myself. Matteo looked at my coins, then at me, and wrapped the fish in newspaper without a word. I remember the white crust of salt cracking under my sandals as I walked back, the fish cold against my ribs, my chest bright with something like triumph. Years later the small ache of that lie still surprises me, but mostly I think of how carefully he folded the paper, tucking in the corners as if for a gift. Beyond his stall the flat shimmered all the way to the hills.\n\n[질문] Which choice best describes the overall tone of the passage?\nA) Fond nostalgia mixed with a faint, lingering sense of guilt\nB) Lasting guilt softened only slightly by moments of fondness\nC) Lingering shame over a childish lie told to a kind stranger\nD) Restless curiosity about a stranger whose past stays unknown\n### lit40-medium-01-029 — skill inferences · 유형 tone_or_mood · 요청 난이도 medium · hard 기준: 두 정서의 비중을 판단해야 하며, 오답은 정반대가 아니라 비중이 틀린 어조다\n[지문]\nWho else still remembered that our grandmother had called the house Two Ravens? Yona and I were selling what was left of it at the Saturday market, spreading her blankets and tin cups across a folding table in the wind. We had argued that morning over a cracked mirror, and for an hour we spoke only to customers. Then a woman lifted the carved sign from the bottom of a crate and read the name aloud. Yona looked at me, and I felt the old ease of being twins rush back, the way we used to finish each other's sentences at her table. Neither of us would sell it. We wrapped it in her red blanket and set it under the table, between our feet. By noon dust had settled on everything, and the vendor beside us was packing up his melons.\n\n[질문] Which choice best describes the overall mood of the passage?\nA) Strained tension that a shared memory eases only for a moment\nB) Wistful affection that outlasts a brief strain between brothers\nC) Quiet irritation between brothers forced to share a dull task\nD) Cheerful excitement about bargaining with customers at market\n### lit40-medium-01-030 — skill inferences · 유형 tone_or_mood · 요청 난이도 medium · hard 기준: 두 정서의 비중을 판단해야 하며, 오답은 정반대가 아니라 비중이 틀린 어조다\n[지문]\nBy the time this reaches you, Abena, the cooperative will have finished sorting the dry-season seed. I have been given the cowpea jars, which you would find funny, since you once swore I could not tell one bean from another. Mother says you promised, before you left, that we would plant the back plot together when you came home. Neither of us can remember you saying it, and I worry a little that you will arrive and find that promise a stranger. Still, I have already set aside two jars with your name on them in my worst handwriting, and I keep picturing your hands in that red soil. Come soon. The jars are labeled. The neighbor's goats have learned to open our gate, so bring wire.\n\n[질문] Which choice best describes the overall tone of the letter?\nA) Anxious uncertainty about whether the promise was ever made\nB) Hesitant doubt relieved by only occasional moments of hope\nC) Hopeful warmth that carries a slight trace of uncertainty\nD) Dutiful formality suited to reporting on the cooperative\n### lit40-medium-01-031 — skill inferences · 유형 relationship_between_characters · 요청 난이도 medium · hard 기준: 두 문장의 단서를 연결해야 하고 오답은 한쪽 감정만 반영한다\n[지문]\nI had soldered the same joint three times when Bogdan took the iron from my hand. 'Again,' he said, and set a cold radio in front of me. I wanted to tell him that no one fixes radios anymore, that I could be in Tel Aviv learning to code by now. Then I saw the folded letter under his ledger, an offer from a conservatory, dated forty years ago and never answered; my mother had told me he stayed to keep this shop open after my grandfather fell ill. I picked up the iron without arguing. When he leaned over to check my work, I tilted the lamp toward his side so he would not have to squint. Outside, a bus groaned up the hill toward the port.\n\n[질문] Based on the passage, which choice best describes the relationship between Tamar and Bogdan?\nA) Tamar feels only frustration with an elder who refuses to modernize.\nB) Bogdan feels indebted to Tamar's family for the sacrifices they made.\nC) Bogdan is a stern master who treats Tamar as a mere hired hand.\nD) Tamar chafes at Bogdan's demands yet honors what he gave up.\n### lit40-medium-01-032 — skill inferences · 유형 relationship_between_characters · 요청 난이도 medium · hard 기준: 두 문장의 단서를 연결해야 하고 오답은 한쪽 감정만 반영한다\n[지문]\nRiccardo slid into the booth first, the way he always had back home, and ordered for both of them without asking. Koa let him. When the waitress brought pancakes instead of the eggs Riccardo had insisted Koa liked, Koa noticed the mix-up before anyone else and quietly cut into the stack as if he had wanted it all along. Earlier, on the drive in, Riccardo had admitted that nobody at his new school knew his name yet, and had laughed too loudly afterward. So Koa praised the syrup, asked for a second pot of coffee, and stayed until Riccardo stopped checking his phone. Rain beaded on the window, and trucks hissed past on the highway, their headlights smearing across the wet glass.\n\n[질문] Based on the passage, which choice best describes the relationship between Koa and Riccardo?\nA) Koa quietly guards Riccardo's pride while his friend struggles to adjust.\nB) Riccardo patiently looks after Koa, who feels lonely at his new school.\nC) Koa is growing tired of a friend who always orders for him without asking.\nD) Riccardo and Koa compete, as old friends often do, over who knows best.\n### lit40-medium-01-033 — skill inferences · 유형 relationship_between_characters · 요청 난이도 medium · hard 기준: 두 문장의 단서를 연결해야 하고 오답은 한쪽 감정만 반영한다\n[지문]\nNobody sleeps in this room. SALMA, sixteen, sits beside RASHID, an old friend of her father's, under a buzzing light.\nSALMA: The car was blue. I saw it.\nRASHID: I saw gray. (He rubs his eyes.) But I was watching your father, not the road.\nSALMA: The police will believe you. You're older.\nRASHID: (turning the officer's notepad toward her) Then you write it. Your words, not mine.\n(Salma hesitates, then writes. Rashid reads over her shoulder and, where she pauses, quietly tells her the date.)\nSALMA: You're not going to change it?\nRASHID: (shaking his head) Your father taught me to trust what a careful person sees.\n(A nurse crosses with a tray of tea glasses that rattle softly.)\n\n[질문] Based on the scene, which choice best describes the relationship between Rashid and Salma?\nA) Salma relies on Rashid to speak for her because she fears the police.\nB) Rashid trusts Salma's judgment enough to set his own account aside.\nC) Salma defers to Rashid's account because he is the older witness.\nD) Rashid acts as a strict guardian who must approve what Salma says.\n### lit40-medium-01-034 — skill inferences · 유형 relationship_between_characters · 요청 난이도 medium · hard 기준: 두 문장의 단서를 연결해야 하고 오답은 한쪽 감정만 반영한다\n[지문]\nYears later, I still think about the back room of the tailor's shop in Valparaíso, where Benedita took over my lessons after my first teacher retired. She kept his chalk marks on the cutting table and never mentioned that his chair was empty. For weeks I answered her in single words and checked her stitches against his patterns when she wasn't looking. Then one afternoon she handed me his worn tape measure and asked me to show her how he had held it. I showed her, and she copied my grip exactly, without correcting me once. After that I began arriving early to sweep the threads before she came. Through the small window, cable cars climbed the hill, swaying above the painted roofs.\n\n[질문] Based on the passage, which choice best describes the relationship between Dariush and Benedita?\nA) Dariush resents Benedita for replacing a teacher whom he admired.\nB) Benedita relies on Dariush to teach her a trade she does not know.\nC) Dariush comes to trust Benedita because she honors his old teacher.\nD) Benedita is a strict instructor who demands obedience from students.\n### lit40-medium-01-035 — skill inferences · 유형 relationship_between_characters · 요청 난이도 medium · hard 기준: 두 문장의 단서를 연결해야 하고 오답은 한쪽 감정만 반영한다\n[지문]\nOn the Monday the rumor reached Themba, I was waiting for the 6:40 bus under the shelter at the foot of the mountain. Someone had told him I was planning to sublet my flat to strangers and disappear, which was not true. I expected a letter, or a raised rent. Instead he sat down beside me on the bench, handed me half of his breakfast roll still warm in its paper, and said only, 'People talk. I told them you have lived in my building longer than my own sons.' When the bus came, he stood and waved it down for me, as if I could not do it myself. Mist was pouring over the ridge, soft as smoke, and the road shone wet below it.\n\n[질문] Based on the passage, which choice best describes the relationship between Themba and Thandiwe?\nA) Thandiwe fears Themba, who controls whether she may keep her home.\nB) Thandiwe feels she must protect Themba from neighborhood gossip.\nC) Themba treats Thandiwe as any landlord treats a reliable tenant.\nD) Themba trusts Thandiwe and regards her almost as family.\n### lit40-medium-01-036 — skill inferences · 유형 relationship_between_characters · 요청 난이도 medium · hard 기준: 두 문장의 단서를 연결해야 하고 오답은 한쪽 감정만 반영한다\n[지문]\nI am writing this on the back of a repair ticket, Dongsik, because the stall is slow tonight and I keep thinking about what you said. When I told you how my old teacher called me 'good with hands, not with books,' you didn't argue; you just slid the accounting textbook across the bench and said you'd cover the heel orders until midnight. You've done that four shifts in a row now, and I've noticed you never mention it when the manager counts the tickets. So I passed the first exam. I wanted you to hear it before anyone else. The rain came in sideways off the harbor around ten, and the lights over the stall flickered twice before they settled.\n\n[질문] Based on the letter, which choice best describes the relationship between Aroha and Dongsik?\nA) Dongsik quietly supports Aroha, who is grateful and eager to tell him.\nB) Aroha covers shifts for Dongsik so that he can study for his own exams.\nC) Aroha feels uneasy and indebted because of the favors Dongsik keeps doing.\nD) Dongsik and Aroha are rivals who compete over who finishes more orders.\n### lit40-medium-01-037 — skill inferences · 유형 relationship_between_characters · 요청 난이도 medium · hard 기준: 두 문장의 단서를 연결해야 하고 오답은 한쪽 감정만 반영한다\n[지문]\nA cracked clay jar lay at the bottom of the salt-water pool, where Alonso had dropped it while showing off for the fishermen's boys. In the old tellings, a jar that breaks in the sea keeps the voice of whoever broke it. Alonso's grandmother, Imtiaz, listened as he explained that a wave had knocked it from his hands. She did not scold him. She only waded in, lifted the shards, and held one to his ear. 'What does it say?' she asked. Alonso listened a long time. 'It says I was being foolish,' he admitted, and she pressed the shard into his palm as if he had earned it. Along the seawall, crows quarreled over a fish head in the noon glare.\n\n[질문] Based on the passage, which choice best describes the relationship between Imtiaz and Alonso?\nA) Alonso fears Imtiaz, whose strict punishments lead him to invent excuses.\nB) Imtiaz gently guides Alonso toward honesty, and he trusts her guidance.\nC) Alonso teaches Imtiaz to hear the old voices that the sea keeps in jars.\nD) Imtiaz indulges Alonso as grandmothers often do, excusing every mistake.\n### lit40-medium-01-038 — skill inferences · 유형 symbolism · 요청 난이도 medium\n[지문]\nRadek tied the best knots in the building. Every Thursday at the corner laundromat, he bound the neighbors' laundry bags with a sailor's hitch, quick and neat, and every Thursday they stopped to admire it. 'A work of art,' Dmitri said, watching him cinch a bowline around a sack of towels. 'You should charge for that.' Radek only laughed. Later, when the dryers had finished, Dmitri saw the women at the folding table slip the knots loose with a single tug and toss the cords into the bin, still praising them as they left. Radek gathered the cords one by one and coiled them in his coat pocket. By the next Thursday he had tied them all again, as carefully as before. The machines thumped and turned behind the steamy windows.\n\n[질문] In the passage, the knots most likely represent which of the following?\nA) Radek's longing to return to the sea he left behind when he retired\nB) The neighbors' deep gratitude for the kindness Radek shows them\nC) Skilled care that others praise but neither reward nor preserve\nD) The strict weekly routines that bind the neighbors to their chores\n### lit40-medium-01-039 — skill inferences · 유형 symbolism · 요청 난이도 medium\n[지문]\nBologna had flooded twice that spring, and the cellar still held a skin of brown water when Meera went down for the wedding linens. Her daughter followed with a torch. Near the stairs floated a paper crown, soft at the edges, its gold paint bleeding into the water. Meera lifted it out before her daughter could. Years ago, at six, the girl had made her promise to wear exactly that crown at the wedding, whoever the groom turned out to be. Upstairs, they spread the linens across chairs to dry and found every one of them ruined. The crown, pressed flat between two dictionaries, kept most of its shape. 'Marco will think we're mad,' her daughter said, but she was already testing it against her own hair. Rain began again on the courtyard tiles.\n\n[질문] In the passage, the paper crown most likely represents which of the following?\nA) The damage that the floods have done to the family's old home\nB) Meera's fear that the wedding plans are being ruined by bad luck\nC) The childish tastes that the daughter has now outgrown as an adult\nD) A childhood bond that endures even as other things are spoiled\n### lit40-medium-01-040 — skill inferences · 유형 symbolism · 요청 난이도 medium\n[지문]\nSmell of cut grass and the harbor's salt,\nand a ball thudding off the far goalpost.\nOkja sits on the bleacher's lowest step,\nher mother's medicine in a paper bag.\n\nThe boys kick it high, past the chalk line,\npast the fence, toward the road to Seoul,\nand every time it bounces back,\nfetched by someone smaller, running home.\n\nShe has packed a bag twice this year.\nTwice she has unpacked it by morning.\n\nWhen the ball rolls to her shoes at last,\nshe holds it for a while, feels its weight,\nthen tosses it gently back onto the field.\nThe floodlights blink on, one bank at a time,\nand gulls drift low across the stands.\n\n[질문] In the poem, the ball most likely represents which of the following?\nA) Okja's urge to leave, which keeps bringing her back home\nB) The carefree childhood that Okja wishes she could return to\nC) The heavy burden of caring for a mother who needs medicine\nD) The boys' dreams of escaping the city as famous players\n### lit40-medium-01-041 — skill inferences · 유형 symbolism · 요청 난이도 medium\n[지문]\nWhy does a man wear a hat indoors? My daughter, Priya, asked this of Mayor Marlon one wet afternoon in the drying shed of the tea estate above Surabaya, where I had come, as the town's only doctor, to discuss the fever in the pickers' quarters. Marlon laughed and tipped the wide straw brim lower. He told me the clinic would get its new beds after the harvest, the same promise he had made after the last harvest. Each time I pressed him on the numbers, he adjusted the hat, and its shadow slid across his eyes like a shutter. Later, walking down between the rows, Priya said she thought he must have been cold. I told her yes, perhaps. But I had noticed that when the estate owner arrived in his car, Marlon took the hat off at once and held it against his chest, his face suddenly bare and eager.\n\n[질문] Based on the text, the mayor's hat most likely represents which of the following?\nA) The authority Marlon holds over the pickers and the clinic\nB) Marlon's habit of concealing himself from people he owes\nC) The damp, chilly weather that fills the drying shed\nD) Marlon's embarrassment at being questioned by a child\n### lit40-medium-01-042 — skill inferences · 유형 symbolism · 요청 난이도 medium\n[지문]\n“He would have come, Yuying, if the river had let him,” Camryn says, and you do not believe him. The wedding hall is so crowded that the fiddlers must lean back against the wall, yet beside you one chair stands empty, a white card propped upon it bearing your father's name. You remember the letter from the conservatory in Memphis, the one that arrived the spring your father took the family savings downriver and did not return. Camryn had travelled with him that spring; you have always held him half to blame. Now he rests his hand upon the empty chair as he speaks, the way a man steadies himself against a rail. When the dancing begins and a cousin tries to borrow the chair, Camryn stops her gently. Leave it, he tells her. You notice that his own glass has stood untouched all evening, and that he will not look at the card.\n\n[질문] Based on the text, the empty chair most likely symbolizes which of the following?\nA) The narrator's lost chance to study at the conservatory\nB) The crowding of the hall and the family's lack of money\nC) An unresolved loss that weighs on Camryn as well as Yuying\nD) Camryn's wish to take the father's place in the family\n### lit40-medium-01-043 — skill inferences · 유형 symbolism · 요청 난이도 medium\n[지문]\nThree rules governed the old weaving house in Lisbon, and you learned them on your first day: no lamp after midnight, no cloth cut before it is finished, and no news spoken until it is certain. Rafaela, who had bought the house that winter, kept all three. Each morning she climbed to the loom room while Mateo, the gardener, pruned the lemon trees below, and each morning she wove one more row of a blue cloth with no pattern anyone could name. The ship carrying her brother was weeks overdue. When Mateo asked why she did not weave something useful, a shawl or a blanket, she only said that the cloth was not finished. Rows gathered like days. Once, when a rumor of a wreck came up the hill, her hands stopped above the threads for a full hour; then she tied the next knot and went on. By midsummer, Mateo had begun bringing her a sprig of lemon blossom each dawn and laying it, without a word, beside the growing blue.\n\n[질문] Based on the text, the blue cloth most likely represents which of the following?\nA) Rafaela's wish to make the old house useful again\nB) The strict household rules that came with the house\nC) The friendship slowly forming between Rafaela and Mateo\nD) Rafaela's refusal to stop expecting her brother's return\n### lit40-medium-01-044 — skill words_in_context · 유형 figurative_language · 요청 난이도 medium\n[지문]\nYears later, Rangi would still remember the evening his son refused to leave the gymnasium in Lyon. It was the anniversary of Elodie's death, and Rangi had planned a quiet dinner at the restaurant she had loved. The boy, fourteen and immovable, had other ideas: he wanted to shoot free throws in the empty gym where his mother had once coached, one for every year since she had been gone. Rangi argued, then pleaded, then sat on the bottom bleacher with his coat still buttoned. His son did not answer. He simply kept shooting, building a wall of silence brick by brick with every bounce of the ball. Only on the fifth shot, when the ball rolled away toward the bleachers, did Rangi stand, pick it up, and pass it back.\n\n[질문] As used in the text, the phrase “building a wall of silence brick by brick” most nearly suggests that the son\nA) was damaging the gymnasium in his anger at his father\nB) was growing too tired to keep arguing with his father\nC) was shutting out his father's objections through steady repetition\nD) was quietly showing off his skill to win his father's praise\n### lit40-medium-01-045 — skill words_in_context · 유형 figurative_language · 요청 난이도 medium\n[지문]\nNight is honest. In the sanatorium above the lake outside Bergen, I learned that patients say at two in the morning what they hide by daylight. Thorvald, my night patient, could not sleep unless I wheeled him to the end of the dock, where the water lay black and still. On the fourth night he showed me an envelope addressed to his brother, sealed and stamped and eleven years old. He had written it the week after their quarrel. He never mailed it, he said, and his brother had died the following spring. He held it on his blanket while he talked, and I understood that the apology had become an anchor he dragged behind him, slowing every hour he had left. Before dawn he asked me, Sigrid, to keep it for him. I put it in my apron pocket, where it weighed almost nothing.\n\n[질문] As used in the text, the phrase “an anchor he dragged behind him” most nearly suggests that the unsent apology was\nA) a source of steadiness that kept Thorvald calm at night\nB) a memory Thorvald was ready to throw into the lake\nC) a hope of reconciliation that still guided his choices\nD) a weight of regret that kept holding Thorvald back\n### lit40-medium-01-046 — skill words_in_context · 유형 figurative_language · 요청 난이도 medium\n[지문]\nWho pays a clockmaker for the hours he gives away?\nMy father, Santiago, bent above his bench\non Forty-Third Street, where the trains shook dust\nfrom the rafters into every open case.\nOttavio came in winter with a watch\nhis wife had worn, its mainspring broken, its glass\nclouded like a frozen pond.\nHe counted out his nickels on the counter.\nMy father pushed them back without a word\nand worked past closing, past supper, past the lamps,\nspending his minutes like coins on a stranger\nwhile I translated nothing, for nothing needed saying.\nWhen the watch ticked, Ottavio wept in Italian.\nMy father answered him in Spanish.\nI stood between them with my English,\nthe only one who thought words were required.\n\n[질문] As used in the text, the phrase “spending his minutes like coins on a stranger” most nearly suggests that Santiago was\nA) giving his own time freely in place of taking payment\nB) wasting time carelessly on a repair he did not value\nC) charging Ottavio for every minute of his labor\nD) hurrying to finish the repair so he could close"
+}

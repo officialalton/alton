@@ -1,0 +1,742 @@
+{
+ "taskId": "gen-lit40-medium-05-05",
+ "passed": [
+  {
+   "candidateId": "lit40-medium-05-082",
+   "task": "gen-lit40-medium-05-05",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-05-082",
+    "batchId": "lit40-medium-05",
+    "route": "ai_passage",
+    "skill": "central_ideas_details",
+    "difficulty": "medium",
+    "questionType": "main_idea_or_purpose",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 81,
+     "genre": "novel_excerpt",
+     "pov": "first",
+     "styleEra": "19c",
+     "names": [
+      "Rangi",
+      "Harriet"
+     ],
+     "nameCultures": [
+      "pacific_maori_hawaiian",
+      "english"
+     ],
+     "locale": "Cape Town",
+     "setting": "a beekeeper's yard",
+     "relationship": "cousins reunited at a funeral",
+     "conflict": "while pretending to enjoy a gift that is wrong",
+     "openingStyle": "장소 이름으로 시작",
+     "topicSeed": "a beekeeper's yard in Cape Town; cousins reunited at a funeral while pretending to enjoy a gift that is wrong"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 90,
+     "max": 150
+    },
+    "recipeId": "central_ideas_details_lit_main_idea_or_purpose_medium"
+   },
+   "g": {
+    "passage": "Cape Town had turned cold for the funeral, and in their grandmother's yard the hives sat under sheets like furniture in a closed house. Harriet pressed a parcel into Rangi's hands before the mourners had finished their tea. Inside was a jar of honey with a hand-lettered label: Orange Blossom, Gran's last harvest. Rangi knew at once that it was not; the hives had been empty since winter, and the lid came from the supermarket. He held the jar to the window anyway and said the color was exactly right. Harriet smiled too widely and agreed. Later, when an aunt asked to taste it, Rangi said he was saving it, and Harriet looked at him with something close to gratitude. Along the fence, a row of agapanthus nodded blue heads against the wet brick.",
+    "question": "Which choice best states the main idea of the text?",
+    "options": [
+     "Harriet gives Rangi a jar of honey at their grandmother's funeral gathering.",
+     "Two cousins quietly sustain a well-meant pretense for each other's sake.",
+     "The grandmother's beekeeping declined steadily during her final winter.",
+     "Grief makes every family gathering awkward for the people who attend."
+    ],
+    "correct_letter": "B",
+    "explanation": "Rangi는 꿀이 할머니의 마지막 수확이 아니라는 것을 알면서도 색이 딱 맞다며 맞장구친다. 뒤에서 이모가 맛보려 하자 아껴 두겠다고 막아 주고 Harriet이 고마워하는 듯 바라보므로, 두 사촌이 서로를 위해 선의의 연기를 함께 지켜 가는 것이 요지인 B가 정답이다. A는 일화만 요약했고, C는 벌통 소재를 쓰지만 목적이 다르며, D는 지나치게 일반적인 진술이다."
+   },
+   "notes": [],
+   "tone": [
+    "tender",
+    "wry"
+   ],
+   "devices": [
+    "simile",
+    "dramatic irony",
+    "imagery"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-05-083",
+   "task": "gen-lit40-medium-05-05",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-05-083",
+    "batchId": "lit40-medium-05",
+    "route": "ai_passage",
+    "skill": "central_ideas_details",
+    "difficulty": "medium",
+    "questionType": "main_idea_or_purpose",
+    "genre": "personal_essay",
+    "seed": {
+     "index": 82,
+     "genre": "personal_essay",
+     "pov": "mixed_or_none",
+     "styleEra": "early_20c",
+     "names": [
+      "Burak",
+      "Meilin"
+     ],
+     "nameCultures": [
+      "greek_balkan_turkish",
+      "chinese"
+     ],
+     "locale": "Shanghai",
+     "setting": "a ship's galley",
+     "relationship": "a seamstress and her only apprentice",
+     "conflict": "over a witness account that differs",
+     "openingStyle": "감각 묘사(소리·냄새·촉감)로 시작",
+     "topicSeed": "a ship's galley in Shanghai; a seamstress and her only apprentice over a witness account that differs"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 90,
+     "max": 150
+    },
+    "recipeId": "central_ideas_details_lit_main_idea_or_purpose_medium"
+   },
+   "g": {
+    "passage": "Steam and the smell of frying garlic filled the galley where I mended the crew's uniforms while our ship sat in Shanghai for repairs. Meilin, my only apprentice, worked across the table on a torn cuff. That morning the cook, Burak, had burned his hand, and we had both seen it happen. By noon the captain wanted statements. Meilin said the pan had slipped; I had seen Burak reach for it without a cloth. We argued quietly, needles moving. I assumed she was protecting him. Then she described the angle of the handle and the jolt of the hull against the pier, details I had missed because I had been watching his face. We wrote two accounts and signed both. Outside the porthole, gulls fought over a crust on the black water.",
+    "question": "Which choice best describes the main purpose of the text?",
+    "options": [
+     "To recount how a ship's cook burned his hand while the vessel was docked",
+     "To describe the daily routine of mending uniforms in a crowded ship's galley",
+     "To show the narrator realizing that a conflicting account reflected another view",
+     "To argue that witnesses should always trust their own eyes over others' words"
+    ],
+    "correct_letter": "C",
+    "explanation": "화자는 처음에 Meilin이 Burak을 감싸려고 다르게 말한다고 여긴다. 그러나 Meilin이 손잡이 각도와 선체의 흔들림처럼 화자가 얼굴을 보느라 놓친 세부를 말하자 두 진술을 모두 서명해 제출하므로, 다른 진술이 거짓이 아니라 다른 시점에서 나왔음을 깨닫는 과정이 핵심인 C가 정답이다. A는 사고 일화만, B는 배경 소재만 말한다. D는 지문의 결론과 반대 방향의 일반론이다."
+   },
+   "notes": [],
+   "tone": [
+    "reflective",
+    "measured"
+   ],
+   "devices": [
+    "sensory imagery",
+    "first-person narration",
+    "contrast"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-05-085",
+   "task": "gen-lit40-medium-05-05",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-05-085",
+    "batchId": "lit40-medium-05",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "medium",
+    "questionType": "character_motivation",
+    "genre": "short_story",
+    "seed": {
+     "index": 84,
+     "genre": "short_story",
+     "pov": "third_omniscient",
+     "styleEra": "19c",
+     "names": [
+      "Beulah",
+      "Lucius"
+     ],
+     "nameCultures": [
+      "african_american",
+      "african_american"
+     ],
+     "locale": "Chicago's South Side",
+     "setting": "a vineyard at harvest",
+     "relationship": "a father and his stubborn son",
+     "conflict": "after a storm reveals what was buried",
+     "openingStyle": "인물의 이름으로 시작",
+     "topicSeed": "a vineyard at harvest in Chicago's South Side; a father and his stubborn son after a storm reveals what was buried"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 90,
+     "max": 150
+    },
+    "recipeId": "inferences_lit_character_motivation_medium"
+   },
+   "g": {
+    "passage": "Lucius found his son already in the backyard vineyard the morning after the storm, kneeling where the wind had torn out the oldest vine behind their South Side two-flat. Its roots had pulled up a rusted lunchbox. \"Leave it,\" Lucius said, but the boy had already pried it open. Inside lay a photograph of Lucius at nineteen, grinning on a club stage with a trumpet, and a ticket stub from Forty-Seventh Street. For years Lucius had told his son, who practiced guitar behind a closed door, that music was no way to feed a family. The boy looked at the photograph a long time, then set it on the fence post and began pressing soil back around the roots. Next door, Beulah called over to ask whether the grapes had survived, and Lucius said most of them had.",
+    "question": "Based on the text, why does Lucius most likely tell his son to \"Leave it\"?",
+    "options": [
+     "He does not want his son to find evidence of a past that contradicts his warnings.",
+     "He worries that the oldest vine will die if its roots are disturbed any further.",
+     "He wants his son to replant the vine before Beulah notices the storm damage.",
+     "He suspects the rusted lunchbox belonged to an earlier owner of the two-flat."
+    ],
+    "correct_letter": "A",
+    "explanation": "상자 안에는 열아홉 살의 Lucius가 트럼펫을 들고 무대에 선 사진이 있었다. 바로 이어 그가 수년간 아들에게 음악으로는 가족을 먹여 살릴 수 없다고 말해 왔다는 문장이 나오므로, 두 문장을 이어 읽으면 자신의 말과 모순되는 과거를 들키고 싶지 않았다는 A가 정답이다. B는 지문에 없는 다른 걱정, C는 이후 행동을 동기로 착각한 것, D는 지문에 없는 외부 원인이다."
+   },
+   "notes": [],
+   "tone": [
+    "quiet",
+    "tense"
+   ],
+   "devices": [
+    "irony",
+    "imagery",
+    "foreshadowing"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-05-086",
+   "task": "gen-lit40-medium-05-05",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-05-086",
+    "batchId": "lit40-medium-05",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "medium",
+    "questionType": "character_motivation",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 85,
+     "genre": "novel_excerpt",
+     "pov": "mixed_or_none",
+     "styleEra": "19c",
+     "names": [
+      "Sakura",
+      "Kenji"
+     ],
+     "nameCultures": [
+      "japanese",
+      "japanese"
+     ],
+     "locale": "Hokkaido",
+     "setting": "a crowded wedding hall",
+     "relationship": "an elder and a restless apprentice",
+     "conflict": "after a harvest, voyage or season that went badly",
+     "openingStyle": "짧은 단언문으로 시작",
+     "topicSeed": "a crowded wedding hall in Hokkaido; an elder and a restless apprentice after a harvest, voyage or season that went badly"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 90,
+     "max": 150
+    },
+    "recipeId": "inferences_lit_character_motivation_medium"
+   },
+   "g": {
+    "passage": "Nobody had expected Kenji to come. The fishing season had been the worst in twenty years, and in October he had told Sakura he would leave her boat for a factory job in Sapporo. Yet here he stood at the back of the crowded wedding hall in a borrowed suit, holding a gift wrapped in newspaper. Sakura, who had taught him to mend nets since he was fifteen, watched him search the crowd until he found her nephew, the groom. Kenji had once told her that the boy was the only one in the harbor who never laughed at his clumsy knots. He handed over the parcel, bowed deeply, and slipped out before the speeches. Snow had begun falling on the parking lot, softening the outlines of the delivery vans.",
+    "question": "Based on the text, why does Kenji most likely attend the wedding?",
+    "options": [
+     "He hopes to persuade Sakura to let him return to work on her boat.",
+     "He wants to honor the groom, who was kind to him when others mocked him.",
+     "He needs to deliver a gift on behalf of his new factory in Sapporo.",
+     "He wishes to apologize to the harbor for the season's poor catch."
+    ],
+    "correct_letter": "B",
+    "explanation": "Kenji는 식장에서 신랑을 찾아 선물을 건넨 뒤 곧바로 떠난다. 바로 다음 문장에서 그가 신랑을 항구에서 유일하게 자신의 서툰 매듭을 비웃지 않은 사람이라고 말했다는 단서가 나오므로, 그 친절에 대한 감사를 표하러 왔다는 B가 정답이다. A는 배와 관련된 다른 바람, C는 지문에 없는 외부 이유, D는 흉어기라는 소재를 엉뚱하게 동기로 바꾼 선택지다."
+   },
+   "notes": [],
+   "tone": [
+    "restrained",
+    "gentle"
+   ],
+   "devices": [
+    "flashback",
+    "imagery",
+    "understatement"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-05-087",
+   "task": "gen-lit40-medium-05-05",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-05-087",
+    "batchId": "lit40-medium-05",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "medium",
+    "questionType": "character_motivation",
+    "genre": "personal_essay",
+    "seed": {
+     "index": 86,
+     "genre": "personal_essay",
+     "pov": "first",
+     "styleEra": "late_20c",
+     "names": [
+      "Theo",
+      "Arjun"
+     ],
+     "nameCultures": [
+      "french",
+      "indian_subcontinent"
+     ],
+     "locale": "Kerala",
+     "setting": "a school music room",
+     "relationship": "a shopkeeper and a persistent customer",
+     "conflict": "over blame for a lost opportunity",
+     "openingStyle": "장소 이름으로 시작",
+     "topicSeed": "a school music room in Kerala; a shopkeeper and a persistent customer over blame for a lost opportunity"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 90,
+     "max": 150
+    },
+    "recipeId": "inferences_lit_character_motivation_medium"
+   },
+   "g": {
+    "passage": "Kerala's monsoon was drumming on the tin roof of the school music room when Arjun found me there, tuning the harmonium I had sold him a year before. I run the instrument shop by the bus stand, and the school calls me for repairs. All that spring Arjun had come into my shop each week, insisting that the harmonium's flat reed had cost his daughter her place in the state competition. Every time, I had refused to admit fault. That afternoon he did not mention the competition. Instead he pointed to Theo, a boy who would compete next month on an instrument no better than his daughter's, and asked whether I could teach him to hear a reed going flat before a judge did. I said yes before I had decided to. Rain kept pooling under the door, and the caretaker laid sacks across the threshold.",
+    "question": "Based on the text, why does Arjun most likely ask the narrator to help Theo?",
+    "options": [
+     "He wants to force the narrator to finally admit that the harmonium was at fault.",
+     "He hopes to earn a refund for his daughter by bringing the shop a new customer.",
+     "He wants to keep another young player from losing to a flaw no one noticed.",
+     "He has been asked by the school to find a qualified music teacher for Theo."
+    ],
+    "correct_letter": "C",
+    "explanation": "Arjun은 음이 낮아진 리드 때문에 딸이 대회에서 떨어졌다고 믿어 왔다. 이어서 Theo가 딸의 것만큼 나쁜 악기로 다음 달 대회에 나간다는 점과 심사위원보다 먼저 리드 문제를 듣게 가르쳐 달라는 부탁이 나오므로, 두 단서를 이어 보면 같은 일이 다른 아이에게 반복되지 않게 하려는 C가 정답이다. A는 그가 과거에 품었던 다른 감정, B는 지문에 없는 이익, D는 지문에 없는 외부 원인이다."
+   },
+   "notes": [],
+   "tone": [
+    "reflective",
+    "conciliatory"
+   ],
+   "devices": [
+    "first-person narration",
+    "imagery",
+    "understatement"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-05-088",
+   "task": "gen-lit40-medium-05-05",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-05-088",
+    "batchId": "lit40-medium-05",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "medium",
+    "questionType": "tone_or_mood",
+    "genre": "short_story",
+    "seed": {
+     "index": 87,
+     "genre": "short_story",
+     "pov": "first",
+     "styleEra": "early_20c",
+     "names": [
+      "Armand",
+      "Dolores"
+     ],
+     "nameCultures": [
+      "french",
+      "spanish_iberian"
+     ],
+     "locale": "Port of Spain",
+     "setting": "a mountain bus stop",
+     "relationship": "a foreman and a young hire",
+     "conflict": "after a public embarrassment",
+     "openingStyle": "시간·날짜 표현으로 시작('By', 'On', 'After' 등)",
+     "topicSeed": "a mountain bus stop in Port of Spain; a foreman and a young hire after a public embarrassment"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 90,
+     "max": 150
+    },
+    "recipeId": "inferences_lit_tone_or_mood_medium"
+   },
+   "g": {
+    "passage": "By six the bus to the hills was already late, and Dolores stood under the shelter with a cement-gray handprint still on her shirt. That morning, in front of the whole crew, she had backed the mixer into the site office and knocked the foreman's lunch off the windowsill. Armand had stared at the spilled rice for a long moment. Now he arrived at the stop, set down his bag, and offered her half of a roti he had bought to replace it. \"Office needed a new door anyway,\" he said. She laughed, then covered her mouth, still half ashamed, and he laughed louder so that she would not have to stop. Below them the lights of Port of Spain came on in loose strings, and a dog trotted past with great purpose.",
+    "question": "Which choice best describes the overall tone of the text?",
+    "options": [
+     "Anxious and embarrassed, dwelling mainly on the young worker's mistake",
+     "Mostly embarrassed, with only a passing hint of the foreman's kindness",
+     "Nostalgic, recalling the city's evenings from a great distance in time",
+     "Warmly humorous, with traces of lingering embarrassment"
+    ],
+    "correct_letter": "D",
+    "explanation": "지문에는 Dolores가 동료들 앞에서 실수한 일과 여전히 반쯤 부끄러워 입을 가리는 모습이 있지만, 더 두드러지는 것은 Armand가 로티를 나눠 주며 농담하고 그녀가 웃음을 멈추지 않도록 더 크게 웃어 주는 따뜻한 유머다. 따라서 D가 정답이다. A는 덜 두드러진 정서인 당혹감만 말했고, B는 두 정서의 비중을 뒤집었다. C의 향수는 지문에 단서가 약하다."
+   },
+   "notes": [],
+   "tone": [
+    "warm",
+    "humorous"
+   ],
+   "devices": [
+    "dialogue",
+    "imagery",
+    "personification"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-05-089",
+   "task": "gen-lit40-medium-05-05",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-05-089",
+    "batchId": "lit40-medium-05",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "medium",
+    "questionType": "tone_or_mood",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 88,
+     "genre": "novel_excerpt",
+     "pov": "third_limited",
+     "styleEra": "early_20c",
+     "names": [
+      "Riccardo",
+      "Tara"
+     ],
+     "nameCultures": [
+      "italian",
+      "indian_subcontinent"
+     ],
+     "locale": "Mumbai",
+     "setting": "a bakery before opening",
+     "relationship": "a coach and a benched star",
+     "conflict": "when a rumor reaches the wrong person",
+     "openingStyle": "장소 이름으로 시작",
+     "topicSeed": "a bakery before opening in Mumbai; a coach and a benched star when a rumor reaches the wrong person"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 90,
+     "max": 150
+    },
+    "recipeId": "inferences_lit_tone_or_mood_medium"
+   },
+   "g": {
+    "passage": "Mumbai was still gray when Tara let herself into her uncle's bakery through the back door, the ovens ticking as they warmed. Coach Riccardo was already there, as he was every Saturday, buying pav for the team. He did not look up from the trays. So the rumor had reached him: that she had called his lineup a joke in front of the selectors. She had said the words, though not about him. Tara tied on an apron and began dusting loaves, flour rising in small clouds, and the silence stretched until her hands ached from working. At last Riccardo asked whether the cardamom buns were fresh. She said they would be in ten minutes. He said he would wait. Outside, a delivery boy leaned his bicycle against the shutter and counted coins into his palm.",
+    "question": "Which choice best describes the overall mood of the text?",
+    "options": [
+     "Tense and uneasy, though softened by a tentative hint of reconciliation",
+     "Quietly hopeful, as two old friends look forward to a warm reunion",
+     "Mostly at ease, though briefly interrupted by a flicker of strain",
+     "Festive and bustling, in keeping with a busy morning at a city bakery"
+    ],
+    "correct_letter": "A",
+    "explanation": "Riccardo가 고개를 들지 않고 침묵이 손이 아플 만큼 길게 이어지는 장면은 긴장과 불편함을 주된 분위기로 만든다. 그러나 그가 빵이 신선한지 묻고 기다리겠다고 말하는 부분에서 화해의 조심스러운 기미가 비치므로 A가 정답이다. B는 덜 두드러진 희망만 말했고, C는 두 정서의 비중을 뒤집었으며, D의 떠들썩함은 지문에 단서가 거의 없다."
+   },
+   "notes": [],
+   "tone": [
+    "tense",
+    "tentative"
+   ],
+   "devices": [
+    "imagery",
+    "dialogue",
+    "understatement"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-05-091",
+   "task": "gen-lit40-medium-05-05",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-05-091",
+    "batchId": "lit40-medium-05",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "medium",
+    "questionType": "relationship_between_characters",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 90,
+     "genre": "novel_excerpt",
+     "pov": "first",
+     "styleEra": "early_20c",
+     "names": [
+      "Niamh",
+      "Rory"
+     ],
+     "nameCultures": [
+      "irish_scottish",
+      "irish_scottish"
+     ],
+     "locale": "Galway",
+     "setting": "a summer camp dining hall",
+     "relationship": "two strangers sharing a delay",
+     "conflict": "after a teacher's remark that changed everything",
+     "openingStyle": "부사절·전치사구로 시작('When', 'Although', 'Beside' 등)",
+     "topicSeed": "a summer camp dining hall in Galway; two strangers sharing a delay after a teacher's remark that changed everything"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 90,
+     "max": 150
+    },
+    "recipeId": "inferences_lit_relationship_between_characters_medium"
+   },
+   "g": {
+    "passage": "Because a flooded road was holding up the buses, Niamh and Rory were the only two left in the camp dining hall in Galway, each at the far end of a long table. They had not spoken all week. Rory broke the silence by saying that a counselor had told him he played the fiddle \"like someone apologizing.\" Niamh laughed, then stopped, and admitted that a teacher had once said the same about her singing, years ago, and she had not sung since. Rory slid his fiddle case down the table toward her. \"Then you can sing badly while I play badly,\" he said, and she moved three seats closer. Rain streamed down the tall windows, and somewhere in the kitchen someone was stacking trays one at a time.",
+    "question": "Based on the text, which choice best describes the relationship between Niamh and Rory?",
+    "options": [
+     "Rory pities Niamh, who resents him for prying into her painful past.",
+     "Niamh offers to coach Rory, who is anxious about his fiddle playing.",
+     "Two near-strangers discover a shared hurt and begin to encourage each other.",
+     "Longtime camp rivals compete over which of them has more musical talent."
+    ],
+    "correct_letter": "C",
+    "explanation": "Rory가 상담사에게 들은 말을 털어놓자 Niamh도 선생님에게 같은 말을 듣고 노래를 그만두었다고 고백한다. 이어 Rory가 바이올린 케이스를 밀어 주며 함께 서툴게 해 보자고 하고 Niamh가 세 자리 다가앉으므로, 같은 상처를 확인한 두 사람이 서로를 격려하기 시작하는 관계인 C가 정답이다. A는 한쪽 감정만 지어냈고, B는 격려의 방향을 뒤집었으며, D는 지문에 없는 경쟁 관계라는 통념이다."
+   },
+   "notes": [],
+   "tone": [
+    "wistful",
+    "warm"
+   ],
+   "devices": [
+    "dialogue",
+    "simile",
+    "imagery"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-05-092",
+   "task": "gen-lit40-medium-05-05",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-05-092",
+    "batchId": "lit40-medium-05",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "medium",
+    "questionType": "symbolism",
+    "genre": "short_story",
+    "seed": {
+     "index": 91,
+     "genre": "short_story",
+     "pov": "mixed_or_none",
+     "styleEra": "early_20c",
+     "names": [
+      "Folasade",
+      "Obinna"
+     ],
+     "nameCultures": [
+      "west_african",
+      "west_african"
+     ],
+     "locale": "Dakar",
+     "setting": "a monastery guesthouse",
+     "relationship": "a brother and sister reading their mother's letters",
+     "conflict": "when the plan works and nobody feels better",
+     "openingStyle": "인물의 이름으로 시작",
+     "topicSeed": "a monastery guesthouse in Dakar; a brother and sister reading their mother's letters when the plan works and nobody feels better"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Folasade read the last of their mother's letters aloud while Obinna sat by the guesthouse window, where the monks' bell rope hung motionless in the noon heat of Dakar. The plan had succeeded: the house in Lagos was sold, the debts were paid, and their mother would join them before the rains. Every letter said she was grateful. Not one said she was glad. Between the final pages Folasade found a pressed hibiscus, faded to the color of weak tea, which their mother had always picked from the vine beside the old front door. Obinna turned it over in his palm and remarked that the new house had no such vine. \"We can plant one,\" Folasade said. He laid the flower on the windowsill, and neither of them moved to return it to the envelope, though the breeze kept nudging it toward the edge.",
+    "question": "In the text, the pressed hibiscus most likely represents",
+    "options": [
+     "the debts that the sale of the house in Lagos has finally settled.",
+     "the quiet routine of the monks that the siblings hope to imitate.",
+     "the new house that the mother will soon share with her children.",
+     "the attachment to home that the mother gave up for the siblings' plan."
+    ],
+    "correct_letter": "D",
+    "explanation": "히비스커스는 어머니가 옛집 현관 옆 덩굴에서 늘 따던 꽃이고, 편지에는 고맙다는 말만 있을 뿐 기쁘다는 말은 없다. Obinna가 새집에는 그런 덩굴이 없다고 말하는 대목까지 이어 보면, 이 꽃은 계획을 위해 어머니가 포기한 집에 대한 애착을 나타내므로 D가 정답이다. A는 매각의 결과, B는 배경 소재, C는 꽃과 반대되는 새집을 가리켜 맞지 않는다."
+   },
+   "notes": [],
+   "tone": [
+    "melancholy",
+    "subdued"
+   ],
+   "devices": [
+    "symbolism",
+    "imagery",
+    "juxtaposition"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-05-093",
+   "task": "gen-lit40-medium-05-05",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-05-093",
+    "batchId": "lit40-medium-05",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "medium",
+    "questionType": "symbolism",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 92,
+     "genre": "novel_excerpt",
+     "pov": "mixed_or_none",
+     "styleEra": "late_20c",
+     "names": [
+      "Anahera",
+      "Astrid"
+     ],
+     "nameCultures": [
+      "pacific_maori_hawaiian",
+      "dutch_nordic"
+     ],
+     "locale": "Bergen",
+     "setting": "a cemetery gate",
+     "relationship": "a young apprentice and a master carpenter",
+     "conflict": "over how to mark an anniversary",
+     "openingStyle": "짧은 단언문으로 시작",
+     "topicSeed": "a cemetery gate in Bergen; a young apprentice and a master carpenter over how to mark an anniversary"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Astrid did not believe in new gates. For forty years she had repaired the oak gate of the cemetery in Bergen, replacing one rotten slat at a time, so that by now hardly a board of the original remained. Her apprentice, Anahera, wanted to mark the gate's hundredth year with something grand: a carved arch, the town's name in gold leaf. Astrid only handed her a plane and a single slat cut from the same stand of oak. \"One board,\" she said. \"Each year, one board.\" Anahera fitted it beside a slat that Astrid's own teacher had set, and the grain of the two ran nearly together. That evening the gate swung shut behind the last mourners, and the hinges, oiled that morning, made no sound at all.",
+    "question": "In the text, the cemetery gate most likely symbolizes",
+    "options": [
+     "a tradition kept alive through small renewals passed between generations.",
+     "the private grief of the mourners who visit the cemetery every evening.",
+     "Anahera's desire to bring bold and visible changes to the old town.",
+     "the gradual decline of careful craftsmanship in a modernizing city."
+    ],
+    "correct_letter": "A",
+    "explanation": "문은 한 번에 한 장씩 판자를 갈아 원래 판자가 거의 남지 않았지만 여전히 같은 문으로 서 있다. Astrid는 화려한 기념물 대신 해마다 한 장씩이라는 방식을 전하고, Anahera의 판자가 Astrid의 스승이 끼운 판자 옆에 결이 이어지듯 놓이므로 문은 세대를 거쳐 조금씩 새로워지며 이어지는 전통을 상징한다. 따라서 A가 정답이다. B와 D는 지문에 근거가 약하고, C는 Astrid가 받아들이지 않은 Anahera의 처음 계획일 뿐이다."
+   },
+   "notes": [],
+   "tone": [
+    "steady",
+    "reverent"
+   ],
+   "devices": [
+    "symbolism",
+    "imagery",
+    "dialogue"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  }
+ ],
+ "rejected": [
+  {
+   "candidateId": "lit40-medium-05-081",
+   "stage": "distractor",
+   "reasons": [
+    "정답이 가장 긴 선택지(17단어, 다음 15)"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-05-084",
+   "stage": "similarity",
+   "reasons": [
+    "문두 집중(3건 이미 같은 문두)"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-05-090",
+   "stage": "distractor",
+   "reasons": [
+    "정답이 가장 긴 선택지(16단어, 다음 14)"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-05-094",
+   "stage": "render",
+   "reasons": [
+    "rw_question:질문 문장을 인식하지 못했습니다 — 지문 마지막 단락이 SAT 문항처럼 물음표로 끝나야 합니다(예: \"Which choice …?\").",
+    "rw_target:빈칸(______)은 정확히 하나여야 합니다(지금 0개).",
+    "rw_target:빈칸 문항에 밑줄(__…__)이 함께 있습니다 — 대상은 하나만."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-05-095",
+   "stage": "render",
+   "reasons": [
+    "rw_question:질문 문장을 인식하지 못했습니다 — 지문 마지막 단락이 SAT 문항처럼 물음표로 끝나야 합니다(예: \"Which choice …?\").",
+    "rw_target:빈칸(______)은 정확히 하나여야 합니다(지금 0개).",
+    "rw_target:빈칸 문항에 밑줄(__…__)이 함께 있습니다 — 대상은 하나만."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-05-096",
+   "stage": "render",
+   "reasons": [
+    "rw_question:질문 문장을 인식하지 못했습니다 — 지문 마지막 단락이 SAT 문항처럼 물음표로 끝나야 합니다(예: \"Which choice …?\").",
+    "rw_target:빈칸(______)은 정확히 하나여야 합니다(지금 0개).",
+    "rw_target:빈칸 문항에 밑줄(__…__)이 함께 있습니다 — 대상은 하나만."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-05-097",
+   "stage": "render",
+   "reasons": [
+    "rw_question:질문 문장을 인식하지 못했습니다 — 지문 마지막 단락이 SAT 문항처럼 물음표로 끝나야 합니다(예: \"Which choice …?\").",
+    "rw_target:빈칸(______)은 정확히 하나여야 합니다(지금 0개).",
+    "rw_target:빈칸 문항에 밑줄(__…__)이 함께 있습니다 — 대상은 하나만."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-05-098",
+   "stage": "render",
+   "reasons": [
+    "rw_question:질문 문장을 인식하지 못했습니다 — 지문 마지막 단락이 SAT 문항처럼 물음표로 끝나야 합니다(예: \"Which choice …?\").",
+    "rw_target:빈칸(______)은 정확히 하나여야 합니다(지금 0개).",
+    "rw_target:빈칸 문항에 밑줄(__…__)이 함께 있습니다 — 대상은 하나만."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-05-099",
+   "stage": "render",
+   "reasons": [
+    "rw_target:질문이 인용한 단어 “settled” 가 지문에 없습니다.",
+    "rw_target:인용 단어형 문항의 지문에 대상이 아닌 인용 표시가 있습니다(“He'll come if you ask him”) — 학생이 대상을 오해합니다. ",
+    "rw_target:빈칸 문항에 밑줄(__…__)이 함께 있습니다 — 대상은 하나만."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-05-100",
+   "stage": "render",
+   "reasons": [
+    "rw_target:질문이 인용한 단어 “mark” 가 지문에 없습니다.",
+    "rw_target:빈칸 문항에 밑줄(__…__)이 함께 있습니다 — 대상은 하나만."
+   ]
+  }
+ ],
+ "retryWords": [],
+ "extraIgnored": []
+}

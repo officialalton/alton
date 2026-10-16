@@ -1,0 +1,42 @@
+{
+ "itemId": "one_variable_data.range.TB.P",
+ "generatedAt": "2026-10-07T05:02:00.475Z",
+ "codeHash": "cd50eea193613af58c3a91d08953d641982da00455603ea5d2cb119bbd21b209",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/data.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/one_variable_data.range.TB.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "one_variable_data.range.TB.P.png",
+   "mobileFile": "one_variable_data.range.TB.P.m375.png",
+   "archetypeId": "ovd.range.TB.P.inverse",
+   "seed": 11,
+   "signature": "data:table",
+   "stimulus": "The table shows the number of bikes sold for each of 5 entries after a company recorded the bikes sold at each of its stores in one month. One more value is then recorded, and it is greater than every value in the table. The range of the new data is 64 bikes.",
+   "question": "What is the new value, in bikes?",
+   "options": [
+    "19",
+    "88",
+    "133",
+    "64"
+   ],
+   "correctIndex": 1,
+   "answer": "88",
+   "explanation": "(1) 표의 값을 읽는다: 47, 43, 24, 63, 69 (5개). (2) 최댓값 69, 최솟값 24 이다. (3) 원래 범위 = 69 - 24 = 45 이다. (4) 새 값이 가장 크므로 새 범위 = 새 값 - 24 이다. (5) 새 값 = 24 + 64 = 88 이다. 따라서 정답은 88이다.",
+   "structuralIssues": []
+  }
+ ]
+}

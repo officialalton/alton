@@ -1,0 +1,90 @@
+{
+ "kind": "ap_new_version_swap_plan",
+ "set": "LT2",
+ "sourceSetName": "AP English Literature — Practice Exam 2",
+ "sourceVersionNo": 2,
+ "generatedBy": "scripts/ap-generation/lt-real-2-plans.ts",
+ "note": "Stage 2 (source = Stage 1 published v2): ① MC 시 세트 p05(ALTON 작성, 13문항) → ls5(Arnold 'Dover Beach' 37줄, 13문항) ② MC 희곡 세트 l01(ALTON 작성, 8문항) → ll1(Ibsen A Doll's House 3막 대화 발췌, 8문항). FRQ·나머지 MC 는 그대로. 교체 뒤 구성은 독립 검증기 위반 0.",
+ "swapCount": 2,
+ "verifierViolations": [],
+ "swaps": [
+  {
+   "section": "ap_mc",
+   "position": 35,
+   "removeKey": "englit-p1-a:ap_english_literature-p05-k0",
+   "addKey": "lt-real-2:ap_english_literature-real-ls5-k0",
+   "remove": {
+    "kind": "mc_set",
+    "group": "poetry",
+    "skills": [
+     "7.B",
+     "6.D",
+     "4.C",
+     "3.C",
+     "2.A",
+     "3.D",
+     "4.A",
+     "6.C",
+     "1.D",
+     "4.B",
+     "3.B",
+     "5.B",
+     "5.D"
+    ]
+   },
+   "add": {
+    "kind": "mc_set",
+    "group": "poetry",
+    "skills": [
+     "4.A",
+     "3.D",
+     "6.B",
+     "5.B",
+     "1.D",
+     "4.C",
+     "1.E",
+     "3.C",
+     "7.B",
+     "4.C",
+     "6.D",
+     "5.A",
+     "6.A"
+    ]
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 48,
+   "removeKey": "englit-p1-a:ap_english_literature-l01-k0",
+   "addKey": "lt-real-2:ap_english_literature-real-ll1-k0",
+   "remove": {
+    "kind": "mc_set",
+    "group": "longer",
+    "skills": [
+     "4.D",
+     "3.B",
+     "3.E",
+     "7.C",
+     "4.B",
+     "1.D",
+     "1.E",
+     "1.B"
+    ]
+   },
+   "add": {
+    "kind": "mc_set",
+    "group": "longer",
+    "skills": [
+     "4.C",
+     "5.B",
+     "3.E",
+     "1.A",
+     "4.C",
+     "3.F",
+     "1.E",
+     "7.B"
+    ]
+   }
+  }
+ ]
+}

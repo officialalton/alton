@@ -1,0 +1,529 @@
+{
+ "taskId": "rewrite-015",
+ "passed": [
+  {
+   "candidateId": "lit40-medium-06-058",
+   "task": "rewrite-015",
+   "attempt": 1,
+   "spec": {
+    "candidateId": "lit40-medium-06-058",
+    "batchId": "lit40-medium-06",
+    "route": "ai_passage",
+    "skill": "central_ideas_details",
+    "difficulty": "medium",
+    "questionType": "narrator_attitude",
+    "genre": "poetry",
+    "seed": {
+     "index": 57,
+     "genre": "poetry",
+     "pov": "third_limited",
+     "styleEra": "early_20c",
+     "names": [
+      "Errol",
+      "Hemi"
+     ],
+     "nameCultures": [
+      "caribbean",
+      "pacific_maori_hawaiian"
+     ],
+     "locale": "Kingston",
+     "setting": "a roadside diner",
+     "relationship": "a father and his stubborn son",
+     "conflict": "after a competition one of them lost on purpose",
+     "openingStyle": "장소 이름으로 시작",
+     "topicSeed": "a roadside diner in Kingston; a father and his stubborn son after a competition one of them lost on purpose"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Kingston wakes slowly at the roadside diner,\nwhere Errol orders for his son without asking\nand Hemi lets him, the way one lets weather happen.\nAll morning on the hill road the father led,\nhis old knees steady as a pair of oars,\nuntil, a stone's throw from the painted line,\nhe bent to fix a shoe that needed no fixing.\nNow Hemi turns the ribbon in his fingers\nand says the shoe was tied. Errol says, eat.\nHemi does not eat. He watches the hands\nthat taught him how to grip a cricket bat,\nhow to lose a game without kicking the dust,\nand thinks there must be a way to lose\nthat costs a man more than winning would.\nOutside, a truck of breadfruit idles at the pump,\nits driver singing to no one in particular.",
+    "question": "Which choice best describes Hemi's attitude toward his father?",
+    "options": [
+     "Grateful for the victory and eager to celebrate it with Errol",
+     "Suspicious that Errol was too tired to finish the race",
+     "Indifferent to the race and absorbed in the morning meal",
+     "Irritated by the gesture yet moved by what it cost Errol"
+    ],
+    "correct_letter": "D",
+    "explanation": "Hemi는 아버지가 필요 없는 신발 끈을 고친 척하며 일부러 졌다고 지적하고 음식도 먹지 않아 불쾌함을 드러낸다. 그러나 자신에게 바르게 지는 법을 가르친 손을 바라보며, 지는 것이 이기는 것보다 더 큰 대가를 치를 수 있다고 생각하는 데서 아버지의 희생에 대한 감동이 읽힌다. 따라서 D가 정답이다. A는 리본을 만지는 장면에 기대지만 축하하려는 기색이 없고, B는 신발이 이미 묶여 있었다는 Hemi의 말과 맞지 않으며, C는 Hemi가 음식을 먹지 않고 아버지를 지켜보는 태도를 무시한다."
+   },
+   "notes": [],
+   "tone": [
+    "tender",
+    "conflicted"
+   ],
+   "devices": [
+    "imagery",
+    "simile",
+    "enjambment"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 1
+  },
+  {
+   "candidateId": "lit40-medium-06-059",
+   "task": "rewrite-015",
+   "attempt": 1,
+   "spec": {
+    "candidateId": "lit40-medium-06-059",
+    "batchId": "lit40-medium-06",
+    "route": "ai_passage",
+    "skill": "central_ideas_details",
+    "difficulty": "medium",
+    "questionType": "narrator_attitude",
+    "genre": "personal_essay",
+    "seed": {
+     "index": 58,
+     "genre": "personal_essay",
+     "pov": "first",
+     "styleEra": "late_20c",
+     "names": [
+      "Bronislaw",
+      "Bogdan"
+     ],
+     "nameCultures": [
+      "slavic_baltic",
+      "slavic_baltic"
+     ],
+     "locale": "Tbilisi",
+     "setting": "a salt flat",
+     "relationship": "a young apprentice and a master carpenter",
+     "conflict": "over an old photograph",
+     "openingStyle": "시간·날짜 표현으로 시작('By', 'On', 'After' 등)",
+     "topicSeed": "a salt flat in Tbilisi; a young apprentice and a master carpenter over an old photograph"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "After eleven months under Bogdan's roof, I, Bronislaw, could list his habits the way other boys listed saints: the pencil behind the left ear, the refusal to sand before noon, the low whistle when a board surprised him. That spring he drove us to a salt flat beyond Tbilisi to gather planks bleached by the wind, and while we ate he passed me a photograph of a wardrobe he had made as a young man. Its doors did not meet. I laughed before I could stop myself, and he laughed too, longer than I did. On the drive home I kept the photograph on my knee. I had thought his skill was something he had been handed, like the color of his eyes. In the workshop that week I found myself measuring every cut twice, and once, for no reason I could name, a third time. Bogdan noticed and said nothing, though he moved his own pencil to the right ear.",
+    "question": "Which choice best describes the narrator's attitude toward Bogdan?",
+    "options": [
+     "Admiring, and newly aware his skill was earned",
+     "Amused, and less impressed by his old work",
+     "Envious, and anxious to equal his reputation",
+     "Doubtful, and wary of trusting his judgment"
+    ],
+    "correct_letter": "A",
+    "explanation": "화자는 처음에 Bogdan의 습관을 성인 목록처럼 외울 만큼 그를 존경한다. 맞지 않는 옷장 사진을 본 뒤 화자는 그의 기술이 눈 색깔처럼 타고난 것이라 여겼던 생각을 돌아보고, 이후 치수를 두 번 세 번 재며 그를 본받으려 한다. 이 두 단서를 연결하면 A가 정답이다. B는 화자가 웃은 장면을 근거로 삼지만 존경이 줄었다는 근거는 없고, C와 D는 각각 명성에 대한 경쟁심과 불신을 지어낸 것이다."
+   },
+   "notes": [],
+   "tone": [
+    "reflective",
+    "affectionate"
+   ],
+   "devices": [
+    "anecdote",
+    "simile"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 1
+  },
+  {
+   "candidateId": "lit40-medium-06-061",
+   "task": "rewrite-015",
+   "attempt": 1,
+   "spec": {
+    "candidateId": "lit40-medium-06-061",
+    "batchId": "lit40-medium-06",
+    "route": "ai_passage",
+    "skill": "central_ideas_details",
+    "difficulty": "medium",
+    "questionType": "main_idea_or_purpose",
+    "genre": "short_story",
+    "seed": {
+     "index": 60,
+     "genre": "short_story",
+     "pov": "first",
+     "styleEra": "19c",
+     "names": [
+      "Mabel",
+      "Cyrus"
+     ],
+     "nameCultures": [
+      "english",
+      "english"
+     ],
+     "locale": "Manchester",
+     "setting": "a soccer field at dusk",
+     "relationship": "two brothers who run a failing shop",
+     "conflict": "about a translation that changes the meaning",
+     "openingStyle": "대화 한 줄로 시작",
+     "topicSeed": "a soccer field at dusk in Manchester; two brothers who run a failing shop about a translation that changes the meaning"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 90,
+     "max": 150
+    },
+    "recipeId": "central_ideas_details_lit_main_idea_or_purpose_medium"
+   },
+   "g": {
+    "passage": "\"Read me the part about the rent again, Cyrus.\" Mabel had walked her brother out to the soccer field behind their shop, where boys chased a ball through the Manchester dusk. Cyrus read the landlord's letter in Polish, which only he could follow, and said the man would wait until summer. Mabel nodded. Later, folding the page, she saw a date circled in ink, three weeks off, and the word their mother used to write on unpaid bills. All winter, she realized, Cyrus had answered every supplier and every caller himself and reported only easy news. She did not speak. On the field a boy in a red cap missed an open goal and lay down laughing in the wet grass.",
+    "question": "Which choice best states the main purpose of the text?",
+    "options": [
+     "To recount how two siblings walked to a soccer field and read a letter",
+     "To show how the shop's failure has caused the siblings to quarrel bitterly",
+     "To show Mabel recognizing that Cyrus has softened hard news for her",
+     "To suggest that people should always tell one another the plain truth"
+    ],
+    "correct_letter": "C",
+    "explanation": "Cyrus는 편지를 집주인이 여름까지 기다려 준다고 번역하지만, Mabel은 3주 뒤 날짜와 어머니가 미납 청구서에 쓰던 단어를 발견한다. 이어 겨울 내내 Cyrus가 모든 연락을 혼자 받고 쉬운 소식만 전했다는 사실을 깨닫는다. 두 단서를 합치면 지문의 목적은 C이다. A는 일화만 요약했고, B는 남매가 다투는 장면이 없어 목적이 다르며, D는 지나치게 일반적인 교훈이다."
+   },
+   "notes": [],
+   "tone": [
+    "quiet",
+    "melancholy"
+   ],
+   "devices": [
+    "irony",
+    "contrast"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 1,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-06-073",
+   "task": "rewrite-015",
+   "attempt": 1,
+   "spec": {
+    "candidateId": "lit40-medium-06-073",
+    "batchId": "lit40-medium-06",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "medium",
+    "questionType": "figurative_language",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 72,
+     "genre": "novel_excerpt",
+     "pov": "third_limited",
+     "styleEra": "late_20c",
+     "names": [
+      "Amelie",
+      "Matthias"
+     ],
+     "nameCultures": [
+      "french",
+      "german_austrian"
+     ],
+     "locale": "Marseille",
+     "setting": "a school music room",
+     "relationship": "a pair of lifelong friends who rarely speak",
+     "conflict": "after learning how someone really earned their reputation",
+     "openingStyle": "인물의 이름으로 시작",
+     "topicSeed": "a school music room in Marseille; a pair of lifelong friends who rarely speak after learning how someone really earned their reputation"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Amelie and Matthias had shared the music room in Marseille for nineteen years, and in that time their conversations had shrunk to nods across the piano lids. Everyone in the city called him the great teacher, the one whose pupils always won. In March, clearing a cabinet, Amelie found the scores those winning pupils had played. The fingerings in the margins were in her own hand, penciled during lunches she had long since stopped remembering, and clipped to them was a card from Matthias, never sent, thanking her. She sat a while on the piano bench. So his fame stood partly on her forgotten afternoons, she thought, and he had known all along. When he came in, she held out the card. He read it, folded it once, and put it in his breast pocket. A pigeon walked the length of the windowsill and back.",
+    "question": "As used in the text, the phrase “his fame stood partly on her forgotten afternoons” most nearly suggests that",
+    "options": [
+     "Matthias won his fame by teaching pupils during the afternoons Amelie was away",
+     "Amelie regretted the many afternoons she had spent clearing out the cabinet",
+     "Matthias's fame in the city was based on rumors that Amelie had forgotten",
+     "Matthias's success relied partly on small help Amelie had given and overlooked"
+    ],
+    "correct_letter": "D",
+    "explanation": "Amelie는 우승한 학생들의 악보 여백에 자기 손으로 쓴 운지법이 있고, 그것이 점심시간에 써 두고 잊어버린 것임을 발견한다. Matthias의 부치지 않은 감사 카드는 그가 이 도움을 알고 있었음을 보여 준다. 두 단서를 연결하면 그의 명성이 일부 Amelie가 잊은 도움 위에 서 있다는 뜻이므로 D가 정답이다. A는 오후라는 단어를 시간표로, B는 캐비닛 정리로, C는 명성을 소문으로 잘못 연결한 오답이다."
+   },
+   "notes": [],
+   "tone": [
+    "subdued",
+    "contemplative"
+   ],
+   "devices": [
+    "metaphor",
+    "understatement"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 1
+  },
+  {
+   "candidateId": "lit40-medium-06-075",
+   "task": "rewrite-015",
+   "attempt": 1,
+   "spec": {
+    "candidateId": "lit40-medium-06-075",
+    "batchId": "lit40-medium-06",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "medium",
+    "questionType": "figurative_language",
+    "genre": "personal_essay",
+    "seed": {
+     "index": 74,
+     "genre": "personal_essay",
+     "pov": "mixed_or_none",
+     "styleEra": "contemporary",
+     "names": [
+      "Vikram",
+      "Janelle"
+     ],
+     "nameCultures": [
+      "indian_subcontinent",
+      "caribbean"
+     ],
+     "locale": "Dhaka",
+     "setting": "a ship's galley",
+     "relationship": "a gardener and the house's new owner",
+     "conflict": "over silence kept to protect someone",
+     "openingStyle": "장소 이름으로 시작",
+     "topicSeed": "a ship's galley in Dhaka; a gardener and the house's new owner over silence kept to protect someone"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Dhaka's river docks are where I first knew Vikram, as the cook on a cargo ship who kept his galley so quiet you could hear the rice settle. Decades later he became the gardener for the house Janelle bought, and she asked him often about the family who had sold it in such a hurry. He talked instead about aphids and rain. I learned the truth from a neighbor: the old owner's son had borrowed from the wrong people, and the sale had saved him. Vikram knew this too. His silence was a lid pressed down on a simmering pot, and he kept his hand on it through every one of Janelle's questions. When she finally stopped asking, he planted a row of marigolds along the side gate, where the old man used to sit. On the ship, I remember, he had scrubbed the same dented pan every evening until it shone.",
+    "question": "As used in the text, the phrase “a lid pressed down on a simmering pot” most nearly suggests",
+    "options": [
+     "Vikram's struggle to hide his own anger at Janelle's prying questions",
+     "Vikram's steady effort to keep a painful family secret from spreading",
+     "Vikram's lasting habit of treating every task like work in a galley",
+     "Vikram's private wish to tell Janelle the truth about the old owner"
+    ],
+    "correct_letter": "B",
+    "explanation": "이웃을 통해 옛 주인의 아들이 위험한 빚을 졌다는 사실이 드러나고, Vikram도 이를 알고 있었다. 그는 Janelle의 질문마다 진딧물과 비 이야기로 화제를 돌리며 계속 침묵을 지키는데, 이는 끓는 냄비 뚜껑을 누르듯 비밀이 새어 나가지 않게 막는 행동이다. 따라서 B가 정답이다. A는 '끓는'을 분노로, C는 부엌 배경을 문자 그대로, D는 침묵을 털어놓고 싶은 욕구로 잘못 해석했다."
+   },
+   "notes": [],
+   "tone": [
+    "discreet",
+    "nostalgic"
+   ],
+   "devices": [
+    "metaphor",
+    "imagery"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 1
+  },
+  {
+   "candidateId": "lit40-medium-06-076",
+   "task": "rewrite-015",
+   "attempt": 1,
+   "spec": {
+    "candidateId": "lit40-medium-06-076",
+    "batchId": "lit40-medium-06",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "medium",
+    "questionType": "figurative_language",
+    "genre": "memoir",
+    "seed": {
+     "index": 75,
+     "genre": "memoir",
+     "pov": "mixed_or_none",
+     "styleEra": "19c",
+     "names": [
+      "Edith",
+      "Nikos"
+     ],
+     "nameCultures": [
+      "english",
+      "greek_balkan_turkish"
+     ],
+     "locale": "Busan",
+     "setting": "a dried-riverbed crossing",
+     "relationship": "an elder and a restless apprentice",
+     "conflict": "over how to mark an anniversary",
+     "openingStyle": "감각 묘사(소리·냄새·촉감)로 시작",
+     "topicSeed": "a dried-riverbed crossing in Busan; an elder and a restless apprentice over how to mark an anniversary"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Gravel and the dry rattle of reeds: that is what I remember of the riverbed outside Busan where Edith took me each autumn. The ferry had crossed there once, before the river wandered east, and her husband had gone down with it. On the tenth year I, Nikos, came armed with plans for candles, a hired singer, a stone with his name cut deep. Edith listened, then walked out onto the cracked mud and knelt where the channel had been. She traced its old curve with one finger, the banks still plain after all that time. The water leaves, but the shape stays, she said, and put a single pebble in her pocket. I folded my plans into smaller and smaller squares. Up on the road, a boy was selling roasted chestnuts from a cart with one squeaking wheel.",
+    "question": "As used in the text, the phrase “the water leaves, but the shape stays” most nearly suggests that",
+    "options": [
+     "the river may one day return to its old channel near the ferry crossing",
+     "Edith expects the river to carve a deeper channel in the coming years",
+     "the immediate rush of grief passes, but the loss leaves a lasting mark",
+     "a quiet ritual will be remembered longer than any carved stone marker"
+    ],
+    "correct_letter": "C",
+    "explanation": "Edith는 남편을 잃은 지 10년이 된 날 강이 흐르던 자리의 옛 물길을 손가락으로 따라 그리며 강둑이 여전히 뚜렷하다는 것을 보여 준다. 물은 떠났지만 형태가 남았다는 말은 이 장면과 연결되어, 슬픔의 격렬함은 지나가도 상실의 흔적은 남는다는 뜻이 된다. 따라서 C가 정답이다. A와 B는 강을 문자 그대로 해석했고, D는 Nikos의 계획과 비교하는 소재를 썼지만 구절의 의미가 아니다."
+   },
+   "notes": [],
+   "tone": [
+    "elegiac",
+    "quiet"
+   ],
+   "devices": [
+    "metaphor",
+    "imagery"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 1
+  },
+  {
+   "candidateId": "lit40-medium-06-082",
+   "task": "rewrite-015",
+   "attempt": 1,
+   "spec": {
+    "candidateId": "lit40-medium-06-082",
+    "batchId": "lit40-medium-06",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "medium",
+    "questionType": "tone_shift",
+    "genre": "short_story",
+    "seed": {
+     "index": 81,
+     "genre": "short_story",
+     "pov": "first",
+     "styleEra": "late_20c",
+     "names": [
+      "Ciara",
+      "Efua"
+     ],
+     "nameCultures": [
+      "irish_scottish",
+      "west_african"
+     ],
+     "locale": "Vermont",
+     "setting": "a flooded cellar",
+     "relationship": "a retired sailor and his neighbor",
+     "conflict": "over an unfinished project",
+     "openingStyle": "장소 이름으로 시작",
+     "topicSeed": "a flooded cellar in Vermont; a retired sailor and his neighbor over an unfinished project"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Vermont's spring melt had put three inches of water in Efua's cellar overnight, and Ciara came down the stairs in borrowed boots, complaining from the first step. \"Thirty years at sea and you build a boat in a basement,\" she said. \"Next you'll keep fish in the attic.\" Efua, who had once captained ore carriers, held up a lantern and let her talk. Ciara listed the damage cheerfully: the soaked boxes, the furnace, the drowned paint cans. Then she reached the hull on its sawhorses, twelve years in the making and still missing half its planks, and her voice dropped. The water had lifted it, barely, off its stands. Ciara stood still, then crouched and set her palm on its side the way one touches a sleeping horse. Upstairs, a kettle began to whistle and kept whistling.",
+    "question": "Which choice best describes the shift in tone that occurs in the passage?",
+    "options": [
+     "It moves from mild worry to sharp frustration as Ciara discovers the full extent of the flood.",
+     "It moves from lively curiosity to quiet sadness as the women accept the boat is ruined.",
+     "It moves from playful mockery to hushed awe as Ciara sees the half-built boat afloat.",
+     "It moves from tense silence to open relief as Efua finds the furnace has survived."
+    ],
+    "correct_letter": "C",
+    "explanation": "초반에 Ciara는 지하실에서 배를 만든다고 Efua를 놀리며 피해 목록조차 유쾌하게 늘어놓는다. 그러나 미완성 선체에 다가가자 목소리가 낮아지고, 물이 선체를 받침대에서 살짝 띄운 것을 보고 잠든 말을 만지듯 조심스레 손을 얹는다. 두 지점을 비교하면 C가 정답이다. A는 피해 목록을 근거로 하지만 분노가 없고, B는 배가 망가졌다는 근거가 없으며, D는 처음부터 침묵이 아니었다."
+   },
+   "notes": [],
+   "tone": [
+    "playful",
+    "reverent"
+   ],
+   "devices": [
+    "simile",
+    "contrast"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 1
+  },
+  {
+   "candidateId": "lit40-medium-06-083",
+   "task": "rewrite-015",
+   "attempt": 1,
+   "spec": {
+    "candidateId": "lit40-medium-06-083",
+    "batchId": "lit40-medium-06",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "medium",
+    "questionType": "tone_shift",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 82,
+     "genre": "novel_excerpt",
+     "pov": "third_limited",
+     "styleEra": "contemporary",
+     "names": [
+      "Sharda",
+      "Noa"
+     ],
+     "nameCultures": [
+      "indian_subcontinent",
+      "hebrew_jewish"
+     ],
+     "locale": "Mumbai",
+     "setting": "a language school classroom",
+     "relationship": "best friends after a move",
+     "conflict": "after a quiet act of generosity",
+     "openingStyle": "감각 묘사(소리·냄새·촉감)로 시작",
+     "topicSeed": "a language school classroom in Mumbai; best friends after a move after a quiet act of generosity"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Chalk dust, the stutter of a ceiling fan, and the warm smell of the photocopier filled the back row of the language school in Mumbai, where Sharda and Noa had sat since moving from Pune. They kept a running list of the teacher's favorite phrases in the margins of their worksheets and awarded points whenever he used one. In August Sharda caught a fever and missed nine days. When she returned, Noa was cheerful as ever, though she now borrowed paper from the girl in front and claimed her notebook was at home. On Friday Sharda opened her own bag and found the notebook there. Every lesson she had missed was copied inside in Noa's small slanted letters, the vocabulary underlined in green. Sharda closed it without reading further and sat holding it on her lap. Down the corridor, someone was dragging a desk across the floor.",
+    "question": "Which choice best describes a shift in tone in the passage?",
+    "options": [
+     "It moves from anxious unease to calm confidence as Sharda catches up on her lessons.",
+     "It moves from friendly rivalry to open resentment as Noa keeps her notebook hidden.",
+     "It moves from careful description to pointed mockery of the teacher's favorite phrases.",
+     "It moves from lighthearted fun to silent gratitude as Sharda realizes what Noa did."
+    ],
+    "correct_letter": "D",
+    "explanation": "지문 전반부는 두 친구가 선생님의 말버릇에 점수를 매기는 장난스러운 분위기다. 후반부에서 Sharda는 Noa가 공책이 집에 있다고 둘러대며 종이를 빌려 썼던 이유를 깨닫는데, 자신이 결석한 수업이 모두 그 공책에 옮겨 적혀 있었기 때문이다. 공책을 닫고 무릎에 올려 둔 채 말없이 있는 모습은 조용한 감사로 읽힌다. 따라서 D가 정답이며, A는 따라잡기, B는 숨긴 공책, C는 선생님 말버릇이라는 소재를 잘못 활용했다."
+   },
+   "notes": [],
+   "tone": [
+    "lighthearted",
+    "tender"
+   ],
+   "devices": [
+    "imagery",
+    "contrast"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 1
+  }
+ ],
+ "rejected": [
+  {
+   "candidateId": "lit40-medium-06-072",
+   "stage": "diversity",
+   "reasons": [
+    "name 'Mai' global 11>10"
+   ]
+  }
+ ],
+ "retryWords": [],
+ "extraIgnored": []
+}

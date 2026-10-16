@@ -1,0 +1,591 @@
+[
+ {
+  "id": "ee.polynomial_distribution.compose_kind",
+  "seeds": 5000,
+  "produced": 5000,
+  "genFail": 0,
+  "thrown": 0,
+  "verifyFail": 0,
+  "failSeeds": [],
+  "thrownSamples": [],
+  "variants": {
+   "abstract": 964,
+   "area_context": 4036
+  },
+  "independent": 75
+ },
+ {
+  "id": "ee.polynomial_distribution.inverse",
+  "seeds": 5000,
+  "produced": 5000,
+  "genFail": 0,
+  "thrown": 0,
+  "verifyFail": 0,
+  "failSeeds": [],
+  "thrownSamples": [],
+  "variants": {
+   "coefficient_inverse": 5000
+  },
+  "independent": 282
+ },
+ {
+  "id": "ee.polynomial_distribution.constraint_select",
+  "seeds": 5000,
+  "produced": 5000,
+  "genFail": 0,
+  "thrown": 0,
+  "verifyFail": 0,
+  "failSeeds": [],
+  "thrownSamples": [],
+  "variants": {
+   "abstract": 1048,
+   "rectangle_context": 3952
+  },
+  "independent": 52
+ },
+ {
+  "id": "ee.polynomial_distribution.repr_shift",
+  "seeds": 5000,
+  "produced": 5000,
+  "genFail": 0,
+  "thrown": 0,
+  "verifyFail": 0,
+  "failSeeds": [],
+  "thrownSamples": [],
+  "variants": {
+   "border_area": 5000
+  },
+  "independent": 187
+ },
+ {
+  "id": "ee.rational_equivalence.inverse",
+  "seeds": 5000,
+  "produced": 5000,
+  "genFail": 0,
+  "thrown": 0,
+  "verifyFail": 0,
+  "failSeeds": [],
+  "thrownSamples": [],
+  "variants": {
+   "product": 2501,
+   "difference": 2499
+  },
+  "independent": 81
+ },
+ {
+  "id": "ee.rational_equivalence.compose_kind",
+  "seeds": 5000,
+  "produced": 5000,
+  "genFail": 0,
+  "thrown": 0,
+  "verifyFail": 0,
+  "failSeeds": [],
+  "thrownSamples": [],
+  "variants": {
+   "reciprocal_of_difference": 1993,
+   "reciprocal_of_sum": 3007
+  },
+  "independent": 93
+ },
+ {
+  "id": "ee.rational_equivalence.param_condition",
+  "seeds": 5000,
+  "produced": 5000,
+  "genFail": 0,
+  "thrown": 0,
+  "verifyFail": 0,
+  "failSeeds": [],
+  "thrownSamples": [],
+  "variants": {
+   "ask_sum": 1645,
+   "ask_k": 1693,
+   "ask_s": 1662
+  },
+  "independent": 72
+ },
+ {
+  "id": "ee.rational_equivalence.constraint_select",
+  "seeds": 5000,
+  "produced": 5000,
+  "genFail": 0,
+  "thrown": 0,
+  "verifyFail": 0,
+  "failSeeds": [],
+  "thrownSamples": [],
+  "variants": {
+   "excluded_values_sum": 5000
+  },
+  "independent": 90
+ },
+ {
+  "id": "rr.proportion.chain2",
+  "seeds": 5000,
+  "produced": 5000,
+  "genFail": 0,
+  "thrown": 0,
+  "verifyFail": 0,
+  "failSeeds": [],
+  "thrownSamples": [],
+  "variants": {
+   "mixture": 4160,
+   "shares": 840
+  },
+  "independent": 112
+ },
+ {
+  "id": "rr.proportion.inverse",
+  "seeds": 5000,
+  "produced": 4963,
+  "genFail": 37,
+  "thrown": 0,
+  "verifyFail": 0,
+  "failSeeds": [],
+  "thrownSamples": [],
+  "variants": {
+   "remove": 2914,
+   "add": 2049
+  },
+  "independent": 133
+ },
+ {
+  "id": "rr.proportion.compare_scenarios",
+  "seeds": 5000,
+  "produced": 5000,
+  "genFail": 0,
+  "thrown": 0,
+  "verifyFail": 0,
+  "failSeeds": [],
+  "thrownSamples": [],
+  "variants": {
+   "head_start": 5000
+  },
+  "independent": 179
+ },
+ {
+  "id": "rr.proportion.unit_ratio",
+  "seeds": 5000,
+  "produced": 5000,
+  "genFail": 0,
+  "thrown": 0,
+  "verifyFail": 0,
+  "failSeeds": [],
+  "thrownSamples": [],
+  "variants": {
+   "area_scale_inverse": 5000
+  },
+  "independent": 82
+ },
+ {
+  "id": "rr.chained_conversion.compose_kind",
+  "seeds": 5000,
+  "produced": 4979,
+  "genFail": 21,
+  "thrown": 0,
+  "verifyFail": 0,
+  "failSeeds": [],
+  "thrownSamples": [],
+  "variants": {
+   "gallons_per_100_miles": 3850,
+   "miles_per_gallon": 1129
+  },
+  "independent": 216
+ },
+ {
+  "id": "rr.chained_conversion.unit_ratio",
+  "seeds": 5000,
+  "produced": 5000,
+  "genFail": 0,
+  "thrown": 0,
+  "verifyFail": 0,
+  "failSeeds": [],
+  "thrownSamples": [],
+  "variants": {
+   "volume_to_time": 5000
+  },
+  "independent": 49
+ },
+ {
+  "id": "rr.chained_conversion.compare_scenarios",
+  "seeds": 5000,
+  "produced": 5000,
+  "genFail": 0,
+  "thrown": 0,
+  "verifyFail": 0,
+  "failSeeds": [],
+  "thrownSamples": [],
+  "variants": {
+   "unit_price_gap": 5000
+  },
+  "independent": 81
+ },
+ {
+  "id": "rr.chained_conversion.chain2",
+  "seeds": 5000,
+  "produced": 4950,
+  "genFail": 50,
+  "thrown": 0,
+  "verifyFail": 0,
+  "failSeeds": [],
+  "thrownSamples": [],
+  "variants": {
+   "two_legs": 4950
+  },
+  "independent": 81
+ },
+ {
+  "id": "le.solve.param_condition",
+  "seeds": 5000,
+  "produced": 5000,
+  "genFail": 0,
+  "thrown": 0,
+  "verifyFail": 0,
+  "failSeeds": [],
+  "thrownSamples": [],
+  "variants": {
+   "infinitely_many": 3035,
+   "no_solution": 1965
+  },
+  "independent": 400
+ },
+ {
+  "id": "le.solve.constraint_select",
+  "seeds": 5000,
+  "produced": 5000,
+  "genFail": 0,
+  "thrown": 0,
+  "verifyFail": 0,
+  "failSeeds": [],
+  "thrownSamples": [],
+  "variants": {
+   "count_solutions": 2627,
+   "find_solution": 2373
+  },
+  "independent": 71
+ },
+ {
+  "id": "le.solve.chain2",
+  "seeds": 5000,
+  "produced": 5000,
+  "genFail": 0,
+  "thrown": 0,
+  "verifyFail": 0,
+  "failSeeds": [],
+  "thrownSamples": [],
+  "variants": {
+   "relation_the_opposite_of": 946,
+   "relation_4_less_than": 862,
+   "relation_3_more_than": 897,
+   "relation_1_more_than_twice": 802,
+   "relation_twice": 834,
+   "relation_three_times": 659
+  },
+  "independent": 400
+ },
+ {
+  "id": "le.solve.compose_kind",
+  "seeds": 5000,
+  "produced": 5000,
+  "genFail": 0,
+  "thrown": 0,
+  "verifyFail": 0,
+  "failSeeds": [],
+  "thrownSamples": [],
+  "variants": {
+   "perimeter_to_area": 5000
+  },
+  "independent": 62
+ },
+ {
+  "id": "le.word_problem_translate.chain2",
+  "seeds": 5000,
+  "produced": 5000,
+  "genFail": 0,
+  "thrown": 0,
+  "verifyFail": 0,
+  "failSeeds": [],
+  "thrownSamples": [],
+  "variants": {
+   "consecutive_even_odd": 2496,
+   "consecutive_integers": 2504
+  },
+  "independent": 52
+ },
+ {
+  "id": "le.word_problem_translate.unit_ratio",
+  "seeds": 5000,
+  "produced": 4999,
+  "genFail": 1,
+  "thrown": 0,
+  "verifyFail": 0,
+  "failSeeds": [],
+  "thrownSamples": [],
+  "variants": {
+   "work_then_alone": 4999
+  },
+  "independent": 236
+ },
+ {
+  "id": "le.word_problem_translate.constraint_select",
+  "seeds": 5000,
+  "produced": 5000,
+  "genFail": 0,
+  "thrown": 0,
+  "verifyFail": 0,
+  "failSeeds": [],
+  "thrownSamples": [],
+  "variants": {
+   "future_sum": 2759,
+   "past_multiple": 2241
+  },
+  "independent": 269
+ },
+ {
+  "id": "le.word_problem_translate.repr_shift",
+  "seeds": 5000,
+  "produced": 5000,
+  "genFail": 0,
+  "thrown": 0,
+  "verifyFail": 0,
+  "failSeeds": [],
+  "thrownSamples": [],
+  "variants": {
+   "three_item_types": 5000
+  },
+  "independent": 400
+ },
+ {
+  "id": "le.literal_rearrange.compose_kind",
+  "seeds": 5000,
+  "produced": 5000,
+  "genFail": 0,
+  "thrown": 0,
+  "verifyFail": 0,
+  "failSeeds": [],
+  "thrownSamples": [],
+  "variants": {
+   "factor_then_substitute": 5000
+  },
+  "independent": 93
+ },
+ {
+  "id": "le.literal_rearrange.inverse",
+  "seeds": 5000,
+  "produced": 5000,
+  "genFail": 0,
+  "thrown": 0,
+  "verifyFail": 0,
+  "failSeeds": [],
+  "thrownSamples": [],
+  "variants": {
+   "thin_lens": 1207,
+   "parallel_resistors": 1282,
+   "combined_time": 2511
+  },
+  "independent": 125
+ },
+ {
+  "id": "le.literal_rearrange.chain2",
+  "seeds": 5000,
+  "produced": 5000,
+  "genFail": 0,
+  "thrown": 0,
+  "verifyFail": 0,
+  "failSeeds": [],
+  "thrownSamples": [],
+  "variants": {
+   "warmer": 2450,
+   "cooler": 2550
+  },
+  "independent": 136
+ },
+ {
+  "id": "le.literal_rearrange.param_condition",
+  "seeds": 5000,
+  "produced": 5000,
+  "genFail": 0,
+  "thrown": 0,
+  "verifyFail": 0,
+  "failSeeds": [],
+  "thrownSamples": [],
+  "variants": {
+   "collect_and_divide": 5000
+  },
+  "independent": 60
+ },
+ {
+  "id": "probability.simple.compose_kind",
+  "seeds": 5000,
+  "produced": 5000,
+  "genFail": 0,
+  "thrown": 0,
+  "verifyFail": 0,
+  "failSeeds": [],
+  "thrownSamples": [],
+  "variants": {
+   "dice_prime": 848,
+   "dice_prodeven": 816,
+   "dice_mult3": 796,
+   "dice_diff": 841,
+   "dice_sumlt": 879,
+   "dice_factor": 820
+  },
+  "independent": 113
+ },
+ {
+  "id": "probability.simple.inverse",
+  "seeds": 5000,
+  "produced": 5000,
+  "genFail": 0,
+  "thrown": 0,
+  "verifyFail": 0,
+  "failSeeds": [],
+  "thrownSamples": [],
+  "variants": {
+   "exactly_one_inverse": 5000
+  },
+  "independent": 54
+ },
+ {
+  "id": "probability.simple.compare_scenarios",
+  "seeds": 5000,
+  "produced": 5000,
+  "genFail": 0,
+  "thrown": 0,
+  "verifyFail": 0,
+  "failSeeds": [],
+  "thrownSamples": [],
+  "variants": {
+   "add_to_reach_probability": 5000
+  },
+  "independent": 108
+ },
+ {
+  "id": "probability.simple.repr_shift",
+  "seeds": 5000,
+  "produced": 4998,
+  "genFail": 2,
+  "thrown": 0,
+  "verifyFail": 0,
+  "failSeeds": [],
+  "thrownSamples": [],
+  "variants": {
+   "angles_to_probability": 4998
+  },
+  "independent": 107
+ },
+ {
+  "id": "probability.conditional.repr_shift",
+  "seeds": 5000,
+  "produced": 5000,
+  "genFail": 0,
+  "thrown": 0,
+  "verifyFail": 0,
+  "failSeeds": [],
+  "thrownSamples": [],
+  "variants": {
+   "rebuild_two_way_table": 5000
+  },
+  "independent": 124
+ },
+ {
+  "id": "probability.conditional.chain2",
+  "seeds": 5000,
+  "produced": 5000,
+  "genFail": 0,
+  "thrown": 0,
+  "verifyFail": 0,
+  "failSeeds": [],
+  "thrownSamples": [],
+  "variants": {
+   "reverse_conditional_defects": 5000
+  },
+  "independent": 131
+ },
+ {
+  "id": "probability.conditional.inverse",
+  "seeds": 5000,
+  "produced": 5000,
+  "genFail": 0,
+  "thrown": 0,
+  "verifyFail": 0,
+  "failSeeds": [],
+  "thrownSamples": [],
+  "variants": {
+   "reverse_definition_complement": 5000
+  },
+  "independent": 55
+ },
+ {
+  "id": "probability.conditional.compose_kind",
+  "seeds": 5000,
+  "produced": 5000,
+  "genFail": 0,
+  "thrown": 0,
+  "verifyFail": 0,
+  "failSeeds": [],
+  "thrownSamples": [],
+  "variants": {
+   "dice_given_sum_same": 1605,
+   "dice_given_sum_anyeven": 1948,
+   "dice_given_sum_firstbig": 1447
+  },
+  "independent": 82
+ },
+ {
+  "id": "probability.sequential_without_replacement.compare_scenarios",
+  "seeds": 5000,
+  "produced": 5000,
+  "genFail": 0,
+  "thrown": 0,
+  "verifyFail": 0,
+  "failSeeds": [],
+  "thrownSamples": [],
+  "variants": {
+   "with_vs_without_replacement": 5000
+  },
+  "independent": 48
+ },
+ {
+  "id": "probability.sequential_without_replacement.inverse",
+  "seeds": 5000,
+  "produced": 5000,
+  "genFail": 0,
+  "thrown": 0,
+  "verifyFail": 0,
+  "failSeeds": [],
+  "thrownSamples": [],
+  "variants": {
+   "unknown_count_from_probability": 5000
+  },
+  "independent": 96
+ },
+ {
+  "id": "probability.sequential_without_replacement.constraint_select",
+  "seeds": 5000,
+  "produced": 5000,
+  "genFail": 0,
+  "thrown": 0,
+  "verifyFail": 0,
+  "failSeeds": [],
+  "thrownSamples": [],
+  "variants": {
+   "at_least_one_red": 2512,
+   "one_of_each_color": 2488
+  },
+  "independent": 56
+ },
+ {
+  "id": "probability.sequential_without_replacement.chain2",
+  "seeds": 5000,
+  "produced": 5000,
+  "genFail": 0,
+  "thrown": 0,
+  "verifyFail": 0,
+  "failSeeds": [],
+  "thrownSamples": [],
+  "variants": {
+   "transfer_then_draw": 5000
+  },
+  "independent": 61
+ }
+]

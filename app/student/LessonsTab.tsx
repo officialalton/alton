@@ -7,16 +7,16 @@ import type { LessonItem } from "./lessons-data";
 import type { CurriculumData } from "./curriculum-data";
 import type { Memo } from "./memo-data";
 import type { ReviewData, StudentFeedback } from "./review-data";
-import type { BookableEnrollment } from "./booking-data";
 import CurriculumView from "./CurriculumView";
 import ReviewPanel from "./ReviewPanel";
-import CalendlyWidget from "@/app/CalendlyWidget";
+import UnderlineSubTabs from "@/app/components/UnderlineSubTabs";
+import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
+import { fmtIntlEn } from "@/lib/format-datetime-en";
 
 type SubView =
   | { type: "list" }
   | { type: "curriculum"; enrollmentId: string }
-  | { type: "review"; sessionId: string }
-  | { type: "booking"; enrollment: BookableEnrollment };
+  | { type: "review"; sessionId: string };
 
 export default function LessonsTab({
   upcoming,
@@ -25,8 +25,14 @@ export default function LessonsTab({
   memosByEnrollment,
   reviews,
   myFeedback,
-  bookableEnrollments = [],
   readOnly = false,
+  // "수업" 탭 정리(A안) — 레슨(레거시 legacy_sessions 기반, 커리큘럼·리뷰 연동)과
+  // 예약(v3 sessions/reservations, Meet 연동)을 하나의 "수업" 탭(ClassesTab)으로
+  // 합치면서, 이 컴포넌트는 그 안의 "레거시 기록·리뷰" 섹션으로 흡수됐다.
+  // forcedSubtab이 주어지면 자체 예정/지난 서브탭 바를 감추고 그 값만 보여준다
+  // (바깥 ClassesTab의 예정/지난 서브탭과 동기화하기 위함).
+  forcedSubtab,
+  hideHeader = false,
 }: {
   upcoming: LessonItem[];
   past: LessonItem[];
@@ -34,35 +40,14 @@ export default function LessonsTab({
   memosByEnrollment: Record<string, Memo[]>;
   reviews: Record<string, ReviewData>;
   myFeedback: Record<string, StudentFeedback>;
-  bookableEnrollments?: BookableEnrollment[];
   readOnly?: boolean;
+  forcedSubtab?: "upcoming" | "past";
+  hideHeader?: boolean;
 }) {
-  const [subtab, setSubtab] = useState<"upcoming" | "past">("upcoming");
+  const [internalSubtab, setInternalSubtab] = useState<"upcoming" | "past">("upcoming");
+  const subtab = forcedSubtab ?? internalSubtab;
+  const setSubtab = setInternalSubtab;
   const [subView, setSubView] = useState<SubView>({ type: "list" });
-
-  if (subView.type === "booking") {
-    const url = `${subView.enrollment.calendlySchedulingUrl}${
-      subView.enrollment.calendlySchedulingUrl.includes("?") ? "&" : "?"
-    }utm_content=${subView.enrollment.enrollmentId}`;
-    return (
-      <div className="max-w-[640px] px-8 py-8">
-        <button
-          onClick={() => setSubView({ type: "list" })}
-          className="text-[13px] text-grey-500 font-semibold mb-4"
-        >
-          ← 뒤로
-        </button>
-        <h1 className="text-[20px] font-extrabold text-ink mb-1.5">
-          {subView.enrollment.teacherName}과(와) 다음 회차 예약
-        </h1>
-        <p className="text-[13px] text-grey-500 mb-5">
-          {subView.enrollment.subjectName} · {subView.enrollment.currentSession}/
-          {subView.enrollment.totalSessions}회차
-        </p>
-        <CalendlyWidget url={url} />
-      </div>
-    );
-  }
 
   if (subView.type === "curriculum") {
     const data = curricula.find((c) => c.enrollmentId === subView.enrollmentId);
@@ -91,51 +76,18 @@ export default function LessonsTab({
   }
 
   return (
-    <div className="max-w-[640px] px-8 py-8">
-      <h1 className="text-[20px] font-extrabold text-ink mb-5">레슨</h1>
-
-      {bookableEnrollments.length > 0 && (
-        <div className="mb-6 flex flex-col gap-2.5">
-          {bookableEnrollments.map((e) => (
-            <div
-              key={e.enrollmentId}
-              className="flex items-center justify-between border-[1.5px] border-grey-200 rounded-xl px-5 py-3.5"
-            >
-              <div>
-                <div className="text-[13px] font-bold text-ink">
-                  {e.teacherName} · {e.subjectName}
-                </div>
-                <div className="text-[12px] text-grey-500 mt-0.5">
-                  {e.currentSession}/{e.totalSessions}회차
-                </div>
-              </div>
-              <button
-                onClick={() => setSubView({ type: "booking", enrollment: e })}
-                className="text-[12px] font-bold px-3.5 py-2 rounded-lg bg-ink text-white shrink-0"
-              >
-                다음 회차 예약하기
-              </button>
-            </div>
-          ))}
-        </div>
+    <div className={hideHeader ? "" : "max-w-[640px] px-8 py-8"}>
+      {!forcedSubtab && (
+        <UnderlineSubTabs
+          className="mb-5"
+          items={[
+            { id: "upcoming", label: "Upcoming" },
+            { id: "past", label: "Past" },
+          ]}
+          activeId={subtab}
+          onSelect={setSubtab}
+        />
       )}
-
-      <div className="flex gap-4 mb-5 border-b border-grey-200">
-        {(["upcoming", "past"] as const).map((id) => (
-          <button
-            key={id}
-            onClick={() => setSubtab(id)}
-            className={
-              "text-[13.5px] font-semibold pb-2.5 -mb-px border-b-2 " +
-              (subtab === id
-                ? "text-ink border-ink"
-                : "text-grey-500 border-transparent")
-            }
-          >
-            {id === "upcoming" ? "예정된 수업" : "지난 수업"}
-          </button>
-        ))}
-      </div>
 
       {subtab === "upcoming" ? (
         <UpcomingList
@@ -165,12 +117,13 @@ function UpcomingList({
   lessons: LessonItem[];
   onOpenCurriculum: (enrollmentId: string) => void;
 }) {
+  const tz = useViewerTimezone();
   const router = useRouter();
 
   if (lessons.length === 0) {
     return (
       <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">
-        예정된 수업이 없습니다.
+        No upcoming lessons.
       </div>
     );
   }
@@ -191,14 +144,15 @@ function UpcomingList({
             className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-3"
           >
             <div className="text-[12px] text-grey-500 mb-1.5">
-              {formatKoreanDateTime(lesson.scheduledAt)}
+              {formatKoreanDateTime(lesson.scheduledAt, tz)}
             </div>
             <div className="flex items-center gap-2 flex-wrap mb-1.5">
               <button
                 onClick={() => onOpenCurriculum(lesson.enrollmentId)}
-                className="text-[13px] font-bold text-ink"
+                className="text-[13px] font-bold text-ink hover:underline text-left"
               >
-                {lesson.subjectName} · {lesson.sessionNumber}회차
+                {lesson.subjectName}
+                {lesson.sessionNumber != null ? ` · Session ${lesson.sessionNumber}` : ""}
                 {lesson.unitTitle ? ` · ${lesson.unitTitle}` : ""}
               </button>
             </div>
@@ -209,7 +163,7 @@ function UpcomingList({
               onClick={() => router.push(`/session/${lesson.sessionId}`)}
               className="text-[12px] font-bold px-4 py-2 rounded-lg bg-ink text-white"
             >
-              {state === "live" ? "수업 입장" : "수업 준비"}
+              {state === "live" ? "Join lesson" : "Prepare"}
             </button>
           </div>
         );
@@ -229,12 +183,13 @@ function PastList({
   onOpenCurriculum: (enrollmentId: string) => void;
   onReview: (sessionId: string) => void;
 }) {
+  const tz = useViewerTimezone();
   const router = useRouter();
 
   if (lessons.length === 0) {
     return (
       <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">
-        지난 수업이 없습니다.
+        No past lessons.
       </div>
     );
   }
@@ -247,14 +202,15 @@ function PastList({
           className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-3"
         >
           <div className="text-[12px] text-grey-500 mb-1.5">
-            {formatKoreanDateTime(lesson.scheduledAt)}
+            {formatKoreanDateTime(lesson.scheduledAt, tz)}
           </div>
           <div className="flex items-center gap-2 flex-wrap mb-1.5">
             <button
               onClick={() => onOpenCurriculum(lesson.enrollmentId)}
-              className="text-[13px] font-bold text-ink"
+              className="text-[13px] font-bold text-ink hover:underline text-left"
             >
-              {lesson.subjectName} · {lesson.sessionNumber}회차
+              {lesson.subjectName}
+              {lesson.sessionNumber != null ? ` · Session ${lesson.sessionNumber}` : ""}
               {lesson.unitTitle ? ` · ${lesson.unitTitle}` : ""}
             </button>
           </div>
@@ -266,14 +222,14 @@ function PastList({
               onClick={() => router.push(`/session/${lesson.sessionId}`)}
               className="text-[12px] font-semibold text-blue"
             >
-              수업 기록
+              Lesson record
             </button>
             <button
               onClick={() => onReview(lesson.sessionId)}
               className="text-[12px] font-semibold text-blue"
             >
-              리뷰 보기
-              {reviews[lesson.sessionId] ? "" : " (미작성)"}
+              View review
+              {reviews[lesson.sessionId] ? "" : " (not yet written)"}
             </button>
           </div>
         </div>
@@ -282,13 +238,13 @@ function PastList({
   );
 }
 
-function formatKoreanDateTime(iso: string | null) {
+function formatKoreanDateTime(iso: string | null, tz: string) {
   if (!iso) return "";
-  return new Intl.DateTimeFormat("ko-KR", {
-    month: "long",
+  return fmtIntlEn(new Date(iso), {
+    month: "short",
     day: "numeric",
     hour: "numeric",
     minute: "2-digit",
     hour12: true,
-  }).format(new Date(iso));
+  }, tz);
 }

@@ -1,0 +1,36 @@
+{
+ "run": "v4-ab",
+ "subject": "ap_calculus_ab",
+ "generatedAt": "2026-10-09T01:24:32.220Z",
+ "totalCostUsd": 1,
+ "newSpendSinceBaseline": 1.36,
+ "cap": 3,
+ "calls": 67,
+ "candidates": 17,
+ "mcCandidates": 8,
+ "frqCandidates": 9,
+ "passedAll": 11,
+ "adopted": 5,
+ "mcAdopted": 2,
+ "frqAdopted": 3,
+ "reserve": 6,
+ "yield": 0.294,
+ "costPerAdopted": 0.2,
+ "callsPerAdopted": 13.4,
+ "duplicateRejected": 4,
+ "spotChecked": 0,
+ "wording": {
+  "llm": 4,
+  "template": 13
+ },
+ "rejectionReasons": {
+  "criterion_failed_key_scoring": 2,
+  "criterion_failed_stimulus_expression": 2,
+  "criterion_failed_exam_suitability": 2,
+  "reference_pattern_mismatch": 2,
+  "duplicate_gate_near_duplicate": 4,
+  "criterion_failed_scope_skill": 1,
+  "instant_reject_out_of_scope_knowledge": 1
+ },
+ "unfilledCells": []
+}

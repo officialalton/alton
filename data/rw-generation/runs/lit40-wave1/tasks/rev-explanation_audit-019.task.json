@@ -1,0 +1,332 @@
+{
+ "schema": "rw-session-task/v1",
+ "kind": "review",
+ "role": "explanation_audit",
+ "runId": "lit40-wave1",
+ "taskId": "rev-explanation_audit-019",
+ "chunkId": "rev-explanation_audit-019",
+ "suggestedModel": "sonnet",
+ "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-explanation_audit-019.result.json",
+ "outputSchema": {
+  "chunkId": "청크 ID",
+  "model": "sonnet",
+  "items": [
+   {
+    "candidateId": "id",
+    "answer_correct": "표시된 정답이 정말 정답이면 true",
+    "explanation_consistent": "해설이 정답·오답 판단과 일치하고 글자 참조가 맞으면 true",
+    "explanation_factual": "해설에 사실 오류가 없으면 true",
+    "issues": "한 줄 메모"
+   }
+  ]
+ },
+ "items": [
+  {
+   "candidateId": "lit40-medium-03-055",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "medium",
+   "passage": "We were twelve in a cabin outside Dhaka\nthe winter snow came, absurd and soft,\nsealing the road the festival van would use.\nArjun had promised word by evening:\nwhether the orchestra would play in the capital\nor fold its music stands for good.\nMeera, the youngest, held her violin unopened\nin its case across her knees.\nNo one rehearsed. No one ate the rice.\nBy dusk the silence tuned itself to a single string,\nand every face leaned toward the radio\nthe way a bow leans toward a note.\nArjun paced from the stove to the window,\nhis baton tucked behind one ear,\nforgetting it was there.\nMeera unlatched the case at last,\nnot to play, only to see the wood,\nwhile snow kept falling past the glass.",
+   "question": "As used in the text, the phrase “the silence tuned itself to a single string” most nearly suggests that",
+   "options": [
+    "the group's attention narrowed to one shared, anxious focus.",
+    "the musicians began to rehearse a single piece together quietly.",
+    "the snowstorm outside had muffled every sound except one.",
+    "Meera's violin had gone out of tune in the cold cabin."
+   ],
+   "correct_letter": "A",
+   "explanation": "지문은 소식을 기다리며 아무도 연습하거나 먹지 않는 긴장된 장면을 그리고, 바로 뒤에 모든 얼굴이 활이 음을 향하듯 라디오 쪽으로 기울었다고 서술한다. 따라서 '침묵이 한 줄에 맞춰 조율되었다'는 표현은 모두의 신경이 하나의 불안한 초점으로 좁혀졌다는 뜻이므로 A가 정답이다. B는 '아무도 연습하지 않았다'는 서술과 어긋나고, C는 눈을 문자 그대로의 소리 차단으로 읽었으며, D는 비유를 악기의 실제 조율로 오해했다."
+  },
+  {
+   "candidateId": "lit40-medium-03-056",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "medium",
+   "passage": "Katerina drove the number 12 bus past the harbor in Thessaloniki every morning, and every morning Eda boarded at the stop beside the shoe repair stall. One spring she stepped on carrying a pair of men's brown oxfords, the heels worn to a slant. Her husband had died in January. She had brought the shoes to the cobbler three times, she told Katerina, asking him to replace the soles, then the laces, then the stitching along the toe. Each time he did the work without complaint, and each time she took them home and set them by the door, where no one would wear them. Mending them, Eda said, was like stitching a new sentence onto a closed book. Katerina said nothing and waited at the green light a moment longer than she needed to, so Eda could sit down. Then she pulled away from the curb into the traffic along the sea.",
+   "question": "As used in the text, the phrase “stitching a new sentence onto a closed book” most nearly suggests",
+   "options": [
+    "a craft that requires more skill than the cobbler possesses.",
+    "an effort to extend something that has already come to an end.",
+    "a way of recording the husband's life story for others to read.",
+    "a task that Eda finds tedious and wishes she could abandon."
+   ],
+   "correct_letter": "B",
+   "explanation": "에다는 남편이 죽은 뒤 아무도 신지 않을 구두를 세 번이나 고쳐 문 옆에 둔다. 이 행동을 '닫힌 책에 새 문장을 꿰매 붙이는 것'에 빗댄 것은 이미 끝난 삶에 무언가를 덧붙이려는 시도라는 뜻이므로 B가 정답이다. A는 구두장이가 불평 없이 일을 해냈다는 서술과 맞지 않고, C는 '책'을 문자 그대로 기록으로 읽었다. D는 그녀가 스스로 반복해 수선을 맡긴다는 점과 어긋난다."
+  },
+  {
+   "candidateId": "lit40-medium-03-057",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "medium",
+   "passage": "Rumors travel faster than ferries. I learned that the autumn I clerked for Ingeborg, a retired judge who still walked the Bergen promenade each morning in a black wool coat. Someone at the fish market had whispered that her late brother once took bribes, a story she had disproved in court decades earlier and never bothered to repeat. Most people shrugged it off. But it reached her niece, who had just been appointed to the bench and who had always believed her uncle was a man without stain. By the next morning, the rumor had found the one door left unlocked, and the niece stopped answering Ingeborg's calls. I, Ingrid, carried the old court file to the niece's office myself, wrapped in brown paper. Ingeborg did not ask whether I had delivered it. She only stood at the railing, watching the gulls ride the wind above the harbor.",
+   "question": "As used in the text, the phrase “the rumor had found the one door left unlocked” most nearly suggests that the rumor",
+   "options": [
+    "had been spread deliberately by someone inside Ingeborg's household.",
+    "was finally proven false once it reached the courts in Bergen.",
+    "reached the one person most open to being hurt by it.",
+    "caused Ingeborg to lock herself away from her neighbors."
+   ],
+   "correct_letter": "C",
+   "explanation": "대부분의 사람은 소문을 대수롭지 않게 넘겼지만, 삼촌을 흠 없는 사람이라 믿어 온 조카에게 닿자 그녀는 잉에보르의 전화를 받지 않게 된다. 이 맥락에서 '잠기지 않은 유일한 문을 찾았다'는 표현은 소문이 가장 상처받기 쉬운 사람에게 닿았다는 뜻이므로 C가 정답이다. A는 '문'을 집안 내부로 문자 그대로 읽었고, B는 지문에 없는 결과이며, D는 문을 잠그는 주체를 잉에보르로 바꾼 오답이다."
+  },
+  {
+   "candidateId": "lit40-medium-03-058",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "medium",
+   "passage": "Mumbai was loud that monsoon, but nothing was louder than the quiet at the noodle stall on the corner of Khetwadi Lane. After the mother left for her sister's village and did not return, the old noodle man and his stubborn son kept the stall open as if she had only stepped out for onions. Each night the son set out three bowls, and each night the father filled only two, and neither said a word. Sharda, who sold tea at the next stall, told her niece Priya that the pair were stirring the same pot of silence, and that it would boil over one day. Priya laughed, for the men seemed calm enough. But the tale goes that on the first dry evening of the year, the son set out two bowls, and the father, seeing it, set down his ladle and wept. Steam rose from the pot and drifted toward the lamps.",
+   "question": "As used in the text, the phrase “stirring the same pot of silence” most nearly suggests that the father and son",
+   "options": [
+    "were too busy preparing food to speak during the crowded evenings.",
+    "had quarreled bitterly and refused to work at the same stall again.",
+    "were secretly planning together to bring the mother back home.",
+    "were jointly keeping up an unspoken avoidance of their loss."
+   ],
+   "correct_letter": "D",
+   "explanation": "아들은 매일 그릇 세 개를 놓고 아버지는 두 개만 채우면서도 둘 다 아무 말을 하지 않으며, 어머니가 잠깐 나간 것처럼 가게를 계속 연다. 샤르다가 이를 '같은 침묵의 냄비를 젓는다'고 표현하고 언젠가 끓어 넘칠 것이라 한 것은 두 사람이 상실을 말하지 않고 함께 피하고 있다는 뜻이므로 D가 정답이다. A는 비유를 실제 요리로 읽었고, B는 함께 가게를 지킨다는 서술과 어긋나며, C는 지문에 근거가 없다."
+  },
+  {
+   "candidateId": "lit40-medium-03-065",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "medium",
+   "passage": "Seville's heat had already settled over the terrace when Joaquin carried out the last box. Lucius, his mother's name for the half-built birdhouse they had started when he was nine, still sat on the ledge, its roof missing. She teased him about it while he loaded the car: a future engineer who could not finish four walls and a perch. He laughed, and she laughed louder, listing every project he had abandoned, the kite, the radio, the tiled step. Then she picked up the birdhouse and turned it over in her hands. Underneath, in pencil, were the measurements for the roof, written in his childish script and never used. She stopped talking. She set the birdhouse back on the ledge very carefully, as if it might break, and told him she would leave it exactly as it was until he came home to finish it.",
+   "question": "Which choice best describes the shift in tone that occurs in the text?",
+   "options": [
+    "From anxious worry about the son's departure to calm acceptance of his choices",
+    "From playful teasing about unfinished work to quiet tenderness toward the son",
+    "From cheerful pride in the son's skill to open regret over a lost childhood",
+    "From mild impatience with the packing to sincere gratitude for the son's help"
+   ],
+   "correct_letter": "B",
+   "explanation": "앞부분에서 어머니는 아들이 끝내지 못한 새집과 여러 프로젝트를 나열하며 웃으며 놀린다. 새집 밑에서 아들이 어릴 때 적어 둔 지붕 치수를 발견한 뒤 그녀는 말을 멈추고 새집을 조심스럽게 내려놓는다. 따라서 장난스러운 놀림에서 조용한 애정으로 바뀐다는 B가 정답이다. A는 초반의 웃음과 맞지 않고, C는 그녀가 아들의 기술을 자랑하지 않고 오히려 놀렸다는 점에서 틀리며, D는 짐 싸기에 대한 짜증이 나타나지 않는다."
+  },
+  {
+   "candidateId": "lit40-medium-03-066",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "medium",
+   "passage": "By the third evening of the festival, the weaving cooperative in Lisbon had run out of chairs. Larissa, who had not set foot in a church in ten years, watched Father Bruno try to arrange one long table for two groups that had never eaten together: the women who kept the old saint's-day customs and the newer members who kept none. He fussed over place cards, shifting names, and Larissa found it absurd, almost comic, that a priest should worry so much about seating. She whispered as much to the woman beside her. Then she noticed what he was doing. He had placed each older weaver beside a newer one whose pattern she had once criticized, and on every plate he had folded a scrap of the other's cloth. Larissa stopped smiling. She saw that the table had been woven as carefully as any shawl on the loom.",
+   "question": "Which choice best describes the shift in tone that occurs in the text?",
+   "options": [
+    "From quiet reverence for the priest to growing doubt about his methods",
+    "From open hostility toward the festival to reluctant pleasure in its food",
+    "From amused skepticism about the priest's fussing to sober admiration",
+    "From weary boredom with the weavers to sudden alarm at their conflict"
+   ],
+   "correct_letter": "C",
+   "explanation": "처음에 Larissa는 신부가 좌석 배치에 신경 쓰는 모습을 우스꽝스럽다고 여기며 옆 사람에게 속삭인다. 그러나 신부가 서로 비판했던 직조공들을 짝지어 앉히고 상대의 천 조각을 접어 둔 것을 알아챈 뒤 그녀는 웃음을 멈춘다. 따라서 재미 섞인 회의에서 진지한 감탄으로 바뀐다는 C가 정답이다. A는 방향이 반대이고, B는 축제에 대한 적대감이나 음식에 대한 언급이 없으며, D는 그녀가 놀라거나 갈등을 걱정하는 장면이 없다."
+  },
+  {
+   "candidateId": "lit40-medium-03-067",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "medium",
+   "passage": "I pinned the sheets on Silas's line that spring,\nthe Cornish wind half wrestling them from me,\nand laughed to think how many years we'd spent\nat chess-club boards, two old men keeping score\nof every bishop lost, each petty win.\nHe'd beaten me at last the week before.\nI meant to tease him over it today.\nBut in his drawer, beneath the clothespin tin,\nI found a notebook of my games, not his,\neach losing move of mine marked out in ink\nand next to it, in his small careful hand,\nthe better move, and then: \"Show Mabel this.\"\nHe never had. The wind went still. I stood\nwith one white sheet held open in my arms\nand folded it as if it were a flag.",
+   "question": "Which choice best describes the shift in tone that occurs in the text?",
+   "options": [
+    "From bitter rivalry with Silas to grudging respect for his skill at chess",
+    "From solemn grief over Silas to cheerful memories of their old matches",
+    "From restless frustration with the wind to calm satisfaction in the chore",
+    "From lighthearted rivalry over chess to hushed, reverent recognition"
+   ],
+   "correct_letter": "D",
+   "explanation": "앞부분에서 화자는 바람과 씨름하며 웃고, 체스 경쟁을 '사소한 승리'라 부르며 Silas를 놀릴 생각을 한다. 서랍에서 자신의 패배 수마다 더 나은 수를 적어 둔 공책을 발견한 뒤 바람이 멎고, 화자는 시트를 깃발처럼 접는다. 따라서 가벼운 경쟁심에서 조용하고 경건한 깨달음으로 바뀐다는 D가 정답이다. A는 초반 어조가 쓰라린 적대가 아니라 장난스럽고, B는 방향이 반대이며, C는 체스와 공책이라는 핵심 전환을 놓친다."
+  },
+  {
+   "candidateId": "lit40-medium-03-068",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "medium",
+   "passage": "ZEYNEP: (holding up a pocket watch) Your grandfather wound this every morning for forty years. And now you want to say goodbye to him with a speech?\nAPONI: A short one. Something proper. People expect it.\nZEYNEP: People expect sandwiches, too. (She snaps the watch open, grinning.) He'd have fallen asleep by your second sentence.\nAPONI: (laughing despite himself) He fell asleep at my graduation.\nZEYNEP: Twice. (Her grin fades. She listens to the watch, which has stopped.) He brought it here the week before he died. Asked me to fix it. I told him there was no hurry.\nAPONI: There wasn't.\nZEYNEP: (quietly, setting the watch on the counter between them) There was. I just didn't hear it. Wind it, child. Not for the speech. Let it run on the plateau a little longer than he did.",
+   "question": "Which choice best describes the shift in tone that occurs in the text?",
+   "options": [
+    "From teasing banter about the speech to subdued, remorseful sincerity",
+    "From formal politeness between strangers to relaxed, joking familiarity",
+    "From sharp anger at the grandson to calm forgiveness of his mistakes",
+    "From grieving silence over the death to lively plans for the funeral"
+   ],
+   "correct_letter": "A",
+   "explanation": "처음에 Zeynep은 연설이 지루할 것이라며 웃으며 농담하고, Aponi도 졸업식 이야기로 함께 웃는다. 그러나 멈춘 시계를 듣는 순간 미소가 사라지고, 수리를 미룬 일을 '나는 듣지 못했다'며 조용히 후회한다. 따라서 장난스러운 대화에서 가라앉은 진지한 후회로 바뀐다는 A가 정답이다. B는 두 사람이 처음부터 친밀하므로 틀리고, C는 Zeynep이 화를 내지 않으며, D는 방향이 반대다."
+  },
+  {
+   "candidateId": "lit40-medium-03-069",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "medium",
+   "passage": "Some alliances arrive disguised. I had spent a month dreading the afternoon Dwayne's aunt Kemoy would join our wedding planning at the salt-water pool in Port of Spain, where my mother and I did our best thinking with our feet in the water. Kemoy had opinions, everyone warned me, and she had opposed the engagement. I rehearsed polite refusals. When she arrived, she criticized the guest list, the menu, the color of the tablecloths, and I felt my mother stiffen beside me. Then Kemoy pulled a folded paper from her bag: the name of a caterer who owed her a favor, a cousin with a free hall, a band that played for half price. She had not come to oppose us. She had come prepared, as she said, to keep two families from going broke on one day. My mother laughed until she nearly slipped into the pool.",
+   "question": "Which choice best describes the shift in tone that occurs in the text?",
+   "options": [
+    "From relaxed contentment at the pool to sudden fear of a family quarrel",
+    "From tense apprehension about Kemoy to relieved and amused gratitude",
+    "From open hostility toward the wedding to quiet acceptance of its costs",
+    "From cheerful planning with the mother to weary resignation about money"
+   ],
+   "correct_letter": "B",
+   "explanation": "화자는 한 달 동안 Kemoy와의 만남을 두려워하며 정중한 거절을 연습했고, 그녀가 하객 명단과 메뉴를 비판하자 어머니까지 긴장한다. 그런데 Kemoy가 출장 요리사, 무료 홀, 반값 밴드 목록을 꺼내자 화자는 그녀가 반대하러 온 것이 아님을 깨닫고, 어머니는 크게 웃는다. 따라서 긴장된 염려에서 안도와 즐거운 감사로 바뀐다는 B가 정답이다. A는 방향이 반대이고, C는 화자가 결혼을 적대한 적이 없으며, D는 결말의 웃음과 맞지 않는다."
+  },
+  {
+   "candidateId": "lit40-medium-03-071",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "medium",
+   "passage": "\"Wrong door again,\" I muttered, finding your envelope in my dryer at the laundromat this morning.\nDear Talon,\nI am writing because this is the third letter of yours that has landed in my machine, my mailbox, or my coat pocket, and I am beginning to suspect the wall between our apartments is thinner than either of us thought. I was ready to slide it under your door with a stern note. I even drafted the note. But the envelope had come open in the wash, and I read the first line before I could stop myself. It was from the hospital, about your sister. I am sorry I read it. I am more sorry that you have been carrying this alone on the other side of a wall I complain about every night. My door is open after six. I will bring the coffee, and I will not mention the mail.\nTallulah",
+   "question": "Which choice best describes the shift in tone that occurs in the letter?",
+   "options": [
+    "From warm friendliness toward Talon to cold formality about the mail",
+    "From cheerful amusement at the mix-up to anxious worry about the hospital",
+    "From formal apology for reading the letter to playful teasing of Talon",
+    "From irritated exasperation over misdelivered mail to gentle compassion"
+   ],
+   "correct_letter": "D",
+   "explanation": "편지 앞부분에서 Tallulah는 세 번째로 잘못 온 편지에 투덜대며 엄한 쪽지까지 써 두었다고 말한다. 그러나 병원에서 온 Talon의 누나 소식을 읽은 뒤 사과하고, 혼자 짐을 지고 있던 그를 위해 문을 열어 두겠다고 말한다. 따라서 짜증 섞인 불만에서 부드러운 연민으로 바뀐다는 D가 정답이다. A는 방향이 반대이고, B는 초반이 즐거움이 아니라 짜증이며, C는 편지가 장난스러운 놀림으로 끝나지 않는다."
+  },
+  {
+   "candidateId": "lit40-medium-03-072",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "text_structure",
+   "requestedDifficulty": "medium",
+   "passage": "We had not spoken in two years when Wenhua appeared at the boarding-house kitchen in Taipei, carrying a sack of shriveled oranges from the orchard our father had left us. The harvest had failed; she had stayed to work it, and I had gone to the city. For a long time neither of us mentioned this. She peeled an orange and complained that the boarders' stove was too small. I complained that the fruit was too sour. Then, almost without meaning to, Mingyu, she said, using the name only our father had used for me, do you remember the year the frost took everything and he made marmalade from the bitter ones anyway? I did remember. We found a pot, a bag of sugar, and the boarders' cracked jars. By midnight the kitchen smelled of burnt peel, and we were arguing again, but about how much sugar to add.",
+   "question": "Which choice best describes the overall structure of the text?",
+   "options": [
+    "It presents a tense reunion, introduces a shared memory, and then shows the sisters cooperating on a task.",
+    "It recounts a failed harvest, explains its causes in some detail, and then describes how the orchard was sold.",
+    "It describes a quarrel between sisters, shows one sister leaving, and then reports a later reconciliation.",
+    "It introduces a boarding house, lists its residents, and then focuses on one boarder's family history."
+   ],
+   "correct_letter": "A",
+   "explanation": "글은 2년간 말하지 않던 자매가 부엌에서 어색하게 다시 만나 서로 불평만 하는 장면으로 시작한다. 이어 Wenhua가 아버지가 서리 든 해에 쓴 오렌지로 마멀레이드를 만든 기억을 꺼내고, 두 사람은 함께 마멀레이드를 만든다. 따라서 긴장된 재회, 공유된 기억, 협력이라는 순서인 A가 정답이다. B는 흉작의 원인 설명이나 과수원 매각이 없고, C는 한 자매가 떠나는 장면이 없으며, D는 하숙인 목록이 나오지 않는다."
+  },
+  {
+   "candidateId": "lit40-medium-03-073",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "text_structure",
+   "requestedDifficulty": "medium",
+   "passage": "\"Tell the landlord the money is coming from the city,\" Haoran said, as if it were already true. Baoyu stood at the window of the rented farmhouse outside Chengdu and watched the rain flatten the young rice. His uncle's plan was simple: a lie about a loan that did not exist would buy them one more season, and one good season would pay back everything they owed. Baoyu had agreed at supper. Now, alone, he went over the account book page by page. The figures were his uncle's, written in neat columns, and beside the last entry was a small note in a different ink: Ask Baoyu if this is right. His uncle had not trusted the plan either. When the landlord's bicycle came up the lane, Baoyu set the book on the table and went out to meet him without rehearsing anything.",
+   "question": "Which choice best describes the overall structure of the text?",
+   "options": [
+    "It describes a farm's history, then traces a landlord's growing suspicion, and then reports a settlement.",
+    "It introduces a deceptive plan, follows a nephew's private reconsideration, and then shows him acting.",
+    "It presents an argument between relatives, then shifts to a flashback, and then returns to the argument.",
+    "It catalogs a family's debts, compares two ways of paying them, and then concludes that both will fail."
+   ],
+   "correct_letter": "B",
+   "explanation": "글은 삼촌 Haoran이 존재하지 않는 대출에 관한 거짓말 계획을 말하는 대화로 시작한다. 이어 Baoyu가 혼자 장부를 넘기다 삼촌이 남긴 메모를 발견하며 계획을 다시 생각하고, 마지막에 연습 없이 집주인을 맞으러 나간다. 따라서 계획 소개, 조카의 내적 재고, 행동이라는 순서인 B가 정답이다. A는 집주인의 의심이 전개되지 않고, C는 회상이 없으며, D는 두 상환 방법을 비교하지 않는다."
+  },
+  {
+   "candidateId": "lit40-medium-03-074",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "text_structure",
+   "requestedDifficulty": "medium",
+   "passage": "Four duties came with my summer job at the rural post office outside Naples: sort the mail, sell the stamps, lock the safe, and give directions to anyone who wandered down from the hills. I was proud of the fourth. So when a hiker named Matteo stumbled in at dusk, sunburned and lost, I drew him a confident map to the trailhead. An hour later Chiara, the park ranger, brought him back. My map had sent him up the wrong ridge. I expected her to tell him whose fault it was. Instead, she told him the trail signs had been moved by the wind, which was not quite true, and she asked me for a glass of water for him. After he left, she sat with me and redrew the map, slowly, landmark by landmark. I have kept that second map, folded in a drawer, for twenty years.",
+   "question": "Which choice best describes the overall structure of the text?",
+   "options": [
+    "It lists the narrator's duties, then criticizes the ranger's dishonesty, and then defends the narrator's map.",
+    "It describes a long hike in detail, then explains why trail signs often fail, and then recommends better maps.",
+    "It sets out the narrator's duties, recounts a mistake a ranger quietly covered, and notes its lasting effect.",
+    "It introduces a lost hiker, then shifts to the ranger's own past, and then returns to the narrator's job."
+   ],
+   "correct_letter": "C",
+   "explanation": "글은 우체국 일의 네 가지 의무를 나열하며 시작하고, 화자가 자랑하던 길 안내에서 실수를 한 일화를 전한다. 레인저 Chiara는 화자의 실수를 드러내지 않고 바람 탓으로 돌린 뒤 지도를 함께 다시 그려 주며, 화자는 그 지도를 20년간 간직했다고 말한다. 따라서 의무 소개, 숨겨 준 실수, 지속적인 영향의 순서인 C가 정답이다. A는 화자가 레인저를 비판하지 않으며, B는 등산 과정이나 권고가 없고, D는 레인저의 과거가 나오지 않는다."
+  },
+  {
+   "candidateId": "lit40-medium-03-075",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "text_structure",
+   "requestedDifficulty": "medium",
+   "passage": "Once, when I was eleven, I asked my father why he had left Japan, and Shigeru only handed me a knife and an onion. That was the beginning of our agreement. In the galley of the fishing boat he cooked for, docked each winter in Hokkaido's colder harbors, we talked in English about everything else: the crew's appetites, the price of squid, my school in Seattle. I translated menus and invoices for him. He taught me to fillet a fish in four strokes. Neither of us mentioned the subject. Then, the winter I turned seventeen, a deckhand asked him the same question I had asked. My father answered in Japanese, at length, while I stood at the cutting board pretending not to understand. I understood every word. That night, Sachiko, he said, you can ask me again. I did not, and I have never been sure whether that silence was kindness or cowardice.",
+   "question": "Which choice best describes the overall structure of the text?",
+   "options": [
+    "It explains why the father emigrated, then describes his galley work, and then praises his cooking.",
+    "It compares two languages, then lists the narrator's chores, and then describes a storm.",
+    "It narrates a bitter argument between the father and daughter and then reports how they reconciled.",
+    "It establishes a long silence, presents an event that disrupts it, and reflects on the outcome."
+   ],
+   "correct_letter": "D",
+   "explanation": "글은 화자가 열한 살 때 아버지가 이민 이유에 대한 질문에 답하지 않으면서 생긴 침묵의 약속을 소개한다. 이어 열일곱 살 때 갑판원의 질문에 아버지가 일본어로 길게 답하는 사건이 그 침묵을 깨고, 화자는 다시 묻지 않은 자신의 선택을 돌아본다. 따라서 침묵 설정, 그것을 흔드는 사건, 결과에 대한 성찰의 순서인 D가 정답이다. A는 이민 이유가 화자에게 직접 설명되지 않고, B는 폭풍이 없으며, C는 두 사람이 다투는 장면이 없다."
+  },
+  {
+   "candidateId": "lit40-medium-03-076",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "underlined_portion_function",
+   "requestedDifficulty": "medium",
+   "passage": "Chalk dust and the sour smell of wet wool filled the tailor's back room in Colombo, where Hassan, the ship's captain, had ordered the stowaway brought for questioning. Imani sat on a bolt of cloth, chin raised. They argued for an hour about a button. She had cut one from his spare coat to trade for bread, and he insisted it was brass from Bombay, worth more than her passage. She insisted it was painted tin. __Neither of them mentioned that she had hidden aboard because her father's boat had not come back, or that Hassan had been the last to see it.__ The tailor, pinning a hem in the corner, said nothing either. Finally Hassan held the button to the lamp, scratched it with his thumbnail, and saw the tin beneath. He set it on the table between them and asked, more gently than before, where she would like to go.",
+   "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+   "options": [
+    "It reveals the deeper grief beneath a quarrel that has so far seemed trivial.",
+    "It explains how Imani managed to board the captain's ship without being seen.",
+    "It suggests that the tailor knows more about the button than either character.",
+    "It confirms that Hassan was right all along about the value of the button."
+   ],
+   "correct_letter": "A",
+   "explanation": "밑줄 앞에서 두 사람은 한 시간 동안 단추가 놋쇠인지 양철인지라는 사소한 문제로 다툰다. 밑줄 문장은 Imani가 아버지의 배가 돌아오지 않아 숨어 탔고 Hassan이 그 배를 마지막으로 본 사람이라는 사실을 밝혀, 다툼 밑의 진짜 슬픔을 드러낸다. 그 뒤 Hassan이 더 부드럽게 묻는 결말도 이 기능과 이어지므로 A가 정답이다. B는 승선 방법을 설명하지 않고, C는 재단사에 관한 내용이 아니며, D는 단추가 양철로 드러난다는 결말과 반대다."
+  },
+  {
+   "candidateId": "lit40-medium-03-077",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "underlined_portion_function",
+   "requestedDifficulty": "medium",
+   "passage": "Oaxaca's Saturday market was nearly closed when Valentina opened the shoebox of their mother's letters on the empty chili stand. Eulalio sat beside her, arms crossed. For years he had blamed her for the scholarship he never took: she had been the one to tell their mother she could not run the stall alone. Valentina read aloud, letter by letter, the weekly accounts of sales and weather. Then she reached one dated the spring of his scholarship. __Their mother had written, in a hand much shakier than usual, that she had asked her daughter to say it, because she could not bear to say it herself.__ Eulalio uncrossed his arms. Neither of them spoke while the vendors folded their awnings. When Valentina moved to close the box, he stopped her and asked her to keep reading, even the letters about the weather.",
+   "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+   "options": [
+    "It introduces the mother's reasons for running the stall alone after the scholarship.",
+    "It reveals information that shifts the blame Eulalio has long placed on Valentina.",
+    "It suggests that Valentina has invented the letter to defend her earlier choice.",
+    "It explains why the mother's weekly letters usually described sales and weather."
+   ],
+   "correct_letter": "B",
+   "explanation": "앞부분에서 Eulalio는 장학금을 포기한 일을 오랫동안 누나 Valentina 탓으로 여겨 왔다. 밑줄 문장은 어머니가 스스로 말할 수 없어 딸에게 대신 말하게 했다는 사실을 밝혀, 그 원망의 대상이 잘못되었음을 드러낸다. 이후 Eulalio가 팔짱을 풀고 계속 읽어 달라고 하는 반응도 이를 뒷받침하므로 B가 정답이다. A는 어머니가 혼자 노점을 운영했다는 내용과 맞지 않고, C는 편지를 지어냈다는 근거가 없으며, D는 편지의 일상적 내용을 설명하는 문장이 아니다."
+  },
+  {
+   "candidateId": "lit40-medium-03-078",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "underlined_portion_function",
+   "requestedDifficulty": "medium",
+   "passage": "After my mother remarried, Anh became the keeper of one rule in our house: no talking in the reading room of the old library in Hanoi, where he took me every Sunday. I resented it. For a year we sat across from each other in silence, he with his newspapers and I, Putri, with whatever novel I could pretend to read. I decided the rule was his way of avoiding me. Then, the week before I left for university, I asked whether the rule still applied now that I was grown. He thought about it, then slid a library slip across the table. On it he had written, in pencil, the title of every book I had read there that year, with a small mark beside the ones I had finished twice. __He had been paying attention the entire time.__ We walked home talking, loudly, the whole way.",
+   "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+   "options": [
+    "It confirms the narrator's early belief that the stepfather avoided her.",
+    "It explains why the library enforced strict silence in its reading room.",
+    "It states the realization that overturns the narrator's view of the rule.",
+    "It introduces a new rule that replaces the one the stepfather once kept firmly."
+   ],
+   "correct_letter": "C",
+   "explanation": "화자는 침묵 규칙을 의붓아버지 Anh이 자신을 피하는 방식이라고 여겼다. 그러나 그가 화자가 1년 동안 읽은 모든 책과 두 번 읽은 책까지 적어 둔 쪽지를 내밀자, 밑줄 문장은 그가 내내 관심을 기울이고 있었다는 깨달음을 직접 말한다. 이 깨달음이 규칙에 대한 화자의 기존 해석을 뒤집으므로 C가 정답이다. A는 반대 내용이고, B는 도서관의 정책을 설명하지 않으며, D는 새로운 규칙이 소개되지 않는다."
+  },
+  {
+   "candidateId": "lit40-medium-03-079",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "underlined_portion_function",
+   "requestedDifficulty": "medium",
+   "passage": "I worked nights at a small clinic near the old stone bridge in Haifa, and Yitzhak was the patient who never slept. He talked instead, mostly about the bridge, which he had crossed every morning for fifty years on his way to the docks. One night his son phoned to say the family had decided to move him to a care home in another city. No one had asked him. I knew because I had been asked to keep it quiet until the papers were signed. I, Chana, said nothing, and for three nights I let him talk about the bridge as if he would walk it again. __On the fourth night I wheeled him to the window and told him.__ He was quiet a long time. Then he asked me to describe the bridge to him in the morning light, so he would have a newer picture to take with him.",
+   "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+   "options": [
+    "It introduces the bridge as a place the patient has never seen before.",
+    "It shows the narrator following the family's request to delay the news.",
+    "It marks the moment when the patient finally learns to sleep through the night.",
+    "It marks the narrator's decision to end her silence about the family's choice."
+   ],
+   "correct_letter": "D",
+   "explanation": "화자 Chana는 가족이 Yitzhak에게 묻지 않고 요양원 이전을 결정했다는 사실을 서류 서명 전까지 숨기라는 부탁을 받고 사흘 동안 침묵한다. 밑줄 문장은 넷째 날 밤 그녀가 그 침묵을 깨고 사실을 알리는 순간을 보여 준다. 이후 Yitzhak이 다리를 묘사해 달라고 부탁하는 결말도 이 결정에서 이어지므로 D가 정답이다. A는 그가 다리를 50년간 건넜다는 내용과 맞지 않고, B는 부탁을 어기는 장면이므로 반대이며, C는 잠에 관한 변화가 나오지 않는다."
+  }
+ ],
+ "instructions": "당신은 문항 감사관이다. 표시된 정답과 해설을 받아, 정답이 맞는지·해설이 일관되고 사실에 맞는지 점검한다(고치지 않고 판정만).\n청크 rev-explanation_audit-019 — 18문항.\n출력: Write 도구로 정확히 이 경로에 JSON 한 파일을 쓴다 → /Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-explanation_audit-019.result.json\n출력 JSON 스키마(예시 구조): {\"chunkId\":\"청크 ID\",\"model\":\"sonnet\",\"items\":[{\"candidateId\":\"id\",\"answer_correct\":\"표시된 정답이 정말 정답이면 true\",\"explanation_consistent\":\"해설이 정답·오답 판단과 일치하고 글자 참조가 맞으면 true\",\"explanation_factual\":\"해설에 사실 오류가 없으면 true\",\"issues\":\"한 줄 메모\"}]}\n허용 값: picked_letter ∈ {A,B,C,D}, 불리언 필드는 true/false, est_difficulty ∈ {easy,medium,hard}. candidateId 를 바꾸지 않고 모든 항목에 답한다.\n금지: 결과 파일 외의 파일 생성·수정, 다른 명령 실행, 문항 수정·재작성. 끝나면 'done <항목 수>' 한 줄만 답한다.\n\n## 문항\n### lit40-medium-03-055 — skill words_in_context · 유형 figurative_language\n[지문]\nWe were twelve in a cabin outside Dhaka\nthe winter snow came, absurd and soft,\nsealing the road the festival van would use.\nArjun had promised word by evening:\nwhether the orchestra would play in the capital\nor fold its music stands for good.\nMeera, the youngest, held her violin unopened\nin its case across her knees.\nNo one rehearsed. No one ate the rice.\nBy dusk the silence tuned itself to a single string,\nand every face leaned toward the radio\nthe way a bow leans toward a note.\nArjun paced from the stove to the window,\nhis baton tucked behind one ear,\nforgetting it was there.\nMeera unlatched the case at last,\nnot to play, only to see the wood,\nwhile snow kept falling past the glass.\n\n[질문] As used in the text, the phrase “the silence tuned itself to a single string” most nearly suggests that\nA) the group's attention narrowed to one shared, anxious focus.\nB) the musicians began to rehearse a single piece together quietly.\nC) the snowstorm outside had muffled every sound except one.\nD) Meera's violin had gone out of tune in the cold cabin.\n\n[표시된 정답] A\n[해설]\n지문은 소식을 기다리며 아무도 연습하거나 먹지 않는 긴장된 장면을 그리고, 바로 뒤에 모든 얼굴이 활이 음을 향하듯 라디오 쪽으로 기울었다고 서술한다. 따라서 '침묵이 한 줄에 맞춰 조율되었다'는 표현은 모두의 신경이 하나의 불안한 초점으로 좁혀졌다는 뜻이므로 A가 정답이다. B는 '아무도 연습하지 않았다'는 서술과 어긋나고, C는 눈을 문자 그대로의 소리 차단으로 읽었으며, D는 비유를 악기의 실제 조율로 오해했다.\n### lit40-medium-03-056 — skill words_in_context · 유형 figurative_language\n[지문]\nKaterina drove the number 12 bus past the harbor in Thessaloniki every morning, and every morning Eda boarded at the stop beside the shoe repair stall. One spring she stepped on carrying a pair of men's brown oxfords, the heels worn to a slant. Her husband had died in January. She had brought the shoes to the cobbler three times, she told Katerina, asking him to replace the soles, then the laces, then the stitching along the toe. Each time he did the work without complaint, and each time she took them home and set them by the door, where no one would wear them. Mending them, Eda said, was like stitching a new sentence onto a closed book. Katerina said nothing and waited at the green light a moment longer than she needed to, so Eda could sit down. Then she pulled away from the curb into the traffic along the sea.\n\n[질문] As used in the text, the phrase “stitching a new sentence onto a closed book” most nearly suggests\nA) a craft that requires more skill than the cobbler possesses.\nB) an effort to extend something that has already come to an end.\nC) a way of recording the husband's life story for others to read.\nD) a task that Eda finds tedious and wishes she could abandon.\n\n[표시된 정답] B\n[해설]\n에다는 남편이 죽은 뒤 아무도 신지 않을 구두를 세 번이나 고쳐 문 옆에 둔다. 이 행동을 '닫힌 책에 새 문장을 꿰매 붙이는 것'에 빗댄 것은 이미 끝난 삶에 무언가를 덧붙이려는 시도라는 뜻이므로 B가 정답이다. A는 구두장이가 불평 없이 일을 해냈다는 서술과 맞지 않고, C는 '책'을 문자 그대로 기록으로 읽었다. D는 그녀가 스스로 반복해 수선을 맡긴다는 점과 어긋난다.\n### lit40-medium-03-057 — skill words_in_context · 유형 figurative_language\n[지문]\nRumors travel faster than ferries. I learned that the autumn I clerked for Ingeborg, a retired judge who still walked the Bergen promenade each morning in a black wool coat. Someone at the fish market had whispered that her late brother once took bribes, a story she had disproved in court decades earlier and never bothered to repeat. Most people shrugged it off. But it reached her niece, who had just been appointed to the bench and who had always believed her uncle was a man without stain. By the next morning, the rumor had found the one door left unlocked, and the niece stopped answering Ingeborg's calls. I, Ingrid, carried the old court file to the niece's office myself, wrapped in brown paper. Ingeborg did not ask whether I had delivered it. She only stood at the railing, watching the gulls ride the wind above the harbor.\n\n[질문] As used in the text, the phrase “the rumor had found the one door left unlocked” most nearly suggests that the rumor\nA) had been spread deliberately by someone inside Ingeborg's household.\nB) was finally proven false once it reached the courts in Bergen.\nC) reached the one person most open to being hurt by it.\nD) caused Ingeborg to lock herself away from her neighbors.\n\n[표시된 정답] C\n[해설]\n대부분의 사람은 소문을 대수롭지 않게 넘겼지만, 삼촌을 흠 없는 사람이라 믿어 온 조카에게 닿자 그녀는 잉에보르의 전화를 받지 않게 된다. 이 맥락에서 '잠기지 않은 유일한 문을 찾았다'는 표현은 소문이 가장 상처받기 쉬운 사람에게 닿았다는 뜻이므로 C가 정답이다. A는 '문'을 집안 내부로 문자 그대로 읽었고, B는 지문에 없는 결과이며, D는 문을 잠그는 주체를 잉에보르로 바꾼 오답이다.\n### lit40-medium-03-058 — skill words_in_context · 유형 figurative_language\n[지문]\nMumbai was loud that monsoon, but nothing was louder than the quiet at the noodle stall on the corner of Khetwadi Lane. After the mother left for her sister's village and did not return, the old noodle man and his stubborn son kept the stall open as if she had only stepped out for onions. Each night the son set out three bowls, and each night the father filled only two, and neither said a word. Sharda, who sold tea at the next stall, told her niece Priya that the pair were stirring the same pot of silence, and that it would boil over one day. Priya laughed, for the men seemed calm enough. But the tale goes that on the first dry evening of the year, the son set out two bowls, and the father, seeing it, set down his ladle and wept. Steam rose from the pot and drifted toward the lamps.\n\n[질문] As used in the text, the phrase “stirring the same pot of silence” most nearly suggests that the father and son\nA) were too busy preparing food to speak during the crowded evenings.\nB) had quarreled bitterly and refused to work at the same stall again.\nC) were secretly planning together to bring the mother back home.\nD) were jointly keeping up an unspoken avoidance of their loss.\n\n[표시된 정답] D\n[해설]\n아들은 매일 그릇 세 개를 놓고 아버지는 두 개만 채우면서도 둘 다 아무 말을 하지 않으며, 어머니가 잠깐 나간 것처럼 가게를 계속 연다. 샤르다가 이를 '같은 침묵의 냄비를 젓는다'고 표현하고 언젠가 끓어 넘칠 것이라 한 것은 두 사람이 상실을 말하지 않고 함께 피하고 있다는 뜻이므로 D가 정답이다. A는 비유를 실제 요리로 읽었고, B는 함께 가게를 지킨다는 서술과 어긋나며, C는 지문에 근거가 없다.\n### lit40-medium-03-065 — skill text_structure_purpose · 유형 tone_shift\n[지문]\nSeville's heat had already settled over the terrace when Joaquin carried out the last box. Lucius, his mother's name for the half-built birdhouse they had started when he was nine, still sat on the ledge, its roof missing. She teased him about it while he loaded the car: a future engineer who could not finish four walls and a perch. He laughed, and she laughed louder, listing every project he had abandoned, the kite, the radio, the tiled step. Then she picked up the birdhouse and turned it over in her hands. Underneath, in pencil, were the measurements for the roof, written in his childish script and never used. She stopped talking. She set the birdhouse back on the ledge very carefully, as if it might break, and told him she would leave it exactly as it was until he came home to finish it.\n\n[질문] Which choice best describes the shift in tone that occurs in the text?\nA) From anxious worry about the son's departure to calm acceptance of his choices\nB) From playful teasing about unfinished work to quiet tenderness toward the son\nC) From cheerful pride in the son's skill to open regret over a lost childhood\nD) From mild impatience with the packing to sincere gratitude for the son's help\n\n[표시된 정답] B\n[해설]\n앞부분에서 어머니는 아들이 끝내지 못한 새집과 여러 프로젝트를 나열하며 웃으며 놀린다. 새집 밑에서 아들이 어릴 때 적어 둔 지붕 치수를 발견한 뒤 그녀는 말을 멈추고 새집을 조심스럽게 내려놓는다. 따라서 장난스러운 놀림에서 조용한 애정으로 바뀐다는 B가 정답이다. A는 초반의 웃음과 맞지 않고, C는 그녀가 아들의 기술을 자랑하지 않고 오히려 놀렸다는 점에서 틀리며, D는 짐 싸기에 대한 짜증이 나타나지 않는다.\n### lit40-medium-03-066 — skill text_structure_purpose · 유형 tone_shift\n[지문]\nBy the third evening of the festival, the weaving cooperative in Lisbon had run out of chairs. Larissa, who had not set foot in a church in ten years, watched Father Bruno try to arrange one long table for two groups that had never eaten together: the women who kept the old saint's-day customs and the newer members who kept none. He fussed over place cards, shifting names, and Larissa found it absurd, almost comic, that a priest should worry so much about seating. She whispered as much to the woman beside her. Then she noticed what he was doing. He had placed each older weaver beside a newer one whose pattern she had once criticized, and on every plate he had folded a scrap of the other's cloth. Larissa stopped smiling. She saw that the table had been woven as carefully as any shawl on the loom.\n\n[질문] Which choice best describes the shift in tone that occurs in the text?\nA) From quiet reverence for the priest to growing doubt about his methods\nB) From open hostility toward the festival to reluctant pleasure in its food\nC) From amused skepticism about the priest's fussing to sober admiration\nD) From weary boredom with the weavers to sudden alarm at their conflict\n\n[표시된 정답] C\n[해설]\n처음에 Larissa는 신부가 좌석 배치에 신경 쓰는 모습을 우스꽝스럽다고 여기며 옆 사람에게 속삭인다. 그러나 신부가 서로 비판했던 직조공들을 짝지어 앉히고 상대의 천 조각을 접어 둔 것을 알아챈 뒤 그녀는 웃음을 멈춘다. 따라서 재미 섞인 회의에서 진지한 감탄으로 바뀐다는 C가 정답이다. A는 방향이 반대이고, B는 축제에 대한 적대감이나 음식에 대한 언급이 없으며, D는 그녀가 놀라거나 갈등을 걱정하는 장면이 없다.\n### lit40-medium-03-067 — skill text_structure_purpose · 유형 tone_shift\n[지문]\nI pinned the sheets on Silas's line that spring,\nthe Cornish wind half wrestling them from me,\nand laughed to think how many years we'd spent\nat chess-club boards, two old men keeping score\nof every bishop lost, each petty win.\nHe'd beaten me at last the week before.\nI meant to tease him over it today.\nBut in his drawer, beneath the clothespin tin,\nI found a notebook of my games, not his,\neach losing move of mine marked out in ink\nand next to it, in his small careful hand,\nthe better move, and then: \"Show Mabel this.\"\nHe never had. The wind went still. I stood\nwith one white sheet held open in my arms\nand folded it as if it were a flag.\n\n[질문] Which choice best describes the shift in tone that occurs in the text?\nA) From bitter rivalry with Silas to grudging respect for his skill at chess\nB) From solemn grief over Silas to cheerful memories of their old matches\nC) From restless frustration with the wind to calm satisfaction in the chore\nD) From lighthearted rivalry over chess to hushed, reverent recognition\n\n[표시된 정답] D\n[해설]\n앞부분에서 화자는 바람과 씨름하며 웃고, 체스 경쟁을 '사소한 승리'라 부르며 Silas를 놀릴 생각을 한다. 서랍에서 자신의 패배 수마다 더 나은 수를 적어 둔 공책을 발견한 뒤 바람이 멎고, 화자는 시트를 깃발처럼 접는다. 따라서 가벼운 경쟁심에서 조용하고 경건한 깨달음으로 바뀐다는 D가 정답이다. A는 초반 어조가 쓰라린 적대가 아니라 장난스럽고, B는 방향이 반대이며, C는 체스와 공책이라는 핵심 전환을 놓친다.\n### lit40-medium-03-068 — skill text_structure_purpose · 유형 tone_shift\n[지문]\nZEYNEP: (holding up a pocket watch) Your grandfather wound this every morning for forty years. And now you want to say goodbye to him with a speech?\nAPONI: A short one. Something proper. People expect it.\nZEYNEP: People expect sandwiches, too. (She snaps the watch open, grinning.) He'd have fallen asleep by your second sentence.\nAPONI: (laughing despite himself) He fell asleep at my graduation.\nZEYNEP: Twice. (Her grin fades. She listens to the watch, which has stopped.) He brought it here the week before he died. Asked me to fix it. I told him there was no hurry.\nAPONI: There wasn't.\nZEYNEP: (quietly, setting the watch on the counter between them) There was. I just didn't hear it. Wind it, child. Not for the speech. Let it run on the plateau a little longer than he did.\n\n[질문] Which choice best describes the shift in tone that occurs in the text?\nA) From teasing banter about the speech to subdued, remorseful sincerity\nB) From formal politeness between strangers to relaxed, joking familiarity\nC) From sharp anger at the grandson to calm forgiveness of his mistakes\nD) From grieving silence over the death to lively plans for the funeral\n\n[표시된 정답] A\n[해설]\n처음에 Zeynep은 연설이 지루할 것이라며 웃으며 농담하고, Aponi도 졸업식 이야기로 함께 웃는다. 그러나 멈춘 시계를 듣는 순간 미소가 사라지고, 수리를 미룬 일을 '나는 듣지 못했다'며 조용히 후회한다. 따라서 장난스러운 대화에서 가라앉은 진지한 후회로 바뀐다는 A가 정답이다. B는 두 사람이 처음부터 친밀하므로 틀리고, C는 Zeynep이 화를 내지 않으며, D는 방향이 반대다.\n### lit40-medium-03-069 — skill text_structure_purpose · 유형 tone_shift\n[지문]\nSome alliances arrive disguised. I had spent a month dreading the afternoon Dwayne's aunt Kemoy would join our wedding planning at the salt-water pool in Port of Spain, where my mother and I did our best thinking with our feet in the water. Kemoy had opinions, everyone warned me, and she had opposed the engagement. I rehearsed polite refusals. When she arrived, she criticized the guest list, the menu, the color of the tablecloths, and I felt my mother stiffen beside me. Then Kemoy pulled a folded paper from her bag: the name of a caterer who owed her a favor, a cousin with a free hall, a band that played for half price. She had not come to oppose us. She had come prepared, as she said, to keep two families from going broke on one day. My mother laughed until she nearly slipped into the pool.\n\n[질문] Which choice best describes the shift in tone that occurs in the text?\nA) From relaxed contentment at the pool to sudden fear of a family quarrel\nB) From tense apprehension about Kemoy to relieved and amused gratitude\nC) From open hostility toward the wedding to quiet acceptance of its costs\nD) From cheerful planning with the mother to weary resignation about money\n\n[표시된 정답] B\n[해설]\n화자는 한 달 동안 Kemoy와의 만남을 두려워하며 정중한 거절을 연습했고, 그녀가 하객 명단과 메뉴를 비판하자 어머니까지 긴장한다. 그런데 Kemoy가 출장 요리사, 무료 홀, 반값 밴드 목록을 꺼내자 화자는 그녀가 반대하러 온 것이 아님을 깨닫고, 어머니는 크게 웃는다. 따라서 긴장된 염려에서 안도와 즐거운 감사로 바뀐다는 B가 정답이다. A는 방향이 반대이고, C는 화자가 결혼을 적대한 적이 없으며, D는 결말의 웃음과 맞지 않는다.\n### lit40-medium-03-071 — skill text_structure_purpose · 유형 tone_shift\n[지문]\n\"Wrong door again,\" I muttered, finding your envelope in my dryer at the laundromat this morning.\nDear Talon,\nI am writing because this is the third letter of yours that has landed in my machine, my mailbox, or my coat pocket, and I am beginning to suspect the wall between our apartments is thinner than either of us thought. I was ready to slide it under your door with a stern note. I even drafted the note. But the envelope had come open in the wash, and I read the first line before I could stop myself. It was from the hospital, about your sister. I am sorry I read it. I am more sorry that you have been carrying this alone on the other side of a wall I complain about every night. My door is open after six. I will bring the coffee, and I will not mention the mail.\nTallulah\n\n[질문] Which choice best describes the shift in tone that occurs in the letter?\nA) From warm friendliness toward Talon to cold formality about the mail\nB) From cheerful amusement at the mix-up to anxious worry about the hospital\nC) From formal apology for reading the letter to playful teasing of Talon\nD) From irritated exasperation over misdelivered mail to gentle compassion\n\n[표시된 정답] D\n[해설]\n편지 앞부분에서 Tallulah는 세 번째로 잘못 온 편지에 투덜대며 엄한 쪽지까지 써 두었다고 말한다. 그러나 병원에서 온 Talon의 누나 소식을 읽은 뒤 사과하고, 혼자 짐을 지고 있던 그를 위해 문을 열어 두겠다고 말한다. 따라서 짜증 섞인 불만에서 부드러운 연민으로 바뀐다는 D가 정답이다. A는 방향이 반대이고, B는 초반이 즐거움이 아니라 짜증이며, C는 편지가 장난스러운 놀림으로 끝나지 않는다.\n### lit40-medium-03-072 — skill text_structure_purpose · 유형 text_structure\n[지문]\nWe had not spoken in two years when Wenhua appeared at the boarding-house kitchen in Taipei, carrying a sack of shriveled oranges from the orchard our father had left us. The harvest had failed; she had stayed to work it, and I had gone to the city. For a long time neither of us mentioned this. She peeled an orange and complained that the boarders' stove was too small. I complained that the fruit was too sour. Then, almost without meaning to, Mingyu, she said, using the name only our father had used for me, do you remember the year the frost took everything and he made marmalade from the bitter ones anyway? I did remember. We found a pot, a bag of sugar, and the boarders' cracked jars. By midnight the kitchen smelled of burnt peel, and we were arguing again, but about how much sugar to add.\n\n[질문] Which choice best describes the overall structure of the text?\nA) It presents a tense reunion, introduces a shared memory, and then shows the sisters cooperating on a task.\nB) It recounts a failed harvest, explains its causes in some detail, and then describes how the orchard was sold.\nC) It describes a quarrel between sisters, shows one sister leaving, and then reports a later reconciliation.\nD) It introduces a boarding house, lists its residents, and then focuses on one boarder's family history.\n\n[표시된 정답] A\n[해설]\n글은 2년간 말하지 않던 자매가 부엌에서 어색하게 다시 만나 서로 불평만 하는 장면으로 시작한다. 이어 Wenhua가 아버지가 서리 든 해에 쓴 오렌지로 마멀레이드를 만든 기억을 꺼내고, 두 사람은 함께 마멀레이드를 만든다. 따라서 긴장된 재회, 공유된 기억, 협력이라는 순서인 A가 정답이다. B는 흉작의 원인 설명이나 과수원 매각이 없고, C는 한 자매가 떠나는 장면이 없으며, D는 하숙인 목록이 나오지 않는다.\n### lit40-medium-03-073 — skill text_structure_purpose · 유형 text_structure\n[지문]\n\"Tell the landlord the money is coming from the city,\" Haoran said, as if it were already true. Baoyu stood at the window of the rented farmhouse outside Chengdu and watched the rain flatten the young rice. His uncle's plan was simple: a lie about a loan that did not exist would buy them one more season, and one good season would pay back everything they owed. Baoyu had agreed at supper. Now, alone, he went over the account book page by page. The figures were his uncle's, written in neat columns, and beside the last entry was a small note in a different ink: Ask Baoyu if this is right. His uncle had not trusted the plan either. When the landlord's bicycle came up the lane, Baoyu set the book on the table and went out to meet him without rehearsing anything.\n\n[질문] Which choice best describes the overall structure of the text?\nA) It describes a farm's history, then traces a landlord's growing suspicion, and then reports a settlement.\nB) It introduces a deceptive plan, follows a nephew's private reconsideration, and then shows him acting.\nC) It presents an argument between relatives, then shifts to a flashback, and then returns to the argument.\nD) It catalogs a family's debts, compares two ways of paying them, and then concludes that both will fail.\n\n[표시된 정답] B\n[해설]\n글은 삼촌 Haoran이 존재하지 않는 대출에 관한 거짓말 계획을 말하는 대화로 시작한다. 이어 Baoyu가 혼자 장부를 넘기다 삼촌이 남긴 메모를 발견하며 계획을 다시 생각하고, 마지막에 연습 없이 집주인을 맞으러 나간다. 따라서 계획 소개, 조카의 내적 재고, 행동이라는 순서인 B가 정답이다. A는 집주인의 의심이 전개되지 않고, C는 회상이 없으며, D는 두 상환 방법을 비교하지 않는다.\n### lit40-medium-03-074 — skill text_structure_purpose · 유형 text_structure\n[지문]\nFour duties came with my summer job at the rural post office outside Naples: sort the mail, sell the stamps, lock the safe, and give directions to anyone who wandered down from the hills. I was proud of the fourth. So when a hiker named Matteo stumbled in at dusk, sunburned and lost, I drew him a confident map to the trailhead. An hour later Chiara, the park ranger, brought him back. My map had sent him up the wrong ridge. I expected her to tell him whose fault it was. Instead, she told him the trail signs had been moved by the wind, which was not quite true, and she asked me for a glass of water for him. After he left, she sat with me and redrew the map, slowly, landmark by landmark. I have kept that second map, folded in a drawer, for twenty years.\n\n[질문] Which choice best describes the overall structure of the text?\nA) It lists the narrator's duties, then criticizes the ranger's dishonesty, and then defends the narrator's map.\nB) It describes a long hike in detail, then explains why trail signs often fail, and then recommends better maps.\nC) It sets out the narrator's duties, recounts a mistake a ranger quietly covered, and notes its lasting effect.\nD) It introduces a lost hiker, then shifts to the ranger's own past, and then returns to the narrator's job.\n\n[표시된 정답] C\n[해설]\n글은 우체국 일의 네 가지 의무를 나열하며 시작하고, 화자가 자랑하던 길 안내에서 실수를 한 일화를 전한다. 레인저 Chiara는 화자의 실수를 드러내지 않고 바람 탓으로 돌린 뒤 지도를 함께 다시 그려 주며, 화자는 그 지도를 20년간 간직했다고 말한다. 따라서 의무 소개, 숨겨 준 실수, 지속적인 영향의 순서인 C가 정답이다. A는 화자가 레인저를 비판하지 않으며, B는 등산 과정이나 권고가 없고, D는 레인저의 과거가 나오지 않는다.\n### lit40-medium-03-075 — skill text_structure_purpose · 유형 text_structure\n[지문]\nOnce, when I was eleven, I asked my father why he had left Japan, and Shigeru only handed me a knife and an onion. That was the beginning of our agreement. In the galley of the fishing boat he cooked for, docked each winter in Hokkaido's colder harbors, we talked in English about everything else: the crew's appetites, the price of squid, my school in Seattle. I translated menus and invoices for him. He taught me to fillet a fish in four strokes. Neither of us mentioned the subject. Then, the winter I turned seventeen, a deckhand asked him the same question I had asked. My father answered in Japanese, at length, while I stood at the cutting board pretending not to understand. I understood every word. That night, Sachiko, he said, you can ask me again. I did not, and I have never been sure whether that silence was kindness or cowardice.\n\n[질문] Which choice best describes the overall structure of the text?\nA) It explains why the father emigrated, then describes his galley work, and then praises his cooking.\nB) It compares two languages, then lists the narrator's chores, and then describes a storm.\nC) It narrates a bitter argument between the father and daughter and then reports how they reconciled.\nD) It establishes a long silence, presents an event that disrupts it, and reflects on the outcome.\n\n[표시된 정답] D\n[해설]\n글은 화자가 열한 살 때 아버지가 이민 이유에 대한 질문에 답하지 않으면서 생긴 침묵의 약속을 소개한다. 이어 열일곱 살 때 갑판원의 질문에 아버지가 일본어로 길게 답하는 사건이 그 침묵을 깨고, 화자는 다시 묻지 않은 자신의 선택을 돌아본다. 따라서 침묵 설정, 그것을 흔드는 사건, 결과에 대한 성찰의 순서인 D가 정답이다. A는 이민 이유가 화자에게 직접 설명되지 않고, B는 폭풍이 없으며, C는 두 사람이 다투는 장면이 없다.\n### lit40-medium-03-076 — skill text_structure_purpose · 유형 underlined_portion_function\n[지문]\nChalk dust and the sour smell of wet wool filled the tailor's back room in Colombo, where Hassan, the ship's captain, had ordered the stowaway brought for questioning. Imani sat on a bolt of cloth, chin raised. They argued for an hour about a button. She had cut one from his spare coat to trade for bread, and he insisted it was brass from Bombay, worth more than her passage. She insisted it was painted tin. __Neither of them mentioned that she had hidden aboard because her father's boat had not come back, or that Hassan had been the last to see it.__ The tailor, pinning a hem in the corner, said nothing either. Finally Hassan held the button to the lamp, scratched it with his thumbnail, and saw the tin beneath. He set it on the table between them and asked, more gently than before, where she would like to go.\n\n[질문] Which choice best describes the function of the underlined sentence in the text as a whole?\nA) It reveals the deeper grief beneath a quarrel that has so far seemed trivial.\nB) It explains how Imani managed to board the captain's ship without being seen.\nC) It suggests that the tailor knows more about the button than either character.\nD) It confirms that Hassan was right all along about the value of the button.\n\n[표시된 정답] A\n[해설]\n밑줄 앞에서 두 사람은 한 시간 동안 단추가 놋쇠인지 양철인지라는 사소한 문제로 다툰다. 밑줄 문장은 Imani가 아버지의 배가 돌아오지 않아 숨어 탔고 Hassan이 그 배를 마지막으로 본 사람이라는 사실을 밝혀, 다툼 밑의 진짜 슬픔을 드러낸다. 그 뒤 Hassan이 더 부드럽게 묻는 결말도 이 기능과 이어지므로 A가 정답이다. B는 승선 방법을 설명하지 않고, C는 재단사에 관한 내용이 아니며, D는 단추가 양철로 드러난다는 결말과 반대다.\n### lit40-medium-03-077 — skill text_structure_purpose · 유형 underlined_portion_function\n[지문]\nOaxaca's Saturday market was nearly closed when Valentina opened the shoebox of their mother's letters on the empty chili stand. Eulalio sat beside her, arms crossed. For years he had blamed her for the scholarship he never took: she had been the one to tell their mother she could not run the stall alone. Valentina read aloud, letter by letter, the weekly accounts of sales and weather. Then she reached one dated the spring of his scholarship. __Their mother had written, in a hand much shakier than usual, that she had asked her daughter to say it, because she could not bear to say it herself.__ Eulalio uncrossed his arms. Neither of them spoke while the vendors folded their awnings. When Valentina moved to close the box, he stopped her and asked her to keep reading, even the letters about the weather.\n\n[질문] Which choice best describes the function of the underlined sentence in the text as a whole?\nA) It introduces the mother's reasons for running the stall alone after the scholarship.\nB) It reveals information that shifts the blame Eulalio has long placed on Valentina.\nC) It suggests that Valentina has invented the letter to defend her earlier choice.\nD) It explains why the mother's weekly letters usually described sales and weather.\n\n[표시된 정답] B\n[해설]\n앞부분에서 Eulalio는 장학금을 포기한 일을 오랫동안 누나 Valentina 탓으로 여겨 왔다. 밑줄 문장은 어머니가 스스로 말할 수 없어 딸에게 대신 말하게 했다는 사실을 밝혀, 그 원망의 대상이 잘못되었음을 드러낸다. 이후 Eulalio가 팔짱을 풀고 계속 읽어 달라고 하는 반응도 이를 뒷받침하므로 B가 정답이다. A는 어머니가 혼자 노점을 운영했다는 내용과 맞지 않고, C는 편지를 지어냈다는 근거가 없으며, D는 편지의 일상적 내용을 설명하는 문장이 아니다.\n### lit40-medium-03-078 — skill text_structure_purpose · 유형 underlined_portion_function\n[지문]\nAfter my mother remarried, Anh became the keeper of one rule in our house: no talking in the reading room of the old library in Hanoi, where he took me every Sunday. I resented it. For a year we sat across from each other in silence, he with his newspapers and I, Putri, with whatever novel I could pretend to read. I decided the rule was his way of avoiding me. Then, the week before I left for university, I asked whether the rule still applied now that I was grown. He thought about it, then slid a library slip across the table. On it he had written, in pencil, the title of every book I had read there that year, with a small mark beside the ones I had finished twice. __He had been paying attention the entire time.__ We walked home talking, loudly, the whole way.\n\n[질문] Which choice best describes the function of the underlined sentence in the text as a whole?\nA) It confirms the narrator's early belief that the stepfather avoided her.\nB) It explains why the library enforced strict silence in its reading room.\nC) It states the realization that overturns the narrator's view of the rule.\nD) It introduces a new rule that replaces the one the stepfather once kept firmly.\n\n[표시된 정답] C\n[해설]\n화자는 침묵 규칙을 의붓아버지 Anh이 자신을 피하는 방식이라고 여겼다. 그러나 그가 화자가 1년 동안 읽은 모든 책과 두 번 읽은 책까지 적어 둔 쪽지를 내밀자, 밑줄 문장은 그가 내내 관심을 기울이고 있었다는 깨달음을 직접 말한다. 이 깨달음이 규칙에 대한 화자의 기존 해석을 뒤집으므로 C가 정답이다. A는 반대 내용이고, B는 도서관의 정책을 설명하지 않으며, D는 새로운 규칙이 소개되지 않는다.\n### lit40-medium-03-079 — skill text_structure_purpose · 유형 underlined_portion_function\n[지문]\nI worked nights at a small clinic near the old stone bridge in Haifa, and Yitzhak was the patient who never slept. He talked instead, mostly about the bridge, which he had crossed every morning for fifty years on his way to the docks. One night his son phoned to say the family had decided to move him to a care home in another city. No one had asked him. I knew because I had been asked to keep it quiet until the papers were signed. I, Chana, said nothing, and for three nights I let him talk about the bridge as if he would walk it again. __On the fourth night I wheeled him to the window and told him.__ He was quiet a long time. Then he asked me to describe the bridge to him in the morning light, so he would have a newer picture to take with him.\n\n[질문] Which choice best describes the function of the underlined sentence in the text as a whole?\nA) It introduces the bridge as a place the patient has never seen before.\nB) It shows the narrator following the family's request to delay the news.\nC) It marks the moment when the patient finally learns to sleep through the night.\nD) It marks the narrator's decision to end her silence about the family's choice.\n\n[표시된 정답] D\n[해설]\n화자 Chana는 가족이 Yitzhak에게 묻지 않고 요양원 이전을 결정했다는 사실을 서류 서명 전까지 숨기라는 부탁을 받고 사흘 동안 침묵한다. 밑줄 문장은 넷째 날 밤 그녀가 그 침묵을 깨고 사실을 알리는 순간을 보여 준다. 이후 Yitzhak이 다리를 묘사해 달라고 부탁하는 결말도 이 결정에서 이어지므로 D가 정답이다. A는 그가 다리를 50년간 건넜다는 내용과 맞지 않고, B는 부탁을 어기는 장면이므로 반대이며, C는 잠에 관한 변화가 나오지 않는다."
+}

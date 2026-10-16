@@ -1,0 +1,360 @@
+{
+ "opts": {
+  "caps": {
+   "perModule": 1,
+   "perExam": 2,
+   "familyPerExam": 4
+  },
+  "maxShared": 15,
+  "groupCap": null,
+  "total": 13,
+  "allowSkillFallback": true,
+  "mix": {
+   "literature_fiction": 22,
+   "humanities": 14,
+   "social_science": 13,
+   "history_civics": 12,
+   "economics_business": 8,
+   "science_life": 11,
+   "science_earth_space": 7,
+   "science_physical": 8,
+   "technology": 5
+  },
+  "mixTol": 0.04,
+  "relaxFormat": false,
+  "excludeProblems": {}
+ },
+ "pubSets": [
+  "SAT Practice Test 1",
+  "SAT Practice Test 2",
+  "SAT Practice Test 3",
+  "SAT Practice Test 4",
+  "SAT Practice Test 5",
+  "SAT Practice Test 6",
+  "SAT Practice Test 7",
+  "SAT Practice Test 8",
+  "SAT Practice Test 9"
+ ],
+ "newRequested": 4,
+ "newPlanned": 4,
+ "swaps": 56,
+ "byReason": {
+  "archived_problem": 15,
+  "topic_cap": 41
+ },
+ "skillFallbacks": 6,
+ "noReplacement": [],
+ "versionBumped": 14,
+ "duplicatesAcrossAllSets": 0,
+ "groupErrors": [],
+ "groupPreExisting": [
+  "SAT Practice Test 6 / SAT Practice Test 7 share 17 groups (before 17, limit 15)"
+ ],
+ "missingCells": [],
+ "newPlanFailures": [],
+ "topicRelaxedInNewSets": [],
+ "shortfallsAtRequestedNew": [],
+ "remainingViolations": [],
+ "perSet": [
+  {
+   "name": "SAT Practice Test 1",
+   "kind": "copy",
+   "items": 147,
+   "subjects": {
+    "literature_fiction": 19,
+    "economics_business": 8,
+    "social_science": 8,
+    "history_civics": 6,
+    "science_life": 18,
+    "science_earth_space": 6,
+    "technology": 3,
+    "science_physical": 4,
+    "humanities": 9
+   },
+   "topClusters": [
+    "cephalopods×3",
+    "congestion-pricing×2",
+    "whistled-languages×2",
+    "streetcar-systems×2"
+   ],
+   "capViolations": []
+  },
+  {
+   "name": "SAT Practice Test 2",
+   "kind": "copy",
+   "items": 147,
+   "subjects": {
+    "literature_fiction": 19,
+    "science_physical": 4,
+    "science_life": 17,
+    "science_earth_space": 5,
+    "social_science": 8,
+    "economics_business": 7,
+    "history_civics": 8,
+    "humanities": 11,
+    "technology": 2
+   },
+   "topClusters": [
+    "carnivorous-plants×3",
+    "exoplanet-detection×2",
+    "cephalopods×2",
+    "textile-industry-decline×2"
+   ],
+   "capViolations": []
+  },
+  {
+   "name": "SAT Practice Test 3",
+   "kind": "copy",
+   "items": 147,
+   "subjects": {
+    "literature_fiction": 22,
+    "technology": 4,
+    "humanities": 9,
+    "science_life": 19,
+    "history_civics": 6,
+    "science_physical": 2,
+    "economics_business": 6,
+    "science_earth_space": 6,
+    "social_science": 7
+   },
+   "topClusters": [
+    "bus-rapid-transit×3",
+    "exoplanet-detection×2",
+    "whistled-languages×2",
+    "carnivorous-plants×2"
+   ],
+   "capViolations": []
+  },
+  {
+   "name": "SAT Practice Test 4",
+   "kind": "copy",
+   "items": 147,
+   "subjects": {
+    "science_life": 12,
+    "literature_fiction": 31,
+    "humanities": 6,
+    "social_science": 5,
+    "history_civics": 12,
+    "technology": 7,
+    "science_earth_space": 6,
+    "science_physical": 1,
+    "economics_business": 1
+   },
+   "topClusters": [
+    "sea-otters-kelp-forests×2",
+    "coqui-frog×2",
+    "desert-plant-adaptation×2",
+    "fiction-loss-of-faith×1"
+   ],
+   "capViolations": []
+  },
+  {
+   "name": "SAT Practice Test 5",
+   "kind": "copy",
+   "items": 147,
+   "subjects": {
+    "humanities": 8,
+    "history_civics": 8,
+    "literature_fiction": 32,
+    "science_earth_space": 10,
+    "science_life": 14,
+    "social_science": 4,
+    "technology": 4,
+    "economics_business": 1
+   },
+   "topClusters": [
+    "public-libraries×2",
+    "dutch-still-life-painting×2",
+    "carnivorous-plants×2",
+    "okavango-delta×2"
+   ],
+   "capViolations": []
+  },
+  {
+   "name": "SAT Practice Test 6",
+   "kind": "copy",
+   "items": 147,
+   "subjects": {
+    "literature_fiction": 31,
+    "science_life": 12,
+    "history_civics": 9,
+    "humanities": 12,
+    "science_physical": 2,
+    "social_science": 5,
+    "technology": 5,
+    "economics_business": 2,
+    "science_earth_space": 3
+   },
+   "topClusters": [
+    "whistled-languages×3",
+    "dutch-still-life-painting×2",
+    "fiction-family-secrets×2",
+    "sea-otters-kelp-forests×2"
+   ],
+   "capViolations": []
+  },
+  {
+   "name": "SAT Practice Test 7",
+   "kind": "copy",
+   "items": 147,
+   "subjects": {
+    "literature_fiction": 30,
+    "science_life": 13,
+    "science_earth_space": 13,
+    "humanities": 5,
+    "economics_business": 2,
+    "technology": 5,
+    "history_civics": 9,
+    "social_science": 4
+   },
+   "topClusters": [
+    "stellar-spectroscopy×2",
+    "okavango-delta×2",
+    "railway-time-standardization×2",
+    "bioluminescent-plankton×2"
+   ],
+   "capViolations": []
+  },
+  {
+   "name": "SAT Practice Test 8",
+   "kind": "copy",
+   "items": 147,
+   "subjects": {
+    "literature_fiction": 40,
+    "technology": 7,
+    "humanities": 6,
+    "science_life": 8,
+    "social_science": 5,
+    "economics_business": 2,
+    "science_earth_space": 6,
+    "history_civics": 5,
+    "science_physical": 2
+   },
+   "topClusters": [
+    "desert-plant-adaptation×2",
+    "fiction-lighthouse-keeper×2",
+    "bridge-engineering×2",
+    "3d-printed-bridge×2"
+   ],
+   "capViolations": []
+  },
+  {
+   "name": "SAT Practice Test 9",
+   "kind": "copy",
+   "items": 147,
+   "subjects": {
+    "literature_fiction": 35,
+    "science_life": 12,
+    "history_civics": 8,
+    "humanities": 6,
+    "technology": 5,
+    "economics_business": 4,
+    "social_science": 6,
+    "science_earth_space": 4,
+    "science_physical": 1
+   },
+   "topClusters": [
+    "sea-otters-kelp-forests×2",
+    "fast-radio-bursts×2",
+    "railway-time-standardization×2",
+    "streetcar-systems×2"
+   ],
+   "capViolations": []
+  },
+  {
+   "name": "SAT Practice Test 10",
+   "kind": "new",
+   "items": 147,
+   "subjects": {
+    "literature_fiction": 18,
+    "history_civics": 9,
+    "science_physical": 7,
+    "social_science": 10,
+    "science_earth_space": 6,
+    "humanities": 11,
+    "economics_business": 7,
+    "technology": 4,
+    "science_life": 9
+   },
+   "topClusters": [
+    "fiction-coming-of-age×1",
+    "fiction-gothic-mystery×1",
+    "apartheid×1",
+    "fiction-estranged-father-daughter×1"
+   ],
+   "capViolations": []
+  },
+  {
+   "name": "SAT Practice Test 11",
+   "kind": "new",
+   "items": 147,
+   "subjects": {
+    "social_science": 11,
+    "history_civics": 8,
+    "science_life": 8,
+    "literature_fiction": 18,
+    "science_physical": 7,
+    "humanities": 11,
+    "science_earth_space": 5,
+    "economics_business": 7,
+    "technology": 6
+   },
+   "topClusters": [
+    "self-efficacy×1",
+    "public-libraries×1",
+    "desert-plant-adaptation×1",
+    "fiction-village-mystery×1"
+   ],
+   "capViolations": []
+  },
+  {
+   "name": "SAT Practice Test 12",
+   "kind": "new",
+   "items": 147,
+   "subjects": {
+    "technology": 4,
+    "economics_business": 7,
+    "science_physical": 7,
+    "science_life": 9,
+    "literature_fiction": 18,
+    "humanities": 11,
+    "history_civics": 8,
+    "social_science": 11,
+    "science_earth_space": 6
+   },
+   "topClusters": [
+    "emotional-labor×2",
+    "fish-ladder-engineering×1",
+    "optical-lens-patents×1",
+    "bordeaux-wine-ranking×1"
+   ],
+   "capViolations": []
+  },
+  {
+   "name": "SAT Practice Test 13",
+   "kind": "new",
+   "items": 147,
+   "subjects": {
+    "technology": 5,
+    "economics_business": 7,
+    "social_science": 9,
+    "literature_fiction": 18,
+    "science_life": 8,
+    "history_civics": 9,
+    "science_earth_space": 6,
+    "humanities": 12,
+    "science_physical": 7
+   },
+   "topClusters": [
+    "tidal-river-management×2",
+    "public-libraries×2",
+    "cleaner-wrasse×2",
+    "boat-lifts×1"
+   ],
+   "capViolations": []
+  }
+ ],
+ "poolInitial": 3285,
+ "poolLeft": 2641,
+ "unclassifiedPool": 0
+}

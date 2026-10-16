@@ -1,0 +1,802 @@
+{
+ "taskId": "gen-lit40-easy-04-02",
+ "passed": [
+  {
+   "candidateId": "lit40-easy-04-021",
+   "task": "gen-lit40-easy-04-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-easy-04-021",
+    "batchId": "lit40-easy-04",
+    "route": "excerpt",
+    "skill": "text_structure_purpose",
+    "difficulty": "easy",
+    "questionType": "tone_shift",
+    "genre": "memoir",
+    "seed": {
+     "index": 20,
+     "genre": "memoir",
+     "pov": "first",
+     "styleEra": "late_20c",
+     "names": [
+      "Eamon",
+      "Danish"
+     ],
+     "nameCultures": [
+      "irish_scottish",
+      "south_asian_muslim_sri_lankan"
+     ],
+     "locale": "Karachi",
+     "setting": "a bookbinder's workshop",
+     "relationship": "a coach and a benched star",
+     "conflict": "after a mistake that only one person noticed",
+     "openingStyle": "짧은 단언문으로 시작",
+     "topicSeed": "a bookbinder's workshop in Karachi; a coach and a benched star after a mistake that only one person noticed"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "What great race has ever been won by any man, or by any nation, without some such fall during its course? Have we not all declared that some check to that career was necessary? Men in their pursuit of intelligence had forgotten to be honest; in struggling for greatness they had discarded purity. The nation has been great, but the statesmen of the nation have been little. Men have hardly been ambitious to govern, but they have coveted the wages of governors. Corruption has crept into high places,--into places that should have been high,--till of all holes and corners in the land they have become the lowest. No public man has been trusted for ordinary honesty.",
+    "question": "Which choice best describes the shift in tone that occurs in the text?",
+    "options": [
+     "From bitter resentment of a rival nation to cautious praise of its leaders",
+     "From playful mockery of statesmen to sincere sympathy for their burdens",
+     "From hopeful anticipation of reform to quiet resignation about failure",
+     "From reflective acceptance of a setback to blunt condemnation of corruption"
+    ],
+    "correct_letter": "D",
+    "explanation": "지문 앞부분은 수사 의문문으로 어떤 경주에도 넘어짐은 있으며 그 제동이 필요했다고 차분히 받아들인다. 이후 정치가들이 작았고 부패가 높은 자리에 스며들었다는 문장에서 어조가 날카로운 비판으로 바뀐다. 따라서 D가 정답이다. A의 경쟁 국가, B의 조롱과 동정, C의 개혁에 대한 기대는 지문에 나타나지 않는다."
+   },
+   "notes": [],
+   "tone": [
+    "reflective",
+    "critical"
+   ],
+   "devices": [
+    "rhetorical question",
+    "antithesis"
+   ],
+   "producerModel": "opus",
+   "excerpt": {
+    "text": "What great race has ever been won by any man, or by any nation, without some such fall during its course? Have we not all declared that some check to that career was necessary? Men in their pursuit of intelligence had forgotten to be honest; in struggling for greatness they had discarded purity. The nation has been great, but the statesmen of the nation have been little. Men have hardly been ambitious to govern, but they have coveted the wages of governors. Corruption has crept into high places,--into places that should have been high,--till of all holes and corners in the land they have become the lowest. No public man has been trusted for ordinary honesty.",
+    "source": {
+     "author": "Trollope, Anthony",
+     "work": "North America — Volume 2",
+     "year": null,
+     "yearSource": "unknown(코퍼스 메타에 발행연도 없음)",
+     "authorDeathYear": 1882,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/1866",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg:gutenberg-1866",
+     "corpusTextSha256": "e4755d1d0fb5f6cac7ed752d4e96a5d3a70d16ae70b16372b861e06d3074e09a",
+     "excerptSha256": "f9fe62ac275e7a5a757e9071db70ecf251b97f449067b9bb55c9741ae98b23b4",
+     "sliceSha256": "2efed812cc2cd3fc5970efb1c237bbfe038d2cfeaced857bd89750ee0095c675",
+     "location": {
+      "startChar": 222507,
+      "endChar": 223173,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 26
+     },
+     "genre": "memoir",
+     "workForm": "memoir"
+    }
+   },
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-easy-04-022",
+   "task": "gen-lit40-easy-04-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-easy-04-022",
+    "batchId": "lit40-easy-04",
+    "route": "excerpt",
+    "skill": "text_structure_purpose",
+    "difficulty": "easy",
+    "questionType": "text_structure",
+    "genre": "short_story",
+    "seed": {
+     "index": 21,
+     "genre": "short_story",
+     "pov": "first",
+     "styleEra": "early_20c",
+     "names": [
+      "Lakshmi",
+      "Ottavio"
+     ],
+     "nameCultures": [
+      "indian_subcontinent",
+      "italian"
+     ],
+     "locale": "Naples",
+     "setting": "a stone bridge",
+     "relationship": "a bus driver and a regular passenger",
+     "conflict": "after a quiet act of generosity",
+     "openingStyle": "과거를 회상하는 문장으로 시작('Years later', 'Once' 등)",
+     "topicSeed": "a stone bridge in Naples; a bus driver and a regular passenger after a quiet act of generosity"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Upon mentioning this I found that it had been noticed in elm avenues and groups a hundred miles distant, so that it is not a local circumstance.\n\nAs far as yet appears, the elms do not seem materially injured, the damage being outwardly confined to the bough attacked. These brown spots looked very remarkable just after the trees had become green. They were quite distinct from the damage caused by the snow of October 1880. The boughs broken by the snow had leaves upon them which at once turned brown, and in the case of the oak were visible, the following spring, as brown spots among the green.",
+    "question": "Which choice best describes the overall structure of the text?",
+    "options": [
+     "It notes that a tree condition is widespread, assesses its effects, and separates it from earlier damage.",
+     "It explains the cause of a tree disease, then proposes a method for preventing its spread.",
+     "It recalls a snowstorm in detail, then argues that the storm permanently weakened the elms.",
+     "It compares elms and oaks in general, then concludes that oaks are the hardier trees."
+    ],
+    "correct_letter": "A",
+    "explanation": "화자는 먼저 갈색 반점이 백 마일 떨어진 곳에서도 관찰되어 지역적 현상이 아니라고 밝힌다. 이어 느릅나무가 크게 손상되지 않았다고 평가하고, 1880년 10월 눈 피해와는 뚜렷이 다르다고 구분한다. 따라서 A가 정답이다. B의 원인·예방책, C의 영구적 약화 주장, D의 수종 비교는 지문에 없다."
+   },
+   "notes": [],
+   "tone": [
+    "observational",
+    "measured"
+   ],
+   "devices": [
+    "comparison",
+    "description"
+   ],
+   "producerModel": "opus",
+   "excerpt": {
+    "text": "Upon mentioning this I found that it had been noticed in elm avenues and groups a hundred miles distant, so that it is not a local circumstance.\n\nAs far as yet appears, the elms do not seem materially injured, the damage being outwardly confined to the bough attacked. These brown spots looked very remarkable just after the trees had become green. They were quite distinct from the damage caused by the snow of October 1880. The boughs broken by the snow had leaves upon them which at once turned brown, and in the case of the oak were visible, the following spring, as brown spots among the green.",
+    "source": {
+     "author": "Jefferies, Richard",
+     "work": "Nature Near London",
+     "year": null,
+     "yearSource": "unknown(코퍼스 메타에 발행연도 없음)",
+     "authorDeathYear": 1887,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/18629",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg:gutenberg-18629",
+     "corpusTextSha256": "c7404a430d32435d047607d4c7a7e6f098ee46f65351175decc0e386c1014ef8",
+     "excerptSha256": "f2200865af4b874b6425ac7767430cb1e12d67322a3a63506d6103dbdc41c6c8",
+     "sliceSha256": "db893ab9a85c321e0be380ec1f4170ff49e4187822346765f932f1ab16369571",
+     "location": {
+      "startChar": 220159,
+      "endChar": 220758,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 60
+     },
+     "genre": "short_story",
+     "workForm": "short_story"
+    }
+   },
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-easy-04-023",
+   "task": "gen-lit40-easy-04-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-easy-04-023",
+    "batchId": "lit40-easy-04",
+    "route": "excerpt",
+    "skill": "text_structure_purpose",
+    "difficulty": "easy",
+    "questionType": "text_structure",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 22,
+     "genre": "novel_excerpt",
+     "pov": "first",
+     "styleEra": "contemporary",
+     "names": [
+      "Ama",
+      "Nasrin"
+     ],
+     "nameCultures": [
+      "west_african",
+      "persian_central_asian"
+     ],
+     "locale": "Samarkand",
+     "setting": "a laundromat",
+     "relationship": "a grandson and the grandfather's old friend",
+     "conflict": "about starting over somewhere unfamiliar",
+     "openingStyle": "시간·날짜 표현으로 시작('By', 'On', 'After' 등)",
+     "topicSeed": "a laundromat in Samarkand; a grandson and the grandfather's old friend about starting over somewhere unfamiliar"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Really, Sir Hugo was worthy of it on his own individual merits. He was a fine young fellow. The foundation of his principles had been laid by a good mother--a widow who had never ceased to mourn for the husband of her youth, whose son, her only child, was the apple of her eye. From her he had derived a remarkable amount of ingenuousness and a dash of enthusiasm, which such intercourse with the world as he had commanded had failed to extinguish. He was regarded as something of a young Quixote at his University, which had been his world for the most part, but he had possessed wit to defend his views. He was manly, rather rash, and a little thoughtless; but in his very thoughtlessness he was generous and honest--a lad to be liked first and trusted afterwards.",
+    "question": "Which choice best describes the overall structure of the text?",
+    "options": [
+     "It describes a mother's grief, then shows how her sorrow eventually ruined her son.",
+     "It asserts a young man's merit, traces the source of his principles, and summarizes his traits.",
+     "It recounts a university quarrel, then explains how a young man was punished for it.",
+     "It lists a young man's faults, then reveals that others refused to trust him."
+    ],
+    "correct_letter": "B",
+    "explanation": "지문은 먼저 휴고 경이 자신의 장점만으로도 그럴 자격이 있다고 단언한다. 이어 그의 원칙의 토대가 어머니에게서 왔다고 설명하고, 마지막에 성급함과 관대함 같은 성격을 요약한다. 따라서 B가 정답이다. A의 몰락, C의 처벌, D의 불신은 지문 내용과 어긋난다."
+   },
+   "notes": [],
+   "tone": [
+    "admiring",
+    "affectionate"
+   ],
+   "devices": [
+    "characterization"
+   ],
+   "producerModel": "opus",
+   "excerpt": {
+    "text": "Really, Sir Hugo was worthy of it on his own individual merits. He was a fine young fellow. The foundation of his principles had been laid by a good mother--a widow who had never ceased to mourn for the husband of her youth, whose son, her only child, was the apple of her eye. From her he had derived a remarkable amount of ingenuousness and a dash of enthusiasm, which such intercourse with the world as he had commanded had failed to extinguish. He was regarded as something of a young Quixote at his University, which had been his world for the most part, but he had possessed wit to defend his views. He was manly, rather rash, and a little thoughtless; but in his very thoughtlessness he was generous and honest--a lad to be liked first and trusted afterwards.",
+    "source": {
+     "author": "Tytler, Sarah",
+     "work": "Saint Mungo's city; vol. 2 [of 3]",
+     "year": null,
+     "yearSource": "unknown(코퍼스 메타에 발행연도 없음)",
+     "authorDeathYear": 1914,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/79372",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg:gutenberg-79372",
+     "corpusTextSha256": "79f300fa70d17367cdd3426263e17b6259ee2de78e0d3653b545ac4caae60bea",
+     "excerptSha256": "30765caf0ec55211cc839ac39fe510ad5460b61ef6adf1e458e5b5e7941efc54",
+     "sliceSha256": "177b6ec388ddbfedbda16b516c4f12fc645df4b35dad721c1a6ca7f554af397f",
+     "location": {
+      "startChar": 129504,
+      "endChar": 130270,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 46
+     },
+     "genre": "novel_excerpt",
+     "workForm": "novel_excerpt"
+    }
+   },
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-easy-04-024",
+   "task": "gen-lit40-easy-04-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-easy-04-024",
+    "batchId": "lit40-easy-04",
+    "route": "excerpt",
+    "skill": "text_structure_purpose",
+    "difficulty": "easy",
+    "questionType": "text_structure",
+    "genre": "personal_essay",
+    "seed": {
+     "index": 23,
+     "genre": "personal_essay",
+     "pov": "third_limited",
+     "styleEra": "contemporary",
+     "names": [
+      "Lindiwe",
+      "Baraka"
+     ],
+     "nameCultures": [
+      "east_south_african",
+      "east_south_african"
+     ],
+     "locale": "Addis Ababa",
+     "setting": "a boarding-house kitchen",
+     "relationship": "a mayor and the town's only doctor",
+     "conflict": "after discovering a letter meant for someone else",
+     "openingStyle": "의문문으로 시작",
+     "topicSeed": "a boarding-house kitchen in Addis Ababa; a mayor and the town's only doctor after discovering a letter meant for someone else"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "We cannot suppose that life would develop in any important degree in a region of perpetual frost, such as the polar regions of our globe. But we do not find any end to it as the climate becomes warmer. On the contrary, every one knows that the tropics are the most fertile regions of the globe in its production. The luxuriance of the vegetation and the number of the animals continually increase the more tropical the climate becomes. Where the limit may be set no one can say. But it would doubtless be far above the present temperature of the equatorial regions.\n\nIt has often been said that this does not apply to the human race, that men lack vigor in the tropics.",
+    "question": "Which choice best describes the overall structure of the text?",
+    "options": [
+     "It describes polar wildlife, then argues that cold regions support the most life.",
+     "It questions whether tropical regions exist, then defends that claim with examples.",
+     "It presents a claim linking warmth to abundant life, then introduces an objection about humans.",
+     "It praises human vigor in the tropics, then explains why vegetation is scarce there."
+    ],
+    "correct_letter": "C",
+    "explanation": "글쓴이는 영구 동토에서는 생명이 발달하기 어렵지만 기후가 따뜻할수록 동식물이 늘어난다고 주장한다. 그 뒤 새 문단에서 이 원리가 인류에는 적용되지 않는다는, 열대에서 사람이 활력을 잃는다는 반론을 소개한다. 따라서 C가 정답이다. A, B, D는 지문의 주장과 반대이거나 근거가 없다."
+   },
+   "notes": [],
+   "tone": [
+    "analytical",
+    "confident"
+   ],
+   "devices": [
+    "contrast"
+   ],
+   "producerModel": "opus",
+   "excerpt": {
+    "text": "We cannot suppose that life would develop in any important degree in a region of perpetual frost, such as the polar regions of our globe. But we do not find any end to it as the climate becomes warmer. On the contrary, every one knows that the tropics are the most fertile regions of the globe in its production. The luxuriance of the vegetation and the number of the animals continually increase the more tropical the climate becomes. Where the limit may be set no one can say. But it would doubtless be far above the present temperature of the equatorial regions.\n\nIt has often been said that this does not apply to the human race, that men lack vigor in the tropics.",
+    "source": {
+     "author": "Newcomb, Simon",
+     "work": "Side-Lights on Astronomy and Kindred Fields of Popular Science",
+     "year": null,
+     "yearSource": "unknown(코퍼스 메타에 발행연도 없음)",
+     "authorDeathYear": 1909,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/4065",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg:gutenberg-4065",
+     "corpusTextSha256": "2b258fd9128f86932c4a266608f3fa008a73ccc5c5d6010c1d9529126b11cc38",
+     "excerptSha256": "38219e0d23f8221668e2e0bf7843e800b5abf2541d150aebff2655a79c8afb71",
+     "sliceSha256": "9ea300c9beeb25cc51e4828b07f6b7f60ba42cfb1a9cb5d88abe39d90286d210",
+     "location": {
+      "startChar": 197796,
+      "endChar": 198465,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 35
+     },
+     "genre": "personal_essay",
+     "workForm": "personal_essay"
+    }
+   },
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-easy-04-029",
+   "task": "gen-lit40-easy-04-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-easy-04-029",
+    "batchId": "lit40-easy-04",
+    "route": "excerpt",
+    "skill": "central_ideas_details",
+    "difficulty": "easy",
+    "questionType": "narrator_attitude",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 28,
+     "genre": "novel_excerpt",
+     "pov": "first",
+     "styleEra": "contemporary",
+     "names": [
+      "Folasade",
+      "Obinna"
+     ],
+     "nameCultures": [
+      "west_african",
+      "west_african"
+     ],
+     "locale": "Lagos",
+     "setting": "a night bus",
+     "relationship": "a farmer and a surveyor from the city",
+     "conflict": "while hiding a small failure",
+     "openingStyle": "대명사 I 또는 We 로 시작",
+     "topicSeed": "a night bus in Lagos; a farmer and a surveyor from the city while hiding a small failure"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "When I arrived at home I of course went to see Lottie before talking with any one else. I found my darling all that heart could wish. She was more beautiful, more charming in my eyes than ever. The large, dreamy blue eyes were swimming in tears of joy as I held her to my glad heart, and I saw a look of love that satisfied me that I was the possessor of a treasure of great value. I lingered by my darling’s side until late at night. Every little trifling incident was described--the days of old were alluded to and discussed, while the present and future came in for a full share.",
+    "question": "Which choice best describes the narrator's attitude toward Lottie?",
+    "options": [
+     "Deep affection and delight in her company",
+     "Polite respect mixed with quiet doubt",
+     "Mild irritation at her emotional display",
+     "Guilty unease about his long absence"
+    ],
+    "correct_letter": "A",
+    "explanation": "화자는 집에 오자마자 다른 누구보다 먼저 로티를 찾아가 그녀가 마음에 바라던 모든 것이라고 말한다. 또 밤늦게까지 그녀 곁에 머물며 지난날과 미래를 이야기했다고 서술한다. 따라서 A가 정답이다. 의심, 짜증, 죄책감을 보여 주는 표현은 지문에 없으므로 B, C, D는 틀리다."
+   },
+   "notes": [],
+   "tone": [
+    "tender",
+    "joyful"
+   ],
+   "devices": [
+    "imagery"
+   ],
+   "producerModel": "opus",
+   "excerpt": {
+    "text": "When I arrived at home I of course went to see Lottie before talking with any one else. I found my darling all that heart could wish. She was more beautiful, more charming in my eyes than ever. The large, dreamy blue eyes were swimming in tears of joy as I held her to my glad heart, and I saw a look of love that satisfied me that I was the possessor of a treasure of great value. I lingered by my darling’s side until late at night. Every little trifling incident was described--the days of old were alluded to and discussed, while the present and future came in for a full share.",
+    "source": {
+     "author": "Falkner, William C. (Clark)",
+     "work": "The White Rose of Memphis",
+     "year": 1881,
+     "yearSource": "text-header(copyright/published line)",
+     "authorDeathYear": 1889,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/41134",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg:gutenberg-41134",
+     "corpusTextSha256": "0347e53bd10a6335fe570663a3814e2a2685eb2293a73b0cbdde1d6d8950bfba",
+     "excerptSha256": "9b15460f8e7da5cb1a0c0316b86b5eacfd79ce71f8fa0b7583cd1cec3d49d3d1",
+     "sliceSha256": "fd35b65de945be564b9853080bf9078776c40f1afe28f4345f159f95f474e047",
+     "location": {
+      "startChar": 309388,
+      "endChar": 309970,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 28
+     },
+     "genre": "novel_excerpt",
+     "workForm": "novel_excerpt"
+    }
+   },
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-easy-04-031",
+   "task": "gen-lit40-easy-04-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-easy-04-031",
+    "batchId": "lit40-easy-04",
+    "route": "excerpt",
+    "skill": "central_ideas_details",
+    "difficulty": "easy",
+    "questionType": "main_idea_or_purpose",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 30,
+     "genre": "novel_excerpt",
+     "pov": "mixed_or_none",
+     "styleEra": "19c",
+     "names": [
+      "Friedrich",
+      "Jianguo"
+     ],
+     "nameCultures": [
+      "german_austrian",
+      "chinese"
+     ],
+     "locale": "Chengdu",
+     "setting": "a hillside terrace",
+     "relationship": "two estranged sisters",
+     "conflict": "after a competition one of them lost on purpose",
+     "openingStyle": "대명사 I 또는 We 로 시작",
+     "topicSeed": "a hillside terrace in Chengdu; two estranged sisters after a competition one of them lost on purpose"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "We had sunk together into the slough of despond, and she contrived to scramble out of it and leave me in the mire. She was clever enough to make use of me to accomplish her escape, sent me out among hard-hearted humanity to borrow, beg, or steal the means by which she meant to separate herself from my fallen fortunes. Do you think I came across the world to seek for her? No, Dick, I am not such a fool. I have been cheated once. I shall never be her dupe again. Do you think I could ever trust her any more?--that if fortune smiled upon us, and she pretended to love me, I could feel any confidence in her truth, any security in her affection?",
+    "question": "Which choice best states the main idea of the text?",
+    "options": [
+     "The speaker hopes to find the woman and win back her love.",
+     "The speaker blames himself alone for their shared misfortune.",
+     "The speaker insists he will never again trust a woman who deceived him.",
+     "The speaker asks Dick to help him borrow money for a journey."
+    ],
+    "correct_letter": "C",
+    "explanation": "화자는 그녀가 자신을 이용해 빠져나갔고 자신은 진창에 남겨졌다고 말한다. 이어 그녀를 찾으러 온 것이 아니며 다시는 속지 않겠다고 하고, 앞으로 그녀의 진심을 믿을 수 없다고 묻는다. 따라서 C가 정답이다. A는 반대이고, B는 그녀를 탓하는 태도와 어긋나며, D는 과거 사건을 잘못 쓴 것이다."
+   },
+   "notes": [],
+   "tone": [
+    "bitter",
+    "resentful"
+   ],
+   "devices": [
+    "metaphor",
+    "rhetorical question"
+   ],
+   "producerModel": "opus",
+   "excerpt": {
+    "text": "We had sunk together into the slough of despond, and she contrived to scramble out of it and leave me in the mire. She was clever enough to make use of me to accomplish her escape, sent me out among hard-hearted humanity to borrow, beg, or steal the means by which she meant to separate herself from my fallen fortunes. Do you think I came across the world to seek for her? No, Dick, I am not such a fool. I have been cheated once. I shall never be her dupe again. Do you think I could ever trust her any more?--that if fortune smiled upon us, and she pretended to love me, I could feel any confidence in her truth, any security in her affection?",
+    "source": {
+     "author": "Braddon, M. E. (Mary Elizabeth)",
+     "work": "Dead men's shoes, vol. 1 (of 3)",
+     "year": null,
+     "yearSource": "unknown(코퍼스 메타에 발행연도 없음)",
+     "authorDeathYear": 1915,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/78772",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg:gutenberg-78772",
+     "corpusTextSha256": "1e46bdd802142a6eab2d858f55ba9d925f31a653d3943660e364fbb6fe6351e5",
+     "excerptSha256": "0c36c52c4cc190c6118e30abc358edc37d525b68240df374720fe1eb9a1884cd",
+     "sliceSha256": "e84dbad891155fff41ca6dcf7dca8ff1f779899e5bb0624a58093a98ba16bb0a",
+     "location": {
+      "startChar": 284765,
+      "endChar": 285411,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 91
+     },
+     "genre": "novel_excerpt",
+     "workForm": "novel_excerpt"
+    }
+   },
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-easy-04-033",
+   "task": "gen-lit40-easy-04-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-easy-04-033",
+    "batchId": "lit40-easy-04",
+    "route": "excerpt",
+    "skill": "words_in_context",
+    "difficulty": "easy",
+    "questionType": "figurative_language",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 32,
+     "genre": "novel_excerpt",
+     "pov": "mixed_or_none",
+     "styleEra": "contemporary",
+     "names": [
+      "Mandla",
+      "Makana"
+     ],
+     "nameCultures": [
+      "east_south_african",
+      "pacific_maori_hawaiian"
+     ],
+     "locale": "Maui",
+     "setting": "a vineyard at harvest",
+     "relationship": "a conductor and the youngest violinist",
+     "conflict": "while pretending nothing has changed",
+     "openingStyle": "감각 묘사(소리·냄새·촉감)로 시작",
+     "topicSeed": "a vineyard at harvest in Maui; a conductor and the youngest violinist while pretending nothing has changed"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Eight miles meant nearly three hours’ steaming for us, and I could also see suspicious ripples at the upper end of the reach. Nevertheless, I was annoyed beyond expression at the delay, and most unreasonably, too, since one night more could not matter much after so many months. As we had plenty of wood, and caution was the word, I brought up in the middle of the stream. The reach was narrow, straight, with high sides like a railway cutting. The dusk came gliding into it long before the sun had set. The current ran smooth and swift, but a dumb immobility sat on the banks.",
+    "question": "As used in the text, the phrase “a dumb immobility sat on the banks” most nearly suggests that the riverbanks",
+    "options": [
+     "were crowded with people waiting silently",
+     "were too steep for the boat to approach",
+     "were slowly being worn away by the current",
+     "were eerily silent and still"
+    ],
+    "correct_letter": "D",
+    "explanation": "화자는 해가 지기 전부터 어둠이 좁은 수로에 스며들었다고 묘사한다. 물살은 빠르게 흘렀지만 강둑에는 말없는 정적이 앉아 있었다는 대비로 섬뜩한 고요함을 드러낸다. 따라서 D가 정답이다. A의 사람들, B의 경사, C의 침식은 구절의 의미가 아니다."
+   },
+   "notes": [],
+   "tone": [
+    "ominous",
+    "tense"
+   ],
+   "devices": [
+    "personification",
+    "simile"
+   ],
+   "producerModel": "opus",
+   "excerpt": {
+    "text": "Eight miles meant nearly three hours’ steaming for us, and I could also see suspicious ripples at the upper end of the reach. Nevertheless, I was annoyed beyond expression at the delay, and most unreasonably, too, since one night more could not matter much after so many months. As we had plenty of wood, and caution was the word, I brought up in the middle of the stream. The reach was narrow, straight, with high sides like a railway cutting. The dusk came gliding into it long before the sun had set. The current ran smooth and swift, but a dumb immobility sat on the banks.",
+    "source": {
+     "author": "Conrad, Joseph",
+     "work": "Heart of Darkness",
+     "year": null,
+     "yearSource": "unknown(코퍼스 메타에 발행연도 없음)",
+     "authorDeathYear": 1924,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/219",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg:gutenberg-219",
+     "corpusTextSha256": "98deb349aafc5d158ea4ea69266834f5744e458231b27bc5c87b6f4fb2e220f0",
+     "excerptSha256": "181e050a6fc5ea8e69947bd983221c98f40b025e92d676cafcee63d3818775f0",
+     "sliceSha256": "a23d2b87fbbb5fc404e92bc332122677a6b025ec2625a58fc9e3188c6df76fb0",
+     "location": {
+      "startChar": 100862,
+      "endChar": 101439,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 48
+     },
+     "genre": "novel_excerpt",
+     "workForm": "novel_excerpt"
+    }
+   },
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-easy-04-034",
+   "task": "gen-lit40-easy-04-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-easy-04-034",
+    "batchId": "lit40-easy-04",
+    "route": "excerpt",
+    "skill": "words_in_context",
+    "difficulty": "easy",
+    "questionType": "figurative_language",
+    "genre": "poetry",
+    "seed": {
+     "index": 33,
+     "genre": "poetry",
+     "pov": "first",
+     "styleEra": "early_20c",
+     "names": [
+      "Mele",
+      "Angus"
+     ],
+     "nameCultures": [
+      "pacific_maori_hawaiian",
+      "irish_scottish"
+     ],
+     "locale": "Galway",
+     "setting": "a roadside diner",
+     "relationship": "a returning soldier and his younger sister",
+     "conflict": "when someone returns after years without explaining",
+     "openingStyle": "의문문으로 시작",
+     "topicSeed": "a roadside diner in Galway; a returning soldier and his younger sister when someone returns after years without explaining"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "\"I had grottos, and fountains, and orange-tree groves,\nI had all that enchantment has told;\nI had sweet shady walks for the gods and their loves,\nI had mountains of coral and gold.\n\n\"But a storm that I felt not had risen and rolled,\nWhile wrapped in a slumber I lay;\nAnd when I looked out in the morning, behold,\nMy Castle was carried away.\n\n\"It passed over rivers and valleys and groves,\nThe world it was all in my view;\nI thought of my friends, of their fates, of their loves,\nAnd often, full often, of you.",
+    "question": "As used in the text, the phrase “My Castle was carried away” most nearly suggests that the speaker",
+    "options": [
+     "lost the splendid world of the imagination",
+     "fled from a real fortress during a storm",
+     "gave away riches to friends",
+     "moved to a new home in the mountains"
+    ],
+    "correct_letter": "A",
+    "explanation": "화자는 동굴, 분수, 산호와 황금의 산 등 마법 같은 것들을 가졌다고 나열한다. 그러나 잠든 사이 일어난 폭풍에 성이 날아갔다고 하며, 그 성은 상상 속 화려한 꿈을 가리킨다. 따라서 A가 정답이다. B, C, D는 비유를 문자 그대로 읽거나 근거 없는 해석이다."
+   },
+   "notes": [],
+   "tone": [
+    "wistful",
+    "whimsical"
+   ],
+   "devices": [
+    "metaphor",
+    "anaphora"
+   ],
+   "producerModel": "opus",
+   "excerpt": {
+    "text": "\"I had grottos, and fountains, and orange-tree groves,\nI had all that enchantment has told;\nI had sweet shady walks for the gods and their loves,\nI had mountains of coral and gold.\n\n\"But a storm that I felt not had risen and rolled,\nWhile wrapped in a slumber I lay;\nAnd when I looked out in the morning, behold,\nMy Castle was carried away.\n\n\"It passed over rivers and valleys and groves,\nThe world it was all in my view;\nI thought of my friends, of their fates, of their loves,\nAnd often, full often, of you.",
+    "source": {
+     "author": "Conway, Moncure Daniel",
+     "work": "The Life Of Thomas Paine, Vol. 2. (of 2)\r With A History of His Literary, Political and Religious Career in America France, and England",
+     "year": 1899,
+     "yearSource": "text-header(copyright/published line)",
+     "authorDeathYear": 1907,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/37702",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg_humanities:gutenberg-37702",
+     "corpusTextSha256": "be37952fdb30d442a46010fda5fab27fdfb8bfa6cc40335b86fdd0e6a04d44cb",
+     "excerptSha256": "34225b61d8fa6c293c26c18519d8c4220aba9f568b6876e85b5f25b54ffb6296",
+     "sliceSha256": "ddeed7a91a749af7ffff160083fa87250bd0838030edf179b6396a0e39d770b3",
+     "location": {
+      "startChar": 411628,
+      "endChar": 412192,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 47
+     },
+     "genre": "poetry",
+     "workForm": "poetry"
+    }
+   },
+   "wordRetries": 0,
+   "rewrites": 0
+  }
+ ],
+ "rejected": [
+  {
+   "candidateId": "lit40-easy-04-025",
+   "stage": "format",
+   "reasons": [
+    "발췌 지문이 제공된 원문과 다름"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-04-026",
+   "stage": "format",
+   "reasons": [
+    "발췌 지문이 제공된 원문과 다름"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-04-027",
+   "stage": "format",
+   "reasons": [
+    "발췌 지문이 제공된 원문과 다름"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-04-028",
+   "stage": "distractor",
+   "reasons": [
+    "정답이 가장 긴 선택지(17단어, 다음 14)"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-04-030",
+   "stage": "distractor",
+   "reasons": [
+    "정답이 가장 긴 선택지(15단어, 다음 12)"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-04-032",
+   "stage": "distractor",
+   "reasons": [
+    "정답이 가장 긴 선택지(9단어, 다음 7)"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-04-035",
+   "stage": "distractor",
+   "reasons": [
+    "정답이 가장 긴 선택지(9단어, 다음 7)"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-04-036",
+   "stage": "distractor",
+   "reasons": [
+    "정답이 가장 긴 선택지(10단어, 다음 7)"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-04-037",
+   "stage": "format",
+   "reasons": [
+    "발췌 지문이 제공된 원문과 다름"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-04-038",
+   "stage": "format",
+   "reasons": [
+    "발췌 지문이 제공된 원문과 다름"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-04-039",
+   "stage": "format",
+   "reasons": [
+    "발췌 지문이 제공된 원문과 다름"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-04-040",
+   "stage": "format",
+   "reasons": [
+    "발췌 지문이 제공된 원문과 다름"
+   ]
+  }
+ ],
+ "retryWords": [],
+ "extraIgnored": []
+}

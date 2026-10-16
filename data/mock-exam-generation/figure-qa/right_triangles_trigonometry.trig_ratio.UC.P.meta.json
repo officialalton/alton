@@ -1,0 +1,42 @@
+{
+ "itemId": "right_triangles_trigonometry.trig_ratio.UC.P",
+ "generatedAt": "2026-10-07T05:02:01.146Z",
+ "codeHash": "d2c64e4e2b0a788ac77e863747fd8dac50f0197d5ed266a27ee30cadb2c8303e",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/unit-circle.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/right_triangles_trigonometry.trig_ratio.UC.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/uc-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "right_triangles_trigonometry.trig_ratio.UC.P.png",
+   "mobileFile": "right_triangles_trigonometry.trig_ratio.UC.P.m375.png",
+   "archetypeId": "rtt.trig_ratio.UC.P.chain2",
+   "seed": 11,
+   "signature": "unit_circle",
+   "stimulus": "During a review session, students study the diagram shown. For the unit circle in the figure, the terminal side of angle $\\beta$ (in standard position) passes through point $B$.",
+   "question": "Find $\\tan\\beta$.",
+   "options": [
+    "15/8",
+    "15/17",
+    "8/15",
+    "8/17"
+   ],
+   "correctIndex": 2,
+   "answer": "8/15",
+   "explanation": "(1) 그림에서 점 P 의 좌표 라벨 (a, 8/17) 을 읽는다. 한 좌표는 문자로 가려져 있다. (2) x² + y² = 1 이므로 가려진 좌표의 크기는 15/17 이다. (3) P 는 I사분면에 있으므로 부호를 정하면 (x, y) = (15/17, 8/17) 이다. (4) tan θ = y ÷ x = 8/15 이다. (5) 따라서 8/15 이다. 따라서 정답은 8/15이다.",
+   "structuralIssues": []
+  }
+ ]
+}

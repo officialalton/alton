@@ -1,0 +1,2481 @@
+[
+ {
+  "key": "ap_chemistry-m01-k0",
+  "cellId": "ap_chemistry-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Molar mass 132.1 g/mol; 25.8/132.1=0.195 mol compound; ×2 N = 0.390 mol",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "0.390 mol"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Mole and molar mass calculation with subscript scaling; fits 1.1/5.F."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "0.390 mol is unique and correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions, each explained in the explanation text. The key option's 'why' field is empty, which is acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "A short calculation, with options consistent with calculator use."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, in scope, and has well-designed distractors. Pass."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: compute the molar mass of (NH4)2SO4 (handling the subscript outside parentheses), convert mass to moles, then apply the 2 N per formula unit ratio. Distractors map to common slips (omitting the ratio, dividing instead of multiplying). Short arithmetic, minimal reading, no unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_chemistry-m01-k1",
+  "cellId": "ap_chemistry-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "1.41 mol",
+     "brief_reasoning": "46.7/132.15 = 0.3534 mol of compound; ×4 O = 1.41 mol",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Moles of O atoms from mass of a compound: topic 1.1, skill 5.F."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Key 1.41 mol is unique and correct (46.7/132.14 x 4)."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor maps to a distinct, reproducible misconception, and the explanation addresses each one."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 100 seconds, calculator allowed, short parallel numeric options."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Clean, correct moles-of-atoms item with plausible distractors. It is suitable and passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Standard 1.1 routine: compute molar mass of (NH4)2SO4 (~132.14 g/mol), convert mass to moles (~0.353 mol), then apply the 4:1 O-to-formula-unit ratio to get ~1.41 mol. Requires parsing the parenthetical formula and a mole-ratio step, but concepts are core and the arithmetic is short. Distractors target common errors (dividing by 4, miscounting atoms). No graph, table, or heavy reading. Fits foundational practice rather than full-mock exam depth.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_chemistry-m02-k0",
+  "cellId": "ap_chemistry-m02",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "V=nRT/P=1.16(0.08206)(288.15)/1=27.4 L",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "27.4 L"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Ideal gas law solve with Celsius to kelvin conversion; fits 3.4 and 5.F."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "V = nRT/P = 27.4 L is correct and unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Distractors 2 and 3 give absurdly tiny volumes and are implausible. The common error of using 15 instead of 288 K (1.43 L) is missing. The explanation gives no reasoning for the correct answer, and its why field is empty."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Time and calculator load are typical of the AP exam."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and the scope fits, but the distractors are weak. Two give orders-of-magnitude absurd volumes, the main plausible error (forgetting the kelvin conversion) is missing, and the correct option has no rationale. Fail on distractor quality."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Direct application of PV=nRT with a single Celsius-to-kelvin conversion and one substitution; no graph, no proportional reasoning, no multi-step linking. Distractors reflect common errors (e.g., using 15 K). Below typical full-mock difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_chemistry-m02-k1",
+  "cellId": "ap_chemistry-m02",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "V=nRT/P=1.08(0.08206)(273.15)/0.5=48.4 L",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "48.4 L"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 3.4 ideal gas law; solving for an unknown with a unit conversion fits skill 5.F."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "V = nRT/P = 48.4 L is unique; 273 K or 273.15 K gives the same option."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Each distractor encodes a distinct, realistic error (wrong R, multiplying by P, dividing by T) and each is explained. The key option's 'why' field is empty, though the explanation_en states the key."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 90 seconds, calculator allowed, light arithmetic."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean ideal gas law calculation with a unique key and sound distractors. It fails only the distractor_explanation criterion, because the correct option's 'why' field is empty."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step direct application of PV=nRT with one Celsius-to-kelvin conversion; no stimulus, short stem, simple arithmetic. Distractors reflect common errors (multiplying by P, inverting, unit mishandling). Appropriate for foundational practice rather than full-mock exam depth.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_chemistry-m03-k0",
+  "cellId": "ap_chemistry-m03",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Beer's law: the slope is 5400 M^-1 (with b = 1 cm). Dividing 0.179 by 5400 gives c = 3.31e-5 M.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "3.31e-5 M"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Beer-Lambert calibration table read; fits 3.13/5.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Slope 5400 M^-1, c=0.179/5400=3.31e-5 M; unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table complete with labels and path length given."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Distractors 966.6 M and 0.179 M are physically implausible magnitudes, and the 0.179 M one is weak; the explanation does not justify the key."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Time and calculator load typical; very easy given exactly linear data."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and unique and the stimulus is complete. Distractors are weakly realistic, with implausible magnitudes (966.6 M, 0.179 M), so this fails on distractor quality. The item is otherwise suitable."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must recognize the linear A vs c relationship in the table (Beer-Lambert), extract the slope (epsilon*b = 5.4e3 M^-1) from the data, and apply A = epsilon*b*c to the unknown. This requires choosing the governing relationship, a table read before computing, and a short computation. Arithmetic is simple and the wording is unambiguous. Distractors reflect plausible errors such as inverting the ratio or reporting a table value directly. This is appropriate for a full mock exam and is neither a pure recall item nor an advanced extension.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 100
+  }
+ },
+ {
+  "key": "ap_chemistry-m03-k1",
+  "cellId": "ap_chemistry-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Calibration slope = 0.080/1.00e-5 = 8000 M^-1 (includes path length). c = 0.166/8000 = 2.07e-5 M.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "2.07e-5 M"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Beer-Lambert calibration use fits topic 3.13 and skill 5.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Slope 8000 M^-1 includes path length; c = 0.166/8000 = 2.075e-5, so the key is unique and correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table data are complete and the stem is clear. Path length is stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The three distractors encode distinct misconceptions and each is explained. The key has no 'why' text, but the explanation states the correct answer; a minor gap."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Load is low, about 100 seconds, with calculator use consistent."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and unique. The distractors are distinct and explained. The item is in scope and has a reasonable load. The only minor gap is that the explanation never explains why the key is correct."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must recognize A = epsilon*b*c, read the table to find the slope (8000 M^-1) or epsilon (4000 M^-1 cm^-1), account for the 2 cm path length, and solve for the unknown concentration. Moderate reasoning with one table read and one path-length trap; arithmetic is light and wording is unambiguous. This is typical AP mock-exam level for 5.D.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_chemistry-m04-k0",
+  "cellId": "ap_chemistry-m04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Fe is limiting: 0.0895 mol Fe gives 0.0448 mol Fe2O3, which is about 7.15 g.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "7.15 g"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Limiting reagent stoichiometry, fits 4.5 / 5.F."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "7.15 g is unique and correct; Fe limiting."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is complete, and the periodic table is available on the exam."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors are distinct and plausible. The 3.57 g rationale is slightly mislabeled, since it is the Fe moles divided by 4, not the missing product coefficient. This is minor."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Typical load; calculator is allowed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a correct, standard limiting-reagent question with a unique key and distinct distractors. The only flaw is a slightly inaccurate rationale on the 3.57 g option."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard limiting-reactant stoichiometry: convert both masses to moles, use mole ratios to identify Fe as limiting, then convert to mass of Fe2O3 (7.15 g). Requires choosing the governing relationship and several linked steps, but the arithmetic is short and the wording is unambiguous. Distractors correspond to typical errors (using O2 as limiting, forgetting the 1/2 ratio). Appropriate for a full mock.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_chemistry-m04-k1",
+  "cellId": "ap_chemistry-m04",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "O2 limiting: 0.0625 mol O2 ×(2/3)=0.04167 mol Fe2O3 ×159.7 = 6.65 g",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "6.65 g"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Limiting reagent stoichiometry fits 4.5 and 5.F."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "O2 is limiting, giving 6.65 g. The key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is complete, and molar masses come from the periodic table."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The 3.33 g rationale (\"moles of limiting reactant without product coefficient\") would give 9.98 g, not 3.33 g, so it is mislabeled. 3.33 g is half of the key and matches no clear misconception. Wrong-option explanations are one-line restatements only."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical of an AP item."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct, but the 3.33 g distractor's stated misconception does not produce 3.33 g, so the distractor encoding and explanation are flawed. Fail on criterion 4."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard limiting-reagent stoichiometry: convert both masses to moles, identify the limiting reactant via mole ratio, then compute product mass. It requires choosing the governing approach and about 5 steps, with simple arithmetic and a short stem. The distractors correspond to plausible errors (using Fe as limiting, mass-conservation sum, missing the mole ratio). It is a typical full-mock item rather than basic recall or an advanced extension.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_chemistry-m05-k0",
+  "cellId": "ap_chemistry-m05",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "7.20e-2 M/s",
+     "brief_reasoning": "rate=k[A]^2[B], k=1.5; 1.5*0.16*0.3=0.072",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Initial-rate method, orders from table, predict new rate; fits 5.2/5.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Orders 2 in A and 1 in B, k=1.5, rate=0.072; unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table is complete with units and constant temperature stated; experiments vary one concentration at a time."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors map to plausible order errors; 0.18 and 0.6 descriptions are slightly loose but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 2 minutes, clean numbers, calculator allowed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, standard initial-rates item with a unique key and reasonable distractors; passes all criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The solver must read the table, compare experiments to get orders (2nd order in A, 1st in B), calculate k, and then predict the rate at new concentrations. This is a standard method-of-initial-rates item with a proportional-reasoning prediction. The numbers are clean, the reading load is minimal, and the wording is unambiguous. It is in scope for topic 5.2 and skill 5.D.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_chemistry-m05-k1",
+  "cellId": "ap_chemistry-m05",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Doubling [A] made the rate 4 times larger, so second order in A. Doubling [B] doubled the rate, so first order in B. k = 0.04 M^-2 s^-1, so rate = 0.04 × 0.09 × 0.4 = 1.44e-3 M/s.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "1.44×10^-3 M/s"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Initial-rate method, reading the table to find orders, then predicting a rate. Fits 5.2/5.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Orders are 2 in A and 1 in B, k = 0.04, rate = 1.44e-3. The key is unique and correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete, with three experiments that each change one concentration. Wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The 1.92e-3 distractor matches swapped orders. The 4.80e-3 and 1.20e-2 values do not follow from the stated misconceptions (first order in each, proportional only to A), so their rationales are not credible. The explanation omits the reasoning for the correct answer."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Typical load and calculator use."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and the stimulus is sound. Two distractors (4.80e-3 and 1.20e-2) do not correspond to their stated misconceptions when computed from the data, and the explanation lacks a worked rationale for the key. Fail on distractor quality."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must read the table, compare experiments to find the orders (2 in A, 1 in B), determine k or use proportional scaling, and predict a new rate. This is a standard method of initial rates item with clean numbers and modest arithmetic. Distractors correspond to plausible order errors.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_chemistry-m06-k0",
+  "cellId": "ap_chemistry-m06",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "q=200(4.18)(5.3)=4431 J absorbed by solution; n=0.100 mol; ΔH=-44.3 kJ/mol (exothermic).",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "-44.3 kJ/mol"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Calorimetry calculation fits 6.4 / 5.F."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Unique key -44.3 kJ/mol; assumptions stated."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is complete. Option A is shown in 'e+04' notation, which is slightly awkward."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions (unit, sign, wrong mass) and each wrong option is explained. The key's own 'why' field is empty but the explanation text covers it."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Typical load; calculator allowed and appropriate."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound calorimetry item with a unique key and distinct distractors. The only flaw is the cosmetic 'e+04' notation in option A."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Standard single-pass calorimetry: q = mcΔT, convert J to kJ, moles from the molar mass, divide, and assign the sign from the temperature rise. Numbers are clean and the wording is unambiguous. Distractors target the unit conversion, the sign and the moles step. There is no table or graph, and the task is a routine application of one governing relationship with a few sequential steps.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_chemistry-m06-k1",
+  "cellId": "ap_chemistry-m06",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "q=50*4.18*12.3=2571 J absorbed; n=8/80.04=0.0999 mol; ΔH=+25.7 kJ/mol (endothermic since temp drops).",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "+25.7 kJ/mol"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Calorimetry calculation of molar enthalpy of dissolution fits 6.4 / 5.F."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "q=2570.7 J, n=0.0999 mol, dH=+25.7 kJ/mol; temperature drop means endothermic, so the key is unique and correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is complete with assumptions stated. The molar mass is standard periodic-table knowledge."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Option 0 (-2.6) is rationalized as 'no division by moles', but that error would give +/-2.57 with the heat sign, not a mismatched sign-and-rounding mix. Option 3 is formatted as '+2.57e+04', a rendering artifact. Rounding is inconsistent across options (-2.6 vs 25.7). The explanation does not explain why the key is correct (sign logic, calculation)."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The option formatting artifact ('e+04') and the inconsistent precision are not exam-ready; the options need cleaning."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and the scope is fine, but the distractors are flawed. Option 0's misconception does not match its value or sign, option 3 uses scientific-notation formatting ('2.57e+04'), option precision is inconsistent, and the explanation does not justify the key. It fails on distractor quality and exam suitability."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard calorimetry calculation: apply q = mcΔT, convert J to kJ, compute moles from molar mass (periodic table available), divide, and assign the sign from the temperature drop (endothermic). Several linked steps with clean numbers; distractors target sign, unit and mole-omission errors. Assumptions are stated explicitly, so the difficulty comes from legitimate sources.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 5,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_chemistry-m07-k0",
+  "cellId": "ap_chemistry-m07",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "1.24 M",
+     "brief_reasoning": "(2x)^2/(1-x)=4 gives x^2+x-1=0, so x=0.618 and [B]=2x=1.24 M.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "ICE table with quadratic, squarely 7.7 / 5.F."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "x^2+x-1=0, x=0.618, [B]=1.236 M; unique correct option."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor maps to a distinct misconception (small-x gives 2.00, x vs 2x gives 0.618, [A] gives 0.382); explanation covers all wrong options."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Clean quadratic, calculator allowed, reasonable time load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, well-formed ICE-table item with distinct distractors; passes all criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires an ICE table with a stoichiometric coefficient of 2, writing Kc, simplifying to x^2 + x - 1 = 0, solving the quadratic, and doubling x to get [B]. Distractors (x, [A], a guess) test whether the solver finishes the last step. The arithmetic is clean and the wording is unambiguous, so this is a typical 7.7 item for a full mock.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 150
+  }
+ },
+ {
+  "key": "ap_chemistry-m07-k1",
+  "cellId": "ap_chemistry-m07",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "0.540 M",
+     "brief_reasoning": "(2x)^2/(1-x)=0.4 gives x=0.270, so [B]=0.540 M",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "ICE table with a quadratic solve; squarely 7.7 and 5.F."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "4x^2/(1-x)=0.4 gives x=0.27016 and [B]=0.540 M. The key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed and the stem is complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor maps to a distinct misconception (small-x approximation, 2x not squared, [A] reported) and the explanation covers all three."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The quadratic needs a calculator, which is allowed; the task load is reasonable."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and unique, the distractors are distinct and well explained, and the item fits topic 7.7 and skill 5.F. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires an ICE table with a 2:1 stoichiometry, writing Kc=(2x)^2/(1-x), and solving a quadratic with clean numbers (x≈0.270, [B]=0.540 M). Typical 7.7 calculation; the main traps are the coefficient 2 and the factor of 2 in [B]. Wording is unambiguous and the arithmetic is short.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_chemistry-m08-k0",
+  "cellId": "ap_chemistry-m08",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Weak acid ICE: x^2/(0.1-x)=4.5e-4, quadratic gives x=6.49e-3 M, pH=2.19",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "2.19"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Weak acid pH from Ka, fits 8.3 and 5.F."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "2.19 is correct via the quadratic. The 5% approximation gives 2.17, which is not an option, so the key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Complete stem, no stimulus needed."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The 1.67 option does not match its stated misconception. Using Ka as [H+] gives pH 3.35, not 1.67. The value 1.67 equals -log(0.0214), which comes from no named error. The rationale for the key option is also empty in the options list."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Typical load for a calculator MC item."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Key is correct and the item is in scope. The 1.67 distractor's rationale is inconsistent with its value (Ka as [H+] would give 3.35), so the distractor does not encode the stated misconception. Fail on the distractor criterion."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard weak acid pH calculation: recognize partial dissociation, set up ICE table and Ka expression, solve for [H+] (approximation or quadratic), convert to pH. Distractors reflect common errors (strong-acid assumption, pOH confusion). Single concept, moderate steps, light arithmetic. Minor caveat: x/C is about 6.5%, so the approximation (pH 2.17) and the quadratic (pH 2.19) differ slightly, but the options keep the correct choice distinguishable.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_chemistry-m08-k1",
+  "cellId": "ap_chemistry-m08",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Solve x^2/(0.1-x)=4.5e-4 exactly: x=6.49e-3 M, pH=2.19",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "2.19"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Weak acid pH from Ka, fits 8.3/5.F."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "2.19 is unique; the 5% approximation gives 2.17, which is not an option."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Complete; no stimulus needed."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The 1.67 distractor is mislabeled: it equals -log(sqrt(Ka)) (square root of Ka taken as [H+]), not Ka taken as [H+] (which gives 3.35, same as the pKa distractor). The stated misconception does not match the value, and the rationales for 3.35 and 1.67 overlap. The option 'why' fields are also empty."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Typical AP length and calculator load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and the item is in scope, but the 1.67 distractor's explanation is wrong (it is sqrt(Ka) as [H+], not Ka as [H+]) and duplicates the pKa rationale, so the distractor explanations fail."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard weak acid pH calculation: write the Ka expression, set up an ICE table, solve for [H+] (choosing between the approximation and the quadratic, since the approximation is marginal at about 6.7%), then convert to pH. It uses a single core concept with moderate computation and no heavy reading. Distractors reflect common errors (x = Ka, pOH confusion). It is appropriate for a full mock rather than basic learning, and not advanced.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_chemistry-m09-k0",
+  "cellId": "ap_chemistry-m09",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "3.27",
+     "brief_reasoning": "After HCl: HCOOH 0.105 mol, HCOO- 0.035 mol; pH = 3.745 + log(1/3) = 3.27",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "Typical AP load: a stoichiometry step and then Henderson-Hasselbalch, with a calculator allowed and no needless arithmetic.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. The key 3.27 is correct and unique, scope and skill fit, and the distractors are distinct and plausible. The only blemish is the 3.74 distractor's rationale, which is mislabeled but still a valid error. Pass."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires converting to moles, applying the stoichiometric buffer reaction with added strong acid, computing pKa from Ka, then using Henderson-Hasselbalch. Concept depth is moderate, arithmetic is short and clean, and the wording is unambiguous. Distractors reflect common errors such as skipping the HCl adjustment or inverting the ratio. This is appropriate for a full mock.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_chemistry-m09-k1",
+  "cellId": "ap_chemistry-m09",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "4.18",
+     "brief_reasoning": "After the HCl reacts, acetate = 0.020 - 0.005 = 0.015 mol and acetic acid = 0.050 + 0.005 = 0.055 mol. pH = 4.745 + log(0.015/0.055) = 4.18.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Stoichiometric reaction of HCl then Henderson-Hasselbalch; fits 8.9 / 5.F."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "4.18 is correct and unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed. Wording 'sodium salt of its conjugate base' is slightly awkward but unambiguous."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Explanation never shows the correct reasoning (the key's 'why' is empty, no stoichiometry step shown). The m3 distractor description is vague."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Reasonable load and calculator use."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Chemically correct and well suited to the topic, but the explanation lacks any justification of the key and has an empty 'why' for the correct option, so it fails the distractor/explanation criterion."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires converting volume and molarity to moles, doing the stoichiometric HCl neutralization of the conjugate base, computing pKa from Ka, and applying Henderson-Hasselbalch. Distractors reflect common errors (ignoring the HCl, pH=pKa, or adding HCl in the wrong direction). The concept is in scope, the arithmetic is light, and the wording is clear.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_chemistry-m10-k0",
+  "cellId": "ap_chemistry-m10",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Cu2+ is reduced at the cathode and Pb is oxidized at the anode. E°cell = 0.34 − (−0.13) = 0.47 V.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "0.47 V"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and clean, with a unique key. It is a low-depth, 9.8-style E° subtraction with one weak distractor (0.94 V), and it is acceptable.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Within Unit 9, but it is really 9.8-level (cathode/anode and E° subtraction). It does not use the ΔG = −nFE link that defines 9.9. Skill 5.F is met minimally."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "0.47 V is correct and unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "All data is in the stem and the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The wrong-order and sum distractors are realistic. The 0.94 V distractor ('multiplies by electrons') is a weak misconception, since E° is intensive. The correct option's 'why' field is empty, but the explanation covers each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, about 60 seconds, with no needless arithmetic."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step routine: identify the cathode as the species with the higher reduction potential and compute E°cell = 0.34 - (-0.13) = 0.47 V. There is no free energy link, no unit conversion and no table or graph to read. The distractors target common errors (sign, doubling for electrons, wrong subtraction). Reading and arithmetic are minimal, so the difficulty comes from no unfair source.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "key": "ap_chemistry-m10-k1",
+  "cellId": "ap_chemistry-m10",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Cu2+ is reduced at the cathode and Fe is oxidized at the anode. E°cell = 0.34 − (−0.44) = 0.78 V.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "0.78 V"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "E°cell from two reduction potentials is a valid 9.9 prerequisite and fits 5.F, though it is low demand and does not link to free energy."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "0.34 - (-0.44) = 0.78 V is unique and correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; all data are in the stem and the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The 1.56 V rationale ('multiplies by the number of electrons') is not a realistic misconception: the stem gives no electron count, and 1.56 is just 2 x 0.78. The 0.44 V rationale is loosely worded. The distractors are weakly justified."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 30-60 seconds, trivial arithmetic, calculator designation fine. The item is easier than typical for the topic."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and the item is clean and in scope. The distractor rationale for 1.56 V cites an electron-count misconception that cannot arise from the given data, and the item is low in demand for topic 9.9. It fails on the distractor criterion."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step routine: identify cathode (Cu) and anode (Fe), then compute E°cell = E°cathode - E°anode = 0.34 - (-0.44) = 0.78 V. No unit conversion, no table or graph reading, no link to free energy or any claim. Distractors are common sign and doubling errors. Concept depth is shallow and the computation is trivial.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_chemistry-m11-k0",
+  "cellId": "ap_chemistry-m11",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "O",
+     "brief_reasoning": "Peaks 2,2,4 give 1s2 2s2 2p4, which is 8 electrons, so oxygen.",
+     "ambiguous_or_flawed": false,
+     "flaw_note": "The binding energies aren't realistic for O (real values are about 52.6, 3.04 and 1.31 MJ/mol), but the electron counts clearly identify O."
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Reading PES peak heights as electron counts fits topic 1.6 and skill 1.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The electron counts 2+2+4 give Z=8, so O is unique by counting. The energies are inconsistent with O, though."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The binding energies (77.79, 6.79, 6.26 MJ/mol) are unrealistic for any element with Z=8. Real O is about 52.6, 3.04 and 1.31, and the 2s/2p peaks are implausibly close. A knowledgeable student would see the spectrum as inconsistent with oxygen, and the stem does not state that peak height equals electron count."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The explanation for the correct option is missing, and the 'why' for O is blank. The Li distractor rationale is weak."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The time and reading load are appropriate, though the item is very easy."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key O is correct by electron count, but the binding energies are fabricated and chemically unrealistic for oxygen (77.79 for 1s, 6.79 and 6.26 for 2s and 2p). The correct option's explanation is also missing. Fail on stimulus fidelity and explanation completeness."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept PES interpretation: read three peaks (2, 2, 4 electrons), assign 1s, 2s and 2p by binding energy, sum to 8 electrons, and identify oxygen. No calculation is needed, the reading load is minimal, and the distractors are easily eliminated.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_chemistry-m11-k1",
+  "cellId": "ap_chemistry-m11",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "instant_reject_wrong_stimulus",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "O",
+     "brief_reasoning": "Peak areas of 2:2:4 mean 1s2 2s2 2p4, so the atom has 8 electrons, which is oxygen.",
+     "ambiguous_or_flawed": false,
+     "flaw_note": "The binding energies don't match real oxygen (about 52.6, 3.04 and 1.31 MJ/mol), but the electron counts still point to only one answer."
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 1.6 PES read of peak heights to identify an element; fits skill 1.A."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Electron counts give O, but the stated binding energies (1s = 77.79 MJ/mol) are inconsistent with oxygen (about 52.6 MJ/mol for 1s), so the stimulus contradicts the key. A student who uses the energies could reasonably doubt the answer."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "Peak energies are chemically unrealistic for the key element; the logarithmic axis is nonstandard for AP PES."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The explanation does not justify the correct option (the option's why is empty; there is no 2+2+4 = 8 reasoning). The distractor rationales are acceptable but minimal."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "Format is fine in length, but an unrealistic spectrum would not be acceptable on an AP exam."
+   },
+   "instant_reject": [
+    "wrong_stimulus"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The item fails: the PES binding energies do not correspond to oxygen (1s of about 78 MJ/mol is far too high), so the stimulus conflicts with the keyed answer. The axis is nonstandard and the explanation lacks reasoning for the key. Needs realistic energies (O: about 52.6, 3.04, 1.31 MJ/mol)."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Student reads three PES peaks, assigns them to 1s, 2s and 2p by energy order, sums the electrons (2+2+4=8) and identifies oxygen. There is no calculation and the concept is routine for topic 1.6. The distractors differ clearly in electron count (N has 7, F has 9, Li has 3).",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_chemistry-m12-k0",
+  "cellId": "ap_chemistry-m12",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "instant_reject_missing_condition",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "EN differences: N-O 0.5, C-Cl 0.6, N-Cl ~0, O-P 3.4-2.2=1.2; O-P is the largest.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "O-P"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": "Skill 4.A requires using a given model; no electronegativity table is provided, so the item reduces to recall of Pauling values."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "O-P has the largest EN difference (about 1.25) versus N-O 0.40, Cl-C 0.61, N-Cl 0.12; the key is unique under standard Pauling values."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "No electronegativity data are provided in the stem or stimulus, yet the blueprint claims all quantities are given. The stem is also very bare."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "All three distractor rationales are the same generic sentence, 'chooses a bond with a smaller electronegativity difference'. They do not encode distinct misconceptions, and the explanation is boilerplate."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "Timing is fine, but the item depends on memorized electronegativity values and is not model-based as AP items are."
+   },
+   "instant_reject": [
+    "missing_condition"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key O-P is correct, but the item gives no electronegativity values, so it depends on recall of Pauling values rather than a given model (missing condition). The distractor rationales are identical and generic. Fail."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: compare electronegativity differences across four bonds and pick the largest (O-P, 1.4 vs 0.5, 0.5, 0). It requires recalling or looking up electronegativity values and simple subtraction, with no stimulus, no representation changes, and no multi-step reasoning. The skill 4.A tag is only loosely met because the model (electronegativity trend) is applied directly. The item is not hard for unfair reasons.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_chemistry-m12-k1",
+  "cellId": "ap_chemistry-m12",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "F–Si",
+     "brief_reasoning": "F–Si has the largest electronegativity difference (about 2.1), so it is the most polar bond.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 2.1 bond polarity by electronegativity difference; in scope. Skill 4.A is only weakly demanded (mostly recall/ranking)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "F-Si (about 2.1) is clearly the largest difference; others are about 1.1, 0.3 and 0.3. Unique key."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed. The stem does not state that Pauling electronegativities are the model, but this is standard and acceptable."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "All three wrong-option explanations are the same templated sentence ('Chooses a bond with a smaller electronegativity difference'), with the parenthetical only naming the option. They do not encode distinct named misconceptions (e.g., larger atom means more polar, involving the most electronegative atom, H is special). The explanation does not meaningfully explain why each is wrong."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Quick (about 60 s), no calculator load. Somewhat low-level recall, but acceptable length."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key F-Si is correct and unique, and the item is in scope for 2.1. It fails on distractors: the three wrong-option rationales are one generic templated sentence and do not encode distinct misconceptions. The skill demand is also low (recall ranking), so I recommend revising the distractor rationales before acceptance."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: bond polarity depends on the electronegativity difference. The student compares four pairs and picks the largest difference (F-Si). No calculation, no representation changes, and minimal reading. It is more of a recall and periodic-trend check than a multi-step model analysis, so it suits foundational practice rather than a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_chemistry-m13-k0",
+  "cellId": "ap_chemistry-m13",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Two electron domains with no lone pairs give a linear shape with a 180° bond angle.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "linear"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": "Topic 2.7 is correct, but the stem gives away the answer: it states 2 bonded atoms and 0 lone pairs, so the student only recalls a table entry. There is no electron-domain versus molecular geometry reasoning and no model analysis, so the 4.A skill demand is minimal."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Linear is the unique correct answer for 2 bonded atoms and 0 lone pairs. CO2 is also linear, so the key is consistent."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed and the wording is clear. The parenthetical hint is redundant but not ambiguous."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The distractor rationales are generic placeholders ('Matches a different count of bonded atoms and lone pairs') and name no distinct misconception. T-shaped and seesaw are implausible for a 2-domain central atom, so they work as throwaway options. The explanation for the correct answer is circular ('the shape follows from the numbers')."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "This is trivially easy and below AP rigor. Official items ask for geometry from a Lewis diagram or formula, or for hybridization or bond angle, rather than giving the domain counts. The 'calculator allowed' designation is irrelevant here."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct, but the stem hands over the bonded-atom and lone-pair counts, which reduces the task to recall. The distractors are implausible and their rationales are boilerplate with no distinct misconceptions. The item is not suitable as written."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The stem supplies the electron-domain information (2 bonded atoms, 0 lone pairs), so the student only needs to recall that AX2 gives a linear geometry. There is one reasoning step, no computation, and no representation change. The distractors are implausible for the given domain count. This is a direct recall item, below full-mock exam difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 20
+  }
+ },
+ {
+  "key": "ap_chemistry-m13-k1",
+  "cellId": "ap_chemistry-m13",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "2 bonding domains, 0 lone pairs → linear (180°).",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "linear"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": "The topic (VSEPR) is correct, but the stem hands the student the bonded-atom and lone-pair counts. The item then reduces to recalling that 2 domains with 0 lone pairs is linear, with no model analysis (4.A) such as separating electron-domain geometry from molecular geometry or linking geometry to hybridization or polarity."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Linear is the unique correct answer for CO2 (2 bonded atoms, 0 lone pairs)."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed and the data object is empty. The stem is clear, and the parenthetical about the central atom is acceptable but gives the answer away."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The explanations are generic templates (\"Matches a different count of bonded atoms and lone pairs\") that do not name distinct misconceptions. They never give the actual domain and lone-pair counts for T-shaped, seesaw, or bent. The key rationale is also vacuous. The distractors are also implausible: seesaw and T-shaped require 5 electron domains, so no student working from 2 bonded atoms and 0 lone pairs would choose them."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The item is trivial recall that can be answered in seconds, with no reasoning demand and no calculator relevance. It is below AP difficulty and offers only a weak discriminator. The CO2 example is also very commonly used in textbooks."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key (linear) is correct, but the stem gives away the domain and lone-pair counts, so the item is pure recall with no model-analysis demand. The distractor rationales are generic templates that name no misconception, and the distractors are implausible for the given counts. The item is not suitable for AP-level use."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The stem gives the electron-domain information (2 bonded atoms, 0 lone pairs), so the student only needs to recall that two domains give a linear geometry. There is a single step, no computation, no representation change, and little reading. Distractors such as T-shaped and seesaw are implausible for a 2-domain atom. This is a recall-level VSEPR check suited to basic learning rather than full-mock exam prep.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 20
+  }
+ },
+ {
+  "key": "ap_chemistry-m14-k0",
+  "cellId": "ap_chemistry-m14",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "C",
+     "brief_reasoning": "SiH4 has more electrons, so its electron cloud is larger and easier to polarize. That gives it stronger London dispersion forces, so it boils at a higher temperature. Molar mass on its own doesn't explain this at the particle level, and boiling doesn't break covalent bonds.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 3.1: linking boiling point to London dispersion strength and polarizability. The skill is argumentation from particulate-level reasoning, a reasonable fit for 6.C, although no actual particulate representation is given."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option C is the unique best answer. SiH4 (-112 C) boils higher than CH4 (-162 C) because of stronger dispersion forces. Option A is a true-sounding statement (greater molar mass) but is incomplete, and it is not framed at the particulate level, so C is clearly better."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear. The stem says the student 'claims' SiH4 is higher, and the options repeat the claim, which is slightly redundant but not ambiguous."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Option D contradicts the stated claim and is implausible, since it is the same sentence as the key with the substances swapped. Option A is weak because molar mass is actually correlated with the correct answer, so it is partly true. The explanation text is mechanical, e.g. 'Applies the right reasoning to the wrong substance'. The key is the only option that mentions London dispersion forces (A, B and D lack a correct IMF-based reason), and it is the longest option, which gives a mild giveaway."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short and quick at about 70 seconds, with no calculation. The calculator designation is irrelevant but harmless."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and the scope is fine. The distractors are weak: D is a trivial swap that contradicts the stated claim, A is partly true, and the key is the longest and only option with a proper IMF rationale. Failing on distractor quality."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: compare LDF strength in two nonpolar molecules and select the correct particulate-level justification. Distractors target common misconceptions (covalent bonds breaking at boiling, molar mass alone, reversed claim). No computation, no representation change, and low reading load; this is foundational Topic 3.1 content rather than a multi-step mock-exam item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_chemistry-m14-k1",
+  "cellId": "ap_chemistry-m14",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_key_scoring",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "instant_reject_multiple_correct",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "H2S is a bent, polar molecule, so its molecules attract each other through dipole-dipole forces as well as dispersion forces. CH4 is nonpolar and has only dispersion forces. Choice C mentions molar mass, but that alone does not describe the forces between particles, so D is the better answer.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "D"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": ""
+   },
+   "notes": "The timing is fine, but the ambiguity of option C and the twin-option structure make it unsuitable as written.",
+   "key_scoring": {
+    "pass": false,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": ""
+   },
+   "instant_reject": [
+    "multiple_correct"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "Reject. Option C (greater molar mass) is a partially valid particulate-level support for H2S having the higher boiling point, so the key is not unique. The skill demand is weak recall without a particulate representation, and option A is a near-duplicate of the key with the substances swapped."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: identify that polar H2S has dipole-dipole plus dispersion forces while nonpolar CH4 has only dispersion forces. The distractors are common misconceptions (breaking covalent bonds, molar mass only, reversed claim). It takes one reasoning step, with no computation, no data to read, and no representation change. It is too simple for a full mock. Minor flaw: the molar mass option is partly defensible, and option 1 mislabels CH4 as polar, but neither makes the item unfairly hard.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_chemistry-m15-k0",
+  "cellId": "ap_chemistry-m15",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "X peaks at lower speed (~350 vs ~550 m/s) so X is heavier; same T means same average KE.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "D"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 3.5 KMT, graph reading of peak positions; fits 5.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "X peaks at lower speed so is heavier; same T gives same average KE. Unique key D."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Graph data complete with axes, labeled curves, and temperature stated; peaks clearly distinguishable."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The 2x2 option set encodes distinct misconceptions; explanations cover each wrong option, with A's slightly loose."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 85 seconds, no calculation needed, typical AP style."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound item: it correctly links peak position to molar mass and same-temperature equal average kinetic energy. The key is unique and the distractors are distinct."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student reads peak positions on two Maxwell-Boltzmann curves, links lower most-probable speed at the same T to greater molar mass, and recalls that average KE depends only on temperature. Two-part claim in the options, no computation, short stem, in scope for 3.5 and skill 5.D. Fairly easy for a mock exam, but the graph-to-concept linkage and the distractor pairing make it a standard exam-style item rather than pure basic recall. Difficulty is not from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_chemistry-m15-k1",
+  "cellId": "ap_chemistry-m15",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "Gas X has the greater molar mass, and both gases have the same average kinetic energy.",
+     "brief_reasoning": "X's most probable speed is about 350 m/s and Y's is about 1100 m/s. At the same temperature, the lower speeds mean X has the larger molar mass, about 40 g/mol compared with about 4 g/mol for Y. Average kinetic energy depends only on temperature, so it is the same for both gases.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Reading peak positions from a Maxwell-Boltzmann graph and applying KMT (same T, same average KE) fits 3.5 and 5.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "X peaks near 350 m/s and Y near 1100 m/s, so X is heavier. Average KE is equal at the same T. Option A is the unique correct answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Axes, labels and the two curves are fully specified, and the temperature is stated. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception, and the explanation addresses every wrong option. The options are parallel in format."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 85 seconds, no arithmetic, typical AP load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound: unique key, complete graph data, distinct distractors, and a good fit to 3.5 and 5.D. I found no problems."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Qualitative comparison of two Maxwell-Boltzmann curves. The student sees that X peaks near 350 m/s and Y near 1100 m/s, then applies two core KMT ideas: equal temperature means equal average KE, and slower molecules at the same T means greater molar mass. No calculation is needed, the wording is clear, and the content is squarely in topic 3.5. The answer is A.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_chemistry-m16-k0",
+  "cellId": "ap_chemistry-m16",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "Too low",
+     "brief_reasoning": "The initial reading is recorded too high, so the volume found by subtracting it from the final reading comes out 1.0 mL too small. That means the calculated moles of NaOH are too few, so the calculated moles and concentration of acid are too low.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Titration error direction, fits 4.6 and 6.G."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Initial reading too high gives a smaller calculated volume, so the calculated concentration is too low. The key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed. The stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors are distinct. The explanation's misconception for option 0 (water in the flask) does not exactly match the option text, a minor flaw."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, conceptual, and well within 60-100 seconds."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. The key is unique and correct, and the distractors are plausible. The only flaw is a minor mismatch between the explanation's misconception text and the option 0 wording."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Qualitative error analysis in titration. The student must connect the buret reading error to the recorded delivered volume (final minus initial), then to moles of base and acid, then to the calculated concentration. It has a clear single answer, little reading, and no calculation. The depth is typical of an AP multiple-choice item on skill 6.G, and it needs more than simple recall.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_chemistry-m16-k1",
+  "cellId": "ap_chemistry-m16",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "instant_reject_missing_condition",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "A – calculated concentration too high",
+     "brief_reasoning": "The pipet puts more than 25 mL of acid in the flask, so there are more moles of acid and more NaOH is needed. The calculated moles of acid (M_NaOH × V_NaOH) are divided by the recorded 25 mL, which is smaller than the real volume, so the calculated concentration comes out too high.",
+     "ambiguous_or_flawed": false,
+     "flaw_note": "The reasoning in A is worded loosely. The NaOH volume is more than 25 mL of acid would need, not more than the acid actually in the flask needs. Still, A is the only option with the right direction (too high) and a cause tied to this error."
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 4.6 and skill 6.G (error effect on result) fit."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Direction (too high) is correct, but the key's stated reason is chemically inaccurate: the NaOH volume is not larger than needed for the acid actually in the flask; moles of acid are computed from NaOH, and the error is dividing by the smaller recorded acid volume. Option B also partly defensible depending on interpretation. The key is not cleanly the unique correct statement."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "Stem is ambiguous: no NaOH volume or numbers, does not state which volume is used in the calculation or that the endpoint is read correctly; 'recorded acid volume' vs 'volume of NaOH' reasoning is underspecified."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Option C (NaOH concentration changes) is implausible and not a realistic misconception; the explanation for B mentions water in the flask, which is not in option B's text; A and D differ only by direction. Explanations are generic."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "Format and load are fine, but the flawed reasoning in the key and the vague stem make it unsuitable for an exam."
+   },
+   "instant_reject": [
+    "missing_condition"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The keyed direction (calculated concentration too high) is right, but the key's reasoning is flawed. The stem lacks the conditions needed to pin down which volume is wrong. Option C is implausible, and the explanation for option B does not match its text. Reject as written."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Qualitative error-direction item with no calculation. Student must link a pipet delivering more acid than recorded to more NaOH needed at the endpoint, and then to an overestimated concentration, using M = n/V with the recorded volume. Short reading, one conceptual chain, no representation changes. Note: the keyed option's justification is slightly imprecise (the NaOH volume is correct for the actual acid delivered), and the distractors are clearly wrong, so it is not a rigorous full-mock item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_chemistry-m17-k0",
+  "cellId": "ap_chemistry-m17",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "C",
+     "brief_reasoning": "Slow first step 2NO→N2O2 gives rate=k[NO]^2. A gives k[NO]^2[O2], B gives k[NO][O2], D gives k[O2].",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Mechanism vs rate law fits 5.8; evaluating a model for consistency fits 4.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "C uniquely gives rate=k[NO]^2; A gives k[NO]^2[O2], B k[NO][O2], D k[O2]."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; stem is clear. Observed rate law for 2NO+O2 is chemically unrealistic (real law includes [O2]) but internally consistent."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Wrong-option explanations are generic ('does not match') with no derived rate law or named misconception; B and D explanations contain garbled text with missing arrows; key rationale mentions a fast equilibrium that option C lacks."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Time and load are typical; no calculation needed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and unique, and the scope fits. The distractor explanations fail: they are generic, two contain garbled text, and the key rationale is misleading about a fast equilibrium that option C does not have. Fail on the explanation criterion."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The student must identify the rate-determining step, write a rate law from its molecularity, and eliminate distractors. One distractor (a fast pre-equilibrium followed by a slow step) requires substituting for an intermediate, which adds depth. There is no arithmetic, the reading load is minimal, and the wording is unambiguous. This is a standard exam-style mechanism-consistency item, at the easier end of exam_prep.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_chemistry-m17-k1",
+  "cellId": "ap_chemistry-m17",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "A",
+     "brief_reasoning": "Slow first step 2NO→N2O2 is bimolecular in NO, so rate = k[NO]^2. Options B and C give k[NO]^2[O2]; D gives k[O2].",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 5.8 mechanism vs rate law, fits 4.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Key A is unique: A gives k[NO]^2; B and C give k[NO]^2[O2]; D gives k[O2]."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Distractor explanations are generic and do not name distinct misconceptions. Options C and D contain leaked template text ('this option: ...') and garbled symbols. The explanation for A wrongly mentions a fast equilibrium that A does not have. Nothing explains why each wrong rate law fails (extra [O2], or rate depending only on [O2])."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The item content is suitable, but the explanation text is not publishable because of the leaked template text and garbled characters."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The chemistry and key are correct and unique. The item fails on distractor explanations, which are generic, contain leaked template text and garbled symbols, and include an incorrect rationale for the key. These need rewriting to name the specific derived rate law and misconception for each option."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Standard mechanism-to-rate-law matching. Option A is correct because its slow step is 2NO, giving rate = k[NO]^2 with O2 entering only after the slow step. Options B and C need the pre-equilibrium approximation and give rate = k[NO]^2[O2]. Option D gives rate = k[O2] and does not sum to the overall reaction. No calculation is needed, the reading load is minimal, and the item is in scope. It is a direct application of the concept with a modest amount of distractor analysis.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_chemistry-m18-k0",
+  "cellId": "ap_chemistry-m18",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "C",
+     "brief_reasoning": "Heat loss lowers ΔT, so q is too small and |ΔH| comes out low. A, B and D each make q too large or the recorded moles too small, so |ΔH| comes out high.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is chemically sound and the key is unique. It fails on explanation quality: the explanations are templated with truncated leaked text, they do not explain the reasoning for each wrong option, and the distractors are not distinct. The key is also a length giveaway.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Fits 6.4 and 2.E. The task is to identify how experimental errors affect the calculated enthalpy."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Heat loss lowers the measured ΔT, so q and |ΔH| are too low. In A, B and D the calculated |ΔH| is too high. The key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The explanations are templated and repetitive. They contain truncated leaked text such as \"(this option: The thermometer reads the final temperature 1.0 degC too hig)\", and they never explain why each error raises the magnitude. A, B and D share one misconception pattern with no distinct reasoning. The key is also noticeably longer than the other options."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is about 60-80 seconds with no needless arithmetic, which is typical for the AP exam."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires choosing q = mcΔT and ΔH = -q/n, then qualitatively tracing the direction of four distinct errors (mass, final temperature, heat loss, moles of solute) to the effect on the magnitude of ΔH. Option D adds a per-mole step that reverses the intuitive direction. No numeric computation is needed, the reading is short, and the wording is unambiguous, so the difficulty comes from legitimate conceptual reasoning.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_chemistry-m18-k1",
+  "cellId": "ap_chemistry-m18",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "D",
+     "brief_reasoning": "Heat loss means the measured ΔT is too small, so q and |ΔH| come out too low. Options A, B and C each make the calculated magnitude too high.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 6.4 calorimetry error identification matches skill 2.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option D is the unique answer; A, B and C each increase the calculated magnitude."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The explanations are templated and generic, and they contain truncated leaked text such as '(this option: The salt is weighed and recorded as 4.50 g but 5.00 g is act)'. They do not explain the specific reasoning for each option, such as a smaller recorded moles value inflating the per-mole result or a higher final T increasing delta T. The three distractor misconceptions share the same wording. The key option is also the longest, a mild giveaway."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 80 seconds with no arithmetic needed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The chemistry and key are correct, and the item is suitable for the exam. However, the distractor explanations are generic, repeated and truncated, and they do not explain each wrong option specifically, so the item fails the distractor/explanation criterion."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The student must choose the governing relationship (q = mcΔT, ΔH = -q/n) and then judge the direction of each error qualitatively. Option B puts the error in the denominator (moles), and option C requires thinking about the sign of ΔT for an exothermic process. Four options each need a separate direction-of-error judgment. There is no heavy arithmetic, the wording is clear, and the content is in scope for 6.4 and skill 2.E.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_chemistry-m19-k0",
+  "cellId": "ap_chemistry-m19",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Q=[B]/[A]^2=0.2/1^2=0.2 < K=2, so net reaction proceeds to the right toward products.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "B"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Q vs K direction, topic 7.2; claim plus justification in each option fits 6.D reasonably."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Q=0.2<K=2 so right; option B is uniquely correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "All needed data in the stem; no stimulus needed."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors encode distinct misconceptions (direction reversed, inequality reversed, any Q is equilibrium); each is explained. The key rationale is thin but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60-90 seconds; light arithmetic. Minor weakness: [A]=1 M means the exponent is not really tested."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean Q vs K direction item with distinct distractors. It is simple, and the choice of [A]=1 M hides the exponent check, but it is acceptable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: write Q for 2A <-> B, compute 0.2/1^2 = 0.2, compare with K = 2, and conclude the shift is to the right. Arithmetic is trivial, reading is minimal, and there are no representation changes. The only mild lever is writing the Q expression with the correct exponent. Distractors are simple sign and direction errors. It is more routine than a full-mock exam_prep item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_chemistry-m19-k1",
+  "cellId": "ap_chemistry-m19",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Q=[B]/[A]^2=0.1/0.16=0.625<K=2, so the reaction shifts toward products.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "A"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 7.2 Q vs K direction; options include a justification, adequate for 6.D though computation-dominant."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Q=0.625<2, shifts right; A is unique correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; stem is complete (concentrations, K, temperature unspecified but fine)."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Explanation is generic and does not show the Q calculation or specifically refute each wrong option. Distractors B and D are internally inconsistent and easily eliminated; the 'why' text for B and D is thin and partly overlapping."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60-90 seconds, simple arithmetic, calculator designation consistent."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and unique, and the scope and suitability are fine. The item fails on the distractor and explanation criterion: the explanation is generic and does not show the calculation or refute each wrong option, and two distractors are self-contradictory and easy to eliminate."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: write Q with the stoichiometric exponent (squared [A]), compute 0.1/0.16 = 0.625, and compare it with K = 2 to pick the direction. The main trap is the exponent. The options all state Q = 0.625, so the student only needs to judge the comparison and direction. There is no table or graph, little reading, and trivial arithmetic.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_chemistry-m20-k0",
+  "cellId": "ap_chemistry-m20",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "C",
+     "brief_reasoning": "ΔH<0, ΔS<0 → favorable below T=ΔH/ΔS≈833 K; ΔG(400K)=-50+24=-26 kJ/mol",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 9.3 sign rules plus a ΔG calculation, with a justification element. This fits 6.D reasonably."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "ΔH<0 and ΔS<0 give a favorable reaction only at low temperature (below about 833 K). ΔG(400 K) = -50 + 24 = -26 kJ/mol. Option C is the unique correct choice."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed and all values are given. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "All four options give the identical numeric clause (ΔG = -26 kJ/mol, favorable), so only the first clause differs and the numeric part does no discriminating work. Two distractors are weak: 'not favorable at any temperature' contradicts its own second clause, and 'favorable at all temperatures' is a plain sign-rule error. The explanations are generic and repeat 'Misapplies the sign rules' for every wrong option. They also contain truncated, templated text such as '(this option: ... De)'. The explanations do not name distinct misconceptions, so the item does not meet the requirement that each wrong sentence encode a distinct named misconception."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The task load is fine, but the options are redundant, and two of them (A and the 'at all temperatures' choice) are internally inconsistent in a way that gives them away. The truncated explanation text is not acceptable for release."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and unique, and the topic and skill fit. The item fails on distractor quality: every option repeats the same ΔG clause, one distractor contradicts itself, and the explanations are generic and truncated. It needs distractors that encode distinct misconceptions, such as a different ΔG value from a sign error or a unit error, and rewritten explanations."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single governing relationship (ΔG = ΔH - TΔS) with simple arithmetic and one kJ/J unit conversion. The sign pattern (ΔH<0, ΔS<0) gives favorability only at low T. The computed value is identical in all options, so it does not discriminate; the item reduces to recalling the sign-pattern rule, with minimal reading and few reasoning steps.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_chemistry-m20-k1",
+  "cellId": "ap_chemistry-m20",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "ΔH<0, ΔS>0 so ΔG<0 at all T; ΔG(250K) = -50 - 250(0.070) = -67.5 ≈ -68 kJ/mol",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "A"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "Key A is correct and the topic fits, but the options are poorly built. All four share an identical numeric clause (ΔG° = -68 kJ/mol, so favorable), which makes D self-contradictory and C inconsistent with 250 K being a low temperature. The numeric check therefore discriminates nothing. Distractor explanations are generic and do not name distinct misconceptions, and the explanation for the key does not justify it.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 9.3 with argumentation fits."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "A is the unique correct option, because the others are wrong on the sign rule."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "Option D is self-contradictory (not favorable at any temperature, yet favorable at 250 K). The shared numeric tail is a template artifact."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "All three distractor explanations say \"Misapplies the sign rules\" with no distinct misconception. The key explanation lacks any reasoning."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "Options with contradictory clauses and an undiscriminating numeric statement are not exam quality."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single governing relationship (ΔG = ΔH - TΔS) and a sign-combination rule (-ΔH, +ΔS gives favorable at all T). One unit conversion (J to kJ) and one short calculation (-67.5 rounds to -68 kJ/mol). All options share the same computed value, so the choice depends only on the temperature-dependence claim. No stimulus, light reading, no ambiguity.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_chemistry-m21-k0-q1",
+  "cellId": "ap_chemistry-m21",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "5.00×10^-5",
+     "brief_reasoning": "Half-equivalence at 12.5 mL, pH≈4.30=pKa, so Ka≈5.0×10^-5. This agrees with the initial pH of 2.655.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Half-equivalence reading from a titration curve; fits 8.5 and 5.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Equivalence at 25 mL, half-equivalence at 12.5 mL gives pH about 4.30 and Ka about 5.0e-5. Unique answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Axes and vertices are complete and consistent with the stem; the curve is a clear weak-acid titration."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct pH-misreading distractors, each explained; the key option's own 'why' is blank but the explanation states the key. Acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Typical AP load, short reading, calculator use minimal."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound item: Ka is read from the half-equivalence point of a clean weak-acid titration curve. The key is unique and the distractors map to distinct misreadings of the curve."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must read the graph to find the equivalence point (25 mL), halve it to get the half-equivalence volume (12.5 mL), read the pH there (~4.30), and apply pH = pKa to compute Ka ≈ 5.0e-5. This requires choosing the governing relationship and one graph read, with a single simple 10^-x calculation. Distractors map to plausible errors (initial [H+], equivalence pH). Arithmetic and reading load are light and everything is within Unit 8 scope.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_chemistry-m21-k0-q2",
+  "cellId": "ap_chemistry-m21",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "8.50",
+     "brief_reasoning": "Equivalence at 25.0 mL (equal moles), graph pH 8.50; consistent with Ka≈5e-5 from half-equivalence pH≈4.3, giving pH≈8.5 for 0.050 M A-.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Reading the equivalence point from a titration curve fits 8.5 and skill 5.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The equivalence volume is 25.0 mL and the curve gives pH 8.5 there. The key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The curve data are complete, with labeled axes and dense vertices."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The explanation never justifies the key. The 'why' field for the key option is empty, and the explanation does not say that equivalence occurs at 25.0 mL where the curve gives pH 8.50 because A- hydrolyzes."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item is quick, needs no heavy arithmetic, and the calculator designation is fine."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is chemically sound with a correct, unique key and a complete stimulus. It fails only on the explanation, which has no rationale for the correct option and an empty 'why' for the key. Fixing that would make it acceptable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The student locates the equivalence volume (25.0 mL, from equal concentrations and volumes) and reads the pH from the graph. The only concept is that a weak acid-strong base equivalence point has pH above 7. This is a direct graph read with no calculation, and the distractors are common misconceptions: 7.00, the initial pH, and the final pH.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_chemistry-m21-k1-q1",
+  "cellId": "ap_chemistry-m21",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "At half-equivalence (12.5 mL) pH≈3.90=pKa, Ka≈1.25e-4; consistent with initial pH 2.458.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "1.25×10^-4"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "Takes about 90 seconds with light calculator use, which is typical for the exam.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. Ka is read from the half-equivalence pH on the curve. The key is unique, the distractors reflect distinct misconceptions, and the explanation is brief but covers each wrong option."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must identify the equivalence point from the steep rise (25 mL), halve it to find the half-equivalence volume, read pH there from the graph (about 3.9), recognize pH = pKa, and convert to Ka with 10^-pH. Distractors correspond to misreading the initial pH, the equivalence pH, or the final region. The concept is standard for Unit 8 and the arithmetic is minimal.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_chemistry-m21-k1-q2",
+  "cellId": "ap_chemistry-m21",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "8.30",
+     "brief_reasoning": "The equivalence point is at 25.0 mL of NaOH, where the curve shows pH 8.30. This makes sense because the conjugate base A- makes the solution basic. A calculation using pKa ≈ 3.9 gives the same pH.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Reading equivalence-point pH from a weak acid titration curve fits 8.5 and 5.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The equivalence volume is 25.0 mL and the curve reads 8.30 there. The key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Axes, labels and vertices are complete and support the question. The vertex list contains only the 25 mL point in the jump, but it is readable."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The three distractors encode distinct misconceptions (initial pH, final pH, 7.00 for any neutralization), and the explanation covers each one."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "A short single graph read with no arithmetic fits AP timing."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean graph-reading question with a unique key of 8.30 at the 25.0 mL equivalence point. The stimulus is complete, the distractors are distinct, and the load is appropriate. I found no reject conditions."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item asks for the pH at the equivalence point of a weak acid/strong base titration. The student locates the steep rise at 25.0 mL (equal moles of acid and base, since both are 0.100 M and 25.0 mL) and reads pH 8.30. The only conceptual hurdle is knowing the equivalence point is above 7 for a weak acid, which rules out the 7.00 distractor. There is no computation, one graph read and one reasoning link. Reading load is low and nothing in the item is unfair.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ }
+]

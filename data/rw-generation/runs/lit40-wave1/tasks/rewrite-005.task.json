@@ -1,0 +1,848 @@
+{
+ "schema": "rw-session-task/v1",
+ "kind": "rewrite",
+ "runId": "lit40-wave1",
+ "taskId": "rewrite-005",
+ "chunkId": "rewrite-005",
+ "batchId": "lit40-hard-01",
+ "attempt": 1,
+ "suggestedModel": "opus",
+ "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rewrite-005.result.json",
+ "outputSchema": {
+  "chunkId": "작업 파일의 chunkId 를 그대로",
+  "model": "당신의 모델 이름(예: opus)",
+  "items": [
+   {
+    "candidateId": "후보의 candidateId 를 그대로",
+    "passage": "영어 지문(문항의 질문은 넣지 않는다)",
+    "question": "영어 질문 한 문장",
+    "options": [
+     "선택지 A",
+     "선택지 B",
+     "선택지 C",
+     "선택지 D"
+    ],
+    "correct_letter": "A|B|C|D (targetLetter 와 같게)",
+    "explanation": "한국어 해설 3~5문장",
+    "tone": [
+     "지문 어조 영어 단어 1~3개"
+    ],
+    "devices": [
+     "쓰인 문학 장치 영어 단어"
+    ],
+    "declaration": {
+     "original": true,
+     "noRealWorkQuoted": true,
+     "noCopyrightedSource": true
+    }
+   }
+  ]
+ },
+ "candidates": [
+  {
+   "candidateId": "lit40-hard-01-100",
+   "route": "ai_passage",
+   "skill": "inferences",
+   "difficulty": "hard",
+   "questionType": "character_motivation",
+   "genre": "personal_essay",
+   "targetLetter": "D",
+   "words": {
+    "min": 110,
+    "max": 170
+   },
+   "recipeId": "inferences_lit_character_motivation_hard",
+   "spec": {
+    "candidateId": "lit40-hard-01-100",
+    "batchId": "lit40-hard-01",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "hard",
+    "questionType": "character_motivation",
+    "genre": "personal_essay",
+    "seed": {
+     "index": 99,
+     "genre": "personal_essay",
+     "pov": "second",
+     "styleEra": "19c",
+     "names": [
+      "Aoife",
+      "Rory"
+     ],
+     "nameCultures": [
+      "irish_scottish",
+      "irish_scottish"
+     ],
+     "locale": "Galway",
+     "setting": "a vineyard at harvest",
+     "relationship": "a young apprentice and a master carpenter",
+     "conflict": "over a recipe that was never written down",
+     "openingStyle": "짧은 단언문으로 시작",
+     "topicSeed": "a vineyard at harvest in Galway; a young apprentice and a master carpenter over a recipe that was never written down"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 110,
+     "max": 170
+    },
+    "recipeId": "inferences_lit_character_motivation_hard"
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a vineyard at harvest in Galway; a young apprentice and a master carpenter over a recipe that was never written down\n인물 이름: Aoife, Rory 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 짧은 단언문으로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 110~170단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 D 에 둔다. correct_letter 는 D 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 D 로 정한 뒤 나머지 선택지를 채운다.\n레시피(inferences_lit_character_motivation_hard, 난이도 hard): 인물이 한 행동을 하는 이유를 묻되 동기는 지문에 직접 서술하지 않는다. 동기를 암시하는 단서는 서로 떨어진 두 곳(예: 앞부분의 습관적 행동, 중간의 말 돌리기·회피)에 나눠 심고, 마지막 문장은 장면 묘사나 사물로 끝내 동기를 요약하지 않는다. 정답은 두 단서를 모두 설명하는 동기다. 오답 3개는 각각 (a) 앞 단서만 설명하는 동기 (b) 뒤 단서만 설명하는 동기 (c) 지문의 표현을 빌렸지만 인물의 다른 행동과 충돌하는 동기로 만들고, 셋 모두 이 인물이 가질 법한 감정이어야 한다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 2 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 앞 단서만 설명하고 뒤 단서와 충돌하는 동기 (2) 뒤 단서만 설명하고 앞 단서를 무시하는 동기 (3) 지문의 구절을 빌려 쓰지만 인물의 다른 행동과 모순되는 동기\n금지: 정답이 지문 마지막 문장을 거의 그대로 바꿔 말한 문장이다 / 오답 3개가 지문의 분위기와 정반대 정서·행동이라 지문 분위기만 알아도 소거된다 / 정답만 길고 구체적이며 오답은 짧고 막연하다 / 지문 어딘가에 정답의 핵심어가 한 문장에 몰려 있다(근거가 한 곳)\n지문 길이: 110~170단어.",
+   "previous": {
+    "passage": "Grapes have no business in Galway. Rory grows them anyway along the south wall of his workshop, and each October he presses them in a press he built before you, Aoife, became his apprentice. This year the press splits along one cheek. Rory has a glue for such repairs, made from a recipe he has never written down; for three years you have asked for it and been told you will learn it when you need it. He mixes it now while you watch, measuring nothing, talking about the weather. When you reach for a pencil, he sends you to the shed for clamps. Next morning he announces that his wrists are bad and the second batch is yours. You ruin it twice. On the third try he leans on the bench beside you, his wrists apparently healed, and tilts the pot a quarter-turn toward the window.",
+    "question": "Based on the text, why does Rory most likely claim that his wrists are bad?",
+    "options": [
+     "He is embarrassed that age has made his hands unsteady for delicate work.",
+     "He hopes the failed batches will keep the recipe safely his own.",
+     "He is worn out from a long season of harvesting and pressing grapes.",
+     "He wants Aoife to learn the recipe through her own hands, not notes."
+    ],
+    "correct_letter": "D",
+    "explanation": "앞부분에서 Rory는 비법은 필요할 때 배우게 된다고 말하고, Aoife가 연필을 집자 창고 심부름을 보내 기록을 막는다. 이후 그는 손목이 아프다며 두 번째 배치를 맡기는데, 세 번째 시도에서는 손목이 멀쩡한 채 옆에서 냄비를 빛 쪽으로 돌려 색을 보게 해 준다. 두 단서를 함께 설명하는 동기는 직접 만들어 보며 손으로 익히게 하려는 것이므로 D가 정답이다. A는 손목이 곧 나은 점과, B는 그가 결국 도와준다는 점과 충돌하며, C는 수확 시기라는 배경만 보고 고른 오답이다.",
+    "judgeNotes": [
+     "Fable 추정 난이도 medium",
+     "difficulty_too_easy"
+    ],
+    "reason": "too_easy"
+   }
+  },
+  {
+   "candidateId": "lit40-medium-02-005",
+   "route": "ai_passage",
+   "skill": "inferences",
+   "difficulty": "medium",
+   "questionType": "relationship_between_characters",
+   "genre": "short_story",
+   "targetLetter": "D",
+   "words": {
+    "min": 90,
+    "max": 150
+   },
+   "recipeId": "inferences_lit_relationship_between_characters_medium",
+   "spec": {
+    "candidateId": "lit40-medium-02-005",
+    "batchId": "lit40-medium-02",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "medium",
+    "questionType": "relationship_between_characters",
+    "genre": "short_story",
+    "seed": {
+     "index": 4,
+     "genre": "short_story",
+     "pov": "second",
+     "styleEra": "19c",
+     "names": [
+      "Kainoa",
+      "Faris"
+     ],
+     "nameCultures": [
+      "pacific_maori_hawaiian",
+      "arabic_levantine"
+     ],
+     "locale": "Hanoi",
+     "setting": "a river barge",
+     "relationship": "a sister and her younger brother's tutor",
+     "conflict": "while pretending to enjoy a gift that is wrong",
+     "openingStyle": "대명사 I 또는 We 로 시작",
+     "topicSeed": "a river barge in Hanoi; a sister and her younger brother's tutor while pretending to enjoy a gift that is wrong"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 90,
+     "max": 150
+    },
+    "recipeId": "inferences_lit_relationship_between_characters_medium"
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a river barge in Hanoi; a sister and her younger brother's tutor while pretending to enjoy a gift that is wrong\n인물 이름: Kainoa, Faris 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 대명사 I 또는 We 로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 90~150단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 D 에 둔다. correct_letter 는 D 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 D 로 정한 뒤 나머지 선택지를 채운다.\n레시피(inferences_lit_relationship_between_characters_medium, 난이도 medium): 두 인물의 관계를 추론하게 한다. 관계는 직접 서술하지 않고 두 문장 안의 대화·행동으로 드러내되 이어 읽으면 알 수 있게 한다. 마지막 문장은 관계와 무관한 장면 묘사로 끝낸다. 오답 3개는 (a) 인물 중 한쪽의 감정만 반영한 관계 (b) 지문 어휘를 쓰지만 반대 방향의 관계 (c) 일반적 통념에서 고른 관계로 만들되 모두 지문의 단어를 한두 개 사용한다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 1 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 한쪽 감정만 반영한 관계 (2) 지문 어휘를 쓰지만 방향이 반대인 관계 (3) 일반적 통념에서 고른 관계\n금지: 정답이 지문 마지막 문장을 거의 그대로 바꿔 말한 문장이다 / 오답 3개가 지문의 분위기와 정반대 정서·행동이라 지문 분위기만 알아도 소거된다 / 정답만 길고 구체적이며 오답은 짧고 막연하다 / 지문 어딘가에 정답의 핵심어가 한 문장에 몰려 있다(근거가 한 곳)\n지문 길이: 90~150단어.",
+   "previous": {
+    "passage": "I unfolded the scarf on the barge's narrow deck while the Red River slid brown and slow beneath us in Hanoi. It was mustard yellow, the one color I had refused to wear since childhood, and Faris, my younger brother's tutor, watched my face as though it were an exam he had studied for. My brother must have told him yellow was my favorite; my brother thought jokes were a form of love. I tied the scarf at my throat and said it matched the lanterns on the far bank. Faris let out a breath and began explaining, too quickly, how well the boy was doing with fractions. I nodded at every fraction. Along the bank, a woman was hanging fish to dry on a line of bamboo poles.",
+    "question": "Based on the text, which choice best describes the relationship between the narrator, Kainoa, and Faris?",
+    "options": [
+     "Faris is relieved, while Kainoa is indifferent to his nervous efforts.",
+     "Kainoa seeks Faris's approval as she anxiously studies his face.",
+     "They are rivals competing for the younger brother's affection.",
+     "Faris anxiously seeks Kainoa's approval, and she kindly spares him."
+    ],
+    "correct_letter": "D",
+    "explanation": "Faris가 시험을 치르듯 Kainoa의 얼굴을 살피는 장면과, 그녀가 싫어하는 색의 스카프를 매고 칭찬하자 그가 숨을 내쉬며 급히 동생의 수학 실력을 설명하는 장면을 이어 읽으면 관계가 드러난다. Faris는 그녀의 인정을 원하고, Kainoa는 그의 마음을 상하지 않게 배려한다. 따라서 D가 정답이다. A는 Kainoa의 배려를 무시하고 한쪽 감정만 반영했고, B는 지문의 face·studied를 쓰지만 방향이 반대이며, C는 지문 근거 없는 통념이다.",
+    "judgeNotes": [
+     "Fable 추정 난이도 easy",
+     "difficulty_too_easy"
+    ],
+    "reason": "too_easy"
+   }
+  },
+  {
+   "candidateId": "lit40-medium-02-022",
+   "route": "ai_passage",
+   "skill": "words_in_context",
+   "difficulty": "medium",
+   "questionType": "figurative_language",
+   "genre": "memoir",
+   "targetLetter": "C",
+   "words": {
+    "min": 60,
+    "max": 220
+   },
+   "recipeId": null,
+   "spec": {
+    "candidateId": "lit40-medium-02-022",
+    "batchId": "lit40-medium-02",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "medium",
+    "questionType": "figurative_language",
+    "genre": "memoir",
+    "seed": {
+     "index": 21,
+     "genre": "memoir",
+     "pov": "first",
+     "styleEra": "late_20c",
+     "names": [
+      "Saoirse",
+      "Thiago"
+     ],
+     "nameCultures": [
+      "irish_scottish",
+      "portuguese_brazilian"
+     ],
+     "locale": "Glasgow",
+     "setting": "a stone bridge",
+     "relationship": "a priest and a lapsed parishioner",
+     "conflict": "about what to tell a younger sibling",
+     "openingStyle": "의문문으로 시작",
+     "topicSeed": "a stone bridge in Glasgow; a priest and a lapsed parishioner about what to tell a younger sibling"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a stone bridge in Glasgow; a priest and a lapsed parishioner about what to tell a younger sibling\n인물 이름: Saoirse, Thiago 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 의문문으로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 C 에 둔다. correct_letter 는 C 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 C 로 정한 뒤 나머지 선택지를 채운다.",
+   "previous": {
+    "passage": "Who decides what a nine-year-old is ready to hear? I put that question to Father Thiago on the Clyde bridge in the winter of 1987, though I had not set foot in his church for three years. My younger brother had asked me why our mother no longer came home, and I wanted the priest to give me an answer I could repeat. Thiago leaned on the cold stone and watched the river for a long while. Then he said that a hard truth told gently was a lantern, not a stone; the boy could carry it in front of him instead of on his back. I, Saoirse, the lapsed one, had expected scripture. Instead he offered me something I could use, and that night I sat on my brother's bed and told him plainly.",
+    "question": "As used in the text, the phrase “a lantern, not a stone” most nearly suggests that a hard truth told gently",
+    "options": [
+     "is a burden that the boy will gradually learn to ignore.",
+     "should be postponed until the boy is old enough to carry it.",
+     "can help the boy see his way rather than simply weigh on him.",
+     "must come from the church rather than from the boy's own family."
+    ],
+    "correct_letter": "C",
+    "explanation": "신부는 진실을 등 뒤에 지는 짐이 아니라 앞에 들고 가는 것이라고 덧붙이고, 화자는 그 말을 듣고 그날 밤 동생에게 솔직하게 말한다. 따라서 이 비유는 부드럽게 전한 진실이 짐이 되기보다 길을 비춰 준다는 뜻이므로 C가 정답이다. A는 '돌'의 의미만 취한 해석이고, B는 화자가 곧바로 말했다는 결과와 맞지 않는다. D는 신부가 경전 대신 실용적 조언을 주었다는 서술과 어긋난다.",
+    "judgeNotes": [
+     "Fable 추정 난이도 easy",
+     "difficulty_too_easy"
+    ],
+    "reason": "too_easy"
+   }
+  },
+  {
+   "candidateId": "lit40-medium-02-023",
+   "route": "ai_passage",
+   "skill": "words_in_context",
+   "difficulty": "medium",
+   "questionType": "figurative_language",
+   "genre": "fable_or_folktale_retelling",
+   "targetLetter": "D",
+   "words": {
+    "min": 60,
+    "max": 220
+   },
+   "recipeId": null,
+   "spec": {
+    "candidateId": "lit40-medium-02-023",
+    "batchId": "lit40-medium-02",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "medium",
+    "questionType": "figurative_language",
+    "genre": "fable_or_folktale_retelling",
+    "seed": {
+     "index": 22,
+     "genre": "fable_or_folktale_retelling",
+     "pov": "first",
+     "styleEra": "late_20c",
+     "names": [
+      "Booker",
+      "Mingyu"
+     ],
+     "nameCultures": [
+      "african_american",
+      "chinese"
+     ],
+     "locale": "Porto Alegre",
+     "setting": "a mountain bus stop",
+     "relationship": "a mother and a daughter planning a wedding",
+     "conflict": "while deciding whether a rule still applies",
+     "openingStyle": "감각 묘사(소리·냄새·촉감)로 시작",
+     "topicSeed": "a mountain bus stop in Porto Alegre; a mother and a daughter planning a wedding while deciding whether a rule still applies"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a mountain bus stop in Porto Alegre; a mother and a daughter planning a wedding while deciding whether a rule still applies\n인물 이름: Booker, Mingyu 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 감각 묘사(소리·냄새·촉감)로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 D 에 둔다. correct_letter 는 D 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 D 로 정한 뒤 나머지 선택지를 채운다.",
+   "previous": {
+    "passage": "Wind hissed through the pines above the mountain bus stop near Porto Alegre, and my mother, Mingyu, smelled of the orange peel she always chewed when nervous. In our family, a rule had come down like an heirloom: a bride must not see the wedding road before the wedding day. I was the bride, Booker was the groom, and the only road to the chapel was this one. Every bus would carry me past it. My mother studied the timetable as if it were scripture, then folded it into a small square. Rules are coats, she said at last, cut for the shoulders of whoever first wore them. She tucked the timetable into my pocket, and when the bus came, she climbed on beside me without looking away from the road.",
+    "question": "As used in the text, the phrase “Rules are coats” most nearly suggests that the family rule",
+    "options": [
+     "protects the family from the harsh conditions of the mountains.",
+     "is a disguise that hides the bride's true feelings about marriage.",
+     "must be worn proudly by every bride who joins the family.",
+     "was shaped for earlier circumstances and may not fit the present."
+    ],
+    "correct_letter": "D",
+    "explanation": "어머니는 규칙이 처음 입은 사람의 어깨에 맞춰 재단된 코트라고 말한 뒤, 딸과 함께 버스를 타고 그 길을 피하지 않는다. 이는 규칙이 과거 상황에 맞춰 만들어져 지금 상황에는 맞지 않을 수 있다는 뜻이므로 D가 정답이다. A는 코트의 보호 기능만 문자 그대로 옮긴 오답이다. B는 감정을 숨긴다는 근거가 없고, C는 어머니가 결국 규칙을 따르지 않는 행동과 반대된다.",
+    "judgeNotes": [
+     "Fable 추정 난이도 easy",
+     "difficulty_too_easy"
+    ],
+    "reason": "too_easy"
+   }
+  },
+  {
+   "candidateId": "lit40-medium-02-033",
+   "route": "ai_passage",
+   "skill": "text_structure_purpose",
+   "difficulty": "medium",
+   "questionType": "tone_shift",
+   "genre": "drama",
+   "targetLetter": "C",
+   "words": {
+    "min": 60,
+    "max": 220
+   },
+   "recipeId": null,
+   "spec": {
+    "candidateId": "lit40-medium-02-033",
+    "batchId": "lit40-medium-02",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "medium",
+    "questionType": "tone_shift",
+    "genre": "drama",
+    "seed": {
+     "index": 32,
+     "genre": "drama",
+     "pov": "mixed_or_none",
+     "styleEra": "late_20c",
+     "names": [
+      "Marta",
+      "Ksenia"
+     ],
+     "nameCultures": [
+      "slavic_baltic",
+      "slavic_baltic"
+     ],
+     "locale": "Gdansk",
+     "setting": "a radio repair shop",
+     "relationship": "an elder and a restless apprentice",
+     "conflict": "about starting over somewhere unfamiliar",
+     "openingStyle": "감각 묘사(소리·냄새·촉감)로 시작",
+     "topicSeed": "a radio repair shop in Gdansk; an elder and a restless apprentice about starting over somewhere unfamiliar"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a radio repair shop in Gdansk; an elder and a restless apprentice about starting over somewhere unfamiliar\n인물 이름: Marta, Ksenia 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 감각 묘사(소리·냄새·촉감)로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 C 에 둔다. correct_letter 는 C 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 C 로 정한 뒤 나머지 선택지를 채운다.",
+   "previous": {
+    "passage": "Solder smoke and old dust hang over the bench of a Gdansk radio repair shop. MARTA, seventy, bends over an opened receiver; KSENIA, nineteen, paces by the window.\nKSENIA: Listen. Warsaw, Berlin, a station from Lisbon. Every one of them is somewhere I have never been.\nMARTA: (laughing) And every one of them is broken until we fix it. Pass me the small pliers, traveler.\nKSENIA: I mean it. I have a place on a ship in May.\n(MARTA stops. She sets down the receiver, and the hiss of static fills the room.)\nMARTA: My husband said May, too. He meant to send for me. I kept the shop open forty years so he could find it.\nKSENIA: (quietly) Then you know why I have to go.",
+    "question": "Which choice best describes the shift in tone in the text?",
+    "options": [
+     "From bitter to forgiving, as Marta pardons Ksenia for leaving",
+     "From anxious to excited, as Ksenia describes her travel plans",
+     "From teasing to sorrowful, as Marta recalls her own lost hope",
+     "From formal to playful, as the two women become closer friends"
+    ],
+    "correct_letter": "C",
+    "explanation": "처음에 마르타는 웃으며 크세니아를 여행자라고 부르며 놀린다. 그러나 크세니아가 5월에 배를 탄다고 하자 마르타는 수신기를 내려놓고, 남편도 5월을 말했지만 끝내 돌아오지 않은 기억을 꺼낸다. 따라서 장난스러운 분위기에서 슬픈 분위기로 바뀌므로 C가 정답이다. A는 마르타가 용서한다는 근거가 없고, B와 D는 변화의 방향이 지문과 맞지 않는다.",
+    "judgeNotes": [
+     "Fable 추정 난이도 easy",
+     "difficulty_too_easy"
+    ],
+    "reason": "too_easy"
+   }
+  },
+  {
+   "candidateId": "lit40-medium-02-036",
+   "route": "ai_passage",
+   "skill": "text_structure_purpose",
+   "difficulty": "medium",
+   "questionType": "tone_shift",
+   "genre": "letter",
+   "targetLetter": "B",
+   "words": {
+    "min": 60,
+    "max": 220
+   },
+   "recipeId": null,
+   "spec": {
+    "candidateId": "lit40-medium-02-036",
+    "batchId": "lit40-medium-02",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "medium",
+    "questionType": "tone_shift",
+    "genre": "letter",
+    "seed": {
+     "index": 35,
+     "genre": "letter",
+     "pov": "mixed_or_none",
+     "styleEra": "19c",
+     "names": [
+      "Emiliano",
+      "Bartolo"
+     ],
+     "nameCultures": [
+      "latin_american",
+      "latin_american"
+     ],
+     "locale": "Oaxaca",
+     "setting": "a lakeside dock",
+     "relationship": "two brothers who run a failing shop",
+     "conflict": "while rehearsing for an important performance",
+     "openingStyle": "숫자·목록·규칙을 말하며 시작",
+     "topicSeed": "a lakeside dock in Oaxaca; two brothers who run a failing shop while rehearsing for an important performance"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a lakeside dock in Oaxaca; two brothers who run a failing shop while rehearsing for an important performance\n인물 이름: Emiliano, Bartolo 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 숫자·목록·규칙을 말하며 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 B 에 둔다. correct_letter 는 B 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 B 로 정한 뒤 나머지 선택지를 채운다.",
+   "previous": {
+    "passage": "Three things, brother Bartolo, I must set down before the festival: the shop owes four months' rent, the dock planks are rotting under our rehearsal spot, and you still play the second verse too fast. I write this by the lake at Oaxaca, where we practiced again tonight while the fishermen pretended not to listen. I meant this letter to be a ledger of our failures. Yet as I write I keep hearing how the water carried your guitar across to the far shore, and how an old fisherman stood up in his boat and took off his hat. Perhaps the shop will close. Perhaps it must. But on Sunday, I think, we will play as if someone on the far shore is waiting for us. Your brother, Emiliano",
+    "question": "Which choice best describes the shift in tone in the text?",
+    "options": [
+     "From playful teasing to stern disapproval",
+     "From grim accounting to tentative hope",
+     "From open despair to bitter resignation",
+     "From formal politeness to casual humor"
+    ],
+    "correct_letter": "B",
+    "explanation": "편지는 밀린 임대료, 썩은 부두, 너무 빠른 연주를 나열하며 실패의 장부처럼 시작한다. 그러나 화자는 물 건너로 퍼진 기타 소리와 모자를 벗은 어부를 떠올린 뒤 일요일 연주에 대한 기대를 말한다. 따라서 냉정한 결산에서 조심스러운 희망으로 바뀌므로 B가 정답이다. A와 D는 앞부분의 무거운 목록을 놓쳤고, C는 마지막의 희망적인 어조와 맞지 않는다.",
+    "judgeNotes": [
+     "Fable 추정 난이도 easy",
+     "difficulty_too_easy"
+    ],
+    "reason": "too_easy"
+   }
+  },
+  {
+   "candidateId": "lit40-medium-02-046",
+   "route": "ai_passage",
+   "skill": "text_structure_purpose",
+   "difficulty": "medium",
+   "questionType": "underlined_portion_function",
+   "genre": "personal_essay",
+   "targetLetter": "D",
+   "words": {
+    "min": 60,
+    "max": 220
+   },
+   "recipeId": null,
+   "spec": {
+    "candidateId": "lit40-medium-02-046",
+    "batchId": "lit40-medium-02",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "medium",
+    "questionType": "underlined_portion_function",
+    "genre": "personal_essay",
+    "seed": {
+     "index": 45,
+     "genre": "personal_essay",
+     "pov": "first",
+     "styleEra": "contemporary",
+     "names": [
+      "Mathis",
+      "Camille"
+     ],
+     "nameCultures": [
+      "french",
+      "french"
+     ],
+     "locale": "Lyon",
+     "setting": "a snowed-in cabin",
+     "relationship": "a stepfather and his stepdaughter",
+     "conflict": "while arguing about something smaller than the real quarrel",
+     "openingStyle": "장소 이름으로 시작",
+     "topicSeed": "a snowed-in cabin in Lyon; a stepfather and his stepdaughter while arguing about something smaller than the real quarrel"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a snowed-in cabin in Lyon; a stepfather and his stepdaughter while arguing about something smaller than the real quarrel\n인물 이름: Mathis, Camille 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 장소 이름으로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 D 에 둔다. correct_letter 는 D 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 D 로 정한 뒤 나머지 선택지를 채운다.",
+   "previous": {
+    "passage": "Lyon was two hours below us, and the road down had vanished under snow by noon. For three days Mathis and I argued about the woodstove: whether to bank it at night, how many logs, whose turn it was to crack the damper. 'Camille, it is only a stove,' he said the first night, which made it worse. I was fifteen and had decided that everything he did in that cabin was wrong. On the third night he let the fire die, on purpose, I was sure, and I said so loudly. __He did not answer; he only took my mother's old wool coat from the hook and laid it over my shoulders.__ I knew the coat at once. We had not spoken of her since the funeral, and the stove, I realized, had never been the point. In the morning we shoveled the path together, trading the one good shovel back and forth.",
+    "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+    "options": [
+     "It shows that Mathis has finally come to agree with Camille about how to manage the stove.",
+     "It emphasizes how bitterly cold the cabin has become after the fire went out overnight.",
+     "It suggests that Mathis wants to stop arguing because he is worn out from shoveling snow.",
+     "It introduces an object that turns the narrator toward the grief beneath their argument."
+    ],
+    "correct_letter": "D",
+    "explanation": "앞부분의 난로 다툼은 사소한 문제처럼 보이지만, 밑줄 문장에서 Mathis가 어머니의 코트를 덮어 주자 화자는 장례 이후 말하지 않던 어머니를 떠올립니다. 바로 뒤에서 화자는 난로가 핵심이 아니었다고 깨닫습니다. 따라서 코트가 진짜 갈등인 슬픔을 드러내는 계기라는 D가 정답입니다. A·C는 Mathis의 동기를 잘못 짚었고, B는 추위 강조에 그쳐 글 전체의 기능을 놓칩니다.",
+    "judgeNotes": [
+     "Fable 추정 난이도 easy",
+     "difficulty_too_easy"
+    ],
+    "reason": "too_easy"
+   }
+  },
+  {
+   "candidateId": "lit40-medium-02-055",
+   "route": "ai_passage",
+   "skill": "central_ideas_details",
+   "difficulty": "medium",
+   "questionType": "narrator_attitude",
+   "genre": "diary",
+   "targetLetter": "A",
+   "words": {
+    "min": 60,
+    "max": 220
+   },
+   "recipeId": null,
+   "spec": {
+    "candidateId": "lit40-medium-02-055",
+    "batchId": "lit40-medium-02",
+    "route": "ai_passage",
+    "skill": "central_ideas_details",
+    "difficulty": "medium",
+    "questionType": "narrator_attitude",
+    "genre": "diary",
+    "seed": {
+     "index": 54,
+     "genre": "diary",
+     "pov": "first",
+     "styleEra": "19c",
+     "names": [
+      "Chana",
+      "Clara"
+     ],
+     "nameCultures": [
+      "hebrew_jewish",
+      "english"
+     ],
+     "locale": "Dhaka",
+     "setting": "a river barge",
+     "relationship": "a grandmother and her grandson",
+     "conflict": "about a name that no one uses anymore",
+     "openingStyle": "대명사 I 또는 We 로 시작",
+     "topicSeed": "a river barge in Dhaka; a grandmother and her grandson about a name that no one uses anymore"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a river barge in Dhaka; a grandmother and her grandson about a name that no one uses anymore\n인물 이름: Chana, Clara 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 대명사 I 또는 We 로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 A 에 둔다. correct_letter 는 A 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 A 로 정한 뒤 나머지 선택지를 채운다.",
+   "previous": {
+    "passage": "We have been three days on the barge down to Dhaka, and my grandson has taken to reading the cargo list aloud to the boatmen. This morning he found my old trunk among the jute bales and read the name painted on its lid: Clara. He asked who she was. I told him she was a girl who once learned English verbs at a mission school and believed she would never live anywhere but beside a cold sea. He said it was a pretty name and asked why no one says it. I could not answer him at once. Tonight I find I do not want the name back, exactly, yet I was glad, absurdly glad, to hear it spoken in his voice over the water. Chana I have been for fifty years, and Chana I shall stay; but I have asked him to leave the lid as it is.",
+    "question": "Which choice best describes the diarist's attitude toward the name Clara?",
+    "options": [
+     "Fondly nostalgic, cherishing the name's memory without wishing to take it back.",
+     "Bitterly regretful, wishing she had never given up the name of her girlhood.",
+     "Embarrassed, hoping her grandson will soon forget the name he read on the trunk.",
+     "Indifferent, treating the name as just one more entry on the barge's cargo list."
+    ],
+    "correct_letter": "A",
+    "explanation": "일기 작성자는 손자가 그 이름을 부르는 것을 듣고 '터무니없이 기뻤다'고 하면서도 이름을 되찾고 싶지는 않다고 씁니다. 또 앞으로도 Chana로 남겠지만 트렁크 뚜껑의 이름은 그대로 두라고 부탁합니다. 이 두 단서를 연결하면 A가 정답입니다. B는 되찾고 싶지 않다는 말과 어긋나고, C는 이름을 남겨 두려는 행동과 반대이며, D는 기쁨을 무시합니다.",
+    "judgeNotes": [
+     "Fable 추정 난이도 easy",
+     "difficulty_too_easy"
+    ],
+    "reason": "too_easy"
+   }
+  },
+  {
+   "candidateId": "lit40-medium-02-063",
+   "route": "ai_passage",
+   "skill": "central_ideas_details",
+   "difficulty": "medium",
+   "questionType": "main_idea_or_purpose",
+   "genre": "fable_or_folktale_retelling",
+   "targetLetter": "A",
+   "words": {
+    "min": 90,
+    "max": 150
+   },
+   "recipeId": "central_ideas_details_lit_main_idea_or_purpose_medium",
+   "spec": {
+    "candidateId": "lit40-medium-02-063",
+    "batchId": "lit40-medium-02",
+    "route": "ai_passage",
+    "skill": "central_ideas_details",
+    "difficulty": "medium",
+    "questionType": "main_idea_or_purpose",
+    "genre": "fable_or_folktale_retelling",
+    "seed": {
+     "index": 62,
+     "genre": "fable_or_folktale_retelling",
+     "pov": "third_limited",
+     "styleEra": "early_20c",
+     "names": [
+      "Odile",
+      "Zaynab"
+     ],
+     "nameCultures": [
+      "french",
+      "arabic_levantine"
+     ],
+     "locale": "Cairo",
+     "setting": "a quiet library",
+     "relationship": "two brothers who run a failing shop",
+     "conflict": "over a witness account that differs",
+     "openingStyle": "과거를 회상하는 문장으로 시작('Years later', 'Once' 등)",
+     "topicSeed": "a quiet library in Cairo; two brothers who run a failing shop over a witness account that differs"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 90,
+     "max": 150
+    },
+    "recipeId": "central_ideas_details_lit_main_idea_or_purpose_medium"
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a quiet library in Cairo; two brothers who run a failing shop over a witness account that differs\n인물 이름: Odile, Zaynab 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 과거를 회상하는 문장으로 시작('Years later', 'Once' 등). 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 90~150단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 A 에 둔다. correct_letter 는 A 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 A 로 정한 뒤 나머지 선택지를 채운다.\n레시피(central_ideas_details_lit_main_idea_or_purpose_medium, 난이도 medium): 지문의 요지나 서술 목적을 묻는다. 요지는 직접 선언하지 않고 두 곳의 근거(앞부분 일화와 뒷부분 대비)에서 읽히게 한다. 마지막 문장은 요지와 다른 소재의 구체적 묘사로 끝낸다. 오답 3개는 (a) 일화만 요약 (b) 지문 소재를 쓰지만 목적이 다른 선택지 (c) 지나치게 일반적인 교훈 선택지로 만든다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 1 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 일화만 요약한 선택지 (2) 지문 소재를 쓰지만 서술 목적이 다른 선택지 (3) 지나치게 일반적인 교훈 선택지\n금지: 정답이 지문 마지막 문장을 거의 그대로 바꿔 말한 문장이다 / 오답 3개가 지문의 분위기와 정반대 정서·행동이라 지문 분위기만 알아도 소거된다 / 정답만 길고 구체적이며 오답은 짧고 막연하다 / 지문 어딘가에 정답의 핵심어가 한 문장에 몰려 있다(근거가 한 곳)\n지문 길이: 90~150단어.",
+   "previous": {
+    "passage": "Once, in a Cairo street where the lamps were lit late, two sisters kept a spice shop that sold less each year. Odile, the elder, swore that a thief in a green cloak had taken their saffron at dusk. Zaynab, the younger, swore no one had entered at all, for she had watched the door the whole hour. Each went alone to the quiet library behind the mosque to ask the keeper of records who was right, and each was sent home with the same answer: come back together. When at last they did, Odile recalled the cloak brushing the back window, and Zaynab recalled the shutter she had never thought to check. Between them, the thief at last had a road. In the reading room, a cat slept on a ledger no one had opened in years.",
+    "question": "Which choice best states the main purpose of the text?",
+    "options": [
+     "To illustrate that the sisters found the truth only by joining their partial accounts",
+     "To recount how a thief in a green cloak stole saffron from the sisters' struggling spice shop",
+     "To depict the library keeper as a judge who settles quarrels among the townspeople",
+     "To teach that people should always trust what they witness with their own eyes"
+    ],
+    "correct_letter": "A",
+    "explanation": "앞부분에서 두 자매의 증언은 서로 어긋나고, 기록 관리인은 각자에게 함께 오라는 같은 답만 준다. 뒷부분에서 함께 온 자매가 각자 놓친 부분(뒤창의 망토, 확인하지 않은 덧문)을 맞추자 도둑의 경로가 드러난다. 따라서 부분적인 증언을 합쳐야 진실에 이른다는 것이 목적이므로 A가 정답이다. B는 사건만 요약했고, C는 관리인의 역할을 과장했으며, D는 지문과 어긋나는 일반적 교훈이다.",
+    "judgeNotes": [
+     "Fable 추정 난이도 easy",
+     "difficulty_too_easy"
+    ],
+    "reason": "too_easy"
+   }
+  },
+  {
+   "candidateId": "lit40-medium-02-070",
+   "route": "ai_passage",
+   "skill": "inferences",
+   "difficulty": "medium",
+   "questionType": "character_motivation",
+   "genre": "diary",
+   "targetLetter": "C",
+   "words": {
+    "min": 90,
+    "max": 150
+   },
+   "recipeId": "inferences_lit_character_motivation_medium",
+   "spec": {
+    "candidateId": "lit40-medium-02-070",
+    "batchId": "lit40-medium-02",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "medium",
+    "questionType": "character_motivation",
+    "genre": "diary",
+    "seed": {
+     "index": 69,
+     "genre": "diary",
+     "pov": "mixed_or_none",
+     "styleEra": "early_20c",
+     "names": [
+      "Yasmin",
+      "Omar"
+     ],
+     "nameCultures": [
+      "arabic_levantine",
+      "arabic_levantine"
+     ],
+     "locale": "Marrakesh",
+     "setting": "a bakery before opening",
+     "relationship": "an author and her translator",
+     "conflict": "while learning to let go of a habit",
+     "openingStyle": "의문문으로 시작",
+     "topicSeed": "a bakery before opening in Marrakesh; an author and her translator while learning to let go of a habit"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 90,
+     "max": 150
+    },
+    "recipeId": "inferences_lit_character_motivation_medium"
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a bakery before opening in Marrakesh; an author and her translator while learning to let go of a habit\n인물 이름: Yasmin, Omar 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 의문문으로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 90~150단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 C 에 둔다. correct_letter 는 C 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 C 로 정한 뒤 나머지 선택지를 채운다.\n레시피(inferences_lit_character_motivation_medium, 난이도 medium): 인물의 행동 이유를 묻는다. 동기는 직접 서술하지 않고 지문 중간 두 문장 안에서 단서로 드러내되 서로 이어 읽으면 알 수 있게 한다. 마지막 문장은 동기와 무관한 후속 행동이나 배경으로 끝낸다. 오답 3개는 (a) 인물의 다른 감정에서 나온 동기 (b) 행동의 결과를 동기로 착각한 선택지 (c) 지문에 없는 외부 원인을 끌어온 선택지로 만들되 모두 지문의 단어를 한두 개 사용한다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 1 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 인물의 다른 감정에서 나온 동기 (2) 행동의 결과를 동기로 착각한 선택지 (3) 지문 단어를 쓰지만 지문에 없는 외부 원인을 끌어온 선택지\n금지: 정답이 지문 마지막 문장을 거의 그대로 바꿔 말한 문장이다 / 오답 3개가 지문의 분위기와 정반대 정서·행동이라 지문 분위기만 알아도 소거된다 / 정답만 길고 구체적이며 오답은 짧고 막연하다 / 지문 어딘가에 정답의 핵심어가 한 문장에 몰려 있다(근거가 한 곳)\n지문 길이: 90~150단어.",
+   "previous": {
+    "passage": "Why do I always reach for the pen once more? I write this at the baker's counter in Marrakesh before dawn, while the loaves are still pale in the oven. Omar arrived at five, as he has every morning this month, and waited without complaint while I, Yasmin, struck out a line I had already struck out twice. Yesterday he read me his French version of my second chapter, and I heard in it a sentence I had abandoned years ago, which he had somehow restored from the margins of my draft. Today, when he held out his hand, I gave him the last pages without rereading them. He seemed so startled that he nearly dropped them into the flour. The baker's boy is now dragging the first trays toward the door.",
+    "question": "Based on the text, why does Yasmin most likely give Omar the last pages without rereading them?",
+    "options": [
+     "She is too exhausted from working before dawn to look over the pages again.",
+     "She wants to finish quickly so that the baker can open the shop on schedule.",
+     "She has come to trust that Omar understands her writing as well as she does.",
+     "She has been told by her publisher that the translation is already overdue."
+    ],
+    "correct_letter": "C",
+    "explanation": "Yasmin은 같은 줄을 몇 번이고 지우는 습관이 있고, Omar는 매일 아침 묵묵히 기다린다. 전날 Omar의 번역에서 자신이 오래전 버린 문장이 여백에서 되살아난 것을 듣고, 오늘 그녀는 처음으로 다시 읽지 않고 원고를 건넨다. 두 단서를 연결하면 그녀가 Omar가 자신의 글을 깊이 이해한다고 믿게 되었음을 알 수 있으므로 C가 정답이다. A는 다른 상태, B는 장면의 배경을 동기로 오해한 것이며, D는 지문에 없는 외부 원인이다.",
+    "judgeNotes": [
+     "Fable 추정 난이도 easy",
+     "difficulty_too_easy"
+    ],
+    "reason": "too_easy"
+   }
+  },
+  {
+   "candidateId": "lit40-medium-02-072",
+   "route": "ai_passage",
+   "skill": "inferences",
+   "difficulty": "medium",
+   "questionType": "tone_or_mood",
+   "genre": "short_story",
+   "targetLetter": "A",
+   "words": {
+    "min": 90,
+    "max": 150
+   },
+   "recipeId": "inferences_lit_tone_or_mood_medium",
+   "spec": {
+    "candidateId": "lit40-medium-02-072",
+    "batchId": "lit40-medium-02",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "medium",
+    "questionType": "tone_or_mood",
+    "genre": "short_story",
+    "seed": {
+     "index": 71,
+     "genre": "short_story",
+     "pov": "third_omniscient",
+     "styleEra": "late_20c",
+     "names": [
+      "Isadora",
+      "Rafaela"
+     ],
+     "nameCultures": [
+      "portuguese_brazilian",
+      "portuguese_brazilian"
+     ],
+     "locale": "Lisbon",
+     "setting": "a bus depot",
+     "relationship": "a teacher and a student who will not speak",
+     "conflict": "over a borrowed object never returned",
+     "openingStyle": "의문문으로 시작",
+     "topicSeed": "a bus depot in Lisbon; a teacher and a student who will not speak over a borrowed object never returned"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 90,
+     "max": 150
+    },
+    "recipeId": "inferences_lit_tone_or_mood_medium"
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a bus depot in Lisbon; a teacher and a student who will not speak over a borrowed object never returned\n인물 이름: Isadora, Rafaela 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 의문문으로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 90~150단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 A 에 둔다. correct_letter 는 A 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 A 로 정한 뒤 나머지 선택지를 채운다.\n레시피(inferences_lit_tone_or_mood_medium, 난이도 medium): 지문 전체의 어조·분위기를 묻는다. 지문에 서로 다른 두 정서(예: 설렘과 불안)가 섞여 있게 하고 한 쪽이 더 두드러지도록 쓴다. 마지막 문장은 분위기를 명명하지 않는다. 오답 3개는 (a) 덜 두드러진 정서만 말한 어조 (b) 두 정서를 섞었지만 비중을 뒤집은 어조 (c) 지문 소재와 어울리지만 지문에 단서가 약한 어조로 만들고 정반대 분위기는 쓰지 않는다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 1 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 덜 두드러진 정서만 말한 어조 (2) 두 정서의 비중을 뒤집은 어조 (3) 소재와 어울리지만 단서가 약한 어조\n금지: 정답이 지문 마지막 문장을 거의 그대로 바꿔 말한 문장이다 / 오답 3개가 지문의 분위기와 정반대 정서·행동이라 지문 분위기만 알아도 소거된다 / 정답만 길고 구체적이며 오답은 짧고 막연하다 / 지문 어딘가에 정답의 핵심어가 한 문장에 몰려 있다(근거가 한 곳)\n지문 길이: 90~150단어.",
+   "previous": {
+    "passage": "Who returns a thing after eleven years? Isadora wondered this as the young woman crossed toward the Lisbon depot bench where she waited each evening for the 28. Rafaela, once the silent child in the back row of her fourth-grade class, was grown now, and in her hands she held the red umbrella Isadora had lent her one stormy afternoon in 1979. Isadora felt a warmth rise in her chest, the kind she had felt whenever a shy pupil finally raised a hand. Still, a small worry pricked at her: had something happened, that the girl should come now? Rafaela held out the umbrella, unopened, and smiled without a word, and Isadora found herself smiling back, the worry loosening. Somewhere behind them, a mechanic was hosing down the bay floor.",
+    "question": "Which choice best describes the overall tone of the text?",
+    "options": [
+     "Warmly hopeful, with a brief undercurrent of worry",
+     "Quietly uneasy about the reason for the visit",
+     "Mostly anxious, with only a fleeting moment of warmth",
+     "Wistfully nostalgic about years in the classroom"
+    ],
+    "correct_letter": "A",
+    "explanation": "Isadora는 수줍던 제자가 우산을 돌려주러 오자 가슴에 따뜻함이 차오르는 것을 느낀다. 한편 무슨 일이 있었나 하는 작은 걱정이 스치지만, 말없이 웃는 Rafaela를 보며 그 걱정은 풀린다. 따라서 따뜻한 희망이 중심이고 걱정은 잠시 스치는 정서이므로 A가 정답이다. B는 덜 두드러진 정서만 말했고, C는 두 정서의 비중을 뒤집었으며, D는 소재와 어울리지만 지문 단서가 약하다.",
+    "judgeNotes": [
+     "Fable 추정 난이도 easy",
+     "difficulty_too_easy"
+    ],
+    "reason": "too_easy"
+   }
+  },
+  {
+   "candidateId": "lit40-medium-02-077",
+   "route": "ai_passage",
+   "skill": "inferences",
+   "difficulty": "medium",
+   "questionType": "tone_or_mood",
+   "genre": "memoir",
+   "targetLetter": "B",
+   "words": {
+    "min": 90,
+    "max": 150
+   },
+   "recipeId": "inferences_lit_tone_or_mood_medium",
+   "spec": {
+    "candidateId": "lit40-medium-02-077",
+    "batchId": "lit40-medium-02",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "medium",
+    "questionType": "tone_or_mood",
+    "genre": "memoir",
+    "seed": {
+     "index": 76,
+     "genre": "memoir",
+     "pov": "first",
+     "styleEra": "19c",
+     "names": [
+      "Thorvald",
+      "Jens"
+     ],
+     "nameCultures": [
+      "dutch_nordic",
+      "dutch_nordic"
+     ],
+     "locale": "Bergen",
+     "setting": "a summer camp dining hall",
+     "relationship": "a gardener and the house's new owner",
+     "conflict": "about the cost of a scholarship or opportunity",
+     "openingStyle": "장소 이름으로 시작",
+     "topicSeed": "a summer camp dining hall in Bergen; a gardener and the house's new owner about the cost of a scholarship or opportunity"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 90,
+     "max": 150
+    },
+    "recipeId": "inferences_lit_tone_or_mood_medium"
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a summer camp dining hall in Bergen; a gardener and the house's new owner about the cost of a scholarship or opportunity\n인물 이름: Thorvald, Jens 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 장소 이름으로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 90~150단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 B 에 둔다. correct_letter 는 B 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 B 로 정한 뒤 나머지 선택지를 채운다.\n레시피(inferences_lit_tone_or_mood_medium, 난이도 medium): 지문 전체의 어조·분위기를 묻는다. 지문에 서로 다른 두 정서(예: 설렘과 불안)가 섞여 있게 하고 한 쪽이 더 두드러지도록 쓴다. 마지막 문장은 분위기를 명명하지 않는다. 오답 3개는 (a) 덜 두드러진 정서만 말한 어조 (b) 두 정서를 섞었지만 비중을 뒤집은 어조 (c) 지문 소재와 어울리지만 지문에 단서가 약한 어조로 만들고 정반대 분위기는 쓰지 않는다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 1 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 덜 두드러진 정서만 말한 어조 (2) 두 정서의 비중을 뒤집은 어조 (3) 소재와 어울리지만 단서가 약한 어조\n금지: 정답이 지문 마지막 문장을 거의 그대로 바꿔 말한 문장이다 / 오답 3개가 지문의 분위기와 정반대 정서·행동이라 지문 분위기만 알아도 소거된다 / 정답만 길고 구체적이며 오답은 짧고 막연하다 / 지문 어딘가에 정답의 핵심어가 한 문장에 몰려 있다(근거가 한 곳)\n지문 길이: 90~150단어.",
+   "previous": {
+    "passage": "Bergen in July smelled of tar and wet lilac, and the long dining hall of the summer school where I worked as a boy smelled of both. I was the gardener's son, trimming hedges for Thorvald, who had bought the estate that spring. One evening he called me in while the students ate and told me, before all of them, that he would pay my fees at the cathedral school in autumn. I felt my face burn; I was holding a rake, and my boots were caked with mud. Yet when he shook my hand, his grip was so earnest that the burning turned, slowly, to something like gladness, and I thanked him twice. Jens, my father, was waiting by the kitchen door. Through the windows, gulls wheeled above the fish market.",
+    "question": "Which choice best describes the overall tone of the text?",
+    "options": [
+     "Embarrassed, focused on the narrator's muddy appearance",
+     "Grateful, though first colored by a sense of embarrassment",
+     "Humiliated, with only a faint trace of thankfulness",
+     "Resentful of the new owner for staging a public display"
+    ],
+    "correct_letter": "B",
+    "explanation": "화자는 학생들 앞에서 장학금 소식을 듣자 진흙투성이 차림 때문에 얼굴이 달아오른다. 그러나 Thorvald의 진심 어린 악수에 그 부끄러움이 기쁨으로 바뀌고 두 번이나 감사를 표한다. 부끄러움이 먼저 있지만 감사가 더 두드러지므로 B가 정답이다. A는 덜 두드러진 정서만, C는 비중을 뒤집었고, D는 지문에 단서가 약한 어조다.",
+    "judgeNotes": [
+     "Fable 추정 난이도 easy",
+     "difficulty_too_easy"
+    ],
+    "reason": "too_easy"
+   }
+  }
+ ],
+ "instructions": "당신은 디지털 SAT Reading & Writing 문학 지문 문항 출제 위원이다. 아래 12개 후보 각각에 대해 문항 1개를 만들어 JSON 한 파일로 저장한다.\n작업: 재작성(1회) · 청크 rewrite-005\n규칙:\n1. 지문은 전부 새로 쓴 창작이다. 실제 작품의 문장·플롯·고유한 인물 설정을 쓰지 말고, 실존 작가·작품 이름이나 'From … by …' 같은 출처 머리글을 붙이지 않는다(발췌 지문 작업은 제공된 발췌를 한 글자도 바꾸지 않는다).\n2. 지문·질문·선택지는 영어만 쓴다. 해설(explanation)만 한국어 3~5문장이며, 글자 참조는 선택지 글자(A~D)로만 한다.\n3. 선택지는 정확히 4개, 정답은 1개이고 정답 위치는 후보별 targetLetter 와 같아야 한다(어기면 코드가 선택지를 재배치하거나 탈락시킨다).\n4. 선택지 길이·문체를 비슷하게 맞춘다. 정답이 가장 길거나 구체적이면 탈락한다. 오답 3개는 서로 다른 그럴듯한 오개념에서 나오게 하고 지문 표현을 일부 활용한다.\n5. 정답이 지문 마지막 문장을 거의 그대로 바꿔 말한 것이면 탈락한다. 근거를 서로 떨어진 둘 이상의 문장에 둔다.\n6. 후보별 names 에 있는 이름만 인물 이름으로 쓴다. 지정되지 않은 이름·'Tobias'·'Odalys'·'Wren' 은 쓰지 않는다. 후보별 openingStyle 을 따르고 첫 단어를 The·You·It·There 로 시작하지 않는다.\n7. 지문 단어 수는 후보별 words.min~words.max 안이어야 한다(코드가 센다). 시는 줄바꿈을 \\n 으로 유지한다.\n8. XML 태그·마크다운·내부 메모·플레이스홀더·'As an AI' 류 문장을 출력에 넣지 않는다. 밑줄 표시는 앱 규격대로 두 밑줄 기호 __문장__ 만 쓴다. 출처·작가를 지어내지 않는다.\n9. 선언: 모든 항목에 declaration 3개(original, noRealWorkQuoted, noCopyrightedSource)를 true 로 쓴다. 그럴 수 없는 항목은 만들지 말고 candidateId 만 빼라(탈락 처리된다).\n지문과 문항을 함께 새로 쓴다.\n출력: Write 도구로 정확히 이 경로에 JSON 한 파일을 쓴다 → /Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rewrite-005.result.json\n출력 JSON 스키마(예시 구조): {\"chunkId\":\"작업 파일의 chunkId 를 그대로\",\"model\":\"당신의 모델 이름(예: opus)\",\"items\":[{\"candidateId\":\"후보의 candidateId 를 그대로\",\"passage\":\"영어 지문(문항의 질문은 넣지 않는다)\",\"question\":\"영어 질문 한 문장\",\"options\":[\"선택지 A\",\"선택지 B\",\"선택지 C\",\"선택지 D\"],\"correct_letter\":\"A|B|C|D (targetLetter 와 같게)\",\"explanation\":\"한국어 해설 3~5문장\",\"tone\":[\"지문 어조 영어 단어 1~3개\"],\"devices\":[\"쓰인 문학 장치 영어 단어\"],\"declaration\":{\"original\":true,\"noRealWorkQuoted\":true,\"noCopyrightedSource\":true}}]}\n허용 값: correct_letter ∈ {A,B,C,D}, options 길이 4, declaration 3개 모두 true. 후보의 candidateId 를 바꾸지 않는다. 항목 순서는 후보 순서를 따른다.\n금지: 결과 파일 외의 파일 생성·수정, 다른 명령 실행, 후보 임의 추가·삭제, 이 작업 파일 수정. 끝나면 'done <항목 수>' 한 줄만 답한다.\n\n## 후보\n### lit40-hard-01-100 — skill inferences · 유형 character_motivation · 난이도 hard · 장르 personal_essay · targetLetter D\n유형 지시: 인물이 어떤 행동을 한 이유·동기를 묻는다.\n난이도 지시: hard: 태도·동기가 직접 서술되지 않고 행동·대조·반복으로만 드러나며 근거가 떨어진 두 곳 이상에 흩어진다. 표면 해석(그럴듯한 오독)과 정답 해석이 갈린다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a vineyard at harvest in Galway; a young apprentice and a master carpenter over a recipe that was never written down\n인물 이름: Aoife, Rory 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 짧은 단언문으로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 110~170단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 D 에 둔다. correct_letter 는 D 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 D 로 정한 뒤 나머지 선택지를 채운다.\n레시피(inferences_lit_character_motivation_hard, 난이도 hard): 인물이 한 행동을 하는 이유를 묻되 동기는 지문에 직접 서술하지 않는다. 동기를 암시하는 단서는 서로 떨어진 두 곳(예: 앞부분의 습관적 행동, 중간의 말 돌리기·회피)에 나눠 심고, 마지막 문장은 장면 묘사나 사물로 끝내 동기를 요약하지 않는다. 정답은 두 단서를 모두 설명하는 동기다. 오답 3개는 각각 (a) 앞 단서만 설명하는 동기 (b) 뒤 단서만 설명하는 동기 (c) 지문의 표현을 빌렸지만 인물의 다른 행동과 충돌하는 동기로 만들고, 셋 모두 이 인물이 가질 법한 감정이어야 한다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 2 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 앞 단서만 설명하고 뒤 단서와 충돌하는 동기 (2) 뒤 단서만 설명하고 앞 단서를 무시하는 동기 (3) 지문의 구절을 빌려 쓰지만 인물의 다른 행동과 모순되는 동기\n금지: 정답이 지문 마지막 문장을 거의 그대로 바꿔 말한 문장이다 / 오답 3개가 지문의 분위기와 정반대 정서·행동이라 지문 분위기만 알아도 소거된다 / 정답만 길고 구체적이며 오답은 짧고 막연하다 / 지문 어딘가에 정답의 핵심어가 한 문장에 몰려 있다(근거가 한 곳)\n지문 길이: 110~170단어.\n[이전 시도(난이도가 쉽다고 판정됨)]\n지문: Grapes have no business in Galway. Rory grows them anyway along the south wall of his workshop, and each October he presses them in a press he built before you, Aoife, became his apprentice. This year the press splits along one cheek. Rory has a glue for such repairs, made from a recipe he has never written down; for three years you have asked for it and been told you will learn it when you need it. He mixes it now while you watch, measuring nothing, talking about the weather. When you reach for a pencil, he sends you to the shed for clamps. Next morning he announces that his wrists are bad and the second batch is yours. You ruin it twice. On the third try he leans on the bench beside you, his wrists apparently healed, and tilts the pot a quarter-turn toward the window.\n질문: Based on the text, why does Rory most likely claim that his wrists are bad?\n선택지: He is embarrassed that age has made his hands unsteady for delicate work. | He hopes the failed batches will keep the recipe safely his own. | He is worn out from a long season of harvesting and pressing grapes. | He wants Aoife to learn the recipe through her own hands, not notes.\n정답: D\n판정 메모: Fable 추정 난이도 medium / difficulty_too_easy\n→ 같은 장면·인물·정답 위치를 유지하되 근거를 더 흩어 놓고 오답을 더 그럴듯하게 고쳐 어렵게 다시 쓴다.\n### lit40-medium-02-005 — skill inferences · 유형 relationship_between_characters · 난이도 medium · 장르 short_story · targetLetter D\n유형 지시: 두 인물의 관계를 단서로 추론하게 한다.\n난이도 지시: medium: 단서를 두 군데 이상 연결해야 하고 오답 중 하나 이상이 그럴듯하다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a river barge in Hanoi; a sister and her younger brother's tutor while pretending to enjoy a gift that is wrong\n인물 이름: Kainoa, Faris 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 대명사 I 또는 We 로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 90~150단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 D 에 둔다. correct_letter 는 D 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 D 로 정한 뒤 나머지 선택지를 채운다.\n레시피(inferences_lit_relationship_between_characters_medium, 난이도 medium): 두 인물의 관계를 추론하게 한다. 관계는 직접 서술하지 않고 두 문장 안의 대화·행동으로 드러내되 이어 읽으면 알 수 있게 한다. 마지막 문장은 관계와 무관한 장면 묘사로 끝낸다. 오답 3개는 (a) 인물 중 한쪽의 감정만 반영한 관계 (b) 지문 어휘를 쓰지만 반대 방향의 관계 (c) 일반적 통념에서 고른 관계로 만들되 모두 지문의 단어를 한두 개 사용한다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 1 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 한쪽 감정만 반영한 관계 (2) 지문 어휘를 쓰지만 방향이 반대인 관계 (3) 일반적 통념에서 고른 관계\n금지: 정답이 지문 마지막 문장을 거의 그대로 바꿔 말한 문장이다 / 오답 3개가 지문의 분위기와 정반대 정서·행동이라 지문 분위기만 알아도 소거된다 / 정답만 길고 구체적이며 오답은 짧고 막연하다 / 지문 어딘가에 정답의 핵심어가 한 문장에 몰려 있다(근거가 한 곳)\n지문 길이: 90~150단어.\n[이전 시도(난이도가 쉽다고 판정됨)]\n지문: I unfolded the scarf on the barge's narrow deck while the Red River slid brown and slow beneath us in Hanoi. It was mustard yellow, the one color I had refused to wear since childhood, and Faris, my younger brother's tutor, watched my face as though it were an exam he had studied for. My brother must have told him yellow was my favorite; my brother thought jokes were a form of love. I tied the scarf at my throat and said it matched the lanterns on the far bank. Faris let out a breath and began explaining, too quickly, how well the boy was doing with fractions. I nodded at every fraction. Along the bank, a woman was hanging fish to dry on a line of bamboo poles.\n질문: Based on the text, which choice best describes the relationship between the narrator, Kainoa, and Faris?\n선택지: Faris is relieved, while Kainoa is indifferent to his nervous efforts. | Kainoa seeks Faris's approval as she anxiously studies his face. | They are rivals competing for the younger brother's affection. | Faris anxiously seeks Kainoa's approval, and she kindly spares him.\n정답: D\n판정 메모: Fable 추정 난이도 easy / difficulty_too_easy\n→ 같은 장면·인물·정답 위치를 유지하되 근거를 더 흩어 놓고 오답을 더 그럴듯하게 고쳐 어렵게 다시 쓴다.\n### lit40-medium-02-022 — skill words_in_context · 유형 figurative_language · 난이도 medium · 장르 memoir · targetLetter C\n유형 지시: 비유 표현이 문맥에서 전달하는 의미를 묻는다. 질문은 'As used in the text, the phrase “…” most nearly suggests …' 형식이고 인용한 구절이 지문에 있어야 하며, 지문 본문에는 따옴표(\" “ ”)를 쓰지 않는다(대사는 따옴표 없이 서술).\n난이도 지시: medium: 단서를 두 군데 이상 연결해야 하고 오답 중 하나 이상이 그럴듯하다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a stone bridge in Glasgow; a priest and a lapsed parishioner about what to tell a younger sibling\n인물 이름: Saoirse, Thiago 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 의문문으로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 C 에 둔다. correct_letter 는 C 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 C 로 정한 뒤 나머지 선택지를 채운다.\n[이전 시도(난이도가 쉽다고 판정됨)]\n지문: Who decides what a nine-year-old is ready to hear? I put that question to Father Thiago on the Clyde bridge in the winter of 1987, though I had not set foot in his church for three years. My younger brother had asked me why our mother no longer came home, and I wanted the priest to give me an answer I could repeat. Thiago leaned on the cold stone and watched the river for a long while. Then he said that a hard truth told gently was a lantern, not a stone; the boy could carry it in front of him instead of on his back. I, Saoirse, the lapsed one, had expected scripture. Instead he offered me something I could use, and that night I sat on my brother's bed and told him plainly.\n질문: As used in the text, the phrase “a lantern, not a stone” most nearly suggests that a hard truth told gently\n선택지: is a burden that the boy will gradually learn to ignore. | should be postponed until the boy is old enough to carry it. | can help the boy see his way rather than simply weigh on him. | must come from the church rather than from the boy's own family.\n정답: C\n판정 메모: Fable 추정 난이도 easy / difficulty_too_easy\n→ 같은 장면·인물·정답 위치를 유지하되 근거를 더 흩어 놓고 오답을 더 그럴듯하게 고쳐 어렵게 다시 쓴다.\n### lit40-medium-02-023 — skill words_in_context · 유형 figurative_language · 난이도 medium · 장르 fable_or_folktale_retelling · targetLetter D\n유형 지시: 비유 표현이 문맥에서 전달하는 의미를 묻는다. 질문은 'As used in the text, the phrase “…” most nearly suggests …' 형식이고 인용한 구절이 지문에 있어야 하며, 지문 본문에는 따옴표(\" “ ”)를 쓰지 않는다(대사는 따옴표 없이 서술).\n난이도 지시: medium: 단서를 두 군데 이상 연결해야 하고 오답 중 하나 이상이 그럴듯하다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a mountain bus stop in Porto Alegre; a mother and a daughter planning a wedding while deciding whether a rule still applies\n인물 이름: Booker, Mingyu 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 감각 묘사(소리·냄새·촉감)로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 D 에 둔다. correct_letter 는 D 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 D 로 정한 뒤 나머지 선택지를 채운다.\n[이전 시도(난이도가 쉽다고 판정됨)]\n지문: Wind hissed through the pines above the mountain bus stop near Porto Alegre, and my mother, Mingyu, smelled of the orange peel she always chewed when nervous. In our family, a rule had come down like an heirloom: a bride must not see the wedding road before the wedding day. I was the bride, Booker was the groom, and the only road to the chapel was this one. Every bus would carry me past it. My mother studied the timetable as if it were scripture, then folded it into a small square. Rules are coats, she said at last, cut for the shoulders of whoever first wore them. She tucked the timetable into my pocket, and when the bus came, she climbed on beside me without looking away from the road.\n질문: As used in the text, the phrase “Rules are coats” most nearly suggests that the family rule\n선택지: protects the family from the harsh conditions of the mountains. | is a disguise that hides the bride's true feelings about marriage. | must be worn proudly by every bride who joins the family. | was shaped for earlier circumstances and may not fit the present.\n정답: D\n판정 메모: Fable 추정 난이도 easy / difficulty_too_easy\n→ 같은 장면·인물·정답 위치를 유지하되 근거를 더 흩어 놓고 오답을 더 그럴듯하게 고쳐 어렵게 다시 쓴다.\n### lit40-medium-02-033 — skill text_structure_purpose · 유형 tone_shift · 난이도 medium · 장르 drama · targetLetter C\n유형 지시: 글 중간에서 어조가 바뀌는 지점과 의미를 묻는다.\n난이도 지시: medium: 단서를 두 군데 이상 연결해야 하고 오답 중 하나 이상이 그럴듯하다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a radio repair shop in Gdansk; an elder and a restless apprentice about starting over somewhere unfamiliar\n인물 이름: Marta, Ksenia 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 감각 묘사(소리·냄새·촉감)로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 C 에 둔다. correct_letter 는 C 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 C 로 정한 뒤 나머지 선택지를 채운다.\n[이전 시도(난이도가 쉽다고 판정됨)]\n지문: Solder smoke and old dust hang over the bench of a Gdansk radio repair shop. MARTA, seventy, bends over an opened receiver; KSENIA, nineteen, paces by the window.\nKSENIA: Listen. Warsaw, Berlin, a station from Lisbon. Every one of them is somewhere I have never been.\nMARTA: (laughing) And every one of them is broken until we fix it. Pass me the small pliers, traveler.\nKSENIA: I mean it. I have a place on a ship in May.\n(MARTA stops. She sets down the receiver, and the hiss of static fills the room.)\nMARTA: My husband said May, too. He meant to send for me. I kept the shop open forty years so he could find it.\nKSENIA: (quietly) Then you know why I have to go.\n질문: Which choice best describes the shift in tone in the text?\n선택지: From bitter to forgiving, as Marta pardons Ksenia for leaving | From anxious to excited, as Ksenia describes her travel plans | From teasing to sorrowful, as Marta recalls her own lost hope | From formal to playful, as the two women become closer friends\n정답: C\n판정 메모: Fable 추정 난이도 easy / difficulty_too_easy\n→ 같은 장면·인물·정답 위치를 유지하되 근거를 더 흩어 놓고 오답을 더 그럴듯하게 고쳐 어렵게 다시 쓴다.\n### lit40-medium-02-036 — skill text_structure_purpose · 유형 tone_shift · 난이도 medium · 장르 letter · targetLetter B\n유형 지시: 글 중간에서 어조가 바뀌는 지점과 의미를 묻는다.\n난이도 지시: medium: 단서를 두 군데 이상 연결해야 하고 오답 중 하나 이상이 그럴듯하다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a lakeside dock in Oaxaca; two brothers who run a failing shop while rehearsing for an important performance\n인물 이름: Emiliano, Bartolo 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 숫자·목록·규칙을 말하며 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 B 에 둔다. correct_letter 는 B 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 B 로 정한 뒤 나머지 선택지를 채운다.\n[이전 시도(난이도가 쉽다고 판정됨)]\n지문: Three things, brother Bartolo, I must set down before the festival: the shop owes four months' rent, the dock planks are rotting under our rehearsal spot, and you still play the second verse too fast. I write this by the lake at Oaxaca, where we practiced again tonight while the fishermen pretended not to listen. I meant this letter to be a ledger of our failures. Yet as I write I keep hearing how the water carried your guitar across to the far shore, and how an old fisherman stood up in his boat and took off his hat. Perhaps the shop will close. Perhaps it must. But on Sunday, I think, we will play as if someone on the far shore is waiting for us. Your brother, Emiliano\n질문: Which choice best describes the shift in tone in the text?\n선택지: From playful teasing to stern disapproval | From grim accounting to tentative hope | From open despair to bitter resignation | From formal politeness to casual humor\n정답: B\n판정 메모: Fable 추정 난이도 easy / difficulty_too_easy\n→ 같은 장면·인물·정답 위치를 유지하되 근거를 더 흩어 놓고 오답을 더 그럴듯하게 고쳐 어렵게 다시 쓴다.\n### lit40-medium-02-046 — skill text_structure_purpose · 유형 underlined_portion_function · 난이도 medium · 장르 personal_essay · targetLetter D\n유형 지시: 지문의 한 문장을 __문장__ 처럼 두 밑줄 기호로 감싸 정확히 하나만 밑줄 표시하고, 질문에 'underlined' 를 넣어 그 문장이 글 전체에서 하는 기능을 묻는다.\n난이도 지시: medium: 단서를 두 군데 이상 연결해야 하고 오답 중 하나 이상이 그럴듯하다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a snowed-in cabin in Lyon; a stepfather and his stepdaughter while arguing about something smaller than the real quarrel\n인물 이름: Mathis, Camille 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 장소 이름으로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 D 에 둔다. correct_letter 는 D 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 D 로 정한 뒤 나머지 선택지를 채운다.\n[이전 시도(난이도가 쉽다고 판정됨)]\n지문: Lyon was two hours below us, and the road down had vanished under snow by noon. For three days Mathis and I argued about the woodstove: whether to bank it at night, how many logs, whose turn it was to crack the damper. 'Camille, it is only a stove,' he said the first night, which made it worse. I was fifteen and had decided that everything he did in that cabin was wrong. On the third night he let the fire die, on purpose, I was sure, and I said so loudly. __He did not answer; he only took my mother's old wool coat from the hook and laid it over my shoulders.__ I knew the coat at once. We had not spoken of her since the funeral, and the stove, I realized, had never been the point. In the morning we shoveled the path together, trading the one good shovel back and forth.\n질문: Which choice best describes the function of the underlined sentence in the text as a whole?\n선택지: It shows that Mathis has finally come to agree with Camille about how to manage the stove. | It emphasizes how bitterly cold the cabin has become after the fire went out overnight. | It suggests that Mathis wants to stop arguing because he is worn out from shoveling snow. | It introduces an object that turns the narrator toward the grief beneath their argument.\n정답: D\n판정 메모: Fable 추정 난이도 easy / difficulty_too_easy\n→ 같은 장면·인물·정답 위치를 유지하되 근거를 더 흩어 놓고 오답을 더 그럴듯하게 고쳐 어렵게 다시 쓴다.\n### lit40-medium-02-055 — skill central_ideas_details · 유형 narrator_attitude · 난이도 medium · 장르 diary · targetLetter A\n유형 지시: 화자·서술자가 대상에 대해 취하는 태도를 묻는다.\n난이도 지시: medium: 단서를 두 군데 이상 연결해야 하고 오답 중 하나 이상이 그럴듯하다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a river barge in Dhaka; a grandmother and her grandson about a name that no one uses anymore\n인물 이름: Chana, Clara 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 대명사 I 또는 We 로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 A 에 둔다. correct_letter 는 A 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 A 로 정한 뒤 나머지 선택지를 채운다.\n[이전 시도(난이도가 쉽다고 판정됨)]\n지문: We have been three days on the barge down to Dhaka, and my grandson has taken to reading the cargo list aloud to the boatmen. This morning he found my old trunk among the jute bales and read the name painted on its lid: Clara. He asked who she was. I told him she was a girl who once learned English verbs at a mission school and believed she would never live anywhere but beside a cold sea. He said it was a pretty name and asked why no one says it. I could not answer him at once. Tonight I find I do not want the name back, exactly, yet I was glad, absurdly glad, to hear it spoken in his voice over the water. Chana I have been for fifty years, and Chana I shall stay; but I have asked him to leave the lid as it is.\n질문: Which choice best describes the diarist's attitude toward the name Clara?\n선택지: Fondly nostalgic, cherishing the name's memory without wishing to take it back. | Bitterly regretful, wishing she had never given up the name of her girlhood. | Embarrassed, hoping her grandson will soon forget the name he read on the trunk. | Indifferent, treating the name as just one more entry on the barge's cargo list.\n정답: A\n판정 메모: Fable 추정 난이도 easy / difficulty_too_easy\n→ 같은 장면·인물·정답 위치를 유지하되 근거를 더 흩어 놓고 오답을 더 그럴듯하게 고쳐 어렵게 다시 쓴다.\n### lit40-medium-02-063 — skill central_ideas_details · 유형 main_idea_or_purpose · 난이도 medium · 장르 fable_or_folktale_retelling · targetLetter A\n유형 지시: 지문 전체의 요지나 서술 목적을 묻는다.\n난이도 지시: medium: 단서를 두 군데 이상 연결해야 하고 오답 중 하나 이상이 그럴듯하다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a quiet library in Cairo; two brothers who run a failing shop over a witness account that differs\n인물 이름: Odile, Zaynab 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 과거를 회상하는 문장으로 시작('Years later', 'Once' 등). 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 90~150단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 A 에 둔다. correct_letter 는 A 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 A 로 정한 뒤 나머지 선택지를 채운다.\n레시피(central_ideas_details_lit_main_idea_or_purpose_medium, 난이도 medium): 지문의 요지나 서술 목적을 묻는다. 요지는 직접 선언하지 않고 두 곳의 근거(앞부분 일화와 뒷부분 대비)에서 읽히게 한다. 마지막 문장은 요지와 다른 소재의 구체적 묘사로 끝낸다. 오답 3개는 (a) 일화만 요약 (b) 지문 소재를 쓰지만 목적이 다른 선택지 (c) 지나치게 일반적인 교훈 선택지로 만든다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 1 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 일화만 요약한 선택지 (2) 지문 소재를 쓰지만 서술 목적이 다른 선택지 (3) 지나치게 일반적인 교훈 선택지\n금지: 정답이 지문 마지막 문장을 거의 그대로 바꿔 말한 문장이다 / 오답 3개가 지문의 분위기와 정반대 정서·행동이라 지문 분위기만 알아도 소거된다 / 정답만 길고 구체적이며 오답은 짧고 막연하다 / 지문 어딘가에 정답의 핵심어가 한 문장에 몰려 있다(근거가 한 곳)\n지문 길이: 90~150단어.\n[이전 시도(난이도가 쉽다고 판정됨)]\n지문: Once, in a Cairo street where the lamps were lit late, two sisters kept a spice shop that sold less each year. Odile, the elder, swore that a thief in a green cloak had taken their saffron at dusk. Zaynab, the younger, swore no one had entered at all, for she had watched the door the whole hour. Each went alone to the quiet library behind the mosque to ask the keeper of records who was right, and each was sent home with the same answer: come back together. When at last they did, Odile recalled the cloak brushing the back window, and Zaynab recalled the shutter she had never thought to check. Between them, the thief at last had a road. In the reading room, a cat slept on a ledger no one had opened in years.\n질문: Which choice best states the main purpose of the text?\n선택지: To illustrate that the sisters found the truth only by joining their partial accounts | To recount how a thief in a green cloak stole saffron from the sisters' struggling spice shop | To depict the library keeper as a judge who settles quarrels among the townspeople | To teach that people should always trust what they witness with their own eyes\n정답: A\n판정 메모: Fable 추정 난이도 easy / difficulty_too_easy\n→ 같은 장면·인물·정답 위치를 유지하되 근거를 더 흩어 놓고 오답을 더 그럴듯하게 고쳐 어렵게 다시 쓴다.\n### lit40-medium-02-070 — skill inferences · 유형 character_motivation · 난이도 medium · 장르 diary · targetLetter C\n유형 지시: 인물이 어떤 행동을 한 이유·동기를 묻는다.\n난이도 지시: medium: 단서를 두 군데 이상 연결해야 하고 오답 중 하나 이상이 그럴듯하다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a bakery before opening in Marrakesh; an author and her translator while learning to let go of a habit\n인물 이름: Yasmin, Omar 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 의문문으로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 90~150단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 C 에 둔다. correct_letter 는 C 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 C 로 정한 뒤 나머지 선택지를 채운다.\n레시피(inferences_lit_character_motivation_medium, 난이도 medium): 인물의 행동 이유를 묻는다. 동기는 직접 서술하지 않고 지문 중간 두 문장 안에서 단서로 드러내되 서로 이어 읽으면 알 수 있게 한다. 마지막 문장은 동기와 무관한 후속 행동이나 배경으로 끝낸다. 오답 3개는 (a) 인물의 다른 감정에서 나온 동기 (b) 행동의 결과를 동기로 착각한 선택지 (c) 지문에 없는 외부 원인을 끌어온 선택지로 만들되 모두 지문의 단어를 한두 개 사용한다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 1 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 인물의 다른 감정에서 나온 동기 (2) 행동의 결과를 동기로 착각한 선택지 (3) 지문 단어를 쓰지만 지문에 없는 외부 원인을 끌어온 선택지\n금지: 정답이 지문 마지막 문장을 거의 그대로 바꿔 말한 문장이다 / 오답 3개가 지문의 분위기와 정반대 정서·행동이라 지문 분위기만 알아도 소거된다 / 정답만 길고 구체적이며 오답은 짧고 막연하다 / 지문 어딘가에 정답의 핵심어가 한 문장에 몰려 있다(근거가 한 곳)\n지문 길이: 90~150단어.\n[이전 시도(난이도가 쉽다고 판정됨)]\n지문: Why do I always reach for the pen once more? I write this at the baker's counter in Marrakesh before dawn, while the loaves are still pale in the oven. Omar arrived at five, as he has every morning this month, and waited without complaint while I, Yasmin, struck out a line I had already struck out twice. Yesterday he read me his French version of my second chapter, and I heard in it a sentence I had abandoned years ago, which he had somehow restored from the margins of my draft. Today, when he held out his hand, I gave him the last pages without rereading them. He seemed so startled that he nearly dropped them into the flour. The baker's boy is now dragging the first trays toward the door.\n질문: Based on the text, why does Yasmin most likely give Omar the last pages without rereading them?\n선택지: She is too exhausted from working before dawn to look over the pages again. | She wants to finish quickly so that the baker can open the shop on schedule. | She has come to trust that Omar understands her writing as well as she does. | She has been told by her publisher that the translation is already overdue.\n정답: C\n판정 메모: Fable 추정 난이도 easy / difficulty_too_easy\n→ 같은 장면·인물·정답 위치를 유지하되 근거를 더 흩어 놓고 오답을 더 그럴듯하게 고쳐 어렵게 다시 쓴다.\n### lit40-medium-02-072 — skill inferences · 유형 tone_or_mood · 난이도 medium · 장르 short_story · targetLetter A\n유형 지시: 지문 전체의 어조나 분위기를 묻는다.\n난이도 지시: medium: 단서를 두 군데 이상 연결해야 하고 오답 중 하나 이상이 그럴듯하다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a bus depot in Lisbon; a teacher and a student who will not speak over a borrowed object never returned\n인물 이름: Isadora, Rafaela 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 의문문으로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 90~150단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 A 에 둔다. correct_letter 는 A 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 A 로 정한 뒤 나머지 선택지를 채운다.\n레시피(inferences_lit_tone_or_mood_medium, 난이도 medium): 지문 전체의 어조·분위기를 묻는다. 지문에 서로 다른 두 정서(예: 설렘과 불안)가 섞여 있게 하고 한 쪽이 더 두드러지도록 쓴다. 마지막 문장은 분위기를 명명하지 않는다. 오답 3개는 (a) 덜 두드러진 정서만 말한 어조 (b) 두 정서를 섞었지만 비중을 뒤집은 어조 (c) 지문 소재와 어울리지만 지문에 단서가 약한 어조로 만들고 정반대 분위기는 쓰지 않는다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 1 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 덜 두드러진 정서만 말한 어조 (2) 두 정서의 비중을 뒤집은 어조 (3) 소재와 어울리지만 단서가 약한 어조\n금지: 정답이 지문 마지막 문장을 거의 그대로 바꿔 말한 문장이다 / 오답 3개가 지문의 분위기와 정반대 정서·행동이라 지문 분위기만 알아도 소거된다 / 정답만 길고 구체적이며 오답은 짧고 막연하다 / 지문 어딘가에 정답의 핵심어가 한 문장에 몰려 있다(근거가 한 곳)\n지문 길이: 90~150단어.\n[이전 시도(난이도가 쉽다고 판정됨)]\n지문: Who returns a thing after eleven years? Isadora wondered this as the young woman crossed toward the Lisbon depot bench where she waited each evening for the 28. Rafaela, once the silent child in the back row of her fourth-grade class, was grown now, and in her hands she held the red umbrella Isadora had lent her one stormy afternoon in 1979. Isadora felt a warmth rise in her chest, the kind she had felt whenever a shy pupil finally raised a hand. Still, a small worry pricked at her: had something happened, that the girl should come now? Rafaela held out the umbrella, unopened, and smiled without a word, and Isadora found herself smiling back, the worry loosening. Somewhere behind them, a mechanic was hosing down the bay floor.\n질문: Which choice best describes the overall tone of the text?\n선택지: Warmly hopeful, with a brief undercurrent of worry | Quietly uneasy about the reason for the visit | Mostly anxious, with only a fleeting moment of warmth | Wistfully nostalgic about years in the classroom\n정답: A\n판정 메모: Fable 추정 난이도 easy / difficulty_too_easy\n→ 같은 장면·인물·정답 위치를 유지하되 근거를 더 흩어 놓고 오답을 더 그럴듯하게 고쳐 어렵게 다시 쓴다.\n### lit40-medium-02-077 — skill inferences · 유형 tone_or_mood · 난이도 medium · 장르 memoir · targetLetter B\n유형 지시: 지문 전체의 어조나 분위기를 묻는다.\n난이도 지시: medium: 단서를 두 군데 이상 연결해야 하고 오답 중 하나 이상이 그럴듯하다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a summer camp dining hall in Bergen; a gardener and the house's new owner about the cost of a scholarship or opportunity\n인물 이름: Thorvald, Jens 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 장소 이름으로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 90~150단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 B 에 둔다. correct_letter 는 B 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 B 로 정한 뒤 나머지 선택지를 채운다.\n레시피(inferences_lit_tone_or_mood_medium, 난이도 medium): 지문 전체의 어조·분위기를 묻는다. 지문에 서로 다른 두 정서(예: 설렘과 불안)가 섞여 있게 하고 한 쪽이 더 두드러지도록 쓴다. 마지막 문장은 분위기를 명명하지 않는다. 오답 3개는 (a) 덜 두드러진 정서만 말한 어조 (b) 두 정서를 섞었지만 비중을 뒤집은 어조 (c) 지문 소재와 어울리지만 지문에 단서가 약한 어조로 만들고 정반대 분위기는 쓰지 않는다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 1 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 덜 두드러진 정서만 말한 어조 (2) 두 정서의 비중을 뒤집은 어조 (3) 소재와 어울리지만 단서가 약한 어조\n금지: 정답이 지문 마지막 문장을 거의 그대로 바꿔 말한 문장이다 / 오답 3개가 지문의 분위기와 정반대 정서·행동이라 지문 분위기만 알아도 소거된다 / 정답만 길고 구체적이며 오답은 짧고 막연하다 / 지문 어딘가에 정답의 핵심어가 한 문장에 몰려 있다(근거가 한 곳)\n지문 길이: 90~150단어.\n[이전 시도(난이도가 쉽다고 판정됨)]\n지문: Bergen in July smelled of tar and wet lilac, and the long dining hall of the summer school where I worked as a boy smelled of both. I was the gardener's son, trimming hedges for Thorvald, who had bought the estate that spring. One evening he called me in while the students ate and told me, before all of them, that he would pay my fees at the cathedral school in autumn. I felt my face burn; I was holding a rake, and my boots were caked with mud. Yet when he shook my hand, his grip was so earnest that the burning turned, slowly, to something like gladness, and I thanked him twice. Jens, my father, was waiting by the kitchen door. Through the windows, gulls wheeled above the fish market.\n질문: Which choice best describes the overall tone of the text?\n선택지: Embarrassed, focused on the narrator's muddy appearance | Grateful, though first colored by a sense of embarrassment | Humiliated, with only a faint trace of thankfulness | Resentful of the new owner for staging a public display\n정답: B\n판정 메모: Fable 추정 난이도 easy / difficulty_too_easy\n→ 같은 장면·인물·정답 위치를 유지하되 근거를 더 흩어 놓고 오답을 더 그럴듯하게 고쳐 어렵게 다시 쓴다."
+}

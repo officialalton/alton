@@ -1,0 +1,23 @@
+{
+ "itemId": "lines_angles_triangles.parallel_lines_transversal_angles.PT.P",
+ "verdict": "pass",
+ "reviewedAt": "2026-10-06T05:21:11Z",
+ "reviewer": "claude-sonnet-5.5 (math-B session)",
+ "codeHash": "04a60c93cf8fac93526ee81ce1a1d61e25f8ac1543152563ff8ab5c513d2c731",
+ "samples": [
+  "lines_angles_triangles.parallel_lines_transversal_angles.PT.P.png"
+ ],
+ "checklist": {
+  "figure_present": "pass",
+  "proportion_matches_values": "pass",
+  "labels_placed_and_legible": "pass",
+  "multi_figure_consistent": "n/a",
+  "text_matches_figure_and_solvable": "pass",
+  "axes_ticks_units_legend": "pass",
+  "choice_distinct_one_rule": "n/a",
+  "sat_visual_style": "pass",
+  "mobile_375_readable": "pass"
+ },
+ "defects": [],
+ "notes": "평행선·횡단선 (2x+21)°/(3x+49)° 샘플 데스크톱·375px 확인: 횡단선이 angles[].value(비인쇄 참값)대로 기울고 각 호가 해당 쐐기에 그려지며 라벨이 호 방향 약 55px 안에 놓여 어느 각의 라벨인지 구별됨, 라벨·선 이름(c,d,t) 겹침 없음. 갤러리(4개 연산자·시드 1~6)에서 두 횡단선(compose)·y° 쐐기(chain2)·숫자 각(inverse)도 확인. 좁은 쐐기(θ 35~60°)에서는 렌더러가 라벨을 호에서 100px 가까이 멀리 놓아 모호해지므로 θ 를 64~80° 로 제한했다. 렌더러에 angles[].value 추가(식 라벨 각도 참값대로 기울임, 테스트 포함)."
+}

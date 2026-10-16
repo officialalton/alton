@@ -1,0 +1,2183 @@
+[
+ {
+  "key": "s3-ab-01-k0",
+  "cellId": "s3-ab-01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Left limit at 1 = 3, right limit at 1 = 1, limit at 3 = 4 (both sides approach 4). Sum = 8.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "8"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Limits from a graph, one-sided and two-sided; fits 1.3 and 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Sum is 3+1+4=8; the key is unique and correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The data fully specifies the pieces, open and closed ends, and isolated points; the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor reflects a distinct misconception and the explanation addresses each one."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short task with no calculator, in line with AP style."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and suitable. The key of 8 is verified, the stimulus is complete, and the distractors are sound."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Three direct graph readings (left limit 3, right limit 1, two-sided limit 4 at the hole) followed by a sum of 8. The main conceptual demand is ignoring the filled-dot function values f(1)=2 and f(3)=0 and recognizing the one-sided limits differ at the jump. The distractors target the limit versus function value misconception. There is a single representation change (graph to number), no long arithmetic and no ambiguity, so this is a core topic 1.3 skill check rather than a full-mock-level item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "s3-ab-02-k0",
+  "cellId": "s3-ab-02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Multiply by the conjugate √(x+5)+3. The factor (x−4) cancels, leaving 1/((x+4)(√(x+5)+3)). At x=4 this is 1/(8·6) = 1/48.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "1/48"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Conjugate procedure selection for a 0/0 limit fits 1.7 and 1.C."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "1/48 verified and unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors are plausible and each is explained. The 1/16 rationale uses a derivative/L'Hôpital-style idea, which is a minor flaw, and there is a small typo ('a algebraic')."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 100 seconds, no calculator needed, and the numbers are clean."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, suitable, and in scope. The only flaws are a minor typo and an explanation for the 1/16 option that references derivatives."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "0/0 form requires choosing the conjugate method, then factoring the denominator and cancelling (x-4), then substituting. Combines two algebraic procedures with a misconception-rich option set (1/8 from dropping the conjugate factor, 0 from numerator only). Numbers are clean, and the stem is short and unambiguous. This is standard for a full-mock item, not a basic one-step limit.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "s3-ab-03-k0",
+  "cellId": "s3-ab-03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "Only y=2",
+     "brief_reasoning": "As x→∞, h→(12−2)/5=2. As x→−∞, the numerator →−5 and the denominator →0+, so h→−∞ and there is no asymptote on the left.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Combines graph end behavior with a rational expression of g to find horizontal asymptotes. This fits 1.15 and 2.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Right limit gives 2. Left limit gives -5/0+ = -inf, so no left asymptote. Only y=2 is correct and unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Data is complete and consistent, with limits and g>-1 for x<-5 stated explicitly. The key points do not contradict the stated end behavior."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors reflect distinct misconceptions, and the explanation addresses each wrong option. The y=0 rationale is a bit weak but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "No calculator needed, simple arithmetic, about 2 minutes. Slightly long but reasonable."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and in scope. The key (only y=2) was verified, the stimulus is complete, and the distractors are plausible. Pass."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires combining graph end behavior with a rational expression in g: direct substitution at +inf gives 2, while at -inf the form -5/0 needs the one-sided fact g>-1 to conclude the limit is -inf, so there is no left horizontal asymptote. Multiple reasoning steps, a representation change, and misconception-rich distractors (y=-5, y=0), with light arithmetic and fair wording.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "s3-ab-04-k0",
+  "cellId": "s3-ab-04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "C'(t)=3e^t-4cos t+2/t; cos π=-1 so C'(π)=3e^π+4+2/π",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "3e^π+4+2/π mg/L per hour"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Direct application of derivative rules for e^x, sin x and ln x, which is exactly topic 2.7 and skill 1.E. No chain rule is needed."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "C'(π) = 3e^π + 4 + 2/π. The key (index 2) is correct and the only defensible answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The model, units, domain and evaluation point are all stated. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The three distractors represent distinct misconceptions (dropped coefficient, sign error on the sin derivative, power rule applied to e^t). The explanation covers each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 80 seconds, no calculator needed, exact-form options, and the load is typical of an AP item."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and in scope. It has a unique key, clean exact-form options, distinct distractors and a typical AP load, so it passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Direct term-by-term differentiation using the sum and constant multiple rules with the derivatives of e^t, sin t, and ln t. The only extra step is evaluating cos(pi) = -1 to get the sign. Distractors target common misconceptions (power rule on e^t, sign of cos, dropped constant), but the concept depth is shallow and there are no representation changes. This is more suited to initial learning than to a full mock exam.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "s3-ab-05-k0",
+  "cellId": "s3-ab-05",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "f'(x)=e^x(sin x+cos x)=0 gives tan x=-1, so x=3π/4 in (0,π).",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "3π/4"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Product rule with e^x and sin x, then solving a trig equation; fits 2.7 and skill 1.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "f'=e^x(sin x+cos x); tan x=-1 gives 3pi/4 uniquely in (0,pi). Key B is correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option has a distinct misconception explained. The option pi is weak since it is outside the interval, but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 90 seconds, no calculator, exact values."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, in-scope product rule item with a unique key of 3pi/4. The distractors are reasonable, though pi is weak because it is outside the interval. It passes."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires product rule with e^x and sin x, factoring out e^x, solving sin x + cos x = 0 (tan x = -1), and selecting the solution in (0, π). Clean numbers, in scope, misconception-rich distractors (π/2 from cos x = 0, π from sin x = 0, π/4 from a sign error). Typical AP multiple-choice difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "s3-ab-06-k0",
+  "cellId": "s3-ab-06",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "instant_reject_out_of_scope_knowledge"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "P'(t)=3e^t+4cos t+2sin t-5/(t+1); P'(0)=3+4+0-5=2",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "2 watts per minute"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": "Differentiating ln(t+1) requires the chain rule (or a shift argument), which is Unit 3 content. The topic 2.7 item should use plain ln x."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "P'(0)=3+4+0-5=2; key C is correct and unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Clear and complete; the stimulus duplicates the stem but is harmless."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor maps to a distinct misconception and is explained. The -2cos t sign error is not captured, since sin 0 = 0 makes it indistinguishable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 75 seconds, no calculator needed, simple numbers."
+   },
+   "instant_reject": [
+    "out_of_scope_knowledge"
+   ],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct (P'(0)=2). However, the ln(t+1) term implicitly requires the chain rule, which is Unit 3 and out of scope for topic 2.7. The item should use ln t or similar with no composite argument."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Direct term-by-term differentiation using sum and constant multiple rules with the basic derivatives of e^x, sin, cos and ln, then evaluation at t=0. The only wrinkle is ln(t+1), whose inner function has derivative 1 (a minimal shift). Arithmetic is trivial and there is no representation change. The distractors target sign errors and a dropped log term.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "s3-ab-07-k0",
+  "cellId": "s3-ab-07",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_stimulus_expression"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Quotient rule: (9*5-60*2)/25 = -75/25 = -3",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "-3"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Quotient rule applied to tabular values; fits 2.9 and skill 1.E. No chain rule or later-unit content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "(9*5-60*2)/25 = -3; the key is unique and correct."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The table's units line says P is in dollars per day and Q is in hundreds of customers per day. The stem says P is dollars and Q is hundreds of customers. This inconsistency makes the stimulus ambiguous. The column headers P and Q also sit beside P' and Q' with units that don't match."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors are distinct: forgetting to square the denominator (-15), the quotient of derivatives (9/2), and the reversed numerator order (3). The explanation covers each one."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 75 seconds, uses clean numbers and needs no calculator."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key and distractors are sound and the item suits the exam. It fails on the stimulus because the units line contradicts the stem: the table gives P and Q as per-day rates, while the stem defines them as a profit and a traffic count. Fixing the units line would resolve it."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single direct application of the quotient rule with table values at one point; small integers, minimal context. Distractors target standard misconceptions (omitting Q^2 denominator, P'/Q', sign error), but the item requires only one procedure and no representation changes.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "s3-ab-08-k0",
+  "cellId": "s3-ab-08",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Quotient rule: N(2)=14, N'(2)=1, so h'(2)=(1·2-14·3)/4=-10",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "-10"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Quotient rule with sum/constant multiple, table-based; in Unit 2 scope, skill 1.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "h'(2)=(1*2-14*3)/4=-10; unique correct option."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table data complete and consistent with the stem; wording clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor maps to a distinct realistic error (quotient of derivatives, sign reversal, unsquared denominator); all verified numerically; explanation covers each."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 90 seconds, simple arithmetic, no calculator needed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and well formed: the key −10 is verified, the distractors are distinct and realistic, and it fits Topic 2.9 and skill 1.E."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "One quotient rule application with a simple numerator (2f+3x) requiring a sum/constant multiple derivative; small integer table values; distractors reflect common errors (omitting g^2, sign flip, N'/g'). Straightforward procedural skill 1.E with one extra step, suited to early learning rather than full-mock stretch.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "s3-ab-09-k0",
+  "cellId": "s3-ab-09",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Quotient rule: (4·3 − 6·(−2))/3² = 24/9 = 8/3",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "8/3"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Direct quotient rule application, Unit 2, skill 1.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "8/3 verified; the other options are distinct and wrong."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table is complete, with a single row of values and clear wording."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "All three distractors are explained. The explanation for the 0 option calls the error a 'sign error' when it is really the product rule, which is a minor imprecision."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 75 seconds, simple arithmetic, no calculator needed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a correct, clean quotient-rule table question. The key 8/3 is verified. The only flaw is a slightly imprecise explanation of the 0 distractor, which does not warrant rejection."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step direct application of the quotient rule using values read from a one-row table. Small integer arithmetic, minimal reading, no representation changes. Distractors target common errors (sign slip, wrong subtraction order giving 0, f'/g' = -2), but the item requires only recall and execution of the rule.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "s3-ab-10-k0",
+  "cellId": "s3-ab-10",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Implicit differentiation: 2xy + (x^2+3y^2)y' = 0, so y' = -2xy/(x^2+3y^2) = -8/16 = -1/2.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "-1/2"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "First-derivative implicit differentiation with product and chain rules; fits topic 3.2 and skill 1.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The point lies on the curve (4*2+8=16). y' = -2xy/(x^2+3y^2) = -8/16 = -1/2, which matches key index 1. The answer is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The relation, point and differentiability condition are all stated. The text stimulus is complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors are a sign error, a dropped 3y^2 y' term and a dropped x^2 y' term. The explanation addresses each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 90 seconds. The arithmetic is simple, the options are exact values, and no calculator is needed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a correct, clean implicit differentiation question with a unique key and distinct distractors. It is suitable for AP Calculus AB, so I am accepting it."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Standard single implicit differentiation: product rule on x^2y, chain rule on y^3, solve for dy/dx, substitute (2,2) to get -1/2. Small integers and a short computation. Distractors reflect common errors (missing product-rule term, sign slip). Concept depth is routine for topic 3.2, with no representation changes. The lab context is brief and adds little reading load.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "s3-ab-11-k0",
+  "cellId": "s3-ab-11",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Implicit differentiation gives 2x+y+xy'+2yy'=0, so y'=-(2x+y)/(x+2y). At (1,2) this is -4/5. The point checks: 1+2+4=7.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "-4/5"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "First-derivative implicit differentiation with product rule; in scope for 3.2/1.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Point lies on curve; dy/dx=-4/5 verified; unique answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Complete: relation, point, units given; wording clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors reflect distinct misconceptions (dropped product term, sign error, inverted ratio); each explained and numerically consistent."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60-90 seconds, simple arithmetic, no calculator needed; the context is incidental but harmless."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean implicit differentiation MC with well-built distractors; passes all criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard implicit differentiation requiring the product rule on xy, the chain rule on y^2, and algebraic solving for dy/dx, followed by evaluation at a point. Small numbers, no heavy reading. Distractors reflect sign errors, a missing product-rule term, and an inverted fraction. Context is minimal and non-essential, so the difficulty is not from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "s3-ab-12-k0",
+  "cellId": "s3-ab-12",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Product rule on ln(1+t^2)e^{-2t}: e^{-2t}(2t/(1+t^2)) - 2e^{-2t}ln(1+t^2).",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "e^{-2t}(2t/(1+t^2) - 2ln(1+t^2))"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Quotient/product rule with chain rule; Unit 3, skill 1.C."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Verified C' = e^{-2t}(2t/(1+t^2) - 2 ln(1+t^2)); unique correct option."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Function, variable, units given; exact-form options."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct realistic misconceptions, each explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Reasonable length for non-calculator MC, no ugly arithmetic."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, in-scope derivative-procedure item with distinct distractors and appropriate load."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires choosing between quotient rule and rewriting as a product, then applying the product rule with two chain-rule derivatives (ln(1+t^2) and e^(-2t)). The distractors target common misconceptions (missing chain-rule factors, incorrect quotient rule). There is no heavy arithmetic or ambiguity, and the context is brief and not needed to solve it. This is typical of a mid-level full-mock item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "s3-ab-13-k0",
+  "cellId": "s3-ab-13",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "C'(t)=0.9e^{-0.25t}(1-0.25t); C'(2)=0.45e^{-0.5}≈0.273, instantaneous rate in million cells/mL per hour.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "At t=2, increasing at about 0.273 million cells/mL per hour"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Interpreting a derivative value with units fits topic 4.1. The product rule is needed, which gives some 1.D flavor, though interpretation dominates."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "C'(2)=0.45e^{-0.5}≈0.273 million cells/mL per hour. Verified; the key is unique and correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Function, units and domain are complete and the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors encode distinct misconceptions: change vs rate, average vs instantaneous rate, function value vs derivative. All numbers check out (0.391, 0.546, 3.49), and the explanation covers each option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 90-120 seconds. The calculator is justified for evaluating the derivative at a point. The load is typical of AP."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct key, clean stimulus, and well-motivated distractors; fits topic 4.1 and is acceptable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single product-rule derivative evaluated at t=2 with a calculator, then matching the value to an interpretation with correct units (rate per hour vs. change over an interval vs. function value). Distractors are misconception-based but the concept depth is shallow and there is no multi-representation work or theorem checking.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "s3-ab-14-k0",
+  "cellId": "s3-ab-14",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "A",
+     "brief_reasoning": "V = πh³/12, so dV/dt = (πh²/4)dh/dt. At h = 6, dh/dt = −12/(9π) ≈ −0.424 cm/s. This is an instantaneous rate of change of depth, so A is correct. B treats it as a change over a time interval, and C and D use the wrong quantity.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Interpretation of dh/dt in context with units and sign; matches 3.F in a related-rates setting."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "dh/dt = -4/(3π) ≈ -0.424 verified; A is unique correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Diagram data complete and consistent with the stem; wording clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distinct misconceptions (interval vs instantaneous, volume vs depth, radius vs depth); each explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, typical load. Calculator is not actually needed since the value is given, but this is minor."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean interpretation item with distinct distractors. It passes all criteria, with a minor note that the calculator designation is not needed."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The dh/dt value is given, so no computation is required. The student only needs to interpret a negative derivative with units (cm/s) at an instant. The distractors cover common misconceptions: an instantaneous rate read as a change over an interval, a mix-up between volume rate and depth rate, and a mix-up between radius and depth. The value checks out (dh/dt = -12/(9π) ≈ -0.424). The item has one conceptual step, minimal reading, and no unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "s3-ab-15-k0",
+  "cellId": "s3-ab-15",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_exam_suitability"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "3/2",
+     "brief_reasoning": "0/0 form; g'(t)=3e^{-3t}→3, h'(t)=2t+2→2, ratio 3/2; table 0.0029955/0.002001≈1.497 confirms.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "L'Hospital with hypothesis check; fits 4.7/3.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Limit 3/2 verified; table values consistent; unique key."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table values accurate; formulas given."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distinct misconceptions, each explained. Option 3 rationale phrasing slightly odd but fine."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "Designated calculator required but no calculator is needed; the task is purely analytic. Designation inconsistent."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The math and key are correct and the distractors are good. The item is flagged because it is designated calculator-required although no calculator is needed."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires recognizing the 0/0 form, checking the hypotheses, differentiating g and h, and evaluating at 0 to get 3/2. The table is a consistency check on the formulas. The distractors target real misconceptions (numerator to 0 means limit 0, 0/0 means no limit, derivative slip). Numbers are simple, wording is clear, and the reading load is low, so the difficulty comes from the concepts.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "s3-ab-16-k0",
+  "cellId": "s3-ab-16",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "Rel max at x=-2, rel min at x=4, none at x=1",
+     "brief_reasoning": "f' changes + to - at x=-2 and - to + at x=4. Because (x-1)^2 is never negative, f' does not change sign at x=1.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Directly tests first derivative test sign analysis with a repeated root; on topic."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Verified: + to - at -2 (max), no change at 1, - to + at 4 (min). Unique key."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "f' fully specified, domain given, open interval question clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors encode distinct misconceptions (all critical points extrema, swapped signs, missing min at 4). Explanation covers each; the wording for option 1 is slightly loose but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60-100 seconds, light load. Calculator is not actually needed, which is a minor designation mismatch but acceptable."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean first derivative test item with a repeated-root trap; distractors are realistic. The calculator designation is unnecessary but not disqualifying."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The item requires identifying critical points from a factored derivative, building a sign chart, and recognizing that the double root at x=1 produces no sign change. Distractors target common misconceptions (treating every critical point as an extremum, reversing max/min). Concept depth is moderate, with no heavy computation or reading, so it fits a full-mock exam-style item rather than a basic or advanced one.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "s3-ab-17-k0",
+  "cellId": "s3-ab-17",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_exam_suitability"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "g'=4x(x-3)^2, critical points x=0,3. g''=12(x-1)(x-3): g''(0)=36>0 gives local min; g''(3)=0 so test inconclusive.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "D"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Second Derivative Test with an inconclusive case; fits 5.7 and skill 1.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "g'=4x(x-3)^2, g''(0)=36, g''(3)=0. Key D is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Function fully specified."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors are distinct and each is explained. The rationales for B and C are somewhat thin."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "Marked calculator required but the work is simple and entirely by hand, so the designation is inconsistent."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The math and key are correct (D). The only issue is that the calculator-required designation is not consistent with an item that needs no calculator."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must differentiate a quartic, factor g' to find critical points x=0 and x=3 (a double root), compute g'', evaluate it at both points, and recognize that g''(3)=0 makes the test inconclusive. This is a standard procedural 5.7 item with a misconception-rich option set (treating g''=0 as a max/min). Numbers are small and the wording is clear, so no unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "s3-ab-18-k0",
+  "cellId": "s3-ab-18",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "Local max 27 at t=1, local min -5 at t=5",
+     "brief_reasoning": "f'=3(t-1)(t-5); f''=6t-18 gives f''(1)=-12<0 (max), f''(5)=12>0 (min); f(1)=27, f(5)=-5.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Direct application of the Second Derivative Test (5.7), routine procedure (1.E)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Verified: critical points 1 and 5; f''(1)=-12, f''(5)=12; f(1)=27, f(5)=-5. Key B unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Minor inconsistency: the stem says 0<t<6, while the data domain is [0,6]. Does not affect the answer. The stimulus is redundant with the stem."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor maps to a distinct misconception (swapped sign rule, f'' value vs f value, inconclusive test), and each is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Quick item with clean numbers. The calculator-required designation is not actually needed, since the computation is simple by hand; a minor concern."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and in scope, with good distractors. Minor flaws are the domain notation mismatch and an unnecessary calculator designation. Passes."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard second derivative test item. It takes five steps: differentiate, solve f'=0 by factoring, compute f'', check the sign at each critical point, and evaluate f for the extreme values. The numbers are small and the context is brief. Distractors target swapped max/min labels and an arithmetic slip in f(5). The difficulty comes from the concept and procedure, not from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "s3-ab-19-k0",
+  "cellId": "s3-ab-19",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "t=6",
+     "brief_reasoning": "Savings grow most slowly where S'(t) is smallest. Check the endpoints and critical points of S' on [1,10]: S'(1)=16.5, S'(2)=20, S'(6)=4, S'(10)=84. The smallest value is at t=6.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Connecting S', S'' and extrema of S' on a closed interval fits 5.9 / 2.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Verified S'(1)=16.5, S'(2)=20, S'(6)=4, S'(10)=84; S''=1.5(t-2)(t-6). The key t=6 is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The graph data match the function. The formula and the graph are redundant, but nothing is inconsistent."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors cover the two endpoints and the local maximum. The explanation addresses each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical for an AP multiple-choice item. A calculator is barely needed, but the designation is not inconsistent."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, with a unique key at t=6. It is well scoped, with plausible distractors and a complete explanation. Its only weaknesses are the minor redundancy between the formula and the graph and the near-unneeded calculator designation."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Students must interpret \"growing most slowly\" as the minimum of S' (the graphed function), not S''=0 or S'=0. They then apply the candidates test on [1,10]: compare the endpoints and the interior local minimum at t=6 using the graph or the expression. S'(6)=4 is the smallest value. Distractors target the local-max, left-endpoint and right-endpoint misconceptions. Numbers are clean and the reading is short, so no unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "s3-ab-20-k0",
+  "cellId": "s3-ab-20",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Minimize (x-4)^2+(ln x)^2; derivative zero gives x^2-4x+ln x=0, unique root ≈3.645.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "3.65"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Standard optimization (min distance), calculator solve; fits 5.11."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Root of x^2-4x+ln x=0 is ~3.645, unique; key 3.65 correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "2.93 matches the dropped chain-rule error; 4 and 1 are plausible. The 1.00 rationale is slightly weak."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 2 minutes with a calculator, typical of the AP exam."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and unique, the distractors are reasonable, and the calculator use is appropriate. The item is acceptable."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard calculator-active optimization: build the squared-distance function, differentiate, solve D'(x)=0 numerically (x ≈ 3.65), and confirm a minimum. It takes a few reasoning steps and one representation change (geometry to function to numeric solve). The options are plausible but not tricky, and the work is light.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 150
+  }
+ },
+ {
+  "key": "s3-ab-21-k0",
+  "cellId": "s3-ab-21",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "L=56<A, T=66<A",
+     "brief_reasoning": "Left sum = 2(2+6+9+11)=56, and it underestimates because r is increasing. Trapezoid sum = 66, and it underestimates because r is concave down.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Relates left and trapezoidal approximations to the actual integral using monotonicity and concavity; fits 6.2/1.F."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "L=56, T=66 verified. L<A because r is increasing; T<A because r is concave down. Unique correct option."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Graph data gives the axes, five points and the curve behavior; sufficient to read the values."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct error (right sum with reversed concavity, concavity reversal, left/right confusion), and the explanation addresses each."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Small, clean arithmetic, no calculator needed. Options are slightly wordy but parallel; time is reasonable."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and clean. Arithmetic and over/underestimate reasoning were verified, the distractors are distinct, and the stimulus is sufficient. Accept."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must compute a left sum and a trapezoidal sum from graph points (small integers), then relate each to the true integral using monotonicity and concavity. Two distinct error-direction judgments and a misconception-rich option set make it typical of an AP multiple-choice item; the computation is light and the wording is unambiguous.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "s3-ab-22-k0",
+  "cellId": "s3-ab-22",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "FTC with chain rule: g'(x)=((x^4+3)/(x^2+1))*2x; at x=1: (4/2)*2=4",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "4"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "FTC Part 1 with chain rule; core 6.4 skill, choosing the rule."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "g'(1)=f(1)*2=4, verified; unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors encode distinct misconceptions; each is explained. f'(1)=0 verified."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 75 seconds, no calculator needed, simple arithmetic."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean FTC with chain rule item; distractors are realistic; suitable for the non-calculator section."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires FTC Part 2 with a non-trivial upper limit (chain rule), then substitution at x=1. The distractor 2 reflects the common error of omitting the 2x factor. Light computation and reading, no unfair difficulty sources. Typical of AP exam multiple-choice items.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "s3-ab-23-k0",
+  "cellId": "s3-ab-23",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Reversed integral over [0,10] = -(6-2) = -4; integral of 3f+2 over [4,10] = 3(-2)+2(6) = 6; total 2.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "2"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Directly tests integral properties (additivity, reversal, linearity, constant integral); no out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Computed 2; matches key and solver. Unique correct answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table data complete, continuity and domain stated; clear wording."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor maps to a distinct realistic misconception, and the arithmetic in each explanation checks out."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 90 seconds, no calculator, simple numbers, parallel numeric options."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, in scope, and well constructed. The key is 2, and all three distractors encode distinct misconceptions that I verified arithmetically."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Direct application of definite integral properties: reversing limits, additivity, linearity, and integral of a constant. Small integers, no heavy reading. Distractors reflect common errors (sign flip, missing constant term), but the item is a routine skill-1.E procedure check suited to early learning of topic 6.6.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "s3-ab-24-k0",
+  "cellId": "s3-ab-24",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "∫0^3 g=42-15=27; ∫5^8 g=27-15=12 so ∫8^5=-12; 2·27+10·3-12=72",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "72"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Properties of definite integrals applied by rule; fits 6.6 and 1.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Verified 72: 2(27)+30-12=72. Unique answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table data complete and consistent; wording clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "96, 52, 48 each trace to a distinct realistic error; explanations accurate."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Small numbers, no calculator, about 100 seconds."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct key (72), sound distractors, in scope for 6.6, and suitable for the exam."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires combining additivity to find the integral of g over [0,3] and [5,8], linearity with a constant term (10 times the interval length 3), and reversal of limits. Small integers, short stem. Several steps with misconception-rich distractors (sign error from reversed bounds, omitting the constant's contribution), but it stays squarely within the topic 6.6 properties.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 100
+  }
+ },
+ {
+  "key": "s3-ab-25-k0",
+  "cellId": "s3-ab-25",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "∫0^6 f=5-3=2; ∫0^6(2f-g)=4-10=-6; reversing limits gives 6.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "6"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Tests additivity, linearity and reversal of limits (6.6), skill 1.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Key 6 is correct and unique: 2*2-10=-6, reversed gives 6."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table is complete and consistent; 'not given' entries are clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor maps to a distinct realistic error (no reversal, ignoring part of f, missing factor 2); explanations check out."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Light arithmetic, non-calculator appropriate, about 90 seconds."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean item on integral properties, with valid distractors and an explanation that covers each wrong option."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Applies three standard properties (additivity of intervals, linearity, reversal of limits) to small integers from a table. Little reading, trivial arithmetic. The sign-flip misconception in the distractors adds mild difficulty, but the item is routine rule application suited to learning rather than full-mock discrimination.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "s3-ab-26-k0",
+  "cellId": "s3-ab-26",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "∫4^6 g = ∫4^10 g + ∫10^6 g = -5+7 = 2, so ∫0^6 g = 18+2 = 20. Then 3(20) - 2(6) = 48.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "48"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Reversed limits, additivity and linearity of definite integrals: exactly 6.6 with procedural application (1.E)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Verified: ∫0^6 g = 20, 3(20)-12 = 48. Unique answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table is complete and clear; continuity and units stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors 60, 72 and 6 map to distinct misconceptions. The explanation for 6 says 'without scaling', but 3(6)-12 also equals 6, so that wording is slightly inaccurate. Minor."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Simple arithmetic, no calculator needed, about 90 seconds."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct key (48), in-scope, clean stimulus, and plausible distractors. The only blemish is the slightly inaccurate rationale for option 6. Pass."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires reversing limits, subtracting interval pieces to get the integral of g over [4,6], applying linearity, and integrating a constant over [0,6]. Numbers are small and clean, wording is clear, and the distractors map to common property errors (omitting the constant term, sign error on the constant). This is a typical multi-step property application, harder than a single-property item but not beyond AP scope.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "s3-ab-27-k0",
+  "cellId": "s3-ab-27",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Integral of 2x+3 from 1 to 4 = (16+12)-(1+3) = 24",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "24"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "FTC applied to a definite integral of a linear function; fits 6.7 and 1.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Convert 100 to 400 loaves to x=1 to 4; the integral of 2x+3 gives 24. Unique correct answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus is redundant with the stem but consistent; units and domain are clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors 15, 28 and 6 each encode a distinct misconception and are all explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 75 seconds, simple arithmetic, no calculator needed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and clean: the key is 24, the distractors are distinct and realistic, and the load is typical of the AP exam."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept FTC application: set up the integral of C'(x) from 1 to 4 after converting loaves to hundreds, find the antiderivative x^2+3x, evaluate (28-4=24). Simple arithmetic, one mild unit-conversion step, and distractors reflect common errors (28 = forgetting to subtract the lower bound). No theorem-hypothesis checking, procedure choice, or multiple representations.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "s3-ab-28-k0",
+  "cellId": "s3-ab-28",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Antiderivative 6√x − x^2; (12−16) − (6−1) = −9",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "-9"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Direct FTC evaluation with power-rule antiderivatives; fits 6.7 / 1.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Verified: F(x)=6√x−x^2, F(4)−F(1)=−4−5=−9. Unique correct option."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; integral is clearly stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor (−4, 9, −12) matches a distinct realistic error, verified arithmetically; explanation covers each. Minor unicode-escape artifacts in explanation text."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 90 seconds, simple exact arithmetic, no calculator needed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, with key −9 verified. The distractors reflect distinct, realistic errors, and the load is typical for a non-calculator AP MC item."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single definite integral requiring rewriting 3/sqrt(x) as a power, applying the power rule to two terms, and evaluating F(4)-F(1) with small numbers. Distractors reflect common slips (omitting F(1), sign errors). Routine procedural skill with no representation changes or theorem checks, so it suits basic learning rather than full-mock exam prep.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "s3-ab-29-k0",
+  "cellId": "s3-ab-29",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "FTC: 6(v(4)-v(0)) + 2*4 = 6(7-8)+8 = 2",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "2"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "Quick, small numbers, no calculator needed.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and clean: it tests FTC with linearity, and its distractors are distinct and realistic."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single application of FTC Part 2 with linearity: 6(v(4)-v(0)) + 2*4 = 2. Only two table values are needed, and the distractors reflect common slips such as forgetting the constant's integral. This is routine procedure with minimal arithmetic, suitable for basic learning rather than a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "s3-ab-30-k0",
+  "cellId": "s3-ab-30",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "dB/dt=0.04(B+30000) gives B+30000=Ce^{0.04t}; B(0)=5000 gives C=35000, so B=35000e^{0.04t}-30000.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "B(t)=35000e^{0.04t}-30000"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Verifying/solving IVP by substitution; separable, within AB scope."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Key A verified: B'=1400e^{0.04t}=0.04B+1200, B(0)=5000. Others fail uniquely."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Complete and clear; stem states all conditions."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors encode distinct errors (wrong C, sign error, guessed form); each explained correctly."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Clean numbers, no calculator needed, about 100 seconds."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean item on verifying an IVP solution; passes all criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires factoring the RHS as 0.04(B+30000), separating variables, integrating with a linear substitution, exponentiating, and applying the initial condition; alternatively verifying options by substitution. Clean numbers, low reading load, misconception-rich distractors (forgetting the shift, sign error, naive guess). Standard AB Unit 7 mock-level item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 150
+  }
+ },
+ {
+  "key": "s3-ab-31-k0",
+  "cellId": "s3-ab-31",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_exam_suitability",
+   "instant_reject_out_of_scope_knowledge",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "y=(2-x)e^x",
+     "brief_reasoning": "Repeated root r=1 gives y=(A+Bx)e^x. f(0)=2 gives A=2, and f'(0)=A+B=1 gives B=-1.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": "Second-order linear DE y''-2y'+y=0 is outside AB Unit 7; AB verifies solutions of first-order equations dy/dx. Second-order constant-coefficient DEs are not in the AB CED."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Key (2-x)e^x verified; the other options each fail a condition as stated."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Purely symbolic, complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors encode distinct misconceptions; explanations accurate."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "Four options require second derivatives with product rule; heavy for non-calculator, about 120s, and not AB content."
+   },
+   "instant_reject": [
+    "out_of_scope_knowledge"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and unique, and the distractors are sound. However, the second-order differential equation is outside AB Unit 7 scope, so the item is rejected."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student verifies a candidate solution by substitution: product-rule derivatives (first and second), substituting into y''-2y'+y=0, and checking the initial conditions f(0)=2, f'(0)=1. Initial conditions quickly eliminate B and C, and D fails the DE, so the item rewards choosing an efficient procedure. The second-order equation is a mild stretch for AB, but no solution method is required, only verification, and the arithmetic is small. Distractors are misconception-rich (B satisfies the DE but not f'(0); C satisfies f'(0) but not f(0); D is a naive guess).",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "s3-ab-32-k0",
+  "cellId": "s3-ab-32",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "Q(t)=80-60e^{-0.5t}",
+     "brief_reasoning": "Separating variables gives 80-Q=Ae^{-0.5t}. Q(0)=20 gives A=60. Choice A fails the differential equation, choice C levels off at 60 instead of 80, and choice D also fails the differential equation.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Verification of a particular solution against the DE and initial condition; fits 7.2 and 1.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Key B verified: Q(0)=20, Q'=30e^{-0.5t}=0.5(80-Q). The other options each fail the DE or the limiting behavior."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Stem is complete and clear; no figure is needed."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors encode distinct misconceptions (sign error, wrong asymptote, growth model); explanation addresses each."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, no calculator, exact-form options, appropriate load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and well formed, with a unique key and distinct distractors, and fits topic 7.2 and skill 1.E."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP AB separable DE with an initial condition. The student must separate variables, integrate to get a ln term, handle the sign and absolute value of (80-Q), apply Q(0)=20, and solve for Q. Alternatively, the student can verify the options by checking the initial condition and substituting into the DE, so there is a choice of procedures. Distractors target sign errors (the exponent's sign, a growth-style answer) and a wrong constant. Numbers are clean and reading is minimal, so the difficulty comes from legitimate concept depth rather than unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "s3-ab-33-k0",
+  "cellId": "s3-ab-33",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Net displacement = 6+2-2-8 = -2, so s(6)=10-2=8.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "8"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Position from initial value plus integral of velocity; fits 8.2 and 1.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Verified: areas 6+2-2-8=-2, s(6)=8. Unique answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Graph data complete and consistent; zero crossing at t=3 matches."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor reflects a distinct misconception; the explanation addresses each, and the arithmetic checks out (4, -2, 28)."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Clean numbers, geometric areas, no calculator needed; reasonable time."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and clean. s(6)=10+(-2)=8, the distractors are realistic, and the stimulus is complete."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must use s(6)=s(0)+integral of v from the graph, computing signed areas of trapezoid, two triangles (cancelling across the t=3 sign change) and a rectangle. Distractors target misconceptions: omitting initial position (-2), total distance vs displacement (28), and partial area errors (4). Small numbers, clear wording, in scope; typical AP-level multi-step graph-to-integral item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 100
+  }
+ },
+ {
+  "key": "s3-ab-34-k0",
+  "cellId": "s3-ab-34",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Integrate right minus left in y between the intersection points y=-2 and y=2: (8-y^2)-y^2 = 8-2y^2.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "∫_{-2}^{2} (8-2y^2) dy"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Area between curves in y; standard 8.5 setup, fits skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Key D correct; intersections at y=±2, right minus left = 8-2y^2; area 64/3 verified."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table complete with equations, positions, and intersection points; clear wording."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors encode sign error, half-interval, and wrong limits; each explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, no calculator needed, options parallel and exact."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean 8.5 item with a unique key and distinct distractors; the stated area 64/3 is correct. Passes."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Standard 8.5 setup: read right and left boundaries from the table, subtract (right - left) to get 8 - 2y^2, and use the given intersection y-values -2 to 2 as limits. The intersection points are supplied, so no solving is needed. Distractors cover wrong limits, reversed sign, and half interval. It is a single-concept item with minimal computation and no hidden complexity.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "s3-ab-35-k0",
+  "cellId": "s3-ab-35",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Each semicircle has diameter sqrt(x), so its area is (1/2)π(sqrt(x)/2)^2 = πx/8. Integrating from 0 to 4 gives π.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "π"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 8.8 semicircle cross sections; extracting diameter from region representation fits 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Verified: integral of pi x/8 from 0 to 4 = pi. Unique correct answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Graph data consistent and sufficient; wording clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "All three distractors verified to arise from the stated errors (2pi, 4pi, 4pi/3); explanations correct."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Exact-form options, simple arithmetic, appropriate for non-calculator."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean, standard semicircle cross-section item; key and distractor derivations verified."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires reading the diameter from the graph, halving it for the radius, building the semicircle area (π/2)r² = πx/8, and integrating x from 0 to 4. Clean numbers, no ambiguity. Distractors correspond to common errors (radius = diameter gives 4π, missing the 1/2 gives 2π, etc.). Standard AP-level cross-section problem.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "s3-ab-36-k0",
+  "cellId": "s3-ab-36",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "2(1)+3(2.6)+2(4.1)+1(4.5)",
+     "final_answer": "22.5",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "b",
+     "brief_reasoning": "3.6+10.05+8.6+4.55",
+     "final_answer": "26.8",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "c",
+     "brief_reasoning": "f increasing so left endpoints are minima on each subinterval; f concave down so chords lie below graph",
+     "final_answer": "Left sum underestimates; trapezoidal sum underestimates",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "d",
+     "brief_reasoning": "26.8/8; integral of (f-1) = 26.8-8",
+     "final_answer": "Average value ≈ 3.35; area ≈ 18.8",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Riemann/trapezoidal sums with unequal subintervals, over/under-estimate reasoning, and average value are all in Unit 6 scope."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All answers verified: 22.5, 26.8, both underestimates, 3.35, 18.8. Rubric rows are consistent and the alternative solution is valid."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete and the assumptions are stated. The data are consistent with f'>0, f''<0, and f>=1."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "FRQ item. The rubric lists common errors, such as equal widths, right endpoints, and overestimate claims."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "9 points in 4 parts (2/2/3/2), about 15 minutes, light arithmetic. The calculator designation is weakly needed but acceptable."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, in scope, and consistent. I verified every computation and the stimulus data, and no problems were found."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP FRQ-style item. Tests left and trapezoidal sums on unequal subintervals, and using f' and f'' signs to judge over- or underestimates. It also asks for average value and area between the graph and y=1, which require connecting the table, the sums, and the integral. Numbers are clean, the reading load is modest, and all content is in AB scope. The difficulty comes from multiple steps and representation links, not from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 7,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "s3-ab-37-k0",
+  "cellId": "s3-ab-37",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "f'=0 at t=2 and t=9. At t=2, f' goes from negative to positive, so f has a relative minimum. At t=9, f' goes from positive to negative, so f has a relative maximum.",
+     "final_answer": "Relative minimum at t=2; relative maximum at t=9",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "b",
+     "brief_reasoning": "f' increases on (0,5) and decreases on (5,10). At t=7 and t=9 the slope of f' changes but stays negative, so concavity does not change there. The only sign change of f'' is at t=5.",
+     "final_answer": "t=5",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "c",
+     "brief_reasoning": "Candidate test using the endpoints and the critical points. f(0)=40. f(2)=40+(-2)=38. The integral of f' from 0 to 10 is -2+9+8+2-1=16, so f(10)=56. f(9) is a maximum, so it is not a candidate. The smallest value is f(2).",
+     "final_answer": "Absolute minimum value is 38, at t=2",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "d",
+     "brief_reasoning": "f is decreasing where f'<0, which is (0,2) and (9,10). f is concave down where f' is decreasing, which is (5,10). Both conditions hold only on the overlap.",
+     "final_answer": "(9,10)",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parts a, b, d are squarely 5.9 with justification. Part c uses area under f' (FTC) to get function values, which is typical of AP AB FRQs (the closed-interval candidates test with f' graph), so it is acceptable."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Verified: relative min at t=2, relative max at t=9, inflection only at t=5, f(2)=38, f(9)=57, f(10)=56, absolute min 38, and (9,10) for part d. The rubric rows are consistent and the dependencies are sensible. Minor sloppy wording in the model answer for c (candidates listed as 't=0, 2, 10 (endpoints) and t=2 and t=9') and b ('negative on (5,7)'), which do not change any answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The graph data is complete: axes, piecewise-linear points, f(0)=40 and the context. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ. The rubric notes common errors (listing the zeros of f' as inflection points) and the model answers are explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The 9-point structure of 3/2/3/1 fits the official grain. The arithmetic is simple (triangles and trapezoids), and it is non-calculator friendly."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and checks out numerically. It is on topic for 5.9, with a standard FRQ structure. The only flaws are a couple of small wording slips in the model answers, which do not affect the keys or the rubric."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard FRQ-style item connecting f, f', and f'' from a graph of f'. Part (a) requires sign-change justification at t=2 and t=9. Part (b) has a corner trap, since the slope changes at t=7 and t=9 but f' does not change from increasing to decreasing there. Part (c) requires the candidates test, with small area computations (f(2)=38, f(10)=56) and an endpoint comparison. Part (d) requires intersecting the decreasing and concave-down intervals. All numbers are small and clean, wording is unambiguous, and everything is in AB Unit 5 scope. The difficulty comes from multi-step justification and representation changes, not from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 9,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "s3-ab-38-k0",
+  "cellId": "s3-ab-38",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "f' goes + to - at x=1, so local max there. f' goes - to + at x=4, so local min there.",
+     "final_answer": "Local max at x=1; local min at x=4",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "b",
+     "brief_reasoning": "f' decreases on (0,3) and increases on (3,6), so its monotonicity changes only at x=3. At x=1 the slope goes -2 to -1, so f' is still decreasing.",
+     "final_answer": "x=3",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "c",
+     "brief_reasoning": "Candidates: f(0)=1, f(1)=2, f(4)=2-3=-1, f(6)=-1+4=3. The smallest is f(4).",
+     "final_answer": "-1 (at x=4)",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Unit 5 connecting f, f', f'' with justification; EVT used appropriately."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All values verified: f(1)=2, f(4)=-1, f(6)=3, inflection only at x=3. Rubric rows consistent."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Graph data complete: points, axes, given conditions."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "FRQ; no distractors needed. Rubric includes the no-inflection check at x=1 and x=4."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "9 points, 3/3/3, about 15 minutes, no calculator needed, simple arithmetic."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct and well-formed FRQ on reading f from the graph of f'. Verified by hand: the local extrema, the inflection point at x=3, and the absolute minimum of -1 are all correct."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP FRQ-style item. (a) is a sign-change reading of f'. (b) requires reading f'' as the slope of f' and checking where it changes sign, with endpoints at x=1 and x=4 as distractors. (c) requires a candidates test with the Fundamental Theorem, using triangle areas to find f(4) = -1 and comparing it with f(0) = 1. The numbers are small and the reading load is low. The difficulty comes from the justification steps and the representation changes (graph to slope or area to function value), not from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 7,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "s3-ab-39-k0",
+  "cellId": "s3-ab-39",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "dB/dt(0) = 0.05(30000) - 1200 = 1500 - 1200 = 300. The equilibrium balance is B = 1200/0.05 = 24000. Since 30000 > 24000, dB/dt stays positive, so the balance keeps growing.",
+     "final_answer": "dB/dt = 300 dollars per year at t=0, so the balance is increasing. The payment rate is not large enough: interest at t=0 is 1500 dollars per year, which is more than 1200. Because B stays above 24000, dB/dt stays positive and the loan is never paid off.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "b",
+     "brief_reasoning": "Rewrite as dB/dt = 0.05(B - 24000). Separate: dB/(B - 24000) = 0.05 dt. Integrate: ln|B - 24000| = 0.05t + C, so B - 24000 = Ke^{0.05t}. At t=0, B = 30000 gives K = 6000.",
+     "final_answer": "B(t) = 24000 + 6000e^{0.05t}",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "c",
+     "brief_reasoning": "A constant balance means dB/dt = 0. Then 0 = 0.05(30000) - P, so P = 1500. In part (b), the payment of 1200 is less than the 1500 of interest, so the balance grows exponentially instead of staying constant.",
+     "final_answer": "P = 1500 dollars per year. With this rate, B = 30000 is an equilibrium solution. In part (b), the payment of 1200 per year is less than the interest of 1500 per year, so B grows without bound and is not constant.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All answers verified: 300 dollars/yr; B=24000+6000e^{0.05t}; P=1500. Rubric rows are consistent and sum to the part totals. Minor wording muddle in b2."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The differential equation, initial condition, variables, and context are complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "FRQ, so there are no distractors. The model answers explain the reasoning."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item fits about 15 minutes, uses clean non-calculator numbers, and follows the 9-point structure with parts of 2/5/2."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, in scope, and suitable. The only issues are minor rubric wording in part b and the density of part a's prompt."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP-style FRQ. Part (a) is a simple evaluation plus interpretation. Part (b) is a full separation of variables with u-substitution, absolute value and constant handling, and an initial condition; it has clean numbers (B = 24000 + 6000e^{0.05t}). Part (c) is equilibrium reasoning (P = 1500) tied back to the solution. All content is in AB scope, with no Euler, logistic, or linear first-order methods. The reading load is short and the arithmetic is clean, so the difficulty comes from concept and multi-step reasoning rather than unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 8,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ }
+]

@@ -1,0 +1,43 @@
+{
+ "itemId": "lines_angles_triangles.triangle_angle_sum.PT.P",
+ "generatedAt": "2026-10-07T05:02:00.949Z",
+ "codeHash": "a269da2f00ed57e14f7936be0d2334974e1c38cd189f568026dd6f340c2116b4",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/geo-cr-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/geo-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/geo-pt-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/lines_angles_triangles.triangle_angle_sum.PT.P.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "lines_angles_triangles.triangle_angle_sum.PT.P.png",
+   "mobileFile": "lines_angles_triangles.triangle_angle_sum.PT.P.m375.png",
+   "archetypeId": "lat.triangle_angle_sum.PT.P.compose_kind",
+   "seed": 11,
+   "signature": "parallel_transversal",
+   "stimulus": "A map maker marks the figure shown. Lines $u$ and $v$ in the figure are parallel. Transversals $r$ and $w$ meet at point $C$, crossing line $v$ at $A$ and $D$ to form triangle $CAD$. Some angle measures are marked in degrees.",
+   "question": "What is the measure, in degrees, of the largest angle of triangle $CAD$?",
+   "options": [
+    "54",
+    "112",
+    "68",
+    "10"
+   ],
+   "correctIndex": 2,
+   "answer": "68",
+   "explanation": "(1) 그림에서 세 각의 라벨을 읽는다. (2) 위 평행선 u 에서 읽은 각은 동위각이므로 삼각형 CAD 의 각과 같다. (3) 내각의 합: (2x+38) + (4x+14) + (2x+48) = 180 에서 x = 10 이다. (4) 세 각은 58°, 54°, 68° 이다. (5) 가장 큰 각은 68° 이다. (6) 따라서 68 이다. 따라서 정답은 68이다.",
+   "structuralIssues": []
+  }
+ ]
+}

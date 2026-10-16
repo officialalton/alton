@@ -1,0 +1,23 @@
+{
+ "itemId": "area_volume.rectangle_area.PG.C",
+ "verdict": "pass",
+ "reviewedAt": "2026-10-06T06:44:29Z",
+ "reviewer": "claude-sonnet-5.5 (math-B session)",
+ "codeHash": "4ef6b4593f6388d130a0e5b0fb6a70258607df775c241f5a4efbf067bb9f1f80",
+ "samples": [
+  "area_volume.rectangle_area.PG.C.png"
+ ],
+ "checklist": {
+  "figure_present": "pass",
+  "proportion_matches_values": "pass",
+  "labels_placed_and_legible": "pass",
+  "multi_figure_consistent": "pass",
+  "text_matches_figure_and_solvable": "pass",
+  "axes_ticks_units_legend": "pass",
+  "choice_distinct_one_rule": "pass",
+  "sat_visual_style": "pass",
+  "mobile_375_readable": "pass"
+ },
+ "defects": [],
+ "notes": "직사각형 선택지 4개(변 라벨 숫자·같은 축척 pxPerUnit 으로 그림) 샘플 데스크톱·375px 확인: 정답만 지문 조건(넓이)을 만족, 오답은 합·둘레를 넓이로 착각한 그림 등 규칙, 네 그림이 같은 축척이라 변 길이 비교가 가능하고 가장 짧은 변도 40px 이상, 라벨·꼭짓점 이름 겹침 없음. [재스탬프: 키트 해시 등록으로 코드 해시만 갱신, 샘플 PNG 바이트 동일]"
+}

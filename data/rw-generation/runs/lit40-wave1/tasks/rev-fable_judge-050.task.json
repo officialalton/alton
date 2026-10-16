@@ -1,0 +1,274 @@
+{
+ "schema": "rw-session-task/v1",
+ "kind": "review",
+ "role": "fable_judge",
+ "runId": "lit40-wave1",
+ "taskId": "rev-fable_judge-050",
+ "chunkId": "rev-fable_judge-050",
+ "suggestedModel": "fable",
+ "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-fable_judge-050.result.json",
+ "outputSchema": {
+  "chunkId": "청크 ID",
+  "model": "fable",
+  "items": [
+   {
+    "candidateId": "id",
+    "picked_letter": "A|B|C|D",
+    "other_defensible": "정답 외 방어 가능한 선택지가 있으면 true",
+    "est_difficulty": "easy|medium|hard (실제 체감, 요청 난이도에 맞추지 말 것)",
+    "hard_fit": "실제 SAT hard 수준의 사고 단계가 필요하면 true(지문 길이·난어만이면 false)",
+    "plausible_distractors": "오답 3개가 모두 그럴듯하고 서로 다른 오개념에서 나왔으면 true",
+    "length_balanced": "네 선택지 길이·구체성이 비슷해 정답이 형식으로 드러나지 않으면 true",
+    "multi_answer_risk": "복수 정답 위험이 있으면 true",
+    "issues": "한 줄 메모"
+   }
+  ]
+ },
+ "items": [
+  {
+   "candidateId": "lit40-medium-07-025",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "medium",
+   "passage": "\"Hand me the long net,\" Shamsuddin said on the first morning the pool's opening was delayed, and I did, because he seemed to know what he was doing. I was Moshe, a visitor with a swim cap and nothing to do in Addis Ababa until the pump was fixed. We skimmed jacaranda petals off the salt water while the attendant argued on the telephone. It was faintly comic: two grown men, strangers, fishing for flowers. By the fourth morning I was arriving early. Shamsuddin had brought a second net, newer, its handle wrapped in blue tape, and he passed it to me without a word, as one passes a cup at a table. I found I did not want the pump repaired. When it hummed back to life on the sixth day, we stood at the edge holding our nets, oddly formal, as though someone ought to make a speech. Swimmers were already lining up at the gate with towels over their shoulders.",
+   "question": "Which choice best describes the shift in tone in the text?",
+   "options": [
+    "From open frustration at a broken pump to triumphant pride when the narrator repairs it himself",
+    "From suspicious distance between two strangers to bitter rivalry over who may use the pool",
+    "From cheerful excitement about swimming to gloomy boredom during a long and pointless wait",
+    "From mild amusement at an odd shared task to a quiet tenderness toward the routine itself"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-07-026",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "text_structure",
+   "requestedDifficulty": "medium",
+   "passage": "Kagiso never hurried at the post office. He stood at the counter with his hat in his hands while the clerk weighed a parcel of seed catalogs, and he answered every question about the rain twice. Marcus, the surveyor from Cape Town, stood behind him checking his watch, a loan document under his arm that needed the farmer's signature before the afternoon bus. At first Marcus tapped the paper against his leg. Then the clerk mentioned that Kagiso's late wife had once run this counter, and that the old scale was hers. Marcus stopped tapping. He looked at the brass weights, worn smooth at the handles, and at the farmer's careful fingers, and he thought of the six-month extension his office liked to call a favor. When Kagiso finally turned around, Marcus found himself asking about the rain. Outside, the bus driver honked once and pulled away down the gravel road.",
+   "question": "Which choice best describes the overall structure of the text?",
+   "options": [
+    "It presents a man's impatience with a slow errand, then traces how a revealed detail alters his outlook.",
+    "It describes a farmer's financial troubles, then explains the legal terms of the loan he is offered.",
+    "It recounts a dispute at a post office, then shows how the clerk settles it in the farmer's favor.",
+    "It contrasts life in the city with life on a farm, then argues that rural customs are worth preserving."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-07-028",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "text_structure",
+   "requestedDifficulty": "medium",
+   "passage": "Anselm cooked by ear. On Thursdays he brought his goulash to the weaving cooperative in Vienna where my mother worked, and the women at the looms would stop their shuttles to ask what he put in it. He always shrugged. When my mother died, I asked him to write the recipe down, partly to test him, partly because I did not yet trust a stepfather to keep anything of hers. He tried. He sat at the kitchen table with a pencil for an hour and produced three lines, one of which said only \"enough paprika.\" I, Liesel, was furious, then puzzled. Then, watching him cook the next Thursday, I began to understand. He tasted, waited, added, tasted again, listening to the pot the way the weavers listened to their looms for a slipped thread. Now I bring the goulash myself. The cooperative has new looms, painted green, that clatter louder than the old ones.",
+   "question": "Which choice best describes the overall structure of the text?",
+   "options": [
+    "It lists the ingredients of a family dish, then explains how each one came to be included.",
+    "It describes the weaving process in detail, then compares it unfavorably with home cooking.",
+    "It introduces a man's unwritten method, then traces the narrator's shift from distrust to understanding.",
+    "It recounts a mother's death, then argues that recipes should always be recorded in writing."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-07-029",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "text_structure",
+   "requestedDifficulty": "medium",
+   "passage": "I rode Darnell's bus for nine years before I saw him without his uniform. That was the Sunday my aunt's church on 47th Street lost its kitchen to a fire and borrowed the narrow galley of a retired lake freighter that a neighbor had turned into a diner on the South Side. The congregation always served fried catfish after service; Darnell's mosque, it turned out, held its Sunday lunch on the same block, and the fire had displaced them too. One galley, one long steel table. For an hour the two groups ate in careful halves, salt shakers lined up like a border. Then Darnell, who knew half the room by their bus stops, began passing plates across the line, calling people by where they got off: Cottage Grove, Halsted, King Drive. \"Kenya, Ashland Avenue, pass the hot sauce,\" he told me. By dessert the halves had blurred. I still take his route, though I sit nearer the front now. Through the windows, the lake looks gray most mornings, then suddenly green.",
+   "question": "Which choice best describes the overall structure of the text?",
+   "options": [
+    "It describes a fire in detail, then explains how the church planned to rebuild its kitchen.",
+    "It compares two religious traditions, then argues that one meal should replace the other.",
+    "It recounts a bus driver's daily route, then lists the stops where most passengers get off.",
+    "It introduces a forced sharing of space, then shows how one person eases the divide between groups."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-07-030",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "underlined_portion_function",
+   "requestedDifficulty": "medium",
+   "passage": "By eleven at night, the metro platform in Gdansk belonged to Jakub and Eitan and whoever was waiting for the last train. They played the song they had written together the winter before, Jakub on guitar, Eitan on clarinet, and when a student asked who wrote it, Jakub said, \"I did,\" before Eitan could open his mouth. Eitan kept playing. __He had written the bridge on the back of a parking ticket, and he could still feel the shape of the paper in his coat pocket.__ The student dropped a coin into the case and thanked Jakub. When the train arrived, Eitan packed his clarinet slowly, while Jakub counted the coins aloud, dividing them into two equal piles as if fairness were a matter of arithmetic. The doors chimed. A pigeon walked the length of the empty platform.",
+   "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+   "options": [
+    "It reveals Eitan's private evidence of his contribution, sharpening the unfairness of Jakub's claim.",
+    "It explains why Eitan is careless about money, foreshadowing his loss of the coins later on.",
+    "It suggests that Eitan wrote the entire song alone, contradicting the earlier account of the duo.",
+    "It describes the cold weather on the platform, establishing the setting before the train arrives."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-07-031",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "underlined_portion_function",
+   "requestedDifficulty": "medium",
+   "passage": "I was twelve the summer my grandfather began teaching me Quechua in the boarding-house kitchen in Lima, between the breakfast dishes and the lunch rush. Winifred, who owned the house, let us use the corner table if we peeled potatoes while we talked. My grandfather corrected me with a grunt and my full name, Rosalinda, never with praise, and he pretended to read the newspaper whenever I got a phrase right. One morning, without thinking, I asked Winifred for the salt in his language. __My grandfather turned a page of the newspaper he had already turned twice.__ Winifred, who did not speak a word of it, handed me the salt anyway, laughing. That night I heard him on the telephone with my mother, repeating my sentence to her slowly, as if reading it from a plaque. In the morning the potatoes were waiting, already washed, in a blue enamel bowl.",
+   "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+   "options": [
+    "It shows that the grandfather is bored by the lesson, explaining why he later stops teaching.",
+    "It hints at a pride the grandfather conceals, which a later scene confirms more directly.",
+    "It reveals that the grandfather cannot read well, contrasting him with the educated landlady.",
+    "It marks the moment the narrator gives up the language, leading to her call with her mother."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-07-032",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "underlined_portion_function",
+   "requestedDifficulty": "medium",
+   "passage": "Ephraim refused my invitation the way he refused everything, politely and at length. I had asked him to Christmas dinner, four floors up, and he stood by the dry fountain in our Manchester courtyard explaining that a man who had spent thirty years at sea did not need company to know what day it was. I said fine, Casey could take a hint, and went upstairs. __Later I noticed he had swept the fountain's basin clean of leaves, though no water had run in it for years.__ On Christmas afternoon I left a plate covered in foil on the fountain's edge. When I came down at dusk the plate was gone, and in its place was a small brass knot, the kind sailors tie for practice, set exactly in the center of the basin. A delivery van idled at the gate, its wipers going though the rain had stopped.",
+   "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+   "options": [
+    "It shows that Ephraim plans to restore the fountain, which becomes the main subject of the essay.",
+    "It explains why the narrator withdraws her invitation, setting up a later quarrel between them.",
+    "It suggests a care Ephraim will not voice, anticipating his indirect reply to the narrator's gift.",
+    "It describes the courtyard's neglect, establishing that the building's residents rarely meet."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-07-033",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "underlined_portion_function",
+   "requestedDifficulty": "medium",
+   "passage": "Dario wanted a haircut, and I was paid to translate. That was the arrangement in Havana: he was a visiting engineer with a contract to sign at four, and I, Valentina, went wherever his Spanish failed him. The barber, an old man with a radio playing baseball, told us that by custom he cut no hair on the afternoon of a game. I translated it plainly. Dario laughed and offered twice the price. I translated that too, though more slowly. The barber turned the radio up. __I had a rule, learned in my first year, never to soften what either side said.__ So I did not tell Dario that the barber's son had pitched for the city team until his arm gave out, as the man in the next chair had whispered to me. Dario left with his hair uncut. At four, under the conference room's buzzing lights, he signed his contract with the collar of his shirt turned up against the draft.",
+   "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+   "options": [
+    "It reveals the narrator's dislike of Dario, explaining why she sabotages his business meeting.",
+    "It introduces a custom of the barbershop, which the barber then explains to his customers.",
+    "It summarizes the narrator's training, showing that she regrets becoming an interpreter.",
+    "It states a principle the narrator follows, which frames her decision about what to leave out."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-07-034",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "medium",
+   "passage": "Who counts the steps of a stairwell after forty years? Katarzyna did, every evening, one hundred and twelve from the street door to her landing in the old building in Naples, and the number had never once changed. Lakshmi, who had inherited the building from her father, met her on the third floor with an envelope. The rent was going up; a hotel group had made an offer for the whole block. Lakshmi had lain awake rehearsing this and still delivered it badly, apologizing in the wrong places. Katarzyna had expected it for a year and had prepared nothing at all, so she listened with her hand on the rail, polished pale by her own palm. Each woman, in her way, was trying to be decent about something neither had chosen. When Katarzyna finally took the envelope, she thanked Lakshmi for bringing it in person, which was more than her father had ever done. Then she climbed the remaining steps, counting aloud.",
+   "question": "Which choice best describes the narrator's attitude toward Lakshmi and Katarzyna?",
+   "options": [
+    "Openly critical of Lakshmi for selling the building and dismissive of Katarzyna's attachment",
+    "Amused by both women's habits and doubtful that either understands the offer being made",
+    "Admiring of Katarzyna's defiance and contemptuous of Lakshmi's attempts to apologize",
+    "Sympathetic toward both, presenting each woman's difficulty without taking a side"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-07-035",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "medium",
+   "passage": "A smell of rosin and radiator dust hung in the music room after school, where Mabel waited for her stepdaughter to finish practicing. For four months Harriet had spoken to her only in logistics: rides, money, a form to sign. Mabel had stopped trying clever openings. She sat on a folding chair by the timpani, pretending with the conviction of a bad actor to grade quizzes she had already graded twice. Harriet played the same eight bars of a sonata, missed the same note, and played them again. On the ninth try she stopped. \"You can say it's bad,\" she said, without turning around. Mabel considered several answers, each more careful than the last, and gave none of them. \"It's the F,\" she said. \"Your mother used to miss it too.\" Harriet's bow hovered. Then she played the bars once more and, deliberately, missed the F again. Snow ticked against the tall windows, and the radiator knocked twice like a latecomer.",
+   "question": "Which choice best describes the narrator's attitude toward Mabel?",
+   "options": [
+    "Gently amused by her awkwardness yet sympathetic to her patient effort to reach Harriet",
+    "Harshly critical of her dishonesty and convinced that she has damaged the family further",
+    "Coolly detached from her feelings and interested mainly in the technical details of music",
+    "Openly mocking of her musical ignorance and impatient with her reluctance to speak plainly"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-07-036",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "medium",
+   "passage": "We had planned the surprise for weeks: on the last night shift before the clinic closed for renovation, Yona and Xinyi would carry the old break-room table out to the hillside terrace so the three of us could watch the sun come up over the plateau. Yona borrowed a truck with the gravity she gives a medication count; Xinyi, who never forgets anything, brought a thermos and three folding chairs. Everything worked. The sky went orange on schedule, and a hawk crossed it as though hired. And yet we sat there saying very little. Yona kept checking her phone for messages from the day staff. Xinyi rubbed at a coffee ring on the table, a stain from some forgotten night years before. I do not blame them, or myself. I have come to think a good plan can arrange the scenery but not the feeling, and that the arranging was its own kind of kindness. On the drive down, the truck's radio found a station playing fiddle music, then lost it in the canyon.",
+   "question": "Which choice best describes the narrator's attitude toward Yona and Xinyi?",
+   "options": [
+    "Disappointed in their lack of enthusiasm and regretful about having joined the plan at all",
+    "Affectionate and appreciative of their care, even though the outing did not lift their mood",
+    "Puzzled by their sudden silence and suspicious that they were hiding news about the clinic",
+    "Envious of their friendship and resentful at being left out of the planning for the morning"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-07-037",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "medium",
+   "passage": "Jamal ran the only all-night pharmacy in our corner of the Delta, and for most of my teens I worked the counter beside him from ten until dawn. We had an agreement, never spoken, that we would not talk about my mother's leaving. Instead we talked about insulin prices, cotton futures, the trucker who bought antacid every Tuesday. I used to think this was cowardice, his and mine. I was Devon then, sixteen and certain I knew everything. Now, writing it down, I see how carefully he built those nights: the radio always tuned to the blues station she liked, her old stool kept behind the register though no one sat on it, the coffee made too strong, the way she made it. He was not avoiding her. He was keeping a room for her and letting me stay in it with him. Outside, the crop dusters started at five, low over the fields, their engines like a second dawn.",
+   "question": "Which choice best describes the narrator's attitude toward his father in the text?",
+   "options": [
+    "Lingering resentment at his father's refusal ever to discuss the mother's departure",
+    "Amused indifference toward his father's habits, which he regards as harmless quirks",
+    "A revised, tender understanding of silences he once judged as mere avoidance",
+    "Sharp disapproval of his father for running a business that kept his son up all night"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-07-039",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "medium",
+   "passage": "Wrapping paper crackled under Vesna's fingers as she slid the package across the diner table outside Riga, where the orchestra bus had stopped for soup. Inside was a wool scarf in a vivid mustard yellow, the one color Zofia had told the whole string section she could not bear. The conductor held it up and declared it perfect. She wore it through lunch, through the second half of the drive, and onto the stage that night, where it clashed magnificently with the black of the orchestra. Vesna, the youngest player, watched from the last desk with her face burning, half proud and half mortified. Afterward, in the corridor, Zofia folded the scarf carefully and told the stage manager it had kept her warm all evening. Outside, the bus idled in the snow, coughing gray clouds under the parking lot's single streetlamp.",
+   "question": "Which choice best describes the main purpose of the text?",
+   "options": [
+    "To portray how a conductor's sustained pretense spares the feelings of a young musician",
+    "To recount the stops an orchestra makes while traveling by bus to a concert outside Riga",
+    "To explain why the conductor dislikes the color yellow and avoids wearing it on stage",
+    "To suggest that honesty between people always matters more than politeness or comfort"
+   ],
+   "recipeBeyondMedium": "두 곳의 근거를 합쳐 요지를 잡아야 하고, 오답 하나는 일화 요약에 그치는 부분 요지다"
+  },
+  {
+   "candidateId": "lit40-medium-07-040",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "medium",
+   "passage": "Ink and machine oil were the first smells I learned in the printing room in Chiang Mai, and the third, after a month, was the steam from Kiet's iron. She rented the back corner from the press owner and sewed there with her only apprentice, Zhiming, between the stacks of temple calendars. In my first week I watched Zhiming hand Kiet every pin before she asked for it. By spring Kiet's eyes had begun to fail, and the roles reversed in small ways neither mentioned: Zhiming threaded the needles now, read the measurements aloud, and left the cutting chalk exactly where Kiet's hand would fall. Kiet still announced each morning's work as if she had planned it. Zhiming still said, \"Yes, teacher.\" The press thundered on beside them, turning out invitations for weddings I would never attend, their gold lettering drying in rows along the windowsill.",
+   "question": "Which choice best describes the main purpose of the text?",
+   "options": [
+    "To recount how the narrator first came to work in a busy printing room in Chiang Mai",
+    "To depict how an apprentice quietly shields her teacher's dignity as their roles reverse",
+    "To explain how a printing press produces calendars and wedding invitations for temples",
+    "To argue that every skilled craft must eventually be handed down to a younger generation"
+   ],
+   "recipeBeyondMedium": "두 곳의 근거를 합쳐 요지를 잡아야 하고, 오답 하나는 일화 요약에 그치는 부분 요지다"
+  },
+  {
+   "candidateId": "lit40-medium-07-041",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "medium",
+   "passage": "Manila Bay's lighthouse station had two keepers' cottages joined by a single wall, and for eleven years I shared it with Wira. We knocked twice each evening to say the lamp was lit. When the bureau assigned Mateo to replace her, I resented him on principle, and for weeks I let his knocks go unanswered. Then one night the generator failed, and Mateo climbed the tower with me, holding the flashlight steady while I reset the breaker. Afterward he asked how Wira used to signal, and I found myself teaching him the double knock. Keeping that small ritual alive, I realized, honored her more than my silence ever had. Below us, the fishing boats rocked in a row, their lanterns swinging like loose buttons on a coat.",
+   "question": "Which choice best states the main purpose of the text?",
+   "options": [
+    "To recount how the narrator and Mateo worked together to repair a generator that failed one night",
+    "To explain how the bureau organized the routines that keepers followed for lighting the lamp",
+    "To show how the narrator comes to see that welcoming a newcomer can preserve an old bond",
+    "To suggest that people must eventually let go of the past entirely in order to be happy"
+   ],
+   "recipeBeyondMedium": "두 곳의 근거를 합쳐 요지를 잡아야 하고, 오답 하나는 일화 요약에 그치는 부분 요지다"
+  },
+  {
+   "candidateId": "lit40-medium-07-042",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "character_motivation",
+   "requestedDifficulty": "medium",
+   "passage": "“Leave the back panel; we only need to replace the shelf,” Okja said, handing over the chisel. In the quiet reading room of the Hokkaido library, Caoimhe pried loose the warped board and found an envelope wedged behind it, addressed in faded ink to someone named only as the Thursday reader. That morning the librarian had mentioned an elderly man who came every Thursday and always ran his hand along this very shelf before sitting down. Caoimhe studied the envelope, then cut a shallow groove into the new board, just deep enough to hold it. Okja raised an eyebrow but said nothing about the extra hour it cost. Outside, snow slid from the roof in a long, soft rush.",
+   "question": "Based on the text, why does Caoimhe most likely cut a groove into the new board?",
+   "options": [
+    "She worries that Okja will scold her for disturbing the back panel he told her to leave alone.",
+    "She hopes the extra hour of careful work will impress Okja with her skill as a carpenter.",
+    "She wants the envelope to stay where the man who visits on Thursdays might still find it.",
+    "She believes the library has a rule requiring any lost papers to be stored inside shelves."
+   ],
+   "recipeBeyondMedium": "단서를 두 문장 이상 연결해야 하며 오답 중 하나는 결과를 동기로 착각하는 전형적 오독이다"
+  }
+ ],
+ "instructions": "당신은 디지털 SAT 독립 채점자다. 정답 표시가 없다. 먼저 문항을 직접 풀고(picked_letter), 이어서 난이도·hard 적합·오답 품질을 판정한다. 요청 난이도에 맞추려 하지 말고 실제로 느끼는 대로 답한다.\n청크 rev-fable_judge-050 — 16문항.\n출력: Write 도구로 정확히 이 경로에 JSON 한 파일을 쓴다 → /Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-fable_judge-050.result.json\n출력 JSON 스키마(예시 구조): {\"chunkId\":\"청크 ID\",\"model\":\"fable\",\"items\":[{\"candidateId\":\"id\",\"picked_letter\":\"A|B|C|D\",\"other_defensible\":\"정답 외 방어 가능한 선택지가 있으면 true\",\"est_difficulty\":\"easy|medium|hard (실제 체감, 요청 난이도에 맞추지 말 것)\",\"hard_fit\":\"실제 SAT hard 수준의 사고 단계가 필요하면 true(지문 길이·난어만이면 false)\",\"plausible_distractors\":\"오답 3개가 모두 그럴듯하고 서로 다른 오개념에서 나왔으면 true\",\"length_balanced\":\"네 선택지 길이·구체성이 비슷해 정답이 형식으로 드러나지 않으면 true\",\"multi_answer_risk\":\"복수 정답 위험이 있으면 true\",\"issues\":\"한 줄 메모\"}]}\n허용 값: picked_letter ∈ {A,B,C,D}, 불리언 필드는 true/false, est_difficulty ∈ {easy,medium,hard}. candidateId 를 바꾸지 않고 모든 항목에 답한다.\n금지: 결과 파일 외의 파일 생성·수정, 다른 명령 실행, 문항 수정·재작성. 끝나면 'done <항목 수>' 한 줄만 답한다.\n\n## 문항\n### lit40-medium-07-025 — skill text_structure_purpose · 유형 tone_shift · 요청 난이도 medium\n[지문]\n\"Hand me the long net,\" Shamsuddin said on the first morning the pool's opening was delayed, and I did, because he seemed to know what he was doing. I was Moshe, a visitor with a swim cap and nothing to do in Addis Ababa until the pump was fixed. We skimmed jacaranda petals off the salt water while the attendant argued on the telephone. It was faintly comic: two grown men, strangers, fishing for flowers. By the fourth morning I was arriving early. Shamsuddin had brought a second net, newer, its handle wrapped in blue tape, and he passed it to me without a word, as one passes a cup at a table. I found I did not want the pump repaired. When it hummed back to life on the sixth day, we stood at the edge holding our nets, oddly formal, as though someone ought to make a speech. Swimmers were already lining up at the gate with towels over their shoulders.\n\n[질문] Which choice best describes the shift in tone in the text?\nA) From open frustration at a broken pump to triumphant pride when the narrator repairs it himself\nB) From suspicious distance between two strangers to bitter rivalry over who may use the pool\nC) From cheerful excitement about swimming to gloomy boredom during a long and pointless wait\nD) From mild amusement at an odd shared task to a quiet tenderness toward the routine itself\n### lit40-medium-07-026 — skill text_structure_purpose · 유형 text_structure · 요청 난이도 medium\n[지문]\nKagiso never hurried at the post office. He stood at the counter with his hat in his hands while the clerk weighed a parcel of seed catalogs, and he answered every question about the rain twice. Marcus, the surveyor from Cape Town, stood behind him checking his watch, a loan document under his arm that needed the farmer's signature before the afternoon bus. At first Marcus tapped the paper against his leg. Then the clerk mentioned that Kagiso's late wife had once run this counter, and that the old scale was hers. Marcus stopped tapping. He looked at the brass weights, worn smooth at the handles, and at the farmer's careful fingers, and he thought of the six-month extension his office liked to call a favor. When Kagiso finally turned around, Marcus found himself asking about the rain. Outside, the bus driver honked once and pulled away down the gravel road.\n\n[질문] Which choice best describes the overall structure of the text?\nA) It presents a man's impatience with a slow errand, then traces how a revealed detail alters his outlook.\nB) It describes a farmer's financial troubles, then explains the legal terms of the loan he is offered.\nC) It recounts a dispute at a post office, then shows how the clerk settles it in the farmer's favor.\nD) It contrasts life in the city with life on a farm, then argues that rural customs are worth preserving.\n### lit40-medium-07-028 — skill text_structure_purpose · 유형 text_structure · 요청 난이도 medium\n[지문]\nAnselm cooked by ear. On Thursdays he brought his goulash to the weaving cooperative in Vienna where my mother worked, and the women at the looms would stop their shuttles to ask what he put in it. He always shrugged. When my mother died, I asked him to write the recipe down, partly to test him, partly because I did not yet trust a stepfather to keep anything of hers. He tried. He sat at the kitchen table with a pencil for an hour and produced three lines, one of which said only \"enough paprika.\" I, Liesel, was furious, then puzzled. Then, watching him cook the next Thursday, I began to understand. He tasted, waited, added, tasted again, listening to the pot the way the weavers listened to their looms for a slipped thread. Now I bring the goulash myself. The cooperative has new looms, painted green, that clatter louder than the old ones.\n\n[질문] Which choice best describes the overall structure of the text?\nA) It lists the ingredients of a family dish, then explains how each one came to be included.\nB) It describes the weaving process in detail, then compares it unfavorably with home cooking.\nC) It introduces a man's unwritten method, then traces the narrator's shift from distrust to understanding.\nD) It recounts a mother's death, then argues that recipes should always be recorded in writing.\n### lit40-medium-07-029 — skill text_structure_purpose · 유형 text_structure · 요청 난이도 medium\n[지문]\nI rode Darnell's bus for nine years before I saw him without his uniform. That was the Sunday my aunt's church on 47th Street lost its kitchen to a fire and borrowed the narrow galley of a retired lake freighter that a neighbor had turned into a diner on the South Side. The congregation always served fried catfish after service; Darnell's mosque, it turned out, held its Sunday lunch on the same block, and the fire had displaced them too. One galley, one long steel table. For an hour the two groups ate in careful halves, salt shakers lined up like a border. Then Darnell, who knew half the room by their bus stops, began passing plates across the line, calling people by where they got off: Cottage Grove, Halsted, King Drive. \"Kenya, Ashland Avenue, pass the hot sauce,\" he told me. By dessert the halves had blurred. I still take his route, though I sit nearer the front now. Through the windows, the lake looks gray most mornings, then suddenly green.\n\n[질문] Which choice best describes the overall structure of the text?\nA) It describes a fire in detail, then explains how the church planned to rebuild its kitchen.\nB) It compares two religious traditions, then argues that one meal should replace the other.\nC) It recounts a bus driver's daily route, then lists the stops where most passengers get off.\nD) It introduces a forced sharing of space, then shows how one person eases the divide between groups.\n### lit40-medium-07-030 — skill text_structure_purpose · 유형 underlined_portion_function · 요청 난이도 medium\n[지문]\nBy eleven at night, the metro platform in Gdansk belonged to Jakub and Eitan and whoever was waiting for the last train. They played the song they had written together the winter before, Jakub on guitar, Eitan on clarinet, and when a student asked who wrote it, Jakub said, \"I did,\" before Eitan could open his mouth. Eitan kept playing. __He had written the bridge on the back of a parking ticket, and he could still feel the shape of the paper in his coat pocket.__ The student dropped a coin into the case and thanked Jakub. When the train arrived, Eitan packed his clarinet slowly, while Jakub counted the coins aloud, dividing them into two equal piles as if fairness were a matter of arithmetic. The doors chimed. A pigeon walked the length of the empty platform.\n\n[질문] Which choice best describes the function of the underlined sentence in the text as a whole?\nA) It reveals Eitan's private evidence of his contribution, sharpening the unfairness of Jakub's claim.\nB) It explains why Eitan is careless about money, foreshadowing his loss of the coins later on.\nC) It suggests that Eitan wrote the entire song alone, contradicting the earlier account of the duo.\nD) It describes the cold weather on the platform, establishing the setting before the train arrives.\n### lit40-medium-07-031 — skill text_structure_purpose · 유형 underlined_portion_function · 요청 난이도 medium\n[지문]\nI was twelve the summer my grandfather began teaching me Quechua in the boarding-house kitchen in Lima, between the breakfast dishes and the lunch rush. Winifred, who owned the house, let us use the corner table if we peeled potatoes while we talked. My grandfather corrected me with a grunt and my full name, Rosalinda, never with praise, and he pretended to read the newspaper whenever I got a phrase right. One morning, without thinking, I asked Winifred for the salt in his language. __My grandfather turned a page of the newspaper he had already turned twice.__ Winifred, who did not speak a word of it, handed me the salt anyway, laughing. That night I heard him on the telephone with my mother, repeating my sentence to her slowly, as if reading it from a plaque. In the morning the potatoes were waiting, already washed, in a blue enamel bowl.\n\n[질문] Which choice best describes the function of the underlined sentence in the text as a whole?\nA) It shows that the grandfather is bored by the lesson, explaining why he later stops teaching.\nB) It hints at a pride the grandfather conceals, which a later scene confirms more directly.\nC) It reveals that the grandfather cannot read well, contrasting him with the educated landlady.\nD) It marks the moment the narrator gives up the language, leading to her call with her mother.\n### lit40-medium-07-032 — skill text_structure_purpose · 유형 underlined_portion_function · 요청 난이도 medium\n[지문]\nEphraim refused my invitation the way he refused everything, politely and at length. I had asked him to Christmas dinner, four floors up, and he stood by the dry fountain in our Manchester courtyard explaining that a man who had spent thirty years at sea did not need company to know what day it was. I said fine, Casey could take a hint, and went upstairs. __Later I noticed he had swept the fountain's basin clean of leaves, though no water had run in it for years.__ On Christmas afternoon I left a plate covered in foil on the fountain's edge. When I came down at dusk the plate was gone, and in its place was a small brass knot, the kind sailors tie for practice, set exactly in the center of the basin. A delivery van idled at the gate, its wipers going though the rain had stopped.\n\n[질문] Which choice best describes the function of the underlined sentence in the text as a whole?\nA) It shows that Ephraim plans to restore the fountain, which becomes the main subject of the essay.\nB) It explains why the narrator withdraws her invitation, setting up a later quarrel between them.\nC) It suggests a care Ephraim will not voice, anticipating his indirect reply to the narrator's gift.\nD) It describes the courtyard's neglect, establishing that the building's residents rarely meet.\n### lit40-medium-07-033 — skill text_structure_purpose · 유형 underlined_portion_function · 요청 난이도 medium\n[지문]\nDario wanted a haircut, and I was paid to translate. That was the arrangement in Havana: he was a visiting engineer with a contract to sign at four, and I, Valentina, went wherever his Spanish failed him. The barber, an old man with a radio playing baseball, told us that by custom he cut no hair on the afternoon of a game. I translated it plainly. Dario laughed and offered twice the price. I translated that too, though more slowly. The barber turned the radio up. __I had a rule, learned in my first year, never to soften what either side said.__ So I did not tell Dario that the barber's son had pitched for the city team until his arm gave out, as the man in the next chair had whispered to me. Dario left with his hair uncut. At four, under the conference room's buzzing lights, he signed his contract with the collar of his shirt turned up against the draft.\n\n[질문] Which choice best describes the function of the underlined sentence in the text as a whole?\nA) It reveals the narrator's dislike of Dario, explaining why she sabotages his business meeting.\nB) It introduces a custom of the barbershop, which the barber then explains to his customers.\nC) It summarizes the narrator's training, showing that she regrets becoming an interpreter.\nD) It states a principle the narrator follows, which frames her decision about what to leave out.\n### lit40-medium-07-034 — skill central_ideas_details · 유형 narrator_attitude · 요청 난이도 medium\n[지문]\nWho counts the steps of a stairwell after forty years? Katarzyna did, every evening, one hundred and twelve from the street door to her landing in the old building in Naples, and the number had never once changed. Lakshmi, who had inherited the building from her father, met her on the third floor with an envelope. The rent was going up; a hotel group had made an offer for the whole block. Lakshmi had lain awake rehearsing this and still delivered it badly, apologizing in the wrong places. Katarzyna had expected it for a year and had prepared nothing at all, so she listened with her hand on the rail, polished pale by her own palm. Each woman, in her way, was trying to be decent about something neither had chosen. When Katarzyna finally took the envelope, she thanked Lakshmi for bringing it in person, which was more than her father had ever done. Then she climbed the remaining steps, counting aloud.\n\n[질문] Which choice best describes the narrator's attitude toward Lakshmi and Katarzyna?\nA) Openly critical of Lakshmi for selling the building and dismissive of Katarzyna's attachment\nB) Amused by both women's habits and doubtful that either understands the offer being made\nC) Admiring of Katarzyna's defiance and contemptuous of Lakshmi's attempts to apologize\nD) Sympathetic toward both, presenting each woman's difficulty without taking a side\n### lit40-medium-07-035 — skill central_ideas_details · 유형 narrator_attitude · 요청 난이도 medium\n[지문]\nA smell of rosin and radiator dust hung in the music room after school, where Mabel waited for her stepdaughter to finish practicing. For four months Harriet had spoken to her only in logistics: rides, money, a form to sign. Mabel had stopped trying clever openings. She sat on a folding chair by the timpani, pretending with the conviction of a bad actor to grade quizzes she had already graded twice. Harriet played the same eight bars of a sonata, missed the same note, and played them again. On the ninth try she stopped. \"You can say it's bad,\" she said, without turning around. Mabel considered several answers, each more careful than the last, and gave none of them. \"It's the F,\" she said. \"Your mother used to miss it too.\" Harriet's bow hovered. Then she played the bars once more and, deliberately, missed the F again. Snow ticked against the tall windows, and the radiator knocked twice like a latecomer.\n\n[질문] Which choice best describes the narrator's attitude toward Mabel?\nA) Gently amused by her awkwardness yet sympathetic to her patient effort to reach Harriet\nB) Harshly critical of her dishonesty and convinced that she has damaged the family further\nC) Coolly detached from her feelings and interested mainly in the technical details of music\nD) Openly mocking of her musical ignorance and impatient with her reluctance to speak plainly\n### lit40-medium-07-036 — skill central_ideas_details · 유형 narrator_attitude · 요청 난이도 medium\n[지문]\nWe had planned the surprise for weeks: on the last night shift before the clinic closed for renovation, Yona and Xinyi would carry the old break-room table out to the hillside terrace so the three of us could watch the sun come up over the plateau. Yona borrowed a truck with the gravity she gives a medication count; Xinyi, who never forgets anything, brought a thermos and three folding chairs. Everything worked. The sky went orange on schedule, and a hawk crossed it as though hired. And yet we sat there saying very little. Yona kept checking her phone for messages from the day staff. Xinyi rubbed at a coffee ring on the table, a stain from some forgotten night years before. I do not blame them, or myself. I have come to think a good plan can arrange the scenery but not the feeling, and that the arranging was its own kind of kindness. On the drive down, the truck's radio found a station playing fiddle music, then lost it in the canyon.\n\n[질문] Which choice best describes the narrator's attitude toward Yona and Xinyi?\nA) Disappointed in their lack of enthusiasm and regretful about having joined the plan at all\nB) Affectionate and appreciative of their care, even though the outing did not lift their mood\nC) Puzzled by their sudden silence and suspicious that they were hiding news about the clinic\nD) Envious of their friendship and resentful at being left out of the planning for the morning\n### lit40-medium-07-037 — skill central_ideas_details · 유형 narrator_attitude · 요청 난이도 medium\n[지문]\nJamal ran the only all-night pharmacy in our corner of the Delta, and for most of my teens I worked the counter beside him from ten until dawn. We had an agreement, never spoken, that we would not talk about my mother's leaving. Instead we talked about insulin prices, cotton futures, the trucker who bought antacid every Tuesday. I used to think this was cowardice, his and mine. I was Devon then, sixteen and certain I knew everything. Now, writing it down, I see how carefully he built those nights: the radio always tuned to the blues station she liked, her old stool kept behind the register though no one sat on it, the coffee made too strong, the way she made it. He was not avoiding her. He was keeping a room for her and letting me stay in it with him. Outside, the crop dusters started at five, low over the fields, their engines like a second dawn.\n\n[질문] Which choice best describes the narrator's attitude toward his father in the text?\nA) Lingering resentment at his father's refusal ever to discuss the mother's departure\nB) Amused indifference toward his father's habits, which he regards as harmless quirks\nC) A revised, tender understanding of silences he once judged as mere avoidance\nD) Sharp disapproval of his father for running a business that kept his son up all night\n### lit40-medium-07-039 — skill central_ideas_details · 유형 main_idea_or_purpose · 요청 난이도 medium · hard 기준: 두 곳의 근거를 합쳐 요지를 잡아야 하고, 오답 하나는 일화 요약에 그치는 부분 요지다\n[지문]\nWrapping paper crackled under Vesna's fingers as she slid the package across the diner table outside Riga, where the orchestra bus had stopped for soup. Inside was a wool scarf in a vivid mustard yellow, the one color Zofia had told the whole string section she could not bear. The conductor held it up and declared it perfect. She wore it through lunch, through the second half of the drive, and onto the stage that night, where it clashed magnificently with the black of the orchestra. Vesna, the youngest player, watched from the last desk with her face burning, half proud and half mortified. Afterward, in the corridor, Zofia folded the scarf carefully and told the stage manager it had kept her warm all evening. Outside, the bus idled in the snow, coughing gray clouds under the parking lot's single streetlamp.\n\n[질문] Which choice best describes the main purpose of the text?\nA) To portray how a conductor's sustained pretense spares the feelings of a young musician\nB) To recount the stops an orchestra makes while traveling by bus to a concert outside Riga\nC) To explain why the conductor dislikes the color yellow and avoids wearing it on stage\nD) To suggest that honesty between people always matters more than politeness or comfort\n### lit40-medium-07-040 — skill central_ideas_details · 유형 main_idea_or_purpose · 요청 난이도 medium · hard 기준: 두 곳의 근거를 합쳐 요지를 잡아야 하고, 오답 하나는 일화 요약에 그치는 부분 요지다\n[지문]\nInk and machine oil were the first smells I learned in the printing room in Chiang Mai, and the third, after a month, was the steam from Kiet's iron. She rented the back corner from the press owner and sewed there with her only apprentice, Zhiming, between the stacks of temple calendars. In my first week I watched Zhiming hand Kiet every pin before she asked for it. By spring Kiet's eyes had begun to fail, and the roles reversed in small ways neither mentioned: Zhiming threaded the needles now, read the measurements aloud, and left the cutting chalk exactly where Kiet's hand would fall. Kiet still announced each morning's work as if she had planned it. Zhiming still said, \"Yes, teacher.\" The press thundered on beside them, turning out invitations for weddings I would never attend, their gold lettering drying in rows along the windowsill.\n\n[질문] Which choice best describes the main purpose of the text?\nA) To recount how the narrator first came to work in a busy printing room in Chiang Mai\nB) To depict how an apprentice quietly shields her teacher's dignity as their roles reverse\nC) To explain how a printing press produces calendars and wedding invitations for temples\nD) To argue that every skilled craft must eventually be handed down to a younger generation\n### lit40-medium-07-041 — skill central_ideas_details · 유형 main_idea_or_purpose · 요청 난이도 medium · hard 기준: 두 곳의 근거를 합쳐 요지를 잡아야 하고, 오답 하나는 일화 요약에 그치는 부분 요지다\n[지문]\nManila Bay's lighthouse station had two keepers' cottages joined by a single wall, and for eleven years I shared it with Wira. We knocked twice each evening to say the lamp was lit. When the bureau assigned Mateo to replace her, I resented him on principle, and for weeks I let his knocks go unanswered. Then one night the generator failed, and Mateo climbed the tower with me, holding the flashlight steady while I reset the breaker. Afterward he asked how Wira used to signal, and I found myself teaching him the double knock. Keeping that small ritual alive, I realized, honored her more than my silence ever had. Below us, the fishing boats rocked in a row, their lanterns swinging like loose buttons on a coat.\n\n[질문] Which choice best states the main purpose of the text?\nA) To recount how the narrator and Mateo worked together to repair a generator that failed one night\nB) To explain how the bureau organized the routines that keepers followed for lighting the lamp\nC) To show how the narrator comes to see that welcoming a newcomer can preserve an old bond\nD) To suggest that people must eventually let go of the past entirely in order to be happy\n### lit40-medium-07-042 — skill inferences · 유형 character_motivation · 요청 난이도 medium · hard 기준: 단서를 두 문장 이상 연결해야 하며 오답 중 하나는 결과를 동기로 착각하는 전형적 오독이다\n[지문]\n“Leave the back panel; we only need to replace the shelf,” Okja said, handing over the chisel. In the quiet reading room of the Hokkaido library, Caoimhe pried loose the warped board and found an envelope wedged behind it, addressed in faded ink to someone named only as the Thursday reader. That morning the librarian had mentioned an elderly man who came every Thursday and always ran his hand along this very shelf before sitting down. Caoimhe studied the envelope, then cut a shallow groove into the new board, just deep enough to hold it. Okja raised an eyebrow but said nothing about the extra hour it cost. Outside, snow slid from the roof in a long, soft rush.\n\n[질문] Based on the text, why does Caoimhe most likely cut a groove into the new board?\nA) She worries that Okja will scold her for disturbing the back panel he told her to leave alone.\nB) She hopes the extra hour of careful work will impress Okja with her skill as a carpenter.\nC) She wants the envelope to stay where the man who visits on Thursdays might still find it.\nD) She believes the library has a rule requiring any lost papers to be stored inside shelves."
+}

@@ -1,0 +1,42 @@
+{
+ "itemId": "right_triangles_trigonometry.trig_ratio.TC.P",
+ "generatedAt": "2026-10-07T05:02:01.153Z",
+ "codeHash": "d0d028e198c45192c6948dc0c49f7025621aa96aca896f961af124a6370b69e3",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/trig-curve.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/right_triangles_trigonometry.trig_ratio.TC.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/tc-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "right_triangles_trigonometry.trig_ratio.TC.P.png",
+   "mobileFile": "right_triangles_trigonometry.trig_ratio.TC.P.m375.png",
+   "archetypeId": "rtt.trig_ratio.TC.P.chain2",
+   "seed": 11,
+   "signature": "trig_curve",
+   "stimulus": "A tutor sketches a curve to review trigonometric values. Shown is the graph of $y = \\cos x$ for $0 \\le x \\le 2\\pi$. Point $P$ is on the graph with $x$-coordinate $h$, and the coordinates of $P$ are labeled.",
+   "question": "What is the value of $\\sin h$?",
+   "options": [
+    "-24/25",
+    "-7/25",
+    "25/24",
+    "24/25"
+   ],
+   "correctIndex": 3,
+   "answer": "24/25",
+   "explanation": "(1) 그림에서 점 P 의 라벨을 읽는다: y 좌표 cos a = -7/25. (2) cos² + sin² = 1 에서 sin a 의 크기는 24/25 이다. (3) 점 P 의 x 위치가 II사분면에 해당하므로 사인의 부호는 양이다. (4) sin a = 24/25 이다. (5) 따라서 24/25 이다. 따라서 정답은 24/25이다.",
+   "structuralIssues": []
+  }
+ ]
+}

@@ -1,0 +1,5108 @@
+[
+ {
+  "candidateKey": "ap_physics_1-f01-k0",
+  "cellId": "ap_physics_1-f01",
+  "apSubjectCode": "ap_physics_1",
+  "kind": "frq_bundle",
+  "keywordCode": "2.7",
+  "unitCode": "2",
+  "skillPrimary": "2.B",
+  "structure": "frq_multipart",
+  "calculator": "allowed",
+  "archetype": "phf_mr_incline_slide",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Standard multi-part FRQ on an incline with kinetic friction: draw the FBD, derive a = g(sinθ - μcosθ), compute the speed with kinematics, then argue that mass cancels so the time is unchanged. It requires choosing Newton's 2nd law, translating between FBD, symbolic and numeric forms, and a proportional-reasoning justification. Numbers are simple and the wording is unambiguous, with no out-of-scope content. Difficulty comes from legitimate concept integration, not from unfair sources.",
+  "payload": {
+   "archetype": "phf_mr_incline_slide",
+   "template": "mr",
+   "topic": "2.7",
+   "extra_topics": [
+    "2.5",
+    "2.2",
+    "1.2"
+   ],
+   "skill": "2.B",
+   "representative_skill": "2.B",
+   "calculator": "allowed",
+   "title": "Block sliding down a rough incline",
+   "stimulus": {
+    "kind": "diagram",
+    "description": "A block of mass $m=2\\text{ kg}$ is released from rest on a rough incline that makes an angle $\\theta=30^\\circ$ with the horizontal. The coefficient of kinetic friction between the block and the incline is $\\mu=0.15$. The block slides a distance $d=2\\text{ m}$ down the incline.",
+    "data": {
+     "variant": "phys_scene",
+     "scene": {
+      "type": "incline",
+      "theta": 30,
+      "m": 2,
+      "mu": 0.15,
+      "kind": "block"
+     }
+    }
+   },
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "A block is released from rest on the rough incline shown in the figure and slides down it. On the dot below, which represents the block, draw and label the forces (not components) that act on the block while it slides down the incline. Each force must be represented by a distinct arrow starting on the dot.",
+     "points": 3,
+     "response_mode": "diagram",
+     "skill_codes": [
+      "1.A",
+      "1.C"
+     ],
+     "model_answer": "Three arrows from the dot: weight straight down, normal force perpendicular to the incline surface and pointing away from it, and kinetic friction pointing up the incline. The weight arrow is the longest and the friction arrow is shorter than the normal-force arrow.",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Draws and labels the three forces: weight, normal force, and kinetic friction (no extra force such as a force down the incline)",
+       "required_elements": [
+        "weight",
+        "normal force",
+        "friction"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "adds a force of motion down the incline"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "diagram"
+      },
+      {
+       "row_id": "A2",
+       "points": 1,
+       "criterion": "Arrow directions are correct: weight straight down, normal force perpendicular to the incline, friction up the incline",
+       "required_elements": [
+        "directions"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "draws the normal force vertical",
+        "draws friction down the incline"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "diagram"
+      },
+      {
+       "row_id": "A3",
+       "points": 1,
+       "criterion": "Relative lengths are consistent: the weight arrow is the longest and the friction arrow is shorter than the normal-force arrow",
+       "required_elements": [
+        "weight longest",
+        "friction shorter than normal"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "draws the normal force as long as the weight"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "diagram"
+      }
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "Derive an expression for the magnitude of the acceleration of the block down the incline in terms of $\\theta$, $\\mu$, and fundamental constants.",
+     "points": 3,
+     "response_mode": "derive",
+     "skill_codes": [
+      "2.A"
+     ],
+     "model_answer": "Perpendicular to the incline $N=mg\\cos\\theta$; along the incline $mg\\sin\\theta-\\mu N=ma$, so $a=g(\\sin\\theta-\\mu\\cos\\theta)$.",
+     "rubric_rows": [
+      {
+       "row_id": "B1",
+       "points": 1,
+       "criterion": "Applies Newton's second law perpendicular to the incline: $N=mg\\cos\\theta$",
+       "required_elements": [
+        "N = m g cos theta"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses N = m g"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "expression"
+      },
+      {
+       "row_id": "B2",
+       "points": 1,
+       "criterion": "Applies Newton's second law along the incline: $mg\\sin\\theta-\\mu N=ma$",
+       "required_elements": [
+        "m g sin theta - mu N = m a"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses the cosine for the component along the incline",
+        "adds the friction term"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "expression"
+      },
+      {
+       "row_id": "B3",
+       "points": 1,
+       "criterion": "Combines the equations to the correct expression $a=g(\\sin\\theta-\\mu\\cos\\theta)$",
+       "required_elements": [
+        "g (sin theta - mu cos theta)"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "leaves the mass in the final expression"
+       ],
+       "requires_row_id": "B2",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "expression"
+      }
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "The angle of the incline and the mass of the block are given in the figure, and the coefficient of kinetic friction between the block and the incline is $\\mu=0.15$. Calculate the speed of the block after it has slid the distance $d=2\\text{ m}$ down the incline.",
+     "points": 2,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "2.B"
+     ],
+     "model_answer": "$a=3.63\\text{ m/s}^2$ and $v=\\sqrt{2ad}=\\sqrt{2(3.63)(2)}\\approx 3.81\\text{ m/s}$.",
+     "rubric_rows": [
+      {
+       "row_id": "C1",
+       "points": 1,
+       "criterion": "Calculates the acceleration (about 3.63) from the expression in part B",
+       "required_elements": [
+        "3.63"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses the sine for both terms"
+       ],
+       "requires_row_id": "B3",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "numeric"
+      },
+      {
+       "row_id": "C2",
+       "points": 1,
+       "criterion": "Uses $v^2=2ad$ (or an energy equation) to find a speed of about 3.81 with units of meters per second",
+       "required_elements": [
+        "3.81",
+        "m/s"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "forgets the square root"
+       ],
+       "requires_row_id": "C1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": true,
+       "kind": "numeric"
+      }
+     ]
+    },
+    {
+     "label": "D",
+     "prompt": "The experiment is repeated on the same incline (same angle and same coefficient of kinetic friction) with a block of mass $4\\text{ kg}$. Does the time for the block to slide the distance $d$ increase, decrease, or stay the same? Justify your answer.",
+     "points": 2,
+     "response_mode": "explain",
+     "skill_codes": [
+      "3.B",
+      "3.C"
+     ],
+     "model_answer": "The time stays the same. The mass cancels in $a=g(\\sin\\theta-\\mu\\cos\\theta)$, so the acceleration is unchanged and the time $t=\\sqrt{2d/a}$ is the same.",
+     "rubric_rows": [
+      {
+       "row_id": "D1",
+       "points": 1,
+       "criterion": "States that the time stays the same",
+       "required_elements": [
+        "stays the same"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "states the heavier block takes less time"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "claim"
+      },
+      {
+       "row_id": "D2",
+       "points": 1,
+       "criterion": "Justifies that the mass cancels, so the acceleration (and the time) does not depend on the mass",
+       "required_elements": [
+        "mass cancels",
+        "same acceleration"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "argues only that heavier objects fall at the same rate without using the equation"
+       ],
+       "requires_row_id": "D1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "justification"
+      }
+     ]
+    }
+   ],
+   "total_points": 10,
+   "est_minutes": 22,
+   "facts": [
+    "th=30",
+    "mu=0.15",
+    "m=2.0",
+    "d=2.0",
+    "a=3.6269",
+    "v=3.809"
+   ],
+   "expected_values": [
+    {
+     "part": "C",
+     "quantity": "acceleration",
+     "value": 3.6269426564368743,
+     "unit": "m/s^2",
+     "tolerance": 0.06
+    },
+    {
+     "part": "C",
+     "quantity": "speed",
+     "value": 3.8089067494160966,
+     "unit": "m/s",
+     "tolerance": 0.06
+    }
+   ],
+   "reference_note": "ALTON reference answer for self-review — not official AP scoring",
+   "blueprint": {
+    "id": "phf_mr_incline_slide",
+    "subject": "ap_physics_1",
+    "kind": "frq_bundle",
+    "concept": "Newton's second law along an incline with kinetic friction, a free-body diagram, and a justified prediction about the effect of mass",
+    "topic": "2.7",
+    "skill": "2.B",
+    "student_thinking": [
+     "Draw the free-body diagram of the block on the incline",
+     "Resolve the weight and write Newton's second law along and perpendicular to the incline",
+     "Predict whether the mass changes the time using the derived relationship"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the block slides down so kinetic friction acts up the incline",
+      "evidence": "the stimulus states the block is released from rest, slides down, and gives the kinetic friction coefficient"
+     }
+    ],
+    "material": {
+     "type": "diagram",
+     "must_include": [
+      "incline angle",
+      "mass",
+      "friction coefficient"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "sympy solves the two Newton equations; an RK4 integration of the motion along the incline recomputes the speed after the distance d",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "A",
+      "skills": [
+       "1.A",
+       "1.C"
+      ],
+      "topics": [
+       "2.7"
+      ],
+      "points": 3,
+      "accepted_answers": [
+       "Three arrows from the dot: weight straight down, normal force perpendicular to the incline surface and pointing away from it, and kinetic friction pointing up the incline. The weight arrow is the longest and the friction arrow is shorter than the normal-force arrow."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Draws and labels the three forces: weight, normal force, and kinetic friction (no extra force such as a force down the incline)",
+        "elements": [
+         "weight",
+         "normal force",
+         "friction"
+        ]
+       },
+       {
+        "row_id": "A2",
+        "points": 1,
+        "criterion": "Arrow directions are correct: weight straight down, normal force perpendicular to the incline, friction up the incline",
+        "elements": [
+         "directions"
+        ]
+       },
+       {
+        "row_id": "A3",
+        "points": 1,
+        "criterion": "Relative lengths are consistent: the weight arrow is the longest and the friction arrow is shorter than the normal-force arrow",
+        "elements": [
+         "weight longest",
+         "friction shorter than normal"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "B",
+      "skills": [
+       "2.A"
+      ],
+      "topics": [
+       "2.7"
+      ],
+      "points": 3,
+      "accepted_answers": [
+       "Perpendicular to the incline $N=mg\\cos\\theta$; along the incline $mg\\sin\\theta-\\mu N=ma$, so $a=g(\\sin\\theta-\\mu\\cos\\theta)$."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "B1",
+        "points": 1,
+        "criterion": "Applies Newton's second law perpendicular to the incline: $N=mg\\cos\\theta$",
+        "elements": [
+         "N = m g cos theta"
+        ]
+       },
+       {
+        "row_id": "B2",
+        "points": 1,
+        "criterion": "Applies Newton's second law along the incline: $mg\\sin\\theta-\\mu N=ma$",
+        "elements": [
+         "m g sin theta - mu N = m a"
+        ]
+       },
+       {
+        "row_id": "B3",
+        "points": 1,
+        "criterion": "Combines the equations to the correct expression $a=g(\\sin\\theta-\\mu\\cos\\theta)$",
+        "elements": [
+         "g (sin theta - mu cos theta)"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "C",
+      "skills": [
+       "2.B"
+      ],
+      "topics": [
+       "2.7"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "$a=3.63\\text{ m/s}^2$ and $v=\\sqrt{2ad}=\\sqrt{2(3.63)(2)}\\approx 3.81\\text{ m/s}$."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "C1",
+        "points": 1,
+        "criterion": "Calculates the acceleration (about 3.63) from the expression in part B",
+        "elements": [
+         "3.63"
+        ]
+       },
+       {
+        "row_id": "C2",
+        "points": 1,
+        "criterion": "Uses $v^2=2ad$ (or an energy equation) to find a speed of about 3.81 with units of meters per second",
+        "elements": [
+         "3.81",
+         "m/s"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "D",
+      "skills": [
+       "3.B",
+       "3.C"
+      ],
+      "topics": [
+       "2.7"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "The time stays the same. The mass cancels in $a=g(\\sin\\theta-\\mu\\cos\\theta)$, so the acceleration is unchanged and the time $t=\\sqrt{2d/a}$ is the same."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "D1",
+        "points": 1,
+        "criterion": "States that the time stays the same",
+        "elements": [
+         "stays the same"
+        ]
+       },
+       {
+        "row_id": "D2",
+        "points": 1,
+        "criterion": "Justifies that the mass cancels, so the acceleration (and the time) does not depend on the mass",
+        "elements": [
+         "mass cancels",
+         "same acceleration"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 10,
+    "judgment_demand": [
+     "representation_reading",
+     "law_selection",
+     "justification"
+    ]
+   },
+   "seed": 9800,
+   "pack_id": "phf_mr_incline_slide-s9800"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "phf_mr_incline_slide",
+   "facts": [
+    "th=30",
+    "mu=0.15",
+    "m=2.0",
+    "d=2.0",
+    "a=3.6269",
+    "v=3.809"
+   ],
+   "seed": 9800
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The bundle passes all five criteria. It is a standard incline-with-kinetic-friction multipart item, stays in Unit 2 scope, and is worth 10 points, matching the Mathematical Routines weight (3+3+2+2). The target skill 2.B is carried by part C, a short calculation. Parts A, B and D carry their own skills (1.A/1.C, 2.A, 3.B/3.C), which is acceptable under the per-part rule.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Part C assesses 2.B with a two-step calculation. The other parts are prerequisite or related skills within topics 2.7, 2.5 and 2.2."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The keys are unique and consistent: a = g(sinθ − μcosθ) gives 3.63 m/s², v = √(2ad) gives 3.81 m/s, and the time is unchanged because mass cancels. The independent solver agrees. The rubric rows are consistent and their dependencies are sensible."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The scene data (angle, mass, μ, block on incline) match the stem. The wording is clear. Part C restates the given values, which is slightly redundant but harmless."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no distractors. Common errors are listed per row (vertical normal force, friction down the incline, mass left in the final expression)."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The task load is typical of an AP FRQ and the calculator load is modest. The 22-minute estimate is only an internal reference and was not penalized."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part FRQ on an incline with kinetic friction: draw the FBD, derive a = g(sinθ - μcosθ), compute the speed with kinematics, then argue that mass cancels so the time is unchanged. It requires choosing Newton's 2nd law, translating between FBD, symbolic and numeric forms, and a proportional-reasoning justification. Numbers are simple and the wording is unambiguous, with no out-of-scope content. Difficulty comes from legitimate concept integration, not from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 10,
+   "representation_changes": 4,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 840
+  }
+ },
+ {
+  "candidateKey": "ap_physics_1-f01-k1",
+  "cellId": "ap_physics_1-f01",
+  "apSubjectCode": "ap_physics_1",
+  "kind": "frq_bundle",
+  "keywordCode": "2.7",
+  "unitCode": "2",
+  "skillPrimary": "2.B",
+  "structure": "frq_multipart",
+  "calculator": "allowed",
+  "archetype": "phf_mr_incline_slide",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "criterion_failed_scope_skill; criterion_failed_key_scoring",
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Standard AP-style incline FRQ: free-body diagram, symbolic derivation of a = g(sin(theta) - mu cos(theta)), a short numeric kinematics calculation (a ≈ 4.1 m/s^2, v ≈ 5.7 m/s), and a mass-independence justification. It needs choosing Newton's second law, resolving components, and linking dynamics to kinematics, with light reading and simple arithmetic. All content is in scope and the wording is unambiguous.",
+  "payload": {
+   "archetype": "phf_mr_incline_slide",
+   "template": "mr",
+   "topic": "2.7",
+   "extra_topics": [
+    "2.5",
+    "2.2",
+    "1.2"
+   ],
+   "skill": "2.B",
+   "representative_skill": "2.B",
+   "calculator": "allowed",
+   "title": "Block sliding down a rough incline",
+   "stimulus": {
+    "kind": "diagram",
+    "description": "A block of mass $m=3\\text{ kg}$ is released from rest on a rough incline that makes an angle $\\theta=30^\\circ$ with the horizontal. The coefficient of kinetic friction between the block and the incline is $\\mu=0.1$. The block slides a distance $d=4\\text{ m}$ down the incline.",
+    "data": {
+     "variant": "phys_scene",
+     "scene": {
+      "type": "incline",
+      "theta": 30,
+      "m": 3,
+      "mu": 0.1,
+      "kind": "block"
+     }
+    }
+   },
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "A block is released from rest on the rough incline shown in the figure and slides down it. On the dot below, which represents the block, draw and label the forces (not components) that act on the block while it slides down the incline. Each force must be represented by a distinct arrow starting on the dot.",
+     "points": 3,
+     "response_mode": "diagram",
+     "skill_codes": [
+      "1.A",
+      "1.C"
+     ],
+     "model_answer": "Three arrows from the dot: weight straight down, normal force perpendicular to the incline surface and pointing away from it, and kinetic friction pointing up the incline. The weight arrow is the longest and the friction arrow is shorter than the normal-force arrow.",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Draws and labels the three forces: weight, normal force, and kinetic friction (no extra force such as a force down the incline)",
+       "required_elements": [
+        "weight",
+        "normal force",
+        "friction"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "adds a force of motion down the incline"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "diagram"
+      },
+      {
+       "row_id": "A2",
+       "points": 1,
+       "criterion": "Arrow directions are correct: weight straight down, normal force perpendicular to the incline, friction up the incline",
+       "required_elements": [
+        "directions"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "draws the normal force vertical",
+        "draws friction down the incline"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "diagram"
+      },
+      {
+       "row_id": "A3",
+       "points": 1,
+       "criterion": "Relative lengths are consistent: the weight arrow is the longest and the friction arrow is shorter than the normal-force arrow",
+       "required_elements": [
+        "weight longest",
+        "friction shorter than normal"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "draws the normal force as long as the weight"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "diagram"
+      }
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "Derive an expression for the magnitude of the acceleration of the block down the incline in terms of $\\theta$, $\\mu$, and fundamental constants.",
+     "points": 3,
+     "response_mode": "derive",
+     "skill_codes": [
+      "2.A"
+     ],
+     "model_answer": "Perpendicular to the incline $N=mg\\cos\\theta$; along the incline $mg\\sin\\theta-\\mu N=ma$, so $a=g(\\sin\\theta-\\mu\\cos\\theta)$.",
+     "rubric_rows": [
+      {
+       "row_id": "B1",
+       "points": 1,
+       "criterion": "Applies Newton's second law perpendicular to the incline: $N=mg\\cos\\theta$",
+       "required_elements": [
+        "N = m g cos theta"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses N = m g"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "expression"
+      },
+      {
+       "row_id": "B2",
+       "points": 1,
+       "criterion": "Applies Newton's second law along the incline: $mg\\sin\\theta-\\mu N=ma$",
+       "required_elements": [
+        "m g sin theta - mu N = m a"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses the cosine for the component along the incline",
+        "adds the friction term"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "expression"
+      },
+      {
+       "row_id": "B3",
+       "points": 1,
+       "criterion": "Combines the equations to the correct expression $a=g(\\sin\\theta-\\mu\\cos\\theta)$",
+       "required_elements": [
+        "g (sin theta - mu cos theta)"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "leaves the mass in the final expression"
+       ],
+       "requires_row_id": "B2",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "expression"
+      }
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "The angle of the incline and the mass of the block are given in the figure, and the coefficient of kinetic friction between the block and the incline is $\\mu=0.1$. Calculate the speed of the block after it has slid the distance $d=4\\text{ m}$ down the incline.",
+     "points": 2,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "2.B"
+     ],
+     "model_answer": "$a=4.05\\text{ m/s}^2$ and $v=\\sqrt{2ad}=\\sqrt{2(4.05)(4)}\\approx 5.69\\text{ m/s}$.",
+     "rubric_rows": [
+      {
+       "row_id": "C1",
+       "points": 1,
+       "criterion": "Calculates the acceleration (about 4.05) from the expression in part B",
+       "required_elements": [
+        "4.05"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses the sine for both terms"
+       ],
+       "requires_row_id": "B3",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "numeric"
+      },
+      {
+       "row_id": "C2",
+       "points": 1,
+       "criterion": "Uses $v^2=2ad$ (or an energy equation) to find a speed of about 5.69 with units of meters per second",
+       "required_elements": [
+        "5.69",
+        "m/s"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "forgets the square root"
+       ],
+       "requires_row_id": "C1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": true,
+       "kind": "numeric"
+      }
+     ]
+    },
+    {
+     "label": "D",
+     "prompt": "The experiment is repeated on the same incline (same angle and same coefficient of kinetic friction) with a block of mass $6\\text{ kg}$. Does the time for the block to slide the distance $d$ increase, decrease, or stay the same? Justify your answer.",
+     "points": 2,
+     "response_mode": "explain",
+     "skill_codes": [
+      "3.B",
+      "3.C"
+     ],
+     "model_answer": "The time stays the same. The mass cancels in $a=g(\\sin\\theta-\\mu\\cos\\theta)$, so the acceleration is unchanged and the time $t=\\sqrt{2d/a}$ is the same.",
+     "rubric_rows": [
+      {
+       "row_id": "D1",
+       "points": 1,
+       "criterion": "States that the time stays the same",
+       "required_elements": [
+        "stays the same"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "states the heavier block takes less time"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "claim"
+      },
+      {
+       "row_id": "D2",
+       "points": 1,
+       "criterion": "Justifies that the mass cancels, so the acceleration (and the time) does not depend on the mass",
+       "required_elements": [
+        "mass cancels",
+        "same acceleration"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "argues only that heavier objects fall at the same rate without using the equation"
+       ],
+       "requires_row_id": "D1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "justification"
+      }
+     ]
+    }
+   ],
+   "total_points": 10,
+   "est_minutes": 22,
+   "facts": [
+    "th=30",
+    "mu=0.1",
+    "m=3.0",
+    "d=4.0",
+    "a=4.0513",
+    "v=5.693"
+   ],
+   "expected_values": [
+    {
+     "part": "C",
+     "quantity": "acceleration",
+     "value": 4.051295104291249,
+     "unit": "m/s^2",
+     "tolerance": 0.06
+    },
+    {
+     "part": "C",
+     "quantity": "speed",
+     "value": 5.693009822082691,
+     "unit": "m/s",
+     "tolerance": 0.0683161178649923
+    }
+   ],
+   "reference_note": "ALTON reference answer for self-review — not official AP scoring",
+   "blueprint": {
+    "id": "phf_mr_incline_slide",
+    "subject": "ap_physics_1",
+    "kind": "frq_bundle",
+    "concept": "Newton's second law along an incline with kinetic friction, a free-body diagram, and a justified prediction about the effect of mass",
+    "topic": "2.7",
+    "skill": "2.B",
+    "student_thinking": [
+     "Draw the free-body diagram of the block on the incline",
+     "Resolve the weight and write Newton's second law along and perpendicular to the incline",
+     "Predict whether the mass changes the time using the derived relationship"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the block slides down so kinetic friction acts up the incline",
+      "evidence": "the stimulus states the block is released from rest, slides down, and gives the kinetic friction coefficient"
+     }
+    ],
+    "material": {
+     "type": "diagram",
+     "must_include": [
+      "incline angle",
+      "mass",
+      "friction coefficient"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "sympy solves the two Newton equations; an RK4 integration of the motion along the incline recomputes the speed after the distance d",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "A",
+      "skills": [
+       "1.A",
+       "1.C"
+      ],
+      "topics": [
+       "2.7"
+      ],
+      "points": 3,
+      "accepted_answers": [
+       "Three arrows from the dot: weight straight down, normal force perpendicular to the incline surface and pointing away from it, and kinetic friction pointing up the incline. The weight arrow is the longest and the friction arrow is shorter than the normal-force arrow."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Draws and labels the three forces: weight, normal force, and kinetic friction (no extra force such as a force down the incline)",
+        "elements": [
+         "weight",
+         "normal force",
+         "friction"
+        ]
+       },
+       {
+        "row_id": "A2",
+        "points": 1,
+        "criterion": "Arrow directions are correct: weight straight down, normal force perpendicular to the incline, friction up the incline",
+        "elements": [
+         "directions"
+        ]
+       },
+       {
+        "row_id": "A3",
+        "points": 1,
+        "criterion": "Relative lengths are consistent: the weight arrow is the longest and the friction arrow is shorter than the normal-force arrow",
+        "elements": [
+         "weight longest",
+         "friction shorter than normal"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "B",
+      "skills": [
+       "2.A"
+      ],
+      "topics": [
+       "2.7"
+      ],
+      "points": 3,
+      "accepted_answers": [
+       "Perpendicular to the incline $N=mg\\cos\\theta$; along the incline $mg\\sin\\theta-\\mu N=ma$, so $a=g(\\sin\\theta-\\mu\\cos\\theta)$."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "B1",
+        "points": 1,
+        "criterion": "Applies Newton's second law perpendicular to the incline: $N=mg\\cos\\theta$",
+        "elements": [
+         "N = m g cos theta"
+        ]
+       },
+       {
+        "row_id": "B2",
+        "points": 1,
+        "criterion": "Applies Newton's second law along the incline: $mg\\sin\\theta-\\mu N=ma$",
+        "elements": [
+         "m g sin theta - mu N = m a"
+        ]
+       },
+       {
+        "row_id": "B3",
+        "points": 1,
+        "criterion": "Combines the equations to the correct expression $a=g(\\sin\\theta-\\mu\\cos\\theta)$",
+        "elements": [
+         "g (sin theta - mu cos theta)"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "C",
+      "skills": [
+       "2.B"
+      ],
+      "topics": [
+       "2.7"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "$a=4.05\\text{ m/s}^2$ and $v=\\sqrt{2ad}=\\sqrt{2(4.05)(4)}\\approx 5.69\\text{ m/s}$."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "C1",
+        "points": 1,
+        "criterion": "Calculates the acceleration (about 4.05) from the expression in part B",
+        "elements": [
+         "4.05"
+        ]
+       },
+       {
+        "row_id": "C2",
+        "points": 1,
+        "criterion": "Uses $v^2=2ad$ (or an energy equation) to find a speed of about 5.69 with units of meters per second",
+        "elements": [
+         "5.69",
+         "m/s"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "D",
+      "skills": [
+       "3.B",
+       "3.C"
+      ],
+      "topics": [
+       "2.7"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "The time stays the same. The mass cancels in $a=g(\\sin\\theta-\\mu\\cos\\theta)$, so the acceleration is unchanged and the time $t=\\sqrt{2d/a}$ is the same."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "D1",
+        "points": 1,
+        "criterion": "States that the time stays the same",
+        "elements": [
+         "stays the same"
+        ]
+       },
+       {
+        "row_id": "D2",
+        "points": 1,
+        "criterion": "Justifies that the mass cancels, so the acceleration (and the time) does not depend on the mass",
+        "elements": [
+         "mass cancels",
+         "same acceleration"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 10,
+    "judgment_demand": [
+     "representation_reading",
+     "law_selection",
+     "justification"
+    ]
+   },
+   "seed": 9801,
+   "pack_id": "phf_mr_incline_slide-s9801"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "phf_mr_incline_slide",
+   "facts": [
+    "th=30",
+    "mu=0.1",
+    "m=3.0",
+    "d=4.0",
+    "a=4.0513",
+    "v=5.693"
+   ],
+   "seed": 9801
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The physics and arithmetic are correct, but the target skill 2.B carries only 2 of 10 points. Rubric rows A3, C1 and C2 also have scoring ambiguities (relative arrow lengths, no numeric tolerance, g not stated). I fail it on scope/skill fit and key/scoring.",
+   "scope_skill": {
+    "pass": false,
+    "notes": "The physics is in scope. But the representative skill 2.B is assessed only in part C, which is 2 of 10 points. Most of the bundle assesses 1.A/1.C, 2.A and 3.B/3.C, so the dominant demand is not the target skill."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Physics values are correct. Rubric weaknesses: row A3 requires the friction arrow to be shorter than the normal-force arrow, which depends on the unstated-in-figure μ = 0.1 and is hard to score from a hand drawing. Numeric rows C1 and C2 give \"about\" values with null tolerance and no stated g, so g = 10 answers (4.13 m/s², 5.75 m/s) are ambiguous. C2 chains from C1, so an upstream error is penalized twice."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The stimulus data (θ, m, μ, d) is complete and the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item with no distractors. The common-error lists are reasonable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical for a 10-point FRQ, the calculator use is appropriate and the arithmetic is light."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP-style incline FRQ: free-body diagram, symbolic derivation of a = g(sin(theta) - mu cos(theta)), a short numeric kinematics calculation (a ≈ 4.1 m/s^2, v ≈ 5.7 m/s), and a mass-independence justification. It needs choosing Newton's second law, resolving components, and linking dynamics to kinematics, with light reading and simple arithmetic. All content is in scope and the wording is unambiguous.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "candidateKey": "ap_physics_1-f01-k2",
+  "cellId": "ap_physics_1-f01",
+  "apSubjectCode": "ap_physics_1",
+  "kind": "frq_bundle",
+  "keywordCode": "2.7",
+  "unitCode": "2",
+  "skillPrimary": "2.B",
+  "structure": "frq_multipart",
+  "calculator": "allowed",
+  "archetype": "phf_mr_incline_slide",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "duplicate_gate_near_duplicate",
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Standard multi-part FRQ: draw FBD (gravity, normal, kinetic friction), derive a = g(sinθ − μcosθ) from Newton's second law with components, compute a ≈ 4.04 m/s² and v = sqrt(2ad) ≈ 5.7 m/s, then argue qualitatively that mass cancels so time is unchanged. Requires choosing the governing law, component resolution, symbolic derivation, and a proportional-reasoning justification. Arithmetic is light and wording is unambiguous. Appropriate for a full mock exam.",
+  "payload": {
+   "archetype": "phf_mr_incline_slide",
+   "template": "mr",
+   "topic": "2.7",
+   "extra_topics": [
+    "2.5",
+    "2.2",
+    "1.2"
+   ],
+   "skill": "2.B",
+   "representative_skill": "2.B",
+   "calculator": "allowed",
+   "title": "Block sliding down a rough incline",
+   "stimulus": {
+    "kind": "diagram",
+    "description": "A block of mass $m=2\\text{ kg}$ is released from rest on a rough incline that makes an angle $\\theta=30^\\circ$ with the horizontal. The coefficient of kinetic friction between the block and the incline is $\\mu=0.1$. The block slides a distance $d=4\\text{ m}$ down the incline.",
+    "data": {
+     "variant": "phys_scene",
+     "scene": {
+      "type": "incline",
+      "theta": 30,
+      "m": 2,
+      "mu": 0.1,
+      "kind": "block"
+     }
+    }
+   },
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "A block is released from rest on the rough incline shown in the figure and slides down it. On the dot below, which represents the block, draw and label the forces (not components) that act on the block while it slides down the incline. Each force must be represented by a distinct arrow starting on the dot.",
+     "points": 3,
+     "response_mode": "diagram",
+     "skill_codes": [
+      "1.A",
+      "1.C"
+     ],
+     "model_answer": "Three arrows from the dot: weight straight down, normal force perpendicular to the incline surface and pointing away from it, and kinetic friction pointing up the incline. The weight arrow is the longest and the friction arrow is shorter than the normal-force arrow.",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Draws and labels the three forces: weight, normal force, and kinetic friction (no extra force such as a force down the incline)",
+       "required_elements": [
+        "weight",
+        "normal force",
+        "friction"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "adds a force of motion down the incline"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "diagram"
+      },
+      {
+       "row_id": "A2",
+       "points": 1,
+       "criterion": "Arrow directions are correct: weight straight down, normal force perpendicular to the incline, friction up the incline",
+       "required_elements": [
+        "directions"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "draws the normal force vertical",
+        "draws friction down the incline"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "diagram"
+      },
+      {
+       "row_id": "A3",
+       "points": 1,
+       "criterion": "Relative lengths are consistent: the weight arrow is the longest and the friction arrow is shorter than the normal-force arrow",
+       "required_elements": [
+        "weight longest",
+        "friction shorter than normal"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "draws the normal force as long as the weight"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "diagram"
+      }
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "Derive an expression for the magnitude of the acceleration of the block down the incline in terms of $\\theta$, $\\mu$, and fundamental constants.",
+     "points": 3,
+     "response_mode": "derive",
+     "skill_codes": [
+      "2.A"
+     ],
+     "model_answer": "Perpendicular to the incline $N=mg\\cos\\theta$; along the incline $mg\\sin\\theta-\\mu N=ma$, so $a=g(\\sin\\theta-\\mu\\cos\\theta)$.",
+     "rubric_rows": [
+      {
+       "row_id": "B1",
+       "points": 1,
+       "criterion": "Applies Newton's second law perpendicular to the incline: $N=mg\\cos\\theta$",
+       "required_elements": [
+        "N = m g cos theta"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses N = m g"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "expression"
+      },
+      {
+       "row_id": "B2",
+       "points": 1,
+       "criterion": "Applies Newton's second law along the incline: $mg\\sin\\theta-\\mu N=ma$",
+       "required_elements": [
+        "m g sin theta - mu N = m a"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses the cosine for the component along the incline",
+        "adds the friction term"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "expression"
+      },
+      {
+       "row_id": "B3",
+       "points": 1,
+       "criterion": "Combines the equations to the correct expression $a=g(\\sin\\theta-\\mu\\cos\\theta)$",
+       "required_elements": [
+        "g (sin theta - mu cos theta)"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "leaves the mass in the final expression"
+       ],
+       "requires_row_id": "B2",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "expression"
+      }
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "The angle of the incline and the mass of the block are given in the figure, and the coefficient of kinetic friction between the block and the incline is $\\mu=0.1$. Calculate the speed of the block after it has slid the distance $d=4\\text{ m}$ down the incline.",
+     "points": 2,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "2.B"
+     ],
+     "model_answer": "$a=4.05\\text{ m/s}^2$ and $v=\\sqrt{2ad}=\\sqrt{2(4.05)(4)}\\approx 5.69\\text{ m/s}$.",
+     "rubric_rows": [
+      {
+       "row_id": "C1",
+       "points": 1,
+       "criterion": "Calculates the acceleration (about 4.05) from the expression in part B",
+       "required_elements": [
+        "4.05"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses the sine for both terms"
+       ],
+       "requires_row_id": "B3",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "numeric"
+      },
+      {
+       "row_id": "C2",
+       "points": 1,
+       "criterion": "Uses $v^2=2ad$ (or an energy equation) to find a speed of about 5.69 with units of meters per second",
+       "required_elements": [
+        "5.69",
+        "m/s"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "forgets the square root"
+       ],
+       "requires_row_id": "C1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": true,
+       "kind": "numeric"
+      }
+     ]
+    },
+    {
+     "label": "D",
+     "prompt": "The experiment is repeated on the same incline (same angle and same coefficient of kinetic friction) with a block of mass $4\\text{ kg}$. Does the time for the block to slide the distance $d$ increase, decrease, or stay the same? Justify your answer.",
+     "points": 2,
+     "response_mode": "explain",
+     "skill_codes": [
+      "3.B",
+      "3.C"
+     ],
+     "model_answer": "The time stays the same. The mass cancels in $a=g(\\sin\\theta-\\mu\\cos\\theta)$, so the acceleration is unchanged and the time $t=\\sqrt{2d/a}$ is the same.",
+     "rubric_rows": [
+      {
+       "row_id": "D1",
+       "points": 1,
+       "criterion": "States that the time stays the same",
+       "required_elements": [
+        "stays the same"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "states the heavier block takes less time"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "claim"
+      },
+      {
+       "row_id": "D2",
+       "points": 1,
+       "criterion": "Justifies that the mass cancels, so the acceleration (and the time) does not depend on the mass",
+       "required_elements": [
+        "mass cancels",
+        "same acceleration"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "argues only that heavier objects fall at the same rate without using the equation"
+       ],
+       "requires_row_id": "D1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "justification"
+      }
+     ]
+    }
+   ],
+   "total_points": 10,
+   "est_minutes": 22,
+   "facts": [
+    "th=30",
+    "mu=0.1",
+    "m=2.0",
+    "d=4.0",
+    "a=4.0513",
+    "v=5.693"
+   ],
+   "expected_values": [
+    {
+     "part": "C",
+     "quantity": "acceleration",
+     "value": 4.051295104291249,
+     "unit": "m/s^2",
+     "tolerance": 0.06
+    },
+    {
+     "part": "C",
+     "quantity": "speed",
+     "value": 5.693009822082691,
+     "unit": "m/s",
+     "tolerance": 0.0683161178649923
+    }
+   ],
+   "reference_note": "ALTON reference answer for self-review — not official AP scoring",
+   "blueprint": {
+    "id": "phf_mr_incline_slide",
+    "subject": "ap_physics_1",
+    "kind": "frq_bundle",
+    "concept": "Newton's second law along an incline with kinetic friction, a free-body diagram, and a justified prediction about the effect of mass",
+    "topic": "2.7",
+    "skill": "2.B",
+    "student_thinking": [
+     "Draw the free-body diagram of the block on the incline",
+     "Resolve the weight and write Newton's second law along and perpendicular to the incline",
+     "Predict whether the mass changes the time using the derived relationship"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the block slides down so kinetic friction acts up the incline",
+      "evidence": "the stimulus states the block is released from rest, slides down, and gives the kinetic friction coefficient"
+     }
+    ],
+    "material": {
+     "type": "diagram",
+     "must_include": [
+      "incline angle",
+      "mass",
+      "friction coefficient"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "sympy solves the two Newton equations; an RK4 integration of the motion along the incline recomputes the speed after the distance d",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "A",
+      "skills": [
+       "1.A",
+       "1.C"
+      ],
+      "topics": [
+       "2.7"
+      ],
+      "points": 3,
+      "accepted_answers": [
+       "Three arrows from the dot: weight straight down, normal force perpendicular to the incline surface and pointing away from it, and kinetic friction pointing up the incline. The weight arrow is the longest and the friction arrow is shorter than the normal-force arrow."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Draws and labels the three forces: weight, normal force, and kinetic friction (no extra force such as a force down the incline)",
+        "elements": [
+         "weight",
+         "normal force",
+         "friction"
+        ]
+       },
+       {
+        "row_id": "A2",
+        "points": 1,
+        "criterion": "Arrow directions are correct: weight straight down, normal force perpendicular to the incline, friction up the incline",
+        "elements": [
+         "directions"
+        ]
+       },
+       {
+        "row_id": "A3",
+        "points": 1,
+        "criterion": "Relative lengths are consistent: the weight arrow is the longest and the friction arrow is shorter than the normal-force arrow",
+        "elements": [
+         "weight longest",
+         "friction shorter than normal"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "B",
+      "skills": [
+       "2.A"
+      ],
+      "topics": [
+       "2.7"
+      ],
+      "points": 3,
+      "accepted_answers": [
+       "Perpendicular to the incline $N=mg\\cos\\theta$; along the incline $mg\\sin\\theta-\\mu N=ma$, so $a=g(\\sin\\theta-\\mu\\cos\\theta)$."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "B1",
+        "points": 1,
+        "criterion": "Applies Newton's second law perpendicular to the incline: $N=mg\\cos\\theta$",
+        "elements": [
+         "N = m g cos theta"
+        ]
+       },
+       {
+        "row_id": "B2",
+        "points": 1,
+        "criterion": "Applies Newton's second law along the incline: $mg\\sin\\theta-\\mu N=ma$",
+        "elements": [
+         "m g sin theta - mu N = m a"
+        ]
+       },
+       {
+        "row_id": "B3",
+        "points": 1,
+        "criterion": "Combines the equations to the correct expression $a=g(\\sin\\theta-\\mu\\cos\\theta)$",
+        "elements": [
+         "g (sin theta - mu cos theta)"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "C",
+      "skills": [
+       "2.B"
+      ],
+      "topics": [
+       "2.7"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "$a=4.05\\text{ m/s}^2$ and $v=\\sqrt{2ad}=\\sqrt{2(4.05)(4)}\\approx 5.69\\text{ m/s}$."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "C1",
+        "points": 1,
+        "criterion": "Calculates the acceleration (about 4.05) from the expression in part B",
+        "elements": [
+         "4.05"
+        ]
+       },
+       {
+        "row_id": "C2",
+        "points": 1,
+        "criterion": "Uses $v^2=2ad$ (or an energy equation) to find a speed of about 5.69 with units of meters per second",
+        "elements": [
+         "5.69",
+         "m/s"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "D",
+      "skills": [
+       "3.B",
+       "3.C"
+      ],
+      "topics": [
+       "2.7"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "The time stays the same. The mass cancels in $a=g(\\sin\\theta-\\mu\\cos\\theta)$, so the acceleration is unchanged and the time $t=\\sqrt{2d/a}$ is the same."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "D1",
+        "points": 1,
+        "criterion": "States that the time stays the same",
+        "elements": [
+         "stays the same"
+        ]
+       },
+       {
+        "row_id": "D2",
+        "points": 1,
+        "criterion": "Justifies that the mass cancels, so the acceleration (and the time) does not depend on the mass",
+        "elements": [
+         "mass cancels",
+         "same acceleration"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 10,
+    "judgment_demand": [
+     "representation_reading",
+     "law_selection",
+     "justification"
+    ]
+   },
+   "seed": 9802,
+   "pack_id": "phf_mr_incline_slide-s9802"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "phf_mr_incline_slide",
+   "facts": [
+    "th=30",
+    "mu=0.1",
+    "m=2.0",
+    "d=4.0",
+    "a=4.0513",
+    "v=5.693"
+   ],
+   "seed": 9802
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Standard incline-with-friction bundle. Keys are unique and consistent with the independent solver (a ≈ 4.05 m/s², v ≈ 5.69 m/s, time unchanged). Rubric rows are well split and the weighting matches the 10-point Mathematical Routines type. The scope is within Unit 2.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Within Unit 2 (kinetic friction, Newton's second law, free-body diagram). Part C targets 2.B, and the other parts carry their own skills."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All keys are unique. Row A3's length conditions hold for these numbers (mg > N > 0.1N). Part C's rows chain correctly from part B."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The stem and diagram data include the angle, mass, mu, and distance. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ with no options. Common errors are listed per rubric row."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Calculator load is light. The time and point grain are reasonable for the type."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part FRQ: draw FBD (gravity, normal, kinetic friction), derive a = g(sinθ − μcosθ) from Newton's second law with components, compute a ≈ 4.04 m/s² and v = sqrt(2ad) ≈ 5.7 m/s, then argue qualitatively that mass cancels so time is unchanged. Requires choosing the governing law, component resolution, symbolic derivation, and a proportional-reasoning justification. Arithmetic is light and wording is unambiguous. Appropriate for a full mock exam.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "candidateKey": "ap_physics_1-f02-k0",
+  "cellId": "ap_physics_1-f02",
+  "apSubjectCode": "ap_physics_1",
+  "kind": "frq_bundle",
+  "keywordCode": "7.2",
+  "unitCode": "7",
+  "skillPrimary": "3.A",
+  "structure": "frq_multipart",
+  "calculator": "allowed",
+  "archetype": "phf_lab_pendulum_g",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Standard multi-part lab-design and analysis item. The student must choose T = 2π√(L/g), linearize it as T² vs. L, plot a best-fit line from a table, and get g from the slope (4π²/slope). It involves one law, one linearization step, and a table-to-graph-to-slope translation. The arithmetic is modest (five squares, one slope, one division), and the wording and model assumptions are clear. This matches the full-mock free-response level and is not basic recall or advanced beyond scope.",
+  "payload": {
+   "archetype": "phf_lab_pendulum_g",
+   "template": "lab",
+   "topic": "7.2",
+   "extra_topics": [
+    "7.1"
+   ],
+   "skill": "3.A",
+   "representative_skill": "3.A",
+   "calculator": "allowed",
+   "title": "Experiment: gravitational field strength from a pendulum",
+   "stimulus": {
+    "kind": "table",
+    "description": "A student measures the period $T$ of a small, dense bob hanging from a light string of length $L$ (measured from the pivot to the center of the bob), swinging through a small angle. The student wants to determine the gravitational field strength $g$ at the lab location.",
+    "data": {
+     "x_label": "Length L (m)",
+     "y_label": "Period T (s)",
+     "rows": [
+      [
+       0.2,
+       0.902
+      ],
+      [
+       0.4,
+       1.282
+      ],
+      [
+       0.6,
+       1.578
+      ],
+      [
+       0.8,
+       1.773
+      ],
+      [
+       1,
+       2.017
+      ]
+     ],
+     "notes": [
+      "A student measures the period $T$ of a small, dense bob hanging from a light string of length $L$ (measured from the pivot to the center of the bob), swinging through a small angle. The student wants to determine the gravitational field strength $g$ at the lab location."
+     ]
+    }
+   },
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "Describe an experimental procedure to collect the data for the period as a function of length. Include the equipment and the measurements, how the independent variable is changed, and one way to reduce the uncertainty in the measured period.",
+     "points": 3,
+     "response_mode": "design",
+     "skill_codes": [
+      "3.A",
+      "2.B"
+     ],
+     "model_answer": "Use a meterstick to measure the length from the pivot to the center of the bob for each trial and a stopwatch to time 10 swings, released from the same small angle each time; change only the string length, and divide the time by 10; repeat the timing and average.",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Identifies the measured quantities and equipment: a meterstick or ruler for the length and a timing device for the period (both are needed)",
+       "required_elements": [
+        "a way to measure the length and a way to time the motion"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "omits how the period is measured"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "design"
+      },
+      {
+       "row_id": "A2",
+       "points": 1,
+       "criterion": "Changes only the length of the string while keeping the same bob and the same small release angle (both conditions are needed)",
+       "required_elements": [
+        "change only the length and keep the same small release angle"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "design"
+      },
+      {
+       "row_id": "A3",
+       "points": 1,
+       "criterion": "Reduces timing uncertainty by timing many swings and dividing, or by repeating the trials and averaging (either earns the point)",
+       "required_elements": [
+        "time many swings or repeat trials (either earns the point)"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "design"
+      }
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "Using the relationship between the period of a pendulum, its length, and the gravitational field strength from the reference information, identify the quantities that should be plotted on the vertical and horizontal axes so that the data produce a straight line whose slope can be used to find $g$.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "2.B",
+      "3.A"
+     ],
+     "model_answer": "Plot $T^2$ on the vertical axis against $L$ on the horizontal axis; the slope is $4\\pi^2/g$.",
+     "rubric_rows": [
+      {
+       "row_id": "B1",
+       "points": 1,
+       "criterion": "Identifies $T^2$ (vertical) versus $L$ (horizontal)",
+       "required_elements": [
+        "T squared versus L"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "plots T versus L"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "expression"
+      }
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "On a blank grid whose scale you choose, plot the data in a form that gives a straight line, and draw a best-fit line. Label the axes with quantities and units and use a scale that fills most of the grid.",
+     "points": 3,
+     "response_mode": "graph",
+     "skill_codes": [
+      "1.B",
+      "3.A"
+     ],
+     "model_answer": "Points $(L,T^2)$: (0.2, 0.814), (0.4, 1.643), (0.6, 2.490), (0.8, 3.143), (1, 4.068) with a best-fit line of slope about $4.00\\text{ s}^2/\\text{m}$.",
+     "rubric_rows": [
+      {
+       "row_id": "C1",
+       "points": 1,
+       "criterion": "Axes are labeled with quantities and units and the scale fills most of the grid",
+       "required_elements": [
+        "axis labels",
+        "units",
+        "scale"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "scale uses less than half the grid"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "graph"
+      },
+      {
+       "row_id": "C2",
+       "points": 1,
+       "criterion": "Plots the five points $(L, T^2)$ accurately",
+       "required_elements": [
+        "points plotted"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "graph"
+      },
+      {
+       "row_id": "C3",
+       "points": 1,
+       "criterion": "Draws a straight best-fit line through the trend of the points",
+       "required_elements": [
+        "best-fit line"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "connects the dots"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "graph"
+      }
+     ]
+    },
+    {
+     "label": "D",
+     "prompt": "Use the best-fit line to determine the gravitational field strength $g$. Show your work.",
+     "points": 3,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "2.B",
+      "2.D"
+     ],
+     "model_answer": "Slope $\\approx 4.00\\text{ s}^2/\\text{m}$, so $g=4\\pi^2/\\text{slope}\\approx 9.9\\text{ N/kg}$.",
+     "rubric_rows": [
+      {
+       "row_id": "D1",
+       "points": 1,
+       "criterion": "Calculates the slope of the best-fit line using two points on the line (about 4.00 s^2/m; accept any value within 5 percent)",
+       "required_elements": [
+        "4.00"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses data points rather than points on the line"
+       ],
+       "requires_row_id": "C3",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "numeric"
+      },
+      {
+       "row_id": "D2",
+       "points": 1,
+       "criterion": "Relates the slope to the gravitational field strength: slope $=4\\pi^2/g$",
+       "required_elements": [
+        "slope = 4 pi^2 / g"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses slope = g"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "expression"
+      },
+      {
+       "row_id": "D3",
+       "points": 1,
+       "criterion": "Calculates $g$ (about 9.9; accept any value within 8 percent) with units of newtons per kilogram or meters per second squared",
+       "required_elements": [
+        "9.9",
+        "N/kg or m/s^2"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "a value of g consistent with the student's own slope from D1, $g=4\\pi^2/\\text{slope}$"
+       ],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": true,
+       "kind": "numeric"
+      }
+     ]
+    }
+   ],
+   "total_points": 10,
+   "est_minutes": 27,
+   "facts": [
+    "gtrue=9.8",
+    "slope=4.0047",
+    "g_est=9.86",
+    "Ts=[0.902, 1.282, 1.578, 1.773, 2.017]"
+   ],
+   "expected_values": [
+    {
+     "part": "D",
+     "quantity": "slope",
+     "value": 4.004700000000001,
+     "unit": "s^2/m",
+     "tolerance": 0.20023500000000005
+    },
+    {
+     "part": "D",
+     "quantity": "gravitational field strength",
+     "value": 9.858021226148631,
+     "unit": "N/kg",
+     "tolerance": 0.7886416980918906
+    }
+   ],
+   "reference_note": "ALTON reference answer for self-review — not official AP scoring",
+   "blueprint": {
+    "id": "phf_lab_pendulum_g",
+    "subject": "ap_physics_1",
+    "kind": "frq_bundle",
+    "concept": "Designing an experiment and analyzing linearized data to extract the gravitational field strength",
+    "topic": "7.2",
+    "skill": "3.A",
+    "student_thinking": [
+     "Describe the measurements and how uncertainty is reduced",
+     "Linearize the pendulum relationship and plot the data",
+     "Use the slope to determine g"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the generated periods follow $T=2\\pi\\sqrt{L/g}$ with a small random error so the best-fit slope is within a few percent of $4\\pi^2/g$",
+      "evidence": "the code rejects a seed whose fitted g differs from 9.8 by more than four percent"
+     }
+    ],
+    "material": {
+     "type": "table",
+     "must_include": [
+      "length",
+      "period"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "the slope is recomputed from the normal equations with numpy linalg.solve and compared with polyfit; the fitted g is compared with the reference value",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "A",
+      "skills": [
+       "3.A",
+       "2.B"
+      ],
+      "topics": [
+       "7.2"
+      ],
+      "points": 3,
+      "accepted_answers": [
+       "Use a meterstick to measure the length from the pivot to the center of the bob for each trial and a stopwatch to time 10 swings, released from the same small angle each time; change only the string length, and divide the time by 10; repeat the timing and average."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Identifies the measured quantities and equipment: a meterstick or ruler for the length and a timing device for the period (both are needed)",
+        "elements": [
+         "a way to measure the length and a way to time the motion"
+        ]
+       },
+       {
+        "row_id": "A2",
+        "points": 1,
+        "criterion": "Changes only the length of the string while keeping the same bob and the same small release angle (both conditions are needed)",
+        "elements": [
+         "change only the length and keep the same small release angle"
+        ]
+       },
+       {
+        "row_id": "A3",
+        "points": 1,
+        "criterion": "Reduces timing uncertainty by timing many swings and dividing, or by repeating the trials and averaging (either earns the point)",
+        "elements": [
+         "time many swings or repeat trials (either earns the point)"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "B",
+      "skills": [
+       "2.B",
+       "3.A"
+      ],
+      "topics": [
+       "7.2"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "Plot $T^2$ on the vertical axis against $L$ on the horizontal axis; the slope is $4\\pi^2/g$."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "B1",
+        "points": 1,
+        "criterion": "Identifies $T^2$ (vertical) versus $L$ (horizontal)",
+        "elements": [
+         "T squared versus L"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "C",
+      "skills": [
+       "1.B",
+       "3.A"
+      ],
+      "topics": [
+       "7.2"
+      ],
+      "points": 3,
+      "accepted_answers": [
+       "Points $(L,T^2)$: (0.2, 0.814), (0.4, 1.643), (0.6, 2.490), (0.8, 3.143), (1, 4.068) with a best-fit line of slope about $4.00\\text{ s}^2/\\text{m}$."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "C1",
+        "points": 1,
+        "criterion": "Axes are labeled with quantities and units and the scale fills most of the grid",
+        "elements": [
+         "axis labels",
+         "units",
+         "scale"
+        ]
+       },
+       {
+        "row_id": "C2",
+        "points": 1,
+        "criterion": "Plots the five points $(L, T^2)$ accurately",
+        "elements": [
+         "points plotted"
+        ]
+       },
+       {
+        "row_id": "C3",
+        "points": 1,
+        "criterion": "Draws a straight best-fit line through the trend of the points",
+        "elements": [
+         "best-fit line"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "D",
+      "skills": [
+       "2.B",
+       "2.D"
+      ],
+      "topics": [
+       "7.2"
+      ],
+      "points": 3,
+      "accepted_answers": [
+       "Slope $\\approx 4.00\\text{ s}^2/\\text{m}$, so $g=4\\pi^2/\\text{slope}\\approx 9.9\\text{ N/kg}$."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "D1",
+        "points": 1,
+        "criterion": "Calculates the slope of the best-fit line using two points on the line (about 4.00 s^2/m; accept any value within 5 percent)",
+        "elements": [
+         "4.00"
+        ]
+       },
+       {
+        "row_id": "D2",
+        "points": 1,
+        "criterion": "Relates the slope to the gravitational field strength: slope $=4\\pi^2/g$",
+        "elements": [
+         "slope = 4 pi^2 / g"
+        ]
+       },
+       {
+        "row_id": "D3",
+        "points": 1,
+        "criterion": "Calculates $g$ (about 9.9; accept any value within 8 percent) with units of newtons per kilogram or meters per second squared",
+        "elements": [
+         "9.9",
+         "N/kg or m/s^2"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 10,
+    "judgment_demand": [
+     "representation_reading",
+     "quantitative_comparison",
+     "design"
+    ]
+   },
+   "seed": 9800,
+   "pack_id": "phf_lab_pendulum_g-s9800"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "phf_lab_pendulum_g",
+   "facts": [
+    "gtrue=9.8",
+    "slope=4.0047",
+    "g_est=9.86",
+    "Ts=[0.902, 1.282, 1.578, 1.773, 2.017]"
+   ],
+   "seed": 9800
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The pendulum g-from-slope experimental design bundle passes all five criteria. It totals 10 points across parts of 3, 1, 3 and 3, and the independent solver reproduced the model answers.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part lab-design and analysis item. The student must choose T = 2π√(L/g), linearize it as T² vs. L, plot a best-fit line from a table, and get g from the slope (4π²/slope). It involves one law, one linearization step, and a table-to-graph-to-slope translation. The arithmetic is modest (five squares, one slope, one division), and the wording and model assumptions are clear. This matches the full-mock free-response level and is not basic recall or advanced beyond scope.",
+   "reading_load": "medium",
+   "computation_load": "medium",
+   "reasoning_steps": 8,
+   "representation_changes": 4,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 900
+  }
+ },
+ {
+  "candidateKey": "ap_physics_1-f02-k1",
+  "cellId": "ap_physics_1-f02",
+  "apSubjectCode": "ap_physics_1",
+  "kind": "frq_bundle",
+  "keywordCode": "7.2",
+  "unitCode": "7",
+  "skillPrimary": "3.A",
+  "structure": "frq_multipart",
+  "calculator": "allowed",
+  "archetype": "phf_lab_pendulum_g",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "duplicate_gate_near_duplicate",
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "This is a standard AP Physics 1 lab-design free-response item with four parts, worth 10 points in total. Students must design a procedure, choose the linearizing variables (T^2 versus L), plot the data and a best-fit line, and use the slope to find g, using g = 4π²/slope. The concepts are in scope (pendulum period). The arithmetic is short and uses rounded values: squaring five periods, then one slope calculation. The reasoning is multi-step but routine for a full mock. The wording is clear, and the stimulus is a simple table. No out-of-scope content is needed. The data are consistent with g ≈ 9.8 m/s², so the item has no hidden traps. It is somewhat reading-heavy because of the four parts, but that load is typical of AP experimental-design questions.",
+  "payload": {
+   "archetype": "phf_lab_pendulum_g",
+   "template": "lab",
+   "topic": "7.2",
+   "extra_topics": [
+    "7.1"
+   ],
+   "skill": "3.A",
+   "representative_skill": "3.A",
+   "calculator": "allowed",
+   "title": "Experiment: gravitational field strength from a pendulum",
+   "stimulus": {
+    "kind": "table",
+    "description": "A student measures the period $T$ of a small, dense bob hanging from a light string of length $L$ (measured from the pivot to the center of the bob), swinging through a small angle. The student wants to determine the gravitational field strength $g$ at the lab location.",
+    "data": {
+     "x_label": "Length L (m)",
+     "y_label": "Period T (s)",
+     "rows": [
+      [
+       0.2,
+       0.89
+      ],
+      [
+       0.4,
+       1.275
+      ],
+      [
+       0.6,
+       1.575
+      ],
+      [
+       0.8,
+       1.81
+      ],
+      [
+       1,
+       1.995
+      ]
+     ],
+     "notes": [
+      "A student measures the period $T$ of a small, dense bob hanging from a light string of length $L$ (measured from the pivot to the center of the bob), swinging through a small angle. The student wants to determine the gravitational field strength $g$ at the lab location."
+     ]
+    }
+   },
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "Describe an experimental procedure to collect the data for the period as a function of length. Include the equipment and the measurements, how the independent variable is changed, and one way to reduce the uncertainty in the measured period.",
+     "points": 3,
+     "response_mode": "design",
+     "skill_codes": [
+      "3.A",
+      "2.B"
+     ],
+     "model_answer": "Use a meterstick to measure the length from the pivot to the center of the bob for each trial and a stopwatch to time 10 swings, released from the same small angle each time; change only the string length, and divide the time by 10; repeat the timing and average.",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Identifies the measured quantities and equipment: a meterstick or ruler for the length and a timing device for the period (both are needed)",
+       "required_elements": [
+        "a way to measure the length and a way to time the motion"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "omits how the period is measured"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "design"
+      },
+      {
+       "row_id": "A2",
+       "points": 1,
+       "criterion": "Changes only the length of the string while keeping the same bob and the same small release angle (both conditions are needed)",
+       "required_elements": [
+        "change only the length and keep the same small release angle"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "design"
+      },
+      {
+       "row_id": "A3",
+       "points": 1,
+       "criterion": "Reduces timing uncertainty by timing many swings and dividing, or by repeating the trials and averaging (either earns the point)",
+       "required_elements": [
+        "time many swings or repeat trials (either earns the point)"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "design"
+      }
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "Using the relationship between the period of a pendulum, its length, and the gravitational field strength from the reference information, identify the quantities that should be plotted on the vertical and horizontal axes so that the data produce a straight line whose slope can be used to find $g$.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "2.B",
+      "3.A"
+     ],
+     "model_answer": "Plot $T^2$ on the vertical axis against $L$ on the horizontal axis; the slope is $4\\pi^2/g$.",
+     "rubric_rows": [
+      {
+       "row_id": "B1",
+       "points": 1,
+       "criterion": "Identifies $T^2$ (vertical) versus $L$ (horizontal)",
+       "required_elements": [
+        "T squared versus L"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "plots T versus L"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "expression"
+      }
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "On a blank grid whose scale you choose, plot the data in a form that gives a straight line, and draw a best-fit line. Label the axes with quantities and units and use a scale that fills most of the grid.",
+     "points": 3,
+     "response_mode": "graph",
+     "skill_codes": [
+      "1.B",
+      "3.A"
+     ],
+     "model_answer": "Points $(L,T^2)$: (0.2, 0.792), (0.4, 1.626), (0.6, 2.481), (0.8, 3.276), (1, 3.980) with a best-fit line of slope about $4.01\\text{ s}^2/\\text{m}$.",
+     "rubric_rows": [
+      {
+       "row_id": "C1",
+       "points": 1,
+       "criterion": "Axes are labeled with quantities and units and the scale fills most of the grid",
+       "required_elements": [
+        "axis labels",
+        "units",
+        "scale"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "scale uses less than half the grid"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "graph"
+      },
+      {
+       "row_id": "C2",
+       "points": 1,
+       "criterion": "Plots the five points $(L, T^2)$ accurately",
+       "required_elements": [
+        "points plotted"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "graph"
+      },
+      {
+       "row_id": "C3",
+       "points": 1,
+       "criterion": "Draws a straight best-fit line through the trend of the points",
+       "required_elements": [
+        "best-fit line"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "connects the dots"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "graph"
+      }
+     ]
+    },
+    {
+     "label": "D",
+     "prompt": "Use the best-fit line to determine the gravitational field strength $g$. Show your work.",
+     "points": 3,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "2.B",
+      "2.D"
+     ],
+     "model_answer": "Slope $\\approx 4.01\\text{ s}^2/\\text{m}$, so $g=4\\pi^2/\\text{slope}\\approx 9.8\\text{ N/kg}$.",
+     "rubric_rows": [
+      {
+       "row_id": "D1",
+       "points": 1,
+       "criterion": "Calculates the slope of the best-fit line using two points on the line (about 4.01 s^2/m; accept any value within 5 percent)",
+       "required_elements": [
+        "4.01"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses data points rather than points on the line"
+       ],
+       "requires_row_id": "C3",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "numeric"
+      },
+      {
+       "row_id": "D2",
+       "points": 1,
+       "criterion": "Relates the slope to the gravitational field strength: slope $=4\\pi^2/g$",
+       "required_elements": [
+        "slope = 4 pi^2 / g"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses slope = g"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "expression"
+      },
+      {
+       "row_id": "D3",
+       "points": 1,
+       "criterion": "Calculates $g$ (about 9.8; accept any value within 8 percent) with units of newtons per kilogram or meters per second squared",
+       "required_elements": [
+        "9.8",
+        "N/kg or m/s^2"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "a value of g consistent with the student's own slope from D1, $g=4\\pi^2/\\text{slope}$"
+       ],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": true,
+       "kind": "numeric"
+      }
+     ]
+    }
+   ],
+   "total_points": 10,
+   "est_minutes": 27,
+   "facts": [
+    "gtrue=9.8",
+    "slope=4.0132",
+    "g_est=9.84",
+    "Ts=[0.89, 1.275, 1.575, 1.81, 1.995]"
+   ],
+   "expected_values": [
+    {
+     "part": "D",
+     "quantity": "slope",
+     "value": 4.01315,
+     "unit": "s^2/m",
+     "tolerance": 0.20065750000000004
+    },
+    {
+     "part": "D",
+     "quantity": "gravitational field strength",
+     "value": 9.83726439439279,
+     "unit": "N/kg",
+     "tolerance": 0.7869811515514232
+    }
+   ],
+   "reference_note": "ALTON reference answer for self-review — not official AP scoring",
+   "blueprint": {
+    "id": "phf_lab_pendulum_g",
+    "subject": "ap_physics_1",
+    "kind": "frq_bundle",
+    "concept": "Designing an experiment and analyzing linearized data to extract the gravitational field strength",
+    "topic": "7.2",
+    "skill": "3.A",
+    "student_thinking": [
+     "Describe the measurements and how uncertainty is reduced",
+     "Linearize the pendulum relationship and plot the data",
+     "Use the slope to determine g"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the generated periods follow $T=2\\pi\\sqrt{L/g}$ with a small random error so the best-fit slope is within a few percent of $4\\pi^2/g$",
+      "evidence": "the code rejects a seed whose fitted g differs from 9.8 by more than four percent"
+     }
+    ],
+    "material": {
+     "type": "table",
+     "must_include": [
+      "length",
+      "period"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "the slope is recomputed from the normal equations with numpy linalg.solve and compared with polyfit; the fitted g is compared with the reference value",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "A",
+      "skills": [
+       "3.A",
+       "2.B"
+      ],
+      "topics": [
+       "7.2"
+      ],
+      "points": 3,
+      "accepted_answers": [
+       "Use a meterstick to measure the length from the pivot to the center of the bob for each trial and a stopwatch to time 10 swings, released from the same small angle each time; change only the string length, and divide the time by 10; repeat the timing and average."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Identifies the measured quantities and equipment: a meterstick or ruler for the length and a timing device for the period (both are needed)",
+        "elements": [
+         "a way to measure the length and a way to time the motion"
+        ]
+       },
+       {
+        "row_id": "A2",
+        "points": 1,
+        "criterion": "Changes only the length of the string while keeping the same bob and the same small release angle (both conditions are needed)",
+        "elements": [
+         "change only the length and keep the same small release angle"
+        ]
+       },
+       {
+        "row_id": "A3",
+        "points": 1,
+        "criterion": "Reduces timing uncertainty by timing many swings and dividing, or by repeating the trials and averaging (either earns the point)",
+        "elements": [
+         "time many swings or repeat trials (either earns the point)"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "B",
+      "skills": [
+       "2.B",
+       "3.A"
+      ],
+      "topics": [
+       "7.2"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "Plot $T^2$ on the vertical axis against $L$ on the horizontal axis; the slope is $4\\pi^2/g$."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "B1",
+        "points": 1,
+        "criterion": "Identifies $T^2$ (vertical) versus $L$ (horizontal)",
+        "elements": [
+         "T squared versus L"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "C",
+      "skills": [
+       "1.B",
+       "3.A"
+      ],
+      "topics": [
+       "7.2"
+      ],
+      "points": 3,
+      "accepted_answers": [
+       "Points $(L,T^2)$: (0.2, 0.792), (0.4, 1.626), (0.6, 2.481), (0.8, 3.276), (1, 3.980) with a best-fit line of slope about $4.01\\text{ s}^2/\\text{m}$."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "C1",
+        "points": 1,
+        "criterion": "Axes are labeled with quantities and units and the scale fills most of the grid",
+        "elements": [
+         "axis labels",
+         "units",
+         "scale"
+        ]
+       },
+       {
+        "row_id": "C2",
+        "points": 1,
+        "criterion": "Plots the five points $(L, T^2)$ accurately",
+        "elements": [
+         "points plotted"
+        ]
+       },
+       {
+        "row_id": "C3",
+        "points": 1,
+        "criterion": "Draws a straight best-fit line through the trend of the points",
+        "elements": [
+         "best-fit line"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "D",
+      "skills": [
+       "2.B",
+       "2.D"
+      ],
+      "topics": [
+       "7.2"
+      ],
+      "points": 3,
+      "accepted_answers": [
+       "Slope $\\approx 4.01\\text{ s}^2/\\text{m}$, so $g=4\\pi^2/\\text{slope}\\approx 9.8\\text{ N/kg}$."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "D1",
+        "points": 1,
+        "criterion": "Calculates the slope of the best-fit line using two points on the line (about 4.01 s^2/m; accept any value within 5 percent)",
+        "elements": [
+         "4.01"
+        ]
+       },
+       {
+        "row_id": "D2",
+        "points": 1,
+        "criterion": "Relates the slope to the gravitational field strength: slope $=4\\pi^2/g$",
+        "elements": [
+         "slope = 4 pi^2 / g"
+        ]
+       },
+       {
+        "row_id": "D3",
+        "points": 1,
+        "criterion": "Calculates $g$ (about 9.8; accept any value within 8 percent) with units of newtons per kilogram or meters per second squared",
+        "elements": [
+         "9.8",
+         "N/kg or m/s^2"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 10,
+    "judgment_demand": [
+     "representation_reading",
+     "quantitative_comparison",
+     "design"
+    ]
+   },
+   "seed": 9801,
+   "pack_id": "phf_lab_pendulum_g-s9801"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "phf_lab_pendulum_g",
+   "facts": [
+    "gtrue=9.8",
+    "slope=4.0132",
+    "g_est=9.84",
+    "Ts=[0.89, 1.275, 1.575, 1.81, 1.995]"
+   ],
+   "seed": 9801
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Pendulum-g lab bundle (10 points) fits topic 7.2 and skill 3.A. The data table is complete, the rubric rows are consistent and sum to 10, and the solver matched the key. Minor: row A2 mentions \"same bob\" but the model answer does not.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Design, linearization, graphing and slope analysis all fit the pendulum topic. No out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key values are consistent: slope 4.01 and g about 9.8. The tolerances are reasonable, and D3 allows a value consistent with the student's own slope."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table has labels, units and five rows. The wording is clear and the small-angle assumption is stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response bundle with no options. The rubric lists common errors such as plotting T versus L and using slope = g."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is heavy but typical of an AP lab free response. A calculator is appropriate for the slope calculation."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "This is a standard AP Physics 1 lab-design free-response item with four parts, worth 10 points in total. Students must design a procedure, choose the linearizing variables (T^2 versus L), plot the data and a best-fit line, and use the slope to find g, using g = 4π²/slope. The concepts are in scope (pendulum period). The arithmetic is short and uses rounded values: squaring five periods, then one slope calculation. The reasoning is multi-step but routine for a full mock. The wording is clear, and the stimulus is a simple table. No out-of-scope content is needed. The data are consistent with g ≈ 9.8 m/s², so the item has no hidden traps. It is somewhat reading-heavy because of the four parts, but that load is typical of AP experimental-design questions.",
+   "reading_load": "medium",
+   "computation_load": "medium",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 840
+  }
+ },
+ {
+  "candidateKey": "ap_physics_1-f02-k2",
+  "cellId": "ap_physics_1-f02",
+  "apSubjectCode": "ap_physics_1",
+  "kind": "frq_bundle",
+  "keywordCode": "7.2",
+  "unitCode": "7",
+  "skillPrimary": "3.A",
+  "structure": "frq_multipart",
+  "calculator": "allowed",
+  "archetype": "phf_lab_pendulum_g",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "criterion_failed_key_scoring",
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "This is a standard AP Physics 1 multi-part lab free-response item on a pendulum, with an experimental design part, a linearization part, a graphing part and a slope-analysis part. It is in scope (7.2 and 7.1) and relies on the allowed levers. The student chooses T = 2π√(L/g), linearizes to T² vs L, translates a table into a graph, and interprets the slope as 4π²/g. No unfair sources: the data are rounded, the wording is unambiguous, there is no calculus, and no out-of-scope content. The task is typical of an exam-prep full-mock FRQ rather than a basic recall question, and is not beyond exam level.",
+  "payload": {
+   "archetype": "phf_lab_pendulum_g",
+   "template": "lab",
+   "topic": "7.2",
+   "extra_topics": [
+    "7.1"
+   ],
+   "skill": "3.A",
+   "representative_skill": "3.A",
+   "calculator": "allowed",
+   "title": "Experiment: gravitational field strength from a pendulum",
+   "stimulus": {
+    "kind": "table",
+    "description": "A student measures the period $T$ of a small, dense bob hanging from a light string of length $L$ (measured from the pivot to the center of the bob), swinging through a small angle. The student wants to determine the gravitational field strength $g$ at the lab location.",
+    "data": {
+     "x_label": "Length L (m)",
+     "y_label": "Period T (s)",
+     "rows": [
+      [
+       0.2,
+       0.889
+      ],
+      [
+       0.4,
+       1.271
+      ],
+      [
+       0.6,
+       1.532
+      ],
+      [
+       0.8,
+       1.78
+      ],
+      [
+       1,
+       2.02
+      ]
+     ],
+     "notes": [
+      "A student measures the period $T$ of a small, dense bob hanging from a light string of length $L$ (measured from the pivot to the center of the bob), swinging through a small angle. The student wants to determine the gravitational field strength $g$ at the lab location."
+     ]
+    }
+   },
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "Describe an experimental procedure to collect the data for the period as a function of length. Include the equipment and the measurements, how the independent variable is changed, and one way to reduce the uncertainty in the measured period.",
+     "points": 3,
+     "response_mode": "design",
+     "skill_codes": [
+      "3.A",
+      "2.B"
+     ],
+     "model_answer": "Use a meterstick to measure the length from the pivot to the center of the bob for each trial and a stopwatch to time 10 swings, released from the same small angle each time; change only the string length, and divide the time by 10; repeat the timing and average.",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Identifies the measured quantities and equipment: a meterstick or ruler for the length and a timing device for the period (both are needed)",
+       "required_elements": [
+        "a way to measure the length and a way to time the motion"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "omits how the period is measured"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "design"
+      },
+      {
+       "row_id": "A2",
+       "points": 1,
+       "criterion": "Changes only the length of the string while keeping the same bob and the same small release angle (both conditions are needed)",
+       "required_elements": [
+        "change only the length and keep the same small release angle"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "design"
+      },
+      {
+       "row_id": "A3",
+       "points": 1,
+       "criterion": "Reduces timing uncertainty by timing many swings and dividing, or by repeating the trials and averaging (either earns the point)",
+       "required_elements": [
+        "time many swings or repeat trials (either earns the point)"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "design"
+      }
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "Using the relationship between the period of a pendulum, its length, and the gravitational field strength from the reference information, identify the quantities that should be plotted on the vertical and horizontal axes so that the data produce a straight line whose slope can be used to find $g$.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "2.B",
+      "3.A"
+     ],
+     "model_answer": "Plot $T^2$ on the vertical axis against $L$ on the horizontal axis; the slope is $4\\pi^2/g$.",
+     "rubric_rows": [
+      {
+       "row_id": "B1",
+       "points": 1,
+       "criterion": "Identifies $T^2$ (vertical) versus $L$ (horizontal)",
+       "required_elements": [
+        "T squared versus L"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "plots T versus L"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "expression"
+      }
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "On a blank grid whose scale you choose, plot the data in a form that gives a straight line, and draw a best-fit line. Label the axes with quantities and units and use a scale that fills most of the grid.",
+     "points": 3,
+     "response_mode": "graph",
+     "skill_codes": [
+      "1.B",
+      "3.A"
+     ],
+     "model_answer": "Points $(L,T^2)$: (0.2, 0.790), (0.4, 1.615), (0.6, 2.347), (0.8, 3.168), (1, 4.080) with a best-fit line of slope about $4.07\\text{ s}^2/\\text{m}$.",
+     "rubric_rows": [
+      {
+       "row_id": "C1",
+       "points": 1,
+       "criterion": "Axes are labeled with quantities and units and the scale fills most of the grid",
+       "required_elements": [
+        "axis labels",
+        "units",
+        "scale"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "scale uses less than half the grid"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "graph"
+      },
+      {
+       "row_id": "C2",
+       "points": 1,
+       "criterion": "Plots the five points $(L, T^2)$ accurately",
+       "required_elements": [
+        "points plotted"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "graph"
+      },
+      {
+       "row_id": "C3",
+       "points": 1,
+       "criterion": "Draws a straight best-fit line through the trend of the points",
+       "required_elements": [
+        "best-fit line"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "connects the dots"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "graph"
+      }
+     ]
+    },
+    {
+     "label": "D",
+     "prompt": "Use the best-fit line to determine the gravitational field strength $g$. Show your work.",
+     "points": 3,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "2.B",
+      "2.D"
+     ],
+     "model_answer": "Slope $\\approx 4.07\\text{ s}^2/\\text{m}$, so $g=4\\pi^2/\\text{slope}\\approx 9.7\\text{ N/kg}$.",
+     "rubric_rows": [
+      {
+       "row_id": "D1",
+       "points": 1,
+       "criterion": "Calculates the slope of the best-fit line using two points on the line (about 4.07 s^2/m; accept any value within 5 percent)",
+       "required_elements": [
+        "4.07"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses data points rather than points on the line"
+       ],
+       "requires_row_id": "C3",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "numeric"
+      },
+      {
+       "row_id": "D2",
+       "points": 1,
+       "criterion": "Relates the slope to the gravitational field strength: slope $=4\\pi^2/g$",
+       "required_elements": [
+        "slope = 4 pi^2 / g"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses slope = g"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "expression"
+      },
+      {
+       "row_id": "D3",
+       "points": 1,
+       "criterion": "Calculates $g$ (about 9.7; accept any value within 8 percent) with units of newtons per kilogram or meters per second squared",
+       "required_elements": [
+        "9.7",
+        "N/kg or m/s^2"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "a value of g consistent with the student's own slope from D1, $g=4\\pi^2/\\text{slope}$"
+       ],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": true,
+       "kind": "numeric"
+      }
+     ]
+    }
+   ],
+   "total_points": 10,
+   "est_minutes": 27,
+   "facts": [
+    "gtrue=9.8",
+    "slope=4.0666",
+    "g_est=9.71",
+    "Ts=[0.889, 1.271, 1.532, 1.78, 2.02]"
+   ],
+   "expected_values": [
+    {
+     "part": "D",
+     "quantity": "slope",
+     "value": 4.0666,
+     "unit": "s^2/m",
+     "tolerance": 0.20333
+    },
+    {
+     "part": "D",
+     "quantity": "gravitational field strength",
+     "value": 9.707966754624854,
+     "unit": "N/kg",
+     "tolerance": 0.7766373403699883
+    }
+   ],
+   "reference_note": "ALTON reference answer for self-review — not official AP scoring",
+   "blueprint": {
+    "id": "phf_lab_pendulum_g",
+    "subject": "ap_physics_1",
+    "kind": "frq_bundle",
+    "concept": "Designing an experiment and analyzing linearized data to extract the gravitational field strength",
+    "topic": "7.2",
+    "skill": "3.A",
+    "student_thinking": [
+     "Describe the measurements and how uncertainty is reduced",
+     "Linearize the pendulum relationship and plot the data",
+     "Use the slope to determine g"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the generated periods follow $T=2\\pi\\sqrt{L/g}$ with a small random error so the best-fit slope is within a few percent of $4\\pi^2/g$",
+      "evidence": "the code rejects a seed whose fitted g differs from 9.8 by more than four percent"
+     }
+    ],
+    "material": {
+     "type": "table",
+     "must_include": [
+      "length",
+      "period"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "the slope is recomputed from the normal equations with numpy linalg.solve and compared with polyfit; the fitted g is compared with the reference value",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "A",
+      "skills": [
+       "3.A",
+       "2.B"
+      ],
+      "topics": [
+       "7.2"
+      ],
+      "points": 3,
+      "accepted_answers": [
+       "Use a meterstick to measure the length from the pivot to the center of the bob for each trial and a stopwatch to time 10 swings, released from the same small angle each time; change only the string length, and divide the time by 10; repeat the timing and average."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Identifies the measured quantities and equipment: a meterstick or ruler for the length and a timing device for the period (both are needed)",
+        "elements": [
+         "a way to measure the length and a way to time the motion"
+        ]
+       },
+       {
+        "row_id": "A2",
+        "points": 1,
+        "criterion": "Changes only the length of the string while keeping the same bob and the same small release angle (both conditions are needed)",
+        "elements": [
+         "change only the length and keep the same small release angle"
+        ]
+       },
+       {
+        "row_id": "A3",
+        "points": 1,
+        "criterion": "Reduces timing uncertainty by timing many swings and dividing, or by repeating the trials and averaging (either earns the point)",
+        "elements": [
+         "time many swings or repeat trials (either earns the point)"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "B",
+      "skills": [
+       "2.B",
+       "3.A"
+      ],
+      "topics": [
+       "7.2"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "Plot $T^2$ on the vertical axis against $L$ on the horizontal axis; the slope is $4\\pi^2/g$."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "B1",
+        "points": 1,
+        "criterion": "Identifies $T^2$ (vertical) versus $L$ (horizontal)",
+        "elements": [
+         "T squared versus L"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "C",
+      "skills": [
+       "1.B",
+       "3.A"
+      ],
+      "topics": [
+       "7.2"
+      ],
+      "points": 3,
+      "accepted_answers": [
+       "Points $(L,T^2)$: (0.2, 0.790), (0.4, 1.615), (0.6, 2.347), (0.8, 3.168), (1, 4.080) with a best-fit line of slope about $4.07\\text{ s}^2/\\text{m}$."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "C1",
+        "points": 1,
+        "criterion": "Axes are labeled with quantities and units and the scale fills most of the grid",
+        "elements": [
+         "axis labels",
+         "units",
+         "scale"
+        ]
+       },
+       {
+        "row_id": "C2",
+        "points": 1,
+        "criterion": "Plots the five points $(L, T^2)$ accurately",
+        "elements": [
+         "points plotted"
+        ]
+       },
+       {
+        "row_id": "C3",
+        "points": 1,
+        "criterion": "Draws a straight best-fit line through the trend of the points",
+        "elements": [
+         "best-fit line"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "D",
+      "skills": [
+       "2.B",
+       "2.D"
+      ],
+      "topics": [
+       "7.2"
+      ],
+      "points": 3,
+      "accepted_answers": [
+       "Slope $\\approx 4.07\\text{ s}^2/\\text{m}$, so $g=4\\pi^2/\\text{slope}\\approx 9.7\\text{ N/kg}$."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "D1",
+        "points": 1,
+        "criterion": "Calculates the slope of the best-fit line using two points on the line (about 4.07 s^2/m; accept any value within 5 percent)",
+        "elements": [
+         "4.07"
+        ]
+       },
+       {
+        "row_id": "D2",
+        "points": 1,
+        "criterion": "Relates the slope to the gravitational field strength: slope $=4\\pi^2/g$",
+        "elements": [
+         "slope = 4 pi^2 / g"
+        ]
+       },
+       {
+        "row_id": "D3",
+        "points": 1,
+        "criterion": "Calculates $g$ (about 9.7; accept any value within 8 percent) with units of newtons per kilogram or meters per second squared",
+        "elements": [
+         "9.7",
+         "N/kg or m/s^2"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 10,
+    "judgment_demand": [
+     "representation_reading",
+     "quantitative_comparison",
+     "design"
+    ]
+   },
+   "seed": 9802,
+   "pack_id": "phf_lab_pendulum_g-s9802"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "phf_lab_pendulum_g",
+   "facts": [
+    "gtrue=9.8",
+    "slope=4.0666",
+    "g_est=9.71",
+    "Ts=[0.889, 1.271, 1.532, 1.78, 2.02]"
+   ],
+   "seed": 9802
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is mostly sound, but D1 depends on C3, so a correct slope can lose its point because of a poorly drawn line. This is a scoring inconsistency. The key and scoring criterion fails on that basis.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parts A and B target 3.A; C and D are plotting and analysis (1.B, 2.D). This is acceptable for a mixed-skill experimental design bundle. Weights total 10 as required. Content is in scope (pendulum period)."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Row D1 (slope) has requires_row_id=C3 (best-fit line drawn), so a correct slope calculation is penalized if the line was poorly drawn. This is a rubric inconsistency. A2 requires controlling the release angle even though the prompt does not explicitly ask for controlled variables."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete and consistent with T=2π√(L/g). Description text is duplicated in the notes (minor redundancy)."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "FRQ with no distractors. Common-error lists are sparse but adequate."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Load is long but is typical of a multi-part lab FRQ, and the calculator is appropriate."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "This is a standard AP Physics 1 multi-part lab free-response item on a pendulum, with an experimental design part, a linearization part, a graphing part and a slope-analysis part. It is in scope (7.2 and 7.1) and relies on the allowed levers. The student chooses T = 2π√(L/g), linearizes to T² vs L, translates a table into a graph, and interprets the slope as 4π²/g. No unfair sources: the data are rounded, the wording is unambiguous, there is no calculus, and no out-of-scope content. The task is typical of an exam-prep full-mock FRQ rather than a basic recall question, and is not beyond exam level.",
+   "reading_load": "medium",
+   "computation_load": "medium",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 900
+  }
+ },
+ {
+  "candidateKey": "ap_physics_1-f03-k0",
+  "cellId": "ap_physics_1-f03",
+  "apSubjectCode": "ap_physics_1",
+  "kind": "frq_bundle",
+  "keywordCode": "3.2",
+  "unitCode": "3",
+  "skillPrimary": "3.A",
+  "structure": "frq_multipart",
+  "calculator": "allowed",
+  "archetype": "phf_lab_sliding_friction",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Multi-part lab FRQ-style item. Requires choosing the work-energy relation (mu*m*g*d = 1/2 m v0^2), linearizing it as d versus v0^2, plotting the data, and extracting mu from the slope (1/(2*mu*g)). It involves a table-to-graph-to-equation representation change and a design-a-procedure part. Concepts are core Unit 3 and the arithmetic is light (five squared values, one slope). Wording is clear and in scope. Difficulty comes from legitimate sources: choosing the law, linearizing, and linking the slope to mu.",
+  "payload": {
+   "archetype": "phf_lab_sliding_friction",
+   "template": "lab",
+   "topic": "3.2",
+   "extra_topics": [
+    "2.7",
+    "3.1"
+   ],
+   "skill": "3.A",
+   "representative_skill": "3.A",
+   "calculator": "allowed",
+   "title": "Experiment: kinetic friction coefficient from stopping distances",
+   "stimulus": {
+    "kind": "table",
+    "description": "A student gives a block a range of initial speeds $v_0$ along a level, rough table, measures the initial speed with a photogate, and measures the distance $d$ the block slides before it stops. The block and the table surface are the same in every trial.",
+    "data": {
+     "x_label": "Initial speed v0 (m/s)",
+     "y_label": "Stopping distance d (m)",
+     "rows": [
+      [
+       1,
+       0.205
+      ],
+      [
+       1.5,
+       0.464
+      ],
+      [
+       2,
+       0.828
+      ],
+      [
+       2.5,
+       1.259
+      ],
+      [
+       3,
+       1.846
+      ]
+     ],
+     "notes": [
+      "A student gives a block a range of initial speeds $v_0$ along a level, rough table, measures the initial speed with a photogate, and measures the distance $d$ the block slides before it stops. The block and the table surface are the same in every trial."
+     ]
+    }
+   },
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "Describe an experimental procedure to collect the data for the stopping distance as a function of the initial speed. Include the equipment and the measurements, how the independent variable is changed, and one way to reduce the uncertainty in the measured distance.",
+     "points": 3,
+     "response_mode": "design",
+     "skill_codes": [
+      "3.A",
+      "2.B"
+     ],
+     "model_answer": "Use a photogate (or motion sensor) to measure the initial speed and a meterstick to measure the sliding distance from the starting point to where the block stops; give the same block different initial speeds on the same table surface, and repeat each trial and average the distances.",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Identifies a way to measure the initial speed (photogate or motion sensor, or distance and time over a short interval) and a way to measure the stopping distance (meterstick or tape)",
+       "required_elements": [
+        "a way to measure the initial speed and a way to measure the stopping distance"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "omits how the speed is measured"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "design"
+      },
+      {
+       "row_id": "A2",
+       "points": 1,
+       "criterion": "Changes only the initial speed while using the same block and the same table surface (both conditions are needed)",
+       "required_elements": [
+        "change only the initial speed with the same block and surface"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "design"
+      },
+      {
+       "row_id": "A3",
+       "points": 1,
+       "criterion": "Reduces the uncertainty in the distance by repeating each trial and averaging, or by marking the stopping point with a method that reduces the reading error (either earns the point)",
+       "required_elements": [
+        "repeat and average or reduce the reading error (either earns the point)"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "design"
+      }
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "Using the work-energy relationship for a block sliding to rest on a level surface with constant kinetic friction, identify the quantities that should be plotted on the vertical and horizontal axes so that the data produce a straight line whose slope can be used to find the coefficient of kinetic friction $\\mu$.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "2.B",
+      "3.A"
+     ],
+     "model_answer": "From $\\mu mgd=\\tfrac12mv_0^2$ we get $d=\\dfrac{1}{2\\mu g}v_0^2$: plot $d$ on the vertical axis against $v_0^2$ on the horizontal axis; the slope is $1/(2\\mu g)$.",
+     "rubric_rows": [
+      {
+       "row_id": "B1",
+       "points": 1,
+       "criterion": "Identifies $d$ (vertical) versus $v_0^2$ (horizontal)",
+       "required_elements": [
+        "d versus v0 squared"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "plots d versus v0"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "expression"
+      }
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "On a blank grid whose scale you choose, plot the data in a form that gives a straight line, and draw a best-fit line. Label the axes with quantities and units and use a scale that fills most of the grid.",
+     "points": 3,
+     "response_mode": "graph",
+     "skill_codes": [
+      "1.B",
+      "3.A"
+     ],
+     "model_answer": "Points $(v_0^2,d)$: (1, 0.205), (2.25, 0.464), (4, 0.828), (6.25, 1.259), (9, 1.846) with a best-fit line of slope about $0.204\\text{ s}^2/\\text{m}$.",
+     "rubric_rows": [
+      {
+       "row_id": "C1",
+       "points": 1,
+       "criterion": "Axes are labeled with quantities and units and the scale fills most of the grid",
+       "required_elements": [
+        "axis labels",
+        "units",
+        "scale"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "scale uses less than half the grid"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "graph"
+      },
+      {
+       "row_id": "C2",
+       "points": 1,
+       "criterion": "Plots the five points $(v_0^2, d)$ accurately",
+       "required_elements": [
+        "points plotted"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "graph"
+      },
+      {
+       "row_id": "C3",
+       "points": 1,
+       "criterion": "Draws a straight best-fit line through the trend of the points",
+       "required_elements": [
+        "best-fit line"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "connects the dots"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "graph"
+      }
+     ]
+    },
+    {
+     "label": "D",
+     "prompt": "Use the best-fit line to determine the coefficient of kinetic friction $\\mu$. Show your work.",
+     "points": 3,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "2.B",
+      "2.D"
+     ],
+     "model_answer": "Slope $\\approx 0.204\\text{ s}^2/\\text{m}$, so $\\mu=\\dfrac{1}{2g\\,\\text{slope}}\\approx 0.25$.",
+     "rubric_rows": [
+      {
+       "row_id": "D1",
+       "points": 1,
+       "criterion": "Calculates the slope of the best-fit line using two points on the line (about 0.204 s^2/m; accept any value within 5 percent)",
+       "required_elements": [
+        "0.204"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses data points rather than points on the line"
+       ],
+       "requires_row_id": "C3",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "numeric"
+      },
+      {
+       "row_id": "D2",
+       "points": 1,
+       "criterion": "Relates the slope to the friction coefficient: slope $=1/(2\\mu g)$",
+       "required_elements": [
+        "slope = 1 / (2 mu g)"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses slope = mu"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "expression"
+      },
+      {
+       "row_id": "D3",
+       "points": 1,
+       "criterion": "Calculates $\\mu$ (about 0.25; accept any value within 8 percent); the coefficient has no units",
+       "required_elements": [
+        "0.25"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "a value of mu consistent with the student's own slope from D1, $\\mu=1/(2g\\,\\text{slope})$"
+       ],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "numeric"
+      }
+     ]
+    }
+   ],
+   "total_points": 10,
+   "est_minutes": 27,
+   "facts": [
+    "mu=0.25",
+    "slope=0.20391",
+    "mu_est=0.250",
+    "ds=[0.205, 0.464, 0.828, 1.259, 1.846]"
+   ],
+   "expected_values": [
+    {
+     "part": "D",
+     "quantity": "slope",
+     "value": 0.203908256880734,
+     "unit": "s^2/m",
+     "tolerance": 0.0101954128440367
+    },
+    {
+     "part": "D",
+     "quantity": "coefficient of kinetic friction",
+     "value": 0.2502125659046125,
+     "unit": "",
+     "tolerance": 0.020017005272369
+    }
+   ],
+   "reference_note": "ALTON reference answer for self-review — not official AP scoring",
+   "blueprint": {
+    "id": "phf_lab_sliding_friction",
+    "subject": "ap_physics_1",
+    "kind": "frq_bundle",
+    "concept": "Designing an experiment and analyzing linearized data to extract a coefficient of kinetic friction from the work-energy theorem",
+    "topic": "3.2",
+    "skill": "3.A",
+    "student_thinking": [
+     "Describe the measurements and how uncertainty is reduced",
+     "Linearize the work-energy relationship and plot the data",
+     "Use the slope to determine the friction coefficient"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the generated stopping distances follow $d=v_0^2/(2\\mu g)$ with a small random error so the best-fit slope is within a few percent of $1/(2\\mu g)$",
+      "evidence": "the code rejects a seed whose fitted coefficient differs from the generating coefficient by more than four percent"
+     }
+    ],
+    "material": {
+     "type": "table",
+     "must_include": [
+      "initial speed",
+      "stopping distance"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "the slope is recomputed from the normal equations with numpy linalg.solve and compared with polyfit; the fitted coefficient is compared with the generating coefficient",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "A",
+      "skills": [
+       "3.A",
+       "2.B"
+      ],
+      "topics": [
+       "3.2"
+      ],
+      "points": 3,
+      "accepted_answers": [
+       "Use a photogate (or motion sensor) to measure the initial speed and a meterstick to measure the sliding distance from the starting point to where the block stops; give the same block different initial speeds on the same table surface, and repeat each trial and average the distances."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Identifies a way to measure the initial speed (photogate or motion sensor, or distance and time over a short interval) and a way to measure the stopping distance (meterstick or tape)",
+        "elements": [
+         "a way to measure the initial speed and a way to measure the stopping distance"
+        ]
+       },
+       {
+        "row_id": "A2",
+        "points": 1,
+        "criterion": "Changes only the initial speed while using the same block and the same table surface (both conditions are needed)",
+        "elements": [
+         "change only the initial speed with the same block and surface"
+        ]
+       },
+       {
+        "row_id": "A3",
+        "points": 1,
+        "criterion": "Reduces the uncertainty in the distance by repeating each trial and averaging, or by marking the stopping point with a method that reduces the reading error (either earns the point)",
+        "elements": [
+         "repeat and average or reduce the reading error (either earns the point)"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "B",
+      "skills": [
+       "2.B",
+       "3.A"
+      ],
+      "topics": [
+       "3.2"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "From $\\mu mgd=\\tfrac12mv_0^2$ we get $d=\\dfrac{1}{2\\mu g}v_0^2$: plot $d$ on the vertical axis against $v_0^2$ on the horizontal axis; the slope is $1/(2\\mu g)$."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "B1",
+        "points": 1,
+        "criterion": "Identifies $d$ (vertical) versus $v_0^2$ (horizontal)",
+        "elements": [
+         "d versus v0 squared"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "C",
+      "skills": [
+       "1.B",
+       "3.A"
+      ],
+      "topics": [
+       "3.2"
+      ],
+      "points": 3,
+      "accepted_answers": [
+       "Points $(v_0^2,d)$: (1, 0.205), (2.25, 0.464), (4, 0.828), (6.25, 1.259), (9, 1.846) with a best-fit line of slope about $0.204\\text{ s}^2/\\text{m}$."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "C1",
+        "points": 1,
+        "criterion": "Axes are labeled with quantities and units and the scale fills most of the grid",
+        "elements": [
+         "axis labels",
+         "units",
+         "scale"
+        ]
+       },
+       {
+        "row_id": "C2",
+        "points": 1,
+        "criterion": "Plots the five points $(v_0^2, d)$ accurately",
+        "elements": [
+         "points plotted"
+        ]
+       },
+       {
+        "row_id": "C3",
+        "points": 1,
+        "criterion": "Draws a straight best-fit line through the trend of the points",
+        "elements": [
+         "best-fit line"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "D",
+      "skills": [
+       "2.B",
+       "2.D"
+      ],
+      "topics": [
+       "3.2"
+      ],
+      "points": 3,
+      "accepted_answers": [
+       "Slope $\\approx 0.204\\text{ s}^2/\\text{m}$, so $\\mu=\\dfrac{1}{2g\\,\\text{slope}}\\approx 0.25$."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "D1",
+        "points": 1,
+        "criterion": "Calculates the slope of the best-fit line using two points on the line (about 0.204 s^2/m; accept any value within 5 percent)",
+        "elements": [
+         "0.204"
+        ]
+       },
+       {
+        "row_id": "D2",
+        "points": 1,
+        "criterion": "Relates the slope to the friction coefficient: slope $=1/(2\\mu g)$",
+        "elements": [
+         "slope = 1 / (2 mu g)"
+        ]
+       },
+       {
+        "row_id": "D3",
+        "points": 1,
+        "criterion": "Calculates $\\mu$ (about 0.25; accept any value within 8 percent); the coefficient has no units",
+        "elements": [
+         "0.25"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 10,
+    "judgment_demand": [
+     "representation_reading",
+     "quantitative_comparison",
+     "design"
+    ]
+   },
+   "seed": 9800,
+   "pack_id": "phf_lab_sliding_friction-s9800"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "phf_lab_sliding_friction",
+   "facts": [
+    "mu=0.25",
+    "slope=0.20391",
+    "mu_est=0.250",
+    "ds=[0.205, 0.464, 0.828, 1.259, 1.846]"
+   ],
+   "seed": 9800
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a coherent experimental design and analysis bundle on work-energy with friction. The key is consistent with d = v0²/(2μg), the rubric rows are 1 point each and total 10, the stimulus table is complete, and the independent solver agreed on every part.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Within Unit 3 and topic 3.2, with parts spanning design, linearization, graphing and analysis. There is no out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The rubric is consistent, and the model answers and expected values agree. The accepted designs in part A are valid alternatives."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table has labels and five data rows, and the wording is clear. The student draws their own graph."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so no options apply. The common_errors fields are present."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical of an AP Physics 1 lab FRQ, with a calculator allowed and no heavy arithmetic."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part lab FRQ-style item. Requires choosing the work-energy relation (mu*m*g*d = 1/2 m v0^2), linearizing it as d versus v0^2, plotting the data, and extracting mu from the slope (1/(2*mu*g)). It involves a table-to-graph-to-equation representation change and a design-a-procedure part. Concepts are core Unit 3 and the arithmetic is light (five squared values, one slope). Wording is clear and in scope. Difficulty comes from legitimate sources: choosing the law, linearizing, and linking the slope to mu.",
+   "reading_load": "medium",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 900
+  }
+ },
+ {
+  "candidateKey": "ap_physics_1-f03-k1",
+  "cellId": "ap_physics_1-f03",
+  "apSubjectCode": "ap_physics_1",
+  "kind": "frq_bundle",
+  "keywordCode": "3.2",
+  "unitCode": "3",
+  "skillPrimary": "3.A",
+  "structure": "frq_multipart",
+  "calculator": "allowed",
+  "archetype": "phf_lab_sliding_friction",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "duplicate_gate_near_duplicate",
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Standard AP Physics 1 experimental-design and linearization FRQ. The governing law is the work-energy theorem with constant kinetic friction: mu*m*g*d = (1/2)m*v0^2, so d = v0^2/(2*mu*g). Students must (1) write an experimental procedure, (2) choose d vs v0^2 as the linearizing axes, (3) plot and fit a line, and (4) get mu from the slope, mu = 1/(2*g*slope). The data are clean (slope about 0.254 s^2/m, mu about 0.20) and the arithmetic is light. The only representation changes are table to squared quantity to graph to slope to mu. All content is within Unit 3 scope, and the wording is unambiguous: the level surface, same block and constant friction are stated. The multi-part length is typical of a full-mock FRQ rather than a source of unfair difficulty.",
+  "payload": {
+   "archetype": "phf_lab_sliding_friction",
+   "template": "lab",
+   "topic": "3.2",
+   "extra_topics": [
+    "2.7",
+    "3.1"
+   ],
+   "skill": "3.A",
+   "representative_skill": "3.A",
+   "calculator": "allowed",
+   "title": "Experiment: kinetic friction coefficient from stopping distances",
+   "stimulus": {
+    "kind": "table",
+    "description": "A student gives a block a range of initial speeds $v_0$ along a level, rough table, measures the initial speed with a photogate, and measures the distance $d$ the block slides before it stops. The block and the table surface are the same in every trial.",
+    "data": {
+     "x_label": "Initial speed v0 (m/s)",
+     "y_label": "Stopping distance d (m)",
+     "rows": [
+      [
+       1,
+       0.253
+      ],
+      [
+       1.5,
+       0.576
+      ],
+      [
+       2,
+       1.033
+      ],
+      [
+       2.5,
+       1.608
+      ],
+      [
+       3,
+       2.283
+      ]
+     ],
+     "notes": [
+      "A student gives a block a range of initial speeds $v_0$ along a level, rough table, measures the initial speed with a photogate, and measures the distance $d$ the block slides before it stops. The block and the table surface are the same in every trial."
+     ]
+    }
+   },
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "Describe an experimental procedure to collect the data for the stopping distance as a function of the initial speed. Include the equipment and the measurements, how the independent variable is changed, and one way to reduce the uncertainty in the measured distance.",
+     "points": 3,
+     "response_mode": "design",
+     "skill_codes": [
+      "3.A",
+      "2.B"
+     ],
+     "model_answer": "Use a photogate (or motion sensor) to measure the initial speed and a meterstick to measure the sliding distance from the starting point to where the block stops; give the same block different initial speeds on the same table surface, and repeat each trial and average the distances.",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Identifies a way to measure the initial speed (photogate or motion sensor, or distance and time over a short interval) and a way to measure the stopping distance (meterstick or tape)",
+       "required_elements": [
+        "a way to measure the initial speed and a way to measure the stopping distance"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "omits how the speed is measured"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "design"
+      },
+      {
+       "row_id": "A2",
+       "points": 1,
+       "criterion": "Changes only the initial speed while using the same block and the same table surface (both conditions are needed)",
+       "required_elements": [
+        "change only the initial speed with the same block and surface"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "design"
+      },
+      {
+       "row_id": "A3",
+       "points": 1,
+       "criterion": "Reduces the uncertainty in the distance by repeating each trial and averaging, or by marking the stopping point with a method that reduces the reading error (either earns the point)",
+       "required_elements": [
+        "repeat and average or reduce the reading error (either earns the point)"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "design"
+      }
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "Using the work-energy relationship for a block sliding to rest on a level surface with constant kinetic friction, identify the quantities that should be plotted on the vertical and horizontal axes so that the data produce a straight line whose slope can be used to find the coefficient of kinetic friction $\\mu$.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "2.B",
+      "3.A"
+     ],
+     "model_answer": "From $\\mu mgd=\\tfrac12mv_0^2$ we get $d=\\dfrac{1}{2\\mu g}v_0^2$: plot $d$ on the vertical axis against $v_0^2$ on the horizontal axis; the slope is $1/(2\\mu g)$.",
+     "rubric_rows": [
+      {
+       "row_id": "B1",
+       "points": 1,
+       "criterion": "Identifies $d$ (vertical) versus $v_0^2$ (horizontal)",
+       "required_elements": [
+        "d versus v0 squared"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "plots d versus v0"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "expression"
+      }
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "On a blank grid whose scale you choose, plot the data in a form that gives a straight line, and draw a best-fit line. Label the axes with quantities and units and use a scale that fills most of the grid.",
+     "points": 3,
+     "response_mode": "graph",
+     "skill_codes": [
+      "1.B",
+      "3.A"
+     ],
+     "model_answer": "Points $(v_0^2,d)$: (1, 0.253), (2.25, 0.576), (4, 1.033), (6.25, 1.608), (9, 2.283) with a best-fit line of slope about $0.254\\text{ s}^2/\\text{m}$.",
+     "rubric_rows": [
+      {
+       "row_id": "C1",
+       "points": 1,
+       "criterion": "Axes are labeled with quantities and units and the scale fills most of the grid",
+       "required_elements": [
+        "axis labels",
+        "units",
+        "scale"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "scale uses less than half the grid"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "graph"
+      },
+      {
+       "row_id": "C2",
+       "points": 1,
+       "criterion": "Plots the five points $(v_0^2, d)$ accurately",
+       "required_elements": [
+        "points plotted"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "graph"
+      },
+      {
+       "row_id": "C3",
+       "points": 1,
+       "criterion": "Draws a straight best-fit line through the trend of the points",
+       "required_elements": [
+        "best-fit line"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "connects the dots"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "graph"
+      }
+     ]
+    },
+    {
+     "label": "D",
+     "prompt": "Use the best-fit line to determine the coefficient of kinetic friction $\\mu$. Show your work.",
+     "points": 3,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "2.B",
+      "2.D"
+     ],
+     "model_answer": "Slope $\\approx 0.254\\text{ s}^2/\\text{m}$, so $\\mu=\\dfrac{1}{2g\\,\\text{slope}}\\approx 0.20$.",
+     "rubric_rows": [
+      {
+       "row_id": "D1",
+       "points": 1,
+       "criterion": "Calculates the slope of the best-fit line using two points on the line (about 0.254 s^2/m; accept any value within 5 percent)",
+       "required_elements": [
+        "0.254"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses data points rather than points on the line"
+       ],
+       "requires_row_id": "C3",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "numeric"
+      },
+      {
+       "row_id": "D2",
+       "points": 1,
+       "criterion": "Relates the slope to the friction coefficient: slope $=1/(2\\mu g)$",
+       "required_elements": [
+        "slope = 1 / (2 mu g)"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses slope = mu"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "expression"
+      },
+      {
+       "row_id": "D3",
+       "points": 1,
+       "criterion": "Calculates $\\mu$ (about 0.20; accept any value within 8 percent); the coefficient has no units",
+       "required_elements": [
+        "0.20"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "a value of mu consistent with the student's own slope from D1, $\\mu=1/(2g\\,\\text{slope})$"
+       ],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "numeric"
+      }
+     ]
+    }
+   ],
+   "total_points": 10,
+   "est_minutes": 27,
+   "facts": [
+    "mu=0.2",
+    "slope=0.25418",
+    "mu_est=0.201",
+    "ds=[0.253, 0.576, 1.033, 1.608, 2.283]"
+   ],
+   "expected_values": [
+    {
+     "part": "D",
+     "quantity": "slope",
+     "value": 0.25417737003058105,
+     "unit": "s^2/m",
+     "tolerance": 0.012708868501529053
+    },
+    {
+     "part": "D",
+     "quantity": "coefficient of kinetic friction",
+     "value": 0.20072757915909997,
+     "unit": "",
+     "tolerance": 0.016058206332727996
+    }
+   ],
+   "reference_note": "ALTON reference answer for self-review — not official AP scoring",
+   "blueprint": {
+    "id": "phf_lab_sliding_friction",
+    "subject": "ap_physics_1",
+    "kind": "frq_bundle",
+    "concept": "Designing an experiment and analyzing linearized data to extract a coefficient of kinetic friction from the work-energy theorem",
+    "topic": "3.2",
+    "skill": "3.A",
+    "student_thinking": [
+     "Describe the measurements and how uncertainty is reduced",
+     "Linearize the work-energy relationship and plot the data",
+     "Use the slope to determine the friction coefficient"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the generated stopping distances follow $d=v_0^2/(2\\mu g)$ with a small random error so the best-fit slope is within a few percent of $1/(2\\mu g)$",
+      "evidence": "the code rejects a seed whose fitted coefficient differs from the generating coefficient by more than four percent"
+     }
+    ],
+    "material": {
+     "type": "table",
+     "must_include": [
+      "initial speed",
+      "stopping distance"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "the slope is recomputed from the normal equations with numpy linalg.solve and compared with polyfit; the fitted coefficient is compared with the generating coefficient",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "A",
+      "skills": [
+       "3.A",
+       "2.B"
+      ],
+      "topics": [
+       "3.2"
+      ],
+      "points": 3,
+      "accepted_answers": [
+       "Use a photogate (or motion sensor) to measure the initial speed and a meterstick to measure the sliding distance from the starting point to where the block stops; give the same block different initial speeds on the same table surface, and repeat each trial and average the distances."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Identifies a way to measure the initial speed (photogate or motion sensor, or distance and time over a short interval) and a way to measure the stopping distance (meterstick or tape)",
+        "elements": [
+         "a way to measure the initial speed and a way to measure the stopping distance"
+        ]
+       },
+       {
+        "row_id": "A2",
+        "points": 1,
+        "criterion": "Changes only the initial speed while using the same block and the same table surface (both conditions are needed)",
+        "elements": [
+         "change only the initial speed with the same block and surface"
+        ]
+       },
+       {
+        "row_id": "A3",
+        "points": 1,
+        "criterion": "Reduces the uncertainty in the distance by repeating each trial and averaging, or by marking the stopping point with a method that reduces the reading error (either earns the point)",
+        "elements": [
+         "repeat and average or reduce the reading error (either earns the point)"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "B",
+      "skills": [
+       "2.B",
+       "3.A"
+      ],
+      "topics": [
+       "3.2"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "From $\\mu mgd=\\tfrac12mv_0^2$ we get $d=\\dfrac{1}{2\\mu g}v_0^2$: plot $d$ on the vertical axis against $v_0^2$ on the horizontal axis; the slope is $1/(2\\mu g)$."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "B1",
+        "points": 1,
+        "criterion": "Identifies $d$ (vertical) versus $v_0^2$ (horizontal)",
+        "elements": [
+         "d versus v0 squared"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "C",
+      "skills": [
+       "1.B",
+       "3.A"
+      ],
+      "topics": [
+       "3.2"
+      ],
+      "points": 3,
+      "accepted_answers": [
+       "Points $(v_0^2,d)$: (1, 0.253), (2.25, 0.576), (4, 1.033), (6.25, 1.608), (9, 2.283) with a best-fit line of slope about $0.254\\text{ s}^2/\\text{m}$."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "C1",
+        "points": 1,
+        "criterion": "Axes are labeled with quantities and units and the scale fills most of the grid",
+        "elements": [
+         "axis labels",
+         "units",
+         "scale"
+        ]
+       },
+       {
+        "row_id": "C2",
+        "points": 1,
+        "criterion": "Plots the five points $(v_0^2, d)$ accurately",
+        "elements": [
+         "points plotted"
+        ]
+       },
+       {
+        "row_id": "C3",
+        "points": 1,
+        "criterion": "Draws a straight best-fit line through the trend of the points",
+        "elements": [
+         "best-fit line"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "D",
+      "skills": [
+       "2.B",
+       "2.D"
+      ],
+      "topics": [
+       "3.2"
+      ],
+      "points": 3,
+      "accepted_answers": [
+       "Slope $\\approx 0.254\\text{ s}^2/\\text{m}$, so $\\mu=\\dfrac{1}{2g\\,\\text{slope}}\\approx 0.20$."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "D1",
+        "points": 1,
+        "criterion": "Calculates the slope of the best-fit line using two points on the line (about 0.254 s^2/m; accept any value within 5 percent)",
+        "elements": [
+         "0.254"
+        ]
+       },
+       {
+        "row_id": "D2",
+        "points": 1,
+        "criterion": "Relates the slope to the friction coefficient: slope $=1/(2\\mu g)$",
+        "elements": [
+         "slope = 1 / (2 mu g)"
+        ]
+       },
+       {
+        "row_id": "D3",
+        "points": 1,
+        "criterion": "Calculates $\\mu$ (about 0.20; accept any value within 8 percent); the coefficient has no units",
+        "elements": [
+         "0.20"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 10,
+    "judgment_demand": [
+     "representation_reading",
+     "quantitative_comparison",
+     "design"
+    ]
+   },
+   "seed": 9801,
+   "pack_id": "phf_lab_sliding_friction-s9801"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "phf_lab_sliding_friction",
+   "facts": [
+    "mu=0.2",
+    "slope=0.25418",
+    "mu_est=0.201",
+    "ds=[0.253, 0.576, 1.033, 1.608, 2.283]"
+   ],
+   "seed": 9801
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound experimental-design and analysis bundle on work-energy with friction. The rubric rows are consistent, the tolerances in D1 and D3 line up, and the workload is typical of an AP experimental-design FRQ. Minor gaps: the stimulus does not say how initial speeds are produced, and the common-errors lists are thin.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Each part fits its own skill: A is procedure design, B is linearization, C and D are graphing and analysis of work-energy data."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The model answers are consistent with the data. The slope tolerance (5 percent) and the μ tolerance (8 percent) are compatible. C2 has no numeric tolerance."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete with labels, units, and conditions. The method of launching the block at different speeds is not stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no distractors. Common-error entries are sparse but adequate."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 27 estimated minutes for 10 points is heavy but acceptable for an experimental-design FRQ. Arithmetic is light and the calculator designation is consistent."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP Physics 1 experimental-design and linearization FRQ. The governing law is the work-energy theorem with constant kinetic friction: mu*m*g*d = (1/2)m*v0^2, so d = v0^2/(2*mu*g). Students must (1) write an experimental procedure, (2) choose d vs v0^2 as the linearizing axes, (3) plot and fit a line, and (4) get mu from the slope, mu = 1/(2*g*slope). The data are clean (slope about 0.254 s^2/m, mu about 0.20) and the arithmetic is light. The only representation changes are table to squared quantity to graph to slope to mu. All content is within Unit 3 scope, and the wording is unambiguous: the level surface, same block and constant friction are stated. The multi-part length is typical of a full-mock FRQ rather than a source of unfair difficulty.",
+   "reading_load": "medium",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 900
+  }
+ },
+ {
+  "candidateKey": "ap_physics_1-f03-k2",
+  "cellId": "ap_physics_1-f03",
+  "apSubjectCode": "ap_physics_1",
+  "kind": "frq_bundle",
+  "keywordCode": "3.2",
+  "unitCode": "3",
+  "skillPrimary": "3.A",
+  "structure": "frq_multipart",
+  "calculator": "allowed",
+  "archetype": "phf_lab_sliding_friction",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "duplicate_gate_near_duplicate",
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Standard AP-style experimental design/data analysis FRQ. Students must choose the work-energy relation (mu*m*g*d = 1/2 m v0^2), see that d vs v0^2 is linear with slope 1/(2*mu*g), design a procedure, plot, and extract mu. Moderate reasoning chain, a few representation changes, light arithmetic (5 squares, one slope), clear wording, in-scope content only.",
+  "payload": {
+   "archetype": "phf_lab_sliding_friction",
+   "template": "lab",
+   "topic": "3.2",
+   "extra_topics": [
+    "2.7",
+    "3.1"
+   ],
+   "skill": "3.A",
+   "representative_skill": "3.A",
+   "calculator": "allowed",
+   "title": "Experiment: kinetic friction coefficient from stopping distances",
+   "stimulus": {
+    "kind": "table",
+    "description": "A student gives a block a range of initial speeds $v_0$ along a level, rough table, measures the initial speed with a photogate, and measures the distance $d$ the block slides before it stops. The block and the table surface are the same in every trial.",
+    "data": {
+     "x_label": "Initial speed v0 (m/s)",
+     "y_label": "Stopping distance d (m)",
+     "rows": [
+      [
+       1,
+       0.253
+      ],
+      [
+       1.5,
+       0.575
+      ],
+      [
+       2,
+       1.005
+      ],
+      [
+       2.5,
+       1.581
+      ],
+      [
+       3,
+       2.31
+      ]
+     ],
+     "notes": [
+      "A student gives a block a range of initial speeds $v_0$ along a level, rough table, measures the initial speed with a photogate, and measures the distance $d$ the block slides before it stops. The block and the table surface are the same in every trial."
+     ]
+    }
+   },
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "Describe an experimental procedure to collect the data for the stopping distance as a function of the initial speed. Include the equipment and the measurements, how the independent variable is changed, and one way to reduce the uncertainty in the measured distance.",
+     "points": 3,
+     "response_mode": "design",
+     "skill_codes": [
+      "3.A",
+      "2.B"
+     ],
+     "model_answer": "Use a photogate (or motion sensor) to measure the initial speed and a meterstick to measure the sliding distance from the starting point to where the block stops; give the same block different initial speeds on the same table surface, and repeat each trial and average the distances.",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Identifies a way to measure the initial speed (photogate or motion sensor, or distance and time over a short interval) and a way to measure the stopping distance (meterstick or tape)",
+       "required_elements": [
+        "a way to measure the initial speed and a way to measure the stopping distance"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "omits how the speed is measured"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "design"
+      },
+      {
+       "row_id": "A2",
+       "points": 1,
+       "criterion": "Changes only the initial speed while using the same block and the same table surface (both conditions are needed)",
+       "required_elements": [
+        "change only the initial speed with the same block and surface"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "design"
+      },
+      {
+       "row_id": "A3",
+       "points": 1,
+       "criterion": "Reduces the uncertainty in the distance by repeating each trial and averaging, or by marking the stopping point with a method that reduces the reading error (either earns the point)",
+       "required_elements": [
+        "repeat and average or reduce the reading error (either earns the point)"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "design"
+      }
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "Using the work-energy relationship for a block sliding to rest on a level surface with constant kinetic friction, identify the quantities that should be plotted on the vertical and horizontal axes so that the data produce a straight line whose slope can be used to find the coefficient of kinetic friction $\\mu$.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "2.B",
+      "3.A"
+     ],
+     "model_answer": "From $\\mu mgd=\\tfrac12mv_0^2$ we get $d=\\dfrac{1}{2\\mu g}v_0^2$: plot $d$ on the vertical axis against $v_0^2$ on the horizontal axis; the slope is $1/(2\\mu g)$.",
+     "rubric_rows": [
+      {
+       "row_id": "B1",
+       "points": 1,
+       "criterion": "Identifies $d$ (vertical) versus $v_0^2$ (horizontal)",
+       "required_elements": [
+        "d versus v0 squared"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "plots d versus v0"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "expression"
+      }
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "On a blank grid whose scale you choose, plot the data in a form that gives a straight line, and draw a best-fit line. Label the axes with quantities and units and use a scale that fills most of the grid.",
+     "points": 3,
+     "response_mode": "graph",
+     "skill_codes": [
+      "1.B",
+      "3.A"
+     ],
+     "model_answer": "Points $(v_0^2,d)$: (1, 0.253), (2.25, 0.575), (4, 1.005), (6.25, 1.581), (9, 2.310) with a best-fit line of slope about $0.256\\text{ s}^2/\\text{m}$.",
+     "rubric_rows": [
+      {
+       "row_id": "C1",
+       "points": 1,
+       "criterion": "Axes are labeled with quantities and units and the scale fills most of the grid",
+       "required_elements": [
+        "axis labels",
+        "units",
+        "scale"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "scale uses less than half the grid"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "graph"
+      },
+      {
+       "row_id": "C2",
+       "points": 1,
+       "criterion": "Plots the five points $(v_0^2, d)$ accurately",
+       "required_elements": [
+        "points plotted"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "graph"
+      },
+      {
+       "row_id": "C3",
+       "points": 1,
+       "criterion": "Draws a straight best-fit line through the trend of the points",
+       "required_elements": [
+        "best-fit line"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "connects the dots"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "graph"
+      }
+     ]
+    },
+    {
+     "label": "D",
+     "prompt": "Use the best-fit line to determine the coefficient of kinetic friction $\\mu$. Show your work.",
+     "points": 3,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "2.B",
+      "2.D"
+     ],
+     "model_answer": "Slope $\\approx 0.256\\text{ s}^2/\\text{m}$, so $\\mu=\\dfrac{1}{2g\\,\\text{slope}}\\approx 0.20$.",
+     "rubric_rows": [
+      {
+       "row_id": "D1",
+       "points": 1,
+       "criterion": "Calculates the slope of the best-fit line using two points on the line (about 0.256 s^2/m; accept any value within 5 percent)",
+       "required_elements": [
+        "0.256"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses data points rather than points on the line"
+       ],
+       "requires_row_id": "C3",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "numeric"
+      },
+      {
+       "row_id": "D2",
+       "points": 1,
+       "criterion": "Relates the slope to the friction coefficient: slope $=1/(2\\mu g)$",
+       "required_elements": [
+        "slope = 1 / (2 mu g)"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "uses slope = mu"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "expression"
+      },
+      {
+       "row_id": "D3",
+       "points": 1,
+       "criterion": "Calculates $\\mu$ (about 0.20; accept any value within 8 percent); the coefficient has no units",
+       "required_elements": [
+        "0.20"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "a value of mu consistent with the student's own slope from D1, $\\mu=1/(2g\\,\\text{slope})$"
+       ],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "numeric"
+      }
+     ]
+    }
+   ],
+   "total_points": 10,
+   "est_minutes": 27,
+   "facts": [
+    "mu=0.2",
+    "slope=0.25639",
+    "mu_est=0.199",
+    "ds=[0.253, 0.575, 1.005, 1.581, 2.31]"
+   ],
+   "expected_values": [
+    {
+     "part": "D",
+     "quantity": "slope",
+     "value": 0.2563914373088686,
+     "unit": "s^2/m",
+     "tolerance": 0.01281957186544343
+    },
+    {
+     "part": "D",
+     "quantity": "coefficient of kinetic friction",
+     "value": 0.19899419691540732,
+     "unit": "",
+     "tolerance": 0.015919535753232586
+    }
+   ],
+   "reference_note": "ALTON reference answer for self-review — not official AP scoring",
+   "blueprint": {
+    "id": "phf_lab_sliding_friction",
+    "subject": "ap_physics_1",
+    "kind": "frq_bundle",
+    "concept": "Designing an experiment and analyzing linearized data to extract a coefficient of kinetic friction from the work-energy theorem",
+    "topic": "3.2",
+    "skill": "3.A",
+    "student_thinking": [
+     "Describe the measurements and how uncertainty is reduced",
+     "Linearize the work-energy relationship and plot the data",
+     "Use the slope to determine the friction coefficient"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the generated stopping distances follow $d=v_0^2/(2\\mu g)$ with a small random error so the best-fit slope is within a few percent of $1/(2\\mu g)$",
+      "evidence": "the code rejects a seed whose fitted coefficient differs from the generating coefficient by more than four percent"
+     }
+    ],
+    "material": {
+     "type": "table",
+     "must_include": [
+      "initial speed",
+      "stopping distance"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "the slope is recomputed from the normal equations with numpy linalg.solve and compared with polyfit; the fitted coefficient is compared with the generating coefficient",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "A",
+      "skills": [
+       "3.A",
+       "2.B"
+      ],
+      "topics": [
+       "3.2"
+      ],
+      "points": 3,
+      "accepted_answers": [
+       "Use a photogate (or motion sensor) to measure the initial speed and a meterstick to measure the sliding distance from the starting point to where the block stops; give the same block different initial speeds on the same table surface, and repeat each trial and average the distances."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Identifies a way to measure the initial speed (photogate or motion sensor, or distance and time over a short interval) and a way to measure the stopping distance (meterstick or tape)",
+        "elements": [
+         "a way to measure the initial speed and a way to measure the stopping distance"
+        ]
+       },
+       {
+        "row_id": "A2",
+        "points": 1,
+        "criterion": "Changes only the initial speed while using the same block and the same table surface (both conditions are needed)",
+        "elements": [
+         "change only the initial speed with the same block and surface"
+        ]
+       },
+       {
+        "row_id": "A3",
+        "points": 1,
+        "criterion": "Reduces the uncertainty in the distance by repeating each trial and averaging, or by marking the stopping point with a method that reduces the reading error (either earns the point)",
+        "elements": [
+         "repeat and average or reduce the reading error (either earns the point)"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "B",
+      "skills": [
+       "2.B",
+       "3.A"
+      ],
+      "topics": [
+       "3.2"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "From $\\mu mgd=\\tfrac12mv_0^2$ we get $d=\\dfrac{1}{2\\mu g}v_0^2$: plot $d$ on the vertical axis against $v_0^2$ on the horizontal axis; the slope is $1/(2\\mu g)$."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "B1",
+        "points": 1,
+        "criterion": "Identifies $d$ (vertical) versus $v_0^2$ (horizontal)",
+        "elements": [
+         "d versus v0 squared"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "C",
+      "skills": [
+       "1.B",
+       "3.A"
+      ],
+      "topics": [
+       "3.2"
+      ],
+      "points": 3,
+      "accepted_answers": [
+       "Points $(v_0^2,d)$: (1, 0.253), (2.25, 0.575), (4, 1.005), (6.25, 1.581), (9, 2.310) with a best-fit line of slope about $0.256\\text{ s}^2/\\text{m}$."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "C1",
+        "points": 1,
+        "criterion": "Axes are labeled with quantities and units and the scale fills most of the grid",
+        "elements": [
+         "axis labels",
+         "units",
+         "scale"
+        ]
+       },
+       {
+        "row_id": "C2",
+        "points": 1,
+        "criterion": "Plots the five points $(v_0^2, d)$ accurately",
+        "elements": [
+         "points plotted"
+        ]
+       },
+       {
+        "row_id": "C3",
+        "points": 1,
+        "criterion": "Draws a straight best-fit line through the trend of the points",
+        "elements": [
+         "best-fit line"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "D",
+      "skills": [
+       "2.B",
+       "2.D"
+      ],
+      "topics": [
+       "3.2"
+      ],
+      "points": 3,
+      "accepted_answers": [
+       "Slope $\\approx 0.256\\text{ s}^2/\\text{m}$, so $\\mu=\\dfrac{1}{2g\\,\\text{slope}}\\approx 0.20$."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "D1",
+        "points": 1,
+        "criterion": "Calculates the slope of the best-fit line using two points on the line (about 0.256 s^2/m; accept any value within 5 percent)",
+        "elements": [
+         "0.256"
+        ]
+       },
+       {
+        "row_id": "D2",
+        "points": 1,
+        "criterion": "Relates the slope to the friction coefficient: slope $=1/(2\\mu g)$",
+        "elements": [
+         "slope = 1 / (2 mu g)"
+        ]
+       },
+       {
+        "row_id": "D3",
+        "points": 1,
+        "criterion": "Calculates $\\mu$ (about 0.20; accept any value within 8 percent); the coefficient has no units",
+        "elements": [
+         "0.20"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 10,
+    "judgment_demand": [
+     "representation_reading",
+     "quantitative_comparison",
+     "design"
+    ]
+   },
+   "seed": 9802,
+   "pack_id": "phf_lab_sliding_friction-s9802"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "phf_lab_sliding_friction",
+   "facts": [
+    "mu=0.2",
+    "slope=0.25639",
+    "mu_est=0.199",
+    "ds=[0.253, 0.575, 1.005, 1.581, 2.31]"
+   ],
+   "seed": 9802
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The friction-coefficient lab bundle is valid. The data follow d = v0^2/(2*mu*g), the rubric is consistent with the model answers, and the 3+1+3+3 split totals 10 points. Each part fits its own skill. No instant-reject condition applies.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Work-energy with kinetic friction (3.2). Part A is design (3.A) and part B is linearization. Parts C and D use graphing and calculation skills, which is acceptable for a mixed-skill bundle. No out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The slope of about 0.256 s^2/m and mu of about 0.20 are consistent with the table. The rubric rows are single-criterion with sensible tolerances. The alternative for D3 is valid."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table has labels, units and five rows, and the same-block, same-surface condition is stated. The notes field repeats the description, which is harmless."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to a free-response item. The common-error entries are brief but adequate."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The task load is typical of an AP Physics 1 experimental design and analysis question. The calculator is allowed and the arithmetic is light."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP-style experimental design/data analysis FRQ. Students must choose the work-energy relation (mu*m*g*d = 1/2 m v0^2), see that d vs v0^2 is linear with slope 1/(2*mu*g), design a procedure, plot, and extract mu. Moderate reasoning chain, a few representation changes, light arithmetic (5 squares, one slope), clear wording, in-scope content only.",
+   "reading_load": "medium",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 4,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 840
+  }
+ }
+]

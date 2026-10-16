@@ -1,0 +1,151 @@
+[
+ {
+  "key": "ap_calculus_ab-f01-k0",
+  "cellId": "ap_calculus_ab-f01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "resembles_known_exam_item"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "(1/24)∫0^24 80e^(-t/4)dt = (320/24)(1-e^-6)",
+     "final_answer": "≈13.300 gallons per hour",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "b",
+     "brief_reasoning": "F'(t)=-20e^(-t/4); F'(2)=-20e^-0.5",
+     "final_answer": "F'(2)≈-12.131 gal/hr^2; at t=2 hours the inflow rate is decreasing at about 12.131 gallons per hour per hour",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "c",
+     "brief_reasoning": "200 + 320(1-e^-6) - 480",
+     "final_answer": "≈39.207 gallons",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "d",
+     "brief_reasoning": "∫0^T (80e^(-t/4)-20)dt = 0 ⇒ 16(1-e^(-T/4)) = T, solved numerically",
+     "final_answer": "∫0^T (80e^(-t/4) - 20) dt = 0; T ≈ 15.683 hours",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": true,
+   "summary": "The computations, rubric and format are sound and AP-like. The item fails on skill fit: the target skill is 3.E (justification), yet no part requires a scored written justification. Part b assesses 3.F, and part d only asks for an equation and a solution, with uniqueness given in the prompt. The structure also closely resembles released AP FRQs on rate in and rate out.",
+   "scope_skill": {
+    "pass": false,
+    "notes": "The target skill is 3.E (justification), but the bundle assesses it weakly. Parts a and c are pure calculation (1.D/1.E). Part b is an interpretation with units, which is 3.F, not 3.E. Only part d lists 3.E, and its rubric awards points for the equation, the solution and the units, with no scored reason. The model answer's parenthetical about the amount rising while F > 20 and then falling is not scored. The uniqueness of the time is stated in the prompt rather than justified by the student, so the dominant demand is calculation and not justification. The topics themselves (8.1, 4.1, 8.3) are in scope."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All numeric keys are consistent with the solver's independent results. The rubric rows are consistent, and each answer row depends on its setup row. In part b, the requirement \"the rate of inflow is decreasing\" is a reasonable parallel to the official wording."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The data object has the inflow, the outflow and the initial amount. The stem restates the context in part a, which is acceptable. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so there are no distractors. The rubric rows are adequate."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical of an AP calculator FRQ: 9 points, about 15 minutes, with clean numbers and a calculator needed for the integrals and the root. The structure closely mirrors released AP rate-in/rate-out FRQs, such as the 2018 and 2019 questions with a similar decaying inflow and a 'find the time' part."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "This is a standard AP FRQ-style multi-part item. It covers average value of a rate, the derivative of a rate with units and interpretation, net change giving the amount at a time, and an integral equation solved on a calculator. The reasoning is moderate: part d requires setting the integral of inflow minus outflow equal to 0 and solving numerically. Representation changes are modest (expression to context to equation). The numbers are clean and the wording is unambiguous. Part c is a calculator-based integral, and the arithmetic stays light. The justification demand is met by the interpretation in b and the integral equation in d. It is a good fit for full mock exams.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "ap_calculus_ab-f01-k1",
+  "cellId": "ap_calculus_ab-f01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_key_scoring",
+   "resembles_known_exam_item"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "(1/20)∫0^20 100e^{-t/5}dt = 25(1−e^{-4})",
+     "final_answer": "≈24.542 gallons per hour",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "b",
+     "brief_reasoning": "F'(t) = −20e^{-t/5}, so F'(3) = −20e^{-0.6}",
+     "final_answer": "F'(3) ≈ −10.976 gal/hr per hour. At t = 3 hours, the rate at which water flows into the reservoir is decreasing by about 10.976 gallons per hour per hour.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "c",
+     "brief_reasoning": "300 + ∫0^20 (F(t) − 25)dt = 300 + 500(1−e^{-4}) − 500 = 300 − 500e^{-4}",
+     "final_answer": "≈290.842 gallons",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "d",
+     "brief_reasoning": "Set 300 + ∫0^t (100e^{-s/5} − 25)ds = 300. This gives 500(1−e^{-t/5}) = 25t; solving numerically gives t ≈ 19.603.",
+     "final_answer": "Equation: ∫0^t (100e^{-s/5} − 25) ds = 0; t ≈ 19.603 hours",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": true,
+   "summary": "The key values are correct, but the item fails on scope/skill and on key/scoring. No part truly assesses 3.E justification. The part b rubric depends on exact phrases, and row d3 is a weak point award.",
+   "scope_skill": {
+    "pass": false,
+    "notes": "Target skill is 3.E, but no part requires real justification. Parts a and c are calculations, and part d asks for an equation and a numerical solve with no written reasoning. Only the part b interpretation is explanatory, and the part b skill is labeled 3.F rather than 3.E."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Key values are correct. Row b2 requires the exact phrases \"the rate of inflow is decreasing\" and \"gallons per hour per hour\" (requires_both), so equivalent correct wording such as gal/hr² could be marked wrong. Row d3 awards a point only for restating the same value with units, which is weakly justified."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The stimulus data are complete. The stem repeats the stimulus content in part a, which is slightly redundant but acceptable."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Free-response item, so distractors do not apply."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The 9 points in about 15 minutes with a calculator matches the AP Calculus FRQ grain."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP FRQ-style multi-part item covering average value, derivative interpretation with units, net change with an initial value, and setting up and solving an integral equation on the calculator. Each part is 1-3 steps with clean numbers. Representation changes are modest (rate to accumulated amount to equation). Appropriate for full mocks.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 7,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ }
+]

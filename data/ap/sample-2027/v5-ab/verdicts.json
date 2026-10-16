@@ -1,0 +1,286 @@
+[
+ {
+  "key": "ap_calculus_ab-f01-k0",
+  "cellId": "ap_calculus_ab-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "Differentiate the velocity: a(t) = 4.5cos(1.5t) + 0.5. At t = 1, a(1) = 4.5(0.07074) + 0.5 ≈ 0.818.",
+     "final_answer": "a(1) ≈ 0.818 m/s^2",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "b",
+     "brief_reasoning": "v(1) = 3sin(1.5) − 0.5 ≈ 2.492 > 0 and a(1) ≈ 0.818 > 0. Velocity and acceleration have the same sign, so the speed is increasing.",
+     "final_answer": "Increasing, because v(1) and a(1) are both positive",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "c",
+     "brief_reasoning": "Antiderivative: F(t) = −2cos(1.5t) + 0.25t² − t. Solving v(t) = 0 numerically gives sign changes at t ≈ 0.2028, 2.1062 and 3.9655. Splitting ∫|v| dt at those times gives 0.1007 + 3.1035 + 2.9259 + 2.4798 ≈ 8.610.",
+     "final_answer": "Total distance ≈ 8.610 m",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "d",
+     "brief_reasoning": "x(5) = 3 + ∫₀⁵ v dt = 3 + (2 − 2cos 7.5 + 6.25 − 5) = 3 + 2.5567 ≈ 5.557.",
+     "final_answer": "x(5) ≈ 5.557 m",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parts match their own skills/topics (4.2 acceleration and speed reasoning; 8.2 distance/position). Part b carries the 3.E justification. Unit 4 and 8.2 scope declared legitimate."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Keys unique. Solver got 8.610 for part c vs key 8.609; the difference is within the stated 0.001 tolerance, but worth re-checking the rounding. Rubric rows are consistent; b2 required words 'increasing','signs' are somewhat brittle but acceptable."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus gives the velocity function, initial position, interval and units; the data object is empty but nothing is needed for rendering. Wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "FRQ, so no distractors; common_errors lists are empty, which is acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Typical AP particle-motion FRQ, 9 points with a 1/2/3/3 split, calculator used for derivative and integrals, about 15 minutes. Part c's separate units point is slightly padded but fine."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound, standard particle-motion FRQ. The only concern is a minor 8.609 vs 8.610 rounding difference in part c, within the stated tolerance. Passes."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Classic AP-style particle motion FRQ. Part a is a routine calculator derivative evaluation with units. Part b requires computing v(1) and a(1) and justifying with their signs, which targets the justification skill. Part c requires locating the zeros of v on [0,5] with the calculator and integrating |v|, a multi-step procedure. Part d uses the initial position plus a definite integral of v (the net change theorem). The context is concise, the numbers are reasonable, and the calculator handles the computation. All content is in AB scope, with no unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 7,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_calculus_ab-f01-k1",
+  "cellId": "ap_calculus_ab-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "a(t)=3cos t+0.5; a(2)=3cos2+0.5",
+     "final_answer": "a(2) ≈ -0.748 m/s^2",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "b",
+     "brief_reasoning": "v(2)≈2.228>0 and a(2)≈-0.748<0 have opposite signs",
+     "final_answer": "Decreasing, because velocity and acceleration have opposite signs",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "c",
+     "brief_reasoning": "v=0 at t≈0.4407 and t≈3.1699; total = 0.3259+4.0819+0.7951",
+     "final_answer": "≈5.203 m",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "d",
+     "brief_reasoning": "x(4)=1+∫0^4 v dt = 1+2.9609",
+     "final_answer": "x(4) ≈ 3.961 m",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "All parts fall within Topic 4.2 and related Topic 8.2 (total distance and position from velocity). Part b assesses 3.E (justification) with a sign-comparison argument. The other parts assess calculation skills, which official FRQs mix in the same way."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Values match the independent solver: a(2) = -0.748, v(2) = 2.228, distance 5.203, x(4) = 3.961. Part b's key is unique. Rubric rows are consistent, and the dependent rows are acceptable. Part c has three 1-point rows (setup, value, units) and part d has three rows (setup, value, answer). These rows are somewhat redundant but valid. Part c's third row repeats the same value for the units mark."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The velocity function, time interval, initial position and units are all stated in the text. The empty data object is fine for a text-only stimulus. Wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so distractors do not apply. The rubric's common_errors lists are empty, which is a minor weakness."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The 9 points and about 15 minutes match the official grain. The task is a standard calculator particle-motion FRQ. The calculator is needed for the integrals of |v| and v. The numbers are moderate."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is accurate and in scope, with a standard structure and a valid rubric. The 1/2/3/3 point split is acceptable. The rubric is slightly padded with units and answer rows, but this is not disqualifying. It passes."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Typical AP FRQ-style particle motion item. Part a is a direct derivative with units. Part b requires comparing the signs of v and a and justifying the conclusion (skill 3.E). Part c requires finding the sign changes of v on [0,4] with the calculator and integrating |v|, or splitting the interval. Part d requires the initial condition plus a definite integral. Concepts are in scope for AB, the wording is unambiguous, and the numbers are calculator-friendly. Difficulty comes from multi-step reasoning and choosing procedures, not from heavy reading or arithmetic.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 7,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "ap_calculus_ab-f02-k0",
+  "cellId": "ap_calculus_ab-f02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "Differentiate implicitly: 2x + y + xy' + 2yy' = 0, so y'(x+2y) = -(2x+y).",
+     "final_answer": "dy/dx = -(2x+y)/(x+2y)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "b",
+     "brief_reasoning": "(1,1) is on the curve since 1+1+1=3. Slope = -3/3 = -1.",
+     "final_answer": "y - 1 = -(x - 1), i.e. y = -x + 2",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "c",
+     "brief_reasoning": "Set 2x+y=0, so y=-2x. Substituting gives 3x²=3, so x=±1. The denominator x+2y is nonzero at both points.",
+     "final_answer": "(1,-2) and (-1,2)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "d",
+     "brief_reasoning": "Normal slope is the negative reciprocal of -1, which is 1.",
+     "final_answer": "y - 1 = 1(x - 1), i.e. y = x",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "First-derivative implicit differentiation, tangent, horizontal tangent, normal line; all in scope for Unit 3 and skill 1.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All keys are correct and unique. The denominator is nonzero at the horizontal-tangent points (-3 and 3), so the answer to (c) is valid. The rubric does not require checking this condition, which is a minor weakness."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text-only stimulus is complete. Template residue such as '1xy', '1y^2', '1(y + x dy/dx)', and 'y=-2x/1' is awkward wording, but the math is unambiguous."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so distractors do not apply. The rubric rows are consistent."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "9 points in 4 parts, no calculator, light arithmetic. Parts (b) and (d) are somewhat repetitive but acceptable."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, in scope, and suitable. The only issues are cosmetic: the coefficient-of-1 template residue in the wording, and no rubric row requiring a check that the denominator is nonzero in (c)."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP FRQ-style implicit differentiation: derive dy/dx using product and chain rules, evaluate slope for tangent and normal lines, and find horizontal tangents by setting the numerator to zero, substituting into the curve, and checking that the denominator is nonzero. Multiple procedures are chained, but the numbers are clean and the scope is limited to first derivatives. Difficulty comes from legitimate conceptual sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 8,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "ap_calculus_ab-f02-k1",
+  "cellId": "ap_calculus_ab-f02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "Differentiate: 2x + 2y + 2x·y' + 4y·y' = 0. Collect y' terms: y'(2x + 4y) = -(2x + 2y), so y' = -(2x + 2y)/(2x + 4y).",
+     "final_answer": "dy/dx = -(2x+2y)/(2x+4y)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "b",
+     "brief_reasoning": "(-2,0) is on the curve since 4 + 0 + 0 = 4. Slope = -(-4)/(-4) = -1.",
+     "final_answer": "y = -(x+2)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "c",
+     "brief_reasoning": "Numerator = 0 gives y = -x. Substitute: x^2 - 2x^2 + 2x^2 = x^2 = 4, so x = ±2. The denominator is nonzero at both points (-4 and 4).",
+     "final_answer": "(2,-2) and (-2,2)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "d",
+     "brief_reasoning": "The tangent slope is -1, so the normal slope is 1, through (-2,0).",
+     "final_answer": "y = x + 2",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Implicit differentiation, tangent line, and horizontal tangents are all in Unit 3 scope. The normal line is a mild extension but is not later-unit content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All keys are correct: dy/dx matches, the slope is -1, the horizontal tangents are at (±2, ∓2) with a nonzero denominator, and the normal line is y = x + 2. The rubric rows are consistent. Rows b2 and d2 check only \"y - 0\", which is weak but acceptable."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus is complete and the wording is clear. The normal line is defined in the prompt."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so distractors do not apply."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item is 9 points in about 15 minutes, with clean non-calculator arithmetic. Parts b and d are somewhat redundant, but the item is acceptable."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A correct, clean, in-scope implicit differentiation FRQ worth 9 points (3/2/2/2). The normal-line part is a minor extension, and the rubric rows are somewhat thin but consistent. Pass."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard FRQ-style implicit differentiation. Part a is routine (product rule and chain rule on a conic). Part b evaluates the derivative and writes a tangent line. Part c needs a horizontal-tangent condition, substitution back into the curve, and a check that the denominator is nonzero. Part d needs the perpendicular slope. The numbers are small and the reading is light. The first derivative only, so it is in scope. Moderate depth with a few multi-step pieces, appropriate for full mocks.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 480
+  }
+ }
+]

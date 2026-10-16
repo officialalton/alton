@@ -1,0 +1,903 @@
+{
+ "taskId": "gen-lit40-medium-04-01",
+ "passed": [
+  {
+   "candidateId": "lit40-medium-04-002",
+   "task": "gen-lit40-medium-04-01",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-04-002",
+    "batchId": "lit40-medium-04",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "medium",
+    "questionType": "relationship_between_characters",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 1,
+     "genre": "novel_excerpt",
+     "pov": "third_limited",
+     "styleEra": "19c",
+     "names": [
+      "Clara",
+      "Clement"
+     ],
+     "nameCultures": [
+      "english",
+      "caribbean"
+     ],
+     "locale": "Manchester",
+     "setting": "a noodle stall",
+     "relationship": "a stepmother and a skeptical teenager",
+     "conflict": "over a plan that depends on a lie",
+     "openingStyle": "부사절·전치사구로 시작('When', 'Although', 'Beside' 등)",
+     "topicSeed": "a noodle stall in Manchester; a stepmother and a skeptical teenager over a plan that depends on a lie"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 90,
+     "max": 150
+    },
+    "recipeId": "inferences_lit_relationship_between_characters_medium"
+   },
+   "g": {
+    "passage": "While the cook ladled broth into two paper bowls, Clara explained the plan a second time: they would tell Clement's father that the school trip had been canceled, and the trip money would go toward his birthday surprise instead. Clement poked at a slice of pork and said nothing. When she finished, he asked how many birthdays she had planned before, and she admitted this was her first. He snorted, but he slid the chili oil across the counter to her, the way his father always did, and told her that the lie would need a better reason for the cancellation. She took out a pen and wrote his suggestion on a napkin. Steam rose against the striped awning, and a bus hissed to a stop at the corner.",
+    "question": "Based on the text, which choice best describes the relationship between Clement and Clara?",
+    "options": [
+     "Clement remains wary of Clara but is starting to work with her as a partner.",
+     "Clara distrusts Clement and hesitates to include him in the plan for his father.",
+     "Clement openly admires Clara and eagerly accepts every plan that she proposes.",
+     "Like many stepchildren, Clement refuses to join in anything that Clara organizes."
+    ],
+    "correct_letter": "A",
+    "explanation": "클레멘트는 처음에 말이 없고 클라라의 경험을 비꼬듯 물으며 코웃음을 쳐 경계심을 드러낸다. 하지만 아버지가 늘 하던 방식대로 고추기름을 건네고, 거짓말에 더 나은 이유가 필요하다고 조언해 계획에 참여하기 시작한다. 클라라가 그 제안을 받아 적는 장면까지 이어 보면 A가 정답이다. B는 경계의 방향을 뒤집었고, C는 회의적인 태도를 무시했으며, D는 지문과 맞지 않는 통념이다."
+   },
+   "notes": [],
+   "tone": [
+    "wry",
+    "tentative"
+   ],
+   "devices": [
+    "characterization",
+    "gesture",
+    "irony"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-04-003",
+   "task": "gen-lit40-medium-04-01",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-04-003",
+    "batchId": "lit40-medium-04",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "medium",
+    "questionType": "relationship_between_characters",
+    "genre": "personal_essay",
+    "seed": {
+     "index": 2,
+     "genre": "personal_essay",
+     "pov": "first",
+     "styleEra": "early_20c",
+     "names": [
+      "Marta",
+      "Larissa"
+     ],
+     "nameCultures": [
+      "slavic_baltic",
+      "portuguese_brazilian"
+     ],
+     "locale": "Tehran",
+     "setting": "a lighthouse station",
+     "relationship": "an author and her translator",
+     "conflict": "when a visitor arrives and sees what the family does not",
+     "openingStyle": "구체적인 사물이나 동작으로 시작(관사 The 로 시작하지 말 것)",
+     "topicSeed": "a lighthouse station in Tehran; an author and her translator when a visitor arrives and sees what the family does not"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 90,
+     "max": 150
+    },
+    "recipeId": "inferences_lit_relationship_between_characters_medium"
+   },
+   "g": {
+    "passage": "Salt-stained binoculars hung by the door of the lighthouse station where Marta wrote her novels, and I lifted them only to have something to do with my hands. I had come to deliver proofs, expecting the polite distance of a writer and her translator. Instead I watched Larissa read a paragraph aloud in Persian, pause, and wait while Marta mouthed the English sentence beneath it, as if checking a pulse. Marta's family, passing through with tea, called Larissa the helper. Yet when Larissa frowned at a word, Marta crossed out her own line rather than defend it, and later asked her, almost shyly, which of two endings she should keep. Outside, the lamp turned its slow beam over the rooftops, and a dog barked twice at the gate.",
+    "question": "Based on the text, which choice best describes the relationship between Marta and Larissa?",
+    "options": [
+     "Larissa feels inferior to Marta and hesitates to question any part of her work.",
+     "Marta treats Larissa as a trusted collaborator whose judgment shapes the writing.",
+     "Larissa relies on Marta to approve each of her choices before she translates further.",
+     "As is typical, the translator serves the author and simply follows her instructions."
+    ],
+    "correct_letter": "B",
+    "explanation": "가족은 라리사를 단순한 조수라고 부르지만, 방문자인 화자는 다른 모습을 본다. 라리사가 한 단어에 얼굴을 찌푸리자 마르타는 자신의 문장을 지우고, 나중에는 두 결말 중 무엇을 남길지 라리사에게 묻는다. 이 두 단서는 마르타가 라리사의 판단을 신뢰하고 작품에 반영한다는 것을 보여 주므로 B가 정답이다. A와 C는 의존의 방향을 잘못 읽었고, D는 지문이 뒤집는 통념이다."
+   },
+   "notes": [],
+   "tone": [
+    "observant",
+    "quiet"
+   ],
+   "devices": [
+    "first-person observer",
+    "simile",
+    "contrast"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-04-004",
+   "task": "gen-lit40-medium-04-01",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-04-004",
+    "batchId": "lit40-medium-04",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "medium",
+    "questionType": "relationship_between_characters",
+    "genre": "memoir",
+    "seed": {
+     "index": 3,
+     "genre": "memoir",
+     "pov": "first",
+     "styleEra": "early_20c",
+     "names": [
+      "Mingyu",
+      "Nikos"
+     ],
+     "nameCultures": [
+      "chinese",
+      "greek_balkan_turkish"
+     ],
+     "locale": "Istanbul",
+     "setting": "a bus depot",
+     "relationship": "a pair of lifelong friends who rarely speak",
+     "conflict": "over a secret discovered in a drawer",
+     "openingStyle": "감각 묘사(소리·냄새·촉감)로 시작",
+     "topicSeed": "a bus depot in Istanbul; a pair of lifelong friends who rarely speak over a secret discovered in a drawer"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 90,
+     "max": 150
+    },
+    "recipeId": "inferences_lit_relationship_between_characters_medium"
+   },
+   "g": {
+    "passage": "Diesel and burnt coffee hung over the bus depot in Istanbul where Nikos and I had worked the night schedule for twenty-two years. We rarely talked; a nod at the start of each shift had always been enough. One evening I opened the dispatch drawer looking for a stapler and found a stack of my own letters to my mother, the ones I believed had been lost years ago, each stamped and returned. Nikos must have been keeping them safe since the depot's old mailroom closed. I said nothing. The next night he set a cup of tea at my elbow before I asked, and I left the drawer unlocked so he would know I had seen. Through the glass, a bus idled with its doors folded open, its headlights pale in the drizzle.",
+    "question": "Based on the text, which choice best describes the relationship between the narrator, Mingyu, and Nikos?",
+    "options": [
+     "Mingyu feels betrayed by Nikos's secret and quietly withdraws from their friendship.",
+     "Nikos waits anxiously for Mingyu to explain the letters he found in the drawer.",
+     "Their long friendship relies on unspoken gestures that both men understand well.",
+     "Like most coworkers, they share a schedule but have little personal connection."
+    ],
+    "correct_letter": "C",
+    "explanation": "화자는 두 사람이 거의 말하지 않고 고개 끄덕임만으로 충분했다고 말한다. 서랍 속 편지를 발견한 뒤에도 말없이, 니코스는 차를 건네고 화자는 서랍을 잠그지 않은 채 두어 알았다는 신호를 보낸다. 두 장면을 이어 보면 말없는 몸짓으로 서로를 이해하는 깊은 우정이 드러나므로 C가 정답이다. A는 감정을 잘못 추측했고, B는 설명을 기다리는 방향을 뒤집었으며, D는 지문과 어긋나는 통념이다."
+   },
+   "notes": [],
+   "tone": [
+    "understated",
+    "tender"
+   ],
+   "devices": [
+    "sensory imagery",
+    "first-person narration",
+    "gesture"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-04-005",
+   "task": "gen-lit40-medium-04-01",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-04-005",
+    "batchId": "lit40-medium-04",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "medium",
+    "questionType": "symbolism",
+    "genre": "short_story",
+    "seed": {
+     "index": 4,
+     "genre": "short_story",
+     "pov": "second",
+     "styleEra": "19c",
+     "names": [
+      "Leilani",
+      "Mele"
+     ],
+     "nameCultures": [
+      "pacific_maori_hawaiian",
+      "pacific_maori_hawaiian"
+     ],
+     "locale": "Auckland",
+     "setting": "a crowded wedding hall",
+     "relationship": "a ferryman's daughter and a passenger",
+     "conflict": "while waiting for important news",
+     "openingStyle": "의문문으로 시작",
+     "topicSeed": "a crowded wedding hall in Auckland; a ferryman's daughter and a passenger while waiting for important news"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Who brings a ferry token to a wedding? Mele asked, watching Leilani turn the brass coin over her knuckles while the band tuned up. Leilani explained that her father gave one to every passenger who crossed the harbor in bad weather, a promise that the boat would come back for them. Mele had ridden that ferry for years; tonight she was only waiting for a message from the hospital where her brother lay in surgery. As the speeches began, Leilani pressed the token into Mele's palm. Mele held it through the toasts and the first dance, rubbing its worn edge whenever her phone stayed dark. When the screen finally lit, she did not read it at once. She closed her fingers around the brass first. Around them, guests clapped as the couple cut a cake shaped like a lighthouse.",
+    "question": "In the text, the ferry token most likely represents",
+    "options": [
+     "the debt that Mele owes Leilani's father for her many years of crossings.",
+     "Leilani's wish to leave the crowded wedding and return to the harbor.",
+     "the long friendship that Leilani and Mele formed while riding the ferry.",
+     "a promise of safe return that Mele clings to while she awaits the news."
+    ],
+    "correct_letter": "D",
+    "explanation": "레일라니는 아버지가 궂은 날씨에 승객에게 배가 다시 데리러 온다는 약속으로 토큰을 주었다고 설명한다. 이후 멜레는 수술 중인 오빠의 소식을 기다리며 휴대전화가 꺼져 있을 때마다 토큰을 문지르고, 소식이 오자 먼저 토큰을 쥔다. 두 단서를 이으면 토큰은 무사 귀환에 대한 약속, 즉 기다림 속 희망을 상징하므로 D가 정답이다. A, B, C는 지문 어휘를 쓰지만 토큰의 반복된 쓰임과 연결되지 않는다."
+   },
+   "notes": [],
+   "tone": [
+    "anxious",
+    "hopeful"
+   ],
+   "devices": [
+    "symbolism",
+    "contrast",
+    "repetition"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-04-006",
+   "task": "gen-lit40-medium-04-01",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-04-006",
+    "batchId": "lit40-medium-04",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "medium",
+    "questionType": "symbolism",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 5,
+     "genre": "novel_excerpt",
+     "pov": "mixed_or_none",
+     "styleEra": "late_20c",
+     "names": [
+      "Ofelia",
+      "Ingrid"
+     ],
+     "nameCultures": [
+      "latin_american",
+      "dutch_nordic"
+     ],
+     "locale": "Bergen",
+     "setting": "a bakery before opening",
+     "relationship": "two night-shift coworkers",
+     "conflict": "when a gift is returned instead of thanked",
+     "openingStyle": "인물의 이름으로 시작",
+     "topicSeed": "a bakery before opening in Bergen; two night-shift coworkers when a gift is returned instead of thanked"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Ofelia found the jar on her workbench at four in the morning, its lid still tied with the red string she had used when she gave it away. Inside, the sourdough starter had been fed and was bubbling, alive. She had kept that culture going for eleven years, feeding it every night before the ovens warmed, and she had handed a portion to Ingrid after their first month together on the night shift, telling her it would need her every day. Ingrid, shaping rolls at the far table, did not look up. Later she mentioned, to no one in particular, that her lease ended in spring and she had not decided where she would go. Ofelia unscrewed the lid, smelled the sour sweetness, and set the jar on the shelf beside her own. Flour drifted in the light above the proofing racks, and outside, the first delivery van rattled over the cobbles.",
+    "question": "In the text, the sourdough starter most likely represents",
+    "options": [
+     "an ongoing commitment that Ingrid feels unable to promise she will keep.",
+     "Ofelia's resentment that Ingrid has ignored her advice about baking bread.",
+     "the bakery's eleven-year history and its constant need for new workers.",
+     "Ingrid's gratitude, shown by feeding the starter before she returned it."
+    ],
+    "correct_letter": "A",
+    "explanation": "오펠리아는 반죽 효모를 11년 동안 매일 돌봐 왔고, 잉그리드에게 나눠 주며 매일 돌봐야 한다고 말했다. 잉그리드는 효모를 돌려준 뒤 봄에 임대가 끝나 어디로 갈지 정하지 못했다고 말한다. 두 단서를 연결하면 효모는 매일의 지속적인 헌신을 상징하며, 잉그리드는 그것을 약속할 수 없어 돌려준 것이므로 A가 정답이다. D는 효모가 살아 있다는 점을 근거로 한 그럴듯한 오답이지만 반환의 이유를 설명하지 못한다."
+   },
+   "notes": [],
+   "tone": [
+    "quiet",
+    "melancholy"
+   ],
+   "devices": [
+    "symbolism",
+    "imagery",
+    "indirect characterization"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-04-008",
+   "task": "gen-lit40-medium-04-01",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-04-008",
+    "batchId": "lit40-medium-04",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "medium",
+    "questionType": "symbolism",
+    "genre": "personal_essay",
+    "seed": {
+     "index": 7,
+     "genre": "personal_essay",
+     "pov": "third_omniscient",
+     "styleEra": "late_20c",
+     "names": [
+      "Janelle",
+      "Shanice"
+     ],
+     "nameCultures": [
+      "caribbean",
+      "caribbean"
+     ],
+     "locale": "Port of Spain",
+     "setting": "a train-station cafe",
+     "relationship": "a gardener and the house's new owner",
+     "conflict": "after a competition one of them lost on purpose",
+     "openingStyle": "인물의 이름으로 시작",
+     "topicSeed": "a train-station cafe in Port of Spain; a gardener and the house's new owner after a competition one of them lost on purpose"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Janelle was already at the train-station cafe in Port of Spain when I arrived, two cups of sorrel tea sweating on the table and the blue ribbon from Saturday's garden show lying between them. I had bought the house on the hill only in March; she had tended its hibiscus for thirty years before that. Everyone at the show knew her blooms were the best, and everyone saw her withdraw her entry an hour before judging, leaving mine to win. I had brought the ribbon to return it. She pushed it back across the table and said the garden needed to learn my name. A train pulled in as she spoke, and pigeons scattered from the platform roof. Since then I have kept the ribbon in a drawer rather than on the wall, and each time I see it I water more carefully, prune more slowly, as though the prize is still being judged. Outside my window now, the hibiscus has begun to bud along the fence.",
+    "question": "In the text, the blue ribbon most likely represents",
+    "options": [
+     "Janelle's lingering bitterness at losing the house to a newcomer.",
+     "the community's admiration for Shanice's skill as a gardener.",
+     "a welcome that Shanice accepts but still feels she must earn.",
+     "Shanice's pride in defeating the most respected local gardener."
+    ],
+    "correct_letter": "C",
+    "explanation": "자넬은 일부러 출품을 철회해 화자인 샤니스가 이기게 했고, 리본을 돌려받지 않으며 정원이 샤니스의 이름을 배워야 한다고 말한다. 샤니스는 리본을 벽에 걸지 않고 서랍에 두며, 볼 때마다 상이 아직 심사 중인 것처럼 더 정성껏 정원을 돌본다. 두 단서를 이으면 리본은 받아들였지만 아직 자격을 증명해야 한다고 느끼는 환영의 표시이므로 C가 정답이다. B와 D는 승리를 실력이나 자부심으로 잘못 읽었고, A는 자넬의 너그러운 행동과 맞지 않는다."
+   },
+   "notes": [],
+   "tone": [
+    "reflective",
+    "humble"
+   ],
+   "devices": [
+    "symbolism",
+    "first-person narration",
+    "imagery"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-04-009",
+   "task": "gen-lit40-medium-04-01",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-04-009",
+    "batchId": "lit40-medium-04",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "medium",
+    "questionType": "symbolism",
+    "genre": "memoir",
+    "seed": {
+     "index": 8,
+     "genre": "memoir",
+     "pov": "mixed_or_none",
+     "styleEra": "late_20c",
+     "names": [
+      "Ruoxi",
+      "Yuxuan"
+     ],
+     "nameCultures": [
+      "chinese",
+      "chinese"
+     ],
+     "locale": "Taipei",
+     "setting": "a soccer field at dusk",
+     "relationship": "a coach and a benched star",
+     "conflict": "after a public embarrassment",
+     "openingStyle": "감각 묘사(소리·냄새·촉감)로 시작",
+     "topicSeed": "a soccer field at dusk in Taipei; a coach and a benched star after a public embarrassment"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Cut grass and wet chalk: that is what I remember of the field in Taipei the week after I missed the penalty in front of the whole stadium. Coach Yuxuan benched me without explanation. Each evening at dusk she handed me a flat ball from the equipment shed and a hand pump, and I knelt by the sideline pressing air into it while the others ran drills. At first I resented the task and pumped carelessly, so the ball sagged by morning. By the fourth night I was checking the valve, squeezing the seams, testing the bounce against my palm before I handed it back. Yuxuan never commented. On the last evening of the week she rolled the ball back to me and pointed at the penalty spot. The floodlights buzzed on, one bank at a time, and moths gathered in the glare.",
+    "question": "In the text, the flat ball that the narrator, Ruoxi, inflates each evening most likely represents",
+    "options": [
+     "the punishment Yuxuan plans to continue until Ruoxi decides to quit.",
+     "Ruoxi's lasting resentment toward the teammates who watched her fail.",
+     "the team's dependence on Ruoxi to keep all of its equipment in order.",
+     "Ruoxi's gradual recovery of a confidence that her mistake had emptied."
+    ],
+    "correct_letter": "D",
+    "explanation": "화자는 페널티킥 실수 뒤 벤치에 앉게 되고, 코치는 매일 바람 빠진 공을 채우게 한다. 처음에는 대충 해서 공이 아침이면 다시 처졌지만, 나흘째에는 밸브와 솔기를 꼼꼼히 확인하게 된다. 마지막 날 코치가 그 공을 페널티 지점으로 굴려 주는 장면까지 이어 보면, 공은 실수로 비어 버린 자신감이 서서히 다시 채워지는 과정을 상징하므로 D가 정답이다. A와 B는 초반의 원망에만 기댄 오답이고, C는 상징을 문자 그대로 읽었다."
+   },
+   "notes": [],
+   "tone": [
+    "introspective",
+    "determined"
+   ],
+   "devices": [
+    "symbolism",
+    "sensory imagery",
+    "progression"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-04-010",
+   "task": "gen-lit40-medium-04-01",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-04-010",
+    "batchId": "lit40-medium-04",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "medium",
+    "questionType": "figurative_language",
+    "genre": "short_story",
+    "seed": {
+     "index": 9,
+     "genre": "short_story",
+     "pov": "first",
+     "styleEra": "late_20c",
+     "names": [
+      "Eamon",
+      "Minjun"
+     ],
+     "nameCultures": [
+      "irish_scottish",
+      "korean"
+     ],
+     "locale": "Jeju Island",
+     "setting": "a mountain bus stop",
+     "relationship": "a daughter and her absent father's friend",
+     "conflict": "when a rumor reaches the wrong person",
+     "openingStyle": "장소 이름으로 시작",
+     "topicSeed": "a mountain bus stop in Jeju Island; a daughter and her absent father's friend when a rumor reaches the wrong person"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Jeju Island had one bus stop on that stretch of the mountain road, a tin shelter where Minjun waited each afternoon after school. Eamon, who had fished with her father before her father left for Busan, sat down beside her and said, without greeting, that her aunt had heard. Minjun had told only one classmate that her father was not coming back. By the time Eamon reached the shelter, the story had already walked down the mountain without her, stopping at the market, the clinic, and finally her aunt's kitchen. Eamon offered her a tangerine and said her aunt was not angry, only hurt that she had learned it from a neighbor. Minjun peeled the fruit slowly. Mist slid over the ridge, and the bus appeared, its headlights soft in the gray.",
+    "question": "As used in the text, the phrase “the story had already walked down the mountain without her” most nearly suggests that the news",
+    "options": [
+     "was told by Minjun to her aunt during a long walk down the mountain.",
+     "was slowly forgotten as it passed from one neighbor to the next.",
+     "had spread from person to person beyond Minjun's control.",
+     "had been invented by people gossiping at the market and clinic."
+    ],
+    "correct_letter": "C",
+    "explanation": "민준은 아버지 이야기를 반 친구 한 명에게만 했는데, 그 소식이 시장과 진료소를 거쳐 고모의 부엌에까지 닿았다. 이야기가 그녀 없이 산을 걸어 내려갔다는 의인화는 소식이 그녀의 손을 떠나 사람들 사이로 퍼졌음을 뜻한다. 고모가 이웃에게서 들었다는 에먼의 말도 이를 뒷받침하므로 C가 정답이다. A는 걷는다는 표현을 문자 그대로 읽었고, B와 D는 지문의 근거가 없다."
+   },
+   "notes": [],
+   "tone": [
+    "gentle",
+    "somber"
+   ],
+   "devices": [
+    "personification",
+    "imagery"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-04-011",
+   "task": "gen-lit40-medium-04-01",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-04-011",
+    "batchId": "lit40-medium-04",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "medium",
+    "questionType": "figurative_language",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 10,
+     "genre": "novel_excerpt",
+     "pov": "first",
+     "styleEra": "contemporary",
+     "names": [
+      "Sota",
+      "Amelia"
+     ],
+     "nameCultures": [
+      "japanese",
+      "portuguese_brazilian"
+     ],
+     "locale": "Porto Alegre",
+     "setting": "a beekeeper's yard",
+     "relationship": "an old teacher and a former pupil",
+     "conflict": "about an ending that nobody wants to admit",
+     "openingStyle": "대화 한 줄로 시작",
+     "topicSeed": "a beekeeper's yard in Porto Alegre; an old teacher and a former pupil about an ending that nobody wants to admit"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Your hives sound quieter this year, Amelia said, setting her bag on the bench by the gate. Sota, who had taught her chemistry thirty years earlier in Porto Alegre, only lifted the lid of the nearest box and let her look. Fewer frames held comb; the bees moved over them slowly. He told her that he had sold four colonies in the spring and would sell the rest in autumn, though he said it as if describing the weather. Amelia asked who would keep them. He answered that the bees had been humming a smaller song for some time now, and that he had been pretending not to hear it. She helped him close the lid. Neither of them mentioned his hands, which shook as he tightened the strap. Along the fence, the jasmine had opened, heavy with afternoon heat.",
+    "question": "As used in the text, the phrase “humming a smaller song” most nearly suggests that the bees",
+    "options": [
+     "make a louder sound that Sota now finds tiresome to hear.",
+     "show a new behavior that Sota hopes to study more closely.",
+     "respond to Amelia's visit with an unusual kind of calm.",
+     "reflect a steady decline that Sota has avoided admitting."
+    ],
+    "correct_letter": "D",
+    "explanation": "아멜리아는 벌통 소리가 조용해졌다고 말하고, 실제로 벌집이 든 틀이 줄고 벌도 느리게 움직인다. 소타는 벌통을 팔고 있으며 그 사실을 날씨 이야기하듯 담담하게 말하고, 떨리는 손은 그 자신의 노쇠도 암시한다. 따라서 더 작은 노래를 흥얼거린다는 표현은 그가 외면해 온 점진적 쇠퇴를 뜻하므로 D가 정답이다. A는 소리의 방향을 반대로 읽었고, B와 C는 지문의 근거가 없다."
+   },
+   "notes": [],
+   "tone": [
+    "elegiac",
+    "restrained"
+   ],
+   "devices": [
+    "metaphor",
+    "understatement",
+    "imagery"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-04-012",
+   "task": "gen-lit40-medium-04-01",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-04-012",
+    "batchId": "lit40-medium-04",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "medium",
+    "questionType": "figurative_language",
+    "genre": "poetry",
+    "seed": {
+     "index": 11,
+     "genre": "poetry",
+     "pov": "first",
+     "styleEra": "early_20c",
+     "names": [
+      "Emilio",
+      "Bronislaw"
+     ],
+     "nameCultures": [
+      "italian",
+      "slavic_baltic"
+     ],
+     "locale": "Naples",
+     "setting": "a monastery guesthouse",
+     "relationship": "a grandson and the grandfather's old friend",
+     "conflict": "about keeping a family business open",
+     "openingStyle": "의문문으로 시작",
+     "topicSeed": "a monastery guesthouse in Naples; a grandson and the grandfather's old friend about keeping a family business open"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Why keep the shutters open, Emilio asks,\nwhen no one climbs the hill for gloves anymore?\nBronislaw, who stitched beside his grandfather\nfor forty years, sets down his guesthouse cup\nand listens to the bell for vespers.\n\nA shop, he says, is a lamp left burning\nfor a traveler you have never met.\nYou do not light it for the road tonight.\nYou light it so the road remembers.\n\nEmilio looks down at his grandfather's thimble,\nworn to silver on one side,\nand counts the unpaid bills again.\n\nBelow the cloister, Naples gathers its lights,\nand a cat crosses the warm stones of the yard.",
+    "question": "As used in the poem, the phrase “a lamp left burning” most nearly suggests that keeping the shop open is",
+    "options": [
+     "a commitment kept in hope of customers who have not yet come.",
+     "a costly waste of money that the family can no longer afford.",
+     "a memorial meant only to honor the grandfather's years of work.",
+     "a warning to travelers that the road up the hill is dangerous."
+    ],
+    "correct_letter": "A",
+    "explanation": "에밀리오는 장갑을 사러 오는 사람이 없는데 왜 가게를 여느냐고 묻는다. 브로니스와프는 가게를 아직 만나지 못한 나그네를 위해 켜 둔 등불에 비유하고, 오늘 밤을 위해서가 아니라 길이 기억하도록 켜는 것이라고 덧붙인다. 따라서 이 표현은 아직 오지 않은 손님을 기대하며 가게를 지키는 헌신을 뜻하므로 A가 정답이다. B는 에밀리오의 걱정만 반영했고, C는 할아버지의 골무에 기댄 그럴듯한 오답이며, D는 근거가 없다."
+   },
+   "notes": [],
+   "tone": [
+    "meditative",
+    "hopeful"
+   ],
+   "devices": [
+    "metaphor",
+    "repetition",
+    "imagery"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-04-013",
+   "task": "gen-lit40-medium-04-01",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-04-013",
+    "batchId": "lit40-medium-04",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "medium",
+    "questionType": "figurative_language",
+    "genre": "personal_essay",
+    "seed": {
+     "index": 12,
+     "genre": "personal_essay",
+     "pov": "second",
+     "styleEra": "late_20c",
+     "names": [
+      "Themba",
+      "Zawadi"
+     ],
+     "nameCultures": [
+      "east_south_african",
+      "east_south_african"
+     ],
+     "locale": "Addis Ababa",
+     "setting": "a vineyard at harvest",
+     "relationship": "a bus driver and a regular passenger",
+     "conflict": "when old loyalties collide with new ones",
+     "openingStyle": "인물의 이름으로 시작",
+     "topicSeed": "a vineyard at harvest in Addis Ababa; a bus driver and a regular passenger when old loyalties collide with new ones"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Themba had driven me to the vineyard gate every harvest morning for six years, and I had never once paid attention to the route until the season I took a job picking grapes for his cousin's rivals across the valley outside Addis Ababa. He still stopped for me. He still saved the seat behind him. But he no longer hummed along to the radio, and when I mentioned the new owners' generous wages he simply nodded at the windshield. That autumn I felt as if I were pruning the same vine from both sides, trimming one friendship to feed another and unsure which branch would bear fruit. On the last day of harvest I bought two baskets of grapes, one from each estate, and left his on the dashboard. Dust rose behind the bus as it climbed toward the hills, gold in the evening light.",
+    "question": "As used in the text, the phrase “pruning the same vine from both sides” most nearly suggests that the narrator, Zawadi, was",
+    "options": [
+     "working harder at the harvest than she had in any earlier season.",
+     "trying to honor two competing loyalties without knowing which would last.",
+     "deliberately ending her friendship with Themba to protect her new job.",
+     "cutting back her time on the bus to spend more hours in the fields."
+    ],
+    "correct_letter": "B",
+    "explanation": "화자는 템바 사촌의 경쟁 농장에서 일하게 되고, 템바는 여전히 그녀를 태워 주지만 라디오를 따라 흥얼거리지 않는다. 화자는 한 우정을 다듬어 다른 우정을 키우며 어느 가지가 열매를 맺을지 모르겠다고 말하고, 마지막에 두 농장의 포도를 하나씩 산다. 이 단서들로 볼 때 이 표현은 두 충성 사이에서 양쪽을 모두 지키려는 갈등을 뜻하므로 B가 정답이다. A와 D는 표현을 문자 그대로 읽었고, C는 템바에게 포도를 남긴 행동과 반대된다."
+   },
+   "notes": [],
+   "tone": [
+    "conflicted",
+    "reflective"
+   ],
+   "devices": [
+    "metaphor",
+    "first-person narration",
+    "imagery"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-04-014",
+   "task": "gen-lit40-medium-04-01",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-04-014",
+    "batchId": "lit40-medium-04",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "medium",
+    "questionType": "figurative_language",
+    "genre": "memoir",
+    "seed": {
+     "index": 13,
+     "genre": "memoir",
+     "pov": "first",
+     "styleEra": "early_20c",
+     "names": [
+      "Aung",
+      "Thuy"
+     ],
+     "nameCultures": [
+      "southeast_asian",
+      "southeast_asian"
+     ],
+     "locale": "Manila",
+     "setting": "a lakeside dock",
+     "relationship": "two estranged sisters",
+     "conflict": "about an object that belonged to someone gone",
+     "openingStyle": "짧은 단언문으로 시작",
+     "topicSeed": "a lakeside dock in Manila; two estranged sisters about an object that belonged to someone gone"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Our mother's radio still works. Thuy proved it the morning she arrived at the dock in Manila, turning the dial until a station crackled through the static, though we had not spoken in nine years. She had come to decide which of us would keep it. We sat on the planks with our feet above the water, and the silence between us had its own tide: it drew back when she laughed at an old song, then rushed in again whenever one of us said our mother's name. Aung, she said finally, you take it. I said she should, since she was the one who had fixed the antenna. By noon neither of us had touched it. A fishing boat slid past the pilings, and its wake slapped softly against the posts.",
+    "question": "As used in the text, the phrase “the silence between us had its own tide” most nearly suggests",
+    "options": [
+     "a steady calm that settled once the sisters reached a decision.",
+     "the noise of the lake drowning out the sisters' conversation.",
+     "a distance that eased and returned as their memories shifted.",
+     "a lasting anger that neither sister was willing to express."
+    ],
+    "correct_letter": "C",
+    "explanation": "두 자매는 9년 동안 말을 하지 않았고, 화자는 둘 사이의 침묵이 밀물과 썰물처럼 움직였다고 말한다. 언니가 옛 노래에 웃을 때 침묵이 물러났다가 어머니의 이름이 나오면 다시 밀려왔다는 설명이 이어진다. 따라서 이 표현은 추억에 따라 줄었다가 다시 생기는 거리감을 뜻하므로 C가 정답이다. A는 결정이 나지 않은 결말과 맞지 않고, B는 비유를 문자 그대로 읽었으며, D는 서로 라디오를 양보하는 모습과 어긋난다."
+   },
+   "notes": [],
+   "tone": [
+    "wistful",
+    "tender"
+   ],
+   "devices": [
+    "metaphor",
+    "imagery",
+    "first-person narration"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-04-015",
+   "task": "gen-lit40-medium-04-01",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-04-015",
+    "batchId": "lit40-medium-04",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "medium",
+    "questionType": "figurative_language",
+    "genre": "fable_or_folktale_retelling",
+    "seed": {
+     "index": 14,
+     "genre": "fable_or_folktale_retelling",
+     "pov": "first",
+     "styleEra": "early_20c",
+     "names": [
+      "Jordan",
+      "Xinyi"
+     ],
+     "nameCultures": [
+      "english",
+      "chinese"
+     ],
+     "locale": "Shanghai",
+     "setting": "a printing press room",
+     "relationship": "an elder and a restless apprentice",
+     "conflict": "after a surprising success that makes things harder",
+     "openingStyle": "장소 이름으로 시작",
+     "topicSeed": "a printing press room in Shanghai; an elder and a restless apprentice after a surprising success that makes things harder"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Shanghai, in the old tale, held a press room so small that only two people could turn its great wheel: Jordan, the elder printer, and Xinyi, an apprentice who could not sit still. One winter Xinyi set the type for a book of riddles without asking permission, and by spring every bookseller along the river wanted a thousand copies. Merchants crowded the doorway. Paper ran short, ink froze in its pots, and Xinyi slept beside the wheel. Jordan watched her for many nights before speaking. You planted one seed, he told her, and now it wants the whole garden. Xinyi asked whether she should have planted nothing. Jordan only handed her a second lamp and showed her how to trim its wick. Outside, snow settled on the rooftops of the sleeping town.",
+    "question": "As used in the text, the phrase “now it wants the whole garden” most nearly suggests that",
+    "options": [
+     "the riddle book will soon be copied by rival printers in town.",
+     "Xinyi should leave the press room to work as a gardener.",
+     "Jordan regrets having taught Xinyi to set type by herself.",
+     "a small success has grown into demands that consume everything."
+    ],
+    "correct_letter": "D",
+    "explanation": "신이가 허락 없이 만든 수수께끼 책이 크게 성공하자 상인들이 몰려들고 종이와 잉크가 바닥나며 신이는 바퀴 옆에서 잠을 잔다. 조던은 씨앗 하나를 심었더니 이제 정원 전체를 원한다고 말하며 작은 시작이 모든 것을 요구하게 되었음을 비유한다. 이어 두 번째 등불을 건네는 행동도 더 많은 수고가 필요함을 암시하므로 D가 정답이다. B는 비유를 문자 그대로 읽었고, A와 C는 지문에 근거가 없다."
+   },
+   "notes": [],
+   "tone": [
+    "fable-like",
+    "wise"
+   ],
+   "devices": [
+    "metaphor",
+    "folktale framing",
+    "symbolism"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  }
+ ],
+ "rejected": [
+  {
+   "candidateId": "lit40-medium-04-001",
+   "stage": "distractor",
+   "reasons": [
+    "정답만 구체적(쉼표·절 구분이 정답에만 있음)",
+    "오답 2개가 절대어(always/never/only 등)로 쉽게 소거됨"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-04-007",
+   "stage": "render",
+   "reasons": [
+    "rw_question:질문 문장을 인식하지 못했습니다 — 지문 마지막 단락이 SAT 문항처럼 물음표로 끝나야 합니다(예: \"Which choice …?\")."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-04-016",
+   "stage": "distractor",
+   "reasons": [
+    "선택지 단어 수 범위 밖(2~40)"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-04-017",
+   "stage": "distractor",
+   "reasons": [
+    "선택지 단어 수 범위 밖(2~40)"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-04-018",
+   "stage": "distractor",
+   "reasons": [
+    "선택지 단어 수 범위 밖(2~40)"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-04-019",
+   "stage": "distractor",
+   "reasons": [
+    "선택지 단어 수 범위 밖(2~40)"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-04-020",
+   "stage": "distractor",
+   "reasons": [
+    "선택지 단어 수 범위 밖(2~40)"
+   ]
+  }
+ ],
+ "retryWords": [],
+ "extraIgnored": []
+}

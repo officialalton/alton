@@ -1,0 +1,49 @@
+{"event":"problem_generation_item_accepted","elapsedMs":73086,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":85930,"acceptedSoFar":2}
+{"event":"problem_generation_item_accepted","elapsedMs":91393,"acceptedSoFar":3}
+{"event":"problem_generation_item_accepted","elapsedMs":108191,"acceptedSoFar":4}
+{"event":"problem_generation_item_accepted","elapsedMs":108341,"acceptedSoFar":5}
+{"event":"problem_generation_item_accepted","elapsedMs":110988,"acceptedSoFar":6}
+{"event":"problem_generation_item_accepted","elapsedMs":128661,"acceptedSoFar":7}
+{"event":"problem_generation_item_accepted","elapsedMs":162860,"acceptedSoFar":8}
+{"event":"problem_generation_item_accepted","elapsedMs":167455,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":170217,"acceptedSoFar":2}
+{"event":"problem_generation_item_accepted","elapsedMs":171427,"acceptedSoFar":3}
+{"event":"problem_generation_item_accepted","elapsedMs":178190,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":197130,"acceptedSoFar":2}
+{"event":"problem_generation_item_accepted","elapsedMs":198890,"acceptedSoFar":4}
+{"event":"problem_generation_item_accepted","elapsedMs":200645,"acceptedSoFar":3}
+{"event":"problem_generation_item_accepted","elapsedMs":203683,"acceptedSoFar":4}
+{"event":"problem_generation_item_accepted","elapsedMs":204536,"acceptedSoFar":5}
+{"event":"problem_generation_item_accepted","elapsedMs":204594,"acceptedSoFar":9}
+{"event":"problem_generation_item_accepted","elapsedMs":212187,"acceptedSoFar":5}
+{"event":"problem_generation_item_accepted","elapsedMs":216939,"acceptedSoFar":6}
+{"event":"problem_generation_item_accepted","elapsedMs":217807,"acceptedSoFar":6}
+{"event":"problem_generation_item_accepted","elapsedMs":225056,"acceptedSoFar":7}
+{"event":"problem_generation_item_accepted","elapsedMs":227396,"acceptedSoFar":8}
+{"event":"problem_generation_item_accepted","elapsedMs":236234,"acceptedSoFar":7}
+{"event":"problem_generation_item_accepted","elapsedMs":239075,"acceptedSoFar":8}
+{"event":"problem_generation_item_accepted","elapsedMs":270209,"acceptedSoFar":9}
+{"event":"problem_generation_pipeline_timing","requested":10,"accepted":9,"shortfall":1,"stoppedReason":"time_cap","timeMs":{"total":270210,"generate":328948,"figure":1946,"contractRepair":7914,"answerExplanationCheck":90761,"review":191100,"regenerate":92058}}
+[central_ideas_details/hard/mc] 9/12 (라운드 1, 통과 9/10, 호출 5.33)
+{"event":"problem_generation_item_accepted","elapsedMs":281743,"acceptedSoFar":10}
+{"event":"problem_generation_item_accepted","elapsedMs":294533,"acceptedSoFar":9}
+{"event":"problem_generation_pipeline_timing","requested":10,"accepted":9,"shortfall":1,"stoppedReason":"time_cap","timeMs":{"total":294534,"generate":328053,"figure":0,"contractRepair":23418,"answerExplanationCheck":82661,"review":207827,"regenerate":51468}}
+[inferences/hard/mc] 9/12 (라운드 1, 통과 9/10, 호출 5.89)
+{"event":"problem_generation_pipeline_timing","requested":10,"accepted":10,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":317876,"generate":247472,"figure":0,"contractRepair":9104,"answerExplanationCheck":86335,"review":293992,"regenerate":89629}}
+[words_in_context/hard/mc] 10/12 (라운드 1, 통과 10/10, 호출 6.2)
+{"event":"problem_generation_item_accepted","elapsedMs":84255,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":85143,"acceptedSoFar":2}
+{"event":"problem_generation_item_accepted","elapsedMs":86222,"acceptedSoFar":3}
+{"event":"problem_generation_item_accepted","elapsedMs":64743,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":65637,"acceptedSoFar":2}
+{"event":"problem_generation_item_accepted","elapsedMs":141324,"acceptedSoFar":1}
+{"event":"problem_generation_pipeline_timing","requested":3,"accepted":3,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":166828,"generate":116387,"figure":0,"contractRepair":0,"answerExplanationCheck":29368,"review":100082,"regenerate":13127}}
+[central_ideas_details/hard/mc] 12/12 (라운드 2, 통과 3/3, 호출 7.67)
+{"event":"problem_generation_item_accepted","elapsedMs":158187,"acceptedSoFar":2}
+{"event":"problem_generation_item_accepted","elapsedMs":162256,"acceptedSoFar":3}
+{"event":"problem_generation_pipeline_timing","requested":2,"accepted":2,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":140496,"generate":74909,"figure":0,"contractRepair":0,"answerExplanationCheck":25198,"review":102727,"regenerate":33851}}
+[words_in_context/hard/mc] 12/12 (라운드 2, 통과 2/2, 호출 12.5)
+{"event":"problem_generation_pipeline_timing","requested":3,"accepted":3,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":168011,"generate":174408,"figure":0,"contractRepair":6889,"answerExplanationCheck":24595,"review":78165,"regenerate":18068}}
+[inferences/hard/mc] 12/12 (라운드 2, 통과 3/3, 호출 7.33)
+생성 완료

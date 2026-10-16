@@ -1,0 +1,79 @@
+{
+ "runs": [
+  "phys-s3-a"
+ ],
+ "rows": 80,
+ "passed": 71,
+ "rejected": 9,
+ "passRate": 0.887,
+ "singles": {
+  "candidates": 80
+ },
+ "unitsPassed": {
+  "1": 9,
+  "2": 13,
+  "3": 11,
+  "4": 9,
+  "5": 5,
+  "6": 8,
+  "7": 8,
+  "8": 8
+ },
+ "figPassed": {
+  "none": 71
+ },
+ "figAll": {
+  "none": 80
+ },
+ "figPassRate": {
+  "none": "71/80"
+ },
+ "renderTypesPassed": {
+  "none": 64,
+  "ap_table": 7
+ },
+ "archetypesPassed": {
+  "ph_sym_vertical_throw": 2,
+  "ph_rank_stop_distance": 2,
+  "ph_sym_incline_accel": 2,
+  "ph_sym_table_hanging": 2,
+  "ph_rank_accel": 2,
+  "ph_sym_track_patch": 1,
+  "ph_rank_ramp_bottom": 2,
+  "ph_sym_collision": 2,
+  "ph_rank_impulse": 2,
+  "ph_sym_beam_cable": 1,
+  "ph_rank_torque": 2,
+  "ph_rank_rolling": 2,
+  "ph_sym_spring_speed": 2,
+  "ph_rank_period": 2,
+  "ph_sym_float_force": 2,
+  "ph_rank_pressure": 2,
+  "ph_claim_free_fall": 1,
+  "ph_pred_centripetal": 2,
+  "ph_claim_const_velocity": 1,
+  "ph_evid_force_data": 2,
+  "ph_pred_stop_factor": 2,
+  "ph_pred_spring_pe": 1,
+  "ph_evid_collision_data": 2,
+  "ph_claim_torque_balance": 2,
+  "ph_claim_angular_momentum": 2,
+  "ph_claim_shm_energy": 2,
+  "ph_evid_pendulum_data": 2,
+  "ph_pred_fluid_scale": 2,
+  "ph_claim_buoyancy": 2,
+  "ph_pred_projectile_scale": 2,
+  "ph_evid_position_data": 2,
+  "ph_rank_centripetal": 2,
+  "ph_sym_pendulum_bottom": 2,
+  "ph_rank_work": 2,
+  "ph_evid_energy_data": 1,
+  "ph_sym_bounce_force": 1,
+  "ph_pred_collision_speed": 2,
+  "ph_sym_orbit": 2,
+  "ph_pred_orbit": 2
+ },
+ "costUsd": {
+  "phys-s3-a": 2.6406
+ }
+}

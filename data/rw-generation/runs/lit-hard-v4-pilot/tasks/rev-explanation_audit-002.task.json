@@ -1,0 +1,278 @@
+{
+ "schema": "rw-session-task/v1",
+ "kind": "review",
+ "role": "explanation_audit",
+ "runId": "lit-hard-v4-pilot",
+ "taskId": "rev-explanation_audit-002",
+ "chunkId": "rev-explanation_audit-002",
+ "suggestedModel": "sonnet",
+ "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit-hard-v4-pilot/results/rev-explanation_audit-002.result.json",
+ "outputSchema": {
+  "chunkId": "청크 ID",
+  "model": "sonnet",
+  "items": [
+   {
+    "candidateId": "id",
+    "answer_correct": "표시된 정답이 정말 정답이면 true",
+    "explanation_consistent": "해설이 정답·오답 판단과 일치하고 글자 참조가 맞으면 true",
+    "explanation_factual": "해설에 사실 오류가 없으면 true",
+    "issues": "한 줄 메모"
+   }
+  ]
+ },
+ "items": [
+  {
+   "candidateId": "hardv4-hard-01-016",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "symbolism",
+   "requestedDifficulty": "hard",
+   "passage": "Paper rattled on the drying lines, and the yard smelled of flour paste. Dario, who had taught half the neighborhood to read before he took up kites, handed Camila a spool of string and told her to measure out thirty meters for the red one. She measured it, cut it, and tied it to the frame the way he had shown her when she was nine. He tested the knot with one tug and nodded. Years ago he had promised the boy next door a kite that would clear the church tower, and the boy had moved away before it was built. The red kite was for him; Dario had kept the address in a tin. When Camila came back that evening, the boxed kite stood by the gate, and Dario was winding the leftover string onto the empty spool by hand, slowly, end to end, instead of throwing it out as he did with every other scrap. He set the spool in her palm and closed her fingers over it.",
+   "question": "In the text, the string most likely represents",
+   "options": [
+    "the practical skill of measuring and cutting materials for a kite",
+    "the craft knowledge that Dario passed to Camila when she was young",
+    "a long-kept commitment that Dario now entrusts to Camila's care",
+    "the repair of a bond between teacher and pupil after years apart"
+   ],
+   "recipeBeyondMedium": "사물이 두 맥락에서 다른 의미를 띠고, 가장 강한 오답이 인물 관계로 읽은 그럴듯한 상징 해석이다",
+   "correct_letter": "C",
+   "explanation": "앞부분에서 실은 길이를 재고 자르는 재료일 뿐이다(A). 중간에 그 실이 오래전 아이에게 한 약속의 연이 되고, 끝에서 Dario가 다른 자투리는 버리면서 남은 실만은 손으로 감아 Camila의 손에 쥐여 준다. 약속을 지키는 일과 그것을 다음 사람에게 넘기는 동작을 함께 설명하는 것은 C뿐이다. B는 어릴 때 배운 기술이라는 앞 맥락만 설명하고, D는 두 사람 사이에 멀어진 적이 있다는 근거가 없어 마지막 동작의 의미를 잘못 읽었다."
+  },
+  {
+   "candidateId": "hardv4-hard-01-017",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "symbolism",
+   "requestedDifficulty": "hard",
+   "passage": "What does a carpenter owe a bench that has outlived its builder? Wilhelmina asked that once, years ago, and Aroha had only handed her a block plane. That morning on the Maui promenade the plane did its ordinary work: Aroha shaved the warped slats of the old benches facing the harbor, and Wilhelmina swept the curls into a bucket. At the sixth bench Aroha stopped. Carved under the armrest were initials and a date, worn soft by salt. She ran the plane along the seat but lifted it each time it neared the letters, leaving a narrow strip untouched, a little higher than the rest. Wilhelmina's old shop teacher had told her she would never be careful enough for fine work, and she had repeated this to Aroha on her first day. At noon Aroha wiped the blade, set the plane in Wilhelmina's hands, and walked to the seventh bench without looking back.",
+   "question": "In the text, the block plane most likely represents",
+   "options": [
+    "the routine labor of repairing benches along the harbor",
+    "the authority that Aroha holds as the master of the work",
+    "the mending of Wilhelmina's confidence after her teacher's remark",
+    "a careful judgment about what to keep, now passed to Wilhelmina"
+   ],
+   "recipeBeyondMedium": "사물이 두 맥락에서 다른 의미를 띠고, 가장 강한 오답이 인물 관계로 읽은 그럴듯한 상징 해석이다",
+   "correct_letter": "D",
+   "explanation": "대패는 처음에 벤치 판을 깎는 평범한 도구로 등장한다(A). 중간에 Aroha가 새겨진 이니셜 근처에서 대패를 들어 올려 그 부분만 남겨 두면서, 대패는 무엇을 깎고 무엇을 남길지 판단하는 일과 연결된다. 끝에서 Aroha가 그 대패를 Wilhelmina의 손에 쥐여 주고 돌아보지 않고 떠나는 동작은 그 판단을 맡긴다는 뜻이므로 D가 정답이다. B는 스승의 권위라는 앞 맥락만 설명하고, C는 선생님의 말을 근거로 자신감 회복으로 읽었지만 대패를 다루는 동작이 그 해석과 맞지 않는다."
+  },
+  {
+   "candidateId": "hardv4-hard-01-019",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "hard",
+   "passage": "Four loads, two dryers, one hour: Mattie had it planned before they left the house. Isaiah carried the baskets because he was leaving for Jackson in the morning and said somebody ought to remember how. Between washers they talked about meal plans, dorm sheets, the price of quarters in a college town. Twice he began a sentence with Daddy used to, and twice Mattie asked whether he had packed the extension cord. Their talk went round the room like a sock caught against the glass, turning and turning in the same small arc. When the buzzer sounded, Mattie folded his shirts and set aside one that was not his, a faded work shirt with a name patch over the pocket, and laid it on top of his stack. She smoothed the patch flat with her thumb before she closed the basket.",
+   "question": "As used in the text, the phrase “like a sock caught against the glass” most nearly suggests that the conversation",
+   "options": [
+    "is weighed down by the many chores still left to finish",
+    "is held within the narrow limits of the small laundromat",
+    "keeps circling near one subject that stays close but unspoken",
+    "repeats the same practical topics in a dull, routine manner"
+   ],
+   "recipeBeyondMedium": "관용 해석으로 풀 수 없고, 오답이 비유의 다른 속성에서 나온 그럴듯한 해석이며 정답은 두 곳 이상의 단서가 정한다",
+   "correct_letter": "C",
+   "explanation": "비유 앞에서 Isaiah가 아버지 이야기를 꺼낼 때마다 Mattie가 연장선 이야기로 화제를 돌리는 반복 행동이 나온다. 유리에 붙은 양말이 같은 자리를 맴돌듯 대화가 그 화제 가까이를 돌면서도 닿지 않는다는 뜻이다. 비유 뒤에 Mattie가 아버지의 작업복을 아들 짐 위에 얹고 이름표를 쓰다듬는 동작은 그 화제가 사라진 것이 아니라 말없이 곁에 있음을 보여 주므로 C가 정답이다. A는 무게, B는 공간의 한계라는 다른 속성을 골랐고, D는 실용적 화제만 보고 의미를 넓혀 결정 단서를 설명하지 못한다."
+  },
+  {
+   "candidateId": "hardv4-hard-01-020",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "hard",
+   "passage": "Years later, Tamika would remember the depot more clearly than the clinic. Every night at two she walked across the lot to the dispatcher's office on the South Side, where Lucius kept the night desk, and took his blood pressure beside a timetable no one had updated since spring. He rolled up his sleeve before she knocked. He kept the cuff warming against the space heater. In her last week she told him a new nurse would come, and he nodded and said the four o'clock bus to Memphis ran on time, if she wanted to know. His voice was a ticket punched for a trip already taken. On her final night the cuff was not by the heater. It was in the drawer, and the drawer was locked, and Lucius looked for the key a long while before he found it in his own shirt pocket.",
+   "question": "As used in the text, the phrase “a ticket punched for a trip already taken” most nearly suggests that Lucius's voice",
+   "options": [
+    "sounded worn out by the many long nights at the depot desk",
+    "carried the exact precision of the bus timetables he kept",
+    "was flat and mechanical, like a recorded station announcement",
+    "spoke of her leaving as settled before he had accepted it"
+   ],
+   "recipeBeyondMedium": "관용 해석으로 풀 수 없고, 오답이 비유의 다른 속성에서 나온 그럴듯한 해석이며 정답은 두 곳 이상의 단서가 정한다",
+   "correct_letter": "D",
+   "explanation": "비유 앞에서 Lucius는 매일 밤 미리 소매를 걷고 혈압계를 데워 두며 Tamika의 방문을 기다리고, 그녀가 떠난다고 하자 버스 시간 이야기로 담담하게 답한다. '이미 다녀온 여행의 펀치 찍힌 표'는 그녀의 떠남을 끝난 일처럼 말하는 목소리를 가리킨다. 그러나 비유 뒤 마지막 밤에 혈압계를 서랍에 잠가 두고 열쇠를 한참 찾는 행동은 그가 아직 그 이별을 받아들이지 못했음을 보여 주므로 D가 정답이다. A는 피로, B는 정확성이라는 다른 속성을 골랐고, C는 비유를 문자적인 기계음으로 넓혀 읽었다."
+  },
+  {
+   "candidateId": "hardv4-hard-01-021",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "hard",
+   "passage": "When the gym lights went off at nine,\nSadia found her coach on the stairwell landing,\nthird floor, where the bulb had been dead since Carnival.\nJiayi sat with a clipboard on her knees,\nthe lineup written and rewritten,\nSadia's name crossed out in pencil,\nthen in pen.\nSadia did not ask why.\nEvery night that week she had climbed past this landing\nand said goodnight, Coach,\nand every night Jiayi had answered with the same\ntwo words about rest.\nBetween them the silence was a folded jersey pressed and set on a shelf too high to reach.\nBelow, a neighbor's younger brother\nran the steps two at a time,\nthe boy who had taken the blame at school\nfor what Sadia had chosen not to report.\nJiayi watched him pass,\nthen slid the clipboard under her arm\nso the crossed-out name faced her ribs.",
+   "question": "As used in the text, the phrase “a folded jersey pressed and set on a shelf” most nearly suggests that the silence is",
+   "options": [
+    "carefully kept in place by both of them for a protective purpose",
+    "heavy with the disappointment of Sadia's removal from the lineup",
+    "a barrier that places the team out of Sadia's reach for now",
+    "a sign that both are putting the season away like old clothes"
+   ],
+   "recipeBeyondMedium": "관용 해석으로 풀 수 없고, 오답이 비유의 다른 속성에서 나온 그럴듯한 해석이며 정답은 두 곳 이상의 단서가 정한다",
+   "correct_letter": "A",
+   "explanation": "비유 앞에서 Sadia는 명단에서 빠진 이유를 묻지 않고, 두 사람은 매일 밤 같은 짧은 인사만 주고받으며 침묵을 함께 유지한다. 접어서 다려 둔 유니폼이라는 비유는 그 침묵이 정성 들여 보관되고 있음을 뜻한다. 비유 뒤에 대신 누명을 쓴 소년이 지나가고 Jiayi가 지워진 이름을 몸 쪽으로 가리는 동작은 그 침묵이 누군가를 보호하기 위한 것임을 보여 주므로 A가 정답이다. B는 무게, C는 손이 닿지 않는 높이라는 한계 속성을 골랐고, D는 옷을 치운다는 문자적 의미로 넓혀 보호의 단서를 설명하지 못한다."
+  },
+  {
+   "candidateId": "hardv4-hard-01-022",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "word_in_context",
+   "requestedDifficulty": "hard",
+   "passage": "Who had promised the honey? Neither Agnes nor Mingyu could say. Every Tuesday for two years he had leaned his bicycle against her gate in Naples, unloaded her groceries, and refused the coins she held out, pointing instead at the hives as if a debt were already settled. Then a cold spring took the colonies, and one Tuesday the hives stood empty. Agnes met him at the gate with nothing in her hands. Mingyu, ______, carried the groceries in as usual, then knelt by the nearest empty hive and began scraping old wax from the frames, setting each clean frame in a neat stack against the wall. He came back the next Tuesday with a borrowed smoker tied to his handlebars.",
+   "question": "Which choice completes the text with the most logical and precise word or phrase?",
+   "options": [
+    "briefly hesitant",
+    "quietly undeterred",
+    "politely indifferent",
+    "visibly relieved"
+   ],
+   "recipeBeyondMedium": "빈칸 뒤 정의가 없고 두 제약을 동시에 만족하는 표현만 정답이며, 오답이 모두 문법적으로 맞고 의미 영역이 같다",
+   "correct_letter": "B",
+   "explanation": "앞부분에서 Mingyu는 2년 동안 돈을 받지 않고 벌통을 가리키며 꿀이 대가인 듯 행동했으므로, 꿀이 사라진 상황에서도 그의 태도가 흔들리지 않아야 한다는 첫 번째 제약이 생긴다. 빈칸 뒤에서 그는 평소처럼 장을 들여놓고 빈 벌통의 밀랍을 긁어내며 다음 주에는 훈연기까지 빌려 오는데, 이는 단순한 무관심이 아니라 적극적인 의지라는 두 번째 제약이다. 두 제약을 모두 만족하는 것은 B이다. C는 대가에 개의치 않는다는 첫 제약만 맞고 뒤의 적극적인 행동과 맞지 않으며, A와 D는 '평소처럼' 일하고 다시 돌아오는 행동과 어조가 어긋난다."
+  },
+  {
+   "candidateId": "hardv4-hard-01-023",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "word_in_context",
+   "requestedDifficulty": "hard",
+   "passage": "\"Come up to the bridge at dawn and see the coast,\" Mai said, as she had said every evening since Otaru. Folasade, found curled behind crates of brass gears bound for a clock-maker's shop in Hakodate, had each time thanked the captain and stayed below, oiling small movements nobody had asked her to touch. On the fourth night the ship's own chronometer stopped, and the mate swore it could not be repaired before port. Folasade had it ticking again within the hour. Mai, taking the mended clock from her hands, made no mention of the bridge and was ______ with her thanks. She nodded once, set a second mug of tea beside the stowaway's tools, and left the cabin door unlatched behind her.",
+   "question": "Which choice completes the text with the most logical and precise word or phrase?",
+   "options": [
+    "noticeably cool",
+    "warmly insistent",
+    "tactfully brief",
+    "somewhat hesitant"
+   ],
+   "recipeBeyondMedium": "빈칸 뒤 정의가 없고 두 제약을 동시에 만족하는 표현만 정답이며, 오답이 모두 문법적으로 맞고 의미 영역이 같다",
+   "correct_letter": "C",
+   "explanation": "앞부분에서 Mai는 매일 저녁 초대를 반복했지만, 시계를 고친 뒤에는 초대를 더 꺼내지 않아 상대의 거절을 존중하는 절제를 보인다. 빈칸 뒤에서는 고개를 한 번 끄덕이고 차를 두고 문을 열어 두는 짧지만 따뜻한 행동이 이어진다. 따라서 말은 아끼되 배려가 담긴 C가 두 제약을 모두 만족한다. A는 초대를 멈춘 점만 보고 차갑게 읽은 것이고, B는 앞의 반복 초대에서 빌린 표현이며, D는 말을 아낀 정도를 망설임으로 한 단계 다르게 읽었다."
+  },
+  {
+   "candidateId": "hardv4-hard-01-024",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "word_in_context",
+   "requestedDifficulty": "hard",
+   "passage": "Who taught me patience on a rooftop in Dayton, if not Mabel? Each morning that summer she climbed to the cedar water tank she was rebuilding and laid out the same three planes before touching a single stave, and each morning I, Aoife, her apprentice of nine weeks, was already reaching for the hammer. In July a storm split two staves she had fitted weeks earlier. I expected her to curse; instead she sat on the tar paper and ran a thumb along the break for a long while. When I offered to cut new staves that very afternoon, her reply was ______. She handed me a plane rather than the saw and pointed me toward the first board, the one I had rushed in June and left rough along one edge.",
+   "question": "Which choice completes the text with the most logical and precise word or phrase?",
+   "options": [
+    "plainly grateful",
+    "patiently approving",
+    "visibly shaken",
+    "gently deflecting"
+   ],
+   "recipeBeyondMedium": "빈칸 뒤 정의가 없고 두 제약을 동시에 만족하는 표현만 정답이며, 오답이 모두 문법적으로 맞고 의미 영역이 같다",
+   "correct_letter": "D",
+   "explanation": "앞부분에서 Mabel은 매일 도구를 같은 순서로 늘어놓는 신중한 습관을 보이고, 폭풍 뒤에도 서두르지 않는다. 빈칸 뒤에서 그녀는 톱 대신 대패를 건네며 Aoife가 6월에 서둘러 만든 판자로 관심을 돌린다. 따라서 제안을 부드럽게 비켜 가는 D가 앞의 신중함과 뒤의 방향 전환을 모두 만족한다. A와 B는 제안을 받아들였다고 읽어 뒤 행동과 맞지 않고, C는 폭풍 장면에서 빌린 표현이다."
+  },
+  {
+   "candidateId": "hardv4-hard-01-025",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "hard",
+   "passage": "Harriet, whose father ran the lake ferry, sold tickets at the Strand each winter, when the films were old and the seats mostly empty. Hollis came every Thursday, paid in exact coins, and took row nine. For six weeks their exchanges never varied: \"One, please.\" \"Enjoy the picture.\" She tore his stub along the perforation, neat as a hem, and he thanked her in the same courteous murmur, and she noted, as she noted everything, that his coat smelled of diesel and lake wind. On the seventh Thursday he laid the coins down and did not pick up the stub. He asked whether her father still ran the early crossing in March. Then he asked about the ice. Then, for a long time, he asked nothing at all and stood looking through the glass. Harriet slid the stub toward him and kept her fingers on it a moment longer than the tear required.",
+   "question": "Which choice best describes the shift in tone in the text?",
+   "options": [
+    "From routine courtesy to mild irritation, as Hollis's questions delay Harriet's careful work at the window",
+    "From routine courtesy to tentative closeness, as Hollis's questions draw Harriet past the usual exchange at the window",
+    "From routine courtesy to tentative closeness, as Harriet's close attention to Hollis's coat leads him to speak more openly",
+    "From warm familiarity to strained formality, as the usual exchange at the window gives way to unfamiliar questions"
+   ],
+   "recipeBeyondMedium": "전환이 명시되지 않고 겉 어조는 그대로여서 겉 변화만 읽으면 걸리며, 오답이 방향·원인·정도 중 하나만 틀린다",
+   "correct_letter": "B",
+   "explanation": "전반부는 매주 똑같은 인사와 표를 찢는 정확한 동작으로 정중하지만 틀에 박힌 관계를 보여 준다. 일곱 번째 목요일에 Hollis가 표를 집지 않고 아버지의 배와 얼음에 대해 묻고 침묵하면서 문장의 흐름이 바뀐다. 마지막에 Harriet이 표 위에 손을 더 오래 두는 동작은 그의 질문이 그녀를 평소의 교환 너머로 끌어냈음을 암시하므로 B가 정답이다. A는 변화를 짜증으로 한 단계 다르게 읽었고, C는 변화의 원인을 Harriet 쪽으로 뒤집었으며, D는 겉의 정중함 변화만 보고 방향을 반대로 읽었다."
+  },
+  {
+   "candidateId": "hardv4-hard-01-028",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "text_structure",
+   "requestedDifficulty": "hard",
+   "passage": "Coconut oil and the hiss of the steriliser filled the barbershop in Kochi where Tara waited each Saturday while her stepson had his hair cut. Arjun, sixteen, kept his eyes on the mirror and never on her. Every week she did the same small thing: she folded a receipt from the cricket academy into a square and tucked it beneath the barber's comb tray. It was from the trial he had missed in March, after she drove him to the wrong ground. Arjun took the folding for a kind of scorekeeping, a record of what she had cost him. This week the barber, tidying, lifted the tray and handed the square to Arjun. Inside, under the date, Tara had written in pencil a list of grounds and coaches and the dates of next season's trials, some crossed out, some circled twice. Arjun turned the paper over. He did not look at her in the mirror. He asked the barber to take a little more off the sides, and he kept the paper on his knee.",
+   "question": "Which choice best describes the overall structure of the text?",
+   "options": [
+    "It describes a repeated gesture, reveals its meaning through a chance discovery, and ends before Arjun's response is settled",
+    "It describes a repeated gesture, explains Arjun's resentment about the trial, and dwells on Tara's mistake in March",
+    "It reveals the meaning of a repeated gesture, then shows Arjun gradually forming his first mistaken view of it",
+    "It describes a repeated gesture, reveals its meaning, and ends with Arjun forgiving Tara for the missed trial"
+   ],
+   "recipeBeyondMedium": "오답이 모두 지문 사실과 일치하고 순서·초점·결말 기능 중 하나만 틀리며, 정답은 재해석 단계를 포함한다",
+   "correct_letter": "A",
+   "explanation": "글은 이발소의 감각 묘사와 Tara가 매주 영수증을 접어 넣는 반복 동작으로 시작한다. 중간에 이발사가 우연히 종이를 건네면서 그것이 다음 시즌 테스트 일정을 찾아 둔 목록임이 드러나 Arjun의 해석이 뒤집힌다. 끝에서 Arjun은 그녀를 보지 않은 채 종이를 무릎에 두어 반응이 정리되지 않은 채 끝나므로 A가 정답이다. B는 전반부 전개만 요약했고, C는 오해와 재해석의 순서를 뒤집었으며, D는 열린 결말을 화해로 오독했다."
+  },
+  {
+   "candidateId": "hardv4-hard-01-030",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "text_structure",
+   "requestedDifficulty": "hard",
+   "passage": "Dwayne, my brother's tutor, rode the night bus out of Dakar's Plateau with me every Thursday after lessons, and every Thursday he wrote the week's vocabulary on the fogged window with one finger, then wiped it clean before my stop. I took it for a teacher's tic. My brother had stopped answering to the name our grandmother gave him the year we moved, and nobody at home used it now. One night Dwayne asked, \"Yaa, what does the name on your brother's old exercise book mean?\" He had found the book inside a borrowed dictionary. I told him. He was quiet through three stops. Then he wrote on the window, not a vocabulary word but the name, in careful letters, and did not wipe it away. When we reached Grand Yoff he got off without a word about it, and I watched the letters run in the condensation as the bus pulled out.",
+   "question": "Which choice best describes the overall structure of the text?",
+   "options": [
+    "It presents a habit the narrator dismisses, recalls how a family move changed a name, and dwells on that loss",
+    "It presents a question that gives a habit new weight, then shows the narrator first dismissing it as a tic",
+    "It presents a habit the narrator dismisses, shows a question that gives it new weight, and closes on an unexplained image",
+    "It presents a habit the narrator dismisses, shows a question that changes it, and closes with the old name restored"
+   ],
+   "recipeBeyondMedium": "오답이 모두 지문 사실과 일치하고 순서·초점·결말 기능 중 하나만 틀리며, 정답은 재해석 단계를 포함한다",
+   "correct_letter": "C",
+   "explanation": "글은 Dwayne이 김 서린 창에 단어를 썼다가 지우는 습관과 이를 버릇으로 여기는 Yaa의 판단으로 시작한다. 중간에 그가 동생의 옛 이름의 뜻을 묻는 질문이 나오고, 그 뒤 그는 그 이름을 써 놓고 지우지 않아 습관이 새로운 무게를 얻는다. 글은 글자가 흘러내리는 모습을 설명 없이 보여 주며 끝나므로 C가 정답이다. A는 전반부의 이름 변화만 구조로 요약했고, B는 순서를 뒤집었으며, D는 열린 결말을 이름의 회복으로 오독했다."
+  },
+  {
+   "candidateId": "hardv4-hard-01-031",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "underlined_portion_function",
+   "requestedDifficulty": "hard",
+   "passage": "I had clerked for Judge Eamon for one summer when he invited me to his terrace above the Saône and announced, as if testing the sound of my name, that Takoda and he would finish the Ferrand file that week. __He kept the file's last page face down beneath a stone ashtray, as he had on the bench, where he never read a verdict until he had heard every word.__ We worked through the mornings. He corrected my French, poured the coffee himself, and pointed out which slope of vines belonged to which cousin. By Friday the other pages were annotated in his small slanted hand, and nothing remained to be heard. When I reached for the ashtray, he covered it with his palm, asked about my plans for autumn, and suggested I carry the file back to the court with the last page unread, just as it was.",
+   "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+   "options": [
+    "It offers background on Eamon's career that explains why Takoda was invited to the terrace",
+    "It establishes a habit of patience that the finished annotations show Eamon has now outgrown",
+    "It establishes a general principle of fairness that guides how Eamon treats his young clerk",
+    "It establishes a habit that later makes Eamon's covering of the page seem like avoidance"
+   ],
+   "recipeBeyondMedium": "밑줄 문장의 기능을 지문 후반 사건이 바꾸므로 밑줄 근처만 읽으면 오답에 걸리고, 오답이 모두 지문에 근거한 기능이다",
+   "correct_letter": "D",
+   "explanation": "밑줄 문장은 단독으로 보면 판사 시절의 신중한 습관을 소개하는 배경 설명처럼 보인다. 중간의 커피와 포도밭 장면을 지나, 금요일에는 들을 것이 더 남지 않았는데도 Eamon은 재떨이를 손으로 덮고 마지막 장을 읽지 않은 채 돌려보내자고 한다. 이 후반 사건 때문에 밑줄 문장은 끝을 마주하기를 피하는 태도의 복선으로 다시 읽히므로 D가 정답이다. A는 밑줄 문장만 따로 읽었고, B는 기능을 습관의 해소로 뒤집었으며, C는 일반적 원칙으로 넓혀 후반 단서와 맞지 않는다."
+  },
+  {
+   "candidateId": "hardv4-hard-01-032",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "underlined_portion_function",
+   "requestedDifficulty": "hard",
+   "passage": "Ayita practiced her recital piece in the back room of the post office outside Albuquerque, where their aunt was postmistress and the piano was older than the building. Faris, home from his deployment for three weeks, sorted mail at the counter while she played. __Each time she reached the slow middle section, he set down whatever letter he held and waited, as if listening for a step on the porch.__ She assumed he found that passage dull. On Saturday, the day before the recital, she skipped the slow section to save time and went straight to the bright ending. Faris kept sorting. That evening she found a sheet of paper on the piano bench in his blocky printing: the dates of four letters she had written him overseas, and beside each, the name of the piece she had said she was learning. All four named the same piece. She sat down and began again from the first bar.",
+   "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+   "options": [
+    "It records a habit of Faris's whose meaning becomes clear once Ayita finds the paper he left",
+    "It shows Faris's boredom with the music, which explains why he keeps sorting when Ayita skips",
+    "It introduces a tension between the siblings that Ayita's choice to skip the section resolves",
+    "It describes the hushed mood of the post office that remains typical of the setting throughout"
+   ],
+   "recipeBeyondMedium": "밑줄 문장의 기능을 지문 후반 사건이 바꾸므로 밑줄 근처만 읽으면 오답에 걸리고, 오답이 모두 지문에 근거한 기능이다",
+   "correct_letter": "A",
+   "explanation": "밑줄 문장은 느린 부분에서 Faris가 편지를 내려놓고 기다리는 모습을 묘사해, 처음에는 분위기 묘사나 지루함으로 읽힐 수 있다. 후반에 Ayita가 찾은 종이에는 그녀가 해외로 보낸 편지 네 통의 날짜와 모두 같은 곡 이름이 적혀 있어, 그 곡이 그에게 특별했음이 드러난다. 따라서 밑줄 문장은 나중에 의미가 밝혀지는 습관을 기록하는 기능을 하므로 A가 정답이다. B는 Ayita의 표면적 추측을 따랐고, C는 기능을 갈등의 해소로 뒤집었으며, D는 배경 묘사라는 일반적 기능으로 넓혔다."
+  },
+  {
+   "candidateId": "hardv4-hard-01-033",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "underlined_portion_function",
+   "requestedDifficulty": "hard",
+   "passage": "Menthol and floor wax met me every night I brought my father's dinner to the pharmacy in Valparaíso where he worked the late shift. __My father, Nicolas, kept a jar of hard candies by the register and gave one to every customer who came in after midnight, whether they bought anything or not.__ I helped with the English labels on the tourists' prescriptions, translating dosages while he restocked shelves he had arranged by color rather than by alphabet. One night a nurse from the port hospital came in for gauze, and while I, Renata, rang her up, she watched the doorway. A sailor, then a woman with a sleeping child, then an old man in slippers came in, took a candy, spoke a few words with my father, and left with nothing. The nurse said she had sent half of them here herself, on the nights the clinic was full. My father shrugged and refilled the jar.",
+   "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+   "options": [
+    "It provides background on the pharmacy's routine that explains why Renata helps with the labels",
+    "It presents a small courtesy that a visitor's remark later reveals as care others depend on",
+    "It introduces a habit of Nicolas's that the nurse's remark shows to be a simple business strategy",
+    "It establishes the general warmth of the family that runs through Renata's memories of the city"
+   ],
+   "recipeBeyondMedium": "밑줄 문장의 기능을 지문 후반 사건이 바꾸므로 밑줄 근처만 읽으면 오답에 걸리고, 오답이 모두 지문에 근거한 기능이다",
+   "correct_letter": "B",
+   "explanation": "밑줄 문장은 단독으로 보면 약국의 소소한 일과를 소개하는 배경처럼 보인다. 중간의 라벨 번역 장면을 지나, 간호사가 병원이 붐비는 밤에 사람들을 직접 이곳으로 보냈다고 말하면서 사탕을 주는 습관이 이웃이 기대는 돌봄이었음이 드러난다. 가족은 몰랐던 것을 방문자가 보게 만드는 이 후반 단서 때문에 B가 정답이다. A는 밑줄 문장만 따로 읽었고, C는 사람들이 아무것도 사지 않는 점과 맞지 않는 상업적 해석이며, D는 가족의 따뜻함이라는 일반적 기능으로 넓혔다."
+  }
+ ],
+ "instructions": "당신은 문항 감사관이다. 표시된 정답과 해설을 받아, 정답이 맞는지·해설이 일관되고 사실에 맞는지 점검한다(고치지 않고 판정만).\n청크 rev-explanation_audit-002 — 14문항.\n출력: Write 도구로 정확히 이 경로에 JSON 한 파일을 쓴다 → /Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit-hard-v4-pilot/results/rev-explanation_audit-002.result.json\n출력 JSON 스키마(예시 구조): {\"chunkId\":\"청크 ID\",\"model\":\"sonnet\",\"items\":[{\"candidateId\":\"id\",\"answer_correct\":\"표시된 정답이 정말 정답이면 true\",\"explanation_consistent\":\"해설이 정답·오답 판단과 일치하고 글자 참조가 맞으면 true\",\"explanation_factual\":\"해설에 사실 오류가 없으면 true\",\"issues\":\"한 줄 메모\"}]}\n허용 값: picked_letter ∈ {A,B,C,D}, 불리언 필드는 true/false, est_difficulty ∈ {easy,medium,hard}. candidateId 를 바꾸지 않고 모든 항목에 답한다.\n금지: 결과 파일 외의 파일 생성·수정, 다른 명령 실행, 문항 수정·재작성. 끝나면 'done <항목 수>' 한 줄만 답한다.\n\n## 문항\n### hardv4-hard-01-016 — skill inferences · 유형 symbolism\n[지문]\nPaper rattled on the drying lines, and the yard smelled of flour paste. Dario, who had taught half the neighborhood to read before he took up kites, handed Camila a spool of string and told her to measure out thirty meters for the red one. She measured it, cut it, and tied it to the frame the way he had shown her when she was nine. He tested the knot with one tug and nodded. Years ago he had promised the boy next door a kite that would clear the church tower, and the boy had moved away before it was built. The red kite was for him; Dario had kept the address in a tin. When Camila came back that evening, the boxed kite stood by the gate, and Dario was winding the leftover string onto the empty spool by hand, slowly, end to end, instead of throwing it out as he did with every other scrap. He set the spool in her palm and closed her fingers over it.\n\n[질문] In the text, the string most likely represents\nA) the practical skill of measuring and cutting materials for a kite\nB) the craft knowledge that Dario passed to Camila when she was young\nC) a long-kept commitment that Dario now entrusts to Camila's care\nD) the repair of a bond between teacher and pupil after years apart\n\n[표시된 정답] C\n[해설]\n앞부분에서 실은 길이를 재고 자르는 재료일 뿐이다(A). 중간에 그 실이 오래전 아이에게 한 약속의 연이 되고, 끝에서 Dario가 다른 자투리는 버리면서 남은 실만은 손으로 감아 Camila의 손에 쥐여 준다. 약속을 지키는 일과 그것을 다음 사람에게 넘기는 동작을 함께 설명하는 것은 C뿐이다. B는 어릴 때 배운 기술이라는 앞 맥락만 설명하고, D는 두 사람 사이에 멀어진 적이 있다는 근거가 없어 마지막 동작의 의미를 잘못 읽었다.\n### hardv4-hard-01-017 — skill inferences · 유형 symbolism\n[지문]\nWhat does a carpenter owe a bench that has outlived its builder? Wilhelmina asked that once, years ago, and Aroha had only handed her a block plane. That morning on the Maui promenade the plane did its ordinary work: Aroha shaved the warped slats of the old benches facing the harbor, and Wilhelmina swept the curls into a bucket. At the sixth bench Aroha stopped. Carved under the armrest were initials and a date, worn soft by salt. She ran the plane along the seat but lifted it each time it neared the letters, leaving a narrow strip untouched, a little higher than the rest. Wilhelmina's old shop teacher had told her she would never be careful enough for fine work, and she had repeated this to Aroha on her first day. At noon Aroha wiped the blade, set the plane in Wilhelmina's hands, and walked to the seventh bench without looking back.\n\n[질문] In the text, the block plane most likely represents\nA) the routine labor of repairing benches along the harbor\nB) the authority that Aroha holds as the master of the work\nC) the mending of Wilhelmina's confidence after her teacher's remark\nD) a careful judgment about what to keep, now passed to Wilhelmina\n\n[표시된 정답] D\n[해설]\n대패는 처음에 벤치 판을 깎는 평범한 도구로 등장한다(A). 중간에 Aroha가 새겨진 이니셜 근처에서 대패를 들어 올려 그 부분만 남겨 두면서, 대패는 무엇을 깎고 무엇을 남길지 판단하는 일과 연결된다. 끝에서 Aroha가 그 대패를 Wilhelmina의 손에 쥐여 주고 돌아보지 않고 떠나는 동작은 그 판단을 맡긴다는 뜻이므로 D가 정답이다. B는 스승의 권위라는 앞 맥락만 설명하고, C는 선생님의 말을 근거로 자신감 회복으로 읽었지만 대패를 다루는 동작이 그 해석과 맞지 않는다.\n### hardv4-hard-01-019 — skill words_in_context · 유형 figurative_language\n[지문]\nFour loads, two dryers, one hour: Mattie had it planned before they left the house. Isaiah carried the baskets because he was leaving for Jackson in the morning and said somebody ought to remember how. Between washers they talked about meal plans, dorm sheets, the price of quarters in a college town. Twice he began a sentence with Daddy used to, and twice Mattie asked whether he had packed the extension cord. Their talk went round the room like a sock caught against the glass, turning and turning in the same small arc. When the buzzer sounded, Mattie folded his shirts and set aside one that was not his, a faded work shirt with a name patch over the pocket, and laid it on top of his stack. She smoothed the patch flat with her thumb before she closed the basket.\n\n[질문] As used in the text, the phrase “like a sock caught against the glass” most nearly suggests that the conversation\nA) is weighed down by the many chores still left to finish\nB) is held within the narrow limits of the small laundromat\nC) keeps circling near one subject that stays close but unspoken\nD) repeats the same practical topics in a dull, routine manner\n\n[표시된 정답] C\n[해설]\n비유 앞에서 Isaiah가 아버지 이야기를 꺼낼 때마다 Mattie가 연장선 이야기로 화제를 돌리는 반복 행동이 나온다. 유리에 붙은 양말이 같은 자리를 맴돌듯 대화가 그 화제 가까이를 돌면서도 닿지 않는다는 뜻이다. 비유 뒤에 Mattie가 아버지의 작업복을 아들 짐 위에 얹고 이름표를 쓰다듬는 동작은 그 화제가 사라진 것이 아니라 말없이 곁에 있음을 보여 주므로 C가 정답이다. A는 무게, B는 공간의 한계라는 다른 속성을 골랐고, D는 실용적 화제만 보고 의미를 넓혀 결정 단서를 설명하지 못한다.\n### hardv4-hard-01-020 — skill words_in_context · 유형 figurative_language\n[지문]\nYears later, Tamika would remember the depot more clearly than the clinic. Every night at two she walked across the lot to the dispatcher's office on the South Side, where Lucius kept the night desk, and took his blood pressure beside a timetable no one had updated since spring. He rolled up his sleeve before she knocked. He kept the cuff warming against the space heater. In her last week she told him a new nurse would come, and he nodded and said the four o'clock bus to Memphis ran on time, if she wanted to know. His voice was a ticket punched for a trip already taken. On her final night the cuff was not by the heater. It was in the drawer, and the drawer was locked, and Lucius looked for the key a long while before he found it in his own shirt pocket.\n\n[질문] As used in the text, the phrase “a ticket punched for a trip already taken” most nearly suggests that Lucius's voice\nA) sounded worn out by the many long nights at the depot desk\nB) carried the exact precision of the bus timetables he kept\nC) was flat and mechanical, like a recorded station announcement\nD) spoke of her leaving as settled before he had accepted it\n\n[표시된 정답] D\n[해설]\n비유 앞에서 Lucius는 매일 밤 미리 소매를 걷고 혈압계를 데워 두며 Tamika의 방문을 기다리고, 그녀가 떠난다고 하자 버스 시간 이야기로 담담하게 답한다. '이미 다녀온 여행의 펀치 찍힌 표'는 그녀의 떠남을 끝난 일처럼 말하는 목소리를 가리킨다. 그러나 비유 뒤 마지막 밤에 혈압계를 서랍에 잠가 두고 열쇠를 한참 찾는 행동은 그가 아직 그 이별을 받아들이지 못했음을 보여 주므로 D가 정답이다. A는 피로, B는 정확성이라는 다른 속성을 골랐고, C는 비유를 문자적인 기계음으로 넓혀 읽었다.\n### hardv4-hard-01-021 — skill words_in_context · 유형 figurative_language\n[지문]\nWhen the gym lights went off at nine,\nSadia found her coach on the stairwell landing,\nthird floor, where the bulb had been dead since Carnival.\nJiayi sat with a clipboard on her knees,\nthe lineup written and rewritten,\nSadia's name crossed out in pencil,\nthen in pen.\nSadia did not ask why.\nEvery night that week she had climbed past this landing\nand said goodnight, Coach,\nand every night Jiayi had answered with the same\ntwo words about rest.\nBetween them the silence was a folded jersey pressed and set on a shelf too high to reach.\nBelow, a neighbor's younger brother\nran the steps two at a time,\nthe boy who had taken the blame at school\nfor what Sadia had chosen not to report.\nJiayi watched him pass,\nthen slid the clipboard under her arm\nso the crossed-out name faced her ribs.\n\n[질문] As used in the text, the phrase “a folded jersey pressed and set on a shelf” most nearly suggests that the silence is\nA) carefully kept in place by both of them for a protective purpose\nB) heavy with the disappointment of Sadia's removal from the lineup\nC) a barrier that places the team out of Sadia's reach for now\nD) a sign that both are putting the season away like old clothes\n\n[표시된 정답] A\n[해설]\n비유 앞에서 Sadia는 명단에서 빠진 이유를 묻지 않고, 두 사람은 매일 밤 같은 짧은 인사만 주고받으며 침묵을 함께 유지한다. 접어서 다려 둔 유니폼이라는 비유는 그 침묵이 정성 들여 보관되고 있음을 뜻한다. 비유 뒤에 대신 누명을 쓴 소년이 지나가고 Jiayi가 지워진 이름을 몸 쪽으로 가리는 동작은 그 침묵이 누군가를 보호하기 위한 것임을 보여 주므로 A가 정답이다. B는 무게, C는 손이 닿지 않는 높이라는 한계 속성을 골랐고, D는 옷을 치운다는 문자적 의미로 넓혀 보호의 단서를 설명하지 못한다.\n### hardv4-hard-01-022 — skill words_in_context · 유형 word_in_context\n[지문]\nWho had promised the honey? Neither Agnes nor Mingyu could say. Every Tuesday for two years he had leaned his bicycle against her gate in Naples, unloaded her groceries, and refused the coins she held out, pointing instead at the hives as if a debt were already settled. Then a cold spring took the colonies, and one Tuesday the hives stood empty. Agnes met him at the gate with nothing in her hands. Mingyu, ______, carried the groceries in as usual, then knelt by the nearest empty hive and began scraping old wax from the frames, setting each clean frame in a neat stack against the wall. He came back the next Tuesday with a borrowed smoker tied to his handlebars.\n\n[질문] Which choice completes the text with the most logical and precise word or phrase?\nA) briefly hesitant\nB) quietly undeterred\nC) politely indifferent\nD) visibly relieved\n\n[표시된 정답] B\n[해설]\n앞부분에서 Mingyu는 2년 동안 돈을 받지 않고 벌통을 가리키며 꿀이 대가인 듯 행동했으므로, 꿀이 사라진 상황에서도 그의 태도가 흔들리지 않아야 한다는 첫 번째 제약이 생긴다. 빈칸 뒤에서 그는 평소처럼 장을 들여놓고 빈 벌통의 밀랍을 긁어내며 다음 주에는 훈연기까지 빌려 오는데, 이는 단순한 무관심이 아니라 적극적인 의지라는 두 번째 제약이다. 두 제약을 모두 만족하는 것은 B이다. C는 대가에 개의치 않는다는 첫 제약만 맞고 뒤의 적극적인 행동과 맞지 않으며, A와 D는 '평소처럼' 일하고 다시 돌아오는 행동과 어조가 어긋난다.\n### hardv4-hard-01-023 — skill words_in_context · 유형 word_in_context\n[지문]\n\"Come up to the bridge at dawn and see the coast,\" Mai said, as she had said every evening since Otaru. Folasade, found curled behind crates of brass gears bound for a clock-maker's shop in Hakodate, had each time thanked the captain and stayed below, oiling small movements nobody had asked her to touch. On the fourth night the ship's own chronometer stopped, and the mate swore it could not be repaired before port. Folasade had it ticking again within the hour. Mai, taking the mended clock from her hands, made no mention of the bridge and was ______ with her thanks. She nodded once, set a second mug of tea beside the stowaway's tools, and left the cabin door unlatched behind her.\n\n[질문] Which choice completes the text with the most logical and precise word or phrase?\nA) noticeably cool\nB) warmly insistent\nC) tactfully brief\nD) somewhat hesitant\n\n[표시된 정답] C\n[해설]\n앞부분에서 Mai는 매일 저녁 초대를 반복했지만, 시계를 고친 뒤에는 초대를 더 꺼내지 않아 상대의 거절을 존중하는 절제를 보인다. 빈칸 뒤에서는 고개를 한 번 끄덕이고 차를 두고 문을 열어 두는 짧지만 따뜻한 행동이 이어진다. 따라서 말은 아끼되 배려가 담긴 C가 두 제약을 모두 만족한다. A는 초대를 멈춘 점만 보고 차갑게 읽은 것이고, B는 앞의 반복 초대에서 빌린 표현이며, D는 말을 아낀 정도를 망설임으로 한 단계 다르게 읽었다.\n### hardv4-hard-01-024 — skill words_in_context · 유형 word_in_context\n[지문]\nWho taught me patience on a rooftop in Dayton, if not Mabel? Each morning that summer she climbed to the cedar water tank she was rebuilding and laid out the same three planes before touching a single stave, and each morning I, Aoife, her apprentice of nine weeks, was already reaching for the hammer. In July a storm split two staves she had fitted weeks earlier. I expected her to curse; instead she sat on the tar paper and ran a thumb along the break for a long while. When I offered to cut new staves that very afternoon, her reply was ______. She handed me a plane rather than the saw and pointed me toward the first board, the one I had rushed in June and left rough along one edge.\n\n[질문] Which choice completes the text with the most logical and precise word or phrase?\nA) plainly grateful\nB) patiently approving\nC) visibly shaken\nD) gently deflecting\n\n[표시된 정답] D\n[해설]\n앞부분에서 Mabel은 매일 도구를 같은 순서로 늘어놓는 신중한 습관을 보이고, 폭풍 뒤에도 서두르지 않는다. 빈칸 뒤에서 그녀는 톱 대신 대패를 건네며 Aoife가 6월에 서둘러 만든 판자로 관심을 돌린다. 따라서 제안을 부드럽게 비켜 가는 D가 앞의 신중함과 뒤의 방향 전환을 모두 만족한다. A와 B는 제안을 받아들였다고 읽어 뒤 행동과 맞지 않고, C는 폭풍 장면에서 빌린 표현이다.\n### hardv4-hard-01-025 — skill text_structure_purpose · 유형 tone_shift\n[지문]\nHarriet, whose father ran the lake ferry, sold tickets at the Strand each winter, when the films were old and the seats mostly empty. Hollis came every Thursday, paid in exact coins, and took row nine. For six weeks their exchanges never varied: \"One, please.\" \"Enjoy the picture.\" She tore his stub along the perforation, neat as a hem, and he thanked her in the same courteous murmur, and she noted, as she noted everything, that his coat smelled of diesel and lake wind. On the seventh Thursday he laid the coins down and did not pick up the stub. He asked whether her father still ran the early crossing in March. Then he asked about the ice. Then, for a long time, he asked nothing at all and stood looking through the glass. Harriet slid the stub toward him and kept her fingers on it a moment longer than the tear required.\n\n[질문] Which choice best describes the shift in tone in the text?\nA) From routine courtesy to mild irritation, as Hollis's questions delay Harriet's careful work at the window\nB) From routine courtesy to tentative closeness, as Hollis's questions draw Harriet past the usual exchange at the window\nC) From routine courtesy to tentative closeness, as Harriet's close attention to Hollis's coat leads him to speak more openly\nD) From warm familiarity to strained formality, as the usual exchange at the window gives way to unfamiliar questions\n\n[표시된 정답] B\n[해설]\n전반부는 매주 똑같은 인사와 표를 찢는 정확한 동작으로 정중하지만 틀에 박힌 관계를 보여 준다. 일곱 번째 목요일에 Hollis가 표를 집지 않고 아버지의 배와 얼음에 대해 묻고 침묵하면서 문장의 흐름이 바뀐다. 마지막에 Harriet이 표 위에 손을 더 오래 두는 동작은 그의 질문이 그녀를 평소의 교환 너머로 끌어냈음을 암시하므로 B가 정답이다. A는 변화를 짜증으로 한 단계 다르게 읽었고, C는 변화의 원인을 Harriet 쪽으로 뒤집었으며, D는 겉의 정중함 변화만 보고 방향을 반대로 읽었다.\n### hardv4-hard-01-028 — skill text_structure_purpose · 유형 text_structure\n[지문]\nCoconut oil and the hiss of the steriliser filled the barbershop in Kochi where Tara waited each Saturday while her stepson had his hair cut. Arjun, sixteen, kept his eyes on the mirror and never on her. Every week she did the same small thing: she folded a receipt from the cricket academy into a square and tucked it beneath the barber's comb tray. It was from the trial he had missed in March, after she drove him to the wrong ground. Arjun took the folding for a kind of scorekeeping, a record of what she had cost him. This week the barber, tidying, lifted the tray and handed the square to Arjun. Inside, under the date, Tara had written in pencil a list of grounds and coaches and the dates of next season's trials, some crossed out, some circled twice. Arjun turned the paper over. He did not look at her in the mirror. He asked the barber to take a little more off the sides, and he kept the paper on his knee.\n\n[질문] Which choice best describes the overall structure of the text?\nA) It describes a repeated gesture, reveals its meaning through a chance discovery, and ends before Arjun's response is settled\nB) It describes a repeated gesture, explains Arjun's resentment about the trial, and dwells on Tara's mistake in March\nC) It reveals the meaning of a repeated gesture, then shows Arjun gradually forming his first mistaken view of it\nD) It describes a repeated gesture, reveals its meaning, and ends with Arjun forgiving Tara for the missed trial\n\n[표시된 정답] A\n[해설]\n글은 이발소의 감각 묘사와 Tara가 매주 영수증을 접어 넣는 반복 동작으로 시작한다. 중간에 이발사가 우연히 종이를 건네면서 그것이 다음 시즌 테스트 일정을 찾아 둔 목록임이 드러나 Arjun의 해석이 뒤집힌다. 끝에서 Arjun은 그녀를 보지 않은 채 종이를 무릎에 두어 반응이 정리되지 않은 채 끝나므로 A가 정답이다. B는 전반부 전개만 요약했고, C는 오해와 재해석의 순서를 뒤집었으며, D는 열린 결말을 화해로 오독했다.\n### hardv4-hard-01-030 — skill text_structure_purpose · 유형 text_structure\n[지문]\nDwayne, my brother's tutor, rode the night bus out of Dakar's Plateau with me every Thursday after lessons, and every Thursday he wrote the week's vocabulary on the fogged window with one finger, then wiped it clean before my stop. I took it for a teacher's tic. My brother had stopped answering to the name our grandmother gave him the year we moved, and nobody at home used it now. One night Dwayne asked, \"Yaa, what does the name on your brother's old exercise book mean?\" He had found the book inside a borrowed dictionary. I told him. He was quiet through three stops. Then he wrote on the window, not a vocabulary word but the name, in careful letters, and did not wipe it away. When we reached Grand Yoff he got off without a word about it, and I watched the letters run in the condensation as the bus pulled out.\n\n[질문] Which choice best describes the overall structure of the text?\nA) It presents a habit the narrator dismisses, recalls how a family move changed a name, and dwells on that loss\nB) It presents a question that gives a habit new weight, then shows the narrator first dismissing it as a tic\nC) It presents a habit the narrator dismisses, shows a question that gives it new weight, and closes on an unexplained image\nD) It presents a habit the narrator dismisses, shows a question that changes it, and closes with the old name restored\n\n[표시된 정답] C\n[해설]\n글은 Dwayne이 김 서린 창에 단어를 썼다가 지우는 습관과 이를 버릇으로 여기는 Yaa의 판단으로 시작한다. 중간에 그가 동생의 옛 이름의 뜻을 묻는 질문이 나오고, 그 뒤 그는 그 이름을 써 놓고 지우지 않아 습관이 새로운 무게를 얻는다. 글은 글자가 흘러내리는 모습을 설명 없이 보여 주며 끝나므로 C가 정답이다. A는 전반부의 이름 변화만 구조로 요약했고, B는 순서를 뒤집었으며, D는 열린 결말을 이름의 회복으로 오독했다.\n### hardv4-hard-01-031 — skill text_structure_purpose · 유형 underlined_portion_function\n[지문]\nI had clerked for Judge Eamon for one summer when he invited me to his terrace above the Saône and announced, as if testing the sound of my name, that Takoda and he would finish the Ferrand file that week. __He kept the file's last page face down beneath a stone ashtray, as he had on the bench, where he never read a verdict until he had heard every word.__ We worked through the mornings. He corrected my French, poured the coffee himself, and pointed out which slope of vines belonged to which cousin. By Friday the other pages were annotated in his small slanted hand, and nothing remained to be heard. When I reached for the ashtray, he covered it with his palm, asked about my plans for autumn, and suggested I carry the file back to the court with the last page unread, just as it was.\n\n[질문] Which choice best describes the function of the underlined sentence in the text as a whole?\nA) It offers background on Eamon's career that explains why Takoda was invited to the terrace\nB) It establishes a habit of patience that the finished annotations show Eamon has now outgrown\nC) It establishes a general principle of fairness that guides how Eamon treats his young clerk\nD) It establishes a habit that later makes Eamon's covering of the page seem like avoidance\n\n[표시된 정답] D\n[해설]\n밑줄 문장은 단독으로 보면 판사 시절의 신중한 습관을 소개하는 배경 설명처럼 보인다. 중간의 커피와 포도밭 장면을 지나, 금요일에는 들을 것이 더 남지 않았는데도 Eamon은 재떨이를 손으로 덮고 마지막 장을 읽지 않은 채 돌려보내자고 한다. 이 후반 사건 때문에 밑줄 문장은 끝을 마주하기를 피하는 태도의 복선으로 다시 읽히므로 D가 정답이다. A는 밑줄 문장만 따로 읽었고, B는 기능을 습관의 해소로 뒤집었으며, C는 일반적 원칙으로 넓혀 후반 단서와 맞지 않는다.\n### hardv4-hard-01-032 — skill text_structure_purpose · 유형 underlined_portion_function\n[지문]\nAyita practiced her recital piece in the back room of the post office outside Albuquerque, where their aunt was postmistress and the piano was older than the building. Faris, home from his deployment for three weeks, sorted mail at the counter while she played. __Each time she reached the slow middle section, he set down whatever letter he held and waited, as if listening for a step on the porch.__ She assumed he found that passage dull. On Saturday, the day before the recital, she skipped the slow section to save time and went straight to the bright ending. Faris kept sorting. That evening she found a sheet of paper on the piano bench in his blocky printing: the dates of four letters she had written him overseas, and beside each, the name of the piece she had said she was learning. All four named the same piece. She sat down and began again from the first bar.\n\n[질문] Which choice best describes the function of the underlined sentence in the text as a whole?\nA) It records a habit of Faris's whose meaning becomes clear once Ayita finds the paper he left\nB) It shows Faris's boredom with the music, which explains why he keeps sorting when Ayita skips\nC) It introduces a tension between the siblings that Ayita's choice to skip the section resolves\nD) It describes the hushed mood of the post office that remains typical of the setting throughout\n\n[표시된 정답] A\n[해설]\n밑줄 문장은 느린 부분에서 Faris가 편지를 내려놓고 기다리는 모습을 묘사해, 처음에는 분위기 묘사나 지루함으로 읽힐 수 있다. 후반에 Ayita가 찾은 종이에는 그녀가 해외로 보낸 편지 네 통의 날짜와 모두 같은 곡 이름이 적혀 있어, 그 곡이 그에게 특별했음이 드러난다. 따라서 밑줄 문장은 나중에 의미가 밝혀지는 습관을 기록하는 기능을 하므로 A가 정답이다. B는 Ayita의 표면적 추측을 따랐고, C는 기능을 갈등의 해소로 뒤집었으며, D는 배경 묘사라는 일반적 기능으로 넓혔다.\n### hardv4-hard-01-033 — skill text_structure_purpose · 유형 underlined_portion_function\n[지문]\nMenthol and floor wax met me every night I brought my father's dinner to the pharmacy in Valparaíso where he worked the late shift. __My father, Nicolas, kept a jar of hard candies by the register and gave one to every customer who came in after midnight, whether they bought anything or not.__ I helped with the English labels on the tourists' prescriptions, translating dosages while he restocked shelves he had arranged by color rather than by alphabet. One night a nurse from the port hospital came in for gauze, and while I, Renata, rang her up, she watched the doorway. A sailor, then a woman with a sleeping child, then an old man in slippers came in, took a candy, spoke a few words with my father, and left with nothing. The nurse said she had sent half of them here herself, on the nights the clinic was full. My father shrugged and refilled the jar.\n\n[질문] Which choice best describes the function of the underlined sentence in the text as a whole?\nA) It provides background on the pharmacy's routine that explains why Renata helps with the labels\nB) It presents a small courtesy that a visitor's remark later reveals as care others depend on\nC) It introduces a habit of Nicolas's that the nurse's remark shows to be a simple business strategy\nD) It establishes the general warmth of the family that runs through Renata's memories of the city\n\n[표시된 정답] B\n[해설]\n밑줄 문장은 단독으로 보면 약국의 소소한 일과를 소개하는 배경처럼 보인다. 중간의 라벨 번역 장면을 지나, 간호사가 병원이 붐비는 밤에 사람들을 직접 이곳으로 보냈다고 말하면서 사탕을 주는 습관이 이웃이 기대는 돌봄이었음이 드러난다. 가족은 몰랐던 것을 방문자가 보게 만드는 이 후반 단서 때문에 B가 정답이다. A는 밑줄 문장만 따로 읽었고, C는 사람들이 아무것도 사지 않는 점과 맞지 않는 상업적 해석이며, D는 가족의 따뜻함이라는 일반적 기능으로 넓혔다."
+}

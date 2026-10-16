@@ -1,0 +1,352 @@
+{
+ "sets": [
+  {
+   "n": 1,
+   "setId": "27adbbda-daa8-4a4c-a37d-117c3a773d59",
+   "itemCount": 143,
+   "ready": false,
+   "duplicateCount": 0,
+   "similarityViolations": 0,
+   "eligibilityViolations": 0,
+   "routeShapeViolations": 0,
+   "missingSnapshot": 0,
+   "skillWarnings": 0,
+   "moduleFound": [
+    "rw_m1:27/27",
+    "rw_m2/lower:27/27",
+    "rw_m2/higher:27/27",
+    "math_m1:22/22",
+    "math_m2/lower:22/22",
+    "math_m2/higher:18/22"
+   ],
+   "shortfalls": [
+    {
+     "module": "math_m2/higher",
+     "satDomain": "advanced_math",
+     "difficulty": "hard",
+     "needed": 1,
+     "found": 0
+    },
+    {
+     "module": "math_m2/higher",
+     "satDomain": "algebra",
+     "difficulty": "hard",
+     "needed": 1,
+     "found": 0
+    },
+    {
+     "module": "math_m2/higher",
+     "satDomain": "geometry_trig",
+     "difficulty": "hard",
+     "needed": 1,
+     "found": 0
+    },
+    {
+     "module": "math_m2/higher",
+     "satDomain": "problem_solving_data",
+     "difficulty": "hard",
+     "needed": 1,
+     "found": 0
+    }
+   ],
+   "ownChecks": {
+    "dupGroupsInSet": 0,
+    "eligibilityViolations": 0,
+    "crossSetDuplicatesVsPrevious": 0,
+    "distinctSkills": 27,
+    "byModule": {
+     "rw_m1": {
+      "easy": 9,
+      "medium": 18
+     },
+     "rw_m2/lower": {
+      "easy": 9,
+      "medium": 18
+     },
+     "rw_m2/higher": {
+      "medium": 18,
+      "hard": 9
+     },
+     "math_m1": {
+      "easy": 8,
+      "medium": 14
+     },
+     "math_m2/lower": {
+      "easy": 8,
+      "medium": 14
+     },
+     "math_m2/higher": {
+      "medium": 14,
+      "hard": 4
+     }
+    }
+   }
+  },
+  {
+   "n": 2,
+   "setId": "ced4f1ef-bbc6-46cf-8e61-02bbbe2d013e",
+   "itemCount": 143,
+   "ready": false,
+   "duplicateCount": 0,
+   "similarityViolations": 0,
+   "eligibilityViolations": 0,
+   "routeShapeViolations": 0,
+   "missingSnapshot": 0,
+   "skillWarnings": 0,
+   "moduleFound": [
+    "rw_m1:27/27",
+    "rw_m2/lower:27/27",
+    "rw_m2/higher:27/27",
+    "math_m1:22/22",
+    "math_m2/lower:22/22",
+    "math_m2/higher:18/22"
+   ],
+   "shortfalls": [
+    {
+     "module": "math_m2/higher",
+     "satDomain": "advanced_math",
+     "difficulty": "hard",
+     "needed": 1,
+     "found": 0
+    },
+    {
+     "module": "math_m2/higher",
+     "satDomain": "algebra",
+     "difficulty": "hard",
+     "needed": 1,
+     "found": 0
+    },
+    {
+     "module": "math_m2/higher",
+     "satDomain": "geometry_trig",
+     "difficulty": "hard",
+     "needed": 1,
+     "found": 0
+    },
+    {
+     "module": "math_m2/higher",
+     "satDomain": "problem_solving_data",
+     "difficulty": "hard",
+     "needed": 1,
+     "found": 0
+    }
+   ],
+   "ownChecks": {
+    "dupGroupsInSet": 0,
+    "eligibilityViolations": 0,
+    "crossSetDuplicatesVsPrevious": 3,
+    "distinctSkills": 26,
+    "byModule": {
+     "rw_m1": {
+      "easy": 9,
+      "medium": 18
+     },
+     "rw_m2/lower": {
+      "easy": 9,
+      "medium": 18
+     },
+     "rw_m2/higher": {
+      "medium": 18,
+      "hard": 9
+     },
+     "math_m1": {
+      "easy": 8,
+      "medium": 14
+     },
+     "math_m2/lower": {
+      "easy": 8,
+      "medium": 14
+     },
+     "math_m2/higher": {
+      "medium": 14,
+      "hard": 4
+     }
+    }
+   }
+  },
+  {
+   "n": 3,
+   "setId": "b4aa9929-9d58-4d0a-a9eb-227cc6b33eb4",
+   "itemCount": 147,
+   "ready": true,
+   "duplicateCount": 0,
+   "similarityViolations": 0,
+   "eligibilityViolations": 0,
+   "routeShapeViolations": 0,
+   "missingSnapshot": 0,
+   "skillWarnings": 0,
+   "moduleFound": [
+    "rw_m1:27/27",
+    "rw_m2/lower:27/27",
+    "rw_m2/higher:27/27",
+    "math_m1:22/22",
+    "math_m2/lower:22/22",
+    "math_m2/higher:22/22"
+   ],
+   "shortfalls": [
+    {
+     "module": "math_m2/higher",
+     "satDomain": "geometry_trig",
+     "difficulty": "hard",
+     "needed": 1,
+     "found": 0
+    },
+    {
+     "module": "math_m2/higher",
+     "satDomain": "problem_solving_data",
+     "difficulty": "hard",
+     "needed": 1,
+     "found": 0
+    },
+    {
+     "note": "종단 시험용 세트: 부족한 hard 칸을 medium 으로 보충"
+    }
+   ],
+   "ownChecks": {
+    "dupGroupsInSet": 0,
+    "eligibilityViolations": 0,
+    "crossSetDuplicatesVsPrevious": 4,
+    "distinctSkills": 27,
+    "byModule": {
+     "rw_m1": {
+      "easy": 9,
+      "medium": 18
+     },
+     "rw_m2/lower": {
+      "easy": 9,
+      "medium": 18
+     },
+     "rw_m2/higher": {
+      "medium": 18,
+      "hard": 9
+     },
+     "math_m1": {
+      "easy": 8,
+      "medium": 14
+     },
+     "math_m2/lower": {
+      "easy": 8,
+      "medium": 14
+     },
+     "math_m2/higher": {
+      "medium": 16,
+      "hard": 6
+     }
+    }
+   }
+  }
+ ],
+ "pool": {
+  "rw": 645,
+  "math": 354,
+  "domainWeightKeys": {
+   "rw": [
+    "rw_craft_structure",
+    "rw_expression_ideas",
+    "rw_information_ideas",
+    "rw_standard_english"
+   ],
+   "math": [
+    "advanced_math",
+    "algebra",
+    "geometry_trig",
+    "problem_solving_data"
+   ]
+  }
+ },
+ "readySetIsNoFormatVariant": true,
+ "attempt": {
+  "setId": "b4aa9929-9d58-4d0a-a9eb-227cc6b33eb4",
+  "high": {
+   "rw_m1_items": true,
+   "rwRoute": "higher",
+   "rw_m2_items": true,
+   "math_m1_items": true,
+   "mathRoute": "higher",
+   "math_m2_items": true,
+   "status": "graded",
+   "rw": {
+    "total": 54,
+    "correct": 54
+   },
+   "math": {
+    "total": 44,
+    "correct": 44
+   },
+   "estimate": {
+    "rw": {
+     "low": 770,
+     "high": 800
+    },
+    "math": {
+     "low": 770,
+     "high": 800
+    },
+    "total": {
+     "low": 1540,
+     "high": 1600
+    },
+    "modelVersion": "v1-adaptive"
+   },
+   "estimateSane": true
+  },
+  "low": {
+   "rw_m1_items": true,
+   "rwRoute": "lower",
+   "rw_m2_items": true,
+   "math_m1_items": true,
+   "mathRoute": "lower",
+   "math_m2_items": true,
+   "status": "graded",
+   "rw": {
+    "total": 54,
+    "correct": 16
+   },
+   "math": {
+    "total": 44,
+    "correct": 14
+   },
+   "estimate": {
+    "rw": {
+     "low": 280,
+     "high": 340
+    },
+    "math": {
+     "low": 290,
+     "high": 350
+    },
+    "total": {
+     "low": 570,
+     "high": 690
+    },
+    "modelVersion": "v1-adaptive"
+   },
+   "estimateSane": true
+  }
+ },
+ "difficultyReview": {
+  "listSummary": {
+   "changed": 2,
+   "confirmed": 0,
+   "provisional": 57
+  },
+  "listTotal": 57,
+  "detailHasHardJudge": true,
+  "detailHasAdvisory": true,
+  "detailRecipeId": "words_in_context_negation_polarity",
+  "detailGenerationStatus": "provisional_ai",
+  "change": {
+   "result": {
+    "batchId": "f9c17230-b762-4eee-bc22-629b67d20d4c",
+    "changed": 1,
+    "skipped": 0,
+    "confirmed": 0,
+    "needsSetReplacement": []
+   },
+   "afterDifficultyStatusVersion": "medium|confirmed|medium",
+   "historyRows": "1",
+   "confirmResult": null
+  },
+  "setSnapshotUnchanged": "1"
+ }
+}

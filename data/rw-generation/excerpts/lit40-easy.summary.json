@@ -1,0 +1,289 @@
+{
+ "generatedAt": "2026-10-01T08:17:48.454Z",
+ "script": "scripts/rw-corpus/lit40-easy-build.ts",
+ "totals": {
+  "candidatesInPlan": 438,
+  "alignedLines": 438,
+  "reserveLines": 18,
+  "totalUniqueExcerpts": 456,
+  "totalLines": 456,
+  "works": 113,
+  "maxPerWork": 5
+ },
+ "words": {
+  "mean": 114.9,
+  "min": 74,
+  "max": 171
+ },
+ "byGenre": {
+  "drama": {
+   "n": 3,
+   "works": 1,
+   "avgWords": 105
+  },
+  "letter": {
+   "n": 13,
+   "works": 4,
+   "avgWords": 118.4
+  },
+  "fable_or_folktale_retelling": {
+   "n": 10,
+   "works": 2,
+   "avgWords": 109.3
+  },
+  "poetry": {
+   "n": 26,
+   "works": 8,
+   "avgWords": 98.7
+  },
+  "memoir": {
+   "n": 80,
+   "works": 24,
+   "avgWords": 115
+  },
+  "personal_essay": {
+   "n": 87,
+   "works": 25,
+   "avgWords": 115.5
+  },
+  "novel_excerpt": {
+   "n": 120,
+   "works": 33,
+   "avgWords": 117.2
+  },
+  "short_story": {
+   "n": 117,
+   "works": 51,
+   "avgWords": 116
+  }
+ },
+ "demandByGenre": {
+  "short_story": 137,
+  "novel_excerpt": 98,
+  "personal_essay": 71,
+  "memoir": 65,
+  "poetry": 35,
+  "letter": 12,
+  "drama": 12,
+  "fable_or_folktale_retelling": 8
+ },
+ "shortages": {
+  "drama": {
+   "target": 15,
+   "demand": 12,
+   "got": 3,
+   "reason": "작품당 5개 상한 + 필터 통과 후보 부족"
+  },
+  "letter": {
+   "target": 15,
+   "demand": 12,
+   "got": 13,
+   "reason": "작품당 5개 상한 + 필터 통과 후보 부족"
+  },
+  "poetry": {
+   "target": 43,
+   "demand": 35,
+   "got": 26,
+   "reason": "작품당 5개 상한 + 필터 통과 후보 부족"
+  },
+  "short_story": {
+   "target": 168,
+   "demand": 137,
+   "got": 117,
+   "reason": "작품당 5개 상한 + 필터 통과 후보 부족"
+  }
+ },
+ "slotGenreSubstitutions": {
+  "count": 38,
+  "byPair": {
+   "short_story<-novel_excerpt": 13,
+   "drama<-novel_excerpt": 9,
+   "poetry<-fable_or_folktale_retelling": 2,
+   "poetry<-personal_essay": 7,
+   "short_story<-memoir": 7
+  }
+ },
+ "weakFit": {
+  "count": 16,
+  "byQuestionType": {
+   "word_in_context": 1,
+   "tone_or_mood": 1,
+   "figurative_language": 14
+  },
+  "note": "발췌가 해당 문항 유형의 사전적 단서(비유·어조 전환·동기 등)를 충분히 갖지 못한 슬롯(휴리스틱). 생성 에이전트가 레시피 부적합로 표시할 수 있음."
+ },
+ "verification": {
+  "quoteMatchAgainstRawCorpus": "456/456",
+  "quoteMatchAgainstLfCorpus": "456/456",
+  "shaRecompute": "456/456",
+  "allFilteredCandidatesQuoteMatch": "7600/7600",
+  "rate": 1
+ },
+ "diversity": {
+  "exactDuplicates": 0,
+  "sameWorkOverlaps": 0,
+  "max5gramJaccard": 0.008,
+  "topNames": [
+   [
+    "Bob",
+    2
+   ],
+   [
+    "Americans",
+    2
+   ],
+   [
+    "Washington",
+    2
+   ],
+   [
+    "America",
+    2
+   ],
+   [
+    "Europe",
+    2
+   ],
+   [
+    "Queen",
+    2
+   ],
+   [
+    "Lily",
+    2
+   ],
+   [
+    "Fairies",
+    2
+   ],
+   [
+    "Elves",
+    2
+   ],
+   [
+    "See",
+    2
+   ],
+   [
+    "Stranger",
+    2
+   ],
+   [
+    "Because",
+    2
+   ]
+  ],
+  "topFirstWords": [
+   [
+    "the",
+    84
+   ],
+   [
+    "i",
+    54
+   ],
+   [
+    "in",
+    22
+   ],
+   [
+    "there",
+    17
+   ],
+   [
+    "a",
+    12
+   ],
+   [
+    "we",
+    9
+   ],
+   [
+    "on",
+    9
+   ],
+   [
+    "if",
+    9
+   ],
+   [
+    "for",
+    8
+   ],
+   [
+    "one",
+    6
+   ]
+  ],
+  "licenses": [
+   "public_domain_us"
+  ]
+ },
+ "substitutedCells": [
+  {
+   "cell": "short_story / main_idea_or_purpose <- novel_excerpt",
+   "n": 6
+  },
+  {
+   "cell": "drama / main_idea_or_purpose <- novel_excerpt",
+   "n": 4
+  },
+  {
+   "cell": "drama / character_motivation <- novel_excerpt",
+   "n": 4
+  },
+  {
+   "cell": "poetry / word_in_context <- fable_or_folktale_retelling",
+   "n": 2
+  },
+  {
+   "cell": "poetry / word_in_context <- personal_essay",
+   "n": 7
+  },
+  {
+   "cell": "drama / tone_shift <- novel_excerpt",
+   "n": 1
+  },
+  {
+   "cell": "short_story / main_idea_or_purpose <- memoir",
+   "n": 7
+  },
+  {
+   "cell": "short_story / word_in_context <- novel_excerpt",
+   "n": 7
+  }
+ ],
+ "shortageReasons": {
+  "drama": "코퍼스에서 희곡 형식(화자 표시 + 대사) 작품이 Clyde Fitch 『The Smart Set』 하나뿐이고 작품당 5개 상한 + 편지·종교·사망 표현 제외 후 3개만 남음(필요 12).",
+  "poetry": "시 작품이 소수(시집 3~4권, 시를 담은 산문집)이고 고어체·비ASCII·종교·전쟁 표현 필터 후 8작품 26개(필요 35).",
+  "short_story": "단편집이 적고(작품 약 25) 작품당 5개 상한 + 대사 위주·고유명사 과다·불쾌 표현 제외 후 117개(필요 137). 소설 작품의 남은 한도에서 자족적 장면으로 보충(workForm 표시)."
+ },
+ "usage": "npx tsx scripts/rw-generation/session-cli.ts prepare --run <runId> --batch lit40-easy-0N --excerpts data/rw-generation/excerpts/lit40-easy-0N.jsonl  (배치별 파일은 후보 순서와 정렬됨)",
+ "rejectionCounts": {
+  "pq9": 2675,
+  "chk231": 47995,
+  "pq8": 10474,
+  "pq5": 11501,
+  "pq12": 10839,
+  "pq2": 9444,
+  "pq1": 13597,
+  "pq3": 13659,
+  "pq4": 6210,
+  "pq10": 21650,
+  "chk388": 21763,
+  "pq6": 1575,
+  "chk990": 1749,
+  "chk986": 9314,
+  "chk146": 2882,
+  "chk883": 3294,
+  "chk896": 4292,
+  "chk451": 1651,
+  "pq7": 255,
+  "chk843": 2215,
+  "pm2": 566,
+  "pm1": 2507,
+  "pm4": 102,
+  "pm3": 116,
+  "pq11": 1242
+ }
+}

@@ -1,0 +1,346 @@
+{
+ "schema": "rw-session-task/v1",
+ "kind": "review",
+ "role": "second_solver",
+ "runId": "lit40-wave1",
+ "taskId": "rev-second_solver-033",
+ "chunkId": "rev-second_solver-033",
+ "suggestedModel": "opus",
+ "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-second_solver-033.result.json",
+ "outputSchema": {
+  "chunkId": "청크 ID",
+  "model": "opus|fable",
+  "items": [
+   {
+    "candidateId": "id",
+    "picked_letter": "A|B|C|D",
+    "other_defensible": "boolean",
+    "confidence": "high|medium|low",
+    "note": "풀이 한 줄"
+   }
+  ]
+ },
+ "items": [
+  {
+   "candidateId": "lit40-hard-03-031",
+   "attempt": 1,
+   "skill": "inferences",
+   "questionType": "character_motivation",
+   "requestedDifficulty": "hard",
+   "passage": "Three rules governed the wall between Kwesi's beekeeper's yard and Kwame's house in Dakar: no climbing, no smoke on windy days, and no talk of the photograph. Kwame kept the picture in a frame, a print of two boys on one bicycle beside a row of hives against that same wall, and each morning he hung it in his window facing the yard. Years ago Kwesi had moved his hives to the far corner, saying the bees disliked the afternoon heat by the wall, and he worked there with his back to the window. In the dry season of 1987, Kwame's son mentioned at the well that his father now read the newspaper with a glass and no longer crossed the street alone. That same week Kwesi began moving the hives back, one each evening after dark, telling anyone who asked that the far corner flooded in the rains. By March the last hive stood under the window, humming. Each morning Kwesi set a jar of the first honey on top of the wall, its lid loosened.",
+   "question": "Based on the text, why does Kwesi most likely move the hives back toward the wall?",
+   "options": [
+    "To protect his hives from the flooding he says has begun in the far corner.",
+    "To reclaim a part of the yard that he had given up during their years apart.",
+    "To return the scene in the picture to a neighbor whose eyesight is fading.",
+    "To apologize to Kwame for the years he spent working with his back turned."
+   ],
+   "recipeBeyondMedium": "동기를 한 문장에서 읽을 수 없고, 표면 명분을 받아들인 학생이 시점 단서에서 걸리도록 설계되어 있으며, 오답이 지문 사실과 충돌하지 않는다"
+  },
+  {
+   "candidateId": "lit40-hard-03-034",
+   "attempt": 1,
+   "skill": "inferences",
+   "questionType": "tone_or_mood",
+   "requestedDifficulty": "hard",
+   "passage": "Thessaloniki was still dark when Despina and I let ourselves into her uncle's bakery to practice, as we had every morning that winter, among the cooling racks. Flour on the music stand. Flour on the bow. Her uncle charged us nothing but the sweeping. A letter from the conservatory in Vienna lay folded inside her violin case, offering one place, for one player, beginning in March. We played the second movement and stopped at the bar where we always stopped. She tuned her A string. I tuned mine. Outside, the first cart came for the bread, and the driver whistled our opening phrase, badly, as he did most days. When we finished, I swept from the ovens to the door, then went back and swept the corner beneath her chair a second time, where there was nothing left to sweep, and set her case by the door with the clasp already fastened.",
+   "question": "Which choice best describes the overall tone of the text?",
+   "options": [
+    "Plain and orderly on the surface, calm and content toward the daily routine",
+    "Plain and orderly on the surface, wistful and accepting toward the coming parting",
+    "Plain and orderly on the surface, bitter and envious toward the single place",
+    "Plain and orderly on the surface, fond and nostalgic toward the bakery mornings"
+   ],
+   "recipeBeyondMedium": "겉 어조만 읽으면 오답에 걸리고 속 어조의 원인까지 맞혀야 하며, 네 선택지 구조가 동일해 형식 단서가 없다"
+  },
+  {
+   "candidateId": "lit40-hard-03-035",
+   "attempt": 1,
+   "skill": "inferences",
+   "questionType": "tone_or_mood",
+   "requestedDifficulty": "hard",
+   "passage": "\"Hold the lamp lower,\" Kofi said, and Yaa did. She had come to his noodle stall with his old school bell in a paper bag, the brass one he had rung every morning for thirty years before the mission school closed, its clapper snapped off at the hinge. A smith in Ebute Metta had welded it for two shillings. Kofi turned the bell over in his hands between bowls. He tapped the weld with a chopstick. It gave a flat sound, a clack rather than a ring, and a customer at the bench laughed. Kofi laughed too, and ladled the man more broth. He told Yaa the smith had done good work, that the price was fair, and asked after her mother. A boy ran past, late, his satchel bouncing. When Yaa rose to go, Kofi wiped the bell with his apron and set it on the shelf above the pot, mouth down, where the steam would reach it at the hour he used to ring it.",
+   "question": "Which choice best describes the overall tone of the text?",
+   "options": [
+    "Light and good-humored in its telling, cheerful and amused toward the failed repair",
+    "Light and good-humored in its telling, embarrassed and uneasy toward the customer's laughter",
+    "Light and good-humored in its telling, tender and wistful toward what cannot be restored",
+    "Light and good-humored in its telling, grateful and pleased toward the smith's careful work"
+   ],
+   "recipeBeyondMedium": "겉 어조만 읽으면 오답에 걸리고 속 어조의 원인까지 맞혀야 하며, 네 선택지 구조가 동일해 형식 단서가 없다"
+  },
+  {
+   "candidateId": "lit40-hard-03-038",
+   "attempt": 1,
+   "skill": "inferences",
+   "questionType": "relationship_between_characters",
+   "requestedDifficulty": "hard",
+   "passage": "Two herrings on Mondays, a smoked eel on Thursdays, and no credit: those were the terms Herr Gyeongho set when Katharina first came to his stall at the edge of the omnibus depot in Hamburg. She called him Herr Gyeongho, he called her Fraulein, and they bargained each week over a pfennig as if the stall depended on it. In the winter her mother's wages from the depot laundry stopped. Katharina still came on Mondays and Thursdays and paid what she could, and he wrapped the fish and dropped the coins into his apron without looking at them. Some weeks he complained loudly to the tram drivers that business was poor. One afternoon, sent to fetch paper from under his counter, she opened the wrong drawer and found a ledger in her own family's name, page after page of small sums, every line crossed through in the same blue pencil. She closed the drawer. The next Monday she set a pfennig more than the price on the scale before he could speak, and he let it lie there.",
+   "question": "Based on the text, which choice best describes the relationship between Katharina and Gyeongho?",
+   "options": [
+    "Behind their formal bargaining lies a plain trade between a merchant and a regular buyer.",
+    "Behind their formal bargaining lies a protective generosity he extends to her family unseen.",
+    "Behind their formal bargaining lies a shared pleasure in haggling that both look forward to.",
+    "Behind their formal bargaining lies his reliance on her custom to keep the stall afloat."
+   ],
+   "recipeBeyondMedium": "관계의 방향(누가 누구에게 의존·양보하는가)을 읽어야 하고, 호칭이 주는 표면 관계가 가장 강한 오답으로 작동하며, 오답이 지문과 충돌하지 않는다"
+  },
+  {
+   "candidateId": "lit40-hard-03-042",
+   "attempt": 1,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "hard",
+   "passage": "Irena had rented the farmhouse outside Gdansk because its old barn carried sound well and because the ensemble could not afford the city hall that season. Tatiana, the youngest violinist, had joined at fifteen; she was nineteen now, and a quartet in Berlin had written to her twice. All week she arrived early, unpacked her violin, and left the case open on the chair beside her, its velvet lining turned toward the door. Irena watched her play the slow movement with her shoulders lifted, a swallow perched on a wire that hums. During rehearsals the others asked Tatiana to lead the tuning, and she did, every morning, before anyone else had taken a seat. On Friday the letter from Berlin lay on her stand, still sealed, beneath the pencil she used to copy Irena's bowings into her part. During the break Irena said nothing about it. She only moved the chair with the open case a little closer to the stove.",
+   "question": "As used in the text, the phrase “a swallow perched on a wire that hums” most nearly suggests that Tatiana is",
+   "options": [
+    "ready to leave while still held by the work around her",
+    "light and fragile in a way that unsettles her bowing",
+    "tense with a vibration that the rest of the ensemble feels",
+    "restless in the way young players tend to be at that age"
+   ],
+   "recipeBeyondMedium": "관용 해석으로 풀 수 없고, 오답이 비유의 다른 속성에서 나온 그럴듯한 해석이며 정답은 두 곳 이상의 단서가 정한다"
+  },
+  {
+   "candidateId": "lit40-hard-03-043",
+   "attempt": 1,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "hard",
+   "passage": "I had not seen Ananya since the wedding where I knocked the garland tray from her hands, and now our grandmother's funeral had placed us in the same borrowed classroom in Kochi. Ananya sat at a front desk, straightening a stack of English primers no one would open that day. Each time an aunt came near, she squared the stack again and answered in short sentences. I took the desk behind her. She did not turn when I sat down, and she did not move away. Her silence toward me was a door left on the latch. Chalk dust stirred on the board. When the tea came, she poured two cups and set one at the corner of her own desk, on the side nearest me, without turning around. Later, clearing the desks, I found Nikhil written small on the inside cover of the top primer, in the round hand she had used as a girl.",
+   "question": "As used in the text, the phrase “a door left on the latch” most nearly suggests that Ananya's silence is",
+   "options": [
+    "a firm barrier meant to keep the narrator at a distance",
+    "a guarded reserve that still leaves room for the narrator",
+    "a fragile calm that might give way under more pressure",
+    "a general reluctance to talk with any relatives that day"
+   ],
+   "recipeBeyondMedium": "관용 해석으로 풀 수 없고, 오답이 비유의 다른 속성에서 나온 그럴듯한 해석이며 정답은 두 곳 이상의 단서가 정한다"
+  },
+  {
+   "candidateId": "lit40-hard-03-044",
+   "attempt": 1,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "hard",
+   "passage": "Dariush counts the coins in his tin each evening\non the stone bridge in Addis Ababa, where the wind off the river\nlifts the corners of Rukhsana's blue cloth.\nThe sum is not yet the sum he borrowed in spring.\nShe pins a hem against the railing, three fingers, then three,\nand shows him again the blind stitch, the tailor's knot,\nthe way to bite a thread without fraying it.\nEach night he opens the ledger to her page,\nreads the figure written there, and closes it.\nHis debt to her is a lamp lit in a room he does not enter.\nAt noon the vendors cross with their baskets.\nHer hands do not stop; neither do his.\nWhen the light thins over the water\nhe takes the ledger out once more\nand writes beneath the figure, not a payment,\nonly the day's date, in small careful letters,\nthe way she taught him to close a seam.",
+   "question": "As used in the text, the phrase “a lamp lit in a room he does not enter” most nearly suggests that Dariush's debt is",
+   "options": [
+    "a warm gratitude that brightens his long days on the bridge",
+    "a private shame that keeps him from speaking of it to her",
+    "an obligation he keeps attending to while not yet settling it",
+    "a small expense he intends to write down at a later point"
+   ],
+   "recipeBeyondMedium": "관용 해석으로 풀 수 없고, 오답이 비유의 다른 속성에서 나온 그럴듯한 해석이며 정답은 두 곳 이상의 단서가 정한다"
+  },
+  {
+   "candidateId": "lit40-hard-03-047",
+   "attempt": 1,
+   "skill": "words_in_context",
+   "questionType": "word_in_context",
+   "requestedDifficulty": "hard",
+   "passage": "By the third week of July, Shira had stopped eating with the surveyors. I had come up from Tel Aviv to map the camp's new water line, and she farmed the fields beside it; each morning she carried her tray to the far end of the dining hall and ate facing the window, where the stakes I had planted the day before stood in her orchard. She never pulled one up. On Thursday the regional office approved my route without consulting her. Lior, the camp cook, set the approval letter beside her coffee. Shira read it and remained ______. She folded the letter into quarters, finished her bread, carried her tray to the counter as she did every day, and then walked the length of the hall to my table and asked, in an even voice, to see the map.",
+   "question": "Which choice completes the text with the most logical and precise word or phrase?",
+   "options": [
+    "hot with anger",
+    "outwardly composed",
+    "quietly defeated",
+    "politely indifferent"
+   ],
+   "recipeBeyondMedium": "빈칸 뒤 정의가 없고 두 제약을 동시에 만족하는 표현만 정답이며, 오답이 모두 문법적으로 맞고 의미 영역이 같다"
+  },
+  {
+   "candidateId": "lit40-hard-03-069",
+   "attempt": 1,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "hard",
+   "passage": "When my grandfather moved into our flat above the terraced gardens in Manila, he brought three suitcases and a Greek grammar for me. Stavros had decided I would learn his language by summer, and every evening on the terrace he drilled verbs while the neighbors' radios played. I complained to my friends that he taught like a drill sergeant with a cough. For my birthday he gave me a wool sweater, knitted by his sister in Thessaloniki, in a city where the evenings rarely drop below twenty-five degrees. I told him it was perfect. That was not a lie, exactly; it was a word I had just learned from him. On weekends I went out with friends and left the grammar under my bed. But I wore the sweater to every lesson on the terrace, sweating, until the cuffs stretched past my wrists. Years later the grammar sits on my desk with his pencil marks in the margins, and I still conjugate one verb aloud before I open the window.",
+   "question": "Which choice best describes the narrator's attitude toward Stavros?",
+   "options": [
+    "Deep affection for Stavros while she grumbles about the way he teaches",
+    "Mild irritation at Stavros while she sits through his lessons out of duty",
+    "Gentle pity for Stavros while she humors him about the unsuitable sweater",
+    "Amused patience with Stavros while she puts up with his drill-sergeant habits"
+   ],
+   "recipeBeyondMedium": "말투와 행동의 어긋남을 읽어야 하고, 네 선택지가 같은 양가 구조라 형식 단서가 없다"
+  },
+  {
+   "candidateId": "lit40-hard-03-071",
+   "attempt": 1,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "hard",
+   "passage": "By the spring I turned fifteen, I had cooked every meal in my aunt's flat above the radio repair shop in Seville for two years. Remedios mended wirelesses downstairs and spoke to me mostly in instructions: less salt, more oil, close the door against the solder smoke. That April a neighbor borrowed our good copper pan for a christening and did not bring it back. I fried eggs in a dented tin pot and complained about it at every meal, while my aunt only turned the dial of whatever set lay open on her bench. Once I asked her to go and fetch the pan; she said, Freja, eat your eggs. In May she began working late, and a smell of hot metal drifted up the stairs past midnight. On my saint's day I found a new pan on the stove, hammered from the brass casing of an old radio cabinet, its handle wrapped in copper wire from the shop. Remedios was already downstairs, bent over a set.",
+   "question": "Which choice best states the main idea of the text?",
+   "options": [
+    "A neighbor's careless borrowing leaves a young cook with poorer tools for her work.",
+    "A handmade pan arrives on the narrator's saint's day to replace the borrowed one.",
+    "An aunt's apparent indifference proves to have hidden an answer made through her trade.",
+    "An aunt's new pan finally puts an end to the narrator's complaining at meals."
+   ],
+   "recipeBeyondMedium": "요지가 한 사건이 아닌 두 사건의 관계이며, 오답이 모두 지문 사실과 양립하는 부분 요지·인과 뒤집기다"
+  },
+  {
+   "candidateId": "lit40-hard-03-072",
+   "attempt": 1,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "hard",
+   "passage": "We kept a tailoring shop in Tehran on a street with too many tailors, and by the third winter our ledger ran mostly red. My brother Kemoy cut the cloth; I, Hemi, did the seams and the slow finishing. Every coat that left the shop carried a small linen tag in its collar, stitched with a single letter: K. When a colonel's wife admired a coat in the window, Kemoy thanked her at the counter while I sat in the back with pins in my mouth. That evening on the roof, where we hung the shop's linen to dry, I said a good deal. For a month afterward we pegged our cloths at opposite ends of the line. One coat came back for mending in February with its tag cut out, and neither of us asked who had done it. In March I went up to take in the new tags Kemoy had washed and starched. Each one read K. and H., the second letter in his clumsier hand. He came up behind me with the basket and pegged his shirts beside mine.",
+   "question": "Which choice best states the main idea of the text?",
+   "options": [
+    "A customer's praise exposes how unevenly two brothers share the work on each coat.",
+    "A set of new tags shows the brothers preparing to change how their shop is run.",
+    "A dispute over the shop's failing ledger is what drives the brothers' quarrel on the roof.",
+    "An old grievance about credit is answered by a gesture made in place of an apology."
+   ],
+   "recipeBeyondMedium": "요지가 한 사건이 아닌 두 사건의 관계이며, 오답이 모두 지문 사실과 양립하는 부분 요지·인과 뒤집기다"
+  },
+  {
+   "candidateId": "lit40-hard-03-073",
+   "attempt": 1,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "hard",
+   "passage": "Dry leaves choked the stone basin of the fountain in our courtyard in Taipei, and every October Baoyu came to argue with me about them. He had been my father's closest friend; he arrived with a rake and insisted the leaves be burned, and I insisted they be left to rot into the flower beds. My father had sailed for Fujian when I was nine. Baoyu asked after my schooling, my cough, the price of rice, and never once after him. We argued for six autumns, loudly enough that the neighbors leaned from their windows to listen. One year he set a small tin box on the fountain's rim while we shouted, and carried it home again when he left. The seventh October he did not come. A boy brought the rake and the tin box to our gate. Inside was a photograph of a young man in shirtsleeves raking leaves into that same basin, and on its back, in my father's hand, the year I was born. I leaned the rake against the fountain and left the leaves where they lay.",
+   "question": "Which choice best states the main idea of the text?",
+   "options": [
+    "A minor yearly dispute turns out to have carried a larger matter left unnamed.",
+    "An old family friend keeps up an autumn chore after the narrator's father leaves.",
+    "A box left at the gate gives the narrator a record of her father's own habits.",
+    "The narrator's refusal to burn the leaves is what leads Baoyu to stop visiting."
+   ],
+   "recipeBeyondMedium": "요지가 한 사건이 아닌 두 사건의 관계이며, 오답이 모두 지문 사실과 양립하는 부분 요지·인과 뒤집기다"
+  },
+  {
+   "candidateId": "lit40-hard-03-076",
+   "attempt": 1,
+   "skill": "inferences",
+   "questionType": "character_motivation",
+   "requestedDifficulty": "hard",
+   "passage": "Brine and coal smoke: that was the smell of the crossing on the salt flats east of Manchester, where my father ran the little ferry over the brine channel for thirty years. Each spring a passenger named Josiah bought two tickets and rode alone at the stern, hat in his hands, and left the second ticket tucked into the rail. My father punched both and never asked. The winter after my father died, the engine began to cough, and the yard at Irlam offered me three possible weeks in April for the overhaul. I took the second. Josiah's Tuesday fell in it; my father had chalked that date on the wheelhouse wall every year, and I had not washed it off. \"Repairs,\" I said, when Josiah came down the path that morning. \"Engine won't be ready till the summer trade.\" I untied my father's old skiff from the jetty, set the oars in their locks, and held the bow steady while he stepped in. On the far bank I took a ticket punch from my coat.",
+   "question": "Based on the text, why does the narrator most likely choose the second week in April for the repairs?",
+   "options": [
+    "She needs the engine mended before the busier summer trade on the channel.",
+    "She wants to spare Josiah a crossing on the boat her father used to run.",
+    "She hopes a delay will lead Josiah to explain the second ticket at last.",
+    "She wants to carry Josiah across in person on the day he always comes."
+   ],
+   "recipeBeyondMedium": "동기를 한 문장에서 읽을 수 없고, 표면 명분을 받아들인 학생이 시점 단서에서 걸리도록 설계되어 있으며, 오답이 지문 사실과 충돌하지 않는다"
+  },
+  {
+   "candidateId": "lit40-hard-03-079",
+   "attempt": 1,
+   "skill": "inferences",
+   "questionType": "tone_or_mood",
+   "requestedDifficulty": "hard",
+   "passage": "When I was sixteen, my violin lessons took place in the back room of a seed-saving cooperative in Tromso, between shelves of labeled envelopes: dwarf peas, northern kale, a barley nobody had sown since 1950. Anders sorted seeds while I played and corrected my bowing without looking up: \"Again, Aydin.\" In March he mentioned, between two envelopes, that he had entered me in the conservatory audition in Oslo, with a sonata of his choosing. I said thank you in the voice one saves for parking fines. For three months I practiced the sonata, and he sorted, and neither of us brought up the form. Once I caught him holding an envelope, not sorting it, while I took the slow movement twice. The night before the train, I found that envelope in my violin case: barley, 1950, keep dry. I now live in a city with no frost to speak of. I keep it in the drawer where the rosin goes, and I check the seal each winter.",
+   "question": "Which choice best describes the overall tone of the text?",
+   "options": [
+    "Wry and detached toward a teacher whose choice the narrator recalls",
+    "Wry and relieved toward a decision that spared the narrator a choice",
+    "Wry and grateful toward a teacher who acted on the narrator's behalf",
+    "Wry and grateful toward the years the narrator spent in Tromso"
+   ],
+   "recipeBeyondMedium": "겉 어조만 읽으면 오답에 걸리고 속 어조의 원인까지 맞혀야 하며, 네 선택지 구조가 동일해 형식 단서가 없다"
+  },
+  {
+   "candidateId": "lit40-hard-03-081",
+   "attempt": 1,
+   "skill": "inferences",
+   "questionType": "relationship_between_characters",
+   "requestedDifficulty": "hard",
+   "passage": "When the last crate of my father's records was sold, Ofelia counted the bills twice on the folding table between the lemon sellers and the fish stalls of the Valparaiso market. I had called her Señora all morning, as I called the woman who ran the bakery, and she answered to it. The plan had been hers: sell the records before the rent came due and keep me at the same school. A man in a striped scarf carried off the jazz albums; a student took the rest in two trips. Ofelia divided the bills into two stacks, slid the thicker one toward me, and said, \"For the rent, Emiliano. Count it.\" The thinner one went into her apron. At the empanada cart she bought one, handed it to me, and said she had already eaten. On the walk uphill she carried the empty crates. That night the rent envelope on the kitchen table was thicker than the stack I had counted, and her apron hung on its hook, the pocket flat.",
+   "question": "Based on the text, which choice best describes the relationship between Ofelia and Emiliano?",
+   "options": [
+    "Emiliano keeps Ofelia at a formal distance, while she quietly bears costs on his behalf.",
+    "Emiliano treats Ofelia as a respected elder, while she accepts the formal role he gives.",
+    "Emiliano and Ofelia work as partners in a sale, while they split what their plan earns.",
+    "Emiliano helps Ofelia through a hard morning, while she relies on him to finish the sale."
+   ],
+   "recipeBeyondMedium": "관계의 방향(누가 누구에게 의존·양보하는가)을 읽어야 하고, 호칭이 주는 표면 관계가 가장 강한 오답으로 작동하며, 오답이 지문과 충돌하지 않는다"
+  },
+  {
+   "candidateId": "lit40-hard-03-084",
+   "attempt": 1,
+   "skill": "inferences",
+   "questionType": "symbolism",
+   "requestedDifficulty": "hard",
+   "passage": "Four rules held in the tailor's back room, which Weiqi and I rented on alternate mornings that Vermont winter to proof our dough: no talk of prices, no borrowed flour, no opening the window, and nothing of mine crosses the chalk line on the floor. I had drawn that line myself, heel to heel across the boards, and each Monday I knelt and traced it fresh. Weiqi, whose bakery stood three doors from mine, kept to her side without comment. On a Thursday in February a letter came addressed to the tailor, and Weiqi opened it, thinking it was hers. The building would be sold in spring. She read it aloud to me anyway, from her side, and then we stood a long while among the rising bowls. The following Monday I knelt with the chalk in my hand, as always. My name is Matheus. I set the chalk back in its tin, and when Weiqi's bowl of rye needed the warmer corner, I lifted it across myself.",
+   "question": "Based on the text, what does the chalk line most likely represent?",
+   "options": [
+    "A practical rule that lets two tenants share a single rented room",
+    "Matheus's wish to guard his methods from a competing baker",
+    "A lost friendship between the bakers that the letter restores",
+    "A separation Matheus had insisted on, which he no longer keeps"
+   ],
+   "recipeBeyondMedium": "사물이 두 맥락에서 다른 의미를 띠고, 가장 강한 오답이 인물 관계로 읽은 그럴듯한 상징 해석이다"
+  },
+  {
+   "candidateId": "lit40-hard-03-086",
+   "attempt": 1,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "hard",
+   "passage": "When the power failed across Old Dhaka, the night pharmacy where Tara worked became the only lit room on the lane, and by midnight two families had carried their festival trays to its single steel counter. Tara's aunt laid out rice pudding for Eid. Hari, who had sailed cargo ships for thirty years and now rented the room above the shop, came down with a brass plate of marigolds and sweets for his evening prayer. Three times he set it near the corner; three times, when an arm reached past him, he drew it back against his chest. Hari's plate stayed at the counter's rim, a skiff riding out the night beyond the harbor lights. Tara moved two bowls and left a space. He looked at it and held the plate level. Later her aunt spooned pudding onto a leaf, set it on the empty steel, and pushed it a finger's width toward him. The marigolds went into the middle, and his small lamp leaned toward the rice.",
+   "question": "As used in the text, the phrase \"a skiff riding out the night beyond the harbor lights\" most nearly suggests that Hari",
+   "options": [
+    "is weighed down by the plate he has carried for his evening prayer.",
+    "has fixed the counter's rim as a boundary he intends to keep.",
+    "is waiting outside the gathering until a place is offered to him.",
+    "is falling back on habits formed during his years on cargo ships."
+   ],
+   "recipeBeyondMedium": "관용 해석으로 풀 수 없고, 오답이 비유의 다른 속성에서 나온 그럴듯한 해석이며 정답은 두 곳 이상의 단서가 정한다"
+  },
+  {
+   "candidateId": "lit40-hard-03-087",
+   "attempt": 1,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "hard",
+   "passage": "Years later I can still see Angus at the crossing below Kelvin Mill, where the burn had dried that August to a bed of grey stones. I clerked for him three mornings a week, long after he had left the bench; he called me Miss Maeve and nothing shorter. In his breast pocket he kept an envelope addressed, in his own hand, to a man he had once sentenced, and its corners had gone soft as cloth. Each morning at the near edge of the stones he pressed two fingers flat against that pocket, stood a while, and turned us toward the bridge. For him the letter was a ford walked daily toward a bank that never came nearer. I would wait with the satchel. On the last dry morning he went out as far as the middle, sat on a flat rock long enough to read a page, and came back with the pocket buttoned. We went round by the bridge, as before.",
+   "question": "As used in the text, the phrase \"a ford walked daily toward a bank that never came nearer\" most nearly suggests that the letter is",
+   "options": [
+    "a weight that presses on Angus each time he sets out in the morning.",
+    "a barrier that conditions outside Angus keep placing in his way.",
+    "a duty left from his years on the bench that still orders his days.",
+    "an effort Angus resumes each day without bringing it to an end."
+   ],
+   "recipeBeyondMedium": "관용 해석으로 풀 수 없고, 오답이 비유의 다른 속성에서 나온 그럴듯한 해석이며 정답은 두 곳 이상의 단서가 정한다"
+  },
+  {
+   "candidateId": "lit40-hard-03-088",
+   "attempt": 1,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "hard",
+   "passage": "Smell of split guava, sweet and gone to vinegar,\nthe wasps loud in it. In March the deed changed hands;\nXimena paid the last wage in an envelope\nand wrote the new gate code on its flap.\nStill, each dawn, Kiara walks the rows above Kingston\nlifting what the wind brought down,\nbinding cracked limbs to their stakes with green twine,\nthe same knot, the same three turns, tree after tree.\nShe moves among them, a candle trimmed for a ship already moored,\nand the light comes up behind her over the Blue Mountains.\nXimena watches from the porch, her coffee going cold,\nand says nothing of the clearing crew due in June.\nAt dusk Kiara rinses the twine knife at the cistern,\nwipes it on her skirt, and hangs her ring of keys\non the gatepost nail where anyone could take them,\nthen walks down the hill toward the road.",
+   "question": "As used in the text, the phrase \"a candle trimmed for a ship already moored\" most nearly suggests that Kiara's work is",
+   "options": [
+    "a devotion she keeps up though no one now requires it of her.",
+    "a strength that is wearing away the longer she stays on.",
+    "a bid to be noticed and kept on by the orchard's new owner.",
+    "the plain habit of a worker used to rising before daylight."
+   ],
+   "recipeBeyondMedium": "관용 해석으로 풀 수 없고, 오답이 비유의 다른 속성에서 나온 그럴듯한 해석이며 정답은 두 곳 이상의 단서가 정한다"
+  },
+  {
+   "candidateId": "lit40-hard-03-089",
+   "attempt": 1,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "hard",
+   "passage": "Rosedale, Mississippi, still keeps its salt-water pool, fed by a brackish well the town drilled in 1958 and never managed to sweeten. Aaliyah came back to survey the levee and found Darnell, the keeper, raking leaves off the surface as he had when she was ten. The water sat an inch lower on the tiles each year, he said, and each Sunday he ran the pump an hour to bring it back. She had left on a scholarship at seventeen, one of four the county gave that spring; on the honor board by the bathhouse, the other three names had addresses in Memphis and Chicago pencilled under them. In her notes that night she called the scholarship a sluice gate the town had opened for its own children. The next morning she measured the pool wall with her rod and logged the figure. Before she drove off, she ran the pump for an hour herself, though it was Tuesday.",
+   "question": "As used in the text, the phrase \"a sluice gate the town had opened for its own children\" most nearly suggests that the scholarship was",
+   "options": [
+    "a route to wider success that the town proudly offered to its youth.",
+    "an opening the town made itself that slowly let its young flow away.",
+    "a barrier that let the town decide which of its children could go.",
+    "a structure meant to manage the water that the levee holds back."
+   ],
+   "recipeBeyondMedium": "관용 해석으로 풀 수 없고, 오답이 비유의 다른 속성에서 나온 그럴듯한 해석이며 정답은 두 곳 이상의 단서가 정한다"
+  }
+ ],
+ "instructions": "당신은 디지털 SAT 독립 채점자(두 번째 풀이자)다. 정답 표시가 없다. 직접 풀고 정답 외에 방어 가능한 선택지가 있는지 판정한다. 다른 풀이자의 답은 모른다.\n청크 rev-second_solver-033 — 20문항.\n출력: Write 도구로 정확히 이 경로에 JSON 한 파일을 쓴다 → /Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-second_solver-033.result.json\n출력 JSON 스키마(예시 구조): {\"chunkId\":\"청크 ID\",\"model\":\"opus|fable\",\"items\":[{\"candidateId\":\"id\",\"picked_letter\":\"A|B|C|D\",\"other_defensible\":\"boolean\",\"confidence\":\"high|medium|low\",\"note\":\"풀이 한 줄\"}]}\n허용 값: picked_letter ∈ {A,B,C,D}, 불리언 필드는 true/false, est_difficulty ∈ {easy,medium,hard}. candidateId 를 바꾸지 않고 모든 항목에 답한다.\n금지: 결과 파일 외의 파일 생성·수정, 다른 명령 실행, 문항 수정·재작성. 끝나면 'done <항목 수>' 한 줄만 답한다.\n\n## 문항\n### lit40-hard-03-031 — skill inferences · 유형 character_motivation\n[지문]\nThree rules governed the wall between Kwesi's beekeeper's yard and Kwame's house in Dakar: no climbing, no smoke on windy days, and no talk of the photograph. Kwame kept the picture in a frame, a print of two boys on one bicycle beside a row of hives against that same wall, and each morning he hung it in his window facing the yard. Years ago Kwesi had moved his hives to the far corner, saying the bees disliked the afternoon heat by the wall, and he worked there with his back to the window. In the dry season of 1987, Kwame's son mentioned at the well that his father now read the newspaper with a glass and no longer crossed the street alone. That same week Kwesi began moving the hives back, one each evening after dark, telling anyone who asked that the far corner flooded in the rains. By March the last hive stood under the window, humming. Each morning Kwesi set a jar of the first honey on top of the wall, its lid loosened.\n\n[질문] Based on the text, why does Kwesi most likely move the hives back toward the wall?\nA) To protect his hives from the flooding he says has begun in the far corner.\nB) To reclaim a part of the yard that he had given up during their years apart.\nC) To return the scene in the picture to a neighbor whose eyesight is fading.\nD) To apologize to Kwame for the years he spent working with his back turned.\n### lit40-hard-03-034 — skill inferences · 유형 tone_or_mood\n[지문]\nThessaloniki was still dark when Despina and I let ourselves into her uncle's bakery to practice, as we had every morning that winter, among the cooling racks. Flour on the music stand. Flour on the bow. Her uncle charged us nothing but the sweeping. A letter from the conservatory in Vienna lay folded inside her violin case, offering one place, for one player, beginning in March. We played the second movement and stopped at the bar where we always stopped. She tuned her A string. I tuned mine. Outside, the first cart came for the bread, and the driver whistled our opening phrase, badly, as he did most days. When we finished, I swept from the ovens to the door, then went back and swept the corner beneath her chair a second time, where there was nothing left to sweep, and set her case by the door with the clasp already fastened.\n\n[질문] Which choice best describes the overall tone of the text?\nA) Plain and orderly on the surface, calm and content toward the daily routine\nB) Plain and orderly on the surface, wistful and accepting toward the coming parting\nC) Plain and orderly on the surface, bitter and envious toward the single place\nD) Plain and orderly on the surface, fond and nostalgic toward the bakery mornings\n### lit40-hard-03-035 — skill inferences · 유형 tone_or_mood\n[지문]\n\"Hold the lamp lower,\" Kofi said, and Yaa did. She had come to his noodle stall with his old school bell in a paper bag, the brass one he had rung every morning for thirty years before the mission school closed, its clapper snapped off at the hinge. A smith in Ebute Metta had welded it for two shillings. Kofi turned the bell over in his hands between bowls. He tapped the weld with a chopstick. It gave a flat sound, a clack rather than a ring, and a customer at the bench laughed. Kofi laughed too, and ladled the man more broth. He told Yaa the smith had done good work, that the price was fair, and asked after her mother. A boy ran past, late, his satchel bouncing. When Yaa rose to go, Kofi wiped the bell with his apron and set it on the shelf above the pot, mouth down, where the steam would reach it at the hour he used to ring it.\n\n[질문] Which choice best describes the overall tone of the text?\nA) Light and good-humored in its telling, cheerful and amused toward the failed repair\nB) Light and good-humored in its telling, embarrassed and uneasy toward the customer's laughter\nC) Light and good-humored in its telling, tender and wistful toward what cannot be restored\nD) Light and good-humored in its telling, grateful and pleased toward the smith's careful work\n### lit40-hard-03-038 — skill inferences · 유형 relationship_between_characters\n[지문]\nTwo herrings on Mondays, a smoked eel on Thursdays, and no credit: those were the terms Herr Gyeongho set when Katharina first came to his stall at the edge of the omnibus depot in Hamburg. She called him Herr Gyeongho, he called her Fraulein, and they bargained each week over a pfennig as if the stall depended on it. In the winter her mother's wages from the depot laundry stopped. Katharina still came on Mondays and Thursdays and paid what she could, and he wrapped the fish and dropped the coins into his apron without looking at them. Some weeks he complained loudly to the tram drivers that business was poor. One afternoon, sent to fetch paper from under his counter, she opened the wrong drawer and found a ledger in her own family's name, page after page of small sums, every line crossed through in the same blue pencil. She closed the drawer. The next Monday she set a pfennig more than the price on the scale before he could speak, and he let it lie there.\n\n[질문] Based on the text, which choice best describes the relationship between Katharina and Gyeongho?\nA) Behind their formal bargaining lies a plain trade between a merchant and a regular buyer.\nB) Behind their formal bargaining lies a protective generosity he extends to her family unseen.\nC) Behind their formal bargaining lies a shared pleasure in haggling that both look forward to.\nD) Behind their formal bargaining lies his reliance on her custom to keep the stall afloat.\n### lit40-hard-03-042 — skill words_in_context · 유형 figurative_language\n[지문]\nIrena had rented the farmhouse outside Gdansk because its old barn carried sound well and because the ensemble could not afford the city hall that season. Tatiana, the youngest violinist, had joined at fifteen; she was nineteen now, and a quartet in Berlin had written to her twice. All week she arrived early, unpacked her violin, and left the case open on the chair beside her, its velvet lining turned toward the door. Irena watched her play the slow movement with her shoulders lifted, a swallow perched on a wire that hums. During rehearsals the others asked Tatiana to lead the tuning, and she did, every morning, before anyone else had taken a seat. On Friday the letter from Berlin lay on her stand, still sealed, beneath the pencil she used to copy Irena's bowings into her part. During the break Irena said nothing about it. She only moved the chair with the open case a little closer to the stove.\n\n[질문] As used in the text, the phrase “a swallow perched on a wire that hums” most nearly suggests that Tatiana is\nA) ready to leave while still held by the work around her\nB) light and fragile in a way that unsettles her bowing\nC) tense with a vibration that the rest of the ensemble feels\nD) restless in the way young players tend to be at that age\n### lit40-hard-03-043 — skill words_in_context · 유형 figurative_language\n[지문]\nI had not seen Ananya since the wedding where I knocked the garland tray from her hands, and now our grandmother's funeral had placed us in the same borrowed classroom in Kochi. Ananya sat at a front desk, straightening a stack of English primers no one would open that day. Each time an aunt came near, she squared the stack again and answered in short sentences. I took the desk behind her. She did not turn when I sat down, and she did not move away. Her silence toward me was a door left on the latch. Chalk dust stirred on the board. When the tea came, she poured two cups and set one at the corner of her own desk, on the side nearest me, without turning around. Later, clearing the desks, I found Nikhil written small on the inside cover of the top primer, in the round hand she had used as a girl.\n\n[질문] As used in the text, the phrase “a door left on the latch” most nearly suggests that Ananya's silence is\nA) a firm barrier meant to keep the narrator at a distance\nB) a guarded reserve that still leaves room for the narrator\nC) a fragile calm that might give way under more pressure\nD) a general reluctance to talk with any relatives that day\n### lit40-hard-03-044 — skill words_in_context · 유형 figurative_language\n[지문]\nDariush counts the coins in his tin each evening\non the stone bridge in Addis Ababa, where the wind off the river\nlifts the corners of Rukhsana's blue cloth.\nThe sum is not yet the sum he borrowed in spring.\nShe pins a hem against the railing, three fingers, then three,\nand shows him again the blind stitch, the tailor's knot,\nthe way to bite a thread without fraying it.\nEach night he opens the ledger to her page,\nreads the figure written there, and closes it.\nHis debt to her is a lamp lit in a room he does not enter.\nAt noon the vendors cross with their baskets.\nHer hands do not stop; neither do his.\nWhen the light thins over the water\nhe takes the ledger out once more\nand writes beneath the figure, not a payment,\nonly the day's date, in small careful letters,\nthe way she taught him to close a seam.\n\n[질문] As used in the text, the phrase “a lamp lit in a room he does not enter” most nearly suggests that Dariush's debt is\nA) a warm gratitude that brightens his long days on the bridge\nB) a private shame that keeps him from speaking of it to her\nC) an obligation he keeps attending to while not yet settling it\nD) a small expense he intends to write down at a later point\n### lit40-hard-03-047 — skill words_in_context · 유형 word_in_context\n[지문]\nBy the third week of July, Shira had stopped eating with the surveyors. I had come up from Tel Aviv to map the camp's new water line, and she farmed the fields beside it; each morning she carried her tray to the far end of the dining hall and ate facing the window, where the stakes I had planted the day before stood in her orchard. She never pulled one up. On Thursday the regional office approved my route without consulting her. Lior, the camp cook, set the approval letter beside her coffee. Shira read it and remained ______. She folded the letter into quarters, finished her bread, carried her tray to the counter as she did every day, and then walked the length of the hall to my table and asked, in an even voice, to see the map.\n\n[질문] Which choice completes the text with the most logical and precise word or phrase?\nA) hot with anger\nB) outwardly composed\nC) quietly defeated\nD) politely indifferent\n### lit40-hard-03-069 — skill central_ideas_details · 유형 narrator_attitude\n[지문]\nWhen my grandfather moved into our flat above the terraced gardens in Manila, he brought three suitcases and a Greek grammar for me. Stavros had decided I would learn his language by summer, and every evening on the terrace he drilled verbs while the neighbors' radios played. I complained to my friends that he taught like a drill sergeant with a cough. For my birthday he gave me a wool sweater, knitted by his sister in Thessaloniki, in a city where the evenings rarely drop below twenty-five degrees. I told him it was perfect. That was not a lie, exactly; it was a word I had just learned from him. On weekends I went out with friends and left the grammar under my bed. But I wore the sweater to every lesson on the terrace, sweating, until the cuffs stretched past my wrists. Years later the grammar sits on my desk with his pencil marks in the margins, and I still conjugate one verb aloud before I open the window.\n\n[질문] Which choice best describes the narrator's attitude toward Stavros?\nA) Deep affection for Stavros while she grumbles about the way he teaches\nB) Mild irritation at Stavros while she sits through his lessons out of duty\nC) Gentle pity for Stavros while she humors him about the unsuitable sweater\nD) Amused patience with Stavros while she puts up with his drill-sergeant habits\n### lit40-hard-03-071 — skill central_ideas_details · 유형 main_idea_or_purpose\n[지문]\nBy the spring I turned fifteen, I had cooked every meal in my aunt's flat above the radio repair shop in Seville for two years. Remedios mended wirelesses downstairs and spoke to me mostly in instructions: less salt, more oil, close the door against the solder smoke. That April a neighbor borrowed our good copper pan for a christening and did not bring it back. I fried eggs in a dented tin pot and complained about it at every meal, while my aunt only turned the dial of whatever set lay open on her bench. Once I asked her to go and fetch the pan; she said, Freja, eat your eggs. In May she began working late, and a smell of hot metal drifted up the stairs past midnight. On my saint's day I found a new pan on the stove, hammered from the brass casing of an old radio cabinet, its handle wrapped in copper wire from the shop. Remedios was already downstairs, bent over a set.\n\n[질문] Which choice best states the main idea of the text?\nA) A neighbor's careless borrowing leaves a young cook with poorer tools for her work.\nB) A handmade pan arrives on the narrator's saint's day to replace the borrowed one.\nC) An aunt's apparent indifference proves to have hidden an answer made through her trade.\nD) An aunt's new pan finally puts an end to the narrator's complaining at meals.\n### lit40-hard-03-072 — skill central_ideas_details · 유형 main_idea_or_purpose\n[지문]\nWe kept a tailoring shop in Tehran on a street with too many tailors, and by the third winter our ledger ran mostly red. My brother Kemoy cut the cloth; I, Hemi, did the seams and the slow finishing. Every coat that left the shop carried a small linen tag in its collar, stitched with a single letter: K. When a colonel's wife admired a coat in the window, Kemoy thanked her at the counter while I sat in the back with pins in my mouth. That evening on the roof, where we hung the shop's linen to dry, I said a good deal. For a month afterward we pegged our cloths at opposite ends of the line. One coat came back for mending in February with its tag cut out, and neither of us asked who had done it. In March I went up to take in the new tags Kemoy had washed and starched. Each one read K. and H., the second letter in his clumsier hand. He came up behind me with the basket and pegged his shirts beside mine.\n\n[질문] Which choice best states the main idea of the text?\nA) A customer's praise exposes how unevenly two brothers share the work on each coat.\nB) A set of new tags shows the brothers preparing to change how their shop is run.\nC) A dispute over the shop's failing ledger is what drives the brothers' quarrel on the roof.\nD) An old grievance about credit is answered by a gesture made in place of an apology.\n### lit40-hard-03-073 — skill central_ideas_details · 유형 main_idea_or_purpose\n[지문]\nDry leaves choked the stone basin of the fountain in our courtyard in Taipei, and every October Baoyu came to argue with me about them. He had been my father's closest friend; he arrived with a rake and insisted the leaves be burned, and I insisted they be left to rot into the flower beds. My father had sailed for Fujian when I was nine. Baoyu asked after my schooling, my cough, the price of rice, and never once after him. We argued for six autumns, loudly enough that the neighbors leaned from their windows to listen. One year he set a small tin box on the fountain's rim while we shouted, and carried it home again when he left. The seventh October he did not come. A boy brought the rake and the tin box to our gate. Inside was a photograph of a young man in shirtsleeves raking leaves into that same basin, and on its back, in my father's hand, the year I was born. I leaned the rake against the fountain and left the leaves where they lay.\n\n[질문] Which choice best states the main idea of the text?\nA) A minor yearly dispute turns out to have carried a larger matter left unnamed.\nB) An old family friend keeps up an autumn chore after the narrator's father leaves.\nC) A box left at the gate gives the narrator a record of her father's own habits.\nD) The narrator's refusal to burn the leaves is what leads Baoyu to stop visiting.\n### lit40-hard-03-076 — skill inferences · 유형 character_motivation\n[지문]\nBrine and coal smoke: that was the smell of the crossing on the salt flats east of Manchester, where my father ran the little ferry over the brine channel for thirty years. Each spring a passenger named Josiah bought two tickets and rode alone at the stern, hat in his hands, and left the second ticket tucked into the rail. My father punched both and never asked. The winter after my father died, the engine began to cough, and the yard at Irlam offered me three possible weeks in April for the overhaul. I took the second. Josiah's Tuesday fell in it; my father had chalked that date on the wheelhouse wall every year, and I had not washed it off. \"Repairs,\" I said, when Josiah came down the path that morning. \"Engine won't be ready till the summer trade.\" I untied my father's old skiff from the jetty, set the oars in their locks, and held the bow steady while he stepped in. On the far bank I took a ticket punch from my coat.\n\n[질문] Based on the text, why does the narrator most likely choose the second week in April for the repairs?\nA) She needs the engine mended before the busier summer trade on the channel.\nB) She wants to spare Josiah a crossing on the boat her father used to run.\nC) She hopes a delay will lead Josiah to explain the second ticket at last.\nD) She wants to carry Josiah across in person on the day he always comes.\n### lit40-hard-03-079 — skill inferences · 유형 tone_or_mood\n[지문]\nWhen I was sixteen, my violin lessons took place in the back room of a seed-saving cooperative in Tromso, between shelves of labeled envelopes: dwarf peas, northern kale, a barley nobody had sown since 1950. Anders sorted seeds while I played and corrected my bowing without looking up: \"Again, Aydin.\" In March he mentioned, between two envelopes, that he had entered me in the conservatory audition in Oslo, with a sonata of his choosing. I said thank you in the voice one saves for parking fines. For three months I practiced the sonata, and he sorted, and neither of us brought up the form. Once I caught him holding an envelope, not sorting it, while I took the slow movement twice. The night before the train, I found that envelope in my violin case: barley, 1950, keep dry. I now live in a city with no frost to speak of. I keep it in the drawer where the rosin goes, and I check the seal each winter.\n\n[질문] Which choice best describes the overall tone of the text?\nA) Wry and detached toward a teacher whose choice the narrator recalls\nB) Wry and relieved toward a decision that spared the narrator a choice\nC) Wry and grateful toward a teacher who acted on the narrator's behalf\nD) Wry and grateful toward the years the narrator spent in Tromso\n### lit40-hard-03-081 — skill inferences · 유형 relationship_between_characters\n[지문]\nWhen the last crate of my father's records was sold, Ofelia counted the bills twice on the folding table between the lemon sellers and the fish stalls of the Valparaiso market. I had called her Señora all morning, as I called the woman who ran the bakery, and she answered to it. The plan had been hers: sell the records before the rent came due and keep me at the same school. A man in a striped scarf carried off the jazz albums; a student took the rest in two trips. Ofelia divided the bills into two stacks, slid the thicker one toward me, and said, \"For the rent, Emiliano. Count it.\" The thinner one went into her apron. At the empanada cart she bought one, handed it to me, and said she had already eaten. On the walk uphill she carried the empty crates. That night the rent envelope on the kitchen table was thicker than the stack I had counted, and her apron hung on its hook, the pocket flat.\n\n[질문] Based on the text, which choice best describes the relationship between Ofelia and Emiliano?\nA) Emiliano keeps Ofelia at a formal distance, while she quietly bears costs on his behalf.\nB) Emiliano treats Ofelia as a respected elder, while she accepts the formal role he gives.\nC) Emiliano and Ofelia work as partners in a sale, while they split what their plan earns.\nD) Emiliano helps Ofelia through a hard morning, while she relies on him to finish the sale.\n### lit40-hard-03-084 — skill inferences · 유형 symbolism\n[지문]\nFour rules held in the tailor's back room, which Weiqi and I rented on alternate mornings that Vermont winter to proof our dough: no talk of prices, no borrowed flour, no opening the window, and nothing of mine crosses the chalk line on the floor. I had drawn that line myself, heel to heel across the boards, and each Monday I knelt and traced it fresh. Weiqi, whose bakery stood three doors from mine, kept to her side without comment. On a Thursday in February a letter came addressed to the tailor, and Weiqi opened it, thinking it was hers. The building would be sold in spring. She read it aloud to me anyway, from her side, and then we stood a long while among the rising bowls. The following Monday I knelt with the chalk in my hand, as always. My name is Matheus. I set the chalk back in its tin, and when Weiqi's bowl of rye needed the warmer corner, I lifted it across myself.\n\n[질문] Based on the text, what does the chalk line most likely represent?\nA) A practical rule that lets two tenants share a single rented room\nB) Matheus's wish to guard his methods from a competing baker\nC) A lost friendship between the bakers that the letter restores\nD) A separation Matheus had insisted on, which he no longer keeps\n### lit40-hard-03-086 — skill words_in_context · 유형 figurative_language\n[지문]\nWhen the power failed across Old Dhaka, the night pharmacy where Tara worked became the only lit room on the lane, and by midnight two families had carried their festival trays to its single steel counter. Tara's aunt laid out rice pudding for Eid. Hari, who had sailed cargo ships for thirty years and now rented the room above the shop, came down with a brass plate of marigolds and sweets for his evening prayer. Three times he set it near the corner; three times, when an arm reached past him, he drew it back against his chest. Hari's plate stayed at the counter's rim, a skiff riding out the night beyond the harbor lights. Tara moved two bowls and left a space. He looked at it and held the plate level. Later her aunt spooned pudding onto a leaf, set it on the empty steel, and pushed it a finger's width toward him. The marigolds went into the middle, and his small lamp leaned toward the rice.\n\n[질문] As used in the text, the phrase \"a skiff riding out the night beyond the harbor lights\" most nearly suggests that Hari\nA) is weighed down by the plate he has carried for his evening prayer.\nB) has fixed the counter's rim as a boundary he intends to keep.\nC) is waiting outside the gathering until a place is offered to him.\nD) is falling back on habits formed during his years on cargo ships.\n### lit40-hard-03-087 — skill words_in_context · 유형 figurative_language\n[지문]\nYears later I can still see Angus at the crossing below Kelvin Mill, where the burn had dried that August to a bed of grey stones. I clerked for him three mornings a week, long after he had left the bench; he called me Miss Maeve and nothing shorter. In his breast pocket he kept an envelope addressed, in his own hand, to a man he had once sentenced, and its corners had gone soft as cloth. Each morning at the near edge of the stones he pressed two fingers flat against that pocket, stood a while, and turned us toward the bridge. For him the letter was a ford walked daily toward a bank that never came nearer. I would wait with the satchel. On the last dry morning he went out as far as the middle, sat on a flat rock long enough to read a page, and came back with the pocket buttoned. We went round by the bridge, as before.\n\n[질문] As used in the text, the phrase \"a ford walked daily toward a bank that never came nearer\" most nearly suggests that the letter is\nA) a weight that presses on Angus each time he sets out in the morning.\nB) a barrier that conditions outside Angus keep placing in his way.\nC) a duty left from his years on the bench that still orders his days.\nD) an effort Angus resumes each day without bringing it to an end.\n### lit40-hard-03-088 — skill words_in_context · 유형 figurative_language\n[지문]\nSmell of split guava, sweet and gone to vinegar,\nthe wasps loud in it. In March the deed changed hands;\nXimena paid the last wage in an envelope\nand wrote the new gate code on its flap.\nStill, each dawn, Kiara walks the rows above Kingston\nlifting what the wind brought down,\nbinding cracked limbs to their stakes with green twine,\nthe same knot, the same three turns, tree after tree.\nShe moves among them, a candle trimmed for a ship already moored,\nand the light comes up behind her over the Blue Mountains.\nXimena watches from the porch, her coffee going cold,\nand says nothing of the clearing crew due in June.\nAt dusk Kiara rinses the twine knife at the cistern,\nwipes it on her skirt, and hangs her ring of keys\non the gatepost nail where anyone could take them,\nthen walks down the hill toward the road.\n\n[질문] As used in the text, the phrase \"a candle trimmed for a ship already moored\" most nearly suggests that Kiara's work is\nA) a devotion she keeps up though no one now requires it of her.\nB) a strength that is wearing away the longer she stays on.\nC) a bid to be noticed and kept on by the orchard's new owner.\nD) the plain habit of a worker used to rising before daylight.\n### lit40-hard-03-089 — skill words_in_context · 유형 figurative_language\n[지문]\nRosedale, Mississippi, still keeps its salt-water pool, fed by a brackish well the town drilled in 1958 and never managed to sweeten. Aaliyah came back to survey the levee and found Darnell, the keeper, raking leaves off the surface as he had when she was ten. The water sat an inch lower on the tiles each year, he said, and each Sunday he ran the pump an hour to bring it back. She had left on a scholarship at seventeen, one of four the county gave that spring; on the honor board by the bathhouse, the other three names had addresses in Memphis and Chicago pencilled under them. In her notes that night she called the scholarship a sluice gate the town had opened for its own children. The next morning she measured the pool wall with her rod and logged the figure. Before she drove off, she ran the pump for an hour herself, though it was Tuesday.\n\n[질문] As used in the text, the phrase \"a sluice gate the town had opened for its own children\" most nearly suggests that the scholarship was\nA) a route to wider success that the town proudly offered to its youth.\nB) an opening the town made itself that slowly let its young flow away.\nC) a barrier that let the town decide which of its children could go.\nD) a structure meant to manage the water that the levee holds back."
+}

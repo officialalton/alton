@@ -1,0 +1,335 @@
+{
+ "schema": "rw-session-task/v1",
+ "kind": "review",
+ "role": "explanation_audit",
+ "runId": "lit40-wave1",
+ "taskId": "rev-explanation_audit-017",
+ "chunkId": "rev-explanation_audit-017",
+ "suggestedModel": "sonnet",
+ "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-explanation_audit-017.result.json",
+ "outputSchema": {
+  "chunkId": "청크 ID",
+  "model": "sonnet",
+  "items": [
+   {
+    "candidateId": "id",
+    "answer_correct": "표시된 정답이 정말 정답이면 true",
+    "explanation_consistent": "해설이 정답·오답 판단과 일치하고 글자 참조가 맞으면 true",
+    "explanation_factual": "해설에 사실 오류가 없으면 true",
+    "issues": "한 줄 메모"
+   }
+  ]
+ },
+ "items": [
+  {
+   "candidateId": "lit40-medium-03-013",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "text_structure",
+   "requestedDifficulty": "medium",
+   "passage": "Eunseo had warned the passenger that the ferryman's house flooded every spring, but Anders followed her down to the cellar anyway, wading through cold water to help carry up her father's boxes. He had arrived in Tromso that morning with one suitcase and no plan, and he said so cheerfully, as if it were a credential. Lifting a crate of charts, Eunseo asked why anyone would choose a town this dark in winter. Anders did not answer at once. Instead he pointed to the waterline on the stone wall, then to the older lines above it, each one marked with a year in her father's hand. 'He kept starting over down here,' Anders said. 'Every spring, the same cellar.' Eunseo looked at the marks she had passed a thousand times and, for the first time, read them as a record of persistence rather than loss.",
+   "question": "Which choice best describes the overall structure of the text?",
+   "options": [
+    "A conflict between two characters is introduced and then settled by a compromise.",
+    "A setting is described, followed by a flashback to the father's arrival in town.",
+    "A character's plan is explained, then abandoned after a setback in the cellar.",
+    "A shared task is shown, a question is raised, and a remark reframes the familiar."
+   ],
+   "correct_letter": "D",
+   "explanation": "글은 지하실에서 상자를 옮기는 일로 시작해, Eunseo가 왜 이 어두운 마을을 택했느냐고 묻는 질문으로 이어진다. Anders는 직접 답하는 대신 벽의 수위 표시를 가리키며 다시 시작하는 아버지의 모습을 짚고, Eunseo는 익숙한 표시를 새롭게 읽게 된다. 따라서 D가 정답이다. A는 갈등과 타협이 없고, B는 회상 장면이 없으며, C는 Anders에게 원래 계획이 없었다."
+  },
+  {
+   "candidateId": "lit40-medium-03-014",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "text_structure",
+   "requestedDifficulty": "medium",
+   "passage": "Paloma hated waiting rooms. She had tended the garden of the house on Calle Betis for thirty years, and she was used to hours that produced something: a pruned hedge, a bed of turned soil. Here in the hospital in Seville there was only the clock and Alba, the house's new owner, who had driven her in after the fall from the ladder. For a long time they spoke about nothing. Then Alba admitted that she had bought the house with money from a scholarship fund her late uncle had left, a fund meant for students who would now never receive it. She had wanted a garden more than she had wanted to be generous, she said. Paloma studied her bandaged wrist. 'Gardens cost too,' she said. 'Someone always pays for the shade.'",
+   "question": "Which choice best describes the overall structure of the text?",
+   "options": [
+    "It shows one character's impatience, presents another's confession, then a reflective reply.",
+    "It describes an accident in detail, then traces the injured character's recovery at home.",
+    "It compares two characters' careers before revealing they are rivals for the same house.",
+    "It recounts a dispute over money and ends with both characters agreeing to share the fund."
+   ],
+   "correct_letter": "A",
+   "explanation": "글은 기다림을 싫어하는 Paloma의 성격으로 시작하고, 병원 대기실에서 Alba가 장학 기금으로 집을 샀다고 고백하는 장면으로 초점이 옮겨 간다. 마지막에는 Paloma가 손목을 바라보며 정원에도 대가가 따른다고 성찰적으로 답한다. 따라서 A가 정답이다. B는 사고를 자세히 묘사하거나 회복을 다루지 않고, C는 두 사람이 경쟁자가 아니며, D는 다툼이나 기금 분배 합의가 없다."
+  },
+  {
+   "candidateId": "lit40-medium-03-015",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "text_structure",
+   "requestedDifficulty": "medium",
+   "passage": "Years later, I still think about the season Coach Sunethra benched me. I was the best bowler on our plantation cricket team outside Colombo, and I sulked on the boundary while she sent out girls who could barely grip the ball. Each evening after practice she walked the rows of tea with the pickers, carrying their baskets to the weighing shed, though no one paid her for it and the estate manager praised her only in speeches. I thought she was wasting her strength. One night I followed her, meaning to complain, and ended up carrying a basket myself. The pickers called me by my name, Nadeesha, as if they had always known it. Sunethra had benched me, I began to see, not to punish my arm but to show me where the team's real work happened.",
+   "question": "Which choice best describes the overall structure of the text?",
+   "options": [
+    "It describes a cricket match in detail, then explains why the team lost the final.",
+    "It recalls a grievance, describes a mentor's habit, then shows how joining it changed the writer.",
+    "It compares two coaching styles before arguing that the estate should pay its coaches.",
+    "It presents the pickers' complaints and then reports the estate manager's response."
+   ],
+   "correct_letter": "B",
+   "explanation": "글은 벤치에 앉게 된 데 대한 필자의 불만으로 시작해, 보수 없이 바구니를 나르는 코치의 저녁 습관을 묘사한다. 이어 필자가 불평하려고 따라갔다가 직접 바구니를 나르며 생각이 바뀌는 과정으로 마무리되므로 B가 정답이다. A는 경기 묘사가 없고, C는 두 코칭 방식을 비교하거나 보수를 주장하지 않으며, D는 일꾼들의 불만이 등장하지 않는다."
+  },
+  {
+   "candidateId": "lit40-medium-03-016",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "text_structure",
+   "requestedDifficulty": "medium",
+   "passage": "Wood remembers everything. Master Zihan said this whenever I, Shuang, rushed a joint in his workshop beside the abandoned orchard outside Chengdu, where his family had once grown pears. For two years I believed the orchard was simply forgotten, the trees left to split and grey because no one had time for them. Zihan's sons spoke of selling the land; his wife spoke of nothing at all. Then a furniture buyer from Shanghai came to see our tables. She walked past the polished samples, out to the orchard, and ran her hand along a fallen trunk. 'These are not neglected,' she said. 'He is drying them. This is twenty years of seasoning.' Zihan only nodded. I looked again at the rows and saw, for the first time, the careful spacing, the bark stripped in patient bands.",
+   "question": "Which choice best describes the overall structure of the text?",
+   "options": [
+    "It describes a carpenter's training methods, then lists the furniture a buyer purchased.",
+    "It recounts a family dispute over land and ends with the sons agreeing to sell it.",
+    "It presents a belief shared by the narrator and a family, then shows an outsider overturning it.",
+    "It contrasts two cities' craft traditions before describing the narrator's departure."
+   ],
+   "correct_letter": "C",
+   "explanation": "앞부분에서 화자와 가족은 과수원이 버려졌다고 믿으며, 아들들은 땅을 팔자고 말한다. 외부인인 구매자가 쓰러진 나무를 만져 보고 20년 동안 건조 중이라고 밝히자 화자는 비로소 나무의 간격과 벗긴 껍질을 새롭게 본다. 따라서 C가 정답이다. A는 구매 목록이 없고, B는 땅을 파는 결말이 없으며, D는 두 도시의 전통을 비교하지 않는다."
+  },
+  {
+   "candidateId": "lit40-medium-03-017",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "text_structure",
+   "requestedDifficulty": "medium",
+   "passage": "Dakar was still asleep when the author Nneka and her translator, Babatunde, sat down at the bus stop on the hill road, where an old rule was painted on a board: Wait for the third bus; the first two belong to the goats. Nneka laughed and stood when the first bus came. Babatunde did not. 'In the story my village tells,' he said, 'a herder painted that rule after his goats were nearly crushed on this bend. The goats are gone, but he did not make the rule for goats alone.' Nneka sat back down, uncertain. The first bus passed, then the second, both crowded and swaying dangerously around the curve. When the third arrived, nearly empty, she climbed aboard, opened her notebook, and asked Babatunde how the herder's words should sound in her book.",
+   "question": "Which choice best describes the overall structure of the text?",
+   "options": [
+    "A journey is planned, a delay occurs, and the characters abandon their trip entirely.",
+    "A legend is retold in full before the narrator explains its moral to the reader.",
+    "Two characters argue about a translation until one of them quits the project.",
+    "A rule is mocked, its origin is explained, and events lead a character to reconsider it."
+   ],
+   "correct_letter": "D",
+   "explanation": "Nneka는 처음에 표지판의 규칙을 비웃고 첫 버스에 오르려 한다. Babatunde가 규칙이 생긴 마을 이야기를 들려준 뒤, 앞의 두 버스가 위험하게 흔들리며 지나가는 사건이 이어지고 Nneka는 규칙을 다시 생각해 자기 책에 담으려 한다. 따라서 D가 정답이다. A는 여행을 포기하지 않고, B는 전설을 전부 다시 들려주거나 화자가 교훈을 설명하지 않으며, C는 번역을 둘러싼 다툼이 없다."
+  },
+  {
+   "candidateId": "lit40-medium-03-018",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "underlined_portion_function",
+   "requestedDifficulty": "medium",
+   "passage": "Minjun found the gift on the shared wall between their yards on Jeju Island: a jar of honey, labeled in Younghee's careful hand, tied with red string. He tasted it at once and winced. It was buckwheat honey, dark and bitter, the kind his own hives produced, the kind he had complained about to her all summer. Still, when Younghee peered over the wall that evening, he smacked his lips and praised its depth. __She beamed and confessed that she had traded three of her best jars for it, certain he had been hinting all along.__ Minjun kept smiling. The next morning he left a jar of his own buckwheat honey on the wall, labeled in his clumsiest hand, and waited to see whether she would pretend too.",
+   "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+   "options": [
+    "It reveals Younghee misread Minjun's complaints, raising the stakes of his pretense.",
+    "It shows that Younghee knew all along that Minjun disliked buckwheat honey.",
+    "It explains why Minjun decides to stop keeping bees on Jeju Island at last.",
+    "It introduces a rivalry between the neighbors over whose honey sells best."
+   ],
+   "correct_letter": "A",
+   "explanation": "앞에서 Minjun은 여름 내내 메밀꿀에 대해 불평했는데도 맛있는 척 칭찬한다. 밑줄 친 문장은 Younghee가 그 불평을 넌지시 원한다는 뜻으로 오해했고, 자기 좋은 꿀 세 병까지 내주었음을 드러내 그의 거짓 칭찬이 더 무거워지게 만든다. 이것이 다음 날 Minjun이 꿀을 되돌려 놓는 행동으로 이어지므로 A가 정답이다. B는 Younghee가 오해했다는 내용과 반대이고, C와 D는 지문에 근거가 없다."
+  },
+  {
+   "candidateId": "lit40-medium-03-020",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "underlined_portion_function",
+   "requestedDifficulty": "medium",
+   "passage": "Ten slow laps in the salt-water pool off Kingston harbor: that was how my stepfather and I had always avoided talking. I was Janelle, nineteen, and he still called me 'the girl' to his friends, not unkindly. That morning we had to decide whether to move his mother, Kiara, out of the house in Port Royal where she had lived for sixty years and into our spare room. I expected him to insist; he was a man who liked decisions made. Instead, between laps, he floated on his back and told me how she had taught him to swim in this very pool, holding his chin above the water. __Then he asked what I thought she would want, and he waited for my answer.__ For the first time, I saw him not as my mother's husband but as a son afraid of choosing wrong.",
+   "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+   "options": [
+    "It shows the stepfather testing the narrator before announcing a decision already made.",
+    "It explains why the family ultimately decides to keep Kiara in her house in Port Royal.",
+    "It marks a change in the stepfather's manner, showing he values the narrator's judgment.",
+    "It reveals the narrator's resentment at being asked to decide for the whole family."
+   ],
+   "correct_letter": "C",
+   "explanation": "화자는 결정을 밀어붙이기 좋아하는 의붓아버지가 자기 뜻을 고집할 것이라고 예상했고, 그는 친구들에게 화자를 '그 아이'라고 부르던 사람이다. 밑줄 친 문장에서 그는 화자의 생각을 묻고 대답을 기다리며, 예상과 다른 태도로 화자의 판단을 존중한다. 이 변화가 마지막에 화자가 그를 두려워하는 아들로 보게 되는 계기가 되므로 C가 정답이다. A는 이미 정한 결정이 있다는 근거가 없고, B는 최종 결정이 나오지 않으며, D는 화자의 원망이 드러나지 않는다."
+  },
+  {
+   "candidateId": "lit40-medium-03-021",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "underlined_portion_function",
+   "requestedDifficulty": "medium",
+   "passage": "Noor was late again. She climbed the iron stairs to the projection booth above the old Beirut cinema two at a time, apologizing before the door had fully opened. Layla, who had threaded films in that booth for thirty years, did not look up from the reel. \"The second reel sticks at the splice,\" she said. \"Fix it.\" Noor fixed it in four minutes, a task that had once taken her most of an evening. __Layla merely grunted and turned to dust the lens, though she dusted the same corner of it for a long while.__ Later, when the audience below laughed at exactly the right moment, Layla remarked to no one in particular that the timing had been acceptable. Noor, already restless, was watching the street through the small square window, where the evening traffic had begun to thicken.",
+   "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+   "options": [
+    "It shows that Layla is displeased with how long Noor took to repair the reel.",
+    "It reveals that Layla cares more about the equipment than about Noor's work.",
+    "It introduces a conflict between Layla and Noor that the text later resolves.",
+    "It suggests that Layla is concealing her approval of Noor's improved skill."
+   ],
+   "correct_letter": "D",
+   "explanation": "Noor가 예전에는 한참 걸리던 수리를 4분 만에 끝냈다는 문장과, 밑줄 문장에서 Layla가 같은 렌즈 모서리를 오래 닦는 어색한 행동을 연결하면 그녀가 감정을 숨기고 있음을 알 수 있다. 뒤에서 타이밍이 '괜찮았다'고 혼잣말하듯 말하는 장면도 드러내지 않는 칭찬을 뒷받침한다. 따라서 D가 정답이다. A는 수리가 빨랐다는 사실과 어긋나고, B는 렌즈 닦기를 문자 그대로만 읽은 것이며, C는 지문에서 갈등이 해결되는 전개가 없으므로 틀리다."
+  },
+  {
+   "candidateId": "lit40-medium-03-022",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "underlined_portion_function",
+   "requestedDifficulty": "medium",
+   "passage": "Who decides what an instrument is for? I, Remedios, asked myself this the winter I lodged at the monastery guesthouse in Gdansk, where a farmer named Katarzyna had come to claim her late uncle's brass theodolite. The monks had already promised it to me, the surveyor from the city, because the uncle's letter left it to \"the one who measures.\" Katarzyna said she measured too: furrows, rainfall, the distance a cow wanders before dusk. The brothers smiled politely at this. __That night I watched her sight the bell tower through the eyepiece and call out its height to within a hand's breadth of my own figure.__ By morning the brothers had agreed that we should share the instrument, a season each, and that each of us should teach the other one thing. Snow had drifted against the guesthouse door, and we dug it out together before breakfast.",
+   "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+   "options": [
+    "It offers evidence against the idea that only the narrator could rightly use the instrument.",
+    "It shows that Katarzyna cares more about the bell tower's height than about her uncle's gift.",
+    "It suggests that the narrator doubts the accuracy of her own earlier measurement of the tower.",
+    "It explains why the monks first promised the theodolite to the surveyor from the city."
+   ],
+   "correct_letter": "A",
+   "explanation": "앞부분에서 수도사들은 '측량하는 사람'이 도시의 측량사인 화자라고 여기고 Katarzyna의 주장에 정중히 웃기만 한다. 밑줄 문장에서 Katarzyna가 종탑 높이를 화자와 거의 같게 측정해 보이고, 그 뒤 수도사들이 도구를 나눠 쓰게 결정한다. 따라서 밑줄 문장은 화자만 적격자라는 가정을 뒤집는 증거 역할을 하므로 A가 정답이다. B는 종탑을 측정 대상일 뿐인데 관심의 대상으로 오해했고, C는 화자의 자기 의심이 지문에 없으며, D는 수도사들의 처음 약속 이유를 밑줄 문장이 설명하지 않는다."
+  },
+  {
+   "candidateId": "lit40-medium-03-023",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "medium",
+   "passage": "Ticking filled every room of our father's clock shop in Galicia, a hundred small hearts arguing over the exact time. Mateo and I had agreed to divide the house above it, but neither of us could say who would stay behind to keep the clocks wound. He spoke of the city as though it were already his address. I told myself I resented this, yet when I found he had quietly oiled the oldest pendulum before dawn, I could not hold on to my anger. Carmela, his wife, said he did it every morning and pretended he didn't. Slowly I began to see that my brother's restlessness was its own kind of loyalty, one that would rather leave than stand by and watch the shop fail. Outside, the rain kept the cobblestones dark until noon.",
+   "question": "Which choice best describes the narrator's attitude toward Mateo?",
+   "options": [
+    "Bitter resentment of Mateo's eagerness to abandon the family shop",
+    "Growing sympathy for motives that Mateo does not openly express",
+    "Quiet amusement at Mateo's attempts to hide his daily habits",
+    "Firm confidence that Mateo will ultimately choose to stay behind"
+   ],
+   "correct_letter": "B",
+   "explanation": "화자는 처음에 Mateo를 원망한다고 '스스로 말했지만', 그가 새벽마다 몰래 진자에 기름칠한다는 사실을 알고 분노를 유지하지 못한다. 이어 동생의 들썩임이 가게가 망하는 것을 보지 않으려는 또 다른 충성이라고 이해하게 된다. 두 단서를 이으면 숨겨진 동기에 대한 공감이 커지는 태도이므로 B가 정답이다. A는 초반의 감정만 본 것이고, C는 지문에 즐거워하는 기색이 없으며, D는 Mateo가 남을 것이라는 근거가 없다."
+  },
+  {
+   "candidateId": "lit40-medium-03-024",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "medium",
+   "passage": "Three rules governed the salt barge that crossed the flats outside Kyoto: no fires below deck, no singing after dark, and no passengers who had not paid. Haruo had broken only the third. Captain Fumiko found him curled among the sacks on the second morning and, instead of putting him ashore, handed him a wool coat that had belonged to her late husband. He returned it the next day, folded with great care, without a word of thanks, and asked for work instead. A lesser boy would have kept both the coat and his silence; Haruo seemed to understand that a debt he could never repay would weigh on him more than the cold. He scraped salt from the rails until his palms cracked. Fumiko watched him, saying nothing, and hung the coat back on its nail beside the wheel.",
+   "question": "Which choice best describes the narrator's attitude toward Haruo's decision to return the coat?",
+   "options": [
+    "Disapproval of Haruo's failure to thank the captain for her generosity",
+    "Confusion about why Haruo would refuse a gift he clearly needed",
+    "Respect for Haruo's wish to earn his place rather than owe it",
+    "Pity for Haruo's inability to accept kindness from a stranger"
+   ],
+   "correct_letter": "C",
+   "explanation": "서술자는 Haruo가 코트를 정성껏 개어 돌려주고 대신 일을 달라고 했다고 전한다. 이어 '못한 소년'이라면 코트를 가졌을 것이라며 Haruo가 갚을 수 없는 빚을 추위보다 무겁게 여겼다고 해석하는데, 이는 그를 높이 평가하는 시선이다. 따라서 C가 정답이다. A는 감사 인사가 없다는 사실에만 주목했고, B는 서술자가 이유를 분명히 설명하므로 맞지 않으며, D는 서술자가 그를 동정하기보다 존중한다는 점에서 틀리다."
+  },
+  {
+   "candidateId": "lit40-medium-03-025",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "medium",
+   "passage": "Baskets heavy with dark grapes swing from Giulietta's arms,\nthe Naples hillside bending in the heat behind her.\nDaphne, her father's old friend, walks the terraces at noon\nand tells the buyers whose hands first pruned these vines.\nShe does not mention the girl.\nGiulietta hears, and lifts another basket.\nWhat she grew she knows by touch:\nthe knot she tied in March, the cane she saved from frost,\nthe row she staked alone the week the rains came early.\nLet the ledger carry Daphne's name in careful ink;\nthe vines lean, as they always have, toward the one who stays.\nAt dusk a cart rattles down the road,\nand swallows stitch the sky above the press.",
+   "question": "Which choice best describes the speaker's attitude toward Giulietta?",
+   "options": [
+    "Frustration that Giulietta will not insist on credit from the buyers",
+    "Concern that Giulietta's labor will soon be forgotten by everyone",
+    "Amusement at Giulietta's stubborn refusal to stop working at noon",
+    "Admiration for Giulietta's steady confidence in the work she has done"
+   ],
+   "correct_letter": "D",
+   "explanation": "Giulietta는 Daphne가 공을 가져가는 말을 듣고도 묵묵히 바구니를 드는데, 화자는 그녀가 손끝으로 아는 구체적인 노동을 나열한다. 또 '장부에는 Daphne의 이름을 적게 두라'면서 포도나무가 '남는 사람' 쪽으로 기운다고 말해 Giulietta의 편에 선다. 이 두 부분을 이으면 그녀의 조용한 확신을 높이 평가하는 태도이므로 D가 정답이다. A는 화자가 그녀의 침묵을 답답해하지 않으므로 틀리고, B는 포도나무가 그녀를 알아본다는 표현과 어긋나며, C는 지문에 즐거움의 단서가 없다."
+  },
+  {
+   "candidateId": "lit40-medium-03-026",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "medium",
+   "passage": "Four buses, two transfers, forty minutes each way: that was the price of every lesson with Tommaso, and I paid it for six years. When he sold his house in Bologna, he asked me to meet him at the bus depot with the last thing he had not given away, a music stand so battered it leaned to the left. He had corrected my bowing beside that stand a thousand times, and he had rarely praised me. \"Take it,\" he said, \"and fix your posture.\" I used to think his strictness was coldness. Standing among the idling engines, I saw that he had saved this one object for me, and I began to understand that his corrections had been a way of paying attention. My bus arrived late, its windows fogged with the breath of strangers.",
+   "question": "Which choice best describes the narrator's attitude toward Tommaso?",
+   "options": [
+    "Fond appreciation for a teacher whose severity reflected genuine care",
+    "Lingering resentment of a teacher who rarely offered any praise at all",
+    "Mild indifference toward a teacher she no longer expects to see again",
+    "Anxious uncertainty about whether she ever truly pleased her teacher"
+   ],
+   "correct_letter": "A",
+   "explanation": "화자는 6년 동안 먼 길을 오가며 레슨을 받았고, Tommaso가 집을 비우며 마지막 물건인 보면대를 자신에게 남겼다는 사실에 주목한다. 이어 엄격함을 차가움으로 여겼던 생각을 바꾸어 교정이 곧 관심이었다고 깨닫는다. 두 단서를 이으면 엄격함 속의 애정을 알아본 따뜻한 감사이므로 A가 정답이다. B는 과거의 오해만 반영하고, C는 화자의 감정적 반응과 맞지 않으며, D는 지문에 불안의 단서가 없다."
+  },
+  {
+   "candidateId": "lit40-medium-03-027",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "medium",
+   "passage": "Years later, I still remember the morning the ferry was cancelled and I waited out the rain under a fruit stall at the Auckland market. I was nineteen and furious, because my teacher had told me the day before that my essays were \"tidy and empty.\" A stranger named Makana sheltered beside me, peeling a feijoa with his thumb. When I repeated the remark, expecting outrage on my behalf, he only asked my name. \"Kian,\" he said, trying it out, \"what would you write if nobody graded it?\" I answered with a long speech about fairness, and I wince, fondly, at how certain I sounded. That boy believed a teacher's judgment was an injury rather than a door. The rain eased by eleven, and the vendors began stacking crates of kumara along the curb.",
+   "question": "Which choice best describes the narrator's attitude toward his younger self?",
+   "options": [
+    "Harsh disapproval of the anger he once directed at his teacher",
+    "Affectionate amusement at the confidence he once had in his complaint",
+    "Deep regret that he ignored the advice the stranger offered him",
+    "Nostalgic longing for the certainty he felt about fairness as a boy"
+   ],
+   "correct_letter": "B",
+   "explanation": "화자는 열아홉 살의 자신이 분노에 차 있었고 공정함에 대해 장황하게 말했다고 회상하며 그 확신에 '다정하게 움찔한다'고 표현한다. 또 그 소년이 선생님의 평가를 문이 아닌 상처로 여겼다고 말하며 어린 시절의 착각을 웃으며 바라본다. 두 부분을 함께 읽으면 B가 정답이다. A는 '다정하게'라는 표현과 어긋나고, C는 조언을 무시해 생긴 후회가 서술되지 않으며, D는 화자가 그 확신을 그리워하지 않으므로 틀리다."
+  },
+  {
+   "candidateId": "lit40-medium-03-028",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "medium",
+   "passage": "I owe you an answer, Kainoa. You asked me on the stone bridge last week why I keep the shave-ice stand open when it loses money every winter, and I gave you a joke instead. You deserved better than that. Your doubts are not disloyalty; your father had the same sharp eye for numbers, and I trusted it then. You were right that the ledger looks grim. Still, I want you to sit with me and go through it, line by line, before either of us decides anything. If the numbers say close, I will listen, and I would rather hear that from you than from a bank. The stream under the bridge has been loud with rain since Tuesday, and the mango tree behind the stand is finally fruiting.\nWith love,\nCaoimhe",
+   "question": "Which choice best describes Caoimhe's attitude toward Kainoa's doubts about the business?",
+   "options": [
+    "Irritation that Kainoa questions decisions his father made long ago",
+    "Amusement at Kainoa's habit of worrying too much about money",
+    "Respect for Kainoa's judgment as worth weighing seriously with her",
+    "Determination to prove Kainoa wrong by keeping the stand open"
+   ],
+   "correct_letter": "C",
+   "explanation": "Caoimhe는 Kainoa의 의심이 불충이 아니며 그의 아버지처럼 숫자를 보는 눈이 있다고 말한다. 또 장부를 함께 한 줄씩 검토하고, 문을 닫아야 한다면 은행보다 Kainoa에게서 듣고 싶다고 쓴다. 두 단서를 이으면 그의 판단을 진지하게 존중하는 태도이므로 C가 정답이다. A는 편지에 짜증의 표현이 없고, B는 지난번 농담으로 넘긴 것을 사과하므로 맞지 않으며, D는 숫자가 닫으라 하면 듣겠다는 말과 충돌한다."
+  },
+  {
+   "candidateId": "lit40-medium-03-029",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "medium",
+   "passage": "We ate in two shifts at the summer camp in Manila, and Lan, the cook, always served his nephew Leilani last. Years earlier Leilani had borrowed money from him for a bus ticket home and never repaid it, and the campers knew only that the two did not speak. On the final night Leilani waited until the hall emptied, set an envelope beside the rice pot, and said he was sorry it had taken so long. Lan pushed the envelope back. He had kept count of the silence, he said, not the pesos, and no apology could buy back the summers they had spent avoiding each other's eyes. Still, he filled a second plate and set it across from his own. Outside, the generator coughed, and moths gathered thick around the bulb above the door.",
+   "question": "Which choice best states the main idea of the text?",
+   "options": [
+    "Leilani finally repays his uncle on the camp's last night after years of avoiding him.",
+    "Lan's careful way of serving meals reveals how strictly the camp kitchen is run.",
+    "Honesty about borrowed money is always the surest way to keep a family's trust.",
+    "Lan mourns the lost closeness more than the money, yet begins to let his nephew in."
+   ],
+   "recipeBeyondMedium": "두 곳의 근거를 합쳐 요지를 잡아야 하고, 오답 하나는 일화 요약에 그치는 부분 요지다",
+   "correct_letter": "D",
+   "explanation": "앞부분에서 Lan은 조카 Leilani에게 늘 마지막으로 밥을 주고 둘은 말을 하지 않는 사이로 그려진다. 뒷부분에서 Lan은 돈봉투를 돌려주며 자신이 센 것은 돈이 아니라 침묵이었다고 말하지만, 곧 두 번째 접시를 자기 맞은편에 놓는다. 두 장면을 이으면 잃어버린 관계를 더 아파하면서도 화해를 시작한다는 요지이므로 D가 정답이다. A는 일화만 요약했고 실제로 돈은 거절되며, B는 식사 순서를 다른 목적으로 해석했고, C는 지나치게 일반적인 교훈이다."
+  },
+  {
+   "candidateId": "lit40-medium-03-030",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "medium",
+   "passage": "\"You're mapping the wrong thing,\" Aaliyah said, before I had even unfolded my tablet. She had swept the Garfield platform for twenty years, and she watched me photograph the stairwells as though I were counting someone's teeth. I was a surveyor for the transit authority, sent to recommend which entrances to close. She walked me down to the street and pointed out the corner store that kept its lights on for kids after late practice, and the bench where Jamal from the barbershop waited for his mother's train. \"People don't take the shortest way,\" she told me. \"They take the way that's watched.\" That evening I redrew two of my lines. A freight train groaned past on the far tracks, its cars rusted the color of dried leaves.",
+   "question": "Which choice best states the main idea of the text?",
+   "options": [
+    "The narrator learns that residents' routes depend on community care more than on efficiency.",
+    "Aaliyah distrusts the surveyor because she worries the station changes will cost her the job.",
+    "The narrator documents the station's stairwells to explain why some entrances must close.",
+    "Familiar places always matter more to people than any new development possibly could."
+   ],
+   "recipeBeyondMedium": "두 곳의 근거를 합쳐 요지를 잡아야 하고, 오답 하나는 일화 요약에 그치는 부분 요지다",
+   "correct_letter": "A",
+   "explanation": "앞부분에서 화자는 효율만 보고 출입구 폐쇄를 권고하러 온 측량사로, 계단을 사진으로만 기록한다. 뒷부분에서 Aaliyah가 아이들을 위해 불을 켜 두는 가게와 누군가 기다리는 벤치를 보여 주고, 사람들은 '지켜봐 주는 길'로 다닌다고 말하자 화자는 그날 밤 계획선을 고친다. 두 장면을 이으면 길의 가치가 공동체의 보살핌에 있다는 깨달음이 요지이므로 A가 정답이다. B는 지문에 없는 동기를 끌어왔고, C는 처음 목적만 말하며, D는 지나치게 일반적인 교훈이다."
+  },
+  {
+   "candidateId": "lit40-medium-03-031",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "medium",
+   "passage": "When the storm drained out of the stairwell, it left a tin box wedged beneath the cracked third step.\nODILE: (kneeling) My mother hid things. I told you so on the first day, and you translated it as \"my mother was careful.\"\nGENEVIEVE: The lawyer only needed the facts.\nODILE: (opening the box; letters inside) These are the facts. Read them to me in the words she used, not the polite ones.\nGENEVIEVE: (hesitates, then reads slowly) \"I am not sorry I stayed.\"\n(ODILE sits down on the wet step.)\nODILE: All those meetings, you made her sound smaller than she was.\nGENEVIEVE: (quietly) I'll do it properly this time.\n(Below, a door slams, and rainwater ticks steadily from the banister onto the tiles.)",
+   "question": "Which choice best states the main purpose of the text?",
+   "options": [
+    "To recount how a storm damaged a staircase and exposed a hidden box of letters",
+    "To show a client pressing her interpreter to convey her mother's words faithfully",
+    "To explain the legal process by which Odile's family property must be settled",
+    "To suggest that the past always returns to those who try to hide from it"
+   ],
+   "recipeBeyondMedium": "두 곳의 근거를 합쳐 요지를 잡아야 하고, 오답 하나는 일화 요약에 그치는 부분 요지다",
+   "correct_letter": "B",
+   "explanation": "앞부분에서 Odile은 Genevieve가 '숨겼다'는 말을 '신중했다'로 부드럽게 옮겼다고 지적하고, 편지를 '정중한 말이 아니라 어머니가 쓴 말 그대로' 읽어 달라고 요구한다. 뒷부분에서 Odile이 그동안 어머니가 작게 들렸다고 말하자 Genevieve는 이번에는 제대로 하겠다고 답한다. 두 부분을 이으면 의뢰인이 어머니의 목소리를 충실히 전하라고 통역사를 압박하는 장면이므로 B가 정답이다. A는 사건의 계기만 요약했고, C는 법적 절차가 설명되지 않으며, D는 지나치게 일반적인 교훈이다."
+  }
+ ],
+ "instructions": "당신은 문항 감사관이다. 표시된 정답과 해설을 받아, 정답이 맞는지·해설이 일관되고 사실에 맞는지 점검한다(고치지 않고 판정만).\n청크 rev-explanation_audit-017 — 18문항.\n출력: Write 도구로 정확히 이 경로에 JSON 한 파일을 쓴다 → /Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-explanation_audit-017.result.json\n출력 JSON 스키마(예시 구조): {\"chunkId\":\"청크 ID\",\"model\":\"sonnet\",\"items\":[{\"candidateId\":\"id\",\"answer_correct\":\"표시된 정답이 정말 정답이면 true\",\"explanation_consistent\":\"해설이 정답·오답 판단과 일치하고 글자 참조가 맞으면 true\",\"explanation_factual\":\"해설에 사실 오류가 없으면 true\",\"issues\":\"한 줄 메모\"}]}\n허용 값: picked_letter ∈ {A,B,C,D}, 불리언 필드는 true/false, est_difficulty ∈ {easy,medium,hard}. candidateId 를 바꾸지 않고 모든 항목에 답한다.\n금지: 결과 파일 외의 파일 생성·수정, 다른 명령 실행, 문항 수정·재작성. 끝나면 'done <항목 수>' 한 줄만 답한다.\n\n## 문항\n### lit40-medium-03-013 — skill text_structure_purpose · 유형 text_structure\n[지문]\nEunseo had warned the passenger that the ferryman's house flooded every spring, but Anders followed her down to the cellar anyway, wading through cold water to help carry up her father's boxes. He had arrived in Tromso that morning with one suitcase and no plan, and he said so cheerfully, as if it were a credential. Lifting a crate of charts, Eunseo asked why anyone would choose a town this dark in winter. Anders did not answer at once. Instead he pointed to the waterline on the stone wall, then to the older lines above it, each one marked with a year in her father's hand. 'He kept starting over down here,' Anders said. 'Every spring, the same cellar.' Eunseo looked at the marks she had passed a thousand times and, for the first time, read them as a record of persistence rather than loss.\n\n[질문] Which choice best describes the overall structure of the text?\nA) A conflict between two characters is introduced and then settled by a compromise.\nB) A setting is described, followed by a flashback to the father's arrival in town.\nC) A character's plan is explained, then abandoned after a setback in the cellar.\nD) A shared task is shown, a question is raised, and a remark reframes the familiar.\n\n[표시된 정답] D\n[해설]\n글은 지하실에서 상자를 옮기는 일로 시작해, Eunseo가 왜 이 어두운 마을을 택했느냐고 묻는 질문으로 이어진다. Anders는 직접 답하는 대신 벽의 수위 표시를 가리키며 다시 시작하는 아버지의 모습을 짚고, Eunseo는 익숙한 표시를 새롭게 읽게 된다. 따라서 D가 정답이다. A는 갈등과 타협이 없고, B는 회상 장면이 없으며, C는 Anders에게 원래 계획이 없었다.\n### lit40-medium-03-014 — skill text_structure_purpose · 유형 text_structure\n[지문]\nPaloma hated waiting rooms. She had tended the garden of the house on Calle Betis for thirty years, and she was used to hours that produced something: a pruned hedge, a bed of turned soil. Here in the hospital in Seville there was only the clock and Alba, the house's new owner, who had driven her in after the fall from the ladder. For a long time they spoke about nothing. Then Alba admitted that she had bought the house with money from a scholarship fund her late uncle had left, a fund meant for students who would now never receive it. She had wanted a garden more than she had wanted to be generous, she said. Paloma studied her bandaged wrist. 'Gardens cost too,' she said. 'Someone always pays for the shade.'\n\n[질문] Which choice best describes the overall structure of the text?\nA) It shows one character's impatience, presents another's confession, then a reflective reply.\nB) It describes an accident in detail, then traces the injured character's recovery at home.\nC) It compares two characters' careers before revealing they are rivals for the same house.\nD) It recounts a dispute over money and ends with both characters agreeing to share the fund.\n\n[표시된 정답] A\n[해설]\n글은 기다림을 싫어하는 Paloma의 성격으로 시작하고, 병원 대기실에서 Alba가 장학 기금으로 집을 샀다고 고백하는 장면으로 초점이 옮겨 간다. 마지막에는 Paloma가 손목을 바라보며 정원에도 대가가 따른다고 성찰적으로 답한다. 따라서 A가 정답이다. B는 사고를 자세히 묘사하거나 회복을 다루지 않고, C는 두 사람이 경쟁자가 아니며, D는 다툼이나 기금 분배 합의가 없다.\n### lit40-medium-03-015 — skill text_structure_purpose · 유형 text_structure\n[지문]\nYears later, I still think about the season Coach Sunethra benched me. I was the best bowler on our plantation cricket team outside Colombo, and I sulked on the boundary while she sent out girls who could barely grip the ball. Each evening after practice she walked the rows of tea with the pickers, carrying their baskets to the weighing shed, though no one paid her for it and the estate manager praised her only in speeches. I thought she was wasting her strength. One night I followed her, meaning to complain, and ended up carrying a basket myself. The pickers called me by my name, Nadeesha, as if they had always known it. Sunethra had benched me, I began to see, not to punish my arm but to show me where the team's real work happened.\n\n[질문] Which choice best describes the overall structure of the text?\nA) It describes a cricket match in detail, then explains why the team lost the final.\nB) It recalls a grievance, describes a mentor's habit, then shows how joining it changed the writer.\nC) It compares two coaching styles before arguing that the estate should pay its coaches.\nD) It presents the pickers' complaints and then reports the estate manager's response.\n\n[표시된 정답] B\n[해설]\n글은 벤치에 앉게 된 데 대한 필자의 불만으로 시작해, 보수 없이 바구니를 나르는 코치의 저녁 습관을 묘사한다. 이어 필자가 불평하려고 따라갔다가 직접 바구니를 나르며 생각이 바뀌는 과정으로 마무리되므로 B가 정답이다. A는 경기 묘사가 없고, C는 두 코칭 방식을 비교하거나 보수를 주장하지 않으며, D는 일꾼들의 불만이 등장하지 않는다.\n### lit40-medium-03-016 — skill text_structure_purpose · 유형 text_structure\n[지문]\nWood remembers everything. Master Zihan said this whenever I, Shuang, rushed a joint in his workshop beside the abandoned orchard outside Chengdu, where his family had once grown pears. For two years I believed the orchard was simply forgotten, the trees left to split and grey because no one had time for them. Zihan's sons spoke of selling the land; his wife spoke of nothing at all. Then a furniture buyer from Shanghai came to see our tables. She walked past the polished samples, out to the orchard, and ran her hand along a fallen trunk. 'These are not neglected,' she said. 'He is drying them. This is twenty years of seasoning.' Zihan only nodded. I looked again at the rows and saw, for the first time, the careful spacing, the bark stripped in patient bands.\n\n[질문] Which choice best describes the overall structure of the text?\nA) It describes a carpenter's training methods, then lists the furniture a buyer purchased.\nB) It recounts a family dispute over land and ends with the sons agreeing to sell it.\nC) It presents a belief shared by the narrator and a family, then shows an outsider overturning it.\nD) It contrasts two cities' craft traditions before describing the narrator's departure.\n\n[표시된 정답] C\n[해설]\n앞부분에서 화자와 가족은 과수원이 버려졌다고 믿으며, 아들들은 땅을 팔자고 말한다. 외부인인 구매자가 쓰러진 나무를 만져 보고 20년 동안 건조 중이라고 밝히자 화자는 비로소 나무의 간격과 벗긴 껍질을 새롭게 본다. 따라서 C가 정답이다. A는 구매 목록이 없고, B는 땅을 파는 결말이 없으며, D는 두 도시의 전통을 비교하지 않는다.\n### lit40-medium-03-017 — skill text_structure_purpose · 유형 text_structure\n[지문]\nDakar was still asleep when the author Nneka and her translator, Babatunde, sat down at the bus stop on the hill road, where an old rule was painted on a board: Wait for the third bus; the first two belong to the goats. Nneka laughed and stood when the first bus came. Babatunde did not. 'In the story my village tells,' he said, 'a herder painted that rule after his goats were nearly crushed on this bend. The goats are gone, but he did not make the rule for goats alone.' Nneka sat back down, uncertain. The first bus passed, then the second, both crowded and swaying dangerously around the curve. When the third arrived, nearly empty, she climbed aboard, opened her notebook, and asked Babatunde how the herder's words should sound in her book.\n\n[질문] Which choice best describes the overall structure of the text?\nA) A journey is planned, a delay occurs, and the characters abandon their trip entirely.\nB) A legend is retold in full before the narrator explains its moral to the reader.\nC) Two characters argue about a translation until one of them quits the project.\nD) A rule is mocked, its origin is explained, and events lead a character to reconsider it.\n\n[표시된 정답] D\n[해설]\nNneka는 처음에 표지판의 규칙을 비웃고 첫 버스에 오르려 한다. Babatunde가 규칙이 생긴 마을 이야기를 들려준 뒤, 앞의 두 버스가 위험하게 흔들리며 지나가는 사건이 이어지고 Nneka는 규칙을 다시 생각해 자기 책에 담으려 한다. 따라서 D가 정답이다. A는 여행을 포기하지 않고, B는 전설을 전부 다시 들려주거나 화자가 교훈을 설명하지 않으며, C는 번역을 둘러싼 다툼이 없다.\n### lit40-medium-03-018 — skill text_structure_purpose · 유형 underlined_portion_function\n[지문]\nMinjun found the gift on the shared wall between their yards on Jeju Island: a jar of honey, labeled in Younghee's careful hand, tied with red string. He tasted it at once and winced. It was buckwheat honey, dark and bitter, the kind his own hives produced, the kind he had complained about to her all summer. Still, when Younghee peered over the wall that evening, he smacked his lips and praised its depth. __She beamed and confessed that she had traded three of her best jars for it, certain he had been hinting all along.__ Minjun kept smiling. The next morning he left a jar of his own buckwheat honey on the wall, labeled in his clumsiest hand, and waited to see whether she would pretend too.\n\n[질문] Which choice best describes the function of the underlined sentence in the text as a whole?\nA) It reveals Younghee misread Minjun's complaints, raising the stakes of his pretense.\nB) It shows that Younghee knew all along that Minjun disliked buckwheat honey.\nC) It explains why Minjun decides to stop keeping bees on Jeju Island at last.\nD) It introduces a rivalry between the neighbors over whose honey sells best.\n\n[표시된 정답] A\n[해설]\n앞에서 Minjun은 여름 내내 메밀꿀에 대해 불평했는데도 맛있는 척 칭찬한다. 밑줄 친 문장은 Younghee가 그 불평을 넌지시 원한다는 뜻으로 오해했고, 자기 좋은 꿀 세 병까지 내주었음을 드러내 그의 거짓 칭찬이 더 무거워지게 만든다. 이것이 다음 날 Minjun이 꿀을 되돌려 놓는 행동으로 이어지므로 A가 정답이다. B는 Younghee가 오해했다는 내용과 반대이고, C와 D는 지문에 근거가 없다.\n### lit40-medium-03-020 — skill text_structure_purpose · 유형 underlined_portion_function\n[지문]\nTen slow laps in the salt-water pool off Kingston harbor: that was how my stepfather and I had always avoided talking. I was Janelle, nineteen, and he still called me 'the girl' to his friends, not unkindly. That morning we had to decide whether to move his mother, Kiara, out of the house in Port Royal where she had lived for sixty years and into our spare room. I expected him to insist; he was a man who liked decisions made. Instead, between laps, he floated on his back and told me how she had taught him to swim in this very pool, holding his chin above the water. __Then he asked what I thought she would want, and he waited for my answer.__ For the first time, I saw him not as my mother's husband but as a son afraid of choosing wrong.\n\n[질문] Which choice best describes the function of the underlined sentence in the text as a whole?\nA) It shows the stepfather testing the narrator before announcing a decision already made.\nB) It explains why the family ultimately decides to keep Kiara in her house in Port Royal.\nC) It marks a change in the stepfather's manner, showing he values the narrator's judgment.\nD) It reveals the narrator's resentment at being asked to decide for the whole family.\n\n[표시된 정답] C\n[해설]\n화자는 결정을 밀어붙이기 좋아하는 의붓아버지가 자기 뜻을 고집할 것이라고 예상했고, 그는 친구들에게 화자를 '그 아이'라고 부르던 사람이다. 밑줄 친 문장에서 그는 화자의 생각을 묻고 대답을 기다리며, 예상과 다른 태도로 화자의 판단을 존중한다. 이 변화가 마지막에 화자가 그를 두려워하는 아들로 보게 되는 계기가 되므로 C가 정답이다. A는 이미 정한 결정이 있다는 근거가 없고, B는 최종 결정이 나오지 않으며, D는 화자의 원망이 드러나지 않는다.\n### lit40-medium-03-021 — skill text_structure_purpose · 유형 underlined_portion_function\n[지문]\nNoor was late again. She climbed the iron stairs to the projection booth above the old Beirut cinema two at a time, apologizing before the door had fully opened. Layla, who had threaded films in that booth for thirty years, did not look up from the reel. \"The second reel sticks at the splice,\" she said. \"Fix it.\" Noor fixed it in four minutes, a task that had once taken her most of an evening. __Layla merely grunted and turned to dust the lens, though she dusted the same corner of it for a long while.__ Later, when the audience below laughed at exactly the right moment, Layla remarked to no one in particular that the timing had been acceptable. Noor, already restless, was watching the street through the small square window, where the evening traffic had begun to thicken.\n\n[질문] Which choice best describes the function of the underlined sentence in the text as a whole?\nA) It shows that Layla is displeased with how long Noor took to repair the reel.\nB) It reveals that Layla cares more about the equipment than about Noor's work.\nC) It introduces a conflict between Layla and Noor that the text later resolves.\nD) It suggests that Layla is concealing her approval of Noor's improved skill.\n\n[표시된 정답] D\n[해설]\nNoor가 예전에는 한참 걸리던 수리를 4분 만에 끝냈다는 문장과, 밑줄 문장에서 Layla가 같은 렌즈 모서리를 오래 닦는 어색한 행동을 연결하면 그녀가 감정을 숨기고 있음을 알 수 있다. 뒤에서 타이밍이 '괜찮았다'고 혼잣말하듯 말하는 장면도 드러내지 않는 칭찬을 뒷받침한다. 따라서 D가 정답이다. A는 수리가 빨랐다는 사실과 어긋나고, B는 렌즈 닦기를 문자 그대로만 읽은 것이며, C는 지문에서 갈등이 해결되는 전개가 없으므로 틀리다.\n### lit40-medium-03-022 — skill text_structure_purpose · 유형 underlined_portion_function\n[지문]\nWho decides what an instrument is for? I, Remedios, asked myself this the winter I lodged at the monastery guesthouse in Gdansk, where a farmer named Katarzyna had come to claim her late uncle's brass theodolite. The monks had already promised it to me, the surveyor from the city, because the uncle's letter left it to \"the one who measures.\" Katarzyna said she measured too: furrows, rainfall, the distance a cow wanders before dusk. The brothers smiled politely at this. __That night I watched her sight the bell tower through the eyepiece and call out its height to within a hand's breadth of my own figure.__ By morning the brothers had agreed that we should share the instrument, a season each, and that each of us should teach the other one thing. Snow had drifted against the guesthouse door, and we dug it out together before breakfast.\n\n[질문] Which choice best describes the function of the underlined sentence in the text as a whole?\nA) It offers evidence against the idea that only the narrator could rightly use the instrument.\nB) It shows that Katarzyna cares more about the bell tower's height than about her uncle's gift.\nC) It suggests that the narrator doubts the accuracy of her own earlier measurement of the tower.\nD) It explains why the monks first promised the theodolite to the surveyor from the city.\n\n[표시된 정답] A\n[해설]\n앞부분에서 수도사들은 '측량하는 사람'이 도시의 측량사인 화자라고 여기고 Katarzyna의 주장에 정중히 웃기만 한다. 밑줄 문장에서 Katarzyna가 종탑 높이를 화자와 거의 같게 측정해 보이고, 그 뒤 수도사들이 도구를 나눠 쓰게 결정한다. 따라서 밑줄 문장은 화자만 적격자라는 가정을 뒤집는 증거 역할을 하므로 A가 정답이다. B는 종탑을 측정 대상일 뿐인데 관심의 대상으로 오해했고, C는 화자의 자기 의심이 지문에 없으며, D는 수도사들의 처음 약속 이유를 밑줄 문장이 설명하지 않는다.\n### lit40-medium-03-023 — skill central_ideas_details · 유형 narrator_attitude\n[지문]\nTicking filled every room of our father's clock shop in Galicia, a hundred small hearts arguing over the exact time. Mateo and I had agreed to divide the house above it, but neither of us could say who would stay behind to keep the clocks wound. He spoke of the city as though it were already his address. I told myself I resented this, yet when I found he had quietly oiled the oldest pendulum before dawn, I could not hold on to my anger. Carmela, his wife, said he did it every morning and pretended he didn't. Slowly I began to see that my brother's restlessness was its own kind of loyalty, one that would rather leave than stand by and watch the shop fail. Outside, the rain kept the cobblestones dark until noon.\n\n[질문] Which choice best describes the narrator's attitude toward Mateo?\nA) Bitter resentment of Mateo's eagerness to abandon the family shop\nB) Growing sympathy for motives that Mateo does not openly express\nC) Quiet amusement at Mateo's attempts to hide his daily habits\nD) Firm confidence that Mateo will ultimately choose to stay behind\n\n[표시된 정답] B\n[해설]\n화자는 처음에 Mateo를 원망한다고 '스스로 말했지만', 그가 새벽마다 몰래 진자에 기름칠한다는 사실을 알고 분노를 유지하지 못한다. 이어 동생의 들썩임이 가게가 망하는 것을 보지 않으려는 또 다른 충성이라고 이해하게 된다. 두 단서를 이으면 숨겨진 동기에 대한 공감이 커지는 태도이므로 B가 정답이다. A는 초반의 감정만 본 것이고, C는 지문에 즐거워하는 기색이 없으며, D는 Mateo가 남을 것이라는 근거가 없다.\n### lit40-medium-03-024 — skill central_ideas_details · 유형 narrator_attitude\n[지문]\nThree rules governed the salt barge that crossed the flats outside Kyoto: no fires below deck, no singing after dark, and no passengers who had not paid. Haruo had broken only the third. Captain Fumiko found him curled among the sacks on the second morning and, instead of putting him ashore, handed him a wool coat that had belonged to her late husband. He returned it the next day, folded with great care, without a word of thanks, and asked for work instead. A lesser boy would have kept both the coat and his silence; Haruo seemed to understand that a debt he could never repay would weigh on him more than the cold. He scraped salt from the rails until his palms cracked. Fumiko watched him, saying nothing, and hung the coat back on its nail beside the wheel.\n\n[질문] Which choice best describes the narrator's attitude toward Haruo's decision to return the coat?\nA) Disapproval of Haruo's failure to thank the captain for her generosity\nB) Confusion about why Haruo would refuse a gift he clearly needed\nC) Respect for Haruo's wish to earn his place rather than owe it\nD) Pity for Haruo's inability to accept kindness from a stranger\n\n[표시된 정답] C\n[해설]\n서술자는 Haruo가 코트를 정성껏 개어 돌려주고 대신 일을 달라고 했다고 전한다. 이어 '못한 소년'이라면 코트를 가졌을 것이라며 Haruo가 갚을 수 없는 빚을 추위보다 무겁게 여겼다고 해석하는데, 이는 그를 높이 평가하는 시선이다. 따라서 C가 정답이다. A는 감사 인사가 없다는 사실에만 주목했고, B는 서술자가 이유를 분명히 설명하므로 맞지 않으며, D는 서술자가 그를 동정하기보다 존중한다는 점에서 틀리다.\n### lit40-medium-03-025 — skill central_ideas_details · 유형 narrator_attitude\n[지문]\nBaskets heavy with dark grapes swing from Giulietta's arms,\nthe Naples hillside bending in the heat behind her.\nDaphne, her father's old friend, walks the terraces at noon\nand tells the buyers whose hands first pruned these vines.\nShe does not mention the girl.\nGiulietta hears, and lifts another basket.\nWhat she grew she knows by touch:\nthe knot she tied in March, the cane she saved from frost,\nthe row she staked alone the week the rains came early.\nLet the ledger carry Daphne's name in careful ink;\nthe vines lean, as they always have, toward the one who stays.\nAt dusk a cart rattles down the road,\nand swallows stitch the sky above the press.\n\n[질문] Which choice best describes the speaker's attitude toward Giulietta?\nA) Frustration that Giulietta will not insist on credit from the buyers\nB) Concern that Giulietta's labor will soon be forgotten by everyone\nC) Amusement at Giulietta's stubborn refusal to stop working at noon\nD) Admiration for Giulietta's steady confidence in the work she has done\n\n[표시된 정답] D\n[해설]\nGiulietta는 Daphne가 공을 가져가는 말을 듣고도 묵묵히 바구니를 드는데, 화자는 그녀가 손끝으로 아는 구체적인 노동을 나열한다. 또 '장부에는 Daphne의 이름을 적게 두라'면서 포도나무가 '남는 사람' 쪽으로 기운다고 말해 Giulietta의 편에 선다. 이 두 부분을 이으면 그녀의 조용한 확신을 높이 평가하는 태도이므로 D가 정답이다. A는 화자가 그녀의 침묵을 답답해하지 않으므로 틀리고, B는 포도나무가 그녀를 알아본다는 표현과 어긋나며, C는 지문에 즐거움의 단서가 없다.\n### lit40-medium-03-026 — skill central_ideas_details · 유형 narrator_attitude\n[지문]\nFour buses, two transfers, forty minutes each way: that was the price of every lesson with Tommaso, and I paid it for six years. When he sold his house in Bologna, he asked me to meet him at the bus depot with the last thing he had not given away, a music stand so battered it leaned to the left. He had corrected my bowing beside that stand a thousand times, and he had rarely praised me. \"Take it,\" he said, \"and fix your posture.\" I used to think his strictness was coldness. Standing among the idling engines, I saw that he had saved this one object for me, and I began to understand that his corrections had been a way of paying attention. My bus arrived late, its windows fogged with the breath of strangers.\n\n[질문] Which choice best describes the narrator's attitude toward Tommaso?\nA) Fond appreciation for a teacher whose severity reflected genuine care\nB) Lingering resentment of a teacher who rarely offered any praise at all\nC) Mild indifference toward a teacher she no longer expects to see again\nD) Anxious uncertainty about whether she ever truly pleased her teacher\n\n[표시된 정답] A\n[해설]\n화자는 6년 동안 먼 길을 오가며 레슨을 받았고, Tommaso가 집을 비우며 마지막 물건인 보면대를 자신에게 남겼다는 사실에 주목한다. 이어 엄격함을 차가움으로 여겼던 생각을 바꾸어 교정이 곧 관심이었다고 깨닫는다. 두 단서를 이으면 엄격함 속의 애정을 알아본 따뜻한 감사이므로 A가 정답이다. B는 과거의 오해만 반영하고, C는 화자의 감정적 반응과 맞지 않으며, D는 지문에 불안의 단서가 없다.\n### lit40-medium-03-027 — skill central_ideas_details · 유형 narrator_attitude\n[지문]\nYears later, I still remember the morning the ferry was cancelled and I waited out the rain under a fruit stall at the Auckland market. I was nineteen and furious, because my teacher had told me the day before that my essays were \"tidy and empty.\" A stranger named Makana sheltered beside me, peeling a feijoa with his thumb. When I repeated the remark, expecting outrage on my behalf, he only asked my name. \"Kian,\" he said, trying it out, \"what would you write if nobody graded it?\" I answered with a long speech about fairness, and I wince, fondly, at how certain I sounded. That boy believed a teacher's judgment was an injury rather than a door. The rain eased by eleven, and the vendors began stacking crates of kumara along the curb.\n\n[질문] Which choice best describes the narrator's attitude toward his younger self?\nA) Harsh disapproval of the anger he once directed at his teacher\nB) Affectionate amusement at the confidence he once had in his complaint\nC) Deep regret that he ignored the advice the stranger offered him\nD) Nostalgic longing for the certainty he felt about fairness as a boy\n\n[표시된 정답] B\n[해설]\n화자는 열아홉 살의 자신이 분노에 차 있었고 공정함에 대해 장황하게 말했다고 회상하며 그 확신에 '다정하게 움찔한다'고 표현한다. 또 그 소년이 선생님의 평가를 문이 아닌 상처로 여겼다고 말하며 어린 시절의 착각을 웃으며 바라본다. 두 부분을 함께 읽으면 B가 정답이다. A는 '다정하게'라는 표현과 어긋나고, C는 조언을 무시해 생긴 후회가 서술되지 않으며, D는 화자가 그 확신을 그리워하지 않으므로 틀리다.\n### lit40-medium-03-028 — skill central_ideas_details · 유형 narrator_attitude\n[지문]\nI owe you an answer, Kainoa. You asked me on the stone bridge last week why I keep the shave-ice stand open when it loses money every winter, and I gave you a joke instead. You deserved better than that. Your doubts are not disloyalty; your father had the same sharp eye for numbers, and I trusted it then. You were right that the ledger looks grim. Still, I want you to sit with me and go through it, line by line, before either of us decides anything. If the numbers say close, I will listen, and I would rather hear that from you than from a bank. The stream under the bridge has been loud with rain since Tuesday, and the mango tree behind the stand is finally fruiting.\nWith love,\nCaoimhe\n\n[질문] Which choice best describes Caoimhe's attitude toward Kainoa's doubts about the business?\nA) Irritation that Kainoa questions decisions his father made long ago\nB) Amusement at Kainoa's habit of worrying too much about money\nC) Respect for Kainoa's judgment as worth weighing seriously with her\nD) Determination to prove Kainoa wrong by keeping the stand open\n\n[표시된 정답] C\n[해설]\nCaoimhe는 Kainoa의 의심이 불충이 아니며 그의 아버지처럼 숫자를 보는 눈이 있다고 말한다. 또 장부를 함께 한 줄씩 검토하고, 문을 닫아야 한다면 은행보다 Kainoa에게서 듣고 싶다고 쓴다. 두 단서를 이으면 그의 판단을 진지하게 존중하는 태도이므로 C가 정답이다. A는 편지에 짜증의 표현이 없고, B는 지난번 농담으로 넘긴 것을 사과하므로 맞지 않으며, D는 숫자가 닫으라 하면 듣겠다는 말과 충돌한다.\n### lit40-medium-03-029 — skill central_ideas_details · 유형 main_idea_or_purpose\n[지문]\nWe ate in two shifts at the summer camp in Manila, and Lan, the cook, always served his nephew Leilani last. Years earlier Leilani had borrowed money from him for a bus ticket home and never repaid it, and the campers knew only that the two did not speak. On the final night Leilani waited until the hall emptied, set an envelope beside the rice pot, and said he was sorry it had taken so long. Lan pushed the envelope back. He had kept count of the silence, he said, not the pesos, and no apology could buy back the summers they had spent avoiding each other's eyes. Still, he filled a second plate and set it across from his own. Outside, the generator coughed, and moths gathered thick around the bulb above the door.\n\n[질문] Which choice best states the main idea of the text?\nA) Leilani finally repays his uncle on the camp's last night after years of avoiding him.\nB) Lan's careful way of serving meals reveals how strictly the camp kitchen is run.\nC) Honesty about borrowed money is always the surest way to keep a family's trust.\nD) Lan mourns the lost closeness more than the money, yet begins to let his nephew in.\n\n[표시된 정답] D\n[해설]\n앞부분에서 Lan은 조카 Leilani에게 늘 마지막으로 밥을 주고 둘은 말을 하지 않는 사이로 그려진다. 뒷부분에서 Lan은 돈봉투를 돌려주며 자신이 센 것은 돈이 아니라 침묵이었다고 말하지만, 곧 두 번째 접시를 자기 맞은편에 놓는다. 두 장면을 이으면 잃어버린 관계를 더 아파하면서도 화해를 시작한다는 요지이므로 D가 정답이다. A는 일화만 요약했고 실제로 돈은 거절되며, B는 식사 순서를 다른 목적으로 해석했고, C는 지나치게 일반적인 교훈이다.\n### lit40-medium-03-030 — skill central_ideas_details · 유형 main_idea_or_purpose\n[지문]\n\"You're mapping the wrong thing,\" Aaliyah said, before I had even unfolded my tablet. She had swept the Garfield platform for twenty years, and she watched me photograph the stairwells as though I were counting someone's teeth. I was a surveyor for the transit authority, sent to recommend which entrances to close. She walked me down to the street and pointed out the corner store that kept its lights on for kids after late practice, and the bench where Jamal from the barbershop waited for his mother's train. \"People don't take the shortest way,\" she told me. \"They take the way that's watched.\" That evening I redrew two of my lines. A freight train groaned past on the far tracks, its cars rusted the color of dried leaves.\n\n[질문] Which choice best states the main idea of the text?\nA) The narrator learns that residents' routes depend on community care more than on efficiency.\nB) Aaliyah distrusts the surveyor because she worries the station changes will cost her the job.\nC) The narrator documents the station's stairwells to explain why some entrances must close.\nD) Familiar places always matter more to people than any new development possibly could.\n\n[표시된 정답] A\n[해설]\n앞부분에서 화자는 효율만 보고 출입구 폐쇄를 권고하러 온 측량사로, 계단을 사진으로만 기록한다. 뒷부분에서 Aaliyah가 아이들을 위해 불을 켜 두는 가게와 누군가 기다리는 벤치를 보여 주고, 사람들은 '지켜봐 주는 길'로 다닌다고 말하자 화자는 그날 밤 계획선을 고친다. 두 장면을 이으면 길의 가치가 공동체의 보살핌에 있다는 깨달음이 요지이므로 A가 정답이다. B는 지문에 없는 동기를 끌어왔고, C는 처음 목적만 말하며, D는 지나치게 일반적인 교훈이다.\n### lit40-medium-03-031 — skill central_ideas_details · 유형 main_idea_or_purpose\n[지문]\nWhen the storm drained out of the stairwell, it left a tin box wedged beneath the cracked third step.\nODILE: (kneeling) My mother hid things. I told you so on the first day, and you translated it as \"my mother was careful.\"\nGENEVIEVE: The lawyer only needed the facts.\nODILE: (opening the box; letters inside) These are the facts. Read them to me in the words she used, not the polite ones.\nGENEVIEVE: (hesitates, then reads slowly) \"I am not sorry I stayed.\"\n(ODILE sits down on the wet step.)\nODILE: All those meetings, you made her sound smaller than she was.\nGENEVIEVE: (quietly) I'll do it properly this time.\n(Below, a door slams, and rainwater ticks steadily from the banister onto the tiles.)\n\n[질문] Which choice best states the main purpose of the text?\nA) To recount how a storm damaged a staircase and exposed a hidden box of letters\nB) To show a client pressing her interpreter to convey her mother's words faithfully\nC) To explain the legal process by which Odile's family property must be settled\nD) To suggest that the past always returns to those who try to hide from it\n\n[표시된 정답] B\n[해설]\n앞부분에서 Odile은 Genevieve가 '숨겼다'는 말을 '신중했다'로 부드럽게 옮겼다고 지적하고, 편지를 '정중한 말이 아니라 어머니가 쓴 말 그대로' 읽어 달라고 요구한다. 뒷부분에서 Odile이 그동안 어머니가 작게 들렸다고 말하자 Genevieve는 이번에는 제대로 하겠다고 답한다. 두 부분을 이으면 의뢰인이 어머니의 목소리를 충실히 전하라고 통역사를 압박하는 장면이므로 B가 정답이다. A는 사건의 계기만 요약했고, C는 법적 절차가 설명되지 않으며, D는 지나치게 일반적인 교훈이다."
+}

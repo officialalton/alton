@@ -1,0 +1,670 @@
+[
+ {
+  "gid": "basic:basic-central_ideas_details-easy-0",
+  "runId": "batch3-basic",
+  "skill": "central_ideas_details",
+  "domain": "rw_information_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "easy",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "For decades, ecologists assumed that the tiny freshwater snails living in a mountain stream in Colorado were a single population moving freely up and down the waterway. When researcher Dana Okafor marked several thousand snails with harmless dye and tracked them for two summers, she found that nearly all of them stayed within about ten meters of where they were first found. Genetic samples confirmed the pattern: snails from pools only a few hundred meters apart showed measurable differences in their DNA, suggesting that they rarely interbreed. Okafor notes that the stream's rocky ledges, which look passable to human observers, may act as barriers to animals as small as these snails.\n\nWhich choice best states the main idea of the text?",
+   "stimulus": "For decades, ecologists assumed that the tiny freshwater snails living in a mountain stream in Colorado were a single population moving freely up and down the waterway. When researcher Dana Okafor marked several thousand snails with harmless dye and tracked them for two summers, she found that nearly all of them stayed within about ten meters of where they were first found. Genetic samples confirmed the pattern: snails from pools only a few hundred meters apart showed measurable differences in their DNA, suggesting that they rarely interbreed. Okafor notes that the stream's rocky ledges, which look passable to human observers, may act as barriers to animals as small as these snails.",
+   "question": "Which choice best states the main idea of the text?",
+   "options": [
+    "Dye-marking is a more reliable method for studying small animals than genetic sampling is.",
+    "Snails in a Colorado stream, long thought to be one mobile population, actually stay in small areas and form genetically distinct groups.",
+    "Snails in a Colorado stream move slowly but eventually spread across the whole waterway over several summers.",
+    "Rocky ledges in mountain streams are the main reason that freshwater snail populations are declining."
+   ],
+   "correctIndex": 1,
+   "answers": null,
+   "explanation": "지문은 달팽이가 하나의 이동성 개체군이라는 기존 가정과 달리, 좁은 범위에 머물고 유전적으로 구분된다는 발견을 중심으로 한다. A는 두 방법을 비교하지 않았으므로 지문에 없는 내용이다. C는 대부분 10m 안에 머물렀다는 내용과 반대다. D는 바위 턱이 이동 장벽일 수 있다는 언급을 개체수 감소 원인으로 바꾼 것으로, 감소에 대한 언급은 없다.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-sonnet-5-5",
+   "reviewedBy": "claude-sonnet-5-5",
+   "seed": "자연과학(생물·생태)",
+   "blind": {
+    "picked": "B",
+    "confidence": "high"
+   },
+   "audit": {
+    "which": [],
+    "note": "Straightforward single-text main idea; the answer is stated directly and the distractors are clearly wrong. It is medium or easier, not hard."
+   }
+  }
+ },
+ {
+  "gid": "basic:basic-central_ideas_details-medium-0",
+  "runId": "batch3-basic",
+  "skill": "central_ideas_details",
+  "domain": "rw_information_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "For decades, ecologists assumed that the famously dense kelp forests along the Pacific coast of North America were held in check mainly by sea urchins, which graze kelp down to bare rock when their numbers surge. Because sea otters eat urchins, the standard account credited otter recovery with kelp regrowth. But marine ecologist Dana Whitfield and colleagues, surveying thirty-one sites over eleven years, found that kelp cover rebounded at several sites where otters were absent, provided that a sheephead-like predatory fish and a species of large crab were abundant. Conversely, at two sites with healthy otter populations, kelp remained sparse because disease had reduced the otters' preferred urchin prey in favor of a less nutritious species the otters ignored. Whitfield argues that otters matter, but as one of several predators whose combined effect on grazers varies by place; treating them as the single explanation, she writes, has led managers to overlook other species worth protecting.\n\nWhich choice best states the main idea of the text?",
+   "stimulus": "For decades, ecologists assumed that the famously dense kelp forests along the Pacific coast of North America were held in check mainly by sea urchins, which graze kelp down to bare rock when their numbers surge. Because sea otters eat urchins, the standard account credited otter recovery with kelp regrowth. But marine ecologist Dana Whitfield and colleagues, surveying thirty-one sites over eleven years, found that kelp cover rebounded at several sites where otters were absent, provided that a sheephead-like predatory fish and a species of large crab were abundant. Conversely, at two sites with healthy otter populations, kelp remained sparse because disease had reduced the otters' preferred urchin prey in favor of a less nutritious species the otters ignored. Whitfield argues that otters matter, but as one of several predators whose combined effect on grazers varies by place; treating them as the single explanation, she writes, has led managers to overlook other species worth protecting.",
+   "question": "Which choice best states the main idea of the text?",
+   "options": [
+    "Sea otters have little influence on kelp forests, since kelp has recovered at sites where otters are absent.",
+    "Kelp forest recovery depends on a mix of grazer-eating predators that differs among sites, so the long-held focus on otters alone is incomplete.",
+    "Disease among urchin populations is the primary factor limiting kelp regrowth along the Pacific coast.",
+    "Ecologists have long understood that fish and crabs, not otters, are the main predators controlling urchin numbers."
+   ],
+   "correctIndex": 1,
+   "answers": null,
+   "explanation": "정답 B: 연구는 수달이 중요하지만 여러 포식자 중 하나이며 그 효과가 장소마다 다르다고 결론짓는다. A는 과장이다(저자는 수달이 중요하지 않다고 하지 않고 '유일한 설명'이 아니라고 함). C는 두 곳의 예외 사례를 전체 주제로 일반화한 부분 일치이다. D는 기존 통념이 수달 중심이었다는 지문 내용과 반대이다.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-sonnet-5-5",
+   "reviewedBy": "claude-sonnet-5-5",
+   "seed": "자연과학(물리·천문)",
+   "blind": {
+    "picked": "B",
+    "confidence": "high"
+   },
+   "audit": {
+    "which": [
+     "scope_calibration"
+    ],
+    "note": "The answer is correct and the explanation is consistent. The thesis is stated explicitly in the final sentence, so this is a typical medium main-idea item. The scope-calibration distractors (A overgeneralizes, C uses a narrow detail) are well built but do not require extra inference, so the item is not clearly hard."
+   }
+  }
+ },
+ {
+  "gid": "basic:basic-inferences-easy-0",
+  "runId": "batch3-basic",
+  "skill": "inferences",
+  "domain": "rw_information_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "easy",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "Botanist Lena Ortiz studied two neighboring meadows of the same size and soil type. In Meadow A, she removed all flowering plants that bloom in early spring; in Meadow B, she left the plants untouched. Over the next season, she counted bumblebee queens, which emerge from hibernation in early spring and need nectar right away to start new colonies. Meadow B hosted many queens, while Meadow A hosted very few. Ortiz concluded that early-spring blooms matter for bumblebee colony founding, reasoning that the queens in Meadow A most likely ______\n\nWhich choice most logically completes the text?",
+   "stimulus": "Botanist Lena Ortiz studied two neighboring meadows of the same size and soil type. In Meadow A, she removed all flowering plants that bloom in early spring; in Meadow B, she left the plants untouched. Over the next season, she counted bumblebee queens, which emerge from hibernation in early spring and need nectar right away to start new colonies. Meadow B hosted many queens, while Meadow A hosted very few. Ortiz concluded that early-spring blooms matter for bumblebee colony founding, reasoning that the queens in Meadow A most likely ______",
+   "question": "Which choice most logically completes the text?",
+   "options": [
+    "left to find nectar elsewhere, since the early-spring flowers that could feed them on emerging were no longer available",
+    "preferred Meadow B because its soil was richer, which allowed more summer flowers to grow there",
+    "died during hibernation because the removal of the flowers disturbed the ground where they slept",
+    "were unable to reproduce because bumblebee queens only feed on nectar from flowers that bloom in autumn"
+   ],
+   "correctIndex": 0,
+   "answers": null,
+   "explanation": "The meadows differed only in early-spring flowers, and queens need nectar immediately upon emerging. The logical inference is that queens in Meadow A had no food and went elsewhere. B contradicts the statement that the soil was the same and ignores the early-spring focus. C introduces an unsupported cause (disturbed hibernation sites); the removal was of flowers and the queens were counted after emerging. D claims queens feed on autumn flowers, which contradicts the text's point that they need nectar in early spring.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-sonnet-5-5",
+   "reviewedBy": "claude-sonnet-5-5",
+   "seed": "역사(근대 사회 변화)",
+   "blind": {
+    "picked": "A",
+    "confidence": "high"
+   },
+   "audit": {
+    "which": [],
+    "note": "Correct and clean, but it is a straightforward controlled-comparison inference with obviously wrong distractors (B contradicts same soil, D contradicts the premise, C is unsupported). It requires no extra reasoning beyond a typical medium item, so it does not meet hard-level standards."
+   }
+  }
+ },
+ {
+  "gid": "basic:basic-inferences-medium-0",
+  "runId": "batch3-basic",
+  "skill": "inferences",
+  "domain": "rw_information_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "Ecologists studying a small island noticed that a species of ground beetle had become much more common over twenty years. During the same period, the island's population of ground-nesting gulls, which eat the beetles, fell sharply after a fox was accidentally introduced. Some researchers proposed that the beetle's increase was caused by the decline in gulls. However, beetle numbers also rose on a neighboring island where gull numbers stayed constant and no foxes were ever present. This observation suggests that ______\n\nWhich choice most logically completes the text?",
+   "stimulus": "Ecologists studying a small island noticed that a species of ground beetle had become much more common over twenty years. During the same period, the island's population of ground-nesting gulls, which eat the beetles, fell sharply after a fox was accidentally introduced. Some researchers proposed that the beetle's increase was caused by the decline in gulls. However, beetle numbers also rose on a neighboring island where gull numbers stayed constant and no foxes were ever present. This observation suggests that ______",
+   "question": "Which choice most logically completes the text?",
+   "options": [
+    "the decline in gulls cannot be the only factor behind the beetle's increase, since beetles became more common even where gulls did not decline",
+    "gulls have no effect on beetle populations on either island, since beetle numbers rose in both places",
+    "the introduction of the fox must have directly benefited the beetles by eating their other predators",
+    "the beetle's increase on the neighboring island was probably smaller than the increase on the first island"
+   ],
+   "correctIndex": 0,
+   "answers": null,
+   "explanation": "이웃 섬에서는 갈매기 수가 일정했는데도 딱정벌레가 늘었으므로, 갈매기 감소가 유일한 원인일 수는 없다는 A가 논리적이다. B는 과잉 일반화로, 갈매기가 첫 섬에서 일부 영향을 줬을 가능성까지 배제할 근거가 없다. C는 여우가 다른 포식자를 잡아먹었다는 지문에 없는 기제를 만들어냈고, 이웃 섬에는 여우가 없었다. D는 증가 폭을 비교할 정보가 지문에 없다.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-sonnet-5-5",
+   "reviewedBy": "claude-sonnet-5-5",
+   "seed": "예술·건축 비평",
+   "blind": {
+    "picked": "A",
+    "confidence": "high"
+   },
+   "audit": {
+    "which": [],
+    "note": "Correct and well-formed, but it is a standard medium-level counterexample inference. The distractors are easily eliminated, so the item lacks hard-level extra reasoning."
+   }
+  }
+ },
+ {
+  "gid": "basic:basic-command_of_evidence_text-easy-0",
+  "runId": "batch3-basic",
+  "skill": "command_of_evidence_text",
+  "domain": "rw_information_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "easy",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "Marine biologist Dana Whitfield proposes that the bright coloration of a certain reef fish, the coral dartfish, functions primarily as a warning signal to predators that the fish is toxic, rather than as a means of attracting mates. Whitfield argues that if coloration is mainly a warning signal, then the brightest individuals should be avoided by predators more often than duller individuals, regardless of how many mates they attract.\n\nWhich finding, if true, would most directly support Whitfield's hypothesis?",
+   "stimulus": "Marine biologist Dana Whitfield proposes that the bright coloration of a certain reef fish, the coral dartfish, functions primarily as a warning signal to predators that the fish is toxic, rather than as a means of attracting mates. Whitfield argues that if coloration is mainly a warning signal, then the brightest individuals should be avoided by predators more often than duller individuals, regardless of how many mates they attract.",
+   "question": "Which finding, if true, would most directly support Whitfield's hypothesis?",
+   "options": [
+    "In a controlled experiment, predatory fish attacked brightly colored dartfish significantly less often than dull-colored dartfish of the same size.",
+    "Brightly colored dartfish were observed to spend more time near the center of the reef than dull-colored dartfish did.",
+    "Male dartfish are generally brighter in color than female dartfish during the breeding season.",
+    "Dartfish living in deeper water, where light is limited, tend to be duller in color than those in shallow water."
+   ],
+   "correctIndex": 0,
+   "answers": null,
+   "explanation": "Whitfield의 가설은 밝은 색이 포식자에게 독성을 알리는 경고 신호라는 것이고, 그렇다면 가장 밝은 개체가 포식자에게 더 자주 회피되어야 한다. A는 통제 실험에서 포식자가 밝은 개체를 덜 공격했다는 직접적 증거이므로 정답이다. B는 서식 위치에 관한 것일 뿐 포식자의 회피와 무관하다. C는 수컷이 더 밝다는 것으로 오히려 짝 유인 가설을 뒷받침하며 경고 신호 기능과는 관련이 없다. D는 수심에 따른 색 차이로 빛 조건의 영향을 보여줄 뿐 포식자의 반응에 대한 정보가 없다.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-sonnet-5-5",
+   "reviewedBy": "claude-sonnet-5-5",
+   "seed": "문학(19세기 소설 분위기의 현대 서술)",
+   "blind": {
+    "picked": "A",
+    "confidence": "high"
+   },
+   "audit": {
+    "which": [],
+    "note": "The key is correct and the item is clean. The stem states the prediction, so option A matches it directly. The distractors are plainly irrelevant, so the item is easy to medium and not hard."
+   }
+  }
+ },
+ {
+  "gid": "basic:basic-command_of_evidence_text-medium-0",
+  "runId": "batch3-basic",
+  "skill": "command_of_evidence_text",
+  "domain": "rw_information_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "Ecologist Dana Whitfield proposes that the large, shallow-rooted shrubs in a desert basin survive dry summers largely because they draw on water that is \"hydraulically lifted\" by neighboring deep-rooted mesquite trees. According to her hypothesis, mesquite roots pull moisture up from deep aquifers at night and release a portion of it into the upper soil, where nearby shrubs absorb it. Whitfield argues that this process, rather than the shrubs' own drought tolerance or shallow rainfall capture, explains why shrubs growing close to mesquite trees persist through summer while isolated shrubs do not.\n\nWhich finding, if true, would most directly support Whitfield's hypothesis?",
+   "stimulus": "Ecologist Dana Whitfield proposes that the large, shallow-rooted shrubs in a desert basin survive dry summers largely because they draw on water that is \"hydraulically lifted\" by neighboring deep-rooted mesquite trees. According to her hypothesis, mesquite roots pull moisture up from deep aquifers at night and release a portion of it into the upper soil, where nearby shrubs absorb it. Whitfield argues that this process, rather than the shrubs' own drought tolerance or shallow rainfall capture, explains why shrubs growing close to mesquite trees persist through summer while isolated shrubs do not.",
+   "question": "Which finding, if true, would most directly support Whitfield's hypothesis?",
+   "options": [
+    "Shrubs growing near mesquite trees have leaf tissue with a higher concentration of water isotopes matching deep-aquifer water than do isolated shrubs, and the difference disappears when the nearby mesquite trees are removed.",
+    "Shrubs growing near mesquite trees produce more flowers in spring than isolated shrubs do, even in years when spring rainfall is unusually low across the basin.",
+    "Mesquite trees in the basin have root systems that extend to depths of more than 30 meters, deeper than the roots of nearly all other plant species in the region.",
+    "Soil near mesquite trees contains higher levels of nitrogen than soil farther away, and shrubs in nitrogen-rich soil generally grow larger than shrubs in nitrogen-poor soil."
+   ],
+   "correctIndex": 0,
+   "answers": null,
+   "explanation": "정답 A: 이웃 메스키트 근처 관목의 잎에 깊은 대수층 물과 일치하는 동위원소가 더 많고, 메스키트를 제거하면 그 차이가 사라진다는 것은 '메스키트가 끌어올린 깊은 물을 관목이 흡수한다'는 수압 재분배 가설의 핵심 경로와 인과를 직접 뒷받침한다. B는 봄철 개화에 관한 것으로 여름 생존 및 물 공급 경로와 무관하다. C는 메스키트 뿌리가 깊다는 전제 조건만 보여 줄 뿐, 그 물이 관목에게 전달된다는 증거는 아니다. D는 질소라는 다른 설명(대안 메커니즘)을 제시하며 가설을 오히려 약화시키거나 무관하다.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-sonnet-5-5",
+   "reviewedBy": "claude-sonnet-5-5",
+   "seed": "사회과학(경제·행동)",
+   "blind": {
+    "picked": "A",
+    "confidence": "high"
+   },
+   "audit": {
+    "which": [
+     "claim_evidence_precision_matching",
+     "causal_reasoning_over_correlation"
+    ],
+    "note": "Correct answer A includes a removal condition that tests causation, and the distractors (precondition-only C, alternative mechanism D) are plausible. The item is on the easier side of hard but acceptable."
+   }
+  }
+ },
+ {
+  "gid": "basic:basic-words_in_context-easy-0",
+  "runId": "batch3-basic",
+  "skill": "words_in_context",
+  "domain": "rw_craft_structure",
+  "examSystem": "sat_rw",
+  "difficulty": "easy",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "When the city council proposed closing the neighborhood library to save money, residents did not simply accept the decision. Hundreds of them attended a public meeting, wrote letters to local newspapers, and collected thousands of signatures, all in an effort to ______ the plan and keep the library open.\n\nWhich choice completes the text with the most logical and precise word or phrase?",
+   "stimulus": "When the city council proposed closing the neighborhood library to save money, residents did not simply accept the decision. Hundreds of them attended a public meeting, wrote letters to local newspapers, and collected thousands of signatures, all in an effort to ______ the plan and keep the library open.",
+   "question": "Which choice completes the text with the most logical and precise word or phrase?",
+   "options": [
+    "oppose",
+    "delay",
+    "announce",
+    "finance"
+   ],
+   "correctIndex": 0,
+   "answers": null,
+   "explanation": "주민들이 회의 참석, 편지, 서명 운동을 한 목적은 도서관을 계속 열어 두기 위해 폐쇄 계획에 '반대하는(oppose)' 것입니다. 'delay'(지연시키다)는 계획을 미루는 것일 뿐 도서관을 계속 열어 두려는 목적과 완전히 맞지 않고, 주민들이 행한 행동도 지연보다는 반대 의사 표명입니다. 'announce'(발표하다)는 계획을 발표하는 것은 시의회의 역할이며 주민들의 노력과 반대되는 방향입니다. 'finance'(자금을 대다)는 폐쇄 계획에 자금을 댄다는 의미가 되어 문맥상 어색합니다.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-sonnet-5-5",
+   "reviewedBy": "claude-sonnet-5-5",
+   "seed": "기술·공학 사례",
+   "blind": {
+    "picked": "A",
+    "confidence": "high"
+   },
+   "audit": {
+    "which": [],
+    "note": "Easy item: a single clue (\"keep the library open\", \"did not simply accept\") gives \"oppose\" directly. Distractors are clearly wrong. It does not reach hard level and needs no extra reasoning beyond a typical easy/medium item."
+   }
+  }
+ },
+ {
+  "gid": "basic:basic-words_in_context-medium-0",
+  "runId": "batch3-basic",
+  "skill": "words_in_context",
+  "domain": "rw_craft_structure",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "Marine biologist Elena Ortiz spent two years studying a colony of sea otters off the coast of Alaska. Early reports had suggested that the otters' foraging patterns varied widely from day to day, but Ortiz's data told a different story: the animals returned to the same kelp beds at nearly the same tidal stages week after week, a level of ______ that surprised even researchers who had long studied the species.\n\nWhich choice completes the text with the most logical and precise word or phrase?",
+   "stimulus": "Marine biologist Elena Ortiz spent two years studying a colony of sea otters off the coast of Alaska. Early reports had suggested that the otters' foraging patterns varied widely from day to day, but Ortiz's data told a different story: the animals returned to the same kelp beds at nearly the same tidal stages week after week, a level of ______ that surprised even researchers who had long studied the species.",
+   "question": "Which choice completes the text with the most logical and precise word or phrase?",
+   "options": [
+    "regularity",
+    "secrecy",
+    "ambition",
+    "novelty"
+   ],
+   "correctIndex": 0,
+   "answers": null,
+   "explanation": "지문은 초기 보고(날마다 크게 달라짐)와 대비되어, 수달이 같은 켈프 군락에 거의 같은 조수 시점에 반복해서 돌아왔다고 말한다. 따라서 '규칙성(regularity)'이 문맥에 맞는다. 'secrecy(비밀스러움)'는 행동이 숨겨졌다는 근거가 없고, 'ambition(야망)'은 동물의 행동 패턴을 묘사하기에 부적절하며 반복성과 무관하다. 'novelty(새로움)'는 같은 장소로 계속 돌아온다는 내용과 정반대이다.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-sonnet-5-5",
+   "reviewedBy": "claude-sonnet-5-5",
+   "seed": "인물 소개(과학자·예술가)",
+   "blind": {
+    "picked": "A",
+    "confidence": "high"
+   },
+   "audit": {
+    "which": [],
+    "note": "Correct and clean, but the blank is directly signaled by the repetition clue (\"same kelp beds... week after week\") with obviously wrong distractors. Mild contrast with early reports does not demand extra reasoning. The item is easy to medium, not hard."
+   }
+  }
+ },
+ {
+  "gid": "basic:basic-text_structure_purpose-easy-0",
+  "runId": "batch3-basic",
+  "skill": "text_structure_purpose",
+  "domain": "rw_craft_structure",
+  "examSystem": "sat_rw",
+  "difficulty": "easy",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "Many people assume that bees are the only insects that matter for pollinating crops. In reality, flies are also important pollinators in many parts of the world. __Hoverflies, for instance, visit the flowers of crops such as onions, carrots, and mustard, carrying pollen from plant to plant as they feed on nectar.__ Because these flies are active in cooler and cloudier weather than many bees tolerate, they can continue pollinating when bee activity drops.\n\nWhich choice best describes the function of the underlined sentence in the text as a whole?",
+   "stimulus": "Many people assume that bees are the only insects that matter for pollinating crops. In reality, flies are also important pollinators in many parts of the world. __Hoverflies, for instance, visit the flowers of crops such as onions, carrots, and mustard, carrying pollen from plant to plant as they feed on nectar.__ Because these flies are active in cooler and cloudier weather than many bees tolerate, they can continue pollinating when bee activity drops.",
+   "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+   "options": [
+    "It provides a specific example that supports the claim that flies are important pollinators.",
+    "It introduces a counterargument to the idea that flies are important pollinators.",
+    "It explains why bees are less effective than flies at pollinating crops.",
+    "It summarizes the main conclusion that the text as a whole reaches."
+   ],
+   "correctIndex": 0,
+   "answers": null,
+   "explanation": "밑줄 문장은 앞 문장의 주장(파리도 중요한 수분 매개자)을 뒷받침하기 위해 '꽃등에'라는 구체적 사례와 작물을 제시한다. B는 반론이 아니라 같은 주장을 지지하므로 틀리다. C는 벌이 파리보다 덜 효과적이라고 말한 적이 없으며, 뒤 문장도 날씨 조건의 차이만 언급한다. D는 이 문장이 결론 요약이 아니라 사례 제시이므로 틀리다.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-sonnet-5-5",
+   "reviewedBy": "claude-sonnet-5-5",
+   "seed": "환경·지리",
+   "blind": {
+    "picked": "A",
+    "confidence": "high"
+   },
+   "audit": {
+    "which": [],
+    "note": "Correct and clean, but the \"for instance\" marker makes it a basic example-function item. Not hard-level; it requires none of the listed hard skills."
+   }
+  }
+ },
+ {
+  "gid": "basic:basic-text_structure_purpose-medium-0",
+  "runId": "batch3-basic",
+  "skill": "text_structure_purpose",
+  "domain": "rw_craft_structure",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "For decades, ecologists assumed that the decline of kelp forests along the Pacific coast was driven primarily by warming ocean temperatures. Kelp is a cold-water species, and the logic seemed straightforward: as waters warmed, the kelp died back. But in a 2019 survey of forty sites, marine biologist Dana Whitcomb found that several of the most severely degraded forests were in areas where water temperatures had barely changed. __What those sites did have in common was a sharp drop in the local population of sunflower sea stars, a predator that feeds on the purple sea urchins that graze on kelp.__ Whitcomb now argues that warming may be a contributing factor in some places, but that the loss of this predator, and the resulting surge in urchins, better explains the pattern she observed.\n\nWhich choice best describes the function of the underlined sentence in the text as a whole?",
+   "stimulus": "For decades, ecologists assumed that the decline of kelp forests along the Pacific coast was driven primarily by warming ocean temperatures. Kelp is a cold-water species, and the logic seemed straightforward: as waters warmed, the kelp died back. But in a 2019 survey of forty sites, marine biologist Dana Whitcomb found that several of the most severely degraded forests were in areas where water temperatures had barely changed. __What those sites did have in common was a sharp drop in the local population of sunflower sea stars, a predator that feeds on the purple sea urchins that graze on kelp.__ Whitcomb now argues that warming may be a contributing factor in some places, but that the loss of this predator, and the resulting surge in urchins, better explains the pattern she observed.",
+   "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+   "options": [
+    "It identifies a shared feature of the degraded sites that the temperature-based explanation could not account for, prompting Whitcomb's alternative account.",
+    "It describes a flaw in the methods of earlier researchers who attributed kelp decline to warming ocean temperatures.",
+    "It presents additional evidence that warming temperatures were the primary cause of kelp decline at the surveyed sites.",
+    "It summarizes Whitcomb's conclusion that sunflower sea stars should be reintroduced to restore the degraded kelp forests."
+   ],
+   "correctIndex": 0,
+   "answers": null,
+   "explanation": "정답 A: 앞 문장에서 수온 변화가 거의 없는 곳에서도 숲이 심하게 훼손되었다는 예상 밖 결과가 나오고, 밑줄 문장은 그 지역들의 공통점(불가사리 감소)을 제시하여 뒤의 Whitcomb의 대안적 주장으로 이어지게 합니다. B는 이전 연구자들의 방법론 결함을 지적하는 내용이 지문에 없으므로 틀립니다. C는 밑줄 문장이 온난화를 뒷받침하지 않고 오히려 다른 요인을 제시하므로 틀립니다. D는 불가사리 재도입 권고는 지문 어디에도 없고, 밑줄 문장은 결론의 요약이 아니라 증거 제시이므로 틀립니다.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-sonnet-5-5",
+   "reviewedBy": "claude-sonnet-5-5",
+   "seed": "언어·인류학",
+   "blind": {
+    "picked": "A",
+    "confidence": "high"
+   },
+   "audit": {
+    "which": [],
+    "note": "Correct and clean, but it is a typical medium function-of-sentence item. The distractors are plainly unsupported (B and D invent content, C reverses the evidence's direction), so there is little evidence-role discrimination. It does not reach hard difficulty."
+   }
+  }
+ },
+ {
+  "gid": "basic:basic-cross_text_connections-easy-0",
+  "runId": "batch3-basic",
+  "skill": "cross_text_connections",
+  "domain": "rw_craft_structure",
+  "examSystem": "sat_rw",
+  "difficulty": "easy",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "Text 1\nMany city planners argue that installing more bike lanes is the surest way to reduce downtown traffic congestion. The reasoning is straightforward: when riding a bike feels safe and convenient, some commuters will leave their cars at home, which leaves more room on the road for those who still drive. Planners who hold this view point to cities where new bike lanes were followed by a noticeable drop in the number of cars entering the city center.\n\nText 2\nTransportation researcher Dana Ortiz has studied several cities that added bike lanes. She found that traffic counts did fall in the months right after the lanes opened, but in most cases the decline faded within two years as new drivers, drawn by the emptier roads, began commuting by car. Ortiz concludes that bike lanes can offer real benefits, such as safer cycling, but that they should not be treated as a lasting solution to congestion on their own.\n\nBased on the texts, how would Ortiz, the author of Text 2, most likely respond to the claim about bike lanes in Text 1?",
+   "stimulus": "Text 1\nMany city planners argue that installing more bike lanes is the surest way to reduce downtown traffic congestion. The reasoning is straightforward: when riding a bike feels safe and convenient, some commuters will leave their cars at home, which leaves more room on the road for those who still drive. Planners who hold this view point to cities where new bike lanes were followed by a noticeable drop in the number of cars entering the city center.\n\nText 2\nTransportation researcher Dana Ortiz has studied several cities that added bike lanes. She found that traffic counts did fall in the months right after the lanes opened, but in most cases the decline faded within two years as new drivers, drawn by the emptier roads, began commuting by car. Ortiz concludes that bike lanes can offer real benefits, such as safer cycling, but that they should not be treated as a lasting solution to congestion on their own.",
+   "question": "Based on the texts, how would Ortiz, the author of Text 2, most likely respond to the claim about bike lanes in Text 1?",
+   "options": [
+    "She would agree that bike lanes reduce congestion but caution that the reduction is often temporary, so bike lanes alone are not a lasting fix.",
+    "She would argue that bike lanes have no effect on traffic and that cities should stop building them.",
+    "She would agree fully with the planners, since traffic counts fell after bike lanes opened in the cities she studied.",
+    "She would say that the planners are wrong about safety, because bike lanes make cycling more dangerous."
+   ],
+   "correctIndex": 0,
+   "answers": null,
+   "explanation": "Ortiz는 자전거 도로 개설 직후 교통량이 실제로 줄었음을 인정하지만(Text 1의 근거와 부분적으로 일치), 2년 내에 효과가 사라지므로 단독으로는 지속적 해결책이 아니라고 본다. 따라서 A가 정답이다. B는 효과가 전혀 없다고 했는데, Ortiz는 초기 감소를 인정하고 안전성 등 이점도 언급하므로 틀리다. C는 전면 동의인데, Ortiz는 효과의 지속성에 의문을 제기하므로 틀리다. D는 안전성에 대해 반대한다고 했지만, Ortiz는 오히려 더 안전한 자전거 이용을 이점으로 언급하므로 틀리다.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-sonnet-5-5",
+   "reviewedBy": "claude-sonnet-5-5",
+   "seed": "자연과학(생물·생태)",
+   "blind": {
+    "picked": "A",
+    "confidence": "high"
+   },
+   "audit": {
+    "which": [],
+    "note": "Correct and consistent, but Ortiz's stance is nearly explicit in Text 2 and the distractors are extreme (no effect, full agreement, danger). It is a typical medium cross-text item and does not meet the hard criteria."
+   }
+  }
+ },
+ {
+  "gid": "basic:basic-cross_text_connections-medium-0",
+  "runId": "batch3-basic",
+  "skill": "cross_text_connections",
+  "domain": "rw_craft_structure",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "Text 1\nUrban planners have long argued that rooftop gardens should be mandated for new commercial buildings. According to ecologist Dana Okafor, such gardens absorb rainwater, reduce the heat that cities trap, and provide habitat for pollinators. Okafor contends that because these benefits accrue to the whole city, the cost of installation should not be left to individual building owners to decide, and that a citywide requirement is therefore the most reliable way to secure them.\n\nText 2\nEconomist Luis Varga does not dispute that rooftop gardens deliver real environmental benefits. His concern is with the mechanism. In a study of three cities, Varga found that mandates often led developers to install the cheapest possible plantings, which died within two years and delivered few of the promised benefits. Cities that instead offered tax reductions scaled to a garden's measured rainwater absorption saw healthier, longer-lasting installations.\n\nBased on the texts, how would the author of Text 2 most likely respond to Okafor's claim in Text 1 that a citywide requirement is the most reliable way to secure the benefits of rooftop gardens?",
+   "stimulus": "Text 1\nUrban planners have long argued that rooftop gardens should be mandated for new commercial buildings. According to ecologist Dana Okafor, such gardens absorb rainwater, reduce the heat that cities trap, and provide habitat for pollinators. Okafor contends that because these benefits accrue to the whole city, the cost of installation should not be left to individual building owners to decide, and that a citywide requirement is therefore the most reliable way to secure them.\n\nText 2\nEconomist Luis Varga does not dispute that rooftop gardens deliver real environmental benefits. His concern is with the mechanism. In a study of three cities, Varga found that mandates often led developers to install the cheapest possible plantings, which died within two years and delivered few of the promised benefits. Cities that instead offered tax reductions scaled to a garden's measured rainwater absorption saw healthier, longer-lasting installations.",
+   "question": "Based on the texts, how would the author of Text 2 most likely respond to Okafor's claim in Text 1 that a citywide requirement is the most reliable way to secure the benefits of rooftop gardens?",
+   "options": [
+    "By agreeing that the benefits are real but arguing that a mandate may not reliably deliver them and that performance-based incentives can work better",
+    "By arguing that rooftop gardens do not actually absorb rainwater or reduce urban heat, so no policy to promote them is justified",
+    "By concurring that mandates are the best approach and recommending that tax reductions be added to make them more affordable for developers",
+    "By asserting that the decision to install a rooftop garden should be left entirely to individual building owners without any government involvement"
+   ],
+   "correctIndex": 0,
+   "answers": null,
+   "explanation": "Text 2는 옥상 정원의 환경적 이점 자체는 인정하면서(Okafor의 전제 수용), 의무화라는 '수단'이 이점을 안정적으로 확보하지 못한다고 반박하고 측정된 성능에 따른 세금 감면이 더 낫다고 제시한다. 따라서 A가 정답이다. B는 Varga가 이점 자체를 부정하지 않는다고 명시했으므로 틀리다. C는 Varga가 의무화에 동의하지 않고 대안으로 인센티브를 제시하므로 틀리다. D는 Varga가 정부 개입 자체를 반대하는 것이 아니라 세금 감면이라는 정책 개입을 제안하므로 틀리다.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-sonnet-5-5",
+   "reviewedBy": "claude-sonnet-5-5",
+   "seed": "자연과학(물리·천문)",
+   "blind": {
+    "picked": "A",
+    "confidence": "high"
+   },
+   "audit": {
+    "which": [],
+    "note": "Correct and well-formed, but Text 2 states its stance on mandates almost explicitly and the distractors are blatantly contradicted by the text (B, C, D). This is a typical medium item and does not reach hard difficulty."
+   }
+  }
+ },
+ {
+  "gid": "basic:basic-rhetorical_synthesis-easy-0",
+  "runId": "batch3-basic",
+  "skill": "rhetorical_synthesis",
+  "domain": "rw_expression_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "easy",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "While researching a topic, a student has taken the following notes:\n- Monarch butterflies migrate each autumn from the United States and Canada to central Mexico.\n- The journey can cover up to 3,000 miles.\n- No single monarch completes the full round trip; the return north takes several generations.\n- Monarchs that migrate south live about eight months, while most other generations live two to six weeks.\n- Scientists believe monarchs use the position of the sun to navigate.\n\nThe student wants to emphasize the distance of the monarch butterfly's migration to an audience unfamiliar with the species. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "stimulus": "While researching a topic, a student has taken the following notes:\n- Monarch butterflies migrate each autumn from the United States and Canada to central Mexico.\n- The journey can cover up to 3,000 miles.\n- No single monarch completes the full round trip; the return north takes several generations.\n- Monarchs that migrate south live about eight months, while most other generations live two to six weeks.\n- Scientists believe monarchs use the position of the sun to navigate.",
+   "question": "The student wants to emphasize the distance of the monarch butterfly's migration to an audience unfamiliar with the species. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "options": [
+    "Each autumn, monarch butterflies migrate from the United States and Canada to central Mexico, a journey that can cover up to 3,000 miles.",
+    "Monarch butterflies that migrate south live about eight months, far longer than the two to six weeks of most other generations.",
+    "Scientists believe monarch butterflies use the position of the sun to navigate during their long migration each autumn.",
+    "No single monarch butterfly completes the full round trip, because the return journey north takes several generations."
+   ],
+   "correctIndex": 0,
+   "answers": null,
+   "explanation": "정답은 A입니다. 학생의 목표는 이동 '거리'를 강조하는 것인데, A는 출발지·도착지와 함께 최대 3,000마일이라는 거리 정보를 제시합니다. B는 수명에 관한 내용이라 거리와 무관합니다. C는 태양 위치를 이용한 길 찾기 방법을 설명하므로 목표에서 벗어납니다. D는 여러 세대에 걸친 귀환을 다루며 거리 수치를 전달하지 않습니다.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-sonnet-5-5",
+   "reviewedBy": "claude-sonnet-5-5",
+   "seed": "역사(근대 사회 변화)",
+   "blind": {
+    "picked": "A",
+    "confidence": "high"
+   },
+   "audit": {
+    "which": [],
+    "note": "Correct and consistent, but too easy for hard. Only A contains the distance figure; B, C and D are clearly off-goal. No scope calibration, certainty discrimination or multi-source tradeoff is required. It is a typical easy/medium item."
+   }
+  }
+ },
+ {
+  "gid": "basic:basic-rhetorical_synthesis-medium-0",
+  "runId": "batch3-basic",
+  "skill": "rhetorical_synthesis",
+  "domain": "rw_expression_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "While researching a topic, a student has taken the following notes:\n- The Mpemba effect is the observation that, under certain conditions, hot water can freeze faster than cooler water.\n- The effect is named after Erasto Mpemba, a Tanzanian student who noticed it in 1963 while making ice cream in a school cooking class.\n- Mpemba and physicist Denis Osborne published a paper on the effect in 1969.\n- Researchers have proposed several explanations, including evaporation, dissolved gases, and convection currents.\n- Some scientists have had difficulty reproducing the effect consistently, and there is no agreed-upon explanation.\n\nThe student wants to explain why the Mpemba effect remains a subject of scientific debate. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "stimulus": "While researching a topic, a student has taken the following notes:\n- The Mpemba effect is the observation that, under certain conditions, hot water can freeze faster than cooler water.\n- The effect is named after Erasto Mpemba, a Tanzanian student who noticed it in 1963 while making ice cream in a school cooking class.\n- Mpemba and physicist Denis Osborne published a paper on the effect in 1969.\n- Researchers have proposed several explanations, including evaporation, dissolved gases, and convection currents.\n- Some scientists have had difficulty reproducing the effect consistently, and there is no agreed-upon explanation.",
+   "question": "The student wants to explain why the Mpemba effect remains a subject of scientific debate. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "options": [
+    "Although Erasto Mpemba and Denis Osborne published a paper on the effect in 1969, the phenomenon, in which hot water can freeze faster than cooler water, is still debated.",
+    "Because researchers have proposed several explanations, such as evaporation, dissolved gases, and convection currents, and some scientists cannot reproduce the effect consistently, no explanation has been agreed upon.",
+    "The Mpemba effect, first noticed in 1963 by a Tanzanian student making ice cream, is the observation that hot water can sometimes freeze faster than cooler water.",
+    "Named after Erasto Mpemba, the Mpemba effect has been explained by evaporation, dissolved gases, and convection currents, all of which scientists now accept."
+   ],
+   "correctIndex": 1,
+   "answers": null,
+   "explanation": "B는 여러 설명이 제안되었다는 점과 효과가 일관되게 재현되지 않는다는 점을 함께 제시해 합의된 설명이 없다는 논쟁의 이유를 직접 설명한다. A는 1969년 논문 발표 사실만 언급해 논쟁의 이유를 설명하지 못한다. C는 효과의 정의와 발견 배경만 설명하며 논쟁 이유가 없다. D는 설명들을 과학자들이 모두 받아들인다고 해 노트와 모순된다.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-sonnet-5-5",
+   "reviewedBy": "claude-sonnet-5-5",
+   "seed": "예술·건축 비평",
+   "blind": {
+    "picked": "B",
+    "confidence": "high"
+   },
+   "audit": {
+    "which": [],
+    "note": "Correct and consistent, but a standard medium item. The goal (why debated) maps directly to B. A and C are off-goal, and D contradicts the notes. There is no subtle calibration of scope or certainty, so it is not hard."
+   }
+  }
+ },
+ {
+  "gid": "basic:basic-transitions-easy-0",
+  "runId": "batch3-basic",
+  "skill": "transitions",
+  "domain": "rw_expression_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "easy",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "Many people assume that a city's oldest trees are the ones most likely to survive a severe storm, since they have endured decades of wind and rain. Arborists who surveyed storm damage in several neighborhoods found the opposite pattern. ______ the tallest, oldest oaks were the most likely to lose major limbs or topple, while younger trees of the same species mostly remained intact.\n\nWhich choice completes the text with the most logical transition?",
+   "stimulus": "Many people assume that a city's oldest trees are the ones most likely to survive a severe storm, since they have endured decades of wind and rain. Arborists who surveyed storm damage in several neighborhoods found the opposite pattern. ______ the tallest, oldest oaks were the most likely to lose major limbs or topple, while younger trees of the same species mostly remained intact.",
+   "question": "Which choice completes the text with the most logical transition?",
+   "options": [
+    "Similarly,",
+    "In fact,",
+    "For example,",
+    "Therefore,"
+   ],
+   "correctIndex": 1,
+   "answers": null,
+   "explanation": "앞 문장에서 조사 결과가 통념과 '정반대의 양상'이었다고 했고, 빈칸 뒤 문장은 그 정반대 양상을 더 구체적이고 강하게 확인해 준다(가장 크고 오래된 참나무가 가장 피해를 입음). 따라서 앞말을 강조·확인하는 In fact,가 적절하다. A(Similarly)는 유사한 사례를 덧붙일 때 쓰는데, 뒤 문장은 새로운 유사 사례가 아니라 같은 발견의 구체화이다. C(For example)는 앞 문장이 일반적 진술일 때 사례를 들 때 쓰지만, 뒤 문장은 '정반대 양상'의 내용 자체를 풀어 말한 것으로 단순 예시로 보기 어렵고 강조 관계가 더 정확하다. D(Therefore)는 인과 관계를 나타내지만, 뒤 문장은 조사 결과의 내용이지 앞 문장의 결과가 아니다.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-sonnet-5-5",
+   "reviewedBy": "claude-sonnet-5-5",
+   "seed": "문학(19세기 소설 분위기의 현대 서술)",
+   "blind": {
+    "picked": "B",
+    "confidence": "high"
+   },
+   "audit": {
+    "which": [],
+    "note": "Answer B is correct and the explanation is consistent. C (For example) is a mild distractor, but the sentence restates the finding rather than illustrating it. The item is a typical medium transition (emphasis/confirmation) and shows none of the hard traits: no non-local referent, no multi-step inference, no goal-versus-content discrimination. It is not hard-level."
+   }
+  }
+ },
+ {
+  "gid": "basic:basic-transitions-medium-0",
+  "runId": "batch3-basic",
+  "skill": "transitions",
+  "domain": "rw_expression_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "Urban ecologists have long assumed that city lighting harms nocturnal pollinators by disorienting moths and deterring them from visiting flowers. A recent field study in three cities found that moths did visit night-blooming plants less often under bright white streetlights. ______ the same study showed that plants near amber-toned lights received nearly as many moth visits as plants in unlit areas, suggesting that the color of the light matters more than its mere presence.\n\nWhich choice completes the text with the most logical transition?",
+   "stimulus": "Urban ecologists have long assumed that city lighting harms nocturnal pollinators by disorienting moths and deterring them from visiting flowers. A recent field study in three cities found that moths did visit night-blooming plants less often under bright white streetlights. ______ the same study showed that plants near amber-toned lights received nearly as many moth visits as plants in unlit areas, suggesting that the color of the light matters more than its mere presence.",
+   "question": "Which choice completes the text with the most logical transition?",
+   "options": [
+    "Similarly,",
+    "However,",
+    "As a result,",
+    "For example,"
+   ],
+   "correctIndex": 1,
+   "answers": null,
+   "explanation": "앞 문장은 밝은 백색 가로등 아래에서 나방의 방문이 줄었다는 결과를 제시하고, 빈칸 뒤 문장은 황색 조명 아래에서는 거의 줄지 않았다는 대조적인 결과를 제시한다. 따라서 대조·제한을 나타내는 'However,'가 적절하다. 'Similarly,'는 뒤 내용이 앞과 비슷한 결과일 때 쓰는데 실제로는 반대되는 결과이므로 오답이다. 'As a result,'는 뒤 내용이 앞 내용의 결과여야 하는데, 황색 조명의 효과는 백색 조명 결과로 인해 생긴 것이 아니므로 오답이다. 'For example,'는 뒤 내용이 앞 내용의 구체적 사례여야 하는데, 황색 조명 결과는 백색 조명 결과의 예시가 아니므로 오답이다.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-sonnet-5-5",
+   "reviewedBy": "claude-sonnet-5-5",
+   "seed": "사회과학(경제·행동)",
+   "blind": {
+    "picked": "B",
+    "confidence": "high"
+   },
+   "audit": {
+    "which": [],
+    "note": "Correct and clean, but it is a straightforward contrast item (reduced visits vs. nearly normal visits). It needs none of the hard-skill reasoning, so it is not hard."
+   }
+  }
+ },
+ {
+  "gid": "basic:basic-form_structure_sense-easy-0",
+  "runId": "batch3-basic",
+  "skill": "form_structure_sense",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "easy",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "The marine biologist Dr. Elena Ruiz has spent years studying coral reefs in the Pacific Ocean. Her latest research team, which includes graduate students from three different universities, ______ the effects of rising water temperatures on reef growth.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "The marine biologist Dr. Elena Ruiz has spent years studying coral reefs in the Pacific Ocean. Her latest research team, which includes graduate students from three different universities, ______ the effects of rising water temperatures on reef growth.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "are measuring",
+    "measure",
+    "have measured",
+    "is measuring"
+   ],
+   "correctIndex": 3,
+   "answers": null,
+   "explanation": "주어는 단수 집합명사 'team'이며, 관계절 'which includes graduate students from three different universities'와 전치사구는 수식어일 뿐 주어의 수를 바꾸지 않는다. 따라서 단수 동사 'is measuring'이 맞다. A 'are measuring'은 가까이 있는 복수명사 'students'/'universities'에 동사를 일치시킨 오류이다. B 'measure'는 복수형(현재 원형)이라 단수 주어 'team'과 일치하지 않는다. C 'have measured'도 복수 동사라 단수 주어와 일치하지 않는다.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-sonnet-5-5",
+   "reviewedBy": "claude-sonnet-5-5",
+   "seed": "환경·지리",
+   "blind": {
+    "picked": "D",
+    "confidence": "high"
+   },
+   "audit": {
+    "which": [],
+    "note": "Correct and well-formed, but it is a standard medium subject-verb agreement item with an intervening relative clause. It does not demand any of the listed hard-level reasoning."
+   }
+  }
+ }
+]

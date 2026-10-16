@@ -1,0 +1,68 @@
+{
+ "runs": [
+  "psych-p3-mc"
+ ],
+ "rows": 8,
+ "passed": 2,
+ "rejected": 6,
+ "passRate": 0.25,
+ "mc": {
+  "rows": 8,
+  "passed": 2,
+  "passRate": 0.25
+ },
+ "frq": {
+  "rows": 0,
+  "passed": 0,
+  "passRate": 0
+ },
+ "unitsPassed": {
+  "1": 1,
+  "4": 1
+ },
+ "skillsPassed": {
+  "1.A": 1,
+  "1.B": 1
+ },
+ "figPassed": {
+  "text": 1,
+  "table": 1
+ },
+ "figAll": {
+  "text": 4,
+  "table": 4
+ },
+ "figPassRate": {
+  "text": "1/4",
+  "table": "1/4"
+ },
+ "renderTypesPassed": {
+  "text": 1,
+  "ap_table": 1
+ },
+ "archetypesPassed": {
+  "pss_u1_injury_case": 1,
+  "pss_u4_bystander_lab": 1
+ },
+ "archetypesAll": {
+  "pss_u1_injury_case": 1,
+  "pss_u1_twin_reading": 1,
+  "pss_u3_language_longitudinal": 1,
+  "pss_u4_initiation_club": 1,
+  "pss_u4_bystander_lab": 1,
+  "pss_u4_attribution_cultures": 1,
+  "pss_u3_attachment_style": 1,
+  "pss_u2_eyewitness_speed": 1
+ },
+ "failedArchetypes": [
+  "pss_u1_twin_reading",
+  "pss_u3_language_longitudinal",
+  "pss_u4_initiation_club",
+  "pss_u4_attribution_cultures",
+  "pss_u3_attachment_style",
+  "pss_u2_eyewitness_speed"
+ ],
+ "costUsd": {
+  "psych-p3-mc": 0.3856
+ }
+}

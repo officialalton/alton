@@ -1,0 +1,7179 @@
+{
+ "assumptions": {
+  "literaryShare": 0.4,
+  "passageBase": {
+   "easy": 317,
+   "medium": 948,
+   "hard": 164
+  },
+  "adoptRate": {
+   "easy": 0.3,
+   "medium": 0.35,
+   "hard": 0.15
+  },
+  "excerptEasyRate": 0.33,
+  "costPerCandidateSyncUsd": {
+   "easy": 0.062,
+   "medium": 0.062,
+   "hard": 0.077
+  },
+  "rewriteShareHard": 0.6,
+  "batchSize": 100
+ },
+ "cells": [
+  {
+   "skill": "central_ideas_details",
+   "difficulty": "easy",
+   "questionType": "narrator_attitude",
+   "genre": "short_story",
+   "route": "excerpt",
+   "needAdopt": 4,
+   "candidates": 13,
+   "recipeId": null,
+   "recipeSource": "none"
+  },
+  {
+   "skill": "central_ideas_details",
+   "difficulty": "easy",
+   "questionType": "narrator_attitude",
+   "genre": "novel_excerpt",
+   "route": "excerpt",
+   "needAdopt": 3,
+   "candidates": 10,
+   "recipeId": null,
+   "recipeSource": "none"
+  },
+  {
+   "skill": "central_ideas_details",
+   "difficulty": "easy",
+   "questionType": "narrator_attitude",
+   "genre": "poetry",
+   "route": "excerpt",
+   "needAdopt": 2,
+   "candidates": 7,
+   "recipeId": null,
+   "recipeSource": "none"
+  },
+  {
+   "skill": "central_ideas_details",
+   "difficulty": "easy",
+   "questionType": "narrator_attitude",
+   "genre": "personal_essay",
+   "route": "excerpt",
+   "needAdopt": 2,
+   "candidates": 7,
+   "recipeId": null,
+   "recipeSource": "none"
+  },
+  {
+   "skill": "central_ideas_details",
+   "difficulty": "easy",
+   "questionType": "narrator_attitude",
+   "genre": "memoir",
+   "route": "excerpt",
+   "needAdopt": 2,
+   "candidates": 7,
+   "recipeId": null,
+   "recipeSource": "none"
+  },
+  {
+   "skill": "central_ideas_details",
+   "difficulty": "easy",
+   "questionType": "narrator_attitude",
+   "genre": "letter",
+   "route": "excerpt",
+   "needAdopt": 1,
+   "candidates": 4,
+   "recipeId": null,
+   "recipeSource": "none"
+  },
+  {
+   "skill": "central_ideas_details",
+   "difficulty": "easy",
+   "questionType": "main_idea_or_purpose",
+   "genre": "short_story",
+   "route": "excerpt",
+   "needAdopt": 4,
+   "candidates": 13,
+   "recipeId": null,
+   "recipeSource": "none"
+  },
+  {
+   "skill": "central_ideas_details",
+   "difficulty": "easy",
+   "questionType": "main_idea_or_purpose",
+   "genre": "novel_excerpt",
+   "route": "excerpt",
+   "needAdopt": 3,
+   "candidates": 10,
+   "recipeId": null,
+   "recipeSource": "none"
+  },
+  {
+   "skill": "central_ideas_details",
+   "difficulty": "easy",
+   "questionType": "main_idea_or_purpose",
+   "genre": "drama",
+   "route": "excerpt",
+   "needAdopt": 1,
+   "candidates": 4,
+   "recipeId": null,
+   "recipeSource": "none"
+  },
+  {
+   "skill": "central_ideas_details",
+   "difficulty": "easy",
+   "questionType": "main_idea_or_purpose",
+   "genre": "personal_essay",
+   "route": "excerpt",
+   "needAdopt": 2,
+   "candidates": 7,
+   "recipeId": null,
+   "recipeSource": "none"
+  },
+  {
+   "skill": "central_ideas_details",
+   "difficulty": "easy",
+   "questionType": "main_idea_or_purpose",
+   "genre": "memoir",
+   "route": "excerpt",
+   "needAdopt": 2,
+   "candidates": 7,
+   "recipeId": null,
+   "recipeSource": "none"
+  },
+  {
+   "skill": "central_ideas_details",
+   "difficulty": "easy",
+   "questionType": "main_idea_or_purpose",
+   "genre": "letter",
+   "route": "excerpt",
+   "needAdopt": 1,
+   "candidates": 4,
+   "recipeId": null,
+   "recipeSource": "none"
+  },
+  {
+   "skill": "inferences",
+   "difficulty": "easy",
+   "questionType": "character_motivation",
+   "genre": "short_story",
+   "route": "excerpt",
+   "needAdopt": 2,
+   "candidates": 7,
+   "recipeId": null,
+   "recipeSource": "none"
+  },
+  {
+   "skill": "inferences",
+   "difficulty": "easy",
+   "questionType": "character_motivation",
+   "genre": "novel_excerpt",
+   "route": "excerpt",
+   "needAdopt": 1,
+   "candidates": 4,
+   "recipeId": null,
+   "recipeSource": "none"
+  },
+  {
+   "skill": "inferences",
+   "difficulty": "easy",
+   "questionType": "character_motivation",
+   "genre": "drama",
+   "route": "excerpt",
+   "needAdopt": 1,
+   "candidates": 4,
+   "recipeId": null,
+   "recipeSource": "none"
+  },
+  {
+   "skill": "inferences",
+   "difficulty": "easy",
+   "questionType": "character_motivation",
+   "genre": "personal_essay",
+   "route": "excerpt",
+   "needAdopt": 1,
+   "candidates": 4,
+   "recipeId": null,
+   "recipeSource": "none"
+  },
+  {
+   "skill": "inferences",
+   "difficulty": "easy",
+   "questionType": "character_motivation",
+   "genre": "memoir",
+   "route": "excerpt",
+   "needAdopt": 1,
+   "candidates": 4,
+   "recipeId": null,
+   "recipeSource": "none"
+  },
+  {
+   "skill": "inferences",
+   "difficulty": "easy",
+   "questionType": "tone_or_mood",
+   "genre": "short_story",
+   "route": "excerpt",
+   "needAdopt": 2,
+   "candidates": 7,
+   "recipeId": null,
+   "recipeSource": "none"
+  },
+  {
+   "skill": "inferences",
+   "difficulty": "easy",
+   "questionType": "tone_or_mood",
+   "genre": "novel_excerpt",
+   "route": "excerpt",
+   "needAdopt": 1,
+   "candidates": 4,
+   "recipeId": null,
+   "recipeSource": "none"
+  },
+  {
+   "skill": "inferences",
+   "difficulty": "easy",
+   "questionType": "tone_or_mood",
+   "genre": "poetry",
+   "route": "excerpt",
+   "needAdopt": 1,
+   "candidates": 4,
+   "recipeId": null,
+   "recipeSource": "none"
+  },
+  {
+   "skill": "inferences",
+   "difficulty": "easy",
+   "questionType": "tone_or_mood",
+   "genre": "personal_essay",
+   "route": "excerpt",
+   "needAdopt": 1,
+   "candidates": 4,
+   "recipeId": null,
+   "recipeSource": "none"
+  },
+  {
+   "skill": "inferences",
+   "difficulty": "easy",
+   "questionType": "tone_or_mood",
+   "genre": "memoir",
+   "route": "excerpt",
+   "needAdopt": 1,
+   "candidates": 4,
+   "recipeId": null,
+   "recipeSource": "none"
+  },
+  {
+   "skill": "inferences",
+   "difficulty": "easy",
+   "questionType": "relationship_between_characters",
+   "genre": "short_story",
+   "route": "excerpt",
+   "needAdopt": 2,
+   "candidates": 7,
+   "recipeId": null,
+   "recipeSource": "none"
+  },
+  {
+   "skill": "inferences",
+   "difficulty": "easy",
+   "questionType": "relationship_between_characters",
+   "genre": "novel_excerpt",
+   "route": "excerpt",
+   "needAdopt": 1,
+   "candidates": 4,
+   "recipeId": null,
+   "recipeSource": "none"
+  },
+  {
+   "skill": "inferences",
+   "difficulty": "easy",
+   "questionType": "relationship_between_characters",
+   "genre": "personal_essay",
+   "route": "excerpt",
+   "needAdopt": 1,
+   "candidates": 4,
+   "recipeId": null,
+   "recipeSource": "none"
+  },
+  {
+   "skill": "inferences",
+   "difficulty": "easy",
+   "questionType": "relationship_between_characters",
+   "genre": "memoir",
+   "route": "excerpt",
+   "needAdopt": 1,
+   "candidates": 4,
+   "recipeId": null,
+   "recipeSource": "none"
+  },
+  {
+   "skill": "inferences",
+   "difficulty": "easy",
+   "questionType": "symbolism",
+   "genre": "short_story",
+   "route": "excerpt",
+   "needAdopt": 2,
+   "candidates": 7,
+   "recipeId": null,
+   "recipeSource": "none"
+  },
+  {
+   "skill": "inferences",
+   "difficulty": "easy",
+   "questionType": "symbolism",
+   "genre": "novel_excerpt",
+   "route": "excerpt",
+   "needAdopt": 1,
+   "candidates": 4,
+   "recipeId": null,
+   "recipeSource": "none"
+  },
+  {
+   "skill": "inferences",
+   "difficulty": "easy",
+   "questionType": "symbolism",
+   "genre": "personal_essay",
+   "route": "excerpt",
+   "needAdopt": 1,
+   "candidates": 4,
+   "recipeId": null,
+   "recipeSource": "none"
+  },
+  {
+   "skill": "inferences",
+   "difficulty": "easy",
+   "questionType": "symbolism",
+   "genre": "memoir",
+   "route": "excerpt",
+   "needAdopt": 1,
+   "candidates": 4,
+   "recipeId": null,
+   "recipeSource": "none"
+  },
+  {
+   "skill": "words_in_context",
+   "difficulty": "easy",
+   "questionType": "figurative_language",
+   "genre": "short_story",
+   "route": "excerpt",
+   "needAdopt": 7,
+   "candidates": 22,
+   "recipeId": null,
+   "recipeSource": "none"
+  },
+  {
+   "skill": "words_in_context",
+   "difficulty": "easy",
+   "questionType": "figurative_language",
+   "genre": "novel_excerpt",
+   "route": "excerpt",
+   "needAdopt": 5,
+   "candidates": 16,
+   "recipeId": null,
+   "recipeSource": "none"
+  },
+  {
+   "skill": "words_in_context",
+   "difficulty": "easy",
+   "questionType": "figurative_language",
+   "genre": "poetry",
+   "route": "excerpt",
+   "needAdopt": 3,
+   "candidates": 10,
+   "recipeId": null,
+   "recipeSource": "none"
+  },
+  {
+   "skill": "words_in_context",
+   "difficulty": "easy",
+   "questionType": "figurative_language",
+   "genre": "personal_essay",
+   "route": "excerpt",
+   "needAdopt": 3,
+   "candidates": 10,
+   "recipeId": null,
+   "recipeSource": "none"
+  },
+  {
+   "skill": "words_in_context",
+   "difficulty": "easy",
+   "questionType": "figurative_language",
+   "genre": "memoir",
+   "route": "excerpt",
+   "needAdopt": 3,
+   "candidates": 10,
+   "recipeId": null,
+   "recipeSource": "none"
+  },
+  {
+   "skill": "words_in_context",
+   "difficulty": "easy",
+   "questionType": "figurative_language",
+   "genre": "fable_or_folktale_retelling",
+   "route": "excerpt",
+   "needAdopt": 1,
+   "candidates": 4,
+   "recipeId": null,
+   "recipeSource": "none"
+  },
+  {
+   "skill": "words_in_context",
+   "difficulty": "easy",
+   "questionType": "word_in_context",
+   "genre": "short_story",
+   "route": "excerpt",
+   "needAdopt": 7,
+   "candidates": 22,
+   "recipeId": null,
+   "recipeSource": "none"
+  },
+  {
+   "skill": "words_in_context",
+   "difficulty": "easy",
+   "questionType": "word_in_context",
+   "genre": "novel_excerpt",
+   "route": "excerpt",
+   "needAdopt": 5,
+   "candidates": 16,
+   "recipeId": null,
+   "recipeSource": "none"
+  },
+  {
+   "skill": "words_in_context",
+   "difficulty": "easy",
+   "questionType": "word_in_context",
+   "genre": "poetry",
+   "route": "excerpt",
+   "needAdopt": 3,
+   "candidates": 10,
+   "recipeId": null,
+   "recipeSource": "none"
+  },
+  {
+   "skill": "words_in_context",
+   "difficulty": "easy",
+   "questionType": "word_in_context",
+   "genre": "personal_essay",
+   "route": "excerpt",
+   "needAdopt": 3,
+   "candidates": 10,
+   "recipeId": null,
+   "recipeSource": "none"
+  },
+  {
+   "skill": "words_in_context",
+   "difficulty": "easy",
+   "questionType": "word_in_context",
+   "genre": "memoir",
+   "route": "excerpt",
+   "needAdopt": 3,
+   "candidates": 10,
+   "recipeId": null,
+   "recipeSource": "none"
+  },
+  {
+   "skill": "words_in_context",
+   "difficulty": "easy",
+   "questionType": "word_in_context",
+   "genre": "fable_or_folktale_retelling",
+   "route": "excerpt",
+   "needAdopt": 1,
+   "candidates": 4,
+   "recipeId": null,
+   "recipeSource": "none"
+  },
+  {
+   "skill": "text_structure_purpose",
+   "difficulty": "easy",
+   "questionType": "tone_shift",
+   "genre": "short_story",
+   "route": "excerpt",
+   "needAdopt": 4,
+   "candidates": 13,
+   "recipeId": null,
+   "recipeSource": "none"
+  },
+  {
+   "skill": "text_structure_purpose",
+   "difficulty": "easy",
+   "questionType": "tone_shift",
+   "genre": "novel_excerpt",
+   "route": "excerpt",
+   "needAdopt": 3,
+   "candidates": 10,
+   "recipeId": null,
+   "recipeSource": "none"
+  },
+  {
+   "skill": "text_structure_purpose",
+   "difficulty": "easy",
+   "questionType": "tone_shift",
+   "genre": "poetry",
+   "route": "excerpt",
+   "needAdopt": 1,
+   "candidates": 4,
+   "recipeId": null,
+   "recipeSource": "none"
+  },
+  {
+   "skill": "text_structure_purpose",
+   "difficulty": "easy",
+   "questionType": "tone_shift",
+   "genre": "drama",
+   "route": "excerpt",
+   "needAdopt": 1,
+   "candidates": 4,
+   "recipeId": null,
+   "recipeSource": "none"
+  },
+  {
+   "skill": "text_structure_purpose",
+   "difficulty": "easy",
+   "questionType": "tone_shift",
+   "genre": "personal_essay",
+   "route": "excerpt",
+   "needAdopt": 2,
+   "candidates": 7,
+   "recipeId": null,
+   "recipeSource": "none"
+  },
+  {
+   "skill": "text_structure_purpose",
+   "difficulty": "easy",
+   "questionType": "tone_shift",
+   "genre": "memoir",
+   "route": "excerpt",
+   "needAdopt": 2,
+   "candidates": 7,
+   "recipeId": null,
+   "recipeSource": "none"
+  },
+  {
+   "skill": "text_structure_purpose",
+   "difficulty": "easy",
+   "questionType": "tone_shift",
+   "genre": "letter",
+   "route": "excerpt",
+   "needAdopt": 1,
+   "candidates": 4,
+   "recipeId": null,
+   "recipeSource": "none"
+  },
+  {
+   "skill": "text_structure_purpose",
+   "difficulty": "easy",
+   "questionType": "text_structure",
+   "genre": "short_story",
+   "route": "excerpt",
+   "needAdopt": 4,
+   "candidates": 13,
+   "recipeId": null,
+   "recipeSource": "none"
+  },
+  {
+   "skill": "text_structure_purpose",
+   "difficulty": "easy",
+   "questionType": "text_structure",
+   "genre": "novel_excerpt",
+   "route": "excerpt",
+   "needAdopt": 3,
+   "candidates": 10,
+   "recipeId": null,
+   "recipeSource": "none"
+  },
+  {
+   "skill": "text_structure_purpose",
+   "difficulty": "easy",
+   "questionType": "text_structure",
+   "genre": "personal_essay",
+   "route": "excerpt",
+   "needAdopt": 2,
+   "candidates": 7,
+   "recipeId": null,
+   "recipeSource": "none"
+  },
+  {
+   "skill": "text_structure_purpose",
+   "difficulty": "easy",
+   "questionType": "text_structure",
+   "genre": "memoir",
+   "route": "excerpt",
+   "needAdopt": 1,
+   "candidates": 4,
+   "recipeId": null,
+   "recipeSource": "none"
+  },
+  {
+   "skill": "text_structure_purpose",
+   "difficulty": "easy",
+   "questionType": "underlined_portion_function",
+   "genre": "short_story",
+   "route": "excerpt",
+   "needAdopt": 4,
+   "candidates": 13,
+   "recipeId": null,
+   "recipeSource": "none"
+  },
+  {
+   "skill": "text_structure_purpose",
+   "difficulty": "easy",
+   "questionType": "underlined_portion_function",
+   "genre": "novel_excerpt",
+   "route": "excerpt",
+   "needAdopt": 3,
+   "candidates": 10,
+   "recipeId": null,
+   "recipeSource": "none"
+  },
+  {
+   "skill": "text_structure_purpose",
+   "difficulty": "easy",
+   "questionType": "underlined_portion_function",
+   "genre": "personal_essay",
+   "route": "excerpt",
+   "needAdopt": 2,
+   "candidates": 7,
+   "recipeId": null,
+   "recipeSource": "none"
+  },
+  {
+   "skill": "text_structure_purpose",
+   "difficulty": "easy",
+   "questionType": "underlined_portion_function",
+   "genre": "memoir",
+   "route": "excerpt",
+   "needAdopt": 1,
+   "candidates": 4,
+   "recipeId": null,
+   "recipeSource": "none"
+  },
+  {
+   "skill": "central_ideas_details",
+   "difficulty": "medium",
+   "questionType": "narrator_attitude",
+   "genre": "short_story",
+   "route": "ai_passage",
+   "needAdopt": 13,
+   "candidates": 38,
+   "recipeId": null,
+   "recipeSource": "difficulty_tip"
+  },
+  {
+   "skill": "central_ideas_details",
+   "difficulty": "medium",
+   "questionType": "narrator_attitude",
+   "genre": "novel_excerpt",
+   "route": "ai_passage",
+   "needAdopt": 9,
+   "candidates": 26,
+   "recipeId": null,
+   "recipeSource": "difficulty_tip"
+  },
+  {
+   "skill": "central_ideas_details",
+   "difficulty": "medium",
+   "questionType": "narrator_attitude",
+   "genre": "poetry",
+   "route": "ai_passage",
+   "needAdopt": 4,
+   "candidates": 12,
+   "recipeId": null,
+   "recipeSource": "difficulty_tip"
+  },
+  {
+   "skill": "central_ideas_details",
+   "difficulty": "medium",
+   "questionType": "narrator_attitude",
+   "genre": "personal_essay",
+   "route": "ai_passage",
+   "needAdopt": 6,
+   "candidates": 18,
+   "recipeId": null,
+   "recipeSource": "difficulty_tip"
+  },
+  {
+   "skill": "central_ideas_details",
+   "difficulty": "medium",
+   "questionType": "narrator_attitude",
+   "genre": "memoir",
+   "route": "ai_passage",
+   "needAdopt": 5,
+   "candidates": 15,
+   "recipeId": null,
+   "recipeSource": "difficulty_tip"
+  },
+  {
+   "skill": "central_ideas_details",
+   "difficulty": "medium",
+   "questionType": "narrator_attitude",
+   "genre": "letter",
+   "route": "ai_passage",
+   "needAdopt": 2,
+   "candidates": 6,
+   "recipeId": null,
+   "recipeSource": "difficulty_tip"
+  },
+  {
+   "skill": "central_ideas_details",
+   "difficulty": "medium",
+   "questionType": "narrator_attitude",
+   "genre": "diary",
+   "route": "ai_passage",
+   "needAdopt": 1,
+   "candidates": 3,
+   "recipeId": null,
+   "recipeSource": "difficulty_tip"
+  },
+  {
+   "skill": "central_ideas_details",
+   "difficulty": "medium",
+   "questionType": "narrator_attitude",
+   "genre": "fable_or_folktale_retelling",
+   "route": "ai_passage",
+   "needAdopt": 1,
+   "candidates": 3,
+   "recipeId": null,
+   "recipeSource": "difficulty_tip"
+  },
+  {
+   "skill": "central_ideas_details",
+   "difficulty": "medium",
+   "questionType": "main_idea_or_purpose",
+   "genre": "short_story",
+   "route": "ai_passage",
+   "needAdopt": 14,
+   "candidates": 40,
+   "recipeId": "central_ideas_details_lit_main_idea_or_purpose_medium",
+   "recipeSource": "v3"
+  },
+  {
+   "skill": "central_ideas_details",
+   "difficulty": "medium",
+   "questionType": "main_idea_or_purpose",
+   "genre": "novel_excerpt",
+   "route": "ai_passage",
+   "needAdopt": 9,
+   "candidates": 26,
+   "recipeId": "central_ideas_details_lit_main_idea_or_purpose_medium",
+   "recipeSource": "v3"
+  },
+  {
+   "skill": "central_ideas_details",
+   "difficulty": "medium",
+   "questionType": "main_idea_or_purpose",
+   "genre": "drama",
+   "route": "ai_passage",
+   "needAdopt": 2,
+   "candidates": 6,
+   "recipeId": "central_ideas_details_lit_main_idea_or_purpose_medium",
+   "recipeSource": "v3"
+  },
+  {
+   "skill": "central_ideas_details",
+   "difficulty": "medium",
+   "questionType": "main_idea_or_purpose",
+   "genre": "personal_essay",
+   "route": "ai_passage",
+   "needAdopt": 6,
+   "candidates": 18,
+   "recipeId": "central_ideas_details_lit_main_idea_or_purpose_medium",
+   "recipeSource": "v3"
+  },
+  {
+   "skill": "central_ideas_details",
+   "difficulty": "medium",
+   "questionType": "main_idea_or_purpose",
+   "genre": "memoir",
+   "route": "ai_passage",
+   "needAdopt": 6,
+   "candidates": 18,
+   "recipeId": "central_ideas_details_lit_main_idea_or_purpose_medium",
+   "recipeSource": "v3"
+  },
+  {
+   "skill": "central_ideas_details",
+   "difficulty": "medium",
+   "questionType": "main_idea_or_purpose",
+   "genre": "letter",
+   "route": "ai_passage",
+   "needAdopt": 2,
+   "candidates": 6,
+   "recipeId": "central_ideas_details_lit_main_idea_or_purpose_medium",
+   "recipeSource": "v3"
+  },
+  {
+   "skill": "central_ideas_details",
+   "difficulty": "medium",
+   "questionType": "main_idea_or_purpose",
+   "genre": "fable_or_folktale_retelling",
+   "route": "ai_passage",
+   "needAdopt": 1,
+   "candidates": 3,
+   "recipeId": "central_ideas_details_lit_main_idea_or_purpose_medium",
+   "recipeSource": "v3"
+  },
+  {
+   "skill": "inferences",
+   "difficulty": "medium",
+   "questionType": "character_motivation",
+   "genre": "short_story",
+   "route": "ai_passage",
+   "needAdopt": 6,
+   "candidates": 18,
+   "recipeId": "inferences_lit_character_motivation_medium",
+   "recipeSource": "v3"
+  },
+  {
+   "skill": "inferences",
+   "difficulty": "medium",
+   "questionType": "character_motivation",
+   "genre": "novel_excerpt",
+   "route": "ai_passage",
+   "needAdopt": 4,
+   "candidates": 12,
+   "recipeId": "inferences_lit_character_motivation_medium",
+   "recipeSource": "v3"
+  },
+  {
+   "skill": "inferences",
+   "difficulty": "medium",
+   "questionType": "character_motivation",
+   "genre": "drama",
+   "route": "ai_passage",
+   "needAdopt": 1,
+   "candidates": 3,
+   "recipeId": "inferences_lit_character_motivation_medium",
+   "recipeSource": "v3"
+  },
+  {
+   "skill": "inferences",
+   "difficulty": "medium",
+   "questionType": "character_motivation",
+   "genre": "personal_essay",
+   "route": "ai_passage",
+   "needAdopt": 3,
+   "candidates": 9,
+   "recipeId": "inferences_lit_character_motivation_medium",
+   "recipeSource": "v3"
+  },
+  {
+   "skill": "inferences",
+   "difficulty": "medium",
+   "questionType": "character_motivation",
+   "genre": "memoir",
+   "route": "ai_passage",
+   "needAdopt": 2,
+   "candidates": 6,
+   "recipeId": "inferences_lit_character_motivation_medium",
+   "recipeSource": "v3"
+  },
+  {
+   "skill": "inferences",
+   "difficulty": "medium",
+   "questionType": "character_motivation",
+   "genre": "letter",
+   "route": "ai_passage",
+   "needAdopt": 1,
+   "candidates": 3,
+   "recipeId": "inferences_lit_character_motivation_medium",
+   "recipeSource": "v3"
+  },
+  {
+   "skill": "inferences",
+   "difficulty": "medium",
+   "questionType": "character_motivation",
+   "genre": "diary",
+   "route": "ai_passage",
+   "needAdopt": 1,
+   "candidates": 3,
+   "recipeId": "inferences_lit_character_motivation_medium",
+   "recipeSource": "v3"
+  },
+  {
+   "skill": "inferences",
+   "difficulty": "medium",
+   "questionType": "character_motivation",
+   "genre": "fable_or_folktale_retelling",
+   "route": "ai_passage",
+   "needAdopt": 1,
+   "candidates": 3,
+   "recipeId": "inferences_lit_character_motivation_medium",
+   "recipeSource": "v3"
+  },
+  {
+   "skill": "inferences",
+   "difficulty": "medium",
+   "questionType": "tone_or_mood",
+   "genre": "short_story",
+   "route": "ai_passage",
+   "needAdopt": 5,
+   "candidates": 15,
+   "recipeId": "inferences_lit_tone_or_mood_medium",
+   "recipeSource": "v3"
+  },
+  {
+   "skill": "inferences",
+   "difficulty": "medium",
+   "questionType": "tone_or_mood",
+   "genre": "novel_excerpt",
+   "route": "ai_passage",
+   "needAdopt": 3,
+   "candidates": 9,
+   "recipeId": "inferences_lit_tone_or_mood_medium",
+   "recipeSource": "v3"
+  },
+  {
+   "skill": "inferences",
+   "difficulty": "medium",
+   "questionType": "tone_or_mood",
+   "genre": "poetry",
+   "route": "ai_passage",
+   "needAdopt": 2,
+   "candidates": 6,
+   "recipeId": "inferences_lit_tone_or_mood_medium",
+   "recipeSource": "v3"
+  },
+  {
+   "skill": "inferences",
+   "difficulty": "medium",
+   "questionType": "tone_or_mood",
+   "genre": "drama",
+   "route": "ai_passage",
+   "needAdopt": 1,
+   "candidates": 3,
+   "recipeId": "inferences_lit_tone_or_mood_medium",
+   "recipeSource": "v3"
+  },
+  {
+   "skill": "inferences",
+   "difficulty": "medium",
+   "questionType": "tone_or_mood",
+   "genre": "personal_essay",
+   "route": "ai_passage",
+   "needAdopt": 2,
+   "candidates": 6,
+   "recipeId": "inferences_lit_tone_or_mood_medium",
+   "recipeSource": "v3"
+  },
+  {
+   "skill": "inferences",
+   "difficulty": "medium",
+   "questionType": "tone_or_mood",
+   "genre": "memoir",
+   "route": "ai_passage",
+   "needAdopt": 2,
+   "candidates": 6,
+   "recipeId": "inferences_lit_tone_or_mood_medium",
+   "recipeSource": "v3"
+  },
+  {
+   "skill": "inferences",
+   "difficulty": "medium",
+   "questionType": "tone_or_mood",
+   "genre": "letter",
+   "route": "ai_passage",
+   "needAdopt": 1,
+   "candidates": 3,
+   "recipeId": "inferences_lit_tone_or_mood_medium",
+   "recipeSource": "v3"
+  },
+  {
+   "skill": "inferences",
+   "difficulty": "medium",
+   "questionType": "relationship_between_characters",
+   "genre": "short_story",
+   "route": "ai_passage",
+   "needAdopt": 5,
+   "candidates": 15,
+   "recipeId": "inferences_lit_relationship_between_characters_medium",
+   "recipeSource": "v3"
+  },
+  {
+   "skill": "inferences",
+   "difficulty": "medium",
+   "questionType": "relationship_between_characters",
+   "genre": "novel_excerpt",
+   "route": "ai_passage",
+   "needAdopt": 4,
+   "candidates": 12,
+   "recipeId": "inferences_lit_relationship_between_characters_medium",
+   "recipeSource": "v3"
+  },
+  {
+   "skill": "inferences",
+   "difficulty": "medium",
+   "questionType": "relationship_between_characters",
+   "genre": "drama",
+   "route": "ai_passage",
+   "needAdopt": 1,
+   "candidates": 3,
+   "recipeId": "inferences_lit_relationship_between_characters_medium",
+   "recipeSource": "v3"
+  },
+  {
+   "skill": "inferences",
+   "difficulty": "medium",
+   "questionType": "relationship_between_characters",
+   "genre": "personal_essay",
+   "route": "ai_passage",
+   "needAdopt": 2,
+   "candidates": 6,
+   "recipeId": "inferences_lit_relationship_between_characters_medium",
+   "recipeSource": "v3"
+  },
+  {
+   "skill": "inferences",
+   "difficulty": "medium",
+   "questionType": "relationship_between_characters",
+   "genre": "memoir",
+   "route": "ai_passage",
+   "needAdopt": 2,
+   "candidates": 6,
+   "recipeId": "inferences_lit_relationship_between_characters_medium",
+   "recipeSource": "v3"
+  },
+  {
+   "skill": "inferences",
+   "difficulty": "medium",
+   "questionType": "relationship_between_characters",
+   "genre": "letter",
+   "route": "ai_passage",
+   "needAdopt": 1,
+   "candidates": 3,
+   "recipeId": "inferences_lit_relationship_between_characters_medium",
+   "recipeSource": "v3"
+  },
+  {
+   "skill": "inferences",
+   "difficulty": "medium",
+   "questionType": "relationship_between_characters",
+   "genre": "fable_or_folktale_retelling",
+   "route": "ai_passage",
+   "needAdopt": 1,
+   "candidates": 3,
+   "recipeId": "inferences_lit_relationship_between_characters_medium",
+   "recipeSource": "v3"
+  },
+  {
+   "skill": "inferences",
+   "difficulty": "medium",
+   "questionType": "symbolism",
+   "genre": "short_story",
+   "route": "ai_passage",
+   "needAdopt": 5,
+   "candidates": 15,
+   "recipeId": null,
+   "recipeSource": "difficulty_tip"
+  },
+  {
+   "skill": "inferences",
+   "difficulty": "medium",
+   "questionType": "symbolism",
+   "genre": "novel_excerpt",
+   "route": "ai_passage",
+   "needAdopt": 4,
+   "candidates": 12,
+   "recipeId": null,
+   "recipeSource": "difficulty_tip"
+  },
+  {
+   "skill": "inferences",
+   "difficulty": "medium",
+   "questionType": "symbolism",
+   "genre": "poetry",
+   "route": "ai_passage",
+   "needAdopt": 2,
+   "candidates": 6,
+   "recipeId": null,
+   "recipeSource": "difficulty_tip"
+  },
+  {
+   "skill": "inferences",
+   "difficulty": "medium",
+   "questionType": "symbolism",
+   "genre": "personal_essay",
+   "route": "ai_passage",
+   "needAdopt": 2,
+   "candidates": 6,
+   "recipeId": null,
+   "recipeSource": "difficulty_tip"
+  },
+  {
+   "skill": "inferences",
+   "difficulty": "medium",
+   "questionType": "symbolism",
+   "genre": "memoir",
+   "route": "ai_passage",
+   "needAdopt": 2,
+   "candidates": 6,
+   "recipeId": null,
+   "recipeSource": "difficulty_tip"
+  },
+  {
+   "skill": "inferences",
+   "difficulty": "medium",
+   "questionType": "symbolism",
+   "genre": "fable_or_folktale_retelling",
+   "route": "ai_passage",
+   "needAdopt": 1,
+   "candidates": 3,
+   "recipeId": null,
+   "recipeSource": "difficulty_tip"
+  },
+  {
+   "skill": "words_in_context",
+   "difficulty": "medium",
+   "questionType": "figurative_language",
+   "genre": "short_story",
+   "route": "ai_passage",
+   "needAdopt": 22,
+   "candidates": 63,
+   "recipeId": null,
+   "recipeSource": "difficulty_tip"
+  },
+  {
+   "skill": "words_in_context",
+   "difficulty": "medium",
+   "questionType": "figurative_language",
+   "genre": "novel_excerpt",
+   "route": "ai_passage",
+   "needAdopt": 15,
+   "candidates": 43,
+   "recipeId": null,
+   "recipeSource": "difficulty_tip"
+  },
+  {
+   "skill": "words_in_context",
+   "difficulty": "medium",
+   "questionType": "figurative_language",
+   "genre": "poetry",
+   "route": "ai_passage",
+   "needAdopt": 7,
+   "candidates": 20,
+   "recipeId": null,
+   "recipeSource": "difficulty_tip"
+  },
+  {
+   "skill": "words_in_context",
+   "difficulty": "medium",
+   "questionType": "figurative_language",
+   "genre": "personal_essay",
+   "route": "ai_passage",
+   "needAdopt": 10,
+   "candidates": 29,
+   "recipeId": null,
+   "recipeSource": "difficulty_tip"
+  },
+  {
+   "skill": "words_in_context",
+   "difficulty": "medium",
+   "questionType": "figurative_language",
+   "genre": "memoir",
+   "route": "ai_passage",
+   "needAdopt": 9,
+   "candidates": 26,
+   "recipeId": null,
+   "recipeSource": "difficulty_tip"
+  },
+  {
+   "skill": "words_in_context",
+   "difficulty": "medium",
+   "questionType": "figurative_language",
+   "genre": "fable_or_folktale_retelling",
+   "route": "ai_passage",
+   "needAdopt": 2,
+   "candidates": 6,
+   "recipeId": null,
+   "recipeSource": "difficulty_tip"
+  },
+  {
+   "skill": "words_in_context",
+   "difficulty": "medium",
+   "questionType": "word_in_context",
+   "genre": "short_story",
+   "route": "ai_passage",
+   "needAdopt": 22,
+   "candidates": 63,
+   "recipeId": null,
+   "recipeSource": "difficulty_tip"
+  },
+  {
+   "skill": "words_in_context",
+   "difficulty": "medium",
+   "questionType": "word_in_context",
+   "genre": "novel_excerpt",
+   "route": "ai_passage",
+   "needAdopt": 15,
+   "candidates": 43,
+   "recipeId": null,
+   "recipeSource": "difficulty_tip"
+  },
+  {
+   "skill": "words_in_context",
+   "difficulty": "medium",
+   "questionType": "word_in_context",
+   "genre": "poetry",
+   "route": "ai_passage",
+   "needAdopt": 7,
+   "candidates": 20,
+   "recipeId": null,
+   "recipeSource": "difficulty_tip"
+  },
+  {
+   "skill": "words_in_context",
+   "difficulty": "medium",
+   "questionType": "word_in_context",
+   "genre": "personal_essay",
+   "route": "ai_passage",
+   "needAdopt": 10,
+   "candidates": 29,
+   "recipeId": null,
+   "recipeSource": "difficulty_tip"
+  },
+  {
+   "skill": "words_in_context",
+   "difficulty": "medium",
+   "questionType": "word_in_context",
+   "genre": "memoir",
+   "route": "ai_passage",
+   "needAdopt": 9,
+   "candidates": 26,
+   "recipeId": null,
+   "recipeSource": "difficulty_tip"
+  },
+  {
+   "skill": "words_in_context",
+   "difficulty": "medium",
+   "questionType": "word_in_context",
+   "genre": "fable_or_folktale_retelling",
+   "route": "ai_passage",
+   "needAdopt": 2,
+   "candidates": 6,
+   "recipeId": null,
+   "recipeSource": "difficulty_tip"
+  },
+  {
+   "skill": "text_structure_purpose",
+   "difficulty": "medium",
+   "questionType": "tone_shift",
+   "genre": "short_story",
+   "route": "ai_passage",
+   "needAdopt": 12,
+   "candidates": 35,
+   "recipeId": null,
+   "recipeSource": "difficulty_tip"
+  },
+  {
+   "skill": "text_structure_purpose",
+   "difficulty": "medium",
+   "questionType": "tone_shift",
+   "genre": "novel_excerpt",
+   "route": "ai_passage",
+   "needAdopt": 8,
+   "candidates": 23,
+   "recipeId": null,
+   "recipeSource": "difficulty_tip"
+  },
+  {
+   "skill": "text_structure_purpose",
+   "difficulty": "medium",
+   "questionType": "tone_shift",
+   "genre": "poetry",
+   "route": "ai_passage",
+   "needAdopt": 4,
+   "candidates": 12,
+   "recipeId": null,
+   "recipeSource": "difficulty_tip"
+  },
+  {
+   "skill": "text_structure_purpose",
+   "difficulty": "medium",
+   "questionType": "tone_shift",
+   "genre": "drama",
+   "route": "ai_passage",
+   "needAdopt": 2,
+   "candidates": 6,
+   "recipeId": null,
+   "recipeSource": "difficulty_tip"
+  },
+  {
+   "skill": "text_structure_purpose",
+   "difficulty": "medium",
+   "questionType": "tone_shift",
+   "genre": "personal_essay",
+   "route": "ai_passage",
+   "needAdopt": 6,
+   "candidates": 18,
+   "recipeId": null,
+   "recipeSource": "difficulty_tip"
+  },
+  {
+   "skill": "text_structure_purpose",
+   "difficulty": "medium",
+   "questionType": "tone_shift",
+   "genre": "memoir",
+   "route": "ai_passage",
+   "needAdopt": 5,
+   "candidates": 15,
+   "recipeId": null,
+   "recipeSource": "difficulty_tip"
+  },
+  {
+   "skill": "text_structure_purpose",
+   "difficulty": "medium",
+   "questionType": "tone_shift",
+   "genre": "letter",
+   "route": "ai_passage",
+   "needAdopt": 2,
+   "candidates": 6,
+   "recipeId": null,
+   "recipeSource": "difficulty_tip"
+  },
+  {
+   "skill": "text_structure_purpose",
+   "difficulty": "medium",
+   "questionType": "tone_shift",
+   "genre": "diary",
+   "route": "ai_passage",
+   "needAdopt": 1,
+   "candidates": 3,
+   "recipeId": null,
+   "recipeSource": "difficulty_tip"
+  },
+  {
+   "skill": "text_structure_purpose",
+   "difficulty": "medium",
+   "questionType": "tone_shift",
+   "genre": "fable_or_folktale_retelling",
+   "route": "ai_passage",
+   "needAdopt": 1,
+   "candidates": 3,
+   "recipeId": null,
+   "recipeSource": "difficulty_tip"
+  },
+  {
+   "skill": "text_structure_purpose",
+   "difficulty": "medium",
+   "questionType": "text_structure",
+   "genre": "short_story",
+   "route": "ai_passage",
+   "needAdopt": 11,
+   "candidates": 32,
+   "recipeId": null,
+   "recipeSource": "difficulty_tip"
+  },
+  {
+   "skill": "text_structure_purpose",
+   "difficulty": "medium",
+   "questionType": "text_structure",
+   "genre": "novel_excerpt",
+   "route": "ai_passage",
+   "needAdopt": 8,
+   "candidates": 23,
+   "recipeId": null,
+   "recipeSource": "difficulty_tip"
+  },
+  {
+   "skill": "text_structure_purpose",
+   "difficulty": "medium",
+   "questionType": "text_structure",
+   "genre": "personal_essay",
+   "route": "ai_passage",
+   "needAdopt": 5,
+   "candidates": 15,
+   "recipeId": null,
+   "recipeSource": "difficulty_tip"
+  },
+  {
+   "skill": "text_structure_purpose",
+   "difficulty": "medium",
+   "questionType": "text_structure",
+   "genre": "memoir",
+   "route": "ai_passage",
+   "needAdopt": 5,
+   "candidates": 15,
+   "recipeId": null,
+   "recipeSource": "difficulty_tip"
+  },
+  {
+   "skill": "text_structure_purpose",
+   "difficulty": "medium",
+   "questionType": "text_structure",
+   "genre": "fable_or_folktale_retelling",
+   "route": "ai_passage",
+   "needAdopt": 1,
+   "candidates": 3,
+   "recipeId": null,
+   "recipeSource": "difficulty_tip"
+  },
+  {
+   "skill": "text_structure_purpose",
+   "difficulty": "medium",
+   "questionType": "underlined_portion_function",
+   "genre": "short_story",
+   "route": "ai_passage",
+   "needAdopt": 11,
+   "candidates": 32,
+   "recipeId": null,
+   "recipeSource": "difficulty_tip"
+  },
+  {
+   "skill": "text_structure_purpose",
+   "difficulty": "medium",
+   "questionType": "underlined_portion_function",
+   "genre": "novel_excerpt",
+   "route": "ai_passage",
+   "needAdopt": 8,
+   "candidates": 23,
+   "recipeId": null,
+   "recipeSource": "difficulty_tip"
+  },
+  {
+   "skill": "text_structure_purpose",
+   "difficulty": "medium",
+   "questionType": "underlined_portion_function",
+   "genre": "personal_essay",
+   "route": "ai_passage",
+   "needAdopt": 5,
+   "candidates": 15,
+   "recipeId": null,
+   "recipeSource": "difficulty_tip"
+  },
+  {
+   "skill": "text_structure_purpose",
+   "difficulty": "medium",
+   "questionType": "underlined_portion_function",
+   "genre": "memoir",
+   "route": "ai_passage",
+   "needAdopt": 5,
+   "candidates": 15,
+   "recipeId": null,
+   "recipeSource": "difficulty_tip"
+  },
+  {
+   "skill": "text_structure_purpose",
+   "difficulty": "medium",
+   "questionType": "underlined_portion_function",
+   "genre": "fable_or_folktale_retelling",
+   "route": "ai_passage",
+   "needAdopt": 1,
+   "candidates": 3,
+   "recipeId": null,
+   "recipeSource": "difficulty_tip"
+  },
+  {
+   "skill": "central_ideas_details",
+   "difficulty": "hard",
+   "questionType": "narrator_attitude",
+   "genre": "short_story",
+   "route": "ai_passage",
+   "needAdopt": 2,
+   "candidates": 14,
+   "recipeId": null,
+   "recipeSource": "difficulty_tip"
+  },
+  {
+   "skill": "central_ideas_details",
+   "difficulty": "hard",
+   "questionType": "narrator_attitude",
+   "genre": "novel_excerpt",
+   "route": "ai_passage",
+   "needAdopt": 2,
+   "candidates": 14,
+   "recipeId": null,
+   "recipeSource": "difficulty_tip"
+  },
+  {
+   "skill": "central_ideas_details",
+   "difficulty": "hard",
+   "questionType": "narrator_attitude",
+   "genre": "poetry",
+   "route": "ai_passage",
+   "needAdopt": 1,
+   "candidates": 7,
+   "recipeId": null,
+   "recipeSource": "difficulty_tip"
+  },
+  {
+   "skill": "central_ideas_details",
+   "difficulty": "hard",
+   "questionType": "narrator_attitude",
+   "genre": "personal_essay",
+   "route": "ai_passage",
+   "needAdopt": 1,
+   "candidates": 7,
+   "recipeId": null,
+   "recipeSource": "difficulty_tip"
+  },
+  {
+   "skill": "central_ideas_details",
+   "difficulty": "hard",
+   "questionType": "narrator_attitude",
+   "genre": "memoir",
+   "route": "ai_passage",
+   "needAdopt": 1,
+   "candidates": 7,
+   "recipeId": null,
+   "recipeSource": "difficulty_tip"
+  },
+  {
+   "skill": "central_ideas_details",
+   "difficulty": "hard",
+   "questionType": "main_idea_or_purpose",
+   "genre": "short_story",
+   "route": "ai_passage",
+   "needAdopt": 3,
+   "candidates": 20,
+   "recipeId": "central_ideas_details_lit_main_idea_or_purpose_hard",
+   "recipeSource": "v3"
+  },
+  {
+   "skill": "central_ideas_details",
+   "difficulty": "hard",
+   "questionType": "main_idea_or_purpose",
+   "genre": "novel_excerpt",
+   "route": "ai_passage",
+   "needAdopt": 2,
+   "candidates": 14,
+   "recipeId": "central_ideas_details_lit_main_idea_or_purpose_hard",
+   "recipeSource": "v3"
+  },
+  {
+   "skill": "central_ideas_details",
+   "difficulty": "hard",
+   "questionType": "main_idea_or_purpose",
+   "genre": "personal_essay",
+   "route": "ai_passage",
+   "needAdopt": 1,
+   "candidates": 7,
+   "recipeId": "central_ideas_details_lit_main_idea_or_purpose_hard",
+   "recipeSource": "v3"
+  },
+  {
+   "skill": "central_ideas_details",
+   "difficulty": "hard",
+   "questionType": "main_idea_or_purpose",
+   "genre": "memoir",
+   "route": "ai_passage",
+   "needAdopt": 1,
+   "candidates": 7,
+   "recipeId": "central_ideas_details_lit_main_idea_or_purpose_hard",
+   "recipeSource": "v3"
+  },
+  {
+   "skill": "inferences",
+   "difficulty": "hard",
+   "questionType": "character_motivation",
+   "genre": "short_story",
+   "route": "ai_passage",
+   "needAdopt": 1,
+   "candidates": 7,
+   "recipeId": "inferences_lit_character_motivation_hard",
+   "recipeSource": "v3"
+  },
+  {
+   "skill": "inferences",
+   "difficulty": "hard",
+   "questionType": "character_motivation",
+   "genre": "novel_excerpt",
+   "route": "ai_passage",
+   "needAdopt": 1,
+   "candidates": 7,
+   "recipeId": "inferences_lit_character_motivation_hard",
+   "recipeSource": "v3"
+  },
+  {
+   "skill": "inferences",
+   "difficulty": "hard",
+   "questionType": "character_motivation",
+   "genre": "personal_essay",
+   "route": "ai_passage",
+   "needAdopt": 1,
+   "candidates": 7,
+   "recipeId": "inferences_lit_character_motivation_hard",
+   "recipeSource": "v3"
+  },
+  {
+   "skill": "inferences",
+   "difficulty": "hard",
+   "questionType": "tone_or_mood",
+   "genre": "short_story",
+   "route": "ai_passage",
+   "needAdopt": 1,
+   "candidates": 7,
+   "recipeId": "inferences_lit_tone_or_mood_hard",
+   "recipeSource": "v3"
+  },
+  {
+   "skill": "inferences",
+   "difficulty": "hard",
+   "questionType": "tone_or_mood",
+   "genre": "novel_excerpt",
+   "route": "ai_passage",
+   "needAdopt": 1,
+   "candidates": 7,
+   "recipeId": "inferences_lit_tone_or_mood_hard",
+   "recipeSource": "v3"
+  },
+  {
+   "skill": "inferences",
+   "difficulty": "hard",
+   "questionType": "tone_or_mood",
+   "genre": "personal_essay",
+   "route": "ai_passage",
+   "needAdopt": 1,
+   "candidates": 7,
+   "recipeId": "inferences_lit_tone_or_mood_hard",
+   "recipeSource": "v3"
+  },
+  {
+   "skill": "inferences",
+   "difficulty": "hard",
+   "questionType": "relationship_between_characters",
+   "genre": "short_story",
+   "route": "ai_passage",
+   "needAdopt": 1,
+   "candidates": 7,
+   "recipeId": "inferences_lit_relationship_between_characters_hard",
+   "recipeSource": "v3"
+  },
+  {
+   "skill": "inferences",
+   "difficulty": "hard",
+   "questionType": "relationship_between_characters",
+   "genre": "novel_excerpt",
+   "route": "ai_passage",
+   "needAdopt": 1,
+   "candidates": 7,
+   "recipeId": "inferences_lit_relationship_between_characters_hard",
+   "recipeSource": "v3"
+  },
+  {
+   "skill": "inferences",
+   "difficulty": "hard",
+   "questionType": "relationship_between_characters",
+   "genre": "personal_essay",
+   "route": "ai_passage",
+   "needAdopt": 1,
+   "candidates": 7,
+   "recipeId": "inferences_lit_relationship_between_characters_hard",
+   "recipeSource": "v3"
+  },
+  {
+   "skill": "inferences",
+   "difficulty": "hard",
+   "questionType": "symbolism",
+   "genre": "short_story",
+   "route": "ai_passage",
+   "needAdopt": 1,
+   "candidates": 7,
+   "recipeId": null,
+   "recipeSource": "difficulty_tip"
+  },
+  {
+   "skill": "inferences",
+   "difficulty": "hard",
+   "questionType": "symbolism",
+   "genre": "novel_excerpt",
+   "route": "ai_passage",
+   "needAdopt": 1,
+   "candidates": 7,
+   "recipeId": null,
+   "recipeSource": "difficulty_tip"
+  },
+  {
+   "skill": "inferences",
+   "difficulty": "hard",
+   "questionType": "symbolism",
+   "genre": "personal_essay",
+   "route": "ai_passage",
+   "needAdopt": 1,
+   "candidates": 7,
+   "recipeId": null,
+   "recipeSource": "difficulty_tip"
+  },
+  {
+   "skill": "words_in_context",
+   "difficulty": "hard",
+   "questionType": "figurative_language",
+   "genre": "short_story",
+   "route": "ai_passage",
+   "needAdopt": 4,
+   "candidates": 27,
+   "recipeId": null,
+   "recipeSource": "difficulty_tip"
+  },
+  {
+   "skill": "words_in_context",
+   "difficulty": "hard",
+   "questionType": "figurative_language",
+   "genre": "novel_excerpt",
+   "route": "ai_passage",
+   "needAdopt": 3,
+   "candidates": 20,
+   "recipeId": null,
+   "recipeSource": "difficulty_tip"
+  },
+  {
+   "skill": "words_in_context",
+   "difficulty": "hard",
+   "questionType": "figurative_language",
+   "genre": "poetry",
+   "route": "ai_passage",
+   "needAdopt": 1,
+   "candidates": 7,
+   "recipeId": null,
+   "recipeSource": "difficulty_tip"
+  },
+  {
+   "skill": "words_in_context",
+   "difficulty": "hard",
+   "questionType": "figurative_language",
+   "genre": "personal_essay",
+   "route": "ai_passage",
+   "needAdopt": 2,
+   "candidates": 14,
+   "recipeId": null,
+   "recipeSource": "difficulty_tip"
+  },
+  {
+   "skill": "words_in_context",
+   "difficulty": "hard",
+   "questionType": "figurative_language",
+   "genre": "memoir",
+   "route": "ai_passage",
+   "needAdopt": 2,
+   "candidates": 14,
+   "recipeId": null,
+   "recipeSource": "difficulty_tip"
+  },
+  {
+   "skill": "words_in_context",
+   "difficulty": "hard",
+   "questionType": "word_in_context",
+   "genre": "short_story",
+   "route": "ai_passage",
+   "needAdopt": 4,
+   "candidates": 27,
+   "recipeId": null,
+   "recipeSource": "difficulty_tip"
+  },
+  {
+   "skill": "words_in_context",
+   "difficulty": "hard",
+   "questionType": "word_in_context",
+   "genre": "novel_excerpt",
+   "route": "ai_passage",
+   "needAdopt": 3,
+   "candidates": 20,
+   "recipeId": null,
+   "recipeSource": "difficulty_tip"
+  },
+  {
+   "skill": "words_in_context",
+   "difficulty": "hard",
+   "questionType": "word_in_context",
+   "genre": "poetry",
+   "route": "ai_passage",
+   "needAdopt": 1,
+   "candidates": 7,
+   "recipeId": null,
+   "recipeSource": "difficulty_tip"
+  },
+  {
+   "skill": "words_in_context",
+   "difficulty": "hard",
+   "questionType": "word_in_context",
+   "genre": "personal_essay",
+   "route": "ai_passage",
+   "needAdopt": 2,
+   "candidates": 14,
+   "recipeId": null,
+   "recipeSource": "difficulty_tip"
+  },
+  {
+   "skill": "words_in_context",
+   "difficulty": "hard",
+   "questionType": "word_in_context",
+   "genre": "memoir",
+   "route": "ai_passage",
+   "needAdopt": 1,
+   "candidates": 7,
+   "recipeId": null,
+   "recipeSource": "difficulty_tip"
+  },
+  {
+   "skill": "text_structure_purpose",
+   "difficulty": "hard",
+   "questionType": "tone_shift",
+   "genre": "short_story",
+   "route": "ai_passage",
+   "needAdopt": 2,
+   "candidates": 14,
+   "recipeId": null,
+   "recipeSource": "difficulty_tip"
+  },
+  {
+   "skill": "text_structure_purpose",
+   "difficulty": "hard",
+   "questionType": "tone_shift",
+   "genre": "novel_excerpt",
+   "route": "ai_passage",
+   "needAdopt": 2,
+   "candidates": 14,
+   "recipeId": null,
+   "recipeSource": "difficulty_tip"
+  },
+  {
+   "skill": "text_structure_purpose",
+   "difficulty": "hard",
+   "questionType": "tone_shift",
+   "genre": "poetry",
+   "route": "ai_passage",
+   "needAdopt": 1,
+   "candidates": 7,
+   "recipeId": null,
+   "recipeSource": "difficulty_tip"
+  },
+  {
+   "skill": "text_structure_purpose",
+   "difficulty": "hard",
+   "questionType": "tone_shift",
+   "genre": "personal_essay",
+   "route": "ai_passage",
+   "needAdopt": 1,
+   "candidates": 7,
+   "recipeId": null,
+   "recipeSource": "difficulty_tip"
+  },
+  {
+   "skill": "text_structure_purpose",
+   "difficulty": "hard",
+   "questionType": "tone_shift",
+   "genre": "memoir",
+   "route": "ai_passage",
+   "needAdopt": 1,
+   "candidates": 7,
+   "recipeId": null,
+   "recipeSource": "difficulty_tip"
+  },
+  {
+   "skill": "text_structure_purpose",
+   "difficulty": "hard",
+   "questionType": "text_structure",
+   "genre": "short_story",
+   "route": "ai_passage",
+   "needAdopt": 2,
+   "candidates": 14,
+   "recipeId": null,
+   "recipeSource": "difficulty_tip"
+  },
+  {
+   "skill": "text_structure_purpose",
+   "difficulty": "hard",
+   "questionType": "text_structure",
+   "genre": "novel_excerpt",
+   "route": "ai_passage",
+   "needAdopt": 1,
+   "candidates": 7,
+   "recipeId": null,
+   "recipeSource": "difficulty_tip"
+  },
+  {
+   "skill": "text_structure_purpose",
+   "difficulty": "hard",
+   "questionType": "text_structure",
+   "genre": "personal_essay",
+   "route": "ai_passage",
+   "needAdopt": 1,
+   "candidates": 7,
+   "recipeId": null,
+   "recipeSource": "difficulty_tip"
+  },
+  {
+   "skill": "text_structure_purpose",
+   "difficulty": "hard",
+   "questionType": "text_structure",
+   "genre": "memoir",
+   "route": "ai_passage",
+   "needAdopt": 1,
+   "candidates": 7,
+   "recipeId": null,
+   "recipeSource": "difficulty_tip"
+  },
+  {
+   "skill": "text_structure_purpose",
+   "difficulty": "hard",
+   "questionType": "underlined_portion_function",
+   "genre": "short_story",
+   "route": "ai_passage",
+   "needAdopt": 2,
+   "candidates": 14,
+   "recipeId": null,
+   "recipeSource": "difficulty_tip"
+  },
+  {
+   "skill": "text_structure_purpose",
+   "difficulty": "hard",
+   "questionType": "underlined_portion_function",
+   "genre": "novel_excerpt",
+   "route": "ai_passage",
+   "needAdopt": 1,
+   "candidates": 7,
+   "recipeId": null,
+   "recipeSource": "difficulty_tip"
+  },
+  {
+   "skill": "text_structure_purpose",
+   "difficulty": "hard",
+   "questionType": "underlined_portion_function",
+   "genre": "personal_essay",
+   "route": "ai_passage",
+   "needAdopt": 1,
+   "candidates": 7,
+   "recipeId": null,
+   "recipeSource": "difficulty_tip"
+  },
+  {
+   "skill": "text_structure_purpose",
+   "difficulty": "hard",
+   "questionType": "underlined_portion_function",
+   "genre": "memoir",
+   "route": "ai_passage",
+   "needAdopt": 1,
+   "candidates": 7,
+   "recipeId": null,
+   "recipeSource": "difficulty_tip"
+  }
+ ],
+ "batches": [
+  {
+   "batchId": "lit40-easy-01",
+   "route": "excerpt",
+   "difficulty": "easy",
+   "candidates": 100,
+   "cells": [
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "short_story",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "novel_excerpt",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "poetry",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "personal_essay",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "memoir",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "letter",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "short_story",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "novel_excerpt",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "drama",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "personal_essay",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "memoir",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "letter",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "character_motivation",
+     "genre": "short_story",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "character_motivation",
+     "genre": "novel_excerpt",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "character_motivation",
+     "genre": "drama",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "character_motivation",
+     "genre": "personal_essay",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "character_motivation",
+     "genre": "memoir",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "tone_or_mood",
+     "genre": "short_story",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "tone_or_mood",
+     "genre": "novel_excerpt",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "tone_or_mood",
+     "genre": "poetry",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "tone_or_mood",
+     "genre": "personal_essay",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "tone_or_mood",
+     "genre": "memoir",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "relationship_between_characters",
+     "genre": "short_story",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "relationship_between_characters",
+     "genre": "novel_excerpt",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "relationship_between_characters",
+     "genre": "personal_essay",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "relationship_between_characters",
+     "genre": "memoir",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "symbolism",
+     "genre": "short_story",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "symbolism",
+     "genre": "novel_excerpt",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "symbolism",
+     "genre": "personal_essay",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "symbolism",
+     "genre": "memoir",
+     "count": 2
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "short_story",
+     "count": 2
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "novel_excerpt",
+     "count": 2
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "poetry",
+     "count": 2
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "personal_essay",
+     "count": 2
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "memoir",
+     "count": 2
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "fable_or_folktale_retelling",
+     "count": 2
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "short_story",
+     "count": 2
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "novel_excerpt",
+     "count": 2
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "poetry",
+     "count": 2
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "personal_essay",
+     "count": 2
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "memoir",
+     "count": 2
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "fable_or_folktale_retelling",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "short_story",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "novel_excerpt",
+     "count": 1
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "poetry",
+     "count": 1
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "drama",
+     "count": 1
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "personal_essay",
+     "count": 1
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "memoir",
+     "count": 1
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "letter",
+     "count": 1
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "text_structure",
+     "genre": "short_story",
+     "count": 1
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "text_structure",
+     "genre": "novel_excerpt",
+     "count": 1
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "text_structure",
+     "genre": "personal_essay",
+     "count": 1
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "text_structure",
+     "genre": "memoir",
+     "count": 1
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "underlined_portion_function",
+     "genre": "short_story",
+     "count": 1
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "underlined_portion_function",
+     "genre": "novel_excerpt",
+     "count": 1
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "underlined_portion_function",
+     "genre": "personal_essay",
+     "count": 1
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "underlined_portion_function",
+     "genre": "memoir",
+     "count": 1
+    }
+   ],
+   "estCostSyncUsd": 6.2,
+   "estCostBatchUsd": 3.1
+  },
+  {
+   "batchId": "lit40-easy-02",
+   "route": "excerpt",
+   "difficulty": "easy",
+   "candidates": 100,
+   "cells": [
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "novel_excerpt",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "poetry",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "drama",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "personal_essay",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "memoir",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "letter",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "text_structure",
+     "genre": "short_story",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "text_structure",
+     "genre": "novel_excerpt",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "text_structure",
+     "genre": "personal_essay",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "text_structure",
+     "genre": "memoir",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "underlined_portion_function",
+     "genre": "short_story",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "underlined_portion_function",
+     "genre": "novel_excerpt",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "underlined_portion_function",
+     "genre": "personal_essay",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "underlined_portion_function",
+     "genre": "memoir",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "short_story",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "novel_excerpt",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "poetry",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "personal_essay",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "memoir",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "letter",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "short_story",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "novel_excerpt",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "drama",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "personal_essay",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "memoir",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "letter",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "character_motivation",
+     "genre": "short_story",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "character_motivation",
+     "genre": "novel_excerpt",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "character_motivation",
+     "genre": "drama",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "character_motivation",
+     "genre": "personal_essay",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "character_motivation",
+     "genre": "memoir",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "tone_or_mood",
+     "genre": "short_story",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "tone_or_mood",
+     "genre": "novel_excerpt",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "tone_or_mood",
+     "genre": "poetry",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "tone_or_mood",
+     "genre": "personal_essay",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "tone_or_mood",
+     "genre": "memoir",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "relationship_between_characters",
+     "genre": "short_story",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "relationship_between_characters",
+     "genre": "novel_excerpt",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "relationship_between_characters",
+     "genre": "personal_essay",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "relationship_between_characters",
+     "genre": "memoir",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "symbolism",
+     "genre": "short_story",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "symbolism",
+     "genre": "novel_excerpt",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "symbolism",
+     "genre": "personal_essay",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "symbolism",
+     "genre": "memoir",
+     "count": 1
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "short_story",
+     "count": 1
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "novel_excerpt",
+     "count": 1
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "poetry",
+     "count": 1
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "personal_essay",
+     "count": 1
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "memoir",
+     "count": 1
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "fable_or_folktale_retelling",
+     "count": 1
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "short_story",
+     "count": 1
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "novel_excerpt",
+     "count": 1
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "poetry",
+     "count": 1
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "personal_essay",
+     "count": 1
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "memoir",
+     "count": 1
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "fable_or_folktale_retelling",
+     "count": 1
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "short_story",
+     "count": 1
+    }
+   ],
+   "estCostSyncUsd": 6.2,
+   "estCostBatchUsd": 3.1
+  },
+  {
+   "batchId": "lit40-easy-03",
+   "route": "excerpt",
+   "difficulty": "easy",
+   "candidates": 100,
+   "cells": [
+    {
+     "skill": "inferences",
+     "questionType": "symbolism",
+     "genre": "memoir",
+     "count": 1
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "short_story",
+     "count": 3
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "novel_excerpt",
+     "count": 3
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "poetry",
+     "count": 3
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "personal_essay",
+     "count": 3
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "memoir",
+     "count": 3
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "fable_or_folktale_retelling",
+     "count": 1
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "short_story",
+     "count": 3
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "novel_excerpt",
+     "count": 3
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "poetry",
+     "count": 3
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "personal_essay",
+     "count": 3
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "memoir",
+     "count": 3
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "fable_or_folktale_retelling",
+     "count": 1
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "short_story",
+     "count": 3
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "novel_excerpt",
+     "count": 3
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "poetry",
+     "count": 1
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "drama",
+     "count": 1
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "personal_essay",
+     "count": 3
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "memoir",
+     "count": 3
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "letter",
+     "count": 1
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "text_structure",
+     "genre": "short_story",
+     "count": 3
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "text_structure",
+     "genre": "novel_excerpt",
+     "count": 3
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "text_structure",
+     "genre": "personal_essay",
+     "count": 3
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "text_structure",
+     "genre": "memoir",
+     "count": 1
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "underlined_portion_function",
+     "genre": "short_story",
+     "count": 3
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "underlined_portion_function",
+     "genre": "novel_excerpt",
+     "count": 3
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "underlined_portion_function",
+     "genre": "personal_essay",
+     "count": 3
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "underlined_portion_function",
+     "genre": "memoir",
+     "count": 1
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "short_story",
+     "count": 3
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "novel_excerpt",
+     "count": 3
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "poetry",
+     "count": 3
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "personal_essay",
+     "count": 3
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "memoir",
+     "count": 3
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "short_story",
+     "count": 3
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "novel_excerpt",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "personal_essay",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "memoir",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "character_motivation",
+     "genre": "short_story",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "tone_or_mood",
+     "genre": "short_story",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "relationship_between_characters",
+     "genre": "short_story",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "symbolism",
+     "genre": "short_story",
+     "count": 2
+    }
+   ],
+   "estCostSyncUsd": 6.2,
+   "estCostBatchUsd": 3.1
+  },
+  {
+   "batchId": "lit40-easy-04",
+   "route": "excerpt",
+   "difficulty": "easy",
+   "candidates": 100,
+   "cells": [
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "novel_excerpt",
+     "count": 4
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "personal_essay",
+     "count": 1
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "memoir",
+     "count": 1
+    },
+    {
+     "skill": "inferences",
+     "questionType": "character_motivation",
+     "genre": "short_story",
+     "count": 1
+    },
+    {
+     "skill": "inferences",
+     "questionType": "tone_or_mood",
+     "genre": "short_story",
+     "count": 1
+    },
+    {
+     "skill": "inferences",
+     "questionType": "relationship_between_characters",
+     "genre": "short_story",
+     "count": 1
+    },
+    {
+     "skill": "inferences",
+     "questionType": "symbolism",
+     "genre": "short_story",
+     "count": 1
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "short_story",
+     "count": 6
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "novel_excerpt",
+     "count": 6
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "poetry",
+     "count": 4
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "personal_essay",
+     "count": 4
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "memoir",
+     "count": 4
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "short_story",
+     "count": 5
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "novel_excerpt",
+     "count": 5
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "poetry",
+     "count": 4
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "personal_essay",
+     "count": 4
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "memoir",
+     "count": 4
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "short_story",
+     "count": 5
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "novel_excerpt",
+     "count": 4
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "personal_essay",
+     "count": 1
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "memoir",
+     "count": 1
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "text_structure",
+     "genre": "short_story",
+     "count": 5
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "text_structure",
+     "genre": "novel_excerpt",
+     "count": 4
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "text_structure",
+     "genre": "personal_essay",
+     "count": 1
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "underlined_portion_function",
+     "genre": "short_story",
+     "count": 5
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "underlined_portion_function",
+     "genre": "novel_excerpt",
+     "count": 4
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "underlined_portion_function",
+     "genre": "personal_essay",
+     "count": 1
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "short_story",
+     "count": 5
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "novel_excerpt",
+     "count": 3
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "short_story",
+     "count": 5
+    }
+   ],
+   "estCostSyncUsd": 6.2,
+   "estCostBatchUsd": 3.1
+  },
+  {
+   "batchId": "lit40-easy-05",
+   "route": "excerpt",
+   "difficulty": "easy",
+   "candidates": 38,
+   "cells": [
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "short_story",
+     "count": 11
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "novel_excerpt",
+     "count": 5
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "short_story",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "text_structure",
+     "genre": "short_story",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "underlined_portion_function",
+     "genre": "short_story",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "short_story",
+     "count": 1
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "short_story",
+     "count": 1
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "short_story",
+     "count": 10
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "novel_excerpt",
+     "count": 4
+    }
+   ],
+   "estCostSyncUsd": 2.36,
+   "estCostBatchUsd": 1.18
+  },
+  {
+   "batchId": "lit40-medium-01",
+   "route": "ai_passage",
+   "difficulty": "medium",
+   "candidates": 100,
+   "cells": [
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "short_story",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "novel_excerpt",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "poetry",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "personal_essay",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "memoir",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "letter",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "diary",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "fable_or_folktale_retelling",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "short_story",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "novel_excerpt",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "drama",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "personal_essay",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "memoir",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "letter",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "fable_or_folktale_retelling",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "character_motivation",
+     "genre": "short_story",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "character_motivation",
+     "genre": "novel_excerpt",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "character_motivation",
+     "genre": "drama",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "character_motivation",
+     "genre": "personal_essay",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "character_motivation",
+     "genre": "memoir",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "character_motivation",
+     "genre": "letter",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "character_motivation",
+     "genre": "diary",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "character_motivation",
+     "genre": "fable_or_folktale_retelling",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "tone_or_mood",
+     "genre": "short_story",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "tone_or_mood",
+     "genre": "novel_excerpt",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "tone_or_mood",
+     "genre": "poetry",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "tone_or_mood",
+     "genre": "drama",
+     "count": 1
+    },
+    {
+     "skill": "inferences",
+     "questionType": "tone_or_mood",
+     "genre": "personal_essay",
+     "count": 1
+    },
+    {
+     "skill": "inferences",
+     "questionType": "tone_or_mood",
+     "genre": "memoir",
+     "count": 1
+    },
+    {
+     "skill": "inferences",
+     "questionType": "tone_or_mood",
+     "genre": "letter",
+     "count": 1
+    },
+    {
+     "skill": "inferences",
+     "questionType": "relationship_between_characters",
+     "genre": "short_story",
+     "count": 1
+    },
+    {
+     "skill": "inferences",
+     "questionType": "relationship_between_characters",
+     "genre": "novel_excerpt",
+     "count": 1
+    },
+    {
+     "skill": "inferences",
+     "questionType": "relationship_between_characters",
+     "genre": "drama",
+     "count": 1
+    },
+    {
+     "skill": "inferences",
+     "questionType": "relationship_between_characters",
+     "genre": "personal_essay",
+     "count": 1
+    },
+    {
+     "skill": "inferences",
+     "questionType": "relationship_between_characters",
+     "genre": "memoir",
+     "count": 1
+    },
+    {
+     "skill": "inferences",
+     "questionType": "relationship_between_characters",
+     "genre": "letter",
+     "count": 1
+    },
+    {
+     "skill": "inferences",
+     "questionType": "relationship_between_characters",
+     "genre": "fable_or_folktale_retelling",
+     "count": 1
+    },
+    {
+     "skill": "inferences",
+     "questionType": "symbolism",
+     "genre": "short_story",
+     "count": 1
+    },
+    {
+     "skill": "inferences",
+     "questionType": "symbolism",
+     "genre": "novel_excerpt",
+     "count": 1
+    },
+    {
+     "skill": "inferences",
+     "questionType": "symbolism",
+     "genre": "poetry",
+     "count": 1
+    },
+    {
+     "skill": "inferences",
+     "questionType": "symbolism",
+     "genre": "personal_essay",
+     "count": 1
+    },
+    {
+     "skill": "inferences",
+     "questionType": "symbolism",
+     "genre": "memoir",
+     "count": 1
+    },
+    {
+     "skill": "inferences",
+     "questionType": "symbolism",
+     "genre": "fable_or_folktale_retelling",
+     "count": 1
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "short_story",
+     "count": 1
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "novel_excerpt",
+     "count": 1
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "poetry",
+     "count": 1
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "personal_essay",
+     "count": 1
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "memoir",
+     "count": 1
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "fable_or_folktale_retelling",
+     "count": 1
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "short_story",
+     "count": 1
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "novel_excerpt",
+     "count": 1
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "poetry",
+     "count": 1
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "personal_essay",
+     "count": 1
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "memoir",
+     "count": 1
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "fable_or_folktale_retelling",
+     "count": 1
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "short_story",
+     "count": 1
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "novel_excerpt",
+     "count": 1
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "poetry",
+     "count": 1
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "drama",
+     "count": 1
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "personal_essay",
+     "count": 1
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "memoir",
+     "count": 1
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "letter",
+     "count": 1
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "diary",
+     "count": 1
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "fable_or_folktale_retelling",
+     "count": 1
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "text_structure",
+     "genre": "short_story",
+     "count": 1
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "text_structure",
+     "genre": "novel_excerpt",
+     "count": 1
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "text_structure",
+     "genre": "personal_essay",
+     "count": 1
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "text_structure",
+     "genre": "memoir",
+     "count": 1
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "text_structure",
+     "genre": "fable_or_folktale_retelling",
+     "count": 1
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "underlined_portion_function",
+     "genre": "short_story",
+     "count": 1
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "underlined_portion_function",
+     "genre": "novel_excerpt",
+     "count": 1
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "underlined_portion_function",
+     "genre": "personal_essay",
+     "count": 1
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "underlined_portion_function",
+     "genre": "memoir",
+     "count": 1
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "underlined_portion_function",
+     "genre": "fable_or_folktale_retelling",
+     "count": 1
+    }
+   ],
+   "estCostSyncUsd": 6.2,
+   "estCostBatchUsd": 3.1
+  },
+  {
+   "batchId": "lit40-medium-02",
+   "route": "ai_passage",
+   "difficulty": "medium",
+   "candidates": 100,
+   "cells": [
+    {
+     "skill": "inferences",
+     "questionType": "tone_or_mood",
+     "genre": "drama",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "tone_or_mood",
+     "genre": "personal_essay",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "tone_or_mood",
+     "genre": "memoir",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "tone_or_mood",
+     "genre": "letter",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "relationship_between_characters",
+     "genre": "short_story",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "relationship_between_characters",
+     "genre": "novel_excerpt",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "relationship_between_characters",
+     "genre": "drama",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "relationship_between_characters",
+     "genre": "personal_essay",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "relationship_between_characters",
+     "genre": "memoir",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "relationship_between_characters",
+     "genre": "letter",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "relationship_between_characters",
+     "genre": "fable_or_folktale_retelling",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "symbolism",
+     "genre": "short_story",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "symbolism",
+     "genre": "novel_excerpt",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "symbolism",
+     "genre": "poetry",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "symbolism",
+     "genre": "personal_essay",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "symbolism",
+     "genre": "memoir",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "symbolism",
+     "genre": "fable_or_folktale_retelling",
+     "count": 2
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "short_story",
+     "count": 2
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "novel_excerpt",
+     "count": 2
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "poetry",
+     "count": 2
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "personal_essay",
+     "count": 2
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "memoir",
+     "count": 2
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "fable_or_folktale_retelling",
+     "count": 2
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "short_story",
+     "count": 2
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "novel_excerpt",
+     "count": 2
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "poetry",
+     "count": 2
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "personal_essay",
+     "count": 1
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "memoir",
+     "count": 1
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "fable_or_folktale_retelling",
+     "count": 1
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "short_story",
+     "count": 1
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "novel_excerpt",
+     "count": 1
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "poetry",
+     "count": 1
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "drama",
+     "count": 1
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "personal_essay",
+     "count": 1
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "memoir",
+     "count": 1
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "letter",
+     "count": 1
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "diary",
+     "count": 1
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "fable_or_folktale_retelling",
+     "count": 1
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "text_structure",
+     "genre": "short_story",
+     "count": 1
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "text_structure",
+     "genre": "novel_excerpt",
+     "count": 1
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "text_structure",
+     "genre": "personal_essay",
+     "count": 1
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "text_structure",
+     "genre": "memoir",
+     "count": 1
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "text_structure",
+     "genre": "fable_or_folktale_retelling",
+     "count": 1
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "underlined_portion_function",
+     "genre": "short_story",
+     "count": 1
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "underlined_portion_function",
+     "genre": "novel_excerpt",
+     "count": 1
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "underlined_portion_function",
+     "genre": "personal_essay",
+     "count": 1
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "underlined_portion_function",
+     "genre": "memoir",
+     "count": 1
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "underlined_portion_function",
+     "genre": "fable_or_folktale_retelling",
+     "count": 1
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "short_story",
+     "count": 1
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "novel_excerpt",
+     "count": 1
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "poetry",
+     "count": 1
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "personal_essay",
+     "count": 1
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "memoir",
+     "count": 1
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "letter",
+     "count": 1
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "diary",
+     "count": 1
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "fable_or_folktale_retelling",
+     "count": 1
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "short_story",
+     "count": 1
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "novel_excerpt",
+     "count": 1
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "drama",
+     "count": 1
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "personal_essay",
+     "count": 1
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "memoir",
+     "count": 1
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "letter",
+     "count": 1
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "fable_or_folktale_retelling",
+     "count": 1
+    },
+    {
+     "skill": "inferences",
+     "questionType": "character_motivation",
+     "genre": "short_story",
+     "count": 1
+    },
+    {
+     "skill": "inferences",
+     "questionType": "character_motivation",
+     "genre": "novel_excerpt",
+     "count": 1
+    },
+    {
+     "skill": "inferences",
+     "questionType": "character_motivation",
+     "genre": "drama",
+     "count": 1
+    },
+    {
+     "skill": "inferences",
+     "questionType": "character_motivation",
+     "genre": "personal_essay",
+     "count": 1
+    },
+    {
+     "skill": "inferences",
+     "questionType": "character_motivation",
+     "genre": "memoir",
+     "count": 1
+    },
+    {
+     "skill": "inferences",
+     "questionType": "character_motivation",
+     "genre": "letter",
+     "count": 1
+    },
+    {
+     "skill": "inferences",
+     "questionType": "character_motivation",
+     "genre": "diary",
+     "count": 1
+    },
+    {
+     "skill": "inferences",
+     "questionType": "character_motivation",
+     "genre": "fable_or_folktale_retelling",
+     "count": 1
+    },
+    {
+     "skill": "inferences",
+     "questionType": "tone_or_mood",
+     "genre": "short_story",
+     "count": 1
+    },
+    {
+     "skill": "inferences",
+     "questionType": "tone_or_mood",
+     "genre": "novel_excerpt",
+     "count": 1
+    },
+    {
+     "skill": "inferences",
+     "questionType": "tone_or_mood",
+     "genre": "poetry",
+     "count": 1
+    }
+   ],
+   "estCostSyncUsd": 6.2,
+   "estCostBatchUsd": 3.1
+  },
+  {
+   "batchId": "lit40-medium-03",
+   "route": "ai_passage",
+   "difficulty": "medium",
+   "candidates": 100,
+   "cells": [
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "personal_essay",
+     "count": 2
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "memoir",
+     "count": 2
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "fable_or_folktale_retelling",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "short_story",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "novel_excerpt",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "poetry",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "drama",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "personal_essay",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "memoir",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "letter",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "diary",
+     "count": 1
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "fable_or_folktale_retelling",
+     "count": 1
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "text_structure",
+     "genre": "short_story",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "text_structure",
+     "genre": "novel_excerpt",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "text_structure",
+     "genre": "personal_essay",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "text_structure",
+     "genre": "memoir",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "text_structure",
+     "genre": "fable_or_folktale_retelling",
+     "count": 1
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "underlined_portion_function",
+     "genre": "short_story",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "underlined_portion_function",
+     "genre": "novel_excerpt",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "underlined_portion_function",
+     "genre": "personal_essay",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "underlined_portion_function",
+     "genre": "memoir",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "underlined_portion_function",
+     "genre": "fable_or_folktale_retelling",
+     "count": 1
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "short_story",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "novel_excerpt",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "poetry",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "personal_essay",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "memoir",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "letter",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "short_story",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "novel_excerpt",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "drama",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "personal_essay",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "memoir",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "letter",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "character_motivation",
+     "genre": "short_story",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "character_motivation",
+     "genre": "novel_excerpt",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "character_motivation",
+     "genre": "personal_essay",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "character_motivation",
+     "genre": "memoir",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "tone_or_mood",
+     "genre": "short_story",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "tone_or_mood",
+     "genre": "novel_excerpt",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "tone_or_mood",
+     "genre": "poetry",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "tone_or_mood",
+     "genre": "personal_essay",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "tone_or_mood",
+     "genre": "memoir",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "relationship_between_characters",
+     "genre": "short_story",
+     "count": 1
+    },
+    {
+     "skill": "inferences",
+     "questionType": "relationship_between_characters",
+     "genre": "novel_excerpt",
+     "count": 1
+    },
+    {
+     "skill": "inferences",
+     "questionType": "relationship_between_characters",
+     "genre": "personal_essay",
+     "count": 1
+    },
+    {
+     "skill": "inferences",
+     "questionType": "relationship_between_characters",
+     "genre": "memoir",
+     "count": 1
+    },
+    {
+     "skill": "inferences",
+     "questionType": "symbolism",
+     "genre": "short_story",
+     "count": 1
+    },
+    {
+     "skill": "inferences",
+     "questionType": "symbolism",
+     "genre": "novel_excerpt",
+     "count": 1
+    },
+    {
+     "skill": "inferences",
+     "questionType": "symbolism",
+     "genre": "poetry",
+     "count": 1
+    },
+    {
+     "skill": "inferences",
+     "questionType": "symbolism",
+     "genre": "personal_essay",
+     "count": 1
+    },
+    {
+     "skill": "inferences",
+     "questionType": "symbolism",
+     "genre": "memoir",
+     "count": 1
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "short_story",
+     "count": 1
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "novel_excerpt",
+     "count": 1
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "poetry",
+     "count": 1
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "personal_essay",
+     "count": 1
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "memoir",
+     "count": 1
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "fable_or_folktale_retelling",
+     "count": 1
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "short_story",
+     "count": 1
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "novel_excerpt",
+     "count": 1
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "poetry",
+     "count": 1
+    }
+   ],
+   "estCostSyncUsd": 6.2,
+   "estCostBatchUsd": 3.1
+  },
+  {
+   "batchId": "lit40-medium-04",
+   "route": "ai_passage",
+   "difficulty": "medium",
+   "candidates": 100,
+   "cells": [
+    {
+     "skill": "inferences",
+     "questionType": "relationship_between_characters",
+     "genre": "short_story",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "relationship_between_characters",
+     "genre": "novel_excerpt",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "relationship_between_characters",
+     "genre": "personal_essay",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "relationship_between_characters",
+     "genre": "memoir",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "symbolism",
+     "genre": "short_story",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "symbolism",
+     "genre": "novel_excerpt",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "symbolism",
+     "genre": "poetry",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "symbolism",
+     "genre": "personal_essay",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "symbolism",
+     "genre": "memoir",
+     "count": 2
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "short_story",
+     "count": 2
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "novel_excerpt",
+     "count": 2
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "poetry",
+     "count": 2
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "personal_essay",
+     "count": 2
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "memoir",
+     "count": 2
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "fable_or_folktale_retelling",
+     "count": 2
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "short_story",
+     "count": 2
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "novel_excerpt",
+     "count": 2
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "poetry",
+     "count": 2
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "personal_essay",
+     "count": 2
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "memoir",
+     "count": 2
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "fable_or_folktale_retelling",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "short_story",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "novel_excerpt",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "poetry",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "drama",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "personal_essay",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "memoir",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "letter",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "text_structure",
+     "genre": "short_story",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "text_structure",
+     "genre": "novel_excerpt",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "text_structure",
+     "genre": "personal_essay",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "text_structure",
+     "genre": "memoir",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "underlined_portion_function",
+     "genre": "short_story",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "underlined_portion_function",
+     "genre": "novel_excerpt",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "underlined_portion_function",
+     "genre": "personal_essay",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "underlined_portion_function",
+     "genre": "memoir",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "short_story",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "novel_excerpt",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "poetry",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "personal_essay",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "memoir",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "letter",
+     "count": 1
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "short_story",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "novel_excerpt",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "drama",
+     "count": 1
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "personal_essay",
+     "count": 1
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "memoir",
+     "count": 1
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "letter",
+     "count": 1
+    },
+    {
+     "skill": "inferences",
+     "questionType": "character_motivation",
+     "genre": "short_story",
+     "count": 1
+    },
+    {
+     "skill": "inferences",
+     "questionType": "character_motivation",
+     "genre": "novel_excerpt",
+     "count": 1
+    },
+    {
+     "skill": "inferences",
+     "questionType": "character_motivation",
+     "genre": "personal_essay",
+     "count": 1
+    },
+    {
+     "skill": "inferences",
+     "questionType": "character_motivation",
+     "genre": "memoir",
+     "count": 1
+    },
+    {
+     "skill": "inferences",
+     "questionType": "tone_or_mood",
+     "genre": "short_story",
+     "count": 1
+    },
+    {
+     "skill": "inferences",
+     "questionType": "tone_or_mood",
+     "genre": "novel_excerpt",
+     "count": 1
+    },
+    {
+     "skill": "inferences",
+     "questionType": "tone_or_mood",
+     "genre": "poetry",
+     "count": 1
+    },
+    {
+     "skill": "inferences",
+     "questionType": "tone_or_mood",
+     "genre": "personal_essay",
+     "count": 1
+    },
+    {
+     "skill": "inferences",
+     "questionType": "tone_or_mood",
+     "genre": "memoir",
+     "count": 1
+    }
+   ],
+   "estCostSyncUsd": 6.2,
+   "estCostBatchUsd": 3.1
+  },
+  {
+   "batchId": "lit40-medium-05",
+   "route": "ai_passage",
+   "difficulty": "medium",
+   "candidates": 100,
+   "cells": [
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "personal_essay",
+     "count": 3
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "memoir",
+     "count": 3
+    },
+    {
+     "skill": "inferences",
+     "questionType": "character_motivation",
+     "genre": "short_story",
+     "count": 3
+    },
+    {
+     "skill": "inferences",
+     "questionType": "character_motivation",
+     "genre": "novel_excerpt",
+     "count": 3
+    },
+    {
+     "skill": "inferences",
+     "questionType": "character_motivation",
+     "genre": "personal_essay",
+     "count": 3
+    },
+    {
+     "skill": "inferences",
+     "questionType": "tone_or_mood",
+     "genre": "short_story",
+     "count": 3
+    },
+    {
+     "skill": "inferences",
+     "questionType": "tone_or_mood",
+     "genre": "novel_excerpt",
+     "count": 3
+    },
+    {
+     "skill": "inferences",
+     "questionType": "relationship_between_characters",
+     "genre": "short_story",
+     "count": 3
+    },
+    {
+     "skill": "inferences",
+     "questionType": "relationship_between_characters",
+     "genre": "novel_excerpt",
+     "count": 3
+    },
+    {
+     "skill": "inferences",
+     "questionType": "symbolism",
+     "genre": "short_story",
+     "count": 3
+    },
+    {
+     "skill": "inferences",
+     "questionType": "symbolism",
+     "genre": "novel_excerpt",
+     "count": 3
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "short_story",
+     "count": 3
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "novel_excerpt",
+     "count": 3
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "poetry",
+     "count": 3
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "personal_essay",
+     "count": 3
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "memoir",
+     "count": 3
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "short_story",
+     "count": 3
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "novel_excerpt",
+     "count": 3
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "poetry",
+     "count": 2
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "personal_essay",
+     "count": 2
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "memoir",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "short_story",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "novel_excerpt",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "poetry",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "personal_essay",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "memoir",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "text_structure",
+     "genre": "short_story",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "text_structure",
+     "genre": "novel_excerpt",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "text_structure",
+     "genre": "personal_essay",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "text_structure",
+     "genre": "memoir",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "underlined_portion_function",
+     "genre": "short_story",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "underlined_portion_function",
+     "genre": "novel_excerpt",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "underlined_portion_function",
+     "genre": "personal_essay",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "underlined_portion_function",
+     "genre": "memoir",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "short_story",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "novel_excerpt",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "poetry",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "personal_essay",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "memoir",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "short_story",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "novel_excerpt",
+     "count": 2
+    }
+   ],
+   "estCostSyncUsd": 6.2,
+   "estCostBatchUsd": 3.1
+  },
+  {
+   "batchId": "lit40-medium-06",
+   "route": "ai_passage",
+   "difficulty": "medium",
+   "candidates": 100,
+   "cells": [
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "poetry",
+     "count": 3
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "personal_essay",
+     "count": 3
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "memoir",
+     "count": 3
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "short_story",
+     "count": 3
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "novel_excerpt",
+     "count": 3
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "poetry",
+     "count": 3
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "personal_essay",
+     "count": 3
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "memoir",
+     "count": 3
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "text_structure",
+     "genre": "short_story",
+     "count": 3
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "text_structure",
+     "genre": "novel_excerpt",
+     "count": 3
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "text_structure",
+     "genre": "personal_essay",
+     "count": 3
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "text_structure",
+     "genre": "memoir",
+     "count": 3
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "underlined_portion_function",
+     "genre": "short_story",
+     "count": 3
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "underlined_portion_function",
+     "genre": "novel_excerpt",
+     "count": 3
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "underlined_portion_function",
+     "genre": "personal_essay",
+     "count": 3
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "underlined_portion_function",
+     "genre": "memoir",
+     "count": 3
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "short_story",
+     "count": 3
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "novel_excerpt",
+     "count": 3
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "poetry",
+     "count": 3
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "personal_essay",
+     "count": 3
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "memoir",
+     "count": 3
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "short_story",
+     "count": 3
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "novel_excerpt",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "personal_essay",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "memoir",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "character_motivation",
+     "genre": "short_story",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "character_motivation",
+     "genre": "novel_excerpt",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "tone_or_mood",
+     "genre": "short_story",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "relationship_between_characters",
+     "genre": "short_story",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "relationship_between_characters",
+     "genre": "novel_excerpt",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "symbolism",
+     "genre": "short_story",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "symbolism",
+     "genre": "novel_excerpt",
+     "count": 2
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "short_story",
+     "count": 2
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "novel_excerpt",
+     "count": 2
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "poetry",
+     "count": 2
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "personal_essay",
+     "count": 2
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "memoir",
+     "count": 2
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "short_story",
+     "count": 2
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "novel_excerpt",
+     "count": 2
+    }
+   ],
+   "estCostSyncUsd": 6.2,
+   "estCostBatchUsd": 3.1
+  },
+  {
+   "batchId": "lit40-medium-07",
+   "route": "ai_passage",
+   "difficulty": "medium",
+   "candidates": 100,
+   "cells": [
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "novel_excerpt",
+     "count": 3
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "personal_essay",
+     "count": 3
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "memoir",
+     "count": 3
+    },
+    {
+     "skill": "inferences",
+     "questionType": "character_motivation",
+     "genre": "short_story",
+     "count": 3
+    },
+    {
+     "skill": "inferences",
+     "questionType": "character_motivation",
+     "genre": "novel_excerpt",
+     "count": 1
+    },
+    {
+     "skill": "inferences",
+     "questionType": "tone_or_mood",
+     "genre": "short_story",
+     "count": 3
+    },
+    {
+     "skill": "inferences",
+     "questionType": "relationship_between_characters",
+     "genre": "short_story",
+     "count": 3
+    },
+    {
+     "skill": "inferences",
+     "questionType": "relationship_between_characters",
+     "genre": "novel_excerpt",
+     "count": 1
+    },
+    {
+     "skill": "inferences",
+     "questionType": "symbolism",
+     "genre": "short_story",
+     "count": 3
+    },
+    {
+     "skill": "inferences",
+     "questionType": "symbolism",
+     "genre": "novel_excerpt",
+     "count": 1
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "short_story",
+     "count": 3
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "novel_excerpt",
+     "count": 3
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "poetry",
+     "count": 3
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "personal_essay",
+     "count": 3
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "memoir",
+     "count": 3
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "short_story",
+     "count": 3
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "novel_excerpt",
+     "count": 3
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "poetry",
+     "count": 3
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "personal_essay",
+     "count": 3
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "memoir",
+     "count": 3
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "short_story",
+     "count": 3
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "novel_excerpt",
+     "count": 3
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "poetry",
+     "count": 1
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "personal_essay",
+     "count": 3
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "memoir",
+     "count": 3
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "text_structure",
+     "genre": "short_story",
+     "count": 3
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "text_structure",
+     "genre": "novel_excerpt",
+     "count": 3
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "text_structure",
+     "genre": "personal_essay",
+     "count": 3
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "text_structure",
+     "genre": "memoir",
+     "count": 3
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "underlined_portion_function",
+     "genre": "short_story",
+     "count": 3
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "underlined_portion_function",
+     "genre": "novel_excerpt",
+     "count": 3
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "underlined_portion_function",
+     "genre": "personal_essay",
+     "count": 3
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "underlined_portion_function",
+     "genre": "memoir",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "short_story",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "novel_excerpt",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "personal_essay",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "memoir",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "short_story",
+     "count": 2
+    }
+   ],
+   "estCostSyncUsd": 6.2,
+   "estCostBatchUsd": 3.1
+  },
+  {
+   "batchId": "lit40-medium-08",
+   "route": "ai_passage",
+   "difficulty": "medium",
+   "candidates": 100,
+   "cells": [
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "underlined_portion_function",
+     "genre": "memoir",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "short_story",
+     "count": 4
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "novel_excerpt",
+     "count": 4
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "personal_essay",
+     "count": 4
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "memoir",
+     "count": 1
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "short_story",
+     "count": 4
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "novel_excerpt",
+     "count": 4
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "personal_essay",
+     "count": 4
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "memoir",
+     "count": 4
+    },
+    {
+     "skill": "inferences",
+     "questionType": "character_motivation",
+     "genre": "short_story",
+     "count": 4
+    },
+    {
+     "skill": "inferences",
+     "questionType": "tone_or_mood",
+     "genre": "short_story",
+     "count": 1
+    },
+    {
+     "skill": "inferences",
+     "questionType": "relationship_between_characters",
+     "genre": "short_story",
+     "count": 1
+    },
+    {
+     "skill": "inferences",
+     "questionType": "symbolism",
+     "genre": "short_story",
+     "count": 1
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "short_story",
+     "count": 4
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "novel_excerpt",
+     "count": 4
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "poetry",
+     "count": 4
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "personal_essay",
+     "count": 4
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "memoir",
+     "count": 4
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "short_story",
+     "count": 4
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "novel_excerpt",
+     "count": 4
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "poetry",
+     "count": 3
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "personal_essay",
+     "count": 3
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "memoir",
+     "count": 3
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "short_story",
+     "count": 3
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "novel_excerpt",
+     "count": 3
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "personal_essay",
+     "count": 3
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "memoir",
+     "count": 1
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "text_structure",
+     "genre": "short_story",
+     "count": 3
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "text_structure",
+     "genre": "novel_excerpt",
+     "count": 3
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "text_structure",
+     "genre": "personal_essay",
+     "count": 1
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "text_structure",
+     "genre": "memoir",
+     "count": 1
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "underlined_portion_function",
+     "genre": "short_story",
+     "count": 3
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "underlined_portion_function",
+     "genre": "novel_excerpt",
+     "count": 3
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "underlined_portion_function",
+     "genre": "personal_essay",
+     "count": 1
+    }
+   ],
+   "estCostSyncUsd": 6.2,
+   "estCostBatchUsd": 3.1
+  },
+  {
+   "batchId": "lit40-medium-09",
+   "route": "ai_passage",
+   "difficulty": "medium",
+   "candidates": 100,
+   "cells": [
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "poetry",
+     "count": 3
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "personal_essay",
+     "count": 6
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "memoir",
+     "count": 6
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "short_story",
+     "count": 6
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "novel_excerpt",
+     "count": 6
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "personal_essay",
+     "count": 1
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "text_structure",
+     "genre": "short_story",
+     "count": 5
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "text_structure",
+     "genre": "novel_excerpt",
+     "count": 5
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "underlined_portion_function",
+     "genre": "short_story",
+     "count": 5
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "underlined_portion_function",
+     "genre": "novel_excerpt",
+     "count": 5
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "short_story",
+     "count": 5
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "novel_excerpt",
+     "count": 5
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "short_story",
+     "count": 5
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "novel_excerpt",
+     "count": 5
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "short_story",
+     "count": 5
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "novel_excerpt",
+     "count": 5
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "poetry",
+     "count": 2
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "personal_essay",
+     "count": 5
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "memoir",
+     "count": 5
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "short_story",
+     "count": 5
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "novel_excerpt",
+     "count": 5
+    }
+   ],
+   "estCostSyncUsd": 6.2,
+   "estCostBatchUsd": 3.1
+  },
+  {
+   "batchId": "lit40-medium-10",
+   "route": "ai_passage",
+   "difficulty": "medium",
+   "candidates": 100,
+   "cells": [
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "text_structure",
+     "genre": "short_story",
+     "count": 9
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "text_structure",
+     "genre": "novel_excerpt",
+     "count": 1
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "underlined_portion_function",
+     "genre": "short_story",
+     "count": 9
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "underlined_portion_function",
+     "genre": "novel_excerpt",
+     "count": 1
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "short_story",
+     "count": 8
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "novel_excerpt",
+     "count": 3
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "short_story",
+     "count": 8
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "novel_excerpt",
+     "count": 3
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "short_story",
+     "count": 8
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "novel_excerpt",
+     "count": 8
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "personal_essay",
+     "count": 6
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "memoir",
+     "count": 3
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "short_story",
+     "count": 8
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "novel_excerpt",
+     "count": 8
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "personal_essay",
+     "count": 6
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "memoir",
+     "count": 3
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "short_story",
+     "count": 8
+    }
+   ],
+   "estCostSyncUsd": 6.2,
+   "estCostBatchUsd": 3.1
+  },
+  {
+   "batchId": "lit40-medium-11",
+   "route": "ai_passage",
+   "difficulty": "medium",
+   "candidates": 100,
+   "cells": [
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "short_story",
+     "count": 7
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "short_story",
+     "count": 9
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "short_story",
+     "count": 27
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "novel_excerpt",
+     "count": 12
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "short_story",
+     "count": 27
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "novel_excerpt",
+     "count": 12
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "short_story",
+     "count": 4
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "text_structure",
+     "genre": "short_story",
+     "count": 1
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "underlined_portion_function",
+     "genre": "short_story",
+     "count": 1
+    }
+   ],
+   "estCostSyncUsd": 6.2,
+   "estCostBatchUsd": 3.1
+  },
+  {
+   "batchId": "lit40-medium-12",
+   "route": "ai_passage",
+   "difficulty": "medium",
+   "candidates": 10,
+   "cells": [
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "short_story",
+     "count": 5
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "short_story",
+     "count": 5
+    }
+   ],
+   "estCostSyncUsd": 0.62,
+   "estCostBatchUsd": 0.31
+  },
+  {
+   "batchId": "lit40-hard-01",
+   "route": "ai_passage",
+   "difficulty": "hard",
+   "candidates": 100,
+   "cells": [
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "short_story",
+     "count": 3
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "novel_excerpt",
+     "count": 3
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "poetry",
+     "count": 3
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "personal_essay",
+     "count": 3
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "memoir",
+     "count": 3
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "short_story",
+     "count": 3
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "novel_excerpt",
+     "count": 3
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "personal_essay",
+     "count": 3
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "memoir",
+     "count": 3
+    },
+    {
+     "skill": "inferences",
+     "questionType": "character_motivation",
+     "genre": "short_story",
+     "count": 3
+    },
+    {
+     "skill": "inferences",
+     "questionType": "character_motivation",
+     "genre": "novel_excerpt",
+     "count": 3
+    },
+    {
+     "skill": "inferences",
+     "questionType": "character_motivation",
+     "genre": "personal_essay",
+     "count": 3
+    },
+    {
+     "skill": "inferences",
+     "questionType": "tone_or_mood",
+     "genre": "short_story",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "tone_or_mood",
+     "genre": "novel_excerpt",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "tone_or_mood",
+     "genre": "personal_essay",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "relationship_between_characters",
+     "genre": "short_story",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "relationship_between_characters",
+     "genre": "novel_excerpt",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "relationship_between_characters",
+     "genre": "personal_essay",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "symbolism",
+     "genre": "short_story",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "symbolism",
+     "genre": "novel_excerpt",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "symbolism",
+     "genre": "personal_essay",
+     "count": 2
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "short_story",
+     "count": 2
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "novel_excerpt",
+     "count": 2
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "poetry",
+     "count": 2
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "personal_essay",
+     "count": 2
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "memoir",
+     "count": 2
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "short_story",
+     "count": 2
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "novel_excerpt",
+     "count": 2
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "poetry",
+     "count": 2
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "personal_essay",
+     "count": 2
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "memoir",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "short_story",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "novel_excerpt",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "poetry",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "personal_essay",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "memoir",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "text_structure",
+     "genre": "short_story",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "text_structure",
+     "genre": "novel_excerpt",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "text_structure",
+     "genre": "personal_essay",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "text_structure",
+     "genre": "memoir",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "underlined_portion_function",
+     "genre": "short_story",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "underlined_portion_function",
+     "genre": "novel_excerpt",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "underlined_portion_function",
+     "genre": "personal_essay",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "underlined_portion_function",
+     "genre": "memoir",
+     "count": 2
+    }
+   ],
+   "estCostSyncUsd": 12.32,
+   "estCostBatchUsd": 6.16
+  },
+  {
+   "batchId": "lit40-hard-02",
+   "route": "ai_passage",
+   "difficulty": "hard",
+   "candidates": 100,
+   "cells": [
+    {
+     "skill": "inferences",
+     "questionType": "tone_or_mood",
+     "genre": "short_story",
+     "count": 3
+    },
+    {
+     "skill": "inferences",
+     "questionType": "tone_or_mood",
+     "genre": "novel_excerpt",
+     "count": 3
+    },
+    {
+     "skill": "inferences",
+     "questionType": "tone_or_mood",
+     "genre": "personal_essay",
+     "count": 3
+    },
+    {
+     "skill": "inferences",
+     "questionType": "relationship_between_characters",
+     "genre": "short_story",
+     "count": 3
+    },
+    {
+     "skill": "inferences",
+     "questionType": "relationship_between_characters",
+     "genre": "novel_excerpt",
+     "count": 3
+    },
+    {
+     "skill": "inferences",
+     "questionType": "relationship_between_characters",
+     "genre": "personal_essay",
+     "count": 3
+    },
+    {
+     "skill": "inferences",
+     "questionType": "symbolism",
+     "genre": "short_story",
+     "count": 3
+    },
+    {
+     "skill": "inferences",
+     "questionType": "symbolism",
+     "genre": "novel_excerpt",
+     "count": 3
+    },
+    {
+     "skill": "inferences",
+     "questionType": "symbolism",
+     "genre": "personal_essay",
+     "count": 3
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "short_story",
+     "count": 3
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "novel_excerpt",
+     "count": 3
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "poetry",
+     "count": 3
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "personal_essay",
+     "count": 2
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "memoir",
+     "count": 2
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "short_story",
+     "count": 2
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "novel_excerpt",
+     "count": 2
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "poetry",
+     "count": 2
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "personal_essay",
+     "count": 2
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "memoir",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "short_story",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "novel_excerpt",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "poetry",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "personal_essay",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "memoir",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "text_structure",
+     "genre": "short_story",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "text_structure",
+     "genre": "novel_excerpt",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "text_structure",
+     "genre": "personal_essay",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "text_structure",
+     "genre": "memoir",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "underlined_portion_function",
+     "genre": "short_story",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "underlined_portion_function",
+     "genre": "novel_excerpt",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "underlined_portion_function",
+     "genre": "personal_essay",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "underlined_portion_function",
+     "genre": "memoir",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "short_story",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "novel_excerpt",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "poetry",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "personal_essay",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "memoir",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "short_story",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "novel_excerpt",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "personal_essay",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "memoir",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "character_motivation",
+     "genre": "short_story",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "character_motivation",
+     "genre": "novel_excerpt",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "character_motivation",
+     "genre": "personal_essay",
+     "count": 2
+    }
+   ],
+   "estCostSyncUsd": 12.32,
+   "estCostBatchUsd": 6.16
+  },
+  {
+   "batchId": "lit40-hard-03",
+   "route": "ai_passage",
+   "difficulty": "hard",
+   "candidates": 100,
+   "cells": [
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "personal_essay",
+     "count": 3
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "memoir",
+     "count": 3
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "short_story",
+     "count": 3
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "novel_excerpt",
+     "count": 3
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "poetry",
+     "count": 3
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "personal_essay",
+     "count": 3
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "memoir",
+     "count": 3
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "short_story",
+     "count": 3
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "novel_excerpt",
+     "count": 3
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "poetry",
+     "count": 3
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "personal_essay",
+     "count": 3
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "memoir",
+     "count": 3
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "text_structure",
+     "genre": "short_story",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "text_structure",
+     "genre": "novel_excerpt",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "text_structure",
+     "genre": "personal_essay",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "text_structure",
+     "genre": "memoir",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "underlined_portion_function",
+     "genre": "short_story",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "underlined_portion_function",
+     "genre": "novel_excerpt",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "underlined_portion_function",
+     "genre": "personal_essay",
+     "count": 2
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "underlined_portion_function",
+     "genre": "memoir",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "short_story",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "novel_excerpt",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "poetry",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "personal_essay",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "memoir",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "short_story",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "novel_excerpt",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "personal_essay",
+     "count": 2
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "memoir",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "character_motivation",
+     "genre": "short_story",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "character_motivation",
+     "genre": "novel_excerpt",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "character_motivation",
+     "genre": "personal_essay",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "tone_or_mood",
+     "genre": "short_story",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "tone_or_mood",
+     "genre": "novel_excerpt",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "tone_or_mood",
+     "genre": "personal_essay",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "relationship_between_characters",
+     "genre": "short_story",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "relationship_between_characters",
+     "genre": "novel_excerpt",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "relationship_between_characters",
+     "genre": "personal_essay",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "symbolism",
+     "genre": "short_story",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "symbolism",
+     "genre": "novel_excerpt",
+     "count": 2
+    },
+    {
+     "skill": "inferences",
+     "questionType": "symbolism",
+     "genre": "personal_essay",
+     "count": 2
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "short_story",
+     "count": 2
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "novel_excerpt",
+     "count": 2
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "poetry",
+     "count": 2
+    }
+   ],
+   "estCostSyncUsd": 12.32,
+   "estCostBatchUsd": 6.16
+  },
+  {
+   "batchId": "lit40-hard-04",
+   "route": "ai_passage",
+   "difficulty": "hard",
+   "candidates": 100,
+   "cells": [
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "text_structure",
+     "genre": "short_story",
+     "count": 7
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "text_structure",
+     "genre": "novel_excerpt",
+     "count": 1
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "text_structure",
+     "genre": "personal_essay",
+     "count": 1
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "text_structure",
+     "genre": "memoir",
+     "count": 1
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "underlined_portion_function",
+     "genre": "short_story",
+     "count": 7
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "underlined_portion_function",
+     "genre": "novel_excerpt",
+     "count": 1
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "underlined_portion_function",
+     "genre": "personal_essay",
+     "count": 1
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "underlined_portion_function",
+     "genre": "memoir",
+     "count": 1
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "short_story",
+     "count": 7
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "narrator_attitude",
+     "genre": "novel_excerpt",
+     "count": 7
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "short_story",
+     "count": 6
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "novel_excerpt",
+     "count": 6
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "short_story",
+     "count": 6
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "novel_excerpt",
+     "count": 6
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "personal_essay",
+     "count": 6
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "memoir",
+     "count": 6
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "short_story",
+     "count": 6
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "novel_excerpt",
+     "count": 6
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "personal_essay",
+     "count": 6
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "short_story",
+     "count": 6
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "novel_excerpt",
+     "count": 6
+    }
+   ],
+   "estCostSyncUsd": 12.32,
+   "estCostBatchUsd": 6.16
+  },
+  {
+   "batchId": "lit40-hard-05",
+   "route": "ai_passage",
+   "difficulty": "hard",
+   "candidates": 57,
+   "cells": [
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "short_story",
+     "count": 7
+    },
+    {
+     "skill": "central_ideas_details",
+     "questionType": "main_idea_or_purpose",
+     "genre": "novel_excerpt",
+     "count": 1
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "short_story",
+     "count": 14
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "novel_excerpt",
+     "count": 7
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "personal_essay",
+     "count": 1
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "figurative_language",
+     "genre": "memoir",
+     "count": 1
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "short_story",
+     "count": 14
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "novel_excerpt",
+     "count": 7
+    },
+    {
+     "skill": "words_in_context",
+     "questionType": "word_in_context",
+     "genre": "personal_essay",
+     "count": 1
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "short_story",
+     "count": 1
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "tone_shift",
+     "genre": "novel_excerpt",
+     "count": 1
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "text_structure",
+     "genre": "short_story",
+     "count": 1
+    },
+    {
+     "skill": "text_structure_purpose",
+     "questionType": "underlined_portion_function",
+     "genre": "short_story",
+     "count": 1
+    }
+   ],
+   "estCostSyncUsd": 7.02,
+   "estCostBatchUsd": 3.51
+  }
+ ],
+ "totals": {
+  "needAdopt": 572,
+  "needAdoptByDifficulty": {
+   "easy": 127,
+   "medium": 379,
+   "hard": 66
+  },
+  "candidates": 2005,
+  "candidatesByRoute": {
+   "excerpt": 438,
+   "ai_passage": 1567
+  },
+  "candidatesByDifficulty": {
+   "easy": 438,
+   "medium": 1110,
+   "hard": 457
+  },
+  "batches": 22,
+  "estCostSyncUsd": 152.28,
+  "estCostBatchUsd": 76.14
+ },
+ "scenarioV3HardRate": {
+  "hardAdoptRate": 0.35,
+  "totals": {
+   "needAdopt": 572,
+   "needAdoptByDifficulty": {
+    "easy": 127,
+    "medium": 379,
+    "hard": 66
+   },
+   "candidates": 1746,
+   "candidatesByRoute": {
+    "excerpt": 438,
+    "ai_passage": 1308
+   },
+   "candidatesByDifficulty": {
+    "easy": 438,
+    "medium": 1110,
+    "hard": 198
+   },
+   "batches": 19,
+   "estCostSyncUsd": 120.37,
+   "estCostBatchUsd": 60.19
+  }
+ }
+}

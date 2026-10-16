@@ -1,0 +1,45 @@
+{
+ "runs": [
+  "chem-s2-m-c"
+ ],
+ "rows": 24,
+ "passed": 17,
+ "rejected": 7,
+ "passRate": 0.708,
+ "singles": {
+  "candidates": 24
+ },
+ "unitsPassed": {
+  "1": 2,
+  "2": 4,
+  "3": 3,
+  "6": 3,
+  "7": 2,
+  "8": 3
+ },
+ "figPassed": {
+  "none": 17
+ },
+ "figAll": {
+  "none": 24
+ },
+ "figPassRate": {
+  "none": "17/24"
+ },
+ "renderTypesPassed": {
+  "none": 12,
+  "ap_table": 5
+ },
+ "archetypesPassed": {
+  "ch_buffer_choice": 3,
+  "ch_claim_from_data": 3,
+  "ch_le_chatelier": 2,
+  "ch_mass_spec_peaks": 2,
+  "ch_photon_energy": 3,
+  "ch_unit_cell_ratio": 2,
+  "ch_variable_coulomb": 2
+ },
+ "costUsd": {
+  "chem-s2-m-c": 0.764
+ }
+}

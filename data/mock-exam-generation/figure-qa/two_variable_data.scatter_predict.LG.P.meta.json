@@ -1,0 +1,40 @@
+{
+ "itemId": "two_variable_data.scatter_predict.LG.P",
+ "generatedAt": "2026-10-07T05:02:00.439Z",
+ "codeHash": "af990c786aee5fdb03964f96ff590663d6fd098cb5ecc00f735cdb7b2885c289",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/data.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-lines.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "two_variable_data.scatter_predict.LG.P.png",
+   "mobileFile": "two_variable_data.scatter_predict.LG.P.m375.png",
+   "archetypeId": "tvd.scatter_predict.LG.P.chain2",
+   "seed": 11,
+   "signature": "data:line",
+   "stimulus": "The line graph shows the book's price at 5 different values of the number of pages in a book; the values follow a linear pattern. In one additional case, pages is 3 pages. The actual price is 25% greater than the value predicted by the line for that case.",
+   "question": "What is the actual price for this case, in dollars?",
+   "options": [
+    "5",
+    "25",
+    "20",
+    "45"
+   ],
+   "correctIndex": 1,
+   "answer": "25",
+   "explanation": "(1) 그림에서 직선 위의 두 격자점 (0, 5) 과 (4, 25) 를 읽는다. (2) 기울기 m = (25 - 5) ÷ (4 - 0) = 5 이다. (3) 식은 y = 5x + 5 이다. (4) x = 3 에서의 예측값은 20 이다. (5) 실제 값은 예측값의 125% 이므로 20 × 1.25 이다. (6) 실제 값 = 25 이다. 따라서 정답은 25이다.",
+   "structuralIssues": []
+  }
+ ]
+}

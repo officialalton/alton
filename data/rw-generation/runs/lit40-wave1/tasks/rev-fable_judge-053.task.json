@@ -1,0 +1,315 @@
+{
+ "schema": "rw-session-task/v1",
+ "kind": "review",
+ "role": "fable_judge",
+ "runId": "lit40-wave1",
+ "taskId": "rev-fable_judge-053",
+ "chunkId": "rev-fable_judge-053",
+ "suggestedModel": "fable",
+ "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-fable_judge-053.result.json",
+ "outputSchema": {
+  "chunkId": "청크 ID",
+  "model": "fable",
+  "items": [
+   {
+    "candidateId": "id",
+    "picked_letter": "A|B|C|D",
+    "other_defensible": "정답 외 방어 가능한 선택지가 있으면 true",
+    "est_difficulty": "easy|medium|hard (실제 체감, 요청 난이도에 맞추지 말 것)",
+    "hard_fit": "실제 SAT hard 수준의 사고 단계가 필요하면 true(지문 길이·난어만이면 false)",
+    "plausible_distractors": "오답 3개가 모두 그럴듯하고 서로 다른 오개념에서 나왔으면 true",
+    "length_balanced": "네 선택지 길이·구체성이 비슷해 정답이 형식으로 드러나지 않으면 true",
+    "multi_answer_risk": "복수 정답 위험이 있으면 true",
+    "issues": "한 줄 메모"
+   }
+  ]
+ },
+ "items": [
+  {
+   "candidateId": "lit40-easy-01-020",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "tone_or_mood",
+   "requestedDifficulty": "easy",
+   "passage": "The isle was barren. Far as hawk may scan\nIn moors it roll’d up to a headland bare\nSave for one narrow patch, by ceaseless care\nSumptuous with corn. Against the sky a Man\nDigging the waste I saw,—bow’d veteran\nA stubborn spade he drave in stubborn ground\nAnd root and rock flung sheer without a sound\nOver the bleak edge.... Then anew began.\n\n“You, who have lodged in the teeth of the abyss\nYour cabin low, and triumph rich as this\nWrung from the ocean-bitter mountain side,\nWhat help’d you most to bring such treasure out?”\nHe stood, and after scrutiny replied,\n“The thing on which I lean, the Spade of Doubt.”",
+   "question": "Which choice best describes the tone of the text?",
+   "options": [
+    "Mocking and dismissive",
+    "Joyful and carefree",
+    "Fearful and despairing",
+    "Admiring and contemplative"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-01-021",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "tone_or_mood",
+   "requestedDifficulty": "easy",
+   "passage": "Good nature is something born with us--an easy, contented disposition, and a tendency to take things quietly and pleasantly. We inherit it. There is little merit in possessing it. Good humor is the result of pleasant surroundings and agreeable circumstances. A good-humored man is so when everything goes right; when things go wrong, his good humor departs and bad humor takes its place. But good temper results from training and self-control--keeping constant watch over our passions and feelings, and above all being in constant harmony with God; for he who is at peace with God is at peace with man, and will keep the \"even tenor of his way.\"",
+   "question": "Which choice best describes the overall tone of the text?",
+   "options": [
+    "earnest and instructive",
+    "bitter and accusatory",
+    "playful and mocking",
+    "anxious and uncertain"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-01-022",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "tone_or_mood",
+   "requestedDifficulty": "easy",
+   "passage": "You will soon be as well as ever, and we shall all be rejoiced at your return. You must not, however, become impatient at the gradual progress you must necessarily make, but be content with the steady advance you are making to health and strength. Your progress will be the more certain and your recovery more confirmed. Do not let Sherman capture you, and I will endeavor to hold Grant till you come. I am glad to hear such good accounts of my little namesake. Good lungs are a great blessing, and nothing expands them better than a full, hearty yell. I hope Mrs. Longstreet is well, and that she is enjoying the good peaches and melons of Georgia.",
+   "question": "Which choice best describes the overall tone of the text?",
+   "options": [
+    "stern and disapproving",
+    "warm and encouraging",
+    "formal and detached",
+    "grieving and somber"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-01-023",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "relationship_between_characters",
+   "requestedDifficulty": "easy",
+   "passage": "Though I have traveled close to a million miles behind the iron horse I cannot ride backwards on a railroad train. In that respect I am like the husband who when about to die said to his wife: \"I want to make a special request of you, and that is, see that I am buried face down; it always did make me sick to travel backwards.\" When a boy I could not swing as could other boys. My head is not level on my shoulders. I have never crossed the ocean and never will. I cannot ride the rolling waves. Some years ago when out on a little coast ride for pleasure, (if that's what you call it) I said to the captain: \"How long till we reach the shore?\"",
+   "question": "Based on the text, which choice best describes the narrator's relationship with the captain?",
+   "options": [
+    "The narrator is a fellow sailor helping the captain steer the boat.",
+    "The narrator is an old friend who often sails with the captain.",
+    "The narrator is an uneasy passenger relying on the captain's knowledge.",
+    "The narrator is a rival captain testing the other's skill at sea."
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-01-024",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "relationship_between_characters",
+   "requestedDifficulty": "easy",
+   "passage": "I was treated like a dog, ordered about like a servant, and made to do three times as much work as had been agreed with my guardian. I felt that it was right to resist. There was no one to fight my battle, and that of my poor sister, but myself. I am well aware that I took upon myself a great responsibility in deciding this question. Perhaps, without the counsel of my brother, I should not have dared to proceed as I did. Bad as the consequences threatened to be, I did not regret that I had permitted the log to drift ashore.",
+   "question": "Based on the text, which choice best describes the narrator's relationship with his brother?",
+   "options": [
+    "The brother is a rival who opposed the narrator's decision to resist.",
+    "The brother is the person who forced the narrator to do extra work.",
+    "The brother is unaware of the hardships the narrator has endured.",
+    "The brother is a trusted adviser whose counsel gave the narrator courage."
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-01-025",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "relationship_between_characters",
+   "requestedDifficulty": "easy",
+   "passage": "In France, mothers always visit with their daughters; and if restraint upon unmarried people is carried to excess there, we certainly err on the opposite extreme. We allow too much freedom, and we allow it too soon. I believe it is much better for a very young lady never to go about alone, or visit for any length of time from home, without her mother.\n\nYouth must have friends, and those friends, being loved ardently, will have prodigious influence. The choice requires extreme caution. The whole of human destiny is often materially affected by those with whom we are intimate at fourteen or fifteen years of age.",
+   "question": "Based on the text, how does the author view the ideal relationship between a very young lady and her mother?",
+   "options": [
+    "The mother should serve as a close guide who accompanies her daughter.",
+    "The daughter should act as an equal who travels freely without her mother.",
+    "The mother should remain a distant authority who is consulted only rarely.",
+    "The daughter should let her friends replace her mother as her chief guide."
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-01-026",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "relationship_between_characters",
+   "requestedDifficulty": "easy",
+   "passage": "The gentleman replied that that information was to be obtained from the result of the schooling of the population generally. Every boy and girl around us could read and write, and could enjoy reading and writing. There was therefore evidence to show that they remained at school sufficiently long for the required purposes. It was fair that I should judge of the system from the results. Here in England, we generally object to much that the Americans have adopted into their form of government, and think that many of their political theories are wrong. We do not like universal suffrage.",
+   "question": "Based on the text, which choice best describes the relationship between the narrator and the gentleman?",
+   "options": [
+    "A teacher is correcting a pupil who has failed to learn to read and write.",
+    "A host is explaining local schooling to a visitor who judges it by results.",
+    "Two political allies are agreeing that universal suffrage should be adopted.",
+    "Two rivals are debating so fiercely that neither listens to the other."
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-01-027",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "symbolism",
+   "requestedDifficulty": "easy",
+   "passage": "There is a fascination in it; there is a magnetism stronger than that of the rock which drew the nails from Sindbad's ship. You are like a bird let out with a string tied to the foot to flutter a little way and return again. It is not business, for you may have none, in the ordinary sense; it is not \"society,\" it is not pleasure. It is the presence of man in his myriads. There is something in the heart which cannot be satisfied away from it.\n\nIt is a curious thing that your next-door neighbour may be a stranger, but there are no strangers in a vast crowd.",
+   "question": "In the text, the image of a bird with a string tied to its foot mainly represents",
+   "options": [
+    "the freedom a person gains by leaving the city for the countryside.",
+    "the loneliness a person feels when living beside an unknown neighbor.",
+    "the pull of the crowd that draws a person back after any brief absence.",
+    "the burden of business duties that keep a person tied to an office."
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-01-028",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "symbolism",
+   "requestedDifficulty": "easy",
+   "passage": "The hot, sleepy streets were waking up in the red glow of the fading day. People in the town, now that the glare had died from their eyes, were telling each other that the air was cool, and trying to believe it.\n\nOutside, however, the assertion had more truth in it. A ripple of refreshment was slowly spreading up from the distant river. The shadows of the straight-lined trees lay across the brick road in great black stripes. The fields looked as if their dusty grass was turning green again beneath the darkening sky; in the dull ditches stood the cattle, dreamily content.\n\nThe girls walked on in silence till they reached a point where the road swerved off into a little thicket. This was the spot which Romeo must have had in his mind.",
+   "question": "In the text, the ripple of refreshment spreading up from the distant river mainly represents",
+   "options": [
+    "a coming storm that threatens the girls on their walk to the thicket.",
+    "a false hope that the townspeople invent to forget the summer heat.",
+    "a sign that the fields have been ruined by a long season of drought.",
+    "a gentle relief that arrives as the oppressive day finally ends."
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-01-029",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "symbolism",
+   "requestedDifficulty": "easy",
+   "passage": "In each black little seed is a whole vine packed away.\n\nAfter a time the old vine will fade away. It will fall and turn brown. It will do no more work of changing gases and minerals into living plant. It will not again have green leaves and bear bright flowers.\n\nBut there will be more morning-glories, for the vine has stored some of its life in the seeds, and they will not fade and cease to work. All that is left of the life of the vine is in the seeds. All the morning-glories that will grow and delight us with their bright flowers next summer lie packed away in the dark seeds.\n\nDear little seeds, live on through the cold winter; without you we never again could see our bright morning-glories!",
+   "question": "In the text, the seeds of the morning-glory vine mainly represent",
+   "options": [
+    "the continuation of the vine's life after the old vine fades away.",
+    "the harsh winter that destroys every flower in the garden each year.",
+    "the work of changing gases and minerals into green leaves and flowers.",
+    "the darkness that remains once the bright summer flowers are gone."
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-01-030",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "symbolism",
+   "requestedDifficulty": "easy",
+   "passage": "I rode up to the house and dismounted, hitched my horse to a post at the door, and proceeded to ring the bell. A tall, stately lady made her appearance, and invited me in with much apparent courtesy. She was dressed in deep mourning, which was very becoming to her pale, sad face. She seemed to be about thirty years of age, very prepossessing in appearance, and evidently belonged to one of the \"F. F. V's.\" As soon as I was seated she inquired: \"To what fortunate circumstance am I to attribute the pleasure of this unexpected call?\" I told her in a few words the nature of my business. The intelligence seemed to cast a deep shadow over her pale features, which all her efforts could not control.",
+   "question": "In the text, the lady's deep mourning dress mainly represents",
+   "options": [
+    "the wealth and high rank that make her look down on her visitor.",
+    "the recent grief that already shadows her face and her manner.",
+    "the formal custom she follows whenever a stranger comes to call.",
+    "the pride she takes in looking elegant before unexpected guests."
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-01-031",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "easy",
+   "passage": "In a few minutes twenty-five hundred men were in simultaneous movement. Five companies of cavalry wheeled into column of companies, and advanced at a trot through the fields, seeking to gain the shelter of the forest. The six infantry regiments slid up alongside of each other, and pushed on in six parallel columns of march, two on the right of the road and four on the left. The artillery, which alone left the highway, followed at a distance of two or three hundred yards. The remaining cavalry made a wide detour to the right as if to flank the enemy’s left.\n\nIt was a mile and a quarter--it was a march of fully twenty minutes--to the edge of the woodland, the proposed cover of the column.",
+   "question": "As used in the text, the phrase “slid up alongside of each other” most nearly suggests",
+   "options": [
+    "that the regiments moved into position smoothly and in close order.",
+    "that the soldiers lost their footing on the wet and muddy road.",
+    "that the regiments retreated quietly to avoid the enemy's notice.",
+    "that the soldiers mixed together until the columns could not be told apart."
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-01-032",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "easy",
+   "passage": "A look of wild amazement swept over her face. It had not disappeared with her touch. It smiled upon her yet. No venomous thing had sprung from those parted and smiling lips. It was herself gazing upon herself. She was there—and it was there—oh! how that poor brain worked and toiled to solve the question of its double self. Was she, the creature of pain, with her temples full of fire, which had no power to melt the snow from her hair, an evil growth from the loveliness before her, and that perfect still? After wandering so many years, with age upon her limbs, and a curse at her heart, had she come back upon her own young self to be met with smiles and pleasant looks, as if no wickedness had ever crept between them?",
+   "question": "As used in the text, the phrase “temples full of fire” most nearly suggests",
+   "options": [
+    "that the woman is filled with fierce anger at her own reflection.",
+    "that the woman is suffering from a burning, feverish pain in her head.",
+    "that the woman has recently escaped from a house that caught fire.",
+    "that the woman's hair has been darkened and scorched by the heat."
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-01-033",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "easy",
+   "passage": "There the old armorial stones dwellers seldom read;\nThere the ivy clambers like the rankest weed;\nThere the Cambridge lawyers sometimes scale the wall\nTo the grave of Helen, loveliest of all.\n\nEven here the fairest of the little band\nStrangers call the fairest girls in Maryland,\nLike the peach her color ere its dyes are fast,\nAnd her form as slender as the virgin mast.\n\nLike a vessel gliding with a net in tow,\nUp the street of evenings Helen seemed to flow,\nLeaving light behind her and a nameless spell\nMurmured in the young men, like an ocean shell.",
+   "question": "As used in the text, the phrase “like an ocean shell” most nearly suggests",
+   "options": [
+    "that Helen spoke to the young men in a loud and commanding voice.",
+    "that the young men collected shells as gifts to win Helen's favor.",
+    "that Helen's charm lingered in the young men like a faint echo.",
+    "that the young men feared Helen as sailors fear a stormy ocean."
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-01-035",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "easy",
+   "passage": "Sometimes it charms us; sometimes it repels. But we can no more be oblivious to it than we can to the temperature of the air. Its possessor has but to enter the room, and insensibly we are conscious of a presence. It is as if we had suddenly been placed in the field of a magnetic force.\n\nOn the other hand there are people who produce no effect upon us whatever. They come and go with a like indifference. They are as unimportant psychically as if they were any other portion of the furniture. They never stir us. We might live with them for fifty years and be hardly able to tell, for any influence upon ourselves, whether they existed or not.",
+   "question": "As used in the text, the phrase “placed in the field of a magnetic force” most nearly suggests",
+   "options": [
+    "that such a person exerts a strong, invisible pull on everyone nearby.",
+    "that such a person makes others feel physically uncomfortable and hot.",
+    "that such a person works in a laboratory studying electricity and magnets.",
+    "that such a person forces others to agree with whatever is said aloud."
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-01-036",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "easy",
+   "passage": "All at once--strange as it may seem, it is true,--the vessel stopped, in the mid sea, as fast as if it was fixed on the ground. The men, astonished, pulled at their oars, and spread more sail, trying to make progress by the aid of both, but all in vain. Ivy twined round the oars and hindered their motion, and clung to the sails, with heavy clusters of berries. A vine, laden with grapes, ran up the mast, and along the sides of the vessel. The sound of flutes was heard and the odor of fragrant wine spread all around.",
+   "question": "As used in the text, the phrase “as fast as if it was fixed on the ground” most nearly suggests",
+   "options": [
+    "that the vessel was moving at a great speed across the open sea.",
+    "that the vessel stopped completely, as though held by solid land.",
+    "that the vessel had run aground on a hidden sandbar near the coast.",
+    "that the vessel slowed gradually as the wind died down around it."
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-01-043",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "easy",
+   "passage": "One can always see trouble who looks for it. I had never been across the plains and before the time for the train to start I walked to the front of the engine and looking along the track as it reached out across the prairie I saw trouble. What was it? Why, six miles ahead the track wasn't wide enough. Yes, I saw it. Then on six miles more the rails came together, with my destination nineteen hundred miles away. Soon the train moved and as we neared the difficulty, the track opened to welcome us. Not a pin was torn up nor a rail displaced. Again I looked ahead and a mountain was on the track, but before I had time to get off the mountain got off.",
+   "question": "Which choice best describes the shift in tone that occurs in the text?",
+   "options": [
+    "From alarm about obstacles ahead to wry amusement as they vanish",
+    "From cheerful confidence about the trip to deep regret over a missed destination",
+    "From quiet boredom with the prairie to angry frustration at the slow train",
+    "From calm curiosity about the engine to grim fear of a coming accident"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-01-044",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "easy",
+   "passage": "Is your world a small one, made unendurable by a thousand petty cares? Are the heart and soul of you cast down by bitter disappointment? Would you leave it all, if only for an hour, and come back with a new point of view? Then open the covers of a book.\n\nWith this gentle comrade, you may journey to the very end of the world and even to the beginning of civilisation. There is no land which you may not visit, from Arctic snows to the loftiest peaks of southern mountains. Gallant gentlemen will go with you and tell you how to appreciate what you see.",
+   "question": "Which choice best describes the shift in tone that occurs in the text?",
+   "options": [
+    "From cheerful praise of travel to stern warnings about the dangers of reading",
+    "From sympathy for readers' troubles to warm encouragement to read",
+    "From playful teasing of the reader to bitter complaints about civilisation",
+    "From formal description of distant lands to sorrowful memories of home"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-01-045",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "easy",
+   "passage": "Because your strife and labour have been vain,\nYe who have striven, shall I forego, forget\nThe far-off goal where to my feet were set\nIn the old days when life was first made plain?\nUpward in April, who, meeting with the rain,\nDid turn, the first shy mayflowers still are met?\nI who have sought, yea, who am seeking yet,\nWhat pain have I like unto your sore pain?\nSo let me go as one yearning, that braves,\nWith shipmen that have knowledge of the sea,\nThe wind disastrous and the ponderous waves\n(Because his love dwells in some far countree),\nCrying, \"Not one of all your million graves\nIs deep enough to keep my love from me!\"",
+   "question": "Which choice best describes the shift in tone that occurs in the text?",
+   "options": [
+    "From joyful celebration of spring to quiet grief over a lost friend",
+    "From angry blame of others to calm acceptance of a shared failure",
+    "From doubt about a distant goal to bold, defiant devotion",
+    "From hopeful planning of a voyage to fearful dread of the sea"
+   ]
+  }
+ ],
+ "instructions": "당신은 디지털 SAT 독립 채점자다. 정답 표시가 없다. 먼저 문항을 직접 풀고(picked_letter), 이어서 난이도·hard 적합·오답 품질을 판정한다. 요청 난이도에 맞추려 하지 말고 실제로 느끼는 대로 답한다.\n청크 rev-fable_judge-053 — 19문항.\n출력: Write 도구로 정확히 이 경로에 JSON 한 파일을 쓴다 → /Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-fable_judge-053.result.json\n출력 JSON 스키마(예시 구조): {\"chunkId\":\"청크 ID\",\"model\":\"fable\",\"items\":[{\"candidateId\":\"id\",\"picked_letter\":\"A|B|C|D\",\"other_defensible\":\"정답 외 방어 가능한 선택지가 있으면 true\",\"est_difficulty\":\"easy|medium|hard (실제 체감, 요청 난이도에 맞추지 말 것)\",\"hard_fit\":\"실제 SAT hard 수준의 사고 단계가 필요하면 true(지문 길이·난어만이면 false)\",\"plausible_distractors\":\"오답 3개가 모두 그럴듯하고 서로 다른 오개념에서 나왔으면 true\",\"length_balanced\":\"네 선택지 길이·구체성이 비슷해 정답이 형식으로 드러나지 않으면 true\",\"multi_answer_risk\":\"복수 정답 위험이 있으면 true\",\"issues\":\"한 줄 메모\"}]}\n허용 값: picked_letter ∈ {A,B,C,D}, 불리언 필드는 true/false, est_difficulty ∈ {easy,medium,hard}. candidateId 를 바꾸지 않고 모든 항목에 답한다.\n금지: 결과 파일 외의 파일 생성·수정, 다른 명령 실행, 문항 수정·재작성. 끝나면 'done <항목 수>' 한 줄만 답한다.\n\n## 문항\n### lit40-easy-01-020 — skill inferences · 유형 tone_or_mood · 요청 난이도 easy\n[지문]\nThe isle was barren. Far as hawk may scan\nIn moors it roll’d up to a headland bare\nSave for one narrow patch, by ceaseless care\nSumptuous with corn. Against the sky a Man\nDigging the waste I saw,—bow’d veteran\nA stubborn spade he drave in stubborn ground\nAnd root and rock flung sheer without a sound\nOver the bleak edge.... Then anew began.\n\n“You, who have lodged in the teeth of the abyss\nYour cabin low, and triumph rich as this\nWrung from the ocean-bitter mountain side,\nWhat help’d you most to bring such treasure out?”\nHe stood, and after scrutiny replied,\n“The thing on which I lean, the Spade of Doubt.”\n\n[질문] Which choice best describes the tone of the text?\nA) Mocking and dismissive\nB) Joyful and carefree\nC) Fearful and despairing\nD) Admiring and contemplative\n### lit40-easy-01-021 — skill inferences · 유형 tone_or_mood · 요청 난이도 easy\n[지문]\nGood nature is something born with us--an easy, contented disposition, and a tendency to take things quietly and pleasantly. We inherit it. There is little merit in possessing it. Good humor is the result of pleasant surroundings and agreeable circumstances. A good-humored man is so when everything goes right; when things go wrong, his good humor departs and bad humor takes its place. But good temper results from training and self-control--keeping constant watch over our passions and feelings, and above all being in constant harmony with God; for he who is at peace with God is at peace with man, and will keep the \"even tenor of his way.\"\n\n[질문] Which choice best describes the overall tone of the text?\nA) earnest and instructive\nB) bitter and accusatory\nC) playful and mocking\nD) anxious and uncertain\n### lit40-easy-01-022 — skill inferences · 유형 tone_or_mood · 요청 난이도 easy\n[지문]\nYou will soon be as well as ever, and we shall all be rejoiced at your return. You must not, however, become impatient at the gradual progress you must necessarily make, but be content with the steady advance you are making to health and strength. Your progress will be the more certain and your recovery more confirmed. Do not let Sherman capture you, and I will endeavor to hold Grant till you come. I am glad to hear such good accounts of my little namesake. Good lungs are a great blessing, and nothing expands them better than a full, hearty yell. I hope Mrs. Longstreet is well, and that she is enjoying the good peaches and melons of Georgia.\n\n[질문] Which choice best describes the overall tone of the text?\nA) stern and disapproving\nB) warm and encouraging\nC) formal and detached\nD) grieving and somber\n### lit40-easy-01-023 — skill inferences · 유형 relationship_between_characters · 요청 난이도 easy\n[지문]\nThough I have traveled close to a million miles behind the iron horse I cannot ride backwards on a railroad train. In that respect I am like the husband who when about to die said to his wife: \"I want to make a special request of you, and that is, see that I am buried face down; it always did make me sick to travel backwards.\" When a boy I could not swing as could other boys. My head is not level on my shoulders. I have never crossed the ocean and never will. I cannot ride the rolling waves. Some years ago when out on a little coast ride for pleasure, (if that's what you call it) I said to the captain: \"How long till we reach the shore?\"\n\n[질문] Based on the text, which choice best describes the narrator's relationship with the captain?\nA) The narrator is a fellow sailor helping the captain steer the boat.\nB) The narrator is an old friend who often sails with the captain.\nC) The narrator is an uneasy passenger relying on the captain's knowledge.\nD) The narrator is a rival captain testing the other's skill at sea.\n### lit40-easy-01-024 — skill inferences · 유형 relationship_between_characters · 요청 난이도 easy\n[지문]\nI was treated like a dog, ordered about like a servant, and made to do three times as much work as had been agreed with my guardian. I felt that it was right to resist. There was no one to fight my battle, and that of my poor sister, but myself. I am well aware that I took upon myself a great responsibility in deciding this question. Perhaps, without the counsel of my brother, I should not have dared to proceed as I did. Bad as the consequences threatened to be, I did not regret that I had permitted the log to drift ashore.\n\n[질문] Based on the text, which choice best describes the narrator's relationship with his brother?\nA) The brother is a rival who opposed the narrator's decision to resist.\nB) The brother is the person who forced the narrator to do extra work.\nC) The brother is unaware of the hardships the narrator has endured.\nD) The brother is a trusted adviser whose counsel gave the narrator courage.\n### lit40-easy-01-025 — skill inferences · 유형 relationship_between_characters · 요청 난이도 easy\n[지문]\nIn France, mothers always visit with their daughters; and if restraint upon unmarried people is carried to excess there, we certainly err on the opposite extreme. We allow too much freedom, and we allow it too soon. I believe it is much better for a very young lady never to go about alone, or visit for any length of time from home, without her mother.\n\nYouth must have friends, and those friends, being loved ardently, will have prodigious influence. The choice requires extreme caution. The whole of human destiny is often materially affected by those with whom we are intimate at fourteen or fifteen years of age.\n\n[질문] Based on the text, how does the author view the ideal relationship between a very young lady and her mother?\nA) The mother should serve as a close guide who accompanies her daughter.\nB) The daughter should act as an equal who travels freely without her mother.\nC) The mother should remain a distant authority who is consulted only rarely.\nD) The daughter should let her friends replace her mother as her chief guide.\n### lit40-easy-01-026 — skill inferences · 유형 relationship_between_characters · 요청 난이도 easy\n[지문]\nThe gentleman replied that that information was to be obtained from the result of the schooling of the population generally. Every boy and girl around us could read and write, and could enjoy reading and writing. There was therefore evidence to show that they remained at school sufficiently long for the required purposes. It was fair that I should judge of the system from the results. Here in England, we generally object to much that the Americans have adopted into their form of government, and think that many of their political theories are wrong. We do not like universal suffrage.\n\n[질문] Based on the text, which choice best describes the relationship between the narrator and the gentleman?\nA) A teacher is correcting a pupil who has failed to learn to read and write.\nB) A host is explaining local schooling to a visitor who judges it by results.\nC) Two political allies are agreeing that universal suffrage should be adopted.\nD) Two rivals are debating so fiercely that neither listens to the other.\n### lit40-easy-01-027 — skill inferences · 유형 symbolism · 요청 난이도 easy\n[지문]\nThere is a fascination in it; there is a magnetism stronger than that of the rock which drew the nails from Sindbad's ship. You are like a bird let out with a string tied to the foot to flutter a little way and return again. It is not business, for you may have none, in the ordinary sense; it is not \"society,\" it is not pleasure. It is the presence of man in his myriads. There is something in the heart which cannot be satisfied away from it.\n\nIt is a curious thing that your next-door neighbour may be a stranger, but there are no strangers in a vast crowd.\n\n[질문] In the text, the image of a bird with a string tied to its foot mainly represents\nA) the freedom a person gains by leaving the city for the countryside.\nB) the loneliness a person feels when living beside an unknown neighbor.\nC) the pull of the crowd that draws a person back after any brief absence.\nD) the burden of business duties that keep a person tied to an office.\n### lit40-easy-01-028 — skill inferences · 유형 symbolism · 요청 난이도 easy\n[지문]\nThe hot, sleepy streets were waking up in the red glow of the fading day. People in the town, now that the glare had died from their eyes, were telling each other that the air was cool, and trying to believe it.\n\nOutside, however, the assertion had more truth in it. A ripple of refreshment was slowly spreading up from the distant river. The shadows of the straight-lined trees lay across the brick road in great black stripes. The fields looked as if their dusty grass was turning green again beneath the darkening sky; in the dull ditches stood the cattle, dreamily content.\n\nThe girls walked on in silence till they reached a point where the road swerved off into a little thicket. This was the spot which Romeo must have had in his mind.\n\n[질문] In the text, the ripple of refreshment spreading up from the distant river mainly represents\nA) a coming storm that threatens the girls on their walk to the thicket.\nB) a false hope that the townspeople invent to forget the summer heat.\nC) a sign that the fields have been ruined by a long season of drought.\nD) a gentle relief that arrives as the oppressive day finally ends.\n### lit40-easy-01-029 — skill inferences · 유형 symbolism · 요청 난이도 easy\n[지문]\nIn each black little seed is a whole vine packed away.\n\nAfter a time the old vine will fade away. It will fall and turn brown. It will do no more work of changing gases and minerals into living plant. It will not again have green leaves and bear bright flowers.\n\nBut there will be more morning-glories, for the vine has stored some of its life in the seeds, and they will not fade and cease to work. All that is left of the life of the vine is in the seeds. All the morning-glories that will grow and delight us with their bright flowers next summer lie packed away in the dark seeds.\n\nDear little seeds, live on through the cold winter; without you we never again could see our bright morning-glories!\n\n[질문] In the text, the seeds of the morning-glory vine mainly represent\nA) the continuation of the vine's life after the old vine fades away.\nB) the harsh winter that destroys every flower in the garden each year.\nC) the work of changing gases and minerals into green leaves and flowers.\nD) the darkness that remains once the bright summer flowers are gone.\n### lit40-easy-01-030 — skill inferences · 유형 symbolism · 요청 난이도 easy\n[지문]\nI rode up to the house and dismounted, hitched my horse to a post at the door, and proceeded to ring the bell. A tall, stately lady made her appearance, and invited me in with much apparent courtesy. She was dressed in deep mourning, which was very becoming to her pale, sad face. She seemed to be about thirty years of age, very prepossessing in appearance, and evidently belonged to one of the \"F. F. V's.\" As soon as I was seated she inquired: \"To what fortunate circumstance am I to attribute the pleasure of this unexpected call?\" I told her in a few words the nature of my business. The intelligence seemed to cast a deep shadow over her pale features, which all her efforts could not control.\n\n[질문] In the text, the lady's deep mourning dress mainly represents\nA) the wealth and high rank that make her look down on her visitor.\nB) the recent grief that already shadows her face and her manner.\nC) the formal custom she follows whenever a stranger comes to call.\nD) the pride she takes in looking elegant before unexpected guests.\n### lit40-easy-01-031 — skill words_in_context · 유형 figurative_language · 요청 난이도 easy\n[지문]\nIn a few minutes twenty-five hundred men were in simultaneous movement. Five companies of cavalry wheeled into column of companies, and advanced at a trot through the fields, seeking to gain the shelter of the forest. The six infantry regiments slid up alongside of each other, and pushed on in six parallel columns of march, two on the right of the road and four on the left. The artillery, which alone left the highway, followed at a distance of two or three hundred yards. The remaining cavalry made a wide detour to the right as if to flank the enemy’s left.\n\nIt was a mile and a quarter--it was a march of fully twenty minutes--to the edge of the woodland, the proposed cover of the column.\n\n[질문] As used in the text, the phrase “slid up alongside of each other” most nearly suggests\nA) that the regiments moved into position smoothly and in close order.\nB) that the soldiers lost their footing on the wet and muddy road.\nC) that the regiments retreated quietly to avoid the enemy's notice.\nD) that the soldiers mixed together until the columns could not be told apart.\n### lit40-easy-01-032 — skill words_in_context · 유형 figurative_language · 요청 난이도 easy\n[지문]\nA look of wild amazement swept over her face. It had not disappeared with her touch. It smiled upon her yet. No venomous thing had sprung from those parted and smiling lips. It was herself gazing upon herself. She was there—and it was there—oh! how that poor brain worked and toiled to solve the question of its double self. Was she, the creature of pain, with her temples full of fire, which had no power to melt the snow from her hair, an evil growth from the loveliness before her, and that perfect still? After wandering so many years, with age upon her limbs, and a curse at her heart, had she come back upon her own young self to be met with smiles and pleasant looks, as if no wickedness had ever crept between them?\n\n[질문] As used in the text, the phrase “temples full of fire” most nearly suggests\nA) that the woman is filled with fierce anger at her own reflection.\nB) that the woman is suffering from a burning, feverish pain in her head.\nC) that the woman has recently escaped from a house that caught fire.\nD) that the woman's hair has been darkened and scorched by the heat.\n### lit40-easy-01-033 — skill words_in_context · 유형 figurative_language · 요청 난이도 easy\n[지문]\nThere the old armorial stones dwellers seldom read;\nThere the ivy clambers like the rankest weed;\nThere the Cambridge lawyers sometimes scale the wall\nTo the grave of Helen, loveliest of all.\n\nEven here the fairest of the little band\nStrangers call the fairest girls in Maryland,\nLike the peach her color ere its dyes are fast,\nAnd her form as slender as the virgin mast.\n\nLike a vessel gliding with a net in tow,\nUp the street of evenings Helen seemed to flow,\nLeaving light behind her and a nameless spell\nMurmured in the young men, like an ocean shell.\n\n[질문] As used in the text, the phrase “like an ocean shell” most nearly suggests\nA) that Helen spoke to the young men in a loud and commanding voice.\nB) that the young men collected shells as gifts to win Helen's favor.\nC) that Helen's charm lingered in the young men like a faint echo.\nD) that the young men feared Helen as sailors fear a stormy ocean.\n### lit40-easy-01-035 — skill words_in_context · 유형 figurative_language · 요청 난이도 easy\n[지문]\nSometimes it charms us; sometimes it repels. But we can no more be oblivious to it than we can to the temperature of the air. Its possessor has but to enter the room, and insensibly we are conscious of a presence. It is as if we had suddenly been placed in the field of a magnetic force.\n\nOn the other hand there are people who produce no effect upon us whatever. They come and go with a like indifference. They are as unimportant psychically as if they were any other portion of the furniture. They never stir us. We might live with them for fifty years and be hardly able to tell, for any influence upon ourselves, whether they existed or not.\n\n[질문] As used in the text, the phrase “placed in the field of a magnetic force” most nearly suggests\nA) that such a person exerts a strong, invisible pull on everyone nearby.\nB) that such a person makes others feel physically uncomfortable and hot.\nC) that such a person works in a laboratory studying electricity and magnets.\nD) that such a person forces others to agree with whatever is said aloud.\n### lit40-easy-01-036 — skill words_in_context · 유형 figurative_language · 요청 난이도 easy\n[지문]\nAll at once--strange as it may seem, it is true,--the vessel stopped, in the mid sea, as fast as if it was fixed on the ground. The men, astonished, pulled at their oars, and spread more sail, trying to make progress by the aid of both, but all in vain. Ivy twined round the oars and hindered their motion, and clung to the sails, with heavy clusters of berries. A vine, laden with grapes, ran up the mast, and along the sides of the vessel. The sound of flutes was heard and the odor of fragrant wine spread all around.\n\n[질문] As used in the text, the phrase “as fast as if it was fixed on the ground” most nearly suggests\nA) that the vessel was moving at a great speed across the open sea.\nB) that the vessel stopped completely, as though held by solid land.\nC) that the vessel had run aground on a hidden sandbar near the coast.\nD) that the vessel slowed gradually as the wind died down around it.\n### lit40-easy-01-043 — skill text_structure_purpose · 유형 tone_shift · 요청 난이도 easy\n[지문]\nOne can always see trouble who looks for it. I had never been across the plains and before the time for the train to start I walked to the front of the engine and looking along the track as it reached out across the prairie I saw trouble. What was it? Why, six miles ahead the track wasn't wide enough. Yes, I saw it. Then on six miles more the rails came together, with my destination nineteen hundred miles away. Soon the train moved and as we neared the difficulty, the track opened to welcome us. Not a pin was torn up nor a rail displaced. Again I looked ahead and a mountain was on the track, but before I had time to get off the mountain got off.\n\n[질문] Which choice best describes the shift in tone that occurs in the text?\nA) From alarm about obstacles ahead to wry amusement as they vanish\nB) From cheerful confidence about the trip to deep regret over a missed destination\nC) From quiet boredom with the prairie to angry frustration at the slow train\nD) From calm curiosity about the engine to grim fear of a coming accident\n### lit40-easy-01-044 — skill text_structure_purpose · 유형 tone_shift · 요청 난이도 easy\n[지문]\nIs your world a small one, made unendurable by a thousand petty cares? Are the heart and soul of you cast down by bitter disappointment? Would you leave it all, if only for an hour, and come back with a new point of view? Then open the covers of a book.\n\nWith this gentle comrade, you may journey to the very end of the world and even to the beginning of civilisation. There is no land which you may not visit, from Arctic snows to the loftiest peaks of southern mountains. Gallant gentlemen will go with you and tell you how to appreciate what you see.\n\n[질문] Which choice best describes the shift in tone that occurs in the text?\nA) From cheerful praise of travel to stern warnings about the dangers of reading\nB) From sympathy for readers' troubles to warm encouragement to read\nC) From playful teasing of the reader to bitter complaints about civilisation\nD) From formal description of distant lands to sorrowful memories of home\n### lit40-easy-01-045 — skill text_structure_purpose · 유형 tone_shift · 요청 난이도 easy\n[지문]\nBecause your strife and labour have been vain,\nYe who have striven, shall I forego, forget\nThe far-off goal where to my feet were set\nIn the old days when life was first made plain?\nUpward in April, who, meeting with the rain,\nDid turn, the first shy mayflowers still are met?\nI who have sought, yea, who am seeking yet,\nWhat pain have I like unto your sore pain?\nSo let me go as one yearning, that braves,\nWith shipmen that have knowledge of the sea,\nThe wind disastrous and the ponderous waves\n(Because his love dwells in some far countree),\nCrying, \"Not one of all your million graves\nIs deep enough to keep my love from me!\"\n\n[질문] Which choice best describes the shift in tone that occurs in the text?\nA) From joyful celebration of spring to quiet grief over a lost friend\nB) From angry blame of others to calm acceptance of a shared failure\nC) From doubt about a distant goal to bold, defiant devotion\nD) From hopeful planning of a voyage to fearful dread of the sea"
+}

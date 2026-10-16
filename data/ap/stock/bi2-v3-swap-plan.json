@@ -1,0 +1,516 @@
+{
+ "kind": "ap_new_version_swap_plan",
+ "set": "BI2",
+ "sourceSetName": "AP Biology — Practice Exam 2",
+ "sourceVersionNo": 2,
+ "generatedBy": "scripts/audit/bio-new-version-plans.ts",
+ "note": "단계 ③ BI2 중간판(v2) → v3 목표(v3). 선행: bi1-v2 공개(BI1 가 BI2 몫 문항을 비운 뒤).",
+ "swapCount": 25,
+ "verifierViolations": [],
+ "substitutions": [
+  "BI1: bio-s2-mc-b:ap_biology-m20-k0 는 BI1 가 지금 이미 갖고 있고 v3 에서만 빠지는 같은 원형(bi_evidence_evolution)·단원·Practice 문항이라 그대로 유지한다(교체 불필요).",
+  "BI1: v3 의 bio-r2:ap_biology-m18-k0 는 DB 에서 아직 변환되지 않아 같은 (단원·Practice) 의 변환 완료 문항 bio-s2-mc-b:ap_biology-m20-k0 로 대체(exam_prep 0/0; 단원·Practice 동일)."
+ ],
+ "swaps": [
+  {
+   "section": "ap_mc",
+   "position": 5,
+   "removeKey": "bio-v2c:ap_biology-m08-k0",
+   "addKey": "bio-v2c:ap_biology-m08-k1",
+   "remove": {
+    "unit": 4,
+    "skill": "4.B",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 4,
+    "skill": "4.B",
+    "shared": false,
+    "type": "",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 6,
+   "removeKey": "bio-r1-mc:ap_biology-m25-k1",
+   "addKey": "bio-s2-mc-a:ap_biology-m41-k0",
+   "remove": {
+    "unit": 2,
+    "skill": "4.B",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 2,
+    "skill": "1.B",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 8,
+   "removeKey": "bio-v2a:ap_biology-m28-k1",
+   "addKey": "bio-v2a:ap_biology-m03-k2",
+   "remove": {
+    "unit": 8,
+    "skill": "5.A",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 2,
+    "skill": "5.A",
+    "shared": false,
+    "type": "",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 10,
+   "removeKey": "bio-s2-sets:ap_biology-m08-k0",
+   "addKey": "bio-r3:ap_biology-m11-k0",
+   "remove": {
+    "unit": 2,
+    "skill": "4.B",
+    "shared": true,
+    "type": "",
+    "examPrep": 1
+   },
+   "add": {
+    "unit": 5,
+    "skill": "5.A",
+    "shared": true,
+    "type": "",
+    "examPrep": 3
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 20,
+   "removeKey": "bio-s2-sets:ap_biology-m03-k0",
+   "addKey": "bio-v2a:ap_biology-m31-k2",
+   "remove": {
+    "unit": 3,
+    "skill": "4.B",
+    "shared": true,
+    "type": "",
+    "examPrep": 1
+   },
+   "add": {
+    "unit": 8,
+    "skill": "4.B",
+    "shared": true,
+    "type": "",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 25,
+   "removeKey": "bio-r2:ap_biology-m04-k0",
+   "addKey": "bio-r2:ap_biology-m01-k1",
+   "remove": {
+    "unit": 4,
+    "skill": "2.B",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 4,
+    "skill": "2.B",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 30,
+   "removeKey": "bio-s2-mc-a:ap_biology-m50-k0",
+   "addKey": "bio-v2b:ap_biology-m11-k2",
+   "remove": {
+    "unit": 4,
+    "skill": "4.B",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 3,
+    "skill": "4.B",
+    "shared": false,
+    "type": "",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 31,
+   "removeKey": "bio-s2-mc-a:ap_biology-m63-k0",
+   "addKey": "bio-r3:ap_biology-m06-k0",
+   "remove": {
+    "unit": 4,
+    "skill": "6.E",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 4,
+    "skill": "3.B",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 32,
+   "removeKey": "bio-p1-a:ap_biology-m06-k1",
+   "addKey": "bio-s2-mc-b:ap_biology-m08-k0",
+   "remove": {
+    "unit": 5,
+    "skill": "5.C",
+    "shared": false,
+    "type": "",
+    "examPrep": 1
+   },
+   "add": {
+    "unit": 6,
+    "skill": "1.B",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 34,
+   "removeKey": "bio-r2:ap_biology-m11-k1",
+   "addKey": "bio-v2a:ap_biology-m01-k1",
+   "remove": {
+    "unit": 5,
+    "skill": "5.A",
+    "shared": false,
+    "type": "",
+    "examPrep": 1
+   },
+   "add": {
+    "unit": 1,
+    "skill": "5.A",
+    "shared": false,
+    "type": "",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 35,
+   "removeKey": "bio-s2-mc-b:ap_biology-m31-k0",
+   "addKey": "bio-s2-mc-b:ap_biology-m19-k0",
+   "remove": {
+    "unit": 5,
+    "skill": "3.B",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 5,
+    "skill": "1.C",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 38,
+   "removeKey": "bio-r3:ap_biology-m03-k0",
+   "addKey": "bio-s2-mc-b:ap_biology-m55-k0",
+   "remove": {
+    "unit": 6,
+    "skill": "2.A",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 6,
+    "skill": "2.B",
+    "shared": false,
+    "type": "",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 41,
+   "removeKey": "bio-s2-mc-b:ap_biology-m33-k0",
+   "addKey": "bio-s2-mc-b:ap_biology-m52-k0",
+   "remove": {
+    "unit": 6,
+    "skill": "6.C",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 6,
+    "skill": "6.C",
+    "shared": false,
+    "type": "",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 42,
+   "removeKey": "bio-v2b:ap_biology-m09-k1",
+   "addKey": "bio-s2-mc-b:ap_biology-m39-k0",
+   "remove": {
+    "unit": 7,
+    "skill": "2.B",
+    "shared": false,
+    "type": "",
+    "examPrep": 1
+   },
+   "add": {
+    "unit": 7,
+    "skill": "1.B",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 45,
+   "removeKey": "bio-r2:ap_biology-m13-k0",
+   "addKey": "bio-s2-mc-b:ap_biology-m66-k0",
+   "remove": {
+    "unit": 7,
+    "skill": "2.B",
+    "shared": false,
+    "type": "",
+    "examPrep": 1
+   },
+   "add": {
+    "unit": 7,
+    "skill": "1.C",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 46,
+   "removeKey": "bio-v2b:ap_biology-m12-k0",
+   "addKey": "bio-r4:ap_biology-m01-k1",
+   "remove": {
+    "unit": 6,
+    "skill": "4.B",
+    "shared": false,
+    "type": "",
+    "examPrep": 1
+   },
+   "add": {
+    "unit": 6,
+    "skill": "1.A",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 50,
+   "removeKey": "bio-v2c:ap_biology-m01-k1",
+   "addKey": "bio-v2c:ap_biology-m01-k2",
+   "remove": {
+    "unit": 1,
+    "skill": "6.E",
+    "shared": false,
+    "type": "",
+    "examPrep": 1
+   },
+   "add": {
+    "unit": 1,
+    "skill": "6.E",
+    "shared": false,
+    "type": "",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 51,
+   "removeKey": "bio-s2-mc-b:ap_biology-m30-k0",
+   "addKey": "bio-r2:ap_biology-m14-k1",
+   "remove": {
+    "unit": 7,
+    "skill": "5.A",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 7,
+    "skill": "5.A",
+    "shared": false,
+    "type": "",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 54,
+   "removeKey": "bio-p1-a:ap_biology-m09-k1",
+   "addKey": "bio-r1-mc:ap_biology-m10-k0",
+   "remove": {
+    "unit": 8,
+    "skill": "5.A",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 3,
+    "skill": "1.B",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 55,
+   "removeKey": "bio-s2-mc-b:ap_biology-m15-k0",
+   "addKey": "bio-s2-mc-a:ap_biology-m45-k0",
+   "remove": {
+    "unit": 8,
+    "skill": "4.B",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 2,
+    "skill": "3.D",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 56,
+   "removeKey": "bio-s2-mc-b:ap_biology-m17-k0",
+   "addKey": "bio-v2c:ap_biology-m02-k2",
+   "remove": {
+    "unit": 8,
+    "skill": "6.E",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 2,
+    "skill": "6.E",
+    "shared": false,
+    "type": "",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 57,
+   "removeKey": "bio-p1-a:ap_biology-m05-k0",
+   "addKey": "bio-v2a:ap_biology-m07-k2",
+   "remove": {
+    "unit": 4,
+    "skill": "5.A",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 4,
+    "skill": "5.A",
+    "shared": false,
+    "type": "",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 58,
+   "removeKey": "bio-s2-mc-b:ap_biology-m22-k0",
+   "addKey": "bio-v2b:ap_biology-m04-k0",
+   "remove": {
+    "unit": 8,
+    "skill": "6.E",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 8,
+    "skill": "6.E",
+    "shared": false,
+    "type": "",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 59,
+   "removeKey": "bio-s2-mc-b:ap_biology-m28-k0",
+   "addKey": "bio-s2-mc-a:ap_biology-m40-k0",
+   "remove": {
+    "unit": 8,
+    "skill": "2.B",
+    "shared": false,
+    "type": "",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": 2,
+    "skill": "2.B",
+    "shared": false,
+    "type": "",
+    "examPrep": 1
+   }
+  },
+  {
+   "section": "ap_frq",
+   "position": 6,
+   "removeKey": "bio-s2-frq:ap_biology-f23-k0",
+   "addKey": "bio-s2-frq:ap_biology-f25-k0",
+   "remove": {
+    "unit": null,
+    "skill": null,
+    "shared": false,
+    "type": "bio_q6_data",
+    "examPrep": 0
+   },
+   "add": {
+    "unit": null,
+    "skill": null,
+    "shared": false,
+    "type": "bio_q6_data",
+    "examPrep": 0
+   }
+  }
+ ]
+}

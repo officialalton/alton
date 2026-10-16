@@ -1,0 +1,4012 @@
+{
+ "schemaVersion": 1,
+ "subject": {
+  "apCode": "ap_us_history",
+  "name": "AP U.S. History",
+  "family": "history",
+  "edition": "ced-2027",
+  "cedVersion": "AP U.S. History CED (Course Framework V.1, (c)2026; effective Fall 2026)",
+  "examYear": 2027,
+  "sourceUrl": "https://apcentral.collegeboard.org/media/pdf/ap-us-history-course-and-exam-description.pdf",
+  "officialTopicCodes": true,
+  "designNotes": "9 units (Periods 1-9) with official CED topic codes (105 topics), titles, class-period estimates, and suggested skills from the Unit at a Glance tables. MC unit weights come from the CED exam weighting (U1 4-6, U2 6-8, U3-U8 10-17, U9 4-6 percent). Skills are the historical thinking skills 1.A-6.D; Skill 6 (argumentation, 6.A-6.D) is not assessed in the multiple-choice section, and skill/reasoning-process weights are not published. Sub-keywords, kinds, requires and estLessons are original tutoring-sequence proposals in neutral, mainstream wording."
+ },
+ "skills": [
+  {
+   "code": "1.A",
+   "category": "Skill 1: Developments and Processes",
+   "label": "Identify a historical concept, development, or process"
+  },
+  {
+   "code": "1.B",
+   "category": "Skill 1: Developments and Processes",
+   "label": "Explain a historical concept, development, or process"
+  },
+  {
+   "code": "2.A",
+   "category": "Skill 2: Sourcing and Situation",
+   "label": "Identify a source's point of view, purpose, historical situation, and/or audience"
+  },
+  {
+   "code": "2.B",
+   "category": "Skill 2: Sourcing and Situation",
+   "label": "Explain the point of view, purpose, historical situation, and/or audience of a source"
+  },
+  {
+   "code": "2.C",
+   "category": "Skill 2: Sourcing and Situation",
+   "label": "Explain the significance of a source's point of view, purpose, historical situation, and/or audience, including how these might limit its use"
+  },
+  {
+   "code": "3.A",
+   "category": "Skill 3: Claims and Evidence in Sources",
+   "label": "Identify and describe a claim and/or argument in a text-based or non-text-based source"
+  },
+  {
+   "code": "3.B",
+   "category": "Skill 3: Claims and Evidence in Sources",
+   "label": "Identify the evidence used in a source to support an argument"
+  },
+  {
+   "code": "3.C",
+   "category": "Skill 3: Claims and Evidence in Sources",
+   "label": "Compare the arguments or main ideas of two sources"
+  },
+  {
+   "code": "3.D",
+   "category": "Skill 3: Claims and Evidence in Sources",
+   "label": "Explain how claims or evidence support, modify, or refute a source's argument"
+  },
+  {
+   "code": "4.A",
+   "category": "Skill 4: Contextualization",
+   "label": "Identify and describe a historical context for a specific historical development or process"
+  },
+  {
+   "code": "4.B",
+   "category": "Skill 4: Contextualization",
+   "label": "Explain how a specific historical development or process is situated within a broader historical context"
+  },
+  {
+   "code": "5.A",
+   "category": "Skill 5: Making Connections",
+   "label": "Identify patterns among or connections between historical developments and processes"
+  },
+  {
+   "code": "5.B",
+   "category": "Skill 5: Making Connections",
+   "label": "Explain how a historical development or process relates to another historical development or process"
+  },
+  {
+   "code": "6.A",
+   "category": "Skill 6: Argumentation",
+   "label": "Make a historically defensible claim"
+  },
+  {
+   "code": "6.B",
+   "category": "Skill 6: Argumentation",
+   "label": "Support an argument using specific and relevant evidence"
+  },
+  {
+   "code": "6.C",
+   "category": "Skill 6: Argumentation",
+   "label": "Use historical reasoning to explain relationships among pieces of historical evidence"
+  },
+  {
+   "code": "6.D",
+   "category": "Skill 6: Argumentation",
+   "label": "Corroborate, qualify, or modify an argument using diverse and alternative evidence to develop a complex argument"
+  }
+ ],
+ "weights": [
+  {
+   "axis": "unit",
+   "code": "1",
+   "section": "mc",
+   "min": 4,
+   "max": 6,
+   "source": "AP U.S. History CED (effective Fall 2026), Exam Information p.498: MC unit weighting"
+  },
+  {
+   "axis": "unit",
+   "code": "2",
+   "section": "mc",
+   "min": 6,
+   "max": 8,
+   "source": "AP U.S. History CED (effective Fall 2026), Exam Information p.498: MC unit weighting"
+  },
+  {
+   "axis": "unit",
+   "code": "3",
+   "section": "mc",
+   "min": 10,
+   "max": 17,
+   "source": "AP U.S. History CED (effective Fall 2026), Exam Information p.498: MC unit weighting"
+  },
+  {
+   "axis": "unit",
+   "code": "4",
+   "section": "mc",
+   "min": 10,
+   "max": 17,
+   "source": "AP U.S. History CED (effective Fall 2026), Exam Information p.498: MC unit weighting"
+  },
+  {
+   "axis": "unit",
+   "code": "5",
+   "section": "mc",
+   "min": 10,
+   "max": 17,
+   "source": "AP U.S. History CED (effective Fall 2026), Exam Information p.498: MC unit weighting"
+  },
+  {
+   "axis": "unit",
+   "code": "6",
+   "section": "mc",
+   "min": 10,
+   "max": 17,
+   "source": "AP U.S. History CED (effective Fall 2026), Exam Information p.498: MC unit weighting"
+  },
+  {
+   "axis": "unit",
+   "code": "7",
+   "section": "mc",
+   "min": 10,
+   "max": 17,
+   "source": "AP U.S. History CED (effective Fall 2026), Exam Information p.498: MC unit weighting"
+  },
+  {
+   "axis": "unit",
+   "code": "8",
+   "section": "mc",
+   "min": 10,
+   "max": 17,
+   "source": "AP U.S. History CED (effective Fall 2026), Exam Information p.498: MC unit weighting"
+  },
+  {
+   "axis": "unit",
+   "code": "9",
+   "section": "mc",
+   "min": 4,
+   "max": 6,
+   "source": "AP U.S. History CED (effective Fall 2026), Exam Information p.498: MC unit weighting"
+  }
+ ],
+ "units": [
+  {
+   "code": "1",
+   "title": "Period 1: 1491-1607",
+   "officialClassPeriods": "~8",
+   "topics": [
+    {
+     "code": "1.1",
+     "title": "Contextualizing Period 1",
+     "scope": "both",
+     "skills": [
+      "4.A"
+     ],
+     "requires": [],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "1.1#1",
+       "label": "Global and Atlantic setting before sustained contact",
+       "kind": "concept",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "1.1#2",
+       "label": "Place early Atlantic events in a broader world context",
+       "kind": "skill",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "1.2",
+     "title": "Native American Societies Before European Contact",
+     "scope": "both",
+     "skills": [
+      "1.A"
+     ],
+     "requires": [
+      "1.1"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "1.2#1",
+       "label": "Regional Native societies adapted to differing environments",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "1.2#2",
+       "label": "Treating Native peoples as one uniform culture",
+       "kind": "misconception",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "1.3",
+     "title": "European Exploration in the Americas",
+     "scope": "both",
+     "skills": [
+      "1.A"
+     ],
+     "requires": [
+      "1.2"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "1.3#1",
+       "label": "Motives and technologies behind Atlantic voyages",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "1.3#2",
+       "label": "Reading maps of 15th-16th century exploration routes",
+       "kind": "representation",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "1.4",
+     "title": "Columbian Exchange, Spanish Exploration, and Conquest",
+     "scope": "both",
+     "skills": [
+      "3.A"
+     ],
+     "requires": [
+      "1.3"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "1.4#1",
+       "label": "Two-way transfer of crops, animals, and diseases",
+       "kind": "concept",
+       "skills": [
+        "3.A"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "1.4#2",
+       "label": "Epidemic disease and Spanish conquest of major Native empires",
+       "kind": "concept",
+       "skills": [
+        "3.A"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "1.4#3",
+       "label": "Identify the claim in a source on conquest or exchange",
+       "kind": "skill",
+       "skills": [
+        "3.A"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "1.5",
+     "title": "Labor, Slavery, and Caste in the Spanish Colonial System",
+     "scope": "both",
+     "skills": [
+      "5.A"
+     ],
+     "requires": [
+      "1.4"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "1.5#1",
+       "label": "Encomienda and forced Native labor in Spanish colonies",
+       "kind": "concept",
+       "skills": [
+        "5.A"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "1.5#2",
+       "label": "Caste hierarchy of the Spanish colonial social order",
+       "kind": "concept",
+       "skills": [
+        "5.A"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "1.6",
+     "title": "Cultural Interactions Between Europeans, Native Americans, and Africans",
+     "scope": "both",
+     "skills": [
+      "3.B"
+     ],
+     "requires": [
+      "1.5"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "1.6#1",
+       "label": "Cultural blending and conflict among Atlantic peoples",
+       "kind": "concept",
+       "skills": [
+        "3.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "1.6#2",
+       "label": "Find evidence a source uses to describe early cultural contact",
+       "kind": "skill",
+       "skills": [
+        "3.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "1.7",
+     "title": "Causation in Period 1",
+     "scope": "both",
+     "skills": [
+      "6.A"
+     ],
+     "requires": [
+      "1.6"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "1.7#1",
+       "label": "Write a defensible claim about causes of Spanish colonization",
+       "kind": "skill",
+       "skills": [
+        "6.A"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "1.7#2",
+       "label": "Short-term and long-term causes of European expansion",
+       "kind": "concept",
+       "skills": [
+        "6.A"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "2",
+   "title": "Period 2: 1607-1754",
+   "officialClassPeriods": "~14",
+   "topics": [
+    {
+     "code": "2.1",
+     "title": "Contextualizing Period 2",
+     "scope": "both",
+     "skills": [
+      "4.A"
+     ],
+     "requires": [],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "2.1#1",
+       "label": "Colonial settlement within the early modern Atlantic world",
+       "kind": "concept",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "2.1#2",
+       "label": "Describe the context for the founding of English colonies",
+       "kind": "skill",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "2.2",
+     "title": "European Colonization",
+     "scope": "both",
+     "skills": [
+      "1.B"
+     ],
+     "requires": [
+      "2.1"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "2.2#1",
+       "label": "Spanish, French, Dutch, and English colonial goals compared",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "2.2#2",
+       "label": "Jamestown, Plymouth, and Massachusetts Bay settlement patterns",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "2.3",
+     "title": "The Regions of British Colonies",
+     "scope": "both",
+     "skills": [
+      "3.A"
+     ],
+     "requires": [
+      "2.2"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "2.3#1",
+       "label": "New England, Middle, Chesapeake, and Southern colonial economies",
+       "kind": "concept",
+       "skills": [
+        "3.A"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "2.3#2",
+       "label": "Interpreting a map of colonial regions and exports",
+       "kind": "representation",
+       "skills": [
+        "3.A"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "2.4",
+     "title": "Transatlantic Trade",
+     "scope": "both",
+     "skills": [
+      "5.A"
+     ],
+     "requires": [
+      "2.3"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "2.4#1",
+       "label": "Mercantilism and the Navigation Acts",
+       "kind": "concept",
+       "skills": [
+        "5.A"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "2.4#2",
+       "label": "Triangular trade connecting Africa, the Americas, and Europe",
+       "kind": "concept",
+       "skills": [
+        "5.A"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "2.4#3",
+       "label": "Colonies trading freely with no imperial regulation",
+       "kind": "misconception",
+       "skills": [
+        "5.A"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "2.5",
+     "title": "Interactions Between American Indians and Europeans",
+     "scope": "both",
+     "skills": [
+      "2.A"
+     ],
+     "requires": [
+      "2.4"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "2.5#1",
+       "label": "Alliances, trade, and warfare between colonists and Native nations",
+       "kind": "concept",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "2.5#2",
+       "label": "Identify the viewpoint of a colonial-era account of Native relations",
+       "kind": "skill",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "2.6",
+     "title": "Slavery in the British Colonies",
+     "scope": "both",
+     "skills": [
+      "5.A"
+     ],
+     "requires": [
+      "2.5"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "2.6#1",
+       "label": "Growth of chattel slavery and slave codes in English colonies",
+       "kind": "concept",
+       "skills": [
+        "5.A"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "2.6#2",
+       "label": "Enslaved African resistance and community formation",
+       "kind": "concept",
+       "skills": [
+        "5.A"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "2.7",
+     "title": "Colonial Society and Culture",
+     "scope": "both",
+     "skills": [
+      "1.A"
+     ],
+     "requires": [
+      "2.6"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "2.7#1",
+       "label": "The Great Awakening and Enlightenment influences",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "2.7#2",
+       "label": "Colonial self-government traditions and assemblies",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "2.7#3",
+       "label": "Colonial society as religiously and socially uniform",
+       "kind": "misconception",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "2.8",
+     "title": "Comparison in Period 2",
+     "scope": "both",
+     "skills": [
+      "6.B"
+     ],
+     "requires": [
+      "2.7"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "2.8#1",
+       "label": "Support a comparison of colonial regions with specific evidence",
+       "kind": "skill",
+       "skills": [
+        "6.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "2.8#2",
+       "label": "Differences in labor systems across colonial regions",
+       "kind": "concept",
+       "skills": [
+        "6.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "3",
+   "title": "Period 3: 1754-1800",
+   "officialClassPeriods": "~17",
+   "topics": [
+    {
+     "code": "3.1",
+     "title": "Contextualizing Period 3",
+     "scope": "both",
+     "skills": [
+      "4.A"
+     ],
+     "requires": [],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "3.1#1",
+       "label": "Imperial rivalry and rising colonial tension after 1750",
+       "kind": "concept",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "3.1#2",
+       "label": "Describe the context for the break with Britain",
+       "kind": "skill",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "3.2",
+     "title": "The Seven Years' War",
+     "scope": "both",
+     "skills": [
+      "1.B"
+     ],
+     "requires": [
+      "3.1"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "3.2#1",
+       "label": "British victory and the Proclamation of 1763",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "3.2#2",
+       "label": "War debt as a cause of new imperial policies",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "3.3",
+     "title": "Taxation Without Representation",
+     "scope": "both",
+     "skills": [
+      "2.A"
+     ],
+     "requires": [
+      "3.2"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "3.3#1",
+       "label": "Stamp Act and Townshend duties and colonial protest",
+       "kind": "concept",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "3.3#2",
+       "label": "Identify the audience and purpose of a protest pamphlet",
+       "kind": "skill",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "3.4",
+     "title": "Philosophical Foundations of the American Revolution",
+     "scope": "both",
+     "skills": [
+      "2.B"
+     ],
+     "requires": [
+      "3.3"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "3.4#1",
+       "label": "Natural rights and social contract ideas",
+       "kind": "concept",
+       "skills": [
+        "2.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "3.4#2",
+       "label": "Republican ideals and fear of concentrated power",
+       "kind": "concept",
+       "skills": [
+        "2.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "3.5",
+     "title": "The American Revolution",
+     "scope": "both",
+     "skills": [
+      "6.B"
+     ],
+     "requires": [
+      "3.4"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "3.5#1",
+       "label": "Declaration of Independence and Patriot, Loyalist, and neutral divisions",
+       "kind": "concept",
+       "skills": [
+        "6.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "3.5#2",
+       "label": "French assistance and American victory at Yorktown",
+       "kind": "concept",
+       "skills": [
+        "6.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "3.6",
+     "title": "The Influence of Revolutionary Ideals",
+     "scope": "both",
+     "skills": [
+      "3.A"
+     ],
+     "requires": [
+      "3.5"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "3.6#1",
+       "label": "Revolutionary ideas applied to slavery, religion, and women's roles",
+       "kind": "concept",
+       "skills": [
+        "3.A"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "3.6#2",
+       "label": "Revolutionary rights extended equally to everyone",
+       "kind": "misconception",
+       "skills": [
+        "3.A"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "3.7",
+     "title": "The Articles of Confederation",
+     "scope": "both",
+     "skills": [
+      "3.B"
+     ],
+     "requires": [
+      "3.6"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "3.7#1",
+       "label": "Weak central government under the first national framework",
+       "kind": "concept",
+       "skills": [
+        "3.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "3.7#2",
+       "label": "Northwest Ordinance and Land Ordinance of 1785",
+       "kind": "concept",
+       "skills": [
+        "3.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "3.8",
+     "title": "The Constitutional Convention and Debates over Ratification",
+     "scope": "both",
+     "skills": [
+      "3.A"
+     ],
+     "requires": [
+      "3.7"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "3.8#1",
+       "label": "Great Compromise and Three-Fifths Compromise",
+       "kind": "concept",
+       "skills": [
+        "3.A"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "3.8#2",
+       "label": "Federalist and Anti-Federalist positions on ratification",
+       "kind": "concept",
+       "skills": [
+        "3.A"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "3.8#3",
+       "label": "Identify the argument in a Federalist or Anti-Federalist essay",
+       "kind": "skill",
+       "skills": [
+        "3.A"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "3.9",
+     "title": "The Constitution",
+     "scope": "both",
+     "skills": [
+      "5.A"
+     ],
+     "requires": [
+      "3.8"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "3.9#1",
+       "label": "Federalism, separation of powers, and checks and balances",
+       "kind": "concept",
+       "skills": [
+        "5.A"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "3.9#2",
+       "label": "The Bill of Rights as a ratification-era response",
+       "kind": "concept",
+       "skills": [
+        "5.A"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "3.10",
+     "title": "Shaping a New Republic",
+     "scope": "both",
+     "skills": [
+      "2.A"
+     ],
+     "requires": [
+      "3.9"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "3.10#1",
+       "label": "Hamilton's financial program and early party formation",
+       "kind": "concept",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "3.10#2",
+       "label": "Washington's Farewell Address and neutrality",
+       "kind": "concept",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "3.10#3",
+       "label": "Identify the purpose and audience of an early republic document",
+       "kind": "skill",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "3.11",
+     "title": "Developing an American Identity",
+     "scope": "both",
+     "skills": [
+      "1.B"
+     ],
+     "requires": [
+      "3.10"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "3.11#1",
+       "label": "Emerging national culture, art, and civic symbols",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "3.11#2",
+       "label": "Early debates over citizenship and racial boundaries",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "3.12",
+     "title": "Movement in the Early Republic",
+     "scope": "both",
+     "skills": [
+      "5.A"
+     ],
+     "requires": [
+      "3.11"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "3.12#1",
+       "label": "Westward settlement and conflict with Native nations",
+       "kind": "concept",
+       "skills": [
+        "5.A"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "3.12#2",
+       "label": "Treaty of Greenville and Pinckney's Treaty",
+       "kind": "concept",
+       "skills": [
+        "5.A"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "3.13",
+     "title": "Continuity and Change in Period 3",
+     "scope": "both",
+     "skills": [
+      "6.B"
+     ],
+     "requires": [
+      "3.12"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "3.13#1",
+       "label": "Support a continuity-and-change claim about 1754-1800",
+       "kind": "skill",
+       "skills": [
+        "6.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "3.13#2",
+       "label": "What changed and what persisted in colonial-to-national government",
+       "kind": "concept",
+       "skills": [
+        "6.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "4",
+   "title": "Period 4: 1800-1848",
+   "officialClassPeriods": "~17",
+   "topics": [
+    {
+     "code": "4.1",
+     "title": "Contextualizing Period 4",
+     "scope": "both",
+     "skills": [
+      "4.A"
+     ],
+     "requires": [],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "4.1#1",
+       "label": "Political and economic setting of the early 19th century",
+       "kind": "concept",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "4.1#2",
+       "label": "Describe the context for the nation's early expansion",
+       "kind": "skill",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "4.2",
+     "title": "The Rise of Political Parties and the Era of Jefferson",
+     "scope": "both",
+     "skills": [
+      "2.A"
+     ],
+     "requires": [
+      "4.1"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "4.2#1",
+       "label": "Federalist and Democratic-Republican competition",
+       "kind": "concept",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "4.2#2",
+       "label": "Marbury v. Madison and judicial review",
+       "kind": "concept",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "4.2#3",
+       "label": "Identify the point of view in a partisan political source",
+       "kind": "skill",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "4.3",
+     "title": "Politics and Regional Interests",
+     "scope": "both",
+     "skills": [
+      "2.B"
+     ],
+     "requires": [
+      "4.2"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "4.3#1",
+       "label": "Regional economic interests in tariffs and internal improvements",
+       "kind": "concept",
+       "skills": [
+        "2.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "4.3#2",
+       "label": "Missouri Compromise and the sectional balance in Congress",
+       "kind": "concept",
+       "skills": [
+        "2.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "4.4",
+     "title": "America on the World Stage",
+     "scope": "both",
+     "skills": [
+      "2.B"
+     ],
+     "requires": [
+      "4.3"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "4.4#1",
+       "label": "Louisiana Purchase and the War of 1812",
+       "kind": "concept",
+       "skills": [
+        "2.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "4.4#2",
+       "label": "Monroe Doctrine and American foreign policy goals",
+       "kind": "concept",
+       "skills": [
+        "2.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "4.5",
+     "title": "Market Revolution: Industrialization",
+     "scope": "both",
+     "skills": [
+      "6.B"
+     ],
+     "requires": [
+      "4.4"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "4.5#1",
+       "label": "Early factories, cotton gin, and interchangeable parts",
+       "kind": "concept",
+       "skills": [
+        "6.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "4.5#2",
+       "label": "Transportation improvements such as canals and railroads",
+       "kind": "concept",
+       "skills": [
+        "6.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "4.5#3",
+       "label": "Back an argument about industrialization with specific evidence",
+       "kind": "skill",
+       "skills": [
+        "6.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "4.6",
+     "title": "Market Revolution: Society and Culture",
+     "scope": "both",
+     "skills": [
+      "5.B"
+     ],
+     "requires": [
+      "4.5"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "4.6#1",
+       "label": "Changing family, work, and class patterns in a market economy",
+       "kind": "concept",
+       "skills": [
+        "5.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "4.6#2",
+       "label": "Urban growth and early immigration",
+       "kind": "concept",
+       "skills": [
+        "5.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "4.7",
+     "title": "Expanding Democracy",
+     "scope": "both",
+     "skills": [
+      "1.B"
+     ],
+     "requires": [
+      "4.6"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "4.7#1",
+       "label": "Expansion of white male suffrage and popular politics",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "4.7#2",
+       "label": "Limits on democracy for women, free Blacks, and Native peoples",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "4.8",
+     "title": "Jackson and Federal Power",
+     "scope": "both",
+     "skills": [
+      "3.D"
+     ],
+     "requires": [
+      "4.7"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "4.8#1",
+       "label": "Nullification crisis and the Bank War",
+       "kind": "concept",
+       "skills": [
+        "3.D"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "4.8#2",
+       "label": "Indian Removal and the Trail of Tears",
+       "kind": "concept",
+       "skills": [
+        "3.D"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "4.8#3",
+       "label": "Judge how evidence supports or refutes a source on federal power",
+       "kind": "skill",
+       "skills": [
+        "3.D"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "4.9",
+     "title": "The Development of an American Culture",
+     "scope": "both",
+     "skills": [
+      "4.B"
+     ],
+     "requires": [
+      "4.8"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "4.9#1",
+       "label": "Romanticism, Transcendentalism, and national literature",
+       "kind": "concept",
+       "skills": [
+        "4.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "4.9#2",
+       "label": "Hudson River School painting and American themes",
+       "kind": "concept",
+       "skills": [
+        "4.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "4.10",
+     "title": "The Second Great Awakening",
+     "scope": "both",
+     "skills": [
+      "5.B"
+     ],
+     "requires": [
+      "4.9"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "4.10#1",
+       "label": "Revivalism and its social impact",
+       "kind": "concept",
+       "skills": [
+        "5.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "4.10#2",
+       "label": "Link between religious revival and reform movements",
+       "kind": "concept",
+       "skills": [
+        "5.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "4.11",
+     "title": "An Age of Reform",
+     "scope": "both",
+     "skills": [
+      "3.B"
+     ],
+     "requires": [
+      "4.10"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "4.11#1",
+       "label": "Abolitionism, temperance, and education reform",
+       "kind": "concept",
+       "skills": [
+        "3.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "4.11#2",
+       "label": "Seneca Falls and early women's rights activism",
+       "kind": "concept",
+       "skills": [
+        "3.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "4.11#3",
+       "label": "Find the evidence a reformer cites to support an argument",
+       "kind": "skill",
+       "skills": [
+        "3.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "4.12",
+     "title": "African Americans in the Early Republic",
+     "scope": "both",
+     "skills": [
+      "3.D"
+     ],
+     "requires": [
+      "4.11"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "4.12#1",
+       "label": "Free Black communities and institutions in the North",
+       "kind": "concept",
+       "skills": [
+        "3.D"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "4.12#2",
+       "label": "Resistance and gradual abolition in the early republic",
+       "kind": "concept",
+       "skills": [
+        "3.D"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "4.13",
+     "title": "The Society of the South in the Early Republic",
+     "scope": "both",
+     "skills": [
+      "1.B"
+     ],
+     "requires": [
+      "4.12"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "4.13#1",
+       "label": "Cotton economy and the expansion of slavery",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "4.13#2",
+       "label": "Planter ideology and the defense of slavery",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "4.14",
+     "title": "Causation in Period 4",
+     "scope": "both",
+     "skills": [
+      "6.C"
+     ],
+     "requires": [
+      "4.13"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "4.14#1",
+       "label": "Explain how pieces of evidence connect in a causal argument",
+       "kind": "skill",
+       "skills": [
+        "6.C"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "4.14#2",
+       "label": "Causes and effects of the Market Revolution",
+       "kind": "concept",
+       "skills": [
+        "6.C"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "5",
+   "title": "Period 5: 1844-1877",
+   "officialClassPeriods": "~17",
+   "topics": [
+    {
+     "code": "5.1",
+     "title": "Contextualizing Period 5",
+     "scope": "both",
+     "skills": [
+      "4.B"
+     ],
+     "requires": [],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "5.1#1",
+       "label": "Territorial growth and sectional tension in the 1840s",
+       "kind": "concept",
+       "skills": [
+        "4.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "5.1#2",
+       "label": "Situate mid-century events in a broader historical context",
+       "kind": "skill",
+       "skills": [
+        "4.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "5.2",
+     "title": "Manifest Destiny",
+     "scope": "both",
+     "skills": [
+      "1.B"
+     ],
+     "requires": [
+      "5.1"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "5.2#1",
+       "label": "Belief in continental expansion and its supporters",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "5.2#2",
+       "label": "Oregon, Texas, and westward migration routes",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "5.3",
+     "title": "The Mexican-American War",
+     "scope": "both",
+     "skills": [
+      "3.C"
+     ],
+     "requires": [
+      "5.2"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "5.3#1",
+       "label": "Annexation of Texas and the war with Mexico",
+       "kind": "concept",
+       "skills": [
+        "3.C"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "5.3#2",
+       "label": "Treaty of Guadalupe Hidalgo and Mexican Cession",
+       "kind": "concept",
+       "skills": [
+        "3.C"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "5.3#3",
+       "label": "Compare two sources on the justification for the war",
+       "kind": "skill",
+       "skills": [
+        "3.C"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "5.4",
+     "title": "The Compromise of 1850",
+     "scope": "both",
+     "skills": [
+      "4.B"
+     ],
+     "requires": [
+      "5.3"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "5.4#1",
+       "label": "Territorial questions after the Mexican Cession",
+       "kind": "concept",
+       "skills": [
+        "4.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "5.4#2",
+       "label": "Provisions of the Compromise including the Fugitive Slave Act",
+       "kind": "concept",
+       "skills": [
+        "4.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "5.5",
+     "title": "Sectional Conflict: Regional Differences",
+     "scope": "both",
+     "skills": [
+      "2.B"
+     ],
+     "requires": [
+      "5.4"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "5.5#1",
+       "label": "Diverging Northern and Southern economies and societies",
+       "kind": "concept",
+       "skills": [
+        "2.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "5.5#2",
+       "label": "Explain the viewpoint and purpose of a sectional source",
+       "kind": "skill",
+       "skills": [
+        "2.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "5.6",
+     "title": "Failure of Compromise",
+     "scope": "both",
+     "skills": [
+      "5.B"
+     ],
+     "requires": [
+      "5.5"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "5.6#1",
+       "label": "Kansas-Nebraska Act and Bleeding Kansas",
+       "kind": "concept",
+       "skills": [
+        "5.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "5.6#2",
+       "label": "Dred Scott decision and the rise of the Republican Party",
+       "kind": "concept",
+       "skills": [
+        "5.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "5.7",
+     "title": "Election of 1860 and Secession",
+     "scope": "both",
+     "skills": [
+      "4.B"
+     ],
+     "requires": [
+      "5.6"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "5.7#1",
+       "label": "Lincoln's election and Southern secession",
+       "kind": "concept",
+       "skills": [
+        "4.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "5.7#2",
+       "label": "Place the secession crisis in its broader context",
+       "kind": "skill",
+       "skills": [
+        "4.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "5.8",
+     "title": "Military Conflict in the Civil War",
+     "scope": "both",
+     "skills": [
+      "5.A"
+     ],
+     "requires": [
+      "5.7"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "5.8#1",
+       "label": "Northern and Southern strengths, strategies, and key campaigns",
+       "kind": "concept",
+       "skills": [
+        "5.A"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "5.8#2",
+       "label": "Turning points at Gettysburg and Vicksburg",
+       "kind": "concept",
+       "skills": [
+        "5.A"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "5.8#3",
+       "label": "Using campaign maps to follow Civil War strategy",
+       "kind": "representation",
+       "skills": [
+        "5.A"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "5.9",
+     "title": "Government Policies During the Civil War",
+     "scope": "both",
+     "skills": [
+      "2.B"
+     ],
+     "requires": [
+      "5.8"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "5.9#1",
+       "label": "Emancipation Proclamation and Union war aims",
+       "kind": "concept",
+       "skills": [
+        "2.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "5.9#2",
+       "label": "Wartime measures like the draft and suspension of habeas corpus",
+       "kind": "concept",
+       "skills": [
+        "2.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "5.9#3",
+       "label": "The Emancipation Proclamation freed all enslaved people at once",
+       "kind": "misconception",
+       "skills": [
+        "2.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "5.10",
+     "title": "Reconstruction",
+     "scope": "both",
+     "skills": [
+      "3.D"
+     ],
+     "requires": [
+      "5.9"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "5.10#1",
+       "label": "Reconstruction plans and the 13th, 14th, and 15th Amendments",
+       "kind": "concept",
+       "skills": [
+        "3.D"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "5.10#2",
+       "label": "Freedpeople's institutions, labor, and political participation",
+       "kind": "concept",
+       "skills": [
+        "3.D"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "5.11",
+     "title": "Failure of Reconstruction",
+     "scope": "both",
+     "skills": [
+      "3.C"
+     ],
+     "requires": [
+      "5.10"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "5.11#1",
+       "label": "Violence and the Compromise of 1877",
+       "kind": "concept",
+       "skills": [
+        "3.C"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "5.11#2",
+       "label": "Sharecropping and Black Codes limiting freedom",
+       "kind": "concept",
+       "skills": [
+        "3.C"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "5.12",
+     "title": "Comparison in Period 5",
+     "scope": "both",
+     "skills": [
+      "6.C"
+     ],
+     "requires": [
+      "5.11"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "5.12#1",
+       "label": "Use evidence to compare Northern and Southern societies",
+       "kind": "skill",
+       "skills": [
+        "6.C"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "5.12#2",
+       "label": "Compare Reconstruction goals with its actual outcomes",
+       "kind": "concept",
+       "skills": [
+        "6.C"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "6",
+   "title": "Period 6: 1865-1898",
+   "officialClassPeriods": "~18",
+   "topics": [
+    {
+     "code": "6.1",
+     "title": "Contextualizing Period 6",
+     "scope": "both",
+     "skills": [
+      "4.B"
+     ],
+     "requires": [],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "6.1#1",
+       "label": "Post-Civil War industrial and territorial expansion",
+       "kind": "concept",
+       "skills": [
+        "4.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "6.1#2",
+       "label": "Situate Gilded Age events in a broader context",
+       "kind": "skill",
+       "skills": [
+        "4.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "6.2",
+     "title": "Westward Expansion: Economic Development",
+     "scope": "both",
+     "skills": [
+      "1.B"
+     ],
+     "requires": [
+      "6.1"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "6.2#1",
+       "label": "Transcontinental railroad, mining, ranching, and farming",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "6.2#2",
+       "label": "Homestead Act and settlement of the Plains",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "6.3",
+     "title": "Westward Expansion: Social and Cultural Development",
+     "scope": "both",
+     "skills": [
+      "3.C"
+     ],
+     "requires": [
+      "6.2"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "6.3#1",
+       "label": "Conflicts and policies affecting Plains Indians",
+       "kind": "concept",
+       "skills": [
+        "3.C"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "6.3#2",
+       "label": "Dawes Act, boarding schools, and assimilation efforts",
+       "kind": "concept",
+       "skills": [
+        "3.C"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "6.3#3",
+       "label": "Compare two sources on westward settlement",
+       "kind": "skill",
+       "skills": [
+        "3.C"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "6.4",
+     "title": "The 'New South'",
+     "scope": "both",
+     "skills": [
+      "2.C"
+     ],
+     "requires": [
+      "6.3"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "6.4#1",
+       "label": "Industrial boosters and persistent agricultural poverty in the South",
+       "kind": "concept",
+       "skills": [
+        "2.C"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "6.4#2",
+       "label": "Jim Crow laws and Plessy v. Ferguson",
+       "kind": "concept",
+       "skills": [
+        "2.C"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "6.4#3",
+       "label": "Explain how a source's point of view limits its usefulness",
+       "kind": "skill",
+       "skills": [
+        "2.C"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "6.5",
+     "title": "Technological Innovation",
+     "scope": "both",
+     "skills": [
+      "5.B"
+     ],
+     "requires": [
+      "6.4"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "6.5#1",
+       "label": "Electricity, telephone, and steel production",
+       "kind": "concept",
+       "skills": [
+        "5.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "6.5#2",
+       "label": "Connection between new technology and urban growth",
+       "kind": "concept",
+       "skills": [
+        "5.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "6.6",
+     "title": "The Rise of Industrial Capitalism",
+     "scope": "both",
+     "skills": [
+      "4.B"
+     ],
+     "requires": [
+      "6.5"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "6.6#1",
+       "label": "Corporations, trusts, and consolidation of industry",
+       "kind": "concept",
+       "skills": [
+        "4.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "6.6#2",
+       "label": "Social Darwinism and the Gospel of Wealth",
+       "kind": "concept",
+       "skills": [
+        "4.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "6.7",
+     "title": "Labor in the Gilded Age",
+     "scope": "both",
+     "skills": [
+      "6.C"
+     ],
+     "requires": [
+      "6.6"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "6.7#1",
+       "label": "Growth of unions and the Haymarket and Pullman conflicts",
+       "kind": "concept",
+       "skills": [
+        "6.C"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "6.7#2",
+       "label": "Use reasoning to link labor-conflict evidence to an argument",
+       "kind": "skill",
+       "skills": [
+        "6.C"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "6.8",
+     "title": "Immigration and Migration in the Gilded Age",
+     "scope": "both",
+     "skills": [
+      "3.C"
+     ],
+     "requires": [
+      "6.7"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "6.8#1",
+       "label": "Immigrants from southern and eastern Europe and Asia",
+       "kind": "concept",
+       "skills": [
+        "3.C"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "6.8#2",
+       "label": "Rural-to-urban migration and Great Migration precursors",
+       "kind": "concept",
+       "skills": [
+        "3.C"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "6.8#3",
+       "label": "Compare two sources on immigrant experiences",
+       "kind": "skill",
+       "skills": [
+        "3.C"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "6.9",
+     "title": "Responses to Immigration in the Gilded Age",
+     "scope": "both",
+     "skills": [
+      "5.B"
+     ],
+     "requires": [
+      "6.8"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "6.9#1",
+       "label": "Nativism and the Chinese Exclusion Act",
+       "kind": "concept",
+       "skills": [
+        "5.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "6.9#2",
+       "label": "Ethnic neighborhoods and immigrant adaptation",
+       "kind": "concept",
+       "skills": [
+        "5.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "6.10",
+     "title": "Development of the Middle Class",
+     "scope": "both",
+     "skills": [
+      "4.B"
+     ],
+     "requires": [
+      "6.9"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "6.10#1",
+       "label": "Rise of white-collar work, department stores, and leisure",
+       "kind": "concept",
+       "skills": [
+        "4.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "6.10#2",
+       "label": "Urban culture and consumerism in the late 19th century",
+       "kind": "concept",
+       "skills": [
+        "4.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "6.11",
+     "title": "Reform in the Gilded Age",
+     "scope": "both",
+     "skills": [
+      "2.C"
+     ],
+     "requires": [
+      "6.10"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "6.11#1",
+       "label": "Settlement houses, Social Gospel, and temperance",
+       "kind": "concept",
+       "skills": [
+        "2.C"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "6.11#2",
+       "label": "Women's activism and early reform organizations",
+       "kind": "concept",
+       "skills": [
+        "2.C"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "6.11#3",
+       "label": "Judge how a reformer's purpose shapes a source",
+       "kind": "skill",
+       "skills": [
+        "2.C"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "6.12",
+     "title": "Controversies over the Role of Government in the Gilded Age",
+     "scope": "both",
+     "skills": [
+      "4.B"
+     ],
+     "requires": [
+      "6.11"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "6.12#1",
+       "label": "Debates over regulation of railroads and business",
+       "kind": "concept",
+       "skills": [
+        "4.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "6.12#2",
+       "label": "Interstate Commerce Act and Sherman Antitrust Act",
+       "kind": "concept",
+       "skills": [
+        "4.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "6.13",
+     "title": "Politics in the Gilded Age",
+     "scope": "both",
+     "skills": [
+      "3.D"
+     ],
+     "requires": [
+      "6.12"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "6.13#1",
+       "label": "Patronage, the Pendleton Act, and party competition",
+       "kind": "concept",
+       "skills": [
+        "3.D"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "6.13#2",
+       "label": "Populist Party and the currency debate",
+       "kind": "concept",
+       "skills": [
+        "3.D"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "6.14",
+     "title": "Continuity and Change in Period 6",
+     "scope": "both",
+     "skills": [
+      "6.D"
+     ],
+     "requires": [
+      "6.13"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "6.14#1",
+       "label": "Qualify a claim about Gilded Age change using alternative evidence",
+       "kind": "skill",
+       "skills": [
+        "6.D"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "6.14#2",
+       "label": "Continuities and changes in American society from 1865 to 1898",
+       "kind": "concept",
+       "skills": [
+        "6.D"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "7",
+   "title": "Period 7: 1890-1945",
+   "officialClassPeriods": "~21",
+   "topics": [
+    {
+     "code": "7.1",
+     "title": "Contextualizing Period 7",
+     "scope": "both",
+     "skills": [
+      "4.B"
+     ],
+     "requires": [],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "7.1#1",
+       "label": "Industrial power and new global ambitions around 1900",
+       "kind": "concept",
+       "skills": [
+        "4.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "7.1#2",
+       "label": "Situate early 20th-century developments in context",
+       "kind": "skill",
+       "skills": [
+        "4.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "7.2",
+     "title": "Imperialism: Debates",
+     "scope": "both",
+     "skills": [
+      "2.C"
+     ],
+     "requires": [
+      "7.1"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "7.2#1",
+       "label": "Arguments for and against American overseas expansion",
+       "kind": "concept",
+       "skills": [
+        "2.C"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "7.2#2",
+       "label": "Explain how an imperialist's purpose limits a source",
+       "kind": "skill",
+       "skills": [
+        "2.C"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "7.3",
+     "title": "The Spanish-American War",
+     "scope": "both",
+     "skills": [
+      "2.B"
+     ],
+     "requires": [
+      "7.2"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "7.3#1",
+       "label": "Causes of the 1898 war and acquisition of overseas territories",
+       "kind": "concept",
+       "skills": [
+        "2.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "7.3#2",
+       "label": "Philippine War and debates over annexation",
+       "kind": "concept",
+       "skills": [
+        "2.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "7.4",
+     "title": "The Progressives",
+     "scope": "both",
+     "skills": [
+      "2.C"
+     ],
+     "requires": [
+      "7.3"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "7.4#1",
+       "label": "Progressive reforms in cities, states, and national government",
+       "kind": "concept",
+       "skills": [
+        "2.C"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "7.4#2",
+       "label": "Muckrakers and regulation like the Pure Food and Drug Act",
+       "kind": "concept",
+       "skills": [
+        "2.C"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "7.4#3",
+       "label": "Weigh a Progressive source's limitations",
+       "kind": "skill",
+       "skills": [
+        "2.C"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "7.5",
+     "title": "World War I: Contexts and Causes",
+     "scope": "both",
+     "skills": [
+      "2.C"
+     ],
+     "requires": [
+      "7.4"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "7.5#1",
+       "label": "American neutrality and entry into World War I",
+       "kind": "concept",
+       "skills": [
+        "2.C"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "7.5#2",
+       "label": "Zimmermann Telegram and unrestricted submarine warfare",
+       "kind": "concept",
+       "skills": [
+        "2.C"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "7.6",
+     "title": "World War I: Home Front",
+     "scope": "both",
+     "skills": [
+      "3.D"
+     ],
+     "requires": [
+      "7.5"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "7.6#1",
+       "label": "Mobilization, propaganda, and wartime civil liberties",
+       "kind": "concept",
+       "skills": [
+        "3.D"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "7.6#2",
+       "label": "Great Migration and wartime labor shifts",
+       "kind": "concept",
+       "skills": [
+        "3.D"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "7.7",
+     "title": "1920s: Innovations in Communication and Technology",
+     "scope": "both",
+     "skills": [
+      "5.B"
+     ],
+     "requires": [
+      "7.6"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "7.7#1",
+       "label": "Radio, film, and the automobile in the 1920s",
+       "kind": "concept",
+       "skills": [
+        "5.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "7.7#2",
+       "label": "Mass consumption and installment buying",
+       "kind": "concept",
+       "skills": [
+        "5.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "7.8",
+     "title": "1920s: Cultural and Political Controversies",
+     "scope": "both",
+     "skills": [
+      "4.B"
+     ],
+     "requires": [
+      "7.7"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "7.8#1",
+       "label": "Prohibition, Scopes trial, and immigration restriction",
+       "kind": "concept",
+       "skills": [
+        "4.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "7.8#2",
+       "label": "Harlem Renaissance and the Red Scare of 1919-1920",
+       "kind": "concept",
+       "skills": [
+        "4.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "7.9",
+     "title": "The Great Depression",
+     "scope": "both",
+     "skills": [
+      "5.B"
+     ],
+     "requires": [
+      "7.8"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "7.9#1",
+       "label": "Causes of the 1929 crash and spread of the Depression",
+       "kind": "concept",
+       "skills": [
+        "5.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "7.9#2",
+       "label": "Hoover's response and social effects of unemployment",
+       "kind": "concept",
+       "skills": [
+        "5.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "7.10",
+     "title": "The New Deal",
+     "scope": "both",
+     "skills": [
+      "5.B"
+     ],
+     "requires": [
+      "7.9"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "7.10#1",
+       "label": "Relief, recovery, and reform programs",
+       "kind": "concept",
+       "skills": [
+        "5.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "7.10#2",
+       "label": "Social Security and the changing role of federal government",
+       "kind": "concept",
+       "skills": [
+        "5.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "7.10#3",
+       "label": "The New Deal ended the Depression by itself",
+       "kind": "misconception",
+       "skills": [
+        "5.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "7.11",
+     "title": "Interwar Foreign Policy",
+     "scope": "both",
+     "skills": [
+      "1.B"
+     ],
+     "requires": [
+      "7.10"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "7.11#1",
+       "label": "Isolationism, the Neutrality Acts, and Good Neighbor Policy",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "7.11#2",
+       "label": "Washington Naval Conference and Kellogg-Briand Pact",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "7.12",
+     "title": "World War II: Mobilization",
+     "scope": "both",
+     "skills": [
+      "1.B"
+     ],
+     "requires": [
+      "7.11"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "7.12#1",
+       "label": "Economic mobilization and women in wartime industry",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "7.12#2",
+       "label": "Japanese American internment and wartime civil rights",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "7.13",
+     "title": "World War II: Military",
+     "scope": "both",
+     "skills": [
+      "6.C"
+     ],
+     "requires": [
+      "7.12"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "7.13#1",
+       "label": "Major campaigns in Europe and the Pacific",
+       "kind": "concept",
+       "skills": [
+        "6.C"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "7.13#2",
+       "label": "Development and use of the atomic bomb",
+       "kind": "concept",
+       "skills": [
+        "6.C"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "7.13#3",
+       "label": "Link evidence about the war to an argument",
+       "kind": "skill",
+       "skills": [
+        "6.C"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "7.14",
+     "title": "Postwar Diplomacy",
+     "scope": "both",
+     "skills": [
+      "2.B"
+     ],
+     "requires": [
+      "7.13"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "7.14#1",
+       "label": "Conferences at Yalta and Potsdam and the postwar order",
+       "kind": "concept",
+       "skills": [
+        "2.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "7.14#2",
+       "label": "Creation of the United Nations and Bretton Woods institutions",
+       "kind": "concept",
+       "skills": [
+        "2.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "7.15",
+     "title": "Comparison in Period 7",
+     "scope": "both",
+     "skills": [
+      "6.D"
+     ],
+     "requires": [
+      "7.14"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "7.15#1",
+       "label": "Corroborate or qualify a comparison of the two world wars",
+       "kind": "skill",
+       "skills": [
+        "6.D"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "7.15#2",
+       "label": "Compare the home-front effects of World War I and World War II",
+       "kind": "concept",
+       "skills": [
+        "6.D"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "8",
+   "title": "Period 8: 1945-1980",
+   "officialClassPeriods": "~20",
+   "topics": [
+    {
+     "code": "8.1",
+     "title": "Contextualizing Period 8",
+     "scope": "both",
+     "skills": [
+      "4.B"
+     ],
+     "requires": [],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "8.1#1",
+       "label": "Postwar United States as a superpower",
+       "kind": "concept",
+       "skills": [
+        "4.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "8.1#2",
+       "label": "Situate postwar developments in a broader context",
+       "kind": "skill",
+       "skills": [
+        "4.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "8.2",
+     "title": "The Cold War from 1944 to 1954",
+     "scope": "both",
+     "skills": [
+      "2.C"
+     ],
+     "requires": [
+      "8.1"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "8.2#1",
+       "label": "Containment, the Truman Doctrine, and the Marshall Plan",
+       "kind": "concept",
+       "skills": [
+        "2.C"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "8.2#2",
+       "label": "NATO and the Korean War",
+       "kind": "concept",
+       "skills": [
+        "2.C"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "8.2#3",
+       "label": "Weigh the limits of a Cold War era source",
+       "kind": "skill",
+       "skills": [
+        "2.C"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "8.3",
+     "title": "The Red Scare",
+     "scope": "both",
+     "skills": [
+      "2.B"
+     ],
+     "requires": [
+      "8.2"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "8.3#1",
+       "label": "McCarthyism and loyalty investigations",
+       "kind": "concept",
+       "skills": [
+        "2.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "8.3#2",
+       "label": "Domestic anticommunism and civil liberties",
+       "kind": "concept",
+       "skills": [
+        "2.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "8.4",
+     "title": "Economy after 1945",
+     "scope": "both",
+     "skills": [
+      "2.C"
+     ],
+     "requires": [
+      "8.3"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "8.4#1",
+       "label": "Postwar prosperity, GI Bill, and suburbanization",
+       "kind": "concept",
+       "skills": [
+        "2.C"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "8.4#2",
+       "label": "Interstate highways and the consumer economy",
+       "kind": "concept",
+       "skills": [
+        "2.C"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "8.5",
+     "title": "Culture after 1945",
+     "scope": "both",
+     "skills": [
+      "4.B"
+     ],
+     "requires": [
+      "8.4"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "8.5#1",
+       "label": "Television, the baby boom, and conformity in 1950s culture",
+       "kind": "concept",
+       "skills": [
+        "4.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "8.5#2",
+       "label": "Counterculture and critiques of postwar society",
+       "kind": "concept",
+       "skills": [
+        "4.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "8.6",
+     "title": "Early Steps in the Civil Rights Movement (1940s and 1950s)",
+     "scope": "both",
+     "skills": [
+      "5.A"
+     ],
+     "requires": [
+      "8.5"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "8.6#1",
+       "label": "Desegregation of the military and Brown v. Board of Education",
+       "kind": "concept",
+       "skills": [
+        "5.A"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "8.6#2",
+       "label": "Montgomery bus boycott and early organizing",
+       "kind": "concept",
+       "skills": [
+        "5.A"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "8.7",
+     "title": "America as a World Power",
+     "scope": "both",
+     "skills": [
+      "3.C"
+     ],
+     "requires": [
+      "8.6"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "8.7#1",
+       "label": "Cold War proxy conflicts and the arms race",
+       "kind": "concept",
+       "skills": [
+        "3.C"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "8.7#2",
+       "label": "Cuban Missile Crisis",
+       "kind": "concept",
+       "skills": [
+        "3.C"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "8.7#3",
+       "label": "Compare two sources on Cold War strategy",
+       "kind": "skill",
+       "skills": [
+        "3.C"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "8.8",
+     "title": "The Vietnam War",
+     "scope": "both",
+     "skills": [
+      "1.B"
+     ],
+     "requires": [
+      "8.7"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "8.8#1",
+       "label": "Escalation in Vietnam and the Gulf of Tonkin Resolution",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "8.8#2",
+       "label": "Antiwar protest and the Tet Offensive's impact",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "8.9",
+     "title": "The Great Society",
+     "scope": "both",
+     "skills": [
+      "5.B"
+     ],
+     "requires": [
+      "8.8"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "8.9#1",
+       "label": "Medicare, Medicaid, and the War on Poverty",
+       "kind": "concept",
+       "skills": [
+        "5.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "8.9#2",
+       "label": "Expanded federal role in education and civil rights",
+       "kind": "concept",
+       "skills": [
+        "5.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "8.10",
+     "title": "The African American Civil Rights Movement (1960s)",
+     "scope": "both",
+     "skills": [
+      "5.B"
+     ],
+     "requires": [
+      "8.9"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "8.10#1",
+       "label": "Sit-ins, Freedom Rides, and the March on Washington",
+       "kind": "concept",
+       "skills": [
+        "5.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "8.10#2",
+       "label": "Civil Rights Act of 1964 and Voting Rights Act of 1965",
+       "kind": "concept",
+       "skills": [
+        "5.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "8.11",
+     "title": "The Civil Rights Movement Expands",
+     "scope": "both",
+     "skills": [
+      "5.B"
+     ],
+     "requires": [
+      "8.10"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "8.11#1",
+       "label": "Black Power, women's rights, and Chicano and American Indian activism",
+       "kind": "concept",
+       "skills": [
+        "5.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "8.11#2",
+       "label": "Disability rights and gay rights activism emerging in this era",
+       "kind": "concept",
+       "skills": [
+        "5.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "8.12",
+     "title": "Youth Culture of the 1960s",
+     "scope": "both",
+     "skills": [
+      "5.B"
+     ],
+     "requires": [
+      "8.11"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "8.12#1",
+       "label": "Student activism, the New Left, and the counterculture",
+       "kind": "concept",
+       "skills": [
+        "5.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "8.12#2",
+       "label": "Rock music and generational conflict",
+       "kind": "concept",
+       "skills": [
+        "5.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "8.13",
+     "title": "The Environment and Natural Resources from 1968 to 1980",
+     "scope": "both",
+     "skills": [
+      "5.A"
+     ],
+     "requires": [
+      "8.12"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "8.13#1",
+       "label": "Rise of the environmental movement and Earth Day",
+       "kind": "concept",
+       "skills": [
+        "5.A"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "8.13#2",
+       "label": "EPA, Clean Air Act, and the 1970s energy crisis",
+       "kind": "concept",
+       "skills": [
+        "5.A"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "8.14",
+     "title": "Society in Transition",
+     "scope": "both",
+     "skills": [
+      "4.B"
+     ],
+     "requires": [
+      "8.13"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "8.14#1",
+       "label": "Economic stagnation and Watergate",
+       "kind": "concept",
+       "skills": [
+        "4.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "8.14#2",
+       "label": "Distrust of government and shifts in the political landscape",
+       "kind": "concept",
+       "skills": [
+        "4.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "8.15",
+     "title": "Continuity and Change in Period 8",
+     "scope": "both",
+     "skills": [
+      "6.D"
+     ],
+     "requires": [
+      "8.14"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "8.15#1",
+       "label": "Qualify a claim about change between 1945 and 1980",
+       "kind": "skill",
+       "skills": [
+        "6.D"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "8.15#2",
+       "label": "Continuities and changes in federal power and social movements",
+       "kind": "concept",
+       "skills": [
+        "6.D"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "9",
+   "title": "Period 9: 1980-Present",
+   "officialClassPeriods": "~8",
+   "topics": [
+    {
+     "code": "9.1",
+     "title": "Contextualizing Period 9",
+     "scope": "both",
+     "skills": [
+      "4.B"
+     ],
+     "requires": [],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "9.1#1",
+       "label": "Political and economic setting of the 1980s onward",
+       "kind": "concept",
+       "skills": [
+        "4.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "9.1#2",
+       "label": "Situate recent history in a broader context",
+       "kind": "skill",
+       "skills": [
+        "4.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "9.2",
+     "title": "Reagan and Conservatism",
+     "scope": "both",
+     "skills": [
+      "3.C"
+     ],
+     "requires": [
+      "9.1"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "9.2#1",
+       "label": "Reagan-era tax cuts, deregulation, and rise of the New Right",
+       "kind": "concept",
+       "skills": [
+        "3.C"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "9.2#2",
+       "label": "Compare two sources on conservative policy",
+       "kind": "skill",
+       "skills": [
+        "3.C"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "9.3",
+     "title": "The End of the Cold War",
+     "scope": "both",
+     "skills": [
+      "1.B"
+     ],
+     "requires": [
+      "9.2"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "9.3#1",
+       "label": "Reagan-Gorbachev diplomacy and the Soviet collapse",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "9.3#2",
+       "label": "Post-Cold War American foreign policy role",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "9.4",
+     "title": "A Changing Economy",
+     "scope": "both",
+     "skills": [
+      "1.B"
+     ],
+     "requires": [
+      "9.3"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "9.4#1",
+       "label": "Deindustrialization and growth of the service and technology sectors",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "9.4#2",
+       "label": "Globalization and the digital revolution",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "9.5",
+     "title": "Migration and Immigration in the 1990s and 2000s",
+     "scope": "both",
+     "skills": [
+      "2.C"
+     ],
+     "requires": [
+      "9.4"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "9.5#1",
+       "label": "Immigration patterns after the 1965 reforms",
+       "kind": "concept",
+       "skills": [
+        "2.C"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "9.5#2",
+       "label": "Sun Belt growth and demographic change",
+       "kind": "concept",
+       "skills": [
+        "2.C"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "9.6",
+     "title": "Challenges of the 21st Century",
+     "scope": "both",
+     "skills": [
+      "2.C"
+     ],
+     "requires": [
+      "9.5"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "9.6#1",
+       "label": "September 11, 2001 and the war on terrorism",
+       "kind": "concept",
+       "skills": [
+        "2.C"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "9.6#2",
+       "label": "Great Recession and increasing political polarization",
+       "kind": "concept",
+       "skills": [
+        "2.C"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "9.6#3",
+       "label": "Explain how point of view limits a recent-history source",
+       "kind": "skill",
+       "skills": [
+        "2.C"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    },
+    {
+     "code": "9.7",
+     "title": "Causation in Period 9",
+     "scope": "both",
+     "skills": [
+      "6.D"
+     ],
+     "requires": [
+      "9.6"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "9.7#1",
+       "label": "Corroborate or modify a causal claim about recent history",
+       "kind": "skill",
+       "skills": [
+        "6.D"
+       ],
+       "requires": [],
+       "estLessons": 1
+      },
+      {
+       "code": "9.7#2",
+       "label": "Short- and long-term causes of late 20th-century change",
+       "kind": "concept",
+       "skills": [
+        "6.D"
+       ],
+       "requires": [],
+       "estLessons": 1
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

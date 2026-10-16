@@ -1,0 +1,329 @@
+[
+ {
+  "key": "ap_statistics-m01-k0-q1",
+  "cellId": "ap_statistics-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "X is binomial with n=5 and p=0.3, so the mean is np = 1.5. Adding x·P(X=x) from the table gives 1.4996, which rounds to 1.50.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "1.50"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Mean of a discrete random variable from a distribution table; fits 2.9 and skill 3.D. Binomial in scope."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "1.50 is unique; the table sum is 1.4996, which rounds to 1.50 and equals np."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table is complete, with column labels, title, and probabilities consistent with Binomial(5, 0.3). Rounding is stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions (p, n(1-p), n/2), and the explanation covers each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 80 seconds, short parallel numeric options, calculator allowed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Clean, correct MC on the mean of a discrete random variable, with a complete table and distinct distractors. Passes."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-procedure item: compute the expected value from a given discrete probability table (or recognize binomial np = 1.5). There is no added condition check or interpretation step. The short table of four-decimal values gives a small sum of 5 products. The distractors are plausible misreadings: 0.30 is p, and 2.50 is n/2.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_statistics-m01-k0-q2",
+  "cellId": "ap_statistics-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Sum P(2..5)=0.3087+0.1323+0.0283+0.0024=0.4717≈0.472",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "0.472"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 60-85 seconds, requires little arithmetic, and has four parallel numeric options.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and clean. The key 0.472 is verified, the distractors are distinct and realistic, and the stimulus is complete."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: read a discrete probability table and sum the probabilities for X ≥ 2 (or use the complement 1 − 0.5282). Short sums, no representation change, and distractors reflect common slips (P(X=2), P(X≥3), 1 − P(X=1)). Fits direct introductory practice rather than a full mock exam.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_statistics-m01-k0-q3",
+  "cellId": "ap_statistics-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "In about 17% of all such random samples of 5 patients, none would have missed an appointment",
+     "brief_reasoning": "P(X=0)=0.7^5≈0.1681, which is the long-run proportion of samples of 5 in which no patient missed an appointment.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "About 85 seconds, with minimal reading and no arithmetic burden.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean interpretation question with a unique key, distinct distractors, and a complete stimulus. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step interpretation of one probability from a small table as a long-run proportion of samples. The correct option is the only one consistent with the definition. The distractors are wrong in plain ways: per-patient probability, all instead of none, and exact percentage in every sample. No computation is needed, and the reading load is light, the table and the context being brief.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_statistics-m01-k1-q1",
+  "cellId": "ap_statistics-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Binomial n=6, p=0.3: mean = np = 1.80. The table sum also gives 1.7995 ≈ 1.80.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "1.80"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Mean of a discrete random variable, binomial context; in scope for Unit 2 and skill 3.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "1.80 is unique; table sum is 1.7995, which rounds to 1.80; np = 1.8."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table data complete, with columns, rows and title; the table matches Binomial(6, 0.3). Rounding is stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors 2.00 (mode), 3.00 (n/2) and 4.20 (n(1-p)) are distinct; the explanation covers each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 80 seconds, calculator allowed, short and clean. The table is redundant given n and p, which is a minor weakness."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean item with a unique key and distinct distractors. The only weakness is that the table is not strictly needed, because the stem gives n and p. Passes."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: compute the mean of a discrete random variable from a table (a weighted sum) or recognize it as binomial and use np = 1.80. Short stem, one representation, and a simple calculation. Distractors reflect common errors such as using n/2 or n(1-p).",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_statistics-m01-k1-q2",
+  "cellId": "ap_statistics-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "P(X>=2)=1-(0.1176+0.3025)=0.5799≈0.580",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "0.580"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The task is short, takes about 85 seconds, and needs little calculation. Calculator use is allowed and not required.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. The key is unique, the table is complete, and the distractors map to distinct misconceptions. The only flaw is that the 0.697 distractor sits at a rounding boundary (0.6975), which is minor."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: read a discrete probability table and find P(X >= 2) via complement or summing. One or two reasoning steps, with the 'at least' wording as the only mild trap. Distractors correspond to P(X=2), P(X>=1)-type errors. Minimal reading and arithmetic.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_statistics-m01-k1-q3",
+  "cellId": "ap_statistics-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "In about 12% of all such random samples of 6 patients, none missed an appointment",
+     "brief_reasoning": "P(X=0)=0.7^6≈0.1176, which is the long-run proportion of samples of 6 in which none of the patients missed an appointment.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Interpreting a probability from a discrete distribution in context; fits 2.8 and 4.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option D is the only correct interpretation; the others are clearly wrong."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table is complete with title and column labels; X is defined in the stem; probabilities sum to about 1."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct named misconceptions; every wrong option is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 85 seconds, low reading load, no arithmetic."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound interpretation item with a unique key and distinct distractors; passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single table lookup of P(X=0) and selection of the correct long-run relative frequency interpretation among plausible misinterpretations (all missed, individual chance, fixed percent per sample). No computation, short reading, one reasoning step; core introductory concept for topic 2.8.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ }
+]

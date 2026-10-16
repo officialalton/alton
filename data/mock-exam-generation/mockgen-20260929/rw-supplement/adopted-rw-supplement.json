@@ -1,0 +1,1916 @@
+[
+ {
+  "gid": "rwsup-medium-1:medium-boundaries-03",
+  "runId": "rw-supplement-medium",
+  "skill": "boundaries",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "In 1823, a group of Glasgow artisans helped establish one of Britain's earliest mechanics' institutes, a combined lending library and lecture hall where factory workers could study chemistry, geometry, and mechanics after their shifts ended______ within roughly three decades, several hundred similar institutes had opened in industrial towns across the country.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "In 1823, a group of Glasgow artisans helped establish one of Britain's earliest mechanics' institutes, a combined lending library and lecture hall where factory workers could study chemistry, geometry, and mechanics after their shifts ended______ within roughly three decades, several hundred similar institutes had opened in industrial towns across the country.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    ",",
+    "(no punctuation)",
+    ": and",
+    ";"
+   ],
+   "correctIndex": 3,
+   "answers": null,
+   "explanation": "빈칸 앞은 긴 동격구(a combined lending library ... after their shifts ended)를 포함하지만 그 자체로 독립절이고, 빈칸 뒤 'within roughly three decades, several hundred ... had opened'도 독립절이다. 두 독립절을 잇기에 알맞은 것은 세미콜론이므로 D가 정답이다. A는 쉼표만으로 두 독립절을 이어 쉼표 오류(comma splice)가 된다. B는 문장부호 없이 이어져 융합문이 되고, 'ended within three decades'처럼 근무 교대가 끝난 시점을 수식하는 것으로 잘못 읽힌다. C는 콜론 뒤에 등위접속사 and를 붙여서 관습에 맞지 않는다.",
+   "explanationEn": "The text before the blank has a long appositive (a combined lending library ... after their shifts ended), but it is still a complete independent clause. The text after the blank, \"within roughly three decades, several hundred ... had opened,\" is a second independent clause. A semicolon is the right way to join two independent clauses, so D is correct. A joins them with only a comma, which makes a comma splice. B uses no punctuation, so you get a fused sentence that wrongly reads as \"their shifts ended within three decades.\" C puts the conjunction \"and\" right after a colon, which doesn't follow standard conventions.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "D",
+   "seed": "역사(근대 사회 변화)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "빈칸 앞(긴 동격구를 포함한 독립절)과 뒤(독립절)를 직접 확인한 결과 세미콜론(D)이 유일하게 옳다. A는 comma splice, B는 융합문(ended within... 오독 유발), C는 콜론 뒤 등위접속사로 비표준. 글래스고 기계공학교 1823년 설립 및 수십 년 내 수백 곳 확산은 사실과 부합. 긴 동격구로 절 경계를 판별해야 하는 2단계 판단이 필요해 medium에 적합. 한·영 해설 결론·글자 참조 일치, 영어 자연스럽고 한글 없음."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "긴 동격구와 부사구 'within roughly three decades'가 경계를 흐리게 만들어 B의 오독을 유도하므로 medium에 적합하다. Glasgow Mechanics' Institution(1823) 관련 사실도 대체로 정확하다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "rwsup-medium-1:medium-boundaries-04",
+  "runId": "rw-supplement-medium",
+  "skill": "boundaries",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "A team of engineers recently completed a pedestrian bridge built entirely from stainless steel deposited layer by layer by robotic welding arms. The structure, which spans a narrow canal in the city's oldest district, is fitted with dozens of sensors that continuously record strain, temperature, and vibration______ from these sensors feed a digital model that helps researchers predict how the printed metal will age.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "A team of engineers recently completed a pedestrian bridge built entirely from stainless steel deposited layer by layer by robotic welding arms. The structure, which spans a narrow canal in the city's oldest district, is fitted with dozens of sensors that continuously record strain, temperature, and vibration______ from these sensors feed a digital model that helps researchers predict how the printed metal will age.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "; data",
+    ", data",
+    " data",
+    " and, data"
+   ],
+   "correctIndex": 0,
+   "answers": null,
+   "explanation": "빈칸 앞 \"The structure ... is fitted with ... vibration\"은 완전한 독립절이고, 빈칸 뒤 \"data from these sensors feed a digital model ...\" 역시 주어와 동사를 갖춘 독립절이다. 중간의 삽입절(which spans ...)이나 긴 목록에 속지 말고 두 독립절을 연결해야 하므로 세미콜론을 쓴 A가 정답이다. B는 쉼표만으로 두 독립절을 이어 쉼표 오류(comma splice)가 된다. C는 아무 문장부호 없이 두 절을 붙인 무종지문(run-on)이다. D는 등위접속사 and를 쓰긴 했지만 쉼표가 접속사 뒤에 있어 위치가 틀렸다. 올바른 형태는 \", and data\"이다.",
+   "explanationEn": "The part before the blank, \"The structure ... is fitted with ... vibration,\" is a complete independent clause, and the part after it, \"data from these sensors feed a digital model ...,\" is also an independent clause with its own subject and verb. Don't let the interrupting \"which\" clause or the long list throw you off: you still need a boundary that can join two independent clauses, so the semicolon in A is correct. B is a comma splice, since it joins two independent clauses with only a comma. C is a run-on, because it puts the clauses together with no punctuation at all. D does use the conjunction \"and,\" but the comma is in the wrong place. It should come before the conjunction (\", and data\"), not after it.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "A",
+   "seed": "기술·공학 사례",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "빈칸 앞뒤 모두 독립절(\"...is fitted with...vibration\" / \"data from these sensors feed...\")이므로 세미콜론 A가 유일하게 올바르다. B는 comma splice, C는 run-on, D는 접속사 뒤에 쉼표가 놓인 비표준 형태. 한국어·영어 해설 모두 정답과 선택지 글자 참조가 일치하고 모순 없음. 긴 목록과 삽입 관계절이 경계 식별을 방해하도록 설계되어 있고, D가 접속사를 포함해 부분적 타당성을 가지므로 medium에 적합. 'data...feed' 복수 취급은 표준적으로 허용됨."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "세미콜론이 유일하게 맞는 선택지다. 삽입절과 목록이 섞여 있어 두 단계 판단이 필요하므로 medium 난이도에 맞다. 다만 B와 C는 쉽게 배제된다. 'data ... feed'처럼 data를 복수로 쓴 것은 허용되는 용법이다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "rwsup-medium-1:medium-boundaries-05",
+  "runId": "rw-supplement-medium",
+  "skill": "boundaries",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "Marine biologist Rachel Okafor spent three seasons tracking the feeding habits of the bluestreak cleaner wrasse, a small reef fish that removes parasites from larger fish. Her team found that wrasses working near crowded reef patches, where many \"client\" fish waited in line, cheated more often by biting off healthy mucus instead of parasites. Wrasses on quieter patches, by contrast, rarely cheated at ______ the researchers suspect, could not risk losing any of the few clients that visited them.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "Marine biologist Rachel Okafor spent three seasons tracking the feeding habits of the bluestreak cleaner wrasse, a small reef fish that removes parasites from larger fish. Her team found that wrasses working near crowded reef patches, where many \"client\" fish waited in line, cheated more often by biting off healthy mucus instead of parasites. Wrasses on quieter patches, by contrast, rarely cheated at ______ the researchers suspect, could not risk losing any of the few clients that visited them.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "all, these fish,",
+    "all; these fish,",
+    "all, these fish",
+    "all these fish,"
+   ],
+   "correctIndex": 1,
+   "answers": null,
+   "explanation": "빈칸 앞 \"Wrasses on quieter patches... rarely cheated at all\"은 독립절이고, 뒤의 \"these fish... could not risk losing...\"도 주어와 동사를 갖춘 독립절이므로 두 절 사이에 세미콜론이 필요하다. 또한 \"the researchers suspect\"는 삽입구이므로 앞뒤로 쉼표를 짝지어야 하는데, B는 \"these fish,\" 뒤 쉼표와 \"suspect,\" 뒤 쉼표가 짝을 이룬다. A는 삽입구 쉼표는 맞지만 두 독립절을 쉼표만으로 연결해 쉼표 오용(comma splice)이 된다. C는 쉼표 연결 오류에 더해 삽입구 앞 쉼표도 빠졌다. D는 두 절 사이에 아무 문장부호도 없어 무종지문(run-on)이 된다.",
+   "explanationEn": "The words before the blank, \"Wrasses on quieter patches... rarely cheated at all,\" form an independent clause, and \"these fish... could not risk losing...\" is also an independent clause with its own subject and verb, so a semicolon has to separate them. On top of that, \"the researchers suspect\" is an interrupting phrase, so it needs a pair of commas around it. In B, the comma after \"these fish\" pairs with the comma after \"suspect,\" so B is correct. A sets off the interrupting phrase correctly, but it joins two independent clauses with only a comma, which is a comma splice. C has the same comma splice and is also missing the comma before the interrupting phrase. D puts no punctuation between the two clauses, which makes it a run-on sentence.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "B",
+   "seed": "자연과학(생물·생태)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "검산: \"rarely cheated at all\"과 \"these fish ... could not risk losing ...\"은 각각 독립절 → 세미콜론 필요(B). A는 comma splice, C는 comma splice + 삽입구 앞 쉼표 누락, D는 fused sentence. 해설(한/영) 모두 B를 정확히 뒷받침하며 선택지 참조 일치. 가상의 연구자 설정이라 사실 오류 없음. 세미콜론 판단 + 삽입구 쉼표 짝 확인이라는 두 단계가 필요하고 A·C가 부분적으로 타당해 medium 적합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "검산 결과 B가 맞다. 'at all; these fish, the researchers suspect, could not risk...'에서 세미콜론이 두 독립절을 이어 주고, 쉼표 두 개가 삽입구를 감싼다. A는 쉼표 오용(comma splice), C는 쉼표 오용에 삽입구 앞 쉼표 누락, D는 무종지문(run-on)이다. 절 경계 판단과 삽입구 쉼표 짝 확인, 두 단계가 필요하다. A는 부분적으로 맞아 매력적인 오답이므로 medium 난이도에 맞다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "rwsup-medium-1:medium-boundaries-06",
+  "runId": "rw-supplement-medium",
+  "skill": "boundaries",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "In Mara Ellison's novel The Lamplighter's Daughter (2019), the narrator, an elderly governess recalling her youth in a fog-bound coastal town, describes the manor's candlelit corridors and creaking stairwells in lavish detail______ withholds the name of the family she served until the final chapter, a choice that critics say deepens the book's atmosphere of secrecy.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "In Mara Ellison's novel The Lamplighter's Daughter (2019), the narrator, an elderly governess recalling her youth in a fog-bound coastal town, describes the manor's candlelit corridors and creaking stairwells in lavish detail______ withholds the name of the family she served until the final chapter, a choice that critics say deepens the book's atmosphere of secrecy.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    ", she",
+    " yet, she",
+    ", yet she",
+    ": yet, she"
+   ],
+   "correctIndex": 2,
+   "answers": null,
+   "explanation": "빈칸 앞(주어 the narrator + 동사 describes)과 빈칸 뒤(she withholds ...)는 각각 독립절이므로 두 절을 바르게 연결해야 한다. 동격 삽입구(an elderly governess ...)가 길어 핵심 절 구조를 놓치기 쉽다. C는 쉼표 + 등위접속사 yet으로 두 독립절을 올바르게 잇는다. A는 쉼표만으로 독립절을 이어 쉼표 오류(comma splice)가 된다. B는 yet 앞에 쉼표가 없고 yet 뒤에 불필요한 쉼표를 넣었으며, D는 콜론 뒤 yet을 붙여 콜론의 설명·제시 기능과 맞지 않고 yet 뒤 쉼표도 불필요하다.",
+   "explanationEn": "The text before the blank (the narrator ... describes ...) and the text after it (she withholds ...) are both independent clauses, so you need a correct way to join them. The long appositive about the governess makes this easy to miss. C correctly joins the clauses with a comma plus the coordinating conjunction \"yet.\" A joins two independent clauses with only a comma, which creates a comma splice. B leaves out the comma before \"yet\" and puts an unnecessary comma after it. D pairs a colon with \"yet,\" but a colon introduces an explanation or example, not a contrast, and the comma after \"yet\" is also unnecessary.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "C",
+   "seed": "문학(19세기 소설 분위기의 현대 서술)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "검산: 빈칸 앞 'the narrator ... describes ... in lavish detail'과 뒤 'she withholds ...'는 모두 독립절. C(, yet she)만 쉼표+등위접속사로 올바르게 연결. A는 comma splice, B는 yet 앞 쉼표 누락·뒤 불필요 쉼표, D는 콜론+yet 결합이 비문. 긴 동격 삽입구가 절 구조 파악을 요구해 두 단계 판단(절 식별 + 구두점 규칙)이 필요하며, A·B가 부분적 그럴듯함을 가져 medium에 적합. 한·영 해설 모두 정답 C와 글자 참조 일치, 영어 해설에 한글 없음. 허구의 소설 인용으로 사실 오류·저작권 문제 없음."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": false,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "긴 동격구가 들어 있어 핵심 절 구조를 파악해야 풀 수 있으므로 medium 난이도에 맞는다. B 선택지 앞에 공백이 두 칸 들어가 있으나 사소한 표기 문제다.",
+    "passed": false
+   }
+  }
+ },
+ {
+  "gid": "rwsup-medium-1:medium-form_structure_sense-00",
+  "runId": "rw-supplement-medium",
+  "skill": "form_structure_sense",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "In the opening chapter of Mara Ellison's novel The Lamplighter's Daughter, a lonely heroine wanders through a fog-bound harbor town that seems lifted from a Victorian serial. The crumbling customs house, along with the rows of shuttered warehouses that line the waterfront, ______ a sense of commerce long abandoned, preparing readers for the family's financial ruin revealed later in the book.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "In the opening chapter of Mara Ellison's novel The Lamplighter's Daughter, a lonely heroine wanders through a fog-bound harbor town that seems lifted from a Victorian serial. The crumbling customs house, along with the rows of shuttered warehouses that line the waterfront, ______ a sense of commerce long abandoned, preparing readers for the family's financial ruin revealed later in the book.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "evokes",
+    "evoke",
+    "evoking",
+    "have evoked"
+   ],
+   "correctIndex": 0,
+   "answers": null,
+   "explanation": "이 문장의 주어는 단수 명사 'customs house'이고, 'along with ... waterfront'는 쉼표로 묶인 삽입구라서 주어의 수에 영향을 주지 않는다. 또한 이 문장에는 다른 정동사가 없으므로 빈칸에는 정동사가 들어가야 하며, 단수 현재형 A가 정답이다. B는 정동사이긴 하지만 바로 앞의 'warehouses'나 'line'에 끌려 복수형을 고른 것이다. D 역시 정동사이고 시제도 가능해 보이지만 복수형 'have'라서 단수 주어와 맞지 않는다. C는 분사이므로 문장에 정동사가 없게 되어 불완전한 문장이 된다.",
+   "explanationEn": "The subject of this sentence is the singular noun \"customs house.\" The phrase \"along with ... waterfront\" is set off by commas, so it doesn't change the subject's number. The sentence has no other main verb, so the blank needs a finite verb, and the singular present-tense form in A is correct. B is a finite verb, but it is plural, probably picked up from the nearby words \"warehouses\" and \"line.\" D is also a finite verb with a reasonable tense, but \"have\" is plural and doesn't agree with the singular subject. C is a participle, which would leave the sentence without a main verb and make it incomplete.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "A",
+   "seed": "문학(19세기 소설 분위기의 현대 서술)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "주어 'customs house'(단수) + 'along with ...' 삽입구 구조. 삽입구가 주어 수에 영향 없으므로 단수 정동사 'evokes'(A)가 정답임을 직접 확인. B·D는 인접 복수 명사(warehouses)/동사(line)에 끌린 오답으로 비교 판단 필요, C는 정동사 부재. 한·영 해설 결론과 선택지 참조 일치, 영어 자연스럽고 한글 없음. 가상의 소설·작가로 저작권 문제 없음. 삽입구 식별 + 수 일치라는 두 단계 판단이 요구되어 medium 적합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "'along with'로 시작하는 삽입구와 바로 앞의 복수 명사가 주어-동사 일치를 헷갈리게 하는 전형적인 medium 문항이다. 판단에는 두 단계가 필요하다. 먼저 주절에 정동사가 필요하다는 점을 확인하고, 다음으로 주어의 수를 판별해야 한다. 오답 B와 D는 부분적으로 그럴듯해서 정답과 비교해야 배제된다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "rwsup-medium-1:medium-form_structure_sense-02",
+  "runId": "rw-supplement-medium",
+  "skill": "form_structure_sense",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "In the 1840s, cheap \"penny papers\" changed how working people in American cities learned about public affairs. Earlier newspapers had cost six cents an issue and were sold mostly by subscription to merchants. The sudden availability of these new papers, hawked by newsboys on crowded street corners for a single cent, ______ laborers and shop clerks who had rarely followed national debates to form opinions about tariffs, immigration, and westward expansion.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "In the 1840s, cheap \"penny papers\" changed how working people in American cities learned about public affairs. Earlier newspapers had cost six cents an issue and were sold mostly by subscription to merchants. The sudden availability of these new papers, hawked by newsboys on crowded street corners for a single cent, ______ laborers and shop clerks who had rarely followed national debates to form opinions about tariffs, immigration, and westward expansion.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "were allowing",
+    "have allowed",
+    "allowed",
+    "allowing"
+   ],
+   "correctIndex": 2,
+   "answers": null,
+   "explanation": "이 문장의 주어는 단수 명사 'availability'이고, 'of these new papers, hawked by ... a single cent'는 그 사이에 끼어든 수식어구이다. 그러므로 단수 주어와 일치하면서 1840년대라는 과거 문맥에 맞는 정동사가 필요하며, C의 'allowed'가 두 조건을 모두 충족한다. A는 과거 시제이긴 하지만 바로 앞의 'papers'에 끌려 복수형을 써서 주어와 일치하지 않는다. B는 복수형인 데다 현재완료여서 과거 시점과도 맞지 않는다. D는 분사라서 정동사가 아니므로 문장이 완성되지 않는다.",
+   "explanationEn": "The subject of this sentence is the singular noun \"availability.\" The phrase \"of these new papers, hawked by ... a single cent\" just sits between the subject and the verb. That means you need a finite verb that agrees with a singular subject and fits the past-time setting of the 1840s, and C, \"allowed,\" does both. A is in the past tense, but it uses the plural \"were\" because it matches the nearby word \"papers\" instead of the actual subject. B is plural too, and its present perfect tense doesn't fit a past setting. D is a participle, not a finite verb, so it leaves the sentence incomplete.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "C",
+   "seed": "역사(근대 사회 변화)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "주어 'availability'(단수) + 긴 삽입 수식어('of these new papers, hawked by ...') 뒤 정동사 자리. C 'allowed'만 단수 일치·과거 시제·정동사 세 조건을 충족. A는 과거이지만 'papers'에 끌린 복수형, B는 복수+현재완료, D는 비정형(분사)으로 문장 미완. 한국어·영어 해설 모두 C를 일관되게 뒷받침하며 글자 참조 일치, 영어 해설에 한글 없음. 난이도: 삽입구를 건너뛰어 진짜 주어를 찾고 시제까지 확인하는 두 단계 판단이 필요하고, A·B가 부분적 근거(각각 과거시제/정동사)를 가져 medium에 적합. 사실 관계: 페니 신문은 1830년대 뉴욕에서 시작되었으나 1840년대에도 확산 중이었고 기존 신문 6센트 가격도 사실에 부합하여 중대한 오류로 보지 않음."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "긴 삽입 수식어구와 복수 명사 'papers'라는 유인 요소가 있어 수 일치, 시제, 정동사 여부를 함께 따져야 한다. 중간 난이도에 적합하다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "rwsup-medium-1:medium-form_structure_sense-03",
+  "runId": "rw-supplement-medium",
+  "skill": "form_structure_sense",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "The array of thin-film strain sensors that engineers at a Dutch infrastructure firm embedded beneath the asphalt of the Zeeland causeway ______ updated readings to a central server every few seconds, allowing maintenance crews to detect hairline cracks long before they become visible to inspectors.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "The array of thin-film strain sensors that engineers at a Dutch infrastructure firm embedded beneath the asphalt of the Zeeland causeway ______ updated readings to a central server every few seconds, allowing maintenance crews to detect hairline cracks long before they become visible to inspectors.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "transmit",
+    "have transmitted",
+    "transmitting",
+    "transmits"
+   ],
+   "correctIndex": 3,
+   "answers": null,
+   "explanation": "이 문장의 주어는 단수 명사 'The array'이고, 'of thin-film strain sensors'와 'that engineers... causeway'는 주어를 꾸미는 수식어일 뿐이다. 따라서 빈칸에는 단수 주어와 일치하는 정동사가 와야 하므로 D가 정답이다. A와 B는 정동사이긴 하지만 바로 앞의 복수 명사 sensors나 engineers에 맞춘 복수형이라 주어 array와 수가 일치하지 않는다. C는 분사이므로 문장에 정동사가 없게 되어 완전한 문장이 되지 않는다.",
+   "explanationEn": "The subject of this sentence is the singular noun \"The array.\" The phrase \"of thin-film strain sensors\" and the clause \"that engineers... causeway\" just describe that subject. So the blank needs a finite verb that agrees with a singular subject, which makes D the correct answer. A and B are finite verbs, but they are plural forms that match the nearby plural nouns \"sensors\" or \"engineers\" rather than the actual subject, \"array.\" C is a participle, so with it the sentence would have no main verb and wouldn't be a complete sentence.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "D",
+   "seed": "기술·공학 사례",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "주어 'The array'(단수)와 빈칸 사이에 전치사구(of ... sensors)와 관계절(that engineers ... causeway)이 끼어 있어 근접 복수 명사(sensors, engineers)에 끌린 오답 A·B가 설득력 있는 함정으로 작동하며, C는 정동사 부재로 배제됨. 'transmits'가 유일하게 수 일치·정동사 조건을 충족하므로 D 정답 확인. 한국어·영어 해설 모두 동일 결론과 글자 참조를 가지며 영어 해설에 한글 없음. 표준 SAT 수일치(긴 수식어 삽입) 유형으로 medium 난이도에 부합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "이 문항은 주어와 동사의 수 일치를 묻는다. 주어 'The array'는 단수이고, 그 사이에 of구와 관계절이 끼어 있다. 이 사이 어구에 복수 명사 sensors와 engineers가 들어 있어 오답을 유도한다. 정답 D(transmits)가 맞다. A와 B는 복수형이라 주어와 수가 맞지 않는다. C(transmitting)는 분사여서 문장에 정동사가 없게 된다. 'every few seconds'는 반복되는 일을 나타내므로 현재시제와 잘 맞는다. 풀려면 수식어를 걷어내고 주어를 찾은 뒤 수 일치를 확인하는 두 단계가 필요하다. 따라서 medium 난이도에 맞다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "rwsup-medium-1:medium-form_structure_sense-04",
+  "runId": "rw-supplement-medium",
+  "skill": "form_structure_sense",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "In the kelp forests off the coast of central California, sea otters prey heavily on purple sea urchins, which graze on the holdfasts that anchor kelp to the seafloor. Ecologist Joanna Ruiz found that the survival of young kelp stands in areas where otters had recently been reintroduced after decades of absence ______ sharply, even though urchin populations there remained high for several years.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "In the kelp forests off the coast of central California, sea otters prey heavily on purple sea urchins, which graze on the holdfasts that anchor kelp to the seafloor. Ecologist Joanna Ruiz found that the survival of young kelp stands in areas where otters had recently been reintroduced after decades of absence ______ sharply, even though urchin populations there remained high for several years.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "had increased",
+    "have increased",
+    "increasing",
+    "to increase"
+   ],
+   "correctIndex": 0,
+   "answers": null,
+   "explanation": "that절의 주어는 단수 명사 'the survival'이고, 그 뒤의 'of young kelp stands ... decades of absence'는 수식어구일 뿐이다. 따라서 that절에는 단수 주어와 일치하는 정동사가 필요하며, 과거 시점(found, remained)과도 맞는 A 'had increased'가 정답이다. B는 정동사이지만 복수형이라 바로 앞의 복수 명사(otters, decades)에 끌린 오답이다. C 'increasing'과 D 'to increase'는 정동사가 아니어서 that절에 본동사가 없는 불완전한 문장이 된다.",
+   "explanationEn": "The subject of the that-clause is the singular noun \"the survival\"; the long phrase \"of young kelp stands ... decades of absence\" just modifies it. So the clause needs a finite verb that agrees with a singular subject and fits the past-tense context (found, remained), which makes A, \"had increased,\" correct. B is a finite verb, but it's plural, so it only looks right if you match it to a nearby plural noun like \"otters\" or \"decades.\" C, \"increasing,\" and D, \"to increase,\" aren't finite verbs, so the that-clause would be left without a main verb.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "A",
+   "seed": "자연과학(생물·생태)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "that절 주어 'the survival'(단수) + 긴 수식어구(복수 명사 otters, decades 포함) 뒤에 정동사가 필요. A 'had increased'만 단수 주어와 일치하는 정동사이며 과거 서술(found, remained)과도 부합. B는 복수형으로 인접 명사 끌림 오답, C·D는 비정동사로 본동사 부재. 한국어·영어 해설 모두 결론·글자 참조 일치, 한글 혼입 없음. 해달–성게–켈프 생태 서술도 사실과 부합. 두 단계 판단(주어 식별 + 정동사/수일치)이 요구되는 표준 medium 수준."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "주어와 동사 사이에 긴 삽입구가 있어 수 일치를 확인하고 절에 정동사가 필요한지도 판단해야 하므로 두 단계 판단이 필요하다. B는 가까운 복수 명사에 끌리게 만든 그럴듯한 오답이다. C와 D는 비정동사라 쉽게 배제되지만 SAT 수 일치 문항의 전형적 구성이다. 내용 논리(성게 개체 수가 높아도 수달이 돌아오자 켈프 생존이 늘어남, 즉 행동 매개 효과)도 타당하다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "rwsup-medium-1:medium-form_structure_sense-06",
+  "runId": "rw-supplement-medium",
+  "skill": "form_structure_sense",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "The braided channels of New Zealand's Waimakariri River, which carry gravel eroded from the Southern Alps across the broad Canterbury Plains, ______ position almost every year as floods deposit new bars of sediment and force the water into fresh paths.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "The braided channels of New Zealand's Waimakariri River, which carry gravel eroded from the Southern Alps across the broad Canterbury Plains, ______ position almost every year as floods deposit new bars of sediment and force the water into fresh paths.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "shifts",
+    "has shifted",
+    "shift",
+    "shifting"
+   ],
+   "correctIndex": 2,
+   "answers": null,
+   "explanation": "문장의 주어는 관계절 앞에 나온 복수 명사 channels이므로 복수 현재형 동사가 필요하다. 또한 'almost every year'와 현재형 deposit, force는 반복적인 현상을 나타내므로 현재 시제가 알맞다. 따라서 C가 정답이다. A는 현재 시제는 맞지만 단수형이어서, 가까이 있는 River를 주어로 잘못 본 경우에 고르게 된다. B 역시 단수형이며, 현재완료는 매년 반복되는 현상과 어울리지 않는다. D는 분사이므로 문장에 정동사가 없게 된다.",
+   "explanationEn": "The subject of the sentence is the plural noun \"channels,\" which comes before the long \"which\" clause, so the verb must be plural. Also, \"almost every year\" and the present-tense verbs \"deposit\" and \"force\" describe something that happens over and over, so present tense fits. That makes C correct. A is present tense but singular, so it's the choice you'd pick if you mistook the nearby noun \"River\" for the subject. B is also singular, and the present perfect doesn't fit a yearly, repeating process. D is a participle, which would leave the sentence without a main verb.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "C",
+   "seed": "환경·지리",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "주어 'channels'(복수)와 삽입 관계절 뒤의 동사 수 일치 + 'almost every year'/현재형 deposit·force와의 시제 일치라는 두 단계 판단 필요. 가까운 명사 'River'와 'Southern Alps/Plains'가 수 일치 함정으로 기능하며, A(단수 현재)·B(단수 현재완료)가 부분적 근거를 가진 오답, D는 정동사 부재. 해설 한·영 모두 정답 C와 선택지 참조 일치, 사실 오류 없음(Waimakariri는 실제 Canterbury Plains의 대표적 망상하천). medium 적합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": false,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "주어와 동사의 수 일치를 묻고 긴 수식어가 끼어 있으며, 시제 판단도 함께 필요해 중간 난이도에 맞는다. 다만 관계절 안의 'carry'가 복수 일치를 보여 주고 빈칸 바로 앞 명사도 복수(Plains)라서, 단수형 오답(A, B)의 유인력은 다소 약하다.",
+    "passed": false
+   }
+  }
+ },
+ {
+  "gid": "rwsup-medium-1:medium-transitions-00",
+  "runId": "rw-supplement-medium",
+  "skill": "transitions",
+  "domain": "rw_expression_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "Glacial lakes in the Himalayas often form behind natural dams of loose rock and ice left by retreating glaciers. Because these dams can fail suddenly, many researchers have assumed that the largest lakes pose the greatest flood danger to downstream villages. A 2021 survey of more than 200 such lakes, however, found that lake volume was a poor predictor of how often outburst floods occurred. ______ the steepness of the slopes above a lake, which determines how likely avalanches are to crash into the water and trigger a surge, was far more closely linked to flood frequency.\n\nWhich choice completes the text with the most logical transition?",
+   "stimulus": "Glacial lakes in the Himalayas often form behind natural dams of loose rock and ice left by retreating glaciers. Because these dams can fail suddenly, many researchers have assumed that the largest lakes pose the greatest flood danger to downstream villages. A 2021 survey of more than 200 such lakes, however, found that lake volume was a poor predictor of how often outburst floods occurred. ______ the steepness of the slopes above a lake, which determines how likely avalanches are to crash into the water and trigger a surge, was far more closely linked to flood frequency.",
+   "question": "Which choice completes the text with the most logical transition?",
+   "options": [
+    "Instead,",
+    "As a result,",
+    "Similarly,",
+    "For example,"
+   ],
+   "correctIndex": 0,
+   "answers": null,
+   "explanation": "앞 문장은 호수 부피가 홍수 빈도를 잘 예측하지 못한다는 점을 말하고, 빈칸 뒤 문장은 그 대신 경사도가 훨씬 밀접한 요인이라는 대안을 제시하므로 대체 관계를 나타내는 A가 정답이다. B는 경사도의 영향이 부피의 예측력이 낮다는 사실에서 생긴 결과가 아니므로 틀렸다. 두 문장 모두 조사 결과라는 점에서 C도 그럴듯해 보이지만, 한쪽은 약한 연관성, 다른 쪽은 강한 연관성이어서 유사 관계가 아니다. D는 경사도가 부피의 예시가 아니라 다른 변수이기 때문에 틀렸다.",
+   "explanationEn": "The previous sentence says lake volume was a poor predictor of flood frequency, and the next sentence offers a different factor, slope steepness, that predicted it much better. That's a replacement relationship, so A is correct. B doesn't work because slope's influence isn't a consequence of volume being a weak predictor. C might look tempting since both sentences report survey findings, but one finding is a weak link and the other is a strong one, so they aren't similar. D is wrong because slope steepness is a separate variable, not an example of lake volume.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "A",
+   "seed": "환경·지리",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "앞 문장(부피는 약한 예측 변수) → 빈칸 문장(경사도가 훨씬 밀접) 구조는 대체 관계이므로 'Instead' 정답 확인. B(결과), C(유사), D(예시) 모두 논리적으로 배제 가능하며 B·C는 부분적 그럴듯함을 가져 medium 난이도에 부합. 한·영 해설 결론 및 선택지 참조 일치, 영어 해설에 한글 없음. 2021 조사 수치 등은 서술상 그럴듯하고 사실 오류 지적 사항 없음."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "'poor predictor → far more closely linked'의 대체 관계로 Instead가 명확함. B(인과)는 훑어 읽으면 그럴듯하고, C도 '두 조사 결과'라는 부분적 근거가 있음. D는 다소 약한 오답이지만 medium 범위 안에 있음.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "rwsup-medium-1:medium-transitions-01",
+  "runId": "rw-supplement-medium",
+  "skill": "transitions",
+  "domain": "rw_expression_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "When gas streetlights spread through London in the 1810s and 1820s, reformers predicted that brighter streets would chiefly reduce crime by exposing thieves to view. Historian Lynda Nead argues that the lamps' most lasting effect lay elsewhere. ______ shops began staying open well past dusk, theaters scheduled later performances, and working people who had once retreated indoors at sundown began treating evening hours as time for shopping and leisure, gradually creating a new urban nightlife.\n\nWhich choice completes the text with the most logical transition?",
+   "stimulus": "When gas streetlights spread through London in the 1810s and 1820s, reformers predicted that brighter streets would chiefly reduce crime by exposing thieves to view. Historian Lynda Nead argues that the lamps' most lasting effect lay elsewhere. ______ shops began staying open well past dusk, theaters scheduled later performances, and working people who had once retreated indoors at sundown began treating evening hours as time for shopping and leisure, gradually creating a new urban nightlife.",
+   "question": "Which choice completes the text with the most logical transition?",
+   "options": [
+    "Nevertheless,",
+    "Specifically,",
+    "As a result,",
+    "Similarly,"
+   ],
+   "correctIndex": 1,
+   "answers": null,
+   "explanation": "앞 문장은 가로등의 가장 오래 남은 효과가 '다른 곳에' 있었다는 일반적 주장이고, 뒷 문장은 그 효과가 무엇인지(상점 영업 연장, 극장 공연 시간 변경, 저녁 여가)를 구체적으로 보여 준다. 따라서 일반화 후 구체화를 나타내는 B가 정답이다. A는 개혁가들의 예측과 대비된다는 점에서 그럴듯해 보이지만, 대비는 이미 앞 문장에서 이루어졌고 뒷 문장은 Nead의 주장을 뒤집는 것이 아니라 뒷받침한다. C는 가로등이 야간 생활을 낳았다는 인과관계 때문에 매력적이지만, 앞 문장은 원인(가로등)이 아니라 효과에 대한 주장이므로 뒷 문장이 그 주장의 결과가 될 수 없다. D는 뒷 문장이 앞 문장과 비슷한 별개의 사례가 아니라 앞 문장의 내용 자체를 풀어 쓴 것이므로 맞지 않는다.",
+   "explanationEn": "The previous sentence makes a general claim: the lamps' most lasting effect was something other than reducing crime. The next sentence spells out what that effect actually was (shops staying open later, theaters adding later shows, evening leisure), so B, which introduces a specific explanation, is correct. A might look right because Nead's view does contrast with what the reformers predicted, but that contrast already happens in the earlier sentence, and the final sentence supports Nead's claim instead of pushing back against it. C is tempting because the lamps did cause the nightlife, but the sentence before the blank is a claim about an effect, not the cause, so the details that follow can't be its result. D doesn't work because the final sentence isn't a separate, similar example; it explains the earlier claim itself.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "B",
+   "seed": "역사(근대 사회 변화)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "앞 문장 \"lay elsewhere\"가 구체화를 예고하므로 B(Specifically)가 명확히 정답. 오답 A(개혁가 예측과의 대비), C(가로등→야간생활 인과)는 각각 부분적 근거가 있어 비교 판단이 필요하고 D도 표면상 말이 됨. 한국어·영어 해설 모두 동일 결론과 글자 참조를 가지며 영어 해설에 한글 없음. 1810~20년대 런던 가스등 보급과 Lynda Nead(Victorian Babylon)의 야간 도시문화 논의는 사실에 부합. 독창적 지문으로 저작권 우려 없음."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "The sentence before the blank makes a general claim (\"lay elsewhere\"), and the sentence after it gives the details, so the general-to-specific link makes B correct. Two wrong answers are tempting for partly valid reasons: C, because the lamps did cause the nightlife, and A, because Nead's view contrasts with the reformers' prediction. D is also plausible, so the item fits medium difficulty. The passage attributes a specific argument to Lynda Nead. She did write about gaslight in Victorian London, but I could not check that she argued exactly this. Gas lighting spreading through London in the 1810s and 1820s is historically accurate.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "rwsup-medium-1:medium-transitions-03",
+  "runId": "rw-supplement-medium",
+  "skill": "transitions",
+  "domain": "rw_expression_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "Many small songbirds lower their body temperature at night to save energy, a strategy that can leave them sluggish and vulnerable at dawn. Researchers studying black-capped chickadees in northern Minnesota expected the birds to rely heavily on this nighttime cooling during the coldest weeks of winter. ______ the chickadees that cooled their bodies the most were not those roosting on the coldest nights but those that had found the least food the previous afternoon, suggesting that the birds' energy reserves, rather than air temperature alone, govern how deeply they cool.\n\nWhich choice completes the text with the most logical transition?",
+   "stimulus": "Many small songbirds lower their body temperature at night to save energy, a strategy that can leave them sluggish and vulnerable at dawn. Researchers studying black-capped chickadees in northern Minnesota expected the birds to rely heavily on this nighttime cooling during the coldest weeks of winter. ______ the chickadees that cooled their bodies the most were not those roosting on the coldest nights but those that had found the least food the previous afternoon, suggesting that the birds' energy reserves, rather than air temperature alone, govern how deeply they cool.",
+   "question": "Which choice completes the text with the most logical transition?",
+   "options": [
+    "Consequently,",
+    "For example,",
+    "Similarly,",
+    "Instead,"
+   ],
+   "correctIndex": 3,
+   "answers": null,
+   "explanation": "앞 문장은 연구자들이 가장 추운 시기에 새들이 야간 체온 저하에 크게 의존할 것이라고 '예상했다'는 내용이고, 뒤 문장은 실제로는 기온이 아니라 전날 먹이 섭취량이 체온 저하 정도를 결정했다는, 예상과 다른 결과를 제시한다. 따라서 예상을 대체하는 실제 결과를 이끄는 D가 정답이다. A는 뒤 문장이 앞 문장의 결과처럼 보여 그럴듯하지만, 연구자들의 예상이 발견을 일으킨 것은 아니다. B는 뒤 문장의 구체적인 관찰 내용이 앞 문장을 예시하는 것처럼 보이지만, 실제로는 예상을 뒤집는다. C는 두 내용이 비슷하다는 뜻을 나타내지만, 둘은 서로 대조된다.",
+   "explanationEn": "The first sentence tells you what the researchers expected: the chickadees would cool their bodies most during the coldest weeks. The second sentence reports a result that replaces that expectation, because food intake, not cold, predicted how deeply the birds cooled. That's why D is correct, since it introduces what actually happened in place of what was expected. A might look reasonable because the finding comes after the expectation, but the expectation didn't cause the finding. B could seem to fit because the second sentence gives specific details, but those details contradict the first sentence rather than illustrate it. C signals similarity, but the two sentences actually contrast with each other.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "D",
+   "seed": "자연과학(생물·생태)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "앞 문장(연구자 예상) vs 뒤 문장(예상과 다른 실제 결과: 기온이 아니라 먹이 섭취량이 결정) 구조에서 'Instead,'가 예상을 대체하는 실제 결과를 자연스럽게 도입함. A(Consequently)는 시간적 선후로 그럴듯하고 B(For example)는 구체적 관찰 내용 때문에 매력적인 오답으로 기능하며, C(Similarly)도 문장 형태상 말이 됨. 두 문장의 관계(예상→반전) 파악과 접속어 의미 비교라는 두 단계 판단이 필요하므로 medium 적합. 한국어·영어 해설 모두 D를 일관되게 뒷받침하고 글자 참조 일치, 영어 해설에 한글 없음. 박새의 야간 체온 저하(torpor)는 실제 알려진 현상으로 사실 오류 없음."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "'expected'로 표시된 예상과 실제 결과가 대조되므로 Instead가 맞다. Consequently와 For example은 훑어 읽으면 그럴듯해 보이고, Similarly는 비교적 쉽게 배제된다. 중간 난이도에 맞다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "rwsup-medium-1:medium-transitions-04",
+  "runId": "rw-supplement-medium",
+  "skill": "transitions",
+  "domain": "rw_expression_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "In her novel The Lantern House (2021), Welsh author Carys Ellwood borrows heavily from the conventions of nineteenth-century fiction: an omniscient narrator comments freely on the characters, chapters end with cliff-hanging letters, and the plot turns on a disputed inheritance. Many early reviewers therefore described the book as a faithful imitation of Victorian style. ______ Ellwood's narrator repeatedly admits to not knowing what the characters are thinking, a confession no Victorian narrator would make, and these gaps quietly undercut the confident, all-seeing voice that the novel seems at first to adopt.\n\nWhich choice completes the text with the most logical transition?",
+   "stimulus": "In her novel The Lantern House (2021), Welsh author Carys Ellwood borrows heavily from the conventions of nineteenth-century fiction: an omniscient narrator comments freely on the characters, chapters end with cliff-hanging letters, and the plot turns on a disputed inheritance. Many early reviewers therefore described the book as a faithful imitation of Victorian style. ______ Ellwood's narrator repeatedly admits to not knowing what the characters are thinking, a confession no Victorian narrator would make, and these gaps quietly undercut the confident, all-seeing voice that the novel seems at first to adopt.",
+   "question": "Which choice completes the text with the most logical transition?",
+   "options": [
+    "Yet,",
+    "As a result,",
+    "For instance,",
+    "Similarly,"
+   ],
+   "correctIndex": 0,
+   "answers": null,
+   "explanation": "앞 문장들은 이 소설이 19세기 관습을 따르기 때문에 평론가들이 '충실한 모방'으로 보았다고 말한다. 빈칸 뒤 문장은 화자가 인물의 생각을 모른다고 인정하는데, 이는 빅토리아 시대 화자라면 하지 않을 일이므로 앞의 평가와 반대된다. 따라서 대조를 나타내는 A가 정답이다. B는 화자의 고백이 평론가들의 평가에서 비롯된 결과처럼 만들어 버린다. C와 D는 둘 다 '화자'를 다루기 때문에 그럴듯해 보이지만, 뒤 문장은 빅토리아 양식의 예시나 비슷한 사례가 아니라 그 양식에서 벗어나는 점이므로 맞지 않는다.",
+   "explanationEn": "The first sentences explain that the novel follows nineteenth-century conventions, which is why reviewers called it a faithful imitation of Victorian style. The sentence after the blank says the narrator admits to not knowing what the characters think, something a Victorian narrator would never do, so it pushes against that judgment. That makes A, a contrast word, the correct choice. B is wrong because it treats the narrator's admissions as a result of the reviewers' opinion. C and D may look tempting because the passage talks about the narrator in both places, but the second sentence isn't an example of Victorian style or another case like it. It shows a break from that style.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "A",
+   "seed": "문학(19세기 소설 분위기의 현대 서술)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "앞 문장(평론가들의 '충실한 모방' 평가)과 뒤 문장(빅토리아 화자라면 하지 않을 고백, 'undercut')이 명확히 대조되므로 A 'Yet,'이 정답임을 직접 확인. B는 인과 관계가 성립하지 않고, C/D는 뒤 문장이 빅토리아 양식의 예시·유사 사례가 아니라 이탈이므로 배제됨. 한국어·영어 해설 모두 동일한 결론과 글자 참조를 가지며 모순 없음, 영어 해설에 한글 없음. 가상의 작가·작품을 사용해 저작권·사실 오류 문제 없음. 'undercut' 등 단서가 비교적 분명해 다소 쉬운 편이지만, 평론가 평가와 서술자 특징을 연결해야 하고 C가 '화자' 언급으로 부분적 유혹을 주므로 medium 범위 내로 판단."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": false,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "대조 신호('a confession no Victorian narrator would make')가 비교적 분명하지만, 'For instance'는 앞서 나온 전지적 화자를 예시하는 것처럼 보여 훑어 읽으면 고르기 쉽다. 이 점에서 medium 난이도에 맞다. 작가와 작품은 가상으로 보인다.",
+    "passed": false
+   }
+  }
+ },
+ {
+  "gid": "rwsup-medium-1:medium-rhetorical_synthesis-00",
+  "runId": "rw-supplement-medium",
+  "skill": "rhetorical_synthesis",
+  "domain": "rw_expression_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "While researching a topic, a student has taken the following notes:\n- Lina Bo Bardi was an Italian-born Brazilian architect.\n- In 1977, she began converting a former oil-drum factory in São Paulo into SESC Pompéia, a public leisure and cultural center.\n- Rather than demolishing the factory's brick warehouses, Bo Bardi kept their original walls and roof trusses exposed.\n- She added two new concrete towers connected by angular aerial walkways to house sports facilities.\n- Critics have described the project as an example of \"adaptive reuse,\" in which old structures are given new functions.\n- The center opened in stages between 1982 and 1986.\n\nThe student wants to emphasize how Bo Bardi's design combined preservation with new construction. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "stimulus": "While researching a topic, a student has taken the following notes:\n- Lina Bo Bardi was an Italian-born Brazilian architect.\n- In 1977, she began converting a former oil-drum factory in São Paulo into SESC Pompéia, a public leisure and cultural center.\n- Rather than demolishing the factory's brick warehouses, Bo Bardi kept their original walls and roof trusses exposed.\n- She added two new concrete towers connected by angular aerial walkways to house sports facilities.\n- Critics have described the project as an example of \"adaptive reuse,\" in which old structures are given new functions.\n- The center opened in stages between 1982 and 1986.",
+   "question": "The student wants to emphasize how Bo Bardi's design combined preservation with new construction. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "options": [
+    "Critics have called SESC Pompéia, which opened in stages between 1982 and 1986, an example of adaptive reuse, a practice in which old structures are given new functions.",
+    "At SESC Pompéia, Bo Bardi left the old factory's brick walls and roof trusses exposed while adding two concrete towers linked by angular aerial walkways.",
+    "Beginning in 1977, Italian-born Brazilian architect Lina Bo Bardi converted a former oil-drum factory in São Paulo into a public leisure and cultural center.",
+    "Bo Bardi chose not to demolish the factory's brick warehouses, instead keeping their original walls and roof trusses exposed to visitors."
+   ],
+   "correctIndex": 1,
+   "answers": null,
+   "explanation": "목표는 '보존'과 '신축'의 결합을 강조하는 것이므로 두 측면을 함께 담아야 한다. B는 기존 벽돌 벽과 지붕 트러스를 노출해 보존한 점과 새 콘크리트 타워 두 동을 추가한 점을 모두 제시하므로 정답이다. A는 '적응적 재사용'이라는 개념을 언급해 그럴듯하지만, 보존과 신축이 구체적으로 어떻게 결합되었는지 보여주지 않는다. C는 공장을 문화센터로 바꾼 사실만 소개할 뿐 설계 방식을 설명하지 않는다. D는 보존 측면만 다루고 새로 지은 부분은 빠져 있다.",
+   "explanationEn": "Your goal is to emphasize how preservation and new construction were combined, so the right sentence has to include both. B does this: it mentions the preserved brick walls and roof trusses and the two new concrete towers that were added. A sounds relevant because it mentions \"adaptive reuse,\" but it never shows how old and new elements were actually combined. C only tells you that the factory was converted into a cultural center and doesn't describe the design. D covers preservation but leaves out the new construction entirely.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "B",
+   "seed": "예술·건축 비평",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "정답 B는 보존(벽돌 벽·지붕 트러스 노출)과 신축(콘크리트 타워 2동·공중 통로)을 모두 담아 목표를 충족한다. A는 '적응적 재사용' 개념으로, D는 보존 측면으로 부분적 근거를 가져 비교가 필요하며 C도 노트에 근거한 그럴듯한 오답이다. 노트 내용(1977년 착수, 1982~1986년 단계 개관, 석유드럼 공장)은 실제 SESC Pompéia 사실과 부합한다. 한·영 해설 결론 및 글자 참조 일치, 영어 자연스러움."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "A(적응적 재사용 개념)와 D(보존만)가 부분적으로 맞는 오답이라 비교가 필요하고, C도 그럴듯하다. 중간 난이도에 맞는다. 사실관계(1977년 착공, 1982–86년 단계적 개관, 타워와 공중 통로)도 맞다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "rwsup-medium-1:medium-rhetorical_synthesis-01",
+  "runId": "rw-supplement-medium",
+  "skill": "rhetorical_synthesis",
+  "domain": "rw_expression_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "While researching a topic, a student has taken the following notes:\n- Tomás Reyes-Ocampo (1921–1988) was a Chilean botanist and watercolor painter.\n- Early in his career, he documented plants of the Atacama Desert mainly through pressed specimens stored in herbaria.\n- Pressed specimens often lost their color and flattened delicate flower structures.\n- Beginning in 1954, Reyes-Ocampo instead painted desert plants in the field, recording their colors and three-dimensional forms before collecting them.\n- His paintings later helped researchers identify three species whose pressed specimens had been misclassified.\n\nThe student wants to emphasize how Reyes-Ocampo's later documentation method addressed a limitation of his earlier one. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "stimulus": "While researching a topic, a student has taken the following notes:\n- Tomás Reyes-Ocampo (1921–1988) was a Chilean botanist and watercolor painter.\n- Early in his career, he documented plants of the Atacama Desert mainly through pressed specimens stored in herbaria.\n- Pressed specimens often lost their color and flattened delicate flower structures.\n- Beginning in 1954, Reyes-Ocampo instead painted desert plants in the field, recording their colors and three-dimensional forms before collecting them.\n- His paintings later helped researchers identify three species whose pressed specimens had been misclassified.",
+   "question": "The student wants to emphasize how Reyes-Ocampo's later documentation method addressed a limitation of his earlier one. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "options": [
+    "Tomás Reyes-Ocampo, a Chilean botanist and watercolor painter, documented plants of the Atacama Desert from the early part of his career until his death in 1988.",
+    "Paintings by Tomás Reyes-Ocampo, who began painting desert plants in the field in 1954, later helped researchers identify three misclassified species.",
+    "Whereas the pressed specimens Reyes-Ocampo first relied on often lost their color and flattened delicate flowers, his later field paintings recorded plants' colors and three-dimensional forms.",
+    "Reyes-Ocampo first documented Atacama Desert plants through pressed specimens stored in herbaria, but in 1954 he began painting them in the field."
+   ],
+   "correctIndex": 2,
+   "answers": null,
+   "explanation": "목표는 후기 방법(현장 수채화)이 초기 방법(압착 표본)의 한계를 어떻게 해결했는지 강조하는 것이다. C는 압착 표본의 한계(색 손실, 구조 평탄화)와 그림이 색과 입체 형태를 기록했다는 점을 직접 대응시켜 목표를 달성한다. D는 두 방법을 대조하지만 초기 방법의 한계와 해결 방식이 빠져 있다. B는 그림의 성과를 말하지만 초기 방법의 한계와 연결하지 않으며, A는 인물의 일반 소개에 그친다.",
+   "explanationEn": "Your goal is to show how the later method (field painting) fixed a limitation of the earlier method (pressed specimens). C does this by pairing the specimens' weakness, lost color and flattened flowers, with what the paintings captured: color and three-dimensional form. D does contrast the two methods, but it never says what was wrong with specimens or how painting solved it. B gives an outcome of the paintings without tying it to the earlier method's limitation, and A is just a general introduction to Reyes-Ocampo.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "C",
+   "seed": "인물 소개(과학자·예술가)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "C가 압착 표본의 한계(색 손실·평탄화)와 현장 그림의 기록(색·입체 형태)을 직접 대응시켜 목표를 유일하게 충족. D는 두 방법의 전환만 서술하고 한계·해결이 없어 비교가 필요한 양질의 오답, B는 성과만 언급, A는 일반 소개로 모두 타당한 오답 구조. 인물은 가상 인물로 보이며 노트 내부 정보만으로 판단 가능. 한국어·영어 해설 결론과 선택지 참조 일치, 영어 자연스럽고 한글 없음. A의 '죽을 때까지'는 노트에 직접 근거가 없으나 오답이므로 문제없음."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "C만 초기 방법의 한계(색 손실, 꽃 구조 평탄화)와 후기 방법이 그 한계를 해결한 방식(색과 입체 형태 기록)을 둘 다 담고 있다. D는 두 방법을 대조하고, B는 그림이 거둔 성과를 말하므로 둘 다 부분적으로 그럴듯한 오답이다. A의 '1988년 사망 때까지 기록했다'는 메모에 없는 내용이지만, 오답 선택지이므로 문항 결함으로 보지는 않는다. 해설은 학생의 목표를 'Your goal'로 표현했지만 사소한 점이다. 난이도는 medium에 적합하다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "rwsup-medium-1:medium-rhetorical_synthesis-02",
+  "runId": "rw-supplement-medium",
+  "skill": "rhetorical_synthesis",
+  "domain": "rw_expression_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "While researching a topic, a student has taken the following notes:\n- Magnetars are a rare type of neutron star with extremely powerful magnetic fields.\n- SGR 1806-20 is a magnetar located about 40,000 light-years from Earth.\n- In 2004, SGR 1806-20 released a giant flare that lasted about two-tenths of a second.\n- In that fraction of a second, the flare emitted more energy than the Sun gives off in roughly 150,000 years.\n- The flare's radiation was strong enough to briefly disturb Earth's upper atmosphere despite the magnetar's great distance.\n\nThe student wants to emphasize how powerful the 2004 flare was relative to its brief duration. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "stimulus": "While researching a topic, a student has taken the following notes:\n- Magnetars are a rare type of neutron star with extremely powerful magnetic fields.\n- SGR 1806-20 is a magnetar located about 40,000 light-years from Earth.\n- In 2004, SGR 1806-20 released a giant flare that lasted about two-tenths of a second.\n- In that fraction of a second, the flare emitted more energy than the Sun gives off in roughly 150,000 years.\n- The flare's radiation was strong enough to briefly disturb Earth's upper atmosphere despite the magnetar's great distance.",
+   "question": "The student wants to emphasize how powerful the 2004 flare was relative to its brief duration. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "options": [
+    "SGR 1806-20, a magnetar about 40,000 light-years from Earth, released a giant flare in 2004 whose radiation briefly disturbed Earth's upper atmosphere.",
+    "Magnetars such as SGR 1806-20 are rare neutron stars with extremely powerful magnetic fields, and in 2004 this one produced a giant flare.",
+    "The giant flare from SGR 1806-20 lasted about two-tenths of a second, and the magnetar itself is located about 40,000 light-years from Earth.",
+    "Although the 2004 flare from SGR 1806-20 lasted only about two-tenths of a second, it emitted more energy than the Sun gives off in roughly 150,000 years."
+   ],
+   "correctIndex": 3,
+   "answers": null,
+   "explanation": "목표는 플레어의 '짧은 지속 시간'과 '엄청난 위력'을 대비하는 것이므로 지속 시간(약 0.2초)과 방출 에너지(태양 약 15만 년분)를 'Although'로 연결한 D가 정답이다. A는 대기 교란을 통해 위력을 보여 주지만 지속 시간이 빠져 있어 대비가 성립하지 않는다. B는 마그네타의 일반적 특징만 소개한다. C는 지속 시간은 언급하지만 위력 대신 거리를 결합해 목표에서 벗어난다.",
+   "explanationEn": "The goal asks you to set the flare's power against its short duration, so you need both facts together. D does exactly that: it pairs the roughly two-tenths-of-a-second duration with energy greater than the Sun's output over about 150,000 years, and links them with \"Although.\" A shows the flare's strength through the atmospheric disturbance but leaves out how long it lasted, so there is no contrast. B only describes what magnetars are in general. C gives the duration but pairs it with the distance instead of the flare's power, so it misses the goal.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "D",
+   "seed": "자연과학(물리·천문)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "D만이 짧은 지속 시간(0.2초)과 막대한 에너지(태양 15만 년분)를 'Although'로 대비하여 목표를 충족. A는 위력(대기 교란)만, C는 지속 시간+거리만 제시해 부분적 근거를 가진 오답으로 비교가 필요하며 B도 말이 되는 일반 서술. 노트의 사실(2004년 거대 플레어, ~0.2초, 태양 ~15만 년분 에너지, 상층 대기 교란)은 실제 SGR 1806-20 사건과 부합. 해설 양쪽 결론·글자 참조 일치, 영어 해설 자연스럽고 한글 없음."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "A(위력만)와 C(지속시간만)가 부분 근거를 가진 매력적 오답이라 medium 기준을 충족한다. B는 약한 오답이다. 사실관계도 대체로 정확하다(0.2초 동안 태양 약 15만 년분의 에너지, 전리층 교란).",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "rwsup-easy-1:easy-boundaries-00",
+  "runId": "rw-supplement-easy",
+  "skill": "boundaries",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "easy",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "Sea otters often float on their backs while eating, using their chests as tables. To open hard-shelled prey such as clams, an otter will place a flat rock on its chest and strike the shell against ______ the shell cracks, the otter scoops out the soft food inside.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "Sea otters often float on their backs while eating, using their chests as tables. To open hard-shelled prey such as clams, an otter will place a flat rock on its chest and strike the shell against ______ the shell cracks, the otter scoops out the soft food inside.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "the rock. Once",
+    "the rock, once",
+    "the rock once",
+    "the rock, and once,"
+   ],
+   "correctIndex": 0,
+   "answers": null,
+   "explanation": "'an otter will place ... against the rock'은 독립절이고, 'once the shell cracks, the otter scoops out ...'도 하나의 완전한 문장이므로 두 절을 마침표로 나눈 A가 정답이다. B는 두 독립절을 쉼표만으로 이어 쉼표 스플라이스가 된다. C는 문장부호 없이 이어 붙여 'once'가 앞 절에 붙은 것처럼 읽히는 융합문이 되므로 문장 구조가 무너진다. D는 접속사 'and' 뒤 'once' 다음에 쉼표가 붙어 종속절 'once the shell cracks'를 잘못 끊는다.",
+   "explanationEn": "The words \"an otter will place ... against the rock\" form an independent clause, and \"once the shell cracks, the otter scoops out ...\" is a complete sentence of its own. A is correct because it separates the two with a period. B joins two independent clauses with only a comma, which makes a comma splice. C runs the two clauses together with no punctuation, so it reads as if \"once\" belongs to the first clause, and the sentence falls apart. D wrongly places a comma after \"once,\" which splits the dependent clause \"once the shell cracks.\"",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "easy",
+   "targetLetter": "A",
+   "seed": "자연과학(생물·생태)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "정답 A 검증: 'strike the shell against the rock.'로 독립절 종결 후 'Once the shell cracks, the otter scoops...'가 완전한 문장. B는 쉼표 스플라이스, C는 'once'절이 앞에 붙은 뒤 쉼표 스플라이스, D는 'once' 뒤 불필요한 쉼표로 종속절 분리. 단일 규칙(독립절 경계)으로 해결 가능하며 오답은 전형적 오개념 — easy 적합. 해달의 돌 사용 서술도 사실과 부합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "A는 두 독립절을 마침표로 올바르게 나눈다. B는 쉼표 스플라이스, C는 융합문, D는 'once' 뒤 쉼표로 종속절이 잘못 끊긴다. 하나의 규칙(독립절 경계)만으로 풀 수 있는 전형적 easy 문항이다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "rwsup-easy-1:easy-boundaries-02",
+  "runId": "rw-supplement-easy",
+  "skill": "boundaries",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "easy",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "The Okavango Delta in Botswana floods every year, even though very little rain falls there during the dry season. The water comes from highland rains in Angola, hundreds of kilometers to the north. It takes several months for this water to travel south through the river ______ the delta often reaches its fullest point in the middle of the dry season.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "The Okavango Delta in Botswana floods every year, even though very little rain falls there during the dry season. The water comes from highland rains in Angola, hundreds of kilometers to the north. It takes several months for this water to travel south through the river ______ the delta often reaches its fullest point in the middle of the dry season.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "channels, as a result",
+    "channels as a result",
+    "channels; as a result,",
+    "channels, as a result,"
+   ],
+   "correctIndex": 2,
+   "answers": null,
+   "explanation": "빈칸 앞 'It takes several months ... through the river channels'와 뒤 'the delta often reaches ... season'은 각각 독립절이다. 'as a result'는 접속부사라 두 독립절을 연결할 수 없으므로 앞에 세미콜론(또는 마침표)이 필요하고, 뒤에는 쉼표가 온다. 따라서 C가 정답이다. A와 D는 쉼표만으로 두 독립절을 이어 쉼표 스플라이스가 되고, B는 아무 부호 없이 이어 무종지문(run-on)이 된다.",
+   "explanationEn": "The words before the blank (\"It takes several months ... through the river channels\") and after it (\"the delta often reaches ... dry season\") are both independent clauses. \"As a result\" is a transitional phrase, not a coordinating conjunction, so it can't join two independent clauses by itself; you need a semicolon (or period) before it and a comma after it. That makes C correct. A and D join the clauses with only a comma, creating a comma splice, and B uses no punctuation at all, creating a run-on sentence.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "easy",
+   "targetLetter": "C",
+   "seed": "환경·지리",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "두 독립절(It takes several months ... channels / the delta often reaches ... season)을 접속부사 'as a result'로 연결하는 전형적 boundaries 문항. 세미콜론+쉼표(C)만이 올바르며 A·D는 쉼표 스플라이스, B는 run-on으로 명확히 배제됨. 오카방고 삼각주가 건기 중에 앙골라 고지대 강우로 범람한다는 배경 사실도 정확. 한·영 해설 모두 선택지 참조 일치, 한글 혼입 없음. 단일 규칙으로 해결되는 easy 난이도에 적합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "독립절 + 접속부사 세미콜론이라는 하나의 규칙만 알면 풀린다. 오답은 전형적인 쉼표 스플라이스/무종지문이다. 오카방고 델타 관련 사실(앙골라 고지대 강우, 건기에 최고 수위)도 정확하다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "rwsup-easy-1:easy-form_structure_sense-00",
+  "runId": "rw-supplement-easy",
+  "skill": "form_structure_sense",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "easy",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "In the late 1800s, many cities in Britain built public libraries that were free for anyone to use. Before then, most books were too expensive for working families. The new libraries, which often stayed open into the evening, ______ factory workers a chance to read after their long shifts ended.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "In the late 1800s, many cities in Britain built public libraries that were free for anyone to use. Before then, most books were too expensive for working families. The new libraries, which often stayed open into the evening, ______ factory workers a chance to read after their long shifts ended.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "gave",
+    "gives",
+    "has given",
+    "is giving"
+   ],
+   "correctIndex": 0,
+   "answers": null,
+   "explanation": "이 지문은 1800년대 후반이라는 과거의 일을 다루며, \"built\", \"were\", \"stayed\", \"ended\" 같은 과거 시제 동사를 계속 쓰고 있다. 따라서 빈칸에도 과거 시제 \"gave\"를 써야 하므로 정답은 A이다. B는 현재 시제라서 과거 이야기의 흐름과 맞지 않는다. C는 현재완료로 현재와 이어지는 일을 나타내므로 이미 끝난 과거의 일에는 어울리지 않는다. D는 현재진행형이고 단수 동사라서 시제도 맞지 않고 복수 주어 \"libraries\"와 수 일치도 되지 않는다.",
+   "explanationEn": "This passage is about something that happened in the late 1800s, and it keeps using past-tense verbs such as \"built,\" \"were,\" \"stayed,\" and \"ended.\" So the blank also needs the past tense, \"gave,\" which makes A the answer. B uses the present tense, so it breaks the past-tense flow of the story. C is present perfect, which links an action to the present, so it doesn't fit an event that ended in the past. D is present progressive and singular, so its tense is wrong and it also doesn't agree with the plural subject \"libraries.\"",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "easy",
+   "targetLetter": "A",
+   "seed": "역사(근대 사회 변화)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "정답 A 검산 완료: 지문 전체가 과거 시제(built, were, stayed, ended)이므로 \"gave\"가 적절. B·C는 시제 불일치에 더해 단수형이라 복수 주어 \"libraries\"와 수 일치도 어긋나지만, 해설이 시제 근거만 든 것은 오류가 아닌 생략 수준. 한·영 해설 결론·글자 참조 일치, 한글 혼입 없음. 역사적 배경(19세기 후반 영국 공공도서관 확산) 사실관계 문제 없음. 단일 규칙(시제 일관성)으로 풀리고 단서가 명시적이어서 easy에 적합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "과거 시제 단서가 명확한 동사 시제 문항이다. 오답들은 전형적인 시제 오개념이다. 다만 A를 뺀 세 선택지가 모두 단수형이라 수 일치만으로도 답을 고를 수 있다. 그래도 easy 난이도에는 맞다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "rwsup-easy-1:easy-form_structure_sense-01",
+  "runId": "rw-supplement-easy",
+  "skill": "form_structure_sense",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "easy",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "Engineers in the Netherlands designed a bicycle path that glows at night. The path is covered with thousands of small stones coated in a special paint. During the day, the paint ______ sunlight, and after dark it releases that stored energy as a soft blue light that helps cyclists see the way.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "Engineers in the Netherlands designed a bicycle path that glows at night. The path is covered with thousands of small stones coated in a special paint. During the day, the paint ______ sunlight, and after dark it releases that stored energy as a soft blue light that helps cyclists see the way.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "absorb",
+    "absorbs",
+    "have absorbed",
+    "are absorbing"
+   ],
+   "correctIndex": 1,
+   "answers": null,
+   "explanation": "빈칸의 주어는 단수 명사 \"the paint\"이므로 단수 동사가 필요하다. 또한 같은 문장의 \"releases\"처럼 반복되는 현상을 나타내는 현재 시제가 자연스러우므로 B \"absorbs\"가 정답이다. A \"absorb\"는 복수 주어에 쓰는 형태라서 단수 주어와 맞지 않는다. C \"have absorbed\"와 D \"are absorbing\"도 복수형 조동사(have, are)를 사용하므로 단수 주어 \"paint\"와 수가 일치하지 않는다.",
+   "explanationEn": "The subject of the blank is the singular noun \"the paint,\" so you need a singular verb. The simple present also fits, since it matches \"releases\" later in the sentence and describes something that happens every day, so B, \"absorbs,\" is correct. A, \"absorb,\" is the form used with plural subjects, so it doesn't agree with \"paint.\" C, \"have absorbed,\" and D, \"are absorbing,\" use the plural helping verbs \"have\" and \"are,\" so they also fail to agree with the singular subject.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "easy",
+   "targetLetter": "B",
+   "seed": "기술·공학 사례",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "주어 \"the paint\"(단수)에 대한 수 일치 단일 규칙으로 해결. 오답 A/C/D는 모두 복수형이며 앞 문장의 \"stones\" 때문에 그럴듯한 오개념 유도. B \"absorbs\"는 \"releases\"와 시제도 병치됨. 한·영 해설 결론 및 글자 참조 일치, 영어 해설에 한글 없음. 지문 창작 수준으로 저작권 의심 없음."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "주어-동사 수일치 단일 규칙. 주어 \"the paint\"는 빈칸 바로 앞에 있다. 오답 A, C, D는 모두 복수형이고, 앞 문장의 \"stones\"에 끌려 고를 수 있는 전형적 오개념이다. 실제 사례인 Van Gogh-Roosegaarde 자전거길과도 사실상 부합한다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "rwsup-easy-1:easy-form_structure_sense-02",
+  "runId": "rw-supplement-easy",
+  "skill": "form_structure_sense",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "easy",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "Sea otters play an important role in kelp forest ecosystems along the Pacific coast. By eating large numbers of sea urchins, which feed on kelp, the otters help protect these underwater forests. In areas where otter populations have recovered, the kelp ______ grown thicker and taller than in areas without otters.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "Sea otters play an important role in kelp forest ecosystems along the Pacific coast. By eating large numbers of sea urchins, which feed on kelp, the otters help protect these underwater forests. In areas where otter populations have recovered, the kelp ______ grown thicker and taller than in areas without otters.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "have",
+    "were",
+    "has",
+    "are"
+   ],
+   "correctIndex": 2,
+   "answers": null,
+   "explanation": "빈칸의 주어는 단수 명사 \"the kelp\"이므로 단수 동사가 와야 하고, 뒤의 과거분사 \"grown\"과 함께 현재완료를 이루려면 \"has\"가 필요하다. 따라서 정답은 C이다. A는 복수 동사여서 단수 주어와 맞지 않는데, 앞의 복수 명사 \"areas\"나 \"populations\"를 주어로 착각하면 고르기 쉽다. B와 D는 복수 동사이고, \"grown\"과 함께 쓰면 수동태가 되어 \"켈프가 자라게 되었다\"는 어색한 뜻이 되므로 문맥에 맞지 않는다.",
+   "explanationEn": "The subject of the blank is the singular noun \"the kelp,\" so the verb must be singular too. To form the present perfect with the past participle \"grown,\" you need \"has,\" so C is correct. A is a plural verb that doesn't agree with the singular subject; it's a tempting choice if you mistake the nearby plural nouns \"areas\" or \"populations\" for the subject. B and D are plural verbs too, and putting them with \"grown\" makes the sentence passive (\"the kelp was grown\"), which doesn't make sense here.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "easy",
+   "targetLetter": "C",
+   "seed": "자연과학(생물·생태)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "주어 \"the kelp\"(단수·불가산) + \"grown\" → 현재완료 \"has grown\"으로 C가 유일한 정답. A는 인접 복수 명사(areas, populations)에 의한 전형적 수 일치 오개념, B·D는 복수형이자 수동태를 만들어 배제됨. 단일 규칙(주어-동사 수 일치 + 완료형 조동사)으로 풀리고 단서가 명시적이어서 easy에 적합. 해양수달-성게-켈프 생태 설명도 사실에 부합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "물질명사 kelp는 단수 취급하므로 has grown(현재완료)이 맞다. 주어-동사 수일치라는 규칙 하나로 풀리고, 근처의 복수 명사(areas, populations)가 전형적인 함정이라 easy에 적합하다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "rwsup-easy-1:easy-form_structure_sense-03",
+  "runId": "rw-supplement-easy",
+  "skill": "form_structure_sense",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "easy",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "In Mara Ellison's novel The Lamplighter's Daughter, set in a fog-bound coastal town, the quiet heroine keeps a small wooden box beneath her bed. The letters inside the box ______ from a sailor who vanished at sea years before the story begins.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "In Mara Ellison's novel The Lamplighter's Daughter, set in a fog-bound coastal town, the quiet heroine keeps a small wooden box beneath her bed. The letters inside the box ______ from a sailor who vanished at sea years before the story begins.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "is",
+    "was",
+    "has been",
+    "are"
+   ],
+   "correctIndex": 3,
+   "answers": null,
+   "explanation": "이 문장의 주어는 복수 명사 \"letters\"이고, \"inside the box\"는 주어를 꾸미는 짧은 전치사구일 뿐이다. 따라서 복수 동사가 필요하므로 D \"are\"가 정답이다. A \"is\", B \"was\", C \"has been\"은 모두 단수 동사로, 동사 바로 앞에 있는 단수 명사 \"box\"를 주어로 잘못 본 경우이다. 지문이 현재 시제(\"keeps\", \"begins\")로 서술되어 있으므로 현재형 \"are\"가 흐름에도 맞는다.",
+   "explanationEn": "The subject of this sentence is the plural noun \"letters.\" The phrase \"inside the box\" is just a short prepositional phrase describing the subject. Because the subject is plural, you need a plural verb, so D, \"are,\" is correct. A (\"is\"), B (\"was\"), and C (\"has been\") are all singular verbs, and they would only seem right if you mistook \"box,\" the singular noun just before the blank, for the subject. The passage is also told in the present tense (\"keeps,\" \"begins\"), so the present-tense \"are\" fits.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "easy",
+   "targetLetter": "D",
+   "seed": "문학(19세기 소설 분위기의 현대 서술)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "주어 \"letters\"(복수) + 짧은 전치사구 \"inside the box\" 구조로 복수 동사 \"are\"가 유일한 정답임을 직접 확인. 오답 A·B·C는 모두 단수형으로 인접 명사 \"box\"를 주어로 오인한 전형적 오개념을 반영하며, 현재 시제 서술과도 일치. 한국어·영어 해설 모두 동일 결론과 선택지 참조로 모순 없음. 가상의 소설·작가 사용으로 저작권 문제 없음. 한 가지 규칙(주어-동사 수 일치, 단일 전치사구 간섭)만으로 풀리는 easy 난이도에 적합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "주어-동사 수일치 하나만 보면 풀린다. 오답 셋은 모두 단수형이라 'box'에 이끌리는 전형적 오개념이다. 소설과 작가는 가상으로 보인다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "rwsup-easy-1:easy-transitions-00",
+  "runId": "rw-supplement-easy",
+  "skill": "transitions",
+  "domain": "rw_expression_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "easy",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "In her novel The Lamplighter's Daughter, contemporary author Mira Castellan imitates the slow, detailed style of nineteenth-century fiction. Early chapters describe the narrow streets and foggy evenings of a small harbor town at great length. ______ the main character, Eliza, has to wait almost fifty pages before anything important happens to her, just as readers of older novels often did.\n\nWhich choice completes the text with the most logical transition?",
+   "stimulus": "In her novel The Lamplighter's Daughter, contemporary author Mira Castellan imitates the slow, detailed style of nineteenth-century fiction. Early chapters describe the narrow streets and foggy evenings of a small harbor town at great length. ______ the main character, Eliza, has to wait almost fifty pages before anything important happens to her, just as readers of older novels often did.",
+   "question": "Which choice completes the text with the most logical transition?",
+   "options": [
+    "As a result,",
+    "However,",
+    "For example,",
+    "Similarly,"
+   ],
+   "correctIndex": 0,
+   "answers": null,
+   "explanation": "앞 문장은 초반 장들이 거리와 저녁 풍경을 아주 길게 묘사한다고 말하고, 뒤 문장은 그 때문에 주인공 엘라이자가 중요한 사건을 거의 50쪽이나 기다려야 한다고 말합니다. 앞 내용이 원인이고 뒤 내용이 결과이므로 정답은 A입니다. B는 대조를 나타내는데, 두 문장은 서로 반대되는 내용이 아닙니다. C는 예시를 나타내지만, 사건이 늦게 일어나는 것은 풍경 묘사의 한 예가 아니라 그 묘사가 낳은 결과입니다. D는 비슷한 내용을 하나 더 덧붙일 때 쓰는 말이어서 두 문장의 인과 관계를 나타내지 못합니다.",
+   "explanationEn": "The first sentence says the early chapters describe the town's streets and evenings at great length. The next sentence says that Eliza waits almost fifty pages before anything important happens. The long descriptions cause the slow start, so this is a cause-and-effect relationship, and the answer is A. B signals contrast, but the two sentences don't disagree with each other. C signals an example, but the delayed action isn't an example of scenery description; it's a result of it. D adds a similar point, so it doesn't show that one sentence causes the other.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "easy",
+   "targetLetter": "A",
+   "seed": "문학(19세기 소설 분위기의 현대 서술)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "앞 문장(초반 장들의 긴 풍경 묘사)이 원인, 뒤 문장(엘라이자가 50쪽을 기다림)이 결과로 명확히 연결되어 A가 가장 논리적임. D(Similarly)는 두 문장이 별개의 유사 사례가 아니라 동일 현상의 원인·결과이므로 배제 가능하나, 뒤 문장의 'just as readers of older novels often did'와 맞물려 다소 그럴듯한 오답으로 작동함(easy 수준에서 허용 가능한 전형적 오개념). 한국어·영어 해설 모두 정답 A와 오답 배제 근거가 일치하며 한글 혼입 없음. 가상 작가·작품으로 저작권 문제 없음. 단일 인과 관계 규칙으로 풀리므로 easy 적합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "바로 앞 문장(긴 묘사)과의 인과 관계가 분명해 A가 가장 적절함. C는 첫 문장의 '느린 문체'를 보여 주는 예로 읽힐 여지가 약간 있지만, 바로 앞 문장과 연결하면 결과 관계가 더 자연스러움. 쉬운 난이도에 맞음.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "rwsup-easy-1:easy-transitions-01",
+  "runId": "rw-supplement-easy",
+  "skill": "transitions",
+  "domain": "rw_expression_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "easy",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "The Atacama Desert in northern Chile is one of the driest places on Earth; some weather stations there have recorded almost no rain for decades. ______ the soil in many parts of the desert holds very little life, and scientists have used it to test equipment designed to search for microbes on Mars.\n\nWhich choice completes the text with the most logical transition?",
+   "stimulus": "The Atacama Desert in northern Chile is one of the driest places on Earth; some weather stations there have recorded almost no rain for decades. ______ the soil in many parts of the desert holds very little life, and scientists have used it to test equipment designed to search for microbes on Mars.",
+   "question": "Which choice completes the text with the most logical transition?",
+   "options": [
+    "However,",
+    "As a result,",
+    "For example,",
+    "Similarly,"
+   ],
+   "correctIndex": 1,
+   "answers": null,
+   "explanation": "첫 문장은 아타카마 사막이 수십 년간 비가 거의 오지 않을 만큼 극도로 건조하다고 말하고, 두 번째 문장은 그 때문에 토양에 생명체가 거의 없다는 결과를 제시한다. 따라서 원인-결과 관계를 나타내는 B가 정답이다. A는 대조를 나타내지만 두 문장은 서로 반대되는 내용이 아니다. C는 예시를 나타내지만 생명체가 적은 토양은 건조함의 예가 아니라 그 결과이다. D는 유사한 다른 사례를 덧붙일 때 쓰지만, 두 번째 문장은 별개의 비슷한 사례가 아니다.",
+   "explanationEn": "The first sentence says the Atacama Desert is so dry that some places have had almost no rain for decades, and the second sentence describes what follows from that: the soil holds very little life. That is a cause-and-effect relationship, so B is correct. A signals a contrast, but the two sentences don't contradict each other. C introduces an example, but lifeless soil isn't an example of dryness. It's a result of dryness. D signals a similar, separate case, and the second sentence doesn't give one.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "easy",
+   "targetLetter": "B",
+   "seed": "환경·지리",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "극도의 건조함(원인) → 토양에 생명체가 거의 없음(결과)이라는 단일 인과 관계로 B가 명확히 성립. A(대조), C(예시), D(유사 사례)는 규칙을 알면 바로 배제되지만 전형적 오개념으로 그럴듯함. 아타카마 사막이 화성 탐사 장비 테스트지로 쓰인다는 내용도 사실에 부합. 한·영 해설 모두 동일 결론·글자 참조, 영어 자연스럽고 한글 없음. easy 난이도 적합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "두 번째 문장이 극도의 건조함에서 비롯된 결과(생명체가 거의 없는 토양)를 직접 보여 주므로 인과 관계를 나타내는 연결어로 바로 풀린다. 오답 However·For example·Similarly는 연결어 문항에서 흔히 보는 그럴듯한 오개념이다. 아타카마 사막이 화성 탐사 장비 시험장으로 쓰인다는 내용도 사실에 맞다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "rwsup-easy-1:easy-transitions-02",
+  "runId": "rw-supplement-easy",
+  "skill": "transitions",
+  "domain": "rw_expression_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "easy",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "Before the mid-1800s, most libraries in Britain charged membership fees that many factory workers could not afford. In 1850, Parliament passed the Public Libraries Act, which allowed towns to use local taxes to pay for libraries that anyone could use for free. ______ thousands of working people in cities such as Manchester were able to borrow books for the first time.\n\nWhich choice completes the text with the most logical transition?",
+   "stimulus": "Before the mid-1800s, most libraries in Britain charged membership fees that many factory workers could not afford. In 1850, Parliament passed the Public Libraries Act, which allowed towns to use local taxes to pay for libraries that anyone could use for free. ______ thousands of working people in cities such as Manchester were able to borrow books for the first time.",
+   "question": "Which choice completes the text with the most logical transition?",
+   "options": [
+    "However,",
+    "For example,",
+    "As a result,",
+    "Similarly,"
+   ],
+   "correctIndex": 2,
+   "answers": null,
+   "explanation": "앞 문장은 1850년 법으로 누구나 무료로 이용할 수 있는 도서관이 생겼다는 원인을, 빈칸 뒤 문장은 노동자들이 처음으로 책을 빌릴 수 있게 되었다는 결과를 말한다. 따라서 인과 관계를 나타내는 C가 정답이다. A는 대조를 나타내지만, 노동자들이 책을 빌리게 된 것은 법과 반대되는 일이 아니라 법에서 비롯된 일이다. B는 예시를 나타내지만, 뒤 문장은 법의 한 사례가 아니라 법이 가져온 효과이다. D는 비슷한 사건을 하나 더 덧붙일 때 쓰는데, 뒤 문장은 별개의 비슷한 사건이 아니라 법의 결과이다.",
+   "explanationEn": "The sentence before the blank gives a cause: the 1850 law let towns create libraries that anyone could use for free. The sentence after the blank gives the effect: working people could borrow books for the first time. So you need a cause-and-effect transition, which makes C correct. A signals contrast, but workers borrowing books doesn't go against the law. It comes from the law. B signals an example, but the last sentence describes what the law led to, not an instance of it. D adds a separate, similar event, but the last sentence is a result, not a parallel event.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "easy",
+   "targetLetter": "C",
+   "seed": "역사(근대 사회 변화)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "지문: 1850년 공공도서관법(Public Libraries Act 1850)으로 지방세 재원 무료 도서관 설립 허용 → 맨체스터 노동자들이 처음 책을 빌릴 수 있게 됨. 명백한 원인→결과 구조로 C \"As a result\"가 유일하게 성립. A(대조), B(예시), D(유사 추가)는 관계를 잘못 짚은 전형적 오개념이며 규칙을 알면 즉시 배제됨. 역사적 사실(1850년 법, 맨체스터가 초기 적용 도시 중 하나)도 정확. 한국어·영어 해설 모두 C를 뒷받침하고 글자 참조 일치, 한글 혼입 없음, 영어 자연스러움. 단일 개념·한 단계 추론·평이한 어휘로 easy 적합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "원인(1850년 공공도서관법)과 결과(노동자들의 첫 도서 대출)의 관계가 지문에 직접 드러나 있다. 한 단계 추론으로 풀리므로 easy 난이도에 맞다. B는 'Manchester' 예시 때문에 그럴듯해 보이는 오답이라 오답으로서 적절하다. 사실관계도 맞다(1850년 법 제정, 맨체스터 무료도서관 1852년 개관).",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "rwsup-easy-1:easy-rhetorical_synthesis-00",
+  "runId": "rw-supplement-easy",
+  "skill": "rhetorical_synthesis",
+  "domain": "rw_expression_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "easy",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "While researching a topic, a student has taken the following notes:\n- The Lotus Temple is a house of worship in New Delhi, India.\n- It was designed by Iranian-born architect Fariborz Sahba.\n- The building was completed in 1986.\n- Its exterior is made of 27 marble-clad \"petals\" arranged to resemble a lotus flower.\n- The temple is open to visitors of all religions.\n\nThe student wants to describe the appearance of the Lotus Temple. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "stimulus": "While researching a topic, a student has taken the following notes:\n- The Lotus Temple is a house of worship in New Delhi, India.\n- It was designed by Iranian-born architect Fariborz Sahba.\n- The building was completed in 1986.\n- Its exterior is made of 27 marble-clad \"petals\" arranged to resemble a lotus flower.\n- The temple is open to visitors of all religions.",
+   "question": "The student wants to describe the appearance of the Lotus Temple. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "options": [
+    "The Lotus Temple, a house of worship in New Delhi, India, welcomes visitors of all religions.",
+    "Fariborz Sahba, an architect born in Iran, designed the Lotus Temple, which was completed in 1986.",
+    "Completed in 1986, the Lotus Temple is a house of worship located in New Delhi, India.",
+    "The Lotus Temple's exterior features 27 marble-clad \"petals\" arranged to resemble a lotus flower."
+   ],
+   "correctIndex": 3,
+   "answers": null,
+   "explanation": "목표는 건물의 '외관'을 묘사하는 것이므로, 외관 정보(대리석 꽃잎 27개, 연꽃 모양)를 담은 D가 정답이다. A는 방문객 개방 정책을 말할 뿐 생김새를 설명하지 않는다. B는 설계자와 완공 연도를 다룰 뿐 외관과 무관하다. C는 완공 연도와 위치만 제시해 건물이 어떻게 보이는지 알려 주지 않는다.",
+   "explanationEn": "Your goal is to describe what the building looks like, so you need the note about its appearance. D does this by mentioning the 27 marble-clad petals arranged like a lotus flower. A tells you who may visit, not what the temple looks like. B gives the architect and completion date, which also say nothing about its appearance. C gives only the date and location, so it doesn't describe how the building looks either.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "easy",
+   "targetLetter": "D",
+   "seed": "예술·건축 비평",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "정답 D는 유일하게 외관(27개 대리석 꽃잎, 연꽃 모양) 정보를 담아 목표에 부합. 오답 A·B·C는 모두 노트의 사실을 정확히 반영하되 외관과 무관한 전형적 오개념(위치/개방, 설계자/연도, 연도/위치)으로 구성됨. 사실관계(Fariborz Sahba 설계, 1986 완공, 27개 대리석 꽃잎, 모든 종교 개방) 정확. 한국어·영어 해설 모두 D를 일관되게 뒷받침하며 글자 참조 일치, 영어 자연스럽고 한글 없음. 표준 Rhetorical Synthesis 형식에 부합하며 easy 난이도 적합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "정답 D가 맞습니다. 외관에 관한 메모가 하나뿐이어서 한 단계 추론으로 풀 수 있습니다. 오답 A·B·C는 메모 내용과 맞는 사실이지만 문항의 목표와는 관련이 없습니다. 이는 easy 난이도의 전형적인 오답 구성입니다. 사실관계(1986년 완공, 설계자 사흐바, 꽃잎 27개)에도 오류가 없습니다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "rwsup-easy-1:easy-rhetorical_synthesis-01",
+  "runId": "rw-supplement-easy",
+  "skill": "rhetorical_synthesis",
+  "domain": "rw_expression_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "easy",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "While researching a topic, a student has taken the following notes:\n- Ruth Asawa (1926–2013) was an American artist.\n- She is best known for her hanging sculptures made of looped wire.\n- Asawa learned a looping technique from craftspeople in Mexico in 1947.\n- She later helped found a public arts high school in San Francisco.\n- That school was renamed in her honor in 2010.\n\nThe student wants to introduce Ruth Asawa to an audience unfamiliar with her work. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "stimulus": "While researching a topic, a student has taken the following notes:\n- Ruth Asawa (1926–2013) was an American artist.\n- She is best known for her hanging sculptures made of looped wire.\n- Asawa learned a looping technique from craftspeople in Mexico in 1947.\n- She later helped found a public arts high school in San Francisco.\n- That school was renamed in her honor in 2010.",
+   "question": "The student wants to introduce Ruth Asawa to an audience unfamiliar with her work. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "options": [
+    "Ruth Asawa was an American artist best known for her hanging sculptures made of looped wire.",
+    "In 2010, a public arts high school in San Francisco was renamed in honor of one of its founders.",
+    "In 1947, craftspeople in Mexico taught a looping technique to a visitor.",
+    "Ruth Asawa, who lived from 1926 to 2013, helped found a public arts high school in Mexico."
+   ],
+   "correctIndex": 0,
+   "answers": null,
+   "explanation": "목표는 아사와를 모르는 독자에게 그녀를 소개하는 것이므로, 그녀가 누구이며 무엇으로 유명한지를 밝혀야 한다. A는 이름, 직업(미국 예술가), 대표 작품(고리 모양 철사로 만든 매달린 조각)을 모두 제시하므로 정답이다. B와 C는 메모 내용을 쓰지만 아사와의 이름을 밝히지 않아 그녀를 소개하지 못한다. D는 학교를 멕시코에 세웠다고 해 메모(샌프란시스코)와 어긋나는 부정확한 진술이다.",
+   "explanationEn": "Your goal is to introduce Ruth Asawa to readers who don't know her, so the sentence needs to say who she was and what she is known for. A gives her name, tells you she was an American artist, and names her best-known work (hanging sculptures of looped wire), so it is the correct answer. B and C use details from the notes, but they never name Asawa, so they don't introduce her. D gets the facts wrong: the notes say the school is in San Francisco, not Mexico.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "easy",
+   "targetLetter": "A",
+   "seed": "인물 소개(과학자·예술가)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "A는 이름·직업·대표작을 담아 소개 목적에 부합. B·C는 이름 미언급, D는 메모(샌프란시스코)와 모순되는 사실 오류로 모두 명확히 배제됨. 메모 내용은 실제 Ruth Asawa 사실과 일치(1947 멕시코 톨루카 철사 고리 기법, 샌프란시스코 예술고교 공동 설립, 2010년 개명). 한·영 해설 결론 및 선택지 참조 일치, 영어 자연스러움. 공개 SAT 문항과 동일한 표현 없음. easy 적합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "정답 A가 맞다. 오답 D는 메모 내용을 틀리게 옮긴 선택지(샌프란시스코→멕시코)다. 실제 SAT의 rhetorical synthesis 문항은 오답도 보통 메모 내용을 정확히 옮기고, 목표에 맞지 않는다는 이유로만 틀리게 만든다. 그래서 D는 실제 시험 형식과 조금 다르다. 다만 치명적인 문제는 아니다. B와 C는 이름을 밝히지 않아 쉽게 배제되므로 easy 난이도에 맞다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "rwsup-easy-1:easy-rhetorical_synthesis-02",
+  "runId": "rw-supplement-easy",
+  "skill": "rhetorical_synthesis",
+  "domain": "rw_expression_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "easy",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "While researching a topic, a student has taken the following notes:\n- Pulsars are rapidly spinning neutron stars that send out beams of radio waves.\n- As a pulsar spins, its beams sweep past Earth, so astronomers detect regular pulses.\n- In 1967, astronomer Jocelyn Bell Burnell noticed strange repeating signals in radio telescope data.\n- The signals she found repeated about every 1.34 seconds.\n- Her observation led to the first confirmed discovery of a pulsar.\n\nThe student wants to explain why astronomers detect regular pulses from pulsars. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "stimulus": "While researching a topic, a student has taken the following notes:\n- Pulsars are rapidly spinning neutron stars that send out beams of radio waves.\n- As a pulsar spins, its beams sweep past Earth, so astronomers detect regular pulses.\n- In 1967, astronomer Jocelyn Bell Burnell noticed strange repeating signals in radio telescope data.\n- The signals she found repeated about every 1.34 seconds.\n- Her observation led to the first confirmed discovery of a pulsar.",
+   "question": "The student wants to explain why astronomers detect regular pulses from pulsars. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "options": [
+    "In 1967, Jocelyn Bell Burnell noticed strange repeating signals that led to the first confirmed discovery of a pulsar.",
+    "Because a pulsar spins rapidly, its beams of radio waves sweep past Earth again and again, producing the regular pulses astronomers detect.",
+    "The signals Jocelyn Bell Burnell found in radio telescope data repeated about every 1.34 seconds.",
+    "Pulsars are neutron stars that were first discovered by astronomers in 1967."
+   ],
+   "correctIndex": 1,
+   "answers": null,
+   "explanation": "목표는 펄서에서 규칙적인 펄스가 감지되는 '이유'를 설명하는 것이다. B는 펄서의 빠른 회전과 빔이 지구를 반복해서 스쳐 지나간다는 점을 원인으로 제시하므로 정답이다. A는 펄서 발견의 역사만 소개할 뿐 이유를 설명하지 않는다. C는 신호의 주기라는 수치만 제시하고 왜 규칙적인지는 말하지 않는다. D는 펄서가 무엇이고 언제 발견되었는지만 말하며 펄스의 원인은 빠져 있다.",
+   "explanationEn": "Your goal is to explain why astronomers detect regular pulses from pulsars. B does this by giving the cause: the pulsar spins rapidly, so its radio beams sweep past Earth over and over. A only tells the history of the discovery and doesn't explain the reason. C gives the timing of the signals but not why they are regular. D says what pulsars are and when they were discovered, but it leaves out the cause of the pulses.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "easy",
+   "targetLetter": "B",
+   "seed": "자연과학(물리·천문)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "B만이 '이유(원인)'를 제시하며 노트 1·2의 정보를 정확히 종합한다. A·C·D는 모두 노트에 근거한 사실이지만 목표(이유 설명)와 무관한 전형적 오답으로, easy 수준의 한 단계 판단으로 배제 가능. 사실 관계(1967년 Bell Burnell, 1.34초 주기)도 실제 역사와 일치. 해설 한·영 모두 글자 참조·결론 일치, 한글 없음."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "'why/cause' 목표와 직접 대응하는 단일 선택지. 오답은 모두 노트의 관련 정보를 사용해 그럴듯하지만 원인 설명이 없음. Bell Burnell 1967, 1.337초 주기 사실과 부합. easy에 적합.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "rwsup-medium-2:medium-boundaries-10",
+  "runId": "rw-supplement-medium",
+  "skill": "boundaries",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "When engineers began pouring concrete for the Hoover Dam in 1933, they confronted a serious obstacle: curing concrete releases heat, and a single solid mass of that size might have needed more than a century to cool fully. Their solution, a grid of steel pipes that circulated chilled river water through each concrete block______ the structure to shed its heat in less than two years.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "When engineers began pouring concrete for the Hoover Dam in 1933, they confronted a serious obstacle: curing concrete releases heat, and a single solid mass of that size might have needed more than a century to cool fully. Their solution, a grid of steel pipes that circulated chilled river water through each concrete block______ the structure to shed its heat in less than two years.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "; allowed",
+    "—allowed",
+    ", allowed",
+    ", and allowed"
+   ],
+   "correctIndex": 2,
+   "answers": null,
+   "explanation": "두 번째 문장의 주어는 \"Their solution\"이고, \"a grid of steel pipes ... block\"은 쉼표로 시작한 비필수 동격구이므로 같은 쉼표로 닫은 뒤 동사 \"allowed\"가 와야 한다. 따라서 C가 정답이다. A의 세미콜론은 앞뒤에 독립절이 있어야 쓸 수 있는데, 앞부분에는 동사가 없고 뒷부분에는 주어가 없다. B의 대시는 경계를 표시할 수는 있지만, 쉼표로 연 삽입구를 대시로 닫으면 짝이 맞지 않는다. D의 \"and\"는 주어와 그 유일한 동사 사이에 쓸데없는 접속사를 넣어서 문장에 본동사가 없게 만든다.",
+   "explanationEn": "In the second sentence, the subject is \"Their solution,\" and \"a grid of steel pipes ... block\" is a nonessential appositive that opens with a comma. You need a matching comma to close it before the verb \"allowed,\" so C is correct. A doesn't work because a semicolon must join two independent clauses, and here the first part has no verb and the second part has no subject. B uses a dash, which can mark a boundary, but an interruption that opens with a comma can't be closed with a dash. D adds \"and\" between the subject and its only verb, which leaves the sentence without a main verb.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "C",
+   "seed": "기술·공학 사례",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "주어 \"Their solution\" + 쉼표로 연 동격구를 쉼표로 닫고 본동사 \"allowed\"가 이어지는 구조. C만 문법적으로 성립하며, A(세미콜론·독립절 아님), B(쉼표-대시 짝 불일치), D(본동사 소실)에 대한 해설 설명이 정확하다. 영어 해설도 한국어 해설과 결론·근거가 일치하고 자연스럽다. 후버댐 1933년 콘크리트 타설 시작, 냉각 파이프, 100년 이상 냉각 추정 등 사실관계도 무리 없음. 동격구 식별 후 열림 문장부호와 짝 맞추기라는 두 단계 판단이 필요하고 B·D가 그럴듯한 오답으로 기능하므로 medium 적합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "동격구를 쉼표 짝으로 닫는 전형적인 SAT boundaries 문항이다. 후버 댐 냉각 파이프에 관한 사실관계도 대체로 정확하다(냉각 없이 약 125년 소요). 긴 동격구 때문에 훑어 읽으면 B와 D에 끌릴 수 있어 medium 난이도에 맞다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "rwsup-medium-2:medium-boundaries-11",
+  "runId": "rw-supplement-medium",
+  "skill": "boundaries",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "Ecologist Mariko Tanaka spent three summers tracking the American pika, a small, round-eared relative of rabbits that lives on rocky alpine slopes ______ data suggest that the animals survive hot afternoons by retreating deep into cool gaps beneath the boulders.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "Ecologist Mariko Tanaka spent three summers tracking the American pika, a small, round-eared relative of rabbits that lives on rocky alpine slopes ______ data suggest that the animals survive hot afternoons by retreating deep into cool gaps beneath the boulders.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    ", her",
+    "her",
+    "and her",
+    "; her"
+   ],
+   "correctIndex": 3,
+   "answers": null,
+   "explanation": "이 문장은 동격 명사구(a small, round-eared relative ... slopes)가 길게 이어진 뒤 빈칸 다음에 새로운 독립절(her data suggest ...)이 시작되므로, 두 독립절의 경계를 올바르게 표시해야 한다. D의 세미콜론은 두 독립절을 바르게 연결한다. A는 쉼표만으로 두 독립절을 이어 쉼표 오류(comma splice)가 된다. 동격구가 쉼표로 시작했으니 쉼표로 닫으면 된다고 생각하기 쉽지만, 그 뒤에 오는 것은 수식어가 아니라 완전한 절이다. B는 문장부호가 없어 무종지문(run-on)이 되고, C는 등위접속사 and 앞에 쉼표가 없어 긴 두 독립절이 제대로 구분되지 않는다.",
+   "explanationEn": "After the long appositive phrase (\"a small, round-eared relative ... slopes\"), a new independent clause begins: \"her data suggest that the animals survive....\" So you need punctuation that can join two independent clauses, and D's semicolon does that correctly. A joins the clauses with only a comma, which is a comma splice. It can look right because a comma seems to close the appositive, but what comes next is a complete clause, not a modifier. B has no punctuation at all, so it makes a run-on sentence. C uses \"and\" without a comma before it, so the two long independent clauses aren't properly separated.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "D",
+   "seed": "자연과학(생물·생태)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "검산: 첫 독립절(Tanaka spent ... pika + 긴 동격구)과 둘째 독립절(her data suggest ...) 사이의 경계 문제. D(세미콜론)만 두 독립절을 올바르게 연결. A는 comma splice(동격구를 닫는 쉼표처럼 보여 매력적 오답), B는 run-on, C는 등위접속사 앞 쉼표 누락으로 SAT 기준상 오답이나 말이 되는 오답으로 기능. 한국어·영어 해설 모두 D를 일관되게 뒷받침하며 선택지 글자 참조 정확, 영어 해설에 한글 없음. 피카 서식지·행동 관련 서술은 사실과 부합(가상 인물 사용). 긴 동격구가 경계 인식을 어렵게 하고 두 단계 판단(동격구 종료 확인 + 절 구조 파악)이 필요하므로 medium 적합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "관계절(that lives...) 안에 동격구가 길게 이어져 독립절 경계를 찾기 어렵다. A(동격구를 닫는 쉼표처럼 보임)와 C(접속사가 있음)는 그럴듯한 오답이다. 피카가 바위 틈으로 피신해 더위를 피한다는 내용도 사실과 맞다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "rwsup-medium-2:medium-form_structure_sense-09",
+  "runId": "rw-supplement-medium",
+  "skill": "form_structure_sense",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "In Hollis Varne's 2019 novel The Lamplighter's Ledger, the narrator, a widowed clockmaker in a fog-bound harbor town, keeps a meticulous account of every visitor to his shop. The ledger entries that describe the mysterious sea captain who arrives each winter, written in a cramped hand and smudged by years of damp, ______ the reader's only evidence that the captain may never have existed at all.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "In Hollis Varne's 2019 novel The Lamplighter's Ledger, the narrator, a widowed clockmaker in a fog-bound harbor town, keeps a meticulous account of every visitor to his shop. The ledger entries that describe the mysterious sea captain who arrives each winter, written in a cramped hand and smudged by years of damp, ______ the reader's only evidence that the captain may never have existed at all.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "provides",
+    "provide",
+    "providing",
+    "having provided"
+   ],
+   "correctIndex": 1,
+   "answers": null,
+   "explanation": "이 문장의 주어는 복수 명사 'entries'이고, 'that describe the mysterious sea captain'과 'written in a cramped hand and smudged by years of damp'는 모두 주어를 꾸미는 수식어구이다. 따라서 빈칸에는 복수 주어와 일치하는 정동사가 필요하므로 B의 'provide'가 정답이다. A의 'provides'는 바로 앞에 나오는 단수 명사 'captain'이나 'damp'에 맞춘 단수형이라 주어와 수가 일치하지 않는다. C의 'providing'과 D의 'having provided'는 분사 형태라서 문장에 정동사가 없게 되어 완전한 문장이 되지 않는다.",
+   "explanationEn": "The subject of this sentence is the plural noun \"entries.\" Both \"that describe the mysterious sea captain\" and \"written in a cramped hand and smudged by years of damp\" are modifiers describing that subject. So the blank needs a finite verb that agrees with a plural subject, which makes B, \"provide,\" the correct answer. A, \"provides,\" is singular, so it matches nearby singular nouns like \"captain\" or \"damp\" but not the actual subject. C, \"providing,\" and D, \"having provided,\" are participles, so the sentence would have no main verb and would not be complete.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "B",
+   "seed": "문학(19세기 소설 분위기의 현대 서술)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "주어 'The ledger entries'(복수)가 관계절과 분사구에 의해 동사와 멀리 떨어져 있어 단수 유인어('captain', 'damp')가 A를 그럴듯하게 만들고, C·D는 정동사 부재로 배제됨. 정답 B 'provide' 검산 완료. 한국어·영어 해설 모두 동일 결론과 글자 참조를 가지며 정확함. 가상 작가·작품으로 저작권 문제 없음. 수식어로 분리된 주어 식별 + 수 일치 확인의 두 단계 판단이 필요하므로 medium에 적합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "주어 'entries'와 동사 사이에 관계절과 분사구가 끼어 있어 수 일치를 판단하려면 두 단계를 거쳐야 한다. 오답 A는 가까이 있는 단수 명사에 끌리게 만드는 매력적인 오답이다. 소설은 가상의 작품으로 보이며 저작권 문제는 없다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "rwsup-medium-2:medium-form_structure_sense-10",
+  "runId": "rw-supplement-medium",
+  "skill": "form_structure_sense",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "In the coastal wetlands of southern Bangladesh, the roots of mangrove trees trap sediment carried downstream by tidal rivers. According to geographer Farhana Rahman, the network of tangled roots stretching along the edges of these channels ______ the land to rise by several millimeters each year, partly offsetting the effects of sea-level rise.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "In the coastal wetlands of southern Bangladesh, the roots of mangrove trees trap sediment carried downstream by tidal rivers. According to geographer Farhana Rahman, the network of tangled roots stretching along the edges of these channels ______ the land to rise by several millimeters each year, partly offsetting the effects of sea-level rise.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "cause",
+    "causing",
+    "causes",
+    "have caused"
+   ],
+   "correctIndex": 2,
+   "answers": null,
+   "explanation": "이 문장의 주어는 단수 명사 'the network'이고, 'of tangled roots stretching along the edges of these channels'는 주어를 꾸미는 수식어구일 뿐이다. 따라서 빈칸에는 단수 주어와 일치하는 정동사가 필요하므로 C 'causes'가 정답이다. A와 D는 정동사이긴 하지만 바로 앞의 복수 명사 'roots'나 'channels'에 맞춘 복수형이어서 단수 주어와 일치하지 않는다. B 'causing'은 분사이므로 정동사가 될 수 없고, 이것을 넣으면 문장에 본동사가 없게 된다.",
+   "explanationEn": "The subject of this sentence is the singular noun \"the network.\" The phrase \"of tangled roots stretching along the edges of these channels\" just describes it. That means the blank needs a main verb that agrees with a singular subject, so C, \"causes,\" is correct. A and D are main verbs, but they're plural forms that match the nearby plural nouns \"roots\" or \"channels\" instead of the actual subject. B, \"causing,\" is a participle, so it can't work as the main verb, and using it would leave the sentence without one.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "C",
+   "seed": "환경·지리",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "주어 'the network'(단수)와 삽입 수식어구 'of tangled roots stretching along the edges of these channels' 사이의 거리로 인한 수 일치 문제. C 'causes'가 유일한 단수 정동사로 정답 확인. A·D는 인접 복수 명사(roots/channels)에 이끌린 오답으로 부분적 근거가 있고, B는 비정동사 오답으로 말이 된다. 한국어·영어 해설 모두 동일 결론과 글자 참조를 가지며 모순 없음. 영어 해설에 한글 없음. 맹그로브 뿌리의 퇴적물 포집·지반 상승은 사실적으로 타당하며, 지리학자 이름은 가상 인물로 저작권 문제 없음. 표준 SAT 중간 난이도에 부합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "주어와 동사 사이에 긴 수식어구(roots, channels)가 끼어 있어 주어-동사 수일치 문항으로 medium 난이도에 맞는다. 'each year'가 있어 현재 시제가 자연스럽다. D는 수일치와 시제 두 면에서 모두 맞지 않는다. 가상의 인물이 나오지만 그럴듯한 맥락이다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "rwsup-medium-2:medium-form_structure_sense-11",
+  "runId": "rw-supplement-medium",
+  "skill": "form_structure_sense",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "Historian Jonathan Rose has traced how ordinary workers in Victorian Britain educated themselves outside formal schooling. Throughout the 1850s, the network of mechanics' institutes and subscription reading rooms that had appeared in mill towns such as Bolton and Huddersfield, many of them funded by the weekly pennies of factory hands, ______ access to newspapers and scientific lectures for people who had never attended secondary school.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "Historian Jonathan Rose has traced how ordinary workers in Victorian Britain educated themselves outside formal schooling. Throughout the 1850s, the network of mechanics' institutes and subscription reading rooms that had appeared in mill towns such as Bolton and Huddersfield, many of them funded by the weekly pennies of factory hands, ______ access to newspapers and scientific lectures for people who had never attended secondary school.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "were steadily expanding",
+    "have steadily expanded",
+    "is steadily expanding",
+    "was steadily expanding"
+   ],
+   "correctIndex": 3,
+   "answers": null,
+   "explanation": "이 문장의 주어는 'institutes', 'reading rooms', 'hands' 같은 복수 명사가 아니라 단수 명사 'the network'이므로 단수 동사가 필요하다. 또한 'Throughout the 1850s'는 과거의 기간을 나타내므로 동사는 과거 시제여야 한다. D는 단수이면서 과거이므로 두 조건을 모두 충족한다. A는 과거 시제지만 복수형이고, B는 복수형이며 현재완료라 과거 시점과 맞지 않는다. C는 단수형이지만 현재 시제라 1850년대라는 시간 표현과 어긋난다.",
+   "explanationEn": "The subject of this sentence is the singular noun \"the network,\" not any of the plural nouns that come between it and the blank (\"institutes,\" \"reading rooms,\" \"hands\"). So you need a singular verb. The phrase \"Throughout the 1850s\" also sets the action in a past period, so the verb has to be in the past tense. D is both singular and past, so it meets both requirements. A uses the past tense but is plural; B is plural and in the present perfect, which doesn't fit a finished past period; and C is singular but in the present tense, which clashes with the 1850s time frame.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "D",
+   "seed": "역사(근대 사회 변화)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "주어 'the network'(단수) + 'Throughout the 1850s'(과거) → 'was steadily expanding'(D)이 정답임을 직접 확인. 주어와 동사 사이에 복수 명사(institutes, reading rooms, hands)가 다수 개입해 훑어 읽으면 A를 고르기 쉽게 설계됨. A(과거·복수), C(단수·현재)는 각각 한 조건만 충족하는 부분적 타당성을 가진 오답이고 B도 문법적으로 성립하는 형태라 medium 기준에 부합. 한국어·영어 해설 모두 동일 결론과 선택지 참조를 가지며 영어 해설에 한글 없음. Jonathan Rose의 빅토리아 시대 노동계급 독학 연구, Bolton·Huddersfield 기계공 학원 언급 모두 사실과 부합. 저작권 의심 요소 없음."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "주어와 동사 사이에 복수 명사가 길게 끼어 있어서 주어-동사 수 일치와 시제 두 단계를 모두 따져야 하므로 중간 난이도에 맞음. A와 C는 각각 한 조건만 충족하는 그럴듯한 오답이고, B는 두 조건 모두 어긋남. Jonathan Rose 관련 배경 서술도 사실과 부합함.",
+    "passed": true
+   }
+  }
+ }
+]

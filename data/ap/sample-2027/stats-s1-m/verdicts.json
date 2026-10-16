@@ -1,0 +1,326 @@
+[
+ {
+  "key": "ap_statistics-m01-k0",
+  "cellId": "ap_statistics-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "No causation, no generalization",
+     "brief_reasoning": "The participants were volunteers, not a random sample, so the results can't be generalized. They also chose their own groups instead of being randomly assigned, so the study can't show cause and effect.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean standalone check of what the design justifies. Volunteers who chose their own groups mean no random selection and no random assignment, so neither causation nor generalization is justified. Option D is the unique key, and the independent solver agreed.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The item targets topic 1.13 (experimental design) and skill 2.B. The dominant demand is deciding which conclusions a design justifies, using random assignment for cause and random selection for generalization."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The stem states that adults volunteered and chose their own group. That removes both random selection and random assignment, so only option D is defensible. The other three options each make at least one unjustified claim."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed, and the stem is complete and clearly worded in US English. The options are parallel full sentences of similar length."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option encodes a distinct misconception: causation from self-selected groups, causation plus generalization from volunteers, and generalizing while denying causation. The explanation addresses each one. One small flaw is that the \"why\" for option C says it \"refuses to conclude cause\", which describes the sentence rather than a misconception. The option still reads as a plausible mistake, so this is minor."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The reading load is light and the item fits a time of about 60-110 seconds. No calculator is needed, and the calculator-allowed designation is harmless."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must recognize that self-selected treatment (no random assignment) blocks causal inference and that volunteers (no random sampling) block generalization, then pick the option that denies both claims among combinations of the two. Concept depth is moderate, with no computation and minimal reading. It is a typical AP multiple-choice item on scope of conclusions.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_statistics-m02-k0",
+  "cellId": "ap_statistics-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "Approximately normal, mean 50, SD 2.5",
+     "brief_reasoning": "By the CLT with n=100, the sample mean is approximately normal with mean 50 and SD 25/sqrt(100)=2.5. The simulated means (44 to 54) fit this.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Directly targets the CLT and the mean and SD of the sampling distribution of the sample mean (topic 2.12). The description task fits skill 4.C well enough."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key is unique: approximately normal, mean 50, SD 2.5. The other three options each fail on shape or SD."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The dotplot data is complete (axis title, values, counts summing to 40) and consistent with the stated parameters. The title of the chart is not given, but the stem describes it."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The three distractors encode distinct misconceptions (keeps population shape, keeps sigma, divides by n). The explanation addresses each one."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 60-100 seconds, has minimal arithmetic, and the options are short and parallel. The dotplot is somewhat decorative but harmless."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean, standard CLT description item with a unique key, distinct distractors, and a complete stimulus. The only weakness is that the dotplot is not strictly needed to answer."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires applying the CLT to justify approximate normality for n=100 despite a right-skewed population, computing the SD of the sample mean as 25/sqrt(100)=2.5, and rejecting distractors based on common misconceptions (shape retained, SD unchanged, SD miscomputed). The dotplot is a supporting representation to check the center and spread. Arithmetic is trivial and the reading load is light, so the difficulty comes from fair conceptual sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_statistics-m03-k0",
+  "cellId": "ap_statistics-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "The p-value is 0.0090, which is below 0.05, so we reject H0 of independence. The sample was random, so the conclusion carries over to the whole population. This was an observational study, so it can't show causation.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "Convincing evidence of association among all shoppers"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item passes all five criteria. It is a clean, standard conclusion-from-output item on a chi-square test of independence. The P-value of 0.0090 is below alpha = 0.05, so the key is the only defensible choice: evidence of an association among all shoppers.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The item targets 3.15 and skill 4.G: it asks for a justified conclusion from chi-square output, and it does not use goodness-of-fit."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key (index 3) is unique. The sample is random, so the population-level conclusion is justified. The setting is observational, so the causal option is wrong. The smallest expected count of 23.27 is above 5, so the large-counts condition holds."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The output includes the chi-square statistic, df, P-value and smallest expected count. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option encodes a distinct named misconception: sample-only, causal reading, and reversed rule. The explanation addresses each one."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item is about 100 seconds, needs no arithmetic, and its options are parallel in length and format."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Student compares the given p-value (0.0090) to alpha (0.05), rejects H0, and picks the correct population-level association claim over distractors (sample-only, causation, independence). Conditions are stated as met and no computation is needed. The only demands are reading the output and recognizing the standard conclusion wording, which is a core skill for this topic.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_statistics-m04-k0",
+  "cellId": "ap_statistics-m04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "There is convincing evidence that the population means differ, because the interval does not contain 0",
+     "brief_reasoning": "The 95% CI (0.868, 9.332) does not include 0, and P = 0.0199 < 0.05, so we reject H0. The other choices either misread the interval or reverse the P-value logic.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Interpreting two-sample t output to justify a claim; fits 4.10/4.G."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option 2 is uniquely correct: the CI excludes 0 and P=0.0199<0.05. The other options contain false reasoning."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Output data is complete and consistent; conditions and mu definitions are stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors encode distinct reversals (interval misread, P-value misstated, P-value meaning reversed), and the explanation addresses each. They are somewhat transparent but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short reading load, no arithmetic, calculator designation fine."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Clean, unambiguous item on drawing a conclusion from two-sample t output. The key is unique and the stimulus is complete. The distractors are a bit easy but each encodes a distinct misconception. Passes."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Student reads P-value (0.0199) and the CI (0.868, 9.332) from output and picks the conclusion with the correct justification. There is one decision step (P < alpha, or CI excludes 0), no computation, and the conditions are given. Distractors are standard mismatched conclusion/reason pairs. This is direct recognition of the two-sample t test decision rule.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_statistics-m05-k0",
+  "cellId": "ap_statistics-m05",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "A linear model is not appropriate because the residuals show a curved pattern",
+     "brief_reasoning": "Residuals are positive at low x, negative in the middle and positive at high x. This U shape shows curvature, so a linear model is not appropriate.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Residual plot interpretation, squarely topic 5.4 and skill 4.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Residuals are positive at the ends and negative in the middle, so D is the unique correct answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Axes titled, 24 points listed, zero reference line given."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception, and the explanation addresses every wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 90 seconds, light reading, typical AP style."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean residual-plot interpretation question with a unique key, a complete stimulus, and distinct distractors. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-skill item: read a residual plot, recognize a curved (U-shaped) pattern, and conclude that a linear model is inappropriate. Distractors are standard misconceptions (residuals sum to 0, large residuals imply a poor fit). No computation, a short stem, and one representation. It checks one condition, which is core Unit 5 content and aligned with skill 4.D.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_statistics-m06-k0",
+  "cellId": "ap_statistics-m06",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "The correlation becomes stronger and the slope becomes steeper",
+     "brief_reasoning": "The high-leverage point at (32.3, 76.3) is far below the steep trend of the cluster (about 3 mpg/L), so it flattens the line and weakens r (r ≈ 0.90 with it, about 0.97 estimated without it). Removing it makes the slope steeper and the correlation stronger.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Influential point effect on r and slope; interpretation skill fits."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Unique correct: stronger r, steeper slope. Verified by trend of cluster vs. outlier."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Scatter data complete with titles, points, highlight; y-axis range unspecified but auto-scalable."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Options cover the 3 reversal combos; explanation for option 3 is slightly vague but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 100 seconds, no heavy arithmetic, calculator not needed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound item: removing the high-leverage point strengthens r and steepens the slope; distinct distractors and a complete stimulus. Minor vagueness in the option 3 explanation."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Students must recognize a high-leverage point at x=32.3 that lies below the trend of the other ten points, so removing it makes the slope steeper. They must also judge that r changes in a separate direction (the remaining points are more tightly linear, so r gets stronger). This requires separate reasoning about slope and r from a scatterplot, with no heavy computation or reading. It fits the allowed levers of reading a representation and linking a result to a claim.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ }
+]

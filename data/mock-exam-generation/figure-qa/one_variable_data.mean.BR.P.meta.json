@@ -1,0 +1,45 @@
+{
+ "itemId": "one_variable_data.mean.BR.P",
+ "generatedAt": "2026-10-07T05:02:00.900Z",
+ "codeHash": "23cf0c4cd525dcf4180b5b7d7849be99186e2a79ed9e1f41af55f9d29e492ee3",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/data.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/data-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/graph-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/_t4-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/one_variable_data.mean.BR.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "one_variable_data.mean.BR.P.png",
+   "mobileFile": "one_variable_data.mean.BR.P.m375.png",
+   "archetypeId": "ovd.mean.BR.P.inverse",
+   "seed": 11,
+   "signature": "data:bar",
+   "stimulus": "The graph shown summarizes the number of trees planted by each team for a group of teams on Arbor Day; bar heights give how many teams had each value. Later, 2 more teams join the group, and each of them has the same value. Then the mean of all the values is 10 trees.",
+   "question": "What is the value, in trees, for each of the 2 new teams?",
+   "options": [
+    "10",
+    "8",
+    "5",
+    "4"
+   ],
+   "correctIndex": 3,
+   "answer": "4",
+   "explanation": "(1) 그래프에서 값과 막대 높이(도수)를 읽는다: 6(5), 8(1), 10(3), 12(7), 14(5) — 전체 21개. (2) 전체 개수 = 5 + 1 + 3 + 7 + 5 = 21 이다. (3) 합 = 6×5 + 8×1 + 10×3 + 12×7 + 14×5 = 222 이다. (4) 새 전체 개수 = 21 + 2 = 23, 새 합 = 10 × 23 = 230 이다. (5) 더해진 합 = 230 - 222 = 8 이다. (6) 한 명의 값 = 8 ÷ 2 = 4 이다. 따라서 정답은 4이다.",
+   "structuralIssues": []
+  }
+ ]
+}

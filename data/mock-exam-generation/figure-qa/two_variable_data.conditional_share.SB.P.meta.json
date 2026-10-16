@@ -1,0 +1,44 @@
+{
+ "itemId": "two_variable_data.conditional_share.SB.P",
+ "generatedAt": "2026-10-07T05:02:01.142Z",
+ "codeHash": "f559eb8228f58148939fa3a22b1554f14f23787bfad9c51fe8e648128aba7548",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_chart.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/d-registry.ts",
+  "lib/problem-figures/templates/stacked-bar.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/two_variable_data.conditional_share.SB.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/sb-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "two_variable_data.conditional_share.SB.P.png",
+   "mobileFile": "two_variable_data.conditional_share.SB.P.m375.png",
+   "archetypeId": "tvd.conditional_share.SB.P.chain2",
+   "seed": 11,
+   "signature": "stacked_bar",
+   "stimulus": "In the stacked bar graph shown, each bar represents one team, and its segments show which position players play in a youth league. One player is chosen at random from those in Bears. Each bar is split into segments, one for each answer.",
+   "question": "What fraction of the players in Bears are in \"Forward\" or \"Midfield\"?",
+   "options": [
+    "1/5",
+    "4/15",
+    "4/5",
+    "2/5"
+   ],
+   "correctIndex": 2,
+   "answer": "4/5",
+   "explanation": "(1) 그래프의 조각 값을 읽는다: Hawks(Forward 50, Midfield 150, Defense 50); Bears(Forward 100, Midfield 100, Defense 50); Eagles(Forward 100, Midfield 100, Defense 50). (2) Bears 의 두 조각 = 100 + 100 = 200 이다. (3) Bears 의 합계 = 250 이다. (4) 비율 = 200/250 이다. (5) 따라서 답은 4/5 이다. 따라서 정답은 4/5이다.",
+   "structuralIssues": []
+  }
+ ]
+}

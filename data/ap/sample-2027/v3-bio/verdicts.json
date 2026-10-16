@@ -1,0 +1,447 @@
+[
+ {
+  "key": "ap_biology-f01-k0",
+  "cellId": "ap_biology-f01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "The variable being changed is the light wavelength or color.",
+     "final_answer": "Wavelength (color) of light shone on one side of the shoot: white, red or blue.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "White light is the control.",
+     "final_answer": "The white-light group is the control. It gives a baseline to compare against, so any difference in curvature can be linked to the specific wavelength and not to other factors, such as having light on only one side.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "No effect of wavelength.",
+     "final_answer": "The wavelength of light has no effect on the mean angle of stem curvature toward the light source; all groups will show the same mean curvature.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Compare the ±2SE intervals.",
+     "final_answer": "Under blue light, the mean curvature (42.1° ± 3.0, range 39.1–45.1°) is much greater than under white light (3.9° ± 3.0, range 0.9–6.9°). The ±2SE intervals do not overlap, so the difference is statistically significant and blue light increases curvature.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The stimulus has a duplicated label (\"white light (control) (control)\"). Part B's rubric requires both elements while the model answer is thin, and the stem says \"Identify ... and explain\" for 1 point. That is acceptable only if both are needed. Part D's rubric requires \"error bars do not overlap\", but the stem asks only to support the claim, so that requirement is not clearly elicited. The blueprint also mislabels D's skills (6.B, 4.B). It is a short-FRQ bundle with four 1-point parts, which fits the grain. Fix the label, tighten the B and D rubrics, and mention error bars in D's stem.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parts A and B fit 3.C. C is labeled 3.B and D is labeled 6.B/4.B, which is acceptable for a mixed bundle. The topic 8.1 phototropism context is fine."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Part B's rubric requires both naming the control and stating it provides a baseline, with alternative phrasings listed. Part D's required \"error bars do not overlap\" is not prompted by the stem, which only says \"using the data\". The part D skill label 4.B does not match the task."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The row label reads \"white light (control) (control)\", a duplicated marker that is a data defect. The table is otherwise complete, with means, 2SE and n."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no distractors. The common_errors listed are reasonable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is light and a calculator is not needed. \"Calculator allowed\" is harmless."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Four one-point parts on standard experimental design (independent variable, control and its purpose, null hypothesis, data-supported claim using mean ± 2SE overlap). Concepts are core AP Bio skills at the level of a typical FRQ. Reasoning is shallow per part and the single table is easy to read. Computation is minimal: only comparing means and checking that the error bars do not overlap. This matches the target for full mocks rather than basic learning or advanced supplement. The duplicated '(control)' label in the table is a cosmetic flaw and does not add unfair difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 300
+  }
+ },
+ {
+  "key": "ap_biology-f01-k1",
+  "cellId": "ap_biology-f01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring",
+   "criterion_failed_exam_suitability"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "The variable the student changes on purpose is the humidity of the test half.",
+     "final_answer": "The relative humidity of the test half of the chamber (30%, 60%, 90%).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "The table labels 60% as the control.",
+     "final_answer": "The 60% relative humidity group is the control. It gives a baseline to compare the other groups against, so any change in where the pill bugs go can be linked to humidity and not to other factors.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "A null hypothesis says the variable has no effect.",
+     "final_answer": "Relative humidity has no effect on the mean number of pill bugs found in the test half of the chamber after 10 minutes.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Compare the mean ± 2SE ranges for 90% and 60%.",
+     "final_answer": "At 90% the mean is 13.6 ± 1.8, a range of 11.8–15.4. At 60% the mean is 7.9 ± 1.4, a range of 6.5–9.3. The 90% mean is higher and the two ranges do not overlap, so the difference is likely statistically significant. This supports the claim that 90% humidity increases the number of pill bugs in the test half.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parts match 3.C/3.B/6.B in topic 8.1 context (kinesis/taxis)."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Part B: 60% is a mid-level humidity, not an untreated baseline; the alt_solution \"does not receive the treatment\" contradicts the design. Required elements with requires_both make the 1 point depend on the phrase \"baseline for comparison\". Part C accepts either \"no difference\" or \"no effect\" (fine)."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table is complete with groups, mean ± 2SE and replicates. The design is thinly described (what the other half of the chamber holds) but adequate."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "FRQ with no options; common errors are listed per row."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "Parts A and B are near-recall and trivial; \"calculator allowed\" is irrelevant to the item. The four 1-point structure fits the short FRQ grain, but the investigation is minimal compared with official short FRQs."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Fails on the part B rubric, where the control concept does not fit a design whose control is a mid-level humidity, and on thin, near-recall parts that make the item weak for exam use. The stimulus and the other parts are acceptable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Four 1-point parts testing core experimental-design vocabulary: identify the independent variable (humidity), identify the control and its purpose, state a null hypothesis, and support a claim by comparing means with error bars (13.6 ± 1.8 vs 7.9 ± 1.4; the 2SE intervals do not overlap). Each part needs one direct step. The table is small and simple. The calculator is not really needed, since the only arithmetic is checking interval overlap (9.8 to 15.4 vs 6.5 to 9.3). Concept depth is low and no representation changes are required.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 240
+  }
+ },
+ {
+  "key": "ap_biology-f01-k2",
+  "cellId": "ap_biology-f01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_exam_suitability"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Manipulated factor",
+     "final_answer": "The wavelength (color) of light shone on one side of the shoot (white, red, blue).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Labeled control",
+     "final_answer": "The white light group is the control. A control gives a baseline for comparison, so any change in curvature can be attributed to the wavelength and not to other factors.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "No effect",
+     "final_answer": "The wavelength of light has no effect on the mean angle of stem curvature toward the light source.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Compare ±2SE intervals",
+     "final_answer": "Blue light mean is 41.8 ± 3.6° (38.2–45.4°) and white light mean is 3.9 ± 4.2° (−0.3–8.1°). The ±2SE intervals do not overlap, so blue light gives significantly greater curvature than white light.",
+     "ambiguous_or_flawed": false,
+     "flaw_note": "Minor typo: '(control)' is duplicated in the table label."
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parts A and B assess 3.C (variables, control) directly. Part C (3.B) and Part D (6.B/4.B) are different skills, which is allowed. All parts fit topic 8.1 (phototropism)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The keys are defensible. Part C's required elements list \"no difference\" and \"no effect\" with requires_both false, so either wording is acceptable. Part D has requires_both true, and the non-overlap of the ±2SE intervals is correct (38.2-45.4 vs -0.3-8.1)."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The row label \"white light (control) (control)\" duplicates \"(control)\", which is a visible defect. The stimulus has no title or units in the column header beyond \"degrees\". The stem never says that the seedlings were identical, or that light was applied to one side only, which is a small gap for a design question."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so there are no distractors. The rubric lists common errors (naming the dependent variable, naming a treated group as the control, stating a prediction as the null hypothesis, ignoring the error bars)."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The bundle is 4 one-point parts, which is the short-FRQ grain only for Biology. The \"calculator allowed\" designation is fine, but no calculation is needed. Part D is worded as an instruction to support a claim and the skill is not clearly distinct from the others. The duplicated \"(control)\" label hurts polish."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The content is sound and the keys are correct. The stimulus has a visible label defect (\"(control) (control)\") that should be fixed before use. Because I am failing when unsure, the stimulus and exam-suitability criteria fail on polish."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Four 1-point parts on a simple three-group table. A asks for the independent variable (wavelength of light). B asks for the control (white light) and why it is needed (a baseline for comparison). C asks for a null hypothesis (no effect of wavelength on curvature). D asks the student to cite the blue vs. white means (41.8 vs 3.9) and note that the 2SE ranges do not overlap. Concept depth is shallow, each part needs one or two reasoning steps, and there is no real computation. The reading load is light and the table is the only representation. The item tests basic experimental-design vocabulary and simple data comparison, so it fits foundational learning more than full-mock exam prep.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 240
+  }
+ },
+ {
+  "key": "ap_biology-f02-k0",
+  "cellId": "ap_biology-f02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Oxygen released goes up from 4.9 mL at 10 °C to 17.2 mL at 37 °C, then drops to 2.6 mL at 70 °C. Activity is highest near 37 °C. The drop at 70 °C fits with the enzyme being denatured.",
+     "final_answer": "The relationship is not linear: oxygen released rises from 10 °C to a peak at 37 °C, then falls sharply at 70 °C (to below the 10 °C value).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "(17.2 − 4.9)/4.9 × 100 = 12.3/4.9 × 100 ≈ 251%",
+     "final_answer": "About a 251% increase",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "The ±2SE intervals are 4.58–5.22 mL (10 °C), 15.18–19.22 mL (37 °C) and 2.44–2.76 mL (70 °C). No two intervals overlap.",
+     "final_answer": "None. Every pair of levels is statistically different.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "The mean at 37 °C is 17.2 mL, far above 4.9 mL and 2.6 mL. Its lowest ±2SE value (15.18 mL) is above the highest values for 10 °C (5.22 mL) and 70 °C (2.76 mL).",
+     "final_answer": "The data support the claim: 37 °C has the highest mean (17.2 mL). Its error bar (15.18–19.22 mL) does not overlap the other two, so the difference is likely statistically significant and supports the claim. The 37 °C error bar is wider, though, so its results varied more. Also, only three temperatures were tested, so the true optimum could be anywhere near 37 °C.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 3.2 is assessed through enzyme activity at three temperatures. Part A matches skill 4.B (describe data from a table). Parts B, C and D use their own skills (5.A, 5.B, 6.B), which is acceptable for a mixed-skill FRQ."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The keys are unique and correct. The percent change is 251%. The ±2SE intervals do not overlap for any pair, so \"none\" is correct. The rubric lists alternative phrasings. Part A's required element \"peaks\" is loosely worded, but alternatives such as \"increases then decreases\" are accepted."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table gives the columns, rows, mean ± 2SE, and n, and every number used in the parts appears in it. Part C says \"pair of levels, if any\", which is a little awkward but clear. Part D says \"support the claim\" but the rubric also expects a statement about the error bars, which the prompt does mention."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so there are no distractors. The common_errors are listed for each part."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item is four 1-point parts, which fits the short FRQ format. The load is light and the percent-change calculation suits a calculator-allowed item. Part C asks students to apply ±2SE overlap as a significance rule, which is a standard AP Biology interpretation."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a sound short data-analysis FRQ with correct keys, a complete stimulus table, and a rubric that accepts alternative phrasings. No instant-reject conditions apply."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP Bio data-analysis item on one table. It asks for a trend description, one percent-change calculation (~251%), error-bar overlap interpretation (no pair overlaps, so none is \"not different\"), and a claim-evidence justification. Concepts are accessible, but it needs correct use of ±2SE and a mild trap in part C, which is typical of full-mock FRQ-style items. No unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "key": "ap_biology-f02-k1",
+  "cellId": "ap_biology-f02",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Rate rises from 5.9 at pH 4 to a peak of 17.7 at pH 7, then drops to 8.3 at pH 10. The relationship is non-linear and peaks near neutral pH.",
+     "final_answer": "Rate goes up from pH 4 to pH 7 (the highest rate), then goes down at pH 10, which is still higher than at pH 4.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "(17.7-5.9)/5.9 ×100 = 11.8/5.9 ×100 = 200%",
+     "final_answer": "200% increase",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "The ±2SE ranges are 5.10–6.70, 16.48–18.92 and 7.16–9.44. None of them overlap.",
+     "final_answer": "No pair. All three means are statistically different because none of the ±2SE intervals overlap (pH 4 tops out at 6.70, below pH 10's low end of 7.16).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "The pH 7 mean (17.7) is the highest. Its interval (16.48–18.92) does not overlap with pH 4 (5.10–6.70) or pH 10 (7.16–9.44).",
+     "final_answer": "pH 7 has the highest mean rate, 17.7 µmol/min, about twice the rate at pH 10 and three times the rate at pH 4. Its ±2SE interval does not overlap either of the others, so the difference is statistically significant and supports the claim, at least among the three pH values tested. The true optimum could be a pH between the tested values.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 3.2 and mixed per-part skills are acceptable."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Part C prompt asks to justify, but rubric only requires 'none of the pairs'; the justification is not scored. Part A model answer 'peaks' while rubric requires numbers, and alternatives omit numbers (inconsistent). Part D largely duplicates C and bundles support plus interpretation in one point."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "Column header 'Ph' is a typo for 'pH'. Otherwise the table data is complete."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Rubric common_errors are thin and generic; no explanation of likely wrong answers beyond brief notes."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Four 1-point parts and a calculator for percent change are consistent with the short FRQ grain."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is generally sound in the data and keys, but fails on rubric consistency (Part C justification unscored, Part A number requirements inconsistent, C and D overlapping) and a 'Ph' typo in the table header."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Four short parts on one small 3-row table. Concept depth is moderate: enzyme activity peaks near an optimum pH, and the ±2SE intervals are used to judge whether means differ. Part A is a simple description of a trend (rate is highest at pH 7, lower at pH 4 and pH 10). Part B is one percent-change calculation: (17.7-5.9)/5.9 x 100, about 200%. Part C requires comparing the error-bar ranges (pH 4: 5.1-6.7; pH 7: 16.48-18.92; pH 10: 7.16-9.44). The ranges do not overlap, so all pairs are statistically different, and the answer is 'none'. A student could be misled into expecting some pair to be non-different. Part D asks the student to support the claim with data and interpret the non-overlapping error bars. The item changes representation only between the table's mean ± 2SE values and intervals, with no graph needed. The reading load is low, the calculator work is minimal, and the context is clear and within the AP Biology scope. This is typical of a full mock-exam free-response item rather than a basic recall exercise or an extension beyond the course.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 480
+  }
+ },
+ {
+  "key": "ap_biology-f02-k2",
+  "cellId": "ap_biology-f02",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "O2 increases from 4.9 mL at 10°C to 16.4 mL at 37°C, then drops to 2.4 mL at 70°C (likely denaturation).",
+     "final_answer": "Oxygen released goes up from 10 °C to 37 °C, where it peaks, then falls sharply at 70 °C, ending below the 10 °C value.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "(16.4-4.9)/4.9 x100 = 11.5/4.9 x100",
+     "final_answer": "About a 235% increase (234.7%)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Ranges are 4.24–5.56, 14.86–17.94 and 2.20–2.60 mL. No two ranges overlap.",
+     "final_answer": "None. Every pair of means is statistically different.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "The 37 °C mean (16.4 mL) is the highest. Its ±2SE range (14.86–17.94) does not overlap the range at 10 °C or 70 °C.",
+     "final_answer": "The mean at 37 °C (16.4 mL) is higher than at 10 °C (4.9 mL) or 70 °C (2.4 mL). Its error bars (14.86–17.94 mL) do not overlap the others, so the difference is likely statistically significant and supports the claim. This only applies to the three temperatures tested.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The numeric values are correct and the stimulus is complete. The rubrics are internally inconsistent (part A requires numbers but accepts alternatives without them). Parts C and D are redundant. No part asks students to connect the data to enzyme function, so the item is weak on 3.2 content. Fail on key/scoring and exam suitability.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 3.2 and skill 4.B fit part A and part D. Parts B (5.A), C (5.B) and D (6.B) assess other skills, which is acceptable for an FRQ bundle. Parts B and C are generic statistics tasks only loosely tied to enzyme function."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "The keys are numerically correct. The rubrics are weak, though. Part A requires the word \"peaks\" plus all three values (requires_both and requires_numbers are true), yet alt_solutions accept \"increases then decreases\" with no numbers, so the row contradicts itself. Part C's required element \"none of the pairs\" is the only keyed answer, which makes the item mechanical. Part D requires the phrase \"do not overlap\" verbatim. Part D also treats non-overlap of ±2SE intervals as proof of a real difference, which is a loose inference. The model answer to part A, \"peaks across the levels\", is awkward and does not describe the decrease at 70 °C."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete, with levels, mean ± 2SE and n. The part A model answer wording is awkward. The claim in part D is framed as causation, but the item never discusses mechanisms such as denaturation or optimum temperature."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so there are no distractors. Common errors are listed only briefly."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The AP short FRQ format is four 1-point parts. The item is bundled with an unrelated skill mix (percent change, error bar overlap), and the percent change calculation in B is trivial. Part C is largely redundant with part D, since both ask about non-overlap of error bars. The item never asks students to connect the data to enzyme function (denaturation, optimum), which is the actual 3.2 content, so the task is generic data handling."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP Bio data-analysis item. It needs the temperature-enzyme relationship (optimum, denaturation), one percent-change calculation, and interpretation of ±2SE error-bar overlap (compute the intervals and see that none overlap). Part C includes a mild trap, since students may expect an overlapping pair. The reading load is short, the arithmetic is simple, and all content is in scope. The multi-part format and skill 4.B/statistical-interpretation demands match typical FRQ practice for full mocks, but it is not beyond the course.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ }
+]

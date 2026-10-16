@@ -1,0 +1,1191 @@
+{
+ "summary": {
+  "sat_rw": {
+   "cand": 37,
+   "genFail": 0,
+   "formatFail": 1,
+   "detPass": 33,
+   "crossScored": 33,
+   "correct": {
+    "agree": 31,
+    "of": 33,
+    "fablePass": 32,
+    "opusPass": 32
+   },
+   "compliance": {
+    "agree": 33,
+    "of": 33,
+    "fablePass": 33,
+    "opusPass": 33
+   },
+   "hardFit": {
+    "agree": 19,
+    "of": 33,
+    "fablePass": 20,
+    "opusPass": 18
+   },
+   "adoptedBoth": 12,
+   "adoptedOneOnly": 14,
+   "yieldBoth": 0.324,
+   "costUsd": 4.461,
+   "costPerAdoptedBoth": 0.372,
+   "fableOnlyPass": 8,
+   "opusOnlyPass": 6
+  },
+  "sat_math": {
+   "cand": 0,
+   "genFail": 0,
+   "formatFail": 0,
+   "detPass": 0,
+   "crossScored": 0,
+   "correct": {
+    "agree": 0,
+    "of": 0,
+    "fablePass": 0,
+    "opusPass": 0
+   },
+   "compliance": {
+    "agree": 0,
+    "of": 0,
+    "fablePass": 0,
+    "opusPass": 0
+   },
+   "hardFit": {
+    "agree": 0,
+    "of": 0,
+    "fablePass": 0,
+    "opusPass": 0
+   },
+   "adoptedBoth": 0,
+   "adoptedOneOnly": 0,
+   "yieldBoth": 0,
+   "costUsd": 0,
+   "costPerAdoptedBoth": null,
+   "fableOnlyPass": 0,
+   "opusOnlyPass": 0
+  },
+  "adoptedHardFableRule": {
+   "total": 20,
+   "rw": 20,
+   "math": 0,
+   "correctBothRequired": true
+  }
+ },
+ "items": [
+  {
+   "cid": "medium-transitions-400",
+   "skill": "transitions",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "마지막 문장은 직전 관찰(저항성 뱀 지역의 영원 독성이 더 높음)을 다시 풀어 해석하는 재진술이므로 A가 타당. 앞 문장의 'however'와 마지막 문장의 'not…but' 구조가 B(대조)를 유혹하게 설계되어 있고, C·D는 문맥상 배제 가능. 해설 한·영 모두 글자 참조와 결론이 일치하며 자연스러움. Brodie III의 영원–가터뱀 공진화 연구는 실제 사실과 부합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "A 'In other words'가 앞 문장의 관찰을 해석·재진술하므로 맞음. B는 둘째 문장(뱀의 저항성)과의 대비 때문에 끌리는 오답으로 잘 설계됨. Brodie III의 영원-가터뱀 공진화 연구는 사실과 일치함. 영원의 주황색은 주로 배 쪽에 있다는 점은 사소한 부분이며 오류로 보지 않음.",
+    "issue": ""
+   },
+   "cost": 0.1355344
+  },
+  {
+   "cid": "medium-transitions-401",
+   "skill": "transitions",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "앞 문장(주장을 매 장마다 반복)과 뒤 문장(그 사이 독자가 반대 증거를 알아차림)은 동시 진행되는 대조 관계이므로 'All the while'이 유일하게 논리적임. A는 '반복 주장 → 독자가 주목'으로 표면상 결과처럼 읽힐 수 있어 유혹적 오답으로 기능하고, C·D는 뒤 문장이 앞 내용을 뒤집는다는 점을 파악해야 배제됨. 해설(한·영) 모두 정답과 선택지 글자 참조가 일치하며 영어 해설에 한글 없음. 가상의 소설·작가를 사용해 저작권·사실 오류 우려 없음. 문장부호(쉼표 뒤 소문자 the) 형식 적절. 대조+동시성이라는 두 요소를 결합해야 정답을 고를 수 있어 medium에 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "B는 주장이 반복되는 동안 그와 어긋나는 증거가 쌓인다는 대조적 동시성을 정확히 나타냄. 대조 신호인 'All the while'은 인과(A)·예시(C)·재진술(D)과 비교해야 고를 수 있어 medium 난이도에 맞음. 소설과 작가는 가상으로 보이며 저작권 문제는 없음. 'Victorian novel' 문체 언급은 내용과 무관한 정보이지만 문항에 해가 되지는 않음.",
+    "issue": ""
+   },
+   "cost": 0.1473484
+  },
+  {
+   "cid": "medium-transitions-402",
+   "skill": "transitions",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "앞 문장의 'did keep'이 양보 신호이고 뒤 문장이 장기적 역효과를 서술하므로 C(Over time, however,)가 유일하게 논리적임. A는 제방-침하 간 인과가 실제로 존재해 부분적 유인력이 있으나, 앞 문장(바닷물 차단)의 결과가 아니며 뒤 문장이 이미 'by blocking the sediment'로 원인을 명시하므로 배제됨. B·D는 예시/유사 관계가 아니어서 배제. 한국어·영어 해설 모두 정답과 글자 참조가 일치하고 모순 없음. 방글라데시 폴더 지반 침하 사실은 실제 연구(Auerbach et al. 2015 등)와 부합. B·D의 유인력이 다소 약해 medium 하한에 가깝지만 양보→반전 구조 파악이 필요해 표준 medium 범위로 판정.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "too_easy",
+     "eliminated:2"
+    ],
+    "note": "그럴듯한 오답은 A(As a result)뿐이다. B(For example)와 D(Similarly)는 대조 구조에서 바로 배제되므로 '오답 3개 중 최소 2개는 부분 근거를 가져야 한다'는 medium 기준에 못 미친다. 방글라데시 폴더의 퇴적물 공급 차단과 지반 침하는 실제로 보고된 현상이다.",
+    "issue": "A를 배제하는 설명이 다소 약하다. 바닷물을 막는 일과 퇴적물을 막는 일은 사실상 같은 작용이므로 인과 연결이 전혀 없다고 보기 어렵다. 하지만 지문은 보호를 기대했던 설정과 반대 결과가 대조되는 구조이므로 결론은 타당하다."
+   },
+   "cost": 0.14937440000000002
+  },
+  {
+   "cid": "medium-transitions-403",
+   "skill": "transitions",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [
+    "contract:contract_transition_parallel"
+   ],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": null,
+   "opus": null,
+   "cost": 0.0209404
+  },
+  {
+   "cid": "medium-transitions-404",
+   "skill": "transitions",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "앞 문장(결함 인정)과 뒤 문장(강한 하중 지지)의 대조 관계가 명확하여 'Nevertheless'가 유일하게 성립. B는 앞 문장만 보면 인과처럼 보일 수 있고, C는 'load tests'가 세부 설명처럼 보일 수 있어 비교가 필요한 오답. 실제 MX3D 다리(암스테르담 2021 설치) 사실과 부합. 한·영 해설 모두 정답·글자 참조 일치, 한글 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "too_easy",
+     "eliminated:3"
+    ],
+    "note": "Nevertheless가 정답임은 확실하다. 소재(MX3D의 12m 스테인리스강 3D 프린팅 다리, 2021년 암스테르담 운하에 설치)도 사실과 맞다. 다만 결함 언급 뒤에 강한 하중 결과가 이어지는 대비가 너무 뚜렷해서 훑어 읽어도 정답이 보인다. Specifically와 Similarly는 그럴듯한 근거가 거의 없어 바로 배제된다. 따라서 medium 기준(오답 중 최소 2개가 부분적 근거를 가질 것)에 못 미친다.",
+    "issue": ""
+   },
+   "cost": 0.11248240000000001
+  },
+  {
+   "cid": "medium-transitions-405",
+   "skill": "transitions",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "앞 문장의 '죽은 것처럼 보인다'와 뒤 문장의 '몇 시간 만에 회복'이 명확한 대조를 이루므로 B(Yet)가 정답으로 타당함. A는 시간 순서를 인과로 오독할 경우, C는 앞부분의 선인장 비교 맥락 때문에 각각 부분적 유인력을 가지며, D도 문법적으로 말이 되어 medium 기준 충족. 사실관계(치와와 사막 자생, 수시간 내 회복, 당에 의한 막 안정화) 정확. 한·영 해설 모두 정답과 선택지 글자 참조가 일치하고 모순 없음. 'Yet' 뒤에만 쉼표가 없는 점은 종속절이 뒤따르므로 자연스러워 형식상 문제 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "too_easy",
+     "eliminated:2"
+    ],
+    "note": "'appears dead'와 '비가 오면 되살아남'의 대비가 매우 분명해서 Yet을 바로 고를 수 있다. 오답 C(Similarly)와 D(For example)는 훑어 읽어도 쉽게 배제된다. 부분적으로 그럴듯한 오답은 A(As a result) 하나뿐이다. 따라서 오답 3개 중 최소 2개가 비교해야 배제되어야 한다는 medium 기준을 충족하지 못한다. 예컨대 Instead나 Nevertheless 같은 다른 대조 표현처럼 비교가 필요한 오답이 없다.",
+    "issue": ""
+   },
+   "cost": 0.1359024
+  },
+  {
+   "cid": "medium-transitions-406",
+   "skill": "transitions",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [
+    "contract:contract_transition_parallel"
+   ],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": null,
+   "opus": null,
+   "cost": 0.022936400000000003
+  },
+  {
+   "cid": "medium-transitions-407",
+   "skill": "transitions",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "정답 검산: 앞 문장(농지 침하·하천 바닥 상승) → 뒤 문장(제방 안이 수로보다 낮아짐)은 명백한 인과 관계이므로 D 'As a result'가 옳다. A/C는 지문 내 대조 요소(보호 성공 vs 퇴적물 차단, 안 vs 밖)에 이끌리는 그럴듯한 오답이고, B는 뒤 문장이 구체적 상황을 서술해 예시처럼 보일 수 있어 비교가 필요하다. 한국어·영어 해설 모두 D를 일관되게 뒷받침하고 선택지 글자 참조가 일치하며 영어 해설에 한글 없음. 방글라데시 해안 제방(polder)으로 인한 농지 침하와 하천 퇴적 현상은 실제 문헌과 부합. 독창적 지문으로 저작권 의심 없음. 형식 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "방글라데시 폴더(polder)의 침하와 침수 정체 현상은 사실에 부합한다. 인과 관계가 명확하고, 오답 A·B·C는 각각 지문 안의 대조 요소나 구체적 사례처럼 보이는 내용에 기대고 있어 medium 난이도에 맞다. 다만 오답이 다소 쉽게 배제될 수 있다.",
+    "issue": ""
+   },
+   "cost": 0.11582239999999999
+  },
+  {
+   "cid": "medium-transitions-408",
+   "skill": "transitions",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "앞 문장(기록이 예측과 달랐다: 소설 위주 대출)과 뒤 문장(그럼에도 기대가 완전히 틀리진 않았다)의 관계는 명백한 양보·반전이므로 'Even so'가 유일하게 성립한다. B는 마지막 문장 내부의 인과(소설→역사 독서) 때문에 훑어 읽으면 끌리는 그럴듯한 오답이고, D는 '개혁가' 화제 반복으로 부분적 유인이 있으며, C는 사례 관계가 아님이 분명하다. 'not entirely misplaced'라는 부분 양보 어구를 앞 문맥과 연결해야 하는 두 단계 판단이 요구되어 medium에 적합. 한국어·영어 해설 모두 정답 A를 일관되게 뒷받침하고 글자 참조가 선택지와 일치하며, 영어 해설에 한글 없음. 1850년 공공도서관법 이후 Salford(1850)·Bolton(1853) 개관 등 역사적 배경도 무리 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "A와 B만 진지하게 비교할 만한 선택지다. B는 마지막 문장의 '소설에서 역사로' 이어지는 인과 때문에 그럴듯해 보인다. 다만 'not entirely misplaced'라는 단서가 강해서 medium의 하단에 가깝다. C와 D는 비교적 쉽게 배제된다.",
+    "issue": ""
+   },
+   "cost": 0.15072239999999998
+  },
+  {
+   "cid": "medium-transitions-409",
+   "skill": "transitions",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [
+    "contract:contract_transition_parallel"
+   ],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": null,
+   "opus": null,
+   "cost": 0.021708400000000003
+  },
+  {
+   "cid": "medium-transitions-410",
+   "skill": "transitions",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "앞 문장(바이스로이 자체가 맛없음이라는 실험 결과) → 빈칸 뒤(그에 따른 재해석)로 인과 관계가 명확하여 C(Accordingly)가 정답임을 직접 확인. '복잡하게 만들었다'는 서술 때문에 A(Nevertheless)에 끌리기 쉽고, 두 종의 유사성 때문에 D(Similarly)도 그럴듯해 medium 적합. 한·영 해설 모두 선택지 글자 참조 일치, 모순 없음, 영어 해설에 한글 없음. 참고: 바이스로이 비기호성(Müllerian 해석)을 실험적으로 확립한 것은 주로 Ritland & Brower(1991)이며 Jane Brower(1958)의 실험은 Batesian 해석과 더 연관되어 귀속이 다소 느슨하나, 지문의 \"later David Ritland\" 서술과 문항 논리에는 영향 없는 경미한 사안으로 판단.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "Ritland & Brower(1991) 연구 내용과 부합. 빈칸 뒤 문장이 'the viceroy's…'로 소문자 시작이나 빈칸 뒤라 문제없음. 오답 A·D는 그럴듯한 유인 요소를 가짐.",
+    "issue": ""
+   },
+   "cost": 0.1527704
+  },
+  {
+   "cid": "medium-transitions-411",
+   "skill": "transitions",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "검산: 앞 문장(평론가: 충실한 부활) vs 뒤 문장(작가가 형식을 반복적으로 undercut) → 대조, D 'Yet' 타당. A(유사), B(인과), C(예시) 모두 배제됨. 해설 한·영 결론·글자 참조 일치, 영어 자연스럽고 한글 없음. 가상의 작가·작품(Imogen Varley, 2021)이므로 사실 오류·저작권 문제 없음. 난이도: 지문이 'praised as faithful revival' 뒤에 'undercuts'가 와서 훑어 읽으면 C/A에 끌릴 수 있고, 'borrows the trappings'와 '19세기 형식'의 연결을 파악해야 하므로 medium 적합. 다만 'Yet,' 단독 쉼표 사용은 다소 비표준적이나 SAT 선택지로 허용 범위.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "가상의 작가·작품이다. 정답은 대조의 'Yet'이며 정독하면 분명하다. 'faithful revival'과 'undercuts'의 대비를 읽어 내야 하므로 중간 난이도에 맞다. C(예시)와 A(유사)는 훑어 읽을 때 그럴듯하다. 다만 B는 비교적 쉽게 배제된다.",
+    "issue": "없음없음"
+   },
+   "cost": 0.1155944
+  },
+  {
+   "cid": "medium-transitions-412",
+   "skill": "transitions",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "앞 문장(많은 사구가 남쪽으로 이동)과 뒤 문장(강바닥 근처 사구는 거의 안 움직임)이 명확한 대조이므로 However가 정답. 'indeed'가 앞 문장에서 가정 확인을 강조해 뒤의 예외와 대비되는 구조를 독해해야 하며, D(Similarly)는 '이동' 주제 연속성 때문에 훑어 읽으면 혼동 가능, C도 '한 사구 군집'이 구체화처럼 보일 수 있어 비교가 필요. B도 문법적으로 자연스러워 말이 됨. 해설 한·영 일치, 글자 참조 정확, 사실 오류 없음(가상의 연구자/연구이지만 일반 지리 서술은 타당). 형식 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "too_easy",
+     "eliminated:2"
+    ],
+    "note": "정답 A는 옳다. 다만 'indeed … many dunes'에서 'barely moved at all'로 넘어가는 대조가 너무 뚜렷해서 훑어 읽어도 바로 답을 고를 수 있다. B(결과)와 D(유사)는 '거의 움직이지 않음'과 바로 충돌해서 쉽게 배제된다. 그럴듯한 오답은 C 하나뿐이어서, 부분적 근거를 가진 오답이 최소 2개 있어야 한다는 medium 기준에 못 미친다.",
+    "issue": ""
+   },
+   "cost": 0.11137839999999999
+  },
+  {
+   "cid": "medium-transitions-413",
+   "skill": "transitions",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "앞 문장(저항·분침 두 개)과 뒤 문장(1855년 대다수 GMT 채택)은 양보-반전 관계로 B \"Nevertheless\"가 명확히 정답. A는 마지막 절 \"driven ... by the practical demands of catching trains\"의 인과 뉘앙스 때문에 훑어 읽으면 고를 수 있어 유효한 오답이나, C·D는 비교적 쉽게 배제됨(오답 2개의 부분적 타당성 기준에 다소 못 미치는 경계선이지만 표준 SAT 중간 난이도 전환어 문항 범위 내). 역사적 사실(1840년대 철도 시간 도입, 1855년경 대부분 공공시계 GMT, 법제화는 1880년) 정확. 해설 한·영 모두 글자 참조 일치, 한글 혼입 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "Resistance → eventual adoption is a clear concession-reversal relationship, so B is correct. The historical facts hold up: some clocks had two minute hands (e.g., Bristol), and about 98% of public clocks were on GMT by 1855. A is the most tempting distractor because of the railways' causal role. C and D are weaker, but D is still somewhat plausible. Overall the item sits at roughly medium difficulty.",
+    "issue": ""
+   },
+   "cost": 0.1404164
+  },
+  {
+   "cid": "medium-transitions-414",
+   "skill": "transitions",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "정답 C 검산 완료: 앞 문장이 '영구 벽은 불가'로 대안을 배제하고 뒤 문장이 대체 해결책을 제시하므로 'Instead'가 유일하게 논리적. A(Nevertheless)는 제약을 고려해 설계했다는 서술과 양보 관계가 성립하지 않아 매력적 오답으로 기능하고, D(For example)는 '해결책'이라는 모호한 선행 개념을 떠올리면 잠깐 그럴듯해 보여 부분적 근거가 있음. B도 문맥상 말이 됨. Maeslantkering 사실관계(두 개의 회전식 수문, 각 약 210m·에펠탑 높이급, 평소 드라이독 보관, 예보 시 폐쇄)는 정확. 한국어·영어 해설 모두 결론·글자 참조 일치하고 영어 해설에 한글 없음. 두 문장 간 '배제→대체' 관계 파악이 필요한 표준 medium 수준.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "'Instead'는 배제된 영구 벽을 대체하는 해결책과 잘 연결된다. 'Nevertheless'는 앞 문장이 제약을 말하므로 훑어 읽으면 고르기 쉬운 오답이다. B와 D도 그럴듯하지만 비교하면 배제된다. 사실 관계: 각 수문의 지지 팔은 약 237m로 에펠탑 높이(약 300m)와 대략 비슷하며, 이는 흔히 쓰이는 비교다. 그 밖의 사실 서술도 정확하다.",
+    "issue": "A 해설의 '벽을 짓지 못했는데도 벽을 지었다는 식의 양보'라는 표현이 다소 어색하지만, 결론은 틀리지 않았다."
+   },
+   "cost": 0.1258164
+  },
+  {
+   "cid": "medium-transitions-415",
+   "skill": "transitions",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "관찰(어린 개체 부재) → 결론(개체군 미대체) 구조이므로 결과 전환어 Accordingly가 적절. A는 '안정적으로 보이지만' 양보구에 끌리는 유인 오답, C는 결론 문장이 재진술처럼 보일 수 있어 비교 필요, B도 문맥상 말이 됨. 해설 한·영 모두 글자 참조·결론 일치, 한글 혼입 없음. Wendell Haag의 담수 홍합·댐 연구 언급은 사실과 부합. 표준 SAT medium 수준.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "관찰에서 결론으로 이어지는 구조라 D가 명확하다. A는 'though they appear stable'이라는 양보 표현 때문에, C는 'not replacing themselves'가 '어린 개체 부재'를 재진술하는 것처럼 읽히기 때문에 그럴듯한 오답이 된다. 따라서 중간 난이도에 적합하다.",
+    "issue": ""
+   },
+   "cost": 0.11439840000000001
+  },
+  {
+   "cid": "medium-transitions-416",
+   "skill": "transitions",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "앞 문장(액면 그대로 읽으면 구식으로 보임)과 뒤 문장(실제로는 비난으로 작동)이 양보-반전 관계이므로 'Nevertheless'가 유일하게 논리적임. C는 뒤 문장의 구체적 사례(과부의 잠긴 식료품실) 때문에 매력적인 오답이고, D도 두 문장이 모두 화자의 서술 방식을 다룬다는 점에서 표면적 근거가 있음. B는 인과로 오독할 여지가 있어 말이 됨. 가상의 소설·작가로 저작권 문제 없음. 한·영 해설 모두 정답 글자 참조 일치, 영어 자연스럽고 한글 없음. medium 난이도 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "정답은 대조 연결어 하나뿐이다. 'However'가 조금 더 자연스럽겠지만 'Nevertheless'도 양보 뒤 반전을 나타내므로 성립한다. C는 구체적 사례가 나온다는 점 때문에 그럴듯해 보이는 오답이다. B와 D는 비교적 쉽게 배제되지만, 겉의 공손함과 속뜻을 연결해야 하므로 medium 난이도로 볼 만하다. 작품은 가상 소설로 보이며 저작권 문제는 없다.",
+    "issue": ""
+   },
+   "cost": 0.1281744
+  },
+  {
+   "cid": "medium-transitions-417",
+   "skill": "transitions",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "'once assumed' → 반박 연구 구조로 B(However)가 유일하게 타당. A는 인과 구조 오독 시, C는 구체 연구 사례로 보일 때 매력적이며 D도 말이 됨. 한·영 해설 모두 정답과 선택지 글자 일치, 모순 없음. 지리학자 이름은 가상이나 방글라데시 제방·침하 사실 자체는 실제 연구(Auerbach et al. 2015)와 부합. 표준 medium 난이도.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "too_easy",
+     "eliminated:3"
+    ],
+    "note": "'once assumed'라는 표현이 대조를 강하게 예고해 한 단계 판단으로 풀린다. 오답 A·C·D 모두 부분 근거가 약하다. 특히 D(Similarly)와 C(For example)는 쉽게 배제되어, 비교해야만 배제되는 오답이 2개 이상이어야 한다는 medium 기준에 못 미친다. 내용은 폴더 침하 연구와 대체로 일치하며 인명은 가상으로 보인다.",
+    "issue": ""
+   },
+   "cost": 0.1213264
+  },
+  {
+   "cid": "medium-transitions-418",
+   "skill": "transitions",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "마지막 문장은 Schlör의 주장(범죄가 아닌 상업·여가 시간의 변화)을 일반화해 다시 말한 것이므로 'In other words'(C)가 정확하다. A는 '범죄율이 아니라'라는 대비 표현 때문에 훑어 읽으면 고르기 쉬운 매력적 오답이고, D도 앞 내용과 유사성을 띠는 듯 보여 비교가 필요하며, B는 말은 되나 구체 사례가 아니므로 배제된다. 두 단계 판단(앞 문장과의 관계 파악 + '대비는 이미 앞 문장에 있음' 확인)이 요구되어 medium에 적합. 한·영 해설 모두 정답 C와 선택지 참조가 일치하고 모순 없음. Joachim Schlör(『Nights in the Big City』) 인용은 사실과 어긋나지 않으며 지문은 독창적 서술로 저작권 우려 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "마지막 문장은 앞 문장을 일반화해 다시 말한 것이므로 정답은 C(In other words)다. A는 범죄 예측과의 대비 때문에 매력적인 오답이다. 다만 'In other words,' 바로 뒤의 'the'가 소문자로 시작한다. 이것은 공란 앞 문장이 끝난 직후라는 위치와 맞지 않는 사소한 표기 문제이며, 판정에는 영향이 없다. Schlör를 인용한 내용은 그럴듯하며 일반적 수준의 서술이다.",
+    "issue": "빈 문자열"
+   },
+   "cost": 0.13478040000000002
+  },
+  {
+   "cid": "medium-transitions-419",
+   "skill": "transitions",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "정답 D 검산 완료: 'expected'(예상) → 'turned out'(드러남) 구조로 예상 밖의 추가 발견이므로 'Unexpectedly'가 가장 논리적. A(인과)는 소음 감소가 배수의 결과가 아니고 맑은 날에도 발생하므로 배제, B(역접)는 배수 이점이 부정되지 않으므로 배제, C(재진술)는 새로운 정보이므로 배제. 한국어·영어 해설 모두 같은 결론과 글자 참조를 가지며 모순 없음. 네덜란드 다공성 아스팔트(ZOAB)의 배수·소음 저감 효과는 사실과 부합. 난이도: 'expected/turned out' 단서가 비교적 명시적이어서 medium 하한에 가깝지만, B(Nevertheless)와 D 사이의 '반전 vs 예상 밖 추가 발견' 구분이 정독을 요구하고 A도 부분적 근거(틈새→소음 흡수의 인과 착시)를 가지므로 medium 적합으로 판정. 'Unexpectedly'와 'turned out'의 약간의 의미 중복은 허용 범위.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "'expected'와 'turned out'의 대비로 D가 유일하게 성립한다. A(같은 틈새 구조가 원인이라 인과처럼 보임)와 B(예상과 어긋남)는 부분적인 근거가 있어 비교해야 배제되므로 medium 수준에 맞다. 다공성 아스팔트(ZOAB)의 배수·소음 저감 효과도 사실과 일치한다.",
+    "issue": ""
+   },
+   "cost": 0.1604824
+  },
+  {
+   "cid": "medium-transitions-420",
+   "skill": "transitions",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "마지막 문장은 연구 결과(플랑크톤 섭취 증가 → 체질량 손실 감소)에서 도출되는 일반적 결론이므로 결과 전환어 'Thus'가 정확함. B(대조), C(예시: 방향 반대), D(비교: 앞 문장의 colony 비교 때문에 일부 유인력 있음)는 모두 배제 가능. 해설 한·영 일치, 선택지 참조 정확, 영어 자연스러움. Putnam의 M. capitata 백화·섭식 연구는 실제 존재하며 서술에 사실 오류 없음. 지문은 독창적 서술로 저작권 문제 없음. 난이도는 표준 medium에 부합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": false,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "출처 표기 문제: 백화 중 Montipora capitata가 플랑크톤 섭취(종속영양)를 늘려 에너지 비축분을 유지하고 회복한다는 연구로 잘 알려진 것은 Grottoli, Rodrigues & Palardy (Nature, 2006)이다. Hollie Putnam도 M. capitata를 연구하지만 이 결과를 Putnam 연구진의 것으로 쓴 것은 잘못된 출처 표기로 보인다. 또 '체질량(body mass)'은 원 연구의 에너지 비축분·생물량 지표를 단순화한 표현이다. 실존 과학자 이름을 그대로 쓸 경우 확인이 필요하다. 문항 구조 자체는 타당하다. 'Thus'가 유일하게 옳은 선택지이고, 'In comparison'은 앞 문장의 군체 간 비교 때문에 훑어 읽으면 끌릴 수 있다. 다만 'Nevertheless'는 비교적 쉽게 배제되어 중간 난이도의 하단에 해당한다.",
+    "issue": ""
+   },
+   "cost": 0.1334944
+  },
+  {
+   "cid": "medium-rhetorical_synthesis-400",
+   "skill": "rhetorical_synthesis",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "B가 메모 4·5를 결합해 '이유'를 제시하는 유일한 선택지. A·C는 재료 정보만, D는 비평가 언급만 있어 목표 미달. 선택지 글자 참조·해설 결론 일치. METI School(2006, Heringer, 흙+대나무, 현지 훈련)은 사실에 부합. 다만 B가 유일하게 'critics'와 이유를 동시에 담은 선택지라 오답 비교 부담이 다소 낮으나, D가 비평가를 언급해 혼동 요소를 제공하므로 medium 범위로 판단.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "too_easy",
+     "eliminated:3"
+    ],
+    "note": "B만 비평가와 그 이유(현지 공법에 미친 영향)를 함께 담고 있다. A와 C는 비평가를 아예 언급하지 않아 바로 배제된다. D도 '비평가' 단어만 있어 쉽게 걸러진다. 부분적 근거를 갖춘 그럴듯한 오답이 부족해 medium 기준(오답 3개 중 최소 2개가 비교해야만 배제될 것)에 미달한다. 또 정답만 눈에 띄게 길어서 길이로도 정답이 드러난다.",
+    "issue": ""
+   },
+   "cost": 0.113878
+  },
+  {
+   "cid": "medium-rhetorical_synthesis-401",
+   "skill": "rhetorical_synthesis",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "C가 유일하게 '50세 이후 시작'과 '13년간 약 145,000점 수집'을 대비 구조(Although)로 결합해 목표를 충족. A·D는 성과만 제시해 늦은 출발이 빠지고, B는 연도만 있을 뿐 나이가 없고 명예에 초점을 두어 배제됨. 노트 내용(1921년 시작, 약 145,000점, 약 500 신종, 약 50종 명명, Mimosa mexiae)은 실제 Mexía 전기와 부합. 한·영 해설 모두 선택지 참조와 결론이 일치하며 영어 자연스러움. 두 조건을 동시에 확인해야 하는 표준 medium 수준.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "늦은 시작과 높은 생산성을 함께 담은 선택지는 C뿐이다. A와 D는 성과만 보여 주고, B는 연도만 제시해 늦은 시작이 드러나지 않으며 생산성보다 명예에 초점을 둔다. 오답들이 부분적으로 맞는 근거를 갖고 있어 medium 난이도에 적합하다. 사실관계(1870–1938년, 약 145,000점, 약 500종의 신종, 약 50종이 그녀의 이름을 딴 종)도 대체로 일치한다.",
+    "issue": ""
+   },
+   "cost": 0.1304
+  },
+  {
+   "cid": "medium-rhetorical_synthesis-402",
+   "skill": "rhetorical_synthesis",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "D는 지속 시간(0.2초)과 에너지량(태양 10만 년치)을 결합해 목표를 정확히 충족. B는 거리 대비 영향으로 '강력함'을 암시, C는 '엄청난 에너지'를 언급해 부분적 근거를 가진 오답으로 기능하며, A도 메모 기반으로 말이 됨. 메모 사실관계(SGR 1806-20, 2004년 12월, ~0.2초, 약 5만 광년, 태양 ~10만 년치 에너지)는 알려진 수치와 대체로 부합. 한·영 해설 결론 및 글자 참조 일치, 영어 해설에 한글 없음. D가 두 수치를 모두 담은 유일한 선택지라 다소 명확한 편이지만 표준 medium 범위.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "too_easy",
+     "eliminated:3"
+    ],
+    "note": "정답은 D이며, 지속 시간과 에너지를 함께 언급하는 선택지는 D 하나뿐이다. 그래서 '에너지'와 '지속 시간'이라는 키워드만 대조해도 바로 답이 나온다. 부분적으로 맞는 근거를 가진 오답은 B 하나뿐이다. A는 날짜와 거리만, C는 마그네타의 일반적 특징만 다루어 금방 걸러지므로, medium 기준(최소 2개의 그럴듯한 오답)에 미치지 못한다. 사실관계 메모: NASA 등은 이 에너지를 흔히 '태양의 약 15만 년치'로 소개하지만, '10만 년'으로 보도한 자료도 있어 허용 범위로 본다.",
+    "issue": ""
+   },
+   "cost": 0.143638
+  },
+  {
+   "cid": "medium-rhetorical_synthesis-403",
+   "skill": "rhetorical_synthesis",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [
+    "contract:contract_math_unclosed",
+    "contract:contract_math_unclosed",
+    "contract:contract_math_unclosed",
+    "unbalanced_dollar_in_body"
+   ],
+   "formatFail": true,
+   "mathVerify": null,
+   "fable": null,
+   "opus": null,
+   "cost": 0.024496
+  },
+  {
+   "cid": "medium-rhetorical_synthesis-404",
+   "skill": "rhetorical_synthesis",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "정답 B 검산 완료: 노트 3(Silbo Gomero는 음높이로 모음·자음 모방)과 노트 5(Hmong은 성조를 재현)를 대조하여 '표현 방식의 차이'라는 목표를 정확히 충족. 오답 분석: A는 두 언어를 비교하지만 공통점(장거리 전달)이며 A의 'difficult terrain'은 Silbo 노트에 명시되지 않았으나 핵심 오류는 아님. C는 'while'로 대조 형식을 갖추고 노트 사실을 정확히 인용하지만 거리·지역 비교로 표현 방식과 무관. D는 두 언어 모두 음높이를 쓴다는 점을 들어 유사성으로 묶는, 가장 매력적인 오답. 수험생은 '차이'와 '표현 방식' 두 조건을 모두 확인해야 하므로 medium에 적합. 사실 관계(5km, Kuşköy, Hmong 성조 휘파람)도 통상 자료와 부합. 한국어·영어 해설 결론 및 선택지 참조 일치, 영어 해설에 한글 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "B가 노트에 나온 두 표현 방식(모음·자음 흉내 vs 성조 재현)을 유일하게 대조함. C는 대조 형식만 갖춘 오답이고, D는 음높이를 쓴다는 공통점만 담은 오답이며, A는 공통점을 진술함. 이처럼 부분적으로 그럴듯한 오답이 있어 medium에 적합함. A의 'difficult terrain'은 Silbo에 대한 노트에는 없지만 오답이므로 문제없음.",
+    "issue": ""
+   },
+   "cost": 0.14746199999999998
+  },
+  {
+   "cid": "medium-rhetorical_synthesis-405",
+   "skill": "rhetorical_synthesis",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "C는 'Whereas'로 일반 극장(높은 무대·분리)과 Oficina(런웨이·관객 사이 공연)를 직접 대조하여 목표를 충족. A·D는 Oficina 특징만 제시(부분적 근거 있음), B는 일반 극장만 설명. 선택지 내용이 노트와 일치하며 실제 Teatro Oficina 사실(Bo Bardi·Elito 재설계, 1993 재개관, 런웨이, 갤러리, 유리벽)과도 부합. 비교 요소 유무를 판단해야 하므로 medium 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "Typical medium contrast item; distractors A/D partially relevant (Oficina features), B conventional only. Facts about Teatro Oficina (Bo Bardi & Elito, 1993, runway, glass wall) accurate.",
+    "issue": ""
+   },
+   "cost": 0.12441200000000001
+  },
+  {
+   "cid": "medium-rhetorical_synthesis-406",
+   "skill": "rhetorical_synthesis",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "정답 D만이 Kimura(완전 중립)와 Ohta(약간 해로움)의 견해를 'Whereas'로 직접 대비하여 목표를 충족함. B는 Ohta 이론의 정확한 예측(부분적 근거), C는 두 사람을 함께 언급하나 공통점만 제시(부분적 근거), A는 사제 관계·수상만 언급. 노트 사실관계(1933년 출생, 1973년 nearly neutral theory, Kimura 멘토, 2015 Crafoord Prize) 모두 정확. D의 후반부 \"though too weakly for that harm to keep chance from determining...\"이 다소 장황하나 문법적·내용적으로 노트와 일치하여 결함은 아님. 한국어·영어 해설 결론 및 선택지 참조 일치, 한글 혼입 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "사실관계(Ohta 1973 nearly neutral theory, 2015 Crafoord Prize)가 정확함. B와 C가 그럴듯한 오답으로 작동함. 다만 D의 'though too weakly...' 구문이 다소 어색하지만 의미는 정확함.",
+    "issue": ""
+   },
+   "cost": 0.13955
+  },
+  {
+   "cid": "medium-rhetorical_synthesis-407",
+   "skill": "rhetorical_synthesis",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "정답 A는 노트 2·3을 결합해 '대부분 vs. 이 FRB' 대조를 명시적으로 제시하므로 목표에 정확히 부합. B·D는 노트 내용을 정확히 담은 부분 정답형 오답(비교 부재), C는 비교를 하지만 공통점을 강조하는 함정형 오답으로 medium 구성 요건 충족. FRB 20180916B 16.35일 주기·CHIME 발견 등 사실 관계 정확. 두 해설 결론·글자 참조 일치, 영어 자연스러움.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "FRB 20180916B의 16.3일 주기(활동 약 4일)와 CHIME 발견은 사실과 맞다. B와 D는 이 FRB만의 특징을 담고 있어 그럴듯한 오답이고, C는 비교 구조를 갖춘 함정이다. medium 난이도에 적합하다. 다만 D에는 노트의 'slowly'와 'magnetized'가 빠졌는데, 정답에는 영향이 없다.",
+    "issue": ""
+   },
+   "cost": 0.118478
+  },
+  {
+   "cid": "medium-rhetorical_synthesis-408",
+   "skill": "rhetorical_synthesis",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "목표(메뉴가 아닌 배고픔이 원인이라고 본 이유 설명)에 대해 B만이 '같은 메뉴·가격'(메뉴 요인 배제)과 '배고픔' 설명을 인과적으로 연결함. A는 결과만, C는 배고픔만, D는 메뉴 동일성만 담아 각각 부분적 근거를 지녀 비교가 필요한 적절한 오답. 한국어·영어 해설 모두 정답과 선택지 참조가 일치하고 모순 없음. 노트는 가상 자료로 사실 오류·저작권 문제 없음. 두 정보의 연결이 요구되는 medium 난이도에 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "B만이 메뉴 요인 배제(같은 메뉴·가격)와 배고픔 설명을 함께 제시함. C·D가 각각 절반의 근거를 담고 있어 서로 비교해야 배제되며, A도 그럴듯함. 노트에는 메뉴가 같았기 때문에 결론을 내렸다는 인과가 명시되어 있지 않으나, 합리적으로 종합한 내용으로 볼 수 있음.",
+    "issue": ""
+   },
+   "cost": 0.134622
+  },
+  {
+   "cid": "medium-rhetorical_synthesis-409",
+   "skill": "rhetorical_synthesis",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": false,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "정답 C는 메모 3·5를 결합해 두 휘파람 언어가 기반 언어를 옮기는 '방식'의 차이를 정확히 대조하므로 타당하다. A(공통점), B(한 언어만·구어와 비교), D(두 언어 대조이지만 지역 차이)로 오답 배제 논리도 명확하며, D와 A가 부분적 타당성을 가져 비교가 필요하므로 medium에 적합하다. 해설 한·영 모두 일관되고 자연스럽다. 다만 사실 관계에서 문제가 있다: 메모 5의 \"터키어에는 자음군이 많다(many consonant clusters)\"는 실제 터키어 음운론과 어긋난다. 터키어는 모음조화는 있으나 자음군을 강하게 제한하는 언어로(어두 자음군 회피, 차용어에 모음 삽입: tren→tiren 등), 오히려 자음군이 적은 언어로 알려져 있다. 또한 쿠슈쾨이 휘파람이 모음조화·자음군을 '빠른 음높이 미끄러짐'으로 재현한다는 서술도 검증된 사실로 보기 어렵다. 문항 논리 자체는 메모 내 정보만으로 성립하지만, 실존 언어에 대한 부정확한 서술이므로 factual_error로 표기한다.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "정답은 C로 맞다. 오답의 매력도는 D(대조는 하지만 측면이 다름)가 가장 높고, A(공통점)와 B(한 언어만 다룸)가 그다음이다. 다만 A와 B는 비교적 쉽게 배제되므로 medium 하단에 가깝다. B의 'unlike ordinary spoken Spanish'는 메모에 없는 비교지만 오답이므로 문제없다. UNESCO 등재 사실(Silbo Gomero 2009년, 터키 휘파람 언어 2017년)도 정확하다.",
+    "issue": ""
+   },
+   "cost": 0.17069800000000002
+  },
+  {
+   "cid": "medium-rhetorical_synthesis-410",
+   "skill": "rhetorical_synthesis",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "D는 유리 이젤(선택)과 '어떤 순서로든 거닐 수 있음'(자유)을 연결해 목표를 유일하게 충족한다. B(이젤만 언급, 효과 누락)와 C(두 선택 나열, 효과 누락)는 부분적 근거가 있어 비교가 필요하고, A는 광장이라는 다른 선택을 다뤄 그럴듯하지만 미술 감상 자유와 무관하다. 노트 사실(1968, 4개 붉은 기둥, 74m 광장, 유리 이젤)은 실제 MASP와 부합. 한·영 해설 모두 D를 일관되게 뒷받침하며 글자 참조 일치, 한글 혼입 없음. 표준 SAT 수사적 종합 형식.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "MASP·유리 이젤·74m 광장 관련 사실은 정확함. 오답 A·B·C 모두 부분적 근거가 있어 비교가 필요하며, 표준 중간 난이도에 맞음. A는 '자유'라는 단어와 공공 공간을 연결해 훑어 읽는 응시자를 유인함.",
+    "issue": ""
+   },
+   "cost": 0.12385399999999999
+  },
+  {
+   "cid": "medium-rhetorical_synthesis-411",
+   "skill": "rhetorical_synthesis",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "A가 유일하게 동료의 전형적 경로(대학 훈련·20대 시작)와 Mexia의 경로(학위 미취득·55세 시작)를 명시적으로 대조하여 목표를 충족. B는 55세 시작을 언급해 부분적 근거가 있으나 비교 없이 업적 중심, D는 비교 구조를 갖추었으나 '유사성'을 제시해 목표와 반대, C는 비교·특이성 없음. 노트의 사실(1925년 55세 시작, 약145,000점, 약500 신종, UC 수강·학위 미취득)은 실제 기록과 부합. 한·영 해설 모두 선택지 참조 일치, 한글 혼입 없음. 표준 SAT medium 수준에 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "B는 55세 시작이라는 특이점을 담고 있어 그럴듯한 오답이고, D는 대학 수강 사실을 근거로 삼는다. 다만 C는 비교적 쉽게 배제된다. 정답은 'compared with her peers'라는 비교 요소를 확인해야 고를 수 있어 medium 난이도에 적합하다. Mexia 관련 사실(55세 시작, 약 145,000점, 약 500종 신종)은 실제 기록과 일치한다.",
+    "issue": ""
+   },
+   "cost": 0.13356400000000002
+  },
+  {
+   "cid": "medium-rhetorical_synthesis-412",
+   "skill": "rhetorical_synthesis",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "정답 B는 지속 시간과 에너지량을 'Although'로 대비하여 목표를 충족. A(강도를 대기 교란으로 암시), D(지속 시간만 제시)는 부분적 근거가 있어 비교가 필요하고 C는 일반 소개로 그럴듯함. 노트 내용(SGR 1806-20, 2004년 12월 27일 거대 플레어, ~0.2초, 태양 10만년분 에너지, 전리층 교란)은 실제 사실과 일치. 한·영 해설 모두 정답과 선택지 참조가 일치하고 자연스러움.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "SGR 1806-20 사실관계(2004.12.27, 약 0.2초, 태양 약 10만~25만 년분 에너지, 전리층 교란)는 정확하다. 오답 중 A(강도)와 D(지속 시간)는 목표의 일부만 다뤄 비교해 봐야 배제된다. 다만 C는 쉽게 배제되어 난이도는 중간 수준의 하한에 가깝다.",
+    "issue": ""
+   },
+   "cost": 0.118372
+  },
+  {
+   "cid": "medium-rhetorical_synthesis-413",
+   "skill": "rhetorical_synthesis",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "C is the only choice that conveys the researchers' causal explanation (future expenses slip from attention) and links it to the result; A gives only the result, B only which reminders worked best, D only the design. Korean and English explanations agree and reference choices correctly. Study details match Karlan et al.'s real reminder research; original student-note framing, no copyright concern. A and B are partially correct distractors requiring comparison; difficulty matches medium.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "Karlan et al. 리마인더 연구(약 6% 증가, 목표 언급 리마인더가 더 효과적, 주의 제한 설명)를 정확히 반영함. 연구 연도(2010 워킹페이퍼/2016 출판)는 메모 설정으로 허용 범위. 정답 C만 연구자들의 설명을 담고 있음. B는 부분적으로 그럴듯한 오답이어서 비교가 필요해 medium 난이도에 적합. 다만 'explanation'이라는 핵심어 때문에 비교적 쉽게 풀릴 수 있음.",
+    "issue": ""
+   },
+   "cost": 0.118418
+  },
+  {
+   "cid": "medium-rhetorical_synthesis-414",
+   "skill": "rhetorical_synthesis",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "D만이 '같은 언어의 두 형태'와 '처리 방식(좌반구 vs 양반구)'이라는 두 조건을 모두 충족. B는 대조 접속사로, C는 연구 결과 인용으로 부분적 근거를 가져 비교가 필요하며 A도 문맥상 말이 됨. 노트 사실(Silbo Gomero, Kuşköy, Güntürkün 2015 연구) 정확. 해설 한·영 일치, 글자 참조 일치.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "B는 대조어가 있고 C는 관련 연구를 담고 있어 둘 다 일부만 맞는 오답이다. 정답을 고르려면 '같은 언어'와 '처리 방식'이라는 두 조건을 모두 확인해야 하므로 medium 난이도에 맞는다.",
+    "issue": ""
+   },
+   "cost": 0.127578
+  },
+  {
+   "cid": "medium-rhetorical_synthesis-415",
+   "skill": "rhetorical_synthesis",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "A alone names the approach (industrial reuse) and supplies the causal reason (preserving/repurposing sheds instead of demolishing), directly combining notes 3 and 6. B references critics but omits the reuse rationale; D uses the shed detail but lacks critics/reason; C is background only. Historical facts about Bo Bardi and SESC Pompéia (1977, drum factory, towers, walkways) are accurate. Korean and English explanations align in conclusion and letter references; English is natural with no Hangul. Two-step judgment (approach + reason) with two partially plausible distractors fits medium.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "정답 A가 방식(산업 건물 재사용)과 이유(창고 보존·용도 전환)를 모두 담고 있다. B와 D는 부분적으로 그럴듯해 비교해야 배제할 수 있어 medium 난이도에 맞는다. 사실관계(1977년 착공, 기름통 공장, 콘크리트 타워 세 동)도 정확하다.",
+    "issue": ""
+   },
+   "cost": 0.13995200000000002
+  }
+ ]
+}

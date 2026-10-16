@@ -1,0 +1,915 @@
+{
+ "schema": "rw-session-task/v1",
+ "kind": "rewrite",
+ "runId": "lit40-wave1",
+ "taskId": "rewrite-011",
+ "chunkId": "rewrite-011",
+ "batchId": "lit40-hard-03",
+ "attempt": 1,
+ "suggestedModel": "opus",
+ "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rewrite-011.result.json",
+ "outputSchema": {
+  "chunkId": "작업 파일의 chunkId 를 그대로",
+  "model": "당신의 모델 이름(예: opus)",
+  "items": [
+   {
+    "candidateId": "후보의 candidateId 를 그대로",
+    "passage": "영어 지문(문항의 질문은 넣지 않는다)",
+    "question": "영어 질문 한 문장",
+    "options": [
+     "선택지 A",
+     "선택지 B",
+     "선택지 C",
+     "선택지 D"
+    ],
+    "correct_letter": "A|B|C|D (targetLetter 와 같게)",
+    "explanation": "한국어 해설 3~5문장",
+    "tone": [
+     "지문 어조 영어 단어 1~3개"
+    ],
+    "devices": [
+     "쓰인 문학 장치 영어 단어"
+    ],
+    "declaration": {
+     "original": true,
+     "noRealWorkQuoted": true,
+     "noCopyrightedSource": true
+    }
+   }
+  ]
+ },
+ "candidates": [
+  {
+   "candidateId": "lit40-hard-03-020",
+   "route": "ai_passage",
+   "skill": "text_structure_purpose",
+   "difficulty": "hard",
+   "questionType": "underlined_portion_function",
+   "genre": "memoir",
+   "targetLetter": "B",
+   "words": {
+    "min": 120,
+    "max": 190
+   },
+   "recipeId": "text_structure_purpose_lit_underlined_portion_function_hard_v4",
+   "spec": {
+    "candidateId": "lit40-hard-03-020",
+    "batchId": "lit40-hard-03",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "hard",
+    "questionType": "underlined_portion_function",
+    "genre": "memoir",
+    "seed": {
+     "index": 19,
+     "genre": "memoir",
+     "pov": "first",
+     "styleEra": "contemporary",
+     "names": [
+      "Milena",
+      "Alessia"
+     ],
+     "nameCultures": [
+      "slavic_baltic",
+      "italian"
+     ],
+     "locale": "Naples",
+     "setting": "a quiet library",
+     "relationship": "an elder and a restless apprentice",
+     "conflict": "about whether a small kindness was a cover for something else",
+     "openingStyle": "구체적인 사물이나 동작으로 시작(관사 The 로 시작하지 말 것)",
+     "topicSeed": "a quiet library in Naples; an elder and a restless apprentice about whether a small kindness was a cover for something else"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 120,
+     "max": 190
+    },
+    "recipeId": "text_structure_purpose_lit_underlined_portion_function_hard_v4"
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a quiet library in Naples; an elder and a restless apprentice about whether a small kindness was a cover for something else\n인물 이름: Milena, Alessia 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 구체적인 사물이나 동작으로 시작(관사 The 로 시작하지 말 것). 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 120~190단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 B 에 둔다. correct_letter 는 B 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 B 로 정한 뒤 나머지 선택지를 채운다.\n레시피(text_structure_purpose_lit_underlined_portion_function_hard_v4, 난이도 hard): 지문의 문장 하나를 __문장__ 처럼 두 밑줄 기호로 감싸 정확히 하나만 표시하고, 질문에 'underlined' 를 넣어 그 문장이 글 전체에서 하는 기능을 묻는다. 밑줄 문장은 단독으로 읽으면 한 가지 기능(배경 설명·성격 묘사·분위기 전환)으로 보이지만, 지문 뒤쪽 사건이 그 기능을 바꿔 놓는다(복선·반어). 밑줄 문장 바로 앞뒤 문장은 기능을 설명하거나 뒤집지 않는다. 오답 3개는 모두 밑줄 문장과 지문 사실에 근거한 기능이어야 하며 (a) 밑줄 문장만 본 기능 (b) 바로 뒤 문장과의 관계로 본 기능 (c) 지문 표현을 빌려 일반화한 기능이다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 3 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 밑줄 문장만 단독으로 읽은 기능(배경 설명 등). 지문 후반 단서를 설명하지 못한다 (2) 바로 뒤 문장과의 관계로 읽어 기능의 방향을 뒤집은 선택지(복선이 아니라 해소로 읽음) (3) 지문의 표현을 빌려 일반적 기능으로 넓힌 선택지. 지문과 양립하지만 후반 단서와 맞지 않는다\n금지: 밑줄 문장 바로 뒤에서 의미를 뒤집거나 설명한다 / 정답 외 선택지가 지문 사실과 정면 충돌한다 / 정답이 지문 마지막 문장(또는 밑줄 문장 직후 문장)을 거의 그대로 바꿔 말한 문장이다 / 오답이 지문과 정반대 정서·사실이거나 지문의 명시 문장과 충돌해 지문 사실만 확인해도 소거된다(오답은 지문의 모든 명시 문장과 양립해야 한다) / 오답에 always·never·only·completely·entirely 같은 절대어나 -ly 극단 수식어를 쓴다(과잉 일반화 오답은 온건한 어휘로 범위만 넓힌다) / 정답만 길거나 구체적이거나 'yet·despite·but' 같은 양가 접속 구조를 갖는다(네 선택지의 문장틀·길이(±2단어)·접속 구조를 맞춘다) / 정답을 판정하는 근거가 한 문장·한 곳에 몰려 있다 / 정답의 핵심 어휘가 지문에 그대로 나온다(지문 어휘 차용은 오답 쪽에만 둔다)\n지문 길이: 120~190단어.\n지문 설계: 근거 위치 — 앞: 밑줄 문장(단독으로는 배경 설명처럼 보임) / 중간: 기능과 무관해 보이는 장면 / 뒤: 밑줄 문장을 복선·반어로 읽게 하는 사건. 직접 서술 금지 — 밑줄 문장의 의미를 풀이하는 인접 문장, 'foreshadow'류 메타 서술 금지.\n정답 설계: 추론 3단계 — 밑줄 문장의 표면 기능 -> 후반 사건 확인 -> 기능 재해석. 오답 3개는 지문의 모든 명시 문장과 양립해야 하고(지문 사실과 충돌하는 오답 금지), 선택지 4개는 같은 문장틀·비슷한 길이로 쓴다.\n제출 전 자기 점검(하나라도 아니면 고쳐서 제출): (1) 밑줄 직전·직후 문장만 읽고 정답을 고를 수 없는가 (2) 표면 기능을 고른 학생이 걸리는 오답이 있는가 (3) 오답 3개 각각을 지문의 모든 명시 문장과 대조해 충돌하는 문장이 하나도 없는가(충돌하면 고친다) (4) 정답을 고르기 전 학생이 처음 떠올릴 해석(표면 해석)이 오답 중 하나로 들어 있는가 (5) 정답만 남기는 결정 단서가 지문의 한 곳(행동·시점·누락)에 있는가 — 없으면 복수 정답, 있어도 한 문장에 직설이면 쉬움 (6) 지문 마지막 문장을 지우고 풀어도 정답이 유지되는가",
+   "previous": {
+    "passage": "Lamp oil and old glue were what I smelled first each morning in the library in Naples, where I was apprenticed to Milena the year I turned nineteen. __Every afternoon she brought me a pastry from the bakery on the corner and set it on my desk without a word.__ I was restless that year, forever asking to work in the reading room instead of the bindery, forever glancing at the door. Milena kept me at the bench, teaching me to resew spines and float torn pages. The pastries kept coming, wrapped in brown paper, and I ate them over my work and wondered whether they were apology or bribe. In the spring a collector came to inspect the library's oldest atlas. Milena showed him every repair and named each one; most were mine. He asked who had done the gathering on the fourth section, and she unfolded a square of brown pastry paper from her drawer, on which, in her small hand, she had kept a dated list of every page I had mended.",
+    "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+    "options": [
+     "It portrays Milena as a generous mentor during the narrator's early months",
+     "It introduces a routine that the closing scene recasts as quiet record-keeping",
+     "It sets up the suspicion, raised soon after, that Milena meant to buy obedience",
+     "It suggests that small gifts between people can carry more than one meaning"
+    ],
+    "correct_letter": "B",
+    "explanation": "밑줄 문장은 단독으로 읽으면 Milena의 친절한 성격을 보여 주는 묘사처럼 보인다. 중간에서 화자는 제본 작업에 붙잡혀 있으며 과자가 사과인지 뇌물인지 의심하지만 답은 주어지지 않는다. 마지막에 Milena가 과자 포장지에 화자가 고친 모든 페이지를 날짜별로 적어 두었음이 드러나면서, 매일의 과자가 화자의 작업을 조용히 지켜보고 기록하는 수단이었음을 알게 되므로 B가 정답이다. A는 표면 기능만 보았고, C는 뒤에 나오는 의심과의 관계로만 읽었으며, D는 지문 표현을 일반적 주제로 넓혔다.",
+    "judgeNotes": [
+     "Fable 추정 난이도 medium",
+     "difficulty_too_easy"
+    ],
+    "reason": "too_easy"
+   }
+  },
+  {
+   "candidateId": "lit40-hard-03-022",
+   "route": "ai_passage",
+   "skill": "central_ideas_details",
+   "difficulty": "hard",
+   "questionType": "narrator_attitude",
+   "genre": "novel_excerpt",
+   "targetLetter": "A",
+   "words": {
+    "min": 120,
+    "max": 180
+   },
+   "recipeId": "central_ideas_details_lit_narrator_attitude_hard_v4",
+   "spec": {
+    "candidateId": "lit40-hard-03-022",
+    "batchId": "lit40-hard-03",
+    "route": "ai_passage",
+    "skill": "central_ideas_details",
+    "difficulty": "hard",
+    "questionType": "narrator_attitude",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 21,
+     "genre": "novel_excerpt",
+     "pov": "first",
+     "styleEra": "early_20c",
+     "names": [
+      "Sigrid",
+      "Thorvald"
+     ],
+     "nameCultures": [
+      "dutch_nordic",
+      "dutch_nordic"
+     ],
+     "locale": "Bergen",
+     "setting": "a ceramics studio",
+     "relationship": "a young apprentice and a master carpenter",
+     "conflict": "after a teacher's remark that changed everything",
+     "openingStyle": "장소 이름으로 시작",
+     "topicSeed": "a ceramics studio in Bergen; a young apprentice and a master carpenter after a teacher's remark that changed everything"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 120,
+     "max": 180
+    },
+    "recipeId": "central_ideas_details_lit_narrator_attitude_hard_v4"
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a ceramics studio in Bergen; a young apprentice and a master carpenter after a teacher's remark that changed everything\n인물 이름: Sigrid, Thorvald 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 장소 이름으로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 120~180단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 A 에 둔다. correct_letter 는 A 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 A 로 정한 뒤 나머지 선택지를 채운다.\n레시피(central_ideas_details_lit_narrator_attitude_hard_v4, 난이도 hard): 화자가 대상에 대해 갖는 태도를 묻는다. 1인칭(또는 가까운 3인칭) 서술에서 화자의 '말투'(불평·농담·건조한 평가)와 '행동'(조용히 해 주는 일, 피하는 화제)이 어긋나게 한다. 말투 단서는 앞부분, 행동 단서는 뒤쪽, 둘 사이에 화자가 스스로를 정정하는 어구(not lying, exactly 같은 완화·망설임)를 한 번 둔다. 정답은 말투 아래 놓인 태도를 말한다. 네 선택지는 모두 '태도 A despite/while 태도 B' 같은 양가 구조로 통일해 정답만 양가형이 되지 않게 하고, 오답은 (a) 말투만 읽은 태도 (b) 존경·애정이지만 이유가 다른 태도 (c) 지문 어휘를 빌린 태도로 만든다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 2 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 화자의 말투(불평·농담)만 읽어 낸 태도. 행동 단서를 설명하지 못한다 (2) 태도의 방향(애정·존중)은 같으나 이유를 뒤집은 선택지(상대가 해 준 일 때문이 아니라 화자 자신의 죄책감 때문이라는 식) (3) 지문의 표현을 빌려 태도로 일반화한 선택지. 지문 사실과 양립하지만 화자의 정정 어구와 맞지 않는다\n금지: 화자가 상대에 대한 마음을 직접 평가하는 문장을 마지막에 둔다 / 정답이 지문 마지막 문장(또는 밑줄 문장 직후 문장)을 거의 그대로 바꿔 말한 문장이다 / 오답이 지문과 정반대 정서·사실이거나 지문의 명시 문장과 충돌해 지문 사실만 확인해도 소거된다(오답은 지문의 모든 명시 문장과 양립해야 한다) / 오답에 always·never·only·completely·entirely 같은 절대어나 -ly 극단 수식어를 쓴다(과잉 일반화 오답은 온건한 어휘로 범위만 넓힌다) / 정답만 길거나 구체적이거나 'yet·despite·but' 같은 양가 접속 구조를 갖는다(네 선택지의 문장틀·길이(±2단어)·접속 구조를 맞춘다) / 정답을 판정하는 근거가 한 문장·한 곳에 몰려 있다 / 정답의 핵심 어휘가 지문에 그대로 나온다(지문 어휘 차용은 오답 쪽에만 둔다)\n지문 길이: 120~180단어.\n지문 설계: 근거 위치 — 앞: 화자의 말투(불평·농담) / 중간: 자기 정정·망설임 어구 / 뒤: 화자가 조용히 해 주는 행동 또는 피하는 화제. 직접 서술 금지 — 화자의 직접 평가어(admire, resent, grateful 등)와 '마음'을 말하는 문장 금지.\n정답 설계: 추론 2단계 — 말투와 행동의 어긋남을 결합해 말투 아래 태도를 추론. 오답 3개는 지문의 모든 명시 문장과 양립해야 하고(지문 사실과 충돌하는 오답 금지), 선택지 4개는 같은 문장틀·비슷한 길이로 쓴다.\n제출 전 자기 점검(하나라도 아니면 고쳐서 제출): (1) 선택지를 가렸을 때 정답만 접속 구조가 다르지 않은가 (2) 말투만 믿은 학생이 걸리는 오답이 있는가 (3) 오답 3개 각각을 지문의 모든 명시 문장과 대조해 충돌하는 문장이 하나도 없는가(충돌하면 고친다) (4) 정답을 고르기 전 학생이 처음 떠올릴 해석(표면 해석)이 오답 중 하나로 들어 있는가 (5) 정답만 남기는 결정 단서가 지문의 한 곳(행동·시점·누락)에 있는가 — 없으면 복수 정답, 있어도 한 문장에 직설이면 쉬움 (6) 지문 마지막 문장을 지우고 풀어도 정답이 유지되는가",
+   "previous": {
+    "passage": "Bergen rain had warped every shelf in the studio by the spring Thorvald came to replace them, and he let me know it was my fault for stacking wet pots too close together. He was a slow, grumbling man who measured each plank three times and talked to the wood more than to me. I said, often and loudly, that he worked like a glacier. Then my teacher looked at my first glazed bowl and remarked, within Thorvald's hearing, that I threw pots the way a carpenter joins wood: careful, square, and without any joy. I told myself I did not care what either of them thought. That is not entirely true, I suppose. Thorvald finished the shelves a week later. I noticed that he had sanded one corner of the lowest shelf round and smooth, at the spot where I always knelt, and after that I stopped calling him a glacier and began, without telling anyone, to time my glazing for the hours he was in the room.",
+    "question": "Which choice best describes the narrator's attitude toward Thorvald?",
+    "options": [
+     "She jokes about his slowness while privately seeking out his steady company.",
+     "She complains about his pace while waiting for the shelves to be finished.",
+     "She respects his care while hoping to make up for the wet pots.",
+     "She resents the carpenter comparison while learning to work more squarely."
+    ],
+    "correct_letter": "A",
+    "explanation": "화자는 앞부분에서 Thorvald를 '빙하처럼 일한다'며 놀리고, 중간에 '완전히 사실은 아니다'라고 자신의 말을 정정한다. 뒤에서는 그가 자신이 무릎 꿇는 자리의 모서리를 둥글게 다듬은 것을 알아챈 뒤, 남몰래 그가 작업실에 있는 시간에 맞춰 유약 작업을 한다. 따라서 농담 아래에서 그의 곁을 찾는 태도를 말한 A가 정답이다. B는 말투만 읽었고, C는 젖은 도자기에 대한 미안함이라는 다른 이유를, D는 선생님 발언의 어휘를 빌려 정정 어구와 행동을 설명하지 못한다.",
+    "judgeNotes": [
+     "Fable 추정 난이도 medium",
+     "difficulty_too_easy"
+    ],
+    "reason": "too_easy"
+   }
+  },
+  {
+   "candidateId": "lit40-hard-03-029",
+   "route": "ai_passage",
+   "skill": "central_ideas_details",
+   "difficulty": "hard",
+   "questionType": "main_idea_or_purpose",
+   "genre": "memoir",
+   "targetLetter": "D",
+   "words": {
+    "min": 130,
+    "max": 190
+   },
+   "recipeId": "central_ideas_details_lit_main_idea_or_purpose_hard_v4",
+   "spec": {
+    "candidateId": "lit40-hard-03-029",
+    "batchId": "lit40-hard-03",
+    "route": "ai_passage",
+    "skill": "central_ideas_details",
+    "difficulty": "hard",
+    "questionType": "main_idea_or_purpose",
+    "genre": "memoir",
+    "seed": {
+     "index": 28,
+     "genre": "memoir",
+     "pov": "third_omniscient",
+     "styleEra": "late_20c",
+     "names": [
+      "Aung",
+      "Siti"
+     ],
+     "nameCultures": [
+      "southeast_asian",
+      "southeast_asian"
+     ],
+     "locale": "Chiang Mai",
+     "setting": "a school music room",
+     "relationship": "a grandson and the grandfather's old friend",
+     "conflict": "when a rumor reaches the wrong person",
+     "openingStyle": "대명사 I 또는 We 로 시작",
+     "topicSeed": "a school music room in Chiang Mai; a grandson and the grandfather's old friend when a rumor reaches the wrong person"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 130,
+     "max": 190
+    },
+    "recipeId": "central_ideas_details_lit_main_idea_or_purpose_hard_v4"
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a school music room in Chiang Mai; a grandson and the grandfather's old friend when a rumor reaches the wrong person\n인물 이름: Aung, Siti 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 대명사 I 또는 We 로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 130~190단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 D 에 둔다. correct_letter 는 D 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 D 로 정한 뒤 나머지 선택지를 채운다.\n레시피(central_ideas_details_lit_main_idea_or_purpose_hard_v4, 난이도 hard): 글 전체의 요지(또는 서술 목적)를 묻는다. 지문에는 요지를 말하는 문장이 없고 서로 다른 두 사건(또는 두 시점)이 있어, 정답은 두 사건의 '관계'(둘이 서로 의미를 바꾸는 대조·반복·아이러니)를 진술한다. 사건 1은 앞부분, 사건 2는 뒷부분에 두고 그 사이에 미해결로 남는 디테일을 하나 둔다. 오답 3개는 (a) 사건 1의 요지 (b) 사건 2의 요지 (c) 두 사건을 함께 말하되 인과 방향을 뒤집은 요지이며, 셋 모두 지문 사실과 양립하는 온건한 진술로 쓴다. 절대어로 과장하지 않는다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 3 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 사건 1의 요지만 말하는 선택지. 지문 사실에 충실하다 (2) 사건 2의 요지만, 사건 2의 표현을 빌려 말하는 선택지. 지문 사실에 충실하다 (3) 두 사건을 모두 언급하지만 한 사건이 다른 사건의 원인·결과라는 방향을 뒤집은 선택지. 지문의 시간 순서와는 충돌하지 않게 쓴다\n금지: 사건 2의 마지막 문장이 교훈·깨달음을 직접 말한다 / 정답이 지문 마지막 문장(또는 밑줄 문장 직후 문장)을 거의 그대로 바꿔 말한 문장이다 / 오답이 지문과 정반대 정서·사실이거나 지문의 명시 문장과 충돌해 지문 사실만 확인해도 소거된다(오답은 지문의 모든 명시 문장과 양립해야 한다) / 오답에 always·never·only·completely·entirely 같은 절대어나 -ly 극단 수식어를 쓴다(과잉 일반화 오답은 온건한 어휘로 범위만 넓힌다) / 정답만 길거나 구체적이거나 'yet·despite·but' 같은 양가 접속 구조를 갖는다(네 선택지의 문장틀·길이(±2단어)·접속 구조를 맞춘다) / 정답을 판정하는 근거가 한 문장·한 곳에 몰려 있다 / 정답의 핵심 어휘가 지문에 그대로 나온다(지문 어휘 차용은 오답 쪽에만 둔다)\n지문 길이: 130~190단어.\n지문 설계: 근거 위치 — 앞: 사건 1 / 중간: 미해결 디테일(설명하지 않음) / 뒤: 사건 2(사건 1을 다시 읽게 함). 직접 서술 금지 — 교훈·깨달음 문장, 인물의 총평 대사, 'learned that'·'realized' 금지.\n정답 설계: 추론 3단계 — 사건 1 의미 파악 -> 사건 2가 그 의미를 바꿈 -> 둘의 관계로 요지를 진술. 오답 3개는 지문의 모든 명시 문장과 양립해야 하고(지문 사실과 충돌하는 오답 금지), 선택지 4개는 같은 문장틀·비슷한 길이로 쓴다.\n제출 전 자기 점검(하나라도 아니면 고쳐서 제출): (1) 부분 요지 두 개가 각각 한 사건에 대해서는 정확한가(틀린 사실이 없는가) (2) 정답을 한 사건만 읽고 고를 수 없는가 (3) 오답 3개 각각을 지문의 모든 명시 문장과 대조해 충돌하는 문장이 하나도 없는가(충돌하면 고친다) (4) 정답을 고르기 전 학생이 처음 떠올릴 해석(표면 해석)이 오답 중 하나로 들어 있는가 (5) 정답만 남기는 결정 단서가 지문의 한 곳(행동·시점·누락)에 있는가 — 없으면 복수 정답, 있어도 한 문장에 직설이면 쉬움 (6) 지문 마지막 문장을 지우고 풀어도 정답이 유지되는가",
+   "previous": {
+    "passage": "I was eleven when I carried the rumor home. Everyone in the school music room said that Siti, who had taught there since before I was born, was being sent away at the end of term, and I repeated it at dinner because it sounded important. My grandfather put down his spoon. He and Siti had not spoken in twenty years, for reasons no one at our table would name, and the next morning he put on his good shirt and walked to the school. I never learned what he said in the headmaster's office. The upright piano in the music room was locked that week, and its key hung on a nail no one would touch. By the cool season the story had come to nothing; Siti was staying. On Saturdays she began coming to our house with a satchel of sheet music, and from the kitchen I could hear two old players arguing over tempo, then starting the same bar again.",
+    "question": "Which choice best states the main idea of the passage?",
+    "options": [
+     "A boy repeats a rumor at dinner and prompts his grandfather to visit the school.",
+     "Two old musicians resume playing together at home after many years without speaking.",
+     "A grandfather's old quarrel with a teacher causes a rumor about her to spread.",
+     "A careless rumor carried home becomes the unexpected route to an old reconciliation."
+    ],
+    "correct_letter": "D",
+    "explanation": "앞부분의 사건은 화자가 소문을 집에 옮기자 20년간 말하지 않던 할아버지가 학교로 찾아가는 장면이다. 뒷부분에서 Siti가 토요일마다 집에 와 할아버지와 함께 연주하게 되면서, 앞의 사소한 실수가 두 사람의 화해로 이어졌음이 드러난다. 따라서 두 사건의 관계를 말한 D가 정답이다. A는 앞 사건만, B는 뒤 사건만 요약하고, C는 소문이 화해를 낳은 방향을 오래된 다툼이 소문을 낳았다는 식으로 뒤집는다.",
+    "judgeNotes": [
+     "Fable 추정 난이도 medium",
+     "difficulty_too_easy"
+    ],
+    "reason": "too_easy"
+   }
+  },
+  {
+   "candidateId": "lit40-hard-03-031",
+   "route": "ai_passage",
+   "skill": "inferences",
+   "difficulty": "hard",
+   "questionType": "character_motivation",
+   "genre": "novel_excerpt",
+   "targetLetter": "C",
+   "words": {
+    "min": 120,
+    "max": 180
+   },
+   "recipeId": "inferences_lit_character_motivation_hard_v4",
+   "spec": {
+    "candidateId": "lit40-hard-03-031",
+    "batchId": "lit40-hard-03",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "hard",
+    "questionType": "character_motivation",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 30,
+     "genre": "novel_excerpt",
+     "pov": "mixed_or_none",
+     "styleEra": "late_20c",
+     "names": [
+      "Kwesi",
+      "Kwame"
+     ],
+     "nameCultures": [
+      "west_african",
+      "west_african"
+     ],
+     "locale": "Dakar",
+     "setting": "a beekeeper's yard",
+     "relationship": "two neighbors with a shared wall",
+     "conflict": "over an old photograph",
+     "openingStyle": "숫자·목록·규칙을 말하며 시작",
+     "topicSeed": "a beekeeper's yard in Dakar; two neighbors with a shared wall over an old photograph"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 120,
+     "max": 180
+    },
+    "recipeId": "inferences_lit_character_motivation_hard_v4"
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a beekeeper's yard in Dakar; two neighbors with a shared wall over an old photograph\n인물 이름: Kwesi, Kwame 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 숫자·목록·규칙을 말하며 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 120~180단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 C 에 둔다. correct_letter 는 C 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 C 로 정한 뒤 나머지 선택지를 채운다.\n레시피(inferences_lit_character_motivation_hard_v4, 난이도 hard): 인물이 한 행동의 이유를 묻는다. 인물이 대사나 서술로 댄 '표면 명분'을 한 번 지문에 넣는다(예: 좋은 좌석 때문에, 바빠서). 진짜 동기는 문장으로 쓰지 않고 (1) 앞부분의 습관·반복 행동 (2) 중간의 시점·순서 단서(날짜, 누가 먼저 움직이는지, 무엇을 숨기는지) (3) 끝의 사물·동작으로만 암시한다. 앞 단서는 처음 읽으면 표면 명분을 지지하고, 중간 단서가 그 의미를 바꾸게 설계한다. 정답은 표면 명분을 부정하지 않으면서 두 단서를 함께 설명하는 동기다. 오답 3개는 모두 지문의 명시 문장과 양립해야 하며, 틀린 이유는 '행동의 순서·시점을 설명하지 못한다'는 한 가지여야 한다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 2 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 인물이 지문에서 댄 표면 명분을 그대로 동기로 삼은 선택지. 지문과 충돌하지 않지만 시점·순서 단서를 설명하지 못한다 (2) 앞 단서(습관)만 또는 중간 단서(시점)만 설명하는 동기. 나머지 단서를 '설명하지 못할 뿐' 부정하지는 않는다 (3) 이 인물이 가질 법한 다른 감정(미안함·자존심·두려움 중 정답과 다른 것)에서 나온 동기. 같은 행동을 설명하지만 행동의 순서와 맞지 않는다\n금지: 표면 명분을 지문이 직접 반박하는 문장을 넣어 표면 오답을 쉽게 지운다 / 정답이 지문 마지막 문장(또는 밑줄 문장 직후 문장)을 거의 그대로 바꿔 말한 문장이다 / 오답이 지문과 정반대 정서·사실이거나 지문의 명시 문장과 충돌해 지문 사실만 확인해도 소거된다(오답은 지문의 모든 명시 문장과 양립해야 한다) / 오답에 always·never·only·completely·entirely 같은 절대어나 -ly 극단 수식어를 쓴다(과잉 일반화 오답은 온건한 어휘로 범위만 넓힌다) / 정답만 길거나 구체적이거나 'yet·despite·but' 같은 양가 접속 구조를 갖는다(네 선택지의 문장틀·길이(±2단어)·접속 구조를 맞춘다) / 정답을 판정하는 근거가 한 문장·한 곳에 몰려 있다 / 정답의 핵심 어휘가 지문에 그대로 나온다(지문 어휘 차용은 오답 쪽에만 둔다)\n지문 길이: 120~180단어.\n지문 설계: 근거 위치 — 앞: 반복 습관 또는 일상 행동 / 중간: 날짜·순서·숨김 같은 시점 단서 / 끝: 사물이나 동작(감정어 없음). 직접 서술 금지 — 동기를 나타내는 감정어·동사(afraid, ashamed, wanted to protect 등)와 'because' 절 금지.\n정답 설계: 추론 2단계 — 앞 단서(습관)와 중간 단서(시점)를 결합해 표면 명분을 기각하고 동기를 세움. 오답 3개는 지문의 모든 명시 문장과 양립해야 하고(지문 사실과 충돌하는 오답 금지), 선택지 4개는 같은 문장틀·비슷한 길이로 쓴다.\n제출 전 자기 점검(하나라도 아니면 고쳐서 제출): (1) 표면 명분만 믿으면 끝 장면(시점·동작)이 설명되지 않는가 (2) 동기를 가르는 단서 두 개를 서로 떨어뜨려 놓았는가 (3) 오답 3개 각각을 지문의 모든 명시 문장과 대조해 충돌하는 문장이 하나도 없는가(충돌하면 고친다) (4) 정답을 고르기 전 학생이 처음 떠올릴 해석(표면 해석)이 오답 중 하나로 들어 있는가 (5) 정답만 남기는 결정 단서가 지문의 한 곳(행동·시점·누락)에 있는가 — 없으면 복수 정답, 있어도 한 문장에 직설이면 쉬움 (6) 지문 마지막 문장을 지우고 풀어도 정답이 유지되는가",
+   "previous": {
+    "passage": "Three rules governed the wall between Kwesi's beekeeper's yard and Kwame's house: no climbing, no smoke on windy days, and no talk of the photograph. Kwame kept the picture in a frame on his side, a print of two boys on one bicycle in front of the old hives, and he hung it in his window every morning facing the yard. Kwesi said he had moved his hives to the far corner years ago because the bees disliked the afternoon heat by the wall. For a long time he worked that corner with his back to the window. In the dry season of 1987, Kwame's son told the street that his father's eyes were failing, and that same week Kwesi began moving the hives, one each evening after dark, toward the wall again. He said nothing to Kwame about it. By March the last hive stood under the window, humming, and each morning Kwesi set a jar of the first honey on top of the wall, its label turned toward the house.",
+    "question": "Based on the passage, why does Kwesi most likely move the hives back toward the wall?",
+    "options": [
+     "To give the bees a better place to forage now that the dry season has arrived.",
+     "To reclaim the part of the yard he had given up during their years of distance.",
+     "To bring the scene in the picture within reach of a neighbor losing his sight.",
+     "To apologize for the years he spent working with his back to the window."
+    ],
+    "correct_letter": "C",
+    "explanation": "Kwesi는 벌이 벽 근처의 더위를 싫어한다는 표면 명분으로 벌통을 멀리 두었고, 오랫동안 창문을 등지고 일했다. 그런데 Kwame의 눈이 나빠진다는 소식이 퍼진 바로 그 주에, 그는 말없이 밤마다 벌통을 하나씩 벽 쪽으로 옮기기 시작한다는 시점 단서가 동기를 바꾼다. 끝에서 사진 속 벌통 장면처럼 창문 아래 벌통이 웅웅거리고 꿀병의 라벨을 집 쪽으로 돌려 두는 동작을 합치면, 시력을 잃어 가는 이웃이 사진 속 장면을 소리와 맛으로 다시 느끼게 하려는 C가 정답이다. A는 표면 명분, B는 앞의 습관만, D는 미안함이라는 다른 감정으로 소식이 퍼진 시점을 설명하지 못한다.",
+    "judgeNotes": [
+     "Fable 추정 난이도 medium",
+     "difficulty_too_easy"
+    ],
+    "reason": "too_easy"
+   }
+  },
+  {
+   "candidateId": "lit40-hard-03-034",
+   "route": "ai_passage",
+   "skill": "inferences",
+   "difficulty": "hard",
+   "questionType": "tone_or_mood",
+   "genre": "novel_excerpt",
+   "targetLetter": "B",
+   "words": {
+    "min": 110,
+    "max": 170
+   },
+   "recipeId": "inferences_lit_tone_or_mood_hard_v4",
+   "spec": {
+    "candidateId": "lit40-hard-03-034",
+    "batchId": "lit40-hard-03",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "hard",
+    "questionType": "tone_or_mood",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 33,
+     "genre": "novel_excerpt",
+     "pov": "first",
+     "styleEra": "19c",
+     "names": [
+      "Selin",
+      "Despina"
+     ],
+     "nameCultures": [
+      "greek_balkan_turkish",
+      "greek_balkan_turkish"
+     ],
+     "locale": "Thessaloniki",
+     "setting": "a bakery before opening",
+     "relationship": "two musicians in a failing duo",
+     "conflict": "about the cost of a scholarship or opportunity",
+     "openingStyle": "장소 이름으로 시작",
+     "topicSeed": "a bakery before opening in Thessaloniki; two musicians in a failing duo about the cost of a scholarship or opportunity"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 110,
+     "max": 170
+    },
+    "recipeId": "inferences_lit_tone_or_mood_hard_v4"
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a bakery before opening in Thessaloniki; two musicians in a failing duo about the cost of a scholarship or opportunity\n인물 이름: Selin, Despina 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 장소 이름으로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 110~170단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 B 에 둔다. correct_letter 는 B 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 B 로 정한 뒤 나머지 선택지를 채운다.\n레시피(inferences_lit_tone_or_mood_hard_v4, 난이도 hard): 지문 전체의 어조·분위기를 묻는다. 정답 어조는 한 단어 감정이 아니라 겉 어조와 속 어조의 두 층(예: wry but tender, courteous yet wary)이다. 지문에는 감정 형용사·감정 동사를 쓰지 않고 어휘 선택(건조한 사실 나열), 문장 리듬(짧게 끊기다 한 번 길어짐), 세부 디테일의 선택(무엇을 보고 무엇을 지나치는가)으로만 어조를 만든다. 겉 어조 단서는 앞부분, 속 어조 단서는 뒤쪽·결말 동작에 둔다. 네 선택지는 모두 '두 층' 문장틀('형용사 and 형용사 toward X')로 통일하고, 오답은 (a) 겉 층만 (b) 속 층이 있으나 그 원인을 뒤집은 것 (c) 같은 감정군에서 범위만 넓힌 것으로 만든다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 2 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 겉 어조 층만 포착한 선택지(예: 유쾌하다). 속 층 단서를 설명하지 못할 뿐 지문과 충돌하지 않는다 (2) 속 어조는 맞게 잡았으나 그 원인 방향을 뒤집은 선택지(슬픔 때문이 아니라 안도 때문인 침묵 등). 지문 사실과 양립한다 (3) 정답과 같은 감정군이지만 대상·범위를 넓히거나 줄인 선택지. 절대어 없이 온건한 어휘로 쓴다\n금지: 선택지를 감정 한 단어씩으로 써서 분위기만 알아도 소거되게 한다 / 정답이 지문 마지막 문장(또는 밑줄 문장 직후 문장)을 거의 그대로 바꿔 말한 문장이다 / 오답이 지문과 정반대 정서·사실이거나 지문의 명시 문장과 충돌해 지문 사실만 확인해도 소거된다(오답은 지문의 모든 명시 문장과 양립해야 한다) / 오답에 always·never·only·completely·entirely 같은 절대어나 -ly 극단 수식어를 쓴다(과잉 일반화 오답은 온건한 어휘로 범위만 넓힌다) / 정답만 길거나 구체적이거나 'yet·despite·but' 같은 양가 접속 구조를 갖는다(네 선택지의 문장틀·길이(±2단어)·접속 구조를 맞춘다) / 정답을 판정하는 근거가 한 문장·한 곳에 몰려 있다 / 정답의 핵심 어휘가 지문에 그대로 나온다(지문 어휘 차용은 오답 쪽에만 둔다)\n지문 길이: 110~170단어.\n지문 설계: 근거 위치 — 앞: 겉 어조(건조한 사실 나열·농담조 문장 리듬) / 중간: 어조와 어긋나는 디테일(지나치는 사물, 멈칫하는 동작) / 끝: 속 어조를 보여 주는 동작(감정어 없음). 직접 서술 금지 — 감정 형용사·감정 동사·'felt'·'seemed to'와 어조를 설명하는 비유 금지.\n정답 설계: 추론 2단계 — 겉 어조 단서와 속 어조 단서를 겹쳐 두 층 어조를 구성하고, 그 원인 방향을 판정. 오답 3개는 지문의 모든 명시 문장과 양립해야 하고(지문 사실과 충돌하는 오답 금지), 선택지 4개는 같은 문장틀·비슷한 길이로 쓴다.\n제출 전 자기 점검(하나라도 아니면 고쳐서 제출): (1) 선택지 4개를 어조 단어만 가리면 형식으로 정답이 구분되지 않는가 (2) 겉 층만 고른 학생이 어느 선택지에서 걸리는가 (3) 오답 3개 각각을 지문의 모든 명시 문장과 대조해 충돌하는 문장이 하나도 없는가(충돌하면 고친다) (4) 정답을 고르기 전 학생이 처음 떠올릴 해석(표면 해석)이 오답 중 하나로 들어 있는가 (5) 정답만 남기는 결정 단서가 지문의 한 곳(행동·시점·누락)에 있는가 — 없으면 복수 정답, 있어도 한 문장에 직설이면 쉬움 (6) 지문 마지막 문장을 지우고 풀어도 정답이 유지되는가",
+   "previous": {
+    "passage": "Thessaloniki was still dark when Despina and I let ourselves into her uncle's bakery to practice, as we had every morning that winter, among the cooling racks. Flour on the music stand. Flour on the bow. Her uncle charged us nothing but the sweeping. The letter from the conservatory in Vienna lay folded inside her violin case, offering one place, for one player, beginning in March. We played the second movement and stopped at the bar where we always stopped. She tuned her A string. I tuned mine. Neither of us said Vienna. Outside, the first cart came for the bread. When we finished, I swept as usual, from the ovens to the door, and then I went back and swept the corner beneath her chair a second time, where there was nothing left to sweep, and set her case by the door with the clasp already fastened.",
+    "question": "Which choice best describes the overall tone of the passage?",
+    "options": [
+     "Matter-of-fact and orderly on the surface, calm and content toward the routine",
+     "Matter-of-fact and orderly on the surface, wistful and resigned toward the parting",
+     "Terse and guarded on the surface, bitter and envious toward the scholarship",
+     "Terse and guarded on the surface, nostalgic and fond toward the bakery"
+    ],
+    "correct_letter": "B",
+    "explanation": "지문 앞부분은 '악보대 위의 밀가루' 같은 짧은 조각 문장과 일과의 나열로 담담하고 정돈된 겉 어조를 만든다. 중간에 두 사람은 늘 멈추던 마디에서 멈추고 누구도 빈이라는 말을 하지 않으며, 끝에서 화자는 쓸 것이 없는 자리를 한 번 더 쓸고 상대의 악기 가방을 잠가 문 옆에 둔다. 따라서 겉은 담담하지만 속은 이별을 받아들이는 아쉬움이 깔린 B가 정답이다. A는 겉 층만 읽었고, C는 가방을 챙겨 주는 동작과 맞지 않게 원인을 질투로 뒤집으며, D는 감정의 대상을 빵집으로 옮겨 범위를 바꾼다.",
+    "judgeNotes": [
+     "Fable 추정 난이도 medium",
+     "difficulty_too_easy"
+    ],
+    "reason": "too_easy"
+   }
+  },
+  {
+   "candidateId": "lit40-hard-03-035",
+   "route": "ai_passage",
+   "skill": "inferences",
+   "difficulty": "hard",
+   "questionType": "tone_or_mood",
+   "genre": "personal_essay",
+   "targetLetter": "C",
+   "words": {
+    "min": 110,
+    "max": 170
+   },
+   "recipeId": "inferences_lit_tone_or_mood_hard_v4",
+   "spec": {
+    "candidateId": "lit40-hard-03-035",
+    "batchId": "lit40-hard-03",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "hard",
+    "questionType": "tone_or_mood",
+    "genre": "personal_essay",
+    "seed": {
+     "index": 34,
+     "genre": "personal_essay",
+     "pov": "mixed_or_none",
+     "styleEra": "early_20c",
+     "names": [
+      "Kofi",
+      "Yaa"
+     ],
+     "nameCultures": [
+      "west_african",
+      "west_african"
+     ],
+     "locale": "Lagos",
+     "setting": "a noodle stall",
+     "relationship": "an old teacher and a former pupil",
+     "conflict": "over a repair that could never really fix it",
+     "openingStyle": "대화 한 줄로 시작",
+     "topicSeed": "a noodle stall in Lagos; an old teacher and a former pupil over a repair that could never really fix it"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 110,
+     "max": 170
+    },
+    "recipeId": "inferences_lit_tone_or_mood_hard_v4"
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a noodle stall in Lagos; an old teacher and a former pupil over a repair that could never really fix it\n인물 이름: Kofi, Yaa 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 대화 한 줄로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 110~170단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 C 에 둔다. correct_letter 는 C 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 C 로 정한 뒤 나머지 선택지를 채운다.\n레시피(inferences_lit_tone_or_mood_hard_v4, 난이도 hard): 지문 전체의 어조·분위기를 묻는다. 정답 어조는 한 단어 감정이 아니라 겉 어조와 속 어조의 두 층(예: wry but tender, courteous yet wary)이다. 지문에는 감정 형용사·감정 동사를 쓰지 않고 어휘 선택(건조한 사실 나열), 문장 리듬(짧게 끊기다 한 번 길어짐), 세부 디테일의 선택(무엇을 보고 무엇을 지나치는가)으로만 어조를 만든다. 겉 어조 단서는 앞부분, 속 어조 단서는 뒤쪽·결말 동작에 둔다. 네 선택지는 모두 '두 층' 문장틀('형용사 and 형용사 toward X')로 통일하고, 오답은 (a) 겉 층만 (b) 속 층이 있으나 그 원인을 뒤집은 것 (c) 같은 감정군에서 범위만 넓힌 것으로 만든다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 2 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 겉 어조 층만 포착한 선택지(예: 유쾌하다). 속 층 단서를 설명하지 못할 뿐 지문과 충돌하지 않는다 (2) 속 어조는 맞게 잡았으나 그 원인 방향을 뒤집은 선택지(슬픔 때문이 아니라 안도 때문인 침묵 등). 지문 사실과 양립한다 (3) 정답과 같은 감정군이지만 대상·범위를 넓히거나 줄인 선택지. 절대어 없이 온건한 어휘로 쓴다\n금지: 선택지를 감정 한 단어씩으로 써서 분위기만 알아도 소거되게 한다 / 정답이 지문 마지막 문장(또는 밑줄 문장 직후 문장)을 거의 그대로 바꿔 말한 문장이다 / 오답이 지문과 정반대 정서·사실이거나 지문의 명시 문장과 충돌해 지문 사실만 확인해도 소거된다(오답은 지문의 모든 명시 문장과 양립해야 한다) / 오답에 always·never·only·completely·entirely 같은 절대어나 -ly 극단 수식어를 쓴다(과잉 일반화 오답은 온건한 어휘로 범위만 넓힌다) / 정답만 길거나 구체적이거나 'yet·despite·but' 같은 양가 접속 구조를 갖는다(네 선택지의 문장틀·길이(±2단어)·접속 구조를 맞춘다) / 정답을 판정하는 근거가 한 문장·한 곳에 몰려 있다 / 정답의 핵심 어휘가 지문에 그대로 나온다(지문 어휘 차용은 오답 쪽에만 둔다)\n지문 길이: 110~170단어.\n지문 설계: 근거 위치 — 앞: 겉 어조(건조한 사실 나열·농담조 문장 리듬) / 중간: 어조와 어긋나는 디테일(지나치는 사물, 멈칫하는 동작) / 끝: 속 어조를 보여 주는 동작(감정어 없음). 직접 서술 금지 — 감정 형용사·감정 동사·'felt'·'seemed to'와 어조를 설명하는 비유 금지.\n정답 설계: 추론 2단계 — 겉 어조 단서와 속 어조 단서를 겹쳐 두 층 어조를 구성하고, 그 원인 방향을 판정. 오답 3개는 지문의 모든 명시 문장과 양립해야 하고(지문 사실과 충돌하는 오답 금지), 선택지 4개는 같은 문장틀·비슷한 길이로 쓴다.\n제출 전 자기 점검(하나라도 아니면 고쳐서 제출): (1) 선택지 4개를 어조 단어만 가리면 형식으로 정답이 구분되지 않는가 (2) 겉 층만 고른 학생이 어느 선택지에서 걸리는가 (3) 오답 3개 각각을 지문의 모든 명시 문장과 대조해 충돌하는 문장이 하나도 없는가(충돌하면 고친다) (4) 정답을 고르기 전 학생이 처음 떠올릴 해석(표면 해석)이 오답 중 하나로 들어 있는가 (5) 정답만 남기는 결정 단서가 지문의 한 곳(행동·시점·누락)에 있는가 — 없으면 복수 정답, 있어도 한 문장에 직설이면 쉬움 (6) 지문 마지막 문장을 지우고 풀어도 정답이 유지되는가",
+   "previous": {
+    "passage": "\"Hold the lamp lower,\" Kofi said, and Yaa did. She had come to his noodle stall near the Marina with his old school bell in a paper bag, the brass one he had rung for thirty years before the mission school closed, its clapper snapped off at the hinge. She had found a smith in Ebute Metta who would weld it for two shillings. Kofi turned the bell over in his hands between bowls. He tapped the weld with a chopstick. It gave a flat sound, a clack rather than a ring, and a customer at the bench laughed. Kofi laughed too, and ladled the man more broth. He told Yaa the smith had done good work, that the price was fair, and asked after her mother. When she rose to go, he wiped the bell with his apron, front and back, and set it on the shelf above the pot, mouth down, where the steam could reach it every morning.",
+    "question": "Which choice best describes the overall tone of the passage?",
+    "options": [
+     "Light and good-humored in its telling, cheerful and amused toward the repair",
+     "Light and good-humored in its telling, embarrassed and uneasy toward the laughter",
+     "Light and good-humored in its telling, tender and wistful toward what cannot return",
+     "Gentle and patient in its telling, grateful and proud toward the smith's work"
+    ],
+    "correct_letter": "C",
+    "explanation": "지문 앞부분은 손님과 함께 웃고 국물을 더 퍼 주는 장면처럼 가볍고 유쾌한 겉 어조로 진행된다. 그러나 중간에 종이 울리지 않고 '딱' 하는 둔한 소리를 내는 디테일이 놓이고, 끝에서 Kofi는 종을 앞치마로 닦아 입을 아래로 향하게 선반에 올려 둔다. 따라서 겉은 유쾌하지만 속은 되돌릴 수 없는 시절에 대한 다정한 아쉬움이 깔린 C가 정답이다. A는 겉 층만 읽었고, B는 웃음에 대한 당혹으로 속 어조의 원인을 바꾸며, D는 감정의 대상을 대장장이의 솜씨로 옮겨 범위를 좁힌다.",
+    "judgeNotes": [
+     "Fable 추정 난이도 medium",
+     "difficulty_too_easy"
+    ],
+    "reason": "too_easy"
+   }
+  },
+  {
+   "candidateId": "lit40-hard-03-038",
+   "route": "ai_passage",
+   "skill": "inferences",
+   "difficulty": "hard",
+   "questionType": "relationship_between_characters",
+   "genre": "personal_essay",
+   "targetLetter": "B",
+   "words": {
+    "min": 120,
+    "max": 180
+   },
+   "recipeId": "inferences_lit_relationship_between_characters_hard_v4",
+   "spec": {
+    "candidateId": "lit40-hard-03-038",
+    "batchId": "lit40-hard-03",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "hard",
+    "questionType": "relationship_between_characters",
+    "genre": "personal_essay",
+    "seed": {
+     "index": 37,
+     "genre": "personal_essay",
+     "pov": "third_limited",
+     "styleEra": "19c",
+     "names": [
+      "Katharina",
+      "Gyeongho"
+     ],
+     "nameCultures": [
+      "german_austrian",
+      "korean"
+     ],
+     "locale": "Hamburg",
+     "setting": "a bus depot",
+     "relationship": "a boy and the old man who sells him fish",
+     "conflict": "over a secret discovered in a drawer",
+     "openingStyle": "숫자·목록·규칙을 말하며 시작",
+     "topicSeed": "a bus depot in Hamburg; a boy and the old man who sells him fish over a secret discovered in a drawer"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 120,
+     "max": 180
+    },
+    "recipeId": "inferences_lit_relationship_between_characters_hard_v4"
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a bus depot in Hamburg; a boy and the old man who sells him fish over a secret discovered in a drawer\n인물 이름: Katharina, Gyeongho 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 숫자·목록·규칙을 말하며 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 120~180단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 B 에 둔다. correct_letter 는 B 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 B 로 정한 뒤 나머지 선택지를 채운다.\n레시피(inferences_lit_relationship_between_characters_hard_v4, 난이도 hard): 두 인물의 관계를 묻는다. 관계 이름(친구·부녀·라이벌)을 지문에 쓰지 않고 호칭·물건을 주고받는 방향·누가 누구를 기다리는가로만 보여 준다. 겉 관계(공식 호칭·직함·예의)와 실제 관계(오랜 빚·보호·미결 갈등)가 다르게 읽히도록 두 층을 만든다. 겉 관계 단서는 앞부분 호칭, 실제 관계 단서는 뒤쪽 행동의 방향(누가 먼저 양보하는가, 누가 조용히 비용을 치르는가)에 둔다. 정답은 실제 관계와 그 방향을 함께 말한다. 오답 3개는 (a) 호칭이 말하는 공식 관계 (b) 한 장면만 반영한 관계 (c) 의존·보호의 방향을 뒤집은 관계이며 모두 지문 사실과 양립해야 한다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 2 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 지문의 호칭·직함이 가리키는 공식 관계. 지문과 충돌하지 않지만 행동의 방향을 설명하지 못한다 (2) 한 장면(앞 또는 뒤)의 행동만으로 세운 관계. 다른 장면은 '설명하지 못할 뿐' 모순되지 않는다 (3) 누가 누구를 돌보고 의지하는지 방향을 뒤집은 관계. 지문의 행동이 양쪽 방향으로 읽힐 여지는 있되 결정 단서(누가 먼저 비용을 치르는가) 한 곳이 방향을 정한다\n금지: 끝 장면에서 인물이 관계를 한 문장으로 선언하거나 서로를 이름 붙여 부른다 / 정답이 지문 마지막 문장(또는 밑줄 문장 직후 문장)을 거의 그대로 바꿔 말한 문장이다 / 오답이 지문과 정반대 정서·사실이거나 지문의 명시 문장과 충돌해 지문 사실만 확인해도 소거된다(오답은 지문의 모든 명시 문장과 양립해야 한다) / 오답에 always·never·only·completely·entirely 같은 절대어나 -ly 극단 수식어를 쓴다(과잉 일반화 오답은 온건한 어휘로 범위만 넓힌다) / 정답만 길거나 구체적이거나 'yet·despite·but' 같은 양가 접속 구조를 갖는다(네 선택지의 문장틀·길이(±2단어)·접속 구조를 맞춘다) / 정답을 판정하는 근거가 한 문장·한 곳에 몰려 있다 / 정답의 핵심 어휘가 지문에 그대로 나온다(지문 어휘 차용은 오답 쪽에만 둔다)\n지문 길이: 120~180단어.\n지문 설계: 근거 위치 — 앞: 공식 호칭·거리 두는 예의 / 중간: 물건·시간·돈이 오가는 방향 / 끝: 한 인물의 조용한 양보 동작. 직접 서술 금지 — 관계 명사, '사랑·미움·고마움' 같은 감정어, 한 인물이 상대를 평가하는 대사 금지.\n정답 설계: 추론 2단계 — 호칭이 주는 표면 관계를 행동의 방향 단서로 수정. 오답 3개는 지문의 모든 명시 문장과 양립해야 하고(지문 사실과 충돌하는 오답 금지), 선택지 4개는 같은 문장틀·비슷한 길이로 쓴다.\n제출 전 자기 점검(하나라도 아니면 고쳐서 제출): (1) 호칭만 보면 어느 선택지가 고르게 되는가(그것이 오답인가) (2) 관계의 방향을 정하는 결정 단서가 한 곳에 분명히 있는가 (3) 오답 3개 각각을 지문의 모든 명시 문장과 대조해 충돌하는 문장이 하나도 없는가(충돌하면 고친다) (4) 정답을 고르기 전 학생이 처음 떠올릴 해석(표면 해석)이 오답 중 하나로 들어 있는가 (5) 정답만 남기는 결정 단서가 지문의 한 곳(행동·시점·누락)에 있는가 — 없으면 복수 정답, 있어도 한 문장에 직설이면 쉬움 (6) 지문 마지막 문장을 지우고 풀어도 정답이 유지되는가",
+   "previous": {
+    "passage": "Two herrings on Mondays, a smoked eel on Thursdays, and no credit: those were the terms Herr Gyeongho set when Katharina first came to his stall at the edge of the omnibus depot in Hamburg. She called him Herr Gyeongho, and he called her Fraulein, and they bargained each week over a pfennig as if the stall depended on it. In the winter her mother's wages from the depot laundry stopped. Katharina still came on Mondays and Thursdays and paid what she could, and he wrapped the fish without counting the coins. One afternoon, sent to fetch paper from under his counter, she opened the wrong drawer and found a ledger in her own family's name, page after page of small debts, every line crossed through in the same blue pencil. She closed the drawer. The next Monday she brought him a pfennig more than the price and set it on the scale before he could speak; he looked at it a long moment and let it lie there.",
+    "question": "Based on the passage, which choice best describes the relationship between Katharina and Gyeongho?",
+    "options": [
+     "Behind their formal bargaining lies a plain trade between a merchant and a regular buyer.",
+     "Behind their formal bargaining lies a protective generosity he extends to her family unseen.",
+     "Behind their formal bargaining lies a shared pleasure in haggling that both look forward to.",
+     "Behind their formal bargaining lies his reliance on her custom to keep the stall afloat."
+    ],
+    "correct_letter": "B",
+    "explanation": "앞부분의 'Herr', 'Fraulein'이라는 호칭과 외상 불가 규칙, 매주의 흥정은 공식적인 상거래 관계를 보여 준다. 그러나 중간에 그는 돈을 세지 않고 생선을 싸 주고, 서랍 속 장부에는 그녀 가족의 빚이 모두 같은 연필로 지워져 있어 비용을 조용히 떠안은 쪽이 그임이 드러난다. 끝에서 그는 그녀가 더 얹은 동전을 말없이 받아 들여 그녀의 체면을 지켜 준다. 따라서 그가 그녀 가족을 보이지 않게 돕는 관계를 말한 B가 정답이다. A는 호칭과 규칙만, C는 흥정 장면만 반영했고, D는 의존의 방향을 뒤집는다.",
+    "judgeNotes": [
+     "Fable 추정 난이도 medium",
+     "difficulty_too_easy"
+    ],
+    "reason": "too_easy"
+   }
+  },
+  {
+   "candidateId": "lit40-hard-03-042",
+   "route": "ai_passage",
+   "skill": "words_in_context",
+   "difficulty": "hard",
+   "questionType": "figurative_language",
+   "genre": "short_story",
+   "targetLetter": "A",
+   "words": {
+    "min": 110,
+    "max": 170
+   },
+   "recipeId": "words_in_context_lit_figurative_language_hard_v4",
+   "spec": {
+    "candidateId": "lit40-hard-03-042",
+    "batchId": "lit40-hard-03",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "hard",
+    "questionType": "figurative_language",
+    "genre": "short_story",
+    "seed": {
+     "index": 41,
+     "genre": "short_story",
+     "pov": "mixed_or_none",
+     "styleEra": "late_20c",
+     "names": [
+      "Irena",
+      "Tatiana"
+     ],
+     "nameCultures": [
+      "slavic_baltic",
+      "slavic_baltic"
+     ],
+     "locale": "Gdansk",
+     "setting": "a rented farmhouse",
+     "relationship": "a conductor and the youngest violinist",
+     "conflict": "when old loyalties collide with new ones",
+     "openingStyle": "인물의 이름으로 시작",
+     "topicSeed": "a rented farmhouse in Gdansk; a conductor and the youngest violinist when old loyalties collide with new ones"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 110,
+     "max": 170
+    },
+    "recipeId": "words_in_context_lit_figurative_language_hard_v4"
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a rented farmhouse in Gdansk; a conductor and the youngest violinist when old loyalties collide with new ones\n인물 이름: Irena, Tatiana 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 인물의 이름으로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 110~170단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 A 에 둔다. correct_letter 는 A 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 A 로 정한 뒤 나머지 선택지를 채운다.\n레시피(words_in_context_lit_figurative_language_hard_v4, 난이도 hard): 지문에 있는 비유 구절이 문맥에서 전하는 의미를 묻는다. 관용 표현·상투적 은유는 쓰지 않고 이 지문 안에서만 의미가 정해지는 신선한 비유를 쓴다. 비유가 가리키는 대상의 의미를 정하는 단서는 비유 앞의 두 곳과 비유 뒤의 한 곳에 나눠 두며, 비유 바로 다음 문장이 해석을 알려 주면 안 된다. 오답 3개는 모두 비유로서 합리적인 해석이어야 하며 문자 해석은 많아야 하나다. 오답은 비유가 가진 서로 다른 속성(무게·한계·소리·온도 등)을 하나씩 골라 해석한 것이고, 정답은 두 단서를 만족하는 속성이다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 2 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 비유의 한 속성(예: 무게)에서 나온 해석. 앞 단서 한 곳만 설명한다 (2) 지문 표현을 빌려 다른 속성(예: 한계)에서 나온 해석. 뒤 단서를 설명하지 못한다 (3) 문자 해석이거나 정답의 의미 범위를 한 단계 넓힌 해석. 절대어 없이 온건하게 쓴다\n금지: 비유 직후 문장이 비유를 풀어 쓴다 / 관용적으로 의미가 알려진 비유(stone in the chest 등)를 쓴다 / 정답이 지문 마지막 문장(또는 밑줄 문장 직후 문장)을 거의 그대로 바꿔 말한 문장이다 / 오답이 지문과 정반대 정서·사실이거나 지문의 명시 문장과 충돌해 지문 사실만 확인해도 소거된다(오답은 지문의 모든 명시 문장과 양립해야 한다) / 오답에 always·never·only·completely·entirely 같은 절대어나 -ly 극단 수식어를 쓴다(과잉 일반화 오답은 온건한 어휘로 범위만 넓힌다) / 정답만 길거나 구체적이거나 'yet·despite·but' 같은 양가 접속 구조를 갖는다(네 선택지의 문장틀·길이(±2단어)·접속 구조를 맞춘다) / 정답을 판정하는 근거가 한 문장·한 곳에 몰려 있다 / 정답의 핵심 어휘가 지문에 그대로 나온다(지문 어휘 차용은 오답 쪽에만 둔다)\n지문 길이: 110~170단어.\n지문 설계: 근거 위치 — 비유 앞 1: 대상이 처한 상황 / 비유 앞 2: 인물의 반복 행동 / 비유 뒤: 해석을 한 번 뒤집는 사소한 디테일(해석을 주지 않음). 직접 서술 금지 — 비유의 뜻을 풀어 주는 문장, 동격·'that is' 정의 금지.\n정답 설계: 추론 2단계 — 비유의 후보 속성 중 앞 단서와 뒤 단서를 동시에 만족하는 속성을 선택. 오답 3개는 지문의 모든 명시 문장과 양립해야 하고(지문 사실과 충돌하는 오답 금지), 선택지 4개는 같은 문장틀·비슷한 길이로 쓴다.\n제출 전 자기 점검(하나라도 아니면 고쳐서 제출): (1) 비유를 문맥 없이 읽었을 때 가장 먼저 떠오르는 해석이 오답인가 (2) 세 오답 사이에 같은 속성이 중복되지 않는가 (3) 오답 3개 각각을 지문의 모든 명시 문장과 대조해 충돌하는 문장이 하나도 없는가(충돌하면 고친다) (4) 정답을 고르기 전 학생이 처음 떠올릴 해석(표면 해석)이 오답 중 하나로 들어 있는가 (5) 정답만 남기는 결정 단서가 지문의 한 곳(행동·시점·누락)에 있는가 — 없으면 복수 정답, 있어도 한 문장에 직설이면 쉬움 (6) 지문 마지막 문장을 지우고 풀어도 정답이 유지되는가",
+   "previous": {
+    "passage": "Irena had rented the farmhouse outside Gdansk because its old barn carried sound well and because the ensemble could not afford the city hall that season. Tatiana, the youngest violinist, had joined at fifteen; she was nineteen now, and a quartet in Berlin had written to her twice. All week she arrived early, unpacked her violin, and left the case open on the chair beside her, its velvet lining turned toward the door. Irena watched her play the slow movement with her shoulders lifted, a swallow perched on a wire that hums. On Friday the letter from Berlin lay on Tatiana's stand, still sealed, beneath the pencil she used to copy Irena's bowings into her part. During the break Irena said nothing about it. She only moved the chair with the open case a little closer to the stove, so that the lining would be warm whenever Tatiana chose to close it.",
+    "question": "As used in the text, the phrase “a swallow perched on a wire that hums” most nearly suggests that Tatiana is",
+    "options": [
+     "poised to depart while still held by present ties",
+     "light and fragile in a way that weakens her playing",
+     "vibrating with a nervousness that unsettles the others",
+     "restless in a way common to young players generally"
+    ],
+    "correct_letter": "A",
+    "explanation": "Tatiana에게는 베를린 4중주단의 편지가 두 번 왔고, 그녀는 매일 바이올린 케이스를 문 쪽으로 열어 둔다는 두 단서가 비유 앞에 있다. 비유 뒤에는 편지가 Irena의 보잉을 옮겨 적는 연필 아래 봉한 채 놓여 있다는 사소한 디테일이 나와, 떠날 준비만이 아니라 지금의 악단에 대한 애착도 함께 드러낸다. 따라서 '울리는 전선 위의 제비'는 떠날 채비를 하면서도 현재의 유대에 붙들린 상태를 뜻하므로 A가 정답이다. B는 가벼움, C는 소리·진동 속성만 골랐고, D는 의미를 젊은 연주자 일반으로 넓혔다.",
+    "judgeNotes": [
+     "Fable 추정 난이도 medium",
+     "difficulty_too_easy"
+    ],
+    "reason": "too_easy"
+   }
+  },
+  {
+   "candidateId": "lit40-hard-03-043",
+   "route": "ai_passage",
+   "skill": "words_in_context",
+   "difficulty": "hard",
+   "questionType": "figurative_language",
+   "genre": "novel_excerpt",
+   "targetLetter": "B",
+   "words": {
+    "min": 110,
+    "max": 170
+   },
+   "recipeId": "words_in_context_lit_figurative_language_hard_v4",
+   "spec": {
+    "candidateId": "lit40-hard-03-043",
+    "batchId": "lit40-hard-03",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "hard",
+    "questionType": "figurative_language",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 42,
+     "genre": "novel_excerpt",
+     "pov": "first",
+     "styleEra": "contemporary",
+     "names": [
+      "Nikhil",
+      "Ananya"
+     ],
+     "nameCultures": [
+      "indian_subcontinent",
+      "indian_subcontinent"
+     ],
+     "locale": "Kerala",
+     "setting": "a language school classroom",
+     "relationship": "cousins reunited at a funeral",
+     "conflict": "after a public embarrassment",
+     "openingStyle": "대명사 I 또는 We 로 시작",
+     "topicSeed": "a language school classroom in Kerala; cousins reunited at a funeral after a public embarrassment"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 110,
+     "max": 170
+    },
+    "recipeId": "words_in_context_lit_figurative_language_hard_v4"
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a language school classroom in Kerala; cousins reunited at a funeral after a public embarrassment\n인물 이름: Nikhil, Ananya 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 대명사 I 또는 We 로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 110~170단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 B 에 둔다. correct_letter 는 B 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 B 로 정한 뒤 나머지 선택지를 채운다.\n레시피(words_in_context_lit_figurative_language_hard_v4, 난이도 hard): 지문에 있는 비유 구절이 문맥에서 전하는 의미를 묻는다. 관용 표현·상투적 은유는 쓰지 않고 이 지문 안에서만 의미가 정해지는 신선한 비유를 쓴다. 비유가 가리키는 대상의 의미를 정하는 단서는 비유 앞의 두 곳과 비유 뒤의 한 곳에 나눠 두며, 비유 바로 다음 문장이 해석을 알려 주면 안 된다. 오답 3개는 모두 비유로서 합리적인 해석이어야 하며 문자 해석은 많아야 하나다. 오답은 비유가 가진 서로 다른 속성(무게·한계·소리·온도 등)을 하나씩 골라 해석한 것이고, 정답은 두 단서를 만족하는 속성이다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 2 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 비유의 한 속성(예: 무게)에서 나온 해석. 앞 단서 한 곳만 설명한다 (2) 지문 표현을 빌려 다른 속성(예: 한계)에서 나온 해석. 뒤 단서를 설명하지 못한다 (3) 문자 해석이거나 정답의 의미 범위를 한 단계 넓힌 해석. 절대어 없이 온건하게 쓴다\n금지: 비유 직후 문장이 비유를 풀어 쓴다 / 관용적으로 의미가 알려진 비유(stone in the chest 등)를 쓴다 / 정답이 지문 마지막 문장(또는 밑줄 문장 직후 문장)을 거의 그대로 바꿔 말한 문장이다 / 오답이 지문과 정반대 정서·사실이거나 지문의 명시 문장과 충돌해 지문 사실만 확인해도 소거된다(오답은 지문의 모든 명시 문장과 양립해야 한다) / 오답에 always·never·only·completely·entirely 같은 절대어나 -ly 극단 수식어를 쓴다(과잉 일반화 오답은 온건한 어휘로 범위만 넓힌다) / 정답만 길거나 구체적이거나 'yet·despite·but' 같은 양가 접속 구조를 갖는다(네 선택지의 문장틀·길이(±2단어)·접속 구조를 맞춘다) / 정답을 판정하는 근거가 한 문장·한 곳에 몰려 있다 / 정답의 핵심 어휘가 지문에 그대로 나온다(지문 어휘 차용은 오답 쪽에만 둔다)\n지문 길이: 110~170단어.\n지문 설계: 근거 위치 — 비유 앞 1: 대상이 처한 상황 / 비유 앞 2: 인물의 반복 행동 / 비유 뒤: 해석을 한 번 뒤집는 사소한 디테일(해석을 주지 않음). 직접 서술 금지 — 비유의 뜻을 풀어 주는 문장, 동격·'that is' 정의 금지.\n정답 설계: 추론 2단계 — 비유의 후보 속성 중 앞 단서와 뒤 단서를 동시에 만족하는 속성을 선택. 오답 3개는 지문의 모든 명시 문장과 양립해야 하고(지문 사실과 충돌하는 오답 금지), 선택지 4개는 같은 문장틀·비슷한 길이로 쓴다.\n제출 전 자기 점검(하나라도 아니면 고쳐서 제출): (1) 비유를 문맥 없이 읽었을 때 가장 먼저 떠오르는 해석이 오답인가 (2) 세 오답 사이에 같은 속성이 중복되지 않는가 (3) 오답 3개 각각을 지문의 모든 명시 문장과 대조해 충돌하는 문장이 하나도 없는가(충돌하면 고친다) (4) 정답을 고르기 전 학생이 처음 떠올릴 해석(표면 해석)이 오답 중 하나로 들어 있는가 (5) 정답만 남기는 결정 단서가 지문의 한 곳(행동·시점·누락)에 있는가 — 없으면 복수 정답, 있어도 한 문장에 직설이면 쉬움 (6) 지문 마지막 문장을 지우고 풀어도 정답이 유지되는가",
+   "previous": {
+    "passage": "I had not seen Ananya since the wedding where I knocked the garland tray from her hands in front of three hundred guests, and now our grandmother's funeral had placed us in the same borrowed classroom in Kochi, where the language school let the family receive visitors. Ananya sat at a front desk, straightening a stack of English primers no one would open that day. Each time an aunt came near, she squared the stack again and answered in short sentences. I took the desk behind her. Her silence toward me was a door left on the latch. When the tea came, she poured two cups and set one at the corner of her own desk, on the side nearest me, without turning around. Later, clearing the desks, I found Nikhil written small on the inside cover of the top primer, in the round hand she had used as a girl.",
+    "question": "As used in the text, the phrase “a door left on the latch” most nearly suggests that Ananya's silence is",
+    "options": [
+     "a firm barrier meant to keep the narrator away",
+     "a guarded reserve that still allows the narrator in",
+     "a fragile calm that could give way under pressure",
+     "a general reluctance to talk with relatives today"
+    ],
+    "correct_letter": "B",
+    "explanation": "화자는 결혼식에서 Ananya에게 망신을 준 과거가 있고, Ananya는 친척이 다가올 때마다 책 더미를 다시 정리하며 짧게만 대답한다는 두 단서가 비유 앞에 놓여 있다. 비유 뒤에는 그녀가 화자 쪽 책상 모서리에 찻잔을 놓는 사소한 행동이 나와, 침묵이 완전한 거부가 아님을 보여 준다. 따라서 '걸쇠만 걸린 문'은 경계하지만 다가갈 여지를 남긴 침묵을 뜻하므로 B가 정답이다. A는 차단의 속성만, C는 깨지기 쉬움의 속성만 골랐고, D는 의미를 친척 전반으로 넓혔다.",
+    "judgeNotes": [
+     "Fable 추정 난이도 medium",
+     "difficulty_too_easy"
+    ],
+    "reason": "too_easy"
+   }
+  },
+  {
+   "candidateId": "lit40-hard-03-044",
+   "route": "ai_passage",
+   "skill": "words_in_context",
+   "difficulty": "hard",
+   "questionType": "figurative_language",
+   "genre": "poetry",
+   "targetLetter": "C",
+   "words": {
+    "min": 110,
+    "max": 170
+   },
+   "recipeId": "words_in_context_lit_figurative_language_hard_v4",
+   "spec": {
+    "candidateId": "lit40-hard-03-044",
+    "batchId": "lit40-hard-03",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "hard",
+    "questionType": "figurative_language",
+    "genre": "poetry",
+    "seed": {
+     "index": 43,
+     "genre": "poetry",
+     "pov": "mixed_or_none",
+     "styleEra": "contemporary",
+     "names": [
+      "Dariush",
+      "Rukhsana"
+     ],
+     "nameCultures": [
+      "persian_central_asian",
+      "south_asian_muslim_sri_lankan"
+     ],
+     "locale": "Addis Ababa",
+     "setting": "a stone bridge",
+     "relationship": "a seamstress and her only apprentice",
+     "conflict": "about borrowed money and borrowed time",
+     "openingStyle": "인물의 이름으로 시작",
+     "topicSeed": "a stone bridge in Addis Ababa; a seamstress and her only apprentice about borrowed money and borrowed time"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 110,
+     "max": 170
+    },
+    "recipeId": "words_in_context_lit_figurative_language_hard_v4"
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a stone bridge in Addis Ababa; a seamstress and her only apprentice about borrowed money and borrowed time\n인물 이름: Dariush, Rukhsana 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 인물의 이름으로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 110~170단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 C 에 둔다. correct_letter 는 C 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 C 로 정한 뒤 나머지 선택지를 채운다.\n레시피(words_in_context_lit_figurative_language_hard_v4, 난이도 hard): 지문에 있는 비유 구절이 문맥에서 전하는 의미를 묻는다. 관용 표현·상투적 은유는 쓰지 않고 이 지문 안에서만 의미가 정해지는 신선한 비유를 쓴다. 비유가 가리키는 대상의 의미를 정하는 단서는 비유 앞의 두 곳과 비유 뒤의 한 곳에 나눠 두며, 비유 바로 다음 문장이 해석을 알려 주면 안 된다. 오답 3개는 모두 비유로서 합리적인 해석이어야 하며 문자 해석은 많아야 하나다. 오답은 비유가 가진 서로 다른 속성(무게·한계·소리·온도 등)을 하나씩 골라 해석한 것이고, 정답은 두 단서를 만족하는 속성이다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 2 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 비유의 한 속성(예: 무게)에서 나온 해석. 앞 단서 한 곳만 설명한다 (2) 지문 표현을 빌려 다른 속성(예: 한계)에서 나온 해석. 뒤 단서를 설명하지 못한다 (3) 문자 해석이거나 정답의 의미 범위를 한 단계 넓힌 해석. 절대어 없이 온건하게 쓴다\n금지: 비유 직후 문장이 비유를 풀어 쓴다 / 관용적으로 의미가 알려진 비유(stone in the chest 등)를 쓴다 / 정답이 지문 마지막 문장(또는 밑줄 문장 직후 문장)을 거의 그대로 바꿔 말한 문장이다 / 오답이 지문과 정반대 정서·사실이거나 지문의 명시 문장과 충돌해 지문 사실만 확인해도 소거된다(오답은 지문의 모든 명시 문장과 양립해야 한다) / 오답에 always·never·only·completely·entirely 같은 절대어나 -ly 극단 수식어를 쓴다(과잉 일반화 오답은 온건한 어휘로 범위만 넓힌다) / 정답만 길거나 구체적이거나 'yet·despite·but' 같은 양가 접속 구조를 갖는다(네 선택지의 문장틀·길이(±2단어)·접속 구조를 맞춘다) / 정답을 판정하는 근거가 한 문장·한 곳에 몰려 있다 / 정답의 핵심 어휘가 지문에 그대로 나온다(지문 어휘 차용은 오답 쪽에만 둔다)\n지문 길이: 110~170단어.\n지문 설계: 근거 위치 — 비유 앞 1: 대상이 처한 상황 / 비유 앞 2: 인물의 반복 행동 / 비유 뒤: 해석을 한 번 뒤집는 사소한 디테일(해석을 주지 않음). 직접 서술 금지 — 비유의 뜻을 풀어 주는 문장, 동격·'that is' 정의 금지.\n정답 설계: 추론 2단계 — 비유의 후보 속성 중 앞 단서와 뒤 단서를 동시에 만족하는 속성을 선택. 오답 3개는 지문의 모든 명시 문장과 양립해야 하고(지문 사실과 충돌하는 오답 금지), 선택지 4개는 같은 문장틀·비슷한 길이로 쓴다.\n제출 전 자기 점검(하나라도 아니면 고쳐서 제출): (1) 비유를 문맥 없이 읽었을 때 가장 먼저 떠오르는 해석이 오답인가 (2) 세 오답 사이에 같은 속성이 중복되지 않는가 (3) 오답 3개 각각을 지문의 모든 명시 문장과 대조해 충돌하는 문장이 하나도 없는가(충돌하면 고친다) (4) 정답을 고르기 전 학생이 처음 떠올릴 해석(표면 해석)이 오답 중 하나로 들어 있는가 (5) 정답만 남기는 결정 단서가 지문의 한 곳(행동·시점·누락)에 있는가 — 없으면 복수 정답, 있어도 한 문장에 직설이면 쉬움 (6) 지문 마지막 문장을 지우고 풀어도 정답이 유지되는가",
+   "previous": {
+    "passage": "Dariush counts the coins in his tin each evening\non the stone bridge, where the wind off the river\nlifts the corners of Rukhsana's blue cloth.\nThe sum is not yet the sum he borrowed in spring.\nShe pins a hem against the railing, three fingers, then three,\nand shows him again the blind stitch, the tailor's knot,\nthe way to bite a thread without fraying it.\nEach night he opens the ledger to her page,\nreads the figure written there, and closes it.\nHis debt to her is a lamp lit in a room he does not enter.\nAt noon the vendors cross with their baskets.\nHer hands do not stop; neither do his.\nWhen the light thins over the water\nhe takes the ledger out once more\nand writes beneath the figure, not a payment,\nonly the day's date, in small careful letters,\nthe way she taught him to close a seam.",
+    "question": "As used in the text, the phrase “a lamp lit in a room he does not enter” most nearly suggests that Dariush's debt is",
+    "options": [
+     "a warm gratitude that brightens his days on the bridge",
+     "a private shame that keeps him from speaking to her",
+     "an obligation he keeps tending while not settling it",
+     "a small expense he means to write down at some point"
+    ],
+    "correct_letter": "C",
+    "explanation": "비유 앞에는 Dariush가 매일 저녁 동전을 세지만 빌린 액수에 이르지 못한다는 상황과, 매일 밤 장부의 그녀 페이지를 펴서 읽고 덮기만 하는 반복 행동이 놓여 있다. 비유 뒤에는 그가 금액이 아니라 날짜만 적어 넣는다는 디테일이 나와, 빚이 갚히지 않은 채 날마다 돌보아지고 있음을 보여 준다. 따라서 '들어가지 않는 방에 켜 둔 등불'은 갚지 못한 채 계속 돌보는 의무를 뜻하므로 C가 정답이다. A는 빛·따뜻함, B는 닫힌 방의 거리감 속성만 골랐고, D는 지문 표현(적기)을 문자적으로 읽은 해석이다.",
+    "judgeNotes": [
+     "Fable 추정 난이도 medium",
+     "difficulty_too_easy"
+    ],
+    "reason": "too_easy"
+   }
+  },
+  {
+   "candidateId": "lit40-hard-03-047",
+   "route": "ai_passage",
+   "skill": "words_in_context",
+   "difficulty": "hard",
+   "questionType": "word_in_context",
+   "genre": "short_story",
+   "targetLetter": "B",
+   "words": {
+    "min": 100,
+    "max": 150
+   },
+   "recipeId": "words_in_context_lit_word_in_context_hard_v4",
+   "spec": {
+    "candidateId": "lit40-hard-03-047",
+    "batchId": "lit40-hard-03",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "hard",
+    "questionType": "word_in_context",
+    "genre": "short_story",
+    "seed": {
+     "index": 46,
+     "genre": "short_story",
+     "pov": "first",
+     "styleEra": "contemporary",
+     "names": [
+      "Lior",
+      "Shira"
+     ],
+     "nameCultures": [
+      "hebrew_jewish",
+      "hebrew_jewish"
+     ],
+     "locale": "Haifa",
+     "setting": "a summer camp dining hall",
+     "relationship": "a farmer and a surveyor from the city",
+     "conflict": "over a decision made without asking",
+     "openingStyle": "시간·날짜 표현으로 시작('By', 'On', 'After' 등)",
+     "topicSeed": "a summer camp dining hall in Haifa; a farmer and a surveyor from the city over a decision made without asking"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 100,
+     "max": 150
+    },
+    "recipeId": "words_in_context_lit_word_in_context_hard_v4"
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a summer camp dining hall in Haifa; a farmer and a surveyor from the city over a decision made without asking\n인물 이름: Lior, Shira 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 시간·날짜 표현으로 시작('By', 'On', 'After' 등). 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 100~150단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 B 에 둔다. correct_letter 는 B 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 B 로 정한 뒤 나머지 선택지를 채운다.\n레시피(words_in_context_lit_word_in_context_hard_v4, 난이도 hard): 빈칸 ______ 을 정확히 하나 두고 가장 논리적이고 정확한 말을 고르게 한다. 빈칸 뒤에 동격구·정의 구문·'that is'를 두지 않는다(웨이브 1에서 빈칸 뒤가 정답을 정의해 쉬웠다). 빈칸이 만족해야 할 제약 두 가지를 서로 떨어진 곳에 둔다: (1) 앞쪽 인물의 행동과 일관되어야 하는 의미 (2) 뒤쪽 행동과 맞물려야 하는 정도·어조. 선택지는 코드 게이트(단어 수 2~40, 최장/최단 비율 1.8 이하) 때문에 모두 2~3단어 구로 쓰고 같은 품사 구조로 통일한다(예: 'quietly relieved' 형태의 부사+형용사 또는 동사+목적어). 오답 3개는 문법상 모두 들어가고 의미 영역이 같으며, (a) 제약 하나만 만족 (b) 정답과 정도·어조만 다른 근접 표현 (c) 지문의 주제어를 빌린 표현이다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 2 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 두 제약 중 하나(앞 행동과의 일관성)만 만족하는 표현 (2) 정답과 의미가 가깝지만 정도·어조가 한 단계 다른 근접 표현. 절대어 없이 쓴다 (3) 지문의 주제어·인물 행동에서 빌린 표현. 문법상 들어가나 뒤 제약과 맞지 않는다\n금지: 선택지를 한 단어로 써서 길이 게이트(2단어 이상)에 걸리게 한다 / 빈칸 바로 뒤에 의미를 풀이하는 구를 둔다 / 정답이 지문 마지막 문장(또는 밑줄 문장 직후 문장)을 거의 그대로 바꿔 말한 문장이다 / 오답이 지문과 정반대 정서·사실이거나 지문의 명시 문장과 충돌해 지문 사실만 확인해도 소거된다(오답은 지문의 모든 명시 문장과 양립해야 한다) / 오답에 always·never·only·completely·entirely 같은 절대어나 -ly 극단 수식어를 쓴다(과잉 일반화 오답은 온건한 어휘로 범위만 넓힌다) / 정답만 길거나 구체적이거나 'yet·despite·but' 같은 양가 접속 구조를 갖는다(네 선택지의 문장틀·길이(±2단어)·접속 구조를 맞춘다) / 정답을 판정하는 근거가 한 문장·한 곳에 몰려 있다 / 정답의 핵심 어휘가 지문에 그대로 나온다(지문 어휘 차용은 오답 쪽에만 둔다)\n지문 길이: 100~150단어.\n지문 설계: 근거 위치 — 앞: 인물의 습관적·반복 행동(제약 1) / 중간: 사건이 한 번 전환되는 지점 / 빈칸 이후 문장: 제약 2를 만드는 행동(빈칸 의미를 정의하지 않음). 직접 서술 금지 — 빈칸 뒤 동격구, 'that is', 대시 뒤 풀이 금지.\n정답 설계: 추론 2단계 — 앞 행동의 방향과 뒤 행동의 정도를 동시에 만족하는 표현을 선택. 오답 3개는 지문의 모든 명시 문장과 양립해야 하고(지문 사실과 충돌하는 오답 금지), 선택지 4개는 같은 문장틀·비슷한 길이로 쓴다.\n제출 전 자기 점검(하나라도 아니면 고쳐서 제출): (1) 오답 하나를 넣어도 문법·의미가 이상하지 않은가(그래야 그럴듯함) (2) 정답을 빈칸 뒤 문장만으로 고를 수 없는가 (3) 오답 3개 각각을 지문의 모든 명시 문장과 대조해 충돌하는 문장이 하나도 없는가(충돌하면 고친다) (4) 정답을 고르기 전 학생이 처음 떠올릴 해석(표면 해석)이 오답 중 하나로 들어 있는가 (5) 정답만 남기는 결정 단서가 지문의 한 곳(행동·시점·누락)에 있는가 — 없으면 복수 정답, 있어도 한 문장에 직설이면 쉬움 (6) 지문 마지막 문장을 지우고 풀어도 정답이 유지되는가",
+   "previous": {
+    "passage": "By the third week of July, Shira had stopped eating with the surveyors. I had come up from Tel Aviv to map the camp's new water line, and she farmed the fields beside it; each morning she carried her tray to the far end of the dining hall and ate facing the window, where the stakes I had planted the day before stood in her orchard. On Thursday the regional office approved my route without consulting her. Lior, the camp cook, set the approval letter beside her coffee. Shira read it and remained ______. She folded the letter into quarters, finished her bread, and then walked the length of the hall to my table and asked, in an even voice, to see the map.",
+    "question": "Which choice completes the text with the most logical and precise word or phrase?",
+    "options": [
+     "hot with anger",
+     "cool and composed",
+     "quiet and defeated",
+     "deep in planning"
+    ],
+    "correct_letter": "B",
+    "explanation": "앞부분에서 Shira는 측량사들과 식사하지 않고 창가에서 말뚝을 바라보며 거리를 두는데, 이는 빈칸이 냉담함과 일관되어야 한다는 첫째 제약이다. 빈칸 뒤에서 그녀는 편지를 접고 빵을 다 먹은 뒤 차분한 목소리로 지도를 보여 달라고 하므로, 감정을 드러내지 않는 절제된 어조여야 한다는 둘째 제약이 생긴다. 두 제약을 모두 만족하는 것은 B다. A는 첫째 제약만 만족하고 차분한 목소리와 맞지 않으며, C는 정도가 지나쳐 직접 찾아가는 행동과 어긋나고, D는 지문의 계획·지도 소재를 빌렸을 뿐 뒤 행동과 맞지 않는다.",
+    "judgeNotes": [
+     "Fable 추정 난이도 medium",
+     "difficulty_too_easy"
+    ],
+    "reason": "too_easy"
+   }
+  },
+  {
+   "candidateId": "lit40-hard-03-069",
+   "route": "ai_passage",
+   "skill": "central_ideas_details",
+   "difficulty": "hard",
+   "questionType": "narrator_attitude",
+   "genre": "memoir",
+   "targetLetter": "A",
+   "words": {
+    "min": 120,
+    "max": 180
+   },
+   "recipeId": "central_ideas_details_lit_narrator_attitude_hard_v4",
+   "spec": {
+    "candidateId": "lit40-hard-03-069",
+    "batchId": "lit40-hard-03",
+    "route": "ai_passage",
+    "skill": "central_ideas_details",
+    "difficulty": "hard",
+    "questionType": "narrator_attitude",
+    "genre": "memoir",
+    "seed": {
+     "index": 68,
+     "genre": "memoir",
+     "pov": "third_limited",
+     "styleEra": "contemporary",
+     "names": [
+      "Orla",
+      "Stavros"
+     ],
+     "nameCultures": [
+      "irish_scottish",
+      "greek_balkan_turkish"
+     ],
+     "locale": "Manila",
+     "setting": "a hillside terrace",
+     "relationship": "a grandfather and a granddaughter learning his language",
+     "conflict": "while pretending to enjoy a gift that is wrong",
+     "openingStyle": "부사절·전치사구로 시작('When', 'Although', 'Beside' 등)",
+     "topicSeed": "a hillside terrace in Manila; a grandfather and a granddaughter learning his language while pretending to enjoy a gift that is wrong"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 120,
+     "max": 180
+    },
+    "recipeId": "central_ideas_details_lit_narrator_attitude_hard_v4"
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a hillside terrace in Manila; a grandfather and a granddaughter learning his language while pretending to enjoy a gift that is wrong\n인물 이름: Orla, Stavros 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 부사절·전치사구로 시작('When', 'Although', 'Beside' 등). 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 120~180단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 A 에 둔다. correct_letter 는 A 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 A 로 정한 뒤 나머지 선택지를 채운다.\n레시피(central_ideas_details_lit_narrator_attitude_hard_v4, 난이도 hard): 화자가 대상에 대해 갖는 태도를 묻는다. 1인칭(또는 가까운 3인칭) 서술에서 화자의 '말투'(불평·농담·건조한 평가)와 '행동'(조용히 해 주는 일, 피하는 화제)이 어긋나게 한다. 말투 단서는 앞부분, 행동 단서는 뒤쪽, 둘 사이에 화자가 스스로를 정정하는 어구(not lying, exactly 같은 완화·망설임)를 한 번 둔다. 정답은 말투 아래 놓인 태도를 말한다. 네 선택지는 모두 '태도 A despite/while 태도 B' 같은 양가 구조로 통일해 정답만 양가형이 되지 않게 하고, 오답은 (a) 말투만 읽은 태도 (b) 존경·애정이지만 이유가 다른 태도 (c) 지문 어휘를 빌린 태도로 만든다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 2 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 화자의 말투(불평·농담)만 읽어 낸 태도. 행동 단서를 설명하지 못한다 (2) 태도의 방향(애정·존중)은 같으나 이유를 뒤집은 선택지(상대가 해 준 일 때문이 아니라 화자 자신의 죄책감 때문이라는 식) (3) 지문의 표현을 빌려 태도로 일반화한 선택지. 지문 사실과 양립하지만 화자의 정정 어구와 맞지 않는다\n금지: 화자가 상대에 대한 마음을 직접 평가하는 문장을 마지막에 둔다 / 정답이 지문 마지막 문장(또는 밑줄 문장 직후 문장)을 거의 그대로 바꿔 말한 문장이다 / 오답이 지문과 정반대 정서·사실이거나 지문의 명시 문장과 충돌해 지문 사실만 확인해도 소거된다(오답은 지문의 모든 명시 문장과 양립해야 한다) / 오답에 always·never·only·completely·entirely 같은 절대어나 -ly 극단 수식어를 쓴다(과잉 일반화 오답은 온건한 어휘로 범위만 넓힌다) / 정답만 길거나 구체적이거나 'yet·despite·but' 같은 양가 접속 구조를 갖는다(네 선택지의 문장틀·길이(±2단어)·접속 구조를 맞춘다) / 정답을 판정하는 근거가 한 문장·한 곳에 몰려 있다 / 정답의 핵심 어휘가 지문에 그대로 나온다(지문 어휘 차용은 오답 쪽에만 둔다)\n지문 길이: 120~180단어.\n지문 설계: 근거 위치 — 앞: 화자의 말투(불평·농담) / 중간: 자기 정정·망설임 어구 / 뒤: 화자가 조용히 해 주는 행동 또는 피하는 화제. 직접 서술 금지 — 화자의 직접 평가어(admire, resent, grateful 등)와 '마음'을 말하는 문장 금지.\n정답 설계: 추론 2단계 — 말투와 행동의 어긋남을 결합해 말투 아래 태도를 추론. 오답 3개는 지문의 모든 명시 문장과 양립해야 하고(지문 사실과 충돌하는 오답 금지), 선택지 4개는 같은 문장틀·비슷한 길이로 쓴다.\n제출 전 자기 점검(하나라도 아니면 고쳐서 제출): (1) 선택지를 가렸을 때 정답만 접속 구조가 다르지 않은가 (2) 말투만 믿은 학생이 걸리는 오답이 있는가 (3) 오답 3개 각각을 지문의 모든 명시 문장과 대조해 충돌하는 문장이 하나도 없는가(충돌하면 고친다) (4) 정답을 고르기 전 학생이 처음 떠올릴 해석(표면 해석)이 오답 중 하나로 들어 있는가 (5) 정답만 남기는 결정 단서가 지문의 한 곳(행동·시점·누락)에 있는가 — 없으면 복수 정답, 있어도 한 문장에 직설이면 쉬움 (6) 지문 마지막 문장을 지우고 풀어도 정답이 유지되는가",
+   "previous": {
+    "passage": "When my grandfather moved into our flat above the terraced gardens in Manila, he brought three suitcases and a Greek grammar for me. Stavros had decided I would learn his language by summer, and every evening on the terrace he drilled verbs while the neighbors' radios played. I complained to my friends that he taught like a drill sergeant with a cough. For my birthday he gave me a wool sweater, knitted by his sister in Thessaloniki, in a city where the evenings rarely drop below twenty-five degrees. I told him it was perfect. That was not a lie, exactly; it was a word I had just learned from him. I wore it to every lesson on the terrace, sweating, until the cuffs stretched past my wrists. Now I keep the grammar on my desk with his pencil marks in the margins, and I conjugate one verb aloud each morning before I open the window.",
+    "question": "Which choice best describes the narrator's attitude toward Stavros?",
+    "options": [
+     "Devoted affection for Stavros and his efforts while she grumbles about his strict lessons",
+     "Mild annoyance at Stavros's nightly drilling while she endures the lessons out of duty",
+     "Respectful fondness for Stavros out of pity for his move while she resists his teaching",
+     "Amused tolerance of the drill sergeant's habits while she plays along with the sweater"
+    ],
+    "correct_letter": "A",
+    "explanation": "화자는 친구들에게 할아버지가 '기침하는 훈련 교관'처럼 가르친다고 불평하지만, 맞지 않는 털 스웨터를 '완벽하다'고 말한 것은 '거짓말은 아니었다, 정확히는'이라며 정정한다. 이후 화자는 땀을 흘리면서도 수업마다 그 스웨터를 입었고, 지금도 매일 아침 동사 하나를 소리 내어 활용한다. 투덜대는 말투와 지속적인 행동을 함께 보면 할아버지와 그의 노력에 대한 깊은 애정이 드러나므로 A가 정답이다. B는 말투만 읽은 것이고, C는 애정의 이유를 동정으로 바꿨으며, D는 지문 표현을 빌렸지만 현재의 행동을 설명하지 못한다.",
+    "judgeNotes": [
+     "Fable 추정 난이도 medium",
+     "difficulty_too_easy"
+    ],
+    "reason": "too_easy"
+   }
+  },
+  {
+   "candidateId": "lit40-hard-03-071",
+   "route": "ai_passage",
+   "skill": "central_ideas_details",
+   "difficulty": "hard",
+   "questionType": "main_idea_or_purpose",
+   "genre": "novel_excerpt",
+   "targetLetter": "C",
+   "words": {
+    "min": 130,
+    "max": 190
+   },
+   "recipeId": "central_ideas_details_lit_main_idea_or_purpose_hard_v4",
+   "spec": {
+    "candidateId": "lit40-hard-03-071",
+    "batchId": "lit40-hard-03",
+    "route": "ai_passage",
+    "skill": "central_ideas_details",
+    "difficulty": "hard",
+    "questionType": "main_idea_or_purpose",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 70,
+     "genre": "novel_excerpt",
+     "pov": "first",
+     "styleEra": "early_20c",
+     "names": [
+      "Freja",
+      "Remedios"
+     ],
+     "nameCultures": [
+      "dutch_nordic",
+      "spanish_iberian"
+     ],
+     "locale": "Seville",
+     "setting": "a radio repair shop",
+     "relationship": "a teenage cook and her stern aunt",
+     "conflict": "over a borrowed object never returned",
+     "openingStyle": "시간·날짜 표현으로 시작('By', 'On', 'After' 등)",
+     "topicSeed": "a radio repair shop in Seville; a teenage cook and her stern aunt over a borrowed object never returned"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 130,
+     "max": 190
+    },
+    "recipeId": "central_ideas_details_lit_main_idea_or_purpose_hard_v4"
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a radio repair shop in Seville; a teenage cook and her stern aunt over a borrowed object never returned\n인물 이름: Freja, Remedios 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 시간·날짜 표현으로 시작('By', 'On', 'After' 등). 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 130~190단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 C 에 둔다. correct_letter 는 C 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 C 로 정한 뒤 나머지 선택지를 채운다.\n레시피(central_ideas_details_lit_main_idea_or_purpose_hard_v4, 난이도 hard): 글 전체의 요지(또는 서술 목적)를 묻는다. 지문에는 요지를 말하는 문장이 없고 서로 다른 두 사건(또는 두 시점)이 있어, 정답은 두 사건의 '관계'(둘이 서로 의미를 바꾸는 대조·반복·아이러니)를 진술한다. 사건 1은 앞부분, 사건 2는 뒷부분에 두고 그 사이에 미해결로 남는 디테일을 하나 둔다. 오답 3개는 (a) 사건 1의 요지 (b) 사건 2의 요지 (c) 두 사건을 함께 말하되 인과 방향을 뒤집은 요지이며, 셋 모두 지문 사실과 양립하는 온건한 진술로 쓴다. 절대어로 과장하지 않는다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 3 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 사건 1의 요지만 말하는 선택지. 지문 사실에 충실하다 (2) 사건 2의 요지만, 사건 2의 표현을 빌려 말하는 선택지. 지문 사실에 충실하다 (3) 두 사건을 모두 언급하지만 한 사건이 다른 사건의 원인·결과라는 방향을 뒤집은 선택지. 지문의 시간 순서와는 충돌하지 않게 쓴다\n금지: 사건 2의 마지막 문장이 교훈·깨달음을 직접 말한다 / 정답이 지문 마지막 문장(또는 밑줄 문장 직후 문장)을 거의 그대로 바꿔 말한 문장이다 / 오답이 지문과 정반대 정서·사실이거나 지문의 명시 문장과 충돌해 지문 사실만 확인해도 소거된다(오답은 지문의 모든 명시 문장과 양립해야 한다) / 오답에 always·never·only·completely·entirely 같은 절대어나 -ly 극단 수식어를 쓴다(과잉 일반화 오답은 온건한 어휘로 범위만 넓힌다) / 정답만 길거나 구체적이거나 'yet·despite·but' 같은 양가 접속 구조를 갖는다(네 선택지의 문장틀·길이(±2단어)·접속 구조를 맞춘다) / 정답을 판정하는 근거가 한 문장·한 곳에 몰려 있다 / 정답의 핵심 어휘가 지문에 그대로 나온다(지문 어휘 차용은 오답 쪽에만 둔다)\n지문 길이: 130~190단어.\n지문 설계: 근거 위치 — 앞: 사건 1 / 중간: 미해결 디테일(설명하지 않음) / 뒤: 사건 2(사건 1을 다시 읽게 함). 직접 서술 금지 — 교훈·깨달음 문장, 인물의 총평 대사, 'learned that'·'realized' 금지.\n정답 설계: 추론 3단계 — 사건 1 의미 파악 -> 사건 2가 그 의미를 바꿈 -> 둘의 관계로 요지를 진술. 오답 3개는 지문의 모든 명시 문장과 양립해야 하고(지문 사실과 충돌하는 오답 금지), 선택지 4개는 같은 문장틀·비슷한 길이로 쓴다.\n제출 전 자기 점검(하나라도 아니면 고쳐서 제출): (1) 부분 요지 두 개가 각각 한 사건에 대해서는 정확한가(틀린 사실이 없는가) (2) 정답을 한 사건만 읽고 고를 수 없는가 (3) 오답 3개 각각을 지문의 모든 명시 문장과 대조해 충돌하는 문장이 하나도 없는가(충돌하면 고친다) (4) 정답을 고르기 전 학생이 처음 떠올릴 해석(표면 해석)이 오답 중 하나로 들어 있는가 (5) 정답만 남기는 결정 단서가 지문의 한 곳(행동·시점·누락)에 있는가 — 없으면 복수 정답, 있어도 한 문장에 직설이면 쉬움 (6) 지문 마지막 문장을 지우고 풀어도 정답이 유지되는가",
+   "previous": {
+    "passage": "By the spring I turned fifteen, I had cooked every meal in my aunt's flat above the radio repair shop in Seville for two years. Remedios mended wirelesses downstairs and spoke to me mostly in instructions: less salt, more oil, close the door against the solder smoke. That April a neighbor borrowed our good copper pan for a christening and did not bring it back. I fried eggs in a dented tin pot and complained about it at every meal, while my aunt only turned the dial of whatever set lay open on her bench. In May she began working late, and a smell of hot metal drifted up the stairs past midnight. On my saint's day I found a new pan on the stove, hammered from the brass casing of an old radio cabinet, its handle wrapped in copper wire from the shop. Remedios was already downstairs, bent over a set, her back to the stairs.",
+    "question": "Which choice best states the main idea of the text?",
+    "options": [
+     "A neighbor's thoughtless borrowing leaves a young cook with poor tools for her work.",
+     "A handmade pan arrives to replace the copper one on the narrator's saint's day.",
+     "An aunt's seeming indifference turns out to conceal a reply made with her own craft.",
+     "The aunt's new pan is what finally ends the narrator's habit of complaining at meals."
+    ],
+    "correct_letter": "C",
+    "explanation": "첫 사건에서 화자는 이웃이 가져간 구리 냄비 때문에 끼니마다 불평하지만, 고모 Remedios는 라디오 다이얼만 돌리며 무심해 보인다. 중간에는 고모가 밤늦게 일하고 뜨거운 금속 냄새가 올라온다는 설명 없는 디테일이 놓인다. 뒷사건에서 라디오 케이스의 황동과 가게의 구리선으로 만든 냄비가 나타나면서, 무관심처럼 보였던 태도가 사실은 자기 기술로 한 대답이었음이 드러나므로 C가 정답이다. A는 첫 사건만, B는 둘째 사건만 요약했고, D는 냄비와 불평의 관계를 지문에 없는 결과로 세운 선택지다.",
+    "judgeNotes": [
+     "Fable 추정 난이도 medium",
+     "difficulty_too_easy"
+    ],
+    "reason": "too_easy"
+   }
+  }
+ ],
+ "instructions": "당신은 디지털 SAT Reading & Writing 문학 지문 문항 출제 위원이다. 아래 13개 후보 각각에 대해 문항 1개를 만들어 JSON 한 파일로 저장한다.\n작업: 재작성(1회) · 청크 rewrite-011\n규칙:\n1. 지문은 전부 새로 쓴 창작이다. 실제 작품의 문장·플롯·고유한 인물 설정을 쓰지 말고, 실존 작가·작품 이름이나 'From … by …' 같은 출처 머리글을 붙이지 않는다(발췌 지문 작업은 제공된 발췌를 한 글자도 바꾸지 않는다).\n2. 지문·질문·선택지는 영어만 쓴다. 해설(explanation)만 한국어 3~5문장이며, 글자 참조는 선택지 글자(A~D)로만 한다.\n3. 선택지는 정확히 4개, 정답은 1개이고 정답 위치는 후보별 targetLetter 와 같아야 한다(어기면 코드가 선택지를 재배치하거나 탈락시킨다).\n4. 선택지 길이·문체를 비슷하게 맞춘다. 정답이 가장 길거나 구체적이면 탈락한다. 오답 3개는 서로 다른 그럴듯한 오개념에서 나오게 하고 지문 표현을 일부 활용한다.\n5. 정답이 지문 마지막 문장을 거의 그대로 바꿔 말한 것이면 탈락한다. 근거를 서로 떨어진 둘 이상의 문장에 둔다.\n6. 후보별 names 에 있는 이름만 인물 이름으로 쓴다. 지정되지 않은 이름·'Tobias'·'Odalys'·'Wren' 은 쓰지 않는다. 후보별 openingStyle 을 따르고 첫 단어를 The·You·It·There 로 시작하지 않는다.\n7. 지문 단어 수는 후보별 words.min~words.max 안이어야 한다(코드가 센다). 시는 줄바꿈을 \\n 으로 유지한다.\n8. XML 태그·마크다운·내부 메모·플레이스홀더·'As an AI' 류 문장을 출력에 넣지 않는다. 밑줄 표시는 앱 규격대로 두 밑줄 기호 __문장__ 만 쓴다. 출처·작가를 지어내지 않는다.\n9. 선언: 모든 항목에 declaration 3개(original, noRealWorkQuoted, noCopyrightedSource)를 true 로 쓴다. 그럴 수 없는 항목은 만들지 말고 candidateId 만 빼라(탈락 처리된다).\n지문과 문항을 함께 새로 쓴다.\n출력: Write 도구로 정확히 이 경로에 JSON 한 파일을 쓴다 → /Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rewrite-011.result.json\n출력 JSON 스키마(예시 구조): {\"chunkId\":\"작업 파일의 chunkId 를 그대로\",\"model\":\"당신의 모델 이름(예: opus)\",\"items\":[{\"candidateId\":\"후보의 candidateId 를 그대로\",\"passage\":\"영어 지문(문항의 질문은 넣지 않는다)\",\"question\":\"영어 질문 한 문장\",\"options\":[\"선택지 A\",\"선택지 B\",\"선택지 C\",\"선택지 D\"],\"correct_letter\":\"A|B|C|D (targetLetter 와 같게)\",\"explanation\":\"한국어 해설 3~5문장\",\"tone\":[\"지문 어조 영어 단어 1~3개\"],\"devices\":[\"쓰인 문학 장치 영어 단어\"],\"declaration\":{\"original\":true,\"noRealWorkQuoted\":true,\"noCopyrightedSource\":true}}]}\n허용 값: correct_letter ∈ {A,B,C,D}, options 길이 4, declaration 3개 모두 true. 후보의 candidateId 를 바꾸지 않는다. 항목 순서는 후보 순서를 따른다.\n금지: 결과 파일 외의 파일 생성·수정, 다른 명령 실행, 후보 임의 추가·삭제, 이 작업 파일 수정. 끝나면 'done <항목 수>' 한 줄만 답한다.\n\n## 후보\n### lit40-hard-03-020 — skill text_structure_purpose · 유형 underlined_portion_function · 난이도 hard · 장르 memoir · targetLetter B\n유형 지시: 지문의 한 문장을 __문장__ 처럼 두 밑줄 기호로 감싸 정확히 하나만 밑줄 표시하고, 질문에 'underlined' 를 넣어 그 문장이 글 전체에서 하는 기능을 묻는다.\n난이도 지시: hard: 태도·동기가 직접 서술되지 않고 행동·대조·반복으로만 드러나며 근거가 떨어진 두 곳 이상에 흩어진다. 표면 해석(그럴듯한 오독)과 정답 해석이 갈린다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a quiet library in Naples; an elder and a restless apprentice about whether a small kindness was a cover for something else\n인물 이름: Milena, Alessia 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 구체적인 사물이나 동작으로 시작(관사 The 로 시작하지 말 것). 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 120~190단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 B 에 둔다. correct_letter 는 B 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 B 로 정한 뒤 나머지 선택지를 채운다.\n레시피(text_structure_purpose_lit_underlined_portion_function_hard_v4, 난이도 hard): 지문의 문장 하나를 __문장__ 처럼 두 밑줄 기호로 감싸 정확히 하나만 표시하고, 질문에 'underlined' 를 넣어 그 문장이 글 전체에서 하는 기능을 묻는다. 밑줄 문장은 단독으로 읽으면 한 가지 기능(배경 설명·성격 묘사·분위기 전환)으로 보이지만, 지문 뒤쪽 사건이 그 기능을 바꿔 놓는다(복선·반어). 밑줄 문장 바로 앞뒤 문장은 기능을 설명하거나 뒤집지 않는다. 오답 3개는 모두 밑줄 문장과 지문 사실에 근거한 기능이어야 하며 (a) 밑줄 문장만 본 기능 (b) 바로 뒤 문장과의 관계로 본 기능 (c) 지문 표현을 빌려 일반화한 기능이다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 3 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 밑줄 문장만 단독으로 읽은 기능(배경 설명 등). 지문 후반 단서를 설명하지 못한다 (2) 바로 뒤 문장과의 관계로 읽어 기능의 방향을 뒤집은 선택지(복선이 아니라 해소로 읽음) (3) 지문의 표현을 빌려 일반적 기능으로 넓힌 선택지. 지문과 양립하지만 후반 단서와 맞지 않는다\n금지: 밑줄 문장 바로 뒤에서 의미를 뒤집거나 설명한다 / 정답 외 선택지가 지문 사실과 정면 충돌한다 / 정답이 지문 마지막 문장(또는 밑줄 문장 직후 문장)을 거의 그대로 바꿔 말한 문장이다 / 오답이 지문과 정반대 정서·사실이거나 지문의 명시 문장과 충돌해 지문 사실만 확인해도 소거된다(오답은 지문의 모든 명시 문장과 양립해야 한다) / 오답에 always·never·only·completely·entirely 같은 절대어나 -ly 극단 수식어를 쓴다(과잉 일반화 오답은 온건한 어휘로 범위만 넓힌다) / 정답만 길거나 구체적이거나 'yet·despite·but' 같은 양가 접속 구조를 갖는다(네 선택지의 문장틀·길이(±2단어)·접속 구조를 맞춘다) / 정답을 판정하는 근거가 한 문장·한 곳에 몰려 있다 / 정답의 핵심 어휘가 지문에 그대로 나온다(지문 어휘 차용은 오답 쪽에만 둔다)\n지문 길이: 120~190단어.\n지문 설계: 근거 위치 — 앞: 밑줄 문장(단독으로는 배경 설명처럼 보임) / 중간: 기능과 무관해 보이는 장면 / 뒤: 밑줄 문장을 복선·반어로 읽게 하는 사건. 직접 서술 금지 — 밑줄 문장의 의미를 풀이하는 인접 문장, 'foreshadow'류 메타 서술 금지.\n정답 설계: 추론 3단계 — 밑줄 문장의 표면 기능 -> 후반 사건 확인 -> 기능 재해석. 오답 3개는 지문의 모든 명시 문장과 양립해야 하고(지문 사실과 충돌하는 오답 금지), 선택지 4개는 같은 문장틀·비슷한 길이로 쓴다.\n제출 전 자기 점검(하나라도 아니면 고쳐서 제출): (1) 밑줄 직전·직후 문장만 읽고 정답을 고를 수 없는가 (2) 표면 기능을 고른 학생이 걸리는 오답이 있는가 (3) 오답 3개 각각을 지문의 모든 명시 문장과 대조해 충돌하는 문장이 하나도 없는가(충돌하면 고친다) (4) 정답을 고르기 전 학생이 처음 떠올릴 해석(표면 해석)이 오답 중 하나로 들어 있는가 (5) 정답만 남기는 결정 단서가 지문의 한 곳(행동·시점·누락)에 있는가 — 없으면 복수 정답, 있어도 한 문장에 직설이면 쉬움 (6) 지문 마지막 문장을 지우고 풀어도 정답이 유지되는가\n[이전 시도(난이도가 쉽다고 판정됨)]\n지문: Lamp oil and old glue were what I smelled first each morning in the library in Naples, where I was apprenticed to Milena the year I turned nineteen. __Every afternoon she brought me a pastry from the bakery on the corner and set it on my desk without a word.__ I was restless that year, forever asking to work in the reading room instead of the bindery, forever glancing at the door. Milena kept me at the bench, teaching me to resew spines and float torn pages. The pastries kept coming, wrapped in brown paper, and I ate them over my work and wondered whether they were apology or bribe. In the spring a collector came to inspect the library's oldest atlas. Milena showed him every repair and named each one; most were mine. He asked who had done the gathering on the fourth section, and she unfolded a square of brown pastry paper from her drawer, on which, in her small hand, she had kept a dated list of every page I had mended.\n질문: Which choice best describes the function of the underlined sentence in the text as a whole?\n선택지: It portrays Milena as a generous mentor during the narrator's early months | It introduces a routine that the closing scene recasts as quiet record-keeping | It sets up the suspicion, raised soon after, that Milena meant to buy obedience | It suggests that small gifts between people can carry more than one meaning\n정답: B\n판정 메모: Fable 추정 난이도 medium / difficulty_too_easy\n→ 같은 장면·인물·정답 위치를 유지하되 근거를 더 흩어 놓고 오답을 더 그럴듯하게 고쳐 어렵게 다시 쓴다.\n### lit40-hard-03-022 — skill central_ideas_details · 유형 narrator_attitude · 난이도 hard · 장르 novel_excerpt · targetLetter A\n유형 지시: 화자·서술자가 대상에 대해 취하는 태도를 묻는다.\n난이도 지시: hard: 태도·동기가 직접 서술되지 않고 행동·대조·반복으로만 드러나며 근거가 떨어진 두 곳 이상에 흩어진다. 표면 해석(그럴듯한 오독)과 정답 해석이 갈린다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a ceramics studio in Bergen; a young apprentice and a master carpenter after a teacher's remark that changed everything\n인물 이름: Sigrid, Thorvald 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 장소 이름으로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 120~180단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 A 에 둔다. correct_letter 는 A 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 A 로 정한 뒤 나머지 선택지를 채운다.\n레시피(central_ideas_details_lit_narrator_attitude_hard_v4, 난이도 hard): 화자가 대상에 대해 갖는 태도를 묻는다. 1인칭(또는 가까운 3인칭) 서술에서 화자의 '말투'(불평·농담·건조한 평가)와 '행동'(조용히 해 주는 일, 피하는 화제)이 어긋나게 한다. 말투 단서는 앞부분, 행동 단서는 뒤쪽, 둘 사이에 화자가 스스로를 정정하는 어구(not lying, exactly 같은 완화·망설임)를 한 번 둔다. 정답은 말투 아래 놓인 태도를 말한다. 네 선택지는 모두 '태도 A despite/while 태도 B' 같은 양가 구조로 통일해 정답만 양가형이 되지 않게 하고, 오답은 (a) 말투만 읽은 태도 (b) 존경·애정이지만 이유가 다른 태도 (c) 지문 어휘를 빌린 태도로 만든다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 2 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 화자의 말투(불평·농담)만 읽어 낸 태도. 행동 단서를 설명하지 못한다 (2) 태도의 방향(애정·존중)은 같으나 이유를 뒤집은 선택지(상대가 해 준 일 때문이 아니라 화자 자신의 죄책감 때문이라는 식) (3) 지문의 표현을 빌려 태도로 일반화한 선택지. 지문 사실과 양립하지만 화자의 정정 어구와 맞지 않는다\n금지: 화자가 상대에 대한 마음을 직접 평가하는 문장을 마지막에 둔다 / 정답이 지문 마지막 문장(또는 밑줄 문장 직후 문장)을 거의 그대로 바꿔 말한 문장이다 / 오답이 지문과 정반대 정서·사실이거나 지문의 명시 문장과 충돌해 지문 사실만 확인해도 소거된다(오답은 지문의 모든 명시 문장과 양립해야 한다) / 오답에 always·never·only·completely·entirely 같은 절대어나 -ly 극단 수식어를 쓴다(과잉 일반화 오답은 온건한 어휘로 범위만 넓힌다) / 정답만 길거나 구체적이거나 'yet·despite·but' 같은 양가 접속 구조를 갖는다(네 선택지의 문장틀·길이(±2단어)·접속 구조를 맞춘다) / 정답을 판정하는 근거가 한 문장·한 곳에 몰려 있다 / 정답의 핵심 어휘가 지문에 그대로 나온다(지문 어휘 차용은 오답 쪽에만 둔다)\n지문 길이: 120~180단어.\n지문 설계: 근거 위치 — 앞: 화자의 말투(불평·농담) / 중간: 자기 정정·망설임 어구 / 뒤: 화자가 조용히 해 주는 행동 또는 피하는 화제. 직접 서술 금지 — 화자의 직접 평가어(admire, resent, grateful 등)와 '마음'을 말하는 문장 금지.\n정답 설계: 추론 2단계 — 말투와 행동의 어긋남을 결합해 말투 아래 태도를 추론. 오답 3개는 지문의 모든 명시 문장과 양립해야 하고(지문 사실과 충돌하는 오답 금지), 선택지 4개는 같은 문장틀·비슷한 길이로 쓴다.\n제출 전 자기 점검(하나라도 아니면 고쳐서 제출): (1) 선택지를 가렸을 때 정답만 접속 구조가 다르지 않은가 (2) 말투만 믿은 학생이 걸리는 오답이 있는가 (3) 오답 3개 각각을 지문의 모든 명시 문장과 대조해 충돌하는 문장이 하나도 없는가(충돌하면 고친다) (4) 정답을 고르기 전 학생이 처음 떠올릴 해석(표면 해석)이 오답 중 하나로 들어 있는가 (5) 정답만 남기는 결정 단서가 지문의 한 곳(행동·시점·누락)에 있는가 — 없으면 복수 정답, 있어도 한 문장에 직설이면 쉬움 (6) 지문 마지막 문장을 지우고 풀어도 정답이 유지되는가\n[이전 시도(난이도가 쉽다고 판정됨)]\n지문: Bergen rain had warped every shelf in the studio by the spring Thorvald came to replace them, and he let me know it was my fault for stacking wet pots too close together. He was a slow, grumbling man who measured each plank three times and talked to the wood more than to me. I said, often and loudly, that he worked like a glacier. Then my teacher looked at my first glazed bowl and remarked, within Thorvald's hearing, that I threw pots the way a carpenter joins wood: careful, square, and without any joy. I told myself I did not care what either of them thought. That is not entirely true, I suppose. Thorvald finished the shelves a week later. I noticed that he had sanded one corner of the lowest shelf round and smooth, at the spot where I always knelt, and after that I stopped calling him a glacier and began, without telling anyone, to time my glazing for the hours he was in the room.\n질문: Which choice best describes the narrator's attitude toward Thorvald?\n선택지: She jokes about his slowness while privately seeking out his steady company. | She complains about his pace while waiting for the shelves to be finished. | She respects his care while hoping to make up for the wet pots. | She resents the carpenter comparison while learning to work more squarely.\n정답: A\n판정 메모: Fable 추정 난이도 medium / difficulty_too_easy\n→ 같은 장면·인물·정답 위치를 유지하되 근거를 더 흩어 놓고 오답을 더 그럴듯하게 고쳐 어렵게 다시 쓴다.\n### lit40-hard-03-029 — skill central_ideas_details · 유형 main_idea_or_purpose · 난이도 hard · 장르 memoir · targetLetter D\n유형 지시: 지문 전체의 요지나 서술 목적을 묻는다.\n난이도 지시: hard: 태도·동기가 직접 서술되지 않고 행동·대조·반복으로만 드러나며 근거가 떨어진 두 곳 이상에 흩어진다. 표면 해석(그럴듯한 오독)과 정답 해석이 갈린다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a school music room in Chiang Mai; a grandson and the grandfather's old friend when a rumor reaches the wrong person\n인물 이름: Aung, Siti 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 대명사 I 또는 We 로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 130~190단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 D 에 둔다. correct_letter 는 D 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 D 로 정한 뒤 나머지 선택지를 채운다.\n레시피(central_ideas_details_lit_main_idea_or_purpose_hard_v4, 난이도 hard): 글 전체의 요지(또는 서술 목적)를 묻는다. 지문에는 요지를 말하는 문장이 없고 서로 다른 두 사건(또는 두 시점)이 있어, 정답은 두 사건의 '관계'(둘이 서로 의미를 바꾸는 대조·반복·아이러니)를 진술한다. 사건 1은 앞부분, 사건 2는 뒷부분에 두고 그 사이에 미해결로 남는 디테일을 하나 둔다. 오답 3개는 (a) 사건 1의 요지 (b) 사건 2의 요지 (c) 두 사건을 함께 말하되 인과 방향을 뒤집은 요지이며, 셋 모두 지문 사실과 양립하는 온건한 진술로 쓴다. 절대어로 과장하지 않는다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 3 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 사건 1의 요지만 말하는 선택지. 지문 사실에 충실하다 (2) 사건 2의 요지만, 사건 2의 표현을 빌려 말하는 선택지. 지문 사실에 충실하다 (3) 두 사건을 모두 언급하지만 한 사건이 다른 사건의 원인·결과라는 방향을 뒤집은 선택지. 지문의 시간 순서와는 충돌하지 않게 쓴다\n금지: 사건 2의 마지막 문장이 교훈·깨달음을 직접 말한다 / 정답이 지문 마지막 문장(또는 밑줄 문장 직후 문장)을 거의 그대로 바꿔 말한 문장이다 / 오답이 지문과 정반대 정서·사실이거나 지문의 명시 문장과 충돌해 지문 사실만 확인해도 소거된다(오답은 지문의 모든 명시 문장과 양립해야 한다) / 오답에 always·never·only·completely·entirely 같은 절대어나 -ly 극단 수식어를 쓴다(과잉 일반화 오답은 온건한 어휘로 범위만 넓힌다) / 정답만 길거나 구체적이거나 'yet·despite·but' 같은 양가 접속 구조를 갖는다(네 선택지의 문장틀·길이(±2단어)·접속 구조를 맞춘다) / 정답을 판정하는 근거가 한 문장·한 곳에 몰려 있다 / 정답의 핵심 어휘가 지문에 그대로 나온다(지문 어휘 차용은 오답 쪽에만 둔다)\n지문 길이: 130~190단어.\n지문 설계: 근거 위치 — 앞: 사건 1 / 중간: 미해결 디테일(설명하지 않음) / 뒤: 사건 2(사건 1을 다시 읽게 함). 직접 서술 금지 — 교훈·깨달음 문장, 인물의 총평 대사, 'learned that'·'realized' 금지.\n정답 설계: 추론 3단계 — 사건 1 의미 파악 -> 사건 2가 그 의미를 바꿈 -> 둘의 관계로 요지를 진술. 오답 3개는 지문의 모든 명시 문장과 양립해야 하고(지문 사실과 충돌하는 오답 금지), 선택지 4개는 같은 문장틀·비슷한 길이로 쓴다.\n제출 전 자기 점검(하나라도 아니면 고쳐서 제출): (1) 부분 요지 두 개가 각각 한 사건에 대해서는 정확한가(틀린 사실이 없는가) (2) 정답을 한 사건만 읽고 고를 수 없는가 (3) 오답 3개 각각을 지문의 모든 명시 문장과 대조해 충돌하는 문장이 하나도 없는가(충돌하면 고친다) (4) 정답을 고르기 전 학생이 처음 떠올릴 해석(표면 해석)이 오답 중 하나로 들어 있는가 (5) 정답만 남기는 결정 단서가 지문의 한 곳(행동·시점·누락)에 있는가 — 없으면 복수 정답, 있어도 한 문장에 직설이면 쉬움 (6) 지문 마지막 문장을 지우고 풀어도 정답이 유지되는가\n[이전 시도(난이도가 쉽다고 판정됨)]\n지문: I was eleven when I carried the rumor home. Everyone in the school music room said that Siti, who had taught there since before I was born, was being sent away at the end of term, and I repeated it at dinner because it sounded important. My grandfather put down his spoon. He and Siti had not spoken in twenty years, for reasons no one at our table would name, and the next morning he put on his good shirt and walked to the school. I never learned what he said in the headmaster's office. The upright piano in the music room was locked that week, and its key hung on a nail no one would touch. By the cool season the story had come to nothing; Siti was staying. On Saturdays she began coming to our house with a satchel of sheet music, and from the kitchen I could hear two old players arguing over tempo, then starting the same bar again.\n질문: Which choice best states the main idea of the passage?\n선택지: A boy repeats a rumor at dinner and prompts his grandfather to visit the school. | Two old musicians resume playing together at home after many years without speaking. | A grandfather's old quarrel with a teacher causes a rumor about her to spread. | A careless rumor carried home becomes the unexpected route to an old reconciliation.\n정답: D\n판정 메모: Fable 추정 난이도 medium / difficulty_too_easy\n→ 같은 장면·인물·정답 위치를 유지하되 근거를 더 흩어 놓고 오답을 더 그럴듯하게 고쳐 어렵게 다시 쓴다.\n### lit40-hard-03-031 — skill inferences · 유형 character_motivation · 난이도 hard · 장르 novel_excerpt · targetLetter C\n유형 지시: 인물이 어떤 행동을 한 이유·동기를 묻는다.\n난이도 지시: hard: 태도·동기가 직접 서술되지 않고 행동·대조·반복으로만 드러나며 근거가 떨어진 두 곳 이상에 흩어진다. 표면 해석(그럴듯한 오독)과 정답 해석이 갈린다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a beekeeper's yard in Dakar; two neighbors with a shared wall over an old photograph\n인물 이름: Kwesi, Kwame 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 숫자·목록·규칙을 말하며 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 120~180단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 C 에 둔다. correct_letter 는 C 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 C 로 정한 뒤 나머지 선택지를 채운다.\n레시피(inferences_lit_character_motivation_hard_v4, 난이도 hard): 인물이 한 행동의 이유를 묻는다. 인물이 대사나 서술로 댄 '표면 명분'을 한 번 지문에 넣는다(예: 좋은 좌석 때문에, 바빠서). 진짜 동기는 문장으로 쓰지 않고 (1) 앞부분의 습관·반복 행동 (2) 중간의 시점·순서 단서(날짜, 누가 먼저 움직이는지, 무엇을 숨기는지) (3) 끝의 사물·동작으로만 암시한다. 앞 단서는 처음 읽으면 표면 명분을 지지하고, 중간 단서가 그 의미를 바꾸게 설계한다. 정답은 표면 명분을 부정하지 않으면서 두 단서를 함께 설명하는 동기다. 오답 3개는 모두 지문의 명시 문장과 양립해야 하며, 틀린 이유는 '행동의 순서·시점을 설명하지 못한다'는 한 가지여야 한다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 2 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 인물이 지문에서 댄 표면 명분을 그대로 동기로 삼은 선택지. 지문과 충돌하지 않지만 시점·순서 단서를 설명하지 못한다 (2) 앞 단서(습관)만 또는 중간 단서(시점)만 설명하는 동기. 나머지 단서를 '설명하지 못할 뿐' 부정하지는 않는다 (3) 이 인물이 가질 법한 다른 감정(미안함·자존심·두려움 중 정답과 다른 것)에서 나온 동기. 같은 행동을 설명하지만 행동의 순서와 맞지 않는다\n금지: 표면 명분을 지문이 직접 반박하는 문장을 넣어 표면 오답을 쉽게 지운다 / 정답이 지문 마지막 문장(또는 밑줄 문장 직후 문장)을 거의 그대로 바꿔 말한 문장이다 / 오답이 지문과 정반대 정서·사실이거나 지문의 명시 문장과 충돌해 지문 사실만 확인해도 소거된다(오답은 지문의 모든 명시 문장과 양립해야 한다) / 오답에 always·never·only·completely·entirely 같은 절대어나 -ly 극단 수식어를 쓴다(과잉 일반화 오답은 온건한 어휘로 범위만 넓힌다) / 정답만 길거나 구체적이거나 'yet·despite·but' 같은 양가 접속 구조를 갖는다(네 선택지의 문장틀·길이(±2단어)·접속 구조를 맞춘다) / 정답을 판정하는 근거가 한 문장·한 곳에 몰려 있다 / 정답의 핵심 어휘가 지문에 그대로 나온다(지문 어휘 차용은 오답 쪽에만 둔다)\n지문 길이: 120~180단어.\n지문 설계: 근거 위치 — 앞: 반복 습관 또는 일상 행동 / 중간: 날짜·순서·숨김 같은 시점 단서 / 끝: 사물이나 동작(감정어 없음). 직접 서술 금지 — 동기를 나타내는 감정어·동사(afraid, ashamed, wanted to protect 등)와 'because' 절 금지.\n정답 설계: 추론 2단계 — 앞 단서(습관)와 중간 단서(시점)를 결합해 표면 명분을 기각하고 동기를 세움. 오답 3개는 지문의 모든 명시 문장과 양립해야 하고(지문 사실과 충돌하는 오답 금지), 선택지 4개는 같은 문장틀·비슷한 길이로 쓴다.\n제출 전 자기 점검(하나라도 아니면 고쳐서 제출): (1) 표면 명분만 믿으면 끝 장면(시점·동작)이 설명되지 않는가 (2) 동기를 가르는 단서 두 개를 서로 떨어뜨려 놓았는가 (3) 오답 3개 각각을 지문의 모든 명시 문장과 대조해 충돌하는 문장이 하나도 없는가(충돌하면 고친다) (4) 정답을 고르기 전 학생이 처음 떠올릴 해석(표면 해석)이 오답 중 하나로 들어 있는가 (5) 정답만 남기는 결정 단서가 지문의 한 곳(행동·시점·누락)에 있는가 — 없으면 복수 정답, 있어도 한 문장에 직설이면 쉬움 (6) 지문 마지막 문장을 지우고 풀어도 정답이 유지되는가\n[이전 시도(난이도가 쉽다고 판정됨)]\n지문: Three rules governed the wall between Kwesi's beekeeper's yard and Kwame's house: no climbing, no smoke on windy days, and no talk of the photograph. Kwame kept the picture in a frame on his side, a print of two boys on one bicycle in front of the old hives, and he hung it in his window every morning facing the yard. Kwesi said he had moved his hives to the far corner years ago because the bees disliked the afternoon heat by the wall. For a long time he worked that corner with his back to the window. In the dry season of 1987, Kwame's son told the street that his father's eyes were failing, and that same week Kwesi began moving the hives, one each evening after dark, toward the wall again. He said nothing to Kwame about it. By March the last hive stood under the window, humming, and each morning Kwesi set a jar of the first honey on top of the wall, its label turned toward the house.\n질문: Based on the passage, why does Kwesi most likely move the hives back toward the wall?\n선택지: To give the bees a better place to forage now that the dry season has arrived. | To reclaim the part of the yard he had given up during their years of distance. | To bring the scene in the picture within reach of a neighbor losing his sight. | To apologize for the years he spent working with his back to the window.\n정답: C\n판정 메모: Fable 추정 난이도 medium / difficulty_too_easy\n→ 같은 장면·인물·정답 위치를 유지하되 근거를 더 흩어 놓고 오답을 더 그럴듯하게 고쳐 어렵게 다시 쓴다.\n### lit40-hard-03-034 — skill inferences · 유형 tone_or_mood · 난이도 hard · 장르 novel_excerpt · targetLetter B\n유형 지시: 지문 전체의 어조나 분위기를 묻는다.\n난이도 지시: hard: 태도·동기가 직접 서술되지 않고 행동·대조·반복으로만 드러나며 근거가 떨어진 두 곳 이상에 흩어진다. 표면 해석(그럴듯한 오독)과 정답 해석이 갈린다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a bakery before opening in Thessaloniki; two musicians in a failing duo about the cost of a scholarship or opportunity\n인물 이름: Selin, Despina 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 장소 이름으로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 110~170단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 B 에 둔다. correct_letter 는 B 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 B 로 정한 뒤 나머지 선택지를 채운다.\n레시피(inferences_lit_tone_or_mood_hard_v4, 난이도 hard): 지문 전체의 어조·분위기를 묻는다. 정답 어조는 한 단어 감정이 아니라 겉 어조와 속 어조의 두 층(예: wry but tender, courteous yet wary)이다. 지문에는 감정 형용사·감정 동사를 쓰지 않고 어휘 선택(건조한 사실 나열), 문장 리듬(짧게 끊기다 한 번 길어짐), 세부 디테일의 선택(무엇을 보고 무엇을 지나치는가)으로만 어조를 만든다. 겉 어조 단서는 앞부분, 속 어조 단서는 뒤쪽·결말 동작에 둔다. 네 선택지는 모두 '두 층' 문장틀('형용사 and 형용사 toward X')로 통일하고, 오답은 (a) 겉 층만 (b) 속 층이 있으나 그 원인을 뒤집은 것 (c) 같은 감정군에서 범위만 넓힌 것으로 만든다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 2 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 겉 어조 층만 포착한 선택지(예: 유쾌하다). 속 층 단서를 설명하지 못할 뿐 지문과 충돌하지 않는다 (2) 속 어조는 맞게 잡았으나 그 원인 방향을 뒤집은 선택지(슬픔 때문이 아니라 안도 때문인 침묵 등). 지문 사실과 양립한다 (3) 정답과 같은 감정군이지만 대상·범위를 넓히거나 줄인 선택지. 절대어 없이 온건한 어휘로 쓴다\n금지: 선택지를 감정 한 단어씩으로 써서 분위기만 알아도 소거되게 한다 / 정답이 지문 마지막 문장(또는 밑줄 문장 직후 문장)을 거의 그대로 바꿔 말한 문장이다 / 오답이 지문과 정반대 정서·사실이거나 지문의 명시 문장과 충돌해 지문 사실만 확인해도 소거된다(오답은 지문의 모든 명시 문장과 양립해야 한다) / 오답에 always·never·only·completely·entirely 같은 절대어나 -ly 극단 수식어를 쓴다(과잉 일반화 오답은 온건한 어휘로 범위만 넓힌다) / 정답만 길거나 구체적이거나 'yet·despite·but' 같은 양가 접속 구조를 갖는다(네 선택지의 문장틀·길이(±2단어)·접속 구조를 맞춘다) / 정답을 판정하는 근거가 한 문장·한 곳에 몰려 있다 / 정답의 핵심 어휘가 지문에 그대로 나온다(지문 어휘 차용은 오답 쪽에만 둔다)\n지문 길이: 110~170단어.\n지문 설계: 근거 위치 — 앞: 겉 어조(건조한 사실 나열·농담조 문장 리듬) / 중간: 어조와 어긋나는 디테일(지나치는 사물, 멈칫하는 동작) / 끝: 속 어조를 보여 주는 동작(감정어 없음). 직접 서술 금지 — 감정 형용사·감정 동사·'felt'·'seemed to'와 어조를 설명하는 비유 금지.\n정답 설계: 추론 2단계 — 겉 어조 단서와 속 어조 단서를 겹쳐 두 층 어조를 구성하고, 그 원인 방향을 판정. 오답 3개는 지문의 모든 명시 문장과 양립해야 하고(지문 사실과 충돌하는 오답 금지), 선택지 4개는 같은 문장틀·비슷한 길이로 쓴다.\n제출 전 자기 점검(하나라도 아니면 고쳐서 제출): (1) 선택지 4개를 어조 단어만 가리면 형식으로 정답이 구분되지 않는가 (2) 겉 층만 고른 학생이 어느 선택지에서 걸리는가 (3) 오답 3개 각각을 지문의 모든 명시 문장과 대조해 충돌하는 문장이 하나도 없는가(충돌하면 고친다) (4) 정답을 고르기 전 학생이 처음 떠올릴 해석(표면 해석)이 오답 중 하나로 들어 있는가 (5) 정답만 남기는 결정 단서가 지문의 한 곳(행동·시점·누락)에 있는가 — 없으면 복수 정답, 있어도 한 문장에 직설이면 쉬움 (6) 지문 마지막 문장을 지우고 풀어도 정답이 유지되는가\n[이전 시도(난이도가 쉽다고 판정됨)]\n지문: Thessaloniki was still dark when Despina and I let ourselves into her uncle's bakery to practice, as we had every morning that winter, among the cooling racks. Flour on the music stand. Flour on the bow. Her uncle charged us nothing but the sweeping. The letter from the conservatory in Vienna lay folded inside her violin case, offering one place, for one player, beginning in March. We played the second movement and stopped at the bar where we always stopped. She tuned her A string. I tuned mine. Neither of us said Vienna. Outside, the first cart came for the bread. When we finished, I swept as usual, from the ovens to the door, and then I went back and swept the corner beneath her chair a second time, where there was nothing left to sweep, and set her case by the door with the clasp already fastened.\n질문: Which choice best describes the overall tone of the passage?\n선택지: Matter-of-fact and orderly on the surface, calm and content toward the routine | Matter-of-fact and orderly on the surface, wistful and resigned toward the parting | Terse and guarded on the surface, bitter and envious toward the scholarship | Terse and guarded on the surface, nostalgic and fond toward the bakery\n정답: B\n판정 메모: Fable 추정 난이도 medium / difficulty_too_easy\n→ 같은 장면·인물·정답 위치를 유지하되 근거를 더 흩어 놓고 오답을 더 그럴듯하게 고쳐 어렵게 다시 쓴다.\n### lit40-hard-03-035 — skill inferences · 유형 tone_or_mood · 난이도 hard · 장르 personal_essay · targetLetter C\n유형 지시: 지문 전체의 어조나 분위기를 묻는다.\n난이도 지시: hard: 태도·동기가 직접 서술되지 않고 행동·대조·반복으로만 드러나며 근거가 떨어진 두 곳 이상에 흩어진다. 표면 해석(그럴듯한 오독)과 정답 해석이 갈린다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a noodle stall in Lagos; an old teacher and a former pupil over a repair that could never really fix it\n인물 이름: Kofi, Yaa 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 대화 한 줄로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 110~170단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 C 에 둔다. correct_letter 는 C 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 C 로 정한 뒤 나머지 선택지를 채운다.\n레시피(inferences_lit_tone_or_mood_hard_v4, 난이도 hard): 지문 전체의 어조·분위기를 묻는다. 정답 어조는 한 단어 감정이 아니라 겉 어조와 속 어조의 두 층(예: wry but tender, courteous yet wary)이다. 지문에는 감정 형용사·감정 동사를 쓰지 않고 어휘 선택(건조한 사실 나열), 문장 리듬(짧게 끊기다 한 번 길어짐), 세부 디테일의 선택(무엇을 보고 무엇을 지나치는가)으로만 어조를 만든다. 겉 어조 단서는 앞부분, 속 어조 단서는 뒤쪽·결말 동작에 둔다. 네 선택지는 모두 '두 층' 문장틀('형용사 and 형용사 toward X')로 통일하고, 오답은 (a) 겉 층만 (b) 속 층이 있으나 그 원인을 뒤집은 것 (c) 같은 감정군에서 범위만 넓힌 것으로 만든다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 2 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 겉 어조 층만 포착한 선택지(예: 유쾌하다). 속 층 단서를 설명하지 못할 뿐 지문과 충돌하지 않는다 (2) 속 어조는 맞게 잡았으나 그 원인 방향을 뒤집은 선택지(슬픔 때문이 아니라 안도 때문인 침묵 등). 지문 사실과 양립한다 (3) 정답과 같은 감정군이지만 대상·범위를 넓히거나 줄인 선택지. 절대어 없이 온건한 어휘로 쓴다\n금지: 선택지를 감정 한 단어씩으로 써서 분위기만 알아도 소거되게 한다 / 정답이 지문 마지막 문장(또는 밑줄 문장 직후 문장)을 거의 그대로 바꿔 말한 문장이다 / 오답이 지문과 정반대 정서·사실이거나 지문의 명시 문장과 충돌해 지문 사실만 확인해도 소거된다(오답은 지문의 모든 명시 문장과 양립해야 한다) / 오답에 always·never·only·completely·entirely 같은 절대어나 -ly 극단 수식어를 쓴다(과잉 일반화 오답은 온건한 어휘로 범위만 넓힌다) / 정답만 길거나 구체적이거나 'yet·despite·but' 같은 양가 접속 구조를 갖는다(네 선택지의 문장틀·길이(±2단어)·접속 구조를 맞춘다) / 정답을 판정하는 근거가 한 문장·한 곳에 몰려 있다 / 정답의 핵심 어휘가 지문에 그대로 나온다(지문 어휘 차용은 오답 쪽에만 둔다)\n지문 길이: 110~170단어.\n지문 설계: 근거 위치 — 앞: 겉 어조(건조한 사실 나열·농담조 문장 리듬) / 중간: 어조와 어긋나는 디테일(지나치는 사물, 멈칫하는 동작) / 끝: 속 어조를 보여 주는 동작(감정어 없음). 직접 서술 금지 — 감정 형용사·감정 동사·'felt'·'seemed to'와 어조를 설명하는 비유 금지.\n정답 설계: 추론 2단계 — 겉 어조 단서와 속 어조 단서를 겹쳐 두 층 어조를 구성하고, 그 원인 방향을 판정. 오답 3개는 지문의 모든 명시 문장과 양립해야 하고(지문 사실과 충돌하는 오답 금지), 선택지 4개는 같은 문장틀·비슷한 길이로 쓴다.\n제출 전 자기 점검(하나라도 아니면 고쳐서 제출): (1) 선택지 4개를 어조 단어만 가리면 형식으로 정답이 구분되지 않는가 (2) 겉 층만 고른 학생이 어느 선택지에서 걸리는가 (3) 오답 3개 각각을 지문의 모든 명시 문장과 대조해 충돌하는 문장이 하나도 없는가(충돌하면 고친다) (4) 정답을 고르기 전 학생이 처음 떠올릴 해석(표면 해석)이 오답 중 하나로 들어 있는가 (5) 정답만 남기는 결정 단서가 지문의 한 곳(행동·시점·누락)에 있는가 — 없으면 복수 정답, 있어도 한 문장에 직설이면 쉬움 (6) 지문 마지막 문장을 지우고 풀어도 정답이 유지되는가\n[이전 시도(난이도가 쉽다고 판정됨)]\n지문: \"Hold the lamp lower,\" Kofi said, and Yaa did. She had come to his noodle stall near the Marina with his old school bell in a paper bag, the brass one he had rung for thirty years before the mission school closed, its clapper snapped off at the hinge. She had found a smith in Ebute Metta who would weld it for two shillings. Kofi turned the bell over in his hands between bowls. He tapped the weld with a chopstick. It gave a flat sound, a clack rather than a ring, and a customer at the bench laughed. Kofi laughed too, and ladled the man more broth. He told Yaa the smith had done good work, that the price was fair, and asked after her mother. When she rose to go, he wiped the bell with his apron, front and back, and set it on the shelf above the pot, mouth down, where the steam could reach it every morning.\n질문: Which choice best describes the overall tone of the passage?\n선택지: Light and good-humored in its telling, cheerful and amused toward the repair | Light and good-humored in its telling, embarrassed and uneasy toward the laughter | Light and good-humored in its telling, tender and wistful toward what cannot return | Gentle and patient in its telling, grateful and proud toward the smith's work\n정답: C\n판정 메모: Fable 추정 난이도 medium / difficulty_too_easy\n→ 같은 장면·인물·정답 위치를 유지하되 근거를 더 흩어 놓고 오답을 더 그럴듯하게 고쳐 어렵게 다시 쓴다.\n### lit40-hard-03-038 — skill inferences · 유형 relationship_between_characters · 난이도 hard · 장르 personal_essay · targetLetter B\n유형 지시: 두 인물의 관계를 단서로 추론하게 한다.\n난이도 지시: hard: 태도·동기가 직접 서술되지 않고 행동·대조·반복으로만 드러나며 근거가 떨어진 두 곳 이상에 흩어진다. 표면 해석(그럴듯한 오독)과 정답 해석이 갈린다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a bus depot in Hamburg; a boy and the old man who sells him fish over a secret discovered in a drawer\n인물 이름: Katharina, Gyeongho 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 숫자·목록·규칙을 말하며 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 120~180단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 B 에 둔다. correct_letter 는 B 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 B 로 정한 뒤 나머지 선택지를 채운다.\n레시피(inferences_lit_relationship_between_characters_hard_v4, 난이도 hard): 두 인물의 관계를 묻는다. 관계 이름(친구·부녀·라이벌)을 지문에 쓰지 않고 호칭·물건을 주고받는 방향·누가 누구를 기다리는가로만 보여 준다. 겉 관계(공식 호칭·직함·예의)와 실제 관계(오랜 빚·보호·미결 갈등)가 다르게 읽히도록 두 층을 만든다. 겉 관계 단서는 앞부분 호칭, 실제 관계 단서는 뒤쪽 행동의 방향(누가 먼저 양보하는가, 누가 조용히 비용을 치르는가)에 둔다. 정답은 실제 관계와 그 방향을 함께 말한다. 오답 3개는 (a) 호칭이 말하는 공식 관계 (b) 한 장면만 반영한 관계 (c) 의존·보호의 방향을 뒤집은 관계이며 모두 지문 사실과 양립해야 한다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 2 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 지문의 호칭·직함이 가리키는 공식 관계. 지문과 충돌하지 않지만 행동의 방향을 설명하지 못한다 (2) 한 장면(앞 또는 뒤)의 행동만으로 세운 관계. 다른 장면은 '설명하지 못할 뿐' 모순되지 않는다 (3) 누가 누구를 돌보고 의지하는지 방향을 뒤집은 관계. 지문의 행동이 양쪽 방향으로 읽힐 여지는 있되 결정 단서(누가 먼저 비용을 치르는가) 한 곳이 방향을 정한다\n금지: 끝 장면에서 인물이 관계를 한 문장으로 선언하거나 서로를 이름 붙여 부른다 / 정답이 지문 마지막 문장(또는 밑줄 문장 직후 문장)을 거의 그대로 바꿔 말한 문장이다 / 오답이 지문과 정반대 정서·사실이거나 지문의 명시 문장과 충돌해 지문 사실만 확인해도 소거된다(오답은 지문의 모든 명시 문장과 양립해야 한다) / 오답에 always·never·only·completely·entirely 같은 절대어나 -ly 극단 수식어를 쓴다(과잉 일반화 오답은 온건한 어휘로 범위만 넓힌다) / 정답만 길거나 구체적이거나 'yet·despite·but' 같은 양가 접속 구조를 갖는다(네 선택지의 문장틀·길이(±2단어)·접속 구조를 맞춘다) / 정답을 판정하는 근거가 한 문장·한 곳에 몰려 있다 / 정답의 핵심 어휘가 지문에 그대로 나온다(지문 어휘 차용은 오답 쪽에만 둔다)\n지문 길이: 120~180단어.\n지문 설계: 근거 위치 — 앞: 공식 호칭·거리 두는 예의 / 중간: 물건·시간·돈이 오가는 방향 / 끝: 한 인물의 조용한 양보 동작. 직접 서술 금지 — 관계 명사, '사랑·미움·고마움' 같은 감정어, 한 인물이 상대를 평가하는 대사 금지.\n정답 설계: 추론 2단계 — 호칭이 주는 표면 관계를 행동의 방향 단서로 수정. 오답 3개는 지문의 모든 명시 문장과 양립해야 하고(지문 사실과 충돌하는 오답 금지), 선택지 4개는 같은 문장틀·비슷한 길이로 쓴다.\n제출 전 자기 점검(하나라도 아니면 고쳐서 제출): (1) 호칭만 보면 어느 선택지가 고르게 되는가(그것이 오답인가) (2) 관계의 방향을 정하는 결정 단서가 한 곳에 분명히 있는가 (3) 오답 3개 각각을 지문의 모든 명시 문장과 대조해 충돌하는 문장이 하나도 없는가(충돌하면 고친다) (4) 정답을 고르기 전 학생이 처음 떠올릴 해석(표면 해석)이 오답 중 하나로 들어 있는가 (5) 정답만 남기는 결정 단서가 지문의 한 곳(행동·시점·누락)에 있는가 — 없으면 복수 정답, 있어도 한 문장에 직설이면 쉬움 (6) 지문 마지막 문장을 지우고 풀어도 정답이 유지되는가\n[이전 시도(난이도가 쉽다고 판정됨)]\n지문: Two herrings on Mondays, a smoked eel on Thursdays, and no credit: those were the terms Herr Gyeongho set when Katharina first came to his stall at the edge of the omnibus depot in Hamburg. She called him Herr Gyeongho, and he called her Fraulein, and they bargained each week over a pfennig as if the stall depended on it. In the winter her mother's wages from the depot laundry stopped. Katharina still came on Mondays and Thursdays and paid what she could, and he wrapped the fish without counting the coins. One afternoon, sent to fetch paper from under his counter, she opened the wrong drawer and found a ledger in her own family's name, page after page of small debts, every line crossed through in the same blue pencil. She closed the drawer. The next Monday she brought him a pfennig more than the price and set it on the scale before he could speak; he looked at it a long moment and let it lie there.\n질문: Based on the passage, which choice best describes the relationship between Katharina and Gyeongho?\n선택지: Behind their formal bargaining lies a plain trade between a merchant and a regular buyer. | Behind their formal bargaining lies a protective generosity he extends to her family unseen. | Behind their formal bargaining lies a shared pleasure in haggling that both look forward to. | Behind their formal bargaining lies his reliance on her custom to keep the stall afloat.\n정답: B\n판정 메모: Fable 추정 난이도 medium / difficulty_too_easy\n→ 같은 장면·인물·정답 위치를 유지하되 근거를 더 흩어 놓고 오답을 더 그럴듯하게 고쳐 어렵게 다시 쓴다.\n### lit40-hard-03-042 — skill words_in_context · 유형 figurative_language · 난이도 hard · 장르 short_story · targetLetter A\n유형 지시: 비유 표현이 문맥에서 전달하는 의미를 묻는다. 질문은 'As used in the text, the phrase “…” most nearly suggests …' 형식이고 인용한 구절이 지문에 있어야 하며, 지문 본문에는 따옴표(\" “ ”)를 쓰지 않는다(대사는 따옴표 없이 서술).\n난이도 지시: hard: 태도·동기가 직접 서술되지 않고 행동·대조·반복으로만 드러나며 근거가 떨어진 두 곳 이상에 흩어진다. 표면 해석(그럴듯한 오독)과 정답 해석이 갈린다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a rented farmhouse in Gdansk; a conductor and the youngest violinist when old loyalties collide with new ones\n인물 이름: Irena, Tatiana 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 인물의 이름으로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 110~170단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 A 에 둔다. correct_letter 는 A 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 A 로 정한 뒤 나머지 선택지를 채운다.\n레시피(words_in_context_lit_figurative_language_hard_v4, 난이도 hard): 지문에 있는 비유 구절이 문맥에서 전하는 의미를 묻는다. 관용 표현·상투적 은유는 쓰지 않고 이 지문 안에서만 의미가 정해지는 신선한 비유를 쓴다. 비유가 가리키는 대상의 의미를 정하는 단서는 비유 앞의 두 곳과 비유 뒤의 한 곳에 나눠 두며, 비유 바로 다음 문장이 해석을 알려 주면 안 된다. 오답 3개는 모두 비유로서 합리적인 해석이어야 하며 문자 해석은 많아야 하나다. 오답은 비유가 가진 서로 다른 속성(무게·한계·소리·온도 등)을 하나씩 골라 해석한 것이고, 정답은 두 단서를 만족하는 속성이다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 2 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 비유의 한 속성(예: 무게)에서 나온 해석. 앞 단서 한 곳만 설명한다 (2) 지문 표현을 빌려 다른 속성(예: 한계)에서 나온 해석. 뒤 단서를 설명하지 못한다 (3) 문자 해석이거나 정답의 의미 범위를 한 단계 넓힌 해석. 절대어 없이 온건하게 쓴다\n금지: 비유 직후 문장이 비유를 풀어 쓴다 / 관용적으로 의미가 알려진 비유(stone in the chest 등)를 쓴다 / 정답이 지문 마지막 문장(또는 밑줄 문장 직후 문장)을 거의 그대로 바꿔 말한 문장이다 / 오답이 지문과 정반대 정서·사실이거나 지문의 명시 문장과 충돌해 지문 사실만 확인해도 소거된다(오답은 지문의 모든 명시 문장과 양립해야 한다) / 오답에 always·never·only·completely·entirely 같은 절대어나 -ly 극단 수식어를 쓴다(과잉 일반화 오답은 온건한 어휘로 범위만 넓힌다) / 정답만 길거나 구체적이거나 'yet·despite·but' 같은 양가 접속 구조를 갖는다(네 선택지의 문장틀·길이(±2단어)·접속 구조를 맞춘다) / 정답을 판정하는 근거가 한 문장·한 곳에 몰려 있다 / 정답의 핵심 어휘가 지문에 그대로 나온다(지문 어휘 차용은 오답 쪽에만 둔다)\n지문 길이: 110~170단어.\n지문 설계: 근거 위치 — 비유 앞 1: 대상이 처한 상황 / 비유 앞 2: 인물의 반복 행동 / 비유 뒤: 해석을 한 번 뒤집는 사소한 디테일(해석을 주지 않음). 직접 서술 금지 — 비유의 뜻을 풀어 주는 문장, 동격·'that is' 정의 금지.\n정답 설계: 추론 2단계 — 비유의 후보 속성 중 앞 단서와 뒤 단서를 동시에 만족하는 속성을 선택. 오답 3개는 지문의 모든 명시 문장과 양립해야 하고(지문 사실과 충돌하는 오답 금지), 선택지 4개는 같은 문장틀·비슷한 길이로 쓴다.\n제출 전 자기 점검(하나라도 아니면 고쳐서 제출): (1) 비유를 문맥 없이 읽었을 때 가장 먼저 떠오르는 해석이 오답인가 (2) 세 오답 사이에 같은 속성이 중복되지 않는가 (3) 오답 3개 각각을 지문의 모든 명시 문장과 대조해 충돌하는 문장이 하나도 없는가(충돌하면 고친다) (4) 정답을 고르기 전 학생이 처음 떠올릴 해석(표면 해석)이 오답 중 하나로 들어 있는가 (5) 정답만 남기는 결정 단서가 지문의 한 곳(행동·시점·누락)에 있는가 — 없으면 복수 정답, 있어도 한 문장에 직설이면 쉬움 (6) 지문 마지막 문장을 지우고 풀어도 정답이 유지되는가\n[이전 시도(난이도가 쉽다고 판정됨)]\n지문: Irena had rented the farmhouse outside Gdansk because its old barn carried sound well and because the ensemble could not afford the city hall that season. Tatiana, the youngest violinist, had joined at fifteen; she was nineteen now, and a quartet in Berlin had written to her twice. All week she arrived early, unpacked her violin, and left the case open on the chair beside her, its velvet lining turned toward the door. Irena watched her play the slow movement with her shoulders lifted, a swallow perched on a wire that hums. On Friday the letter from Berlin lay on Tatiana's stand, still sealed, beneath the pencil she used to copy Irena's bowings into her part. During the break Irena said nothing about it. She only moved the chair with the open case a little closer to the stove, so that the lining would be warm whenever Tatiana chose to close it.\n질문: As used in the text, the phrase “a swallow perched on a wire that hums” most nearly suggests that Tatiana is\n선택지: poised to depart while still held by present ties | light and fragile in a way that weakens her playing | vibrating with a nervousness that unsettles the others | restless in a way common to young players generally\n정답: A\n판정 메모: Fable 추정 난이도 medium / difficulty_too_easy\n→ 같은 장면·인물·정답 위치를 유지하되 근거를 더 흩어 놓고 오답을 더 그럴듯하게 고쳐 어렵게 다시 쓴다.\n### lit40-hard-03-043 — skill words_in_context · 유형 figurative_language · 난이도 hard · 장르 novel_excerpt · targetLetter B\n유형 지시: 비유 표현이 문맥에서 전달하는 의미를 묻는다. 질문은 'As used in the text, the phrase “…” most nearly suggests …' 형식이고 인용한 구절이 지문에 있어야 하며, 지문 본문에는 따옴표(\" “ ”)를 쓰지 않는다(대사는 따옴표 없이 서술).\n난이도 지시: hard: 태도·동기가 직접 서술되지 않고 행동·대조·반복으로만 드러나며 근거가 떨어진 두 곳 이상에 흩어진다. 표면 해석(그럴듯한 오독)과 정답 해석이 갈린다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a language school classroom in Kerala; cousins reunited at a funeral after a public embarrassment\n인물 이름: Nikhil, Ananya 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 대명사 I 또는 We 로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 110~170단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 B 에 둔다. correct_letter 는 B 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 B 로 정한 뒤 나머지 선택지를 채운다.\n레시피(words_in_context_lit_figurative_language_hard_v4, 난이도 hard): 지문에 있는 비유 구절이 문맥에서 전하는 의미를 묻는다. 관용 표현·상투적 은유는 쓰지 않고 이 지문 안에서만 의미가 정해지는 신선한 비유를 쓴다. 비유가 가리키는 대상의 의미를 정하는 단서는 비유 앞의 두 곳과 비유 뒤의 한 곳에 나눠 두며, 비유 바로 다음 문장이 해석을 알려 주면 안 된다. 오답 3개는 모두 비유로서 합리적인 해석이어야 하며 문자 해석은 많아야 하나다. 오답은 비유가 가진 서로 다른 속성(무게·한계·소리·온도 등)을 하나씩 골라 해석한 것이고, 정답은 두 단서를 만족하는 속성이다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 2 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 비유의 한 속성(예: 무게)에서 나온 해석. 앞 단서 한 곳만 설명한다 (2) 지문 표현을 빌려 다른 속성(예: 한계)에서 나온 해석. 뒤 단서를 설명하지 못한다 (3) 문자 해석이거나 정답의 의미 범위를 한 단계 넓힌 해석. 절대어 없이 온건하게 쓴다\n금지: 비유 직후 문장이 비유를 풀어 쓴다 / 관용적으로 의미가 알려진 비유(stone in the chest 등)를 쓴다 / 정답이 지문 마지막 문장(또는 밑줄 문장 직후 문장)을 거의 그대로 바꿔 말한 문장이다 / 오답이 지문과 정반대 정서·사실이거나 지문의 명시 문장과 충돌해 지문 사실만 확인해도 소거된다(오답은 지문의 모든 명시 문장과 양립해야 한다) / 오답에 always·never·only·completely·entirely 같은 절대어나 -ly 극단 수식어를 쓴다(과잉 일반화 오답은 온건한 어휘로 범위만 넓힌다) / 정답만 길거나 구체적이거나 'yet·despite·but' 같은 양가 접속 구조를 갖는다(네 선택지의 문장틀·길이(±2단어)·접속 구조를 맞춘다) / 정답을 판정하는 근거가 한 문장·한 곳에 몰려 있다 / 정답의 핵심 어휘가 지문에 그대로 나온다(지문 어휘 차용은 오답 쪽에만 둔다)\n지문 길이: 110~170단어.\n지문 설계: 근거 위치 — 비유 앞 1: 대상이 처한 상황 / 비유 앞 2: 인물의 반복 행동 / 비유 뒤: 해석을 한 번 뒤집는 사소한 디테일(해석을 주지 않음). 직접 서술 금지 — 비유의 뜻을 풀어 주는 문장, 동격·'that is' 정의 금지.\n정답 설계: 추론 2단계 — 비유의 후보 속성 중 앞 단서와 뒤 단서를 동시에 만족하는 속성을 선택. 오답 3개는 지문의 모든 명시 문장과 양립해야 하고(지문 사실과 충돌하는 오답 금지), 선택지 4개는 같은 문장틀·비슷한 길이로 쓴다.\n제출 전 자기 점검(하나라도 아니면 고쳐서 제출): (1) 비유를 문맥 없이 읽었을 때 가장 먼저 떠오르는 해석이 오답인가 (2) 세 오답 사이에 같은 속성이 중복되지 않는가 (3) 오답 3개 각각을 지문의 모든 명시 문장과 대조해 충돌하는 문장이 하나도 없는가(충돌하면 고친다) (4) 정답을 고르기 전 학생이 처음 떠올릴 해석(표면 해석)이 오답 중 하나로 들어 있는가 (5) 정답만 남기는 결정 단서가 지문의 한 곳(행동·시점·누락)에 있는가 — 없으면 복수 정답, 있어도 한 문장에 직설이면 쉬움 (6) 지문 마지막 문장을 지우고 풀어도 정답이 유지되는가\n[이전 시도(난이도가 쉽다고 판정됨)]\n지문: I had not seen Ananya since the wedding where I knocked the garland tray from her hands in front of three hundred guests, and now our grandmother's funeral had placed us in the same borrowed classroom in Kochi, where the language school let the family receive visitors. Ananya sat at a front desk, straightening a stack of English primers no one would open that day. Each time an aunt came near, she squared the stack again and answered in short sentences. I took the desk behind her. Her silence toward me was a door left on the latch. When the tea came, she poured two cups and set one at the corner of her own desk, on the side nearest me, without turning around. Later, clearing the desks, I found Nikhil written small on the inside cover of the top primer, in the round hand she had used as a girl.\n질문: As used in the text, the phrase “a door left on the latch” most nearly suggests that Ananya's silence is\n선택지: a firm barrier meant to keep the narrator away | a guarded reserve that still allows the narrator in | a fragile calm that could give way under pressure | a general reluctance to talk with relatives today\n정답: B\n판정 메모: Fable 추정 난이도 medium / difficulty_too_easy\n→ 같은 장면·인물·정답 위치를 유지하되 근거를 더 흩어 놓고 오답을 더 그럴듯하게 고쳐 어렵게 다시 쓴다.\n### lit40-hard-03-044 — skill words_in_context · 유형 figurative_language · 난이도 hard · 장르 poetry · targetLetter C\n유형 지시: 비유 표현이 문맥에서 전달하는 의미를 묻는다. 질문은 'As used in the text, the phrase “…” most nearly suggests …' 형식이고 인용한 구절이 지문에 있어야 하며, 지문 본문에는 따옴표(\" “ ”)를 쓰지 않는다(대사는 따옴표 없이 서술).\n난이도 지시: hard: 태도·동기가 직접 서술되지 않고 행동·대조·반복으로만 드러나며 근거가 떨어진 두 곳 이상에 흩어진다. 표면 해석(그럴듯한 오독)과 정답 해석이 갈린다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a stone bridge in Addis Ababa; a seamstress and her only apprentice about borrowed money and borrowed time\n인물 이름: Dariush, Rukhsana 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 인물의 이름으로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 110~170단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 C 에 둔다. correct_letter 는 C 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 C 로 정한 뒤 나머지 선택지를 채운다.\n레시피(words_in_context_lit_figurative_language_hard_v4, 난이도 hard): 지문에 있는 비유 구절이 문맥에서 전하는 의미를 묻는다. 관용 표현·상투적 은유는 쓰지 않고 이 지문 안에서만 의미가 정해지는 신선한 비유를 쓴다. 비유가 가리키는 대상의 의미를 정하는 단서는 비유 앞의 두 곳과 비유 뒤의 한 곳에 나눠 두며, 비유 바로 다음 문장이 해석을 알려 주면 안 된다. 오답 3개는 모두 비유로서 합리적인 해석이어야 하며 문자 해석은 많아야 하나다. 오답은 비유가 가진 서로 다른 속성(무게·한계·소리·온도 등)을 하나씩 골라 해석한 것이고, 정답은 두 단서를 만족하는 속성이다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 2 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 비유의 한 속성(예: 무게)에서 나온 해석. 앞 단서 한 곳만 설명한다 (2) 지문 표현을 빌려 다른 속성(예: 한계)에서 나온 해석. 뒤 단서를 설명하지 못한다 (3) 문자 해석이거나 정답의 의미 범위를 한 단계 넓힌 해석. 절대어 없이 온건하게 쓴다\n금지: 비유 직후 문장이 비유를 풀어 쓴다 / 관용적으로 의미가 알려진 비유(stone in the chest 등)를 쓴다 / 정답이 지문 마지막 문장(또는 밑줄 문장 직후 문장)을 거의 그대로 바꿔 말한 문장이다 / 오답이 지문과 정반대 정서·사실이거나 지문의 명시 문장과 충돌해 지문 사실만 확인해도 소거된다(오답은 지문의 모든 명시 문장과 양립해야 한다) / 오답에 always·never·only·completely·entirely 같은 절대어나 -ly 극단 수식어를 쓴다(과잉 일반화 오답은 온건한 어휘로 범위만 넓힌다) / 정답만 길거나 구체적이거나 'yet·despite·but' 같은 양가 접속 구조를 갖는다(네 선택지의 문장틀·길이(±2단어)·접속 구조를 맞춘다) / 정답을 판정하는 근거가 한 문장·한 곳에 몰려 있다 / 정답의 핵심 어휘가 지문에 그대로 나온다(지문 어휘 차용은 오답 쪽에만 둔다)\n지문 길이: 110~170단어.\n지문 설계: 근거 위치 — 비유 앞 1: 대상이 처한 상황 / 비유 앞 2: 인물의 반복 행동 / 비유 뒤: 해석을 한 번 뒤집는 사소한 디테일(해석을 주지 않음). 직접 서술 금지 — 비유의 뜻을 풀어 주는 문장, 동격·'that is' 정의 금지.\n정답 설계: 추론 2단계 — 비유의 후보 속성 중 앞 단서와 뒤 단서를 동시에 만족하는 속성을 선택. 오답 3개는 지문의 모든 명시 문장과 양립해야 하고(지문 사실과 충돌하는 오답 금지), 선택지 4개는 같은 문장틀·비슷한 길이로 쓴다.\n제출 전 자기 점검(하나라도 아니면 고쳐서 제출): (1) 비유를 문맥 없이 읽었을 때 가장 먼저 떠오르는 해석이 오답인가 (2) 세 오답 사이에 같은 속성이 중복되지 않는가 (3) 오답 3개 각각을 지문의 모든 명시 문장과 대조해 충돌하는 문장이 하나도 없는가(충돌하면 고친다) (4) 정답을 고르기 전 학생이 처음 떠올릴 해석(표면 해석)이 오답 중 하나로 들어 있는가 (5) 정답만 남기는 결정 단서가 지문의 한 곳(행동·시점·누락)에 있는가 — 없으면 복수 정답, 있어도 한 문장에 직설이면 쉬움 (6) 지문 마지막 문장을 지우고 풀어도 정답이 유지되는가\n[이전 시도(난이도가 쉽다고 판정됨)]\n지문: Dariush counts the coins in his tin each evening\non the stone bridge, where the wind off the river\nlifts the corners of Rukhsana's blue cloth.\nThe sum is not yet the sum he borrowed in spring.\nShe pins a hem against the railing, three fingers, then three,\nand shows him again the blind stitch, the tailor's knot,\nthe way to bite a thread without fraying it.\nEach night he opens the ledger to her page,\nreads the figure written there, and closes it.\nHis debt to her is a lamp lit in a room he does not enter.\nAt noon the vendors cross with their baskets.\nHer hands do not stop; neither do his.\nWhen the light thins over the water\nhe takes the ledger out once more\nand writes beneath the figure, not a payment,\nonly the day's date, in small careful letters,\nthe way she taught him to close a seam.\n질문: As used in the text, the phrase “a lamp lit in a room he does not enter” most nearly suggests that Dariush's debt is\n선택지: a warm gratitude that brightens his days on the bridge | a private shame that keeps him from speaking to her | an obligation he keeps tending while not settling it | a small expense he means to write down at some point\n정답: C\n판정 메모: Fable 추정 난이도 medium / difficulty_too_easy\n→ 같은 장면·인물·정답 위치를 유지하되 근거를 더 흩어 놓고 오답을 더 그럴듯하게 고쳐 어렵게 다시 쓴다.\n### lit40-hard-03-047 — skill words_in_context · 유형 word_in_context · 난이도 hard · 장르 short_story · targetLetter B\n유형 지시: 지문에 빈칸 ______ 을 정확히 하나 두고 질문은 'Which choice completes the text with the most logical and precise word or phrase?' 로 한다.\n난이도 지시: hard: 태도·동기가 직접 서술되지 않고 행동·대조·반복으로만 드러나며 근거가 떨어진 두 곳 이상에 흩어진다. 표면 해석(그럴듯한 오독)과 정답 해석이 갈린다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a summer camp dining hall in Haifa; a farmer and a surveyor from the city over a decision made without asking\n인물 이름: Lior, Shira 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 시간·날짜 표현으로 시작('By', 'On', 'After' 등). 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 100~150단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 B 에 둔다. correct_letter 는 B 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 B 로 정한 뒤 나머지 선택지를 채운다.\n레시피(words_in_context_lit_word_in_context_hard_v4, 난이도 hard): 빈칸 ______ 을 정확히 하나 두고 가장 논리적이고 정확한 말을 고르게 한다. 빈칸 뒤에 동격구·정의 구문·'that is'를 두지 않는다(웨이브 1에서 빈칸 뒤가 정답을 정의해 쉬웠다). 빈칸이 만족해야 할 제약 두 가지를 서로 떨어진 곳에 둔다: (1) 앞쪽 인물의 행동과 일관되어야 하는 의미 (2) 뒤쪽 행동과 맞물려야 하는 정도·어조. 선택지는 코드 게이트(단어 수 2~40, 최장/최단 비율 1.8 이하) 때문에 모두 2~3단어 구로 쓰고 같은 품사 구조로 통일한다(예: 'quietly relieved' 형태의 부사+형용사 또는 동사+목적어). 오답 3개는 문법상 모두 들어가고 의미 영역이 같으며, (a) 제약 하나만 만족 (b) 정답과 정도·어조만 다른 근접 표현 (c) 지문의 주제어를 빌린 표현이다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 2 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 두 제약 중 하나(앞 행동과의 일관성)만 만족하는 표현 (2) 정답과 의미가 가깝지만 정도·어조가 한 단계 다른 근접 표현. 절대어 없이 쓴다 (3) 지문의 주제어·인물 행동에서 빌린 표현. 문법상 들어가나 뒤 제약과 맞지 않는다\n금지: 선택지를 한 단어로 써서 길이 게이트(2단어 이상)에 걸리게 한다 / 빈칸 바로 뒤에 의미를 풀이하는 구를 둔다 / 정답이 지문 마지막 문장(또는 밑줄 문장 직후 문장)을 거의 그대로 바꿔 말한 문장이다 / 오답이 지문과 정반대 정서·사실이거나 지문의 명시 문장과 충돌해 지문 사실만 확인해도 소거된다(오답은 지문의 모든 명시 문장과 양립해야 한다) / 오답에 always·never·only·completely·entirely 같은 절대어나 -ly 극단 수식어를 쓴다(과잉 일반화 오답은 온건한 어휘로 범위만 넓힌다) / 정답만 길거나 구체적이거나 'yet·despite·but' 같은 양가 접속 구조를 갖는다(네 선택지의 문장틀·길이(±2단어)·접속 구조를 맞춘다) / 정답을 판정하는 근거가 한 문장·한 곳에 몰려 있다 / 정답의 핵심 어휘가 지문에 그대로 나온다(지문 어휘 차용은 오답 쪽에만 둔다)\n지문 길이: 100~150단어.\n지문 설계: 근거 위치 — 앞: 인물의 습관적·반복 행동(제약 1) / 중간: 사건이 한 번 전환되는 지점 / 빈칸 이후 문장: 제약 2를 만드는 행동(빈칸 의미를 정의하지 않음). 직접 서술 금지 — 빈칸 뒤 동격구, 'that is', 대시 뒤 풀이 금지.\n정답 설계: 추론 2단계 — 앞 행동의 방향과 뒤 행동의 정도를 동시에 만족하는 표현을 선택. 오답 3개는 지문의 모든 명시 문장과 양립해야 하고(지문 사실과 충돌하는 오답 금지), 선택지 4개는 같은 문장틀·비슷한 길이로 쓴다.\n제출 전 자기 점검(하나라도 아니면 고쳐서 제출): (1) 오답 하나를 넣어도 문법·의미가 이상하지 않은가(그래야 그럴듯함) (2) 정답을 빈칸 뒤 문장만으로 고를 수 없는가 (3) 오답 3개 각각을 지문의 모든 명시 문장과 대조해 충돌하는 문장이 하나도 없는가(충돌하면 고친다) (4) 정답을 고르기 전 학생이 처음 떠올릴 해석(표면 해석)이 오답 중 하나로 들어 있는가 (5) 정답만 남기는 결정 단서가 지문의 한 곳(행동·시점·누락)에 있는가 — 없으면 복수 정답, 있어도 한 문장에 직설이면 쉬움 (6) 지문 마지막 문장을 지우고 풀어도 정답이 유지되는가\n[이전 시도(난이도가 쉽다고 판정됨)]\n지문: By the third week of July, Shira had stopped eating with the surveyors. I had come up from Tel Aviv to map the camp's new water line, and she farmed the fields beside it; each morning she carried her tray to the far end of the dining hall and ate facing the window, where the stakes I had planted the day before stood in her orchard. On Thursday the regional office approved my route without consulting her. Lior, the camp cook, set the approval letter beside her coffee. Shira read it and remained ______. She folded the letter into quarters, finished her bread, and then walked the length of the hall to my table and asked, in an even voice, to see the map.\n질문: Which choice completes the text with the most logical and precise word or phrase?\n선택지: hot with anger | cool and composed | quiet and defeated | deep in planning\n정답: B\n판정 메모: Fable 추정 난이도 medium / difficulty_too_easy\n→ 같은 장면·인물·정답 위치를 유지하되 근거를 더 흩어 놓고 오답을 더 그럴듯하게 고쳐 어렵게 다시 쓴다.\n### lit40-hard-03-069 — skill central_ideas_details · 유형 narrator_attitude · 난이도 hard · 장르 memoir · targetLetter A\n유형 지시: 화자·서술자가 대상에 대해 취하는 태도를 묻는다.\n난이도 지시: hard: 태도·동기가 직접 서술되지 않고 행동·대조·반복으로만 드러나며 근거가 떨어진 두 곳 이상에 흩어진다. 표면 해석(그럴듯한 오독)과 정답 해석이 갈린다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a hillside terrace in Manila; a grandfather and a granddaughter learning his language while pretending to enjoy a gift that is wrong\n인물 이름: Orla, Stavros 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 부사절·전치사구로 시작('When', 'Although', 'Beside' 등). 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 120~180단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 A 에 둔다. correct_letter 는 A 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 A 로 정한 뒤 나머지 선택지를 채운다.\n레시피(central_ideas_details_lit_narrator_attitude_hard_v4, 난이도 hard): 화자가 대상에 대해 갖는 태도를 묻는다. 1인칭(또는 가까운 3인칭) 서술에서 화자의 '말투'(불평·농담·건조한 평가)와 '행동'(조용히 해 주는 일, 피하는 화제)이 어긋나게 한다. 말투 단서는 앞부분, 행동 단서는 뒤쪽, 둘 사이에 화자가 스스로를 정정하는 어구(not lying, exactly 같은 완화·망설임)를 한 번 둔다. 정답은 말투 아래 놓인 태도를 말한다. 네 선택지는 모두 '태도 A despite/while 태도 B' 같은 양가 구조로 통일해 정답만 양가형이 되지 않게 하고, 오답은 (a) 말투만 읽은 태도 (b) 존경·애정이지만 이유가 다른 태도 (c) 지문 어휘를 빌린 태도로 만든다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 2 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 화자의 말투(불평·농담)만 읽어 낸 태도. 행동 단서를 설명하지 못한다 (2) 태도의 방향(애정·존중)은 같으나 이유를 뒤집은 선택지(상대가 해 준 일 때문이 아니라 화자 자신의 죄책감 때문이라는 식) (3) 지문의 표현을 빌려 태도로 일반화한 선택지. 지문 사실과 양립하지만 화자의 정정 어구와 맞지 않는다\n금지: 화자가 상대에 대한 마음을 직접 평가하는 문장을 마지막에 둔다 / 정답이 지문 마지막 문장(또는 밑줄 문장 직후 문장)을 거의 그대로 바꿔 말한 문장이다 / 오답이 지문과 정반대 정서·사실이거나 지문의 명시 문장과 충돌해 지문 사실만 확인해도 소거된다(오답은 지문의 모든 명시 문장과 양립해야 한다) / 오답에 always·never·only·completely·entirely 같은 절대어나 -ly 극단 수식어를 쓴다(과잉 일반화 오답은 온건한 어휘로 범위만 넓힌다) / 정답만 길거나 구체적이거나 'yet·despite·but' 같은 양가 접속 구조를 갖는다(네 선택지의 문장틀·길이(±2단어)·접속 구조를 맞춘다) / 정답을 판정하는 근거가 한 문장·한 곳에 몰려 있다 / 정답의 핵심 어휘가 지문에 그대로 나온다(지문 어휘 차용은 오답 쪽에만 둔다)\n지문 길이: 120~180단어.\n지문 설계: 근거 위치 — 앞: 화자의 말투(불평·농담) / 중간: 자기 정정·망설임 어구 / 뒤: 화자가 조용히 해 주는 행동 또는 피하는 화제. 직접 서술 금지 — 화자의 직접 평가어(admire, resent, grateful 등)와 '마음'을 말하는 문장 금지.\n정답 설계: 추론 2단계 — 말투와 행동의 어긋남을 결합해 말투 아래 태도를 추론. 오답 3개는 지문의 모든 명시 문장과 양립해야 하고(지문 사실과 충돌하는 오답 금지), 선택지 4개는 같은 문장틀·비슷한 길이로 쓴다.\n제출 전 자기 점검(하나라도 아니면 고쳐서 제출): (1) 선택지를 가렸을 때 정답만 접속 구조가 다르지 않은가 (2) 말투만 믿은 학생이 걸리는 오답이 있는가 (3) 오답 3개 각각을 지문의 모든 명시 문장과 대조해 충돌하는 문장이 하나도 없는가(충돌하면 고친다) (4) 정답을 고르기 전 학생이 처음 떠올릴 해석(표면 해석)이 오답 중 하나로 들어 있는가 (5) 정답만 남기는 결정 단서가 지문의 한 곳(행동·시점·누락)에 있는가 — 없으면 복수 정답, 있어도 한 문장에 직설이면 쉬움 (6) 지문 마지막 문장을 지우고 풀어도 정답이 유지되는가\n[이전 시도(난이도가 쉽다고 판정됨)]\n지문: When my grandfather moved into our flat above the terraced gardens in Manila, he brought three suitcases and a Greek grammar for me. Stavros had decided I would learn his language by summer, and every evening on the terrace he drilled verbs while the neighbors' radios played. I complained to my friends that he taught like a drill sergeant with a cough. For my birthday he gave me a wool sweater, knitted by his sister in Thessaloniki, in a city where the evenings rarely drop below twenty-five degrees. I told him it was perfect. That was not a lie, exactly; it was a word I had just learned from him. I wore it to every lesson on the terrace, sweating, until the cuffs stretched past my wrists. Now I keep the grammar on my desk with his pencil marks in the margins, and I conjugate one verb aloud each morning before I open the window.\n질문: Which choice best describes the narrator's attitude toward Stavros?\n선택지: Devoted affection for Stavros and his efforts while she grumbles about his strict lessons | Mild annoyance at Stavros's nightly drilling while she endures the lessons out of duty | Respectful fondness for Stavros out of pity for his move while she resists his teaching | Amused tolerance of the drill sergeant's habits while she plays along with the sweater\n정답: A\n판정 메모: Fable 추정 난이도 medium / difficulty_too_easy\n→ 같은 장면·인물·정답 위치를 유지하되 근거를 더 흩어 놓고 오답을 더 그럴듯하게 고쳐 어렵게 다시 쓴다.\n### lit40-hard-03-071 — skill central_ideas_details · 유형 main_idea_or_purpose · 난이도 hard · 장르 novel_excerpt · targetLetter C\n유형 지시: 지문 전체의 요지나 서술 목적을 묻는다.\n난이도 지시: hard: 태도·동기가 직접 서술되지 않고 행동·대조·반복으로만 드러나며 근거가 떨어진 두 곳 이상에 흩어진다. 표면 해석(그럴듯한 오독)과 정답 해석이 갈린다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a radio repair shop in Seville; a teenage cook and her stern aunt over a borrowed object never returned\n인물 이름: Freja, Remedios 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 시간·날짜 표현으로 시작('By', 'On', 'After' 등). 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 130~190단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 C 에 둔다. correct_letter 는 C 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 C 로 정한 뒤 나머지 선택지를 채운다.\n레시피(central_ideas_details_lit_main_idea_or_purpose_hard_v4, 난이도 hard): 글 전체의 요지(또는 서술 목적)를 묻는다. 지문에는 요지를 말하는 문장이 없고 서로 다른 두 사건(또는 두 시점)이 있어, 정답은 두 사건의 '관계'(둘이 서로 의미를 바꾸는 대조·반복·아이러니)를 진술한다. 사건 1은 앞부분, 사건 2는 뒷부분에 두고 그 사이에 미해결로 남는 디테일을 하나 둔다. 오답 3개는 (a) 사건 1의 요지 (b) 사건 2의 요지 (c) 두 사건을 함께 말하되 인과 방향을 뒤집은 요지이며, 셋 모두 지문 사실과 양립하는 온건한 진술로 쓴다. 절대어로 과장하지 않는다.\n근거 분산: 정답을 뒷받침하는 단서를 서로 다른 2곳 이상(문장 간격 3 이상)에 두고, 마지막 문장이 정답을 요약·재진술하지 않게 한다.\n오답 설계: (1) 사건 1의 요지만 말하는 선택지. 지문 사실에 충실하다 (2) 사건 2의 요지만, 사건 2의 표현을 빌려 말하는 선택지. 지문 사실에 충실하다 (3) 두 사건을 모두 언급하지만 한 사건이 다른 사건의 원인·결과라는 방향을 뒤집은 선택지. 지문의 시간 순서와는 충돌하지 않게 쓴다\n금지: 사건 2의 마지막 문장이 교훈·깨달음을 직접 말한다 / 정답이 지문 마지막 문장(또는 밑줄 문장 직후 문장)을 거의 그대로 바꿔 말한 문장이다 / 오답이 지문과 정반대 정서·사실이거나 지문의 명시 문장과 충돌해 지문 사실만 확인해도 소거된다(오답은 지문의 모든 명시 문장과 양립해야 한다) / 오답에 always·never·only·completely·entirely 같은 절대어나 -ly 극단 수식어를 쓴다(과잉 일반화 오답은 온건한 어휘로 범위만 넓힌다) / 정답만 길거나 구체적이거나 'yet·despite·but' 같은 양가 접속 구조를 갖는다(네 선택지의 문장틀·길이(±2단어)·접속 구조를 맞춘다) / 정답을 판정하는 근거가 한 문장·한 곳에 몰려 있다 / 정답의 핵심 어휘가 지문에 그대로 나온다(지문 어휘 차용은 오답 쪽에만 둔다)\n지문 길이: 130~190단어.\n지문 설계: 근거 위치 — 앞: 사건 1 / 중간: 미해결 디테일(설명하지 않음) / 뒤: 사건 2(사건 1을 다시 읽게 함). 직접 서술 금지 — 교훈·깨달음 문장, 인물의 총평 대사, 'learned that'·'realized' 금지.\n정답 설계: 추론 3단계 — 사건 1 의미 파악 -> 사건 2가 그 의미를 바꿈 -> 둘의 관계로 요지를 진술. 오답 3개는 지문의 모든 명시 문장과 양립해야 하고(지문 사실과 충돌하는 오답 금지), 선택지 4개는 같은 문장틀·비슷한 길이로 쓴다.\n제출 전 자기 점검(하나라도 아니면 고쳐서 제출): (1) 부분 요지 두 개가 각각 한 사건에 대해서는 정확한가(틀린 사실이 없는가) (2) 정답을 한 사건만 읽고 고를 수 없는가 (3) 오답 3개 각각을 지문의 모든 명시 문장과 대조해 충돌하는 문장이 하나도 없는가(충돌하면 고친다) (4) 정답을 고르기 전 학생이 처음 떠올릴 해석(표면 해석)이 오답 중 하나로 들어 있는가 (5) 정답만 남기는 결정 단서가 지문의 한 곳(행동·시점·누락)에 있는가 — 없으면 복수 정답, 있어도 한 문장에 직설이면 쉬움 (6) 지문 마지막 문장을 지우고 풀어도 정답이 유지되는가\n[이전 시도(난이도가 쉽다고 판정됨)]\n지문: By the spring I turned fifteen, I had cooked every meal in my aunt's flat above the radio repair shop in Seville for two years. Remedios mended wirelesses downstairs and spoke to me mostly in instructions: less salt, more oil, close the door against the solder smoke. That April a neighbor borrowed our good copper pan for a christening and did not bring it back. I fried eggs in a dented tin pot and complained about it at every meal, while my aunt only turned the dial of whatever set lay open on her bench. In May she began working late, and a smell of hot metal drifted up the stairs past midnight. On my saint's day I found a new pan on the stove, hammered from the brass casing of an old radio cabinet, its handle wrapped in copper wire from the shop. Remedios was already downstairs, bent over a set, her back to the stairs.\n질문: Which choice best states the main idea of the text?\n선택지: A neighbor's thoughtless borrowing leaves a young cook with poor tools for her work. | A handmade pan arrives to replace the copper one on the narrator's saint's day. | An aunt's seeming indifference turns out to conceal a reply made with her own craft. | The aunt's new pan is what finally ends the narrator's habit of complaining at meals.\n정답: C\n판정 메모: Fable 추정 난이도 medium / difficulty_too_easy\n→ 같은 장면·인물·정답 위치를 유지하되 근거를 더 흩어 놓고 오답을 더 그럴듯하게 고쳐 어렵게 다시 쓴다."
+}

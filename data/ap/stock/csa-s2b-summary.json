@@ -1,0 +1,101 @@
+{
+ "runs": [
+  "csa-s2-mc-b"
+ ],
+ "rows": 44,
+ "passed": 30,
+ "rejected": 14,
+ "passRate": 0.682,
+ "mc": {
+  "rows": 44,
+  "passed": 30,
+  "passRate": 0.682
+ },
+ "frq": {
+  "rows": 0,
+  "passed": 0,
+  "passRate": 0
+ },
+ "unitsPassed": {
+  "2": 26,
+  "3": 4
+ },
+ "skillsPassed": {
+  "3.A": 12,
+  "3.D": 2,
+  "4.A": 1,
+  "2.A": 6,
+  "3.C": 7,
+  "2.C": 1,
+  "4.B": 1
+ },
+ "figPassed": {
+  "text": 29,
+  "none": 1
+ },
+ "figAll": {
+  "text": 42,
+  "none": 2
+ },
+ "figPassRate": {
+  "text": "29/42",
+  "none": "1/2"
+ },
+ "renderTypesPassed": {
+  "text": 29,
+  "none": 1
+ },
+ "archetypesPassed": {
+  "cs_boolean_expr_trace": 2,
+  "cs_bug_find": 1,
+  "cs_demorgan": 1,
+  "cs_describe_int": 1,
+  "cs_digit_completion": 2,
+  "cs_else_if_chain": 1,
+  "cs_for_iter_count": 2,
+  "cs_gcd_completion": 1,
+  "cs_halving_count": 2,
+  "cs_if_nesting": 2,
+  "cs_loop_bug_fix": 1,
+  "cs_nested_completion": 1,
+  "cs_nested_triangle": 2,
+  "cs_palindrome_completion": 1,
+  "cs_return_early": 2,
+  "cs_string_loop_trace": 2,
+  "cs_while_completion": 1,
+  "css_loop_set": 1,
+  "cs_instance_helper_completion": 1,
+  "cs_precondition_class": 1,
+  "cs_return_reference": 2
+ },
+ "archetypesAll": {
+  "cs_boolean_expr_trace": 2,
+  "cs_bug_find": 2,
+  "cs_demorgan": 2,
+  "cs_describe_int": 2,
+  "cs_digit_completion": 2,
+  "cs_else_if_chain": 2,
+  "cs_for_iter_count": 2,
+  "cs_gcd_completion": 2,
+  "cs_halving_count": 2,
+  "cs_if_nesting": 2,
+  "cs_loop_bug_fix": 2,
+  "cs_nested_completion": 2,
+  "cs_nested_triangle": 2,
+  "cs_palindrome_completion": 2,
+  "cs_return_early": 2,
+  "cs_string_algorithm": 2,
+  "cs_string_loop_trace": 2,
+  "cs_while_completion": 2,
+  "css_loop_set": 2,
+  "cs_instance_helper_completion": 2,
+  "cs_precondition_class": 2,
+  "cs_return_reference": 2
+ },
+ "failedArchetypes": [
+  "cs_string_algorithm"
+ ],
+ "costUsd": {
+  "csa-s2-mc-b": 1.4059
+ }
+}

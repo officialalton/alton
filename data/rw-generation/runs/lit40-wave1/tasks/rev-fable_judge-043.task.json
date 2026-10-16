@@ -1,0 +1,322 @@
+{
+ "schema": "rw-session-task/v1",
+ "kind": "review",
+ "role": "fable_judge",
+ "runId": "lit40-wave1",
+ "taskId": "rev-fable_judge-043",
+ "chunkId": "rev-fable_judge-043",
+ "suggestedModel": "fable",
+ "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-fable_judge-043.result.json",
+ "outputSchema": {
+  "chunkId": "청크 ID",
+  "model": "fable",
+  "items": [
+   {
+    "candidateId": "id",
+    "picked_letter": "A|B|C|D",
+    "other_defensible": "정답 외 방어 가능한 선택지가 있으면 true",
+    "est_difficulty": "easy|medium|hard (실제 체감, 요청 난이도에 맞추지 말 것)",
+    "hard_fit": "실제 SAT hard 수준의 사고 단계가 필요하면 true(지문 길이·난어만이면 false)",
+    "plausible_distractors": "오답 3개가 모두 그럴듯하고 서로 다른 오개념에서 나왔으면 true",
+    "length_balanced": "네 선택지 길이·구체성이 비슷해 정답이 형식으로 드러나지 않으면 true",
+    "multi_answer_risk": "복수 정답 위험이 있으면 true",
+    "issues": "한 줄 메모"
+   }
+  ]
+ },
+ "items": [
+  {
+   "candidateId": "lit40-medium-05-078",
+   "attempt": 1,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "medium",
+   "passage": "Colette left the parcel on the fountain's dry lip,\nthe blue scarf I knitted through a Lyon winter,\nfolded back into its paper, unworn.\nForty years across one courtyard,\nperhaps a hundred sentences between us.\nThe neighbors call it pride. I nearly did.\nBut the wool has taken on her lavender,\nas if it slept a while in her drawer,\nand tucked in the last fold, a strip of lace\nworked in the pattern her mother taught us both,\nColette and Odile, nine years old, sharing one needle.\nI sit beside the basin that holds no water\nand count the stitches she added, row by row,\nuntil the bells at Saint-Jean begin.",
+   "question": "Which choice best describes the speaker's attitude toward Colette's return of the scarf?",
+   "options": [
+    "Wounded, regarding the returned scarf as proof of Colette's lasting pride.",
+    "Tender, reading the scarf's return as a silent and generous answer.",
+    "Bewildered, unable to say why Colette would refuse a handmade gift.",
+    "Resigned, accepting the return as typical of a fading friendship."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-05-093",
+   "attempt": 1,
+   "skill": "inferences",
+   "questionType": "symbolism",
+   "requestedDifficulty": "medium",
+   "passage": "Astrid distrusted new gates. For forty years she had kept the oak gate of the Bergen cemetery standing by replacing a single rotten slat each spring, so that hardly a board of the first gate remained, though no mourner could have said when it changed. Her apprentice, Anahera, wanted the gate's hundredth year marked by something people would notice: a carved arch, gilt letters, a ribbon for the mayor to cut. Astrid listened, then handed her a plane and one slat sawn from the same stand of oak her own teacher had used. Anahera grumbled through the planing. When she fitted the board, its grain ran almost seamlessly into the slat beside it, which bore a faint carpenter's mark she did not recognize. Astrid touched the mark and said it was older than either of them. That evening the gate swung shut behind the last visitors, and the hinges, oiled that morning, made no sound at all.",
+   "question": "In the text, the cemetery gate most likely symbolizes",
+   "options": [
+    "a continuity sustained through small repairs handed down across generations.",
+    "Astrid's stubborn refusal to accept any change to the town's old customs.",
+    "the lasting grief of the mourners who pass through the cemetery each day.",
+    "a fading craft that younger carpenters such as Anahera no longer value."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-06-004",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "medium",
+   "passage": "On the first Monday of November, the movie theater in Vienna was closed for the season, and Bao had rented its empty stage for lessons. Linus arrived with his violin and a list of complaints. The hall was cold, the seats smelled of dust, and nothing about this city resembled the conservatory he had left. Bao listened, tuned his A string sharply, and said they would begin with open strings, as beginners do. Linus played them with exaggerated boredom. Then the note rose into the dark balcony and returned to him, rounder and slower than any sound he had made at home. He stopped. He played it again, softly this time, and waited for the echo as if it might answer a question. Bao said nothing, but she moved her chair closer, and for the rest of the hour neither of them looked at the clock.",
+   "question": "Which choice best describes the shift in tone that occurs in the text?",
+   "options": [
+    "From grudging resentment toward the lesson to quiet absorption in the hall's sound",
+    "From open admiration for Bao to disappointment in her old-fashioned methods",
+    "From nervous excitement about the city to calm indifference toward the music",
+    "From playful teasing between the two to tense rivalry over the instrument"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-06-009",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "text_structure",
+   "requestedDifficulty": "medium",
+   "passage": "Words were Malek's first gift to every keeper he trained. At the lighthouse station on the edge of Cairo's old harbor district, he now taught them to his granddaughter, Dalia, who had grown up speaking only the language of her mother's country. Each evening he named a part of the lamp in Arabic, and she repeated it, stumbling, while the beam swept the dark water. She told him she was learning only to please him, that she would leave for her studies abroad in the fall and forget it all. He did not argue. One night the power failed, and Malek, his eyes weak, asked her to talk him through the backup switches. She found herself calling each one by the name he had taught her, without translating. When the light returned, she did not mention her plans, and the next evening she arrived before he did, notebook already open.",
+   "question": "Which choice best describes the overall structure of the text?",
+   "options": [
+    "It describes a power failure, then flashes back to explain why the lighthouse matters to Malek.",
+    "It presents a routine and a character's dismissive stance, then shows an event that quietly alters it.",
+    "It contrasts two characters' memories of the lighthouse, then reveals which memory is accurate.",
+    "It lists the parts of the lamp, then explains how each part was named by an earlier keeper."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-06-013",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "underlined_portion_function",
+   "requestedDifficulty": "medium",
+   "passage": "A wooden spoon tapped twice against the pot was Mandla's signal that dinner was late, and Nandi heard it all the way up in the old projection booth. She had turned the booth above her aunt's cinema in Addis Ababa into a kitchen of her own, with a hot plate and a shelf of spices, and she cooked there whenever she wanted to be left alone. Tonight Mandla climbed the narrow stairs and announced that the stew needed more salt. Nandi answered that it was perfect. They argued about salt for ten minutes, voices rising over the hum of the cooling projector. __Neither of them mentioned the letter from the culinary school in Nairobi, still unopened on the shelf between the cumin and the cardamom.__ At last Mandla tasted the stew again, set down the spoon, and said quietly that perhaps it was fine after all.",
+   "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+   "options": [
+    "It explains why Mandla dislikes the spices Nandi keeps in the booth.",
+    "It suggests that the argument about salt stands in for a larger, unspoken disagreement.",
+    "It reveals that Nandi has already decided to reject the culinary school's offer.",
+    "It shows that Mandla is unaware that Nandi has applied to any school."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-06-015",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "underlined_portion_function",
+   "requestedDifficulty": "medium",
+   "passage": "Beirut's oldest ceramics studio sits above a tire shop, and that is where Samira and I, Kwesi, spent every Saturday after her family moved across the city. Distance made our friendship deliberate; we had to plan it now, and the studio became our fixed point. Last spring, one of my bowls was chosen for a gallery show downtown. Samira hugged me in the doorway and said she had always known. Then, over the following weeks, she began arriving late, leaving early, finding reasons to work at the far wheel. __One Saturday I found her old glaze test tiles, the ones we had made together our first month, boxed and labeled for the shelf marked \"give away.\"__ I did not ask about them. Instead, I brought the box back to our table and set it between us, and after a while she took out a tile and began, very carefully, to describe what she had hoped it would become.",
+   "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+   "options": [
+    "It explains how the narrator first learned to mix glazes at the studio.",
+    "It reveals that Samira has decided to stop making ceramics altogether.",
+    "It shows that the studio has begun discarding work by former members.",
+    "It offers concrete evidence of Samira's withdrawal that prompts the narrator to act."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-06-017",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "medium",
+   "passage": "I watched my grandmother, Solange, shape the morning loaves at the Lisbon bakery an hour before the shutters opened, the way I had watched her since I was small enough to sit on the flour sacks. In three days I, Anselmo, would board a ship for a job across the ocean, and I had come to say a proper goodbye. I had prepared a speech. She handed me an apron instead. For an hour we worked side by side, and she corrected my folding with a flick of her knuckle, never once mentioning my departure. At first her silence stung; I wanted her to say she would miss me. But as the ovens warmed, I noticed she had set aside a small, tightly wrapped loaf, the kind that keeps for a week, and that she was teaching me, fold by fold, how to make it myself.",
+   "question": "Which choice best describes the narrator's attitude toward Solange by the end of the text?",
+   "options": [
+    "He comes to appreciate that her lessons express care she does not state aloud.",
+    "He remains hurt that she refuses to acknowledge his decision to leave.",
+    "He feels amused by her strictness and doubts the value of her methods.",
+    "He grows impatient with her and wishes he had left without visiting."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-06-018",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "medium",
+   "passage": "Alonso had taught geography in the village for forty years, and he still spoke as if every bus leaving the Galician depot were a lesson. Fatma, once his brightest pupil, now drove the morning route, and she let him ride free in the front seat. Today her small son rode with them. Halfway to the coast, the boy asked Alonso why he never visited the cities he had taught about. Alonso began an answer about railways and expense, then about his late wife's health, then about the weather in Madrid. The boy listened with a frown. Fatma kept her eyes on the road. She remembered how certain Alonso had sounded in class, how he had made every distant place seem within reach, and she felt something gentler than disappointment watching him stumble now. When they reached the coast, she pulled over a moment longer than necessary, so he could see the water before getting off.",
+   "question": "Which choice best describes the narrator's attitude toward Alonso?",
+   "options": [
+    "Openly mocking, highlighting his excuses to diminish his former authority",
+    "Sympathetic, noting his evasions while treating his vulnerability with kindness",
+    "Coldly neutral, reporting his words without suggesting any emotional response",
+    "Reverent, presenting him as wiser than the boy who questions him"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-06-019",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "medium",
+   "passage": "Three kites hung drying in the Rotterdam yard,\ntwo red, one patched with a map of somewhere else,\nthe day after we buried our uncle.\nEmil spoke first, in the voice of lists:\nthe stairs, the stove, the doctor's warnings,\nthe home outside the city with a garden view.\nIngrid wound string around her fingers\nand said our aunt still climbed to this yard every morning\nto test the wind for kites no one would buy.\nI said nothing, cousin to them both.\nI watched our aunt through the kitchen window,\nher hands smoothing paper as if the house were listening,\nand I understood that both of them were right,\nand that the yard, not the stairs,\nwas what we were really deciding to take from her.",
+   "question": "Which choice best describes the speaker's attitude toward the decision about the aunt?",
+   "options": [
+    "Firmly convinced that moving her is the only responsible choice",
+    "Dismissive of both cousins' concerns as exaggerated and selfish",
+    "Torn, recognizing the sense of each view and the loss either entails",
+    "Indifferent, since the speaker plans to leave the matter to the cousins"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-06-020",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "medium",
+   "passage": "Two coffee cups set out on the galley counter every morning: that was Dolores's habit for eleven years after her husband died. She had cooked for his crew on the old cargo ship moored in Havana harbor, and when the ship became a floating restaurant, she stayed on in its narrow galley. I, Daphne, delivered her produce each dawn. At first I found the second cup a little sad and a little strange, and I placed the onions carefully around it as if it were fragile. One morning she poured coffee into both cups and handed the second to me. \"He would want it used,\" she said, and nothing more. I drank it standing up, too surprised to sit. Since then, the cup is waiting for me when I arrive, and I have come to see it less as a memorial than as an invitation she chose to keep open.",
+   "question": "Which choice best describes the narrator's attitude toward Dolores's habit by the end of the text?",
+   "options": [
+    "Uneasy pity for a widow who cannot accept her husband's death",
+    "Mild amusement at a ritual she considers old-fashioned and odd",
+    "Polite indifference toward a routine that does not concern her",
+    "Grateful understanding of a gesture she now sees as welcoming"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-06-021",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "medium",
+   "passage": "When Brigid drove the morning route past the cemetery gate in Porto Alegre, Miriam was always waiting there, holding the same cracked umbrella she had mended with wire and tape for three winters. Brigid privately thought the thing was beyond saving; the ribs bent sideways, and rain came through the patches in thin, stubborn threads. Still, each time Miriam climbed aboard and announced that she had fixed it again, Brigid nodded as though hearing news of a small victory. One wet Tuesday Brigid even kept a roll of electrical tape beside the fare box, telling herself it was only for the mirrors. Miriam noticed it, said nothing, and sat in the front seat as usual, shaking water from her sleeves. Outside, the gate's iron rails dripped onto the curb while the engine idled.",
+   "question": "Which choice best describes Brigid's attitude toward Miriam's repairs to the umbrella?",
+   "options": [
+    "She doubts the repairs can succeed but quietly respects and supports the effort.",
+    "She is irritated that Miriam wastes her time on a hopeless repair.",
+    "She is confident that the umbrella will soon work as well as new.",
+    "She feels indifferent and only pretends to listen to stay polite."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-06-022",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "medium",
+   "passage": "Surabaya's afternoon heat pressed against the windows of the school music room, where Etienne had asked Thuy to meet him beside the old piano. The instrument had belonged jointly to Thuy's late grandfather and Etienne, and a buyer had offered a good price. Thuy came ready to agree; the money would pay for his first year of university. But Etienne only lifted the lid and played a halting tune, missing notes where, he said, the grandfather had always sung over him. Thuy recognized it at once from childhood evenings he had nearly forgotten. Later, walking home, he did not mention the buyer, and Etienne did not ask. Along the canal, vendors were folding their umbrellas, and a boy chased a runaway kite across the bridge.",
+   "question": "Which choice best states the main purpose of the text?",
+   "options": [
+    "To describe how Etienne taught Thuy to play a tune on an old piano",
+    "To show how a shared memory leads Thuy to reconsider selling the piano",
+    "To explain why the buyer's offer for the piano was unusually generous",
+    "To suggest that family possessions should never be sold for money"
+   ],
+   "recipeBeyondMedium": "두 곳의 근거를 합쳐 요지를 잡아야 하고, 오답 하나는 일화 요약에 그치는 부분 요지다"
+  },
+  {
+   "candidateId": "lit40-medium-06-023",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "medium",
+   "passage": "Smoke from the chili oil stung Emiliano's eyes as he ladled broth at the noodle stall in Oaxaca, the stall he had rented from Anacleto for nineteen years. That morning Anacleto had brought papers: the block was being sold, and he was moving to his daughter's city. He offered Emiliano a share of the sale if he would leave quietly by spring. Emiliano listened, then handed him a bowl, as he did every Thursday. When customers came, Anacleto stood behind the counter without being asked and wiped the stools, scolding a boy for dripping sauce, exactly as he had when the stall first opened. By noon the papers lay under a jar of oregano, curling in the steam. Across the street, a bus unloaded schoolchildren in green sweaters.",
+   "question": "Which choice best describes the main purpose of the text?",
+   "options": [
+    "To recount how Anacleto delivered papers announcing the sale of the block",
+    "To explain why the noodle stall had become popular with schoolchildren",
+    "To reveal that Anacleto's attachment to the stall complicates his plan to leave",
+    "To argue that business arrangements always give way to old friendships"
+   ],
+   "recipeBeyondMedium": "두 곳의 근거를 합쳐 요지를 잡아야 하고, 오답 하나는 일화 요약에 그치는 부분 요지다"
+  },
+  {
+   "candidateId": "lit40-medium-06-025",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "medium",
+   "passage": "\"A fine hat, truly fine,\" Tunde said, turning the wide straw brim in his hands at the dried-riverbed crossing outside Accra. As mayor, he had commissioned it for Ngozi, the town's only doctor, to thank her for a year of night visits. I was twelve and carrying the parcel, so I saw her face before she found her smile: the hat was enormous, trimmed with plastic fruit, nothing she would ever wear. She put it on anyway and walked the whole crossing beside him, nodding at every greeting. Years afterward I learned she had kept it on a peg in her clinic, where patients waiting for stitches would stare at it and forget to be afraid. That afternoon the cracked mud glittered with mica, and goats picked their way along the old banks.",
+   "question": "Which choice best states the main purpose of the text?",
+   "options": [
+    "To show how Ngozi's polite acceptance of an unsuitable gift turned it into something useful",
+    "To describe the appearance of the hat that Tunde had commissioned for the doctor",
+    "To explain why the mayor wanted to thank the doctor for a year of night visits",
+    "To suggest that people should always be grateful for whatever gifts they receive"
+   ],
+   "recipeBeyondMedium": "두 곳의 근거를 합쳐 요지를 잡아야 하고, 오답 하나는 일화 요약에 그치는 부분 요지다"
+  },
+  {
+   "candidateId": "lit40-medium-06-026",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "character_motivation",
+   "requestedDifficulty": "medium",
+   "passage": "When Remy arrived at the community garden in Marseille, Noemie was already kneeling among the basil, a notebook open on the soil beside her. For years Remy had owed her uncle money, and her uncle had owed him something too: the fish stew he had cooked at every festival but never written down. Since the funeral, Noemie had asked about the stew twice, each time stopping before she said why. Today Remy did not mention the debt. Instead he pinched a leaf of fennel, named it, and waited while she wrote. Then he named the saffron, the orange peel, the bay. Noemie's pencil moved faster, and she did not look up. Afterward he helped her carry the watering cans to the shed and latched its rusty door.",
+   "question": "Based on the text, why does Remy name the ingredients while Noemie writes?",
+   "options": [
+    "He is embarrassed about the money he owes and wants to change the subject.",
+    "He wants to preserve her uncle's unwritten recipe, which Noemie clearly longs for.",
+    "He hopes the recipe will earn enough at the festival to repay his debt.",
+    "He was asked by the garden's members to record the herbs that grow there."
+   ],
+   "recipeBeyondMedium": "단서를 두 문장 이상 연결해야 하며 오답 중 하나는 결과를 동기로 착각하는 전형적 오독이다"
+  },
+  {
+   "candidateId": "lit40-medium-06-027",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "character_motivation",
+   "requestedDifficulty": "medium",
+   "passage": "Years later, Kagiso would still remember the morning the surveyor from the city sat down in his barbershop in Cape Town. Themba had come to measure the farmland Kagiso's family had worked for generations, and the whole street expected a quarrel. Kagiso draped the cape over him and began trimming without a word. Halfway through, Themba remarked that the city's old maps placed the boundary well beyond the stone wall, not along it as the developers claimed. Kagiso paused, scissors raised, and then asked whether those maps could be copied before the hearing. Themba said they could, if someone knew which archive to ask. Kagiso finished the cut slowly and refused payment. Outside, a delivery van idled, its radio playing an old jazz station.",
+   "question": "Based on the text, why does Kagiso most likely refuse Themba's payment?",
+   "options": [
+    "He is still angry with Themba and does not want to accept his money.",
+    "He believes refusing payment will guarantee he wins the hearing.",
+    "He recognizes that Themba's information about the maps could help protect his land.",
+    "He has been told by the street's residents not to charge city officials."
+   ],
+   "recipeBeyondMedium": "단서를 두 문장 이상 연결해야 하며 오답 중 하나는 결과를 동기로 착각하는 전형적 오독이다"
+  },
+  {
+   "candidateId": "lit40-medium-06-028",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "tone_or_mood",
+   "requestedDifficulty": "medium",
+   "passage": "Ticking filled every corner of the clock-maker's shop in Seville, dozens of pendulums slightly out of step. Carmela had tended the courtyard garden behind it for thirty years, and Mateo, who had bought the building last month, found her there pruning the orange trees. He told her gently that he planned to pave the courtyard for a café. She thanked him, wiped her shears, and kept cutting, as though the branches still needed her by evening. Inside, Mateo wound a clock that had stopped, and for a moment the shop seemed almost cheerful. Yet each time a bell chimed the hour, Carmela's hands went still among the leaves, and she counted the strokes under her breath. At dusk she swept the fallen blossoms into a neat pile beside the gate.",
+   "question": "Which choice best describes the overall mood of the text?",
+   "options": [
+    "Cheerful, as the shop comes back to life under its new owner",
+    "Hopeful with brief worry, as Carmela trusts the garden will be spared",
+    "Peaceful and timeless, as the old shop continues its familiar routines",
+    "Wistful, with a quiet sense of loss beneath moments of brightness"
+   ],
+   "recipeBeyondMedium": "두 정서의 비중을 판단해야 하며, 오답은 정반대가 아니라 비중이 틀린 어조다"
+  },
+  {
+   "candidateId": "lit40-medium-06-030",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "relationship_between_characters",
+   "requestedDifficulty": "medium",
+   "passage": "Zawadi had not entered the church in Samarkand for six years, so when Linton, the priest, left a basket of cuttings from the parish vines at her door, she assumed it was a reproach. She marched into the vineyard during harvest to return it. Linton, sleeves rolled and hands purple, only asked whether her late husband's rows still grew on the eastern slope. She admitted they did, though badly. He said the cuttings were meant to replace those rows, nothing more, and offered to help her graft them on Saturday. Zawadi hesitated, then took back the basket and told him to bring his own knife, since hers were dull. Pickers called to one another across the terraces, and a cart creaked downhill under its load.",
+   "question": "Based on the text, which choice best describes the relationship between Linton and Zawadi?",
+   "options": [
+    "Linton disapproves of Zawadi and uses the gift to urge her return to church.",
+    "Zawadi's initial suspicion gives way to acceptance of Linton's practical kindness.",
+    "Zawadi relies on Linton to manage the vineyard rows her husband left behind.",
+    "They are rivals who compete each year over whose grapes are harvested first."
+   ],
+   "recipeBeyondMedium": "두 문장의 단서를 연결해야 하고 오답은 한쪽 감정만 반영한다"
+  },
+  {
+   "candidateId": "lit40-medium-06-031",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "symbolism",
+   "requestedDifficulty": "medium",
+   "passage": "When the rains flooded the cellar of her house in Haifa, Rivka, a retired judge, summoned her former clerk, Chana, to help carry out the boxes of old case files. Ten years earlier Chana had misfiled an appeal, and a promotion both of them had wanted went to someone else; each still privately blamed the other. Standing knee-deep in the cold water, they lifted the boxes one by one, and the ink on the labels had run so badly that neither could tell whose handwriting was whose. Rivka held a dripping folder up to the light and laughed for the first time that afternoon. By evening the files were spread across the courtyard to dry, every label equally blurred, and Chana, without asking, began sorting them into a single pile rather than two.",
+   "question": "In the text, the blurred labels on the case files most likely represent",
+   "options": [
+    "the damage that the flood caused to Rivka's legal career over the years.",
+    "the carelessness that led Chana to misfile an appeal a decade earlier.",
+    "the fading of clear lines of blame between Rivka and Chana.",
+    "the importance of keeping court records in a dry, safe place."
+   ]
+  }
+ ],
+ "instructions": "당신은 디지털 SAT 독립 채점자다. 정답 표시가 없다. 먼저 문항을 직접 풀고(picked_letter), 이어서 난이도·hard 적합·오답 품질을 판정한다. 요청 난이도에 맞추려 하지 말고 실제로 느끼는 대로 답한다.\n청크 rev-fable_judge-043 — 19문항.\n출력: Write 도구로 정확히 이 경로에 JSON 한 파일을 쓴다 → /Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-fable_judge-043.result.json\n출력 JSON 스키마(예시 구조): {\"chunkId\":\"청크 ID\",\"model\":\"fable\",\"items\":[{\"candidateId\":\"id\",\"picked_letter\":\"A|B|C|D\",\"other_defensible\":\"정답 외 방어 가능한 선택지가 있으면 true\",\"est_difficulty\":\"easy|medium|hard (실제 체감, 요청 난이도에 맞추지 말 것)\",\"hard_fit\":\"실제 SAT hard 수준의 사고 단계가 필요하면 true(지문 길이·난어만이면 false)\",\"plausible_distractors\":\"오답 3개가 모두 그럴듯하고 서로 다른 오개념에서 나왔으면 true\",\"length_balanced\":\"네 선택지 길이·구체성이 비슷해 정답이 형식으로 드러나지 않으면 true\",\"multi_answer_risk\":\"복수 정답 위험이 있으면 true\",\"issues\":\"한 줄 메모\"}]}\n허용 값: picked_letter ∈ {A,B,C,D}, 불리언 필드는 true/false, est_difficulty ∈ {easy,medium,hard}. candidateId 를 바꾸지 않고 모든 항목에 답한다.\n금지: 결과 파일 외의 파일 생성·수정, 다른 명령 실행, 문항 수정·재작성. 끝나면 'done <항목 수>' 한 줄만 답한다.\n\n## 문항\n### lit40-medium-05-078 — skill central_ideas_details · 유형 narrator_attitude · 요청 난이도 medium\n[지문]\nColette left the parcel on the fountain's dry lip,\nthe blue scarf I knitted through a Lyon winter,\nfolded back into its paper, unworn.\nForty years across one courtyard,\nperhaps a hundred sentences between us.\nThe neighbors call it pride. I nearly did.\nBut the wool has taken on her lavender,\nas if it slept a while in her drawer,\nand tucked in the last fold, a strip of lace\nworked in the pattern her mother taught us both,\nColette and Odile, nine years old, sharing one needle.\nI sit beside the basin that holds no water\nand count the stitches she added, row by row,\nuntil the bells at Saint-Jean begin.\n\n[질문] Which choice best describes the speaker's attitude toward Colette's return of the scarf?\nA) Wounded, regarding the returned scarf as proof of Colette's lasting pride.\nB) Tender, reading the scarf's return as a silent and generous answer.\nC) Bewildered, unable to say why Colette would refuse a handmade gift.\nD) Resigned, accepting the return as typical of a fading friendship.\n### lit40-medium-05-093 — skill inferences · 유형 symbolism · 요청 난이도 medium\n[지문]\nAstrid distrusted new gates. For forty years she had kept the oak gate of the Bergen cemetery standing by replacing a single rotten slat each spring, so that hardly a board of the first gate remained, though no mourner could have said when it changed. Her apprentice, Anahera, wanted the gate's hundredth year marked by something people would notice: a carved arch, gilt letters, a ribbon for the mayor to cut. Astrid listened, then handed her a plane and one slat sawn from the same stand of oak her own teacher had used. Anahera grumbled through the planing. When she fitted the board, its grain ran almost seamlessly into the slat beside it, which bore a faint carpenter's mark she did not recognize. Astrid touched the mark and said it was older than either of them. That evening the gate swung shut behind the last visitors, and the hinges, oiled that morning, made no sound at all.\n\n[질문] In the text, the cemetery gate most likely symbolizes\nA) a continuity sustained through small repairs handed down across generations.\nB) Astrid's stubborn refusal to accept any change to the town's old customs.\nC) the lasting grief of the mourners who pass through the cemetery each day.\nD) a fading craft that younger carpenters such as Anahera no longer value.\n### lit40-medium-06-004 — skill text_structure_purpose · 유형 tone_shift · 요청 난이도 medium\n[지문]\nOn the first Monday of November, the movie theater in Vienna was closed for the season, and Bao had rented its empty stage for lessons. Linus arrived with his violin and a list of complaints. The hall was cold, the seats smelled of dust, and nothing about this city resembled the conservatory he had left. Bao listened, tuned his A string sharply, and said they would begin with open strings, as beginners do. Linus played them with exaggerated boredom. Then the note rose into the dark balcony and returned to him, rounder and slower than any sound he had made at home. He stopped. He played it again, softly this time, and waited for the echo as if it might answer a question. Bao said nothing, but she moved her chair closer, and for the rest of the hour neither of them looked at the clock.\n\n[질문] Which choice best describes the shift in tone that occurs in the text?\nA) From grudging resentment toward the lesson to quiet absorption in the hall's sound\nB) From open admiration for Bao to disappointment in her old-fashioned methods\nC) From nervous excitement about the city to calm indifference toward the music\nD) From playful teasing between the two to tense rivalry over the instrument\n### lit40-medium-06-009 — skill text_structure_purpose · 유형 text_structure · 요청 난이도 medium\n[지문]\nWords were Malek's first gift to every keeper he trained. At the lighthouse station on the edge of Cairo's old harbor district, he now taught them to his granddaughter, Dalia, who had grown up speaking only the language of her mother's country. Each evening he named a part of the lamp in Arabic, and she repeated it, stumbling, while the beam swept the dark water. She told him she was learning only to please him, that she would leave for her studies abroad in the fall and forget it all. He did not argue. One night the power failed, and Malek, his eyes weak, asked her to talk him through the backup switches. She found herself calling each one by the name he had taught her, without translating. When the light returned, she did not mention her plans, and the next evening she arrived before he did, notebook already open.\n\n[질문] Which choice best describes the overall structure of the text?\nA) It describes a power failure, then flashes back to explain why the lighthouse matters to Malek.\nB) It presents a routine and a character's dismissive stance, then shows an event that quietly alters it.\nC) It contrasts two characters' memories of the lighthouse, then reveals which memory is accurate.\nD) It lists the parts of the lamp, then explains how each part was named by an earlier keeper.\n### lit40-medium-06-013 — skill text_structure_purpose · 유형 underlined_portion_function · 요청 난이도 medium\n[지문]\nA wooden spoon tapped twice against the pot was Mandla's signal that dinner was late, and Nandi heard it all the way up in the old projection booth. She had turned the booth above her aunt's cinema in Addis Ababa into a kitchen of her own, with a hot plate and a shelf of spices, and she cooked there whenever she wanted to be left alone. Tonight Mandla climbed the narrow stairs and announced that the stew needed more salt. Nandi answered that it was perfect. They argued about salt for ten minutes, voices rising over the hum of the cooling projector. __Neither of them mentioned the letter from the culinary school in Nairobi, still unopened on the shelf between the cumin and the cardamom.__ At last Mandla tasted the stew again, set down the spoon, and said quietly that perhaps it was fine after all.\n\n[질문] Which choice best describes the function of the underlined sentence in the text as a whole?\nA) It explains why Mandla dislikes the spices Nandi keeps in the booth.\nB) It suggests that the argument about salt stands in for a larger, unspoken disagreement.\nC) It reveals that Nandi has already decided to reject the culinary school's offer.\nD) It shows that Mandla is unaware that Nandi has applied to any school.\n### lit40-medium-06-015 — skill text_structure_purpose · 유형 underlined_portion_function · 요청 난이도 medium\n[지문]\nBeirut's oldest ceramics studio sits above a tire shop, and that is where Samira and I, Kwesi, spent every Saturday after her family moved across the city. Distance made our friendship deliberate; we had to plan it now, and the studio became our fixed point. Last spring, one of my bowls was chosen for a gallery show downtown. Samira hugged me in the doorway and said she had always known. Then, over the following weeks, she began arriving late, leaving early, finding reasons to work at the far wheel. __One Saturday I found her old glaze test tiles, the ones we had made together our first month, boxed and labeled for the shelf marked \"give away.\"__ I did not ask about them. Instead, I brought the box back to our table and set it between us, and after a while she took out a tile and began, very carefully, to describe what she had hoped it would become.\n\n[질문] Which choice best describes the function of the underlined sentence in the text as a whole?\nA) It explains how the narrator first learned to mix glazes at the studio.\nB) It reveals that Samira has decided to stop making ceramics altogether.\nC) It shows that the studio has begun discarding work by former members.\nD) It offers concrete evidence of Samira's withdrawal that prompts the narrator to act.\n### lit40-medium-06-017 — skill central_ideas_details · 유형 narrator_attitude · 요청 난이도 medium\n[지문]\nI watched my grandmother, Solange, shape the morning loaves at the Lisbon bakery an hour before the shutters opened, the way I had watched her since I was small enough to sit on the flour sacks. In three days I, Anselmo, would board a ship for a job across the ocean, and I had come to say a proper goodbye. I had prepared a speech. She handed me an apron instead. For an hour we worked side by side, and she corrected my folding with a flick of her knuckle, never once mentioning my departure. At first her silence stung; I wanted her to say she would miss me. But as the ovens warmed, I noticed she had set aside a small, tightly wrapped loaf, the kind that keeps for a week, and that she was teaching me, fold by fold, how to make it myself.\n\n[질문] Which choice best describes the narrator's attitude toward Solange by the end of the text?\nA) He comes to appreciate that her lessons express care she does not state aloud.\nB) He remains hurt that she refuses to acknowledge his decision to leave.\nC) He feels amused by her strictness and doubts the value of her methods.\nD) He grows impatient with her and wishes he had left without visiting.\n### lit40-medium-06-018 — skill central_ideas_details · 유형 narrator_attitude · 요청 난이도 medium\n[지문]\nAlonso had taught geography in the village for forty years, and he still spoke as if every bus leaving the Galician depot were a lesson. Fatma, once his brightest pupil, now drove the morning route, and she let him ride free in the front seat. Today her small son rode with them. Halfway to the coast, the boy asked Alonso why he never visited the cities he had taught about. Alonso began an answer about railways and expense, then about his late wife's health, then about the weather in Madrid. The boy listened with a frown. Fatma kept her eyes on the road. She remembered how certain Alonso had sounded in class, how he had made every distant place seem within reach, and she felt something gentler than disappointment watching him stumble now. When they reached the coast, she pulled over a moment longer than necessary, so he could see the water before getting off.\n\n[질문] Which choice best describes the narrator's attitude toward Alonso?\nA) Openly mocking, highlighting his excuses to diminish his former authority\nB) Sympathetic, noting his evasions while treating his vulnerability with kindness\nC) Coldly neutral, reporting his words without suggesting any emotional response\nD) Reverent, presenting him as wiser than the boy who questions him\n### lit40-medium-06-019 — skill central_ideas_details · 유형 narrator_attitude · 요청 난이도 medium\n[지문]\nThree kites hung drying in the Rotterdam yard,\ntwo red, one patched with a map of somewhere else,\nthe day after we buried our uncle.\nEmil spoke first, in the voice of lists:\nthe stairs, the stove, the doctor's warnings,\nthe home outside the city with a garden view.\nIngrid wound string around her fingers\nand said our aunt still climbed to this yard every morning\nto test the wind for kites no one would buy.\nI said nothing, cousin to them both.\nI watched our aunt through the kitchen window,\nher hands smoothing paper as if the house were listening,\nand I understood that both of them were right,\nand that the yard, not the stairs,\nwas what we were really deciding to take from her.\n\n[질문] Which choice best describes the speaker's attitude toward the decision about the aunt?\nA) Firmly convinced that moving her is the only responsible choice\nB) Dismissive of both cousins' concerns as exaggerated and selfish\nC) Torn, recognizing the sense of each view and the loss either entails\nD) Indifferent, since the speaker plans to leave the matter to the cousins\n### lit40-medium-06-020 — skill central_ideas_details · 유형 narrator_attitude · 요청 난이도 medium\n[지문]\nTwo coffee cups set out on the galley counter every morning: that was Dolores's habit for eleven years after her husband died. She had cooked for his crew on the old cargo ship moored in Havana harbor, and when the ship became a floating restaurant, she stayed on in its narrow galley. I, Daphne, delivered her produce each dawn. At first I found the second cup a little sad and a little strange, and I placed the onions carefully around it as if it were fragile. One morning she poured coffee into both cups and handed the second to me. \"He would want it used,\" she said, and nothing more. I drank it standing up, too surprised to sit. Since then, the cup is waiting for me when I arrive, and I have come to see it less as a memorial than as an invitation she chose to keep open.\n\n[질문] Which choice best describes the narrator's attitude toward Dolores's habit by the end of the text?\nA) Uneasy pity for a widow who cannot accept her husband's death\nB) Mild amusement at a ritual she considers old-fashioned and odd\nC) Polite indifference toward a routine that does not concern her\nD) Grateful understanding of a gesture she now sees as welcoming\n### lit40-medium-06-021 — skill central_ideas_details · 유형 narrator_attitude · 요청 난이도 medium\n[지문]\nWhen Brigid drove the morning route past the cemetery gate in Porto Alegre, Miriam was always waiting there, holding the same cracked umbrella she had mended with wire and tape for three winters. Brigid privately thought the thing was beyond saving; the ribs bent sideways, and rain came through the patches in thin, stubborn threads. Still, each time Miriam climbed aboard and announced that she had fixed it again, Brigid nodded as though hearing news of a small victory. One wet Tuesday Brigid even kept a roll of electrical tape beside the fare box, telling herself it was only for the mirrors. Miriam noticed it, said nothing, and sat in the front seat as usual, shaking water from her sleeves. Outside, the gate's iron rails dripped onto the curb while the engine idled.\n\n[질문] Which choice best describes Brigid's attitude toward Miriam's repairs to the umbrella?\nA) She doubts the repairs can succeed but quietly respects and supports the effort.\nB) She is irritated that Miriam wastes her time on a hopeless repair.\nC) She is confident that the umbrella will soon work as well as new.\nD) She feels indifferent and only pretends to listen to stay polite.\n### lit40-medium-06-022 — skill central_ideas_details · 유형 main_idea_or_purpose · 요청 난이도 medium · hard 기준: 두 곳의 근거를 합쳐 요지를 잡아야 하고, 오답 하나는 일화 요약에 그치는 부분 요지다\n[지문]\nSurabaya's afternoon heat pressed against the windows of the school music room, where Etienne had asked Thuy to meet him beside the old piano. The instrument had belonged jointly to Thuy's late grandfather and Etienne, and a buyer had offered a good price. Thuy came ready to agree; the money would pay for his first year of university. But Etienne only lifted the lid and played a halting tune, missing notes where, he said, the grandfather had always sung over him. Thuy recognized it at once from childhood evenings he had nearly forgotten. Later, walking home, he did not mention the buyer, and Etienne did not ask. Along the canal, vendors were folding their umbrellas, and a boy chased a runaway kite across the bridge.\n\n[질문] Which choice best states the main purpose of the text?\nA) To describe how Etienne taught Thuy to play a tune on an old piano\nB) To show how a shared memory leads Thuy to reconsider selling the piano\nC) To explain why the buyer's offer for the piano was unusually generous\nD) To suggest that family possessions should never be sold for money\n### lit40-medium-06-023 — skill central_ideas_details · 유형 main_idea_or_purpose · 요청 난이도 medium · hard 기준: 두 곳의 근거를 합쳐 요지를 잡아야 하고, 오답 하나는 일화 요약에 그치는 부분 요지다\n[지문]\nSmoke from the chili oil stung Emiliano's eyes as he ladled broth at the noodle stall in Oaxaca, the stall he had rented from Anacleto for nineteen years. That morning Anacleto had brought papers: the block was being sold, and he was moving to his daughter's city. He offered Emiliano a share of the sale if he would leave quietly by spring. Emiliano listened, then handed him a bowl, as he did every Thursday. When customers came, Anacleto stood behind the counter without being asked and wiped the stools, scolding a boy for dripping sauce, exactly as he had when the stall first opened. By noon the papers lay under a jar of oregano, curling in the steam. Across the street, a bus unloaded schoolchildren in green sweaters.\n\n[질문] Which choice best describes the main purpose of the text?\nA) To recount how Anacleto delivered papers announcing the sale of the block\nB) To explain why the noodle stall had become popular with schoolchildren\nC) To reveal that Anacleto's attachment to the stall complicates his plan to leave\nD) To argue that business arrangements always give way to old friendships\n### lit40-medium-06-025 — skill central_ideas_details · 유형 main_idea_or_purpose · 요청 난이도 medium · hard 기준: 두 곳의 근거를 합쳐 요지를 잡아야 하고, 오답 하나는 일화 요약에 그치는 부분 요지다\n[지문]\n\"A fine hat, truly fine,\" Tunde said, turning the wide straw brim in his hands at the dried-riverbed crossing outside Accra. As mayor, he had commissioned it for Ngozi, the town's only doctor, to thank her for a year of night visits. I was twelve and carrying the parcel, so I saw her face before she found her smile: the hat was enormous, trimmed with plastic fruit, nothing she would ever wear. She put it on anyway and walked the whole crossing beside him, nodding at every greeting. Years afterward I learned she had kept it on a peg in her clinic, where patients waiting for stitches would stare at it and forget to be afraid. That afternoon the cracked mud glittered with mica, and goats picked their way along the old banks.\n\n[질문] Which choice best states the main purpose of the text?\nA) To show how Ngozi's polite acceptance of an unsuitable gift turned it into something useful\nB) To describe the appearance of the hat that Tunde had commissioned for the doctor\nC) To explain why the mayor wanted to thank the doctor for a year of night visits\nD) To suggest that people should always be grateful for whatever gifts they receive\n### lit40-medium-06-026 — skill inferences · 유형 character_motivation · 요청 난이도 medium · hard 기준: 단서를 두 문장 이상 연결해야 하며 오답 중 하나는 결과를 동기로 착각하는 전형적 오독이다\n[지문]\nWhen Remy arrived at the community garden in Marseille, Noemie was already kneeling among the basil, a notebook open on the soil beside her. For years Remy had owed her uncle money, and her uncle had owed him something too: the fish stew he had cooked at every festival but never written down. Since the funeral, Noemie had asked about the stew twice, each time stopping before she said why. Today Remy did not mention the debt. Instead he pinched a leaf of fennel, named it, and waited while she wrote. Then he named the saffron, the orange peel, the bay. Noemie's pencil moved faster, and she did not look up. Afterward he helped her carry the watering cans to the shed and latched its rusty door.\n\n[질문] Based on the text, why does Remy name the ingredients while Noemie writes?\nA) He is embarrassed about the money he owes and wants to change the subject.\nB) He wants to preserve her uncle's unwritten recipe, which Noemie clearly longs for.\nC) He hopes the recipe will earn enough at the festival to repay his debt.\nD) He was asked by the garden's members to record the herbs that grow there.\n### lit40-medium-06-027 — skill inferences · 유형 character_motivation · 요청 난이도 medium · hard 기준: 단서를 두 문장 이상 연결해야 하며 오답 중 하나는 결과를 동기로 착각하는 전형적 오독이다\n[지문]\nYears later, Kagiso would still remember the morning the surveyor from the city sat down in his barbershop in Cape Town. Themba had come to measure the farmland Kagiso's family had worked for generations, and the whole street expected a quarrel. Kagiso draped the cape over him and began trimming without a word. Halfway through, Themba remarked that the city's old maps placed the boundary well beyond the stone wall, not along it as the developers claimed. Kagiso paused, scissors raised, and then asked whether those maps could be copied before the hearing. Themba said they could, if someone knew which archive to ask. Kagiso finished the cut slowly and refused payment. Outside, a delivery van idled, its radio playing an old jazz station.\n\n[질문] Based on the text, why does Kagiso most likely refuse Themba's payment?\nA) He is still angry with Themba and does not want to accept his money.\nB) He believes refusing payment will guarantee he wins the hearing.\nC) He recognizes that Themba's information about the maps could help protect his land.\nD) He has been told by the street's residents not to charge city officials.\n### lit40-medium-06-028 — skill inferences · 유형 tone_or_mood · 요청 난이도 medium · hard 기준: 두 정서의 비중을 판단해야 하며, 오답은 정반대가 아니라 비중이 틀린 어조다\n[지문]\nTicking filled every corner of the clock-maker's shop in Seville, dozens of pendulums slightly out of step. Carmela had tended the courtyard garden behind it for thirty years, and Mateo, who had bought the building last month, found her there pruning the orange trees. He told her gently that he planned to pave the courtyard for a café. She thanked him, wiped her shears, and kept cutting, as though the branches still needed her by evening. Inside, Mateo wound a clock that had stopped, and for a moment the shop seemed almost cheerful. Yet each time a bell chimed the hour, Carmela's hands went still among the leaves, and she counted the strokes under her breath. At dusk she swept the fallen blossoms into a neat pile beside the gate.\n\n[질문] Which choice best describes the overall mood of the text?\nA) Cheerful, as the shop comes back to life under its new owner\nB) Hopeful with brief worry, as Carmela trusts the garden will be spared\nC) Peaceful and timeless, as the old shop continues its familiar routines\nD) Wistful, with a quiet sense of loss beneath moments of brightness\n### lit40-medium-06-030 — skill inferences · 유형 relationship_between_characters · 요청 난이도 medium · hard 기준: 두 문장의 단서를 연결해야 하고 오답은 한쪽 감정만 반영한다\n[지문]\nZawadi had not entered the church in Samarkand for six years, so when Linton, the priest, left a basket of cuttings from the parish vines at her door, she assumed it was a reproach. She marched into the vineyard during harvest to return it. Linton, sleeves rolled and hands purple, only asked whether her late husband's rows still grew on the eastern slope. She admitted they did, though badly. He said the cuttings were meant to replace those rows, nothing more, and offered to help her graft them on Saturday. Zawadi hesitated, then took back the basket and told him to bring his own knife, since hers were dull. Pickers called to one another across the terraces, and a cart creaked downhill under its load.\n\n[질문] Based on the text, which choice best describes the relationship between Linton and Zawadi?\nA) Linton disapproves of Zawadi and uses the gift to urge her return to church.\nB) Zawadi's initial suspicion gives way to acceptance of Linton's practical kindness.\nC) Zawadi relies on Linton to manage the vineyard rows her husband left behind.\nD) They are rivals who compete each year over whose grapes are harvested first.\n### lit40-medium-06-031 — skill inferences · 유형 symbolism · 요청 난이도 medium\n[지문]\nWhen the rains flooded the cellar of her house in Haifa, Rivka, a retired judge, summoned her former clerk, Chana, to help carry out the boxes of old case files. Ten years earlier Chana had misfiled an appeal, and a promotion both of them had wanted went to someone else; each still privately blamed the other. Standing knee-deep in the cold water, they lifted the boxes one by one, and the ink on the labels had run so badly that neither could tell whose handwriting was whose. Rivka held a dripping folder up to the light and laughed for the first time that afternoon. By evening the files were spread across the courtyard to dry, every label equally blurred, and Chana, without asking, began sorting them into a single pile rather than two.\n\n[질문] In the text, the blurred labels on the case files most likely represent\nA) the damage that the flood caused to Rivka's legal career over the years.\nB) the carelessness that led Chana to misfile an appeal a decade earlier.\nC) the fading of clear lines of blame between Rivka and Chana.\nD) the importance of keeping court records in a dry, safe place."
+}

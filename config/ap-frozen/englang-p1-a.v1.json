@@ -1,0 +1,70 @@
+{
+ "version": "v1-englang-p1-a",
+ "run": "englang-p1-a",
+ "subject": "ap_english_language",
+ "mode": "mc",
+ "capUsd": 3.5,
+ "hardStopCumulativeUsd": 125,
+ "myTotalCapUsd": 24,
+ "syncStages": [
+  "gen",
+  "solve",
+  "adv",
+  "review",
+  "judge"
+ ],
+ "stages": [
+  "gen",
+  "check",
+  "solve",
+  "adv",
+  "judge",
+  "finalize"
+ ],
+ "plan": {
+  "reading": {
+   "sets": 2,
+   "seed": 9101,
+   "startIndex": 0
+  },
+  "writing": {
+   "sets": 2,
+   "seed": 9102,
+   "startIndex": 0
+  }
+ },
+ "models": {
+  "gen": "claude-fable-5-1",
+  "solvers": [
+   "claude-opus-5-5",
+   "claude-sonnet-5-5",
+   "claude-fable-5-1"
+  ],
+  "adversary": "claude-fable-5-1",
+  "judge": "claude-opus-5-5",
+  "review": "claude-sonnet-5-5",
+  "sampleHigh": "claude-opus-5-5",
+  "sampleLow": "claude-sonnet-5-5",
+  "graders": [
+   "claude-opus-5-5",
+   "claude-sonnet-5-5",
+   "claude-fable-5-1"
+  ]
+ },
+ "effort": "medium",
+ "minKeyConfidence": 0.8,
+ "generatorFiles": [
+  "lib/ap-generation/englang-gates.ts",
+  "lib/ap-generation/englang-frq.ts",
+  "lib/ap-generation/englang-plan.ts",
+  "lib/ap-generation/englang-prompts.ts",
+  "lib/ap-generation/english-text-stats.ts",
+  "lib/ap-generation/subjects/englang.ts",
+  "lib/ap-exam/elang-rules.ts",
+  "scripts/ap-generation/englang-pipeline.ts",
+  "scripts/mock-exam-generation/batch-lib.ts"
+ ],
+ "expected": {
+  "hash": "44f6136e1546"
+ }
+}

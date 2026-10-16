@@ -1,0 +1,23 @@
+{
+ "itemId": "area_volume.prism_volume.SX.P",
+ "verdict": "pass",
+ "reviewedAt": "2026-10-06T08:00:00Z",
+ "reviewer": "visual-review-agent-mathE",
+ "codeHash": "ba7a086423284dd429791c2cac723f01fd17502dc860ce404c7987d1497400d1",
+ "samples": [
+  "area_volume.prism_volume.SX.P.png"
+ ],
+ "checklist": {
+  "figure_present": "pass",
+  "proportion_matches_values": "pass",
+  "labels_placed_and_legible": "pass",
+  "multi_figure_consistent": "n/a",
+  "text_matches_figure_and_solvable": "pass",
+  "axes_ticks_units_legend": "pass",
+  "choice_distinct_one_rule": "n/a",
+  "sat_visual_style": "pass",
+  "mobile_375_readable": "pass"
+ },
+ "defects": [],
+ "notes": "데스크톱·375px PNG를 직접 읽고 그림-지문-정답 일치, 라벨 겹침·잘림 없음 확인. 입체 치수 라벨·점선 숨은선 판독 가능. prism 직각표시가 점선과 살짝 겹침 — 비차단 nit."
+}

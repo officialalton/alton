@@ -1,0 +1,23 @@
+{
+ "itemId": "linear_equations_two_var.intercept.LN.C",
+ "verdict": "pass",
+ "reviewedAt": "2026-10-06T11:12:55Z",
+ "reviewer": "claude-sonnet-5.5 (math-A session)",
+ "codeHash": "7f8ded1824139c519df9f4a848c5aeb01247eb568360b5a2810aedb806eda4c4",
+ "samples": [
+  "linear_equations_two_var.intercept.LN.C.png"
+ ],
+ "checklist": {
+  "figure_present": "pass",
+  "proportion_matches_values": "pass",
+  "labels_placed_and_legible": "pass",
+  "multi_figure_consistent": "pass",
+  "text_matches_figure_and_solvable": "pass",
+  "axes_ticks_units_legend": "pass",
+  "choice_distinct_one_rule": "pass",
+  "sat_visual_style": "pass",
+  "mobile_375_readable": "pass"
+ },
+ "defects": [],
+ "notes": "리드 문장 중복 수정 후 재생성본을 데스크톱 PNG 21장 전부 읽고, 375px는 계열별(직선·부등식·포물선) 4장 확인. 선택지 4개 중 서술 조건을 모두 만족하는 도형이 하나, 오답은 조건 일부 위반. 축·눈금·라벨 양호. FN.C 계수 문항은 x² 유니코드 표기로 변경."
+}

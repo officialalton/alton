@@ -1,0 +1,111 @@
+[D-cross] 후보 223 · 생성 claude-opus-5-5 · 검수 fable+opus · 추정(동기) $16.59 · 구간 누적 $0.00 / 상한 $17
+[batch gen] 제출 msgbatch_013BtajVZ3pkvZAvpRdkqusd (223건, 시도 1)
+[batch gen] {"processing":223,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch gen] {"processing":223,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch gen] {"processing":223,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch gen] {"processing":223,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch gen] {"processing":223,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch gen] {"processing":223,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch gen] {"processing":223,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch gen] {"processing":223,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch gen] {"processing":223,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch gen] {"processing":223,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch gen] {"processing":223,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch gen] {"processing":223,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch gen] {"processing":223,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch gen] {"processing":223,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch gen] {"processing":223,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch gen] 완료 성공 223/223, 이번 비용 $3.0913, 누적 $3.09
+[batch review-fable] 제출 msgbatch_01CUaUekU9aweWb91HeHvdBg (412건, 시도 1)
+[batch review-fable] {"processing":412,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch review-fable] {"processing":412,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch review-fable] {"processing":412,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch review-fable] {"processing":412,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch review-fable] {"processing":412,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch review-fable] {"processing":412,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch review-fable] {"processing":412,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch review-fable] {"processing":412,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch review-fable] {"processing":412,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch review-fable] {"processing":412,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch review-fable] {"processing":412,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch review-fable] 완료 성공 412/412, 이번 비용 $9.2602, 누적 $12.35
+[batch review-opus] 제출 msgbatch_01BkiYKzRWUosboVvP8hUEjN (412건, 시도 1)
+[batch review-opus] {"processing":412,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch review-opus] {"processing":412,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch review-opus] {"processing":412,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch review-opus] {"processing":412,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch review-opus] {"processing":412,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch review-opus] {"processing":412,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch review-opus] 완료 성공 412/412, 이번 비용 $2.8446, 누적 $15.20
+{
+ "sat_rw": {
+  "cand": 223,
+  "genFail": 0,
+  "formatFail": 1,
+  "detPass": 206,
+  "crossScored": 206,
+  "correct": {
+   "agree": 190,
+   "of": 206,
+   "fablePass": 195,
+   "opusPass": 185
+  },
+  "compliance": {
+   "agree": 206,
+   "of": 206,
+   "fablePass": 206,
+   "opusPass": 206
+  },
+  "hardFit": {
+   "agree": 162,
+   "of": 206,
+   "fablePass": 169,
+   "opusPass": 131
+  },
+  "adoptedBoth": 108,
+  "adoptedOneOnly": 57,
+  "yieldBoth": 0.484,
+  "costUsd": 15.196,
+  "costPerAdoptedBoth": 0.141,
+  "fableOnlyPass": 51,
+  "opusOnlyPass": 6
+ },
+ "sat_math": {
+  "cand": 0,
+  "genFail": 0,
+  "formatFail": 0,
+  "detPass": 0,
+  "crossScored": 0,
+  "correct": {
+   "agree": 0,
+   "of": 0,
+   "fablePass": 0,
+   "opusPass": 0
+  },
+  "compliance": {
+   "agree": 0,
+   "of": 0,
+   "fablePass": 0,
+   "opusPass": 0
+  },
+  "hardFit": {
+   "agree": 0,
+   "of": 0,
+   "fablePass": 0,
+   "opusPass": 0
+  },
+  "adoptedBoth": 0,
+  "adoptedOneOnly": 0,
+  "yieldBoth": 0,
+  "costUsd": 0,
+  "costPerAdoptedBoth": null,
+  "fableOnlyPass": 0,
+  "opusOnlyPass": 0
+ },
+ "adoptedHardFableRule": {
+  "total": 146,
+  "rw": 146,
+  "math": 0,
+  "correctBothRequired": true
+ }
+}

@@ -22,12 +22,14 @@ const DB_URL = "postgresql://postgres:postgres@127.0.0.1:54422/postgres";
 
 // closed는 §5.7상 종착 상태라 transition_account_status()만으로는 임의
 // 상태에서 곧장 도달/복귀할 수 없다(허용된 전이만 통과) — 테스트 세팅/정리
-// 전용으로 트리거 우회 플래그를 직접 켜고(superuser 권한) status를 원하는
-// 값으로 강제한다. 실제 앱/관리자 경로에서는 이 방법을 쓸 수 없다(권한도
+// 전용으로 superuser 권한으로 같은 트랜잭션 안에 status_transition_tokens
+// 1회용 토큰을 심고(GUC app.bypass_status_protect 우회는 보안 정리로 제거됨,
+// 20261256) status를 원하는 값으로 강제한다. 실제 앱/관리자 경로에서는 이 방법을 쓸 수 없다(권한도
 // 없고, 이 파일에서만 superuser로 접속하기 때문).
 function forceSetTeacherStatus(status: string) {
   const sql = `
-    select set_config('app.bypass_status_protect', 'true', true);
+    insert into public.status_transition_tokens (table_name, row_id, action)
+      values ('teachers', '${TEACHER_ID}', 'status_transition');
     update teachers set status = '${status}' where id = '${TEACHER_ID}';
   `;
   execFileSync("psql", [DB_URL, "-v", "ON_ERROR_STOP=1", "-c", sql]);
@@ -35,7 +37,8 @@ function forceSetTeacherStatus(status: string) {
 
 function forceSetParentStatus(status: string) {
   const sql = `
-    select set_config('app.bypass_status_protect', 'true', true);
+    insert into public.status_transition_tokens (table_name, row_id, action)
+      values ('parents', '${PARENT_ID}', 'status_transition');
     update parents set status = '${status}' where id = '${PARENT_ID}';
   `;
   execFileSync("psql", [DB_URL, "-v", "ON_ERROR_STOP=1", "-c", sql]);
@@ -108,13 +111,13 @@ test.describe.serial("R2 계정 상태 전환 — 실제 브라우저 로그인 
     forceSetTeacherStatus("suspended");
 
     await page.goto("/login");
-    await page.getByLabel("이메일").fill(ACCOUNTS.teacher);
-    await page.getByLabel("비밀번호").fill(DEV_PASSWORD);
-    await page.getByRole("button", { name: "로그인", exact: true }).click();
+    await page.getByLabel("Email").fill(ACCOUNTS.teacher);
+    await page.getByLabel("Password").fill(DEV_PASSWORD);
+    await page.getByRole("button", { name: "Log in", exact: true }).click();
 
     await expect(page).toHaveURL(/\/account-suspended/);
     await expect(
-      page.getByRole("heading", { name: "계정이 일시정지되었습니다" })
+      page.getByRole("heading", { name: "Your account is suspended" })
     ).toBeVisible();
   });
 
@@ -124,9 +127,9 @@ test.describe.serial("R2 계정 상태 전환 — 실제 브라우저 로그인 
     forceSetTeacherStatus("suspended");
 
     await page.goto("/login");
-    await page.getByLabel("이메일").fill(ACCOUNTS.teacher);
-    await page.getByLabel("비밀번호").fill(DEV_PASSWORD);
-    await page.getByRole("button", { name: "로그인", exact: true }).click();
+    await page.getByLabel("Email").fill(ACCOUNTS.teacher);
+    await page.getByLabel("Password").fill(DEV_PASSWORD);
+    await page.getByRole("button", { name: "Log in", exact: true }).click();
     await expect(page).toHaveURL(/\/account-suspended/);
 
     // 세션은 유지된 채(suspended는 로그아웃시키지 않는다) 다른 포털 경로로
@@ -155,15 +158,15 @@ test.describe.serial("R2 계정 상태 전환 — 실제 브라우저 로그인 
     forceSetTeacherStatus("closed");
 
     await page.goto("/login");
-    await page.getByLabel("이메일").fill(ACCOUNTS.teacher);
-    await page.getByLabel("비밀번호").fill(DEV_PASSWORD);
-    await page.getByRole("button", { name: "로그인", exact: true }).click();
+    await page.getByLabel("Email").fill(ACCOUNTS.teacher);
+    await page.getByLabel("Password").fill(DEV_PASSWORD);
+    await page.getByRole("button", { name: "Log in", exact: true }).click();
 
     // resolveAccountDestination()이 supabase.auth.signOut()을 호출한 뒤
     // /login?error=...로 보낸다 — /teacher나 /account-suspended가 아니라
     // 로그인 화면 자체로 돌아와야 한다.
     await expect(page).toHaveURL(/\/login/);
-    await expect(page.getByText(/계정이 폐쇄되어 로그인할 수 없습니다/)).toBeVisible();
+    await expect(page.getByText(/account is closed and cannot sign in/)).toBeVisible();
 
     // 세션이 실제로 로그아웃됐는지: 같은 페이지에서 보호된 경로로 이동하면
     // /login으로 다시 돌아와야 한다(세션이 남아있다면 /account-suspended
@@ -180,14 +183,16 @@ test.describe.serial("R2 계정 상태 전환 — 실제 브라우저 로그인 
     forceSetParentStatus("suspended");
 
     await page.goto("/login");
-    await page.getByLabel("이메일").fill(ACCOUNTS.parent);
-    await page.getByLabel("비밀번호").fill(DEV_PASSWORD);
-    await page.getByRole("button", { name: "로그인", exact: true }).click();
+    await page.getByLabel("Email").fill(ACCOUNTS.parent);
+    await page.getByLabel("Password").fill(DEV_PASSWORD);
+    await page.getByRole("button", { name: "Log in", exact: true }).click();
     await expect(page).toHaveURL(/\/account-suspended/);
 
     transitionParentStatus("active", "e2e: 학부모 재활성화 테스트");
 
-    await loginAs(page, ACCOUNTS.parent);
+    // 세션은 유지된 채이므로(로그인된 사용자가 /login에 가면 리다이렉트됨) 다시
+    // 로그인하지 않고 포털로 곧장 이동해 차단이 풀렸는지 확인한다.
+    await page.goto("/parent");
     await expect(page).toHaveURL(/\/parent/);
   });
 

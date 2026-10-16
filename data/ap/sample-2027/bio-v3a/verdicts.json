@@ -1,0 +1,1519 @@
+[
+ {
+  "key": "ap_biology-f01-k0",
+  "cellId": "ap_biology-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Bristle number varies among flies, and the variation is heritable. Only flies with the most bristles reproduce, so alleles for more bristles become more common each generation. As those allele frequencies rise, the population mean moves up.",
+     "final_answer": "Selection keeps only high-bristle parents, which raises the frequency of alleles for more bristles each generation, so the mean bristle number goes up.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "(i) The researcher changes the number of generations and measures bristle count. (ii) Conditions such as temperature need to be the same for all groups. (iii) The mean goes up with each step.",
+     "final_answer": "(i) The independent variable is the number of generations of selective breeding. The dependent variable is the mean number of bristles per fly. (ii) One factor to keep constant is rearing temperature (food, fly strain or sex/age of the sampled flies would also work). (iii) The mean bristle number rises as generations increase, from 34.0 to 52.5. The rise is small from 0 to 3 generations and larger after that.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Percent change = (52.5−34.0)/34.0 × 100. Gen 3 interval: 37.0 ± 2.68 = 34.32–39.68. Gen 6 interval: 45.6 ± 2.76 = 42.84–48.36.",
+     "final_answer": "(i) Percent change = (52.5 − 34.0)/34.0 × 100 = 18.5/34.0 × 100 ≈ 54.4% increase. (ii) Yes, the difference is statistically supported. The ±2SE interval for 3 generations (34.32–39.68) does not overlap the interval for 6 generations (42.84–48.36).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "With random mating and no selection, nothing favors high-bristle alleles, so allele frequencies should stay roughly the same.",
+     "final_answer": "About 34 bristles, the same as at generation 0. With no selection, alleles for more bristles are not favored, so allele frequencies and the mean bristle number should stay roughly the same, apart from small random changes (genetic drift).",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The bundle is acceptable: a 9-point long FRQ in the Q1 pattern (A1, B3, C3, D2) on artificial selection with a data table, where each part is judged against its own skill. The independent solver matched every key answer, and the rubric alternatives are valid.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parts A and D require the artificial selection and allele-frequency concepts (7.3, 7.4). B and C assess the official data and statistics skills legitimately. The bundle as a whole requires the topic concept."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The percent change of 54.4% and the non-overlapping ±2SE ranges (34.32-39.68 vs 42.84-48.36) are consistent with the table. The rubric rows are split into setup and answer, with a dependency row, and list valid alternatives. Part D accepts a prediction of little change from the starting value, which is defensible."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table gives the generation levels, the mean ± 2SE, and n = 12. All numbers used in the parts appear in the table. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so there are no distractors. The rubric lists specific common errors for each row."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load fits a 9-point long FRQ. The only calculation is a single percent change, and the calculator designation is consistent."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP-style multi-part FRQ on artificial selection. It requires explaining the mechanism of selective breeding, identifying variables and a constant factor, describing a trend, doing one percent-change calculation with clean numbers, comparing mean ± 2SE intervals (3 vs 6 generations: 34.32-39.68 vs 42.84-48.36, non-overlapping so the difference is supported), and predicting the no-selection outcome (about 34, no directional change). All of this is within CED scope, with a single simple table and no unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 840
+  }
+ },
+ {
+  "key": "ap_biology-f01-k1",
+  "cellId": "ap_biology-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Only individuals at the high extreme reproduce; because the trait is heritable, alleles for more bristles are passed on more often, so their frequency rises each generation and the population mean moves upward.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Selecting high-bristle parents raises the frequency of alleles for more bristles in each new generation, so the mean shifts over generations."
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Standard identification from the setup and data.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "(i) IV: number of generations of selective breeding; DV: mean number of abdominal bristles per fly. (ii) e.g., temperature, food, sample size, or the same counting method/region. (iii) The mean bristle number rises as generations increase (34.0 to 54.7), with bigger increases after generation 3."
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "(54.7-34.0)/34.0×100 = 60.9%. The ±2SE intervals are 33.04–41.76 for generation 3 and 42.68–48.92 for generation 6. They don't overlap.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "(i) About a 60.9% increase. (ii) Yes, the difference is statistically supported because the ±2SE intervals (33.04–41.76 and 42.68–48.92) don't overlap."
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Without directional selection there is no consistent change in allele frequencies, so the mean stays near the starting value.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "About 34 bristles, similar to generation 0 (within about 31–37). With random mating there is no selection favoring more bristles, so allele frequencies and the mean should stay roughly the same."
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Passes all five criteria. The key is sound and the stimulus is complete. The point split matches the long-FRQ Q1 structure (A1/B3/C3/D2). The only blemish is that the Part D model answer says \"about 35\" while the table gives 34.0; the rubric accepts \"close to the starting value\", so it is minor.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Artificial selection (7.3) is required in Part A and Part D and sets the context for the rest. The data-analysis parts use official data skills."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The percent change and the non-overlapping ±2SE intervals are correct. The \"about 35\" in the Part D model answer is a minor mismatch with the table value of 34.0, covered by the accepted phrasing."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table has n, units and mean ± 2SE. The wording \"four levels of the independent variable\" is slightly awkward but not unclear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to a free-response item. Common errors are listed in each rubric row."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is moderate, with one simple percent-change calculation, and the point split follows the official long-FRQ structure."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Typical AP-style short FR set within Unit 7 scope (7.3/7.4). Requires explaining selection changing the trait mean, identifying variables and a controlled factor, describing a trend, one simple percent-change calculation (60.9%), comparing mean ± 2SE ranges (33.04-41.76 vs 42.68-48.92, no overlap, so the difference is supported), and predicting the no-selection outcome (the mean stays near 34 because there is no differential reproduction). Numbers are small and rounded, the wording is clear, and the context is concise. Multiple parts and representation use make it more than basic learning, but no step is beyond the CED.",
+   "reading_load": "medium",
+   "computation_load": "low",
+   "reasoning_steps": 7,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_biology-f02-k0",
+  "cellId": "ap_biology-f02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Allolactose (inducer) binds repressor, changing its shape so it releases the operator; RNA polymerase can then transcribe lacZYA.",
+     "final_answer": "Lactose is converted to allolactose, which binds the lac repressor and changes its shape. The repressor can no longer bind the operator, so RNA polymerase can bind the promoter and transcribe the lac genes.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "IV lactose concentration; DV beta-gal activity; constants such as temperature; positive trend.",
+     "final_answer": "(i) Independent variable: lactose concentration. Dependent variable: beta-galactosidase activity. (ii) Keep temperature constant (other options: incubation time, strain, culture volume/cell density, assay method). (iii) Enzyme activity goes up as lactose concentration goes up, from 1.9 units at 0% to 82.6 units at 2.0%. The increase is not proportional: the activity per unit of lactose gets smaller at higher concentrations.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "(82.6-1.9)/1.9*100 = 4247%. 2SE ranges 10.84–12.56 and 35.42–39.98 do not overlap.",
+     "final_answer": "(i) (82.6−1.9)/1.9 × 100 ≈ 4247% increase. (ii) Yes, the difference is statistically supported. The ±2SE intervals (10.84–12.56 at 0.1% and 35.42–39.98 at 0.5%) do not overlap.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Constitutive expression in the mutant.",
+     "final_answer": "Activity would be much higher than in the original strain, about the same as fully induced levels. Because the repressor cannot bind the operator, nothing blocks RNA polymerase, so the lac genes are transcribed all the time even without lactose. The original strain stays repressed, at about 1.9 units.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The bundle follows the official Q1 structure (A1, B3, C3, D2 = 9 points) and fits topic 6.5, with the lac operon concept required in A and D. A solver reached the same answers, so the keys are unique and defensible. Part A, a 1-point describe part, is correctly aligned with skill 1.B.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Part A tests concept explanation (1.B) on lac operon regulation, and part D requires the repressor and operator concept. Parts B and C assess the official data and experiment skills, which are legitimate in a Q1 bundle. No content comes from later units."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The rubric rows are consistent and list alternative phrasings. Row C2 depends on C1 and has a numeric tolerance (4247.4 ± 42.5). The no-overlap conclusion in C3 is correct for 10.84 to 12.56 versus 35.42 to 39.98. In D, the original strain's 1.9 to 2.0 units at 0% lactose appears in the table (1.9), and the rubric's \"2.0 units\" alternative is only a loose reference."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table has columns, rows, units, n = 6, and mean ± 2SE. The wording is clear. The stimulus text says the table shows \"four levels of the independent variable\", which is acceptable."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no distractors. The common_errors listed in each row are plausible misconceptions."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical of a 9-point Q1: one simple percent-change calculation and one ±2SE comparison. A calculator is allowed, and the item does not need one for anything beyond the single division."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part FRQ typical of AP exam format: lac operon mechanism explanation, variable identification and trend description, one percent-change calculation with simple numbers, a mean ± 2SE overlap comparison, and a disruption prediction (repressor mutant). Each part is a standard AP skill, with clear wording, in-scope content and light arithmetic. Several representation changes (table to calculation to interval comparison to mechanism) justify full-mock placement rather than basic learning.",
+   "reading_load": "medium",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 840
+  }
+ },
+ {
+  "key": "ap_biology-f02-k1",
+  "cellId": "ap_biology-f02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Lactose (as allolactose) binds the lac repressor and changes its shape. The repressor then can no longer bind the operator, so RNA polymerase can transcribe the operon genes.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Allolactose (an isomer of lactose) binds the repressor protein and changes its shape (allosteric change). The repressor releases the operator, so RNA polymerase can bind the promoter and transcribe lacZ, lacY and lacA."
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Read the variables and the trend from the table.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "(i) Independent variable: lactose concentration (%). Dependent variable: beta-galactosidase activity. (ii) Any one controlled factor, e.g. temperature, incubation time, E. coli strain, starting cell density or the other parts of the medium. (iii) Enzyme activity rises as lactose concentration rises, from 1.9 units at 0% to 86.2 units at 2.0%."
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Percent change = (86.2-1.9)/1.9 x 100 ≈ 4437%. The ±2SE intervals do not overlap.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "(i) (86.2 − 1.9)/1.9 × 100 ≈ 4437% increase (about 4.4 × 10^3%). (ii) Yes, the difference is supported. The interval at 0.1% is 10.42–13.18 and at 0.5% is 35.24–40.36. These ±2SE ranges do not overlap, so the difference is statistically significant."
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Without repressor binding, the operon is expressed all the time (constitutive), even with no lactose.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "With no lactose, the mutant's activity would be much higher than the original strain's 1.9 units, at roughly fully induced levels. The repressor cannot bind the operator, so nothing blocks RNA polymerase and the lac genes are transcribed all the time (constitutively)."
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound Q1-style long FRQ (A1/B3/C3/D2) on lac operon regulation. The key and rubric are consistent with the table, and the independent solver agreed on every part. One minor flaw: Part D's alt_solution cites \"2.0 units\" for the original strain with no lactose, but the table shows 1.9. This should be corrected to 1.9, but it does not change the key.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parts A and D require lac operon regulation (6.5). Parts B and C are legitimate data-skill parts. Topic fit holds at the bundle level."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The percent change (4436.8%) and the non-overlapping ±2SE ranges are correct. Part D's alt_solution wrongly cites 2.0 units where the table shows 1.9, a minor error in an alternative phrasing."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table has complete mean ± 2SE values and n, and the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ. The common_errors listed per row are realistic."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical of a long FRQ. The calculator is needed only for one percent change."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part FRQ on the lac operon: recall of inducible operon mechanism, standard experimental design identification, trend description, one percent-change calculation, a mean ± 2SE overlap comparison, and predicting a repressor-binding mutant's effect. All within the CED and Unit 6 scope. Demand is moderate, with typical AP FRQ breadth rather than depth. There is no long arithmetic, ambiguity, or heavy reading.",
+   "reading_load": "medium",
+   "computation_load": "low",
+   "reasoning_steps": 7,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 900
+  }
+ },
+ {
+  "key": "ap_biology-f03-k0",
+  "cellId": "ap_biology-f03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Hormone binding changes the receptor's shape and activates it. The active receptor starts a signal transduction cascade, for example through a G protein, second messengers such as cAMP, and protein kinases that phosphorylate target proteins. The signal is amplified along the way. The result is a cell response such as a change in enzyme activity or in gene expression.",
+     "final_answer": "Binding changes the receptor's shape, which starts a signal transduction cascade (second messengers, kinase phosphorylation, amplification). This changes enzyme activity or gene expression in the cell.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "The hormone concentration is the independent variable, so it goes on the x-axis. The response molecule is the dependent variable, so it goes on the y-axis. Each axis needs a label with units and a linear scale. Plot the 7 points and connect them. The curve rises steeply at first and then levels off as it approaches about 60 µM.",
+     "final_answer": "Draw a line graph. Label the x-axis 'Hormone concentration (nM)' with a linear scale from 0 to 64. Label the y-axis 'Response molecule produced (µM)' with a scale from 0 to 60. Plot the 7 points and connect them. The curve rises steeply and then plateaus near 60 µM.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "(i) Rate = (53.3 − 40) ÷ (8 − 2) = 13.3 ÷ 6 ≈ 2.2 µM per nM. (ii) The data fit the curve y = 60x ÷ (1 + x), so the plateau is about 60 µM.",
+     "final_answer": "(i) About 2.2 µM of response molecule per nM of hormone. (ii) About 60 µM.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "The maximum response happens when all the receptors are bound by hormone (saturated). With half as many receptors, fewer hormone–receptor complexes can form at saturation. That means less activation of the pathway, so the maximum should drop, probably to about half (about 30 µM).",
+     "final_answer": "The maximum would decrease, to about half (about 30 µM). At saturation, fewer receptors means fewer active hormone–receptor complexes, so less of the pathway is activated and less response molecule is made.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The bundle follows the official Q2 structure (A1, B4, C2, D2) and requires the signal transduction concept in parts A and D. The graph checklist is sound, and the key values are verified and carry sensible tolerances. The only flaw is a minor µm/µM typo in the C2 rubric criterion.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The bundle requires the receptor and transduction concept (parts A, D) and graph construction (part B), which is the target skill 4.A. Part C is a legitimate data skill."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The expected values are consistent with the table. The plateau tolerance accepts 56 to 62, and rubric rows are consistent with alt_solutions listed."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete with units in the column headers. Wording is clear US English. The C2 criterion has a minor µm/µM typo."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to a free-response item. Common errors are listed per rubric row and are realistic."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The task load is typical of an AP Biology Q2: one simple rate calculation, one graph, one prediction. The calculator designation is consistent."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part short FR on signal transduction typical of AP exam format. Requires describing receptor-ligand signaling, constructing a labeled graph from a small table (axes, scale, plotting, curve), one simple rate calculation, estimating a plateau from the graph, and predicting the effect of halving receptor number via saturation reasoning. Concepts are in scope (4.2/4.3), the arithmetic is short, and the wording is unambiguous, so the difficulty comes from legitimate skills rather than reading or computation burden.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 840
+  }
+ },
+ {
+  "key": "ap_biology-f03-k1",
+  "cellId": "ap_biology-f03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Hormone (ligand) binding changes the receptor's shape and activates it. This sets off a signal transduction cascade, often with second messengers (e.g., cAMP) and phosphorylation by kinases, which amplifies the signal. The cascade changes enzyme activity or gene expression, so the cell's response changes.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Binding changes the receptor's conformation and starts a transduction cascade (second messengers, kinase phosphorylation) that amplifies the signal and alters enzyme activity or gene expression, producing a cellular response."
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Put hormone concentration (nM) on the x-axis (independent variable) and response molecule (µM) on the y-axis. Plot all 7 points, connect them with lines or a smooth curve, and give the graph a title. The curve is a saturating hyperbola that levels off near 80 µM.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "A line/scatter graph with x-axis 'Hormone concentration (nM)' (0 to 64) and y-axis 'Response molecule produced (µM)' (0 to 80), correct scaling, all 7 points plotted and connected, and a title. The curve rises steeply, then plateaus near about 78 to 80 µM."
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "(i) (64 − 40)/(8 − 2) = 24/6 = 4 µM per nM. (ii) The data fit R = 80C/(C + 2), so the curve approaches a plateau of about 80 µM. Any estimate from about 78 to 80 µM is reasonable.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "(i) 4 µM/nM; (ii) about 80 µM (plateau of about 78 to 80 µM)"
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "The plateau happens because all receptors are saturated. Fewer receptors means fewer receptor–hormone complexes can form at saturation. That gives less signal transduction, so less response molecule is made. This assumes the response is in proportion to the number of occupied receptors.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "The maximum would decrease, to about half (around 40 µM). At saturating hormone levels, response is limited by the number of receptors, so halving receptors halves the maximum signaling."
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item fits the official Q2 pattern (A1, B4, C2, D2). The graph rubric is clear, the prediction in Part D is sound, and the Part C rate is correct. The plateau key of 77.6 is slightly below the true asymptote of about 80, but the ±3.88 tolerance covers reasonable estimates, so the item passes.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Part B tests graph construction (4.A) with four checklist rows. Parts A and D require the signal transduction concept from 4.2, with 4.3 as a related topic."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The rate of 4.00 µM per nM is correct. The plateau key of 77.6 with a ±3.88 tolerance accepts estimates from about 74 to 81.5 µM, which includes an estimate of 80. Row C1 says \"with units\" while `units_row` is true, a minor inconsistency."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table data are complete and the wording is clear. Every number used in the parts appears in the table."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no distractors. The rubric rows list plausible common errors for each part."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The task load is typical of an AP Biology long FRQ, with one simple calculation. A calculator is allowed and not needed for most parts."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Typical multi-part FRQ on signal transduction with data. Part A is a concrete recall/explain of ligand-receptor binding leading to a cellular response. Part B is a standard graph construction (axes, labels, scale, plotted points, curve) with a saturating curve; the unevenly spaced x-values require a choice of scale. Part C is one simple rate calculation ((64-40)/(8-2)=4 µM/nM) plus a plateau estimate. Part D asks for a prediction with justification, with receptor number limiting the maximum (saturation). The concepts are within the CED, the numbers are rounded and the reading load is modest. Difficulty comes from the skill mix rather than from the arithmetic or the wording, so this fits a full mock exam.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 840
+  }
+ },
+ {
+  "key": "ap_biology-f04-k0",
+  "cellId": "ap_biology-f04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Natural selection",
+     "final_answer": "The pesticide is a selective pressure. Insects that carry the resistance allele are more likely to survive and reproduce, while susceptible insects die. Resistant survivors pass the allele to their offspring, so its frequency goes up each generation.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Line graph of the table data",
+     "final_answer": "Make a line graph (or scatterplot with points connected). Put Generation (0–12) on the x-axis and Frequency of resistance allele (%) (0–100) on the y-axis, both with linear scales and a title. Plot all 7 points and connect them. The result is an S-shaped (sigmoidal) curve.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "(57.6-7.6)/(6-2)=12.5; interpolating between gen 4 (25.1%) and gen 6 (57.6%) gives 50% at about gen 5.5",
+     "final_answer": "(i) (57.6 − 7.6)/(6 − 2) = 50/4 = 12.5 percentage points per generation. (ii) About generation 5.5 (between generations 5 and 6). Since no generation 5 was measured, the first recorded value above 50% is at generation 6.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Selection now works against the resistance allele",
+     "final_answer": "The frequency will decrease over the following generations. Without the pesticide, carriers of the resistance allele survive and reproduce less than susceptible insects. This means fewer copies of the allele are passed on each generation. The decline will probably be gradual, and the allele may stay in the population for a while, especially as recessive copies in heterozygotes.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The bundle follows the official Q2 structure (A1, B4, C2, D2 = 9 points) and its stimulus data are complete. Key values are correct, and the rubric rows are consistent and give alternative wordings. Part C(ii) is slightly ambiguous because generations are sampled every two, so the first measured value above 50 percent is generation 6. The ±1 tolerance around 5.5 covers both the interpolated answer and 6, so it is not disqualifying.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The dominant demand in B is constructing a graph (4.A) for the allele-frequency topic, with 7.2 selection covered in A and D. Part C is a legitimate 5.A/4.B data-use part."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The rate 12.5 is correct. The 5.5 estimate is accepted with a ±1 tolerance, which also accepts 6. The graph rubric rows are consistent."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table gives all seven data pairs with the variable and units. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so there are no distractors. The common_errors listed per row are specific and reasonable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Calculator use is light and the load is typical of an AP Biology long FRQ."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "This is a typical AP-style short free-response item on selection with a graphing skill focus. Part A is a concrete describe item on selection (selective pressure, differential survival and reproduction, allele passed to offspring). Part B asks for a line graph of 7 data points with labeled axes, scale and plotting, which is the target skill and a standard representation change. Part C(i) is one rate calculation, (57.6-7.6)/4 = 12.5 percent per generation, with clean numbers. Part C(ii) is a read from the graph, interpolating to about generation 5.5-6. Part D asks for a prediction with justification, that the allele frequency would decline because of selection against it without the pesticide. Concepts are in scope for 7.2 and 7.4. Reading load is modest and the arithmetic is short and rounded. No ambiguity or out-of-scope knowledge is needed. Difficulty comes from multi-part integration of concept, graphing, calculation and prediction, which suits a full mock exam.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 840
+  }
+ },
+ {
+  "key": "ap_biology-f04-k1",
+  "cellId": "ap_biology-f04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Selection pressure",
+     "final_answer": "The pesticide kills susceptible insects. Insects carrying the resistance allele survive and reproduce more, so they pass the allele to more offspring. Over generations this natural selection raises the allele's frequency.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Line or scatter graph",
+     "final_answer": "Make a line graph. Put Generation on the x-axis from 0 to 12 and 'Frequency of resistance allele (%)' on the y-axis from 0 to 100. Use evenly spaced scales, plot the 7 points and connect them. The result is an S-shaped (sigmoidal) curve.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "(79-13.3)/(6-2)=16.4; linear interpolation between generations 4 and 6 gives about 4.4",
+     "final_answer": "(i) (79 − 13.3)% ÷ (6 − 2) generations ≈ 16.4 percent per generation. (ii) About generation 4.4, so between generations 4 and 5 (about 4–5).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Selection now acts against the allele",
+     "final_answer": "The frequency of the resistance allele will decrease over the next generations. Without the pesticide, carriers of the allele survive and reproduce less than non-carriers, so selection now acts against the allele. The decrease would probably be gradual, and the allele could stay at a low frequency for some time, for example in heterozygotes.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item follows the official Q2 structure (A1, B4, C2, D2) with graph construction as the target skill. The key values are consistent: the average rate is about 16.4 percentage points per generation and the interpolated crossing point is about 4.4. The only minor issue is that the \"first exceeds 50\" wording could allow a reading of generation 6, but the stated tolerance covers the standard graph-based reading.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Part B targets 4.A with a standard 4-row graphing rubric. Parts A and D test selection and allele frequency (7.4/7.2)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The keys are unique and defensible. C(ii) has slight ambiguity, since data exist only at even generations, but the tolerance of ±1 handles it."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete and every number used appears in it. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The FRQ rubric rows list common errors and accepted alternative phrasings, which is appropriate."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Typical 9-point long FRQ load, and the calculator is allowed with simple arithmetic."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Short free-response item on natural selection and allele frequency with a skill 4.A graphing focus. Part A asks the student to describe selection acting on a resistance allele. Part B is the core task: choose axes, scale, label, and plot 7 points as a line graph. Part C(i) is one rate calculation with small numbers, (79-13.3)/4 = 16.4, which is manageable with a calculator. Part C(ii) is a graph-reading estimate. Part D asks for a prediction with justification, reasoning that the allele would decline through selection against it once the pesticide is gone. All of this stays within CED Unit 7 (7.2 and 7.4) and requires no out-of-scope knowledge. The reading load is modest, the data are clean and rounded, and the wording is unambiguous. The 9 points across four parts make it appropriate for a full mock exam.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 840
+  }
+ },
+ {
+  "key": "ap_biology-f05-k0",
+  "cellId": "ap_biology-f05",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_stimulus_expression",
+   "instant_reject_missing_condition",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Law of segregation: homologous chromosomes, one carrying each allele, pair and then separate in anaphase I, so each gamete gets one allele.",
+     "final_answer": "In meiosis I the homologous chromosomes pair up, then separate in anaphase I. One homolog carries the long-wing allele and the other carries the vestigial allele, so each gamete gets only one allele (half get L, half get l).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Controlled variable",
+     "final_answer": "Keep the rearing temperature the same, along with food and culture conditions. Temperature can change how wing development shows up (for example, vestigial flies raised warm can grow longer wings) and how many offspring survive. If it varied, the phenotype counts would reflect the environment and not just genotype.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "A test cross of a heterozygote is expected to give a 1:1 ratio",
+     "final_answer": "Null hypothesis: there is no significant difference between the observed counts and the 1:1 ratio expected from Mendelian segregation (200 long : 200 vestigial). Any difference is due to chance.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Check: (15²/200)×2 = 2.25, which is less than 3.84",
+     "final_answer": "Fail to reject the null hypothesis. With expected counts of 200 each, the calculation (215−200)²/200 + (185−200)²/200 = 2.25 checks out. Because 2.25 is less than 3.84 (p > 0.05), the difference from a 1:1 ratio is not statistically significant and can be explained by chance.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [
+    "missing_condition"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "Part B refers to \"all of the crosses\" although the stimulus describes only one cross. The scenario also gives no comparison or rearing conditions, so the controlled-variable task has no stated experimental context. Part D tests a statistical decision (5.C) rather than justifying a prediction, which loosens the Q3 pattern. The keys themselves are correct.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The bundle fits topic 5.3 (segregation, test cross ratio). Skill 3.C appears only in part B, which is acceptable for a short FRQ."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The keys are correct and consistent with the rubric rows. The 2.25 vs 3.84 comparison leads to failing to reject the null."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The stimulus describes a single test cross with no mention of rearing conditions or of any comparison. Part B's \"all of the crosses\" contradicts it."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to a free-response item; the rubric rows list common errors."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The reading and calculation load is light and suits a 4-point short FRQ."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Each part is a single-step task. Part A is a standard description of allele segregation. Part B asks for one controlled variable and a reason. Part C asks for a 1:1 null hypothesis, which follows directly from the test cross. Part D gives the chi-square value, so the student only compares 2.25 with 3.84. Part D also needs no calculation. The reading load is low, and nothing in the item is ambiguous or out of scope.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 300
+  }
+ },
+ {
+  "key": "ap_biology-f06-k0",
+  "cellId": "ap_biology-f06",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Mutation changes codons in the mRNA, so different amino acids may be added, the protein may be cut short or the reading frame may shift. This can change the protein's structure and function.",
+     "final_answer": "A change in nucleotide sequence changes the mRNA codons. This can put a different amino acid into the protein (missense), create an early stop codon (nonsense, giving a shortened protein) or shift the reading frame (insertion or deletion). Any of these can change the protein's primary structure, its folding or shape, and its function.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "The student controls the UV exposure time and counts the resistant colonies.",
+     "final_answer": "Independent variable: length of UV exposure (0, 10, 20 or 30 s). Dependent variable: number of colonies (antibiotic-resistant cells) that grow on the antibiotic plates.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "More UV causes more mutations, so more resistant mutants are expected.",
+     "final_answer": "As UV exposure time increases, the number of colonies on the antibiotic plates will increase. There should be few or no colonies at 0 s.",
+     "ambiguous_or_flawed": false,
+     "flaw_note": "At very long exposures, UV could kill enough cells to lower colony counts. This is not part of the expected answer."
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "UV damages DNA, causing mutations; longer exposure gives more mutations, so it is more likely that some cells gain a resistance mutation.",
+     "final_answer": "UV light damages DNA, for example by forming thymine dimers, and errors in repairing this damage create mutations. Longer exposure causes more DNA damage and mutations, so it is more likely that some cells get a mutation that makes them resistant to the antibiotic. Those cells survive and form colonies.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Short FRQ with four 1-point parts matching the official Q3 structure (describe, identify variables, predict, justify), within topic 6.7. Keys are unambiguous and the rubric alternatives are valid. Minor template wording in B1 (\"gives the reason\") does not affect scoring.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Four 1-point parts, each asking for one core idea: how a nucleotide change alters a protein, the independent and dependent variables, a directional prediction, and a DNA-level justification (UV causes mutations, so more exposure produces more resistance mutations and more colonies). The scenario is short, there is no data to read and no calculation, and no misconceptions have to be rejected. This tests direct recall and application of mutation and experimental-design basics, which suits foundational practice more than a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 240
+  }
+ },
+ {
+  "key": "ap_biology-f07-k0",
+  "cellId": "ap_biology-f07",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Endocrine/long-distance signaling: the signaling cell releases the hormone, it moves by diffusion through air or fluids, or is carried in circulation or vascular tissue, to distant target cells. Those cells have specific receptors that bind the hormone and start a signal transduction pathway leading to a response.",
+     "final_answer": "The secreting cell releases the hormone, which travels by diffusion or transport (air, xylem/phloem, blood) to distant target cells. Target cells with specific receptors bind it, triggering signal transduction and a cellular response.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "The bag with the unripe banana alone (0 ripe bananas) gives the baseline ripening from the banana's own ethylene and other conditions. Comparing against it shows whether extra ethylene from the ripe bananas causes extra yellowing.",
+     "final_answer": "The bag with only the unripe banana and no ripe bananas. It shows the baseline amount of yellowing without ethylene from ripe fruit, so any extra yellowing in the other bags can be credited to the ripe bananas.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "More ripe bananas means more ethylene in the bag, which should cause more ripening.",
+     "final_answer": "As the number of ripe bananas goes up (0→1→2→4), the percent of the unripe banana that turns yellow goes up. The most yellowing should be in the bag with 4 ripe bananas, possibly levelling off at high numbers.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "More ripe fruit releases more ethylene, so the gas reaches a higher concentration in the sealed bag. More ethylene binds receptors on the unripe banana's cells, which activates more transduction and expression of ripening genes, such as enzymes that break down chlorophyll.",
+     "final_answer": "More ripe bananas release more ethylene into the sealed bag. The ethylene diffuses to the unripe banana's cells and binds ethylene receptors. More receptors become occupied, which increases signal transduction and the expression of ripening genes (for example, chlorophyll breakdown and cell-wall softening). This speeds up yellowing.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The short FRQ has the official Q3 structure of four 1-point parts: describe, identify the control, predict, justify. The topic is cell communication (ethylene signaling), and part B assesses 3.C. The control is unambiguous, and the rubric rows are meaning-based with alternative phrasings listed. The independent solver's answers agree with the key. No instant-reject condition applies.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Short, concrete scenario with no data. Part A is a recall-level description of hormone signaling over distance. Part B identifies the obvious control (bag with no ripe bananas) and its purpose. Part C is a simple dose-response prediction, and Part D links it to ligand-receptor signaling. Each part takes one or two reasoning steps, with no calculation or representation changes. The wording is clear and in scope, so the difficulty is introductory and not inflated by unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 300
+  }
+ },
+ {
+  "key": "ap_biology-f08-k0",
+  "cellId": "ap_biology-f08",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Natural selection needs variation in a trait, that trait being heritable, more offspring produced than can survive (competition or predation pressure), and differences in survival and reproduction based on the trait.",
+     "final_answer": "There must be variation in a trait, the trait must be heritable, and individuals must differ in survival or reproduction because of that trait (more offspring are produced than can survive).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Controlled variable: plot location, release time, or beetle size or marking method. If marks differed, birds might see some beetles more easily, which would confound color as the cause.",
+     "final_answer": "Use the same marking method, or mark sizes and positions that are equally visible, for both colors (or release both colors in the same plots at the same time). Then any difference in survival can be put down to beetle color alone and not to how visible the mark is or where the beetles were released.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Green beetles are camouflaged on green grass.",
+     "final_answer": "More green beetles will be alive.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Birds hunting by sight spot the brown beetles more easily against green grass and eat them, so green beetles survive and reproduce more. Because color is heritable, the frequency of green increases.",
+     "final_answer": "Green beetles blend in with green grass, so birds that hunt by sight find and eat brown beetles more often. Green beetles therefore have higher survival and reproductive success. Because color is heritable, they pass on the green trait, and green becomes more frequent in the population.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a short FRQ with four 1-point parts that follows the official Q3 structure and fits topic 7.2 (natural selection). Each part is judged against its own skill. The rubrics are meaning-based and list alternative accepted answers. Part B's model answer (equal numbers) restates what the setup already does, which makes it slightly easy, but other controlled factors are accepted and the part is valid.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The bundle requires natural selection concepts throughout, and each part matches its assigned skill (1.A, 3.C, 3.B, 6.C)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Each part has a defensible key and flexible alternatives. The common errors are realistic. Part B accepts multiple valid controlled factors."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The scenario text is clear and complete. No data object is needed."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so there are no options. The listed common errors (color change on demand, birds preferring green) are distinct misconceptions."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load of about 10 minutes for four 1-point parts is typical of a short FRQ. No arithmetic is required."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Short, concrete FRQ on natural selection with no calculation or data. Part A is a scenario-based description of the conditions for selection, B asks for a controlled variable with a reason, C is a one-step prediction (camouflage on green grass), and D justifies it using differential survival, reproduction and heritability. The wording is unambiguous and the context is minimal. Depth is moderate and typical of a mock-exam short FRQ, above pure recall because B and D require applying concepts to the scenario.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 360
+  }
+ },
+ {
+  "key": "ap_biology-f09-k0",
+  "cellId": "ap_biology-f09",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Homologs synapse to form tetrads; non-sister chromatids exchange corresponding segments at chiasmata.",
+     "final_answer": "Homologous chromosomes pair up (synapsis) to form a tetrad. Non-sister chromatids then exchange matching segments of DNA at chiasmata, so alleles are swapped between the maternal and paternal homologs.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Recombinant chromatids carry new allele combinations.",
+     "final_answer": "Crossing over produces recombinant chromatids that carry new combinations of the maternal and paternal alleles of linked genes. These combinations were not present on either parental chromosome, so the four products of meiosis differ from each other and from the parent's chromosomes, which increases the number of different possible gametes.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Loss of recombination reduces variation; independent assortment remains.",
+     "final_answer": "Genetic variation among the gametes will decrease. Some variation remains because the two chromosome pairs still assort independently, giving 2^2 = 4 chromosome combinations.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Chromosomes keep parental allele combinations.",
+     "final_answer": "Without crossing over, each chromosome passed to a gamete keeps exactly the same combination of alleles it had in the parent (all maternal or all paternal), so linked alleles are always inherited together. The gametes can therefore only carry one of the 4 combinations of whole parental chromosomes produced by independent assortment, with no recombinant chromosomes.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Short FRQ with four 1-point parts matching the Q4 Conceptual Analysis structure (describe, explain, predict, justify) on crossing over in topic 5.2. Keys are unique and defensible, rubric rows list alternative phrasings and distinct common errors, and the independent solver agrees. Load is appropriate for about 10 minutes with no calculator demand.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The bundle is centered on crossing over and genetic diversity (topic 5.2). Part B assesses the target skill 1.B by asking how crossing over increases variation. The other parts carry their own skills, which fit their prompts."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Each part has one defensible answer and the rubric rows are meaning-based with alternative phrasings. The prediction in Part C (variation decreases) is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The scenario is a clear text stimulus with no data needed. Minor wording mismatch between \"some of the organism's cells\" and \"an individual whose cells have the mutation\" does not create ambiguity."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "No options apply. The common_errors listed for each part are distinct named misconceptions, such as sister chromatids exchanging segments, new alleles being created, and a changed chromosome number."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Four 1-point parts in roughly 10 minutes matches the short FRQ grain. There is no arithmetic load, and the calculator designation is consistent with AP Biology."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Short concept-explanation FRQ on a single, core idea (crossing over and gamete variation) with a brief text-only scenario and no data. Parts A-D follow a describe, explain, predict, justify sequence. A is recall, B is a direct explanation, and C and D need one simple inference: without crossing over, alleles on each chromosome stay linked, so only independent assortment generates variation. No calculation, no representation changes, no misconceptions to reject beyond the basics. Fits foundational learning more than a full mock exam.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 240
+  }
+ },
+ {
+  "key": "ap_biology-f10-k0",
+  "cellId": "ap_biology-f10",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Definition",
+     "final_answer": "Genetic drift is a random change in allele frequencies in a population from one generation to the next. It comes from chance events, such as which individuals happen to survive and reproduce, and not from natural selection.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Sampling error",
+     "final_answer": "In a small population, each individual makes up a large share of the gene pool. Chance events (sampling error) can therefore change allele frequencies a lot and can even make an allele disappear. In a large population, random gains and losses tend to cancel out, so the frequencies stay closer to what they were.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Bottleneck lowers allelic diversity",
+     "final_answer": "The recovered population of 5,000 will have fewer different alleles of the gene than the original population did, even though it is back to the same size.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Survivors carry limited alleles",
+     "final_answer": "The 20 survivors carry at most 40 copies of each gene, and these are a random sample of the original gene pool. Rare alleles were probably not carried by any survivor, so they were lost. The recovered population comes only from the survivors' alleles, and new alleles from mutation build up very slowly, so the lost alleles do not come back.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean short FRQ on a population bottleneck and genetic drift, with a Q4 structure and unambiguous 1-point rubric rows. It passes all five criteria.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The item is a short FRQ with four 1-point parts in the official Q4 Conceptual Analysis structure: A describe, B explain, C predict, D justify. All parts address 7.4 (genetic drift, bottleneck). Part B carries the target skill 1.B, which asks why drift matters more in small populations. The part-level skills (1.A, 1.B, 6.E, 6.C) fit the official part purposes."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Each part has a single defensible answer, and the independent solver agreed on all four. Each rubric row lists accepted alternative wordings. In part C, \"fewer alleles\" is unambiguous because the scenario states that deaths are random with respect to alleles. In part D, the model answer adds a mutation clause, but the rubric requires only the loss of alleles from the survivors."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus is short, clear, and complete: 5,000 squirrels reduced to 20 by a disease that kills at random with respect to alleles, then regrowth to 5,000. No data object is needed."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no distractors. The common_errors listed for each row are realistic misconceptions, such as drift as gene flow, drift as selection, and the belief that regrowth restores the alleles."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item has a light reading load, needs no calculation, and fits the roughly 10-minute short FRQ format. Calculator designation is irrelevant here and harmless."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Short FRQ on a single core concept (genetic drift and the bottleneck effect). It requires describing drift, linking small population size to chance sampling effects, and predicting and justifying loss of allelic diversity after a bottleneck (alleles absent from the 20 survivors cannot return without mutation or gene flow). No data, no calculation and no representation changes. The reasoning is moderate and the wording is unambiguous, which suits a full mock exam.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 300
+  }
+ },
+ {
+  "key": "ap_biology-f11-k0",
+  "cellId": "ap_biology-f11",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Competition definition",
+     "final_answer": "Competition is an interaction in which two species use the same limited resource (e.g., space, food), so each one reduces the resource available to the other. This lowers the growth, survival or reproduction of both (a -/- interaction).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Predation lowers prey numbers",
+     "final_answer": "The sea star eats mussels, so it raises the mussels' death rate. This keeps the mussel population smaller than it would be without the predator, below the size where mussels could cover all the rock space.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Keystone predator removed",
+     "final_answer": "The number of species living on the rocks will decrease where the sea stars were removed, compared with the unchanged area.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Competitive exclusion",
+     "final_answer": "With no sea stars eating them, mussels grow in number and spread over the rock surface. Because mussels are the strongest competitor for space, they take over the limited space and crowd out the other species (competitive exclusion). Those species can no longer attach or survive there, so diversity drops. This shows the sea star is a keystone predator.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a standard short FRQ (Q4 Conceptual Analysis) with four 1-point parts: describe, explain, predict, justify. It sits within 8.5 community ecology. The key is unique and consistent with the independent solver. Alt solutions are listed, and the stem states the key conditions (mussels are the strongest competitor for space, and the sea star preys on mussels). The load is light.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The bundle is in topic 8.5 (competition, predation, keystone effect). Part B explains how predation limits the prey population (1.B), and the other parts follow the official Q4 purposes."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Each part has a single defensible answer. Rubric rows are meaning-based with alternatives and common errors listed. The solver matched all four answers."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text scenario is complete and clear, with no data needed. The comparison area is stated. Only one of several possible organism-removal designs is described, but that is sufficient here."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so there are no distractors. Common errors are listed per row and are realistic."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item is short, about 10 minutes, with no calculation, and matches the official short FRQ grain. The calculator designation is harmless."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Short FRQ on a keystone predator scenario. Part A is a definition in context. Part B is one step: predation limits the mussel population. Parts C and D need a short causal chain: removing the predator lets the dominant competitor increase, which excludes other species from space, so species richness falls. No data, no calculation, concise reading. The wording is unambiguous and within the Unit 8.5 scope. The concept depth and multi-step reasoning fit a full-mock exam item rather than basic recall.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 300
+  }
+ },
+ {
+  "key": "ap_biology-f12-k0",
+  "cellId": "ap_biology-f12",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Normal cells with lactose have high activity (46.7). Normal cells without lactose (1.9) and mutant cells with lactose (3.0) both have low activity.",
+     "final_answer": "Activity is high only in normal cells given lactose (46.7 units). It stays low in normal cells without lactose (1.9) and in mutant-repressor cells even with lactose (3.0). Lactose induces the enzyme only when the repressor is functional.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "(1.9-46.7)/46.7*100",
+     "final_answer": "(1.9 − 46.7)/46.7 × 100 ≈ −95.9% (a decrease of about 96%)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "The 2SE intervals do not overlap.",
+     "final_answer": "Supported. The lactose range (43.1–50.3) does not overlap the no-lactose range (1.7–2.1) or the mutant range (2.78–3.22), so the difference is likely statistically meaningful.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "The repressor cannot bind the inducer, so it stays on the operator.",
+     "final_answer": "Normally, the lactose derivative (allolactose) binds the repressor and changes its shape, so the repressor releases the operator and the lac genes are transcribed. The mutant repressor cannot bind the inducer, so it stays bound to the operator. This blocks RNA polymerase from transcribing lacZ, and little beta-galactosidase is made even when lactose is present.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The four 1-point short-FRQ parts follow the Q6 Analyze Data pattern. The key values and the ±2SE comparison are correct, the table is complete, and the lac operon concept is required in part D. The part skill labels differ slightly from the official Q6 pattern, which is a minor issue that does not justify failing the item.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Short 4-part FRQ on lac operon regulation with a small table. It requires describing a data pattern with values, one simple percent-change calculation (1.9 vs 46.7, short arithmetic), comparing mean ± 2SE ranges for non-overlap, and explaining how a repressor that cannot bind lactose stays on the operator and blocks transcription. These are all allowed levers and in-scope content (6.5). Reading load is low and arithmetic is short. It matches the typical depth of a full-mock AP Biology FRQ rather than a basic recall item or an advanced extension.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "ap_biology-f12-k1",
+  "cellId": "ap_biology-f12",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Normal cells with lactose have high activity (47.3 units). Normal cells without lactose (1.9) and mutant cells with lactose (3.0) both stay low. So activity goes up about 25-fold only when lactose is present and the repressor works normally.",
+     "final_answer": "Activity is high only in normal cells with lactose (47.3). It is low in normal cells without lactose (1.9) and in mutant cells with lactose (3.0).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "(1.9-47.3)/47.3 x 100 = -45.4/47.3 x 100 = -96.0%",
+     "final_answer": "About -96.0% (a 96% decrease)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "The ±2SE ranges are 43.04-51.56 (normal, lactose), 1.70-2.10 (normal, no lactose) and 2.64-3.36 (mutant, lactose). The range for normal cells with lactose does not overlap either of the others.",
+     "final_answer": "Supported: the ranges do not overlap, so the difference is likely real.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Normally the lactose derivative (allolactose) binds the repressor and releases it from the operator. The mutant repressor cannot bind allolactose, so it stays on the operator. This blocks RNA polymerase from transcribing lacZ, so little beta-galactosidase is made even when lactose is present.",
+     "final_answer": "The mutant repressor cannot bind the inducer, so it stays bound to the operator. This blocks transcription of lacZ, so enzyme activity stays low.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a valid short FRQ Q6 with four 1-point parts (describe, calculate, evaluate with ±2SE, explain). It fits topic 6.5 as a whole. The key values are unique and defensible, the stimulus is complete, and the load is typical for the exam.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Four short parts that match the allowed levers: describe a table, one percent-change calculation with rounded values, a mean ± 2SE range comparison (43.04-51.56 vs 1.7-2.1 and 2.64-3.36, no overlap), and explaining the lac repressor disruption. The concepts are core CED content. The reading is short and the setup is unambiguous. The calculation is a single step. It is typical of a full-mock short free-response item, not basic recall and not beyond the course.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 480
+  }
+ },
+ {
+  "key": "ap_biology-f13-k0",
+  "cellId": "ap_biology-f13",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring",
+   "criterion_failed_exam_suitability"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Moths matching bark survived most: dark on dark 66.0% vs light on dark 31.2% and dark on light 28.7%; mismatched moths survived less than half as well.",
+     "final_answer": "Survival is highest when moth color matches bark (dark on dark 66.0%) and much lower when mismatched (31.2% light on dark, 28.7% dark on light).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "(28.7-66.0)/66.0 ×100 = -37.3/66.0×100",
+     "final_answer": "≈ -56.5% (a 56.5% decrease)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Dark/dark range 61.96–70.04; light/dark 28.8–33.6; dark/light 26.62–30.78. No overlap of dark/dark interval with either other interval.",
+     "final_answer": "Supported: the dark-on-dark ±2SE interval (61.96–70.04) does not overlap the others (28.8–33.6; 26.62–30.78), so the difference is likely significant.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Birds hunting by sight eat conspicuous moths more; camouflaged (matching) moths survive and reproduce more, passing heritable color alleles, so color frequency shifts toward the one matching the bark.",
+     "final_answer": "Birds that hunt by sight eat moths that stand out against the bark more often. Moths whose color matches the bark survive better and have more offspring. Because color is inherited, the color that matches the bark becomes more common in the population over generations.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Fail. The Part A key frames unordered categories as a decreasing trend, and Part D relies on an unstated heritability premise. Parts B and C are sound.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The bundle as a whole needs natural selection (Part D) and table description (Part A). Each part has its own skill, which is allowed."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "The Part A model answer and alternatives say the survival means decrease across the levels. The rows are unordered categories, so this implies a nonexistent trend. The better description is match versus mismatch. The solver's answer gave that description instead of the model answer. The Part A rubric is very loose."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete, with the n, the ±2SE and the predator context stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ with no distractors. The common_errors lists are adequate though generic."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "Part D requires reproduction and a change in allele frequency. The 3-day survival data and the stimulus do not state that color is heritable, so the explanation relies on a premise the item never provides."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Four-part FRQ in scope for 7.2 / skill 4.B. It asks the student to describe a pattern from a 3-row table, do one percent-change calculation with clean numbers, compare mean ± 2SE ranges (61.96-70.04 vs 28.80-33.60 and 26.62-30.78, no overlap), and explain natural selection via differential survival and reproduction (camouflage and predation). The reasoning is multi-step but uses only allowed difficulty levers. The wording is unambiguous, the arithmetic is short and uses rounded values, and the reading load is low. This fits a full-mock exam-prep item rather than basic recall or an advanced extension.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_biology-f13-k1",
+  "cellId": "ap_biology-f13",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring",
+   "resembles_known_exam_item"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Compare means",
+     "final_answer": "Moths whose color matches the bark survived much better: dark moths on dark bark averaged 66.1% survival. Moths that did not match survived about half as well: light moths on dark bark averaged 31.5%, and dark moths on light bark averaged 28.9%. The two mismatched groups had similar survival.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "(new-old)/old ×100",
+     "final_answer": "(28.9 − 66.1)/66.1 × 100 = −37.2/66.1 × 100 ≈ −56.3%, which is a decrease of about 56%.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Check whether the ±2SE ranges overlap",
+     "final_answer": "The data support the claim. The range for dark moths on dark bark is 59.24–72.96%. This does not overlap the range for light moths on dark bark (28.66–34.34%) or for dark moths on light bark (25.52–32.28%). Because the ranges don't overlap, the differences are likely statistically significant.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Selection through visual predators",
+     "final_answer": "Moth color is a heritable trait that varies between moths. Birds hunt by sight, so they find and eat moths that stand out against the bark more often than moths that blend in. Camouflaged moths survive at higher rates and so produce more offspring. Over generations, this makes the color that matches the local bark more common in the population. This is natural selection, because survival and reproduction differ depending on phenotype.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": true,
+   "summary": "The item mostly works as a Q6 data-analysis short FRQ on natural selection, but Part A's key is misleading and the item closely resembles a known College Board scenario.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The bundle fits 7.2. Camouflage, predation and survival lead into the natural-selection explanation in Part D. The four parts follow the Q6 pattern: A describes data, B calculates, C evaluates with ±2SE, D relates the results to a principle."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Part A's model answer says the means \"decrease across the levels\" and that 66.1 is greatest. The levels are unordered categories, so \"across the levels\" implies an ordering that the data do not have. The rubric (A1) also says \"requires_numbers\": false even though the prompt asks for values, and its error descriptions are vague. Parts B, C and D are consistent: the percent change is correct, the ±2SE ranges do not overlap, and the Part D alternatives are valid. The key and rubric for Part A need tightening."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete: it gives n, the mean ± 2SE, units and the bird-predation context. The wording is clear. Part A's phrase \"across the levels\" is awkward for categories."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no distractors. The rubric's common_errors entries are generic but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Four 1-point parts, one short calculation and a calculator allowed are typical of an AP Biology short FRQ."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Four 1-point parts on a single small table: describe the pattern with values (4.B), one percent-change calculation, compare mean ± 2SE ranges (no overlap of 59.24-72.96 with 28.66-34.34 and 25.52-32.28), and explain natural selection via camouflage and differential survival. All levers are permitted and in scope for Unit 7.2. The arithmetic is short with rounded values, the wording is unambiguous, and there is no out-of-scope content. This is typical of a full-mock short free-response item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 480
+  }
+ },
+ {
+  "key": "ap_biology-f14-k0",
+  "cellId": "ap_biology-f14",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:B:flagged",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "instant_reject_multiple_correct"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Older mice have a higher mean percent of abnormal eggs: 1.9% at 3 months, 8.8% at 12 months and 27.8% at 18 months. The increase also gets larger with age.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "The percent of abnormal eggs goes up with age, from 1.9% at 3 months to 8.8% at 12 months to 27.8% at 18 months, and it rises faster at older ages."
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Read literally (start at 18 months, end at 3 months): (1.9 − 27.8)/27.8 × 100 = −93.2%. The question probably meant 3 to 18 months: (27.8 − 1.9)/1.9 × 100 ≈ +1363%.",
+     "ambiguous_or_flawed": true,
+     "flaw_note": "The wording 'from 18 months to 3 months' runs backward in time, so the item may have meant 3 to 18 months. The two readings give different answers: −93.2% versus +1363%.",
+     "final_answer": "≈ −93.2% (if the question meant 3 to 18 months: ≈ +1363%)"
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "The ±2SE ranges are 25.78–29.82 at 18 months, 8.12–9.48 at 12 months and 1.70–2.10 at 3 months. The 18-month range does not overlap either of the others.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Supported: the 18-month ±2SE range (25.78–29.82) does not overlap the 12-month range (8.12–9.48) or the 3-month range (1.70–2.10)."
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "In nondisjunction, homologous chromosomes fail to separate in meiosis I, or sister chromatids fail to separate in meiosis II. One daughter cell then gets an extra chromosome and the other is missing one.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "If homologs (meiosis I) or sister chromatids (meiosis II) fail to separate, both copies go to the same cell. The egg ends up with n+1 or n−1 chromosomes, and fertilization gives a trisomic or monosomic zygote."
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [
+    "multiple_correct"
+   ],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Part B's wording (\"percent change from 18 months to 3 months\") runs backward in time and has two defensible readings (-93.2% or about +1363%). The rubric accepts only -93.2, so a student who computes the 3-to-18-month change would be marked wrong. The other parts are sound.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The bundle fits topic 5.1 (age and meiotic errors, nondisjunction in Part D). The parts assess the official Q6 skills."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Part B has no unique defensible answer because the direction of the change is ambiguous. The rubric accepts only -93.2 (±0.9). Parts A, C and D are fine."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The table is complete, but the Part B wording is ambiguous and runs backward in time. The word \"levels\" is used for ages in the rubric text."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "FRQ parts have no distractors. The listed common errors are reasonable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Load is typical of a short FRQ. The calculator is appropriate for the single percent-change calculation."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Four-part short FRQ with a compact 3-row table. It needs a trend description with values (4.B), one percent-change calculation with clean numbers, a comparison of mean ± 2SE ranges (no overlap, so the data support the claim), and a concept explanation of nondisjunction tied to the scenario. Every lever is allowed and the topic is in scope. The reading load is low, the arithmetic is short, the wording is unambiguous, and no out-of-scope knowledge is needed. The demand is typical of a full AP mock, above a basic-learning item but below an advanced supplement.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "ap_biology-f14-k1",
+  "cellId": "ap_biology-f14",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:B:flagged",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "The mean percent of abnormal eggs rises with age: 1.9% at 3 months, 8.9% at 12 months, 27.9% at 18 months. The increase speeds up (+7.0 points, then +19.0 points).",
+     "ambiguous_or_flawed": false,
+     "final_answer": "The percent of eggs with an abnormal chromosome number increases with age, and the increase speeds up: 1.9% (3 months) → 8.9% (12 months) → 27.9% (18 months)."
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Literal reading (18 → 3 months): (1.9−27.9)/27.9×100 = −93.2%. Reading in order of age (3 → 18 months): (27.9−1.9)/1.9×100 ≈ +1368%.",
+     "ambiguous_or_flawed": true,
+     "flaw_note": "The wording 'from 18 months to 3 months' runs backwards in time, so the intended direction is unclear. The two readings give −93.2% or +1368%.",
+     "final_answer": "≈ −93.2% (literal reading); +1368% if the intended direction is 3 → 18 months"
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "±2SE ranges: 18 months 24.64–31.16%; 12 months 8.10–9.70%; 3 months 1.70–2.10%. The 18-month range does not overlap either other range.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Supported: the 18-month ±2SE range (24.64–31.16%) does not overlap the 12-month range (8.10–9.70%) or the 3-month range (1.70–2.10%)."
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Homologs fail to separate in meiosis I, or sister chromatids fail to separate in meiosis II. One daughter cell gets an extra chromosome (n+1) and another is missing one (n−1), so the egg is aneuploid.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Nondisjunction means chromosomes fail to separate during meiosis I or II. The egg ends up with an extra or missing chromosome (n+1 or n−1), which leads to trisomy or monosomy after fertilization."
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Part B's wording \"from 18 months to 3 months\" runs against the table order and creates a directional ambiguity. The solver got -93.2% or +1368% depending on the reading, and the rubric accepts only -93.2, so the key is not uniquely defensible. Parts A, C and D are sound. Fix B by stating the direction explicitly.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The bundle fits topic 5.1 and the Q6 data-analysis structure."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Part B accepts only -93.2; the reversed-direction wording makes +1368% a plausible student answer that would be marked wrong."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The table is complete. The ambiguous wording of B is the expression flaw."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to the FRQ beyond the listed common errors, which are reasonable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is appropriate for a short FRQ."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Four-part short FR on a single small table. Part A asks for a trend description with supporting values. Part B is one percent-change calculation with clean numbers, (3 months - 18 months)/18 months, about -93.2%. Part C compares mean ± 2SE ranges: 18 months is 24.64-31.16, 12 months is 8.1-9.7, and 3 months is 1.7-2.1, so the ranges do not overlap and the claim is supported. Part D asks for an explanation of nondisjunction producing an abnormal chromosome number. All levers are allowed (table reading, one formula-sheet calculation, 2SE comparison, a disruption in meiosis). Reading load is light, the arithmetic is short, and the context is concrete and unambiguous. The depth is typical AP exam level and not above it, so it fits a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ }
+]

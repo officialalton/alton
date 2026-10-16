@@ -1,0 +1,98 @@
+{
+ "runs": [
+  "csa-s2-mc-a"
+ ],
+ "rows": 44,
+ "passed": 31,
+ "rejected": 13,
+ "passRate": 0.705,
+ "mc": {
+  "rows": 44,
+  "passed": 31,
+  "passRate": 0.705
+ },
+ "frq": {
+  "rows": 0,
+  "passed": 0,
+  "passRate": 0
+ },
+ "unitsPassed": {
+  "1": 23,
+  "3": 8
+ },
+ "skillsPassed": {
+  "3.A": 11,
+  "4.A": 2,
+  "2.A": 4,
+  "3.C": 3,
+  "3.B": 5,
+  "2.B": 3,
+  "3.D": 2,
+  "2.C": 1
+ },
+ "figPassed": {
+  "text": 31
+ },
+ "figAll": {
+  "text": 44
+ },
+ "figPassRate": {
+  "text": "31/44"
+ },
+ "renderTypesPassed": {
+  "text": 31
+ },
+ "archetypesPassed": {
+  "cs_assign_swap_bug": 2,
+  "cs_casting_range": 1,
+  "cs_char_arith": 2,
+  "cs_compound_assign": 2,
+  "cs_describe_every_other": 1,
+  "cs_int_overflow": 2,
+  "cs_math_completion": 1,
+  "cs_method_params": 2,
+  "cs_object_alias": 2,
+  "cs_overload_resolution": 1,
+  "cs_random_range": 2,
+  "cs_string_concat_prec": 2,
+  "cs_string_equals_compare": 2,
+  "cs_string_method_completion": 1,
+  "cs_class_describe": 1,
+  "cs_class_state_completion": 1,
+  "cs_class_trace": 1,
+  "cs_compile_error_calls": 2,
+  "cs_constructor_completion": 2,
+  "cs_helper_use_completion": 1
+ },
+ "archetypesAll": {
+  "cs_assign_swap_bug": 2,
+  "cs_casting_range": 2,
+  "cs_char_arith": 2,
+  "cs_compound_assign": 2,
+  "cs_describe_every_other": 2,
+  "cs_int_overflow": 2,
+  "cs_math_class": 2,
+  "cs_math_completion": 2,
+  "cs_method_params": 2,
+  "cs_object_alias": 2,
+  "cs_overload_resolution": 2,
+  "cs_random_range": 2,
+  "cs_string_concat_prec": 2,
+  "cs_string_equals_compare": 2,
+  "cs_string_method_completion": 2,
+  "cs_clamp_completion": 2,
+  "cs_class_describe": 2,
+  "cs_class_state_completion": 2,
+  "cs_class_trace": 2,
+  "cs_compile_error_calls": 2,
+  "cs_constructor_completion": 2,
+  "cs_helper_use_completion": 2
+ },
+ "failedArchetypes": [
+  "cs_math_class",
+  "cs_clamp_completion"
+ ],
+ "costUsd": {
+  "csa-s2-mc-a": 1.3974
+ }
+}

@@ -1,0 +1,4395 @@
+{
+ "schemaVersion": 1,
+ "subject": {
+  "apCode": "ap_chemistry",
+  "name": "AP Chemistry",
+  "family": "chemistry",
+  "edition": "ced-2027",
+  "cedVersion": "AP Chemistry CED ((c)2024; 2027 hybrid digital exam)",
+  "examYear": 2027,
+  "sourceUrl": "https://apcentral.collegeboard.org/media/pdf/ap-chemistry-course-and-exam-description.pdf",
+  "officialTopicCodes": true,
+  "designNotes": "Units, topic codes, titles, class periods and exam weights follow the CED. Topic skills are the CED suggested skills (Course at a Glance / unit pages). Sub-keywords, kinds, prerequisites and estLessons are original tutoring-sequence design; estLessons are scaled to roughly 60% of CED class periods per unit. Practice 3 has no MC weight (not assessed in MC)."
+ },
+ "skills": [
+  {
+   "code": "1.A",
+   "category": "Models and Representations",
+   "label": "Describe components and quantitative information of particulate-level models and representations"
+  },
+  {
+   "code": "1.B",
+   "category": "Models and Representations",
+   "label": "Describe components of models showing particulate and macroscopic properties"
+  },
+  {
+   "code": "2.A",
+   "category": "Question and Method",
+   "label": "Identify a testable scientific question"
+  },
+  {
+   "code": "2.B",
+   "category": "Question and Method",
+   "label": "Formulate a hypothesis or predict experiment results"
+  },
+  {
+   "code": "2.C",
+   "category": "Question and Method",
+   "label": "Identify procedures aligned to a scientific question"
+  },
+  {
+   "code": "2.D",
+   "category": "Question and Method",
+   "label": "Make observations or collect data from lab representations"
+  },
+  {
+   "code": "2.E",
+   "category": "Question and Method",
+   "label": "Identify sources of experimental error"
+  },
+  {
+   "code": "2.F",
+   "category": "Question and Method",
+   "label": "Explain how changing a procedure alters results"
+  },
+  {
+   "code": "3.A",
+   "category": "Representing Data and Phenomena",
+   "label": "Represent phenomena with appropriate graphs, scale, and units"
+  },
+  {
+   "code": "3.B",
+   "category": "Representing Data and Phenomena",
+   "label": "Represent substances or phenomena with diagrams or models"
+  },
+  {
+   "code": "3.C",
+   "category": "Representing Data and Phenomena",
+   "label": "Relate structures and interactions across scales visually"
+  },
+  {
+   "code": "4.A",
+   "category": "Model Analysis",
+   "label": "Predict or explain properties using given models"
+  },
+  {
+   "code": "4.B",
+   "category": "Model Analysis",
+   "label": "Explain whether a model is consistent with chemical theory"
+  },
+  {
+   "code": "4.C",
+   "category": "Model Analysis",
+   "label": "Connect particulate-level and macroscopic properties"
+  },
+  {
+   "code": "4.D",
+   "category": "Model Analysis",
+   "label": "Explain how well a model links particulate and macroscopic properties"
+  },
+  {
+   "code": "5.A",
+   "category": "Mathematical Routines",
+   "label": "Identify quantities needed to solve a problem"
+  },
+  {
+   "code": "5.B",
+   "category": "Mathematical Routines",
+   "label": "Choose a theory or relationship to solve a problem"
+  },
+  {
+   "code": "5.C",
+   "category": "Mathematical Routines",
+   "label": "Explain how variables relate in an equation"
+  },
+  {
+   "code": "5.D",
+   "category": "Mathematical Routines",
+   "label": "Use information presented graphically"
+  },
+  {
+   "code": "5.E",
+   "category": "Mathematical Routines",
+   "label": "Determine a balanced chemical equation"
+  },
+  {
+   "code": "5.F",
+   "category": "Mathematical Routines",
+   "label": "Calculate an unknown from known quantities"
+  },
+  {
+   "code": "6.A",
+   "category": "Argumentation",
+   "label": "Make a scientific claim"
+  },
+  {
+   "code": "6.B",
+   "category": "Argumentation",
+   "label": "Support a claim with experimental data"
+  },
+  {
+   "code": "6.C",
+   "category": "Argumentation",
+   "label": "Support a claim with particulate-level representations"
+  },
+  {
+   "code": "6.D",
+   "category": "Argumentation",
+   "label": "Justify a claim with chemical principles or math"
+  },
+  {
+   "code": "6.E",
+   "category": "Argumentation",
+   "label": "Justify a claim connecting particulate and macroscopic scales"
+  },
+  {
+   "code": "6.F",
+   "category": "Argumentation",
+   "label": "Connect experimental results to chemical concepts"
+  },
+  {
+   "code": "6.G",
+   "category": "Argumentation",
+   "label": "Explain how experimental error affects results"
+  }
+ ],
+ "weights": [
+  {
+   "axis": "unit",
+   "code": "1",
+   "section": "mc",
+   "min": 7,
+   "max": 9,
+   "source": "CED Exam Information, MC unit weighting table"
+  },
+  {
+   "axis": "unit",
+   "code": "2",
+   "section": "mc",
+   "min": 7,
+   "max": 9,
+   "source": "CED Exam Information, MC unit weighting table"
+  },
+  {
+   "axis": "unit",
+   "code": "3",
+   "section": "mc",
+   "min": 18,
+   "max": 22,
+   "source": "CED Exam Information, MC unit weighting table"
+  },
+  {
+   "axis": "unit",
+   "code": "4",
+   "section": "mc",
+   "min": 7,
+   "max": 9,
+   "source": "CED Exam Information, MC unit weighting table"
+  },
+  {
+   "axis": "unit",
+   "code": "5",
+   "section": "mc",
+   "min": 7,
+   "max": 9,
+   "source": "CED Exam Information, MC unit weighting table"
+  },
+  {
+   "axis": "unit",
+   "code": "6",
+   "section": "mc",
+   "min": 7,
+   "max": 9,
+   "source": "CED Exam Information, MC unit weighting table"
+  },
+  {
+   "axis": "unit",
+   "code": "7",
+   "section": "mc",
+   "min": 7,
+   "max": 9,
+   "source": "CED Exam Information, MC unit weighting table"
+  },
+  {
+   "axis": "unit",
+   "code": "8",
+   "section": "mc",
+   "min": 11,
+   "max": 15,
+   "source": "CED Exam Information, MC unit weighting table"
+  },
+  {
+   "axis": "unit",
+   "code": "9",
+   "section": "mc",
+   "min": 7,
+   "max": 9,
+   "source": "CED Exam Information, MC unit weighting table"
+  },
+  {
+   "axis": "skill",
+   "code": "Models and Representations",
+   "section": "mc",
+   "min": 8,
+   "max": 12,
+   "source": "CED Exam Information, Section I science practice weighting"
+  },
+  {
+   "axis": "skill",
+   "code": "Question and Method",
+   "section": "mc",
+   "min": 8,
+   "max": 12,
+   "source": "CED Exam Information, Section I science practice weighting"
+  },
+  {
+   "axis": "skill",
+   "code": "Model Analysis",
+   "section": "mc",
+   "min": 23,
+   "max": 30,
+   "source": "CED Exam Information, Section I science practice weighting"
+  },
+  {
+   "axis": "skill",
+   "code": "Mathematical Routines",
+   "section": "mc",
+   "min": 35,
+   "max": 42,
+   "source": "CED Exam Information, Section I science practice weighting"
+  },
+  {
+   "axis": "skill",
+   "code": "Argumentation",
+   "section": "mc",
+   "min": 8,
+   "max": 12,
+   "source": "CED Exam Information, Section I science practice weighting"
+  },
+  {
+   "axis": "skill",
+   "code": "Models and Representations",
+   "section": "frq",
+   "min": 2,
+   "max": 4,
+   "source": "CED Exam Information, Section II science practice weighting"
+  },
+  {
+   "axis": "skill",
+   "code": "Question and Method",
+   "section": "frq",
+   "min": 10,
+   "max": 16,
+   "source": "CED Exam Information, Section II science practice weighting"
+  },
+  {
+   "axis": "skill",
+   "code": "Representing Data and Phenomena",
+   "section": "frq",
+   "min": 8,
+   "max": 16,
+   "source": "CED Exam Information, Section II science practice weighting"
+  },
+  {
+   "axis": "skill",
+   "code": "Model Analysis",
+   "section": "frq",
+   "min": 5,
+   "max": 9,
+   "source": "CED Exam Information, Section II science practice weighting"
+  },
+  {
+   "axis": "skill",
+   "code": "Mathematical Routines",
+   "section": "frq",
+   "min": 43,
+   "max": 53,
+   "source": "CED Exam Information, Section II science practice weighting"
+  },
+  {
+   "axis": "skill",
+   "code": "Argumentation",
+   "section": "frq",
+   "min": 15,
+   "max": 24,
+   "source": "CED Exam Information, Section II science practice weighting"
+  }
+ ],
+ "units": [
+  {
+   "code": "1",
+   "title": "Atomic Structure and Properties",
+   "officialClassPeriods": "~9–10",
+   "topics": [
+    {
+     "code": "1.1",
+     "title": "Moles and Molar Mass",
+     "scope": "both",
+     "skills": [
+      "5.B"
+     ],
+     "requires": [],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "1.1#1",
+       "label": "Mole as a counting bridge between mass and particles",
+       "kind": "concept",
+       "skills": [
+        "5.B"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.1#2",
+       "label": "Mass-mole-particle conversions with Avogadro's number",
+       "kind": "skill",
+       "skills": [
+        "5.F"
+       ],
+       "requires": [
+        "1.1#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.1#3",
+       "label": "Molar mass of a formula vs. mass of one particle",
+       "kind": "misconception",
+       "skills": [
+        "5.A"
+       ],
+       "requires": [
+        "1.1#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "1.2",
+     "title": "Mass Spectra of Elements",
+     "scope": "both",
+     "skills": [
+      "5.D"
+     ],
+     "requires": [
+      "1.1"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "1.2#1",
+       "label": "Reading peak position and height in a mass spectrum",
+       "kind": "representation",
+       "skills": [
+        "5.D"
+       ],
+       "requires": [
+        "1.1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.2#2",
+       "label": "Average atomic mass from isotope abundances",
+       "kind": "skill",
+       "skills": [
+        "5.F"
+       ],
+       "requires": [
+        "1.2#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.2#3",
+       "label": "Mass number vs. average atomic mass on the periodic table",
+       "kind": "misconception",
+       "skills": [
+        "5.A"
+       ],
+       "requires": [
+        "1.2#2"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "1.3",
+     "title": "Elemental Composition of Pure Substances",
+     "scope": "both",
+     "skills": [
+      "2.A"
+     ],
+     "requires": [
+      "1.1"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "1.3#1",
+       "label": "Law of definite proportions and mass percent",
+       "kind": "concept",
+       "skills": [
+        "5.B"
+       ],
+       "requires": [
+        "1.1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.3#2",
+       "label": "Empirical formula from mass or percent data",
+       "kind": "skill",
+       "skills": [
+        "5.F"
+       ],
+       "requires": [
+        "1.3#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.3#3",
+       "label": "Empirical to molecular formula using molar mass",
+       "kind": "skill",
+       "skills": [
+        "5.F"
+       ],
+       "requires": [
+        "1.3#2"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "1.4",
+     "title": "Composition of Mixtures",
+     "scope": "both",
+     "skills": [
+      "5.A"
+     ],
+     "requires": [
+      "1.3"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "1.4#1",
+       "label": "Pure substance vs. mixture at the particle level",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [
+        "1.3"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.4#2",
+       "label": "Mass percent of a component in a mixture",
+       "kind": "skill",
+       "skills": [
+        "5.F"
+       ],
+       "requires": [
+        "1.4#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.4#3",
+       "label": "Using composition data to decide purity or identity",
+       "kind": "representation",
+       "skills": [
+        "5.A"
+       ],
+       "requires": [
+        "1.4#2"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "1.5",
+     "title": "Atomic Structure and Electron Configuration",
+     "scope": "both",
+     "skills": [
+      "1.A"
+     ],
+     "requires": [
+      "1.1"
+     ],
+     "estLessons": 1.0,
+     "subKeywords": [
+      {
+       "code": "1.5#1",
+       "label": "Shells, subshells, and orbital capacity",
+       "kind": "concept",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.5#2",
+       "label": "Writing ground-state configurations with the filling order",
+       "kind": "skill",
+       "skills": [
+        "3.B"
+       ],
+       "requires": [
+        "1.5#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.5#3",
+       "label": "Exceptions such as Cr and Cu and ion configurations",
+       "kind": "misconception",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [
+        "1.5#2"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.5#4",
+       "label": "Coulombic attraction between nucleus and electrons",
+       "kind": "concept",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [
+        "1.5#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "1.6",
+     "title": "Photoelectron Spectroscopy",
+     "scope": "both",
+     "skills": [
+      "4.B"
+     ],
+     "requires": [
+      "1.5"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "1.6#1",
+       "label": "Reading a PES spectrum: peak energy and relative height",
+       "kind": "representation",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [
+        "1.5"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.6#2",
+       "label": "Matching PES peaks to configurations",
+       "kind": "skill",
+       "skills": [
+        "4.B"
+       ],
+       "requires": [
+        "1.6#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.6#3",
+       "label": "Confusing peak height with orbital energy",
+       "kind": "misconception",
+       "skills": [
+        "4.B"
+       ],
+       "requires": [
+        "1.6#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "1.7",
+     "title": "Periodic Trends",
+     "scope": "both",
+     "skills": [
+      "4.A"
+     ],
+     "requires": [
+      "1.5"
+     ],
+     "estLessons": 1.0,
+     "subKeywords": [
+      {
+       "code": "1.7#1",
+       "label": "Effective nuclear charge and shielding",
+       "kind": "concept",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [
+        "1.5"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.7#2",
+       "label": "Explaining radius and ionization energy trends with Coulomb's law",
+       "kind": "skill",
+       "skills": [
+        "6.D"
+       ],
+       "requires": [
+        "1.7#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.7#3",
+       "label": "Treating trends as memorized rules instead of attraction arguments",
+       "kind": "misconception",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [
+        "1.7#2"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.7#4",
+       "label": "Reading successive ionization energy jumps",
+       "kind": "skill",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [
+        "1.7#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "1.8",
+     "title": "Valence Electrons and Ionic Compounds",
+     "scope": "both",
+     "skills": [
+      "4.C"
+     ],
+     "requires": [
+      "1.7"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "1.8#1",
+       "label": "Valence electrons and common ion charges",
+       "kind": "concept",
+       "skills": [
+        "4.C"
+       ],
+       "requires": [
+        "1.7"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.8#2",
+       "label": "Predicting ionic formulas from charges",
+       "kind": "skill",
+       "skills": [
+        "5.E"
+       ],
+       "requires": [
+        "1.8#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.8#3",
+       "label": "Relating ion size and charge to lattice behavior",
+       "kind": "concept",
+       "skills": [
+        "4.C"
+       ],
+       "requires": [
+        "1.8#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "2",
+   "title": "Compound Structure and Properties",
+   "officialClassPeriods": "~12–13",
+   "topics": [
+    {
+     "code": "2.1",
+     "title": "Types of Chemical Bonds",
+     "scope": "both",
+     "skills": [
+      "6.A"
+     ],
+     "requires": [
+      "1.8"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "2.1#1",
+       "label": "Electronegativity difference and bond polarity continuum",
+       "kind": "concept",
+       "skills": [
+        "6.A"
+       ],
+       "requires": [
+        "1.7"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.1#2",
+       "label": "Classifying bonds as ionic, polar covalent, or nonpolar",
+       "kind": "skill",
+       "skills": [
+        "4.C"
+       ],
+       "requires": [
+        "2.1#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.1#3",
+       "label": "Metallic bonding with delocalized electrons",
+       "kind": "concept",
+       "skills": [
+        "4.C"
+       ],
+       "requires": [
+        "2.1#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "2.2",
+     "title": "Intramolecular Force and Potential Energy",
+     "scope": "both",
+     "skills": [
+      "3.A"
+     ],
+     "requires": [
+      "2.1"
+     ],
+     "estLessons": 1.0,
+     "subKeywords": [
+      {
+       "code": "2.2#1",
+       "label": "Potential energy versus internuclear distance curve",
+       "kind": "representation",
+       "skills": [
+        "3.A"
+       ],
+       "requires": [
+        "2.1"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "2.2#2",
+       "label": "Linking bond length and bond energy to the curve minimum",
+       "kind": "skill",
+       "skills": [
+        "4.D"
+       ],
+       "requires": [
+        "2.2#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.2#3",
+       "label": "Thinking the lowest-energy point is zero separation",
+       "kind": "misconception",
+       "skills": [
+        "4.B"
+       ],
+       "requires": [
+        "2.2#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "2.3",
+     "title": "Structure of Ionic Solids",
+     "scope": "both",
+     "skills": [
+      "4.C"
+     ],
+     "requires": [
+      "2.1"
+     ],
+     "estLessons": 1.0,
+     "subKeywords": [
+      {
+       "code": "2.3#1",
+       "label": "Ion arrangement and the lattice energy idea",
+       "kind": "concept",
+       "skills": [
+        "4.C"
+       ],
+       "requires": [
+        "2.1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.3#2",
+       "label": "Comparing melting points via charge and ion size",
+       "kind": "skill",
+       "skills": [
+        "6.D"
+       ],
+       "requires": [
+        "2.3#1"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "2.3#3",
+       "label": "Reading ionic solid particle diagrams",
+       "kind": "representation",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [
+        "2.3#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "2.4",
+     "title": "Structure of Metals and Alloys",
+     "scope": "both",
+     "skills": [
+      "4.C"
+     ],
+     "requires": [
+      "2.1"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "2.4#1",
+       "label": "Sea of electrons and metal properties",
+       "kind": "concept",
+       "skills": [
+        "4.C"
+       ],
+       "requires": [
+        "2.1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.4#2",
+       "label": "Substitutional vs. interstitial alloy drawings",
+       "kind": "representation",
+       "skills": [
+        "1.A"
+       ],
+       "requires": [
+        "2.4#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.4#3",
+       "label": "Explaining why alloys are harder than pure metals",
+       "kind": "skill",
+       "skills": [
+        "6.C"
+       ],
+       "requires": [
+        "2.4#2"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "2.5",
+     "title": "Lewis Diagrams",
+     "scope": "both",
+     "skills": [
+      "3.B"
+     ],
+     "requires": [
+      "2.1"
+     ],
+     "estLessons": 1.25,
+     "subKeywords": [
+      {
+       "code": "2.5#1",
+       "label": "Counting valence electrons and drawing Lewis structures",
+       "kind": "skill",
+       "skills": [
+        "3.B"
+       ],
+       "requires": [
+        "2.1"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "2.5#2",
+       "label": "Placing the wrong atom in the center or miscounting lone pairs",
+       "kind": "misconception",
+       "skills": [
+        "3.B"
+       ],
+       "requires": [
+        "2.5#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.5#3",
+       "label": "Multiple bonds and exceptions to the octet",
+       "kind": "skill",
+       "skills": [
+        "3.B"
+       ],
+       "requires": [
+        "2.5#1"
+       ],
+       "estLessons": 0.5
+      }
+     ]
+    },
+    {
+     "code": "2.6",
+     "title": "Resonance and Formal Charge",
+     "scope": "both",
+     "skills": [
+      "6.C"
+     ],
+     "requires": [
+      "2.5"
+     ],
+     "estLessons": 1.0,
+     "subKeywords": [
+      {
+       "code": "2.6#1",
+       "label": "Calculating formal charge",
+       "kind": "skill",
+       "skills": [
+        "5.F"
+       ],
+       "requires": [
+        "2.5"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.6#2",
+       "label": "Resonance structures and bond order",
+       "kind": "concept",
+       "skills": [
+        "6.C"
+       ],
+       "requires": [
+        "2.6#1"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "2.6#3",
+       "label": "Choosing the best structure from formal charges",
+       "kind": "skill",
+       "skills": [
+        "6.C"
+       ],
+       "requires": [
+        "2.6#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "2.7",
+     "title": "VSEPR and Hybridization",
+     "scope": "both",
+     "skills": [
+      "6.C"
+     ],
+     "requires": [
+      "2.6"
+     ],
+     "estLessons": 1.75,
+     "subKeywords": [
+      {
+       "code": "2.7#1",
+       "label": "Electron domains and molecular geometry",
+       "kind": "concept",
+       "skills": [
+        "6.C"
+       ],
+       "requires": [
+        "2.5"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "2.7#2",
+       "label": "Predicting bond angles and polarity of a molecule",
+       "kind": "skill",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [
+        "2.7#1"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "2.7#3",
+       "label": "Hybridization and sigma/pi bonding",
+       "kind": "concept",
+       "skills": [
+        "6.C"
+       ],
+       "requires": [
+        "2.7#1"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "2.7#4",
+       "label": "Confusing electron geometry with molecular shape",
+       "kind": "misconception",
+       "skills": [
+        "6.C"
+       ],
+       "requires": [
+        "2.7#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "3",
+   "title": "Properties of Substances and Mixtures",
+   "officialClassPeriods": "~14–15",
+   "topics": [
+    {
+     "code": "3.1",
+     "title": "Intermolecular and Interparticle Forces",
+     "scope": "both",
+     "skills": [
+      "4.D"
+     ],
+     "requires": [
+      "2.7"
+     ],
+     "estLessons": 1.0,
+     "subKeywords": [
+      {
+       "code": "3.1#1",
+       "label": "Ranking dispersion, dipole, and hydrogen bonding",
+       "kind": "concept",
+       "skills": [
+        "4.D"
+       ],
+       "requires": [
+        "2.7"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "3.1#2",
+       "label": "Calling intermolecular attractions bonds that break in reactions",
+       "kind": "misconception",
+       "skills": [
+        "4.D"
+       ],
+       "requires": [
+        "3.1#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "3.1#3",
+       "label": "Using IMF strength to compare boiling points",
+       "kind": "skill",
+       "skills": [
+        "6.E"
+       ],
+       "requires": [
+        "3.1#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "3.2",
+     "title": "Properties of Solids",
+     "scope": "both",
+     "skills": [
+      "4.C"
+     ],
+     "requires": [
+      "3.1"
+     ],
+     "estLessons": 1.0,
+     "subKeywords": [
+      {
+       "code": "3.2#1",
+       "label": "Network, molecular, ionic, and metallic solid types",
+       "kind": "concept",
+       "skills": [
+        "4.C"
+       ],
+       "requires": [
+        "3.1"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "3.2#2",
+       "label": "Predicting hardness and conductivity from structure",
+       "kind": "skill",
+       "skills": [
+        "6.C"
+       ],
+       "requires": [
+        "3.2#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "3.2#3",
+       "label": "Particulate drawings of solid types",
+       "kind": "representation",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [
+        "3.2#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "3.3",
+     "title": "Solids, Liquids, and Gases",
+     "scope": "both",
+     "skills": [
+      "3.C"
+     ],
+     "requires": [
+      "3.1"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "3.3#1",
+       "label": "Particle-level pictures of the three phases",
+       "kind": "representation",
+       "skills": [
+        "3.C"
+       ],
+       "requires": [
+        "3.1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "3.3#2",
+       "label": "Linking particle motion and spacing to phase properties",
+       "kind": "skill",
+       "skills": [
+        "4.C"
+       ],
+       "requires": [
+        "3.3#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "3.3#3",
+       "label": "Heating and phase diagram curves",
+       "kind": "representation",
+       "skills": [
+        "3.C"
+       ],
+       "requires": [
+        "3.3#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "3.4",
+     "title": "Ideal Gas Law",
+     "scope": "both",
+     "skills": [
+      "5.C"
+     ],
+     "requires": [
+      "1.1"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "3.4#1",
+       "label": "Pressure, volume, temperature, and moles relations",
+       "kind": "concept",
+       "skills": [
+        "5.C"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "3.4#2",
+       "label": "Solving with PV = nRT and consistent units",
+       "kind": "skill",
+       "skills": [
+        "5.F"
+       ],
+       "requires": [
+        "3.4#1"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "3.4#3",
+       "label": "Using Celsius instead of kelvin",
+       "kind": "misconception",
+       "skills": [
+        "5.F"
+       ],
+       "requires": [
+        "3.4#2"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "3.4#4",
+       "label": "Gas density and molar mass applications",
+       "kind": "skill",
+       "skills": [
+        "5.F"
+       ],
+       "requires": [
+        "3.4#2"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "3.5",
+     "title": "Kinetic Molecular Theory",
+     "scope": "both",
+     "skills": [
+      "4.A"
+     ],
+     "requires": [
+      "3.4"
+     ],
+     "estLessons": 1.0,
+     "subKeywords": [
+      {
+       "code": "3.5#1",
+       "label": "Particle-based assumptions of an ideal gas",
+       "kind": "concept",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [
+        "3.4"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "3.5#2",
+       "label": "Maxwell-Boltzmann distribution curves",
+       "kind": "representation",
+       "skills": [
+        "3.A"
+       ],
+       "requires": [
+        "3.5#1"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "3.5#3",
+       "label": "Assuming all gas molecules share the same speed",
+       "kind": "misconception",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [
+        "3.5#2"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "3.6",
+     "title": "Deviation from Ideal Gas Law",
+     "scope": "both",
+     "skills": [
+      "6.E"
+     ],
+     "requires": [
+      "3.5"
+     ],
+     "estLessons": 0.5,
+     "subKeywords": [
+      {
+       "code": "3.6#1",
+       "label": "Why real gases deviate at high pressure and low temperature",
+       "kind": "concept",
+       "skills": [
+        "6.E"
+       ],
+       "requires": [
+        "3.5"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "3.6#2",
+       "label": "Predicting which gas is more ideal from size and IMF",
+       "kind": "skill",
+       "skills": [
+        "6.E"
+       ],
+       "requires": [
+        "3.6#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "3.7",
+     "title": "Solutions and Mixtures",
+     "scope": "both",
+     "skills": [
+      "5.F"
+     ],
+     "requires": [
+      "1.1"
+     ],
+     "estLessons": 1.0,
+     "subKeywords": [
+      {
+       "code": "3.7#1",
+       "label": "Solute, solvent, and molarity",
+       "kind": "concept",
+       "skills": [
+        "5.B"
+       ],
+       "requires": [
+        "1.1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "3.7#2",
+       "label": "Molarity and dilution calculations",
+       "kind": "skill",
+       "skills": [
+        "5.F"
+       ],
+       "requires": [
+        "3.7#1"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "3.7#3",
+       "label": "Using solvent volume instead of solution volume",
+       "kind": "misconception",
+       "skills": [
+        "5.F"
+       ],
+       "requires": [
+        "3.7#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "3.8",
+     "title": "Representations of Solutions",
+     "scope": "both",
+     "skills": [
+      "3.C"
+     ],
+     "requires": [
+      "3.7"
+     ],
+     "estLessons": 0.5,
+     "subKeywords": [
+      {
+       "code": "3.8#1",
+       "label": "Particulate drawings of dissolved ionic and molecular solids",
+       "kind": "representation",
+       "skills": [
+        "3.C"
+       ],
+       "requires": [
+        "3.7"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "3.8#2",
+       "label": "Converting a drawing to concentration",
+       "kind": "skill",
+       "skills": [
+        "5.A"
+       ],
+       "requires": [
+        "3.8#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "3.9",
+     "title": "Separation of Solutions and Mixtures",
+     "scope": "both",
+     "skills": [
+      "2.C"
+     ],
+     "requires": [
+      "3.8"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "3.9#1",
+       "label": "Chromatography and retention factors",
+       "kind": "concept",
+       "skills": [
+        "2.C"
+       ],
+       "requires": [
+        "3.1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "3.9#2",
+       "label": "Distillation and filtration choices",
+       "kind": "concept",
+       "skills": [
+        "2.C"
+       ],
+       "requires": [
+        "3.1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "3.9#3",
+       "label": "Matching a separation method to a property difference",
+       "kind": "skill",
+       "skills": [
+        "2.C"
+       ],
+       "requires": [
+        "3.9#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "3.10",
+     "title": "Solubility",
+     "scope": "both",
+     "skills": [
+      "4.D"
+     ],
+     "requires": [
+      "3.8"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "3.10#1",
+       "label": "Like-dissolves-like and ion-dipole interactions",
+       "kind": "concept",
+       "skills": [
+        "4.D"
+       ],
+       "requires": [
+        "3.8"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "3.10#2",
+       "label": "Predicting solubility from molecular structure",
+       "kind": "skill",
+       "skills": [
+        "4.D"
+       ],
+       "requires": [
+        "3.10#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "3.11",
+     "title": "Spectroscopy and the Electromagnetic Spectrum",
+     "scope": "both",
+     "skills": [
+      "4.A"
+     ],
+     "requires": [
+      "1.5"
+     ],
+     "estLessons": 0.5,
+     "subKeywords": [
+      {
+       "code": "3.11#1",
+       "label": "Spectral regions and what each probes",
+       "kind": "concept",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [
+        "1.5"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "3.11#2",
+       "label": "Matching energy transitions to IR, UV-vis, and microwave",
+       "kind": "skill",
+       "skills": [
+        "4.A"
+       ],
+       "requires": [
+        "3.11#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "3.12",
+     "title": "Properties of Photons",
+     "scope": "both",
+     "skills": [
+      "5.F"
+     ],
+     "requires": [
+      "3.11"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "3.12#1",
+       "label": "Using E = hv and c = lambda*v",
+       "kind": "skill",
+       "skills": [
+        "5.F"
+       ],
+       "requires": [
+        "3.11"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "3.12#2",
+       "label": "Mixing up the direction of frequency and wavelength",
+       "kind": "misconception",
+       "skills": [
+        "5.C"
+       ],
+       "requires": [
+        "3.12#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "3.13",
+     "title": "Beer-Lambert Law",
+     "scope": "both",
+     "skills": [
+      "2.E"
+     ],
+     "requires": [
+      "3.12"
+     ],
+     "estLessons": 1.0,
+     "subKeywords": [
+      {
+       "code": "3.13#1",
+       "label": "Absorbance, concentration, and path length",
+       "kind": "skill",
+       "skills": [
+        "5.F"
+       ],
+       "requires": [
+        "3.7"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "3.13#2",
+       "label": "Calibration curve from absorbance data",
+       "kind": "representation",
+       "skills": [
+        "3.A"
+       ],
+       "requires": [
+        "3.13#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "3.13#3",
+       "label": "Spotting error sources in colorimetry",
+       "kind": "skill",
+       "skills": [
+        "2.E"
+       ],
+       "requires": [
+        "3.13#2"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "4",
+   "title": "Chemical Reactions",
+   "officialClassPeriods": "~14–15",
+   "topics": [
+    {
+     "code": "4.1",
+     "title": "Introduction for Reactions",
+     "scope": "both",
+     "skills": [
+      "2.B"
+     ],
+     "requires": [
+      "1.1"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "4.1#1",
+       "label": "Evidence of a chemical change",
+       "kind": "concept",
+       "skills": [
+        "2.B"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "4.1#2",
+       "label": "Writing and balancing equations",
+       "kind": "skill",
+       "skills": [
+        "5.E"
+       ],
+       "requires": [
+        "4.1#1"
+       ],
+       "estLessons": 0.5
+      }
+     ]
+    },
+    {
+     "code": "4.2",
+     "title": "Net Ionic Equations",
+     "scope": "both",
+     "skills": [
+      "5.E"
+     ],
+     "requires": [
+      "4.1"
+     ],
+     "estLessons": 1.0,
+     "subKeywords": [
+      {
+       "code": "4.2#1",
+       "label": "Spotting soluble and insoluble ionic compounds",
+       "kind": "skill",
+       "skills": [
+        "5.E"
+       ],
+       "requires": [
+        "3.10"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "4.2#2",
+       "label": "Writing complete and net ionic equations",
+       "kind": "skill",
+       "skills": [
+        "5.E"
+       ],
+       "requires": [
+        "4.2#1"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "4.2#3",
+       "label": "Splitting weak electrolytes or solids into ions",
+       "kind": "misconception",
+       "skills": [
+        "5.E"
+       ],
+       "requires": [
+        "4.2#2"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "4.3",
+     "title": "Representations of Reactions",
+     "scope": "both",
+     "skills": [
+      "3.B"
+     ],
+     "requires": [
+      "4.1"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "4.3#1",
+       "label": "Particulate drawings of reactants and products",
+       "kind": "representation",
+       "skills": [
+        "3.B"
+       ],
+       "requires": [
+        "4.1"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "4.3#2",
+       "label": "Checking conservation of atoms in a drawing",
+       "kind": "skill",
+       "skills": [
+        "3.B"
+       ],
+       "requires": [
+        "4.3#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "4.4",
+     "title": "Physical and Chemical Changes",
+     "scope": "both",
+     "skills": [
+      "6.B"
+     ],
+     "requires": [
+      "4.3"
+     ],
+     "estLessons": 0.5,
+     "subKeywords": [
+      {
+       "code": "4.4#1",
+       "label": "Bond changes versus IMF changes",
+       "kind": "concept",
+       "skills": [
+        "6.B"
+       ],
+       "requires": [
+        "4.3"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "4.4#2",
+       "label": "Classifying a change from evidence",
+       "kind": "skill",
+       "skills": [
+        "6.B"
+       ],
+       "requires": [
+        "4.4#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "4.5",
+     "title": "Stoichiometry",
+     "scope": "both",
+     "skills": [
+      "5.C"
+     ],
+     "requires": [
+      "4.1"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "4.5#1",
+       "label": "Mole-ratio method from balanced equation",
+       "kind": "skill",
+       "skills": [
+        "5.F"
+       ],
+       "requires": [
+        "1.1"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "4.5#2",
+       "label": "Using mass ratios instead of mole ratios",
+       "kind": "misconception",
+       "skills": [
+        "5.C"
+       ],
+       "requires": [
+        "4.5#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "4.5#3",
+       "label": "Limiting reactant and percent yield",
+       "kind": "skill",
+       "skills": [
+        "5.F"
+       ],
+       "requires": [
+        "4.5#1"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "4.5#4",
+       "label": "Gas stoichiometry with PV = nRT",
+       "kind": "skill",
+       "skills": [
+        "5.F"
+       ],
+       "requires": [
+        "3.4"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "4.6",
+     "title": "Introduction to Titration",
+     "scope": "both",
+     "skills": [
+      "3.A"
+     ],
+     "requires": [
+      "4.5"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "4.6#1",
+       "label": "Titration curve features and equivalence point",
+       "kind": "representation",
+       "skills": [
+        "3.A"
+       ],
+       "requires": [
+        "4.5"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "4.6#2",
+       "label": "Computing unknown concentration at equivalence",
+       "kind": "skill",
+       "skills": [
+        "5.F"
+       ],
+       "requires": [
+        "4.6#1"
+       ],
+       "estLessons": 0.5
+      }
+     ]
+    },
+    {
+     "code": "4.7",
+     "title": "Types of Chemical Reactions",
+     "scope": "both",
+     "skills": [
+      "1.B"
+     ],
+     "requires": [
+      "4.2"
+     ],
+     "estLessons": 0.5,
+     "subKeywords": [
+      {
+       "code": "4.7#1",
+       "label": "Synthesis, decomposition, and exchange patterns",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [
+        "4.2"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "4.7#2",
+       "label": "Predicting products from a reaction type",
+       "kind": "skill",
+       "skills": [
+        "5.E"
+       ],
+       "requires": [
+        "4.7#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "4.8",
+     "title": "Introduction to Acid-Base Reactions",
+     "scope": "both",
+     "skills": [
+      "1.B"
+     ],
+     "requires": [
+      "4.7"
+     ],
+     "estLessons": 1.0,
+     "subKeywords": [
+      {
+       "code": "4.8#1",
+       "label": "Proton transfer in Bronsted-Lowry reactions",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [
+        "4.7"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "4.8#2",
+       "label": "Identifying acids, bases, and conjugate pairs",
+       "kind": "skill",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [
+        "4.8#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "4.8#3",
+       "label": "Particulate view of neutralization",
+       "kind": "representation",
+       "skills": [
+        "3.B"
+       ],
+       "requires": [
+        "4.8#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "4.9",
+     "title": "Oxidation-Reduction (Redox) Reactions",
+     "scope": "both",
+     "skills": [
+      "5.E"
+     ],
+     "requires": [
+      "4.7"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "4.9#1",
+       "label": "Assigning oxidation numbers",
+       "kind": "skill",
+       "skills": [
+        "5.E"
+       ],
+       "requires": [
+        "4.7"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "4.9#2",
+       "label": "Identifying oxidized and reduced species",
+       "kind": "skill",
+       "skills": [
+        "5.E"
+       ],
+       "requires": [
+        "4.9#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "4.9#3",
+       "label": "Mixing up oxidizing agent with the species oxidized",
+       "kind": "misconception",
+       "skills": [
+        "5.E"
+       ],
+       "requires": [
+        "4.9#2"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "4.9#4",
+       "label": "Balancing simple redox half-reactions",
+       "kind": "skill",
+       "skills": [
+        "5.E"
+       ],
+       "requires": [
+        "4.9#2"
+       ],
+       "estLessons": 0.5
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "5",
+   "title": "Kinetics",
+   "officialClassPeriods": "~13–14",
+   "topics": [
+    {
+     "code": "5.1",
+     "title": "Reaction Rates",
+     "scope": "both",
+     "skills": [
+      "6.E"
+     ],
+     "requires": [
+      "4.5"
+     ],
+     "estLessons": 0.5,
+     "subKeywords": [
+      {
+       "code": "5.1#1",
+       "label": "Rate as change in concentration over time",
+       "kind": "concept",
+       "skills": [
+        "6.E"
+       ],
+       "requires": [
+        "4.5"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "5.1#2",
+       "label": "Relating rates of different species using coefficients",
+       "kind": "skill",
+       "skills": [
+        "5.F"
+       ],
+       "requires": [
+        "5.1#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "5.2",
+     "title": "Introduction to Rate Law",
+     "scope": "both",
+     "skills": [
+      "5.C"
+     ],
+     "requires": [
+      "5.1"
+     ],
+     "estLessons": 1.25,
+     "subKeywords": [
+      {
+       "code": "5.2#1",
+       "label": "Rate law, rate constant, and reaction order",
+       "kind": "concept",
+       "skills": [
+        "5.C"
+       ],
+       "requires": [
+        "5.1"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "5.2#2",
+       "label": "Finding order from initial-rate data",
+       "kind": "skill",
+       "skills": [
+        "5.F"
+       ],
+       "requires": [
+        "5.2#1"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "5.2#3",
+       "label": "Reading orders from the balanced equation coefficients",
+       "kind": "misconception",
+       "skills": [
+        "5.C"
+       ],
+       "requires": [
+        "5.2#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "5.3",
+     "title": "Concentration Changes Over Time",
+     "scope": "both",
+     "skills": [
+      "5.B"
+     ],
+     "requires": [
+      "5.2"
+     ],
+     "estLessons": 1.25,
+     "subKeywords": [
+      {
+       "code": "5.3#1",
+       "label": "Concentration-time graphs for zero, first, and second order",
+       "kind": "representation",
+       "skills": [
+        "3.A"
+       ],
+       "requires": [
+        "5.2"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "5.3#2",
+       "label": "Using integrated rate laws and half-life",
+       "kind": "skill",
+       "skills": [
+        "5.F"
+       ],
+       "requires": [
+        "5.3#1"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "5.3#3",
+       "label": "Choosing the linear plot to identify order",
+       "kind": "skill",
+       "skills": [
+        "5.D"
+       ],
+       "requires": [
+        "5.3#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "5.4",
+     "title": "Elementary Reactions",
+     "scope": "both",
+     "skills": [
+      "5.E"
+     ],
+     "requires": [
+      "5.2"
+     ],
+     "estLessons": 0.5,
+     "subKeywords": [
+      {
+       "code": "5.4#1",
+       "label": "Molecularity and rate law of an elementary step",
+       "kind": "concept",
+       "skills": [
+        "5.E"
+       ],
+       "requires": [
+        "5.2"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "5.4#2",
+       "label": "Assuming every reaction rate law equals its coefficients",
+       "kind": "misconception",
+       "skills": [
+        "5.E"
+       ],
+       "requires": [
+        "5.4#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "5.5",
+     "title": "Collision Model",
+     "scope": "both",
+     "skills": [
+      "6.E"
+     ],
+     "requires": [
+      "5.1"
+     ],
+     "estLessons": 0.5,
+     "subKeywords": [
+      {
+       "code": "5.5#1",
+       "label": "Collision frequency, energy, and orientation",
+       "kind": "concept",
+       "skills": [
+        "6.E"
+       ],
+       "requires": [
+        "5.1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "5.5#2",
+       "label": "Explaining temperature and concentration effects on rate",
+       "kind": "skill",
+       "skills": [
+        "6.E"
+       ],
+       "requires": [
+        "5.5#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "5.6",
+     "title": "Reaction Energy Profile",
+     "scope": "both",
+     "skills": [
+      "3.B"
+     ],
+     "requires": [
+      "5.5"
+     ],
+     "estLessons": 0.5,
+     "subKeywords": [
+      {
+       "code": "5.6#1",
+       "label": "Drawing energy profile with activation energy",
+       "kind": "representation",
+       "skills": [
+        "3.B"
+       ],
+       "requires": [
+        "5.5"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "5.6#2",
+       "label": "Comparing forward and reverse barriers and delta E",
+       "kind": "skill",
+       "skills": [
+        "3.B"
+       ],
+       "requires": [
+        "5.6#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "5.7",
+     "title": "Introduction to Reaction Mechanisms",
+     "scope": "both",
+     "skills": [
+      "1.B"
+     ],
+     "requires": [
+      "5.4"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "5.7#1",
+       "label": "Intermediates versus catalysts",
+       "kind": "concept",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [
+        "5.4"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "5.7#2",
+       "label": "Checking a mechanism sums to the overall reaction",
+       "kind": "skill",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [
+        "5.7#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "5.7#3",
+       "label": "Calling an intermediate a catalyst",
+       "kind": "misconception",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [
+        "5.7#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "5.8",
+     "title": "Reaction Mechanism and Rate Law",
+     "scope": "both",
+     "skills": [
+      "5.B"
+     ],
+     "requires": [
+      "5.7"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "5.8#1",
+       "label": "Rate law from a slow first step",
+       "kind": "skill",
+       "skills": [
+        "5.B"
+       ],
+       "requires": [
+        "5.7"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "5.8#2",
+       "label": "Judging a mechanism against experimental rate law",
+       "kind": "skill",
+       "skills": [
+        "5.B"
+       ],
+       "requires": [
+        "5.8#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "5.9",
+     "title": "Pre-Equilibrium Approximation",
+     "scope": "both",
+     "skills": [
+      "5.B"
+     ],
+     "requires": [
+      "5.8"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "5.9#1",
+       "label": "Fast reversible step before the slow step",
+       "kind": "concept",
+       "skills": [
+        "5.B"
+       ],
+       "requires": [
+        "5.8"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "5.9#2",
+       "label": "Eliminating intermediates from the rate law",
+       "kind": "skill",
+       "skills": [
+        "5.B"
+       ],
+       "requires": [
+        "5.9#1"
+       ],
+       "estLessons": 0.5
+      }
+     ]
+    },
+    {
+     "code": "5.10",
+     "title": "Multistep Reaction Energy Profile",
+     "scope": "both",
+     "skills": [
+      "3.B"
+     ],
+     "requires": [
+      "5.6"
+     ],
+     "estLessons": 0.5,
+     "subKeywords": [
+      {
+       "code": "5.10#1",
+       "label": "Reading multi-hump profiles",
+       "kind": "representation",
+       "skills": [
+        "3.B"
+       ],
+       "requires": [
+        "5.7"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "5.10#2",
+       "label": "Finding the rate-determining step on a profile",
+       "kind": "skill",
+       "skills": [
+        "3.B"
+       ],
+       "requires": [
+        "5.10#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "5.11",
+     "title": "Catalysis",
+     "scope": "both",
+     "skills": [
+      "6.E"
+     ],
+     "requires": [
+      "5.10"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "5.11#1",
+       "label": "How catalysts lower activation energy via new pathways",
+       "kind": "concept",
+       "skills": [
+        "6.E"
+       ],
+       "requires": [
+        "5.10"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "5.11#2",
+       "label": "Representing catalyzed vs. uncatalyzed profiles",
+       "kind": "skill",
+       "skills": [
+        "6.E"
+       ],
+       "requires": [
+        "5.11#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "5.11#3",
+       "label": "Believing a catalyst shifts equilibrium or is consumed",
+       "kind": "misconception",
+       "skills": [
+        "6.E"
+       ],
+       "requires": [
+        "5.11#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "6",
+   "title": "Thermochemistry",
+   "officialClassPeriods": "~10–11",
+   "topics": [
+    {
+     "code": "6.1",
+     "title": "Endothermic and Exothermic Processes",
+     "scope": "both",
+     "skills": [
+      "6.D"
+     ],
+     "requires": [
+      "4.4"
+     ],
+     "estLessons": 0.5,
+     "subKeywords": [
+      {
+       "code": "6.1#1",
+       "label": "System, surroundings, and sign of heat flow",
+       "kind": "concept",
+       "skills": [
+        "6.D"
+       ],
+       "requires": [
+        "4.4"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "6.1#2",
+       "label": "Equating endothermic with feeling hot",
+       "kind": "misconception",
+       "skills": [
+        "6.D"
+       ],
+       "requires": [
+        "6.1#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "6.2",
+     "title": "Energy Diagrams",
+     "scope": "both",
+     "skills": [
+      "3.A"
+     ],
+     "requires": [
+      "6.1"
+     ],
+     "estLessons": 0.5,
+     "subKeywords": [
+      {
+       "code": "6.2#1",
+       "label": "Reading potential energy diagrams of reactions",
+       "kind": "representation",
+       "skills": [
+        "3.A"
+       ],
+       "requires": [
+        "6.1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "6.2#2",
+       "label": "Linking bond breaking and forming to diagram",
+       "kind": "skill",
+       "skills": [
+        "3.A"
+       ],
+       "requires": [
+        "6.2#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "6.3",
+     "title": "Heat Transfer and Thermal Equilibrium",
+     "scope": "both",
+     "skills": [
+      "6.E"
+     ],
+     "requires": [
+      "6.1"
+     ],
+     "estLessons": 0.5,
+     "subKeywords": [
+      {
+       "code": "6.3#1",
+       "label": "Particle collisions and heat flow to equilibrium",
+       "kind": "concept",
+       "skills": [
+        "6.E"
+       ],
+       "requires": [
+        "6.1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "6.3#2",
+       "label": "Predicting direction of heat transfer",
+       "kind": "skill",
+       "skills": [
+        "6.E"
+       ],
+       "requires": [
+        "6.3#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "6.4",
+     "title": "Heat Capacity and Calorimetry",
+     "scope": "both",
+     "skills": [
+      "2.D"
+     ],
+     "requires": [
+      "6.3"
+     ],
+     "estLessons": 1.25,
+     "subKeywords": [
+      {
+       "code": "6.4#1",
+       "label": "Using q = mc*deltaT",
+       "kind": "skill",
+       "skills": [
+        "5.F"
+       ],
+       "requires": [
+        "6.3"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "6.4#2",
+       "label": "Interpreting calorimeter data and heat losses",
+       "kind": "skill",
+       "skills": [
+        "2.D"
+       ],
+       "requires": [
+        "6.4#1"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "6.4#3",
+       "label": "Sign errors between heat of system and surroundings",
+       "kind": "misconception",
+       "skills": [
+        "5.F"
+       ],
+       "requires": [
+        "6.4#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "6.5",
+     "title": "Energy of Phase Changes",
+     "scope": "both",
+     "skills": [
+      "1.B"
+     ],
+     "requires": [
+      "6.4"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "6.5#1",
+       "label": "Heating curve plateaus",
+       "kind": "representation",
+       "skills": [
+        "1.B"
+       ],
+       "requires": [
+        "6.4"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "6.5#2",
+       "label": "Heat of fusion and vaporization calculations",
+       "kind": "skill",
+       "skills": [
+        "5.F"
+       ],
+       "requires": [
+        "6.5#1"
+       ],
+       "estLessons": 0.5
+      }
+     ]
+    },
+    {
+     "code": "6.6",
+     "title": "Introduction to Enthalpy of Reaction",
+     "scope": "both",
+     "skills": [
+      "5.F"
+     ],
+     "requires": [
+      "6.4"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "6.6#1",
+       "label": "Enthalpy change as heat at constant pressure",
+       "kind": "concept",
+       "skills": [
+        "5.F"
+       ],
+       "requires": [
+        "6.4"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "6.6#2",
+       "label": "Scaling delta H with stoichiometry",
+       "kind": "skill",
+       "skills": [
+        "5.F"
+       ],
+       "requires": [
+        "4.5"
+       ],
+       "estLessons": 0.5
+      }
+     ]
+    },
+    {
+     "code": "6.7",
+     "title": "Bond Enthalpies",
+     "scope": "both",
+     "skills": [
+      "5.F"
+     ],
+     "requires": [
+      "6.6"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "6.7#1",
+       "label": "Estimating delta H from bonds broken minus formed",
+       "kind": "skill",
+       "skills": [
+        "5.F"
+       ],
+       "requires": [
+        "6.6"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "6.7#2",
+       "label": "Reversing the broken and formed bond terms",
+       "kind": "misconception",
+       "skills": [
+        "5.F"
+       ],
+       "requires": [
+        "6.7#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "6.8",
+     "title": "Enthalpy of Formation",
+     "scope": "both",
+     "skills": [
+      "5.F"
+     ],
+     "requires": [
+      "6.6"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "6.8#1",
+       "label": "Standard states and formation reactions",
+       "kind": "concept",
+       "skills": [
+        "5.F"
+       ],
+       "requires": [
+        "6.6"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "6.8#2",
+       "label": "Delta H as products minus reactants of formation",
+       "kind": "skill",
+       "skills": [
+        "5.F"
+       ],
+       "requires": [
+        "6.8#1"
+       ],
+       "estLessons": 0.5
+      }
+     ]
+    },
+    {
+     "code": "6.9",
+     "title": "Hess's Law",
+     "scope": "both",
+     "skills": [
+      "5.A"
+     ],
+     "requires": [
+      "6.8"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "6.9#1",
+       "label": "Combining steps with flipped and scaled enthalpies",
+       "kind": "skill",
+       "skills": [
+        "5.A"
+       ],
+       "requires": [
+        "6.8"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "6.9#2",
+       "label": "Forgetting to change sign when reversing",
+       "kind": "misconception",
+       "skills": [
+        "5.F"
+       ],
+       "requires": [
+        "6.9#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "7",
+   "title": "Equilibrium",
+   "officialClassPeriods": "~13–15",
+   "topics": [
+    {
+     "code": "7.1",
+     "title": "Introduction to Equilibrium",
+     "scope": "both",
+     "skills": [
+      "6.D"
+     ],
+     "requires": [
+      "5.1"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "7.1#1",
+       "label": "Dynamic equilibrium with equal forward and reverse rates",
+       "kind": "concept",
+       "skills": [
+        "6.D"
+       ],
+       "requires": [
+        "5.1"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "7.1#2",
+       "label": "Thinking concentrations are equal at equilibrium",
+       "kind": "misconception",
+       "skills": [
+        "6.D"
+       ],
+       "requires": [
+        "7.1#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "7.2",
+     "title": "Direction of Reversible Reactions",
+     "scope": "both",
+     "skills": [
+      "4.D"
+     ],
+     "requires": [
+      "7.1"
+     ],
+     "estLessons": 0.5,
+     "subKeywords": [
+      {
+       "code": "7.2#1",
+       "label": "Concentration-time plots approaching equilibrium",
+       "kind": "representation",
+       "skills": [
+        "4.D"
+       ],
+       "requires": [
+        "7.1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "7.2#2",
+       "label": "Predicting direction from mixture composition",
+       "kind": "skill",
+       "skills": [
+        "4.D"
+       ],
+       "requires": [
+        "7.2#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "7.3",
+     "title": "Reaction Quotient and Equilibrium Constant",
+     "scope": "both",
+     "skills": [
+      "3.A"
+     ],
+     "requires": [
+      "7.2"
+     ],
+     "estLessons": 1.0,
+     "subKeywords": [
+      {
+       "code": "7.3#1",
+       "label": "Writing Q and K expressions",
+       "kind": "skill",
+       "skills": [
+        "3.A"
+       ],
+       "requires": [
+        "7.2"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "7.3#2",
+       "label": "Including solids and pure liquids in K",
+       "kind": "misconception",
+       "skills": [
+        "3.A"
+       ],
+       "requires": [
+        "7.3#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "7.3#3",
+       "label": "Comparing Q to K for shift direction",
+       "kind": "skill",
+       "skills": [
+        "3.A"
+       ],
+       "requires": [
+        "7.3#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "7.4",
+     "title": "Calculating the Equilibrium Constant",
+     "scope": "both",
+     "skills": [
+      "5.C"
+     ],
+     "requires": [
+      "7.3"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "7.4#1",
+       "label": "Computing K from equilibrium concentrations",
+       "kind": "skill",
+       "skills": [
+        "5.F"
+       ],
+       "requires": [
+        "7.3"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "7.4#2",
+       "label": "Kp, Kc, and units",
+       "kind": "concept",
+       "skills": [
+        "5.C"
+       ],
+       "requires": [
+        "7.4#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "7.5",
+     "title": "Magnitude of the Equilibrium Constant",
+     "scope": "both",
+     "skills": [
+      "6.D"
+     ],
+     "requires": [
+      "7.4"
+     ],
+     "estLessons": 0.5,
+     "subKeywords": [
+      {
+       "code": "7.5#1",
+       "label": "Large vs. small K and extent of reaction",
+       "kind": "concept",
+       "skills": [
+        "6.D"
+       ],
+       "requires": [
+        "7.4"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "7.5#2",
+       "label": "Relating K of reversed and scaled reactions",
+       "kind": "skill",
+       "skills": [
+        "6.D"
+       ],
+       "requires": [
+        "7.5#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "7.6",
+     "title": "Properties of the Equilibrium Constant",
+     "scope": "both",
+     "skills": [
+      "5.A"
+     ],
+     "requires": [
+      "7.5"
+     ],
+     "estLessons": 0.5,
+     "subKeywords": [
+      {
+       "code": "7.6#1",
+       "label": "Combining reactions by multiplying K values",
+       "kind": "skill",
+       "skills": [
+        "5.A"
+       ],
+       "requires": [
+        "7.5"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "7.6#2",
+       "label": "Temperature as the only variable that changes K",
+       "kind": "concept",
+       "skills": [
+        "5.A"
+       ],
+       "requires": [
+        "7.6#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "7.7",
+     "title": "Calculating Equilibrium Concentrations",
+     "scope": "both",
+     "skills": [
+      "3.A"
+     ],
+     "requires": [
+      "7.6"
+     ],
+     "estLessons": 1.25,
+     "subKeywords": [
+      {
+       "code": "7.7#1",
+       "label": "Setting up ICE tables",
+       "kind": "skill",
+       "skills": [
+        "3.A"
+       ],
+       "requires": [
+        "7.4"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "7.7#2",
+       "label": "Using the small-x approximation correctly",
+       "kind": "skill",
+       "skills": [
+        "5.F"
+       ],
+       "requires": [
+        "7.7#1"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "7.7#3",
+       "label": "Missing the stoichiometric coefficient in the change row",
+       "kind": "misconception",
+       "skills": [
+        "3.A"
+       ],
+       "requires": [
+        "7.7#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "7.8",
+     "title": "Representations of Equilibrium",
+     "scope": "both",
+     "skills": [
+      "3.C"
+     ],
+     "requires": [
+      "7.7"
+     ],
+     "estLessons": 0.5,
+     "subKeywords": [
+      {
+       "code": "7.8#1",
+       "label": "Particulate pictures at equilibrium",
+       "kind": "representation",
+       "skills": [
+        "3.C"
+       ],
+       "requires": [
+        "7.7"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "7.8#2",
+       "label": "Estimating K from a diagram",
+       "kind": "skill",
+       "skills": [
+        "3.C"
+       ],
+       "requires": [
+        "7.8#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "7.9",
+     "title": "Introduction to Le Chatelier's Principle",
+     "scope": "both",
+     "skills": [
+      "6.F"
+     ],
+     "requires": [
+      "7.5"
+     ],
+     "estLessons": 1.0,
+     "subKeywords": [
+      {
+       "code": "7.9#1",
+       "label": "Stress, shift, and restoring equilibrium",
+       "kind": "concept",
+       "skills": [
+        "6.F"
+       ],
+       "requires": [
+        "7.5"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "7.9#2",
+       "label": "Believing K changes with concentration shifts",
+       "kind": "misconception",
+       "skills": [
+        "6.F"
+       ],
+       "requires": [
+        "7.9#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "7.9#3",
+       "label": "Predicting shifts for temperature, pressure, and volume",
+       "kind": "skill",
+       "skills": [
+        "6.F"
+       ],
+       "requires": [
+        "7.9#1"
+       ],
+       "estLessons": 0.5
+      }
+     ]
+    },
+    {
+     "code": "7.10",
+     "title": "Reaction Quotient and Le Chatelier's Principle",
+     "scope": "both",
+     "skills": [
+      "5.F"
+     ],
+     "requires": [
+      "7.9"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "7.10#1",
+       "label": "Justifying a shift quantitatively with Q vs. K",
+       "kind": "skill",
+       "skills": [
+        "5.F"
+       ],
+       "requires": [
+        "7.9"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "7.10#2",
+       "label": "Dilution and volume changes in gas equilibria",
+       "kind": "skill",
+       "skills": [
+        "5.F"
+       ],
+       "requires": [
+        "7.10#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "7.11",
+     "title": "Introduction to Solubility Equilibria",
+     "scope": "both",
+     "skills": [
+      "5.B"
+     ],
+     "requires": [
+      "7.7"
+     ],
+     "estLessons": 1.0,
+     "subKeywords": [
+      {
+       "code": "7.11#1",
+       "label": "Ksp expressions for slightly soluble salts",
+       "kind": "concept",
+       "skills": [
+        "5.B"
+       ],
+       "requires": [
+        "7.7"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "7.11#2",
+       "label": "Molar solubility from Ksp",
+       "kind": "skill",
+       "skills": [
+        "5.F"
+       ],
+       "requires": [
+        "7.11#1"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "7.11#3",
+       "label": "Comparing Ksp values for salts with different ion counts",
+       "kind": "misconception",
+       "skills": [
+        "5.B"
+       ],
+       "requires": [
+        "7.11#2"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "7.12",
+     "title": "Common-Ion Effect",
+     "scope": "both",
+     "skills": [
+      "2.F"
+     ],
+     "requires": [
+      "7.11"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "7.12#1",
+       "label": "Added ion lowering solubility",
+       "kind": "concept",
+       "skills": [
+        "2.F"
+       ],
+       "requires": [
+        "7.11"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "7.12#2",
+       "label": "Solubility with a common ion",
+       "kind": "skill",
+       "skills": [
+        "5.F"
+       ],
+       "requires": [
+        "7.12#1"
+       ],
+       "estLessons": 0.5
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "8",
+   "title": "Acids and Bases",
+   "officialClassPeriods": "~14–16",
+   "topics": [
+    {
+     "code": "8.1",
+     "title": "Introduction to Acids and Bases",
+     "scope": "both",
+     "skills": [
+      "5.B"
+     ],
+     "requires": [
+      "4.8"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "8.1#1",
+       "label": "Water autoionization and Kw",
+       "kind": "concept",
+       "skills": [
+        "5.B"
+       ],
+       "requires": [
+        "4.8"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "8.1#2",
+       "label": "Relating pH, pOH, and ion concentrations",
+       "kind": "skill",
+       "skills": [
+        "5.F"
+       ],
+       "requires": [
+        "8.1#1"
+       ],
+       "estLessons": 0.5
+      }
+     ]
+    },
+    {
+     "code": "8.2",
+     "title": "pH and pOH of Strong Acids and Bases",
+     "scope": "both",
+     "skills": [
+      "5.B"
+     ],
+     "requires": [
+      "8.1"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "8.2#1",
+       "label": "Strong acid or base pH with stoichiometry",
+       "kind": "skill",
+       "skills": [
+        "5.F"
+       ],
+       "requires": [
+        "8.1"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "8.2#2",
+       "label": "Forgetting that diluted very-low strong acid still gives pH below 7",
+       "kind": "misconception",
+       "skills": [
+        "5.F"
+       ],
+       "requires": [
+        "8.2#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "8.3",
+     "title": "Weak Acid and Base Equilibria",
+     "scope": "both",
+     "skills": [
+      "5.C"
+     ],
+     "requires": [
+      "8.2"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "8.3#1",
+       "label": "Partial ionization and Ka or Kb",
+       "kind": "concept",
+       "skills": [
+        "5.C"
+       ],
+       "requires": [
+        "7.7"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "8.3#2",
+       "label": "pH of a weak acid with an ICE table",
+       "kind": "skill",
+       "skills": [
+        "5.F"
+       ],
+       "requires": [
+        "8.3#1"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "8.3#3",
+       "label": "Treating a weak acid as fully dissociated",
+       "kind": "misconception",
+       "skills": [
+        "5.C"
+       ],
+       "requires": [
+        "8.3#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "8.3#4",
+       "label": "Percent ionization and its concentration dependence",
+       "kind": "skill",
+       "skills": [
+        "5.C"
+       ],
+       "requires": [
+        "8.3#2"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "8.4",
+     "title": "Acid-Base Reactions and Buffers",
+     "scope": "both",
+     "skills": [
+      "5.C"
+     ],
+     "requires": [
+      "8.3"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "8.4#1",
+       "label": "Reaction of strong with weak acid or base then equilibrium",
+       "kind": "skill",
+       "skills": [
+        "5.F"
+       ],
+       "requires": [
+        "8.3"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "8.4#2",
+       "label": "Conjugate pair mixtures as buffers",
+       "kind": "concept",
+       "skills": [
+        "5.C"
+       ],
+       "requires": [
+        "8.4#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "8.5",
+     "title": "Acid-Base Titrations",
+     "scope": "both",
+     "skills": [
+      "5.D"
+     ],
+     "requires": [
+      "4.6"
+     ],
+     "estLessons": 1.25,
+     "subKeywords": [
+      {
+       "code": "8.5#1",
+       "label": "Reading strong and weak titration curves",
+       "kind": "representation",
+       "skills": [
+        "5.D"
+       ],
+       "requires": [
+        "8.3"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "8.5#2",
+       "label": "Finding pH at half-equivalence and equivalence",
+       "kind": "skill",
+       "skills": [
+        "5.F"
+       ],
+       "requires": [
+        "8.5#1"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "8.5#3",
+       "label": "Assuming equivalence point pH is always 7",
+       "kind": "misconception",
+       "skills": [
+        "5.D"
+       ],
+       "requires": [
+        "8.5#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "8.6",
+     "title": "Molecular Structure of Acids and Bases",
+     "scope": "both",
+     "skills": [
+      "6.C"
+     ],
+     "requires": [
+      "8.3"
+     ],
+     "estLessons": 0.5,
+     "subKeywords": [
+      {
+       "code": "8.6#1",
+       "label": "Bond strength and polarity effect on acidity",
+       "kind": "concept",
+       "skills": [
+        "6.C"
+       ],
+       "requires": [
+        "8.3"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "8.6#2",
+       "label": "Ranking acid strength from structure",
+       "kind": "skill",
+       "skills": [
+        "6.C"
+       ],
+       "requires": [
+        "8.6#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "8.7",
+     "title": "pH and pKa",
+     "scope": "both",
+     "skills": [
+      "2.D"
+     ],
+     "requires": [
+      "8.3"
+     ],
+     "estLessons": 0.5,
+     "subKeywords": [
+      {
+       "code": "8.7#1",
+       "label": "Relating pH and pKa to protonation state",
+       "kind": "concept",
+       "skills": [
+        "2.D"
+       ],
+       "requires": [
+        "8.3"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "8.7#2",
+       "label": "Reading species dominance on a distribution diagram",
+       "kind": "skill",
+       "skills": [
+        "2.D"
+       ],
+       "requires": [
+        "8.7#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "8.8",
+     "title": "Properties of Buffers",
+     "scope": "both",
+     "skills": [
+      "6.D"
+     ],
+     "requires": [
+      "8.4"
+     ],
+     "estLessons": 0.5,
+     "subKeywords": [
+      {
+       "code": "8.8#1",
+       "label": "Buffer resisting changes in pH",
+       "kind": "concept",
+       "skills": [
+        "6.D"
+       ],
+       "requires": [
+        "8.4"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "8.8#2",
+       "label": "Explaining buffer action by added acid or base",
+       "kind": "skill",
+       "skills": [
+        "6.D"
+       ],
+       "requires": [
+        "8.8#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "8.9",
+     "title": "Henderson-Hasselbalch Equation",
+     "scope": "both",
+     "skills": [
+      "5.F"
+     ],
+     "requires": [
+      "8.8"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "8.9#1",
+       "label": "Using pH = pKa + log ratio",
+       "kind": "skill",
+       "skills": [
+        "5.F"
+       ],
+       "requires": [
+        "8.8"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "8.9#2",
+       "label": "Inverting the ratio of base to acid",
+       "kind": "misconception",
+       "skills": [
+        "5.F"
+       ],
+       "requires": [
+        "8.9#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "8.10",
+     "title": "Buffer Capacity",
+     "scope": "both",
+     "skills": [
+      "6.G"
+     ],
+     "requires": [
+      "8.9"
+     ],
+     "estLessons": 0.5,
+     "subKeywords": [
+      {
+       "code": "8.10#1",
+       "label": "Components and ratio controlling capacity",
+       "kind": "concept",
+       "skills": [
+        "6.G"
+       ],
+       "requires": [
+        "8.9"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "8.10#2",
+       "label": "Designing a buffer near a target pH",
+       "kind": "skill",
+       "skills": [
+        "6.G"
+       ],
+       "requires": [
+        "8.10#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "8.11",
+     "title": "pH and Solubility",
+     "scope": "both",
+     "skills": [
+      "2.D"
+     ],
+     "requires": [
+      "7.12"
+     ],
+     "estLessons": 0.5,
+     "subKeywords": [
+      {
+       "code": "8.11#1",
+       "label": "Acidic solutions raising solubility of basic anions",
+       "kind": "concept",
+       "skills": [
+        "2.D"
+       ],
+       "requires": [
+        "7.12"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "8.11#2",
+       "label": "Predicting solubility change with pH",
+       "kind": "skill",
+       "skills": [
+        "2.D"
+       ],
+       "requires": [
+        "8.11#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "9",
+   "title": "Thermodynamics and Electrochemistry",
+   "officialClassPeriods": "~10–13",
+   "topics": [
+    {
+     "code": "9.1",
+     "title": "Introduction to Entropy",
+     "scope": "both",
+     "skills": [
+      "6.C"
+     ],
+     "requires": [
+      "6.1"
+     ],
+     "estLessons": 0.5,
+     "subKeywords": [
+      {
+       "code": "9.1#1",
+       "label": "Entropy as dispersal of matter and energy",
+       "kind": "concept",
+       "skills": [
+        "6.C"
+       ],
+       "requires": [
+        "6.1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "9.1#2",
+       "label": "Equating entropy only with disorder as messiness",
+       "kind": "misconception",
+       "skills": [
+        "6.C"
+       ],
+       "requires": [
+        "9.1#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "9.2",
+     "title": "Absolute Entropy and Entropy Change",
+     "scope": "both",
+     "skills": [
+      "5.F"
+     ],
+     "requires": [
+      "9.1"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "9.2#1",
+       "label": "Predicting sign of delta S for a process",
+       "kind": "skill",
+       "skills": [
+        "5.F"
+       ],
+       "requires": [
+        "9.1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "9.2#2",
+       "label": "Calculating delta S from standard values",
+       "kind": "skill",
+       "skills": [
+        "5.F"
+       ],
+       "requires": [
+        "9.2#1"
+       ],
+       "estLessons": 0.5
+      }
+     ]
+    },
+    {
+     "code": "9.3",
+     "title": "Gibbs Free Energy and Thermodynamic Favorability",
+     "scope": "both",
+     "skills": [
+      "6.E"
+     ],
+     "requires": [
+      "9.2"
+     ],
+     "estLessons": 1.25,
+     "subKeywords": [
+      {
+       "code": "9.3#1",
+       "label": "Delta G = delta H - T delta S",
+       "kind": "concept",
+       "skills": [
+        "6.E"
+       ],
+       "requires": [
+        "9.2"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "9.3#2",
+       "label": "Four sign cases and temperature dependence",
+       "kind": "skill",
+       "skills": [
+        "6.E"
+       ],
+       "requires": [
+        "9.3#1"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "9.3#3",
+       "label": "Equating favorable with fast",
+       "kind": "misconception",
+       "skills": [
+        "6.E"
+       ],
+       "requires": [
+        "9.3#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "9.4",
+     "title": "Thermodynamic and Kinetic Control",
+     "scope": "both",
+     "skills": [
+      "6.E"
+     ],
+     "requires": [
+      "9.3"
+     ],
+     "estLessons": 0.5,
+     "subKeywords": [
+      {
+       "code": "9.4#1",
+       "label": "Favorable but slow reactions",
+       "kind": "concept",
+       "skills": [
+        "6.E"
+       ],
+       "requires": [
+        "9.3"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "9.4#2",
+       "label": "Separating barrier from favorability in an argument",
+       "kind": "skill",
+       "skills": [
+        "6.E"
+       ],
+       "requires": [
+        "5.6"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "9.5",
+     "title": "Free Energy and Equilibrium",
+     "scope": "both",
+     "skills": [
+      "6.D"
+     ],
+     "requires": [
+      "9.3"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "9.5#1",
+       "label": "Delta G and K relationship",
+       "kind": "concept",
+       "skills": [
+        "6.D"
+       ],
+       "requires": [
+        "7.4"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "9.5#2",
+       "label": "Using delta G standard = -RT ln K",
+       "kind": "skill",
+       "skills": [
+        "5.F"
+       ],
+       "requires": [
+        "9.5#1"
+       ],
+       "estLessons": 0.5
+      }
+     ]
+    },
+    {
+     "code": "9.6",
+     "title": "Free Energy of Dissolution",
+     "scope": "both",
+     "skills": [
+      "4.D"
+     ],
+     "requires": [
+      "9.5"
+     ],
+     "estLessons": 0.5,
+     "subKeywords": [
+      {
+       "code": "9.6#1",
+       "label": "Explaining dissolution via enthalpy and entropy terms",
+       "kind": "skill",
+       "skills": [
+        "4.D"
+       ],
+       "requires": [
+        "3.10"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "9.7",
+     "title": "Coupled Reactions",
+     "scope": "both",
+     "skills": [
+      "4.D"
+     ],
+     "requires": [
+      "9.5"
+     ],
+     "estLessons": 0.5,
+     "subKeywords": [
+      {
+       "code": "9.7#1",
+       "label": "Driving an unfavorable reaction with a favorable one",
+       "kind": "concept",
+       "skills": [
+        "4.D"
+       ],
+       "requires": [
+        "9.5"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "9.7#2",
+       "label": "Summing delta G of coupled steps",
+       "kind": "skill",
+       "skills": [
+        "4.D"
+       ],
+       "requires": [
+        "9.7#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "9.8",
+     "title": "Galvanic (Voltaic) and Electrolytic Cells",
+     "scope": "both",
+     "skills": [
+      "2.F"
+     ],
+     "requires": [
+      "4.9"
+     ],
+     "estLessons": 1.0,
+     "subKeywords": [
+      {
+       "code": "9.8#1",
+       "label": "Cell diagrams with anode, cathode, and salt bridge",
+       "kind": "representation",
+       "skills": [
+        "2.F"
+       ],
+       "requires": [
+        "4.9"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "9.8#2",
+       "label": "Tracking electron and ion flow",
+       "kind": "skill",
+       "skills": [
+        "2.F"
+       ],
+       "requires": [
+        "9.8#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "9.8#3",
+       "label": "Swapping anode and cathode signs across cell types",
+       "kind": "misconception",
+       "skills": [
+        "2.F"
+       ],
+       "requires": [
+        "9.8#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "9.9",
+     "title": "Cell Potential and Free Energy",
+     "scope": "both",
+     "skills": [
+      "5.F"
+     ],
+     "requires": [
+      "9.8"
+     ],
+     "estLessons": 1.25,
+     "subKeywords": [
+      {
+       "code": "9.9#1",
+       "label": "Standard cell potential from reduction potentials",
+       "kind": "skill",
+       "skills": [
+        "5.F"
+       ],
+       "requires": [
+        "9.8"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "9.9#2",
+       "label": "Linking E, delta G, and K",
+       "kind": "skill",
+       "skills": [
+        "5.F"
+       ],
+       "requires": [
+        "9.5"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "9.9#3",
+       "label": "Multiplying potentials by coefficients when scaling",
+       "kind": "misconception",
+       "skills": [
+        "5.F"
+       ],
+       "requires": [
+        "9.9#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "9.10",
+     "title": "Cell Potential Under Nonstandard Conditions",
+     "scope": "both",
+     "skills": [
+      "6.D"
+     ],
+     "requires": [
+      "9.9"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "9.10#1",
+       "label": "Applying the Nernst equation with Q",
+       "kind": "skill",
+       "skills": [
+        "6.D"
+       ],
+       "requires": [
+        "9.9"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "9.10#2",
+       "label": "Concentration cells",
+       "kind": "concept",
+       "skills": [
+        "6.D"
+       ],
+       "requires": [
+        "9.10#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "9.11",
+     "title": "Electrolysis and Faraday's Law",
+     "scope": "both",
+     "skills": [
+      "5.B"
+     ],
+     "requires": [
+      "9.9"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "9.11#1",
+       "label": "Charge, moles of electrons, and mass deposited",
+       "kind": "skill",
+       "skills": [
+        "5.F"
+       ],
+       "requires": [
+        "9.9"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "9.11#2",
+       "label": "Mixing up current, charge, and time units",
+       "kind": "misconception",
+       "skills": [
+        "5.B"
+       ],
+       "requires": [
+        "9.11#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

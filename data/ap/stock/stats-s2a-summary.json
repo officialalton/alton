@@ -1,0 +1,99 @@
+{
+ "runs": [
+  "stats-s2a-a",
+  "stats-s2a-b",
+  "stats-s2a-c"
+ ],
+ "rows": 19,
+ "passed": 13,
+ "rejected": 6,
+ "exactDuplicates": 0,
+ "singles": {
+  "candidates": 15,
+  "passed": 11
+ },
+ "sets": {
+  "candidates": 2,
+  "passed": 1,
+  "questionsInPassedSets": 3
+ },
+ "frq": {
+  "candidates": 2,
+  "passed": 1
+ },
+ "uniquePassedItems": 15,
+ "structureFamilies": 13,
+ "itemFamilyIds": 13,
+ "perUnit": {
+  "1": 3,
+  "2": 1,
+  "3": 3,
+  "4": 2,
+  "5": 5
+ },
+ "perSkillCategory": {
+  "1": 2,
+  "2": 3,
+  "3": 4,
+  "4": 5
+ },
+ "rejectionReasons": [
+  {
+   "key": "stats-s2a-a:ap_statistics-m04-k0",
+   "reason": "criterion_failed_distractor_explanation"
+  },
+  {
+   "key": "stats-s2a-a:ap_statistics-m05-k0",
+   "reason": "criterion_failed_scope_skill; criterion_failed_distractor_explanation; reference_pattern_mismatch"
+  },
+  {
+   "key": "stats-s2a-a:ap_statistics-m08-k0",
+   "reason": "criterion_failed_distractor_explanation; criterion_failed_exam_suitability"
+  },
+  {
+   "key": "stats-s2a-a:ap_statistics-m14-k0",
+   "reason": "criterion_failed_key_scoring; criterion_failed_stimulus_expression; criterion_failed_exam_suitability; reference_pattern_mismatch"
+  },
+  {
+   "key": "stats-s2a-b:ap_statistics-m01-k0",
+   "reason": "criterion_failed_stimulus_expression; criterion_failed_distractor_explanation; set_item_1:criterion_failed_stimulus_expression; set_item_1:criterion_failed_distractor_explanation; set_item_2:criterion_failed_scope_skill; set_item_2:reference_pattern_mismatch; criterion_failed_scope_skill; reference_pattern_mismatch"
+  },
+  {
+   "key": "stats-s2a-c:ap_statistics-f02-k0",
+   "reason": "criterion_failed_stimulus_expression; criterion_failed_exam_suitability; reference_pattern_mismatch"
+  }
+ ],
+ "costs": {
+  "stats-s2a-a": {
+   "byStage": {
+    "difficulty": 0.1299,
+    "review": 0.2815,
+    "review2": 0.0396,
+    "review4": 0.0375,
+    "solve": 0.148
+   },
+   "total": 0.6365
+  },
+  "stats-s2a-b": {
+   "byStage": {
+    "difficulty": 0.0409,
+    "review": 0.089,
+    "review2": 0.0131,
+    "review4": 0.0122,
+    "solve": 0.0525
+   },
+   "total": 0.2077
+  },
+  "stats-s2a-c": {
+   "byStage": {
+    "difficulty": 0.0172,
+    "review": 0.0423,
+    "solve": 0.0365
+   },
+   "total": 0.096
+  }
+ },
+ "totalUsd": 0.9402,
+ "lookAlikeClustersContainingBatch": [],
+ "lookAlikeComparedAgainst": "378 existing auto_passed MC (all subjects incl. the S1 pilot) + 12 S2-a items"
+}

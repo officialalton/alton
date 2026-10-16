@@ -1,0 +1,43 @@
+{
+ "itemId": "linear_equations_one_var.word_problem_translate.LN.P",
+ "generatedAt": "2026-10-07T05:02:00.657Z",
+ "codeHash": "711c2b22c859ecda70d11007f77ab7ec2e70b94236c322ba5a6871a25c0a7dce",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/coordinate-plane.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/graph-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/linear_equations_one_var.word_problem_translate.LN.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "linear_equations_one_var.word_problem_translate.LN.P.png",
+   "mobileFile": "linear_equations_one_var.word_problem_translate.LN.P.m375.png",
+   "archetypeId": "wptg.word_problem_translate.LN.P.repr_shift",
+   "seed": 11,
+   "signature": "plane",
+   "stimulus": "A linear relationship relates the number of employees at a company to the company's monthly revenue. Its graph is shown. The relationship is modeled by the equation $y = ax + b$, where $x$ is the number of employees at a company, $y$ is the company's monthly revenue, and $a$ and $b$ are constants.",
+   "question": "What is the value of $a + b$?",
+   "options": [
+    "20",
+    "26",
+    "25",
+    "5"
+   ],
+   "correctIndex": 2,
+   "answer": "25",
+   "explanation": "(1) 그래프에 표시된 두 점 (0, 20) 과 (4, 40) 을 읽는다. (2) 기울기 = (40 - 20) ÷ (4 - 0) = 5 이다. (3) x = 0 일 때 값: 20 - (5) × 0 = 20 이다. (4) y = 5x + 20 로 쓸 수 있다. (5) a + b = 25 이다. 따라서 정답은 25이다.",
+   "structuralIssues": []
+  }
+ ]
+}

@@ -1,0 +1,49 @@
+{
+ "itemId": "systems_linear.system_from_graph.LN.C",
+ "generatedAt": "2026-10-07T05:02:00.700Z",
+ "codeHash": "b56bc315c07194d52b404d45f3907dbddf41403b419cc716ddeffe23e8ce8016",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/coordinate-plane.ts",
+  "lib/problem-figures/templates/figure-choice.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/cplane-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/data-c-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/graph-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/systems_linear.system_from_graph.LN.C.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/ln-b-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/lnc-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/pure-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "systems_linear.system_from_graph.LN.C.png",
+   "mobileFile": "systems_linear.system_from_graph.LN.C.m375.png",
+   "archetypeId": "sfcg.system_from_graph.LN.C.repr_shift",
+   "seed": 11,
+   "signature": "figure_choice[plane]",
+   "stimulus": "Choices A through D are graphs of two lines in the same $xy$-plane.",
+   "question": "Of the four graphs shown, which one is a system where the lines are the graphs of a line with slope 1 and $y$-intercept 1 and a line with slope 2 and $y$-intercept 1?",
+   "options": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "correctIndex": 2,
+   "answer": "C",
+   "explanation": "(1) 두 직선: y = 1x + 1, y = 2x + 1. (2) 각 그래프의 두 직선을 읽어 조건을 대조한다. (3) 조건 하나라도 어긋난 그래프를 지운다. (4) 남은 그래프가 정답이다. (5) 다른 그래프는 조건 하나 이상이 어긋난다. 따라서 정답은 C이다.",
+   "structuralIssues": []
+  }
+ ]
+}

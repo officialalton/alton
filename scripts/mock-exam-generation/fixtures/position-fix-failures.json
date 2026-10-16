@@ -1,0 +1,249 @@
+[
+ {
+  "id": "0e9a6d0b",
+  "perm": [
+   1,
+   2,
+   3,
+   0
+  ],
+  "origIndex": 0,
+  "newIndex": 3,
+  "explanation": "전체 자루 수가 24개이므로 c + m = 24이다. 컴포스트 한 자루의 가격은 6달러, 멀치 한 자루의 가격은 9달러이고 총 예산이 정확히 180달러이므로 6c + 9m = 180이다. 이 두 방정식을 동시에 만족해야 상황을 정확히 나타내므로 c + m = 24와 6c + 9m = 180으로 이루어진 연립방정식이 정답이다.\n\n다른 선택지는 값이 뒤바뀌었거나(두 번째 선택지: 총 자루 수와 총 비용을 서로 바꿔 씀), 컴포스트와 멀치의 단가를 서로 바꿔 적용했거나(세 번째 선택지: 9c + 6m = 180), 총 자루 수 관계를 합이 아닌 차로 잘못 나타낸 경우(네 번째 선택지: c - m = 24)에 해당하여 오답이다. 따라서 정답은 A이다.",
+  "explanationEn": null,
+  "options": [
+   "c + m = 24 and 6c + 9m = 180",
+   "c + m = 180 and 6c + 9m = 24",
+   "c + m = 24 and 9c + 6m = 180",
+   "c - m = 24 and 6c + 9m = 180"
+  ]
+ },
+ {
+  "id": "1dfcbdb2",
+  "perm": [
+   1,
+   2,
+   3,
+   0
+  ],
+  "origIndex": 0,
+  "newIndex": 3,
+  "explanation": "이 연구는 관찰 연구다: 어떤 그림이 아마인유를 쓰고 어떤 그림이 달걀 템페라를 썼는지는 무작위로 정해진 것이 아니라 각 화방(workshop)의 역사적 선택에 따른 것이다. 아마인유를 선택한 화방은 안료 품질, 보관 방식, 화가의 기법 등 다른 면에서도 달걀 템페라를 쓴 화방과 체계적으로 달랐을 수 있다. 이런 교란 요인이 있으므로 반사율 점수 차이가 매체 때문인지 다른 요인 때문인지 구분할 수 없어 인과관계를 주장할 수 없다. B는 '실험실이 아닌 실제 자료'라는 것이 오히려 무작위 배정이 없다는 뜻이므로 인과관계를 뒷받침하지 못한다. C는 지문에 없는 타당성 문제를 임의로 제기한 것이다. D는 표본 크기가 같다는 것과 인과관계 확보는 무관하다.",
+  "explanationEn": "This is an observational study: which paintings used linseed oil versus egg tempera was not randomly assigned but instead depended on historical choices made by individual workshops. Workshops that chose linseed oil may have differed systematically from those that used egg tempera in other ways—such as pigment quality, storage conditions, or technique—that could also affect vibrancy scores. Because of this potential confounding, the difference in reflectance scores cannot be attributed to the medium alone, so a causal conclusion is not supported. Choice B incorrectly treats the absence of a controlled lab setting as support for causality, when in fact it signals the lack of random assignment. Choice C raises a measurement validity concern not indicated in the passage. Choice D confuses equal sample sizes with the presence of random assignment, which is unrelated.",
+  "options": [
+   "The study cannot support a cause-and-effect conclusion because the paintings were not randomly assigned to a medium; workshops that chose linseed oil may have differed in other ways, such as pigment quality or storage conditions, that also affect vibrancy.",
+   "The study supports a cause-and-effect conclusion because the sample included paintings from real historical workshops rather than a laboratory setting.",
+   "The study cannot support a cause-and-effect conclusion because a sample of only 30 paintings is too small to detect a real difference in vibrancy between the two media.",
+   "The study supports a cause-and-effect conclusion because the sample size of 30 paintings is large enough to rule out the effects of any confounding variables."
+  ]
+ },
+ {
+  "id": "241ae323",
+  "perm": [
+   1,
+   2,
+   3,
+   0
+  ],
+  "origIndex": 0,
+  "newIndex": 3,
+  "explanation": "10개 값의 평균은 (3+5+4+6+2-15+5+4+3+6)/10 = 23/10 = 2.3%이다. -15를 제외한 나머지 9개 값의 평균은 (23-(-15))/9 = 38/9 ≈ 4.22%로, 원래 평균 2.3%보다 커진다. -15는 다른 값들(대부분 2~6 사이)로부터 매우 멀리 떨어진 값이므로 편차 제곱합에 크게 기여하는데, 이를 제거하면 나머지 값들이 평균 근처로 더 가깝게 모여 있어 표준편차는 작아진다. 따라서 평균은 증가하고 표준편차는 감소하므로 정답은 A번이다.",
+  "explanationEn": "The mean of all 10 values is (3+5+4+6+2−15+5+4+3+6)/10 = 23/10 = 2.3%. Removing −15 leaves 9 values with a mean of (23−(−15))/9 = 38/9 ≈ 4.22%, which is greater than the original mean of 2.3%. Since −15 is far from the rest of the values (which cluster between 2 and 6), it contributes heavily to the sum of squared deviations; removing it means the remaining values are more tightly clustered around their mean, so the standard deviation decreases. Thus the mean increases and the standard deviation decreases, making A the correct answer.",
+  "options": [
+   "The mean increases, and the standard deviation decreases.",
+   "The mean decreases, and the standard deviation increases.",
+   "The mean increases, and the standard deviation increases.",
+   "The mean stays the same, and the standard deviation decreases."
+  ]
+ },
+ {
+  "id": "00371549",
+  "perm": [
+   1,
+   2,
+   3,
+   0
+  ],
+  "origIndex": 0,
+  "newIndex": 3,
+  "explanation": "학생의 목표는 전기 전차 도입이 어떻게 교외 성장에 기여했는지 설명하는 것이다. 첫 번째 선택지는 전기 전차가 말이 끄는 전차보다 훨씬 빨랐다는 메모와, 그 결과 노동자들이 도심에서 멀리 살면서도 통근할 수 있게 되어 교외 거주지가 성장했다는 메모를 인과적으로 연결하여 목표를 정확히 달성한다. 두 번째 선택지는 부동산 개발업체와의 제휴만 언급할 뿐, 전기 전차 도입이 왜 교외 성장을 가능하게 했는지(속도 증가와 통근 가능성)의 핵심 인과관계를 빠뜨린다. 세 번째 선택지는 위생 문제라는 무관한 내용에 집중해 목표와 관련 없는 종합을 제시한다. 네 번째 선택지는 자동차 경쟁으로 인한 전차 이용 감소라는, 교외 성장의 원인이 아니라 쇠퇴와 관련된 서로 다른 메모들을 잘못 결합하고 있다.",
+  "explanationEn": null,
+  "options": [
+   "Because electric streetcars traveled much faster than horse-drawn streetcars, workers could live farther from downtown and still commute to their jobs, which spurred suburban residential growth.",
+   "Streetcar companies frequently partnered with real estate developers to extend new lines into undeveloped land at the edges of cities.",
+   "Horse-drawn streetcars were slow and produced large quantities of manure, which created serious sanitation problems that electric streetcars eventually helped resolve.",
+   "As automobiles began competing with streetcars for passengers in the 1920s, many streetcar lines that had once extended into the suburbs saw declining ridership."
+  ]
+ },
+ {
+  "id": "06a3ced4",
+  "perm": [
+   1,
+   2,
+   3,
+   0
+  ],
+  "origIndex": 0,
+  "newIndex": 3,
+  "explanation": "지문은 optic gland를 제거한 암컷이 동일한 에너지를 알에 소모했음에도 불구하고 쇠퇴하지 않고 더 오래 살았다는 실험을 제시한다. 이는 쇠퇴가 에너지 소모 자체의 결과가 아니라 optic gland가 분비하는 호르몬 신호에 의해 유발되는 과정이며, 그 신호가 없으면(즉 조건이 달라지면) 쇠퇴가 시작되지 않을 수 있음을 뜻한다. 따라서 정답은 '호르몬 신호에 의해 능동적으로 조절되며, 다른 조건에서는 개시가 저지될 수 있다'는 0번이다. 1번은 쇠퇴가 어미가 부화 전에 최대한 에너지를 쓸 수 있게 하려는 목적을 지닌 적응적 형질이라는 내용으로, 지문에 없는 목적론적 인과관계를 부여한 것이므로 근거가 없다(UNSUPPORTED). 2번은 쇠퇴가 알이 이미 부화한 후에만 나타난다는 주장으로, 지문은 부화 전 브루딩 기간 동안 이미 신체적 쇠퇴가 진행된다고 명시하므로 시간적 순서를 뒤바꾼 오류다(WRONG_SCOPE). 3번은 쇠퇴의 원인을 신체적 부담(에너지 소모)으로 돌려, 지문이 정확히 반박한 기존 가설을 그대로 반복하는 것이므로 지문의 결론과 정반대다(OPPOSITE).",
+  "explanationEn": null,
+  "options": [
+   "actively regulated by a hormonal signal that the animal's body could, under different conditions, be prevented from initiating",
+   "a trait that persists specifically because it allows the mother to expend as much energy as possible before the eggs hatch",
+   "a physiological response that occurs only after the eggs have already hatched rather than during the brooding period itself",
+   "caused primarily by the physical strain of aerating eggs rather than by any internal biological process"
+  ]
+ },
+ {
+  "id": "02a126a6",
+  "perm": [
+   1,
+   2,
+   3,
+   0
+  ],
+  "origIndex": 0,
+  "newIndex": 3,
+  "explanation": "지문은 먼저 산호초가 형성되기 위한 좁은 온도, 수질, 광량 조건을 설명하고, 이 조건이 벗어나면 백화 현상이 일어날 수 있음을 언급한 뒤, 마지막 문장에서 그럼에도 불구하고 좁은 허용 범위 내에서는 산호초가 수천 년간 지속될 만큼 회복력이 있다는 점을 강조한다. 선택지 B는 첫 문장의 비유와 생물다양성이라는 단어에 이끌려 지문이 산호초와 열대우림의 종을 비교·목록화하려 한다고 오해한 것으로, 지문에는 그러한 비교나 종 목록이 등장하지 않는다. 선택지 C는 지문 중반의 백화 현상 설명만을 근거로 삼아 이를 전체 목적으로 확대한 것으로, 백화 현상 이후 마지막 문장에서 제시되는 회복력에 대한 언급을 놓치고 있다. 선택지 D는 지문이 언급한 세 가지 조건(온도, 수질, 광량) 중 온도 하나만을 취해 이를 유일한 핵심 요인으로 확대 해석하고, 지문에 없는 '권고'라는 목적을 새로 부여한 오답이다. 따라서 지문 전체의 목적은 산호초 형성의 정밀한 조건과 그 안에서의 회복력을 함께 설명하는 것이며, 정답은 A이다.",
+  "explanationEn": "The passage first explains the narrow environmental conditions required for coral reef formation, mentions that bleaching can occur when those conditions fail, and then concludes by emphasizing that within their narrow tolerances reefs can persist for millennia, showing resilience. The overall purpose is therefore to explain both the precise requirements and the resilience within them, making A correct.",
+  "options": [
+   "To explain the precise environmental requirements that allow coral reefs to form and to note their resilience within those limits",
+   "To compare coral reefs with rainforests in order to catalog the specific species that inhabit each ecosystem",
+   "To describe the process by which coral bleaching occurs when temperature, water clarity, or sunlight conditions are disrupted",
+   "To recommend that scientists monitor water temperature as the single most important factor in reef preservation"
+  ]
+ },
+ {
+  "id": "048df914",
+  "perm": [
+   1,
+   2,
+   3,
+   0
+  ],
+  "origIndex": 0,
+  "newIndex": 3,
+  "explanation": "지문은 네덜란드의 번영을 설명하는 여러 개별 이론(금융 제도, 어업)을 차례로 소개한 뒤, 마지막 문장에서 최근 역사가들이 이 모든 요인이 함께 작용했다고 본다는 종합적 주장을 제시한다. 따라서 지문 전체의 목적은 단일 원인이 아니라 여러 요인의 상호작용으로 네덜란드의 번영을 설명하려는 견해를 제시하는 것이며, 정답은 A이다.",
+  "explanationEn": "The passage introduces several individual theories for Dutch prosperity (financial institutions, the fishing industry) before concluding that recent historians view these factors as working together rather than any single cause being decisive. The overall purpose of the text is to present this multi-factor explanation, making A correct.",
+  "options": [
+   "To present a case for the view that Dutch prosperity resulted from the interaction of multiple factors rather than any single cause",
+   "To argue that the Amsterdam Stock Exchange was the single most important cause of Dutch economic success",
+   "To describe how the Dutch fishing industry supplied cheap protein that freed labor for manufacturing and trade",
+   "To describe how Dutch financial institutions and the fishing industry independently contributed to prosperity before concluding that religious tolerance was the decisive factor"
+  ]
+ },
+ {
+  "id": "90f4fae1",
+  "perm": [
+   1,
+   2,
+   0,
+   3
+  ],
+  "origIndex": 0,
+  "newIndex": 2,
+  "explanation": "지문은 카라바조의 극명한 명암 대비가 촛불 아래에서 종교화의 정서적 효과를 더욱 강렬하게 만들도록 설계되었다고 설명하며, 이어서 현대의 균일한 조명이 그 대비를 '평탄하게 하여(flattens)' 원래의 강렬한 시각적 힘을 '감소시킨다(diminishing the visceral power)'고 대조한다. 즉 원래 환경에서는 효과가 강화되었다는 뜻이므로, 'intensify'는 '강화하다, 고조시키다'라는 뜻의 'heighten'과 가장 가깝다. 따라서 정답은 A이다. 'reveal(드러내다)'은 단지 무언가를 보이게 한다는 뜻으로, 정서적 효과를 더 강렬하게 만든다는 의미를 포착하지 못하므로 B는 오답이다. 'simplify(단순화하다)'는 지문에서 현대 조명이 대비를 없애 단조롭게 만든다는 것과 오히려 반대로, 카라바조의 기법이 대비를 단순화한다는 뜻이 되어 문맥과 맞지 않으므로 C는 오답이다. 'extend(연장하다)'는 시간이나 길이를 늘린다는 뜻으로 감정적 강도와 무관하므로 D는 오답이다.",
+  "explanationEn": "The passage explains that Caravaggio's stark contrasts of light and shadow were designed to make the emotional impact of religious scenes more powerful under candlelight, and it contrasts this with modern gallery lighting, which 'flattens' the contrasts and 'diminishes the visceral power' originally experienced. This means the effect was originally heightened, so 'intensify' is closest in meaning to 'heighten,' making A correct. 'Reveal' merely means to make something visible, which does not capture the idea of making the emotional effect stronger, so B is wrong. 'Simplify' would mean reducing complexity, which is the opposite of what Caravaggio's technique achieves and instead describes what modern lighting does, so C is wrong. 'Extend' means to lengthen or prolong, which is unrelated to emotional intensity, so D is wrong.",
+  "options": [
+   "heighten",
+   "reveal",
+   "simplify",
+   "extend"
+  ]
+ },
+ {
+  "id": "81df28e6",
+  "perm": [
+   1,
+   0,
+   2,
+   3
+  ],
+  "origIndex": 0,
+  "newIndex": 1,
+  "explanation": "빈칸 뒤의 \"ultraviolet radiation from the sun then converts...\"는 앞의 \"Charon's frigid surface\"라는 장소를 가리키는 관계부사절로 연결되어야 자연스럽다. A는 쉼표 뒤에 관계부사 where를 두어 이 절을 비제한적 수식절로 매끄럽게 연결하므로 정답이다. B는 세미콜론을 쓰는데, 세미콜론은 두 개의 독립절을 연결할 때 쓰이지만 \"where ultraviolet radiation...\" 절 앞에 세미콜론을 쓰면 관계부사절 구조와 충돌해 문장이 어색해진다. C는 콜론을 쓰는데, 콜론 뒤에는 보통 독립절이나 목록이 와야 하며 관계부사로 시작하는 수식절과는 어울리지 않는다. D는 \"and where\"를 써서 등위접속사와 관계부사를 함께 쓰는데, 이는 불필요하게 중복된 연결 구조를 만들어 어색한 문장이 된다.",
+  "explanationEn": "The clause after the blank, \"ultraviolet radiation from the sun then converts...,\" should attach as a relative clause referring back to the location \"Charon's frigid surface.\" Choice A places a comma before the relative adverb \"where,\" smoothly introducing this descriptive clause, making it correct. Choice B uses a semicolon, which is meant to join two independent clauses, but placing it before a relative clause beginning with \"where\" clashes with that structure and creates an awkward sentence. Choice C uses a colon, which typically introduces an independent clause or a list, not a relative clause starting with \"where.\" Choice D adds \"and\" before \"where,\" combining a coordinating conjunction with a relative adverb in a redundant, ungrammatical way.",
+  "options": [
+   ", where",
+   "; where",
+   ": where",
+   ", and where"
+  ]
+ },
+ {
+  "id": "80e56b91",
+  "perm": [
+   0,
+   2,
+   1,
+   3
+  ],
+  "origIndex": 2,
+  "newIndex": 1,
+  "explanation": "Text 1은 혼잡통행료가 즉각적으로 적용되어 대중교통 확충보다 빠른 해결책이라고 주장한다. Text 2는 이 속도상의 이점을 부정하지 않고 오히려 '시간이 더 걸리더라도'라고 명시하면서도, 저소득 통근자에게 공정한 대안으로 대중교통 확충을 우선해야 한다고 본다. 따라서 정답은 C번이다. A는 Text 2가 하지 않은 극단적 주장이고(속도만이 유일한 기준이라는 것은 Text 2의 형평성 강조와 반대), B는 Text 1의 구체적 성과 데이터를 무시한 과장이며(SINGLE_TEXT_ONLY 관점 결여), D는 Text 2가 명시적으로 부정한 내용(더 오래 걸린다고 인정)과 반대된다(REVERSED).",
+  "explanationEn": "Text 1 argues that congestion pricing works faster than transit expansion because it changes driver behavior immediately. Text 2 does not dispute this speed advantage—it explicitly says transit projects take longer—but argues that expanding transit is fairer to lower-income commuters and should be prioritized despite being slower. So C is correct. A misrepresents Text 2 as caring only about speed, which contradicts its equity focus; B ignores the traffic-reduction evidence Text 1 provides; D directly reverses Text 2's own admission that transit projects take longer.",
+  "options": [
+   "By agreeing that speed is the only factor that should determine which policy a city adopts",
+   "By denying that congestion pricing reduces traffic volume in any city that has adopted it",
+   "By acknowledging the speed advantage but arguing that transit expansion is fairer to lower-income commuters",
+   "By claiming that transit expansion projects can now be completed just as quickly as pricing programs"
+  ]
+ },
+ {
+  "id": "9d4af989",
+  "perm": [
+   0,
+   2,
+   3,
+   1
+  ],
+  "origIndex": 1,
+  "newIndex": 3,
+  "explanation": "두 식 $R = 2.50p + 375$와 $R = 2.50p + 3(125)$를 비교하면 $375 = 3(125)$로 같은 값임을 알 수 있다. 원래 식에서 $2.50p$는 전액 요금을 낸 승객 $p$명에게서 나온 수입을 나타내므로, 나머지 상수항 $375$(즉 $3(125)$)는 전액 요금을 내지 않는 승객들로부터 걷힌 수입을 나타낸다. 이는 승객 수나 요금 자체가 아니라 금액(수입)이라는 점에 유의해야 한다. 선택지 1은 상수항을 승객 수로 착각한 오답, 선택지 3은 계수 2.50을 요금으로 오해하지 않고 엉뚱하게 상수항과 연결한 오답, 선택지 4는 금액을 날짜 수로 잘못 해석한 오답이다.",
+  "explanationEn": null,
+  "options": [
+   "The total number of passengers who ride the bus each day",
+   "The daily fare revenue collected from passengers who do not pay the full adult fare",
+   "The full adult fare charged to each passenger",
+   "The number of days needed to collect 375 dollars in revenue"
+  ]
+ },
+ {
+  "id": "5bf69abf",
+  "perm": [
+   0,
+   2,
+   3,
+   1
+  ],
+  "origIndex": 1,
+  "newIndex": 3,
+  "explanation": "방정식 $h(x) = 25$를 세우면 $\\frac{1}{20}x^2 - 4x + 65 = 25$이다. 양변에서 25를 빼면 $\\frac{1}{20}x^2 - 4x + 40 = 0$이 된다. 양변에 20을 곱해 분수를 없애면 $x^2 - 80x + 800 = 0$이 된다.\n\n판별식을 계산하면 $b^2 - 4ac = (-80)^2 - 4(1)(800) = 6400 - 3200 = 3200 > 0$이므로 서로 다른 두 실근이 존재한다.\n\n근과 계수의 관계(비에타의 공식)에 의해 이차방정식 $x^2 - 80x + 800 = 0$의 두 근의 합은 $-\\frac{b}{a} = -\\frac{-80}{1} = 80$이다.\n\n따라서 $h(x) = 25$는 두 개의 실근을 가지며, 그 합은 $80$이다. 정답은 두 번째 선택지이다.\n\n오답 분석: 첫 번째 선택지는 판별식이 0이라고 잘못 계산하여 중근 하나만 존재한다고 오인한 경우이다. 세 번째 선택지는 두 실근이 존재한다는 것은 맞게 파악했지만, 두 근의 합을 구하는 비에타 공식에서 $-b/a$ 대신 $b/a$를 사용하거나 상수항 $c=800$을 근의 합 공식에 혼동하여 잘못 계산한 경우($800/20=40$ 등으로 오해)에 해당한다. 네 번째 선택지는 판별식의 부호를 반대로 계산하여 음수로 잘못 판단한 경우이다.",
+  "explanationEn": null,
+  "options": [
+   "One real solution; sum equals $40$",
+   "Two real solutions; sum equals $80$",
+   "Two real solutions; sum equals $40$",
+   "No real solutions"
+  ]
+ },
+ {
+  "id": "4e5c16c7",
+  "perm": [
+   1,
+   2,
+   3,
+   0
+  ],
+  "origIndex": 0,
+  "newIndex": 3,
+  "explanation": "인디고 양이 마더 양의 2배보다 최소 5 더 많아야 하므로 $y \\ge 2x+5$ (직선 $y=2x+5$ 를 포함해 위쪽 영역). 전체 합이 40을 넘지 않아야 하므로 $x+y \\le 40$ (직선 $x+y=40$ 을 포함해 아래쪽 영역). 두 조건을 결합하면 첫 번째 선택지가 정답. 두 번째 선택지는 부등호 방향을 뒤집어 인디고가 마더보다 적은 영역을 나타내 조건과 반대된다. 세 번째 선택지는 총량 제한 부등호를 뒤집어 40 이상이 되어야 한다고 잘못 나타낸다. 네 번째 선택지는 $x$와 $y$의 역할을 바꿔 마더 양이 인디고 양의 2배보다 많아야 한다고 잘못 나타낸다.",
+  "explanationEn": "Since indigo must be at least 5 more than twice the madder amount, we need $y \\ge 2x+5$ (region on or above the line $y=2x+5$). Since the total cannot exceed 40 milliliters, we need $x+y \\le 40$ (region on or below the line $x+y=40$). Combining these gives the first option as correct. The second option reverses the first inequality, describing a region where indigo is less than twice madder plus 5, contradicting the condition. The third option reverses the total constraint, requiring the total to be at least 40 instead of at most 40. The fourth option swaps the roles of $x$ and $y$, incorrectly requiring madder to be at least twice indigo plus 5.",
+  "options": [
+   "$$\\begin{cases} y \\ge 2x + 5 \\\\ x + y \\le 40 \\end{cases}$$",
+   "$$\\begin{cases} y \\le 2x + 5 \\\\ x + y \\le 40 \\end{cases}$$",
+   "$$\\begin{cases} y \\ge 2x + 5 \\\\ x + y \\ge 40 \\end{cases}$$",
+   "$$\\begin{cases} x \\ge 2y + 5 \\\\ x + y \\le 40 \\end{cases}$$"
+  ]
+ }
+]

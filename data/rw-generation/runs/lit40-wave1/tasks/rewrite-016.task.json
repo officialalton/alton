@@ -1,0 +1,580 @@
+{
+ "schema": "rw-session-task/v1",
+ "kind": "rewrite",
+ "runId": "lit40-wave1",
+ "taskId": "rewrite-016",
+ "chunkId": "rewrite-016",
+ "batchId": "lit40-medium-06",
+ "attempt": 1,
+ "suggestedModel": "opus",
+ "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rewrite-016.result.json",
+ "outputSchema": {
+  "chunkId": "작업 파일의 chunkId 를 그대로",
+  "model": "당신의 모델 이름(예: opus)",
+  "items": [
+   {
+    "candidateId": "후보의 candidateId 를 그대로",
+    "passage": "영어 지문(문항의 질문은 넣지 않는다)",
+    "question": "영어 질문 한 문장",
+    "options": [
+     "선택지 A",
+     "선택지 B",
+     "선택지 C",
+     "선택지 D"
+    ],
+    "correct_letter": "A|B|C|D (targetLetter 와 같게)",
+    "explanation": "한국어 해설 3~5문장",
+    "tone": [
+     "지문 어조 영어 단어 1~3개"
+    ],
+    "devices": [
+     "쓰인 문학 장치 영어 단어"
+    ],
+    "declaration": {
+     "original": true,
+     "noRealWorkQuoted": true,
+     "noCopyrightedSource": true
+    }
+   }
+  ]
+ },
+ "candidates": [
+  {
+   "candidateId": "lit40-medium-06-084",
+   "route": "ai_passage",
+   "skill": "text_structure_purpose",
+   "difficulty": "medium",
+   "questionType": "tone_shift",
+   "genre": "poetry",
+   "targetLetter": "A",
+   "words": {
+    "min": 60,
+    "max": 220
+   },
+   "recipeId": null,
+   "spec": {
+    "candidateId": "lit40-medium-06-084",
+    "batchId": "lit40-medium-06",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "medium",
+    "questionType": "tone_shift",
+    "genre": "poetry",
+    "seed": {
+     "index": 83,
+     "genre": "poetry",
+     "pov": "third_omniscient",
+     "styleEra": "contemporary",
+     "names": [
+      "Talon",
+      "Camille"
+     ],
+     "nameCultures": [
+      "indigenous_american",
+      "french"
+     ],
+     "locale": "Lyon",
+     "setting": "a lighthouse station",
+     "relationship": "a mother and her son leaving for college",
+     "conflict": "when a rumor reaches the wrong person",
+     "openingStyle": "숫자·목록·규칙을 말하며 시작",
+     "topicSeed": "a lighthouse station in Lyon; a mother and her son leaving for college when a rumor reaches the wrong person"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a lighthouse station in Lyon; a mother and her son leaving for college when a rumor reaches the wrong person\n인물 이름: Talon, Camille 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 숫자·목록·규칙을 말하며 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 A 에 둔다. correct_letter 는 A 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 A 로 정한 뒤 나머지 선택지를 채운다.",
+   "previous": {
+    "passage": "Four rules for the lighthouse at Lyon's river bend:\nwipe the lens at dusk, log the barges,\nnever leave the lamp alone,\nand do not listen to the quay.\n\nCamille kept them all for Talon's sake,\nand Talon kept them, mostly, for hers.\nBut someone on the quay had said\nhe would not come home from college,\nand the baker said it to her twice.\n\nTonight she wipes the lens too hard.\nThen she finds his note beneath the logbook,\nfolded small in his crooked hand:\nleave the lamp on for me in May.\n\nShe laughs once, alone in the glass room,\nand lets the beam swing wide across the water.",
+    "question": "Which choice best describes the shift in tone in the poem?",
+    "options": [
+     "It moves from anxious strictness to relieved warmth when Camille finds her son's note.",
+     "It moves from joyful celebration to grief when Camille hears the rumor about Talon.",
+     "It moves from detached observation to anger directed at the baker on the quay.",
+     "It moves from playful mockery of the rules to solemn respect for the lighthouse."
+    ],
+    "correct_letter": "A",
+    "explanation": "시는 등대의 규칙을 나열하며 엄격한 분위기로 시작하고, 아들이 돌아오지 않을 거라는 소문에 Camille는 렌즈를 '너무 세게' 닦을 만큼 불안해한다. 그러다 5월에 등불을 켜 두라는 아들의 쪽지를 발견하고 홀로 웃으며 빛을 넓게 비춘다. 따라서 불안한 엄격함에서 안도의 따뜻함으로 바뀐다는 A가 정답이다. B는 순서가 거꾸로이고, C의 분노와 D의 조롱은 근거가 없다.",
+    "judgeNotes": [
+     "Fable 추정 난이도 easy",
+     "difficulty_too_easy"
+    ],
+    "reason": "too_easy"
+   }
+  },
+  {
+   "candidateId": "lit40-medium-07-012",
+   "route": "ai_passage",
+   "skill": "words_in_context",
+   "difficulty": "medium",
+   "questionType": "figurative_language",
+   "genre": "novel_excerpt",
+   "targetLetter": "B",
+   "words": {
+    "min": 60,
+    "max": 220
+   },
+   "recipeId": null,
+   "spec": {
+    "candidateId": "lit40-medium-07-012",
+    "batchId": "lit40-medium-07",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "medium",
+    "questionType": "figurative_language",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 11,
+     "genre": "novel_excerpt",
+     "pov": "third_limited",
+     "styleEra": "19c",
+     "names": [
+      "Layla",
+      "Sigrid"
+     ],
+     "nameCultures": [
+      "arabic_levantine",
+      "dutch_nordic"
+     ],
+     "locale": "Beirut",
+     "setting": "a bus depot",
+     "relationship": "a violin student and an exacting teacher",
+     "conflict": "over a witness account that differs",
+     "openingStyle": "의문문으로 시작",
+     "topicSeed": "a bus depot in Beirut; a violin student and an exacting teacher over a witness account that differs"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a bus depot in Beirut; a violin student and an exacting teacher over a witness account that differs\n인물 이름: Layla, Sigrid 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 의문문으로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 B 에 둔다. correct_letter 는 B 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 B 로 정한 뒤 나머지 선택지를 채운다.",
+   "previous": {
+    "passage": "Did anyone else see the case fall? Layla asked the depot clerk in Beirut, though she already knew the answer. Her violin had slipped from the overhead rack when the bus braked, and Sigrid, her teacher, insisted that Layla had left the case unlatched. Layla remembered fastening both clasps. The driver said a passenger had bumped it; a woman by the window said no one had touched it at all. Each account was confident, and each was different, so that the truth seemed to splinter into pieces too small to hold. Sigrid examined the cracked bridge with her usual severity, then said only that bridges could be replaced and that Layla would practice on the spare instrument until Friday. Outside, buses idled in their bays, exhaust drifting over the ticket windows.",
+    "question": "As used in the text, the phrase “splinter into pieces too small to hold” most nearly suggests that",
+    "options": [
+     "the violin was so badly damaged that it could never be repaired",
+     "the conflicting accounts broke the event into fragments no one could join",
+     "Layla was too upset to recall what she had done with the case's clasps",
+     "the witnesses were careless people whose statements deserved no attention"
+    ],
+    "correct_letter": "B",
+    "explanation": "앞 문장들에서 Sigrid, Layla, 운전기사, 창가의 여자가 저마다 다른 이야기를 하고, 이 비유는 모두 확신에 차 있지만 서로 다르다는 문장에 이어 나온다. 그러므로 진실이 쪼개진다는 표현은 엇갈린 증언 때문에 사건을 하나의 이야기로 맞출 수 없다는 뜻이며 B가 정답이다. A는 깨진 브리지에 끌려 비유를 문자 그대로 읽었고, Sigrid가 브리지는 교체할 수 있다고 한 것과도 맞지 않는다. C와 D는 지문에 근거가 없다.",
+    "judgeNotes": [
+     "Fable 추정 난이도 easy",
+     "difficulty_too_easy"
+    ],
+    "reason": "too_easy"
+   }
+  },
+  {
+   "candidateId": "lit40-medium-07-014",
+   "route": "ai_passage",
+   "skill": "words_in_context",
+   "difficulty": "medium",
+   "questionType": "figurative_language",
+   "genre": "personal_essay",
+   "targetLetter": "D",
+   "words": {
+    "min": 60,
+    "max": 220
+   },
+   "recipeId": null,
+   "spec": {
+    "candidateId": "lit40-medium-07-014",
+    "batchId": "lit40-medium-07",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "medium",
+    "questionType": "figurative_language",
+    "genre": "personal_essay",
+    "seed": {
+     "index": 13,
+     "genre": "personal_essay",
+     "pov": "first",
+     "styleEra": "contemporary",
+     "names": [
+      "Kaya",
+      "Dainius"
+     ],
+     "nameCultures": [
+      "indigenous_american",
+      "slavic_baltic"
+     ],
+     "locale": "Albuquerque",
+     "setting": "a bakery before opening",
+     "relationship": "old rivals in a chess club",
+     "conflict": "about what to tell a younger sibling",
+     "openingStyle": "짧은 단언문으로 시작",
+     "topicSeed": "a bakery before opening in Albuquerque; old rivals in a chess club about what to tell a younger sibling"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a bakery before opening in Albuquerque; old rivals in a chess club about what to tell a younger sibling\n인물 이름: Kaya, Dainius 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 짧은 단언문으로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 D 에 둔다. correct_letter 는 D 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 D 로 정한 뒤 나머지 선택지를 채운다.",
+   "previous": {
+    "passage": "Chess rivals make poor confidants. I learned this at four in the morning in my aunt's bakery in Albuquerque, where Dainius and I had met to argue, as usual, though not about openings. My younger brother had asked each of us, separately, whether he should quit the club after losing every game of the season. Dainius wanted to tell him the truth: that he played too fast. I wanted to tell him he would improve. Between the cooling racks we circled the question like two kings in an endgame, each step careful, neither willing to come close enough to be checked. By the time the first tray of conchas came out, we had agreed on nothing except that my brother deserved one answer, not two. Kaya, my aunt, unlocked the front door and flipped the sign.",
+    "question": "As used in the text, the phrase “circled the question like two kings in an endgame” most nearly suggests that the narrator and Dainius",
+    "options": [
+     "played a slow game of chess while waiting for the bakery to open",
+     "competed fiercely to prove who understood the brother better",
+     "paced the bakery restlessly because they were tired and anxious",
+     "approached the problem warily, each avoiding an exposed position"
+    ],
+    "correct_letter": "D",
+    "explanation": "비유 바로 뒤에서 두 사람은 한 걸음씩 조심하며 체크당할 만큼 가까이 다가가지 않으려 한다. 또 결국 아무것도 합의하지 못했다는 내용이 이어져, 서로 공격받을 입장을 피하며 문제를 조심스럽게 다루었음을 알 수 있다. 따라서 D가 정답이다. A는 비유를 실제 체스 경기로 읽었고, B는 격렬한 경쟁이라는 점에서 조심스러운 태도와 맞지 않으며, C는 피곤과 불안이라는 근거 없는 이유를 끌어왔다.",
+    "judgeNotes": [
+     "Fable 추정 난이도 easy",
+     "difficulty_too_easy"
+    ],
+    "reason": "too_easy"
+   }
+  },
+  {
+   "candidateId": "lit40-medium-07-015",
+   "route": "ai_passage",
+   "skill": "words_in_context",
+   "difficulty": "medium",
+   "questionType": "figurative_language",
+   "genre": "memoir",
+   "targetLetter": "A",
+   "words": {
+    "min": 60,
+    "max": 220
+   },
+   "recipeId": null,
+   "spec": {
+    "candidateId": "lit40-medium-07-015",
+    "batchId": "lit40-medium-07",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "medium",
+    "questionType": "figurative_language",
+    "genre": "memoir",
+    "seed": {
+     "index": 14,
+     "genre": "memoir",
+     "pov": "second",
+     "styleEra": "19c",
+     "names": [
+      "Genevieve",
+      "Solange"
+     ],
+     "nameCultures": [
+      "french",
+      "french"
+     ],
+     "locale": "Marseille",
+     "setting": "a mountain bus stop",
+     "relationship": "a teacher and a student who will not speak",
+     "conflict": "about the proper way to say goodbye",
+     "openingStyle": "구체적인 사물이나 동작으로 시작(관사 The 로 시작하지 말 것)",
+     "topicSeed": "a mountain bus stop in Marseille; a teacher and a student who will not speak about the proper way to say goodbye"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a mountain bus stop in Marseille; a teacher and a student who will not speak about the proper way to say goodbye\n인물 이름: Genevieve, Solange 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 구체적인 사물이나 동작으로 시작(관사 The 로 시작하지 말 것). 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 A 에 둔다. correct_letter 는 A 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 A 로 정한 뒤 나머지 선택지를 채운다.",
+   "previous": {
+    "passage": "A folded bus ticket was all Solange ever left me. I had been her teacher for two years in the hills above Marseille, and in that time she had not said a word in class, though her essays ran long and fierce in pencil. On her last day before her family moved north, we waited together at the mountain bus stop, I with my briefcase, she with a backpack so full it seemed to lean on her. I had prepared a small speech about the proper way to say goodbye. I never gave it. When the bus came, she pressed the ticket into my hand, and on its back she had written a single line of thanks, the letters pressed so hard they had nearly torn through, a whole conversation squeezed into the width of a thumb. Genevieve, my colleague, later framed it for me. That spring, the broom on the hillside bloomed early and yellow.",
+    "question": "As used in the text, the phrase “a whole conversation squeezed into the width of a thumb” most nearly suggests that",
+    "options": [
+     "the brief note carried all that Solange had never said aloud",
+     "Solange's handwriting was too small for the teacher to read",
+     "Solange regretted not having had more time to talk at the stop",
+     "the teacher squeezed in a hurried final lesson before the bus"
+    ],
+    "correct_letter": "A",
+    "explanation": "앞에서 Solange는 2년 동안 수업 시간에 한마디도 하지 않았지만 글은 길고 강렬했다고 소개된다. 마지막에 그녀가 종이를 뚫을 듯 눌러 쓴 감사 한 줄은 그동안 말로 하지 않은 모든 것을 담은 것이므로, 엄지 너비에 압축된 대화라는 비유는 A를 뜻한다. B는 비유를 글씨 크기로 문자 그대로 읽었고, C는 지문에 없는 후회를 끌어왔다. D는 '압축'이라는 표현만 빌린 오답이다.",
+    "judgeNotes": [
+     "Fable 추정 난이도 easy",
+     "difficulty_too_easy"
+    ],
+    "reason": "too_easy"
+   }
+  },
+  {
+   "candidateId": "lit40-medium-07-070",
+   "route": "ai_passage",
+   "skill": "central_ideas_details",
+   "difficulty": "medium",
+   "questionType": "narrator_attitude",
+   "genre": "personal_essay",
+   "targetLetter": "B",
+   "words": {
+    "min": 60,
+    "max": 220
+   },
+   "recipeId": null,
+   "spec": {
+    "candidateId": "lit40-medium-07-070",
+    "batchId": "lit40-medium-07",
+    "route": "ai_passage",
+    "skill": "central_ideas_details",
+    "difficulty": "medium",
+    "questionType": "narrator_attitude",
+    "genre": "personal_essay",
+    "seed": {
+     "index": 69,
+     "genre": "personal_essay",
+     "pov": "mixed_or_none",
+     "styleEra": "late_20c",
+     "names": [
+      "Konrad",
+      "Camryn"
+     ],
+     "nameCultures": [
+      "german_austrian",
+      "african_american"
+     ],
+     "locale": "Vienna",
+     "setting": "a train-station cafe",
+     "relationship": "a young apprentice and a master carpenter",
+     "conflict": "after a harvest, voyage or season that went badly",
+     "openingStyle": "장소 이름으로 시작",
+     "topicSeed": "a train-station cafe in Vienna; a young apprentice and a master carpenter after a harvest, voyage or season that went badly"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a train-station cafe in Vienna; a young apprentice and a master carpenter after a harvest, voyage or season that went badly\n인물 이름: Konrad, Camryn 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 장소 이름으로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 B 에 둔다. correct_letter 는 B 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 B 로 정한 뒤 나머지 선택지를 채운다.",
+   "previous": {
+    "passage": "Vienna's Westbahnhof cafe was where Konrad took me after the worst season of my apprenticeship, the autumn three of our staircases came back warped from a client's damp villa. I was twenty-two then, Camryn the American who measured twice and still cut wrong, and I expected a lecture. Instead he ordered two coffees and spent an hour describing his own first ruined commission, a cabinet that split in its first winter. I have since heard people praise mentors who never let you fail, and I find I distrust them a little. Konrad let me fail, then sat beside me among the departing travelers while it hurt. He did not rebuild the staircases for me; he only made sure I knew I could rebuild them. Outside, a night train to Munich was announced in three languages.",
+    "question": "Which choice best describes the narrator's attitude toward Konrad's way of handling the failed season?",
+    "options": [
+     "Mild embarrassment that Konrad shared such a personal story in public.",
+     "Grateful approval of a mentor who allowed failure and then offered company.",
+     "Quiet frustration that Konrad refused to repair the warped staircases himself.",
+     "Skeptical distance from the idea that a mentor should ever intervene."
+    ],
+    "correct_letter": "B",
+    "explanation": "화자는 실패를 막아 주는 멘토를 오히려 조금 불신한다고 말하며, Konrad가 실패하게 두고 아플 때 곁에 있어 준 방식을 높이 평가한다. 꾸짖는 대신 자신의 실패담을 들려준 장면도 그 고마움을 뒷받침한다. 따라서 B가 정답이다. A의 당혹감과 C의 불만은 지문에 없고, D는 화자가 Konrad의 개입(곁에 있어 줌)을 긍정하므로 틀리다.",
+    "judgeNotes": [
+     "Fable 추정 난이도 easy",
+     "difficulty_too_easy"
+    ],
+    "reason": "too_easy"
+   }
+  },
+  {
+   "candidateId": "lit40-medium-07-071",
+   "route": "ai_passage",
+   "skill": "central_ideas_details",
+   "difficulty": "medium",
+   "questionType": "narrator_attitude",
+   "genre": "memoir",
+   "targetLetter": "C",
+   "words": {
+    "min": 60,
+    "max": 220
+   },
+   "recipeId": null,
+   "spec": {
+    "candidateId": "lit40-medium-07-071",
+    "batchId": "lit40-medium-07",
+    "route": "ai_passage",
+    "skill": "central_ideas_details",
+    "difficulty": "medium",
+    "questionType": "narrator_attitude",
+    "genre": "memoir",
+    "seed": {
+     "index": 70,
+     "genre": "memoir",
+     "pov": "first",
+     "styleEra": "late_20c",
+     "names": [
+      "Marit",
+      "Soren"
+     ],
+     "nameCultures": [
+      "dutch_nordic",
+      "dutch_nordic"
+     ],
+     "locale": "Rotterdam",
+     "setting": "a stone bridge",
+     "relationship": "an interpreter and her client",
+     "conflict": "while learning to let go of a habit",
+     "openingStyle": "감각 묘사(소리·냄새·촉감)로 시작",
+     "topicSeed": "a stone bridge in Rotterdam; an interpreter and her client while learning to let go of a habit"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a stone bridge in Rotterdam; an interpreter and her client while learning to let go of a habit\n인물 이름: Marit, Soren 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 감각 묘사(소리·냄새·촉감)로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 C 에 둔다. correct_letter 는 C 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 C 로 정한 뒤 나머지 선택지를 채운다.",
+   "previous": {
+    "passage": "Wet iron and diesel rose from the river the morning Soren asked me to stop translating for him. I had interpreted for him for six years, at every meeting with Dutch buyers, and out of habit I still leaned toward his ear whenever anyone spoke. We were crossing the old stone bridge to the harbor office in Rotterdam when he said, in careful, slow Dutch, that he wanted to make his own mistakes now. I felt something close to grief, which embarrassed me. I, Marit, had built a version of myself around being needed in two languages at once. In the meeting I kept my hands folded and bit back three corrections. Looking back, I am fond of that woman and a little impatient with her: she mistook usefulness for closeness. A tugboat pushed a barge of gravel under the arch as we left.",
+    "question": "Which choice best describes the narrator's attitude toward her past reaction to Soren's request?",
+    "options": [
+     "Bitter regret that she ever agreed to stop interpreting for him.",
+     "Unqualified pride in how gracefully she accepted the sudden change.",
+     "Affectionate but critical understanding of her former dependence.",
+     "Lasting confusion about why Soren wanted to speak Dutch himself."
+    ],
+    "correct_letter": "C",
+    "explanation": "화자는 당시 슬픔에 가까운 감정을 느끼고 부끄러웠다고 회고하며, 필요한 존재가 되는 것에 자신을 맞춰 왔다고 인정한다. 이어 그때의 자신을 아끼면서도 쓸모를 친밀함으로 착각했다며 조금 답답해한다. 따라서 애정과 비판이 함께 있는 C가 정답이다. A의 쓰라린 후회, B의 순수한 자부심, D의 혼란은 지문과 맞지 않는다.",
+    "judgeNotes": [
+     "Fable 추정 난이도 easy",
+     "difficulty_too_easy"
+    ],
+    "reason": "too_easy"
+   }
+  },
+  {
+   "candidateId": "lit40-medium-07-083",
+   "route": "ai_passage",
+   "skill": "words_in_context",
+   "difficulty": "medium",
+   "questionType": "figurative_language",
+   "genre": "personal_essay",
+   "targetLetter": "D",
+   "words": {
+    "min": 60,
+    "max": 220
+   },
+   "recipeId": null,
+   "spec": {
+    "candidateId": "lit40-medium-07-083",
+    "batchId": "lit40-medium-07",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "medium",
+    "questionType": "figurative_language",
+    "genre": "personal_essay",
+    "seed": {
+     "index": 82,
+     "genre": "personal_essay",
+     "pov": "third_limited",
+     "styleEra": "late_20c",
+     "names": [
+      "Thida",
+      "Arisa"
+     ],
+     "nameCultures": [
+      "southeast_asian",
+      "southeast_asian"
+     ],
+     "locale": "Surabaya",
+     "setting": "a bus depot",
+     "relationship": "a conductor and the youngest violinist",
+     "conflict": "over a plan that depends on a lie",
+     "openingStyle": "감각 묘사(소리·냄새·촉감)로 시작",
+     "topicSeed": "a bus depot in Surabaya; a conductor and the youngest violinist over a plan that depends on a lie"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a bus depot in Surabaya; a conductor and the youngest violinist over a plan that depends on a lie\n인물 이름: Thida, Arisa 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 감각 묘사(소리·냄새·촉감)로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 D 에 둔다. correct_letter 는 D 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 D 로 정한 뒤 나머지 선택지를 채운다.",
+   "previous": {
+    "passage": "Diesel and frying shallots hung over the bus depot in Surabaya, where the youth orchestra waited for a coach that was already two hours late. Thida, the conductor, gathered the players under a tin awning and explained the plan: if anyone at the festival gate asked, they had registered on time. Arisa, the youngest violinist, held her case against her knees. She understood that without that single sentence, the bookings, the borrowed instruments, the months of rehearsal would all come down at once. The lie was the keystone of the whole arch, Thida said quietly, almost as if apologizing to it. Arisa nodded, but when the coach finally wheezed into the lot, she found she could not stop rehearsing the truth instead.",
+    "question": "As used in the text, the phrase “the keystone of the whole arch” most nearly suggests",
+    "options": [
+     "the most impressive part of the orchestra's festival performance.",
+     "a small detail that Thida expects festival officials to overlook.",
+     "a burden that Arisa alone must carry for all the other players.",
+     "the one element the whole plan needs in order to stand."
+    ],
+    "correct_letter": "D",
+    "explanation": "아리사는 그 한 문장의 거짓말이 없으면 예약, 빌린 악기, 몇 달의 연습이 한꺼번에 무너진다는 것을 이해한다. 그 직후 지휘자 티다가 거짓말을 아치의 '쐐기돌'이라 부르므로, 이 비유는 계획 전체를 지탱하는 핵심 요소를 뜻하며 D가 정답이다. A는 공연과 관련이 없다. B는 거짓말의 중요성을 오히려 축소하고, C는 아리사의 불편한 마음을 근거로 했지만 비유의 의미와는 다르다.",
+    "judgeNotes": [
+     "Fable 추정 난이도 easy",
+     "difficulty_too_easy"
+    ],
+    "reason": "too_easy"
+   }
+  },
+  {
+   "candidateId": "lit40-medium-07-091",
+   "route": "ai_passage",
+   "skill": "text_structure_purpose",
+   "difficulty": "medium",
+   "questionType": "tone_shift",
+   "genre": "novel_excerpt",
+   "targetLetter": "B",
+   "words": {
+    "min": 60,
+    "max": 220
+   },
+   "recipeId": null,
+   "spec": {
+    "candidateId": "lit40-medium-07-091",
+    "batchId": "lit40-medium-07",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "medium",
+    "questionType": "tone_shift",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 90,
+     "genre": "novel_excerpt",
+     "pov": "first",
+     "styleEra": "early_20c",
+     "names": [
+      "Bao",
+      "Somchai"
+     ],
+     "nameCultures": [
+      "southeast_asian",
+      "southeast_asian"
+     ],
+     "locale": "Manila",
+     "setting": "an old cinema projection booth",
+     "relationship": "a nurse and her night patient",
+     "conflict": "over a decision made without asking",
+     "openingStyle": "숫자·목록·규칙을 말하며 시작",
+     "topicSeed": "an old cinema projection booth in Manila; a nurse and her night patient over a decision made without asking"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "promptBlock": "소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): an old cinema projection booth in Manila; a nurse and her night patient over a decision made without asking\n인물 이름: Bao, Somchai 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 숫자·목록·규칙을 말하며 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 B 에 둔다. correct_letter 는 B 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 B 로 정한 뒤 나머지 선택지를 채운다.",
+   "previous": {
+    "passage": "Four reels, two projectors, one cot pushed against the wall: that was the whole of the booth above the old cinema in Manila where Somchai had asked to spend his nights. I, Bao, was his nurse, and for a week our evenings were nearly merry. He taught me to thread film by lamplight, laughed when I tangled it, and narrated the silent pictures below in a dozen ridiculous voices. Then, on the eighth night, I mentioned that the doctor and I had arranged his transfer to the hospital ward, beginning tomorrow. He stopped threading. He did not shout. He only asked, very politely, whether anyone had thought to ask him, and turned the lamp so that his face fell into shadow.",
+    "question": "Which choice best describes how the tone of the text shifts?",
+    "options": [
+     "From grim duty to cheerful relief once the nurse learns Somchai will recover",
+     "From playful warmth to wounded restraint after the nurse reveals the transfer",
+     "From anxious suspicion to open anger once Somchai is moved to another ward",
+     "From stiff politeness to easy friendship as Somchai teaches the nurse his craft"
+    ],
+    "correct_letter": "B",
+    "explanation": "처음 일주일 동안 두 사람은 필름을 감으며 웃고 우스꽝스러운 목소리로 무성영화를 해설하는 즐거운 시간을 보낸다. 그러나 간호사가 묻지도 않고 정한 이송 결정을 알리자 솜차이는 소리치지 않고 정중하게 질문한 뒤 얼굴을 그림자 속으로 돌린다. 따라서 장난스러운 따뜻함에서 상처 입은 절제로 바뀌는 B가 정답이다. C는 그럴듯하지만 솜차이는 공공연히 화를 내지 않는다. D는 변화의 방향이 반대다.",
+    "judgeNotes": [
+     "Fable 추정 난이도 easy",
+     "difficulty_too_easy"
+    ],
+    "reason": "too_easy"
+   }
+  }
+ ],
+ "instructions": "당신은 디지털 SAT Reading & Writing 문학 지문 문항 출제 위원이다. 아래 8개 후보 각각에 대해 문항 1개를 만들어 JSON 한 파일로 저장한다.\n작업: 재작성(1회) · 청크 rewrite-016\n규칙:\n1. 지문은 전부 새로 쓴 창작이다. 실제 작품의 문장·플롯·고유한 인물 설정을 쓰지 말고, 실존 작가·작품 이름이나 'From … by …' 같은 출처 머리글을 붙이지 않는다(발췌 지문 작업은 제공된 발췌를 한 글자도 바꾸지 않는다).\n2. 지문·질문·선택지는 영어만 쓴다. 해설(explanation)만 한국어 3~5문장이며, 글자 참조는 선택지 글자(A~D)로만 한다.\n3. 선택지는 정확히 4개, 정답은 1개이고 정답 위치는 후보별 targetLetter 와 같아야 한다(어기면 코드가 선택지를 재배치하거나 탈락시킨다).\n4. 선택지 길이·문체를 비슷하게 맞춘다. 정답이 가장 길거나 구체적이면 탈락한다. 오답 3개는 서로 다른 그럴듯한 오개념에서 나오게 하고 지문 표현을 일부 활용한다.\n5. 정답이 지문 마지막 문장을 거의 그대로 바꿔 말한 것이면 탈락한다. 근거를 서로 떨어진 둘 이상의 문장에 둔다.\n6. 후보별 names 에 있는 이름만 인물 이름으로 쓴다. 지정되지 않은 이름·'Tobias'·'Odalys'·'Wren' 은 쓰지 않는다. 후보별 openingStyle 을 따르고 첫 단어를 The·You·It·There 로 시작하지 않는다.\n7. 지문 단어 수는 후보별 words.min~words.max 안이어야 한다(코드가 센다). 시는 줄바꿈을 \\n 으로 유지한다.\n8. XML 태그·마크다운·내부 메모·플레이스홀더·'As an AI' 류 문장을 출력에 넣지 않는다. 밑줄 표시는 앱 규격대로 두 밑줄 기호 __문장__ 만 쓴다. 출처·작가를 지어내지 않는다.\n9. 선언: 모든 항목에 declaration 3개(original, noRealWorkQuoted, noCopyrightedSource)를 true 로 쓴다. 그럴 수 없는 항목은 만들지 말고 candidateId 만 빼라(탈락 처리된다).\n지문과 문항을 함께 새로 쓴다.\n출력: Write 도구로 정확히 이 경로에 JSON 한 파일을 쓴다 → /Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rewrite-016.result.json\n출력 JSON 스키마(예시 구조): {\"chunkId\":\"작업 파일의 chunkId 를 그대로\",\"model\":\"당신의 모델 이름(예: opus)\",\"items\":[{\"candidateId\":\"후보의 candidateId 를 그대로\",\"passage\":\"영어 지문(문항의 질문은 넣지 않는다)\",\"question\":\"영어 질문 한 문장\",\"options\":[\"선택지 A\",\"선택지 B\",\"선택지 C\",\"선택지 D\"],\"correct_letter\":\"A|B|C|D (targetLetter 와 같게)\",\"explanation\":\"한국어 해설 3~5문장\",\"tone\":[\"지문 어조 영어 단어 1~3개\"],\"devices\":[\"쓰인 문학 장치 영어 단어\"],\"declaration\":{\"original\":true,\"noRealWorkQuoted\":true,\"noCopyrightedSource\":true}}]}\n허용 값: correct_letter ∈ {A,B,C,D}, options 길이 4, declaration 3개 모두 true. 후보의 candidateId 를 바꾸지 않는다. 항목 순서는 후보 순서를 따른다.\n금지: 결과 파일 외의 파일 생성·수정, 다른 명령 실행, 후보 임의 추가·삭제, 이 작업 파일 수정. 끝나면 'done <항목 수>' 한 줄만 답한다.\n\n## 후보\n### lit40-medium-06-084 — skill text_structure_purpose · 유형 tone_shift · 난이도 medium · 장르 poetry · targetLetter A\n유형 지시: 글 중간에서 어조가 바뀌는 지점과 의미를 묻는다.\n난이도 지시: medium: 단서를 두 군데 이상 연결해야 하고 오답 중 하나 이상이 그럴듯하다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a lighthouse station in Lyon; a mother and her son leaving for college when a rumor reaches the wrong person\n인물 이름: Talon, Camille 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 숫자·목록·규칙을 말하며 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 A 에 둔다. correct_letter 는 A 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 A 로 정한 뒤 나머지 선택지를 채운다.\n[이전 시도(난이도가 쉽다고 판정됨)]\n지문: Four rules for the lighthouse at Lyon's river bend:\nwipe the lens at dusk, log the barges,\nnever leave the lamp alone,\nand do not listen to the quay.\n\nCamille kept them all for Talon's sake,\nand Talon kept them, mostly, for hers.\nBut someone on the quay had said\nhe would not come home from college,\nand the baker said it to her twice.\n\nTonight she wipes the lens too hard.\nThen she finds his note beneath the logbook,\nfolded small in his crooked hand:\nleave the lamp on for me in May.\n\nShe laughs once, alone in the glass room,\nand lets the beam swing wide across the water.\n질문: Which choice best describes the shift in tone in the poem?\n선택지: It moves from anxious strictness to relieved warmth when Camille finds her son's note. | It moves from joyful celebration to grief when Camille hears the rumor about Talon. | It moves from detached observation to anger directed at the baker on the quay. | It moves from playful mockery of the rules to solemn respect for the lighthouse.\n정답: A\n판정 메모: Fable 추정 난이도 easy / difficulty_too_easy\n→ 같은 장면·인물·정답 위치를 유지하되 근거를 더 흩어 놓고 오답을 더 그럴듯하게 고쳐 어렵게 다시 쓴다.\n### lit40-medium-07-012 — skill words_in_context · 유형 figurative_language · 난이도 medium · 장르 novel_excerpt · targetLetter B\n유형 지시: 비유 표현이 문맥에서 전달하는 의미를 묻는다. 질문은 'As used in the text, the phrase “…” most nearly suggests …' 형식이고 인용한 구절이 지문에 있어야 하며, 지문 본문에는 따옴표(\" “ ”)를 쓰지 않는다(대사는 따옴표 없이 서술).\n난이도 지시: medium: 단서를 두 군데 이상 연결해야 하고 오답 중 하나 이상이 그럴듯하다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a bus depot in Beirut; a violin student and an exacting teacher over a witness account that differs\n인물 이름: Layla, Sigrid 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 의문문으로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 B 에 둔다. correct_letter 는 B 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 B 로 정한 뒤 나머지 선택지를 채운다.\n[이전 시도(난이도가 쉽다고 판정됨)]\n지문: Did anyone else see the case fall? Layla asked the depot clerk in Beirut, though she already knew the answer. Her violin had slipped from the overhead rack when the bus braked, and Sigrid, her teacher, insisted that Layla had left the case unlatched. Layla remembered fastening both clasps. The driver said a passenger had bumped it; a woman by the window said no one had touched it at all. Each account was confident, and each was different, so that the truth seemed to splinter into pieces too small to hold. Sigrid examined the cracked bridge with her usual severity, then said only that bridges could be replaced and that Layla would practice on the spare instrument until Friday. Outside, buses idled in their bays, exhaust drifting over the ticket windows.\n질문: As used in the text, the phrase “splinter into pieces too small to hold” most nearly suggests that\n선택지: the violin was so badly damaged that it could never be repaired | the conflicting accounts broke the event into fragments no one could join | Layla was too upset to recall what she had done with the case's clasps | the witnesses were careless people whose statements deserved no attention\n정답: B\n판정 메모: Fable 추정 난이도 easy / difficulty_too_easy\n→ 같은 장면·인물·정답 위치를 유지하되 근거를 더 흩어 놓고 오답을 더 그럴듯하게 고쳐 어렵게 다시 쓴다.\n### lit40-medium-07-014 — skill words_in_context · 유형 figurative_language · 난이도 medium · 장르 personal_essay · targetLetter D\n유형 지시: 비유 표현이 문맥에서 전달하는 의미를 묻는다. 질문은 'As used in the text, the phrase “…” most nearly suggests …' 형식이고 인용한 구절이 지문에 있어야 하며, 지문 본문에는 따옴표(\" “ ”)를 쓰지 않는다(대사는 따옴표 없이 서술).\n난이도 지시: medium: 단서를 두 군데 이상 연결해야 하고 오답 중 하나 이상이 그럴듯하다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a bakery before opening in Albuquerque; old rivals in a chess club about what to tell a younger sibling\n인물 이름: Kaya, Dainius 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 짧은 단언문으로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 D 에 둔다. correct_letter 는 D 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 D 로 정한 뒤 나머지 선택지를 채운다.\n[이전 시도(난이도가 쉽다고 판정됨)]\n지문: Chess rivals make poor confidants. I learned this at four in the morning in my aunt's bakery in Albuquerque, where Dainius and I had met to argue, as usual, though not about openings. My younger brother had asked each of us, separately, whether he should quit the club after losing every game of the season. Dainius wanted to tell him the truth: that he played too fast. I wanted to tell him he would improve. Between the cooling racks we circled the question like two kings in an endgame, each step careful, neither willing to come close enough to be checked. By the time the first tray of conchas came out, we had agreed on nothing except that my brother deserved one answer, not two. Kaya, my aunt, unlocked the front door and flipped the sign.\n질문: As used in the text, the phrase “circled the question like two kings in an endgame” most nearly suggests that the narrator and Dainius\n선택지: played a slow game of chess while waiting for the bakery to open | competed fiercely to prove who understood the brother better | paced the bakery restlessly because they were tired and anxious | approached the problem warily, each avoiding an exposed position\n정답: D\n판정 메모: Fable 추정 난이도 easy / difficulty_too_easy\n→ 같은 장면·인물·정답 위치를 유지하되 근거를 더 흩어 놓고 오답을 더 그럴듯하게 고쳐 어렵게 다시 쓴다.\n### lit40-medium-07-015 — skill words_in_context · 유형 figurative_language · 난이도 medium · 장르 memoir · targetLetter A\n유형 지시: 비유 표현이 문맥에서 전달하는 의미를 묻는다. 질문은 'As used in the text, the phrase “…” most nearly suggests …' 형식이고 인용한 구절이 지문에 있어야 하며, 지문 본문에는 따옴표(\" “ ”)를 쓰지 않는다(대사는 따옴표 없이 서술).\n난이도 지시: medium: 단서를 두 군데 이상 연결해야 하고 오답 중 하나 이상이 그럴듯하다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a mountain bus stop in Marseille; a teacher and a student who will not speak about the proper way to say goodbye\n인물 이름: Genevieve, Solange 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 구체적인 사물이나 동작으로 시작(관사 The 로 시작하지 말 것). 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 A 에 둔다. correct_letter 는 A 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 A 로 정한 뒤 나머지 선택지를 채운다.\n[이전 시도(난이도가 쉽다고 판정됨)]\n지문: A folded bus ticket was all Solange ever left me. I had been her teacher for two years in the hills above Marseille, and in that time she had not said a word in class, though her essays ran long and fierce in pencil. On her last day before her family moved north, we waited together at the mountain bus stop, I with my briefcase, she with a backpack so full it seemed to lean on her. I had prepared a small speech about the proper way to say goodbye. I never gave it. When the bus came, she pressed the ticket into my hand, and on its back she had written a single line of thanks, the letters pressed so hard they had nearly torn through, a whole conversation squeezed into the width of a thumb. Genevieve, my colleague, later framed it for me. That spring, the broom on the hillside bloomed early and yellow.\n질문: As used in the text, the phrase “a whole conversation squeezed into the width of a thumb” most nearly suggests that\n선택지: the brief note carried all that Solange had never said aloud | Solange's handwriting was too small for the teacher to read | Solange regretted not having had more time to talk at the stop | the teacher squeezed in a hurried final lesson before the bus\n정답: A\n판정 메모: Fable 추정 난이도 easy / difficulty_too_easy\n→ 같은 장면·인물·정답 위치를 유지하되 근거를 더 흩어 놓고 오답을 더 그럴듯하게 고쳐 어렵게 다시 쓴다.\n### lit40-medium-07-070 — skill central_ideas_details · 유형 narrator_attitude · 난이도 medium · 장르 personal_essay · targetLetter B\n유형 지시: 화자·서술자가 대상에 대해 취하는 태도를 묻는다.\n난이도 지시: medium: 단서를 두 군데 이상 연결해야 하고 오답 중 하나 이상이 그럴듯하다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a train-station cafe in Vienna; a young apprentice and a master carpenter after a harvest, voyage or season that went badly\n인물 이름: Konrad, Camryn 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 장소 이름으로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 B 에 둔다. correct_letter 는 B 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 B 로 정한 뒤 나머지 선택지를 채운다.\n[이전 시도(난이도가 쉽다고 판정됨)]\n지문: Vienna's Westbahnhof cafe was where Konrad took me after the worst season of my apprenticeship, the autumn three of our staircases came back warped from a client's damp villa. I was twenty-two then, Camryn the American who measured twice and still cut wrong, and I expected a lecture. Instead he ordered two coffees and spent an hour describing his own first ruined commission, a cabinet that split in its first winter. I have since heard people praise mentors who never let you fail, and I find I distrust them a little. Konrad let me fail, then sat beside me among the departing travelers while it hurt. He did not rebuild the staircases for me; he only made sure I knew I could rebuild them. Outside, a night train to Munich was announced in three languages.\n질문: Which choice best describes the narrator's attitude toward Konrad's way of handling the failed season?\n선택지: Mild embarrassment that Konrad shared such a personal story in public. | Grateful approval of a mentor who allowed failure and then offered company. | Quiet frustration that Konrad refused to repair the warped staircases himself. | Skeptical distance from the idea that a mentor should ever intervene.\n정답: B\n판정 메모: Fable 추정 난이도 easy / difficulty_too_easy\n→ 같은 장면·인물·정답 위치를 유지하되 근거를 더 흩어 놓고 오답을 더 그럴듯하게 고쳐 어렵게 다시 쓴다.\n### lit40-medium-07-071 — skill central_ideas_details · 유형 narrator_attitude · 난이도 medium · 장르 memoir · targetLetter C\n유형 지시: 화자·서술자가 대상에 대해 취하는 태도를 묻는다.\n난이도 지시: medium: 단서를 두 군데 이상 연결해야 하고 오답 중 하나 이상이 그럴듯하다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a stone bridge in Rotterdam; an interpreter and her client while learning to let go of a habit\n인물 이름: Marit, Soren 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 감각 묘사(소리·냄새·촉감)로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 C 에 둔다. correct_letter 는 C 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 C 로 정한 뒤 나머지 선택지를 채운다.\n[이전 시도(난이도가 쉽다고 판정됨)]\n지문: Wet iron and diesel rose from the river the morning Soren asked me to stop translating for him. I had interpreted for him for six years, at every meeting with Dutch buyers, and out of habit I still leaned toward his ear whenever anyone spoke. We were crossing the old stone bridge to the harbor office in Rotterdam when he said, in careful, slow Dutch, that he wanted to make his own mistakes now. I felt something close to grief, which embarrassed me. I, Marit, had built a version of myself around being needed in two languages at once. In the meeting I kept my hands folded and bit back three corrections. Looking back, I am fond of that woman and a little impatient with her: she mistook usefulness for closeness. A tugboat pushed a barge of gravel under the arch as we left.\n질문: Which choice best describes the narrator's attitude toward her past reaction to Soren's request?\n선택지: Bitter regret that she ever agreed to stop interpreting for him. | Unqualified pride in how gracefully she accepted the sudden change. | Affectionate but critical understanding of her former dependence. | Lasting confusion about why Soren wanted to speak Dutch himself.\n정답: C\n판정 메모: Fable 추정 난이도 easy / difficulty_too_easy\n→ 같은 장면·인물·정답 위치를 유지하되 근거를 더 흩어 놓고 오답을 더 그럴듯하게 고쳐 어렵게 다시 쓴다.\n### lit40-medium-07-083 — skill words_in_context · 유형 figurative_language · 난이도 medium · 장르 personal_essay · targetLetter D\n유형 지시: 비유 표현이 문맥에서 전달하는 의미를 묻는다. 질문은 'As used in the text, the phrase “…” most nearly suggests …' 형식이고 인용한 구절이 지문에 있어야 하며, 지문 본문에는 따옴표(\" “ ”)를 쓰지 않는다(대사는 따옴표 없이 서술).\n난이도 지시: medium: 단서를 두 군데 이상 연결해야 하고 오답 중 하나 이상이 그럴듯하다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): a bus depot in Surabaya; a conductor and the youngest violinist over a plan that depends on a lie\n인물 이름: Thida, Arisa 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 감각 묘사(소리·냄새·촉감)로 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 D 에 둔다. correct_letter 는 D 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 D 로 정한 뒤 나머지 선택지를 채운다.\n[이전 시도(난이도가 쉽다고 판정됨)]\n지문: Diesel and frying shallots hung over the bus depot in Surabaya, where the youth orchestra waited for a coach that was already two hours late. Thida, the conductor, gathered the players under a tin awning and explained the plan: if anyone at the festival gate asked, they had registered on time. Arisa, the youngest violinist, held her case against her knees. She understood that without that single sentence, the bookings, the borrowed instruments, the months of rehearsal would all come down at once. The lie was the keystone of the whole arch, Thida said quietly, almost as if apologizing to it. Arisa nodded, but when the coach finally wheezed into the lot, she found she could not stop rehearsing the truth instead.\n질문: As used in the text, the phrase “the keystone of the whole arch” most nearly suggests\n선택지: the most impressive part of the orchestra's festival performance. | a small detail that Thida expects festival officials to overlook. | a burden that Arisa alone must carry for all the other players. | the one element the whole plan needs in order to stand.\n정답: D\n판정 메모: Fable 추정 난이도 easy / difficulty_too_easy\n→ 같은 장면·인물·정답 위치를 유지하되 근거를 더 흩어 놓고 오답을 더 그럴듯하게 고쳐 어렵게 다시 쓴다.\n### lit40-medium-07-091 — skill text_structure_purpose · 유형 tone_shift · 난이도 medium · 장르 novel_excerpt · targetLetter B\n유형 지시: 글 중간에서 어조가 바뀌는 지점과 의미를 묻는다.\n난이도 지시: medium: 단서를 두 군데 이상 연결해야 하고 오답 중 하나 이상이 그럴듯하다.\n소재 씨앗(문구를 그대로 쓰지 말고 장면으로 풀 것): an old cinema projection booth in Manila; a nurse and her night patient over a decision made without asking\n인물 이름: Bao, Somchai 만 사용한다(다른 이름·흔한 이름을 지어내지 않는다).\n도입 방식: 숫자·목록·규칙을 말하며 시작. 첫 단어를 'The'·'You'·'It'·'There' 로 시작하지 않는다.\n지문 길이: 60~220단어(코드가 검사해 벗어나면 재요청하거나 탈락시킨다).\n정답 위치: 정답 선택지는 반드시 B 에 둔다. correct_letter 는 B 이고, 해설의 글자 참조도 이에 맞춘다. 정답을 B 로 정한 뒤 나머지 선택지를 채운다.\n[이전 시도(난이도가 쉽다고 판정됨)]\n지문: Four reels, two projectors, one cot pushed against the wall: that was the whole of the booth above the old cinema in Manila where Somchai had asked to spend his nights. I, Bao, was his nurse, and for a week our evenings were nearly merry. He taught me to thread film by lamplight, laughed when I tangled it, and narrated the silent pictures below in a dozen ridiculous voices. Then, on the eighth night, I mentioned that the doctor and I had arranged his transfer to the hospital ward, beginning tomorrow. He stopped threading. He did not shout. He only asked, very politely, whether anyone had thought to ask him, and turned the lamp so that his face fell into shadow.\n질문: Which choice best describes how the tone of the text shifts?\n선택지: From grim duty to cheerful relief once the nurse learns Somchai will recover | From playful warmth to wounded restraint after the nurse reveals the transfer | From anxious suspicion to open anger once Somchai is moved to another ward | From stiff politeness to easy friendship as Somchai teaches the nurse his craft\n정답: B\n판정 메모: Fable 추정 난이도 easy / difficulty_too_easy\n→ 같은 장면·인물·정답 위치를 유지하되 근거를 더 흩어 놓고 오답을 더 그럴듯하게 고쳐 어렵게 다시 쓴다."
+}

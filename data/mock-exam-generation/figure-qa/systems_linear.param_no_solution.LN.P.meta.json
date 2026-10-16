@@ -1,0 +1,45 @@
+{
+ "itemId": "systems_linear.param_no_solution.LN.P",
+ "generatedAt": "2026-10-07T05:02:00.650Z",
+ "codeHash": "37bdde39ce6b8e6ab3b82924b53010658eb091ae89dad08b267e5044e73d99ab",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/coordinate-plane.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/graph-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/systems_linear.param_no_solution.LN.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/pure-fn-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/pure-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "systems_linear.param_no_solution.LN.P.png",
+   "mobileFile": "systems_linear.param_no_solution.LN.P.m375.png",
+   "archetypeId": "pnsg.param_no_solution.LN.P.param_condition",
+   "seed": 11,
+   "signature": "plane",
+   "stimulus": "A teacher graphs one equation of a system on a grid. Consider the line graphed in the $xy$-plane shown. The line shown and the line with equation $kx + 6y = 23$, where $k$ is a constant, form a system with no solution.",
+   "question": "Find the value of the constant $k$.",
+   "options": [
+    "-6",
+    "6",
+    "-5",
+    "1"
+   ],
+   "correctIndex": 0,
+   "answer": "-6",
+   "explanation": "(1) 그래프에 표시된 두 점 (-8, -2) 과 (2, 8) 을 읽는다. (2) 기울기 = (8 - (-2)) ÷ (2 - (-8)) = 1 이다. (3) 해가 없으려면 두 직선이 평행이어야 하므로 기울기가 같다. (4) kx + 6y = 23 의 기울기는 -k/6 이므로 -k/6 = 1 이다. (5) k = -6 이다. 따라서 정답은 -6이다.",
+   "structuralIssues": []
+  }
+ ]
+}

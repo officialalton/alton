@@ -1,0 +1,1832 @@
+{
+  "schemaVersion": 1,
+  "subject": {
+    "apCode": "ap_english_language",
+    "name": "AP English Language and Composition",
+    "family": "english_language",
+    "edition": "ced-2027",
+    "cedVersion": "AP English Language and Composition CED (V.1, (c)2024; 2027 exam)",
+    "examYear": 2027,
+    "sourceUrl": "https://apcentral.collegeboard.org/media/pdf/ap-english-language-and-composition-course-and-exam-description.pdf",
+    "officialTopicCodes": false,
+    "designNotes": "The CED has no numbered topics and no named units: each of nine units (~15 class periods each) is defined by a list of reading and writing skills (codes 1.A-8.C, grouped in 8 skill categories). Topic codes here are ALTON-assigned 'U<unit>.<n>', each grouping one or two official skills from that unit's skill list. Unit titles and topic titles are ALTON labels summarizing each unit's overview and skill focus (in the CED, units 8 and 9 mainly revisit skills). Skill codes in `skills` are official. Unit skill lists are transcribed from the Course at a Glance; topic skills sometimes add skills from the same unit. Topic U9.3 (the three FRQ types) is an ALTON addition to schedule timed-essay practice; it is not an official unit topic. Sub-keywords, ordering, prerequisites and estLessons are ALTON editorial designs. Exam: 45 MC (23-25 reading, 20-22 writing; 60 min, 45%), 3 FRQ (synthesis, rhetorical analysis, argument; 2 h 15 min including a 15-min reading period, 55%). Only MC skill-category weights are published; no per-unit weights."
+  },
+  "skills": [
+    {
+      "code": "1.A",
+      "category": "Rhetorical Situation - Reading",
+      "label": "Identify and describe components of the rhetorical situation: the exigence, audience, writer, purpose, context, and message."
+    },
+    {
+      "code": "1.B",
+      "category": "Rhetorical Situation - Reading",
+      "label": "Explain how an argument demonstrates understanding of an audience's beliefs, values, or needs."
+    },
+    {
+      "code": "2.A",
+      "category": "Rhetorical Situation - Writing",
+      "label": "Write introductions and conclusions appropriate to the purpose and context of the rhetorical situation."
+    },
+    {
+      "code": "2.B",
+      "category": "Rhetorical Situation - Writing",
+      "label": "Demonstrate an understanding of an audience's beliefs, values, or needs."
+    },
+    {
+      "code": "3.A",
+      "category": "Claims and Evidence - Reading",
+      "label": "Identify and explain claims and evidence within an argument."
+    },
+    {
+      "code": "3.B",
+      "category": "Claims and Evidence - Reading",
+      "label": "Identify and describe the overarching thesis of an argument, and any indication it provides of the argument's structure."
+    },
+    {
+      "code": "3.C",
+      "category": "Claims and Evidence - Reading",
+      "label": "Explain ways claims are qualified through modifiers, counterarguments, and alternative perspectives."
+    },
+    {
+      "code": "4.A",
+      "category": "Claims and Evidence - Writing",
+      "label": "Develop a paragraph that includes a claim and evidence supporting the claim."
+    },
+    {
+      "code": "4.B",
+      "category": "Claims and Evidence - Writing",
+      "label": "Write a thesis statement that requires proof or defense and that may preview the structure of the argument."
+    },
+    {
+      "code": "4.C",
+      "category": "Claims and Evidence - Writing",
+      "label": "Qualify a claim using modifiers, counterarguments, or alternative perspectives."
+    },
+    {
+      "code": "5.A",
+      "category": "Reasoning and Organization - Reading",
+      "label": "Describe the line of reasoning and explain whether it supports an argument's overarching thesis."
+    },
+    {
+      "code": "5.B",
+      "category": "Reasoning and Organization - Reading",
+      "label": "Explain how the organization of a text creates unity and coherence and reflects a line of reasoning."
+    },
+    {
+      "code": "5.C",
+      "category": "Reasoning and Organization - Reading",
+      "label": "Recognize and explain the use of methods of development to accomplish a purpose."
+    },
+    {
+      "code": "6.A",
+      "category": "Reasoning and Organization - Writing",
+      "label": "Develop a line of reasoning and commentary that explains it throughout an argument."
+    },
+    {
+      "code": "6.B",
+      "category": "Reasoning and Organization - Writing",
+      "label": "Use transitional elements to guide the reader through the line of reasoning of an argument."
+    },
+    {
+      "code": "6.C",
+      "category": "Reasoning and Organization - Writing",
+      "label": "Use appropriate methods of development to advance an argument."
+    },
+    {
+      "code": "7.A",
+      "category": "Style - Reading",
+      "label": "Explain how word choice, comparisons, and syntax contribute to the specific tone or style of a text."
+    },
+    {
+      "code": "7.B",
+      "category": "Style - Reading",
+      "label": "Explain how writers create, combine, and place independent and dependent clauses to show relationships between and among ideas."
+    },
+    {
+      "code": "7.C",
+      "category": "Style - Reading",
+      "label": "Explain how grammar and mechanics contribute to the clarity and effectiveness of an argument."
+    },
+    {
+      "code": "8.A",
+      "category": "Style - Writing",
+      "label": "Strategically use words, comparisons, and syntax to convey a specific tone or style in an argument."
+    },
+    {
+      "code": "8.B",
+      "category": "Style - Writing",
+      "label": "Write sentences that clearly convey ideas and arguments."
+    },
+    {
+      "code": "8.C",
+      "category": "Style - Writing",
+      "label": "Use established conventions of grammar and mechanics to communicate clearly and effectively."
+    }
+  ],
+  "weights": [
+    {
+      "axis": "skill",
+      "code": "Rhetorical Situation - Reading",
+      "section": "mc",
+      "min": 11,
+      "max": 14,
+      "source": "AP English Language CED, Exam Information: Section I skill-category weighting"
+    },
+    {
+      "axis": "skill",
+      "code": "Rhetorical Situation - Writing",
+      "section": "mc",
+      "min": 11,
+      "max": 14,
+      "source": "AP English Language CED, Exam Information: Section I skill-category weighting"
+    },
+    {
+      "axis": "skill",
+      "code": "Claims and Evidence - Reading",
+      "section": "mc",
+      "min": 13,
+      "max": 16,
+      "source": "AP English Language CED, Exam Information: Section I skill-category weighting"
+    },
+    {
+      "axis": "skill",
+      "code": "Claims and Evidence - Writing",
+      "section": "mc",
+      "min": 11,
+      "max": 14,
+      "source": "AP English Language CED, Exam Information: Section I skill-category weighting"
+    },
+    {
+      "axis": "skill",
+      "code": "Reasoning and Organization - Reading",
+      "section": "mc",
+      "min": 13,
+      "max": 16,
+      "source": "AP English Language CED, Exam Information: Section I skill-category weighting"
+    },
+    {
+      "axis": "skill",
+      "code": "Reasoning and Organization - Writing",
+      "section": "mc",
+      "min": 11,
+      "max": 14,
+      "source": "AP English Language CED, Exam Information: Section I skill-category weighting"
+    },
+    {
+      "axis": "skill",
+      "code": "Style - Reading",
+      "section": "mc",
+      "min": 11,
+      "max": 14,
+      "source": "AP English Language CED, Exam Information: Section I skill-category weighting"
+    },
+    {
+      "axis": "skill",
+      "code": "Style - Writing",
+      "section": "mc",
+      "min": 11,
+      "max": 14,
+      "source": "AP English Language CED, Exam Information: Section I skill-category weighting"
+    }
+  ],
+  "units": [
+    {
+      "code": "1",
+      "title": "Claims and Evidence in Paragraphs",
+      "officialClassPeriods": "~15",
+      "topics": [
+        {
+          "code": "U1.1",
+          "title": "Reading the Rhetorical Situation",
+          "scope": "both",
+          "skills": [
+            "1.A"
+          ],
+          "requires": [],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "U1.1#1",
+              "label": "Writer, audience, purpose, context, message",
+              "kind": "concept",
+              "skills": [
+                "1.A"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "U1.1#2",
+              "label": "Exigence: what prompted the text",
+              "kind": "concept",
+              "skills": [
+                "1.A"
+              ],
+              "requires": [
+                "U1.1#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "U1.1#3",
+              "label": "Summarizing a text versus analyzing its situation",
+              "kind": "misconception",
+              "skills": [
+                "1.A"
+              ],
+              "requires": [
+                "U1.1#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "U1.1#4",
+              "label": "Annotating a passage for situation clues",
+              "kind": "skill",
+              "skills": [
+                "1.A"
+              ],
+              "requires": [
+                "U1.1#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "U1.2",
+          "title": "Spotting Claims and Evidence",
+          "scope": "both",
+          "skills": [
+            "3.A"
+          ],
+          "requires": [
+            "U1.1"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "U1.2#1",
+              "label": "Claim versus statement of fact",
+              "kind": "concept",
+              "skills": [
+                "3.A"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "U1.2#2",
+              "label": "Types of evidence and how they support",
+              "kind": "concept",
+              "skills": [
+                "3.A"
+              ],
+              "requires": [
+                "U1.2#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "U1.2#3",
+              "label": "Evidence is not the same as commentary",
+              "kind": "misconception",
+              "skills": [
+                "3.A"
+              ],
+              "requires": [
+                "U1.2#2"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "U1.2#4",
+              "label": "Marking claims and evidence on the page",
+              "kind": "representation",
+              "skills": [
+                "3.A"
+              ],
+              "requires": [
+                "U1.2#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "U1.3",
+          "title": "Building a Claim-and-Evidence Paragraph",
+          "scope": "both",
+          "skills": [
+            "4.A"
+          ],
+          "requires": [
+            "U1.2"
+          ],
+          "estLessons": 2,
+          "subKeywords": [
+            {
+              "code": "U1.3#1",
+              "label": "Writing a claim that needs defense",
+              "kind": "skill",
+              "skills": [
+                "4.A"
+              ],
+              "requires": [
+                "U1.2#1"
+              ],
+              "estLessons": 0.75
+            },
+            {
+              "code": "U1.3#2",
+              "label": "Selecting and integrating textual evidence",
+              "kind": "skill",
+              "skills": [
+                "4.A"
+              ],
+              "requires": [
+                "U1.3#1",
+                "U1.2#2"
+              ],
+              "estLessons": 0.75
+            },
+            {
+              "code": "U1.3#3",
+              "label": "Paragraph with claim, evidence, and explanation",
+              "kind": "representation",
+              "skills": [
+                "4.A"
+              ],
+              "requires": [
+                "U1.3#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "2",
+      "title": "Audience, Appeals, and Thesis",
+      "officialClassPeriods": "~15",
+      "topics": [
+        {
+          "code": "U2.1",
+          "title": "Audience Beliefs, Values, and Needs",
+          "scope": "both",
+          "skills": [
+            "1.B",
+            "2.B"
+          ],
+          "requires": [
+            "U1.1"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "U2.1#1",
+              "label": "Identifying an audience's values and needs",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "U2.1#2",
+              "label": "How a writer appeals to a specific audience",
+              "kind": "skill",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [
+                "U2.1#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "U2.1#3",
+              "label": "Shaping my own paragraph for a target audience",
+              "kind": "skill",
+              "skills": [
+                "2.B"
+              ],
+              "requires": [
+                "U2.1#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "U2.2",
+          "title": "Claims and Evidence in Longer Arguments",
+          "scope": "both",
+          "skills": [
+            "3.A",
+            "4.A"
+          ],
+          "requires": [
+            "U1.3"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "U2.2#1",
+              "label": "Tracking claims across a whole argument",
+              "kind": "skill",
+              "skills": [
+                "3.A"
+              ],
+              "requires": [
+                "U1.2#2"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "U2.2#2",
+              "label": "Building a bank of evidence on one topic",
+              "kind": "skill",
+              "skills": [
+                "4.A"
+              ],
+              "requires": [
+                "U1.3#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "U2.3",
+          "title": "Reading an Argument's Thesis and Structure",
+          "scope": "both",
+          "skills": [
+            "3.B"
+          ],
+          "requires": [
+            "U2.2"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "U2.3#1",
+              "label": "Locating the overarching thesis",
+              "kind": "skill",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "U2.3#2",
+              "label": "Structure previews in a thesis",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [
+                "U2.3#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "U2.3#3",
+              "label": "Thesis versus topic or fact",
+              "kind": "misconception",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [
+                "U2.3#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "U2.4",
+          "title": "Writing a Defensible Thesis",
+          "scope": "both",
+          "skills": [
+            "4.B"
+          ],
+          "requires": [
+            "U2.3"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "U2.4#1",
+              "label": "A thesis that requires proof",
+              "kind": "concept",
+              "skills": [
+                "4.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "U2.4#2",
+              "label": "Deriving a thesis from patterns in evidence",
+              "kind": "skill",
+              "skills": [
+                "4.B"
+              ],
+              "requires": [
+                "U2.2#2"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "U2.4#3",
+              "label": "Previewing structure in a thesis",
+              "kind": "skill",
+              "skills": [
+                "4.B"
+              ],
+              "requires": [
+                "U2.4#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "3",
+      "title": "Line of Reasoning and Methods of Development",
+      "officialClassPeriods": "~15",
+      "topics": [
+        {
+          "code": "U3.1",
+          "title": "Describing a Line of Reasoning",
+          "scope": "both",
+          "skills": [
+            "5.A",
+            "3.A"
+          ],
+          "requires": [
+            "U2.3"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "U3.1#1",
+              "label": "Following the chain of claims in an argument",
+              "kind": "skill",
+              "skills": [
+                "5.A"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "U3.1#2",
+              "label": "Does the reasoning support the thesis",
+              "kind": "concept",
+              "skills": [
+                "5.A"
+              ],
+              "requires": [
+                "U3.1#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "U3.1#3",
+              "label": "Reasoning gaps between evidence and claim",
+              "kind": "misconception",
+              "skills": [
+                "5.A"
+              ],
+              "requires": [
+                "U3.1#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "U3.2",
+          "title": "Writing Commentary That Builds Reasoning",
+          "scope": "both",
+          "skills": [
+            "6.A",
+            "4.A"
+          ],
+          "requires": [
+            "U3.1",
+            "U1.3"
+          ],
+          "estLessons": 2,
+          "subKeywords": [
+            {
+              "code": "U3.2#1",
+              "label": "Commentary that explains how evidence supports claim",
+              "kind": "skill",
+              "skills": [
+                "6.A"
+              ],
+              "requires": [
+                "U1.3#2"
+              ],
+              "estLessons": 0.75
+            },
+            {
+              "code": "U3.2#2",
+              "label": "Connecting paragraphs into one line of reasoning",
+              "kind": "skill",
+              "skills": [
+                "6.A"
+              ],
+              "requires": [
+                "U3.2#1"
+              ],
+              "estLessons": 0.75
+            },
+            {
+              "code": "U3.2#3",
+              "label": "Restating evidence is not commentary",
+              "kind": "misconception",
+              "skills": [
+                "6.A"
+              ],
+              "requires": [
+                "U3.2#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "U3.3",
+          "title": "Methods of Development in Reading",
+          "scope": "both",
+          "skills": [
+            "5.C"
+          ],
+          "requires": [
+            "U3.1"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "U3.3#1",
+              "label": "Common methods: cause-effect, comparison, definition",
+              "kind": "concept",
+              "skills": [
+                "5.C"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "U3.3#2",
+              "label": "Narration and process as development",
+              "kind": "concept",
+              "skills": [
+                "5.C"
+              ],
+              "requires": [
+                "U3.3#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "U3.3#3",
+              "label": "Explaining why a method fits the purpose",
+              "kind": "skill",
+              "skills": [
+                "5.C"
+              ],
+              "requires": [
+                "U3.3#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "U3.4",
+          "title": "Using Methods of Development in Writing",
+          "scope": "both",
+          "skills": [
+            "6.C"
+          ],
+          "requires": [
+            "U3.3",
+            "U3.2"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "U3.4#1",
+              "label": "Choosing a method to advance a claim",
+              "kind": "skill",
+              "skills": [
+                "6.C"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "U3.4#2",
+              "label": "Blending two methods in one argument",
+              "kind": "skill",
+              "skills": [
+                "6.C"
+              ],
+              "requires": [
+                "U3.4#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "4",
+      "title": "Introductions, Conclusions, and Refined Thesis",
+      "officialClassPeriods": "~15",
+      "topics": [
+        {
+          "code": "U4.1",
+          "title": "Rhetorical Situation in Openings and Closings",
+          "scope": "both",
+          "skills": [
+            "1.A"
+          ],
+          "requires": [
+            "U3.1"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "U4.1#1",
+              "label": "How introductions respond to context and audience",
+              "kind": "concept",
+              "skills": [
+                "1.A"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "U4.1#2",
+              "label": "How conclusions extend or press the argument",
+              "kind": "concept",
+              "skills": [
+                "1.A"
+              ],
+              "requires": [
+                "U4.1#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "U4.2",
+          "title": "Writing Introductions and Conclusions",
+          "scope": "both",
+          "skills": [
+            "2.A"
+          ],
+          "requires": [
+            "U4.1",
+            "U2.4"
+          ],
+          "estLessons": 2,
+          "subKeywords": [
+            {
+              "code": "U4.2#1",
+              "label": "Introductions that set context and lead to a thesis",
+              "kind": "skill",
+              "skills": [
+                "2.A"
+              ],
+              "requires": [],
+              "estLessons": 0.75
+            },
+            {
+              "code": "U4.2#2",
+              "label": "Conclusions that go beyond summary",
+              "kind": "skill",
+              "skills": [
+                "2.A"
+              ],
+              "requires": [
+                "U4.2#1"
+              ],
+              "estLessons": 0.75
+            },
+            {
+              "code": "U4.2#3",
+              "label": "Repeating the thesis word for word as a conclusion",
+              "kind": "misconception",
+              "skills": [
+                "2.A"
+              ],
+              "requires": [
+                "U4.2#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "U4.3",
+          "title": "Sharpening the Thesis",
+          "scope": "both",
+          "skills": [
+            "3.B",
+            "4.B"
+          ],
+          "requires": [
+            "U2.4"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "U4.3#1",
+              "label": "Revising a thesis to carry more nuance",
+              "kind": "skill",
+              "skills": [
+                "4.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "U4.3#2",
+              "label": "Spotting a thesis in dense professional prose",
+              "kind": "skill",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [
+                "U4.3#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "U4.4",
+          "title": "More Methods of Development",
+          "scope": "both",
+          "skills": [
+            "5.C",
+            "6.C"
+          ],
+          "requires": [
+            "U3.4"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "U4.4#1",
+              "label": "Exemplification, analogy, and classification",
+              "kind": "concept",
+              "skills": [
+                "5.C"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "U4.4#2",
+              "label": "Choosing the most effective method for a task",
+              "kind": "skill",
+              "skills": [
+                "6.C"
+              ],
+              "requires": [
+                "U4.4#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "U4.4#3",
+              "label": "Reading a method's effect on the audience",
+              "kind": "skill",
+              "skills": [
+                "5.C"
+              ],
+              "requires": [
+                "U4.4#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "5",
+      "title": "Coherence, Transitions, and Word Choice",
+      "officialClassPeriods": "~15",
+      "topics": [
+        {
+          "code": "U5.1",
+          "title": "Organization, Unity, and Coherence",
+          "scope": "both",
+          "skills": [
+            "5.A",
+            "5.B"
+          ],
+          "requires": [
+            "U3.1"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "U5.1#1",
+              "label": "How structure reflects reasoning",
+              "kind": "concept",
+              "skills": [
+                "5.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "U5.1#2",
+              "label": "Unity within and across paragraphs",
+              "kind": "concept",
+              "skills": [
+                "5.B"
+              ],
+              "requires": [
+                "U5.1#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "U5.1#3",
+              "label": "Chronological order always works best",
+              "kind": "misconception",
+              "skills": [
+                "5.B"
+              ],
+              "requires": [
+                "U5.1#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "U5.2",
+          "title": "Transitions and Guiding the Reader",
+          "scope": "both",
+          "skills": [
+            "6.B"
+          ],
+          "requires": [
+            "U5.1"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "U5.2#1",
+              "label": "Transitional words versus transitional ideas",
+              "kind": "concept",
+              "skills": [
+                "6.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "U5.2#2",
+              "label": "Revising choppy paragraphs with better transitions",
+              "kind": "skill",
+              "skills": [
+                "6.B"
+              ],
+              "requires": [
+                "U5.2#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "U5.3",
+          "title": "Sustained Reasoning in Writing",
+          "scope": "both",
+          "skills": [
+            "6.A"
+          ],
+          "requires": [
+            "U3.2",
+            "U5.2"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "U5.3#1",
+              "label": "Planning a line of reasoning before drafting",
+              "kind": "skill",
+              "skills": [
+                "6.A"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "U5.3#2",
+              "label": "Outline representing claims and commentary",
+              "kind": "representation",
+              "skills": [
+                "6.A"
+              ],
+              "requires": [
+                "U5.3#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "U5.3#3",
+              "label": "Revising for a stronger link to the thesis",
+              "kind": "skill",
+              "skills": [
+                "6.A"
+              ],
+              "requires": [
+                "U5.3#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "U5.4",
+          "title": "How Word Choice, Comparisons, and Syntax Create Tone",
+          "scope": "both",
+          "skills": [
+            "7.A"
+          ],
+          "requires": [
+            "U1.1"
+          ],
+          "estLessons": 2,
+          "subKeywords": [
+            {
+              "code": "U5.4#1",
+              "label": "Diction and connotation effects",
+              "kind": "concept",
+              "skills": [
+                "7.A"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "U5.4#2",
+              "label": "Figurative comparisons (metaphor, simile, analogy)",
+              "kind": "concept",
+              "skills": [
+                "7.A"
+              ],
+              "requires": [
+                "U5.4#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "U5.4#3",
+              "label": "Syntax shaping emphasis and pace",
+              "kind": "concept",
+              "skills": [
+                "7.A"
+              ],
+              "requires": [
+                "U5.4#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "U5.4#4",
+              "label": "Naming a device without explaining its effect",
+              "kind": "misconception",
+              "skills": [
+                "7.A"
+              ],
+              "requires": [
+                "U5.4#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "U5.5",
+          "title": "Using Words and Syntax Strategically",
+          "scope": "both",
+          "skills": [
+            "8.A"
+          ],
+          "requires": [
+            "U5.4"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "U5.5#1",
+              "label": "Choosing words for a target tone",
+              "kind": "skill",
+              "skills": [
+                "8.A"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "U5.5#2",
+              "label": "Varying sentence structure for emphasis",
+              "kind": "skill",
+              "skills": [
+                "8.A"
+              ],
+              "requires": [
+                "U5.5#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "6",
+      "title": "Bias, Limits of Evidence, and Connotation",
+      "officialClassPeriods": "~15",
+      "topics": [
+        {
+          "code": "U6.1",
+          "title": "Evaluating Evidence, Bias, and Limits",
+          "scope": "both",
+          "skills": [
+            "3.A",
+            "4.A"
+          ],
+          "requires": [
+            "U3.2"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "U6.1#1",
+              "label": "Source credibility and perspective",
+              "kind": "concept",
+              "skills": [
+                "3.A"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "U6.1#2",
+              "label": "Evidence that complicates a claim",
+              "kind": "skill",
+              "skills": [
+                "4.A"
+              ],
+              "requires": [
+                "U6.1#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "U6.1#3",
+              "label": "Relevance versus quantity of evidence",
+              "kind": "misconception",
+              "skills": [
+                "4.A"
+              ],
+              "requires": [
+                "U6.1#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "U6.2",
+          "title": "Revising a Thesis for Contradictory Evidence",
+          "scope": "both",
+          "skills": [
+            "3.B",
+            "4.B"
+          ],
+          "requires": [
+            "U6.1",
+            "U4.3"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "U6.2#1",
+              "label": "Adjusting a thesis after new evidence",
+              "kind": "skill",
+              "skills": [
+                "4.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "U6.2#2",
+              "label": "Reading how a writer handles conflicting sources",
+              "kind": "skill",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [
+                "U6.2#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "U6.3",
+          "title": "Connotation and Attitude in Reading",
+          "scope": "both",
+          "skills": [
+            "7.A"
+          ],
+          "requires": [
+            "U5.4"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "U6.3#1",
+              "label": "Connotation signals attitude",
+              "kind": "concept",
+              "skills": [
+                "7.A"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "U6.3#2",
+              "label": "Tracing a tone shift through a passage",
+              "kind": "skill",
+              "skills": [
+                "7.A"
+              ],
+              "requires": [
+                "U6.3#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "U6.4",
+          "title": "Writing with Precise Tone",
+          "scope": "both",
+          "skills": [
+            "8.A"
+          ],
+          "requires": [
+            "U5.5",
+            "U6.3"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "U6.4#1",
+              "label": "Revising word choice for precision",
+              "kind": "skill",
+              "skills": [
+                "8.A"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "U6.4#2",
+              "label": "Matching tone to audience and purpose",
+              "kind": "skill",
+              "skills": [
+                "8.A"
+              ],
+              "requires": [
+                "U6.4#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "7",
+      "title": "Qualifying Claims, Sentences, and Conventions",
+      "officialClassPeriods": "~15",
+      "topics": [
+        {
+          "code": "U7.1",
+          "title": "Qualifying Claims in Reading",
+          "scope": "both",
+          "skills": [
+            "3.C",
+            "1.A"
+          ],
+          "requires": [
+            "U6.2"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "U7.1#1",
+              "label": "Modifiers that limit a claim",
+              "kind": "concept",
+              "skills": [
+                "3.C"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "U7.1#2",
+              "label": "Counterarguments and alternative perspectives",
+              "kind": "concept",
+              "skills": [
+                "3.C"
+              ],
+              "requires": [
+                "U7.1#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "U7.1#3",
+              "label": "Concession versus rebuttal",
+              "kind": "concept",
+              "skills": [
+                "3.C"
+              ],
+              "requires": [
+                "U7.1#2"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "U7.1#4",
+              "label": "Qualifying a claim weakens it",
+              "kind": "misconception",
+              "skills": [
+                "3.C"
+              ],
+              "requires": [
+                "U7.1#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "U7.2",
+          "title": "Qualifying Claims in Writing",
+          "scope": "both",
+          "skills": [
+            "4.C",
+            "2.A"
+          ],
+          "requires": [
+            "U7.1"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "U7.2#1",
+              "label": "Revising absolute claims with modifiers",
+              "kind": "skill",
+              "skills": [
+                "4.C"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "U7.2#2",
+              "label": "Adding a concession-rebuttal move",
+              "kind": "skill",
+              "skills": [
+                "4.C"
+              ],
+              "requires": [
+                "U7.1#3"
+              ],
+              "estLessons": 0.75
+            }
+          ]
+        },
+        {
+          "code": "U7.3",
+          "title": "Clauses and Relationships Between Ideas",
+          "scope": "both",
+          "skills": [
+            "7.B"
+          ],
+          "requires": [
+            "U5.4"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "U7.3#1",
+              "label": "Independent and dependent clauses",
+              "kind": "concept",
+              "skills": [
+                "7.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "U7.3#2",
+              "label": "How subordination shows relationships",
+              "kind": "concept",
+              "skills": [
+                "7.B"
+              ],
+              "requires": [
+                "U7.3#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "U7.4",
+          "title": "Writing Clear Sentences",
+          "scope": "both",
+          "skills": [
+            "8.B"
+          ],
+          "requires": [
+            "U7.3"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "U7.4#1",
+              "label": "Combining sentences to show relationships",
+              "kind": "skill",
+              "skills": [
+                "8.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "U7.4#2",
+              "label": "Cutting wordiness and ambiguity",
+              "kind": "skill",
+              "skills": [
+                "8.B"
+              ],
+              "requires": [
+                "U7.4#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "U7.5",
+          "title": "Grammar, Punctuation, and Design Effects",
+          "scope": "both",
+          "skills": [
+            "7.C",
+            "8.C"
+          ],
+          "requires": [
+            "U7.3"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "U7.5#1",
+              "label": "Punctuation choices shaping meaning",
+              "kind": "concept",
+              "skills": [
+                "7.C"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "U7.5#2",
+              "label": "Standard conventions in my own revision",
+              "kind": "skill",
+              "skills": [
+                "8.C"
+              ],
+              "requires": [
+                "U7.5#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "U7.5#3",
+              "label": "Colons, semicolons, and dashes mixed up",
+              "kind": "misconception",
+              "skills": [
+                "8.C"
+              ],
+              "requires": [
+                "U7.5#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "8",
+      "title": "Review Cycle: Audience and Style",
+      "officialClassPeriods": "~15",
+      "topics": [
+        {
+          "code": "U8.1",
+          "title": "Audience Awareness: Reading and Writing",
+          "scope": "both",
+          "skills": [
+            "1.B",
+            "2.B"
+          ],
+          "requires": [
+            "U2.1"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "U8.1#1",
+              "label": "Evaluating an argument's audience fit",
+              "kind": "skill",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "U8.1#2",
+              "label": "Revising a draft for a different audience",
+              "kind": "skill",
+              "skills": [
+                "2.B"
+              ],
+              "requires": [
+                "U8.1#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "U8.2",
+          "title": "Style Analysis in Reading",
+          "scope": "both",
+          "skills": [
+            "7.A",
+            "7.B"
+          ],
+          "requires": [
+            "U6.3",
+            "U7.3"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "U8.2#1",
+              "label": "Combining diction, syntax, and clauses in one analysis",
+              "kind": "skill",
+              "skills": [
+                "7.A"
+              ],
+              "requires": [],
+              "estLessons": 0.75
+            },
+            {
+              "code": "U8.2#2",
+              "label": "Writing commentary about style effects",
+              "kind": "skill",
+              "skills": [
+                "7.B"
+              ],
+              "requires": [
+                "U8.2#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "U8.3",
+          "title": "Style in My Own Arguments",
+          "scope": "both",
+          "skills": [
+            "8.A",
+            "8.B"
+          ],
+          "requires": [
+            "U8.2",
+            "U7.4"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "U8.3#1",
+              "label": "Drafting a paragraph with deliberate style choices",
+              "kind": "skill",
+              "skills": [
+                "8.A"
+              ],
+              "requires": [],
+              "estLessons": 0.75
+            },
+            {
+              "code": "U8.3#2",
+              "label": "Polishing sentences for rhythm and clarity",
+              "kind": "skill",
+              "skills": [
+                "8.B"
+              ],
+              "requires": [
+                "U8.3#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "9",
+      "title": "Counterarguments and Exam Synthesis",
+      "officialClassPeriods": "~15",
+      "topics": [
+        {
+          "code": "U9.1",
+          "title": "Reading Counterarguments and Alternatives",
+          "scope": "both",
+          "skills": [
+            "3.C"
+          ],
+          "requires": [
+            "U7.1"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "U9.1#1",
+              "label": "Recognizing refutation, rebuttal, and concession",
+              "kind": "concept",
+              "skills": [
+                "3.C"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "U9.1#2",
+              "label": "Judging how a counterargument affects credibility",
+              "kind": "skill",
+              "skills": [
+                "3.C"
+              ],
+              "requires": [
+                "U9.1#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "U9.2",
+          "title": "Writing with Counterarguments",
+          "scope": "both",
+          "skills": [
+            "4.C"
+          ],
+          "requires": [
+            "U9.1",
+            "U7.2"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "U9.2#1",
+              "label": "Placing a counterargument in an essay",
+              "kind": "skill",
+              "skills": [
+                "4.C"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "U9.2#2",
+              "label": "Responding fairly to the strongest opposing view",
+              "kind": "skill",
+              "skills": [
+                "4.C"
+              ],
+              "requires": [
+                "U9.2#1"
+              ],
+              "estLessons": 0.75
+            }
+          ]
+        },
+        {
+          "code": "U9.3",
+          "title": "Timed Essays: Synthesis, Rhetorical Analysis, Argument",
+          "scope": "both",
+          "skills": [
+            "1.A",
+            "3.B",
+            "4.B",
+            "6.A"
+          ],
+          "requires": [
+            "U9.2",
+            "U8.3",
+            "U5.3"
+          ],
+          "estLessons": 3,
+          "subKeywords": [
+            {
+              "code": "U9.3#1",
+              "label": "Synthesis essay: sourcing and integrating multiple texts",
+              "kind": "skill",
+              "skills": [
+                "3.A",
+                "4.A"
+              ],
+              "requires": [
+                "U9.2#1"
+              ],
+              "estLessons": 1.0
+            },
+            {
+              "code": "U9.3#2",
+              "label": "Rhetorical analysis essay: situation to choices to effects",
+              "kind": "skill",
+              "skills": [
+                "1.A",
+                "7.A"
+              ],
+              "requires": [
+                "U8.2#1"
+              ],
+              "estLessons": 1.0
+            },
+            {
+              "code": "U9.3#3",
+              "label": "Argument essay: building a defensible position",
+              "kind": "skill",
+              "skills": [
+                "4.B",
+                "6.A"
+              ],
+              "requires": [
+                "U9.2#1"
+              ],
+              "estLessons": 1.0
+            },
+            {
+              "code": "U9.3#4",
+              "label": "Pacing and planning within forty minutes",
+              "kind": "skill",
+              "skills": [
+                "6.A"
+              ],
+              "requires": [
+                "U9.3#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

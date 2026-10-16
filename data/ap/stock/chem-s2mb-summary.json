@@ -1,0 +1,65 @@
+{
+ "runs": [
+  "chem-s2-m-b"
+ ],
+ "rows": 78,
+ "passed": 38,
+ "rejected": 40,
+ "passRate": 0.487,
+ "singles": {
+  "candidates": 78
+ },
+ "unitsPassed": {
+  "1": 6,
+  "2": 2,
+  "3": 10,
+  "4": 5,
+  "5": 2,
+  "6": 3,
+  "7": 1,
+  "8": 8,
+  "9": 1
+ },
+ "figPassed": {
+  "none": 27,
+  "scene": 11
+ },
+ "figAll": {
+  "none": 63,
+  "scene": 15
+ },
+ "figPassRate": {
+  "none": "27/63",
+  "scene": "11/15"
+ },
+ "renderTypesPassed": {
+  "ap_table": 10,
+  "none": 17,
+  "ap_diagram:chem_particles": 8,
+  "ap_diagram:chem_pes": 3
+ },
+ "archetypesPassed": {
+  "ch_buffer_data_conclusion": 2,
+  "ch_buret_data": 1,
+  "ch_calorimetry_error": 2,
+  "ch_gas_vapor_error": 1,
+  "ch_gibbs_temperature": 1,
+  "ch_ion_conductivity": 2,
+  "ch_le_chatelier": 1,
+  "ch_miscibility": 2,
+  "ch_mixture_mass_percent": 3,
+  "ch_needed_dh": 1,
+  "ch_particle_solution_formula": 3,
+  "ch_particulate_limiting": 2,
+  "ch_pes_subshell": 3,
+  "ch_ph_ranking": 3,
+  "ch_resonance_lengths": 2,
+  "ch_titrant_change": 2,
+  "ch_titration_conclusion": 3,
+  "ch_viscosity_trend": 2,
+  "chs_rate_set_q1": 2
+ },
+ "costUsd": {
+  "chem-s2-m-b": 2.6612
+ }
+}

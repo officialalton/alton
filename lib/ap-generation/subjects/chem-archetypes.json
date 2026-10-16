@@ -1,0 +1,1697 @@
+[
+ {
+  "id": "ch_acid_strength",
+  "topic": "8.6",
+  "skill": "4.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "measured bond lengths and enthalpies (longest and lowest) vs the rule that bond strength falls down a group"
+  ],
+  "misconceptions": [
+   "HCl has a shorter (127 pm) and stronger (about 431 kJ/mol) H\u2013X bond than HI (161 pm, about 299 kJ/mol), so its bond is harder to break.",
+   "HBr has a shorter (141 pm) and stronger (about 366 kJ/mol) H\u2013X bond than HI (161 pm, about 299 kJ/mol), so its bond is harder to break.",
+   "HF has a shorter (92 pm) and stronger (about 567 kJ/mol) H\u2013X bond than HI (161 pm, about 299 kJ/mol), so its bond is harder to break. It is also the most electronegative halogen, which makes the bond strongest rather than weakest."
+  ]
+ },
+ {
+  "id": "ch_acid_strength_particles",
+  "topic": "8.3",
+  "skill": "6.C",
+  "calculator": "allowed",
+  "stimulus": "diagram",
+  "verifiedBy": [
+   "fraction dissociated from the particle counts (exact fraction) vs the rule that a strong acid leaves no HA"
+  ],
+  "misconceptions": [
+   "Treats equal ion numbers as a sign of equilibrium rather than of 1:1 dissociation.",
+   "Mixes up the charge balance, which the ions satisfy on their own, with the need for intact HA.",
+   "Believes any ionic product means an equilibrium with HA still present."
+  ]
+ },
+ {
+  "id": "ch_average_atomic_mass",
+  "topic": "1.2",
+  "skill": "5.D",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "exact fraction weighted sum vs numpy weighted average"
+  ],
+  "misconceptions": [
+   "Reports the mass of the more abundant isotope.",
+   "Takes the simple average of the two isotope masses, ignoring abundance.",
+   "Uses only the contribution of the lighter isotope (its mass times its abundance fraction) and forgets the other isotope."
+  ]
+ },
+ {
+  "id": "ch_balance_combustion",
+  "topic": "4.3",
+  "skill": "5.E",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy linear system with scaling by the denominator vs brute-force search of small integers"
+  ],
+  "misconceptions": [
+   "Doubles the O2 coefficient without checking the hydrogens.",
+   "Uses the number of carbon atoms times two.",
+   "Gives the sum of all coefficients instead of the O2 coefficient."
+  ]
+ },
+ {
+  "id": "ch_beer_lambert",
+  "topic": "3.13",
+  "skill": "5.D",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "least-squares line from numpy polyfit vs normal equations; the recovered concentration matches the generating value within rounding"
+  ],
+  "misconceptions": [
+   "Adds the path length in cm to the concentration found from the calibration line.",
+   "Multiplies by the path length instead of using the slope of the calibration line.",
+   "Averages the concentrations of the four standards."
+  ]
+ },
+ {
+  "id": "ch_beer_procedure",
+  "topic": "3.13",
+  "skill": "2.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "proportional scaling from A = \u03b5bc with sympy vs numeric recomputation of \u03b5 and the new b and c"
+  ],
+  "misconceptions": [
+   "Squares the change factor instead of applying it once.",
+   "Leaves the absorbance unchanged.",
+   "Doubles the absorbance when it should halve."
+  ]
+ },
+ {
+  "id": "ch_bond_enthalpy",
+  "topic": "6.7",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "bond counts from a per-reaction table summed exactly vs a flattened list of every bond"
+  ],
+  "misconceptions": [
+   "Counts each bond once and ignores the coefficients.",
+   "Adds the energies of the bonds broken and formed.",
+   "Subtracts the energy of bonds broken from the energy of bonds formed (reversed sign)."
+  ]
+ },
+ {
+  "id": "ch_bond_polarity",
+  "topic": "2.1",
+  "skill": "4.A",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "difference from a Pauling table vs argmax over the four bonds"
+  ],
+  "misconceptions": [
+   "The electronegativity difference of the S\u2013I bond is only 0.08, smaller than the 1.78 of the most polar bond, so its electrons are shared more evenly.",
+   "The electronegativity difference of the Br\u2013F bond is only 1.02, smaller than the 1.78 of the most polar bond, so its electrons are shared more evenly.",
+   "The electronegativity difference of the Br\u2013Si bond is only 1.06, smaller than the 1.78 of the most polar bond, so its electrons are shared more evenly."
+  ]
+ },
+ {
+  "id": "ch_buffer_choice",
+  "topic": "8.8",
+  "skill": "4.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "argmin of |pKa - target| vs the |log ratio| <= 1 feasibility test"
+  ],
+  "misconceptions": [
+   "This pair has the strongest acid shown (pKa = 3.75), but that is 6.55 units from the target pH of 10.3, so it would resist pH changes poorly.",
+   "Its pKa of 7.54 is 2.76 units from the target pH of 10.3, more than the one unit over which a buffer works well.",
+   "Its pKa of 4.76 is 5.54 units from the target pH of 10.3, more than the one unit over which a buffer works well."
+  ]
+ },
+ {
+  "id": "ch_buffer_data_conclusion",
+  "topic": "8.10",
+  "skill": "6.F",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "Henderson\u2013Hasselbalch pH values vs an exact charge-balance equilibrium solved by bisection; the strong-acid pH from excess hydroxide"
+  ],
+  "misconceptions": [
+   "Assumes equal starting pH means equal resistance to added base.",
+   "Attributes buffering to a strong acid instead of a weak acid and its conjugate base.",
+   "Reads a larger pH change as stronger resistance to change."
+  ]
+ },
+ {
+  "id": "ch_buffer_ph",
+  "topic": "8.9",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "Henderson-Hasselbalch on the post-reaction moles vs bisection on the charge balance of the weak acid and its conjugate base"
+  ],
+  "misconceptions": [
+   "Ignores the added strong reagent and reports the pKa.",
+   "Applies the added moles to the wrong buffer component.",
+   "Inverts the base-to-acid ratio in the Henderson-Hasselbalch equation."
+  ]
+ },
+ {
+  "id": "ch_buret_data",
+  "topic": "4.6",
+  "skill": "2.D",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "exact fraction mean of the two closest delivered volumes vs numpy mean of the same pair; the discordant trial is the one outside the closest pair"
+  ],
+  "misconceptions": [
+   "Averages all three trials, including the trial that is far from the others.",
+   "Uses only the final buret reading of the first trial.",
+   "Averages the three final readings."
+  ]
+ },
+ {
+  "id": "ch_calorimetry",
+  "topic": "6.4",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy solve of q = -n\u0394H vs the generating enthalpy recovered within temperature rounding"
+  ],
+  "misconceptions": [
+   "Reports the heat in kJ without dividing by the moles of salt.",
+   "Uses the mass of the salt in place of the mass of the water.",
+   "Gives the sign of the heat gained by the water instead of the sign of the enthalpy change."
+  ]
+ },
+ {
+  "id": "ch_calorimetry_error",
+  "topic": "6.4",
+  "skill": "2.E",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the enthalpy formula recomputed with each altered recorded value shows which errors lower the magnitude"
+  ],
+  "misconceptions": [
+   "A final temperature read 1.0 \u00b0C too high makes \u0394T larger than the true change, so the calculated heat and the magnitude of \u0394H are too high.",
+   "Recording 110 g of water when only 100 g is present makes the calculated heat q = mc\u0394T larger, so the magnitude of \u0394H is too high.",
+   "Recording 4.50 g when 5.00 g dissolved makes the calculated moles of salt smaller, so the heat per mole, and the magnitude of \u0394H, is too high."
+  ]
+ },
+ {
+  "id": "ch_cell_deltag",
+  "topic": "9.9",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact arithmetic with sympy vs numpy evaluation of -nFE\u00b0"
+  ],
+  "misconceptions": [
+   "Omits the negative sign in \u0394G\u00b0 = -nFE\u00b0.",
+   "Leaves the energy in joules per mole.",
+   "Does not multiply by the number of electrons transferred."
+  ]
+ },
+ {
+  "id": "ch_cell_potential",
+  "topic": "9.9",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy rational subtraction of cathode minus anode vs a table sort that identifies the cathode as the more positive potential"
+  ],
+  "misconceptions": [
+   "Uses the magnitude of the anode's reduction potential as the cell potential.",
+   "Subtracts in the wrong order (anode minus cathode).",
+   "Adds the two reduction potentials."
+  ]
+ },
+ {
+  "id": "ch_chromatography",
+  "topic": "3.9",
+  "skill": "2.D",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "exact fraction vs numpy division"
+  ],
+  "misconceptions": [
+   "Reports the spot distance without dividing by the solvent front.",
+   "Divides the solvent-front distance by the spot distance.",
+   "Uses the distance between two spots instead of the origin distance."
+  ]
+ },
+ {
+  "id": "ch_claim_from_data",
+  "topic": "6.4",
+  "skill": "6.B",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "mean of the three temperature changes (exact) vs the sign of each trial's change"
+  ],
+  "misconceptions": [
+   "Uses trial-to-trial variation rather than the sign of the temperature change.",
+   "Reverses the link between the sign of \u0394T and the direction of energy flow.",
+   "Dismisses consistent data from three trials."
+  ]
+ },
+ {
+  "id": "ch_combined_gas",
+  "topic": "3.4",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "closed-form rearrangement vs bisection on the invariant PV/T"
+  ],
+  "misconceptions": [
+   "Ignores the temperature change.",
+   "Inverts the volume ratio.",
+   "Uses Celsius temperatures instead of kelvins."
+  ]
+ },
+ {
+  "id": "ch_common_ion",
+  "topic": "7.12",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy quadratic for s(s + c) = Ksp vs bisection"
+  ],
+  "misconceptions": [
+   "Divides Ksp by the square of the common-ion concentration.",
+   "Takes the square root of Ksp divided by the common-ion concentration.",
+   "Reports the molar solubility in pure water."
+  ]
+ },
+ {
+  "id": "ch_dilution",
+  "topic": "3.7",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy solve of M1V1 = M2V2 vs exact fraction"
+  ],
+  "misconceptions": [
+   "Multiplies the final concentration by the final volume and treats the product as a volume.",
+   "Divides the stock volume by the concentration ratio the wrong way (uses M1V2/M2).",
+   "Reports the volume of stock instead of the volume of water."
+  ]
+ },
+ {
+  "id": "ch_energy_profile",
+  "topic": "5.6",
+  "skill": "5.D",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "analytic heights from the generating energies vs numeric max and endpoints of the dense curve"
+  ],
+  "misconceptions": [
+   "Reads the activation energy of the reverse reaction.",
+   "Reads the activation energy of the forward reaction.",
+   "Reverses the sign of the enthalpy change."
+  ]
+ },
+ {
+  "id": "ch_entropy_sign",
+  "topic": "9.2",
+  "skill": "4.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sign of the sum of tabulated absolute entropies vs the gas-mole and phase rule"
+  ],
+  "misconceptions": [
+   "Believes entropy depends only on which elements are present.",
+   "Links the sign of the entropy change to the sign of the enthalpy change.",
+   "Gets the entropy-change sign reversed."
+  ]
+ },
+ {
+  "id": "ch_faraday",
+  "topic": "9.11",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy rational evaluation vs numpy evaluation"
+  ],
+  "misconceptions": [
+   "Divides by the molar mass instead of multiplying.",
+   "Uses the time in minutes without converting to seconds.",
+   "Does not divide by the number of electrons per ion."
+  ]
+ },
+ {
+  "id": "ch_first_order_decay",
+  "topic": "5.3",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "closed-form ln[A]t - ln[A]0 = -kt vs RK4 integration of d[A]/dt = -k[A]"
+  ],
+  "misconceptions": [
+   "Uses a growing exponential e^(+kt).",
+   "Treats the reaction as zero order and subtracts kt.",
+   "Uses the second-order integrated rate law."
+  ]
+ },
+ {
+  "id": "ch_formal_charge",
+  "topic": "2.6",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "valence minus nonbonding minus bonds vs electron bookkeeping (lone pair plus half the shared electrons)"
+  ],
+  "misconceptions": [
+   "Subtracts only the bonds and forgets the lone-pair electrons.",
+   "Uses lone pairs instead of lone-pair electrons.",
+   "Counts both electrons of every bond as belonging to the atom."
+  ]
+ },
+ {
+  "id": "ch_formation_enthalpy",
+  "topic": "6.8",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "explicit loop over products minus reactants vs a signed coefficient vector dot product"
+  ],
+  "misconceptions": [
+   "Uses only the enthalpies of formation of the products and ignores the reactants.",
+   "Adds the enthalpies of formation of the reactants and the products.",
+   "Subtracts products from reactants (reversed sign)."
+  ]
+ },
+ {
+  "id": "ch_gas_deviation",
+  "topic": "3.6",
+  "skill": "4.B",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "Z from the van der Waals equation by root finding vs the first-order estimate (b - a/RT)P; both pick the same gas"
+  ],
+  "misconceptions": [
+   "CH4 has a van der Waals attraction constant of a = 2.25 L\u00b2\u00b7atm/mol\u00b2, smaller than the 3.59 of CO2, so it stays closer to ideal behavior.",
+   "Ne has a van der Waals attraction constant of a = 0.211 L\u00b2\u00b7atm/mol\u00b2, smaller than the 3.59 of CO2, so it stays closer to ideal behavior.",
+   "O2 has a van der Waals attraction constant of a = 1.38 L\u00b2\u00b7atm/mol\u00b2, smaller than the 3.59 of CO2, so it stays closer to ideal behavior."
+  ]
+ },
+ {
+  "id": "ch_gas_molar_mass",
+  "topic": "3.4",
+  "skill": "5.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy solve of PM = dRT vs recovery of the generating molar mass"
+  ],
+  "misconceptions": [
+   "Uses the STP molar volume of 22.4 L/mol regardless of the given temperature and pressure.",
+   "Uses the Celsius temperature in place of kelvins.",
+   "Multiplies by the pressure instead of dividing."
+  ]
+ },
+ {
+  "id": "ch_gas_particle_claim",
+  "topic": "3.5",
+  "skill": "6.E",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the ideal gas relation predicts a pressure increase in each scenario (numeric) and the collision explanation is keyed to the changed variable"
+  ],
+  "misconceptions": [
+   "Believes the mass of a particle changes.",
+   "Attributes the pressure change to stronger attractions.",
+   "Believes particles themselves expand."
+  ]
+ },
+ {
+  "id": "ch_gas_vapor_error",
+  "topic": "3.4",
+  "skill": "2.E",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "ratio of the computed molar mass to the true value equals (P - Pw)/P < 1 both symbolically and numerically"
+  ],
+  "misconceptions": [
+   "Believes water vapor has no effect on the measured pressure of the collected gas.",
+   "Gets the direction of the molar mass reversed.",
+   "Assumes the vapor reduces the volume rather than adding to the total pressure."
+  ]
+ },
+ {
+  "id": "ch_gibbs_k",
+  "topic": "9.5",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "closed-form exp(-\u0394G\u00b0/RT) with sympy vs numpy exp"
+  ],
+  "misconceptions": [
+   "Uses the base-ten logarithm in place of the natural logarithm.",
+   "Uses \u0394G\u00b0 as the equilibrium constant.",
+   "Uses kilojoules without converting to joules."
+  ]
+ },
+ {
+  "id": "ch_gibbs_sign",
+  "topic": "9.3",
+  "skill": "6.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sign pattern table vs direct evaluation of the sign of \u0394G at a very low and a very high temperature"
+  ],
+  "misconceptions": [
+   "This pattern requires \u0394H\u00b0 to be positive and \u0394S\u00b0 to be negative, but the reaction has \u0394H\u00b0 = +90 kJ/mol (positive) and \u0394S\u00b0 = +180 J/(mol\u00b7K) (positive).",
+   "This pattern requires \u0394H\u00b0 to be negative and \u0394S\u00b0 to be negative, but the reaction has \u0394H\u00b0 = +90 kJ/mol (positive) and \u0394S\u00b0 = +180 J/(mol\u00b7K) (positive).",
+   "This pattern requires \u0394H\u00b0 to be negative and \u0394S\u00b0 to be positive, but the reaction has \u0394H\u00b0 = +90 kJ/mol (positive) and \u0394S\u00b0 = +180 J/(mol\u00b7K) (positive)."
+  ]
+ },
+ {
+  "id": "ch_gibbs_temperature",
+  "topic": "9.3",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy solution of \u0394H - T\u0394S = 0 vs bisection on \u0394G(T)"
+  ],
+  "misconceptions": [
+   "Converts \u0394S to kJ as well as \u0394H, which makes the answer a factor of 10\u2076 too large.",
+   "Does not convert kilojoules to joules.",
+   "Inverts the ratio, dividing \u0394S by \u0394H instead of \u0394H by \u0394S."
+  ]
+ },
+ {
+  "id": "ch_halflife_order_claim",
+  "topic": "5.3",
+  "skill": "6.B",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "analytic times at which [A] reaches successive halves vs an ODE integration of the rate law with an event at each halving, then a rule on the ratios of successive intervals"
+  ],
+  "misconceptions": [
+   "A second-order reaction would have half-lives that double each time, which is not the pattern in the table.",
+   "A zero-order reaction would have half-lives that halve each time, which is not the pattern in the table.",
+   "Believes unevenly spaced times make the data unusable, when the pattern of intervals is the evidence."
+  ]
+ },
+ {
+  "id": "ch_heating_curve",
+  "topic": "6.5",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "sum of the three heating steps vs the final heat coordinate of the generated curve vertices"
+  ],
+  "misconceptions": [
+   "Uses the specific heat of liquid water for the ice as well as for the liquid.",
+   "Omits the energy needed to melt the ice.",
+   "Adds the three steps correctly but reports the sum in joules as if it were kilojoules."
+  ]
+ },
+ {
+  "id": "ch_hess_law",
+  "topic": "6.9",
+  "skill": "5.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "vector sum of scaled step stoichiometries by exact integers vs least-squares solution of the linear system for the coefficients"
+  ],
+  "misconceptions": [
+   "Adds the three enthalpy changes without reversing or scaling any step.",
+   "Multiplies by the coefficients but forgets to change signs for reversed steps.",
+   "Reverses the wrong step's sign when combining."
+  ]
+ },
+ {
+  "id": "ch_hydrate_error",
+  "topic": "1.3",
+  "skill": "6.G",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "percent water recomputed from the altered recorded masses (exact fractions) vs the same recomputation in floating point compared with the true value"
+  ],
+  "misconceptions": [
+   "Attributes the effect to a changed molar mass instead of the recorded masses.",
+   "Assumes any experimental error raises the calculated value.",
+   "Believes this error does not change the masses used in the calculation."
+  ]
+ },
+ {
+  "id": "ch_ice_table",
+  "topic": "7.7",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy solution of the quadratic vs bisection on the equilibrium expression"
+  ],
+  "misconceptions": [
+   "Writes the expression with [B] instead of [B]\u00b2 (leaves out the square) and solves it exactly.",
+   "Reports the equilibrium concentration of A.",
+   "Applies the small-x approximation even though the change is not negligible compared with the initial concentration."
+  ]
+ },
+ {
+  "id": "ch_ideal_gas",
+  "topic": "3.4",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy solve of PV = nRT vs bisection root find on the residual"
+  ],
+  "misconceptions": [
+   "Uses the Celsius temperature in place of kelvins.",
+   "Multiplies by the volume instead of dividing.",
+   "Uses R = 8.314 with a volume in L and a pressure in atm."
+  ]
+ },
+ {
+  "id": "ch_ie_trend",
+  "topic": "1.7",
+  "skill": "4.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "tabulated ionization energies vs the rule that the highest group in the same period wins (no exception pair present)"
+  ],
+  "misconceptions": [
+   "Al (Z = 13) has 4 fewer protons than Cl (Z = 17) in the same period with a similar number of inner electrons, so its outer electron feels a smaller effective nuclear charge and is removed more easily (578 versus 1251 kJ/mol).",
+   "Na (Z = 11) has 6 fewer protons than Cl (Z = 17) in the same period with a similar number of inner electrons, so its outer electron feels a smaller effective nuclear charge and is removed more easily (496 versus 1251 kJ/mol).",
+   "P (Z = 15) has 2 fewer protons than Cl (Z = 17) in the same period with a similar number of inner electrons, so its outer electron feels a smaller effective nuclear charge and is removed more easily (1012 versus 1251 kJ/mol)."
+  ]
+ },
+ {
+  "id": "ch_imf_boiling",
+  "topic": "3.1",
+  "skill": "6.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "tabulated boiling points vs a force-strength score (H-bond > dipole-dipole > dispersion), with the molar-mass argument checked against the table"
+  ],
+  "misconceptions": [
+   "Confuses kinetic energy, which depends only on temperature, with the strength of the attractions between particles.",
+   "Confuses the covalent bonds inside molecules, which stay intact when a liquid boils, with the intermolecular forces that are overcome.",
+   "NH3 actually has the smaller molar mass (17 g/mol versus 20.2 g/mol for Ne), so molar mass cannot explain its higher boiling point."
+  ]
+ },
+ {
+  "id": "ch_indicator",
+  "topic": "8.5",
+  "skill": "6.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "equivalence pH from the full charge balance (bisection) vs the analytic salt-hydrolysis formula; both fall in one indicator range"
+  ],
+  "misconceptions": [
+   "bromothymol blue changes color between pH 6.0 and 7.6, near pH 7, but the equivalence point is at pH 8.3, outside that range.",
+   "alizarin yellow R changes color between pH 10.1 and 12.0, which does not include the equivalence-point pH of 8.3.",
+   "methyl orange (pH 3.1\u20134.4) has a range that contains the pKa-related value 3.5, but the equivalence point is at pH 8.3."
+  ]
+ },
+ {
+  "id": "ch_ion_conductivity",
+  "topic": "3.8",
+  "skill": "4.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "ion count from a table vs ions listed by splitting the formula"
+  ],
+  "misconceptions": [
+   "CaCl2 releases 3 ions per formula unit, fewer than the 4 released by K3PO4, so its solution has fewer charge carriers.",
+   "C6H12O6 dissolves as neutral molecules and releases no ions, so its solution has far fewer charge carriers than K3PO4.",
+   "KNO3 releases 2 ions per formula unit, fewer than the 4 released by K3PO4, so its solution has fewer charge carriers."
+  ]
+ },
+ {
+  "id": "ch_k_expression",
+  "topic": "7.4",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "sympy product with exponents vs numpy product"
+  ],
+  "misconceptions": [
+   "Multiplies by the coefficients instead of using them as exponents.",
+   "Inverts the expression (reactants over products).",
+   "Omits the exponents from the stoichiometric coefficients."
+  ]
+ },
+ {
+  "id": "ch_k_manipulation",
+  "topic": "7.6",
+  "skill": "5.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact powers K1^a K2^b vs exponentiated sum of logarithms"
+  ],
+  "misconceptions": [
+   "Multiplies each K by the coefficient instead of raising it to that power.",
+   "Multiplies the constants but ignores that a reversed reaction has the reciprocal K.",
+   "Uses the reciprocal of the correct combined constant."
+  ]
+ },
+ {
+  "id": "ch_ka_from_ph",
+  "topic": "8.3",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "algebra Ka = [H+]^2/(c - [H+]) vs forward bisection solve recovering the measured pH"
+  ],
+  "misconceptions": [
+   "Reports the pKa (the negative logarithm of Ka) instead of Ka itself.",
+   "Divides the hydronium concentration by the initial concentration.",
+   "Uses the hydronium concentration as Ka."
+  ]
+ },
+ {
+  "id": "ch_ksp_solubility",
+  "topic": "7.11",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy solution of the Ksp expression vs bisection on (as)^a (bs)^b - Ksp"
+  ],
+  "misconceptions": [
+   "Omits the stoichiometric coefficients when writing the solubility product.",
+   "Reports Ksp itself as the molar solubility.",
+   "Takes the square root of Ksp regardless of the formula."
+  ]
+ },
+ {
+  "id": "ch_lattice_energy",
+  "topic": "2.3",
+  "skill": "4.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact rational q1q2/d ranking vs numpy argmax; sizes from a radius table"
+  ],
+  "misconceptions": [
+   "CaF2 has a charge product of 2 and an ionic separation of 233 pm, so its charge-to-separation ratio (0.0086) is smaller than that of MgO (0.0189).",
+   "NaF has a charge product of 1 and an ionic separation of 235 pm, so its charge-to-separation ratio (0.0043) is smaller than that of MgO (0.0189).",
+   "KBr has a charge product of 1 and an ionic separation of 334 pm, so its charge-to-separation ratio (0.0030) is smaller than that of MgO (0.0189)."
+  ]
+ },
+ {
+  "id": "ch_le_chatelier",
+  "topic": "7.9",
+  "skill": "4.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "numeric Q after the change vs K (direction from the sign of ln Q/K) agrees with the rule from moles of gas"
+  ],
+  "misconceptions": [
+   "Believes that a change in concentration or volume changes the value of K, which depends only on temperature.",
+   "For this disturbance halving the volume doubles both concentrations, so Q = [B]^2/[A]^1 is multiplied by 2^(2 \u2212 1) = 2, so Q is not smaller than K and the system does not shift toward the products.",
+   "For this disturbance halving the volume doubles both concentrations, so Q = [B]^2/[A]^1 is multiplied by 2^(2 \u2212 1) = 2, so Q is not equal to K and the system does not stay at equilibrium."
+  ]
+ },
+ {
+  "id": "ch_le_chatelier_prediction",
+  "topic": "7.10",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact fraction of Q versus K vs a numerically integrated rate-law trajectory started at the new concentrations"
+  ],
+  "misconceptions": [
+   "This answer takes Q to be equal to K and the net reaction to go in neither direction (no net change), but after the change Q = 0.45 and K = 0.225, so Q is greater than K.",
+   "This answer takes Q to be less than K and the net reaction to go toward the products, but after the change Q = 0.45 and K = 0.225, so Q is greater than K.",
+   "The direction is right, but Q is not less than K here: Q = 0.45 and K = 0.225."
+  ]
+ },
+ {
+  "id": "ch_lewis_electron_check",
+  "topic": "2.5",
+  "skill": "4.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "2(bonds + lone pairs) compared with the valence electron count; the diagram is inconsistent by construction"
+  ],
+  "misconceptions": [
+   "Counts only the bonding electrons, forgetting the lone pairs.",
+   "Accepts extra electrons because they are placed on the central atom.",
+   "Assumes the diagram is right without counting its electrons."
+  ]
+ },
+ {
+  "id": "ch_lewis_lone_pairs",
+  "topic": "2.5",
+  "skill": "1.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "(valence electrons - 2 x bonding pairs)/2 vs a tabulated structure with explicit lone pairs"
+  ],
+  "misconceptions": [
+   "Subtracts only one electron per bond instead of two before dividing by 2.",
+   "Divides all the valence electrons by 2 and counts every pair as a lone pair, forgetting that bonds use pairs.",
+   "Counts the lone-pair electrons rather than the lone pairs."
+  ]
+ },
+ {
+  "id": "ch_limiting_reagent",
+  "topic": "4.5",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact fraction extent-of-reaction minimum vs numerical stepping of the reaction extent until one reactant runs out"
+  ],
+  "misconceptions": [
+   "Adds the masses of the two reactants.",
+   "Uses the excess reactant to find the product.",
+   "Forgets the product coefficient from the balanced equation (assumes 1 mol of product per mole of reaction)."
+  ]
+ },
+ {
+  "id": "ch_mass_spec_peaks",
+  "topic": "1.2",
+  "skill": "1.A",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "distinct sums of every isotope pair from itertools vs the formula 2n - 1 for evenly spaced masses"
+  ],
+  "misconceptions": [
+   "Counts every ordered pair of isotopes as a different peak.",
+   "Adds one for the single atom peak.",
+   "Counts the number of isotopes, not the combinations of two atoms."
+  ]
+ },
+ {
+  "id": "ch_mb_curves",
+  "topic": "3.5",
+  "skill": "5.D",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "analytic most probable speed sqrt(2RT/M) vs numerical argmax of the sampled distribution"
+  ],
+  "misconceptions": [
+   "Thinks a heavier gas has a larger average kinetic energy at the same temperature.",
+   "Assigns the peak at the higher speed to the heavier gas.",
+   "Reverses the molar-mass assignment and links speed to kinetic energy."
+  ]
+ },
+ {
+  "id": "ch_mechanism_consistent",
+  "topic": "5.8",
+  "skill": "4.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy substitution of the intermediate from the fast equilibrium vs a hand-built table of expected exponents"
+  ],
+  "misconceptions": [
+   "The slow step of this mechanism leads to rate = k [NO]^2 [O2], which does not match the observed rate = k [O2].",
+   "The slow step of this mechanism leads to rate = k [NO]^2, which does not match the observed rate = k [O2].",
+   "The slow step of this mechanism leads to rate = k [NO] [O2], which does not match the observed rate = k [O2]."
+  ]
+ },
+ {
+  "id": "ch_miscibility",
+  "topic": "3.7",
+  "skill": "4.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "tabulated solubilities vs the polar/nonpolar rule; the polar substance is the unique maximum"
+  ],
+  "misconceptions": [
+   "hexane is nonpolar, so it has only weak dispersion attractions to water and cannot replace the strong hydrogen bonding among water molecules; its solubility is only about 0.001 g per 100 mL.",
+   "cyclohexane is nonpolar, so it has only weak dispersion attractions to water and cannot replace the strong hydrogen bonding among water molecules; its solubility is only about 0.006 g per 100 mL.",
+   "carbon tetrachloride is nonpolar, so it has only weak dispersion attractions to water and cannot replace the strong hydrogen bonding among water molecules; its solubility is only about 0.08 g per 100 mL."
+  ]
+ },
+ {
+  "id": "ch_mixture_mass_percent",
+  "topic": "1.4",
+  "skill": "1.B",
+  "calculator": "allowed",
+  "stimulus": "diagram",
+  "verifiedBy": [
+   "exact fraction of particle counts times molar masses vs numpy mass from moles (particles / N_A)"
+  ],
+  "misconceptions": [
+   "Reports the mass percent of the other gas, CO2, instead of Ne.",
+   "Reports the percent of molecules (number percent) instead of the mass percent.",
+   "Divides the mass of Ne by the mass of CO2 instead of by the total mass of the mixture."
+  ]
+ },
+ {
+  "id": "ch_model_conductivity",
+  "topic": "3.2",
+  "skill": "4.D",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "model prediction (no conduction as a solid, conduction as a liquid) compared with the observed pair; consistent only for the ionic type"
+  ],
+  "misconceptions": [
+   "Rejects conductivity as evidence about the particles.",
+   "Believes fixed ions can conduct.",
+   "Does not compare the model's predictions with the table."
+  ]
+ },
+ {
+  "id": "ch_moles_of_atoms",
+  "topic": "1.1",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "formula mass by a recursive parser vs a flattened-regex parser; exact rational recomputation of the mole count"
+  ],
+  "misconceptions": [
+   "Divides by the atom count instead of multiplying by it.",
+   "Gives moles of formula units, not moles of the named atom (omits the subscript factor).",
+   "Ignores the subscript outside the parentheses when computing the molar mass."
+  ]
+ },
+ {
+  "id": "ch_needed_dh",
+  "topic": "6.4",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "free symbols of the working expression (sympy) vs nonzero numeric sensitivity of the expression to each symbol"
+  ],
+  "misconceptions": [
+   "Leaves out the moles of salt dissolved (from its mass and molar mass) and adds a measurement that the relationship does not use.",
+   "Includes an unneeded measurement and omits quantities the relationship requires.",
+   "Leaves out the temperature change of the solution, which the relationship requires."
+  ]
+ },
+ {
+  "id": "ch_needed_dumas",
+  "topic": "3.4",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "free symbols of the working expression (sympy) vs nonzero numeric sensitivity of the expression to each symbol"
+  ],
+  "misconceptions": [
+   "Leaves out the temperature of the vapor and adds a measurement that the relationship does not use.",
+   "Includes an unneeded measurement and omits quantities the relationship requires.",
+   "Leaves out the volume of the flask, which the relationship requires."
+  ]
+ },
+ {
+  "id": "ch_needed_ka",
+  "topic": "8.3",
+  "skill": "5.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "free symbols of the working expression (sympy) vs nonzero numeric sensitivity of the expression to each symbol"
+  ],
+  "misconceptions": [
+   "Leaves out the pH of the solution (to find the hydronium concentration) and adds a measurement that the relationship does not use.",
+   "Includes an unneeded measurement and omits quantities the relationship requires.",
+   "Leaves out the initial concentration of the acid, which the relationship requires."
+  ]
+ },
+ {
+  "id": "ch_nernst",
+  "topic": "9.10",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "natural-log Nernst equation vs the base-ten form with 0.05916/n"
+  ],
+  "misconceptions": [
+   "Uses the base-ten logarithm with the natural-log prefactor RT/nF.",
+   "Adds the logarithmic term instead of subtracting it.",
+   "Uses the standard potential as the cell potential."
+  ]
+ },
+ {
+  "id": "ch_net_ionic",
+  "topic": "4.2",
+  "skill": "5.E",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "precipitate formula from cross-multiplying charges vs the tabulated formula; charge and atom counts checked"
+  ],
+  "misconceptions": [
+   "Writes a precipitate formula that does not balance the ion charges.",
+   "Includes spectator ions, which do not take part in the net change.",
+   "Leaves the equation unbalanced in charge and atoms."
+  ]
+ },
+ {
+  "id": "ch_order_plot",
+  "topic": "5.3",
+  "skill": "5.D",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "the generating order and rate constant vs least-squares R^2 of the three linearized plots (the best fit recovers the order)"
+  ],
+  "misconceptions": [
+   "Fits the second-order plot, which is visibly curved for these data.",
+   "Fits the zero-order plot, which is visibly curved for these data.",
+   "Gives the right order but doubles the slope (confuses k with a rate-law coefficient)."
+  ]
+ },
+ {
+  "id": "ch_partial_pressure",
+  "topic": "3.4",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact fractions vs numpy normalized moles"
+  ],
+  "misconceptions": [
+   "Assumes each gas contributes an equal share of the total pressure.",
+   "Reports the total pressure.",
+   "Uses the mass fraction instead of the mole fraction."
+  ]
+ },
+ {
+  "id": "ch_particle_phase",
+  "topic": "3.3",
+  "skill": "1.B",
+  "calculator": "allowed",
+  "stimulus": "diagram",
+  "verifiedBy": [
+   "rule table from arrangement/packing to phase vs a packing-fraction threshold classifier"
+  ],
+  "misconceptions": [
+   "Assumes particles that are far apart form a dense, incompressible phase.",
+   "Links a particulate arrangement to the wrong macroscopic behavior.",
+   "Treats particles in contact as a rigid lattice regardless of order."
+  ]
+ },
+ {
+  "id": "ch_particle_solution_formula",
+  "topic": "3.8",
+  "skill": "1.A",
+  "calculator": "allowed",
+  "stimulus": "diagram",
+  "verifiedBy": [
+   "ion ratio compared with each formula vs charge neutrality of the counts shown"
+  ],
+  "misconceptions": [
+   "CaCl2 contains 1 Ca2+ to 2 Cl- per formula unit, not the ions shown in the diagram.",
+   "Na2SO4 contains 2 Na+ to 1 SO42- per formula unit, not the ions shown in the diagram.",
+   "NaCl contains 1 Na+ to 1 Cl- per formula unit, not the ions shown in the diagram."
+  ]
+ },
+ {
+  "id": "ch_particulate_limiting",
+  "topic": "4.5",
+  "skill": "1.A",
+  "calculator": "allowed",
+  "stimulus": "diagram",
+  "verifiedBy": [
+   "exact fraction extent minimum vs step-by-step molecule consumption"
+  ],
+  "misconceptions": [
+   "Uses the number of molecules of the first reactant as the number of product molecules.",
+   "Counts the molecules of the excess reactant that are left over.",
+   "Adds all reactant molecules."
+  ]
+ },
+ {
+  "id": "ch_percent_composition",
+  "topic": "1.3",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "recursive formula parser vs flattened parser; percent from atom-count fraction cross-check"
+  ],
+  "misconceptions": [
+   "Divides the total mass of the other elements by the molar mass.",
+   "Divides by the mass of the named element instead of the compound.",
+   "Uses the atomic mass of one atom and ignores its subscript."
+  ]
+ },
+ {
+  "id": "ch_percent_yield",
+  "topic": "4.5",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact fractions for the theoretical yield vs recovery of the generating percent"
+  ],
+  "misconceptions": [
+   "Omits the product coefficient when finding the theoretical yield.",
+   "Divides the theoretical yield by the actual yield.",
+   "Reports the actual mass as a percentage."
+  ]
+ },
+ {
+  "id": "ch_pes_identify",
+  "topic": "1.6",
+  "skill": "1.A",
+  "calculator": "allowed",
+  "stimulus": "diagram",
+  "verifiedBy": [
+   "electron configuration from a hand-coded subshell filling list vs Madelung (n+l) ordering; total relative electrons equals Z"
+  ],
+  "misconceptions": [
+   "Uses the number of peaks as the atomic number.",
+   "Counts one electron too few.",
+   "Counts one electron too many."
+  ]
+ },
+ {
+  "id": "ch_pes_subshell",
+  "topic": "1.6",
+  "skill": "1.A",
+  "calculator": "allowed",
+  "stimulus": "diagram",
+  "verifiedBy": [
+   "peak labels from the shell-model energy ordering vs the occupied-subshell list in filling order"
+  ],
+  "misconceptions": [
+   "2s is occupied in this atom, but the peak for 2s is number 2 counting from the highest binding energy, not number 5.",
+   "4s is not occupied in this atom, so the spectrum has no peak for it.",
+   "1s is occupied in this atom, but the peak for 1s is number 1 counting from the highest binding energy, not number 5."
+  ]
+ },
+ {
+  "id": "ch_ph_ranking",
+  "topic": "8.7",
+  "skill": "4.A",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "pH of each solution from the exact charge balance vs ordering by Ka; the orders agree"
+  ],
+  "misconceptions": [
+   "HCOOH has the second-largest Ka (1.8 \u00d7 10\u207b\u2074), not the largest (4.5 \u00d7 10\u207b\u2074 for HNO2), so it dissociates less at the same concentration and its solution has a higher pH than that of HNO2.",
+   "HOCl has the smallest Ka (3.0 \u00d7 10\u207b\u2078), so its solution has the highest pH; choosing it reverses the relationship between Ka and pH.",
+   "C6H5COOH has the third-largest Ka (6.3 \u00d7 10\u207b\u2075), not the largest (4.5 \u00d7 10\u207b\u2074 for HNO2), so it dissociates less at the same concentration and its solution has a higher pH than that of HNO2."
+  ]
+ },
+ {
+  "id": "ch_photon_energy",
+  "topic": "3.12",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy rational arithmetic vs float evaluation"
+  ],
+  "misconceptions": [
+   "Computes the energy of a mole of photons.",
+   "Reports the frequency c/\u03bb instead of the energy.",
+   "Omits Planck's constant (c/\u03bb in wrong units)."
+  ]
+ },
+ {
+  "id": "ch_potential_curve",
+  "topic": "2.2",
+  "skill": "5.D",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "analytic Morse minimum position and depth vs numerical argmin of a dense sampled curve"
+  ],
+  "misconceptions": [
+   "Assigns the stronger bond to the wrong molecule: the deeper minimum belongs to X.",
+   "Reverses both readings; bond length is the horizontal position of the minimum and bond energy is its depth below zero.",
+   "Assigns the longer bond to the wrong molecule: the minimum at the larger internuclear distance belongs to X."
+  ]
+ },
+ {
+  "id": "ch_precipitate_claim",
+  "topic": "4.2",
+  "skill": "6.A",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "match of the observation pattern against the solubility rule table vs a step-by-step elimination order"
+  ],
+  "misconceptions": [
+   "Mg2+ would not form a precipitate with chloride ions (NaCl), but the table shows a precipitate.",
+   "K+ would not form a precipitate with chloride ions (NaCl), but the table shows a precipitate.",
+   "Ba2+ would not form a precipitate with chloride ions (NaCl), but the table shows a precipitate."
+  ]
+ },
+ {
+  "id": "ch_procedure_calorimetry",
+  "topic": "6.4",
+  "skill": "2.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the complete step list covers all measured quantities of the working equation; each distractor drops exactly one required step"
+  ],
+  "misconceptions": [
+   "Omits the water mass, which is needed to calculate the heat gained by the water.",
+   "Omits the final temperature.",
+   "Omits the initial temperature, so the temperature change cannot be found."
+  ]
+ },
+ {
+  "id": "ch_procedure_rate",
+  "topic": "5.2",
+  "skill": "2.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the complete step list covers all measured quantities of the working equation; each distractor drops exactly one required step"
+  ],
+  "misconceptions": [
+   "Does not control which concentration changes, so the effect of one reactant cannot be isolated.",
+   "Does not compare the mixtures.",
+   "Does not control the temperature, which also changes the rate."
+  ]
+ },
+ {
+  "id": "ch_procedure_titration",
+  "topic": "4.6",
+  "skill": "2.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "the complete step list covers all measured quantities of the working equation; each distractor drops exactly one required step"
+  ],
+  "misconceptions": [
+   "Omits the mass of the acid, so its molar mass cannot be calculated.",
+   "Omits the conversion of volume to moles.",
+   "Omits the titration to the endpoint, so the moles of acid are unknown."
+  ]
+ },
+ {
+  "id": "ch_q_vs_k",
+  "topic": "7.2",
+  "skill": "6.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "Q computed from the mixture compared with K via ln(Q/K) sign vs the inequality test"
+  ],
+  "misconceptions": [
+   "Believes any nonzero Q means the system is at equilibrium.",
+   "Gets the inequality right but the direction reversed.",
+   "Reverses the comparison of Q and K and the direction accordingly."
+  ]
+ },
+ {
+  "id": "ch_radius_trend",
+  "topic": "1.7",
+  "skill": "6.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "rule from period and group positions vs tabulated radii agree"
+  ],
+  "misconceptions": [
+   "Both the atom and the reason are reversed.",
+   "Treats more protons as making an atom larger.",
+   "Right reason applied to the wrong atom."
+  ]
+ },
+ {
+  "id": "ch_rate_law_initial",
+  "topic": "5.2",
+  "skill": "5.D",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "least-squares fit of ln(rate) on ln[A], ln[B] vs exhaustive search of integer orders reproducing all rates"
+  ],
+  "misconceptions": [
+   "Assumes the rate depends only on [A] (first order in A, zero order in B).",
+   "Assumes the reaction is first order in both A and B without comparing the experiments.",
+   "Swaps the orders of A and B."
+  ]
+ },
+ {
+  "id": "ch_rate_prediction",
+  "topic": "5.2",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "power-law arithmetic exactly vs the exponent-sum of logs"
+  ],
+  "misconceptions": [
+   "Multiplies the concentration factors instead of raising them to the orders.",
+   "Adds the two concentration factors instead of applying the orders.",
+   "Swaps the orders of A and B."
+  ]
+ },
+ {
+  "id": "ch_redox_agent",
+  "topic": "4.9",
+  "skill": "4.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "oxidation-number change signs vs electron bookkeeping (electrons lost equal electrons gained)"
+  ],
+  "misconceptions": [
+   "Chooses the product of the reduction instead of the reactant.",
+   "Chooses the product of the oxidation instead of a reactant that is reduced.",
+   "Chooses the species that is oxidized, which is the reducing agent."
+  ]
+ },
+ {
+  "id": "ch_resonance_lengths",
+  "topic": "2.6",
+  "skill": "4.D",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "equality and betweenness tests on the measured lengths vs the number of distinct lengths a single-double structure predicts"
+  ],
+  "misconceptions": [
+   "Contradicts the table, which shows equal measured lengths.",
+   "Misreads a length between the two reference values as a single bond.",
+   "Ignores that a single structure with one double bond predicts two different bond lengths."
+  ]
+ },
+ {
+  "id": "ch_solid_type_claim",
+  "topic": "3.2",
+  "skill": "6.A",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "rule table for the generating type vs a property-match score that selects the same single type"
+  ],
+  "misconceptions": [
+   "Uses conductivity of the liquid only.",
+   "Ignores the melting point.",
+   "Treats a high melting point as sufficient without checking conductivity."
+  ]
+ },
+ {
+  "id": "ch_species_ratio",
+  "topic": "8.7",
+  "skill": "6.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "ratio from 10^(pH - pKa) with sympy vs the Henderson-Hasselbalch inequality sign"
+  ],
+  "misconceptions": [
+   "Believes pH alone sets a 1:1 ratio.",
+   "Treats the pH - pKa difference as the ratio instead of a power of ten.",
+   "Reverses which species predominates when pH and pKa are compared."
+  ]
+ },
+ {
+  "id": "ch_strong_ph",
+  "topic": "8.2",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy logarithm vs numpy log10 with the pOH route"
+  ],
+  "misconceptions": [
+   "Does not count both hydroxide ions in the formula.",
+   "Subtracts the pH from 7 instead of 14.",
+   "Reports the pOH as if it were the pH."
+  ]
+ },
+ {
+  "id": "ch_successive_ie",
+  "topic": "1.7",
+  "skill": "5.D",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "argmax of consecutive ratios vs first ratio above a threshold; both equal the known group valence count"
+  ],
+  "misconceptions": [
+   "Stops one electron before the jump.",
+   "Counts the electrons needed to complete an octet instead.",
+   "Counts the first core electron removed after the large jump as a valence electron."
+  ]
+ },
+ {
+  "id": "ch_testable_question",
+  "topic": "3.13",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sentence rule: a testable question contains both the manipulated variable and the measured quantity; the distractors contain neither"
+  ],
+  "misconceptions": [
+   "Compares without a measurable variable or a stated meaning of better.",
+   "A question about motivation rather than something an experiment can test.",
+   "A question of opinion that cannot be answered with measurements."
+  ]
+ },
+ {
+  "id": "ch_testable_variables",
+  "topic": "5.1",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "rule: exactly one manipulated variable, a named measured quantity and the controlled conditions; each distractor breaks one of these rules"
+  ],
+  "misconceptions": [
+   "No variable is deliberately changed, so the question cannot test a cause-and-effect relationship.",
+   "The outcome is a subjective impression, not a quantity that can be measured.",
+   "Changes two variables at once, so the effect of each cannot be separated."
+  ]
+ },
+ {
+  "id": "ch_titrant_change",
+  "topic": "4.6",
+  "skill": "2.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "moles of base equal moles of acid solved symbolically (sympy) vs the ratio of the two titrant concentrations applied to the first volume"
+  ],
+  "misconceptions": [
+   "Multiplies the original volume by the ratio of concentrations instead of dividing.",
+   "Assumes the same volume is needed even though the concentration of the base changed.",
+   "Adds the volume of acid to the first titration volume, as if the two volumes were additive."
+  ]
+ },
+ {
+  "id": "ch_titration_conc",
+  "topic": "4.6",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy solve of the mole-balance equation vs direct mole arithmetic"
+  ],
+  "misconceptions": [
+   "Uses a 1:1 mole ratio regardless of the formula.",
+   "Multiplies by the mole ratio instead of dividing.",
+   "Divides by the base volume instead of the acid volume."
+  ]
+ },
+ {
+  "id": "ch_titration_conclusion",
+  "topic": "8.5",
+  "skill": "6.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "initial pH compared with -log c from an exact charge balance vs the equivalence-point pH from salt hydrolysis"
+  ],
+  "misconceptions": [
+   "Believes pH data cannot show acid strength, although comparing the pH with the strong-acid value for the known concentration does.",
+   "Treats an initial pH below 7 as a sign of partial dissociation instead of comparing it with the strong-acid value.",
+   "Attributes a neutral equivalence point to a weak acid, although a weak acid gives a basic equivalence point."
+  ]
+ },
+ {
+  "id": "ch_titration_error",
+  "topic": "4.6",
+  "skill": "6.G",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "ratio of the calculated value to the true value from the changed recorded volume (sympy) vs a numeric recomputation"
+  ],
+  "misconceptions": [
+   "Believes the direction of an error can only be found by comparing with the true value, when it can be traced through the recorded volumes.",
+   "For this error the calculated concentration is too high, not too low: tracing the error through the recorded volumes shows that the ratio of recorded NaOH volume to recorded acid volume becomes larger.",
+   "For this error the calculated concentration is too high, not unaffected: tracing the error through the recorded volumes shows that the ratio of recorded NaOH volume to recorded acid volume becomes larger."
+  ]
+ },
+ {
+  "id": "ch_titration_point",
+  "topic": "8.5",
+  "skill": "5.D",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "generating Ka vs the value read from the numerically computed curve (steepest point gives Veq; pH at Veq/2 gives pKa)"
+  ],
+  "misconceptions": [
+   "Uses the initial pH of the acid solution as the pKa.",
+   "Takes the pH at the point where the base volume is twice the equivalence volume.",
+   "Uses the pH at the equivalence point as the pKa."
+  ]
+ },
+ {
+  "id": "ch_unit_cell_ratio",
+  "topic": "2.3",
+  "skill": "1.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact fractions of each ion per cell reduced to a ratio vs the raw position counts shown as the wrong reading"
+  ],
+  "misconceptions": [
+   "Doubles the number of anions counted in the cell.",
+   "Inverts the ratio of cations to anions.",
+   "Counts every ion position as a whole ion, ignoring that corner, face, and edge ions are shared."
+  ]
+ },
+ {
+  "id": "ch_vapor_pressure_graph",
+  "topic": "3.3",
+  "skill": "4.C",
+  "calculator": "allowed",
+  "stimulus": "graph",
+  "verifiedBy": [
+   "Clausius-Clapeyron values at 320 K for both liquids vs the order of the normal boiling points"
+  ],
+  "misconceptions": [
+   "Believes a higher vapor pressure means stronger attractions.",
+   "Reads the curves in the wrong order.",
+   "Treats a lower vapor pressure as weaker attractions."
+  ]
+ },
+ {
+  "id": "ch_vapor_pressure_justify",
+  "topic": "3.1",
+  "skill": "6.E",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "ranking of the liquids by the computed 25 \u00b0C vapor pressure vs the reverse ranking by boiling point (Trouton + Clausius\u2013Clapeyron)"
+  ],
+  "misconceptions": [
+   "Confuses intermolecular forces with the covalent bonds inside molecules.",
+   "Claims the particles of X move faster, although both liquids are at the same temperature.",
+   "Reverses the link between vapor pressure and the strength of attractions."
+  ]
+ },
+ {
+  "id": "ch_variable_coulomb",
+  "topic": "2.2",
+  "skill": "5.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact rational scaling vs numeric evaluation of the ratio of the two states"
+  ],
+  "misconceptions": [
+   "Divides by the distance factor instead of by its square.",
+   "Ignores the change in the charge.",
+   "Multiplies the force by the distance factor instead of dividing by its square."
+  ]
+ },
+ {
+  "id": "ch_variable_gas",
+  "topic": "3.4",
+  "skill": "5.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact rational scaling vs numeric evaluation of the ratio of the two states"
+  ],
+  "misconceptions": [
+   "Uses the square of the volume factor.",
+   "Uses the square root of the factor.",
+   "Subtracts 1 from the volume factor."
+  ]
+ },
+ {
+  "id": "ch_viscosity_trend",
+  "topic": "3.1",
+  "skill": "4.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "measured viscosities vs the count of -OH groups (ties broken by molecular size); the same liquid wins"
+  ],
+  "misconceptions": [
+   "acetone has 0 \u2013OH groups per molecule, fewer than the 3 of glycerol, so its molecules attract each other less strongly and it flows more easily.",
+   "water has 2 \u2013OH groups per molecule, fewer than the 3 of glycerol, so its molecules attract each other less strongly and it flows more easily.",
+   "methanol has 1 \u2013OH group per molecule, fewer than the 3 of glycerol, so its molecules attract each other less strongly and it flows more easily."
+  ]
+ },
+ {
+  "id": "ch_vsepr_shape",
+  "topic": "2.7",
+  "skill": "4.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "shape table keyed by (domains, lone pairs) vs rule-built geometry from the electron-domain geometry"
+  ],
+  "misconceptions": [
+   "This is the shape of a central atom with 4 bonded atoms and 2 lone pairs, not the 3 bonded atoms and 2 lone pairs of ClF3.",
+   "This is the shape of a central atom with 4 bonded atoms and 1 lone pair, not the 3 bonded atoms and 2 lone pairs of ClF3.",
+   "This is the electron-domain geometry of the 5 domains; it counts the 2 lone pairs, but the molecular geometry describes only where the atoms are."
+  ]
+ },
+ {
+  "id": "ch_weak_acid_ph",
+  "topic": "8.3",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy solution of the quadratic x^2 + Ka x - Ka c = 0 vs bisection on the full charge balance including water"
+  ],
+  "misconceptions": [
+   "Takes the square root of Ka as [H\u207a], leaving out the initial concentration.",
+   "Reports the pOH of the solution.",
+   "Uses the pKa of the acid as the pH of the solution."
+  ]
+ },
+ {
+  "id": "chs_equilibrium_set_q1",
+  "topic": "7.3",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy quadratic for the shifted equilibrium vs bisection; Q computed directly"
+  ],
+  "misconceptions": [
+   "Treats any computed Q as an equilibrium state.",
+   "Correct comparison, reversed direction.",
+   "Reverses the comparison of Q and K."
+  ]
+ },
+ {
+  "id": "chs_equilibrium_set_q2",
+  "topic": "7.3",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy quadratic for the shifted equilibrium vs bisection; Q computed directly"
+  ],
+  "misconceptions": [
+   "Reports B0 + x (the amount of A that reacted) instead of the equilibrium concentration of B.",
+   "Reports the equilibrium concentration of A.",
+   "Uses the initial concentration of B."
+  ]
+ },
+ {
+  "id": "chs_rate_set_q1",
+  "topic": "5.2",
+  "skill": "5.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "log-log least squares vs integer search of orders; k from experiment 1 with those orders"
+  ],
+  "misconceptions": [
+   "A second order dependence on A would change the rate by a factor of 4 when [A] doubles, but the data show a factor of 1.",
+   "A first order dependence on A would change the rate by a factor of 2 when [A] doubles, but the data show a factor of 1.",
+   "Believes three experiments are not enough to find an order, when two experiments that change only [A] are enough."
+  ]
+ },
+ {
+  "id": "chs_rate_set_q2",
+  "topic": "5.2",
+  "skill": "5.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "log-log least squares vs integer search of orders; k from experiment 1 with those orders"
+  ],
+  "misconceptions": [
+   "Uses the rate of experiment 1 as k.",
+   "Divides the rate by only one concentration.",
+   "Uses the concentrations without their orders in the rate law."
+  ]
+ },
+ {
+  "id": "chs_titration_set_q1",
+  "topic": "8.5",
+  "skill": "5.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "generating Ka and the analytic equivalence pH vs values read from the numerically computed curve"
+  ],
+  "misconceptions": [
+   "Uses the initial pH of the acid solution instead of the pH at the half-equivalence point.",
+   "Uses the pH after excess base was added instead of the pH at the half-equivalence point.",
+   "Uses the pH at the equivalence point instead of the pH at the half-equivalence point."
+  ]
+ },
+ {
+  "id": "chs_titration_set_q2",
+  "topic": "8.5",
+  "skill": "5.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "generating Ka and the analytic equivalence pH vs values read from the numerically computed curve"
+  ],
+  "misconceptions": [
+   "Reports 7.00 for the equivalence point of any neutralization.",
+   "Reports the pKa, the pH at the half-equivalence point, instead of the equivalence-point pH.",
+   "Uses the initial pH of the acid."
+  ]
+ }
+]

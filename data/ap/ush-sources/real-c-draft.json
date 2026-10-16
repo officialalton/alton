@@ -1,0 +1,1021 @@
+[
+ {
+  "cellId": "ap_us_history-real_c_emanc",
+  "apSubjectCode": "ap_us_history",
+  "kind": "mc",
+  "calculator": "na",
+  "reserve": false,
+  "wording": "authored_from_real_source",
+  "candidateKey": "ap_us_history-real_c_emanc-k0",
+  "keywordCode": "5.9",
+  "unitCode": "5",
+  "skillPrimary": "2.A",
+  "structure": "shared_stimulus_set",
+  "archetype": "ush_real_real_c_emanc",
+  "reviewState": "sample_unverified",
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficulty": [
+   {
+    "label": "basic_learning"
+   },
+   {
+    "label": "exam_prep"
+   },
+   {
+    "label": "basic_learning"
+   }
+  ],
+  "gateOverride": "ush-real-c-2026-10-15",
+  "run": "ush-real-c",
+  "stockKey": "ush-real-c:ap_us_history-real_c_emanc-k0",
+  "pipeline": "real_source_v1",
+  "validation": "needs_review",
+  "gateVersion": "ush-real-c-2026-10-15",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "selectedForSample": true,
+  "legacyReserve": false,
+  "family": "ap_us_history",
+  "itemFamilyId": "fam:ush-real-c:ap_us_history-real_c_emanc-k0",
+  "canonicalKey": "ush-real-c:ap_us_history-real_c_emanc-k0",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_us_history:5.9",
+  "sharedWith": [],
+  "stockCell": "ap_us_history|5.9|2.A|shared_stimulus_set|na",
+  "history": [
+   {
+    "run": "ush-real-c",
+    "gateVersion": "ush-real-c-2026-10-15",
+    "outcome": "passed",
+    "reasons": null
+   }
+  ],
+  "stimulusOrigin": "real_historical_source",
+  "sourceRegistryIds": [
+   "txt-emancipation-1863"
+  ],
+  "replaces": "US2 u526",
+  "payload": {
+   "archetype": "ush_real_real_c_emanc",
+   "topic": "5.9",
+   "skill": "2.A",
+   "calculator": "na",
+   "set_intro": "Historical source (real document)\n(primary source)\nEmancipation Proclamation (excerpt)\nAbraham Lincoln, President of the United States, 1863 (January 1). U.S. National Archives (transcript page). Reuse: public domain (U.S. government work; published before 1929). excerpted (three segments joined by [...]); whitespace normalized; bracketed editorial marks of the NARA transcript removed. Excerpts from the proclamation Lincoln issued on January 1, 1863; the third segment comes from the list of exempted places that follows the main text.\n\n\"That on the first day of January, in the year of our Lord one thousand eight hundred and sixty-three, all persons held as slaves within any State or designated part of a State, the people whereof shall then be in rebellion against the United States, shall be then, thenceforward, and forever free; and the Executive Government of the United States, including the military and naval authority thereof, will recognize and maintain the freedom of such persons, and will do no act or acts to repress such persons, or any of them, in any efforts they may make for their actual freedom. [...] Now, therefore I, Abraham Lincoln, President of the United States, by virtue of the power in me vested as Commander-in-Chief, of the Army and Navy of the United States in time of actual armed rebellion against the authority and government of the United States, and as a fit and necessary war measure for suppressing said rebellion, [...] and which excepted parts, are for the present, left precisely as if this proclamation were not issued.\"",
+   "ush_set": {
+    "period": 5,
+    "stim_type": "primary_text",
+    "theme": "The Emancipation Proclamation",
+    "title": "The Emancipation Proclamation, January 1, 1863",
+    "sources": [
+     {
+      "id": "A",
+      "kind": "primary_text",
+      "title": "Emancipation Proclamation (excerpt)",
+      "attribution": "Abraham Lincoln, President of the United States, 1863 (January 1). U.S. National Archives (transcript page). Reuse: public domain (U.S. government work; published before 1929). excerpted (three segments joined by [...]); whitespace normalized; bracketed editorial marks of the NARA transcript removed.",
+      "real_data": true,
+      "source_registry_id": "txt-emancipation-1863",
+      "source_sha256": "ce1a5e1f0f305c7a167b752aeb19327f66172ce7cebf4768bf873329ef545c44"
+     }
+    ]
+   },
+   "items": [
+    {
+     "archetype": "ush_real_2A",
+     "topic": "5.9",
+     "skill": "2.A",
+     "stem": "In the excerpt, Lincoln most directly justifies the proclamation as",
+     "options": [
+      {
+       "text": "the enforcement of a constitutional amendment that had already abolished slavery",
+       "why": "No amendment had abolished slavery in January 1863; the Thirteenth Amendment was ratified in December 1865 and the excerpt cites no amendment.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "a ruling by the Supreme Court that slavery could not exist in rebelling states",
+       "why": "The excerpt rests the order on presidential war powers, not on any court ruling, and no such ruling existed.",
+       "value": null,
+       "label": "unsupported_by_source"
+      },
+      {
+       "text": "an exercise of his powers as commander in chief against states in rebellion",
+       "why": "Lincoln cites his power as Commander-in-Chief of the Army and Navy and calls the order 'a fit and necessary war measure for suppressing said rebellion'.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "a request from the legislatures of the Union border states that they be freed from slavery first",
+       "why": "The border states are not mentioned as a source of the order, and slavery was left in place in the exempted areas.",
+       "value": null,
+       "label": "unsupported_by_source"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is \"an exercise of his powers as commander in chief against states in rebellion\". Lincoln cites his power as Commander-in-Chief of the Army and Navy and calls the order 'a fit and necessary war measure for suppressing said rebellion'.\n\"the enforcement of a constitutional amendment that had already abolished slavery\" is incorrect: No amendment had abolished slavery in January 1863; the Thirteenth Amendment was ratified in December 1865 and the excerpt cites no amendment.\n\"a ruling by the Supreme Court that slavery could not exist in rebelling states\" is incorrect: The excerpt rests the order on presidential war powers, not on any court ruling, and no such ruling existed.\n\"a request from the legislatures of the Union border states that they be freed from slavery first\" is incorrect: The border states are not mentioned as a source of the order, and slavery was left in place in the exempted areas.",
+     "est_seconds": 75,
+     "facts": [
+      "The Emancipation Proclamation took effect January 1, 1863, and applied to areas in rebellion.",
+      "The Thirteenth Amendment was ratified in December 1865."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "2.A",
+      "key_evidence_in_source": "'by virtue of the power in me vested as Commander-in-Chief ... as a fit and necessary war measure for suppressing said rebellion'."
+     }
+    },
+    {
+     "archetype": "ush_real_4B",
+     "topic": "5.9",
+     "skill": "4.B",
+     "stem": "The proclamation is best understood in the context of which of the following developments?",
+     "options": [
+      {
+       "text": "A shift in Union war aims toward ending slavery as well as restoring the Union",
+       "why": "By 1863 the war's length and the flight of enslaved people to Union lines pushed the Union to make emancipation a war aim alongside restoring the Union.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "Northern demands to repeal the Fugitive Slave Act and the Compromise of 1850",
+       "why": "Opposition to those laws was not the immediate setting of a wartime order issued under presidential war powers against states in rebellion.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "The Radical Republican plan to readmit the Southern states during Reconstruction",
+       "why": "Reconstruction plans came later; in January 1863 the Confederate states were in rebellion and the war was undecided.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "A decline in Northern support for the war that led Lincoln to seek a negotiated peace",
+       "why": "The proclamation committed the Union to a harder war; Lincoln did not seek a negotiated peace with the Confederacy.",
+       "value": null,
+       "label": "reversal"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is \"A shift in Union war aims toward ending slavery as well as restoring the Union\". By 1863 the war's length and the flight of enslaved people to Union lines pushed the Union to make emancipation a war aim alongside restoring the Union.\n\"Northern demands to repeal the Fugitive Slave Act and the Compromise of 1850\" is incorrect: Opposition to those laws was not the immediate setting of a wartime order issued under presidential war powers against states in rebellion.\n\"The Radical Republican plan to readmit the Southern states during Reconstruction\" is incorrect: Reconstruction plans came later; in January 1863 the Confederate states were in rebellion and the war was undecided.\n\"A decline in Northern support for the war that led Lincoln to seek a negotiated peace\" is incorrect: The proclamation committed the Union to a harder war; Lincoln did not seek a negotiated peace with the Confederacy.",
+     "est_seconds": 75,
+     "facts": [
+      "Enslaved people fleeing to Union lines and Congress's Confiscation Acts preceded the proclamation.",
+      "Lincoln announced the policy in a preliminary proclamation in September 1862."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "4.B",
+      "key_evidence_in_source": "The text applies to 'all persons held as slaves' in areas 'in rebellion' under war powers, a wartime step beyond preserving the Union."
+     }
+    },
+    {
+     "archetype": "ush_real_1A",
+     "topic": "5.8",
+     "skill": "1.A",
+     "stem": "Besides the effects the excerpt describes, the proclamation contributed most directly to which of the following during the Civil War?",
+     "options": [
+      {
+       "text": "The immediate end of slavery in the Union border states",
+       "why": "The border states were left outside the proclamation, and slavery there ended later by state action and the Thirteenth Amendment.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "British and French diplomatic recognition of the Confederacy",
+       "why": "The proclamation made recognition of the Confederacy harder for Britain and France, which did not recognize it.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "A pause in Confederate military operations in the eastern theater of the war",
+       "why": "The proclamation did not halt Confederate offensives; the war continued for more than two years.",
+       "value": null,
+       "label": "unrelated_development"
+      },
+      {
+       "text": "The enlistment of African American men in the Union army and navy",
+       "why": "The full proclamation announced that freed men would be received into armed service, and about 180,000 Black men served in the Union army.",
+       "value": null,
+       "label": "key"
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is \"The enlistment of African American men in the Union army and navy\". The full proclamation announced that freed men would be received into armed service, and about 180,000 Black men served in the Union army.\n\"The immediate end of slavery in the Union border states\" is incorrect: The border states were left outside the proclamation, and slavery there ended later by state action and the Thirteenth Amendment.\n\"British and French diplomatic recognition of the Confederacy\" is incorrect: The proclamation made recognition of the Confederacy harder for Britain and France, which did not recognize it.\n\"A pause in Confederate military operations in the eastern theater of the war\" is incorrect: The proclamation did not halt Confederate offensives; the war continued for more than two years.",
+     "est_seconds": 75,
+     "facts": [
+      "About 180,000 African American men served in the Union army during the war, and thousands more in the navy.",
+      "Britain and France never recognized the Confederacy."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "1.A",
+      "key_evidence_in_source": "The excerpt commits 'the military and naval authority' to 'recognize and maintain the freedom of such persons'."
+     }
+    }
+   ],
+   "excluded_items": []
+  }
+ },
+ {
+  "cellId": "ap_us_history-real_c_monroe",
+  "apSubjectCode": "ap_us_history",
+  "kind": "mc",
+  "calculator": "na",
+  "reserve": false,
+  "wording": "authored_from_real_source",
+  "candidateKey": "ap_us_history-real_c_monroe-k0",
+  "keywordCode": "4.4",
+  "unitCode": "4",
+  "skillPrimary": "2.B",
+  "structure": "shared_stimulus_set",
+  "archetype": "ush_real_real_c_monroe",
+  "reviewState": "sample_unverified",
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficulty": [
+   {
+    "label": "exam_prep"
+   },
+   {
+    "label": "basic_learning"
+   },
+   {
+    "label": "exam_prep"
+   },
+   {
+    "label": "basic_learning"
+   }
+  ],
+  "gateOverride": "ush-real-c-2026-10-15",
+  "run": "ush-real-c",
+  "stockKey": "ush-real-c:ap_us_history-real_c_monroe-k0",
+  "pipeline": "real_source_v1",
+  "validation": "needs_review",
+  "gateVersion": "ush-real-c-2026-10-15",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "selectedForSample": true,
+  "legacyReserve": false,
+  "family": "ap_us_history",
+  "itemFamilyId": "fam:ush-real-c:ap_us_history-real_c_monroe-k0",
+  "canonicalKey": "ush-real-c:ap_us_history-real_c_monroe-k0",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_us_history:4.4",
+  "sharedWith": [],
+  "stockCell": "ap_us_history|4.4|2.B|shared_stimulus_set|na",
+  "history": [
+   {
+    "run": "ush-real-c",
+    "gateVersion": "ush-real-c-2026-10-15",
+    "outcome": "passed",
+    "reasons": null
+   }
+  ],
+  "stimulusOrigin": "real_historical_source",
+  "sourceRegistryIds": [
+   "txt-monroe-1823"
+  ],
+  "replaces": "US2 u408",
+  "payload": {
+   "archetype": "ush_real_real_c_monroe",
+   "topic": "4.4",
+   "skill": "2.B",
+   "calculator": "na",
+   "set_intro": "Historical source (real document)\n(primary source)\nMonroe's Seventh Annual Message to Congress (excerpts on European colonization and intervention)\nJames Monroe, President of the United States, 1823 (December 2). Avalon Project, Yale Law School (transcription). Reuse: public domain (U.S. government work; published before 1929). excerpted (three segments joined by [...]); whitespace normalized; no wording changed. Excerpts from the President's annual message to Congress; the segments appear in the order in which they occur in the message.\n\n\"the occasion has been judged proper for asserting, as a principle in which the rights and interests of the United States are involved, that the American continents, by the free and independent condition which they have assumed and maintain, are henceforth not to be considered as subjects for future colonization by any European powers. [...] In the wars of the European powers in matters relating to themselves we have never taken any part, nor does it comport with our policy to do so. [...] We owe it, therefore, to candor and to the amicable relations existing between the United States and those powers to declare that we should consider any attempt on their part to extend their system to any portion of this hemisphere as dangerous to our peace and safety. With the existing colonies or dependencies of any European power we have not interfered and shall not interfere. But with the Governments who have declared their independence and maintain it, and whose independence we have, on great consideration and on just principles, acknowledged, we could not view any interposition for the purpose of oppressing them, or controlling in any other manner their destiny, by any European power in any other light than as the manifestation of an unfriendly disposition toward the United States.\"",
+   "ush_set": {
+    "period": 4,
+    "stim_type": "primary_text",
+    "theme": "The Monroe Doctrine",
+    "title": "Monroe's Message to Congress, December 1823",
+    "sources": [
+     {
+      "id": "A",
+      "kind": "primary_text",
+      "title": "Monroe's Seventh Annual Message to Congress (excerpts on European colonization and intervention)",
+      "attribution": "James Monroe, President of the United States, 1823 (December 2). Avalon Project, Yale Law School (transcription). Reuse: public domain (U.S. government work; published before 1929). excerpted (three segments joined by [...]); whitespace normalized; no wording changed.",
+      "real_data": true,
+      "source_registry_id": "txt-monroe-1823",
+      "source_sha256": "6226fefdc4255c2bc3ab927a39f64082f01d0f5feef6620b98b79c15b2ba8496"
+     }
+    ]
+   },
+   "items": [
+    {
+     "archetype": "ush_real_2B",
+     "topic": "4.4",
+     "skill": "2.B",
+     "stem": "Monroe's statements in the excerpt were most likely shaped by which of the following concerns?",
+     "options": [
+      {
+       "text": "That Congress would refuse to fund the purchase of Florida from Spain",
+       "why": "The Florida purchase was settled by the Adams-Onis Treaty of 1819 and ratified in 1821, and the excerpt does not mention it.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "That European powers might intervene against the newly independent American governments",
+       "why": "Monroe says the United States could not view any interposition by a European power to oppress the independent governments 'in any other light than as the manifestation of an unfriendly disposition'.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "That Great Britain planned to ally with Russia against the United States in North America",
+       "why": "The excerpt states a policy toward all European powers and mentions no alliance directed against the United States.",
+       "value": null,
+       "label": "unsupported_by_source"
+      },
+      {
+       "text": "That the former Spanish colonies were asking the United States to send troops to defend them",
+       "why": "The excerpt says nothing about requests from those governments; the policy is stated as a U.S. position.",
+       "value": null,
+       "label": "unsupported_by_source"
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is \"That European powers might intervene against the newly independent American governments\". Monroe says the United States could not view any interposition by a European power to oppress the independent governments 'in any other light than as the manifestation of an unfriendly disposition'.\n\"That Congress would refuse to fund the purchase of Florida from Spain\" is incorrect: The Florida purchase was settled by the Adams-Onis Treaty of 1819 and ratified in 1821, and the excerpt does not mention it.\n\"That Great Britain planned to ally with Russia against the United States in North America\" is incorrect: The excerpt states a policy toward all European powers and mentions no alliance directed against the United States.\n\"That the former Spanish colonies were asking the United States to send troops to defend them\" is incorrect: The excerpt says nothing about requests from those governments; the policy is stated as a U.S. position.",
+     "est_seconds": 75,
+     "facts": [
+      "By 1823 most Spanish American colonies had won or were fighting for independence, and the United States had recognized several in 1822.",
+      "Monroe delivered the message December 2, 1823."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "2.B",
+      "key_evidence_in_source": "'we could not view any interposition for the purpose of oppressing them ... by any European power in any other light than as the manifestation of an unfriendly disposition toward the United States'."
+     }
+    },
+    {
+     "archetype": "ush_real_3A",
+     "topic": "4.4",
+     "skill": "3.A",
+     "stem": "Which of the following best describes a claim Monroe makes in the excerpt?",
+     "options": [
+      {
+       "text": "The United States would join the wars of European powers whenever American shipping and overseas trade was threatened",
+       "why": "Monroe says the nation has 'never taken any part' in the wars of the European powers and that it does not comport with its policy to do so.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "European colonies in the Western Hemisphere should be freed by American military force",
+       "why": "He states that the United States has not interfered and will not interfere with the existing colonies or dependencies.",
+       "value": null,
+       "label": "overstated"
+      },
+      {
+       "text": "European governments were better suited than republics to protect liberty in the Americas",
+       "why": "The excerpt warns against extending the European system to the hemisphere and nowhere praises European governments.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "The United States would leave existing colonies alone but oppose European oppression of new American states",
+       "why": "He says the United States 'shall not interfere' with existing colonies while European oppression of independent governments would be viewed as unfriendly.",
+       "value": null,
+       "label": "key"
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is \"The United States would leave existing colonies alone but oppose European oppression of new American states\". He says the United States 'shall not interfere' with existing colonies while European oppression of independent governments would be viewed as unfriendly.\n\"The United States would join the wars of European powers whenever American shipping and overseas trade was threatened\" is incorrect: Monroe says the nation has 'never taken any part' in the wars of the European powers and that it does not comport with its policy to do so.\n\"European colonies in the Western Hemisphere should be freed by American military force\" is incorrect: He states that the United States has not interfered and will not interfere with the existing colonies or dependencies.\n\"European governments were better suited than republics to protect liberty in the Americas\" is incorrect: The excerpt warns against extending the European system to the hemisphere and nowhere praises European governments.",
+     "est_seconds": 75,
+     "facts": [
+      "The message addressed European colonization and intervention in the Americas and the U.S. stance of non-involvement in Europe's affairs."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "3.A",
+      "key_evidence_in_source": "'With the existing colonies or dependencies of any European power we have not interfered and shall not interfere.'"
+     }
+    },
+    {
+     "archetype": "ush_real_4B",
+     "topic": "4.4",
+     "skill": "4.B",
+     "stem": "The concerns expressed in the excerpt are best understood in the context of which of the following?",
+     "options": [
+      {
+       "text": "Latin American independence movements and European monarchies' interest in restoring control",
+       "why": "Spain's colonies were winning independence while European monarchies, which had put down a revolution in Spain in 1823, were seen as a danger to the new republics.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "The war with Mexico that followed the annexation of Texas and the dispute over its border in the 1840s",
+       "why": "That war began in 1846, more than two decades after the message.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "The nullification crisis in South Carolina over federal tariffs and states' rights in the early 1830s",
+       "why": "The crisis arose in 1832 over tariffs and states' rights, not over European intervention in the hemisphere.",
+       "value": null,
+       "label": "unrelated_development"
+      },
+      {
+       "text": "American settlement of the Great Plains and the building of transcontinental railroads after the Civil War",
+       "why": "Large-scale settlement of the Plains came after 1865, long after the message.",
+       "value": null,
+       "label": "wrong_period"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is \"Latin American independence movements and European monarchies' interest in restoring control\". Spain's colonies were winning independence while European monarchies, which had put down a revolution in Spain in 1823, were seen as a danger to the new republics.\n\"The war with Mexico that followed the annexation of Texas and the dispute over its border in the 1840s\" is incorrect: That war began in 1846, more than two decades after the message.\n\"The nullification crisis in South Carolina over federal tariffs and states' rights in the early 1830s\" is incorrect: The crisis arose in 1832 over tariffs and states' rights, not over European intervention in the hemisphere.\n\"American settlement of the Great Plains and the building of transcontinental railroads after the Civil War\" is incorrect: Large-scale settlement of the Plains came after 1865, long after the message.",
+     "est_seconds": 75,
+     "facts": [
+      "Spain's colonies on the mainland won independence mainly between 1810 and 1825.",
+      "France intervened militarily in Spain in 1823 to restore its king."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "4.B",
+      "key_evidence_in_source": "Monroe refers to 'those Governments who have declared their independence and maintain it' and to 'oppressing them' by European powers."
+     }
+    },
+    {
+     "archetype": "ush_real_5A",
+     "topic": "3.10",
+     "skill": "5.A",
+     "stem": "The excerpt's statement about the wars of the European powers most directly reflects continuity with which earlier development?",
+     "options": [
+      {
+       "text": "The Alien and Sedition Acts of 1798, which restricted foreign residents and criticism of the government",
+       "why": "These laws restricted foreign residents and criticism of the government and did not set a policy toward European wars.",
+       "value": null,
+       "label": "unrelated_development"
+      },
+      {
+       "text": "The Louisiana Purchase of 1803, which brought the Great Plains into the United States",
+       "why": "The purchase expanded U.S. territory and was not a statement about taking sides in European wars.",
+       "value": null,
+       "label": "unrelated_development"
+      },
+      {
+       "text": "Washington's Neutrality Proclamation of 1793 and his advice to avoid European conflicts",
+       "why": "Monroe's statement that the United States had never taken part in European wars follows the neutrality policy Washington announced in 1793 and urged in 1796.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "The Hartford Convention of 1814, a New England protest during the War of 1812",
+       "why": "The convention was a New England protest during the War of 1812 and did not concern a general policy toward Europe.",
+       "value": null,
+       "label": "unrelated_development"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is \"Washington's Neutrality Proclamation of 1793 and his advice to avoid European conflicts\". Monroe's statement that the United States had never taken part in European wars follows the neutrality policy Washington announced in 1793 and urged in 1796.\n\"The Alien and Sedition Acts of 1798, which restricted foreign residents and criticism of the government\" is incorrect: These laws restricted foreign residents and criticism of the government and did not set a policy toward European wars.\n\"The Louisiana Purchase of 1803, which brought the Great Plains into the United States\" is incorrect: The purchase expanded U.S. territory and was not a statement about taking sides in European wars.\n\"The Hartford Convention of 1814, a New England protest during the War of 1812\" is incorrect: The convention was a New England protest during the War of 1812 and did not concern a general policy toward Europe.",
+     "est_seconds": 75,
+     "facts": [
+      "Washington issued the Neutrality Proclamation in 1793 and warned against permanent alliances in his 1796 Farewell Address."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "5.A",
+      "key_evidence_in_source": "'In the wars of the European powers in matters relating to themselves we have never taken any part, nor does it comport with our policy to do so.'"
+     }
+    }
+   ],
+   "excluded_items": []
+  }
+ },
+ {
+  "cellId": "ap_us_history-real_c_fsa",
+  "apSubjectCode": "ap_us_history",
+  "kind": "mc",
+  "calculator": "na",
+  "reserve": false,
+  "wording": "authored_from_real_source",
+  "candidateKey": "ap_us_history-real_c_fsa-k0",
+  "keywordCode": "5.4",
+  "unitCode": "5",
+  "skillPrimary": "2.A",
+  "structure": "shared_stimulus_set",
+  "archetype": "ush_real_real_c_fsa",
+  "reviewState": "sample_unverified",
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficulty": [
+   {
+    "label": "basic_learning"
+   },
+   {
+    "label": "basic_learning"
+   },
+   {
+    "label": "basic_learning"
+   },
+   {
+    "label": "exam_prep"
+   }
+  ],
+  "gateOverride": "ush-real-c-2026-10-15",
+  "run": "ush-real-c",
+  "stockKey": "ush-real-c:ap_us_history-real_c_fsa-k0",
+  "pipeline": "real_source_v1",
+  "validation": "needs_review",
+  "gateVersion": "ush-real-c-2026-10-15",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "selectedForSample": true,
+  "legacyReserve": false,
+  "family": "ap_us_history",
+  "itemFamilyId": "fam:ush-real-c:ap_us_history-real_c_fsa-k0",
+  "canonicalKey": "ush-real-c:ap_us_history-real_c_fsa-k0",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_us_history:5.4",
+  "sharedWith": [],
+  "stockCell": "ap_us_history|5.4|2.A|shared_stimulus_set|na",
+  "history": [
+   {
+    "run": "ush-real-c",
+    "gateVersion": "ush-real-c-2026-10-15",
+    "outcome": "passed",
+    "reasons": null
+   }
+  ],
+  "stimulusOrigin": "real_historical_source",
+  "sourceRegistryIds": [
+   "txt-fugitive-slave-act-1850"
+  ],
+  "replaces": "US1 u528",
+  "payload": {
+   "archetype": "ush_real_real_c_fsa",
+   "topic": "5.4",
+   "skill": "2.A",
+   "calculator": "na",
+   "set_intro": "Historical source (real document)\n(primary source)\nFugitive Slave Act of 1850 (excerpts from Sections 5, 6, 7 and 8)\nCongress of the United States (Thirty-First Congress, First Session), 1850 (September 18). Avalon Project, Yale Law School (transcription). Reuse: public domain (U.S. government work; published before 1929). excerpted (four segments joined by [...]); whitespace normalized; no wording changed. Excerpts from four sections of the act, which Congress passed in September 1850 as part of a group of laws on slavery and the territories; the segments appear in the order in which they occur in the act.\n\n\"and all good citizens are hereby commanded to aid and assist in the prompt and efficient execution of this law, whenever their services may be required, as aforesaid, for that purpose; [...] In no trial or hearing under this act shall the testimony of such alleged fugitive be admitted in evidence; [...] any person who shall knowingly and willingly obstruct, hinder, or prevent such claimant, his agent or attorney, or any person or persons lawfully assisting him, her, or them, from arresting such a fugitive from service or labor, either with or without process as aforesaid, or shall rescue, or attempt to rescue, such fugitive from service or labor, from the custody of such claimant, his or her agent or attorney, or other person or persons lawfully assisting as aforesaid, when so arrested, pursuant to the authority herein given and declared; or shall aid, abet, or assist such person so owing service or labor as aforesaid, directly or indirectly, to escape from such claimant, his agent or attorney, or other person or persons legally authorized as aforesaid; or shall harbor or conceal such fugitive, so as to prevent the discovery and arrest of such person, after notice or knowledge of the fact that such person was a fugitive from service or labor as aforesaid, shall, for either of said offences, be subject to a fine not exceeding one thousand dollars, and imprisonment not exceeding six months [...] he shall be entitled to a fee of ten dollars in full for his services in each case, upon the delivery of the said certificate to the claimant, his agent or attorney; or a fee of five dollars in cases where the proof shall not, in the opinion of such commissioner, warrant such certificate and delivery\"",
+   "ush_set": {
+    "period": 5,
+    "stim_type": "primary_text",
+    "theme": "The Fugitive Slave Act",
+    "title": "The Fugitive Slave Act of 1850",
+    "sources": [
+     {
+      "id": "A",
+      "kind": "primary_text",
+      "title": "Fugitive Slave Act of 1850 (excerpts from Sections 5, 6, 7 and 8)",
+      "attribution": "Congress of the United States (Thirty-First Congress, First Session), 1850 (September 18). Avalon Project, Yale Law School (transcription). Reuse: public domain (U.S. government work; published before 1929). excerpted (four segments joined by [...]); whitespace normalized; no wording changed.",
+      "real_data": true,
+      "source_registry_id": "txt-fugitive-slave-act-1850",
+      "source_sha256": "a614227b4be3b687eecfe69bf7001dcbfb0ed1c470755305ff56419739461813"
+     }
+    ]
+   },
+   "items": [
+    {
+     "archetype": "ush_real_2A",
+     "topic": "5.4",
+     "skill": "2.A",
+     "stem": "Congress most likely included the provisions in the excerpt in order to",
+     "options": [
+      {
+       "text": "protect the legal rights of accused fugitives by guaranteeing them a hearing before a federal jury",
+       "why": "The excerpt bars the accused from testifying and favors the claimant, which weakens rather than protects the accused.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "limit the spread of slavery into the territories acquired from Mexico",
+       "why": "That issue was handled in other parts of the Compromise of 1850; these sections concern people who escaped from slavery.",
+       "value": null,
+       "label": "unrelated_development"
+      },
+      {
+       "text": "leave the return of fugitives to the discretion of each state government",
+       "why": "The act gives federal commissioners, marshals and courts the authority and requires private citizens to assist.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "make it easier for slaveholders to recover people who had escaped to free states",
+       "why": "The sections require citizens to assist, bar the testimony of the accused, penalize obstruction and pay commissioners more when they rule for the claimant.",
+       "value": null,
+       "label": "key"
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is \"make it easier for slaveholders to recover people who had escaped to free states\". The sections require citizens to assist, bar the testimony of the accused, penalize obstruction and pay commissioners more when they rule for the claimant.\n\"protect the legal rights of accused fugitives by guaranteeing them a hearing before a federal jury\" is incorrect: The excerpt bars the accused from testifying and favors the claimant, which weakens rather than protects the accused.\n\"limit the spread of slavery into the territories acquired from Mexico\" is incorrect: That issue was handled in other parts of the Compromise of 1850; these sections concern people who escaped from slavery.\n\"leave the return of fugitives to the discretion of each state government\" is incorrect: The act gives federal commissioners, marshals and courts the authority and requires private citizens to assist.",
+     "est_seconds": 75,
+     "facts": [
+      "The Fugitive Slave Act of 1850 strengthened the federal enforcement of the Constitution's fugitive-slave clause."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "2.A",
+      "key_evidence_in_source": "'all good citizens are hereby commanded to aid and assist in the prompt and efficient execution of this law'; 'In no trial or hearing under this act shall the testimony of such alleged fugitive be admitted'."
+     }
+    },
+    {
+     "archetype": "ush_real_3A",
+     "topic": "5.4",
+     "skill": "3.A",
+     "stem": "Which of the following best describes a provision of the law as the excerpt states it?",
+     "options": [
+      {
+       "text": "Alleged fugitives had the right to testify and to a jury trial in the state where they were arrested",
+       "why": "The excerpt states that the alleged fugitive's testimony could not be admitted, and it provides for hearings before commissioners.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "Citizens could be required to help capture alleged fugitives, and aiding an escape was punishable",
+       "why": "The excerpt commands good citizens to assist and sets a fine of up to a thousand dollars and imprisonment up to six months for obstructing or aiding escape.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "State governors were to decide whether to return alleged fugitives who reached their states",
+       "why": "The excerpt gives the process to federal officers and commissioners and says nothing about governors deciding.",
+       "value": null,
+       "label": "unsupported_by_source"
+      },
+      {
+       "text": "Slaveholders had to prove their claim in federal district court before any arrest could be made",
+       "why": "The act allowed claimants to seize and arrest fugitives without process and to take them before a commissioner.",
+       "value": null,
+       "label": "overstated"
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is \"Citizens could be required to help capture alleged fugitives, and aiding an escape was punishable\". The excerpt commands good citizens to assist and sets a fine of up to a thousand dollars and imprisonment up to six months for obstructing or aiding escape.\n\"Alleged fugitives had the right to testify and to a jury trial in the state where they were arrested\" is incorrect: The excerpt states that the alleged fugitive's testimony could not be admitted, and it provides for hearings before commissioners.\n\"State governors were to decide whether to return alleged fugitives who reached their states\" is incorrect: The excerpt gives the process to federal officers and commissioners and says nothing about governors deciding.\n\"Slaveholders had to prove their claim in federal district court before any arrest could be made\" is incorrect: The act allowed claimants to seize and arrest fugitives without process and to take them before a commissioner.",
+     "est_seconds": 75,
+     "facts": [
+      "Commissioners under the 1850 act were paid ten dollars when they certified a claim and five dollars when they did not."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "3.A",
+      "key_evidence_in_source": "The excerpt's penalty clause (a fine 'not exceeding one thousand dollars, and imprisonment not exceeding six months') and the command to citizens."
+     }
+    },
+    {
+     "archetype": "ush_real_4A",
+     "topic": "5.3",
+     "skill": "4.A",
+     "stem": "The law was adopted most directly in the context of which of the following?",
+     "options": [
+      {
+       "text": "Debates over the Constitution's three-fifths clause at the Philadelphia Convention of 1787",
+       "why": "That debate occurred in 1787 and was not the immediate setting of an 1850 statute.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "The Missouri Compromise's ban on slavery north of 36 30 in the Louisiana Purchase",
+       "why": "That compromise dates from 1820; the laws of 1850 dealt with the Mexican Cession and with fugitives.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "Sectional conflict over slavery after the Mexican Cession and the Compromise of 1850",
+       "why": "The acquisition of Mexican territory reopened the dispute over slavery's extension, and Congress passed a package of laws in 1850, including this act.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "Southern secession and the outbreak of the Civil War at Fort Sumter in 1861",
+       "why": "Secession began in 1860 and 1861, ten years after the act was passed.",
+       "value": null,
+       "label": "wrong_period"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is \"Sectional conflict over slavery after the Mexican Cession and the Compromise of 1850\". The acquisition of Mexican territory reopened the dispute over slavery's extension, and Congress passed a package of laws in 1850, including this act.\n\"Debates over the Constitution's three-fifths clause at the Philadelphia Convention of 1787\" is incorrect: That debate occurred in 1787 and was not the immediate setting of an 1850 statute.\n\"The Missouri Compromise's ban on slavery north of 36 30 in the Louisiana Purchase\" is incorrect: That compromise dates from 1820; the laws of 1850 dealt with the Mexican Cession and with fugitives.\n\"Southern secession and the outbreak of the Civil War at Fort Sumter in 1861\" is incorrect: Secession began in 1860 and 1861, ten years after the act was passed.",
+     "est_seconds": 75,
+     "facts": [
+      "The United States gained California and the Southwest from Mexico in 1848.",
+      "Congress passed the Compromise of 1850 in September of that year."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "4.A",
+      "key_evidence_in_source": "The act was part of the Compromise of 1850 (registry note); the excerpt itself concerns enforcement of the fugitive-slave clause."
+     }
+    },
+    {
+     "archetype": "ush_real_1B",
+     "topic": "5.6",
+     "skill": "1.B",
+     "stem": "Northern reaction to this law contributed most directly to which of the following developments in the 1850s?",
+     "options": [
+      {
+       "text": "Growing Northern antislavery sentiment, including personal liberty laws and Uncle Tom's Cabin",
+       "why": "The act brought the enforcement of slavery into Northern communities, and resistance and antislavery writing, including Stowe's 1852 novel, grew.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "A decline in Northern support for the Underground Railroad and for other aid to people escaping slavery",
+       "why": "Aid to escaping people increased after 1850, and the Underground Railroad's activity grew as a response to the law.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "The end of the sectional dispute over slavery in the territories",
+       "why": "The dispute intensified in the 1850s, notably with the Kansas-Nebraska Act of 1854.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "Federal repeal of the law before the Civil War",
+       "why": "The law remained in force until Congress repealed it in 1864.",
+       "value": null,
+       "label": "wrong_period"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is \"Growing Northern antislavery sentiment, including personal liberty laws and Uncle Tom's Cabin\". The act brought the enforcement of slavery into Northern communities, and resistance and antislavery writing, including Stowe's 1852 novel, grew.\n\"A decline in Northern support for the Underground Railroad and for other aid to people escaping slavery\" is incorrect: Aid to escaping people increased after 1850, and the Underground Railroad's activity grew as a response to the law.\n\"The end of the sectional dispute over slavery in the territories\" is incorrect: The dispute intensified in the 1850s, notably with the Kansas-Nebraska Act of 1854.\n\"Federal repeal of the law before the Civil War\" is incorrect: The law remained in force until Congress repealed it in 1864.",
+     "est_seconds": 75,
+     "facts": [
+      "Several Northern states passed personal liberty laws after 1850.",
+      "Harriet Beecher Stowe published Uncle Tom's Cabin in 1852.",
+      "Congress repealed the Fugitive Slave Act in June 1864."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "1.B",
+      "key_evidence_in_source": "Effects of the enforcement provisions shown in the excerpt (commanding citizens to assist; barring testimony) provoked resistance."
+     }
+    }
+   ],
+   "excluded_items": []
+  }
+ },
+ {
+  "cellId": "ap_us_history-real_c_jones",
+  "apSubjectCode": "ap_us_history",
+  "kind": "mc",
+  "calculator": "na",
+  "reserve": false,
+  "wording": "authored_from_real_source",
+  "candidateKey": "ap_us_history-real_c_jones-k0",
+  "keywordCode": "5.9",
+  "unitCode": "5",
+  "skillPrimary": "2.A",
+  "structure": "shared_stimulus_set",
+  "archetype": "ush_real_real_c_jones",
+  "reviewState": "sample_unverified",
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficulty": [
+   {
+    "label": "basic_learning"
+   },
+   {
+    "label": "basic_learning"
+   },
+   {
+    "label": "basic_learning"
+   },
+   {
+    "label": "basic_learning"
+   }
+  ],
+  "gateOverride": "ush-real-c-2026-10-15",
+  "run": "ush-real-c",
+  "stockKey": "ush-real-c:ap_us_history-real_c_jones-k0",
+  "pipeline": "real_source_v1",
+  "validation": "needs_review",
+  "gateVersion": "ush-real-c-2026-10-15",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "selectedForSample": true,
+  "legacyReserve": false,
+  "family": "ap_us_history",
+  "itemFamilyId": "fam:ush-real-c:ap_us_history-real_c_jones-k0",
+  "canonicalKey": "ush-real-c:ap_us_history-real_c_jones-k0",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_us_history:5.9",
+  "sharedWith": [],
+  "stockCell": "ap_us_history|5.9|2.A|shared_stimulus_set|na",
+  "history": [
+   {
+    "run": "ush-real-c",
+    "gateVersion": "ush-real-c-2026-10-15",
+    "outcome": "passed",
+    "reasons": null
+   }
+  ],
+  "stimulusOrigin": "real_historical_source",
+  "sourceRegistryIds": [
+   "txt-jones-diary-1863"
+  ],
+  "replaces": "US1 u531",
+  "payload": {
+   "archetype": "ush_real_real_c_jones",
+   "topic": "5.9",
+   "skill": "2.A",
+   "calculator": "na",
+   "set_intro": "Historical source (real document)\n(primary source)\nA Rebel War Clerk's Diary at the Confederate States Capital (entries of March 31 and April 2, 1863)\nJ. B. Jones (clerk in the Confederate War Department, Richmond), 1866 (published; entries dated March 31 and April 2, 1863). Project Gutenberg eBook #31087. Reuse: public domain in the United States (published before 1929; author died 1866). excerpted (four segments joined by [...]); whitespace normalized; line breaks removed; no wording changed. Diary entries by a clerk in the Confederate War Department, written in Richmond, Virginia, in the spring of 1863 and published in 1866. 'Aliens' here means foreign residents. The segments appear in the order of the entries.\n\n\"Another stride of the grim specter, and corn-meal is selling for $17 per bushel. Coal at $20.50 per ton, and wood at $30 per cord. And at these prices one has to wait several days to get either. Common tallow candles are selling at $1 per pound. I see that some furnished houses are now advertised for rent; and I hope that all the population that can get away, and subsist elsewhere, will leave the city. [...] This morning early a few hundred women and boys met as by concert in the Capitol Square, saying they were hungry, and must have food. The number continued to swell until there were more than a thousand. But few men were among them, and these were mostly foreign residents, with exemptions in their pockets. [...] Not knowing the meaning of such a procession, I asked a pale boy where they were going. A young woman, seemingly emaciated, but yet with a smile, answered that they were going to find something to eat. I could not, for the life of me, refrain from expressing the hope that they might be successful; and I remarked they were going in the right direction to find plenty in the hands of the extortioners. [...] Here they were incited to pillage valuables, not necessary for subsistence, by the class of residents (aliens) exempted from military duty by Judge Campbell, Assistant Secretary of War, in contravention of Judge Meredith's decision.\"",
+   "ush_set": {
+    "period": 5,
+    "stim_type": "primary_text",
+    "theme": "Wartime shortages and exemptions in the Confederacy",
+    "title": "Hunger and Exemptions in Richmond, 1863",
+    "sources": [
+     {
+      "id": "A",
+      "kind": "primary_text",
+      "title": "A Rebel War Clerk's Diary at the Confederate States Capital (entries of March 31 and April 2, 1863)",
+      "attribution": "J. B. Jones (clerk in the Confederate War Department, Richmond), 1866 (published; entries dated March 31 and April 2, 1863). Project Gutenberg eBook #31087. Reuse: public domain in the United States (published before 1929; author died 1866). excerpted (four segments joined by [...]); whitespace normalized; line breaks removed; no wording changed.",
+      "real_data": true,
+      "source_registry_id": "txt-jones-diary-1863",
+      "source_sha256": "3d966a8caa79404591636618962f0ce25a5ca6b718d0d7b93eac9e85ba8384dd"
+     }
+    ]
+   },
+   "items": [
+    {
+     "archetype": "ush_real_2A",
+     "topic": "5.9",
+     "skill": "2.A",
+     "stem": "Which of the following best describes the author's point of view about the women and boys who gathered in the Capitol Square?",
+     "options": [
+      {
+       "text": "He sympathizes with their hunger and blames extortioners for the shortages",
+       "why": "He tells a young woman he hopes the crowd will find food and remarks that plenty lies 'in the hands of the extortioners'.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "He supports calling out troops to disperse the crowd as soon as it gathered",
+       "why": "He expresses the hope that they might succeed and does not call for troops; the governor, not the author, summoned the military.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "He believes the Union blockade was the only cause of the shortages",
+       "why": "He points to extortioners rather than to a blockade, which the excerpt does not mention.",
+       "value": null,
+       "label": "unsupported_by_source"
+      },
+      {
+       "text": "He is indifferent to events that did not involve his own department",
+       "why": "He describes the scene closely and says he could not refrain from voicing hope for the crowd.",
+       "value": null,
+       "label": "reversal"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is \"He sympathizes with their hunger and blames extortioners for the shortages\". He tells a young woman he hopes the crowd will find food and remarks that plenty lies 'in the hands of the extortioners'.\n\"He supports calling out troops to disperse the crowd as soon as it gathered\" is incorrect: He expresses the hope that they might succeed and does not call for troops; the governor, not the author, summoned the military.\n\"He believes the Union blockade was the only cause of the shortages\" is incorrect: He points to extortioners rather than to a blockade, which the excerpt does not mention.\n\"He is indifferent to events that did not involve his own department\" is incorrect: He describes the scene closely and says he could not refrain from voicing hope for the crowd.",
+     "est_seconds": 75,
+     "facts": [
+      "The Richmond bread riot occurred on April 2, 1863; the governor called out the militia."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "2.A",
+      "key_evidence_in_source": "'I could not, for the life of me, refrain from expressing the hope that they might be successful; and I remarked they were going in the right direction to find plenty in the hands of the extortioners.'"
+     }
+    },
+    {
+     "archetype": "ush_real_3A",
+     "topic": "5.9",
+     "skill": "3.A",
+     "stem": "Which of the following claims does the author make about military exemptions?",
+     "options": [
+      {
+       "text": "Exemptions had been granted only to the poorest Confederate families and to soldiers' widows and orphans",
+       "why": "The excerpt ties exemptions to foreign residents and to Judge Campbell's decision, not to poor families.",
+       "value": null,
+       "label": "unsupported_by_source"
+      },
+      {
+       "text": "The Confederate Congress had abolished all exemptions from military service",
+       "why": "The author criticizes an exemption ruling by Judge Campbell and describes exempted residents in the crowd, which shows that exemptions still existed.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "Foreign residents holding exemptions from military duty were in the crowd and encouraged looting",
+       "why": "He says most of the few men in the crowd were foreign residents 'with exemptions in their pockets' and that aliens exempted from duty incited pillage of valuables.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "Women were exempt from the draft and used that status to lead the protest",
+       "why": "The author writes of men with exemptions among the crowd and says nothing about a draft of women.",
+       "value": null,
+       "label": "unsupported_by_source"
+      }
+     ],
+     "key_index": 2,
+     "explanation_en": "The correct answer is \"Foreign residents holding exemptions from military duty were in the crowd and encouraged looting\". He says most of the few men in the crowd were foreign residents 'with exemptions in their pockets' and that aliens exempted from duty incited pillage of valuables.\n\"Exemptions had been granted only to the poorest Confederate families and to soldiers' widows and orphans\" is incorrect: The excerpt ties exemptions to foreign residents and to Judge Campbell's decision, not to poor families.\n\"The Confederate Congress had abolished all exemptions from military service\" is incorrect: The author criticizes an exemption ruling by Judge Campbell and describes exempted residents in the crowd, which shows that exemptions still existed.\n\"Women were exempt from the draft and used that status to lead the protest\" is incorrect: The author writes of men with exemptions among the crowd and says nothing about a draft of women.",
+     "est_seconds": 75,
+     "facts": [
+      "The Confederacy enacted conscription in April 1862 with exemptions for certain occupations."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "3.A",
+      "key_evidence_in_source": "'these were mostly foreign residents, with exemptions in their pockets'; 'the class of residents (aliens) exempted from military duty by Judge Campbell'."
+     }
+    },
+    {
+     "archetype": "ush_real_4A",
+     "topic": "5.8",
+     "skill": "4.A",
+     "stem": "The economic conditions the author describes were most directly shaped by which of the following?",
+     "options": [
+      {
+       "text": "A surge of Northern investment in Southern railroads, cotton mills and coal mines",
+       "why": "Northern capital did not flow into the Confederacy during the war, and the diary describes scarcity, not growth.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "Shortages and inflation from the Union blockade, army demand, and paper money",
+       "why": "The Union blockade, army needs for food and rapid issuing of Confederate paper money drove prices up and goods short in Richmond.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "The Southern shift from cotton to manufacturing before the war",
+       "why": "The Confederacy remained a mostly agricultural economy with limited industry, and the diary does not describe a shift.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "Federal tariffs that had raised the cost of imported goods before 1861",
+       "why": "Tariff policy is not the cause of the wartime price spikes in Richmond in 1863.",
+       "value": null,
+       "label": "unrelated_development"
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is \"Shortages and inflation from the Union blockade, army demand, and paper money\". The Union blockade, army needs for food and rapid issuing of Confederate paper money drove prices up and goods short in Richmond.\n\"A surge of Northern investment in Southern railroads, cotton mills and coal mines\" is incorrect: Northern capital did not flow into the Confederacy during the war, and the diary describes scarcity, not growth.\n\"The Southern shift from cotton to manufacturing before the war\" is incorrect: The Confederacy remained a mostly agricultural economy with limited industry, and the diary does not describe a shift.\n\"Federal tariffs that had raised the cost of imported goods before 1861\" is incorrect: Tariff policy is not the cause of the wartime price spikes in Richmond in 1863.",
+     "est_seconds": 75,
+     "facts": [
+      "The Union blockade reduced Confederate trade; the Confederacy financed the war largely by issuing paper money, causing severe inflation."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "4.A",
+      "key_evidence_in_source": "Prices in the excerpt: 'corn-meal is selling for $17 per bushel ... Coal at $20.50 per ton, and wood at $30 per cord ... tallow candles ... $1 per pound'."
+     }
+    },
+    {
+     "archetype": "ush_real_5A",
+     "topic": "5.9",
+     "skill": "5.A",
+     "stem": "The grievance about exemptions in the excerpt is most similar to which of the following developments in the North during the Civil War?",
+     "options": [
+      {
+       "text": "Wage increases in Northern factories and shipyards supplying the Union army and navy",
+       "why": "Rising wages in some war industries are a different development and did not involve resentment of exemptions from service.",
+       "value": null,
+       "label": "true_but_not_responsive"
+      },
+      {
+       "text": "The passage of the Homestead Act, which offered western land to settlers",
+       "why": "The Homestead Act offered western land to settlers and was unrelated to a draft grievance.",
+       "value": null,
+       "label": "unrelated_development"
+      },
+      {
+       "text": "The surge of volunteer enthusiasm in the North after the Confederate attack on Fort Sumter in April 1861",
+       "why": "That enthusiasm in 1861 involved willing enlistment, not resentment of exemptions, and came earlier.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "Resentment of substitute and commutation fees in the North, as in the New York City draft riots",
+       "why": "In the North, men could hire a substitute or pay a 300-dollar commutation fee to avoid service, and poorer men resented it, as in the July 1863 riots.",
+       "value": null,
+       "label": "key"
+      }
+     ],
+     "key_index": 3,
+     "explanation_en": "The correct answer is \"Resentment of substitute and commutation fees in the North, as in the New York City draft riots\". In the North, men could hire a substitute or pay a 300-dollar commutation fee to avoid service, and poorer men resented it, as in the July 1863 riots.\n\"Wage increases in Northern factories and shipyards supplying the Union army and navy\" is incorrect: Rising wages in some war industries are a different development and did not involve resentment of exemptions from service.\n\"The passage of the Homestead Act, which offered western land to settlers\" is incorrect: The Homestead Act offered western land to settlers and was unrelated to a draft grievance.\n\"The surge of volunteer enthusiasm in the North after the Confederate attack on Fort Sumter in April 1861\" is incorrect: That enthusiasm in 1861 involved willing enlistment, not resentment of exemptions, and came earlier.",
+     "est_seconds": 75,
+     "facts": [
+      "The Union Enrollment Act of March 1863 allowed a 300-dollar commutation fee or a substitute.",
+      "The New York City draft riots took place July 13-16, 1863."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "5.A",
+      "key_evidence_in_source": "'foreign residents, with exemptions in their pockets' and exempted aliens in a crowd of the hungry."
+     }
+    }
+   ],
+   "excluded_items": []
+  }
+ }
+]

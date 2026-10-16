@@ -1,0 +1,888 @@
+{
+ "tally": {
+  "adopted_hard": {
+   "total": 59,
+   "dual_independent_agree": 59,
+   "math_verify_pass": 14,
+   "math_verify_unverifiable": 1
+  },
+  "general": {
+   "total": 959,
+   "dual_independent_agree": 944,
+   "math_no_verify_data": 340,
+   "FAIL:dual_independent": 15,
+   "FAIL:options_distinct": 1,
+   "WARN:app_material_gate_false_positive": 60,
+   "FAIL:contract": 2,
+   "FAIL:option_prefix": 2
+  },
+  "basic_batch": {
+   "total": 17,
+   "dual_independent_agree": 17
+  }
+ },
+ "fails": [
+  {
+   "gid": "1e54587e-0e0a-4648-a276-1d335b4c4a36",
+   "corpus": "general",
+   "skill": "boundaries",
+   "check": "dual_independent",
+   "detail": "pipeline=undefined blind=true"
+  },
+  {
+   "gid": "60ebda0b-23d0-4d1e-babe-06a817095314",
+   "corpus": "general",
+   "skill": "boundaries",
+   "check": "options_distinct",
+   "detail": "4개/중복"
+  },
+  {
+   "gid": "1f320cc8-d841-4b66-9c4e-ef759fad2d52",
+   "corpus": "general",
+   "skill": "central_ideas_details",
+   "check": "dual_independent",
+   "detail": "pipeline=undefined blind=true"
+  },
+  {
+   "gid": "ab653c06-5cd3-41f3-8a19-34ef852dea71",
+   "corpus": "general",
+   "skill": "central_ideas_details",
+   "check": "dual_independent",
+   "detail": "pipeline=undefined blind=true"
+  },
+  {
+   "gid": "5c4aa1d1-9fa2-4311-b800-06eb27adf68a",
+   "corpus": "general",
+   "skill": "form_structure_sense",
+   "check": "dual_independent",
+   "detail": "pipeline=undefined blind=true"
+  },
+  {
+   "gid": "60b056e7-cfed-4bc0-9cb3-15f7fc6f45b0",
+   "corpus": "general",
+   "skill": "form_structure_sense",
+   "check": "dual_independent",
+   "detail": "pipeline=undefined blind=true"
+  },
+  {
+   "gid": "61957807-c084-46df-8ff6-50fef7a65763",
+   "corpus": "general",
+   "skill": "inferences",
+   "check": "dual_independent",
+   "detail": "pipeline=undefined blind=true"
+  },
+  {
+   "gid": "957a60d4-0c6b-4acd-ac89-c2b6745f5d87",
+   "corpus": "general",
+   "skill": "inferences",
+   "check": "dual_independent",
+   "detail": "pipeline=undefined blind=true"
+  },
+  {
+   "gid": "72cf10de-f15d-4c97-ba10-112477f41e18",
+   "corpus": "general",
+   "skill": "inferences",
+   "check": "contract",
+   "detail": "contract_option_echo"
+  },
+  {
+   "gid": "aaea6d4c-e355-4460-87db-35837babc199",
+   "corpus": "general",
+   "skill": "ratios_rates_units",
+   "check": "option_prefix",
+   "detail": "선택지에 A) 접두어"
+  },
+  {
+   "gid": "4ec7897f-00e3-415f-8b33-efcfe8bffa04",
+   "corpus": "general",
+   "skill": "rhetorical_synthesis",
+   "check": "option_prefix",
+   "detail": "선택지에 A) 접두어"
+  },
+  {
+   "gid": "ac3df812-27ba-47f8-95fb-520519c0b15c",
+   "corpus": "general",
+   "skill": "text_structure_purpose",
+   "check": "dual_independent",
+   "detail": "pipeline=undefined blind=true"
+  },
+  {
+   "gid": "c723be7b-9672-465e-93ee-7cd00772bc4a",
+   "corpus": "general",
+   "skill": "text_structure_purpose",
+   "check": "dual_independent",
+   "detail": "pipeline=undefined blind=true"
+  },
+  {
+   "gid": "c74e1463-d86d-4989-83a7-5710d7040c4a",
+   "corpus": "general",
+   "skill": "text_structure_purpose",
+   "check": "contract",
+   "detail": "contract_option_language"
+  },
+  {
+   "gid": "c74e1463-d86d-4989-83a7-5710d7040c4a",
+   "corpus": "general",
+   "skill": "text_structure_purpose",
+   "check": "dual_independent",
+   "detail": "pipeline=undefined blind=true"
+  },
+  {
+   "gid": "994b8fa5-4fc4-4980-a488-33a9dadff967",
+   "corpus": "general",
+   "skill": "transitions",
+   "check": "dual_independent",
+   "detail": "pipeline=undefined blind=true"
+  },
+  {
+   "gid": "ba697160-e3fa-49fb-95bf-709ccb601ec3",
+   "corpus": "general",
+   "skill": "transitions",
+   "check": "dual_independent",
+   "detail": "pipeline=undefined blind=true"
+  },
+  {
+   "gid": "177c5aad-46e5-46dc-8549-aa596aac5354",
+   "corpus": "general",
+   "skill": "words_in_context",
+   "check": "dual_independent",
+   "detail": "pipeline=undefined blind=true"
+  },
+  {
+   "gid": "61e935ff-4d26-462c-8a17-fb2414fa5875",
+   "corpus": "general",
+   "skill": "words_in_context",
+   "check": "dual_independent",
+   "detail": "pipeline=undefined blind=true"
+  },
+  {
+   "gid": "7720dd1b-6183-4aa1-b4e1-cf7f89d1aee5",
+   "corpus": "general",
+   "skill": "words_in_context",
+   "check": "dual_independent",
+   "detail": "pipeline=undefined blind=true"
+  }
+ ],
+ "diversity": {
+  "transitions": {
+   "n": 75,
+   "maxSimP50": 0.07,
+   "maxSimP90": 0.14,
+   "maxSim": 0.26,
+   "pairsGe06": 0,
+   "topTokens": [
+    "several:28",
+    "however:26",
+    "rather:25",
+    "these:21",
+    "recent:20"
+   ],
+   "topTokenShare": 0.37,
+   "correctLetterDist": [
+    24,
+    18,
+    16,
+    17
+   ],
+   "distinctGroupKeys": 75,
+   "groupKeyRatio": 1,
+   "topOpening": "marine biologists have(14)"
+  },
+  "boundaries": {
+   "n": 70,
+   "maxSimP50": 0.12,
+   "maxSimP90": 0.16,
+   "maxSim": 0.21,
+   "pairsGe06": 0,
+   "topTokens": [
+    "during:19",
+    "historians:17",
+    "several:16",
+    "early:16",
+    "century:16"
+   ],
+   "topTokenShare": 0.27,
+   "correctLetterDist": [
+    44,
+    21,
+    0,
+    5
+   ],
+   "distinctGroupKeys": 70,
+   "groupKeyRatio": 1,
+   "topOpening": "the marine biologist(9)"
+  },
+  "command_of_evidence_text": {
+   "n": 47,
+   "maxSimP50": 0.03,
+   "maxSimP90": 0.06,
+   "maxSim": 0.09,
+   "pairsGe06": 0,
+   "topTokens": [
+    "rather:27",
+    "studying:25",
+    "after:16",
+    "argued:15",
+    "proposed:14"
+   ],
+   "topTokenShare": 0.57,
+   "correctLetterDist": [
+    27,
+    13,
+    7,
+    0
+   ],
+   "distinctGroupKeys": 47,
+   "groupKeyRatio": 1,
+   "topOpening": "a team of(4)"
+  },
+  "text_structure_purpose": {
+   "n": 63,
+   "maxSimP50": 0.05,
+   "maxSimP90": 0.08,
+   "maxSim": 0.11,
+   "pairsGe06": 0,
+   "topTokens": [
+    "these:31",
+    "however:27",
+    "rather:23",
+    "decades:20",
+    "through:19"
+   ],
+   "topTokenShare": 0.49,
+   "correctLetterDist": [
+    40,
+    18,
+    5,
+    0
+   ],
+   "distinctGroupKeys": 63,
+   "groupKeyRatio": 1,
+   "topOpening": "art historians have(4)"
+  },
+  "linear_equations_one_var": {
+   "n": 17,
+   "maxSimP50": 0.05,
+   "maxSimP90": 0.26,
+   "maxSim": 0.26,
+   "pairsGe06": 0,
+   "topTokens": [
+    "equation:8",
+    "constant:8",
+    "after:7",
+    "number:6",
+    "dollars:5"
+   ],
+   "topTokenShare": 0.47,
+   "correctLetterDist": [
+    2,
+    2,
+    6,
+    1
+   ],
+   "distinctGroupKeys": 17,
+   "groupKeyRatio": 1,
+   "topOpening": "a beekeeper is(3)"
+  },
+  "linear_equations_two_var": {
+   "n": 38,
+   "maxSimP50": 0.16,
+   "maxSimP90": 0.57,
+   "maxSim": 0.58,
+   "pairsGe06": 0,
+   "topTokens": [
+    "shown:26",
+    "plane:22",
+    "represents:16",
+    "passes:15",
+    "through:15"
+   ],
+   "topTokenShare": 0.68,
+   "correctLetterDist": [
+    12,
+    4,
+    9,
+    2
+   ],
+   "distinctGroupKeys": 38,
+   "groupKeyRatio": 1,
+   "topOpening": "in the $xy$-plane,(14)"
+  },
+  "equivalent_expressions": {
+   "n": 39,
+   "maxSimP50": 0.24,
+   "maxSimP90": 0.53,
+   "maxSim": 0.53,
+   "pairsGe06": 0,
+   "topTokens": [
+    "equivalent:24",
+    "where:23",
+    "expression:23",
+    "function:11",
+    "values:10"
+   ],
+   "topTokenShare": 0.62,
+   "correctLetterDist": [
+    21,
+    5,
+    2,
+    0
+   ],
+   "distinctGroupKeys": 39,
+   "groupKeyRatio": 1,
+   "topOpening": "which expression is(5)"
+  },
+  "cross_text_connections": {
+   "n": 49,
+   "maxSimP50": 0.05,
+   "maxSimP90": 0.09,
+   "maxSim": 0.15,
+   "pairsGe06": 0,
+   "topTokens": [
+    "argue:29",
+    "these:28",
+    "while:22",
+    "often:21",
+    "because:20"
+   ],
+   "topTokenShare": 0.59,
+   "correctLetterDist": [
+    22,
+    19,
+    8,
+    0
+   ],
+   "distinctGroupKeys": 49,
+   "groupKeyRatio": 1,
+   "topOpening": "text 1 urban(10)"
+  },
+  "systems_linear": {
+   "n": 42,
+   "maxSimP50": 0.08,
+   "maxSimP90": 0.17,
+   "maxSim": 0.49,
+   "pairsGe06": 0,
+   "topTokens": [
+    "number:25",
+    "graph:20",
+    "lines:19",
+    "shown:19",
+    "equation:18"
+   ],
+   "topTokenShare": 0.6,
+   "correctLetterDist": [
+    5,
+    13,
+    8,
+    1
+   ],
+   "distinctGroupKeys": 42,
+   "groupKeyRatio": 1,
+   "topOpening": "a marine biology(6)"
+  },
+  "central_ideas_details": {
+   "n": 63,
+   "maxSimP50": 0.03,
+   "maxSimP90": 0.07,
+   "maxSim": 0.08,
+   "pairsGe06": 0,
+   "topTokens": [
+    "these:36",
+    "however:32",
+    "rather:30",
+    "decades:28",
+    "century:23"
+   ],
+   "topTokenShare": 0.57,
+   "correctLetterDist": [
+    11,
+    33,
+    16,
+    3
+   ],
+   "distinctGroupKeys": 63,
+   "groupKeyRatio": 1,
+   "topOpening": "for decades, marine(12)"
+  },
+  "inferences": {
+   "n": 42,
+   "maxSimP50": 0.02,
+   "maxSimP90": 0.05,
+   "maxSim": 0.13,
+   "pairsGe06": 0,
+   "topTokens": [
+    "studying:20",
+    "these:19",
+    "found:18",
+    "pattern:17",
+    "suggests:17"
+   ],
+   "topTokenShare": 0.48,
+   "correctLetterDist": [
+    36,
+    3,
+    3,
+    0
+   ],
+   "distinctGroupKeys": 42,
+   "groupKeyRatio": 1,
+   "topOpening": "art historians examining(5)"
+  },
+  "words_in_context": {
+   "n": 97,
+   "maxSimP50": 0.07,
+   "maxSimP90": 0.12,
+   "maxSim": 0.22,
+   "pairsGe06": 0,
+   "topTokens": [
+    "rather:37",
+    "historians:37",
+    "studying:34",
+    "these:30",
+    "within:26"
+   ],
+   "topTokenShare": 0.38,
+   "correctLetterDist": [
+    57,
+    33,
+    5,
+    2
+   ],
+   "distinctGroupKeys": 97,
+   "groupKeyRatio": 1,
+   "topOpening": "marine biologists studying(17)"
+  },
+  "rhetorical_synthesis": {
+   "n": 86,
+   "maxSimP50": 0.09,
+   "maxSimP90": 0.19,
+   "maxSim": 0.25,
+   "pairsGe06": 0,
+   "topTokens": [
+    "while:86",
+    "researching:86",
+    "topic:86",
+    "student:86",
+    "taken:86"
+   ],
+   "topTokenShare": 1,
+   "correctLetterDist": [
+    24,
+    40,
+    20,
+    2
+   ],
+   "distinctGroupKeys": 86,
+   "groupKeyRatio": 1,
+   "topOpening": "while researching a(86)"
+  },
+  "form_structure_sense": {
+   "n": 56,
+   "maxSimP50": 0.11,
+   "maxSimP90": 0.18,
+   "maxSim": 0.23,
+   "pairsGe06": 0,
+   "topTokens": [
+    "studying:17",
+    "spent:15",
+    "marine:14",
+    "biologist:11",
+    "early:10"
+   ],
+   "topTokenShare": 0.3,
+   "correctLetterDist": [
+    31,
+    12,
+    8,
+    5
+   ],
+   "distinctGroupKeys": 56,
+   "groupKeyRatio": 1,
+   "topOpening": "the marine biologist(5)"
+  },
+  "nonlinear_equations_systems": {
+   "n": 40,
+   "maxSimP50": 0.15,
+   "maxSimP90": 0.49,
+   "maxSim": 0.57,
+   "pairsGe06": 0,
+   "topTokens": [
+    "function:35",
+    "graph:34",
+    "where:31",
+    "shown:30",
+    "plane:18"
+   ],
+   "topTokenShare": 0.88,
+   "correctLetterDist": [
+    9,
+    11,
+    9,
+    1
+   ],
+   "distinctGroupKeys": 40,
+   "groupKeyRatio": 1,
+   "topOpening": "in the $xy$-plane,(6)"
+  },
+  "area_volume": {
+   "n": 8,
+   "maxSimP50": 0.42,
+   "maxSimP90": 0.43,
+   "maxSim": 0.43,
+   "pairsGe06": 0,
+   "topTokens": [
+    "radius:6",
+    "height:6",
+    "length:2",
+    "circular:2",
+    "cylindrical:2"
+   ],
+   "topTokenShare": 0.75,
+   "correctLetterDist": [
+    1,
+    2,
+    2,
+    1
+   ],
+   "distinctGroupKeys": 8,
+   "groupKeyRatio": 1,
+   "topOpening": "a cylindrical water(2)"
+  },
+  "circles": {
+   "n": 9,
+   "maxSimP50": 0.11,
+   "maxSimP90": 0.3,
+   "maxSim": 0.3,
+   "pairsGe06": 0,
+   "topTokens": [
+    "circle:8",
+    "angle:6",
+    "center:6",
+    "central:5",
+    "shown:5"
+   ],
+   "topTokenShare": 0.89,
+   "correctLetterDist": [
+    2,
+    4,
+    1,
+    0
+   ],
+   "distinctGroupKeys": 9,
+   "groupKeyRatio": 1,
+   "topOpening": "in the circle(5)"
+  },
+  "command_of_evidence_quant": {
+   "n": 32,
+   "maxSimP50": 0.07,
+   "maxSimP90": 0.11,
+   "maxSim": 0.11,
+   "pairsGe06": 0,
+   "topTokens": [
+    "table:18",
+    "below:15",
+    "average:14",
+    "studied:13",
+    "recorded:12"
+   ],
+   "topTokenShare": 0.56,
+   "correctLetterDist": [
+    15,
+    10,
+    5,
+    2
+   ],
+   "distinctGroupKeys": 32,
+   "groupKeyRatio": 1,
+   "topOpening": "an economic historian(4)"
+  },
+  "evaluating_statistical_claims": {
+   "n": 5,
+   "maxSimP50": 0.05,
+   "maxSimP90": 0.07,
+   "maxSim": 0.07,
+   "pairsGe06": 0,
+   "topTokens": [
+    "whether:4",
+    "results:3",
+    "shown:3",
+    "figure:3",
+    "wants:3"
+   ],
+   "topTokenShare": 0.8,
+   "correctLetterDist": [
+    5,
+    0,
+    0,
+    0
+   ],
+   "distinctGroupKeys": 5,
+   "groupKeyRatio": 1,
+   "topOpening": "an art historian(2)"
+  },
+  "inference_margin_error": {
+   "n": 6,
+   "maxSimP50": 0.23,
+   "maxSimP90": 0.28,
+   "maxSim": 0.28,
+   "pairsGe06": 0,
+   "topTokens": [
+    "wants:6",
+    "estimate:6",
+    "sample:6",
+    "adult:5",
+    "otters:5"
+   ],
+   "topTokenShare": 1,
+   "correctLetterDist": [
+    3,
+    0,
+    0,
+    0
+   ],
+   "distinctGroupKeys": 6,
+   "groupKeyRatio": 1,
+   "topOpening": "a marine biologist(3)"
+  },
+  "linear_functions": {
+   "n": 13,
+   "maxSimP50": 0.05,
+   "maxSimP90": 0.2,
+   "maxSim": 0.2,
+   "pairsGe06": 0,
+   "topTokens": [
+    "linear:12",
+    "graph:10",
+    "shows:9",
+    "function:9",
+    "models:7"
+   ],
+   "topTokenShare": 0.92,
+   "correctLetterDist": [
+    5,
+    1,
+    4,
+    0
+   ],
+   "distinctGroupKeys": 13,
+   "groupKeyRatio": 1,
+   "topOpening": "the graph shows(6)"
+  },
+  "linear_inequalities": {
+   "n": 16,
+   "maxSimP50": 0.05,
+   "maxSimP90": 0.1,
+   "maxSim": 0.1,
+   "pairsGe06": 0,
+   "topTokens": [
+    "shows:10",
+    "dollars:9",
+    "number:9",
+    "graph:8",
+    "total:7"
+   ],
+   "topTokenShare": 0.63,
+   "correctLetterDist": [
+    6,
+    3,
+    3,
+    1
+   ],
+   "distinctGroupKeys": 16,
+   "groupKeyRatio": 1,
+   "topOpening": "a landscaping company(2)"
+  },
+  "lines_angles_triangles": {
+   "n": 26,
+   "maxSimP50": 0.14,
+   "maxSimP90": 0.34,
+   "maxSim": 0.34,
+   "pairsGe06": 0,
+   "topTokens": [
+    "angle:22",
+    "triangle:19",
+    "figure:15",
+    "similar:11",
+    "parallel:9"
+   ],
+   "topTokenShare": 0.85,
+   "correctLetterDist": [
+    5,
+    4,
+    5,
+    4
+   ],
+   "distinctGroupKeys": 26,
+   "groupKeyRatio": 1,
+   "topOpening": "in the figure,(13)"
+  },
+  "nonlinear_functions": {
+   "n": 34,
+   "maxSimP50": 0.19,
+   "maxSimP90": 0.31,
+   "maxSim": 0.41,
+   "pairsGe06": 0,
+   "topTokens": [
+    "graph:34",
+    "function:33",
+    "shown:25",
+    "where:22",
+    "models:18"
+   ],
+   "topTokenShare": 1,
+   "correctLetterDist": [
+    11,
+    8,
+    5,
+    0
+   ],
+   "distinctGroupKeys": 34,
+   "groupKeyRatio": 1,
+   "topOpening": "the graph shows(6)"
+  },
+  "one_variable_data": {
+   "n": 3,
+   "maxSimP50": 0.03,
+   "maxSimP90": 0.03,
+   "maxSim": 0.03,
+   "pairsGe06": 0,
+   "topTokens": [
+    "recorded:2",
+    "number:2",
+    "during:2",
+    "coastal:2",
+    "survey:2"
+   ],
+   "topTokenShare": 0.67,
+   "correctLetterDist": [
+    0,
+    2,
+    0,
+    0
+   ],
+   "distinctGroupKeys": 3,
+   "groupKeyRatio": 1,
+   "topOpening": "a city planner(1)"
+  },
+  "percentages": {
+   "n": 13,
+   "maxSimP50": 0.04,
+   "maxSimP90": 0.09,
+   "maxSim": 0.09,
+   "pairsGe06": 0,
+   "topTokens": [
+    "shows:9",
+    "below:7",
+    "number:6",
+    "table:6",
+    "during:4"
+   ],
+   "topTokenShare": 0.69,
+   "correctLetterDist": [
+    2,
+    6,
+    2,
+    1
+   ],
+   "distinctGroupKeys": 13,
+   "groupKeyRatio": 1,
+   "topOpening": "a marine biology(3)"
+  },
+  "probability": {
+   "n": 5,
+   "maxSimP50": 0.18,
+   "maxSimP90": 0.18,
+   "maxSim": 0.18,
+   "pairsGe06": 0,
+   "topTokens": [
+    "results:5",
+    "shown:5",
+    "table:5",
+    "recorded:4",
+    "whether:4"
+   ],
+   "topTokenShare": 1,
+   "correctLetterDist": [
+    3,
+    1,
+    0,
+    0
+   ],
+   "distinctGroupKeys": 5,
+   "groupKeyRatio": 1,
+   "topOpening": "a city library(1)"
+  },
+  "ratios_rates_units": {
+   "n": 15,
+   "maxSimP50": 0.03,
+   "maxSimP90": 0.1,
+   "maxSim": 0.1,
+   "pairsGe06": 0,
+   "topTokens": [
+    "different:10",
+    "shows:9",
+    "table:7",
+    "distance:6",
+    "along:5"
+   ],
+   "topTokenShare": 0.67,
+   "correctLetterDist": [
+    1,
+    6,
+    1,
+    0
+   ],
+   "distinctGroupKeys": 15,
+   "groupKeyRatio": 1,
+   "topOpening": "a marine biology(3)"
+  },
+  "right_triangles_trigonometry": {
+   "n": 23,
+   "maxSimP50": 0.12,
+   "maxSimP90": 0.41,
+   "maxSim": 0.42,
+   "pairsGe06": 0,
+   "topTokens": [
+    "angle:18",
+    "right:10",
+    "triangle:10",
+    "radius:10",
+    "height:9"
+   ],
+   "topTokenShare": 0.78,
+   "correctLetterDist": [
+    2,
+    5,
+    6,
+    1
+   ],
+   "distinctGroupKeys": 23,
+   "groupKeyRatio": 1,
+   "topOpening": "in right triangle(3)"
+  },
+  "two_variable_data": {
+   "n": 3,
+   "maxSimP50": 0.05,
+   "maxSimP90": 0.05,
+   "maxSim": 0.05,
+   "pairsGe06": 0,
+   "topTokens": [
+    "along:3",
+    "scatterplot:3",
+    "recorded:2",
+    "thousands:2",
+    "dollars:2"
+   ],
+   "topTokenShare": 1,
+   "correctLetterDist": [
+    1,
+    0,
+    1,
+    0
+   ],
+   "distinctGroupKeys": 3,
+   "groupKeyRatio": 1,
+   "topOpening": "an art historian(1)"
+  }
+ }
+}

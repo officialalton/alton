@@ -1,0 +1,4580 @@
+[
+ {
+  "candidateKey": "ap_microeconomics-f01-k0",
+  "cellId": "ap_microeconomics-f01",
+  "apSubjectCode": "ap_microeconomics",
+  "kind": "frq_bundle",
+  "keywordCode": "3.7",
+  "unitCode": "3",
+  "skillPrimary": "4.A",
+  "structure": "frq_multipart",
+  "calculator": "allowed",
+  "archetype": "mif_long_pc_firm",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Standard multi-part FRQ on perfect competition. Students must derive MC and ATC from a total cost table (small integer arithmetic), identify the long-run zero-profit quantity (Q=2 at P=18), apply P=MC at P=25 (Q=4, profit $20), draw and then modify paired market/firm graphs, and reason about entry and the new long-run equilibrium in a constant-cost industry. Concept depth and representation changes are typical of AP exam FRQs. Numbers are clean, wording is unambiguous, and the reading load is light, so the difficulty comes from legitimate sources.",
+  "payload": {
+   "archetype": "mif_long_pc_firm",
+   "template": "long_pc_firm",
+   "topic": "3.7",
+   "extra_topics": [
+    "3.5",
+    "3.6",
+    "2.7"
+   ],
+   "skill": "4.A",
+   "calculator": "allowed",
+   "title": "A perfectly competitive firm and its market",
+   "stimulus": {
+    "kind": "table",
+    "description": "Total cost of producing cabbage for a typical firm in a perfectly competitive, constant-cost cabbage industry.",
+    "data": {
+     "columns": [
+      "Quantity (tons)",
+      "Total cost (dollars)"
+     ],
+     "rows": [
+      [
+       "0",
+       "8"
+      ],
+      [
+       "1",
+       "20"
+      ],
+      [
+       "2",
+       "36"
+      ],
+      [
+       "3",
+       "56"
+      ],
+      [
+       "4",
+       "80"
+      ],
+      [
+       "5",
+       "108"
+      ],
+      [
+       "6",
+       "140"
+      ],
+      [
+       "7",
+       "176"
+      ],
+      [
+       "8",
+       "216"
+      ]
+     ],
+     "notes": [
+      "The market for cabbage is currently in long-run equilibrium at a price of $18 per ton."
+     ]
+    }
+   },
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "Draw correctly labeled side-by-side graphs for the market for cabbage and for a typical firm, both in long-run equilibrium at a price of $18 per ton. On your graphs, label the market equilibrium price and quantity ($18 and Q_M), the firm's quantity (Q_F), and the firm's MC and ATC curves.",
+     "points": 3,
+     "response_mode": "draw",
+     "skill_codes": [
+      "4.A"
+     ],
+     "model_answer": "ALTON reference answer for self-review — not official AP scoring. Market graph: downward-sloping demand and upward-sloping supply meeting at $18 and Q_M. Firm graph: U-shaped ATC with MC crossing it at its minimum, a horizontal price line at $18, and Q_F where the price line meets MC.",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Market graph labeled correctly",
+       "required_elements": [
+        "Draws downward-sloping demand and upward-sloping supply curves with Price and Quantity labeled on the axes and the intersection labeled with the price and Q_M"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "labels may be written as P and Q or as price and quantity",
+        "curves may be labeled D and S or demand and supply"
+       ],
+       "common_errors": [
+        "omits axis labels",
+        "draws both curves with the same slope sign"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      },
+      {
+       "row_id": "A2",
+       "points": 1,
+       "criterion": "Firm graph curves correct",
+       "required_elements": [
+        "Draws U-shaped MC and ATC curves on the firm graph, with MC crossing ATC at the minimum of ATC and a horizontal price line at the long-run price touching ATC at its minimum"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "the price line may be labeled as demand, marginal revenue, or price",
+        "MC may be drawn as a rising curve through the minimum of ATC"
+       ],
+       "common_errors": [
+        "draws ATC as a downward-sloping line only",
+        "places the price line above or below the minimum of ATC"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      },
+      {
+       "row_id": "A3",
+       "points": 1,
+       "criterion": "Quantities labeled consistently",
+       "required_elements": [
+        "Labels the firm's quantity Q_F where the price line meets MC and shows the same price on both graphs"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "Q_F may be marked on the horizontal axis directly below the MC-price intersection",
+        "the firm quantity is labeled at the minimum of ATC"
+       ],
+       "common_errors": [
+        "labels Q_F at the minimum of MC",
+        "uses different prices on the two graphs"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "3.7"
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "Suppose market demand for cabbage increases and the market price rises to $25 per ton. Using the table, calculate the firm's profit-maximizing quantity and its economic profit at that price.",
+     "points": 2,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "3.C"
+     ],
+     "model_answer": "ALTON reference answer for self-review — not official AP scoring. Marginal cost of the 4th ton is $24, below $25, and the next ton costs $28, above it, so the firm produces 4 tons. Profit = $25 x 4 - $80 = $20.",
+     "rubric_rows": [
+      {
+       "row_id": "B1",
+       "points": 1,
+       "criterion": "Profit-maximizing quantity (answer)",
+       "required_elements": [
+        "Finds the last ton whose marginal cost does not exceed the price (the quantity answer is correct)",
+        "4"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "price equals marginal cost",
+        "compares each additional ton's cost with the price"
+       ],
+       "common_errors": [
+        "uses the quantity that minimizes average total cost",
+        "uses the largest quantity in the table"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      },
+      {
+       "row_id": "B2",
+       "points": 1,
+       "criterion": "Economic profit (answer)",
+       "required_elements": [
+        "Computes total revenue minus total cost at the profit-maximizing quantity (the profit answer is correct)",
+        "20"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "price minus ATC times quantity",
+        "total revenue less the table's total cost"
+       ],
+       "common_errors": [
+        "forgets to subtract total cost",
+        "uses marginal cost instead of total cost"
+       ],
+       "requires_row_id": "B1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "3.5"
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "On your graphs from part (A), show the short-run effect of the increase in demand: label the new market price ($25) on the market graph and, on the firm graph, label the firm's new quantity (Q_F2) and shade the firm's economic profit.",
+     "points": 2,
+     "response_mode": "draw",
+     "skill_codes": [
+      "4.C"
+     ],
+     "model_answer": "ALTON reference answer for self-review — not official AP scoring. Market demand shifts right and the equilibrium price rises to the new price. On the firm graph the new horizontal price line meets MC at Q_F2, and the rectangle between the price and ATC up to Q_F2 is shaded.",
+     "rubric_rows": [
+      {
+       "row_id": "C1",
+       "points": 1,
+       "criterion": "Market effect shown",
+       "required_elements": [
+        "Shifts the market demand curve to the right and labels the new, higher equilibrium price on the market graph"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "draws the new demand curve and labels it D2",
+        "shows an arrow indicating the rightward shift"
+       ],
+       "common_errors": [
+        "shifts the supply curve instead of demand",
+        "shows the price falling"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      },
+      {
+       "row_id": "C2",
+       "points": 1,
+       "criterion": "Firm profit shown",
+       "required_elements": [
+        "Draws the higher price line on the firm graph, labels Q_F2 where it meets MC, and shades the profit rectangle between the price and ATC up to Q_F2"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "shading may be a rectangle outlined and hatched",
+        "Q_F2 may be marked on the horizontal axis"
+       ],
+       "common_errors": [
+        "shades the area between price and MC",
+        "labels Q_F2 at the minimum of ATC"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "2.7"
+     ]
+    },
+    {
+     "label": "D",
+     "prompt": "Explain what happens to the number of firms in the industry in the long run and why.",
+     "points": 2,
+     "response_mode": "explain",
+     "skill_codes": [
+      "2.B"
+     ],
+     "model_answer": "ALTON reference answer for self-review — not official AP scoring. Firms are earning positive economic profit, so new firms enter; entry shifts market supply to the right, which lowers the price until economic profit returns to zero.",
+     "rubric_rows": [
+      {
+       "row_id": "D1",
+       "points": 1,
+       "criterion": "Entry because of profit",
+       "required_elements": [
+        "States that firms enter the industry because existing firms are earning positive economic profit"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "new firms are attracted by profits",
+        "the number of firms increases because price exceeds average total cost"
+       ],
+       "common_errors": [
+        "says firms exit",
+        "says the number of firms does not change in a competitive market"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      },
+      {
+       "row_id": "D2",
+       "points": 1,
+       "criterion": "Mechanism of adjustment",
+       "required_elements": [
+        "Explains that entry shifts market supply to the right, which lowers the price until economic profit falls to zero"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "more firms mean greater market supply and a lower price",
+        "the price falls back toward the minimum of average total cost"
+       ],
+       "common_errors": [
+        "says entry shifts demand",
+        "says price keeps rising"
+       ],
+       "requires_row_id": "D1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "3.6"
+     ]
+    },
+    {
+     "label": "E",
+     "prompt": "In the new long-run equilibrium, will the market quantity of the good be greater than, less than, or equal to Q_M? Identify and give a reason.",
+     "points": 1,
+     "response_mode": "select",
+     "skill_codes": [
+      "3.A"
+     ],
+     "model_answer": "ALTON reference answer for self-review — not official AP scoring. Greater than Q_M, because the price returns to its original level while demand is higher, so the market quantity is larger.",
+     "rubric_rows": [
+      {
+       "row_id": "E1",
+       "points": 1,
+       "criterion": "States the long-run market quantity and the reason",
+       "required_elements": [
+        "States that the long-run market quantity is greater than Q_M because the price returns to its original level at the higher demand"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "more than the original quantity",
+        "the long-run supply curve is horizontal in a constant-cost industry"
+       ],
+       "common_errors": [
+        "says the quantity returns to Q_M",
+        "says the quantity is less than Q_M"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "3.7"
+     ]
+    }
+   ],
+   "total_points": 10,
+   "est_minutes": 24,
+   "facts": [
+    "b=2",
+    "k=2",
+    "a=10",
+    "P1=18",
+    "P2=25",
+    "qstar=4",
+    "profit=20",
+    "good=cabbage"
+   ],
+   "context": "perfect_competition",
+   "blueprint": {
+    "id": "mif_long_pc_firm",
+    "subject": "ap_microeconomics",
+    "kind": "frq_bundle",
+    "concept": "Perfectly competitive firm in long-run equilibrium, a demand increase, short-run profit, and long-run entry",
+    "topic": "3.7",
+    "skill": "4.A",
+    "student_thinking": [
+     "Draw the market and firm graphs consistent with long-run equilibrium",
+     "Use marginal cost from the table to find the profit-maximizing quantity and profit",
+     "Show the short-run change and reason about entry"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "Competitive constant-cost industry with the cost table shown and a long-run price equal to the minimum of ATC",
+      "evidence": "stated in the stimulus notes"
+     }
+    ],
+    "material": {
+     "type": "table",
+     "must_include": [
+      "total cost table",
+      "long-run price"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "table scan of profit by quantity versus the MC-at-most-price rule, and ATC minimum found by scanning the table",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "A",
+      "skills": [
+       "4.A"
+      ],
+      "topics": [
+       "3.7"
+      ],
+      "points": 3,
+      "accepted_answers": [
+       "ALTON reference answer for self-review — not official AP scoring. Market graph: downward-sloping demand and upward-sloping supply meeting at $18 and Q_M. Firm graph: U-shaped ATC with MC crossing it at its minimum, a horizontal price line at $18, and Q_F where the price line meets MC."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Market graph labeled correctly",
+        "elements": [
+         "Draws downward-sloping demand and upward-sloping supply curves with Price and Quantity labeled on the axes and the intersection labeled with the price and Q_M"
+        ]
+       },
+       {
+        "row_id": "A2",
+        "points": 1,
+        "criterion": "Firm graph curves correct",
+        "elements": [
+         "Draws U-shaped MC and ATC curves on the firm graph, with MC crossing ATC at the minimum of ATC and a horizontal price line at the long-run price touching ATC at its minimum"
+        ]
+       },
+       {
+        "row_id": "A3",
+        "points": 1,
+        "criterion": "Quantities labeled consistently",
+        "elements": [
+         "Labels the firm's quantity Q_F where the price line meets MC and shows the same price on both graphs"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "B",
+      "skills": [
+       "3.C"
+      ],
+      "topics": [
+       "3.5"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "ALTON reference answer for self-review — not official AP scoring. Marginal cost of the 4th ton is $24, below $25, and the next ton costs $28, above it, so the firm produces 4 tons. Profit = $25 x 4 - $80 = $20."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "B1",
+        "points": 1,
+        "criterion": "Profit-maximizing quantity (answer)",
+        "elements": [
+         "Finds the last ton whose marginal cost does not exceed the price (the quantity answer is correct)",
+         "4"
+        ]
+       },
+       {
+        "row_id": "B2",
+        "points": 1,
+        "criterion": "Economic profit (answer)",
+        "elements": [
+         "Computes total revenue minus total cost at the profit-maximizing quantity (the profit answer is correct)",
+         "20"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "C",
+      "skills": [
+       "4.C"
+      ],
+      "topics": [
+       "2.7"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "ALTON reference answer for self-review — not official AP scoring. Market demand shifts right and the equilibrium price rises to the new price. On the firm graph the new horizontal price line meets MC at Q_F2, and the rectangle between the price and ATC up to Q_F2 is shaded."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "C1",
+        "points": 1,
+        "criterion": "Market effect shown",
+        "elements": [
+         "Shifts the market demand curve to the right and labels the new, higher equilibrium price on the market graph"
+        ]
+       },
+       {
+        "row_id": "C2",
+        "points": 1,
+        "criterion": "Firm profit shown",
+        "elements": [
+         "Draws the higher price line on the firm graph, labels Q_F2 where it meets MC, and shades the profit rectangle between the price and ATC up to Q_F2"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "D",
+      "skills": [
+       "2.B"
+      ],
+      "topics": [
+       "3.6"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "ALTON reference answer for self-review — not official AP scoring. Firms are earning positive economic profit, so new firms enter; entry shifts market supply to the right, which lowers the price until economic profit returns to zero."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "D1",
+        "points": 1,
+        "criterion": "Entry because of profit",
+        "elements": [
+         "States that firms enter the industry because existing firms are earning positive economic profit"
+        ]
+       },
+       {
+        "row_id": "D2",
+        "points": 1,
+        "criterion": "Mechanism of adjustment",
+        "elements": [
+         "Explains that entry shifts market supply to the right, which lowers the price until economic profit falls to zero"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "E",
+      "skills": [
+       "3.A"
+      ],
+      "topics": [
+       "3.7"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "ALTON reference answer for self-review — not official AP scoring. Greater than Q_M, because the price returns to its original level while demand is higher, so the market quantity is larger."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "E1",
+        "points": 1,
+        "criterion": "States the long-run market quantity and the reason",
+        "elements": [
+         "States that the long-run market quantity is greater than Q_M because the price returns to its original level at the higher demand"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 10,
+    "model": {
+     "initial_state": "competitive industry in long-run equilibrium at $18 with firm costs TC = 8 + 10Q + 2Q^2",
+     "changed_conditions": [
+      "market demand rises and price becomes $25"
+     ],
+     "held_constant": [
+      "firm cost curves",
+      "constant-cost industry"
+     ],
+     "checks": [
+      "ATC minimum at the long-run price",
+      "profit-maximizing quantity by scan",
+      "profit",
+      "long-run entry direction"
+     ],
+     "key_assumptions_id": "pc-constant-cost",
+     "explanation_assumptions_id": "pc-constant-cost"
+    }
+   },
+   "seed": 9200,
+   "pack_id": "mif_long_pc_firm-s9200"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "mif_long_pc_firm",
+   "facts": [
+    "b=2",
+    "k=2",
+    "a=10",
+    "P1=18",
+    "P2=25",
+    "qstar=4",
+    "profit=20",
+    "good=cabbage"
+   ],
+   "seed": 9200
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Standard long FRQ (10 points) on a perfectly competitive firm and its market. The table is consistent: minimum ATC is $18 at 2 tons, and at $25 the firm produces 4 tons for a $20 profit. The rubric rows are meaning-based with valid alternatives, and every part is in scope for Unit 3.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Each part fits its own skill and topic: graphing for A and C, a calculation for B, and explanation for D and E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Keys are unique and consistent with the table. The rubric rows are split sensibly, with B2 depending on B1 and D2 on D1."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table data are complete and the notes state the long-run price. The stem calls the industry constant-cost."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to an FRQ. The rubric lists plausible common errors."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The 10-point grain, reading load and calculator use are typical of a long microeconomics FRQ."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part FRQ on perfect competition. Students must derive MC and ATC from a total cost table (small integer arithmetic), identify the long-run zero-profit quantity (Q=2 at P=18), apply P=MC at P=25 (Q=4, profit $20), draw and then modify paired market/firm graphs, and reason about entry and the new long-run equilibrium in a constant-cost industry. Concept depth and representation changes are typical of AP exam FRQs. Numbers are clean, wording is unambiguous, and the reading load is light, so the difficulty comes from legitimate sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 7,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 840
+  }
+ },
+ {
+  "candidateKey": "ap_microeconomics-f02-k0",
+  "cellId": "ap_microeconomics-f02",
+  "apSubjectCode": "ap_microeconomics",
+  "kind": "frq_bundle",
+  "keywordCode": "2.8",
+  "unitCode": "2",
+  "skillPrimary": "4.A",
+  "structure": "frq_multipart",
+  "calculator": "allowed",
+  "archetype": "mif_long_market_policy",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "criterion_failed_key_scoring",
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Standard multi-part AP FRQ on price ceilings. It requires converting a table to a labeled supply-demand graph, finding equilibrium, applying a binding ceiling (Qd=72, Qs=54, shortage=18), explaining two non-shortage effects (e.g., deadweight loss, black markets, lower quality, search costs), and recognizing a non-binding ceiling at $17 (above the $15 equilibrium, so no change in quantity traded). Concepts are core Unit 2 (2.6 and 2.8), the arithmetic is a single subtraction, and the reading load is light. The main demand is graphing accuracy and conceptual explanation, which fits the exam-prep tier for full mocks rather than basic learning or advanced supplement.",
+  "payload": {
+   "archetype": "mif_long_market_policy",
+   "template": "long_market_policy",
+   "topic": "2.8",
+   "extra_topics": [
+    "2.6"
+   ],
+   "skill": "4.A",
+   "calculator": "allowed",
+   "title": "A market with a price ceiling",
+   "stimulus": {
+    "kind": "table",
+    "description": "Quantity demanded and quantity supplied of gasoline at different prices in a competitive market.",
+    "data": {
+     "columns": [
+      "Price (dollars)",
+      "Quantity demanded",
+      "Quantity supplied"
+     ],
+     "rows": [
+      [
+       "$11",
+       "76",
+       "52"
+      ],
+      [
+       "$12",
+       "72",
+       "54"
+      ],
+      [
+       "$14",
+       "64",
+       "58"
+      ],
+      [
+       "$15",
+       "60",
+       "60"
+      ],
+      [
+       "$17",
+       "52",
+       "64"
+      ],
+      [
+       "$19",
+       "44",
+       "68"
+      ]
+     ]
+    }
+   },
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "Draw a correctly labeled graph of the competitive market for gasoline. On your graph, label the equilibrium price (P_E) and the equilibrium quantity (Q_E).",
+     "points": 2,
+     "response_mode": "draw",
+     "skill_codes": [
+      "4.A"
+     ],
+     "model_answer": "ALTON reference answer for self-review — not official AP scoring. A downward-sloping demand curve and an upward-sloping supply curve with Price and Quantity axes, intersecting at P_E and Q_E.",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Curves and axes",
+       "required_elements": [
+        "Draws a downward-sloping demand curve and an upward-sloping supply curve with Price and Quantity labeled on the axes and the curves labeled"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "curves may be labeled D and S",
+        "axes may be labeled P and Q"
+       ],
+       "common_errors": [
+        "draws two curves with the same slope sign",
+        "omits an axis label"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      },
+      {
+       "row_id": "A2",
+       "points": 1,
+       "criterion": "Equilibrium labeled",
+       "required_elements": [
+        "Labels the intersection of the curves as the equilibrium with P_E on the price axis and Q_E on the quantity axis"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "drops dashed lines from the intersection to the axes",
+        "labels the equilibrium point E with P_E and Q_E"
+       ],
+       "common_errors": [
+        "labels a point that is not the intersection",
+        "labels only the price"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "2.6"
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "Using the table, determine the equilibrium quantity.",
+     "points": 1,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "3.C"
+     ],
+     "model_answer": "ALTON reference answer for self-review — not official AP scoring. Quantity demanded equals quantity supplied at $15, where 60 units are traded.",
+     "rubric_rows": [
+      {
+       "row_id": "B1",
+       "points": 1,
+       "criterion": "Equilibrium quantity (answer)",
+       "required_elements": [
+        "Identifies the price at which quantity demanded equals quantity supplied and reads the quantity (the quantity answer is correct)",
+        "60"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "the row where the two quantities are equal",
+        "equilibrium quantity from the table"
+       ],
+       "common_errors": [
+        "reports the equilibrium price instead of the quantity"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "2.6"
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "The government sets a price ceiling of $12 per unit. On your graph, show the price ceiling, label the quantity actually traded (Q_C), and label the shortage.",
+     "points": 2,
+     "response_mode": "draw",
+     "skill_codes": [
+      "4.B"
+     ],
+     "model_answer": "ALTON reference answer for self-review — not official AP scoring. A horizontal line at the ceiling below P_E, Q_C on the quantity axis at the quantity supplied at the ceiling, and the horizontal gap between supply and demand at the ceiling labeled as the shortage.",
+     "rubric_rows": [
+      {
+       "row_id": "C1",
+       "points": 1,
+       "criterion": "Ceiling drawn",
+       "required_elements": [
+        "Draws a horizontal price ceiling line below the equilibrium price and labels it with the ceiling price"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "the line may extend across the graph at the ceiling price",
+        "the line is labeled price ceiling or PC"
+       ],
+       "common_errors": [
+        "draws the ceiling above the equilibrium price",
+        "draws a vertical line"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      },
+      {
+       "row_id": "C2",
+       "points": 1,
+       "criterion": "Quantity and shortage shown",
+       "required_elements": [
+        "Labels Q_C where the ceiling meets the supply curve and marks the gap between the supply and demand curves at the ceiling as the shortage"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "Q_C is marked on the horizontal axis at the quantity supplied",
+        "the shortage is shown as a horizontal segment between supply and demand"
+       ],
+       "common_errors": [
+        "marks Q_C at the quantity demanded",
+        "labels the surplus instead of the shortage"
+       ],
+       "requires_row_id": "C1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "2.8"
+     ]
+    },
+    {
+     "label": "D",
+     "prompt": "Using the table, calculate the quantity demanded and the quantity supplied at the price ceiling and the size of the shortage.",
+     "points": 2,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "3.C"
+     ],
+     "model_answer": "ALTON reference answer for self-review — not official AP scoring. At $12: quantity demanded is 72 and quantity supplied is 54, so the shortage is 18 units.",
+     "rubric_rows": [
+      {
+       "row_id": "D1",
+       "points": 1,
+       "criterion": "Quantities at the ceiling (answer)",
+       "required_elements": [
+        "Reads the quantity demanded and quantity supplied at the ceiling price (both answers are correct)",
+        "72",
+        "54"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "row of the table at the ceiling price",
+        "quantity demanded and supplied at the ceiling"
+       ],
+       "common_errors": [
+        "reads quantities at the equilibrium price"
+       ],
+       "requires_row_id": null,
+       "requires_both": true,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      },
+      {
+       "row_id": "D2",
+       "points": 1,
+       "criterion": "Shortage (answer)",
+       "required_elements": [
+        "Subtracts quantity supplied from quantity demanded to find the shortage (the shortage answer is correct)",
+        "18"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "difference between demanded and supplied",
+        "excess of quantity demanded over quantity supplied"
+       ],
+       "common_errors": [
+        "reports the quantity traded as the shortage"
+       ],
+       "requires_row_id": "D1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "2.8"
+     ]
+    },
+    {
+     "label": "E",
+     "prompt": "Explain two effects of the price ceiling on the market other than the shortage.",
+     "points": 2,
+     "response_mode": "explain",
+     "skill_codes": [
+      "2.A"
+     ],
+     "model_answer": "ALTON reference answer for self-review — not official AP scoring. Some mutually beneficial trades no longer occur, creating deadweight loss; and buyers who are willing to pay more than the ceiling cannot buy, which leads to nonprice rationing or black markets.",
+     "rubric_rows": [
+      {
+       "row_id": "E1",
+       "points": 1,
+       "criterion": "Explains the deadweight loss",
+       "required_elements": [
+        "Explains that the quantity traded falls below the efficient quantity, so some mutually beneficial transactions do not occur and a deadweight loss results"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "total surplus falls",
+        "a triangle of lost surplus appears"
+       ],
+       "common_errors": [
+        "says total surplus rises",
+        "says the price ceiling helps all buyers"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      },
+      {
+       "row_id": "E2",
+       "points": 1,
+       "criterion": "Explains nonprice rationing",
+       "required_elements": [
+        "Explains that buyers willing to pay more than the ceiling cannot obtain the good, which leads to waiting, favoritism, or black markets"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "black markets could develop",
+        "buyers compete with time or queues instead of price"
+       ],
+       "common_errors": [
+        "says sellers lower their costs",
+        "says the shortage disappears"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "2.8"
+     ]
+    },
+    {
+     "label": "F",
+     "prompt": "Suppose instead the government had set a price ceiling of $17 per unit. Identify what would happen to the quantity traded and explain why.",
+     "points": 1,
+     "response_mode": "select",
+     "skill_codes": [
+      "3.A"
+     ],
+     "model_answer": "ALTON reference answer for self-review — not official AP scoring. The quantity traded would not change, because $17 is above the equilibrium price of $15, so the ceiling is not binding.",
+     "rubric_rows": [
+      {
+       "row_id": "F1",
+       "points": 1,
+       "criterion": "States that the ceiling is nonbinding and gives the reason",
+       "required_elements": [
+        "States that the quantity traded would be unchanged because a ceiling above the equilibrium price is not binding"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "no effect on price or quantity",
+        "the market stays at equilibrium"
+       ],
+       "common_errors": [
+        "says a shortage would arise",
+        "says the quantity traded would fall"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "2.8"
+     ]
+    }
+   ],
+   "total_points": 10,
+   "est_minutes": 25,
+   "facts": [
+    "a=120",
+    "b=4",
+    "c=30",
+    "d=2",
+    "P0=15",
+    "Pc=12",
+    "hi=17",
+    "good=gasoline"
+   ],
+   "context": "price_ceiling",
+   "blueprint": {
+    "id": "mif_long_market_policy",
+    "subject": "ap_microeconomics",
+    "kind": "frq_bundle",
+    "concept": "Competitive market equilibrium and a binding price ceiling with its shortage, deadweight loss, and a nonbinding comparison",
+    "topic": "2.8",
+    "skill": "4.A",
+    "student_thinking": [
+     "Draw the market and read equilibrium from the table",
+     "Show the binding ceiling, the quantity traded and the shortage on the graph and calculate them",
+     "Explain the welfare effects and contrast a nonbinding ceiling"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "Competitive market with the schedule in the table and a ceiling below the equilibrium price",
+      "evidence": "stated in the stimulus"
+     }
+    ],
+    "material": {
+     "type": "table",
+     "must_include": [
+      "demand and supply schedule",
+      "ceiling price"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "table intersection scan versus sympy solution of the linear schedules",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "A",
+      "skills": [
+       "4.A"
+      ],
+      "topics": [
+       "2.6"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "ALTON reference answer for self-review — not official AP scoring. A downward-sloping demand curve and an upward-sloping supply curve with Price and Quantity axes, intersecting at P_E and Q_E."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Curves and axes",
+        "elements": [
+         "Draws a downward-sloping demand curve and an upward-sloping supply curve with Price and Quantity labeled on the axes and the curves labeled"
+        ]
+       },
+       {
+        "row_id": "A2",
+        "points": 1,
+        "criterion": "Equilibrium labeled",
+        "elements": [
+         "Labels the intersection of the curves as the equilibrium with P_E on the price axis and Q_E on the quantity axis"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "B",
+      "skills": [
+       "3.C"
+      ],
+      "topics": [
+       "2.6"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "ALTON reference answer for self-review — not official AP scoring. Quantity demanded equals quantity supplied at $15, where 60 units are traded."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "B1",
+        "points": 1,
+        "criterion": "Equilibrium quantity (answer)",
+        "elements": [
+         "Identifies the price at which quantity demanded equals quantity supplied and reads the quantity (the quantity answer is correct)",
+         "60"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "C",
+      "skills": [
+       "4.B"
+      ],
+      "topics": [
+       "2.8"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "ALTON reference answer for self-review — not official AP scoring. A horizontal line at the ceiling below P_E, Q_C on the quantity axis at the quantity supplied at the ceiling, and the horizontal gap between supply and demand at the ceiling labeled as the shortage."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "C1",
+        "points": 1,
+        "criterion": "Ceiling drawn",
+        "elements": [
+         "Draws a horizontal price ceiling line below the equilibrium price and labels it with the ceiling price"
+        ]
+       },
+       {
+        "row_id": "C2",
+        "points": 1,
+        "criterion": "Quantity and shortage shown",
+        "elements": [
+         "Labels Q_C where the ceiling meets the supply curve and marks the gap between the supply and demand curves at the ceiling as the shortage"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "D",
+      "skills": [
+       "3.C"
+      ],
+      "topics": [
+       "2.8"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "ALTON reference answer for self-review — not official AP scoring. At $12: quantity demanded is 72 and quantity supplied is 54, so the shortage is 18 units."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "D1",
+        "points": 1,
+        "criterion": "Quantities at the ceiling (answer)",
+        "elements": [
+         "Reads the quantity demanded and quantity supplied at the ceiling price (both answers are correct)",
+         "72",
+         "54"
+        ]
+       },
+       {
+        "row_id": "D2",
+        "points": 1,
+        "criterion": "Shortage (answer)",
+        "elements": [
+         "Subtracts quantity supplied from quantity demanded to find the shortage (the shortage answer is correct)",
+         "18"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "E",
+      "skills": [
+       "2.A"
+      ],
+      "topics": [
+       "2.8"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "ALTON reference answer for self-review — not official AP scoring. Some mutually beneficial trades no longer occur, creating deadweight loss; and buyers who are willing to pay more than the ceiling cannot buy, which leads to nonprice rationing or black markets."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "E1",
+        "points": 1,
+        "criterion": "Explains the deadweight loss",
+        "elements": [
+         "Explains that the quantity traded falls below the efficient quantity, so some mutually beneficial transactions do not occur and a deadweight loss results"
+        ]
+       },
+       {
+        "row_id": "E2",
+        "points": 1,
+        "criterion": "Explains nonprice rationing",
+        "elements": [
+         "Explains that buyers willing to pay more than the ceiling cannot obtain the good, which leads to waiting, favoritism, or black markets"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "F",
+      "skills": [
+       "3.A"
+      ],
+      "topics": [
+       "2.8"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "ALTON reference answer for self-review — not official AP scoring. The quantity traded would not change, because $17 is above the equilibrium price of $15, so the ceiling is not binding."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "F1",
+        "points": 1,
+        "criterion": "States that the ceiling is nonbinding and gives the reason",
+        "elements": [
+         "States that the quantity traded would be unchanged because a ceiling above the equilibrium price is not binding"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 10,
+    "model": {
+     "initial_state": "competitive market with Qd = 120 - 4P and Qs = 30 + 2P",
+     "changed_conditions": [
+      "price ceiling of $12"
+     ],
+     "held_constant": [
+      "demand and supply curves"
+     ],
+     "checks": [
+      "equilibrium",
+      "quantities at the ceiling",
+      "shortage",
+      "nonbinding ceiling"
+     ],
+     "key_assumptions_id": "ceiling-linear",
+     "explanation_assumptions_id": "ceiling-linear"
+    }
+   },
+   "seed": 9200,
+   "pack_id": "mif_long_market_policy-s9200"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "mif_long_market_policy",
+   "facts": [
+    "a=120",
+    "b=4",
+    "c=30",
+    "d=2",
+    "P0=15",
+    "Pc=12",
+    "hi=17",
+    "good=gasoline"
+   ],
+   "seed": 9200
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The table and numeric keys are consistent. Part E asks for any two effects other than the shortage, but the rubric accepts only deadweight loss and nonprice rationing. Valid answers such as lower producer surplus or lower quality would be denied credit, so the key is not unique. Part C is also labeled 4.B although it is a graph-drawing task.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The content is in scope for topics 2.8 and 2.6. Part C's skill label is 4.B but the task is drawing and labeling a graph, which is 4.A; this is a metadata inconsistency."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Part E's rubric is too narrow for an open \"explain two effects\" prompt. It does not list producer surplus falling or quality declining as accepted alternatives, so correct student answers could lose credit. Other parts are fine."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete and consistent with the linear model."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "No multiple-choice options. The rubric common_errors are reasonable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical for a long FRQ at 10 points."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part AP FRQ on price ceilings. It requires converting a table to a labeled supply-demand graph, finding equilibrium, applying a binding ceiling (Qd=72, Qs=54, shortage=18), explaining two non-shortage effects (e.g., deadweight loss, black markets, lower quality, search costs), and recognizing a non-binding ceiling at $17 (above the $15 equilibrium, so no change in quantity traded). Concepts are core Unit 2 (2.6 and 2.8), the arithmetic is a single subtraction, and the reading load is light. The main demand is graphing accuracy and conceptual explanation, which fits the exam-prep tier for full mocks rather than basic learning or advanced supplement.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "candidateKey": "ap_microeconomics-f03-k0",
+  "cellId": "ap_microeconomics-f03",
+  "apSubjectCode": "ap_microeconomics",
+  "kind": "frq_bundle",
+  "keywordCode": "4.2",
+  "unitCode": "4",
+  "skillPrimary": "4.A",
+  "structure": "frq_multipart",
+  "calculator": "allowed",
+  "archetype": "mif_long_monopoly",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Standard FRQ-style monopoly item: draw D, MR (twice as steep), and MC curves, and find MR = MC. The solution is Q = 55 and P = 65, with profit 2,925. A price cap at MC gives Q = 110 and a loss of 100 (the fixed cost). Concept depth is moderate (monopoly pricing, allocative efficiency, price ceiling at MC). Each part is one or two steps, the numbers are clean, and the demand formula is given so the non-tabulated Q = 55 is unambiguous. The graphing tasks align with skill 4.A. It is appropriate for a full mock exam, not so basic as to be only introductory and not advanced.",
+  "payload": {
+   "archetype": "mif_long_monopoly",
+   "template": "long_monopoly",
+   "topic": "4.2",
+   "extra_topics": [
+    "6.4"
+   ],
+   "skill": "4.A",
+   "calculator": "allowed",
+   "title": "A monopolist and price regulation",
+   "stimulus": {
+    "kind": "table",
+    "description": "Demand schedule for the only seller (a monopolist) of a product.",
+    "data": {
+     "columns": [
+      "Quantity",
+      "Price (dollars)"
+     ],
+     "rows": [
+      [
+       "0",
+       "$120"
+      ],
+      [
+       "20",
+       "$100"
+      ],
+      [
+       "40",
+       "$80"
+      ],
+      [
+       "60",
+       "$60"
+      ],
+      [
+       "80",
+       "$40"
+      ],
+      [
+       "100",
+       "$20"
+      ],
+      [
+       "120",
+       "$0"
+      ]
+     ],
+     "notes": [
+      "The demand schedule follows P = 120 - 1Q.",
+      "Marginal cost is constant at $10 per unit, and the firm has a fixed cost of $100."
+     ]
+    }
+   },
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "Draw a correctly labeled graph of the monopolist's market showing the demand curve, the marginal revenue curve, and the marginal cost curve. Label the profit-maximizing quantity (Q_M) and price (P_M).",
+     "points": 2,
+     "response_mode": "draw",
+     "skill_codes": [
+      "4.A"
+     ],
+     "model_answer": "ALTON reference answer for self-review — not official AP scoring. A downward-sloping demand curve with a marginal revenue curve below it (steeper), a horizontal MC curve, Q_M where MR crosses MC, and P_M on the demand curve above Q_M.",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Curves drawn",
+       "required_elements": [
+        "Draws a downward-sloping demand curve, a marginal revenue curve that lies below demand and is steeper, and a horizontal marginal cost curve, all labeled, with Price and Quantity on the axes"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "curves may be labeled D, MR, and MC",
+        "MR may reach the quantity axis at half the demand intercept"
+       ],
+       "common_errors": [
+        "draws MR above demand",
+        "draws MR and demand with the same slope"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      },
+      {
+       "row_id": "A2",
+       "points": 1,
+       "criterion": "Optimum labeled",
+       "required_elements": [
+        "Labels Q_M where MR crosses MC and labels P_M on the vertical axis at the demand curve directly above Q_M"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "dashed lines from the MR-MC intersection down to Q_M and up to demand to P_M",
+        "price read from demand, not from MC"
+       ],
+       "common_errors": [
+        "labels P_M at the MC curve",
+        "puts Q_M at the demand-MC intersection"
+       ],
+       "requires_row_id": "A1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "4.2"
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "Using the demand schedule and the marginal cost, calculate the profit-maximizing quantity and the price.",
+     "points": 2,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "3.C"
+     ],
+     "model_answer": "ALTON reference answer for self-review — not official AP scoring. MR = 120 - 2Q equals MC = 10 at Q = 55; the price from demand is $65.",
+     "rubric_rows": [
+      {
+       "row_id": "B1",
+       "points": 1,
+       "criterion": "Profit-maximizing quantity (answer)",
+       "required_elements": [
+        "Sets marginal revenue equal to marginal cost and solves for the quantity (the quantity answer is correct)",
+        "55"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "MR = MC",
+        "marginal revenue equals marginal cost"
+       ],
+       "common_errors": [
+        "sets price equal to marginal cost and gets the competitive quantity"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      },
+      {
+       "row_id": "B2",
+       "points": 1,
+       "criterion": "Price (answer)",
+       "required_elements": [
+        "Reads the price from the demand curve at the profit-maximizing quantity (the price answer is correct)",
+        "65"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "substitutes Q into the demand equation",
+        "price on demand above the quantity"
+       ],
+       "common_errors": [
+        "reports marginal cost or marginal revenue as the price"
+       ],
+       "requires_row_id": "B1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "4.2"
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "Calculate the monopolist's economic profit.",
+     "points": 1,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "3.C"
+     ],
+     "model_answer": "ALTON reference answer for self-review — not official AP scoring. Profit = ($65 - $10) x 55 - $100 = $2925.",
+     "rubric_rows": [
+      {
+       "row_id": "C1",
+       "points": 1,
+       "criterion": "Economic profit (answer)",
+       "required_elements": [
+        "Computes total revenue minus total variable and fixed cost at the profit-maximizing quantity (the profit answer is correct)",
+        "2925"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "(price minus average total cost) times quantity",
+        "total revenue less total cost"
+       ],
+       "common_errors": [
+        "forgets the fixed cost",
+        "uses marginal cost as average total cost"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "4.2"
+     ]
+    },
+    {
+     "label": "D",
+     "prompt": "A regulator now sets a maximum price equal to the monopolist's marginal cost. On your graph, show the regulated price and label the quantity the firm would produce (Q_R).",
+     "points": 2,
+     "response_mode": "draw",
+     "skill_codes": [
+      "4.C"
+     ],
+     "model_answer": "ALTON reference answer for self-review — not official AP scoring. A horizontal price cap at the MC level; the quantity Q_R is where the demand curve meets MC, larger than Q_M.",
+     "rubric_rows": [
+      {
+       "row_id": "D1",
+       "points": 1,
+       "criterion": "Price cap shown",
+       "required_elements": [
+        "Draws the price cap at the level of the marginal cost curve and labels it as the regulated price"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "the cap may coincide with the MC line",
+        "labels the regulated price P_R equal to MC"
+       ],
+       "common_errors": [
+        "draws the cap at P_M",
+        "draws the cap above the demand intercept"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      },
+      {
+       "row_id": "D2",
+       "points": 1,
+       "criterion": "Regulated quantity",
+       "required_elements": [
+        "Labels Q_R on the quantity axis where the demand curve meets the marginal cost curve and shows it is greater than Q_M"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "Q_R is at the intersection of demand and MC",
+        "the regulated quantity exceeds the monopoly quantity"
+       ],
+       "common_errors": [
+        "labels Q_R at the MR-MC intersection",
+        "shows Q_R smaller than Q_M"
+       ],
+       "requires_row_id": "D1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "6.4"
+     ]
+    },
+    {
+     "label": "E",
+     "prompt": "Explain why the unregulated monopolist's output is not allocatively efficient.",
+     "points": 2,
+     "response_mode": "explain",
+     "skill_codes": [
+      "2.B"
+     ],
+     "model_answer": "ALTON reference answer for self-review — not official AP scoring. The monopolist sets MR = MC, so price exceeds marginal cost; the last units valued by consumers at more than their cost are not produced, creating deadweight loss.",
+     "rubric_rows": [
+      {
+       "row_id": "E1",
+       "points": 1,
+       "criterion": "Explains why price is above marginal cost",
+       "required_elements": [
+        "Explains that the monopolist produces where marginal revenue equals marginal cost, so price exceeds marginal cost at that quantity"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "P is greater than MC at the monopoly output",
+        "MR lies below demand so the price is above MC"
+       ],
+       "common_errors": [
+        "says price equals marginal cost",
+        "says the monopolist produces the efficient quantity"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      },
+      {
+       "row_id": "E2",
+       "points": 1,
+       "criterion": "Lost surplus",
+       "required_elements": [
+        "Explains that the quantity is below the efficient quantity, so units whose benefit exceeds their cost are not produced, creating deadweight loss"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "some mutually beneficial trades do not occur",
+        "total surplus is lower than at the competitive quantity"
+       ],
+       "common_errors": [
+        "says deadweight loss is zero",
+        "says output is above the efficient quantity"
+       ],
+       "requires_row_id": "E1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "4.2"
+     ]
+    },
+    {
+     "label": "F",
+     "prompt": "Calculate the firm's economic profit when the price is capped at marginal cost.",
+     "points": 1,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "3.C"
+     ],
+     "model_answer": "ALTON reference answer for self-review — not official AP scoring. At a price equal to marginal cost the firm earns no margin over marginal cost, so it loses its fixed cost: -$100.",
+     "rubric_rows": [
+      {
+       "row_id": "F1",
+       "points": 1,
+       "criterion": "Profit under the cap (answer)",
+       "required_elements": [
+        "Finds that revenue just covers variable cost, so the firm loses its fixed cost (the loss answer is correct)",
+        "100"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "economic loss equal to the fixed cost",
+        "profit equals minus the fixed cost"
+       ],
+       "common_errors": [
+        "reports zero profit",
+        "reports the unregulated profit"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "6.4"
+     ]
+    }
+   ],
+   "total_points": 10,
+   "est_minutes": 25,
+   "facts": [
+    "A=120",
+    "B=1",
+    "m=10",
+    "F=100",
+    "Qm=55",
+    "Pm=65",
+    "profit=2925",
+    "Qr=110"
+   ],
+   "context": "monopoly_regulation",
+   "blueprint": {
+    "id": "mif_long_monopoly",
+    "subject": "ap_microeconomics",
+    "kind": "frq_bundle",
+    "concept": "Monopoly profit maximization, profit, deadweight loss, and a price cap at marginal cost",
+    "topic": "4.2",
+    "skill": "4.A",
+    "student_thinking": [
+     "Draw D, MR, MC and the monopoly optimum",
+     "Compute the optimum and profit, show the price cap",
+     "Explain the inefficiency and compute the loss under the cap"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "Linear demand, constant marginal cost, and fixed cost stated in the stimulus",
+      "evidence": "stated in the table notes"
+     }
+    ],
+    "material": {
+     "type": "table",
+     "must_include": [
+      "demand schedule",
+      "marginal cost",
+      "fixed cost"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "sympy derivative of profit versus numpy grid search of profit by quantity",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "A",
+      "skills": [
+       "4.A"
+      ],
+      "topics": [
+       "4.2"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "ALTON reference answer for self-review — not official AP scoring. A downward-sloping demand curve with a marginal revenue curve below it (steeper), a horizontal MC curve, Q_M where MR crosses MC, and P_M on the demand curve above Q_M."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Curves drawn",
+        "elements": [
+         "Draws a downward-sloping demand curve, a marginal revenue curve that lies below demand and is steeper, and a horizontal marginal cost curve, all labeled, with Price and Quantity on the axes"
+        ]
+       },
+       {
+        "row_id": "A2",
+        "points": 1,
+        "criterion": "Optimum labeled",
+        "elements": [
+         "Labels Q_M where MR crosses MC and labels P_M on the vertical axis at the demand curve directly above Q_M"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "B",
+      "skills": [
+       "3.C"
+      ],
+      "topics": [
+       "4.2"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "ALTON reference answer for self-review — not official AP scoring. MR = 120 - 2Q equals MC = 10 at Q = 55; the price from demand is $65."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "B1",
+        "points": 1,
+        "criterion": "Profit-maximizing quantity (answer)",
+        "elements": [
+         "Sets marginal revenue equal to marginal cost and solves for the quantity (the quantity answer is correct)",
+         "55"
+        ]
+       },
+       {
+        "row_id": "B2",
+        "points": 1,
+        "criterion": "Price (answer)",
+        "elements": [
+         "Reads the price from the demand curve at the profit-maximizing quantity (the price answer is correct)",
+         "65"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "C",
+      "skills": [
+       "3.C"
+      ],
+      "topics": [
+       "4.2"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "ALTON reference answer for self-review — not official AP scoring. Profit = ($65 - $10) x 55 - $100 = $2925."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "C1",
+        "points": 1,
+        "criterion": "Economic profit (answer)",
+        "elements": [
+         "Computes total revenue minus total variable and fixed cost at the profit-maximizing quantity (the profit answer is correct)",
+         "2925"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "D",
+      "skills": [
+       "4.C"
+      ],
+      "topics": [
+       "6.4"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "ALTON reference answer for self-review — not official AP scoring. A horizontal price cap at the MC level; the quantity Q_R is where the demand curve meets MC, larger than Q_M."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "D1",
+        "points": 1,
+        "criterion": "Price cap shown",
+        "elements": [
+         "Draws the price cap at the level of the marginal cost curve and labels it as the regulated price"
+        ]
+       },
+       {
+        "row_id": "D2",
+        "points": 1,
+        "criterion": "Regulated quantity",
+        "elements": [
+         "Labels Q_R on the quantity axis where the demand curve meets the marginal cost curve and shows it is greater than Q_M"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "E",
+      "skills": [
+       "2.B"
+      ],
+      "topics": [
+       "4.2"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "ALTON reference answer for self-review — not official AP scoring. The monopolist sets MR = MC, so price exceeds marginal cost; the last units valued by consumers at more than their cost are not produced, creating deadweight loss."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "E1",
+        "points": 1,
+        "criterion": "Explains why price is above marginal cost",
+        "elements": [
+         "Explains that the monopolist produces where marginal revenue equals marginal cost, so price exceeds marginal cost at that quantity"
+        ]
+       },
+       {
+        "row_id": "E2",
+        "points": 1,
+        "criterion": "Lost surplus",
+        "elements": [
+         "Explains that the quantity is below the efficient quantity, so units whose benefit exceeds their cost are not produced, creating deadweight loss"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "F",
+      "skills": [
+       "3.C"
+      ],
+      "topics": [
+       "6.4"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "ALTON reference answer for self-review — not official AP scoring. At a price equal to marginal cost the firm earns no margin over marginal cost, so it loses its fixed cost: -$100."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "F1",
+        "points": 1,
+        "criterion": "Profit under the cap (answer)",
+        "elements": [
+         "Finds that revenue just covers variable cost, so the firm loses its fixed cost (the loss answer is correct)",
+         "100"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 10,
+    "model": {
+     "initial_state": "single seller with P = 120 - 1Q, MC = 10, fixed cost 100",
+     "changed_conditions": [
+      "price cap set at marginal cost 10"
+     ],
+     "held_constant": [
+      "demand",
+      "marginal cost",
+      "fixed cost"
+     ],
+     "checks": [
+      "MR=MC quantity",
+      "price from demand",
+      "profit",
+      "regulated quantity",
+      "loss under the cap"
+     ],
+     "key_assumptions_id": "monopoly-cap",
+     "explanation_assumptions_id": "monopoly-cap"
+    }
+   },
+   "seed": 9200,
+   "pack_id": "mif_long_monopoly-s9200"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "mif_long_monopoly",
+   "facts": [
+    "A=120",
+    "B=1",
+    "m=10",
+    "F=100",
+    "Qm=55",
+    "Pm=65",
+    "profit=2925",
+    "Qr=110"
+   ],
+   "seed": 9200
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The monopoly and price-cap FRQ is correct: Q_M = 55, P_M = $65, profit $2,925, Q_R = 110, and a loss of $100 under the cap. The independent solver agreed on every part. Weaknesses are minor: part D is tagged 4.C although it is a drawing task, there is no carry-forward language for part C, and the part F rubric accepts \"100\" without a sign. The 10-point grain with parts of 1-2 points matches the official long-FRQ format.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topics 4.2 and 6.4 fit. The parts mix skills, which is allowed. Part D's tag of 4.C is slightly off for a drawing task."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All answers are correct and unique. The rubric rows are consistent and have valid alternative wordings. There is no carry-forward language, and part F's sign is only implied."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table plus notes give the demand equation, MC, and fixed cost. This is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ with no distractors, so the criterion is not applicable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Load is typical for a 10-point long FRQ, the arithmetic is simple, and a calculator is allowed."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard FRQ-style monopoly item: draw D, MR (twice as steep), and MC curves, and find MR = MC. The solution is Q = 55 and P = 65, with profit 2,925. A price cap at MC gives Q = 110 and a loss of 100 (the fixed cost). Concept depth is moderate (monopoly pricing, allocative efficiency, price ceiling at MC). Each part is one or two steps, the numbers are clean, and the demand formula is given so the non-tabulated Q = 55 is unambiguous. The graphing tasks align with skill 4.A. It is appropriate for a full mock exam, not so basic as to be only introductory and not advanced.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "candidateKey": "ap_microeconomics-f04-k0",
+  "cellId": "ap_microeconomics-f04",
+  "apSubjectCode": "ap_microeconomics",
+  "kind": "frq_bundle",
+  "keywordCode": "6.2",
+  "unitCode": "6",
+  "skillPrimary": "4.A",
+  "structure": "frq_multipart",
+  "calculator": "allowed",
+  "archetype": "mif_short_externality",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Standard AP externality FRQ. Students must infer linear demand and supply from the table (slopes of -1 and +1 per unit), find Q_M = 50 by extrapolating slightly past the table, build MSC = MPC + 20, and find Q_E = 40. They then draw a labeled graph, explain overproduction, give the corrective tax of $20, and reason that a subsidy worsens the overproduction. The arithmetic is simple and the concepts are in scope for Unit 6.2. The only mild demand is extrapolating beyond the table, which the linear pattern supports.",
+  "payload": {
+   "archetype": "mif_short_externality",
+   "template": "short_externality",
+   "topic": "6.2",
+   "extra_topics": [],
+   "skill": "4.A",
+   "calculator": "allowed",
+   "title": "A market with a negative externality",
+   "stimulus": {
+    "kind": "table",
+    "description": "Marginal private benefit, marginal private cost, and marginal external cost per unit in the market for paper.",
+    "data": {
+     "columns": [
+      "Quantity",
+      "Marginal private benefit (demand)",
+      "Marginal private cost (supply)",
+      "Marginal external cost"
+     ],
+     "rows": [
+      [
+       "0",
+       "$120",
+       "$20",
+       "$20"
+      ],
+      [
+       "12",
+       "$108",
+       "$32",
+       "$20"
+      ],
+      [
+       "24",
+       "$96",
+       "$44",
+       "$20"
+      ],
+      [
+       "36",
+       "$84",
+       "$56",
+       "$20"
+      ],
+      [
+       "48",
+       "$72",
+       "$68",
+       "$20"
+      ]
+     ],
+     "notes": [
+      "Production of paper imposes a constant external cost of $20 per unit on people who are not buyers or sellers."
+     ]
+    }
+   },
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "Draw a correctly labeled graph of the market for paper showing demand, private supply, and marginal social cost. Label the market quantity (Q_M) and the socially efficient quantity (Q_E).",
+     "points": 2,
+     "response_mode": "draw",
+     "skill_codes": [
+      "4.A"
+     ],
+     "model_answer": "ALTON reference answer for self-review — not official AP scoring. Demand and upward-sloping supply, with the MSC curve above supply; Q_M where demand meets supply and Q_E, smaller, where demand meets MSC.",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Curves drawn",
+       "required_elements": [
+        "Draws a downward-sloping demand curve, an upward-sloping private supply curve, and a marginal social cost curve above the supply curve, all labeled, with Price and Quantity on the axes"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "MSC may be labeled MSC or social cost",
+        "supply may be labeled S or private cost"
+       ],
+       "common_errors": [
+        "draws MSC below supply",
+        "omits the MSC curve"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      },
+      {
+       "row_id": "A2",
+       "points": 1,
+       "criterion": "Quantities labeled",
+       "required_elements": [
+        "Labels Q_M where demand meets supply and Q_E where demand meets the marginal social cost curve, with Q_E less than Q_M"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "dashed lines to the horizontal axis at each intersection",
+        "Q_E drawn to the left of Q_M"
+       ],
+       "common_errors": [
+        "labels Q_E to the right of Q_M",
+        "labels both quantities at the same point"
+       ],
+       "requires_row_id": "A1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "6.2"
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "Explain why the market quantity is greater than the efficient quantity.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "2.A"
+     ],
+     "model_answer": "ALTON reference answer for self-review — not official AP scoring. Producers ignore the external cost, so the market supply curve reflects only private cost and the market produces where marginal private benefit equals marginal private cost, beyond the point where marginal social cost equals benefit.",
+     "rubric_rows": [
+      {
+       "row_id": "B1",
+       "points": 1,
+       "criterion": "Explains the ignored external cost",
+       "required_elements": [
+        "Explains that producers do not bear the external cost, so the market produces beyond the point where marginal social benefit equals marginal social cost"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "private cost is below social cost",
+        "the market ignores the cost imposed on third parties"
+       ],
+       "common_errors": [
+        "says the market underproduces",
+        "says producers pay the external cost"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "6.2"
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "Calculate the per-unit tax that would lead the market to produce the efficient quantity.",
+     "points": 1,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "3.C"
+     ],
+     "model_answer": "ALTON reference answer for self-review — not official AP scoring. A tax equal to the marginal external cost, $20 per unit.",
+     "rubric_rows": [
+      {
+       "row_id": "C1",
+       "points": 1,
+       "criterion": "Tax (answer)",
+       "required_elements": [
+        "Sets the per-unit tax equal to the marginal external cost (the tax answer is correct)",
+        "20"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "tax equals the external cost per unit",
+        "a Pigouvian tax"
+       ],
+       "common_errors": [
+        "reports the market price",
+        "reports the total external cost"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "6.2"
+     ]
+    },
+    {
+     "label": "D",
+     "prompt": "Suppose the government instead gives producers of paper a per-unit subsidy. Would the quantity produced move closer to or farther from the efficient quantity? Explain.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "3.A"
+     ],
+     "model_answer": "ALTON reference answer for self-review — not official AP scoring. Farther from the efficient quantity, because the subsidy shifts private supply right and increases a quantity that is already too large.",
+     "rubric_rows": [
+      {
+       "row_id": "D1",
+       "points": 1,
+       "criterion": "Explains the effect of the subsidy",
+       "required_elements": [
+        "States that the quantity moves farther from the efficient quantity because a subsidy lowers private cost and raises an already excessive quantity"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "the market would overproduce even more",
+        "supply shifts right and output increases"
+       ],
+       "common_errors": [
+        "says the subsidy moves output closer to Q_E",
+        "says the subsidy reduces output"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "6.2"
+     ]
+    }
+   ],
+   "total_points": 5,
+   "est_minutes": 12,
+   "facts": [
+    "A=120",
+    "B=1",
+    "C=20",
+    "D=1",
+    "e=20",
+    "Qm=50",
+    "Qe=40",
+    "good=paper"
+   ],
+   "context": "externality",
+   "blueprint": {
+    "id": "mif_short_externality",
+    "subject": "ap_microeconomics",
+    "kind": "frq_bundle",
+    "concept": "Negative externality: market versus efficient quantity, the corrective tax, and a subsidy",
+    "topic": "6.2",
+    "skill": "4.A",
+    "student_thinking": [
+     "Draw private supply, MSC, and demand and mark the two quantities",
+     "Explain overproduction and compute the corrective tax",
+     "Judge the effect of a subsidy"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "Constant external cost per unit stated in the table notes",
+      "evidence": "stated in the stimulus notes"
+     }
+    ],
+    "material": {
+     "type": "table",
+     "must_include": [
+      "marginal external cost"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "analytic Q_M and Q_E versus numpy search for maximum social surplus",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "A",
+      "skills": [
+       "4.A"
+      ],
+      "topics": [
+       "6.2"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "ALTON reference answer for self-review — not official AP scoring. Demand and upward-sloping supply, with the MSC curve above supply; Q_M where demand meets supply and Q_E, smaller, where demand meets MSC."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Curves drawn",
+        "elements": [
+         "Draws a downward-sloping demand curve, an upward-sloping private supply curve, and a marginal social cost curve above the supply curve, all labeled, with Price and Quantity on the axes"
+        ]
+       },
+       {
+        "row_id": "A2",
+        "points": 1,
+        "criterion": "Quantities labeled",
+        "elements": [
+         "Labels Q_M where demand meets supply and Q_E where demand meets the marginal social cost curve, with Q_E less than Q_M"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "B",
+      "skills": [
+       "2.A"
+      ],
+      "topics": [
+       "6.2"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "ALTON reference answer for self-review — not official AP scoring. Producers ignore the external cost, so the market supply curve reflects only private cost and the market produces where marginal private benefit equals marginal private cost, beyond the point where marginal social cost equals benefit."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "B1",
+        "points": 1,
+        "criterion": "Explains the ignored external cost",
+        "elements": [
+         "Explains that producers do not bear the external cost, so the market produces beyond the point where marginal social benefit equals marginal social cost"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "C",
+      "skills": [
+       "3.C"
+      ],
+      "topics": [
+       "6.2"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "ALTON reference answer for self-review — not official AP scoring. A tax equal to the marginal external cost, $20 per unit."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "C1",
+        "points": 1,
+        "criterion": "Tax (answer)",
+        "elements": [
+         "Sets the per-unit tax equal to the marginal external cost (the tax answer is correct)",
+         "20"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "D",
+      "skills": [
+       "3.A"
+      ],
+      "topics": [
+       "6.2"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "ALTON reference answer for self-review — not official AP scoring. Farther from the efficient quantity, because the subsidy shifts private supply right and increases a quantity that is already too large."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "D1",
+        "points": 1,
+        "criterion": "Explains the effect of the subsidy",
+        "elements": [
+         "States that the quantity moves farther from the efficient quantity because a subsidy lowers private cost and raises an already excessive quantity"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 5,
+    "model": {
+     "initial_state": "market with MPB = 120 - 1Q, MPC = 20 + 1Q, external cost $20 per unit",
+     "changed_conditions": [
+      "corrective tax or subsidy"
+     ],
+     "held_constant": [
+      "demand and supply"
+     ],
+     "checks": [
+      "market quantity",
+      "efficient quantity",
+      "tax equals external cost",
+      "subsidy direction"
+     ],
+     "key_assumptions_id": "externality-constant",
+     "explanation_assumptions_id": "externality-constant"
+    }
+   },
+   "seed": 9200,
+   "pack_id": "mif_short_externality-s9200"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "mif_short_externality",
+   "facts": [
+    "A=120",
+    "B=1",
+    "C=20",
+    "D=1",
+    "e=20",
+    "Qm=50",
+    "Qe=40",
+    "good=paper"
+   ],
+   "seed": 9200
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Acceptable short externality FRQ. The graph part is the dominant demand and is scored qualitatively. The tax and subsidy parts are unambiguous, and the 5-point grain matches the short-FRQ format.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Part A draws the externality graph (4.A). The other parts mix skills (2.A, 3.C, 3.A), all within topic 6.2."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Unique answers: Q_E < Q_M, a $20 tax, and a subsidy moves output farther from Q_E. The rubric is consistent."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete and gives the constant external cost in the notes. The table stops at Q=48, just short of the market intersection (Q=50), so students must extend the pattern. This is minor because part A only needs the qualitative placement."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "N/A for FRQ. The rubric lists common errors."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Light load (about 12 minutes for 5 points). The calculator is not needed but is harmless."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP externality FRQ. Students must infer linear demand and supply from the table (slopes of -1 and +1 per unit), find Q_M = 50 by extrapolating slightly past the table, build MSC = MPC + 20, and find Q_E = 40. They then draw a labeled graph, explain overproduction, give the corrective tax of $20, and reason that a subsidy worsens the overproduction. The arithmetic is simple and the concepts are in scope for Unit 6.2. The only mild demand is extrapolating beyond the table, which the linear pattern supports.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 480
+  }
+ },
+ {
+  "candidateKey": "ap_microeconomics-f05-k0",
+  "cellId": "ap_microeconomics-f05",
+  "apSubjectCode": "ap_microeconomics",
+  "kind": "frq_bundle",
+  "keywordCode": "5.3",
+  "unitCode": "5",
+  "skillPrimary": "2.C",
+  "structure": "frq_multipart",
+  "calculator": "allowed",
+  "archetype": "mif_short_labor",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Standard FRQ-style multi-part item. Requires computing MP from a total product table, converting to MRP using price, comparing to the wage (near-tie at worker 3: $54 vs $55), then a comparative-statics step (price rise shifts labor demand) and a monopsony contrast (MFC > wage, so fewer workers). Small, clean numbers; in scope for 5.2-5.4; no unfair difficulty sources.",
+  "payload": {
+   "archetype": "mif_short_labor",
+   "template": "short_labor",
+   "topic": "5.3",
+   "extra_topics": [
+    "5.2",
+    "5.4"
+   ],
+   "skill": "2.C",
+   "calculator": "allowed",
+   "title": "A firm's demand for labor",
+   "stimulus": {
+    "kind": "table",
+    "description": "Total product of chairs per day for a firm that sells chairs in a perfectly competitive market at $3 each and hires labor in a perfectly competitive labor market at a wage of $55 per day.",
+    "data": {
+     "columns": [
+      "Workers",
+      "Total product (chairs)"
+     ],
+     "rows": [
+      [
+       "0",
+       "0"
+      ],
+      [
+       "1",
+       "30"
+      ],
+      [
+       "2",
+       "52"
+      ],
+      [
+       "3",
+       "70"
+      ],
+      [
+       "4",
+       "84"
+      ],
+      [
+       "5",
+       "94"
+      ]
+     ]
+    }
+   },
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "Calculate the marginal revenue product of the third worker.",
+     "points": 1,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "2.C"
+     ],
+     "model_answer": "ALTON reference answer for self-review — not official AP scoring. MP of the third worker = 70 - 52 = 18; MRP = 18 x $3 = $54.",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "MRP (answer)",
+       "required_elements": [
+        "Multiplies the third worker's marginal product by the output price (the answer is correct)",
+        "54"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "marginal product times price",
+        "extra output times the price of the product"
+       ],
+       "common_errors": [
+        "reports the marginal product without the price",
+        "uses total product"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "5.3"
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "How many workers should the firm hire to maximize profit?",
+     "points": 1,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "2.C"
+     ],
+     "model_answer": "ALTON reference answer for self-review — not official AP scoring. Hire while the marginal revenue product is at least the wage of $55: 2 workers.",
+     "rubric_rows": [
+      {
+       "row_id": "B1",
+       "points": 1,
+       "criterion": "Workers hired (answer)",
+       "required_elements": [
+        "Hires workers until the marginal revenue product falls below the wage (the number answer is correct)",
+        "2"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "hire up to the last worker whose MRP is at least the wage",
+        "MRP equals the wage"
+       ],
+       "common_errors": [
+        "hires the worker with the highest marginal product only",
+        "hires all five workers"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "5.3"
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "Explain why the firm does not hire worker number 3.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "2.A"
+     ],
+     "model_answer": "ALTON reference answer for self-review — not official AP scoring. Worker 3 adds $54 of revenue, which is less than the wage of $55, so hiring would reduce profit.",
+     "rubric_rows": [
+      {
+       "row_id": "C1",
+       "points": 1,
+       "criterion": "Explains why MRP below the wage stops hiring",
+       "required_elements": [
+        "Explains that the next worker's marginal revenue product is less than the wage, so hiring that worker would lower profit"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "the extra revenue from the worker is less than the extra cost",
+        "MRP is below the wage for that worker"
+       ],
+       "common_errors": [
+        "says the worker is unproductive in total",
+        "says the firm hires only workers with rising marginal product"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "5.3"
+     ]
+    },
+    {
+     "label": "D",
+     "prompt": "Suppose the price of the product rises. Identify the effect on the firm's demand for labor.",
+     "points": 1,
+     "response_mode": "select",
+     "skill_codes": [
+      "3.B"
+     ],
+     "model_answer": "ALTON reference answer for self-review — not official AP scoring. The demand for labor increases (shifts right), because a higher output price raises the marginal revenue product at every quantity of labor.",
+     "rubric_rows": [
+      {
+       "row_id": "D1",
+       "points": 1,
+       "criterion": "Labor demand shifts right",
+       "required_elements": [
+        "States that the demand for labor increases because the higher output price raises the marginal revenue product of every worker"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "derived demand rises with the product price",
+        "more workers are hired at the same wage"
+       ],
+       "common_errors": [
+        "says labor supply increases",
+        "says the demand for labor decreases"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "5.2"
+     ]
+    },
+    {
+     "label": "E",
+     "prompt": "If the firm were the only employer of labor in its town (a monopsonist), would it hire more, fewer, or the same number of workers as in the competitive labor market? Explain.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "2.B"
+     ],
+     "model_answer": "ALTON reference answer for self-review — not official AP scoring. Fewer, because the marginal factor cost of labor exceeds the wage, so the monopsonist hires where MRP equals the higher marginal factor cost.",
+     "rubric_rows": [
+      {
+       "row_id": "E1",
+       "points": 1,
+       "criterion": "Explains why a monopsonist hires fewer workers",
+       "required_elements": [
+        "States that the monopsonist hires fewer workers because its marginal factor cost exceeds the wage"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "hiring more workers requires raising the wage for all workers",
+        "the monopsonist hires where MRP equals MFC"
+       ],
+       "common_errors": [
+        "says a monopsonist hires more workers",
+        "says the monopsonist pays a higher wage"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "5.4"
+     ]
+    }
+   ],
+   "total_points": 5,
+   "est_minutes": 12,
+   "facts": [
+    "P=3",
+    "tp=[0, 30, 52, 70, 84, 94]",
+    "w=55",
+    "best=2",
+    "mrp3=54",
+    "good=chairs"
+   ],
+   "context": "labor_demand",
+   "blueprint": {
+    "id": "mif_short_labor",
+    "subject": "ap_microeconomics",
+    "kind": "frq_bundle",
+    "concept": "Marginal revenue product, the hiring decision, a labor demand shift, and monopsony",
+    "topic": "5.3",
+    "skill": "2.C",
+    "student_thinking": [
+     "Compute marginal products and multiply by the output price",
+     "Hire while MRP is at least the wage",
+     "Reason about demand shifts and monopsony"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "Competitive output and labor markets with the price and wage stated in the table description",
+      "evidence": "stated in the stimulus description"
+     }
+    ],
+    "material": {
+     "type": "table",
+     "must_include": [
+      "total product",
+      "output price",
+      "wage"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "MRP count versus argmax of profit across worker counts",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "A",
+      "skills": [
+       "2.C"
+      ],
+      "topics": [
+       "5.3"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "ALTON reference answer for self-review — not official AP scoring. MP of the third worker = 70 - 52 = 18; MRP = 18 x $3 = $54."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "MRP (answer)",
+        "elements": [
+         "Multiplies the third worker's marginal product by the output price (the answer is correct)",
+         "54"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "B",
+      "skills": [
+       "2.C"
+      ],
+      "topics": [
+       "5.3"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "ALTON reference answer for self-review — not official AP scoring. Hire while the marginal revenue product is at least the wage of $55: 2 workers."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "B1",
+        "points": 1,
+        "criterion": "Workers hired (answer)",
+        "elements": [
+         "Hires workers until the marginal revenue product falls below the wage (the number answer is correct)",
+         "2"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "C",
+      "skills": [
+       "2.A"
+      ],
+      "topics": [
+       "5.3"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "ALTON reference answer for self-review — not official AP scoring. Worker 3 adds $54 of revenue, which is less than the wage of $55, so hiring would reduce profit."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "C1",
+        "points": 1,
+        "criterion": "Explains why MRP below the wage stops hiring",
+        "elements": [
+         "Explains that the next worker's marginal revenue product is less than the wage, so hiring that worker would lower profit"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "D",
+      "skills": [
+       "3.B"
+      ],
+      "topics": [
+       "5.2"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "ALTON reference answer for self-review — not official AP scoring. The demand for labor increases (shifts right), because a higher output price raises the marginal revenue product at every quantity of labor."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "D1",
+        "points": 1,
+        "criterion": "Labor demand shifts right",
+        "elements": [
+         "States that the demand for labor increases because the higher output price raises the marginal revenue product of every worker"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "E",
+      "skills": [
+       "2.B"
+      ],
+      "topics": [
+       "5.4"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "ALTON reference answer for self-review — not official AP scoring. Fewer, because the marginal factor cost of labor exceeds the wage, so the monopsonist hires where MRP equals the higher marginal factor cost."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "E1",
+        "points": 1,
+        "criterion": "Explains why a monopsonist hires fewer workers",
+        "elements": [
+         "States that the monopsonist hires fewer workers because its marginal factor cost exceeds the wage"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 5,
+    "model": {
+     "initial_state": "competitive firm selling at $3 and paying $55 per worker",
+     "changed_conditions": [
+      "output price rises",
+      "firm is a monopsonist"
+     ],
+     "held_constant": [
+      "production function"
+     ],
+     "checks": [
+      "MRP",
+      "number hired",
+      "demand shift",
+      "monopsony direction"
+     ],
+     "key_assumptions_id": "labor-demand",
+     "explanation_assumptions_id": "labor-demand"
+    }
+   },
+   "seed": 9200,
+   "pack_id": "mif_short_labor-s9200"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "mif_short_labor",
+   "facts": [
+    "P=3",
+    "tp=[0, 30, 52, 70, 84, 94]",
+    "w=55",
+    "best=2",
+    "mrp3=54",
+    "good=chairs"
+   ],
+   "seed": 9200
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The keys are correct and unambiguous: MRP of the third worker is $54, and hiring stops at 2 workers because the wage is $55. The part grain of 1/1/1/1/1 matches the short-FRQ format. Part C largely repeats part B, and part E gives no labor supply detail, but the standard monopsony result still holds.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard FRQ-style multi-part item. Requires computing MP from a total product table, converting to MRP using price, comparing to the wage (near-tie at worker 3: $54 vs $55), then a comparative-statics step (price rise shifts labor demand) and a monopsony contrast (MFC > wage, so fewer workers). Small, clean numbers; in scope for 5.2-5.4; no unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 240
+  }
+ },
+ {
+  "candidateKey": "ap_microeconomics-f06-k0",
+  "cellId": "ap_microeconomics-f06",
+  "apSubjectCode": "ap_microeconomics",
+  "kind": "frq_bundle",
+  "keywordCode": "1.4",
+  "unitCode": "1",
+  "skillPrimary": "1.C",
+  "structure": "frq_multipart",
+  "calculator": "allowed",
+  "archetype": "mif_short_trade",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "criterion_failed_stimulus_expression; criterion_failed_exam_suitability; instant_reject_missing_condition",
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Standard multi-part comparative advantage item. Requires reading a table of maximum outputs, computing opportunity costs by simple division (12/48 = 0.25; 24/12 = 2), identifying comparative advantage, explaining why a price between the two opportunity costs (0.25 < 1.12 < 2) benefits both countries, and drawing a labeled linear PPC. Arithmetic is clean, reading load is low, and all content is in scope for Unit 1 (1.3/1.4). The multiple representations (table, numeric ratio, verbal explanation, graph) and the need to link the trade price to the opportunity-cost range make it appropriate for a full mock rather than basic learning, but it is not advanced. The constant-cost (linear PPC) assumption is implicit but conventional for this table format.",
+  "payload": {
+   "archetype": "mif_short_trade",
+   "template": "short_trade",
+   "topic": "1.4",
+   "extra_topics": [
+    "1.3"
+   ],
+   "skill": "1.C",
+   "calculator": "allowed",
+   "title": "Comparative advantage and gains from trade",
+   "stimulus": {
+    "kind": "table",
+    "description": "Maximum output per day if a country uses all of its resources to produce only one good.",
+    "data": {
+     "columns": [
+      "Country",
+      "Wheat",
+      "Cloth"
+     ],
+     "rows": [
+      [
+       "Country A",
+       "48",
+       "12"
+      ],
+      [
+       "Country B",
+       "12",
+       "24"
+      ]
+     ]
+    }
+   },
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "Calculate the opportunity cost of producing one unit of wheat, in units of cloth, in each country.",
+     "points": 2,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "1.C"
+     ],
+     "model_answer": "ALTON reference answer for self-review — not official AP scoring. Country A: 12/48 = 0.25 units of cloth; Country B: 24/12 = 2.00 units of cloth.",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Country A opportunity cost (answer)",
+       "required_elements": [
+        "Divides the amount of the other good given up by the amount of this good gained for Country A (the answer is correct)",
+        "0.25"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "units of the other good per unit of this good",
+        "ratio of the maximum outputs"
+       ],
+       "common_errors": [
+        "inverts the ratio",
+        "reports the maximum output of the other good"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      },
+      {
+       "row_id": "A2",
+       "points": 1,
+       "criterion": "Country B opportunity cost (answer)",
+       "required_elements": [
+        "Divides the amount of the other good given up by the amount of this good gained for Country B (the answer is correct)",
+        "2.00"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "units of the other good per unit of this good",
+        "ratio of the maximum outputs"
+       ],
+       "common_errors": [
+        "inverts the ratio",
+        "reports the maximum output of the other good"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "1.4"
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "Which country has the comparative advantage in producing wheat? Identify the country.",
+     "points": 1,
+     "response_mode": "select",
+     "skill_codes": [
+      "1.C"
+     ],
+     "model_answer": "ALTON reference answer for self-review — not official AP scoring. Country A, because its opportunity cost of wheat is lower.",
+     "rubric_rows": [
+      {
+       "row_id": "B1",
+       "points": 1,
+       "criterion": "Comparative advantage",
+       "required_elements": [
+        "Identifies the country with the lower opportunity cost of the good as the one with the comparative advantage"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "the country that gives up less of the other good",
+        "Country A has the lower cost"
+       ],
+       "common_errors": [
+        "picks the country with the larger absolute output",
+        "picks the country with the higher opportunity cost"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "1.4"
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "Explain why both countries can gain if Country A exports wheat to Country B at a price of 1.12 units of cloth per unit of wheat.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "2.A"
+     ],
+     "model_answer": "ALTON reference answer for self-review — not official AP scoring. The price of 1.12 is above Country A's opportunity cost (0.25) and below Country B's (2.00), so each country obtains the good for less than it would cost to produce at home.",
+     "rubric_rows": [
+      {
+       "row_id": "C1",
+       "points": 1,
+       "criterion": "Explains the gains from trade",
+       "required_elements": [
+        "Explains that the trading price lies between the two opportunity costs, so each country obtains the good at a cost lower than its own opportunity cost"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "each country gets the good for less than it gives up at home",
+        "the price is between the two opportunity costs"
+       ],
+       "common_errors": [
+        "says only the exporter gains",
+        "says trade benefits only the country with the absolute advantage"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "1.4"
+     ]
+    },
+    {
+     "label": "D",
+     "prompt": "Draw a correctly labeled production possibilities curve for Country A with wheat on the horizontal axis. Label the maximum quantity of each good.",
+     "points": 1,
+     "response_mode": "draw",
+     "skill_codes": [
+      "4.A"
+     ],
+     "model_answer": "ALTON reference answer for self-review — not official AP scoring. A straight line from 12 units of cloth on the vertical axis to 48 units of wheat on the horizontal axis.",
+     "rubric_rows": [
+      {
+       "row_id": "D1",
+       "points": 1,
+       "criterion": "PPC drawn",
+       "required_elements": [
+        "Draws a downward-sloping PPC with both axes labeled and the intercepts labeled with the maximum quantity of each good for Country A"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "the curve may be a straight line because the opportunity cost is constant",
+        "intercepts may be marked with the numbers from the table"
+       ],
+       "common_errors": [
+        "swaps the axis intercepts",
+        "draws an upward-sloping curve"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "1.3"
+     ]
+    }
+   ],
+   "total_points": 5,
+   "est_minutes": 11,
+   "facts": [
+    "A=[48, 12]",
+    "B=[12, 24]",
+    "mid=1.125",
+    "goods=wheat/cloth"
+   ],
+   "context": "trade",
+   "blueprint": {
+    "id": "mif_short_trade",
+    "subject": "ap_microeconomics",
+    "kind": "frq_bundle",
+    "concept": "Opportunity costs from maximum outputs, comparative advantage, and gains from trade within the terms of trade",
+    "topic": "1.4",
+    "skill": "1.C",
+    "student_thinking": [
+     "Compute opportunity costs as output ratios",
+     "Identify the lower-cost producer",
+     "Explain gains from trade and draw a PPC"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "Constant opportunity costs implied by the maximum outputs",
+      "evidence": "stated in the table description"
+     }
+    ],
+    "material": {
+     "type": "table",
+     "must_include": [
+      "maximum outputs"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "ratio of outputs versus reciprocal opportunity cost of the other good",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "A",
+      "skills": [
+       "1.C"
+      ],
+      "topics": [
+       "1.4"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "ALTON reference answer for self-review — not official AP scoring. Country A: 12/48 = 0.25 units of cloth; Country B: 24/12 = 2.00 units of cloth."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Country A opportunity cost (answer)",
+        "elements": [
+         "Divides the amount of the other good given up by the amount of this good gained for Country A (the answer is correct)",
+         "0.25"
+        ]
+       },
+       {
+        "row_id": "A2",
+        "points": 1,
+        "criterion": "Country B opportunity cost (answer)",
+        "elements": [
+         "Divides the amount of the other good given up by the amount of this good gained for Country B (the answer is correct)",
+         "2.00"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "B",
+      "skills": [
+       "1.C"
+      ],
+      "topics": [
+       "1.4"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "ALTON reference answer for self-review — not official AP scoring. Country A, because its opportunity cost of wheat is lower."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "B1",
+        "points": 1,
+        "criterion": "Comparative advantage",
+        "elements": [
+         "Identifies the country with the lower opportunity cost of the good as the one with the comparative advantage"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "C",
+      "skills": [
+       "2.A"
+      ],
+      "topics": [
+       "1.4"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "ALTON reference answer for self-review — not official AP scoring. The price of 1.12 is above Country A's opportunity cost (0.25) and below Country B's (2.00), so each country obtains the good for less than it would cost to produce at home."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "C1",
+        "points": 1,
+        "criterion": "Explains the gains from trade",
+        "elements": [
+         "Explains that the trading price lies between the two opportunity costs, so each country obtains the good at a cost lower than its own opportunity cost"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "D",
+      "skills": [
+       "4.A"
+      ],
+      "topics": [
+       "1.3"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "ALTON reference answer for self-review — not official AP scoring. A straight line from 12 units of cloth on the vertical axis to 48 units of wheat on the horizontal axis."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "D1",
+        "points": 1,
+        "criterion": "PPC drawn",
+        "elements": [
+         "Draws a downward-sloping PPC with both axes labeled and the intercepts labeled with the maximum quantity of each good for Country A"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 5,
+    "model": {
+     "initial_state": "two countries with constant opportunity costs given by the table",
+     "changed_conditions": [
+      "trade at 1.12 units of cloth per wheat"
+     ],
+     "held_constant": [
+      "technology"
+     ],
+     "checks": [
+      "opportunity cost",
+      "comparative advantage",
+      "terms between opportunity costs",
+      "PPC intercepts"
+     ],
+     "key_assumptions_id": "trade-constant",
+     "explanation_assumptions_id": "trade-constant"
+    }
+   },
+   "seed": 9200,
+   "pack_id": "mif_short_trade-s9200"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "mif_short_trade",
+   "facts": [
+    "A=[48, 12]",
+    "B=[12, 24]",
+    "mid=1.125",
+    "goods=wheat/cloth"
+   ],
+   "seed": 9200
+  },
+  "review": {
+   "instant_reject": [
+    "missing_condition"
+   ],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item never states that opportunity costs are constant or that the PPC is linear, even though the blueprint says this is stated in the table description. Parts A and D depend on that assumption, so the item is not exam-ready as written. The arithmetic and the key are otherwise correct.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parts map to 1.4 and 1.3 with mixed skills, which is acceptable for the bundle."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Values 0.25 and 2.00, Country A, and the 1.12 explanation are all correct."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The table description omits the constant-cost / straight-line PPC assumption that parts A and D rely on."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable for an FRQ; common errors are listed in the rubric."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The load is typical of a short FRQ, but the unstated model assumption makes the item unsuitable until the stimulus is fixed."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part comparative advantage item. Requires reading a table of maximum outputs, computing opportunity costs by simple division (12/48 = 0.25; 24/12 = 2), identifying comparative advantage, explaining why a price between the two opportunity costs (0.25 < 1.12 < 2) benefits both countries, and drawing a labeled linear PPC. Arithmetic is clean, reading load is low, and all content is in scope for Unit 1 (1.3/1.4). The multiple representations (table, numeric ratio, verbal explanation, graph) and the need to link the trade price to the opportunity-cost range make it appropriate for a full mock rather than basic learning, but it is not advanced. The constant-cost (linear PPC) assumption is implicit but conventional for this table format.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 300
+  }
+ },
+ {
+  "candidateKey": "ap_microeconomics-f07-k0",
+  "cellId": "ap_microeconomics-f07",
+  "apSubjectCode": "ap_microeconomics",
+  "kind": "frq_bundle",
+  "keywordCode": "2.3",
+  "unitCode": "2",
+  "skillPrimary": "1.C",
+  "structure": "frq_multipart",
+  "calculator": "allowed",
+  "archetype": "mif_short_elasticity",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "solver_disagrees:D:flagged; criterion_failed_key_scoring; criterion_failed_stimulus_expression; criterion_failed_exam_suitability; instant_reject_missing_condition; instant_reject_wrong_key; reference_pattern_mismatch",
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Standard AP-style multi-part elasticity item: midpoint method from a table (two short calculations), classify elasticity, link to total revenue, then compute cross-price elasticity and classify the goods. Concepts are core to topics 2.3/2.5 and chain together modestly (each part builds on the previous one). Arithmetic is short; the midpoint result is about 1.31, so it needs mild rounding. Minor wording weakness: the note does not state the direction of the salad quantity change (it is implied by the context), which could make part D slightly ambiguous, but this is not the main source of difficulty.",
+  "payload": {
+   "archetype": "mif_short_elasticity",
+   "template": "short_elasticity",
+   "topic": "2.3",
+   "extra_topics": [
+    "2.5"
+   ],
+   "skill": "1.C",
+   "calculator": "allowed",
+   "title": "Elasticity and total revenue",
+   "stimulus": {
+    "kind": "table",
+    "description": "Price and quantity demanded of pizza before and after a price increase.",
+    "data": {
+     "columns": [
+      "",
+      "Price (dollars)",
+      "Quantity demanded"
+     ],
+     "rows": [
+      [
+       "Before",
+       "12",
+       "400"
+      ],
+      [
+       "After",
+       "13",
+       "360"
+      ]
+     ],
+     "notes": [
+      "A 2 percent increase in the price of pizza changes the quantity demanded of salad by 5 percent."
+     ]
+    }
+   },
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "Using the midpoint method, calculate the absolute value of the price elasticity of demand for pizza between the two prices.",
+     "points": 2,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "1.C"
+     ],
+     "model_answer": "ALTON reference answer for self-review — not official AP scoring. Percentage change in quantity = 10.5%, percentage change in price = 8.0%, elasticity = 1.32.",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Percentage changes (answer)",
+       "required_elements": [
+        "Computes the percentage change in quantity and in price using midpoints as the base (both are correct)",
+        "10.5",
+        "8.0"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "change divided by the average of the two values",
+        "midpoint formula for each variable"
+       ],
+       "common_errors": [
+        "divides by the initial value instead of the midpoint",
+        "divides by the final value"
+       ],
+       "requires_row_id": null,
+       "requires_both": true,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      },
+      {
+       "row_id": "A2",
+       "points": 1,
+       "criterion": "Elasticity (answer)",
+       "required_elements": [
+        "Divides the percentage change in quantity by the percentage change in price (the elasticity answer is correct)",
+        "1.32"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "ratio of the two midpoint percentage changes",
+        "absolute value of the elasticity"
+       ],
+       "common_errors": [
+        "inverts the ratio",
+        "reports the slope"
+       ],
+       "requires_row_id": "A1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "2.3"
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "Is the demand for pizza between these prices elastic, inelastic, or unit elastic? Identify.",
+     "points": 1,
+     "response_mode": "select",
+     "skill_codes": [
+      "1.C"
+     ],
+     "model_answer": "ALTON reference answer for self-review — not official AP scoring. Elastic, because the elasticity is greater than 1.",
+     "rubric_rows": [
+      {
+       "row_id": "B1",
+       "points": 1,
+       "criterion": "Elasticity classification",
+       "required_elements": [
+        "Classifies demand as elastic because the elasticity coefficient is greater than one"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "compares the elasticity with 1",
+        "elastic demand"
+       ],
+       "common_errors": [
+        "classifies demand with the opposite label",
+        "says unit elastic"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "2.3"
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "Explain what happens to the total revenue from pizza when the price rises, using your answer to part (B).",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "2.A"
+     ],
+     "model_answer": "ALTON reference answer for self-review — not official AP scoring. Total revenue decreases (from $4800 to $4680), because the percentage change in quantity is larger than the percentage change in price.",
+     "rubric_rows": [
+      {
+       "row_id": "C1",
+       "points": 1,
+       "criterion": "Explains the revenue effect",
+       "required_elements": [
+        "Explains that total revenue decreases because demand is elastic, so the percentage fall in quantity is larger than the percentage rise in price"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "compares the percentage changes in price and quantity",
+        "revenue decreases for elastic demand"
+       ],
+       "common_errors": [
+        "says revenue always rises when price rises",
+        "says revenue always falls when price rises"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "2.3"
+     ]
+    },
+    {
+     "label": "D",
+     "prompt": "Calculate the cross-price elasticity of demand between pizza and salad and identify whether the goods are substitutes or complements.",
+     "points": 1,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "1.C"
+     ],
+     "model_answer": "ALTON reference answer for self-review — not official AP scoring. 5/2 = 2.50; the goods are substitutes.",
+     "rubric_rows": [
+      {
+       "row_id": "D1",
+       "points": 1,
+       "criterion": "Cross-price elasticity and relationship (answer)",
+       "required_elements": [
+        "Divides the percentage change in quantity of the other good by the percentage change in price and interprets the sign (the value and relationship are correct)",
+        "2.50",
+        "The goods are substitutes because the elasticity is positive"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "positive means substitutes and negative means complements",
+        "ratio of the two percentage changes"
+       ],
+       "common_errors": [
+        "inverts the ratio",
+        "reverses the interpretation of the sign"
+       ],
+       "requires_row_id": null,
+       "requires_both": true,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "2.5"
+     ]
+    }
+   ],
+   "total_points": 5,
+   "est_minutes": 12,
+   "facts": [
+    "P0=12",
+    "P1=13",
+    "Q0=400",
+    "Q1=360",
+    "e=1.3158",
+    "pctP=2",
+    "pctQ=5",
+    "goods=pizza/salad"
+   ],
+   "context": "elasticity",
+   "blueprint": {
+    "id": "mif_short_elasticity",
+    "subject": "ap_microeconomics",
+    "kind": "frq_bundle",
+    "concept": "Midpoint price elasticity, its classification, the total revenue effect, and cross-price elasticity",
+    "topic": "2.3",
+    "skill": "1.C",
+    "student_thinking": [
+     "Compute midpoint percentage changes and their ratio",
+     "Classify elasticity and connect it to revenue",
+     "Compute and interpret a cross-price elasticity"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "Midpoint method and the data shown in the table and its notes",
+      "evidence": "stated in the stimulus"
+     }
+    ],
+    "material": {
+     "type": "table",
+     "must_include": [
+      "prices and quantities",
+      "cross-price data"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "exact Fraction midpoint ratio versus sympy expression, revenue compared directly",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "A",
+      "skills": [
+       "1.C"
+      ],
+      "topics": [
+       "2.3"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "ALTON reference answer for self-review — not official AP scoring. Percentage change in quantity = 10.5%, percentage change in price = 8.0%, elasticity = 1.32."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Percentage changes (answer)",
+        "elements": [
+         "Computes the percentage change in quantity and in price using midpoints as the base (both are correct)",
+         "10.5",
+         "8.0"
+        ]
+       },
+       {
+        "row_id": "A2",
+        "points": 1,
+        "criterion": "Elasticity (answer)",
+        "elements": [
+         "Divides the percentage change in quantity by the percentage change in price (the elasticity answer is correct)",
+         "1.32"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "B",
+      "skills": [
+       "1.C"
+      ],
+      "topics": [
+       "2.3"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "ALTON reference answer for self-review — not official AP scoring. Elastic, because the elasticity is greater than 1."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "B1",
+        "points": 1,
+        "criterion": "Elasticity classification",
+        "elements": [
+         "Classifies demand as elastic because the elasticity coefficient is greater than one"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "C",
+      "skills": [
+       "2.A"
+      ],
+      "topics": [
+       "2.3"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "ALTON reference answer for self-review — not official AP scoring. Total revenue decreases (from $4800 to $4680), because the percentage change in quantity is larger than the percentage change in price."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "C1",
+        "points": 1,
+        "criterion": "Explains the revenue effect",
+        "elements": [
+         "Explains that total revenue decreases because demand is elastic, so the percentage fall in quantity is larger than the percentage rise in price"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "D",
+      "skills": [
+       "1.C"
+      ],
+      "topics": [
+       "2.5"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "ALTON reference answer for self-review — not official AP scoring. 5/2 = 2.50; the goods are substitutes."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "D1",
+        "points": 1,
+        "criterion": "Cross-price elasticity and relationship (answer)",
+        "elements": [
+         "Divides the percentage change in quantity of the other good by the percentage change in price and interprets the sign (the value and relationship are correct)",
+         "2.50",
+         "The goods are substitutes because the elasticity is positive"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 5,
+    "model": {
+     "initial_state": "demand data for pizza with a price change and a cross-price observation for salad",
+     "changed_conditions": [
+      "price rises from $12 to $13"
+     ],
+     "held_constant": [
+      "other determinants of demand"
+     ],
+     "checks": [
+      "midpoint elasticity",
+      "classification",
+      "total revenue direction",
+      "cross-price sign"
+     ],
+     "key_assumptions_id": "elasticity-midpoint",
+     "explanation_assumptions_id": "elasticity-midpoint"
+    }
+   },
+   "seed": 9200,
+   "pack_id": "mif_short_elasticity-s9200"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "mif_short_elasticity",
+   "facts": [
+    "P0=12",
+    "P1=13",
+    "Q0=400",
+    "Q1=360",
+    "e=1.3158",
+    "pctP=2",
+    "pctQ=5",
+    "goods=pizza/salad"
+   ],
+   "seed": 9200
+  },
+  "review": {
+   "instant_reject": [
+    "missing_condition",
+    "wrong_key"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "Parts A-C are fine, but part D is missing the direction of the salad quantity change, so the key (2.50, substitutes) is not uniquely defensible. The 2 percent price change in the note also contradicts the table. Reject.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Part D: the direction of the salad quantity change is not stated, so the sign (substitutes vs complements) is indeterminate. The key assumes an increase (+2.50, substitutes). The note's \"2 percent increase in price\" also contradicts the table's roughly 8 percent increase ($12 to $13), so the cross-price elasticity of 5/2 is inconsistent with part A's data."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The note says quantity \"changes\" by 5 percent, with no direction. The 2 percent price change conflicts with the table's price change. Cross-price data is awkwardly placed in a table note."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP-style multi-part elasticity item: midpoint method from a table (two short calculations), classify elasticity, link to total revenue, then compute cross-price elasticity and classify the goods. Concepts are core to topics 2.3/2.5 and chain together modestly (each part builds on the previous one). Arithmetic is short; the midpoint result is about 1.31, so it needs mild rounding. Minor wording weakness: the note does not state the direction of the salad quantity change (it is implied by the context), which could make part D slightly ambiguous, but this is not the main source of difficulty.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 300
+  }
+ },
+ {
+  "candidateKey": "ap_microeconomics-f08-k0",
+  "cellId": "ap_microeconomics-f08",
+  "apSubjectCode": "ap_microeconomics",
+  "kind": "frq_bundle",
+  "keywordCode": "4.4",
+  "unitCode": "4",
+  "skillPrimary": "4.A",
+  "structure": "frq_multipart",
+  "calculator": "na",
+  "archetype": "mif_short_mc",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "criterion_failed_key_scoring; criterion_failed_stimulus_expression",
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Standard AP-style multi-part graphing FRQ. The student must identify MR = MC at Q=25 from the table, read P=$70 off the demand column, and compare it with ATC=$24 to place the profit rectangle. The student must then draw four curves with correct labels and shading, explain the long-run leftward shift of demand from entry, and state that P > MC in long-run equilibrium (tangency of demand and ATC, with excess capacity). Concepts are core to topic 4.4, with one table-to-graph representation change and no heavy arithmetic. Minor note: the MR values in the table are not perfectly consistent with linear demand, but the key row (MR = MC = $20 at Q=25) is unambiguous, so this does not make the item unfairly hard.",
+  "payload": {
+   "archetype": "mif_short_mc",
+   "template": "short_monopolistic_competition",
+   "topic": "4.4",
+   "extra_topics": [],
+   "skill": "4.A",
+   "calculator": "na",
+   "title": "A monopolistically competitive firm",
+   "stimulus": {
+    "kind": "table",
+    "description": "Price, marginal revenue (MR), marginal cost (MC), and average total cost (ATC), in dollars, for a neighborhood coffee shop in a monopolistically competitive market.",
+    "data": {
+     "columns": [
+      "Quantity",
+      "Price (demand)",
+      "Marginal revenue",
+      "Marginal cost",
+      "Average total cost"
+     ],
+     "rows": [
+      [
+       "12",
+       "$96",
+       "$72",
+       "$20",
+       "$28.33"
+      ],
+      [
+       "25",
+       "$70",
+       "$20",
+       "$20",
+       "$24"
+      ],
+      [
+       "37",
+       "$46",
+       "$-28",
+       "$20",
+       "$22.70"
+      ],
+      [
+       "50",
+       "$20",
+       "$-80",
+       "$20",
+       "$22"
+      ]
+     ]
+    }
+   },
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "Draw a correctly labeled graph showing the firm's demand, marginal revenue, marginal cost, and average total cost curves in the short run. Label the profit-maximizing quantity (Q_1) and price (P_1).",
+     "points": 2,
+     "response_mode": "draw",
+     "skill_codes": [
+      "4.A"
+     ],
+     "model_answer": "ALTON reference answer for self-review — not official AP scoring. A downward-sloping demand curve with MR below it, a horizontal MC curve, and a U-shaped ATC; Q_1 where MR crosses MC and P_1 on demand above Q_1.",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Curves drawn",
+       "required_elements": [
+        "Draws a downward-sloping demand curve, a marginal revenue curve below it, a marginal cost curve, and a U-shaped average total cost curve, all labeled, with Price and Quantity on the axes"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "MC may be drawn horizontal or rising",
+        "curves may be labeled D, MR, MC, and ATC"
+       ],
+       "common_errors": [
+        "draws MR above demand",
+        "omits the ATC curve"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      },
+      {
+       "row_id": "A2",
+       "points": 1,
+       "criterion": "Optimum labeled",
+       "required_elements": [
+        "Labels Q_1 where MR crosses MC and P_1 on the demand curve above Q_1"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "dashed lines from the MR-MC intersection to the axes",
+        "price read from demand, not from MC"
+       ],
+       "common_errors": [
+        "labels P_1 at the MC curve",
+        "puts Q_1 at the demand-ATC intersection"
+       ],
+       "requires_row_id": "A1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "4.4"
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "On your graph, shade the firm's economic profit in the short run.",
+     "points": 1,
+     "response_mode": "draw",
+     "skill_codes": [
+      "4.B"
+     ],
+     "model_answer": "ALTON reference answer for self-review — not official AP scoring. The rectangle between the price and ATC at Q_1, extending to Q_1 on the horizontal axis.",
+     "rubric_rows": [
+      {
+       "row_id": "B1",
+       "points": 1,
+       "criterion": "Profit shaded",
+       "required_elements": [
+        "Shades the rectangle whose height is the difference between P_1 and ATC at Q_1 and whose width is Q_1"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "the rectangle bounded by P_1, ATC at Q_1, and the vertical axis",
+        "shaded area above ATC and below the price"
+       ],
+       "common_errors": [
+        "shades the area between price and MC",
+        "shades the area under the demand curve"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "4.4"
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "Explain what happens to the demand for this firm's product in the long run.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "2.B"
+     ],
+     "model_answer": "ALTON reference answer for self-review — not official AP scoring. Positive economic profit attracts new firms offering close substitutes, so the demand for this firm's product decreases until economic profit is zero.",
+     "rubric_rows": [
+      {
+       "row_id": "C1",
+       "points": 1,
+       "criterion": "Explains how entry lowers demand",
+       "required_elements": [
+        "Explains that economic profit attracts entry of firms selling close substitutes, so the demand for this firm's product decreases"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "new competitors take away some customers",
+        "the firm's demand curve shifts to the left"
+       ],
+       "common_errors": [
+        "says demand increases",
+        "says no firms can enter because of product differentiation"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "4.4"
+     ]
+    },
+    {
+     "label": "D",
+     "prompt": "In long-run equilibrium, how does the firm's price compare with its marginal cost? Identify.",
+     "points": 1,
+     "response_mode": "select",
+     "skill_codes": [
+      "1.D"
+     ],
+     "model_answer": "ALTON reference answer for self-review — not official AP scoring. Price is greater than marginal cost, because the firm faces a downward-sloping demand curve and produces where marginal revenue equals marginal cost.",
+     "rubric_rows": [
+      {
+       "row_id": "D1",
+       "points": 1,
+       "criterion": "Price above marginal cost",
+       "required_elements": [
+        "States that price exceeds marginal cost in long-run equilibrium because the firm has a downward-sloping demand curve and marginal revenue is below price"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [
+        "P is greater than MC even with zero economic profit",
+        "price equals average total cost but exceeds marginal cost"
+       ],
+       "common_errors": [
+        "says price equals marginal cost as in perfect competition",
+        "says price is below marginal cost"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "meaning_based": true,
+       "uses_concept": false,
+       "single_explanation": false,
+       "grading_note": "Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase."
+      }
+     ],
+     "topic_codes": [
+      "4.4"
+     ]
+    }
+   ],
+   "total_points": 5,
+   "est_minutes": 12,
+   "facts": [
+    "A=120",
+    "B=2",
+    "c=20",
+    "F=100",
+    "Qs=25",
+    "Ps=70",
+    "profit=1150",
+    "firm=a neighborhood coffee shop"
+   ],
+   "context": "monopolistic_competition",
+   "blueprint": {
+    "id": "mif_short_mc",
+    "subject": "ap_microeconomics",
+    "kind": "frq_bundle",
+    "concept": "Short-run profit of a monopolistically competitive firm and the long-run adjustment",
+    "topic": "4.4",
+    "skill": "4.A",
+    "student_thinking": [
+     "Draw the four curves and mark the MR = MC optimum",
+     "Shade the profit rectangle",
+     "Reason about entry and the long-run price-cost relationship"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "na",
+    "key_conditions": [
+     {
+      "condition": "Linear demand, constant marginal cost, and fixed cost implied by the table",
+      "evidence": "stated in the stimulus"
+     }
+    ],
+    "material": {
+     "type": "table",
+     "must_include": [
+      "price, MR, MC, ATC data"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "sympy derivative of profit versus numpy grid search of profit by quantity",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "A",
+      "skills": [
+       "4.A"
+      ],
+      "topics": [
+       "4.4"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "ALTON reference answer for self-review — not official AP scoring. A downward-sloping demand curve with MR below it, a horizontal MC curve, and a U-shaped ATC; Q_1 where MR crosses MC and P_1 on demand above Q_1."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Curves drawn",
+        "elements": [
+         "Draws a downward-sloping demand curve, a marginal revenue curve below it, a marginal cost curve, and a U-shaped average total cost curve, all labeled, with Price and Quantity on the axes"
+        ]
+       },
+       {
+        "row_id": "A2",
+        "points": 1,
+        "criterion": "Optimum labeled",
+        "elements": [
+         "Labels Q_1 where MR crosses MC and P_1 on the demand curve above Q_1"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "B",
+      "skills": [
+       "4.B"
+      ],
+      "topics": [
+       "4.4"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "ALTON reference answer for self-review — not official AP scoring. The rectangle between the price and ATC at Q_1, extending to Q_1 on the horizontal axis."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "B1",
+        "points": 1,
+        "criterion": "Profit shaded",
+        "elements": [
+         "Shades the rectangle whose height is the difference between P_1 and ATC at Q_1 and whose width is Q_1"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "C",
+      "skills": [
+       "2.B"
+      ],
+      "topics": [
+       "4.4"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "ALTON reference answer for self-review — not official AP scoring. Positive economic profit attracts new firms offering close substitutes, so the demand for this firm's product decreases until economic profit is zero."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "C1",
+        "points": 1,
+        "criterion": "Explains how entry lowers demand",
+        "elements": [
+         "Explains that economic profit attracts entry of firms selling close substitutes, so the demand for this firm's product decreases"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "D",
+      "skills": [
+       "1.D"
+      ],
+      "topics": [
+       "4.4"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "ALTON reference answer for self-review — not official AP scoring. Price is greater than marginal cost, because the firm faces a downward-sloping demand curve and produces where marginal revenue equals marginal cost."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "D1",
+        "points": 1,
+        "criterion": "Price above marginal cost",
+        "elements": [
+         "States that price exceeds marginal cost in long-run equilibrium because the firm has a downward-sloping demand curve and marginal revenue is below price"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 5,
+    "model": {
+     "initial_state": "monopolistically competitive firm with P = 120 - 2Q, MC = 20, fixed cost 100",
+     "changed_conditions": [
+      "entry of rival firms in the long run"
+     ],
+     "held_constant": [
+      "cost curves"
+     ],
+     "checks": [
+      "MR=MC quantity",
+      "profit shading",
+      "demand shifts left",
+      "price above MC"
+     ],
+     "key_assumptions_id": "mc-short-run",
+     "explanation_assumptions_id": "mc-short-run"
+    }
+   },
+   "seed": 9200,
+   "pack_id": "mif_short_mc-s9200"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "mif_short_mc",
+   "facts": [
+    "A=120",
+    "B=2",
+    "c=20",
+    "F=100",
+    "Qs=25",
+    "Ps=70",
+    "profit=1150",
+    "firm=a neighborhood coffee shop"
+   ],
+   "seed": 9200
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The rubric requires a U-shaped ATC, but the table shows ATC falling throughout (constant MC plus a fixed cost), so faithful plotting contradicts row A1. Part D says \"Identify\" in select mode with no options given. These are fixable flaws.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 4.4 and skill 4.A are fit well; each part carries its own skill."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Row A1 requires a U-shaped ATC, which conflicts with the table data (ATC declines monotonically with constant MC). A student who follows the data could be denied the point."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "Part D is in select mode with no options. The table is only weakly needed since the graph is mostly generic."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Common errors are listed per rubric row; adequate for a free-response item."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Load is typical of a short FRQ: 5 points, no calculator needed."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP-style multi-part graphing FRQ. The student must identify MR = MC at Q=25 from the table, read P=$70 off the demand column, and compare it with ATC=$24 to place the profit rectangle. The student must then draw four curves with correct labels and shading, explain the long-run leftward shift of demand from entry, and state that P > MC in long-run equilibrium (tangency of demand and ATC, with excess capacity). Concepts are core to topic 4.4, with one table-to-graph representation change and no heavy arithmetic. Minor note: the MR values in the table are not perfectly consistent with linear demand, but the key row (MR = MC = $20 at Q=25) is unambiguous, so this does not make the item unfairly hard.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ }
+]

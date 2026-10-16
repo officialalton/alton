@@ -1,0 +1,158 @@
+{
+ "difficultyAudit": {
+  "declared": 17,
+  "structuralExamPrep": 17,
+  "judgeExamPrep": 17,
+  "agreement": {
+   "agree": 17
+  },
+  "singlesExamPrepShare": 1,
+  "disagreements": []
+ },
+ "runs": [
+  "stats-s3-a"
+ ],
+ "rows": 20,
+ "passed": 17,
+ "rejected": 3,
+ "exactDuplicates": 0,
+ "singles": {
+  "candidates": 20,
+  "passed": 17
+ },
+ "sets": {
+  "candidates": 0,
+  "passed": 0,
+  "questionsInPassedSets": 0
+ },
+ "frq": {
+  "candidates": 0,
+  "passed": 0
+ },
+ "uniquePassedItems": 17,
+ "structureFamilies": 9,
+ "itemFamilyIds": 9,
+ "perUnit": {
+  "1": 2,
+  "2": 2,
+  "3": 5,
+  "4": 6,
+  "5": 2
+ },
+ "perSkillCategory": {
+  "2": 3,
+  "3": 6,
+  "4": 8
+ },
+ "rejectionReasons": [
+  {
+   "key": "stats-s3-a:ap_statistics-m05-k0",
+   "reason": "criterion_failed_stimulus_expression; criterion_failed_distractor_explanation"
+  },
+  {
+   "key": "stats-s3-a:ap_statistics-m05-k1",
+   "reason": "criterion_failed_distractor_explanation"
+  },
+  {
+   "key": "stats-s3-a:ap_statistics-m06-k0",
+   "reason": "criterion_failed_scope_skill; instant_reject_out_of_scope_knowledge"
+  }
+ ],
+ "costs": {
+  "stats-s3-a": {
+   "byStage": {
+    "difficulty": 0.1658,
+    "review": 0.3178,
+    "review2": 0.0786,
+    "review4": 0.0565,
+    "solve": 0.1996
+   },
+   "total": 0.8183
+  }
+ },
+ "totalUsd": 0.8183,
+ "lookAlikeClustersWithExistingStock": 0,
+ "lookAlikeClustersContainingBatch": [
+  {
+   "id": "la:stats-s3-a:ap_statistics-m01-k0",
+   "keys": [
+    "stats-s3-a:ap_statistics-m01-k0",
+    "stats-s3-a:ap_statistics-m01-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-s3-a:ap_statistics-m02-k0",
+   "keys": [
+    "stats-s3-a:ap_statistics-m02-k0",
+    "stats-s3-a:ap_statistics-m02-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-s3-a:ap_statistics-m03-k0",
+   "keys": [
+    "stats-s3-a:ap_statistics-m03-k0",
+    "stats-s3-a:ap_statistics-m03-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-s3-a:ap_statistics-m04-k0",
+   "keys": [
+    "stats-s3-a:ap_statistics-m04-k0",
+    "stats-s3-a:ap_statistics-m04-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-s3-a:ap_statistics-m07-k0",
+   "keys": [
+    "stats-s3-a:ap_statistics-m07-k0",
+    "stats-s3-a:ap_statistics-m07-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-s3-a:ap_statistics-m08-k0",
+   "keys": [
+    "stats-s3-a:ap_statistics-m08-k0",
+    "stats-s3-a:ap_statistics-m08-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-s3-a:ap_statistics-m09-k0",
+   "keys": [
+    "stats-s3-a:ap_statistics-m09-k0",
+    "stats-s3-a:ap_statistics-m09-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  },
+  {
+   "id": "la:stats-s3-a:ap_statistics-m10-k0",
+   "keys": [
+    "stats-s3-a:ap_statistics-m10-k0",
+    "stats-s3-a:ap_statistics-m10-k1"
+   ],
+   "reasons": [
+    "family"
+   ]
+  }
+ ],
+ "lookAlikeComparedAgainst": "403 existing auto_passed MC (all subjects incl. the S1 pilot) + 17 S2-a items"
+}

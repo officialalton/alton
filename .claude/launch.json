@@ -1,11 +1,7 @@
 {
   "version": "0.0.1",
   "configurations": [
-    {
-      "name": "alton-dev",
-      "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev"],
-      "port": 3010
-    }
+    { "name": "alton-dev", "runtimeExecutable": "npm", "runtimeArgs": ["run", "dev"], "port": 3010 },
+    { "name": "landing-v3", "runtimeExecutable": "npx", "runtimeArgs": ["next", "dev", "-p", "3057"], "port": 3057 }
   ]
 }

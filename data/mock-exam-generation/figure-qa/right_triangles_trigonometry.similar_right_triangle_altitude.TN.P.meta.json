@@ -1,0 +1,42 @@
+{
+ "itemId": "right_triangles_trigonometry.similar_right_triangle_altitude.TN.P",
+ "generatedAt": "2026-10-07T05:02:01.167Z",
+ "codeHash": "afaac34ef0324007944d997b1b3c9e8b7b2de9bebe1b3f46f582893f2c2720d3",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/triangle-nested.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/right_triangles_trigonometry.similar_right_triangle_altitude.TN.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/tn-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "right_triangles_trigonometry.similar_right_triangle_altitude.TN.P.png",
+   "mobileFile": "right_triangles_trigonometry.similar_right_triangle_altitude.TN.P.m375.png",
+   "archetypeId": "rtt.similar_right_triangle_altitude.TN.P.chain2",
+   "seed": 11,
+   "signature": "triangle_nested:altitude",
+   "stimulus": "A student draws a figure for a geometry assignment. In the figure shown, triangle $MPC$ has a right angle at $C$, and $\\overline{CX}$ is the altitude drawn from $C$ to the hypotenuse $\\overline{MP}$.",
+   "question": "What is the length of $\\overline{MC}$?",
+   "options": [
+    "50",
+    "30",
+    "42",
+    "24"
+   ],
+   "correctIndex": 1,
+   "answer": "30",
+   "explanation": "(1) 그림에서 AD, DB 길이 라벨을 읽는다. (2) AB = AD + DB = 18 + 32 = 50 이다. (3) 수선 CX 가 직각삼각형을 닮은 두 직각삼각형으로 나누므로 기하평균 관계가 성립한다. (4) AC² = AD × AB = 18 × 50 = 900 이다. (5) AC = 30 이다. 따라서 정답은 30이다.",
+   "structuralIssues": []
+  }
+ ]
+}

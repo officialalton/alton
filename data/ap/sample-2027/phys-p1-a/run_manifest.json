@@ -1,0 +1,47 @@
+{
+ "run": "phys-p1-a",
+ "subject": "ap_physics_1",
+ "generatorCommit": "6090522e",
+ "gateVersion": "v2-code-first-final-2026-10-08",
+ "reviewerPromptHash": "e4ade534079e",
+ "difficultyPromptHash": "9bda2250d42c",
+ "flags": {
+  "flatReview": true,
+  "subjectNotes": true,
+  "requireBlueprint": true,
+  "legacyItems": false,
+  "repair": false
+ },
+ "arm": "frozen v1-phys-p1-a",
+ "parserHash": "7528bbe8cdfc",
+ "models": {
+  "gen": "claude-sonnet-5-5",
+  "solve": "claude-opus-5-5",
+  "review": "claude-sonnet-5-5",
+  "difficulty": "claude-sonnet-5-5",
+  "spot": "claude-fable-5-1"
+ },
+ "policy": {
+  "firstCandidatesPerCell": 1,
+  "repairLimit": 1,
+  "codeChecksBeforeLlm": true,
+  "independentVerification": true,
+  "templateStop": {
+   "window": 4,
+   "maxSameReason": 2
+  },
+  "denominator": "first_candidates",
+  "manifestFile": "run_manifest.json"
+ },
+ "seeds": {
+  "first": [
+   7300
+  ],
+  "note": "seed0 = first seed tried per archetype; packs.json records pack_id = archetype-sSEED"
+ },
+ "frozenAt": "2026-10-13T07:56:25.457Z",
+ "generatorHash": "db2af7db6102",
+ "frozenConfig": "config/ap-frozen/phys-p1-a.v1.json@v1-phys-p1-a",
+ "validity": "valid",
+ "repairDefinition": "none (repair not run in this round)"
+}

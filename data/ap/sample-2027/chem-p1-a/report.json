@@ -1,0 +1,49 @@
+{
+ "run": "chem-p1-a",
+ "subject": "ap_chemistry",
+ "generatedAt": "2026-10-13T11:31:05.238Z",
+ "totalCostUsd": 1.56,
+ "newSpendSinceBaseline": 1.76,
+ "cap": 50,
+ "calls": 132,
+ "candidates": 44,
+ "mcCandidates": 44,
+ "frqCandidates": 0,
+ "passedAll": 16,
+ "adopted": 12,
+ "mcAdopted": 12,
+ "frqAdopted": 0,
+ "reserve": 3,
+ "yield": 0.273,
+ "costPerAdopted": 0.13,
+ "callsPerAdopted": 11,
+ "duplicateRejected": 0,
+ "spotChecked": 0,
+ "wording": {
+  "llm": 0,
+  "template": 44
+ },
+ "rejectionReasons": {
+  "criterion_failed_distractor_explanation": 27,
+  "criterion_failed_exam_suitability": 10,
+  "reference_pattern_mismatch": 9,
+  "criterion_failed_stimulus_expression": 5,
+  "criterion_failed_key_scoring": 3,
+  "instant_reject_wrong_stimulus": 1,
+  "criterion_failed_scope_skill": 4,
+  "instant_reject_missing_condition": 2,
+  "instant_reject_multiple_correct": 1,
+  "set_item_N": 2
+ },
+ "unfilledCells": [
+  "ap_chemistry-m02",
+  "ap_chemistry-m08",
+  "ap_chemistry-m11",
+  "ap_chemistry-m12",
+  "ap_chemistry-m13",
+  "ap_chemistry-m14",
+  "ap_chemistry-m17",
+  "ap_chemistry-m18",
+  "ap_chemistry-m20"
+ ]
+}

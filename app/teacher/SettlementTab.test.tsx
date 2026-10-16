@@ -1,0 +1,462 @@
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import { describe, expect, it, vi, beforeEach } from "vitest";
+
+// P4-2 — 교사 `정산` 탭 UI 기준 검증.
+// 확정 정책 중 화면으로 보장해야 하는 것: 예정/확정/지급 완료 분리, 지급 예정 월·
+// 마지막 갱신 시각·변동 가능 안내, 계좌 마스킹, 서류에 게이트성 표현 없음.
+
+const {
+  loadPageDataMock,
+  saveAccountMock,
+  uploadDocMock,
+  downloadUrlMock,
+  deleteDocMock,
+  markReadMock,
+} = vi.hoisted(() => ({
+  loadPageDataMock: vi.fn(),
+  saveAccountMock: vi.fn(),
+  uploadDocMock: vi.fn(),
+  downloadUrlMock: vi.fn(),
+  deleteDocMock: vi.fn(),
+  markReadMock: vi.fn(),
+}));
+
+vi.mock("./settlement-actions", () => ({
+  loadSettlementPageDataAction: loadPageDataMock,
+  saveMyPayoutAccountAction: saveAccountMock,
+  uploadMyDocumentAction: uploadDocMock,
+  getMyDocumentDownloadUrlAction: downloadUrlMock,
+  deleteMyDocumentAction: deleteDocMock,
+  markPayoutNoticeReadAction: markReadMock,
+}));
+
+// 2026-09-22(성능 수정: 정산·계좌·서류를 서버 액션 1개로 합침) — 기존 테스트는
+// loadMock/getAccountMock/listDocsMock 세 개를 따로 mockResolvedValue 했는데,
+// 이제 하나의 loadPageDataMock이 세 값을 한 번에 돌려준다. 마지막에 설정된
+// settlement/account/documents 값을 기억해뒀다가 합쳐서 응답하는 얇은 헬퍼로
+// 기존 테스트 코드의 호출 모양(loadMock.mockResolvedValue(X) 등)을 유지한다.
+let currentSettlement: unknown = null;
+let currentAccount: unknown = null;
+let currentDocuments: unknown = [];
+function refreshPageDataMock() {
+  loadPageDataMock.mockResolvedValue({ settlement: currentSettlement, account: currentAccount, documents: currentDocuments });
+}
+const loadMock = { mockResolvedValue: (s: unknown) => { currentSettlement = s; refreshPageDataMock(); } };
+const getAccountMock = { mockResolvedValue: (a: unknown) => { currentAccount = a; refreshPageDataMock(); } };
+const listDocsMock = { mockResolvedValue: (d: unknown) => { currentDocuments = d; refreshPageDataMock(); } };
+
+import SettlementTab from "./SettlementTab";
+
+// P4-2(UAT 후속) — 화면이 4개 서브탭(정산 현황/정산 내역/계좌/서류)으로 나뉘었다.
+async function openSubtab(id: "summary" | "history" | "account" | "documents") {
+  fireEvent.click(await screen.findByTestId(`settlement-subtab-${id}`));
+}
+
+const SETTLEMENT = {
+  months: [
+    {
+      settlementMonth: "2026-09",
+      payoutMonth: "2026-09",
+      periodKey: "2026-09-H1",
+      periodStart: "2026-09-01",
+      periodEnd: "2026-09-15",
+      nominalPayoutDate: "2026-09-25",
+      currency: "KRW",
+      status: "scheduled" as const,
+      autoCalculatedAmountMinor: 160000,
+      adjustmentAmountMinor: -10000,
+      totalAmountMinor: 150000,
+      lessonCount: 2,
+      paidAt: null,
+      scheduledPayoutDate: "2026-10-10",
+      autoDispatchEnabled: true,
+      dateChanges: [],
+      externalTransfer: null,
+      adjustments: [
+        {
+          id: "adj1",
+          amountMinor: -10000,
+          currency: "KRW",
+          reason: "교통비 차감",
+          createdAt: "2026-09-11T00:00:00.000Z",
+        },
+      ],
+      lines: [
+        {
+          payoutItemId: "i1",
+          sessionDate: "2026-09-03T01:00:00.000Z",
+          studentName: "김학생",
+          subjectName: "SAT Math",
+          itemType: "regular",
+          payableMinutes: 60,
+          hourlyRateSnapshotMinor: 50000,
+          amountMinor: 50000,
+          currency: "KRW",
+        },
+      ],
+    },
+  ],
+  scheduledTotalsByCurrency: { KRW: 150000 },
+  inReviewTotalsByCurrency: { KRW: 40000 },
+  approvedTotalsByCurrency: { KRW: 80000 },
+  paidTotalsByCurrency: { KRW: 200000 },
+  nextPayoutMonth: "2026-09",
+  nextPayoutDate: "2026-09-25",
+  refreshedAt: "2026-09-12T03:00:00.000Z",
+};
+
+beforeEach(() => {
+  vi.clearAllMocks();
+  loadMock.mockResolvedValue(SETTLEMENT);
+  getAccountMock.mockResolvedValue(null);
+  listDocsMock.mockResolvedValue([]);
+  saveAccountMock.mockResolvedValue({
+    status: "saved",
+    account: {
+      accountHolderName: "김선생",
+      bankName: "국민은행",
+      accountNumberMasked: "****6789",
+      currency: "KRW",
+      country: null,
+      swiftOrRouting: null,
+      updatedAt: "2026-09-12T03:00:00.000Z",
+    },
+  });
+});
+
+describe("SettlementTab — 예정액 요약", () => {
+  it("예정·검토 중·송금 승인됨·지급 완료 4단계를 나눠 보여준다", async () => {
+    render(<SettlementTab />);
+    // 같은 금액이 월별 표에도 나오므로 요약 카드(예정)만 콕 집어 확인한다.
+    const scheduled = await screen.findAllByText("₩150,000");
+    expect(scheduled.length).toBeGreaterThan(0);
+    for (const label of ["In review", "Transfer approved", "Paid"]) {
+      expect(screen.getAllByText(label).length).toBeGreaterThan(0);
+    }
+    expect(screen.getByText("₩40,000")).toBeInTheDocument();
+    expect(screen.getByText("₩80,000")).toBeInTheDocument();
+    expect(screen.getByText("₩200,000")).toBeInTheDocument();
+    // '확정'이라는 모호한 라벨은 더 이상 쓰지 않는다.
+    expect(screen.queryByText("Confirmed (awaiting payout)")).not.toBeInTheDocument();
+  });
+
+  it("반월 지급 기한 안내와 갱신 시각·변동 안내를 보여준다", async () => {
+    render(<SettlementTab />);
+    expect(await screen.findByText(/Payouts are made twice a month, no later than the 26th and the 10th/)).toBeInTheDocument();
+    // 2026-09-12: "승인 시점에 정해집니다" 문구는 제품 오너 요청으로 제거했다.
+    expect(screen.queryByText(/is set at the time of transfer approval/)).not.toBeInTheDocument();
+    expect(screen.getByText(/Last updated:/)).toBeInTheDocument();
+    expect(screen.getByText(/Amounts may change until finalized/)).toBeInTheDocument();
+    expect(screen.getByText(/Gross totals before taxes, fees, or other deductions/)).toBeInTheDocument();
+  });
+
+  it("서브탭 4개로 나뉘어 있고 기본은 정산 현황이다", async () => {
+    render(<SettlementTab />);
+    for (const label of ["Overview", "Payout History", "Payout Account", "Documents"]) {
+      expect(await screen.findByText(label)).toBeInTheDocument();
+    }
+    // 기본 탭에서는 월별 내역·계좌·서류 카드가 보이지 않는다.
+    expect(screen.queryByText("Monthly payout history")).not.toBeInTheDocument();
+    expect(screen.queryByText("Payout bank account")).not.toBeInTheDocument();
+  });
+
+  it("마감 뒤 변동은 승인된 금액을 고치지 않고 다음 정산월 조정으로 간다고 안내한다", async () => {
+    render(<SettlementTab />);
+    expect(
+      await screen.findByText(/the approved amount is not edited; the difference is applied as an adjustment in the next payout period/)
+    ).toBeInTheDocument();
+  });
+
+  it("월 행을 펼치면 수업별 산출 근거를 보여준다", async () => {
+    render(<SettlementTab />);
+    await openSubtab("history");
+    const row = await screen.findByTestId("settlement-month-2026-09-H1|KRW|scheduled");
+    fireEvent.click(row);
+    expect(await screen.findByText("김학생")).toBeInTheDocument();
+    expect(screen.getByText("SAT Math")).toBeInTheDocument();
+    expect(screen.getByText("60 min")).toBeInTheDocument();
+  });
+
+  it("자동 산정 수업 합계·관리자 조정액·최종 금액을 분리해 보여준다", async () => {
+    render(<SettlementTab />);
+    await openSubtab("history");
+    fireEvent.click(await screen.findByTestId("settlement-month-2026-09-H1|KRW|scheduled"));
+
+    const key = "2026-09-H1|KRW|scheduled";
+    expect(await screen.findByTestId(`auto-${key}`)).toHaveTextContent("₩160,000");
+    expect(screen.getByTestId(`adjust-${key}`)).toHaveTextContent("-₩10,000");
+    expect(screen.getByTestId(`final-${key}`)).toHaveTextContent("₩150,000");
+  });
+
+  it("지급 예정일과 자동 송금 여부를 상세에 구분해 보여준다", async () => {
+    render(<SettlementTab />);
+    await openSubtab("history");
+    fireEvent.click(await screen.findByTestId("settlement-month-2026-09-H1|KRW|scheduled"));
+
+    const key = "2026-09-H1|KRW|scheduled";
+    expect(await screen.findByTestId(`sched-${key}`)).toHaveTextContent("Oct 10, 2026");
+    expect(screen.getByTestId(`auto-dispatch-${key}`)).toHaveTextContent("Yes");
+  });
+
+  it("예정일이 아직 정해지지 않았으면 구체적인 날짜를 보여주지 않는다", async () => {
+    loadMock.mockResolvedValue({
+      ...SETTLEMENT,
+      months: [{ ...SETTLEMENT.months[0], scheduledPayoutDate: null }],
+    });
+    render(<SettlementTab />);
+    await openSubtab("history");
+    expect(await screen.findByText(/The payout deadline is set after approval/)).toBeInTheDocument();
+  });
+
+  it("지급 예정일 변경 이력과 은행 직접 송금 사실을 교사도 볼 수 있다", async () => {
+    loadMock.mockResolvedValue({
+      ...SETTLEMENT,
+      months: [
+        {
+          ...SETTLEMENT.months[0],
+          status: "paid" as const,
+          scheduledPayoutDate: "2026-10-10",
+          dateChanges: [
+            {
+              id: "dc1",
+              previousDate: "2026-10-10",
+              newDate: "2026-10-20",
+              reason: "은행 점검으로 연기",
+              createdAt: "2026-10-05T00:00:00.000Z",
+            },
+          ],
+          externalTransfer: { transferredOn: "2026-10-20", amountMinor: 150000, currency: "KRW" },
+        },
+      ],
+    });
+    render(<SettlementTab />);
+    await openSubtab("history");
+    fireEvent.click(await screen.findByTestId("settlement-month-2026-09-H1|KRW|paid"));
+
+    expect(await screen.findByTestId("date-change-dc1")).toHaveTextContent("은행 점검으로 연기");
+    expect(screen.getByTestId("external-2026-09-H1|KRW|paid")).toHaveTextContent("Direct bank transfer");
+  });
+
+  it("관리자 조정 내역의 사유와 금액을 교사도 볼 수 있다", async () => {
+    render(<SettlementTab />);
+    await openSubtab("history");
+    fireEvent.click(await screen.findByTestId("settlement-month-2026-09-H1|KRW|scheduled"));
+    expect(await screen.findByTestId("adjust-reason-adj1")).toHaveTextContent("교통비 차감");
+    expect(screen.getByTestId("adjust-reason-adj1")).toHaveTextContent("-₩10,000");
+  });
+
+  it("검토 중인 건은 날짜만 덩그러니 보여주지 않고 '검토 완료 후 지급'을 앞세운다", async () => {
+    loadMock.mockResolvedValue({
+      ...SETTLEMENT,
+      months: [{ ...SETTLEMENT.months[0], status: "in_review" as const }],
+    });
+    render(<SettlementTab />);
+    await openSubtab("history");
+    expect(await screen.findByText(/Paid after review \(by Oct 10, 2026\)/)).toBeInTheDocument();
+  });
+
+  it("예정 건은 지급 예정일을 그대로 보여준다", async () => {
+    render(<SettlementTab />);
+    await openSubtab("history");
+    expect(await screen.findByText(/Paid by Oct 10, 2026/)).toBeInTheDocument();
+  });
+
+  it("정산 내역이 없으면 빈 상태 문구를 보여준다", async () => {
+    loadMock.mockResolvedValue({
+      months: [],
+      scheduledTotalsByCurrency: {},
+      inReviewTotalsByCurrency: {},
+      approvedTotalsByCurrency: {},
+      paidTotalsByCurrency: {},
+      nextPayoutMonth: null,
+      nextPayoutDate: null,
+      refreshedAt: "2026-09-12T03:00:00.000Z",
+    });
+    render(<SettlementTab />);
+    await openSubtab("history");
+    expect(await screen.findByTestId("settlement-empty")).toBeInTheDocument();
+  });
+});
+
+describe("SettlementTab — 수취 계좌", () => {
+  it("등록 전에는 필수 등록 안내(배너)와 등록 폼을 보여주고, 저장 후에는 읽기 전용 마스킹 화면만 보인다", async () => {
+    render(<SettlementTab />);
+    expect(await screen.findByTestId("account-setup-banner")).toBeInTheDocument();
+    await openSubtab("account");
+    expect(await screen.findByTestId("account-empty")).toBeInTheDocument();
+
+    fireEvent.change(screen.getByLabelText("Account holder"), { target: { value: "김선생" } });
+    fireEvent.change(screen.getByLabelText("Bank name"), { target: { value: "국민은행" } });
+    fireEvent.change(screen.getByLabelText("Account number"), { target: { value: "110-123-456789" } });
+    fireEvent.click(screen.getByTestId("account-save"));
+
+    expect(await screen.findByTestId("account-masked")).toHaveTextContent("****6789");
+    expect(screen.queryByText(/110-123-456789/)).not.toBeInTheDocument();
+    // 저장 뒤: 수정 수단이 없고 직원 문의 안내만 있다.
+    expect(screen.getByTestId("account-locked-note")).toHaveTextContent("To change your account details, contact ALTON staff.");
+    expect(screen.queryByText("Edit")).not.toBeInTheDocument();
+    expect(screen.queryByTestId("account-save")).not.toBeInTheDocument();
+  });
+
+  it("이미 등록된 계좌는 처음부터 읽기 전용이다(수정·추가 버튼 없음)", async () => {
+    getAccountMock.mockResolvedValue({
+      accountHolderName: "김선생", bankName: "국민은행", accountNumberMasked: "****6789", currency: "KRW",
+      country: "KR", swiftOrRouting: null, updatedAt: "2026-09-12T03:00:00.000Z",
+    });
+    render(<SettlementTab />);
+    await openSubtab("account");
+    expect(await screen.findByTestId("account-masked")).toHaveTextContent("****6789");
+    expect(screen.queryByText("Edit")).not.toBeInTheDocument();
+    expect(screen.queryByText("Add account")).not.toBeInTheDocument();
+    expect(screen.queryByTestId("account-setup-banner")).not.toBeInTheDocument();
+    expect(screen.getByTestId("account-locked-note")).toBeInTheDocument();
+  });
+
+  it("서버가 입력을 거부하면 사유를 보여주고 폼을 유지한다", async () => {
+    saveAccountMock.mockResolvedValue({ status: "invalid", message: "Please enter the account holder name." });
+    render(<SettlementTab />);
+    await openSubtab("account");
+    fireEvent.click(await screen.findByTestId("account-save"));
+
+    expect(await screen.findByText("Please enter the account holder name.")).toBeInTheDocument();
+    expect(screen.getByLabelText("Bank name")).toBeInTheDocument();
+  });
+
+  it("USD를 고르면 ABA 라우팅 입력이 나온다", async () => {
+    render(<SettlementTab />);
+    await openSubtab("account");
+    fireEvent.change(await screen.findByLabelText("Currency"), { target: { value: "USD" } });
+    expect(screen.getByText("ABA routing number")).toBeInTheDocument();
+  });
+});
+
+  it("통화는 KRW/USD 중에서 고르게 하고 계좌번호 하이픈 안내를 보여준다", async () => {
+    render(<SettlementTab />);
+    await openSubtab("account");
+    const currency = (await screen.findByLabelText("Currency")) as HTMLSelectElement;
+    expect(currency.tagName).toBe("SELECT");
+    expect(Array.from(currency.options).map((o) => o.value)).toEqual(["KRW", "USD"]);
+    expect(screen.getByText(/hyphens are fine/)).toBeInTheDocument();
+  });
+
+describe("SettlementTab — 제출 서류", () => {
+  it("보관 창구임을 안내하고 게이트로 읽힐 '필수/미제출' 표현을 쓰지 않는다", async () => {
+    render(<SettlementTab />);
+    await openSubtab("documents");
+    expect(await screen.findByTestId("documents-empty")).toBeInTheDocument();
+    expect(
+      screen.getByText(/does not affect payouts, matching, or lessons/)
+    ).toBeInTheDocument();
+    expect(screen.queryByText(/Required documents/)).not.toBeInTheDocument();
+    expect(screen.queryByText(/Not submitted/)).not.toBeInTheDocument();
+  });
+
+  it("업로드 입력이 버튼으로 보인다(기본 file input을 그대로 노출하지 않는다)", async () => {
+    render(<SettlementTab />);
+    await openSubtab("documents");
+    expect(await screen.findByTestId("upload-document")).toHaveTextContent("Choose a file to upload");
+    expect(screen.getByLabelText("Upload document")).toHaveClass("hidden");
+  });
+
+  it("잘못 올린 서류를 삭제할 수 있다", async () => {
+    listDocsMock.mockResolvedValue([
+      {
+        id: "d1",
+        fileName: "잘못올림.pdf",
+        contentType: "application/pdf",
+        sizeBytes: 100,
+        note: null,
+        uploadedAt: "2026-09-12T03:00:00.000Z",
+      },
+    ]);
+    deleteDocMock.mockResolvedValue(undefined);
+    vi.spyOn(window, "confirm").mockReturnValue(true);
+
+    render(<SettlementTab />);
+    await openSubtab("documents");
+    fireEvent.click(await screen.findByTestId("delete-document-d1"));
+
+    await waitFor(() => expect(deleteDocMock).toHaveBeenCalledWith("d1"));
+    await waitFor(() => expect(screen.getByTestId("documents-empty")).toBeInTheDocument());
+  });
+
+  it("업로드가 성공하면 목록에 바로 추가된다", async () => {
+    uploadDocMock.mockResolvedValue({
+      status: "uploaded",
+      document: {
+        id: "d1",
+        fileName: "계약서.pdf",
+        contentType: "application/pdf",
+        sizeBytes: 100,
+        note: null,
+        uploadedAt: "2026-09-12T03:00:00.000Z",
+      },
+    });
+    render(<SettlementTab />);
+    await openSubtab("documents");
+    await screen.findByTestId("documents-empty");
+
+    const input = screen.getByLabelText("Upload document");
+    fireEvent.change(input, {
+      target: { files: [new File(["1"], "계약서.pdf", { type: "application/pdf" })] },
+    });
+
+    await waitFor(() => expect(screen.getByText("계약서.pdf")).toBeInTheDocument());
+  });
+});
+
+describe("SettlementTab — payout notices", () => {
+  const NOTICES = [
+    { id: "n1", kind: "payout_delayed_late", message: "Your payout for Oct 1–15, 2026 is delayed. It is now expected to arrive by Oct 30, 2026 (original deadline: Oct 26, 2026).", createdAt: "2026-10-27T18:00:00.000Z", read: false },
+    { id: "n2", kind: "payout_date_changed", message: "Your payout for Sep 16–30, 2026 will now be paid by Oct 8, 2026.", createdAt: "2026-10-01T18:00:00.000Z", read: true },
+  ];
+
+  it("shows the latest notices at the top with unread state", async () => {
+    loadPageDataMock.mockResolvedValue({ settlement: SETTLEMENT, account: null, documents: [], notices: NOTICES });
+    render(<SettlementTab />);
+    expect(await screen.findByTestId("payout-notices")).toBeInTheDocument();
+    expect(screen.getByTestId("payout-notice-n1")).toHaveTextContent("is delayed");
+    expect(screen.getByTestId("mark-read-n1")).toBeInTheDocument();
+    expect(screen.queryByTestId("mark-read-n2")).not.toBeInTheDocument();
+  });
+
+  it("mark as read calls the server action and clears the unread control", async () => {
+    markReadMock.mockResolvedValue({ ok: true });
+    loadPageDataMock.mockResolvedValue({ settlement: SETTLEMENT, account: null, documents: [], notices: NOTICES });
+    render(<SettlementTab />);
+    fireEvent.click(await screen.findByTestId("mark-read-n1"));
+    await waitFor(() => expect(markReadMock).toHaveBeenCalledWith("n1"));
+    await waitFor(() => expect(screen.queryByTestId("mark-read-n1")).not.toBeInTheDocument());
+  });
+
+  it("hides the section when there are no notices", async () => {
+    loadPageDataMock.mockResolvedValue({ settlement: SETTLEMENT, account: null, documents: [], notices: [] });
+    render(<SettlementTab />);
+    await screen.findByText(/Review payouts for completed lessons/);
+    expect(screen.queryByTestId("payout-notices")).not.toBeInTheDocument();
+  });
+});
+
+describe("SettlementTab — 기한 경과", () => {
+  it("기한이 지난 예정 건은 'Overdue — being processed'와 원래 기한을 보여주고, 다음 지급 기한 줄은 없다", async () => {
+    loadPageDataMock.mockResolvedValue({
+      settlement: {
+        ...SETTLEMENT,
+        scheduledTotalsByCurrency: {},
+        overdueTotalsByCurrency: { KRW: 70000 },
+        overdueSince: "2026-09-25",
+        nextPayoutMonth: null,
+        nextPayoutDate: null,
+        months: [{ ...SETTLEMENT.months[0], status: "scheduled", overdue: true, effectiveDeadline: "2026-09-25", scheduledPayoutDate: null }],
+      },
+      account: null,
+      documents: [],
+      notices: [],
+    });
+    render(<SettlementTab />);
+    expect(await screen.findByTestId("overdue-payout")).toHaveTextContent("Overdue — being processed");
+    expect(screen.getByTestId("overdue-payout")).toHaveTextContent("Was due Sep 25, 2026");
+    expect(screen.queryByText(/Next payout deadline/)).not.toBeInTheDocument();
+    expect(screen.getByText("No upcoming amount yet.")).toBeInTheDocument();
+  });
+});

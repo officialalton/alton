@@ -1,0 +1,315 @@
+{
+ "schema": "rw-session-task/v1",
+ "kind": "review",
+ "role": "fable_judge",
+ "runId": "lit40-wave1",
+ "taskId": "rev-fable_judge-068",
+ "chunkId": "rev-fable_judge-068",
+ "suggestedModel": "fable",
+ "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-fable_judge-068.result.json",
+ "outputSchema": {
+  "chunkId": "청크 ID",
+  "model": "fable",
+  "items": [
+   {
+    "candidateId": "id",
+    "picked_letter": "A|B|C|D",
+    "other_defensible": "정답 외 방어 가능한 선택지가 있으면 true",
+    "est_difficulty": "easy|medium|hard (실제 체감, 요청 난이도에 맞추지 말 것)",
+    "hard_fit": "실제 SAT hard 수준의 사고 단계가 필요하면 true(지문 길이·난어만이면 false)",
+    "plausible_distractors": "오답 3개가 모두 그럴듯하고 서로 다른 오개념에서 나왔으면 true",
+    "length_balanced": "네 선택지 길이·구체성이 비슷해 정답이 형식으로 드러나지 않으면 true",
+    "multi_answer_risk": "복수 정답 위험이 있으면 true",
+    "issues": "한 줄 메모"
+   }
+  ]
+ },
+ "items": [
+  {
+   "candidateId": "lit40-easy-04-063",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "easy",
+   "passage": "Redcastle is suddenly awakened to the consciousness of loveliness that scarcely moved it to admiration two years ago, although the girl’s beauty had then the bloom and freshness of unchastened youth. Perhaps she is really lovelier now. Sorrow and passion have passed there, and left the exalted look of an awakened soul, where there was before only girlish innocence, curious and wondering about a world of which it knew nothing. She has eaten of the tree of knowledge of good and evil. The mystery of life has been revealed to her. Be sure that Eve’s beauty had a deeper meaning after she came out by the fatal gate where the angel with the flaming sword kept watch and ward.",
+   "question": "Which choice best describes how the tone shifts in the text?",
+   "options": [
+    "From cheerful praise of the girl to harsh criticism of her sorrow",
+    "From admiring description of the girl to reflection on how experience deepens beauty",
+    "From gloomy warning about Redcastle to lighthearted mockery of him",
+    "From confusion about the girl's looks to certainty that her beauty has faded"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-04-068",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "easy",
+   "passage": "I tried to think that this indifference and sunny idleness were perhaps the natural reaction of that larger life of emotion and activity from which he had just emerged. I reflected a great deal on that life, and, though I lamented the fact that he had drawn his sword on the wrong side, there was, down deep in my heart, an involuntary sympathetic throb for the valor that had not availed. I suppose the inexplicable ties of kinship had something to do with all this.\n\nWashington Flagg had now been with us five weeks. He usually lingered awhile after dinner; sometimes spent the entire evening with the family, or, rather, with me, for Mrs. Wesley preferred the sitting-room to my den when I had company.",
+   "question": "Which choice best describes the narrator's attitude toward Washington Flagg?",
+   "options": [
+    "Open contempt for his idleness and long visits",
+    "Fearful suspicion of his reasons for staying",
+    "Complete indifference to his past and company",
+    "Sympathy mixed with mild disapproval of his past"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-04-069",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "easy",
+   "passage": "Far less than half-way to the hamlet, very little beyond the bottom of the hill, we must come forth into the moonlight. Nor was this all, for the sound of several footsteps running came already to our ears, and as we looked back in their direction, a light tossing to and fro, and still rapidly advancing, showed that one of the new-comers carried a lantern.\n\n\"My dear,\" said my mother suddenly, \"take the money and run on. I am going to faint.\"\n\nThis was certainly the end for both of us, I thought. How I cursed the cowardice of the neighbours; how I blamed my poor mother for her honesty and her greed, for her past foolhardiness and present weakness!",
+   "question": "Which choice best describes the narrator's attitude toward his mother?",
+   "options": [
+    "Exasperated blame softened by pity",
+    "Calm admiration for her courage",
+    "Cheerful confidence in her plan",
+    "Cold indifference to her fate"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-04-070",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "easy",
+   "passage": "I was also present for one day during the races. The course is two miles in length, and in excellent condition, being railed off the whole distance. I saw one race, which was admirably contested; but the ground was not well attended, and the others did not go off with spirit. I was told, however, that there was a great prospect of improvement, as the Canadians were beginning to be fond of the sport. The excitement would have been much greater if it had lasted but two days instead of four; and a public ball afterwards would not have been amiss.",
+   "question": "Which choice best states the main purpose of the text?",
+   "options": [
+    "To describe how the Canadians invented a new kind of racing",
+    "To give a mixed view of the races and suggest improvements",
+    "To complain that the racecourse was in very poor condition",
+    "To recount the narrator's own victory in a close race"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-04-072",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "easy",
+   "passage": "John Milton had rowed back without lifting his eyes to Mrs. Ashwood's receding figure. He believed that he was right in declining her invitation, although he had a miserable feeling that it entailed seeing her for the last time. With all that he believed was his previous experience of the affections, he was still so untutored as to be confused as to his reasons for declining, or his right to have been shocked and disappointed at her manner. It seemed to him sufficiently plain that he had offended the most perfect woman he had ever known without knowing more. The feeling he had for her was none the less powerful because, in his great simplicity, it was vague and unformulated.",
+   "question": "As used in the text, the phrase “so untutored” most nearly suggests that John Milton was",
+   "options": [
+    "poorly educated in his school subjects",
+    "unwilling to learn from other people",
+    "inexperienced in understanding his own feelings",
+    "too proud to admit he had made an error"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-04-073",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "easy",
+   "passage": "If I might see a smile on her face, if the look of yielding would but come back there and remain! Surely her scruples would pass when I should bring her father to her. What imaginary barrier could stand before the combined forces of love and gratitude? The rescue of her father must not be longer deferred. I must form my plan immediately. Yet I continued to waste time thinking of the future, of the day when she should acknowledge herself mine. I took off my hat and removed from it the glove that she had given me. It was like a part of her; it was fashioned by use to the very form of her hand.",
+   "question": "As used in the text, the phrase “It was like a part of her” most nearly suggests that the glove was",
+   "options": [
+    "a worn object the narrator planned to discard",
+    "a gift she had demanded that he return",
+    "a disguise that he used to hide his identity",
+    "a treasured token that seemed to hold her presence"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-04-074",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "easy",
+   "passage": "\"The city boasts an old and learned college,\nWhere you'd think the leading industry was Greek;\nEven there the favoured instruments of knowledge\nAre a driver, and a putter, and a cleek.\n\n\"All the natives and the residents are patrons\nOf this royal, ancient, irritating game;\nAll the old men, all the young men, maids and matrons,\nWith this passion burn in hard and gem-like flame.\n\n\"In the morning, as the light grows strong and stronger,\nYou may see the players going out in shoals;\nAnd when night forbids their playing any longer,\nThey will tell you how they did the different holes.",
+   "question": "As used in the text, the phrase “With this passion burn in hard and gem-like flame” most nearly suggests that the townspeople",
+   "options": [
+    "feel an intense and lasting enthusiasm for golf",
+    "are angry about the game's irritating rules",
+    "suffer from the summer heat on the course",
+    "pretend to enjoy golf to please their neighbors"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-04-075",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "easy",
+   "passage": "Of course we all know from the books that their intention is to find a suitable spot in which to bury this ball, and such being the case, with what astonishing stupidity do they urge on that labor! Here certainly is just the right spot for you, Mrs. Tumble-bug! Stop rolling and dig! But no, she will not listen to reason. She mounts the top of the ball, and, creeping far out upon it, pulls it over forward with her back feet, while Mr. Tumble-bug helps her in a most singular fashion. Does he stand up on his hind legs on the opposite side, and push with his powerful front feet? Oh no; he stands on his head, and pushes with his hind legs. As he pushes, and as the ball rolls merrily on, Mrs. Tumble-bug is continually rolled around with it, and must needs climb backward at a lively rate to keep her place.",
+   "question": "As used in the text, the phrase “she will not listen to reason” most nearly suggests that Mrs. Tumble-bug",
+   "options": [
+    "cannot hear the observer over the noise of rolling",
+    "stubbornly ignores what seems sensible to the observer",
+    "is waiting for Mr. Tumble-bug to give her advice",
+    "has already found a good spot in which to dig"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-04-076",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "easy",
+   "passage": "Determined to carry to a successful completion every project we take in hand, we went to work to organize the meeting. A chairman is essential to any meeting. They are necessary to keep the meeting in order, and give the assemblage proper dignity. We were unanimously chosen chairman and took our seat amid the most profound silence. But a difficulty, wholly unexpected now presented itself. A secretary to keep the record of the proceedings is equally indispensable. There was no one to make secretary. Not to be thwarted by minor obstacles, we finally with much reluctance, consented to assume this arduous position also.",
+   "question": "As used in the text, the phrase “this arduous position” most nearly suggests that the role of secretary was",
+   "options": [
+    "a truly exhausting job that required long training",
+    "a post that other members fought hard to obtain",
+    "a mock-serious exaggeration of a trivial duty",
+    "a dangerous role that the narrator greatly feared"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-04-082",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "easy",
+   "passage": "The thought became intolerable to him as he pondered seriously, always with his head between his hands. He began once more to pace up and down the room heavily, but hastily--with a heavy foot, but not the deliberate quietness of legitimate thought. Such reflections as these tire a man and hurry him; there is no peace in them. Passing the door of the turret-room, he looked in, and a sudden gust of anger rose. A stool was standing in the middle of the room, a book lying open on the floor.",
+   "question": "Which choice best describes the shift in tone in the text?",
+   "options": [
+    "From calm satisfaction to gentle amusement",
+    "From cheerful planning to quiet regret",
+    "From restless brooding to sudden anger",
+    "From fierce anger to calm acceptance"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-04-083",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "easy",
+   "passage": "Had the simple, manly patience with which he had paid the penalty reversed the result in character, in the subtle workings by which good may triumph over evil? Had Bob become less and she more worldly-minded since they parted? Had his nature been softened, mellowed, purified in his ceaseless toil for his sick wife and helpless children, while she in her comparative ease, her leisure for her bible and her kirk, had lost sight of magnanimity and mercy and learnt only vindictiveness and malice? And if so, had she not been doubly defrauded? Was Bob to cheat her not only of earthly, but of heavenly happiness?",
+   "question": "Which choice best describes the shift in tone in the text?",
+   "options": [
+    "From bitter anger to forgiving calm",
+    "From joyful hope to quiet sorrow",
+    "From amused teasing to deep fear",
+    "From searching doubt to bitter grievance"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-04-084",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "text_structure",
+   "requestedDifficulty": "easy",
+   "passage": "The look of straightforward gratitude and trust on his face as he exchanged looks with her was balm to her heart.\n\n“And now,” he said, “I can’t thank you. I can only pray that--that your advice has come--in time.”\n\nThe look of gravity on his face showed Rhoda, who shivered as she glanced at him, that he appreciated the extent of the danger to which his easy-going temper had brought him and his wife.\n\nRhoda dared not say any more; she was in terror now lest he should proceed to question her about the picture and its restoration.",
+   "question": "Which choice best describes the overall structure of the text?",
+   "options": [
+    "It shows a man's grateful response and then turns to a woman's hidden fear",
+    "It describes a picture's restoration and then a couple's later quarrel",
+    "It presents a woman's advice and then the man's firm refusal of it",
+    "It recounts a danger in detail and then explains its happy ending"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-04-085",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "text_structure",
+   "requestedDifficulty": "easy",
+   "passage": "While, from its yellow, scintillating eyes, it emitted a glance of such malignant ferocity as, had it been more fully grown, might have alarmed a braver man than he.\n\n'Oh, how cruel to kick that poor little half-drowned thing!' Bella exclaimed reproachfully; 'it never meant to hurt you, only it was frightened. Poor little thing!' she said again, and, even as she spoke, she knelt down on the deck and stroked the wet, striped ball that lay there. And it seemed as if her gentleness had some power to soothe whatever ferocious instincts--still dormant and undeveloped at present--were smouldering within it. For, instead of now using its paws as weapons with which to strike out and attack anything near it, it played with her as a kitten plays with a ball, tapping at her hand and trying to catch it, and pushing and kicking against her with its hind legs.",
+   "question": "Which choice best describes the overall structure of the text?",
+   "options": [
+    "It shows a woman's fear of an animal and then her escape from it",
+    "It describes a creature's fierce look and then how kindness calms it",
+    "It praises a man's bravery and then describes his reward from Bella",
+    "It shows a kitten at play and then its sudden turn toward danger"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-04-088",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "easy",
+   "passage": "If the Miss Mackinnons had advertised for the owner of that basket they would have been clever if they had found her. Now, we are all right, thank you--at least, we are fast getting right. I open the door, for of course I am the youngest, and the stairs try me least, and I take in all the parcels. If there is anything very suspicious, even for my extensive requirements, I carry it to my room, and Miss Janet is too much of a lady to meddle with what I do there.",
+   "question": "Which choice best describes the narrator's attitude toward her role in the household?",
+   "options": [
+    "Bitter resentment toward Miss Janet",
+    "Fearful worry about being found out",
+    "Sad longing for an easier past",
+    "Good-humored confidence in her duties"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-04-089",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "easy",
+   "passage": "In all there was free play for individual ideas and development. One Bible class in particular I would mention, that conducted for many years by Mr. Wilbur, and which had more than one hundred members. In a variety of ways, by freedom of discussion in the class, by excursions, receptions, entertainments of various kinds, it bound the young people together, helped greatly to build up the church, and particularly contributed to its social life. How firmly it was established is witnessed by the fact that it has never weakened, even in the changes that have come in the membership, or the official direction of the church.",
+   "question": "Which choice best states the main purpose of the text?",
+   "options": [
+    "To praise a Bible class that united young people and lastingly helped the church",
+    "To criticize the changes in church leadership that weakened the congregation",
+    "To explain why the church lost so many of its younger members over time",
+    "To describe the early life of Mr. Wilbur before he began teaching his class"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-04-090",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "easy",
+   "passage": "The agent went out, and the runaway drew one of the chairs up in front of the stove and sat down in it. He was provided for for the night, but what should he do when morning came? Should he stay there at the tank-station and look for work, or would it be better for him to start for Oxford on foot, begging his meals as he went like any other tramp? That was what he intended to do when he first made up his mind to desert the academy, and he could not see that there was any other course open to him now. While he was thinking about it, he fell asleep. He did not know when the lightning express and the fast freight went through, but he heard the whistle of the morning train, and hurried to the door to see the accommodation approaching.",
+   "question": "As used in the text, the phrase “like any other tramp” most nearly suggests that the runaway expects to",
+   "options": [
+    "live as a poor wanderer who depends on strangers",
+    "travel quickly and comfortably by the morning train",
+    "work steadily at the tank-station for good wages",
+    "return to the academy and apologize for leaving"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-04-091",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "easy",
+   "passage": "There was a lapse of some kind that she could neither account for nor describe even to herself. She tried to put it into seconds and minutes, and then realised that it was not a matter to be reckoned as time. Yet there had been a distinct, unmistakable gap in her existence. Something had stopped--she knew not for how long--and then she had found herself breathing, thinking once more. In spite of the conviction that she had passed through a period of utter oblivion, she could account for every second of time with an absolute clearness of memory.\n\nThere was not an instant, nor a sensation, nor an impulse that was not fully recorded in her alert brain.",
+   "question": "As used in the text, the phrase “a distinct, unmistakable gap in her existence” most nearly suggests",
+   "options": [
+    "a long journey she once took far away from home",
+    "a moment when her awareness seemed to stop",
+    "a stretch of time she could measure exactly",
+    "an empty space left in the room around her"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-04-094",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "easy",
+   "passage": "People who have nothing to do get rid of a great deal of time in trying to make impressions and in speculating as to what impressions they have made. Jane--hastening toward Martha's to get out of the sun which could not but injure a complexion so delicately fine as hers--gave herself up to this form of occupation. What did he think of her? Did he really have as little sense of her physical charm as he seemed? No woman could hope to be attractive to every man. Still--this man surely must be at least not altogether insensible.",
+   "question": "Which choice best describes the shift in tone in the text?",
+   "options": [
+    "From detached irony to anxious, hopeful self-questioning",
+    "From joyful excitement to sudden and open anger",
+    "From quiet grief to a calm and settled acceptance",
+    "From fear of the sun to relief at reaching shade"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-04-095",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "text_structure",
+   "requestedDifficulty": "easy",
+   "passage": "The wretched merchant, overcome by the terrors with which his soul had been appalled, and reduced to the last extremity of impotence by misery and disease, gave up his wearied spirit on the floor. There was no other creature in existence, to whom Bochari dared to intrust the secret of his infernal design. He had not the time to accomplish it himself, for the sounds of shoutings were already echoing through the air. To execute the work partially, would only expose him to discovery, and to certain revenge. There were upwards of five hundred vases on the tables.",
+   "question": "Which choice best describes the overall structure of the text?",
+   "options": [
+    "It describes a festive gathering and then a merchant's sudden illness",
+    "It reports one man's death and then turns to another man's dilemma",
+    "It explains how a plan succeeded and then how it was discovered",
+    "It lists the vases on the tables and then traces their long history"
+   ]
+  }
+ ],
+ "instructions": "당신은 디지털 SAT 독립 채점자다. 정답 표시가 없다. 먼저 문항을 직접 풀고(picked_letter), 이어서 난이도·hard 적합·오답 품질을 판정한다. 요청 난이도에 맞추려 하지 말고 실제로 느끼는 대로 답한다.\n청크 rev-fable_judge-068 — 19문항.\n출력: Write 도구로 정확히 이 경로에 JSON 한 파일을 쓴다 → /Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-fable_judge-068.result.json\n출력 JSON 스키마(예시 구조): {\"chunkId\":\"청크 ID\",\"model\":\"fable\",\"items\":[{\"candidateId\":\"id\",\"picked_letter\":\"A|B|C|D\",\"other_defensible\":\"정답 외 방어 가능한 선택지가 있으면 true\",\"est_difficulty\":\"easy|medium|hard (실제 체감, 요청 난이도에 맞추지 말 것)\",\"hard_fit\":\"실제 SAT hard 수준의 사고 단계가 필요하면 true(지문 길이·난어만이면 false)\",\"plausible_distractors\":\"오답 3개가 모두 그럴듯하고 서로 다른 오개념에서 나왔으면 true\",\"length_balanced\":\"네 선택지 길이·구체성이 비슷해 정답이 형식으로 드러나지 않으면 true\",\"multi_answer_risk\":\"복수 정답 위험이 있으면 true\",\"issues\":\"한 줄 메모\"}]}\n허용 값: picked_letter ∈ {A,B,C,D}, 불리언 필드는 true/false, est_difficulty ∈ {easy,medium,hard}. candidateId 를 바꾸지 않고 모든 항목에 답한다.\n금지: 결과 파일 외의 파일 생성·수정, 다른 명령 실행, 문항 수정·재작성. 끝나면 'done <항목 수>' 한 줄만 답한다.\n\n## 문항\n### lit40-easy-04-063 — skill text_structure_purpose · 유형 tone_shift · 요청 난이도 easy\n[지문]\nRedcastle is suddenly awakened to the consciousness of loveliness that scarcely moved it to admiration two years ago, although the girl’s beauty had then the bloom and freshness of unchastened youth. Perhaps she is really lovelier now. Sorrow and passion have passed there, and left the exalted look of an awakened soul, where there was before only girlish innocence, curious and wondering about a world of which it knew nothing. She has eaten of the tree of knowledge of good and evil. The mystery of life has been revealed to her. Be sure that Eve’s beauty had a deeper meaning after she came out by the fatal gate where the angel with the flaming sword kept watch and ward.\n\n[질문] Which choice best describes how the tone shifts in the text?\nA) From cheerful praise of the girl to harsh criticism of her sorrow\nB) From admiring description of the girl to reflection on how experience deepens beauty\nC) From gloomy warning about Redcastle to lighthearted mockery of him\nD) From confusion about the girl's looks to certainty that her beauty has faded\n### lit40-easy-04-068 — skill central_ideas_details · 유형 narrator_attitude · 요청 난이도 easy\n[지문]\nI tried to think that this indifference and sunny idleness were perhaps the natural reaction of that larger life of emotion and activity from which he had just emerged. I reflected a great deal on that life, and, though I lamented the fact that he had drawn his sword on the wrong side, there was, down deep in my heart, an involuntary sympathetic throb for the valor that had not availed. I suppose the inexplicable ties of kinship had something to do with all this.\n\nWashington Flagg had now been with us five weeks. He usually lingered awhile after dinner; sometimes spent the entire evening with the family, or, rather, with me, for Mrs. Wesley preferred the sitting-room to my den when I had company.\n\n[질문] Which choice best describes the narrator's attitude toward Washington Flagg?\nA) Open contempt for his idleness and long visits\nB) Fearful suspicion of his reasons for staying\nC) Complete indifference to his past and company\nD) Sympathy mixed with mild disapproval of his past\n### lit40-easy-04-069 — skill central_ideas_details · 유형 narrator_attitude · 요청 난이도 easy\n[지문]\nFar less than half-way to the hamlet, very little beyond the bottom of the hill, we must come forth into the moonlight. Nor was this all, for the sound of several footsteps running came already to our ears, and as we looked back in their direction, a light tossing to and fro, and still rapidly advancing, showed that one of the new-comers carried a lantern.\n\n\"My dear,\" said my mother suddenly, \"take the money and run on. I am going to faint.\"\n\nThis was certainly the end for both of us, I thought. How I cursed the cowardice of the neighbours; how I blamed my poor mother for her honesty and her greed, for her past foolhardiness and present weakness!\n\n[질문] Which choice best describes the narrator's attitude toward his mother?\nA) Exasperated blame softened by pity\nB) Calm admiration for her courage\nC) Cheerful confidence in her plan\nD) Cold indifference to her fate\n### lit40-easy-04-070 — skill central_ideas_details · 유형 main_idea_or_purpose · 요청 난이도 easy\n[지문]\nI was also present for one day during the races. The course is two miles in length, and in excellent condition, being railed off the whole distance. I saw one race, which was admirably contested; but the ground was not well attended, and the others did not go off with spirit. I was told, however, that there was a great prospect of improvement, as the Canadians were beginning to be fond of the sport. The excitement would have been much greater if it had lasted but two days instead of four; and a public ball afterwards would not have been amiss.\n\n[질문] Which choice best states the main purpose of the text?\nA) To describe how the Canadians invented a new kind of racing\nB) To give a mixed view of the races and suggest improvements\nC) To complain that the racecourse was in very poor condition\nD) To recount the narrator's own victory in a close race\n### lit40-easy-04-072 — skill words_in_context · 유형 figurative_language · 요청 난이도 easy\n[지문]\nJohn Milton had rowed back without lifting his eyes to Mrs. Ashwood's receding figure. He believed that he was right in declining her invitation, although he had a miserable feeling that it entailed seeing her for the last time. With all that he believed was his previous experience of the affections, he was still so untutored as to be confused as to his reasons for declining, or his right to have been shocked and disappointed at her manner. It seemed to him sufficiently plain that he had offended the most perfect woman he had ever known without knowing more. The feeling he had for her was none the less powerful because, in his great simplicity, it was vague and unformulated.\n\n[질문] As used in the text, the phrase “so untutored” most nearly suggests that John Milton was\nA) poorly educated in his school subjects\nB) unwilling to learn from other people\nC) inexperienced in understanding his own feelings\nD) too proud to admit he had made an error\n### lit40-easy-04-073 — skill words_in_context · 유형 figurative_language · 요청 난이도 easy\n[지문]\nIf I might see a smile on her face, if the look of yielding would but come back there and remain! Surely her scruples would pass when I should bring her father to her. What imaginary barrier could stand before the combined forces of love and gratitude? The rescue of her father must not be longer deferred. I must form my plan immediately. Yet I continued to waste time thinking of the future, of the day when she should acknowledge herself mine. I took off my hat and removed from it the glove that she had given me. It was like a part of her; it was fashioned by use to the very form of her hand.\n\n[질문] As used in the text, the phrase “It was like a part of her” most nearly suggests that the glove was\nA) a worn object the narrator planned to discard\nB) a gift she had demanded that he return\nC) a disguise that he used to hide his identity\nD) a treasured token that seemed to hold her presence\n### lit40-easy-04-074 — skill words_in_context · 유형 figurative_language · 요청 난이도 easy\n[지문]\n\"The city boasts an old and learned college,\nWhere you'd think the leading industry was Greek;\nEven there the favoured instruments of knowledge\nAre a driver, and a putter, and a cleek.\n\n\"All the natives and the residents are patrons\nOf this royal, ancient, irritating game;\nAll the old men, all the young men, maids and matrons,\nWith this passion burn in hard and gem-like flame.\n\n\"In the morning, as the light grows strong and stronger,\nYou may see the players going out in shoals;\nAnd when night forbids their playing any longer,\nThey will tell you how they did the different holes.\n\n[질문] As used in the text, the phrase “With this passion burn in hard and gem-like flame” most nearly suggests that the townspeople\nA) feel an intense and lasting enthusiasm for golf\nB) are angry about the game's irritating rules\nC) suffer from the summer heat on the course\nD) pretend to enjoy golf to please their neighbors\n### lit40-easy-04-075 — skill words_in_context · 유형 figurative_language · 요청 난이도 easy\n[지문]\nOf course we all know from the books that their intention is to find a suitable spot in which to bury this ball, and such being the case, with what astonishing stupidity do they urge on that labor! Here certainly is just the right spot for you, Mrs. Tumble-bug! Stop rolling and dig! But no, she will not listen to reason. She mounts the top of the ball, and, creeping far out upon it, pulls it over forward with her back feet, while Mr. Tumble-bug helps her in a most singular fashion. Does he stand up on his hind legs on the opposite side, and push with his powerful front feet? Oh no; he stands on his head, and pushes with his hind legs. As he pushes, and as the ball rolls merrily on, Mrs. Tumble-bug is continually rolled around with it, and must needs climb backward at a lively rate to keep her place.\n\n[질문] As used in the text, the phrase “she will not listen to reason” most nearly suggests that Mrs. Tumble-bug\nA) cannot hear the observer over the noise of rolling\nB) stubbornly ignores what seems sensible to the observer\nC) is waiting for Mr. Tumble-bug to give her advice\nD) has already found a good spot in which to dig\n### lit40-easy-04-076 — skill words_in_context · 유형 figurative_language · 요청 난이도 easy\n[지문]\nDetermined to carry to a successful completion every project we take in hand, we went to work to organize the meeting. A chairman is essential to any meeting. They are necessary to keep the meeting in order, and give the assemblage proper dignity. We were unanimously chosen chairman and took our seat amid the most profound silence. But a difficulty, wholly unexpected now presented itself. A secretary to keep the record of the proceedings is equally indispensable. There was no one to make secretary. Not to be thwarted by minor obstacles, we finally with much reluctance, consented to assume this arduous position also.\n\n[질문] As used in the text, the phrase “this arduous position” most nearly suggests that the role of secretary was\nA) a truly exhausting job that required long training\nB) a post that other members fought hard to obtain\nC) a mock-serious exaggeration of a trivial duty\nD) a dangerous role that the narrator greatly feared\n### lit40-easy-04-082 — skill text_structure_purpose · 유형 tone_shift · 요청 난이도 easy\n[지문]\nThe thought became intolerable to him as he pondered seriously, always with his head between his hands. He began once more to pace up and down the room heavily, but hastily--with a heavy foot, but not the deliberate quietness of legitimate thought. Such reflections as these tire a man and hurry him; there is no peace in them. Passing the door of the turret-room, he looked in, and a sudden gust of anger rose. A stool was standing in the middle of the room, a book lying open on the floor.\n\n[질문] Which choice best describes the shift in tone in the text?\nA) From calm satisfaction to gentle amusement\nB) From cheerful planning to quiet regret\nC) From restless brooding to sudden anger\nD) From fierce anger to calm acceptance\n### lit40-easy-04-083 — skill text_structure_purpose · 유형 tone_shift · 요청 난이도 easy\n[지문]\nHad the simple, manly patience with which he had paid the penalty reversed the result in character, in the subtle workings by which good may triumph over evil? Had Bob become less and she more worldly-minded since they parted? Had his nature been softened, mellowed, purified in his ceaseless toil for his sick wife and helpless children, while she in her comparative ease, her leisure for her bible and her kirk, had lost sight of magnanimity and mercy and learnt only vindictiveness and malice? And if so, had she not been doubly defrauded? Was Bob to cheat her not only of earthly, but of heavenly happiness?\n\n[질문] Which choice best describes the shift in tone in the text?\nA) From bitter anger to forgiving calm\nB) From joyful hope to quiet sorrow\nC) From amused teasing to deep fear\nD) From searching doubt to bitter grievance\n### lit40-easy-04-084 — skill text_structure_purpose · 유형 text_structure · 요청 난이도 easy\n[지문]\nThe look of straightforward gratitude and trust on his face as he exchanged looks with her was balm to her heart.\n\n“And now,” he said, “I can’t thank you. I can only pray that--that your advice has come--in time.”\n\nThe look of gravity on his face showed Rhoda, who shivered as she glanced at him, that he appreciated the extent of the danger to which his easy-going temper had brought him and his wife.\n\nRhoda dared not say any more; she was in terror now lest he should proceed to question her about the picture and its restoration.\n\n[질문] Which choice best describes the overall structure of the text?\nA) It shows a man's grateful response and then turns to a woman's hidden fear\nB) It describes a picture's restoration and then a couple's later quarrel\nC) It presents a woman's advice and then the man's firm refusal of it\nD) It recounts a danger in detail and then explains its happy ending\n### lit40-easy-04-085 — skill text_structure_purpose · 유형 text_structure · 요청 난이도 easy\n[지문]\nWhile, from its yellow, scintillating eyes, it emitted a glance of such malignant ferocity as, had it been more fully grown, might have alarmed a braver man than he.\n\n'Oh, how cruel to kick that poor little half-drowned thing!' Bella exclaimed reproachfully; 'it never meant to hurt you, only it was frightened. Poor little thing!' she said again, and, even as she spoke, she knelt down on the deck and stroked the wet, striped ball that lay there. And it seemed as if her gentleness had some power to soothe whatever ferocious instincts--still dormant and undeveloped at present--were smouldering within it. For, instead of now using its paws as weapons with which to strike out and attack anything near it, it played with her as a kitten plays with a ball, tapping at her hand and trying to catch it, and pushing and kicking against her with its hind legs.\n\n[질문] Which choice best describes the overall structure of the text?\nA) It shows a woman's fear of an animal and then her escape from it\nB) It describes a creature's fierce look and then how kindness calms it\nC) It praises a man's bravery and then describes his reward from Bella\nD) It shows a kitten at play and then its sudden turn toward danger\n### lit40-easy-04-088 — skill central_ideas_details · 유형 narrator_attitude · 요청 난이도 easy\n[지문]\nIf the Miss Mackinnons had advertised for the owner of that basket they would have been clever if they had found her. Now, we are all right, thank you--at least, we are fast getting right. I open the door, for of course I am the youngest, and the stairs try me least, and I take in all the parcels. If there is anything very suspicious, even for my extensive requirements, I carry it to my room, and Miss Janet is too much of a lady to meddle with what I do there.\n\n[질문] Which choice best describes the narrator's attitude toward her role in the household?\nA) Bitter resentment toward Miss Janet\nB) Fearful worry about being found out\nC) Sad longing for an easier past\nD) Good-humored confidence in her duties\n### lit40-easy-04-089 — skill central_ideas_details · 유형 main_idea_or_purpose · 요청 난이도 easy\n[지문]\nIn all there was free play for individual ideas and development. One Bible class in particular I would mention, that conducted for many years by Mr. Wilbur, and which had more than one hundred members. In a variety of ways, by freedom of discussion in the class, by excursions, receptions, entertainments of various kinds, it bound the young people together, helped greatly to build up the church, and particularly contributed to its social life. How firmly it was established is witnessed by the fact that it has never weakened, even in the changes that have come in the membership, or the official direction of the church.\n\n[질문] Which choice best states the main purpose of the text?\nA) To praise a Bible class that united young people and lastingly helped the church\nB) To criticize the changes in church leadership that weakened the congregation\nC) To explain why the church lost so many of its younger members over time\nD) To describe the early life of Mr. Wilbur before he began teaching his class\n### lit40-easy-04-090 — skill words_in_context · 유형 figurative_language · 요청 난이도 easy\n[지문]\nThe agent went out, and the runaway drew one of the chairs up in front of the stove and sat down in it. He was provided for for the night, but what should he do when morning came? Should he stay there at the tank-station and look for work, or would it be better for him to start for Oxford on foot, begging his meals as he went like any other tramp? That was what he intended to do when he first made up his mind to desert the academy, and he could not see that there was any other course open to him now. While he was thinking about it, he fell asleep. He did not know when the lightning express and the fast freight went through, but he heard the whistle of the morning train, and hurried to the door to see the accommodation approaching.\n\n[질문] As used in the text, the phrase “like any other tramp” most nearly suggests that the runaway expects to\nA) live as a poor wanderer who depends on strangers\nB) travel quickly and comfortably by the morning train\nC) work steadily at the tank-station for good wages\nD) return to the academy and apologize for leaving\n### lit40-easy-04-091 — skill words_in_context · 유형 figurative_language · 요청 난이도 easy\n[지문]\nThere was a lapse of some kind that she could neither account for nor describe even to herself. She tried to put it into seconds and minutes, and then realised that it was not a matter to be reckoned as time. Yet there had been a distinct, unmistakable gap in her existence. Something had stopped--she knew not for how long--and then she had found herself breathing, thinking once more. In spite of the conviction that she had passed through a period of utter oblivion, she could account for every second of time with an absolute clearness of memory.\n\nThere was not an instant, nor a sensation, nor an impulse that was not fully recorded in her alert brain.\n\n[질문] As used in the text, the phrase “a distinct, unmistakable gap in her existence” most nearly suggests\nA) a long journey she once took far away from home\nB) a moment when her awareness seemed to stop\nC) a stretch of time she could measure exactly\nD) an empty space left in the room around her\n### lit40-easy-04-094 — skill text_structure_purpose · 유형 tone_shift · 요청 난이도 easy\n[지문]\nPeople who have nothing to do get rid of a great deal of time in trying to make impressions and in speculating as to what impressions they have made. Jane--hastening toward Martha's to get out of the sun which could not but injure a complexion so delicately fine as hers--gave herself up to this form of occupation. What did he think of her? Did he really have as little sense of her physical charm as he seemed? No woman could hope to be attractive to every man. Still--this man surely must be at least not altogether insensible.\n\n[질문] Which choice best describes the shift in tone in the text?\nA) From detached irony to anxious, hopeful self-questioning\nB) From joyful excitement to sudden and open anger\nC) From quiet grief to a calm and settled acceptance\nD) From fear of the sun to relief at reaching shade\n### lit40-easy-04-095 — skill text_structure_purpose · 유형 text_structure · 요청 난이도 easy\n[지문]\nThe wretched merchant, overcome by the terrors with which his soul had been appalled, and reduced to the last extremity of impotence by misery and disease, gave up his wearied spirit on the floor. There was no other creature in existence, to whom Bochari dared to intrust the secret of his infernal design. He had not the time to accomplish it himself, for the sounds of shoutings were already echoing through the air. To execute the work partially, would only expose him to discovery, and to certain revenge. There were upwards of five hundred vases on the tables.\n\n[질문] Which choice best describes the overall structure of the text?\nA) It describes a festive gathering and then a merchant's sudden illness\nB) It reports one man's death and then turns to another man's dilemma\nC) It explains how a plan succeeded and then how it was discovered\nD) It lists the vases on the tables and then traces their long history"
+}

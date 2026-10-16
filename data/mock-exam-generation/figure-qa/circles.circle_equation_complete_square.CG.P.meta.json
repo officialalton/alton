@@ -1,0 +1,46 @@
+{
+ "itemId": "circles.circle_equation_complete_square.CG.P",
+ "generatedAt": "2026-10-07T05:02:01.037Z",
+ "codeHash": "4a03e563dcb3e8257f6d283f274b9ced269f0a98e8a7b70858ba325e337bc431",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/coordinate-plane.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/cg-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/cgc-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/ext-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/geo-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/circles.circle_equation_complete_square.CG.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/pg-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "circles.circle_equation_complete_square.CG.P.png",
+   "mobileFile": "circles.circle_equation_complete_square.CG.P.m375.png",
+   "archetypeId": "av.circle_equation_complete_square.CG.P.compose_kind",
+   "seed": 11,
+   "signature": "plane",
+   "stimulus": "A game developer positions the objects shown on a grid. All coordinates in the figure are integers. The figure shows a circle graphed on a coordinate grid. An equation of the circle is $x^2 + y^2 + Dx + Ey + F = 0$, with constants $D$, $E$, and $F$.",
+   "question": "Find the value of $D$.",
+   "options": [
+    "7",
+    "14",
+    "6",
+    "16"
+   ],
+   "correctIndex": 1,
+   "answer": "14",
+   "explanation": "(1) 그림에서 중심 (-7, -3), 반지름 2 을 읽는다. (2) 표준형: (x − (-7))² + (y − (-3))² = 4 이다. (3) (x + 7)² 를 전개하면 x² + 14x + 49 이다. (4) x 의 계수는 −2h 이다. (5) 따라서 D = 14 이다. 따라서 정답은 14이다.",
+   "structuralIssues": []
+  }
+ ]
+}

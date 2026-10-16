@@ -1,0 +1,311 @@
+{
+ "schema": "rw-session-task/v1",
+ "kind": "review",
+ "role": "second_solver",
+ "runId": "lit40-wave1",
+ "taskId": "rev-second_solver-059",
+ "chunkId": "rev-second_solver-059",
+ "suggestedModel": "opus",
+ "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-second_solver-059.result.json",
+ "outputSchema": {
+  "chunkId": "청크 ID",
+  "model": "opus|fable",
+  "items": [
+   {
+    "candidateId": "id",
+    "picked_letter": "A|B|C|D",
+    "other_defensible": "boolean",
+    "confidence": "high|medium|low",
+    "note": "풀이 한 줄"
+   }
+  ]
+ },
+ "items": [
+  {
+   "candidateId": "lit40-easy-02-088",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "character_motivation",
+   "requestedDifficulty": "easy",
+   "passage": "My name was sent in to headquarters, and I was soon summoned to appear there myself. Mr. and Mrs. B. accompanied me. We were ushered into the presence of Generals Mc., M. and H., where I was questioned and cross-questioned with regard to my views of the rebellion and my motive in wishing to engage in so perilous an undertaking. My views were freely given, my object briefly stated, and I had passed trial number one.\n\nNext I was examined with regard to my knowledge of the use of firearms, and in that department I sustained my character in a manner worthy of a veteran. Then I was again cross-questioned, but this time by a new committee of military stars.",
+   "question": "Based on the text, why is the narrator summoned to headquarters?",
+   "options": [
+    "To receive a reward for past bravery in battle",
+    "To be punished by the generals for openly criticizing their plans for the war",
+    "To be evaluated for a dangerous undertaking she wished to join",
+    "To serve as a witness for Mr. and Mrs. B."
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-02-089",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "tone_or_mood",
+   "requestedDifficulty": "easy",
+   "passage": "With the birds, their brothers, the summer tourists had flown southward at the rustling of the first autumnal leaf. Here and there a guide leaned idly against a post in front of one of the empty hotels. There was no other indication of life in the main street save the little group we have mentioned watching the departing carriage.\n\nThis carriage, a maroon body set upon red and black wheels, was drawn by four white horses and driven by the marquis. The doctor had prescribed white horses, and he took great credit to himself that morning as he stood on the hotel steps beside Mr. and Mrs. Denham, who followed the retreating vehicle rather thoughtfully with their eyes until it turned a corner of the narrow street and was lost to them.",
+   "question": "Which choice best describes the mood of the text?",
+   "options": [
+    "Festive and crowded, as the town celebrates the season's end",
+    "Tense and fearful, as the townspeople wait anxiously for a coming autumn storm",
+    "Comic and lively, as the marquis races the white horses",
+    "Quiet and somewhat wistful, as the season ends and a carriage departs"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-02-090",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "tone_or_mood",
+   "requestedDifficulty": "easy",
+   "passage": "There was no abyss of black loss in that girl's life!\n\nLucy just now was concerned only for Perry. How the poor man loved her! Why not marry him after all, and put him out of his pain? She was twenty-four. Most women at twenty-four had gone through their little tragedy of love. But she had had no tragedy. She told herself firmly that there had been no story of love in her life. There never could be, now. She was too old.\n\nShe was tired, too, and very lonely. This man would seat her on a throne and worship her every day. That would be pleasant enough.",
+   "question": "Which choice best describes the tone of the text?",
+   "options": [
+    "Wearily resigned, as Lucy considers marrying without love",
+    "Joyfully excited, as Lucy anticipates a romantic wedding",
+    "Bitterly angry, as Lucy blames Perry for her long years of loneliness",
+    "Playfully teasing, as Lucy mocks Perry's devotion"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-02-091",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "tone_or_mood",
+   "requestedDifficulty": "easy",
+   "passage": "\"Take, take lobsters and lettuces,\nMind that they send you the fish that you order;\nTake, take a decent sized salad bowl,\nOne that's sufficiently deep in the border;\nCut into many a slice,\nAll of the fish that's nice;\nPlace in the bowl with due neatness and order;\nThen hard-boiled eggs you may\nAdd in a neat array,\nAll toward the bowl, just by way of a border.\n\n\"Take from the cellar of salt a proportion,\nTake from the castors both pepper and oil,\nWith vinegar too, but a moderate portion,--\nToo much of acid your salad will spoil;\nMix them together,\nYou need not mind whether\nYou blend them exactly in apple-pie order,\nBut when you've stirred away,\nMix up the whole you may,\nAll but the eggs which are used as a border.",
+   "question": "Which choice best describes the tone of the text?",
+   "options": [
+    "Mournful, lamenting a meal that has been ruined",
+    "Lighthearted, presenting a recipe in playful verse",
+    "Formal, warning readers about the dangers of acid",
+    "Anxious, worrying that the dinner guests will not arrive on time"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-02-093",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "tone_or_mood",
+   "requestedDifficulty": "easy",
+   "passage": "July 1.--Dark cloudy morning, with showers of rain. However desirous I was to proceed, I found that to do so would greatly injure the horses. Towards noon it cleared up, permitting me to take a tolerable observation, to ascertain our situation. I consider ourselves as peculiarly fortunate in being blessed with so dry and favourable a season; since all attempts to penetrate into the country during rain, or after an inundation of the stream, must have failed. I am quite convinced that at this place, when the banks are overflowed, the waters must extend from thirty to forty miles on each side of the stream, as we are that distance from any eminence.",
+   "question": "Which choice best describes the tone of the text?",
+   "options": [
+    "Frustrated, complaining bitterly that the rain has ruined the entire expedition",
+    "Fearful, expecting the stream to flood the camp soon",
+    "Humorous, joking about the horses' dislike of rain",
+    "Careful and grateful, noting conditions and the luck of a dry season"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-02-094",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "relationship_between_characters",
+   "requestedDifficulty": "easy",
+   "passage": "Not so the Spirit of the Storm.\n\n\"Stay, sweet being! oh, stay and listen to me!\" he repeated, but the words only hastened her flight. He gazed after her till she disappeared, and when he found that it was useless to follow, and that there was not the remotest chance of her returning, he sat himself down on a rock which hung over the sea to consider what he should do. As he sat, the water became perfectly calm as a glass mirror; and looking into it, after some minutes' deep meditation he beheld the reflection of his own monstrous form.",
+   "question": "Based on the text, how does the Spirit of the Storm relate to the being he calls to?",
+   "options": [
+    "He longs for her company, but she wants to escape him",
+    "He commands her, and she obeys him at once and without any question",
+    "He fears her, so he hides on a rock above the sea",
+    "He resents her, and she tries to calm his anger"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-02-095",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "relationship_between_characters",
+   "requestedDifficulty": "easy",
+   "passage": "The fat young man and his counsels were so present to his mind that he threw back his head and, putting his hands before his mouth, shouted aloud to the populous heavens. Whether from the position of his head or the sudden strain of the exertion, he seemed to see a momentary shock among the stars, and a diffusion of frosty light pass from one to another along the sky. At the same instant, a corner of the blind was lifted and lowered again at once. He laughed a loud ho-ho! \"One and another!\" thought Will. \"The stars tremble, and the blind goes up. Why, before Heaven, what a great magician I must be! Now if I were only a fool, should not I be in a pretty way?\"",
+   "question": "Based on the text, what is suggested about Will's feelings toward the fat young man?",
+   "options": [
+    "Will rejects the young man's advice as foolish and forgettable",
+    "Will is strongly affected by the young man's counsel and keeps it in mind",
+    "Will envies the young man for being a skilled magician",
+    "Will fears that the young man is secretly spying on him from behind the lifted blind"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-02-097",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "relationship_between_characters",
+   "requestedDifficulty": "easy",
+   "passage": "While in our present position I cannot restrain a feeling of admiration for the earnestness of many of the members of our organization. Among them are some of Reading's most considerable citizens, men who occupy important stations, and carry weighty responsibilities. Strange figures, indeed, they make here, in far-off Maryland, resting upon their arms, and keeping watch for the invading foe. Could their loved ones see them at this moment, what moral heroes would they appear in their eyes! I could not help observing how strikingly the predominant characteristics of men are developed in critical emergencies. In our mutual concern for the common safety, it is in the strongest characters that we feel our chief reliance is to be placed.",
+   "question": "Based on the text, how does the narrator regard the other members of the organization?",
+   "options": [
+    "He resents them for leaving their families unprotected",
+    "He considers them too inexperienced and nervous to be trusted with their weapons",
+    "He envies the important stations they hold at home",
+    "He admires their earnestness and relies on the strongest among them"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-02-098",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "symbolism",
+   "requestedDifficulty": "easy",
+   "passage": "A clean-looking bed stood in one corner, a wash-stand, bureau, and two chairs, constituted the furniture. There were two windows--one in the east side, the other in the south--both covered with clean, snow-white curtains, nicely looped up from the middle. A mocking-bird sat on a tree near the south window, and seemed to be exerting himself to amuse me. I like mocking-birds; but this one was hoarse, and singing out of tune; a half dozen cats were holding a meeting on top of the smoke-house. I might have enjoyed the concert under more favorable circumstances, but the state of my nervous system was such as to deprive me of the pleasure. I needed sleep, and knew that it was my duty to endeavor to get it, so as to enable me to master the situation in which I was placed.",
+   "question": "In the text, the hoarse, out-of-tune mocking-bird most likely represents",
+   "options": [
+    "the narrator's inability to enjoy anything while so unsettled",
+    "the cheerful and musical welcome the narrator receives from her hosts",
+    "the narrator's love of music since childhood",
+    "the dangers lurking outside the narrator's window"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-02-099",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "symbolism",
+   "requestedDifficulty": "easy",
+   "passage": "Through the open door the sunlight streamed into the dark room. She flew to tables and chairs, and gave a rapid sweep of the hand over their surfaces.\n\n\"He has been dusting here,--and within a few days, too,\" she thought triumphantly.\n\nThe kitchen was perfection, as she always knew it would be, with one door opening to the shaded road and the other looking on the river; windows, too, framing the apple-orchard and the elms. She had chosen the furniture, but how differently it looked now that it was actually in place!",
+   "question": "In the text, the kitchen she finds in perfect order most likely represents",
+   "options": [
+    "her disappointment that the house was smaller than expected",
+    "her joy at seeing a long-imagined home come to life",
+    "her fear that someone else has taken her place",
+    "her regret about choosing the furniture herself"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-02-100",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "symbolism",
+   "requestedDifficulty": "easy",
+   "passage": "Indeed, I fancy it is one of the most interesting cities in France. In an old engraving of it which I have, it is surrounded by a wall, and seems a city of church spires, and its ecclesiastical buildings are very old and numerous, but the walls are gone, and handsome boulevards have taken their place. Its modern fame depends on its wine, its spiced bread, and its mustard. I buy a mustard-pot—a characteristic specimen of French ingenuity. It is an earthenware pig. The back is hollow. You take off the top, and there is the place for the mustard and a long mustard-spoon, the crooked end of which does duty as a tail.",
+   "question": "In the text, the earthenware pig mustard-pot most likely represents",
+   "options": [
+    "the old city walls that once surrounded the town",
+    "the narrator's dislike of modern French boulevards",
+    "the inventive charm the narrator finds in the city",
+    "the narrator's homesickness while traveling in France"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-03-001",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "symbolism",
+   "requestedDifficulty": "easy",
+   "passage": "Under the deep shade of these trees we found an air pure and gratefully cool. Passing from the glare of the open country into the dusky forest, one seems to enter a door and ride into a vast covered hall. The whole sensation is of being roofed and enclosed. You are never tired of gazing down long vistas, where, in stately groups, stand tall shafts of pine. Columns they are, each with its own characteristic tinting and finish, yet all standing together with the air of relationship and harmony. Feathery branches, trimmed with living green, wave through the upper air, opening broken glimpses of the far blue, and catching on their polished surfaces reflections of the sun. Broad streams of light pour in, gilding purple trunks and falling in bright pathways along an undulating floor.",
+   "question": "Based on the text, the repeated comparison of the forest to a roofed hall lined with columns most strongly suggests that the forest is",
+   "options": [
+    "a dangerous place that travelers should avoid entering.",
+    "a crowded space where trees compete for the sunlight.",
+    "a dark refuge that hides the sky entirely from view.",
+    "a grand, ordered space that inspires quiet admiration."
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-03-002",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "easy",
+   "passage": "Of course; I never can think of making myself comfortable, but you wound my feelings. If you cared for your own bed like any other man, you'd not have stayed out till this hour. Don't say that I drove you out of the house as soon as we came in it. I only just spoke about the dirt and the dust,--but the fact is, you'd be happy in a pig-sty! I thought I could have trusted that Mrs. Closepeg with untold gold; and did you only see the hearthrug? When we left home there was a tiger in it: I should like to know who could make out the tiger, now?",
+   "question": "As used in the text, the phrase “you'd be happy in a pig-sty” most nearly suggests that the listener",
+   "options": [
+    "is indifferent to how dirty his surroundings are.",
+    "secretly longs to live on a farm with animals.",
+    "has recently been working in a filthy stable.",
+    "prefers the company of animals to that of people."
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-03-003",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "easy",
+   "passage": "The air, besides, was fresh and stirring, and this, under the sheer sunbeams, was a wonderful refreshment to our senses.\n\nThe party spread itself abroad, in a fan shape, shouting and leaping to and fro. About the centre, and a good way behind the rest, Silver and I followed--I tethered by my rope, he ploughing, with deep pants, among the sliding gravel. From time to time, indeed, I had to lend him a hand, or he must have missed his footing and fallen backward down the hill.\n\nWe had thus proceeded for about half a mile, and were approaching the brow of the plateau, when the man upon the farthest left began to cry aloud, as if in terror. Shout after shout came from him, and the others began to run in his direction.",
+   "question": "As used in the text, the phrase “ploughing, with deep pants, among the sliding gravel” most nearly suggests that Silver is",
+   "options": [
+    "moving swiftly and easily ahead of the others.",
+    "laboring slowly and heavily through loose ground.",
+    "digging carefully in search of something buried.",
+    "marching proudly at the front of the whole party."
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-03-004",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "easy",
+   "passage": "\"At his height,\nA speck scarce visible, the eagle heard,\nAnd felt his strong wing falter: terror-struck,\nFluttering and wildly screaming, down he sank--\nDown through the quivering air: another shout,--\nHis talons droop--his sunny eye grows dark--\nHis strengthless pennons fail--plump down he falls,\nEven like a stone. Amid the far-off hills,\nWith eye of fire, and shaggy mane uprear'd,\nThe sleeping lion in his den sprang up;\nListen'd awhile--then laid his monstrous mouth\nClose to the floor, and breathed hot roarings out\nIn fierce reply.\"",
+   "question": "As used in the text, the phrase “Even like a stone” most nearly suggests that the eagle",
+   "options": [
+    "hardens itself in anger against the shout.",
+    "glides gently toward a chosen landing place.",
+    "drops straight down, helpless and out of control.",
+    "hides motionless among the rocks of the hills."
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-03-005",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "easy",
+   "passage": "You ask me how the planets are weighed? I reply, on the same principle by which a butcher weighs a ham in a spring-balance. When he picks the ham up, he feels a pull of the ham towards the earth. When he hangs it on the hook, this pull is transferred from his hand to the spring of the balance. The stronger the pull, the farther the spring is pulled down. What he reads on the scale is the strength of the pull. You know that this pull is simply the attraction of the earth on the ham. But, by a universal law of force, the ham attracts the earth exactly as much as the earth does the ham.",
+   "question": "As used in the text, the phrase “on the same principle by which a butcher weighs a ham” most nearly suggests that the writer believes",
+   "options": [
+    "planets are weighed by merchants who sell goods by weight.",
+    "the methods of astronomy are crude and often inaccurate.",
+    "the earth is as small and light as an everyday object.",
+    "a familiar everyday act shows the same law at work."
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-03-006",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "easy",
+   "passage": "In appearance and manner the professional criminal has not changed much in the last decade. I knew him first over ten years ago, when making my earliest studies of tramp life. I saw him again five years ago, while on a short trip in Hoboland, and we have met recently on the railroads; and he looks just about as he did when we first got acquainted.\n\nOrdinarily he would not be noticed in mixed company by others than those accustomed to his ways. He is not like the tramp, whom practically any one can pick out in a crowd.",
+   "question": "As used in the text, the phrase “pick out in a crowd” most nearly suggests that the tramp",
+   "options": [
+    "is easily recognized by almost anyone who sees him.",
+    "is carefully chosen by others for special tasks.",
+    "is usually found among large public gatherings.",
+    "is eager to stand apart from his companions."
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-03-007",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "easy",
+   "passage": "Some of the shapes had scowling faces and bright, fiery eyes; these were the spirits of Anger. Others, with sullen, anxious looks, seemed gathering up all they could reach, and Annie saw that the more they gained, the less they seemed to have; and these she knew were shapes of Selfishness. Spirits of Pride were there, who folded their shadowy garments round them, and turned scornfully away from all the rest. These and many others little Annie saw, which had come from her own heart, and taken form before her eyes.",
+   "question": "As used in the text, the phrase “folded their shadowy garments round them” most nearly suggests that the spirits of Pride",
+   "options": [
+    "feel cold and need protection from the weather.",
+    "hold themselves apart from others in self-regard.",
+    "are ashamed and wish to hide their faces away.",
+    "are preparing to leave the gathering in quiet."
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-03-014",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "easy",
+   "passage": "Once in the fresh air again he promptly recovered his boyish spirits. The light flying scud had already effaced the first rising stars; the lower creeping sea-fog had already blotted out the western shore and sea; but below him to the east the glittering lights of the city seemed to start up with a new, mysterious, and dazzling brilliancy. It was the valley of diamonds that Sindbad saw lying almost at his feet! Perhaps somewhere there the light of his own fame and fortune was already beginning to twinkle!\n\nHe returned to his humble roof joyous and inspired. As he entered the hall he heard his wife's voice and his own name mentioned, followed by that awkward, meaningless silence on his entrance which so plainly indicated either that he had been the subject of conversation or that it was not for his ears.",
+   "question": "Which choice best describes the shift in tone that occurs in the text?",
+   "options": [
+    "From gloomy doubt to sudden, confident triumph.",
+    "From hopeful elation to uneasy suspicion.",
+    "From calm description to angry confrontation.",
+    "From playful humor to deep, lasting grief."
+   ]
+  }
+ ],
+ "instructions": "당신은 디지털 SAT 독립 채점자(두 번째 풀이자)다. 정답 표시가 없다. 직접 풀고 정답 외에 방어 가능한 선택지가 있는지 판정한다. 다른 풀이자의 답은 모른다.\n청크 rev-second_solver-059 — 19문항.\n출력: Write 도구로 정확히 이 경로에 JSON 한 파일을 쓴다 → /Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-second_solver-059.result.json\n출력 JSON 스키마(예시 구조): {\"chunkId\":\"청크 ID\",\"model\":\"opus|fable\",\"items\":[{\"candidateId\":\"id\",\"picked_letter\":\"A|B|C|D\",\"other_defensible\":\"boolean\",\"confidence\":\"high|medium|low\",\"note\":\"풀이 한 줄\"}]}\n허용 값: picked_letter ∈ {A,B,C,D}, 불리언 필드는 true/false, est_difficulty ∈ {easy,medium,hard}. candidateId 를 바꾸지 않고 모든 항목에 답한다.\n금지: 결과 파일 외의 파일 생성·수정, 다른 명령 실행, 문항 수정·재작성. 끝나면 'done <항목 수>' 한 줄만 답한다.\n\n## 문항\n### lit40-easy-02-088 — skill inferences · 유형 character_motivation\n[지문]\nMy name was sent in to headquarters, and I was soon summoned to appear there myself. Mr. and Mrs. B. accompanied me. We were ushered into the presence of Generals Mc., M. and H., where I was questioned and cross-questioned with regard to my views of the rebellion and my motive in wishing to engage in so perilous an undertaking. My views were freely given, my object briefly stated, and I had passed trial number one.\n\nNext I was examined with regard to my knowledge of the use of firearms, and in that department I sustained my character in a manner worthy of a veteran. Then I was again cross-questioned, but this time by a new committee of military stars.\n\n[질문] Based on the text, why is the narrator summoned to headquarters?\nA) To receive a reward for past bravery in battle\nB) To be punished by the generals for openly criticizing their plans for the war\nC) To be evaluated for a dangerous undertaking she wished to join\nD) To serve as a witness for Mr. and Mrs. B.\n### lit40-easy-02-089 — skill inferences · 유형 tone_or_mood\n[지문]\nWith the birds, their brothers, the summer tourists had flown southward at the rustling of the first autumnal leaf. Here and there a guide leaned idly against a post in front of one of the empty hotels. There was no other indication of life in the main street save the little group we have mentioned watching the departing carriage.\n\nThis carriage, a maroon body set upon red and black wheels, was drawn by four white horses and driven by the marquis. The doctor had prescribed white horses, and he took great credit to himself that morning as he stood on the hotel steps beside Mr. and Mrs. Denham, who followed the retreating vehicle rather thoughtfully with their eyes until it turned a corner of the narrow street and was lost to them.\n\n[질문] Which choice best describes the mood of the text?\nA) Festive and crowded, as the town celebrates the season's end\nB) Tense and fearful, as the townspeople wait anxiously for a coming autumn storm\nC) Comic and lively, as the marquis races the white horses\nD) Quiet and somewhat wistful, as the season ends and a carriage departs\n### lit40-easy-02-090 — skill inferences · 유형 tone_or_mood\n[지문]\nThere was no abyss of black loss in that girl's life!\n\nLucy just now was concerned only for Perry. How the poor man loved her! Why not marry him after all, and put him out of his pain? She was twenty-four. Most women at twenty-four had gone through their little tragedy of love. But she had had no tragedy. She told herself firmly that there had been no story of love in her life. There never could be, now. She was too old.\n\nShe was tired, too, and very lonely. This man would seat her on a throne and worship her every day. That would be pleasant enough.\n\n[질문] Which choice best describes the tone of the text?\nA) Wearily resigned, as Lucy considers marrying without love\nB) Joyfully excited, as Lucy anticipates a romantic wedding\nC) Bitterly angry, as Lucy blames Perry for her long years of loneliness\nD) Playfully teasing, as Lucy mocks Perry's devotion\n### lit40-easy-02-091 — skill inferences · 유형 tone_or_mood\n[지문]\n\"Take, take lobsters and lettuces,\nMind that they send you the fish that you order;\nTake, take a decent sized salad bowl,\nOne that's sufficiently deep in the border;\nCut into many a slice,\nAll of the fish that's nice;\nPlace in the bowl with due neatness and order;\nThen hard-boiled eggs you may\nAdd in a neat array,\nAll toward the bowl, just by way of a border.\n\n\"Take from the cellar of salt a proportion,\nTake from the castors both pepper and oil,\nWith vinegar too, but a moderate portion,--\nToo much of acid your salad will spoil;\nMix them together,\nYou need not mind whether\nYou blend them exactly in apple-pie order,\nBut when you've stirred away,\nMix up the whole you may,\nAll but the eggs which are used as a border.\n\n[질문] Which choice best describes the tone of the text?\nA) Mournful, lamenting a meal that has been ruined\nB) Lighthearted, presenting a recipe in playful verse\nC) Formal, warning readers about the dangers of acid\nD) Anxious, worrying that the dinner guests will not arrive on time\n### lit40-easy-02-093 — skill inferences · 유형 tone_or_mood\n[지문]\nJuly 1.--Dark cloudy morning, with showers of rain. However desirous I was to proceed, I found that to do so would greatly injure the horses. Towards noon it cleared up, permitting me to take a tolerable observation, to ascertain our situation. I consider ourselves as peculiarly fortunate in being blessed with so dry and favourable a season; since all attempts to penetrate into the country during rain, or after an inundation of the stream, must have failed. I am quite convinced that at this place, when the banks are overflowed, the waters must extend from thirty to forty miles on each side of the stream, as we are that distance from any eminence.\n\n[질문] Which choice best describes the tone of the text?\nA) Frustrated, complaining bitterly that the rain has ruined the entire expedition\nB) Fearful, expecting the stream to flood the camp soon\nC) Humorous, joking about the horses' dislike of rain\nD) Careful and grateful, noting conditions and the luck of a dry season\n### lit40-easy-02-094 — skill inferences · 유형 relationship_between_characters\n[지문]\nNot so the Spirit of the Storm.\n\n\"Stay, sweet being! oh, stay and listen to me!\" he repeated, but the words only hastened her flight. He gazed after her till she disappeared, and when he found that it was useless to follow, and that there was not the remotest chance of her returning, he sat himself down on a rock which hung over the sea to consider what he should do. As he sat, the water became perfectly calm as a glass mirror; and looking into it, after some minutes' deep meditation he beheld the reflection of his own monstrous form.\n\n[질문] Based on the text, how does the Spirit of the Storm relate to the being he calls to?\nA) He longs for her company, but she wants to escape him\nB) He commands her, and she obeys him at once and without any question\nC) He fears her, so he hides on a rock above the sea\nD) He resents her, and she tries to calm his anger\n### lit40-easy-02-095 — skill inferences · 유형 relationship_between_characters\n[지문]\nThe fat young man and his counsels were so present to his mind that he threw back his head and, putting his hands before his mouth, shouted aloud to the populous heavens. Whether from the position of his head or the sudden strain of the exertion, he seemed to see a momentary shock among the stars, and a diffusion of frosty light pass from one to another along the sky. At the same instant, a corner of the blind was lifted and lowered again at once. He laughed a loud ho-ho! \"One and another!\" thought Will. \"The stars tremble, and the blind goes up. Why, before Heaven, what a great magician I must be! Now if I were only a fool, should not I be in a pretty way?\"\n\n[질문] Based on the text, what is suggested about Will's feelings toward the fat young man?\nA) Will rejects the young man's advice as foolish and forgettable\nB) Will is strongly affected by the young man's counsel and keeps it in mind\nC) Will envies the young man for being a skilled magician\nD) Will fears that the young man is secretly spying on him from behind the lifted blind\n### lit40-easy-02-097 — skill inferences · 유형 relationship_between_characters\n[지문]\nWhile in our present position I cannot restrain a feeling of admiration for the earnestness of many of the members of our organization. Among them are some of Reading's most considerable citizens, men who occupy important stations, and carry weighty responsibilities. Strange figures, indeed, they make here, in far-off Maryland, resting upon their arms, and keeping watch for the invading foe. Could their loved ones see them at this moment, what moral heroes would they appear in their eyes! I could not help observing how strikingly the predominant characteristics of men are developed in critical emergencies. In our mutual concern for the common safety, it is in the strongest characters that we feel our chief reliance is to be placed.\n\n[질문] Based on the text, how does the narrator regard the other members of the organization?\nA) He resents them for leaving their families unprotected\nB) He considers them too inexperienced and nervous to be trusted with their weapons\nC) He envies the important stations they hold at home\nD) He admires their earnestness and relies on the strongest among them\n### lit40-easy-02-098 — skill inferences · 유형 symbolism\n[지문]\nA clean-looking bed stood in one corner, a wash-stand, bureau, and two chairs, constituted the furniture. There were two windows--one in the east side, the other in the south--both covered with clean, snow-white curtains, nicely looped up from the middle. A mocking-bird sat on a tree near the south window, and seemed to be exerting himself to amuse me. I like mocking-birds; but this one was hoarse, and singing out of tune; a half dozen cats were holding a meeting on top of the smoke-house. I might have enjoyed the concert under more favorable circumstances, but the state of my nervous system was such as to deprive me of the pleasure. I needed sleep, and knew that it was my duty to endeavor to get it, so as to enable me to master the situation in which I was placed.\n\n[질문] In the text, the hoarse, out-of-tune mocking-bird most likely represents\nA) the narrator's inability to enjoy anything while so unsettled\nB) the cheerful and musical welcome the narrator receives from her hosts\nC) the narrator's love of music since childhood\nD) the dangers lurking outside the narrator's window\n### lit40-easy-02-099 — skill inferences · 유형 symbolism\n[지문]\nThrough the open door the sunlight streamed into the dark room. She flew to tables and chairs, and gave a rapid sweep of the hand over their surfaces.\n\n\"He has been dusting here,--and within a few days, too,\" she thought triumphantly.\n\nThe kitchen was perfection, as she always knew it would be, with one door opening to the shaded road and the other looking on the river; windows, too, framing the apple-orchard and the elms. She had chosen the furniture, but how differently it looked now that it was actually in place!\n\n[질문] In the text, the kitchen she finds in perfect order most likely represents\nA) her disappointment that the house was smaller than expected\nB) her joy at seeing a long-imagined home come to life\nC) her fear that someone else has taken her place\nD) her regret about choosing the furniture herself\n### lit40-easy-02-100 — skill inferences · 유형 symbolism\n[지문]\nIndeed, I fancy it is one of the most interesting cities in France. In an old engraving of it which I have, it is surrounded by a wall, and seems a city of church spires, and its ecclesiastical buildings are very old and numerous, but the walls are gone, and handsome boulevards have taken their place. Its modern fame depends on its wine, its spiced bread, and its mustard. I buy a mustard-pot—a characteristic specimen of French ingenuity. It is an earthenware pig. The back is hollow. You take off the top, and there is the place for the mustard and a long mustard-spoon, the crooked end of which does duty as a tail.\n\n[질문] In the text, the earthenware pig mustard-pot most likely represents\nA) the old city walls that once surrounded the town\nB) the narrator's dislike of modern French boulevards\nC) the inventive charm the narrator finds in the city\nD) the narrator's homesickness while traveling in France\n### lit40-easy-03-001 — skill inferences · 유형 symbolism\n[지문]\nUnder the deep shade of these trees we found an air pure and gratefully cool. Passing from the glare of the open country into the dusky forest, one seems to enter a door and ride into a vast covered hall. The whole sensation is of being roofed and enclosed. You are never tired of gazing down long vistas, where, in stately groups, stand tall shafts of pine. Columns they are, each with its own characteristic tinting and finish, yet all standing together with the air of relationship and harmony. Feathery branches, trimmed with living green, wave through the upper air, opening broken glimpses of the far blue, and catching on their polished surfaces reflections of the sun. Broad streams of light pour in, gilding purple trunks and falling in bright pathways along an undulating floor.\n\n[질문] Based on the text, the repeated comparison of the forest to a roofed hall lined with columns most strongly suggests that the forest is\nA) a dangerous place that travelers should avoid entering.\nB) a crowded space where trees compete for the sunlight.\nC) a dark refuge that hides the sky entirely from view.\nD) a grand, ordered space that inspires quiet admiration.\n### lit40-easy-03-002 — skill words_in_context · 유형 figurative_language\n[지문]\nOf course; I never can think of making myself comfortable, but you wound my feelings. If you cared for your own bed like any other man, you'd not have stayed out till this hour. Don't say that I drove you out of the house as soon as we came in it. I only just spoke about the dirt and the dust,--but the fact is, you'd be happy in a pig-sty! I thought I could have trusted that Mrs. Closepeg with untold gold; and did you only see the hearthrug? When we left home there was a tiger in it: I should like to know who could make out the tiger, now?\n\n[질문] As used in the text, the phrase “you'd be happy in a pig-sty” most nearly suggests that the listener\nA) is indifferent to how dirty his surroundings are.\nB) secretly longs to live on a farm with animals.\nC) has recently been working in a filthy stable.\nD) prefers the company of animals to that of people.\n### lit40-easy-03-003 — skill words_in_context · 유형 figurative_language\n[지문]\nThe air, besides, was fresh and stirring, and this, under the sheer sunbeams, was a wonderful refreshment to our senses.\n\nThe party spread itself abroad, in a fan shape, shouting and leaping to and fro. About the centre, and a good way behind the rest, Silver and I followed--I tethered by my rope, he ploughing, with deep pants, among the sliding gravel. From time to time, indeed, I had to lend him a hand, or he must have missed his footing and fallen backward down the hill.\n\nWe had thus proceeded for about half a mile, and were approaching the brow of the plateau, when the man upon the farthest left began to cry aloud, as if in terror. Shout after shout came from him, and the others began to run in his direction.\n\n[질문] As used in the text, the phrase “ploughing, with deep pants, among the sliding gravel” most nearly suggests that Silver is\nA) moving swiftly and easily ahead of the others.\nB) laboring slowly and heavily through loose ground.\nC) digging carefully in search of something buried.\nD) marching proudly at the front of the whole party.\n### lit40-easy-03-004 — skill words_in_context · 유형 figurative_language\n[지문]\n\"At his height,\nA speck scarce visible, the eagle heard,\nAnd felt his strong wing falter: terror-struck,\nFluttering and wildly screaming, down he sank--\nDown through the quivering air: another shout,--\nHis talons droop--his sunny eye grows dark--\nHis strengthless pennons fail--plump down he falls,\nEven like a stone. Amid the far-off hills,\nWith eye of fire, and shaggy mane uprear'd,\nThe sleeping lion in his den sprang up;\nListen'd awhile--then laid his monstrous mouth\nClose to the floor, and breathed hot roarings out\nIn fierce reply.\"\n\n[질문] As used in the text, the phrase “Even like a stone” most nearly suggests that the eagle\nA) hardens itself in anger against the shout.\nB) glides gently toward a chosen landing place.\nC) drops straight down, helpless and out of control.\nD) hides motionless among the rocks of the hills.\n### lit40-easy-03-005 — skill words_in_context · 유형 figurative_language\n[지문]\nYou ask me how the planets are weighed? I reply, on the same principle by which a butcher weighs a ham in a spring-balance. When he picks the ham up, he feels a pull of the ham towards the earth. When he hangs it on the hook, this pull is transferred from his hand to the spring of the balance. The stronger the pull, the farther the spring is pulled down. What he reads on the scale is the strength of the pull. You know that this pull is simply the attraction of the earth on the ham. But, by a universal law of force, the ham attracts the earth exactly as much as the earth does the ham.\n\n[질문] As used in the text, the phrase “on the same principle by which a butcher weighs a ham” most nearly suggests that the writer believes\nA) planets are weighed by merchants who sell goods by weight.\nB) the methods of astronomy are crude and often inaccurate.\nC) the earth is as small and light as an everyday object.\nD) a familiar everyday act shows the same law at work.\n### lit40-easy-03-006 — skill words_in_context · 유형 figurative_language\n[지문]\nIn appearance and manner the professional criminal has not changed much in the last decade. I knew him first over ten years ago, when making my earliest studies of tramp life. I saw him again five years ago, while on a short trip in Hoboland, and we have met recently on the railroads; and he looks just about as he did when we first got acquainted.\n\nOrdinarily he would not be noticed in mixed company by others than those accustomed to his ways. He is not like the tramp, whom practically any one can pick out in a crowd.\n\n[질문] As used in the text, the phrase “pick out in a crowd” most nearly suggests that the tramp\nA) is easily recognized by almost anyone who sees him.\nB) is carefully chosen by others for special tasks.\nC) is usually found among large public gatherings.\nD) is eager to stand apart from his companions.\n### lit40-easy-03-007 — skill words_in_context · 유형 figurative_language\n[지문]\nSome of the shapes had scowling faces and bright, fiery eyes; these were the spirits of Anger. Others, with sullen, anxious looks, seemed gathering up all they could reach, and Annie saw that the more they gained, the less they seemed to have; and these she knew were shapes of Selfishness. Spirits of Pride were there, who folded their shadowy garments round them, and turned scornfully away from all the rest. These and many others little Annie saw, which had come from her own heart, and taken form before her eyes.\n\n[질문] As used in the text, the phrase “folded their shadowy garments round them” most nearly suggests that the spirits of Pride\nA) feel cold and need protection from the weather.\nB) hold themselves apart from others in self-regard.\nC) are ashamed and wish to hide their faces away.\nD) are preparing to leave the gathering in quiet.\n### lit40-easy-03-014 — skill text_structure_purpose · 유형 tone_shift\n[지문]\nOnce in the fresh air again he promptly recovered his boyish spirits. The light flying scud had already effaced the first rising stars; the lower creeping sea-fog had already blotted out the western shore and sea; but below him to the east the glittering lights of the city seemed to start up with a new, mysterious, and dazzling brilliancy. It was the valley of diamonds that Sindbad saw lying almost at his feet! Perhaps somewhere there the light of his own fame and fortune was already beginning to twinkle!\n\nHe returned to his humble roof joyous and inspired. As he entered the hall he heard his wife's voice and his own name mentioned, followed by that awkward, meaningless silence on his entrance which so plainly indicated either that he had been the subject of conversation or that it was not for his ears.\n\n[질문] Which choice best describes the shift in tone that occurs in the text?\nA) From gloomy doubt to sudden, confident triumph.\nB) From hopeful elation to uneasy suspicion.\nC) From calm description to angry confrontation.\nD) From playful humor to deep, lasting grief."
+}

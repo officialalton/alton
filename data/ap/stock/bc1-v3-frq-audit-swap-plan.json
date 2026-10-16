@@ -1,0 +1,58 @@
+{
+ "kind": "ap_new_version_swap_plan",
+ "set": "BC1",
+ "sourceSetName": "AP Calculus BC — Practice Exam 1",
+ "sourceVersionNo": 2,
+ "generatedBy": "derived from data/ap/stock/bc1-v2-audit-swap-plan.json by scripts/audit (2026-10-13)",
+ "note": "FRQ-only continuation of bc1-v2-audit-swap-plan.json: the MC#7 swap (run2:ap_calculus_ab-m17-k3 -> run2:ap_calculus_ab-m18-k0) is already applied in the DB (BC1 v2 is published), so only the two FRQ swaps remain. Apply to the currently published BC1 version (v2 at 2026-10-13). Order-independent with the apply-audit-fixes SQL (that SQL always refreshes whichever BC1 version is then published, and the panel always copies the then-published version).",
+ "swapCount": 2,
+ "verifierViolations": [],
+ "swaps": [
+  {
+   "section": "ap_frq_a",
+   "position": 2,
+   "removeKey": "s1a-final:ap_calculus_ab-f04-k0",
+   "addKey": "supp-r3c-ab-final:ap_calculus_ab-f03-k0",
+   "reason": "external audit: the BC set has only one real-world-context FRQ; official minimum is two",
+   "remove": {
+    "unit": 8,
+    "skill": 1,
+    "calculator": "required",
+    "graph": true,
+    "family": "fam:run2:ap_calculus_ab-f04-k0",
+    "type": "frq_area_volume"
+   },
+   "add": {
+    "unit": 5,
+    "skill": 3,
+    "calculator": "required",
+    "graph": false,
+    "family": "fam:supp-r3c-ab-final:ap_calculus_ab-f03-k0",
+    "type": "frq_marginal_profit"
+   }
+  },
+  {
+   "section": "ap_frq_b",
+   "position": 2,
+   "removeKey": "run1:ap_calculus_ab-f03-k10",
+   "addKey": "supp-r3c-ab-final:ap_calculus_ab-f09-k0",
+   "reason": "external audit: the BC set has only one real-world-context FRQ; official minimum is two",
+   "remove": {
+    "unit": 7,
+    "skill": 1,
+    "calculator": "na",
+    "graph": false,
+    "family": "fam:run1:ap_calculus_ab-f03-k10",
+    "type": "7.6"
+   },
+   "add": {
+    "unit": 5,
+    "skill": 3,
+    "calculator": "not_allowed",
+    "graph": false,
+    "family": "fam:supp-r3c-ab-final:ap_calculus_ab-f09-k0",
+    "type": "frq_pen_cost"
+   }
+  }
+ ]
+}

@@ -60,10 +60,10 @@ describe("CurriculumView", () => {
         onReview={vi.fn()}
       />
     );
-    expect(screen.getByText("8 / 12회차")).toBeInTheDocument();
-    expect(screen.getByText("완료")).toBeInTheDocument();
-    expect(screen.getByText("진행중")).toBeInTheDocument();
-    expect(screen.getByText("예정")).toBeInTheDocument();
+    expect(screen.getByText("Session 8 / 12")).toBeInTheDocument();
+    expect(screen.getByText("Done")).toBeInTheDocument();
+    expect(screen.getByText("In Progress")).toBeInTheDocument();
+    expect(screen.getByText("Upcoming")).toBeInTheDocument();
   });
 
   it("완료된 회차에만 리뷰 보기 버튼이 있다", () => {
@@ -75,7 +75,7 @@ describe("CurriculumView", () => {
         onReview={vi.fn()}
       />
     );
-    expect(screen.getAllByText("리뷰 보기")).toHaveLength(1);
+    expect(screen.getAllByText("View review")).toHaveLength(1);
   });
 
   it("메모를 추가할 수 있다", async () => {
@@ -93,10 +93,10 @@ describe("CurriculumView", () => {
         onReview={vi.fn()}
       />
     );
-    fireEvent.change(screen.getByPlaceholderText("메모를 남겨보세요"), {
+    fireEvent.change(screen.getByPlaceholderText("Leave a note"), {
       target: { value: "이해했어요" },
     });
-    fireEvent.click(screen.getByText("추가"));
+    fireEvent.click(screen.getByText("Add"));
     await waitFor(() =>
       expect(memoActions.addMemo).toHaveBeenCalledWith("e1", "이해했어요")
     );
@@ -114,7 +114,7 @@ describe("CurriculumView", () => {
       />
     );
     expect(screen.getByText("잘하고 있어요")).toBeInTheDocument();
-    expect(screen.queryByPlaceholderText("메모를 남겨보세요")).not.toBeInTheDocument();
-    expect(screen.queryByText("추가")).not.toBeInTheDocument();
+    expect(screen.queryByPlaceholderText("Leave a note")).not.toBeInTheDocument();
+    expect(screen.queryByText("Add")).not.toBeInTheDocument();
   });
 });

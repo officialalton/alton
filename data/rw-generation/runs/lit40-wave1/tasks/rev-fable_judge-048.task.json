@@ -1,0 +1,319 @@
+{
+ "schema": "rw-session-task/v1",
+ "kind": "review",
+ "role": "fable_judge",
+ "runId": "lit40-wave1",
+ "taskId": "rev-fable_judge-048",
+ "chunkId": "rev-fable_judge-048",
+ "suggestedModel": "fable",
+ "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-fable_judge-048.result.json",
+ "outputSchema": {
+  "chunkId": "청크 ID",
+  "model": "fable",
+  "items": [
+   {
+    "candidateId": "id",
+    "picked_letter": "A|B|C|D",
+    "other_defensible": "정답 외 방어 가능한 선택지가 있으면 true",
+    "est_difficulty": "easy|medium|hard (실제 체감, 요청 난이도에 맞추지 말 것)",
+    "hard_fit": "실제 SAT hard 수준의 사고 단계가 필요하면 true(지문 길이·난어만이면 false)",
+    "plausible_distractors": "오답 3개가 모두 그럴듯하고 서로 다른 오개념에서 나왔으면 true",
+    "length_balanced": "네 선택지 길이·구체성이 비슷해 정답이 형식으로 드러나지 않으면 true",
+    "multi_answer_risk": "복수 정답 위험이 있으면 true",
+    "issues": "한 줄 메모"
+   }
+  ]
+ },
+ "items": [
+  {
+   "candidateId": "lit40-medium-07-074",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "medium",
+   "passage": "Although my grandfather's cocoa orchard above Port of Spain had been abandoned for a decade, I still brought Tyrese there when he began translating my book about it. I am Cecile, and I had written the orchard as a ruin, a place my family had been right to leave. Tyrese walked the rows for an hour and came back with a pod split open, the beans inside still pale and sweet. He asked how to translate a word I had used, finished. I said it meant done, closed. He said the trees did not seem to know that. That night I rewrote the last chapter, and in the morning I called my aunt about reopening the drying shed. Rain came in from the gulf by afternoon, drumming on the tin roof of the car.",
+   "question": "Which choice best states the main purpose of the text?",
+   "options": [
+    "To describe how the narrator's grandfather first planted and tended his large cocoa orchard.",
+    "To show how a translator's question changed the narrator's view of the family farm.",
+    "To argue that books about a family's history lose their meaning in translation.",
+    "To suggest that any abandoned place can be restored with enough hard work."
+   ],
+   "recipeBeyondMedium": "두 곳의 근거를 합쳐 요지를 잡아야 하고, 오답 하나는 일화 요약에 그치는 부분 요지다"
+  },
+  {
+   "candidateId": "lit40-medium-07-075",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "medium",
+   "passage": "Paper envelopes of tomato seed lined the shelves of the cooperative in Naples, where Wilhelmina sewed seed bags on Tuesdays beside Angus, the seamstress who had taught her everything and who had not spoken to her since a quarrel over a torn hem two winters before. They worked side by side, passing scissors without looking up. One Tuesday Angus's hands shook too badly to thread the needle. Wilhelmina threaded it and handed it back without a word. Angus said, quietly, that the hem had been her own fault. After that the two women talked through every Tuesday, mostly about thread. Through the window, a man was hosing down crates of lemons.",
+   "question": "Which choice best states the main idea of the text?",
+   "options": [
+    "A seed cooperative depends on volunteers who sew the bags for its tomato seed.",
+    "An apprentice decides to leave her teacher after a quarrel over a hem.",
+    "A small act of help lets a teacher admit fault and end a long estrangement.",
+    "People who work together in silence eventually forget their old disputes."
+   ],
+   "recipeBeyondMedium": "두 곳의 근거를 합쳐 요지를 잡아야 하고, 오답 하나는 일화 요약에 그치는 부분 요지다"
+  },
+  {
+   "candidateId": "lit40-medium-07-076",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "character_motivation",
+   "requestedDifficulty": "medium",
+   "passage": "Kemoy wrote the report twice. The first version, which Leila the foreman had suggested, said the retaining wall on the tea terrace above Taipei had simply collapsed in the rain. The second said Kemoy had stacked the stones himself, too fast, because he wanted to finish before the last bus down the hill. His father had built walls for forty years and once told him that a wall remembers every shortcut. Kemoy had also watched that same father lose his work for hiding one. He handed Leila the second version. She read it, folded it, and asked whether he had eaten. Below them, a cable car slid silently toward the city.",
+   "question": "Based on the text, why does Kemoy most likely submit the second version of the report?",
+   "options": [
+    "He fears that Leila will discover the truth and dismiss him for lying.",
+    "He hopes that confessing will earn him a quick promotion to the foreman's position.",
+    "He has learned from his father's experience that hiding a mistake costs more.",
+    "He believes inspectors will reject any report that blames the rain."
+   ],
+   "recipeBeyondMedium": "단서를 두 문장 이상 연결해야 하며 오답 중 하나는 결과를 동기로 착각하는 전형적 오독이다"
+  },
+  {
+   "candidateId": "lit40-medium-07-077",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "tone_or_mood",
+   "requestedDifficulty": "medium",
+   "passage": "I had not meant to stay past dusk in the weaving house, but Alonso kept unrolling cloths my father had once dyed, each a deeper red than the last. He had stayed in Seville to keep the looms running, he said, while my father sailed off after a fortune that never came home. I listened for blame in his voice and found none, only a weariness worn smooth, like the handles of the shuttles. Still, I felt an old ledger open in me: what he had given, what we had taken. He laid the last cloth across my knees as gently as a blanket on a sleeping child. Ingrid, he said, your father chose this red for you. I traced the pattern with one finger, warmed through, and could not say thank you. The lamps along the river were lit one by one.",
+   "question": "Which choice best describes the overall tone of the text?",
+   "options": [
+    "Uneasy and guilty, with little warmth passing between the two speakers.",
+    "Celebratory and proud, honoring the beauty of the cooperative's cloth.",
+    "Guilty above all, with only a faint trace of tenderness toward Alonso.",
+    "Tender and wistful, though shaded by the narrator's unease over a debt."
+   ],
+   "recipeBeyondMedium": "두 정서의 비중을 판단해야 하며, 오답은 정반대가 아니라 비중이 틀린 어조다"
+  },
+  {
+   "candidateId": "lit40-medium-07-079",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "symbolism",
+   "requestedDifficulty": "medium",
+   "passage": "I used to think Chinedu's brass compass was a trophy. He carried it everywhere, even to the soccer field by the river in Kyoto where we watched the boys play until the lamps came on, and the neighbors said he had won it for steering a ship through a typhoon alone. One evening, as the light went orange over the goalposts, he told me otherwise. The captain had steered; Chinedu had been seasick below. The compass was the captain's, given to Chinedu the morning the man died. I, Fumiko, had repeated the heroic story to half the street. He opened the compass and let the needle swing. \"It points the same way whether people say true things about me or not,\" he said. After that, when the boys asked him for sea stories, he told them about the captain. The ball thudded against the post.",
+   "question": "In the text, the compass most likely represents",
+   "options": [
+    "the courage Chinedu displayed while steering through the typhoon.",
+    "a steady truth Chinedu holds to regardless of what others say.",
+    "the wealth Chinedu gained from his many years working at sea.",
+    "Fumiko's eagerness to repeat exciting stories to the neighbors."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-07-081",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "medium",
+   "passage": "Dust and warm glue, the rasp of the ceiling fan, the thump of Lorenzo's stamp on envelope after envelope: these were the sounds of every Thursday at the little post office outside Cairo. I came to collect my mother's letters, and he always had them ready, tied with string, my name, Astrid, printed on the tag in his careful hand. We talked about the heat, the goats that wandered past the window, the price of sugar. We never talked about my father, who had stopped writing two winters ago. Lorenzo had known him since boyhood, and I could feel the name waiting behind every pause. Still, we each kept a hand on a door we had painted shut together, pressing whenever it creaked. Today, when an envelope in familiar handwriting slid from the stack, Lorenzo turned it face down before I could look, and I thanked him for the weather report.",
+   "question": "As used in the text, the phrase “a door we had painted shut together” most nearly suggests",
+   "options": [
+    "a part of the post office that the two of them had agreed to close off.",
+    "a shared, deliberate effort to keep a painful subject out of their talk.",
+    "a resentment Astrid holds toward Lorenzo for hiding her father's letters.",
+    "a formal habit that keeps Lorenzo from treating Astrid as one of the family."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-07-082",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "medium",
+   "passage": "Ohio in March, and the tailor's back room\nsmells of chalk and steam and pins.\nJordan, the landlord's son, opens a drawer\nfor buttons and finds instead the notices,\nunpaid, folded small as handkerchiefs.\nDeclan, whose father rents the rooms upstairs,\nwatches him read them.\nNeither speaks. The iron hisses.\nShe threads a needle with steady fingers;\nhe counts out buttons he does not need.\nBetween them now, a pocket sewn inside the silence,\ndeep enough to carry what they found,\nclosed with stitches no one else will see.\nWhen the tailor calls from the front, they answer\nin one voice, and go on working.",
+   "question": "As used in the text, the phrase “a pocket sewn inside the silence” most nearly suggests",
+   "options": [
+    "a hiding place in the drawer where the tailor keeps his private papers.",
+    "an awkwardness that makes Jordan and Declan unwilling to work together.",
+    "a secret the two quietly agree to keep hidden from everyone else.",
+    "a resentment Declan feels toward Jordan's family because of the rent."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-07-083",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "medium",
+   "passage": "Diesel and frying shallots hung over the bus depot in Surabaya, where the youth orchestra waited for a coach that was already two hours late. Thida, the conductor, gathered the players under a tin awning and explained the plan: if anyone at the festival gate asked, they had registered on time. Arisa, the youngest violinist, held her case against her knees. She understood that without that single sentence, the bookings, the borrowed instruments, the months of rehearsal would all come down at once. The lie was the keystone of the whole arch, Thida said quietly, almost as if apologizing to it. Arisa nodded, but when the coach finally wheezed into the lot, she found she could not stop rehearsing the truth instead.",
+   "question": "As used in the text, the phrase “the keystone of the whole arch” most nearly suggests",
+   "options": [
+    "the most impressive part of the orchestra's festival performance.",
+    "a small detail that Thida expects festival officials to overlook.",
+    "a burden that Arisa alone must carry for all the other players.",
+    "the one element the whole plan needs in order to stand."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-07-090",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "medium",
+   "passage": "By the time the gymnasium lights came on, Samira and I had played our duet three times for an audience of folding chairs. I, Giulietta, was cheerful about it, even giddy; I joked that the basketball hoops were our most loyal listeners, and I pressed into her hands the gift I had saved for all winter, a new bow wrapped in brown paper. She thanked the paper. Then she set the parcel back on my case, unopened, and said she would not need it in Milan. I stood under the hoops and noticed, for the first time, how the varnish on the floor had worn to bare wood where so many feet had stopped and turned away.",
+   "question": "Which choice best describes how the tone of the text shifts?",
+   "options": [
+    "It moves from lighthearted optimism to a quiet, disappointed sense of loss.",
+    "It moves from nervous anticipation to relief that the performance is over.",
+    "It moves from bitter resentment toward Samira to grudging forgiveness.",
+    "It moves from detached observation to excited plans for a trip to Milan."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-07-091",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "medium",
+   "passage": "Four reels, two projectors, one cot pushed against the wall: that was the whole of the booth above the old cinema in Manila where Somchai had asked to spend his nights. I, Bao, was his nurse, and for a week our evenings were nearly merry. He taught me to thread film by lamplight, laughed when I tangled it, and narrated the silent pictures below in a dozen ridiculous voices. Then, on the eighth night, I mentioned that the doctor and I had arranged his transfer to the hospital ward, beginning tomorrow. He stopped threading. He did not shout. He only asked, very politely, whether anyone had thought to ask him, and turned the lamp so that his face fell into shadow.",
+   "question": "Which choice best describes how the tone of the text shifts?",
+   "options": [
+    "From grim duty to cheerful relief once the nurse learns Somchai will recover",
+    "From playful warmth to wounded restraint after the nurse reveals the transfer",
+    "From anxious suspicion to open anger once Somchai is moved to another ward",
+    "From stiff politeness to easy friendship as Somchai teaches the nurse his craft"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-07-092",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "medium",
+   "passage": "Years later, Isadora still described those morning rides to the salt pans south of Lisbon as the easiest part of her week. Bruno drove the route, and the two of them traded the same pleasant remarks every day: the wind, the herons, the white heaps glittering beyond the marsh. When she asked about his wife, he always said she was well, resting, fine. Then one morning a small boy in the front seat leaned forward and asked Bruno why he had stopped wearing his ring. The bus went quiet. Bruno kept his eyes on the road, and Isadora understood, with a cold sort of shame, how long she had been grateful for answers she knew were rehearsed.",
+   "question": "Which choice best describes how the tone of the text shifts?",
+   "options": [
+    "From irritation at Bruno's routine to admiration for his honesty",
+    "From eager curiosity about the salt pans to boredom with the route",
+    "From easy, comfortable routine to an uneasy sense of evasion exposed",
+    "From sorrow over Bruno's loss to amusement at the boy's bold question"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-07-093",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "medium",
+   "passage": "When I moved back to Porto Alegre to care for my mother, I treated her beekeeper's yard as a list of chores. I logged each hive's weight, scraped wax from the frames, and reported to her in the flat voice of an inspector: colony three is weak, the smoker needs a new bellows. Our neighbor Fausto, who had kept bees beside her for decades, watched me without comment. Then one evening, clearing her desk for the honey ledger, I found the letter I had written her nine years earlier, apologizing for leaving, stamped but never mailed. I carried it out to the hives. In the dusk the bees sounded like a house breathing, and I sat down beside my mother's chair and, for once, simply listened with her.",
+   "question": "Which choice best describes how the tone of the text shifts?",
+   "options": [
+    "From cheerful enthusiasm for the hives to weary frustration with the work",
+    "From fearful avoidance of the bees to confident mastery of the yard",
+    "From warm nostalgia for childhood to sharp regret about leaving home",
+    "From brisk, detached efficiency to tender and reflective closeness"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-07-094",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "text_structure",
+   "requestedDifficulty": "medium",
+   "passage": "Once, in the summer of her first post, Priya was assigned to supervise the dining hall at a hill camp in Kerala, and with it a boy named Dongsik, who had been ordered to scrub the long tables as punishment. He worked in silence that first evening, scowling at her offer of help. On the second evening she simply took a rag and began at the opposite end. By the end of the week they were meeting in the middle each night without arranging it, and he had begun to tell her which cook burned the rice and which bench wobbled. When the camp director lifted the punishment, Dongsik arrived anyway, rag in hand, and asked which end she wanted.",
+   "question": "Which choice best describes the overall structure of the text?",
+   "options": [
+    "It traces how a forced task gradually becomes a shared habit for two people.",
+    "It describes a conflict between two people and then shows how a third ends it.",
+    "It presents a teacher's memory of a camp and then judges the camp's strict rules.",
+    "It introduces a student's punishment and then argues that the punishment was unfair."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-07-095",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "text_structure",
+   "requestedDifficulty": "medium",
+   "passage": "“Bus won't come for an hour,” Ren said, nodding at the rain-blurred street beyond the community garden in Havana. Faisal shrugged and pretended to study the bean rows, as any stranger might. Ren talked to fill the wait: the tomatoes were sulking this year, someone had planted squash too close to the fence, and only one plot looked properly tended, the one with the carved wooden stakes. Faisal said it was probably beginner's luck. Ren disagreed, praising the careful mulching and the neat string lines. Faisal listened with his hands in his pockets, saying little, but when Ren bent to admire the stakes, Faisal's eyes went, before he could stop them, to the initials cut into each one, which were his own.",
+   "question": "Which choice best describes the overall structure of the text?",
+   "options": [
+    "It describes a garden in detail and then explains why the bus is delayed.",
+    "It moves from small talk to a quiet revelation of Faisal's hidden pride.",
+    "It begins with an argument between strangers and ends with a reconciliation.",
+    "It presents Ren's criticism of the garden and then Faisal's defense of the city."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-07-096",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "text_structure",
+   "requestedDifficulty": "medium",
+   "passage": "I met Nneka at the cemetery gate in Lagos the spring after my family moved to Ibadan, because it was the one place we both knew how to find. We had visited her grandmother's grave there as children, and it felt right to begin again where we had once said goodbye to someone. At first we spoke of easy things: her new job, my new school, the vendor who still sold roasted corn by the wall. Then she mentioned, lightly, the letter I had sent her in the autumn, the one in which I, Babatunde, had written her late grandmother's name wrong. She had never told me. I had never noticed. Standing there, I realized she had carried my carelessness for months so that I would not have to.",
+   "question": "Which choice best describes the overall structure of the text?",
+   "options": [
+    "It describes a cemetery's history and then explains why the narrator moved away.",
+    "It recounts an argument between friends and then describes how they settled it.",
+    "It shifts from a reunion's easy talk to the narrator's grasp of a quiet kindness.",
+    "It contrasts two cities and then argues that the narrator should have stayed in Lagos."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-07-097",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "text_structure",
+   "requestedDifficulty": "medium",
+   "passage": "“You will not find a kinder roof on the mainland, Hortense,” Chulsoo said as the night omnibus rattled along the coast of Jeju Island. He had been my landlord for eleven years, and he had insisted on riding with me to the harbor, my two trunks wedged between our knees. For the first hour he listed the faults of every city I had named: damp lodgings, dishonest grocers, winters that bit through wool. I let him speak. Somewhere past the stone walls of the eastern villages he fell silent, and then, without looking at me, he began to describe the best tea houses in the very city he had condemned, and which of its streets caught the morning sun.",
+   "question": "Which choice best describes the overall structure of the text?",
+   "options": [
+    "It presents Hortense's doubts about moving and then shows Chulsoo persuading her to stay.",
+    "It describes the scenery of the journey and then explains why Hortense chose the mainland.",
+    "It recounts a quarrel between a landlord and a tenant and then their final separation.",
+    "It shifts from Chulsoo's warnings about leaving to his reluctant help with her new life."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-07-098",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "underlined_portion_function",
+   "requestedDifficulty": "medium",
+   "passage": "Nguyen always got the scissors. That was how I, Roxana, explained it to myself, sitting in a laundromat in Busan while our dryers turned in the next row. Our mother had been a seamstress, and her will left her silver shears, the ones she had used for forty years, to my sister, who had never sewn a hem in her life. I was the one who had learned the trade. For two years we had not spoken. Now Nguyen sat beside me holding the shears in a cloth bag, and __she asked me, awkwardly, to show her how to keep the blades from rusting__. I took the bag and, for the first time in a long while, began to explain something to her slowly.",
+   "question": "Which choice best describes the function of the underlined portion in the text as a whole?",
+   "options": [
+    "It marks a first step toward reconciliation by deferring to the narrator's skill.",
+    "It reveals that Nguyen plans to hand over the shears to settle an old quarrel.",
+    "It shows that Nguyen has quietly been practicing sewing since their mother died.",
+    "It explains why the narrator has long believed the will was written unfairly."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-07-099",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "underlined_portion_function",
+   "requestedDifficulty": "medium",
+   "passage": "Salt-whitened tiles ring the pool behind your grandmother's house in Marrakesh, and you sit on them with your feet in the cool, heavy water, Yusuf, holding the card your cousin Tariq sent. He is marrying in Casablanca, and the whole family is invited. Your grandmother has already said she will not go. She says it while trailing her hand through the pool, as if discussing the weather. __She tells you the water here holds her up better than any crowd ever has.__ You do not argue. You notice instead how she has turned her chair so that it faces away from the road north, and how the good dress she once wore to weddings hangs, still pressed, behind her door.",
+   "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+   "options": [
+    "It shows that the grandmother refuses the invitation because she is too frail to travel.",
+    "It offers a casual excuse for her refusal that later details suggest hides deeper feeling.",
+    "It reveals that the grandmother is angry at Tariq for choosing to marry in Casablanca.",
+    "It suggests that Yusuf secretly agrees that the family wedding is not worth attending."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-07-100",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "underlined_portion_function",
+   "requestedDifficulty": "medium",
+   "passage": "Goodbyes belong to the mountain. Kerem, who kept the little shelter at the bus stop above Thessaloniki, told me so on my first morning there, when I tried to shake his hand and leave without ceremony. For a month I surveyed the slopes and he kept the stove lit, and each evening he corrected some small habit of mine: I closed the door too quickly, I thanked him too briefly, I glanced at my watch. On my last day the bus came early. I had my instruments packed and my hand already out. __Then I remembered, and I set down my case and walked with him to the bend in the road, where the whole valley could watch us part.__ Kerem said nothing, but he waited at the bend until the bus had passed the second curve.",
+   "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+   "options": [
+    "It shows the narrator rushing to catch the early bus before Kerem can stop him.",
+    "It reveals that the narrator has decided to stay on and continue his survey.",
+    "It shows the narrator finally following the farewell custom Kerem taught him.",
+    "It suggests that the narrator resents Kerem's constant corrections of his habits."
+   ]
+  }
+ ],
+ "instructions": "당신은 디지털 SAT 독립 채점자다. 정답 표시가 없다. 먼저 문항을 직접 풀고(picked_letter), 이어서 난이도·hard 적합·오답 품질을 판정한다. 요청 난이도에 맞추려 하지 말고 실제로 느끼는 대로 답한다.\n청크 rev-fable_judge-048 — 19문항.\n출력: Write 도구로 정확히 이 경로에 JSON 한 파일을 쓴다 → /Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-fable_judge-048.result.json\n출력 JSON 스키마(예시 구조): {\"chunkId\":\"청크 ID\",\"model\":\"fable\",\"items\":[{\"candidateId\":\"id\",\"picked_letter\":\"A|B|C|D\",\"other_defensible\":\"정답 외 방어 가능한 선택지가 있으면 true\",\"est_difficulty\":\"easy|medium|hard (실제 체감, 요청 난이도에 맞추지 말 것)\",\"hard_fit\":\"실제 SAT hard 수준의 사고 단계가 필요하면 true(지문 길이·난어만이면 false)\",\"plausible_distractors\":\"오답 3개가 모두 그럴듯하고 서로 다른 오개념에서 나왔으면 true\",\"length_balanced\":\"네 선택지 길이·구체성이 비슷해 정답이 형식으로 드러나지 않으면 true\",\"multi_answer_risk\":\"복수 정답 위험이 있으면 true\",\"issues\":\"한 줄 메모\"}]}\n허용 값: picked_letter ∈ {A,B,C,D}, 불리언 필드는 true/false, est_difficulty ∈ {easy,medium,hard}. candidateId 를 바꾸지 않고 모든 항목에 답한다.\n금지: 결과 파일 외의 파일 생성·수정, 다른 명령 실행, 문항 수정·재작성. 끝나면 'done <항목 수>' 한 줄만 답한다.\n\n## 문항\n### lit40-medium-07-074 — skill central_ideas_details · 유형 main_idea_or_purpose · 요청 난이도 medium · hard 기준: 두 곳의 근거를 합쳐 요지를 잡아야 하고, 오답 하나는 일화 요약에 그치는 부분 요지다\n[지문]\nAlthough my grandfather's cocoa orchard above Port of Spain had been abandoned for a decade, I still brought Tyrese there when he began translating my book about it. I am Cecile, and I had written the orchard as a ruin, a place my family had been right to leave. Tyrese walked the rows for an hour and came back with a pod split open, the beans inside still pale and sweet. He asked how to translate a word I had used, finished. I said it meant done, closed. He said the trees did not seem to know that. That night I rewrote the last chapter, and in the morning I called my aunt about reopening the drying shed. Rain came in from the gulf by afternoon, drumming on the tin roof of the car.\n\n[질문] Which choice best states the main purpose of the text?\nA) To describe how the narrator's grandfather first planted and tended his large cocoa orchard.\nB) To show how a translator's question changed the narrator's view of the family farm.\nC) To argue that books about a family's history lose their meaning in translation.\nD) To suggest that any abandoned place can be restored with enough hard work.\n### lit40-medium-07-075 — skill central_ideas_details · 유형 main_idea_or_purpose · 요청 난이도 medium · hard 기준: 두 곳의 근거를 합쳐 요지를 잡아야 하고, 오답 하나는 일화 요약에 그치는 부분 요지다\n[지문]\nPaper envelopes of tomato seed lined the shelves of the cooperative in Naples, where Wilhelmina sewed seed bags on Tuesdays beside Angus, the seamstress who had taught her everything and who had not spoken to her since a quarrel over a torn hem two winters before. They worked side by side, passing scissors without looking up. One Tuesday Angus's hands shook too badly to thread the needle. Wilhelmina threaded it and handed it back without a word. Angus said, quietly, that the hem had been her own fault. After that the two women talked through every Tuesday, mostly about thread. Through the window, a man was hosing down crates of lemons.\n\n[질문] Which choice best states the main idea of the text?\nA) A seed cooperative depends on volunteers who sew the bags for its tomato seed.\nB) An apprentice decides to leave her teacher after a quarrel over a hem.\nC) A small act of help lets a teacher admit fault and end a long estrangement.\nD) People who work together in silence eventually forget their old disputes.\n### lit40-medium-07-076 — skill inferences · 유형 character_motivation · 요청 난이도 medium · hard 기준: 단서를 두 문장 이상 연결해야 하며 오답 중 하나는 결과를 동기로 착각하는 전형적 오독이다\n[지문]\nKemoy wrote the report twice. The first version, which Leila the foreman had suggested, said the retaining wall on the tea terrace above Taipei had simply collapsed in the rain. The second said Kemoy had stacked the stones himself, too fast, because he wanted to finish before the last bus down the hill. His father had built walls for forty years and once told him that a wall remembers every shortcut. Kemoy had also watched that same father lose his work for hiding one. He handed Leila the second version. She read it, folded it, and asked whether he had eaten. Below them, a cable car slid silently toward the city.\n\n[질문] Based on the text, why does Kemoy most likely submit the second version of the report?\nA) He fears that Leila will discover the truth and dismiss him for lying.\nB) He hopes that confessing will earn him a quick promotion to the foreman's position.\nC) He has learned from his father's experience that hiding a mistake costs more.\nD) He believes inspectors will reject any report that blames the rain.\n### lit40-medium-07-077 — skill inferences · 유형 tone_or_mood · 요청 난이도 medium · hard 기준: 두 정서의 비중을 판단해야 하며, 오답은 정반대가 아니라 비중이 틀린 어조다\n[지문]\nI had not meant to stay past dusk in the weaving house, but Alonso kept unrolling cloths my father had once dyed, each a deeper red than the last. He had stayed in Seville to keep the looms running, he said, while my father sailed off after a fortune that never came home. I listened for blame in his voice and found none, only a weariness worn smooth, like the handles of the shuttles. Still, I felt an old ledger open in me: what he had given, what we had taken. He laid the last cloth across my knees as gently as a blanket on a sleeping child. Ingrid, he said, your father chose this red for you. I traced the pattern with one finger, warmed through, and could not say thank you. The lamps along the river were lit one by one.\n\n[질문] Which choice best describes the overall tone of the text?\nA) Uneasy and guilty, with little warmth passing between the two speakers.\nB) Celebratory and proud, honoring the beauty of the cooperative's cloth.\nC) Guilty above all, with only a faint trace of tenderness toward Alonso.\nD) Tender and wistful, though shaded by the narrator's unease over a debt.\n### lit40-medium-07-079 — skill inferences · 유형 symbolism · 요청 난이도 medium\n[지문]\nI used to think Chinedu's brass compass was a trophy. He carried it everywhere, even to the soccer field by the river in Kyoto where we watched the boys play until the lamps came on, and the neighbors said he had won it for steering a ship through a typhoon alone. One evening, as the light went orange over the goalposts, he told me otherwise. The captain had steered; Chinedu had been seasick below. The compass was the captain's, given to Chinedu the morning the man died. I, Fumiko, had repeated the heroic story to half the street. He opened the compass and let the needle swing. \"It points the same way whether people say true things about me or not,\" he said. After that, when the boys asked him for sea stories, he told them about the captain. The ball thudded against the post.\n\n[질문] In the text, the compass most likely represents\nA) the courage Chinedu displayed while steering through the typhoon.\nB) a steady truth Chinedu holds to regardless of what others say.\nC) the wealth Chinedu gained from his many years working at sea.\nD) Fumiko's eagerness to repeat exciting stories to the neighbors.\n### lit40-medium-07-081 — skill words_in_context · 유형 figurative_language · 요청 난이도 medium\n[지문]\nDust and warm glue, the rasp of the ceiling fan, the thump of Lorenzo's stamp on envelope after envelope: these were the sounds of every Thursday at the little post office outside Cairo. I came to collect my mother's letters, and he always had them ready, tied with string, my name, Astrid, printed on the tag in his careful hand. We talked about the heat, the goats that wandered past the window, the price of sugar. We never talked about my father, who had stopped writing two winters ago. Lorenzo had known him since boyhood, and I could feel the name waiting behind every pause. Still, we each kept a hand on a door we had painted shut together, pressing whenever it creaked. Today, when an envelope in familiar handwriting slid from the stack, Lorenzo turned it face down before I could look, and I thanked him for the weather report.\n\n[질문] As used in the text, the phrase “a door we had painted shut together” most nearly suggests\nA) a part of the post office that the two of them had agreed to close off.\nB) a shared, deliberate effort to keep a painful subject out of their talk.\nC) a resentment Astrid holds toward Lorenzo for hiding her father's letters.\nD) a formal habit that keeps Lorenzo from treating Astrid as one of the family.\n### lit40-medium-07-082 — skill words_in_context · 유형 figurative_language · 요청 난이도 medium\n[지문]\nOhio in March, and the tailor's back room\nsmells of chalk and steam and pins.\nJordan, the landlord's son, opens a drawer\nfor buttons and finds instead the notices,\nunpaid, folded small as handkerchiefs.\nDeclan, whose father rents the rooms upstairs,\nwatches him read them.\nNeither speaks. The iron hisses.\nShe threads a needle with steady fingers;\nhe counts out buttons he does not need.\nBetween them now, a pocket sewn inside the silence,\ndeep enough to carry what they found,\nclosed with stitches no one else will see.\nWhen the tailor calls from the front, they answer\nin one voice, and go on working.\n\n[질문] As used in the text, the phrase “a pocket sewn inside the silence” most nearly suggests\nA) a hiding place in the drawer where the tailor keeps his private papers.\nB) an awkwardness that makes Jordan and Declan unwilling to work together.\nC) a secret the two quietly agree to keep hidden from everyone else.\nD) a resentment Declan feels toward Jordan's family because of the rent.\n### lit40-medium-07-083 — skill words_in_context · 유형 figurative_language · 요청 난이도 medium\n[지문]\nDiesel and frying shallots hung over the bus depot in Surabaya, where the youth orchestra waited for a coach that was already two hours late. Thida, the conductor, gathered the players under a tin awning and explained the plan: if anyone at the festival gate asked, they had registered on time. Arisa, the youngest violinist, held her case against her knees. She understood that without that single sentence, the bookings, the borrowed instruments, the months of rehearsal would all come down at once. The lie was the keystone of the whole arch, Thida said quietly, almost as if apologizing to it. Arisa nodded, but when the coach finally wheezed into the lot, she found she could not stop rehearsing the truth instead.\n\n[질문] As used in the text, the phrase “the keystone of the whole arch” most nearly suggests\nA) the most impressive part of the orchestra's festival performance.\nB) a small detail that Thida expects festival officials to overlook.\nC) a burden that Arisa alone must carry for all the other players.\nD) the one element the whole plan needs in order to stand.\n### lit40-medium-07-090 — skill text_structure_purpose · 유형 tone_shift · 요청 난이도 medium\n[지문]\nBy the time the gymnasium lights came on, Samira and I had played our duet three times for an audience of folding chairs. I, Giulietta, was cheerful about it, even giddy; I joked that the basketball hoops were our most loyal listeners, and I pressed into her hands the gift I had saved for all winter, a new bow wrapped in brown paper. She thanked the paper. Then she set the parcel back on my case, unopened, and said she would not need it in Milan. I stood under the hoops and noticed, for the first time, how the varnish on the floor had worn to bare wood where so many feet had stopped and turned away.\n\n[질문] Which choice best describes how the tone of the text shifts?\nA) It moves from lighthearted optimism to a quiet, disappointed sense of loss.\nB) It moves from nervous anticipation to relief that the performance is over.\nC) It moves from bitter resentment toward Samira to grudging forgiveness.\nD) It moves from detached observation to excited plans for a trip to Milan.\n### lit40-medium-07-091 — skill text_structure_purpose · 유형 tone_shift · 요청 난이도 medium\n[지문]\nFour reels, two projectors, one cot pushed against the wall: that was the whole of the booth above the old cinema in Manila where Somchai had asked to spend his nights. I, Bao, was his nurse, and for a week our evenings were nearly merry. He taught me to thread film by lamplight, laughed when I tangled it, and narrated the silent pictures below in a dozen ridiculous voices. Then, on the eighth night, I mentioned that the doctor and I had arranged his transfer to the hospital ward, beginning tomorrow. He stopped threading. He did not shout. He only asked, very politely, whether anyone had thought to ask him, and turned the lamp so that his face fell into shadow.\n\n[질문] Which choice best describes how the tone of the text shifts?\nA) From grim duty to cheerful relief once the nurse learns Somchai will recover\nB) From playful warmth to wounded restraint after the nurse reveals the transfer\nC) From anxious suspicion to open anger once Somchai is moved to another ward\nD) From stiff politeness to easy friendship as Somchai teaches the nurse his craft\n### lit40-medium-07-092 — skill text_structure_purpose · 유형 tone_shift · 요청 난이도 medium\n[지문]\nYears later, Isadora still described those morning rides to the salt pans south of Lisbon as the easiest part of her week. Bruno drove the route, and the two of them traded the same pleasant remarks every day: the wind, the herons, the white heaps glittering beyond the marsh. When she asked about his wife, he always said she was well, resting, fine. Then one morning a small boy in the front seat leaned forward and asked Bruno why he had stopped wearing his ring. The bus went quiet. Bruno kept his eyes on the road, and Isadora understood, with a cold sort of shame, how long she had been grateful for answers she knew were rehearsed.\n\n[질문] Which choice best describes how the tone of the text shifts?\nA) From irritation at Bruno's routine to admiration for his honesty\nB) From eager curiosity about the salt pans to boredom with the route\nC) From easy, comfortable routine to an uneasy sense of evasion exposed\nD) From sorrow over Bruno's loss to amusement at the boy's bold question\n### lit40-medium-07-093 — skill text_structure_purpose · 유형 tone_shift · 요청 난이도 medium\n[지문]\nWhen I moved back to Porto Alegre to care for my mother, I treated her beekeeper's yard as a list of chores. I logged each hive's weight, scraped wax from the frames, and reported to her in the flat voice of an inspector: colony three is weak, the smoker needs a new bellows. Our neighbor Fausto, who had kept bees beside her for decades, watched me without comment. Then one evening, clearing her desk for the honey ledger, I found the letter I had written her nine years earlier, apologizing for leaving, stamped but never mailed. I carried it out to the hives. In the dusk the bees sounded like a house breathing, and I sat down beside my mother's chair and, for once, simply listened with her.\n\n[질문] Which choice best describes how the tone of the text shifts?\nA) From cheerful enthusiasm for the hives to weary frustration with the work\nB) From fearful avoidance of the bees to confident mastery of the yard\nC) From warm nostalgia for childhood to sharp regret about leaving home\nD) From brisk, detached efficiency to tender and reflective closeness\n### lit40-medium-07-094 — skill text_structure_purpose · 유형 text_structure · 요청 난이도 medium\n[지문]\nOnce, in the summer of her first post, Priya was assigned to supervise the dining hall at a hill camp in Kerala, and with it a boy named Dongsik, who had been ordered to scrub the long tables as punishment. He worked in silence that first evening, scowling at her offer of help. On the second evening she simply took a rag and began at the opposite end. By the end of the week they were meeting in the middle each night without arranging it, and he had begun to tell her which cook burned the rice and which bench wobbled. When the camp director lifted the punishment, Dongsik arrived anyway, rag in hand, and asked which end she wanted.\n\n[질문] Which choice best describes the overall structure of the text?\nA) It traces how a forced task gradually becomes a shared habit for two people.\nB) It describes a conflict between two people and then shows how a third ends it.\nC) It presents a teacher's memory of a camp and then judges the camp's strict rules.\nD) It introduces a student's punishment and then argues that the punishment was unfair.\n### lit40-medium-07-095 — skill text_structure_purpose · 유형 text_structure · 요청 난이도 medium\n[지문]\n“Bus won't come for an hour,” Ren said, nodding at the rain-blurred street beyond the community garden in Havana. Faisal shrugged and pretended to study the bean rows, as any stranger might. Ren talked to fill the wait: the tomatoes were sulking this year, someone had planted squash too close to the fence, and only one plot looked properly tended, the one with the carved wooden stakes. Faisal said it was probably beginner's luck. Ren disagreed, praising the careful mulching and the neat string lines. Faisal listened with his hands in his pockets, saying little, but when Ren bent to admire the stakes, Faisal's eyes went, before he could stop them, to the initials cut into each one, which were his own.\n\n[질문] Which choice best describes the overall structure of the text?\nA) It describes a garden in detail and then explains why the bus is delayed.\nB) It moves from small talk to a quiet revelation of Faisal's hidden pride.\nC) It begins with an argument between strangers and ends with a reconciliation.\nD) It presents Ren's criticism of the garden and then Faisal's defense of the city.\n### lit40-medium-07-096 — skill text_structure_purpose · 유형 text_structure · 요청 난이도 medium\n[지문]\nI met Nneka at the cemetery gate in Lagos the spring after my family moved to Ibadan, because it was the one place we both knew how to find. We had visited her grandmother's grave there as children, and it felt right to begin again where we had once said goodbye to someone. At first we spoke of easy things: her new job, my new school, the vendor who still sold roasted corn by the wall. Then she mentioned, lightly, the letter I had sent her in the autumn, the one in which I, Babatunde, had written her late grandmother's name wrong. She had never told me. I had never noticed. Standing there, I realized she had carried my carelessness for months so that I would not have to.\n\n[질문] Which choice best describes the overall structure of the text?\nA) It describes a cemetery's history and then explains why the narrator moved away.\nB) It recounts an argument between friends and then describes how they settled it.\nC) It shifts from a reunion's easy talk to the narrator's grasp of a quiet kindness.\nD) It contrasts two cities and then argues that the narrator should have stayed in Lagos.\n### lit40-medium-07-097 — skill text_structure_purpose · 유형 text_structure · 요청 난이도 medium\n[지문]\n“You will not find a kinder roof on the mainland, Hortense,” Chulsoo said as the night omnibus rattled along the coast of Jeju Island. He had been my landlord for eleven years, and he had insisted on riding with me to the harbor, my two trunks wedged between our knees. For the first hour he listed the faults of every city I had named: damp lodgings, dishonest grocers, winters that bit through wool. I let him speak. Somewhere past the stone walls of the eastern villages he fell silent, and then, without looking at me, he began to describe the best tea houses in the very city he had condemned, and which of its streets caught the morning sun.\n\n[질문] Which choice best describes the overall structure of the text?\nA) It presents Hortense's doubts about moving and then shows Chulsoo persuading her to stay.\nB) It describes the scenery of the journey and then explains why Hortense chose the mainland.\nC) It recounts a quarrel between a landlord and a tenant and then their final separation.\nD) It shifts from Chulsoo's warnings about leaving to his reluctant help with her new life.\n### lit40-medium-07-098 — skill text_structure_purpose · 유형 underlined_portion_function · 요청 난이도 medium\n[지문]\nNguyen always got the scissors. That was how I, Roxana, explained it to myself, sitting in a laundromat in Busan while our dryers turned in the next row. Our mother had been a seamstress, and her will left her silver shears, the ones she had used for forty years, to my sister, who had never sewn a hem in her life. I was the one who had learned the trade. For two years we had not spoken. Now Nguyen sat beside me holding the shears in a cloth bag, and __she asked me, awkwardly, to show her how to keep the blades from rusting__. I took the bag and, for the first time in a long while, began to explain something to her slowly.\n\n[질문] Which choice best describes the function of the underlined portion in the text as a whole?\nA) It marks a first step toward reconciliation by deferring to the narrator's skill.\nB) It reveals that Nguyen plans to hand over the shears to settle an old quarrel.\nC) It shows that Nguyen has quietly been practicing sewing since their mother died.\nD) It explains why the narrator has long believed the will was written unfairly.\n### lit40-medium-07-099 — skill text_structure_purpose · 유형 underlined_portion_function · 요청 난이도 medium\n[지문]\nSalt-whitened tiles ring the pool behind your grandmother's house in Marrakesh, and you sit on them with your feet in the cool, heavy water, Yusuf, holding the card your cousin Tariq sent. He is marrying in Casablanca, and the whole family is invited. Your grandmother has already said she will not go. She says it while trailing her hand through the pool, as if discussing the weather. __She tells you the water here holds her up better than any crowd ever has.__ You do not argue. You notice instead how she has turned her chair so that it faces away from the road north, and how the good dress she once wore to weddings hangs, still pressed, behind her door.\n\n[질문] Which choice best describes the function of the underlined sentence in the text as a whole?\nA) It shows that the grandmother refuses the invitation because she is too frail to travel.\nB) It offers a casual excuse for her refusal that later details suggest hides deeper feeling.\nC) It reveals that the grandmother is angry at Tariq for choosing to marry in Casablanca.\nD) It suggests that Yusuf secretly agrees that the family wedding is not worth attending.\n### lit40-medium-07-100 — skill text_structure_purpose · 유형 underlined_portion_function · 요청 난이도 medium\n[지문]\nGoodbyes belong to the mountain. Kerem, who kept the little shelter at the bus stop above Thessaloniki, told me so on my first morning there, when I tried to shake his hand and leave without ceremony. For a month I surveyed the slopes and he kept the stove lit, and each evening he corrected some small habit of mine: I closed the door too quickly, I thanked him too briefly, I glanced at my watch. On my last day the bus came early. I had my instruments packed and my hand already out. __Then I remembered, and I set down my case and walked with him to the bend in the road, where the whole valley could watch us part.__ Kerem said nothing, but he waited at the bend until the bus had passed the second curve.\n\n[질문] Which choice best describes the function of the underlined sentence in the text as a whole?\nA) It shows the narrator rushing to catch the early bus before Kerem can stop him.\nB) It reveals that the narrator has decided to stay on and continue his survey.\nC) It shows the narrator finally following the farewell custom Kerem taught him.\nD) It suggests that the narrator resents Kerem's constant corrections of his habits."
+}

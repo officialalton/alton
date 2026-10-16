@@ -1,0 +1,82 @@
+{
+ "itemId": "area_volume.surface_area.SO.P",
+ "generatedAt": "2026-10-07T05:02:01.076Z",
+ "codeHash": "d8b230f8dc06722602a792bc2e553de0f1792b7598996563953d680a29299492",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/ext-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/geo-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/area_volume.surface_area.SO.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/pg-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/so-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "area_volume.surface_area.SO.P.png",
+   "mobileFile": "area_volume.surface_area.SO.P.m375.png",
+   "archetypeId": "av.surface_area.SO.P.compose_kind",
+   "seed": 11,
+   "signature": "solid:rectangular_prism",
+   "stimulus": "A scientist describes the container shown. A calculator is not necessary. The solid in the figure is a rectangular tank whose dimensions are labeled.",
+   "question": "Find the total surface area of the solid.",
+   "options": [
+    "132",
+    "96",
+    "192",
+    "180"
+   ],
+   "correctIndex": 2,
+   "answer": "192",
+   "explanation": "(1) 그림에서 길이 6, 너비 5, 높이 6 를 읽는다. (2) 위·아래 면의 넓이 = 2 × 6 × 5 = 60 이다. (3) 앞·뒤 면의 넓이 = 2 × 6 × 6 = 72 이다. (4) 양 옆 면의 넓이 = 2 × 5 × 6 = 60 이다. (5) 따라서 60 + 72 + 60 = 192 이다. 따라서 정답은 192이다.",
+   "structuralIssues": []
+  },
+  {
+   "file": "area_volume.surface_area.SO.P~chain2.png",
+   "mobileFile": "area_volume.surface_area.SO.P~chain2.m375.png",
+   "archetypeId": "av.surface_area.SO.P.chain2",
+   "seed": 11,
+   "signature": "solid:cube",
+   "stimulus": "A teacher shows the class the solid below. Read each label carefully before computing. The figure shows a cube with its edge length labeled. Every face is painted except the top face.",
+   "question": "Find the area of the painted part of the solid.",
+   "options": [
+    "36",
+    "216",
+    "30",
+    "180"
+   ],
+   "correctIndex": 3,
+   "answer": "180",
+   "explanation": "(1) 그림에서 모서리 6 를 읽는다. (2) 한 면의 넓이 = 6² = 36 이다. (3) 정육면체는 면이 6 개이다. (4) 윗면은 칠하지 않으므로 5 면이다. (5) 따라서 5 × 36 = 180 이다. 따라서 정답은 180이다.",
+   "structuralIssues": []
+  },
+  {
+   "file": "area_volume.surface_area.SO.P~repr_shift.png",
+   "mobileFile": "area_volume.surface_area.SO.P~repr_shift.m375.png",
+   "archetypeId": "av.surface_area.SO.P.repr_shift",
+   "seed": 11,
+   "signature": "solid:cylinder",
+   "stimulus": "A student studies the solid shown. Use the labels in the figure. The figure shows a right circular cylinder with its labeled dimensions. The height, labeled $h$, is three times the length of the radius.",
+   "question": "What is the total surface area of the cylinder, in terms of $\\pi$?",
+   "options": [
+    "$28\\pi$",
+    "$32\\pi$",
+    "$8\\pi$",
+    "$24\\pi$"
+   ],
+   "correctIndex": 1,
+   "answer": "$32\\pi$",
+   "explanation": "(1) 그림에서 반지름 2 을 읽고 지문에서 높이 = 3 × 반지름 이다. (2) 높이 h = 3 × 2 = 6 이다. (3) 두 밑면의 넓이 = 2 × π × 2² = 8π 이다. (4) 옆면의 넓이 = 2π × 2 × 6 = 24π 이다. (5) 따라서 8π + 24π = 32π 이다. 따라서 정답은 $32\\pi$이다.",
+   "structuralIssues": []
+  }
+ ]
+}

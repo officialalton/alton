@@ -1,0 +1,45 @@
+{
+ "itemId": "percentages.percent_change.BR.P",
+ "generatedAt": "2026-10-07T05:02:00.899Z",
+ "codeHash": "a7a827748580e15360663dc46aac10fc0b26627c2e39bb076b0f7e48fca7d498",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/data.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/data-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/graph-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/_t4-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/percentages.percent_change.BR.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "percentages.percent_change.BR.P.png",
+   "mobileFile": "percentages.percent_change.BR.P.m375.png",
+   "archetypeId": "pct.percent_change.BR.P.compare_scenarios",
+   "seed": 11,
+   "signature": "data:bar",
+   "stimulus": "For each of several theaters, the graph shown gives the number of tickets sold in two periods.",
+   "question": "Each of these theaters had an increase from Saturday to Sunday. What is the greatest percent increase among the theaters?",
+   "options": [
+    "60",
+    "75",
+    "25",
+    "30"
+   ],
+   "correctIndex": 1,
+   "answer": "75",
+   "explanation": "(1) 막대그래프에서 읽는다: Rialto 20→30, Strand 50→80, Majestic 60→90, Lyric 80→100, Orpheum 40→70. (2) 퍼센트 증가 = (나중 - 처음) ÷ 처음 × 100 이다. (3) 행별 퍼센트 증가: Rialto 50%, Strand 60%, Majestic 50%, Lyric 25%, Orpheum 75% 이다. (4) 증가량이 가장 큰 Strand 는 60% 로 가장 크지 않다. (5) 가장 큰 퍼센트 증가는 75% 이다. 따라서 정답은 75이다.",
+   "structuralIssues": []
+  }
+ ]
+}

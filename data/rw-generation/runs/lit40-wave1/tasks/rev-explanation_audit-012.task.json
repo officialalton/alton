@@ -1,0 +1,359 @@
+{
+ "schema": "rw-session-task/v1",
+ "kind": "review",
+ "role": "explanation_audit",
+ "runId": "lit40-wave1",
+ "taskId": "rev-explanation_audit-012",
+ "chunkId": "rev-explanation_audit-012",
+ "suggestedModel": "sonnet",
+ "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-explanation_audit-012.result.json",
+ "outputSchema": {
+  "chunkId": "청크 ID",
+  "model": "sonnet",
+  "items": [
+   {
+    "candidateId": "id",
+    "answer_correct": "표시된 정답이 정말 정답이면 true",
+    "explanation_consistent": "해설이 정답·오답 판단과 일치하고 글자 참조가 맞으면 true",
+    "explanation_factual": "해설에 사실 오류가 없으면 true",
+    "issues": "한 줄 메모"
+   }
+  ]
+ },
+ "items": [
+  {
+   "candidateId": "lit40-medium-02-001",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "tone_or_mood",
+   "requestedDifficulty": "medium",
+   "passage": "\"Put that down before the stew scorches,\" Wenhua said, without turning from the stove. Sequoia folded the envelope twice, then a third time, as if smaller paper might hold fewer words. The galley had been salvaged from a decommissioned steamer and hauled inland decades ago, and on windy nights the whole trailer creaked like it still remembered water. The letter was addressed to her aunt, in a hand Sequoia did not know, and she had read only the first line before her pulse began knocking in her ears. She wondered, briefly, who in the world still wrote to Wenhua at all. Then the ladle struck the pot rim, sharp as a gavel, and Sequoia slid the envelope under the flour tin. Outside, the mesa held the last orange light, and the onions hissed in the pan.",
+   "question": "Which choice best describes the overall tone of the text?",
+   "options": [
+    "Curious, as a girl delights in uncovering a family secret",
+    "Intrigued, with only a faint undercurrent of unease",
+    "Nostalgic, as the galley's long history at sea is recalled",
+    "Uneasy, with a brief flicker of guilty curiosity"
+   ],
+   "recipeBeyondMedium": "두 정서의 비중을 판단해야 하며, 오답은 정반대가 아니라 비중이 틀린 어조다",
+   "correct_letter": "D",
+   "explanation": "봉투를 세 번이나 접어 작게 만들고, 첫 줄만 읽었는데 맥박이 귀에서 울리며, 국자 소리에 놀라 봉투를 밀가루 통 밑에 숨기는 장면이 불안을 주된 정서로 만든다. 고모에게 누가 편지를 쓰는지 잠깐 궁금해하는 문장은 부차적인 호기심이다. 따라서 불안이 중심이고 죄책감 섞인 호기심이 잠깐 비치는 D가 정답이다. A는 덜 두드러진 호기심만 말하고, B는 두 정서의 비중을 뒤집었으며, C는 배의 내력이라는 소재에 기댔지만 그리움의 단서가 약하다."
+  },
+  {
+   "candidateId": "lit40-medium-02-002",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "tone_or_mood",
+   "requestedDifficulty": "medium",
+   "passage": "Some objects refuse to leave with their owners. When I bought the house above the tide pools in Maui, Mika, the gardener, came with it, and so did a cracked snorkel mask hanging on a nail by the salt-water pool. I offered to throw it out. Mika looked at the mask the way one looks at a sleeping dog, then said that Moira, who had lived here thirty years, used it every dawn, even after she could no longer swim far. I laughed, a little embarrassed, and admitted I had already tried it on. Mika laughed too, which surprised us both. Now I glance at that nail whenever the tide fills the pool, and I find myself rinsing the mask, though I never wear it. Mika trims the hibiscus along the wall on Thursdays.",
+   "question": "Which choice best describes the overall tone of the text?",
+   "options": [
+    "Wistful, softened by brief moments of shared humor",
+    "Amused, with only a passing touch of sadness",
+    "Playful, centered on an awkward joke between strangers",
+    "Practical, focused on what to keep or throw away"
+   ],
+   "recipeBeyondMedium": "두 정서의 비중을 판단해야 하며, 오답은 정반대가 아니라 비중이 틀린 어조다",
+   "correct_letter": "A",
+   "explanation": "가드너가 마스크를 잠든 개를 보듯 바라보고 떠난 Moira의 새벽 습관을 전하는 장면, 그리고 화자가 쓰지도 않는 마스크를 계속 헹구는 장면이 그리움을 중심 정서로 만든다. 두 사람이 함께 웃는 장면은 그 정서를 잠시 부드럽게 하는 유머다. 따라서 A가 정답이다. B는 비중을 뒤집었고, C는 덜 두드러진 유머만 말하며, D는 버릴지 말지라는 소재에만 기대 단서가 약하다."
+  },
+  {
+   "candidateId": "lit40-medium-02-003",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "tone_or_mood",
+   "requestedDifficulty": "medium",
+   "passage": "Tbilisi in February smelled of wet stone and glue, at least inside the bookbinder's workshop where our chess club met after closing. Dainius walked in that evening as though eleven years were a short errand. He set his coat on the press and asked whether the board by the window was free. Nobody answered. I was Tatiana, his oldest rival, so the question was really mine, and I found my hands squaring a stack of signatures that were already square. He offered no reason for leaving, and I did not ask; asking would have meant admitting I had counted the years. Still, I pushed the white pieces toward him, the way I always had when he was losing. Behind us the binder pulled thread through a spine, slow and even.",
+   "question": "Which choice best describes the overall tone of the text?",
+   "options": [
+    "Warm, as old rivals happily resume a familiar game",
+    "Guarded, with an undercurrent of reluctant affection",
+    "Affectionate, with only a slight trace of wariness",
+    "Mournful, as the narrator grieves the lost years of play"
+   ],
+   "recipeBeyondMedium": "두 정서의 비중을 판단해야 하며, 오답은 정반대가 아니라 비중이 틀린 어조다",
+   "correct_letter": "B",
+   "explanation": "아무도 대답하지 않는 침묵, 이미 가지런한 종이를 괜히 정리하는 손, 세월을 세어 왔다는 것을 인정하기 싫어 묻지 않는 태도가 경계심을 주된 정서로 만든다. 그러면서도 예전처럼 백 기물을 상대에게 밀어 주는 행동에 마지못한 애정이 깔려 있다. 따라서 B가 정답이다. A는 덜 두드러진 따뜻함만 말하고, C는 비중을 뒤집었으며, D는 지나간 세월이라는 소재에 기댔지만 슬픔의 단서가 약하다."
+  },
+  {
+   "candidateId": "lit40-medium-02-004",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "tone_or_mood",
+   "requestedDifficulty": "medium",
+   "passage": "By four this morning I was already at the bakery, Esperanza, kneading before the ovens were warm, because I could not stay in the house another hour. You asked how the division went. On paper, perfectly: my brother takes the upper floor and the boathouse, I keep the kitchen and our mother's piano, and the lawyer called it a model settlement. I suppose I should be glad that no one shouted. Yet when I carried my half of the plates down the stairs, each stack seemed to weigh more than the last, and I caught myself setting out two cups out of habit. Snow is falling on the harbor now in Tromso, and the first loaves are browning. I will write again when the shop closes. Yours, Jens",
+   "question": "Which choice best describes the overall tone of the text?",
+   "options": [
+    "Relieved, as a difficult division ends without a quarrel",
+    "Content, with only a slight trace of lingering sorrow",
+    "Heavyhearted, with only a faint sense of relief",
+    "Anxious, as the writer worries about the bakery's future"
+   ],
+   "recipeBeyondMedium": "두 정서의 비중을 판단해야 하며, 오답은 정반대가 아니라 비중이 틀린 어조다",
+   "correct_letter": "C",
+   "explanation": "집에 한 시간도 더 머물 수 없어 새벽에 빵집으로 나온 것, 접시 더미가 점점 무겁게 느껴지고 습관처럼 컵 두 개를 놓는 장면이 무거운 상실감을 중심 정서로 만든다. 아무도 소리치지 않아 다행이라는 문장은 옅은 안도감일 뿐이다. 따라서 C가 정답이다. A는 덜 두드러진 안도만 말하고, B는 비중을 뒤집었으며, D는 빵집이라는 소재에 기댔지만 걱정의 단서가 없다."
+  },
+  {
+   "candidateId": "lit40-medium-02-005",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "relationship_between_characters",
+   "requestedDifficulty": "medium",
+   "passage": "I unfolded the scarf on the barge's narrow deck while the Red River slid brown and slow beneath us in Hanoi. It was mustard yellow, the one color I had refused to wear since childhood, and Faris, my younger brother's tutor, watched my face as though it were an exam he had studied for. My brother must have told him yellow was my favorite; my brother thought jokes were a form of love. I tied the scarf at my throat and said it matched the lanterns on the far bank. Faris let out a breath and began explaining, too quickly, how well the boy was doing with fractions. I nodded at every fraction. Along the bank, a woman was hanging fish to dry on a line of bamboo poles.",
+   "question": "Based on the text, which choice best describes the relationship between the narrator, Kainoa, and Faris?",
+   "options": [
+    "Faris is relieved, while Kainoa is indifferent to his nervous efforts.",
+    "Kainoa seeks Faris's approval as she anxiously studies his face.",
+    "They are rivals competing for the younger brother's affection.",
+    "Faris anxiously seeks Kainoa's approval, and she kindly spares him."
+   ],
+   "recipeBeyondMedium": "두 문장의 단서를 연결해야 하고 오답은 한쪽 감정만 반영한다",
+   "correct_letter": "D",
+   "explanation": "Faris가 시험을 치르듯 Kainoa의 얼굴을 살피는 장면과, 그녀가 싫어하는 색의 스카프를 매고 칭찬하자 그가 숨을 내쉬며 급히 동생의 수학 실력을 설명하는 장면을 이어 읽으면 관계가 드러난다. Faris는 그녀의 인정을 원하고, Kainoa는 그의 마음을 상하지 않게 배려한다. 따라서 D가 정답이다. A는 Kainoa의 배려를 무시하고 한쪽 감정만 반영했고, B는 지문의 face·studied를 쓰지만 방향이 반대이며, C는 지문 근거 없는 통념이다."
+  },
+  {
+   "candidateId": "lit40-medium-02-006",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "relationship_between_characters",
+   "requestedDifficulty": "medium",
+   "passage": "Agnes had not expected anyone to find her in the courtyard, where the fountain had been dry since before her family moved to Colombo. She was scraping lichen from its rim with a thumbnail when Rukhsana sat down beside her, close enough that their shoulders touched. Neither of them mentioned the assembly, or the speech Agnes had forgotten halfway through in front of the whole school. Instead Rukhsana opened a paper cone of roasted peanuts and tipped half of them into Agnes's palm, the way she had every afternoon since they were seven. Agnes ate one, then another, and felt her face cool. Overhead, a crow walked the length of the wall and dropped a twig into the empty basin.",
+   "question": "Based on the text, which choice best describes the relationship between Agnes and Rukhsana?",
+   "options": [
+    "Rukhsana stays loyal to Agnes and tactfully avoids the subject of the speech.",
+    "Agnes feels ashamed and wishes Rukhsana would leave her alone in the courtyard.",
+    "Agnes comforts Rukhsana by sharing peanuts as she has since they were seven.",
+    "They are new acquaintances who bond over a shared dislike of the school."
+   ],
+   "recipeBeyondMedium": "두 문장의 단서를 연결해야 하고 오답은 한쪽 감정만 반영한다",
+   "correct_letter": "A",
+   "explanation": "Rukhsana가 어깨가 닿을 만큼 가까이 앉으면서도 조회 시간의 실수를 꺼내지 않는 장면과, 일곱 살 때부터 그래 왔듯 땅콩을 반 나눠 주는 장면을 함께 읽으면 오랜 우정과 배려가 드러난다. Agnes의 얼굴이 식는 것도 그 위로가 통했음을 보여 준다. 따라서 A가 정답이다. B는 Agnes의 부끄러움만 반영했고, C는 지문 어휘를 쓰지만 위로의 방향이 반대이며, D는 일곱 살부터의 우정과 맞지 않는 통념이다."
+  },
+  {
+   "candidateId": "lit40-medium-02-007",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "relationship_between_characters",
+   "requestedDifficulty": "medium",
+   "passage": "When Freja arrived at the community garden in Rotterdam, Ingeborg was already kneeling between the bean rows, as she did every Saturday before rehearsal. Freja held out the letter from the Vienna academy, and Ingeborg glanced at it only long enough to say, You are still flat on the high E. Then she handed Freja a trowel and pointed to the weeds she always left for her. Freja knelt and worked beside her without speaking, though twice she caught the older woman watching her hands instead of the soil. Later, when Freja stood to go, Ingeborg pressed a jar of last year's honey into her coat pocket and turned back to the beans before Freja could thank her. A gull circled the shed roof and settled on the rain barrel.",
+   "question": "Based on the text, which choice best describes the relationship between Ingeborg and Freja?",
+   "options": [
+    "Ingeborg is indifferent to Freja and cares only about her intonation.",
+    "Ingeborg hides a protective fondness for Freja behind her usual strictness.",
+    "Freja watches over Ingeborg, who depends on her help in the garden.",
+    "They are competitors hoping to win the same place at the academy."
+   ],
+   "recipeBeyondMedium": "두 문장의 단서를 연결해야 하고 오답은 한쪽 감정만 반영한다",
+   "correct_letter": "B",
+   "explanation": "합격 편지를 슬쩍 보고 음정 지적만 하는 엄격함과, 흙 대신 Freja의 손을 바라보고 감사 인사를 받기 전에 꿀단지를 주머니에 넣어 주는 행동을 이어 읽으면 무뚝뚝함 뒤에 숨은 애정이 드러난다. 따라서 B가 정답이다. A는 겉으로 드러난 Ingeborg의 태도만 반영했고, C는 watching·garden 같은 지문 어휘를 쓰지만 돌봄의 방향이 반대이며, D는 지문 근거가 없는 통념이다."
+  },
+  {
+   "candidateId": "lit40-medium-02-008",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "relationship_between_characters",
+   "requestedDifficulty": "medium",
+   "passage": "Years later, I still think of the night shifts at the old signal station outside Marrakesh, where Hamza and I watched a beacon that no ship would ever need. That spring I had borrowed money from him for my mother's medicine, and every Friday I held out a folded envelope. Every Friday he pushed it back across the desk and asked, instead, whether I could take his last two hours so he could see his daughter before school. I always said yes, and he always left a thermos of mint tea on my chair. We never wrote down what either of us owed. On clear nights, the lamp swept across the dark olive groves and caught the eyes of foxes.",
+   "question": "Based on the text, which choice best describes the relationship between the narrator, Samira, and Hamza?",
+   "options": [
+    "Hamza feels generous, but Samira finds the loan humiliating and burdensome.",
+    "Samira lends Hamza money and asks him to cover her late shifts.",
+    "They trade favors freely, trusting each other without keeping strict accounts.",
+    "They are strict colleagues who record carefully every debt between them."
+   ],
+   "recipeBeyondMedium": "두 문장의 단서를 연결해야 하고 오답은 한쪽 감정만 반영한다",
+   "correct_letter": "C",
+   "explanation": "Samira가 매주 돈 봉투를 내밀면 Hamza가 돌려주며 대신 근무 두 시간을 부탁하는 장면과, 그가 늘 민트차를 의자에 두고 가는 장면을 이어 읽으면 두 사람이 돈 대신 시간과 호의를 주고받는 관계임을 알 수 있다. 서로 무엇을 빚졌는지 적지 않았다는 점도 이를 뒷받침한다. 따라서 C가 정답이다. A는 한쪽 감정만 추측했고, B는 지문 어휘를 쓰지만 빌린 방향이 반대이며, D는 동료 관계에 대한 통념이다."
+  },
+  {
+   "candidateId": "lit40-medium-02-009",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "relationship_between_characters",
+   "requestedDifficulty": "medium",
+   "passage": "Diesel and wet umbrellas: that is how the bus depot in Taipei smelled the morning I saw Kamal again, twenty years after we last sang together at the harbor theater. She was standing at the ticket window, arguing softly with the clerk, and when I reached the counter he told me my fare to Tainan had already been paid. I turned, but Kamal was studying the timetable with great concentration. I bought two cups of hot soy milk from the kiosk and set one on the bench beside her without a word, the way she used to leave water by my music stand. She lifted it and nodded, still reading departure times. Somewhere behind us an engine coughed, and pigeons rose from the rafters in a gray sheet.",
+   "question": "Based on the text, which choice best describes the relationship between the narrator, Xiulan, and Kamal?",
+   "options": [
+    "Kamal regrets their old partnership and avoids speaking to Xiulan.",
+    "Xiulan pays Kamal's fare to repay an old kindness from the theater.",
+    "They are former rivals whose competition has faded into indifference.",
+    "They share a lasting fondness expressed through quiet, unspoken care."
+   ],
+   "recipeBeyondMedium": "두 문장의 단서를 연결해야 하고 오답은 한쪽 감정만 반영한다",
+   "correct_letter": "D",
+   "explanation": "Kamal이 몰래 Xiulan의 차비를 내고 시간표만 들여다보는 장면과, Xiulan이 말없이 두유를 옆에 놓아 주자 Kamal이 고개만 끄덕이는 장면을 이어 읽으면 말없이 배려를 주고받는 오랜 애정이 드러난다. 예전에 보면대 옆에 물을 두던 습관도 그 관계가 오래되었음을 보여 준다. 따라서 D가 정답이다. A는 Kamal의 시선 회피만 보고 한쪽을 오해했고, B는 지문 어휘를 쓰지만 차비를 낸 방향이 반대이며, C는 한 무대에 섰던 사이에 대한 통념이다."
+  },
+  {
+   "candidateId": "lit40-medium-02-010",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "relationship_between_characters",
+   "requestedDifficulty": "medium",
+   "passage": "Hamburg has been all rain since you left the farmhouse, Ottilie, and the piano has gone a half step flat without you to complain about it. I know you think I changed the chorus on purpose. When I translated your line about the river, I wrote that it carries us away, and you meant that it carries us home; I see now how much that small word cost you onstage. I have kept your chair by the window and your scores in the order you left them. If you come back for the autumn concerts, I will sing your version, word for word, even if the audience never notices. The landlord's geese have found a way into the barn again.",
+   "question": "Based on the text, which choice best describes the relationship between the letter writer, Lena, and Ottilie?",
+   "options": [
+    "Lena values the duo and wants to repair the rift her words caused.",
+    "Ottilie resents Lena and has decided to end the duo for good.",
+    "Ottilie wants Lena to come home and sing the original chorus.",
+    "They are business partners who care mainly about concert income."
+   ],
+   "recipeBeyondMedium": "두 문장의 단서를 연결해야 하고 오답은 한쪽 감정만 반영한다",
+   "correct_letter": "A",
+   "explanation": "Lena가 번역 실수 하나가 Ottilie에게 얼마나 큰 상처였는지 인정하는 문장과, 의자와 악보를 그대로 두고 돌아오면 원래 가사로 부르겠다고 약속하는 문장을 이어 읽으면 그녀가 듀오를 소중히 여기며 관계를 회복하려 함을 알 수 있다. 따라서 A가 정답이다. B는 Ottilie 한쪽의 감정만 단정했고, C는 home·chorus 같은 지문 어휘를 쓰지만 바라는 방향이 반대이며, D는 지문 근거 없는 통념이다."
+  },
+  {
+   "candidateId": "lit40-medium-02-012",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "symbolism",
+   "requestedDifficulty": "medium",
+   "passage": "I took the last night bus out of Marseille with my violin across my knees and, in my coat pocket, the cake of rosin Remy had given me at my first lesson. It was cracked down the middle now, worn into a shallow valley by eight years of his insistence that I bow slower, slower. The audition in Paris was in the morning, and the teacher there had already written that he used only a newer, softer rosin; he would supply it. Twice, as the bus wound along the coast, I took Remy's cake out, meaning to leave it on the seat beside me. Twice I put it back. Somewhere past Aix, I rubbed my thumb along the crack until it was warm, and I did not sleep. The windows showed only my own reflection, and behind it, the dark.",
+   "question": "In the text, the cake of rosin most likely represents which of the following?",
+   "options": [
+    "Noemie's resentment of Remy's strict and old-fashioned methods",
+    "Noemie's fear that her violin is too damaged to play well",
+    "Noemie's lasting tie to Remy as she turns toward a new teacher",
+    "Noemie's eagerness to adopt the habits of the Paris teacher"
+   ],
+   "correct_letter": "C",
+   "explanation": "송진은 Remy가 첫 수업 때 준 것이고 8년간의 그의 가르침으로 닳아 있으며, 파리의 새 선생님은 다른 송진을 쓰겠다고 한다. 화자가 두 번이나 송진을 두고 내리려다 다시 넣고, 갈라진 틈을 엄지로 문지르는 장면은 새 길로 가면서도 옛 스승과의 유대를 놓지 못함을 보여 준다. 따라서 C가 정답이다. A는 엄격함을 원망으로 잘못 읽었고, B는 갈라진 것을 악기 상태로 오해했으며, D는 새 선생님 쪽으로 기우는 마음만 말해 망설임과 맞지 않는다."
+  },
+  {
+   "candidateId": "lit40-medium-02-013",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "symbolism",
+   "requestedDifficulty": "medium",
+   "passage": "\"Stand still and they'll forget you're here,\" Ivy said, working the bellows of the smoker until gray clouds drifted over the hives. Hortense obeyed, as she had obeyed in Ivy's classroom thirty years before. The bees grew sluggish and mild, and Ivy lifted out a heavy frame without a single sting. \"Smoke doesn't hurt them,\" Ivy said. \"It only tells them not to worry.\" Hortense remembered the ginger biscuits Ivy used to slip her after school, always on the afternoons the headmaster called her father in. She had thought them comfort. Now, watching the drowsy bees surrender their honey, she wondered what else had been lifted out of that house while she was busy chewing. Ivy offered her a jar of the honey, and Hortense, after a moment, took it.",
+   "question": "In the text, the smoke most likely represents which of the following?",
+   "options": [
+    "A peaceful harmony that Ivy has built with the natural world",
+    "A danger that Hortense has learned to fear since childhood",
+    "A punishment that teachers once gave to disobedient students",
+    "A gentleness that calms someone while masking another intent"
+   ],
+   "correct_letter": "D",
+   "explanation": "연기는 벌을 해치지 않고 걱정하지 말라고 알려 줄 뿐이지만, 그 사이 Ivy는 벌집에서 꿀을 꺼낸다. Hortense는 교장이 아버지를 부르던 날마다 받던 생강 비스킷을 떠올리며, 위로라고 여겼던 친절이 다른 목적을 가렸을지 모른다고 의심한다. 따라서 진정시키면서 다른 의도를 숨기는 다정함을 뜻하는 D가 정답이다. A는 겉으로 보이는 양봉 장면만 읽었고, B와 C는 지문에 근거가 없는 두려움과 처벌을 끌어왔다."
+  },
+  {
+   "candidateId": "lit40-medium-02-014",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "symbolism",
+   "requestedDifficulty": "medium",
+   "passage": "Three rules my uncle Dewi kept at the loom:\ncount every thread, owe no one, trust no rival.\nWe owed the cooperative in Bologna\nmore than a winter's linen could repay,\nand Nora, at the next loom, wove faster than us both.\nHe called her the competition. I called her nothing.\nBut when our warp snapped on the morning of the market,\nit was Nora who knotted it, thread across thread,\nher weft running sideways through our long, straight lines.\nWarp holds still; weft crosses over.\nNeither one alone is cloth.\nBy evening the bolt was finished, and my uncle,\ncounting, lost his place, and laughed, and counted again.",
+   "question": "In the poem, the warp and weft most likely represent which of the following?",
+   "options": [
+    "How opposing forces can bind together into something stronger",
+    "The uncle's strict rules for keeping his accounts in order",
+    "The debt that grows heavier as the long winter continues",
+    "The rivalry that drives each weaver to work ever faster"
+   ],
+   "correct_letter": "A",
+   "explanation": "삼촌은 Nora를 경쟁자로 여겼지만, 날실이 끊어지자 그녀가 실을 가로질러 묶어 천을 완성하게 돕는다. 가만히 있는 날실과 가로지르는 씨실 중 어느 하나만으로는 천이 되지 않는다는 구절은 대립하던 쪽이 결합해 하나를 이루는 것을 상징한다. 따라서 A가 정답이다. B는 첫 행의 규칙, C는 빚, D는 경쟁이라는 지문 소재만 가져왔을 뿐 실의 이미지가 가리키는 결합과는 맞지 않는다."
+  },
+  {
+   "candidateId": "lit40-medium-02-015",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "symbolism",
+   "requestedDifficulty": "medium",
+   "passage": "Havana's outskirts still had a post office with a brass telegraph key bolted to the counter, though no message had passed through it in decades. I had come there as a new teacher, Roshane, to teach Morse code to anyone who wanted to learn, and the only one who came was Valentina, fourteen, arms folded, certain the key was a museum piece. Its knob was worn bright, a shallow dip pressed into it by thumbs I would never meet. On the first day Valentina refused to touch it. On the fifth, she tapped out her own name, badly, and set her thumb exactly in that hollow without noticing. By the end of the month she was correcting my rhythm. When I left, the postmistress asked whether to remove the key at last. Valentina answered before I could, and the key stayed.",
+   "question": "In the text, the worn hollow on the telegraph key most likely represents which of the following?",
+   "options": [
+    "The uselessness of a machine that no longer sends any messages",
+    "A skill handed down through many people, now reaching Valentina",
+    "Valentina's stubborn resistance to learning from a stranger",
+    "The postmistress's wish to modernize the old post office"
+   ],
+   "correct_letter": "B",
+   "explanation": "손잡이의 움푹한 자리는 화자가 결코 만나지 못할 많은 사람의 엄지가 남긴 흔적이며, Valentina가 무심코 바로 그 자리에 엄지를 얹으면서 그녀도 그 계보에 들어간다. 이후 그녀가 리듬을 고쳐 주고 열쇠를 남기게 하는 장면도 사라져 가는 기술이 이어짐을 보여 준다. 따라서 B가 정답이다. A는 수십 년간 쓰이지 않았다는 사실만, C는 처음의 거부만, D는 우체국장의 질문만 가져와 상징의 의미를 놓쳤다."
+  },
+  {
+   "candidateId": "lit40-medium-02-016",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "symbolism",
+   "requestedDifficulty": "medium",
+   "passage": "After the winter my father chipped Wilhelmina's blue serving bowl, he turned it every morning so the broken edge faced the kitchen wall. Wilhelmina ran the boarding house in Bergen and counted her dishes the way other people count money, yet she never seemed to see the chip. I saw it. I was eleven and stubborn and had been told I was wrong about everything that year, so I said nothing, which felt like winning. Each morning I watched him rotate the bowl before Leopoldina, the cook, filled it with porridge, and each morning, after he left, I checked that the edge still faced the wall. Neither of us ever spoke of it. When we moved out in spring, he lifted the bowl last, turned it once more, and set it down exactly as it had been.",
+   "question": "In the text, the chipped bowl most likely represents which of the following?",
+   "options": [
+    "The father's careless habits that annoyed the landlady",
+    "The family's poverty during their years at the house",
+    "A mistake that father and son silently agree to hide",
+    "The son's wish to expose his father's carelessness"
+   ],
+   "correct_letter": "C",
+   "explanation": "아버지는 매일 아침 깨진 쪽을 벽으로 돌려 놓고, 그것을 본 유일한 사람인 아들은 말하지 않은 채 깨진 쪽이 여전히 벽을 향하는지 확인한다. 두 사람이 끝까지 그 일을 입에 올리지 않고, 떠나는 날 아버지가 그릇을 한 번 더 돌려 두는 장면은 둘이 말없이 공유한 비밀을 보여 준다. 따라서 C가 정답이다. A는 집주인이 흠을 알아채지 못했다는 내용과 맞지 않고, B는 근거가 없으며, D는 아들이 침묵을 지킨 것과 정반대다."
+  },
+  {
+   "candidateId": "lit40-medium-02-017",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "symbolism",
+   "requestedDifficulty": "medium",
+   "passage": "Cornwall's smallest harbor, so the old tale goes, held one boat that belonged to two people: old Ephraim and the granddaughter who had come to learn his tongue. A merchant named Albert offered gold for the boat, enough to fill both their pockets. Ephraim did not answer. Instead he handed the girl a torn net and taught her the old word for each knot as she mended it: one for the knot that holds, one for the knot that forgives, one for the knot that remembers. All winter she mended and spoke, until the words came to her without thinking. In spring Albert returned with more gold. The girl looked at the net spread across the seawall, every knot with a name, and told him the boat was not for sale. Ephraim only nodded and went down to the water.",
+   "question": "In the text, the mended net most likely represents which of the following?",
+   "options": [
+    "The hard labor that the girl secretly wishes to escape",
+    "The wealth that Albert hopes to gain from the harbor",
+    "The damage that the old boat has suffered over time",
+    "The heritage that binds the girl to Ephraim's language"
+   ],
+   "correct_letter": "D",
+   "explanation": "Ephraim은 팔지 말라고 말하는 대신 그물을 건네고, 매듭마다 붙는 옛말을 손녀에게 가르친다. 겨울 내내 그물을 고치며 말이 자연스러워진 손녀가 모든 매듭에 이름이 있는 그물을 보고 배를 팔지 않겠다고 결정하므로, 그물은 할아버지의 언어와 유산으로 이어진 유대를 상징한다. 따라서 D가 정답이다. A는 수선을 고된 노동으로만 보았고, B는 상인의 금화, C는 찢어진 그물이라는 표면 소재만 가져왔다."
+  },
+  {
+   "candidateId": "lit40-medium-02-018",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "medium",
+   "passage": "Bogdan, the caretaker of the school gymnasium in Riga, let the two women in after hours, as he had every Thursday since the mother's knees began to fail. The daughter swept the long floor while her mother sat on the lowest bench and wound the climbing ropes, slowly, the way she had done for thirty years. In nine days the daughter would board a plane for Toronto and not come back. Neither of them mentioned it. Instead the mother asked Bogdan to turn off the radio, and when the daughter dropped the broom, the clatter rang out alone in the high room. Her mother did not look up. She was practicing the silence, Bogdan thought, the way the girls on the team once practiced a vault before the real meet. He locked the doors behind them at ten.",
+   "question": "As used in the text, the phrase “practicing the silence” most nearly suggests that the mother is",
+   "options": [
+    "trying to calm her daughter before a stressful journey.",
+    "showing irritation at the noise of the dropped broom.",
+    "preparing herself for life after her daughter is gone.",
+    "training herself to ignore Bogdan's many interruptions."
+   ],
+   "correct_letter": "C",
+   "explanation": "딸은 아흐레 뒤 토론토로 떠나 돌아오지 않을 예정이고, 어머니는 라디오를 끄게 한 뒤 빗자루 소리가 텅 빈 체육관에 홀로 울려도 고개를 들지 않는다. 체조 선수들이 실제 대회 전에 도마를 연습하듯 한다는 비유는 어머니가 딸이 없는 조용한 삶을 미리 익히고 있음을 뜻한다. 따라서 C가 정답이다. A는 딸을 진정시킨다는 근거가 없고, B는 소리에 대한 짜증으로 오해했으며, D는 Bogdan이 방해한다는 내용이 지문에 없다."
+  },
+  {
+   "candidateId": "lit40-medium-02-019",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "medium",
+   "passage": "Although they had not spoken in a month, Imani and Themba both arrived at the kite-maker's yard in Addis Ababa on the morning of the festival, each pretending to have come for something else. The festival contract, the one that would have filled both their ovens all year, had gone to a hotel kitchen across the city after each baker's sample arrived late. Themba said Imani had kept the only van. Imani said Themba had never once been on time. Overhead, the kite-maker's children ran with paper hawks and bright diamonds, and a gust tore one of the diamonds loose. That contract, Themba said quietly, was a kite with no string. They watched the loose diamond rise, wobbling, over the eucalyptus trees until it was only a speck.",
+   "question": "As used in the text, the phrase “a kite with no string” most nearly suggests that the contract was",
+   "options": [
+    "a fragile agreement that the bakers could still easily repair.",
+    "a festival honor that only the kite-maker had power to grant.",
+    "a minor opportunity hardly worth the bakers' long argument.",
+    "a chance that had drifted beyond either baker's control."
+   ],
+   "correct_letter": "D",
+   "explanation": "계약은 두 제빵사의 견본이 모두 늦게 도착해 다른 호텔 주방으로 넘어갔고, 둘은 서로에게 책임을 돌린다. 줄이 끊긴 연은 붙잡을 수 없이 멀어지는 것이므로, 이 비유는 계약이 이미 두 사람의 손을 떠났음을 뜻한다. 따라서 D가 정답이다. A는 쉽게 되돌릴 수 있다고 해 비유와 반대이고, B는 연 장인을 끌어들인 오독이며, C는 일 년 내내 오븐을 채웠을 계약이라는 서술과 맞지 않는다."
+  },
+  {
+   "candidateId": "lit40-medium-02-020",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "medium",
+   "passage": "Once, in a Galician spring, the river climbed\ninto the cellar of the old clinic, and Rafael,\nthe night nurse, waded down with a lantern\nto carry up the jars of plum preserve\nhe had meant as a gift for Esteban in bed seven.\nEsteban, who could not lift a spoon by then,\nlooked at the dripping jar a long time\nand pushed it back across the blanket.\nKeep it, he said. You saved it. It is yours.\nRafael set it on the sill and understood:\nin that room where the water kept rising,\nthe old man's pride still kept its head above water.\nThe rain went on all night against the shutters.",
+   "question": "As used in the text, the phrase “kept its head above water” most nearly suggests that Esteban's pride",
+   "options": [
+    "survived despite his growing weakness and dependence.",
+    "made him fear that the flood would reach his room.",
+    "turned into anger at Rafael for entering the cellar.",
+    "gave him hope of recovering enough to leave the clinic."
+   ],
+   "correct_letter": "A",
+   "explanation": "Esteban은 숟가락도 들 수 없을 만큼 쇠약했지만, Rafael이 물에 잠긴 지하실에서 건져 온 선물을 고맙다고 받지 않고 네가 구했으니 네 것이라며 돌려준다. 물이 차오르는 방이라는 배경과 겹친 이 비유는 몸이 무너져 가는 상황에서도 그의 자존심이 꺾이지 않고 버티고 있음을 뜻한다. 따라서 A가 정답이다. B는 홍수를 문자 그대로 읽었고, C는 분노의 근거가 없으며, D는 회복에 대한 희망을 지문이 보여 주지 않는다."
+  }
+ ],
+ "instructions": "당신은 문항 감사관이다. 표시된 정답과 해설을 받아, 정답이 맞는지·해설이 일관되고 사실에 맞는지 점검한다(고치지 않고 판정만).\n청크 rev-explanation_audit-012 — 19문항.\n출력: Write 도구로 정확히 이 경로에 JSON 한 파일을 쓴다 → /Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-explanation_audit-012.result.json\n출력 JSON 스키마(예시 구조): {\"chunkId\":\"청크 ID\",\"model\":\"sonnet\",\"items\":[{\"candidateId\":\"id\",\"answer_correct\":\"표시된 정답이 정말 정답이면 true\",\"explanation_consistent\":\"해설이 정답·오답 판단과 일치하고 글자 참조가 맞으면 true\",\"explanation_factual\":\"해설에 사실 오류가 없으면 true\",\"issues\":\"한 줄 메모\"}]}\n허용 값: picked_letter ∈ {A,B,C,D}, 불리언 필드는 true/false, est_difficulty ∈ {easy,medium,hard}. candidateId 를 바꾸지 않고 모든 항목에 답한다.\n금지: 결과 파일 외의 파일 생성·수정, 다른 명령 실행, 문항 수정·재작성. 끝나면 'done <항목 수>' 한 줄만 답한다.\n\n## 문항\n### lit40-medium-02-001 — skill inferences · 유형 tone_or_mood\n[지문]\n\"Put that down before the stew scorches,\" Wenhua said, without turning from the stove. Sequoia folded the envelope twice, then a third time, as if smaller paper might hold fewer words. The galley had been salvaged from a decommissioned steamer and hauled inland decades ago, and on windy nights the whole trailer creaked like it still remembered water. The letter was addressed to her aunt, in a hand Sequoia did not know, and she had read only the first line before her pulse began knocking in her ears. She wondered, briefly, who in the world still wrote to Wenhua at all. Then the ladle struck the pot rim, sharp as a gavel, and Sequoia slid the envelope under the flour tin. Outside, the mesa held the last orange light, and the onions hissed in the pan.\n\n[질문] Which choice best describes the overall tone of the text?\nA) Curious, as a girl delights in uncovering a family secret\nB) Intrigued, with only a faint undercurrent of unease\nC) Nostalgic, as the galley's long history at sea is recalled\nD) Uneasy, with a brief flicker of guilty curiosity\n\n[표시된 정답] D\n[해설]\n봉투를 세 번이나 접어 작게 만들고, 첫 줄만 읽었는데 맥박이 귀에서 울리며, 국자 소리에 놀라 봉투를 밀가루 통 밑에 숨기는 장면이 불안을 주된 정서로 만든다. 고모에게 누가 편지를 쓰는지 잠깐 궁금해하는 문장은 부차적인 호기심이다. 따라서 불안이 중심이고 죄책감 섞인 호기심이 잠깐 비치는 D가 정답이다. A는 덜 두드러진 호기심만 말하고, B는 두 정서의 비중을 뒤집었으며, C는 배의 내력이라는 소재에 기댔지만 그리움의 단서가 약하다.\n### lit40-medium-02-002 — skill inferences · 유형 tone_or_mood\n[지문]\nSome objects refuse to leave with their owners. When I bought the house above the tide pools in Maui, Mika, the gardener, came with it, and so did a cracked snorkel mask hanging on a nail by the salt-water pool. I offered to throw it out. Mika looked at the mask the way one looks at a sleeping dog, then said that Moira, who had lived here thirty years, used it every dawn, even after she could no longer swim far. I laughed, a little embarrassed, and admitted I had already tried it on. Mika laughed too, which surprised us both. Now I glance at that nail whenever the tide fills the pool, and I find myself rinsing the mask, though I never wear it. Mika trims the hibiscus along the wall on Thursdays.\n\n[질문] Which choice best describes the overall tone of the text?\nA) Wistful, softened by brief moments of shared humor\nB) Amused, with only a passing touch of sadness\nC) Playful, centered on an awkward joke between strangers\nD) Practical, focused on what to keep or throw away\n\n[표시된 정답] A\n[해설]\n가드너가 마스크를 잠든 개를 보듯 바라보고 떠난 Moira의 새벽 습관을 전하는 장면, 그리고 화자가 쓰지도 않는 마스크를 계속 헹구는 장면이 그리움을 중심 정서로 만든다. 두 사람이 함께 웃는 장면은 그 정서를 잠시 부드럽게 하는 유머다. 따라서 A가 정답이다. B는 비중을 뒤집었고, C는 덜 두드러진 유머만 말하며, D는 버릴지 말지라는 소재에만 기대 단서가 약하다.\n### lit40-medium-02-003 — skill inferences · 유형 tone_or_mood\n[지문]\nTbilisi in February smelled of wet stone and glue, at least inside the bookbinder's workshop where our chess club met after closing. Dainius walked in that evening as though eleven years were a short errand. He set his coat on the press and asked whether the board by the window was free. Nobody answered. I was Tatiana, his oldest rival, so the question was really mine, and I found my hands squaring a stack of signatures that were already square. He offered no reason for leaving, and I did not ask; asking would have meant admitting I had counted the years. Still, I pushed the white pieces toward him, the way I always had when he was losing. Behind us the binder pulled thread through a spine, slow and even.\n\n[질문] Which choice best describes the overall tone of the text?\nA) Warm, as old rivals happily resume a familiar game\nB) Guarded, with an undercurrent of reluctant affection\nC) Affectionate, with only a slight trace of wariness\nD) Mournful, as the narrator grieves the lost years of play\n\n[표시된 정답] B\n[해설]\n아무도 대답하지 않는 침묵, 이미 가지런한 종이를 괜히 정리하는 손, 세월을 세어 왔다는 것을 인정하기 싫어 묻지 않는 태도가 경계심을 주된 정서로 만든다. 그러면서도 예전처럼 백 기물을 상대에게 밀어 주는 행동에 마지못한 애정이 깔려 있다. 따라서 B가 정답이다. A는 덜 두드러진 따뜻함만 말하고, C는 비중을 뒤집었으며, D는 지나간 세월이라는 소재에 기댔지만 슬픔의 단서가 약하다.\n### lit40-medium-02-004 — skill inferences · 유형 tone_or_mood\n[지문]\nBy four this morning I was already at the bakery, Esperanza, kneading before the ovens were warm, because I could not stay in the house another hour. You asked how the division went. On paper, perfectly: my brother takes the upper floor and the boathouse, I keep the kitchen and our mother's piano, and the lawyer called it a model settlement. I suppose I should be glad that no one shouted. Yet when I carried my half of the plates down the stairs, each stack seemed to weigh more than the last, and I caught myself setting out two cups out of habit. Snow is falling on the harbor now in Tromso, and the first loaves are browning. I will write again when the shop closes. Yours, Jens\n\n[질문] Which choice best describes the overall tone of the text?\nA) Relieved, as a difficult division ends without a quarrel\nB) Content, with only a slight trace of lingering sorrow\nC) Heavyhearted, with only a faint sense of relief\nD) Anxious, as the writer worries about the bakery's future\n\n[표시된 정답] C\n[해설]\n집에 한 시간도 더 머물 수 없어 새벽에 빵집으로 나온 것, 접시 더미가 점점 무겁게 느껴지고 습관처럼 컵 두 개를 놓는 장면이 무거운 상실감을 중심 정서로 만든다. 아무도 소리치지 않아 다행이라는 문장은 옅은 안도감일 뿐이다. 따라서 C가 정답이다. A는 덜 두드러진 안도만 말하고, B는 비중을 뒤집었으며, D는 빵집이라는 소재에 기댔지만 걱정의 단서가 없다.\n### lit40-medium-02-005 — skill inferences · 유형 relationship_between_characters\n[지문]\nI unfolded the scarf on the barge's narrow deck while the Red River slid brown and slow beneath us in Hanoi. It was mustard yellow, the one color I had refused to wear since childhood, and Faris, my younger brother's tutor, watched my face as though it were an exam he had studied for. My brother must have told him yellow was my favorite; my brother thought jokes were a form of love. I tied the scarf at my throat and said it matched the lanterns on the far bank. Faris let out a breath and began explaining, too quickly, how well the boy was doing with fractions. I nodded at every fraction. Along the bank, a woman was hanging fish to dry on a line of bamboo poles.\n\n[질문] Based on the text, which choice best describes the relationship between the narrator, Kainoa, and Faris?\nA) Faris is relieved, while Kainoa is indifferent to his nervous efforts.\nB) Kainoa seeks Faris's approval as she anxiously studies his face.\nC) They are rivals competing for the younger brother's affection.\nD) Faris anxiously seeks Kainoa's approval, and she kindly spares him.\n\n[표시된 정답] D\n[해설]\nFaris가 시험을 치르듯 Kainoa의 얼굴을 살피는 장면과, 그녀가 싫어하는 색의 스카프를 매고 칭찬하자 그가 숨을 내쉬며 급히 동생의 수학 실력을 설명하는 장면을 이어 읽으면 관계가 드러난다. Faris는 그녀의 인정을 원하고, Kainoa는 그의 마음을 상하지 않게 배려한다. 따라서 D가 정답이다. A는 Kainoa의 배려를 무시하고 한쪽 감정만 반영했고, B는 지문의 face·studied를 쓰지만 방향이 반대이며, C는 지문 근거 없는 통념이다.\n### lit40-medium-02-006 — skill inferences · 유형 relationship_between_characters\n[지문]\nAgnes had not expected anyone to find her in the courtyard, where the fountain had been dry since before her family moved to Colombo. She was scraping lichen from its rim with a thumbnail when Rukhsana sat down beside her, close enough that their shoulders touched. Neither of them mentioned the assembly, or the speech Agnes had forgotten halfway through in front of the whole school. Instead Rukhsana opened a paper cone of roasted peanuts and tipped half of them into Agnes's palm, the way she had every afternoon since they were seven. Agnes ate one, then another, and felt her face cool. Overhead, a crow walked the length of the wall and dropped a twig into the empty basin.\n\n[질문] Based on the text, which choice best describes the relationship between Agnes and Rukhsana?\nA) Rukhsana stays loyal to Agnes and tactfully avoids the subject of the speech.\nB) Agnes feels ashamed and wishes Rukhsana would leave her alone in the courtyard.\nC) Agnes comforts Rukhsana by sharing peanuts as she has since they were seven.\nD) They are new acquaintances who bond over a shared dislike of the school.\n\n[표시된 정답] A\n[해설]\nRukhsana가 어깨가 닿을 만큼 가까이 앉으면서도 조회 시간의 실수를 꺼내지 않는 장면과, 일곱 살 때부터 그래 왔듯 땅콩을 반 나눠 주는 장면을 함께 읽으면 오랜 우정과 배려가 드러난다. Agnes의 얼굴이 식는 것도 그 위로가 통했음을 보여 준다. 따라서 A가 정답이다. B는 Agnes의 부끄러움만 반영했고, C는 지문 어휘를 쓰지만 위로의 방향이 반대이며, D는 일곱 살부터의 우정과 맞지 않는 통념이다.\n### lit40-medium-02-007 — skill inferences · 유형 relationship_between_characters\n[지문]\nWhen Freja arrived at the community garden in Rotterdam, Ingeborg was already kneeling between the bean rows, as she did every Saturday before rehearsal. Freja held out the letter from the Vienna academy, and Ingeborg glanced at it only long enough to say, You are still flat on the high E. Then she handed Freja a trowel and pointed to the weeds she always left for her. Freja knelt and worked beside her without speaking, though twice she caught the older woman watching her hands instead of the soil. Later, when Freja stood to go, Ingeborg pressed a jar of last year's honey into her coat pocket and turned back to the beans before Freja could thank her. A gull circled the shed roof and settled on the rain barrel.\n\n[질문] Based on the text, which choice best describes the relationship between Ingeborg and Freja?\nA) Ingeborg is indifferent to Freja and cares only about her intonation.\nB) Ingeborg hides a protective fondness for Freja behind her usual strictness.\nC) Freja watches over Ingeborg, who depends on her help in the garden.\nD) They are competitors hoping to win the same place at the academy.\n\n[표시된 정답] B\n[해설]\n합격 편지를 슬쩍 보고 음정 지적만 하는 엄격함과, 흙 대신 Freja의 손을 바라보고 감사 인사를 받기 전에 꿀단지를 주머니에 넣어 주는 행동을 이어 읽으면 무뚝뚝함 뒤에 숨은 애정이 드러난다. 따라서 B가 정답이다. A는 겉으로 드러난 Ingeborg의 태도만 반영했고, C는 watching·garden 같은 지문 어휘를 쓰지만 돌봄의 방향이 반대이며, D는 지문 근거가 없는 통념이다.\n### lit40-medium-02-008 — skill inferences · 유형 relationship_between_characters\n[지문]\nYears later, I still think of the night shifts at the old signal station outside Marrakesh, where Hamza and I watched a beacon that no ship would ever need. That spring I had borrowed money from him for my mother's medicine, and every Friday I held out a folded envelope. Every Friday he pushed it back across the desk and asked, instead, whether I could take his last two hours so he could see his daughter before school. I always said yes, and he always left a thermos of mint tea on my chair. We never wrote down what either of us owed. On clear nights, the lamp swept across the dark olive groves and caught the eyes of foxes.\n\n[질문] Based on the text, which choice best describes the relationship between the narrator, Samira, and Hamza?\nA) Hamza feels generous, but Samira finds the loan humiliating and burdensome.\nB) Samira lends Hamza money and asks him to cover her late shifts.\nC) They trade favors freely, trusting each other without keeping strict accounts.\nD) They are strict colleagues who record carefully every debt between them.\n\n[표시된 정답] C\n[해설]\nSamira가 매주 돈 봉투를 내밀면 Hamza가 돌려주며 대신 근무 두 시간을 부탁하는 장면과, 그가 늘 민트차를 의자에 두고 가는 장면을 이어 읽으면 두 사람이 돈 대신 시간과 호의를 주고받는 관계임을 알 수 있다. 서로 무엇을 빚졌는지 적지 않았다는 점도 이를 뒷받침한다. 따라서 C가 정답이다. A는 한쪽 감정만 추측했고, B는 지문 어휘를 쓰지만 빌린 방향이 반대이며, D는 동료 관계에 대한 통념이다.\n### lit40-medium-02-009 — skill inferences · 유형 relationship_between_characters\n[지문]\nDiesel and wet umbrellas: that is how the bus depot in Taipei smelled the morning I saw Kamal again, twenty years after we last sang together at the harbor theater. She was standing at the ticket window, arguing softly with the clerk, and when I reached the counter he told me my fare to Tainan had already been paid. I turned, but Kamal was studying the timetable with great concentration. I bought two cups of hot soy milk from the kiosk and set one on the bench beside her without a word, the way she used to leave water by my music stand. She lifted it and nodded, still reading departure times. Somewhere behind us an engine coughed, and pigeons rose from the rafters in a gray sheet.\n\n[질문] Based on the text, which choice best describes the relationship between the narrator, Xiulan, and Kamal?\nA) Kamal regrets their old partnership and avoids speaking to Xiulan.\nB) Xiulan pays Kamal's fare to repay an old kindness from the theater.\nC) They are former rivals whose competition has faded into indifference.\nD) They share a lasting fondness expressed through quiet, unspoken care.\n\n[표시된 정답] D\n[해설]\nKamal이 몰래 Xiulan의 차비를 내고 시간표만 들여다보는 장면과, Xiulan이 말없이 두유를 옆에 놓아 주자 Kamal이 고개만 끄덕이는 장면을 이어 읽으면 말없이 배려를 주고받는 오랜 애정이 드러난다. 예전에 보면대 옆에 물을 두던 습관도 그 관계가 오래되었음을 보여 준다. 따라서 D가 정답이다. A는 Kamal의 시선 회피만 보고 한쪽을 오해했고, B는 지문 어휘를 쓰지만 차비를 낸 방향이 반대이며, C는 한 무대에 섰던 사이에 대한 통념이다.\n### lit40-medium-02-010 — skill inferences · 유형 relationship_between_characters\n[지문]\nHamburg has been all rain since you left the farmhouse, Ottilie, and the piano has gone a half step flat without you to complain about it. I know you think I changed the chorus on purpose. When I translated your line about the river, I wrote that it carries us away, and you meant that it carries us home; I see now how much that small word cost you onstage. I have kept your chair by the window and your scores in the order you left them. If you come back for the autumn concerts, I will sing your version, word for word, even if the audience never notices. The landlord's geese have found a way into the barn again.\n\n[질문] Based on the text, which choice best describes the relationship between the letter writer, Lena, and Ottilie?\nA) Lena values the duo and wants to repair the rift her words caused.\nB) Ottilie resents Lena and has decided to end the duo for good.\nC) Ottilie wants Lena to come home and sing the original chorus.\nD) They are business partners who care mainly about concert income.\n\n[표시된 정답] A\n[해설]\nLena가 번역 실수 하나가 Ottilie에게 얼마나 큰 상처였는지 인정하는 문장과, 의자와 악보를 그대로 두고 돌아오면 원래 가사로 부르겠다고 약속하는 문장을 이어 읽으면 그녀가 듀오를 소중히 여기며 관계를 회복하려 함을 알 수 있다. 따라서 A가 정답이다. B는 Ottilie 한쪽의 감정만 단정했고, C는 home·chorus 같은 지문 어휘를 쓰지만 바라는 방향이 반대이며, D는 지문 근거 없는 통념이다.\n### lit40-medium-02-012 — skill inferences · 유형 symbolism\n[지문]\nI took the last night bus out of Marseille with my violin across my knees and, in my coat pocket, the cake of rosin Remy had given me at my first lesson. It was cracked down the middle now, worn into a shallow valley by eight years of his insistence that I bow slower, slower. The audition in Paris was in the morning, and the teacher there had already written that he used only a newer, softer rosin; he would supply it. Twice, as the bus wound along the coast, I took Remy's cake out, meaning to leave it on the seat beside me. Twice I put it back. Somewhere past Aix, I rubbed my thumb along the crack until it was warm, and I did not sleep. The windows showed only my own reflection, and behind it, the dark.\n\n[질문] In the text, the cake of rosin most likely represents which of the following?\nA) Noemie's resentment of Remy's strict and old-fashioned methods\nB) Noemie's fear that her violin is too damaged to play well\nC) Noemie's lasting tie to Remy as she turns toward a new teacher\nD) Noemie's eagerness to adopt the habits of the Paris teacher\n\n[표시된 정답] C\n[해설]\n송진은 Remy가 첫 수업 때 준 것이고 8년간의 그의 가르침으로 닳아 있으며, 파리의 새 선생님은 다른 송진을 쓰겠다고 한다. 화자가 두 번이나 송진을 두고 내리려다 다시 넣고, 갈라진 틈을 엄지로 문지르는 장면은 새 길로 가면서도 옛 스승과의 유대를 놓지 못함을 보여 준다. 따라서 C가 정답이다. A는 엄격함을 원망으로 잘못 읽었고, B는 갈라진 것을 악기 상태로 오해했으며, D는 새 선생님 쪽으로 기우는 마음만 말해 망설임과 맞지 않는다.\n### lit40-medium-02-013 — skill inferences · 유형 symbolism\n[지문]\n\"Stand still and they'll forget you're here,\" Ivy said, working the bellows of the smoker until gray clouds drifted over the hives. Hortense obeyed, as she had obeyed in Ivy's classroom thirty years before. The bees grew sluggish and mild, and Ivy lifted out a heavy frame without a single sting. \"Smoke doesn't hurt them,\" Ivy said. \"It only tells them not to worry.\" Hortense remembered the ginger biscuits Ivy used to slip her after school, always on the afternoons the headmaster called her father in. She had thought them comfort. Now, watching the drowsy bees surrender their honey, she wondered what else had been lifted out of that house while she was busy chewing. Ivy offered her a jar of the honey, and Hortense, after a moment, took it.\n\n[질문] In the text, the smoke most likely represents which of the following?\nA) A peaceful harmony that Ivy has built with the natural world\nB) A danger that Hortense has learned to fear since childhood\nC) A punishment that teachers once gave to disobedient students\nD) A gentleness that calms someone while masking another intent\n\n[표시된 정답] D\n[해설]\n연기는 벌을 해치지 않고 걱정하지 말라고 알려 줄 뿐이지만, 그 사이 Ivy는 벌집에서 꿀을 꺼낸다. Hortense는 교장이 아버지를 부르던 날마다 받던 생강 비스킷을 떠올리며, 위로라고 여겼던 친절이 다른 목적을 가렸을지 모른다고 의심한다. 따라서 진정시키면서 다른 의도를 숨기는 다정함을 뜻하는 D가 정답이다. A는 겉으로 보이는 양봉 장면만 읽었고, B와 C는 지문에 근거가 없는 두려움과 처벌을 끌어왔다.\n### lit40-medium-02-014 — skill inferences · 유형 symbolism\n[지문]\nThree rules my uncle Dewi kept at the loom:\ncount every thread, owe no one, trust no rival.\nWe owed the cooperative in Bologna\nmore than a winter's linen could repay,\nand Nora, at the next loom, wove faster than us both.\nHe called her the competition. I called her nothing.\nBut when our warp snapped on the morning of the market,\nit was Nora who knotted it, thread across thread,\nher weft running sideways through our long, straight lines.\nWarp holds still; weft crosses over.\nNeither one alone is cloth.\nBy evening the bolt was finished, and my uncle,\ncounting, lost his place, and laughed, and counted again.\n\n[질문] In the poem, the warp and weft most likely represent which of the following?\nA) How opposing forces can bind together into something stronger\nB) The uncle's strict rules for keeping his accounts in order\nC) The debt that grows heavier as the long winter continues\nD) The rivalry that drives each weaver to work ever faster\n\n[표시된 정답] A\n[해설]\n삼촌은 Nora를 경쟁자로 여겼지만, 날실이 끊어지자 그녀가 실을 가로질러 묶어 천을 완성하게 돕는다. 가만히 있는 날실과 가로지르는 씨실 중 어느 하나만으로는 천이 되지 않는다는 구절은 대립하던 쪽이 결합해 하나를 이루는 것을 상징한다. 따라서 A가 정답이다. B는 첫 행의 규칙, C는 빚, D는 경쟁이라는 지문 소재만 가져왔을 뿐 실의 이미지가 가리키는 결합과는 맞지 않는다.\n### lit40-medium-02-015 — skill inferences · 유형 symbolism\n[지문]\nHavana's outskirts still had a post office with a brass telegraph key bolted to the counter, though no message had passed through it in decades. I had come there as a new teacher, Roshane, to teach Morse code to anyone who wanted to learn, and the only one who came was Valentina, fourteen, arms folded, certain the key was a museum piece. Its knob was worn bright, a shallow dip pressed into it by thumbs I would never meet. On the first day Valentina refused to touch it. On the fifth, she tapped out her own name, badly, and set her thumb exactly in that hollow without noticing. By the end of the month she was correcting my rhythm. When I left, the postmistress asked whether to remove the key at last. Valentina answered before I could, and the key stayed.\n\n[질문] In the text, the worn hollow on the telegraph key most likely represents which of the following?\nA) The uselessness of a machine that no longer sends any messages\nB) A skill handed down through many people, now reaching Valentina\nC) Valentina's stubborn resistance to learning from a stranger\nD) The postmistress's wish to modernize the old post office\n\n[표시된 정답] B\n[해설]\n손잡이의 움푹한 자리는 화자가 결코 만나지 못할 많은 사람의 엄지가 남긴 흔적이며, Valentina가 무심코 바로 그 자리에 엄지를 얹으면서 그녀도 그 계보에 들어간다. 이후 그녀가 리듬을 고쳐 주고 열쇠를 남기게 하는 장면도 사라져 가는 기술이 이어짐을 보여 준다. 따라서 B가 정답이다. A는 수십 년간 쓰이지 않았다는 사실만, C는 처음의 거부만, D는 우체국장의 질문만 가져와 상징의 의미를 놓쳤다.\n### lit40-medium-02-016 — skill inferences · 유형 symbolism\n[지문]\nAfter the winter my father chipped Wilhelmina's blue serving bowl, he turned it every morning so the broken edge faced the kitchen wall. Wilhelmina ran the boarding house in Bergen and counted her dishes the way other people count money, yet she never seemed to see the chip. I saw it. I was eleven and stubborn and had been told I was wrong about everything that year, so I said nothing, which felt like winning. Each morning I watched him rotate the bowl before Leopoldina, the cook, filled it with porridge, and each morning, after he left, I checked that the edge still faced the wall. Neither of us ever spoke of it. When we moved out in spring, he lifted the bowl last, turned it once more, and set it down exactly as it had been.\n\n[질문] In the text, the chipped bowl most likely represents which of the following?\nA) The father's careless habits that annoyed the landlady\nB) The family's poverty during their years at the house\nC) A mistake that father and son silently agree to hide\nD) The son's wish to expose his father's carelessness\n\n[표시된 정답] C\n[해설]\n아버지는 매일 아침 깨진 쪽을 벽으로 돌려 놓고, 그것을 본 유일한 사람인 아들은 말하지 않은 채 깨진 쪽이 여전히 벽을 향하는지 확인한다. 두 사람이 끝까지 그 일을 입에 올리지 않고, 떠나는 날 아버지가 그릇을 한 번 더 돌려 두는 장면은 둘이 말없이 공유한 비밀을 보여 준다. 따라서 C가 정답이다. A는 집주인이 흠을 알아채지 못했다는 내용과 맞지 않고, B는 근거가 없으며, D는 아들이 침묵을 지킨 것과 정반대다.\n### lit40-medium-02-017 — skill inferences · 유형 symbolism\n[지문]\nCornwall's smallest harbor, so the old tale goes, held one boat that belonged to two people: old Ephraim and the granddaughter who had come to learn his tongue. A merchant named Albert offered gold for the boat, enough to fill both their pockets. Ephraim did not answer. Instead he handed the girl a torn net and taught her the old word for each knot as she mended it: one for the knot that holds, one for the knot that forgives, one for the knot that remembers. All winter she mended and spoke, until the words came to her without thinking. In spring Albert returned with more gold. The girl looked at the net spread across the seawall, every knot with a name, and told him the boat was not for sale. Ephraim only nodded and went down to the water.\n\n[질문] In the text, the mended net most likely represents which of the following?\nA) The hard labor that the girl secretly wishes to escape\nB) The wealth that Albert hopes to gain from the harbor\nC) The damage that the old boat has suffered over time\nD) The heritage that binds the girl to Ephraim's language\n\n[표시된 정답] D\n[해설]\nEphraim은 팔지 말라고 말하는 대신 그물을 건네고, 매듭마다 붙는 옛말을 손녀에게 가르친다. 겨울 내내 그물을 고치며 말이 자연스러워진 손녀가 모든 매듭에 이름이 있는 그물을 보고 배를 팔지 않겠다고 결정하므로, 그물은 할아버지의 언어와 유산으로 이어진 유대를 상징한다. 따라서 D가 정답이다. A는 수선을 고된 노동으로만 보았고, B는 상인의 금화, C는 찢어진 그물이라는 표면 소재만 가져왔다.\n### lit40-medium-02-018 — skill words_in_context · 유형 figurative_language\n[지문]\nBogdan, the caretaker of the school gymnasium in Riga, let the two women in after hours, as he had every Thursday since the mother's knees began to fail. The daughter swept the long floor while her mother sat on the lowest bench and wound the climbing ropes, slowly, the way she had done for thirty years. In nine days the daughter would board a plane for Toronto and not come back. Neither of them mentioned it. Instead the mother asked Bogdan to turn off the radio, and when the daughter dropped the broom, the clatter rang out alone in the high room. Her mother did not look up. She was practicing the silence, Bogdan thought, the way the girls on the team once practiced a vault before the real meet. He locked the doors behind them at ten.\n\n[질문] As used in the text, the phrase “practicing the silence” most nearly suggests that the mother is\nA) trying to calm her daughter before a stressful journey.\nB) showing irritation at the noise of the dropped broom.\nC) preparing herself for life after her daughter is gone.\nD) training herself to ignore Bogdan's many interruptions.\n\n[표시된 정답] C\n[해설]\n딸은 아흐레 뒤 토론토로 떠나 돌아오지 않을 예정이고, 어머니는 라디오를 끄게 한 뒤 빗자루 소리가 텅 빈 체육관에 홀로 울려도 고개를 들지 않는다. 체조 선수들이 실제 대회 전에 도마를 연습하듯 한다는 비유는 어머니가 딸이 없는 조용한 삶을 미리 익히고 있음을 뜻한다. 따라서 C가 정답이다. A는 딸을 진정시킨다는 근거가 없고, B는 소리에 대한 짜증으로 오해했으며, D는 Bogdan이 방해한다는 내용이 지문에 없다.\n### lit40-medium-02-019 — skill words_in_context · 유형 figurative_language\n[지문]\nAlthough they had not spoken in a month, Imani and Themba both arrived at the kite-maker's yard in Addis Ababa on the morning of the festival, each pretending to have come for something else. The festival contract, the one that would have filled both their ovens all year, had gone to a hotel kitchen across the city after each baker's sample arrived late. Themba said Imani had kept the only van. Imani said Themba had never once been on time. Overhead, the kite-maker's children ran with paper hawks and bright diamonds, and a gust tore one of the diamonds loose. That contract, Themba said quietly, was a kite with no string. They watched the loose diamond rise, wobbling, over the eucalyptus trees until it was only a speck.\n\n[질문] As used in the text, the phrase “a kite with no string” most nearly suggests that the contract was\nA) a fragile agreement that the bakers could still easily repair.\nB) a festival honor that only the kite-maker had power to grant.\nC) a minor opportunity hardly worth the bakers' long argument.\nD) a chance that had drifted beyond either baker's control.\n\n[표시된 정답] D\n[해설]\n계약은 두 제빵사의 견본이 모두 늦게 도착해 다른 호텔 주방으로 넘어갔고, 둘은 서로에게 책임을 돌린다. 줄이 끊긴 연은 붙잡을 수 없이 멀어지는 것이므로, 이 비유는 계약이 이미 두 사람의 손을 떠났음을 뜻한다. 따라서 D가 정답이다. A는 쉽게 되돌릴 수 있다고 해 비유와 반대이고, B는 연 장인을 끌어들인 오독이며, C는 일 년 내내 오븐을 채웠을 계약이라는 서술과 맞지 않는다.\n### lit40-medium-02-020 — skill words_in_context · 유형 figurative_language\n[지문]\nOnce, in a Galician spring, the river climbed\ninto the cellar of the old clinic, and Rafael,\nthe night nurse, waded down with a lantern\nto carry up the jars of plum preserve\nhe had meant as a gift for Esteban in bed seven.\nEsteban, who could not lift a spoon by then,\nlooked at the dripping jar a long time\nand pushed it back across the blanket.\nKeep it, he said. You saved it. It is yours.\nRafael set it on the sill and understood:\nin that room where the water kept rising,\nthe old man's pride still kept its head above water.\nThe rain went on all night against the shutters.\n\n[질문] As used in the text, the phrase “kept its head above water” most nearly suggests that Esteban's pride\nA) survived despite his growing weakness and dependence.\nB) made him fear that the flood would reach his room.\nC) turned into anger at Rafael for entering the cellar.\nD) gave him hope of recovering enough to leave the clinic.\n\n[표시된 정답] A\n[해설]\nEsteban은 숟가락도 들 수 없을 만큼 쇠약했지만, Rafael이 물에 잠긴 지하실에서 건져 온 선물을 고맙다고 받지 않고 네가 구했으니 네 것이라며 돌려준다. 물이 차오르는 방이라는 배경과 겹친 이 비유는 몸이 무너져 가는 상황에서도 그의 자존심이 꺾이지 않고 버티고 있음을 뜻한다. 따라서 A가 정답이다. B는 홍수를 문자 그대로 읽었고, C는 분노의 근거가 없으며, D는 회복에 대한 희망을 지문이 보여 주지 않는다."
+}

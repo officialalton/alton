@@ -1,49 +1,24 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 
-export type CreditPackage = {
-  id: string;
-  name: string;
-  creditCount: number;
-  priceUsd: number;
-};
-
+// 2026-09-07 — 잔여 수업권/충전 데이터(students.credit_balance, credit_packages)는
+// 더 이상 조회하지 않는다(CreditsTab.tsx 상단 주석 참고 — EntitlementsTab이 그
+// 역할을 대체, 레거시 값은 R4 구매로 절대 갱신되지 않아 표시 자체가 오해를 유발).
+// 지인 추천 코드(parents.referral_code)만 남긴다.
 export type ParentCreditsData = {
-  balance: number;
   referralCode: string | null;
-  packages: CreditPackage[];
 };
 
 export async function loadParentCreditsData(
   supabase: SupabaseClient,
-  parentId: string,
-  studentId: string
+  parentId: string
 ): Promise<ParentCreditsData> {
-  const { data: student } = await supabase
-    .from("students")
-    .select("credit_balance")
-    .eq("id", studentId)
-    .single();
-
   const { data: parent } = await supabase
     .from("parents")
     .select("referral_code")
     .eq("id", parentId)
     .maybeSingle();
 
-  const { data: packages } = await supabase
-    .from("credit_packages")
-    .select("id, name, credit_count, price_usd")
-    .eq("active", true)
-    .order("credit_count", { ascending: true });
-
   return {
-    balance: student?.credit_balance ?? 0,
     referralCode: parent?.referral_code ?? null,
-    packages: (packages ?? []).map((p) => ({
-      id: p.id,
-      name: p.name,
-      creditCount: p.credit_count,
-      priceUsd: Number(p.price_usd),
-    })),
   };
 }

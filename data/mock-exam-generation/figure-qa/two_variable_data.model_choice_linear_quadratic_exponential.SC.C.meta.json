@@ -1,0 +1,44 @@
+{
+ "itemId": "two_variable_data.model_choice_linear_quadratic_exponential.SC.C",
+ "generatedAt": "2026-10-07T05:02:00.788Z",
+ "codeHash": "698c98017efc443fa1b5462a8a680096f51f5b1f2ea4052f5d2955eae7c94fb6",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/data.ts",
+  "lib/problem-figures/templates/figure-choice.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/data-c-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/_model-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/two_variable_data.model_choice_linear_quadratic_exponential.SC.C.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "two_variable_data.model_choice_linear_quadratic_exponential.SC.C.png",
+   "mobileFile": "two_variable_data.model_choice_linear_quadratic_exponential.SC.C.m375.png",
+   "archetypeId": "tvd.model_choice_linear_quadratic_exponential.SC.C.repr_shift",
+   "seed": 11,
+   "signature": "figure_choice[data:scatter]",
+   "stimulus": "The four graphs shown plot the package's shipping cost against the weight of a package, with 5 data points in each graph.",
+   "question": "The data in which scatterplot most closely follow an exponential decay function?",
+   "options": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "correctIndex": 0,
+   "answer": "A",
+   "explanation": "(1) 각 산점도의 점 5개의 y 값을 읽고 1차 차분을 구한다. (2) 차분이 일정하면 일차, 차분의 차가 일정하면 이차, 연속한 값의 비가 일정하면 지수이다. (3) 증가·감소와 위/아래 볼록까지 구별한다. (4) 다른 유형의 산점도를 하나씩 지워 나간다. (5) 찾는 모형: an exponential decay function. (6) 다른 산점도는 다른 유형의 모형을 따른다. 따라서 정답은 A이다.",
+   "structuralIssues": []
+  }
+ ]
+}

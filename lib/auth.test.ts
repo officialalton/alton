@@ -88,6 +88,130 @@ describe("resolveAccountDestination", () => {
   });
 });
 
+// M4 UAT #2(2026-09-05): 학생 프로필 완성 게이트. rpc 이름마다 다른 응답이
+// 필요해(current_account_status/current_account_access_allowed/
+// current_student_profile_completed) 위 fakeSupabase보다 세분화된 헬퍼를 쓴다.
+function fakeSupabaseWithRpcMap(opts: {
+  getUser?: { id: string } | null;
+  profile?: { role?: string; name?: string } | null;
+  rpc: Record<string, unknown>;
+}) {
+  const signOutMock = vi.fn().mockResolvedValue({ error: null });
+  const rpcMock = vi.fn((name: string) =>
+    Promise.resolve({ data: opts.rpc[name] ?? null, error: null })
+  );
+  return {
+    auth: {
+      getUser: vi.fn().mockResolvedValue({ data: { user: opts.getUser ?? null } }),
+      signOut: signOutMock,
+    },
+    from: () => ({
+      select: () => ({
+        eq: () => ({
+          single: vi.fn().mockResolvedValue({ data: opts.profile ?? null }),
+        }),
+      }),
+    }),
+    rpc: rpcMock,
+    __signOutMock: signOutMock,
+    __rpcMock: rpcMock,
+  };
+}
+
+describe("resolveAccountDestination — 학생 프로필 완성 게이트(M4)", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
+  it("프로필 미완료 학생은 /complete-profile로 보낸다", async () => {
+    const { resolveAccountDestination } = await import("./auth");
+    const supabase = fakeSupabaseWithRpcMap({
+      rpc: {
+        current_account_status: "active",
+        current_account_access_allowed: true,
+        current_student_profile_completed: false,
+      },
+    });
+    const dest = await resolveAccountDestination(supabase as never, "student");
+    expect(dest).toBe("/complete-profile");
+  });
+
+  it("프로필 완료 학생은 정상 학생 홈으로 보낸다", async () => {
+    const { resolveAccountDestination } = await import("./auth");
+    const supabase = fakeSupabaseWithRpcMap({
+      rpc: {
+        current_account_status: "active",
+        current_account_access_allowed: true,
+        current_student_profile_completed: true,
+      },
+    });
+    const dest = await resolveAccountDestination(supabase as never, "student");
+    expect(dest).toBe("/student");
+  });
+
+  it("2026-09-10(P0 2차): pending 상태인 신규 학생도 프로필 미완료면 /account-pending보다 /complete-profile을 먼저 보여준다(비밀번호 설정 직후 학생은 항상 pending)", async () => {
+    const { resolveAccountDestination } = await import("./auth");
+    const supabase = fakeSupabaseWithRpcMap({
+      rpc: {
+        current_account_status: "pending",
+        current_account_access_allowed: true,
+        current_student_profile_completed: false,
+      },
+    });
+    const dest = await resolveAccountDestination(supabase as never, "student");
+    expect(dest).toBe("/complete-profile");
+  });
+
+  it("2026-09-10(P0 2차): pending 상태 학생도 프로필을 완료했으면 /account-pending으로 보낸다", async () => {
+    const { resolveAccountDestination } = await import("./auth");
+    const supabase = fakeSupabaseWithRpcMap({
+      rpc: {
+        current_account_status: "pending",
+        current_account_access_allowed: true,
+        current_student_profile_completed: true,
+      },
+    });
+    const dest = await resolveAccountDestination(supabase as never, "student");
+    expect(dest).toBe("/account-pending");
+  });
+
+  it("학생이 아닌 role(보호자)은 프로필 완성 게이트로 리다이렉트되지 않는다(2026-09-21: 세 RPC를 병렬로 항상 조회하되, role이 student가 아니면 결과값을 게이트에 쓰지 않는다 — 순차 왕복을 줄이기 위한 의도된 변경)", async () => {
+    const { resolveAccountDestination } = await import("./auth");
+    const supabase = fakeSupabaseWithRpcMap({
+      rpc: {
+        current_account_status: "active",
+        current_account_access_allowed: true,
+        current_student_profile_completed: false,
+      },
+    });
+    const dest = await resolveAccountDestination(supabase as never, "parent");
+    expect(dest).toBe("/parent");
+  });
+});
+
+describe("requireUser — 학생 프로필 완성 게이트(M4)", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
+  it("프로필 미완료 학생은 /complete-profile로 리다이렉트한다", async () => {
+    const supabase = fakeSupabaseWithRpcMap({
+      getUser: { id: "u1" },
+      profile: { role: "student", name: "학생" },
+      rpc: {
+        current_account_status: "active",
+        current_account_access_allowed: true,
+        current_student_profile_completed: false,
+      },
+    });
+    vi.doMock("@/utils/supabase/server", () => ({ createClient: async () => supabase }));
+    vi.resetModules();
+    const { requireUser } = await import("./auth");
+
+    await expect(requireUser()).rejects.toThrow("REDIRECT:/complete-profile");
+  });
+});
+
 describe("requireUser", () => {
   beforeEach(() => {
     vi.clearAllMocks();
@@ -141,5 +265,30 @@ describe("requireUser", () => {
     const result = await requireUser();
     expect(result.user).toEqual({ id: "u1" });
     expect(result.profile).toEqual({ role: "student", name: "학생" });
+  });
+});
+
+describe("requireUser — 왕복 수(2026-10-13 결과 화면 지연 점검)", () => {
+  it("프로필 조회가 끝나기 전에 계정 게이트 RPC 세 개를 이미 보낸다(순차 왕복 금지)", async () => {
+    let releaseProfile: (v: { data: { role: string } }) => void = () => {};
+    const profilePending = new Promise<{ data: { role: string } }>((r) => (releaseProfile = r));
+    const rpcMock = vi.fn().mockResolvedValue({ data: "active", error: null });
+    const supabase = {
+      auth: { getUser: vi.fn().mockResolvedValue({ data: { user: { id: "u1" } } }), signOut: vi.fn() },
+      from: () => ({ select: () => ({ eq: () => ({ single: () => profilePending }) }) }),
+      rpc: rpcMock,
+    };
+    vi.doMock("@/utils/supabase/server", () => ({ createClient: async () => supabase }));
+    vi.resetModules();
+    const { requireUser } = await import("./auth");
+    const p = requireUser();
+    await new Promise((r) => setTimeout(r, 0));
+    expect(rpcMock.mock.calls.map((c) => c[0]).sort()).toEqual([
+      "current_account_access_allowed",
+      "current_account_status",
+      "current_student_profile_completed",
+    ]);
+    releaseProfile({ data: { role: "parent" } });
+    await p.catch(() => {});
   });
 });

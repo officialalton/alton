@@ -1,0 +1,60 @@
+{
+ "runs": [
+  "bio-r4"
+ ],
+ "rows": 8,
+ "passed": 7,
+ "rejected": 1,
+ "passRate": 0.875,
+ "mc": {
+  "rows": 8,
+  "passed": 7,
+  "passRate": 0.875
+ },
+ "frq": {
+  "rows": 0,
+  "passed": 0,
+  "passRate": 0
+ },
+ "unitsPassed": {
+  "3": 2,
+  "4": 2,
+  "6": 3
+ },
+ "skillsPassed": {
+  "1.A": 3,
+  "4.B": 4
+ },
+ "figPassed": {
+  "none": 3,
+  "table": 4
+ },
+ "figAll": {
+  "none": 4,
+  "table": 4
+ },
+ "figPassRate": {
+  "none": "3/4",
+  "table": "4/4"
+ },
+ "renderTypesPassed": {
+  "none": 3,
+  "ap_table": 4
+ },
+ "archetypesPassed": {
+  "bi_transcription_concept": 2,
+  "bi_replication_enzyme_scenario": 1,
+  "bis_leafdisk_set": 2,
+  "bis_cell_cycle_set": 2
+ },
+ "archetypesAll": {
+  "bi_transcription_concept": 2,
+  "bi_replication_enzyme_scenario": 2,
+  "bis_leafdisk_set": 2,
+  "bis_cell_cycle_set": 2
+ },
+ "failedArchetypes": [],
+ "costUsd": {
+  "bio-r4": 0.7037
+ }
+}

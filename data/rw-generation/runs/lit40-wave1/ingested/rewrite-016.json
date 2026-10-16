@@ -1,0 +1,521 @@
+{
+ "taskId": "rewrite-016",
+ "passed": [
+  {
+   "candidateId": "lit40-medium-06-084",
+   "task": "rewrite-016",
+   "attempt": 1,
+   "spec": {
+    "candidateId": "lit40-medium-06-084",
+    "batchId": "lit40-medium-06",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "medium",
+    "questionType": "tone_shift",
+    "genre": "poetry",
+    "seed": {
+     "index": 83,
+     "genre": "poetry",
+     "pov": "third_omniscient",
+     "styleEra": "contemporary",
+     "names": [
+      "Talon",
+      "Camille"
+     ],
+     "nameCultures": [
+      "indigenous_american",
+      "french"
+     ],
+     "locale": "Lyon",
+     "setting": "a lighthouse station",
+     "relationship": "a mother and her son leaving for college",
+     "conflict": "when a rumor reaches the wrong person",
+     "openingStyle": "숫자·목록·규칙을 말하며 시작",
+     "topicSeed": "a lighthouse station in Lyon; a mother and her son leaving for college when a rumor reaches the wrong person"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Three rules for the lamp room above the Saône:\ntrim the wick, log every barge by name,\nand let no gossip climb the stairs.\n\nCamille has kept the first two for thirty years.\nThe third she broke this week, when the ferryman\ntold her what the café told him: that Talon,\npacking for Paris, had said he was glad to go.\n\nShe logs the barges. She trims the wick.\nShe does not ask, at supper, if it is true.\nTalon talks of trains, of borrowed books,\nand she answers like a ledger, one line each.\n\nNear midnight he climbs up with two cups,\nsets one beside the logbook, says nothing,\nand writes his own name under the last barge,\nthen, smaller, a date in early June.\n\nShe reads it the way she reads the weather.\nThen she lets the lamp turn once, unwatched,\nand pours the tea before it cools.",
+    "question": "Which choice best describes the shift in tone in the poem?",
+    "options": [
+     "It shifts from clipped, guarded restraint to quiet tenderness after Talon signs the log.",
+     "It shifts from calm routine to open hurt after Camille confronts Talon about the rumor.",
+     "It shifts from cheerful pride in Camille's work to anxiety about her son's departure.",
+     "It shifts from bitterness toward Talon to resigned acceptance that he will not return."
+    ],
+    "correct_letter": "A",
+    "explanation": "소문을 들은 뒤 Camille은 질문하지 않고 '장부처럼 한 줄씩' 대답하며 규칙적인 일만 반복해 절제되고 경계하는 어조를 보인다. 이후 Talon이 장부에 자기 이름과 6월 날짜를 적자, 그녀는 등불을 지켜보지 않고 돌게 두고 차를 따르며 어조가 부드러워진다. 따라서 A가 정답이다. B는 그녀가 직접 따지지 않으므로 틀리고, C는 처음부터 즐거운 자부심이 드러나지 않으며, D는 6월 날짜가 귀가를 암시하므로 지문과 맞지 않는다."
+   },
+   "notes": [],
+   "tone": [
+    "guarded",
+    "tender"
+   ],
+   "devices": [
+    "imagery",
+    "repetition",
+    "simile"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 1
+  },
+  {
+   "candidateId": "lit40-medium-07-012",
+   "task": "rewrite-016",
+   "attempt": 1,
+   "spec": {
+    "candidateId": "lit40-medium-07-012",
+    "batchId": "lit40-medium-07",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "medium",
+    "questionType": "figurative_language",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 11,
+     "genre": "novel_excerpt",
+     "pov": "third_limited",
+     "styleEra": "19c",
+     "names": [
+      "Layla",
+      "Sigrid"
+     ],
+     "nameCultures": [
+      "arabic_levantine",
+      "dutch_nordic"
+     ],
+     "locale": "Beirut",
+     "setting": "a bus depot",
+     "relationship": "a violin student and an exacting teacher",
+     "conflict": "over a witness account that differs",
+     "openingStyle": "의문문으로 시작",
+     "topicSeed": "a bus depot in Beirut; a violin student and an exacting teacher over a witness account that differs"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Who had seen it first? Layla put the question to the depot clerk, to the driver, to a woman still holding her ticket stub, and each of them answered at once. The case had slid from the rack when the bus braked outside the Beirut depot; or a boy had knocked it; or it had never been latched. Sigrid, who had come to meet her pupil off the bus, listened without interrupting, her mouth set as it was whenever Layla rushed a passage. By the fourth telling the truth had become a coin passed through too many hands, its face rubbed smooth, still spendable but no longer readable. Layla remembered the clasps clicking shut, or remembered wanting to. Sigrid lifted the violin, turned the cracked bridge toward the light, and said that the instrument at least would not lie to them. Then she asked Layla to play an open A, and they both listened.",
+    "question": "As used in the text, the phrase “a coin passed through too many hands” most nearly suggests that the truth",
+    "options": [
+     "had been deliberately bent by witnesses who wanted to seem important",
+     "was still being repeated but had lost the details that made it clear",
+     "had cost Layla more than she could afford to spend on repairs",
+     "had grown more valuable each time another person retold it"
+    ],
+    "correct_letter": "B",
+    "explanation": "목격자마다 서로 다른 설명을 내놓았고, 네 번째로 전해질 때쯤 진실은 '면이 닳아 여전히 쓸 수는 있지만 읽을 수 없는' 동전처럼 되었다고 서술된다. 또 Layla조차 걸쇠를 잠갔는지 확신하지 못한다. 따라서 이야기는 계속 오가지만 구별되는 세부를 잃었다는 B가 정답이다. A는 의도적 왜곡의 근거가 없고, C는 동전을 실제 비용으로 오해한 것이며, D는 가치가 커졌다는 정반대 해석이다."
+   },
+   "notes": [],
+   "tone": [
+    "tense",
+    "measured"
+   ],
+   "devices": [
+    "metaphor",
+    "imagery"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 1
+  },
+  {
+   "candidateId": "lit40-medium-07-014",
+   "task": "rewrite-016",
+   "attempt": 1,
+   "spec": {
+    "candidateId": "lit40-medium-07-014",
+    "batchId": "lit40-medium-07",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "medium",
+    "questionType": "figurative_language",
+    "genre": "personal_essay",
+    "seed": {
+     "index": 13,
+     "genre": "personal_essay",
+     "pov": "first",
+     "styleEra": "contemporary",
+     "names": [
+      "Kaya",
+      "Dainius"
+     ],
+     "nameCultures": [
+      "indigenous_american",
+      "slavic_baltic"
+     ],
+     "locale": "Albuquerque",
+     "setting": "a bakery before opening",
+     "relationship": "old rivals in a chess club",
+     "conflict": "about what to tell a younger sibling",
+     "openingStyle": "짧은 단언문으로 시작",
+     "topicSeed": "a bakery before opening in Albuquerque; old rivals in a chess club about what to tell a younger sibling"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Rivals rarely make good counselors. Dainius and I learned this at four in the morning in my aunt Kaya's bakery in Albuquerque, where we had played each other across a folding table for eleven years and had never once agreed on an opening. That morning the board stayed in its box. My younger brother had lost every game of his first season and had asked us both, separately, whether to quit. Dainius thought he should hear that he played too fast; I thought he should hear that he would improve. Neither of us said so at first. Between the cooling racks we circled the question like two kings in an endgame, each offering a small remark and then retreating from it, wary of standing anywhere the other could pin down. Kaya, shaping dough, asked whether we planned to decide before the bread did. By the first tray of conchas we had settled only one point: my brother deserved a single answer, not two.",
+    "question": "As used in the text, the phrase “circled the question like two kings in an endgame” most nearly suggests that the narrator and Dainius",
+    "options": [
+     "had stripped the question down to its simplest remaining elements",
+     "were too tired to speak plainly so early in the bakery morning",
+     "competed openly to show who understood the brother better",
+     "approached the issue warily, each avoiding a committed position"
+    ],
+    "correct_letter": "D",
+    "explanation": "두 사람은 처음에 각자의 생각을 말하지 않았고, 작은 말을 꺼냈다가 곧 물러서며 상대에게 '붙잡히지 않을' 자리를 피했다고 서술된다. 체스 종반의 두 킹처럼 서로 조심스럽게 거리를 재는 모습이므로 D가 정답이다. A는 종반에 말이 적다는 점에서 그럴듯하지만 지문은 문제를 단순화한 것이 아니라 회피한 것을 강조한다. B의 피로나 C의 공개적 경쟁은 지문의 근거와 맞지 않는다."
+   },
+   "notes": [],
+   "tone": [
+    "wry",
+    "reflective"
+   ],
+   "devices": [
+    "simile",
+    "understatement"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 1
+  },
+  {
+   "candidateId": "lit40-medium-07-015",
+   "task": "rewrite-016",
+   "attempt": 1,
+   "spec": {
+    "candidateId": "lit40-medium-07-015",
+    "batchId": "lit40-medium-07",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "medium",
+    "questionType": "figurative_language",
+    "genre": "memoir",
+    "seed": {
+     "index": 14,
+     "genre": "memoir",
+     "pov": "second",
+     "styleEra": "19c",
+     "names": [
+      "Genevieve",
+      "Solange"
+     ],
+     "nameCultures": [
+      "french",
+      "french"
+     ],
+     "locale": "Marseille",
+     "setting": "a mountain bus stop",
+     "relationship": "a teacher and a student who will not speak",
+     "conflict": "about the proper way to say goodbye",
+     "openingStyle": "구체적인 사물이나 동작으로 시작(관사 The 로 시작하지 말 것)",
+     "topicSeed": "a mountain bus stop in Marseille; a teacher and a student who will not speak about the proper way to say goodbye"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "A bus ticket, folded twice, is what I kept. For two years I taught Solange at a school in the hills above Marseille, and for two years she did not speak in class, though the essays she handed in ran for pages, fierce and crowded in pencil. Genevieve, who taught her mathematics, said the girl answered sums the same way: correctly, and in silence. On her last afternoon, before her family moved north, Solange and I waited at the mountain bus stop. I had rehearsed a few sentences about how one ought to say goodbye, and found I could not use any of them. When the bus came she pressed the ticket into my palm. On the back was a single line of thanks, the pencil pushed so hard it had nearly gone through: a whole conversation squeezed into the width of a thumb. I read it on the walk down, and again at my desk that evening.",
+    "question": "As used in the text, the phrase “a whole conversation squeezed into the width of a thumb” most nearly suggests that",
+    "options": [
+     "the brief note carried the force of everything Solange had left unsaid",
+     "the note was cramped because Solange had written it hastily at the stop",
+     "Solange preferred written exchanges to the speeches her teacher prepared",
+     "the line of thanks was too faint and small to be read with any ease"
+    ],
+    "correct_letter": "A",
+    "explanation": "Solange는 2년 동안 수업에서 말하지 않았지만 글은 길고 강렬했으며, 마지막 날 남긴 한 줄은 종이가 뚫릴 만큼 눌러 쓴 것이었다. 이 두 단서를 연결하면, 엄지 폭의 짧은 글에 말하지 못한 모든 것이 담겼다는 A가 정답이다. B는 '좁다'는 표면 의미만 본 오답이고, C는 교사의 연설과 비교하는 내용이 없으며, D는 세게 눌러 썼다는 서술과 반대된다."
+   },
+   "notes": [],
+   "tone": [
+    "tender",
+    "restrained"
+   ],
+   "devices": [
+    "metaphor",
+    "hyperbole"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 1
+  },
+  {
+   "candidateId": "lit40-medium-07-070",
+   "task": "rewrite-016",
+   "attempt": 1,
+   "spec": {
+    "candidateId": "lit40-medium-07-070",
+    "batchId": "lit40-medium-07",
+    "route": "ai_passage",
+    "skill": "central_ideas_details",
+    "difficulty": "medium",
+    "questionType": "narrator_attitude",
+    "genre": "personal_essay",
+    "seed": {
+     "index": 69,
+     "genre": "personal_essay",
+     "pov": "mixed_or_none",
+     "styleEra": "late_20c",
+     "names": [
+      "Konrad",
+      "Camryn"
+     ],
+     "nameCultures": [
+      "german_austrian",
+      "african_american"
+     ],
+     "locale": "Vienna",
+     "setting": "a train-station cafe",
+     "relationship": "a young apprentice and a master carpenter",
+     "conflict": "after a harvest, voyage or season that went badly",
+     "openingStyle": "장소 이름으로 시작",
+     "topicSeed": "a train-station cafe in Vienna; a young apprentice and a master carpenter after a harvest, voyage or season that went badly"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Vienna's Westbahnhof had a cafe with brass rails and bad pastries, and that is where Konrad took me after the worst season of my apprenticeship, the autumn three of our staircases came back warped from a client's damp villa. I was twenty-two, Camryn the American who measured twice and still cut wrong, and I expected a lecture or, worse, to be let go. He ordered two coffees and talked for an hour about a cabinet of his that had split in its first winter. At the time I thought he was avoiding the subject, and I resented him a little for it. He never offered to rebuild the staircases; in the following weeks he only stood in the workshop doorway while I did. I have heard people praise mentors who catch every mistake before it lands, and I understand the appeal. But I still plane a board the way I learned that winter, slowly, with no hands but mine on it.",
+    "question": "Which choice best describes the narrator's attitude toward Konrad's way of handling the failed season?",
+    "options": [
+     "Lingering resentment of a mentor who withheld guidance when it was most needed.",
+     "Settled appreciation for a restraint that she once took for evasion.",
+     "Mild amusement at Konrad's habit of telling stories instead of teaching.",
+     "Uncertain approval of a method she suspects most mentors would reject."
+    ],
+    "correct_letter": "B",
+    "explanation": "화자는 당시 Konrad가 문제를 회피한다고 여겨 조금 원망했다고 말하지만, 그가 계단을 대신 고치지 않고 지켜보기만 한 덕분에 지금도 그때 배운 방식으로 나무를 다룬다고 밝힌다. 과거의 오해와 현재의 평가를 연결하면 B가 정답이다. A는 과거의 감정을 현재 태도로 착각한 것이고, C의 재미는 근거가 없으며, D는 다른 멘토 방식에 대한 언급을 과대 해석한 것이다."
+   },
+   "notes": [],
+   "tone": [
+    "reflective",
+    "appreciative"
+   ],
+   "devices": [
+    "contrast",
+    "anecdote"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 1
+  },
+  {
+   "candidateId": "lit40-medium-07-071",
+   "task": "rewrite-016",
+   "attempt": 1,
+   "spec": {
+    "candidateId": "lit40-medium-07-071",
+    "batchId": "lit40-medium-07",
+    "route": "ai_passage",
+    "skill": "central_ideas_details",
+    "difficulty": "medium",
+    "questionType": "narrator_attitude",
+    "genre": "memoir",
+    "seed": {
+     "index": 70,
+     "genre": "memoir",
+     "pov": "first",
+     "styleEra": "late_20c",
+     "names": [
+      "Marit",
+      "Soren"
+     ],
+     "nameCultures": [
+      "dutch_nordic",
+      "dutch_nordic"
+     ],
+     "locale": "Rotterdam",
+     "setting": "a stone bridge",
+     "relationship": "an interpreter and her client",
+     "conflict": "while learning to let go of a habit",
+     "openingStyle": "감각 묘사(소리·냄새·촉감)로 시작",
+     "topicSeed": "a stone bridge in Rotterdam; an interpreter and her client while learning to let go of a habit"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Wet iron and diesel rose off the Maas the morning Soren asked me to stop interpreting for him. For six years I had sat at his elbow in every meeting with Dutch buyers, and even then, crossing the old stone bridge toward the harbor office in Rotterdam, I caught myself leaning toward his ear whenever a passerby spoke. He told me, in slow and careful Dutch, that he wanted to make his own mistakes now. I said of course. I, Marit, said of course and then spent the walk silently listing every word he was likely to get wrong. In the meeting I folded my hands and bit back three corrections, and I counted them as if they were sacrifices. I can smile at that woman now, tallying her small martyrdoms. She had built a self around being needed in two languages at once, and she called it loyalty. A tugboat nudged a gravel barge under the arch as we left, and I let him hold the door.",
+    "question": "Which choice best describes the narrator's attitude toward her past reaction to Soren's request?",
+    "options": [
+     "Bitter regret that she agreed so readily to stop interpreting for Soren.",
+     "Quiet pride in the self-control she showed by holding back corrections.",
+     "Gentle amusement mixed with a clear view of what her loyalty concealed.",
+     "Continued worry that Soren's Dutch was not yet ready for such meetings."
+    ],
+    "correct_letter": "C",
+    "explanation": "화자는 과거의 자신을 보며 '이제는 웃을 수 있다'고 하면서도, 참은 교정을 희생처럼 셌던 일을 '작은 순교'라 부르고 필요받는 것을 충성이라 불렀다고 비판한다. 다정한 웃음과 비판적 통찰이 함께 있으므로 C가 정답이다. B는 교정을 참은 행동만 보면 그럴듯하지만 화자는 그것을 자랑이 아니라 과장된 희생으로 본다. A의 쓰라린 후회와 D의 지속적 걱정은 근거가 없다."
+   },
+   "notes": [],
+   "tone": [
+    "wry",
+    "self-aware"
+   ],
+   "devices": [
+    "irony",
+    "imagery"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 1
+  },
+  {
+   "candidateId": "lit40-medium-07-083",
+   "task": "rewrite-016",
+   "attempt": 1,
+   "spec": {
+    "candidateId": "lit40-medium-07-083",
+    "batchId": "lit40-medium-07",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "medium",
+    "questionType": "figurative_language",
+    "genre": "personal_essay",
+    "seed": {
+     "index": 82,
+     "genre": "personal_essay",
+     "pov": "third_limited",
+     "styleEra": "late_20c",
+     "names": [
+      "Thida",
+      "Arisa"
+     ],
+     "nameCultures": [
+      "southeast_asian",
+      "southeast_asian"
+     ],
+     "locale": "Surabaya",
+     "setting": "a bus depot",
+     "relationship": "a conductor and the youngest violinist",
+     "conflict": "over a plan that depends on a lie",
+     "openingStyle": "감각 묘사(소리·냄새·촉감)로 시작",
+     "topicSeed": "a bus depot in Surabaya; a conductor and the youngest violinist over a plan that depends on a lie"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Diesel and frying shallots hung over the depot in Surabaya, where the youth orchestra had waited two hours for a coach that was not coming on time. I was the youngest violinist then, and I remember Thida, our conductor, gathering us beneath a tin awning to explain what we would say at the festival gate: that our registration had gone in before the deadline. It had not. Without that sentence, she said, the hall booking would lapse, the borrowed cellos would go back to their school, and four months of rehearsal would have nowhere to land. She called the lie the keystone of the whole arch, and she said it softly, almost as though apologizing to the stone. Nobody else seemed to notice how much she had rested on one small claim. I, Arisa, did. When the coach finally wheezed into the lot, I sat by the window rehearsing the truth instead, the way I would have practiced a hard passage.",
+    "question": "As used in the text, the phrase “the keystone of the whole arch” most nearly suggests",
+    "options": [
+     "the crowning feature that would make the performance memorable",
+     "a minor detail that festival officials would probably overlook",
+     "a shared burden that every player would have to carry equally",
+     "the single claim on which every other arrangement depended"
+    ],
+    "correct_letter": "D",
+    "explanation": "Thida는 그 한 문장이 없으면 공연장 예약, 빌린 첼로, 넉 달의 연습이 모두 무너진다고 설명하고, 화자는 그녀가 작은 주장 하나에 많은 것을 얹었다고 느낀다. 이 두 단서를 연결하면 다른 모든 준비가 기대는 하나의 주장이라는 D가 정답이다. A는 쐐기돌이 아치 꼭대기에 있다는 점에서 그럴듯하지만 '돋보임'이 아니라 '지탱'이 핵심이다. B와 C는 지문에 근거가 없다."
+   },
+   "notes": [],
+   "tone": [
+    "uneasy",
+    "reflective"
+   ],
+   "devices": [
+    "metaphor",
+    "personification"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 1
+  },
+  {
+   "candidateId": "lit40-medium-07-091",
+   "task": "rewrite-016",
+   "attempt": 1,
+   "spec": {
+    "candidateId": "lit40-medium-07-091",
+    "batchId": "lit40-medium-07",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "medium",
+    "questionType": "tone_shift",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 90,
+     "genre": "novel_excerpt",
+     "pov": "first",
+     "styleEra": "early_20c",
+     "names": [
+      "Bao",
+      "Somchai"
+     ],
+     "nameCultures": [
+      "southeast_asian",
+      "southeast_asian"
+     ],
+     "locale": "Manila",
+     "setting": "an old cinema projection booth",
+     "relationship": "a nurse and her night patient",
+     "conflict": "over a decision made without asking",
+     "openingStyle": "숫자·목록·규칙을 말하며 시작",
+     "topicSeed": "an old cinema projection booth in Manila; a nurse and her night patient over a decision made without asking"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Four reels, two projectors, one cot pushed against the wall: that was the whole of the booth above the old cinema in Manila where Somchai had asked to spend his nights. I, Bao, was his nurse, and for a week those nights were almost merry. He taught me to thread film by lamplight, called me hopeless when I tangled it, and gave the silent figures on the screen below a dozen absurd voices, one of them, he insisted, mine. On the eighth night, while he was splicing a broken reel, I mentioned that the doctor and I had arranged for him to move to the ward downstairs in the morning. His hands kept working. He finished the splice, tested it twice, and thanked me for letting him know. Then he asked, in the same even voice, whether the doctor had found the decision difficult to make without him, and turned the lamp so that its light fell on the film and not on his face.",
+    "question": "Which choice best describes how the tone of the text shifts?",
+    "options": [
+     "From cheerful teasing to resigned acceptance once Somchai agrees to the move",
+     "From playful warmth to wounded restraint once the planned transfer is revealed",
+     "From easy banter to open anger as Somchai confronts the nurse about the ward",
+     "From quiet unease to relief once Bao explains the reasons behind the transfer"
+    ],
+    "correct_letter": "B",
+    "explanation": "앞부분은 필름 감기를 가르치고 놀리며 우스운 목소리를 내는 장난스럽고 따뜻한 분위기다. 이송 결정을 알리자 Somchai는 차분히 감사하지만, 자신 없이 결정한 것을 꼬집는 질문을 하고 얼굴을 빛에서 돌려 상처를 억누른다. 따라서 B가 정답이다. A는 공손한 반응을 체념으로 오해한 것이고, C는 그가 소리치지 않으므로 틀리며, D의 안도는 지문에 없다."
+   },
+   "notes": [],
+   "tone": [
+    "playful",
+    "restrained"
+   ],
+   "devices": [
+    "contrast",
+    "imagery"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 1
+  }
+ ],
+ "rejected": [],
+ "retryWords": [],
+ "extraIgnored": []
+}

@@ -1,6 +1,7 @@
 "use server";
 
 import { requireUser } from "@/lib/auth";
+import { loadLegacyProblemAnswers } from "@/lib/legacy-problem-answers";
 
 async function requireStudent() {
   const { supabase, user } = await requireUser();
@@ -18,12 +19,11 @@ export async function submitMcAttempt(
 ) {
   const { supabase, userId } = await requireStudent();
 
-  const { data: problem } = await supabase
-    .from("problems")
-    .select("correct_index")
-    .eq("id", problemId)
-    .single();
-  if (!problem) throw new Error("문제를 찾을 수 없습니다.");
+  // 사용자 세션의 RLS 로 볼 수 있는 문제인지 먼저 확인하고, 정답은 서버 admin 으로 읽는다(컬럼 권한 회수).
+  const { data: visible } = await supabase.from("problems").select("id").eq("id", problemId).single();
+  if (!visible) throw new Error("Problem not found.");
+  const problem = (await loadLegacyProblemAnswers([problemId])).get(problemId);
+  if (!problem) throw new Error("Problem not found.");
 
   const { data: priorAttempts } = await supabase
     .from("session_problem_attempts")
@@ -37,10 +37,10 @@ export async function submitMcAttempt(
   ).length;
   const alreadyCorrect = (priorAttempts ?? []).some((a) => a.correct === true);
   if (alreadyCorrect || wrongSoFar >= 3) {
-    throw new Error("이미 채점이 끝난 문제입니다.");
+    throw new Error("This problem has already been graded.");
   }
 
-  const correct = problem.correct_index === selectedIndex;
+  const correct = problem.correctIndex === selectedIndex;
   const attemptNumber = wrongSoFar + 1;
   const done = correct || attemptNumber >= 3;
 
@@ -57,7 +57,7 @@ export async function submitMcAttempt(
     correct,
     attemptNumber,
     done,
-    correctIndex: done ? problem.correct_index : null,
+    correctIndex: done ? problem.correctIndex : null,
   };
 }
 
@@ -77,7 +77,7 @@ async function submitOnceGraded(
     .limit(1);
 
   if (priorAttempts && priorAttempts.length > 0) {
-    throw new Error("이미 제출한 문제입니다.");
+    throw new Error("This problem has already been submitted.");
   }
 
   const { error } = await supabase.from("session_problem_attempts").insert({
@@ -95,7 +95,7 @@ export async function submitEssayAttempt(
   problemId: string,
   text: string
 ) {
-  if (!text.trim()) throw new Error("답안을 입력해주세요.");
+  if (!text.trim()) throw new Error("Please enter an answer.");
   await submitOnceGraded(sessionId, problemId, text.trim());
 }
 

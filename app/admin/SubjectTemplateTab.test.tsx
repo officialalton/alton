@@ -1,8 +1,9 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { useState } from "react";
-import { describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import SubjectTemplateTab from "./SubjectTemplateTab";
 import * as actions from "./subject-actions";
+import * as folderActions from "./keyword-folder-actions";
 import type { AdminSubject } from "./subject-data";
 
 // SubjectTemplateTab은 이제 subjects를 부모(CatalogTab)에서 controlled로 받는다 —
@@ -21,6 +22,21 @@ vi.mock("./subject-actions", () => ({
   updateSubjectUnit: vi.fn(),
   removeSubjectUnit: vi.fn(),
   moveSubjectUnit: vi.fn(),
+  createSubjectKeyword: vi.fn(),
+  renameSubjectKeyword: vi.fn(),
+  assignUnitKeyword: vi.fn(),
+  removeUnitKeyword: vi.fn(),
+}));
+
+vi.mock("./keyword-folder-actions", () => ({
+  createKeywordFolder: vi.fn(),
+  createKeywordInFolder: vi.fn(),
+  deleteKeywordFolder: vi.fn(),
+  deleteSubjectKeyword: vi.fn(),
+  moveKeywordToFolder: vi.fn(),
+  renameKeywordFolder: vi.fn(),
+  reorderKeywordFolders: vi.fn(),
+  reorderKeywordsInFolder: vi.fn(),
 }));
 
 const satMath: AdminSubject = {
@@ -86,20 +102,226 @@ describe("SubjectTemplateTab", () => {
     await waitFor(() => expect(actions.removeSubjectUnit).toHaveBeenCalledWith("u1"));
   });
 
-  it("과목 삭제는 확인 단계를 거치고, 실패 시 에러 메시지를 보여준다", async () => {
-    vi.mocked(actions.deleteSubject).mockRejectedValue(
-      new Error("이 과목은 이미 선생님 커리큘럼/매칭/교재 등에서 사용 중이라 삭제할 수 없습니다.")
-    );
+  it("과목 삭제는 확인 단계를 거치고, 예상치 못한 오류면 에러 메시지를 보여준다", async () => {
+    vi.mocked(actions.deleteSubject).mockRejectedValue(new Error("알 수 없는 오류가 발생했습니다."));
     render(<Wrapper initialSubjects={[satMath]} />);
     fireEvent.click(screen.getByText("편집"));
     fireEvent.click(screen.getByText("이 과목 삭제"));
     expect(screen.getByText(/정말 "SAT Math" 과목을 삭제하시겠습니까/)).toBeInTheDocument();
     const deleteButtons = screen.getAllByText("삭제");
     fireEvent.click(deleteButtons[deleteButtons.length - 1]);
+    await waitFor(() => expect(screen.getByText("알 수 없는 오류가 발생했습니다.")).toBeInTheDocument());
+  });
+
+  it("2026-09-09(UAT 지적): 사용 이력이 있는 과목은 삭제 대신 보관 처리되고, 사유가 구체적으로 표시된다", async () => {
+    vi.mocked(actions.deleteSubject).mockResolvedValue({
+      archived: true,
+      reason: "학생 수강 이력 3건이(가) 있어 보관 처리되었습니다.",
+    });
+    render(<Wrapper initialSubjects={[satMath]} />);
+    fireEvent.click(screen.getByText("편집"));
+    fireEvent.click(screen.getByText("이 과목 삭제"));
+    const deleteButtons = screen.getAllByText("삭제");
+    fireEvent.click(deleteButtons[deleteButtons.length - 1]);
     await waitFor(() =>
-      expect(
-        screen.getByText("이 과목은 이미 선생님 커리큘럼/매칭/교재 등에서 사용 중이라 삭제할 수 없습니다.")
-      ).toBeInTheDocument()
+      expect(screen.getByText(/학생 수강 이력 3건이\(가\) 있어 보관 처리되었습니다\./)).toBeInTheDocument()
     );
+    // 삭제된 게 아니라 보관된 것이므로 편집 화면에 그대로 남아있어야 한다.
+    expect(screen.getByDisplayValue("SAT Math")).toBeInTheDocument();
+  });
+
+  it("2026-09-09(UAT 지적): 참조가 전혀 없는 과목은 실제로 삭제되어 목록에서 사라진다", async () => {
+    vi.mocked(actions.deleteSubject).mockResolvedValue({ archived: false, reason: null });
+    render(<Wrapper initialSubjects={[satMath]} />);
+    fireEvent.click(screen.getByText("편집"));
+    fireEvent.click(screen.getByText("이 과목 삭제"));
+    const deleteButtons = screen.getAllByText("삭제");
+    fireEvent.click(deleteButtons[deleteButtons.length - 1]);
+    await waitFor(() => expect(screen.queryByDisplayValue("SAT Math")).not.toBeInTheDocument());
+    expect(screen.queryByText("SAT Math")).not.toBeInTheDocument();
+  });
+
+  it("2026-09-09(UAT 지적): 보관된 과목은 목록에 '보관됨' 배지와 사유가 함께 표시된다", () => {
+    const archivedSubject: AdminSubject = {
+      ...satMath,
+      archivedAt: "2026-09-09T00:00:00.000Z",
+      archivedReason: "교재 문서 1건이(가) 있어 보관 처리되었습니다.",
+    };
+    render(<Wrapper initialSubjects={[archivedSubject]} />);
+    // 2026-09-12: 현재/보관됨을 나눠 보여준다. 보관된 과목은 '보관됨'에서 본다.
+    fireEvent.click(screen.getByText(/^보관됨/));
+    expect(screen.getAllByText("보관됨").length).toBeGreaterThan(0);
+    expect(screen.getByText(/교재 문서 1건이\(가\) 있어 보관 처리되었습니다\./)).toBeInTheDocument();
+  });
+
+  it("2026-09-09(UAT 지적, 제품 오너 승인): 과목 키워드를 추가하면 사전에 반영되고, 회차에 태그·해제할 수 있다", async () => {
+    vi.mocked(folderActions.createKeywordInFolder).mockResolvedValue({
+      ok: true,
+      value: { folders: [], keywords: [{ id: "kw1", label: "이차방정식", status: "active", folderId: null }] },
+    });
+    vi.mocked(actions.assignUnitKeyword).mockResolvedValue({ ok: true });
+    vi.mocked(actions.removeUnitKeyword).mockResolvedValue({ ok: true });
+    render(<Wrapper initialSubjects={[satMath]} />);
+    fireEvent.click(screen.getByText("편집"));
+    fireEvent.click(screen.getByRole("button", { name: "키워드 사전" }));
+
+    fireEvent.change(screen.getByPlaceholderText("새 키워드 (예: 이차방정식)"), {
+      target: { value: "이차방정식" },
+    });
+    fireEvent.click(screen.getByText("추가"));
+    await waitFor(() => expect(folderActions.createKeywordInFolder).toHaveBeenCalledWith("sub1", "이차방정식", null));
+
+    // 사전에 등록된 뒤에는 회차 구성 탭의 회차별 키워드 선택기(기본 접힘)에도 나타난다.
+    fireEvent.click(screen.getByRole("button", { name: "회차 구성" }));
+    fireEvent.click(screen.getByRole("button", { name: "키워드 모두 펼치기" }));
+
+    fireEvent.click(screen.getByLabelText("함수의 기초 회차에 이차방정식 태그"));
+    await waitFor(() => expect(actions.assignUnitKeyword).toHaveBeenCalledWith("u1", "kw1"));
+
+    fireEvent.click(screen.getByLabelText("함수의 기초 회차에 이차방정식 해제"));
+    await waitFor(() => expect(actions.removeUnitKeyword).toHaveBeenCalledWith("u1", "kw1"));
+  });
+
+  it("2026-09-10(P0-2) — 키워드 추가 실패는 { ok:false, error } 문구만 안내하고 던지지 않는다(Minified React error #441 마스킹 버그 재발 방지)", async () => {
+    vi.mocked(folderActions.createKeywordInFolder).mockResolvedValue({
+      ok: false,
+      error: "이미 존재하는 키워드입니다.",
+    });
+    render(<Wrapper initialSubjects={[satMath]} />);
+    fireEvent.click(screen.getByText("편집"));
+    fireEvent.click(screen.getByRole("button", { name: "키워드 사전" }));
+
+    fireEvent.change(screen.getByPlaceholderText("새 키워드 (예: 이차방정식)"), {
+      target: { value: "중복키워드" },
+    });
+    fireEvent.click(screen.getByText("추가"));
+
+    await waitFor(() => expect(screen.getByText("이미 존재하는 키워드입니다.")).toBeInTheDocument());
+    // 새로 만든 값이 화면 상태(사전)에는 반영되지 않아야 한다 — DB/화면 불일치 방지.
+    expect(screen.queryByText("중복키워드")).not.toBeInTheDocument();
+  });
+});
+
+// P2/P3 2차 — 키워드 이름 수정.
+// 키워드는 교재·문제·회차가 전부 id로 참조한다. 그래서 이름을 고치는 것이
+// "새로 만들어 옮기기"보다 안전하다 — 붙어 있던 연결이 그대로 유지된다.
+describe("과목 키워드 이름 수정", () => {
+  beforeEach(() => vi.clearAllMocks());
+
+  // 단원 제목과 겹치지 않는 키워드를 쓴다 — 겹치면 무엇을 눌렀는지 알 수 없다.
+  const withKeyword: AdminSubject = {
+    ...satMath,
+    keywords: [{ id: "kw1", label: "포물선", status: "active" }],
+  };
+
+  function openKeywordEditor() {
+    render(<Wrapper initialSubjects={[withKeyword]} />);
+    fireEvent.click(screen.getByText("편집"));
+    fireEvent.click(screen.getByRole("button", { name: "키워드 사전" }));
+    fireEvent.click(screen.getByRole("button", { name: "모두 펼치기" }));
+    fireEvent.click(screen.getByRole("button", { name: "포물선" }));
+    return screen.getByLabelText("키워드 이름");
+  }
+
+  it("이름을 고치면 목록에 새 이름이 보인다", async () => {
+    vi.mocked(actions.renameSubjectKeyword).mockResolvedValue({
+      ok: true,
+      value: { id: "kw1", label: "포물선의 축", status: "active" },
+    });
+    const input = openKeywordEditor();
+    fireEvent.change(input, { target: { value: "포물선의 축" } });
+    fireEvent.keyDown(input, { key: "Enter" });
+
+    await waitFor(() => expect(actions.renameSubjectKeyword).toHaveBeenCalledWith("kw1", "포물선의 축"));
+    await waitFor(() => expect(screen.getByRole("button", { name: "포물선의 축" })).toBeInTheDocument());
+  });
+
+  it("이름이 겹치면 사유를 보여주고 편집 상태를 유지한다", async () => {
+    vi.mocked(actions.renameSubjectKeyword).mockResolvedValue({
+      ok: false,
+      error: "같은 과목에 이미 있는 키워드 이름입니다.",
+    });
+    const input = openKeywordEditor();
+    fireEvent.change(input, { target: { value: "삼각함수" } });
+    fireEvent.keyDown(input, { key: "Enter" });
+
+    await waitFor(() =>
+      expect(screen.getByText("같은 과목에 이미 있는 키워드 이름입니다.")).toBeInTheDocument()
+    );
+    // 고치던 값을 잃지 않아야 한다 — 다시 입력하게 만들면 안 된다.
+    expect(screen.getByLabelText("키워드 이름")).toHaveValue("삼각함수");
+  });
+
+  it("바꾸지 않고 빠져나오면 아무것도 부르지 않는다", async () => {
+    const input = openKeywordEditor();
+    fireEvent.keyDown(input, { key: "Escape" });
+    expect(actions.renameSubjectKeyword).not.toHaveBeenCalled();
+    expect(screen.queryByLabelText("키워드 이름")).not.toBeInTheDocument();
+  });
+});
+
+describe("회차 키워드 태그 — 도메인 그룹(관리자는 한국어 '기타')", () => {
+  it("도메인 제목 아래로 묶이고 구 키워드는 기타에 들어간다", () => {
+    const subject: AdminSubject = {
+      ...satMath,
+      keywords: [
+        { id: "kw1", label: "Linear equations", status: "active", domainCode: "algebra" },
+        { id: "kw2", label: "포물선", status: "active" },
+      ],
+      units: [{ id: "u1", position: 1, unitTitle: "함수의 기초", note: null, keywordIds: ["kw1"] }],
+    };
+    render(<Wrapper initialSubjects={[subject]} />);
+    fireEvent.click(screen.getByText("편집"));
+    fireEvent.click(screen.getByRole("button", { name: "키워드 모두 펼치기" }));
+    expect(screen.getByText("Algebra")).toBeInTheDocument();
+    expect(screen.getAllByText("기타").length).toBeGreaterThanOrEqual(1);
+    expect(screen.getByLabelText("함수의 기초 회차에 Linear equations 해제")).toHaveAttribute("aria-pressed", "true");
+  });
+});
+
+describe("AP 회차 구성 / 키워드 사전 서브탭", () => {
+  const ap: AdminSubject = {
+    subjectId: "ap1",
+    subjectName: "AP Calculus AB",
+    units: [
+      { id: "L1", position: 1, unitTitle: "Unit 1 · Lesson 1: Limits", note: null, keywordIds: ["k1", "k2"], lessonKind: "content", trackSet: "compact", estMinutes: 110, cedUnitCode: "1" },
+      { id: "X1", position: 2, unitTitle: "Exam Prep 1", note: null, keywordIds: [], lessonKind: "exam_prep", trackSet: "compact", estMinutes: 110, cedUnitCode: null },
+    ],
+    keywords: [
+      { id: "k1", label: "Limit notation", status: "active", folderId: "f1", folderName: "Unit 1", folderPosition: 1 },
+      { id: "k2", label: "One-sided limits", status: "active", folderId: "f1", folderName: "Unit 1", folderPosition: 1 },
+    ],
+    folders: [{ id: "f1", name: "Unit 1", position: 1 }],
+  };
+
+  it("회차 구성이 기본 탭이고 배지(종류·단원·과정·분)가 보이며 키워드는 접혀 있다", () => {
+    render(<Wrapper initialSubjects={[ap]} />);
+    fireEvent.click(screen.getByText("편집"));
+    expect(screen.getByRole("button", { name: "회차 구성" })).toHaveAttribute("aria-current", "page");
+    const badges = screen.getAllByTestId("lesson-badges");
+    expect(badges).toHaveLength(2);
+    expect(badges[0]).toHaveTextContent("내용");
+    expect(badges[0]).toHaveTextContent("Unit 1");
+    expect(badges[0]).toHaveTextContent("컴팩트");
+    expect(badges[0]).toHaveTextContent("110분");
+    expect(badges[1]).toHaveTextContent("시험 준비");
+    const toggle = screen.getByRole("button", { name: /Lesson 1: Limits 회차 키워드 펼치기/ });
+    expect(toggle).toHaveAttribute("aria-expanded", "false");
+    expect(toggle).toHaveTextContent("키워드 2개");
+    expect(screen.queryByLabelText(/회차에 Limit notation/)).not.toBeInTheDocument();
+    fireEvent.click(toggle);
+    expect(toggle).toHaveAttribute("aria-expanded", "true");
+  });
+
+  it("키워드 사전 탭은 폴더가 접힌 채로 열리고 모두 펼치기·검색이 된다", () => {
+    render(<Wrapper initialSubjects={[ap]} />);
+    fireEvent.click(screen.getByText("편집"));
+    fireEvent.click(screen.getByRole("button", { name: "키워드 사전" }));
+    expect(screen.queryByText("Limit notation")).not.toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: "모두 펼치기" }));
+    expect(screen.getByText("Limit notation")).toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: "모두 접기" }));
+    fireEvent.change(screen.getByLabelText("키워드 검색"), { target: { value: "one-sided" } });
+    expect(screen.getByText("One-sided limits")).toBeInTheDocument();
   });
 });

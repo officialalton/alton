@@ -1,12 +1,18 @@
-import { render, screen, fireEvent } from "@testing-library/react";
-import { describe, expect, it, vi } from "vitest";
+import { render, screen, fireEvent, within } from "@testing-library/react";
+import { describe, expect, it, vi, beforeEach } from "vitest";
 import ParentShell from "./ParentShell";
 import type { DashboardData } from "@/app/student/dashboard-data";
 import type { Child } from "./children-data";
 
-const replaceMock = vi.fn();
+const pushMock = vi.fn();
+vi.mock("./mock-exam-tab-actions", () => ({
+  loadChildMockExamOverviewAction: vi.fn(async () => ({ catalog: [], attempts: [] })),
+}));
+vi.mock("./board-actions", () => ({
+  loadChildBoardCardsAction: vi.fn(async () => []),
+}));
 vi.mock("next/navigation", () => ({
-  useRouter: () => ({ push: vi.fn(), replace: replaceMock }),
+  useRouter: () => ({ push: pushMock, replace: vi.fn(), refresh: vi.fn() }),
 }));
 
 vi.mock("@/app/login/actions", () => ({
@@ -23,6 +29,28 @@ vi.mock("@/app/student/review-actions", () => ({
 
 vi.mock("./credits-actions", () => ({
   createCreditCheckoutSession: vi.fn(),
+}));
+
+vi.mock("./purchase-actions", () => ({
+  createEntitlementCheckoutSession: vi.fn(),
+}));
+
+vi.mock("./inquiry-actions", () => ({
+  getMessengerUnreadCount: vi.fn().mockResolvedValue(0),
+  listGuardianMeetingRequests: vi.fn().mockResolvedValue([]),
+  submitMeetingRequest: vi.fn(),
+  getGuardianMeetingRequestReview: vi.fn().mockResolvedValue(null),
+  getMyHouseholdConsultantsAction: vi.fn().mockResolvedValue([]),
+  listOpenSlotsForConsultantAction: vi.fn().mockResolvedValue([]),
+}));
+
+vi.mock("./home-reviews-actions", () => ({
+  getAllFamilyLessonReviews: vi.fn().mockResolvedValue([]),
+  getHomeConsultationReviews: vi.fn().mockResolvedValue([]),
+}));
+
+vi.mock("./home-stats-actions", () => ({
+  getParentChildStats: vi.fn().mockResolvedValue({ attendanceRate: null, satisfactionAvg: null, bySubject: [] }),
 }));
 
 const childrenList: Child[] = [
@@ -47,13 +75,32 @@ const lessonsProps = {
   reviews: {},
   myFeedback: {},
   bookableEnrollments: [],
-  credits: { balance: 0, referralCode: null, packages: [] },
+  credits: { referralCode: null },
+  entitlements: { prices: [], children: [] },
   consentChildren: [],
   activeConsentPolicy: null,
+  childrenSubjectEnrollments: [],
+  vocabData: { children: [], books: [] },
+  homeworkByChild: [],
+  lessonBooking: {
+    bookableEnrollments: [],
+    upcomingBookings: [],
+    pastSessionsForReport: [],
+    regularLessonTypeId: null,
+    lessonDurationMinutes: 120,
+    timezone: "America/Los_Angeles",
+  },
 };
 
 describe("ParentShell", () => {
-  it("사이드바 5개 항목과 자녀 전환 pill을 보여주고, 기본 탭은 홈이다", () => {
+  // 2026-09-22 — "Review" 서브탭이 종합/수업/상담 리뷰를 한 번에 불러오면서
+  // 테스트 간 mock 호출 이력이 남으면 다음 테스트의 "호출 안 됨" 단언이
+  // 실행 순서에 따라 깨질 수 있다 — 매 테스트 전에 초기화한다.
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
+  it("사이드바 항목(홈/수업권/수강 과목/수업/상담/단어장/과제)을 보여주고, 기본 탭은 홈(Overview 서브탭)이다", () => {
     render(
       <ParentShell
         parentName="김민지"
@@ -63,12 +110,103 @@ describe("ParentShell", () => {
         {...lessonsProps}
       />
     );
-    ["홈", "레슨", "수업권", "통계"].forEach((label) =>
-      expect(screen.getByText(label)).toBeInTheDocument()
+    ["Home", "Lesson Credits", "Courses", "Lessons", "Practice Tests", "Consultations", "Vocabulary Builder", "Assignments"].forEach((label) =>
+      expect(screen.getAllByText(label).length).toBeGreaterThan(0)
     );
-    expect(screen.getByText("지훈")).toBeInTheDocument();
-    expect(screen.getByText("이서아")).toBeInTheDocument();
-    expect(screen.getByText(/지훈의 학습 현황/)).toBeInTheDocument();
+    // 2026-09-17/18 IA 재구성: 지인 추천/통계(독립 탭)/동의/가족/교재는
+    // 메인 내비게이션에서 제거됐다(지인 추천·동의는 프로필 드롭다운).
+    // 2026-09-19(UAT 반영)에서 "예약"(Bookings) 탭은 다시 메인 내비로
+    // 돌아왔으므로 더 이상 부재를 확인하지 않는다(아래 별도 테스트가 커버).
+    // 2026-09-22(사용자 지시) — 모의고사도 홈 서브탭에서 좌측 nav "모의고사"로
+    // 옮겼고, 통계 서브탭은 아예 없앴다(Overview에 이미 있다는 이유).
+    expect(screen.queryByText("Refer a Friend")).not.toBeInTheDocument();
+    expect(screen.queryByText("Family")).not.toBeInTheDocument();
+    expect(screen.queryByText("Materials")).not.toBeInTheDocument();
+    expect(screen.getAllByText("지훈").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("이서아").length).toBeGreaterThan(0);
+    // 2026-09-22(사용자 지시) — 종합/수업/상담 리뷰를 "Review" 서브탭 하나로 합쳤다.
+    expect(screen.getByText("Review")).toBeInTheDocument();
+    // 2026-09-30(오너 결정) — 통계 서브탭 복귀: 학생 본인과 같은 범위의 통계를 본다.
+    expect(screen.getByText("Stats")).toBeInTheDocument();
+    // 홈 기본 서브탭은 Overview — "Review" 탭 내용은 눌러야 보인다.
+    fireEvent.click(screen.getByText("Review"));
+    // 2026-09-18(사용자 결정 2차) — "종합 리뷰"는 수업/상담 리뷰를 합친 목록이
+    // 아니라 향후 AI OS가 만들 "Monthly Summary Review" 전용 자리라 정적 준비 중
+    // 문구만 보여준다(데이터 로딩 없음 — 즉시 렌더되므로 findByText 불필요).
+    expect(screen.getByText("Monthly Summary Review")).toBeInTheDocument();
+    expect(screen.getByText(/No monthly summary review has been generated yet/)).toBeInTheDocument();
+  });
+
+  it("홈 상단에는 동의 배너를 보여주지 않는다(2026-09-17, 배지는 프로필 메뉴로만)", () => {
+    render(
+      <ParentShell
+        parentName="김민지"
+        childrenList={childrenList}
+        currentChildId="s1"
+        dashboard={dashboard}
+        {...lessonsProps}
+        consentChildren={[
+          { studentId: "s1", name: "지훈", isUnder13: true, dobKnown: true, hasValidConsent: false, latestConsent: null },
+        ]}
+      />
+    );
+    expect(screen.queryByText(/documents need your consent/)).not.toBeInTheDocument();
+  });
+
+  // 2026-09-22(사용자 지시) — 종합/수업/상담 리뷰를 "Review" 서브탭 하나로
+  // 합쳤다. 클릭 한 번으로 수업 리뷰·상담 리뷰 로더가 함께 호출된다.
+  it("홈 'Review' 서브탭을 누르면 종합/수업/상담 리뷰가 함께 보인다", async () => {
+    const { getAllFamilyLessonReviews, getHomeConsultationReviews } = await import("./home-reviews-actions");
+    vi.mocked(getAllFamilyLessonReviews).mockResolvedValueOnce([
+      {
+        reviewId: "rev1",
+        sessionId: "sess1",
+        lessonType: "regular",
+        finalText: "수업 리뷰 내용",
+        aiSummary: null,
+        finalizedAt: "2026-09-10T00:00:00.000Z",
+        categoryNotes: [],
+        meetingRecordLink: "https://drive.google.com/file/d/f1/view",
+      },
+    ]);
+    vi.mocked(getHomeConsultationReviews).mockResolvedValueOnce([
+      {
+        meetingRequestId: "mr1",
+        startsAt: "2026-09-10T05:00:00.000Z",
+        endsAt: "2026-09-10T05:30:00.000Z",
+        finalText: "학습 태도가 좋아졌습니다.",
+        finalizedAt: "2026-09-11T00:00:00.000Z",
+        meetingRecordLink: null,
+      },
+    ]);
+    render(
+      <ParentShell
+        parentName="김민지"
+        childrenList={childrenList}
+        currentChildId="s1"
+        dashboard={dashboard}
+        {...lessonsProps}
+      />
+    );
+    expect(getAllFamilyLessonReviews).not.toHaveBeenCalled();
+    fireEvent.click(screen.getByText("Review"));
+    expect(await screen.findByText("수업 리뷰 내용")).toBeInTheDocument();
+    expect(await screen.findByText("학습 태도가 좋아졌습니다.")).toBeInTheDocument();
+    expect(screen.getByText("Monthly Summary Review")).toBeInTheDocument();
+  });
+
+  it("홈 'Review' 서브탭의 상담 리뷰 빈 상태는 간결한 문구를 보여준다", async () => {
+    render(
+      <ParentShell
+        parentName="김민지"
+        childrenList={childrenList}
+        currentChildId="s1"
+        dashboard={dashboard}
+        {...lessonsProps}
+      />
+    );
+    fireEvent.click(screen.getByText("Review"));
+    expect(await screen.findByText("No finalized consultation reviews yet.")).toBeInTheDocument();
   });
 
   it("다른 자녀 pill을 누르면 ?child= 쿼리로 이동한다", () => {
@@ -81,11 +219,11 @@ describe("ParentShell", () => {
         {...lessonsProps}
       />
     );
-    fireEvent.click(screen.getByText("이서아"));
-    expect(replaceMock).toHaveBeenCalledWith("?child=s2&tab=home", { scroll: false });
+    fireEvent.click(screen.getAllByText("이서아")[0]);
+    expect(pushMock).toHaveBeenCalledWith("?child=s2&tab=home", { scroll: false });
   });
 
-  it("레슨 탭을 누르면 읽기전용 LessonsTab이 렌더링된다(메모 입력창 없음)", () => {
+  it("수업 탭을 누르면 읽기전용 LessonsTab이 렌더링된다(메모 입력창 없음)", () => {
     render(
       <ParentShell
         parentName="김민지"
@@ -95,11 +233,14 @@ describe("ParentShell", () => {
         {...lessonsProps}
       />
     );
-    fireEvent.click(screen.getByText("레슨"));
-    expect(screen.getByText("예정된 수업이 없습니다.")).toBeInTheDocument();
+    fireEvent.click(screen.getAllByText("Lessons")[0]);
+    expect(screen.getByText("No upcoming lessons.")).toBeInTheDocument();
   });
 
-  it("수업권 탭을 누르면 CreditsTab이 렌더링되고 결제수단 입력은 없다", () => {
+  // 2026-09-19(UAT 반영, 제품 오너 결정) — 2026-09-17 R13의 "예약 독립 탭
+  // 제거" 정책을 되돌려 "예약" 탭을 다시 만들었다. LessonBookingTab
+  // 자체 동작은 그 컴포넌트 테스트가 이미 커버하므로, 여기서는 탭 진입만 확인.
+  it("Bookings 탭을 누르면 LessonBookingTab이 렌더링된다", () => {
     render(
       <ParentShell
         parentName="김민지"
@@ -109,12 +250,99 @@ describe("ParentShell", () => {
         {...lessonsProps}
       />
     );
-    fireEvent.click(screen.getByText("수업권"));
-    expect(screen.getByText("장 보유")).toBeInTheDocument();
+    fireEvent.click(screen.getAllByText("Bookings")[0]);
+    expect(
+      screen.getByText(/A teacher hasn.t been assigned yet/)
+    ).toBeInTheDocument();
+  });
+
+  // 2026-09-22(사용자 지시) — 별도 Planner nav는 Home 서브탭(Overview/Board/Review)으로
+  // 흡수됐다. "Done"은 별도 서브탭 없이 Board 안 한 칼럼으로 합쳐졌다.
+  it("Home의 Board 서브탭을 누르면 자녀 보드가 읽기 전용으로 렌더링된다(Student Success Planner MVP)", async () => {
+    render(
+      <ParentShell
+        parentName="김민지"
+        childrenList={childrenList}
+        currentChildId="s1"
+        dashboard={dashboard}
+        {...lessonsProps}
+      />
+    );
+    fireEvent.click(screen.getAllByText("Home")[0]);
+    fireEvent.click(await screen.findByText("Board"));
+    expect(await screen.findByText("Backlog")).toBeInTheDocument();
+  });
+
+  it("수업권 탭을 누르면 EntitlementsTab(R4)이 렌더링된다", () => {
+    render(
+      <ParentShell
+        parentName="김민지"
+        childrenList={childrenList}
+        currentChildId="s1"
+        dashboard={dashboard}
+        {...lessonsProps}
+      />
+    );
+    fireEvent.click(screen.getAllByText("Lesson Credits")[0]);
+    expect(screen.getByText("Overview")).toBeInTheDocument();
+    expect(screen.getByText("Buy")).toBeInTheDocument();
+  });
+
+  it("상담 탭은 상담 신청 서브탭이 기본이고, 상담 내역 서브탭은 ConsultationHistoryTab을 보여준다", async () => {
+    render(
+      <ParentShell
+        parentName="김민지"
+        childrenList={childrenList}
+        currentChildId="s1"
+        dashboard={dashboard}
+        {...lessonsProps}
+      />
+    );
+    fireEvent.click(screen.getAllByText("Consultations")[0]);
+    expect(await screen.findByPlaceholderText("What would you like to discuss?")).toBeInTheDocument();
+    fireEvent.click(screen.getByText("History"));
+    expect(await screen.findByText("No consultation requests yet.")).toBeInTheDocument();
+  });
+
+  // 2026-09-18 통합 지시: 신규 자녀 상담 신청 흐름(showNewChildConsult 토글,
+  // ConsultRequestTab)은 완전히 폐기됐다 — "상담 신청" 서브탭은 이제
+  // ConsultationRequestTab 단일 흐름으로만 연결된다.
+
+  it("계정 메뉴를 열면 동의/지인 추천/시간대 설정/로그아웃이 보인다", () => {
+    render(
+      <ParentShell
+        parentName="김민지"
+        childrenList={childrenList}
+        currentChildId="s1"
+        dashboard={dashboard}
+        {...lessonsProps}
+      />
+    );
+    fireEvent.click(screen.getByText("김민지 ▾"));
+    expect(screen.getAllByText("Consent").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("Refer a Friend").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("Time Zone").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("Log Out").length).toBeGreaterThan(0);
+  });
+
+  it("계정 메뉴의 지인 추천을 누르면 CreditsTab(추천 코드 전용)이 모달로 뜨고 결제수단 입력은 없다", () => {
+    render(
+      <ParentShell
+        parentName="김민지"
+        childrenList={childrenList}
+        currentChildId="s1"
+        dashboard={dashboard}
+        {...lessonsProps}
+      />
+    );
+    fireEvent.click(screen.getByText("김민지 ▾"));
+    fireEvent.click(screen.getAllByText("Refer a Friend")[0]);
+    expect(screen.getByText("No referral code yet.")).toBeInTheDocument();
+    expect(screen.queryByText("credits available")).not.toBeInTheDocument();
     expect(screen.queryByPlaceholderText("0000 0000 0000 0000")).not.toBeInTheDocument();
   });
 
-  it("다른 탭을 누르면 준비 중 문구를 보여준다", () => {
+  it("계정 메뉴의 동의를 누르면 동의 탭으로 이동한다(?tab=consent)", () => {
     render(
       <ParentShell
         parentName="김민지"
@@ -124,11 +352,46 @@ describe("ParentShell", () => {
         {...lessonsProps}
       />
     );
-    fireEvent.click(screen.getByText("통계"));
-    expect(screen.getByText("통계 탭은 준비 중입니다.")).toBeInTheDocument();
+    fireEvent.click(screen.getByText("김민지 ▾"));
+    fireEvent.click(screen.getAllByText("Consent")[0]);
+    expect(pushMock).toHaveBeenCalledWith("?child=s1&tab=consent", { scroll: false });
   });
 
-  it("계정 메뉴를 열면 로그아웃 버튼이 보인다", () => {
+  it("동의/정규 진행 조치가 필요한 자녀가 있으면 계정 메뉴의 동의에 숫자 배지가 붙는다", () => {
+    render(
+      <ParentShell
+        parentName="김민지"
+        childrenList={childrenList}
+        currentChildId="s1"
+        dashboard={dashboard}
+        {...lessonsProps}
+        consentChildren={[
+          { studentId: "s1", name: "지훈", isUnder13: true, dobKnown: true, hasValidConsent: false, latestConsent: null },
+        ]}
+      />
+    );
+    fireEvent.click(screen.getByText("김민지 ▾"));
+    expect(within(screen.getAllByText("Consent")[0].parentElement as HTMLElement).getByText("1")).toBeInTheDocument();
+  });
+
+  it("생년월일이 아직 입력되지 않은 자녀는 is_under_13이 true여도 동의 배지 카운트에 포함하지 않는다(계정 생성 직후 회귀 방지)", () => {
+    render(
+      <ParentShell
+        parentName="김민지"
+        childrenList={childrenList}
+        currentChildId="s1"
+        dashboard={dashboard}
+        {...lessonsProps}
+        consentChildren={[
+          { studentId: "s1", name: "지훈", isUnder13: true, dobKnown: false, hasValidConsent: false, latestConsent: null },
+        ]}
+      />
+    );
+    fireEvent.click(screen.getByText("김민지 ▾"));
+    expect(within(screen.getAllByText("Consent")[0].parentElement as HTMLElement).queryByText("1")).not.toBeInTheDocument();
+  });
+
+  it("조치가 필요한 항목이 전부 없으면 동의 배지를 보여주지 않는다", () => {
     render(
       <ParentShell
         parentName="김민지"
@@ -138,7 +401,77 @@ describe("ParentShell", () => {
         {...lessonsProps}
       />
     );
-    fireEvent.click(screen.getByText("김민지 학부모님 ▾"));
-    expect(screen.getByText("로그아웃")).toBeInTheDocument();
+    fireEvent.click(screen.getByText("김민지 ▾"));
+    expect(screen.queryByText("0")).not.toBeInTheDocument();
+  });
+
+  it("동명이인이어도 childId 기준으로 조치가 필요한 자녀 수만 배지에 센다(중복 카운트 방지)", () => {
+    // s1과 s3는 이름이 같지만("지훈") id가 다르다. s3만 13세 미만 동의가
+    // 필요하면 배지는 1이어야 한다(이름 매칭 시 잘못 부풀려질 수 있음).
+    const duplicateNameChildren: Child[] = [
+      { studentId: "s1", name: "지훈", isPrimary: true },
+      { studentId: "s3", name: "지훈", isPrimary: false },
+    ];
+    render(
+      <ParentShell
+        parentName="김민지"
+        childrenList={duplicateNameChildren}
+        currentChildId="s1"
+        dashboard={dashboard}
+        {...lessonsProps}
+        consentChildren={[
+          { studentId: "s3", name: "지훈", isUnder13: true, dobKnown: true, hasValidConsent: false, latestConsent: null },
+        ]}
+      />
+    );
+    fireEvent.click(screen.getByText("김민지 ▾"));
+    expect(within(screen.getAllByText("Consent")[0].parentElement as HTMLElement).getByText("1")).toBeInTheDocument();
+  });
+
+  // 2026-09-22(사용자 지시) — "모의고사"는 이제 홈 서브탭이 아니라 좌측
+  // 독립 nav("모의고사")다. 여전히 별도 라우트로 이동하지 않고 탭 안에서
+  // 현재 선택된 자녀의 응시 목록을 바로 보여준다.
+  it("Practice Tests 탭을 누르면 라우트 이동 없이 탭 안에서 자녀 응시 목록을 보여준다", async () => {
+    pushMock.mockClear();
+    render(
+      <ParentShell
+        parentName="김민지"
+        childrenList={childrenList}
+        currentChildId="s1"
+        dashboard={dashboard}
+        {...lessonsProps}
+      />
+    );
+    fireEvent.click(screen.getAllByText("Practice Tests")[0]);
+    expect(pushMock).not.toHaveBeenCalledWith("/parent/mock-exam/s1");
+    expect(await screen.findByText("No practice tests are available yet.")).toBeInTheDocument();
+  });
+
+  it("현재 활성 탭에는 aria-current가 붙고, 탭 전환 시 이동한다", () => {
+    render(
+      <ParentShell
+        parentName="김민지"
+        childrenList={childrenList}
+        currentChildId="s1"
+        dashboard={dashboard}
+        {...lessonsProps}
+      />
+    );
+    expect(screen.getAllByRole("button", { name: new RegExp("Home") })[0]).toHaveAttribute(
+      "aria-current",
+      "page"
+    );
+    expect(
+      screen.getAllByRole("button", { name: new RegExp("Lesson Credits") })[0]
+    ).not.toHaveAttribute("aria-current");
+
+    fireEvent.click(screen.getAllByRole("button", { name: new RegExp("Lesson Credits") })[0]);
+    expect(screen.getAllByRole("button", { name: new RegExp("Lesson Credits") })[0]).toHaveAttribute(
+      "aria-current",
+      "page"
+    );
+    expect(
+      screen.getAllByRole("button", { name: new RegExp("Home") })[0]
+    ).not.toHaveAttribute("aria-current");
   });
 });

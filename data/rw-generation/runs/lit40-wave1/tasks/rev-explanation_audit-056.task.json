@@ -1,0 +1,349 @@
+{
+ "schema": "rw-session-task/v1",
+ "kind": "review",
+ "role": "explanation_audit",
+ "runId": "lit40-wave1",
+ "taskId": "rev-explanation_audit-056",
+ "chunkId": "rev-explanation_audit-056",
+ "suggestedModel": "sonnet",
+ "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-explanation_audit-056.result.json",
+ "outputSchema": {
+  "chunkId": "청크 ID",
+  "model": "sonnet",
+  "items": [
+   {
+    "candidateId": "id",
+    "answer_correct": "표시된 정답이 정말 정답이면 true",
+    "explanation_consistent": "해설이 정답·오답 판단과 일치하고 글자 참조가 맞으면 true",
+    "explanation_factual": "해설에 사실 오류가 없으면 true",
+    "issues": "한 줄 메모"
+   }
+  ]
+ },
+ "items": [
+  {
+   "candidateId": "lit40-easy-01-090",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "easy",
+   "passage": "\"At length it came over a beautiful scene,\nThat nature in silence had made;\nThe place was but small, but't was sweetly serene,\nAnd chequered with sunshine and shade.\n\n\"I gazed and I envied with painful good will,\nAnd grew tired of my seat in the air;\nWhen all of a sudden my Castle stood still,\nAs if some attraction were there.\n\n\"Like a lark from the sky it came fluttering down,\nAnd placed me exactly in view,\nWhen whom should I meet in this charming retreat\nThis corner of calmness, but--you.",
+   "question": "As used in the text, the phrase “This corner of calmness” most nearly suggests",
+   "options": [
+    "a crowded spot where the speaker feels trapped.",
+    "a sharp angle in the walls of the speaker's castle.",
+    "a small, peaceful place set apart from the world.",
+    "a cold, dark refuge from the heat of the sun."
+   ],
+   "correct_letter": "C",
+   "explanation": "시의 앞부분은 이곳을 자연이 고요 속에 만든 작고도 평온한 장소로 묘사한다. 이어 화자는 이곳을 매력적인 은신처라고 부른 뒤 같은 장소를 고요의 구석이라고 다시 표현한다. 따라서 C가 정답이다. A의 혼잡함, B의 성벽 모서리라는 문자적 해석, D의 춥고 어두운 곳은 햇빛과 그늘이 어우러진 평온한 장면과 맞지 않는다."
+  },
+  {
+   "candidateId": "lit40-easy-01-091",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "easy",
+   "passage": "The occasional sense of our being too weak for the ordinary incidents of life, is strangely distressing. The cry of an infant makes us wretched for hours after, in spite of every effort of reason. I saw, through my telescope, two big boys worrying a little one, and I could not look to see the end of it. They were so far off that there was nothing to be done. The distress to me was such--the picture of the lives of the three boys was so vivid--that I felt as if I had no reason nor courage left.",
+   "question": "As used in the text, the phrase “too weak for the ordinary incidents of life” most nearly suggests feeling",
+   "options": [
+    "physically ill from a lack of rest and food.",
+    "unable to lift heavy objects in daily work.",
+    "too young to understand the actions of others.",
+    "emotionally overwhelmed by common painful sights."
+   ],
+   "correct_letter": "D",
+   "explanation": "필자는 아기의 울음이 이성의 노력에도 몇 시간 동안 자신을 비참하게 만든다고 말한다. 또 망원경으로 큰 소년들이 작은 아이를 괴롭히는 장면을 보고 이성도 용기도 남지 않은 듯했다고 고백한다. 따라서 이 구절은 흔한 고통스러운 장면에 감정적으로 압도되는 상태를 뜻하므로 D가 정답이다. A와 B는 신체적 약함으로, C는 나이로 잘못 해석했다."
+  },
+  {
+   "candidateId": "lit40-easy-01-092",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "easy",
+   "passage": "The family living in the hut consisted of three persons--man, wife and their little daughter, a sweet child of about four years of age. Both mother and child were neatly dressed, and had a genteel appearance that was in marked contrast with their surroundings. The child wore a tidy pink dress, tastefully ornamented, and seemed as if she had just come from the class-room of a convent school. The family impressed us as having seen better days, and had evidently not lived always so far away from their fellows.\n\nNear the house stood a large calabash tree, bearing the largest fruit of the kind we had yet observed.",
+   "question": "As used in the text, the phrase “as if she had just come from the class-room of a convent school” most nearly suggests that the child",
+   "options": [
+    "looks unusually neat and cared for given her setting.",
+    "has recently arrived from a school far from her home.",
+    "is shy and silent in the presence of strangers.",
+    "is dressed in a plain uniform like other pupils."
+   ],
+   "correct_letter": "A",
+   "explanation": "지문은 엄마와 아이가 단정하게 차려입어 주변 환경과 뚜렷이 대조되는 품위 있는 모습이었다고 말한다. 아이가 단정하고 멋스럽게 장식된 분홍 옷을 입었다는 묘사도 이 비유를 뒷받침한다. 따라서 A가 정답이다. B는 비유를 사실로 읽었고, C의 수줍음은 근거가 없으며, D의 수수한 교복은 장식된 분홍 옷과 맞지 않는다."
+  },
+  {
+   "candidateId": "lit40-easy-01-093",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "easy",
+   "passage": "Venus, who was present at the festival, heard him and knew the thought he would have uttered; and as an omen of her favor, caused the flame on the altar to shoot up thrice in a fiery point into the air. When he returned home, he went to see his statue, and leaning over the couch, gave a kiss to the mouth. It seemed to be warm. He pressed its lips again, he laid his hand upon the limbs; the ivory felt soft to his touch and yielded to his fingers like the wax of Hymettus. While he stands astonished and glad, though doubting, and fears he may be mistaken, again and again with a lover's ardor he touches the object of his hopes. It was indeed alive!",
+   "question": "As used in the text, the phrase “yielded to his fingers like the wax of Hymettus” most nearly suggests that",
+   "options": [
+    "the statue breaks apart when he presses it firmly.",
+    "the hard ivory turns soft and pliant like living flesh.",
+    "the statue is melting from the heat of the altar flame.",
+    "the ivory feels sticky and unpleasant to his hand."
+   ],
+   "correct_letter": "B",
+   "explanation": "그가 입맞춤했을 때 조각상이 따뜻하게 느껴졌고, 상아가 손길에 부드럽게 느껴졌다는 서술이 이어진다. 마지막에 조각상이 정말 살아 있었다고 밝혀지므로 밀랍 비유는 단단한 상아가 살아 있는 몸처럼 부드러워졌음을 뜻한다. 따라서 B가 정답이다. A의 부서짐, C의 녹아내림, D의 불쾌함은 기쁨과 놀라움의 장면과 맞지 않는다."
+  },
+  {
+   "candidateId": "lit40-easy-01-096",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "word_in_context",
+   "requestedDifficulty": "easy",
+   "passage": "Time passed on, and the Fairies had done nothing to gain their lovely home again. They wept no longer, but watched little Bud, as she daily tended the flowers, restoring their strength and beauty, or with gentle words flew from nest to nest, teaching the little birds to live happily together; and wherever she went blessings fell, and loving hearts were filled with gratitude.\n\nThen, one by one, the Elves secretly did some little work of kindness, and found a quiet joy come back to repay them. Flowers looked lovingly up as they passed, birds sang to cheer them when sad thoughts made them weep. And soon little Bud found out their gentle deeds, and her friendly words gave them new strength.",
+   "question": "As used in the text, what does the word “tended” most nearly mean?",
+   "options": [
+    "cared for",
+    "leaned toward",
+    "listened to",
+    "grew tired of"
+   ],
+   "correct_letter": "A",
+   "explanation": "Bud가 매일 꽃을 돌보면서 그 힘과 아름다움을 되살렸다는 맥락이다. 그녀가 가는 곳마다 축복이 내렸다는 서술도 보살핌의 의미를 뒷받침하므로 tended는 '돌보다'라는 뜻이다. 따라서 A가 정답이다. B의 '기울다', C의 '귀 기울이다', D의 '싫증 나다'는 꽃을 되살리는 행동과 연결되지 않는다."
+  },
+  {
+   "candidateId": "lit40-easy-01-100",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "easy",
+   "passage": "Meantime, the unconscious object of their criticism walked sadly down the old market-garden, whose rude outlines and homely details he once clothed with the poetry of a sensitive man's first love. Well, it was a common cabbage field and potato patch after all. In his disgust he felt conscious of even the loss of that sense of patronage and superiority which had invested his affection for a girl of meaner condition. His self-respect was humiliated with his love. The soil and dirt of those wretched cabbages had clung to him, but not to her. It was she who had gone higher; it was he who was left in the vulgar ruins of his misplaced passion.\n\nHe reached the bottom of the garden without observing any sign of the lonely invalid.",
+   "question": "Which choice best describes the shift in tone in the text?",
+   "options": [
+    "It moves from cheerful excitement to calm acceptance of his love.",
+    "It moves from anger at the girl to sympathy for her poor family.",
+    "It moves from bored description to eager hope for the future.",
+    "It moves from fond memory of the garden to bitter disillusionment."
+   ],
+   "correct_letter": "D",
+   "explanation": "지문 앞부분은 그가 한때 첫사랑의 시정으로 그 텃밭을 감쌌다고 회상한다. 그러나 곧 그것은 결국 흔한 양배추 밭이었다는 문장으로 어조가 바뀌고, 그는 잘못된 열정의 초라한 폐허에 남겨졌다고 느낀다. 따라서 애틋한 기억에서 쓰라린 환멸로 바뀐다는 D가 정답이다. A의 평온한 수용, B의 동정, C의 희망은 굴욕과 혐오의 감정과 맞지 않는다."
+  },
+  {
+   "candidateId": "lit40-easy-02-021",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "easy",
+   "passage": "If Richard prayed, it was with the heart, for his lips never opened. But I believe that his heart, in this hour of clear defeat, was turned to stone. He took his joys with riot, his triumphs calmly; his griefs he shut in a trap. Such a nature as his, I suppose, respects no persons. Whether God beat him, or his enemy, he would take it the same way. All that Gilles heard him say aloud was this: 'What I have done I have done: deliver us from evil.' He bade no farewell to his hope, he asked no greeting for his altered way. When he had turned his back upon the sacred places he lowered his shield; and then rode down the hill into the cold shadow of the valley.",
+   "question": "Which choice best states the main purpose of the text?",
+   "options": [
+    "To describe Richard's joyful celebration after winning a battle",
+    "To explain why Gilles chose to abandon Richard in the valley",
+    "To portray Richard silently enduring a defeat with stern resolve",
+    "To show Richard begging God aloud for help against his enemy"
+   ],
+   "correct_letter": "C",
+   "explanation": "지문은 Richard가 '명백한 패배'의 순간에 입을 열지 않고 마음을 돌처럼 굳혔다고 서술한다. 그가 슬픔을 '덫에 가두듯' 숨기며 한마디만 남긴 채 말없이 골짜기로 내려가는 모습이 이를 뒷받침한다. A는 승리와 기쁨을 말해 틀리고, B와 D는 지문에 없는 행동을 지어낸다. 따라서 정답은 C이다."
+  },
+  {
+   "candidateId": "lit40-easy-02-022",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "easy",
+   "passage": "I have grown to a certain extent already to love you. You interest me much; still, I must be just to you and to my own children. You are not a common, everyday sort of girl, Flower. I don't wish to flatter you, and I am not going to say whether you are nice or the reverse. But there is no harm in my telling you that you are out of the common. It is probable that you may be extremely difficult to manage, and it is possible that your disposition may--may clash with those of some of the members of my own household.",
+   "question": "Which choice best states the main purpose of the text?",
+   "options": [
+    "To praise Flower as the most pleasant girl in the household",
+    "To scold Flower for misbehaving toward the speaker's children",
+    "To refuse Flower any place at all in the speaker's household",
+    "To express growing fondness for Flower while voicing honest concerns"
+   ],
+   "correct_letter": "D",
+   "explanation": "화자는 Flower를 '어느 정도 사랑하게 되었다'고 말하면서도 자기 아이들에게 공정해야 한다고 덧붙인다. 또 Flower가 다루기 어렵고 가족과 부딪칠 수 있다는 걱정을 솔직하게 밝힌다. A는 칭찬하지 않겠다는 말과 어긋나고, B와 C는 지문에 없는 꾸짖음과 거절이다. 따라서 정답은 D이다."
+  },
+  {
+   "candidateId": "lit40-easy-02-023",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "easy",
+   "passage": "After a deliberate survey of the situation, Tim made a sudden spring to the side of his enemy, caught him under his chest, and turned him upon his back. This side attack was unexpected and a perfect success, and the reptile had an active and prolonged struggle to regain his natural position. Tim watched the struggle with intense interest, seeming to be happy in knowing that he held the key to the situation. From that time on, his guest during the daylight hours had no peace. Whenever Tim had an opportunity, he turned him over, and, when not engaged in that diversion, he was chasing him around the enclosure. About one month of such an existence brought the Saurian very near to his end.",
+   "question": "Which choice best states the main purpose of the text?",
+   "options": [
+    "To recount how Tim dominated a reptile by repeatedly tormenting it",
+    "To explain how Tim and the reptile slowly became peaceful companions",
+    "To describe the reptile's clever escape from Tim's small enclosure",
+    "To show Tim's growing fear of the reptile during the daylight hours"
+   ],
+   "correct_letter": "A",
+   "explanation": "Tim은 갑자기 파충류를 뒤집어 우위를 차지하고, 이후 틈만 나면 뒤집거나 쫓아다닌다. 그 결과 한 달 만에 파충류는 거의 죽음에 이른다. B의 평화로운 관계, C의 탈출, D의 두려움은 모두 지문과 반대이다. 따라서 정답은 A이다."
+  },
+  {
+   "candidateId": "lit40-easy-02-024",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "easy",
+   "passage": "The only lesson we can gather from it with any clearness is the uncertainty of this world, and all that it contains, and the folly of seeking the presidency. Nobody can hope to follow in his footsteps. He began life as a kind of editor of which he was one of the last specimens, and which will shortly be totally extinct--the editor who fought as the man-at-arms of the party. This kind of work Mr. Greeley did with extraordinary earnestness and vehemence and success--so much success that a modern newspaper finally grew up around him, in spite of him, almost to his surprise, and often to his embarrassment.",
+   "question": "Which choice best states the main purpose of the text?",
+   "options": [
+    "To argue that Greeley invented the party-free style of newspaper",
+    "To present Greeley as a fading type of partisan editor amid change",
+    "To encourage young readers to seek the presidency as Greeley did",
+    "To criticize Greeley harshly for embarrassing his own political party"
+   ],
+   "correct_letter": "B",
+   "explanation": "글쓴이는 Greeley를 곧 사라질 '당의 무사로 싸우는 편집자'의 마지막 표본으로 소개한다. 그리고 현대 신문이 그의 의도와 달리 그의 주변에서 자라났다고 설명한다. A는 그가 의도해 만든 것처럼 말해 틀리고, C는 대통령직을 좇는 어리석음을 말한 지문과 반대이며, D는 비판이 아니다. 따라서 정답은 B이다."
+  },
+  {
+   "candidateId": "lit40-easy-02-025",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "easy",
+   "passage": "Higher ranges were seen to the W.N.W. and west; and I found myself fairly caught between rocky hills when I least expected them, but hoped to enter upon a country corresponding in its character with the low coast marked down in the map, in this latitude. I turned to the northward, and found a practicable path between the hills, and came, after crossing a small sandy creek to a fine salt-water river, as broad as any we had seen. High hills were at its left bank; and, as we followed it up in a direction S. 60 degrees W., the right became more broken, and the vegetation richer.",
+   "question": "Which choice best states the main purpose of the text?",
+   "options": [
+    "To complain about errors the narrator found in an old map",
+    "To describe a peaceful rest beside a small sandy creek",
+    "To recount how the narrator found a route through unexpected hills",
+    "To explain why the whole party turned back toward the coast"
+   ],
+   "correct_letter": "C",
+   "explanation": "화자는 예상치 못한 바위 언덕 사이에 갇혔다고 말한 뒤 북쪽으로 방향을 틀어 지나갈 길을 찾는다. 이어 개울을 건너 넓은 강에 이르러 강을 따라 올라간다. A의 불평, B의 휴식, D의 귀환은 지문에 없다. 따라서 정답은 C이다."
+  },
+  {
+   "candidateId": "lit40-easy-02-026",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "easy",
+   "passage": "What can I think of all this? I could not believe if any one should tell me of these things, but what I see with my own eyes I certainly cannot doubt.\n\nThe Brother Andreas is very good to me, and my box has been brought from the hotel to the cloister, so my room is as cheerful as possible with all your pictures around me.\n\nHow I wish that you were here, or I could hear from you, but never, my dear boy will that time come, I fear; I have given up the idea of ever having so great a pleasure in this world. I cannot write more now as I am too weak. Good night and greet Benicia for me.",
+   "question": "Which choice best states the main purpose of the text?",
+   "options": [
+    "To describe the hotel where the writer is now staying",
+    "To ask the recipient to travel to the cloister at once",
+    "To report that the writer has fully recovered from illness",
+    "To share the writer's situation and sad longing for the recipient"
+   ],
+   "correct_letter": "D",
+   "explanation": "글쓴이는 수도원으로 짐을 옮겨 Andreas 수사의 보살핌을 받는 근황을 전한다. 동시에 상대가 곁에 있기를 바라지만 그런 기쁨은 없을 것 같다고 슬퍼한다. A는 이미 호텔을 떠났으므로 틀리고, B는 요청이 아니며, C는 '너무 약하다'는 말과 반대이다. 따라서 정답은 D이다."
+  },
+  {
+   "candidateId": "lit40-easy-02-028",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "character_motivation",
+   "requestedDifficulty": "easy",
+   "passage": "Sick at heart I tried again, but to no purpose. There was no blinking the fact. The power of healing had gone from me.\n\nMaking what poor excuse I could, I stumbled out of the cottage and into the open air: and then I found my way into a little wood, and fell on my face, and prayed that I might die. It seemed as if God Himself had forsaken me.\n\nBut gradually the knowledge came to me that it was not so. It was not that God had forsaken me, but that I had forsaken God.",
+   "question": "Based on the text, why does the narrator stumble out of the cottage?",
+   "options": [
+    "He is ashamed of the poor excuse he made to the family inside.",
+    "He is devastated to realize that his power of healing has left him.",
+    "He is frightened by a sudden storm approaching the little wood.",
+    "He is eager to find a stronger healer somewhere in the village."
+   ],
+   "correct_letter": "B",
+   "explanation": "화자는 다시 시도했지만 소용이 없었고 '치유의 힘이 사라졌다'고 깨닫는다. 그 뒤 숲에 엎드려 죽기를 기도할 만큼 절망한다. A의 변명은 결과일 뿐 이유가 아니고, C와 D는 지문에 없다. 따라서 정답은 B이다."
+  },
+  {
+   "candidateId": "lit40-easy-02-030",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "character_motivation",
+   "requestedDifficulty": "easy",
+   "passage": "Hearing lectures is good, for it will teach you how much there is to be known, and how little you know. Reading books is good, for it will give you habits of regular and diligent study. And therefore I urge on you strongly private study, especially in case a library should be formed here of books on those most practical subjects of which I have been speaking. But, after all, both lectures and books are good, mainly in as far as they furnish matter for reflection: while the desire to reflect and the ability to reflect must come, as I believe, from above. The honest craving after light and power, after knowledge, wisdom, active usefulness, must come--and may it come to you--by the inspiration of the Spirit of God.",
+   "question": "According to the text, why does the speaker value lectures and books?",
+   "options": [
+    "They replace the need for any private reflection on hard subjects.",
+    "They are the only true source of the craving after knowledge.",
+    "They prove to listeners how much they already understand.",
+    "They mainly give listeners material on which to reflect."
+   ],
+   "correct_letter": "D",
+   "explanation": "화자는 강의와 책이 좋다고 하면서도 '주로 성찰할 재료를 제공하는 한에서' 좋다고 말한다. 성찰하려는 욕구 자체는 위에서 온다고 덧붙인다. A는 성찰을 대체한다고 해 반대이고, B는 갈망이 신에게서 온다는 말과 어긋나며, C는 '얼마나 모르는지'를 가르친다는 말과 반대이다. 따라서 정답은 D이다."
+  },
+  {
+   "candidateId": "lit40-easy-02-031",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "character_motivation",
+   "requestedDifficulty": "easy",
+   "passage": "In taking this step we feel that we owe it to the public and to ourselves to explain briefly some of the reasons by which we have been moved. There was a time when the League stood for integrity and fair dealing; to-day it stands for dollars and cents. Once it looked to the elevation of the game and an honest exhibition of the sport. To-day its eyes are upon the turnstile. Men have come into the business for no other motive than to exploit it for every dollar in sight. Measures originally intended for the good of the game have been turned into instruments for wrong. The reserve rule and the provisions of the national agreement gave the managers unlimited power, and they have not hesitated to use this in the most arbitrary and mercenary way.",
+   "question": "Based on the text, why are the writers most likely taking this step?",
+   "options": [
+    "They believe the League has abandoned integrity for profit.",
+    "They want the League's managers to gain more power over players.",
+    "They hope to increase the money collected at the turnstile.",
+    "They wish to praise the reserve rule as good for the game."
+   ],
+   "correct_letter": "A",
+   "explanation": "글쓴이들은 리그가 한때 정직을 대표했지만 지금은 '돈'을 대표한다고 말한다. 또 경영자들이 무제한의 권력을 돈벌이에 자의적으로 썼다고 비판한다. B, C, D는 그들이 비판하는 내용을 오히려 원하는 것처럼 바꾼 것이다. 따라서 정답은 A이다."
+  },
+  {
+   "candidateId": "lit40-easy-02-032",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "tone_or_mood",
+   "requestedDifficulty": "easy",
+   "passage": "In the course of his labours, several little pots fall about his ears; a dislodged spade-handle gives him a brisk blow on the shoulder; old cobwebs get into his mouth. But he is rewarded at last. Through the breach he has made daylight pours in, and shows him a little red form crouched up against the wall, and showing all its dazzling white teeth in a frenzy of fear. Poor little beast! Probably some indistinct memory of the cruel hounds that tore its mother limb from limb is giving its intensity of terror to that grin.",
+   "question": "Which choice best describes the overall tone of the text?",
+   "options": [
+    "Amused and mocking",
+    "Sympathetic and pitying",
+    "Cold and indifferent",
+    "Angry and accusing"
+   ],
+   "correct_letter": "B",
+   "explanation": "화자는 공포에 질려 웅크린 작은 짐승을 보고 '가엾은 작은 짐승!'이라고 외친다. 또 어미가 사냥개에게 찢긴 기억 때문에 더 무서워할 것이라고 헤아린다. A와 C는 이런 연민과 맞지 않고, D의 분노는 지문에 드러나지 않는다. 따라서 정답은 B이다."
+  },
+  {
+   "candidateId": "lit40-easy-02-033",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "tone_or_mood",
+   "requestedDifficulty": "easy",
+   "passage": "Intelligence of the awful event, which had put so decisive, and so unexpected an end to the usurpation, was diffused with the speed of lightning through the capital. The gloom, with which it had been overspread the day before, was dispersed, as if by an enchanter’s command. Every face beamed with rapturous joy. Families were seen in the streets and market-places, embracing each other, and pouring out tears of gladness. It was every where proclaimed that their beloved emperor was safe, and that he might be expected in Agra the following morning. The people seemed frantic with joy, for they venerated the house of Acbar, and loved their lawful sovereign with an enthusiasm, rendered still more intense by their hatred of the alien who had usurped his sceptre.",
+   "question": "Which choice best describes the overall tone of the text?",
+   "options": [
+    "Gloomy and fearful",
+    "Calm and indifferent",
+    "Jubilant and relieved",
+    "Suspicious and tense"
+   ],
+   "correct_letter": "C",
+   "explanation": "전날의 우울함이 마법처럼 걷히고 '모든 얼굴이 기쁨으로 빛났다'고 서술한다. 가족들이 거리에서 기쁨의 눈물을 흘리고 사람들이 기뻐 날뛴다. A는 사라진 전날의 분위기이고, B와 D는 지문의 열광과 맞지 않는다. 따라서 정답은 C이다."
+  },
+  {
+   "candidateId": "lit40-easy-02-034",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "tone_or_mood",
+   "requestedDifficulty": "easy",
+   "passage": "\"I come to sing that summer is at hand,\nThe summer time of wit, you 'll understand;\nPlants, fruits, and flowers, and all the smiling race\nThat can the orchard or the garden grace;\nThe Rose and Lily shall address the fair,\nAnd whisper sweetly out, 'My dears, take care:'\nWith sterling worth the Plant of Sense shall rise,\nAnd teach the curious to philosophize.\n\n\"The frost returns?\nWe 'll garnish out the scenes\nWith stately rows of Evergreens,\nTrees that will bear the frost, and deck their tops\nWith everlasting flowers, like diamond drops.\"",
+   "question": "Which choice best describes the overall tone of the text?",
+   "options": [
+    "Mournful and grave",
+    "Bitter and resentful",
+    "Anxious and uncertain",
+    "Cheerful and playful"
+   ],
+   "correct_letter": "D",
+   "explanation": "화자는 '재치의 여름'이 왔다고 노래하며 장미와 백합이 아가씨들에게 속삭이게 한다. 서리가 돌아와도 상록수와 다이아몬드 같은 꽃으로 무대를 꾸미겠다고 가볍게 말한다. A, B, C는 이런 밝고 장난스러운 어조와 맞지 않는다. 따라서 정답은 D이다."
+  },
+  {
+   "candidateId": "lit40-easy-02-035",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "tone_or_mood",
+   "requestedDifficulty": "easy",
+   "passage": "Had Luther stood alone, he, too, would probably have remained silent. What was he, a poor, friendless, solitary monk, that he should set himself against the majesty of the triple crown?\n\nHowever hateful the walls of a dungeon, a man of sense confined alone there does not dash his hands against the stones.\n\nBut Luther knew that his thoughts were the thoughts of thousands. Many wrong things, as we all know, have to be endured in this world. Authority is never very angelic; and moderate injustice, a moderate quantity of lies, is more tolerable than anarchy.",
+   "question": "Which choice best describes the overall tone of the text?",
+   "options": [
+    "Measured and realistic",
+    "Furious and rebellious",
+    "Mocking and dismissive",
+    "Joyful and carefree"
+   ],
+   "correct_letter": "A",
+   "explanation": "글쓴이는 Luther가 혼자였다면 침묵했을 것이라며 감옥 벽에 손을 부딪치지 않는 분별 있는 사람을 예로 든다. 또 적당한 불의가 무정부보다 견딜 만하다고 차분히 말한다. B와 C는 이런 절제된 태도와 맞지 않고, D는 주제의 무게와 어긋난다. 따라서 정답은 A이다."
+  }
+ ],
+ "instructions": "당신은 문항 감사관이다. 표시된 정답과 해설을 받아, 정답이 맞는지·해설이 일관되고 사실에 맞는지 점검한다(고치지 않고 판정만).\n청크 rev-explanation_audit-056 — 19문항.\n출력: Write 도구로 정확히 이 경로에 JSON 한 파일을 쓴다 → /Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-explanation_audit-056.result.json\n출력 JSON 스키마(예시 구조): {\"chunkId\":\"청크 ID\",\"model\":\"sonnet\",\"items\":[{\"candidateId\":\"id\",\"answer_correct\":\"표시된 정답이 정말 정답이면 true\",\"explanation_consistent\":\"해설이 정답·오답 판단과 일치하고 글자 참조가 맞으면 true\",\"explanation_factual\":\"해설에 사실 오류가 없으면 true\",\"issues\":\"한 줄 메모\"}]}\n허용 값: picked_letter ∈ {A,B,C,D}, 불리언 필드는 true/false, est_difficulty ∈ {easy,medium,hard}. candidateId 를 바꾸지 않고 모든 항목에 답한다.\n금지: 결과 파일 외의 파일 생성·수정, 다른 명령 실행, 문항 수정·재작성. 끝나면 'done <항목 수>' 한 줄만 답한다.\n\n## 문항\n### lit40-easy-01-090 — skill words_in_context · 유형 figurative_language\n[지문]\n\"At length it came over a beautiful scene,\nThat nature in silence had made;\nThe place was but small, but't was sweetly serene,\nAnd chequered with sunshine and shade.\n\n\"I gazed and I envied with painful good will,\nAnd grew tired of my seat in the air;\nWhen all of a sudden my Castle stood still,\nAs if some attraction were there.\n\n\"Like a lark from the sky it came fluttering down,\nAnd placed me exactly in view,\nWhen whom should I meet in this charming retreat\nThis corner of calmness, but--you.\n\n[질문] As used in the text, the phrase “This corner of calmness” most nearly suggests\nA) a crowded spot where the speaker feels trapped.\nB) a sharp angle in the walls of the speaker's castle.\nC) a small, peaceful place set apart from the world.\nD) a cold, dark refuge from the heat of the sun.\n\n[표시된 정답] C\n[해설]\n시의 앞부분은 이곳을 자연이 고요 속에 만든 작고도 평온한 장소로 묘사한다. 이어 화자는 이곳을 매력적인 은신처라고 부른 뒤 같은 장소를 고요의 구석이라고 다시 표현한다. 따라서 C가 정답이다. A의 혼잡함, B의 성벽 모서리라는 문자적 해석, D의 춥고 어두운 곳은 햇빛과 그늘이 어우러진 평온한 장면과 맞지 않는다.\n### lit40-easy-01-091 — skill words_in_context · 유형 figurative_language\n[지문]\nThe occasional sense of our being too weak for the ordinary incidents of life, is strangely distressing. The cry of an infant makes us wretched for hours after, in spite of every effort of reason. I saw, through my telescope, two big boys worrying a little one, and I could not look to see the end of it. They were so far off that there was nothing to be done. The distress to me was such--the picture of the lives of the three boys was so vivid--that I felt as if I had no reason nor courage left.\n\n[질문] As used in the text, the phrase “too weak for the ordinary incidents of life” most nearly suggests feeling\nA) physically ill from a lack of rest and food.\nB) unable to lift heavy objects in daily work.\nC) too young to understand the actions of others.\nD) emotionally overwhelmed by common painful sights.\n\n[표시된 정답] D\n[해설]\n필자는 아기의 울음이 이성의 노력에도 몇 시간 동안 자신을 비참하게 만든다고 말한다. 또 망원경으로 큰 소년들이 작은 아이를 괴롭히는 장면을 보고 이성도 용기도 남지 않은 듯했다고 고백한다. 따라서 이 구절은 흔한 고통스러운 장면에 감정적으로 압도되는 상태를 뜻하므로 D가 정답이다. A와 B는 신체적 약함으로, C는 나이로 잘못 해석했다.\n### lit40-easy-01-092 — skill words_in_context · 유형 figurative_language\n[지문]\nThe family living in the hut consisted of three persons--man, wife and their little daughter, a sweet child of about four years of age. Both mother and child were neatly dressed, and had a genteel appearance that was in marked contrast with their surroundings. The child wore a tidy pink dress, tastefully ornamented, and seemed as if she had just come from the class-room of a convent school. The family impressed us as having seen better days, and had evidently not lived always so far away from their fellows.\n\nNear the house stood a large calabash tree, bearing the largest fruit of the kind we had yet observed.\n\n[질문] As used in the text, the phrase “as if she had just come from the class-room of a convent school” most nearly suggests that the child\nA) looks unusually neat and cared for given her setting.\nB) has recently arrived from a school far from her home.\nC) is shy and silent in the presence of strangers.\nD) is dressed in a plain uniform like other pupils.\n\n[표시된 정답] A\n[해설]\n지문은 엄마와 아이가 단정하게 차려입어 주변 환경과 뚜렷이 대조되는 품위 있는 모습이었다고 말한다. 아이가 단정하고 멋스럽게 장식된 분홍 옷을 입었다는 묘사도 이 비유를 뒷받침한다. 따라서 A가 정답이다. B는 비유를 사실로 읽었고, C의 수줍음은 근거가 없으며, D의 수수한 교복은 장식된 분홍 옷과 맞지 않는다.\n### lit40-easy-01-093 — skill words_in_context · 유형 figurative_language\n[지문]\nVenus, who was present at the festival, heard him and knew the thought he would have uttered; and as an omen of her favor, caused the flame on the altar to shoot up thrice in a fiery point into the air. When he returned home, he went to see his statue, and leaning over the couch, gave a kiss to the mouth. It seemed to be warm. He pressed its lips again, he laid his hand upon the limbs; the ivory felt soft to his touch and yielded to his fingers like the wax of Hymettus. While he stands astonished and glad, though doubting, and fears he may be mistaken, again and again with a lover's ardor he touches the object of his hopes. It was indeed alive!\n\n[질문] As used in the text, the phrase “yielded to his fingers like the wax of Hymettus” most nearly suggests that\nA) the statue breaks apart when he presses it firmly.\nB) the hard ivory turns soft and pliant like living flesh.\nC) the statue is melting from the heat of the altar flame.\nD) the ivory feels sticky and unpleasant to his hand.\n\n[표시된 정답] B\n[해설]\n그가 입맞춤했을 때 조각상이 따뜻하게 느껴졌고, 상아가 손길에 부드럽게 느껴졌다는 서술이 이어진다. 마지막에 조각상이 정말 살아 있었다고 밝혀지므로 밀랍 비유는 단단한 상아가 살아 있는 몸처럼 부드러워졌음을 뜻한다. 따라서 B가 정답이다. A의 부서짐, C의 녹아내림, D의 불쾌함은 기쁨과 놀라움의 장면과 맞지 않는다.\n### lit40-easy-01-096 — skill words_in_context · 유형 word_in_context\n[지문]\nTime passed on, and the Fairies had done nothing to gain their lovely home again. They wept no longer, but watched little Bud, as she daily tended the flowers, restoring their strength and beauty, or with gentle words flew from nest to nest, teaching the little birds to live happily together; and wherever she went blessings fell, and loving hearts were filled with gratitude.\n\nThen, one by one, the Elves secretly did some little work of kindness, and found a quiet joy come back to repay them. Flowers looked lovingly up as they passed, birds sang to cheer them when sad thoughts made them weep. And soon little Bud found out their gentle deeds, and her friendly words gave them new strength.\n\n[질문] As used in the text, what does the word “tended” most nearly mean?\nA) cared for\nB) leaned toward\nC) listened to\nD) grew tired of\n\n[표시된 정답] A\n[해설]\nBud가 매일 꽃을 돌보면서 그 힘과 아름다움을 되살렸다는 맥락이다. 그녀가 가는 곳마다 축복이 내렸다는 서술도 보살핌의 의미를 뒷받침하므로 tended는 '돌보다'라는 뜻이다. 따라서 A가 정답이다. B의 '기울다', C의 '귀 기울이다', D의 '싫증 나다'는 꽃을 되살리는 행동과 연결되지 않는다.\n### lit40-easy-01-100 — skill text_structure_purpose · 유형 tone_shift\n[지문]\nMeantime, the unconscious object of their criticism walked sadly down the old market-garden, whose rude outlines and homely details he once clothed with the poetry of a sensitive man's first love. Well, it was a common cabbage field and potato patch after all. In his disgust he felt conscious of even the loss of that sense of patronage and superiority which had invested his affection for a girl of meaner condition. His self-respect was humiliated with his love. The soil and dirt of those wretched cabbages had clung to him, but not to her. It was she who had gone higher; it was he who was left in the vulgar ruins of his misplaced passion.\n\nHe reached the bottom of the garden without observing any sign of the lonely invalid.\n\n[질문] Which choice best describes the shift in tone in the text?\nA) It moves from cheerful excitement to calm acceptance of his love.\nB) It moves from anger at the girl to sympathy for her poor family.\nC) It moves from bored description to eager hope for the future.\nD) It moves from fond memory of the garden to bitter disillusionment.\n\n[표시된 정답] D\n[해설]\n지문 앞부분은 그가 한때 첫사랑의 시정으로 그 텃밭을 감쌌다고 회상한다. 그러나 곧 그것은 결국 흔한 양배추 밭이었다는 문장으로 어조가 바뀌고, 그는 잘못된 열정의 초라한 폐허에 남겨졌다고 느낀다. 따라서 애틋한 기억에서 쓰라린 환멸로 바뀐다는 D가 정답이다. A의 평온한 수용, B의 동정, C의 희망은 굴욕과 혐오의 감정과 맞지 않는다.\n### lit40-easy-02-021 — skill central_ideas_details · 유형 main_idea_or_purpose\n[지문]\nIf Richard prayed, it was with the heart, for his lips never opened. But I believe that his heart, in this hour of clear defeat, was turned to stone. He took his joys with riot, his triumphs calmly; his griefs he shut in a trap. Such a nature as his, I suppose, respects no persons. Whether God beat him, or his enemy, he would take it the same way. All that Gilles heard him say aloud was this: 'What I have done I have done: deliver us from evil.' He bade no farewell to his hope, he asked no greeting for his altered way. When he had turned his back upon the sacred places he lowered his shield; and then rode down the hill into the cold shadow of the valley.\n\n[질문] Which choice best states the main purpose of the text?\nA) To describe Richard's joyful celebration after winning a battle\nB) To explain why Gilles chose to abandon Richard in the valley\nC) To portray Richard silently enduring a defeat with stern resolve\nD) To show Richard begging God aloud for help against his enemy\n\n[표시된 정답] C\n[해설]\n지문은 Richard가 '명백한 패배'의 순간에 입을 열지 않고 마음을 돌처럼 굳혔다고 서술한다. 그가 슬픔을 '덫에 가두듯' 숨기며 한마디만 남긴 채 말없이 골짜기로 내려가는 모습이 이를 뒷받침한다. A는 승리와 기쁨을 말해 틀리고, B와 D는 지문에 없는 행동을 지어낸다. 따라서 정답은 C이다.\n### lit40-easy-02-022 — skill central_ideas_details · 유형 main_idea_or_purpose\n[지문]\nI have grown to a certain extent already to love you. You interest me much; still, I must be just to you and to my own children. You are not a common, everyday sort of girl, Flower. I don't wish to flatter you, and I am not going to say whether you are nice or the reverse. But there is no harm in my telling you that you are out of the common. It is probable that you may be extremely difficult to manage, and it is possible that your disposition may--may clash with those of some of the members of my own household.\n\n[질문] Which choice best states the main purpose of the text?\nA) To praise Flower as the most pleasant girl in the household\nB) To scold Flower for misbehaving toward the speaker's children\nC) To refuse Flower any place at all in the speaker's household\nD) To express growing fondness for Flower while voicing honest concerns\n\n[표시된 정답] D\n[해설]\n화자는 Flower를 '어느 정도 사랑하게 되었다'고 말하면서도 자기 아이들에게 공정해야 한다고 덧붙인다. 또 Flower가 다루기 어렵고 가족과 부딪칠 수 있다는 걱정을 솔직하게 밝힌다. A는 칭찬하지 않겠다는 말과 어긋나고, B와 C는 지문에 없는 꾸짖음과 거절이다. 따라서 정답은 D이다.\n### lit40-easy-02-023 — skill central_ideas_details · 유형 main_idea_or_purpose\n[지문]\nAfter a deliberate survey of the situation, Tim made a sudden spring to the side of his enemy, caught him under his chest, and turned him upon his back. This side attack was unexpected and a perfect success, and the reptile had an active and prolonged struggle to regain his natural position. Tim watched the struggle with intense interest, seeming to be happy in knowing that he held the key to the situation. From that time on, his guest during the daylight hours had no peace. Whenever Tim had an opportunity, he turned him over, and, when not engaged in that diversion, he was chasing him around the enclosure. About one month of such an existence brought the Saurian very near to his end.\n\n[질문] Which choice best states the main purpose of the text?\nA) To recount how Tim dominated a reptile by repeatedly tormenting it\nB) To explain how Tim and the reptile slowly became peaceful companions\nC) To describe the reptile's clever escape from Tim's small enclosure\nD) To show Tim's growing fear of the reptile during the daylight hours\n\n[표시된 정답] A\n[해설]\nTim은 갑자기 파충류를 뒤집어 우위를 차지하고, 이후 틈만 나면 뒤집거나 쫓아다닌다. 그 결과 한 달 만에 파충류는 거의 죽음에 이른다. B의 평화로운 관계, C의 탈출, D의 두려움은 모두 지문과 반대이다. 따라서 정답은 A이다.\n### lit40-easy-02-024 — skill central_ideas_details · 유형 main_idea_or_purpose\n[지문]\nThe only lesson we can gather from it with any clearness is the uncertainty of this world, and all that it contains, and the folly of seeking the presidency. Nobody can hope to follow in his footsteps. He began life as a kind of editor of which he was one of the last specimens, and which will shortly be totally extinct--the editor who fought as the man-at-arms of the party. This kind of work Mr. Greeley did with extraordinary earnestness and vehemence and success--so much success that a modern newspaper finally grew up around him, in spite of him, almost to his surprise, and often to his embarrassment.\n\n[질문] Which choice best states the main purpose of the text?\nA) To argue that Greeley invented the party-free style of newspaper\nB) To present Greeley as a fading type of partisan editor amid change\nC) To encourage young readers to seek the presidency as Greeley did\nD) To criticize Greeley harshly for embarrassing his own political party\n\n[표시된 정답] B\n[해설]\n글쓴이는 Greeley를 곧 사라질 '당의 무사로 싸우는 편집자'의 마지막 표본으로 소개한다. 그리고 현대 신문이 그의 의도와 달리 그의 주변에서 자라났다고 설명한다. A는 그가 의도해 만든 것처럼 말해 틀리고, C는 대통령직을 좇는 어리석음을 말한 지문과 반대이며, D는 비판이 아니다. 따라서 정답은 B이다.\n### lit40-easy-02-025 — skill central_ideas_details · 유형 main_idea_or_purpose\n[지문]\nHigher ranges were seen to the W.N.W. and west; and I found myself fairly caught between rocky hills when I least expected them, but hoped to enter upon a country corresponding in its character with the low coast marked down in the map, in this latitude. I turned to the northward, and found a practicable path between the hills, and came, after crossing a small sandy creek to a fine salt-water river, as broad as any we had seen. High hills were at its left bank; and, as we followed it up in a direction S. 60 degrees W., the right became more broken, and the vegetation richer.\n\n[질문] Which choice best states the main purpose of the text?\nA) To complain about errors the narrator found in an old map\nB) To describe a peaceful rest beside a small sandy creek\nC) To recount how the narrator found a route through unexpected hills\nD) To explain why the whole party turned back toward the coast\n\n[표시된 정답] C\n[해설]\n화자는 예상치 못한 바위 언덕 사이에 갇혔다고 말한 뒤 북쪽으로 방향을 틀어 지나갈 길을 찾는다. 이어 개울을 건너 넓은 강에 이르러 강을 따라 올라간다. A의 불평, B의 휴식, D의 귀환은 지문에 없다. 따라서 정답은 C이다.\n### lit40-easy-02-026 — skill central_ideas_details · 유형 main_idea_or_purpose\n[지문]\nWhat can I think of all this? I could not believe if any one should tell me of these things, but what I see with my own eyes I certainly cannot doubt.\n\nThe Brother Andreas is very good to me, and my box has been brought from the hotel to the cloister, so my room is as cheerful as possible with all your pictures around me.\n\nHow I wish that you were here, or I could hear from you, but never, my dear boy will that time come, I fear; I have given up the idea of ever having so great a pleasure in this world. I cannot write more now as I am too weak. Good night and greet Benicia for me.\n\n[질문] Which choice best states the main purpose of the text?\nA) To describe the hotel where the writer is now staying\nB) To ask the recipient to travel to the cloister at once\nC) To report that the writer has fully recovered from illness\nD) To share the writer's situation and sad longing for the recipient\n\n[표시된 정답] D\n[해설]\n글쓴이는 수도원으로 짐을 옮겨 Andreas 수사의 보살핌을 받는 근황을 전한다. 동시에 상대가 곁에 있기를 바라지만 그런 기쁨은 없을 것 같다고 슬퍼한다. A는 이미 호텔을 떠났으므로 틀리고, B는 요청이 아니며, C는 '너무 약하다'는 말과 반대이다. 따라서 정답은 D이다.\n### lit40-easy-02-028 — skill inferences · 유형 character_motivation\n[지문]\nSick at heart I tried again, but to no purpose. There was no blinking the fact. The power of healing had gone from me.\n\nMaking what poor excuse I could, I stumbled out of the cottage and into the open air: and then I found my way into a little wood, and fell on my face, and prayed that I might die. It seemed as if God Himself had forsaken me.\n\nBut gradually the knowledge came to me that it was not so. It was not that God had forsaken me, but that I had forsaken God.\n\n[질문] Based on the text, why does the narrator stumble out of the cottage?\nA) He is ashamed of the poor excuse he made to the family inside.\nB) He is devastated to realize that his power of healing has left him.\nC) He is frightened by a sudden storm approaching the little wood.\nD) He is eager to find a stronger healer somewhere in the village.\n\n[표시된 정답] B\n[해설]\n화자는 다시 시도했지만 소용이 없었고 '치유의 힘이 사라졌다'고 깨닫는다. 그 뒤 숲에 엎드려 죽기를 기도할 만큼 절망한다. A의 변명은 결과일 뿐 이유가 아니고, C와 D는 지문에 없다. 따라서 정답은 B이다.\n### lit40-easy-02-030 — skill inferences · 유형 character_motivation\n[지문]\nHearing lectures is good, for it will teach you how much there is to be known, and how little you know. Reading books is good, for it will give you habits of regular and diligent study. And therefore I urge on you strongly private study, especially in case a library should be formed here of books on those most practical subjects of which I have been speaking. But, after all, both lectures and books are good, mainly in as far as they furnish matter for reflection: while the desire to reflect and the ability to reflect must come, as I believe, from above. The honest craving after light and power, after knowledge, wisdom, active usefulness, must come--and may it come to you--by the inspiration of the Spirit of God.\n\n[질문] According to the text, why does the speaker value lectures and books?\nA) They replace the need for any private reflection on hard subjects.\nB) They are the only true source of the craving after knowledge.\nC) They prove to listeners how much they already understand.\nD) They mainly give listeners material on which to reflect.\n\n[표시된 정답] D\n[해설]\n화자는 강의와 책이 좋다고 하면서도 '주로 성찰할 재료를 제공하는 한에서' 좋다고 말한다. 성찰하려는 욕구 자체는 위에서 온다고 덧붙인다. A는 성찰을 대체한다고 해 반대이고, B는 갈망이 신에게서 온다는 말과 어긋나며, C는 '얼마나 모르는지'를 가르친다는 말과 반대이다. 따라서 정답은 D이다.\n### lit40-easy-02-031 — skill inferences · 유형 character_motivation\n[지문]\nIn taking this step we feel that we owe it to the public and to ourselves to explain briefly some of the reasons by which we have been moved. There was a time when the League stood for integrity and fair dealing; to-day it stands for dollars and cents. Once it looked to the elevation of the game and an honest exhibition of the sport. To-day its eyes are upon the turnstile. Men have come into the business for no other motive than to exploit it for every dollar in sight. Measures originally intended for the good of the game have been turned into instruments for wrong. The reserve rule and the provisions of the national agreement gave the managers unlimited power, and they have not hesitated to use this in the most arbitrary and mercenary way.\n\n[질문] Based on the text, why are the writers most likely taking this step?\nA) They believe the League has abandoned integrity for profit.\nB) They want the League's managers to gain more power over players.\nC) They hope to increase the money collected at the turnstile.\nD) They wish to praise the reserve rule as good for the game.\n\n[표시된 정답] A\n[해설]\n글쓴이들은 리그가 한때 정직을 대표했지만 지금은 '돈'을 대표한다고 말한다. 또 경영자들이 무제한의 권력을 돈벌이에 자의적으로 썼다고 비판한다. B, C, D는 그들이 비판하는 내용을 오히려 원하는 것처럼 바꾼 것이다. 따라서 정답은 A이다.\n### lit40-easy-02-032 — skill inferences · 유형 tone_or_mood\n[지문]\nIn the course of his labours, several little pots fall about his ears; a dislodged spade-handle gives him a brisk blow on the shoulder; old cobwebs get into his mouth. But he is rewarded at last. Through the breach he has made daylight pours in, and shows him a little red form crouched up against the wall, and showing all its dazzling white teeth in a frenzy of fear. Poor little beast! Probably some indistinct memory of the cruel hounds that tore its mother limb from limb is giving its intensity of terror to that grin.\n\n[질문] Which choice best describes the overall tone of the text?\nA) Amused and mocking\nB) Sympathetic and pitying\nC) Cold and indifferent\nD) Angry and accusing\n\n[표시된 정답] B\n[해설]\n화자는 공포에 질려 웅크린 작은 짐승을 보고 '가엾은 작은 짐승!'이라고 외친다. 또 어미가 사냥개에게 찢긴 기억 때문에 더 무서워할 것이라고 헤아린다. A와 C는 이런 연민과 맞지 않고, D의 분노는 지문에 드러나지 않는다. 따라서 정답은 B이다.\n### lit40-easy-02-033 — skill inferences · 유형 tone_or_mood\n[지문]\nIntelligence of the awful event, which had put so decisive, and so unexpected an end to the usurpation, was diffused with the speed of lightning through the capital. The gloom, with which it had been overspread the day before, was dispersed, as if by an enchanter’s command. Every face beamed with rapturous joy. Families were seen in the streets and market-places, embracing each other, and pouring out tears of gladness. It was every where proclaimed that their beloved emperor was safe, and that he might be expected in Agra the following morning. The people seemed frantic with joy, for they venerated the house of Acbar, and loved their lawful sovereign with an enthusiasm, rendered still more intense by their hatred of the alien who had usurped his sceptre.\n\n[질문] Which choice best describes the overall tone of the text?\nA) Gloomy and fearful\nB) Calm and indifferent\nC) Jubilant and relieved\nD) Suspicious and tense\n\n[표시된 정답] C\n[해설]\n전날의 우울함이 마법처럼 걷히고 '모든 얼굴이 기쁨으로 빛났다'고 서술한다. 가족들이 거리에서 기쁨의 눈물을 흘리고 사람들이 기뻐 날뛴다. A는 사라진 전날의 분위기이고, B와 D는 지문의 열광과 맞지 않는다. 따라서 정답은 C이다.\n### lit40-easy-02-034 — skill inferences · 유형 tone_or_mood\n[지문]\n\"I come to sing that summer is at hand,\nThe summer time of wit, you 'll understand;\nPlants, fruits, and flowers, and all the smiling race\nThat can the orchard or the garden grace;\nThe Rose and Lily shall address the fair,\nAnd whisper sweetly out, 'My dears, take care:'\nWith sterling worth the Plant of Sense shall rise,\nAnd teach the curious to philosophize.\n\n\"The frost returns?\nWe 'll garnish out the scenes\nWith stately rows of Evergreens,\nTrees that will bear the frost, and deck their tops\nWith everlasting flowers, like diamond drops.\"\n\n[질문] Which choice best describes the overall tone of the text?\nA) Mournful and grave\nB) Bitter and resentful\nC) Anxious and uncertain\nD) Cheerful and playful\n\n[표시된 정답] D\n[해설]\n화자는 '재치의 여름'이 왔다고 노래하며 장미와 백합이 아가씨들에게 속삭이게 한다. 서리가 돌아와도 상록수와 다이아몬드 같은 꽃으로 무대를 꾸미겠다고 가볍게 말한다. A, B, C는 이런 밝고 장난스러운 어조와 맞지 않는다. 따라서 정답은 D이다.\n### lit40-easy-02-035 — skill inferences · 유형 tone_or_mood\n[지문]\nHad Luther stood alone, he, too, would probably have remained silent. What was he, a poor, friendless, solitary monk, that he should set himself against the majesty of the triple crown?\n\nHowever hateful the walls of a dungeon, a man of sense confined alone there does not dash his hands against the stones.\n\nBut Luther knew that his thoughts were the thoughts of thousands. Many wrong things, as we all know, have to be endured in this world. Authority is never very angelic; and moderate injustice, a moderate quantity of lies, is more tolerable than anarchy.\n\n[질문] Which choice best describes the overall tone of the text?\nA) Measured and realistic\nB) Furious and rebellious\nC) Mocking and dismissive\nD) Joyful and carefree\n\n[표시된 정답] A\n[해설]\n글쓴이는 Luther가 혼자였다면 침묵했을 것이라며 감옥 벽에 손을 부딪치지 않는 분별 있는 사람을 예로 든다. 또 적당한 불의가 무정부보다 견딜 만하다고 차분히 말한다. B와 C는 이런 절제된 태도와 맞지 않고, D는 주제의 무게와 어긋난다. 따라서 정답은 A이다."
+}

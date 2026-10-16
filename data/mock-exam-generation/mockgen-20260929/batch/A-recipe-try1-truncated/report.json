@@ -1,0 +1,232 @@
+{
+ "combo": "A",
+ "method": "recipe",
+ "models": {
+  "combo": "A",
+  "method": "recipe",
+  "gen": "claude-sonnet-5-5",
+  "rev": "claude-sonnet-5-5"
+ },
+ "rows": [
+  {
+   "skill": "transitions",
+   "system": "sat_rw",
+   "cand": 10,
+   "detPass": 1,
+   "correct": 1,
+   "compliance": 1,
+   "hardFit": 1,
+   "adopted": 1,
+   "causes": {
+    "생성:empty_explanation": 4,
+    "생성실패": 5,
+    "생성:계약:format": 1,
+    "생성:계약:correct_index": 1
+   },
+   "cost": 0.10946620000000001,
+   "calls": 12,
+   "mathVerifyFail": 0,
+   "mathVerifyPass": 0,
+   "mathVerifySkipped": 0,
+   "mathAnswerMismatch": 0,
+   "mathExplInconsistent": 0
+  },
+  {
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "cand": 10,
+   "detPass": 3,
+   "correct": 2,
+   "compliance": 3,
+   "hardFit": 3,
+   "adopted": 2,
+   "causes": {
+    "생성:empty_explanation": 4,
+    "생성실패": 3,
+    "정답:블라인드불일치": 1
+   },
+   "cost": 0.13045020000000002,
+   "calls": 16,
+   "mathVerifyFail": 0,
+   "mathVerifyPass": 0,
+   "mathVerifySkipped": 0,
+   "mathAnswerMismatch": 0,
+   "mathExplInconsistent": 0
+  },
+  {
+   "skill": "command_of_evidence_text",
+   "system": "sat_rw",
+   "cand": 10,
+   "detPass": 0,
+   "correct": 0,
+   "compliance": 0,
+   "hardFit": 0,
+   "adopted": 0,
+   "causes": {
+    "생성실패": 4,
+    "생성:empty_explanation": 6,
+    "생성:계약:evidence": 1
+   },
+   "cost": 0.10943230000000001,
+   "calls": 10,
+   "mathVerifyFail": 0,
+   "mathVerifyPass": 0,
+   "mathVerifySkipped": 0,
+   "mathAnswerMismatch": 0,
+   "mathExplInconsistent": 0
+  },
+  {
+   "skill": "text_structure_purpose",
+   "system": "sat_rw",
+   "cand": 10,
+   "detPass": 2,
+   "correct": 2,
+   "compliance": 2,
+   "hardFit": 1,
+   "adopted": 1,
+   "causes": {
+    "생성:empty_explanation": 5,
+    "생성실패": 3,
+    "hard적합실패": 1
+   },
+   "cost": 0.12036080000000003,
+   "calls": 14,
+   "mathVerifyFail": 0,
+   "mathVerifyPass": 0,
+   "mathVerifySkipped": 0,
+   "mathAnswerMismatch": 0,
+   "mathExplInconsistent": 0
+  },
+  {
+   "skill": "linear_equations_one_var",
+   "system": "sat_math",
+   "cand": 5,
+   "detPass": 5,
+   "correct": 5,
+   "compliance": 3,
+   "hardFit": 3,
+   "adopted": 3,
+   "causes": {
+    "레시피미준수": 2,
+    "hard적합실패": 2
+   },
+   "cost": 0.0929085,
+   "calls": 15,
+   "mathVerifyFail": 0,
+   "mathVerifyPass": 5,
+   "mathVerifySkipped": 0,
+   "mathAnswerMismatch": 0,
+   "mathExplInconsistent": 0
+  },
+  {
+   "skill": "linear_equations_two_var",
+   "system": "sat_math",
+   "cand": 5,
+   "detPass": 3,
+   "correct": 3,
+   "compliance": 3,
+   "hardFit": 3,
+   "adopted": 3,
+   "causes": {
+    "생성:empty_explanation": 2
+   },
+   "cost": 0.0950554,
+   "calls": 11,
+   "mathVerifyFail": 0,
+   "mathVerifyPass": 3,
+   "mathVerifySkipped": 2,
+   "mathAnswerMismatch": 0,
+   "mathExplInconsistent": 0
+  },
+  {
+   "skill": "equivalent_expressions",
+   "system": "sat_math",
+   "cand": 5,
+   "detPass": 2,
+   "correct": 2,
+   "compliance": 2,
+   "hardFit": 1,
+   "adopted": 1,
+   "causes": {
+    "생성:계약:evidence": 2,
+    "생성:계약:format": 1,
+    "생성:계약:correct_index": 1,
+    "생성:empty_explanation": 1,
+    "hard적합실패": 1
+   },
+   "cost": 0.0788632,
+   "calls": 9,
+   "mathVerifyFail": 0,
+   "mathVerifyPass": 2,
+   "mathVerifySkipped": 3,
+   "mathAnswerMismatch": 0,
+   "mathExplInconsistent": 0
+  }
+ ],
+ "totals": {
+  "all": {
+   "cand": 55,
+   "detPass": 16,
+   "correct": 15,
+   "compliance": 14,
+   "hardFit": 12,
+   "adopted": 11,
+   "yield": 0.2,
+   "calls": 87,
+   "costUsd": 0.7365,
+   "costPerAdopted": 0.067,
+   "mathVerifyFail": 0,
+   "mathVerifyPass": 10,
+   "mathVerifySkipped": 5,
+   "mathAnswerMismatch": 0,
+   "mathExplInconsistent": 0
+  },
+  "rw": {
+   "cand": 40,
+   "detPass": 6,
+   "correct": 5,
+   "compliance": 6,
+   "hardFit": 5,
+   "adopted": 4,
+   "yield": 0.1,
+   "calls": 52,
+   "costUsd": 0.4697,
+   "costPerAdopted": 0.1174,
+   "mathVerifyFail": 0,
+   "mathVerifyPass": 0,
+   "mathVerifySkipped": 0,
+   "mathAnswerMismatch": 0,
+   "mathExplInconsistent": 0
+  },
+  "math": {
+   "cand": 15,
+   "detPass": 10,
+   "correct": 10,
+   "compliance": 8,
+   "hardFit": 7,
+   "adopted": 7,
+   "yield": 0.467,
+   "calls": 35,
+   "costUsd": 0.2668,
+   "costPerAdopted": 0.0381,
+   "mathVerifyFail": 0,
+   "mathVerifyPass": 10,
+   "mathVerifySkipped": 5,
+   "mathAnswerMismatch": 0,
+   "mathExplInconsistent": 0
+  }
+ },
+ "adoptedIds": [
+  "recipe-transitions-04",
+  "recipe-boundaries-03",
+  "recipe-boundaries-09",
+  "recipe-text_structure_purpose-03",
+  "recipe-linear_equations_one_var-00",
+  "recipe-linear_equations_one_var-02",
+  "recipe-linear_equations_one_var-04",
+  "recipe-linear_equations_two_var-01",
+  "recipe-linear_equations_two_var-02",
+  "recipe-linear_equations_two_var-04",
+  "recipe-equivalent_expressions-01"
+ ]
+}

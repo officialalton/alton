@@ -11,7 +11,7 @@ export async function GET(request: Request) {
   const url = new URL(request.url);
   const token = url.searchParams.get("token");
   if (!token) {
-    return redirectWithError(url, "유효하지 않은 초대 링크입니다.");
+    return redirectWithError(url, "This invitation link is not valid.");
   }
 
   const admin = createAdminClient();
@@ -25,7 +25,7 @@ export async function GET(request: Request) {
 
   const claim = data?.[0];
   if (!claim) {
-    return redirectWithError(url, "유효하지 않은 초대 링크입니다.");
+    return redirectWithError(url, "This invitation link is not valid.");
   }
 
   if (claim.status === "manual_review") {
@@ -42,7 +42,7 @@ export async function GET(request: Request) {
         user_metadata: { name: claim.invitee_name },
       });
       if (createError || !created?.user) {
-        return redirectWithError(url, "계정 생성에 실패했습니다. 관리자에게 문의해주세요.");
+        return redirectWithError(url, "We couldn't create your account. Please contact support.");
       }
       authUserId = created.user.id;
     }
@@ -52,7 +52,7 @@ export async function GET(request: Request) {
       p_auth_user_id: authUserId,
     });
     if (finalizeError) {
-      return redirectWithError(url, "계정 연결에 실패했습니다. 관리자에게 문의해주세요.");
+      return redirectWithError(url, "We couldn't link your account. Please contact support.");
     }
   }
 
@@ -66,7 +66,7 @@ export async function GET(request: Request) {
     email: claim.email_normalized,
   });
   if (linkError || !linkData?.properties?.hashed_token) {
-    return redirectWithError(url, "로그인 링크 생성에 실패했습니다. 관리자에게 문의해주세요.");
+    return redirectWithError(url, "We couldn't create your sign-in link. Please contact support.");
   }
 
   const separator = setPasswordPath.includes("?") ? "&" : "?";
@@ -85,16 +85,16 @@ function redirectWithError(url: URL, message: string) {
 function mapClaimError(message: string): string {
   switch (message) {
     case "invalid_token":
-      return "유효하지 않은 초대 링크입니다.";
+      return "This invitation link is not valid.";
     case "expired":
-      return "만료된 초대입니다. 새로 초대를 요청해주세요.";
+      return "This invitation has expired. Please request a new one.";
     case "revoked":
-      return "철회된 초대입니다. 관리자에게 문의해주세요.";
+      return "This invitation was withdrawn. Please contact support.";
     case "superseded":
-      return "이 링크는 더 이상 유효하지 않습니다. 가장 최근에 받은 초대 메일을 확인해주세요.";
+      return "This link is no longer valid. Please check the most recent invitation email you received.";
     case "failed":
-      return "초대 처리에 실패했습니다. 관리자에게 문의해주세요.";
+      return "We couldn't process your invitation. Please contact support.";
     default:
-      return "초대를 처리할 수 없습니다.";
+      return "We couldn't process this invitation.";
   }
 }

@@ -1,0 +1,38 @@
+{"event":"problem_generation_item_accepted","elapsedMs":14814,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":16114,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":16526,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":29630,"acceptedSoFar":2}
+{"event":"problem_generation_pipeline_timing","requested":2,"accepted":2,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":29630,"generate":13093,"figure":9030,"contractRepair":0,"answerExplanationCheck":0,"review":6378,"regenerate":4139}}
+[linear_functions/easy/spr] 2/2 (라운드 1, 통과 2/2, 호출 3.5)
+[pipeline] 자료 생성 실패: polygon AI 가 만든 그림 데이터가 규격에 맞지 않습니다 — sideLabels[].tick 은 1~3 입니다. (받은 데이터: {"type":"polygon","kind":"rectangle","vertices":["A","B","C","D"],"sideLabels":[{"between":["A","B"],"label":"12 ft","tick":0},{"between":["B","C"],"label":"5 ft","tick":0}],"angles":[{"at":"A","label":"","right":true},{"at":"B","label":"","right":true},{"at":"C","label":"","right":true},{"at":"D","label":"","right":true}],"notToScale":true})
+{"event":"problem_generation_item_accepted","elapsedMs":41141,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":43191,"acceptedSoFar":2}
+{"event":"problem_generation_item_accepted","elapsedMs":45348,"acceptedSoFar":2}
+{"event":"problem_generation_pipeline_timing","requested":2,"accepted":2,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":45348,"generate":19446,"figure":6973,"contractRepair":1944,"answerExplanationCheck":0,"review":6166,"regenerate":13899}}
+[area_volume/easy/spr] 2/2 (라운드 1, 통과 2/2, 호출 5.5)
+{"event":"problem_generation_item_accepted","elapsedMs":52381,"acceptedSoFar":3}
+{"event":"problem_generation_item_accepted","elapsedMs":53923,"acceptedSoFar":4}
+{"event":"problem_generation_item_accepted","elapsedMs":55819,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":55979,"acceptedSoFar":2}
+{"event":"problem_generation_item_accepted","elapsedMs":56257,"acceptedSoFar":1}
+{"event":"problem_generation_item_accepted","elapsedMs":56186,"acceptedSoFar":3}
+{"event":"problem_generation_item_accepted","elapsedMs":56685,"acceptedSoFar":2}
+{"event":"problem_generation_item_accepted","elapsedMs":58742,"acceptedSoFar":2}
+{"event":"problem_generation_pipeline_timing","requested":2,"accepted":2,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":58742,"generate":26893,"figure":4885,"contractRepair":7191,"answerExplanationCheck":0,"review":12518,"regenerate":10590}}
+[circles/easy/spr] 2/2 (라운드 1, 통과 2/2, 호출 7)
+{"event":"problem_generation_item_accepted","elapsedMs":66392,"acceptedSoFar":4}
+{"event":"problem_generation_item_accepted","elapsedMs":66888,"acceptedSoFar":3}
+{"event":"problem_generation_item_accepted","elapsedMs":72341,"acceptedSoFar":5}
+{"event":"problem_generation_item_accepted","elapsedMs":105906,"acceptedSoFar":6}
+{"event":"problem_generation_item_accepted","elapsedMs":105990,"acceptedSoFar":5}
+{"event":"problem_generation_item_accepted","elapsedMs":114070,"acceptedSoFar":4}
+{"event":"problem_generation_item_accepted","elapsedMs":114343,"acceptedSoFar":5}
+{"event":"problem_generation_pipeline_timing","requested":5,"accepted":5,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":114343,"generate":73049,"figure":8121,"contractRepair":1774,"answerExplanationCheck":16459,"review":49498,"regenerate":10205}}
+[linear_functions/easy/mc] 5/5 (라운드 1, 통과 5/5, 호출 4.6)
+{"event":"problem_generation_item_accepted","elapsedMs":120596,"acceptedSoFar":7}
+{"event":"problem_generation_pipeline_timing","requested":7,"accepted":7,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":120596,"generate":62646,"figure":14562,"contractRepair":0,"answerExplanationCheck":22811,"review":95066,"regenerate":17932}}
+[area_volume/easy/mc] 7/7 (라운드 1, 통과 7/7, 호출 4.57)
+{"event":"problem_generation_item_accepted","elapsedMs":157349,"acceptedSoFar":6}
+{"event":"problem_generation_pipeline_timing","requested":6,"accepted":6,"shortfall":0,"stoppedReason":"target_met","timeMs":{"total":157349,"generate":69196,"figure":19296,"contractRepair":0,"answerExplanationCheck":16590,"review":83510,"regenerate":22874}}
+[circles/easy/mc] 6/6 (라운드 1, 통과 6/6, 호출 5.17)
+생성 완료

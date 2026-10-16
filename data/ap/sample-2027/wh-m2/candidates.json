@@ -1,0 +1,266 @@
+[
+ {
+  "cellId": "ap_world_history-w114",
+  "apSubjectCode": "ap_world_history",
+  "kind": "mc",
+  "calculator": "na",
+  "reserve": false,
+  "wording": "designed_from_real_source",
+  "candidateKey": "ap_world_history-w114-k0",
+  "keywordCode": "8.5",
+  "unitCode": "8",
+  "skillPrimary": "3.A",
+  "structure": "shared_stimulus_set",
+  "archetype": "wh_w114",
+  "reviewState": "verified_by_independent_models",
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficulty": [
+   {
+    "label": "basic_learning"
+   },
+   {
+    "label": "basic_learning"
+   },
+   {
+    "label": "exam_prep"
+   }
+  ],
+  "gateOverride": "wh-m2-2026-10-15",
+  "run": "wh-m2",
+  "stockKey": "wh-m2:ap_world_history-w114-k0",
+  "pipeline": "real_source_v1",
+  "validation": "auto_passed",
+  "gateVersion": "wh-m2-2026-10-15",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "selectedForSample": true,
+  "legacyReserve": false,
+  "family": "ap_world_history",
+  "itemFamilyId": "fam:wh-m2:ap_world_history-w114-k0",
+  "canonicalKey": "wh-m2:ap_world_history-w114-k0",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_world_history:8.5",
+  "sharedWith": [],
+  "stockCell": "ap_world_history|8.5|3.A|shared_stimulus_set|na",
+  "history": [
+   {
+    "run": "wh-m2",
+    "gateVersion": "wh-m2-2026-10-15",
+    "outcome": "passed",
+    "reasons": null
+   }
+  ],
+  "stimulusOrigin": "real_historical_source",
+  "sourceRegistryIds": [
+   "txt-cs-ghana-1995"
+  ],
+  "exam": "WH1",
+  "payload": {
+   "archetype": "wh_w114",
+   "topic": "8.5",
+   "skill": "3.A",
+   "calculator": "na",
+   "set_intro": "Historical source (real document)\n(secondary source)\nGhana: A Country Study (excerpt on Kwame Nkrumah and the Convention People's Party)\nLaVerle Berry, ed., Federal Research Division, Library of Congress, 1995 (research completed 1994). Library of Congress, Federal Research Division (Country Studies; full text via Internet Archive OCR). Reuse: public domain (U.S. government work, 17 U.S.C. 105; the Library of Congress states all other text and graphics are in the public domain). excerpted (2 segments joined by [...]); whitespace normalized; OCR line-break hyphenation rejoined; no wording changed.\nContext: This reference book was written for the U.S. government; the country was called the Gold Coast under British rule before it became independent as Ghana in 1957.\n\n\"The gentlemanly manner in which politics were then conducted was to change after Kwame Nkrumah created his Convention People's Party (CPP) in June 1949. [...] In 1947, when the UGCC was created in the Gold Coast to oppose colonial rule, Nkrumah was invited from London to become the movement's general secretary. Nkrumah's tenure with the UGCC was a stormy one. In March 1948, he was arrested and detained with other leaders of the UGCC for political activism. Later, after the other members of the UGCC were invited to make recommendations to the Coussey Committee, which was advising the governor on the path to independence, Nkrumah broke with the UGCC and founded the CPP. Unlike the UGCC, which called for self-government \"in the shortest possible time,\" Nkrumah and the CPP asked for \"self-government now.\"\"",
+   "wh_set": {
+    "unit": 8,
+    "stim_type": "secondary_text",
+    "theme": "The path to independence in the Gold Coast",
+    "title": "The path to independence in the Gold Coast",
+    "sources": [
+     {
+      "id": "A",
+      "kind": "secondary_text",
+      "title": "Ghana: A Country Study (excerpt on Kwame Nkrumah and the Convention People's Party)",
+      "attribution": "LaVerle Berry, ed., Federal Research Division, Library of Congress, 1995 (research completed 1994). Library of Congress, Federal Research Division (Country Studies; full text via Internet Archive OCR). Reuse: public domain (U.S. government work, 17 U.S.C. 105; the Library of Congress states all other text and graphics are in the public domain). excerpted (2 segments joined by [...]); whitespace normalized; OCR line-break hyphenation rejoined; no wording changed.",
+      "context": "This reference book was written for the U.S. government; the country was called the Gold Coast under British rule before it became independent as Ghana in 1957.",
+      "real_data": true,
+      "source_registry_id": "txt-cs-ghana-1995",
+      "source_sha256": "2d919dd349ae2abb110f58a0a664a26101f283d63c80cdde57e51813c458956d"
+     }
+    ]
+   },
+   "items": [
+    {
+     "archetype": "wh_w114_3A",
+     "topic": "8.5",
+     "skill": "3.A",
+     "stem": "Which of the following best describes the main claim of the excerpt about Kwame Nkrumah's founding of the Convention People's Party?",
+     "options": [
+      {
+       "text": "It made the push for independence more confrontational and urgent",
+       "why": "The excerpt says the gentlemanly manner of politics changed with the CPP, which demanded self-government now rather than in the shortest possible time.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "It allowed the Gold Coast to win complete independence from Britain within the same year, 1949",
+       "why": "The context line dates independence to 1957, not 1949.",
+       "value": null,
+       "label": "overstated"
+      },
+      {
+       "text": "It brought the UGCC leaders and Nkrumah together in one movement to oppose British colonial rule",
+       "why": "The excerpt says Nkrumah broke with the UGCC to form the CPP, so the parties split rather than united.",
+       "value": null,
+       "label": "reversal"
+      },
+      {
+       "text": "It led the colonial governor to end the Coussey Committee's advisory work on independence",
+       "why": "The excerpt says nothing about the Coussey Committee's work ending; it says only that UGCC members were invited to advise it.",
+       "value": null,
+       "label": "unsupported_by_source"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is \"It made the push for independence more confrontational and urgent\". The excerpt says the gentlemanly manner of politics changed with the CPP, which demanded self-government now rather than in the shortest possible time.\n\"It allowed the Gold Coast to win complete independence from Britain within the same year, 1949\" is incorrect: The context line dates independence to 1957, not 1949.\n\"It brought the UGCC leaders and Nkrumah together in one movement to oppose British colonial rule\" is incorrect: The excerpt says Nkrumah broke with the UGCC to form the CPP, so the parties split rather than united.\n\"It led the colonial governor to end the Coussey Committee's advisory work on independence\" is incorrect: The excerpt says nothing about the Coussey Committee's work ending; it says only that UGCC members were invited to advise it.",
+     "est_seconds": 50,
+     "facts": [
+      "Nkrumah founded the CPP in June 1949.",
+      "The Gold Coast became independent as Ghana in 1957."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "3.A",
+      "key_evidence_in_source": "The excerpt sets the UGCC's gradual demand against the CPP's call for immediate self-government and says the gentlemanly politics changed.",
+      "evidence_quote": "The gentlemanly manner in which politics were then conducted was to change after Kwame Nkrumah created his Convention People's Party"
+     },
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 0,
+        "confidence": "certain"
+       },
+       {
+        "choice": 0,
+        "confidence": "certain"
+       }
+      ],
+      "panel_choice": 0
+     }
+    },
+    {
+     "archetype": "wh_w114_4A",
+     "topic": "8.1",
+     "skill": "4.A",
+     "stem": "Which of the following developments in the 1940s most directly provides context for the nationalist activity in the Gold Coast described in the excerpt?",
+     "options": [
+      {
+       "text": "The Berlin Conference divided the African interior among the European powers",
+       "why": "The Berlin Conference took place in 1884 and 1885, which is far too early to explain events in the 1940s.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "Britain was weakened by the Second World War and had recently given up control of India",
+       "why": "The war's costs and Indian independence in 1947 weakened British rule and encouraged African nationalists, and the UGCC was formed that same year.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "Soviet forces invaded Afghanistan to support a communist government in Kabul",
+       "why": "The Soviet invasion of Afghanistan happened in 1979.",
+       "value": null,
+       "label": "wrong_period"
+      },
+      {
+       "text": "Gold Coast cocoa farmers fell into debt in the 1930s Depression and sharply lowered production",
+       "why": "Depression-era hardship affected the colony, but it does not explain the late-1940s turn toward demands for self-government.",
+       "value": null,
+       "label": "true_but_not_responsive"
+      }
+     ],
+     "key_index": 1,
+     "explanation_en": "The correct answer is \"Britain was weakened by the Second World War and had recently given up control of India\". The war's costs and Indian independence in 1947 weakened British rule and encouraged African nationalists, and the UGCC was formed that same year.\n\"The Berlin Conference divided the African interior among the European powers\" is incorrect: The Berlin Conference took place in 1884 and 1885, which is far too early to explain events in the 1940s.\n\"Soviet forces invaded Afghanistan to support a communist government in Kabul\" is incorrect: The Soviet invasion of Afghanistan happened in 1979.\n\"Gold Coast cocoa farmers fell into debt in the 1930s Depression and sharply lowered production\" is incorrect: Depression-era hardship affected the colony, but it does not explain the late-1940s turn toward demands for self-government.",
+     "est_seconds": 50,
+     "facts": [
+      "India became independent from Britain in 1947.",
+      "World War II (1939 to 1945) severely strained British finances."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "4.A",
+      "key_evidence_in_source": "The excerpt dates the UGCC's founding to 1947 and Nkrumah's arrest to 1948, which places them right after the Second World War.",
+      "evidence_quote": "In 1947, when the UGCC was created in the Gold Coast to oppose colonial rule"
+     },
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 1,
+        "confidence": "likely"
+       },
+       {
+        "choice": 1,
+        "confidence": "certain"
+       }
+      ],
+      "panel_choice": 1
+     }
+    },
+    {
+     "archetype": "wh_w114_1B",
+     "topic": "8.6",
+     "skill": "1.B",
+     "stem": "Which of the following best explains why Kwame Nkrumah, the leader described in the excerpt, became important beyond Ghana after independence in 1957?",
+     "options": [
+      {
+       "text": "He promoted Pan-Africanism and African political unity",
+       "why": "Nkrumah championed Pan-Africanism and helped found the Organization of African Unity in 1963.",
+       "value": null,
+       "label": "key"
+      },
+      {
+       "text": "He drafted the Bandung Conference declaration as the conference's chief host in Indonesia",
+       "why": "Indonesia's Sukarno hosted Bandung in 1955, and Ghana was not yet independent.",
+       "value": null,
+       "label": "misattributed"
+      },
+      {
+       "text": "He led the African National Congress",
+       "why": "The ANC is a South African organization led by figures such as Mandela.",
+       "value": null,
+       "label": "misattributed"
+      },
+      {
+       "text": "He led Ghana into the Warsaw Pact as a formal military ally of the Soviet Union",
+       "why": "Ghana never joined the Warsaw Pact, whose members were in Eastern Europe.",
+       "value": null,
+       "label": "misattributed"
+      }
+     ],
+     "key_index": 0,
+     "explanation_en": "The correct answer is \"He promoted Pan-Africanism and African political unity\". Nkrumah championed Pan-Africanism and helped found the Organization of African Unity in 1963.\n\"He drafted the Bandung Conference declaration as the conference's chief host in Indonesia\" is incorrect: Indonesia's Sukarno hosted Bandung in 1955, and Ghana was not yet independent.\n\"He led the African National Congress\" is incorrect: The ANC is a South African organization led by figures such as Mandela.\n\"He led Ghana into the Warsaw Pact as a formal military ally of the Soviet Union\" is incorrect: Ghana never joined the Warsaw Pact, whose members were in Eastern Europe.",
+     "est_seconds": 45,
+     "facts": [
+      "Nkrumah was a leading advocate of Pan-Africanism.",
+      "The Organization of African Unity was founded in 1963."
+     ],
+     "design": {
+      "source_fixed_first": true,
+      "skill": "1.B",
+      "key_evidence_in_source": "The question builds on the excerpt's focus on Nkrumah as the leader of Gold Coast nationalism.",
+      "evidence_quote": "Nkrumah and the CPP asked for \"self-government now.\""
+     },
+     "key_confidence": {
+      "solver_votes": [
+       {
+        "choice": 0,
+        "confidence": "certain"
+       },
+       {
+        "choice": 0,
+        "confidence": "certain"
+       }
+      ],
+      "panel_choice": 0
+     }
+    }
+   ],
+   "excluded_items": []
+  }
+ }
+]
