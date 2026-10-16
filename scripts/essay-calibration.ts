@@ -22,15 +22,15 @@ const mem = () => { let fin: Finish | null = null; const s: EssayStore = {
   return { s, get: () => fin }; };
 
 type Sample = { tier: "high" | "mid" | "low"; essay: string; target_total: number; annotations?: unknown };
-// CALIB_SUBJECT: en(기본, el_frq) | lit(lt-p1b, lit_frq, englit-v1) | ush(ush-p1b, ush_frq, ushistory-v1). CALIB_CELLS = 쉼표로 구분한 cellId 접미사(예: saq1_3,dbq_1)
+// CALIB_SUBJECT: en(기본, el_frq) | lit(lt-p1b, lit_frq, englit-v1) | ush(ush-p1b, ush_frq, ushistory-v1) | wh(wh-* FRQ files via CALIB_FILES, whap_frq, whap-v1). CALIB_CELLS = 쉼표로 구분한 cellId 접미사(예: saq1_3,dbq_1)
 const SUBJ = process.env.CALIB_SUBJECT ?? "en";
-const KEY = SUBJ === "lit" ? "lit_frq" : SUBJ === "ush" ? "ush_frq" : "el_frq";
-const FILES = process.env.CALIB_FILES ? process.env.CALIB_FILES.split(",") : SUBJ === "lit" ? ["lt-p1b"] : SUBJ === "ush" ? ["ush-p1b"] : ["el-p1", "el-p2b"];
+const KEY = SUBJ === "lit" ? "lit_frq" : SUBJ === "ush" ? "ush_frq" : SUBJ === "wh" ? "whap_frq" : "el_frq";
+const FILES = process.env.CALIB_FILES ? process.env.CALIB_FILES.split(",") : SUBJ === "lit" ? ["lt-p1b"] : SUBJ === "ush" ? ["ush-p1b"] : SUBJ === "wh" ? ["wh-frq"] : ["el-p1", "el-p2b"];
 const CELLS = process.env.CALIB_CELLS ? process.env.CALIB_CELLS.split(",") : null;
 const items = FILES.flatMap((f) => JSON.parse(readFileSync(`data/ap/stock/${f}-items.json`, "utf-8")) as any[]).filter((i) => i.kind === "frq_bundle" && i.payload?.[KEY]?.samples?.length >= 3)
   .filter((i) => !CELLS || CELLS.some((c) => String(i.cellId).endsWith(c))).slice(0, SUBJ === "en" ? 6 : 99);
-const ROW_EXTRA = (ctx: any) => (SUBJ === "lit" ? { rubricId: "englit" } : SUBJ === "ush" ? { rubricId: ctx.rubricId, taskType: ctx.taskType, scoringNotes: ctx.scoringNotes } : {});
-const MAXS = SUBJ === "lit" ? "6/6 (thesis 1, evidence 4, sophistication 1)" : SUBJ === "ush" ? "the maximum score on every rubric row" : "6/6 (thesis 1, evidence 4, sophistication 1)";
+const ROW_EXTRA = (ctx: any) => (SUBJ === "lit" ? { rubricId: "englit" } : SUBJ === "ush" || SUBJ === "wh" ? { rubricId: ctx.rubricId, taskType: ctx.taskType, scoringNotes: ctx.scoringNotes } : {});
+const MAXS = SUBJ === "lit" ? "6/6 (thesis 1, evidence 4, sophistication 1)" : SUBJ === "ush" || SUBJ === "wh" ? "the maximum score on every rubric row" : "6/6 (thesis 1, evidence 4, sophistication 1)";
 const SEL = process.env.CALIB_SELECT ? new Set(process.env.CALIB_SELECT.split(",")) : null; // "fa1:1,fa3:0" = cell suffix:sample index
 const RUN_INJ = process.env.CALIB_INJ !== "0";
 const rank = { high: 3, mid: 2, low: 1 } as const;

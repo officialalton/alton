@@ -1,0 +1,1120 @@
+[
+ {
+  "spec": {
+   "id": "w101",
+   "exam": "WH1",
+   "unit": 1,
+   "stim": "primary_text",
+   "theme": "Limits on royal power and feudal obligations in England, 1215",
+   "sources": [
+    {
+     "id": "txt-magna-1215",
+     "context": "In 1215 a group of English barons in rebellion against King John forced him to accept this charter."
+    }
+   ],
+   "skills": [
+    "2.B",
+    "3.A",
+    "4.A",
+    "5.B"
+   ],
+   "nItems": 4,
+   "seed": 1101
+  },
+  "items": [
+   {
+    "skill": "2.B",
+    "topic": "1.6",
+    "stem": "Based on the excerpt and the context line, the barons who forced the charter on King John most likely intended it to",
+    "options": [
+     {
+      "text": "affirm the pope's authority to approve the taxes that English kings imposed on clergy and lay nobles",
+      "is_key": false,
+      "label": "misattributed",
+      "why": "Clause 12 gives a role to the common counsel of the kingdom, not to the pope. In fact Pope Innocent III later annulled the charter."
+     },
+     {
+      "text": "strengthen the authority of the crown over rebellious nobles by tying them more firmly to royal courts",
+      "is_key": false,
+      "label": "reversal",
+      "why": "The rebels imposed the charter to limit royal authority. They were not trying to strengthen the king against nobles."
+     },
+     {
+      "text": "guarantee equal legal rights to every inhabitant of England, including unfree peasants bound to the land",
+      "is_key": false,
+      "label": "overstated",
+      "why": "The protections in clause 39 apply to freemen. Unfree villeins, who made up a large part of the rural population, were not given equal rights."
+     },
+     {
+      "text": "restrict the king's power to tax his vassals and punish free men without legal process",
+      "is_key": true,
+      "label": "key",
+      "why": "Clause 12 requires common counsel for scutage and aids, and clause 39 bars imprisonment or exile of freemen without lawful judgment. Rebellious barons wanted to protect their own interests against a demanding king."
+     }
+    ],
+    "facts": [
+     "In 1215 rebel barons forced King John to accept Magna Carta.",
+     "Feudal aids and scutage were payments that vassals owed their lord. Scutage was paid in place of military service."
+    ],
+    "design": {
+     "source_fixed_first": true,
+     "key_evidence_in_source": "Clause 12 limits scutage and aids, clause 39 limits punishment of freemen, and the context line says rebel barons forced the charter on the king.",
+     "evidence_quote": "No scutage not aid shall be imposed on our kingdom, unless by common counsel of our kingdom"
+    },
+    "est_seconds": 55,
+    "key_index": 3,
+    "det": [],
+    "extra": false
+   },
+   {
+    "skill": "3.A",
+    "topic": "1.6",
+    "stem": "Clause 39 of the excerpt makes which of the following claims?",
+    "options": [
+     {
+      "text": "A free man can be punished only by lawful judgment of his peers or the law of the land",
+      "is_key": true,
+      "label": "key",
+      "why": "Clause 39 says no freeman shall be imprisoned, disseised, exiled, or destroyed except by the lawful judgment of his peers or by the law of the land."
+     },
+     {
+      "text": "The king may seize the lands of free men whenever he decides that the safety of the kingdom requires it",
+      "is_key": false,
+      "label": "reversal",
+      "why": "The clause forbids disseisin, meaning the taking of land, without lawful judgment. It does not allow the king to seize land at his own discretion."
+     },
+     {
+      "text": "Accused free men must be tried in church courts rather than by royal judges appointed by the king",
+      "is_key": false,
+      "label": "unsupported_by_source",
+      "why": "The clause mentions judgment of peers and the law of the land. It says nothing about church courts."
+     },
+     {
+      "text": "All people in the kingdom, whatever their legal status, must receive identical treatment in royal courts",
+      "is_key": false,
+      "label": "overstated",
+      "why": "The clause names only freemen. It does not promise identical treatment for people of every legal status."
+     }
+    ],
+    "facts": [
+     "Magna Carta (1215) clause 39 restricted the king from punishing freemen without lawful judgment of peers or the law of the land."
+    ],
+    "design": {
+     "source_fixed_first": true,
+     "key_evidence_in_source": "The wording of clause 39 lists the protected actions and the two lawful exceptions.",
+     "evidence_quote": "except by the lawful judgment of his peers or by the law of the land"
+    },
+    "est_seconds": 45,
+    "key_index": 0,
+    "det": [],
+    "extra": false
+   },
+   {
+    "skill": "4.A",
+    "topic": "1.6",
+    "stem": "Which of the following developments most directly contributed to the barons' rebellion that produced the charter in 1215?",
+    "options": [
+     {
+      "text": "Mongol campaigns into Eastern Europe, which pressured Western kings to raise large armies for defense",
+      "is_key": false,
+      "label": "unrelated_development",
+      "why": "The Mongol invasions of Eastern Europe took place around 1240 to 1242, after 1215. They had nothing to do with the English barons' grievances."
+     },
+     {
+      "text": "Royal demands for money to fund King John's unsuccessful wars to recover lands in France",
+      "is_key": true,
+      "label": "key",
+      "why": "John lost Normandy to Philip II of France in 1204 and his allies were defeated at Bouvines in 1214. The heavy scutage and aids he demanded to pay for these campaigns angered the barons, which is why clause 12 limits such levies."
+     },
+     {
+      "text": "Mounting costs of the Hundred Years' War, which forced the crown to seek new taxes on wool exports",
+      "is_key": false,
+      "label": "wrong_period",
+      "why": "The Hundred Years' War began in 1337, long after Magna Carta."
+     },
+     {
+      "text": "Severe labor shortages after the Black Death, which led lords and peasants to fight over wages and dues",
+      "is_key": false,
+      "label": "wrong_period",
+      "why": "The Black Death reached England in 1348, more than a century after 1215."
+     }
+    ],
+    "facts": [
+     "King John lost Normandy to Philip II of France in 1204.",
+     "John's allies were defeated at the Battle of Bouvines in 1214, shortly before the 1215 rebellion."
+    ],
+    "design": {
+     "source_fixed_first": true,
+     "key_evidence_in_source": "Clause 12's limits on scutage and aids point to baronial anger over heavy royal levies.",
+     "evidence_quote": "No scutage not aid shall be imposed on our kingdom, unless by common counsel of our kingdom"
+    },
+    "est_seconds": 55,
+    "key_index": 1,
+    "det": [],
+    "extra": false
+   },
+   {
+    "skill": "5.B",
+    "topic": "1.6",
+    "stem": "The principle in clause 12 that certain levies required the \"common counsel of our kingdom\" most directly relates to which later development in England during the 1200s?",
+    "options": [
+     {
+      "text": "The creation of an absolute monarchy in which kings ruled without consulting nobles or towns",
+      "is_key": false,
+      "label": "reversal",
+      "why": "English kings increasingly had to consult assemblies in this period, which is the opposite of absolutism."
+     },
+     {
+      "text": "The replacement of feudal levies by a salaried civil service recruited through written examinations",
+      "is_key": false,
+      "label": "misattributed",
+      "why": "Recruiting officials through examinations was a feature of Song China, not of thirteenth-century England."
+     },
+     {
+      "text": "The rise of Parliament as an assembly whose consent kings sought for new taxes",
+      "is_key": true,
+      "label": "key",
+      "why": "The idea that taxation needed the counsel of the realm fed into the growth of Parliament in the 1200s, including Simon de Montfort's parliament of 1265 and Edward I's parliament of 1295."
+     },
+     {
+      "text": "The abolition of serfdom, as royal courts extended the charter's protections to all peasants",
+      "is_key": false,
+      "label": "overstated",
+      "why": "Serfdom continued in England through the 1200s. It declined only gradually after the Black Death."
+     }
+    ],
+    "facts": [
+     "Simon de Montfort called a parliament in 1265 that included representatives of towns.",
+     "Edward I summoned the so-called Model Parliament in 1295."
+    ],
+    "design": {
+     "source_fixed_first": true,
+     "key_evidence_in_source": "Clause 12 makes scutage and aids depend on the common counsel of the kingdom.",
+     "evidence_quote": "unless by common counsel of our kingdom"
+    },
+    "est_seconds": 55,
+    "key_index": 2,
+    "det": [],
+    "extra": false
+   },
+   {
+    "skill": "5.A",
+    "topic": "1.7",
+    "stem": "EXTRA. The feudal obligations implied in clause 12, such as aids owed by vassals to their lord the king, most resemble political relationships in which other society from c. 1200 to c. 1450?",
+    "options": [
+     {
+      "text": "Venice, where a council of wealthy merchant families elected the doge and directed overseas trade",
+      "is_key": false,
+      "label": "unrelated_development",
+      "why": "Venice was a merchant republic governed by commercial elites. It is not an example of land-based feudal obligation."
+     },
+     {
+      "text": "Mali, where rulers grew wealthy by taxing caravans carrying gold and salt across the Sahara",
+      "is_key": false,
+      "label": "unrelated_development",
+      "why": "Mali's revenue came mainly from taxing trade. That is not comparable to vassals owing service and aids to a lord."
+     },
+     {
+      "text": "Song China, where officials chosen by civil service examinations collected taxes for the emperor",
+      "is_key": false,
+      "label": "true_but_not_responsive",
+      "why": "This describes Song China accurately, but a centralized bureaucracy of examined officials is the opposite of a system built on personal ties between lords and vassals."
+     },
+     {
+      "text": "Japan, where warriors served lords and the shogun in exchange for land or its income",
+      "is_key": true,
+      "label": "key",
+      "why": "Under the Kamakura shogunate, samurai and regional lords owed military service in exchange for land rights. Like English feudalism, this system rested on reciprocal obligations among military elites."
+     }
+    ],
+    "facts": [
+     "The Kamakura shogunate ruled Japan from 1185 to 1333 and relied on warrior vassals rewarded with land rights.",
+     "Song China (960-1279) recruited officials through civil service examinations."
+    ],
+    "design": {
+     "source_fixed_first": true,
+     "key_evidence_in_source": "Clause 12 lists customary aids that vassals owed their lord, such as paying his ransom or helping when his eldest son was knighted. These obligations show a feudal relationship.",
+     "evidence_quote": "except for ransoming our person, for making our eldest son a knight, and for once marrying our eldest daughter"
+    },
+    "est_seconds": 60,
+    "key_index": 3,
+    "det": [],
+    "extra": true
+   },
+   {
+    "skill": "2.C",
+    "topic": "1.6",
+    "stem": "EXTRA. Because rebellious barons forced the charter on the king, the excerpt is most limited as evidence about which of the following?",
+    "options": [
+     {
+      "text": "The financial obligations that vassals were expected to owe their lord in the feudal system",
+      "is_key": false,
+      "label": "true_but_not_responsive",
+      "why": "Clause 12 names specific customary aids, so the source is useful on this topic and is not limited by who wrote it."
+     },
+     {
+      "text": "The ways in which the barons wished royal justice to be administered to people of free status",
+      "is_key": false,
+      "label": "reversal",
+      "why": "Clauses 39 and 40 state exactly how the barons wanted justice handled for freemen. The excerpt is good evidence on this point."
+     },
+     {
+      "text": "The grievances that leading nobles held against the king's taxation of their estates",
+      "is_key": false,
+      "label": "reversal",
+      "why": "Clause 12 speaks directly to baronial complaints about levies. The source is strong evidence on this topic, not limited."
+     },
+     {
+      "text": "The legal standing of unfree peasants who worked the lands of English lords",
+      "is_key": true,
+      "label": "key",
+      "why": "The charter was negotiated by and for elites, and clause 39 protects freemen only. It therefore says little about the unfree villeins who worked the land."
+     }
+    ],
+    "facts": [
+     "Magna Carta (1215) was produced by negotiations between King John and rebel barons.",
+     "A large share of England's rural population in 1215 were unfree villeins."
+    ],
+    "design": {
+     "source_fixed_first": true,
+     "key_evidence_in_source": "The context line names the barons as the force behind the charter, and clause 39 limits its protections to freemen.",
+     "evidence_quote": "No freemen shall be taken or imprisoned or disseised or exiled"
+    },
+    "est_seconds": 55,
+    "key_index": 3,
+    "det": [],
+    "extra": true
+   }
+  ],
+  "setViolations": []
+ },
+ {
+  "spec": {
+   "id": "w102",
+   "exam": "WH1",
+   "unit": 2,
+   "stim": "image",
+   "theme": "Trans-Saharan trade, gold and the image of the king of Mali on a European atlas",
+   "sources": [
+    {
+     "id": "img-catalan-mansa-musa-1375",
+     "context": "This detail comes from a hand-painted atlas made in 1375 on the island of Majorca, which shows lands around the Mediterranean and beyond as European mapmakers knew them."
+    }
+   ],
+   "skills": [
+    "2.A",
+    "3.A",
+    "4.B",
+    "5.A"
+   ],
+   "nItems": 4,
+   "seed": 1102
+  },
+  "items": [
+   {
+    "skill": "2.A",
+    "topic": "2.4",
+    "stem": "The way the mapmaker depicted the ruler most directly reflects which European view of West Africa in the late fourteenth century?",
+    "options": [
+     {
+      "text": "It was a poor land whose people had no organized states or trade.",
+      "is_key": false,
+      "label": "reversal",
+      "why": "This is the opposite of the image, which shows a crowned monarch with gold, scepter and throne."
+     },
+     {
+      "text": "It was a distant province governed directly by the Mongol khans of the Golden Horde.",
+      "is_key": false,
+      "label": "misattributed",
+      "why": "The Golden Horde ruled the steppe north of the Black Sea, not West Africa. The caption identifies the figure as the king of Mali, an independent ruler."
+     },
+     {
+      "text": "It was a region ruled by kings rich in gold.",
+      "is_key": true,
+      "label": "key",
+      "why": "The crowned, enthroned figure holds up a large gold piece, so the Majorcan mapmaker presents West Africa as a land of wealthy rulers. That matches what Mediterranean merchants knew about Mali's gold."
+     },
+     {
+      "text": "It was a pagan frontier that crusading orders were preparing to conquer by force.",
+      "is_key": false,
+      "label": "unsupported_by_source",
+      "why": "Nothing in the image suggests a planned conquest. The ruler is shown with dignity and wealth, not as a target of crusade."
+     }
+    ],
+    "facts": [
+     "The Catalan Atlas was made on Majorca in 1375 and is attributed to Abraham Cresques.",
+     "In the 1300s the Mali Empire was a major source of the gold that reached Mediterranean markets."
+    ],
+    "design": {
+     "source_fixed_first": true,
+     "key_evidence_in_source": "The ruler holds up a round gold piece while wearing a crown and sitting on a throne, and the caption identifies him as the king of Mali.",
+     "evidence_quote": ""
+    },
+    "est_seconds": 50,
+    "key_index": 2,
+    "det": [],
+    "extra": false
+   },
+   {
+    "skill": "3.A",
+    "topic": "2.4",
+    "stem": "By showing the king of Mali with a crown, a scepter and a throne, the image makes which claim about him?",
+    "options": [
+     {
+      "text": "He ruled as a subordinate governor appointed by the Mamluk sultan of Egypt.",
+      "is_key": false,
+      "label": "reversal",
+      "why": "The image presents him as an independent crowned king, not a subordinate. Mali was not governed by the Mamluks."
+     },
+     {
+      "text": "He was a sovereign equal in rank to Europe's kings.",
+      "is_key": true,
+      "label": "key",
+      "why": "The crown, scepter and throne are standard European symbols of royal authority. Using them claims that Mali's ruler was a monarch on the same level as European kings."
+     },
+     {
+      "text": "He gained his wealth chiefly by selling captives to Atlantic sugar plantations.",
+      "is_key": false,
+      "label": "wrong_period",
+      "why": "The Atlantic plantation slave trade grew after 1450, long after this 1375 atlas. The image links his wealth to gold."
+     },
+     {
+      "text": "He had converted to Christianity and accepted the authority of the pope in Rome.",
+      "is_key": false,
+      "label": "unsupported_by_source",
+      "why": "Royal symbols do not show religious conversion. Mali's rulers in this period were Muslims, not Christians."
+     }
+    ],
+    "facts": [
+     "Mali's rulers in the 1300s, including Mansa Musa, were Muslims.",
+     "The Atlantic slave trade to plantation economies developed mainly after the mid-1400s."
+    ],
+    "design": {
+     "source_fixed_first": true,
+     "key_evidence_in_source": "The visible royal symbols (gold crown, fleur-de-lis scepter, cushioned throne) present the ruler as a full sovereign.",
+     "evidence_quote": ""
+    },
+    "est_seconds": 50,
+    "key_index": 1,
+    "det": [],
+    "extra": false
+   },
+   {
+    "skill": "4.B",
+    "topic": "2.4",
+    "stem": "The European knowledge of Mali shown in this 1375 image is best explained in the context of which earlier development?",
+    "options": [
+     {
+      "text": "Arab dhow voyages bringing East African ivory and gold from Kilwa to Indian ports",
+      "is_key": false,
+      "label": "unrelated_development",
+      "why": "Indian Ocean trade from the Swahili coast was real, but it did not connect Mali to the Mediterranean world that made this atlas."
+     },
+     {
+      "text": "Mongol-protected Silk Road caravans that carried Chinese porcelain and silk to Europe",
+      "is_key": false,
+      "label": "true_but_not_responsive",
+      "why": "The Mongols did protect Silk Road trade, but that trade explains European knowledge of East Asia, not of West African gold."
+     },
+     {
+      "text": "The spread of printed maps from presses in German cities across Mediterranean ports",
+      "is_key": false,
+      "label": "wrong_period",
+      "why": "Movable-type printing began in Europe around 1450, after 1375, and this atlas was painted by hand."
+     },
+     {
+      "text": "A Malian king's lavish pilgrimage to Mecca by way of Cairo in 1324",
+      "is_key": true,
+      "label": "key",
+      "why": "Mansa Musa's hajj, with its large spending of gold in Cairo, spread reports of Mali's wealth around the Mediterranean. Those reports shaped how European mapmakers pictured the king of Mali."
+     }
+    ],
+    "facts": [
+     "Mansa Musa of Mali made his pilgrimage to Mecca in 1324, passing through Cairo.",
+     "His spending of gold in Cairo spread his reputation for wealth across the Mediterranean world."
+    ],
+    "design": {
+     "source_fixed_first": true,
+     "key_evidence_in_source": "The atlas dates to 1375 and shows the king of Mali holding gold, about fifty years after Mansa Musa's well-known hajj.",
+     "evidence_quote": ""
+    },
+    "est_seconds": 55,
+    "key_index": 3,
+    "det": [],
+    "extra": false
+   },
+   {
+    "skill": "5.A",
+    "topic": "2.4",
+    "stem": "European interest in the West African gold shown in the image most directly contributed to which development in the fifteenth century?",
+    "options": [
+     {
+      "text": "Portuguese voyages down Africa's Atlantic coast",
+      "is_key": true,
+      "label": "key",
+      "why": "In the 1400s the Portuguese sailed down the West African coast, partly to reach the sources of gold directly and avoid the Saharan and North African middlemen."
+     },
+     {
+      "text": "The Ottoman conquest of Constantinople and its control of Black Sea trade",
+      "is_key": false,
+      "label": "unrelated_development",
+      "why": "The Ottomans took Constantinople in 1453, but European demand for West African gold did not cause it."
+     },
+     {
+      "text": "Spanish conquest of the Aztec Empire to seize the gold of central Mexico",
+      "is_key": false,
+      "label": "wrong_period",
+      "why": "The Spanish conquest of the Aztecs happened in 1519 to 1521, in the sixteenth century, and in the Americas, not West Africa."
+     },
+     {
+      "text": "Ming dynasty treasure fleets under Zheng He sailing to East African ports",
+      "is_key": false,
+      "label": "unrelated_development",
+      "why": "Zheng He's voyages were real and took place in the 1400s, but Chinese imperial goals drove them, not European interest in West African gold."
+     }
+    ],
+    "facts": [
+     "Portuguese expeditions explored the West African coast during the 1400s, seeking direct access to African gold.",
+     "The Spanish conquest of the Aztec Empire took place in 1519-1521."
+    ],
+    "design": {
+     "source_fixed_first": true,
+     "key_evidence_in_source": "The prominent gold piece in the king's hand shows how strongly European mapmakers linked Mali with gold.",
+     "evidence_quote": ""
+    },
+    "est_seconds": 45,
+    "key_index": 0,
+    "det": [],
+    "extra": false
+   },
+   {
+    "skill": "1.B",
+    "topic": "2.4",
+    "stem": "Which of the following best explains how the rulers of the empire shown in the image gained the wealth that the gold piece suggests?",
+    "options": [
+     {
+      "text": "They taxed the gold and salt trade crossing their lands.",
+      "is_key": true,
+      "label": "key",
+      "why": "Mali's rulers grew rich by controlling and taxing the trans-Saharan trade. Gold from West African fields was exchanged for salt and other goods brought across the desert by camel caravans."
+     },
+     {
+      "text": "They exported silver from mines in the Andes to merchants in Ming China.",
+      "is_key": false,
+      "label": "wrong_period",
+      "why": "Andean silver reached global trade only after Spanish colonization in the 1500s, long after this image was made."
+     },
+     {
+      "text": "They controlled the Indian Ocean spice trade from fortified ports on the Malabar Coast.",
+      "is_key": false,
+      "label": "misattributed",
+      "why": "Mali was an inland West African empire. Malabar's spice ports were in India and were not under Malian control."
+     },
+     {
+      "text": "They collected tribute from caravan cities along the Silk Roads of Central Asia.",
+      "is_key": false,
+      "label": "unrelated_development",
+      "why": "Silk Road cities lay in Central Asia, far outside Mali's reach. Their tribute went to states such as the Mongol khanates."
+     }
+    ],
+    "facts": [
+     "The Mali Empire drew much of its wealth from taxing trans-Saharan trade, especially gold and salt.",
+     "Camel caravans carried goods across the Sahara between West Africa and North Africa."
+    ],
+    "design": {
+     "source_fixed_first": true,
+     "key_evidence_in_source": "The gold piece in the king's raised hand stands for the gold-based wealth of Mali's rulers.",
+     "evidence_quote": ""
+    },
+    "est_seconds": 45,
+    "key_index": 0,
+    "det": [],
+    "extra": true
+   },
+   {
+    "skill": "2.C",
+    "topic": "2.4",
+    "stem": "Which of the following most limits the usefulness of the image as evidence of what Mali's ruler and his court actually looked like?",
+    "options": [
+     {
+      "text": "A colonial administrator painted it centuries after Mali's empire had collapsed.",
+      "is_key": false,
+      "label": "wrong_period",
+      "why": "The atlas dates from 1375, when Mali was still a powerful empire, long before European colonial rule in Africa."
+     },
+     {
+      "text": "The artist copied the portrait directly from coins that the Malian rulers minted.",
+      "is_key": false,
+      "label": "unsupported_by_source",
+      "why": "Nothing in the source supports this. Mali traded gold as dust and in other forms rather than as portrait coins."
+     },
+     {
+      "text": "Mali's court commissioned the atlas to flatter its ruler in front of foreign envoys.",
+      "is_key": false,
+      "label": "unsupported_by_source",
+      "why": "The credit and context lines place the atlas's making in Majorca. Nothing shows that Mali's court ordered it."
+     },
+     {
+      "text": "The mapmaker in Majorca relied on secondhand reports.",
+      "is_key": true,
+      "label": "key",
+      "why": "The atlas was made on Majorca from merchant and travel reports. Its European-style crown and scepter show how Europeans imagined the king, not an accurate likeness of him."
+     }
+    ],
+    "facts": [
+     "The Catalan Atlas of 1375 was produced on Majorca by European mapmakers who drew on reports from merchants and travelers.",
+     "The crown and scepter in the image are European symbols of kingship."
+    ],
+    "design": {
+     "source_fixed_first": true,
+     "key_evidence_in_source": "The context line says the atlas was made in 1375 on Majorca and shows lands as European mapmakers knew them.",
+     "evidence_quote": "shows lands around the Mediterranean and beyond as European mapmakers knew them"
+    },
+    "est_seconds": 50,
+    "key_index": 3,
+    "det": [],
+    "extra": true
+   }
+  ],
+  "setViolations": []
+ },
+ {
+  "spec": {
+   "id": "w108",
+   "exam": "WH1",
+   "unit": 5,
+   "stim": "quantitative",
+   "theme": "World population growth in the age of revolutions and industrialization",
+   "sources": [
+    {
+     "id": "tab-census-worldpop-1700-1900",
+     "context": "The U.S. Census Bureau publishes a table comparing estimates of world population made by several scholars; this table shows the lowest and highest of those estimates for five years."
+    }
+   ],
+   "skills": [
+    "1.A",
+    "3.B",
+    "4.B"
+   ],
+   "nItems": 3,
+   "seed": 1108
+  },
+  "items": [
+   {
+    "skill": "1.A",
+    "topic": "5.10",
+    "stem": "Which of the following developments most directly contributed to the rise in world population shown in the table between 1750 and 1900?",
+    "options": [
+     {
+      "text": "Rising death rates from the Taiping Rebellion in China and from famines in British India",
+      "is_key": false,
+      "label": "reversal",
+      "why": "These were real nineteenth-century disasters, but they killed millions. They worked against population growth and did not cause it."
+     },
+     {
+      "text": "The mass use of antibiotics such as penicillin to treat bacterial infections in colonized regions",
+      "is_key": false,
+      "label": "wrong_period",
+      "why": "Penicillin went into wide use in the 1940s, long after 1900."
+     },
+     {
+      "text": "Wider cultivation of American crops such as maize and potatoes in Afro-Eurasia",
+      "is_key": true,
+      "label": "key",
+      "why": "After the Columbian Exchange, American crops spread in Europe, Africa, and China. They raised food supplies and helped support the growth both estimates show from 1750 to 1900."
+     },
+     {
+      "text": "The Green Revolution's high-yield rice and wheat varieties and chemical fertilizers in South Asia",
+      "is_key": false,
+      "label": "wrong_period",
+      "why": "The Green Revolution happened in the mid-twentieth century, after the period the table covers."
+     }
+    ],
+    "facts": [
+     "Maize, potatoes, and sweet potatoes from the Americas spread through Afro-Eurasia after the sixteenth century as part of the Columbian Exchange.",
+     "Penicillin came into widespread medical use in the 1940s."
+    ],
+    "design": {
+     "source_fixed_first": true,
+     "key_evidence_in_source": "Both estimates rise steadily from 1750 (629 and 961 million) to 1900 (1,550 and 1,762 million), so students must name a cause of growth from this period.",
+     "evidence_quote": "1900 AD | 1,550 | 1,762"
+    },
+    "est_seconds": 50,
+    "key_index": 2,
+    "det": [],
+    "extra": false
+   },
+   {
+    "skill": "3.B",
+    "topic": "5.10",
+    "stem": "Which of the following claims about world population is best supported by the data in the table?",
+    "options": [
+     {
+      "text": "Most of the population increase from 1800 to 1900 took place in industrializing countries of Western Europe",
+      "is_key": false,
+      "label": "unsupported_by_source",
+      "why": "The table gives only world totals and has no regional breakdown. Asia, not Western Europe, also held most of the world's people."
+     },
+     {
+      "text": "Both the lower and upper estimates show world population more than doubling from 1700 to 1900",
+      "is_key": true,
+      "label": "key",
+      "why": "The lower estimate rises from 600 to 1,550 million and the upper from 679 to 1,762 million. Each is about 2.6 times its 1700 value."
+     },
+     {
+      "text": "World population declined between 1750 and 1800 according to the lower estimate before recovering",
+      "is_key": false,
+      "label": "reversal",
+      "why": "The lower estimate rises from 629 to 813 million between 1750 and 1800. It does not fall."
+     },
+     {
+      "text": "Scholars' estimates for 1750 agree more closely than their estimates for any other year in the table",
+      "is_key": false,
+      "label": "reversal",
+      "why": "The 1750 gap (629 to 961, a spread of 332 million) is the widest in the table, so the estimates for that year agree least."
+     }
+    ],
+    "facts": [
+     "Asia held the majority of the world's population throughout the period 1700 to 1900."
+    ],
+    "design": {
+     "source_fixed_first": true,
+     "key_evidence_in_source": "Computation: lower estimate 1,550 divided by 600 is about 2.6; upper estimate 1,762 divided by 679 is about 2.6.",
+     "evidence_quote": "1700 AD | 600 | 679"
+    },
+    "est_seconds": 60,
+    "key_index": 1,
+    "det": [],
+    "extra": false
+   },
+   {
+    "skill": "4.B",
+    "topic": "5.9",
+    "stem": "The world population growth shown in the table between 1850 and 1900 is best understood in the context of which of the following broader developments?",
+    "options": [
+     {
+      "text": "Growing populations encouraged European states to adopt mercantilist policies and found their first joint-stock trading companies",
+      "is_key": false,
+      "label": "wrong_period",
+      "why": "The first joint-stock trading companies and mercantilist policy date to the 1600s, long before 1850."
+     },
+     {
+      "text": "Crowding in coastal cities persuaded Qing China and Tokugawa Japan to open their ports voluntarily to Western trade",
+      "is_key": false,
+      "label": "misattributed",
+      "why": "Western pressure forced the ports open: the Opium Wars in China and Perry's gunboat diplomacy in Japan. Neither state opened them by choice."
+     },
+     {
+      "text": "Rural population pressure, along with steamships and railroads, helped drive mass labor migration abroad",
+      "is_key": true,
+      "label": "key",
+      "why": "In the late nineteenth century, crowded rural areas in Europe, China, and India sent millions of migrants abroad. Steamships and railroads made the journeys cheaper and faster."
+     },
+     {
+      "text": "Concerns about population growth led Britain to abolish the Atlantic slave trade and slavery in its colonies",
+      "is_key": false,
+      "label": "misattributed",
+      "why": "Britain ended the slave trade in 1807 and slavery in 1833 because of abolitionist campaigns, slave resistance, and economic change, not worries about population. Both acts also came before 1850."
+     }
+    ],
+    "facts": [
+     "Millions of Europeans, Chinese, and Indians migrated overseas in the late nineteenth century, many as laborers.",
+     "Commodore Perry's expedition (1853-1854) forced Japan to open ports to U.S. ships.",
+     "Britain abolished the slave trade in 1807 and slavery in most of its colonies in 1833."
+    ],
+    "design": {
+     "source_fixed_first": true,
+     "key_evidence_in_source": "Between 1850 and 1900 the lower estimate rises by 422 million (1,128 to 1,550) and the upper by 360 million (1,402 to 1,762), the largest increases in the table.",
+     "evidence_quote": "1850 AD | 1,128 | 1,402"
+    },
+    "est_seconds": 60,
+    "key_index": 2,
+    "det": [],
+    "extra": false
+   },
+   {
+    "skill": "2.C",
+    "topic": "5.10",
+    "stem": "The large gap between the lower and upper estimates for 1750 most likely reflects which limitation that historians face when using the table?",
+    "options": [
+     {
+      "text": "Few states then took regular censuses, so scholars reconstructed totals from fragmentary records",
+      "is_key": true,
+      "label": "key",
+      "why": "In 1750 national censuses were rare; the United States began one in 1790 and Britain in 1801. Modern scholars had to estimate the totals from partial sources, so their figures differ widely."
+     },
+     {
+      "text": "Colonial officials in the Americas deliberately undercounted enslaved Africans to reduce the taxes owed to Spain",
+      "is_key": false,
+      "label": "unsupported_by_source",
+      "why": "Nothing in the table or its credit line connects the range to colonial tax records. A regional practice like this could not explain a gap in world totals."
+     },
+     {
+      "text": "Some scholars counted only Europe and its colonies, while others included Asia",
+      "is_key": false,
+      "label": "unsupported_by_source",
+      "why": "The context line says every figure is an estimate of world population. Nothing suggests some estimates leave out regions."
+     },
+     {
+      "text": "Thomas Malthus inflated the 1750 totals to support his argument that poor relief encouraged larger families",
+      "is_key": false,
+      "label": "misattributed",
+      "why": "Malthus published his essay in 1798 and is not one of the estimators listed in the table. Scholars produced these figures between 1974 and 1999."
+     }
+    ],
+    "facts": [
+     "The United States held its first national census in 1790, and Great Britain held its first in 1801.",
+     "Thomas Malthus published An Essay on the Principle of Population in 1798."
+    ],
+    "design": {
+     "source_fixed_first": true,
+     "key_evidence_in_source": "For 1750 the estimates range from 629 to 961 million, a spread of 332 million, and the credit line says the figures are estimates published 1974-1999.",
+     "evidence_quote": "1750 AD | 629 | 961"
+    },
+    "est_seconds": 55,
+    "key_index": 0,
+    "det": [],
+    "extra": true
+   },
+   {
+    "skill": "5.B",
+    "topic": "5.9",
+    "stem": "In industrializing societies such as Britain, the population growth shown in the table between 1800 and 1900 most directly contributed to which of the following?",
+    "options": [
+     {
+      "text": "The abandonment of coal power in favor of hydroelectric dams to meet rising demand for energy",
+      "is_key": false,
+      "label": "wrong_period",
+      "why": "Coal stayed the main industrial fuel through 1900. Hydroelectric power was only beginning in the 1880s and did not replace coal."
+     },
+     {
+      "text": "Rapid growth of industrial cities such as Manchester, with crowded working-class housing",
+      "is_key": true,
+      "label": "key",
+      "why": "A growing population and factory jobs pulled people into cities like Manchester. Much of the housing there was crowded and unsanitary."
+     },
+     {
+      "text": "A sharp decline in emigration from Europe as new factory jobs absorbed workers in their home countries",
+      "is_key": false,
+      "label": "reversal",
+      "why": "European emigration rose sharply in the nineteenth century, with tens of millions leaving for the Americas and elsewhere."
+     },
+     {
+      "text": "A return of surplus workers from factories to rural cottage industries under the putting-out system",
+      "is_key": false,
+      "label": "reversal",
+      "why": "Factories replaced cottage industry during industrialization, and labor moved from the countryside to the cities, not the other way."
+     }
+    ],
+    "facts": [
+     "Manchester grew rapidly in the early nineteenth century as a center of cotton textile manufacturing.",
+     "Coal-powered steam engines remained the main energy source of industrialization through the nineteenth century."
+    ],
+    "design": {
+     "source_fixed_first": true,
+     "key_evidence_in_source": "The lower estimate grows from 813 million in 1800 to 1,550 million in 1900 (about 1.9 times), the century of rapid industrialization and urbanization.",
+     "evidence_quote": "1800 AD | 813 | 1,125"
+    },
+    "est_seconds": 50,
+    "key_index": 1,
+    "det": [],
+    "extra": true
+   }
+  ],
+  "setViolations": []
+ },
+ {
+  "spec": {
+   "id": "w109",
+   "exam": "WH1",
+   "unit": 6,
+   "stim": "paired_text",
+   "theme": "Justifying and criticizing imperial rule around 1900",
+   "sources": [
+    {
+     "id": "txt-kipling-1899",
+     "context": "Rudyard Kipling, a British writer born in India, published this poem in 1899, soon after the United States took control of the Philippines."
+    },
+    {
+     "id": "txt-twain-1905",
+     "context": "Mark Twain, an American writer, published this satire in 1905 to support a campaign against the rule of King Leopold II of Belgium in the Congo; the speaker is Leopold as Twain imagined him."
+    }
+   ],
+   "skills": [
+    "3.C",
+    "2.B",
+    "4.A",
+    "5.B"
+   ],
+   "nItems": 4,
+   "seed": 1109
+  },
+  "items": [
+   {
+    "skill": "3.C",
+    "topic": "6.1",
+    "stem": "Which of the following best describes a difference between the main ideas of Source A and Source B about imperial rule?",
+    "options": [
+     {
+      "text": "Source A portrays imperial rule as a costly duty, while Source B mocks claims that such rule benefited the colonized.",
+      "is_key": true,
+      "label": "key",
+      "why": "Kipling urges readers to send their sons to exile and fight famine and sickness, framing empire as self-sacrifice. Twain has Leopold admit he was falsely seen as the benefactor of a down-trodden people, which ridicules that claim."
+     },
+     {
+      "text": "Both sources reject the idea of racial hierarchy and call for colonized peoples to receive immediate self-government.",
+      "is_key": false,
+      "label": "reversal",
+      "why": "Source A openly expresses racial hierarchy, and neither source calls for self-government."
+     },
+     {
+      "text": "Both sources argue that colonial rule should be left to private trading companies rather than to national governments and their armies.",
+      "is_key": false,
+      "label": "unsupported_by_source",
+      "why": "Neither excerpt discusses whether companies or governments should rule. Twain mentions traders only as people Leopold blamed for spreading stories."
+     },
+     {
+      "text": "Source A warns that empire would corrupt the colonizing nation, while Source B praises Leopold for ending the Congo's internal slave trade.",
+      "is_key": false,
+      "label": "reversal",
+      "why": "Kipling urges readers to take up empire rather than warning against it, and Twain's satire attacks Leopold instead of praising him."
+     }
+    ],
+    "facts": [
+     "Kipling published The White Man's Burden in 1899, urging the United States to take up colonial rule in the Philippines.",
+     "Twain published King Leopold's Soliloquy in 1905 to support the international campaign against abuses in the Congo Free State."
+    ],
+    "design": {
+     "source_fixed_first": true,
+     "key_evidence_in_source": "Source A's call to send sons into exile to serve colonized peoples, set against Source B's ironic line about Leopold being seen as a benefactor.",
+     "evidence_quote": "I was looked up to as the benefactor of a down-trodden and friendless people"
+    },
+    "est_seconds": 60,
+    "key_index": 0,
+    "det": [],
+    "extra": false
+   },
+   {
+    "skill": "2.B",
+    "topic": "6.3",
+    "stem": "Twain most likely had the imagined Leopold call the kodak his most powerful enemy in Source B in order to",
+    "options": [
+     {
+      "text": "argue that new technologies such as cameras mainly helped European states expand their colonial control",
+      "is_key": false,
+      "label": "reversal",
+      "why": "Some technologies did help imperial expansion, but in this excerpt the camera works against the colonial ruler."
+     },
+     {
+      "text": "suggest that photographic evidence undercut official denials of abuses in the Congo",
+      "is_key": true,
+      "label": "key",
+      "why": "Leopold says the press once dismissed the mutilation stories as lies, but the camera is a witness he cannot bribe. Twain wrote for the reform campaign, which used photographs of mutilated Congolese to prove the abuses were real."
+     },
+     {
+      "text": "persuade American traders to demand the reopening of the Congo market under the Berlin Conference terms",
+      "is_key": false,
+      "label": "true_but_not_responsive",
+      "why": "Twain mentions traders shut out by the closed open door, but the point of the kodak passage is exposing atrocities, not trade access."
+     },
+     {
+      "text": "praise Leopold's efforts to protect Congolese privacy from foreign journalists and missionaries",
+      "is_key": false,
+      "label": "unsupported_by_source",
+      "why": "The work is satire aimed against Leopold. His efforts to suppress the pictures are shown as a cover-up, not as protecting anyone."
+     }
+    ],
+    "facts": [
+     "Photographs of mutilated Congolese, including those taken by missionary Alice Seeley Harris, were used by the Congo Reform Association in the early 1900s.",
+     "Portable Kodak cameras became widely available after 1888."
+    ],
+    "design": {
+     "source_fixed_first": true,
+     "key_evidence_in_source": "Leopold calls the camera a witness he could not bribe and says its pictures circulate despite his efforts to suppress them, after earlier press denials of the mutilation stories.",
+     "evidence_quote": "The only witness I have encountered in my long experience that I couldn't bribe."
+    },
+    "est_seconds": 55,
+    "key_index": 1,
+    "det": [],
+    "extra": false
+   },
+   {
+    "skill": "4.A",
+    "topic": "6.2",
+    "stem": "Source B's reference to the open door of the Berlin-Congo charter is best understood in the context of which of the following?",
+    "options": [
+     {
+      "text": "European diplomacy that set terms for claiming African territory in the 1880s",
+      "is_key": true,
+      "label": "key",
+      "why": "At the Berlin Conference of 1884 to 1885, European powers set rules for claiming African territory and accepted Leopold's Congo Free State on the condition that trade there stayed open to all."
+     },
+     {
+      "text": "The Treaty of Paris of 1898, by which Spain ceded the Philippines and other colonies to the United States",
+      "is_key": false,
+      "label": "misattributed",
+      "why": "This treaty is the context for Source A, not for the Berlin-Congo charter named in Source B."
+     },
+     {
+      "text": "Treaties that forced Qing China to open ports to Western trade after the Opium Wars of the 1840s",
+      "is_key": false,
+      "label": "unrelated_development",
+      "why": "The phrase open door also appears in the history of China, but this source refers to a charter about the Congo, not to the treaty ports."
+     },
+     {
+      "text": "The Congress of Vienna's effort to restore a balance of power among European monarchies after 1815",
+      "is_key": false,
+      "label": "wrong_period",
+      "why": "The Congress of Vienna came decades earlier and dealt with Europe after Napoleon, not with the Congo."
+     }
+    ],
+    "facts": [
+     "The Berlin Conference (1884 to 1885) set rules for European claims in Africa and included free-trade provisions for the Congo basin.",
+     "Leopold II's Congo Free State was recognized as his personal possession in 1885."
+    ],
+    "design": {
+     "source_fixed_first": true,
+     "key_evidence_in_source": "Source B names the Berlin-Congo charter and its open door for trade, which points to the Berlin Conference settlement.",
+     "evidence_quote": "the \"open door\" of the Berlin-Congo charter closed against them"
+    },
+    "est_seconds": 45,
+    "key_index": 0,
+    "det": [],
+    "extra": false
+   },
+   {
+    "skill": "5.B",
+    "topic": "6.8",
+    "stem": "The international campaign that Source B was written to support most directly contributed to which of the following developments?",
+    "options": [
+     {
+      "text": "The collapse of global demand for rubber as manufacturers turned to synthetic substitutes",
+      "is_key": false,
+      "label": "unrelated_development",
+      "why": "Demand for rubber kept growing in the early 1900s, and synthetic rubber had nothing to do with the reform campaign."
+     },
+     {
+      "text": "An agreement among the European powers to abandon their claims to colonies across sub-Saharan Africa",
+      "is_key": false,
+      "label": "overstated",
+      "why": "The reform campaign aimed at Leopold's rule in particular. European powers kept their African colonies for decades afterward."
+     },
+     {
+      "text": "The Belgian state's takeover of the Congo from Leopold's personal control in 1908",
+      "is_key": true,
+      "label": "key",
+      "why": "Pressure from the Congo reform movement led Belgium to annex the Congo Free State in 1908, ending Leopold's personal rule there."
+     },
+     {
+      "text": "The immediate independence of the Congo and the withdrawal of all Belgian officials and companies",
+      "is_key": false,
+      "label": "wrong_period",
+      "why": "The Congo became a Belgian colony in 1908 and did not become independent until 1960."
+     }
+    ],
+    "facts": [
+     "Belgium annexed the Congo Free State as the Belgian Congo in 1908.",
+     "The Congo Reform Association was founded in 1904 to publicize abuses in Leopold's Congo."
+    ],
+    "design": {
+     "source_fixed_first": true,
+     "key_evidence_in_source": "The context line says Twain wrote to support a campaign against Leopold's rule in the Congo, and that campaign helped bring about the 1908 annexation.",
+     "evidence_quote": ""
+    },
+    "est_seconds": 45,
+    "key_index": 2,
+    "det": [],
+    "extra": false
+   },
+   {
+    "skill": "4.B",
+    "topic": "6.1",
+    "stem": "EXTRA: Kipling's description in Source A of colonized peoples as half-devil and half-child is best understood as part of which broader development of the period?",
+    "options": [
+     {
+      "text": "The rise of nationalist movements in Asia demanding self-rule, such as the Indian National Congress",
+      "is_key": false,
+      "label": "true_but_not_responsive",
+      "why": "The Indian National Congress existed by 1885, but it was a response to imperial rule, not the source of Kipling's racial justification."
+     },
+     {
+      "text": "The spread of racial theories, including Social Darwinism, used to justify imperial rule",
+      "is_key": true,
+      "label": "key",
+      "why": "In the late 1800s, many supporters of empire claimed that some races were superior to others and used these ideas to justify ruling other peoples. Kipling's language reflects that thinking."
+     },
+     {
+      "text": "The growth of Marxist critiques that described empire as the highest stage of capitalism",
+      "is_key": false,
+      "label": "wrong_period",
+      "why": "Lenin made this argument in 1916, and it attacked imperialism rather than justifying it."
+     },
+     {
+      "text": "The Enlightenment argument that all people possessed natural rights that governments must protect",
+      "is_key": false,
+      "label": "reversal",
+      "why": "Natural-rights ideas stress that all people share basic rights. Kipling's language instead ranks the colonized below their rulers."
+     }
+    ],
+    "facts": [
+     "Social Darwinist ideas were widely used in the late nineteenth century to justify imperial expansion.",
+     "The Indian National Congress was founded in 1885."
+    ],
+    "design": {
+     "source_fixed_first": true,
+     "key_evidence_in_source": "Kipling describes colonized peoples as half-devil and half-child, which reflects the racial hierarchies used to justify empire.",
+     "evidence_quote": "Your new-caught, sullen peoples, Half-devil and half-child."
+    },
+    "est_seconds": 45,
+    "key_index": 1,
+    "det": [],
+    "extra": true
+   },
+   {
+    "skill": "3.B",
+    "topic": "6.5",
+    "stem": "EXTRA: Which of the following pieces of evidence would best support the argument Twain makes in Source B?",
+    "options": [
+     {
+      "text": "Evidence that American missionaries in the Congo were mainly seeking trade profits for themselves",
+      "is_key": false,
+      "label": "reversal",
+      "why": "This would back up Leopold's attempts to discredit his critics, so it weakens Twain's argument."
+     },
+     {
+      "text": "Accounts of British forces using concentration camps against Boer civilians in South Africa",
+      "is_key": false,
+      "label": "true_but_not_responsive",
+      "why": "Britain did use camps during the South African War, but this concerns a different empire and does not support claims about the Congo."
+     },
+     {
+      "text": "Reports of forced labor and violence used to meet rubber quotas in the Congo Free State",
+      "is_key": true,
+      "label": "key",
+      "why": "Twain's satire claims that the mutilation stories were true and that Leopold covered them up. Investigations such as Roger Casement's 1904 report documented forced labor and brutal punishments tied to rubber quotas."
+     },
+     {
+      "text": "Records showing that Belgian schools and hospitals in the Congo expanded rapidly in the 1890s",
+      "is_key": false,
+      "label": "reversal",
+      "why": "Evidence like this would support Leopold's claim to be a benefactor, which Twain mocks."
+     }
+    ],
+    "facts": [
+     "Roger Casement's 1904 report documented forced labor and atrocities connected to rubber collection in the Congo Free State.",
+     "The Congo Free State relied on forced labor and quotas to extract rubber in the 1890s and early 1900s."
+    ],
+    "design": {
+     "source_fixed_first": true,
+     "key_evidence_in_source": "Twain's Leopold admits the mutilation stories were dismissed as slanders and that he works to suppress the photographs, implying the abuses were real.",
+     "evidence_quote": "getting the press to \"expose\" the tales of the mutilations as slanders, lies, inventions"
+    },
+    "est_seconds": 50,
+    "key_index": 2,
+    "det": [],
+    "extra": true
+   }
+  ],
+  "setViolations": []
+ }
+]

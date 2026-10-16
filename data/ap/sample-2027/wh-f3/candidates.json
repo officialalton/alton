@@ -1,0 +1,518 @@
+[
+ {
+  "__rejected": true,
+  "specId": "wh1_saq2",
+  "reason": "sample_low_missing; sample_low_no_consistent_candidate"
+ },
+ {
+  "__rejected": true,
+  "specId": "wh1_dbq",
+  "reason": "sample_high_missing; sample_mid_missing; sample_low_missing; sample_high_no_consistent_candidate; sample_mid_no_consistent_candidate; sample_low_no_consistent_candidate"
+ },
+ {
+  "__rejected": true,
+  "specId": "wh1_leq",
+  "reason": "sample_high_missing; sample_mid_missing; sample_low_missing; sample_high_no_consistent_candidate; sample_mid_no_consistent_candidate; sample_low_no_consistent_candidate; fact_inaccurate"
+ },
+ {
+  "cellId": "ap_world_history-wh2_saq2",
+  "apSubjectCode": "ap_world_history",
+  "kind": "frq_bundle",
+  "calculator": "na",
+  "reserve": false,
+  "wording": "designed_from_real_source",
+  "candidateKey": "ap_world_history-wh2_saq2-k0",
+  "keywordCode": "8.1",
+  "unitCode": "8",
+  "skillPrimary": "3.A",
+  "structure": "frq_multipart",
+  "archetype": "whfrq_wh2_saq2",
+  "reviewState": "verified_by_independent_models",
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "gateOverride": "wh-f3-2026-10-15",
+  "run": "wh-f3",
+  "stockKey": "wh-f3:ap_world_history-wh2_saq2-k0",
+  "pipeline": "real_source_v1",
+  "validation": "auto_passed",
+  "gateVersion": "wh-f3-2026-10-15",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "selectedForSample": true,
+  "legacyReserve": false,
+  "family": "ap_world_history",
+  "itemFamilyId": "fam:wh-f3:ap_world_history-wh2_saq2-k0",
+  "canonicalKey": "wh-f3:ap_world_history-wh2_saq2-k0",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_world_history:8.1",
+  "sharedWith": [],
+  "stockCell": "ap_world_history|8.1|3.A|frq_multipart|na",
+  "history": [
+   {
+    "run": "wh-f3",
+    "gateVersion": "wh-f3-2026-10-15",
+    "outcome": "passed",
+    "reasons": null
+   }
+  ],
+  "stimulusOrigin": "real_historical_source",
+  "sourceRegistryIds": [
+   "txt-atlantic-1941"
+  ],
+  "exam": "WH2",
+  "payload": {
+   "archetype": "whfrq_wh2_saq2",
+   "template": "saq2",
+   "topic": "8.1",
+   "extra_topics": [],
+   "skill": "3.A",
+   "representative_skill": "3.A",
+   "calculator": "na",
+   "title": "The Atlantic Charter and the Politics of Self-Government, 1941 to 1965",
+   "set_intro": "Historical source (real document)\n(primary source)\nThe Atlantic Charter (excerpt: the first three points)\nFranklin D. Roosevelt and Winston S. Churchill (joint declaration), 1941 (August 14). Avalon Project, Yale Law School (transcription). Reuse: public domain (U.S. government work). excerpted (one contiguous passage); whitespace normalized; no wording changed.\nContext: United States President Franklin Roosevelt and British Prime Minister Winston Churchill issued this joint statement in August 1941, before the United States entered the Second World War.\n\n\"First, their countries seek no aggrandizement, territorial or other; Second, they desire to see no territorial changes that do not accord with the freely expressed wishes of the peoples concerned; Third, they respect the right of all peoples to choose the form of government under which they will live; and they wish to see sovereign rights and self government restored to those who have been forcibly deprived of them;\"",
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "Briefly describe ONE principle about territory or government stated in the excerpt.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "3.A"
+     ],
+     "topic_codes": [
+      "8.1"
+     ],
+     "model_answer": "The excerpt says the United States and Britain were not seeking any territorial or other expansion for themselves.",
+     "rubric_rows": [
+      {
+       "row_id": "a",
+       "points": 1,
+       "criterion": "Students must accurately describe one principle that the excerpt states, such as no territorial expansion by the two countries, no territorial changes against the freely expressed wishes of the peoples concerned, the right of all peoples to choose their form of government, or restoring sovereign rights and self-government to those forcibly deprived of them.",
+       "required_elements": [
+        "The excerpt says the United States and Britain were not seeking any territorial or other expansion for themselves.",
+        "It says borders should not be changed unless the peoples affected freely agree.",
+        "It states that all peoples have the right to choose the form of government they live under.",
+        "It calls for sovereign rights and self-government to be restored to peoples who were forcibly deprived of them."
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "Briefly explain ONE specific action taken by an anti-colonial movement or leader in Asia or Africa between 1941 and 1965 to pursue the kind of self-government described in the excerpt. Do not use an example named in the excerpt.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "3.A"
+     ],
+     "topic_codes": [
+      "8.1"
+     ],
+     "model_answer": "In 1942 the Indian National Congress launched the Quit India Movement, demanding that Britain leave India immediately and hand over self-government to Indians.",
+     "rubric_rows": [
+      {
+       "row_id": "b",
+       "points": 1,
+       "criterion": "Students must explain a specific action by a named anti-colonial movement or leader in Asia or Africa, 1941 to 1965, that pursued self-government or independence, such as the Quit India Movement, the Indonesian independence declaration, the Viet Minh declaration of independence, or the 1945 Pan-African Congress. Naming a movement with no explanation of how the action pursued self-government does not earn the point.",
+       "required_elements": [
+        "In 1942 the Indian National Congress launched the Quit India Movement, demanding that Britain leave India immediately and hand over self-government to Indians.",
+        "In August 1945 Sukarno and Hatta declared Indonesia independent of Dutch rule and then resisted Dutch efforts to return until the Netherlands recognized independence in 1949.",
+        "In September 1945 Ho Chi Minh declared Vietnam independent of France, claiming the right of the Vietnamese people to govern themselves.",
+        "Kwame Nkrumah's Convention People's Party used mass campaigns, including strikes and boycotts, to press Britain for self-government in the Gold Coast, which became independent Ghana in 1957."
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "Briefly explain ONE way the actions of a European colonial power in Asia or Africa between 1941 and 1965 differed from the principles stated in the excerpt.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "3.A"
+     ],
+     "topic_codes": [
+      "8.1"
+     ],
+     "model_answer": "Churchill told Parliament in 1941 that the third point applied mainly to Nazi-occupied Europe, not to Britain's colonies such as India, which limited the right of all peoples to choose their government.",
+     "rubric_rows": [
+      {
+       "row_id": "c",
+       "points": 1,
+       "criterion": "Students must explain a specific action by a named European colonial power in Asia or Africa, 1941 to 1965, that contradicted or limited the excerpt's principles, such as Churchill limiting the third point to Nazi-occupied Europe, the French war in Indochina, Dutch military campaigns in Indonesia, the British response to the Mau Mau uprising in Kenya, or the French war in Algeria.",
+       "required_elements": [
+        "Churchill told Parliament in 1941 that the third point applied mainly to Nazi-occupied Europe, not to Britain's colonies such as India, which limited the right of all peoples to choose their government.",
+        "After 1945 France fought the Viet Minh in Indochina to restore colonial rule rather than accept Vietnam's declared independence.",
+        "The Netherlands launched military campaigns in Indonesia in 1947 and 1948 to regain control rather than accept the Indonesian people's freely expressed wishes.",
+        "Britain declared an emergency in Kenya in 1952 and detained large numbers of Kikuyu during the Mau Mau uprising instead of granting self-government."
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ]
+    }
+   ],
+   "reference_text": "Scoring guide (ALTON reference — not official AP scoring). This question is worth 3 points.\nPart A (0-1): Students must accurately describe one principle that the excerpt states, such as no territorial expansion by the two countries, no territorial changes against the freely expressed wishes of the peoples concerned, the right of all peoples to choose their form of government, or restoring sovereign rights and self-government to those forcibly deprived of them.\n   - 1: The response accurately describes one principle about territory or government that the excerpt states.\n   - 0: The response misstates the excerpt, only quotes it without description, or gives a principle the excerpt does not contain.\nPart B (0-1): Students must explain a specific action by a named anti-colonial movement or leader in Asia or Africa, 1941 to 1965, that pursued self-government or independence, such as the Quit India Movement, the Indonesian independence declaration, the Viet Minh declaration of independence, or the 1945 Pan-African Congress. Naming a movement with no explanation of how the action pursued self-government does not earn the point.\n   - 1: The response explains a specific, accurate action by an anti-colonial movement or leader in Asia or Africa, 1941 to 1965, and shows how it pursued self-government or independence.\n   - 0: The response gives no specific action, falls outside Asia or Africa or the 1941 to 1965 range, or does not connect the action to self-government.\nPart C (0-1): Students must explain a specific action by a named European colonial power in Asia or Africa, 1941 to 1965, that contradicted or limited the excerpt's principles, such as Churchill limiting the third point to Nazi-occupied Europe, the French war in Indochina, Dutch military campaigns in Indonesia, the British response to the Mau Mau uprising in Kenya, or the French war in Algeria.\n   - 1: The response explains a specific, accurate action by a European colonial power in Asia or Africa, 1941 to 1965, and how it went against or narrowed the principles in the excerpt.\n   - 0: The response gives no specific action, no named colonial power and place, or does not explain the difference from the excerpt's principles.\nNote: Each part is scored on its own; a strong answer to one part does not make up for a missing answer in another.\nNote: For Part B, students do not have to show that a movement cited the Atlantic Charter itself; they only need an action that pursued the kind of self-government the excerpt describes.\nNote: Do not award Part C for vague claims that colonial powers were hypocritical; the response must name a specific power, place and action.\nNote: Responses saying the Atlantic Charter alone caused decolonization should not lose a point they otherwise earn, but readers should not treat that claim as the explanation.\nNote: ALTON reference — not official AP scoring\nAcceptable answers for A: The excerpt says the United States and Britain were not seeking any territorial or other expansion for themselves. / It says borders should not be changed unless the peoples affected freely agree. / It states that all peoples have the right to choose the form of government they live under. / It calls for sovereign rights and self-government to be restored to peoples who were forcibly deprived of them.\nAcceptable answers for B: In 1942 the Indian National Congress launched the Quit India Movement, demanding that Britain leave India immediately and hand over self-government to Indians. / In August 1945 Sukarno and Hatta declared Indonesia independent of Dutch rule and then resisted Dutch efforts to return until the Netherlands recognized independence in 1949. / In September 1945 Ho Chi Minh declared Vietnam independent of France, claiming the right of the Vietnamese people to govern themselves. / Kwame Nkrumah's Convention People's Party used mass campaigns, including strikes and boycotts, to press Britain for self-government in the Gold Coast, which became independent Ghana in 1957.\nAcceptable answers for C: Churchill told Parliament in 1941 that the third point applied mainly to Nazi-occupied Europe, not to Britain's colonies such as India, which limited the right of all peoples to choose their government. / After 1945 France fought the Viet Minh in Indochina to restore colonial rule rather than accept Vietnam's declared independence. / The Netherlands launched military campaigns in Indonesia in 1947 and 1948 to regain control rather than accept the Indonesian people's freely expressed wishes. / Britain declared an emergency in Kenya in 1952 and detained large numbers of Kikuyu during the Mau Mau uprising instead of granting self-government.\n\nSample response, high score (3/3; Part A 1, Part B 1, Part C 1):\n(A) One principle in the excerpt is that there should be no territorial changes unless the people living in that territory freely agree to them. This means Britain and the United States said borders should not be redrawn by force or by outside powers against the wishes of the local population.\n\n(B) In 1942 Gandhi and the Indian National Congress launched the Quit India Movement, which demanded that Britain leave India immediately. Congress called for mass civil disobedience, and the British responded by arresting Gandhi, Nehru and other Congress leaders. The movement pushed for self-government because it made clear that Indians would not keep cooperating with British rule, and that pressure helped lead to independence in 1947.\n\n(C) After World War II France fought the Viet Minh in Indochina from 1946 to 1954 to take back control of Vietnam, even though Ho Chi Minh had already declared Vietnamese independence in 1945. This went against the excerpt's principle that all peoples have the right to choose their own form of government, because France used military force to put colonial rule back in place over people who had openly said they wanted to be independent. The fighting only ended after the French were defeated at Dien Bien Phu in 1954.\n   - \"there should be no territorial changes unless the people living in that territory freely agree to them\" - Accurately restates the second point in the student's own words, not just a quotation. Earns the point.\n   - \"In 1942 Gandhi and the Indian National Congress launched the Quit India Movement\" - Specific, accurate action by a named movement and leader in Asia, inside 1941-1965.\n   - \"it made clear that Indians would not keep cooperating with British rule\" - Explains how the action pushed for self-government, so this is more than just naming the movement. Earns the point.\n   - \"France fought the Viet Minh in Indochina from 1946 to 1954\" - Names a specific European power, place and action, with accurate dates.\n   - \"This went against the excerpt's principle that all peoples have the right to choose their own form of government\" - Ties the action directly to the third point and explains the contradiction. This is not a vague charge of hypocrisy. Earns the point.\n\nSample response, middle score (2/3; Part A 1, Part B 0, Part C 1):\n(A) One principle in the excerpt is that all peoples have the right to choose the form of government they live under. The leaders say they respect this right, and that countries who were forcibly deprived of their self-government should get it back.\n\n(B) In Asia and Africa there were a lot of anti-colonial movements after World War II. One of them was the independence movement in India led by Gandhi, which wanted India to be free from Britain. Gandhi and the Indian National Congress were very important and they inspired other people in Africa and Asia to also want their freedom. This shows that colonized people wanted self-government like the excerpt talks about.\n\n(C) One way a colonial power acted differently from the excerpt was France in Indochina. After World War II ended, Ho Chi Minh declared Vietnam independent in 1945, but France did not accept this and fought a war against the Viet Minh from 1946 until 1954. This went against the principle that peoples should choose their own government and that self-government should be restored, because France used military force to keep control of Vietnam instead of letting the Vietnamese decide their own government.\n   - \"all peoples have the right to choose the form of government they live under\" - Accurately describes the third principle in the excerpt in the student's own words instead of just quoting it. Earns the point.\n   - \"One of them was the independence movement in India led by Gandhi, which wanted India to be free from Britain.\" - Names a movement and leader but gives no specific action such as the Quit India Movement in 1942. Describing the movement's general goal is not an action, so this does not earn the point.\n   - \"This shows that colonized people wanted self-government like the excerpt talks about.\" - Only a general link to self-government. It does not explain how any particular action pursued independence, and the range of dates is never tied to an event.\n   - \"France did not accept this and fought a war against the Viet Minh from 1946 until 1954.\" - Names a specific colonial power (France), place (Indochina or Vietnam) and action (the war against the Viet Minh), with accurate dates.\n   - \"because France used military force to keep control of Vietnam instead of letting the Vietnamese decide their own government\" - Explains how the action contradicted the excerpt's principle of choosing one's own government. Earns the point.\n\nSample response, low score (1/3; Part A 1, Part B 0, Part C 0):\n(A) One principle in the excerpt is that people should be able to choose their own government. The excerpt says the United States and Great Britain respect the right of all peoples to choose the form of government they live under, and that self government should be given back to people who lost it by force.\n\n(B) An anti-colonial movement in Asia that wanted independence was the Indian National Congress. They wanted India to be free from Britain and they protested against British rule for many years. Leaders like Gandhi were important and they got many people to join. This shows they wanted self-government like the excerpt describes.\n\n(C) European colonial powers did not follow the principles in the excerpt. Even though the Atlantic Charter said people should choose their own government, many European countries kept their colonies in Asia and Africa and did not want to give them up. This was different from the excerpt because the excerpt said that people should have self government but the colonial powers were being hypocritical and kept control over the people.\n   - \"people should be able to choose their own government\" - Accurately describes the third principle (right of peoples to choose their form of government) in the student's own words, not just quoting. Earns the Part A point.\n   - \"self government should be given back to people who lost it by force\" - Also correctly paraphrases the restoration of self-government clause, reinforcing the accurate description in Part A.\n   - \"they protested against British rule for many years\" - Too general: no specific action (such as the Quit India Movement in 1942) is named or dated. Naming the Indian National Congress alone does not earn the point.\n   - \"Leaders like Gandhi were important and they got many people to join.\" - Describes importance, not a specific action by a leader or movement between 1941 and 1965. Does not explain how a particular action pursued self-government.\n   - \"many European countries kept their colonies in Asia and Africa and did not want to give them up\" - No specific colonial power, place, or action is named (for example, the French war in Indochina or the Algerian War). Too vague to earn the point.\n   - \"the colonial powers were being hypocritical and kept control over the people\" - A general claim of hypocrisy, which the rubric says does not earn credit. It restates the excerpt rather than giving specific evidence.",
+   "whap_frq": {
+    "schema_version": "whap-frq-1",
+    "task_type": "saq",
+    "template": "saq2",
+    "era": 4,
+    "units": [
+     8
+    ],
+    "title": "The Atlantic Charter and the Politics of Self-Government, 1941 to 1965",
+    "prompt": {
+     "scenario": "In August 1941, during the Second World War, the leaders of the United States and Great Britain issued a joint statement about the principles they hoped would shape the world after the war. In the decades that followed, anti-colonial movements in Asia and Africa pressed colonial powers for self-government and independence.",
+     "task": "Using the excerpt, answer (a), (b), and (c).",
+     "requirements": [
+      "Answer all three parts.",
+      "Parts B and C must use specific historical evidence from 1941 to 1965.",
+      "Part B must name an anti-colonial movement or leader in Asia or Africa.",
+      "Part C must name a European colonial power and a place in Asia or Africa."
+     ],
+     "parts": [
+      {
+       "label": "A",
+       "prompt": "Briefly describe ONE principle about territory or government stated in the excerpt.",
+       "points": 1
+      },
+      {
+       "label": "B",
+       "prompt": "Briefly explain ONE specific action taken by an anti-colonial movement or leader in Asia or Africa between 1941 and 1965 to pursue the kind of self-government described in the excerpt. Do not use an example named in the excerpt.",
+       "points": 1
+      },
+      {
+       "label": "C",
+       "prompt": "Briefly explain ONE way the actions of a European colonial power in Asia or Africa between 1941 and 1965 differed from the principles stated in the excerpt.",
+       "points": 1
+      }
+     ]
+    },
+    "sources": [
+     {
+      "id": "A",
+      "kind": "primary_text",
+      "title": "The Atlantic Charter (excerpt: the first three points)",
+      "attribution": "Franklin D. Roosevelt and Winston S. Churchill (joint declaration), 1941 (August 14). Avalon Project, Yale Law School (transcription). Reuse: public domain (U.S. government work). excerpted (one contiguous passage); whitespace normalized; no wording changed.",
+      "context": "United States President Franklin Roosevelt and British Prime Minister Winston Churchill issued this joint statement in August 1941, before the United States entered the Second World War.",
+      "real_data": true,
+      "source_registry_id": "txt-atlantic-1941",
+      "source_sha256": "47cb7d0b214afc1b914bc363c4ccc9bd37c4f1240b03b527bafe87b713b833a6",
+      "body": "First, their countries seek no aggrandizement, territorial or other; Second, they desire to see no territorial changes that do not accord with the freely expressed wishes of the peoples concerned; Third, they respect the right of all peoples to choose the form of government under which they will live; and they wish to see sovereign rights and self government restored to those who have been forcibly deprived of them;",
+      "provenance": {
+       "kind": "real_historical_source",
+       "real_data": true,
+       "note": "registry txt-atlantic-1941"
+      }
+     }
+    ],
+    "rubric": {
+     "rubric_id": "whap-v1",
+     "total_points": 3,
+     "rows": [
+      {
+       "row_id": "a",
+       "name": "Part A",
+       "max": 1,
+       "descriptors": {
+        "0": "The response misstates the excerpt, only quotes it without description, or gives a principle the excerpt does not contain.",
+        "1": "The response accurately describes one principle about territory or government that the excerpt states."
+       },
+       "task_specific": "Students must accurately describe one principle that the excerpt states, such as no territorial expansion by the two countries, no territorial changes against the freely expressed wishes of the peoples concerned, the right of all peoples to choose their form of government, or restoring sovereign rights and self-government to those forcibly deprived of them."
+      },
+      {
+       "row_id": "b",
+       "name": "Part B",
+       "max": 1,
+       "descriptors": {
+        "0": "The response gives no specific action, falls outside Asia or Africa or the 1941 to 1965 range, or does not connect the action to self-government.",
+        "1": "The response explains a specific, accurate action by an anti-colonial movement or leader in Asia or Africa, 1941 to 1965, and shows how it pursued self-government or independence."
+       },
+       "task_specific": "Students must explain a specific action by a named anti-colonial movement or leader in Asia or Africa, 1941 to 1965, that pursued self-government or independence, such as the Quit India Movement, the Indonesian independence declaration, the Viet Minh declaration of independence, or the 1945 Pan-African Congress. Naming a movement with no explanation of how the action pursued self-government does not earn the point."
+      },
+      {
+       "row_id": "c",
+       "name": "Part C",
+       "max": 1,
+       "descriptors": {
+        "0": "The response gives no specific action, no named colonial power and place, or does not explain the difference from the excerpt's principles.",
+        "1": "The response explains a specific, accurate action by a European colonial power in Asia or Africa, 1941 to 1965, and how it went against or narrowed the principles in the excerpt."
+       },
+       "task_specific": "Students must explain a specific action by a named European colonial power in Asia or Africa, 1941 to 1965, that contradicted or limited the excerpt's principles, such as Churchill limiting the third point to Nazi-occupied Europe, the French war in Indochina, Dutch military campaigns in Indonesia, the British response to the Mau Mau uprising in Kenya, or the French war in Algeria."
+      }
+     ],
+     "scoring_notes": [
+      "Each part is scored on its own; a strong answer to one part does not make up for a missing answer in another.",
+      "For Part B, students do not have to show that a movement cited the Atlantic Charter itself; they only need an action that pursued the kind of self-government the excerpt describes.",
+      "Do not award Part C for vague claims that colonial powers were hypocritical; the response must name a specific power, place and action.",
+      "Responses saying the Atlantic Charter alone caused decolonization should not lose a point they otherwise earn, but readers should not treat that claim as the explanation.",
+      "ALTON reference — not official AP scoring"
+     ]
+    },
+    "expected_features": {
+     "defensible_theses": [],
+     "contextualization_ideas": [
+      "Before Pearl Harbor, the Charter set out shared war aims while Britain was fighting Germany.",
+      "Colonial soldiers and resources supported the Allied war effort, and the war weakened European powers.",
+      "Wilson's Fourteen Points after the First World War had raised similar hopes among colonized peoples, and many of those hopes went unmet."
+     ],
+     "outside_evidence": [
+      "Quit India Movement, 1942",
+      "Indonesian declaration of independence, 1945",
+      "Vietnamese declaration of independence, 1945",
+      "Fifth Pan-African Congress, 1945",
+      "Ghana independence, 1957",
+      "Algerian War, 1954 to 1962",
+      "Mau Mau uprising and emergency in Kenya, 1952",
+      "Bandung Conference, 1955",
+      "UN General Assembly Resolution 1514, 1960"
+     ],
+     "reasoning_types": [
+      "Sourcing and situation (Part A)",
+      "Causation and continuity in independence struggles (Part B)",
+      "Comparison of stated principles with practice (Part C)"
+     ],
+     "doc_uses": [
+      {
+       "source_id": "Atlantic Charter excerpt",
+       "usable_for": "Identifying stated Allied principles of self-determination and self-government that anti-colonial movements could appeal to and colonial powers could narrow.",
+       "sourcing": "A joint public statement by two heads of government issued during the war, before U.S. entry; its general wording about 'all peoples' left room for different interpretations about colonies."
+      }
+     ],
+     "evidence_map": [],
+     "saq_answers": {
+      "a": [
+       "The excerpt says the United States and Britain were not seeking any territorial or other expansion for themselves.",
+       "It says borders should not be changed unless the peoples affected freely agree.",
+       "It states that all peoples have the right to choose the form of government they live under.",
+       "It calls for sovereign rights and self-government to be restored to peoples who were forcibly deprived of them."
+      ],
+      "b": [
+       "In 1942 the Indian National Congress launched the Quit India Movement, demanding that Britain leave India immediately and hand over self-government to Indians.",
+       "In August 1945 Sukarno and Hatta declared Indonesia independent of Dutch rule and then resisted Dutch efforts to return until the Netherlands recognized independence in 1949.",
+       "In September 1945 Ho Chi Minh declared Vietnam independent of France, claiming the right of the Vietnamese people to govern themselves.",
+       "Kwame Nkrumah's Convention People's Party used mass campaigns, including strikes and boycotts, to press Britain for self-government in the Gold Coast, which became independent Ghana in 1957."
+      ],
+      "c": [
+       "Churchill told Parliament in 1941 that the third point applied mainly to Nazi-occupied Europe, not to Britain's colonies such as India, which limited the right of all peoples to choose their government.",
+       "After 1945 France fought the Viet Minh in Indochina to restore colonial rule rather than accept Vietnam's declared independence.",
+       "The Netherlands launched military campaigns in Indonesia in 1947 and 1948 to regain control rather than accept the Indonesian people's freely expressed wishes.",
+       "Britain declared an emergency in Kenya in 1952 and detained large numbers of Kikuyu during the Mau Mau uprising instead of granting self-government."
+      ]
+     },
+     "common_pitfalls": [
+      "Part A answers that only copy a phrase from the excerpt without describing the principle.",
+      "Part B examples from outside Asia or Africa, or outside 1941 to 1965 (for example, Gandhi's Salt March of 1930).",
+      "Part C answers about the Soviet Union or the United States when the question asks about a European colonial power.",
+      "Claiming the Atlantic Charter by itself caused independence movements or decolonization.",
+      "Writing that Roosevelt and Churchill agreed completely on applying the Charter to colonies."
+     ],
+     "facts": [
+      "The Atlantic Charter was issued on August 14, 1941, by Franklin Roosevelt and Winston Churchill, before the United States entered the war in December 1941.",
+      "In September 1941 Churchill told Parliament that the third point applied mainly to European nations under Nazi occupation and was separate from Britain's policy toward its own empire.",
+      "The Indian National Congress launched the Quit India Movement in August 1942; British authorities arrested Gandhi, Nehru and other Congress leaders.",
+      "India and Pakistan became independent in 1947.",
+      "Sukarno and Hatta declared Indonesian independence in August 1945; the Netherlands recognized Indonesian sovereignty in 1949 after years of fighting.",
+      "Ho Chi Minh declared the independence of Vietnam on September 2, 1945; France fought the Viet Minh until its defeat at Dien Bien Phu in 1954.",
+      "The Fifth Pan-African Congress met in Manchester in 1945, with Kwame Nkrumah and Jomo Kenyatta among those attending.",
+      "Ghana became independent in 1957 under Nkrumah.",
+      "Britain declared a state of emergency in Kenya in 1952 during the Mau Mau uprising.",
+      "The Algerian War of Independence against France lasted from 1954 to 1962.",
+      "The UN Charter of 1945 lists self-determination of peoples among the organization's purposes; UN General Assembly Resolution 1514 (1960) called for an end to colonialism."
+     ]
+    },
+    "samples": [
+     {
+      "tier": "high",
+      "target_total": 3,
+      "essay": "(A) One principle in the excerpt is that there should be no territorial changes unless the people living in that territory freely agree to them. This means Britain and the United States said borders should not be redrawn by force or by outside powers against the wishes of the local population.\n\n(B) In 1942 Gandhi and the Indian National Congress launched the Quit India Movement, which demanded that Britain leave India immediately. Congress called for mass civil disobedience, and the British responded by arresting Gandhi, Nehru and other Congress leaders. The movement pushed for self-government because it made clear that Indians would not keep cooperating with British rule, and that pressure helped lead to independence in 1947.\n\n(C) After World War II France fought the Viet Minh in Indochina from 1946 to 1954 to take back control of Vietnam, even though Ho Chi Minh had already declared Vietnamese independence in 1945. This went against the excerpt's principle that all peoples have the right to choose their own form of government, because France used military force to put colonial rule back in place over people who had openly said they wanted to be independent. The fighting only ended after the French were defeated at Dien Bien Phu in 1954.",
+      "word_count": 208,
+      "rubric_scores": {
+       "a": 1,
+       "b": 1,
+       "c": 1,
+       "total": 3
+      },
+      "annotations": [
+       {
+        "quote": "there should be no territorial changes unless the people living in that territory freely agree to them",
+        "comment": "Accurately restates the second point in the student's own words, not just a quotation. Earns the point.",
+        "row_id": "a"
+       },
+       {
+        "quote": "In 1942 Gandhi and the Indian National Congress launched the Quit India Movement",
+        "comment": "Specific, accurate action by a named movement and leader in Asia, inside 1941-1965.",
+        "row_id": "b"
+       },
+       {
+        "quote": "it made clear that Indians would not keep cooperating with British rule",
+        "comment": "Explains how the action pushed for self-government, so this is more than just naming the movement. Earns the point.",
+        "row_id": "b"
+       },
+       {
+        "quote": "France fought the Viet Minh in Indochina from 1946 to 1954",
+        "comment": "Names a specific European power, place and action, with accurate dates.",
+        "row_id": "c"
+       },
+       {
+        "quote": "This went against the excerpt's principle that all peoples have the right to choose their own form of government",
+        "comment": "Ties the action directly to the third point and explains the contradiction. This is not a vague charge of hypocrisy. Earns the point.",
+        "row_id": "c"
+       }
+      ]
+     },
+     {
+      "tier": "mid",
+      "target_total": 2,
+      "essay": "(A) One principle in the excerpt is that all peoples have the right to choose the form of government they live under. The leaders say they respect this right, and that countries who were forcibly deprived of their self-government should get it back.\n\n(B) In Asia and Africa there were a lot of anti-colonial movements after World War II. One of them was the independence movement in India led by Gandhi, which wanted India to be free from Britain. Gandhi and the Indian National Congress were very important and they inspired other people in Africa and Asia to also want their freedom. This shows that colonized people wanted self-government like the excerpt talks about.\n\n(C) One way a colonial power acted differently from the excerpt was France in Indochina. After World War II ended, Ho Chi Minh declared Vietnam independent in 1945, but France did not accept this and fought a war against the Viet Minh from 1946 until 1954. This went against the principle that peoples should choose their own government and that self-government should be restored, because France used military force to keep control of Vietnam instead of letting the Vietnamese decide their own government.",
+      "word_count": 197,
+      "rubric_scores": {
+       "a": 1,
+       "b": 0,
+       "c": 1,
+       "total": 2
+      },
+      "annotations": [
+       {
+        "quote": "all peoples have the right to choose the form of government they live under",
+        "comment": "Accurately describes the third principle in the excerpt in the student's own words instead of just quoting it. Earns the point.",
+        "row_id": "a"
+       },
+       {
+        "quote": "One of them was the independence movement in India led by Gandhi, which wanted India to be free from Britain.",
+        "comment": "Names a movement and leader but gives no specific action such as the Quit India Movement in 1942. Describing the movement's general goal is not an action, so this does not earn the point.",
+        "row_id": "b"
+       },
+       {
+        "quote": "This shows that colonized people wanted self-government like the excerpt talks about.",
+        "comment": "Only a general link to self-government. It does not explain how any particular action pursued independence, and the range of dates is never tied to an event.",
+        "row_id": "b"
+       },
+       {
+        "quote": "France did not accept this and fought a war against the Viet Minh from 1946 until 1954.",
+        "comment": "Names a specific colonial power (France), place (Indochina or Vietnam) and action (the war against the Viet Minh), with accurate dates.",
+        "row_id": "c"
+       },
+       {
+        "quote": "because France used military force to keep control of Vietnam instead of letting the Vietnamese decide their own government",
+        "comment": "Explains how the action contradicted the excerpt's principle of choosing one's own government. Earns the point.",
+        "row_id": "c"
+       }
+      ]
+     },
+     {
+      "tier": "low",
+      "target_total": 1,
+      "essay": "(A) One principle in the excerpt is that people should be able to choose their own government. The excerpt says the United States and Great Britain respect the right of all peoples to choose the form of government they live under, and that self government should be given back to people who lost it by force.\n\n(B) An anti-colonial movement in Asia that wanted independence was the Indian National Congress. They wanted India to be free from Britain and they protested against British rule for many years. Leaders like Gandhi were important and they got many people to join. This shows they wanted self-government like the excerpt describes.\n\n(C) European colonial powers did not follow the principles in the excerpt. Even though the Atlantic Charter said people should choose their own government, many European countries kept their colonies in Asia and Africa and did not want to give them up. This was different from the excerpt because the excerpt said that people should have self government but the colonial powers were being hypocritical and kept control over the people.",
+      "word_count": 179,
+      "rubric_scores": {
+       "a": 1,
+       "b": 0,
+       "c": 0,
+       "total": 1
+      },
+      "annotations": [
+       {
+        "quote": "people should be able to choose their own government",
+        "comment": "Accurately describes the third principle (right of peoples to choose their form of government) in the student's own words, not just quoting. Earns the Part A point.",
+        "row_id": "a"
+       },
+       {
+        "quote": "self government should be given back to people who lost it by force",
+        "comment": "Also correctly paraphrases the restoration of self-government clause, reinforcing the accurate description in Part A.",
+        "row_id": "a"
+       },
+       {
+        "quote": "they protested against British rule for many years",
+        "comment": "Too general: no specific action (such as the Quit India Movement in 1942) is named or dated. Naming the Indian National Congress alone does not earn the point.",
+        "row_id": "b"
+       },
+       {
+        "quote": "Leaders like Gandhi were important and they got many people to join.",
+        "comment": "Describes importance, not a specific action by a leader or movement between 1941 and 1965. Does not explain how a particular action pursued self-government.",
+        "row_id": "b"
+       },
+       {
+        "quote": "many European countries kept their colonies in Asia and Africa and did not want to give them up",
+        "comment": "No specific colonial power, place, or action is named (for example, the French war in Indochina or the Algerian War). Too vague to earn the point.",
+        "row_id": "c"
+       },
+       {
+        "quote": "the colonial powers were being hypocritical and kept control over the people",
+        "comment": "A general claim of hypocrisy, which the rubric says does not earn credit. It restates the excerpt rather than giving specific evidence.",
+        "row_id": "c"
+       }
+      ]
+     }
+    ],
+    "provenance": {
+     "kind": "alton_authored_from_real_sources",
+     "note": "Prompts, rubric text, expected answers and sample responses are ALTON-authored practice material; every source is a real historical document, image or dataset (see sources[].source_registry_id)."
+    }
+   },
+   "design": {
+    "source_fixed_first": true,
+    "documents_chosen_before_prompt": true
+   },
+   "verification": {
+    "fact_checker": "claude-fable-5-1",
+    "graders": [
+     "claude-opus-5-5",
+     "claude-sonnet-5-5"
+    ],
+    "fact_flags": [],
+    "sample_totals": {
+     "high": 3,
+     "mid": 2,
+     "low": 1
+    },
+    "bands": {
+     "high": [
+      3,
+      3
+     ],
+     "mid": [
+      2,
+      2
+     ],
+     "low": [
+      1,
+      1
+     ]
+    }
+   }
+  }
+ },
+ {
+  "__rejected": true,
+  "specId": "wh2_saq3",
+  "reason": "sample_high_missing; sample_mid_missing; sample_low_missing; sample_high_no_consistent_candidate; sample_mid_no_consistent_candidate; sample_low_no_consistent_candidate; fact_misdescribes_source"
+ }
+]

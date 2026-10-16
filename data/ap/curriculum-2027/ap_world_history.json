@@ -1,0 +1,2652 @@
+{
+  "schemaVersion": 1,
+  "subject": {
+    "apCode": "ap_world_history",
+    "name": "AP World History: Modern",
+    "family": "history",
+    "edition": "ced-2027",
+    "cedVersion": "AP World History: Modern CED (Course Framework V.1, (c)2026; effective Fall 2026)",
+    "examYear": 2027,
+    "sourceUrl": "https://apcentral.collegeboard.org/media/pdf/ap-world-history-modern-course-and-exam-description.pdf",
+    "officialTopicCodes": true,
+    "designNotes": "9 units (c. 1200 to the present) with official CED topic codes (71 topics: U1 7, U2 7, U3 4, U4 8, U5 10, U6 8, U7 9, U8 9, U9 9), titles, class-period estimates, and suggested skills from the Unit at a Glance tables. MC unit weights come from the CED exam weighting (U1 8-10, U2 8-10, U3-U6 12-15, U7-U9 8-10 percent). Skills are the historical thinking skills 1.A-6.D; Skill 6 (argumentation) is not assessed in the multiple-choice section, and skill/reasoning-process weights are not published. Sub-keywords, kinds, requires and estLessons are original tutoring-sequence proposals in neutral, mainstream wording."
+  },
+  "skills": [
+    {
+      "code": "1.A",
+      "category": "Skill 1: Developments and Processes",
+      "label": "Identify a historical concept, development, or process"
+    },
+    {
+      "code": "1.B",
+      "category": "Skill 1: Developments and Processes",
+      "label": "Explain a historical concept, development, or process"
+    },
+    {
+      "code": "2.A",
+      "category": "Skill 2: Sourcing and Situation",
+      "label": "Identify a source's point of view, purpose, historical situation, and/or audience"
+    },
+    {
+      "code": "2.B",
+      "category": "Skill 2: Sourcing and Situation",
+      "label": "Explain the point of view, purpose, historical situation, and/or audience of a source"
+    },
+    {
+      "code": "2.C",
+      "category": "Skill 2: Sourcing and Situation",
+      "label": "Explain the significance of a source's point of view, purpose, historical situation, and/or audience, including how these might limit its use"
+    },
+    {
+      "code": "3.A",
+      "category": "Skill 3: Claims and Evidence in Sources",
+      "label": "Identify and describe a claim and/or argument in a text-based or non-text-based source"
+    },
+    {
+      "code": "3.B",
+      "category": "Skill 3: Claims and Evidence in Sources",
+      "label": "Identify the evidence used in a source to support an argument"
+    },
+    {
+      "code": "3.C",
+      "category": "Skill 3: Claims and Evidence in Sources",
+      "label": "Compare the arguments or main ideas of two sources"
+    },
+    {
+      "code": "3.D",
+      "category": "Skill 3: Claims and Evidence in Sources",
+      "label": "Explain how claims or evidence support, modify, or refute a source's argument"
+    },
+    {
+      "code": "4.A",
+      "category": "Skill 4: Contextualization",
+      "label": "Identify and describe a historical context for a specific historical development or process"
+    },
+    {
+      "code": "4.B",
+      "category": "Skill 4: Contextualization",
+      "label": "Explain how a specific historical development or process is situated within a broader historical context"
+    },
+    {
+      "code": "5.A",
+      "category": "Skill 5: Making Connections",
+      "label": "Identify patterns among or connections between historical developments and processes"
+    },
+    {
+      "code": "5.B",
+      "category": "Skill 5: Making Connections",
+      "label": "Explain how a historical development or process relates to another historical development or process"
+    },
+    {
+      "code": "6.A",
+      "category": "Skill 6: Argumentation",
+      "label": "Make a historically defensible claim"
+    },
+    {
+      "code": "6.B",
+      "category": "Skill 6: Argumentation",
+      "label": "Support an argument using specific and relevant evidence"
+    },
+    {
+      "code": "6.C",
+      "category": "Skill 6: Argumentation",
+      "label": "Use historical reasoning to explain relationships among pieces of historical evidence"
+    },
+    {
+      "code": "6.D",
+      "category": "Skill 6: Argumentation",
+      "label": "Corroborate, qualify, or modify an argument using diverse and alternative evidence to develop a complex argument"
+    }
+  ],
+  "weights": [
+    {
+      "axis": "unit",
+      "code": "1",
+      "section": "mc",
+      "min": 8,
+      "max": 10,
+      "source": "AP World History: Modern CED (effective Fall 2026), Exam Information p.196: MC unit weighting"
+    },
+    {
+      "axis": "unit",
+      "code": "2",
+      "section": "mc",
+      "min": 8,
+      "max": 10,
+      "source": "AP World History: Modern CED (effective Fall 2026), Exam Information p.196: MC unit weighting"
+    },
+    {
+      "axis": "unit",
+      "code": "3",
+      "section": "mc",
+      "min": 12,
+      "max": 15,
+      "source": "AP World History: Modern CED (effective Fall 2026), Exam Information p.196: MC unit weighting"
+    },
+    {
+      "axis": "unit",
+      "code": "4",
+      "section": "mc",
+      "min": 12,
+      "max": 15,
+      "source": "AP World History: Modern CED (effective Fall 2026), Exam Information p.196: MC unit weighting"
+    },
+    {
+      "axis": "unit",
+      "code": "5",
+      "section": "mc",
+      "min": 12,
+      "max": 15,
+      "source": "AP World History: Modern CED (effective Fall 2026), Exam Information p.196: MC unit weighting"
+    },
+    {
+      "axis": "unit",
+      "code": "6",
+      "section": "mc",
+      "min": 12,
+      "max": 15,
+      "source": "AP World History: Modern CED (effective Fall 2026), Exam Information p.196: MC unit weighting"
+    },
+    {
+      "axis": "unit",
+      "code": "7",
+      "section": "mc",
+      "min": 8,
+      "max": 10,
+      "source": "AP World History: Modern CED (effective Fall 2026), Exam Information p.196: MC unit weighting"
+    },
+    {
+      "axis": "unit",
+      "code": "8",
+      "section": "mc",
+      "min": 8,
+      "max": 10,
+      "source": "AP World History: Modern CED (effective Fall 2026), Exam Information p.196: MC unit weighting"
+    },
+    {
+      "axis": "unit",
+      "code": "9",
+      "section": "mc",
+      "min": 8,
+      "max": 10,
+      "source": "AP World History: Modern CED (effective Fall 2026), Exam Information p.196: MC unit weighting"
+    }
+  ],
+  "units": [
+    {
+      "code": "1",
+      "title": "Unit 1: The Global Tapestry (c. 1200 to c. 1450)",
+      "officialClassPeriods": "~10-13",
+      "topics": [
+        {
+          "code": "1.1",
+          "title": "Developments in East Asia from c. 1200 to c. 1450",
+          "scope": "both",
+          "skills": [
+            "4.A"
+          ],
+          "requires": [],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "1.1#1",
+              "label": "Song to Yuan to Ming: state, bureaucracy and Neo-Confucianism",
+              "kind": "concept",
+              "skills": [
+                "4.A"
+              ],
+              "requires": [],
+              "estLessons": 1
+            },
+            {
+              "code": "1.1#2",
+              "label": "Place East Asian developments in their regional context",
+              "kind": "skill",
+              "skills": [
+                "4.A"
+              ],
+              "requires": [],
+              "estLessons": 1
+            }
+          ]
+        },
+        {
+          "code": "1.2",
+          "title": "Developments in Dar al-Islam from c. 1200 to c. 1450",
+          "scope": "both",
+          "skills": [
+            "1.A"
+          ],
+          "requires": [
+            "1.1"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "1.2#1",
+              "label": "Abbasid decline, Mongol conquest and successor Islamic states",
+              "kind": "concept",
+              "skills": [
+                "1.A"
+              ],
+              "requires": [],
+              "estLessons": 1
+            },
+            {
+              "code": "1.2#2",
+              "label": "Islamic law, learning and the spread of Islam by trade and Sufis",
+              "kind": "concept",
+              "skills": [
+                "1.A"
+              ],
+              "requires": [],
+              "estLessons": 1
+            }
+          ]
+        },
+        {
+          "code": "1.3",
+          "title": "Developments in South and Southeast Asia from c. 1200 to c. 1450",
+          "scope": "both",
+          "skills": [
+            "3.A"
+          ],
+          "requires": [
+            "1.2"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "1.3#1",
+              "label": "Delhi Sultanate, Hindu and Buddhist kingdoms, and Khmer and Srivijaya states",
+              "kind": "concept",
+              "skills": [
+                "3.A"
+              ],
+              "requires": [],
+              "estLessons": 1
+            },
+            {
+              "code": "1.3#2",
+              "label": "Identify the claim in a source on South or Southeast Asian rule",
+              "kind": "skill",
+              "skills": [
+                "3.A"
+              ],
+              "requires": [],
+              "estLessons": 1
+            }
+          ]
+        },
+        {
+          "code": "1.4",
+          "title": "State Building in the Americas",
+          "scope": "both",
+          "skills": [
+            "3.B"
+          ],
+          "requires": [
+            "1.3"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "1.4#1",
+              "label": "Aztec (Mexica) and Inca imperial organization",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [],
+              "estLessons": 1
+            },
+            {
+              "code": "1.4#2",
+              "label": "Identify the evidence a source gives for American state building",
+              "kind": "skill",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [],
+              "estLessons": 1
+            }
+          ]
+        },
+        {
+          "code": "1.5",
+          "title": "State Building in Africa",
+          "scope": "both",
+          "skills": [
+            "1.B"
+          ],
+          "requires": [
+            "1.4"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "1.5#1",
+              "label": "Mali, Ethiopia, Great Zimbabwe and Swahili city-states",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 1
+            },
+            {
+              "code": "1.5#2",
+              "label": "Explain the role of trade and religion in African state building",
+              "kind": "skill",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 1
+            }
+          ]
+        },
+        {
+          "code": "1.6",
+          "title": "Developments in Europe from c. 1200 to c. 1450",
+          "scope": "both",
+          "skills": [
+            "1.A"
+          ],
+          "requires": [
+            "1.5"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "1.6#1",
+              "label": "Feudalism, manorialism, the church and early parliaments",
+              "kind": "concept",
+              "skills": [
+                "1.A"
+              ],
+              "requires": [],
+              "estLessons": 1
+            },
+            {
+              "code": "1.6#2",
+              "label": "Black Death and its social and economic effects",
+              "kind": "concept",
+              "skills": [
+                "1.A"
+              ],
+              "requires": [],
+              "estLessons": 1
+            }
+          ]
+        },
+        {
+          "code": "1.7",
+          "title": "Comparison in the Period from c. 1200 to c. 1450",
+          "scope": "both",
+          "skills": [
+            "6.A"
+          ],
+          "requires": [
+            "1.6"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "1.7#1",
+              "label": "Compare state forms and sources of legitimacy across regions",
+              "kind": "skill",
+              "skills": [
+                "6.A"
+              ],
+              "requires": [],
+              "estLessons": 1
+            },
+            {
+              "code": "1.7#2",
+              "label": "Make a defensible comparative claim about the period",
+              "kind": "skill",
+              "skills": [
+                "6.A"
+              ],
+              "requires": [],
+              "estLessons": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "2",
+      "title": "Unit 2: Networks of Exchange (c. 1200 to c. 1450)",
+      "officialClassPeriods": "~10-13",
+      "topics": [
+        {
+          "code": "2.1",
+          "title": "The Silk Roads",
+          "scope": "both",
+          "skills": [
+            "4.A"
+          ],
+          "requires": [
+            "1.7"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "2.1#1",
+              "label": "Goods, technologies and religions along overland routes",
+              "kind": "concept",
+              "skills": [
+                "4.A"
+              ],
+              "requires": [],
+              "estLessons": 1
+            },
+            {
+              "code": "2.1#2",
+              "label": "Read trade-route maps",
+              "kind": "representation",
+              "skills": [
+                "4.A"
+              ],
+              "requires": [],
+              "estLessons": 1
+            }
+          ]
+        },
+        {
+          "code": "2.2",
+          "title": "The Mongol Empire and the Making of the Modern World",
+          "scope": "both",
+          "skills": [
+            "5.A"
+          ],
+          "requires": [
+            "2.1"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "2.2#1",
+              "label": "Mongol conquest, the Pax Mongolica and exchange across Eurasia",
+              "kind": "concept",
+              "skills": [
+                "5.A"
+              ],
+              "requires": [],
+              "estLessons": 1
+            },
+            {
+              "code": "2.2#2",
+              "label": "Continuity and change under Mongol rule",
+              "kind": "skill",
+              "skills": [
+                "5.A"
+              ],
+              "requires": [],
+              "estLessons": 1
+            }
+          ]
+        },
+        {
+          "code": "2.3",
+          "title": "Exchange in the Indian Ocean",
+          "scope": "both",
+          "skills": [
+            "5.A"
+          ],
+          "requires": [
+            "2.2"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "2.3#1",
+              "label": "Monsoon trade, port cities and merchant communities",
+              "kind": "concept",
+              "skills": [
+                "5.A"
+              ],
+              "requires": [],
+              "estLessons": 1
+            },
+            {
+              "code": "2.3#2",
+              "label": "Cultural diffusion through maritime exchange",
+              "kind": "concept",
+              "skills": [
+                "5.A"
+              ],
+              "requires": [],
+              "estLessons": 1
+            }
+          ]
+        },
+        {
+          "code": "2.4",
+          "title": "Trans-Saharan Trade Routes",
+          "scope": "both",
+          "skills": [
+            "1.B"
+          ],
+          "requires": [
+            "2.3"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "2.4#1",
+              "label": "Gold, salt, camels and the rise of West African states",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 1
+            },
+            {
+              "code": "2.4#2",
+              "label": "Explain how trade spread Islam in West Africa",
+              "kind": "skill",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 1
+            }
+          ]
+        },
+        {
+          "code": "2.5",
+          "title": "Cultural Consequences of Connectivity",
+          "scope": "both",
+          "skills": [
+            "2.A"
+          ],
+          "requires": [
+            "2.4"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "2.5#1",
+              "label": "Diffusion of religion, art, science and technology",
+              "kind": "concept",
+              "skills": [
+                "2.A"
+              ],
+              "requires": [],
+              "estLessons": 1
+            },
+            {
+              "code": "2.5#2",
+              "label": "Identify the point of view of travelers' accounts",
+              "kind": "skill",
+              "skills": [
+                "2.A"
+              ],
+              "requires": [],
+              "estLessons": 1
+            }
+          ]
+        },
+        {
+          "code": "2.6",
+          "title": "Environmental Consequences of Connectivity",
+          "scope": "both",
+          "skills": [
+            "5.A"
+          ],
+          "requires": [
+            "2.5"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "2.6#1",
+              "label": "Disease transmission and the Black Death along trade routes",
+              "kind": "concept",
+              "skills": [
+                "5.A"
+              ],
+              "requires": [],
+              "estLessons": 1
+            },
+            {
+              "code": "2.6#2",
+              "label": "Link trade expansion to environmental change",
+              "kind": "skill",
+              "skills": [
+                "5.A"
+              ],
+              "requires": [],
+              "estLessons": 1
+            }
+          ]
+        },
+        {
+          "code": "2.7",
+          "title": "Comparison of Economic Exchange",
+          "scope": "both",
+          "skills": [
+            "6.B"
+          ],
+          "requires": [
+            "2.6"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "2.7#1",
+              "label": "Compare the Silk Roads, Indian Ocean and trans-Saharan systems",
+              "kind": "skill",
+              "skills": [
+                "6.B"
+              ],
+              "requires": [],
+              "estLessons": 1
+            },
+            {
+              "code": "2.7#2",
+              "label": "Support a comparison with specific evidence",
+              "kind": "skill",
+              "skills": [
+                "6.B"
+              ],
+              "requires": [],
+              "estLessons": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "3",
+      "title": "Unit 3: Land-Based Empires (c. 1450 to c. 1750)",
+      "officialClassPeriods": "~8-11",
+      "topics": [
+        {
+          "code": "3.1",
+          "title": "Empires Expand",
+          "scope": "both",
+          "skills": [
+            "1.B"
+          ],
+          "requires": [
+            "2.7"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "3.1#1",
+              "label": "Ottoman, Safavid, Mughal, Qing, Russian and other land-based empires",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 1
+            },
+            {
+              "code": "3.1#2",
+              "label": "Gunpowder, military organization and expansion",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 1
+            }
+          ]
+        },
+        {
+          "code": "3.2",
+          "title": "Empires: Administration",
+          "scope": "both",
+          "skills": [
+            "4.A"
+          ],
+          "requires": [
+            "3.1"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "3.2#1",
+              "label": "Bureaucracy, taxation and the legitimation of rule",
+              "kind": "concept",
+              "skills": [
+                "4.A"
+              ],
+              "requires": [],
+              "estLessons": 1
+            },
+            {
+              "code": "3.2#2",
+              "label": "Describe administrative contexts of an empire",
+              "kind": "skill",
+              "skills": [
+                "4.A"
+              ],
+              "requires": [],
+              "estLessons": 1
+            }
+          ]
+        },
+        {
+          "code": "3.3",
+          "title": "Empires: Belief Systems",
+          "scope": "both",
+          "skills": [
+            "2.B"
+          ],
+          "requires": [
+            "3.2"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "3.3#1",
+              "label": "Religion as support for and challenge to imperial rule",
+              "kind": "concept",
+              "skills": [
+                "2.B"
+              ],
+              "requires": [],
+              "estLessons": 1
+            },
+            {
+              "code": "3.3#2",
+              "label": "Explain how a source's purpose reflects imperial religious policy",
+              "kind": "skill",
+              "skills": [
+                "2.B"
+              ],
+              "requires": [],
+              "estLessons": 1
+            }
+          ]
+        },
+        {
+          "code": "3.4",
+          "title": "Comparison in Land-Based Empires",
+          "scope": "both",
+          "skills": [
+            "6.B"
+          ],
+          "requires": [
+            "3.3"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "3.4#1",
+              "label": "Compare administration and religious policy across empires",
+              "kind": "skill",
+              "skills": [
+                "6.B"
+              ],
+              "requires": [],
+              "estLessons": 1
+            },
+            {
+              "code": "3.4#2",
+              "label": "Support a comparative argument with specific evidence",
+              "kind": "skill",
+              "skills": [
+                "6.B"
+              ],
+              "requires": [],
+              "estLessons": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "4",
+      "title": "Unit 4: Transoceanic Interconnections (c. 1450 to c. 1750)",
+      "officialClassPeriods": "~22-25",
+      "topics": [
+        {
+          "code": "4.1",
+          "title": "Technological Innovations from 1450 to 1750",
+          "scope": "both",
+          "skills": [
+            "4.A"
+          ],
+          "requires": [
+            "3.4"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "4.1#1",
+              "label": "Navigation, shipbuilding and cartography",
+              "kind": "concept",
+              "skills": [
+                "4.A"
+              ],
+              "requires": [],
+              "estLessons": 1
+            },
+            {
+              "code": "4.1#2",
+              "label": "Place maritime innovations in their political context",
+              "kind": "skill",
+              "skills": [
+                "4.A"
+              ],
+              "requires": [],
+              "estLessons": 1
+            }
+          ]
+        },
+        {
+          "code": "4.2",
+          "title": "Exploration: Causes and Events from 1450 to 1750",
+          "scope": "both",
+          "skills": [
+            "5.B"
+          ],
+          "requires": [
+            "4.1"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "4.2#1",
+              "label": "Portuguese, Spanish, Dutch, French and English voyages and motives",
+              "kind": "concept",
+              "skills": [
+                "5.B"
+              ],
+              "requires": [],
+              "estLessons": 1
+            },
+            {
+              "code": "4.2#2",
+              "label": "Explain how state competition drove exploration",
+              "kind": "skill",
+              "skills": [
+                "5.B"
+              ],
+              "requires": [],
+              "estLessons": 1
+            }
+          ]
+        },
+        {
+          "code": "4.3",
+          "title": "Columbian Exchange",
+          "scope": "both",
+          "skills": [
+            "3.B"
+          ],
+          "requires": [
+            "4.2"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "4.3#1",
+              "label": "Transfer of crops, animals, people and disease between hemispheres",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [],
+              "estLessons": 1
+            },
+            {
+              "code": "4.3#2",
+              "label": "Identify the evidence a source gives for the exchange's effects",
+              "kind": "skill",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [],
+              "estLessons": 1
+            }
+          ]
+        },
+        {
+          "code": "4.4",
+          "title": "Maritime Empires Established",
+          "scope": "both",
+          "skills": [
+            "2.A"
+          ],
+          "requires": [
+            "4.3"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "4.4#1",
+              "label": "Trading-post and colonial empires of Europeans",
+              "kind": "concept",
+              "skills": [
+                "2.A"
+              ],
+              "requires": [],
+              "estLessons": 1
+            },
+            {
+              "code": "4.4#2",
+              "label": "Identify the point of view in a colonial-era source",
+              "kind": "skill",
+              "skills": [
+                "2.A"
+              ],
+              "requires": [],
+              "estLessons": 1
+            }
+          ]
+        },
+        {
+          "code": "4.5",
+          "title": "Maritime Empires Maintained and Developed",
+          "scope": "both",
+          "skills": [
+            "3.A"
+          ],
+          "requires": [
+            "4.4"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "4.5#1",
+              "label": "Mercantilism, chartered companies and the Atlantic system",
+              "kind": "concept",
+              "skills": [
+                "3.A"
+              ],
+              "requires": [],
+              "estLessons": 1
+            },
+            {
+              "code": "4.5#2",
+              "label": "Identify the claim in a source on maritime commerce",
+              "kind": "skill",
+              "skills": [
+                "3.A"
+              ],
+              "requires": [],
+              "estLessons": 1
+            }
+          ]
+        },
+        {
+          "code": "4.6",
+          "title": "Internal and External Challenges to State Power from 1450 to 1750",
+          "scope": "both",
+          "skills": [
+            "4.B"
+          ],
+          "requires": [
+            "4.5"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "4.6#1",
+              "label": "Revolts, resistance and rivalry that strained states",
+              "kind": "concept",
+              "skills": [
+                "4.B"
+              ],
+              "requires": [],
+              "estLessons": 1
+            },
+            {
+              "code": "4.6#2",
+              "label": "Situate a challenge within its broader context",
+              "kind": "skill",
+              "skills": [
+                "4.B"
+              ],
+              "requires": [],
+              "estLessons": 1
+            }
+          ]
+        },
+        {
+          "code": "4.7",
+          "title": "Changing Social Hierarchies from 1450 to 1750",
+          "scope": "both",
+          "skills": [
+            "3.D"
+          ],
+          "requires": [
+            "4.6"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "4.7#1",
+              "label": "Atlantic slavery, castas, and new elites",
+              "kind": "concept",
+              "skills": [
+                "3.D"
+              ],
+              "requires": [],
+              "estLessons": 1
+            },
+            {
+              "code": "4.7#2",
+              "label": "Explain how evidence supports or modifies a claim about hierarchy",
+              "kind": "skill",
+              "skills": [
+                "3.D"
+              ],
+              "requires": [],
+              "estLessons": 1
+            }
+          ]
+        },
+        {
+          "code": "4.8",
+          "title": "Continuity and Change from 1450 to 1750",
+          "scope": "both",
+          "skills": [
+            "6.C"
+          ],
+          "requires": [
+            "4.7"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "4.8#1",
+              "label": "Trace continuities and changes in global trade and power",
+              "kind": "skill",
+              "skills": [
+                "6.C"
+              ],
+              "requires": [],
+              "estLessons": 1
+            },
+            {
+              "code": "4.8#2",
+              "label": "Use reasoning to relate pieces of evidence about continuity and change",
+              "kind": "skill",
+              "skills": [
+                "6.C"
+              ],
+              "requires": [],
+              "estLessons": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "5",
+      "title": "Unit 5: Revolutions (c. 1750 to c. 1900)",
+      "officialClassPeriods": "~20-23",
+      "topics": [
+        {
+          "code": "5.1",
+          "title": "The Enlightenment",
+          "scope": "both",
+          "skills": [
+            "3.A"
+          ],
+          "requires": [
+            "4.8"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "5.1#1",
+              "label": "Natural rights, reason and challenges to absolutism",
+              "kind": "concept",
+              "skills": [
+                "3.A"
+              ],
+              "requires": [],
+              "estLessons": 1
+            },
+            {
+              "code": "5.1#2",
+              "label": "Identify the claim in an Enlightenment source",
+              "kind": "skill",
+              "skills": [
+                "3.A"
+              ],
+              "requires": [],
+              "estLessons": 1
+            }
+          ]
+        },
+        {
+          "code": "5.2",
+          "title": "Nationalism and Revolutions in the Period from 1750 to 1900",
+          "scope": "both",
+          "skills": [
+            "3.C"
+          ],
+          "requires": [
+            "5.1"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "5.2#1",
+              "label": "American, French, Haitian and Latin American revolutions",
+              "kind": "concept",
+              "skills": [
+                "3.C"
+              ],
+              "requires": [],
+              "estLessons": 1
+            },
+            {
+              "code": "5.2#2",
+              "label": "Compare revolutionary documents",
+              "kind": "skill",
+              "skills": [
+                "3.C"
+              ],
+              "requires": [],
+              "estLessons": 1
+            }
+          ]
+        },
+        {
+          "code": "5.3",
+          "title": "Industrial Revolution Begins",
+          "scope": "both",
+          "skills": [
+            "1.B"
+          ],
+          "requires": [
+            "5.2"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "5.3#1",
+              "label": "Why industrialization began in Britain",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 1
+            },
+            {
+              "code": "5.3#2",
+              "label": "Coal, iron, textiles and the factory",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 1
+            }
+          ]
+        },
+        {
+          "code": "5.4",
+          "title": "Industrialization Spreads in the Period from 1750 to 1900",
+          "scope": "both",
+          "skills": [
+            "5.A"
+          ],
+          "requires": [
+            "5.3"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "5.4#1",
+              "label": "Industrial development in continental Europe, the United States and Japan",
+              "kind": "concept",
+              "skills": [
+                "5.A"
+              ],
+              "requires": [],
+              "estLessons": 1
+            },
+            {
+              "code": "5.4#2",
+              "label": "Identify patterns in industrial spread",
+              "kind": "skill",
+              "skills": [
+                "5.A"
+              ],
+              "requires": [],
+              "estLessons": 1
+            }
+          ]
+        },
+        {
+          "code": "5.5",
+          "title": "Technology of the Industrial Age",
+          "scope": "both",
+          "skills": [
+            "1.B"
+          ],
+          "requires": [
+            "5.4"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "5.5#1",
+              "label": "Steam, railroads, telegraph and steamships",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 1
+            },
+            {
+              "code": "5.5#2",
+              "label": "Explain technological effects on trade and empire",
+              "kind": "skill",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 1
+            }
+          ]
+        },
+        {
+          "code": "5.6",
+          "title": "Industrialization: Government's Role from 1750 to 1900",
+          "scope": "both",
+          "skills": [
+            "5.A"
+          ],
+          "requires": [
+            "5.5"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "5.6#1",
+              "label": "State support, laissez-faire and reform",
+              "kind": "concept",
+              "skills": [
+                "5.A"
+              ],
+              "requires": [],
+              "estLessons": 1
+            },
+            {
+              "code": "5.6#2",
+              "label": "Connect state action to industrial development",
+              "kind": "skill",
+              "skills": [
+                "5.A"
+              ],
+              "requires": [],
+              "estLessons": 1
+            }
+          ]
+        },
+        {
+          "code": "5.7",
+          "title": "Economic Developments and Innovations in the Industrial Age",
+          "scope": "both",
+          "skills": [
+            "5.B"
+          ],
+          "requires": [
+            "5.6"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "5.7#1",
+              "label": "Capitalism, joint-stock companies and banking",
+              "kind": "concept",
+              "skills": [
+                "5.B"
+              ],
+              "requires": [],
+              "estLessons": 1
+            },
+            {
+              "code": "5.7#2",
+              "label": "Explain relationships among economic developments",
+              "kind": "skill",
+              "skills": [
+                "5.B"
+              ],
+              "requires": [],
+              "estLessons": 1
+            }
+          ]
+        },
+        {
+          "code": "5.8",
+          "title": "Reactions to the Industrial Economy from 1750 to 1900",
+          "scope": "both",
+          "skills": [
+            "2.B"
+          ],
+          "requires": [
+            "5.7"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "5.8#1",
+              "label": "Socialism, Marxism, labor movements and reform",
+              "kind": "concept",
+              "skills": [
+                "2.B"
+              ],
+              "requires": [],
+              "estLessons": 1
+            },
+            {
+              "code": "5.8#2",
+              "label": "Explain how a source's situation shapes its view of industry",
+              "kind": "skill",
+              "skills": [
+                "2.B"
+              ],
+              "requires": [],
+              "estLessons": 1
+            }
+          ]
+        },
+        {
+          "code": "5.9",
+          "title": "Society and the Industrial Age",
+          "scope": "both",
+          "skills": [
+            "4.B"
+          ],
+          "requires": [
+            "5.8"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "5.9#1",
+              "label": "Urbanization, class, gender and family change",
+              "kind": "concept",
+              "skills": [
+                "4.B"
+              ],
+              "requires": [],
+              "estLessons": 1
+            },
+            {
+              "code": "5.9#2",
+              "label": "Situate social change in the broader industrial context",
+              "kind": "skill",
+              "skills": [
+                "4.B"
+              ],
+              "requires": [],
+              "estLessons": 1
+            }
+          ]
+        },
+        {
+          "code": "5.10",
+          "title": "Continuity and Change in the Industrial Age",
+          "scope": "both",
+          "skills": [
+            "6.C"
+          ],
+          "requires": [
+            "5.9"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "5.10#1",
+              "label": "Trace what industrialization changed and what it left unchanged",
+              "kind": "skill",
+              "skills": [
+                "6.C"
+              ],
+              "requires": [],
+              "estLessons": 1
+            },
+            {
+              "code": "5.10#2",
+              "label": "Use reasoning to relate pieces of evidence",
+              "kind": "skill",
+              "skills": [
+                "6.C"
+              ],
+              "requires": [],
+              "estLessons": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "6",
+      "title": "Unit 6: Consequences of Industrialization (c. 1750 to c. 1900)",
+      "officialClassPeriods": "~12-15",
+      "topics": [
+        {
+          "code": "6.1",
+          "title": "Rationales for Imperialism from 1750 to 1900",
+          "scope": "both",
+          "skills": [
+            "4.B"
+          ],
+          "requires": [
+            "5.10"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "6.1#1",
+              "label": "Economic, political and ideological motives for empire",
+              "kind": "concept",
+              "skills": [
+                "4.B"
+              ],
+              "requires": [],
+              "estLessons": 1
+            },
+            {
+              "code": "6.1#2",
+              "label": "Situate imperial rationales in their broader context",
+              "kind": "skill",
+              "skills": [
+                "4.B"
+              ],
+              "requires": [],
+              "estLessons": 1
+            }
+          ]
+        },
+        {
+          "code": "6.2",
+          "title": "State Expansion from 1750 to 1900",
+          "scope": "both",
+          "skills": [
+            "4.B"
+          ],
+          "requires": [
+            "6.1"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "6.2#1",
+              "label": "Imperial expansion by Britain, Russia, Japan, the United States and others",
+              "kind": "concept",
+              "skills": [
+                "4.B"
+              ],
+              "requires": [],
+              "estLessons": 1
+            },
+            {
+              "code": "6.2#2",
+              "label": "Compare forms of state expansion",
+              "kind": "skill",
+              "skills": [
+                "4.B"
+              ],
+              "requires": [],
+              "estLessons": 1
+            }
+          ]
+        },
+        {
+          "code": "6.3",
+          "title": "Indigenous Responses to State Expansion from 1750 to 1900",
+          "scope": "both",
+          "skills": [
+            "2.C"
+          ],
+          "requires": [
+            "6.2"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "6.3#1",
+              "label": "Resistance, accommodation and rebellion",
+              "kind": "concept",
+              "skills": [
+                "2.C"
+              ],
+              "requires": [],
+              "estLessons": 1
+            },
+            {
+              "code": "6.3#2",
+              "label": "Explain how a source's point of view limits its use",
+              "kind": "skill",
+              "skills": [
+                "2.C"
+              ],
+              "requires": [],
+              "estLessons": 1
+            }
+          ]
+        },
+        {
+          "code": "6.4",
+          "title": "Global Economic Development from 1750 to 1900",
+          "scope": "both",
+          "skills": [
+            "2.B"
+          ],
+          "requires": [
+            "6.3"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "6.4#1",
+              "label": "Global trade, plantations and resource extraction",
+              "kind": "concept",
+              "skills": [
+                "2.B"
+              ],
+              "requires": [],
+              "estLessons": 1
+            },
+            {
+              "code": "6.4#2",
+              "label": "Explain how a source's audience affects its interpretation",
+              "kind": "skill",
+              "skills": [
+                "2.B"
+              ],
+              "requires": [],
+              "estLessons": 1
+            }
+          ]
+        },
+        {
+          "code": "6.5",
+          "title": "Economic Imperialism from 1750 to 1900",
+          "scope": "both",
+          "skills": [
+            "4.B"
+          ],
+          "requires": [
+            "6.4"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "6.5#1",
+              "label": "Unequal treaties, spheres of influence and informal empire",
+              "kind": "concept",
+              "skills": [
+                "4.B"
+              ],
+              "requires": [],
+              "estLessons": 1
+            },
+            {
+              "code": "6.5#2",
+              "label": "Situate economic imperialism in its context",
+              "kind": "skill",
+              "skills": [
+                "4.B"
+              ],
+              "requires": [],
+              "estLessons": 1
+            }
+          ]
+        },
+        {
+          "code": "6.6",
+          "title": "Causes of Migration in an Interconnected World",
+          "scope": "both",
+          "skills": [
+            "5.B"
+          ],
+          "requires": [
+            "6.5"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "6.6#1",
+              "label": "Push and pull factors, indentured labor and emancipation",
+              "kind": "concept",
+              "skills": [
+                "5.B"
+              ],
+              "requires": [],
+              "estLessons": 1
+            },
+            {
+              "code": "6.6#2",
+              "label": "Explain connections between migration and global economic change",
+              "kind": "skill",
+              "skills": [
+                "5.B"
+              ],
+              "requires": [],
+              "estLessons": 1
+            }
+          ]
+        },
+        {
+          "code": "6.7",
+          "title": "Effects of Migration",
+          "scope": "both",
+          "skills": [
+            "5.B"
+          ],
+          "requires": [
+            "6.6"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "6.7#1",
+              "label": "Diasporas, nativism and ethnic enclaves",
+              "kind": "concept",
+              "skills": [
+                "5.B"
+              ],
+              "requires": [],
+              "estLessons": 1
+            },
+            {
+              "code": "6.7#2",
+              "label": "Explain relationships between migration and social change",
+              "kind": "skill",
+              "skills": [
+                "5.B"
+              ],
+              "requires": [],
+              "estLessons": 1
+            }
+          ]
+        },
+        {
+          "code": "6.8",
+          "title": "Causation in the Imperial Age",
+          "scope": "both",
+          "skills": [
+            "6.D"
+          ],
+          "requires": [
+            "6.7"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "6.8#1",
+              "label": "Weigh multiple causes of imperial expansion and its outcomes",
+              "kind": "skill",
+              "skills": [
+                "6.D"
+              ],
+              "requires": [],
+              "estLessons": 1
+            },
+            {
+              "code": "6.8#2",
+              "label": "Qualify a causal claim about empire with alternative evidence",
+              "kind": "skill",
+              "skills": [
+                "6.D"
+              ],
+              "requires": [],
+              "estLessons": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "7",
+      "title": "Unit 7: Global Conflict (c. 1900 to the present)",
+      "officialClassPeriods": "~9-12",
+      "topics": [
+        {
+          "code": "7.1",
+          "title": "Shifting Power After 1900",
+          "scope": "both",
+          "skills": [
+            "4.B"
+          ],
+          "requires": [
+            "6.8"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "7.1#1",
+              "label": "Decline of old empires and rise of new powers",
+              "kind": "concept",
+              "skills": [
+                "4.B"
+              ],
+              "requires": [],
+              "estLessons": 1
+            },
+            {
+              "code": "7.1#2",
+              "label": "Situate shifting power in its broader context",
+              "kind": "skill",
+              "skills": [
+                "4.B"
+              ],
+              "requires": [],
+              "estLessons": 1
+            }
+          ]
+        },
+        {
+          "code": "7.2",
+          "title": "Causes of World War I",
+          "scope": "both",
+          "skills": [
+            "1.B"
+          ],
+          "requires": [
+            "7.1"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "7.2#1",
+              "label": "Alliances, imperial rivalry and nationalism",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 1
+            },
+            {
+              "code": "7.2#2",
+              "label": "Explain how causes combined in 1914",
+              "kind": "skill",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 1
+            }
+          ]
+        },
+        {
+          "code": "7.3",
+          "title": "Conducting World War I",
+          "scope": "both",
+          "skills": [
+            "3.B"
+          ],
+          "requires": [
+            "7.2"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "7.3#1",
+              "label": "Total war, mobilization and colonial participation",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [],
+              "estLessons": 1
+            },
+            {
+              "code": "7.3#2",
+              "label": "Identify the evidence a source offers about the war experience",
+              "kind": "skill",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [],
+              "estLessons": 1
+            }
+          ]
+        },
+        {
+          "code": "7.4",
+          "title": "Economy in the Interwar Period",
+          "scope": "both",
+          "skills": [
+            "2.C"
+          ],
+          "requires": [
+            "7.3"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "7.4#1",
+              "label": "Postwar recovery, the Great Depression and state responses",
+              "kind": "concept",
+              "skills": [
+                "2.C"
+              ],
+              "requires": [],
+              "estLessons": 1
+            },
+            {
+              "code": "7.4#2",
+              "label": "Explain how the situation of an interwar source limits its use",
+              "kind": "skill",
+              "skills": [
+                "2.C"
+              ],
+              "requires": [],
+              "estLessons": 1
+            }
+          ]
+        },
+        {
+          "code": "7.5",
+          "title": "Unresolved Tensions After World War I",
+          "scope": "both",
+          "skills": [
+            "2.C"
+          ],
+          "requires": [
+            "7.4"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "7.5#1",
+              "label": "Versailles, mandates, revolutions and nationalist movements",
+              "kind": "concept",
+              "skills": [
+                "2.C"
+              ],
+              "requires": [],
+              "estLessons": 1
+            },
+            {
+              "code": "7.5#2",
+              "label": "Explain the significance of a source's point of view",
+              "kind": "skill",
+              "skills": [
+                "2.C"
+              ],
+              "requires": [],
+              "estLessons": 1
+            }
+          ]
+        },
+        {
+          "code": "7.6",
+          "title": "Causes of World War II",
+          "scope": "both",
+          "skills": [
+            "2.C"
+          ],
+          "requires": [
+            "7.5"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "7.6#1",
+              "label": "Fascism, militarism, appeasement and expansion",
+              "kind": "concept",
+              "skills": [
+                "2.C"
+              ],
+              "requires": [],
+              "estLessons": 1
+            },
+            {
+              "code": "7.6#2",
+              "label": "Explain the significance of a source's purpose",
+              "kind": "skill",
+              "skills": [
+                "2.C"
+              ],
+              "requires": [],
+              "estLessons": 1
+            }
+          ]
+        },
+        {
+          "code": "7.7",
+          "title": "Conducting World War II",
+          "scope": "both",
+          "skills": [
+            "3.D"
+          ],
+          "requires": [
+            "7.6"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "7.7#1",
+              "label": "Total war, air power, the home front and new weapons",
+              "kind": "concept",
+              "skills": [
+                "3.D"
+              ],
+              "requires": [],
+              "estLessons": 1
+            },
+            {
+              "code": "7.7#2",
+              "label": "Explain how evidence supports or modifies a claim about the war",
+              "kind": "skill",
+              "skills": [
+                "3.D"
+              ],
+              "requires": [],
+              "estLessons": 1
+            }
+          ]
+        },
+        {
+          "code": "7.8",
+          "title": "Mass Atrocities After 1900",
+          "scope": "both",
+          "skills": [
+            "5.B"
+          ],
+          "requires": [
+            "7.7"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "7.8#1",
+              "label": "Armenian genocide, the Holocaust, and later atrocities",
+              "kind": "concept",
+              "skills": [
+                "5.B"
+              ],
+              "requires": [],
+              "estLessons": 1
+            },
+            {
+              "code": "7.8#2",
+              "label": "Explain connections among causes of atrocities",
+              "kind": "skill",
+              "skills": [
+                "5.B"
+              ],
+              "requires": [],
+              "estLessons": 1
+            }
+          ]
+        },
+        {
+          "code": "7.9",
+          "title": "Causation in Global Conflict",
+          "scope": "both",
+          "skills": [
+            "6.D"
+          ],
+          "requires": [
+            "7.8"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "7.9#1",
+              "label": "Weigh multiple causes of world wars and atrocities",
+              "kind": "skill",
+              "skills": [
+                "6.D"
+              ],
+              "requires": [],
+              "estLessons": 1
+            },
+            {
+              "code": "7.9#2",
+              "label": "Qualify a causal claim about the world wars with alternative evidence",
+              "kind": "skill",
+              "skills": [
+                "6.D"
+              ],
+              "requires": [],
+              "estLessons": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "8",
+      "title": "Unit 8: Cold War and Decolonization (c. 1900 to the present)",
+      "officialClassPeriods": "~14-17",
+      "topics": [
+        {
+          "code": "8.1",
+          "title": "Setting the Stage for the Cold War and Decolonization",
+          "scope": "both",
+          "skills": [
+            "4.B"
+          ],
+          "requires": [
+            "7.9"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "8.1#1",
+              "label": "Postwar settlements, the UN and weakened empires",
+              "kind": "concept",
+              "skills": [
+                "4.B"
+              ],
+              "requires": [],
+              "estLessons": 1
+            },
+            {
+              "code": "8.1#2",
+              "label": "Situate the early Cold War in its context",
+              "kind": "skill",
+              "skills": [
+                "4.B"
+              ],
+              "requires": [],
+              "estLessons": 1
+            }
+          ]
+        },
+        {
+          "code": "8.2",
+          "title": "The Cold War",
+          "scope": "both",
+          "skills": [
+            "2.B"
+          ],
+          "requires": [
+            "8.1"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "8.2#1",
+              "label": "Superpower rivalry, alliances and proxy conflict",
+              "kind": "concept",
+              "skills": [
+                "2.B"
+              ],
+              "requires": [],
+              "estLessons": 1
+            },
+            {
+              "code": "8.2#2",
+              "label": "Explain how a source's purpose reflects Cold War positions",
+              "kind": "skill",
+              "skills": [
+                "2.B"
+              ],
+              "requires": [],
+              "estLessons": 1
+            }
+          ]
+        },
+        {
+          "code": "8.3",
+          "title": "Effects of the Cold War",
+          "scope": "both",
+          "skills": [
+            "5.B"
+          ],
+          "requires": [
+            "8.2"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "8.3#1",
+              "label": "Arms race, space race and divided societies",
+              "kind": "concept",
+              "skills": [
+                "5.B"
+              ],
+              "requires": [],
+              "estLessons": 1
+            },
+            {
+              "code": "8.3#2",
+              "label": "Explain relationships among Cold War effects",
+              "kind": "skill",
+              "skills": [
+                "5.B"
+              ],
+              "requires": [],
+              "estLessons": 1
+            }
+          ]
+        },
+        {
+          "code": "8.4",
+          "title": "Spread of Communism After 1900",
+          "scope": "both",
+          "skills": [
+            "2.C"
+          ],
+          "requires": [
+            "8.3"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "8.4#1",
+              "label": "Russia, China, Cuba and Vietnam",
+              "kind": "concept",
+              "skills": [
+                "2.C"
+              ],
+              "requires": [],
+              "estLessons": 1
+            },
+            {
+              "code": "8.4#2",
+              "label": "Explain the significance of a communist source's audience",
+              "kind": "skill",
+              "skills": [
+                "2.C"
+              ],
+              "requires": [],
+              "estLessons": 1
+            }
+          ]
+        },
+        {
+          "code": "8.5",
+          "title": "Decolonization After 1900",
+          "scope": "both",
+          "skills": [
+            "5.B"
+          ],
+          "requires": [
+            "8.4"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "8.5#1",
+              "label": "Independence movements and partition",
+              "kind": "concept",
+              "skills": [
+                "5.B"
+              ],
+              "requires": [],
+              "estLessons": 1
+            },
+            {
+              "code": "8.5#2",
+              "label": "Compare decolonization in Asia and Africa",
+              "kind": "skill",
+              "skills": [
+                "5.B"
+              ],
+              "requires": [],
+              "estLessons": 1
+            }
+          ]
+        },
+        {
+          "code": "8.6",
+          "title": "Newly Independent States",
+          "scope": "both",
+          "skills": [
+            "3.D"
+          ],
+          "requires": [
+            "8.5"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "8.6#1",
+              "label": "Nation building, nonalignment and neocolonialism",
+              "kind": "concept",
+              "skills": [
+                "3.D"
+              ],
+              "requires": [],
+              "estLessons": 1
+            },
+            {
+              "code": "8.6#2",
+              "label": "Explain how evidence modifies a claim about new states",
+              "kind": "skill",
+              "skills": [
+                "3.D"
+              ],
+              "requires": [],
+              "estLessons": 1
+            }
+          ]
+        },
+        {
+          "code": "8.7",
+          "title": "Global Resistance to Established Order After 1900",
+          "scope": "both",
+          "skills": [
+            "2.B"
+          ],
+          "requires": [
+            "8.6"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "8.7#1",
+              "label": "Civil rights, anti-apartheid and student movements",
+              "kind": "concept",
+              "skills": [
+                "2.B"
+              ],
+              "requires": [],
+              "estLessons": 1
+            },
+            {
+              "code": "8.7#2",
+              "label": "Explain how a source's audience shaped its message",
+              "kind": "skill",
+              "skills": [
+                "2.B"
+              ],
+              "requires": [],
+              "estLessons": 1
+            }
+          ]
+        },
+        {
+          "code": "8.8",
+          "title": "End of the Cold War",
+          "scope": "both",
+          "skills": [
+            "1.B"
+          ],
+          "requires": [
+            "8.7"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "8.8#1",
+              "label": "Reform in the USSR and the collapse of communist states",
+              "kind": "concept",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 1
+            },
+            {
+              "code": "8.8#2",
+              "label": "Explain multiple causes of the Cold War's end",
+              "kind": "skill",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [],
+              "estLessons": 1
+            }
+          ]
+        },
+        {
+          "code": "8.9",
+          "title": "Causation in the Age of the Cold War and Decolonization",
+          "scope": "both",
+          "skills": [
+            "6.D"
+          ],
+          "requires": [
+            "8.8"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "8.9#1",
+              "label": "Weigh causes of Cold War outcomes and decolonization",
+              "kind": "skill",
+              "skills": [
+                "6.D"
+              ],
+              "requires": [],
+              "estLessons": 1
+            },
+            {
+              "code": "8.9#2",
+              "label": "Qualify a causal claim about the Cold War era with alternative evidence",
+              "kind": "skill",
+              "skills": [
+                "6.D"
+              ],
+              "requires": [],
+              "estLessons": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "9",
+      "title": "Unit 9: Globalization (c. 1900 to the present)",
+      "officialClassPeriods": "~8-11",
+      "topics": [
+        {
+          "code": "9.1",
+          "title": "Advances in Technology and Exchange After 1900",
+          "scope": "both",
+          "skills": [
+            "5.A"
+          ],
+          "requires": [
+            "8.9"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "9.1#1",
+              "label": "Green Revolution, communications and transport",
+              "kind": "concept",
+              "skills": [
+                "5.A"
+              ],
+              "requires": [],
+              "estLessons": 1
+            },
+            {
+              "code": "9.1#2",
+              "label": "Identify patterns in technology and exchange",
+              "kind": "skill",
+              "skills": [
+                "5.A"
+              ],
+              "requires": [],
+              "estLessons": 1
+            }
+          ]
+        },
+        {
+          "code": "9.2",
+          "title": "Technological Advances and Limitations After 1900: Disease",
+          "scope": "both",
+          "skills": [
+            "5.B"
+          ],
+          "requires": [
+            "9.1"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "9.2#1",
+              "label": "Vaccination, antibiotics and pandemics",
+              "kind": "concept",
+              "skills": [
+                "5.B"
+              ],
+              "requires": [],
+              "estLessons": 1
+            },
+            {
+              "code": "9.2#2",
+              "label": "Explain connections between medicine and demographic change",
+              "kind": "skill",
+              "skills": [
+                "5.B"
+              ],
+              "requires": [],
+              "estLessons": 1
+            }
+          ]
+        },
+        {
+          "code": "9.3",
+          "title": "Technological Advances: Debates About the Environment After 1900",
+          "scope": "both",
+          "skills": [
+            "4.B"
+          ],
+          "requires": [
+            "9.2"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "9.3#1",
+              "label": "Industrial pollution, climate change and conservation",
+              "kind": "concept",
+              "skills": [
+                "4.B"
+              ],
+              "requires": [],
+              "estLessons": 1
+            },
+            {
+              "code": "9.3#2",
+              "label": "Situate environmental debates in their context",
+              "kind": "skill",
+              "skills": [
+                "4.B"
+              ],
+              "requires": [],
+              "estLessons": 1
+            }
+          ]
+        },
+        {
+          "code": "9.4",
+          "title": "Economics in the Global Age",
+          "scope": "both",
+          "skills": [
+            "2.C"
+          ],
+          "requires": [
+            "9.3"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "9.4#1",
+              "label": "Free trade, multinationals and international institutions",
+              "kind": "concept",
+              "skills": [
+                "2.C"
+              ],
+              "requires": [],
+              "estLessons": 1
+            },
+            {
+              "code": "9.4#2",
+              "label": "Explain how the situation of a globalization-era source limits its use",
+              "kind": "skill",
+              "skills": [
+                "2.C"
+              ],
+              "requires": [],
+              "estLessons": 1
+            }
+          ]
+        },
+        {
+          "code": "9.5",
+          "title": "Calls for Reform and Responses After 1900",
+          "scope": "both",
+          "skills": [
+            "4.B"
+          ],
+          "requires": [
+            "9.4"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "9.5#1",
+              "label": "Human rights, women's rights and labor movements",
+              "kind": "concept",
+              "skills": [
+                "4.B"
+              ],
+              "requires": [],
+              "estLessons": 1
+            },
+            {
+              "code": "9.5#2",
+              "label": "Situate reform movements in their context",
+              "kind": "skill",
+              "skills": [
+                "4.B"
+              ],
+              "requires": [],
+              "estLessons": 1
+            }
+          ]
+        },
+        {
+          "code": "9.6",
+          "title": "Globalized Culture After 1900",
+          "scope": "both",
+          "skills": [
+            "4.B"
+          ],
+          "requires": [
+            "9.5"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "9.6#1",
+              "label": "Mass media, migration and popular culture",
+              "kind": "concept",
+              "skills": [
+                "4.B"
+              ],
+              "requires": [],
+              "estLessons": 1
+            },
+            {
+              "code": "9.6#2",
+              "label": "Situate cultural globalization in its context",
+              "kind": "skill",
+              "skills": [
+                "4.B"
+              ],
+              "requires": [],
+              "estLessons": 1
+            }
+          ]
+        },
+        {
+          "code": "9.7",
+          "title": "Resistance to Globalization After 1900",
+          "scope": "both",
+          "skills": [
+            "2.C"
+          ],
+          "requires": [
+            "9.6"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "9.7#1",
+              "label": "Traditionalism, fundamentalism and anti-globalization protest",
+              "kind": "concept",
+              "skills": [
+                "2.C"
+              ],
+              "requires": [],
+              "estLessons": 1
+            },
+            {
+              "code": "9.7#2",
+              "label": "Explain the significance of a source's audience and purpose",
+              "kind": "skill",
+              "skills": [
+                "2.C"
+              ],
+              "requires": [],
+              "estLessons": 1
+            }
+          ]
+        },
+        {
+          "code": "9.8",
+          "title": "Institutions Developing in a Globalized World",
+          "scope": "both",
+          "skills": [
+            "3.C"
+          ],
+          "requires": [
+            "9.7"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "9.8#1",
+              "label": "United Nations, WTO, NGOs and regional blocs",
+              "kind": "concept",
+              "skills": [
+                "3.C"
+              ],
+              "requires": [],
+              "estLessons": 1
+            },
+            {
+              "code": "9.8#2",
+              "label": "Compare arguments about international institutions",
+              "kind": "skill",
+              "skills": [
+                "3.C"
+              ],
+              "requires": [],
+              "estLessons": 1
+            }
+          ]
+        },
+        {
+          "code": "9.9",
+          "title": "Continuity and Change in a Globalized World",
+          "scope": "both",
+          "skills": [
+            "6.D"
+          ],
+          "requires": [
+            "9.8"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "9.9#1",
+              "label": "Weigh continuity and change since 1900",
+              "kind": "skill",
+              "skills": [
+                "6.D"
+              ],
+              "requires": [],
+              "estLessons": 1
+            },
+            {
+              "code": "9.9#2",
+              "label": "Qualify an argument with diverse evidence",
+              "kind": "skill",
+              "skills": [
+                "6.D"
+              ],
+              "requires": [],
+              "estLessons": 1
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

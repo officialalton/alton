@@ -1,0 +1,633 @@
+{
+ "run": "wh-f4",
+ "generatedAt": "2026-10-15",
+ "passed": [
+  "wh-f4:ap_world_history-wh1_saq2-k0",
+  "wh-f4:ap_world_history-wh1_dbq-k0",
+  "wh-f4:ap_world_history-wh1_leq-k0",
+  "wh-f4:ap_world_history-wh2_saq3-k0"
+ ],
+ "rejected": [],
+ "audit": [
+  {
+   "id": "wh1_saq2",
+   "tier": "high",
+   "options": [
+    {
+     "k": 0,
+     "total": 3,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 1,
+     "total": 3,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 2,
+     "total": 3,
+     "spread": 0,
+     "flagged": true,
+     "flags": [
+      "inaccurate:Overstatement. The Mongol Empire at its height covered roughly 24 million km² of Eurasia's ~55 million km² — a very larg"
+     ]
+    },
+    {
+     "k": 3,
+     "total": 3,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 4,
+     "total": 3,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 5,
+     "total": 3,
+     "spread": 0,
+     "flagged": true,
+     "flags": [
+      "inaccurate:\"The Mongol Empire conquered most of Eurasia\" is an overstatement. Even at its greatest extent (c. 24 million km²) the M"
+     ]
+    }
+   ],
+   "chosen": 0
+  },
+  {
+   "id": "wh1_saq2",
+   "tier": "mid",
+   "options": [
+    {
+     "k": 0,
+     "total": 2,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 1,
+     "total": 2,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 2,
+     "total": 2,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 3,
+     "total": 2,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 4,
+     "total": 2,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 5,
+     "total": 2,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    }
+   ],
+   "chosen": 0
+  },
+  {
+   "id": "wh1_saq2",
+   "tier": "low",
+   "options": [
+    {
+     "k": 0,
+     "total": 1,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 1,
+     "total": 1,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 2,
+     "total": 1,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 3,
+     "total": 1,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 4,
+     "total": 1,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 5,
+     "total": 1,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    }
+   ],
+   "chosen": 0
+  },
+  {
+   "id": "wh1_dbq",
+   "tier": "high",
+   "options": [
+    {
+     "k": 0,
+     "total": 7,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 1,
+     "total": 6,
+     "spread": 0,
+     "flagged": true,
+     "flags": [
+      "inaccurate:The sample says Engels 'helped run his family's cotton business in Manchester' at the time he observed factory life. Whe"
+     ]
+    },
+    {
+     "k": 2,
+     "total": 7,
+     "spread": 1,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 3,
+     "total": 7,
+     "spread": 1,
+     "flagged": true,
+     "flags": [
+      "inaccurate:At the time Engels gathered material for The Condition of the Working Class in England (1842–44), he was a young clerk/t"
+     ]
+    },
+    {
+     "k": 4,
+     "total": 7,
+     "spread": 1,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 5,
+     "total": 7,
+     "spread": 1,
+     "flagged": true,
+     "flags": [
+      "inaccurate:Overstated. When Engels wrote The Condition of the Working Class in England (researched 1842–44, published 1845) he was "
+     ]
+    }
+   ],
+   "chosen": 0
+  },
+  {
+   "id": "wh1_dbq",
+   "tier": "mid",
+   "options": [
+    {
+     "k": 0,
+     "total": 5,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 1,
+     "total": 3,
+     "spread": 1,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 2,
+     "total": 4,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 3,
+     "total": 3,
+     "spread": 0,
+     "flagged": true,
+     "flags": [
+      "inaccurate:The Treaty of Tientsin was signed in June 1858 during the Second Opium War (1856–1860), not after it; hostilities resume"
+     ]
+    },
+    {
+     "k": 4,
+     "total": 4,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 5,
+     "total": 3,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    }
+   ],
+   "chosen": 2
+  },
+  {
+   "id": "wh1_dbq",
+   "tier": "low",
+   "options": [
+    {
+     "k": 0,
+     "total": 2,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 1,
+     "total": 2,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 2,
+     "total": 3,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 3,
+     "total": 2,
+     "spread": 1,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 4,
+     "total": 2,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 5,
+     "total": 2,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    }
+   ],
+   "chosen": 0
+  },
+  {
+   "id": "wh1_leq",
+   "tier": "high",
+   "options": [
+    {
+     "k": 0,
+     "total": 6,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 1,
+     "total": 6,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 2,
+     "total": 6,
+     "spread": 0,
+     "flagged": true,
+     "flags": [
+      "inaccurate:Overstatement. The Mongol Empire at its height covered roughly a quarter of Eurasia's land area (most of Central Asia, C"
+     ]
+    },
+    {
+     "k": 3,
+     "total": 6,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 4,
+     "total": 6,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 5,
+     "total": 6,
+     "spread": 0,
+     "flagged": true,
+     "flags": [
+      "inaccurate:Overstatement. The Mongol Empire, though the largest contiguous land empire in history, covered roughly 24 million km² o"
+     ]
+    }
+   ],
+   "chosen": 0
+  },
+  {
+   "id": "wh1_leq",
+   "tier": "mid",
+   "options": [
+    {
+     "k": 0,
+     "total": 4,
+     "spread": 1,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 1,
+     "total": 5,
+     "spread": 1,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 2,
+     "total": 6,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 3,
+     "total": 6,
+     "spread": 1,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 4,
+     "total": 5,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 5,
+     "total": 5,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    }
+   ],
+   "chosen": 0
+  },
+  {
+   "id": "wh1_leq",
+   "tier": "low",
+   "options": [
+    {
+     "k": 0,
+     "total": 3,
+     "spread": 2,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 1,
+     "total": 3,
+     "spread": 1,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 2,
+     "total": 1,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 3,
+     "total": 1,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 4,
+     "total": 3,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 5,
+     "total": 0,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    }
+   ],
+   "chosen": 2
+  },
+  {
+   "id": "wh2_saq3",
+   "tier": "high",
+   "options": [
+    {
+     "k": 0,
+     "total": 3,
+     "spread": 0,
+     "flagged": true,
+     "flags": [
+      "inaccurate:The sample says that 'after Kublai Khan founded the Yuan dynasty in China, he sent envoys demanding that Japan submit.' "
+     ]
+    },
+    {
+     "k": 1,
+     "total": 3,
+     "spread": 0,
+     "flagged": true,
+     "flags": [
+      "inaccurate:The chronology is reversed. Kublai's first letters and envoys demanding Japan's submission were sent in 1266–1268 (reach"
+     ]
+    },
+    {
+     "k": 2,
+     "total": 3,
+     "spread": 0,
+     "flagged": true,
+     "flags": [
+      "inaccurate:The sample says that 'after Kublai Khan founded the Yuan dynasty, he sent envoys to Japan demanding that it submit.' The"
+     ]
+    },
+    {
+     "k": 3,
+     "total": 3,
+     "spread": 0,
+     "flagged": true,
+     "flags": [
+      "inaccurate:The response says that 'after Kublai Khan founded the Yuan dynasty, he sent envoys demanding that Japan submit.' Kublai'"
+     ]
+    },
+    {
+     "k": 4,
+     "total": 3,
+     "spread": 0,
+     "flagged": true,
+     "flags": [
+      "inaccurate:The response states that Kublai Khan sent envoys demanding Japan's submission 'after' he founded the Yuan dynasty. Kubla"
+     ]
+    },
+    {
+     "k": 5,
+     "total": 3,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    }
+   ],
+   "chosen": 5
+  },
+  {
+   "id": "wh2_saq3",
+   "tier": "mid",
+   "options": [
+    {
+     "k": 0,
+     "total": 3,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 1,
+     "total": 2,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 2,
+     "total": 2,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 3,
+     "total": 2,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 4,
+     "total": 2,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 5,
+     "total": 2,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    }
+   ],
+   "chosen": 1
+  },
+  {
+   "id": "wh2_saq3",
+   "tier": "low",
+   "options": [
+    {
+     "k": 0,
+     "total": 1,
+     "spread": 0,
+     "flagged": true,
+     "flags": [
+      "misdescribes_source:The prompt identifies the image as presenting the Japanese warriors who fought the Mongols (almost certainly the Mōko Sh"
+     ]
+    },
+    {
+     "k": 1,
+     "total": 1,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 2,
+     "total": 1,
+     "spread": 0,
+     "flagged": true,
+     "flags": [
+      "misdescribes_source:The response says the image shows 'Mongol soldiers riding on horses through the trees with bows.' The image used for thi"
+     ]
+    },
+    {
+     "k": 3,
+     "total": 2,
+     "spread": 0,
+     "flagged": true,
+     "flags": [
+      "inaccurate:The Mongol campaigns against the Rus' principalities (1237–1240) were not easy conquests: cities such as Ryazan, Vladimi"
+     ]
+    },
+    {
+     "k": 4,
+     "total": 1,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 5,
+     "total": 1,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    }
+   ],
+   "chosen": 1
+  }
+ ]
+}

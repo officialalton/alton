@@ -23,10 +23,11 @@ export const NOT_ASSESSED_MC: Record<string, string[]> = {
   ap_macroeconomics: ["4.A", "4.B", "4.C"],
   ap_physics_1: ["1.A", "1.B", "1.C", "3.A"], // 2027 CED p.172: Practice 1 과 3.A 는 MC 에서 평가하지 않는다
   ap_chemistry: ["3.A", "3.B", "3.C"], // AP Chemistry CED(2024) Exam Information p.207: Practice 3 은 MC 에서 평가하지 않는다
+  ap_world_history: ["6.A", "6.B", "6.C", "6.D"], // CED Exam Information p.199: MC 는 논증(Skill 6)을 명시적으로 평가하지 않는다
   ap_us_history: ["6.A", "6.B", "6.C", "6.D"], // CED p.501: MC 는 논증(Skill 6)을 명시적으로 평가하지 않는다
   ap_psychology: ["4.A", "4.B"], // AP Psychology CED(Fall 2025) Exam Information p.148: MC 는 Practice 1-3 만 평가한다(Practice 4 논증은 FRQ 전용)
 };
-export const OPTION_COUNT: Record<string, number> = { ap_calculus_ab: 4, ap_biology: 4, ap_microeconomics: 5, ap_macroeconomics: 5, ap_psychology: 4, ap_us_history: 4, ap_statistics: 4, ap_physics_1: 4, ap_chemistry: 4, ap_computer_science_a: 4 };
+export const OPTION_COUNT: Record<string, number> = { ap_calculus_ab: 4, ap_biology: 4, ap_microeconomics: 5, ap_macroeconomics: 5, ap_psychology: 4, ap_us_history: 4, ap_world_history: 4, ap_statistics: 4, ap_physics_1: 4, ap_chemistry: 4, ap_computer_science_a: 4 };
 /** 수식 구분자 규칙이 적용되는 수학·통계 과목(달러 기호가 통화인 Micro 는 제외). 통계는 정수·확률·통계량을 모두 $...$ 안에 쓴다. */
 const MATH_SUBJECT = /^ap_(calculus|statistics|physics|chemistry|biology)/;
 

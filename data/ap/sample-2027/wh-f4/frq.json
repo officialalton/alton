@@ -1,0 +1,942 @@
+[
+ {
+  "id": "wh1_saq2",
+  "spec": {
+   "id": "wh1_saq2",
+   "exam": "WH1",
+   "template": "saq2",
+   "era": 1,
+   "units": [
+    2
+   ],
+   "focus": "The Black Death as a disease that moved along trade routes, and its social and economic effects in Europe and the Mediterranean (do not tie the plague to the fall of any particular dynasty)",
+   "sources": [
+    {
+     "id": "txt-boccaccio-plague-1353",
+     "context": "Giovanni Boccaccio was a writer from Florence, Italy; he wrote this introduction a few years after a plague struck Florence in 1348."
+    }
+   ],
+   "seed": 3122
+  },
+  "payload": {
+   "schema_version": "whap-frq-1",
+   "task_type": "saq",
+   "template": "saq2",
+   "era": 1,
+   "units": [
+    2
+   ],
+   "title": "Boccaccio on the Plague of 1348: Trade Routes, Contagion, and Consequences",
+   "prompt": {
+    "scenario": "In the period c. 1200 to c. 1450, the trade routes that linked East Asia, Central Asia, the Middle East, and the Mediterranean carried goods, people, and ideas, and they also carried disease. In the late 1340s a deadly epidemic later called the Black Death reached Italy and much of the rest of Europe and the Mediterranean world.",
+    "task": "Using the excerpt, answer (a), (b), and (c).",
+    "requirements": [
+     "Each part is answered in a few sentences.",
+     "Part B must use a development from c. 1200 to c. 1350 that is not already named in the excerpt.",
+     "Part C must name an effect in Europe or the Mediterranean world between c. 1348 and c. 1450."
+    ],
+    "parts": [
+     {
+      "label": "A",
+      "prompt": "Briefly describe ONE explanation Boccaccio gives in the excerpt for why the pestilence came to Florence or how it spread among people.",
+      "points": 1
+     },
+     {
+      "label": "B",
+      "prompt": "Briefly explain ONE specific historical development in the period c. 1200 to c. 1350 that helps explain how a disease that Boccaccio says first appeared in the East was able to reach Italy. Do not use an example that is already named in the excerpt.",
+      "points": 1
+     },
+     {
+      "label": "C",
+      "prompt": "Briefly explain ONE social or economic effect of the Black Death in Europe or the Mediterranean world in the period c. 1348 to c. 1450.",
+      "points": 1
+     }
+    ]
+   },
+   "sources": [
+    {
+     "id": "A",
+     "kind": "primary_text",
+     "title": "The Decameron, Introduction to the First Day: the plague of 1348 in Florence (excerpt)",
+     "attribution": "Giovanni Boccaccio (translated by John Payne), c. 1349-1353 (text); 1886 (Payne translation). Project Gutenberg eBook #23700. Reuse: public domain in the United States (published before 1929). excerpted (2 segments joined by [...]); whitespace normalized; no wording changed.",
+     "context": "Giovanni Boccaccio was a writer from Florence, Italy; he wrote this introduction a few years after a plague struck Florence in 1348.",
+     "real_data": true,
+     "source_registry_id": "txt-boccaccio-plague-1353",
+     "source_sha256": "890b1bf6cfb7027fcd9b6f31e5965f1d0b36a5e012b1b29e78e4d4187c215cec",
+     "body": "I say, then, that the years [of the era] of the fruitful Incarnation of the Son of God had attained to the number of one thousand three hundred and forty-eight, when into the notable city of Florence, fair over every other of Italy, there came the death-dealing pestilence, which, through the operation of the heavenly bodies or of our own iniquitous dealings, being sent down upon mankind for our correction by the just wrath of God, had some years before appeared in the parts of the East and after having bereft these latter of an innumerable number of inhabitants, extending without cease from one place to another, had now unhappily spread towards the West. [...] And this pestilence was the more virulent for that, by communication with those who were sick thereof, it gat hold upon the sound, no otherwise than fire upon things dry or greasy, whenas they are brought very near thereunto. Nay, the mischief was yet greater; for that not only did converse and consortion with the sick give to the sound infection of cause of common death, but the mere touching of the clothes or of whatsoever other thing had been touched or used of the sick appeared of itself to communicate the malady to the toucher.",
+     "provenance": {
+      "kind": "real_historical_source",
+      "real_data": true,
+      "note": "registry txt-boccaccio-plague-1353"
+     }
+    }
+   ],
+   "rubric": {
+    "rubric_id": "whap-v1",
+    "total_points": 3,
+    "rows": [
+     {
+      "row_id": "a",
+      "name": "Part A",
+      "max": 1,
+      "descriptors": {
+       "0": "The response does not correctly describe an explanation the excerpt gives, or it only repeats the date or the city's name.",
+       "1": "The response correctly describes one explanation for the plague's cause or spread that Boccaccio gives in the excerpt."
+      },
+      "task_specific": "The response describes one explanation from the excerpt: the plague as God's just punishment for human sins, the influence of the heavenly bodies (astrological causes), the disease moving from the East toward the West from place to place, or contagion through contact with the sick or with their clothing and belongings."
+     },
+     {
+      "row_id": "b",
+      "name": "Part B",
+      "max": 1,
+      "descriptors": {
+       "0": "The response gives no relevant development, gives one from outside the period, only repeats the excerpt, or does not connect the development to the movement of disease.",
+       "1": "The response explains one accurate development from c. 1200 to c. 1350 that helps account for how the disease traveled from the East to Italy."
+      },
+      "task_specific": "The response explains one specific development from c. 1200 to c. 1350 that connected the East with Italy, such as Mongol rule over much of Eurasia linking overland trade routes, Genoese and Venetian trading posts on the Black Sea such as Caffa, or the Mediterranean shipping networks of Italian merchant cities, and ties it to how disease could travel."
+     },
+     {
+      "row_id": "c",
+      "name": "Part C",
+      "max": 1,
+      "descriptors": {
+       "0": "The response gives no accurate effect, gives an effect outside the stated region or years, or only says that many people died without explaining a social or economic result.",
+       "1": "The response explains one accurate social or economic effect of the Black Death in Europe or the Mediterranean world within the stated years."
+      },
+      "task_specific": "The response explains one social or economic effect of the Black Death in Europe or the Mediterranean world from c. 1348 to c. 1450, such as labor shortages and rising wages, laws that tried to hold wages down, peasant unrest, the weakening of serfdom in Western Europe, attacks on Jewish communities, flagellant movements, or new quarantine practices in port cities."
+     }
+    ],
+    "scoring_notes": [
+     "Each part is worth 1 point; score each part on its own, and do not penalize errors in one part when scoring another.",
+     "In Part A, accept either the stated causes (divine wrath, heavenly bodies, human sin) or the stated means of spread (from East to West, by contact with the sick, by touching their clothing or belongings).",
+     "In Part B, a general reference to trade earns credit only if the response names a specific network, empire, or set of merchants and explains how it linked the East with Italy.",
+     "In Part C, statements about mortality alone do not earn the point; the response must explain a social or economic consequence.",
+     "Do not credit responses that blame the plague for the fall of a particular dynasty or state.",
+     "ALTON reference — not official AP scoring"
+    ]
+   },
+   "expected_features": {
+    "defensible_theses": [],
+    "contextualization_ideas": [
+     "Increased Afro-Eurasian connectivity under the Mongols and through Mediterranean commerce in the thirteenth and fourteenth centuries",
+     "Fourteenth-century Christian beliefs that linked disaster to divine punishment"
+    ],
+    "outside_evidence": [
+     "The Mongol Empire and the Pax Mongolica across Eurasia",
+     "Genoese Caffa and other Italian trading posts on the Black Sea",
+     "Mediterranean shipping networks run by Genoa and Venice",
+     "England's Ordinance of Labourers (1349) and Statute of Labourers (1351)",
+     "The English Peasants' Revolt of 1381, which was tied to post-plague labor tensions and a poll tax",
+     "Attacks on Jewish communities, such as in Strasbourg in 1349",
+     "Flagellant movements",
+     "Ragusa's 1377 isolation rule for travelers"
+    ],
+    "reasoning_types": [
+     "Sourcing and claim identification (Part A)",
+     "Causation: developments that made the spread of disease possible (Part B)",
+     "Causation: effects of the Black Death (Part C)"
+    ],
+    "doc_uses": [
+     {
+      "source_id": "Boccaccio, Decameron, Introduction to the First Day",
+      "usable_for": "Identifying fourteenth-century explanations for the plague's cause and spread, and evidence that people knew it had traveled from the East",
+      "sourcing": "A Florentine writer composing a literary work a few years after the plague of 1348; his explanations reflect the religious and astrological beliefs of the time and what people observed about contagion."
+     }
+    ],
+    "saq_answers": {
+     "a": [
+      "Boccaccio says the plague was sent by the just wrath of God to correct people for their sins.",
+      "He suggests that the plague may have come through the operation of the heavenly bodies, which is an astrological explanation.",
+      "He describes the disease beginning in the East and moving from place to place until it reached the West and Florence.",
+      "He says healthy people caught the disease by talking with or being near the sick, and even by touching their clothes or things they had used."
+     ],
+     "b": [
+      "The Mongol Empire united much of Eurasia in the thirteenth century and protected Silk Road trade, so merchants, caravans, and the rats and fleas they carried could travel long distances from Central Asia toward the Black Sea.",
+      "Genoese and Venetian merchants kept trading posts on the Black Sea, such as Genoese Caffa in Crimea, which tied the Mongol-ruled steppe to Mediterranean shipping. Ships from that region carried the disease to Mediterranean ports in 1347.",
+      "Italian merchant cities such as Genoa and Venice ran dense Mediterranean sea trade linking ports in the eastern Mediterranean and Black Sea with Italy, so infected sailors, cargo, and rats could reach Italian cities fast.",
+      "Growing trade between the Indian Ocean, Middle East, and Mediterranean through Mamluk-controlled Egypt and Syria brought regular contact between Eastern ports and Italian merchants, giving disease a path westward."
+     ],
+     "c": [
+      "The huge number of deaths caused labor shortages, which let surviving peasants and workers demand higher wages. Governments such as England's answered with the Statute of Labourers (1351) to try to cap wages.",
+      "In much of Western Europe, labor shortages gave peasants more bargaining power and helped weaken serfdom over the following decades.",
+      "Fear and searches for someone to blame led to violent attacks on Jewish communities in parts of Europe in 1348 and 1349, including the massacre in Strasbourg in 1349.",
+      "Port cities developed public health measures, such as Ragusa's 1377 rule isolating arriving travelers, which was an early form of quarantine.",
+      "Flagellant groups marched through towns whipping themselves as penance, which shows how the plague strengthened religious anxiety and the belief that it was divine punishment."
+     ]
+    },
+    "common_pitfalls": [
+     "In Part A, saying only that the plague arrived in 1348 or that it was deadly, without describing an explanation the excerpt gives.",
+     "In Part B, repeating Boccaccio's statement that the disease came from the East without naming a specific historical development that linked East and West.",
+     "In Part B, using developments from after 1350, or ones from outside the trade networks, such as Portuguese voyages.",
+     "In Part C, saying only that many people died, with no social or economic consequence.",
+     "Linking the plague to the fall of a specific dynasty, or making disputed single-cause claims.",
+     "Treating Boccaccio's religious or astrological explanations as medically correct instead of as fourteenth-century beliefs."
+    ],
+    "facts": [
+     "Boccaccio was a Florentine writer, and he wrote the Decameron in the years shortly after the 1348 plague.",
+     "The excerpt offers both religious and astrological explanations (God's just wrath sent to correct human sin, and the operation of the heavenly bodies), along with the observation that the disease spread by contact.",
+     "The excerpt says the pestilence appeared earlier in the East and spread from place to place toward the West.",
+     "In the thirteenth and fourteenth centuries the Mongol Empire and its successor khanates controlled much of Eurasia, which made overland trade across the Silk Roads easier.",
+     "Genoa held the trading port of Caffa in Crimea on the Black Sea, and plague reached Mediterranean ports, Sicily among them, by ship in 1347.",
+     "Across Europe and the Mediterranean, the Black Death killed a large share of the population, often estimated at around one third or more in many areas.",
+     "After the plague, England's Ordinance of Labourers (1349) and Statute of Labourers (1351) tried to hold wages at pre-plague levels.",
+     "Ragusa (Dubrovnik) introduced an isolation period for arriving travelers in 1377, an early form of quarantine."
+    ]
+   },
+   "samples": [],
+   "provenance": {
+    "kind": "alton_authored_from_real_sources",
+    "note": "Prompts, rubric text, expected answers and sample responses are ALTON-authored practice material; every source is a real historical document, image or dataset (see sources[].source_registry_id)."
+   }
+  },
+  "fact": []
+ },
+ {
+  "id": "wh1_dbq",
+  "spec": {
+   "id": "wh1_dbq",
+   "exam": "WH1",
+   "template": "dbq",
+   "era": 3,
+   "units": [
+    5,
+    6,
+    7
+   ],
+   "focus": "How industrialization changed relationships between industrial and non-industrial societies and conditions within industrial societies, 1776-1922",
+   "sources": [
+    {
+     "id": "txt-smith-1776",
+     "context": "Adam Smith was a Scottish moral philosopher who published this book in 1776."
+    },
+    {
+     "id": "txt-qianlong-1793",
+     "context": "The Qianlong Emperor of China wrote this reply to King George III of Britain in 1793, after a British ambassador asked for expanded trade and a permanent British envoy in Beijing."
+    },
+    {
+     "id": "txt-engels-1845",
+     "context": "Friedrich Engels, a German who helped manage his family's cotton business in Manchester, England, published this book in German in 1845."
+    },
+    {
+     "id": "txt-tientsin-1858",
+     "context": "Britain and China signed this treaty in June 1858, during the Second Opium War."
+    },
+    {
+     "id": "img-dore-london-1872",
+     "context": "The French artist Gustave Dore drew scenes of London for a book published in 1872."
+    },
+    {
+     "id": "txt-gandhi-1909-machinery",
+     "context": "Mohandas Gandhi, an Indian lawyer, wrote this book in 1909 as a dialogue between a Reader and an Editor; the Editor states Gandhi's views."
+    },
+    {
+     "id": "txt-sun-1922",
+     "context": "Sun Yat-sen, a leader of the Chinese revolution of 1911, wrote this plan to attract foreign investment to China after the First World War; it was published in English in 1922."
+    }
+   ],
+   "seed": 3124
+  },
+  "payload": {
+   "schema_version": "whap-frq-1",
+   "task_type": "dbq",
+   "template": "dbq",
+   "era": 3,
+   "units": [
+    5,
+    6,
+    7
+   ],
+   "title": "Industrialization, Industrial Societies, and Their Relationships with Non-Industrial Societies, 1776-1922",
+   "prompt": {
+    "scenario": "Starting in Britain in the late eighteenth century, industrialization changed how goods were made, where people lived and worked, and how states dealt with one another. The seven documents run from 1776 to 1922. They come from Britain, China, and India and include an economist, a Qing emperor, a social critic, a treaty, an artist, and two Asian nationalist leaders.",
+    "task": "Evaluate the extent to which industrialization transformed societies in the period 1776 to 1922, both in conditions within industrializing states and in their relationships with societies that had not industrialized.",
+    "requirements": [
+     "Respond to the prompt with a historically defensible thesis or claim that establishes a line of reasoning.",
+     "Describe a broader historical context relevant to the prompt.",
+     "Support an argument in response to the prompt using at least four documents.",
+     "Use at least one additional piece of specific historical evidence (beyond that found in the documents) relevant to an argument about the prompt.",
+     "For at least two documents, explain how or why the document's point of view, purpose, historical situation, and/or audience is relevant to an argument.",
+     "Use evidence to corroborate, qualify, or modify an argument that addresses the prompt."
+    ]
+   },
+   "sources": [
+    {
+     "id": "1",
+     "kind": "primary_text",
+     "title": "An Inquiry into the Nature and Causes of the Wealth of Nations, Book I, ch. 1 (excerpt on a pin factory)",
+     "attribution": "Adam Smith (Scottish moral philosopher and economist), 1776 (London). Project Gutenberg eBook #3300. Reuse: public domain in the United States (published before 1929). excerpted (one contiguous passage); whitespace normalized; no wording changed.",
+     "context": "Adam Smith was a Scottish moral philosopher who published this book in 1776.",
+     "real_data": true,
+     "source_registry_id": "txt-smith-1776",
+     "source_sha256": "92f2374006641318e061ec9a006d98255d05b64e633a93361cc5fd6eacd4bc30",
+     "body": "To take an example, therefore, from a very trifling manufacture, but one in which the division of labour has been very often taken notice of, the trade of a pin-maker: a workman not educated to this business (which the division of labour has rendered a distinct trade), nor acquainted with the use of the machinery employed in it (to the invention of which the same division of labour has probably given occasion), could scarce, perhaps, with his utmost industry, make one pin in a day, and certainly could not make twenty. But in the way in which this business is now carried on, not only the whole work is a peculiar trade, but it is divided into a number of branches, of which the greater part are likewise peculiar trades. One man draws out the wire; another straights it; a third cuts it; a fourth points it; a fifth grinds it at the top for receiving the head; to make the head requires two or three distinct operations; to put it on is a peculiar business; to whiten the pins is another; it is even a trade by itself to put them into the paper; and the important business of making a pin is, in this manner, divided into about eighteen distinct operations",
+     "provenance": {
+      "kind": "real_historical_source",
+      "real_data": true,
+      "note": "registry txt-smith-1776"
+     }
+    },
+    {
+     "id": "2",
+     "kind": "primary_text",
+     "title": "Edict of the Qianlong Emperor to King George III of Great Britain, 1793 (excerpt)",
+     "attribution": "Qianlong Emperor of China (edict translated by Sir Edmund Backhouse and J. O. P. Bland), 1793 (September; translation published 1914). Internet Archive (Annals and Memoirs of the Court of Peking, 1914; OCR text). Reuse: public domain in the United States (published before 1929). excerpted (one contiguous passage); whitespace normalized; OCR line-break hyphenation rejoined; an OCR page heading ('324 THE COURT OF PEKING') removed from inside the passage; no wording changed.",
+     "context": "The Qianlong Emperor of China wrote this reply to King George III of Britain in 1793, after a British ambassador asked for expanded trade and a permanent British envoy in Beijing.",
+     "real_data": true,
+     "source_registry_id": "txt-qianlong-1793",
+     "source_sha256": "d165dd31d31541ff3f579a9cf5b8a81cd7dac5ad2896851df58af838729c5700",
+     "body": "Swaying the wide world, I have but one aim in view, namely, to maintain a perfect governance and to fulfil the duties of the State : strange and costly objects do not interest me. If I have commanded that the tribute offerings sent by you, O King, are to be accepted, this was solely in consideration for the spirit which prompted you to dispatch them from afar. Our dynasty's majestic virtue has penetrated unto every country under Heaven, and Kings of all nations have offered their costly tribute by land and sea. As your Ambassador can see for himself, we possess all things. I set no value on objects strange or ingenious, and have no use for your country's manufactures.",
+     "provenance": {
+      "kind": "real_historical_source",
+      "real_data": true,
+      "note": "registry txt-qianlong-1793"
+     }
+    },
+    {
+     "id": "3",
+     "kind": "primary_text",
+     "title": "The Condition of the Working-Class in England in 1844, 'The Industrial Proletariat' (excerpt)",
+     "attribution": "Friedrich Engels (German businessman and social critic; translated by Florence Kelley Wischnewetzky), 1845 (German original); 1887 English translation (New York). Project Gutenberg eBook #17306. Reuse: public domain in the United States (published before 1929). excerpted (one contiguous passage); whitespace normalized; no wording changed.",
+     "context": "Friedrich Engels, a German who helped manage his family's cotton business in Manchester, England, published this book in German in 1845.",
+     "real_data": true,
+     "source_registry_id": "txt-engels-1845",
+     "source_sha256": "6209d0a7805b72f03eeb241b9fa560b39308f0332ef6560d4c493dfabe26b5c0",
+     "body": "The history of the proletariat in England begins with the second half of the last century, with the invention of the steam-engine and of machinery for working cotton. These inventions gave rise, as is well known, to an industrial revolution, a revolution which altered the whole civil society; one, the historical importance of which is only now beginning to be recognised. England is the classic soil of this transformation, which was all the mightier, the more silently it proceeded; and England is, therefore, the classic land of its chief product also, the proletariat. Only in England can the proletariat be studied in all its relations and from all sides.",
+     "provenance": {
+      "kind": "real_historical_source",
+      "real_data": true,
+      "note": "registry txt-engels-1845"
+     }
+    },
+    {
+     "id": "4",
+     "kind": "primary_text",
+     "title": "Treaty of Tientsin (Tianjin) between Great Britain and China, Articles XV and XVI (excerpt)",
+     "attribution": "Queen Victoria's government and the Xianfeng Emperor's high commissioners (treaty signed by Lord Elgin, Kweiliang and Hwashana), 1858 (June 26). Wikisource (English Wikisource transcription). Reuse: public domain (published before 1929). excerpted; whitespace normalized; wiki markup removed; no wording changed.",
+     "context": "Britain and China signed this treaty in June 1858, during the Second Opium War.",
+     "real_data": true,
+     "source_registry_id": "txt-tientsin-1858",
+     "source_sha256": "173eb06aec36a5cdeb579a1b32a09e7fcd59912a51ac8f16f4d19a44b5bde143",
+     "body": "All questions in regard to rights, whether of property or person, arising between British subjects, shall be subject to the jurisdiction of the British authorities. ARTICLE XVI. Chinese subjects who may be guilty of any criminal act towards British subjects shall be arrested and punished by the Chinese authorities, according to the Laws of China. British subjects who may commit any crime in China shall be tried and punished by the Consul, or other public functionary authorized thereto, according to the Laws of Great Britain. Justice shall be equitably and impartially administered on both sides.",
+     "provenance": {
+      "kind": "real_historical_source",
+      "real_data": true,
+      "note": "registry txt-tientsin-1858"
+     }
+    },
+    {
+     "id": "5",
+     "kind": "image",
+     "title": "Over London - by Rail (engraving after Gustave Dore)",
+     "attribution": "Gustave Dore (artist); engraved by Adolphe Francois Pannemaker; from London: A Pilgrimage (text by Blanchard Jerrold), 1872. Wikimedia Commons (file page records the source institution and public-domain tag). Reuse: public domain (published 1872; artist died 1883). unmodified except Commons' 1200px-wide JPEG rendering of the file.",
+     "context": "The French artist Gustave Dore drew scenes of London for a book published in 1872.",
+     "real_data": true,
+     "source_registry_id": "img-dore-london-1872",
+     "source_sha256": "f428487dc54371ac5be153301ac32690e5e7b53c100ed7d27165da67a6ab15d8",
+     "body": "A dark black-and-white engraving seen through a round brick arch: rows of cramped brick houses with tall chimney pots and tiny walled back yards fall away toward a distant railway viaduct whose arches and smoking steam locomotive stand at the far end, while small figures crowd the yards and alleys below.",
+     "image": {
+      "path": "ap-sources/img-dore-london-1872/image.jpg",
+      "alt": "A dark black-and-white engraving seen through a round brick arch: rows of cramped brick houses with tall chimney pots and tiny walled back yards fall away toward a distant railway viaduct whose arches and smoking steam locomotive stand at the far end, while small figures crowd the yards and alleys below.",
+      "credit": "Over London - by Rail, engraving after Gustave Dore, London: A Pilgrimage (1872). Yale Center for British Art via Wikimedia Commons (public domain)."
+     },
+     "provenance": {
+      "kind": "real_historical_source",
+      "real_data": true,
+      "note": "registry img-dore-london-1872"
+     }
+    },
+    {
+     "id": "6",
+     "kind": "primary_text",
+     "title": "Indian Home Rule (Hind Swaraj), ch. 19 'Machinery' (excerpt)",
+     "attribution": "Mohandas K. Gandhi (Indian lawyer and political leader), 1909 (Gujarati original); English translation 1910; Madras edition. Project Gutenberg eBook #40461. Reuse: public domain in the United States (published before 1929). excerpted (one contiguous passage); whitespace normalized; no wording changed.",
+     "context": "Mohandas Gandhi, an Indian lawyer, wrote this book in 1909 as a dialogue between a Reader and an Editor; the Editor states Gandhi's views.",
+     "real_data": true,
+     "source_registry_id": "txt-gandhi-1909-machinery",
+     "source_sha256": "31fc60cc408c48ebc54d222dbdd483f8e87374c0bc3eff138bec1311c7ba8fe1",
+     "body": "Machinery has begun to desolate Europe. Ruination is now knocking at the English gates. Machinery is the chief symbol of modern civilization; it represents a great sin. The workers in the mills of Bombay have become slaves. The condition of the women working in the mills is shocking. When there were no mills, these women were not starving. If the machinery craze grows in our country, it will become an unhappy land. It may be considered a heresy, but I am bound to say that it were better for us to send money to Manchester and to use flimsy Manchester cloth than to multiply mills in India.",
+     "provenance": {
+      "kind": "real_historical_source",
+      "real_data": true,
+      "note": "registry txt-gandhi-1909-machinery"
+     }
+    },
+    {
+     "id": "7",
+     "kind": "primary_text",
+     "title": "The International Development of China, opening section (excerpt)",
+     "attribution": "Sun Yat-sen (Chinese revolutionary and first provisional president of the Republic of China), 1922 (New York: G. P. Putnam's Sons; written c. 1918-1919). Project Gutenberg eBook #45188. Reuse: public domain in the United States (published before 1929). excerpted (one contiguous passage); whitespace normalized; no wording changed.",
+     "context": "Sun Yat-sen, a leader of the Chinese revolution of 1911, wrote this plan to attract foreign investment to China after the First World War; it was published in English in 1922.",
+     "real_data": true,
+     "source_registry_id": "txt-sun-1922",
+     "source_sha256": "c4ce378b8979a06fe7043a742f8610a2d8bcdb9a226ad4f26db7c127fd67268f",
+     "body": "Where in this world can Europe and America look for a market to consume this enormous saving from the war? If the billions of dollars worth of war industries can find no place in the post-bellum readjustment, then they will be a pure economic waste. The result will not only disturb the economic condition of the producing countries, but will also be a great loss to the world at large. All the commercial nations are looking to China as the only \"dumping ground\" for their over-production. The pre-war condition of trade was unfavorable to China. The balance of imports over exports was something over one hundred million dollars gold annually.",
+     "provenance": {
+      "kind": "real_historical_source",
+      "real_data": true,
+      "note": "registry txt-sun-1922"
+     }
+    }
+   ],
+   "rubric": {
+    "rubric_id": "whap-v1",
+    "total_points": 7,
+    "rows": [
+     {
+      "row_id": "thesis",
+      "name": "Thesis/claim",
+      "max": 1,
+      "descriptors": {
+       "0": "The response has no defensible claim, or it restates the prompt, or its claim sets up no line of reasoning about the extent of transformation.",
+       "1": "The response makes a defensible claim, in the introduction or conclusion, that sets up a line of reasoning about how far industrialization changed internal conditions and/or relations with non-industrial societies."
+      },
+      "task_specific": "The response states a defensible claim about how far industrialization transformed conditions inside industrializing states, relations between industrial and non-industrial societies, or both. The claim must set up a line of reasoning, for example that it shifted power from Qing China to Britain through unequal treaties while also creating crowded cities and a new working class at home. Simply restating the prompt does not earn the point."
+     },
+     {
+      "row_id": "context",
+      "name": "Contextualization",
+      "max": 1,
+      "descriptors": {
+       "0": "The response gives no relevant context, or offers only a passing phrase not tied to the argument.",
+       "1": "The response describes a broader historical development relevant to industrialization's effects and explains how it relates to the argument."
+      },
+      "task_specific": "The response describes developments before or during the period that frame the prompt and connects them to the argument. Examples include Britain's resources and capital, the Atlantic and Asian trade networks before industry, the Qing tribute and Canton system, the spread of industry to other states after 1850, or the rise of the new imperialism."
+     },
+     {
+      "row_id": "docs",
+      "name": "Evidence from the documents",
+      "max": 2,
+      "descriptors": {
+       "0": "The response does not accurately describe the content of at least three documents, or it only quotes them with no explanation.",
+       "1": "The response accurately describes the content of at least three documents and ties them to the topic, or uses only two or three documents to support an argument.",
+       "2": "The response uses the content of at least four documents to support an argument about the extent of transformation."
+      },
+      "task_specific": "The response uses what the documents actually say or show, for instance Smith's eighteen operations, Qianlong's statement that China has no use for British manufactures, the consular jurisdiction in the 1858 treaty, Gandhi's comments on the Bombay mills, or Sun's 'dumping ground' passage. To earn 2 points, at least four documents must support an argument about the prompt."
+     },
+     {
+      "row_id": "outside",
+      "name": "Evidence beyond the documents",
+      "max": 1,
+      "descriptors": {
+       "0": "The response offers no specific outside evidence, or only names something without tying it to an argument.",
+       "1": "The response explains at least one specific, accurate piece of evidence beyond the documents in relation to an argument about the prompt."
+      },
+      "task_specific": "The response uses at least one specific piece of evidence that is not in the documents, for example the Treaty of Nanjing of 1842, the British Factory Act of 1833, the Meiji Restoration, the Self-Strengthening Movement, or the Swadeshi movement. The evidence must be explained in relation to the argument."
+     },
+     {
+      "row_id": "sourcing",
+      "name": "Sourcing (point of view, purpose, situation, audience)",
+      "max": 1,
+      "descriptors": {
+       "0": "The response sources fewer than two documents, or only labels an author without explaining why that matters.",
+       "1": "The response explains for at least two documents how point of view, purpose, historical situation, or audience is relevant to an argument."
+      },
+      "task_specific": "For two documents, the response explains why point of view, purpose, historical situation, or audience matters to the argument. Examples: Qianlong's role as emperor in a tributary system; the treaty being made during the Second Opium War; Engels's place in the Manchester cotton business; Gandhi writing as an Indian nationalist critic of modern civilization; Sun writing in English to attract foreign investors."
+     },
+     {
+      "row_id": "complexity",
+      "name": "Complex understanding",
+      "max": 1,
+      "descriptors": {
+       "0": "The response does not show a complex understanding of the extent of transformation.",
+       "1": "The response consistently qualifies or modifies its argument, for example by weighing multiple effects, relating causes to consequences across societies, or balancing change with continuity and local agency."
+      },
+      "task_specific": "The response shows complex understanding. It might weigh change against continuity, explain both internal and external effects and how they were linked, show non-industrial societies both resisting and adopting industry, or source most documents to build the argument."
+     }
+    ],
+    "scoring_notes": [
+     "Document 2 is a 1914 English translation by Backhouse and Bland. Credit students who treat its exact wording with caution, but they do not have to.",
+     "Document 5 is an artist's composed engraving. Credit readings of crowding, smoke, and the railway that stay with what the image actually shows.",
+     "Students may argue the transformation was great, limited, or uneven. Score the reasoning, not the side taken.",
+     "Document 1 predates mature factory production. Students who use it to show the logic of productivity before steam power should get credit.",
+     "ALTON reference — not official AP scoring"
+    ]
+   },
+   "expected_features": {
+    "defensible_theses": [
+     "Industrialization deeply changed relations between societies. Before steam-powered industry, Qing China could turn down British trade terms (Doc 2). By 1858 British industrial and military power forced unequal treaties with extraterritoriality (Doc 4), and by 1922 industrial nations saw China as a market for their surplus goods (Doc 7).",
+     "Inside industrial states, industrialization changed daily life more than anything else. It reorganized work into specialized tasks (Doc 1), created a new working class (Doc 3), and packed workers into crowded housing next to railways (Doc 5), and critics like Gandhi saw similar harm in Bombay's mills (Doc 6).",
+     "Industrialization changed both internal conditions and external relations, but non-industrial societies did not simply submit. They responded in different ways: Gandhi rejected machine industry (Doc 6), Sun Yat-sen tried to bring in foreign capital to industrialize China (Doc 7), and the Qing defended their sovereignty earlier (Doc 2). So the change was large but uneven, and people contested it."
+    ],
+    "contextualization_ideas": [
+     "Before industrialization, Britain had access to coal and iron, capital from Atlantic trade, and growing textile demand. Earlier, China and India had led world manufacturing in goods such as silk, porcelain, and cotton cloth.",
+     "Under the Qing Canton system, European trade with China was limited to licensed merchants at one port. Britain's trade deficit in tea led it to sell opium grown in India.",
+     "After 1850, industry spread to Western Europe, the United States, Russia, and Japan. This drove the new imperialism and the search for raw materials and markets in Asia and Africa."
+    ],
+    "outside_evidence": [
+     "The Treaty of Nanjing (1842) ended the First Opium War. It gave Hong Kong to Britain and opened five treaty ports.",
+     "Under the British Factory Act of 1833, inspectors enforced limits on child labor in textile mills.",
+     "James Watt's improvements to the steam engine, along with machines like Arkwright's water frame, mechanized cotton spinning in Britain.",
+     "Japan's Meiji Restoration of 1868 led to state-sponsored industrialization. Japan later defeated China in the Sino-Japanese War of 1894-1895.",
+     "China's Self-Strengthening Movement in the later nineteenth century built arsenals and shipyards using Western technology.",
+     "After the 1905 partition of Bengal, the Swadeshi movement in India boycotted British goods and promoted Indian-made cloth.",
+     "Marx and Engels published the Communist Manifesto in 1848.",
+     "After the Boxer Rebellion (1899-1901), China had to pay a large indemnity to foreign powers.",
+     "The Indian National Congress was founded in 1885."
+    ],
+    "reasoning_types": [
+     "Causation",
+     "Continuity and change over time",
+     "Comparison"
+    ],
+    "doc_uses": [
+     {
+      "source_id": "1",
+      "usable_for": "Shows how the division of labor multiplied output. This logic of productivity underlies industrialization and later the hunt for markets abroad.",
+      "sourcing": "Smith published this in 1776 as a moral philosopher arguing for the benefits of the division of labor. He wrote before the steam-powered factory system matured, so his view may be more optimistic and limited than later accounts."
+     },
+     {
+      "source_id": "2",
+      "usable_for": "A baseline before industrial dominance. Qing China claims to have everything it needs, treats British gifts as tribute, and rejects British manufactures.",
+      "sourcing": "As emperor, Qianlong was speaking within the tributary system, and his purpose was to assert Qing superiority to a foreign king. The text is a 1914 translation, so its exact wording should be used with care."
+     },
+     {
+      "source_id": "3",
+      "usable_for": "Links steam engines and cotton machinery to an industrial revolution that changed English society and produced a proletariat.",
+      "sourcing": "Engels was a German critic connected to his family's cotton business in Manchester. His critical view of capitalism, which grew into his later socialist writing, shapes how he frames the working class."
+     },
+     {
+      "source_id": "4",
+      "usable_for": "Shows unequal relations. British subjects in China were tried by British consuls under British law, while Chinese subjects were punished under Chinese law.",
+      "sourcing": "The treaty was signed during the Second Opium War, so its terms reflect British military pressure. The phrase about equitable justice reads differently given that situation."
+     },
+     {
+      "source_id": "5",
+      "usable_for": "Shows crowded brick housing, small yards full of people, smoke, and a railway viaduct. It illustrates urban conditions in an industrial city.",
+      "sourcing": "A French artist made it for a published book about London. It is a selective, artistic view meant for readers, not a neutral record, so it may play up the gloom."
+     },
+     {
+      "source_id": "6",
+      "usable_for": "Criticizes machinery as harmful to Europe and to Bombay mill workers, especially women. It even prefers Manchester cloth to more Indian mills, showing one Indian response to industrialization.",
+      "sourcing": "Gandhi wrote as an Indian nationalist questioning modern civilization, using a dialogue in which the Editor speaks for him. His purpose was to argue that Indian self-rule should reject imitating the West."
+     },
+     {
+      "source_id": "7",
+      "usable_for": "Shows that industrial nations were looking for outlets for their surplus production. It describes China's unfavorable trade balance and Sun's wish to steer foreign capital into China's development.",
+      "sourcing": "Sun led the 1911 revolution and wrote in English to persuade foreign governments and investors after the First World War. That purpose explains why he describes the problem in terms of what the industrial powers needed."
+     }
+    ],
+    "evidence_map": [
+     {
+      "line": "Industrial productivity created pressure for markets that reshaped relations with non-industrial societies.",
+      "supports": [
+       "1",
+       "4",
+       "7"
+      ],
+      "complicates": [
+       "2"
+      ]
+     },
+     {
+      "line": "Industrial power produced unequal political and legal relationships between Britain and China.",
+      "supports": [
+       "2",
+       "4",
+       "7"
+      ],
+      "complicates": []
+     },
+     {
+      "line": "Industrialization changed conditions within industrial societies, creating a working class and crowded cities.",
+      "supports": [
+       "3",
+       "5",
+       "6"
+      ],
+      "complicates": [
+       "1"
+      ]
+     },
+     {
+      "line": "Non-industrial societies resisted or adapted on their own terms, which limited one-way transformation.",
+      "supports": [
+       "2",
+       "6",
+       "7"
+      ],
+      "complicates": [
+       "4"
+      ]
+     }
+    ],
+    "common_pitfalls": [
+     "Summarizing documents one at a time without an argument about extent.",
+     "Claiming that Doc 2 proves China was backward, without noting the Qing's real strength in 1793 and the edict's purpose.",
+     "Treating the Doré engraving as a photograph or describing details it does not show.",
+     "Saying Smith describes steam-powered factories.",
+     "Ignoring how Docs 6 and 7 differ: Gandhi rejects mills while Sun seeks industrial development.",
+     "Writing about the United States or Europe in general instead of the Britain, China, and India these documents cover."
+    ],
+    "facts": [
+     "Adam Smith published The Wealth of Nations in 1776.",
+     "Lord Macartney's embassy reached the Qing court in 1793.",
+     "The First Opium War lasted from 1839 to 1842, and the Second Opium War from 1856 to 1860.",
+     "The Treaty of Tianjin was signed in 1858 and included extraterritoriality.",
+     "Engels's book was published in German in 1845 and in English in 1887.",
+     "Doré's London: A Pilgrimage was published in 1872 with text by Blanchard Jerrold.",
+     "Gandhi wrote Hind Swaraj in Gujarati in 1909.",
+     "The 1911 revolution ended Qing rule, and Sun Yat-sen became provisional president of the Republic of China."
+    ]
+   },
+   "samples": [],
+   "provenance": {
+    "kind": "alton_authored_from_real_sources",
+    "note": "Prompts, rubric text, expected answers and sample responses are ALTON-authored practice material; every source is a real historical document, image or dataset (see sources[].source_registry_id)."
+   }
+  },
+  "fact": []
+ },
+ {
+  "id": "wh1_leq",
+  "spec": {
+   "id": "wh1_leq",
+   "exam": "WH1",
+   "template": "leq",
+   "era": 2,
+   "units": [
+    1,
+    2,
+    3,
+    4
+   ],
+   "focus": "Long-distance trade and the exchange of goods, ideas and diseases, c. 1200 to c. 1750 (avoid 'for the first time' claims)",
+   "sources": [],
+   "seed": 3125
+  },
+  "payload": {
+   "schema_version": "whap-frq-1",
+   "task_type": "leq",
+   "template": "leq",
+   "era": 2,
+   "units": [
+    1,
+    2,
+    3,
+    4
+   ],
+   "title": "LEQ: Continuity and Change in Long-Distance Exchange, c. 1200 to c. 1750",
+   "prompt": {
+    "scenario": "Between about 1200 and 1750, merchants, pilgrims, missionaries, soldiers and enslaved people moved along overland and maritime routes that linked Afro-Eurasia and, after the 1490s, the Americas. Goods, beliefs, technologies, crops and diseases moved with them. Some patterns of exchange lasted across the whole era, while others were transformed as new routes, states and trading organizations appeared.",
+    "task": "Evaluate the extent to which long-distance trade networks changed the exchange of goods, ideas and diseases in the period c. 1200 to c. 1750. You are not expected to address the entire time period.",
+    "requirements": [
+     "Respond to the prompt with a historically defensible thesis or claim that establishes a line of reasoning.",
+     "Describe a broader historical context relevant to the prompt.",
+     "Support an argument in response to the prompt using at least two pieces of specific and relevant evidence.",
+     "Use historical reasoning (continuity and change over time) to frame or structure an argument that addresses the prompt.",
+     "Use evidence to demonstrate a complex understanding of the prompt, for example by explaining both continuity and change, by weighing change in one kind of exchange against continuity in another, or by comparing patterns in different regions."
+    ]
+   },
+   "sources": [],
+   "rubric": {
+    "rubric_id": "whap-v1",
+    "total_points": 6,
+    "rows": [
+     {
+      "row_id": "thesis",
+      "name": "Thesis/claim",
+      "max": 1,
+      "descriptors": {
+       "0": "The response restates the prompt, offers no evaluative claim, or makes a claim that is not historically defensible.",
+       "1": "The response makes a defensible claim about how much long-distance trade changed exchange in this period and signals the reasons or categories that will support it."
+      },
+      "task_specific": "A claim that evaluates the extent of change in exchange of goods, ideas or diseases through trade networks between c. 1200 and c. 1750, with a line of reasoning (for example: change in scale and global reach versus continuity in older Indian Ocean and Silk Road patterns). The claim must be in the introduction or conclusion."
+     },
+     {
+      "row_id": "context",
+      "name": "Contextualization",
+      "max": 1,
+      "descriptors": {
+       "0": "The response gives no context or only a passing phrase not connected to the argument.",
+       "1": "The response describes a broader historical development before, during or after the period and connects it to the topic of the prompt."
+      },
+      "task_specific": "Relevant broader context such as Mongol unification of Eurasian routes in the 1200s and 1300s, the long-standing monsoon-based Indian Ocean system, the growth of Islamic commercial networks, or the rise of Iberian maritime empires in the 1400s and 1500s, explicitly tied to the argument."
+     },
+     {
+      "row_id": "evidence",
+      "name": "Evidence",
+      "max": 2,
+      "descriptors": {
+       "0": "The response provides no specific relevant examples.",
+       "1": "The response provides at least two specific, accurate examples relevant to the topic of the prompt.",
+       "2": "The response uses at least two specific, accurate examples to support a reasoned argument about the extent of change in exchange."
+      },
+      "task_specific": "Specific examples of trade-based exchange, such as the spread of the Black Death along Eurasian routes, Zheng He's voyages, the Swahili coast cities, silver from Potosi reaching Ming China via the Manila galleons, smallpox in the Americas, or the Atlantic slave trade."
+     },
+     {
+      "row_id": "analysis",
+      "name": "Analysis and reasoning",
+      "max": 2,
+      "descriptors": {
+       "0": "The response does not use continuity and change reasoning or only lists events.",
+       "1": "The response uses continuity and change over time to frame or structure an argument about long-distance exchange.",
+       "2": "The response shows a complex understanding, for example by explaining both significant continuities and significant changes or by showing how the extent of change differed across regions or types of exchange."
+      },
+      "task_specific": "Continuity and change reasoning that frames the argument, plus complexity such as weighing continuities against changes, distinguishing among goods, ideas and diseases, or comparing regions."
+     }
+    ],
+    "scoring_notes": [
+     "Students may focus on any regions; an essay limited to one region can still earn full credit if the argument is well supported.",
+     "Do not reward claims that a route, exchange or disease spread happened for the first time unless clearly accurate; reward responses that recognize earlier precedents.",
+     "Complexity must be shown in the body of the essay rather than in a single sentence.",
+     "Evidence from just before 1200 or just after 1750 can earn credit as context but should not be the main support.",
+     "ALTON reference — not official AP scoring"
+    ]
+   },
+   "expected_features": {
+    "defensible_theses": [
+     "From c. 1200 to c. 1750 long-distance trade changed greatly in scale and reach, as Atlantic and trans-Pacific routes after the 1490s moved American crops, silver, enslaved Africans and Old World diseases across oceans. Older Indian Ocean and Silk Road exchanges of luxury goods and religious ideas continued alongside the new routes.",
+     "Long-distance trade networks changed the exchange of diseases and crops most sharply, through the Columbian Exchange. The exchange of ideas, especially the spread of Islam by merchants and Sufis in the Indian Ocean, mostly continued older patterns.",
+     "Europeans built new maritime empires, but much continuity remained before 1750. Asian demand, especially Chinese demand for silver, still shaped global trade, and Europeans often joined existing Indian Ocean networks instead of replacing them."
+    ],
+    "contextualization_ideas": [
+     "Mongol conquests in the 1200s created a large unified zone that protected merchants and travelers along the Silk Roads, which made Eurasian exchange easier, including the movement of disease.",
+     "For centuries the Indian Ocean had been a monsoon-driven trading system linking East Africa, Arabia, South Asia and Southeast Asia, with Muslim merchants playing a large role, and that system was in place before Europeans arrived.",
+     "In the 1400s and 1500s Portuguese and Spanish states, using maritime technology such as the caravel and the magnetic compass, sought direct access to Asian goods and set up empires in the Americas, linking the hemispheres."
+    ],
+    "outside_evidence": [
+     "The Black Death spread across Eurasia and into North Africa and Europe in the 1340s along trade routes, including through Black Sea ports such as Caffa.",
+     "Ibn Battuta traveled through Dar al-Islam, including West Africa, East Africa, South Asia and China, between the 1320s and 1350s, showing how far Islamic networks reached.",
+     "Mansa Musa of Mali made his pilgrimage to Mecca in 1324, and his spending of gold in Cairo showed the importance of trans-Saharan trade.",
+     "Zheng He led Ming fleets on seven voyages from 1405 to 1433 across the Indian Ocean as far as East Africa.",
+     "Swahili coast city-states such as Kilwa and Mombasa traded gold and ivory in Indian Ocean networks, and Islam spread among their merchant elites.",
+     "Malacca became a major entrepot in the 1400s, and Islam spread in Southeast Asia through merchants and Sufi teachers.",
+     "Vasco da Gama reached India in 1498, and the Portuguese took Goa in 1510 and Malacca in 1511, using armed trading posts and a cartaz pass system.",
+     "Smallpox and other Old World diseases caused massive population decline among Indigenous peoples of the Americas, including during the Spanish conquest of Tenochtitlan in 1519 to 1521.",
+     "American crops such as maize and potatoes spread to Afro-Eurasia, and sugar, wheat, horses and cattle were brought to the Americas.",
+     "Silver mined at Potosi, from the 1540s, flowed to China, partly through Manila galleons sailing from Acapulco after 1571, and Ming China increasingly required tax payments in silver.",
+     "The Atlantic slave trade forcibly moved millions of Africans to plantations in Brazil and the Caribbean, producing sugar for European markets.",
+     "The Dutch East India Company (VOC), chartered in 1602, and the English East India Company, chartered in 1600, were joint-stock companies that traded spices, textiles and tea in Asia.",
+     "Jesuit missionaries such as Matteo Ricci brought European science and Christianity to the Ming court, while Tokugawa Japan limited European trade to the Dutch at Dejima."
+    ],
+    "reasoning_types": [
+     "Continuity and change over time",
+     "Comparison across regions or types of exchange (as complexity)",
+     "Causation (as supporting reasoning for why change occurred)"
+    ],
+    "common_pitfalls": [
+     "Describing the Columbian Exchange alone without evaluating continuity or extent.",
+     "Claiming Europeans controlled Indian Ocean trade by 1500 or that Asian networks ended.",
+     "Using 'for the first time' claims that ignore earlier connections such as the Silk Roads or the Indian Ocean.",
+     "Listing goods and routes without connecting them to an argument about change.",
+     "Treating only goods and ignoring ideas or diseases, or mixing up dates such as putting the Black Death after 1492.",
+     "Focusing only on events after 1750, such as industrial trade."
+    ],
+    "facts": [
+     "Zheng He's voyages took place between 1405 and 1433.",
+     "The Black Death reached the Mediterranean and Europe in 1347 and 1348.",
+     "Vasco da Gama reached Calicut in 1498.",
+     "Manila galleon trade between Acapulco and Manila began in 1571 and lasted into the early 1800s.",
+     "Potosi silver mining expanded after 1545.",
+     "The VOC was founded in 1602 and the English East India Company in 1600.",
+     "Mansa Musa's pilgrimage took place in 1324."
+    ]
+   },
+   "samples": [],
+   "provenance": {
+    "kind": "alton_authored_from_real_sources",
+    "note": "Prompts, rubric text, expected answers and sample responses are ALTON-authored practice material; every source is a real historical document, image or dataset (see sources[].source_registry_id)."
+   }
+  },
+  "fact": []
+ },
+ {
+  "id": "wh2_saq3",
+  "spec": {
+   "id": "wh2_saq3",
+   "exam": "WH2",
+   "template": "saq3",
+   "era": 1,
+   "units": [
+    1
+   ],
+   "focus": "Mongol expansion and the response of the states it threatened in the 13th century (the image is a detail of a longer scroll; make no claims about the rest of the scroll)",
+   "sources": [
+    {
+     "id": "img-mongol-invasion-japan-1293",
+     "context": "A Japanese warrior named Takezaki Suenaga had this scroll painted around 1293 to record his service against the Mongol invasions of Japan in 1274 and 1281."
+    }
+   ],
+   "seed": 3223
+  },
+  "payload": {
+   "schema_version": "whap-frq-1",
+   "task_type": "saq",
+   "template": "saq3",
+   "era": 1,
+   "units": [
+    1
+   ],
+   "title": "Japanese Warriors and the Mongol Invasions: The Moko Shurai Ekotoba",
+   "prompt": {
+    "scenario": "In the period c. 1200 to c. 1300, the Mongols built the largest land empire in the world, and many states in Afroeurasia had to decide whether to resist Mongol armies, submit to them, or negotiate with them. Japan faced two seaborne invasions launched from Yuan China and Korea in 1274 and 1281.",
+    "task": "Using the image, answer (a), (b), and (c).",
+    "requirements": [
+     "Responses to (b) and (c) should use specific historical evidence from the period 1200 to 1300.",
+     "Response to (c) must name a specific state or region outside Japan."
+    ],
+    "parts": [
+     {
+      "label": "A",
+      "prompt": "Briefly describe ONE way the image presents the Japanese warriors who fought against the Mongol invasions.",
+      "points": 1
+     },
+     {
+      "label": "B",
+      "prompt": "Briefly explain ONE specific historical development or circumstance from the period 1200 to 1300, other than the dates of the invasions given in the context line, that helps explain the Mongol attempts to conquer Japan or the outcome of those attempts.",
+      "points": 1
+     },
+     {
+      "label": "C",
+      "prompt": "Briefly explain ONE similarity or ONE difference between Japan's experience of the Mongol threat and the experience of a state outside Japan that faced Mongol armies in the period 1200 to 1300.",
+      "points": 1
+     }
+    ]
+   },
+   "sources": [
+    {
+     "id": "A",
+     "kind": "image",
+     "title": "Moko Shurai Ekotoba (Illustrated Account of the Mongol Invasions), detail of mounted warriors",
+     "attribution": "Unknown artist (scroll commissioned by the samurai Takezaki Suenaga), c. 1293. Wikimedia Commons (file page records the source institution and public-domain tag). Reuse: public domain (13th-century work). unmodified except Wikimedia Commons' scaled JPEG rendering of the file (upload.wikimedia.org thumbnail; 960 px wide for tall images, 1280 px wide for wide images).",
+     "context": "A Japanese warrior named Takezaki Suenaga had this scroll painted around 1293 to record his service against the Mongol invasions of Japan in 1274 and 1281.",
+     "real_data": true,
+     "source_registry_id": "img-mongol-invasion-japan-1293",
+     "source_sha256": "526f28c56b2865a13c3f06e893c9a551e43720811bdca1d4c0ae203942850f18",
+     "body": "A faded Japanese hand-painted scroll showing armored mounted warriors with bows and arrow quivers riding through pine trees, with a column of Japanese writing at the top naming a warrior.",
+     "image": {
+      "path": "ap-sources/img-mongol-invasion-japan-1293/image.jpg",
+      "alt": "A faded Japanese hand-painted scroll showing armored mounted warriors with bows and arrow quivers riding through pine trees, with a column of Japanese writing at the top naming a warrior.",
+      "credit": "Moko Shurai Ekotoba (c. 1293), detail. Wikimedia Commons (public domain)."
+     },
+     "provenance": {
+      "kind": "real_historical_source",
+      "real_data": true,
+      "note": "registry img-mongol-invasion-japan-1293"
+     }
+    }
+   ],
+   "rubric": {
+    "rubric_id": "whap-v1",
+    "total_points": 3,
+    "rows": [
+     {
+      "row_id": "a",
+      "name": "Part A",
+      "max": 1,
+      "descriptors": {
+       "0": "The response does not describe a feature visible in the image, misidentifies the riders as Mongols, or only restates the title.",
+       "1": "The response accurately describes one way the image presents the Japanese warriors, such as armored horsemen carrying bows and quivers, or a written label singling out a named warrior."
+      },
+      "task_specific": "Describe a feature of the image's portrayal of the Japanese defenders, such as their mounted archery equipment, their armor, their depiction as a group of horsemen in motion, or the written label that names an individual warrior, linking it to how the warriors are presented."
+     },
+     {
+      "row_id": "b",
+      "name": "Part B",
+      "max": 1,
+      "descriptors": {
+       "0": "The response gives no specific development, repeats only the invasion dates, or gives an inaccurate or off-period development.",
+       "1": "The response explains one accurate, specific development from 1200 to 1300 and connects it to why the Mongols attacked Japan or why the invasions failed."
+      },
+      "task_specific": "Explain a specific development from 1200 to 1300 connected to the Mongol attempts on Japan or their outcome, for example Kublai Khan's founding of the Yuan dynasty and demands for submission, the Kamakura shogunate's refusal, the stone defensive wall at Hakata Bay, the use of Korean and Chinese ships and crews, or the storm that wrecked the 1281 fleet."
+     },
+     {
+      "row_id": "c",
+      "name": "Part C",
+      "max": 1,
+      "descriptors": {
+       "0": "The response names no specific state, makes no comparison, or relies on inaccurate information.",
+       "1": "The response explains one accurate similarity or difference between Japan's experience and that of a specific named state outside Japan in 1200 to 1300."
+      },
+      "task_specific": "Compare Japan's experience with that of a named state outside Japan facing Mongol armies in 1200 to 1300, for example the Mamluk Sultanate, Dai Viet, the Song dynasty, Goryeo Korea, the Abbasid Caliphate, the Rus principalities, or the Delhi Sultanate."
+     }
+    ],
+    "scoring_notes": [
+     "Each part is scored independently; a response may earn a point in (b) or (c) even if (a) earns no point.",
+     "In (a), do not award the point if the response treats the riders shown as Mongol soldiers; the detail shows Japanese warriors.",
+     "In (b), a storm explanation is acceptable if it is tied to the 1281 fleet or to the failure of the invasions; it need not be the only cause, and responses claiming storms were the sole reason should still earn the point if otherwise accurate, though stronger answers mention Japanese defenses.",
+     "Responses should not be credited for claims about parts of the scroll not shown in the detail.",
+     "ALTON reference — not official AP scoring"
+    ]
+   },
+   "expected_features": {
+    "defensible_theses": [],
+    "contextualization_ideas": [
+     "Mongol expansion under Chinggis Khan and his successors across Eurasia in the 13th century.",
+     "The Yuan dynasty's use of conquered Korean and Chinese naval resources."
+    ],
+    "outside_evidence": [
+     "Hakata Bay defensive wall",
+     "Hojo Tokimune's refusal of Mongol demands",
+     "Goryeo's submission and role in the invasions",
+     "Battle of Ain Jalut, 1260",
+     "Battle of Bach Dang, 1288"
+    ],
+    "reasoning_types": [
+     "Sourcing and description of a visual source",
+     "Causation",
+     "Comparison"
+    ],
+    "doc_uses": [
+     {
+      "source_id": "Moko Shurai Ekotoba detail",
+      "usable_for": "Describing how Japanese defenders were portrayed as armored mounted archers and how an individual warrior was named.",
+      "sourcing": "Commissioned around 1293 by Takezaki Suenaga to record his service against the Mongols; its purpose of recording personal service helps explain the focus on a named warrior."
+     }
+    ],
+    "saq_answers": {
+     "a": [
+      "The image shows the Japanese warriors as armored horsemen carrying bows and full quivers of arrows, presenting them as skilled mounted archers ready for battle.",
+      "The warriors are shown riding together as a group through pine trees, presenting them as an organized force moving into action rather than as individuals at rest.",
+      "The column of writing at the top names a particular warrior, so the image presents the defense against the Mongols in terms of one man's individual service, fitting a scroll commissioned by Takezaki Suenaga to record his service.",
+      "The warriors wear elaborate colored armor and helmets, presenting them as well-equipped members of a professional warrior class."
+     ],
+     "b": [
+      "Kublai Khan, who founded the Yuan dynasty in 1271, sent envoys demanding that Japan submit and pay tribute; the Kamakura shogunate under the regent Hojo Tokimune refused, which led to the invasions.",
+      "After the 1274 attack, the Kamakura shogunate had warriors build a stone defensive wall along Hakata Bay in Kyushu, which helped prevent the 1281 invasion force from establishing itself on land.",
+      "The Mongols relied on ships and conscripted crews from Goryeo Korea, which had submitted to them, and from the conquered Southern Song, showing how they used the resources of subject peoples to attempt a seaborne campaign.",
+      "In 1281 a powerful storm wrecked much of the Mongol invasion fleet off Kyushu, which together with Japanese resistance caused the invasion to fail."
+     ],
+     "c": [
+      "Similarity: like Japan, the Mamluk Sultanate of Egypt successfully stopped Mongol expansion, defeating a Mongol army at Ain Jalut in 1260.",
+      "Similarity: like Japan, Dai Viet under the Tran dynasty repelled repeated Mongol invasions, including a victory at the Bach Dang River in 1288.",
+      "Difference: unlike Japan, the Song dynasty in China was conquered by Kublai Khan's forces, with Song resistance ending in 1279, and China came under Yuan rule.",
+      "Difference: unlike Japan, Goryeo Korea eventually submitted to the Mongols after years of resistance and became a subordinate state whose ships and men were used in the invasions of Japan.",
+      "Difference: unlike Japan, the Rus principalities were conquered by Mongol armies in 1237 to 1240 and were required to pay tribute to the Golden Horde."
+     ]
+    },
+    "common_pitfalls": [
+     "Identifying the riders in the detail as Mongol soldiers.",
+     "Describing parts of the scroll not shown in this detail.",
+     "Claiming the artist or Suenaga painted scenes he personally watched, rather than saying the scroll was commissioned to record his service.",
+     "Treating the storm as the only reason the invasions failed and ignoring Japanese defenses.",
+     "In (c), naming a state but not making an actual comparison with Japan, or choosing an example outside 1200 to 1300.",
+     "In (b), simply restating that invasions happened in 1274 and 1281."
+    ],
+    "facts": [
+     "Takezaki Suenaga, a warrior from Higo province in Kyushu, commissioned the Moko Shurai Ekotoba around 1293 to record his service against the Mongol invasions.",
+     "The Mongol invasions of Japan took place in 1274 and 1281 and both failed.",
+     "Kublai Khan proclaimed the Yuan dynasty in 1271 and completed the conquest of the Southern Song in 1279.",
+     "Japan was governed by the Kamakura shogunate, with Hojo Tokimune serving as regent during the invasions.",
+     "A stone defensive wall was built along Hakata Bay after the 1274 invasion.",
+     "A storm destroyed much of the 1281 invasion fleet.",
+     "The Mamluks defeated the Mongols at Ain Jalut in 1260.",
+     "Baghdad was sacked by Mongol forces in 1258, ending the Abbasid Caliphate there.",
+     "Dai Viet defeated Mongol forces at the Bach Dang River in 1288."
+    ]
+   },
+   "samples": [],
+   "provenance": {
+    "kind": "alton_authored_from_real_sources",
+    "note": "Prompts, rubric text, expected answers and sample responses are ALTON-authored practice material; every source is a real historical document, image or dataset (see sources[].source_registry_id)."
+   }
+  },
+  "fact": [
+   {
+    "where": "RUBRIC TEXT, Part B note vs. EXPECTED FEATURES common_pitfalls",
+    "kind": "other",
+    "detail": "The pitfalls list treats 'treating the storm as the only reason the invasions failed and ignoring Japanese defenses' as an error, while the Part B rubric note says responses claiming storms were the sole reason 'should still earn the point.' The two guidance statements point graders in opposite directions on the same type of response; align them (the rubric note's position is the historically more defensible one, since the storm was decisive in 1281 even though Japanese defenses also mattered)."
+   }
+  ]
+ }
+]

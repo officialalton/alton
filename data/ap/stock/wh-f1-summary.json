@@ -1,0 +1,383 @@
+{
+ "run": "wh-f1",
+ "generatedAt": "2026-10-15",
+ "passed": [
+  "wh-f1:ap_world_history-wh1_saq1-k0",
+  "wh-f1:ap_world_history-wh2_saq1-k0",
+  "wh-f1:ap_world_history-wh2_dbq-k0"
+ ],
+ "rejected": [
+  {
+   "__rejected": true,
+   "specId": "wh1_saq2",
+   "reason": "sample_high_missing; sample_mid_missing; sample_low_missing; sample_high_no_consistent_candidate; sample_mid_no_consistent_candidate; sample_low_no_consistent_candidate; fact_contested"
+  },
+  {
+   "__rejected": true,
+   "specId": "wh1_saq3",
+   "reason": "sample_high_missing; sample_mid_missing; sample_low_missing; sample_high_no_consistent_candidate; sample_mid_no_consistent_candidate; sample_low_no_consistent_candidate; fact_anachronism"
+  },
+  {
+   "__rejected": true,
+   "specId": "wh1_dbq",
+   "reason": "sample_high_missing; sample_mid_missing; sample_low_missing; sample_high_no_consistent_candidate; sample_mid_no_consistent_candidate; sample_low_no_consistent_candidate"
+  },
+  {
+   "__rejected": true,
+   "specId": "wh1_leq",
+   "reason": "sample_high_missing; sample_mid_annotations_few; sample_low_missing; sample_high_no_consistent_candidate; sample_low_no_consistent_candidate"
+  },
+  {
+   "__rejected": true,
+   "specId": "wh2_saq2",
+   "reason": "sample_high_missing; sample_mid_missing; sample_low_missing; sample_high_no_consistent_candidate; sample_mid_no_consistent_candidate; sample_low_no_consistent_candidate"
+  },
+  {
+   "__rejected": true,
+   "specId": "wh2_saq3",
+   "reason": "sample_high_missing; sample_high_no_consistent_candidate"
+  },
+  {
+   "__rejected": true,
+   "specId": "wh2_leq",
+   "reason": "sample_high_missing; sample_mid_missing; sample_low_missing; sample_high_no_consistent_candidate; sample_mid_no_consistent_candidate; sample_low_no_consistent_candidate; fact_inaccurate"
+  }
+ ],
+ "audit": [
+  {
+   "id": "wh1_saq1",
+   "tier": "high",
+   "options": [
+    {
+     "k": 0,
+     "total": 3,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    }
+   ],
+   "chosen": 0
+  },
+  {
+   "id": "wh1_saq1",
+   "tier": "mid",
+   "options": [
+    {
+     "k": 0,
+     "total": 2,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    }
+   ],
+   "chosen": 0
+  },
+  {
+   "id": "wh1_saq1",
+   "tier": "low",
+   "options": [
+    {
+     "k": 0,
+     "total": 1,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    }
+   ],
+   "chosen": 0
+  },
+  {
+   "id": "wh1_saq2",
+   "tier": "high",
+   "options": [],
+   "chosen": null
+  },
+  {
+   "id": "wh1_saq2",
+   "tier": "mid",
+   "options": [],
+   "chosen": null
+  },
+  {
+   "id": "wh1_saq2",
+   "tier": "low",
+   "options": [],
+   "chosen": null
+  },
+  {
+   "id": "wh1_saq3",
+   "tier": "high",
+   "options": [],
+   "chosen": null
+  },
+  {
+   "id": "wh1_saq3",
+   "tier": "mid",
+   "options": [],
+   "chosen": null
+  },
+  {
+   "id": "wh1_saq3",
+   "tier": "low",
+   "options": [],
+   "chosen": null
+  },
+  {
+   "id": "wh1_dbq",
+   "tier": "high",
+   "options": [
+    {
+     "k": 0,
+     "total": 7,
+     "spread": 1,
+     "flagged": true,
+     "flags": [
+      "inaccurate:The Treaty of Tientsin (1858) was signed in the middle of the Second Opium War (1856–1860), not after China had lost 'th"
+     ]
+    }
+   ],
+   "chosen": null
+  },
+  {
+   "id": "wh1_dbq",
+   "tier": "mid",
+   "options": [
+    {
+     "k": 0,
+     "total": 5,
+     "spread": 0,
+     "flagged": true,
+     "flags": [
+      "inaccurate:The Treaty of Tientsin (June 1858) was signed during the Second Opium War (1856–1860), not after it. Fighting resumed in"
+     ]
+    }
+   ],
+   "chosen": null
+  },
+  {
+   "id": "wh1_dbq",
+   "tier": "low",
+   "options": [
+    {
+     "k": 0,
+     "total": 3,
+     "spread": 0,
+     "flagged": true,
+     "flags": [
+      "misdescribes_source:Qianlong's 1793 edict did not refuse trade with Britain. It rejected Macartney's requests (a resident British envoy, add",
+      "inaccurate:The Treaty of Tianjin's extraterritoriality clause placed British subjects under British consular jurisdiction; it did n"
+     ]
+    }
+   ],
+   "chosen": null
+  },
+  {
+   "id": "wh1_leq",
+   "tier": "high",
+   "options": [
+    {
+     "k": 0,
+     "total": 6,
+     "spread": 0,
+     "flagged": true,
+     "flags": [
+      "inaccurate:Overstated for Japan. Jesuit and other Catholic missions in Japan were initially quite successful (roughly 300,000 conve"
+     ]
+    }
+   ],
+   "chosen": null
+  },
+  {
+   "id": "wh1_leq",
+   "tier": "mid",
+   "options": [
+    {
+     "k": 0,
+     "total": 5,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    }
+   ],
+   "chosen": 0
+  },
+  {
+   "id": "wh1_leq",
+   "tier": "low",
+   "options": [
+    {
+     "k": 0,
+     "total": 0,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    }
+   ],
+   "chosen": null
+  },
+  {
+   "id": "wh2_saq1",
+   "tier": "high",
+   "options": [
+    {
+     "k": 0,
+     "total": 3,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    }
+   ],
+   "chosen": 0
+  },
+  {
+   "id": "wh2_saq1",
+   "tier": "mid",
+   "options": [
+    {
+     "k": 0,
+     "total": 2,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    }
+   ],
+   "chosen": 0
+  },
+  {
+   "id": "wh2_saq1",
+   "tier": "low",
+   "options": [
+    {
+     "k": 0,
+     "total": 1,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    }
+   ],
+   "chosen": 0
+  },
+  {
+   "id": "wh2_saq2",
+   "tier": "high",
+   "options": [],
+   "chosen": null
+  },
+  {
+   "id": "wh2_saq2",
+   "tier": "mid",
+   "options": [],
+   "chosen": null
+  },
+  {
+   "id": "wh2_saq2",
+   "tier": "low",
+   "options": [],
+   "chosen": null
+  },
+  {
+   "id": "wh2_saq3",
+   "tier": "high",
+   "options": [
+    {
+     "k": 0,
+     "total": 3,
+     "spread": 0,
+     "flagged": true,
+     "flags": [
+      "contested:The plural implies both the 1274 and 1281 Mongol fleets were destroyed by typhoons. The 1281 typhoon is well attested, b"
+     ]
+    }
+   ],
+   "chosen": null
+  },
+  {
+   "id": "wh2_saq3",
+   "tier": "mid",
+   "options": [
+    {
+     "k": 0,
+     "total": 2,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    }
+   ],
+   "chosen": 0
+  },
+  {
+   "id": "wh2_saq3",
+   "tier": "low",
+   "options": [
+    {
+     "k": 0,
+     "total": 1,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    }
+   ],
+   "chosen": 0
+  },
+  {
+   "id": "wh2_dbq",
+   "tier": "high",
+   "options": [
+    {
+     "k": 0,
+     "total": 7,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    }
+   ],
+   "chosen": 0
+  },
+  {
+   "id": "wh2_dbq",
+   "tier": "mid",
+   "options": [
+    {
+     "k": 0,
+     "total": 3,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    }
+   ],
+   "chosen": 0
+  },
+  {
+   "id": "wh2_dbq",
+   "tier": "low",
+   "options": [
+    {
+     "k": 0,
+     "total": 2,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    }
+   ],
+   "chosen": 0
+  },
+  {
+   "id": "wh2_leq",
+   "tier": "high",
+   "options": [],
+   "chosen": null
+  },
+  {
+   "id": "wh2_leq",
+   "tier": "mid",
+   "options": [],
+   "chosen": null
+  },
+  {
+   "id": "wh2_leq",
+   "tier": "low",
+   "options": [],
+   "chosen": null
+  }
+ ]
+}

@@ -1,0 +1,453 @@
+{
+ "run": "wh-f2",
+ "generatedAt": "2026-10-15",
+ "passed": [
+  "wh-f2:ap_world_history-wh1_saq3-k0",
+  "wh-f2:ap_world_history-wh2_leq-k0"
+ ],
+ "rejected": [
+  {
+   "__rejected": true,
+   "specId": "wh1_saq2",
+   "reason": "sample_high_missing; sample_mid_missing; sample_low_missing; sample_high_no_consistent_candidate; sample_mid_no_consistent_candidate; sample_low_no_consistent_candidate; fact_contested"
+  },
+  {
+   "__rejected": true,
+   "specId": "wh1_dbq",
+   "reason": "rubric_row_thesis_descriptor_0_missing; rubric_row_thesis_descriptor_1_missing; rubric_row_thesis_task_specific_missing; rubric_row_context_descriptor_0_missing; rubric_row_context_descriptor_1_missing; rubric_row_context_task_specific_missing; rubric_row_docs_descriptor_0_missing; rubric_row_docs_descriptor_1_missing; rubric_row_docs_descriptor_2_missing; rubric_row_docs_task_specific_missing; rubric_row_outside_descriptor_0_missing; rubric_row_outside_descriptor_1_missing; rubric_row_outside_task_specific_missing; rubric_row_sourcing_descriptor_0_missing; rubric_row_sourcing_descriptor_1_missing; rubric_row_sourcing_task_specific_missing; rubric_row_complexity_descriptor_0_missing; rubric_row_complexity_descriptor_1_missing; rubric_row_complexity_task_specific_missing; sample_high_missing; sample_mid_missing; sample_low_missing; sample_high_no_consistent_candidate; sample_mid_no_consis"
+  },
+  {
+   "__rejected": true,
+   "specId": "wh1_leq",
+   "reason": "sample_high_missing; sample_mid_missing; sample_low_missing; sample_high_no_consistent_candidate; sample_mid_no_consistent_candidate; sample_low_no_consistent_candidate; fact_contested"
+  },
+  {
+   "__rejected": true,
+   "specId": "wh2_saq2",
+   "reason": "sample_mid_missing; sample_mid_no_consistent_candidate"
+  },
+  {
+   "__rejected": true,
+   "specId": "wh2_saq3",
+   "reason": "rubric_row_a_descriptor_0_missing; rubric_row_a_descriptor_1_missing; rubric_row_a_task_specific_missing; rubric_row_b_descriptor_0_missing; rubric_row_b_descriptor_1_missing; rubric_row_b_task_specific_missing; rubric_row_c_descriptor_0_missing; rubric_row_c_descriptor_1_missing; rubric_row_c_task_specific_missing; sample_high_missing; sample_mid_missing; sample_low_missing; sample_high_no_consistent_candidate; sample_mid_no_consistent_candidate; sample_low_no_consistent_candidate"
+  }
+ ],
+ "audit": [
+  {
+   "id": "wh1_saq2",
+   "tier": "high",
+   "options": [],
+   "chosen": null
+  },
+  {
+   "id": "wh1_saq2",
+   "tier": "mid",
+   "options": [],
+   "chosen": null
+  },
+  {
+   "id": "wh1_saq2",
+   "tier": "low",
+   "options": [],
+   "chosen": null
+  },
+  {
+   "id": "wh1_saq3",
+   "tier": "high",
+   "options": [
+    {
+     "k": 0,
+     "total": 3,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 1,
+     "total": 3,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 2,
+     "total": 3,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 3,
+     "total": 3,
+     "spread": 0,
+     "flagged": true,
+     "flags": [
+      "inaccurate:Aden (1538) did give the Ottomans control of the Red Sea entrance, but Basra (1546) lies at the head of the Persian Gulf"
+     ]
+    }
+   ],
+   "chosen": 0
+  },
+  {
+   "id": "wh1_saq3",
+   "tier": "mid",
+   "options": [
+    {
+     "k": 0,
+     "total": 2,
+     "spread": 0,
+     "flagged": true,
+     "flags": [
+      "contested:The sample presents the 1517 Ottoman conquest of Mamluk Egypt as itself a 'way the Ottoman Empire responded to Portugues"
+     ]
+    },
+    {
+     "k": 1,
+     "total": 2,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 2,
+     "total": 2,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 3,
+     "total": 2,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    }
+   ],
+   "chosen": 1
+  },
+  {
+   "id": "wh1_saq3",
+   "tier": "low",
+   "options": [
+    {
+     "k": 0,
+     "total": 1,
+     "spread": 0,
+     "flagged": true,
+     "flags": [
+      "contested:The sample presents the Ottoman conquest of Mamluk Egypt in 1517 as a 'way the Ottoman Empire responded to Portuguese ex"
+     ]
+    },
+    {
+     "k": 1,
+     "total": 1,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 2,
+     "total": 1,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 3,
+     "total": 1,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    }
+   ],
+   "chosen": 1
+  },
+  {
+   "id": "wh1_dbq",
+   "tier": "high",
+   "options": [],
+   "chosen": null
+  },
+  {
+   "id": "wh1_dbq",
+   "tier": "mid",
+   "options": [],
+   "chosen": null
+  },
+  {
+   "id": "wh1_dbq",
+   "tier": "low",
+   "options": [],
+   "chosen": null
+  },
+  {
+   "id": "wh1_leq",
+   "tier": "high",
+   "options": [],
+   "chosen": null
+  },
+  {
+   "id": "wh1_leq",
+   "tier": "mid",
+   "options": [],
+   "chosen": null
+  },
+  {
+   "id": "wh1_leq",
+   "tier": "low",
+   "options": [],
+   "chosen": null
+  },
+  {
+   "id": "wh2_saq2",
+   "tier": "high",
+   "options": [
+    {
+     "k": 0,
+     "total": 3,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 1,
+     "total": 3,
+     "spread": 0,
+     "flagged": true,
+     "flags": [
+      "inaccurate:The causal sequence is compressed/misordered. The 1919 Revolution (March 1919) was sparked when British authorities refu"
+     ]
+    },
+    {
+     "k": 2,
+     "total": 3,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 3,
+     "total": 3,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    }
+   ],
+   "chosen": 0
+  },
+  {
+   "id": "wh2_saq2",
+   "tier": "mid",
+   "options": [
+    {
+     "k": 0,
+     "total": 2,
+     "spread": 0,
+     "flagged": true,
+     "flags": [
+      "inaccurate:The response says that 'after the Second World War they said it again in the Atlantic Charter.' The Atlantic Charter was"
+     ]
+    },
+    {
+     "k": 1,
+     "total": 2,
+     "spread": 0,
+     "flagged": true,
+     "flags": [
+      "inaccurate:As applied to the 1941–1960 window the prompt defines, this is inaccurate as a generalization. Unlike 1918–1925, when th"
+     ]
+    },
+    {
+     "k": 2,
+     "total": 2,
+     "spread": 0,
+     "flagged": true,
+     "flags": [
+      "inaccurate:The response asserts that after the Second World War 'the colonial powers kept their empires and did not really apply th"
+     ]
+    },
+    {
+     "k": 3,
+     "total": 2,
+     "spread": 0,
+     "flagged": true,
+     "flags": [
+      "inaccurate:The sample claims that after the Second World War, as after the First, colonized peoples 'did not really get' self-deter"
+     ]
+    }
+   ],
+   "chosen": null
+  },
+  {
+   "id": "wh2_saq2",
+   "tier": "low",
+   "options": [
+    {
+     "k": 0,
+     "total": 1,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 1,
+     "total": 1,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 2,
+     "total": 1,
+     "spread": 0,
+     "flagged": true,
+     "flags": [
+      "inaccurate:The Allied powers did not honor self-determination promises uniformly toward their colonies. Churchill stated in Septemb",
+      "inaccurate:Self-determination was a central, widely publicized principle after WWI—Wilson's Fourteen Points (1918) and the Paris Pe",
+      "inaccurate:Decolonization was far from complete by 1950. Only a handful of Asian colonies (e.g., Philippines 1946, India/Pakistan 1"
+     ]
+    },
+    {
+     "k": 3,
+     "total": 1,
+     "spread": 0,
+     "flagged": true,
+     "flags": [
+      "inaccurate:The response claims that after the Second World War 'the same thing happened' as after WWI because the colonial powers '"
+     ]
+    }
+   ],
+   "chosen": 0
+  },
+  {
+   "id": "wh2_saq3",
+   "tier": "high",
+   "options": [],
+   "chosen": null
+  },
+  {
+   "id": "wh2_saq3",
+   "tier": "mid",
+   "options": [],
+   "chosen": null
+  },
+  {
+   "id": "wh2_saq3",
+   "tier": "low",
+   "options": [],
+   "chosen": null
+  },
+  {
+   "id": "wh2_leq",
+   "tier": "high",
+   "options": [
+    {
+     "k": 0,
+     "total": 6,
+     "spread": 0,
+     "flagged": true,
+     "flags": [
+      "anachronism:John Locke's Two Treatises of Government was published in 1689 and Locke died in 1704; he was not a late-1700s thinker. ",
+      "contested:A common oversimplification. The Berlin Conference set ground rules for recognizing colonial claims (e.g., 'effective oc"
+     ]
+    },
+    {
+     "k": 1,
+     "total": 6,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 2,
+     "total": 6,
+     "spread": 0,
+     "flagged": true,
+     "flags": [
+      "inaccurate:Toussaint L'Ouverture did not lead Haiti to independence in 1804. He was captured by the French in 1802 and died in a Fr"
+     ]
+    },
+    {
+     "k": 3,
+     "total": 6,
+     "spread": 0,
+     "flagged": true,
+     "flags": [
+      "anachronism:The Maji Maji Rebellion took place in 1905–1907, not in the mid-1800s. Grouping it under the paragraph framed as \"the mi"
+     ]
+    }
+   ],
+   "chosen": 1
+  },
+  {
+   "id": "wh2_leq",
+   "tier": "mid",
+   "options": [
+    {
+     "k": 0,
+     "total": 5,
+     "spread": 1,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 1,
+     "total": 4,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 2,
+     "total": 4,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 3,
+     "total": 4,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    }
+   ],
+   "chosen": 1
+  },
+  {
+   "id": "wh2_leq",
+   "tier": "low",
+   "options": [
+    {
+     "k": 0,
+     "total": 2,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 1,
+     "total": 2,
+     "spread": 1,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 2,
+     "total": 2,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    },
+    {
+     "k": 3,
+     "total": 2,
+     "spread": 0,
+     "flagged": false,
+     "flags": []
+    }
+   ],
+   "chosen": 0
+  }
+ ]
+}
