@@ -1,0 +1,104 @@
+[D-cross] 후보 36 · 생성 claude-opus-5-5 · 검수 fable+opus · 추정(동기) $2.68 · 구간 누적 $0.00 / 상한 $4
+[batch gen] 제출 msgbatch_01DakjFqZ83Ff6FLepoondwV (36건, 시도 1)
+[batch gen] {"processing":36,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch gen] {"processing":36,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch gen] {"processing":36,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch gen] {"processing":36,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch gen] {"processing":36,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch gen] {"processing":36,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch gen] {"processing":36,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch gen] {"processing":36,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch gen] {"processing":36,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch gen] {"processing":36,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch gen] {"processing":36,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch gen] 완료 성공 36/36, 이번 비용 $0.4384, 누적 $0.44
+[batch review-fable] 제출 msgbatch_018CcbeiZP16H79twC7wbLvd (60건, 시도 1)
+[batch review-fable] {"processing":60,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch review-fable] {"processing":60,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch review-fable] {"processing":60,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch review-fable] {"processing":60,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch review-fable] {"processing":60,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch review-fable] 완료 성공 60/60, 이번 비용 $1.3149, 누적 $1.75
+[batch review-opus] 제출 msgbatch_01X2DRaYgUDHLruiLCNhL9TA (60건, 시도 1)
+[batch review-opus] {"processing":60,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch review-opus] {"processing":60,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch review-opus] {"processing":60,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch review-opus] {"processing":60,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch review-opus] {"processing":60,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch review-opus] {"processing":60,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch review-opus] {"processing":60,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch review-opus] {"processing":60,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch review-opus] {"processing":60,"succeeded":0,"errored":0,"canceled":0,"expired":0}
+[batch review-opus] 완료 성공 60/60, 이번 비용 $0.3912, 누적 $2.14
+{
+ "sat_rw": {
+  "cand": 36,
+  "genFail": 0,
+  "formatFail": 0,
+  "detPass": 30,
+  "crossScored": 30,
+  "correct": {
+   "agree": 29,
+   "of": 30,
+   "fablePass": 28,
+   "opusPass": 29
+  },
+  "compliance": {
+   "agree": 30,
+   "of": 30,
+   "fablePass": 30,
+   "opusPass": 30
+  },
+  "hardFit": {
+   "agree": 23,
+   "of": 30,
+   "fablePass": 25,
+   "opusPass": 18
+  },
+  "adoptedBoth": 16,
+  "adoptedOneOnly": 8,
+  "yieldBoth": 0.444,
+  "costUsd": 2.144,
+  "costPerAdoptedBoth": 0.134,
+  "fableOnlyPass": 7,
+  "opusOnlyPass": 1
+ },
+ "sat_math": {
+  "cand": 0,
+  "genFail": 0,
+  "formatFail": 0,
+  "detPass": 0,
+  "crossScored": 0,
+  "correct": {
+   "agree": 0,
+   "of": 0,
+   "fablePass": 0,
+   "opusPass": 0
+  },
+  "compliance": {
+   "agree": 0,
+   "of": 0,
+   "fablePass": 0,
+   "opusPass": 0
+  },
+  "hardFit": {
+   "agree": 0,
+   "of": 0,
+   "fablePass": 0,
+   "opusPass": 0
+  },
+  "adoptedBoth": 0,
+  "adoptedOneOnly": 0,
+  "yieldBoth": 0,
+  "costUsd": 0,
+  "costPerAdoptedBoth": null,
+  "fableOnlyPass": 0,
+  "opusOnlyPass": 0
+ },
+ "adoptedHardFableRule": {
+  "total": 23,
+  "rw": 23,
+  "math": 0,
+  "correctBothRequired": true
+ }
+}
