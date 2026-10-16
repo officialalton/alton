@@ -1,0 +1,54 @@
+{
+ "kind": "ap_new_version_swap_plan",
+ "set": "US2",
+ "sourceSetName": "AP U.S. History — Practice Exam 2",
+ "sourceVersionNo": 4,
+ "generatedBy": "scripts/ap-generation/audit-wuel-build.ts (external audit 2026-10-15)",
+ "note": "Corrected DBQ, LEQ and SAQ 3 (AP-074, AP-075, AP-078). Source = US2 v4 (Stage C/D published). Batch 'audit-wuel' must be loaded first.",
+ "swapCount": 3,
+ "verifierViolations": [],
+ "swaps": [
+  {
+   "section": "ap_frq",
+   "removeKey": "ush-real-b:ap_us_history-real_b_dbq_market-k0",
+   "addKey": "audit-wuel:ap_us_history-real_b_dbq_market-k0",
+   "tier": "required",
+   "reason": "AP-074: mid sample: added a distinct post-1812 context sentence so the Erie Canal is the separate outside example (context and outside evidence were both credited for the same Erie Canal sentence)",
+   "remove": {
+    "type": "dbq"
+   },
+   "add": {
+    "type": "dbq",
+    "sameCell": true
+   }
+  },
+  {
+   "section": "ap_frq",
+   "removeKey": "ush-p1-b:ap_us_history-leq_1-k0",
+   "addKey": "audit-wuel:ap_us_history-leq_1-k0",
+   "tier": "required",
+   "reason": "AP-075: low sample: header and notes reconciled to evidence 1 (two examples identified, general), analysis 0 -> 1/6; annotation no longer says the federal-power link is absent",
+   "remove": {
+    "type": "leq"
+   },
+   "add": {
+    "type": "leq",
+    "sameCell": true
+   }
+  },
+  {
+   "section": "ap_saq",
+   "removeKey": "ush-real-a:ap_us_history-real_a_saq3_plains-k0",
+   "addKey": "audit-wuel:ap_us_history-real_a_saq3_plains-k0",
+   "tier": "required",
+   "reason": "AP-078: Munn v. Illinois (1877) concerned grain-elevator/warehouse charges, not railroad rates; the reference now separates the Granger railroad laws from Munn",
+   "remove": {
+    "type": "saq3"
+   },
+   "add": {
+    "type": "saq3",
+    "sameCell": true
+   }
+  }
+ ]
+}

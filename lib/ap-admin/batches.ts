@@ -160,6 +160,8 @@ export const STOCK_BATCHES: StockBatch[] = [
   // 2026-10-15 AP English Literature Stage 2 실제 작품(공유 영역) 5건: LT1 단편 세트 s05 → Chopin, LT1 장편 세트 l04 → Austen, LT1 FRQ Q2 → Crane, LT2 시 세트 p05 → Arnold, LT2 희곡 세트 l01 → Ibsen(docs/ap/englit-groundwork.md "Stage 2"). 새 버전 계획(게시 v2 → v3): data/ap/stock/lt1-v3-real-2-swap-plan.json, lt2-v3-real-2-swap-plan.json
   { id: "lt-real-2", title: "AP English Literature Stage 2 실제 작품 5건 (MC 세트 4 + FRQ Q2)", itemsFile: "lt-real-2-items.json", loadLabel: "lt-real-2-2026-10-15", supplement: true, passKeysFile: "lt-real-2-pass-keys.json", evidenceFile: "evidence-lt-real-2.json" },
   { id: "bc-topup", title: "BC 보충 (bc-topup)", itemsFile: "bc-topup-items.json", loadLabel: "bc-topup-2026-10-09", supplement: true, passKeysFile: "bc-topup-pass-keys.json", evidenceFile: "evidence-bc-topup.json" },
+  // 2026-10-15 외부 AP 전체 검수 확정 수정(docs/audits/ap-external-audit-20261015-confirmed-fixes.csv) — World History(MC 세트 5 + FRQ 6)·US History(FRQ 4)·English Literature(FRQ 4) 수정본 19건. 원본과 같은 칸의 교정 후보이며 한 증거 파일을 공유한다. 새 버전 계획: data/ap/stock/wh1-v2-, wh2-v2-, us1-v5-, us2-v5-, lt1-v4-, lt2-v4-audit-wuel-swap-plan.json (scripts/ap-generation/audit-wuel-build.ts)
+  { id: "audit-wuel", title: "AP 외부 검수 수정본 (World History·US History·English Literature, MC 5 + FRQ 14)", itemsFile: "audit-wuel-items.json", loadLabel: "audit-wuel-2026-10-15", supplement: true, passKeysFile: "audit-wuel-pass-keys.json", evidenceFile: "evidence-audit-wuel.json" },
 ];
 
 export const batchById = (id: string): StockBatch => {

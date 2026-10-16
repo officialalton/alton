@@ -1,0 +1,229 @@
+{
+ "run": "audit-wuel",
+ "generatedAt": "2026-10-15",
+ "source": "docs/audits/ap-external-audit-20261015-confirmed-fixes.csv",
+ "passed": [
+  {
+   "stockKey": "audit-wuel:ap_world_history-w202-k0",
+   "replaces": "wh-m1:ap_world_history-w202-k0",
+   "auditIds": "AP-085",
+   "notes": [
+    "population table was shown twice (set_intro markdown + stimulus table); body now points to the single table"
+   ],
+   "violationsBefore": [],
+   "violationsAfter": []
+  },
+  {
+   "stockKey": "audit-wuel:ap_world_history-w108-k0",
+   "replaces": "wh-p1:ap_world_history-w108-k0",
+   "auditIds": "AP-093",
+   "notes": [
+    "population table was shown twice (set_intro markdown + stimulus table); body now points to the single table"
+   ],
+   "violationsBefore": [],
+   "violationsAfter": []
+  },
+  {
+   "stockKey": "audit-wuel:ap_world_history-w205-k0",
+   "replaces": "wh-m1:ap_world_history-w205-k0",
+   "auditIds": "AP-091+AP-092(MC20)",
+   "notes": [
+    "MC18: image description/alt now includes the 2 feet 7 inches heading the key relies on",
+    "MC20: removed 'EXTRA: ' authoring marker from the stem"
+   ],
+   "violationsBefore": [],
+   "violationsAfter": []
+  },
+  {
+   "stockKey": "audit-wuel:ap_world_history-w111-k0",
+   "replaces": "wh-m1:ap_world_history-w111-k0",
+   "auditIds": "AP-092(MC42)",
+   "notes": [
+    "removed 'EXTRA. ' authoring marker from the stem"
+   ],
+   "violationsBefore": [],
+   "violationsAfter": []
+  },
+  {
+   "stockKey": "audit-wuel:ap_world_history-w211-k0",
+   "replaces": "wh-m1:ap_world_history-w211-k0",
+   "auditIds": "AP-094",
+   "notes": [
+    "source context said Order No. 1 came a few days after the abdication; it was issued March 1 (O.S.), the day before Nicholas II abdicated (March 2 O.S.)"
+   ],
+   "violationsBefore": [],
+   "violationsAfter": []
+  },
+  {
+   "stockKey": "audit-wuel:ap_world_history-wh1_dbq-k0",
+   "replaces": "wh-f4:ap_world_history-wh1_dbq-k0",
+   "auditIds": "AP-079+AP-080+AP-081+AP-082",
+   "notes": [
+    "docs row: level 1 no longer allows two documents (unified: 1 = accurately describe 3 documents, 2 = use 4 in an argument)",
+    "high sample: complexity point not earned (annotation itself called it a 6) -> 6/7",
+    "mid sample: annotation now credits the five documents actually used (1, 3, 5, 2, 4) -> docs 2, total 4 unchanged",
+    "low sample: added Document 3 so three documents are described (docs 1, total 2 unchanged)"
+   ],
+   "violationsBefore": [],
+   "violationsAfter": []
+  },
+  {
+   "stockKey": "audit-wuel:ap_world_history-wh1_leq-k0",
+   "replaces": "wh-f4:ap_world_history-wh1_leq-k0",
+   "auditIds": "AP-083+AP-084",
+   "notes": [
+    "low sample: annotations now credit the continuity-and-change framing (analysis 1) that the header already gave; no complexity",
+    "mid sample: header and annotations reconciled to thesis 1 + evidence 1 + analysis 1 = 3"
+   ],
+   "violationsBefore": [],
+   "violationsAfter": []
+  },
+  {
+   "stockKey": "audit-wuel:ap_world_history-wh1_saq1-k0",
+   "replaces": "wh-f1:ap_world_history-wh1_saq1-k0",
+   "auditIds": "AP-086",
+   "notes": [
+    "low sample part C annotation no longer faults Gandhi for not being a head of government (the prompt allows any nationalist leader); the valid objections are the 1930 Salt March outside 1945-1975 and the missing comparison"
+   ],
+   "violationsBefore": [],
+   "violationsAfter": []
+  },
+  {
+   "stockKey": "audit-wuel:ap_world_history-wh2_dbq-k0",
+   "replaces": "wh-f1:ap_world_history-wh2_dbq-k0",
+   "auditIds": "AP-087",
+   "notes": [
+    "high sample: complexity point not earned (annotation described a 6-level response) -> 6/7"
+   ],
+   "violationsBefore": [],
+   "violationsAfter": []
+  },
+  {
+   "stockKey": "audit-wuel:ap_world_history-wh2_leq-k0",
+   "replaces": "wh-f2:ap_world_history-wh2_leq-k0",
+   "auditIds": "AP-088+AP-089+AP-090",
+   "notes": [
+    "high sample: removed the 'just short of top level' clause that contradicted the 6/6 header; 6/6 kept",
+    "mid sample: header and annotations reconciled to thesis 1 + evidence 1 + analysis 1 = 3",
+    "low sample: annotations now credit the change-and-continuity framing (analysis 1) that the header gave; no complexity"
+   ],
+   "violationsBefore": [],
+   "violationsAfter": []
+  },
+  {
+   "stockKey": "audit-wuel:ap_world_history-wh2_saq1-k0",
+   "replaces": "wh-f1:ap_world_history-wh2_saq1-k0",
+   "auditIds": "AP-095",
+   "notes": [
+    "part B window is 1839-1900: the Boxer Protocol (1901) is outside it; the note now accepts only the 1899-1900 Uprising and the 1900 foreign intervention, with the Protocol credited only as a stated later consequence of those 1900 events"
+   ],
+   "violationsBefore": [],
+   "violationsAfter": []
+  },
+  {
+   "stockKey": "audit-wuel:ap_us_history-leq_3-k0",
+   "replaces": "ush-p1-b:ap_us_history-leq_3-k0",
+   "auditIds": "AP-073",
+   "notes": [
+    "mid sample: header and notes reconciled to thesis 1 + context 0 + evidence 1 + analysis 1 = 3 (notes denied context and credited evidence 1)",
+    "low sample: header and notes reconciled to evidence 1 (two examples identified, general), analysis 0 -> 1/6"
+   ],
+   "violationsBefore": [],
+   "violationsAfter": []
+  },
+  {
+   "stockKey": "audit-wuel:ap_us_history-leq_1-k0",
+   "replaces": "ush-p1-b:ap_us_history-leq_1-k0",
+   "auditIds": "AP-075",
+   "notes": [
+    "low sample: header and notes reconciled to evidence 1 (two examples identified, general), analysis 0 -> 1/6; annotation no longer says the federal-power link is absent"
+   ],
+   "violationsBefore": [],
+   "violationsAfter": []
+  },
+  {
+   "stockKey": "audit-wuel:ap_us_history-real_b_dbq_market-k0",
+   "replaces": "ush-real-b:ap_us_history-real_b_dbq_market-k0",
+   "auditIds": "AP-074",
+   "notes": [
+    "mid sample: added a distinct post-1812 context sentence so the Erie Canal is the separate outside example (context and outside evidence were both credited for the same Erie Canal sentence)"
+   ],
+   "violationsBefore": [
+    "dbq_no_secondary",
+    "source_1_not_marked_alton_composed",
+    "source_1_real_person_andrew jackson",
+    "source_2_not_marked_alton_composed",
+    "source_3_not_marked_alton_composed",
+    "source_4_not_marked_alton_composed",
+    "source_5_not_marked_alton_composed",
+    "source_6_not_marked_alton_composed",
+    "source_7_not_marked_alton_composed"
+   ],
+   "violationsAfter": [
+    "dbq_no_secondary",
+    "source_1_not_marked_alton_composed",
+    "source_1_real_person_andrew jackson",
+    "source_2_not_marked_alton_composed",
+    "source_3_not_marked_alton_composed",
+    "source_4_not_marked_alton_composed",
+    "source_5_not_marked_alton_composed",
+    "source_6_not_marked_alton_composed",
+    "source_7_not_marked_alton_composed"
+   ]
+  },
+  {
+   "stockKey": "audit-wuel:ap_us_history-real_a_saq3_plains-k0",
+   "replaces": "ush-real-a:ap_us_history-real_a_saq3_plains-k0",
+   "auditIds": "AP-078",
+   "notes": [
+    "Munn v. Illinois (1877) concerned grain-elevator/warehouse charges, not railroad rates; the reference now separates the Granger railroad laws from Munn"
+   ],
+   "violationsBefore": [
+    "source_A_not_marked_alton_composed"
+   ],
+   "violationsAfter": [
+    "source_A_not_marked_alton_composed"
+   ]
+  },
+  {
+   "stockKey": "audit-wuel:ap_english_literature-real-rf3-k0",
+   "replaces": "lt-real-2:ap_english_literature-real-rf3-k0",
+   "auditIds": "AP-047",
+   "notes": [
+    "'scornfully bumping a crest' describes the boat (she), not the sea; the high sample and the sophistication note no longer list it as personification of the sea"
+   ],
+   "violationsBefore": [],
+   "violationsAfter": []
+  },
+  {
+   "stockKey": "audit-wuel:ap_english_literature-fa1-k0",
+   "replaces": "englit-p1-b:ap_english_literature-fa1-k0",
+   "auditIds": "AP-050",
+   "notes": [
+    "mid sample inserted a line break after the first 'Nothing'; in the poem the break falls after the second 'Nothing' (line 15 ends 'Nothing', line 16 begins 'was ever let go of')"
+   ],
+   "violationsBefore": [],
+   "violationsAfter": []
+  },
+  {
+   "stockKey": "audit-wuel:ap_english_literature-real-rf2-k0",
+   "replaces": "lt-real-1:ap_english_literature-real-rf2-k0",
+   "auditIds": "AP-051",
+   "notes": [
+    "the high sample called 'seemed to slip out of his memory', 'some force seemed to draw him' and 'took possession of him' passive; they are active/intransitive constructions with non-human subjects, so the claim is now about subject and agency"
+   ],
+   "violationsBefore": [],
+   "violationsAfter": []
+  },
+  {
+   "stockKey": "audit-wuel:ap_english_literature-fa3-k0",
+   "replaces": "englit-p1-b:ap_english_literature-fa3-k0",
+   "auditIds": "AP-052",
+   "notes": [
+    "low sample header gave thesis 1 but the annotation denied it; reconciled to thesis 1 (the essay states a defensible interpretation in the last paragraph; the thesis may appear anywhere), total 3 unchanged"
+   ],
+   "violationsBefore": [],
+   "violationsAfter": []
+  }
+ ]
+}

@@ -38,15 +38,16 @@ export const isImage = (s: RegistrySource) => Boolean(s.public_path);
 export const isTable = (s: RegistrySource) => Boolean(s.table);
 
 /** 학생에게 보이는 자료 한 덩어리. label: "Source A"/"Document 3"/null. 이미지·표 자체는 그림 칸에 그려진다. */
-export function realBlock(label: string | null, s: RegistrySource, context: string): string {
+export function realBlock(label: string | null, s: RegistrySource, context: string, tableShownBelow = false): string {
   const head = `${label ? `${label} ` : ""}(${TYPE_LABEL[s.type] ?? s.type})\n${s.title}\n${credit(s)}\nContext: ${context}`;
   if (s.excerpt_segments) return `${head}\n\n"${s.excerpt_segments.join(" [...] ")}"`;
-  if (s.table) return `${head}\n\n${tableMarkdown(s.table)}`;
+  // 2026-10-15 외부 검수(AP-085·093): 그림 칸(stimulus)이 같은 표를 이미 그리므로 본문에는 표를 다시 싣지 않는다(표가 두 번 보이던 결함).
+  if (s.table) return tableShownBelow ? `${head}\n\nThe table for this source is shown below.` : `${head}\n\n${tableMarkdown(s.table)}`;
   return `${head}\n\nThe image for this source is shown below. Select the image to open it full size.`;
 }
 export function realSetIntro(refs: { id: string; context: string }[], reg: Map<string, RegistrySource>): string {
   const multi = refs.length > 1;
-  return `${WH_SOURCE_MARKER}\n` + refs.map((r, i) => realBlock(multi ? `Source ${String.fromCharCode(65 + i)}` : null, reg.get(r.id)!, r.context)).join("\n\n———\n\n");
+  return `${WH_SOURCE_MARKER}\n` + refs.map((r, i) => realBlock(multi ? `Source ${String.fromCharCode(65 + i)}` : null, reg.get(r.id)!, r.context, !refs.some((x) => isImage(reg.get(x.id)!)))).join("\n\n———\n\n");
 }
 /** 그림 칸(stimulus): 표 자료는 표, 이미지 자료는 정적 이미지(여러 장이면 more). labelFor: 자료 순번(0부터) → 이미지 라벨(기본: 자료가 둘 이상이면 "Source A"…). */
 export function realStimulus(refs: { id: string }[], reg: Map<string, RegistrySource>, labelFor?: (i: number) => string | undefined): Record<string, unknown> | undefined {
