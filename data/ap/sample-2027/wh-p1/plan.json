@@ -1,0 +1,155 @@
+{
+ "specs": [
+  {
+   "id": "w101",
+   "exam": "WH1",
+   "unit": 1,
+   "stim": "primary_text",
+   "theme": "Limits on royal power and feudal obligations in England, 1215",
+   "sources": [
+    {
+     "id": "txt-magna-1215",
+     "context": "In 1215 a group of English barons in rebellion against King John forced him to accept this charter."
+    }
+   ],
+   "skills": [
+    "2.B",
+    "3.A",
+    "4.A",
+    "5.B"
+   ],
+   "nItems": 4,
+   "seed": 1101
+  },
+  {
+   "id": "w102",
+   "exam": "WH1",
+   "unit": 2,
+   "stim": "image",
+   "theme": "Trans-Saharan trade, gold and the image of the king of Mali on a European atlas",
+   "sources": [
+    {
+     "id": "img-catalan-mansa-musa-1375",
+     "context": "This detail comes from a hand-painted atlas made in 1375 on the island of Majorca, which shows lands around the Mediterranean and beyond as European mapmakers knew them."
+    }
+   ],
+   "skills": [
+    "2.A",
+    "3.A",
+    "4.B",
+    "5.A"
+   ],
+   "nItems": 4,
+   "seed": 1102
+  },
+  {
+   "id": "w108",
+   "exam": "WH1",
+   "unit": 5,
+   "stim": "quantitative",
+   "theme": "World population growth in the age of revolutions and industrialization",
+   "sources": [
+    {
+     "id": "tab-census-worldpop-1700-1900",
+     "context": "The U.S. Census Bureau publishes a table comparing estimates of world population made by several scholars; this table shows the lowest and highest of those estimates for five years."
+    }
+   ],
+   "skills": [
+    "1.A",
+    "3.B",
+    "4.B"
+   ],
+   "nItems": 3,
+   "seed": 1108
+  },
+  {
+   "id": "w109",
+   "exam": "WH1",
+   "unit": 6,
+   "stim": "paired_text",
+   "theme": "Justifying and criticizing imperial rule around 1900",
+   "sources": [
+    {
+     "id": "txt-kipling-1899",
+     "context": "Rudyard Kipling, a British writer born in India, published this poem in 1899, soon after the United States took control of the Philippines."
+    },
+    {
+     "id": "txt-twain-1905",
+     "context": "Mark Twain, an American writer, published this satire in 1905 to support a campaign against the rule of King Leopold II of Belgium in the Congo; the speaker is Leopold as Twain imagined him."
+    }
+   ],
+   "skills": [
+    "3.C",
+    "2.B",
+    "4.A",
+    "5.B"
+   ],
+   "nItems": 4,
+   "seed": 1109
+  }
+ ],
+ "summary": {
+  "sets": 30,
+  "items": 110,
+  "byExam": {
+   "WH1": {
+    "sets": 15,
+    "items": 55,
+    "units": {
+     "1": 4,
+     "2": 4,
+     "3": 8,
+     "4": 8,
+     "5": 7,
+     "6": 8,
+     "7": 6,
+     "8": 6,
+     "9": 4
+    },
+    "stim": {
+     "primary_text": 8,
+     "image": 2,
+     "secondary_text": 3,
+     "quantitative": 1,
+     "paired_text": 1
+    },
+    "skillCats": {
+     "1": 6,
+     "2": 9,
+     "3": 15,
+     "4": 15,
+     "5": 10
+    }
+   },
+   "WH2": {
+    "sets": 15,
+    "items": 55,
+    "units": {
+     "1": 4,
+     "2": 4,
+     "3": 8,
+     "4": 8,
+     "5": 7,
+     "6": 8,
+     "7": 6,
+     "8": 6,
+     "9": 4
+    },
+    "stim": {
+     "primary_text": 6,
+     "quantitative": 1,
+     "image": 4,
+     "secondary_text": 3,
+     "paired_text": 1
+    },
+    "skillCats": {
+     "1": 7,
+     "2": 10,
+     "3": 14,
+     "4": 12,
+     "5": 12
+    }
+   }
+  }
+ }
+}

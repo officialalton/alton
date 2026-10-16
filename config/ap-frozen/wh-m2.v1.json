@@ -1,0 +1,55 @@
+{
+ "version": "v1-wh-m2",
+ "run": "wh-m2",
+ "batch": "wh-m2",
+ "gate": "wh-m2-2026-10-15",
+ "subject": "ap_world_history",
+ "mode": "mc",
+ "capUsd": 1.5,
+ "hardStopCumulativeUsd": 275,
+ "myTotalCapUsd": 22,
+ "stages": [
+  "gen",
+  "check",
+  "balance",
+  "solve",
+  "panel",
+  "finalize"
+ ],
+ "sets": [
+  "w114"
+ ],
+ "extra": 2,
+ "models": {
+  "gen": "claude-opus-5-5",
+  "solvers": [
+   "claude-opus-5-5",
+   "claude-sonnet-5-5"
+  ],
+  "panel": "claude-fable-5-1",
+  "sampleHigh": "claude-opus-5-5",
+  "sampleLow": "claude-sonnet-5-5",
+  "graders": [
+   "claude-opus-5-5",
+   "claude-sonnet-5-5"
+  ],
+  "fact": "claude-fable-5-1"
+ },
+ "effort": "low",
+ "genEffort": "low",
+ "generatorFiles": [
+  "scripts/ap-generation/wh-pipeline.ts",
+  "scripts/ap-generation/wh-build.ts",
+  "scripts/ap-generation/wh-real-frq-gates.ts",
+  "lib/ap-generation/wh-prompts.ts",
+  "lib/ap-generation/wh-plan.ts",
+  "lib/ap-generation/wh-real-gates.ts",
+  "lib/ap-generation/wh-frq.ts",
+  "lib/ap-generation/subjects/worldhistory.ts",
+  "lib/ap-exam/wh-rules.ts",
+  "data/ap/wh-sources/registry.json"
+ ],
+ "expected": {
+  "hash": "f8fe13f5c0aa"
+ }
+}

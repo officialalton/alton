@@ -314,7 +314,7 @@ describe("loadEssayScores", () => {
     const calls: unknown[][] = [];
     const q: any = { select() { return q; }, eq() { return q; }, in(...a: unknown[]) { calls.push(a); return Promise.resolve({ data: [{ set_item_id: "i", part_label: "A", status: "done", scores: { total: 2 }, rationale: null, last_error: null, rubric_version: "ushistory-v1" }], error: null }); } }; // eslint-disable-line @typescript-eslint/no-explicit-any
     const rows = await loadEssayScores({ from: () => q }, "a1");
-    expect(calls[0]).toEqual(["rubric_version", ["englang-v2", "englit-v1", "ushistory-v1"]]);
+    expect(calls[0]).toEqual(["rubric_version", ["englang-v2", "englit-v1", "ushistory-v1", "whap-v1"]]);
     expect(rows[0]).toMatchObject({ setItemId: "i", partLabel: "A", rubricVersion: "ushistory-v1" });
   });
 });

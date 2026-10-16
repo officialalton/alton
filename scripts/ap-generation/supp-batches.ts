@@ -92,6 +92,12 @@ export const ltItemNames = (): string[] => {
  * AP U.S. History 재고 파일(data/ap/stock/ush-<배치>-items.json, 2026-10-14). psych 와 같은 이름 규칙.
  */
 export const USH_ITEM_FILE_RE = /^ush-[a-z0-9]+(?:-[a-z0-9]+)*-items\.json$/;
+/** AP World History 재고 파일(data/ap/stock/wh-<배치>-items.json, 2026-10-15). */
+export const WH_ITEM_FILE_RE = /^wh-[a-z0-9]+(?:-[a-z0-9]+)*-items\.json$/;
+export const whItemNames = (): string[] => {
+  const dir = path.resolve(process.cwd(), "data/ap/stock");
+  return existsSync(dir) ? readdirSync(dir).filter((f) => WH_ITEM_FILE_RE.test(f)).map((f) => f.replace(/\.json$/, "")).sort() : [];
+};
 export const ushItemNames = (): string[] => {
   const dir = path.resolve(process.cwd(), "data/ap/stock");
   return existsSync(dir) ? readdirSync(dir).filter((f) => USH_ITEM_FILE_RE.test(f)).map((f) => f.replace(/\.json$/, "")).sort() : [];

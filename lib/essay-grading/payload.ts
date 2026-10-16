@@ -32,9 +32,9 @@ function ushSourceBody(s: Record<string, unknown>): string {
 /** payload.ush_frq(schema_version 'ush-frq-1') → context.ts 가 읽는 모양 + rubricId/taskType/scoringNotes.
  *  읽는 필드: task_type, prompt{scenario,task,requirements[],parts[{label,prompt,points}]}, sources[{id,kind,title,attribution,body,table{columns,rows},figure{title,categories,series[{name,values}],description}}],
  *  rubric{rubric_id,rows[{row_id,name,max,descriptors,task_specific}]}, expected_features, samples[{tier,essay,annotations[{quote,comment,row_id}],rubric_scores}]. */
-function ushToEssayPayload(u: Record<string, unknown>, outerVersion: unknown): unknown | null {
+function ushToEssayPayload(u: Record<string, unknown>, outerVersion: unknown, family: "ush" | "whap" = "ush"): unknown | null {
   const ver = str(u.schema_version) || str(outerVersion);
-  if (ver && ver !== "ush-frq-1") return null;
+  if (ver && ver !== `${family}-frq-1`) return null;
   const taskType = str(u.task_type);
   if (taskType !== "saq" && taskType !== "dbq" && taskType !== "leq") return null;
   const pr = isObj(u.prompt) ? u.prompt : {};
@@ -59,7 +59,7 @@ function ushToEssayPayload(u: Record<string, unknown>, outerVersion: unknown): u
     }),
     isObj(u.expected_features) ? "Expected features: " + JSON.stringify(u.expected_features) : "",
   ].filter(Boolean).join("\n");
-  return { task, parts: [], sources, samples, rubricId: "ushistory-v1", taskType, scoringNotes: clipTo(notes, 4000) };
+  return { task, parts: [], sources, samples, rubricId: family === "whap" ? "whap-v1" : "ushistory-v1", taskType, scoringNotes: clipTo(notes, 4000) };
 }
 
 /** payload(el_frq: prompt·sources[{id,title,body}]·samples[{tier,essay,annotations}]; parts[{label,prompt}]) → context.ts 가 읽는 모양. */
@@ -77,6 +77,7 @@ function litToEssayPayload(payload: Record<string, unknown>, lit: Record<string,
 export function toEssayPayload(payload: unknown): unknown | null {
   if (isObj(payload) && isObj(payload.lit_frq)) return litToEssayPayload(payload, payload.lit_frq);
   if (isObj(payload) && isObj(payload.ush_frq)) return ushToEssayPayload(payload.ush_frq, payload.schema_version);
+  if (isObj(payload) && isObj(payload.whap_frq)) return ushToEssayPayload(payload.whap_frq, payload.schema_version, "whap");
   if (!isObj(payload) || !isObj(payload.el_frq)) return null;
   const el = payload.el_frq;
   const parts = (Array.isArray(payload.parts) ? payload.parts.filter(isObj) : []).map((p) => ({ label: str(p.label), prompt: str(p.prompt) || str(el.prompt) }));

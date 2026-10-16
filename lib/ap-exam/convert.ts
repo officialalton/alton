@@ -34,7 +34,7 @@ const isObj = (v: unknown): v is Json => typeof v === "object" && v !== null && 
 export const FRQ_DISCLAIMER = "Reference answer and scoring notes (not official College Board scoring). Compare your response with this guide; no AP score is estimated.";
 
 function frqReference(payload: Json): string {
-  if ((isObj(payload.el_frq) || isObj(payload.lit_frq) || isObj(payload.ush_frq)) && typeof payload.reference_text === "string" && payload.reference_text.trim()) return payload.reference_text; // AP English: 루브릭 요약 + 3단계 주석 샘플(englang-frq.ts frqReferenceText)
+  if ((isObj(payload.el_frq) || isObj(payload.lit_frq) || isObj(payload.ush_frq) || isObj(payload.whap_frq)) && typeof payload.reference_text === "string" && payload.reference_text.trim()) return payload.reference_text; // AP English: 루브릭 요약 + 3단계 주석 샘플(englang-frq.ts frqReferenceText)
   const parts = Array.isArray(payload.parts) ? (payload.parts as Json[]) : [];
   const lines: string[] = [FRQ_DISCLAIMER, ""];
   for (const p of parts) {
