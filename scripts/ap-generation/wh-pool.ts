@@ -1,6 +1,6 @@
 // AP World History 풀 모의고사 배정용 재고 로더(읽기 전용, DB 없음). el-pool.ts 와 같은 재고 정의(자동 통과·결함 0·완전 중복 제외·렌더 게이트 통과·화면 증거 보유).
 // 후보 모델: MC = 자료 세트 1개 = 후보 1개(문항 3–4: payload.items 의 skill·topic), FRQ = 문항 1개 = 후보 1개(유형 = payload.template: saq1|saq2|saq3|dbq|leq; 시대 = payload.whap_frq.period).
-import { existsSync, readdirSync, readFileSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync } from "../../lib/ap-generation/data-fs";
 import { gateCandidate } from "../../lib/ap-figures/gate";
 import { whSkillCat, whUnitOfTopic } from "../../lib/ap-exam/wh-rules";
 import { STOCK_FILES } from "./keys-file";
