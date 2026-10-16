@@ -1,0 +1,69 @@
+{
+ "kind": "ap_new_version_swap_plan",
+ "set": "BC1",
+ "sourceSetName": "AP Calculus BC — Practice Exam 1",
+ "sourceVersionNo": 4,
+ "generatedBy": "scripts/audit/ap-aud1015-csa-calc-build.py (external audit 2026-10-15 confirmed fixes)",
+ "note": "Each swap replaces a published candidate with a corrected copy (stem/premise/reference-wording fix only; the key answer is unchanged). New candidates are in data/ap/stock/supp-aud1015-items.json and must be loaded (review_env_ready) before the preview. Slots are found by removeKey.",
+ "swapCount": 3,
+ "verifierViolations": [],
+ "swaps": [
+  {
+   "section": "ap_mc_b",
+   "position": 5,
+   "removeKey": "s3a-graph-ab-final:ap_calculus_ab-m04-k0",
+   "addKey": "supp-aud1015-final:ap_calculus_ab-m04-k0",
+   "reason": "external audit 2026-10-15 AP-021",
+   "remove": {
+    "unit": 3,
+    "skill": "1.E",
+    "shared": false,
+    "type": "3.2"
+   },
+   "add": {
+    "unit": 3,
+    "skill": "1.E",
+    "shared": false,
+    "type": "3.2"
+   }
+  },
+  {
+   "section": "ap_mc_b",
+   "position": 6,
+   "removeKey": "s3a-graph-bc-final:ap_calculus_bc-m02-k0",
+   "addKey": "supp-aud1015-final:ap_calculus_bc-m02-k0",
+   "reason": "external audit 2026-10-15 AP-022",
+   "remove": {
+    "unit": 10,
+    "skill": "3.D",
+    "shared": false,
+    "type": "10.12"
+   },
+   "add": {
+    "unit": 10,
+    "skill": "3.D",
+    "shared": false,
+    "type": "10.12"
+   }
+  },
+  {
+   "section": "ap_frq_b",
+   "position": 3,
+   "removeKey": "s1a-final:ap_calculus_ab-f02-k0",
+   "addKey": "supp-aud1015-final:ap_calculus_ab-f02-k0",
+   "reason": "external audit 2026-10-15 AP-020",
+   "remove": {
+    "unit": 5,
+    "skill": "3.E",
+    "shared": false,
+    "type": "5.9"
+   },
+   "add": {
+    "unit": 5,
+    "skill": "3.E",
+    "shared": false,
+    "type": "5.9"
+   }
+  }
+ ]
+}

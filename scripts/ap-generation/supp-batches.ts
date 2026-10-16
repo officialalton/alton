@@ -22,6 +22,8 @@ export const SUPP_BATCHES: { run: string; file: string }[] = [
   { run: "supp-r3b2-ab-final", file: "supp-r3b2-items.json" },
   { run: "supp-r3c-ab-final", file: "supp-r3c-items.json" },
   { run: "supp-r3c2-ab-final", file: "supp-r3c2-items.json" },
+  // 2026-10-15 외부 AP 감사 확정 수정 — Calculus 11행의 수정본(원본 후보는 그대로, 교체안이 옛 키 -> 새 키)
+  { run: "supp-aud1015-final", file: "supp-aud1015-items.json" },
 ];
 
 /** 디스크에 실제로 있는 보강 배치 파일 이름(확장자 없음). */

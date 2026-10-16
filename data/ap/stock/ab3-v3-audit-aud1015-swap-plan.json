@@ -1,0 +1,31 @@
+{
+ "kind": "ap_new_version_swap_plan",
+ "set": "AB3",
+ "sourceSetName": "AP Calculus AB — Practice Exam 3",
+ "sourceVersionNo": 2,
+ "generatedBy": "scripts/audit/ap-aud1015-csa-calc-build.py (external audit 2026-10-15 confirmed fixes)",
+ "note": "Each swap replaces a published candidate with a corrected copy (stem/premise/reference-wording fix only; the key answer is unchanged). New candidates are in data/ap/stock/supp-aud1015-items.json and must be loaded (review_env_ready) before the preview. Slots are found by removeKey.",
+ "swapCount": 1,
+ "verifierViolations": [],
+ "swaps": [
+  {
+   "section": "ap_mc_a",
+   "position": 27,
+   "removeKey": "s1-graph-ab-final:ap_calculus_ab-m24-k0",
+   "addKey": "supp-aud1015-final:ap_calculus_ab-m24-k0",
+   "reason": "external audit 2026-10-15 AP-018",
+   "remove": {
+    "unit": 4,
+    "skill": "1.D",
+    "shared": false,
+    "type": "4.7"
+   },
+   "add": {
+    "unit": 4,
+    "skill": "1.D",
+    "shared": false,
+    "type": "4.7"
+   }
+  }
+ ]
+}

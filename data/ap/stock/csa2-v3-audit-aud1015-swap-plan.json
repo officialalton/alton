@@ -1,0 +1,145 @@
+{
+ "kind": "ap_new_version_swap_plan",
+ "set": "CSA2",
+ "sourceSetName": "AP Computer Science A — Practice Exam 2",
+ "sourceVersionNo": 2,
+ "generatedBy": "scripts/audit/ap-aud1015-csa-calc-build.py (external audit 2026-10-15 confirmed fixes)",
+ "note": "CSA FRQ points 9/9/9/9 -> 7/7/5/6 (current CED), plus scope fixes. Corrected copies are in data/ap/stock/csa-aud1015-items.json. Replacements keep unit/skill (practice counts) except the Practice 5 swap, which trades one Practice 3 item for one Practice 5 item. Independent of data/ap/stock/csa2-v2-audit-r6-swap-plan.json (different slots); apply in either order.",
+ "swapCount": 7,
+ "verifierViolations": [],
+ "swaps": [
+  {
+   "section": "ap_frq",
+   "position": 1,
+   "removeKey": "csa-s2-frq-a:ap_computer_science_a-f03-k0",
+   "addKey": "csa-aud1015:ap_computer_science_a-f03-k0",
+   "reason": "external audit 2026-10-15 AP-036,AP-037",
+   "remove": {
+    "unit": 2,
+    "skill": "2.A",
+    "shared": false,
+    "type": "2.7"
+   },
+   "add": {
+    "unit": 2,
+    "skill": "2.A",
+    "shared": false,
+    "type": "2.7"
+   }
+  },
+  {
+   "section": "ap_frq",
+   "position": 2,
+   "removeKey": "csa-p1-b:ap_computer_science_a-f02-k0",
+   "addKey": "csa-aud1015:ap_computer_science_a-f02-k0",
+   "reason": "external audit 2026-10-15 AP-037",
+   "remove": {
+    "unit": 3,
+    "skill": "2.B",
+    "shared": false,
+    "type": "3.3"
+   },
+   "add": {
+    "unit": 3,
+    "skill": "2.B",
+    "shared": false,
+    "type": "3.3"
+   }
+  },
+  {
+   "section": "ap_frq",
+   "position": 3,
+   "removeKey": "csa-s2-frq-b:ap_computer_science_a-f02-k0",
+   "addKey": "csa-aud1015:ap_computer_science_a-f02-k0",
+   "reason": "external audit 2026-10-15 AP-037",
+   "remove": {
+    "unit": 4,
+    "skill": "2.A",
+    "shared": false,
+    "type": "4.10"
+   },
+   "add": {
+    "unit": 4,
+    "skill": "2.A",
+    "shared": false,
+    "type": "4.10"
+   }
+  },
+  {
+   "section": "ap_frq",
+   "position": 4,
+   "removeKey": "csa-s2-short-frq:ap_computer_science_a-f01-k0",
+   "addKey": "csa-aud1015:ap_computer_science_a-f01-k0",
+   "reason": "external audit 2026-10-15 AP-037",
+   "remove": {
+    "unit": 4,
+    "skill": "2.A",
+    "shared": false,
+    "type": "4.13"
+   },
+   "add": {
+    "unit": 4,
+    "skill": "2.A",
+    "shared": false,
+    "type": "4.13"
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 3,
+   "removeKey": "csa-s2-mc-a:ap_computer_science_a-m03-k1",
+   "addKey": "csa-aud1015:ap_computer_science_a-m03-k1",
+   "reason": "external audit 2026-10-15 AP-040",
+   "remove": {
+    "unit": 1,
+    "skill": "3.A",
+    "shared": false,
+    "type": "1.5"
+   },
+   "add": {
+    "unit": 1,
+    "skill": "3.A",
+    "shared": false,
+    "type": "1.5"
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 40,
+   "removeKey": "csa-s2-short-mc:ap_computer_science_a-m01-k1",
+   "addKey": "csa-aud1015:ap_computer_science_a-m01-k1",
+   "reason": "external audit 2026-10-15 AP-041",
+   "remove": {
+    "unit": 4,
+    "skill": "4.A",
+    "shared": false,
+    "type": "4.9"
+   },
+   "add": {
+    "unit": 4,
+    "skill": "4.A",
+    "shared": false,
+    "type": "4.9"
+   }
+  },
+  {
+   "section": "ap_mc",
+   "position": 27,
+   "removeKey": "csa-s2-mc-c:ap_computer_science_a-m22-k1",
+   "addKey": "csa-aud1015:ap_computer_science_a-m91-k0",
+   "reason": "external audit 2026-10-15 AP-043",
+   "remove": {
+    "unit": 3,
+    "skill": "3.B",
+    "shared": false,
+    "type": "3.7"
+   },
+   "add": {
+    "unit": 3,
+    "skill": "5.A",
+    "shared": false,
+    "type": "3.2"
+   }
+  }
+ ]
+}
