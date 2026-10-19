@@ -408,8 +408,13 @@ function renderQuadraticFnProblem(model: QuadraticFnModel, opts?: { figureMode?:
   const figureMode: NonlinearFnFigureMode = opts?.figureMode ?? "text";
   if (figureMode === "figure_choice") return renderQuadraticFigureChoice(model);
   const figure: PlaneSpec | null = figureMode === "plane" ? buildPlaneFigure(model.a, model.h, model.k) : null;
+  // 외부 검수(2026-10-18, Test 1 Math 10·11·15·19번) — 그래프와 식을 둘 다 주면 한쪽만으로 풀린다. 그래프를 보이는 plane 은
+  // 그래프만 주고 꼭짓점을 읽게 한다. 함수값(evaluate) 계산은 식만으로 묻는다 — plane 자료와 짝짓지 않는다(배치가 막는다).
+  if (figureMode === "plane" && model.questionKind === "evaluate") {
+    throw new Error("nonlinear_functions: evaluate 는 좌표평면 자료와 함께 낼 수 없습니다(식과 그래프 중복).");
+  }
   const passage = figureMode === "plane"
-    ? `The function f is defined by ${vertexExpr(model.a, model.h, model.k)}. The graph of y = f(x) is shown in the xy-plane below.`
+    ? "The graph of y = f(x), a parabola, is shown in the xy-plane below."
     : `The function f is defined by ${vertexExpr(model.a, model.h, model.k)}.`;
   const options = [model.correctAnswer, ...model.distractors.map((d) => d.value)];
   const order = [0, 1, 2, 3].sort(() => Math.random() - 0.5);
@@ -434,13 +439,13 @@ function renderQuadraticFnProblem(model: QuadraticFnModel, opts?: { figureMode?:
   }
   if (model.questionKind === "vertex_x") {
     const question = "What is the x-coordinate of the vertex of the graph of f in the xy-plane?";
-    const explanation = `f(x) = a(x-h)² + k 형태에서 꼭짓점은 (h, k)이므로 꼭짓점의 x좌표는 h = ${model.correctAnswer}이다.`;
-    const explanationEn = `In the form f(x) = a(x-h)² + k, the vertex is (h, k), so the x-coordinate of the vertex is h = ${model.correctAnswer}.`;
+    const explanation = figureMode === "plane" ? `그래프의 꼭짓점을 읽으면 x좌표는 ${model.correctAnswer}이다.` : `f(x) = a(x-h)² + k 형태에서 꼭짓점은 (h, k)이므로 꼭짓점의 x좌표는 h = ${model.correctAnswer}이다.`;
+    const explanationEn = figureMode === "plane" ? `Reading the vertex of the graph, its x-coordinate is ${model.correctAnswer}.` : `In the form f(x) = a(x-h)² + k, the vertex is (h, k), so the x-coordinate of the vertex is h = ${model.correctAnswer}.`;
     return { passage, question, options: shuffled, correctIndex, explanation, explanationEn, figure, distractorRationales };
   }
   const question = "What is the y-coordinate of the vertex of the graph of f in the xy-plane?";
-  const explanation = `f(x) = a(x-h)² + k 형태에서 꼭짓점은 (h, k)이므로 꼭짓점의 y좌표는 k = ${model.correctAnswer}이다.`;
-  const explanationEn = `In the form f(x) = a(x-h)² + k, the vertex is (h, k), so the y-coordinate of the vertex is k = ${model.correctAnswer}.`;
+  const explanation = figureMode === "plane" ? `그래프의 꼭짓점을 읽으면 y좌표는 ${model.correctAnswer}이다.` : `f(x) = a(x-h)² + k 형태에서 꼭짓점은 (h, k)이므로 꼭짓점의 y좌표는 k = ${model.correctAnswer}이다.`;
+  const explanationEn = figureMode === "plane" ? `Reading the vertex of the graph, its y-coordinate is ${model.correctAnswer}.` : `In the form f(x) = a(x-h)² + k, the vertex is (h, k), so the y-coordinate of the vertex is k = ${model.correctAnswer}.`;
   return { passage, question, options: shuffled, correctIndex, explanation, explanationEn, figure, distractorRationales };
 }
 

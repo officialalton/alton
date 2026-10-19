@@ -39,6 +39,15 @@ const CONTEXTS: string[] = [
   "employees of a company who work remotely at least once a week",
 ];
 
+/** 외부 검수(2026-10-18, Test 1 Math 14번) — "same characteristic" 같은 지시어 대신 집단·성질을 문장에 직접 쓴다.
+ * context 문자열(모델 필드)은 그대로 두고, 렌더용 어휘를 여기서 찾는다. */
+export const CONTEXT_PHRASES: Record<string, { sample: string; population: string; trait: string; traitInfinitive: string }> = {
+  "residents of a town who support a new park": { sample: "residents of a town", population: "residents", trait: "support a new park", traitInfinitive: "support a new park" },
+  "students at a school who ride the bus": { sample: "students at a school", population: "students", trait: "ride the bus", traitInfinitive: "ride the bus" },
+  "customers of a store who prefer online shopping": { sample: "customers of a store", population: "customers", trait: "prefer online shopping", traitInfinitive: "prefer online shopping" },
+  "employees of a company who work remotely at least once a week": { sample: "employees of a company", population: "employees", trait: "work remotely at least once a week", traitInfinitive: "work remotely at least once a week" },
+};
+
 function pickUnique(
   cands: { value: number; kind: DistractorKind; reason: string }[],
   correctAnswer: string
@@ -104,10 +113,12 @@ export type CompiledMathProblem = {
 
 export function renderInferenceProblem(model: InferenceModel, opts?: { figureMode?: "data" }): CompiledMathProblem {
   const wantsData = opts?.figureMode === "data";
-  const passage = `A random sample of ${model.sampleSize} ${model.context.includes("residents") ? "residents" : model.context.includes("students") ? "students" : model.context.includes("customers") ? "customers" : "employees"} was surveyed. Of those surveyed, ${model.sampleCount} were ${model.context}. The population consists of ${model.population} total.`
+  const ph = CONTEXT_PHRASES[model.context];
+  if (!ph) throw new Error(`inference_from_sample: 알 수 없는 context '${model.context}'`);
+  const passage = `A random sample of ${model.sampleSize} ${ph.sample} was surveyed. Of those surveyed, ${model.sampleCount} ${ph.trait}. The population consists of ${model.population} ${ph.population} in total.`
     + (wantsData ? " The sample results are also shown in the table below." : "");
-  const figure: DataSpec | null = wantsData ? { type: "data", kind: "table", title: "Sample results", columns: ["Category", "Count"], rows: [["Sample size", model.sampleSize], ["Have this characteristic", model.sampleCount], ["Population", model.population]] } : null;
-  const question = "Based on the sample, about how many people in the entire population would be expected to have this same characteristic?";
+  const figure: DataSpec | null = wantsData ? { type: "data", kind: "table", title: "Sample results", columns: ["Category", "Count"], rows: [["Sample size", model.sampleSize], [`Sampled ${ph.population} who ${ph.trait}`, model.sampleCount], ["Population", model.population]] } : null;
+  const question = `Based on the sample, about how many of the ${model.population} ${ph.population} would be expected to ${ph.traitInfinitive}?`;
   const options = [model.correctAnswer, ...model.distractors.map((d) => d.value)];
   const order = [0, 1, 2, 3].sort(() => Math.random() - 0.5);
   const shuffled = order.map((i) => options[i]);

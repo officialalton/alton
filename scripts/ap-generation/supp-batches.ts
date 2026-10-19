@@ -24,8 +24,12 @@ export const SUPP_BATCHES: { run: string; file: string }[] = [
   { run: "supp-r3c2-ab-final", file: "supp-r3c2-items.json" },
   // 2026-10-15 외부 AP 전체 검수 확정 수정본(scripts/audit/ap-audit-fix-1015.ts): 후보 복제본이라 run 디렉터리는 없다.
   { run: "fix1015", file: "supp-fix1015-items.json" },
+  // 2026-10-19 외부 AP 검수 유형 단위 수정 복제 후보(scripts/audit/ap-audit-typefix-1019.ts).
+  { run: "fix1019", file: "supp-fix1019-items.json" },
   // 2026-10-15 외부 AP 감사 확정 수정 — Calculus 11행의 수정본(원본 후보는 그대로, 교체안이 옛 키 -> 새 키)
   { run: "supp-aud1015-final", file: "supp-aud1015-items.json" },
+  // k912/k913: 계산기 불가 FRQ B 칸용 교정 복제(k910/k911 대체). 따로 적재해야 앞서 적재된 9건과 섞이지 않는다.
+  { run: "supp-aud1015-final", file: "supp-aud1015b-items.json" },
 ];
 
 /** 디스크에 실제로 있는 보강 배치 파일 이름(확장자 없음). */

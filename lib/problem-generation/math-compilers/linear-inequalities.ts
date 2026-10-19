@@ -6,7 +6,7 @@
 // 계수로 나눌 때 부등호 방향이 뒤집히는 것이 핵심 오류 지점) — (2) 두 변수 일차부등식
 // y (부등호) mx + b 이 주어졌을 때 어느 점이 그 해 영역에 속하는가(좌표평면에 경계선과
 // 음영을 실제로 그려 검증한다).
-import type { PlaneSpec, PlaneObject } from "@/lib/problem-figures/templates/coordinate-plane";
+import type { PlaneSpec } from "@/lib/problem-figures/templates/coordinate-plane";
 import type { DistractorRationale, DistractorKind } from "../review";
 
 export type LinearInequalityQuestionKind = "solve_one_var" | "point_in_solution" | "table_verification";
@@ -338,14 +338,6 @@ export type CompiledMathProblem = {
   distractorRationales: DistractorRationale[];
 };
 
-function buildFigureForPointInSolution(model: LinearInequalityModel): PlaneSpec {
-  const range = RANGE_BY_DIFFICULTY[model.difficulty] + 2;
-  const objects: PlaneObject[] = [
-    { id: "region", kind: "inequality", op: model.op, slope: model.m, intercept: model.b, label: "" },
-  ];
-  return { type: "plane", axes: { x: { min: -range, max: range }, y: { min: -range, max: range } }, objects };
-}
-
 export function renderLinearInequalityProblem(model: LinearInequalityModel): CompiledMathProblem {
   const shuffleWithAnswer = (correct: string, wrongs: string[]): { options: string[]; correctIndex: number } => {
     const options = [correct, ...wrongs];
@@ -404,18 +396,19 @@ export function renderLinearInequalityProblem(model: LinearInequalityModel): Com
   const opEn = model.op === "<" || model.op === "<=" ? "less than" : "greater than";
   const eqIncl = model.op === "<=" || model.op === ">=" ? "(경계선 포함)" : "(경계선 제외)";
   const eqInclEn = model.op === "<=" || model.op === ">=" ? "(boundary included)" : "(boundary excluded)";
-  const passage = `Consider the graph of the inequality shown.\n\n${mathWrap(`y ${OP_TEXT[model.op]} ${rhsExpr(model.m, model.b)}`)}`;
+  // 외부 검수(2026-10-18) — 식을 지문에 주므로 같은 부등식의 그래프를 또 그리지 않는다(한 표현만 제시).
+  const passage = `Consider the inequality shown.\n\n${mathWrap(`y ${OP_TEXT[model.op]} ${rhsExpr(model.m, model.b)}`)}`;
   const question = "Which of the following points is a solution to the inequality shown?";
   const { options, correctIndex } = shuffleWithAnswer(model.correctAnswer, model.distractors.map((d) => d.value));
   const explanation = `경계선 y = ${rhsExpr(model.m, model.b)} ${eqIncl}을 기준으로, y 값이 경계선의 값보다 ${opKor} 쪽이 해 영역이다. ${model.correctAnswer}를 대입하면 조건을 만족하므로 정답이다.`;
   const explanationEn = `Relative to the boundary line y = ${rhsExpr(model.m, model.b)} ${eqInclEn}, the solution region is where the y-value is ${opEn} the boundary's value. Substituting ${model.correctAnswer} satisfies the condition, so it is the correct answer.`;
   const distractorRationales: DistractorRationale[] = model.distractors.map((d, i) => ({
     index: options.indexOf(d.value) >= 0 ? options.indexOf(d.value) : i,
-    plausibleBecause: "그래프 위 또는 반대편의 실제 점이라 얼핏 보면 해로 보일 수 있다.",
-    matches: "같은 그래프에서 골랐다.",
+    plausibleBecause: "경계선 위 또는 반대편의 실제 점이라 얼핏 보면 해로 보일 수 있다.",
+    matches: "같은 부등식에서 골랐다.",
     whyWrong: d.reason,
     kind: d.kind,
     obvious: false,
   }));
-  return { passage, question, options, correctIndex, explanation, explanationEn, figure: buildFigureForPointInSolution(model), distractorRationales };
+  return { passage, question, options, correctIndex, explanation, explanationEn, figure: null, distractorRationales };
 }

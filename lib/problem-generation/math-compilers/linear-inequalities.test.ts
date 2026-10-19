@@ -69,10 +69,11 @@ describe("renderLinearInequalityProblem — 렌더링", () => {
     expect(rendered.options[rendered.correctIndex]).toBe(model.correctAnswer);
   });
 
-  it("point_in_solution은 부등식 그림(plane, inequality 객체)을 낸다", () => {
+  it("point_in_solution은 식만 주고 같은 부등식의 그림은 붙이지 않는다(외부 검수 2026-10-18)", () => {
     const model = generateLinearInequalityModel({ difficulty: "medium", questionKind: "point_in_solution" });
     const rendered = renderLinearInequalityProblem(model);
-    expect(rendered.figure?.type).toBe("plane");
+    expect(rendered.figure).toBeNull();
+    expect(rendered.passage).toMatch(/inequality shown/);
     expect(rendered.options[rendered.correctIndex]).toBe(model.correctAnswer);
   });
 });

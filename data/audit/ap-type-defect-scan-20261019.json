@@ -1,0 +1,2155 @@
+{
+ "dropPlans": null,
+ "generatedBy": "scripts/audit/ap-type-defect-scan.py",
+ "auditSource": "docs/audits/ap-external-audit-20261015-report.md",
+ "poolSize": 4470,
+ "unpublishedSets": [
+  "PH1",
+  "PH2"
+ ],
+ "detectors": {
+  "a_chisq_equivalent_nulls": {
+   "stockByArchetype": {
+    "st_chisq_setup": 3
+   },
+   "stockTotal": 3,
+   "published": [],
+   "coveredByExistingPlan": [
+    {
+     "key": "stats-s3-a:ap_statistics-m10-k0",
+     "archetype": "st_chisq_setup",
+     "plan": "st1-v3-audit-1015-swap-plan.json",
+     "newKey": "fix1015:ap_statistics-fx03-k0",
+     "set": "ST1"
+    },
+    {
+     "key": "stats-s3-a:ap_statistics-m10-k1",
+     "archetype": "st_chisq_setup",
+     "plan": "st2-v2-audit-1015-swap-plan.json",
+     "newKey": "fix1015:ap_statistics-fx04-k0",
+     "set": "ST2"
+    },
+    {
+     "key": "stats-s3b-d:ap_statistics-m05-k0",
+     "archetype": "st_chisq_setup",
+     "plan": "st2-v2-audit-1015-swap-plan.json",
+     "newKey": "fix1015:ap_statistics-fx05-k0",
+     "set": "ST2"
+    }
+   ],
+   "stockItems": {
+    "st_chisq_setup": [
+     {
+      "key": "stats-s3-a:ap_statistics-m10-k0",
+      "subject": "ap_statistics",
+      "hits": [
+       "homogeneity_and_independence_nulls_both_offered"
+      ],
+      "usedIn": [],
+      "replacedBy": [
+       "st1-v3-audit-1015-swap-plan.json",
+       "fix1015:ap_statistics-fx03-k0",
+       "ST1"
+      ]
+     },
+     {
+      "key": "stats-s3-a:ap_statistics-m10-k1",
+      "subject": "ap_statistics",
+      "hits": [
+       "homogeneity_and_independence_nulls_both_offered"
+      ],
+      "usedIn": [],
+      "replacedBy": [
+       "st2-v2-audit-1015-swap-plan.json",
+       "fix1015:ap_statistics-fx04-k0",
+       "ST2"
+      ]
+     },
+     {
+      "key": "stats-s3b-d:ap_statistics-m05-k0",
+      "subject": "ap_statistics",
+      "hits": [
+       "homogeneity_and_independence_nulls_both_offered"
+      ],
+      "usedIn": [],
+      "replacedBy": [
+       "st2-v2-audit-1015-swap-plan.json",
+       "fix1015:ap_statistics-fx05-k0",
+       "ST2"
+      ]
+     }
+    ]
+   }
+  },
+  "b_setup_hidden": {
+   "stockByArchetype": {
+    "(no archetype)": 12,
+    "bif_q1_fliesselection": 2,
+    "bif_q1_growthfactor": 1,
+    "bif_q1_inhibitor": 1,
+    "bif_q1_lacoperon": 2,
+    "bif_q1_resistance": 1,
+    "bif_q1_salinity": 1,
+    "bif_q2_allelefreq": 2,
+    "bif_q2_enzymetemp": 1,
+    "bif_q2_photosyn": 1,
+    "bif_q2_popgrowth": 1,
+    "bif_q2_potato": 1,
+    "bif_q2_receptorsat": 2,
+    "bif_q6_agemeiosis": 4,
+    "bif_q6_enzymeph": 2,
+    "bif_q6_growth": 1,
+    "bif_q6_lacz": 2,
+    "bif_q6_mitotic": 1,
+    "bif_q6_moth": 4,
+    "bif_q6_photo": 1,
+    "bif_q6_resp": 1,
+    "bif_q6_salt": 1,
+    "chf_long_kinetics": 7,
+    "elfrq_fb1": 2,
+    "maf_short_ppc_trade": 3,
+    "mi_public_good_efficient": 1,
+    "mif_short_labor": 1,
+    "stfrq_q2_regression": 5
+   },
+   "stockTotal": 64,
+   "published": [
+    {
+     "key": "el-rv:ap_english_language-fb1-k0",
+     "archetype": "elfrq_fb1",
+     "subject": "ap_english_language",
+     "hits": [
+      "number:410"
+     ],
+     "where": [
+      {
+       "set": "EL1",
+       "section": "frq",
+       "position": 1,
+       "published": true
+      }
+     ]
+    }
+   ],
+   "coveredByExistingPlan": [
+    {
+     "key": "bio-p1-b:ap_biology-f01-k0",
+     "archetype": "bif_q1_inhibitor",
+     "plan": "bi1-v5-swap-plan.json",
+     "newKey": "bio-v3a:ap_biology-f01-k0",
+     "set": "BI1"
+    },
+    {
+     "key": "bio-p1-b:ap_biology-f02-k0",
+     "archetype": "bif_q2_potato",
+     "plan": "bi1-v6-audit-1015-swap-plan.json",
+     "newKey": "fix1015:ap_biology-fx06-k0",
+     "set": "BI1"
+    },
+    {
+     "key": "bio-s2-frq:ap_biology-f01-k0",
+     "archetype": "bif_q1_growthfactor",
+     "plan": "bi2-v7-audit-1019-swap-plan.json",
+     "newKey": "fix1019:ap_biology-tf01-k0",
+     "set": "BI2"
+    },
+    {
+     "key": "bio-s2-frq:ap_biology-f02-k0",
+     "archetype": "bif_q1_resistance",
+     "plan": "bi1-v2-swap-plan.json",
+     "newKey": "bio-p1-b:ap_biology-f01-k0",
+     "set": "BI1"
+    },
+    {
+     "key": "bio-s2-frq:ap_biology-f03-k0",
+     "archetype": "bif_q1_salinity",
+     "plan": "bi2-v5-swap-plan.json",
+     "newKey": "bio-s2-frq:ap_biology-f01-k0",
+     "set": "BI2"
+    },
+    {
+     "key": "bio-s2-frq:ap_biology-f04-k0",
+     "archetype": "bif_q2_enzymetemp",
+     "plan": "bi1-v5-swap-plan.json",
+     "newKey": "bio-p1-b:ap_biology-f02-k0",
+     "set": "BI1"
+    },
+    {
+     "key": "bio-s2-frq:ap_biology-f05-k0",
+     "archetype": "bif_q2_photosyn",
+     "plan": "bi2-v5-swap-plan.json",
+     "newKey": "bio-v3a:ap_biology-f04-k0",
+     "set": "BI2"
+    },
+    {
+     "key": "bio-s2-frq:ap_biology-f06-k0",
+     "archetype": "bif_q2_popgrowth",
+     "plan": "bi1-v2-swap-plan.json",
+     "newKey": "bio-s2-frq:ap_biology-f04-k0",
+     "set": "BI1"
+    },
+    {
+     "key": "bio-s2-frq:ap_biology-f23-k0",
+     "archetype": "bif_q6_growth",
+     "plan": "bi2-v3-swap-plan.json",
+     "newKey": "bio-s2-frq:ap_biology-f25-k0",
+     "set": "BI2"
+    },
+    {
+     "key": "bio-s2-frq:ap_biology-f24-k0",
+     "archetype": "bif_q6_mitotic",
+     "plan": "bi1-v7-audit-1019-swap-plan.json",
+     "newKey": "fix1019:ap_biology-tf03-k0",
+     "set": "BI1"
+    },
+    {
+     "key": "bio-s2-frq:ap_biology-f25-k0",
+     "archetype": "bif_q6_photo",
+     "plan": "bi1-v2-swap-plan.json",
+     "newKey": "bio-s2-frq:ap_biology-f24-k0",
+     "set": "BI1"
+    },
+    {
+     "key": "bio-v3a:ap_biology-f01-k0",
+     "archetype": "bif_q1_fliesselection",
+     "plan": "bi1-v7-audit-1019-swap-plan.json",
+     "newKey": "fix1019:ap_biology-tf02-k0",
+     "set": "BI1"
+    },
+    {
+     "key": "bio-v3a:ap_biology-f04-k0",
+     "archetype": "bif_q2_allelefreq",
+     "plan": "bi2-v6-audit-1015-swap-plan.json",
+     "newKey": "fix1015:ap_biology-fx10-k0",
+     "set": "BI2"
+    },
+    {
+     "key": "bio-v3c:ap_biology-f02-k0",
+     "archetype": "bif_q6_agemeiosis",
+     "plan": "bi2-v7-audit-1019-swap-plan.json",
+     "newKey": "fix1019:ap_biology-tf04-k0",
+     "set": "BI2"
+    },
+    {
+     "key": "chem-s2-f2:ap_chemistry-f03-k0",
+     "archetype": "chf_long_kinetics",
+     "plan": "ch2-v3-audit-1019-swap-plan.json",
+     "newKey": "fix1019:ap_chemistry-tf06-k0",
+     "set": "CH2"
+    },
+    {
+     "key": "chem-s2-f4:ap_chemistry-f03-k0",
+     "archetype": "chf_long_kinetics",
+     "plan": "ch1-v2-audit-1019-swap-plan.json",
+     "newKey": "fix1019:ap_chemistry-tf05-k0",
+     "set": "CH1"
+    },
+    {
+     "key": "englang-p2-b:ap_english_language-fb1-k0",
+     "archetype": "elfrq_fb1",
+     "plan": "el1-review-v2-swap-plan.json",
+     "newKey": "el-rv:ap_english_language-fb1-k0",
+     "set": "EL1"
+    },
+    {
+     "key": "micro-p1-b:ap_microeconomics-f05-k0",
+     "archetype": "mif_short_labor",
+     "plan": "mi1-v2-audit-1019-swap-plan.json",
+     "newKey": "fix1019:ap_microeconomics-tf07-k0",
+     "set": "MI1"
+    },
+    {
+     "key": "micro-p2-a:ap_microeconomics-m32-k0",
+     "archetype": "mi_public_good_efficient",
+     "plan": "mi2-v2-audit-1015-swap-plan.json",
+     "newKey": "fix1015:ap_microeconomics-fx01-k0",
+     "set": "MI2"
+    },
+    {
+     "key": "stats-s2b-c:ap_statistics-f02-k0",
+     "archetype": "stfrq_q2_regression",
+     "plan": "st1-v4-audit-1019-swap-plan.json",
+     "newKey": "fix1019:ap_statistics-tf08-k0",
+     "set": "ST1"
+    },
+    {
+     "key": "stats-s3b-c:ap_statistics-f02-k0",
+     "archetype": "stfrq_q2_regression",
+     "plan": "st2-v3-audit-1019-swap-plan.json",
+     "newKey": "fix1019:ap_statistics-tf09-k0",
+     "set": "ST2"
+    }
+   ],
+   "stockItems": {
+    "bif_q1_inhibitor": [
+     {
+      "key": "bio-p1-b:ap_biology-f01-k0",
+      "subject": "ap_biology",
+      "hits": [
+       "number:6",
+       "sentence:A researcher hypothesizes that compound X is a competitive i",
+       "sentence:Each treatment was repeated n = 6 times.",
+       "sentence:Mean initial reaction rate (µmol of product per minute) ± 2S",
+       "sentence:The researcher measures the initial rate of the reaction at "
+      ],
+      "usedIn": [],
+      "replacedBy": [
+       "bi1-v5-swap-plan.json",
+       "bio-v3a:ap_biology-f01-k0",
+       "BI1"
+      ]
+     }
+    ],
+    "bif_q2_potato": [
+     {
+      "key": "bio-p1-b:ap_biology-f02-k0",
+      "subject": "ap_biology",
+      "hits": [
+       "number:24",
+       "sentence:A student places potato cores of equal initial mass in sucro"
+      ],
+      "usedIn": [],
+      "replacedBy": [
+       "bi1-v6-audit-1015-swap-plan.json",
+       "fix1015:ap_biology-fx06-k0",
+       "BI1"
+      ]
+     }
+    ],
+    "bif_q6_enzymeph": [
+     {
+      "key": "bio-p1-b:ap_biology-f06-k0",
+      "subject": "ap_biology",
+      "hits": [
+       "number:8"
+      ],
+      "usedIn": [],
+      "replacedBy": null
+     },
+     {
+      "key": "bio-s2-frq:ap_biology-f22-k0",
+      "subject": "ap_biology",
+      "hits": [
+       "number:8"
+      ],
+      "usedIn": [],
+      "replacedBy": null
+     }
+    ],
+    "bif_q1_growthfactor": [
+     {
+      "key": "bio-s2-frq:ap_biology-f01-k0",
+      "subject": "ap_biology",
+      "hits": [
+       "number:24",
+       "number:8",
+       "sentence:A researcher investigates how a growth factor affects cell d",
+       "sentence:Cells were grown with four concentrations of the growth fact",
+       "sentence:Each treatment was repeated n = 8 times.",
+       "sentence:Mean percent of cells in mitosis (percent of cells) ± 2SE fo"
+      ],
+      "usedIn": [],
+      "replacedBy": [
+       "bi2-v7-audit-1019-swap-plan.json",
+       "fix1019:ap_biology-tf01-k0",
+       "BI2"
+      ]
+     }
+    ],
+    "bif_q1_resistance": [
+     {
+      "key": "bio-s2-frq:ap_biology-f02-k0",
+      "subject": "ap_biology",
+      "hits": [
+       "sentence:A researcher grows a culture of bacteria with an antibiotic ",
+       "sentence:After different numbers of days of exposure to the antibioti",
+       "sentence:Mean percent of bacterial cells that are resistant (percent "
+      ],
+      "usedIn": [],
+      "replacedBy": [
+       "bi1-v2-swap-plan.json",
+       "bio-p1-b:ap_biology-f01-k0",
+       "BI1"
+      ]
+     }
+    ],
+    "bif_q1_salinity": [
+     {
+      "key": "bio-s2-frq:ap_biology-f03-k0",
+      "subject": "ap_biology",
+      "hits": [
+       "number:10",
+       "number:7",
+       "sentence:A student investigates how the salt concentration of the wat",
+       "sentence:Each treatment was repeated n = 10 times.",
+       "sentence:Mean percent of seeds that germinated (percent of seeds) ± 2",
+       "sentence:Seeds were placed in solutions of sodium chloride (NaCl), an"
+      ],
+      "usedIn": [],
+      "replacedBy": [
+       "bi2-v5-swap-plan.json",
+       "bio-s2-frq:ap_biology-f01-k0",
+       "BI2"
+      ]
+     }
+    ],
+    "bif_q2_enzymetemp": [
+     {
+      "key": "bio-s2-frq:ap_biology-f04-k0",
+      "subject": "ap_biology",
+      "hits": [
+       "sentence:A student measures the rate at which an enzyme converts its ",
+       "sentence:Each value is the mean of repeated trials."
+      ],
+      "usedIn": [],
+      "replacedBy": [
+       "bi1-v5-swap-plan.json",
+       "bio-p1-b:ap_biology-f02-k0",
+       "BI1"
+      ]
+     }
+    ],
+    "bif_q2_photosyn": [
+     {
+      "key": "bio-s2-frq:ap_biology-f05-k0",
+      "subject": "ap_biology",
+      "hits": [
+       "sentence:A student measures the rate of oxygen production by an aquat",
+       "sentence:Each value is the mean of repeated trials."
+      ],
+      "usedIn": [],
+      "replacedBy": [
+       "bi2-v5-swap-plan.json",
+       "bio-v3a:ap_biology-f04-k0",
+       "BI2"
+      ]
+     }
+    ],
+    "bif_q2_popgrowth": [
+     {
+      "key": "bio-s2-frq:ap_biology-f06-k0",
+      "subject": "ap_biology",
+      "hits": [
+       "sentence:A researcher introduces a small number of mice to an island "
+      ],
+      "usedIn": [],
+      "replacedBy": [
+       "bi1-v2-swap-plan.json",
+       "bio-s2-frq:ap_biology-f04-k0",
+       "BI1"
+      ]
+     }
+    ],
+    "bif_q6_growth": [
+     {
+      "key": "bio-s2-frq:ap_biology-f23-k0",
+      "subject": "ap_biology",
+      "hits": [
+       "number:10"
+      ],
+      "usedIn": [],
+      "replacedBy": [
+       "bi2-v3-swap-plan.json",
+       "bio-s2-frq:ap_biology-f25-k0",
+       "BI2"
+      ]
+     }
+    ],
+    "bif_q6_mitotic": [
+     {
+      "key": "bio-s2-frq:ap_biology-f24-k0",
+      "subject": "ap_biology",
+      "hits": [
+       "number:6"
+      ],
+      "usedIn": [],
+      "replacedBy": [
+       "bi1-v7-audit-1019-swap-plan.json",
+       "fix1019:ap_biology-tf03-k0",
+       "BI1"
+      ]
+     }
+    ],
+    "bif_q6_photo": [
+     {
+      "key": "bio-s2-frq:ap_biology-f25-k0",
+      "subject": "ap_biology",
+      "hits": [
+       "number:6"
+      ],
+      "usedIn": [],
+      "replacedBy": [
+       "bi1-v2-swap-plan.json",
+       "bio-s2-frq:ap_biology-f24-k0",
+       "BI1"
+      ]
+     }
+    ],
+    "bif_q6_resp": [
+     {
+      "key": "bio-s2-frq:ap_biology-f26-k0",
+      "subject": "ap_biology",
+      "hits": [
+       "number:6"
+      ],
+      "usedIn": [],
+      "replacedBy": null
+     }
+    ],
+    "bif_q6_salt": [
+     {
+      "key": "bio-s2-frq:ap_biology-f27-k0",
+      "subject": "ap_biology",
+      "hits": [
+       "number:24",
+       "number:8"
+      ],
+      "usedIn": [],
+      "replacedBy": null
+     }
+    ],
+    "bif_q1_fliesselection": [
+     {
+      "key": "bio-v3a:ap_biology-f01-k0",
+      "subject": "ap_biology",
+      "hits": [
+       "number:12",
+       "sentence:A researcher breeds populations of fruit flies for an increa",
+       "sentence:After different numbers of generations of selective breeding",
+       "sentence:In each generation only the flies with the most bristles wer",
+       "sentence:Mean number of bristles per fly (bristles) ± 2SE for fruit f"
+      ],
+      "usedIn": [],
+      "replacedBy": [
+       "bi1-v7-audit-1019-swap-plan.json",
+       "fix1019:ap_biology-tf02-k0",
+       "BI1"
+      ]
+     },
+     {
+      "key": "bio-v3a:ap_biology-f01-k1",
+      "subject": "ap_biology",
+      "hits": [
+       "number:12",
+       "sentence:A researcher breeds populations of fruit flies for an increa",
+       "sentence:After different numbers of generations of selective breeding",
+       "sentence:In each generation only the flies with the most bristles wer",
+       "sentence:Mean number of bristles per fly (bristles) ± 2SE for fruit f"
+      ],
+      "usedIn": [],
+      "replacedBy": null
+     }
+    ],
+    "bif_q1_lacoperon": [
+     {
+      "key": "bio-v3a:ap_biology-f02-k0",
+      "subject": "ap_biology",
+      "hits": [
+       "number:6",
+       "sentence:Mean beta-galactosidase activity (units of enzyme activity) ",
+       "sentence:The activity of the enzyme beta-galactosidase, which is enco",
+       "sentence:coli in media that contain different concentrations of lacto"
+      ],
+      "usedIn": [],
+      "replacedBy": null
+     },
+     {
+      "key": "bio-v3a:ap_biology-f02-k1",
+      "subject": "ap_biology",
+      "hits": [
+       "number:6",
+       "sentence:Mean beta-galactosidase activity (units of enzyme activity) ",
+       "sentence:The activity of the enzyme beta-galactosidase, which is enco",
+       "sentence:coli in media that contain different concentrations of lacto"
+      ],
+      "usedIn": [],
+      "replacedBy": null
+     }
+    ],
+    "bif_q2_receptorsat": [
+     {
+      "key": "bio-v3a:ap_biology-f03-k0",
+      "subject": "ap_biology",
+      "hits": [
+       "sentence:A researcher exposes cultured liver cells to different conce",
+       "sentence:The researcher measures the amount of a response molecule th"
+      ],
+      "usedIn": [],
+      "replacedBy": null
+     },
+     {
+      "key": "bio-v3a:ap_biology-f03-k1",
+      "subject": "ap_biology",
+      "hits": [
+       "sentence:A researcher exposes cultured liver cells to different conce",
+       "sentence:The researcher measures the amount of a response molecule th"
+      ],
+      "usedIn": [],
+      "replacedBy": null
+     }
+    ],
+    "bif_q2_allelefreq": [
+     {
+      "key": "bio-v3a:ap_biology-f04-k0",
+      "subject": "ap_biology",
+      "hits": [
+       "sentence:In an isolated population of insects, an allele that provide",
+       "sentence:The pesticide is applied every generation, and a researcher "
+      ],
+      "usedIn": [],
+      "replacedBy": [
+       "bi2-v6-audit-1015-swap-plan.json",
+       "fix1015:ap_biology-fx10-k0",
+       "BI2"
+      ]
+     },
+     {
+      "key": "bio-v3a:ap_biology-f04-k1",
+      "subject": "ap_biology",
+      "hits": [
+       "sentence:In an isolated population of insects, an allele that provide",
+       "sentence:The pesticide is applied every generation, and a researcher "
+      ],
+      "usedIn": [],
+      "replacedBy": null
+     }
+    ],
+    "bif_q6_lacz": [
+     {
+      "key": "bio-v3a:ap_biology-f12-k0",
+      "subject": "ap_biology",
+      "hits": [
+       "number:6",
+       "sentence:The mutant cells make a repressor protein that cannot bind t",
+       "sentence:The table shows the mean beta-galactosidase activity ± 2SE i",
+       "sentence:coli grown under three conditions; n = 6 cultures for each c"
+      ],
+      "usedIn": [],
+      "replacedBy": null
+     },
+     {
+      "key": "bio-v3a:ap_biology-f12-k1",
+      "subject": "ap_biology",
+      "hits": [
+       "number:6",
+       "sentence:The mutant cells make a repressor protein that cannot bind t",
+       "sentence:The table shows the mean beta-galactosidase activity ± 2SE i",
+       "sentence:coli grown under three conditions; n = 6 cultures for each c"
+      ],
+      "usedIn": [],
+      "replacedBy": null
+     }
+    ],
+    "bif_q6_moth": [
+     {
+      "key": "bio-v3a:ap_biology-f13-k0",
+      "subject": "ap_biology",
+      "hits": [
+       "number:8",
+       "sentence:Birds that hunt by sight feed on the moths.",
+       "sentence:The table shows the mean percent of moths that survived for "
+      ],
+      "usedIn": [],
+      "replacedBy": null
+     },
+     {
+      "key": "bio-v3a:ap_biology-f13-k1",
+      "subject": "ap_biology",
+      "hits": [
+       "number:8",
+       "sentence:Birds that hunt by sight feed on the moths.",
+       "sentence:The table shows the mean percent of moths that survived for "
+      ],
+      "usedIn": [],
+      "replacedBy": null
+     },
+     {
+      "key": "bio-v3c:ap_biology-f03-k0",
+      "subject": "ap_biology",
+      "hits": [
+       "number:8",
+       "sentence:Birds that hunt by sight feed on the moths, and the color of",
+       "sentence:The table shows the mean percent of moths that survived for "
+      ],
+      "usedIn": [],
+      "replacedBy": null
+     },
+     {
+      "key": "bio-v3c:ap_biology-f03-k1",
+      "subject": "ap_biology",
+      "hits": [
+       "number:8",
+       "sentence:Birds that hunt by sight feed on the moths, and the color of",
+       "sentence:The table shows the mean percent of moths that survived for "
+      ],
+      "usedIn": [],
+      "replacedBy": null
+     }
+    ],
+    "bif_q6_agemeiosis": [
+     {
+      "key": "bio-v3a:ap_biology-f14-k0",
+      "subject": "ap_biology",
+      "hits": [
+       "number:10"
+      ],
+      "usedIn": [],
+      "replacedBy": null
+     },
+     {
+      "key": "bio-v3a:ap_biology-f14-k1",
+      "subject": "ap_biology",
+      "hits": [
+       "number:10"
+      ],
+      "usedIn": [],
+      "replacedBy": null
+     },
+     {
+      "key": "bio-v3c:ap_biology-f02-k0",
+      "subject": "ap_biology",
+      "hits": [
+       "number:10"
+      ],
+      "usedIn": [],
+      "replacedBy": [
+       "bi2-v7-audit-1019-swap-plan.json",
+       "fix1019:ap_biology-tf04-k0",
+       "BI2"
+      ]
+     },
+     {
+      "key": "bio-v3c:ap_biology-f02-k1",
+      "subject": "ap_biology",
+      "hits": [
+       "number:10"
+      ],
+      "usedIn": [],
+      "replacedBy": null
+     }
+    ],
+    "chf_long_kinetics": [
+     {
+      "key": "chem-p1-b:ap_chemistry-f03-k0",
+      "subject": "ap_chemistry",
+      "hits": [
+       "number:310"
+      ],
+      "usedIn": [],
+      "replacedBy": null
+     },
+     {
+      "key": "chem-s2-f1:ap_chemistry-f03-k0",
+      "subject": "ap_chemistry",
+      "hits": [
+       "number:310"
+      ],
+      "usedIn": [],
+      "replacedBy": null
+     },
+     {
+      "key": "chem-s2-f1:ap_chemistry-f03-k1",
+      "subject": "ap_chemistry",
+      "hits": [
+       "number:310"
+      ],
+      "usedIn": [],
+      "replacedBy": null
+     },
+     {
+      "key": "chem-s2-f2:ap_chemistry-f03-k0",
+      "subject": "ap_chemistry",
+      "hits": [
+       "number:310"
+      ],
+      "usedIn": [],
+      "replacedBy": [
+       "ch2-v3-audit-1019-swap-plan.json",
+       "fix1019:ap_chemistry-tf06-k0",
+       "CH2"
+      ]
+     },
+     {
+      "key": "chem-s2-f2:ap_chemistry-f03-k1",
+      "subject": "ap_chemistry",
+      "hits": [
+       "number:310"
+      ],
+      "usedIn": [],
+      "replacedBy": null
+     },
+     {
+      "key": "chem-s2-f4:ap_chemistry-f03-k0",
+      "subject": "ap_chemistry",
+      "hits": [
+       "number:310"
+      ],
+      "usedIn": [],
+      "replacedBy": [
+       "ch1-v2-audit-1019-swap-plan.json",
+       "fix1019:ap_chemistry-tf05-k0",
+       "CH1"
+      ]
+     },
+     {
+      "key": "chem-s2-f4:ap_chemistry-f03-k1",
+      "subject": "ap_chemistry",
+      "hits": [
+       "number:310"
+      ],
+      "usedIn": [],
+      "replacedBy": null
+     }
+    ],
+    "elfrq_fb1": [
+     {
+      "key": "englang-p2-b:ap_english_language-fb1-k0",
+      "subject": "ap_english_language",
+      "hits": [
+       "number:410"
+      ],
+      "usedIn": [],
+      "replacedBy": [
+       "el1-review-v2-swap-plan.json",
+       "el-rv:ap_english_language-fb1-k0",
+       "EL1"
+      ]
+     },
+     {
+      "key": "el-rv:ap_english_language-fb1-k0",
+      "subject": "ap_english_language",
+      "hits": [
+       "number:410"
+      ],
+      "usedIn": [
+       {
+        "set": "EL1",
+        "section": "frq",
+        "position": 1,
+        "published": true
+       }
+      ],
+      "replacedBy": null
+     }
+    ],
+    "(no archetype)": [
+     {
+      "key": "run1:ap_biology-f01-k4",
+      "subject": "ap_biology",
+      "hits": [
+       "number:3"
+      ],
+      "usedIn": [],
+      "replacedBy": null
+     },
+     {
+      "key": "run1:ap_biology-f02-k0",
+      "subject": "ap_biology",
+      "hits": [
+       "sentence:Table of mean beta-galactosidase activity (Miller units) wit"
+      ],
+      "usedIn": [],
+      "replacedBy": null
+     },
+     {
+      "key": "run1:ap_biology-f02-k4",
+      "subject": "ap_biology",
+      "hits": [
+       "sentence:Table of mean beta-galactosidase activity (Miller units) wit",
+       "sentence:coli strains (wild type, lacI mutant, lacO mutant) grown in "
+      ],
+      "usedIn": [],
+      "replacedBy": null
+     },
+     {
+      "key": "run1:ap_biology-f02-k7",
+      "subject": "ap_biology",
+      "hits": [
+       "sentence:Table of relative EPO mRNA levels (mean of 4 cultures, +/-2 ",
+       "sentence:enhancer with a point mutation in the activator-binding site"
+      ],
+      "usedIn": [],
+      "replacedBy": null
+     },
+     {
+      "key": "run1:ap_biology-f02-k8",
+      "subject": "ap_biology",
+      "hits": [
+       "sentence:Table of mean beta-galactosidase-like reporter activity (Mil",
+       "sentence:coli strains grown with or without the inducer sugar IPTG, p"
+      ],
+      "usedIn": [],
+      "replacedBy": null
+     },
+     {
+      "key": "run1:ap_biology-f02-k12",
+      "subject": "ap_biology",
+      "hits": [
+       "sentence:Table of mean beta-galactosidase activity (Miller units) +/-",
+       "sentence:coli strains (wild type, mutant 1, mutant 2, mutant 3) grown"
+      ],
+      "usedIn": [],
+      "replacedBy": null
+     },
+     {
+      "key": "run1:ap_biology-f02-k15",
+      "subject": "ap_biology",
+      "hits": [
+       "sentence:Table of mean reporter fluorescence (arbitrary units, AU) wi"
+      ],
+      "usedIn": [],
+      "replacedBy": null
+     },
+     {
+      "key": "run1:ap_biology-f02-k17",
+      "subject": "ap_biology",
+      "hits": [
+       "sentence:Table of beta-galactosidase activity (mean ± 2SE, arbitrary "
+      ],
+      "usedIn": [],
+      "replacedBy": null
+     },
+     {
+      "key": "run1:ap_biology-f03-k23",
+      "subject": "ap_biology",
+      "hits": [
+       "sentence:Table of mean gut bacterial abundance (CFU per gram of stool"
+      ],
+      "usedIn": [],
+      "replacedBy": null
+     },
+     {
+      "key": "run1:ap_biology-f03-k24",
+      "subject": "ap_biology",
+      "hits": [
+       "sentence:Table of mean percent cover of mussels and barnacles after 1",
+       "sentence:Values are mean percent cover with ±2 SE."
+      ],
+      "usedIn": [],
+      "replacedBy": null
+     },
+     {
+      "key": "run1:ap_microeconomics-f01-k3",
+      "subject": "ap_microeconomics",
+      "hits": [
+       "sentence:Demand and cost data for a monopolist selling a patented wea",
+       "sentence:Demand is linear, P = 180 - 2Q; marginal cost and average to"
+      ],
+      "usedIn": [],
+      "replacedBy": null
+     },
+     {
+      "key": "run1:ap_microeconomics-f02-k2",
+      "subject": "ap_microeconomics",
+      "hits": [
+       "number:28",
+       "number:33",
+       "number:66",
+       "number:82"
+      ],
+      "usedIn": [],
+      "replacedBy": null
+     }
+    ],
+    "maf_short_ppc_trade": [
+     {
+      "key": "macro-p1-b:ap_macroeconomics-f05-k0",
+      "subject": "ap_macroeconomics",
+      "hits": [
+       "sentence:Maximum daily output of two goods for two countries when eac"
+      ],
+      "usedIn": [],
+      "replacedBy": null
+     },
+     {
+      "key": "macro-p2-f:ap_macroeconomics-f10-k0",
+      "subject": "ap_macroeconomics",
+      "hits": [
+       "sentence:Maximum daily output of two goods for two countries when eac"
+      ],
+      "usedIn": [],
+      "replacedBy": null
+     },
+     {
+      "key": "macro-p2-f:ap_macroeconomics-f10-k1",
+      "subject": "ap_macroeconomics",
+      "hits": [
+       "sentence:Maximum daily output of two goods for two countries when eac"
+      ],
+      "usedIn": [],
+      "replacedBy": null
+     }
+    ],
+    "mif_short_labor": [
+     {
+      "key": "micro-p1-b:ap_microeconomics-f05-k0",
+      "subject": "ap_microeconomics",
+      "hits": [
+       "number:55"
+      ],
+      "usedIn": [],
+      "replacedBy": [
+       "mi1-v2-audit-1019-swap-plan.json",
+       "fix1019:ap_microeconomics-tf07-k0",
+       "MI1"
+      ]
+     }
+    ],
+    "mi_public_good_efficient": [
+     {
+      "key": "micro-p2-a:ap_microeconomics-m32-k0",
+      "subject": "ap_microeconomics",
+      "hits": [
+       "number:26"
+      ],
+      "usedIn": [],
+      "replacedBy": [
+       "mi2-v2-audit-1015-swap-plan.json",
+       "fix1015:ap_microeconomics-fx01-k0",
+       "MI2"
+      ]
+     }
+    ],
+    "stfrq_q2_regression": [
+     {
+      "key": "stats-s2b-c:ap_statistics-f02-k0",
+      "subject": "ap_statistics",
+      "hits": [
+       "number:18"
+      ],
+      "usedIn": [],
+      "replacedBy": [
+       "st1-v4-audit-1019-swap-plan.json",
+       "fix1019:ap_statistics-tf08-k0",
+       "ST1"
+      ]
+     },
+     {
+      "key": "stats-s2b-c:ap_statistics-f02-k1",
+      "subject": "ap_statistics",
+      "hits": [
+       "number:14"
+      ],
+      "usedIn": [],
+      "replacedBy": null
+     },
+     {
+      "key": "stats-s3b-c:ap_statistics-f02-k0",
+      "subject": "ap_statistics",
+      "hits": [
+       "number:16"
+      ],
+      "usedIn": [],
+      "replacedBy": [
+       "st2-v3-audit-1019-swap-plan.json",
+       "fix1019:ap_statistics-tf09-k0",
+       "ST2"
+      ]
+     },
+     {
+      "key": "stats-s3b-c:ap_statistics-f02-k1",
+      "subject": "ap_statistics",
+      "hits": [
+       "number:16"
+      ],
+      "usedIn": [],
+      "replacedBy": null
+     },
+     {
+      "key": "stats-s3b-c:ap_statistics-f02-k2",
+      "subject": "ap_statistics",
+      "hits": [
+       "number:16"
+      ],
+      "usedIn": [],
+      "replacedBy": null
+     }
+    ]
+   }
+  },
+  "b_title_truncated": {
+   "stockByArchetype": {
+    "bif_q2_allelefreq": 2,
+    "bif_q2_enzymetemp": 1,
+    "bif_q2_photosyn": 1,
+    "bif_q2_popgrowth": 1,
+    "bif_q2_potato": 1,
+    "bif_q2_receptorsat": 2
+   },
+   "stockTotal": 8,
+   "published": [],
+   "coveredByExistingPlan": [
+    {
+     "key": "bio-p1-b:ap_biology-f02-k0",
+     "archetype": "bif_q2_potato",
+     "plan": "bi1-v6-audit-1015-swap-plan.json",
+     "newKey": "fix1015:ap_biology-fx06-k0",
+     "set": "BI1"
+    },
+    {
+     "key": "bio-s2-frq:ap_biology-f04-k0",
+     "archetype": "bif_q2_enzymetemp",
+     "plan": "bi1-v5-swap-plan.json",
+     "newKey": "bio-p1-b:ap_biology-f02-k0",
+     "set": "BI1"
+    },
+    {
+     "key": "bio-s2-frq:ap_biology-f05-k0",
+     "archetype": "bif_q2_photosyn",
+     "plan": "bi2-v5-swap-plan.json",
+     "newKey": "bio-v3a:ap_biology-f04-k0",
+     "set": "BI2"
+    },
+    {
+     "key": "bio-s2-frq:ap_biology-f06-k0",
+     "archetype": "bif_q2_popgrowth",
+     "plan": "bi1-v2-swap-plan.json",
+     "newKey": "bio-s2-frq:ap_biology-f04-k0",
+     "set": "BI1"
+    },
+    {
+     "key": "bio-v3a:ap_biology-f04-k0",
+     "archetype": "bif_q2_allelefreq",
+     "plan": "bi2-v6-audit-1015-swap-plan.json",
+     "newKey": "fix1015:ap_biology-fx10-k0",
+     "set": "BI2"
+    }
+   ],
+   "stockItems": {
+    "bif_q2_potato": [
+     {
+      "key": "bio-p1-b:ap_biology-f02-k0",
+      "subject": "ap_biology",
+      "hits": [
+       "title_cut_mid_sentence"
+      ],
+      "usedIn": [],
+      "replacedBy": [
+       "bi1-v6-audit-1015-swap-plan.json",
+       "fix1015:ap_biology-fx06-k0",
+       "BI1"
+      ]
+     }
+    ],
+    "bif_q2_enzymetemp": [
+     {
+      "key": "bio-s2-frq:ap_biology-f04-k0",
+      "subject": "ap_biology",
+      "hits": [
+       "title_cut_mid_sentence"
+      ],
+      "usedIn": [],
+      "replacedBy": [
+       "bi1-v5-swap-plan.json",
+       "bio-p1-b:ap_biology-f02-k0",
+       "BI1"
+      ]
+     }
+    ],
+    "bif_q2_photosyn": [
+     {
+      "key": "bio-s2-frq:ap_biology-f05-k0",
+      "subject": "ap_biology",
+      "hits": [
+       "title_cut_mid_sentence"
+      ],
+      "usedIn": [],
+      "replacedBy": [
+       "bi2-v5-swap-plan.json",
+       "bio-v3a:ap_biology-f04-k0",
+       "BI2"
+      ]
+     }
+    ],
+    "bif_q2_popgrowth": [
+     {
+      "key": "bio-s2-frq:ap_biology-f06-k0",
+      "subject": "ap_biology",
+      "hits": [
+       "title_cut_mid_sentence"
+      ],
+      "usedIn": [],
+      "replacedBy": [
+       "bi1-v2-swap-plan.json",
+       "bio-s2-frq:ap_biology-f04-k0",
+       "BI1"
+      ]
+     }
+    ],
+    "bif_q2_receptorsat": [
+     {
+      "key": "bio-v3a:ap_biology-f03-k0",
+      "subject": "ap_biology",
+      "hits": [
+       "title_cut_mid_sentence"
+      ],
+      "usedIn": [],
+      "replacedBy": null
+     },
+     {
+      "key": "bio-v3a:ap_biology-f03-k1",
+      "subject": "ap_biology",
+      "hits": [
+       "title_cut_mid_sentence"
+      ],
+      "usedIn": [],
+      "replacedBy": null
+     }
+    ],
+    "bif_q2_allelefreq": [
+     {
+      "key": "bio-v3a:ap_biology-f04-k0",
+      "subject": "ap_biology",
+      "hits": [
+       "title_cut_mid_sentence"
+      ],
+      "usedIn": [],
+      "replacedBy": [
+       "bi2-v6-audit-1015-swap-plan.json",
+       "fix1015:ap_biology-fx10-k0",
+       "BI2"
+      ]
+     },
+     {
+      "key": "bio-v3a:ap_biology-f04-k1",
+      "subject": "ap_biology",
+      "hits": [
+       "title_cut_mid_sentence"
+      ],
+      "usedIn": [],
+      "replacedBy": null
+     }
+    ]
+   }
+  },
+  "d_bio_fork_direction": {
+   "stockByArchetype": {
+    "bif_q5_replication": 2
+   },
+   "stockTotal": 2,
+   "published": [],
+   "coveredByExistingPlan": [
+    {
+     "key": "bio-s2-frq:ap_biology-f21-k0",
+     "archetype": "bif_q5_replication",
+     "plan": "bi2-v6-audit-1015-swap-plan.json",
+     "newKey": "fix1015:ap_biology-fx02-k0",
+     "set": "BI2"
+    }
+   ],
+   "stockItems": {
+    "bif_q5_replication": [
+     {
+      "key": "bio-p1-b:ap_biology-f05-k0",
+      "subject": "ap_biology",
+      "hits": [
+       "fork_direction_not_in_student_text"
+      ],
+      "usedIn": [],
+      "replacedBy": null
+     },
+     {
+      "key": "bio-s2-frq:ap_biology-f21-k0",
+      "subject": "ap_biology",
+      "hits": [
+       "fork_direction_not_in_student_text"
+      ],
+      "usedIn": [],
+      "replacedBy": [
+       "bi2-v6-audit-1015-swap-plan.json",
+       "fix1015:ap_biology-fx02-k0",
+       "BI2"
+      ]
+     }
+    ]
+   }
+  },
+  "d_bio_potato_solute_potential": {
+   "stockByArchetype": {
+    "bif_q2_potato": 1
+   },
+   "stockTotal": 1,
+   "published": [],
+   "coveredByExistingPlan": [
+    {
+     "key": "bio-p1-b:ap_biology-f02-k0",
+     "archetype": "bif_q2_potato",
+     "plan": "bi1-v6-audit-1015-swap-plan.json",
+     "newKey": "fix1015:ap_biology-fx06-k0",
+     "set": "BI1"
+    }
+   ],
+   "stockItems": {
+    "bif_q2_potato": [
+     {
+      "key": "bio-p1-b:ap_biology-f02-k0",
+      "subject": "ap_biology",
+      "hits": [
+       "solute_potential_greater"
+      ],
+      "usedIn": [],
+      "replacedBy": [
+       "bi1-v6-audit-1015-swap-plan.json",
+       "fix1015:ap_biology-fx06-k0",
+       "BI1"
+      ]
+     }
+    ]
+   }
+  },
+  "d_bio_uv_dose_unstated": {
+   "stockByArchetype": {
+    "bif_q3_uvbacteria": 1
+   },
+   "stockTotal": 1,
+   "published": [],
+   "coveredByExistingPlan": [
+    {
+     "key": "bio-v3a:ap_biology-f06-k0",
+     "archetype": "bif_q3_uvbacteria",
+     "plan": "bi1-v6-audit-1015-swap-plan.json",
+     "newKey": "fix1015:ap_biology-fx08-k0",
+     "set": "BI1"
+    }
+   ],
+   "stockItems": {
+    "bif_q3_uvbacteria": [
+     {
+      "key": "bio-v3a:ap_biology-f06-k0",
+      "subject": "ap_biology",
+      "hits": [
+       "uv_dose_lethality_unstated"
+      ],
+      "usedIn": [],
+      "replacedBy": [
+       "bi1-v6-audit-1015-swap-plan.json",
+       "fix1015:ap_biology-fx08-k0",
+       "BI1"
+      ]
+     }
+    ]
+   }
+  },
+  "d_bio_population_stops_changing": {
+   "stockByArchetype": {
+    "bis_population_set": 3
+   },
+   "stockTotal": 3,
+   "published": [],
+   "coveredByExistingPlan": [
+    {
+     "key": "bio-v2a:ap_biology-m31-k2",
+     "archetype": "bis_population_set",
+     "plan": "bi2-v6-audit-1015-swap-plan.json",
+     "newKey": "fix1015:ap_biology-fx12-k0",
+     "set": "BI2"
+    }
+   ],
+   "stockItems": {
+    "bis_population_set": [
+     {
+      "key": "bio-v2a:ap_biology-m31-k0",
+      "subject": "ap_biology",
+      "hits": [
+       "stops_changing_but_table_still_changes"
+      ],
+      "usedIn": [],
+      "replacedBy": null
+     },
+     {
+      "key": "bio-v2a:ap_biology-m31-k1",
+      "subject": "ap_biology",
+      "hits": [
+       "stops_changing_but_table_still_changes"
+      ],
+      "usedIn": [],
+      "replacedBy": null
+     },
+     {
+      "key": "bio-v2a:ap_biology-m31-k2",
+      "subject": "ap_biology",
+      "hits": [
+       "stops_changing_but_table_still_changes"
+      ],
+      "usedIn": [],
+      "replacedBy": [
+       "bi2-v6-audit-1015-swap-plan.json",
+       "fix1015:ap_biology-fx12-k0",
+       "BI2"
+      ]
+     }
+    ]
+   }
+  },
+  "d_stats_phat_not_count_over_n": {
+   "stockByArchetype": {
+    "st_pvalue_interpretation": 1
+   },
+   "stockTotal": 1,
+   "published": [],
+   "coveredByExistingPlan": [
+    {
+     "key": "stats-s1-h-final:ap_statistics-m03-k0",
+     "archetype": "st_pvalue_interpretation",
+     "plan": "st1-v3-audit-1015-swap-plan.json",
+     "newKey": "fix1015:ap_statistics-fx67-k0",
+     "set": "ST1"
+    }
+   ],
+   "stockItems": {
+    "st_pvalue_interpretation": [
+     {
+      "key": "stats-s1-h-final:ap_statistics-m03-k0",
+      "subject": "ap_statistics",
+      "hits": [
+       "p_hat_0.459_is_not_count_over_n_200"
+      ],
+      "usedIn": [],
+      "replacedBy": [
+       "st1-v3-audit-1015-swap-plan.json",
+       "fix1015:ap_statistics-fx67-k0",
+       "ST1"
+      ]
+     }
+    ]
+   }
+  },
+  "d_phys_collision_rounded_premise": {
+   "stockByArchetype": {
+    "ph_evid_collision_data": 1
+   },
+   "stockTotal": 1,
+   "published": [],
+   "coveredByExistingPlan": [
+    {
+     "key": "phys-s3-a:ap_physics_1-m24-k0",
+     "archetype": "ph_evid_collision_data",
+     "plan": "ph3-v2-audit-1015-swap-plan.json",
+     "newKey": "fix1015:ap_physics_1-fx58-k0",
+     "set": "PH3"
+    }
+   ],
+   "stockItems": {
+    "ph_evid_collision_data": [
+     {
+      "key": "phys-s3-a:ap_physics_1-m24-k0",
+      "subject": "ap_physics_1",
+      "hits": [
+       "displayed_u1_rounded",
+       "displayed_u2_rounded"
+      ],
+      "usedIn": [],
+      "replacedBy": [
+       "ph3-v2-audit-1015-swap-plan.json",
+       "fix1015:ap_physics_1-fx58-k0",
+       "PH3"
+      ]
+     }
+    ]
+   }
+  },
+  "d_calc_smoothness_premise": {
+   "stockByArchetype": {
+    "g_lagrange_decimal_calc": 1,
+    "g_lagrange_p2_calc": 1,
+    "g_lhopital_graph": 1,
+    "g_taylor_deriv_graph": 1,
+    "lagrange_graph": 2
+   },
+   "stockTotal": 6,
+   "published": [],
+   "coveredByExistingPlan": [
+    {
+     "key": "bc-topup-final:ap_calculus_bc-m04-k1",
+     "archetype": "lagrange_graph",
+     "plan": "bc3-v2-audit-aud1015-swap-plan.json",
+     "newKey": "supp-aud1015-final:ap_calculus_bc-m04-k904",
+     "set": "BC3"
+    },
+    {
+     "key": "s1-graph-ab-final:ap_calculus_ab-m24-k0",
+     "archetype": "g_lhopital_graph",
+     "plan": "ab3-v3-audit-aud1015-swap-plan.json",
+     "newKey": "supp-aud1015-final:ap_calculus_ab-m24-k905",
+     "set": "AB3"
+    },
+    {
+     "key": "s2-graph-bc-final:ap_calculus_bc-m02-k0",
+     "archetype": "g_lagrange_decimal_calc",
+     "plan": "bc2-v3-audit-aud1015-swap-plan.json",
+     "newKey": "supp-aud1015-final:ap_calculus_bc-m02-k903",
+     "set": "BC2"
+    },
+    {
+     "key": "s3a-graph-bc-final:ap_calculus_bc-m02-k0",
+     "archetype": "g_lagrange_p2_calc",
+     "plan": "bc1-v5-audit-aud1015-swap-plan.json",
+     "newKey": "supp-aud1015-final:ap_calculus_bc-m02-k902",
+     "set": "BC1"
+    }
+   ],
+   "stockItems": {
+    "lagrange_graph": [
+     {
+      "key": "bc-topup-final:ap_calculus_bc-m04-k0",
+      "subject": "ap_calculus_bc",
+      "hits": [
+       "all_order_derivatives_with_piecewise_linear_graph"
+      ],
+      "usedIn": [],
+      "replacedBy": null
+     },
+     {
+      "key": "bc-topup-final:ap_calculus_bc-m04-k1",
+      "subject": "ap_calculus_bc",
+      "hits": [
+       "all_order_derivatives_with_piecewise_linear_graph"
+      ],
+      "usedIn": [],
+      "replacedBy": [
+       "bc3-v2-audit-aud1015-swap-plan.json",
+       "supp-aud1015-final:ap_calculus_bc-m04-k904",
+       "BC3"
+      ]
+     }
+    ],
+    "g_lhopital_graph": [
+     {
+      "key": "s1-graph-ab-final:ap_calculus_ab-m24-k0",
+      "subject": "ap_calculus_ab",
+      "hits": [
+       "differentiable_premise_with_segment_graphs"
+      ],
+      "usedIn": [],
+      "replacedBy": [
+       "ab3-v3-audit-aud1015-swap-plan.json",
+       "supp-aud1015-final:ap_calculus_ab-m24-k905",
+       "AB3"
+      ]
+     }
+    ],
+    "g_lagrange_decimal_calc": [
+     {
+      "key": "s2-graph-bc-final:ap_calculus_bc-m02-k0",
+      "subject": "ap_calculus_bc",
+      "hits": [
+       "all_order_derivatives_with_piecewise_linear_graph"
+      ],
+      "usedIn": [],
+      "replacedBy": [
+       "bc2-v3-audit-aud1015-swap-plan.json",
+       "supp-aud1015-final:ap_calculus_bc-m02-k903",
+       "BC2"
+      ]
+     }
+    ],
+    "g_taylor_deriv_graph": [
+     {
+      "key": "s2-graph-bc-final:ap_calculus_bc-m05-k0",
+      "subject": "ap_calculus_bc",
+      "hits": [
+       "all_order_derivatives_with_piecewise_linear_graph"
+      ],
+      "usedIn": [],
+      "replacedBy": null
+     }
+    ],
+    "g_lagrange_p2_calc": [
+     {
+      "key": "s3a-graph-bc-final:ap_calculus_bc-m02-k0",
+      "subject": "ap_calculus_bc",
+      "hits": [
+       "all_order_derivatives_with_piecewise_linear_graph"
+      ],
+      "usedIn": [],
+      "replacedBy": [
+       "bc1-v5-audit-aud1015-swap-plan.json",
+       "supp-aud1015-final:ap_calculus_bc-m02-k902",
+       "BC1"
+      ]
+     }
+    ]
+   }
+  },
+  "d_calc_concavity_reference": {
+   "stockByArchetype": {
+    "frq_fprime_graph": 6
+   },
+   "stockTotal": 6,
+   "published": [],
+   "coveredByExistingPlan": [
+    {
+     "key": "run2:ap_calculus_ab-f02-k0",
+     "archetype": "frq_fprime_graph",
+     "plan": "bc3-v2-audit-aud1015-swap-plan.json",
+     "newKey": "supp-aud1015-final:ap_calculus_ab-f02-k909",
+     "set": "BC3"
+    },
+    {
+     "key": "run2:ap_calculus_ab-f02-k1",
+     "archetype": "frq_fprime_graph",
+     "plan": "bc2-v3-audit-aud1015-swap-plan.json",
+     "newKey": "supp-aud1015-final:ap_calculus_ab-f02-k908",
+     "set": "BC2"
+    },
+    {
+     "key": "run2:ap_calculus_ab-f02-k2",
+     "archetype": "frq_fprime_graph",
+     "plan": "ab3-v4-audit-1019-swap-plan.json",
+     "newKey": "fix1019:ap_calculus_ab-tf12-k0",
+     "set": "AB3"
+    },
+    {
+     "key": "run2:ap_calculus_ab-f02-k3",
+     "archetype": "frq_fprime_graph",
+     "plan": "ab2-v3-audit-1019-swap-plan.json",
+     "newKey": "fix1019:ap_calculus_ab-tf11-k0",
+     "set": "AB2"
+    },
+    {
+     "key": "s1a-final:ap_calculus_ab-f02-k0",
+     "archetype": "frq_fprime_graph",
+     "plan": "bc1-v5-audit-aud1015-swap-plan.json",
+     "newKey": "supp-aud1015-final:ap_calculus_ab-f02-k907",
+     "set": "BC1"
+    },
+    {
+     "key": "s1a-final:ap_calculus_ab-f02-k1",
+     "archetype": "frq_fprime_graph",
+     "plan": "abfrq-v2-audit-aud1015-swap-plan.json",
+     "newKey": "supp-aud1015-final:ap_calculus_ab-f02-k906",
+     "set": "ABFRQ"
+    }
+   ],
+   "stockItems": {
+    "frq_fprime_graph": [
+     {
+      "key": "run2:ap_calculus_ab-f02-k0",
+      "subject": "ap_calculus_ab",
+      "hits": [
+       "f_prime_increasing_equated_with_strict_f_double_prime_positive"
+      ],
+      "usedIn": [],
+      "replacedBy": [
+       "bc3-v2-audit-aud1015-swap-plan.json",
+       "supp-aud1015-final:ap_calculus_ab-f02-k909",
+       "BC3"
+      ]
+     },
+     {
+      "key": "run2:ap_calculus_ab-f02-k1",
+      "subject": "ap_calculus_ab",
+      "hits": [
+       "f_prime_increasing_equated_with_strict_f_double_prime_positive"
+      ],
+      "usedIn": [],
+      "replacedBy": [
+       "bc2-v3-audit-aud1015-swap-plan.json",
+       "supp-aud1015-final:ap_calculus_ab-f02-k908",
+       "BC2"
+      ]
+     },
+     {
+      "key": "run2:ap_calculus_ab-f02-k2",
+      "subject": "ap_calculus_ab",
+      "hits": [
+       "f_prime_increasing_equated_with_strict_f_double_prime_positive"
+      ],
+      "usedIn": [],
+      "replacedBy": [
+       "ab3-v4-audit-1019-swap-plan.json",
+       "fix1019:ap_calculus_ab-tf12-k0",
+       "AB3"
+      ]
+     },
+     {
+      "key": "run2:ap_calculus_ab-f02-k3",
+      "subject": "ap_calculus_ab",
+      "hits": [
+       "f_prime_increasing_equated_with_strict_f_double_prime_positive"
+      ],
+      "usedIn": [],
+      "replacedBy": [
+       "ab2-v3-audit-1019-swap-plan.json",
+       "fix1019:ap_calculus_ab-tf11-k0",
+       "AB2"
+      ]
+     },
+     {
+      "key": "s1a-final:ap_calculus_ab-f02-k0",
+      "subject": "ap_calculus_ab",
+      "hits": [
+       "f_prime_increasing_equated_with_strict_f_double_prime_positive"
+      ],
+      "usedIn": [],
+      "replacedBy": [
+       "bc1-v5-audit-aud1015-swap-plan.json",
+       "supp-aud1015-final:ap_calculus_ab-f02-k907",
+       "BC1"
+      ]
+     },
+     {
+      "key": "s1a-final:ap_calculus_ab-f02-k1",
+      "subject": "ap_calculus_ab",
+      "hits": [
+       "f_prime_increasing_equated_with_strict_f_double_prime_positive"
+      ],
+      "usedIn": [],
+      "replacedBy": [
+       "abfrq-v2-audit-aud1015-swap-plan.json",
+       "supp-aud1015-final:ap_calculus_ab-f02-k906",
+       "ABFRQ"
+      ]
+     }
+    ]
+   }
+  },
+  "d_csa_scope_and_points": {
+   "stockByArchetype": {
+    "cs_char_arith": 2,
+    "cs_compile_error": 2,
+    "csf_2d_best_row": 2,
+    "csf_2d_border": 1,
+    "csf_2d_shift": 1,
+    "csf_2d_transpose": 2,
+    "csf_class_counter": 2,
+    "csf_class_scoreboard": 2,
+    "csf_class_steps": 2,
+    "csf_class_stock": 2,
+    "csf_list_above": 1,
+    "csf_list_remove_short": 1,
+    "csf_list_reviews": 1,
+    "csf_list_runs": 1,
+    "csf_methods_digits": 1,
+    "csf_methods_leap": 1,
+    "csf_methods_pass": 2,
+    "csf_methods_runs": 2
+   },
+   "stockTotal": 28,
+   "published": [],
+   "coveredByExistingPlan": [
+    {
+     "key": "csa-p1-a:ap_computer_science_a-m03-k0",
+     "archetype": "cs_compile_error",
+     "plan": "csa1-v2-audit-aud1015-swap-plan.json",
+     "newKey": "csa-aud1015:ap_computer_science_a-m03-k909",
+     "set": "CSA1"
+    },
+    {
+     "key": "csa-p1-b:ap_computer_science_a-f01-k0",
+     "archetype": "csf_methods_pass",
+     "plan": "csa1-v2-audit-aud1015-swap-plan.json",
+     "newKey": "csa-aud1015:ap_computer_science_a-f01-k901",
+     "set": "CSA1"
+    },
+    {
+     "key": "csa-p1-b:ap_computer_science_a-f02-k0",
+     "archetype": "csf_class_steps",
+     "plan": "csa2-v3-audit-aud1015-swap-plan.json",
+     "newKey": "csa-aud1015:ap_computer_science_a-f02-k906",
+     "set": "CSA2"
+    },
+    {
+     "key": "csa-s2-short-frq:ap_computer_science_a-f01-k0",
+     "archetype": "csf_2d_best_row",
+     "plan": "csa2-v3-audit-aud1015-swap-plan.json",
+     "newKey": "csa-aud1015:ap_computer_science_a-f01-k908",
+     "set": "CSA2"
+    },
+    {
+     "key": "csa-s2-mc-a:ap_computer_science_a-m03-k1",
+     "archetype": "cs_char_arith",
+     "plan": "csa2-v3-audit-aud1015-swap-plan.json",
+     "newKey": "csa-aud1015:ap_computer_science_a-m03-k911",
+     "set": "CSA2"
+    },
+    {
+     "key": "csa-s2-frq-a:ap_computer_science_a-f03-k0",
+     "archetype": "csf_methods_digits",
+     "plan": "csa2-v3-audit-aud1015-swap-plan.json",
+     "newKey": "csa-aud1015:ap_computer_science_a-f03-k905",
+     "set": "CSA2"
+    },
+    {
+     "key": "csa-s2-frq-a:ap_computer_science_a-f04-k0",
+     "archetype": "csf_class_counter",
+     "plan": "csa1-v2-audit-aud1015-swap-plan.json",
+     "newKey": "csa-aud1015:ap_computer_science_a-f04-k902",
+     "set": "CSA1"
+    },
+    {
+     "key": "csa-s2-frq-b:ap_computer_science_a-f01-k0",
+     "archetype": "csf_list_reviews",
+     "plan": "csa1-v2-audit-aud1015-swap-plan.json",
+     "newKey": "csa-aud1015:ap_computer_science_a-f01-k903",
+     "set": "CSA1"
+    },
+    {
+     "key": "csa-s2-frq-b:ap_computer_science_a-f02-k0",
+     "archetype": "csf_list_runs",
+     "plan": "csa2-v3-audit-aud1015-swap-plan.json",
+     "newKey": "csa-aud1015:ap_computer_science_a-f02-k907",
+     "set": "CSA2"
+    },
+    {
+     "key": "csa-s2-frq-b:ap_computer_science_a-f04-k0",
+     "archetype": "csf_2d_shift",
+     "plan": "csa1-v2-audit-aud1015-swap-plan.json",
+     "newKey": "csa-aud1015:ap_computer_science_a-f04-k904",
+     "set": "CSA1"
+    }
+   ],
+   "stockItems": {
+    "cs_compile_error": [
+     {
+      "key": "csa-p1-a:ap_computer_science_a-m03-k0",
+      "subject": "ap_computer_science_a",
+      "hits": [
+       "char_long_float_in_options_out_of_scope"
+      ],
+      "usedIn": [],
+      "replacedBy": [
+       "csa1-v2-audit-aud1015-swap-plan.json",
+       "csa-aud1015:ap_computer_science_a-m03-k909",
+       "CSA1"
+      ]
+     },
+     {
+      "key": "csa-p1-a:ap_computer_science_a-m03-k1",
+      "subject": "ap_computer_science_a",
+      "hits": [
+       "char_long_float_in_options_out_of_scope"
+      ],
+      "usedIn": [],
+      "replacedBy": null
+     }
+    ],
+    "csf_methods_pass": [
+     {
+      "key": "csa-p1-b:ap_computer_science_a-f01-k0",
+      "subject": "ap_computer_science_a",
+      "hits": [
+       "frq_points_9_not_official_7_7_5_6"
+      ],
+      "usedIn": [],
+      "replacedBy": [
+       "csa1-v2-audit-aud1015-swap-plan.json",
+       "csa-aud1015:ap_computer_science_a-f01-k901",
+       "CSA1"
+      ]
+     },
+     {
+      "key": "csa-p1-b:ap_computer_science_a-f01-k1",
+      "subject": "ap_computer_science_a",
+      "hits": [
+       "frq_points_9_not_official_7_7_5_6"
+      ],
+      "usedIn": [],
+      "replacedBy": null
+     }
+    ],
+    "csf_class_steps": [
+     {
+      "key": "csa-p1-b:ap_computer_science_a-f02-k0",
+      "subject": "ap_computer_science_a",
+      "hits": [
+       "frq_points_9_not_official_7_7_5_6"
+      ],
+      "usedIn": [],
+      "replacedBy": [
+       "csa2-v3-audit-aud1015-swap-plan.json",
+       "csa-aud1015:ap_computer_science_a-f02-k906",
+       "CSA2"
+      ]
+     },
+     {
+      "key": "csa-p1-b:ap_computer_science_a-f02-k1",
+      "subject": "ap_computer_science_a",
+      "hits": [
+       "frq_points_9_not_official_7_7_5_6"
+      ],
+      "usedIn": [],
+      "replacedBy": null
+     }
+    ],
+    "csf_list_above": [
+     {
+      "key": "csa-p1-b:ap_computer_science_a-f03-k0",
+      "subject": "ap_computer_science_a",
+      "hits": [
+       "frq_points_9_not_official_7_7_5_6"
+      ],
+      "usedIn": [],
+      "replacedBy": null
+     }
+    ],
+    "csf_2d_best_row": [
+     {
+      "key": "csa-p1-b:ap_computer_science_a-f04-k0",
+      "subject": "ap_computer_science_a",
+      "hits": [
+       "frq_points_9_not_official_7_7_5_6"
+      ],
+      "usedIn": [],
+      "replacedBy": null
+     },
+     {
+      "key": "csa-s2-short-frq:ap_computer_science_a-f01-k0",
+      "subject": "ap_computer_science_a",
+      "hits": [
+       "frq_points_9_not_official_7_7_5_6"
+      ],
+      "usedIn": [],
+      "replacedBy": [
+       "csa2-v3-audit-aud1015-swap-plan.json",
+       "csa-aud1015:ap_computer_science_a-f01-k908",
+       "CSA2"
+      ]
+     }
+    ],
+    "cs_char_arith": [
+     {
+      "key": "csa-s2-mc-a:ap_computer_science_a-m03-k0",
+      "subject": "ap_computer_science_a",
+      "hits": [
+       "char_arithmetic_out_of_scope"
+      ],
+      "usedIn": [],
+      "replacedBy": null
+     },
+     {
+      "key": "csa-s2-mc-a:ap_computer_science_a-m03-k1",
+      "subject": "ap_computer_science_a",
+      "hits": [
+       "char_arithmetic_out_of_scope"
+      ],
+      "usedIn": [],
+      "replacedBy": [
+       "csa2-v3-audit-aud1015-swap-plan.json",
+       "csa-aud1015:ap_computer_science_a-m03-k911",
+       "CSA2"
+      ]
+     }
+    ],
+    "csf_methods_runs": [
+     {
+      "key": "csa-s2-frq-a:ap_computer_science_a-f01-k0",
+      "subject": "ap_computer_science_a",
+      "hits": [
+       "frq_points_9_not_official_7_7_5_6"
+      ],
+      "usedIn": [],
+      "replacedBy": null
+     },
+     {
+      "key": "csa-s2-frq-a:ap_computer_science_a-f01-k1",
+      "subject": "ap_computer_science_a",
+      "hits": [
+       "frq_points_9_not_official_7_7_5_6"
+      ],
+      "usedIn": [],
+      "replacedBy": null
+     }
+    ],
+    "csf_methods_leap": [
+     {
+      "key": "csa-s2-frq-a:ap_computer_science_a-f02-k0",
+      "subject": "ap_computer_science_a",
+      "hits": [
+       "frq_points_9_not_official_7_7_5_6"
+      ],
+      "usedIn": [],
+      "replacedBy": null
+     }
+    ],
+    "csf_methods_digits": [
+     {
+      "key": "csa-s2-frq-a:ap_computer_science_a-f03-k0",
+      "subject": "ap_computer_science_a",
+      "hits": [
+       "frq_points_9_not_official_7_7_5_6"
+      ],
+      "usedIn": [],
+      "replacedBy": [
+       "csa2-v3-audit-aud1015-swap-plan.json",
+       "csa-aud1015:ap_computer_science_a-f03-k905",
+       "CSA2"
+      ]
+     }
+    ],
+    "csf_class_counter": [
+     {
+      "key": "csa-s2-frq-a:ap_computer_science_a-f04-k0",
+      "subject": "ap_computer_science_a",
+      "hits": [
+       "frq_points_9_not_official_7_7_5_6"
+      ],
+      "usedIn": [],
+      "replacedBy": [
+       "csa1-v2-audit-aud1015-swap-plan.json",
+       "csa-aud1015:ap_computer_science_a-f04-k902",
+       "CSA1"
+      ]
+     },
+     {
+      "key": "csa-s2-frq-a:ap_computer_science_a-f04-k1",
+      "subject": "ap_computer_science_a",
+      "hits": [
+       "frq_points_9_not_official_7_7_5_6"
+      ],
+      "usedIn": [],
+      "replacedBy": null
+     }
+    ],
+    "csf_class_scoreboard": [
+     {
+      "key": "csa-s2-frq-a:ap_computer_science_a-f05-k0",
+      "subject": "ap_computer_science_a",
+      "hits": [
+       "frq_points_9_not_official_7_7_5_6"
+      ],
+      "usedIn": [],
+      "replacedBy": null
+     },
+     {
+      "key": "csa-s2-frq-a:ap_computer_science_a-f05-k1",
+      "subject": "ap_computer_science_a",
+      "hits": [
+       "frq_points_9_not_official_7_7_5_6"
+      ],
+      "usedIn": [],
+      "replacedBy": null
+     }
+    ],
+    "csf_class_stock": [
+     {
+      "key": "csa-s2-frq-a:ap_computer_science_a-f06-k0",
+      "subject": "ap_computer_science_a",
+      "hits": [
+       "frq_points_9_not_official_7_7_5_6"
+      ],
+      "usedIn": [],
+      "replacedBy": null
+     },
+     {
+      "key": "csa-s2-frq-a:ap_computer_science_a-f06-k1",
+      "subject": "ap_computer_science_a",
+      "hits": [
+       "frq_points_9_not_official_7_7_5_6"
+      ],
+      "usedIn": [],
+      "replacedBy": null
+     }
+    ],
+    "csf_list_reviews": [
+     {
+      "key": "csa-s2-frq-b:ap_computer_science_a-f01-k0",
+      "subject": "ap_computer_science_a",
+      "hits": [
+       "frq_points_9_not_official_7_7_5_6"
+      ],
+      "usedIn": [],
+      "replacedBy": [
+       "csa1-v2-audit-aud1015-swap-plan.json",
+       "csa-aud1015:ap_computer_science_a-f01-k903",
+       "CSA1"
+      ]
+     }
+    ],
+    "csf_list_runs": [
+     {
+      "key": "csa-s2-frq-b:ap_computer_science_a-f02-k0",
+      "subject": "ap_computer_science_a",
+      "hits": [
+       "frq_points_9_not_official_7_7_5_6"
+      ],
+      "usedIn": [],
+      "replacedBy": [
+       "csa2-v3-audit-aud1015-swap-plan.json",
+       "csa-aud1015:ap_computer_science_a-f02-k907",
+       "CSA2"
+      ]
+     }
+    ],
+    "csf_list_remove_short": [
+     {
+      "key": "csa-s2-frq-b:ap_computer_science_a-f03-k0",
+      "subject": "ap_computer_science_a",
+      "hits": [
+       "frq_points_9_not_official_7_7_5_6"
+      ],
+      "usedIn": [],
+      "replacedBy": null
+     }
+    ],
+    "csf_2d_shift": [
+     {
+      "key": "csa-s2-frq-b:ap_computer_science_a-f04-k0",
+      "subject": "ap_computer_science_a",
+      "hits": [
+       "frq_points_9_not_official_7_7_5_6"
+      ],
+      "usedIn": [],
+      "replacedBy": [
+       "csa1-v2-audit-aud1015-swap-plan.json",
+       "csa-aud1015:ap_computer_science_a-f04-k904",
+       "CSA1"
+      ]
+     }
+    ],
+    "csf_2d_border": [
+     {
+      "key": "csa-s2-frq-b:ap_computer_science_a-f05-k0",
+      "subject": "ap_computer_science_a",
+      "hits": [
+       "frq_points_9_not_official_7_7_5_6"
+      ],
+      "usedIn": [],
+      "replacedBy": null
+     }
+    ],
+    "csf_2d_transpose": [
+     {
+      "key": "csa-s2-frq-b:ap_computer_science_a-f06-k0",
+      "subject": "ap_computer_science_a",
+      "hits": [
+       "frq_points_9_not_official_7_7_5_6"
+      ],
+      "usedIn": [],
+      "replacedBy": null
+     },
+     {
+      "key": "csa-s2-short-frq:ap_computer_science_a-f02-k0",
+      "subject": "ap_computer_science_a",
+      "hits": [
+       "frq_points_9_not_official_7_7_5_6"
+      ],
+      "usedIn": [],
+      "replacedBy": null
+     }
+    ]
+   }
+  },
+  "d_stats_regression_reference_range": {
+   "stockByArchetype": {
+    "stfrq_q2_regression": 1
+   },
+   "stockTotal": 1,
+   "published": [],
+   "coveredByExistingPlan": [],
+   "stockItems": {
+    "stfrq_q2_regression": [
+     {
+      "key": "stats-s3b-c:ap_statistics-f02-k1",
+      "subject": "ap_statistics",
+      "hits": [
+       "reference_range_1_to_9_but_data_2_to_9"
+      ],
+      "usedIn": [],
+      "replacedBy": null
+     }
+    ]
+   }
+  }
+ }
+}

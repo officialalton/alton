@@ -303,7 +303,12 @@ export function attemptOne(
     if (figurePolicy === "require_figure_choice" && kind && !["evaluate", "vertex_x", "vertex_y"].includes(kind)) {
       return { ok: false, reason: `선택한 세부 패턴 '${kind}'은 그래프/도형 선택지 자료를 지원하지 않습니다.` };
     }
-    const model = generateNonlinearFnModel({ difficulty, ...(figurePolicy === "require_figure_choice" ? { family: "quadratic" as const } : {}), questionKind: kind as Parameters<typeof generateNonlinearFnModel>[0]["questionKind"] });
+    // 외부 검수(2026-10-18) — 좌표평면 자료는 그래프만 주는 읽기 문항(꼭짓점 x·y)에만 쓴다. 함수값 계산은 식만으로 묻는다.
+    if (figurePolicy === "require_plane" && kind && !["vertex_x", "vertex_y"].includes(kind)) {
+      return { ok: false, reason: `선택한 세부 패턴 '${kind}'은 좌표평면 자료와 함께 낼 수 없습니다(그래프와 식이 중복됩니다 — 꼭짓점 x·y만 가능).` };
+    }
+    const planeKind = figurePolicy === "require_plane" && !kind ? (Math.random() < 0.5 ? "vertex_x" : "vertex_y") : undefined;
+    const model = generateNonlinearFnModel({ difficulty, ...(figurePolicy === "require_figure_choice" || figurePolicy === "require_plane" ? { family: "quadratic" as const } : {}), questionKind: (kind ?? planeKind) as Parameters<typeof generateNonlinearFnModel>[0]["questionKind"] });
     usedKind = (model as { questionKind?: string; kind?: string }).questionKind ?? (model as { kind?: string }).kind ?? null;
     const check = validateNonlinearFnModel(model);
     if (!check.ok) { timing.compileMs += Date.now() - t0; return { ok: false, reason: check.reason }; }

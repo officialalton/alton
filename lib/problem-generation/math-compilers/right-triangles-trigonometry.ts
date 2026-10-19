@@ -177,7 +177,7 @@ export function renderRightTriProblem(model: RightTriModel): CompiledMathProblem
   const question =
     model.questionKind === "pythagorean_hypotenuse" ? "What is the length of the hypotenuse of the right triangle shown?"
     : model.questionKind === "pythagorean_leg" ? "What is the length of side AC of the right triangle shown?"
-    : `What is ${model.trigFn}(angle ${model.atVertex}) in the right triangle shown?`;
+    : `What is ${model.trigFn} ${model.atVertex} in the right triangle shown?`;
 
   const options = [model.correctAnswer, ...model.distractors.map((d) => d.value)];
   const order = [0, 1, 2, 3].sort(() => Math.random() - 0.5);
@@ -223,8 +223,8 @@ export function renderRightTriProblem(model: RightTriModel): CompiledMathProblem
     const ratioWord = model.trigFn === "sin" ? "대변/빗변" : model.trigFn === "cos" ? "인접변/빗변" : "대변/인접변";
     const ratioWordEn = model.trigFn === "sin" ? "opposite/hypotenuse" : model.trigFn === "cos" ? "adjacent/hypotenuse" : "opposite/adjacent";
     const denVal = model.trigFn === "tan" ? adj : model.hyp;
-    explanation = `각 ${model.atVertex}에서 대변은 ${oppSide}(= ${opp}), 인접변은 ${adjSide}(= ${adj}), 빗변은 BC(= ${model.hyp})이다. ${model.trigFn}(${model.atVertex}) = ${ratioWord} = ${opp}/${denVal} = ${model.correctAnswer}이다.`;
-    explanationEn = `At angle ${model.atVertex}, the opposite side is ${oppSide}(= ${opp}), the adjacent side is ${adjSide}(= ${adj}), and the hypotenuse is BC(= ${model.hyp}). ${model.trigFn}(${model.atVertex}) = ${ratioWordEn} = ${opp}/${denVal} = ${model.correctAnswer}.`;
+    explanation = `각 ${model.atVertex}에서 대변은 ${oppSide}(= ${opp}), 인접변은 ${adjSide}(= ${adj}), 빗변은 BC(= ${model.hyp})이다. ${model.trigFn} ${model.atVertex} = ${ratioWord} = ${opp}/${denVal} = ${model.correctAnswer}이다.`;
+    explanationEn = `At angle ${model.atVertex}, the opposite side is ${oppSide}(= ${opp}), the adjacent side is ${adjSide}(= ${adj}), and the hypotenuse is BC(= ${model.hyp}). ${model.trigFn} ${model.atVertex} = ${ratioWordEn} = ${opp}/${denVal} = ${model.correctAnswer}.`;
     figure = { type: "triangle", vertices: ["A", "B", "C"], kind: "right", rightAngleAt: "A", sides: [
       { between: ["A", "B"], label: fmt(model.leg1) },
       { between: ["A", "C"], label: fmt(model.leg2) },

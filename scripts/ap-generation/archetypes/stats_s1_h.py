@@ -74,9 +74,13 @@ def st_pvalue_interpretation(rng):
     pre, pop, event = pick(rng, PV)
     for _ in forever():
         p0 = pick(rng, [0.3, 0.4, 0.5])
-        n = pick(rng, [150, 200, 250])
+        # 외부 검수 2026-10-15 AP-067: 표시하는 표본비율은 정수 개수 / n 이어야 한다(n=200 에서 .459 는 91.8명). n 은 x/n 이 소수 셋째 자리 이내에서 딱 떨어지는 값만 쓴다.
+        n = pick(rng, [200, 250, 500])
         se = math.sqrt(p0 * (1 - p0) / n)
-        ph = round(p0 + pick(rng, [1.7, 1.9, 2.2, 2.4]) * se, 3)
+        x = round(n * (p0 + pick(rng, [1.7, 1.9, 2.2, 2.4]) * se))
+        ph = x / n
+        assert abs(ph * 1000 - round(ph * 1000)) < 1e-9 and abs(ph * n - x) < 1e-9
+        ph = round(ph, 3)
         z = (ph - p0) / se
         P = ss.norm.sf(z)
         agree(P, 1 - ncdf(z), tol=1e-9, name="pvalue")

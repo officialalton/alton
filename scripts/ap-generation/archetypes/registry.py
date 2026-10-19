@@ -1,4 +1,5 @@
 import sys, json, random, hashlib
+from frq_visible import ensure_setup_visible
 import calc_ab_reinforce as rf, calc_ab_calc as cc, micro_frq as mf, calc_ab_1 as c1, calc_ab_2 as c2, calc_ab_3 as c3, calc_ab_frq as cf, bio_frq as bf, calc_bc as bc, calc_bc_topup as tu, calc_bc_topup_frq as tf
 
 MC = {
@@ -153,6 +154,7 @@ def batch(name, n, seed0):
     while len(out) < n and seed < seed0 + 400:
         try:
             p = fn(random.Random(seed))
+            p = ensure_setup_visible(p)  # 2026-10-19: 표·도식 설명(실험 소개·주어진 값)이 학생에게 안 보이는 서술형은 제목에 완전한 문장으로 싣는다
         except Exception:
             seed += 1; continue
         k = p.get("variant_id") or (sig(p) if "options" in p else hashlib.sha1(json.dumps(p["facts"]).encode()).hexdigest()[:12])

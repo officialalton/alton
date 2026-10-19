@@ -85,7 +85,7 @@ def frq_fprime_graph(rng):
     fmt_iv = lambda L: " and ".join(f"({a},{b})" for a, b in L) if L else "no interval"
     parts = [
         part("a", "On what open intervals in $(0,8)$ is the graph of $f$ concave up? Give a reason for your answer.", 2, "explain", ["2.E", "3.E"], f"Concave up on {fmt_iv(inc)} because f' is increasing there.", [
-            row("a1", 1, "Maximal open intervals where f' is increasing (adjacent intervals merged)", [fmt_iv(inc)], alt=["endpoints may be included"]), row("a2", 1, "Reason: f' is increasing (so f'' > 0) on those intervals", ["f' is increasing", "f'' is positive"], err=["only restates 'concave up'"])]),
+            row("a1", 1, "Maximal open intervals where f' is increasing (adjacent intervals merged)", [fmt_iv(inc)], alt=["endpoints may be included"]), row("a2", 1, "Reason: f' is increasing on those intervals", ["f' is increasing"], err=["only restates 'concave up'"])]),
         part("b", "Find the $x$-coordinate of each point at which $f$ has a relative extremum on $(0,8)$, and classify each as a relative minimum or relative maximum. Justify your answer.", 2, "explain", ["3.B", "3.E"],
              "; ".join(f"x = {k}: relative {w}" for k, w in rel.items()) + " because f' changes sign there.", [
             row("b1", 1, "Identifies the x-values where f' = 0 and changes sign", [f"x = {k}" for k in rel], nums=True), row("b2", 1, "Classifies each using the sign change of f' (negative to positive: minimum; positive to negative: maximum)", [f"{w} at x = {k}" for k, w in rel.items()], both=True)]),
