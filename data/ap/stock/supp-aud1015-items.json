@@ -3089,5 +3089,559 @@
     "auditRow": "AP-016"
    }
   ]
+ },
+ {
+  "candidateKey": "ap_calculus_ab-f02-k912",
+  "cellId": "ap_calculus_ab-f02",
+  "apSubjectCode": "ap_calculus_ab",
+  "kind": "frq_bundle",
+  "keywordCode": "5.9",
+  "unitCode": "5",
+  "skillPrimary": "3.E",
+  "structure": "frq_multipart",
+  "calculator": "not_allowed",
+  "reviewState": "auto_passed",
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Standard multipart FRQ on a graph of f'. It uses the first derivative test, the sign change of f'' read from the slopes of f', and the candidates test with triangle areas. The justification skill is dominant and matches the topics. Reading and computation are light, and nothing is out of scope.",
+  "payload": {
+   "title": "Smart Thermostat Savings: Reading the Rate Graph",
+   "stimulus": {
+    "kind": "graph",
+    "description": "Piecewise-linear graph of f'(t), rate of change of cumulative savings in dollars per week, for 0 <= t <= 10 weeks, through (0,-2), (2,0), (5,6), (7,2), (9,0), (10,-2).",
+    "data": {
+     "x_axis": {
+      "label": "t (weeks)",
+      "min": 0,
+      "max": 10,
+      "tick": 1
+     },
+     "y_axis": {
+      "label": "f'(t) (dollars per week)",
+      "min": -3,
+      "max": 7,
+      "tick": 1
+     },
+     "curve": {
+      "name": "f'",
+      "type": "piecewise_linear",
+      "points": [
+       [
+        0,
+        -2
+       ],
+       [
+        2,
+        0
+       ],
+       [
+        5,
+        6
+       ],
+       [
+        7,
+        2
+       ],
+       [
+        9,
+        0
+       ],
+       [
+        10,
+        -2
+       ]
+      ]
+     },
+     "context": "f(t) is the cumulative net savings in dollars on a household energy bill t weeks after a smart thermostat is installed; f is differentiable on [0,10].",
+     "given": {
+      "f(0)": 40
+     },
+     "legend": [
+      "f' (solid line)"
+     ]
+    }
+   },
+   "parts": [
+    {
+     "label": "a",
+     "prompt": "Find all values of t in the open interval (0,10) at which f has a relative extremum. For each, state whether it is a relative minimum or relative maximum, and justify your answer.",
+     "points": 3,
+     "response_mode": "explain",
+     "skill_codes": [
+      "3.E"
+     ],
+     "model_answer": "f'(t)=0 at t=2 and t=9. At t=2, f' changes from negative to positive, so f has a relative minimum at t=2. At t=9, f' changes from positive to negative, so f has a relative maximum at t=9.",
+     "rubric_rows": [
+      {
+       "row_id": "a1",
+       "points": 1,
+       "criterion": "Identifies both critical points",
+       "required_elements": [
+        "t=2",
+        "t=9",
+        "f'(t)=0 there"
+       ]
+      },
+      {
+       "row_id": "a2",
+       "points": 1,
+       "criterion": "Relative minimum at t=2 with sign-change justification",
+       "required_elements": [
+        "t=2 minimum",
+        "f' changes negative to positive"
+       ]
+      },
+      {
+       "row_id": "a3",
+       "points": 1,
+       "criterion": "Relative maximum at t=9 with sign-change justification",
+       "required_elements": [
+        "t=9 maximum",
+        "f' changes positive to negative"
+       ]
+      }
+     ]
+    },
+    {
+     "label": "b",
+     "prompt": "Find the t-coordinate of each point of inflection of the graph of f on (0,10). Give a reason for your answer.",
+     "points": 2,
+     "response_mode": "explain",
+     "skill_codes": [
+      "3.E"
+     ],
+     "model_answer": "t=5. f'' is positive on (0,5) because f' is increasing, and negative on (5,7) because f' is decreasing, so f'' changes sign at t=5 (f' has its maximum there). No other sign change of f'' occurs: f' is increasing on (0,5) and decreasing on (5,10).",
+     "rubric_rows": [
+      {
+       "row_id": "b1",
+       "points": 1,
+       "criterion": "Identifies t=5 only",
+       "required_elements": [
+        "t=5"
+       ],
+       "common_errors": [
+        "Also lists t=2 or t=9 (zeros of f')"
+       ]
+      },
+      {
+       "row_id": "b2",
+       "points": 1,
+       "criterion": "Justifies using change in sign of f'' (f' changes from increasing to decreasing)",
+       "required_elements": [
+        "f' increasing then decreasing at t=5",
+        "f'' changes sign"
+       ],
+       "requires_row_id": "b1"
+      }
+     ]
+    },
+    {
+     "label": "c",
+     "prompt": "Find the absolute minimum value of f on the closed interval [0,10]. Justify your answer.",
+     "points": 3,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "3.E"
+     ],
+     "model_answer": "Candidates: the endpoints t=0 and t=10 and the critical points t=2 and t=9. f(2)=40+int_0^2 f' = 40-2=38. f(9)=38+9+8+2=57. f(10)=57-1=56. f(0)=40. The smallest is f(2)=38, so the absolute minimum value is 38 dollars.",
+     "rubric_rows": [
+      {
+       "row_id": "c1",
+       "points": 1,
+       "criterion": "Setup: considers endpoints and critical points as candidates",
+       "required_elements": [
+        "candidates t=0,2,9,10"
+       ]
+      },
+      {
+       "row_id": "c2",
+       "points": 1,
+       "criterion": "Computes candidate values using f(0)+area under f'",
+       "required_elements": [
+        "f(2)=38",
+        "f(9)=57 or f(10)=56"
+       ],
+       "alt_solutions": [
+        "Any correct set of areas -2, 9, 8, 2, -1"
+       ],
+       "requires_row_id": "c1"
+      },
+      {
+       "row_id": "c3",
+       "points": 1,
+       "criterion": "Answer 38 with comparison of candidates",
+       "required_elements": [
+        "38",
+        "compares values"
+       ],
+       "requires_row_id": "c2",
+       "units_row": true
+      }
+     ]
+    },
+    {
+     "label": "d",
+     "prompt": "On which open interval(s) is f both decreasing and concave down? Give a reason.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "3.E"
+     ],
+     "model_answer": "(9,10). There f'(t)<0 so f is decreasing, and f' is decreasing so f''<0 and f is concave down. On (0,2), f is decreasing but f' is increasing, so f is concave up.",
+     "rubric_rows": [
+      {
+       "row_id": "d1",
+       "points": 1,
+       "criterion": "Interval (9,10) with reason using signs of f' and f''",
+       "required_elements": [
+        "(9,10)",
+        "f'<0",
+        "f' decreasing"
+       ]
+      }
+     ]
+    }
+   ],
+   "total_points": 9,
+   "est_minutes": 15,
+   "design_note": "Household energy context with an f' graph given as data; tests justification via sign charts of f' and f'', and the candidates test using areas. Part (c) is hand-computable with triangles and trapezoids, and keeps to topics 5.4, 5.6 and 5.9.",
+   "calculator_part": "not_allowed",
+   "template": "fprime_graph_justify",
+   "verification_code": "import json\npts=[(0,-2),(2,0),(5,6),(7,2),(9,0),(10,-2)]\ndef area(a,b):\n    return (b[0]-a[0])*(a[1]+b[1])/2\n# split segments at zeros are already vertices\nA=[area(pts[i],pts[i+1]) for i in range(5)]\nf={0:40}\nf[2]=40+A[0]+0\nf[2]=40+A[0]\nf[5]=f[2]+A[1]\nf[7]=f[5]+A[2]\nf[9]=f[7]+A[3]\nf[10]=f[9]+A[4]\nslopes=[(pts[i+1][1]-pts[i][1])/(pts[i+1][0]-pts[i][0]) for i in range(5)]\nok_c=(f[2]==38 and f[9]==57 and f[10]==56 and min(f[0],f[2],f[9],f[10])==38)\nok_b=slopes==[1,2,-2,-1,-2]\nprint(json.dumps({\"checks\":[{\"part\":\"a\",\"pass\":True,\"detail\":\"zeros at 2 (-to+), 9 (+to-)\"},{\"part\":\"b\",\"pass\":ok_b,\"detail\":str(slopes)},{\"part\":\"c\",\"pass\":ok_c,\"detail\":str(f)},{\"part\":\"d\",\"pass\":True,\"detail\":\"(9,10)\"}],\"conceptual_parts\":[\"a\",\"d\"]}))"
+  },
+  "verification": {
+   "conceptualOnly": false,
+   "solverAgrees": true
+  },
+  "review": {
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "FRQ; rubric lists the common error of listing t=2 or t=9 as inflection points. Adequate."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Hand-computable areas, 9 points, about 15 minutes, no calculator needed."
+   },
+   "instant_reject": [],
+   "key_scoring": {
+    "pass": true,
+    "notes": "Verified: f(2)=38, f(5)=47, f(7)=55, f(9)=57, f(10)=56. The absolute minimum is 38. Parts (a), (b), and (d) are correct, and t=7 is correctly not an inflection point. The rubric is consistent. Minor sloppiness in the model answer's candidate list, which names t=2 twice."
+   },
+   "resembles_known_exam_item": false,
+   "scope_skill": {
+    "pass": true,
+    "notes": "The bundle combines 5.4, 5.6, and 5.9 with a justification emphasis (3.E), which fits the stated scope."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The data gives axes, ranges, ticks, all vertices of the piecewise-linear f', and f(0)=40. It is complete and the wording is clear."
+   },
+   "summary": "The item is correct, complete, and suitable. I verified the key by computing the areas under f' (f(2)=38, f(10)=56) and the slope signs of f'. The only blemish is a sloppy candidate list in the part (c) model answer, which does not change the key or the rubric. I recommend acceptance."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multipart FRQ on a graph of f'. It uses the first derivative test, the sign change of f'' read from the slopes of f', and the candidates test with triangle areas. The justification skill is dominant and matches the topics. Reading and computation are light, and nothing is out of scope.",
+   "reading_load": "medium",
+   "computation_load": "low",
+   "reasoning_steps": 9,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  },
+  "gateOverride": "v2-legacy-revalidated-2026-10-09",
+  "run": "supp-aud1015-final",
+  "stockKey": "supp-aud1015-final:ap_calculus_ab-f02-k912",
+  "pipeline": "llm_v1",
+  "validation": "auto_passed",
+  "gateVersion": "v2-legacy-revalidated-2026-10-09",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "selectedForSample": true,
+  "legacyReserve": false,
+  "family": "calculus",
+  "itemFamilyId": "fam:run1:ap_calculus_ab-f02-k5",
+  "canonicalKey": "supp-aud1015-final:ap_calculus_ab-f02-k912",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "calculus:5.9",
+  "sharedWith": [],
+  "stockCell": "ap_calculus_ab|5.9|3.E|frq_multipart|na",
+  "history": [
+   {
+    "run": "supp-aud1015-final",
+    "gateVersion": "v2-code-first-final-2026-10-08",
+    "outcome": "passed",
+    "reasons": null,
+    "derivedFrom": "run1:ap_calculus_ab-f02-k5",
+    "auditRow": "AP-015"
+   }
+  ]
+ },
+ {
+  "candidateKey": "ap_calculus_ab-f03-k913",
+  "cellId": "ap_calculus_ab-f03",
+  "apSubjectCode": "ap_calculus_ab",
+  "kind": "frq_bundle",
+  "keywordCode": "7.6",
+  "unitCode": "7",
+  "skillPrimary": "1.E",
+  "structure": "frq_multipart",
+  "calculator": "not_allowed",
+  "reviewState": "auto_passed",
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Standard multipart FRQ on separable differential equations. Part a is slope evaluation plus noting that the slope is undefined at y=0. Part b is separation, integration and a cube root. Part c uses the initial condition. Part d checks that y never equals 0, using the discriminant of x^2+x+8. All of it is in scope, with light computation and no ambiguity. The domain justification in part d needs some conceptual care but is a typical exam item.",
+  "payload": {
+   "title": "Separable equation with cubic denominator",
+   "stimulus": {
+    "kind": "text",
+    "description": "Differential equation dy/dx = (2x+1)/(3y^2) with initial condition y(0)=2.",
+    "data": {
+     "equation": "dy/dx = (2x+1)/(3y^2)",
+     "initial_condition": {
+      "x": 0,
+      "y": 2
+     },
+     "points_for_slope": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       -1
+      ],
+      [
+       0,
+       0
+      ]
+     ]
+    }
+   },
+   "parts": [
+    {
+     "label": "a",
+     "prompt": "Consider the differential equation $\\frac{dy}{dx}=\\frac{2x+1}{3y^2}$. Find the slope at each of the points $(0,1)$ and $(1,-1)$. Then explain what happens to the slope at $(0,0)$ and what this means for a slope field drawn there.",
+     "points": 2,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "1.E"
+     ],
+     "model_answer": "At (0,1): 1/3. At (1,-1): 3/3 = 1. At (0,0) the denominator is 0, so the slope is undefined (there is no finite slope); no slope segment is drawn there.",
+     "rubric_rows": [
+      {
+       "row_id": "a1",
+       "points": 1,
+       "criterion": "Both slopes computed correctly",
+       "required_elements": [
+        "1/3 at (0,1)",
+        "1 at (1,-1)"
+       ],
+       "requires_both": true,
+       "requires_numbers": true,
+       "alt_solutions": []
+      },
+      {
+       "row_id": "a2",
+       "points": 1,
+       "criterion": "States slope undefined at (0,0) because denominator is 0",
+       "required_elements": [
+        "undefined",
+        "3y^2 = 0"
+       ],
+       "alt_solutions": [
+        "no segment drawn / no finite slope"
+       ]
+      }
+     ]
+    },
+    {
+     "label": "b",
+     "prompt": "Use separation of variables to find the general solution, writing $y$ in terms of $x$ and a constant.",
+     "points": 3,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "1.E"
+     ],
+     "model_answer": "3y^2 dy = (2x+1) dx; y^3 = x^2 + x + C; y = (x^2 + x + C)^(1/3).",
+     "rubric_rows": [
+      {
+       "row_id": "b1",
+       "points": 1,
+       "criterion": "Separates variables correctly",
+       "required_elements": [
+        "3y^2 dy = (2x+1) dx"
+       ]
+      },
+      {
+       "row_id": "b2",
+       "points": 1,
+       "criterion": "Antiderivatives of both sides with a constant C",
+       "required_elements": [
+        "y^3",
+        "x^2 + x + C"
+       ],
+       "common_errors": [
+        "omitting +C",
+        "putting C on both sides unsimplified is fine"
+       ]
+      },
+      {
+       "row_id": "b3",
+       "points": 1,
+       "criterion": "Solves for y",
+       "required_elements": [
+        "y = (x^2 + x + C)^(1/3)"
+       ],
+       "requires_row_id": "b2",
+       "alt_solutions": [
+        "y = cube root of (x^2+x+C)"
+       ]
+      }
+     ]
+    },
+    {
+     "label": "c",
+     "prompt": "Find the particular solution $y=f(x)$ with $f(0)=2$.",
+     "points": 2,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "1.E"
+     ],
+     "model_answer": "8 = C, so y = (x^2 + x + 8)^(1/3).",
+     "rubric_rows": [
+      {
+       "row_id": "c1",
+       "points": 1,
+       "criterion": "Uses the initial condition to find C",
+       "required_elements": [
+        "C = 8"
+       ],
+       "requires_row_id": "b2"
+      },
+      {
+       "row_id": "c2",
+       "points": 1,
+       "criterion": "States particular solution",
+       "required_elements": [
+        "y = (x^2 + x + 8)^(1/3)"
+       ],
+       "requires_row_id": "c1"
+      }
+     ]
+    },
+    {
+     "label": "d",
+     "prompt": "Determine the largest interval on which your particular solution from part (c) is a valid solution of the differential equation. Justify your answer.",
+     "points": 2,
+     "response_mode": "explain",
+     "skill_codes": [
+      "1.E"
+     ],
+     "model_answer": "The differential equation requires y ≠ 0. Since x^2+x+8 has discriminant 1-32 < 0, it is always positive, so y > 0 for all x. The solution is valid on (-infinity, infinity).",
+     "rubric_rows": [
+      {
+       "row_id": "d1",
+       "points": 1,
+       "criterion": "Identifies condition y ≠ 0 and shows x^2+x+8 > 0 for all x",
+       "required_elements": [
+        "y not 0",
+        "x^2+x+8 > 0 (discriminant negative or completed square (x+1/2)^2+31/4)"
+       ]
+      },
+      {
+       "row_id": "d2",
+       "points": 1,
+       "criterion": "Concludes interval is all real numbers",
+       "required_elements": [
+        "(-infinity, infinity)"
+       ],
+       "requires_row_id": "d1"
+      }
+     ]
+    }
+   ],
+   "total_points": 9,
+   "est_minutes": 15,
+   "calculator_part": "not_allowed",
+   "template": "differential_equation",
+   "design_note": "Abstract text-only DE; integrates slope evaluation (7.3/7.4 idea of slope field and undefined slopes), separation (7.6), and domain justification via the y not 0 condition.",
+   "verification_code": "import json, sympy as sp\nx,y,C=sp.symbols('x y C')\nf=(2*x+1)/(3*y**2)\ns1=f.subs({x:0,y:1}); s2=f.subs({x:1,y:-1})\nCv=sp.solve(sp.Eq(2**3,0+0+C),C)[0]\ndisc=1-4*8\nchecks=[{\"part\":\"a\",\"pass\":bool(s1==sp.Rational(1,3) and s2==1),\"detail\":\"slopes\"},\n{\"part\":\"b\",\"pass\":bool(sp.simplify(sp.diff(x**2+x+C,x)-(2*x+1))==0),\"detail\":\"d/dx y^3 check\"},\n{\"part\":\"c\",\"pass\":bool(Cv==8),\"detail\":\"C=8\"},\n{\"part\":\"d\",\"pass\":bool(disc<0),\"detail\":\"discriminant negative\"}]\nyy=(x**2+x+8)**sp.Rational(1,3)\nchecks[2][\"pass\"]=checks[2][\"pass\"] and sp.simplify(sp.diff(yy,x)-f.subs(y,yy))==0\nprint(json.dumps({\"checks\":checks,\"conceptual_parts\":[]}))"
+  },
+  "verification": {
+   "conceptualOnly": false,
+   "solverAgrees": true
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Slope evaluation, separation of variables, initial condition, and domain check fit 7.6/7.3/7.4 with 1.E dominant."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All answers verified: 1/3, 1, undefined; y^3=x^2+x+C; C=8; all reals. Rubric consistent. Minor: (a) allows 'no segment or vertical' hedge."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Equation, initial condition and points fully specified. Text-only, clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "FRQ; rubric rows are clear with alternatives. Little discussion of common errors, but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "9 points, ~15 min, no calculator, light arithmetic. Part (d) is somewhat easy but fine."
+   },
+   "instant_reject": [],
+   "resembles_known_exam_item": false,
+   "summary": "Correct, well-scoped multipart FRQ on separable equations and slope-field reasoning. Only minor looseness in (a)'s accepted explanation at (0,0). Acceptable."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multipart FRQ on separable differential equations. Part a is slope evaluation plus noting that the slope is undefined at y=0. Part b is separation, integration and a cube root. Part c uses the initial condition. Part d checks that y never equals 0, using the discriminant of x^2+x+8. All of it is in scope, with light computation and no ambiguity. The domain justification in part d needs some conceptual care but is a typical exam item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 8,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 480
+  },
+  "gateOverride": "v2-legacy-revalidated-2026-10-09",
+  "run": "supp-aud1015-final",
+  "stockKey": "supp-aud1015-final:ap_calculus_ab-f03-k913",
+  "pipeline": "llm_v1",
+  "validation": "auto_passed",
+  "gateVersion": "v2-legacy-revalidated-2026-10-09",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "selectedForSample": true,
+  "legacyReserve": false,
+  "family": "calculus",
+  "itemFamilyId": "fam:run1:ap_calculus_ab-f03-k2",
+  "canonicalKey": "supp-aud1015-final:ap_calculus_ab-f03-k913",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "calculus:7.6",
+  "sharedWith": [],
+  "stockCell": "ap_calculus_ab|7.6|1.E|frq_multipart|na",
+  "history": [
+   {
+    "run": "supp-aud1015-final",
+    "gateVersion": "v2-code-first-final-2026-10-08",
+    "outcome": "passed",
+    "reasons": null,
+    "derivedFrom": "run1:ap_calculus_ab-f03-k2",
+    "auditRow": "AP-016"
+   }
+  ]
  }
 ]
