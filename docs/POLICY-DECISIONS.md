@@ -86,3 +86,4 @@
 - AI 서술형 채점 개인정보 문구·AP/SAT 상표 고지(2026-10-15 오너 승인): 개인정보 처리방침에 'AI-Estimated Scoring of Written Responses' 절·Anthropic 서비스 제공자·학습 데이터(서술형 응답) 문구를 추가하고, 푸터·이용약관(교육적 면책)·연습시험 목록에 'AP® and SAT® are registered trademarks of the College Board…' 고지를 추가했다(lib/legal.ts TRADEMARK_NOTICE). 정책 시행일(LEGAL_LAST_UPDATED/STUDENT_TERMS_VERSION) 갱신은 오픈 배포 때 오너와 확인.
 - Production 환경변수 확인(2026-10-15 오너): CONTRACT_AUTO_DISPATCH_ENABLED=false, AI_ESSAY_GRADING_ENABLED=true 로 설정됨(오너 확인). 값은 CLI 로 읽을 수 없어 오너 확인에 의존하며, 재배포해야 반영된다.
 - 2026-10-15: 오너 확정 — 전 과목(AP 14과목 + SAT) 모의고사 수량을 현재의 2.5배로 확대(AP 33→약 83, SAT 14→약 35). 예산 상한 $650 / 중단선 $640으로 상향. 기존 콘텐츠 정책(실제 자료 출처·과목별 검증·소량 단계 교체·미해결 항목 제외) 그대로 적용. 프로덕션 오픈은 현재 세트로 QA 후 먼저 진행하고, 확대분은 세트 단위로 추가 공개.
+- 2026-10-15: 오너 확정 — 학생 응시 기반 난도 보정(문항별 정답률·풀이 시간·오답 분포·변별도)은 프로덕션 무료 공개 후 실제 고객 응시 데이터로 한다. 공개 전 선행: 외부 검수 확정 수정(P1 4곳·해설/배점 충돌·CSA 범위) 반영. 확대분은 문항 설계표(내용·기능·표현·추론·중복)와 시험 간 반복 감소 기준을 지켜 만든다.

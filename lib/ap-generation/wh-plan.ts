@@ -34,7 +34,7 @@ export const CTX: Record<string, string> = {
   "txt-wells-1920": "H. G. Wells was an English writer who published a popular history of the world in 1920 for general readers.",
   "txt-kanagawa-1854": "In 1854 a United States naval squadron under Commodore Matthew Perry and Japanese commissioners signed this treaty.",
   "img-china-cake-1898": "This cartoon appeared in a French newspaper supplement in January 1898, after several European powers and Japan had gained special rights in parts of China.",
-  "txt-order1-1917": "This order was issued in March 1917 by the Petrograd Soviet, a council of workers' and soldiers' deputies, a few days after Tsar Nicholas II gave up the throne.",
+  "txt-order1-1917": "This order was issued on March 1 (Old Style) in 1917 by the Petrograd Soviet, a council of workers' and soldiers' deputies, during the February Revolution and one day before Tsar Nicholas II gave up the throne.",
   "txt-lenin-1918": "Vladimir Lenin, leader of the Bolshevik government of Russia, wrote this letter in August 1918, during the Russian Civil War.",
   "txt-gandhi-1909": "Mohandas Gandhi, an Indian lawyer who had worked in South Africa, wrote this book in 1909 as a dialogue between a Reader and an Editor; the Editor states Gandhi's views.",
   "img-berlin-wall-cia-1961": "This photograph from the U.S. Central Intelligence Agency shows work on a wall dividing East Berlin from West Berlin in September 1961.",

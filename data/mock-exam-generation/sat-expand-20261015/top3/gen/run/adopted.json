@@ -1,0 +1,1336 @@
+[
+ {
+  "gid": "sz-boundaries-e-000",
+  "runId": "rw-supplement-easy",
+  "skill": "boundaries",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "easy",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "Russian painter Wassily Kandinsky believed that colors could be heard as well as seen. In his 1911 book Concerning the Spiritual in Art, he linked yellow to the sharp blast of a trumpet and deep blue to the low tones of a cello. These ideas shaped his abstract canvases, which he often titled \"Compositions\" as if they were pieces of ______ wanted viewers to experience his paintings the way listeners experience a symphony.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "Russian painter Wassily Kandinsky believed that colors could be heard as well as seen. In his 1911 book Concerning the Spiritual in Art, he linked yellow to the sharp blast of a trumpet and deep blue to the low tones of a cello. These ideas shaped his abstract canvases, which he often titled \"Compositions\" as if they were pieces of ______ wanted viewers to experience his paintings the way listeners experience a symphony.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "music. Kandinsky",
+    "music, Kandinsky",
+    "music Kandinsky",
+    "music, and, Kandinsky"
+   ],
+   "correctIndex": 0,
+   "answers": null,
+   "explanation": "빈칸 앞 \"These ideas shaped ... pieces of music\"과 뒤의 \"Kandinsky wanted viewers ...\"는 각각 독립절이므로 마침표로 분리해야 한다. 그래서 A가 정답이다. B는 쉼표만으로 두 독립절을 이어 쉼표 스플라이스가 된다. C는 문장부호 없이 이어 붙인 무종지문(run-on)이다. D는 등위접속사 and 뒤에 불필요한 쉼표가 들어가 문장부호 사용이 잘못되었다.",
+   "explanationEn": "The text before the blank (\"These ideas shaped ... pieces of music\") and the text after it (\"Kandinsky wanted viewers ...\") are both independent clauses, so they need to be separated with a period. That makes A correct. B joins the two independent clauses with only a comma, which is a comma splice. C runs the clauses together with no punctuation at all, creating a run-on sentence. D adds an extra comma after the coordinating conjunction \"and,\" and that comma doesn't belong there.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "easy",
+   "targetLetter": "A",
+   "seed": "arts and humanities nonfiction — Wassily Kandinsky synesthesia color-sound correspondence theory and abstract expressionism visual music representation",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "빈칸 앞뒤가 모두 독립절(\"These ideas shaped ... pieces of music\" / \"Kandinsky wanted viewers ...\")임을 직접 확인했고, 마침표(A)만이 올바른 경계 처리이다. B는 쉼표 스플라이스, C는 무종지문, D는 and 뒤 불필요한 쉼표로 각각 전형적 오개념을 반영한다. 한국어·영어 해설 모두 A를 일관되게 뒷받침하며 글자 참조가 선택지와 일치한다. 칸딘스키 관련 사실(1911년 저서, 노랑-트럼펫, 짙은 파랑-첼로 연상)도 통설과 부합한다. 독립절 경계라는 단일 규칙으로 해결되므로 easy 난이도에 적합하다."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "독립절 두 개를 마침표로 분리하는 단일 규칙 문항. 오답은 쉼표 스플라이스, 무종지문, and 뒤 불필요한 쉼표로 전형적인 오개념이다. 칸딘스키의 공감각 이론, 1911년 저서, 노랑-트럼펫/파랑-첼로 비유, Compositions 연작은 모두 사실과 맞다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "sz-form_structure_sense-e-002",
+  "runId": "rw-supplement-easy",
+  "skill": "form_structure_sense",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "easy",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "In sixteenth-century Italy, traveling troupes performed commedia dell'arte, a form of theater built on improvisation rather than fixed scripts. Actors relied on familiar stock characters, such as the greedy merchant Pantalone and the clever servant Arlecchino. The leather masks of these characters ______ each figure instantly recognizable to audiences, even in crowded town squares.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "In sixteenth-century Italy, traveling troupes performed commedia dell'arte, a form of theater built on improvisation rather than fixed scripts. Actors relied on familiar stock characters, such as the greedy merchant Pantalone and the clever servant Arlecchino. The leather masks of these characters ______ each figure instantly recognizable to audiences, even in crowded town squares.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "makes",
+    "is making",
+    "made",
+    "has made"
+   ],
+   "correctIndex": 2,
+   "answers": null,
+   "explanation": "주어는 복수 명사 'masks'이고 'of these characters'는 주어를 꾸미는 수식어일 뿐이다. 따라서 동사는 복수 주어와 일치해야 하며, 과거형 C는 단수·복수 구분 없이 쓸 수 있어 수 일치 조건을 충족하고, 16세기를 다루는 지문의 과거 맥락과도 맞는다. A, B, D는 모두 단수 동사 형태(makes, is making, has made)라 복수 주어 'masks'와 수가 맞지 않는다. 바로 앞에 'characters'가 있지만 이는 전치사의 목적어이므로 동사의 수를 정하지 않는다.",
+   "explanationEn": "The subject of the sentence is the plural noun \"masks.\" The phrase \"of these characters\" only modifies it. That means the verb has to agree with a plural subject. Choice C, the past tense \"made,\" has the same form for singular and plural subjects, so it agrees with \"masks.\" It also fits the sixteenth-century, past-tense setting of the passage. Choices A, B, and D are all singular forms (\"makes,\" \"is making,\" \"has made\"), so they don't agree with \"masks.\" Don't let the nearby word \"characters\" fool you: it is the object of the preposition \"of,\" so it doesn't control the verb.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "easy",
+   "targetLetter": "C",
+   "seed": "arts and humanities nonfiction — Comedia dell'arte improvisational theater stock characters and commedia mask tradition sixteenth-century Italian performance evolution",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "주어 'masks'(복수)와 동사 수 일치 단일 규칙으로 해결. A·B·D는 모두 단수형이라 배제되고, 전치사구 'of these characters'의 'characters'에 끌리는 전형적 오개념을 유도함. C 'made'는 수 구분 없는 과거형으로 16세기 과거 맥락에도 부합. 해설(한·영) 결론·글자 참조 일치, 영어 해설에 한글 없음. 역사적 사실(commedia dell'arte, Pantalone, Arlecchino, 가죽 가면) 정확. 난이도 easy 적합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "복수 주어 masks와 수 일치(사이에 전치사구) 하나만 묻는 문항이다. 지문은 과거 시제(performed, relied)를 쓰고 있어 made가 유일하게 맞는 답이다. 오답 셋은 바로 앞 단어 characters에 맞춘 단수형으로, 수 일치를 잘못 이해한 학생이 흔히 고를 만한 선택지다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "sz-form_structure_sense-e-003",
+  "runId": "rw-supplement-easy",
+  "skill": "form_structure_sense",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "easy",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "In 1887, Ludwik Zamenhof published a short booklet introducing Esperanto, a constructed language he hoped would serve as a neutral bridge between speakers of different native tongues. Today, the grammar of Esperanto ______ only sixteen basic rules, so many learners can master its structure within a few weeks.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "In 1887, Ludwik Zamenhof published a short booklet introducing Esperanto, a constructed language he hoped would serve as a neutral bridge between speakers of different native tongues. Today, the grammar of Esperanto ______ only sixteen basic rules, so many learners can master its structure within a few weeks.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "contain",
+    "are containing",
+    "have contained",
+    "contains"
+   ],
+   "correctIndex": 3,
+   "answers": null,
+   "explanation": "빈칸 동사의 주어는 단수 명사 'grammar'이고, 'of Esperanto'는 주어를 꾸미는 수식어일 뿐이다. 따라서 단수 현재형 동사인 D 'contains'가 정답이다. A는 복수 주어에 쓰는 형태라 단수 주어 'grammar'와 맞지 않는다. B의 'are'와 C의 'have'도 복수 주어용이라 수 일치에 어긋난다.",
+   "explanationEn": "The subject of the blank is the singular noun \"grammar.\" The phrase \"of Esperanto\" just describes that subject, so it doesn't change the number. That's why D, \"contains,\" is correct: it's a singular present-tense verb. A is the form used with plural subjects, so it doesn't agree with \"grammar.\" B (\"are\") and C (\"have\") also go with plural subjects, so they break subject-verb agreement too.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "easy",
+   "targetLetter": "D",
+   "seed": "arts and humanities nonfiction — Esperanto constructed international auxiliary language Ludwik Zamenhof utopian communication bridge linguistic experiment",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "주어 'grammar'(단수) + 수식어 'of Esperanto'(단수)로 D 'contains'가 유일한 정답. 오답 3개는 모두 복수 동사 형태로, 수 일치 규칙 하나만 알면 배제되며 'rules' 등 주변 복수 명사에 이끌리는 전형적 오개념을 유도함. 해설 한·영 일치, 사실(1887년, 16개 규칙) 정확, 저작권 의심 없음."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "단수 주어 grammar에 맞춘 수 일치를 묻는 단일 규칙 문항이다. 오답은 모두 복수형이라 규칙을 알면 바로 배제된다. 1887년 Unua Libro 출간과 16개 규칙이라는 사실도 정확하다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "sz-inferences-m-005",
+  "runId": "rw-supplement-medium",
+  "skill": "inferences",
+  "domain": "rw_information_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "Linguists once assumed that languages spoken by larger populations tend to have larger phonemic inventories—that is, more distinct consonant and vowel sounds. One proposed explanation was that sounds are lost more easily in small, isolated communities. To test this idea, linguist Mira Okonjo compared inventory sizes across hundreds of languages, but she counted sounds in two ways: once by listing every phoneme, and once by grouping phonemes according to shared distinctive features, such as voicing or nasality. When she counted individual phonemes, larger populations did show slightly larger inventories. When she counted feature categories, however, the difference vanished: small and large speech communities used about the same number of features, with large ones simply combining those features in more ways. These findings suggest that ______\n\nWhich choice most logically completes the text?",
+   "stimulus": "Linguists once assumed that languages spoken by larger populations tend to have larger phonemic inventories—that is, more distinct consonant and vowel sounds. One proposed explanation was that sounds are lost more easily in small, isolated communities. To test this idea, linguist Mira Okonjo compared inventory sizes across hundreds of languages, but she counted sounds in two ways: once by listing every phoneme, and once by grouping phonemes according to shared distinctive features, such as voicing or nasality. When she counted individual phonemes, larger populations did show slightly larger inventories. When she counted feature categories, however, the difference vanished: small and large speech communities used about the same number of features, with large ones simply combining those features in more ways. These findings suggest that ______",
+   "question": "Which choice most logically completes the text?",
+   "options": [
+    "small speech communities lose distinctive features more readily than large ones do, which accounts for their smaller phoneme counts.",
+    "whether population size appears to influence phonemic inventories depends partly on how linguists choose to count the sounds of a language.",
+    "large speech communities tend to develop entirely new kinds of distinctive features that small communities do not use.",
+    "phonemic inventory size bears no relationship to population size, no matter which counting method linguists use."
+   ],
+   "correctIndex": 1,
+   "answers": null,
+   "explanation": "개별 음소로 세면 인구 규모와 음소 수 사이에 약한 관계가 보였지만, 자질 범주로 세면 그 차이가 사라졌다. 따라서 관계가 드러나는지 여부가 계산 방식에 달려 있다는 B가 가장 논리적이다. A는 소규모 공동체가 자질을 잃는다고 하지만, 지문은 자질 수가 비슷하다고 말한다. C는 대규모 공동체가 새로운 자질을 만든다고 하지만, 실제로는 같은 자질을 더 다양하게 조합할 뿐이다. D는 음소 단위로 셌을 때 약간의 차이가 나타났다는 사실과 모순된다.",
+   "explanationEn": "When Okonjo counted individual phonemes, she found a small link between population size and inventory size, but that link disappeared when she counted feature categories. So whether the link shows up depends on the counting method, which is what B says. A claims small communities lose features, but the text says both groups use about the same number of features. C says large communities invent new kinds of features, but they actually just combine the same features in more ways. D goes too far, because the phoneme count did show a slight difference.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "B",
+   "seed": "arts and humanities nonfiction — Phonemic inventory linguistic phoneme system variation across world languages and distinctive sound feature categorization",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "정답 B 검산: 음소 단위 계산에서는 약한 상관이 나타나고 자질 단위에서는 사라졌으므로 '계산 방식에 따라 달라진다'가 유일하게 두 결과를 모두 포괄함. A는 자질 수가 비슷하다는 진술과 모순, C는 '같은 자질을 더 다양하게 조합'과 모순, D는 음소 계산에서 약한 차이가 있었다는 사실과 모순. 가상의 연구자(Mira Okonjo)와 결과이므로 사실 오류·저작권 문제 없음. 한국어·영어 해설 모두 B를 일관되게 뒷받침하며 글자 참조 정확, 영어 자연스럽고 한글 없음. 난이도: 두 계산 결과를 연결해야 하고 D가 훑어 읽으면 매력적인 오답, A·C도 지문 요소를 부분적으로 차용하여 medium에 부합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "두 계산 방식의 결과를 연결해야 하는 2단계 추론이다. A는 '소규모 공동체의 소실' 가설, D는 '자질 기준 결과'라는 부분 근거를 가져 매력적인 오답이 된다. Mira Okonjo는 가상의 인물로 보이며 사실 오류 문제는 없다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "sz-central_ideas_details-m-006",
+  "runId": "rw-supplement-medium",
+  "skill": "central_ideas_details",
+  "domain": "rw_information_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "In the late thirteenth century, the Majorcan philosopher Ramon Llull devised what he called the Ars, a system for exploring religious and philosophical questions by combining a fixed set of basic concepts. Llull assigned letters to attributes such as goodness, greatness, and power, inscribed them on concentric paper wheels, and rotated the wheels so that every possible pairing appeared in turn. Llull himself intended the device as a tool of persuasion: he hoped that by producing every combination of divine attributes, it would lead Muslim and Jewish scholars to accept Christian doctrine through reasoning both sides already shared. Historians of computing, however, have increasingly pointed to the Ars for a different reason. Whatever its missionary purpose, the wheels carried out reasoning through a mechanical procedure, producing results by following fixed rules rather than relying on the insight of whoever turned them. It is this feature, and not Llull's theological conclusions, that later thinkers such as Gottfried Leibniz found worth developing when they imagined a calculus of thought.\n\nWhich choice best states the main idea of the text?",
+   "stimulus": "In the late thirteenth century, the Majorcan philosopher Ramon Llull devised what he called the Ars, a system for exploring religious and philosophical questions by combining a fixed set of basic concepts. Llull assigned letters to attributes such as goodness, greatness, and power, inscribed them on concentric paper wheels, and rotated the wheels so that every possible pairing appeared in turn. Llull himself intended the device as a tool of persuasion: he hoped that by producing every combination of divine attributes, it would lead Muslim and Jewish scholars to accept Christian doctrine through reasoning both sides already shared. Historians of computing, however, have increasingly pointed to the Ars for a different reason. Whatever its missionary purpose, the wheels carried out reasoning through a mechanical procedure, producing results by following fixed rules rather than relying on the insight of whoever turned them. It is this feature, and not Llull's theological conclusions, that later thinkers such as Gottfried Leibniz found worth developing when they imagined a calculus of thought.",
+   "question": "Which choice best states the main idea of the text?",
+   "options": [
+    "Llull's Ars was designed mainly to persuade Muslim and Jewish scholars, and that goal explains why historians of computing now study it closely.",
+    "Llull's Ars used lettered concentric wheels to produce pairings of divine attributes, a technique that Leibniz later adopted in order to strengthen theological arguments.",
+    "Llull's Ars, though built to serve religious persuasion, is valued today because it treated reasoning as a rule-governed procedure that later thinkers expanded on.",
+    "Llull's Ars, though built to serve religious persuasion, failed in that aim because its combinations depended on the skill of the person turning the wheels."
+   ],
+   "correctIndex": 2,
+   "answers": null,
+   "explanation": "지문은 Llull이 Ars를 종교적 설득 도구로 의도했지만 오늘날 역사가들은 그것이 고정 규칙에 따른 기계적 절차로 추론을 수행한 점 때문에 주목하며, 이 특징을 Leibniz 등이 발전시켰다고 말한다. 따라서 C가 정답이다. A는 설득 목적이 언급되긴 하지만, 지문은 역사가들이 '다른 이유로' 주목한다고 하므로 인과를 뒤집는다. B는 바퀴 구조를 정확히 묘사하지만 Leibniz가 신학적 결론이 아닌 기계적 특징을 발전시켰다는 내용과 모순된다. D는 C와 앞부분이 같으나, 지문은 결과가 돌리는 사람의 통찰에 의존하지 않는다고 했고 설득 실패도 언급하지 않는다.",
+   "explanationEn": "The text explains that Llull meant the Ars as a tool of religious persuasion, but historians now value it because it carried out reasoning through fixed rules, a feature Leibniz and others developed further. That makes C correct. A mentions the real persuasive goal, but the text says historians study the device for a different reason, so A gets the cause wrong. B describes the wheels accurately, but the text says Leibniz built on the mechanical feature, not the theological conclusions. D starts the same way as C, but the text says the results did not depend on the operator's insight, and it never says the persuasion failed.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "C",
+   "seed": "arts and humanities nonfiction — Ars combinatoria Ramon Llull mechanical logic circle notation and algorithmic reasoning medieval philosophical system",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "지문의 핵심 구조(의도된 설득 목적 vs. 역사가들이 주목하는 기계적·규칙 기반 추론 → Leibniz 등이 발전)를 C가 정확히 요약함. A는 인과 역전, B는 Leibniz가 신학적 결론이 아닌 기계적 특징을 발전시켰다는 서술과 모순, D는 \"rather than relying on the insight of whoever turned them\"과 정면 모순이며 설득 실패는 언급 없음. 한국어·영어 해설 모두 동일 결론과 글자 참조를 가지며 자연스럽고 한글 혼입 없음. 역사적 사실(Llull의 마요르카 출신, 13세기 후반, 속성 문자 배정·동심원 바퀴, 이슬람·유대 학자 대상 선교 목적, Leibniz의 결합술 영감)도 정확. 대조 구조 파악 + 역사가들의 평가 이유 연결이라는 두 단계 판단이 필요하고, A·D가 부분적으로 맞는 근거를 가져 medium에 적합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": false,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "오답 A, B, D가 각각 지문의 일부 정확한 내용을 담고 있어 비교해야 배제됨. 중간 난이도에 적합.",
+    "passed": false
+   }
+  }
+ },
+ {
+  "gid": "sz-central_ideas_details-m-007",
+  "runId": "rw-supplement-medium",
+  "skill": "central_ideas_details",
+  "domain": "rw_information_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "Afrofuturism is often described as a genre that imagines Black people in high-tech futures, and works such as Octavia Butler's novels or Sun Ra's cosmic jazz are frequently cited as examples. Some critics, however, argue that this description misses what many Afrofuturist artists are actually doing. In the work of contemporary painters and installation artists such as Wangechi Mutu and Cauleen Smith, futuristic imagery rarely appears on its own: spacecraft, cyborg bodies, and alien landscapes are combined with references to ancestral myths, the Middle Passage, and diasporic folk practices. For these artists, the critics contend, the future is less a destination than a way of reexamining the past, recovering histories that were erased or distorted so that they can shape new possibilities for the present.\n\nWhich choice best states the main idea of the text?",
+   "stimulus": "Afrofuturism is often described as a genre that imagines Black people in high-tech futures, and works such as Octavia Butler's novels or Sun Ra's cosmic jazz are frequently cited as examples. Some critics, however, argue that this description misses what many Afrofuturist artists are actually doing. In the work of contemporary painters and installation artists such as Wangechi Mutu and Cauleen Smith, futuristic imagery rarely appears on its own: spacecraft, cyborg bodies, and alien landscapes are combined with references to ancestral myths, the Middle Passage, and diasporic folk practices. For these artists, the critics contend, the future is less a destination than a way of reexamining the past, recovering histories that were erased or distorted so that they can shape new possibilities for the present.",
+   "question": "Which choice best states the main idea of the text?",
+   "options": [
+    "Some critics contend that Afrofuturism is best defined by the novels of Octavia Butler and the music of Sun Ra rather than by contemporary visual art.",
+    "Some critics contend that contemporary Afrofuturist artists have abandoned futuristic imagery in favor of depicting ancestral myths and folk practices.",
+    "Some critics contend that Afrofuturist artists use images of technology chiefly to celebrate scientific progress within the Black diaspora.",
+    "Some critics contend that, for certain Afrofuturist artists, imagining the future serves mainly as a means of reclaiming and reinterpreting history."
+   ],
+   "correctIndex": 3,
+   "answers": null,
+   "explanation": "지문은 Afrofuturism을 단순히 첨단 미래 장르로 보는 시각을 비평가들이 반박하며, Mutu·Smith 같은 작가에게 미래는 지워진 과거를 되찾고 재해석하는 수단이라고 주장한다는 내용이므로 D가 정답이다. A는 Butler와 Sun Ra가 언급되긴 하지만 그것은 통념의 예시일 뿐이며, 비평가들이 이를 정의의 기준으로 삼는다는 내용은 없다. B는 조상 신화가 등장한다는 부분은 맞지만, 미래적 이미지를 버린 것이 아니라 과거와 '결합'한다고 했으므로 틀리다. C는 기술 이미지를 언급하지만 과학 진보의 찬양이라는 목적은 지문에 없다.",
+   "explanationEn": "The text says critics reject the view of Afrofuturism as simply imagining high-tech futures, and argue that for artists like Mutu and Smith the future is a way to recover and reexamine erased histories, so D is correct. A goes wrong because Butler and Sun Ra appear only as examples of the common description, and the critics never treat them as the defining standard. B gets the ancestral myths right, but the artists combine futuristic imagery with the past instead of giving it up. C mentions technology imagery, but the text never says it is used to celebrate scientific progress.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "D",
+   "seed": "arts and humanities nonfiction — Afrofuturism artistic movement speculative fiction Black diaspora culture and technological liberation reimagining in contemporary art",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "D는 마지막 문장(\"the future is less a destination than a way of reexamining the past, recovering histories...\")을 정확히 요약하며 비평가들의 주장이라는 프레임도 유지함. B는 '결합'을 '포기'로 바꾼 전형적 매력 오답, A는 통념의 예시를 비평가 주장으로 뒤바꾼 오답, C는 기술 이미지를 언급하나 목적을 왜곡. 한국어·영어 해설 모두 선택지 글자 참조 및 결론 일치, 영어 자연스럽고 한글 없음. Mutu·Smith·Butler·Sun Ra 관련 서술은 일반적으로 알려진 사실과 부합하며 지문은 독창적 작성으로 보임. 통념 대 비평가 반론 구조를 파악하고 마지막 문장의 핵심을 연결해야 하므로 medium 적합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "B는 부분적 근거(조상 신화)를 가진 매력적 오답이고, A는 지문 앞부분만 훑으면 고를 수 있다. C는 약한 편이지만 그럴듯하다. medium 기준에 맞는다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "sz-boundaries-e-009",
+  "runId": "rw-supplement-easy",
+  "skill": "boundaries",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "easy",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "Economist Keith Chen has studied whether the way a language marks the future affects how its speakers behave. English requires speakers to mark future events with words such as \"will,\" while languages like Mandarin often let speakers describe the future using the present tense. Chen found that speakers of languages with weak future marking tended to save more ______ he suggested that talking about the future as if it were the present may make it feel closer.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "Economist Keith Chen has studied whether the way a language marks the future affects how its speakers behave. English requires speakers to mark future events with words such as \"will,\" while languages like Mandarin often let speakers describe the future using the present tense. Chen found that speakers of languages with weak future marking tended to save more ______ he suggested that talking about the future as if it were the present may make it feel closer.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "money,",
+    "money;",
+    "money",
+    "money, then"
+   ],
+   "correctIndex": 1,
+   "answers": null,
+   "explanation": "빈칸 앞 \"Chen found ... save more money\"와 뒤 \"he suggested ... feel closer\"는 각각 완전한 독립절이다. 두 독립절은 세미콜론으로 연결할 수 있으므로 B가 정답이다. A는 쉼표만으로 두 독립절을 이어 쉼표 스플라이스가 된다. C는 아무 문장부호 없이 두 절을 붙인 무종지문(run-on)이다. D의 \"then\"은 등위접속사가 아닌 부사이므로 쉼표와 함께 써도 여전히 쉼표 스플라이스다.",
+   "explanationEn": "The text before the blank (\"Chen found ... save more money\") and the text after it (\"he suggested ... feel closer\") are both independent clauses. A semicolon can correctly join two independent clauses, so B is correct. A joins them with only a comma, which makes a comma splice. C puts no punctuation between them, which makes a run-on sentence. D adds \"then,\" but \"then\" is an adverb, not a coordinating conjunction, so the result is still a comma splice.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "easy",
+   "targetLetter": "B",
+   "seed": "social science research — Linguistic Relativity Sapir-Whorf hypothesis temporal perception language structure and future tense grammatical marking cognition",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "빈칸 앞뒤가 모두 완전한 독립절(\"Chen found ... money\" / \"he suggested ... closer\")임을 직접 확인함. 세미콜론(B)만이 적법하게 두 독립절을 연결하며, A는 쉼표 스플라이스, C는 무종지문, D는 접속부사 \"then\"을 쉼표와 함께 쓴 쉼표 스플라이스로 모두 오답. 한국어·영어 해설 모두 동일한 결론과 선택지 참조를 갖고 정확하며, 영어 해설에 한글 없음. Keith Chen의 future-time reference 연구(영어는 강한 미래 표지, 만다린은 약한 표지, 약한 표지 언어 화자의 저축률이 높음) 내용도 사실과 부합. 독립절 연결 규칙 하나로 풀리고 오답은 전형적 오개념(쉼표 스플라이스, 접속부사 오용)이므로 easy에 적합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "Chen의 언어-저축 연구는 실제 연구 내용이며 서술이 정확하다. 이 문항은 두 독립절을 세미콜론으로 연결하는 규칙 하나로 풀 수 있다. 오답은 쉼표 스플라이스, 무종지문, 쉼표+then으로, 이 규칙을 모르는 학생이 흔히 고르는 오답들이다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "sz-form_structure_sense-e-010",
+  "runId": "rw-supplement-easy",
+  "skill": "form_structure_sense",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "easy",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "First proposed by psychologist Gordon Allport in 1954, the contact hypothesis holds that prejudice between groups can shrink under the right conditions. Studies of desegregated schools suggest that cooperation between students of equal status ______ especially effective at reducing bias.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "First proposed by psychologist Gordon Allport in 1954, the contact hypothesis holds that prejudice between groups can shrink under the right conditions. Studies of desegregated schools suggest that cooperation between students of equal status ______ especially effective at reducing bias.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "are",
+    "have been",
+    "is",
+    "were"
+   ],
+   "correctIndex": 2,
+   "answers": null,
+   "explanation": "빈칸 동사의 주어는 단수 명사 \"cooperation\"이며, \"between students of equal status\"는 주어를 꾸미는 수식어일 뿐이다. 따라서 단수 현재형 동사가 필요하므로 C가 정답이다. A와 B는 복수형 동사로, 바로 앞의 복수 명사 \"students\"를 주어로 착각하게 만드는 오답이다. D 역시 복수형(were)이고 현재 시제 문맥(suggest)과도 맞지 않는다.",
+   "explanationEn": "The subject of the blank is the singular noun \"cooperation.\" The phrase \"between students of equal status\" just modifies it. That means you need a singular present-tense verb, so C is correct. A and B are plural verb forms, and they're tempting because the plural noun \"students\" comes right before the blank, but \"students\" isn't the subject. D is also a plural form (were), and it doesn't fit the present-tense context set by \"suggest.\"",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "easy",
+   "targetLetter": "C",
+   "seed": "social science research — Contact Hypothesis intergroup prejudice reduction and equal-status cooperation effectiveness in desegregation educational setting outcomes",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "주어 \"cooperation\"(단수)과 동사 일치 문제. 삽입구 \"between students of equal status\"의 복수 명사가 전형적 오답 유도 장치로 기능하며, 정답 C(is)는 유일하게 단수 현재형. 해설 한·영 모두 정답·글자 참조 일치, 모순 없음. Allport 1954 contact hypothesis 사실 관계도 정확. 한 가지 규칙(수 일치)으로 해결되므로 easy 적합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "주어-동사 수일치 단일 규칙 문항이며, 수식어 속 복수 명사 students가 대표적인 함정 역할을 함. Allport(1954)의 접촉 가설 관련 사실은 정확함.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "sz-form_structure_sense-e-011",
+  "runId": "rw-supplement-easy",
+  "skill": "form_structure_sense",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "easy",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "In his 1959 book The Presentation of Self in Everyday Life, sociologist Erving Goffman compared social interaction to a theatrical performance. According to Goffman, a restaurant server who smiles warmly at diners is acting on a \"front stage,\" where an audience is watching. Once the server walks into the kitchen, however, the polished performance often ______ to the relaxed, unguarded behavior of the \"back stage.\"\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "In his 1959 book The Presentation of Self in Everyday Life, sociologist Erving Goffman compared social interaction to a theatrical performance. According to Goffman, a restaurant server who smiles warmly at diners is acting on a \"front stage,\" where an audience is watching. Once the server walks into the kitchen, however, the polished performance often ______ to the relaxed, unguarded behavior of the \"back stage.\"",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "give way",
+    "are giving way",
+    "have given way",
+    "gives way"
+   ],
+   "correctIndex": 3,
+   "answers": null,
+   "explanation": "빈칸의 동사는 단수 주어 \"the polished performance\"와 수가 일치해야 하므로 단수 동사 D \"gives way\"가 정답이다. 지문의 다른 문장도 \"smiles\", \"walks\"처럼 현재 시제를 쓰고 있어 D와 시제도 맞는다. A \"give way\"는 복수 주어에 쓰는 형태이다. B \"are giving way\"와 C \"have given way\"도 복수형 조동사(are, have)를 써서 단수 주어와 맞지 않는다.",
+   "explanationEn": "The verb in the blank needs to agree with the singular subject \"the polished performance,\" so the singular verb in D, \"gives way,\" is correct. D also fits the present tense used elsewhere in the passage (\"smiles,\" \"walks\"). A, \"give way,\" is the form you'd use with a plural subject. B, \"are giving way,\" and C, \"have given way,\" also use plural helping verbs (are, have), so they don't agree with a singular subject.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "easy",
+   "targetLetter": "D",
+   "seed": "social science research — Goffman Impression Management self-presentation front-stage back-stage behavior performance and social role enactment in everyday interaction",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "주어 \"the polished performance\"(단수)와 일치하는 단수 현재형 \"gives way\"(D)가 유일하게 올바름. A/B/C는 모두 복수형이라 규칙 하나로 배제됨. Goffman 1959 저서·front/back stage 개념 사실 관계 정확. 해설 한/영 모두 일관되고 자연스러움. 단, 주어와 빈칸 사이에 복수 명사 간섭 요소가 없어 매우 쉬운 편이나 easy 범위에 부합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "단수 주어 performance와 수 일치시키는 문항으로, 규칙 하나만 알면 풀 수 있다. 주어 바로 뒤에 빈칸이 있고 사이에 끼어드는 어구가 없어 easy 난이도에 맞다. 고프먼 저서(1959)와 front/back stage 개념도 정확하게 소개했다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "sz-inferences-m-012",
+  "runId": "rw-supplement-medium",
+  "skill": "inferences",
+  "domain": "rw_information_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "Sociologist Pierre Bourdieu argued that schools, though officially neutral, reward a kind of \"cultural capital\"—familiarity with canonical art, literature, and ways of speaking about them—that children from affluent families typically absorb at home rather than learn in class. To test this idea, a research team compared students who scored equally well on a test of formally taught material, such as grammar rules and historical dates. Despite these identical scores, students whose parents frequently took them to museums and concerts received noticeably higher grades from teachers on open-ended essays about artworks, and these grades were linked to the students' relaxed, confident manner of discussing the works rather than to accuracy. If Bourdieu is correct, these findings suggest that ______\n\nWhich choice most logically completes the text?",
+   "stimulus": "Sociologist Pierre Bourdieu argued that schools, though officially neutral, reward a kind of \"cultural capital\"—familiarity with canonical art, literature, and ways of speaking about them—that children from affluent families typically absorb at home rather than learn in class. To test this idea, a research team compared students who scored equally well on a test of formally taught material, such as grammar rules and historical dates. Despite these identical scores, students whose parents frequently took them to museums and concerts received noticeably higher grades from teachers on open-ended essays about artworks, and these grades were linked to the students' relaxed, confident manner of discussing the works rather than to accuracy. If Bourdieu is correct, these findings suggest that ______",
+   "question": "Which choice most logically completes the text?",
+   "options": [
+    "teachers' assessments may partly reward a style of engagement acquired outside school, allowing family advantages to appear as individual academic merit.",
+    "students from affluent families learn formally taught material more thoroughly than other students do, which explains their higher essay grades.",
+    "museum and concert visits improve students' factual knowledge of art history, which teachers then reward with higher grades on essays.",
+    "open-ended essays are a less reliable measure of achievement than tests of formal material, so schools should replace essays with such tests."
+   ],
+   "correctIndex": 0,
+   "answers": null,
+   "explanation": "두 집단은 학교에서 가르친 내용의 시험 점수가 같았고, 에세이 점수 차이는 정확성이 아니라 여유롭고 자신감 있는 말하기 방식과 관련이 있었습니다. 이는 집에서 습득한 문화자본이 개인의 실력처럼 보상된다는 부르디외의 주장과 맞아떨어지므로 A가 정답입니다. B는 형식적 학습 내용 점수가 같았다는 사실과 모순됩니다. C는 점수 차이를 사실 지식 덕분으로 보지만, 지문은 점수가 정확성과는 관련이 없었다고 말합니다. D는 지문이 다루지 않은 정책 권고까지 나아간 것으로, 연구 결과를 넘어서는 결론입니다.",
+   "explanationEn": "The two groups scored the same on formally taught material, and the gap in essay grades was linked to a relaxed, confident manner, not to accuracy. That fits Bourdieu's claim that cultural capital picked up at home gets rewarded as if it were individual merit, so A is correct. B contradicts the identical scores on formally taught material. C credits the gap to factual knowledge, but the passage says the grades weren't tied to accuracy. D jumps to a policy recommendation the passage never discusses, so it goes beyond what the findings support.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "A",
+   "seed": "social science research — Bourdieu Cultural Capital class reproduction educational achievement and inherited knowledge aesthetic disposition sociological distinction",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "정답 A 검증: 형식 학습 점수 동일 + 에세이 점수 차이가 정확성 아닌 '여유롭고 자신감 있는 태도'와 연결 → 가정에서 습득한 문화자본이 개인 실력처럼 보상된다는 부르디외 주장과 일치. B는 '동일 점수' 전제와 모순, C는 '정확성과 무관' 진술과 모순, D는 지문 밖 정책 권고. 오답 B·C는 지문 일부 사실(부유층·박물관 방문→높은 점수)에 기대어 부분적 설득력을 지녀 비교 배제가 필요하고, D도 그럴듯함. 부르디외 주장 + 연구 데이터 두 정보의 연결이 요구되므로 medium 적합. 한·영 해설 결론·글자 참조 일치, 영어 자연스럽고 한글 없음. 부르디외 문화자본 개념 서술 정확."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": false,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "정답 A가 명확하다. B와 C는 부분적으로 그럴듯해서 지문의 통제 조건(동일 점수, 정확성과 무관)을 대조해야 배제된다. D도 그럴듯하지만 비약이다. medium 난이도에 적합하다.",
+    "passed": false
+   }
+  }
+ },
+ {
+  "gid": "sz-central_ideas_details-m-014",
+  "runId": "rw-supplement-medium",
+  "skill": "central_ideas_details",
+  "domain": "rw_information_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "In 1968, psychologists Robert Rosenthal and Lenore Jacobson told teachers at a California elementary school that certain students, identified by a new test, were poised for unusual intellectual growth. In fact, those students had been chosen at random. By year's end, the designated students, especially in the early grades, showed larger IQ gains than their classmates, a result widely cited as evidence that teacher expectations can become self-fulfilling. Later researchers, however, noted that the gains were concentrated among a small number of younger children and that some of the test scores were implausible, and attempts to replicate the original effect produced inconsistent results. Studies that instead observed teachers whose expectations formed naturally found that those expectations generally predicted student performance accurately rather than shaping it, with expectation effects typically modest in size. Even so, these studies identified groups, such as students from stigmatized backgrounds, for whom teacher expectations appeared to exert a stronger influence on achievement.\n\nWhich choice best states the main idea of the text?",
+   "stimulus": "In 1968, psychologists Robert Rosenthal and Lenore Jacobson told teachers at a California elementary school that certain students, identified by a new test, were poised for unusual intellectual growth. In fact, those students had been chosen at random. By year's end, the designated students, especially in the early grades, showed larger IQ gains than their classmates, a result widely cited as evidence that teacher expectations can become self-fulfilling. Later researchers, however, noted that the gains were concentrated among a small number of younger children and that some of the test scores were implausible, and attempts to replicate the original effect produced inconsistent results. Studies that instead observed teachers whose expectations formed naturally found that those expectations generally predicted student performance accurately rather than shaping it, with expectation effects typically modest in size. Even so, these studies identified groups, such as students from stigmatized backgrounds, for whom teacher expectations appeared to exert a stronger influence on achievement.",
+   "question": "Which choice best states the main idea of the text?",
+   "options": [
+    "A 1968 study showed that teachers' beliefs about students' potential reliably raise the intellectual performance of children across all grade levels.",
+    "Later research showed that teachers' expectations have no measurable effect on student performance because they simply reflect students' existing abilities.",
+    "Although a famous study suggested that teachers' beliefs strongly shape achievement, subsequent work indicates the influence is usually small, though it may be larger for certain students.",
+    "Researchers have found that students from stigmatized backgrounds are more likely than other students to be randomly selected for studies of teacher expectations."
+   ],
+   "correctIndex": 2,
+   "answers": null,
+   "explanation": "지문은 1968년 연구가 교사 기대의 자기충족 효과를 보여 준 것처럼 알려졌지만, 이후 연구에서 그 효과는 대체로 작았고 낙인찍힌 집단에서는 더 클 수 있다는 흐름이므로 C가 정답이다. A는 원래 연구의 주장만 담았고, 실제 효과도 저학년에 집중되었으므로 '모든 학년'이라는 표현이 틀렸다. B는 기대가 성적을 대체로 정확히 예측했다는 부분은 맞지만, 효과가 '전혀 없다'는 단정은 효과가 작다는 내용 및 특정 집단에서는 더 크다는 내용과 모순된다. D는 낙인찍힌 집단과 무작위 선정이라는 지문의 단어를 엉뚱하게 결합한 진술이다.",
+   "explanationEn": "The text moves from a famous 1968 study that seemed to show strong self-fulfilling teacher expectations, to later research finding the effects are usually modest, to the note that they may be stronger for some groups, so C is correct. A repeats only the original claim, and \"across all grade levels\" is wrong because the gains were concentrated among younger children. B gets right that expectations often accurately predicted performance, but saying they have \"no measurable effect\" contradicts the text's description of modest effects and of stronger effects for some students. D wrongly combines two details from the text, stigmatized backgrounds and random selection, into a claim the text never makes.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "C",
+   "seed": "social science research — Pygmalion Effect teacher expectancy student achievement inflation and self-fulfilling prophecy mechanism in classroom educational performance",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "C는 지문 전체 흐름(유명 연구 → 효과는 대체로 작음 → 특정 집단에서는 더 큼)을 정확히 요약한다. A는 '모든 학년'이 저학년 집중 서술과 모순, B는 '효과 없음'이 'modest' 및 낙인 집단 서술과 모순, D는 세부 사항의 엉뚱한 결합. Rosenthal & Jacobson(1968), 무작위 선정, 저학년 집중, 비판·재현 실패, Jussim 계열의 '정확성·작은 효과·낙인 집단에서 더 큼' 결론 모두 사실과 부합. 한·영 해설 일치, 영어 자연스럽고 한글 없음. 두 정보 연결(원 연구 vs 후속 연구, modest vs none)이 필요한 medium 난이도에 적합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "지문 내용이 Rosenthal-Jacobson 연구와 Jussim 등의 후속 연구를 정확히 반영함. A·B는 부분적으로 맞는 근거가 있는 그럴듯한 오답이고 D는 상대적으로 약하지만 문장은 성립함. medium 난이도에 적합함.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "sz-central_ideas_details-m-015",
+  "runId": "rw-supplement-medium",
+  "skill": "central_ideas_details",
+  "domain": "rw_information_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "In the 1960s and 1970s, British sociologist Basil Bernstein proposed that children learn to speak in different \"codes\" depending on how their families communicate. A restricted code relies on meanings shared by speakers who know one another well, so much can go unsaid; an elaborated code spells out meanings explicitly so that strangers can follow them. Bernstein observed that working-class children tended to use mostly restricted codes, while middle-class children moved easily between both. Critics later accused him of claiming that working-class speech was deficient, but Bernstein rejected that reading. Restricted codes, he insisted, are rich and efficient within close-knit groups. His concern was with schools, which reward the elaborated code almost exclusively in their lessons, tests, and judgments of ability. Because some children arrive already fluent in that code and others do not, he argued, schools end up treating a difference in communication style as a difference in intelligence, reproducing the class inequalities they claim to reduce.\n\nWhich choice best states the main idea of the text?",
+   "stimulus": "In the 1960s and 1970s, British sociologist Basil Bernstein proposed that children learn to speak in different \"codes\" depending on how their families communicate. A restricted code relies on meanings shared by speakers who know one another well, so much can go unsaid; an elaborated code spells out meanings explicitly so that strangers can follow them. Bernstein observed that working-class children tended to use mostly restricted codes, while middle-class children moved easily between both. Critics later accused him of claiming that working-class speech was deficient, but Bernstein rejected that reading. Restricted codes, he insisted, are rich and efficient within close-knit groups. His concern was with schools, which reward the elaborated code almost exclusively in their lessons, tests, and judgments of ability. Because some children arrive already fluent in that code and others do not, he argued, schools end up treating a difference in communication style as a difference in intelligence, reproducing the class inequalities they claim to reduce.",
+   "question": "Which choice best states the main idea of the text?",
+   "options": [
+    "Bernstein found that working-class children use restricted codes because their families communicate less often than middle-class families do.",
+    "Bernstein argued that restricted codes are more efficient than elaborated codes and should therefore replace them in classroom instruction.",
+    "Bernstein's critics showed that his theory of linguistic codes unfairly ranked working-class speech below middle-class speech.",
+    "Bernstein held that schools deepen class inequality by favoring one communication style and mistaking unfamiliarity with it for lower ability."
+   ],
+   "correctIndex": 3,
+   "answers": null,
+   "explanation": "글은 비판자들의 오해를 소개한 뒤 Bernstein의 진짜 관심사를 제시한다. 학교가 elaborated code만 보상하기 때문에 의사소통 방식의 차이를 지능의 차이로 취급하고, 그 결과 계층 불평등을 재생산한다는 것이며, 이를 정확히 요약한 것이 D다. A는 계층과 코드의 연관성은 맞지만, 가정이 대화를 덜 한다는 내용은 글에 없다. B는 restricted code가 효율적이라는 부분은 맞지만, 교실에서 이를 대체해야 한다는 주장은 Bernstein이 한 적이 없다. C는 비판자들의 주장을 사실로 다루고 있지만, 글에서 Bernstein은 그런 해석을 거부했다.",
+   "explanationEn": "The text brings up the critics' misreading and then states what Bernstein actually cared about. Because schools reward only the elaborated code, they treat a difference in communication style as a difference in intelligence, and this reproduces class inequality. Choice D sums that up correctly. Choice A gets the link between class and code right, but the text never says working-class families talk less. Choice B is right that restricted codes are efficient, but Bernstein never said they should replace elaborated codes in classrooms. Choice C presents the critics' charge as fact, while the text says Bernstein rejected that reading.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "D",
+   "seed": "social science research — Bernstein Elaborated Restricted Code linguistic repertoire socioeconomic class communication style and educational inequality reproduction sociology",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "정답 D 검산: 글의 마지막 두 문장(학교가 elaborated code만 보상 → 의사소통 방식 차이를 지능 차이로 취급 → 계층 불평등 재생산)을 정확히 요약. A는 '가정이 대화를 덜 한다'는 근거 없음, B는 '더 효율적/대체해야'가 글에 없음(restricted code는 close-knit 집단 '내에서' 효율적이라고만 함), C는 Bernstein이 거부한 비판자 해석을 사실로 제시. 한·영 해설 결론·글자 참조 일치, 영어 자연스럽고 한글 없음. Bernstein 코드 이론·비판·반박의 역사적 사실 정확. 오답 세 개 모두 글의 일부 내용에 부분적으로 근거하여 비교가 필요하므로 medium 적합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": false,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "Bernstein의 코드 이론 서술은 사실에 맞는다. 오답 A·B·C는 각각 부분적으로 맞는 근거(계층-코드 연관, 효율성, 비판자 존재)를 갖고 있어 비교해야만 배제된다. 비판-반박 구조를 거쳐 주제를 파악하는 두 단계 판단이 필요해 medium에 적합하다.",
+    "passed": false
+   }
+  }
+ },
+ {
+  "gid": "sz-boundaries-e-016",
+  "runId": "rw-supplement-easy",
+  "skill": "boundaries",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "easy",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "In 1894, French army captain Alfred Dreyfus was convicted of passing military secrets to Germany. The evidence against him was weak ______ ignored its flaws, in part because of widespread antisemitism within the army. He was not fully cleared until 1906.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "In 1894, French army captain Alfred Dreyfus was convicted of passing military secrets to Germany. The evidence against him was weak ______ ignored its flaws, in part because of widespread antisemitism within the army. He was not fully cleared until 1906.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "; many officials",
+    ", many officials",
+    " many officials",
+    " and, many officials"
+   ],
+   "correctIndex": 0,
+   "answers": null,
+   "explanation": "빈칸 앞 \"The evidence against him was weak\"와 빈칸 뒤 \"many officials ignored its flaws...\"는 각각 완전한 독립절이다. 두 독립절은 세미콜론으로 연결할 수 있으므로 A가 정답이다. B는 쉼표만으로 독립절을 이어 쉼표 스플라이스가 된다. C는 아무 문장부호 없이 두 절을 붙여 무종지문(run-on)이 된다. D는 접속사 and 뒤에 쉼표를 두어 구두점 위치가 잘못되었다(쉼표는 and 앞에 와야 한다).",
+   "explanationEn": "The words before the blank, \"The evidence against him was weak,\" form a complete independent clause, and so do the words after it, \"many officials ignored its flaws...\". You can join two independent clauses with a semicolon, so A is correct. B links them with only a comma, which makes a comma splice. C uses no punctuation at all, so it creates a run-on sentence. D puts the comma after \"and\" instead of before it, and that placement is wrong.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "easy",
+   "targetLetter": "A",
+   "seed": "history and civics — Dreyfus Affair 1894-1906 French military espionage scandal and antisemitism institutional bias exposing Third Republic justice system",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "\"The evidence against him was weak\" and \"many officials ignored its flaws...\" are both independent clauses; only A (semicolon) joins them correctly. B = comma splice, C = fused sentence, D = misplaced comma after \"and\". Korean and English explanations agree and reference the correct letters. Historical facts (1894 conviction, 1906 exoneration) are accurate. Single rule (semicolon between independent clauses), one-step reasoning, plausible distractors → fits easy."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "독립절 두 개를 세미콜론으로 연결하는 단일 규칙 문항. 사실관계(1894년 유죄 판결, 1906년 복권)도 정확함. 두 절이 의미상 대조 관계라 'but'이 더 자연스럽지만, 세미콜론도 문법적으로 옳음.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "sz-inferences-m-019",
+  "runId": "rw-supplement-medium",
+  "skill": "inferences",
+  "domain": "rw_information_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "Historians have long debated whether the militant tactics of Britain's Women's Social and Political Union (WSPU), founded in 1903, advanced or hindered the cause of women's suffrage. Some argue that window smashing and arson alienated members of Parliament who might otherwise have supported reform. Yet historian June Purvis notes that before the WSPU's campaigns, suffrage bills were routinely introduced and quietly allowed to lapse, attracting little press coverage. After militancy began, newspapers reported on suffrage almost daily, and party leaders could no longer treat the question as marginal. Purvis concedes that militancy did not by itself secure the 1918 and 1928 acts, which followed wartime shifts in public opinion. Taken together, these points suggest that militancy's main contribution was ______\n\nWhich choice most logically completes the text?",
+   "stimulus": "Historians have long debated whether the militant tactics of Britain's Women's Social and Political Union (WSPU), founded in 1903, advanced or hindered the cause of women's suffrage. Some argue that window smashing and arson alienated members of Parliament who might otherwise have supported reform. Yet historian June Purvis notes that before the WSPU's campaigns, suffrage bills were routinely introduced and quietly allowed to lapse, attracting little press coverage. After militancy began, newspapers reported on suffrage almost daily, and party leaders could no longer treat the question as marginal. Purvis concedes that militancy did not by itself secure the 1918 and 1928 acts, which followed wartime shifts in public opinion. Taken together, these points suggest that militancy's main contribution was ______",
+   "question": "Which choice most logically completes the text?",
+   "options": [
+    "persuading members of Parliament who had opposed reform to vote for the suffrage bills that were introduced before 1914.",
+    "producing the shift in public opinion during the war that led directly to the passage of the 1918 and 1928 acts.",
+    "preventing the suffrage question from receiving serious attention by alienating potential supporters in Parliament.",
+    "making women's suffrage a prominent political issue, even though other factors were needed to achieve the vote itself."
+   ],
+   "correctIndex": 3,
+   "answers": null,
+   "explanation": "Purvis는 투쟁 전술 이후 언론 보도가 늘고 정당 지도자들이 참정권 문제를 무시할 수 없게 되었다고 말하면서도, 투쟁만으로 1918년·1928년 법이 통과된 것은 아니라고 인정한다. 이 두 정보를 연결하면 D가 정답이다. A는 반대 의원들이 실제로 찬성표를 던졌다는 근거가 지문에 없다. B는 전시 여론 변화를 투쟁의 결과로 보는데, 지문은 이를 별개의 요인으로 제시한다. C는 일부 역사가의 견해일 뿐, Purvis의 근거는 오히려 관심이 커졌음을 보여 준다.",
+   "explanationEn": "Purvis points out that after militancy began, the press covered suffrage almost daily and party leaders couldn't treat it as marginal anymore. She also admits that militancy alone didn't win the 1918 and 1928 acts. If you put those two points together, you get D. A is wrong because the text never says opponents changed their votes. B is wrong because it treats the wartime shift in opinion as something militancy caused, but the text presents it as a separate factor. C repeats the critics' view, and Purvis's evidence actually shows that attention to the issue grew.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "D",
+   "seed": "history and civics — Suffragette movement Britain 1903-1928 women's voting rights activism militant protest tactics and political enfranchisement gender equality",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "정답 D 검산 완료: 지문은 (1) 투쟁 이후 언론 보도·정치적 비중 증가, (2) 투쟁만으로 법 통과를 이룬 것은 아님(전시 여론 변화가 별도 요인)이라는 두 정보를 제시하며, \"Taken together\"로 이 둘을 결합하도록 요구하므로 D만이 두 점을 모두 반영한다. A는 1914년 이전 법안이 통과되지 않았고 반대 의원의 표 변화 근거가 없어 배제, B는 전시 여론 변화를 투쟁의 결과로 바꿔 놓아 지문과 모순, C는 비판자 견해로 Purvis의 근거와 정반대. 사실관계(WSPU 1903년 창립, June Purvis의 WSPU 옹호 입장, 1918·1928년 법)는 정확. 한국어·영어 해설 모두 결론·선택지 참조가 일치하고 영어 해설에 한글 없음, 자연스러움. 난이도: 두 정보의 연결이 필요하고 B·A가 지문 요소를 부분적으로 차용해 비교가 필요하며 C도 지문 속 견해로 그럴듯하므로 medium에 부합. 다만 D만이 양보절(\"even though\")을 포함한 균형 잡힌 선택지라 숙련된 수험생에게는 다소 쉽게 식별될 수 있음."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": false,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "두 정보(관심 증대 + 단독으로는 불충분)를 연결해야 하는 표준 중간 난이도 문항이다. B는 '전시 여론 변화'와 '1918·1928년 법'을 지문에서 그대로 가져와 그럴듯해 보이는 오답이고, C는 지문에 실린 비판자들의 견해를 담고 있다. 따라서 오답들이 각각 부분적인 근거를 갖는다. A는 상대적으로 쉽게 배제된다. 1918년 법은 30세 이상 일부 여성에게, 1928년 법은 남성과 동등하게 투표권을 부여했으며 사실관계에 문제는 없다.",
+    "passed": false
+   }
+  }
+ },
+ {
+  "gid": "sz-inferences-m-026",
+  "runId": "rw-supplement-medium",
+  "skill": "inferences",
+  "domain": "rw_information_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "The American pika, a small relative of rabbits, lives on rocky talus slopes in western North American mountains. Pikas do not hibernate and have a high resting body temperature, so they can die after only a few hours of exposure to air above about 25°C. In many mountain ranges, pika populations exist as isolated patches on separate peaks, divided by warm, low-elevation valleys. Ecologist researchers surveying the Great Basin found that pikas had disappeared from several lower-elevation sites where they had been recorded decades earlier, while populations on higher, cooler peaks generally persisted. Because a pika lost from one peak can be replaced only by individuals crossing the intervening valleys, the researchers concluded that as summers warm, ______\n\nWhich choice most logically completes the text?",
+   "stimulus": "The American pika, a small relative of rabbits, lives on rocky talus slopes in western North American mountains. Pikas do not hibernate and have a high resting body temperature, so they can die after only a few hours of exposure to air above about 25°C. In many mountain ranges, pika populations exist as isolated patches on separate peaks, divided by warm, low-elevation valleys. Ecologist researchers surveying the Great Basin found that pikas had disappeared from several lower-elevation sites where they had been recorded decades earlier, while populations on higher, cooler peaks generally persisted. Because a pika lost from one peak can be replaced only by individuals crossing the intervening valleys, the researchers concluded that as summers warm, ______",
+   "question": "Which choice most logically completes the text?",
+   "options": [
+    "pikas on lower peaks will likely move down into the valleys, where food plants are more plentiful than on rocky talus slopes.",
+    "pikas on higher peaks will likely be the first to disappear, since those populations are the most isolated from other populations.",
+    "pikas that vanish from a peak are increasingly unlikely to be replaced, since the valleys separating peaks will become harder for pikas to cross.",
+    "pikas will likely grow less sensitive to heat over time, since the populations that have survived are found mostly on higher peaks."
+   ],
+   "correctIndex": 2,
+   "answers": null,
+   "explanation": "지문은 피카가 약 25°C 이상에서 몇 시간 만에 죽을 수 있다는 점, 그리고 한 봉우리의 개체군이 사라지면 따뜻한 계곡을 건너온 개체로만 다시 채워질 수 있다는 점을 제시한다. 이 두 정보를 연결하면, 여름이 따뜻해질수록 계곡을 건너기가 더 어려워져 사라진 개체군이 다시 채워질 가능성이 낮아진다는 결론이 나오므로 C가 정답이다. A는 먹이를 언급하지만, 지문은 따뜻한 저지대가 피카에게 치명적이라고 말한다. B는 고립을 언급하지만, 지문에서 높은 봉우리의 개체군은 대체로 살아남았다. D는 살아남은 개체군의 분포를 내열성의 진화로 잘못 해석하며, 지문은 이를 뒷받침하지 않는다.",
+   "explanationEn": "The passage gives you two key facts: pikas can die after a few hours in air above about 25°C, and a peak that loses its pikas can be repopulated only by pikas crossing warm valleys. If you connect these facts, warmer summers make those crossings more dangerous, so lost populations become less likely to be replaced. That makes C the answer. A mentions food, but the passage says warm low elevations are deadly to pikas. B brings up isolation, but the passage says populations on higher peaks generally survived. D treats where the surviving pikas live as evidence that they are evolving heat tolerance, and nothing in the passage supports that.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "C",
+   "seed": "life science — American pika alpine habitat fragmentation temperature sensitivity and climate-driven range contraction population vulnerability",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "정답 C는 25°C 치사 온도 + 계곡 횡단으로만 재정착 가능이라는 두 정보를 연결해야 도출되며 검산상 옳다. A(먹이)·B(고봉 먼저 소멸)는 지문과 직접 모순, D(내열성 진화)는 근거 없음으로 배제 가능. 해설 한/영 모두 C를 일관되게 뒷받침하고 글자 참조 일치, 영어 해설에 한글 없음. 사실관계(피카 열 민감성, Great Basin 저지대 소멸 사례)는 실제 연구와 부합. 사소한 표현상 어색함: \"Ecologist researchers\"는 \"Ecologists\"가 자연스러움(판정에 영향 없음). 난이도는 마지막 \"Because…\" 절이 정답을 다소 강하게 암시해 medium 하한에 가깝지만, B·D가 지문 요소를 부분적으로 차용해 비교가 필요하므로 medium 범위로 판단."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": false,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "정답 C는 열에 대한 민감성과 계곡을 건너야만 개체군이 다시 채워진다는 두 정보를 이어야 나온다. B와 D는 지문 속 사실(고립, 고지대 생존)에 기대고 있어 그럴듯한 오답이다. A는 비교적 쉽게 배제된다. 지문의 'Ecologist researchers'는 어색한 표현이므로 'Ecologists'나 'Researchers'로 다듬는 것을 권한다(사소함).",
+    "passed": false
+   }
+  }
+ },
+ {
+  "gid": "sz-inferences-m-027",
+  "runId": "rw-supplement-medium",
+  "skill": "inferences",
+  "domain": "rw_information_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "Leatherback sea turtles cross entire ocean basins, and researchers have long suspected that the turtles navigate partly by sensing Earth's magnetic field, whose intensity and inclination angle vary predictably across the globe. To test this, a team placed young leatherbacks in a tank surrounded by electric coils that could reproduce the magnetic conditions of specific ocean locations. When the coils mimicked the field found off the turtles' natal beaches in the Caribbean, the turtles swam in no consistent direction. But when the coils reproduced the field of a site far to the northeast, near the edge of the North Atlantic current system, the turtles consistently oriented toward the southwest—the direction that would carry them back toward their usual migratory loop. Notably, the turtles had never traveled to that northeastern site. These findings suggest that ______\n\nWhich choice most logically completes the text?",
+   "stimulus": "Leatherback sea turtles cross entire ocean basins, and researchers have long suspected that the turtles navigate partly by sensing Earth's magnetic field, whose intensity and inclination angle vary predictably across the globe. To test this, a team placed young leatherbacks in a tank surrounded by electric coils that could reproduce the magnetic conditions of specific ocean locations. When the coils mimicked the field found off the turtles' natal beaches in the Caribbean, the turtles swam in no consistent direction. But when the coils reproduced the field of a site far to the northeast, near the edge of the North Atlantic current system, the turtles consistently oriented toward the southwest—the direction that would carry them back toward their usual migratory loop. Notably, the turtles had never traveled to that northeastern site. These findings suggest that ______",
+   "question": "Which choice most logically completes the text?",
+   "options": [
+    "young leatherbacks learn the magnetic signatures of distant ocean sites by remembering fields they encountered during earlier stages of their migration.",
+    "young leatherbacks rely mainly on the magnetic field of their natal beaches, which allows them to swim directly back toward the Caribbean from anywhere.",
+    "young leatherbacks can sense the strength of a magnetic field but are unable to use that information to choose a direction of travel.",
+    "young leatherbacks respond to certain regional magnetic conditions with an appropriate heading even before they have any firsthand experience of those regions."
+   ],
+   "correctIndex": 3,
+   "answers": null,
+   "explanation": "거북들은 한 번도 가 본 적 없는 북동쪽 지점의 자기장에 대해 이동 경로로 돌아가는 남서쪽 방향을 일관되게 택했으므로, 경험 없이도 특정 자기 조건에 알맞은 방향으로 반응한다는 D가 정답이다. A는 자기 신호를 학습한다는 설명이지만, 해당 지점에 가 본 적이 없다는 진술과 모순된다. B는 출생 해변 자기장을 강조하지만, 그 자기장에서는 거북들이 일정한 방향 없이 헤엄쳤다. C는 자기장 감지는 인정하지만, 거북들이 방향을 일관되게 정했다는 결과와 맞지 않는다.",
+   "explanationEn": "The turtles had never visited the northeastern site, yet when they were exposed to its magnetic field, they consistently headed southwest, back toward their migratory loop. That's why D is the answer: the turtles responded to a regional field with a suitable heading without any firsthand experience. A says the turtles learned these signatures from earlier travel, but the text states that they had never been to that site. B focuses on the natal-beach field, but under that field the turtles swam in no consistent direction. C admits the turtles can sense the field but says they can't use it to choose a direction, which goes against their consistent southwest heading.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "D",
+   "seed": "life science — Leatherback sea turtle magnetic field navigation geomagnetic cue detection transoceanic migration route finding",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "정답 D 검증: 북동쪽 지점 자기장 → 일관된 남서 방향 + 해당 지점 미방문 → 경험 없이 적절한 방향 반응. A는 '한 번도 가 본 적 없다'와 모순, B는 출생 해변 자기장에서 무방향 결과와 모순, C는 일관된 방향 선택 결과와 모순. 해설(한·영) 모두 D 결론과 글자 참조 일치, 영어 자연스럽고 한글 없음. 실험 설계는 Lohmann 계열의 바다거북 자기 항법 연구를 반영하며 명백한 사실 오류 없음(실제 연구는 주로 붉은바다거북 대상이나 지문은 가상의 연구팀 서술로 처리됨). 난이도: 두 정보(일관된 방향 + 미방문) 연결이 필요하고 A·B가 부분적 근거를 지녀 비교가 필요하므로 medium 적합. 다만 'Notably' 문장이 정답을 다소 직접적으로 암시해 쉬운 편의 medium."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": false,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "이 문항은 실제 바다거북 자기 지도 연구 구조(주로 붉은바다거북, Lohmann 연구)를 장수거북에 적용해 변형한 것으로 보인다. 지문 안에서는 논리가 일관되며, 사실 주장도 '시사한다' 수준이라 문제없다. 오답 A와 B는 각각 경험, 출생 해변이라는 그럴듯한 연결 고리를 갖고 있어 정독해야 배제할 수 있으므로 medium 난이도에 맞다. 다만 C는 다소 쉽게 배제된다.",
+    "passed": false
+   }
+  }
+ },
+ {
+  "gid": "sz-central_ideas_details-m-028",
+  "runId": "rw-supplement-medium",
+  "skill": "central_ideas_details",
+  "domain": "rw_information_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "Naked mole rats live in underground colonies of up to several hundred individuals, yet typically only one female, the queen, breeds. For decades, researchers assumed she enforced this arrangement mainly through chemical signals released in her urine, as happens in some insect colonies. Biologist Melissa Holmes and colleagues tested this idea by exposing nonbreeding females to bedding soaked with the queen's urine, and they found that the females' reproductive hormones did not drop as predicted. Instead, the team observed that the queen regularly shoves and nudges other colony members as she patrols the tunnels, and that females removed from her physical presence began to mature sexually within weeks, even when they could still smell her. The researchers concluded that the queen's suppression of breeding depends far more on direct bodily contact than on scent.\n\nWhich choice best states the main idea of the text?",
+   "stimulus": "Naked mole rats live in underground colonies of up to several hundred individuals, yet typically only one female, the queen, breeds. For decades, researchers assumed she enforced this arrangement mainly through chemical signals released in her urine, as happens in some insect colonies. Biologist Melissa Holmes and colleagues tested this idea by exposing nonbreeding females to bedding soaked with the queen's urine, and they found that the females' reproductive hormones did not drop as predicted. Instead, the team observed that the queen regularly shoves and nudges other colony members as she patrols the tunnels, and that females removed from her physical presence began to mature sexually within weeks, even when they could still smell her. The researchers concluded that the queen's suppression of breeding depends far more on direct bodily contact than on scent.",
+   "question": "Which choice best states the main idea of the text?",
+   "options": [
+    "Research suggests that a naked mole rat queen keeps other females from breeding chiefly through physical interaction rather than through chemical cues.",
+    "Research suggests that a naked mole rat queen keeps other females from breeding chiefly through chemical cues, much as queens in some insect colonies do.",
+    "Research suggests that nonbreeding naked mole rat females mature sexually only after the queen of their colony has died.",
+    "Research suggests that naked mole rat colonies grow larger when the queen spends more time patrolling the tunnels."
+   ],
+   "correctIndex": 0,
+   "answers": null,
+   "explanation": "지문은 여왕이 소변 속 화학 신호로 번식을 억제한다는 기존 가정을 소개한 뒤, 실험으로 이를 반박하고 직접적인 신체 접촉이 핵심이라고 결론짓는다. 그래서 A가 정답이다. B는 지문에 나오는 기존 가정을 그대로 옮긴 것인데, 지문은 바로 이 가정을 반박한다. C는 성숙이 여왕과 떨어졌을 때 일어났다는 세부를 여왕의 죽음으로 잘못 바꿨다. D는 순찰이라는 세부를 쓰지만 군집 크기와의 관계는 지문에서 다루지 않는다.",
+   "explanationEn": "The text first describes the old assumption that the queen suppresses breeding with chemical signals in her urine. It then explains how experiments contradicted that idea and concludes that direct bodily contact matters most, so A is correct. B repeats the old assumption, which the text rejects. C distorts a detail: females matured when they were separated from the queen, not after she died. D uses the patrolling detail, but the text never links patrolling to colony size.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "A",
+   "seed": "life science — Naked mole rat eusocial colony structure reproductive suppression painless tactile discrimination adaptation physiology",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "지문 구조(기존 가정 → 실험 반박 → 결론)와 정답 A가 정확히 일치. B는 지문에 실제 등장하는 기존 가정이라 훑어 읽으면 선택 가능, C는 '분리'를 '죽음'으로 비튼 세부 왜곡, D는 순찰 세부를 차용한 무근거 선택지로 medium 기준 충족. 한국어·영어 해설 모두 결론·글자 참조 일치, 영어 해설에 한글 없음. 실제 연구(여왕 소변 노출 실험의 무효, 신체적 밀치기 행동)는 알려진 내용이지만 Melissa Holmes에게 해당 실험을 직접 귀속시킨 부분은 각색일 가능성이 있음—다만 지문 내 논리에는 영향 없음."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": false,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "too_easy",
+     "eliminated:3"
+    ],
+    "note": "정답 A는 지문 마지막 문장을 거의 그대로 바꿔 말한 것이어서 한 단계 판단으로 고를 수 있음. 그럴듯한 오답은 B(지문이 반박한 기존 가정을 그대로 옮긴 함정) 하나뿐이고, C(여왕의 죽음)와 D(군집 크기)는 지문에 근거가 없어 바로 배제됨. 오답 중 최소 2개가 부분적 근거를 가져야 한다는 medium 기준에 미달함. 연구자 실명(Melissa Holmes)과 연구 내용은 실제 벌거숭이두더지쥐 연구를 단순화한 것으로 보이며, 명백한 사실 오류는 없음.",
+    "passed": false
+   }
+  }
+ },
+ {
+  "gid": "sz-boundaries-e-030",
+  "runId": "rw-supplement-easy",
+  "skill": "boundaries",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "easy",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "Most glaciers creep forward at a steady pace of a few meters per year. A surge glacier behaves differently. For years or even decades, it moves slowly while ice builds up in its upper reaches. Then, often within a few months, the glacier speeds up dramatically and can advance several kilometers ______ Variegated Glacier in Alaska, for example, surged in 1982 and 1983, moving up to 65 meters in a single day.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "Most glaciers creep forward at a steady pace of a few meters per year. A surge glacier behaves differently. For years or even decades, it moves slowly while ice builds up in its upper reaches. Then, often within a few months, the glacier speeds up dramatically and can advance several kilometers ______ Variegated Glacier in Alaska, for example, surged in 1982 and 1983, moving up to 65 meters in a single day.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "downvalley, the",
+    "downvalley the",
+    "downvalley. The",
+    "downvalley, and, the"
+   ],
+   "correctIndex": 2,
+   "answers": null,
+   "explanation": "빈칸 앞의 \"Then ... the glacier speeds up dramatically and can advance several kilometers downvalley\"와 빈칸 뒤의 \"The Variegated Glacier ... surged ...\"는 각각 독립절이므로 마침표로 분리해야 한다. 따라서 C가 정답이다. A는 두 독립절을 쉼표만으로 연결한 쉼표 스플라이스이다. B는 아무 문장부호 없이 두 독립절을 이어 붙인 융합문(run-on)이다. D는 접속사 and 뒤에 불필요한 쉼표가 들어가 있어 어색하고 비표준적이다.",
+   "explanationEn": "The words before the blank (\"Then ... the glacier speeds up dramatically and can advance several kilometers downvalley\") form an independent clause, and so do the words after it (\"The Variegated Glacier ... surged ...\"). Two independent clauses need to be separated correctly, and a period does that, so C is correct. A joins the two clauses with only a comma, which makes a comma splice. B uses no punctuation at all, which makes a run-on sentence. D puts an unnecessary comma after the conjunction \"and,\" which isn't standard punctuation.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "easy",
+   "targetLetter": "C",
+   "seed": "earth and space science — Surge glacier accelerating flow instability and periodic advance-retreat cycles in Alaska Patagonia rapid mass loss",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "빈칸 앞뒤가 각각 독립절임이 명확하며 C(마침표)만 표준적으로 경계를 구분한다. A는 쉼표 스플라이스, B는 융합문, D는 and 뒤 불필요한 쉼표로 비표준. 단일 규칙(독립절 경계)으로 해결되는 easy 수준에 적합. Variegated Glacier 1982–83 서지(최대 약 65 m/일) 사실 관계도 정확. 해설 한·영 모두 정답과 일치하고 자연스러움."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "Variegated Glacier의 1982–83년 서지와 하루 최대 약 65 m 이동은 사실과 대체로 부합함. 독립절 두 개를 구분하는 단일 규칙만 묻는 전형적인 easy 문항임.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "sz-boundaries-e-031",
+  "runId": "rw-supplement-easy",
+  "skill": "boundaries",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "easy",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "In the 1970s, chemists Mario Molina and F. Sherwood Rowland warned that chlorofluorocarbons (CFCs), once common in spray cans and refrigerators, could drift into the stratosphere and break apart under strong sunlight. The chlorine released by this breakdown destroys ozone molecules ______ the thinning is most severe over Antarctica each spring, when returning sunlight triggers the chemical reactions that allow more ultraviolet radiation to reach the surface.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "In the 1970s, chemists Mario Molina and F. Sherwood Rowland warned that chlorofluorocarbons (CFCs), once common in spray cans and refrigerators, could drift into the stratosphere and break apart under strong sunlight. The chlorine released by this breakdown destroys ozone molecules ______ the thinning is most severe over Antarctica each spring, when returning sunlight triggers the chemical reactions that allow more ultraviolet radiation to reach the surface.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "at a rapid rate,",
+    "at a rapid rate",
+    "at a rapid rate, and,",
+    "at a rapid rate;"
+   ],
+   "correctIndex": 3,
+   "answers": null,
+   "explanation": "빈칸 앞 \"The chlorine ... destroys ozone molecules at a rapid rate\"와 빈칸 뒤 \"the thinning is most severe ...\"는 각각 독립절이다. 접속사 없이 두 독립절을 잇는 데는 세미콜론이 적절하므로 D가 정답이다. A는 쉼표만으로 독립절을 이어 쉼표 스플라이스가 된다. B는 아무 부호 없이 이어 run-on 문장이 된다. C는 \"and\" 뒤에 불필요한 쉼표를 넣어 \"and\"와 다음 절의 주어 사이를 끊는다.",
+   "explanationEn": "The words before the blank (\"The chlorine ... destroys ozone molecules at a rapid rate\") form an independent clause, and so do the words after it (\"the thinning is most severe ...\"). When two independent clauses are joined without a conjunction, a semicolon is correct, so D is the answer. A joins the clauses with only a comma, which makes a comma splice. B uses no punctuation at all, which makes a run-on sentence. C puts an extra comma after \"and,\" which cuts \"and\" off from the subject of the next clause for no reason.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "easy",
+   "targetLetter": "D",
+   "seed": "earth and space science — Ozone depletion chlorofluorocarbon atmospheric breakdown and stratospheric ultraviolet radiation increase polar spring phenomenon",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "빈칸 앞뒤가 각각 독립절(\"The chlorine ... destroys ozone molecules at a rapid rate\" / \"the thinning is most severe ...\")임을 직접 확인. 접속사 없이 두 독립절을 잇는 세미콜론(D)만 적절. A는 쉼표 스플라이스, B는 run-on, C는 \"and\" 뒤 불필요한 쉼표로 배제됨. 한국어·영어 해설 모두 D를 일관되게 뒷받침하며 글자 참조 일치, 영어 해설에 한글 없음. 과학적 배경(Molina·Rowland 1970년대 경고, 남극 봄철 오존 감소)도 사실에 부합. 단일 규칙(독립절 경계 구두점)으로 해결되는 easy 난이도에 적합하며 오답 3개는 전형적 오개념."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "독립절 두 개를 세미콜론으로 잇는 규칙 하나로 풀 수 있다. 오답은 쉼표 스플라이스, run-on, 불필요한 쉼표로 모두 전형적인 오개념이다. 사실관계(Molina·Rowland, 남극 봄철 오존 감소)에도 문제가 없다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "sz-boundaries-e-032",
+  "runId": "rw-supplement-easy",
+  "skill": "boundaries",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "easy",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "When certain crystals such as quartz are crushed or ground, they briefly give off flashes of light, a phenomenon called triboluminescence. The stress of grinding breaks bonds in the crystal lattice and separates electric charges along fresh cracks. These charges quickly recombine across the tiny gaps, and the energy they release ______ some engineers now study the flashes to monitor how evenly minerals are being ground in industrial mills.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "When certain crystals such as quartz are crushed or ground, they briefly give off flashes of light, a phenomenon called triboluminescence. The stress of grinding breaks bonds in the crystal lattice and separates electric charges along fresh cracks. These charges quickly recombine across the tiny gaps, and the energy they release ______ some engineers now study the flashes to monitor how evenly minerals are being ground in industrial mills.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "appears as visible light. Today,",
+    "appears as visible light, today,",
+    "appears as visible light today,",
+    "appears as visible light, today"
+   ],
+   "correctIndex": 0,
+   "answers": null,
+   "explanation": "\"the energy they release appears as visible light\"는 독립절이고, \"some engineers now study...\"도 주어와 동사를 갖춘 독립절이다. A는 마침표로 두 독립절을 나누고 \"Today,\"로 새 문장을 시작하므로 올바르다. B와 D는 접속사 없이 쉼표만으로 두 독립절을 이어 쉼표 스플라이스가 된다. C는 \"today\" 뒤에 쉼표만 있어서 역시 두 독립절이 쉼표로만 연결된다.",
+   "explanationEn": "\"The energy they release appears as visible light\" is an independent clause, and \"some engineers now study...\" is also an independent clause with its own subject and verb. Choice A puts a period between the two clauses and starts a new sentence with \"Today,\" so it is correct. Choices B and D join the two independent clauses with only a comma and no conjunction, which makes a comma splice. Choice C also links the clauses with nothing but the comma after \"today,\" so it is a comma splice too.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "easy",
+   "targetLetter": "A",
+   "seed": "physical science — Triboluminescence mechanically-induced light emission and crystal lattice defect recombination in stressed mineral grinding industrial applications",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "검산: \"the energy they release appears as visible light\"와 \"some engineers now study...\"는 모두 독립절. A만 마침표로 분리하여 올바름. B·C·D는 \"today\"의 위치만 다를 뿐 모두 접속사 없이 쉼표로 두 독립절을 잇는 쉼표 스플라이스. 해설(한·영) 결론·글자 참조 일치, 영어 자연스럽고 한글 없음. 난이도: 쉼표 스플라이스 식별이라는 단일 규칙으로 해결되며, 오답은 전형적 오개념(쉼표로 독립절 연결)이라 easy에 적합. 사소한 점: \"Today, ... now\"가 약간 중복적이나 문법 오류는 아니며 정답 판별에 영향 없음."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "독립절 두 개를 구분하는 단일 규칙만 쓰는 전형적인 쉼표 스플라이스 문항이다. 오답들은 그럴듯한 오개념이라 easy 난이도에 맞는다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "sz-boundaries-e-033",
+  "runId": "rw-supplement-easy",
+  "skill": "boundaries",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "easy",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "When ultraviolet light strikes particles of titanium dioxide, a common semiconductor, it can push electrons across the material's bandgap and leave positively charged \"holes\" behind. These holes react with water molecules to form hydroxyl ______ the radicals then break apart dyes and other pollutants dissolved in wastewater.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "When ultraviolet light strikes particles of titanium dioxide, a common semiconductor, it can push electrons across the material's bandgap and leave positively charged \"holes\" behind. These holes react with water molecules to form hydroxyl ______ the radicals then break apart dyes and other pollutants dissolved in wastewater.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "radicals,",
+    "radicals;",
+    "radicals",
+    "radicals, then"
+   ],
+   "correctIndex": 1,
+   "answers": null,
+   "explanation": "빈칸 앞 \"These holes react with water molecules to form hydroxyl radicals\"와 뒤 \"the radicals then break apart dyes...\"는 각각 주어와 동사를 갖춘 독립절이다. 접속사 없이 두 독립절을 이으려면 세미콜론이 필요하므로 B가 정답이다. A는 쉼표만으로 독립절을 이어 쉼표 스플라이스가 된다. C는 문장부호가 전혀 없어 무종지문(run-on)이 된다. D의 \"then\"은 등위접속사가 아니라 부사라서 쉼표와 함께 써도 여전히 쉼표 스플라이스이다.",
+   "explanationEn": "The text before the blank (\"These holes react with water molecules to form hydroxyl radicals\") and the text after it (\"the radicals then break apart dyes...\") are both independent clauses, since each has its own subject and verb. When you join two independent clauses without a conjunction, you need a semicolon, so B is correct. A joins the clauses with only a comma, which makes a comma splice. C has no punctuation at all, so it creates a run-on sentence. D adds \"then,\" but \"then\" is an adverb, not a coordinating conjunction, so the comma before it still makes a comma splice.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "easy",
+   "targetLetter": "B",
+   "seed": "physical science — Photocatalytic titanium dioxide semiconductor bandgap excitation and hydroxyl radical generation in wastewater pollutant degradation treatment",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "빈칸 앞뒤가 모두 주어+동사를 갖춘 독립절임을 직접 확인(\"These holes react...\" / \"the radicals then break apart...\"). 접속사 없이 연결하므로 세미콜론(B)이 유일하게 올바름. A는 쉼표 스플라이스, C는 무종지문, D는 \"then\"이 부사라 여전히 스플라이스. 한국어·영어 해설 모두 B를 일관되게 뒷받침하며 선택지 글자 참조 일치, 영어 해설에 한글 없음. 단일 규칙(독립절 연결 시 세미콜론)으로 풀리고 어휘는 과학 용어가 있으나 문법 판단에 영향 없음 → easy 적합. 사소한 점: D를 넣으면 \"then the radicals then\"으로 then이 중복되어 오답으로서의 매력도가 약간 떨어지나 전형적 오개념(접속부사를 접속사로 착각)을 반영하므로 허용 범위. 티타늄 다이옥사이드 광촉매 작용 서술은 사실에 부합. 저작권 의심 없음."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "독립절 두 개를 세미콜론으로 잇는 규칙 하나로 풀 수 있다. D를 넣으면 'then'이 두 번 나와 더 쉽게 배제되지만, 오답으로서의 기능에는 문제가 없다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "sz-boundaries-e-034",
+  "runId": "rw-supplement-easy",
+  "skill": "boundaries",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "easy",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "Even metal surfaces that look perfectly smooth are covered with tiny bumps and pits. When a computer chip is pressed against a heatsink, these flaws trap pockets of air, which slows the flow of heat away from the chip. Thermal paste solves this problem by filling the tiny gaps between the two surfaces______ the paste carries heat far better than the air it replaces.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "Even metal surfaces that look perfectly smooth are covered with tiny bumps and pits. When a computer chip is pressed against a heatsink, these flaws trap pockets of air, which slows the flow of heat away from the chip. Thermal paste solves this problem by filling the tiny gaps between the two surfaces______ the paste carries heat far better than the air it replaces.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    ", the paste",
+    " the paste",
+    "; the paste",
+    " and, the paste"
+   ],
+   "correctIndex": 2,
+   "answers": null,
+   "explanation": "빈칸 앞 \"Thermal paste solves ... surfaces\"와 뒤 \"the paste carries ... replaces\"는 각각 완전한 독립절이다. 접속사 없이 두 독립절을 잇는 데에는 세미콜론이 적절하므로 C가 정답이다. A는 쉼표만으로 두 독립절을 이어 쉼표 스플라이스가 된다. B는 아무 문장부호 없이 두 절을 붙여 무종지문(run-on)이 된다. D는 접속사 and 바로 뒤에 쉼표를 찍었는데, 두 절 사이의 이 위치에는 쉼표가 필요하지 않다.",
+   "explanationEn": "The text before the blank (\"Thermal paste solves ... surfaces\") and the text after it (\"the paste carries ... replaces\") are both independent clauses. When there's no conjunction joining two independent clauses, a semicolon is the right way to connect them, so C is correct. A joins the two clauses with only a comma, which makes a comma splice. B runs the two clauses together with no punctuation at all, so it's a run-on sentence. D puts a comma right after the conjunction \"and,\" but no comma is needed in that spot between the two clauses.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "easy",
+   "targetLetter": "C",
+   "seed": "technology and engineering — Thermal paste micro-gap filling thermal conductivity and interface bond-line thickness optimization in CPU-to-heatsink heat dissipation",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "빈칸 앞뒤 모두 독립절(\"Thermal paste solves ... surfaces\" / \"the paste carries ... replaces\")이므로 세미콜론(C)이 유일한 정답. A는 쉼표 스플라이스, B는 무종지문, D는 and 뒤에 불필요한 쉼표(and 앞에 쉼표가 있어야 함)로 명확히 배제되며, 세 오답 모두 전형적 오개념을 반영한다. 한·영 해설 결론과 선택지 글자 참조 일치, 영어 해설 자연스럽고 한글 없음. 선택지 B·D의 앞 공백은 빈칸 뒤 공백과 합쳐 두 칸이 되는 사소한 표기 문제이나 판독에 지장 없음. 열 전도 관련 내용도 사실에 부합. 단일 규칙(독립절 연결 구두점)으로 해결되는 easy 난이도에 적합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "독립절 두 개를 세미콜론으로 잇는 규칙 하나만 알면 풀 수 있음. 오답은 쉼표 스플라이스, 무종지문, 쉼표 위치 오류로 모두 전형적인 오개념임. B와 D 선택지 앞에 공백이 두 칸 있는 것은 사소한 표기 문제임.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "sz-boundaries-e-035",
+  "runId": "rw-supplement-easy",
+  "skill": "boundaries",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "easy",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "Early soft contact lenses were made of hydrogel, a material that delivers oxygen to the cornea only through the water it holds. When worn overnight, these lenses could starve the eye of oxygen, a condition called corneal hypoxia. Silicone hydrogel lenses, introduced in the late 1990s, largely solved this ______ silicone component lets oxygen pass directly through the lens material.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "Early soft contact lenses were made of hydrogel, a material that delivers oxygen to the cornea only through the water it holds. When worn overnight, these lenses could starve the eye of oxygen, a condition called corneal hypoxia. Silicone hydrogel lenses, introduced in the late 1990s, largely solved this ______ silicone component lets oxygen pass directly through the lens material.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "problem, their",
+    "problem their",
+    "problem and, their",
+    "problem; their"
+   ],
+   "correctIndex": 3,
+   "answers": null,
+   "explanation": "빈칸 앞 'Silicone hydrogel lenses ... largely solved this problem'과 뒤 'their silicone component lets oxygen pass ...'는 각각 주어와 동사를 갖춘 독립절이다. 두 독립절은 세미콜론으로 연결할 수 있으므로 D가 정답이다. A는 쉼표만으로 두 독립절을 이어 쉼표 스플라이스가 된다. B는 아무 문장부호 없이 두 절을 붙여 무종지문(run-on)이 된다. C는 접속사 and 뒤에 쉼표를 두어 문장부호 위치가 잘못되었다.",
+   "explanationEn": "The text before the blank (\"Silicone hydrogel lenses ... largely solved this problem\") and the text after it (\"their silicone component lets oxygen pass ...\") are both independent clauses, each with its own subject and verb. A semicolon can join two independent clauses, so D is correct. A joins them with only a comma, which makes a comma splice. B puts no punctuation between them at all, which makes a run-on sentence. C puts the comma after \"and\" instead of before it, so the punctuation is in the wrong place.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "easy",
+   "targetLetter": "D",
+   "seed": "technology and engineering — Hydrogel contact lens oxygen permeability silicone hydrogel material and corneal hypoxia prevention in extended-wear ophthalmic devices",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "빈칸 앞뒤가 모두 독립절이며 세미콜론 연결(D)이 유일하게 적합. A 쉼표 스플라이스, B 무종지문, C 'and' 뒤 쉼표 오배치로 모두 배제됨. 한국어·영어 해설 결론 및 글자 참조 일치, 영어 자연스럽고 한글 없음. 하이드로겔/실리콘 하이드로겔 산소 투과 관련 내용은 사실과 부합. 독립절 연결 규칙 하나로 풀리는 전형적 easy 문항."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "두 독립절을 세미콜론으로 연결하는 기본 규칙 문항. 오답은 쉼표 스플라이스, 무종지문, 접속사 뒤 쉼표로 모두 전형적 오개념이다. 사실 관계(실리콘 하이드로겔 렌즈가 1990년대 후반에 도입되었고 산소 투과성이 높다)도 정확하다.",
+    "passed": true
+   }
+  }
+ }
+]
