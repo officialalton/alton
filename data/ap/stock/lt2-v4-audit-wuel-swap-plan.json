@@ -1,0 +1,54 @@
+{
+ "kind": "ap_new_version_swap_plan",
+ "set": "LT2",
+ "sourceSetName": "AP English Literature — Practice Exam 2",
+ "sourceVersionNo": 3,
+ "generatedBy": "scripts/ap-generation/audit-wuel-build.ts (external audit 2026-10-15)",
+ "note": "Corrected Q1, Q2, Q3 (AP-050, AP-051, AP-052). Source = LT2 v3 (Stage 2 published). Batch 'audit-wuel' must be loaded first.",
+ "swapCount": 3,
+ "verifierViolations": [],
+ "swaps": [
+  {
+   "section": "ap_frq",
+   "removeKey": "englit-p1-b:ap_english_literature-fa1-k0",
+   "addKey": "audit-wuel:ap_english_literature-fa1-k0",
+   "tier": "required",
+   "reason": "AP-050: mid sample inserted a line break after the first 'Nothing'; in the poem the break falls after the second 'Nothing' (line 15 ends 'Nothing', line 16 begins 'was ever let go of')",
+   "remove": {
+    "type": "q1"
+   },
+   "add": {
+    "type": "q1",
+    "sameCell": true
+   }
+  },
+  {
+   "section": "ap_frq",
+   "removeKey": "lt-real-1:ap_english_literature-real-rf2-k0",
+   "addKey": "audit-wuel:ap_english_literature-real-rf2-k0",
+   "tier": "required",
+   "reason": "AP-051: the high sample called 'seemed to slip out of his memory', 'some force seemed to draw him' and 'took possession of him' passive; they are active/intransitive constructions with non-human subjects, so the claim is now about subject and agency",
+   "remove": {
+    "type": "q2"
+   },
+   "add": {
+    "type": "q2",
+    "sameCell": true
+   }
+  },
+  {
+   "section": "ap_frq",
+   "removeKey": "englit-p1-b:ap_english_literature-fa3-k0",
+   "addKey": "audit-wuel:ap_english_literature-fa3-k0",
+   "tier": "required",
+   "reason": "AP-052: low sample header gave thesis 1 but the annotation denied it; reconciled to thesis 1 (the essay states a defensible interpretation in the last paragraph; the thesis may appear anywhere), total 3 unchanged",
+   "remove": {
+    "type": "q3"
+   },
+   "add": {
+    "type": "q3",
+    "sameCell": true
+   }
+  }
+ ]
+}

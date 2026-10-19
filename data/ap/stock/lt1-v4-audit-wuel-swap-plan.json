@@ -1,0 +1,26 @@
+{
+ "kind": "ap_new_version_swap_plan",
+ "set": "LT1",
+ "sourceSetName": "AP English Literature — Practice Exam 1",
+ "sourceVersionNo": 3,
+ "generatedBy": "scripts/ap-generation/audit-wuel-build.ts (external audit 2026-10-15)",
+ "note": "Corrected Q2 (AP-047). Source = LT1 v3 (Stage 2 published). Batch 'audit-wuel' must be loaded first.",
+ "swapCount": 1,
+ "verifierViolations": [],
+ "swaps": [
+  {
+   "section": "ap_frq",
+   "removeKey": "lt-real-2:ap_english_literature-real-rf3-k0",
+   "addKey": "audit-wuel:ap_english_literature-real-rf3-k0",
+   "tier": "required",
+   "reason": "AP-047: 'scornfully bumping a crest' describes the boat (she), not the sea; the high sample and the sophistication note no longer list it as personification of the sea",
+   "remove": {
+    "type": "q2"
+   },
+   "add": {
+    "type": "q2",
+    "sameCell": true
+   }
+  }
+ ]
+}

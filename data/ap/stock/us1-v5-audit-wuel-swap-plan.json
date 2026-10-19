@@ -1,0 +1,26 @@
+{
+ "kind": "ap_new_version_swap_plan",
+ "set": "US1",
+ "sourceSetName": "AP U.S. History — Practice Exam 1",
+ "sourceVersionNo": 4,
+ "generatedBy": "scripts/ap-generation/audit-wuel-build.ts (external audit 2026-10-15)",
+ "note": "Corrected LEQ (AP-073). Source = US1 v4 (Stage C/D published). Batch 'audit-wuel' must be loaded first.",
+ "swapCount": 1,
+ "verifierViolations": [],
+ "swaps": [
+  {
+   "section": "ap_frq",
+   "removeKey": "ush-p1-b:ap_us_history-leq_3-k0",
+   "addKey": "audit-wuel:ap_us_history-leq_3-k0",
+   "tier": "required",
+   "reason": "AP-073: mid sample: header and notes reconciled to thesis 1 + context 0 + evidence 1 + analysis 1 = 3 (notes denied context and credited evidence 1); low sample: header and notes reconciled to evidence 1 (two examples identified, general), analysis 0 -> 1/6",
+   "remove": {
+    "type": "leq"
+   },
+   "add": {
+    "type": "leq",
+    "sameCell": true
+   }
+  }
+ ]
+}
