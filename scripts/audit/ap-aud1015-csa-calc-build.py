@@ -25,10 +25,15 @@ for f in glob.glob("data/ap/stock/*items.json"):
                 idx.setdefault(r["stockKey"], (f, r))
 
 
+_seq = {}
+
+
 def clone(key, run, audit_row, new_candidate_key=None):
     f, r = idx[key]
     n = copy.deepcopy(r)
-    ck = new_candidate_key or r["candidateKey"]
+    # 원본과 셀·번호가 겹치지 않도록(여러 원본 배치에서 같은 candidateKey 가 있다) 새 번호 k9xx 를 순서대로 준다.
+    _seq[run] = _seq.get(run, 0) + 1
+    ck = new_candidate_key or f"{r['cellId']}-k{900 + _seq[run]}"
     n["candidateKey"] = ck
     n["run"] = run
     n["stockKey"] = f"{run}:{ck}"
