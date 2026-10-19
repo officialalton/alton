@@ -108,3 +108,7 @@ export const ushItemNames = (): string[] => {
   const dir = path.resolve(process.cwd(), "data/ap/stock");
   return existsSync(dir) ? readdirSync(dir).filter((f) => USH_ITEM_FILE_RE.test(f)).map((f) => f.replace(/\.json$/, "")).sort() : [];
 };
+
+/** AP 외부 검수 수정본 배치(data/ap/stock/audit-wuel-items.json, 2026-10-15). 고정 파일 하나. */
+export const auditWuelItemNames = (): string[] =>
+  existsSync(path.resolve(process.cwd(), "data/ap/stock/audit-wuel-items.json")) ? ["audit-wuel-items"] : [];
