@@ -22,6 +22,8 @@ export const SUPP_BATCHES: { run: string; file: string }[] = [
   { run: "supp-r3b2-ab-final", file: "supp-r3b2-items.json" },
   { run: "supp-r3c-ab-final", file: "supp-r3c-items.json" },
   { run: "supp-r3c2-ab-final", file: "supp-r3c2-items.json" },
+  // 2026-10-15 외부 AP 전체 검수 확정 수정본(scripts/audit/ap-audit-fix-1015.ts): 후보 복제본이라 run 디렉터리는 없다.
+  { run: "fix1015", file: "supp-fix1015-items.json" },
 ];
 
 /** 디스크에 실제로 있는 보강 배치 파일 이름(확장자 없음). */

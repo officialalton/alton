@@ -1,0 +1,52 @@
+{
+ "kind": "ap_new_version_swap_plan",
+ "set": "ST1",
+ "sourceSetName": "AP Statistics — Practice Exam 1",
+ "sourceVersionNo": 2,
+ "generatedBy": "scripts/audit/ap-audit-fix-1015-plans.ts (external audit 2026-10-15, docs/audits/ap-external-audit-20261015-confirmed-fixes.csv)",
+ "note": "Swaps use removeKey (positions resolve from the live set). Apply after the candidates in data/ap/stock/supp-fix1015-items.json are loaded, converted, render/screen-verified and review_env_ready.",
+ "swapCount": 2,
+ "verifierViolations": [],
+ "requiresConvertedCandidates": [
+  "fix1015:ap_statistics-fx03-k0",
+  "fix1015:ap_statistics-fx67-k0"
+ ],
+ "swaps": [
+  {
+   "section": "ap_mc",
+   "removeKey": "stats-s3-a:ap_statistics-m10-k0",
+   "addKey": "fix1015:ap_statistics-fx03-k0",
+   "reason": "AP-003 (P1) MC27: homogeneity and independence nulls were equivalent options",
+   "remove": {
+    "unit": 3,
+    "skill": 2,
+    "shared": false,
+    "type": ""
+   },
+   "add": {
+    "unit": 3,
+    "skill": 2,
+    "shared": false,
+    "type": ""
+   }
+  },
+  {
+   "section": "ap_mc",
+   "removeKey": "stats-s1-h-final:ap_statistics-m03-k0",
+   "addKey": "fix1015:ap_statistics-fx67-k0",
+   "reason": "AP-067 MC21: n=200 cannot produce p-hat 0.459; now 0.46 with P=0.042",
+   "remove": {
+    "unit": 3,
+    "skill": 4,
+    "shared": false,
+    "type": ""
+   },
+   "add": {
+    "unit": 3,
+    "skill": 4,
+    "shared": false,
+    "type": ""
+   }
+  }
+ ]
+}
