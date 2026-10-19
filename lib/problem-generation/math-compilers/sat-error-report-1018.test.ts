@@ -138,7 +138,7 @@ describe("Math 10·11·15·19번 — 그래프와 식을 둘 다 주지 않는�
 });
 
 describe("Math 2번 — 막대·선그래프는 눈금으로 읽을 수 없는 값에 데이터 라벨을 붙인다", () => {
-  const base = { type: "data", kind: "bar", categories: ["2010", "2020"], xTitle: "Year", yTitle: "Population (thousands)", yMin: 0, yMax: 50, yStep: 10 } as const;
+  const base = { type: "data" as const, kind: "bar" as const, categories: ["2010", "2020"], xTitle: "Year", yTitle: "Population (thousands)", yMin: 0, yMax: 50, yStep: 10 };
   it("값이 눈금선 위에 있지 않으면 라벨(값 텍스트)이 그려진다", () => {
     const off: DataSpec = { ...base, series: [{ values: [20, 37] }] };
     expect(barLineNeedsValueLabels(off)).toBe(true);
