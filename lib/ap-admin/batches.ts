@@ -164,6 +164,9 @@ export const STOCK_BATCHES: StockBatch[] = [
   { id: "bc-topup", title: "BC 보충 (bc-topup)", itemsFile: "bc-topup-items.json", loadLabel: "bc-topup-2026-10-09", supplement: true, passKeysFile: "bc-topup-pass-keys.json", evidenceFile: "evidence-bc-topup.json" },
   // 2026-10-15 외부 AP 전체 검수 확정 수정(docs/audits/ap-external-audit-20261015-confirmed-fixes.csv) — World History(MC 세트 5 + FRQ 6)·US History(FRQ 4)·English Literature(FRQ 4) 수정본 19건. 원본과 같은 칸의 교정 후보이며 한 증거 파일을 공유한다. 새 버전 계획: data/ap/stock/wh1-v2-, wh2-v2-, us1-v5-, us2-v5-, lt1-v4-, lt2-v4-audit-wuel-swap-plan.json (scripts/ap-generation/audit-wuel-build.ts)
   { id: "audit-wuel", title: "AP 외부 검수 수정본 (World History·US History·English Literature, MC 5 + FRQ 14)", itemsFile: "audit-wuel-items.json", loadLabel: "audit-wuel-2026-10-15", supplement: true, passKeysFile: "audit-wuel-pass-keys.json", evidenceFile: "evidence-audit-wuel.json" },
+  // 2026-10-15 외부 AP 검수 확정 수정 — CSA(FRQ 배점 7·7·5·6, 범위 밖 문항 교체, Practice 5 2문항) 14건과 Calculus AB·BC(전제·문구) 11건의 수정본. 한 증거 파일(evidence-aud1015.json)을 공유한다. 새 버전 계획: data/ap/stock/ab1-v5-, ab3-v3-, abfrq-v2-, bc1-v5-, bc2-v3-, bc3-v2-, csa1-v2-, csa2-v3-audit-aud1015-swap-plan.json (scripts/audit/ap-aud1015-csa-calc-build.py)
+  { id: "csa-aud1015", title: "AP 외부 검수 수정본 (Computer Science A, FRQ 8 + MC 4 + Practice 5 신규 2)", itemsFile: "csa-aud1015-items.json", loadLabel: "csa-aud1015-2026-10-15", supplement: true, passKeysFile: "csa-aud1015-pass-keys.json", evidenceFile: "evidence-aud1015.json" },
+  { id: "supp-aud1015-final", title: "AP 외부 검수 수정본 (Calculus AB·BC, 11건)", itemsFile: "supp-aud1015-items.json", loadLabel: "supp-aud1015-final-2026-10-15", supplement: true, passKeysFile: "supp-aud1015-pass-keys.json", evidenceFile: "evidence-aud1015.json" },
 ];
 
 export const batchById = (id: string): StockBatch => {
