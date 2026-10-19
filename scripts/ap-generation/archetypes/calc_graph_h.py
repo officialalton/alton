@@ -254,7 +254,7 @@ def g_lagrange_p2_calc(rng):
         raise ValueError("independent_check_failed")
     ds = [("Uses the maximum of |f'''| over the whole graph instead of over [0, %s]." % a, Mall * a ** 3 / 6), ("Divides by 2! instead of 3!.", M * a ** 3 / 2), ("Uses the power 2 instead of 3 for the x-term.", M * a ** 2 / 6), ("Uses the value of f''' at x = %s instead of its maximum absolute value." % a, abs(fa) * a ** 3 / 6)]
     pool = dopts(ds, key)
-    stem = f"A function $f$ has derivatives of all orders. The graph of its third derivative $f'''$ on $0\\le x\\le 3$ is shown and consists of line segments. The second-degree Maclaurin polynomial $P_2$ is used to estimate $f({a})$. What bound on $|f({a})-P_2({a})|$ does the Lagrange error bound give?"
+    stem = f"A function $f$ has a continuous third derivative on $0\\le x\\le 3$. The graph of $f'''$ is shown and consists of line segments. The second-degree Maclaurin polynomial $P_2$ is used to estimate $f({a})$. What bound on $|f({a})-P_2({a})|$ does the Lagrange error bound give?"
     k = Opt(dec(key), True, "Error <= M |x|^3/3! where M is the maximum of |f'''| on [0, a] read from the graph; evaluate with a calculator.", key)
     bpr = bp("g_lagrange_p2_calc", "10.12", "3.D", "required", "Apply the Lagrange error bound for a second-degree polynomial with a bound on the third derivative read from a graph",
              ["Read the largest absolute value of f''' on [0, a] from the graph", "Apply M |x|^(n+1)/(n+1)! with n = 2", "Evaluate with a calculator"],

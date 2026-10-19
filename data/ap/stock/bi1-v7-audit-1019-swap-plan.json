@@ -1,0 +1,52 @@
+{
+ "kind": "ap_new_version_swap_plan",
+ "set": "BI1",
+ "sourceSetName": "AP Biology — Practice Exam 1",
+ "sourceVersionNo": 6,
+ "generatedBy": "scripts/audit/ap-audit-typefix-1019-plans.ts (type-level fix of external audit 2026-10-15, docs/audits/ap-type-defect-scan-20261019.md)",
+ "note": "Swaps use removeKey (positions resolve from the live set). Apply after the candidates in data/ap/stock/supp-fix1019-items.json are loaded, converted, render/screen-verified and review_env_ready. Each candidate is a copy of the published item with only the student-visible setup (title) corrected; the answer key is unchanged.",
+ "swapCount": 2,
+ "verifierViolations": [],
+ "requiresConvertedCandidates": [
+  "fix1019:ap_biology-tf02-k0",
+  "fix1019:ap_biology-tf03-k0"
+ ],
+ "swaps": [
+  {
+   "section": "ap_frq",
+   "removeKey": "bio-v3a:ap_biology-f01-k0",
+   "addKey": "fix1019:ap_biology-tf02-k0",
+   "reason": "type fix b: BI1 FRQ1 (bif_q1) experiment setup was only in the invisible stimulus description; the title is now the complete setup",
+   "remove": {
+    "unit": null,
+    "skill": null,
+    "shared": false,
+    "type": "bio_q1_results"
+   },
+   "add": {
+    "unit": null,
+    "skill": null,
+    "shared": false,
+    "type": "bio_q1_results"
+   }
+  },
+  {
+   "section": "ap_frq",
+   "removeKey": "bio-s2-frq:ap_biology-f24-k0",
+   "addKey": "fix1019:ap_biology-tf03-k0",
+   "reason": "type fix b: BI1 FRQ6 (bif_q6) table caption with n = 6 was only in the invisible description; the title is now the complete caption",
+   "remove": {
+    "unit": null,
+    "skill": null,
+    "shared": false,
+    "type": "bio_q6_data"
+   },
+   "add": {
+    "unit": null,
+    "skill": null,
+    "shared": false,
+    "type": "bio_q6_data"
+   }
+  }
+ ]
+}

@@ -1,0 +1,1693 @@
+{
+ "a_chisq_equivalent_nulls": {
+  "bySubject": {
+   "statistics": {
+    "stock": 3,
+    "published_origin": 3
+   }
+  },
+  "items": [
+   {
+    "key": "stats-s3-a:ap_statistics-m10-k0",
+    "subject": "ap_statistics",
+    "archetype": "st_chisq_setup",
+    "hits": [
+     "homogeneity_and_independence_nulls_both_offered"
+    ],
+    "origin": [
+     "ST1-MC25"
+    ],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "stats-s3-a:ap_statistics-m10-k1",
+    "subject": "ap_statistics",
+    "archetype": "st_chisq_setup",
+    "hits": [
+     "homogeneity_and_independence_nulls_both_offered"
+    ],
+    "origin": [
+     "ST2-MC21"
+    ],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "stats-s3b-d:ap_statistics-m05-k0",
+    "subject": "ap_statistics",
+    "archetype": "st_chisq_setup",
+    "hits": [
+     "homogeneity_and_independence_nulls_both_offered"
+    ],
+    "origin": [
+     "ST2-MC26"
+    ],
+    "after1015": [],
+    "after1019": []
+   }
+  ]
+ },
+ "b_setup_hidden": {
+  "bySubject": {
+   "biology": {
+    "stock": 43,
+    "published_origin": 6,
+    "published_after1015": 4
+   },
+   "chemistry": {
+    "stock": 7,
+    "published_origin": 2,
+    "published_after1015": 2
+   },
+   "english_language": {
+    "stock": 2,
+    "published_origin": 1,
+    "published_after1015": 1,
+    "published_after1019": 1
+   },
+   "macroeconomics": {
+    "stock": 3
+   },
+   "microeconomics": {
+    "stock": 4,
+    "published_origin": 2,
+    "published_after1015": 1
+   },
+   "statistics": {
+    "stock": 5,
+    "published_origin": 2,
+    "published_after1015": 2
+   }
+  },
+  "items": [
+   {
+    "key": "bio-p1-b:ap_biology-f01-k0",
+    "subject": "ap_biology",
+    "archetype": "bif_q1_inhibitor",
+    "hits": [
+     "number:6",
+     "sentence:A researcher hypothesizes that compound X is a competitive i",
+     "sentence:Each treatment was repeated n = 6 times."
+    ],
+    "origin": [],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "bio-p1-b:ap_biology-f02-k0",
+    "subject": "ap_biology",
+    "archetype": "bif_q2_potato",
+    "hits": [
+     "number:24",
+     "sentence:A student places potato cores of equal initial mass in sucro"
+    ],
+    "origin": [
+     "BI1-FRQ2"
+    ],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "bio-p1-b:ap_biology-f06-k0",
+    "subject": "ap_biology",
+    "archetype": "bif_q6_enzymeph",
+    "hits": [
+     "number:8"
+    ],
+    "origin": [],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "bio-s2-frq:ap_biology-f01-k0",
+    "subject": "ap_biology",
+    "archetype": "bif_q1_growthfactor",
+    "hits": [
+     "number:24",
+     "number:8",
+     "sentence:A researcher investigates how a growth factor affects cell d"
+    ],
+    "origin": [
+     "BI2-FRQ1"
+    ],
+    "after1015": [
+     "BI2-FRQ1"
+    ],
+    "after1019": []
+   },
+   {
+    "key": "bio-s2-frq:ap_biology-f02-k0",
+    "subject": "ap_biology",
+    "archetype": "bif_q1_resistance",
+    "hits": [
+     "sentence:A researcher grows a culture of bacteria with an antibiotic ",
+     "sentence:After different numbers of days of exposure to the antibioti",
+     "sentence:Mean percent of bacterial cells that are resistant (percent "
+    ],
+    "origin": [],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "bio-s2-frq:ap_biology-f03-k0",
+    "subject": "ap_biology",
+    "archetype": "bif_q1_salinity",
+    "hits": [
+     "number:10",
+     "number:7",
+     "sentence:A student investigates how the salt concentration of the wat"
+    ],
+    "origin": [],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "bio-s2-frq:ap_biology-f04-k0",
+    "subject": "ap_biology",
+    "archetype": "bif_q2_enzymetemp",
+    "hits": [
+     "sentence:A student measures the rate at which an enzyme converts its ",
+     "sentence:Each value is the mean of repeated trials."
+    ],
+    "origin": [],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "bio-s2-frq:ap_biology-f05-k0",
+    "subject": "ap_biology",
+    "archetype": "bif_q2_photosyn",
+    "hits": [
+     "sentence:A student measures the rate of oxygen production by an aquat",
+     "sentence:Each value is the mean of repeated trials."
+    ],
+    "origin": [],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "bio-s2-frq:ap_biology-f06-k0",
+    "subject": "ap_biology",
+    "archetype": "bif_q2_popgrowth",
+    "hits": [
+     "sentence:A researcher introduces a small number of mice to an island "
+    ],
+    "origin": [],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "bio-s2-frq:ap_biology-f22-k0",
+    "subject": "ap_biology",
+    "archetype": "bif_q6_enzymeph",
+    "hits": [
+     "number:8"
+    ],
+    "origin": [],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "bio-s2-frq:ap_biology-f23-k0",
+    "subject": "ap_biology",
+    "archetype": "bif_q6_growth",
+    "hits": [
+     "number:10"
+    ],
+    "origin": [],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "bio-s2-frq:ap_biology-f24-k0",
+    "subject": "ap_biology",
+    "archetype": "bif_q6_mitotic",
+    "hits": [
+     "number:6"
+    ],
+    "origin": [
+     "BI1-FRQ6"
+    ],
+    "after1015": [
+     "BI1-FRQ6"
+    ],
+    "after1019": []
+   },
+   {
+    "key": "bio-s2-frq:ap_biology-f25-k0",
+    "subject": "ap_biology",
+    "archetype": "bif_q6_photo",
+    "hits": [
+     "number:6"
+    ],
+    "origin": [],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "bio-s2-frq:ap_biology-f26-k0",
+    "subject": "ap_biology",
+    "archetype": "bif_q6_resp",
+    "hits": [
+     "number:6"
+    ],
+    "origin": [],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "bio-s2-frq:ap_biology-f27-k0",
+    "subject": "ap_biology",
+    "archetype": "bif_q6_salt",
+    "hits": [
+     "number:24",
+     "number:8"
+    ],
+    "origin": [],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "bio-v3a:ap_biology-f01-k0",
+    "subject": "ap_biology",
+    "archetype": "bif_q1_fliesselection",
+    "hits": [
+     "number:12",
+     "sentence:A researcher breeds populations of fruit flies for an increa",
+     "sentence:After different numbers of generations of selective breeding"
+    ],
+    "origin": [
+     "BI1-FRQ1"
+    ],
+    "after1015": [
+     "BI1-FRQ1"
+    ],
+    "after1019": []
+   },
+   {
+    "key": "bio-v3a:ap_biology-f01-k1",
+    "subject": "ap_biology",
+    "archetype": "bif_q1_fliesselection",
+    "hits": [
+     "number:12",
+     "sentence:A researcher breeds populations of fruit flies for an increa",
+     "sentence:After different numbers of generations of selective breeding"
+    ],
+    "origin": [],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "bio-v3a:ap_biology-f02-k0",
+    "subject": "ap_biology",
+    "archetype": "bif_q1_lacoperon",
+    "hits": [
+     "number:6",
+     "sentence:Mean beta-galactosidase activity (units of enzyme activity) ",
+     "sentence:The activity of the enzyme beta-galactosidase, which is enco"
+    ],
+    "origin": [],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "bio-v3a:ap_biology-f02-k1",
+    "subject": "ap_biology",
+    "archetype": "bif_q1_lacoperon",
+    "hits": [
+     "number:6",
+     "sentence:Mean beta-galactosidase activity (units of enzyme activity) ",
+     "sentence:The activity of the enzyme beta-galactosidase, which is enco"
+    ],
+    "origin": [],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "bio-v3a:ap_biology-f03-k0",
+    "subject": "ap_biology",
+    "archetype": "bif_q2_receptorsat",
+    "hits": [
+     "sentence:A researcher exposes cultured liver cells to different conce",
+     "sentence:The researcher measures the amount of a response molecule th"
+    ],
+    "origin": [],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "bio-v3a:ap_biology-f03-k1",
+    "subject": "ap_biology",
+    "archetype": "bif_q2_receptorsat",
+    "hits": [
+     "sentence:A researcher exposes cultured liver cells to different conce",
+     "sentence:The researcher measures the amount of a response molecule th"
+    ],
+    "origin": [],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "bio-v3a:ap_biology-f04-k0",
+    "subject": "ap_biology",
+    "archetype": "bif_q2_allelefreq",
+    "hits": [
+     "sentence:In an isolated population of insects, an allele that provide",
+     "sentence:The pesticide is applied every generation, and a researcher "
+    ],
+    "origin": [
+     "BI2-FRQ2"
+    ],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "bio-v3a:ap_biology-f04-k1",
+    "subject": "ap_biology",
+    "archetype": "bif_q2_allelefreq",
+    "hits": [
+     "sentence:In an isolated population of insects, an allele that provide",
+     "sentence:The pesticide is applied every generation, and a researcher "
+    ],
+    "origin": [],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "bio-v3a:ap_biology-f12-k0",
+    "subject": "ap_biology",
+    "archetype": "bif_q6_lacz",
+    "hits": [
+     "number:6",
+     "sentence:The mutant cells make a repressor protein that cannot bind t",
+     "sentence:The table shows the mean beta-galactosidase activity ± 2SE i"
+    ],
+    "origin": [],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "bio-v3a:ap_biology-f12-k1",
+    "subject": "ap_biology",
+    "archetype": "bif_q6_lacz",
+    "hits": [
+     "number:6",
+     "sentence:The mutant cells make a repressor protein that cannot bind t",
+     "sentence:The table shows the mean beta-galactosidase activity ± 2SE i"
+    ],
+    "origin": [],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "bio-v3a:ap_biology-f13-k0",
+    "subject": "ap_biology",
+    "archetype": "bif_q6_moth",
+    "hits": [
+     "number:8",
+     "sentence:Birds that hunt by sight feed on the moths.",
+     "sentence:The table shows the mean percent of moths that survived for "
+    ],
+    "origin": [],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "bio-v3a:ap_biology-f13-k1",
+    "subject": "ap_biology",
+    "archetype": "bif_q6_moth",
+    "hits": [
+     "number:8",
+     "sentence:Birds that hunt by sight feed on the moths.",
+     "sentence:The table shows the mean percent of moths that survived for "
+    ],
+    "origin": [],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "bio-v3a:ap_biology-f14-k0",
+    "subject": "ap_biology",
+    "archetype": "bif_q6_agemeiosis",
+    "hits": [
+     "number:10"
+    ],
+    "origin": [],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "bio-v3a:ap_biology-f14-k1",
+    "subject": "ap_biology",
+    "archetype": "bif_q6_agemeiosis",
+    "hits": [
+     "number:10"
+    ],
+    "origin": [],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "bio-v3c:ap_biology-f02-k0",
+    "subject": "ap_biology",
+    "archetype": "bif_q6_agemeiosis",
+    "hits": [
+     "number:10"
+    ],
+    "origin": [
+     "BI2-FRQ6"
+    ],
+    "after1015": [
+     "BI2-FRQ6"
+    ],
+    "after1019": []
+   },
+   {
+    "key": "bio-v3c:ap_biology-f02-k1",
+    "subject": "ap_biology",
+    "archetype": "bif_q6_agemeiosis",
+    "hits": [
+     "number:10"
+    ],
+    "origin": [],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "bio-v3c:ap_biology-f03-k0",
+    "subject": "ap_biology",
+    "archetype": "bif_q6_moth",
+    "hits": [
+     "number:8",
+     "sentence:Birds that hunt by sight feed on the moths, and the color of",
+     "sentence:The table shows the mean percent of moths that survived for "
+    ],
+    "origin": [],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "bio-v3c:ap_biology-f03-k1",
+    "subject": "ap_biology",
+    "archetype": "bif_q6_moth",
+    "hits": [
+     "number:8",
+     "sentence:Birds that hunt by sight feed on the moths, and the color of",
+     "sentence:The table shows the mean percent of moths that survived for "
+    ],
+    "origin": [],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "chem-p1-b:ap_chemistry-f03-k0",
+    "subject": "ap_chemistry",
+    "archetype": "chf_long_kinetics",
+    "hits": [
+     "number:310"
+    ],
+    "origin": [],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "chem-s2-f1:ap_chemistry-f03-k0",
+    "subject": "ap_chemistry",
+    "archetype": "chf_long_kinetics",
+    "hits": [
+     "number:310"
+    ],
+    "origin": [],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "chem-s2-f1:ap_chemistry-f03-k1",
+    "subject": "ap_chemistry",
+    "archetype": "chf_long_kinetics",
+    "hits": [
+     "number:310"
+    ],
+    "origin": [],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "chem-s2-f2:ap_chemistry-f03-k0",
+    "subject": "ap_chemistry",
+    "archetype": "chf_long_kinetics",
+    "hits": [
+     "number:310"
+    ],
+    "origin": [
+     "CH2-FRQ3"
+    ],
+    "after1015": [
+     "CH2-FRQ3"
+    ],
+    "after1019": []
+   },
+   {
+    "key": "chem-s2-f2:ap_chemistry-f03-k1",
+    "subject": "ap_chemistry",
+    "archetype": "chf_long_kinetics",
+    "hits": [
+     "number:310"
+    ],
+    "origin": [],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "chem-s2-f4:ap_chemistry-f03-k0",
+    "subject": "ap_chemistry",
+    "archetype": "chf_long_kinetics",
+    "hits": [
+     "number:310"
+    ],
+    "origin": [
+     "CH1-FRQ3"
+    ],
+    "after1015": [
+     "CH1-FRQ3"
+    ],
+    "after1019": []
+   },
+   {
+    "key": "chem-s2-f4:ap_chemistry-f03-k1",
+    "subject": "ap_chemistry",
+    "archetype": "chf_long_kinetics",
+    "hits": [
+     "number:310"
+    ],
+    "origin": [],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "englang-p2-b:ap_english_language-fb1-k0",
+    "subject": "ap_english_language",
+    "archetype": "elfrq_fb1",
+    "hits": [
+     "number:410"
+    ],
+    "origin": [],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "el-rv:ap_english_language-fb1-k0",
+    "subject": "ap_english_language",
+    "archetype": "elfrq_fb1",
+    "hits": [
+     "number:410"
+    ],
+    "origin": [
+     "EL1-FRQ1"
+    ],
+    "after1015": [
+     "EL1-FRQ1"
+    ],
+    "after1019": [
+     "EL1-FRQ1"
+    ]
+   },
+   {
+    "key": "run1:ap_biology-f01-k4",
+    "subject": "ap_biology",
+    "archetype": "(none)",
+    "hits": [
+     "number:3"
+    ],
+    "origin": [],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "run1:ap_biology-f02-k0",
+    "subject": "ap_biology",
+    "archetype": "(none)",
+    "hits": [
+     "sentence:Table of mean beta-galactosidase activity (Miller units) wit"
+    ],
+    "origin": [],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "run1:ap_biology-f02-k4",
+    "subject": "ap_biology",
+    "archetype": "(none)",
+    "hits": [
+     "sentence:Table of mean beta-galactosidase activity (Miller units) wit",
+     "sentence:coli strains (wild type, lacI mutant, lacO mutant) grown in "
+    ],
+    "origin": [],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "run1:ap_biology-f02-k7",
+    "subject": "ap_biology",
+    "archetype": "(none)",
+    "hits": [
+     "sentence:Table of relative EPO mRNA levels (mean of 4 cultures, +/-2 ",
+     "sentence:enhancer with a point mutation in the activator-binding site"
+    ],
+    "origin": [],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "run1:ap_biology-f02-k8",
+    "subject": "ap_biology",
+    "archetype": "(none)",
+    "hits": [
+     "sentence:Table of mean beta-galactosidase-like reporter activity (Mil",
+     "sentence:coli strains grown with or without the inducer sugar IPTG, p"
+    ],
+    "origin": [],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "run1:ap_biology-f02-k12",
+    "subject": "ap_biology",
+    "archetype": "(none)",
+    "hits": [
+     "sentence:Table of mean beta-galactosidase activity (Miller units) +/-",
+     "sentence:coli strains (wild type, mutant 1, mutant 2, mutant 3) grown"
+    ],
+    "origin": [],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "run1:ap_biology-f02-k15",
+    "subject": "ap_biology",
+    "archetype": "(none)",
+    "hits": [
+     "sentence:Table of mean reporter fluorescence (arbitrary units, AU) wi"
+    ],
+    "origin": [],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "run1:ap_biology-f02-k17",
+    "subject": "ap_biology",
+    "archetype": "(none)",
+    "hits": [
+     "sentence:Table of beta-galactosidase activity (mean ± 2SE, arbitrary "
+    ],
+    "origin": [],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "run1:ap_biology-f03-k23",
+    "subject": "ap_biology",
+    "archetype": "(none)",
+    "hits": [
+     "sentence:Table of mean gut bacterial abundance (CFU per gram of stool"
+    ],
+    "origin": [],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "run1:ap_biology-f03-k24",
+    "subject": "ap_biology",
+    "archetype": "(none)",
+    "hits": [
+     "sentence:Table of mean percent cover of mussels and barnacles after 1",
+     "sentence:Values are mean percent cover with ±2 SE."
+    ],
+    "origin": [],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "run1:ap_microeconomics-f01-k3",
+    "subject": "ap_microeconomics",
+    "archetype": "(none)",
+    "hits": [
+     "sentence:Demand and cost data for a monopolist selling a patented wea",
+     "sentence:Demand is linear, P = 180 - 2Q; marginal cost and average to"
+    ],
+    "origin": [],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "run1:ap_microeconomics-f02-k2",
+    "subject": "ap_microeconomics",
+    "archetype": "(none)",
+    "hits": [
+     "number:28",
+     "number:33",
+     "number:66"
+    ],
+    "origin": [],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "macro-p1-b:ap_macroeconomics-f05-k0",
+    "subject": "ap_macroeconomics",
+    "archetype": "maf_short_ppc_trade",
+    "hits": [
+     "sentence:Maximum daily output of two goods for two countries when eac"
+    ],
+    "origin": [],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "macro-p2-f:ap_macroeconomics-f10-k0",
+    "subject": "ap_macroeconomics",
+    "archetype": "maf_short_ppc_trade",
+    "hits": [
+     "sentence:Maximum daily output of two goods for two countries when eac"
+    ],
+    "origin": [],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "macro-p2-f:ap_macroeconomics-f10-k1",
+    "subject": "ap_macroeconomics",
+    "archetype": "maf_short_ppc_trade",
+    "hits": [
+     "sentence:Maximum daily output of two goods for two countries when eac"
+    ],
+    "origin": [],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "micro-p1-b:ap_microeconomics-f05-k0",
+    "subject": "ap_microeconomics",
+    "archetype": "mif_short_labor",
+    "hits": [
+     "number:55"
+    ],
+    "origin": [
+     "MI1-FRQ3"
+    ],
+    "after1015": [
+     "MI1-FRQ3"
+    ],
+    "after1019": []
+   },
+   {
+    "key": "micro-p2-a:ap_microeconomics-m32-k0",
+    "subject": "ap_microeconomics",
+    "archetype": "mi_public_good_efficient",
+    "hits": [
+     "number:26"
+    ],
+    "origin": [
+     "MI2-MC56"
+    ],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "stats-s2b-c:ap_statistics-f02-k0",
+    "subject": "ap_statistics",
+    "archetype": "stfrq_q2_regression",
+    "hits": [
+     "number:18"
+    ],
+    "origin": [
+     "ST1-FRQ2"
+    ],
+    "after1015": [
+     "ST1-FRQ2"
+    ],
+    "after1019": []
+   },
+   {
+    "key": "stats-s2b-c:ap_statistics-f02-k1",
+    "subject": "ap_statistics",
+    "archetype": "stfrq_q2_regression",
+    "hits": [
+     "number:14"
+    ],
+    "origin": [],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "stats-s3b-c:ap_statistics-f02-k0",
+    "subject": "ap_statistics",
+    "archetype": "stfrq_q2_regression",
+    "hits": [
+     "number:16"
+    ],
+    "origin": [
+     "ST2-FRQ2"
+    ],
+    "after1015": [
+     "ST2-FRQ2"
+    ],
+    "after1019": []
+   },
+   {
+    "key": "stats-s3b-c:ap_statistics-f02-k1",
+    "subject": "ap_statistics",
+    "archetype": "stfrq_q2_regression",
+    "hits": [
+     "number:16"
+    ],
+    "origin": [],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "stats-s3b-c:ap_statistics-f02-k2",
+    "subject": "ap_statistics",
+    "archetype": "stfrq_q2_regression",
+    "hits": [
+     "number:16"
+    ],
+    "origin": [],
+    "after1015": [],
+    "after1019": []
+   }
+  ]
+ },
+ "b_title_truncated": {
+  "bySubject": {
+   "biology": {
+    "stock": 8,
+    "published_origin": 2
+   }
+  },
+  "items": [
+   {
+    "key": "bio-p1-b:ap_biology-f02-k0",
+    "subject": "ap_biology",
+    "archetype": "bif_q2_potato",
+    "hits": [
+     "title_cut_mid_sentence"
+    ],
+    "origin": [
+     "BI1-FRQ2"
+    ],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "bio-s2-frq:ap_biology-f04-k0",
+    "subject": "ap_biology",
+    "archetype": "bif_q2_enzymetemp",
+    "hits": [
+     "title_cut_mid_sentence"
+    ],
+    "origin": [],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "bio-s2-frq:ap_biology-f05-k0",
+    "subject": "ap_biology",
+    "archetype": "bif_q2_photosyn",
+    "hits": [
+     "title_cut_mid_sentence"
+    ],
+    "origin": [],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "bio-s2-frq:ap_biology-f06-k0",
+    "subject": "ap_biology",
+    "archetype": "bif_q2_popgrowth",
+    "hits": [
+     "title_cut_mid_sentence"
+    ],
+    "origin": [],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "bio-v3a:ap_biology-f03-k0",
+    "subject": "ap_biology",
+    "archetype": "bif_q2_receptorsat",
+    "hits": [
+     "title_cut_mid_sentence"
+    ],
+    "origin": [],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "bio-v3a:ap_biology-f03-k1",
+    "subject": "ap_biology",
+    "archetype": "bif_q2_receptorsat",
+    "hits": [
+     "title_cut_mid_sentence"
+    ],
+    "origin": [],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "bio-v3a:ap_biology-f04-k0",
+    "subject": "ap_biology",
+    "archetype": "bif_q2_allelefreq",
+    "hits": [
+     "title_cut_mid_sentence"
+    ],
+    "origin": [
+     "BI2-FRQ2"
+    ],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "bio-v3a:ap_biology-f04-k1",
+    "subject": "ap_biology",
+    "archetype": "bif_q2_allelefreq",
+    "hits": [
+     "title_cut_mid_sentence"
+    ],
+    "origin": [],
+    "after1015": [],
+    "after1019": []
+   }
+  ]
+ },
+ "d_bio_fork_direction": {
+  "bySubject": {
+   "biology": {
+    "stock": 2,
+    "published_origin": 1
+   }
+  },
+  "items": [
+   {
+    "key": "bio-p1-b:ap_biology-f05-k0",
+    "subject": "ap_biology",
+    "archetype": "bif_q5_replication",
+    "hits": [
+     "fork_direction_not_in_student_text"
+    ],
+    "origin": [],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "bio-s2-frq:ap_biology-f21-k0",
+    "subject": "ap_biology",
+    "archetype": "bif_q5_replication",
+    "hits": [
+     "fork_direction_not_in_student_text"
+    ],
+    "origin": [
+     "BI2-FRQ5"
+    ],
+    "after1015": [],
+    "after1019": []
+   }
+  ]
+ },
+ "d_bio_potato_solute_potential": {
+  "bySubject": {
+   "biology": {
+    "stock": 1,
+    "published_origin": 1
+   }
+  },
+  "items": [
+   {
+    "key": "bio-p1-b:ap_biology-f02-k0",
+    "subject": "ap_biology",
+    "archetype": "bif_q2_potato",
+    "hits": [
+     "solute_potential_greater"
+    ],
+    "origin": [
+     "BI1-FRQ2"
+    ],
+    "after1015": [],
+    "after1019": []
+   }
+  ]
+ },
+ "d_bio_uv_dose_unstated": {
+  "bySubject": {
+   "biology": {
+    "stock": 1,
+    "published_origin": 1
+   }
+  },
+  "items": [
+   {
+    "key": "bio-v3a:ap_biology-f06-k0",
+    "subject": "ap_biology",
+    "archetype": "bif_q3_uvbacteria",
+    "hits": [
+     "uv_dose_lethality_unstated"
+    ],
+    "origin": [
+     "BI1-FRQ3"
+    ],
+    "after1015": [],
+    "after1019": []
+   }
+  ]
+ },
+ "d_bio_population_stops_changing": {
+  "bySubject": {
+   "biology": {
+    "stock": 3,
+    "published_origin": 1
+   }
+  },
+  "items": [
+   {
+    "key": "bio-v2a:ap_biology-m31-k0",
+    "subject": "ap_biology",
+    "archetype": "bis_population_set",
+    "hits": [
+     "stops_changing_but_table_still_changes"
+    ],
+    "origin": [],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "bio-v2a:ap_biology-m31-k1",
+    "subject": "ap_biology",
+    "archetype": "bis_population_set",
+    "hits": [
+     "stops_changing_but_table_still_changes"
+    ],
+    "origin": [],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "bio-v2a:ap_biology-m31-k2",
+    "subject": "ap_biology",
+    "archetype": "bis_population_set",
+    "hits": [
+     "stops_changing_but_table_still_changes"
+    ],
+    "origin": [
+     "BI2-MC53"
+    ],
+    "after1015": [],
+    "after1019": []
+   }
+  ]
+ },
+ "d_stats_phat_not_count_over_n": {
+  "bySubject": {
+   "statistics": {
+    "stock": 1,
+    "published_origin": 1
+   }
+  },
+  "items": [
+   {
+    "key": "stats-s1-h-final:ap_statistics-m03-k0",
+    "subject": "ap_statistics",
+    "archetype": "st_pvalue_interpretation",
+    "hits": [
+     "p_hat_0.459_is_not_count_over_n_200"
+    ],
+    "origin": [
+     "ST1-MC19"
+    ],
+    "after1015": [],
+    "after1019": []
+   }
+  ]
+ },
+ "d_phys_collision_rounded_premise": {
+  "bySubject": {
+   "physics_1": {
+    "stock": 1,
+    "published_origin": 1
+   }
+  },
+  "items": [
+   {
+    "key": "phys-s3-a:ap_physics_1-m24-k0",
+    "subject": "ap_physics_1",
+    "archetype": "ph_evid_collision_data",
+    "hits": [
+     "displayed_u1_rounded",
+     "displayed_u2_rounded"
+    ],
+    "origin": [
+     "PH3-MC24"
+    ],
+    "after1015": [],
+    "after1019": []
+   }
+  ]
+ },
+ "d_calc_smoothness_premise": {
+  "bySubject": {
+   "calculus_ab": {
+    "stock": 1,
+    "published_origin": 1
+   },
+   "calculus_bc": {
+    "stock": 5,
+    "published_origin": 3
+   }
+  },
+  "items": [
+   {
+    "key": "bc-topup-final:ap_calculus_bc-m04-k0",
+    "subject": "ap_calculus_bc",
+    "archetype": "lagrange_graph",
+    "hits": [
+     "all_order_derivatives_with_piecewise_linear_graph"
+    ],
+    "origin": [],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "bc-topup-final:ap_calculus_bc-m04-k1",
+    "subject": "ap_calculus_bc",
+    "archetype": "lagrange_graph",
+    "hits": [
+     "all_order_derivatives_with_piecewise_linear_graph"
+    ],
+    "origin": [
+     "BC3-MC19"
+    ],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "s1-graph-ab-final:ap_calculus_ab-m24-k0",
+    "subject": "ap_calculus_ab",
+    "archetype": "g_lhopital_graph",
+    "hits": [
+     "differentiable_premise_with_segment_graphs"
+    ],
+    "origin": [
+     "AB3-MC27"
+    ],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "s2-graph-bc-final:ap_calculus_bc-m02-k0",
+    "subject": "ap_calculus_bc",
+    "archetype": "g_lagrange_decimal_calc",
+    "hits": [
+     "all_order_derivatives_with_piecewise_linear_graph"
+    ],
+    "origin": [
+     "BC2-MC38"
+    ],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "s2-graph-bc-final:ap_calculus_bc-m05-k0",
+    "subject": "ap_calculus_bc",
+    "archetype": "g_taylor_deriv_graph",
+    "hits": [
+     "all_order_derivatives_with_piecewise_linear_graph"
+    ],
+    "origin": [],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "s3a-graph-bc-final:ap_calculus_bc-m02-k0",
+    "subject": "ap_calculus_bc",
+    "archetype": "g_lagrange_p2_calc",
+    "hits": [
+     "all_order_derivatives_with_piecewise_linear_graph"
+    ],
+    "origin": [
+     "BC1-MC35"
+    ],
+    "after1015": [],
+    "after1019": []
+   }
+  ]
+ },
+ "d_calc_concavity_reference": {
+  "bySubject": {
+   "calculus_ab": {
+    "stock": 6,
+    "published_origin": 5,
+    "published_after1015": 2
+   }
+  },
+  "items": [
+   {
+    "key": "run2:ap_calculus_ab-f02-k0",
+    "subject": "ap_calculus_ab",
+    "archetype": "frq_fprime_graph",
+    "hits": [
+     "f_prime_increasing_equated_with_strict_f_double_prime_positive"
+    ],
+    "origin": [
+     "BC3-FRQ3"
+    ],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "run2:ap_calculus_ab-f02-k1",
+    "subject": "ap_calculus_ab",
+    "archetype": "frq_fprime_graph",
+    "hits": [
+     "f_prime_increasing_equated_with_strict_f_double_prime_positive"
+    ],
+    "origin": [
+     "BC2-FRQ3"
+    ],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "run2:ap_calculus_ab-f02-k2",
+    "subject": "ap_calculus_ab",
+    "archetype": "frq_fprime_graph",
+    "hits": [
+     "f_prime_increasing_equated_with_strict_f_double_prime_positive"
+    ],
+    "origin": [
+     "AB3-FRQ4"
+    ],
+    "after1015": [
+     "AB3-FRQ4"
+    ],
+    "after1019": []
+   },
+   {
+    "key": "run2:ap_calculus_ab-f02-k3",
+    "subject": "ap_calculus_ab",
+    "archetype": "frq_fprime_graph",
+    "hits": [
+     "f_prime_increasing_equated_with_strict_f_double_prime_positive"
+    ],
+    "origin": [
+     "AB2-FRQ4"
+    ],
+    "after1015": [
+     "AB2-FRQ4"
+    ],
+    "after1019": []
+   },
+   {
+    "key": "s1a-final:ap_calculus_ab-f02-k0",
+    "subject": "ap_calculus_ab",
+    "archetype": "frq_fprime_graph",
+    "hits": [
+     "f_prime_increasing_equated_with_strict_f_double_prime_positive"
+    ],
+    "origin": [
+     "BC1-FRQ5"
+    ],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "s1a-final:ap_calculus_ab-f02-k1",
+    "subject": "ap_calculus_ab",
+    "archetype": "frq_fprime_graph",
+    "hits": [
+     "f_prime_increasing_equated_with_strict_f_double_prime_positive"
+    ],
+    "origin": [],
+    "after1015": [],
+    "after1019": []
+   }
+  ]
+ },
+ "d_csa_scope_and_points": {
+  "bySubject": {
+   "computer_science_a": {
+    "stock": 28,
+    "published_origin": 10
+   }
+  },
+  "items": [
+   {
+    "key": "csa-p1-a:ap_computer_science_a-m03-k0",
+    "subject": "ap_computer_science_a",
+    "archetype": "cs_compile_error",
+    "hits": [
+     "char_long_float_in_options_out_of_scope"
+    ],
+    "origin": [
+     "CSA1-MC1"
+    ],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "csa-p1-a:ap_computer_science_a-m03-k1",
+    "subject": "ap_computer_science_a",
+    "archetype": "cs_compile_error",
+    "hits": [
+     "char_long_float_in_options_out_of_scope"
+    ],
+    "origin": [],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "csa-p1-b:ap_computer_science_a-f01-k0",
+    "subject": "ap_computer_science_a",
+    "archetype": "csf_methods_pass",
+    "hits": [
+     "frq_points_9_not_official_7_7_5_6"
+    ],
+    "origin": [
+     "CSA1-FRQ1"
+    ],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "csa-p1-b:ap_computer_science_a-f01-k1",
+    "subject": "ap_computer_science_a",
+    "archetype": "csf_methods_pass",
+    "hits": [
+     "frq_points_9_not_official_7_7_5_6"
+    ],
+    "origin": [],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "csa-p1-b:ap_computer_science_a-f02-k0",
+    "subject": "ap_computer_science_a",
+    "archetype": "csf_class_steps",
+    "hits": [
+     "frq_points_9_not_official_7_7_5_6"
+    ],
+    "origin": [
+     "CSA2-FRQ2"
+    ],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "csa-p1-b:ap_computer_science_a-f02-k1",
+    "subject": "ap_computer_science_a",
+    "archetype": "csf_class_steps",
+    "hits": [
+     "frq_points_9_not_official_7_7_5_6"
+    ],
+    "origin": [],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "csa-p1-b:ap_computer_science_a-f03-k0",
+    "subject": "ap_computer_science_a",
+    "archetype": "csf_list_above",
+    "hits": [
+     "frq_points_9_not_official_7_7_5_6"
+    ],
+    "origin": [],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "csa-p1-b:ap_computer_science_a-f04-k0",
+    "subject": "ap_computer_science_a",
+    "archetype": "csf_2d_best_row",
+    "hits": [
+     "frq_points_9_not_official_7_7_5_6"
+    ],
+    "origin": [],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "csa-s2-mc-a:ap_computer_science_a-m03-k0",
+    "subject": "ap_computer_science_a",
+    "archetype": "cs_char_arith",
+    "hits": [
+     "char_arithmetic_out_of_scope"
+    ],
+    "origin": [],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "csa-s2-mc-a:ap_computer_science_a-m03-k1",
+    "subject": "ap_computer_science_a",
+    "archetype": "cs_char_arith",
+    "hits": [
+     "char_arithmetic_out_of_scope"
+    ],
+    "origin": [
+     "CSA2-MC3"
+    ],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "csa-s2-frq-a:ap_computer_science_a-f01-k0",
+    "subject": "ap_computer_science_a",
+    "archetype": "csf_methods_runs",
+    "hits": [
+     "frq_points_9_not_official_7_7_5_6"
+    ],
+    "origin": [],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "csa-s2-frq-a:ap_computer_science_a-f01-k1",
+    "subject": "ap_computer_science_a",
+    "archetype": "csf_methods_runs",
+    "hits": [
+     "frq_points_9_not_official_7_7_5_6"
+    ],
+    "origin": [],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "csa-s2-frq-a:ap_computer_science_a-f02-k0",
+    "subject": "ap_computer_science_a",
+    "archetype": "csf_methods_leap",
+    "hits": [
+     "frq_points_9_not_official_7_7_5_6"
+    ],
+    "origin": [],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "csa-s2-frq-a:ap_computer_science_a-f03-k0",
+    "subject": "ap_computer_science_a",
+    "archetype": "csf_methods_digits",
+    "hits": [
+     "frq_points_9_not_official_7_7_5_6"
+    ],
+    "origin": [
+     "CSA2-FRQ1"
+    ],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "csa-s2-frq-a:ap_computer_science_a-f04-k0",
+    "subject": "ap_computer_science_a",
+    "archetype": "csf_class_counter",
+    "hits": [
+     "frq_points_9_not_official_7_7_5_6"
+    ],
+    "origin": [
+     "CSA1-FRQ2"
+    ],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "csa-s2-frq-a:ap_computer_science_a-f04-k1",
+    "subject": "ap_computer_science_a",
+    "archetype": "csf_class_counter",
+    "hits": [
+     "frq_points_9_not_official_7_7_5_6"
+    ],
+    "origin": [],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "csa-s2-frq-a:ap_computer_science_a-f05-k0",
+    "subject": "ap_computer_science_a",
+    "archetype": "csf_class_scoreboard",
+    "hits": [
+     "frq_points_9_not_official_7_7_5_6"
+    ],
+    "origin": [],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "csa-s2-frq-a:ap_computer_science_a-f05-k1",
+    "subject": "ap_computer_science_a",
+    "archetype": "csf_class_scoreboard",
+    "hits": [
+     "frq_points_9_not_official_7_7_5_6"
+    ],
+    "origin": [],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "csa-s2-frq-a:ap_computer_science_a-f06-k0",
+    "subject": "ap_computer_science_a",
+    "archetype": "csf_class_stock",
+    "hits": [
+     "frq_points_9_not_official_7_7_5_6"
+    ],
+    "origin": [],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "csa-s2-frq-a:ap_computer_science_a-f06-k1",
+    "subject": "ap_computer_science_a",
+    "archetype": "csf_class_stock",
+    "hits": [
+     "frq_points_9_not_official_7_7_5_6"
+    ],
+    "origin": [],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "csa-s2-frq-b:ap_computer_science_a-f01-k0",
+    "subject": "ap_computer_science_a",
+    "archetype": "csf_list_reviews",
+    "hits": [
+     "frq_points_9_not_official_7_7_5_6"
+    ],
+    "origin": [
+     "CSA1-FRQ3"
+    ],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "csa-s2-frq-b:ap_computer_science_a-f02-k0",
+    "subject": "ap_computer_science_a",
+    "archetype": "csf_list_runs",
+    "hits": [
+     "frq_points_9_not_official_7_7_5_6"
+    ],
+    "origin": [
+     "CSA2-FRQ3"
+    ],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "csa-s2-frq-b:ap_computer_science_a-f03-k0",
+    "subject": "ap_computer_science_a",
+    "archetype": "csf_list_remove_short",
+    "hits": [
+     "frq_points_9_not_official_7_7_5_6"
+    ],
+    "origin": [],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "csa-s2-frq-b:ap_computer_science_a-f04-k0",
+    "subject": "ap_computer_science_a",
+    "archetype": "csf_2d_shift",
+    "hits": [
+     "frq_points_9_not_official_7_7_5_6"
+    ],
+    "origin": [
+     "CSA1-FRQ4"
+    ],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "csa-s2-frq-b:ap_computer_science_a-f05-k0",
+    "subject": "ap_computer_science_a",
+    "archetype": "csf_2d_border",
+    "hits": [
+     "frq_points_9_not_official_7_7_5_6"
+    ],
+    "origin": [],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "csa-s2-frq-b:ap_computer_science_a-f06-k0",
+    "subject": "ap_computer_science_a",
+    "archetype": "csf_2d_transpose",
+    "hits": [
+     "frq_points_9_not_official_7_7_5_6"
+    ],
+    "origin": [],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "csa-s2-short-frq:ap_computer_science_a-f01-k0",
+    "subject": "ap_computer_science_a",
+    "archetype": "csf_2d_best_row",
+    "hits": [
+     "frq_points_9_not_official_7_7_5_6"
+    ],
+    "origin": [
+     "CSA2-FRQ4"
+    ],
+    "after1015": [],
+    "after1019": []
+   },
+   {
+    "key": "csa-s2-short-frq:ap_computer_science_a-f02-k0",
+    "subject": "ap_computer_science_a",
+    "archetype": "csf_2d_transpose",
+    "hits": [
+     "frq_points_9_not_official_7_7_5_6"
+    ],
+    "origin": [],
+    "after1015": [],
+    "after1019": []
+   }
+  ]
+ },
+ "d_stats_regression_reference_range": {
+  "bySubject": {
+   "statistics": {
+    "stock": 1
+   }
+  },
+  "items": [
+   {
+    "key": "stats-s3b-c:ap_statistics-f02-k1",
+    "subject": "ap_statistics",
+    "archetype": "stfrq_q2_regression",
+    "hits": [
+     "reference_range_1_to_9_but_data_2_to_9"
+    ],
+    "origin": [],
+    "after1015": [],
+    "after1019": []
+   }
+  ]
+ }
+}
