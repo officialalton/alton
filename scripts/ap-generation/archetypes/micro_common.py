@@ -237,6 +237,11 @@ def mk(arch, topic, skill, stem, key, ds, rng, *, concept, path, thinking=None, 
         key.why = kwhy
     stem = _name_curves(stem, stim)
     p = pack(arch, topic, skill, "allowed", stem, key, ds, rng, stimulus=stim, est=max(45, min(130, est)), facts=facts or [], n_total=5)
+    # 표 자료의 description 은 학생 화면에 나오지 않는다. 풀이에 필요한 값(비용·가격 같은 조건)이 거기에만 있으면 학생은 답을 정할 수 없다(외부 검수 2026-10-15 AP-002).
+    from frq_visible import hidden_setup
+    bad = hidden_setup(p, "mc")
+    if bad:
+        raise ValueError("stimulus_setup_hidden:" + ",".join(bad))
     shown = [o for i, o in enumerate(p["options"]) if i != p["key_index"]]
     seen = set()
     for o in shown:

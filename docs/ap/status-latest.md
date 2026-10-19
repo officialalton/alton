@@ -109,3 +109,6 @@
 - 본문: `docs/ap/englang-groundwork.md` §7(FRQ 스키마 el-frq-1)·§8(구현)·§9(결과). 지출 $22.73(원장 $88.0814 → $110.8147, 영어 상한 $24).
 - 적재할 배치: `el-p1`(MC 묶음 3 + FRQ 3)·`el-p2a`(MC 묶음 14)·`el-p2b`(FRQ 3), 증거 `evidence-el.json`(23 후보, 390x844·1280x800 144건 전부 통과), 렌더 보고서 갱신. EL1 정확 배정 `exact-assign-el-el1.json`(가상 0, 위반 0). **EL2 는 재고 부족**(MC 읽기 ≥16·글쓰기 ≥6문항, ≈ $3.5 필요 — 상한 상향 결정 대기).
 - 변경: `itemContentHash` 가 영어 원형(el_·elfrq_)에는 지문·문항(set_intro·items)을 포함(다른 과목 해시 불변). `apPassageForDisplay` 영어 표지(`ALTON original passage`)가 있으면 stem 인용 오탐 없이 표시·수식 변환 없음. 에세이 입력칸(18줄·단어 수). `local-demo-seed.ts` 연습 세트 분할이 문제 행 수 기준(지문 묶음이 20문항을 넘겨도 전부 포함).
+## 외부 AP 검수 유형 단위 수정 (2026-10-19)
+- 본문·표: `docs/audits/ap-type-defect-scan-20261019.md`. 같은 생성기 결함을 원형 20개 계열에서 고치고(`test_audit_1019.py`·Vitest `audit-1019-type-fixes.test.ts`), 재고·공개 구성의 같은 유형 문항을 전수 목록화(`data/audit/ap-type-defect-scan-20261019.json`)했다. 원형 수정은 저장된 문항을 바꾸지 않으므로 공개 FRQ 11건은 복제 후보 `supp-fix1019`(새 키 `fix1019:…`) + 교체안 9개(`*-audit-1019-swap-plan.json`)로 고친다.
+- 남은 일(오너 실행): `supp-fix1019` 적재(관리자 '재고 관리') → 화면 증거·렌더 보고 → 새 버전 초안. 독립 풀이 38/38 통과(`data/audit/ap-fix1019-independent-solve.json`, 유료 약 $0.73). 미처리(§6): CSA FRQ 배점 9→7/7/5/6 원형 쪽·`cs_char_arith` 퇴역(JDK 필요), 에세이 참고답 점수·해설 충돌(원형 없음).

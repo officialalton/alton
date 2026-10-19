@@ -1,3 +1,4 @@
+import { hasGraphAndExpressionForSameCurves } from "../graph-expression-redundancy";
 import { describe, expect, it } from "vitest";
 import {
   generateLinearTwoVarModel,
@@ -124,11 +125,11 @@ describe("renderLinearTwoVarProblem — 렌더링은 모델 값만 그대로 옮
     expect(rendered.explanation).toContain(String(model.intersection!.x));
   });
 
-  it("num_solutions 문항은 그래프를 만들지 않고, 그 외 문항은 두 직선을 그린 그래프를 만든다", () => {
-    const noSol = generateLinearTwoVarModel({ difficulty: "medium", questionKind: "num_solutions" });
-    expect(renderLinearTwoVarProblem(noSol).figure).toBeNull();
-    const withSol = generateLinearTwoVarModel({ difficulty: "medium", questionKind: "intersection_x" });
-    const rendered = renderLinearTwoVarProblem(withSol);
-    expect(rendered.figure?.type).toBe("plane");
+  it("지문에 두 식을 주는 문항은 같은 두 직선의 그래프를 붙이지 않는다(한 표현만 — 외부 검수 2026-10-18)", () => {
+    for (const questionKind of ["num_solutions", "intersection_x", "intersection_y", "intersection_sum", "slope", "intercept"] as const) {
+      const rendered = renderLinearTwoVarProblem(generateLinearTwoVarModel({ difficulty: "medium", questionKind }));
+      expect(rendered.figure).toBeNull();
+      expect(hasGraphAndExpressionForSameCurves(rendered.figure as never, rendered.passage)).toBe(false);
+    }
   });
 });

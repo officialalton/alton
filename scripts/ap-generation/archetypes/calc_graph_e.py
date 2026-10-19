@@ -36,7 +36,7 @@ def g_lagrange_decimal_calc(rng):
     ds = [("Uses the largest signed value of the graph on [0, %s] instead of the largest absolute value." % a, mx * a ** 4 / 24), ("Takes the maximum over the whole graph, not only over [0, %s]." % a, Mall * a ** 4 / 24),
           ("Divides by 3! instead of 4!.", M * a ** 4 / 6), ("Uses the power 3 instead of 4 for the x-term.", M * a ** 3 / 24)]
     pool = dopts_local(ds, key)
-    stem = f"The third-degree Maclaurin polynomial $P_3$ of a function $f$ with derivatives of all orders is used to estimate $f({a})$. The fourth derivative of $f$ is graphed on $0\\le x\\le 3$ and consists of line segments, as shown. Use the Lagrange error bound to find the least upper bound for the error $|f({a})-P_3({a})|$ that the graph supports."
+    stem = f"The third-degree Maclaurin polynomial $P_3$ of a function $f$ that has a continuous fourth derivative on $0\\le x\\le 3$ is used to estimate $f({a})$. The fourth derivative of $f$ is graphed and consists of line segments, as shown. Use the Lagrange error bound to find the least upper bound for the error $|f({a})-P_3({a})|$ that the graph supports."
     k = Opt(dec(key), True, "M x^4/4! with M = the maximum of |f^(4)| on [0, a] read from the graph, evaluated with a calculator.", key)
     bpr = _bpc("g_lagrange_decimal_calc", "10.12", "1.E", "required", "Apply the Lagrange error bound with a bound read from a graph at a non-integer point",
                ["Read the largest absolute value of f^(4) on [0, a] from the graph", "Apply M |x|^(n+1)/(n+1)! with n = 3", "Evaluate with a calculator"],
@@ -78,7 +78,7 @@ def g_taylor_deriv_graph(rng):
     ds = [("Leaves out the factorial: f''(0) x^2 instead of f''(0) x^2/2!.", k0 + f1 * c + f2 * c * c), ("Uses f'(%d) from the graph instead of f'(0) for the linear term." % c, k0 + fp.at(c) * c + f2 * c * c / 2),
           ("Stops at the linear term and leaves out the quadratic term.", k0 + f1 * c), ("Uses f''(0) x/2 instead of f''(0) x^2/2.", k0 + f1 * c + f2 * c / 2)]
     pool = opts(ds, key, fx)
-    stem = f"The function $f$ has derivatives of all orders and $f(0)={k0}$. The graph of $f'$, consisting of line segments, is shown for $0\\le x\\le 4$. Let $P_2$ be the second-degree Maclaurin polynomial for $f$. What is $P_2({c})$?"
+    stem = f"The function $f$ has a continuous derivative on $0\\le x\\le 4$, and $f(0)={k0}$. The graph of $f'$, consisting of line segments, is shown for $0\\le x\\le 4$. Let $P_2$ be the second-degree Maclaurin polynomial for $f$, and assume that $f''(0)$ exists. What is $P_2({c})$?"
     k = Opt(fx(key), True, "P2(x) = f(0) + f'(0) x + f''(0) x^2/2!; f'(0) is the height of the graph at 0 and f''(0) is the slope of the first segment.", key)
     bpr = _bpc("g_taylor_deriv_graph", "10.11", "2.B", "not_allowed", "Build a Maclaurin polynomial using f'(0) and f''(0) read from the graph of f'",
                ["Read f'(0) from the graph and f''(0) as the slope of the graph of f' at 0", "Form P2(x) = f(0) + f'(0)x + f''(0)x^2/2", "Evaluate at the given x"],

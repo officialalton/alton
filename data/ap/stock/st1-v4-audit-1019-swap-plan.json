@@ -1,0 +1,33 @@
+{
+ "kind": "ap_new_version_swap_plan",
+ "set": "ST1",
+ "sourceSetName": "AP Statistics — Practice Exam 1",
+ "sourceVersionNo": 3,
+ "generatedBy": "scripts/audit/ap-audit-typefix-1019-plans.ts (type-level fix of external audit 2026-10-15, docs/audits/ap-type-defect-scan-20261019.md)",
+ "note": "Swaps use removeKey (positions resolve from the live set). Apply after the candidates in data/ap/stock/supp-fix1019-items.json are loaded, converted, render/screen-verified and review_env_ready. Each candidate is a copy of the published item with only the student-visible setup (title) corrected; the answer key is unchanged.",
+ "swapCount": 1,
+ "verifierViolations": [],
+ "requiresConvertedCandidates": [
+  "fix1019:ap_statistics-tf08-k0"
+ ],
+ "swaps": [
+  {
+   "section": "ap_frq",
+   "removeKey": "stats-s2b-c:ap_statistics-f02-k0",
+   "addKey": "fix1019:ap_statistics-tf08-k0",
+   "reason": "type fix b: ST1 FRQ2 (stfrq_q2_regression) the sample size (18 observations) was only in the invisible description; the title now states it",
+   "remove": {
+    "unit": null,
+    "skill": null,
+    "shared": false,
+    "type": "q2_regression"
+   },
+   "add": {
+    "unit": null,
+    "skill": null,
+    "shared": false,
+    "type": "q2_regression"
+   }
+  }
+ ]
+}

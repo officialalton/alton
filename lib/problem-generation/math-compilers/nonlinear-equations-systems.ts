@@ -778,8 +778,11 @@ function lineRhsGeneral(m: number, k: number): string {
 
 function renderIntersectionProblem(model: NonlinearEqModel, opts?: { figureMode?: "plane" }): CompiledMathProblem {
   const a = model.quadA!, qb = model.quadB!, qc = model.quadC!, m = model.lineM!, k = model.lineK!;
-  const shownBelow = opts?.figureMode === "plane" ? " The graphs of the equations are shown in the xy-plane below." : "";
-  const passage = `Consider the system of equations shown.${shownBelow}\n\n$y = ${quadRhsGeneral(a, qb, qc)}$\n$y = ${lineRhsGeneral(m, k)}$`;
+  // 외부 검수(2026-10-18, Test 1 Math 10·11·15·19번) — plane 은 그래프만 주고 식은 주지 않는다(그래프와 식을 둘 다 주면 한쪽만으로 풀린다).
+  const plane = opts?.figureMode === "plane";
+  const passage = plane
+    ? "The graphs of a quadratic function and a linear function are shown in the xy-plane below."
+    : `Consider the system of equations shown.\n\n$y = ${quadRhsGeneral(a, qb, qc)}$\n$y = ${lineRhsGeneral(m, k)}$`;
   const figure = opts?.figureMode === "plane" ? buildIntersectionPlaneFigure(a, qb, qc, m, k, model.intersectionXs ?? []) : null;
   const B = qb - m, C = qc - k;
   const combinedEqKo = `${quadRhsGeneral(a, B, C).replace("x^2", "x²")} = 0`;
@@ -790,7 +793,7 @@ function renderIntersectionProblem(model: NonlinearEqModel, opts?: { figureMode?
   let explanation: string;
   let explanationEn: string;
   if (model.intersectionSubKind === "count") {
-    question = "How many points of intersection do the graphs of the equations shown have?";
+    question = plane ? "How many points of intersection do the two graphs shown have?" : "How many points of intersection do the graphs of the equations shown have?";
     const d = model.discriminant!;
     const verdictKo = d > 0 ? "0보다 크므로 서로 다른 두 교점을 갖는다." : d === 0 ? "0이므로 교점을 하나 갖는다(직선이 포물선에 접한다)." : "0보다 작으므로 교점이 없다.";
     const verdictEn = d > 0 ? "Since it is greater than 0, there are two distinct intersection points." : d === 0 ? "Since it equals 0, there is exactly one intersection point (the line is tangent to the parabola)." : "Since it is less than 0, there are no intersection points.";
@@ -798,16 +801,20 @@ function renderIntersectionProblem(model: NonlinearEqModel, opts?: { figureMode?
     explanationEn = `Setting the two expressions equal gives ${quadKo} = ${lineKo}, which simplifies to ${combinedEqKo}. The discriminant is B² - 4AC = ${fmt(B)}² - 4×${fmt(a)}×${fmt(C)} = ${fmt(d)}. ${verdictEn} So the answer is ${model.correctAnswer}.`;
   } else if (model.intersectionSubKind === "x_coord") {
     const r = model.intersectionXs![0];
-    question = "What is the x-coordinate of the intersection point of the graphs of the equations shown?";
+    question = plane ? "What is the x-coordinate of the intersection point of the two graphs shown?" : "What is the x-coordinate of the intersection point of the graphs of the equations shown?";
     explanation = `두 식을 같다고 놓으면 ${quadKo} = ${lineKo}이고, 정리하면 ${combinedEqKo}이다. 이 식은 (x ${r >= 0 ? "-" : "+"} ${fmt(Math.abs(r))})² = 0 형태로 인수분해되어 중근 x = ${model.correctAnswer}을 갖는다(직선이 포물선에 한 점에서 접한다). 따라서 교점의 x좌표는 ${model.correctAnswer}이다.`;
     explanationEn = `Setting the two expressions equal gives ${quadKo} = ${lineKo}, which simplifies to ${combinedEqKo}. This factors as (x ${r >= 0 ? "-" : "+"} ${fmt(Math.abs(r))})² = 0, a repeated root x = ${model.correctAnswer} (the line is tangent to the parabola at one point). So the x-coordinate of the intersection point is ${model.correctAnswer}.`;
   } else {
     const [r1, r2] = model.intersectionXs!;
-    question = "What is the sum of the x-coordinates of the two intersection points of the graphs of the equations shown?";
+    question = plane ? "What is the sum of the x-coordinates of the two intersection points of the graphs shown?" : "What is the sum of the x-coordinates of the two intersection points of the graphs of the equations shown?";
     explanation = `두 식을 같다고 놓으면 ${quadKo} = ${lineKo}이고, 정리하면 ${combinedEqKo}이다. 이 식의 두 근은 ${fmt(r1)}, ${fmt(r2)}이며, 두 근의 합은 -B/A = -(${fmt(B)})/${fmt(a)} = ${model.correctAnswer}이다(개별 교점을 따로 구하지 않아도 된다).`;
     explanationEn = `Setting the two expressions equal gives ${quadKo} = ${lineKo}, which simplifies to ${combinedEqKo}. The two roots are ${fmt(r1)} and ${fmt(r2)}, and their sum is -B/A = -(${fmt(B)})/${fmt(a)} = ${model.correctAnswer} (no need to find each intersection point separately).`;
   }
 
+  if (plane) {
+    explanation = `그래프의 두 곡선은 y = ${quadKo}, y = ${lineKo}이다. ` + explanation;
+    explanationEn = `The two graphs are y = ${quadKo} and y = ${lineKo}. ` + explanationEn;
+  }
   const options = [model.correctAnswer, ...model.distractors.map((d) => d.value)];
   const order = [0, 1, 2, 3].sort(() => Math.random() - 0.5);
   const shuffled = order.map((i) => options[i]);

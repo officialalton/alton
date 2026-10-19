@@ -1,0 +1,1986 @@
+{
+ "generatedAt": "2026-10-19",
+ "generator": "scripts/mock-exam-generation/sat-error-report-1018-replacements.ts",
+ "note": "새 problem_versions 후보. 공개 문항·원격 DB 는 직접 수정하지 않는다.",
+ "count": 28,
+ "candidates": [
+  {
+   "report": "(1) 10·11·15·19 그래프 읽기 — 일차함수 함수값(그래프만)",
+   "skill": "linear_functions",
+   "kind": "evaluate",
+   "figurePolicy": "require_plane",
+   "graphAndExpressionDuplicate": false,
+   "problem": {
+    "format": "mc",
+    "figure": {
+     "type": "plane",
+     "axes": {
+      "x": {
+       "min": -11,
+       "max": 11
+      },
+      "y": {
+       "min": -28,
+       "max": 30
+      }
+     },
+     "objects": [
+      {
+       "id": "f",
+       "kind": "line",
+       "slope": 2,
+       "intercept": 1,
+       "label": "f"
+      }
+     ],
+     "grid": true
+    },
+    "passage": "The graph of y = f(x) is shown in the xy-plane below.\n\nWhat is f(-7)?",
+    "stimulus": "The graph of y = f(x) is shown in the xy-plane below.",
+    "question": "What is f(-7)?",
+    "needsFigure": false,
+    "options": [
+     "-6",
+     "13",
+     "-13",
+     "3"
+    ],
+    "correctIndex": 2,
+    "answers": null,
+    "statements": null,
+    "explanation": "그래프에서 x = -7일 때의 y값을 읽으면 f(-7) = -13이다.",
+    "explanationEn": "Reading the graph at x = -7 gives y = -13, so f(-7) = -13.",
+    "difficulty": "medium",
+    "distractorRationales": [
+     {
+      "index": 1,
+      "plausible_because": "같은 함수·같은 점에서 나올 수 있는 실제 계산 오류다.",
+      "matches": "같은 함수에서 계산되었다.",
+      "why_wrong": "곱셈에서 부호를 반대로 계산했다.",
+      "kind": "sign_error"
+     },
+     {
+      "index": 0,
+      "plausible_because": "같은 함수·같은 점에서 나올 수 있는 실제 계산 오류다.",
+      "matches": "같은 함수에서 계산되었다.",
+      "why_wrong": "기울기를 곱하지 않고 x값을 그대로 더했다.",
+      "kind": "formula_misuse"
+     },
+     {
+      "index": 3,
+      "plausible_because": "같은 함수·같은 점에서 나올 수 있는 실제 계산 오류다.",
+      "matches": "같은 함수에서 계산되었다.",
+      "why_wrong": "대입할 x값 대신 1을 곱한 것처럼 계산했다(x0를 빼먹었다).",
+      "kind": "condition_ignored"
+     }
+    ],
+    "difficultyRationale": "",
+    "design": null,
+    "subpattern": "evaluate"
+   }
+  },
+  {
+   "report": "(1) 10·11·15·19 그래프 읽기 — 일차함수 함수값(그래프만)",
+   "skill": "linear_functions",
+   "kind": "evaluate",
+   "figurePolicy": "require_plane",
+   "graphAndExpressionDuplicate": false,
+   "problem": {
+    "format": "mc",
+    "figure": {
+     "type": "plane",
+     "axes": {
+      "x": {
+       "min": -11,
+       "max": 11
+      },
+      "y": {
+       "min": -41,
+       "max": 45
+      }
+     },
+     "objects": [
+      {
+       "id": "f",
+       "kind": "line",
+       "slope": 3,
+       "intercept": 2,
+       "label": "f"
+      }
+     ],
+     "grid": true
+    },
+    "passage": "The graph of y = f(x) is shown in the xy-plane below.\n\nWhat is f(6)?",
+    "stimulus": "The graph of y = f(x) is shown in the xy-plane below.",
+    "question": "What is f(6)?",
+    "needsFigure": false,
+    "options": [
+     "20",
+     "-20",
+     "8",
+     "5"
+    ],
+    "correctIndex": 0,
+    "answers": null,
+    "statements": null,
+    "explanation": "그래프에서 x = 6일 때의 y값을 읽으면 f(6) = 20이다.",
+    "explanationEn": "Reading the graph at x = 6 gives y = 20, so f(6) = 20.",
+    "difficulty": "medium",
+    "distractorRationales": [
+     {
+      "index": 1,
+      "plausible_because": "같은 함수·같은 점에서 나올 수 있는 실제 계산 오류다.",
+      "matches": "같은 함수에서 계산되었다.",
+      "why_wrong": "곱셈에서 부호를 반대로 계산했다.",
+      "kind": "sign_error"
+     },
+     {
+      "index": 2,
+      "plausible_because": "같은 함수·같은 점에서 나올 수 있는 실제 계산 오류다.",
+      "matches": "같은 함수에서 계산되었다.",
+      "why_wrong": "기울기를 곱하지 않고 x값을 그대로 더했다.",
+      "kind": "formula_misuse"
+     },
+     {
+      "index": 3,
+      "plausible_because": "같은 함수·같은 점에서 나올 수 있는 실제 계산 오류다.",
+      "matches": "같은 함수에서 계산되었다.",
+      "why_wrong": "대입할 x값 대신 1을 곱한 것처럼 계산했다(x0를 빼먹었다).",
+      "kind": "condition_ignored"
+     }
+    ],
+    "difficultyRationale": "",
+    "design": null,
+    "subpattern": "evaluate"
+   }
+  },
+  {
+   "report": "(1) 일차함수 x 역산(그래프만)",
+   "skill": "linear_functions",
+   "kind": "find_x_for_value",
+   "figurePolicy": "require_plane",
+   "graphAndExpressionDuplicate": false,
+   "problem": {
+    "format": "mc",
+    "figure": {
+     "type": "plane",
+     "axes": {
+      "x": {
+       "min": -11,
+       "max": 11
+      },
+      "y": {
+       "min": -38,
+       "max": 48
+      }
+     },
+     "objects": [
+      {
+       "id": "f",
+       "kind": "line",
+       "slope": 3,
+       "intercept": 5,
+       "label": "f"
+      }
+     ],
+     "grid": true
+    },
+    "passage": "The graph of y = f(x) is shown in the xy-plane below.\n\nFor what value of x does f(x) = 2?",
+    "stimulus": "The graph of y = f(x) is shown in the xy-plane below.",
+    "question": "For what value of x does f(x) = 2?",
+    "needsFigure": false,
+    "options": [
+     "-1",
+     "2",
+     "-3",
+     "1"
+    ],
+    "correctIndex": 0,
+    "answers": null,
+    "statements": null,
+    "explanation": "그래프에서 y = 2인 점의 x좌표를 읽으면 x = -1이다.",
+    "explanationEn": "On the graph, the point with y = 2 has x = -1.",
+    "difficulty": "medium",
+    "distractorRationales": [
+     {
+      "index": 3,
+      "plausible_because": "같은 함수·같은 점에서 나올 수 있는 실제 계산 오류다.",
+      "matches": "같은 함수에서 계산되었다.",
+      "why_wrong": "이항할 때 부호를 바꾸지 않았다.",
+      "kind": "sign_error"
+     },
+     {
+      "index": 2,
+      "plausible_because": "같은 함수·같은 점에서 나올 수 있는 실제 계산 오류다.",
+      "matches": "같은 함수에서 계산되었다.",
+      "why_wrong": "상수항을 이항하지 않고 target 값을 그대로 m으로 나눴다.",
+      "kind": "formula_misuse"
+     },
+     {
+      "index": 1,
+      "plausible_because": "같은 함수·같은 점에서 나올 수 있는 실제 계산 오류다.",
+      "matches": "같은 함수에서 계산되었다.",
+      "why_wrong": "x를 구하지 않고 f(x)의 값을 그대로 답으로 썼다.",
+      "kind": "condition_ignored"
+     }
+    ],
+    "difficultyRationale": "",
+    "design": null,
+    "subpattern": "find_x_for_value"
+   }
+  },
+  {
+   "report": "(1) 일차함수 x 역산(그래프만)",
+   "skill": "linear_functions",
+   "kind": "find_x_for_value",
+   "figurePolicy": "require_plane",
+   "graphAndExpressionDuplicate": false,
+   "problem": {
+    "format": "mc",
+    "figure": {
+     "type": "plane",
+     "axes": {
+      "x": {
+       "min": -11,
+       "max": 11
+      },
+      "y": {
+       "min": -69,
+       "max": 75
+      }
+     },
+     "objects": [
+      {
+       "id": "f",
+       "kind": "line",
+       "slope": -5,
+       "intercept": 3,
+       "label": "f"
+      }
+     ],
+     "grid": true
+    },
+    "passage": "The graph of y = f(x) is shown in the xy-plane below.\n\nFor what value of x does f(x) = -37?",
+    "stimulus": "The graph of y = f(x) is shown in the xy-plane below.",
+    "question": "For what value of x does f(x) = -37?",
+    "needsFigure": false,
+    "options": [
+     "-40",
+     "-37",
+     "8",
+     "-8"
+    ],
+    "correctIndex": 2,
+    "answers": null,
+    "statements": null,
+    "explanation": "그래프에서 y = -37인 점의 x좌표를 읽으면 x = 8이다.",
+    "explanationEn": "On the graph, the point with y = -37 has x = 8.",
+    "difficulty": "medium",
+    "distractorRationales": [
+     {
+      "index": 3,
+      "plausible_because": "같은 함수·같은 점에서 나올 수 있는 실제 계산 오류다.",
+      "matches": "같은 함수에서 계산되었다.",
+      "why_wrong": "이항할 때 부호를 바꾸지 않았다.",
+      "kind": "sign_error"
+     },
+     {
+      "index": 0,
+      "plausible_because": "같은 함수·같은 점에서 나올 수 있는 실제 계산 오류다.",
+      "matches": "같은 함수에서 계산되었다.",
+      "why_wrong": "상수항을 이항하지 않고 target 값을 그대로 m으로 나눴다.",
+      "kind": "formula_misuse"
+     },
+     {
+      "index": 1,
+      "plausible_because": "같은 함수·같은 점에서 나올 수 있는 실제 계산 오류다.",
+      "matches": "같은 함수에서 계산되었다.",
+      "why_wrong": "x를 구하지 않고 f(x)의 값을 그대로 답으로 썼다.",
+      "kind": "condition_ignored"
+     }
+    ],
+    "difficultyRationale": "",
+    "design": null,
+    "subpattern": "find_x_for_value"
+   }
+  },
+  {
+   "report": "(1) 일차함수 기울기(그래프만)",
+   "skill": "linear_functions",
+   "kind": "slope_from_two_points",
+   "figurePolicy": "require_plane",
+   "graphAndExpressionDuplicate": false,
+   "problem": {
+    "format": "mc",
+    "figure": {
+     "type": "plane",
+     "axes": {
+      "x": {
+       "min": -11,
+       "max": 11
+      },
+      "y": {
+       "min": -42,
+       "max": 44
+      }
+     },
+     "objects": [
+      {
+       "id": "f",
+       "kind": "line",
+       "slope": -3,
+       "intercept": 1,
+       "label": "f"
+      }
+     ],
+     "grid": true
+    },
+    "passage": "The graph of line f is shown in the xy-plane below.\n\nWhat is the slope of line f?",
+    "stimulus": "The graph of line f is shown in the xy-plane below.",
+    "question": "What is the slope of line f?",
+    "needsFigure": false,
+    "options": [
+     "-3",
+     "3",
+     "-5",
+     "15"
+    ],
+    "correctIndex": 0,
+    "answers": null,
+    "statements": null,
+    "explanation": "기울기는 (y의 변화량) ÷ (x의 변화량) = (15) ÷ (-5) = -3이다.",
+    "explanationEn": "Slope = (change in y) ÷ (change in x) = (15) ÷ (-5) = -3.",
+    "difficulty": "medium",
+    "distractorRationales": [
+     {
+      "index": 1,
+      "plausible_because": "같은 함수·같은 점에서 나올 수 있는 실제 계산 오류다.",
+      "matches": "같은 함수에서 계산되었다.",
+      "why_wrong": "분자·분모의 뺄셈 순서를 한쪽만 바꿔 부호가 반대로 나왔다.",
+      "kind": "sign_error"
+     },
+     {
+      "index": 3,
+      "plausible_because": "같은 함수·같은 점에서 나올 수 있는 실제 계산 오류다.",
+      "matches": "같은 함수에서 계산되었다.",
+      "why_wrong": "y 변화량을 x 변화량으로 나누지 않고 그대로 답으로 썼다.",
+      "kind": "condition_ignored"
+     },
+     {
+      "index": 2,
+      "plausible_because": "같은 함수·같은 점에서 나올 수 있는 실제 계산 오류다.",
+      "matches": "같은 함수에서 계산되었다.",
+      "why_wrong": "x 변화량을 y 변화량으로 나누지 않고 그대로 답으로 썼다.",
+      "kind": "condition_ignored"
+     }
+    ],
+    "difficultyRationale": "",
+    "design": null,
+    "subpattern": "slope_from_two_points"
+   }
+  },
+  {
+   "report": "(1) 일차함수 기울기(그래프만)",
+   "skill": "linear_functions",
+   "kind": "slope_from_two_points",
+   "figurePolicy": "require_plane",
+   "graphAndExpressionDuplicate": false,
+   "problem": {
+    "format": "mc",
+    "figure": {
+     "type": "plane",
+     "axes": {
+      "x": {
+       "min": -11,
+       "max": 11
+      },
+      "y": {
+       "min": -63,
+       "max": 51
+      }
+     },
+     "objects": [
+      {
+       "id": "f",
+       "kind": "line",
+       "slope": -4,
+       "intercept": -6,
+       "label": "f"
+      }
+     ],
+     "grid": true
+    },
+    "passage": "The graph of line f is shown in the xy-plane below.\n\nWhat is the slope of line f?",
+    "stimulus": "The graph of line f is shown in the xy-plane below.",
+    "question": "What is the slope of line f?",
+    "needsFigure": false,
+    "options": [
+     "-6",
+     "-4",
+     "4",
+     "24"
+    ],
+    "correctIndex": 1,
+    "answers": null,
+    "statements": null,
+    "explanation": "기울기는 (y의 변화량) ÷ (x의 변화량) = (24) ÷ (-6) = -4이다.",
+    "explanationEn": "Slope = (change in y) ÷ (change in x) = (24) ÷ (-6) = -4.",
+    "difficulty": "medium",
+    "distractorRationales": [
+     {
+      "index": 2,
+      "plausible_because": "같은 함수·같은 점에서 나올 수 있는 실제 계산 오류다.",
+      "matches": "같은 함수에서 계산되었다.",
+      "why_wrong": "분자·분모의 뺄셈 순서를 한쪽만 바꿔 부호가 반대로 나왔다.",
+      "kind": "sign_error"
+     },
+     {
+      "index": 3,
+      "plausible_because": "같은 함수·같은 점에서 나올 수 있는 실제 계산 오류다.",
+      "matches": "같은 함수에서 계산되었다.",
+      "why_wrong": "y 변화량을 x 변화량으로 나누지 않고 그대로 답으로 썼다.",
+      "kind": "condition_ignored"
+     },
+     {
+      "index": 0,
+      "plausible_because": "같은 함수·같은 점에서 나올 수 있는 실제 계산 오류다.",
+      "matches": "같은 함수에서 계산되었다.",
+      "why_wrong": "x 변화량을 y 변화량으로 나누지 않고 그대로 답으로 썼다.",
+      "kind": "condition_ignored"
+     }
+    ],
+    "difficultyRationale": "",
+    "design": null,
+    "subpattern": "slope_from_two_points"
+   }
+  },
+  {
+   "report": "(1) 이차함수 꼭짓점 x(그래프만)",
+   "skill": "nonlinear_functions",
+   "kind": "vertex_x",
+   "figurePolicy": "require_plane",
+   "graphAndExpressionDuplicate": false,
+   "problem": {
+    "format": "mc",
+    "figure": {
+     "type": "plane",
+     "axes": {
+      "x": {
+       "min": -3,
+       "max": 9
+      },
+      "y": {
+       "min": -13,
+       "max": 81
+      }
+     },
+     "objects": [
+      {
+       "id": "f",
+       "kind": "function",
+       "fn": "quadratic",
+       "params": [
+        2,
+        -12,
+        16
+       ],
+       "label": "f"
+      }
+     ],
+     "grid": true
+    },
+    "passage": "The graph of y = f(x), a parabola, is shown in the xy-plane below.\n\nWhat is the x-coordinate of the vertex of the graph of f in the xy-plane?",
+    "stimulus": "The graph of y = f(x), a parabola, is shown in the xy-plane below.",
+    "question": "What is the x-coordinate of the vertex of the graph of f in the xy-plane?",
+    "needsFigure": false,
+    "options": [
+     "-2",
+     "2",
+     "3",
+     "-3"
+    ],
+    "correctIndex": 2,
+    "answers": null,
+    "statements": null,
+    "explanation": "그래프의 꼭짓점을 읽으면 x좌표는 3이다.",
+    "explanationEn": "Reading the vertex of the graph, its x-coordinate is 3.",
+    "difficulty": "medium",
+    "distractorRationales": [
+     {
+      "index": 3,
+      "plausible_because": "같은 함수에서 나올 수 있는 실제 계산 오류다.",
+      "matches": "같은 함수에서 계산되었다.",
+      "why_wrong": "꼭짓점의 x좌표는 h가 아니라 -h라고 착각해 부호를 반대로 계산했다.",
+      "kind": "sign_error"
+     },
+     {
+      "index": 0,
+      "plausible_because": "같은 함수에서 나올 수 있는 실제 계산 오류다.",
+      "matches": "같은 함수에서 계산되었다.",
+      "why_wrong": "x좌표와 y좌표를 서로 바꿔 답했다.",
+      "kind": "condition_ignored"
+     },
+     {
+      "index": 1,
+      "plausible_because": "같은 함수에서 나올 수 있는 실제 계산 오류다.",
+      "matches": "같은 함수에서 계산되었다.",
+      "why_wrong": "x좌표와 y좌표를 바꾸고 부호까지 반대로 계산했다.",
+      "kind": "sign_error"
+     }
+    ],
+    "difficultyRationale": "",
+    "design": null,
+    "subpattern": "vertex_x"
+   }
+  },
+  {
+   "report": "(1) 이차함수 꼭짓점 x(그래프만)",
+   "skill": "nonlinear_functions",
+   "kind": "vertex_x",
+   "figurePolicy": "require_plane",
+   "graphAndExpressionDuplicate": false,
+   "problem": {
+    "format": "mc",
+    "figure": {
+     "type": "plane",
+     "axes": {
+      "x": {
+       "min": 1,
+       "max": 13
+      },
+      "y": {
+       "min": -47,
+       "max": -1
+      }
+     },
+     "objects": [
+      {
+       "id": "f",
+       "kind": "function",
+       "fn": "quadratic",
+       "params": [
+        -1,
+        14,
+        -55
+       ],
+       "label": "f"
+      }
+     ],
+     "grid": true
+    },
+    "passage": "The graph of y = f(x), a parabola, is shown in the xy-plane below.\n\nWhat is the x-coordinate of the vertex of the graph of f in the xy-plane?",
+    "stimulus": "The graph of y = f(x), a parabola, is shown in the xy-plane below.",
+    "question": "What is the x-coordinate of the vertex of the graph of f in the xy-plane?",
+    "needsFigure": false,
+    "options": [
+     "-7",
+     "7",
+     "-6",
+     "6"
+    ],
+    "correctIndex": 1,
+    "answers": null,
+    "statements": null,
+    "explanation": "그래프의 꼭짓점을 읽으면 x좌표는 7이다.",
+    "explanationEn": "Reading the vertex of the graph, its x-coordinate is 7.",
+    "difficulty": "medium",
+    "distractorRationales": [
+     {
+      "index": 0,
+      "plausible_because": "같은 함수에서 나올 수 있는 실제 계산 오류다.",
+      "matches": "같은 함수에서 계산되었다.",
+      "why_wrong": "꼭짓점의 x좌표는 h가 아니라 -h라고 착각해 부호를 반대로 계산했다.",
+      "kind": "sign_error"
+     },
+     {
+      "index": 2,
+      "plausible_because": "같은 함수에서 나올 수 있는 실제 계산 오류다.",
+      "matches": "같은 함수에서 계산되었다.",
+      "why_wrong": "x좌표와 y좌표를 서로 바꿔 답했다.",
+      "kind": "condition_ignored"
+     },
+     {
+      "index": 3,
+      "plausible_because": "같은 함수에서 나올 수 있는 실제 계산 오류다.",
+      "matches": "같은 함수에서 계산되었다.",
+      "why_wrong": "x좌표와 y좌표를 바꾸고 부호까지 반대로 계산했다.",
+      "kind": "sign_error"
+     }
+    ],
+    "difficultyRationale": "",
+    "design": null,
+    "subpattern": "vertex_x"
+   }
+  },
+  {
+   "report": "(1) 이차함수 꼭짓점 y(그래프만)",
+   "skill": "nonlinear_functions",
+   "kind": "vertex_y",
+   "figurePolicy": "require_plane",
+   "graphAndExpressionDuplicate": false,
+   "problem": {
+    "format": "mc",
+    "figure": {
+     "type": "plane",
+     "axes": {
+      "x": {
+       "min": -1,
+       "max": 11
+      },
+      "y": {
+       "min": -42,
+       "max": 4
+      }
+     },
+     "objects": [
+      {
+       "id": "f",
+       "kind": "function",
+       "fn": "quadratic",
+       "params": [
+        -1,
+        10,
+        -26
+       ],
+       "label": "f"
+      }
+     ],
+     "grid": true
+    },
+    "passage": "The graph of y = f(x), a parabola, is shown in the xy-plane below.\n\nWhat is the y-coordinate of the vertex of the graph of f in the xy-plane?",
+    "stimulus": "The graph of y = f(x), a parabola, is shown in the xy-plane below.",
+    "question": "What is the y-coordinate of the vertex of the graph of f in the xy-plane?",
+    "needsFigure": false,
+    "options": [
+     "-5",
+     "1",
+     "-1",
+     "5"
+    ],
+    "correctIndex": 2,
+    "answers": null,
+    "statements": null,
+    "explanation": "그래프의 꼭짓점을 읽으면 y좌표는 -1이다.",
+    "explanationEn": "Reading the vertex of the graph, its y-coordinate is -1.",
+    "difficulty": "medium",
+    "distractorRationales": [
+     {
+      "index": 1,
+      "plausible_because": "같은 함수에서 나올 수 있는 실제 계산 오류다.",
+      "matches": "같은 함수에서 계산되었다.",
+      "why_wrong": "꼭짓점의 y좌표 부호를 반대로 계산했다.",
+      "kind": "sign_error"
+     },
+     {
+      "index": 3,
+      "plausible_because": "같은 함수에서 나올 수 있는 실제 계산 오류다.",
+      "matches": "같은 함수에서 계산되었다.",
+      "why_wrong": "x좌표와 y좌표를 서로 바꿔 답했다.",
+      "kind": "condition_ignored"
+     },
+     {
+      "index": 0,
+      "plausible_because": "같은 함수에서 나올 수 있는 실제 계산 오류다.",
+      "matches": "같은 함수에서 계산되었다.",
+      "why_wrong": "x좌표와 y좌표를 바꾸고 부호까지 반대로 계산했다.",
+      "kind": "sign_error"
+     }
+    ],
+    "difficultyRationale": "",
+    "design": null,
+    "subpattern": "vertex_y"
+   }
+  },
+  {
+   "report": "(1) 이차함수 꼭짓점 y(그래프만)",
+   "skill": "nonlinear_functions",
+   "kind": "vertex_y",
+   "figurePolicy": "require_plane",
+   "graphAndExpressionDuplicate": false,
+   "problem": {
+    "format": "mc",
+    "figure": {
+     "type": "plane",
+     "axes": {
+      "x": {
+       "min": 0,
+       "max": 12
+      },
+      "y": {
+       "min": -131,
+       "max": 9
+      }
+     },
+     "objects": [
+      {
+       "id": "f",
+       "kind": "function",
+       "fn": "quadratic",
+       "params": [
+        -3,
+        36,
+        -115
+       ],
+       "label": "f"
+      }
+     ],
+     "grid": true
+    },
+    "passage": "The graph of y = f(x), a parabola, is shown in the xy-plane below.\n\nWhat is the y-coordinate of the vertex of the graph of f in the xy-plane?",
+    "stimulus": "The graph of y = f(x), a parabola, is shown in the xy-plane below.",
+    "question": "What is the y-coordinate of the vertex of the graph of f in the xy-plane?",
+    "needsFigure": false,
+    "options": [
+     "-7",
+     "7",
+     "6",
+     "-6"
+    ],
+    "correctIndex": 0,
+    "answers": null,
+    "statements": null,
+    "explanation": "그래프의 꼭짓점을 읽으면 y좌표는 -7이다.",
+    "explanationEn": "Reading the vertex of the graph, its y-coordinate is -7.",
+    "difficulty": "medium",
+    "distractorRationales": [
+     {
+      "index": 1,
+      "plausible_because": "같은 함수에서 나올 수 있는 실제 계산 오류다.",
+      "matches": "같은 함수에서 계산되었다.",
+      "why_wrong": "꼭짓점의 y좌표 부호를 반대로 계산했다.",
+      "kind": "sign_error"
+     },
+     {
+      "index": 2,
+      "plausible_because": "같은 함수에서 나올 수 있는 실제 계산 오류다.",
+      "matches": "같은 함수에서 계산되었다.",
+      "why_wrong": "x좌표와 y좌표를 서로 바꿔 답했다.",
+      "kind": "condition_ignored"
+     },
+     {
+      "index": 3,
+      "plausible_because": "같은 함수에서 나올 수 있는 실제 계산 오류다.",
+      "matches": "같은 함수에서 계산되었다.",
+      "why_wrong": "x좌표와 y좌표를 바꾸고 부호까지 반대로 계산했다.",
+      "kind": "sign_error"
+     }
+    ],
+    "difficultyRationale": "",
+    "design": null,
+    "subpattern": "vertex_y"
+   }
+  },
+  {
+   "report": "(1) 이차함수 함수값(식만)",
+   "skill": "nonlinear_functions",
+   "kind": "evaluate",
+   "figurePolicy": null,
+   "graphAndExpressionDuplicate": false,
+   "problem": {
+    "format": "mc",
+    "figure": null,
+    "passage": "The function f is defined by $f(x) = -2(x + 4)^2 + 4$.\n\nWhat is f(-5)?",
+    "stimulus": "The function f is defined by $f(x) = -2(x + 4)^2 + 4$.",
+    "question": "What is f(-5)?",
+    "needsFigure": false,
+    "options": [
+     "-6",
+     "5",
+     "2",
+     "-158"
+    ],
+    "correctIndex": 2,
+    "answers": null,
+    "statements": null,
+    "explanation": "f(-5) = -2(-5 - -4)² + 4 = -2 × -1² + 4 = 2이다.",
+    "explanationEn": "f(-5) = -2(-5 - -4)² + 4 = -2 × -1² + 4 = 2.",
+    "difficulty": "medium",
+    "distractorRationales": [
+     {
+      "index": 3,
+      "plausible_because": "같은 함수에서 나올 수 있는 실제 계산 오류다.",
+      "matches": "같은 함수에서 계산되었다.",
+      "why_wrong": "괄호 안 h의 부호를 반대로 계산했다(x0-h 대신 x0+h).",
+      "kind": "sign_error"
+     },
+     {
+      "index": 0,
+      "plausible_because": "같은 함수에서 나올 수 있는 실제 계산 오류다.",
+      "matches": "같은 함수에서 계산되었다.",
+      "why_wrong": "마지막에 k를 더하지 않고 뺐다.",
+      "kind": "sign_error"
+     },
+     {
+      "index": 1,
+      "plausible_because": "같은 함수에서 나올 수 있는 실제 계산 오류다.",
+      "matches": "같은 함수에서 계산되었다.",
+      "why_wrong": "제곱한 값에 a를 곱하지 않았다.",
+      "kind": "formula_misuse"
+     }
+    ],
+    "difficultyRationale": "",
+    "design": null,
+    "subpattern": "evaluate"
+   }
+  },
+  {
+   "report": "(1) 이차함수 함수값(식만)",
+   "skill": "nonlinear_functions",
+   "kind": "evaluate",
+   "figurePolicy": null,
+   "graphAndExpressionDuplicate": false,
+   "problem": {
+    "format": "mc",
+    "figure": null,
+    "passage": "The function f is defined by $f(x) = -3(x - 6)^2 - 7$.\n\nWhat is f(4)?",
+    "stimulus": "The function f is defined by $f(x) = -3(x - 6)^2 - 7$.",
+    "question": "What is f(4)?",
+    "needsFigure": false,
+    "options": [
+     "-19",
+     "-3",
+     "-307",
+     "-5"
+    ],
+    "correctIndex": 0,
+    "answers": null,
+    "statements": null,
+    "explanation": "f(4) = -3(4 - 6)² - 7 = -3 × -2² - 7 = -19이다.",
+    "explanationEn": "f(4) = -3(4 - 6)² - 7 = -3 × -2² - 7 = -19.",
+    "difficulty": "medium",
+    "distractorRationales": [
+     {
+      "index": 2,
+      "plausible_because": "같은 함수에서 나올 수 있는 실제 계산 오류다.",
+      "matches": "같은 함수에서 계산되었다.",
+      "why_wrong": "괄호 안 h의 부호를 반대로 계산했다(x0-h 대신 x0+h).",
+      "kind": "sign_error"
+     },
+     {
+      "index": 3,
+      "plausible_because": "같은 함수에서 나올 수 있는 실제 계산 오류다.",
+      "matches": "같은 함수에서 계산되었다.",
+      "why_wrong": "마지막에 k를 더하지 않고 뺐다.",
+      "kind": "sign_error"
+     },
+     {
+      "index": 1,
+      "plausible_because": "같은 함수에서 나올 수 있는 실제 계산 오류다.",
+      "matches": "같은 함수에서 계산되었다.",
+      "why_wrong": "제곱한 값에 a를 곱하지 않았다.",
+      "kind": "formula_misuse"
+     }
+    ],
+    "difficultyRationale": "",
+    "design": null,
+    "subpattern": "evaluate"
+   }
+  },
+  {
+   "report": "(1) 일차·이차 교점(그래프만)",
+   "skill": "nonlinear_equations_systems",
+   "kind": "linear_quadratic_intersection",
+   "figurePolicy": "require_plane",
+   "graphAndExpressionDuplicate": false,
+   "problem": {
+    "format": "mc",
+    "figure": {
+     "type": "plane",
+     "axes": {
+      "x": {
+       "min": -9,
+       "max": 9
+      },
+      "y": {
+       "min": -102,
+       "max": 236
+      }
+     },
+     "objects": [
+      {
+       "id": "q",
+       "kind": "function",
+       "fn": "quadratic",
+       "params": [
+        2,
+        -3,
+        8
+       ]
+      },
+      {
+       "id": "l",
+       "kind": "line",
+       "slope": -7,
+       "intercept": 0
+      }
+     ],
+     "grid": true
+    },
+    "passage": "The graphs of a quadratic function and a linear function are shown in the xy-plane below.\n\nHow many points of intersection do the two graphs shown have?",
+    "stimulus": "The graphs of a quadratic function and a linear function are shown in the xy-plane below.",
+    "question": "How many points of intersection do the two graphs shown have?",
+    "needsFigure": false,
+    "options": [
+     "One intersection point",
+     "Two intersection points",
+     "No intersection points",
+     "Infinitely many intersection points"
+    ],
+    "correctIndex": 2,
+    "answers": null,
+    "statements": null,
+    "explanation": "그래프의 두 곡선은 y = 2x² - 3x + 8, y = -7x이다. 두 식을 같다고 놓으면 2x² - 3x + 8 = -7x이고, 정리하면 2x² + 4x + 8 = 0이다. 판별식은 B² - 4AC = 4² - 4×2×8 = -48이다. 0보다 작으므로 교점이 없다. 따라서 No intersection points이다.",
+    "explanationEn": "The two graphs are y = 2x² - 3x + 8 and y = -7x. Setting the two expressions equal gives 2x² - 3x + 8 = -7x, which simplifies to 2x² + 4x + 8 = 0. The discriminant is B² - 4AC = 4² - 4×2×8 = -48. Since it is less than 0, there are no intersection points. So the answer is No intersection points.",
+    "difficulty": "medium",
+    "distractorRationales": [
+     {
+      "index": 1,
+      "plausible_because": "같은 연립에서 나올 수 있는 실제 계산 오류다.",
+      "matches": "같은 두 식에서 계산되었다.",
+      "why_wrong": "판별식의 부호를 잘못 읽어 교점이 두 개라고 착각했다.",
+      "kind": "condition_ignored"
+     },
+     {
+      "index": 0,
+      "plausible_because": "같은 연립에서 나올 수 있는 실제 계산 오류다.",
+      "matches": "같은 두 식에서 계산되었다.",
+      "why_wrong": "판별식이 0이 아닌데 0이라고 착각했다.",
+      "kind": "condition_ignored"
+     },
+     {
+      "index": 3,
+      "plausible_because": "같은 연립에서 나올 수 있는 실제 계산 오류다.",
+      "matches": "같은 두 식에서 계산되었다.",
+      "why_wrong": "직선과 포물선이 항상 여러 점에서 만난다고 잘못 일반화했다 — 포물선과 직선은 무수히 많은 점에서 만날 수 없다.",
+      "kind": "other"
+     }
+    ],
+    "difficultyRationale": "",
+    "design": null,
+    "subpattern": "linear_quadratic_intersection"
+   }
+  },
+  {
+   "report": "(1) 일차·이차 교점(그래프만)",
+   "skill": "nonlinear_equations_systems",
+   "kind": "linear_quadratic_intersection",
+   "figurePolicy": "require_plane",
+   "graphAndExpressionDuplicate": false,
+   "problem": {
+    "format": "mc",
+    "figure": {
+     "type": "plane",
+     "axes": {
+      "x": {
+       "min": -9,
+       "max": 9
+      },
+      "y": {
+       "min": -249,
+       "max": 53
+      }
+     },
+     "objects": [
+      {
+       "id": "q",
+       "kind": "function",
+       "fn": "quadratic",
+       "params": [
+        -1,
+        12,
+        -25
+       ]
+      },
+      {
+       "id": "l",
+       "kind": "line",
+       "slope": 2,
+       "intercept": 0
+      }
+     ],
+     "grid": true
+    },
+    "passage": "The graphs of a quadratic function and a linear function are shown in the xy-plane below.\n\nHow many points of intersection do the two graphs shown have?",
+    "stimulus": "The graphs of a quadratic function and a linear function are shown in the xy-plane below.",
+    "question": "How many points of intersection do the two graphs shown have?",
+    "needsFigure": false,
+    "options": [
+     "Infinitely many intersection points",
+     "One intersection point",
+     "Two intersection points",
+     "No intersection points"
+    ],
+    "correctIndex": 1,
+    "answers": null,
+    "statements": null,
+    "explanation": "그래프의 두 곡선은 y = -x² + 12x - 25, y = 2x이다. 두 식을 같다고 놓으면 -x² + 12x - 25 = 2x이고, 정리하면 -x² + 10x - 25 = 0이다. 판별식은 B² - 4AC = 10² - 4×-1×-25 = 0이다. 0이므로 교점을 하나 갖는다(직선이 포물선에 접한다). 따라서 One intersection point이다.",
+    "explanationEn": "The two graphs are y = -x² + 12x - 25 and y = 2x. Setting the two expressions equal gives -x² + 12x - 25 = 2x, which simplifies to -x² + 10x - 25 = 0. The discriminant is B² - 4AC = 10² - 4×-1×-25 = 0. Since it equals 0, there is exactly one intersection point (the line is tangent to the parabola). So the answer is One intersection point.",
+    "difficulty": "medium",
+    "distractorRationales": [
+     {
+      "index": 2,
+      "plausible_because": "같은 연립에서 나올 수 있는 실제 계산 오류다.",
+      "matches": "같은 두 식에서 계산되었다.",
+      "why_wrong": "판별식의 부호를 잘못 읽어 교점이 두 개라고 착각했다.",
+      "kind": "condition_ignored"
+     },
+     {
+      "index": 3,
+      "plausible_because": "같은 연립에서 나올 수 있는 실제 계산 오류다.",
+      "matches": "같은 두 식에서 계산되었다.",
+      "why_wrong": "판별식이 음수가 아닌데 음수라고 착각해 교점이 없다고 답했다.",
+      "kind": "condition_ignored"
+     },
+     {
+      "index": 0,
+      "plausible_because": "같은 연립에서 나올 수 있는 실제 계산 오류다.",
+      "matches": "같은 두 식에서 계산되었다.",
+      "why_wrong": "직선과 포물선이 항상 여러 점에서 만난다고 잘못 일반화했다 — 포물선과 직선은 무수히 많은 점에서 만날 수 없다.",
+      "kind": "other"
+     }
+    ],
+    "difficultyRationale": "",
+    "design": null,
+    "subpattern": "linear_quadratic_intersection"
+   }
+  },
+  {
+   "report": "(1) 일차·이차 교점(그래프만)",
+   "skill": "nonlinear_equations_systems",
+   "kind": "linear_quadratic_intersection",
+   "figurePolicy": "require_plane",
+   "graphAndExpressionDuplicate": false,
+   "problem": {
+    "format": "mc",
+    "figure": {
+     "type": "plane",
+     "axes": {
+      "x": {
+       "min": -9,
+       "max": 9
+      },
+      "y": {
+       "min": -326,
+       "max": 104
+      }
+     },
+     "objects": [
+      {
+       "id": "q",
+       "kind": "function",
+       "fn": "quadratic",
+       "params": [
+        -2,
+        -12,
+        -6
+       ]
+      },
+      {
+       "id": "l",
+       "kind": "line",
+       "slope": -6,
+       "intercept": 0
+      }
+     ],
+     "grid": true
+    },
+    "passage": "The graphs of a quadratic function and a linear function are shown in the xy-plane below.\n\nHow many points of intersection do the two graphs shown have?",
+    "stimulus": "The graphs of a quadratic function and a linear function are shown in the xy-plane below.",
+    "question": "How many points of intersection do the two graphs shown have?",
+    "needsFigure": false,
+    "options": [
+     "No intersection points",
+     "Two intersection points",
+     "Infinitely many intersection points",
+     "One intersection point"
+    ],
+    "correctIndex": 0,
+    "answers": null,
+    "statements": null,
+    "explanation": "그래프의 두 곡선은 y = -2x² - 12x - 6, y = -6x이다. 두 식을 같다고 놓으면 -2x² - 12x - 6 = -6x이고, 정리하면 -2x² - 6x - 6 = 0이다. 판별식은 B² - 4AC = -6² - 4×-2×-6 = -12이다. 0보다 작으므로 교점이 없다. 따라서 No intersection points이다.",
+    "explanationEn": "The two graphs are y = -2x² - 12x - 6 and y = -6x. Setting the two expressions equal gives -2x² - 12x - 6 = -6x, which simplifies to -2x² - 6x - 6 = 0. The discriminant is B² - 4AC = -6² - 4×-2×-6 = -12. Since it is less than 0, there are no intersection points. So the answer is No intersection points.",
+    "difficulty": "medium",
+    "distractorRationales": [
+     {
+      "index": 1,
+      "plausible_because": "같은 연립에서 나올 수 있는 실제 계산 오류다.",
+      "matches": "같은 두 식에서 계산되었다.",
+      "why_wrong": "판별식의 부호를 잘못 읽어 교점이 두 개라고 착각했다.",
+      "kind": "condition_ignored"
+     },
+     {
+      "index": 3,
+      "plausible_because": "같은 연립에서 나올 수 있는 실제 계산 오류다.",
+      "matches": "같은 두 식에서 계산되었다.",
+      "why_wrong": "판별식이 0이 아닌데 0이라고 착각했다.",
+      "kind": "condition_ignored"
+     },
+     {
+      "index": 2,
+      "plausible_because": "같은 연립에서 나올 수 있는 실제 계산 오류다.",
+      "matches": "같은 두 식에서 계산되었다.",
+      "why_wrong": "직선과 포물선이 항상 여러 점에서 만난다고 잘못 일반화했다 — 포물선과 직선은 무수히 많은 점에서 만날 수 없다.",
+      "kind": "other"
+     }
+    ],
+    "difficultyRationale": "",
+    "design": null,
+    "subpattern": "linear_quadratic_intersection"
+   }
+  },
+  {
+   "report": "(1) 연립 일차방정식 교점·기울기(식만)",
+   "skill": "linear_equations_two_var",
+   "kind": "intersection_x",
+   "figurePolicy": null,
+   "graphAndExpressionDuplicate": false,
+   "problem": {
+    "format": "mc",
+    "figure": null,
+    "passage": "The solution to the system of equations shown is (x, y).\n\ny = -3x - 7\ny = 4x\n\nWhat is the x-coordinate of the solution to the system of equations shown?",
+    "stimulus": "The solution to the system of equations shown is (x, y).\n\ny = -3x - 7\ny = 4x",
+    "question": "What is the x-coordinate of the solution to the system of equations shown?",
+    "needsFigure": false,
+    "options": [
+     "1",
+     "4",
+     "-1",
+     "-4"
+    ],
+    "correctIndex": 2,
+    "answers": null,
+    "statements": null,
+    "explanation": "두 식의 우변이 같으므로 -3x - 7 = 4x이다. 양변에서 정리하면 (-7)x = 7이므로 x = 7 ÷ (-7) = -1이다. 이를 y = -3x - 7에 대입하면 y = -3 × -1 - 7 = -4이다. 따라서 x좌표는 -1이다.",
+    "explanationEn": "Since the right-hand sides are equal, -3x - 7 = 4x. Rearranging gives (-7)x = 7, so x = 7 ÷ (-7) = -1. Substituting into y = -3x - 7 gives y = -3 × -1 - 7 = -4. So the x-coordinate is -1.",
+    "difficulty": "medium",
+    "distractorRationales": [
+     {
+      "index": 0,
+      "plausible_because": "계산 과정의 실제 오류 경로에서 나온 값이라 얼핏 보면 그럴듯하다.",
+      "matches": "같은 두 식에서 계산되었다.",
+      "why_wrong": "부호를 반대로 계산했다.",
+      "kind": "sign_error"
+     },
+     {
+      "index": 3,
+      "plausible_because": "계산 과정의 실제 오류 경로에서 나온 값이라 얼핏 보면 그럴듯하다.",
+      "matches": "같은 두 식에서 계산되었다.",
+      "why_wrong": "묻는 좌표가 아니라 다른 좌표값을 답으로 골랐다.",
+      "kind": "condition_ignored"
+     },
+     {
+      "index": 1,
+      "plausible_because": "계산 과정의 실제 오류 경로에서 나온 값이라 얼핏 보면 그럴듯하다.",
+      "matches": "같은 두 식에서 계산되었다.",
+      "why_wrong": "묻는 좌표가 아니라 다른 좌표값을 답으로 골랐다. 그 값의 부호까지 반대로 계산했다.",
+      "kind": "sign_error"
+     }
+    ],
+    "difficultyRationale": "",
+    "design": null,
+    "subpattern": "intersection_x"
+   }
+  },
+  {
+   "report": "(1) 연립 일차방정식 교점·기울기(식만)",
+   "skill": "linear_equations_two_var",
+   "kind": "intersection_x",
+   "figurePolicy": null,
+   "graphAndExpressionDuplicate": false,
+   "problem": {
+    "format": "mc",
+    "figure": null,
+    "passage": "The solution to the system of equations shown is (x, y).\n\ny = -2x - 3\ny = 2x + 1\n\nWhat is the x-coordinate of the solution to the system of equations shown?",
+    "stimulus": "The solution to the system of equations shown is (x, y).\n\ny = -2x - 3\ny = 2x + 1",
+    "question": "What is the x-coordinate of the solution to the system of equations shown?",
+    "needsFigure": false,
+    "options": [
+     "3",
+     "-1",
+     "1",
+     "-5"
+    ],
+    "correctIndex": 1,
+    "answers": null,
+    "statements": null,
+    "explanation": "두 식의 우변이 같으므로 -2x - 3 = 2x + 1이다. 양변에서 정리하면 (-4)x = 4이므로 x = 4 ÷ (-4) = -1이다. 이를 y = -2x - 3에 대입하면 y = -2 × -1 - 3 = -1이다. 따라서 x좌표는 -1이다.",
+    "explanationEn": "Since the right-hand sides are equal, -2x - 3 = 2x + 1. Rearranging gives (-4)x = 4, so x = 4 ÷ (-4) = -1. Substituting into y = -2x - 3 gives y = -2 × -1 - 3 = -1. So the x-coordinate is -1.",
+    "difficulty": "medium",
+    "distractorRationales": [
+     {
+      "index": 2,
+      "plausible_because": "계산 과정의 실제 오류 경로에서 나온 값이라 얼핏 보면 그럴듯하다.",
+      "matches": "같은 두 식에서 계산되었다.",
+      "why_wrong": "부호를 반대로 계산했다.",
+      "kind": "sign_error"
+     },
+     {
+      "index": 3,
+      "plausible_because": "계산 과정의 실제 오류 경로에서 나온 값이라 얼핏 보면 그럴듯하다.",
+      "matches": "같은 두 식에서 계산되었다.",
+      "why_wrong": "두 식의 절편 차를 answer에 그대로 더해 계산했다(소거 과정 오류).",
+      "kind": "formula_misuse"
+     },
+     {
+      "index": 0,
+      "plausible_because": "계산 과정의 실제 오류 경로에서 나온 값이라 얼핏 보면 그럴듯하다.",
+      "matches": "같은 두 식에서 계산되었다.",
+      "why_wrong": "두 식의 절편 차를 answer에 그대로 반대 부호로 반영해 계산했다(소거 과정 오류).",
+      "kind": "formula_misuse"
+     }
+    ],
+    "difficultyRationale": "",
+    "design": null,
+    "subpattern": "intersection_x"
+   }
+  },
+  {
+   "report": "(1) 원의 방정식(그래프만)",
+   "skill": "circles",
+   "kind": "circle_equation_transform",
+   "figurePolicy": "require_plane",
+   "graphAndExpressionDuplicate": false,
+   "problem": {
+    "format": "mc",
+    "figure": {
+     "type": "plane",
+     "axes": {
+      "x": {
+       "min": -18,
+       "max": 8
+      },
+      "y": {
+       "min": -11,
+       "max": 15
+      }
+     },
+     "objects": [
+      {
+       "id": "c",
+       "kind": "circle",
+       "center": [
+        -5,
+        2
+       ],
+       "radius": 11,
+       "label": "c"
+      }
+     ],
+     "grid": true
+    },
+    "passage": "A circle is shown in the xy-plane below.\n\nWhich equation represents this circle?",
+    "stimulus": "A circle is shown in the xy-plane below.",
+    "question": "Which equation represents this circle?",
+    "needsFigure": false,
+    "options": [
+     "(x + 5)² + (y - 2)² = 121",
+     "(x - 5)² + (y - 2)² = 121",
+     "(x + 5)² + (y - 2)² = 11",
+     "(x + 5)² + (y + 2)² = 121"
+    ],
+    "correctIndex": 0,
+    "answers": null,
+    "statements": null,
+    "explanation": "중심 (h, k) = (-5, 2)과 반지름 r = 11를 (x-h)² + (y-k)² = r²에 대입하면 (x + 5)² + (y - 2)² = 121이다.",
+    "explanationEn": "Substituting center (h, k) = (-5, 2) and radius r = 11 into (x-h)² + (y-k)² = r² gives (x + 5)² + (y - 2)² = 121.",
+    "difficulty": "medium",
+    "distractorRationales": [
+     {
+      "index": 1,
+      "plausible_because": "같은 원에서 실제로 나올 수 있는 계산·공식 혼동 오류다.",
+      "matches": "같은 조건에서 계산되었다.",
+      "why_wrong": "중심의 x좌표 h를 (x-h) 대신 (x+h) 형태로 써서 부호를 뒤집었다.",
+      "kind": "sign_error"
+     },
+     {
+      "index": 3,
+      "plausible_because": "같은 원에서 실제로 나올 수 있는 계산·공식 혼동 오류다.",
+      "matches": "같은 조건에서 계산되었다.",
+      "why_wrong": "중심의 y좌표 k를 (y-k) 대신 (y+k) 형태로 써서 부호를 뒤집었다.",
+      "kind": "sign_error"
+     },
+     {
+      "index": 2,
+      "plausible_because": "같은 원에서 실제로 나올 수 있는 계산·공식 혼동 오류다.",
+      "matches": "같은 조건에서 계산되었다.",
+      "why_wrong": "우변을 r²으로 제곱하지 않고 반지름 r을 그대로 썼다.",
+      "kind": "formula_misuse"
+     }
+    ],
+    "difficultyRationale": "",
+    "design": null,
+    "subpattern": "circle_equation_transform"
+   }
+  },
+  {
+   "report": "(1) 원의 방정식(그래프만)",
+   "skill": "circles",
+   "kind": "circle_equation_transform",
+   "figurePolicy": "require_plane",
+   "graphAndExpressionDuplicate": false,
+   "problem": {
+    "format": "mc",
+    "figure": {
+     "type": "plane",
+     "axes": {
+      "x": {
+       "min": -6,
+       "max": 10
+      },
+      "y": {
+       "min": -6,
+       "max": 10
+      }
+     },
+     "objects": [
+      {
+       "id": "c",
+       "kind": "circle",
+       "center": [
+        2,
+        2
+       ],
+       "radius": 6,
+       "label": "c"
+      }
+     ],
+     "grid": true
+    },
+    "passage": "A circle is shown in the xy-plane below.\n\nWhich equation represents this circle?",
+    "stimulus": "A circle is shown in the xy-plane below.",
+    "question": "Which equation represents this circle?",
+    "needsFigure": false,
+    "options": [
+     "(x - 2)² + (y - 2)² = 36",
+     "(x + 2)² + (y - 2)² = 36",
+     "(x - 2)² + (y - 2)² = 6",
+     "(x - 2)² + (y + 2)² = 36"
+    ],
+    "correctIndex": 0,
+    "answers": null,
+    "statements": null,
+    "explanation": "중심 (h, k) = (2, 2)과 반지름 r = 6를 (x-h)² + (y-k)² = r²에 대입하면 (x - 2)² + (y - 2)² = 36이다.",
+    "explanationEn": "Substituting center (h, k) = (2, 2) and radius r = 6 into (x-h)² + (y-k)² = r² gives (x - 2)² + (y - 2)² = 36.",
+    "difficulty": "medium",
+    "distractorRationales": [
+     {
+      "index": 1,
+      "plausible_because": "같은 원에서 실제로 나올 수 있는 계산·공식 혼동 오류다.",
+      "matches": "같은 조건에서 계산되었다.",
+      "why_wrong": "중심의 x좌표 h를 (x-h) 대신 (x+h) 형태로 써서 부호를 뒤집었다.",
+      "kind": "sign_error"
+     },
+     {
+      "index": 3,
+      "plausible_because": "같은 원에서 실제로 나올 수 있는 계산·공식 혼동 오류다.",
+      "matches": "같은 조건에서 계산되었다.",
+      "why_wrong": "중심의 y좌표 k를 (y-k) 대신 (y+k) 형태로 써서 부호를 뒤집었다.",
+      "kind": "sign_error"
+     },
+     {
+      "index": 2,
+      "plausible_because": "같은 원에서 실제로 나올 수 있는 계산·공식 혼동 오류다.",
+      "matches": "같은 조건에서 계산되었다.",
+      "why_wrong": "우변을 r²으로 제곱하지 않고 반지름 r을 그대로 썼다.",
+      "kind": "formula_misuse"
+     }
+    ],
+    "difficultyRationale": "",
+    "design": null,
+    "subpattern": "circle_equation_transform"
+   }
+  },
+  {
+   "report": "(1) 원의 방정식(그래프만)",
+   "skill": "circles",
+   "kind": "circle_equation_transform",
+   "figurePolicy": "require_plane",
+   "graphAndExpressionDuplicate": false,
+   "problem": {
+    "format": "mc",
+    "figure": {
+     "type": "plane",
+     "axes": {
+      "x": {
+       "min": 2,
+       "max": 14
+      },
+      "y": {
+       "min": 3,
+       "max": 15
+      }
+     },
+     "objects": [
+      {
+       "id": "c",
+       "kind": "circle",
+       "center": [
+        8,
+        9
+       ],
+       "radius": 4,
+       "label": "c"
+      }
+     ],
+     "grid": true
+    },
+    "passage": "A circle is shown in the xy-plane below.\n\nWhich equation represents this circle?",
+    "stimulus": "A circle is shown in the xy-plane below.",
+    "question": "Which equation represents this circle?",
+    "needsFigure": false,
+    "options": [
+     "(x - 8)² + (y + 9)² = 16",
+     "(x - 8)² + (y - 9)² = 4",
+     "(x + 8)² + (y - 9)² = 16",
+     "(x - 8)² + (y - 9)² = 16"
+    ],
+    "correctIndex": 3,
+    "answers": null,
+    "statements": null,
+    "explanation": "중심 (h, k) = (8, 9)과 반지름 r = 4를 (x-h)² + (y-k)² = r²에 대입하면 (x - 8)² + (y - 9)² = 16이다.",
+    "explanationEn": "Substituting center (h, k) = (8, 9) and radius r = 4 into (x-h)² + (y-k)² = r² gives (x - 8)² + (y - 9)² = 16.",
+    "difficulty": "medium",
+    "distractorRationales": [
+     {
+      "index": 2,
+      "plausible_because": "같은 원에서 실제로 나올 수 있는 계산·공식 혼동 오류다.",
+      "matches": "같은 조건에서 계산되었다.",
+      "why_wrong": "중심의 x좌표 h를 (x-h) 대신 (x+h) 형태로 써서 부호를 뒤집었다.",
+      "kind": "sign_error"
+     },
+     {
+      "index": 0,
+      "plausible_because": "같은 원에서 실제로 나올 수 있는 계산·공식 혼동 오류다.",
+      "matches": "같은 조건에서 계산되었다.",
+      "why_wrong": "중심의 y좌표 k를 (y-k) 대신 (y+k) 형태로 써서 부호를 뒤집었다.",
+      "kind": "sign_error"
+     },
+     {
+      "index": 1,
+      "plausible_because": "같은 원에서 실제로 나올 수 있는 계산·공식 혼동 오류다.",
+      "matches": "같은 조건에서 계산되었다.",
+      "why_wrong": "우변을 r²으로 제곱하지 않고 반지름 r을 그대로 썼다.",
+      "kind": "formula_misuse"
+     }
+    ],
+    "difficultyRationale": "",
+    "design": null,
+    "subpattern": "circle_equation_transform"
+   }
+  },
+  {
+   "report": "(1) 부등식 해 판정(식만)",
+   "skill": "linear_inequalities",
+   "kind": "point_in_solution",
+   "figurePolicy": null,
+   "graphAndExpressionDuplicate": false,
+   "problem": {
+    "format": "mc",
+    "figure": null,
+    "passage": "Consider the inequality shown.\n\n$y \\le -x - 8$\n\nWhich of the following points is a solution to the inequality shown?",
+    "stimulus": "Consider the inequality shown.\n\n$y \\le -x - 8$",
+    "question": "Which of the following points is a solution to the inequality shown?",
+    "needsFigure": false,
+    "options": [
+     "(3, 7)",
+     "(4, -8)",
+     "(-2, -8)",
+     "(7, 7)"
+    ],
+    "correctIndex": 2,
+    "answers": null,
+    "statements": null,
+    "explanation": "경계선 y = -x - 8 (경계선 포함)을 기준으로, y 값이 경계선의 값보다 작다 쪽이 해 영역이다. (-2, -8)를 대입하면 조건을 만족하므로 정답이다.",
+    "explanationEn": "Relative to the boundary line y = -x - 8 (boundary included), the solution region is where the y-value is less than the boundary's value. Substituting (-2, -8) satisfies the condition, so it is the correct answer.",
+    "difficulty": "medium",
+    "distractorRationales": [
+     {
+      "index": 1,
+      "plausible_because": "경계선 위 또는 반대편의 실제 점이라 얼핏 보면 해로 보일 수 있다.",
+      "matches": "같은 부등식에서 골랐다.",
+      "why_wrong": "부등호의 방향을 반대로 적용해 해 영역 밖의 점을 답으로 골랐다.",
+      "kind": "sign_error"
+     },
+     {
+      "index": 3,
+      "plausible_because": "경계선 위 또는 반대편의 실제 점이라 얼핏 보면 해로 보일 수 있다.",
+      "matches": "같은 부등식에서 골랐다.",
+      "why_wrong": "부등호의 방향을 반대로 적용해 해 영역 밖의 점을 답으로 골랐다.",
+      "kind": "sign_error"
+     },
+     {
+      "index": 0,
+      "plausible_because": "경계선 위 또는 반대편의 실제 점이라 얼핏 보면 해로 보일 수 있다.",
+      "matches": "같은 부등식에서 골랐다.",
+      "why_wrong": "부등호의 방향을 반대로 적용해 해 영역 밖의 점을 답으로 골랐다.",
+      "kind": "sign_error"
+     }
+    ],
+    "difficultyRationale": "",
+    "design": null,
+    "subpattern": "point_in_solution"
+   }
+  },
+  {
+   "report": "(1) 부등식 해 판정(식만)",
+   "skill": "linear_inequalities",
+   "kind": "point_in_solution",
+   "figurePolicy": null,
+   "graphAndExpressionDuplicate": false,
+   "problem": {
+    "format": "mc",
+    "figure": null,
+    "passage": "Consider the inequality shown.\n\n$y > -3x - 1$\n\nWhich of the following points is a solution to the inequality shown?",
+    "stimulus": "Consider the inequality shown.\n\n$y > -3x - 1$",
+    "question": "Which of the following points is a solution to the inequality shown?",
+    "needsFigure": false,
+    "options": [
+     "(2, 0)",
+     "(-3, -3)",
+     "(-7, 3)",
+     "(-3, 6)"
+    ],
+    "correctIndex": 0,
+    "answers": null,
+    "statements": null,
+    "explanation": "경계선 y = -3x - 1 (경계선 제외)을 기준으로, y 값이 경계선의 값보다 크다 쪽이 해 영역이다. (2, 0)를 대입하면 조건을 만족하므로 정답이다.",
+    "explanationEn": "Relative to the boundary line y = -3x - 1 (boundary excluded), the solution region is where the y-value is greater than the boundary's value. Substituting (2, 0) satisfies the condition, so it is the correct answer.",
+    "difficulty": "medium",
+    "distractorRationales": [
+     {
+      "index": 2,
+      "plausible_because": "경계선 위 또는 반대편의 실제 점이라 얼핏 보면 해로 보일 수 있다.",
+      "matches": "같은 부등식에서 골랐다.",
+      "why_wrong": "부등호의 방향을 반대로 적용해 해 영역 밖의 점을 답으로 골랐다.",
+      "kind": "sign_error"
+     },
+     {
+      "index": 3,
+      "plausible_because": "경계선 위 또는 반대편의 실제 점이라 얼핏 보면 해로 보일 수 있다.",
+      "matches": "같은 부등식에서 골랐다.",
+      "why_wrong": "부등호의 방향을 반대로 적용해 해 영역 밖의 점을 답으로 골랐다.",
+      "kind": "sign_error"
+     },
+     {
+      "index": 1,
+      "plausible_because": "경계선 위 또는 반대편의 실제 점이라 얼핏 보면 해로 보일 수 있다.",
+      "matches": "같은 부등식에서 골랐다.",
+      "why_wrong": "부등호의 방향을 반대로 적용해 해 영역 밖의 점을 답으로 골랐다.",
+      "kind": "sign_error"
+     }
+    ],
+    "difficultyRationale": "",
+    "design": null,
+    "subpattern": "point_in_solution"
+   }
+  },
+  {
+   "report": "(2)(13) 삼각비 sin B 표기",
+   "skill": "right_triangles_trigonometry",
+   "kind": "trig_ratio",
+   "figurePolicy": null,
+   "graphAndExpressionDuplicate": false,
+   "problem": {
+    "format": "mc",
+    "figure": {
+     "type": "triangle",
+     "vertices": [
+      "A",
+      "B",
+      "C"
+     ],
+     "kind": "right",
+     "rightAngleAt": "A",
+     "sides": [
+      {
+       "between": [
+        "A",
+        "B"
+       ],
+       "label": "8"
+      },
+      {
+       "between": [
+        "A",
+        "C"
+       ],
+       "label": "15"
+      }
+     ],
+     "angles": [
+      {
+       "at": "C"
+      }
+     ]
+    },
+    "passage": "In right triangle ABC, the right angle is at A, AB = 8, and AC = 15, as shown in the figure.\n\nWhat is cos C in the right triangle shown?",
+    "stimulus": "In right triangle ABC, the right angle is at A, AB = 8, and AC = 15, as shown in the figure.",
+    "question": "What is cos C in the right triangle shown?",
+    "needsFigure": false,
+    "options": [
+     "15/17",
+     "17/15",
+     "8/17",
+     "8/15"
+    ],
+    "correctIndex": 0,
+    "answers": null,
+    "statements": null,
+    "explanation": "각 C에서 대변은 AB(= 8), 인접변은 AC(= 15), 빗변은 BC(= 17)이다. cos C = 인접변/빗변 = 8/17 = 15/17이다.",
+    "explanationEn": "At angle C, the opposite side is AB(= 8), the adjacent side is AC(= 15), and the hypotenuse is BC(= 17). cos C = adjacent/hypotenuse = 8/17 = 15/17.",
+    "difficulty": "medium",
+    "distractorRationales": [
+     {
+      "index": 2,
+      "plausible_because": "같은 직각삼각형에서 실제로 나올 수 있는 계산 오류다.",
+      "matches": "같은 변 길이에서 계산되었다.",
+      "why_wrong": "cos 대신 sin을 계산했다(대변·인접변·빗변 혼동).",
+      "kind": "geometry_misapplied"
+     },
+     {
+      "index": 3,
+      "plausible_because": "같은 직각삼각형에서 실제로 나올 수 있는 계산 오류다.",
+      "matches": "같은 변 길이에서 계산되었다.",
+      "why_wrong": "cos 대신 tan을 계산했다(대변·인접변·빗변 혼동).",
+      "kind": "geometry_misapplied"
+     },
+     {
+      "index": 1,
+      "plausible_because": "같은 직각삼각형에서 실제로 나올 수 있는 계산 오류다.",
+      "matches": "같은 변 길이에서 계산되었다.",
+      "why_wrong": "분자와 분모를 뒤집어(역수) 계산했다.",
+      "kind": "formula_misuse"
+     }
+    ],
+    "difficultyRationale": "",
+    "design": null,
+    "subpattern": "trig_ratio"
+   }
+  },
+  {
+   "report": "(2)(13) 삼각비 sin B 표기",
+   "skill": "right_triangles_trigonometry",
+   "kind": "trig_ratio",
+   "figurePolicy": null,
+   "graphAndExpressionDuplicate": false,
+   "problem": {
+    "format": "mc",
+    "figure": {
+     "type": "triangle",
+     "vertices": [
+      "A",
+      "B",
+      "C"
+     ],
+     "kind": "right",
+     "rightAngleAt": "A",
+     "sides": [
+      {
+       "between": [
+        "A",
+        "B"
+       ],
+       "label": "10"
+      },
+      {
+       "between": [
+        "A",
+        "C"
+       ],
+       "label": "24"
+      }
+     ],
+     "angles": [
+      {
+       "at": "B"
+      }
+     ]
+    },
+    "passage": "In right triangle ABC, the right angle is at A, AB = 10, and AC = 24, as shown in the figure.\n\nWhat is tan B in the right triangle shown?",
+    "stimulus": "In right triangle ABC, the right angle is at A, AB = 10, and AC = 24, as shown in the figure.",
+    "question": "What is tan B in the right triangle shown?",
+    "needsFigure": false,
+    "options": [
+     "12/13",
+     "5/12",
+     "12/5",
+     "5/13"
+    ],
+    "correctIndex": 2,
+    "answers": null,
+    "statements": null,
+    "explanation": "각 B에서 대변은 AC(= 24), 인접변은 AB(= 10), 빗변은 BC(= 26)이다. tan B = 대변/인접변 = 24/10 = 12/5이다.",
+    "explanationEn": "At angle B, the opposite side is AC(= 24), the adjacent side is AB(= 10), and the hypotenuse is BC(= 26). tan B = opposite/adjacent = 24/10 = 12/5.",
+    "difficulty": "medium",
+    "distractorRationales": [
+     {
+      "index": 0,
+      "plausible_because": "같은 직각삼각형에서 실제로 나올 수 있는 계산 오류다.",
+      "matches": "같은 변 길이에서 계산되었다.",
+      "why_wrong": "tan 대신 sin을 계산했다(대변·인접변·빗변 혼동).",
+      "kind": "geometry_misapplied"
+     },
+     {
+      "index": 3,
+      "plausible_because": "같은 직각삼각형에서 실제로 나올 수 있는 계산 오류다.",
+      "matches": "같은 변 길이에서 계산되었다.",
+      "why_wrong": "tan 대신 cos을 계산했다(대변·인접변·빗변 혼동).",
+      "kind": "geometry_misapplied"
+     },
+     {
+      "index": 1,
+      "plausible_because": "같은 직각삼각형에서 실제로 나올 수 있는 계산 오류다.",
+      "matches": "같은 변 길이에서 계산되었다.",
+      "why_wrong": "분자와 분모를 뒤집어(역수) 계산했다.",
+      "kind": "formula_misuse"
+     }
+    ],
+    "difficultyRationale": "",
+    "design": null,
+    "subpattern": "trig_ratio"
+   }
+  },
+  {
+   "report": "(2)(13) 삼각비 sin B 표기",
+   "skill": "right_triangles_trigonometry",
+   "kind": "trig_ratio",
+   "figurePolicy": null,
+   "graphAndExpressionDuplicate": false,
+   "problem": {
+    "format": "mc",
+    "figure": {
+     "type": "triangle",
+     "vertices": [
+      "A",
+      "B",
+      "C"
+     ],
+     "kind": "right",
+     "rightAngleAt": "A",
+     "sides": [
+      {
+       "between": [
+        "A",
+        "B"
+       ],
+       "label": "14"
+      },
+      {
+       "between": [
+        "A",
+        "C"
+       ],
+       "label": "48"
+      }
+     ],
+     "angles": [
+      {
+       "at": "B"
+      }
+     ]
+    },
+    "passage": "In right triangle ABC, the right angle is at A, AB = 14, and AC = 48, as shown in the figure.\n\nWhat is cos B in the right triangle shown?",
+    "stimulus": "In right triangle ABC, the right angle is at A, AB = 14, and AC = 48, as shown in the figure.",
+    "question": "What is cos B in the right triangle shown?",
+    "needsFigure": false,
+    "options": [
+     "24/7",
+     "24/25",
+     "25/7",
+     "7/25"
+    ],
+    "correctIndex": 3,
+    "answers": null,
+    "statements": null,
+    "explanation": "각 B에서 대변은 AC(= 48), 인접변은 AB(= 14), 빗변은 BC(= 50)이다. cos B = 인접변/빗변 = 48/50 = 7/25이다.",
+    "explanationEn": "At angle B, the opposite side is AC(= 48), the adjacent side is AB(= 14), and the hypotenuse is BC(= 50). cos B = adjacent/hypotenuse = 48/50 = 7/25.",
+    "difficulty": "medium",
+    "distractorRationales": [
+     {
+      "index": 1,
+      "plausible_because": "같은 직각삼각형에서 실제로 나올 수 있는 계산 오류다.",
+      "matches": "같은 변 길이에서 계산되었다.",
+      "why_wrong": "cos 대신 sin을 계산했다(대변·인접변·빗변 혼동).",
+      "kind": "geometry_misapplied"
+     },
+     {
+      "index": 0,
+      "plausible_because": "같은 직각삼각형에서 실제로 나올 수 있는 계산 오류다.",
+      "matches": "같은 변 길이에서 계산되었다.",
+      "why_wrong": "cos 대신 tan을 계산했다(대변·인접변·빗변 혼동).",
+      "kind": "geometry_misapplied"
+     },
+     {
+      "index": 2,
+      "plausible_because": "같은 직각삼각형에서 실제로 나올 수 있는 계산 오류다.",
+      "matches": "같은 변 길이에서 계산되었다.",
+      "why_wrong": "분자와 분모를 뒤집어(역수) 계산했다.",
+      "kind": "formula_misuse"
+     }
+    ],
+    "difficultyRationale": "",
+    "design": null,
+    "subpattern": "trig_ratio"
+   }
+  },
+  {
+   "report": "(3)(14) 표본 추정 성질 명시",
+   "skill": "inference_margin_error",
+   "kind": null,
+   "figurePolicy": null,
+   "graphAndExpressionDuplicate": false,
+   "problem": {
+    "format": "mc",
+    "figure": null,
+    "passage": "A random sample of 22 employees of a company was surveyed. Of those surveyed, 12 work remotely at least once a week. The population consists of 638 employees in total.\n\nBased on the sample, about how many of the 638 employees would be expected to work remotely at least once a week?",
+    "stimulus": "A random sample of 22 employees of a company was surveyed. Of those surveyed, 12 work remotely at least once a week. The population consists of 638 employees in total.",
+    "question": "Based on the sample, about how many of the 638 employees would be expected to work remotely at least once a week?",
+    "needsFigure": false,
+    "options": [
+     "12",
+     "348",
+     "290",
+     "638"
+    ],
+    "correctIndex": 1,
+    "answers": null,
+    "statements": null,
+    "explanation": "표본 비율은 12/22이다. 이 비율이 모집단에서도 유지된다고 가정하면, 모집단 638명 중 예상 인원은 638×12/22 = 348명이다.",
+    "explanationEn": "The sample proportion is 12/22. Assuming this proportion holds for the population, the expected count among 638 people is 638×12/22 = 348.",
+    "difficulty": "medium",
+    "distractorRationales": [
+     {
+      "index": 0,
+      "plausible_because": "같은 표본 통계에서 나올 수 있는 실제 추정 오류다.",
+      "matches": "같은 표본·모집단 수치로 계산되었다.",
+      "why_wrong": "표본 비율을 모집단 크기로 확장하지 않고 표본 개수를 그대로 답했다.",
+      "kind": "condition_ignored"
+     },
+     {
+      "index": 2,
+      "plausible_because": "같은 표본 통계에서 나올 수 있는 실제 추정 오류다.",
+      "matches": "같은 표본·모집단 수치로 계산되었다.",
+      "why_wrong": "해당 성질이 있는 비율이 아니라 없는 쪽(1-비율)으로 계산했다.",
+      "kind": "condition_ignored"
+     },
+     {
+      "index": 3,
+      "plausible_because": "같은 표본 통계에서 나올 수 있는 실제 추정 오류다.",
+      "matches": "같은 표본·모집단 수치로 계산되었다.",
+      "why_wrong": "표본 비율을 반영하지 않고 모집단 전체 크기를 그대로 답했다.",
+      "kind": "condition_ignored"
+     }
+    ],
+    "difficultyRationale": "",
+    "design": null,
+    "subpattern": null
+   }
+  },
+  {
+   "report": "(3)(14) 표본 추정 성질 명시",
+   "skill": "inference_margin_error",
+   "kind": null,
+   "figurePolicy": null,
+   "graphAndExpressionDuplicate": false,
+   "problem": {
+    "format": "mc",
+    "figure": null,
+    "passage": "A random sample of 26 customers of a store was surveyed. Of those surveyed, 15 prefer online shopping. The population consists of 364 customers in total.\n\nBased on the sample, about how many of the 364 customers would be expected to prefer online shopping?",
+    "stimulus": "A random sample of 26 customers of a store was surveyed. Of those surveyed, 15 prefer online shopping. The population consists of 364 customers in total.",
+    "question": "Based on the sample, about how many of the 364 customers would be expected to prefer online shopping?",
+    "needsFigure": false,
+    "options": [
+     "15",
+     "154",
+     "210",
+     "364"
+    ],
+    "correctIndex": 2,
+    "answers": null,
+    "statements": null,
+    "explanation": "표본 비율은 15/26이다. 이 비율이 모집단에서도 유지된다고 가정하면, 모집단 364명 중 예상 인원은 364×15/26 = 210명이다.",
+    "explanationEn": "The sample proportion is 15/26. Assuming this proportion holds for the population, the expected count among 364 people is 364×15/26 = 210.",
+    "difficulty": "medium",
+    "distractorRationales": [
+     {
+      "index": 0,
+      "plausible_because": "같은 표본 통계에서 나올 수 있는 실제 추정 오류다.",
+      "matches": "같은 표본·모집단 수치로 계산되었다.",
+      "why_wrong": "표본 비율을 모집단 크기로 확장하지 않고 표본 개수를 그대로 답했다.",
+      "kind": "condition_ignored"
+     },
+     {
+      "index": 1,
+      "plausible_because": "같은 표본 통계에서 나올 수 있는 실제 추정 오류다.",
+      "matches": "같은 표본·모집단 수치로 계산되었다.",
+      "why_wrong": "해당 성질이 있는 비율이 아니라 없는 쪽(1-비율)으로 계산했다.",
+      "kind": "condition_ignored"
+     },
+     {
+      "index": 3,
+      "plausible_because": "같은 표본 통계에서 나올 수 있는 실제 추정 오류다.",
+      "matches": "같은 표본·모집단 수치로 계산되었다.",
+      "why_wrong": "표본 비율을 반영하지 않고 모집단 전체 크기를 그대로 답했다.",
+      "kind": "condition_ignored"
+     }
+    ],
+    "difficultyRationale": "",
+    "design": null,
+    "subpattern": null
+   }
+  },
+  {
+   "report": "(3)(14) 표본 추정 성질 명시",
+   "skill": "inference_margin_error",
+   "kind": null,
+   "figurePolicy": null,
+   "graphAndExpressionDuplicate": false,
+   "problem": {
+    "format": "mc",
+    "figure": null,
+    "passage": "A random sample of 22 residents of a town was surveyed. Of those surveyed, 5 support a new park. The population consists of 814 residents in total.\n\nBased on the sample, about how many of the 814 residents would be expected to support a new park?",
+    "stimulus": "A random sample of 22 residents of a town was surveyed. Of those surveyed, 5 support a new park. The population consists of 814 residents in total.",
+    "question": "Based on the sample, about how many of the 814 residents would be expected to support a new park?",
+    "needsFigure": false,
+    "options": [
+     "814",
+     "629",
+     "5",
+     "185"
+    ],
+    "correctIndex": 3,
+    "answers": null,
+    "statements": null,
+    "explanation": "표본 비율은 5/22이다. 이 비율이 모집단에서도 유지된다고 가정하면, 모집단 814명 중 예상 인원은 814×5/22 = 185명이다.",
+    "explanationEn": "The sample proportion is 5/22. Assuming this proportion holds for the population, the expected count among 814 people is 814×5/22 = 185.",
+    "difficulty": "medium",
+    "distractorRationales": [
+     {
+      "index": 2,
+      "plausible_because": "같은 표본 통계에서 나올 수 있는 실제 추정 오류다.",
+      "matches": "같은 표본·모집단 수치로 계산되었다.",
+      "why_wrong": "표본 비율을 모집단 크기로 확장하지 않고 표본 개수를 그대로 답했다.",
+      "kind": "condition_ignored"
+     },
+     {
+      "index": 1,
+      "plausible_because": "같은 표본 통계에서 나올 수 있는 실제 추정 오류다.",
+      "matches": "같은 표본·모집단 수치로 계산되었다.",
+      "why_wrong": "해당 성질이 있는 비율이 아니라 없는 쪽(1-비율)으로 계산했다.",
+      "kind": "condition_ignored"
+     },
+     {
+      "index": 0,
+      "plausible_because": "같은 표본 통계에서 나올 수 있는 실제 추정 오류다.",
+      "matches": "같은 표본·모집단 수치로 계산되었다.",
+      "why_wrong": "표본 비율을 반영하지 않고 모집단 전체 크기를 그대로 답했다.",
+      "kind": "condition_ignored"
+     }
+    ],
+    "difficultyRationale": "",
+    "design": null,
+    "subpattern": null
+   }
+  }
+ ]
+}

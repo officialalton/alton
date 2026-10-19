@@ -27,6 +27,8 @@ export type DataSpec = {
   yMin?: number;
   yMax?: number;
   yStep?: number;
+  /** bar · line: 막대 위·점 위에 값을 쓴다. 생략하면 어떤 값이 눈금선 위에 있지 않아 읽을 수 없을 때(외부 검수 2026-10-18, Test 1 Math 2번) 자동으로 켠다. */
+  valueLabels?: boolean;
   /** histogram */
   bins?: { from: number; to: number; count: number }[];
   /** scatter */
@@ -229,6 +231,17 @@ function yDomain(values: number[], spec: DataSpec): { min: number; max: number; 
   return { min, max: max <= min ? min + step : max, step };
 }
 
+/** 어떤 값이 세로 눈금선 위에 있지 않으면 눈금만으로는 값을 읽을 수 없다(외부 검수 2026-10-18, Test 1 Math 2번). */
+function valuesOffGrid(values: number[], dom: { min: number; step: number }): boolean {
+  return values.some((v) => Math.abs((v - dom.min) / dom.step - Math.round((v - dom.min) / dom.step)) > 1e-6);
+}
+
+/** 막대·선그래프가 값 라벨 없이는 읽을 수 없는지(전수 점검용). */
+export function barLineNeedsValueLabels(spec: DataSpec): boolean {
+  if ((spec.kind !== "bar" && spec.kind !== "line") || !spec.series || spec.valueLabels !== undefined) return false;
+  return valuesOffGrid(spec.series.flatMap((s) => s.values), yDomain(spec.series.flatMap((s) => s.values), spec));
+}
+
 /** 가로 범주 라벨 — 칸 폭에 맞지 않으면 45° 기울인다(규칙). 기울여도 넘치면 문제로 기록. */
 function drawCategoryLabels(sheet: Sheet, fr: Frame, categories: string[], issues: FigureIssue[]) {
   const slot = (fr.x1 - fr.x0) / categories.length;
@@ -273,6 +286,8 @@ function renderBarOrLine(spec: DataSpec): { svg: string; alt: string; issues: Fi
   const sy = drawYAxis(sheet, fr, dom.min, dom.max, dom.step, spec.yTitle);
   const { slot } = drawCategoryLabels(sheet, fr, cats, issues);
   if (spec.xTitle) sheet.raw(`<text x="${f((fr.x0 + fr.x1) / 2)}" y="${f(xTitleY(fr, H, rotate))}" font-family="${FONT}" font-size="12.5" text-anchor="middle" data-axis-title="x" fill="#111">${esc(spec.xTitle)}</text>`);
+  const showValues = spec.valueLabels ?? valuesOffGrid(allValues, dom);
+  const valueLabel = (cx: number, yTop: number, v: number) => { if (showValues) sheet.text(cx, yTop - 5, fmtNum(v), { size: 11, anchor: "middle" }); };
   if (spec.kind === "bar") {
     const groupW = slot * 0.7, barW = groupW / series.length;
     cats.forEach((_, i) => {
@@ -282,13 +297,14 @@ function renderBarOrLine(spec: DataSpec): { svg: string; alt: string; issues: Fi
         const y = sy(Math.max(v, dom.min)), y0 = sy(Math.max(Math.min(0, dom.max), dom.min));
         sheet.raw(`<rect x="${f(x)}" y="${f(Math.min(y, y0))}" width="${f(barW - 2)}" height="${f(Math.abs(y0 - y))}" fill="${COLORS[k % COLORS.length]}"/>`);
         sheet.registerSegment([x, Math.min(y, y0)], [x + barW - 2, Math.min(y, y0)]);
+        valueLabel(x + (barW - 2) / 2, Math.min(y, y0), v);
       });
     });
   } else {
     series.forEach((s, k) => {
       const pts: Pt[] = s.values.map((v, i) => [fr.x0 + slot * (i + 0.5), sy(v)]);
       sheet.polyline(pts, { color: COLORS[k % COLORS.length], w: 2 });
-      for (const p of pts) sheet.raw(`<circle cx="${f(p[0])}" cy="${f(p[1])}" r="3.5" fill="${COLORS[k % COLORS.length]}"/>`);
+      for (const [pi, p] of pts.entries()) { sheet.raw(`<circle cx="${f(p[0])}" cy="${f(p[1])}" r="3.5" fill="${COLORS[k % COLORS.length]}"/>`); valueLabel(p[0], p[1] - 3, s.values[pi]); }
     });
   }
   const alt = `${spec.title ? spec.title + " — " : ""}${spec.kind === "bar" ? "막대그래프" : "선그래프"}${spec.xTitle ? `, 가로축 ${spec.xTitle}` : ""}${spec.yTitle ? `, 세로축 ${spec.yTitle}` : ""}. ` +

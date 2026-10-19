@@ -397,20 +397,23 @@ export function renderCirclesProblem(model: CirclesModel, opts?: { figureMode?: 
     // (2026-09-24 UAT 지적) 이동 전 원을 실제 좌표평면에 그린다.
     const { eqVariant, centerH, centerK, radius } = model as { eqVariant: CircleEqVariant; centerH: number; centerK: number; radius: number };
     figure = wantsPlane ? buildCirclePlaneFigure(centerH, centerK, radius) : null;
-    const shownBelow = wantsPlane ? " The circle is shown in the xy-plane below." : "";
+    // 외부 검수(2026-10-18) — plane 은 그래프만 주고 방정식·중심·반지름 같은 같은 정보는 지문에 쓰지 않는다(한 표현만 제시).
+    const shownBelow = "";
     if (eqVariant === "shift") {
       const { shiftDx, shiftDy } = model as { shiftDx: number; shiftDy: number };
       const newH = centerH + shiftDx;
       const newK = centerK - shiftDy;
       const original = correctEquation(centerH, centerK, radius);
       const moved = correctEquation(newH, newK, radius);
-      passage = `A circle in the xy-plane is defined by the equation ${original}. The circle is shifted ${shiftDx} units to the right and ${shiftDy} units down.${shownBelow}`;
+      passage = wantsPlane
+        ? `The circle shown in the xy-plane below is shifted ${shiftDx} units to the right and ${shiftDy} units down.`
+        : `A circle in the xy-plane is defined by the equation ${original}. The circle is shifted ${shiftDx} units to the right and ${shiftDy} units down.${shownBelow}`;
       explanation = `원래 방정식에서 중심은 (${fmt(centerH)}, ${fmt(centerK)})이고 반지름은 ${fmt(radius)}이다. 오른쪽으로 ${shiftDx}만큼 이동하면 h는 ${fmt(centerH)} + ${shiftDx} = ${fmt(newH)}가 되고, 아래로 ${shiftDy}만큼 이동하면 k는 ${fmt(centerK)} − ${shiftDy} = ${fmt(newK)}가 된다(아래로 이동은 y좌표가 줄어드는 방향이다). 반지름은 그대로이므로 새 방정식은 ${moved}이다.`;
       explanationEn = `In the original equation, the center is (${fmt(centerH)}, ${fmt(centerK)}) and the radius is ${fmt(radius)}. Shifting ${shiftDx} units right changes h to ${fmt(centerH)} + ${shiftDx} = ${fmt(newH)}, and shifting ${shiftDy} units down changes k to ${fmt(centerK)} − ${shiftDy} = ${fmt(newK)} (moving down decreases the y-coordinate). The radius stays the same, so the new equation is ${moved}.`;
     } else if (eqVariant === "center_radius") {
       const { askFor } = model as { askFor: "radius" | "center" };
       const eq = correctEquation(centerH, centerK, radius);
-      passage = `A circle in the xy-plane is defined by the equation ${eq}.${shownBelow}`;
+      passage = wantsPlane ? "A circle is shown in the xy-plane below." : `A circle in the xy-plane is defined by the equation ${eq}.${shownBelow}`;
       if (askFor === "radius") {
         explanation = `방정식을 (x-h)² + (y-k)² = r² 형태와 비교하면 r² = ${fmt(radius * radius)}이므로 반지름 r = √${fmt(radius * radius)} = ${fmt(radius)}이다.`;
         explanationEn = `Comparing with (x-h)² + (y-k)² = r², r² = ${fmt(radius * radius)}, so the radius r = √${fmt(radius * radius)} = ${fmt(radius)}.`;
@@ -421,7 +424,7 @@ export function renderCirclesProblem(model: CirclesModel, opts?: { figureMode?: 
     } else {
       // match_equation
       const eq = correctEquation(centerH, centerK, radius);
-      passage = `A circle in the xy-plane has center (${fmt(centerH)}, ${fmt(centerK)}) and radius ${fmt(radius)}.${shownBelow}`;
+      passage = wantsPlane ? "A circle is shown in the xy-plane below." : `A circle in the xy-plane has center (${fmt(centerH)}, ${fmt(centerK)}) and radius ${fmt(radius)}.${shownBelow}`;
       explanation = `중심 (h, k) = (${fmt(centerH)}, ${fmt(centerK)})과 반지름 r = ${fmt(radius)}를 (x-h)² + (y-k)² = r²에 대입하면 ${eq}이다.`;
       explanationEn = `Substituting center (h, k) = (${fmt(centerH)}, ${fmt(centerK)}) and radius r = ${fmt(radius)} into (x-h)² + (y-k)² = r² gives ${eq}.`;
     }

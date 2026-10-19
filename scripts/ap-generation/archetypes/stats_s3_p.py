@@ -678,9 +678,11 @@ def st_chisq_setup(rng):
     assert df != df_bad
     if hom:
         H_hom = f"$H_0$: the distribution of {c['v2']} is the same for all ${r_}$ {c['grp']}; $df = {df}$"
-        H_ind = f"$H_0$: {c['grp'].rstrip('s')} and {c['v2']} are independent in the population of all customers; $df = {df}$".replace("customers", c["noun"])
+        # 외부 감사 2026-10-15 AP-003/004: 동질성 귀무(분포 동일)와 독립성 귀무(독립)는 모집단에서 수학적으로 동치라 한 문항에 같이 보기로 두면 복수 정답이다.
+        # 오답 보기는 같은 검정의 "대립가설을 귀무가설 자리에 쓴 것"으로 만든다(키와 동치가 아님).
+        H_alt = f"$H_0$: the distribution of {c['v2']} is not the same for all ${r_}$ {c['grp']}; $df = {df}$"
         key = Opt(H_hom, True, f"Separate random samples were taken from each of the ${r_}$ {c['grp']}, so this is a test of homogeneity: the null hypothesis says that the distribution of the response is the same in every group; $df = ({r_}-1)({c_}-1) = {df}$.", None)
-        ds = [W(H_ind, "Describes a test of independence, which is for one random sample classified on two variables; here the samples were taken separately from each group.", 1),
+        ds = [W(H_alt, "States the alternative hypothesis, not the null hypothesis; the null hypothesis of the test says that there is no difference among the groups.", 1),
               W(f"$H_0$: the sample proportions of {c['v2']} are equal for all ${r_}$ {c['grp']}; $df = {df}$", "States the hypothesis about sample proportions in the table; hypotheses are about population parameters, and the sample proportions differ by chance.", 2),
               W(f"$H_0$: the distribution of {c['v2']} is the same for all ${r_}$ {c['grp']}; $df = {df_bad}$", f"Uses the number of cells minus $1$ for the degrees of freedom instead of $({r_}-1)({c_}-1)$.", 3)]
         stem = f"A researcher takes an independent random sample of ${per}$ {c['noun']} from each of ${r_}$ {c['grp']} and records the {c['v2']} of each {c['noun'].rstrip('s')} in the table shown. The researcher will carry out a chi-square test using these counts. Which of the following gives the appropriate null hypothesis and degrees of freedom?"
@@ -688,19 +690,19 @@ def st_chisq_setup(rng):
     else:
         v1, v2, pop = c["v1"], c["v2"], c["pop"]
         H_ind = f"$H_0$: {v1} and {v2} are independent in the population of {pop}; $df = {df}$"
-        H_hom = f"$H_0$: the distribution of {v2} is the same for all ${r_}$ {c['grp']} in the population of {pop}; $df = {df}$"
+        H_alt = f"$H_0$: {v1} and {v2} are associated in the population of {pop}; $df = {df}$"
         key = Opt(H_ind, True, f"One random sample of ${N}$ was classified on two categorical variables, so this is a test of independence: the null hypothesis says that the variables are independent (no association) in the population; $df = ({r_}-1)({c_}-1) = {df}$.", None)
-        ds = [W(H_hom, "Describes a test of homogeneity, which is for separate samples from several populations; here one sample was classified on both variables.", 1),
+        ds = [W(H_alt, "States the alternative hypothesis, not the null hypothesis; the null hypothesis of a test of independence says that there is no association between the variables.", 1),
               W(f"$H_0$: {v1} and {v2} are independent in the sample; $df = {df}$", "States the hypothesis about the sample rather than the population; the counts in the sample will not be exactly independent even if the variables are independent in the population.", 2),
               W(f"$H_0$: {v1} and {v2} are independent in the population of {pop}; $df = {df_bad}$", f"Uses the number of cells minus $1$ for the degrees of freedom instead of $({r_}-1)({c_}-1)$.", 3)]
-        stem = f"A researcher selects one simple random sample of ${N}$ {pop.split(' at ')[0] if ' at ' in pop else pop.replace('adult ', '')} and classifies each one by {v1} and by {v2}, as shown in the table. The researcher will carry out a chi-square test using these counts. Which of the following gives the appropriate null hypothesis and degrees of freedom?"
+        stem = f"A researcher selects one simple random sample of ${N}$ {pop} and classifies each one by {v1} and by {v2}, as shown in the table. The researcher will carry out a chi-square test using these counts. Which of the following gives the appropriate null hypothesis and degrees of freedom?"
         hdr = v1.capitalize()
     stim = stat_stim(f"Two-way table of {hdr.lower()} and {c['v2']}", "two_way", rowHeader=hdr, rowLabels=list(c["rows"]), colLabels=list(c["cols"]), cells=cells)
     steps = ["Decide from the sampling design whether the situation is one sample classified on two variables (independence) or separate samples from several groups (homogeneity)", "Choose the null hypothesis that matches the design and is stated about the population", "Find the degrees of freedom from the dimensions of the table as the number of rows minus one times the number of columns minus one"]
     concepts = ["chi-square test of independence versus homogeneity", "degrees of freedom for a two-way table"]
     bpr = _bp("st_chisq_setup", "3.14", "2.E", "Choose the null hypothesis and the degrees of freedom of a chi-square test from the sampling design and the dimensions of the table",
-              steps, [("one sample classified on two variables gives a test of independence and separate samples from several groups give a test of homogeneity; the degrees of freedom are (rows - 1)(columns - 1)", "the stem states how the data were collected and the table shows the counts")],
-              [("independence_homogeneity_swapped", "uses the null hypothesis of the other kind of test"), ("statistic_not_parameter", "states the hypothesis about the sample"), ("degrees_of_freedom_cells_minus_one", "uses the number of cells minus one")],
+              steps, [("one sample classified on two variables gives a test of independence and separate samples from several groups give a test of homogeneity, and the two null hypotheses are equivalent statements about the population; the degrees of freedom are (rows - 1)(columns - 1)", "the stem states how the data were collected and the table shows the counts")],
+              [("alternative_stated_as_null", "states the alternative hypothesis in place of the null hypothesis"), ("statistic_not_parameter", "states the hypothesis about the sample"), ("degrees_of_freedom_cells_minus_one", "uses the number of cells minus one")],
               "the degrees of freedom and the expected counts are recomputed with scipy's chi-square contingency routine, and every expected count must be at least 5",
               {"type": "two_way_table", "must_include": ["all cell counts", "row and column labels"]}, ["procedure_choice", "representation_reading"], "scipy contingency dof and expected counts")
     return spack_d("st_chisq_setup", "3.14", "2.E", stem, key, ds, rng, bpr, stim, 110, [f"hom={hom}", f"dim={r_}x{c_}"], steps, concepts, 2, "none")

@@ -8,7 +8,7 @@
 // 범위(1차): 두 직선(y = m1 x + b1, y = m2 x + b2)의 교점 — 교점의 x/y좌표, 좌표 합,
 // 기울기, 절편, 해의 개수. 계수는 항상 정수이고, 교점이 존재하는 유형은 교점 좌표도
 // 항상 정수가 되도록 계수를 고른다(선택지가 지저분한 분수가 되지 않게).
-import type { PlaneSpec, PlaneObject } from "@/lib/problem-figures/templates/coordinate-plane";
+import type { PlaneSpec } from "@/lib/problem-figures/templates/coordinate-plane";
 import type { FigureChoiceSpec } from "@/lib/problem-figures/templates/figure-choice";
 import type { DistractorRationale, DistractorKind } from "../review";
 
@@ -162,30 +162,6 @@ function buildDistractorsForCoordinate(
     out.push({ value: fmt(c.value), kind: c.kind, reason: c.reason });
   }
   return out;
-}
-
-/**
- * 두 직선의 그래프를 결정적으로 렌더링한다 — AI가 좌표를 따로 만들거나 보정하지
- * 않는다. 두 직선과(해가 있으면) 교점 표시를 모델의 값 그대로 그린다.
- */
-function buildFigure(model: Pick<LinearTwoVarModel, "m1" | "b1" | "m2" | "b2" | "systemKind" | "intersection">): PlaneSpec {
-  const xs: number[] = [-8, 8];
-  const objects: PlaneObject[] = [
-    // 2026-09-17(checkFigure 실측) — 식 전체("y = -5x + 6")를 그림 라벨로 쓰면 두 직선이
-    // 가까울 때 놓을 자리가 없어 label_collision이 잦다. 식은 이미 지문에 그대로
-    // 적혀 있으므로, 그림에는 어느 선인지만 구분하는 짧은 라벨(l1/l2)만 붙인다.
-    { id: "l1", kind: "line", slope: model.m1, intercept: model.b1, label: "l1" },
-    { id: "l2", kind: "line", slope: model.m2, intercept: model.b2, label: "l2" },
-  ];
-  if (model.systemKind === "one_solution" && model.intersection) {
-    objects.push({ id: "p", kind: "point", at: [model.intersection.x, model.intersection.y], label: "P" });
-  }
-  const range = Math.max(8, ...xs.map(Math.abs), Math.abs(model.intersection?.x ?? 0) + 2, Math.abs(model.intersection?.y ?? 0) + 2);
-  return {
-    type: "plane",
-    axes: { x: { min: -range, max: range }, y: { min: -range, max: range } },
-    objects,
-  };
 }
 
 /** 2026-09-24(UAT 지적) — "그래프 선택지 4개"(systems_linear 전용). 정답은 실제 두 직선
@@ -481,7 +457,8 @@ export function renderLinearTwoVarProblem(model: LinearTwoVarModel, opts?: { fig
     correctIndex,
     explanation: buildExplanation(model),
     explanationEn: buildExplanationEn(model),
-    figure: model.questionKind === "num_solutions" ? null : buildFigure(model),
+    // 외부 검수(2026-10-18, Test 1 Math 10·11·15·19번) — 지문에 두 식을 모두 주므로 같은 두 직선을 그래프로 또 보이지 않는다(한 표현만 제시).
+    figure: null,
     distractorRationales,
   };
 }
