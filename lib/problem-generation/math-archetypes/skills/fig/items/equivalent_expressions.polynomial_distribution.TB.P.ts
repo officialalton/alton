@@ -16,15 +16,17 @@ function gen(rng: Rng, fn: string, o: { with0?: boolean; no0?: boolean } = {}): 
   }
   throw new GenFail("다항식 값표 표집 실패");
 }
+// 외부 검수(2026-10-18, Test 1 Math 7번) — 표준형 ax² + bx + c 를 뒤에서 이미 주므로 "quadratic"·"degree 2"·"highest power of x is 2" 같은
+// 차수 안내를 도입부에 또 쓰지 않는다(같은 정보를 두 번 주면 군더더기다).
 const intro = (rng: Rng, fn: string) => rng.pick(LEAD) + rng.pick([
-  `The table shows several values of $x$ and the corresponding values of $${fn}(x)$, where $${fn}$ is a quadratic polynomial.`,
-  `For the second-degree polynomial $${fn}(x)$, the table shown gives the value of $${fn}(x)$ for selected values of $x$.`,
-  `Selected values of a quadratic polynomial $${fn}(x)$ are shown in the table.`,
-  `A polynomial $${fn}(x)$ of degree 2 takes the values given in the table for the listed values of $x$.`,
-  `The table shown lists input-output pairs for the quadratic polynomial $${fn}(x)$.`,
-  `Some values of a polynomial function $${fn}$, whose highest power of $x$ is 2, are given in the table.`,
-  `In the table, each value of $x$ is paired with the value of the quadratic expression $${fn}(x)$.`,
-  `A quadratic polynomial $${fn}(x)$ was evaluated at several values of $x$, and the results are recorded in the table shown.`,
+  `The table shows several values of $x$ and the corresponding values of $${fn}(x)$.`,
+  `For the polynomial $${fn}(x)$, the table shown gives the value of $${fn}(x)$ for selected values of $x$.`,
+  `Selected values of a polynomial $${fn}(x)$ are shown in the table.`,
+  `A polynomial $${fn}(x)$ takes the values given in the table for the listed values of $x$.`,
+  `The table shown lists input-output pairs for the polynomial $${fn}(x)$.`,
+  `Some values of a polynomial function $${fn}$ are given in the table.`,
+  `In the table, each value of $x$ is paired with the value of the polynomial $${fn}(x)$.`,
+  `A polynomial $${fn}(x)$ was evaluated at several values of $x$, and the results are recorded in the table shown.`,
 ]);
 const stdForm = (fn: string, rng: Rng) => rng.pick([`$${fn}(x)$ is written in the form $ax^2 + bx + c$, where $a$, $b$, and $c$ are constants`, `$${fn}(x)$ is expressed as $ax^2 + bx + c$, with $a$, $b$, and $c$ constants`, `the standard form of $${fn}(x)$ is $ax^2 + bx + c$, where $a$, $b$, and $c$ are constants`]);
 
